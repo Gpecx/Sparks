@@ -13,6 +13,8 @@ import 'package:spark_app/screens/store_screen.dart';
 import 'package:spark_app/screens/settings_screen.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/clan_screen.dart';
+import 'package:spark_app/screens/duel_screen.dart';
+import 'package:spark_app/screens/error_simulation_screen.dart';
 
 void main() {
   runApp(const SparkApp());
@@ -42,6 +44,8 @@ class SparkApp extends StatelessWidget {
         '/settings': (context) => const SettingsScreen(),
         '/achievements': (context) => const AchievementsScreen(),
         '/clan': (context) => const ClanScreen(isCreating: true),
+        '/duel': (context) => const DuelScreen(),
+        '/error-simulation': (context) => const ErrorSimulationScreen(),
       },
     );
   }

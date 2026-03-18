@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/widgets/pcb_background.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -18,238 +19,240 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return SparksBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
+      child: PcbBackground(
+        child: Scaffold(
           backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.pop(context),
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () => Navigator.pop(context),
+            ),
+            title: const Text(
+              'CONFIGURAÇÕES',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+                fontSize: 15,
+                letterSpacing: 1.5,
+              ),
+            ),
           ),
-          title: const Text(
-            'CONFIGURAÇÕES',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w800,
-              fontSize: 15,
-              letterSpacing: 1.5,
-            ),
+          body: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            children: [
+              _sectionTitle('CONTA E PERFIL'),
+              _tile(
+                icon: Icons.person_outline,
+                title: 'Editar Perfil',
+                subtitle: 'Nome, e-mail, cargo',
+                onTap: () => _snack('Editar Perfil'),
+              ),
+              _tile(
+                icon: Icons.lock_outline,
+                title: 'Alterar Senha',
+                subtitle: 'Segurança da conta',
+                onTap: () => _snack('Alterar Senha'),
+              ),
+              _tile(
+                icon: Icons.card_membership_outlined,
+                title: 'Gerir Plano',
+                subtitle: 'Premium, planos ativos',
+                onTap: () => Navigator.pushNamed(context, '/store'),
+              ),
+              _tile(
+                icon: Icons.delete_outline,
+                title: 'Eliminar Conta',
+                subtitle: 'Apagar permanentemente',
+                titleColor: AppColors.error,
+                onTap: _deleteDialog,
+              ),
+              const SizedBox(height: 8),
+
+              _sectionTitle('NOTIFICAÇÕES'),
+              _switchTile(
+                icon: Icons.school_outlined,
+                title: 'Lembretes de Estudo',
+                subtitle: 'Notificações diárias de prática',
+                value: _studyReminders,
+                onChanged: (v) => setState(() => _studyReminders = v),
+              ),
+              _switchTile(
+                icon: Icons.leaderboard_outlined,
+                title: 'Alertas de Ranking',
+                subtitle: 'Quando alguém te ultrapassar',
+                value: _rankingAlerts,
+                onChanged: (v) => setState(() => _rankingAlerts = v),
+              ),
+              _switchTile(
+                icon: Icons.new_releases_outlined,
+                title: 'Atualizações de Normas',
+                subtitle: 'Novas normas disponíveis',
+                value: _normUpdates,
+                onChanged: (v) => setState(() => _normUpdates = v),
+              ),
+              _switchTile(
+                icon: Icons.email_outlined,
+                title: 'E-mails',
+                subtitle: 'Newsletter e novidades',
+                value: _emailNotifications,
+                onChanged: (v) => setState(() => _emailNotifications = v),
+              ),
+              const SizedBox(height: 8),
+
+              // ── ACESSIBILIDADE ────────────────────────────────
+              _sectionTitle('ACESSIBILIDADE'),
+              Container(
+                margin: const EdgeInsets.only(bottom: 4),
+                decoration: BoxDecoration(
+                  color: AppColors.card,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.text_fields, color: AppColors.textMuted, size: 22),
+                          const SizedBox(width: 12),
+                          const Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Tamanho do Texto',
+                                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                ),
+                                Text(
+                                  'Ajuste o tamanho da fonte em todo o app',
+                                  style: TextStyle(color: AppColors.textMuted, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: AppColors.primary.withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
+                            ),
+                            child: Text(
+                              '${(_textScale * 100).round()}%',
+                              style: const TextStyle(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          const Text('A', style: TextStyle(color: AppColors.textMuted, fontSize: 11)),
+                          Expanded(
+                            child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: AppColors.primary,
+                                inactiveTrackColor: AppColors.inputBackground,
+                                thumbColor: AppColors.primary,
+                                overlayColor: AppColors.primary.withValues(alpha: 0.2),
+                                trackHeight: 4,
+                              ),
+                              child: Slider(
+                                value: _textScale,
+                                min: 0.8,
+                                max: 1.4,
+                                divisions: 12,
+                                onChanged: (v) => setState(() => _textScale = v),
+                              ),
+                            ),
+                          ),
+                          const Text('A', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
+                        ],
+                      ),
+                      // Preview
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColors.inputBackground,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          'Exemplo de texto com o tamanho selecionado.',
+                          style: TextStyle(
+                            color: AppColors.textSecondary,
+                            fontSize: 14 * _textScale,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+
+              // ── SOBRE ──────────────────────────────────────────
+              _sectionTitle('SOBRE'),
+              _tile(
+                icon: Icons.info_outline,
+                title: 'Versão do App',
+                subtitle: 'SPARK v1.0.0 · EXS Solutions',
+                onTap: () {},
+              ),
+              _tile(
+                icon: Icons.description_outlined,
+                title: 'Termos de Uso',
+                subtitle: 'Leia nossos termos',
+                onTap: () => _snack('Termos de Uso'),
+              ),
+              _tile(
+                icon: Icons.privacy_tip_outlined,
+                title: 'Política de Privacidade',
+                subtitle: 'Como usamos seus dados',
+                onTap: () => _snack('Privacidade'),
+              ),
+              _tile(
+                icon: Icons.headset_mic_outlined,
+                title: 'Suporte',
+                subtitle: 'Reporte um problema ou tire dúvidas',
+                onTap: _showSupportDialog,
+              ),
+              _tile(
+                icon: Icons.help_outline,
+                title: 'Central de Ajuda / FAQ',
+                subtitle: 'Perguntas frequentes',
+                onTap: _showFaqDialog,
+              ),
+              const SizedBox(height: 20),
+
+              // Logout
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                child: OutlinedButton.icon(
+                  onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false),
+                  icon: const Icon(Icons.logout, size: 18),
+                  label: const Text(
+                    'SAIR DA CONTA',
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, letterSpacing: 1.5),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppColors.error,
+                    side: const BorderSide(color: AppColors.error, width: 1.5),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 32),
+            ],
           ),
-        ),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          children: [
-            _sectionTitle('CONTA E PERFIL'),
-            _tile(
-              icon: Icons.person_outline,
-              title: 'Editar Perfil',
-              subtitle: 'Nome, e-mail, cargo',
-              onTap: () => _snack('Editar Perfil'),
-            ),
-            _tile(
-              icon: Icons.lock_outline,
-              title: 'Alterar Senha',
-              subtitle: 'Segurança da conta',
-              onTap: () => _snack('Alterar Senha'),
-            ),
-            _tile(
-              icon: Icons.card_membership_outlined,
-              title: 'Gerir Plano',
-              subtitle: 'Premium, planos ativos',
-              onTap: () => Navigator.pushNamed(context, '/store'),
-            ),
-            _tile(
-              icon: Icons.delete_outline,
-              title: 'Eliminar Conta',
-              subtitle: 'Apagar permanentemente',
-              titleColor: AppColors.error,
-              onTap: _deleteDialog,
-            ),
-            const SizedBox(height: 8),
-
-            _sectionTitle('NOTIFICAÇÕES'),
-            _switchTile(
-              icon: Icons.school_outlined,
-              title: 'Lembretes de Estudo',
-              subtitle: 'Notificações diárias de prática',
-              value: _studyReminders,
-              onChanged: (v) => setState(() => _studyReminders = v),
-            ),
-            _switchTile(
-              icon: Icons.leaderboard_outlined,
-              title: 'Alertas de Ranking',
-              subtitle: 'Quando alguém te ultrapassar',
-              value: _rankingAlerts,
-              onChanged: (v) => setState(() => _rankingAlerts = v),
-            ),
-            _switchTile(
-              icon: Icons.new_releases_outlined,
-              title: 'Atualizações de Normas',
-              subtitle: 'Novas normas disponíveis',
-              value: _normUpdates,
-              onChanged: (v) => setState(() => _normUpdates = v),
-            ),
-            _switchTile(
-              icon: Icons.email_outlined,
-              title: 'E-mails',
-              subtitle: 'Newsletter e novidades',
-              value: _emailNotifications,
-              onChanged: (v) => setState(() => _emailNotifications = v),
-            ),
-            const SizedBox(height: 8),
-
-            // ── ACESSIBILIDADE ────────────────────────────────
-            _sectionTitle('ACESSIBILIDADE'),
-            Container(
-              margin: const EdgeInsets.only(bottom: 4),
-              decoration: BoxDecoration(
-                color: AppColors.card,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.text_fields, color: AppColors.textMuted, size: 22),
-                        const SizedBox(width: 12),
-                        const Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Tamanho do Texto',
-                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                              ),
-                              Text(
-                                'Ajuste o tamanho da fonte em todo o app',
-                                style: TextStyle(color: AppColors.textMuted, fontSize: 12),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary.withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
-                          ),
-                          child: Text(
-                            '${(_textScale * 100).round()}%',
-                            style: const TextStyle(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        const Text('A', style: TextStyle(color: AppColors.textMuted, fontSize: 11)),
-                        Expanded(
-                          child: SliderTheme(
-                            data: SliderTheme.of(context).copyWith(
-                              activeTrackColor: AppColors.primary,
-                              inactiveTrackColor: AppColors.inputBackground,
-                              thumbColor: AppColors.primary,
-                              overlayColor: AppColors.primary.withValues(alpha: 0.2),
-                              trackHeight: 4,
-                            ),
-                            child: Slider(
-                              value: _textScale,
-                              min: 0.8,
-                              max: 1.4,
-                              divisions: 12,
-                              onChanged: (v) => setState(() => _textScale = v),
-                            ),
-                          ),
-                        ),
-                        const Text('A', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
-                      ],
-                    ),
-                    // Preview
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: AppColors.inputBackground,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        'Exemplo de texto com o tamanho selecionado.',
-                        style: TextStyle(
-                          color: AppColors.textSecondary,
-                          fontSize: 14 * _textScale,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-
-            // ── SOBRE ──────────────────────────────────────────
-            _sectionTitle('SOBRE'),
-            _tile(
-              icon: Icons.info_outline,
-              title: 'Versão do App',
-              subtitle: 'SPARK v1.0.0 · EXS Solutions',
-              onTap: () {},
-            ),
-            _tile(
-              icon: Icons.description_outlined,
-              title: 'Termos de Uso',
-              subtitle: 'Leia nossos termos',
-              onTap: () => _snack('Termos de Uso'),
-            ),
-            _tile(
-              icon: Icons.privacy_tip_outlined,
-              title: 'Política de Privacidade',
-              subtitle: 'Como usamos seus dados',
-              onTap: () => _snack('Privacidade'),
-            ),
-            _tile(
-              icon: Icons.headset_mic_outlined,
-              title: 'Suporte',
-              subtitle: 'Reporte um problema ou tire dúvidas',
-              onTap: _showSupportDialog,
-            ),
-            _tile(
-              icon: Icons.help_outline,
-              title: 'Central de Ajuda / FAQ',
-              subtitle: 'Perguntas frequentes',
-              onTap: _showFaqDialog,
-            ),
-            const SizedBox(height: 20),
-
-            // Logout
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4),
-              child: OutlinedButton.icon(
-                onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false),
-                icon: const Icon(Icons.logout, size: 18),
-                label: const Text(
-                  'SAIR DA CONTA',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, letterSpacing: 1.5),
-                ),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.error,
-                  side: const BorderSide(color: AppColors.error, width: 1.5),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-              ),
-            ),
-            const SizedBox(height: 32),
-          ],
         ),
       ),
     );

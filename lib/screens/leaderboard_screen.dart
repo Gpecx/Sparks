@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/widgets/pcb_background.dart';
 
 class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({super.key});
@@ -50,110 +51,112 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> with SingleTicker
     final rest = players.skip(3).toList();
 
     return SparksBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Column(
-            children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                child: Row(
-                  children: [
-                    _MoleculeIcon(size: 22),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        _showingClan ? 'RANKING DO CLÃ' : 'RANKING SEMANAL',
-                        style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 2),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary.withValues(alpha: 0.12),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-                      ),
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.calendar_today_outlined, color: AppColors.primary, size: 13),
-                          SizedBox(width: 5),
-                          Text('Esta semana', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w600)),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 14),
-
-              // Toggle Global / Clã
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: AppColors.card,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
-                  ),
+      child: PcbBackground(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: Column(
+              children: [
+                // Header
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                   child: Row(
                     children: [
-                      _tabBtn('🌎  Global', !_showingClan, () => setState(() => _showingClan = false)),
-                      _tabBtn('🛡️  Meu Clã', _showingClan, () => setState(() => _showingClan = true)),
+                      _MoleculeIcon(size: 22),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          _showingClan ? 'RANKING DO CLÃ' : 'RANKING SEMANAL',
+                          style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 2),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.calendar_today_outlined, color: AppColors.primary, size: 13),
+                            SizedBox(width: 5),
+                            Text('Esta semana', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w600)),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
+                const SizedBox(height: 14),
 
-              // Pódio
-              SizedBox(
-                height: 220,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    if (topThree.length > 1)
-                      _buildPodiumItem(topThree[1].name, topThree[1].points, 2, AppColors.greenDark, 120),
-                    const SizedBox(width: 10),
-                    if (topThree.isNotEmpty)
-                      _buildPodiumItem(topThree[0].name, topThree[0].points, 1, AppColors.primary, 160),
-                    const SizedBox(width: 10),
-                    if (topThree.length > 2)
-                      _buildPodiumItem(topThree[2].name, topThree[2].points, 3, const Color(0xFF5A9A6E), 100),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 14),
-
-              // Divisor
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(children: [
-                  Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.3))),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Text(
-                      _showingClan ? 'Membros do Clã' : 'Classificação Geral',
-                      style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 11, letterSpacing: 1),
+                // Toggle Global / Clã
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: AppColors.card,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
+                    ),
+                    child: Row(
+                      children: [
+                        _tabBtn('🌎  Global', !_showingClan, () => setState(() => _showingClan = false)),
+                        _tabBtn('🛡️  Meu Clã', _showingClan, () => setState(() => _showingClan = true)),
+                      ],
                     ),
                   ),
-                  Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.3))),
-                ]),
-              ),
-              const SizedBox(height: 10),
-
-              // Lista
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  children: rest.map((p) => _buildRankRow(p.rank, p.name, p.points, p.isHighlighted)).toList(),
                 ),
-              ),
-            ],
+                const SizedBox(height: 16),
+
+                // Pódio
+                SizedBox(
+                  height: 220,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      if (topThree.length > 1)
+                        _buildPodiumItem(topThree[1].name, topThree[1].points, 2, AppColors.greenDark, 120),
+                      const SizedBox(width: 10),
+                      if (topThree.isNotEmpty)
+                        _buildPodiumItem(topThree[0].name, topThree[0].points, 1, AppColors.primary, 160),
+                      const SizedBox(width: 10),
+                      if (topThree.length > 2)
+                        _buildPodiumItem(topThree[2].name, topThree[2].points, 3, const Color(0xFF5A9A6E), 100),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 14),
+
+                // Divisor
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(children: [
+                    Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.3))),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Text(
+                        _showingClan ? 'Membros do Clã' : 'Classificação Geral',
+                        style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 11, letterSpacing: 1),
+                      ),
+                    ),
+                    Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.3))),
+                  ]),
+                ),
+                const SizedBox(height: 10),
+
+                // Lista
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    children: rest.map((p) => _buildRankRow(p.rank, p.name, p.points, p.isHighlighted)).toList(),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

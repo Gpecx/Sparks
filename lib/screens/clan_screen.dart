@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/widgets/pcb_background.dart';
 
 enum ClanRole { chefe, admin, moderador, membro }
 
@@ -49,45 +50,47 @@ class _ClanScreenState extends State<ClanScreen> {
   @override
   Widget build(BuildContext context) {
     return SparksBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
+      child: PcbBackground(
+        child: Scaffold(
           backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.pop(context),
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () => Navigator.pop(context),
+            ),
+            title: Text(
+              _clanCreated
+                  ? _clanName.toUpperCase()
+                  : widget.isCreating
+                      ? 'CRIAR CLÃ'
+                      : 'ENTRAR EM UM CLÃ',
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 15, letterSpacing: 1.5),
+            ),
+            actions: _clanCreated
+                ? [
+                    PopupMenuButton<String>(
+                      icon: const Icon(Icons.more_vert, color: Colors.white),
+                      color: AppColors.card,
+                      onSelected: (v) {
+                        if (v == 'edit') _showEditClanDialog();
+                        if (v == 'delete') _showDeleteDialog();
+                      },
+                      itemBuilder: (_) => [
+                        const PopupMenuItem(value: 'edit', child: Text('Editar Nome/Senha', style: TextStyle(color: Colors.white))),
+                        const PopupMenuItem(value: 'delete', child: Text('Deletar Clã', style: TextStyle(color: Colors.redAccent))),
+                      ],
+                    ),
+                  ]
+                : null,
           ),
-          title: Text(
-            _clanCreated
-                ? _clanName.toUpperCase()
-                : widget.isCreating
-                    ? 'CRIAR CLÃ'
-                    : 'ENTRAR EM UM CLÃ',
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 15, letterSpacing: 1.5),
-          ),
-          actions: _clanCreated
-              ? [
-                  PopupMenuButton<String>(
-                    icon: const Icon(Icons.more_vert, color: Colors.white),
-                    color: AppColors.card,
-                    onSelected: (v) {
-                      if (v == 'edit') _showEditClanDialog();
-                      if (v == 'delete') _showDeleteDialog();
-                    },
-                    itemBuilder: (_) => [
-                      const PopupMenuItem(value: 'edit', child: Text('Editar Nome/Senha', style: TextStyle(color: Colors.white))),
-                      const PopupMenuItem(value: 'delete', child: Text('Deletar Clã', style: TextStyle(color: Colors.redAccent))),
-                    ],
-                  ),
-                ]
-              : null,
+          body: _clanCreated
+              ? _buildClanView()
+              : widget.isCreating
+                  ? _buildCreateClan()
+                  : _buildJoinClan(),
         ),
-        body: _clanCreated
-            ? _buildClanView()
-            : widget.isCreating
-                ? _buildCreateClan()
-                : _buildJoinClan(),
       ),
     );
   }

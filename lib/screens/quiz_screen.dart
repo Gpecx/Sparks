@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
+import 'package:spark_app/widgets/spark_emitter.dart';
 
 class QuizScreen extends StatefulWidget {
   final bool isEvaluation;
@@ -12,15 +14,21 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   final EnergyController _energyCtrl = EnergyController();
-  int _selectedOption = -1;
+  
+  // ── VARIÁVEIS DE ESTADO HÍBRIDAS ──
+  int _selectedOption = -1; // Para Múltipla Escolha
+  List<String?> _draggedSlots = []; // Para Arrastar Palavras
+  bool? _swipeAnswer; // Para Verdadeiro/Falso (True = Direita, False = Esquerda)
+  
   bool _hasAnswered = false;
   bool _isCorrect = false;
   int _currentQuestion = 0;
   int _totalCorrect = 0;
 
-  // Banco de perguntas
+  // ── BANCO DE PERGUNTAS ──
   final List<Map<String, dynamic>> _questions = [
     {
+      'type': 'multiple', // Adicionamos o tipo
       'module': 'Módulo 2: NR-10',
       'question': 'De acordo com a NR-10, qual é o requisito obrigatório para intervenções em instalações elétricas energizadas?',
       'options': [
@@ -33,6 +41,7 @@ class _QuizScreenState extends State<QuizScreen> {
       'explanation': 'Segundo a NR-10, as intervenções em instalações elétricas com tensão igual ou superior a 50 Volts só podem ser realizadas por trabalhadores que atendam às exigências de qualificação, capacitação e autorização.',
     },
     {
+      'type': 'multiple',
       'module': 'Módulo 2: NR-10',
       'question': 'Qual o principal objetivo da NR-10?',
       'options': [
@@ -44,41 +53,41 @@ class _QuizScreenState extends State<QuizScreen> {
       'correct': 1,
       'explanation': 'A NR-10 tem como principal objetivo estabelecer os requisitos e condições mínimas para a implementação de medidas de controle e sistemas preventivos de segurança em instalações e serviços em eletricidade.',
     },
+    // NOVO DESAFIO: VERDADEIRO OU FALSO (SWIPE)
     {
+      'type': 'swipe',
       'module': 'Módulo 2: NR-10',
-      'question': 'Qual a tensão mínima que exige treinamento específico de NR-10?',
-      'options': [
-        '12 Volts',
-        '24 Volts',
-        '50 Volts',
-        '110 Volts',
-      ],
-      'correct': 2,
-      'explanation': 'A NR-10 estabelece que intervenções em instalações elétricas com tensão igual ou superior a 50 Volts em corrente alternada ou superior a 120 Volts em corrente contínua exigem treinamento específico.',
+      'question': 'Verdadeiro ou Falso?',
+      'statement': 'Qualquer funcionário da empresa pode acessar a sala de painéis elétricos (subestação), desde que esteja usando capacete de segurança.',
+      'answer': false, 
+      'explanation': 'Falso! Apenas pessoas advertidas ou profissionais autorizados podem acessar áreas de instalações elétricas restritas.',
     },
+    // NOVO DESAFIO: ARRASTAR PALAVRAS (DRAG)
     {
+      'type': 'drag',
       'module': 'Módulo 2: NR-10',
-      'question': 'A cada quantos anos o treinamento de reciclagem da NR-10 deve ser realizado?',
-      'options': [
-        'A cada 1 ano',
-        'A cada 2 anos',
-        'A cada 3 anos',
-        'A cada 5 anos',
-      ],
-      'correct': 1,
-      'explanation': 'Os trabalhadores autorizados devem receber treinamento de reciclagem bienal (a cada 2 anos) e sempre que houver troca de função ou mudança de empresa.',
+      'question': 'Complete a regra fundamental de treinamento da NR-10:',
+      'prefix': 'Intervenções acima de',
+      'suffix': 'exigem treinamento.',
+      'answer': ['50 Volts', 'específico'], 
+      'options': ['50 Volts', 'específico', '10 Volts', 'opcional', 'básico'], 
+      'explanation': 'A norma define 50V AC ou 120V DC como o limite para obrigatoriedade de treinamento.',
     },
+    // SENTENCE BUILDER
     {
-      'module': 'Módulo 2: NR-10',
-      'question': 'Qual EPI é obrigatório para trabalhos em circuitos energizados?',
-      'options': [
-        'Capacete de construção civil',
-        'Luvas isolantes de borracha classe adequada à tensão',
-        'Botas de PVC simples',
-        'Óculos de proteção UV',
+      'type': 'sentence_builder',
+      'module': 'Módulo 3: NR-35',
+      'question': 'Monte a frase correta sobre trabalho em altura:',
+      'fragments': [
+        {'text': 'O uso de ', 'isGap': false},
+        {'text': 'cinto de segurança', 'isGap': true, 'id': 'slot0'},
+        {'text': ' é obrigatório em ', 'isGap': false},
+        {'text': 'alturas acima de 2m', 'isGap': true, 'id': 'slot1'},
+        {'text': '.', 'isGap': false},
       ],
-      'correct': 1,
-      'explanation': 'Para trabalhos em circuitos energizados são obrigatórias as luvas isolantes de borracha (classe adequada à tensão de trabalho), além de outros EPIs especificados conforme a atividade.',
+      'options': ['cinto de segurança', 'alturas acima de 2m', 'capacete', 'escadas', 'pisos molhados'],
+      'answer': ['cinto de segurança', 'alturas acima de 2m'],
+      'explanation': 'Conforme NR-35, trabalho em altura (acima de 2 metros) exige uso obrigatório de cinto de segurança tipo paraquedista.',
     },
   ];
 
@@ -86,11 +95,23 @@ class _QuizScreenState extends State<QuizScreen> {
   void initState() {
     super.initState();
     _energyCtrl.addListener(_onEnergyChanged);
+    _initializeQuestionState(); // Inicializa os dados da primeira pergunta
+    
     // Cobrar energia de entrada
     if (!_energyCtrl.spendEntryEnergy()) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showOutOfEnergyModal();
       });
+    }
+  }
+
+  // Prepara as variáveis baseadas no tipo da pergunta atual
+  void _initializeQuestionState() {
+    final q = _questions[_currentQuestion];
+    _selectedOption = -1;
+    _swipeAnswer = null;
+    if (q['type'] == 'drag' || q['type'] == 'sentence_builder') {
+      _draggedSlots = List.filled((q['answer'] as List).length, null);
     }
   }
 
@@ -104,14 +125,36 @@ class _QuizScreenState extends State<QuizScreen> {
     if (mounted) setState(() {});
   }
 
+  // Lógica unificada para verificar a resposta correta
   void _confirmAnswer() {
-    if (_selectedOption == -1) return;
+    if (_hasAnswered) return;
+    
     final q = _questions[_currentQuestion];
+    bool correct = false;
+
+    if (q['type'] == 'multiple') {
+      if (_selectedOption == -1) return;
+      correct = _selectedOption == q['correct'];
+    } else if (q['type'] == 'drag' || q['type'] == 'sentence_builder') {
+      correct = true;
+      for (int i = 0; i < _draggedSlots.length; i++) {
+        if (_draggedSlots[i] != q['answer'][i]) {
+          correct = false;
+          break;
+        }
+      }
+      // Sentence Builder: se errou, devolve as palavras com shake
+      if (!correct && q['type'] == 'sentence_builder') {
+        HapticFeedback.mediumImpact();
+      }
+    } else if (q['type'] == 'swipe') {
+      correct = _swipeAnswer == q['answer'];
+    }
 
     setState(() {
       _hasAnswered = true;
-      if (_selectedOption == q['correct']) {
-        _isCorrect = true;
+      _isCorrect = correct;
+      if (correct) {
         _totalCorrect++;
         int bonus = _energyCtrl.registerCorrectAnswer();
         if (bonus > 0) {
@@ -123,7 +166,6 @@ class _QuizScreenState extends State<QuizScreen> {
           );
         }
       } else {
-        _isCorrect = false;
         _energyCtrl.resetStreak();
         _energyCtrl.spendErrorEnergy();
       }
@@ -142,13 +184,10 @@ class _QuizScreenState extends State<QuizScreen> {
       bool passed = widget.isEvaluation ? score >= 0.8 : score >= 0.7;
 
       if (passed) {
-        // Concede XP baseado na performance
         int xpEarned = (score * 100).toInt() + (_totalCorrect * 10);
         _energyCtrl.addXp(xpEarned);
-        // Exibe feedback de sucesso, então mostra propaganda e retorna true
         _showQuizResultModal(true, score, xpEarned);
       } else {
-        // Exibe feedback de falha, não passa adiante
         _showQuizResultModal(false, score, 0);
       }
       return;
@@ -156,13 +195,13 @@ class _QuizScreenState extends State<QuizScreen> {
 
     setState(() {
       _currentQuestion++;
-      _selectedOption = -1;
       _hasAnswered = false;
       _isCorrect = false;
+      _initializeQuestionState(); // Reinicializa pro próximo tipo
     });
   }
 
-  // === MODAL DE RESULTADO DO QUIZ ===
+  // === MODAIS (MANTIDOS EXATAMENTE IGUAIS) ===
   void _showQuizResultModal(bool passed, double score, int xpEarned) {
     showModalBottomSheet(
       context: context,
@@ -203,11 +242,7 @@ class _QuizScreenState extends State<QuizScreen> {
               const SizedBox(height: 24),
               Text(
                 passed ? 'Módulo Concluído!' : 'Desempenho Insuficiente',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               Text(
@@ -215,11 +250,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     ? 'Parabéns! Você alcançou ${(score * 100).toInt()}% de acertos e ganhou $xpEarned XP!'
                     : 'Você obteve ${(score * 100).toInt()}%. É necessário no mínimo ${widget.isEvaluation ? '80%' : '70%'} para avançar. Revise o material e tente novamente.',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.7),
-                  fontSize: 15,
-                  height: 1.4,
-                ),
+                style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15, height: 1.4),
               ),
               const SizedBox(height: 20),
               SizedBox(
@@ -227,23 +258,15 @@ class _QuizScreenState extends State<QuizScreen> {
                 height: 56,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    Navigator.pop(context); // Fechar Modal
+                    Navigator.pop(context); 
                     if (passed) {
-                      _showPowerplayAd(); // Mostrar propaganda antes de sair
+                      _showPowerplayAd(); 
                     } else {
-                      Navigator.pop(context, false); // Falhou
+                      Navigator.pop(context, false); 
                     }
                   },
                   icon: Icon(passed ? Icons.play_arrow : Icons.replay, color: AppColors.background),
-                  label: Text(
-                    passed ? 'CONTINUAR' : 'REFAZER',
-                    style: const TextStyle(
-                      color: AppColors.background,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                    ),
-                  ),
+                  label: Text(passed ? 'CONTINUAR' : 'REFAZER', style: const TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: passed ? AppColors.primary : Colors.redAccent,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -266,7 +289,6 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
-  // === MODAL DE ENERGIA ESGOTADA ===
   void _showOutOfEnergyModal() {
     showModalBottomSheet(
       context: context,
@@ -277,98 +299,39 @@ class _QuizScreenState extends State<QuizScreen> {
       builder: (context) {
         return Container(
           padding: const EdgeInsets.all(24),
-          decoration: const BoxDecoration(
-            color: AppColors.card,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-          ),
+          decoration: const BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.redAccent.withValues(alpha: 0.1),
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.redAccent.withValues(alpha: 0.2),
-                      blurRadius: 40,
-                      spreadRadius: 10,
-                    ),
-                  ],
-                ),
-                child: const Icon(
-                  Icons.battery_alert,
-                  size: 50,
-                  color: Colors.redAccent,
-                ),
+                width: 100, height: 100,
+                decoration: BoxDecoration(color: Colors.redAccent.withValues(alpha: 0.1), shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.redAccent.withValues(alpha: 0.2), blurRadius: 40, spreadRadius: 10)]),
+                child: const Icon(Icons.battery_alert, size: 50, color: Colors.redAccent),
               ),
               const SizedBox(height: 24),
-              const Text(
-                'Bateria Esgotada!',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              const Text('Bateria Esgotada!', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
               const SizedBox(height: 12),
-              Text(
-                'Você gastou toda a sua energia nas revisões. Aguarde a recarga automática ou recarregue agora usando seus Pontos Spark na loja.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.7),
-                  fontSize: 15,
-                  height: 1.4,
-                ),
-              ),
+              Text('Você gastou toda a sua energia nas revisões. Aguarde a recarga automática ou recarregue agora usando seus Pontos Spark na loja.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15, height: 1.4)),
               const SizedBox(height: 20),
-              // Recarga rápida com Sparks
               SizedBox(
-                width: double.infinity,
-                height: 56,
+                width: double.infinity, height: 56,
                 child: ElevatedButton.icon(
                   onPressed: () {
                     if (_energyCtrl.rechargeWithSparks()) {
                       Navigator.pop(context);
-                      ScaffoldMessenger.of(this.context).showSnackBar(
-                        const SnackBar(
-                          content: Text('⚡ Energia recarregada!'),
-                          backgroundColor: AppColors.primary,
-                        ),
-                      );
+                      ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('⚡ Energia recarregada!'), backgroundColor: AppColors.primary));
                     } else {
-                      ScaffoldMessenger.of(this.context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Pontos Spark insuficientes!'),
-                          backgroundColor: AppColors.error,
-                        ),
-                      );
+                      ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Pontos Spark insuficientes!'), backgroundColor: AppColors.error));
                     }
                   },
                   icon: const Icon(Icons.bolt, color: AppColors.background),
-                  label: Text(
-                    'RECARREGAR (${EnergyController.fullRechargeSparkCost} Sparks)',
-                    style: const TextStyle(
-                      color: AppColors.background,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
-                  ),
+                  label: Text('RECARREGAR (${EnergyController.fullRechargeSparkCost} Sparks)', style: const TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
                 ),
               ),
               const SizedBox(height: 12),
-              // Ir para a loja
               SizedBox(
-                width: double.infinity,
-                height: 56,
+                width: double.infinity, height: 56,
                 child: ElevatedButton.icon(
                   onPressed: () {
                     Navigator.pop(context);
@@ -376,20 +339,8 @@ class _QuizScreenState extends State<QuizScreen> {
                     Navigator.pushNamed(this.context, '/store');
                   },
                   icon: const Icon(Icons.store, color: AppColors.background),
-                  label: const Text(
-                    'IR PARA A LOJA',
-                    style: TextStyle(
-                      color: AppColors.background,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.accent,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
-                  ),
+                  label: const Text('IR PARA A LOJA', style: TextStyle(color: AppColors.background, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.accent, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
                 ),
               ),
               const SizedBox(height: 16),
@@ -398,14 +349,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  'Sair do Quiz',
-                  style: TextStyle(
-                    color: AppColors.textMuted,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                child: const Text('Sair do Quiz', style: TextStyle(color: AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.bold)),
               ),
               const SizedBox(height: 10),
             ],
@@ -415,7 +359,6 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
-  // === PROPAGANDA POWERPLAY AO CONCLUIR MÓDULO ===
   void _showPowerplayAd() {
     showDialog(
       context: context,
@@ -427,114 +370,53 @@ class _QuizScreenState extends State<QuizScreen> {
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              gradient: const LinearGradient(
-                colors: [Color(0xFF061629), Color(0xFF0D2641)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              border: Border.all(
-                color: const Color(0xFF00C402).withValues(alpha: 0.5),
-              ),
+              gradient: const LinearGradient(colors: [Color(0xFF061629), Color(0xFF0D2641)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+              border: Border.all(color: const Color(0xFF00C402).withValues(alpha: 0.5)),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Botão Pular
                 Align(
                   alignment: Alignment.topRight,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pop(ctx);
-                      Navigator.pop(context, true); // Retorna true informando sucesso na lição
+                      Navigator.pop(context, true); 
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Text(
-                        'Pular ✕',
-                        style: TextStyle(color: Colors.white70, fontSize: 12),
-                      ),
+                      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(20)),
+                      child: const Text('Pular ✕', style: TextStyle(color: Colors.white70, fontSize: 12)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 12),
-                // Logo Powerplay
                 Container(
-                  width: 80,
-                  height: 80,
+                  width: 80, height: 80,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFF00C402), Color(0xFF1D5F31)],
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFF00C402).withValues(alpha: 0.4),
-                        blurRadius: 20,
-                        spreadRadius: 4,
-                      ),
-                    ],
+                    gradient: const LinearGradient(colors: [Color(0xFF00C402), Color(0xFF1D5F31)]),
+                    boxShadow: [BoxShadow(color: const Color(0xFF00C402).withValues(alpha: 0.4), blurRadius: 20, spreadRadius: 4)],
                   ),
                   child: const Icon(Icons.play_arrow, color: Colors.white, size: 40),
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  'POWERPLAY',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w900,
-                    fontStyle: FontStyle.italic,
-                    letterSpacing: 2,
-                  ),
-                ),
+                const Text('POWERPLAY', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w900, fontStyle: FontStyle.italic, letterSpacing: 2)),
                 const SizedBox(height: 8),
-                const Text(
-                  '🎉 Parabéns pelo módulo!',
-                  style: TextStyle(
-                    color: AppColors.accent,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                const Text('🎉 Parabéns pelo módulo!', style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 14),
-                Text(
-                  'Continue aprendendo com vídeos técnicos exclusivos. Experimente grátis por 7 dias!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.7),
-                    fontSize: 14,
-                    height: 1.4,
-                  ),
-                ),
+                Text('Continue aprendendo com vídeos técnicos exclusivos. Experimente grátis por 7 dias!', textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 14, height: 1.4)),
                 const SizedBox(height: 24),
                 SizedBox(
-                  width: double.infinity,
-                  height: 52,
+                  width: double.infinity, height: 52,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00C402),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                    ),
+                    style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00C402), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
                     onPressed: () {
                       Navigator.pop(ctx);
-                      Navigator.pop(context, true); // Marca lição como concluída mesmo se ir p/ detail
+                      Navigator.pop(context, true); 
                       Navigator.pushNamed(context, '/standard-detail');
                     },
-                    child: const Text(
-                      'TESTE GRÁTIS POR 7 DIAS',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        letterSpacing: 1,
-                      ),
-                    ),
+                    child: const Text('TESTE GRÁTIS POR 7 DIAS', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14, letterSpacing: 1)),
                   ),
                 ),
               ],
@@ -545,250 +427,357 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
+  // === UI PRINCIPAL DA TELA ===
   @override
   Widget build(BuildContext context) {
     final q = _questions[_currentQuestion];
     final progress = (_currentQuestion + 1) / _questions.length;
 
-    // --- CÓDIGO NOVO AQUI: Lógica para descobrir qual ícone de bateria usar ---
     IconData batteryIcon;
     final ratio = _energyCtrl.energy / EnergyController.maxEnergy;
-    if (_energyCtrl.isPremiumUser) {
-      batteryIcon = Icons.battery_charging_full;
-    } else if (ratio >= 0.7) {
-      batteryIcon = Icons.battery_full;
-    } else if (ratio >= 0.4) {
-      batteryIcon = Icons.battery_4_bar;
-    } else if (ratio >= 0.2) {
-      batteryIcon = Icons.battery_2_bar;
-    } else {
-      batteryIcon = Icons.battery_alert;
-    }
+    if (_energyCtrl.isPremiumUser) { batteryIcon = Icons.battery_charging_full; }
+    else if (ratio >= 0.7) { batteryIcon = Icons.battery_full; }
+    else if (ratio >= 0.4) { batteryIcon = Icons.battery_4_bar; }
+    else if (ratio >= 0.2) { batteryIcon = Icons.battery_2_bar; }
+    else { batteryIcon = Icons.battery_alert; }
 
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: RadialGradient(
-            center: Alignment.center,
-            radius: 1.2,
-            colors: [Color(0xFF091E35), Color(0xFF061629)],
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              // 1. HEADER E BARRA DE ENERGIA
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: const Icon(Icons.close, color: Colors.white, size: 28),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.all(Radius.circular(4)),
-                          child: LinearProgressIndicator(
-                            value: progress,
-                            backgroundColor: AppColors.cardBorder,
-                            valueColor: const AlwaysStoppedAnimation<Color>(AppColors.accent),
-                            minHeight: 8,
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(gradient: RadialGradient(center: Alignment.center, radius: 1.2, colors: [Color(0xFF091E35), Color(0xFF061629)])),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  // 1. HEADER E BARRA DE ENERGIA
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      children: [
+                        GestureDetector(onTap: () => Navigator.pop(context), child: const Icon(Icons.close, color: Colors.white, size: 28)),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(Radius.circular(4)),
+                              child: LinearProgressIndicator(value: progress, backgroundColor: AppColors.cardBorder, valueColor: const AlwaysStoppedAnimation<Color>(AppColors.accent), minHeight: 8),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    // Indicador de Energia
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: AppColors.card,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: _energyCtrl.hasEnergy
-                              ? AppColors.gold.withValues(alpha: 0.4)
-                              : Colors.redAccent.withValues(alpha: 0.5),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(20), border: Border.all(color: _energyCtrl.hasEnergy ? AppColors.gold.withValues(alpha: 0.4) : Colors.redAccent.withValues(alpha: 0.5))),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(batteryIcon, color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, size: 20),
+                              const SizedBox(width: 4),
+                              Text(_energyCtrl.energyDisplay, style: TextStyle(color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, fontSize: 16, fontWeight: FontWeight.bold)),
+                              if (_energyCtrl.isRecharging) ...[
+                                const SizedBox(width: 6),
+                                Text(_energyCtrl.regenTimeRemaining, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
+                              ],
+                            ],
+                          ),
                         ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                      ],
+                    ),
+                  ),
+
+                  // 2. CORPO DA PERGUNTA (MÚLTIPLA ESCOLHA, DRAG OU SWIPE)
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(
-                            batteryIcon, // Usando a variável que criamos lá em cima!
-                            color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            _energyCtrl.energyDisplay,
-                            style: TextStyle(
-                              color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          if (_energyCtrl.isRecharging) ...[
-                            const SizedBox(width: 6),
-                            Text(
-                              _energyCtrl.regenTimeRemaining,
-                              style: const TextStyle(
-                                color: AppColors.textMuted,
-                                fontSize: 11,
-                              ),
-                            ),
-                          ],
+                          const SizedBox(height: 10),
+                          Text(q['module'], style: TextStyle(color: AppColors.accent.withValues(alpha: 0.8), fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1.5)),
+                          const SizedBox(height: 4),
+                          Text('Pergunta ${_currentQuestion + 1} de ${_questions.length}', style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                          const SizedBox(height: 12),
+                          Text(q['question'], style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold, height: 1.4)),
+                          const SizedBox(height: 30),
+
+                          // --- CONDICIONAL DA MECÂNICA ---
+                          if (q['type'] == 'multiple')
+                            ...List.generate((q['options'] as List).length, (index) {
+                              return _buildOptionTile(index, q['options'][index], q['correct']);
+                            })
+                          else if (q['type'] == 'drag')
+                            _buildDragChallenge(q)
+                          else if (q['type'] == 'sentence_builder')
+                            _buildSentenceBuilderChallenge(q)
+                          else if (q['type'] == 'swipe')
+                            _buildSwipeChallenge(q),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-
-              // 2. PERGUNTA
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 10),
-                      Text(
-                        q['module'],
-                        style: TextStyle(
-                          color: AppColors.accent.withValues(alpha: 0.8),
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.5,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Pergunta ${_currentQuestion + 1} de ${_questions.length}',
-                        style: const TextStyle(
-                          color: AppColors.textMuted,
-                          fontSize: 12,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        q['question'],
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          height: 1.4,
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-
-                      // 3. OPÇÕES DE RESPOSTA
-                      ...List.generate((q['options'] as List).length, (index) {
-                        return _buildOptionTile(index, q['options'][index], q['correct']);
-                      }),
-                    ],
                   ),
-                ),
-              ),
 
-              // 4. ÁREA DE FEEDBACK / BOTÃO INFERIOR
-              _buildBottomArea(),
-            ],
+                  // 3. ÁREA DE FEEDBACK / BOTÃO INFERIOR
+                  _buildBottomArea(),
+                ],
+              ),
+            ),
           ),
-        ),
+          
+          // Emissor de Faíscas de Acerto
+          Positioned.fill(
+            child: SparkEmitter(trigger: _hasAnswered && _isCorrect),
+          ),
+        ],
       ),
     );
   }
 
+  // ── WIDGETS DE MÚLTIPLA ESCOLHA ──
   Widget _buildOptionTile(int index, String text, int correctIndex) {
     bool isSelected = _selectedOption == index;
-    
     Color borderColor = AppColors.cardBorder;
     Color bgColor = AppColors.card;
     Color textColor = Colors.white;
 
     if (_hasAnswered) {
       if (index == correctIndex) {
-        borderColor = AppColors.accent;
-        bgColor = AppColors.accent.withValues(alpha: 0.15);
+        borderColor = AppColors.accent; bgColor = AppColors.accent.withValues(alpha: 0.15);
       } else if (isSelected && !_isCorrect) {
-        borderColor = Colors.redAccent;
-        bgColor = Colors.redAccent.withValues(alpha: 0.15);
+        borderColor = Colors.redAccent; bgColor = Colors.redAccent.withValues(alpha: 0.15);
       } else {
-        borderColor = Colors.transparent;
-        textColor = AppColors.textMuted;
+        borderColor = Colors.transparent; textColor = AppColors.textMuted;
       }
     } else if (isSelected) {
-      borderColor = AppColors.primary;
-      bgColor = AppColors.primary.withValues(alpha: 0.15);
+      borderColor = AppColors.primary; bgColor = AppColors.primary.withValues(alpha: 0.15);
     }
 
     return GestureDetector(
-      onTap: _hasAnswered
-          ? null
-          : () {
-              setState(() {
-                _selectedOption = index;
-              });
-            },
+      onTap: _hasAnswered ? null : () => setState(() => _selectedOption = index),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: borderColor, width: 2),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                text,
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 16,
-                  height: 1.4,
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                ),
-              ),
-            ),
-          ],
-        ),
+        margin: const EdgeInsets.only(bottom: 12), padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(16), border: Border.all(color: borderColor, width: 2)),
+        child: Row(children: [Expanded(child: Text(text, style: TextStyle(color: textColor, fontSize: 16, height: 1.4, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal)))]),
       ),
     );
   }
 
+  // ── WIDGETS DE ARRASTAR (DRAG) ──
+  Widget _buildDragChallenge(Map<String, dynamic> q) {
+    return Column(
+      children: [
+        Wrap(
+          spacing: 8, runSpacing: 12, crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Text(q['prefix'], style: const TextStyle(color: Colors.white, fontSize: 18)),
+            ...List.generate(_draggedSlots.length, (index) => _buildTargetSlot(index)),
+            Text(q['suffix'], style: const TextStyle(color: Colors.white, fontSize: 18)),
+          ],
+        ),
+        const SizedBox(height: 40),
+        if (!_hasAnswered)
+          Wrap(
+            spacing: 10, runSpacing: 10,
+            children: (q['options'] as List<String>).map((word) {
+              return _draggedSlots.contains(word) ? _buildEmptyChip() : _buildDraggableWord(word);
+            }).toList(),
+          ),
+      ],
+    );
+  }
+
+  // ── SENTENCE BUILDER ──
+  Widget _buildSentenceBuilderChallenge(Map<String, dynamic> q) {
+    final fragments = q['fragments'] as List;
+    int gapIndex = 0;
+
+    return Column(
+      children: [
+        // Frase com lacunas
+        Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: AppColors.card,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
+          ),
+          child: Wrap(
+            spacing: 4,
+            runSpacing: 12,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: fragments.map<Widget>((frag) {
+              if (frag['isGap'] == true) {
+                final idx = gapIndex++;
+                return _buildTargetSlot(idx);
+              } else {
+                return Text(
+                  frag['text'],
+                  style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600, height: 1.6),
+                );
+              }
+            }).toList(),
+          ),
+        ),
+        const SizedBox(height: 30),
+        // Chips arrastáveis
+        if (!_hasAnswered)
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: (q['options'] as List<String>).map((word) {
+              return _draggedSlots.contains(word) ? _buildEmptyChip() : _buildDraggableWord(word);
+            }).toList(),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildTargetSlot(int index) {
+    String? word = _draggedSlots[index];
+    return DragTarget<String>(
+      builder: (context, candidate, rejected) {
+        return GestureDetector(
+          onTap: () {
+            // Tocar numa palavra já colocada a remove do slot
+            if (word != null && !_hasAnswered) {
+              setState(() => _draggedSlots[index] = null);
+            }
+          },
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            width: 120, height: 45,
+            decoration: BoxDecoration(
+              color: word == null ? AppColors.card : AppColors.primary.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: candidate.isNotEmpty
+                    ? AppColors.primary
+                    : word != null
+                        ? AppColors.primary.withValues(alpha: 0.4)
+                        : AppColors.cardBorder,
+                width: 2,
+              ),
+              boxShadow: candidate.isNotEmpty
+                  ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 10)]
+                  : null,
+            ),
+            child: Center(
+              child: Text(
+                word ?? '________',
+                style: TextStyle(
+                  color: word == null ? AppColors.textMuted : Colors.white,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 13,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      onAcceptWithDetails: (details) {
+        if (!_hasAnswered) {
+          setState(() => _draggedSlots[index] = details.data);
+          HapticFeedback.selectionClick();
+        }
+      },
+    );
+  }
+
+  Widget _buildDraggableWord(String word) {
+    return Draggable<String>(
+      data: word,
+      feedback: Material(color: Colors.transparent, child: _chip(word, glow: true)),
+      childWhenDragging: Opacity(opacity: 0.3, child: _chip(word)),
+      child: _chip(word),
+    );
+  }
+
+  Widget _chip(String label, {bool glow = false}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: AppColors.cardBorder),
+        boxShadow: glow ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.5), blurRadius: 15)] : null,
+      ),
+      child: Text(label, style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w800)),
+    );
+  }
+
+  Widget _buildEmptyChip() => Container(
+    width: 80, height: 40,
+    decoration: BoxDecoration(
+      color: Colors.white.withValues(alpha: 0.05),
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.2)),
+    ),
+  );
+
+  // ── WIDGET DE DESLIZAR (SWIPE) ESTILO TINDER ──
+  Widget _buildSwipeChallenge(Map<String, dynamic> q) {
+    if (_swipeAnswer != null) {
+      bool isTrue = _swipeAnswer == true;
+      return Container(
+        width: double.infinity, padding: const EdgeInsets.all(30),
+        decoration: BoxDecoration(
+          color: isTrue ? AppColors.primary.withValues(alpha: 0.15) : Colors.redAccent.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(16), border: Border.all(color: isTrue ? AppColors.primary : Colors.redAccent, width: 2),
+        ),
+        child: Column(
+          children: [
+            Icon(isTrue ? Icons.check_circle : Icons.cancel, color: isTrue ? AppColors.primary : Colors.redAccent, size: 60),
+            const SizedBox(height: 10),
+            Text(isTrue ? 'VERDADEIRO' : 'FALSO', style: TextStyle(color: isTrue ? AppColors.primary : Colors.redAccent, fontSize: 24, fontWeight: FontWeight.w800)),
+          ],
+        ),
+      );
+    }
+
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.arrow_back, color: Colors.redAccent.withValues(alpha: 0.6), size: 16),
+            const SizedBox(width: 6),
+            Text('FALSO', style: TextStyle(color: Colors.redAccent.withValues(alpha: 0.6), fontSize: 11, fontWeight: FontWeight.w800)),
+            const SizedBox(width: 24),
+            Text('VERDADEIRO', style: TextStyle(color: AppColors.primary.withValues(alpha: 0.6), fontSize: 11, fontWeight: FontWeight.w800)),
+            const SizedBox(width: 6),
+            Icon(Icons.arrow_forward, color: AppColors.primary.withValues(alpha: 0.6), size: 16),
+          ],
+        ),
+        const SizedBox(height: 16),
+        _SwipeTinderCard(
+          key: ValueKey(_currentQuestion),
+          statement: q['statement'],
+          onSwiped: (bool isRight) {
+            HapticFeedback.mediumImpact();
+            setState(() {
+              _swipeAnswer = isRight;
+            });
+            _confirmAnswer();
+          },
+        ),
+      ],
+    );
+  }
+
+  // ── RODAPÉ ──
   Widget _buildBottomArea() {
     final q = _questions[_currentQuestion];
 
     if (!_hasAnswered) {
-      bool canConfirm = _selectedOption != -1;
+      bool canConfirm = false;
+      if (q['type'] == 'multiple') canConfirm = _selectedOption != -1;
+      if (q['type'] == 'drag' || q['type'] == 'sentence_builder') canConfirm = !_draggedSlots.contains(null);
+      if (q['type'] == 'swipe') return const SizedBox.shrink(); // Swipe não tem botão Verificar
+
       return Container(
-        padding: const EdgeInsets.all(20),
-        decoration: const BoxDecoration(
-          color: Color(0xFF061629),
-          border: Border(top: BorderSide(color: AppColors.cardBorder)),
-        ),
+        padding: const EdgeInsets.all(20), decoration: const BoxDecoration(color: Color(0xFF061629), border: Border(top: BorderSide(color: AppColors.cardBorder))),
         child: SizedBox(
-          width: double.infinity,
-          height: 56,
+          width: double.infinity, height: 56,
           child: ElevatedButton(
             onPressed: canConfirm ? _confirmAnswer : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: canConfirm ? AppColors.primary : AppColors.card,
-              disabledBackgroundColor: AppColors.card,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            ),
-            child: Text(
-              'VERIFICAR',
-              style: TextStyle(
-                color: canConfirm ? Colors.white : AppColors.textMuted,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1,
-              ),
-            ),
+            style: ElevatedButton.styleFrom(backgroundColor: canConfirm ? AppColors.primary : AppColors.card, disabledBackgroundColor: AppColors.card, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+            child: Text('VERIFICAR', style: TextStyle(color: canConfirm ? Colors.white : AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
           ),
         ),
       );
@@ -800,60 +789,122 @@ class _QuizScreenState extends State<QuizScreen> {
 
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: feedbackColor.withValues(alpha: 0.15),
-        border: Border(top: BorderSide(color: feedbackColor, width: 2)),
-      ),
+      decoration: BoxDecoration(color: feedbackColor.withValues(alpha: 0.15), border: Border(top: BorderSide(color: feedbackColor, width: 2))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(feedbackIcon, color: feedbackColor, size: 28),
-              const SizedBox(width: 10),
-              Text(
-                feedbackTitle,
-                style: TextStyle(
-                  color: feedbackColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          if (!_isCorrect) ...[
-            const SizedBox(height: 10),
-            Text(
-              q['explanation'],
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                height: 1.4,
-              ),
-            ),
-          ],
+          Row(children: [Icon(feedbackIcon, color: feedbackColor, size: 28), const SizedBox(width: 10), Text(feedbackTitle, style: TextStyle(color: feedbackColor, fontSize: 20, fontWeight: FontWeight.bold))]),
+          if (!_isCorrect) ...[const SizedBox(height: 10), Text(q['explanation'], style: const TextStyle(color: Colors.white, fontSize: 14, height: 1.4))],
           const SizedBox(height: 20),
           SizedBox(
-            width: double.infinity,
-            height: 56,
+            width: double.infinity, height: 56,
             child: ElevatedButton(
               onPressed: _nextQuestion,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: feedbackColor,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              ),
-              child: Text(
-                _currentQuestion + 1 >= _questions.length ? 'FINALIZAR' : 'CONTINUAR',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                ),
-              ),
+              style: ElevatedButton.styleFrom(backgroundColor: feedbackColor, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+              child: Text(_currentQuestion + 1 >= _questions.length ? 'FINALIZAR' : 'CONTINUAR', style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  WIDGET SWIPE TINDER COM ROTAÇÃO E OVERLAY VERDE/VERMELHO
+// ═══════════════════════════════════════════════════════════
+class _SwipeTinderCard extends StatefulWidget {
+  final String statement;
+  final void Function(bool isRight) onSwiped;
+
+  const _SwipeTinderCard({
+    super.key,
+    required this.statement,
+    required this.onSwiped,
+  });
+
+  @override
+  State<_SwipeTinderCard> createState() => _SwipeTinderCardState();
+}
+
+class _SwipeTinderCardState extends State<_SwipeTinderCard> {
+  Offset _dragOffset = Offset.zero;
+  bool _isDragging = false;
+  static const double _swipeThreshold = 100.0;
+
+  double get _rotation => (_dragOffset.dx / 300).clamp(-0.3, 0.3);
+  double get _swipeProgress => (_dragOffset.dx.abs() / _swipeThreshold).clamp(0, 1);
+  bool get _isSwipingRight => _dragOffset.dx > 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onPanStart: (_) => setState(() => _isDragging = true),
+      onPanUpdate: (details) {
+        setState(() => _dragOffset += details.delta);
+      },
+      onPanEnd: (_) {
+        if (_dragOffset.dx.abs() > _swipeThreshold) {
+          widget.onSwiped(_isSwipingRight);
+        } else {
+          setState(() {
+            _dragOffset = Offset.zero;
+            _isDragging = false;
+          });
+        }
+      },
+      child: Transform.translate(
+        offset: _dragOffset,
+        child: Transform.rotate(
+          angle: _rotation,
+          child: Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(30),
+                decoration: BoxDecoration(
+                  color: AppColors.card,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.cardBorder, width: 2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.3),
+                      blurRadius: 20,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: Text(
+                  widget.statement,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white, fontSize: 20, height: 1.5, fontWeight: FontWeight.w600),
+                ),
+              ),
+              // Overlay de feedback visual (verde/vermelho)
+              if (_isDragging && _swipeProgress > 0.1)
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: _isSwipingRight
+                          ? AppColors.primary.withValues(alpha: _swipeProgress * 0.25)
+                          : Colors.redAccent.withValues(alpha: _swipeProgress * 0.25),
+                    ),
+                    child: Center(
+                      child: Opacity(
+                        opacity: _swipeProgress,
+                        child: Icon(
+                          _isSwipingRight ? Icons.check_circle : Icons.cancel,
+                          color: _isSwipingRight ? AppColors.primary : Colors.redAccent,
+                          size: 60,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

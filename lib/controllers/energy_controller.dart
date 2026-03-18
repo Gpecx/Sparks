@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:spark_app/services/overload_service.dart';
 
 /// Controlador global de energia do SPARK.
 /// Gerencia bateria, regeneração por tempo, streaks e status premium.
@@ -123,9 +124,10 @@ class EnergyController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Adiciona XP após finalizar lição
+  /// Adiciona XP após finalizar lição (aplica multiplicador de Sobrecarga se ativo)
   void addXp(int amount) {
-    _xp += amount;
+    final finalAmount = OverloadService().applyMultiplier(amount);
+    _xp += finalAmount;
     notifyListeners();
   }
 

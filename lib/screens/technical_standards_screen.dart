@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/widgets/pcb_background.dart';
 
 class TechnicalStandardsScreen extends StatefulWidget {
   const TechnicalStandardsScreen({super.key});
@@ -43,79 +45,83 @@ class _TechnicalStandardsScreenState extends State<TechnicalStandardsScreen> {
   @override
   Widget build(BuildContext context) {
     final items = _filtered;
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.background,
-        elevation: 0,
-        leading: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(context)),
-        title: const Text('NORMAS TÉCNICAS', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14, letterSpacing: 1.5)),
-      ),
-      body: Column(
-        children: [
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextField(
-              style: const TextStyle(color: Colors.white),
-              onChanged: (v) => setState(() => _searchQuery = v),
-              decoration: InputDecoration(
-                hintText: 'Buscar normas...',
-                prefixIcon: const Icon(Icons.search, color: AppColors.textMuted),
-                filled: true, fillColor: AppColors.card,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.4))),
-                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.4))),
-              ),
-            ),
+    return SparksBackground(
+      child: PcbBackground(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(context)),
+            title: const Text('NORMAS TÉCNICAS', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14, letterSpacing: 1.5)),
           ),
-          const SizedBox(height: 12),
-          // Filtros estilo tags EXS
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: _filters.map((f) {
-                final sel = f == _selectedFilter;
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: GestureDetector(
-                    onTap: () => setState(() => _selectedFilter = f),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 180),
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: sel ? AppColors.primary : Colors.transparent,
-                        borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: sel ? AppColors.primary : AppColors.cardBorder.withValues(alpha: 0.5)),
-                      ),
-                      child: Text(f, style: TextStyle(color: sel ? Colors.white : AppColors.textSecondary, fontWeight: FontWeight.w700, fontSize: 13, letterSpacing: 0.5)),
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-          const SizedBox(height: 14),
-          if (items.isEmpty)
-            Expanded(
-              child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [
-                  const Icon(Icons.search_off, color: AppColors.textMuted, size: 48),
-                  const SizedBox(height: 12),
-                  Text('Nenhuma norma encontrada', style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 15)),
-                ]),
-              ),
-            )
-          else
-            Expanded(
-              child: ListView.separated(
+          body: Column(
+            children: [
+              const SizedBox(height: 8),
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: items.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 10),
-                itemBuilder: (ctx, i) => _card(ctx, items[i]),
+                child: TextField(
+                  style: const TextStyle(color: Colors.white),
+                  onChanged: (v) => setState(() => _searchQuery = v),
+                  decoration: InputDecoration(
+                    hintText: 'Buscar normas...',
+                    prefixIcon: const Icon(Icons.search, color: AppColors.textMuted),
+                    filled: true, fillColor: AppColors.card,
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.4))),
+                    enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.4))),
+                  ),
+                ),
               ),
-            ),
-        ],
+              const SizedBox(height: 12),
+              // Filtros estilo tags EXS
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: _filters.map((f) {
+                    final sel = f == _selectedFilter;
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: GestureDetector(
+                        onTap: () => setState(() => _selectedFilter = f),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 180),
+                          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: sel ? AppColors.primary : Colors.transparent,
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: sel ? AppColors.primary : AppColors.cardBorder.withValues(alpha: 0.5)),
+                          ),
+                          child: Text(f, style: TextStyle(color: sel ? Colors.white : AppColors.textSecondary, fontWeight: FontWeight.w700, fontSize: 13, letterSpacing: 0.5)),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+              const SizedBox(height: 14),
+              if (items.isEmpty)
+                Expanded(
+                  child: Center(
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      const Icon(Icons.search_off, color: AppColors.textMuted, size: 48),
+                      const SizedBox(height: 12),
+                      Text('Nenhuma norma encontrada', style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 15)),
+                    ]),
+                  ),
+                )
+              else
+                Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    itemCount: items.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
+                    itemBuilder: (ctx, i) => _card(ctx, items[i]),
+                  ),
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

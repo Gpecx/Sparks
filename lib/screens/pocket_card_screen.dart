@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/widgets/pcb_background.dart';
 
 class PocketCardScreen extends StatefulWidget {
   const PocketCardScreen({super.key});
@@ -38,46 +40,50 @@ class _PocketCardScreenState extends State<PocketCardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.close, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text(
-          'CREDENCIAL DIGITAL',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w800,
-            letterSpacing: 2,
-            fontSize: 14,
+    return SparksBackground(
+      child: PcbBackground(
+        child: Scaffold(
+          backgroundColor: Colors.transparent, // Transparente para ver o fundo
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.close, color: Colors.white),
+              onPressed: () => Navigator.pop(context),
+            ),
+            title: const Text(
+              'CREDENCIAL DIGITAL',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 2,
+                fontSize: 14,
+              ),
+            ),
+            centerTitle: true,
           ),
-        ),
-        centerTitle: true,
-      ),
-      // O GestureDetector é o nosso "espião" que detecta os toques
-      body: GestureDetector(
-        onPanUpdate: _onPanUpdate,
-        onPanEnd: _onPanEnd,
-        child: Container(
-          color: Colors.transparent, // Necessário para capturar toques na tela toda
-          width: double.infinity,
-          height: double.infinity,
-          alignment: Alignment.center,
-          // AnimatedContainer faz o cartão voltar pro meio suavemente quando soltamos
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeOut,
-            transformAlignment: Alignment.center,
-            // AQUI É A MÁGICA DO 3D!
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001) // Adiciona a perspectiva (profundidade)
-              ..rotateX(_xRotation)   // Inclina pra cima/baixo
-              ..rotateY(_yRotation),  // Inclina pros lados
-            child: _buildCardUI(),
+          // O GestureDetector é o nosso "espião" que detecta os toques
+          body: GestureDetector(
+            onPanUpdate: _onPanUpdate,
+            onPanEnd: _onPanEnd,
+            child: Container(
+              color: Colors.transparent, // Necessário para capturar toques na tela toda
+              width: double.infinity,
+              height: double.infinity,
+              alignment: Alignment.center,
+              // AnimatedContainer faz o cartão voltar pro meio suavemente quando soltamos
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeOut,
+                transformAlignment: Alignment.center,
+                // AQUI É A MÁGICA DO 3D!
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001) // Adiciona a perspectiva (profundidade)
+                  ..rotateX(_xRotation)   // Inclina pra cima/baixo
+                  ..rotateY(_yRotation),  // Inclina pros lados
+                child: _buildCardUI(),
+              ),
+            ),
           ),
         ),
       ),

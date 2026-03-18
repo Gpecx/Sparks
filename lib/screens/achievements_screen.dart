@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/widgets/pcb_background.dart';
 
 class AchievementsScreen extends StatelessWidget {
   const AchievementsScreen({super.key});
@@ -8,107 +9,109 @@ class AchievementsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SparksBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
+      child: PcbBackground(
+        child: Scaffold(
           backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.pop(context),
-          ),
-          title: const Text(
-            'CONQUISTAS',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w800,
-              fontSize: 15,
-              letterSpacing: 1.5,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () => Navigator.pop(context),
+            ),
+            title: const Text(
+              'CONQUISTAS',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+                fontSize: 15,
+                letterSpacing: 1.5,
+              ),
             ),
           ),
-        ),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          children: [
-            // Sumário
-            Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.card,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 56,
-                    height: 56,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.15),
-                      shape: BoxShape.circle,
+          body: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            children: [
+              // Sumário
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: AppColors.card,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 56,
+                      height: 56,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.emoji_events, color: AppColors.gold, size: 30),
                     ),
-                    child: const Icon(Icons.emoji_events, color: AppColors.gold, size: 30),
-                  ),
-                  const SizedBox(width: 16),
-                  const Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('4 Conquistas', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800)),
-                        SizedBox(height: 2),
-                        Text('de 12 disponíveis', style: TextStyle(color: AppColors.textMuted, fontSize: 13)),
-                      ],
-                    ),
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: SizedBox(
-                      width: 60,
+                    const SizedBox(width: 16),
+                    const Expanded(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('33%', style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 16)),
-                          const SizedBox(height: 4),
-                          LinearProgressIndicator(
-                            value: 4 / 12,
-                            backgroundColor: AppColors.inputBackground,
-                            valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
-                            minHeight: 5,
-                          ),
+                          Text('4 Conquistas', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800)),
+                          SizedBox(height: 2),
+                          Text('de 12 disponíveis', style: TextStyle(color: AppColors.textMuted, fontSize: 13)),
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: SizedBox(
+                        width: 60,
+                        child: Column(
+                          children: [
+                            Text('33%', style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 16)),
+                            const SizedBox(height: 4),
+                            LinearProgressIndicator(
+                              value: 4 / 12,
+                              backgroundColor: AppColors.inputBackground,
+                              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                              minHeight: 5,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            _sectionTitle('NORMAS E CONHECIMENTO'),
-            _achievementGrid(context, [
-              _AchievementData('Mestre NR-10', Icons.electrical_services, 'Completou todos os módulos da NR-10', true),
-              _AchievementData('Expert NFPA 70E', Icons.shield_outlined, 'Completou todos os módulos da NFPA 70E', false),
-              _AchievementData('Pro em Segurança', Icons.verified_outlined, 'Atingiu 95% de acerto em 5 avaliações', false),
-              _AchievementData('Mestre NR-35', Icons.height, 'Completou todos os módulos da NR-35', false),
-            ]),
+              _sectionTitle('NORMAS E CONHECIMENTO'),
+              _achievementGrid(context, [
+                _AchievementData('Mestre NR-10', Icons.electrical_services, 'Completou todos os módulos da NR-10', true),
+                _AchievementData('Expert NFPA 70E', Icons.shield_outlined, 'Completou todos os módulos da NFPA 70E', false),
+                _AchievementData('Pro em Segurança', Icons.verified_outlined, 'Atingiu 95% de acerto em 5 avaliações', false),
+                _AchievementData('Mestre NR-35', Icons.height, 'Completou todos os módulos da NR-35', false),
+              ]),
 
-            _sectionTitle('DEDICAÇÃO E PRESENÇA'),
-            _achievementGrid(context, [
-              _AchievementData('Streak 7 dias', Icons.local_fire_department, 'Estudou 7 dias consecutivos', true),
-              _AchievementData('Streak 30 dias', Icons.whatshot, 'Estudou 30 dias consecutivos', false),
-              _AchievementData('Madrugador', Icons.wb_twilight, 'Estudou antes das 7h por 5 dias', false),
-              _AchievementData('Dedicado', Icons.calendar_month, 'Ativo por 60 dias', false),
-            ]),
+              _sectionTitle('DEDICAÇÃO E PRESENÇA'),
+              _achievementGrid(context, [
+                _AchievementData('Streak 7 dias', Icons.local_fire_department, 'Estudou 7 dias consecutivos', true),
+                _AchievementData('Streak 30 dias', Icons.whatshot, 'Estudou 30 dias consecutivos', false),
+                _AchievementData('Madrugador', Icons.wb_twilight, 'Estudou antes das 7h por 5 dias', false),
+                _AchievementData('Dedicado', Icons.calendar_month, 'Ativo por 60 dias', false),
+              ]),
 
-            _sectionTitle('PERFORMANCE'),
-            _achievementGrid(context, [
-              _AchievementData('Primeira Avaliação', Icons.quiz_outlined, 'Completou sua primeira avaliação', true),
-              _AchievementData('Nota Máxima', Icons.star_outlined, 'Tirou 100% em uma avaliação', true),
-              _AchievementData('Sequência Perfeita', Icons.military_tech, '10 acertos seguidos no quiz', false),
-              _AchievementData('Imbatível', Icons.workspace_premium, 'Completou 5 avaliações com nota máxima', false),
-            ]),
+              _sectionTitle('PERFORMANCE'),
+              _achievementGrid(context, [
+                _AchievementData('Primeira Avaliação', Icons.quiz_outlined, 'Completou sua primeira avaliação', true),
+                _AchievementData('Nota Máxima', Icons.star_outlined, 'Tirou 100% em uma avaliação', true),
+                _AchievementData('Sequência Perfeita', Icons.military_tech, '10 acertos seguidos no quiz', false),
+                _AchievementData('Imbatível', Icons.workspace_premium, 'Completou 5 avaliações com nota máxima', false),
+              ]),
 
-            const SizedBox(height: 20),
-          ],
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );

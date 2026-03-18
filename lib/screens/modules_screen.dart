@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/learning_path_screen.dart';
 
 class ModulesScreen extends StatelessWidget {
@@ -9,76 +10,78 @@ class ModulesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SparksBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
+      child: PcbBackground(
+        child: Scaffold(
           backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: const Text(
-            'MÓDULOS DISPONÍVEIS',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w800,
-              letterSpacing: 1.5,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: const Text(
+              'MÓDULOS DISPONÍVEIS',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 1.5,
+              ),
             ),
+            centerTitle: true,
           ),
-          centerTitle: true,
-        ),
-        body: ListView(
-          padding: const EdgeInsets.all(20),
-          children: [
-            _buildModuleCard(
-              context,
-              title: 'Módulo 1: Segurança Básica',
-              subtitle: 'Introdução e NR-10',
-              progress: 0.75, // mock progress
-              icon: Icons.security,
-              color: AppColors.primary,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const LearningPathScreen()),
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            _buildModuleCard(
-              context,
-              title: 'Módulo 2: Trabalhos e Riscos',
-              subtitle: 'NR-35 e Prevenções',
-              progress: 0.0,
-              icon: Icons.warning_amber_rounded,
-              color: const Color(0xFFFF9800),
-              isLocked: true,
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Conclua o Módulo 1 para desbloquear!'),
-                    backgroundColor: AppColors.error,
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            _buildModuleCard(
-              context,
-              title: 'Módulo 3: Avançado',
-              subtitle: 'Gestão de Crises',
-              progress: 0.0,
-              icon: Icons.shield,
-              color: AppColors.accent,
-              isLocked: true,
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Módulo bloqueado.'),
-                    backgroundColor: AppColors.error,
-                  ),
-                );
-              },
-            ),
-          ],
+          body: ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              _buildModuleCard(
+                context,
+                title: 'Módulo 1: Segurança Básica',
+                subtitle: 'Introdução e NR-10',
+                progress: 0.75, // mock progress
+                icon: Icons.security,
+                color: AppColors.primary,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const LearningPathScreen()),
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+              _buildModuleCard(
+                context,
+                title: 'Módulo 2: Trabalhos e Riscos',
+                subtitle: 'NR-35 e Prevenções',
+                progress: 0.0,
+                icon: Icons.warning_amber_rounded,
+                color: const Color(0xFFFF9800),
+                isLocked: true,
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Conclua o Módulo 1 para desbloquear!'),
+                      backgroundColor: AppColors.error,
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+              _buildModuleCard(
+                context,
+                title: 'Módulo 3: Avançado',
+                subtitle: 'Gestão de Crises',
+                progress: 0.0,
+                icon: Icons.shield,
+                color: AppColors.accent,
+                isLocked: true,
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Módulo bloqueado.'),
+                      backgroundColor: AppColors.error,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/screens/settings_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/widgets/pcb_background.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -145,6 +146,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 },
               ),
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
+              const Padding(
+                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                 child: Text('NOVAS MECÂNICAS', style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.bold)),
+              ),
+              _buildProfileMenuItem(
+                icon: Icons.flash_on,
+                label: 'Duelo de Faíscas (PvP)',
+                color: AppColors.primary,
+                onTap: () {
+                  Navigator.pop(ctx);
+                  Navigator.pushNamed(context, '/duel');
+                },
+              ),
+              _buildProfileMenuItem(
+                icon: Icons.precision_manufacturing,
+                label: 'Lab. de Simulação de Erros',
+                color: AppColors.gold,
+                onTap: () {
+                  Navigator.pop(ctx);
+                  Navigator.pushNamed(context, '/error-simulation');
+                },
+              ),
+              Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
               _buildProfileMenuItem(
                 icon: Icons.logout,
                 label: 'Sair',
@@ -199,11 +223,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
     return SparksBackground(
-      child: SafeArea(
-        child: SingleChildScrollView(
+      // 2. Envolvemos a tela com o nosso novo fundo PCB
+      child: PcbBackground(
+        // 3. Colocamos um Scaffold transparente. Isso é o segredo 
+        // para o desenho da placa de circuito aparecer no fundo!
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          
+          // O seu código original começa a partir do SafeArea pra baixo!
+          body: SafeArea(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -366,6 +397,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ],
               ),
             ),
+          ),
+        ),
       ),
     );
   }

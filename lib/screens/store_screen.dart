@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/checkout_screen.dart';
-import 'package:spark_app/screens/main_shell_screen.dart'; // Importante para o botão voltar
-import 'package:spark_app/widgets/sparks_background.dart'; // Importante para as faíscas
+import 'package:spark_app/screens/main_shell_screen.dart';
+import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/widgets/pcb_background.dart';
 
 class SparkPackage {
   final int points;
@@ -65,12 +66,10 @@ class _StoreScreenState extends State<StoreScreen> {
       icon: const Icon(Icons.arrow_back, color: Colors.white),
       onPressed: () {
         if (Navigator.canPop(context)) {
-          // Se chegou aqui via Navigator.push (ex: clicou no perfil)
           Navigator.pop(context);
         } else {
-          // Se chegou aqui pela BottomNavigationBar
           final shell = context.findAncestorStateOfType<MainShellScreenState>();
-          shell?.switchTab(0); // Volta pro Dashboard (Início)
+          shell?.switchTab(0);
         }
       },
     );
@@ -78,84 +77,85 @@ class _StoreScreenState extends State<StoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // CORREÇÃO: Scaffold envolvendo a página toda
-    return Scaffold(
-      backgroundColor: Colors.transparent, // Deixa o fundo SparksBackground aparecer
-      body: SparksBackground( // CORREÇÃO: Fundo animado com as faíscas
-        child: SafeArea(
-          child: Column(
-            children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 16, 20, 0), // Margem esquerda reduzida para alinhar com o botão
-                child: Row(
-                  children: [
-                    _buildSmartBackButton(), // CORREÇÃO: Botão de voltar
-                    const Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('LOJA SPARK', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 2)),
-                          SizedBox(height: 2),
-                          Text('Potencialize seu aprendizado', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
-                        ],
-                      ),
-                    ),
-                    // Carrinho
-                    GestureDetector(
-                      onTap: _cart.isEmpty ? null : _openCheckout,
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: AppColors.card,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: _cart.isNotEmpty ? AppColors.primary.withValues(alpha: 0.5) : AppColors.cardBorder.withValues(alpha: 0.4)),
-                        ),
-                        child: Stack(
-                          clipBehavior: Clip.none,
+    return SparksBackground(
+      child: PcbBackground(
+        child: Scaffold(
+          backgroundColor: Colors.transparent, 
+          body: SafeArea(
+            child: Column(
+              children: [
+                // Header
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 16, 20, 0),
+                  child: Row(
+                    children: [
+                      _buildSmartBackButton(), 
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(Icons.shopping_cart_outlined, color: _cart.isNotEmpty ? AppColors.primary : AppColors.textMuted, size: 22),
-                            if (_cart.isNotEmpty)
-                              Positioned(
-                                top: -6, right: -6,
-                                child: Container(
-                                  width: 17, height: 17,
-                                  decoration: const BoxDecoration(color: AppColors.error, shape: BoxShape.circle),
-                                  child: Center(child: Text('${_cart.length}', style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w800))),
-                                ),
-                              ),
+                            Text('LOJA SPARK', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 2)),
+                            SizedBox(height: 2),
+                            Text('Potencialize seu aprendizado', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
                           ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Promo card
-                      _promoCard(),
-                      const SizedBox(height: 28),
-                      _sectionTitle('PACOTES DE PONTOS', Icons.bolt),
-                      const SizedBox(height: 12),
-                      ...sparkPackages.map((p) => Padding(padding: const EdgeInsets.only(bottom: 10), child: _packageCard(p))),
-                      const SizedBox(height: 16),
-                      _sectionTitle('PLANOS DE ASSINATURA', Icons.card_membership_outlined),
-                      const SizedBox(height: 4),
-                      Text('Ganhe pontos bônus todo mês automaticamente!', style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 12)),
-                      const SizedBox(height: 12),
-                      ...subscriptionPlans.map((p) => Padding(padding: const EdgeInsets.only(bottom: 10), child: _planCard(p))),
-                      const SizedBox(height: 32),
+                      // Carrinho
+                      GestureDetector(
+                        onTap: _cart.isEmpty ? null : _openCheckout,
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: AppColors.card,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: _cart.isNotEmpty ? AppColors.primary.withValues(alpha: 0.5) : AppColors.cardBorder.withValues(alpha: 0.4)),
+                          ),
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Icon(Icons.shopping_cart_outlined, color: _cart.isNotEmpty ? AppColors.primary : AppColors.textMuted, size: 22),
+                              if (_cart.isNotEmpty)
+                                Positioned(
+                                  top: -6, right: -6,
+                                  child: Container(
+                                    width: 17, height: 17,
+                                    decoration: const BoxDecoration(color: AppColors.error, shape: BoxShape.circle),
+                                    child: Center(child: Text('${_cart.length}', style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w800))),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 16),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Promo card
+                        _promoCard(),
+                        const SizedBox(height: 28),
+                        _sectionTitle('PACOTES DE PONTOS', Icons.bolt),
+                        const SizedBox(height: 12),
+                        ...sparkPackages.map((p) => Padding(padding: const EdgeInsets.only(bottom: 10), child: _packageCard(p))),
+                        const SizedBox(height: 16),
+                        _sectionTitle('PLANOS DE ASSINATURA', Icons.card_membership_outlined),
+                        const SizedBox(height: 4),
+                        Text('Ganhe pontos bônus todo mês automaticamente!', style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 12)),
+                        const SizedBox(height: 12),
+                        ...subscriptionPlans.map((p) => Padding(padding: const EdgeInsets.only(bottom: 10), child: _planCard(p))),
+                        const SizedBox(height: 32),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
