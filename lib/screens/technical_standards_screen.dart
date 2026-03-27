@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
@@ -131,7 +132,7 @@ class _TechnicalStandardsScreenState extends State<TechnicalStandardsScreen> {
     final double progress = s['progress'] as double;
     final bool locked = s['status'] == 'BLOQUEADO';
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/standard-detail'),
+      onTap: () => context.push('/standard-detail'),
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(

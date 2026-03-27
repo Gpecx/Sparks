@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'dart:math' as math;
 import 'dart:ui'; // Adicionado para o efeito de vidro fosco (Glassmorphism)
 import 'package:flutter/material.dart';
@@ -6,10 +7,14 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/quiz_screen.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/models/curriculum_models.dart';
 
 
 class LearningPathScreen extends StatefulWidget {
-  const LearningPathScreen({super.key});
+  final String? moduleTitle;
+  final List<MicroLesson>? lessons;
+
+  const LearningPathScreen({super.key, this.moduleTitle, this.lessons});
   @override
   State<LearningPathScreen> createState() => _LearningPathScreenState();
 }
@@ -36,19 +41,23 @@ class _LearningPathScreenState extends State<LearningPathScreen>
     )..repeat();
     _energyCtrl.addListener(_onEnergyChanged);
 
-    _nodes.add({'type': 'lesson', 'title': 'Introdução', 'subtitle': 'Introdução ao Módulo'});
-
-    for (int i = 1; i <= 10; i++) {
-      _nodes.add({'type': 'lesson', 'title': 'Lição $i', 'subtitle': 'Módulo Base'});
+    // Usa as lições do módulo se fornecidas, ou gera padrão
+    final moduleLessons = widget.lessons;
+    if (moduleLessons != null && moduleLessons.isNotEmpty) {
+      for (final lesson in moduleLessons) {
+        _nodes.add({'type': lesson.type, 'title': lesson.title, 'subtitle': lesson.subtitle});
+      }
+    } else {
+      _nodes.add({'type': 'lesson', 'title': 'Introdução', 'subtitle': 'Introdução ao Módulo'});
+      for (int i = 1; i <= 10; i++) {
+        _nodes.add({'type': 'lesson', 'title': 'Lição $i', 'subtitle': 'Módulo Base'});
+      }
+      _nodes.add({'type': 'eval', 'title': 'AVALIAÇÃO 1', 'subtitle': 'Certificado Básico'});
+      for (int i = 1; i <= 10; i++) {
+        _nodes.add({'type': 'lesson', 'title': 'Lição ${i + 10}', 'subtitle': 'Módulo Avançado'});
+      }
+      _nodes.add({'type': 'eval', 'title': 'AVALIAÇÃO 2', 'subtitle': 'Certificado Final'});
     }
-
-    _nodes.add({'type': 'eval', 'title': 'AVALIAÇÃO 1', 'subtitle': 'Certificado Básico'});
-
-    for (int i = 1; i <= 10; i++) {
-      _nodes.add({'type': 'lesson', 'title': 'Lição ${i + 10}', 'subtitle': 'Módulo Avançado'});
-    }
-
-    _nodes.add({'type': 'eval', 'title': 'AVALIAÇÃO 2', 'subtitle': 'Certificado Final'});
   }
 
   void _onEnergyChanged() {
@@ -135,10 +144,10 @@ class _LearningPathScreenState extends State<LearningPathScreen>
                         child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
                       ),
                       const SizedBox(width: 12),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          'SEGURANÇA BÁSICA',
-                          style: TextStyle(
+                          widget.moduleTitle?.toUpperCase() ?? 'SEGURANÇA BÁSICA',
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
@@ -147,12 +156,12 @@ class _LearningPathScreenState extends State<LearningPathScreen>
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, '/store'),
+                        onTap: () => context.push('/store'),
                         child: _buildBadge(Icons.bolt, '250', AppColors.primary),
                       ),
                       const SizedBox(width: 10),
                       GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, '/store'),
+                        onTap: () => context.push('/store'),
                         child: ListenableBuilder(
                           listenable: _energyCtrl,
                           builder: (_, _) => _buildBatteryBadge(),
@@ -293,27 +302,44 @@ class _LearningPathScreenState extends State<LearningPathScreen>
                                   final cy = _nodeY(index, screenWidth);
 
                                   const nodeWidgetW = 120.0;
+                                  
+                                  final List<String> friends = [];
+                                  if (index == 2) friends.add('Mariana');
+                                  if (index == 5) friends.add('Bruno');
+                                  if (index == 8) friends.add('Alex');
 
                                   return Positioned(
                                     left: cx - nodeWidgetW / 2,
                                     top:  cy - TrailLayout.kNodeSize / 2,
                                     width: nodeWidgetW,
-                                    child: isEval
-                                        ? _buildEvalNode(
-                                            label: node['title'],
-                                            subtitle: node['subtitle'],
-                                            isUnlocked: isUnlocked,
-                                            isCompleted: isCompleted,
-                                            onTap: () => _handleNodeTap(index),
-                                          )
-                                        : _buildLessonNode(
-                                            label: node['title'],
-                                            subtitle: node['subtitle'],
-                                            isCompleted: isCompleted,
-                                            isCurrent: isCurrent,
-                                            isUnlocked: isUnlocked,
-                                            onTap: () => _handleNodeTap(index),
+                                    child: Stack(
+                                      clipBehavior: Clip.none,
+                                      alignment: Alignment.center,
+                                      children: [
+                                        isEval
+                                            ? _buildEvalNode(
+                                                label: node['title'],
+                                                subtitle: node['subtitle'],
+                                                isUnlocked: isUnlocked,
+                                                isCompleted: isCompleted,
+                                                onTap: () => _handleNodeTap(index),
+                                              )
+                                            : _buildLessonNode(
+                                                label: node['title'],
+                                                subtitle: node['subtitle'],
+                                                isCompleted: isCompleted,
+                                                isCurrent: isCurrent,
+                                                isUnlocked: isUnlocked,
+                                                onTap: () => _handleNodeTap(index),
+                                              ),
+                                        if (friends.isNotEmpty)
+                                          Positioned(
+                                            top: -24,
+                                            right: -5,
+                                            child: _buildFriendAvatar(friends.first),
                                           ),
+                                      ],
+                                    ),
                                   );
                                 }),
                               ],
@@ -348,6 +374,47 @@ class _LearningPathScreenState extends State<LearningPathScreen>
     return TrailLayout.kTopPadding +
         index * TrailLayout.kSlotHeight +
         TrailLayout.kNodeSize / 2;
+  }
+
+  Widget _buildFriendAvatar(String name) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 38,
+          height: 38,
+          decoration: BoxDecoration(
+            color: AppColors.primary,
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.white, width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withValues(alpha: 0.5),
+                blurRadius: 10,
+                spreadRadius: 2,
+              )
+            ],
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            name[0],
+            style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+        const SizedBox(height: 2),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.8),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text(
+            name,
+            style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w700),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildLessonNode({

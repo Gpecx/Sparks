@@ -4,6 +4,23 @@ import 'package:spark_app/screens/checkout_screen.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+class CartNotifier extends Notifier<List<CartItem>> {
+  @override
+  List<CartItem> build() => [];
+
+  void add(CartItem item) {
+    state = [...state, item];
+  }
+
+  void clear() {
+    state = [];
+  }
+}
+
+final cartProvider = NotifierProvider<CartNotifier, List<CartItem>>(CartNotifier.new);
 
 class SparkPackage {
   final int points;
@@ -40,28 +57,24 @@ const List<SubscriptionPlan> subscriptionPlans = [
   SubscriptionPlan(name: 'Anual', monthlyPrice: 14.90, bonusPoints: 800, period: '/mês', badge: 'Melhor Oferta'),
 ];
 
-class StoreScreen extends StatefulWidget {
+class StoreScreen extends ConsumerWidget {
   const StoreScreen({super.key});
-  @override
-  State<StoreScreen> createState() => _StoreScreenState();
-}
 
-class _StoreScreenState extends State<StoreScreen> {
-  final List<CartItem> _cart = [];
-
-  void _addToCart(CartItem item) {
-    setState(() => _cart.add(item));
+  void _addToCart(BuildContext context, WidgetRef ref, CartItem item) {
+    ref.read(cartProvider.notifier).add(item);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('${item.name} adicionado!'), backgroundColor: AppColors.primary, duration: const Duration(seconds: 1)),
     );
   }
 
-  void _openCheckout() {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => CheckoutScreen(items: List.from(_cart)))).then((_) => setState(() => _cart.clear()));
+  void _openCheckout(BuildContext context, WidgetRef ref, List<CartItem> cart) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => CheckoutScreen(items: List.from(cart)))).then((_) {
+      ref.read(cartProvider.notifier).clear();
+    });
   }
 
   // === BOTÃO VOLTAR INTELIGENTE ===
-  Widget _buildSmartBackButton() {
+  Widget _buildSmartBackButton(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.arrow_back, color: Colors.white),
       onPressed: () {
@@ -76,7 +89,9 @@ class _StoreScreenState extends State<StoreScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cart = ref.watch(cartProvider);
+
     return SparksBackground(
       child: PcbBackground(
         child: Scaffold(
@@ -89,7 +104,7 @@ class _StoreScreenState extends State<StoreScreen> {
                   padding: const EdgeInsets.fromLTRB(8, 16, 20, 0),
                   child: Row(
                     children: [
-                      _buildSmartBackButton(), 
+                      _buildSmartBackButton(context), 
                       const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,31 +116,34 @@ class _StoreScreenState extends State<StoreScreen> {
                         ),
                       ),
                       // Carrinho
-                      GestureDetector(
-                        onTap: _cart.isEmpty ? null : _openCheckout,
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                        onTap: cart.isEmpty ? null : () => _openCheckout(context, ref, cart),
                         child: Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: AppColors.card,
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: _cart.isNotEmpty ? AppColors.primary.withValues(alpha: 0.5) : AppColors.cardBorder.withValues(alpha: 0.4)),
+                            border: Border.all(color: cart.isNotEmpty ? AppColors.primary.withValues(alpha: 0.5) : AppColors.cardBorder.withValues(alpha: 0.4)),
                           ),
                           child: Stack(
                             clipBehavior: Clip.none,
                             children: [
-                              Icon(Icons.shopping_cart_outlined, color: _cart.isNotEmpty ? AppColors.primary : AppColors.textMuted, size: 22),
-                              if (_cart.isNotEmpty)
+                              Icon(Icons.shopping_cart_outlined, color: cart.isNotEmpty ? AppColors.primary : AppColors.textMuted, size: 22),
+                              if (cart.isNotEmpty)
                                 Positioned(
                                   top: -6, right: -6,
                                   child: Container(
                                     width: 17, height: 17,
                                     decoration: const BoxDecoration(color: AppColors.error, shape: BoxShape.circle),
-                                    child: Center(child: Text('${_cart.length}', style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w800))),
+                                    child: Center(child: Text('${cart.length}', style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w800))),
                                   ),
                                 ),
                             ],
                           ),
                         ),
+                      ),
                       ),
                     ],
                   ),
@@ -138,17 +156,17 @@ class _StoreScreenState extends State<StoreScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Promo card
-                        _promoCard(),
+                        _promoCard(context, ref),
                         const SizedBox(height: 28),
                         _sectionTitle('PACOTES DE PONTOS', Icons.bolt),
                         const SizedBox(height: 12),
-                        ...sparkPackages.map((p) => Padding(padding: const EdgeInsets.only(bottom: 10), child: _packageCard(p))),
+                        ...sparkPackages.map((p) => Padding(padding: const EdgeInsets.only(bottom: 10), child: _packageCard(context, ref, p))),
                         const SizedBox(height: 16),
                         _sectionTitle('PLANOS DE ASSINATURA', Icons.card_membership_outlined),
                         const SizedBox(height: 4),
                         Text('Ganhe pontos bônus todo mês automaticamente!', style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 12)),
                         const SizedBox(height: 12),
-                        ...subscriptionPlans.map((p) => Padding(padding: const EdgeInsets.only(bottom: 10), child: _planCard(p))),
+                        ...subscriptionPlans.map((p) => Padding(padding: const EdgeInsets.only(bottom: 10), child: _planCard(context, ref, p))),
                         const SizedBox(height: 32),
                       ],
                     ),
@@ -172,7 +190,7 @@ class _StoreScreenState extends State<StoreScreen> {
     );
   }
 
-  Widget _promoCard() {
+  Widget _promoCard(BuildContext context, WidgetRef ref) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(18),
@@ -218,7 +236,7 @@ class _StoreScreenState extends State<StoreScreen> {
           SizedBox(
             width: double.infinity, height: 46,
             child: ElevatedButton(
-              onPressed: () => _addToCart(CartItem(name: '500 Pontos Spark (Promo)', description: 'Oferta Relâmpago', price: promoDiscountPrice, icon: Icons.bolt)),
+              onPressed: () => _addToCart(context, ref, CartItem(name: '500 Pontos Spark (Promo)', description: 'Oferta Relâmpago', price: promoDiscountPrice, icon: Icons.bolt)),
               child: const Text('APROVEITAR AGORA', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
             ),
           ),
@@ -227,10 +245,12 @@ class _StoreScreenState extends State<StoreScreen> {
     );
   }
 
-  Widget _packageCard(SparkPackage pkg) {
+  Widget _packageCard(BuildContext context, WidgetRef ref, SparkPackage pkg) {
     final hasBadge = pkg.badge != null;
-    return GestureDetector(
-      onTap: () => _addToCart(CartItem(name: '${pkg.points} Pontos Spark', description: 'Pacote avulso', price: pkg.price, icon: Icons.bolt)),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+      onTap: () => _addToCart(context, ref, CartItem(name: '${pkg.points} Pontos Spark', description: 'Pacote avulso', price: pkg.price, icon: Icons.bolt)),
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
@@ -274,13 +294,16 @@ class _StoreScreenState extends State<StoreScreen> {
           ],
         ),
       ),
+    ),
     );
   }
 
-  Widget _planCard(SubscriptionPlan plan) {
+  Widget _planCard(BuildContext context, WidgetRef ref, SubscriptionPlan plan) {
     final isBest = plan.badge == 'Melhor Oferta';
-    return GestureDetector(
-      onTap: () => _addToCart(CartItem(name: 'Plano ${plan.name}', description: '+${plan.bonusPoints} pts bônus/mês', price: plan.monthlyPrice, icon: isBest ? Icons.workspace_premium : Icons.card_membership)),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+      onTap: () => _addToCart(context, ref, CartItem(name: 'Plano ${plan.name}', description: '+${plan.bonusPoints} pts bônus/mês', price: plan.monthlyPrice, icon: isBest ? Icons.workspace_premium : Icons.card_membership)),
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
@@ -329,6 +352,7 @@ class _StoreScreenState extends State<StoreScreen> {
           ],
         ),
       ),
+    ),
     );
   }
 }

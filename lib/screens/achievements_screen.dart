@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/models/badge_model.dart';
 
 class AchievementsScreen extends StatelessWidget {
   const AchievementsScreen({super.key});
@@ -53,13 +54,13 @@ class AchievementsScreen extends StatelessWidget {
                       child: const Icon(Icons.emoji_events, color: AppColors.gold, size: 30),
                     ),
                     const SizedBox(width: 16),
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('4 Conquistas', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800)),
-                          SizedBox(height: 2),
-                          Text('de 12 disponíveis', style: TextStyle(color: AppColors.textMuted, fontSize: 13)),
+                          Text('${4 + BadgeRegistry.unlockedCount} Conquistas', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800)),
+                          const SizedBox(height: 2),
+                          Text('de ${12 + BadgeRegistry.totalCount} disponíveis', style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
                         ],
                       ),
                     ),
@@ -69,10 +70,10 @@ class AchievementsScreen extends StatelessWidget {
                         width: 60,
                         child: Column(
                           children: [
-                            Text('33%', style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 16)),
+                            Text('${(((4 + BadgeRegistry.unlockedCount) / (12 + BadgeRegistry.totalCount)) * 100).round()}%', style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 16)),
                             const SizedBox(height: 4),
                             LinearProgressIndicator(
-                              value: 4 / 12,
+                              value: (4 + BadgeRegistry.unlockedCount) / (12 + BadgeRegistry.totalCount),
                               backgroundColor: AppColors.inputBackground,
                               valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
                               minHeight: 5,
@@ -84,6 +85,11 @@ class AchievementsScreen extends StatelessWidget {
                   ],
                 ),
               ),
+
+              // ── BADGES DINÂMICAS CONTEXTUAIS ──
+              _sectionTitle('BADGES DINÂMICAS'),
+              _buildDynamicBadges(),
+              const SizedBox(height: 8),
 
               _sectionTitle('NORMAS E CONHECIMENTO'),
               _achievementGrid(context, [
@@ -114,6 +120,115 @@ class AchievementsScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildDynamicBadges() {
+    return Column(
+      children: BadgeRegistry.allBadges.map((badge) {
+        return Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: badge.unlocked ? AppColors.primary.withValues(alpha: 0.06) : AppColors.card,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: badge.unlocked
+                  ? AppColors.primary.withValues(alpha: 0.35)
+                  : AppColors.cardBorder.withValues(alpha: 0.25),
+            ),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: badge.unlocked
+                      ? AppColors.primary.withValues(alpha: 0.15)
+                      : AppColors.inputBackground,
+                  border: Border.all(
+                    color: badge.unlocked
+                        ? AppColors.primary.withValues(alpha: 0.4)
+                        : AppColors.cardBorder.withValues(alpha: 0.2),
+                  ),
+                ),
+                child: Center(
+                  child: Text(badge.emoji, style: TextStyle(fontSize: badge.unlocked ? 22 : 18)),
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          badge.title,
+                          style: TextStyle(
+                            color: badge.unlocked ? Colors.white : AppColors.textMuted,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        if (badge.unlocked) ...[
+                          const SizedBox(width: 6),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: AppColors.gold.withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Text('✓', style: TextStyle(color: AppColors.gold, fontSize: 10, fontWeight: FontWeight.w800)),
+                          ),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      badge.description,
+                      style: TextStyle(
+                        color: badge.unlocked ? AppColors.textSecondary : AppColors.textMuted.withValues(alpha: 0.6),
+                        fontSize: 11,
+                      ),
+                    ),
+                    if (!badge.unlocked && badge.progress > 0) ...[
+                      const SizedBox(height: 6),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(3),
+                              child: LinearProgressIndicator(
+                                value: badge.progress,
+                                backgroundColor: AppColors.inputBackground,
+                                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                                minHeight: 4,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '${(badge.progress * 100).round()}%',
+                            style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              if (!badge.unlocked)
+                const Padding(
+                  padding: EdgeInsets.only(left: 8),
+                  child: Icon(Icons.lock_outline, color: AppColors.textMuted, size: 16),
+                ),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 

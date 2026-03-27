@@ -1,7 +1,13 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/screens/achievements_screen.dart';
+import 'package:spark_app/screens/technical_standards_screen.dart';
+import 'package:spark_app/screens/edit_profile_screen.dart';
+import 'package:spark_app/screens/change_password_screen.dart';
+import 'package:spark_app/services/notification_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -14,7 +20,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _rankingAlerts = true;
   bool _normUpdates = false;
   bool _emailNotifications = false;
-  double _textScale = 1.0; // 80% = 0.8, 140% = 1.4
+  double _textScale = 1.0;
+
+  // Smart Notifications
+  bool _streakAlerts = true;
+  bool _friendActivity = true;
+  bool _dailyChallengeAlert = true;
+  bool _tournamentAlerts = true;
+  bool _achievementAlerts = true;
+  bool _silentMode = false;
+  bool _quietHoursEnabled = true;
+  String _notifFrequency = 'Normal';
 
   @override
   Widget build(BuildContext context) {
@@ -47,19 +63,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 icon: Icons.person_outline,
                 title: 'Editar Perfil',
                 subtitle: 'Nome, e-mail, cargo',
-                onTap: () => _snack('Editar Perfil'),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfileScreen())),
+              ),
+              _tile(
+                icon: Icons.emoji_events_outlined,
+                title: 'Ver Minhas Conquistas',
+                subtitle: 'Página de troféus e insígnias',
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen())),
+              ),
+              _tile(
+                icon: Icons.trending_up,
+                title: 'Meu Progresso',
+                subtitle: 'Normas técnicas recomendadas',
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TechnicalStandardsScreen())),
               ),
               _tile(
                 icon: Icons.lock_outline,
                 title: 'Alterar Senha',
                 subtitle: 'Segurança da conta',
-                onTap: () => _snack('Alterar Senha'),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ChangePasswordScreen())),
               ),
               _tile(
                 icon: Icons.card_membership_outlined,
                 title: 'Gerir Plano',
                 subtitle: 'Premium, planos ativos',
-                onTap: () => Navigator.pushNamed(context, '/store'),
+                onTap: () => context.push('/store'),
               ),
               _tile(
                 icon: Icons.delete_outline,
@@ -70,7 +98,63 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const SizedBox(height: 8),
 
-              _sectionTitle('NOTIFICAÇÕES'),
+              _sectionTitle('NOTIFICAÇÕES INTELIGENTES'),
+              _switchTile(
+                icon: Icons.local_fire_department,
+                title: 'Alertas de Streak',
+                subtitle: 'Quando seu streak está em risco',
+                value: _streakAlerts,
+                onChanged: (v) => setState(() => _streakAlerts = v),
+              ),
+              _switchTile(
+                icon: Icons.person_search_outlined,
+                title: 'Amigos Online',
+                subtitle: 'Quando um amigo está estudando',
+                value: _friendActivity,
+                onChanged: (v) => setState(() => _friendActivity = v),
+              ),
+              _switchTile(
+                icon: Icons.bolt,
+                title: 'Desafio Diário',
+                subtitle: 'Lembrete do desafio rápido',
+                value: _dailyChallengeAlert,
+                onChanged: (v) => setState(() => _dailyChallengeAlert = v),
+              ),
+              _switchTile(
+                icon: Icons.emoji_events_outlined,
+                title: 'Torneio Semanal',
+                subtitle: 'Novos torneios e posição no ranking',
+                value: _tournamentAlerts,
+                onChanged: (v) => setState(() => _tournamentAlerts = v),
+              ),
+              _switchTile(
+                icon: Icons.star_outline,
+                title: 'Conquistas',
+                subtitle: 'Quando você desbloquear badges',
+                value: _achievementAlerts,
+                onChanged: (v) => setState(() => _achievementAlerts = v),
+              ),
+              const SizedBox(height: 8),
+
+              _sectionTitle('PERSONALIZAÇÃO DE NOTIFICAÇÕES'),
+              _switchTile(
+                icon: Icons.volume_off_outlined,
+                title: 'Modo Silencioso',
+                subtitle: 'Pausa todas as notificações',
+                value: _silentMode,
+                onChanged: (v) => setState(() => _silentMode = v),
+              ),
+              _switchTile(
+                icon: Icons.schedule_outlined,
+                title: 'Horário Silencioso',
+                subtitle: 'Sem notificações das 22h às 7h',
+                value: _quietHoursEnabled,
+                onChanged: (v) => setState(() => _quietHoursEnabled = v),
+              ),
+              _buildFrequencySelector(),
+              const SizedBox(height: 8),
+
+              _sectionTitle('NOTIFICAÇÕES GERAIS'),
               _switchTile(
                 icon: Icons.school_outlined,
                 title: 'Lembretes de Estudo',
@@ -207,6 +291,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: () {},
               ),
               _tile(
+                icon: Icons.school_outlined,
+                title: 'Refazer Tutorial',
+                subtitle: 'Minigame interativo do app',
+                onTap: () => context.push('/onboarding'),
+              ),
+              _tile(
                 icon: Icons.description_outlined,
                 title: 'Termos de Uso',
                 subtitle: 'Leia nossos termos',
@@ -236,7 +326,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 child: OutlinedButton.icon(
-                  onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false),
+                  onPressed: () => context.go('/'),
                   icon: const Icon(Icons.logout, size: 18),
                   label: const Text(
                     'SAIR DA CONTA',
@@ -310,6 +400,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void _snack(String msg) =>
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg), backgroundColor: AppColors.primary));
+
+  Widget _buildFrequencySelector() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 4),
+      decoration: BoxDecoration(
+        color: AppColors.card,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
+      ),
+      child: ListTile(
+        leading: const Icon(Icons.tune, color: AppColors.textMuted, size: 22),
+        title: const Text('Frequência', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600)),
+        subtitle: const Text('Quantidade de notificações', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+        trailing: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+          decoration: BoxDecoration(
+            color: AppColors.primary.withValues(alpha: 0.12),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              value: _notifFrequency,
+              dropdownColor: AppColors.card,
+              style: const TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.w700),
+              icon: const Icon(Icons.arrow_drop_down, color: AppColors.primary, size: 18),
+              items: ['Mínimo', 'Normal', 'Todas'].map((f) => DropdownMenuItem(value: f, child: Text(f))).toList(),
+              onChanged: (v) => setState(() => _notifFrequency = v ?? 'Normal'),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   void _showSupportDialog() {
     showDialog(
@@ -444,7 +568,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ElevatedButton(
             onPressed: () {
               Navigator.pop(ctx);
-              Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
+              context.go('/');
             },
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.error, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))),
             child: const Text('ELIMINAR', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, letterSpacing: 1)),

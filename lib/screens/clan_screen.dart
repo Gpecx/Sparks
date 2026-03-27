@@ -24,7 +24,8 @@ final List<ClanMember> _mockMembers = [
 
 class ClanScreen extends StatefulWidget {
   final bool isCreating;
-  const ClanScreen({super.key, required this.isCreating});
+  final bool isViewingActive;
+  const ClanScreen({super.key, this.isCreating = false, this.isViewingActive = false});
 
   @override
   State<ClanScreen> createState() => _ClanScreenState();
@@ -38,12 +39,30 @@ class _ClanScreenState extends State<ClanScreen> {
   final _joinPasswordCtrl = TextEditingController();
   final _joinCodeCtrl = TextEditingController();
 
+  final List<Map<String, dynamic>> _messages = [
+    {'sender': 'Alex Rodriguez', 'text': 'Chegamos ao top 3 global!', 'isMe': false},
+    {'sender': 'Mariana Figueiredo', 'text': 'Vamos focar na meta dessa semana pessoal.', 'isMe': false},
+  ];
+  final _chatCtrl = TextEditingController();
+  final ScrollController _scrollCtrl = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isViewingActive) {
+      _clanCreated = true;
+      _clanName = 'EXS Técnicos';
+    }
+  }
+
   @override
   void dispose() {
     _nameCtrl.dispose();
     _passwordCtrl.dispose();
     _joinPasswordCtrl.dispose();
     _joinCodeCtrl.dispose();
+    _chatCtrl.dispose();
+    _scrollCtrl.dispose();
     super.dispose();
   }
 
@@ -258,25 +277,59 @@ class _ClanScreenState extends State<ClanScreen> {
                     children: [
                       Text(_clanName, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
                       const SizedBox(height: 4),
-                      Text('${_mockMembers.length} membros · Criado hoje', style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                      Text('${_mockMembers.length} membros · Criado há 2 dias', style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                      const SizedBox(height: 12),
+                      // Barra de Level do Clã
+                      Row(
+                        children: [
+                          const Text('Nível 4', style: TextStyle(color: AppColors.gold, fontSize: 11, fontWeight: FontWeight.w700)),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(4),
+                              child: const LinearProgressIndicator(
+                                value: 0.65,
+                                minHeight: 6,
+                                backgroundColor: Color(0xFF1a1a1a),
+                                valueColor: AlwaysStoppedAnimation<Color>(AppColors.gold),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          const Text('6k/10k XP', style: TextStyle(color: AppColors.textMuted, fontSize: 10, fontFamily: 'monospace')),
+                        ],
+                      ),
                     ],
                   ),
                 ),
-                GestureDetector(
-                  onTap: _showInviteDialog,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: _showInviteDialog,
+                    borderRadius: BorderRadius.circular(8),
+                    splashColor: AppColors.primary.withValues(alpha: 0.2),
+                    highlightColor: AppColors.primary.withValues(alpha: 0.1),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
+                        ),
+                        child: const Icon(Icons.person_add_alt_1, color: AppColors.primary, size: 20),
+                      ),
                     ),
-                    child: const Icon(Icons.person_add_alt_1, color: AppColors.primary, size: 20),
                   ),
                 ),
               ],
             ),
           ),
+          const SizedBox(height: 20),
+          
+          // ESTATÍSTICAS DO CLÃ
+          _buildClanStats(),
           const SizedBox(height: 20),
 
           // Membros
@@ -287,10 +340,181 @@ class _ClanScreenState extends State<ClanScreen> {
             final m = entry.value;
             return _MemberTile(member: m, rank: i + 1, onManage: () => _showManageDialog(m));
           }),
+          const SizedBox(height: 30),
+          _buildChatSection(),
           const SizedBox(height: 20),
         ],
       ),
     );
+  }
+
+  Widget _buildClanStats() {
+    return Row(
+      children: [
+        Expanded(
+          child: _statCard('Liga Atual', 'OURO III', Icons.emoji_events, AppColors.gold),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: _statCard('Rank Global', '#142', Icons.public, AppColors.primary),
+        ),
+      ],
+    );
+  }
+
+  Widget _statCard(String label, String value, IconData icon, Color color) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(12),
+        splashColor: color.withValues(alpha: 0.15),
+        highlightColor: color.withValues(alpha: 0.08),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+            decoration: BoxDecoration(
+              color: AppColors.card,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: color.withValues(alpha: 0.3)),
+            ),
+            child: Column(
+              children: [
+                Icon(icon, color: color, size: 24),
+                const SizedBox(height: 6),
+                Text(value, style: TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w800)),
+                const SizedBox(height: 2),
+                Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildChatSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('CHAT DO CLÃ', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
+        const SizedBox(height: 10),
+        Container(
+          height: 350,
+          decoration: BoxDecoration(
+            color: AppColors.card,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  controller: _scrollCtrl,
+                  padding: const EdgeInsets.all(12),
+                  itemCount: _messages.length,
+                  itemBuilder: (ctx, i) {
+                    final msg = _messages[i];
+                    final isMe = msg['isMe'] == true;
+                    return Align(
+                      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                        decoration: BoxDecoration(
+                          color: isMe ? AppColors.primary.withValues(alpha: 0.2) : AppColors.inputBackground,
+                          border: Border.all(color: isMe ? AppColors.primary.withValues(alpha: 0.4) : AppColors.cardBorder.withValues(alpha: 0.2)),
+                          borderRadius: BorderRadius.only(
+                            topLeft: const Radius.circular(12),
+                            topRight: const Radius.circular(12),
+                            bottomLeft: isMe ? const Radius.circular(12) : const Radius.circular(2),
+                            bottomRight: isMe ? const Radius.circular(2) : const Radius.circular(12),
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                          children: [
+                            if (!isMe)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 4),
+                                child: Text(msg['sender'], style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold)),
+                              ),
+                            Text(msg['text'], style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.4)),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                decoration: BoxDecoration(
+                  border: Border(top: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.2))),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        decoration: BoxDecoration(
+                          color: AppColors.inputBackground,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
+                        ),
+                        child: TextField(
+                          controller: _chatCtrl,
+                          style: const TextStyle(color: Colors.white, fontSize: 13),
+                          decoration: const InputDecoration(
+                            hintText: 'Digite uma mensagem...',
+                            hintStyle: TextStyle(color: AppColors.textMuted, fontSize: 13),
+                            border: InputBorder.none,
+                          ),
+                          onSubmitted: (_) => _sendMessage(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: _sendMessage,
+                        customBorder: const CircleBorder(),
+                        splashColor: Colors.white.withValues(alpha: 0.2),
+                        highlightColor: Colors.white.withValues(alpha: 0.1),
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
+                            child: const Icon(Icons.send, color: Colors.white, size: 18),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _sendMessage() {
+    final text = _chatCtrl.text.trim();
+    if (text.isEmpty) return;
+    setState(() {
+      _messages.add({'sender': 'Você', 'text': text, 'isMe': true});
+      _chatCtrl.clear();
+    });
+    Future.delayed(const Duration(milliseconds: 100), () {
+      if (_scrollCtrl.hasClients) {
+        _scrollCtrl.animateTo(_scrollCtrl.position.maxScrollExtent, duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
+      }
+    });
   }
 
   Widget _label(String t) => Text(t, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13, fontWeight: FontWeight.w600));
@@ -398,7 +622,7 @@ class _ClanScreenState extends State<ClanScreen> {
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar', style: TextStyle(color: AppColors.textMuted))),
           ElevatedButton(
-            onPressed: () { Navigator.pop(ctx); Navigator.pop(context); },
+            onPressed: () { Navigator.pop(ctx); Navigator.pop(context, true); },
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.error, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
             child: const Text('DELETAR', style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white)),
           ),
@@ -518,59 +742,82 @@ class _MemberTile extends StatelessWidget {
         roleColor = AppColors.textMuted; roleIcon = Icons.person; break;
     }
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: member.isUser ? AppColors.primary.withValues(alpha: 0.08) : AppColors.card,
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onManage,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: member.isUser ? AppColors.primary.withValues(alpha: 0.35) : AppColors.cardBorder.withValues(alpha: 0.3)),
-      ),
-      child: Row(
-        children: [
-          SizedBox(width: 28, child: Text('$rank', style: TextStyle(color: rank <= 3 ? AppColors.gold : AppColors.textMuted, fontWeight: FontWeight.w800, fontSize: 15))),
-          Container(
-            width: 38, height: 38,
-            decoration: BoxDecoration(shape: BoxShape.circle, color: roleColor.withValues(alpha: 0.15), border: Border.all(color: roleColor.withValues(alpha: 0.4))),
-            child: Icon(Icons.person, color: roleColor, size: 20),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        splashColor: AppColors.primary.withValues(alpha: 0.12),
+        highlightColor: AppColors.primary.withValues(alpha: 0.06),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: member.isUser ? AppColors.primary.withValues(alpha: 0.08) : AppColors.card,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: member.isUser ? AppColors.primary.withValues(alpha: 0.35) : AppColors.cardBorder.withValues(alpha: 0.3)),
+            ),
+            child: Row(
               children: [
-                Row(
-                  children: [
-                    Text(member.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13)),
-                    if (member.isUser) ...[
-                      const SizedBox(width: 6),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                        decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(4)),
-                        child: const Text('Você', style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700)),
+                SizedBox(width: 28, child: Text('$rank', style: TextStyle(color: rank <= 3 ? AppColors.gold : AppColors.textMuted, fontWeight: FontWeight.w800, fontSize: 15))),
+                Container(
+                  width: 38, height: 38,
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: roleColor.withValues(alpha: 0.15), border: Border.all(color: roleColor.withValues(alpha: 0.4))),
+                  child: Icon(Icons.person, color: roleColor, size: 20),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(member.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13)),
+                          if (member.isUser) ...[
+                            const SizedBox(width: 6),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(4)),
+                              child: const Text('Você', style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700)),
+                            ),
+                          ],
+                        ],
+                      ),
+                      const SizedBox(height: 2),
+                      Row(
+                        children: [
+                          Icon(roleIcon, color: roleColor, size: 12),
+                          const SizedBox(width: 4),
+                          Text(_roleLabelOf(member.role), style: TextStyle(color: roleColor, fontSize: 11, fontWeight: FontWeight.w600)),
+                          const SizedBox(width: 8),
+                          Text('· ${member.xp} XP', style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
+                        ],
                       ),
                     ],
-                  ],
+                  ),
                 ),
-                const SizedBox(height: 2),
-                Row(
-                  children: [
-                    Icon(roleIcon, color: roleColor, size: 12),
-                    const SizedBox(width: 4),
-                    Text(_roleLabelOf(member.role), style: TextStyle(color: roleColor, fontSize: 11, fontWeight: FontWeight.w600)),
-                    const SizedBox(width: 8),
-                    Text('· ${member.xp} XP', style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
-                  ],
-                ),
+                if (!member.isUser)
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: onManage,
+                      customBorder: const CircleBorder(),
+                      splashColor: AppColors.primary.withValues(alpha: 0.2),
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: const Padding(
+                          padding: EdgeInsets.all(4),
+                          child: Icon(Icons.more_vert, color: AppColors.textMuted, size: 20),
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),
-          if (!member.isUser)
-            GestureDetector(
-              onTap: onManage,
-              child: const Icon(Icons.more_vert, color: AppColors.textMuted, size: 20),
-            ),
-        ],
+        ),
       ),
     );
   }

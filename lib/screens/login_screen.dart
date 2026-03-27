@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
@@ -69,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () => Navigator.pushNamed(context, '/forgot-password'),
+                onPressed: () => context.push('/forgot-password'),
                 child: const Text('Esqueceu a senha?', style: TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.w600)),
               ),
             ),
@@ -78,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: double.infinity,
               height: 52,
               child: ElevatedButton(
-                onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/home', (r) => false),
+                onPressed: () => context.go('/home'),
                 child: const Text('ENTRAR', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
               ),
             ),
@@ -98,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Text('Não tem uma conta? ', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14)),
                 GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, '/register'),
+                  onTap: () => context.push('/register'),
                   child: const Text('Cadastre-se', style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),
                 ),
               ],

@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
@@ -6,6 +7,7 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/screens/pocket_card_screen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -33,8 +35,10 @@ class ProfileScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 2),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, '/settings'),
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                          onTap: () => context.push('/settings'),
                           child: Container(
                             width: 38,
                             height: 38,
@@ -46,6 +50,7 @@ class ProfileScreen extends StatelessWidget {
                             child: const Icon(Icons.settings_outlined, color: AppColors.textMuted, size: 20),
                           ),
                         ),
+                        ),
                       ],
                     ),
                   ),
@@ -54,6 +59,7 @@ class ProfileScreen extends StatelessWidget {
                   // ── Avatar + Nome ───────────────────────────────
                   Stack(
                     alignment: Alignment.center,
+                    clipBehavior: Clip.none,
                     children: [
                       Container(
                         width: 110,
@@ -66,7 +72,13 @@ class ProfileScreen extends StatelessWidget {
                         child: Container(
                           margin: const EdgeInsets.all(4),
                           decoration: const BoxDecoration(color: AppColors.card, shape: BoxShape.circle),
-                          child: const Icon(Icons.person, color: AppColors.primary, size: 52),
+                          clipBehavior: Clip.antiAlias,
+                          child: CachedNetworkImage(
+                            imageUrl: 'https://i.pravatar.cc/150?img=11',
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: AppColors.primary)),
+                            errorWidget: (context, url, error) => const Icon(Icons.person, color: AppColors.primary, size: 52),
+                          ),
                         ),
                       ),
                       Positioned(
@@ -95,7 +107,9 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 14),
 
                   // 👇 Botão Adicionado 👇
-                  GestureDetector(
+                  MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
@@ -134,11 +148,14 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  ),
                   const SizedBox(height: 14),
 
                   // ── Pontos Spark ────────────────────────────────
-                  GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/store'),
+                  MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                    onTap: () => context.push('/store'),
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       decoration: BoxDecoration(
@@ -162,6 +179,7 @@ class ProfileScreen extends StatelessWidget {
                         }
                       ),
                     ),
+                  ),
                   ),
                   const SizedBox(height: 28),
 
@@ -192,9 +210,12 @@ class ProfileScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text('CONQUISTAS', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
-                        GestureDetector(
-                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen())),
-                          child: const Text('Ver Tudo ↗', style: TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w700)),
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen())),
+                            child: const Text('Ver Tudo ↗', style: TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w700)),
+                          ),
                         ),
                       ],
                     ),
@@ -336,13 +357,65 @@ class ProfileScreen extends StatelessWidget {
 }
 
 // ── Seção Meu Clã ──────────────────────────────────────────────
-class _ClanSection extends StatelessWidget {
+class _ClanSection extends StatefulWidget {
   final BuildContext context;
   const _ClanSection({required this.context});
 
   @override
+  State<_ClanSection> createState() => _ClanSectionState();
+}
+
+class _ClanSectionState extends State<_ClanSection> {
+  bool _hasClan = true;
+
+  @override
   Widget build(BuildContext context) {
-    // Mock: sem clã
+    if (!_hasClan) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('CLÃ', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: AppColors.card,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.push(widget.context, MaterialPageRoute(builder: (_) => const ClanScreen(isCreating: true))),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    child: const Text('CRIAR CLÃ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13)),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.push(widget.context, MaterialPageRoute(builder: (_) => const ClanScreen(isCreating: false))),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5), width: 1.5),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    child: const Text('ENTRAR', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 13)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
+
+    // Mock: com clã ativo
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -364,53 +437,42 @@ class _ClanSection extends StatelessWidget {
                     height: 50,
                     decoration: BoxDecoration(
                       color: AppColors.primary.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: AppColors.primary, width: 2),
+                      shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.groups_outlined, color: AppColors.primary, size: 26),
+                    child: const Icon(Icons.shield, color: AppColors.primary, size: 26),
                   ),
                   const SizedBox(width: 14),
                   const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Você não está em nenhum clã', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+                        Text('EXS Técnicos', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800)),
                         SizedBox(height: 4),
-                        Text('Crie ou entre em um grupo para competir com colegas', style: TextStyle(color: AppColors.textMuted, fontSize: 11), maxLines: 2),
+                        Text('Membro · 5 membros', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
                       ],
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 14),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ClanScreen(isCreating: true))),
-                      icon: const Icon(Icons.add, size: 16, color: Colors.white),
-                      label: const Text('CRIAR CLÃ', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1, color: Colors.white)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                      ),
-                    ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () async {
+                    final deleted = await Navigator.push(widget.context, MaterialPageRoute(builder: (_) => const ClanScreen(isViewingActive: true)));
+                    if (deleted == true && mounted) {
+                      setState(() => _hasClan = false);
+                    }
+                  },
+                  icon: const Icon(Icons.groups, size: 18, color: Colors.white),
+                  label: const Text('VISUALIZAR CLÃ', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1, color: Colors.white)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: OutlinedButton.icon(
-                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ClanScreen(isCreating: false))),
-                      icon: const Icon(Icons.login, size: 16),
-                      label: const Text('ENTRAR', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1)),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.primary,
-                        side: const BorderSide(color: AppColors.primary),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/screens/video_preview_screen.dart';
 
 class StandardDetailScreen extends StatelessWidget {
   const StandardDetailScreen({super.key});
@@ -126,11 +127,20 @@ class StandardDetailScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         children: [
-                          _videoCard('NR-10: Painéis Elétricos Industriais Avançados', '12:45', true),
+                          GestureDetector(
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const VideoPreviewScreen(title: 'NR-10: Painéis Elétricos Industriais Avançados'))),
+                            child: _videoCard('NR-10: Painéis Elétricos Industriais Avançados', '12:45', true),
+                          ),
                           const SizedBox(width: 12),
-                          _videoCard('Estudo de Caso: Inspeção em Alta Tensão', '8:30', false),
+                          GestureDetector(
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const VideoPreviewScreen(title: 'Estudo de Caso: Inspeção em Alta Tensão'))),
+                            child: _videoCard('Estudo de Caso: Inspeção em Alta Tensão', '8:30', false),
+                          ),
                           const SizedBox(width: 12),
-                          _videoCard('NR-35: Equipamentos de Proteção Individual', '15:20', false),
+                          GestureDetector(
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const VideoPreviewScreen(title: 'NR-35: Equipamentos de Proteção Individual'))),
+                            child: _videoCard('NR-35: Equipamentos de Proteção Individual', '15:20', false),
+                          ),
                         ],
                       ),
                     ),

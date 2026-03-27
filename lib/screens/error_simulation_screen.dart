@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 
 // ─────────────────────────────────────────────────────────────────
@@ -26,6 +27,8 @@ class InspectionLevel {
   final String completionMessage;
   final Widget Function(Set<String> foundIds) sceneBuilder;
   final List<HitZone> hitZones;
+  final double originalWidth;
+  final double originalHeight;
 
   const InspectionLevel({
     required this.title,
@@ -33,6 +36,8 @@ class InspectionLevel {
     required this.completionMessage,
     required this.sceneBuilder,
     required this.hitZones,
+    required this.originalWidth,
+    required this.originalHeight,
   });
 }
 
@@ -48,15 +53,22 @@ class ErrorSimulationScreen extends StatefulWidget {
       _ErrorSimulationScreenState();
 }
 
+// SECRETO DE SÊNIOR: Mudamos de SingleTickerProviderStateMixin para TickerProviderStateMixin 
+// porque agora temos 2 animações (Pulso e Tremida)!
 class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   int _currentLevelIndex = 0;
   final Set<String> _foundIds = {};
   String? _feedbackMessage;
   bool _feedbackIsError = false;
 
+  // Controlador do Pulso (Glow vermelho nas falhas)
   late AnimationController _pulseCtrl;
   late Animation<double> _pulseAnim;
+
+  // Novo controlador para o efeito de "Tremida" (Shake ao errar o clique)
+  late AnimationController _shakeCtrl;
+  late Animation<double> _shakeAnim;
 
   // ── Lista de Níveis ─────────────────────────────────────────────
   late final List<InspectionLevel> _levels = [
@@ -68,18 +80,20 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
       hitZones: const [
         HitZone(
           id: 'fio',
-          rect: Rect.fromLTWH(210, 155, 60, 32),
+          rect: Rect.fromLTWH(200, 140, 85, 55),
           errorMessage:
               '⚡ RISCO · Fio terra desencapado — cobre exposto sem isolamento verde/amarelo.',
         ),
         HitZone(
           id: 'prot',
-          rect: Rect.fromLTWH(188, 78, 70, 40),
+          rect: Rect.fromLTWH(270, 68, 85, 65),
           errorMessage:
               '⚠ NORMA · Tomada sem proteção infantil (NBR 14136). Abertura exposta.',
         ),
       ],
       sceneBuilder: (foundIds) => _TomadaScene(foundIds: foundIds),
+      originalWidth: 560,
+      originalHeight: 260,
     ),
 
     // LAB-02 · Quadro de Distribuição
@@ -90,18 +104,20 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
       hitZones: const [
         HitZone(
           id: 'trip',
-          rect: Rect.fromLTWH(60, 143, 215, 26),
+          rect: Rect.fromLTWH(55, 132, 230, 42),
           errorMessage:
               '⚡ CRÍTICO · Disjuntor C3 em TRIP. Causa raiz não investigada — reconexão proibida.',
         ),
         HitZone(
           id: 'inv',
-          rect: Rect.fromLTWH(140, 200, 30, 38),
+          rect: Rect.fromLTWH(130, 195, 50, 50),
           errorMessage:
               '⚡ PERIGO · Fio FASE ligado na barra NEUTRO. Inversão de polaridade — risco de choque com disjuntor desligado.',
         ),
       ],
       sceneBuilder: (foundIds) => _QuadroScene(foundIds: foundIds),
+      originalWidth: 560,
+      originalHeight: 320,
     ),
 
     // LAB-03 · Painel Industrial
@@ -112,24 +128,26 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
       hitZones: const [
         HitZone(
           id: 'rele',
-          rect: Rect.fromLTWH(225, 38, 80, 60),
+          rect: Rect.fromLTWH(268, 35, 90, 68),
           errorMessage:
               '⚡ CRÍTICO · Relé térmico em TRIP sem reset autorizado. Motor com histórico de sobrecarga.',
         ),
         HitZone(
           id: 'borda',
-          rect: Rect.fromLTWH(158, 248, 40, 20),
+          rect: Rect.fromLTWH(145, 238, 65, 35),
           errorMessage:
               '⚠ RISCO · Cabo elétrico sobre borda metálica sem passa-fio. Isolamento sofrerá corte progressivo.',
         ),
         HitZone(
           id: 'paraf',
-          rect: Rect.fromLTWH(320, 268, 22, 20),
+          rect: Rect.fromLTWH(405, 260, 40, 35),
           errorMessage:
               '⚠ NORMA · Parafuso ausente no gabinete. Grau de proteção IP comprometido.',
         ),
       ],
       sceneBuilder: (foundIds) => _PainelIndustrialScene(foundIds: foundIds),
+      originalWidth: 560,
+      originalHeight: 310,
     ),
   ];
 
@@ -143,25 +161,46 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
     _pulseAnim = Tween<double>(begin: 0.5, end: 1.0).animate(
       CurvedAnimation(parent: _pulseCtrl, curve: Curves.easeInOut),
     );
+
+    // Inicializando o controlador da tremida (rápido, dura só 400ms)
+    _shakeCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+    );
+    _shakeAnim = Tween<double>(begin: 0.0, end: 1.0).animate(_shakeCtrl);
   }
 
   @override
   void dispose() {
     _pulseCtrl.dispose();
+    _shakeCtrl.dispose(); // Limpando a memória do novo controlador!
     super.dispose();
   }
+
+  bool _isHintActive = false;
 
   InspectionLevel get _level => _levels[_currentLevelIndex];
   int get _totalErrors => _level.hitZones.length;
   bool get _levelComplete => _foundIds.length >= _totalErrors;
 
-  void _onTapScene(Offset localPosition) {
+  void _onTapScene(Offset localPosition, Size renderedSize) {
     if (_levelComplete) return;
+
+    final double scaleX = renderedSize.width / _level.originalWidth;
+    final double scaleY = renderedSize.height / _level.originalHeight;
 
     // Checa se bateu em alguma hitzone
     for (final zone in _level.hitZones) {
       if (_foundIds.contains(zone.id)) continue;
-      if (zone.rect.contains(localPosition)) {
+      
+      final scaledRect = Rect.fromLTWH(
+        zone.rect.left * scaleX,
+        zone.rect.top * scaleY,
+        zone.rect.width * scaleX,
+        zone.rect.height * scaleY,
+      );
+
+      if (scaledRect.contains(localPosition)) {
         setState(() {
           _foundIds.add(zone.id);
           _feedbackMessage = zone.errorMessage;
@@ -176,10 +215,22 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
       }
     }
 
-    // Toque em área sem erro
+    // Toque em área sem erro: Vibra, treme a tela e dá feedback negativo
+    HapticFeedback.vibrate(); 
+    _shakeCtrl.forward(from: 0.0); 
+
     setState(() {
       _feedbackMessage = '// Tudo certo por aqui. Continue procurando...';
       _feedbackIsError = false;
+    });
+  }
+
+  void _activateHint() {
+    if (_levelComplete || _isHintActive) return;
+    HapticFeedback.lightImpact();
+    setState(() => _isHintActive = true);
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) setState(() => _isHintActive = false);
     });
   }
 
@@ -270,6 +321,42 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
               overflow: TextOverflow.ellipsis,
             ),
           ),
+          
+          // Botão Dica
+          if (!_levelComplete)
+            GestureDetector(
+              onTap: _activateHint,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                margin: const EdgeInsets.only(right: 12),
+                decoration: BoxDecoration(
+                  color: _isHintActive ? AppColors.gold : const Color(0xFF1a1a0f),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                    color: _isHintActive ? AppColors.gold : AppColors.gold.withValues(alpha: 0.3),
+                  ),
+                  boxShadow: _isHintActive ? [
+                    BoxShadow(color: AppColors.gold.withValues(alpha: 0.5), blurRadius: 8, spreadRadius: 1)
+                  ] : [],
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.search, size: 14, color: _isHintActive ? Colors.black : AppColors.gold),
+                    const SizedBox(width: 4),
+                    Text(
+                      'DICA',
+                      style: TextStyle(
+                        color: _isHintActive ? Colors.black : AppColors.gold,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
           // Contador de erros
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -322,12 +409,22 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
     );
   }
 
-  // ── Cena clicável ─────────────────────────────────────────────
+  // ── Cena clicável (Com Tremida e Proporção Corrigida) ─────────
   Widget _buildScene() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: GestureDetector(
-        onTapDown: (details) => _onTapScene(details.localPosition),
+      child: AnimatedBuilder(
+        animation: _shakeAnim,
+        builder: (context, child) {
+          // A mágica acontece aqui: usamos seno para criar a oscilação da tremida
+          final dx = math.sin(_shakeAnim.value * math.pi * 6) * 8.0;
+          final amplitude = 1.0 - _shakeAnim.value; // Vai perdendo força
+          
+          return Transform.translate(
+            offset: Offset(dx * amplitude, 0.0), // Move no eixo X
+            child: child,
+          );
+        },
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -337,26 +434,49 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
               color: AppColors.primary.withValues(alpha: 0.25),
               width: 1,
             ),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black45,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              )
+            ],
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Stack(
-              children: [
-                // Cena desenhada
-                _level.sceneBuilder(_foundIds),
-                // Overlay de hitboxes (apenas as não encontradas pulsam)
-                AnimatedBuilder(
-                  animation: _pulseAnim,
-                  builder: (_, __) => CustomPaint(
-                    painter: _HitZoneOverlayPainter(
-                      hitZones: _level.hitZones,
-                      foundIds: _foundIds,
-                      pulseValue: _pulseAnim.value,
-                    ),
-                    size: Size.infinite,
-                  ),
+            child: Center(
+              // AspectRatio mantém as hitboxes perfeitamente alinhadas com o desenho
+              child: AspectRatio(
+                aspectRatio: _level.originalWidth / _level.originalHeight,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final Size renderSize = Size(constraints.maxWidth, constraints.maxHeight);
+                    return GestureDetector(
+                      onTapDown: (details) => _onTapScene(details.localPosition, renderSize),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          _level.sceneBuilder(_foundIds),
+                          AnimatedBuilder(
+                            animation: _pulseAnim,
+                            builder: (_, __) => CustomPaint(
+                              painter: _HitZoneOverlayPainter(
+                                hitZones: _level.hitZones,
+                                foundIds: _foundIds,
+                                pulseValue: _pulseAnim.value,
+                                isHintActive: _isHintActive,
+                                renderedSize: renderSize,
+                                originalSize: Size(_level.originalWidth, _level.originalHeight),
+                              ),
+                              size: Size.infinite,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 ),
-              ],
+              ),
             ),
           ),
         ),
@@ -416,40 +536,56 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
       ),
     );
   }
-
 }
 
 // ─────────────────────────────────────────────────────────────────
-//  OVERLAY DE HITBOXES (pulsante)
+//  OVERLAY DE HITBOXES (Corrigido para ocultar respostas erradas)
 // ─────────────────────────────────────────────────────────────────
 
 class _HitZoneOverlayPainter extends CustomPainter {
   final List<HitZone> hitZones;
   final Set<String> foundIds;
   final double pulseValue;
+  final bool isHintActive;
+  final Size renderedSize;
+  final Size originalSize;
 
   const _HitZoneOverlayPainter({
     required this.hitZones,
     required this.foundIds,
     required this.pulseValue,
+    required this.isHintActive,
+    required this.renderedSize,
+    required this.originalSize,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    for (final zone in hitZones) {
+    final double sx = size.width / originalSize.width;
+    final double sy = size.height / originalSize.height;
+
+    for (int i = 0; i < hitZones.length; i++) {
+      final zone = hitZones[i];
       final bool found = foundIds.contains(zone.id);
+
+      final scaledRect = Rect.fromLTWH(
+        zone.rect.left * sx,
+        zone.rect.top * sy,
+        zone.rect.width * sx,
+        zone.rect.height * sy,
+      );
 
       if (found) {
         // Zona encontrada: borda vermelha sólida + fill suave
         final fillPaint = Paint()
-          ..color = AppColors.error.withValues(alpha: 0.22)
+          ..color = AppColors.error.withValues(alpha: 0.15 + (pulseValue * 0.1))
           ..style = PaintingStyle.fill;
         final borderPaint = Paint()
           ..color = AppColors.error
           ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.8;
+          ..strokeWidth = 2.0;
 
-        final rRect = RRect.fromRectAndRadius(zone.rect, const Radius.circular(5));
+        final rRect = RRect.fromRectAndRadius(scaledRect, const Radius.circular(5));
         canvas.drawRRect(rRect, fillPaint);
         canvas.drawRRect(rRect, borderPaint);
 
@@ -468,57 +604,34 @@ class _HitZoneOverlayPainter extends CustomPainter {
         tp.paint(
           canvas,
           Offset(
-            zone.rect.center.dx - tp.width / 2,
-            zone.rect.center.dy - tp.height / 2,
+            scaledRect.center.dx - tp.width / 2,
+            scaledRect.center.dy - tp.height / 2,
           ),
         );
       } else {
-        // Zona não encontrada: tracejado pulsante
-        final alpha = (0.25 + pulseValue * 0.35).clamp(0.0, 1.0);
-        final dashPaint = Paint()
-          ..color = AppColors.error.withValues(alpha: alpha)
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.2;
+        // Zona não encontrada: Só destacamos se a dica foi ativada!
+        final bool isFirstMissing = (!found && hitZones.firstWhere((z) => !foundIds.contains(z.id)).id == zone.id);
 
-        _drawDashedRect(canvas, zone.rect, dashPaint);
-      }
-    }
-  }
+        if (isHintActive && isFirstMissing) {
+           final highlightPaint = Paint()
+            ..color = AppColors.gold.withValues(alpha: 0.5 + (pulseValue * 0.4))
+            ..style = PaintingStyle.fill;
+          final borderH = Paint()
+            ..color = AppColors.gold
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 3.0;
 
-  void _drawDashedRect(Canvas canvas, Rect rect, Paint paint) {
-    const dashLen = 5.0;
-    const gapLen = 3.0;
-
-    final corners = [
-      rect.topLeft,
-      rect.topRight,
-      rect.bottomRight,
-      rect.bottomLeft,
-      rect.topLeft,
-    ];
-
-    for (int i = 0; i < 4; i++) {
-      final start = corners[i];
-      final end = corners[i + 1];
-      final total = (end - start).distance;
-      double drawn = 0;
-      final dir = (end - start) / total;
-
-      while (drawn < total) {
-        final segLen = math.min(dashLen, total - drawn);
-        canvas.drawLine(
-          start + dir * drawn,
-          start + dir * (drawn + segLen),
-          paint,
-        );
-        drawn += dashLen + gapLen;
+          final rRect = RRect.fromRectAndRadius(scaledRect, const Radius.circular(5));
+          canvas.drawRRect(rRect, highlightPaint);
+          canvas.drawRRect(rRect, borderH);
+        }
       }
     }
   }
 
   @override
   bool shouldRepaint(_HitZoneOverlayPainter old) =>
-      old.pulseValue != pulseValue || old.foundIds != foundIds;
+      old.pulseValue != pulseValue || old.foundIds != foundIds || old.isHintActive != isHintActive || old.renderedSize != renderedSize;
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -544,7 +657,6 @@ class _TomadaPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Escala do viewBox original (560×260) para o tamanho real
     final double sx = size.width / 560;
     final double sy = size.height / 260;
 

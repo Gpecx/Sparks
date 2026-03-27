@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
@@ -95,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               width: double.infinity,
               height: 52,
               child: ElevatedButton(
-                onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/home', (r) => false),
+                onPressed: () => context.go('/home'),
                 child: const Text('CADASTRAR', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
               ),
             ),
@@ -105,7 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 Text('Já possui uma conta? ', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14)),
                 GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, '/login'),
+                  onTap: () => context.push('/login'),
                   child: const Text('Entrar', style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),
                 ),
               ],

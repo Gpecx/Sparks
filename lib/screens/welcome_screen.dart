@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:spark_app/theme/app_theme.dart';
@@ -205,7 +206,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       width: double.infinity,
                       height: 52,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/login'),
+                        onPressed: () => context.push('/login'),
                         child: const Text(
                           'FAZER LOGIN',
                           style: TextStyle(
@@ -222,7 +223,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       width: double.infinity,
                       height: 52,
                       child: OutlinedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/register'),
+                        onPressed: () => context.push('/register'),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: AppColors.primary,
                           side: const BorderSide(color: AppColors.primary, width: 1.5),

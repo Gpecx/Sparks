@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/models/match_models.dart';
 import 'package:spark_app/services/match_service.dart';
+import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 
 class DuelScreen extends StatefulWidget {
@@ -22,6 +23,33 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
   int _selectedOption = -1;
   bool _hasAnswered = false;
   bool _opponentAnswered = false;
+
+  // ELO / Division system
+  int _eloRating = 1250;
+  int _wins = 12;
+  int _losses = 5;
+  String get _division {
+    if (_eloRating >= 2000) return 'Diamond';
+    if (_eloRating >= 1600) return 'Platinum';
+    if (_eloRating >= 1200) return 'Silver';
+    if (_eloRating >= 800) return 'Bronze';
+    return 'Iron';
+  }
+  String get _divisionTier {
+    final rem = _eloRating % 400;
+    if (rem >= 300) return 'III';
+    if (rem >= 150) return 'II';
+    return 'I';
+  }
+  IconData get _divisionIcon {
+    if (_eloRating >= 2000) return Icons.diamond;
+    if (_eloRating >= 1600) return Icons.workspace_premium;
+    if (_eloRating >= 1200) return Icons.shield;
+    return Icons.security;
+  }
+
+  // Bet animation
+  bool _showBetDeduction = false;
 
   // Timer
   late AnimationController _timerController;
@@ -72,10 +100,31 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
       }
     });
 
+    // Trigger bet deduction animation
+    Future.delayed(const Duration(milliseconds: 300), () {
+      if (mounted) setState(() => _showBetDeduction = true);
+      Future.delayed(const Duration(seconds: 2), () {
+        if (mounted) setState(() => _showBetDeduction = false);
+      });
+    });
+
     _startMatchmaking();
   }
 
+  static const int betAmount = 20;
+
   Future<void> _startMatchmaking() async {
+    final energyCtrl = EnergyController();
+    if (!energyCtrl.spendSparkPoints(betAmount)) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Pontos Spark insuficientes para apostar. Custo: 20'), backgroundColor: AppColors.error),
+        );
+        Navigator.pop(context);
+      }
+      return;
+    }
+
     try {
       final match = await _matchService.findMatch('jogador_local');
       if (!mounted) return;
@@ -159,6 +208,19 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
 
   void _finishMatch() {
     _matchService.finishMatch();
+    
+    if (_match != null) {
+      final p1Score = _match!.player1TotalScore;
+      final p2Score = _match!.player2TotalScore;
+      final energyCtrl = EnergyController();
+
+      if (p1Score > p2Score) {
+        energyCtrl.addSparkPoints(betAmount * 2);
+      } else if (p1Score == p2Score) {
+        energyCtrl.addSparkPoints(betAmount);
+      }
+    }
+
     setState(() => _matchFinished = true);
   }
 
@@ -544,6 +606,32 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // ELO + Division badge
+                Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: AppColors.card,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(_divisionIcon, color: AppColors.gold, size: 22),
+                      const SizedBox(width: 8),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('$_division $_divisionTier', style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w800)),
+                          Text('ELO $_eloRating · ${_wins}W ${_losses}L', style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Pulse icon
                 AnimatedBuilder(
                   animation: _pulseAnim,
                   builder: (_, __) => Opacity(
@@ -570,19 +658,43 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                 const SizedBox(height: 32),
                 const Text(
                   'PROCURANDO OPONENTE...',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 2,
-                  ),
+                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800, letterSpacing: 2),
                 ),
                 const SizedBox(height: 12),
-                Text(
-                  'Preparando sua arena de faíscas ⚡',
-                  style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14),
+                Text('Preparando sua arena de faíscas ⚡', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14)),
+
+                // Bet deduction animation
+                const SizedBox(height: 20),
+                AnimatedOpacity(
+                  opacity: _showBetDeduction ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 500),
+                  child: AnimatedSlide(
+                    offset: _showBetDeduction ? Offset.zero : const Offset(0, 0.5),
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.elasticOut,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: AppColors.error.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: AppColors.error.withValues(alpha: 0.4)),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.bolt, color: AppColors.error, size: 18),
+                          const SizedBox(width: 6),
+                          Text(
+                            '−$betAmount Pontos Spark',
+                            style: const TextStyle(color: AppColors.error, fontSize: 14, fontWeight: FontWeight.w800),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 40),
+
+                const SizedBox(height: 20),
                 SizedBox(
                   width: 200,
                   child: LinearProgressIndicator(
@@ -593,10 +705,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                 const SizedBox(height: 40),
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text(
-                    'CANCELAR',
-                    style: TextStyle(color: AppColors.textMuted, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1),
-                  ),
+                  child: const Text('CANCELAR', style: TextStyle(color: AppColors.textMuted, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                 ),
               ],
             ),
@@ -660,7 +769,33 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                       letterSpacing: 3,
                     ),
                   ),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 8),
+                  Text(
+                    won ? '+$betAmount Pontos Adquiridos!' : (draw ? 'Seus $betAmount de aposta voltaram.' : 'Você perdeu os $betAmount apostados.'),
+                    style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 14, fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 10),
+                  // ELO change
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: (won ? AppColors.primary : AppColors.error).withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: (won ? AppColors.primary : AppColors.error).withValues(alpha: 0.3)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(_divisionIcon, color: AppColors.gold, size: 16),
+                        const SizedBox(width: 6),
+                        Text(
+                          won ? 'ELO +25 → ${_eloRating + 25}' : (draw ? 'ELO ±0' : 'ELO −15 → ${_eloRating - 15}'),
+                          style: TextStyle(color: won ? AppColors.primary : (draw ? AppColors.gold : AppColors.error), fontSize: 12, fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 18),
 
                   // Scoreboard
                   Container(

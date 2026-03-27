@@ -1,8 +1,10 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/spark_emitter.dart';
+import 'package:spark_app/widgets/streak_lightning_emitter.dart';
 
 class QuizScreen extends StatefulWidget {
   final bool isEvaluation;
@@ -12,7 +14,7 @@ class QuizScreen extends StatefulWidget {
   State<QuizScreen> createState() => _QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   final EnergyController _energyCtrl = EnergyController();
   
   // ── VARIÁVEIS DE ESTADO HÍBRIDAS ──
@@ -24,6 +26,12 @@ class _QuizScreenState extends State<QuizScreen> {
   bool _isCorrect = false;
   int _currentQuestion = 0;
   int _totalCorrect = 0;
+  int _currentStreak = 0; // Streak da sessão atual
+
+  // Controladores de animação épica
+  late AnimationController _shakeController;
+  late AnimationController _epicStreakController;
+  late AnimationController _completionController;
 
   // ── BANCO DE PERGUNTAS ──
   final List<Map<String, dynamic>> _questions = [
@@ -89,15 +97,81 @@ class _QuizScreenState extends State<QuizScreen> {
       'answer': ['cinto de segurança', 'alturas acima de 2m'],
       'explanation': 'Conforme NR-35, trabalho em altura (acima de 2 metros) exige uso obrigatório de cinto de segurança tipo paraquedista.',
     },
+    // Q6: Multiple
+    {
+      'type': 'multiple',
+      'module': 'Módulo 2: NR-10',
+      'question': 'Qual o EPI essencial para proteção contra choques elétricos?',
+      'options': [
+        'Luva de vaqueta sem isolamento',
+        'Capacete com aba frontal isolante',
+        'Óculos de sol comum',
+        'Bota de couro com biqueira de aço',
+      ],
+      'correct': 1,
+      'explanation': 'Para trabalhos com eletricidade, o capacete e o calçado devem ser dielétricos (isolantes), sem partes metálicas.',
+    },
+    // Q7: Swipe
+    {
+      'type': 'swipe',
+      'module': 'Módulo 3: NR-35',
+      'question': 'Verdadeiro ou Falso?',
+      'statement': 'Um cinto de segurança comum (abdominal) pode ser utilizado para retenção de quedas em trabalhos acima de 2 metros.',
+      'answer': false, 
+      'explanation': 'Falso! Para retenção de quedas em trabalho em altura, é obrigatório o uso de cinto de segurança tipo paraquedista.',
+    },
+    // Q8: Drag
+    {
+      'type': 'drag',
+      'module': 'Módulo 2: NR-10',
+      'question': 'Complete o princípio básico contra choques:',
+      'prefix': 'Toda instalação elétrica deve possuir',
+      'suffix': 'de proteção confiável.',
+      'answer': ['aterramento'], 
+      'options': ['aterramento', 'alerta visual', 'sirene', 'fio neutro'], 
+      'explanation': 'O aterramento elétrico é a medida preventiva fundamental contra choques provenientes de falhas de isolamento.',
+    },
+    // Q9: Sentence Builder
+    {
+      'type': 'sentence_builder',
+      'module': 'Módulo 2: NR-10',
+      'question': 'Qual a primeira etapa da Desenergização?',
+      'fragments': [
+        {'text': 'A primeira etapa é o ', 'isGap': false},
+        {'text': 'seccionamento', 'isGap': true, 'id': 'slot0'},
+        {'text': ' da rede.', 'isGap': false},
+      ],
+      'options': ['seccionamento', 'aterramento', 'bloqueio', 'aviso', 'teste'],
+      'answer': ['seccionamento'],
+      'explanation': 'A sequência correta da desenergização começa sempre pelo seccionamento (desligamento) da fonte de energia.',
+    },
+    // Q10: Multiple
+    {
+      'type': 'multiple',
+      'module': 'Módulo 3: NR-35',
+      'question': 'O que é o Talabarte de Retenção de Queda?',
+      'options': [
+        'Dispositivo em Y que liga o cinto à ancoragem.',
+        'Um mosquetão simples de alpinismo.',
+        'A própria corda guia.',
+        'O laço abdominal do cinto de segurança.',
+      ],
+      'correct': 0,
+      'explanation': 'O talabarte em Y com absorvedor de energia é o dispositivo utilizado para conectar o cinto do tipo paraquedista ao ponto de ancoragem repetidamente.',
+    },
   ];
 
   @override
   void initState() {
     super.initState();
     _energyCtrl.addListener(_onEnergyChanged);
-    _initializeQuestionState(); // Inicializa os dados da primeira pergunta
+    _initializeQuestionState(); 
     
-    // Cobrar energia de entrada
+    // Animações
+    _shakeController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _epicStreakController = AnimationController(vsync: this, duration: const Duration(milliseconds: 1500));
+    _completionController = AnimationController(vsync: this, duration: const Duration(milliseconds: 2000));
+
     if (!_energyCtrl.spendEntryEnergy()) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showOutOfEnergyModal();
@@ -118,6 +192,9 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void dispose() {
     _energyCtrl.removeListener(_onEnergyChanged);
+    _shakeController.dispose();
+    _epicStreakController.dispose();
+    _completionController.dispose();
     super.dispose();
   }
 
@@ -156,16 +233,31 @@ class _QuizScreenState extends State<QuizScreen> {
       _isCorrect = correct;
       if (correct) {
         _totalCorrect++;
+        _currentStreak++;
         int bonus = _energyCtrl.registerCorrectAnswer();
-        if (bonus > 0) {
+        
+        // PROGRESSIVE ANIMATIONS LOGIC
+        if (_currentStreak == 5) {
+          // 5 Seguidas: Faíscas + Label
+          HapticFeedback.heavyImpact();
+          _epicStreakController.forward(from: 0);
+        } else if (_currentStreak == 10) {
+          // 10 Seguidas: Tela balança, Electrified Streak, +100XP
+          HapticFeedback.vibrate();
+          _shakeController.forward(from: 0);
+          _epicStreakController.forward(from: 0);
+          _energyCtrl.addXp(100);
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('⚡ STREAK ÉPICO! +100 XP Bônus!')));
+        } else if (bonus > 0 && _currentStreak < 5) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('🔥 Streak! +$bonus de energia bônus!'),
+              content: Text('🔥 Acerto! +$bonus energia bônus!'),
               backgroundColor: AppColors.gold,
             ),
           );
         }
       } else {
+        _currentStreak = 0;
         _energyCtrl.resetStreak();
         _energyCtrl.spendErrorEnergy();
       }
@@ -179,14 +271,18 @@ class _QuizScreenState extends State<QuizScreen> {
     }
 
     if (_currentQuestion + 1 >= _questions.length) {
-      // Quiz concluído — Verifica pontuação
       double score = _totalCorrect / _questions.length;
       bool passed = widget.isEvaluation ? score >= 0.8 : score >= 0.7;
 
       if (passed) {
         int xpEarned = (score * 100).toInt() + (_totalCorrect * 10);
         _energyCtrl.addXp(xpEarned);
-        _showQuizResultModal(true, score, xpEarned);
+        
+        // Assessment Complete Epic Animation
+        HapticFeedback.vibrate();
+        _completionController.forward(from: 0).then((_) {
+          _showQuizResultModal(true, score, xpEarned);
+        });
       } else {
         _showQuizResultModal(false, score, 0);
       }
@@ -210,33 +306,43 @@ class _QuizScreenState extends State<QuizScreen> {
       enableDrag: false,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(24),
-          decoration: const BoxDecoration(
-            color: AppColors.card,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
+        return TweenAnimationBuilder<double>(
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.elasticOut,
+          tween: Tween(begin: 0.0, end: 1.0),
+          builder: (context, value, child) {
+            return Transform.scale(
+              scale: value,
+              child: child,
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            decoration: const BoxDecoration(
+              color: AppColors.card,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
               Container(
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: passed ? AppColors.primary.withValues(alpha: 0.1) : Colors.redAccent.withValues(alpha: 0.1),
+                  color: passed ? Colors.blueAccent.withValues(alpha: 0.1) : Colors.redAccent.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: passed ? AppColors.primary.withValues(alpha: 0.2) : Colors.redAccent.withValues(alpha: 0.2),
+                      color: passed ? Colors.blueAccent.withValues(alpha: 0.2) : Colors.redAccent.withValues(alpha: 0.2),
                       blurRadius: 40,
                       spreadRadius: 10,
                     ),
                   ],
                 ),
                 child: Icon(
-                  passed ? Icons.emoji_events : Icons.close,
+                  passed ? Icons.bolt : Icons.close,
                   size: 50,
-                  color: passed ? AppColors.primary : Colors.redAccent,
+                  color: passed ? Colors.blueAccent : Colors.redAccent,
                 ),
               ),
               const SizedBox(height: 24),
@@ -284,6 +390,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
             ],
           ),
+        ),
         );
       },
     );
@@ -336,7 +443,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   onPressed: () {
                     Navigator.pop(context);
                     Navigator.pop(context);
-                    Navigator.pushNamed(this.context, '/store');
+                    this.context.push('/store');
                   },
                   icon: const Icon(Icons.store, color: AppColors.background),
                   label: const Text('IR PARA A LOJA', style: TextStyle(color: AppColors.background, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
@@ -414,7 +521,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     onPressed: () {
                       Navigator.pop(ctx);
                       Navigator.pop(context, true); 
-                      Navigator.pushNamed(context, '/standard-detail');
+                      context.push('/standard-detail');
                     },
                     child: const Text('TESTE GRÁTIS POR 7 DIAS', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14, letterSpacing: 1)),
                   ),
@@ -442,91 +549,126 @@ class _QuizScreenState extends State<QuizScreen> {
     else { batteryIcon = Icons.battery_alert; }
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(gradient: RadialGradient(center: Alignment.center, radius: 1.2, colors: [Color(0xFF091E35), Color(0xFF061629)])),
-            child: SafeArea(
-              child: Column(
-                children: [
-                  // 1. HEADER E BARRA DE ENERGIA
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Row(
+      body: AnimatedBuilder(
+        animation: Listenable.merge([_shakeController, _completionController, _epicStreakController]),
+        builder: (context, child) {
+          // Shake effect for 10x streak
+          double dx = 0;
+          if (_shakeController.isAnimating) {
+            dx = 15 * (0.5 - (0.5 - _shakeController.value).abs()) * (DateTime.now().millisecond % 2 == 0 ? 1 : -1);
+          }
+
+          return Stack(
+            children: [
+              Transform.translate(
+                offset: Offset(dx, 0),
+                child: Container(
+                  decoration: const BoxDecoration(gradient: RadialGradient(center: Alignment.center, radius: 1.2, colors: [Color(0xFF091E35), Color(0xFF061629)])),
+                  child: SafeArea(
+                    child: Column(
                       children: [
-                        GestureDetector(onTap: () => Navigator.pop(context), child: const Icon(Icons.close, color: Colors.white, size: 28)),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: ClipRRect(
-                              borderRadius: const BorderRadius.all(Radius.circular(4)),
-                              child: LinearProgressIndicator(value: progress, backgroundColor: AppColors.cardBorder, valueColor: const AlwaysStoppedAnimation<Color>(AppColors.accent), minHeight: 8),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                          decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(20), border: Border.all(color: _energyCtrl.hasEnergy ? AppColors.gold.withValues(alpha: 0.4) : Colors.redAccent.withValues(alpha: 0.5))),
+                        // 1. HEADER E BARRA DE ENERGIA
+                        Padding(
+                          padding: const EdgeInsets.all(20),
                           child: Row(
-                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(batteryIcon, color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, size: 20),
-                              const SizedBox(width: 4),
-                              Text(_energyCtrl.energyDisplay, style: TextStyle(color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, fontSize: 16, fontWeight: FontWeight.bold)),
-                              if (_energyCtrl.isRecharging) ...[
-                                const SizedBox(width: 6),
-                                Text(_energyCtrl.regenTimeRemaining, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
-                              ],
+                              GestureDetector(onTap: () => Navigator.pop(context), child: const Icon(Icons.close, color: Colors.white, size: 28)),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                                    child: LinearProgressIndicator(value: progress, backgroundColor: AppColors.cardBorder, valueColor: const AlwaysStoppedAnimation<Color>(AppColors.accent), minHeight: 8),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                                decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(20), border: Border.all(color: _energyCtrl.hasEnergy ? AppColors.gold.withValues(alpha: 0.4) : Colors.redAccent.withValues(alpha: 0.5))),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(batteryIcon, color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, size: 20),
+                                    const SizedBox(width: 4),
+                                    Text(_energyCtrl.energyDisplay, style: TextStyle(color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, fontSize: 16, fontWeight: FontWeight.bold)),
+                                    if (_energyCtrl.isRecharging) ...[
+                                      const SizedBox(width: 6),
+                                      Text(_energyCtrl.regenTimeRemaining, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
+                                    ],
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
+
+                        // 2. CORPO DA PERGUNTA (MÚLTIPLA ESCOLHA, DRAG OU SWIPE)
+                        Expanded(
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 10),
+                                Text(q['module'], style: TextStyle(color: AppColors.accent.withValues(alpha: 0.8), fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1.5)),
+                                const SizedBox(height: 4),
+                                Text('Pergunta ${_currentQuestion + 1} de ${_questions.length}', style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                                const SizedBox(height: 12),
+                                Text(q['question'], style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold, height: 1.4)),
+                                const SizedBox(height: 30),
+
+                                // --- CONDICIONAL DA MECÂNICA ---
+                                if (q['type'] == 'multiple')
+                                  ...List.generate((q['options'] as List).length, (index) {
+                                    return _buildOptionTile(index, q['options'][index], q['correct']);
+                                  })
+                                else if (q['type'] == 'drag')
+                                  _buildDragChallenge(q)
+                                else if (q['type'] == 'sentence_builder')
+                                  _buildSentenceBuilderChallenge(q)
+                                else if (q['type'] == 'swipe')
+                                  _buildSwipeChallenge(q),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        // 3. ÁREA DE FEEDBACK / BOTÃO INFERIOR
+                        _buildBottomArea(),
                       ],
                     ),
                   ),
+                ),
+              ),
 
-                  // 2. CORPO DA PERGUNTA (MÚLTIPLA ESCOLHA, DRAG OU SWIPE)
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 10),
-                          Text(q['module'], style: TextStyle(color: AppColors.accent.withValues(alpha: 0.8), fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1.5)),
-                          const SizedBox(height: 4),
-                          Text('Pergunta ${_currentQuestion + 1} de ${_questions.length}', style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
-                          const SizedBox(height: 12),
-                          Text(q['question'], style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold, height: 1.4)),
-                          const SizedBox(height: 30),
+              // CELEBRATION OVERLAYS
+              Positioned.fill(
+                child: StreakLightningEmitter(
+                  trigger: _epicStreakController.isAnimating,
+                  streakCount: _currentStreak,
+                ),
+              ),
 
-                          // --- CONDICIONAL DA MECÂNICA ---
-                          if (q['type'] == 'multiple')
-                            ...List.generate((q['options'] as List).length, (index) {
-                              return _buildOptionTile(index, q['options'][index], q['correct']);
-                            })
-                          else if (q['type'] == 'drag')
-                            _buildDragChallenge(q)
-                          else if (q['type'] == 'sentence_builder')
-                            _buildSentenceBuilderChallenge(q)
-                          else if (q['type'] == 'swipe')
-                            _buildSwipeChallenge(q),
-                        ],
+              if (_completionController.isAnimating)
+                Container(
+                  color: Colors.blueAccent.withValues(alpha: 0.3 * (1.0 - _completionController.value)),
+                  child: Center(
+                    child: SlideTransition(
+                      position: Tween<Offset>(begin: const Offset(0, -1), end: Offset.zero).animate(
+                        CurvedAnimation(parent: _completionController, curve: Curves.elasticOut)
                       ),
+                      child: Icon(Icons.bolt, color: Colors.blueAccent, size: 200 + (50 * _completionController.value)),
                     ),
                   ),
-
-                  // 3. ÁREA DE FEEDBACK / BOTÃO INFERIOR
-                  _buildBottomArea(),
-                ],
+                ),
+              
+              // Emissor de Faíscas de Acerto (pequenas faíscas nativas para acertos básicos)
+              Positioned.fill(
+                child: SparkEmitter(trigger: _hasAnswered && _isCorrect),
               ),
-            ),
-          ),
-          
-          // Emissor de Faíscas de Acerto
-          Positioned.fill(
-            child: SparkEmitter(trigger: _hasAnswered && _isCorrect),
-          ),
-        ],
+            ],
+          );
+        }
       ),
     );
   }
@@ -643,7 +785,8 @@ class _QuizScreenState extends State<QuizScreen> {
           },
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            width: 120, height: 45,
+            constraints: const BoxConstraints(minWidth: 80, minHeight: 45),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               color: word == null ? AppColors.card : AppColors.primary.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(16),
@@ -702,7 +845,7 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   Widget _buildEmptyChip() => Container(
-    width: 80, height: 40,
+    constraints: const BoxConstraints(minWidth: 80, minHeight: 40),
     decoration: BoxDecoration(
       color: Colors.white.withValues(alpha: 0.05),
       borderRadius: BorderRadius.circular(16),

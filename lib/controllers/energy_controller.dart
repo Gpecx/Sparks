@@ -83,6 +83,16 @@ class EnergyController extends ChangeNotifier {
     return _energy > 0;
   }
 
+  /// Tenta gastar Pontos Spark (para apostas, etc). Retorna true se saldo for suficiente.
+  bool spendSparkPoints(int amount) {
+    if (_sparkPoints >= amount) {
+      _sparkPoints -= amount;
+      notifyListeners();
+      return true;
+    }
+    return false;
+  }
+
   /// Registra um acerto. Se atingir streak, dá bônus aleatório.
   int registerCorrectAnswer() {
     _streak++;

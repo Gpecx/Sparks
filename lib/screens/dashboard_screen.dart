@@ -1,9 +1,14 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/screens/settings_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/screens/achievements_screen.dart';
+import 'package:spark_app/screens/technical_standards_screen.dart';
+import 'package:spark_app/services/streak_service.dart';
+import 'package:spark_app/services/covenant_service.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -120,9 +125,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 label: 'Minhas Conquistas',
                 onTap: () {
                   Navigator.pop(ctx);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Conquistas em breve!')),
-                  );
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen()));
                 },
               ),
               _buildProfileMenuItem(
@@ -130,9 +133,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 label: 'Meu Progresso',
                 onTap: () {
                   Navigator.pop(ctx);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Progresso em breve!')),
-                  );
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const TechnicalStandardsScreen()));
                 },
               ),
               _buildProfileMenuItem(
@@ -156,7 +157,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 color: AppColors.primary,
                 onTap: () {
                   Navigator.pop(ctx);
-                  Navigator.pushNamed(context, '/duel');
+                  context.push('/duel');
                 },
               ),
               _buildProfileMenuItem(
@@ -165,7 +166,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 color: AppColors.gold,
                 onTap: () {
                   Navigator.pop(ctx);
-                  Navigator.pushNamed(context, '/error-simulation');
+                  context.push('/error-simulation');
                 },
               ),
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
@@ -175,7 +176,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 color: AppColors.error,
                 onTap: () {
                   Navigator.pop(ctx);
-                  Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                  context.go('/');
                 },
               ),
               const SizedBox(height: 16),
@@ -250,26 +251,66 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      GestureDetector(
-                        onTap: _showProfileMenu,
-                        child: Container(
-                          width: 42,
-                          height: 42,
-                          decoration: BoxDecoration(
-                            color: AppColors.card,
-                            borderRadius: BorderRadius.circular(21),
-                            border: Border.all(color: AppColors.cardBorder),
+                      Row(
+                        children: [
+                          // Streak Indicator
+                          _ResponsiveTapWidget(
+                            onTap: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('🔥 Streak de ${StreakService().currentStreak} dias! Multiplicador de ${StreakService().xpMultiplier}x em dobro.'),
+                                  backgroundColor: AppColors.primary,
+                                  duration: const Duration(seconds: 3),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(right: 12),
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: AppColors.gold.withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
+                              ),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.local_fire_department, color: AppColors.gold, size: 16),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '${StreakService().currentStreak}',
+                                    style: const TextStyle(color: AppColors.gold, fontSize: 13, fontWeight: FontWeight.w800),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          child: const Icon(
-                            Icons.person,
-                            color: AppColors.textSecondary,
-                            size: 24,
+                          _ResponsiveTapWidget(
+                            onTap: _showProfileMenu,
+                            child: Container(
+                              width: 42,
+                              height: 42,
+                              decoration: BoxDecoration(
+                                color: AppColors.card,
+                                borderRadius: BorderRadius.circular(21),
+                                border: Border.all(color: AppColors.cardBorder),
+                              ),
+                              child: const Icon(
+                                Icons.person,
+                                color: AppColors.textSecondary,
+                                size: 24,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
+                  
+                  // Daily Challenge Card
+                  _buildDailyChallengeCard(),
+                  const SizedBox(height: 20),
+                  
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -321,8 +362,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                               ),
                               const SizedBox(height: 12),
-                              GestureDetector(
-                                onTap: () => Navigator.pushNamed(context, '/standards'),
+                              _ResponsiveTapWidget(
+                                onTap: () => context.push('/standards'),
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 10),
@@ -356,7 +397,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ),
                   const SizedBox(height: 14),
-                  GestureDetector(
+                  _ResponsiveTapWidget(
                     onTap: () {
                       final shell = context.findAncestorStateOfType<MainShellScreenState>();
                       shell?.switchTab(1);
@@ -364,6 +405,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: _buildContinueLearningCard(),
                   ),
                   const SizedBox(height: 28),
+                  
+                  // Covenant Section
+                  const Text(
+                    'Pactos Semanais',
+                    style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 14),
+                  _buildCovenantList(),
+                  const SizedBox(height: 28),
+
                   const Text(
                     'Normas em Destaque',
                     style: TextStyle(
@@ -480,10 +531,132 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+  Widget _buildDailyChallengeCard() {
+    return _ResponsiveTapWidget(
+      onTap: () => _showDailyChallengeModal(context),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.primary.withValues(alpha: 0.2), AppColors.card],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primary.withValues(alpha: 0.1),
+              blurRadius: 10,
+              spreadRadius: 2,
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.15),
+                shape: BoxShape.circle,
+                border: Border.all(color: AppColors.primary.withValues(alpha: 0.5)),
+              ),
+              child: const Icon(Icons.timer, color: AppColors.primary, size: 24),
+            ),
+            const SizedBox(width: 14),
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Desafio Diário',
+                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    'NR-10 • Revisão Rápida • 3 min',
+                    style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: AppColors.gold.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.gold.withValues(alpha: 0.3)),
+              ),
+              child: const Column(
+                children: [
+                  Text('+50', style: TextStyle(color: AppColors.gold, fontSize: 14, fontWeight: FontWeight.w900)),
+                  Text('XP', style: TextStyle(color: AppColors.gold, fontSize: 9, fontWeight: FontWeight.w700)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showDailyChallengeModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.card,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5))),
+        title: Row(
+          children: [
+            const Icon(Icons.timer, color: AppColors.primary),
+            const SizedBox(width: 10),
+            const Text('Desafio Diário', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Teste seus conhecimentos em NR-10! Complete 3 perguntas rápidas para receber recompensas.', style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 14)),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(color: AppColors.inputBackground, borderRadius: BorderRadius.circular(12)),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(children: [Text('💰 +50 XP', style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold)), Text('Recompensa', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
+                  Column(children: [Text('⏱️ 3 min', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)), Text('Tempo Est.', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
+                ],
+              ),
+            )
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('AGORA NÃO', style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.bold)),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+            onPressed: () {
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Iniciando desafio diário...'), backgroundColor: AppColors.primary));
+              // Logica para iniciar desafio
+            },
+            child: const Text('INICIAR DESAFIO', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildNormaCard(
       BuildContext context, String code, String name, Color iconColor) {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/standards'),
+    return _ResponsiveTapWidget(
+      onTap: () => context.push('/standards'),
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.card,
@@ -535,8 +708,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _buildPowerplayBanner() {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/standard-detail'),
+    return _ResponsiveTapWidget(
+      onTap: () => context.push('/standard-detail'),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(18),
@@ -624,6 +797,175 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCovenantList() {
+    final covenants = CovenantService().activeCovenants;
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: covenants.length,
+      separatorBuilder: (ctx, index) => const SizedBox(height: 12),
+      itemBuilder: (ctx, index) {
+        final cov = covenants[index];
+        final progressPercent = cov.currentProgress / cov.maxProgress;
+        
+        return Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppColors.card,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: cov.isCompleted ? AppColors.gold.withValues(alpha: 0.5) : AppColors.cardBorder),
+            boxShadow: cov.isCompleted
+                ? [BoxShadow(color: AppColors.gold.withValues(alpha: 0.1), blurRadius: 8, spreadRadius: 1)]
+                : null,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        cov.isCompleted ? Icons.check_circle : Icons.commit,
+                        color: cov.isCompleted ? AppColors.gold : AppColors.primary,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        cov.title,
+                        style: TextStyle(
+                          color: cov.isCompleted ? AppColors.gold : Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      cov.reward,
+                      style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 12),
+              Text(cov.objective, style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 13)),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: AppColors.cardBorder,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: FractionallySizedBox(
+                        alignment: Alignment.centerLeft,
+                        widthFactor: progressPercent.clamp(0.0, 1.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: cov.isCompleted ? AppColors.gold : AppColors.primary,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    '${cov.currentProgress}/${cov.maxProgress} ${cov.trackingType}',
+                    style: TextStyle(
+                      color: cov.isCompleted ? AppColors.gold : AppColors.textMuted,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  WIDGET RESPONSIVO (escala + opacidade ao tocar)
+// ─────────────────────────────────────────────────────────────────
+
+class _ResponsiveTapWidget extends StatefulWidget {
+  final Widget child;
+  final VoidCallback onTap;
+
+  const _ResponsiveTapWidget({required this.child, required this.onTap});
+
+  @override
+  State<_ResponsiveTapWidget> createState() => _ResponsiveTapWidgetState();
+}
+
+class _ResponsiveTapWidgetState extends State<_ResponsiveTapWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _ctrl;
+  late Animation<double> _scaleAnim;
+  late Animation<double> _opacityAnim;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
+    _scaleAnim = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut),
+    );
+    _opacityAnim = Tween<double>(begin: 1.0, end: 0.7).animate(
+      CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTapDown: (_) => _ctrl.forward(),
+        onTapUp: (_) {
+          _ctrl.reverse();
+          widget.onTap();
+        },
+        onTapCancel: () => _ctrl.reverse(),
+        child: AnimatedBuilder(
+          animation: _ctrl,
+          builder: (context, child) => Opacity(
+            opacity: _opacityAnim.value,
+            child: Transform.scale(
+              scale: _scaleAnim.value,
+              child: child,
+            ),
+          ),
+          child: widget.child,
         ),
       ),
     );
