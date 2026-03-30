@@ -17,6 +17,7 @@ import 'package:spark_app/screens/error_simulation_screen.dart';
 import 'package:spark_app/screens/categories_screen.dart';
 import 'package:spark_app/screens/change_password_screen.dart';
 import 'package:spark_app/screens/onboarding_screen.dart';
+import 'package:spark_app/screens/covenants_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -40,6 +41,7 @@ class AppRouter {
       GoRoute(path: '/categories', builder: (context, state) => const CategoriesScreen()),
       GoRoute(path: '/change-password', builder: (context, state) => const ChangePasswordScreen()),
       GoRoute(path: '/onboarding', builder: (context, state) => const OnboardingScreen()),
+      GoRoute(path: '/covenants', builder: (context, state) => const CovenantsScreen()),
     ],
   );
 }
