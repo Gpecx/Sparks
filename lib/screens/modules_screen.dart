@@ -1,18 +1,22 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/models/curriculum_models.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/learning_path_screen.dart';
+import 'package:spark_app/providers/dev_mode_provider.dart';
 
-class ModulesScreen extends StatelessWidget {
+class ModulesScreen extends ConsumerWidget {
   final LearningCategory? category;
 
   const ModulesScreen({super.key, this.category});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isTestMode = kDebugMode && ref.watch(devModeProvider);
     // Fallback: se nenhuma categoria for passada, usa a primeira
     final cat = category ?? mockCategories.first;
 
@@ -90,8 +94,9 @@ class ModulesScreen extends StatelessWidget {
                         child: _ModuleCard(
                           module: module,
                           categoryColor: cat.color,
+                          isTestMode: isTestMode,
                           onTap: () {
-                            if (module.isLocked) {
+                            if (!isTestMode && module.isLocked) {
                               HapticFeedback.heavyImpact();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
@@ -107,6 +112,7 @@ class ModulesScreen extends StatelessWidget {
                               MaterialPageRoute(
                                 builder: (_) => LearningPathScreen(
                                   moduleTitle: module.title,
+                                  moduleId: module.id,   // <-- ID para buscar lições reais
                                   lessons: module.lessons,
                                 ),
                               ),
@@ -134,11 +140,13 @@ class _ModuleCard extends StatefulWidget {
   final LearningModule module;
   final Color categoryColor;
   final VoidCallback onTap;
+  final bool isTestMode;
 
   const _ModuleCard({
     required this.module,
     required this.categoryColor,
     required this.onTap,
+    this.isTestMode = false,
   });
 
   @override
@@ -171,7 +179,8 @@ class _ModuleCardState extends State<_ModuleCard>
   @override
   Widget build(BuildContext context) {
     final mod = widget.module;
-    final color = mod.isLocked ? AppColors.textMuted : mod.color;
+    final locked = !widget.isTestMode && mod.isLocked;
+    final color = locked ? AppColors.textMuted : mod.color;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -193,12 +202,12 @@ class _ModuleCardState extends State<_ModuleCard>
             color: AppColors.card,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: mod.isLocked
+              color: locked
                   ? AppColors.cardBorder.withValues(alpha: 0.4)
                   : color.withValues(alpha: 0.3),
               width: 1.5,
             ),
-            boxShadow: mod.isLocked
+            boxShadow: locked
                 ? null
                 : [
                     BoxShadow(
@@ -219,14 +228,14 @@ class _ModuleCardState extends State<_ModuleCard>
                       width: 48,
                       height: 48,
                       decoration: BoxDecoration(
-                        color: mod.isLocked
+                        color: locked
                             ? AppColors.inputBackground
                             : color.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
-                        mod.isLocked ? Icons.lock : mod.icon,
-                        color: mod.isLocked ? AppColors.textMuted : color,
+                        locked ? Icons.lock : mod.icon,
+                        color: locked ? AppColors.textMuted : color,
                         size: 24,
                       ),
                     ),
@@ -238,7 +247,7 @@ class _ModuleCardState extends State<_ModuleCard>
                           Text(
                             mod.title,
                             style: TextStyle(
-                              color: mod.isLocked ? AppColors.textMuted : Colors.white,
+                              color: locked ? AppColors.textMuted : Colors.white,
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),
@@ -247,18 +256,18 @@ class _ModuleCardState extends State<_ModuleCard>
                           Text(
                             mod.subtitle,
                             style: TextStyle(
-                              color: AppColors.textMuted.withValues(alpha: mod.isLocked ? 0.5 : 1.0),
+                              color: AppColors.textMuted.withValues(alpha: locked ? 0.5 : 1.0),
                               fontSize: 12,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    if (!mod.isLocked)
+                    if (!locked)
                       Icon(Icons.arrow_forward_ios, color: AppColors.textMuted, size: 14),
                   ],
                 ),
-                if (!mod.isLocked) ...[
+                if (!locked) ...[
                   const SizedBox(height: 16),
                   Row(
                     children: [
@@ -291,7 +300,7 @@ class _ModuleCardState extends State<_ModuleCard>
                     ),
                   ),
                 ],
-                if (mod.isLocked) ...[
+                if (locked) ...[
                   const SizedBox(height: 12),
                   Text(
                     '🔒 Bloqueado · ${mod.lessons.length} lições',

@@ -5,10 +5,17 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/spark_emitter.dart';
 import 'package:spark_app/widgets/streak_lightning_emitter.dart';
+import 'package:spark_app/models/quiz_models.dart';
 
 class QuizScreen extends StatefulWidget {
   final bool isEvaluation;
-  const QuizScreen({super.key, this.isEvaluation = false});
+  final Lesson? lesson; // <-- lição real com questões técnicas
+
+  const QuizScreen({
+    super.key,
+    this.isEvaluation = false,
+    this.lesson,
+  });
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -165,8 +172,16 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _energyCtrl.addListener(_onEnergyChanged);
-    _initializeQuestionState(); 
-    
+
+    // Se uma lição real foi fornecida, usa as questões dela
+    if (widget.lesson != null && widget.lesson!.questions.isNotEmpty) {
+      _questions
+        ..clear()
+        ..addAll(_convertLessonToQuestions(widget.lesson!));
+    }
+
+    _initializeQuestionState();
+
     // Animações
     _shakeController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
     _epicStreakController = AnimationController(vsync: this, duration: const Duration(milliseconds: 1500));
@@ -177,6 +192,48 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         _showOutOfEnergyModal();
       });
     }
+  }
+
+  /// Converte as questões do modelo [Lesson] para o formato interno da tela.
+  List<Map<String, dynamic>> _convertLessonToQuestions(Lesson lesson) {
+    final result = <Map<String, dynamic>>[];
+    for (final q in lesson.questions) {
+      if (q is MultipleChoice) {
+        result.add({
+          'type': 'multiple',
+          'module': lesson.title,
+          'question': q.statement,
+          'options': q.options,
+          'correct': q.correctIndex,
+          'explanation': q.explanation,
+        });
+      } else if (q is TrueFalse) {
+        result.add({
+          'type': 'swipe',
+          'module': lesson.title,
+          'question': 'Verdadeiro ou Falso?',
+          'statement': q.statement,
+          'answer': q.isTrue,
+          'explanation': q.explanation,
+        });
+      } else if (q is FillInTheBlanks) {
+        // Converte FillInTheBlanks para o formato drag existente
+        result.add({
+          'type': 'drag',
+          'module': lesson.title,
+          'question': q.statement,
+          'prefix': q.textWithBlanks.split('____').first,
+          'suffix': q.textWithBlanks.split('____').last,
+          'answer': q.blanks.map((b) => b.answer).toList(),
+          'options': [
+            ...q.blanks.map((b) => b.answer),
+            // Opções distrátoras geradas automaticamente
+          ],
+          'explanation': q.explanation,
+        });
+      }
+    }
+    return result;
   }
 
   // Prepara as variáveis baseadas no tipo da pergunta atual

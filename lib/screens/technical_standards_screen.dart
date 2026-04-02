@@ -1,16 +1,19 @@
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/providers/dev_mode_provider.dart';
 
-class TechnicalStandardsScreen extends StatefulWidget {
+class TechnicalStandardsScreen extends ConsumerStatefulWidget {
   const TechnicalStandardsScreen({super.key});
   @override
-  State<TechnicalStandardsScreen> createState() => _TechnicalStandardsScreenState();
+  ConsumerState<TechnicalStandardsScreen> createState() => _TechnicalStandardsScreenState();
 }
 
-class _TechnicalStandardsScreenState extends State<TechnicalStandardsScreen> {
+class _TechnicalStandardsScreenState extends ConsumerState<TechnicalStandardsScreen> {
   String _selectedFilter = 'Todos';
   String _searchQuery = '';
   final List<String> _filters = ['Todos', 'NRs', 'TCs', 'TPs'];
@@ -45,6 +48,7 @@ class _TechnicalStandardsScreenState extends State<TechnicalStandardsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isTestMode = kDebugMode && ref.watch(devModeProvider);
     final items = _filtered;
     return SparksBackground(
       child: PcbBackground(
@@ -117,7 +121,7 @@ class _TechnicalStandardsScreenState extends State<TechnicalStandardsScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     itemCount: items.length,
                     separatorBuilder: (_, __) => const SizedBox(height: 10),
-                    itemBuilder: (ctx, i) => _card(ctx, items[i]),
+                    itemBuilder: (ctx, i) => _card(ctx, items[i], isTestMode),
                   ),
                 ),
             ],
@@ -127,10 +131,10 @@ class _TechnicalStandardsScreenState extends State<TechnicalStandardsScreen> {
     );
   }
 
-  Widget _card(BuildContext context, Map<String, dynamic> s) {
+  Widget _card(BuildContext context, Map<String, dynamic> s, bool isTestMode) {
     final Color color = s['statusColor'] as Color;
     final double progress = s['progress'] as double;
-    final bool locked = s['status'] == 'BLOQUEADO';
+    final bool locked = !isTestMode && s['status'] == 'BLOQUEADO';
     return GestureDetector(
       onTap: () => context.push('/standard-detail'),
       child: Container(

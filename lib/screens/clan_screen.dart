@@ -14,12 +14,36 @@ class ClanMember {
   const ClanMember({required this.name, required this.position, required this.xp, required this.role, this.isUser = false});
 }
 
+class ClanQuest {
+  final String id;
+  final String title;
+  final int currentProgress;
+  final int targetProgress;
+  final String rewardDescription;
+
+  const ClanQuest({
+     required this.id,
+     required this.title,
+     required this.currentProgress,
+     required this.targetProgress,
+     required this.rewardDescription,
+  });
+
+  bool get isCompleted => currentProgress >= targetProgress;
+  double get progressPercentage => (currentProgress / targetProgress).clamp(0.0, 1.0);
+}
+
 final List<ClanMember> _mockMembers = [
   const ClanMember(name: 'Alex Rodriguez', position: 'Técnico Líder', xp: 14250, role: ClanRole.chefe, isUser: true),
   const ClanMember(name: 'Mariana Figueiredo', position: 'Engenheira', xp: 12800, role: ClanRole.admin),
   const ClanMember(name: 'Bruno Carvalho', position: 'Técnico', xp: 9400, role: ClanRole.moderador),
   const ClanMember(name: 'Camila Santos', position: 'Analista', xp: 7600, role: ClanRole.membro),
   const ClanMember(name: 'Diego Oliveira', position: 'Estagiário', xp: 3200, role: ClanRole.membro),
+];
+
+final List<ClanQuest> _mockQuests = [
+  const ClanQuest(id: 'q1', title: 'Semana de Segurança', currentProgress: 15, targetProgress: 20, rewardDescription: '+ 5.000 XP'),
+  const ClanQuest(id: 'q2', title: 'Mestres do Duelo', currentProgress: 10, targetProgress: 10, rewardDescription: '+ 2.500 XP'),
 ];
 
 class ClanScreen extends StatefulWidget {
@@ -39,9 +63,16 @@ class _ClanScreenState extends State<ClanScreen> {
   final _joinPasswordCtrl = TextEditingController();
   final _joinCodeCtrl = TextEditingController();
 
+  final _formKeyCreate = GlobalKey<FormState>();
+  final _formKeyJoin = GlobalKey<FormState>();
+
+  Color _clanPrimaryColor = AppColors.primary;
+  IconData _clanIcon = Icons.shield;
+
   final List<Map<String, dynamic>> _messages = [
-    {'sender': 'Alex Rodriguez', 'text': 'Chegamos ao top 3 global!', 'isMe': false},
-    {'sender': 'Mariana Figueiredo', 'text': 'Vamos focar na meta dessa semana pessoal.', 'isMe': false},
+    {'sender': 'Sistema', 'text': 'Mariana subiu para o Rank Ouro!', 'isMe': false, 'isSystem': true},
+    {'sender': 'Alex Rodriguez', 'text': 'Chegamos ao top 3 global!', 'isMe': false, 'isSystem': false},
+    {'sender': 'Mariana Figueiredo', 'text': 'Vamos focar na meta dessa semana pessoal.', 'isMe': false, 'isSystem': false},
   ];
   final _chatCtrl = TextEditingController();
   final ScrollController _scrollCtrl = ScrollController();
@@ -143,11 +174,29 @@ class _ClanScreenState extends State<ClanScreen> {
                 const SizedBox(height: 24),
                 _label('Nome do Clã'),
                 const SizedBox(height: 8),
-                _inputField(_nameCtrl, 'Ex: EXS Técnicos SP', Icons.shield_outlined),
-                const SizedBox(height: 16),
-                _label('Senha do Clã'),
-                const SizedBox(height: 8),
-                _inputField(_passwordCtrl, 'Mínimo 4 caracteres', Icons.lock_outline, isPassword: true),
+                Form(
+                  key: _formKeyCreate,
+                  child: Column(
+                    children: [
+                      _inputField(
+                        _nameCtrl, 
+                        'Ex: EXS Técnicos SP', 
+                        Icons.shield_outlined,
+                        validator: (v) => (v == null || v.trim().length <= 3) ? 'Nome deve ter mais que 3 caracteres' : null,
+                      ),
+                      const SizedBox(height: 16),
+                      _label('Senha do Clã'),
+                      const SizedBox(height: 8),
+                      _inputField(
+                        _passwordCtrl, 
+                        'Mínimo 4 caracteres', 
+                        Icons.lock_outline, 
+                        isPassword: true,
+                        validator: (v) => (v == null || v.trim().length < 4) ? 'Senha deve ter pelo menos 4 caracteres' : null,
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 8),
                 Container(
                   padding: const EdgeInsets.all(10),
@@ -217,11 +266,24 @@ class _ClanScreenState extends State<ClanScreen> {
                 const SizedBox(height: 24),
                 _label('Código de Convite (opcional)'),
                 const SizedBox(height: 8),
-                _inputField(_joinCodeCtrl, 'Ex: SPARK-XK29', Icons.confirmation_number_outlined),
-                const SizedBox(height: 16),
-                _label('Senha do Clã'),
-                const SizedBox(height: 8),
-                _inputField(_joinPasswordCtrl, 'Digite a senha do grupo', Icons.lock_outline, isPassword: true),
+                Form(
+                  key: _formKeyJoin,
+                  child: Column(
+                    children: [
+                      _inputField(_joinCodeCtrl, 'Ex: SPARK-XK29', Icons.confirmation_number_outlined),
+                      const SizedBox(height: 16),
+                      _label('Senha do Clã'),
+                      const SizedBox(height: 8),
+                      _inputField(
+                        _joinPasswordCtrl, 
+                        'Digite a senha do grupo', 
+                        Icons.lock_outline, 
+                        isPassword: true,
+                        validator: (v) => (_joinCodeCtrl.text.isEmpty && (v == null || v.isEmpty)) ? 'Informe a senha ou o código' : null,
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity,
@@ -256,20 +318,11 @@ class _ClanScreenState extends State<ClanScreen> {
             decoration: BoxDecoration(
               color: AppColors.card,
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+              border: Border.all(color: _clanPrimaryColor.withValues(alpha: 0.3)),
             ),
             child: Row(
               children: [
-                Container(
-                  width: 56,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.primary.withValues(alpha: 0.15),
-                    border: Border.all(color: AppColors.primary.withValues(alpha: 0.5), width: 2),
-                  ),
-                  child: const Icon(Icons.shield, color: AppColors.primary, size: 28),
-                ),
+                _buildClanMascot(_mockMembers.fold(0, (sum, m) => sum + m.xp)),
                 const SizedBox(width: 14),
                 Expanded(
                   child: Column(
@@ -314,11 +367,11 @@ class _ClanScreenState extends State<ClanScreen> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withValues(alpha: 0.15),
+                          color: _clanPrimaryColor.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
+                          border: Border.all(color: _clanPrimaryColor.withValues(alpha: 0.4)),
                         ),
-                        child: const Icon(Icons.person_add_alt_1, color: AppColors.primary, size: 20),
+                        child: Icon(Icons.person_add_alt_1, color: _clanPrimaryColor, size: 20),
                       ),
                     ),
                   ),
@@ -330,6 +383,10 @@ class _ClanScreenState extends State<ClanScreen> {
           
           // ESTATÍSTICAS DO CLÃ
           _buildClanStats(),
+          const SizedBox(height: 20),
+
+          // MISSÕES DA SEMANA
+          _buildClanQuests(),
           const SizedBox(height: 20),
 
           // Membros
@@ -410,43 +467,72 @@ class _ClanScreenState extends State<ClanScreen> {
           child: Column(
             children: [
               Expanded(
-                child: ListView.builder(
-                  controller: _scrollCtrl,
-                  padding: const EdgeInsets.all(12),
-                  itemCount: _messages.length,
-                  itemBuilder: (ctx, i) {
-                    final msg = _messages[i];
-                    final isMe = msg['isMe'] == true;
-                    return Align(
-                      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 12),
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: isMe ? AppColors.primary.withValues(alpha: 0.2) : AppColors.inputBackground,
-                          border: Border.all(color: isMe ? AppColors.primary.withValues(alpha: 0.4) : AppColors.cardBorder.withValues(alpha: 0.2)),
-                          borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(12),
-                            topRight: const Radius.circular(12),
-                            bottomLeft: isMe ? const Radius.circular(12) : const Radius.circular(2),
-                            bottomRight: isMe ? const Radius.circular(2) : const Radius.circular(12),
-                          ),
-                        ),
+                child: _messages.isEmpty
+                    ? Center(
                         child: Column(
-                          crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            if (!isMe)
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: Text(msg['sender'], style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold)),
-                              ),
-                            Text(msg['text'], style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.4)),
+                            Icon(Icons.speaker_notes_off_outlined, color: AppColors.primary.withValues(alpha: 0.2), size: 64),
+                            const SizedBox(height: 12),
+                            const Text('O chat está silencioso...', style: TextStyle(color: AppColors.textSecondary, fontSize: 14, fontWeight: FontWeight.w600)),
+                            const SizedBox(height: 4),
+                            Text('Seja o primeiro a interagir!', style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 12)),
                           ],
                         ),
+                      )
+                    : ListView.builder(
+                        controller: _scrollCtrl,
+                        padding: const EdgeInsets.all(12),
+                        itemCount: _messages.length,
+                        itemBuilder: (ctx, i) {
+                          final msg = _messages[i];
+                          final isMe = msg['isMe'] == true;
+                          final isSystem = msg['isSystem'] == true;
+                          
+                          if (isSystem) {
+                            return Container(
+                              margin: const EdgeInsets.symmetric(vertical: 8),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.info_outline, color: AppColors.gold, size: 14),
+                                  const SizedBox(width: 6),
+                                  Text(msg['text'], style: const TextStyle(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            );
+                          }
+
+                          return Align(
+                            alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 12),
+                              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: isMe ? AppColors.primary.withValues(alpha: 0.2) : AppColors.inputBackground,
+                                border: Border.all(color: isMe ? AppColors.primary.withValues(alpha: 0.4) : AppColors.cardBorder.withValues(alpha: 0.2)),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: const Radius.circular(12),
+                                  topRight: const Radius.circular(12),
+                                  bottomLeft: isMe ? const Radius.circular(12) : const Radius.circular(2),
+                                  bottomRight: isMe ? const Radius.circular(2) : const Radius.circular(12),
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                                children: [
+                                  if (!isMe)
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 4),
+                                      child: Text(msg['sender'], style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold)),
+                                    ),
+                                  Text(msg['text'], style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.4)),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -519,33 +605,112 @@ class _ClanScreenState extends State<ClanScreen> {
 
   Widget _label(String t) => Text(t, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13, fontWeight: FontWeight.w600));
 
-  Widget _inputField(TextEditingController ctrl, String hint, IconData icon, {bool isPassword = false}) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.inputBackground,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
-      ),
-      child: TextField(
-        controller: ctrl,
-        obscureText: isPassword,
-        style: const TextStyle(color: Colors.white, fontSize: 14),
-        decoration: InputDecoration(
-          hintText: hint,
-          hintStyle: const TextStyle(color: AppColors.textMuted, fontSize: 13),
-          prefixIcon: Icon(icon, color: AppColors.textMuted, size: 20),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-        ),
+  Widget _inputField(TextEditingController ctrl, String hint, IconData icon, {bool isPassword = false, String? Function(String?)? validator}) {
+    return TextFormField(
+      controller: ctrl,
+      obscureText: isPassword,
+      validator: validator,
+      style: const TextStyle(color: Colors.white, fontSize: 14),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: const TextStyle(color: AppColors.textMuted, fontSize: 13),
+        prefixIcon: Icon(icon, color: AppColors.textMuted, size: 20),
+        filled: true,
+        fillColor: AppColors.inputBackground,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.4))),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.4))),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: _clanPrimaryColor)),
+        errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.error)),
+        focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.error)),
+        errorStyle: const TextStyle(color: AppColors.error, fontSize: 11),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
       ),
     );
   }
 
+  Widget _buildClanMascot(int totalXp) {
+    Color auraColor;
+    if (totalXp >= 15000) {
+      auraColor = AppColors.gold; 
+    } else if (totalXp >= 8000) {
+      auraColor = Colors.grey[300]!; 
+    } else {
+      auraColor = const Color(0xFFCD7F32); 
+    }
+
+    return Container(
+      width: 56,
+      height: 56,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: AppColors.card,
+        boxShadow: [
+          BoxShadow(color: auraColor.withValues(alpha: 0.3), blurRadius: 15, spreadRadius: 2),
+        ],
+        border: Border.all(color: auraColor, width: 2),
+      ),
+      child: Center(child: Icon(_clanIcon, color: auraColor, size: 28)),
+    );
+  }
+
+  Widget _buildClanQuests() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('MISSÕES DA SEMANA', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
+        const SizedBox(height: 10),
+        ..._mockQuests.map((q) => Container(
+          margin: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: AppColors.card,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: q.isCompleted ? AppColors.gold.withValues(alpha: 0.5) : AppColors.cardBorder.withValues(alpha: 0.3)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(q.title, style: TextStyle(color: q.isCompleted ? AppColors.gold : Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+                  Text(q.rewardDescription, style: const TextStyle(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.w800)),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: TweenAnimationBuilder<double>(
+                        tween: Tween<double>(begin: 0.0, end: q.progressPercentage),
+                        duration: const Duration(milliseconds: 1200),
+                        curve: Curves.easeOutCubic,
+                        builder: (context, value, _) {
+                          return LinearProgressIndicator(
+                            value: value,
+                            backgroundColor: AppColors.inputBackground,
+                            valueColor: AlwaysStoppedAnimation<Color>(q.isCompleted ? AppColors.gold : AppColors.primary),
+                            minHeight: 6,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text('${q.currentProgress}/${q.targetProgress}', style: const TextStyle(color: AppColors.textMuted, fontSize: 11, fontFamily: 'monospace')),
+                ],
+              ),
+            ],
+          ),
+        )),
+      ],
+    );
+  }
+
   void _createClan() {
-    if (_nameCtrl.text.trim().isEmpty || _passwordCtrl.text.length < 4) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Preencha o nome e a senha (mín. 4 caracteres)!'), backgroundColor: AppColors.error),
-      );
+    if (!_formKeyCreate.currentState!.validate()) {
       return;
     }
     setState(() {
@@ -558,10 +723,7 @@ class _ClanScreenState extends State<ClanScreen> {
   }
 
   void _joinClan() {
-    if (_joinPasswordCtrl.text.isEmpty && _joinCodeCtrl.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Informe a senha ou código de convite!'), backgroundColor: AppColors.error),
-      );
+    if (!_formKeyJoin.currentState!.validate()) {
       return;
     }
     setState(() {
@@ -575,38 +737,91 @@ class _ClanScreenState extends State<ClanScreen> {
 
   void _showEditClanDialog() {
     final editCtrl = TextEditingController(text: _clanName);
+    Color tempColor = _clanPrimaryColor;
+    IconData tempIcon = _clanIcon;
+
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppColors.card,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide(color: AppColors.primary)),
-        title: const Text('Editar Clã', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: editCtrl,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                hintText: 'Novo nome do clã',
-                hintStyle: TextStyle(color: AppColors.textMuted),
-                enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.primary)),
-                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.primary)),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setDialogState) {
+          return AlertDialog(
+            backgroundColor: AppColors.card,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide(color: AppColors.primary)),
+            title: const Text('Editar Clã', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextField(
+                    controller: editCtrl,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
+                      hintText: 'Novo nome do clã',
+                      hintStyle: TextStyle(color: AppColors.textMuted),
+                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.primary)),
+                      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.primary)),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  const Text('Cor Principal', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      AppColors.primary,
+                      AppColors.gold,
+                      Colors.redAccent,
+                      Colors.blueAccent,
+                      Colors.greenAccent,
+                    ].map((c) => GestureDetector(
+                      onTap: () => setDialogState(() => tempColor = c),
+                      child: Container(
+                        width: 30, height: 30,
+                        decoration: BoxDecoration(shape: BoxShape.circle, color: c, border: Border.all(color: Colors.white, width: tempColor == c ? 3 : 0)),
+                      ),
+                    )).toList(),
+                  ),
+                  const SizedBox(height: 24),
+                  const Text('Ícone do Escudo', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icons.shield,
+                      Icons.security,
+                      Icons.bolt,
+                      Icons.local_fire_department,
+                      Icons.pets,
+                    ].map((i) => GestureDetector(
+                      onTap: () => setDialogState(() => tempIcon = i),
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(color: tempIcon == i ? tempColor.withValues(alpha: 0.2) : Colors.transparent, borderRadius: BorderRadius.circular(8)),
+                        child: Icon(i, color: tempIcon == i ? tempColor : AppColors.textMuted, size: 28),
+                      ),
+                    )).toList(),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar', style: TextStyle(color: AppColors.textMuted))),
-          ElevatedButton(
-            onPressed: () {
-              setState(() => _clanName = editCtrl.text.trim().isEmpty ? _clanName : editCtrl.text.trim());
-              Navigator.pop(ctx);
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            child: const Text('SALVAR', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
-          ),
-        ],
+            actions: [
+              TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar', style: TextStyle(color: AppColors.textMuted))),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _clanName = editCtrl.text.trim().isEmpty ? _clanName : editCtrl.text.trim();
+                    _clanPrimaryColor = tempColor;
+                    _clanIcon = tempIcon;
+                  });
+                  Navigator.pop(ctx);
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                child: const Text('SALVAR', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+              ),
+            ],
+          );
+        }
       ),
     );
   }

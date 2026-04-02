@@ -1,25 +1,38 @@
 import 'package:go_router/go_router.dart';
 import 'dart:math' as math;
-import 'dart:ui'; // Adicionado para o efeito de vidro fosco (Glassmorphism)
+import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/quiz_screen.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/models/curriculum_models.dart';
+import 'package:spark_app/models/quiz_models.dart';
+import 'package:spark_app/data/lessons_registry.dart';
+import 'package:spark_app/providers/dev_mode_provider.dart';
 
 
-class LearningPathScreen extends StatefulWidget {
+class LearningPathScreen extends ConsumerStatefulWidget {
   final String? moduleTitle;
-  final List<MicroLesson>? lessons;
+  final String? moduleId;           // <-- ID para buscar lições reais
+  final List<MicroLesson>? lessons; // <-- fallback (apenas nomes/tipos)
 
-  const LearningPathScreen({super.key, this.moduleTitle, this.lessons});
+  const LearningPathScreen({
+    super.key,
+    this.moduleTitle,
+    this.moduleId,
+    this.lessons,
+  });
+
   @override
-  State<LearningPathScreen> createState() => _LearningPathScreenState();
+  ConsumerState<LearningPathScreen> createState() =>
+      _LearningPathScreenState();
 }
 
-class _LearningPathScreenState extends State<LearningPathScreen>
+class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   final EnergyController _energyCtrl = EnergyController();
@@ -32,6 +45,9 @@ class _LearningPathScreenState extends State<LearningPathScreen>
   // 22 nós: 1 introdução + 10 lições + 1 avaliação + 10 lições + 1 avaliação
   final List<Map<String, dynamic>> _nodes = [];
 
+  // Lições reais com questões (do registry)
+  List<Lesson> _realLessons = [];
+
   @override
   void initState() {
     super.initState();
@@ -41,10 +57,22 @@ class _LearningPathScreenState extends State<LearningPathScreen>
     )..repeat();
     _energyCtrl.addListener(_onEnergyChanged);
 
-    // Usa as lições do módulo se fornecidas, ou gera padrão
-    final moduleLessons = widget.lessons;
-    if (moduleLessons != null && moduleLessons.isNotEmpty) {
-      for (final lesson in moduleLessons) {
+    // Busca lições reais do registry (tem questões)
+    if (widget.moduleId != null) {
+      _realLessons = getLessonsForModule(widget.moduleId!);
+    }
+
+    // Monta nós da trilha
+    // ⚠️ PRIORIDADE: se existem lições reais com questões, usa-as para os nós
+    // Garante que _nodes[i] === _realLessons[i] (sem desencontro de índice)
+    if (_realLessons.isNotEmpty) {
+      for (final lesson in _realLessons) {
+        final type = lesson.type == LessonType.evaluation ? 'eval' : 'lesson';
+        _nodes.add({'type': type, 'title': lesson.title, 'subtitle': lesson.subtitle});
+      }
+    } else if (widget.lessons != null && widget.lessons!.isNotEmpty) {
+      // Fallback: sem conteúdo real, usa MicroLessons do currículo (sem questões)
+      for (final lesson in widget.lessons!) {
         _nodes.add({'type': lesson.type, 'title': lesson.title, 'subtitle': lesson.subtitle});
       }
     } else {
@@ -71,15 +99,21 @@ class _LearningPathScreenState extends State<LearningPathScreen>
     super.dispose();
   }
 
-  bool _isNodeUnlocked(int index) => index <= _completedLessons;
+  /// Retorna true se o nó está desbloqueado.
+  /// Quando o Modo Dev está ativo (apenas em kDebugMode), tudo é desbloqueado.
+  bool _isNodeUnlocked(int index) {
+    if (kDebugMode && ref.read(devModeProvider)) return true;
+    return index <= _completedLessons;
+  }
 
-  bool get _canAccessEvaluation1 => _completedLessons >= 11;
-  bool get _canAccessEvaluation2 => _completedLessons >= 22;
-
-  double get _progressValue => (_completedLessons > 22 ? 22 : _completedLessons) / 22;
+  double get _progressValue {
+    if (_nodes.isEmpty) return 0.0;
+    return (_completedLessons > _nodes.length ? _nodes.length : _completedLessons) / _nodes.length;
+  }
 
   void _handleNodeTap(int index) async {
-    if (!_isNodeUnlocked(index)) {
+    final isTestMode = kDebugMode && ref.read(devModeProvider);
+    if (!_isNodeUnlocked(index) && !isTestMode) {
       _glitchKey.currentState?.triggerGlitch();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -92,31 +126,34 @@ class _LearningPathScreenState extends State<LearningPathScreen>
 
     final node = _nodes[index];
 
+    // Obtém a lição real (com questões) se disponível
+    final Lesson? realLesson = (index < _realLessons.length) ? _realLessons[index] : null;
+
     // Lógica da Avaliação
     if (node['type'] == 'eval') {
-      if ((index == 11 && _canAccessEvaluation1) || (index == 22 && _canAccessEvaluation2)) {
-        final passed = await Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const QuizScreen()),
-        );
-        if (passed == true && index == _completedLessons) {
-          setState(() { _completedLessons++; });
-        }
-      } else {
-        _glitchKey.currentState?.triggerGlitch();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Complete 100% das lições anteriores para a avaliação!'),
-            backgroundColor: AppColors.error,
+      final passed = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => QuizScreen(
+            lesson: realLesson,
+            isEvaluation: true,
           ),
-        );
+        ),
+      );
+      if (passed == true && index == _completedLessons) {
+        setState(() { _completedLessons++; });
       }
     }
     // Lição normal (Quiz)
     else {
       final passed = await Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => const QuizScreen()),
+        MaterialPageRoute(
+          builder: (_) => QuizScreen(
+            lesson: realLesson,
+            isEvaluation: false,
+          ),
+        ),
       );
       if (passed == true && index == _completedLessons) {
         setState(() { _completedLessons++; });
@@ -222,11 +259,18 @@ class _LearningPathScreenState extends State<LearningPathScreen>
                             const SizedBox(height: 10),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(4),
-                              child: LinearProgressIndicator(
-                                value: _progressValue,
-                                backgroundColor: AppColors.inputBackground.withValues(alpha: 0.5),
-                                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
-                                minHeight: 5,
+                              child: TweenAnimationBuilder<double>(
+                                tween: Tween<double>(begin: 0.0, end: _progressValue),
+                                duration: const Duration(milliseconds: 1200),
+                                curve: Curves.easeOutCubic,
+                                builder: (context, value, _) {
+                                  return LinearProgressIndicator(
+                                    value: value,
+                                    backgroundColor: AppColors.inputBackground.withValues(alpha: 0.5),
+                                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                                    minHeight: 5,
+                                  );
+                                },
                               ),
                             ),
                           ],
@@ -319,14 +363,12 @@ class _LearningPathScreenState extends State<LearningPathScreen>
                                         isEval
                                             ? _buildEvalNode(
                                                 label: node['title'],
-                                                subtitle: node['subtitle'],
                                                 isUnlocked: isUnlocked,
                                                 isCompleted: isCompleted,
                                                 onTap: () => _handleNodeTap(index),
                                               )
                                             : _buildLessonNode(
                                                 label: node['title'],
-                                                subtitle: node['subtitle'],
                                                 isCompleted: isCompleted,
                                                 isCurrent: isCurrent,
                                                 isUnlocked: isUnlocked,
@@ -419,7 +461,6 @@ class _LearningPathScreenState extends State<LearningPathScreen>
 
   Widget _buildLessonNode({
     required String label,
-    required String subtitle,
     required bool isCompleted,
     required bool isCurrent,
     required bool isUnlocked,
@@ -505,13 +546,6 @@ class _LearningPathScreenState extends State<LearningPathScreen>
               letterSpacing: 0.5,
             ),
           ),
-          Text(
-            subtitle,
-            style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.4),
-              fontSize: 11,
-            ),
-          ),
         ],
       ),
     );
@@ -519,7 +553,6 @@ class _LearningPathScreenState extends State<LearningPathScreen>
 
   Widget _buildEvalNode({
     required String label,
-    required String subtitle,
     required bool isUnlocked,
     required bool isCompleted,
     required VoidCallback onTap,
@@ -578,19 +611,6 @@ class _LearningPathScreenState extends State<LearningPathScreen>
               fontSize: 14,
               fontWeight: FontWeight.w900,
               letterSpacing: 0.5,
-            ),
-          ),
-          Text(
-            isCompleted
-                ? 'Concluída ✓'
-                : isUnlocked
-                    ? 'Disponível!'
-                    : 'Complete 100% antes!',
-            style: TextStyle(
-              color: (isCompleted || isUnlocked)
-                  ? color.withValues(alpha: 0.7)
-                  : Colors.white.withValues(alpha: 0.3),
-              fontSize: 11,
             ),
           ),
         ],

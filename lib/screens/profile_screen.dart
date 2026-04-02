@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/clan_screen.dart';
@@ -7,12 +9,83 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/screens/pocket_card_screen.dart';
+import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({super.key});
+/// Tela de Perfil do usuário.
+///
+/// 🔒 Easter egg: 7 toques rápidos no avatar ativam/desativam o Modo Dev.
+/// Funciona apenas em kDebugMode.
+class ProfileScreen extends ConsumerStatefulWidget {
+  const ProfileScreen({super.key});
 
+  @override
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   final EnergyController _energyCtrl = EnergyController();
+
+  // ── Trigger oculto: 7 toques no avatar ──────────────────────
+  int _avatarTapCount = 0;
+  static const int _triggerTaps = 7;
+
+  void _onAvatarTap() {
+    if (!kDebugMode) return;
+
+    _avatarTapCount++;
+
+    // Feedback tátil a cada toque
+    if (_avatarTapCount < _triggerTaps) {
+      final remaining = _triggerTaps - _avatarTapCount;
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            '🔧 Dev: $remaining toque(s) restantes...',
+            style: const TextStyle(color: Colors.white, fontSize: 13),
+          ),
+          duration: const Duration(milliseconds: 800),
+          backgroundColor: AppColors.card,
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.all(16),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      );
+    } else {
+      // Ativação!
+      _avatarTapCount = 0;
+      final isActive = ref.read(devModeProvider);
+      ref.read(devModeProvider.notifier).toggle();
+
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Icon(
+                isActive ? Icons.bug_report_outlined : Icons.bug_report,
+                color: isActive ? Colors.grey : Colors.amber,
+                size: 20,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                isActive
+                    ? '🔒 Modo Dev DESATIVADO'
+                    : '🔓 Modo Dev ATIVADO — Tudo desbloqueado!',
+                style: const TextStyle(color: Colors.white, fontSize: 13),
+              ),
+            ],
+          ),
+          duration: const Duration(seconds: 3),
+          backgroundColor: isActive ? AppColors.card : const Color(0xFF1A1200),
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.all(16),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,27 +130,31 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // ── Avatar + Nome ───────────────────────────────
+                  // 🔒 Easter egg: 7 toques aqui ativam o Modo Dev
                   Stack(
                     alignment: Alignment.center,
                     clipBehavior: Clip.none,
                     children: [
-                      Container(
-                        width: 110,
-                        height: 110,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.primary, width: 2.5),
-                          boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 20, spreadRadius: 3)],
-                        ),
+                      GestureDetector(
+                        onTap: _onAvatarTap,
                         child: Container(
-                          margin: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(color: AppColors.card, shape: BoxShape.circle),
-                          clipBehavior: Clip.antiAlias,
-                          child: CachedNetworkImage(
-                            imageUrl: 'https://i.pravatar.cc/150?img=11',
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: AppColors.primary)),
-                            errorWidget: (context, url, error) => const Icon(Icons.person, color: AppColors.primary, size: 52),
+                          width: 110,
+                          height: 110,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: AppColors.primary, width: 2.5),
+                            boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 20, spreadRadius: 3)],
+                          ),
+                          child: Container(
+                            margin: const EdgeInsets.all(4),
+                            decoration: const BoxDecoration(color: AppColors.card, shape: BoxShape.circle),
+                            clipBehavior: Clip.antiAlias,
+                            child: CachedNetworkImage(
+                              imageUrl: 'https://i.pravatar.cc/150?img=11',
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: AppColors.primary)),
+                              errorWidget: (context, url, error) => const Icon(Icons.person, color: AppColors.primary, size: 52),
+                            ),
                           ),
                         ),
                       ),
@@ -106,7 +183,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
 
-                  // 👇 Botão Adicionado 👇
+                  // 👇 Botão Credencial
                   MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
@@ -120,7 +197,7 @@ class ProfileScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                          colors: [Color(0xFF00C402), Color(0xFF1D5F31)], // Verde EXS
+                          colors: [Color(0xFF00C402), Color(0xFF1D5F31)],
                         ),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [

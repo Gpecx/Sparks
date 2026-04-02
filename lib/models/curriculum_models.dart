@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 //  MODELOS DO CURRÍCULO
 // ─────────────────────────────────────────────────────────────────
 
-/// Uma micro-lição dentro de um módulo.
 class MicroLesson {
   final String id;
   final String title;
@@ -19,7 +18,6 @@ class MicroLesson {
   });
 }
 
-/// Um módulo de aprendizado dentro de uma categoria.
 class LearningModule {
   final String id;
   final String title;
@@ -42,7 +40,7 @@ class LearningModule {
   });
 }
 
-/// Uma categoria temática que agrupa módulos.
+/// Categoria temática. [isLocked] bloqueia toda a categoria na tela inicial.
 class LearningCategory {
   final String id;
   final String title;
@@ -50,6 +48,7 @@ class LearningCategory {
   final IconData icon;
   final Color color;
   final Color gradientEnd;
+  final bool isLocked;
   final List<LearningModule> modules;
 
   const LearningCategory({
@@ -59,238 +58,265 @@ class LearningCategory {
     required this.icon,
     required this.color,
     required this.gradientEnd,
+    this.isLocked = false,
     required this.modules,
   });
 }
 
 // ─────────────────────────────────────────────────────────────────
-//  DADOS MOCK DO CURRÍCULO
+//  HELPERS
 // ─────────────────────────────────────────────────────────────────
 
-List<MicroLesson> _generateLessons(int count, String prefix) {
+List<MicroLesson> _buildLessons(String prefix, int count, int evalCount) {
   final list = <MicroLesson>[];
-  list.add(MicroLesson(id: '${prefix}_intro', title: 'Introdução', subtitle: 'Introdução ao Módulo'));
   for (int i = 1; i <= count; i++) {
-    list.add(MicroLesson(id: '${prefix}_l$i', title: 'Lição $i', subtitle: 'Módulo Base'));
+    list.add(MicroLesson(
+      id: '${prefix}_l$i',
+      title: 'Lição $i',
+      subtitle: 'Conteúdo didático',
+    ));
   }
-  list.add(MicroLesson(id: '${prefix}_eval', title: 'AVALIAÇÃO', subtitle: 'Certificado', type: 'eval'));
+  for (int e = 1; e <= evalCount; e++) {
+    list.add(MicroLesson(
+      id: '${prefix}_eval$e',
+      title: 'Avaliação $e',
+      subtitle: 'Teste de conhecimentos',
+      type: 'eval',
+    ));
+  }
   return list;
 }
 
-final List<LearningCategory> mockCategories = [
-  // ── 1. NORMAS ──────────────────────────────────────────
-  LearningCategory(
-    id: 'normas',
-    title: 'Normas Regulamentadoras',
-    subtitle: 'NR-10, NR-12, NR-33, NR-35 e mais',
-    icon: Icons.gavel,
-    color: const Color(0xFF00C402),
-    gradientEnd: const Color(0xFF1D5F31),
-    modules: [
-      LearningModule(
-        id: 'nr10',
-        title: 'NR-10 · Eletricidade',
-        subtitle: 'Segurança em instalações e serviços em eletricidade',
-        icon: Icons.flash_on,
-        color: const Color(0xFF00C402),
-        progress: 0.75,
-        lessons: _generateLessons(10, 'nr10'),
-      ),
-      LearningModule(
-        id: 'nr12',
-        title: 'NR-12 · Máquinas',
-        subtitle: 'Segurança no trabalho com máquinas e equipamentos',
-        icon: Icons.precision_manufacturing,
-        color: const Color(0xFF1D5F31),
-        isLocked: true,
-        lessons: _generateLessons(8, 'nr12'),
-      ),
-      LearningModule(
-        id: 'nr33',
-        title: 'NR-33 · Espaço Confinado',
-        subtitle: 'Trabalhos em espaços confinados',
-        icon: Icons.door_back_door,
-        color: const Color(0xFFB0BEC5),
-        isLocked: true,
-        lessons: _generateLessons(6, 'nr33'),
-      ),
-      LearningModule(
-        id: 'nr35',
-        title: 'NR-35 · Trabalho em Altura',
-        subtitle: 'Segurança em trabalhos em altura',
-        icon: Icons.height,
-        color: const Color(0xFFFF9800),
-        isLocked: true,
-        lessons: _generateLessons(8, 'nr35'),
-      ),
-    ],
-  ),
+// ─────────────────────────────────────────────────────────────────
+//  DADOS — 3 CATEGORIAS
+// ─────────────────────────────────────────────────────────────────
 
-  // ── 2. SELETIVIDADE ────────────────────────────────────
+final List<LearningCategory> mockCategories = [
+  // ── 1. CAPACITAÇÃO TÉCNICA ── DISPONÍVEL ──────────────────────
   LearningCategory(
-    id: 'seletividade',
-    title: 'Seletividade',
-    subtitle: 'Coordenação e proteção de circuitos',
-    icon: Icons.account_tree,
-    color: const Color(0xFF42A5F5),
-    gradientEnd: const Color(0xFF0D47A1),
+    id: 'capacitacao_tecnica',
+    title: 'Capacitação Técnica',
+    subtitle: '18 módulos · IEEE 1547, Proteções e Transdutores',
+    icon: Icons.bolt,
+    color: const Color(0xFFFFC107),
+    gradientEnd: const Color(0xFFFF6F00),
+    isLocked: false,
     modules: [
+      // ── BLOCO 1: Fundamentos e Base Técnica ──────────────────
       LearningModule(
-        id: 'sel_intro',
-        title: 'Fundamentos de Seletividade',
-        subtitle: 'Conceitos básicos de coordenação',
-        icon: Icons.school,
+        id: 'mod01_fundamentos',
+        title: 'Módulo 01 · Fundamentos Analíticos',
+        subtitle: 'Sistema Por Unidade (PU) e Componentes Simétricas',
+        icon: Icons.functions,
+        color: const Color(0xFFFFC107),
+        progress: 0.0,
+        isLocked: false,
+        lessons: _buildLessons('mod01', 20, 4),
+      ),
+      LearningModule(
+        id: 'mod02_filosofia',
+        title: 'Módulo 02 · Filosofia de Proteção',
+        subtitle: 'Zonas de proteção e critérios de seletividade',
+        icon: Icons.shield_outlined,
+        color: const Color(0xFFFF8F00),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod02', 12, 2),
+      ),
+      LearningModule(
+        id: 'mod03_linhas',
+        title: 'Módulo 03 · Proteção de Linhas (LT)',
+        subtitle: 'Proteção de distância, zonas Mho e Quadrilateral',
+        icon: Icons.timeline,
+        color: const Color(0xFFFF6F00),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod03', 16, 3),
+      ),
+
+      // ── BLOCO 2: Proteções Unitárias ─────────────────────────
+      LearningModule(
+        id: 'mod04',
+        title: 'Módulo 04 · Proteção Diferencial',
+        subtitle: 'Relés diferenciais e princípio de operação',
+        icon: Icons.compare_arrows,
         color: const Color(0xFF42A5F5),
         progress: 0.0,
-        lessons: _generateLessons(8, 'sel_intro'),
-      ),
-      LearningModule(
-        id: 'sel_curvas',
-        title: 'Curvas de Atuação',
-        subtitle: 'Análise de curvas tempo × corrente',
-        icon: Icons.show_chart,
-        color: const Color(0xFF1565C0),
         isLocked: true,
-        lessons: _generateLessons(6, 'sel_curvas'),
+        lessons: _buildLessons('mod04', 14, 3),
       ),
       LearningModule(
-        id: 'sel_disjuntores',
-        title: 'Seletividade entre Disjuntores',
-        subtitle: 'Coordenação MT e BT',
-        icon: Icons.toggle_on,
-        color: const Color(0xFF0D47A1),
-        isLocked: true,
-        lessons: _generateLessons(7, 'sel_disj'),
-      ),
-    ],
-  ),
-
-  // ── 3. SEGURANÇA BÁSICA ────────────────────────────────
-  LearningCategory(
-    id: 'seguranca',
-    title: 'Segurança Básica',
-    subtitle: 'EPIs, procedimentos e primeiros socorros',
-    icon: Icons.security,
-    color: const Color(0xFFFF9800),
-    gradientEnd: const Color(0xFFE65100),
-    modules: [
-      LearningModule(
-        id: 'seg_epis',
-        title: 'EPIs e EPCs',
-        subtitle: 'Equipamentos de proteção individual e coletiva',
-        icon: Icons.health_and_safety,
-        color: const Color(0xFFFF9800),
+        id: 'mod05',
+        title: 'Módulo 05 · Proteção de Distância',
+        subtitle: 'Zonas de proteção e características de atuação',
+        icon: Icons.social_distance,
+        color: const Color(0xFF1E88E5),
         progress: 0.0,
-        lessons: _generateLessons(8, 'seg_epis'),
+        isLocked: true,
+        lessons: _buildLessons('mod05', 16, 3),
       ),
       LearningModule(
-        id: 'seg_socorros',
-        title: 'Primeiros Socorros',
-        subtitle: 'Choque elétrico, queimaduras e RCP',
-        icon: Icons.local_hospital,
-        color: const Color(0xFFF44336),
+        id: 'mod06',
+        title: 'Módulo 06 · Sobrecorrente',
+        subtitle: 'Relés de sobrecorrente: tempo definido e inverso',
+        icon: Icons.flash_on,
+        color: const Color(0xFF1565C0),
+        progress: 0.0,
         isLocked: true,
-        lessons: _generateLessons(6, 'seg_soc'),
+        lessons: _buildLessons('mod06', 14, 2),
       ),
-      LearningModule(
-        id: 'seg_bloqueio',
-        title: 'Bloqueio e Etiquetagem',
-        subtitle: 'Procedimentos LOTO',
-        icon: Icons.lock_outline,
-        color: const Color(0xFFE65100),
-        isLocked: true,
-        lessons: _generateLessons(5, 'seg_loto'),
-      ),
-    ],
-  ),
 
-  // ── 4. BT — BAIXA TENSÃO ──────────────────────────────
-  LearningCategory(
-    id: 'bt',
-    title: 'BT · Baixa Tensão',
-    subtitle: 'Circuitos até 1000V CA / 1500V CC',
-    icon: Icons.electrical_services,
-    color: const Color(0xFF66BB6A),
-    gradientEnd: const Color(0xFF2E7D32),
-    modules: [
+      // ── BLOCO 3: Proteções de Barramento e Equipamentos ──────
       LearningModule(
-        id: 'bt_residencial',
-        title: 'Instalações Residenciais',
-        subtitle: 'NBR 5410, quadros e circuitos',
-        icon: Icons.home,
+        id: 'mod07',
+        title: 'Módulo 07 · Proteção de Barramento',
+        subtitle: 'Esquemas de proteção de barras e zonas mortas',
+        icon: Icons.account_tree,
         color: const Color(0xFF66BB6A),
         progress: 0.0,
-        lessons: _generateLessons(10, 'bt_res'),
-      ),
-      LearningModule(
-        id: 'bt_industrial',
-        title: 'Instalações Industriais BT',
-        subtitle: 'Painéis, CCMs e aterramento',
-        icon: Icons.factory,
-        color: const Color(0xFF2E7D32),
         isLocked: true,
-        lessons: _generateLessons(8, 'bt_ind'),
+        lessons: _buildLessons('mod07', 12, 2),
       ),
-    ],
-  ),
-
-  // ── 5. MT — MÉDIA TENSÃO ──────────────────────────────
-  LearningCategory(
-    id: 'mt',
-    title: 'MT · Média Tensão',
-    subtitle: 'Circuitos entre 1kV e 36,2kV',
-    icon: Icons.bolt,
-    color: const Color(0xFFAB47BC),
-    gradientEnd: const Color(0xFF6A1B9A),
-    modules: [
       LearningModule(
-        id: 'mt_subest',
-        title: 'Subestações de Média Tensão',
-        subtitle: 'Projeto, montagem e comissionamento',
-        icon: Icons.domain,
+        id: 'mod08',
+        title: 'Módulo 08 · Proteção de Transformadores',
+        subtitle: 'Diferenciais percentuais e proteções de backup',
+        icon: Icons.electrical_services,
+        color: const Color(0xFF43A047),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod08', 14, 3),
+      ),
+      LearningModule(
+        id: 'mod09',
+        title: 'Módulo 09 · Proteção de Geradores',
+        subtitle: 'Funções 87G, 40, 46, 51V e esquemas de proteção',
+        icon: Icons.energy_savings_leaf,
+        color: const Color(0xFF2E7D32),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod09', 16, 3),
+      ),
+
+      // ── BLOCO 4: Sistemas de DER e Redes Inteligentes ────────
+      LearningModule(
+        id: 'mod10',
+        title: 'Módulo 10 · DER e Fontes Renováveis',
+        subtitle: 'Integração de geração distribuída ao sistema elétrico',
+        icon: Icons.solar_power,
         color: const Color(0xFFAB47BC),
         progress: 0.0,
-        lessons: _generateLessons(10, 'mt_sub'),
+        isLocked: true,
+        lessons: _buildLessons('mod10', 14, 2),
       ),
       LearningModule(
-        id: 'mt_protecao',
-        title: 'Proteção em MT',
-        subtitle: 'Relés, TCs, TPs e esquemas',
-        icon: Icons.shield,
-        color: const Color(0xFF6A1B9A),
+        id: 'mod11',
+        title: 'Módulo 11 · Ilhamento e Anti-Ilhamento',
+        subtitle: 'Detecção de ilhamento e requisitos IEEE 1547',
+        icon: Icons.grid_off,
+        color: const Color(0xFF8E24AA),
+        progress: 0.0,
         isLocked: true,
-        lessons: _generateLessons(8, 'mt_prot'),
+        lessons: _buildLessons('mod11', 12, 2),
+      ),
+      LearningModule(
+        id: 'mod12',
+        title: 'Módulo 12 · Qualidade de Energia',
+        subtitle: 'Harmônicos, flicker e desequilíbrio de tensão',
+        icon: Icons.show_chart,
+        color: const Color(0xFF6A1B9A),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod12', 14, 3),
+      ),
+
+      // ── BLOCO 5: Comunicação e Automação ─────────────────────
+      LearningModule(
+        id: 'mod13',
+        title: 'Módulo 13 · Protocolo IEC 61850',
+        subtitle: 'Comunicação em subestações digitais',
+        icon: Icons.router,
+        color: const Color(0xFFEF5350),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod13', 14, 2),
+      ),
+      LearningModule(
+        id: 'mod14',
+        title: 'Módulo 14 · Automação de Subestações',
+        subtitle: 'SCADA, IED e arquitetura de automação',
+        icon: Icons.settings_remote,
+        color: const Color(0xFFE53935),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod14', 12, 2),
+      ),
+      LearningModule(
+        id: 'mod15',
+        title: 'Módulo 15 · Religadores e Seccionadores',
+        subtitle: 'Automatização da rede de distribuição',
+        icon: Icons.power,
+        color: const Color(0xFFB71C1C),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod15', 12, 2),
+      ),
+
+      // ── BLOCO 6: Integração e Estudos Avançados ──────────────
+      LearningModule(
+        id: 'mod16',
+        title: 'Módulo 16 · Estudos de Curto-Circuito',
+        subtitle: 'Cálculo de correntes de falta e nível de curto',
+        icon: Icons.warning_amber_rounded,
+        color: const Color(0xFFFF7043),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod16', 14, 3),
+      ),
+      LearningModule(
+        id: 'mod17',
+        title: 'Módulo 17 · Coordenação e Seletividade',
+        subtitle: 'Curvas TCC e ajuste coordenado de proteções',
+        icon: Icons.timeline,
+        color: const Color(0xFFF4511E),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod17', 16, 3),
+      ),
+      LearningModule(
+        id: 'mod18',
+        title: 'Módulo 18 · Projeto Final Integrado',
+        subtitle: 'Estudo de caso completo de proteção de sistema',
+        icon: Icons.workspace_premium,
+        color: const Color(0xFFBF360C),
+        progress: 0.0,
+        isLocked: true,
+        lessons: _buildLessons('mod18', 10, 5),
       ),
     ],
   ),
 
-  // ── 6. AT — ALTA TENSÃO ───────────────────────────────
+  // ── 2. EQUIPAMENTOS SPCS ── BLOQUEADO ─────────────────────────
   LearningCategory(
-    id: 'at',
-    title: 'AT · Alta Tensão',
-    subtitle: 'Circuitos acima de 36,2kV',
-    icon: Icons.flash_on,
-    color: const Color(0xFFEF5350),
-    gradientEnd: const Color(0xFFB71C1C),
-    modules: [
-      LearningModule(
-        id: 'at_linhas',
-        title: 'Linhas de Transmissão',
-        subtitle: 'Projeto, manutenção e segurança',
-        icon: Icons.cell_tower,
-        color: const Color(0xFFEF5350),
-        progress: 0.0,
-        lessons: _generateLessons(10, 'at_lin'),
-      ),
-      LearningModule(
-        id: 'at_manobras',
-        title: 'Manobras em AT',
-        subtitle: 'Procedimentos e sequências de manobra',
-        icon: Icons.warning_amber_rounded,
-        color: const Color(0xFFB71C1C),
-        isLocked: true,
-        lessons: _generateLessons(8, 'at_man'),
-      ),
-    ],
+    id: 'equipamentos_spcs',
+    title: 'Equipamentos SPCS',
+    subtitle: 'Em breve · Relés, IEDs e painéis SPCS',
+    icon: Icons.memory,
+    color: const Color(0xFF78909C),
+    gradientEnd: const Color(0xFF37474F),
+    isLocked: true,
+    modules: [],
+  ),
+
+  // ── 3. NORMAS TÉCNICAS ── BLOQUEADO ───────────────────────────
+  LearningCategory(
+    id: 'normas_tecnicas',
+    title: 'Normas Técnicas',
+    subtitle: 'Em breve · ABNT, IEEE, IEC e NR',
+    icon: Icons.gavel,
+    color: const Color(0xFF78909C),
+    gradientEnd: const Color(0xFF37474F),
+    isLocked: true,
+    modules: [],
   ),
 ];

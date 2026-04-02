@@ -39,15 +39,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 child: widget.items.isEmpty
                     ? Center(
                         child: Column(mainAxisSize: MainAxisSize.min, children: [
-                          Container(
-                            width: 80, height: 80,
-                            decoration: BoxDecoration(color: AppColors.card, shape: BoxShape.circle, border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3))),
-                            child: const Icon(Icons.shopping_cart_outlined, color: AppColors.textMuted, size: 38),
-                          ),
+                          Icon(Icons.shopping_cart_outlined, color: AppColors.primary.withValues(alpha: 0.2), size: 100),
                           const SizedBox(height: 16),
-                          const Text('Carrinho vazio', style: TextStyle(color: AppColors.textSecondary, fontSize: 17, fontWeight: FontWeight.w600)),
-                          const SizedBox(height: 6),
-                          Text('Adicione itens na loja', style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 13)),
+                          const Text('Seu carrinho está vazio', style: TextStyle(color: AppColors.textSecondary, fontSize: 18, fontWeight: FontWeight.w700)),
+                          const SizedBox(height: 8),
+                          Text('Explore a loja e equipe-se\npara os próximos desafios!', textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 14)),
+                          const SizedBox(height: 24),
+                          ElevatedButton.icon(
+                            onPressed: () => Navigator.pop(context),
+                            icon: const Icon(Icons.storefront, size: 18, color: AppColors.primary),
+                            label: const Text('VOLTAR À LOJA', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                            style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary.withValues(alpha: 0.15), elevation: 0),
+                          ),
                         ]),
                       )
                     : ListView.separated(
