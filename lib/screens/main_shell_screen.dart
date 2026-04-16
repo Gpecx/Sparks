@@ -1,6 +1,11 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:spark_app/services/covenant_service.dart';
+import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/dashboard_screen.dart';
 import 'package:spark_app/screens/categories_screen.dart';
@@ -18,6 +23,27 @@ class MainShellScreen extends ConsumerStatefulWidget {
 
 class MainShellScreenState extends ConsumerState<MainShellScreen> {
   int _currentIndex = 0;
+  StreamSubscription? _userSub;
+
+  @override
+  void initState() {
+    super.initState();
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null) {
+      CovenantService().initialize(uid);
+      _userSub = UserService().watchUser(uid).listen((user) {
+        if (mounted) {
+          EnergyController().loadUser(user);
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _userSub?.cancel();
+    super.dispose();
+  }
 
   final List<Widget> _screens = [
     DashboardScreen(),

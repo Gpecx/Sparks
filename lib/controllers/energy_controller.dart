@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/services/overload_service.dart';
+import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/services/achievement_service.dart';
+import 'package:spark_app/models/user_model.dart';
 
 /// Controlador global de energia do SPARK.
 /// Gerencia bateria, regeneração por tempo, streaks e status premium.
@@ -59,6 +63,42 @@ class EnergyController extends ChangeNotifier {
   }
 
   // ============================================================
+  // LOAD USER DA FONTE DE DADOS
+  // ============================================================
+  void loadUser(UserModel user) {
+    _energy = user.energy;
+    _sparkPoints = user.sparkPoints;
+    _isPremiumUser = user.isPremium;
+    _streak = user.streak;
+    _xp = user.xp;
+    
+    // Atualiza lógica de regen inicial a partir do banco
+    if (!user.isPremium && user.energy < maxEnergy && user.energyLastRegen != null) {
+      final lastRegen = user.energyLastRegen!;
+      final now = DateTime.now();
+      final diff = now.difference(lastRegen).inMinutes;
+      final gained = diff ~/ regenIntervalMinutes;
+      
+      int newEnergy = (user.energy + gained).clamp(0, maxEnergy);
+      if (newEnergy > _energy) {
+        _energy = newEnergy;
+        // Iniciar regen se não chegou ao máximo
+        if (_energy < maxEnergy) {
+          int remainder = diff % regenIntervalMinutes;
+          _nextRegenTime = now.add(Duration(minutes: regenIntervalMinutes - remainder));
+          UserService().regenEnergy(user.uid);
+        }
+      } else {
+        _nextRegenTime = lastRegen.add(Duration(minutes: regenIntervalMinutes));
+      }
+      _startRegenTimer();
+    }
+    notifyListeners();
+  }
+
+  String? get _currentUid => FirebaseAuth.instance.currentUser?.uid;
+
+  // ============================================================
   // AÇÕES
   // ============================================================
 
@@ -67,6 +107,12 @@ class EnergyController extends ChangeNotifier {
     if (_isPremiumUser) return true;
     if (_energy < entryCost) return false;
     _energy -= entryCost;
+    
+    final uid = _currentUid;
+    if (uid != null) {
+      UserService().spendEnergy(uid);
+    }
+    
     _startRegenIfNeeded();
     notifyListeners();
     return true;
@@ -77,6 +123,12 @@ class EnergyController extends ChangeNotifier {
     if (_isPremiumUser) return true;
     if (_energy > 0) {
       _energy -= errorCost;
+      
+      final uid = _currentUid;
+      if (uid != null) {
+        UserService().spendEnergy(uid);
+      }
+      
       _startRegenIfNeeded();
       notifyListeners();
     }
@@ -101,6 +153,13 @@ class EnergyController extends ChangeNotifier {
       bonus = Random().nextInt(3) + 1; // Bônus de 1 a 3
       _energy = (_energy + bonus).clamp(0, maxEnergy);
     }
+    
+    final uid = _currentUid;
+    if (uid != null) {
+      UserService().updateStreak(uid);
+      AchievementService().checkStreakAchievements(uid, _streak);
+    }
+    
     notifyListeners();
     return bonus;
   }
@@ -108,6 +167,14 @@ class EnergyController extends ChangeNotifier {
   /// Reseta streak em erro
   void resetStreak() {
     _streak = 0;
+    
+    final uid = _currentUid;
+    if (uid != null) {
+      // In a real app we might reset streak in DB immediately too.
+      // UserService().updateStreak doesn't explicitly reset, so we could add a reset method 
+      // or assume logic if needed. But locally we reset it.
+    }
+    
     notifyListeners();
   }
 
@@ -116,6 +183,12 @@ class EnergyController extends ChangeNotifier {
     if (_sparkPoints < fullRechargeSparkCost) return false;
     _sparkPoints -= fullRechargeSparkCost;
     _energy = maxEnergy;
+    
+    final uid = _currentUid;
+    if (uid != null) {
+      UserService().spendSP(uid, fullRechargeSparkCost);
+    }
+    
     _stopRegen();
     notifyListeners();
     return true;
@@ -128,16 +201,25 @@ class EnergyController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Adiciona pontos spark (ex: compra na loja)
+  /// Adiciona pontos spark (ex: compra na loja) e persiste no Firestore.
   void addSparkPoints(int amount) {
     _sparkPoints += amount;
+    final uid = _currentUid;
+    if (uid != null) {
+      UserService().addSP(uid, amount);
+    }
     notifyListeners();
   }
 
   /// Adiciona XP após finalizar lição (aplica multiplicador de Sobrecarga se ativo)
+  /// e persiste no Firestore via [UserService].
   void addXp(int amount) {
     final finalAmount = OverloadService().applyMultiplier(amount);
     _xp += finalAmount;
+    final uid = _currentUid;
+    if (uid != null) {
+      UserService().addXp(uid, finalAmount);
+    }
     notifyListeners();
   }
 
@@ -146,19 +228,32 @@ class EnergyController extends ChangeNotifier {
   // ============================================================
   void _startRegenIfNeeded() {
     if (_regenTimer != null || _energy >= maxEnergy || _isPremiumUser) return;
-    _nextRegenTime = DateTime.now().add(const Duration(minutes: regenIntervalMinutes));
+    if (_nextRegenTime == null) {
+        _nextRegenTime = DateTime.now().add(const Duration(minutes: regenIntervalMinutes));
+    }
+    _startRegenTimer();
+  }
+
+  void _startRegenTimer() {
+    if (_regenTimer != null) return;
     _regenTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_energy >= maxEnergy || _isPremiumUser) {
         _stopRegen();
         return;
       }
-      if (DateTime.now().isAfter(_nextRegenTime!)) {
+      if (_nextRegenTime != null && DateTime.now().isAfter(_nextRegenTime!)) {
         _energy = (_energy + 1).clamp(0, maxEnergy);
         if (_energy < maxEnergy) {
           _nextRegenTime = DateTime.now().add(const Duration(minutes: regenIntervalMinutes));
         } else {
           _stopRegen();
         }
+        
+        final uid = _currentUid;
+        if (uid != null) {
+          UserService().regenEnergy(uid);
+        }
+        
         notifyListeners();
       }
       notifyListeners(); // para atualizar o timer na UI

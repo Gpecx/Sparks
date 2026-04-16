@@ -4,17 +4,26 @@ import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/spark_emitter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:spark_app/services/progress_service.dart';
+import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/widgets/spark_emitter.dart';
 import 'package:spark_app/widgets/streak_lightning_emitter.dart';
 import 'package:spark_app/models/quiz_models.dart';
 
 class QuizScreen extends StatefulWidget {
   final bool isEvaluation;
   final Lesson? lesson; // <-- lição real com questões técnicas
+  final String? categoryId;
+  final String? moduleId;
 
   const QuizScreen({
     super.key,
     this.isEvaluation = false,
     this.lesson,
+    this.categoryId,
+    this.moduleId,
   });
 
   @override
@@ -333,7 +342,23 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
 
       if (passed) {
         int xpEarned = (score * 100).toInt() + (_totalCorrect * 10);
-        _energyCtrl.addXp(xpEarned);
+        int spEarned = (xpEarned * 0.1).toInt();
+        
+        final uid = FirebaseAuth.instance.currentUser?.uid;
+        if (uid != null && widget.moduleId != null) {
+          ProgressService().markLessonComplete(
+            uid,
+            widget.categoryId ?? 'default_cat',
+            widget.moduleId!,
+            widget.lesson?.id ?? 'lesson_$_currentQuestion', // Fallback se null
+            xpEarned,
+            spEarned,
+          );
+        } else {
+          // Fallback offline / sem módulo mapeado
+          _energyCtrl.addXp(xpEarned);
+          _energyCtrl.addSparkPoints(spEarned);
+        }
         
         // Assessment Complete Epic Animation
         HapticFeedback.vibrate();
@@ -354,8 +379,22 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     });
   }
 
-  // === MODAIS (MANTIDOS EXATAMENTE IGUAIS) ===
+  // === MODAIS ===
   void _showQuizResultModal(bool passed, double score, int xpEarned) {
+    if (passed) {
+      final uid = FirebaseAuth.instance.currentUser?.uid;
+      if (uid != null) {
+        UserService().saveQuizResult(uid, {
+          'moduleId': widget.moduleId ?? 'unknown_module',
+          'score': score,
+          'xpEarned': xpEarned,
+          'correctAnswers': _totalCorrect,
+          'totalQuestions': _questions.length,
+          'timestamp': FieldValue.serverTimestamp(),
+        });
+      }
+    }
+    
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

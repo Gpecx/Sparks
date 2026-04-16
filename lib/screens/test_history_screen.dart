@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 
-class TestHistoryScreen extends StatelessWidget {
+class TestHistoryScreen extends StatefulWidget {
   const TestHistoryScreen({super.key});
+
+  @override
+  State<TestHistoryScreen> createState() => _TestHistoryScreenState();
+}
+
+class _TestHistoryScreenState extends State<TestHistoryScreen> {
+  String? _uid;
+
+  @override
+  void initState() {
+    super.initState();
+    _uid = FirebaseAuth.instance.currentUser?.uid;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +37,35 @@ class TestHistoryScreen extends StatelessWidget {
           body: Column(
             children: [
               const SizedBox(height: 8),
-              // Sumário rápido
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
-                    _summaryChip('12', 'Testes', Icons.quiz_outlined),
-                    const SizedBox(width: 10),
-                    _summaryChip('85%', 'Média', Icons.gps_fixed),
-                    const SizedBox(width: 10),
-                    _summaryChip('7', 'Normas', Icons.menu_book_outlined),
-                  ],
+              if (_uid != null)
+                StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance.collection('users').doc(_uid).collection('quiz_history').snapshots(),
+                  builder: (context, snapshot) {
+                    int total = 0;
+                    double media = 0.0;
+                    if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
+                      total = snapshot.data!.docs.length;
+                      double s = 0.0;
+                      for (var doc in snapshot.data!.docs) {
+                        s += (doc.data() as Map<String, dynamic>)['score'] as double? ?? 0.0;
+                      }
+                      media = (s / total) * 100;
+                    }
+                    
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        children: [
+                          _summaryChip('$total', 'Testes', Icons.quiz_outlined),
+                          const SizedBox(width: 10),
+                          _summaryChip('${media.toStringAsFixed(0)}%', 'Média', Icons.gps_fixed),
+                          const SizedBox(width: 10),
+                          _summaryChip('-', 'Normas', Icons.menu_book_outlined),
+                        ],
+                      ),
+                    );
+                  }
                 ),
-              ),
               const SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -51,20 +83,34 @@ class TestHistoryScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  children: [
-                    _histCard('NR-10 Segurança em Instalações Elétricas', '15/10/2023', 0.85, Icons.electrical_services, true),
-                    const SizedBox(height: 10),
-                    _histCard('NR-35 Trabalho em Altura', '10/10/2023', 0.92, Icons.height, true),
-                    const SizedBox(height: 10),
-                    _histCard('NR-18 Condições e Meio Ambiente', '28/09/2023', 0.75, Icons.construction, false),
-                    const SizedBox(height: 10),
-                    _histCard('NR-12 Máquinas e Equipamentos', '15/09/2023', 0.60, Icons.precision_manufacturing, false),
-                    const SizedBox(height: 10),
-                    _histCard('NR-33 Espaços Confinados', '02/09/2023', 0.88, Icons.warning_amber_outlined, true),
-                  ],
-                ),
+                child: _uid == null 
+                  ? const Center(child: Text("Faça login para ver seu histórico.", style: TextStyle(color: Colors.white)))
+                  : StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance.collection('users').doc(_uid).collection('quiz_history').orderBy('timestamp', descending: true).snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+                        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                          return const Center(child: Text("Nenhum histórico encontrado.", style: TextStyle(color: AppColors.textMuted)));
+                        }
+                        
+                        return ListView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (ctx, i) {
+                            final data = snapshot.data!.docs[i].data() as Map<String, dynamic>;
+                            final score = data['score'] as double? ?? 0.0;
+                            final moduleId = data['moduleId'] as String? ?? 'Desconhecido';
+                            final ts = data['timestamp'] as Timestamp?;
+                            final dateStr = ts != null ? DateFormat('dd/MM/yyyy').format(ts.toDate()) : 'Data Desconhecida';
+                            
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: _histCard('Módulo: $moduleId', dateStr, score, Icons.text_snippet_outlined, score >= 0.7),
+                            );
+                          },
+                        );
+                      },
+                    ),
               ),
             ],
           ),

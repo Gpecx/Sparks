@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:spark_app/services/clan_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
@@ -57,7 +60,10 @@ class ClanScreen extends StatefulWidget {
 
 class _ClanScreenState extends State<ClanScreen> {
   bool _clanCreated = false;
-  String _clanName = 'EXS Técnicos';
+  String _clanName = 'Carregando...';
+  String? _myClanId;
+  String? _currentUserUid;
+  String? _myName;
   final _nameCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _joinPasswordCtrl = TextEditingController();
@@ -80,9 +86,37 @@ class _ClanScreenState extends State<ClanScreen> {
   @override
   void initState() {
     super.initState();
+    _currentUserUid = FirebaseAuth.instance.currentUser?.uid;
+    _myName = FirebaseAuth.instance.currentUser?.displayName ?? 'Usuário';
+
     if (widget.isViewingActive) {
       _clanCreated = true;
       _clanName = 'EXS Técnicos';
+    } else {
+      _loadUserClan();
+    }
+  }
+
+  Future<void> _loadUserClan() async {
+    if (_currentUserUid == null) return;
+    try {
+      final doc = await FirebaseFirestore.instance.collection('users').doc(_currentUserUid).get();
+      if (doc.exists) {
+        final data = doc.data()!;
+        final clanId = data['clanId'];
+        if (clanId != null) {
+          final clanDoc = await FirebaseFirestore.instance.collection('clans').doc(clanId).get();
+          if (mounted && clanDoc.exists) {
+            setState(() {
+              _myClanId = clanId;
+              _clanName = clanDoc.data()?['name'] ?? 'Clã Atual';
+              _clanCreated = true;
+            });
+          }
+        }
+      }
+    } catch(e) {
+      debugPrint('Erro carregando clã: $e');
     }
   }
 
@@ -392,13 +426,38 @@ class _ClanScreenState extends State<ClanScreen> {
           // Membros
           const Text('MEMBROS', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
           const SizedBox(height: 10),
-          ..._mockMembers.asMap().entries.map((entry) {
-            final i = entry.key;
-            final m = entry.value;
-            return _MemberTile(member: m, rank: i + 1, onManage: () => _showManageDialog(m));
-          }),
+          _myClanId == null 
+             ? const CircularProgressIndicator()
+             : StreamBuilder<QuerySnapshot>(
+                 stream: FirebaseFirestore.instance.collection('clans').doc(_myClanId).collection('members').orderBy('xpContribution', descending: true).snapshots(),
+                 builder: (context, snapshot) {
+                   if (!snapshot.hasData) return const CircularProgressIndicator();
+                   final docs = snapshot.data!.docs;
+                   return Column(
+                     children: docs.asMap().entries.map((entry) {
+                       final i = entry.key;
+                       final doc = entry.value;
+                       final mData = doc.data() as Map<String, dynamic>;
+                       final roleStr = mData['role'] as String? ?? 'membro';
+                       final roleEnum = roleStr == 'chefe' ? ClanRole.chefe : (roleStr == 'admin' ? ClanRole.admin : (roleStr == 'moderador' ? ClanRole.moderador : ClanRole.membro));
+                       final uid = mData['uid'];
+                       
+                       // Em app real buscaria o nome via uid num join rápido, 
+                       // Por simplicidade provisória usando docId(se possuir) ou Fallback:
+                       final mockMember = ClanMember(
+                         name: uid == _currentUserUid ? 'Eu' : 'Membro $uid'.substring(0, 12), 
+                         position: roleStr.toUpperCase(), 
+                         xp: mData['xpContribution'] ?? 0, 
+                         role: roleEnum,
+                         isUser: uid == _currentUserUid,
+                       );
+                       return _MemberTile(member: mockMember, rank: i + 1, onManage: () => _showManageDialog(mockMember));
+                     }).toList(),
+                   );
+                 },
+               ),
           const SizedBox(height: 30),
-          _buildChatSection(),
+          if (_myClanId != null) _buildChatSection(),
           const SizedBox(height: 20),
         ],
       ),
@@ -467,8 +526,14 @@ class _ClanScreenState extends State<ClanScreen> {
           child: Column(
             children: [
               Expanded(
-                child: _messages.isEmpty
-                    ? Center(
+                child: StreamBuilder<List<Map<String, dynamic>>>(
+                  stream: ClanService().watchMessages(_myClanId!),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+                    
+                    final msgs = snapshot.data ?? [];
+                    if (msgs.isEmpty) {
+                      return Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -479,14 +544,17 @@ class _ClanScreenState extends State<ClanScreen> {
                             Text('Seja o primeiro a interagir!', style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 12)),
                           ],
                         ),
-                      )
-                    : ListView.builder(
+                      );
+                    }
+                    
+                    return ListView.builder(
                         controller: _scrollCtrl,
+                        reverse: true, // as mensagens mais novas estão no topo do array vindo do Firebase com descending: true
                         padding: const EdgeInsets.all(12),
-                        itemCount: _messages.length,
+                        itemCount: msgs.length,
                         itemBuilder: (ctx, i) {
-                          final msg = _messages[i];
-                          final isMe = msg['isMe'] == true;
+                          final msg = msgs[i];
+                          final isMe = msg['uid'] == _currentUserUid;
                           final isSystem = msg['isSystem'] == true;
                           
                           if (isSystem) {
@@ -497,7 +565,7 @@ class _ClanScreenState extends State<ClanScreen> {
                                 children: [
                                   const Icon(Icons.info_outline, color: AppColors.gold, size: 14),
                                   const SizedBox(width: 6),
-                                  Text(msg['text'], style: const TextStyle(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.bold)),
+                                  Text(msg['text'] ?? '', style: const TextStyle(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             );
@@ -524,15 +592,16 @@ class _ClanScreenState extends State<ClanScreen> {
                                   if (!isMe)
                                     Padding(
                                       padding: const EdgeInsets.only(bottom: 4),
-                                      child: Text(msg['sender'], style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold)),
+                                      child: Text(msg['name'] ?? 'Membro', style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold)),
                                     ),
-                                  Text(msg['text'], style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.4)),
+                                  Text(msg['text'] ?? '', style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.4)),
                                 ],
                               ),
                             ),
                           );
                         },
-                      ),
+                      );
+                  }),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -590,15 +659,16 @@ class _ClanScreenState extends State<ClanScreen> {
   }
 
   void _sendMessage() {
+    if (_myClanId == null || _currentUserUid == null) return;
     final text = _chatCtrl.text.trim();
     if (text.isEmpty) return;
-    setState(() {
-      _messages.add({'sender': 'Você', 'text': text, 'isMe': true});
-      _chatCtrl.clear();
-    });
+    
+    ClanService().sendMessage(_myClanId!, _currentUserUid!, _myName ?? 'Eu', text);
+    _chatCtrl.clear();
+    
     Future.delayed(const Duration(milliseconds: 100), () {
       if (_scrollCtrl.hasClients) {
-        _scrollCtrl.animateTo(_scrollCtrl.position.maxScrollExtent, duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
+        _scrollCtrl.animateTo(0.0, duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
       }
     });
   }
@@ -709,30 +779,61 @@ class _ClanScreenState extends State<ClanScreen> {
     );
   }
 
-  void _createClan() {
-    if (!_formKeyCreate.currentState!.validate()) {
-      return;
+  void _createClan() async {
+    if (!_formKeyCreate.currentState!.validate()) return;
+    if (_currentUserUid == null) return;
+    
+    try {
+      final name = _nameCtrl.text.trim();
+      final pwd = _passwordCtrl.text.trim();
+      
+      final clanId = await ClanService().createClan(
+        name,
+        'Novo clã EXS',
+        _currentUserUid!,
+        pwd.isEmpty,
+        pwd.isEmpty ? null : pwd,
+      );
+      
+      setState(() {
+        _clanName = name;
+        _myClanId = clanId;
+        _clanCreated = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Clã "$_clanName" criado com sucesso!'), backgroundColor: AppColors.primary),
+      );
+    } catch(e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao criar: $e'), backgroundColor: AppColors.error),
+      );
     }
-    setState(() {
-      _clanName = _nameCtrl.text.trim();
-      _clanCreated = true;
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Clã "$_clanName" criado com sucesso!'), backgroundColor: AppColors.primary),
-    );
   }
 
-  void _joinClan() {
-    if (!_formKeyJoin.currentState!.validate()) {
-      return;
+  void _joinClan() async {
+    if (!_formKeyJoin.currentState!.validate()) return;
+    if (_currentUserUid == null) return;
+    
+    // Na vida real a gente teria uma pesquisa de clã.
+    // Pra testes, caso informe o CODIGO/ID que criaram na tela test.
+    final clanId = _joinCodeCtrl.text.trim();
+    final pwd = _joinPasswordCtrl.text.trim();
+    
+    try {
+      await ClanService().joinClan(clanId, _currentUserUid!, pwd.isEmpty ? null : pwd);
+      setState(() {
+        _myClanId = clanId;
+      });
+      await _loadUserClan();
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Você entrou no clã!'), backgroundColor: AppColors.primary),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao entrar: $e'), backgroundColor: AppColors.error),
+      );
     }
-    setState(() {
-      _clanName = 'EXS Técnicos';
-      _clanCreated = true;
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Você entrou no clã!'), backgroundColor: AppColors.primary),
-    );
   }
 
   void _showEditClanDialog() {

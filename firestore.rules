@@ -1,0 +1,116 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null && request.auth.uid != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isClanMember(clanId) {
+      return isAuthenticated() && exists(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid));
+    }
+
+    function isClanChief(clanId) {
+      return isAuthenticated() && get(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid)).data.role == 'chefe';
+    }
+
+    match /users/{uid} {
+      allow read: if isAuthenticated();
+      allow write: if request.auth.uid == uid;
+
+      match /progress/{modId} {
+        allow read, write: if request.auth.uid == uid;
+      }
+
+      match /quiz_history/{id} {
+        allow read, write: if request.auth.uid == uid;
+      }
+    }
+
+    match /categories/{catId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+      
+      match /modules/{modId} {
+        allow read: if isAuthenticated();
+        allow write: if isAdmin();
+        
+        match /lessons/{lessonId} {
+          allow read: if isAuthenticated();
+          allow write: if isAdmin();
+          
+          match /questions/{questionId} {
+            allow read: if isAuthenticated();
+            allow write: if isAdmin();
+          }
+        }
+      }
+    }
+
+    match /clans/{clanId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isClanMember(clanId);
+      allow delete: if false;
+
+      match /members/{memberUid} {
+        allow read: if isAuthenticated();
+        allow write: if request.auth.uid == memberUid || isClanChief(clanId) || isAdmin();
+      }
+
+      match /messages/{id} {
+        allow create: if isClanMember(clanId);
+        allow read: if isClanMember(clanId);
+        allow update: if false;
+        allow delete: if resource.data.uid == request.auth.uid || isClanChief(clanId) || isAdmin();
+      }
+    }
+
+    match /rankings/{id} {
+      allow read: if isAuthenticated();
+      allow write: if false;
+    }
+
+    match /matches/{matchId} {
+      allow read: if isAuthenticated() && (resource.data.player1Uid == request.auth.uid || resource.data.player2Uid == request.auth.uid);
+      allow create: if isAuthenticated() && (request.resource.data.player1Uid == request.auth.uid || request.resource.data.player2Uid == request.auth.uid);
+      allow update: if isAuthenticated() && (resource.data.player1Uid == request.auth.uid || resource.data.player2Uid == request.auth.uid);
+      allow delete: if false;
+    }
+
+    match /matchmaking_queue/{uid} {
+      allow read, write: if request.auth.uid == uid;
+    }
+
+    match /store_items/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /badges/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /active_events/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /transactions/{id} {
+      allow read: if isAuthenticated() && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+
+    match /voucher_redemptions/{id} {
+      allow read: if isAuthenticated() && resource.data.uid == request.auth.uid;
+      allow create: if isAuthenticated() && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+  }
+}

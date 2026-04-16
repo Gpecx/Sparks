@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/clan_screen.dart';
@@ -10,6 +11,7 @@ import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/screens/pocket_card_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
+import 'package:spark_app/providers/user_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 /// Tela de Perfil do usuário.
@@ -89,6 +91,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userAsync = ref.watch(userProvider);
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+
+    final displayName = userAsync.value?.name
+        ?? firebaseUser?.displayName
+        ?? firebaseUser?.email?.split('@').first
+        ?? 'Usuário';
+    final displayProfession = userAsync.value?.profession ?? '';
+    final photoUrl = userAsync.value?.photoUrl ?? '';
+
     return SparksBackground(
       child: PcbBackground(
         child: Scaffold(
@@ -150,7 +162,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             decoration: const BoxDecoration(color: AppColors.card, shape: BoxShape.circle),
                             clipBehavior: Clip.antiAlias,
                             child: CachedNetworkImage(
-                              imageUrl: 'https://i.pravatar.cc/150?img=11',
+                              imageUrl: photoUrl.isNotEmpty
+                                  ? photoUrl
+                                  : 'https://ui-avatars.com/api/?name=${Uri.encodeComponent(displayName)}&background=00C402&color=fff',
                               fit: BoxFit.cover,
                               placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: AppColors.primary)),
                               errorWidget: (context, url, error) => const Icon(Icons.person, color: AppColors.primary, size: 52),
@@ -175,12 +189,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ],
                   ),
                   const SizedBox(height: 14),
-                  const Text('Alex Rodriguez', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
+                  Text(displayName, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
                   const SizedBox(height: 4),
-                  Text(
-                    'TÉCNICO LÍDER',
-                    style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
-                  ),
+                  if (displayProfession.isNotEmpty)
+                    Text(
+                      displayProfession.toUpperCase(),
+                      style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
+                    ),
                   const SizedBox(height: 14),
 
                   // 👇 Botão Credencial

@@ -1,6 +1,8 @@
 import 'dart:ui'; // Adicionado para o efeito Glassmorphism (BackdropFilter)
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/screens/settings_screen.dart';
@@ -10,15 +12,16 @@ import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/technical_standards_screen.dart';
 import 'package:spark_app/services/streak_service.dart';
 import 'package:spark_app/services/covenant_service.dart';
+import 'package:spark_app/providers/user_provider.dart';
 
-class DashboardScreen extends StatefulWidget {
+class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   // Variável para controlar o estado de loading (Skeleton)
   bool _isLoading = true;
 
@@ -53,6 +56,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // MENU DE PERFIL (BottomSheet com animações)
   // ============================================================
   void _showProfileMenu() {
+    final userAsync = ref.read(userProvider);
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+
+    // Fallbacks seguros: usa FirebaseAuth se Firestore ainda não chegou
+    final displayName = userAsync.value?.name
+        ?? firebaseUser?.displayName
+        ?? firebaseUser?.email?.split('@').first
+        ?? 'Usuário';
+    final displayEmail = userAsync.value?.email
+        ?? firebaseUser?.email
+        ?? '';
+    final displayProfession = userAsync.value?.profession ?? '';
+
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -97,9 +113,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Alex Rodriguez',
-                            style: TextStyle(
+                          Text(
+                            displayName,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -107,21 +123,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'alex.rodriguez@spark.com',
+                            displayEmail,
                             style: TextStyle(
                               color: Colors.white.withValues(alpha: 0.5),
                               fontSize: 13,
                             ),
                           ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Técnico Líder',
-                            style: TextStyle(
-                              color: AppColors.primary.withValues(alpha: 0.8),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
+                          if (displayProfession.isNotEmpty) ...[
+                            const SizedBox(height: 2),
+                            Text(
+                              displayProfession,
+                              style: TextStyle(
+                                color: AppColors.primary.withValues(alpha: 0.8),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
+                          ],
                         ],
                       ),
                     ),
@@ -291,6 +309,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // NOVO: COMPONENTE DE HEADER EXTRAÍDO PARA LIMPAR O BUILD
   // ============================================================
   Widget _buildHeader() {
+    final userAsync = ref.watch(userProvider);
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+
+    final fullName = userAsync.value?.name
+        ?? firebaseUser?.displayName
+        ?? firebaseUser?.email?.split('@').first
+        ?? 'Técnico';
+    final firstName = fullName.split(' ').first;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -304,9 +331,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 fontSize: 16,
               ),
             ),
-            const Text(
-              'Alex!', // Nome do usuário
-              style: TextStyle(
+            Text(
+              '$firstName!',
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,

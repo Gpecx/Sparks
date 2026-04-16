@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
+import 'package:spark_app/services/auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -10,7 +11,43 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _authService = AuthService();
   bool _obscurePassword = true;
+  bool _isLoading = false;
+
+  Future<void> _handleRegister() async {
+    final name = _nameController.text.trim();
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (name.isEmpty || email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Preencha todos os campos.')),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      await _authService.registerWithEmail(email, password, name, 'Membro');
+      if (mounted) context.go('/home');
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceAll('Exception: ', '')),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +77,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 32),
             _fieldLabel('Nome Completo'),
             const SizedBox(height: 8),
-            const TextField(
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(hintText: 'Digite seu nome completo', prefixIcon: Icon(Icons.person_outline, color: AppColors.textMuted)),
+            TextField(
+              controller: _nameController,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(hintText: 'Digite seu nome completo', prefixIcon: Icon(Icons.person_outline, color: AppColors.textMuted)),
             ),
             const SizedBox(height: 20),
             _fieldLabel('Endereço de E-mail'),
             const SizedBox(height: 8),
-            const TextField(
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(hintText: 'Digite seu e-mail', prefixIcon: Icon(Icons.mail_outline, color: AppColors.textMuted)),
+            TextField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(hintText: 'Digite seu e-mail', prefixIcon: Icon(Icons.mail_outline, color: AppColors.textMuted)),
             ),
             const SizedBox(height: 20),
             _fieldLabel('Senha'),
             const SizedBox(height: 8),
             TextField(
+              controller: _passwordController,
               obscureText: _obscurePassword,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
@@ -96,8 +137,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               width: double.infinity,
               height: 52,
               child: ElevatedButton(
-                onPressed: () => context.go('/home'),
-                child: const Text('CADASTRAR', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
+                onPressed: _isLoading ? null : _handleRegister,
+                child: _isLoading 
+                    ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
+                    : const Text('CADASTRAR', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
               ),
             ),
             const SizedBox(height: 20),

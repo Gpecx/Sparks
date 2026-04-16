@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/quiz_screen.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
@@ -13,6 +14,7 @@ import 'package:spark_app/models/curriculum_models.dart';
 import 'package:spark_app/models/quiz_models.dart';
 import 'package:spark_app/data/lessons_registry.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
+import 'package:spark_app/services/progress_service.dart';
 
 
 class LearningPathScreen extends ConsumerStatefulWidget {
@@ -86,6 +88,25 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
       }
       _nodes.add({'type': 'eval', 'title': 'AVALIAÇÃO 2', 'subtitle': 'Certificado Final'});
     }
+
+    // Carrega o progresso real do Firestore para mostrar cadeados/checks corretamente
+    _loadProgress();
+  }
+
+  /// Busca o progresso salvo no Firestore e atualiza [_completedLessons].
+  Future<void> _loadProgress() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    final moduleId = widget.moduleId;
+    if (uid == null || moduleId == null) return;
+
+    final progress = await ProgressService().getProgress(uid, moduleId);
+    if (!mounted) return;
+
+    if (progress != null) {
+      setState(() {
+        _completedLessons = progress.completedLessons.length;
+      });
+    }
   }
 
   void _onEnergyChanged() {
@@ -104,6 +125,16 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
   bool _isNodeUnlocked(int index) {
     if (kDebugMode && ref.read(devModeProvider)) return true;
     return index <= _completedLessons;
+  }
+
+  String? _findCategoryId(String? moduleId) {
+    if (moduleId == null) return null;
+    for (var cat in mockCategories) {
+      for (var mod in cat.modules) {
+        if (mod.id == moduleId) return cat.id;
+      }
+    }
+    return null;
   }
 
   double get _progressValue {
@@ -137,6 +168,8 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
           builder: (_) => QuizScreen(
             lesson: realLesson,
             isEvaluation: true,
+            moduleId: widget.moduleId,
+            categoryId: _findCategoryId(widget.moduleId),
           ),
         ),
       );
@@ -152,6 +185,8 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
           builder: (_) => QuizScreen(
             lesson: realLesson,
             isEvaluation: false,
+            moduleId: widget.moduleId,
+            categoryId: _findCategoryId(widget.moduleId),
           ),
         ),
       );
