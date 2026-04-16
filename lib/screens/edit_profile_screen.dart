@@ -29,13 +29,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _professionCtrl = TextEditingController(text: '');
     
     if (_uid != null) {
-      UserService().getUser(_uid!).then((u) {
-        if (mounted && u != null) {
-          setState(() {
-            _professionCtrl.text = u.profession;
-          });
-        }
-      });
+      // Lê dados do singleton UserService (já carregado pelo startListening)
+      final u = UserService().user;
+      if (mounted && u != null) {
+        setState(() {
+          _professionCtrl.text = u.role; // 'role' é o campo de profissão no UserModel
+        });
+      }
     }
   }
 
@@ -52,12 +52,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       // Update Firebase Auth profile
       await FirebaseAuth.instance.currentUser?.updateDisplayName(newName);
       
-      // Update Firestore
-      await UserService().updateUser(_uid!, {
-        'name': newName,
-        'email': newEmail,
-        'profession': newProfession,
-      });
+      // Atualiza Firestore via updateProfile
+      await UserService().updateProfile(
+        displayName: newName,
+        role: newProfession,
+      );
       
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(

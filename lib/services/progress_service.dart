@@ -112,8 +112,9 @@ class ProgressService {
 
     await batch.commit();
 
-    // Invoca verificação de badging após conclusão no banco global.
-    await AchievementService().checkLessonAchievements(uid, userData.totalLessonsCompleted + 1);
+    // Usa o total de lições completadas calculado pelo conjunto local (alreadyCompleted + nova)
+    final totalLessonsCompletedSoFar = completedSet.length;
+    await AchievementService().checkLessonAchievements(uid, totalLessonsCompletedSoFar);
   }
 
   Future<bool> isModuleUnlocked(String uid, String requiredModuleId) async {

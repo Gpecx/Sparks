@@ -15,6 +15,8 @@ import 'package:spark_app/models/quiz_models.dart';
 import 'package:spark_app/data/lessons_registry.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/services/progress_service.dart';
+import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/services/covenant_service.dart';
 
 
 class LearningPathScreen extends ConsumerStatefulWidget {
@@ -38,6 +40,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   final EnergyController _energyCtrl = EnergyController();
+  final UserService _userService = UserService();
 
   // ── GlobalKey para acionar o glitch ──────────────────────────
   final _glitchKey = GlobalKey<_SparkGlitchWrapperState>();
@@ -109,6 +112,38 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     }
   }
 
+  /// Chamado ao concluir uma lição. Persiste progresso e atualiza streak.
+  Future<void> _onLessonCompleted(int lessonIndex) async {
+    setState(() => _completedLessons++);
+
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+
+    final moduleId = widget.moduleId ?? 'unknown';
+    final categoryId = _findCategoryId(widget.moduleId) ?? 'default_cat';
+    final lessonId = '${moduleId}_l${lessonIndex + 1}';
+
+    // ✅ Persiste na subcoleção progress (fonte de verdade)
+    await ProgressService().markLessonComplete(
+      uid,
+      categoryId,
+      moduleId,
+      lessonId,
+      0, // XP já gerenciado pelo QuizScreen via UserService.addXp
+      0, // SP já gerenciado pelo QuizScreen
+    );
+
+    // ✅ Registra atividade de estudo (streak diário)
+    await _userService.registerStudyActivity();
+
+    // ✅ Atualiza pacto de mestria via CovenantService (subcoleção)
+    if (moduleId.contains('nr35') || moduleId.contains('mod')) {
+      final progressPercent =
+          (_completedLessons / _nodes.length * 100).toInt();
+      CovenantService().addProgress('cov_3', progressPercent);
+    }
+  }
+
   void _onEnergyChanged() {
     if (mounted) setState(() {});
   }
@@ -173,8 +208,8 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
           ),
         ),
       );
-      if (passed == true && index == _completedLessons) {
-        setState(() { _completedLessons++; });
+      if (passed == true) {
+        await _onLessonCompleted(index);
       }
     }
     // Lição normal (Quiz)
@@ -190,8 +225,8 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
           ),
         ),
       );
-      if (passed == true && index == _completedLessons) {
-        setState(() { _completedLessons++; });
+      if (passed == true) {
+        await _onLessonCompleted(index);
       }
     }
   }

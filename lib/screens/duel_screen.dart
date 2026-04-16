@@ -115,7 +115,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
 
   Future<void> _startMatchmaking() async {
     final energyCtrl = EnergyController();
-    if (!energyCtrl.spendSparkPoints(betAmount)) {
+    if (!await energyCtrl.spendSparkPoints(betAmount)) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Pontos Spark insuficientes para apostar. Custo: 20'), backgroundColor: AppColors.error),
@@ -661,7 +661,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                   style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800, letterSpacing: 2),
                 ),
                 const SizedBox(height: 12),
-                Text('Preparando sua arena de faíscas ⚡', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14)),
+                Text('Preparando sua arena de faíscas', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14)),
 
                 // Bet deduction animation
                 const SizedBox(height: 20),
@@ -685,7 +685,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                           const Icon(Icons.bolt, color: AppColors.error, size: 18),
                           const SizedBox(width: 6),
                           Text(
-                            '−$betAmount Pontos Spark',
+                            '-$betAmount Pontos Spark', // Use standard dash, not U+2212
                             style: const TextStyle(color: AppColors.error, fontSize: 14, fontWeight: FontWeight.w800),
                           ),
                         ],
@@ -789,7 +789,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                         Icon(_divisionIcon, color: AppColors.gold, size: 16),
                         const SizedBox(width: 6),
                         Text(
-                          won ? 'ELO +25 → ${_eloRating + 25}' : (draw ? 'ELO ±0' : 'ELO −15 → ${_eloRating - 15}'),
+                          won ? 'ELO +25 -> ${_eloRating + 25}' : (draw ? 'ELO 0' : 'ELO -15 -> ${_eloRating - 15}'),
                           style: TextStyle(color: won ? AppColors.primary : (draw ? AppColors.gold : AppColors.error), fontSize: 12, fontWeight: FontWeight.w700),
                         ),
                       ],

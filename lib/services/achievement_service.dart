@@ -14,11 +14,12 @@ class AchievementService {
     };
 
     if (streakBadges.containsKey(streak)) {
-      await UserService().addBadge(uid, streakBadges[streak]!);
+      // unlockBadge é singleton e usa o uid do usuário logado internamente
+      await UserService().unlockBadge(streakBadges[streak]!);
     }
   }
 
-  /// Verifica se o usuário deve receber badges baseado na quantia total de lições feits.
+  /// Verifica se o usuário deve receber badges baseado na quantia total de lições feitas.
   Future<void> checkLessonAchievements(String uid, int totalLessonsCompleted) async {
     final Map<int, String> lessonBadges = {
       1: 'first_lesson',
@@ -28,7 +29,7 @@ class AchievementService {
     };
 
     if (lessonBadges.containsKey(totalLessonsCompleted)) {
-      await UserService().addBadge(uid, lessonBadges[totalLessonsCompleted]!);
+      await UserService().unlockBadge(lessonBadges[totalLessonsCompleted]!);
     }
   }
 }

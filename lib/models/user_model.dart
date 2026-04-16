@@ -1,108 +1,156 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../core/constants/fs.dart';
+
+// ─────────────────────────────────────────────────────────────────
+//  MODELO PRINCIPAL DO USUÁRIO — Firestore: users/{uid}
+//
+//  CAMPOS REMOVIDOS (gerenciados via subcoleções):
+//   - lessonProgress → users/{uid}/progress  (ProgressService)
+//   - covenantProgress → users/{uid}/covenants (CovenantService)
+// ─────────────────────────────────────────────────────────────────
 
 class UserModel {
   final String uid;
-  final String name;
+  final String displayName;
   final String email;
-  final String profession;
-  final String photoUrl;
-  final DateTime createdAt;
+  final String? photoUrl;
+  final String role;
   final int sparkPoints;
   final int xp;
-  final int energy;
-  final DateTime energyLastRegen;
-  final int streak;
+  final int level;
+  final String tensionLevel; // 'BT' | 'MT' | 'AT' | 'EAT'
+  final int currentStreak;
   final int longestStreak;
-  final DateTime lastLoginDate;
-  final bool isPremium;
-  final String tensionLevel;
-  final String role;
+  final int activeDays;
+  final DateTime? lastStudyDate;
+  final bool studiedToday;
   final String? clanId;
-  final int totalLessonsCompleted;
-  final int totalCorrectAnswers;
-  final int totalAnswers;
-  final List<String> badges;
+  final String? clanName;
+  final List<String> unlockedBadgeIds;
   final int weeklyXp;
-  final int monthlyXp;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   const UserModel({
     required this.uid,
-    required this.name,
+    required this.displayName,
     required this.email,
-    required this.profession,
-    required this.photoUrl,
-    required this.createdAt,
-    required this.sparkPoints,
-    required this.xp,
-    required this.energy,
-    required this.energyLastRegen,
-    required this.streak,
-    required this.longestStreak,
-    required this.lastLoginDate,
-    required this.isPremium,
-    required this.tensionLevel,
-    required this.role,
+    this.photoUrl,
+    this.role = 'Técnico',
+    this.sparkPoints = 0,
+    this.xp = 0,
+    this.level = 1,
+    this.tensionLevel = 'BT',
+    this.currentStreak = 0,
+    this.longestStreak = 0,
+    this.activeDays = 0,
+    this.lastStudyDate,
+    this.studiedToday = false,
     this.clanId,
-    required this.totalLessonsCompleted,
-    required this.totalCorrectAnswers,
-    required this.totalAnswers,
-    required this.badges,
-    required this.weeklyXp,
-    required this.monthlyXp,
+    this.clanName,
+    this.unlockedBadgeIds = const [],
+    this.weeklyXp = 0,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
+  // ── fromFirestore ───────────────────────────────────────────────
   factory UserModel.fromFirestore(DocumentSnapshot doc) {
-    final d = doc.data() as Map<String, dynamic>;
+    final data = doc.data() as Map<String, dynamic>;
     return UserModel(
       uid: doc.id,
-      name: d[FS.name] as String,
-      email: d[FS.email] as String,
-      profession: d[FS.profession] as String,
-      photoUrl: d[FS.photoUrl] as String,
-      createdAt: (d[FS.createdAt] as Timestamp).toDate(),
-      sparkPoints: (d[FS.sparkPoints] as num).toInt(),
-      xp: (d[FS.xp] as num).toInt(),
-      energy: (d[FS.energy] as num).toInt(),
-      energyLastRegen: (d[FS.energyLastRegen] as Timestamp).toDate(),
-      streak: (d[FS.streak] as num).toInt(),
-      longestStreak: (d[FS.longestStreak] as num).toInt(),
-      lastLoginDate: (d[FS.lastLoginDate] as Timestamp).toDate(),
-      isPremium: d[FS.isPremium] as bool,
-      tensionLevel: d[FS.tensionLevel] as String,
-      role: d[FS.role] as String,
-      clanId: d[FS.clanId] as String?,
-      totalLessonsCompleted: (d[FS.totalLessonsCompleted] as num).toInt(),
-      totalCorrectAnswers: (d[FS.totalCorrectAnswers] as num).toInt(),
-      totalAnswers: (d[FS.totalAnswers] as num).toInt(),
-      badges: List<String>.from(d[FS.userBadges] as List),
-      weeklyXp: (d[FS.weeklyXp] as num).toInt(),
-      monthlyXp: (d[FS.monthlyXp] as num).toInt(),
+      displayName: data['displayName'] ?? data['name'] ?? 'Usuário', // fallback legado
+      email: data['email'] ?? '',
+      photoUrl: data['photoUrl'],
+      role: data['role'] ?? 'Técnico',
+      sparkPoints: (data['sparkPoints'] as num?)?.toInt() ?? 0,
+      xp: (data['xp'] as num?)?.toInt() ?? 0,
+      level: (data['level'] as num?)?.toInt() ?? 1,
+      tensionLevel: data['tensionLevel'] ?? 'BT',
+      currentStreak: (data['currentStreak'] as num?)?.toInt() ??
+          (data['streak'] as num?)?.toInt() ?? 0, // fallback legado
+      longestStreak: (data['longestStreak'] as num?)?.toInt() ?? 0,
+      activeDays: (data['activeDays'] as num?)?.toInt() ?? 0,
+      lastStudyDate: (data['lastStudyDate'] as Timestamp?)?.toDate(),
+      studiedToday: data['studiedToday'] ?? false,
+      clanId: data['clanId'],
+      clanName: data['clanName'],
+      unlockedBadgeIds: List<String>.from(
+        data['unlockedBadgeIds'] ?? data['badges'] ?? [], // fallback legado
+      ),
+      weeklyXp: (data['weeklyXp'] as num?)?.toInt() ?? 0,
+      createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      updatedAt: (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
 
-  Map<String, dynamic> toMap() => {
-        FS.name: name,
-        FS.email: email,
-        FS.profession: profession,
-        FS.photoUrl: photoUrl,
-        FS.createdAt: Timestamp.fromDate(createdAt),
-        FS.sparkPoints: sparkPoints,
-        FS.xp: xp,
-        FS.energy: energy,
-        FS.energyLastRegen: Timestamp.fromDate(energyLastRegen),
-        FS.streak: streak,
-        FS.longestStreak: longestStreak,
-        FS.lastLoginDate: Timestamp.fromDate(lastLoginDate),
-        FS.isPremium: isPremium,
-        FS.tensionLevel: tensionLevel,
-        FS.role: role,
-        FS.clanId: clanId,
-        FS.totalLessonsCompleted: totalLessonsCompleted,
-        FS.totalCorrectAnswers: totalCorrectAnswers,
-        FS.totalAnswers: totalAnswers,
-        FS.userBadges: badges,
-        FS.weeklyXp: weeklyXp,
-        FS.monthlyXp: monthlyXp,
-      };
+  // ── toFirestore ─────────────────────────────────────────────────
+  // Nota: não inclui lessonProgress nem covenantProgress — gerenciados via subcoleções
+  Map<String, dynamic> toFirestore() {
+    return {
+      'displayName': displayName,
+      'email': email,
+      'photoUrl': photoUrl,
+      'role': role,
+      'sparkPoints': sparkPoints,
+      'xp': xp,
+      'level': level,
+      'tensionLevel': tensionLevel,
+      'currentStreak': currentStreak,
+      'longestStreak': longestStreak,
+      'activeDays': activeDays,
+      'lastStudyDate':
+          lastStudyDate != null ? Timestamp.fromDate(lastStudyDate!) : null,
+      'studiedToday': studiedToday,
+      'clanId': clanId,
+      'clanName': clanName,
+      'unlockedBadgeIds': unlockedBadgeIds,
+      'weeklyXp': weeklyXp,
+      'updatedAt': FieldValue.serverTimestamp(),
+    };
+  }
+
+  // ── copyWith ────────────────────────────────────────────────────
+  UserModel copyWith({
+    String? displayName,
+    String? email,
+    String? photoUrl,
+    String? role,
+    int? sparkPoints,
+    int? xp,
+    int? level,
+    String? tensionLevel,
+    int? currentStreak,
+    int? longestStreak,
+    int? activeDays,
+    DateTime? lastStudyDate,
+    bool? studiedToday,
+    String? clanId,
+    String? clanName,
+    List<String>? unlockedBadgeIds,
+    int? weeklyXp,
+    DateTime? updatedAt,
+  }) {
+    return UserModel(
+      uid: uid,
+      displayName: displayName ?? this.displayName,
+      email: email ?? this.email,
+      photoUrl: photoUrl ?? this.photoUrl,
+      role: role ?? this.role,
+      sparkPoints: sparkPoints ?? this.sparkPoints,
+      xp: xp ?? this.xp,
+      level: level ?? this.level,
+      tensionLevel: tensionLevel ?? this.tensionLevel,
+      currentStreak: currentStreak ?? this.currentStreak,
+      longestStreak: longestStreak ?? this.longestStreak,
+      activeDays: activeDays ?? this.activeDays,
+      lastStudyDate: lastStudyDate ?? this.lastStudyDate,
+      studiedToday: studiedToday ?? this.studiedToday,
+      clanId: clanId ?? this.clanId,
+      clanName: clanName ?? this.clanName,
+      unlockedBadgeIds: unlockedBadgeIds ?? this.unlockedBadgeIds,
+      weeklyXp: weeklyXp ?? this.weeklyXp,
+      createdAt: createdAt,
+      updatedAt: updatedAt ?? DateTime.now(),
+    );
+  }
 }

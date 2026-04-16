@@ -31,33 +31,34 @@ class AuthService {
         password: password,
       );
 
-      await _firestore
-          .collection('users')
-          .doc(credential.user!.uid)
-          .set({
-        'uid': credential.user!.uid,
-        'name': name.trim(),
+      final uid = credential.user!.uid;
+
+      // Esquema exato do UserModel — única fonte de verdade
+      await _firestore.collection('users').doc(uid).set({
+        'uid': uid,
+        'displayName': name.trim(),
         'email': email.trim(),
-        'profession': profession.trim(),
-        'photoUrl': '',
-        'createdAt': FieldValue.serverTimestamp(),
-        'sparkPoints': 0,
+        'photoUrl': null,
+        'role': 'Técnico',
+        'sparkPoints': 100, // Bônus de boas-vindas
         'xp': 0,
-        'energy': 25,
-        'energyLastRegen': FieldValue.serverTimestamp(),
-        'streak': 0,
-        'longestStreak': 0,
-        'lastLoginDate': FieldValue.serverTimestamp(),
-        'isPremium': false,
+        'level': 1,
         'tensionLevel': 'BT',
-        'role': 'member',
+        'currentStreak': 0,
+        'longestStreak': 0,
+        'activeDays': 0,
+        'studiedToday': false,
+        'lastStudyDate': null,
+        'weeklyXp': 0,
+        'monthlyXp': 0,
+        'unlockedBadgeIds': [],
         'clanId': null,
+        'clanName': null,
         'totalLessonsCompleted': 0,
         'totalCorrectAnswers': 0,
         'totalAnswers': 0,
-        'badges': [],
-        'weeklyXp': 0,
-        'monthlyXp': 0,
+        'createdAt': FieldValue.serverTimestamp(),
+        'updatedAt': FieldValue.serverTimestamp(),
       });
 
       return credential;
@@ -65,6 +66,7 @@ class AuthService {
       throw _mapAuthException(e);
     }
   }
+
 
   Future<void> signOut() async {
     try {

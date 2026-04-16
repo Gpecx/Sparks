@@ -1,61 +1,131 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/services/tournament_service.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/providers/user_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
+// ─────────────────────────────────────────────────────────────────
+//  LEADERBOARD SCREEN — Versão com Firebase
+//  MUDANÇAS:
+//  - Aba Global: busca ranking real do Firestore (weeklyXp)
+//  - Aba Clã: filtra pelo clanId do usuário logado
+//  - Aba Torneio: mantida como estava (TournamentService)
+//  - Posição do usuário logado destacada em todas as listas
+//  - Paginação com "Carregar mais" continua funcionando
+// ─────────────────────────────────────────────────────────────────
 
 class LeaderboardScreen extends ConsumerStatefulWidget {
   const LeaderboardScreen({super.key});
+
   @override
   ConsumerState<LeaderboardScreen> createState() => _LeaderboardScreenState();
 }
 
-class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with SingleTickerProviderStateMixin {
+class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   int _selectedTab = 0; // 0 = Global, 1 = Clã, 2 = Torneio
   final _tournament = TournamentService();
 
-  int _paginatedGlobalCount = 5;
+  // Dados do Firebase
+  List<RankingEntry> _globalPlayers = [];
+  List<RankingEntry> _clanPlayers = [];
+  bool _loadingGlobal = true;
+  bool _loadingClan = true;
+  String? _errorGlobal;
+  String? _errorClan;
 
-  // Mock de dados globais
-  final List<_PlayerData> _globalPlayers = const [
-    _PlayerData('John Doe', '12.500 XP', 1, true),
-    _PlayerData('Jane S.', '8500 XP', 2, false),
-    _PlayerData('Alice J.', '7200 XP', 3, false),
-    _PlayerData('Bob Brown', '4500 XP', 4, false),
-    _PlayerData('Charlie Davis', '4200 XP', 5, false),
-    _PlayerData('Você', '3900 XP', 6, true),
-    _PlayerData('Eva Green', '3500 XP', 7, false),
-    _PlayerData('Frank White', '3100 XP', 8, false),
-    _PlayerData('Sara Lima', '2800 XP', 9, false),
-  ];
-
-  // Mock de dados do clã
-  final List<_PlayerData> _clanPlayers = const [
-    _PlayerData('Alex Rodriguez', '14250 XP', 1, true),
-    _PlayerData('Mariana Figueiredo', '12800 XP', 2, false),
-    _PlayerData('Bruno Carvalho', '9400 XP', 3, false),
-    _PlayerData('Camila Santos', '7600 XP', 4, false),
-    _PlayerData('Diego Oliveira', '3200 XP', 5, false),
-  ];
+  // Paginação
+  int _paginatedGlobalCount = 10;
+  static const int _pageSize = 10;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 4))..repeat(reverse: true);
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 4))
+          ..repeat(reverse: true);
+    _loadRankings();
   }
 
   @override
-  void dispose() { _controller.dispose(); super.dispose(); }
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _loadRankings() async {
+    final userService = ref.read(userServiceProvider);
+    await Future.wait([
+      _loadGlobal(userService),
+      _loadClan(userService),
+    ]);
+  }
+
+  Future<void> _loadGlobal(UserService userService) async {
+    setState(() {
+      _loadingGlobal = true;
+      _errorGlobal = null;
+    });
+    try {
+      final data = await userService.getGlobalWeeklyRanking();
+      // Atribui posições
+      for (int i = 0; i < data.length; i++) {
+        data[i].position = i + 1;
+      }
+      if (mounted) setState(() {
+        _globalPlayers = data;
+        _loadingGlobal = false;
+      });
+    } catch (e) {
+      if (mounted) setState(() {
+        _errorGlobal = 'Erro ao carregar ranking';
+        _loadingGlobal = false;
+      });
+    }
+  }
+
+  Future<void> _loadClan(UserService userService) async {
+    setState(() {
+      _loadingClan = true;
+      _errorClan = null;
+    });
+    try {
+      final data = await userService.getClanWeeklyRanking();
+      for (int i = 0; i < data.length; i++) {
+        data[i].position = i + 1;
+      }
+      if (mounted) setState(() {
+        _clanPlayers = data;
+        _loadingClan = false;
+      });
+    } catch (e) {
+      if (mounted) setState(() {
+        _errorClan = 'Erro ao carregar ranking do clã';
+        _loadingClan = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final players = _selectedTab == 1 ? _clanPlayers : _globalPlayers.take(_paginatedGlobalCount).toList();
+    final userService = ref.watch(userServiceProvider);
+    final myUid = userService.uid;
+
+    final players = _selectedTab == 1
+        ? _clanPlayers
+        : _globalPlayers.take(_paginatedGlobalCount).toList();
+
     final topThree = players.take(3).toList();
     final rest = players.skip(3).toList();
-    final canLoadMoreGlobal = _selectedTab == 0 && _paginatedGlobalCount < _globalPlayers.length;
+    final canLoadMoreGlobal =
+        _selectedTab == 0 && _paginatedGlobalCount < _globalPlayers.length;
+    final isLoadingCurrent =
+        _selectedTab == 0 ? _loadingGlobal : _loadingClan;
 
     return SparksBackground(
       child: PcbBackground(
@@ -64,7 +134,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with Sing
           body: SafeArea(
             child: Column(
               children: [
-                // Header
+                // ── Header ─────────────────────────────────────────
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                   child: Row(
@@ -73,8 +143,16 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with Sing
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          _selectedTab == 2 ? 'TORNEIO SEMANAL' : _selectedTab == 1 ? 'RANKING DO CLÃ' : 'RANKING SEMANAL',
-                          style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 2),
+                          _selectedTab == 2
+                              ? 'TORNEIO SEMANAL'
+                              : _selectedTab == 1
+                                  ? 'RANKING DO CLÃ'
+                                  : 'RANKING SEMANAL',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: 2),
                         ),
                       ),
                       MouseRegion(
@@ -82,21 +160,29 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with Sing
                         child: GestureDetector(
                           onTap: () => _showYearCalendar(context),
                           child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-                        ),
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.calendar_today_outlined, color: AppColors.primary, size: 13),
-                            SizedBox(width: 5),
-                            Text('Esta semana', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w600)),
-                          ],
-                        ),
-                      ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: AppColors.primary.withValues(alpha: 0.12),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                  color:
+                                      AppColors.primary.withValues(alpha: 0.3)),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.calendar_today_outlined,
+                                    color: AppColors.primary, size: 13),
+                                SizedBox(width: 5),
+                                Text('Esta semana',
+                                    style: TextStyle(
+                                        color: AppColors.primary,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600)),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -104,7 +190,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with Sing
                 ),
                 const SizedBox(height: 14),
 
-                // Toggle Global / Clã
+                // ── Toggle Global / Clã / Torneio ─────────────────
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Container(
@@ -112,78 +198,107 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with Sing
                     decoration: BoxDecoration(
                       color: AppColors.card,
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
+                      border: Border.all(
+                          color: AppColors.cardBorder.withValues(alpha: 0.4)),
                     ),
                     child: Row(
                       children: [
-                        _tabBtn('🌎 Global', _selectedTab == 0, () => setState(() => _selectedTab = 0)),
-                        _tabBtn('🛡️ Clã', _selectedTab == 1, () => setState(() => _selectedTab = 1)),
-                        _tabBtn('🏆 Torneio', _selectedTab == 2, () => setState(() => _selectedTab = 2)),
+                        _tabBtn('🌎 Global', _selectedTab == 0,
+                            () => setState(() => _selectedTab = 0)),
+                        _tabBtn('🛡️ Clã', _selectedTab == 1,
+                            () => setState(() => _selectedTab = 1)),
+                        _tabBtn('🏆 Torneio', _selectedTab == 2,
+                            () => setState(() => _selectedTab = 2)),
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
 
-                // Content area based on selected tab
+                // ── Conteúdo ──────────────────────────────────────
                 if (_selectedTab == 2)
                   Expanded(child: _buildTournamentView())
-                else ...[
-                  // Pódio
-                  SizedBox(
-                    height: 220,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        if (topThree.length > 1)
-                          _buildPodiumItem(topThree[1].name, topThree[1].points, 2, AppColors.greenDark, 120),
-                        const SizedBox(width: 10),
-                        if (topThree.isNotEmpty)
-                          _buildPodiumItem(topThree[0].name, topThree[0].points, 1, AppColors.primary, 160),
-                        const SizedBox(width: 10),
-                        if (topThree.length > 2)
-                          _buildPodiumItem(topThree[2].name, topThree[2].points, 3, const Color(0xFF5A9A6E), 100),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-
-                  // Divisor
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(children: [
-                      Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.3))),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Text(
-                          _selectedTab == 1 ? 'Membros do Clã' : 'Classificação Geral',
-                          style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 11, letterSpacing: 1),
-                        ),
-                      ),
-                      Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.3))),
-                    ]),
-                  ),
-                  const SizedBox(height: 10),
-
-                  // Lista
+                else
                   Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      children: [
-                        ...rest.map((p) => _buildRankRow(p.rank, p.name, p.points, p.isHighlighted)),
-                        if (canLoadMoreGlobal)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: TextButton(
-                              onPressed: () => setState(() => _paginatedGlobalCount += 5),
-                              child: const Text('Carregar Mais', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
-                            ),
-                          ),
-                      ],
-                    ),
+                    child: isLoadingCurrent
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                                color: AppColors.primary))
+                        : (_selectedTab == 0 && _errorGlobal != null) ||
+                                (_selectedTab == 1 && _errorClan != null)
+                            ? _buildErrorView()
+                            : players.isEmpty
+                                ? _buildEmptyView()
+                                : RefreshIndicator(
+                                    color: AppColors.primary,
+                                    onRefresh: _loadRankings,
+                                    child: ListView(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      children: [
+                                        // Pódio
+                                        SizedBox(
+                                          height: 220,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              if (topThree.length > 1)
+                                                _buildPodiumItem(
+                                                    topThree[1],
+                                                    2,
+                                                    AppColors.greenDark,
+                                                    120,
+                                                    myUid),
+                                              const SizedBox(width: 10),
+                                              if (topThree.isNotEmpty)
+                                                _buildPodiumItem(
+                                                    topThree[0],
+                                                    1,
+                                                    AppColors.primary,
+                                                    160,
+                                                    myUid),
+                                              const SizedBox(width: 10),
+                                              if (topThree.length > 2)
+                                                _buildPodiumItem(
+                                                    topThree[2],
+                                                    3,
+                                                    const Color(0xFF5A9A6E),
+                                                    100,
+                                                    myUid),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(height: 14),
+                                        // Lista (posições 4+)
+                                        ...rest.map((player) => _buildPlayerRow(
+                                            player, myUid)),
+                                        if (canLoadMoreGlobal)
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 16),
+                                            child: TextButton(
+                                              onPressed: () => setState(() =>
+                                                  _paginatedGlobalCount +=
+                                                      _pageSize),
+                                              child: const Text(
+                                                  'Carregar mais',
+                                                  style: TextStyle(
+                                                      color: AppColors.primary,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ),
+                                          ),
+                                        // Minha posição fixada no fundo (se fora do top visível)
+                                        _buildMyPositionFooter(
+                                            players, myUid, userService),
+                                        const SizedBox(height: 20),
+                                      ],
+                                    ),
+                                  ),
                   ),
-                ],
               ],
             ),
           ),
@@ -192,479 +307,398 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with Sing
     );
   }
 
-  // ── Calendário anual ─────────────────────────────────────────
-  void _showYearCalendar(BuildContext context) {
-    final now = DateTime.now();
-    final year = now.year;
+  // ── Pódio ────────────────────────────────────────────────────────
+  Widget _buildPodiumItem(
+      RankingEntry player, int place, Color color, double height, String myUid) {
+    final isMe = player.uid == myUid;
+    final medal = place == 1 ? '🥇' : place == 2 ? '🥈' : '🥉';
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => _YearCalendarPage(year: year, today: now),
-      ),
-    );
-  }
-
-  Widget _tabBtn(String label, bool active, VoidCallback onTap) {
     return Expanded(
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: onTap,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            margin: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              color: active ? AppColors.primary : Colors.transparent,
-              borderRadius: BorderRadius.circular(7),
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              label,
-              style: TextStyle(
-                color: active ? Colors.white : AppColors.textMuted,
-                fontSize: 12,
-                fontWeight: active ? FontWeight.w800 : FontWeight.normal,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPodiumItem(String name, String points, int rank, Color color, double h) {
-    final isFirst = rank == 1;
-    final avatarSize = isFirst ? 76.0 : 60.0;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        if (isFirst)
-          Container(margin: const EdgeInsets.only(bottom: 6), child: const Icon(Icons.emoji_events, color: AppColors.gold, size: 26)),
-        Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: avatarSize, height: avatarSize,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: color, width: isFirst ? 3 : 2),
-                boxShadow: isFirst ? [BoxShadow(color: color.withValues(alpha: 0.4), blurRadius: 16, spreadRadius: 3)] : null,
-              ),
-              child: Container(
-                margin: const EdgeInsets.all(4),
-                decoration: const BoxDecoration(color: AppColors.card, shape: BoxShape.circle),
-                clipBehavior: Clip.antiAlias,
-                child: CachedNetworkImage(
-                  imageUrl: 'https://i.pravatar.cc/150?u=${name.replaceAll(' ', '')}',
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => const Center(child: CircularProgressIndicator(strokeWidth: 2)),
-                  errorWidget: (context, url, error) => Icon(Icons.person, color: AppColors.textMuted, size: isFirst ? 34 : 24),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: -4,
-              child: Container(
-                width: 22, height: 22,
-                decoration: BoxDecoration(color: color, shape: BoxShape.circle, border: Border.all(color: AppColors.background, width: 2)),
-                child: Center(child: Text('$rank', style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800))),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Text(name, style: TextStyle(color: isFirst ? Colors.white : Colors.white.withValues(alpha: 0.7), fontSize: 11, fontWeight: FontWeight.w700)),
-        const SizedBox(height: 2),
-        Text(points, style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 6),
-        Container(
-          width: isFirst ? 76 : 60,
-          height: isFirst ? 36 : 26,
-          decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.15),
-            borderRadius: const BorderRadius.only(topLeft: Radius.circular(6), topRight: Radius.circular(6)),
-            border: Border.all(color: color.withValues(alpha: 0.3)),
-          ),
-          child: Center(child: Text('#$rank', style: TextStyle(color: color, fontSize: 13, fontWeight: FontWeight.w800))),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildRankRow(int rank, String name, String points, bool isYou) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(
-        color: isYou ? AppColors.primary.withValues(alpha: 0.10) : AppColors.card,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: isYou ? AppColors.primary.withValues(alpha: 0.4) : AppColors.cardBorder.withValues(alpha: 0.35)),
-      ),
-      child: Row(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(
-            width: 26,
-            child: Text('$rank', style: TextStyle(color: isYou ? AppColors.primary : AppColors.textMuted, fontSize: 14, fontWeight: FontWeight.w800)),
-          ),
+          Text(medal, style: const TextStyle(fontSize: 22)),
+          const SizedBox(height: 6),
           Container(
-            width: 36, height: 36,
-            decoration: const BoxDecoration(color: AppColors.inputBackground, shape: BoxShape.circle),
-            clipBehavior: Clip.antiAlias,
-            child: CachedNetworkImage(
-              imageUrl: 'https://i.pravatar.cc/150?u=${name.replaceAll(' ', '')}',
-              fit: BoxFit.cover,
-              placeholder: (context, url) => const SizedBox(width: 14, height: 14, child: Center(child: CircularProgressIndicator(strokeWidth: 2))),
-              errorWidget: (context, url, error) => const Icon(Icons.person, color: AppColors.textMuted, size: 20),
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                  color: isMe ? AppColors.gold : color, width: isMe ? 2.5 : 2),
+            ),
+            child: ClipOval(
+              child: player.photoUrl != null
+                  ? CachedNetworkImage(
+                      imageUrl: player.photoUrl!,
+                      fit: BoxFit.cover,
+                      errorWidget: (c, u, e) => _defaultAvatar(color))
+                  : _defaultAvatar(color),
             ),
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(name, style: TextStyle(color: isYou ? Colors.white : Colors.white.withValues(alpha: 0.85), fontSize: 14, fontWeight: FontWeight.w600)),
+          const SizedBox(height: 6),
+          Text(
+            _shortName(player.displayName),
+            style: TextStyle(
+                color: isMe ? AppColors.gold : Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.w700),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
-          if (isYou)
-            Container(
-              margin: const EdgeInsets.only(right: 8),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10), border: Border.all(color: AppColors.primary.withValues(alpha: 0.3))),
-              child: const Text('Você', style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
+          const SizedBox(height: 4),
+          Text(
+            '${player.weeklyXp} XP',
+            style:
+                TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 6),
+          Container(
+            height: height,
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.15),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(8)),
+              border: Border(top: BorderSide(color: color, width: 1.5)),
             ),
-          Text(points, style: TextStyle(color: isYou ? AppColors.primary : AppColors.greenDark, fontSize: 13, fontWeight: FontWeight.bold)),
+            child: Center(
+              child: Text('#$place',
+                  style: TextStyle(
+                      color: color,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 18)),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  // ── Tournament view ───────────────────────────────────────────
+  Widget _defaultAvatar(Color color) {
+    return Container(
+      color: color.withValues(alpha: 0.2),
+      child: Icon(Icons.person, color: color, size: 24),
+    );
+  }
+
+  // ── Linha de jogador (posições 4+) ──────────────────────────────
+  Widget _buildPlayerRow(RankingEntry player, String myUid) {
+    final isMe = player.uid == myUid;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: isMe
+            ? AppColors.primary.withValues(alpha: 0.1)
+            : AppColors.card,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+            color: isMe
+                ? AppColors.primary.withValues(alpha: 0.4)
+                : AppColors.cardBorder.withValues(alpha: 0.3)),
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 32,
+            child: Text(
+              '#${player.position}',
+              style: TextStyle(
+                  color: isMe ? AppColors.primary : AppColors.textMuted,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                  color: isMe
+                      ? AppColors.primary
+                      : AppColors.cardBorder.withValues(alpha: 0.4)),
+            ),
+            child: ClipOval(
+              child: player.photoUrl != null
+                  ? CachedNetworkImage(
+                      imageUrl: player.photoUrl!,
+                      fit: BoxFit.cover,
+                      errorWidget: (c, u, e) =>
+                          _defaultAvatar(AppColors.primary))
+                  : _defaultAvatar(AppColors.primary),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  isMe ? '${player.displayName} (Você)' : player.displayName,
+                  style: TextStyle(
+                      color: isMe ? AppColors.primary : Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600),
+                ),
+                if (player.clanName != null)
+                  Text(player.clanName!,
+                      style: const TextStyle(
+                          color: AppColors.textMuted, fontSize: 11)),
+              ],
+            ),
+          ),
+          Text(
+            '${player.weeklyXp} XP',
+            style: TextStyle(
+                color: isMe ? AppColors.primary : AppColors.textSecondary,
+                fontSize: 12,
+                fontWeight: FontWeight.w700),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Mostra a posição do usuário fixada no fundo se ele não estiver
+  /// na lista visível.
+  Widget _buildMyPositionFooter(
+      List<RankingEntry> visiblePlayers, String myUid, UserService userService) {
+    final isVisible = visiblePlayers.any((p) => p.uid == myUid);
+    if (isVisible) return const SizedBox.shrink();
+
+    // Encontra nos dados completos
+    final allPlayers =
+        _selectedTab == 0 ? _globalPlayers : _clanPlayers;
+    final myIndex = allPlayers.indexWhere((p) => p.uid == myUid);
+    if (myIndex < 0) return const SizedBox.shrink();
+
+    final me = allPlayers[myIndex];
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Text('• • •',
+              style: TextStyle(
+                  color: AppColors.textMuted.withValues(alpha: 0.5),
+                  fontSize: 14)),
+        ),
+        _buildPlayerRow(me, myUid),
+      ],
+    );
+  }
+
+  Widget _buildErrorView() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.wifi_off, color: AppColors.textMuted, size: 48),
+          const SizedBox(height: 12),
+          const Text('Não foi possível carregar o ranking',
+              style: TextStyle(color: AppColors.textSecondary)),
+          const SizedBox(height: 16),
+          TextButton(
+            onPressed: _loadRankings,
+            child: const Text('Tentar novamente',
+                style: TextStyle(color: AppColors.primary)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyView() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.leaderboard_outlined,
+              color: AppColors.textMuted, size: 48),
+          const SizedBox(height: 12),
+          Text(
+            _selectedTab == 1
+                ? 'Seu clã ainda não tem membros no ranking'
+                : 'Nenhum dado de ranking esta semana',
+            style: const TextStyle(color: AppColors.textSecondary),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ── Tab button ─────────────────────────────────────────────────
+  Widget _tabBtn(String label, bool active, VoidCallback onTap) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 40,
+          decoration: BoxDecoration(
+            color: active ? AppColors.primary : Colors.transparent,
+            borderRadius: BorderRadius.circular(9),
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(
+                  color: active ? Colors.white : AppColors.textMuted,
+                  fontSize: 12,
+                  fontWeight:
+                      active ? FontWeight.w700 : FontWeight.w500),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ── Torneio (mantido como original) ────────────────────────────
   Widget _buildTournamentView() {
-    final players = _tournament.weeklyRanking;
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       children: [
-        // Tournament info card
         Container(
-          margin: const EdgeInsets.only(bottom: 16),
           padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.only(bottom: 16),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [AppColors.primary.withValues(alpha: 0.15), AppColors.card],
+            gradient: const LinearGradient(
+              colors: [Color(0xFF0D2641), Color(0xFF061629)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: AppColors.primary.withValues(alpha: 0.35)),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+                color: AppColors.primary.withValues(alpha: 0.4)),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  const Icon(Icons.emoji_events, color: AppColors.gold, size: 28),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(_tournament.tournamentName, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800)),
-                        const SizedBox(height: 2),
-                        Text(_tournament.endsLabel, style: const TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w600)),
-                      ],
-                    ),
-                  ),
+                  const Icon(Icons.emoji_events,
+                      color: AppColors.gold, size: 24),
+                  const SizedBox(width: 8),
+                  const Text('Torneio em andamento',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15)),
+                  const Spacer(),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
-                    ),
-                    child: const Text('ATIVO', style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                        color: AppColors.error.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: const Text('AO VIVO',
+                        style: TextStyle(
+                            color: AppColors.error,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w900)),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
-              // Prizes
+              Text(
+                'Complete o máximo de lições esta semana para subir no ranking e ganhar recompensas exclusivas!',
+                style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.7),
+                    fontSize: 13,
+                    height: 1.4),
+              ),
+              const SizedBox(height: 16),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _prizeChip('🥇 1º', '500 XP', AppColors.gold),
-                  const SizedBox(width: 8),
-                  _prizeChip('🥈 2º', '300 XP', Colors.grey.shade400),
-                  const SizedBox(width: 8),
-                  _prizeChip('🥉 3º', '150 XP', const Color(0xFFCD7F32)),
+                  _tournamentStat('🥇', '500 XP', '1º lugar'),
+                  _tournamentStat('🥈', '250 XP', '2º lugar'),
+                  _tournamentStat('🥉', '100 XP', '3º lugar'),
                 ],
               ),
             ],
           ),
         ),
-        // Tournament ranking list
-        ...players.map((p) {
-          final isTop3 = p.rank <= 3;
-          final medalEmoji = p.rank == 1 ? '🥇' : p.rank == 2 ? '🥈' : p.rank == 3 ? '🥉' : '';
-          return Container(
-            margin: const EdgeInsets.only(bottom: 6),
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-            decoration: BoxDecoration(
-              color: p.isUser ? AppColors.primary.withValues(alpha: 0.10) : isTop3 ? AppColors.card : AppColors.card,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: p.isUser ? AppColors.primary.withValues(alpha: 0.4)
-                    : isTop3 ? AppColors.gold.withValues(alpha: 0.2) : AppColors.cardBorder.withValues(alpha: 0.25),
-              ),
-            ),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 30,
-                  child: Text(
-                    isTop3 ? medalEmoji : '#${p.rank}',
-                    style: TextStyle(fontSize: isTop3 ? 16 : 13, fontWeight: FontWeight.w800, color: p.isUser ? AppColors.primary : AppColors.textMuted),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Container(
-                  width: 32, height: 32,
-                  decoration: const BoxDecoration(color: AppColors.inputBackground, shape: BoxShape.circle),
-                  clipBehavior: Clip.antiAlias,
-                  child: CachedNetworkImage(
-                    imageUrl: 'https://i.pravatar.cc/150?u=${p.name.replaceAll(' ', '')}',
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const SizedBox(width: 12, height: 12, child: Center(child: CircularProgressIndicator(strokeWidth: 2))),
-                    errorWidget: (context, url, error) => const Icon(Icons.person, color: AppColors.textMuted, size: 18),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(p.name, style: TextStyle(color: p.isUser ? Colors.white : Colors.white.withValues(alpha: 0.85), fontSize: 13, fontWeight: FontWeight.w600)),
-                ),
-                if (p.isUser)
-                  Container(
-                    margin: const EdgeInsets.only(right: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(8)),
-                    child: const Text('Você', style: TextStyle(color: AppColors.primary, fontSize: 9, fontWeight: FontWeight.w700)),
-                  ),
-                Text('${p.xp} XP', style: TextStyle(color: p.isUser ? AppColors.primary : AppColors.greenDark, fontSize: 12, fontWeight: FontWeight.bold)),
-              ],
-            ),
-          );
+        const Text('PARTICIPANTES',
+            style: TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 11,
+                letterSpacing: 1.5,
+                fontWeight: FontWeight.w700)),
+        const SizedBox(height: 12),
+        // Usa dados globais reais no torneio também
+        ..._globalPlayers.take(8).map((player) {
+          final userService = ref.read(userServiceProvider);
+          return _buildPlayerRow(player, userService.uid);
         }),
-        const SizedBox(height: 20),
       ],
     );
   }
 
-  Widget _prizeChip(String label, String prize, Color color) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.08),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: color.withValues(alpha: 0.25)),
-        ),
+  Widget _tournamentStat(String emoji, String prize, String label) {
+    return Column(
+      children: [
+        Text(emoji, style: const TextStyle(fontSize: 24)),
+        const SizedBox(height: 4),
+        Text(prize,
+            style: const TextStyle(
+                color: AppColors.gold,
+                fontWeight: FontWeight.w700,
+                fontSize: 13)),
+        Text(label,
+            style: const TextStyle(
+                color: AppColors.textMuted, fontSize: 11)),
+      ],
+    );
+  }
+
+  void _showYearCalendar(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.card,
+      shape:
+          const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (_) => Padding(
+        padding: const EdgeInsets.all(24),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label, style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w700)),
-            const SizedBox(height: 2),
-            Text(prize, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600)),
+            const Text('Período do ranking',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold)),
+            const SizedBox(height: 16),
+            Text(
+              'O ranking semanal é resetado toda segunda-feira às 00:00.\nSeus pontos acumulados ficam no histórico.',
+              style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.7), fontSize: 13, height: 1.5),
+            ),
+            const SizedBox(height: 24),
           ],
         ),
       ),
     );
   }
+
+  String _shortName(String name) {
+    final parts = name.split(' ');
+    if (parts.length >= 2) return '${parts[0]} ${parts[1][0]}.';
+    return name;
+  }
 }
 
-class _PlayerData {
-  final String name;
-  final String points;
-  final int rank;
-  final bool isHighlighted;
-  const _PlayerData(this.name, this.points, this.rank, this.isHighlighted);
-}
-
+// ── Ícone decorativo ─────────────────────────────────────────────
 class _MoleculeIcon extends StatelessWidget {
   final double size;
   const _MoleculeIcon({required this.size});
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(width: size, height: size, child: CustomPaint(painter: _MolPainter()));
-  }
-}
-
-class _MolPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final p1 = Paint()..color = const Color(0xFF00C402)..style = PaintingStyle.fill;
-    final p2 = Paint()..color = const Color(0xFF1D5F31)..style = PaintingStyle.fill;
-    final lp = Paint()..color = const Color(0xFF00C402).withValues(alpha: 0.5)..strokeWidth = 1..style = PaintingStyle.stroke;
-    final cx = size.width / 2; final cy = size.height / 2; final r = size.width * 0.11;
-    final pts = [Offset(cx, cy - size.height * 0.35), Offset(cx + size.width * 0.3, cy - size.height * 0.15),
-      Offset(cx + size.width * 0.3, cy + size.height * 0.15), Offset(cx, cy + size.height * 0.35),
-      Offset(cx - size.width * 0.3, cy + size.height * 0.15), Offset(cx - size.width * 0.3, cy - size.height * 0.15)];
-    for (final pos in pts) canvas.drawLine(Offset(cx, cy), pos, lp);
-    for (int i = 0; i < pts.length; i++) canvas.drawLine(pts[i], pts[(i + 1) % pts.length], lp);
-    for (int i = 0; i < pts.length; i++) canvas.drawCircle(pts[i], r * 0.7, i.isEven ? p1 : p2);
-    canvas.drawCircle(Offset(cx, cy), r * 1.1, p2);
-    canvas.drawCircle(Offset(cx, cy), r * 0.75, p1);
-  }
-  @override
-  bool shouldRepaint(covariant CustomPainter o) => false;
-}
-
-// ─────────────────────────────────────────────────────────────────
-//  PÁGINA DE CALENDÁRIO ANUAL
-// ─────────────────────────────────────────────────────────────────
-
-class _YearCalendarPage extends StatelessWidget {
-  final int year;
-  final DateTime today;
-
-  const _YearCalendarPage({required this.year, required this.today});
-
-  static const _monthNames = [
-    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
-  ];
-  static const _dayHeaders = ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text(
-          'CALENDÁRIO $year',
-          style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 1.5),
-        ),
-        centerTitle: true,
-      ),
-      body: GridView.builder(
-        padding: const EdgeInsets.fromLTRB(12, 8, 12, 32),
-        physics: const BouncingScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.78,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
-        itemCount: 12,
-        itemBuilder: (context, index) {
-          return _buildMonthCard(index + 1);
-        },
-      ),
-    );
-  }
-
-  Widget _buildMonthCard(int month) {
-    final firstDay = DateTime(year, month, 1);
-    final daysInMonth = DateTime(year, month + 1, 0).day;
-    // weekday: 1=Mon ... 7=Sun. We want Mon=0 to Sun=6.
-    final startWeekday = (firstDay.weekday - 1) % 7;
-    final isCurrentMonth = today.year == year && today.month == month;
-
-    // Compute current week range for highlighting
-    final weekStart = today.subtract(Duration(days: (today.weekday - 1) % 7));
-    final weekEnd = weekStart.add(const Duration(days: 6));
-
-    return Container(
-      decoration: BoxDecoration(
-        color: isCurrentMonth ? AppColors.primary.withValues(alpha: 0.08) : AppColors.card,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isCurrentMonth ? AppColors.primary.withValues(alpha: 0.4) : AppColors.cardBorder.withValues(alpha: 0.3),
-        ),
-      ),
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Month name
-          Text(
-            _monthNames[month - 1],
-            style: TextStyle(
-              color: isCurrentMonth ? AppColors.primary : Colors.white,
-              fontSize: 13,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const SizedBox(height: 6),
-          // Day headers
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: _dayHeaders.map((d) => SizedBox(
-              width: 18,
-              child: Text(d, textAlign: TextAlign.center, style: TextStyle(color: AppColors.textMuted.withValues(alpha: 0.6), fontSize: 8, fontWeight: FontWeight.w600)),
-            )).toList(),
-          ),
-          const SizedBox(height: 4),
-          // Day grid
-          Expanded(
-            child: Column(
-              children: _buildWeeks(month, daysInMonth, startWeekday, weekStart, weekEnd),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  List<Widget> _buildWeeks(int month, int daysInMonth, int startWeekday, DateTime weekStart, DateTime weekEnd) {
-    final weeks = <Widget>[];
-    int day = 1;
-
-    for (int row = 0; row < 6 && day <= daysInMonth; row++) {
-      final cells = <Widget>[];
-      for (int col = 0; col < 7; col++) {
-        if (row == 0 && col < startWeekday || day > daysInMonth) {
-          cells.add(const SizedBox(width: 18, height: 18));
-        } else {
-          final date = DateTime(year, month, day);
-          final isToday = date.year == today.year && date.month == today.month && date.day == today.day;
-          final isThisWeek = !date.isBefore(weekStart) && !date.isAfter(weekEnd);
-
-          cells.add(
-            Container(
-              width: 18,
-              height: 18,
-              decoration: BoxDecoration(
-                color: isToday
-                    ? AppColors.primary
-                    : isThisWeek
-                        ? AppColors.primary.withValues(alpha: 0.18)
-                        : Colors.transparent,
-                shape: BoxShape.circle,
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                '$day',
-                style: TextStyle(
-                  color: isToday
-                      ? Colors.white
-                      : isThisWeek
-                          ? AppColors.primary
-                          : Colors.white.withValues(alpha: 0.5),
-                  fontSize: 9,
-                  fontWeight: isToday || isThisWeek ? FontWeight.w800 : FontWeight.normal,
-                ),
-              ),
-            ),
-          );
-          day++;
-        }
-      }
-      weeks.add(
-        Padding(
-          padding: const EdgeInsets.only(bottom: 2),
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: cells),
-        ),
-      );
-    }
-    return weeks;
+    return Icon(Icons.hub_outlined, color: AppColors.primary, size: size);
   }
 }

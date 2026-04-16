@@ -22,31 +22,46 @@ abstract class FS {
   static const String questions = 'questions';
   static const String members = 'members';
   static const String messages = 'messages';
+  static const String covenants = 'covenants'; // subcoleção users/{uid}/covenants
 
-  // ── User fields ───────────────────────────────────────────────────────────
+  // ── User fields (esquema unificado UserModel) ─────────────────────────────
   static const String uid = 'uid';
-  static const String name = 'name';
+  static const String displayName = 'displayName'; // padrão atual
   static const String email = 'email';
   static const String profession = 'profession';
   static const String photoUrl = 'photoUrl';
   static const String createdAt = 'createdAt';
+  static const String updatedAt = 'updatedAt';
   static const String sparkPoints = 'sparkPoints';
   static const String xp = 'xp';
-  static const String energy = 'energy';
-  static const String energyLastRegen = 'energyLastRegen';
-  static const String streak = 'streak';
-  static const String longestStreak = 'longestStreak';
-  static const String lastLoginDate = 'lastLoginDate';
-  static const String isPremium = 'isPremium';
+  static const String level = 'level';
   static const String tensionLevel = 'tensionLevel';
+  static const String currentStreak = 'currentStreak';
+  static const String longestStreak = 'longestStreak';
+  static const String activeDays = 'activeDays';
+  static const String studiedToday = 'studiedToday';
+  static const String lastStudyDate = 'lastStudyDate';
+  static const String weeklyXp = 'weeklyXp';
+  static const String monthlyXp = 'monthlyXp';
+  static const String unlockedBadgeIds = 'unlockedBadgeIds'; // padrão atual
   static const String role = 'role';
   static const String clanId = 'clanId';
+  static const String clanName = 'clanName';
   static const String totalLessonsCompleted = 'totalLessonsCompleted';
   static const String totalCorrectAnswers = 'totalCorrectAnswers';
   static const String totalAnswers = 'totalAnswers';
-  static const String userBadges = 'badges';
-  static const String weeklyXp = 'weeklyXp';
-  static const String monthlyXp = 'monthlyXp';
+
+  // ── Aliases legados (dados antigos no Firestore — não usar em código novo) ─
+  // ignore: constant_identifier_names
+  static const String name = 'name';               // legado → use displayName
+  // ignore: constant_identifier_names
+  static const String streak = 'streak';            // legado → use currentStreak
+  // ignore: constant_identifier_names
+  static const String userBadges = 'badges';        // legado → use unlockedBadgeIds
+  static const String energy = 'energy';
+  static const String energyLastRegen = 'energyLastRegen';
+  static const String lastLoginDate = 'lastLoginDate';
+  static const String isPremium = 'isPremium';
 
   // ── Progress fields ───────────────────────────────────────────────────────
   static const String moduleId = 'moduleId';

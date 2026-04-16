@@ -27,6 +27,10 @@ service cloud.firestore {
         allow read, write: if request.auth.uid == uid;
       }
 
+      match /covenants/{covId} {
+        allow read, write: if request.auth.uid == uid;
+      }
+
       match /quiz_history/{id} {
         allow read, write: if request.auth.uid == uid;
       }
