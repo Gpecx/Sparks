@@ -1,6 +1,7 @@
-import 'dart:ui'; // Adicionado para o efeito Glassmorphism (BackdropFilter)
+import 'dart:ui';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/screens/settings_screen.dart';
@@ -8,51 +9,51 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/technical_standards_screen.dart';
-import 'package:spark_app/services/streak_service.dart';
+import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/services/covenant_service.dart';
+import 'package:spark_app/services/progress_service.dart';
+import 'package:spark_app/models/progress_model.dart';
+import 'package:spark_app/providers/user_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class DashboardScreen extends StatefulWidget {
+// ─────────────────────────────────────────────────────────────────
+//  DASHBOARD — Versão com Firebase
+//  MUDANÇAS:
+//  - Saudação usa displayName do UserService (Firestore)
+//  - Streak lê do UserService (persistido)
+//  - "Continue Aprendendo" usa getLastActiveModule() real
+//  - Pactos Semanais lêem progress do Firestore
+//  - Level, XP e Spark Points vêm do Firestore
+// ─────────────────────────────────────────────────────────────────
+
+class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
-  // Variável para controlar o estado de loading (Skeleton)
+class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    // Simula uma requisição na API de 2 segundos para mostrar o efeito Shimmer
     Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+      if (mounted) setState(() => _isLoading = false);
     });
   }
 
-  // ============================================================
-  // LÓGICA DE SAUDAÇÃO DINÂMICA
-  // ============================================================
   String _getDynamicGreeting() {
     final hour = DateTime.now().hour;
-    if (hour < 12) {
-      return 'Bom dia';
-    } else if (hour < 18) {
-      return 'Boa tarde';
-    } else {
-      return 'Boa noite';
-    }
+    if (hour < 12) return 'Bom dia';
+    if (hour < 18) return 'Boa tarde';
+    return 'Boa noite';
   }
 
-  // ============================================================
-  // MENU DE PERFIL (BottomSheet com animações)
-  // ============================================================
   void _showProfileMenu() {
+    final userService = ref.read(userServiceProvider);
+
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -87,9 +88,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         shape: BoxShape.circle,
                         border: Border.all(color: AppColors.accent, width: 2),
                       ),
-                      child: const CircleAvatar(
+                      child: CircleAvatar(
                         backgroundColor: AppColors.surface,
-                        child: Icon(Icons.person, color: AppColors.accent, size: 30),
+                        backgroundImage: userService.user?.photoUrl != null
+                            ? NetworkImage(userService.user!.photoUrl!)
+                            : null,
+                        child: userService.user?.photoUrl == null
+                            ? const Icon(Icons.person, color: AppColors.accent, size: 30)
+                            : null,
                       ),
                     ),
                     const SizedBox(width: 14),
@@ -97,9 +103,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Alex Rodriguez',
-                            style: TextStyle(
+                          // ✅ Nome real do Firestore
+                          Text(
+                            userService.displayName,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -107,7 +114,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'alex.rodriguez@spark.com',
+                            userService.user?.email ?? '',
                             style: TextStyle(
                               color: Colors.white.withValues(alpha: 0.5),
                               fontSize: 13,
@@ -115,7 +122,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'Técnico Líder',
+                            userService.user?.role ?? 'Técnico',
                             style: TextStyle(
                               color: AppColors.primary.withValues(alpha: 0.8),
                               fontSize: 12,
@@ -175,8 +182,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
               const Padding(
-                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                 child: Text('NOVAS MECÂNICAS', style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.bold)),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                child: Text('NOVAS MECÂNICAS', style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.bold)),
               ),
               _buildProfileMenuItem(
                 icon: Icons.flash_on,
@@ -251,33 +258,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // ============================================================
-  // CABEÇALHO DE SESSÃO COM BOTÃO "VER TODAS"
-  // ============================================================
   Widget _buildSectionHeader(String title, VoidCallback onSeeAll) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        Text(title, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
         _ResponsiveTapWidget(
           onTap: onSeeAll,
           child: const Row(
             children: [
-              Text(
-                'Ver todas',
-                style: TextStyle(
-                  color: AppColors.primary,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text('Ver todas', style: TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.bold)),
               SizedBox(width: 4),
               Icon(Icons.arrow_forward_ios, color: AppColors.primary, size: 12),
             ],
@@ -287,10 +277,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // ============================================================
-  // NOVO: COMPONENTE DE HEADER EXTRAÍDO PARA LIMPAR O BUILD
-  // ============================================================
+  // ── Header com nome real do Firestore ───────────────────────────
   Widget _buildHeader() {
+    final userService = ref.watch(userServiceProvider);
+    final firstName = userService.displayName.split(' ').first;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -299,18 +290,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: [
             Text(
               '${_getDynamicGreeting()},',
-              style: const TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 16,
-              ),
+              style: const TextStyle(color: AppColors.textSecondary, fontSize: 16),
             ),
-            const Text(
-              'Alex!', // Nome do usuário
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
+            Text(
+              '$firstName!', // ✅ Nome real do Firestore
+              style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -324,11 +308,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               borderRadius: BorderRadius.circular(23),
               border: Border.all(color: AppColors.cardBorder),
             ),
-            child: const Icon(
-              Icons.person,
-              color: AppColors.textSecondary,
-              size: 24,
-            ),
+            child: userService.user?.photoUrl != null
+                ? ClipOval(child: Image.network(userService.user!.photoUrl!, fit: BoxFit.cover))
+                : const Icon(Icons.person, color: AppColors.textSecondary, size: 24),
           ),
         ),
       ],
@@ -347,14 +329,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 1. Cabeçalho (Header limpo)
                   _buildHeader(),
-                  const SizedBox(height: 32), // Mais respiro visual
-                  
-                  // 2. Foco Principal: Progresso e Próxima Lição agrupados
+                  const SizedBox(height: 32),
                   _buildGamificationCenter(),
-                  const SizedBox(height: 16), // Espaço menor aqui para agrupar o contexto
-                  
+                  const SizedBox(height: 16),
                   _ResponsiveTapWidget(
                     onTap: () {
                       final shell = context.findAncestorStateOfType<MainShellScreenState>();
@@ -362,29 +340,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     },
                     child: _buildContinueLearningCard(),
                   ),
-                  const SizedBox(height: 40), // Espaço grande para separar seções
-                  
-                  // 3. Pactos Semanais (Gamificação e Engajamento)
-                  _buildSectionHeader('Pactos Semanais', () {
-                    context.push('/covenants');
-                  }),
+                  const SizedBox(height: 40),
+                  _buildSectionHeader('Pactos Semanais', () => context.push('/covenants')),
                   const SizedBox(height: 16),
                   _isLoading ? _buildCovenantSkeleton() : _buildCovenantList(),
                   const SizedBox(height: 40),
-
-                  // 4. Normas em Destaque (Exploração - Agora com Glassmorphism)
-                  _buildSectionHeader('Normas em Destaque', () {
-                    context.push('/standards');
-                  }),
+                  _buildSectionHeader('Normas em Destaque', () => context.push('/standards')),
                   const SizedBox(height: 16),
                   _isLoading ? _buildNormasSkeleton() : _buildNormasList(context),
                   const SizedBox(height: 40),
-                  
-                  // 5. Extras: Destaque de Segurança e Powerplay
                   _buildSecurityHighlightCard(),
                   const SizedBox(height: 24),
                   _buildPowerplayBanner(),
-                  const SizedBox(height: 40), // Espaço extra no final da rolagem
+                  const SizedBox(height: 40),
                 ],
               ),
             ),
@@ -394,16 +362,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // ============================================================
-  // WIDGETS DE SKELETON (SHIMMER)
-  // ============================================================
+  // ── Skeletons ───────────────────────────────────────────────────
   Widget _buildCovenantSkeleton() {
     return SizedBox(
       height: 145,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         clipBehavior: Clip.none,
-        itemCount: 2, 
+        itemCount: 2,
         separatorBuilder: (ctx, index) => const SizedBox(width: 16),
         itemBuilder: (ctx, index) => const _SkeletonBox(width: 280, height: 145),
       ),
@@ -423,17 +389,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // ============================================================
-  // COMPONENTES EXISTENTES REVISADOS
-  // ============================================================
-
+  // ── Gamification Center com dados reais ─────────────────────────
   Widget _buildGamificationCenter() {
+    final userService = ref.watch(userServiceProvider);
+    final streak = userService.currentStreak;
+    final level = userService.level;
+    final multiplier = userService.xpMultiplier;
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.card.withValues(alpha: 0.6),
         borderRadius: BorderRadius.circular(16),
-        // Deixei a borda um pouquinho mais suave para não poluir
         border: Border.all(color: AppColors.primary.withValues(alpha: 0.15)),
       ),
       child: Column(
@@ -450,7 +417,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Técnico Nível 12',
+                    'Técnico Nível $level', // ✅ Nível real
                     style: TextStyle(color: AppColors.primary.withValues(alpha: 0.8), fontSize: 13, fontWeight: FontWeight.w600),
                   ),
                 ],
@@ -459,7 +426,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('🔥 Streak de ${StreakService().currentStreak} dias! Multiplicador de ${StreakService().xpMultiplier}x.'),
+                      content: Text('🔥 Streak de $streak dias! Multiplicador de ${multiplier}x.'),
                       backgroundColor: AppColors.primary,
                       duration: const Duration(seconds: 3),
                     ),
@@ -477,7 +444,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       const Icon(Icons.local_fire_department, color: AppColors.gold, size: 16),
                       const SizedBox(width: 4),
                       Text(
-                        '${StreakService().currentStreak} Dias',
+                        '$streak Dias', // ✅ Streak real
                         style: const TextStyle(color: AppColors.gold, fontSize: 13, fontWeight: FontWeight.w800),
                       ),
                     ],
@@ -508,14 +475,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Desafio Diário',
-                        style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'NR-10 • Revisão Rápida',
-                        style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
-                      ),
+                      Text('Desafio Diário', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+                      Text('NR-10 • Revisão Rápida', style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
                     ],
                   ),
                 ),
@@ -531,6 +492,350 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  // ── Continue Aprendendo com dados reais (ProgressService) ───────
+  Widget _buildContinueLearningCard() {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+
+    return FutureBuilder<ProgressModel?>(
+      future: uid != null
+          ? ProgressService().getAllProgress(uid).then((list) {
+              if (list.isEmpty) return null;
+              final incomplete = list.where((p) => !p.isCompleted).toList()
+                ..sort((a, b) => b.lastAccessed.compareTo(a.lastAccessed));
+              return incomplete.isNotEmpty ? incomplete.first : list.last;
+            })
+          : Future.value(null),
+      builder: (context, snapshot) {
+        final lastModule = snapshot.data;
+
+        final moduleName = lastModule != null
+            ? 'Módulo ${lastModule.moduleId}'
+            : 'NR-35 Trabalho em Altura';
+        final moduleSubtitle = lastModule != null
+            ? 'Módulo • ${lastModule.completedLessons.length} lições concluídas'
+            : 'Módulo 3: Equipamentos de Proteção';
+        final progress = lastModule?.progressPercent ?? 0.65;
+        final progressText = '${(progress * 100).toInt()}%';
+
+        return Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppColors.card,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.5)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Continue Aprendendo',
+                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 14),
+              Row(
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF00C402).withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.menu_book, color: Color(0xFF00C402)),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          moduleName,
+                          style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          moduleSubtitle,
+                          style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: TweenAnimationBuilder<double>(
+                        tween: Tween<double>(begin: 0.0, end: progress),
+                        duration: const Duration(milliseconds: 1200),
+                        curve: Curves.easeOutCubic,
+                        builder: (context, value, _) {
+                          return LinearProgressIndicator(
+                            value: value,
+                            backgroundColor: AppColors.inputBackground,
+                            valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                            minHeight: 6,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    progressText,
+                    style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showDailyChallengeModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.card,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5)),
+        ),
+        title: const Row(
+          children: [
+            Icon(Icons.timer, color: AppColors.primary),
+            SizedBox(width: 10),
+            Text('Desafio Diário', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Teste seus conhecimentos em NR-10! Complete 3 perguntas rápidas para receber recompensas.',
+              style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 14),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(color: AppColors.inputBackground, borderRadius: BorderRadius.circular(12)),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(children: [Text('💰 +50 XP', style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold)), Text('Recompensa', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
+                  Column(children: [Text('⏱️ 3 min', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)), Text('Tempo Est.', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('AGORA NÃO', style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.bold)),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            ),
+            onPressed: () {
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Iniciando desafio diário...'), backgroundColor: AppColors.primary),
+              );
+            },
+            child: const Text('INICIAR DESAFIO', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ── Covenant List com dados reais da subcoleção ─────────────────
+  Widget _buildCovenantList() {
+    // CovenantService já sincroniza com users/{uid}/covenants em tempo real
+    final covenants = CovenantService().activeCovenants;
+
+    return SizedBox(
+      height: 145,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        clipBehavior: Clip.none,
+        itemCount: covenants.isEmpty ? 1 : covenants.length,
+        separatorBuilder: (ctx, index) => const SizedBox(width: 16),
+        itemBuilder: (ctx, index) {
+          if (covenants.isEmpty) {
+            return const _SkeletonBox(width: 280, height: 145);
+          }
+          final cov = covenants[index];
+
+          // ✅ Progresso já sincronizado pelo CovenantService (subcoleção)
+          final realProgress = cov.currentProgress;
+          final progressPercent = cov.maxProgress > 0 ? realProgress / cov.maxProgress : 0.0;
+          final isCompleted = realProgress >= cov.maxProgress;
+
+          return Container(
+            width: 280,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: AppColors.card,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: isCompleted
+                    ? AppColors.gold.withValues(alpha: 0.5)
+                    : AppColors.cardBorder.withValues(alpha: 0.5),
+              ),
+              boxShadow: isCompleted
+                  ? [BoxShadow(color: AppColors.gold.withValues(alpha: 0.1), blurRadius: 8, spreadRadius: 1)]
+                  : null,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          isCompleted ? Icons.check_circle : Icons.commit,
+                          color: isCompleted ? AppColors.gold : AppColors.primary,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          cov.title,
+                          style: TextStyle(
+                            color: isCompleted ? AppColors.gold : Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(cov.reward, style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: Text(
+                    cov.objective,
+                    style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 12),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 6,
+                        decoration: BoxDecoration(color: AppColors.cardBorder, borderRadius: BorderRadius.circular(3)),
+                        child: FractionallySizedBox(
+                          alignment: Alignment.centerLeft,
+                          widthFactor: progressPercent.clamp(0.0, 1.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: isCompleted ? AppColors.gold : AppColors.primary,
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      '$realProgress/${cov.maxProgress} ${cov.trackingType}', // ✅ Progresso real
+                      style: TextStyle(
+                        color: isCompleted ? AppColors.gold : AppColors.textMuted,
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildNormasList(BuildContext context) {
+    return SizedBox(
+      height: 140,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        clipBehavior: Clip.none,
+        children: [
+          SizedBox(width: 140, child: _buildNormaCard(context, 'NR-10', 'Eletricidade', const Color(0xFF00C402))),
+          const SizedBox(width: 16),
+          SizedBox(width: 140, child: _buildNormaCard(context, 'NR-12', 'Máquinas', const Color(0xFF1D5F31))),
+          const SizedBox(width: 16),
+          SizedBox(width: 140, child: _buildNormaCard(context, 'NR-18', 'Construção', const Color(0xFF00C402))),
+          const SizedBox(width: 16),
+          SizedBox(width: 140, child: _buildNormaCard(context, 'NR-33', 'Espaço Confinado', const Color(0xFFB0BEC5))),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNormaCard(BuildContext context, String code, String name, Color iconColor) {
+    return _ResponsiveTapWidget(
+      onTap: () => context.push('/standards'),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.card.withValues(alpha: 0.4),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 56,
+                  height: 56,
+                  decoration: BoxDecoration(color: iconColor.withValues(alpha: 0.2), shape: BoxShape.circle),
+                  child: Center(
+                    child: Container(
+                      width: 28,
+                      height: 28,
+                      decoration: BoxDecoration(color: iconColor, borderRadius: BorderRadius.circular(8)),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 14),
+                Text(code, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 4),
+                Text(name, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12), textAlign: TextAlign.center),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -564,400 +869,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Destaque de Segurança',
-                  style: TextStyle(
-                    color: AppColors.accent,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                const Text('Destaque de Segurança', style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 6),
                 Text(
                   'Confira as novas diretrizes da NR-10 e mantenha-se atualizado.',
-                  style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.8),
-                    fontSize: 13,
-                    height: 1.4,
-                  ),
+                  style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 13, height: 1.4),
                 ),
                 const SizedBox(height: 12),
                 _ResponsiveTapWidget(
                   onTap: () => context.push('/standards'),
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: AppColors.accent,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Text(
-                      'Acessar agora',
-                      style: TextStyle(
-                        color: AppColors.background,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
-                      ),
-                    ),
+                    decoration: BoxDecoration(color: AppColors.accent, borderRadius: BorderRadius.circular(8)),
+                    child: const Text('Acessar agora', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold, fontSize: 13)),
                   ),
                 ),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildContinueLearningCard() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(16),
-        // Suavizamos a borda para integrar melhor ao gamification center
-        border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.5)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Continue Aprendendo',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16, // Reduzido para encaixar na nova hierarquia
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 14),
-          Row(
-            children: [
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF00C402).withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Icon(Icons.menu_book, color: Color(0xFF00C402)),
-              ),
-              const SizedBox(width: 14),
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'NR-35 Trabalho em Altura',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Módulo 3: Equipamentos de Proteção',
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: TweenAnimationBuilder<double>(
-                    tween: Tween<double>(begin: 0.0, end: 0.65),
-                    duration: const Duration(milliseconds: 1200),
-                    curve: Curves.easeOutCubic,
-                    builder: (context, value, _) {
-                      return LinearProgressIndicator(
-                        value: value,
-                        backgroundColor: AppColors.inputBackground,
-                        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
-                        minHeight: 6,
-                      );
-                    },
-                  ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              const Text(
-                '65%',
-                style: TextStyle(
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showDailyChallengeModal(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppColors.card,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5))),
-        title: Row(
-          children: [
-            const Icon(Icons.timer, color: AppColors.primary),
-            const SizedBox(width: 10),
-            const Text('Desafio Diário', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Teste seus conhecimentos em NR-10! Complete 3 perguntas rápidas para receber recompensas.', style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 14)),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: AppColors.inputBackground, borderRadius: BorderRadius.circular(12)),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(children: [Text('💰 +50 XP', style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold)), Text('Recompensa', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
-                  Column(children: [Text('⏱️ 3 min', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)), Text('Tempo Est.', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
-                ],
-              ),
-            )
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('AGORA NÃO', style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.bold)),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-            onPressed: () {
-              Navigator.pop(ctx);
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Iniciando desafio diário...'), backgroundColor: AppColors.primary));
-            },
-            child: const Text('INICIAR DESAFIO', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCovenantList() {
-    final covenants = CovenantService().activeCovenants;
-    
-    return SizedBox(
-      height: 145, 
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal, 
-        clipBehavior: Clip.none, 
-        itemCount: covenants.length,
-        separatorBuilder: (ctx, index) => const SizedBox(width: 16),
-        itemBuilder: (ctx, index) {
-          final cov = covenants[index];
-          final progressPercent = cov.currentProgress / cov.maxProgress;
-          
-          return Container(
-            width: 280, 
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppColors.card,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: cov.isCompleted ? AppColors.gold.withValues(alpha: 0.5) : AppColors.cardBorder.withValues(alpha: 0.5)),
-              boxShadow: cov.isCompleted
-                  ? [BoxShadow(color: AppColors.gold.withValues(alpha: 0.1), blurRadius: 8, spreadRadius: 1)]
-                  : null,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          cov.isCompleted ? Icons.check_circle : Icons.commit,
-                          color: cov.isCompleted ? AppColors.gold : AppColors.primary,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          cov.title,
-                          style: TextStyle(
-                            color: cov.isCompleted ? AppColors.gold : Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        cov.reward,
-                        style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Expanded(
-                  child: Text(
-                    cov.objective, 
-                    style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 12),
-                    maxLines: 2, 
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 6, 
-                        decoration: BoxDecoration(
-                          color: AppColors.cardBorder,
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                        child: FractionallySizedBox(
-                          alignment: Alignment.centerLeft,
-                          widthFactor: progressPercent.clamp(0.0, 1.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: cov.isCompleted ? AppColors.gold : AppColors.primary,
-                              borderRadius: BorderRadius.circular(3),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      '${cov.currentProgress}/${cov.maxProgress} ${cov.trackingType}',
-                      style: TextStyle(
-                        color: cov.isCompleted ? AppColors.gold : AppColors.textMuted,
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildNormasList(BuildContext context) {
-    return SizedBox(
-      height: 140, 
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        clipBehavior: Clip.none,
-        children: [
-          SizedBox(
-            width: 140, 
-            child: _buildNormaCard(context, 'NR-10', 'Eletricidade', const Color(0xFF00C402))
-          ),
-          const SizedBox(width: 16),
-          SizedBox(
-            width: 140, 
-            child: _buildNormaCard(context, 'NR-12', 'Máquinas', const Color(0xFF1D5F31))
-          ),
-          const SizedBox(width: 16),
-          SizedBox(
-            width: 140, 
-            child: _buildNormaCard(context, 'NR-18', 'Construção', const Color(0xFF00C402))
-          ),
-          const SizedBox(width: 16),
-          SizedBox(
-            width: 140, 
-            child: _buildNormaCard(context, 'NR-33', 'Espaço Confinado', const Color(0xFFB0BEC5))
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ============================================================
-  // NOVO DESIGN DO CARD COM EFEITO DE VIDRO (GLASSMORPHISM)
-  // ============================================================
-  Widget _buildNormaCard(
-      BuildContext context, String code, String name, Color iconColor) {
-    return _ResponsiveTapWidget(
-      onTap: () => context.push('/standards'),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // O desfoque mágico aqui
-          child: Container(
-            decoration: BoxDecoration(
-              // Cor semi-transparente para dar o efeito de vidro
-              color: AppColors.card.withValues(alpha: 0.4),
-              borderRadius: BorderRadius.circular(16),
-              // Borda bem sutil branca para destacar o vidro
-              border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 56, // Reduzido ligeiramente para mais respiro interno
-                  height: 56,
-                  decoration: BoxDecoration(
-                    color: iconColor.withValues(alpha: 0.2), // Fundo suave para o ícone
-                    shape: BoxShape.circle, // Círculo fica mais moderno aqui
-                  ),
-                  child: Center(
-                    child: Container(
-                      width: 28,
-                      height: 28,
-                      decoration: BoxDecoration(
-                        color: iconColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 14),
-                Text(
-                  code,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  name,
-                  style: const TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 12,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }
@@ -975,16 +905,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
           ),
-          border: Border.all(
-            color: const Color(0xFF00C402).withValues(alpha: 0.4),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF00C402).withValues(alpha: 0.15),
-              blurRadius: 12,
-              spreadRadius: 1,
-            ),
-          ],
+          border: Border.all(color: const Color(0xFF00C402).withValues(alpha: 0.4)),
+          boxShadow: [BoxShadow(color: const Color(0xFF00C402).withValues(alpha: 0.15), blurRadius: 12, spreadRadius: 1)],
         ),
         child: Row(
           children: [
@@ -993,18 +915,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               height: 50,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF00C402), Color(0xFF1D5F31)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF00C402).withValues(alpha: 0.4),
-                    blurRadius: 10,
-                    spreadRadius: 1,
-                  ),
-                ],
+                gradient: const LinearGradient(colors: [Color(0xFF00C402), Color(0xFF1D5F31)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                boxShadow: [BoxShadow(color: const Color(0xFF00C402).withValues(alpha: 0.4), blurRadius: 10, spreadRadius: 1)],
               ),
               child: const Icon(Icons.play_arrow, color: Colors.white, size: 28),
             ),
@@ -1013,22 +925,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'PowerPlay Streaming',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  const Text('PowerPlay Streaming', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
                   Text(
                     'Vídeos técnicos e conteúdos exclusivos para seu aprendizado',
-                    style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.6),
-                      fontSize: 12,
-                      height: 1.3,
-                    ),
+                    style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 12, height: 1.3),
                   ),
                 ],
               ),
@@ -1037,19 +938,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF00C402), Color(0xFF1D5F31)],
-                ),
+                gradient: const LinearGradient(colors: [Color(0xFF00C402), Color(0xFF1D5F31)]),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text(
-                'Saiba mais',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: const Text('Saiba mais', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -1058,10 +950,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────
-//  WIDGET RESPONSIVO (escala + opacidade ao tocar)
-// ─────────────────────────────────────────────────────────────────
-
+// ── Responsive Tap Widget ────────────────────────────────────────
 class _ResponsiveTapWidget extends StatefulWidget {
   final Widget child;
   final VoidCallback onTap;
@@ -1081,16 +970,9 @@ class _ResponsiveTapWidgetState extends State<_ResponsiveTapWidget>
   @override
   void initState() {
     super.initState();
-    _ctrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 100),
-    );
-    _scaleAnim = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut),
-    );
-    _opacityAnim = Tween<double>(begin: 1.0, end: 0.7).animate(
-      CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut),
-    );
+    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
+    _scaleAnim = Tween<double>(begin: 1.0, end: 0.95).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
+    _opacityAnim = Tween<double>(begin: 1.0, end: 0.7).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
   }
 
   @override
@@ -1114,10 +996,7 @@ class _ResponsiveTapWidgetState extends State<_ResponsiveTapWidget>
           animation: _ctrl,
           builder: (context, child) => Opacity(
             opacity: _opacityAnim.value,
-            child: Transform.scale(
-              scale: _scaleAnim.value,
-              child: child,
-            ),
+            child: Transform.scale(scale: _scaleAnim.value, child: child),
           ),
           child: widget.child,
         ),
@@ -1126,10 +1005,7 @@ class _ResponsiveTapWidgetState extends State<_ResponsiveTapWidget>
   }
 }
 
-// ─────────────────────────────────────────────────────────────────
-//  WIDGET DE ESQUELETO ANIMADO (SHIMMER NATIVO)
-// ─────────────────────────────────────────────────────────────────
-
+// ── Skeleton Box ─────────────────────────────────────────────────
 class _SkeletonBox extends StatefulWidget {
   final double width;
   final double height;
@@ -1146,10 +1022,7 @@ class _SkeletonBoxState extends State<_SkeletonBox> with SingleTickerProviderSta
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 800),
-    )..repeat(reverse: true); 
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 800))..repeat(reverse: true);
   }
 
   @override
@@ -1161,14 +1034,12 @@ class _SkeletonBoxState extends State<_SkeletonBox> with SingleTickerProviderSta
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      opacity: Tween<double>(begin: 0.4, end: 0.8).animate(
-        CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-      ),
+      opacity: Tween<double>(begin: 0.4, end: 0.8).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut)),
       child: Container(
         width: widget.width,
         height: widget.height,
         decoration: BoxDecoration(
-          color: AppColors.cardBorder.withValues(alpha: 0.5), 
+          color: AppColors.cardBorder.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(16),
         ),
       ),

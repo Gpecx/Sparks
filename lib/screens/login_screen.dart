@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
+import 'package:spark_app/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,7 +11,41 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _authService = AuthService();
   bool _obscurePassword = true;
+  bool _isLoading = false;
+
+  Future<void> _handleLogin() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Preencha todos os campos.')),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      await _authService.signInWithEmail(email, password);
+      if (mounted) context.go('/home');
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceAll('Exception: ', '')),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +80,8 @@ class _LoginScreenState extends State<LoginScreen> {
             _fieldLabel('Endereço de E-mail'),
             const SizedBox(height: 8),
             TextField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
               style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 hintText: 'Digite seu e-mail',
@@ -55,6 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
             _fieldLabel('Senha'),
             const SizedBox(height: 8),
             TextField(
+              controller: _passwordController,
               obscureText: _obscurePassword,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
@@ -79,8 +117,10 @@ class _LoginScreenState extends State<LoginScreen> {
               width: double.infinity,
               height: 52,
               child: ElevatedButton(
-                onPressed: () => context.go('/home'),
-                child: const Text('ENTRAR', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
+                onPressed: _isLoading ? null : _handleLogin,
+                child: _isLoading 
+                    ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
+                    : const Text('ENTRAR', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
               ),
             ),
             const SizedBox(height: 20),

@@ -1,0 +1,55 @@
+Analyzing spark_app...
+
+warning - lib/screens/clan_screen.dart:78:36 - The value of the field '_messages' isn't used. Try removing the field, or using it. - unused_field
+warning - lib/screens/dashboard_screen.dart:12:8 - Unused import: 'package:spark_app/services/user_service.dart'. Try removing the import directive. - unused_import
+warning - lib/screens/duel_screen.dart:25:8 - The value of the field '_opponentAnswered' isn't used. Try removing the field, or using it. - unused_field
+warning - lib/screens/edit_profile_screen.dart:49:13 - The value of the local variable 'newEmail' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib/screens/leaderboard_screen.dart:32:9 - The value of the field '_tournament' isn't used. Try removing the field, or using it. - unused_field
+warning - lib/screens/profile_screen.dart:35:26 - The value of the field '_energyCtrl' isn't used. Try removing the field, or using it. - unused_field
+warning - lib/screens/settings_screen.dart:10:8 - Unused import: 'package:spark_app/services/notification_service.dart'. Try removing the import directive. - unused_import
+warning - lib/screens/store_screen.dart:8:8 - Unused import: 'package:cached_network_image/cached_network_image.dart'. Try removing the import directive. - unused_import
+warning - lib/services/covenant_service.dart:4:8 - Unused import: 'package:firebase_auth/firebase_auth.dart'. Try removing the import directive. - unused_import
+warning - lib/services/notification_service.dart:1:8 - Unused import: 'dart:math'. Try removing the import directive. - unused_import
+warning - lib/services/progress_service.dart:69:28 - Unnecessary cast. Try removing the cast. - unnecessary_cast
+warning - lib/services/question_service.dart:12:11 - The value of the local variable 'batch' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib/widgets/sparks_background.dart:66:11 - The value of the local variable 'cy' isn't used. Try removing the variable or using it. - unused_local_variable
+   info - lib/models/match_models.dart:1:1 - Dangling library doc comment. Add a 'library' directive after the library comment. - dangling_library_doc_comments
+   info - lib/screens/animated_spark_logo.dart:49:15 - 'translate' is deprecated and shouldn't be used. Use translateByVector3, translateByVector4, or translateByDouble instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/screens/checkout_screen.dart:59:47 - Unnecessary use of multiple underscores. Try using '_'. - unnecessary_underscores
+   info - lib/screens/clan_screen.dart:359:56 - The parameter name 'sum' matches a visible type name. Try adding a name for the parameter or changing the parameter name to not match an existing type. - avoid_types_as_parameter_names
+   info - lib/screens/clan_screen.dart:803:28 - Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted' check. - use_build_context_synchronously
+   info - lib/screens/clan_screen.dart:807:28 - Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted' check. - use_build_context_synchronously
+   info - lib/screens/clan_screen.dart:829:28 - Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted' check. - use_build_context_synchronously
+   info - lib/screens/clan_screen.dart:833:28 - Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted' check. - use_build_context_synchronously
+   info - lib/screens/duel_screen.dart:28:7 - The private field _eloRating could be 'final'. Try making the field 'final'. - prefer_final_fields
+   info - lib/screens/duel_screen.dart:29:7 - The private field _wins could be 'final'. Try making the field 'final'. - prefer_final_fields
+   info - lib/screens/duel_screen.dart:30:7 - The private field _losses could be 'final'. Try making the field 'final'. - prefer_final_fields
+   info - lib/screens/duel_screen.dart:304:30 - Unnecessary use of multiple underscores. Try using '_'. - unnecessary_underscores
+   info - lib/screens/duel_screen.dart:311:30 - Unnecessary use of multiple underscores. Try using '_'. - unnecessary_underscores
+   info - lib/screens/duel_screen.dart:637:32 - Unnecessary use of multiple underscores. Try using '_'. - unnecessary_underscores
+   info - lib/screens/error_simulation_screen.dart:462:42 - Unnecessary use of multiple underscores. Try using '_'. - unnecessary_underscores
+   info - lib/screens/error_simulation_screen.dart:913:36 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/error_simulation_screen.dart:914:36 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/error_simulation_screen.dart:1069:27 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/error_simulation_screen.dart:1085:36 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/error_simulation_screen.dart:1086:36 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/leaderboard_screen.dart:80:20 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/leaderboard_screen.dart:85:20 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/leaderboard_screen.dart:102:20 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/leaderboard_screen.dart:107:20 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/learning_path_screen.dart:387:54 - Unnecessary use of multiple underscores. Try using '_'. - unnecessary_underscores
+   info - lib/screens/learning_path_screen.dart:929:44 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/onboarding_screen.dart:159:53 - Unnecessary escape in string literal. Remove the '\' escape. - unnecessary_string_escapes
+   info - lib/screens/profile_screen.dart:362:59 - Unnecessary braces in a string interpolation. Try removing the braces. - unnecessary_brace_in_string_interps
+   info - lib/screens/quiz_screen.dart:560:37 - Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted' check. - use_build_context_synchronously
+   info - lib/screens/quiz_screen.dart:561:44 - Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted' check. - use_build_context_synchronously
+   info - lib/screens/quiz_screen.dart:563:44 - Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted' check. - use_build_context_synchronously
+   info - lib/screens/settings_screen.dart:392:11 - 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/screens/technical_standards_screen.dart:43:70 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib/screens/technical_standards_screen.dart:123:43 - Unnecessary use of multiple underscores. Try using '_'. - unnecessary_underscores
+   info - lib/services/clan_service.dart:28:7 - Use the null-aware marker '?' rather than a null check via an 'if'. Try using '?'. - use_null_aware_elements
+   info - lib/widgets/overload_banner.dart:62:30 - Unnecessary use of multiple underscores. Try using '_'. - unnecessary_underscores
+   info - lib/widgets/overload_banner.dart:98:30 - Unnecessary use of multiple underscores. Try using '_'. - unnecessary_underscores
+   info - lib/widgets/spark_emitter.dart:80:54 - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+
+51 issues found.

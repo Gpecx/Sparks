@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
@@ -11,29 +13,77 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final _nameCtrl = TextEditingController(text: 'João da Silva');
-  final _emailCtrl = TextEditingController(text: 'joao.silva@exemplo.com');
+  late final TextEditingController _nameCtrl;
+  late final TextEditingController _emailCtrl;
+  late final TextEditingController _professionCtrl;
   bool _saving = false;
+  String? _uid;
+
+  @override
+  void initState() {
+    super.initState();
+    final user = FirebaseAuth.instance.currentUser;
+    _uid = user?.uid;
+    _nameCtrl = TextEditingController(text: user?.displayName ?? 'Usuário');
+    _emailCtrl = TextEditingController(text: user?.email ?? '');
+    _professionCtrl = TextEditingController(text: '');
+    
+    if (_uid != null) {
+      // Lê dados do singleton UserService (já carregado pelo startListening)
+      final u = UserService().user;
+      if (mounted && u != null) {
+        setState(() {
+          _professionCtrl.text = u.role; // 'role' é o campo de profissão no UserModel
+        });
+      }
+    }
+  }
 
   void _saveProfile() async {
+    if (_uid == null) return;
+    
     setState(() => _saving = true);
-    await Future.delayed(const Duration(seconds: 1));
-    setState(() => _saving = false);
-
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Perfil atualizado com sucesso!'),
-        backgroundColor: Colors.green,
-      ),
-    );
-    Navigator.pop(context);
+    
+    try {
+      final newName = _nameCtrl.text.trim();
+      final newEmail = _emailCtrl.text.trim();
+      final newProfession = _professionCtrl.text.trim();
+      
+      // Update Firebase Auth profile
+      await FirebaseAuth.instance.currentUser?.updateDisplayName(newName);
+      
+      // Atualiza Firestore via updateProfile
+      await UserService().updateProfile(
+        displayName: newName,
+        role: newProfession,
+      );
+      
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Perfil atualizado com sucesso!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+      Navigator.pop(context);
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erro ao atualizar: $e'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
   }
 
   @override
   void dispose() {
     _nameCtrl.dispose();
     _emailCtrl.dispose();
+    _professionCtrl.dispose();
     super.dispose();
   }
 
@@ -90,8 +140,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const SizedBox(height: 32),
                 _buildFieldGroup('Nome Completo', _nameCtrl),
                 const SizedBox(height: 20),
+                _buildFieldGroup('Profissão', _professionCtrl),
+                const SizedBox(height: 20),
                 _buildFieldGroup('E-mail', _emailCtrl),
-                const SizedBox(height: 48),
+                const SizedBox(height: 40),
                 SizedBox(
                   width: double.infinity,
                   height: 54,

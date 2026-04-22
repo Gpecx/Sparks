@@ -18,4 +18,52 @@ class CovenantModel {
     required this.isCompleted,
     required this.trackingType,
   });
+
+  CovenantModel copyWith({
+    String? id,
+    String? title,
+    String? objective,
+    String? reward,
+    int? currentProgress,
+    int? maxProgress,
+    bool? isCompleted,
+    String? trackingType,
+  }) {
+    return CovenantModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      objective: objective ?? this.objective,
+      reward: reward ?? this.reward,
+      currentProgress: currentProgress ?? this.currentProgress,
+      maxProgress: maxProgress ?? this.maxProgress,
+      isCompleted: isCompleted ?? this.isCompleted,
+      trackingType: trackingType ?? this.trackingType,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'objective': objective,
+      'reward': reward,
+      'currentProgress': currentProgress,
+      'maxProgress': maxProgress,
+      'isCompleted': isCompleted,
+      'trackingType': trackingType,
+    };
+  }
+
+  factory CovenantModel.fromMap(Map<String, dynamic> map, [String? docId]) {
+    return CovenantModel(
+      id: docId ?? map['id'] ?? '',
+      title: map['title'] ?? '',
+      objective: map['objective'] ?? '',
+      reward: map['reward'] ?? '',
+      currentProgress: map['currentProgress']?.toInt() ?? 0,
+      maxProgress: map['maxProgress']?.toInt() ?? 0,
+      isCompleted: map['isCompleted'] ?? false,
+      trackingType: map['trackingType'] ?? '',
+    );
+  }
 }

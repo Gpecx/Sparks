@@ -20,9 +20,6 @@ class _SparkEmitterState extends State<SparkEmitter> with SingleTickerProviderSt
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 800));
-    _controller.addListener(() {
-      setState(() {}); // Atualiza a tela a cada frame
-    });
   }
 
   @override
@@ -53,9 +50,14 @@ class _SparkEmitterState extends State<SparkEmitter> with SingleTickerProviderSt
     if (!_controller.isAnimating && _controller.isDismissed) return const SizedBox.shrink();
     
     return IgnorePointer( // Para não atrapalhar os cliques do usuário
-      child: CustomPaint(
-        painter: _ParticlePainter(_particles, _controller.value),
-        child: Container(),
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, _) {
+          return CustomPaint(
+            painter: _ParticlePainter(_particles, _controller.value),
+            child: Container(),
+          );
+        }
       ),
     );
   }

@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:spark_app/services/covenant_service.dart';
+import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/dashboard_screen.dart';
 import 'package:spark_app/screens/categories_screen.dart';
@@ -18,6 +21,22 @@ class MainShellScreen extends ConsumerStatefulWidget {
 
 class MainShellScreenState extends ConsumerState<MainShellScreen> {
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null) {
+      CovenantService().initialize(uid);
+      // Inicia escuta em tempo real do Firestore para o usuário logado
+      UserService().startListening();
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   final List<Widget> _screens = [
     DashboardScreen(),

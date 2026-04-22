@@ -21,9 +21,6 @@ class _StreakLightningEmitterState extends State<StreakLightningEmitter> with Si
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 1500));
-    _controller.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
@@ -65,56 +62,61 @@ class _StreakLightningEmitterState extends State<StreakLightningEmitter> with Si
     if (!_controller.isAnimating && _controller.isDismissed) return const SizedBox.shrink();
 
     return IgnorePointer(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final width = constraints.maxWidth;
-          final height = constraints.maxHeight;
-          final t = Curves.easeOutQuad.transform(_controller.value);
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, _) {
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              final width = constraints.maxWidth;
+              final height = constraints.maxHeight;
+              final t = Curves.easeOutQuad.transform(_controller.value);
 
-          return Stack(
-            clipBehavior: Clip.none,
-            children: _particles.map((p) {
-              // Current positions (Bottom to Top)
-              double dx = (p.startX * width) + (p.driftX * width * t);
-              double dy = height - (p.speedY * height * t) + 100; // Start slightly below screen
-              
-              // Fade out towards the end
-              double opacity = 1.0;
-              if (_controller.value > 0.8) {
-                opacity = (1.0 - _controller.value) / 0.2;
-              }
+              return Stack(
+                clipBehavior: Clip.none,
+                children: _particles.map((p) {
+                  // Current positions (Bottom to Top)
+                  double dx = (p.startX * width) + (p.driftX * width * t);
+                  double dy = height - (p.speedY * height * t) + 100; // Start slightly below screen
+                  
+                  // Fade out towards the end
+                  double opacity = 1.0;
+                  if (_controller.value > 0.8) {
+                    opacity = (1.0 - _controller.value) / 0.2;
+                  }
 
-              return Positioned(
-                left: dx - (p.size / 2),
-                top: dy - (p.size / 2),
-                child: Opacity(
-                  opacity: opacity,
-                  child: Transform.rotate(
-                    angle: p.rotation + (p.rotationSpeed * _controller.value),
-                    child: p.isSpark 
-                      ? Container(
-                          width: p.size * 0.2, 
-                          height: p.size * 0.2, 
-                          decoration: BoxDecoration(
-                            color: AppColors.primary, 
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(color: AppColors.primary.withValues(alpha: 0.6), blurRadius: 10)
-                            ]
-                          )
-                        )
-                      : Icon(
-                          Icons.bolt,
-                          color: AppColors.primary,
-                          size: p.size,
-                          shadows: [Shadow(color: AppColors.primary.withValues(alpha: 0.5), blurRadius: 15)],
-                        ),
-                  ),
-                ),
+                  return Positioned(
+                    left: dx - (p.size / 2),
+                    top: dy - (p.size / 2),
+                    child: Opacity(
+                      opacity: opacity,
+                      child: Transform.rotate(
+                        angle: p.rotation + (p.rotationSpeed * _controller.value),
+                        child: p.isSpark 
+                          ? Container(
+                              width: p.size * 0.2, 
+                              height: p.size * 0.2, 
+                              decoration: BoxDecoration(
+                                color: AppColors.primary, 
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(color: AppColors.primary.withValues(alpha: 0.6), blurRadius: 10)
+                                ]
+                              )
+                            )
+                          : Icon(
+                              Icons.bolt,
+                              color: AppColors.primary,
+                              size: p.size,
+                              shadows: [Shadow(color: AppColors.primary.withValues(alpha: 0.5), blurRadius: 15)],
+                            ),
+                      ),
+                    ),
+                  );
+                }).toList(),
               );
-            }).toList(),
+            },
           );
-        },
+        }
       ),
     );
   }

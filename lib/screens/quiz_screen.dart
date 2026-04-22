@@ -4,17 +4,24 @@ import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/spark_emitter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:spark_app/services/progress_service.dart';
+import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/widgets/streak_lightning_emitter.dart';
 import 'package:spark_app/models/quiz_models.dart';
 
 class QuizScreen extends StatefulWidget {
   final bool isEvaluation;
   final Lesson? lesson; // <-- lição real com questões técnicas
+  final String? categoryId;
+  final String? moduleId;
 
   const QuizScreen({
     super.key,
     this.isEvaluation = false,
     this.lesson,
+    this.categoryId,
+    this.moduleId,
   });
 
   @override
@@ -22,6 +29,7 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
+  final UserService _userService = UserService();
   final EnergyController _energyCtrl = EnergyController();
   
   // ── VARIÁVEIS DE ESTADO HÍBRIDAS ──
@@ -304,11 +312,11 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
           _shakeController.forward(from: 0);
           _epicStreakController.forward(from: 0);
           _energyCtrl.addXp(100);
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('⚡ STREAK ÉPICO! +100 XP Bônus!')));
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('STREAK EPICO! +100 XP Bonus!')));
         } else if (bonus > 0 && _currentStreak < 5) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('🔥 Acerto! +$bonus energia bônus!'),
+              content: Text('Acerto em sequencia! +$bonus energia bonus!'),
               backgroundColor: AppColors.gold,
             ),
           );
@@ -328,21 +336,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     }
 
     if (_currentQuestion + 1 >= _questions.length) {
-      double score = _totalCorrect / _questions.length;
-      bool passed = widget.isEvaluation ? score >= 0.8 : score >= 0.7;
-
-      if (passed) {
-        int xpEarned = (score * 100).toInt() + (_totalCorrect * 10);
-        _energyCtrl.addXp(xpEarned);
-        
-        // Assessment Complete Epic Animation
-        HapticFeedback.vibrate();
-        _completionController.forward(from: 0).then((_) {
-          _showQuizResultModal(true, score, xpEarned);
-        });
-      } else {
-        _showQuizResultModal(false, score, 0);
-      }
+      _onQuizComplete();
       return;
     }
 
@@ -350,24 +344,93 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
       _currentQuestion++;
       _hasAnswered = false;
       _isCorrect = false;
-      _initializeQuestionState(); // Reinicializa pro próximo tipo
+      _initializeQuestionState();
     });
   }
 
-  // === MODAIS (MANTIDOS EXATAMENTE IGUAIS) ===
+  /// Chamado ao terminar todas as questões do quiz.
+  /// Calcula XP com multiplicador de streak, persiste no Firestore,
+  /// registra atividade, salva progresso da lição e desbloqueia badges.
+  Future<void> _onQuizComplete() async {
+    final double score = _totalCorrect / _questions.length;
+    final bool passed = widget.isEvaluation ? score >= 0.8 : score >= 0.7;
+    int xpEarned = 0;
+
+    if (passed) {
+      // XP base
+      xpEarned = (score * 100).toInt() + (_totalCorrect * 10);
+      final multiplier = _userService.xpMultiplier;
+      xpEarned = (xpEarned * multiplier).toInt();
+      final int spEarned = (xpEarned * 0.1).toInt();
+
+      // ✅ SEMPRE executa: animação + modal de resultado IMEDIATAMENTE (NÃO ESPERA FIREBASE)
+      HapticFeedback.vibrate();
+      if (mounted) {
+        _completionController.forward(from: 0).then((_) {
+          if (mounted) _showQuizResultModal(true, score, xpEarned);
+        });
+      }
+
+      // Tenta persistir no Firebase — em BACKGROUND para NÃO bloquear a tela final
+      Future.microtask(() async {
+        try {
+          // ✅ Persiste XP no Firestore via UserService
+          await _userService.addXp(xpEarned);
+
+          // Fallback: também atualiza EnergyController local para SP
+          _energyCtrl.addSparkPoints(spEarned);
+
+          // ✅ Também registra no ProgressService (compatibilidade)
+          final uid = FirebaseAuth.instance.currentUser?.uid;
+          if (uid != null && widget.moduleId != null) {
+            ProgressService().markLessonComplete(
+              uid,
+              widget.categoryId ?? 'default_cat',
+              widget.moduleId!,
+              widget.lesson?.id ?? 'lesson_$_currentQuestion',
+              xpEarned,
+              spEarned,
+            );
+          }
+
+          // ✅ Registra atividade de estudo (streak diário)
+          await _userService.registerStudyActivity();
+
+          // Progresso da lição já foi salvo pelo ProgressService.markLessonComplete acima.
+
+          // ✅ Verifica conquistas de quiz
+          if (_totalCorrect == _questions.length) {
+            await _userService.unlockBadge('queimador'); // 100% de acerto
+          }
+          if (_currentStreak >= 10) {
+            await _userService.unlockBadge('sniper'); // 10 acertos seguidos
+          }
+        } catch (e) {
+          // Falha de persistência gravado silenciosamente
+          debugPrint('[QuizScreen] Erro ao persistir no Firebase: $e');
+        }
+      });
+    } else {
+      // Reprovado — mostra modal imediatamente
+      if (mounted) _showQuizResultModal(false, score, 0);
+    }
+  }
+
+  // === MODAIS ===
   void _showQuizResultModal(bool passed, double score, int xpEarned) {
+    
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       isDismissible: false,
       enableDrag: false,
       backgroundColor: Colors.transparent,
-      builder: (context) {
+      builder: (modalCtx) {
         return TweenAnimationBuilder<double>(
           duration: const Duration(milliseconds: 600),
           curve: Curves.elasticOut,
           tween: Tween(begin: 0.0, end: 1.0),
-          builder: (context, value, child) {
+          builder: (modalCtx, value, child) {
             return Transform.scale(
               scale: value,
               child: child,
@@ -421,11 +484,14 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                 height: 56,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    Navigator.pop(context); 
+                    // Cuidado: capturamos o Navigator da tela principal ANTES de fechar o modal
+                    final rootNavigator = Navigator.of(this.context);
+                    Navigator.of(modalCtx).pop(); // fecha BottomSheet
+
                     if (passed) {
-                      _showPowerplayAd(); 
+                      _showPowerplayAd();
                     } else {
-                      Navigator.pop(context, false); 
+                      rootNavigator.pop(false);
                     }
                   },
                   icon: Icon(passed ? Icons.play_arrow : Icons.replay, color: AppColors.background),
@@ -440,8 +506,9 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
               if (!passed)
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context, false);
+                    final rootNavigator = Navigator.of(this.context);
+                    Navigator.of(modalCtx).pop(); 
+                    rootNavigator.pop(false); 
                   },
                   child: const Text('Sair', style: TextStyle(color: AppColors.textMuted)),
                 ),
@@ -480,10 +547,10 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
               SizedBox(
                 width: double.infinity, height: 56,
                 child: ElevatedButton.icon(
-                  onPressed: () {
-                    if (_energyCtrl.rechargeWithSparks()) {
+                  onPressed: () async {
+                    if (await _energyCtrl.rechargeWithSparks()) {
                       Navigator.pop(context);
-                      ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('⚡ Energia recarregada!'), backgroundColor: AppColors.primary));
+                      ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Energia recarregada!'), backgroundColor: AppColors.primary));
                     } else {
                       ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Pontos Spark insuficientes!'), backgroundColor: AppColors.error));
                     }
@@ -527,7 +594,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (ctx) {
+      builder: (dialogCtx) {
         return Dialog(
           backgroundColor: Colors.transparent,
           child: Container(
@@ -544,8 +611,9 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                   alignment: Alignment.topRight,
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pop(ctx);
-                      Navigator.pop(context, true); 
+                      final rootNavigator = Navigator.of(this.context);
+                      Navigator.of(dialogCtx).pop(); // Fecha dialog
+                      rootNavigator.pop(true);       // Fecha o Quiz
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -567,7 +635,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                 const SizedBox(height: 20),
                 const Text('POWERPLAY', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w900, fontStyle: FontStyle.italic, letterSpacing: 2)),
                 const SizedBox(height: 8),
-                const Text('🎉 Parabéns pelo módulo!', style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.bold)),
+                const Text('Parabens pelo modulo!', style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 14),
                 Text('Continue aprendendo com vídeos técnicos exclusivos. Experimente grátis por 7 dias!', textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 14, height: 1.4)),
                 const SizedBox(height: 24),
@@ -576,9 +644,11 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00C402), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
                     onPressed: () {
-                      Navigator.pop(ctx);
-                      Navigator.pop(context, true); 
-                      context.push('/standard-detail');
+                      final rootNavigator = Navigator.of(this.context);
+                      final rootRouter = GoRouter.of(this.context);
+                      Navigator.of(dialogCtx).pop();
+                      rootNavigator.pop(true);
+                      rootRouter.push('/standard-detail');
                     },
                     child: const Text('TESTE GRÁTIS POR 7 DIAS', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14, letterSpacing: 1)),
                   ),
