@@ -1,0 +1,57 @@
+name: GCP
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Setup Gcloud Account
+    runs-on: ubuntu-latest
+    environment: gcp-prod
+    env:
+      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/site:latest
+    steps:
+      # Git checkout
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Login to GCP
+      - uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      # gcloud configure docker
+      - name: Configure Docker
+        run: gcloud auth configure-docker --quiet
+
+      # build image (Injetando as chaves públicas do Frontend)
+      - name: Build Docker image
+        run: |
+          docker build -t $IMAGE_NAME \
+            --build-arg NEXT_PUBLIC_FIREBASE_API_KEY="${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}" \
+            --build-arg NEXT_PUBLIC_FIREBASE_APP_ID="${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}" \
+            --build-arg NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}" \
+            --build-arg NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}" \
+            --build-arg NEXT_PUBLIC_FIREBASE_PROJECT_ID="${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}" \
+            --build-arg NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}" \
+            .
+
+      # push image to registry
+      - name: Push Docker image
+        run: docker push $IMAGE_NAME
+
+      # deploy image (Injetando as chaves secretas do Backend e ajustando porta/memória)
+      - name: Deploy Docker image
+        run: |
+          gcloud run deploy site \
+            --image $IMAGE_NAME \
+            --region us-central1 \
+            --memory 512Mi \
+            --min-instances 0 \
+            --max-instances 1 \
+            --platform managed \
+            --port 8080 \
+            --allow-unauthenticated \
+            --set-env-vars="ASAAS_API_KEY=${{ secrets.ASAAS_API_KEY }},ASAAS_API_URL=${{ secrets.ASAAS_API_URL }},ASAAS_WEBHOOK_TOKEN=${{ secrets.ASAAS_WEBHOOK_TOKEN }},MUX_SIGNING_KEY=${{ secrets.MUX_SIGNING_KEY }},MUX_SIGNING_KEY_ID=${{ secrets.MUX_SIGNING_KEY_ID }},MUX_TOKEN_ID=${{ secrets.MUX_TOKEN_ID }},MUX_TOKEN_SECRET=${{ secrets.MUX_TOKEN_SECRET }},FIREBASE_PROJECT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }},FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }},FIREBASE_PRIVATE_KEY=${{ secrets.FIREBASE_PRIVATE_KEY }}"
