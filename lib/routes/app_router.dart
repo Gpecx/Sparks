@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/screens/login_screen.dart';
 import 'package:spark_app/screens/register_screen.dart';
+import 'package:spark_app/screens/registration_success_screen.dart';
 import 'package:spark_app/screens/forgot_password_screen.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/screens/technical_standards_screen.dart';
@@ -26,10 +27,19 @@ class AppRouter {
       GoRoute(path: '/', builder: (context, state) => const WelcomeScreen()),
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
       GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
+      GoRoute(path: '/registration-success', builder: (context, state) => const RegistrationSuccessScreen()),
       GoRoute(path: '/forgot-password', builder: (context, state) => const ForgotPasswordScreen()),
       GoRoute(path: '/home', builder: (context, state) => const MainShellScreen()),
       GoRoute(path: '/standards', builder: (context, state) => const TechnicalStandardsScreen()),
-      GoRoute(path: '/standard-detail', builder: (context, state) => const StandardDetailScreen()),
+      GoRoute(
+        path: '/standard-detail',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final standardId = extra?['standardId'] as String?;
+          return StandardDetailScreen(standardId: standardId);
+        },
+      ),
+
       GoRoute(path: '/quiz', builder: (context, state) => const QuizScreen()),
       GoRoute(path: '/test-history', builder: (context, state) => const TestHistoryScreen()),
       GoRoute(path: '/store', builder: (context, state) => const StoreScreen()),

@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/models/badge_model.dart';
+import 'package:spark_app/providers/user_provider.dart';
 
-class AchievementsScreen extends StatelessWidget {
+class AchievementsScreen extends ConsumerWidget {
   const AchievementsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userService = ref.watch(userServiceProvider);
+    final unlockedIds = userService.unlockedBadgeIds.toSet();
+    final unlockedCount = BadgeRegistry.unlockedCount(unlockedIds);
+    final total = BadgeRegistry.totalCount + 8; // +8 for static achievement cards
+    final percent = total > 0 ? unlockedCount / total : 0.0;
+
     return SparksBackground(
       child: PcbBackground(
         child: Scaffold(
@@ -33,7 +41,7 @@ class AchievementsScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
-              // Sumário
+              // ── Summary card (reactive) ──────────────────────────
               Container(
                 margin: const EdgeInsets.only(bottom: 20),
                 padding: const EdgeInsets.all(16),
@@ -58,9 +66,15 @@ class AchievementsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('${4 + BadgeRegistry.unlockedCount} Conquistas', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800)),
+                          Text(
+                            '$unlockedCount Conquistas',
+                            style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800),
+                          ),
                           const SizedBox(height: 2),
-                          Text('de ${12 + BadgeRegistry.totalCount} disponíveis', style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
+                          Text(
+                            'de $total disponíveis',
+                            style: const TextStyle(color: AppColors.textMuted, fontSize: 13),
+                          ),
                         ],
                       ),
                     ),
@@ -70,10 +84,13 @@ class AchievementsScreen extends StatelessWidget {
                         width: 60,
                         child: Column(
                           children: [
-                            Text('${(((4 + BadgeRegistry.unlockedCount) / (12 + BadgeRegistry.totalCount)) * 100).round()}%', style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 16)),
+                            Text(
+                              '${(percent * 100).round()}%',
+                              style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 16),
+                            ),
                             const SizedBox(height: 4),
                             LinearProgressIndicator(
-                              value: (4 + BadgeRegistry.unlockedCount) / (12 + BadgeRegistry.totalCount),
+                              value: percent.clamp(0.0, 1.0),
                               backgroundColor: AppColors.inputBackground,
                               valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
                               minHeight: 5,
@@ -86,35 +103,95 @@ class AchievementsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ── BADGES DINÂMICAS CONTEXTUAIS ──
-              _sectionTitle('BADGES DINÂMICAS'),
-              _buildDynamicBadges(),
-              const SizedBox(height: 8),
+              if (unlockedCount == 0)
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                  decoration: BoxDecoration(
+                    color: AppColors.card,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: AppColors.inputBackground,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: AppColors.cardBorder),
+                        ),
+                        child: const Icon(Icons.lock_outline, size: 40, color: AppColors.textMuted),
+                      ),
+                      const SizedBox(height: 24),
+                      const Text(
+                        'Nenhuma conquista ainda',
+                        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Complete lições, mantenha seu streak de ofensiva e gabarite os testes para destravar conquistas exclusivas.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.4),
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton.icon(
+                        onPressed: () => Navigator.pop(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: AppColors.background,
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                        icon: const Icon(Icons.play_arrow, size: 20),
+                        label: const Text('COMEÇAR APRENDER', style: TextStyle(fontWeight: FontWeight.bold)),
+                      )
+                    ],
+                  ),
+                )
+              else ...[
+                // ── Dynamic badges from Firestore ────────────────────
+                _sectionTitle('BADGES DINÂMICAS'),
+                _buildDynamicBadges(unlockedIds),
+                const SizedBox(height: 8),
 
-              _sectionTitle('NORMAS E CONHECIMENTO'),
-              _achievementGrid(context, [
-                _AchievementData('Mestre NR-10', Icons.electrical_services, 'Completou todos os módulos da NR-10', true),
-                _AchievementData('Expert NFPA 70E', Icons.shield_outlined, 'Completou todos os módulos da NFPA 70E', false),
-                _AchievementData('Pro em Segurança', Icons.verified_outlined, 'Atingiu 95% de acerto em 5 avaliações', false),
-                _AchievementData('Mestre NR-35', Icons.height, 'Completou todos os módulos da NR-35', false),
-              ]),
+                _sectionTitle('NORMAS E CONHECIMENTO'),
+                _achievementGrid(context, [
+                  _AchievementData('Mestre NR-10', Icons.electrical_services, 'Completou todos os módulos da NR-10',
+                      unlockedIds.contains('nr10_master')),
+                  _AchievementData('Expert NFPA 70E', Icons.shield_outlined, 'Completou todos os módulos da NFPA 70E',
+                      unlockedIds.contains('nfpa_expert')),
+                  _AchievementData('Pro em Segurança', Icons.verified_outlined, 'Atingiu 95% de acerto em 5 avaliações',
+                      unlockedIds.contains('safety_pro')),
+                  _AchievementData('Mestre NR-35', Icons.height, 'Completou todos os módulos da NR-35',
+                      unlockedIds.contains('nr35_master')),
+                ]),
 
-              _sectionTitle('DEDICAÇÃO E PRESENÇA'),
-              _achievementGrid(context, [
-                _AchievementData('Streak 7 dias', Icons.local_fire_department, 'Estudou 7 dias consecutivos', true),
-                _AchievementData('Streak 30 dias', Icons.whatshot, 'Estudou 30 dias consecutivos', false),
-                _AchievementData('Madrugador', Icons.wb_twilight, 'Estudou antes das 7h por 5 dias', false),
-                _AchievementData('Dedicado', Icons.calendar_month, 'Ativo por 60 dias', false),
-              ]),
+                _sectionTitle('DEDICAÇÃO E PRESENÇA'),
+                _achievementGrid(context, [
+                  _AchievementData('Streak 7 dias', Icons.local_fire_department, 'Estudou 7 dias consecutivos',
+                      unlockedIds.contains('streak_7')),
+                  _AchievementData('Streak 30 dias', Icons.whatshot, 'Estudou 30 dias consecutivos',
+                      unlockedIds.contains('streak_30')),
+                  _AchievementData('Madrugador', Icons.wb_twilight, 'Estudou antes das 7h por 5 dias',
+                      unlockedIds.contains('noturno')),
+                  _AchievementData('Dedicado', Icons.calendar_month, 'Ativo por 60 dias',
+                      unlockedIds.contains('streak_100')),
+                ]),
 
-              _sectionTitle('PERFORMANCE'),
-              _achievementGrid(context, [
-                _AchievementData('Primeira Avaliação', Icons.quiz_outlined, 'Completou sua primeira avaliação', true),
-                _AchievementData('Nota Máxima', Icons.star_outlined, 'Tirou 100% em uma avaliação', true),
-                _AchievementData('Sequência Perfeita', Icons.military_tech, '10 acertos seguidos no quiz', false),
-                _AchievementData('Imbatível', Icons.workspace_premium, 'Completou 5 avaliações com nota máxima', false),
-              ]),
-
+                _sectionTitle('PERFORMANCE'),
+                _achievementGrid(context, [
+                  _AchievementData('Primeira Avaliação', Icons.quiz_outlined, 'Completou sua primeira avaliação',
+                      unlockedIds.contains('first_lesson')),
+                  _AchievementData('Nota Máxima', Icons.star_outlined, 'Tirou 100% em uma avaliação',
+                      unlockedIds.contains('xp_1000')),
+                  _AchievementData('Sequência Perfeita', Icons.military_tech, '10 acertos seguidos no quiz',
+                      unlockedIds.contains('sniper')),
+                  _AchievementData('Imbatível', Icons.workspace_premium, 'Completou 5 avaliações com nota máxima',
+                      unlockedIds.contains('lesson_50')),
+                ]),
+              ],
               const SizedBox(height: 20),
             ],
           ),
@@ -123,17 +200,18 @@ class AchievementsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDynamicBadges() {
+  Widget _buildDynamicBadges(Set<String> unlockedIds) {
     return Column(
       children: BadgeRegistry.allBadges.map((badge) {
+        final isUnlocked = unlockedIds.contains(badge.id);
         return Container(
           margin: const EdgeInsets.only(bottom: 8),
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: badge.unlocked ? AppColors.primary.withValues(alpha: 0.06) : AppColors.card,
+            color: isUnlocked ? AppColors.primary.withValues(alpha: 0.06) : AppColors.card,
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
-              color: badge.unlocked
+              color: isUnlocked
                   ? AppColors.primary.withValues(alpha: 0.35)
                   : AppColors.cardBorder.withValues(alpha: 0.25),
             ),
@@ -145,17 +223,17 @@ class AchievementsScreen extends StatelessWidget {
                 height: 48,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: badge.unlocked
+                  color: isUnlocked
                       ? AppColors.primary.withValues(alpha: 0.15)
                       : AppColors.inputBackground,
                   border: Border.all(
-                    color: badge.unlocked
+                    color: isUnlocked
                         ? AppColors.primary.withValues(alpha: 0.4)
                         : AppColors.cardBorder.withValues(alpha: 0.2),
                   ),
                 ),
                 child: Center(
-                  child: Text(badge.emoji, style: TextStyle(fontSize: badge.unlocked ? 22 : 18)),
+                  child: Text(badge.emoji, style: TextStyle(fontSize: isUnlocked ? 22 : 18)),
                 ),
               ),
               const SizedBox(width: 14),
@@ -168,12 +246,12 @@ class AchievementsScreen extends StatelessWidget {
                         Text(
                           badge.title,
                           style: TextStyle(
-                            color: badge.unlocked ? Colors.white : AppColors.textMuted,
+                            color: isUnlocked ? Colors.white : AppColors.textMuted,
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        if (badge.unlocked) ...[
+                        if (isUnlocked) ...[
                           const SizedBox(width: 6),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -190,37 +268,14 @@ class AchievementsScreen extends StatelessWidget {
                     Text(
                       badge.description,
                       style: TextStyle(
-                        color: badge.unlocked ? AppColors.textSecondary : AppColors.textMuted.withValues(alpha: 0.6),
+                        color: isUnlocked ? AppColors.textSecondary : AppColors.textMuted.withValues(alpha: 0.6),
                         fontSize: 11,
                       ),
                     ),
-                    if (!badge.unlocked && badge.progress > 0) ...[
-                      const SizedBox(height: 6),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(3),
-                              child: LinearProgressIndicator(
-                                value: badge.progress,
-                                backgroundColor: AppColors.inputBackground,
-                                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
-                                minHeight: 4,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            '${(badge.progress * 100).round()}%',
-                            style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                    ],
                   ],
                 ),
               ),
-              if (!badge.unlocked)
+              if (!isUnlocked)
                 const Padding(
                   padding: EdgeInsets.only(left: 8),
                   child: Icon(Icons.lock_outline, color: AppColors.textMuted, size: 16),
@@ -233,17 +288,17 @@ class AchievementsScreen extends StatelessWidget {
   }
 
   Widget _sectionTitle(String t) => Padding(
-    padding: const EdgeInsets.fromLTRB(4, 16, 4, 12),
-    child: Text(
-      t,
-      style: const TextStyle(
-        color: AppColors.primary,
-        fontSize: 11,
-        fontWeight: FontWeight.w800,
-        letterSpacing: 2,
-      ),
-    ),
-  );
+        padding: const EdgeInsets.fromLTRB(4, 16, 4, 12),
+        child: Text(
+          t,
+          style: const TextStyle(
+            color: AppColors.primary,
+            fontSize: 11,
+            fontWeight: FontWeight.w800,
+            letterSpacing: 2,
+          ),
+        ),
+      );
 
   Widget _achievementGrid(BuildContext context, List<_AchievementData> items) {
     return GridView.builder(
@@ -316,10 +371,7 @@ class _AchievementCard extends StatelessWidget {
                 Container(
                   width: 18,
                   height: 18,
-                  decoration: const BoxDecoration(
-                    color: AppColors.inputBackground,
-                    shape: BoxShape.circle,
-                  ),
+                  decoration: const BoxDecoration(color: AppColors.inputBackground, shape: BoxShape.circle),
                   child: const Icon(Icons.lock, color: AppColors.textMuted, size: 10),
                 ),
               if (data.unlocked)

@@ -4,17 +4,62 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/models/curriculum_models.dart';
+import 'package:spark_app/models/progress_model.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/modules_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
+import 'package:spark_app/providers/progress_provider.dart';
 
 class CategoriesScreen extends ConsumerWidget {
   const CategoriesScreen({super.key});
 
+  List<LearningCategory> _getDynamicCategories(List<LearningCategory> baseCategories, List<ProgressModel> userProgress) {
+    return baseCategories.map((cat) {
+      if (cat.isLocked) return cat;
+
+      bool previousCompleted = true; // O primeiro módulo é sempre desbloqueado
+      final newModules = cat.modules.map((mod) {
+        final progIndex = userProgress.indexWhere((p) => p.moduleId == mod.id);
+        final prog = progIndex >= 0 ? userProgress[progIndex] : null;
+        
+        final isLocked = !previousCompleted;
+        final actualProgress = prog?.progressPercent ?? 0.0;
+        
+        // Para desbloquear o próximo, este precisa estar concluído
+        previousCompleted = (prog != null && (prog.isCompleted || prog.progressPercent >= 1.0));
+
+        return LearningModule(
+          id: mod.id,
+          title: mod.title,
+          subtitle: mod.subtitle,
+          icon: mod.icon,
+          color: mod.color,
+          progress: actualProgress,
+          isLocked: isLocked,
+          lessons: mod.lessons,
+        );
+      }).toList();
+
+      return LearningCategory(
+        id: cat.id,
+        title: cat.title,
+        subtitle: cat.subtitle,
+        icon: cat.icon,
+        color: cat.color,
+        gradientEnd: cat.gradientEnd,
+        isLocked: cat.isLocked,
+        modules: newModules,
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTestMode = kDebugMode && ref.watch(devModeProvider);
+    final userProgressAsync = ref.watch(userProgressProvider);
+    final dynamicCategories = _getDynamicCategories(mockCategories, userProgressAsync.value ?? []);
+
     return SparksBackground(
       child: PcbBackground(
         child: Scaffold(
@@ -56,9 +101,9 @@ class CategoriesScreen extends ConsumerWidget {
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     physics: const BouncingScrollPhysics(),
-                    itemCount: mockCategories.length,
+                    itemCount: dynamicCategories.length,
                     itemBuilder: (context, index) {
-                      final cat = mockCategories[index];
+                      final cat = dynamicCategories[index];
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 14),
                         child: _CategoryCard(

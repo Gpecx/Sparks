@@ -60,8 +60,12 @@ class AuthService {
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       });
+      // Firebase automatically signs in the user upon creation.
+      // We sign them out immediately to force them to use the Login screen.
+      await _auth.signOut();
 
       return credential;
+
     } on FirebaseAuthException catch (e) {
       throw _mapAuthException(e);
     }

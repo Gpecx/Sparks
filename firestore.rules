@@ -21,18 +21,40 @@ service cloud.firestore {
 
     match /users/{uid} {
       allow read: if isAuthenticated();
-      allow write: if request.auth.uid == uid;
+      // Validação básica para impedir corrupção de valores numéricos críticos
+      allow write: if request.auth.uid == uid
+        && (!request.resource.data.keys().hasAny(['xp']) || request.resource.data.xp is number)
+        && (!request.resource.data.keys().hasAny(['sparkPoints']) || request.resource.data.sparkPoints is number)
+        && (!request.resource.data.keys().hasAny(['level']) || request.resource.data.level is number)
+        && (!request.resource.data.keys().hasAny(['role']) || request.resource.data.role is string);
 
       match /progress/{modId} {
-        allow read, write: if request.auth.uid == uid;
+        allow read: if request.auth.uid == uid;
+        // Validação de segurança em progresso
+        allow write: if request.auth.uid == uid
+          && (!request.resource.data.keys().hasAny(['progressPercent']) || request.resource.data.progressPercent is number)
+          && (!request.resource.data.keys().hasAny(['bestScore']) || request.resource.data.bestScore is number);
       }
 
       match /covenants/{covId} {
-        allow read, write: if request.auth.uid == uid;
+        allow read: if request.auth.uid == uid;
+        allow write: if request.auth.uid == uid
+          && (!request.resource.data.keys().hasAny(['currentProgress']) || request.resource.data.currentProgress is number);
       }
 
       match /quiz_history/{id} {
         allow read, write: if request.auth.uid == uid;
+      }
+
+      // Histórico de transações financeiras do usuário (compras, ganhos)
+      match /transactions/{txId} {
+        allow read: if request.auth.uid == uid;
+        // Escrita apenas via batch no servidor (checkout_screen usa WriteBatch)
+        allow create: if request.auth.uid == uid
+          && request.resource.data.keys().hasAll(['type', 'amount', 'createdAt'])
+          && request.resource.data.amount is int
+          && request.resource.data.amount > 0;
+        allow update, delete: if false;
       }
     }
 
@@ -106,6 +128,17 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // Metadados de popularidade de normas (clickCount, etc.)
+    match /standards_metadata/{stdId} {
+      allow read: if isAuthenticated();
+      // incrementClick usa update — permitido para usuários autenticados
+      allow update: if isAuthenticated()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['clickCount']);
+      allow create, delete: if isAdmin();
+    }
+
+    // Coleção raiz legada — mantida em modo somente-leitura
+    // Novas transações vão para users/{uid}/transactions
     match /transactions/{id} {
       allow read: if isAuthenticated() && resource.data.uid == request.auth.uid;
       allow write: if false;

@@ -32,7 +32,15 @@ class ProgressService {
     return snap.docs.map((d) => ProgressModel.fromFirestore(d)).toList();
   }
 
-  Future<void> markLessonComplete(String uid, String catId, String modId, String lessonId, int xpEarned, int spEarned) async {
+  Future<void> markLessonComplete(
+    String uid,
+    String catId,
+    String modId,
+    String lessonId,
+    int xpEarned,
+    int spEarned, {
+    String moduleName = '',
+  }) async {
     final userRef = _fs.collection(FS.users).doc(uid);
     final userDoc = await userRef.get();
     
@@ -52,6 +60,7 @@ class ProgressService {
       batch.set(pRef, {
         FS.moduleId: modId,
         FS.categoryId: catId,
+        'moduleName': moduleName,
         FS.completedLessons: [],
         FS.progressPercent: 0.0,
         FS.isCompleted: false,
@@ -82,6 +91,7 @@ class ProgressService {
       FS.lastAccessed: FieldValue.serverTimestamp(),
       FS.progressPercent: double.parse(updatedProgress.toStringAsFixed(2)),
       FS.isCompleted: moduleCompleted,
+      if (moduleName.isNotEmpty) 'moduleName': moduleName,
       if (moduleCompleted) FS.completedAt: FieldValue.serverTimestamp(),
     });
 

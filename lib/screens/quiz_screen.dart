@@ -377,8 +377,8 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
           // ✅ Persiste XP no Firestore via UserService
           await _userService.addXp(xpEarned);
 
-          // Fallback: também atualiza EnergyController local para SP
-          _energyCtrl.addSparkPoints(spEarned);
+          // ✅ Persiste Spark Points no Firestore via UserService
+          await _userService.addSparkPoints(spEarned);
 
           // ✅ Também registra no ProgressService (compatibilidade)
           final uid = FirebaseAuth.instance.currentUser?.uid;
@@ -390,6 +390,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
               widget.lesson?.id ?? 'lesson_$_currentQuestion',
               xpEarned,
               spEarned,
+              moduleName: widget.lesson?.title ?? '',
             );
           }
 

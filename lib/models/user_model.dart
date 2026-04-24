@@ -27,6 +27,11 @@ class UserModel {
   final String? clanName;
   final List<String> unlockedBadgeIds;
   final int weeklyXp;
+  // ── Duelo ──────────────────────────────────────────────────────
+  final int eloRating;
+  final int wins;
+  final int losses;
+  final int totalDuels;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -49,6 +54,10 @@ class UserModel {
     this.clanName,
     this.unlockedBadgeIds = const [],
     this.weeklyXp = 0,
+    this.eloRating = 1200,
+    this.wins = 0,
+    this.losses = 0,
+    this.totalDuels = 0,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -78,6 +87,10 @@ class UserModel {
         data['unlockedBadgeIds'] ?? data['badges'] ?? [], // fallback legado
       ),
       weeklyXp: (data['weeklyXp'] as num?)?.toInt() ?? 0,
+      eloRating: (data['eloRating'] as num?)?.toInt() ?? 1200,
+      wins: (data['wins'] as num?)?.toInt() ?? 0,
+      losses: (data['losses'] as num?)?.toInt() ?? 0,
+      totalDuels: (data['totalDuels'] as num?)?.toInt() ?? 0,
       createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       updatedAt: (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
@@ -105,6 +118,10 @@ class UserModel {
       'clanName': clanName,
       'unlockedBadgeIds': unlockedBadgeIds,
       'weeklyXp': weeklyXp,
+      'eloRating': eloRating,
+      'wins': wins,
+      'losses': losses,
+      'totalDuels': totalDuels,
       'updatedAt': FieldValue.serverTimestamp(),
     };
   }
@@ -128,6 +145,10 @@ class UserModel {
     String? clanName,
     List<String>? unlockedBadgeIds,
     int? weeklyXp,
+    int? eloRating,
+    int? wins,
+    int? losses,
+    int? totalDuels,
     DateTime? updatedAt,
   }) {
     return UserModel(
@@ -149,6 +170,10 @@ class UserModel {
       clanName: clanName ?? this.clanName,
       unlockedBadgeIds: unlockedBadgeIds ?? this.unlockedBadgeIds,
       weeklyXp: weeklyXp ?? this.weeklyXp,
+      eloRating: eloRating ?? this.eloRating,
+      wins: wins ?? this.wins,
+      losses: losses ?? this.losses,
+      totalDuels: totalDuels ?? this.totalDuels,
       createdAt: createdAt,
       updatedAt: updatedAt ?? DateTime.now(),
     );

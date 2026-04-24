@@ -4,10 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/models/curriculum_models.dart';
+import 'package:spark_app/models/progress_model.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/learning_path_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
+import 'package:spark_app/providers/progress_provider.dart';
 
 class ModulesScreen extends ConsumerWidget {
   final LearningCategory? category;
@@ -17,8 +19,33 @@ class ModulesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTestMode = kDebugMode && ref.watch(devModeProvider);
-    // Fallback: se nenhuma categoria for passada, usa a primeira
     final cat = category ?? mockCategories.first;
+
+    final userProgressAsync = ref.watch(userProgressProvider);
+    final userProgress = userProgressAsync.value ?? [];
+
+    // Calcula de forma dinâmica os módulos usando o progresso realtime
+    bool previousCompleted = true;
+    final dynamicModules = cat.modules.map((mod) {
+      final progIndex = userProgress.indexWhere((p) => p.moduleId == mod.id);
+      final prog = progIndex >= 0 ? userProgress[progIndex] : null;
+      
+      final isLocked = !previousCompleted;
+      final actualProgress = prog?.progressPercent ?? 0.0;
+      
+      previousCompleted = (prog != null && (prog.isCompleted || prog.progressPercent >= 1.0));
+
+      return LearningModule(
+        id: mod.id,
+        title: mod.title,
+        subtitle: mod.subtitle,
+        icon: mod.icon,
+        color: mod.color,
+        progress: actualProgress,
+        isLocked: isLocked,
+        lessons: mod.lessons,
+      );
+    }).toList();
 
     return SparksBackground(
       child: PcbBackground(
@@ -67,7 +94,7 @@ class ModulesScreen extends ConsumerWidget {
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              '${cat.modules.length} módulos disponíveis',
+                              '${dynamicModules.length} módulos disponíveis',
                               style: TextStyle(
                                 color: AppColors.textMuted.withValues(alpha: 0.8),
                                 fontSize: 11,
@@ -86,9 +113,9 @@ class ModulesScreen extends ConsumerWidget {
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     physics: const BouncingScrollPhysics(),
-                    itemCount: cat.modules.length,
+                    itemCount: dynamicModules.length,
                     itemBuilder: (context, index) {
-                      final module = cat.modules[index];
+                      final module = dynamicModules[index];
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 14),
                         child: _ModuleCard(

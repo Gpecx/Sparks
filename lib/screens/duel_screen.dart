@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/models/match_models.dart';
 import 'package:spark_app/services/match_service.dart';
-import 'package:spark_app/controllers/energy_controller.dart';
+import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 
 class DuelScreen extends StatefulWidget {
@@ -16,6 +16,7 @@ class DuelScreen extends StatefulWidget {
 
 class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
   final MatchService _matchService = MatchService();
+  final UserService _userService = UserService();
   Match? _match;
   bool _isSearching = true;
   bool _matchFinished = false;
@@ -24,10 +25,10 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
   bool _hasAnswered = false;
   bool _opponentAnswered = false;
 
-  // ELO / Division system
-  int _eloRating = 1250;
-  int _wins = 12;
-  int _losses = 5;
+  // ELO / Division system — lidos ao vivo do UserService
+  int get _eloRating => _userService.eloRating;
+  int get _wins => _userService.wins;
+  int get _losses => _userService.losses;
   String get _division {
     if (_eloRating >= 2000) return 'Diamond';
     if (_eloRating >= 1600) return 'Platinum';
@@ -114,8 +115,10 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
   static const int betAmount = 20;
 
   Future<void> _startMatchmaking() async {
-    final energyCtrl = EnergyController();
-    if (!await energyCtrl.spendSparkPoints(betAmount)) {
+    // Gasta Spark Points via UserService (persiste no Firestore)
+    final userService = UserService();
+    final spent = await userService.spendSparkPoints(betAmount);
+    if (!spent) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Pontos Spark insuficientes para apostar. Custo: 20'), backgroundColor: AppColors.error),
@@ -208,16 +211,24 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
 
   void _finishMatch() {
     _matchService.finishMatch();
-    
+
     if (_match != null) {
       final p1Score = _match!.player1TotalScore;
       final p2Score = _match!.player2TotalScore;
-      final energyCtrl = EnergyController();
 
       if (p1Score > p2Score) {
-        energyCtrl.addSparkPoints(betAmount * 2);
+        // Vitória: +25 ELO + devolve aposta dobrada
+        _userService
+          ..updateElo(eloChange: 25, won: true)
+          ..addSparkPoints(betAmount * 2);
       } else if (p1Score == p2Score) {
-        energyCtrl.addSparkPoints(betAmount);
+        // Empate: 0 ELO + devolve aposta
+        _userService
+          ..updateElo(eloChange: 0, won: null)
+          ..addSparkPoints(betAmount);
+      } else {
+        // Derrota: -15 ELO (aposta já foi consumida no início)
+        _userService.updateElo(eloChange: -15, won: false);
       }
     }
 
