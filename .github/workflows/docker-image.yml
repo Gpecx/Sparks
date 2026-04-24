@@ -12,34 +12,21 @@ jobs:
     env:
       IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/site:latest
     steps:
-      # Git checkout
+      # 1. Git checkout
       - name: Checkout
         uses: actions/checkout@v2
 
-      # Login to GCP
+      # 2. Login to GCP
       - uses: google-github-actions/setup-gcloud@v0.2.0
         with:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      # gcloud configure docker
+      # 3. Configure Docker
       - name: Configure Docker
         run: gcloud auth configure-docker --quiet
 
-      # build image (Injetando as chaves públicas do Frontend)
-      - name: Build Docker image
-        run: |
-          docker build -t $IMAGE_NAME \
-            --build-arg NEXT_PUBLIC_FIREBASE_API_KEY="${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}" \
-            --build-arg NEXT_PUBLIC_FIREBASE_APP_ID="${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}" \
-            --build-arg NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}" \
-            --build-arg NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}" \
-            --build-arg NEXT_PUBLIC_FIREBASE_PROJECT_ID="${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}" \
-            --build-arg NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}" \
-            .
-
-
-# Cria o arquivo .env com as chaves do Firebase
+      # 4. GERA O ARQUIVO .ENV PRIMEIRO COM AS CHAVES DO SPARK
       - name: Generate .env file
         run: |
           echo "FIREBASE_API_KEY_ANDROID=${{ secrets.FIREBASE_API_KEY_ANDROID }}" >> .env
@@ -54,14 +41,15 @@ jobs:
           echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> .env
           echo "FIREBASE_STORAGE_BUCKET=${{ secrets.FIREBASE_STORAGE_BUCKET }}" >> .env
 
-      # build image
+      # 5. CONSTROI A IMAGEM DOCKER (O Docker vai copiar o .env gerado acima)
       - name: Build Docker image
         run: docker build -t $IMAGE_NAME .
-      # push image to registry
+
+      # 6. PUSH PARA O GOOGLE CLOUD
       - name: Push Docker image
         run: docker push $IMAGE_NAME
 
-      # deploy image (Injetando as chaves secretas do Backend e ajustando porta/memória)
+      # 7. DEPLOY NO CLOUD RUN (Apenas as flags essenciais e a porta 80)
       - name: Deploy Docker image
         run: |
           gcloud run deploy site \
@@ -72,5 +60,4 @@ jobs:
             --max-instances 1 \
             --platform managed \
             --port 80 \
-            --allow-unauthenticated \
-            --set-env-vars="ASAAS_API_KEY=${{ secrets.ASAAS_API_KEY }},ASAAS_API_URL=${{ secrets.ASAAS_API_URL }},ASAAS_WEBHOOK_TOKEN=${{ secrets.ASAAS_WEBHOOK_TOKEN }},MUX_SIGNING_KEY=${{ secrets.MUX_SIGNING_KEY }},MUX_SIGNING_KEY_ID=${{ secrets.MUX_SIGNING_KEY_ID }},MUX_TOKEN_ID=${{ secrets.MUX_TOKEN_ID }},MUX_TOKEN_SECRET=${{ secrets.MUX_TOKEN_SECRET }},FIREBASE_PROJECT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }},FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }},FIREBASE_PRIVATE_KEY=${{ secrets.FIREBASE_PRIVATE_KEY }}"
+            --allow-unauthenticated
