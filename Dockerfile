@@ -9,7 +9,21 @@ RUN git clone https://github.com/flutter/flutter.git -b 3.41.4 /usr/local/flutte
 
 # Adiciona o Flutter ao caminho (PATH) do sistema
 ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
+# ... (código anterior do Dockerfile) ...
 
+WORKDIR /app
+COPY . .
+
+# Baixa os pacotes do projeto
+RUN flutter pub get
+
+# Cria um arquivo .env vazio para o compilador não quebrar a etapa de assets
+RUN touch .env
+
+# Compila a versão Web
+RUN flutter build web
+
+# ... (restante do código) ...
 # Inicializa o Flutter
 RUN flutter doctor -v
 
