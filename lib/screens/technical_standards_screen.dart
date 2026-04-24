@@ -6,6 +6,8 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
+import 'package:spark_app/services/standards_service.dart';
+
 
 class TechnicalStandardsScreen extends ConsumerStatefulWidget {
   const TechnicalStandardsScreen({super.key});
@@ -17,6 +19,13 @@ class _TechnicalStandardsScreenState extends ConsumerState<TechnicalStandardsScr
   String _selectedFilter = 'Todos';
   String _searchQuery = '';
   final List<String> _filters = ['Todos', 'NRs', 'TCs', 'TPs'];
+
+  @override
+  void initState() {
+    super.initState();
+    // Seed the Firestore standards_metadata collection on first access
+    StandardsService().initializeStandards();
+  }
 
   final List<Map<String, dynamic>> _allStandards = [
     {'code': 'NR-10', 'type': 'NR', 'description': 'Segurança em Instalações e Serviços em Eletricidade', 'progress': 1.0, 'status': 'COMPLETO', 'statusColor': AppColors.primary, 'icon': Icons.electrical_services},
@@ -136,7 +145,12 @@ class _TechnicalStandardsScreenState extends ConsumerState<TechnicalStandardsScr
     final double progress = s['progress'] as double;
     final bool locked = !isTestMode && s['status'] == 'BLOQUEADO';
     return GestureDetector(
-      onTap: () => context.push('/standard-detail'),
+      onTap: () {
+        // Derive standard ID: 'NR-10' -> 'nr-10'
+        final standardId = (s['code'] as String).toLowerCase().replaceAll(' ', '-');
+        StandardsService().incrementClick(standardId);
+        context.push('/standard-detail', extra: {'standardId': standardId});
+      },
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(

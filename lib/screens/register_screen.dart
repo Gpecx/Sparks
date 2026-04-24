@@ -34,7 +34,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     try {
       await _authService.registerWithEmail(email, password, name, 'Membro');
-      if (mounted) context.go('/home');
+      if (mounted) {
+        context.go('/registration-success');
+      }
+
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -108,30 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             const SizedBox(height: 12),
-            // Checkbox termos
-            Row(
-              children: [
-                Container(
-                  width: 20, height: 20,
-                  decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(4)),
-                  child: const Icon(Icons.check, size: 14, color: Colors.white),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text.rich(
-                    TextSpan(
-                      text: 'Concordo com os ',
-                      style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 12),
-                      children: const [
-                        TextSpan(text: 'Termos de Uso', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600)),
-                        TextSpan(text: ' e '),
-                        TextSpan(text: 'Política de Privacidade', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600)),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+
             const SizedBox(height: 32),
             SizedBox(
               width: double.infinity,

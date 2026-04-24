@@ -9,13 +9,15 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/technical_standards_screen.dart';
-import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/services/covenant_service.dart';
-import 'package:spark_app/services/progress_service.dart';
-import 'package:spark_app/models/progress_model.dart';
-import 'package:spark_app/providers/user_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:spark_app/services/progress_service.dart';
+import 'package:spark_app/services/standards_service.dart';
+import 'package:spark_app/models/progress_model.dart';
+import 'package:spark_app/models/standard_metadata.dart';
+import 'package:spark_app/providers/user_provider.dart';
+import 'package:spark_app/providers/progress_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // ─────────────────────────────────────────────────────────────────
 //  DASHBOARD — Versão com Firebase
 //  MUDANÇAS:
@@ -498,106 +500,110 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   // ── Continue Aprendendo com dados reais (ProgressService) ───────
   Widget _buildContinueLearningCard() {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
+    final userProgressAsync = ref.watch(userProgressProvider);
+    
+    return userProgressAsync.when(
+      loading: () => const _SkeletonBox(width: double.infinity, height: 120),
+      error: (e, st) => const SizedBox(height: 120, child: Center(child: Text('Erro ao carregar progresso', style: TextStyle(color: AppColors.error)))),
+      data: (list) {
+        if (list.isEmpty) return _buildContinueLearningContent(null);
+        
+        final incomplete = list.where((p) => !p.isCompleted).toList()
+          ..sort((a, b) => b.lastAccessed.compareTo(a.lastAccessed));
+        final lastModule = incomplete.isNotEmpty ? incomplete.first : list.last;
+        
+        return _buildContinueLearningContent(lastModule);
+      },
+    );
+  }
 
-    return FutureBuilder<ProgressModel?>(
-      future: uid != null
-          ? ProgressService().getAllProgress(uid).then((list) {
-              if (list.isEmpty) return null;
-              final incomplete = list.where((p) => !p.isCompleted).toList()
-                ..sort((a, b) => b.lastAccessed.compareTo(a.lastAccessed));
-              return incomplete.isNotEmpty ? incomplete.first : list.last;
-            })
-          : Future.value(null),
-      builder: (context, snapshot) {
-        final lastModule = snapshot.data;
+  Widget _buildContinueLearningContent(ProgressModel? lastModule) {
+    final moduleName = lastModule != null
+        ? lastModule.moduleName.isNotEmpty
+            ? lastModule.moduleName
+            : 'Módulo ${lastModule.moduleId.split('_').last}'
+        : 'Nenhum módulo iniciado';
+    final moduleSubtitle = lastModule != null
+        ? '${lastModule.completedLessons.length} lição(ões) concluída(s)'
+        : 'Acesse o Caminho de Aprendizado para começar';
+    final progress = lastModule?.progressPercent ?? 0.0;
+    final progressText = lastModule != null ? '${(progress * 100).toInt()}%' : '';
 
-        final moduleName = lastModule != null
-            ? 'Módulo ${lastModule.moduleId}'
-            : 'NR-35 Trabalho em Altura';
-        final moduleSubtitle = lastModule != null
-            ? 'Módulo • ${lastModule.completedLessons.length} lições concluídas'
-            : 'Módulo 3: Equipamentos de Proteção';
-        final progress = lastModule?.progressPercent ?? 0.65;
-        final progressText = '${(progress * 100).toInt()}%';
-
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: AppColors.card,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.5)),
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.card,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.5)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Continue Aprendendo',
+            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          const SizedBox(height: 14),
+          Row(
             children: [
-              const Text(
-                'Continue Aprendendo',
-                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+              Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF00C402).withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(Icons.menu_book, color: Color(0xFF00C402)),
               ),
-              const SizedBox(height: 14),
-              Row(
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF00C402).withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(12),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      moduleName,
+                      style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
                     ),
-                    child: const Icon(Icons.menu_book, color: Color(0xFF00C402)),
-                  ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          moduleName,
-                          style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          moduleSubtitle,
-                          style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
-                        ),
-                      ],
+                    const SizedBox(height: 4),
+                    Text(
+                      moduleSubtitle,
+                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: TweenAnimationBuilder<double>(
-                        tween: Tween<double>(begin: 0.0, end: progress),
-                        duration: const Duration(milliseconds: 1200),
-                        curve: Curves.easeOutCubic,
-                        builder: (context, value, _) {
-                          return LinearProgressIndicator(
-                            value: value,
-                            backgroundColor: AppColors.inputBackground,
-                            valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
-                            minHeight: 6,
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    progressText,
-                    style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 13),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
-        );
-      },
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: TweenAnimationBuilder<double>(
+                    tween: Tween<double>(begin: 0.0, end: progress),
+                    duration: const Duration(milliseconds: 1200),
+                    curve: Curves.easeOutCubic,
+                    builder: (context, value, _) {
+                      return LinearProgressIndicator(
+                        value: value,
+                        backgroundColor: AppColors.inputBackground,
+                        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                        minHeight: 6,
+                      );
+                    },
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Text(
+                progressText,
+                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 13),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -676,7 +682,48 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         separatorBuilder: (ctx, index) => const SizedBox(width: 16),
         itemBuilder: (ctx, index) {
           if (covenants.isEmpty) {
-            return const _SkeletonBox(width: 280, height: 145);
+            return Container(
+              width: 280,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: AppColors.card,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.5)),
+                boxShadow: [
+                  BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 4, offset: const Offset(0, 2))
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.shield_outlined, color: AppColors.textMuted, size: 28),
+                  const SizedBox(height: 8),
+                  const Text('Nenhum Pacto Ativo', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+                  const SizedBox(height: 4),
+                  const Expanded(
+                    child: Text(
+                      'Vá até a aba Pactos para criar o compromisso!', 
+                      textAlign: TextAlign.center, 
+                      style: TextStyle(color: AppColors.textSecondary, fontSize: 11),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () => context.push('/covenants'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                      minimumSize: const Size(0, 32),
+                    ),
+                    child: const Text('ACEITAR PACTO', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold, fontSize: 11)),
+                  )
+                ],
+              ),
+            );
           }
           final cov = covenants[index];
 
@@ -782,27 +829,50 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   }
 
   Widget _buildNormasList(BuildContext context) {
-    return SizedBox(
-      height: 140,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        clipBehavior: Clip.none,
-        children: [
-          SizedBox(width: 140, child: _buildNormaCard(context, 'NR-10', 'Eletricidade', const Color(0xFF00C402))),
-          const SizedBox(width: 16),
-          SizedBox(width: 140, child: _buildNormaCard(context, 'NR-12', 'Máquinas', const Color(0xFF1D5F31))),
-          const SizedBox(width: 16),
-          SizedBox(width: 140, child: _buildNormaCard(context, 'NR-18', 'Construção', const Color(0xFF00C402))),
-          const SizedBox(width: 16),
-          SizedBox(width: 140, child: _buildNormaCard(context, 'NR-33', 'Espaço Confinado', const Color(0xFFB0BEC5))),
-        ],
-      ),
+    return StreamBuilder<List<StandardMetadata>>(
+      stream: StandardsService().getTopStandards(limit: 3),
+      builder: (context, snap) {
+        // Fallback: show skeleton while loading
+        if (!snap.hasData || snap.data!.isEmpty) {
+          return _buildNormasSkeleton();
+        }
+
+        final standards = snap.data!;
+        return SizedBox(
+          height: 140,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            clipBehavior: Clip.none,
+            itemCount: standards.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 16),
+            itemBuilder: (ctx, i) {
+              final s = standards[i];
+              Color accent;
+              try {
+                final hex = s.colorHex.replaceAll('#', '');
+                accent = Color(int.parse('FF$hex', radix: 16));
+              } catch (_) {
+                accent = AppColors.primary;
+              }
+              return SizedBox(
+                width: 140,
+                child: _buildNormaCard(context, s.code, s.title, accent, s.id),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildNormaCard(BuildContext context, String code, String name, Color iconColor) {
+
+  Widget _buildNormaCard(BuildContext context, String code, String name, Color iconColor, [String? standardId]) {
+    final id = standardId ?? code.toLowerCase().replaceAll(' ', '-');
     return _ResponsiveTapWidget(
-      onTap: () => context.push('/standards'),
+      onTap: () {
+        StandardsService().incrementClick(id);
+        context.push('/standard-detail', extra: {'standardId': id});
+      },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: BackdropFilter(

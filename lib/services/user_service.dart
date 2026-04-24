@@ -57,6 +57,11 @@ class UserService extends ChangeNotifier {
   String get displayName => _user?.displayName ?? 'Usuário';
   String? get clanId => _user?.clanId;
   String? get clanName => _user?.clanName;
+  // Duelo
+  int get eloRating => _user?.eloRating ?? 1200;
+  int get wins => _user?.wins ?? 0;
+  int get losses => _user?.losses ?? 0;
+  int get totalDuels => _user?.totalDuels ?? 0;
 
   // ─────────────────────────────────────────────────────────────────
   //  INICIALIZAÇÃO
@@ -133,6 +138,11 @@ class UserService extends ChangeNotifier {
       'totalLessonsCompleted': 0,
       'totalCorrectAnswers': 0,
       'totalAnswers': 0,
+      // Campos de duelo
+      'eloRating': 1200,
+      'wins': 0,
+      'losses': 0,
+      'totalDuels': 0,
       'createdAt': FieldValue.serverTimestamp(),
       'updatedAt': FieldValue.serverTimestamp(),
     });
@@ -188,6 +198,32 @@ class UserService extends ChangeNotifier {
       'updatedAt': FieldValue.serverTimestamp(),
     });
     return true;
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  //  DUELO / ELO
+  // ─────────────────────────────────────────────────────────────────
+
+  /// Atualiza o resultado do duelo no Firestore.
+  ///
+  /// [eloChange] pode ser positivo (vitória) ou negativo (derrota) ou 0 (empate).
+  /// [won] true = vitória, false = derrota, null = empate.
+  Future<void> updateElo({required int eloChange, required bool? won}) async {
+    if (uid.isEmpty) return;
+    final Map<String, dynamic> data = {
+      'eloRating': FieldValue.increment(eloChange),
+      'totalDuels': FieldValue.increment(1),
+      'updatedAt': FieldValue.serverTimestamp(),
+    };
+    if (won == true) data['wins'] = FieldValue.increment(1);
+    if (won == false) data['losses'] = FieldValue.increment(1);
+
+    await _db.collection('users').doc(uid).update(data);
+
+    // Badge de primeiro duelo
+    if (totalDuels == 0) {
+      await unlockBadge('primeiro_duelo');
+    }
   }
 
   // ─────────────────────────────────────────────────────────────────

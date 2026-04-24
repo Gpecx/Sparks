@@ -5,7 +5,6 @@ import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class CartNotifier extends Notifier<List<CartItem>> {
   @override
@@ -236,7 +235,7 @@ class StoreScreen extends ConsumerWidget {
           SizedBox(
             width: double.infinity, height: 46,
             child: ElevatedButton(
-              onPressed: () => _addToCart(context, ref, CartItem(name: '500 Pontos Spark (Promo)', description: 'Oferta Relâmpago', price: promoDiscountPrice, icon: Icons.bolt)),
+              onPressed: () => _addToCart(context, ref, CartItem(name: '500 Pontos Spark (Promo)', description: 'Oferta Relâmpago', price: promoDiscountPrice, icon: Icons.bolt, sparkPointsGranted: promoPoints)),
               child: const Text('APROVEITAR AGORA', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
             ),
           ),
@@ -250,7 +249,7 @@ class StoreScreen extends ConsumerWidget {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-      onTap: () => _addToCart(context, ref, CartItem(name: '${pkg.points} Pontos Spark', description: 'Pacote avulso', price: pkg.price, icon: Icons.bolt)),
+      onTap: () => _addToCart(context, ref, CartItem(name: '${pkg.points} Pontos Spark', description: 'Pacote avulso', price: pkg.price, icon: Icons.bolt, sparkPointsGranted: pkg.points)),
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
@@ -303,7 +302,7 @@ class StoreScreen extends ConsumerWidget {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-      onTap: () => _addToCart(context, ref, CartItem(name: 'Plano ${plan.name}', description: '+${plan.bonusPoints} pts bônus/mês', price: plan.monthlyPrice, icon: isBest ? Icons.workspace_premium : Icons.card_membership)),
+      onTap: () => _addToCart(context, ref, CartItem(name: 'Plano ${plan.name}', description: '+${plan.bonusPoints} pts bônus/mês', price: plan.monthlyPrice, icon: isBest ? Icons.workspace_premium : Icons.card_membership, sparkPointsGranted: plan.bonusPoints)),
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(

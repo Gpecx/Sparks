@@ -6,7 +6,9 @@ class CovenantModel {
   final int currentProgress;
   final int maxProgress;
   final bool isCompleted;
-  final String trackingType; // e.g. 'days', 'battles', 'completion'
+  final String trackingType; // 'days', 'battles', '%'
+  final bool isSelected;    // true = ativo para a semana atual
+  final String weekKey;     // ex: '2025-W17', vazio = nunca selecionado
 
   CovenantModel({
     required this.id,
@@ -17,6 +19,8 @@ class CovenantModel {
     required this.maxProgress,
     required this.isCompleted,
     required this.trackingType,
+    this.isSelected = false,
+    this.weekKey = '',
   });
 
   CovenantModel copyWith({
@@ -28,6 +32,8 @@ class CovenantModel {
     int? maxProgress,
     bool? isCompleted,
     String? trackingType,
+    bool? isSelected,
+    String? weekKey,
   }) {
     return CovenantModel(
       id: id ?? this.id,
@@ -38,6 +44,8 @@ class CovenantModel {
       maxProgress: maxProgress ?? this.maxProgress,
       isCompleted: isCompleted ?? this.isCompleted,
       trackingType: trackingType ?? this.trackingType,
+      isSelected: isSelected ?? this.isSelected,
+      weekKey: weekKey ?? this.weekKey,
     );
   }
 
@@ -51,6 +59,8 @@ class CovenantModel {
       'maxProgress': maxProgress,
       'isCompleted': isCompleted,
       'trackingType': trackingType,
+      'isSelected': isSelected,
+      'weekKey': weekKey,
     };
   }
 
@@ -64,6 +74,8 @@ class CovenantModel {
       maxProgress: map['maxProgress']?.toInt() ?? 0,
       isCompleted: map['isCompleted'] ?? false,
       trackingType: map['trackingType'] ?? '',
+      isSelected: map['isSelected'] ?? false,
+      weekKey: map['weekKey'] ?? '',
     );
   }
 }

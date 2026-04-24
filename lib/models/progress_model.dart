@@ -5,6 +5,7 @@ class ProgressModel {
   final String id;
   final String moduleId;
   final String categoryId;
+  final String moduleName;          // Nome human-readable do módulo
   final List<String> completedLessons;
   final double progressPercent;
   final bool isCompleted;
@@ -18,6 +19,7 @@ class ProgressModel {
     required this.id,
     required this.moduleId,
     required this.categoryId,
+    this.moduleName = '',
     required this.completedLessons,
     required this.progressPercent,
     required this.isCompleted,
@@ -34,6 +36,7 @@ class ProgressModel {
       id: doc.id,
       moduleId: d[FS.moduleId] as String,
       categoryId: d[FS.categoryId] as String,
+      moduleName: d['moduleName'] as String? ?? '',
       completedLessons: List<String>.from(d[FS.completedLessons] as List),
       progressPercent: (d[FS.progressPercent] as num).toDouble(),
       isCompleted: d[FS.isCompleted] as bool,
@@ -50,6 +53,7 @@ class ProgressModel {
   Map<String, dynamic> toMap() => {
         FS.moduleId: moduleId,
         FS.categoryId: categoryId,
+        'moduleName': moduleName,
         FS.completedLessons: completedLessons,
         FS.progressPercent: progressPercent,
         FS.isCompleted: isCompleted,

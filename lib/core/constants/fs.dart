@@ -13,6 +13,7 @@ abstract class FS {
   static const String voucherRedemptions = 'voucher_redemptions';
   static const String badges = 'badges';
   static const String activeEvents = 'active_events';
+  static const String standardsMetadata = 'standards_metadata';
 
   // ── Sub-collections ───────────────────────────────────────────────────────
   static const String progress = 'progress';
@@ -23,6 +24,14 @@ abstract class FS {
   static const String members = 'members';
   static const String messages = 'messages';
   static const String covenants = 'covenants'; // subcoleção users/{uid}/covenants
+
+  // ── Standards metadata fields ─────────────────────────────────────────────
+  static const String clickCount = 'clickCount';
+  static const String colorHex = 'colorHex';
+
+  // ── Covenant selection fields ─────────────────────────────────────────────
+  static const String isSelected = 'isSelected';
+  static const String weekKey = 'weekKey';
 
   // ── User fields (esquema unificado UserModel) ─────────────────────────────
   static const String uid = 'uid';
