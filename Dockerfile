@@ -17,8 +17,6 @@ COPY . .
 # Baixa os pacotes do projeto
 RUN flutter pub get
 
-# Cria um arquivo .env vazio para o compilador não quebrar a etapa de assets
-RUN touch .env
 
 # Compila a versão Web
 RUN flutter build web
