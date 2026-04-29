@@ -8,8 +8,13 @@ class QuestionService {
 
   final FirebaseFirestore _fs = FirebaseFirestore.instance;
 
-  Future<void> addQuestions(String catId, String modId, String lessonId, List<Map<String, dynamic>> qs) async {
-    final batch = _fs.batch();
+  /// Grava uma lista de questões em Map direto no Firestore (usado no seed).
+  Future<void> addQuestions(
+    String catId,
+    String modId,
+    String lessonId,
+    List<Map<String, dynamic>> qs,
+  ) async {
     final colRef = _fs
         .collection(FS.categories)
         .doc(catId)
@@ -30,7 +35,14 @@ class QuestionService {
     }
   }
 
-  Future<List<QuestionModel>> getQuestions(String catId, String modId, String lessonId, {int limit = 10}) async {
+  /// Busca questões do Firestore como [QuestionModel] polimórfico.
+  /// Suporta multipleChoice, trueFalse e fillInTheBlanks.
+  Future<List<QuestionModel>> getQuestions(
+    String catId,
+    String modId,
+    String lessonId, {
+    int limit = 20,
+  }) async {
     final snap = await _fs
         .collection(FS.categories)
         .doc(catId)
@@ -39,7 +51,7 @@ class QuestionService {
         .collection(FS.lessons)
         .doc(lessonId)
         .collection(FS.questions)
-        .orderBy('order')
+        .orderBy(FS.order)
         .limit(limit)
         .get();
 

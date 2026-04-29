@@ -2,6 +2,8 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/clan_screen.dart';
@@ -13,6 +15,7 @@ import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/models/badge_model.dart';
+import 'package:spark_app/scripts/seed_curriculum.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 // ─────────────────────────────────────────────────────────────────
@@ -40,6 +43,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   // Posição no ranking (carregada de forma assíncrona)
   int _rankingPosition = 0;
   bool _rankingLoaded = false;
+  bool _seeding = false;
 
   @override
   void initState() {
@@ -58,6 +62,73 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         _rankingPosition = index >= 0 ? index + 1 : 0;
         _rankingLoaded = true;
       });
+    }
+  }
+
+  /// Executa o seed de lições + questões no Firestore (somente kDebugMode).
+  /// Também aplica um AUTO-FIX na conta do usuário, transformando-o em admin
+  /// e corrigindo o bug da conta "fantasma" / "Usuário".
+  Future<void> _runSeed() async {
+    if (_seeding) return;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.card,
+        title: const Text('Confirmar Auto-Fix + Seed', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+        content: const Text(
+          '1. Isso aplicará um FIX na sua conta atual (recuperando seu usuário fantasma e te dando permissão de admin).\n\n'
+          '2. Em seguida, vai popular o Firestore com as lições.\n\nExecute apenas UMA VEZ.',
+          style: TextStyle(color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('CANCELAR', style: TextStyle(color: AppColors.textMuted))),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+            child: const Text('⚡ EXECUTAR FIX', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+    setState(() => _seeding = true);
+    try {
+      // ── AUTO-FIX DA CONTA "FANTASMA" ──
+      // Pega o Auth UID do celular e FORÇA a criação do documento dele com role=admin
+      final auth = FirebaseAuth.instance.currentUser;
+      if (auth != null) {
+        await FirebaseFirestore.instance.collection('users').doc(auth.uid).set({
+          'uid': auth.uid,
+          'displayName': 'Admin Supremo', // Substitui o nome de "Usuario" para confirmar que arrumou
+          'email': auth.email ?? '',
+          'role': 'admin',
+          'sparkPoints': 9999, // Presente pra confirmar que atualizou!
+          'createdAt': FieldValue.serverTimestamp(),
+          'updatedAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+        debugPrint('[AutoFix] Conta corrigida e promovida para admin!');
+        
+        // Dá 2 segundos para as regras do Firestore processarem a mudança
+        await Future.delayed(const Duration(seconds: 2));
+      }
+
+      await seedLessonsAndQuestions(catId: 'capacitacao_tecnica');
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('✅ Fix + Seed concluído com sucesso!', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF00C402),
+        behavior: SnackBarBehavior.floating,
+      ));
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('❌ Erro no seed: $e', style: const TextStyle(color: Colors.white)),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 6),
+      ));
+    } finally {
+      if (mounted) setState(() => _seeding = false);
     }
   }
 
@@ -272,6 +343,40 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ),
                   ),
                   const SizedBox(height: 28),
+
+                  // ── Dev Tools (somente debug) ────────────────────
+                  if (kDebugMode) ...[  
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('DEV TOOLS', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          onPressed: _seeding ? null : _runSeed,
+                          icon: _seeding
+                              ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.primary))
+                              : const Icon(Icons.bolt, color: AppColors.primary, size: 18),
+                          label: Text(
+                            _seeding ? 'Populando Firestore...' : '⚡ SEED FIRESTORE',
+                            style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 13, letterSpacing: 1),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5), width: 1.5),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                  ],
 
                   // ── Conquistas ───────────────────────────────────
                   Padding(

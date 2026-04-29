@@ -96,6 +96,11 @@ abstract class FS {
   static const String normReference = 'normReference';
   static const String imageUrl = 'imageUrl';
   static const String isActive = 'isActive';
+  // TrueFalse
+  static const String isTrue = 'isTrue';
+  // FillInTheBlanks
+  static const String textWithBlanks = 'textWithBlanks';
+  static const String blanks = 'blanks';
 
   // ── Clan fields ───────────────────────────────────────────────────────────
   static const String description = 'description';
@@ -119,49 +124,115 @@ abstract class FS {
 }
 
 // ── QuestionModel ─────────────────────────────────────────────────────────────
+// Modelo Firestore que suporta multipleChoice, trueFalse e fillInTheBlanks.
 
 class QuestionModel {
   final String id;
   final int order;
   final String type;
   final String statement;
-  final List<String> options;
-  final int correctIndex;
   final String explanation;
-  final String difficulty;
-  final String normReference;
-  final String? imageUrl;
   final bool isActive;
+
+  // multipleChoice
+  final List<String>? options;
+  final int? correctIndex;
+
+  // trueFalse
+  final bool? isTrue;
+
+  // fillInTheBlanks
+  final String? textWithBlanks;
+  final List<Map<String, dynamic>>? blanks;
 
   const QuestionModel({
     required this.id,
     required this.order,
     required this.type,
     required this.statement,
-    required this.options,
-    required this.correctIndex,
     required this.explanation,
-    required this.difficulty,
-    required this.normReference,
-    this.imageUrl,
     required this.isActive,
+    this.options,
+    this.correctIndex,
+    this.isTrue,
+    this.textWithBlanks,
+    this.blanks,
   });
 
   factory QuestionModel.fromFirestore(DocumentSnapshot doc) {
     final d = doc.data() as Map<String, dynamic>;
+    final type = d[FS.type] as String? ?? 'multipleChoice';
+
     return QuestionModel(
       id: doc.id,
-      order: (d[FS.order] as num).toInt(),
-      type: d[FS.type] as String,
-      statement: d[FS.statement] as String,
-      options: List<String>.from(d[FS.options] as List),
-      correctIndex: (d[FS.correctIndex] as num).toInt(),
-      explanation: d[FS.explanation] as String,
-      difficulty: d[FS.difficulty] as String,
-      normReference: d[FS.normReference] as String,
-      imageUrl: d[FS.imageUrl] as String?,
+      order: (d[FS.order] as num? ?? 0).toInt(),
+      type: type,
+      statement: d[FS.statement] as String? ?? '',
+      explanation: d[FS.explanation] as String? ?? '',
       isActive: d[FS.isActive] as bool? ?? true,
+      // multipleChoice
+      options: type == 'multipleChoice' && d[FS.options] != null
+          ? List<String>.from(d[FS.options] as List)
+          : null,
+      correctIndex: type == 'multipleChoice' && d[FS.correctIndex] != null
+          ? (d[FS.correctIndex] as num).toInt()
+          : null,
+      // trueFalse
+      isTrue: type == 'trueFalse' ? d[FS.isTrue] as bool? : null,
+      // fillInTheBlanks
+      textWithBlanks: type == 'fillInTheBlanks'
+          ? d[FS.textWithBlanks] as String?
+          : null,
+      blanks: type == 'fillInTheBlanks' && d[FS.blanks] != null
+          ? List<Map<String, dynamic>>.from(d[FS.blanks] as List)
+          : null,
     );
+  }
+
+  /// Converte para o formato Map interno usado pelo QuizScreen.
+  Map<String, dynamic> toQuizMap(String moduleName) {
+    switch (type) {
+      case 'multipleChoice':
+        return {
+          'type': 'multiple',
+          'module': moduleName,
+          'question': statement,
+          'options': options ?? [],
+          'correct': correctIndex ?? 0,
+          'explanation': explanation,
+        };
+      case 'trueFalse':
+        return {
+          'type': 'swipe',
+          'module': moduleName,
+          'question': 'Verdadeiro ou Falso?',
+          'statement': statement,
+          'answer': isTrue ?? false,
+          'explanation': explanation,
+        };
+      case 'fillInTheBlanks':
+        final parts = (textWithBlanks ?? '').split('____');
+        final answers = (blanks ?? []).map((b) => b['answer'] as String).toList();
+        return {
+          'type': 'drag',
+          'module': moduleName,
+          'question': statement,
+          'prefix': parts.isNotEmpty ? parts.first : '',
+          'suffix': parts.length > 1 ? parts.last : '',
+          'answer': answers,
+          'options': answers,
+          'explanation': explanation,
+        };
+      default:
+        return {
+          'type': 'multiple',
+          'module': moduleName,
+          'question': statement,
+          'options': options ?? [],
+          'correct': correctIndex ?? 0,
+          'explanation': explanation,
+        };
+    }
   }
 
   Map<String, dynamic> toMap() => {
@@ -169,13 +240,13 @@ class QuestionModel {
         FS.order: order,
         FS.type: type,
         FS.statement: statement,
-        FS.options: options,
-        FS.correctIndex: correctIndex,
         FS.explanation: explanation,
-        FS.difficulty: difficulty,
-        FS.normReference: normReference,
-        FS.imageUrl: imageUrl,
         FS.isActive: isActive,
+        if (options != null) FS.options: options,
+        if (correctIndex != null) FS.correctIndex: correctIndex,
+        if (isTrue != null) FS.isTrue: isTrue,
+        if (textWithBlanks != null) FS.textWithBlanks: textWithBlanks,
+        if (blanks != null) FS.blanks: blanks,
       };
 }
 
