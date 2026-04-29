@@ -11,10 +11,17 @@ import 'package:spark_app/services/progress_service.dart';
 // ─────────────────────────────────────────────────────────────────
 
 /// Provider do UserService (singleton).
-/// Riverpod v3 removeu ChangeNotifierProvider — usamos Provider simples
-/// já que UserService é um singleton e gerencia seu próprio estado interno.
+/// Emulando a reatividade antiga do ChangeNotifierProvider no Riverpod 3.0.
 final userServiceProvider = Provider<UserService>((ref) {
-  return UserService();
+  final service = UserService();
+  
+  // Força o provider a notificar seus ouvintes quando o Singleton emitir evento
+  void listener() => ref.invalidateSelf();
+  service.addListener(listener);
+  
+  ref.onDispose(() => service.removeListener(listener));
+  
+  return service;
 });
 
 /// Provider do usuário atual (stream do Firebase Auth).

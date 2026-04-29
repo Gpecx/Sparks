@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -21,6 +22,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       vsync: this,
       duration: const Duration(seconds: 12),
     )..repeat();
+
+    // ── Auto-Login ──────────────────────────────────────────
+    // Se a sessão do Firebase persistiu, pula o Welcome direto pro Home
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (FirebaseAuth.instance.currentUser != null) {
+        context.go('/home');
+      }
+    });
   }
 
   @override

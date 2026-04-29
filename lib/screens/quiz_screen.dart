@@ -6,9 +6,11 @@ import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/spark_emitter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/services/progress_service.dart';
+import 'package:spark_app/services/question_service.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/widgets/streak_lightning_emitter.dart';
 import 'package:spark_app/models/quiz_models.dart';
+import 'package:spark_app/core/constants/fs.dart';
 
 class QuizScreen extends StatefulWidget {
   final bool isEvaluation;
@@ -47,6 +49,9 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   late AnimationController _shakeController;
   late AnimationController _epicStreakController;
   late AnimationController _completionController;
+
+  // Estado de carregamento (busca questões do Firestore)
+  bool _isLoading = false;
 
   // ── BANCO DE PERGUNTAS ──
   final List<Map<String, dynamic>> _questions = [
@@ -181,20 +186,71 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     super.initState();
     _energyCtrl.addListener(_onEnergyChanged);
 
-    // Se uma lição real foi fornecida, usa as questões dela
-    if (widget.lesson != null && widget.lesson!.questions.isNotEmpty) {
-      _questions
-        ..clear()
-        ..addAll(_convertLessonToQuestions(widget.lesson!));
-    }
-
-    _initializeQuestionState();
-
-    // Animações
+    // Inicializa animações primeiro
     _shakeController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
     _epicStreakController = AnimationController(vsync: this, duration: const Duration(milliseconds: 1500));
     _completionController = AnimationController(vsync: this, duration: const Duration(milliseconds: 2000));
 
+    if (widget.lesson != null) {
+      if (widget.lesson!.questions.isNotEmpty) {
+        // Lição local com questões — converte e usa imediatamente
+        _questions
+          ..clear()
+          ..addAll(_convertLessonToQuestions(widget.lesson!));
+        _initializeQuestionState();
+        _checkEnergy();
+      } else if (widget.categoryId != null && widget.moduleId != null) {
+        // Lição sem questões locais — busca do Firestore
+        _isLoading = true;
+        _loadQuestionsFromFirestore();
+      } else {
+        // Sem categoria/módulo — usa banco de mock local
+        _initializeQuestionState();
+        _checkEnergy();
+      }
+    } else {
+      // Sem lição real — usa banco de mock local
+      _initializeQuestionState();
+      _checkEnergy();
+    }
+  }
+
+  /// Busca questões da lição no Firestore e popula _questions.
+  Future<void> _loadQuestionsFromFirestore() async {
+    try {
+      final firestoreQuestions = await QuestionService().getQuestions(
+        widget.categoryId!,
+        widget.moduleId!,
+        widget.lesson!.id,
+        limit: 20,
+      );
+
+      if (!mounted) return;
+
+      if (firestoreQuestions.isNotEmpty) {
+        _questions
+          ..clear()
+          ..addAll(firestoreQuestions.map((q) => q.toQuizMap(widget.lesson!.title)));
+      }
+      // Se não há questões no Firestore, mantém o mock local
+
+      setState(() {
+        _isLoading = false;
+      });
+      _initializeQuestionState();
+      _checkEnergy();
+    } catch (e) {
+      debugPrint('[QuizScreen] Erro ao buscar questões do Firestore: $e');
+      if (!mounted) return;
+      setState(() {
+        _isLoading = false;
+      });
+      _initializeQuestionState();
+      _checkEnergy();
+    }
+  }
+
+  void _checkEnergy() {
     if (!_energyCtrl.spendEntryEnergy()) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showOutOfEnergyModal();
@@ -380,14 +436,14 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
           // ✅ Persiste Spark Points no Firestore via UserService
           await _userService.addSparkPoints(spEarned);
 
-          // ✅ Também registra no ProgressService (compatibilidade)
+          // ✅ Persiste progresso da lição no Firestore (com await para garantir)
           final uid = FirebaseAuth.instance.currentUser?.uid;
           if (uid != null && widget.moduleId != null) {
-            ProgressService().markLessonComplete(
+            await ProgressService().markLessonComplete(
               uid,
-              widget.categoryId ?? 'default_cat',
+              widget.categoryId ?? FS.categories,
               widget.moduleId!,
-              widget.lesson?.id ?? 'lesson_$_currentQuestion',
+              widget.lesson?.id ?? 'lesson_${_currentQuestion + 1}',
               xpEarned,
               spEarned,
               moduleName: widget.lesson?.title ?? '',
@@ -665,6 +721,34 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   // === UI PRINCIPAL DA TELA ===
   @override
   Widget build(BuildContext context) {
+    // Exibe spinner enquanto busca questões do Firestore
+    if (_isLoading || _questions.isEmpty) {
+      return Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: RadialGradient(
+              center: Alignment.center,
+              radius: 1.2,
+              colors: [Color(0xFF091E35), Color(0xFF061629)],
+            ),
+          ),
+          child: const Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(color: AppColors.primary),
+                SizedBox(height: 16),
+                Text(
+                  'Carregando questões...',
+                  style: TextStyle(color: AppColors.textMuted, fontSize: 14),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     final q = _questions[_currentQuestion];
     final progress = (_currentQuestion + 1) / _questions.length;
 
