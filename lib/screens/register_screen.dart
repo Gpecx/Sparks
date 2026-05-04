@@ -1,8 +1,12 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
+import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/services/auth_service.dart';
+import 'package:spark_app/services/user_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -30,23 +34,172 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-    setState(() => _isLoading = true);
-
     try {
-      await _authService.registerWithEmail(email, password, name, 'Membro');
-      if (mounted) {
-        context.go('/registration-success');
+      setState(() => _isLoading = true);
+
+      WelcomeScreen.skipAutoLogin = true;
+      UserService().stopListening(); // Cancela listeners ativos
+
+      // 1. Cria a conta no Firebase Auth
+      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email, 
+        password: password
+      );
+
+      final user = credential.user;
+      if (user == null) throw Exception('Erro desconhecido ao criar usuário.');
+
+      // 2. Atualiza o nome do usuário com try/catch e timeout
+      try {
+        await user.updateDisplayName(name).timeout(const Duration(seconds: 4));
+        await user.reload().timeout(const Duration(seconds: 2));
+      } catch (e) {
+        debugPrint('Aviso: updateDisplayName demorou ou falhou: $e');
       }
+
+      // 3. Cria o documento no Firestore com Timeout e Try/Catch isolado
+      // Se houver instabilidade ou timeout no Firestore, não travamos o usuário.
+      // A conta Auth já existe e o AuthService a curará no próximo login.
+      try {
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'uid': user.uid,
+          'displayName': name,
+          'email': email,
+          'photoUrl': null,
+          'role': 'Técnico',
+          'sparkPoints': 100, // Bônus de boas-vindas
+          'xp': 0,
+          'level': 1,
+          'tensionLevel': 'BT',
+          'currentStreak': 0,
+          'longestStreak': 0,
+          'activeDays': 0,
+          'studiedToday': false,
+          'lastStudyDate': null,
+          'weeklyXp': 0,
+          'monthlyXp': 0,
+          'unlockedBadgeIds': [],
+          'clanId': null,
+          'clanName': null,
+          'totalLessonsCompleted': 0,
+          'totalCorrectAnswers': 0,
+          'totalAnswers': 0,
+          'eloRating': 1200,
+          'wins': 0,
+          'losses': 0,
+          'totalDuels': 0,
+          'createdAt': FieldValue.serverTimestamp(),
+          'updatedAt': FieldValue.serverTimestamp(),
+        }).timeout(const Duration(seconds: 3));
+      } catch (firestoreError) {
+        debugPrint('Firestore Timeout/Error ignorado no cadastro: $firestoreError');
+      }
+
+      if (!mounted) return;
+
+      // 4. Só aqui mostra o popup (A conta foi criada com sucesso)
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (ctx) => Dialog(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Container(
+            padding: const EdgeInsets.all(28),
+            decoration: BoxDecoration(
+              color: AppColors.card,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: AppColors.primary.withValues(alpha: 0.3), width: 1.5),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withValues(alpha: 0.15),
+                  blurRadius: 32,
+                  spreadRadius: 8,
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.check_circle_outline,
+                    color: AppColors.primary,
+                    size: 56,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  'Conta Criada!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Sua conta foi criada com sucesso.\nVocê já pode acessar o SPARK.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.7),
+                    fontSize: 15,
+                    height: 1.5,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                SizedBox(
+                  width: double.infinity,
+                  height: 52,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    onPressed: () async {
+                      Navigator.pop(ctx);
+                      final router = GoRouter.of(context);
+                      WelcomeScreen.skipAutoLogin = false;
+                      await FirebaseAuth.instance.signOut();
+                      UserService().stopListening();
+                      router.go('/login');
+                    },
+                    child: const Text(
+                      'IR PARA O LOGIN',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
 
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(e.toString().replaceAll('Exception: ', '')),
-            backgroundColor: AppColors.error,
-          ),
-        );
-      }
+      WelcomeScreen.skipAutoLogin = false;
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erro: ${e.toString().replaceAll('Exception: ', '')}'),
+          backgroundColor: AppColors.error,
+        ),
+      );
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }

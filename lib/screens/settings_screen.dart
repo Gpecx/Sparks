@@ -7,7 +7,8 @@ import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/technical_standards_screen.dart';
 import 'package:spark_app/screens/edit_profile_screen.dart';
 import 'package:spark_app/screens/change_password_screen.dart';
-import 'package:spark_app/services/notification_service.dart';
+import 'package:spark_app/services/auth_service.dart';
+import 'package:spark_app/services/user_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -326,7 +327,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 child: OutlinedButton.icon(
-                  onPressed: () => context.go('/'),
+                  onPressed: () async {
+                    final router = GoRouter.of(context);
+                    await AuthService().signOut();
+                    UserService().stopListening();
+                    router.go('/');
+                  },
                   icon: const Icon(Icons.logout, size: 18),
                   label: const Text(
                     'SAIR DA CONTA',
@@ -389,7 +395,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         trailing: Switch(
           value: value,
           onChanged: onChanged,
-          activeColor: AppColors.primary,
+          activeThumbColor: AppColors.primary,
           activeTrackColor: AppColors.primary.withValues(alpha: 0.3),
           inactiveThumbColor: AppColors.textMuted,
           inactiveTrackColor: AppColors.inputBackground,

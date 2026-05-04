@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/routes/app_router.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/firebase_options.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -39,10 +40,13 @@ void main() async {
   // 2. Escuta mudanças de autenticação para iniciar/parar o listener
   FirebaseAuth.instance.authStateChanges().listen((user) {
     if (user != null) {
-      // Usuário logou: inicia escuta em tempo real
-      UserService().startListening();
-      // Verifica se streak precisa ser resetado
-      UserService().checkAndResetStreakIfNeeded();
+      // Impede contenção de escrita durante o cadastro (bloqueia deadlock do Firestore)
+      if (!WelcomeScreen.skipAutoLogin) {
+        // Usuário logou normalmente: inicia escuta em tempo real
+        UserService().startListening();
+        // Verifica se streak precisa ser resetado
+        UserService().checkAndResetStreakIfNeeded();
+      }
     } else {
       // Usuário saiu: para a escuta
       UserService().stopListening();

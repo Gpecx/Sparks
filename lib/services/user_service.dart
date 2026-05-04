@@ -54,7 +54,15 @@ class UserService extends ChangeNotifier {
   int get activeDays => _user?.activeDays ?? 0;
   bool get studiedToday => _user?.studiedToday ?? false;
   List<String> get unlockedBadgeIds => _user?.unlockedBadgeIds ?? [];
-  String get displayName => _user?.displayName ?? 'Usuário';
+  // Usa o displayName do Firestore quando disponível, senão cai no Firebase Auth
+  // (disponível imediatamente após login), e só por último usa 'Usuário'.
+  String get displayName {
+    final fromFirestore = _user?.displayName;
+    if (fromFirestore != null && fromFirestore.isNotEmpty) return fromFirestore;
+    final fromAuth = _auth.currentUser?.displayName;
+    if (fromAuth != null && fromAuth.isNotEmpty) return fromAuth;
+    return 'Usuário';
+  }
   String? get clanId => _user?.clanId;
   String? get clanName => _user?.clanName;
   // Duelo
@@ -81,6 +89,7 @@ class UserService extends ChangeNotifier {
         if (snap.exists) {
           _user = UserModel.fromFirestore(snap);
         }
+        // Só notifica quando o documento existir ou o loading terminar
         _isLoading = false;
         notifyListeners();
       },
@@ -273,7 +282,16 @@ class UserService extends ChangeNotifier {
 
   /// Verifica e reseta o streak se o usuário não estudou.
   Future<void> checkAndResetStreakIfNeeded() async {
+    // Aguarda o documento carregar antes de tentar qualquer escrita.
+    // Evita conflito com o set() inicial do cadastro (retry loop do Firestore).
     if (uid.isEmpty || _user == null) return;
+
+    // Conta nova: createdAt nos últimos 60s → pula verificação de streak.
+    final createdAt = _user?.createdAt;
+    if (createdAt != null &&
+        DateTime.now().difference(createdAt).inSeconds < 60) {
+      return;
+    }
 
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
