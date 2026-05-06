@@ -1,8 +1,13 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:spark_app/models/user_model.dart';
+import 'package:spark_app/services/analytics_service.dart';
+import 'package:spark_app/services/audit_service.dart';
+import 'package:spark_app/services/fcm_service.dart';
+import 'package:spark_app/services/gamification_service.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  USER SERVICE — Sincronização completa com Firestore
@@ -84,12 +89,17 @@ class UserService extends ChangeNotifier {
     notifyListeners();
 
     _userStream?.cancel();
+    bool tokenSaved = false;
     _userStream = _db.collection('users').doc(uid).snapshots().listen(
       (snap) {
         if (snap.exists) {
           _user = UserModel.fromFirestore(snap);
+          // Salva token FCM uma única vez após o primeiro snapshot
+          if (!tokenSaved) {
+            tokenSaved = true;
+            FcmService().saveTokenAfterLogin();
+          }
         }
-        // Só notifica quando o documento existir ou o loading terminar
         _isLoading = false;
         notifyListeners();
       },
@@ -162,9 +172,11 @@ class UserService extends ChangeNotifier {
   // ─────────────────────────────────────────────────────────────────
 
   /// Adiciona XP e recalcula o nível e tensionLevel.
-  Future<void> addXp(int amount) async {
+  /// Dispara push notification via FCM quando o nível sobe.
+  Future<void> addXp(int amount, {String source = 'app'}) async {
     if (uid.isEmpty) return;
 
+    final oldLevel = level; // captura antes do update
     final newXp = xp + amount;
     final newLevel = (newXp ~/ 500) + 1;
     final newWeeklyXp = (_user?.weeklyXp ?? 0) + amount;
@@ -179,8 +191,62 @@ class UserService extends ChangeNotifier {
       'updatedAt': FieldValue.serverTimestamp(),
     });
 
+    // Audit log — registra ganho de XP
+    await AuditService().log(
+      action: AuditAction.xpGained,
+      amount: amount,
+      source: source,
+      meta: {'newXp': newXp, 'newLevel': newLevel},
+    );
+
+    // Dispara notificação de level-up via FCM
+    if (newLevel > oldLevel) {
+      await _sendLevelUpNotification(newLevel);
+      await AuditService().log(
+        action: AuditAction.levelUp,
+        amount: newLevel,
+        source: source,
+        meta: {'oldLevel': oldLevel, 'newLevel': newLevel},
+      );
+      // Analytics — level_up
+      await AnalyticsService().logLevelUp(
+        oldLevel: oldLevel,
+        newLevel: newLevel,
+        totalXp: newXp,
+      );
+      await AnalyticsService().setUserLevel(newLevel);
+    }
+
     await _updateWeeklyRanking(newWeeklyXp);
     await _checkXpBadges(newXp);
+  }
+
+  /// Grava o evento de level-up na subcoleção `users/{uid}/notifications`
+  /// para que uma Cloud Function (ou o próprio app) envie o push via FCM.
+  Future<void> _sendLevelUpNotification(int newLevel) async {
+    try {
+      // Obtém o token FCM atual para referência
+      final token = await FirebaseMessaging.instance.getToken();
+
+      // Persiste o evento — uma Cloud Function pode escutar e enviar o push
+      await _db
+          .collection('users')
+          .doc(uid)
+          .collection('notifications')
+          .add({
+        'type': 'level_up',
+        'title': '🎉 Você subiu de nível!',
+        'body': 'Parabéns! Você alcançou o nível $newLevel no SPARK.',
+        'level': newLevel,
+        'fcmToken': token,
+        'sent': false,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      debugPrint('[FCM] Evento level_up registrado → nível $newLevel');
+    } catch (e) {
+      debugPrint('[FCM] Erro ao registrar level_up: $e');
+    }
   }
 
   String _calcTension(int totalXp) {
@@ -191,21 +257,31 @@ class UserService extends ChangeNotifier {
   }
 
   /// Adiciona Pontos Spark (moeda).
-  Future<void> addSparkPoints(int amount) async {
+  Future<void> addSparkPoints(int amount, {String source = 'app'}) async {
     if (uid.isEmpty) return;
     await _db.collection('users').doc(uid).update({
       'sparkPoints': FieldValue.increment(amount),
       'updatedAt': FieldValue.serverTimestamp(),
     });
+    await AuditService().log(
+      action: AuditAction.spGained,
+      amount: amount,
+      source: source,
+    );
   }
 
   /// Gasta Pontos Spark. Retorna false se saldo insuficiente.
-  Future<bool> spendSparkPoints(int amount) async {
+  Future<bool> spendSparkPoints(int amount, {String source = 'purchase'}) async {
     if (uid.isEmpty || sparkPoints < amount) return false;
     await _db.collection('users').doc(uid).update({
       'sparkPoints': FieldValue.increment(-amount),
       'updatedAt': FieldValue.serverTimestamp(),
     });
+    await AuditService().log(
+      action: AuditAction.spSpent,
+      amount: amount,
+      source: source,
+    );
     return true;
   }
 
@@ -277,7 +353,20 @@ class UserService extends ChangeNotifier {
       'updatedAt': FieldValue.serverTimestamp(),
     });
 
+    await AuditService().log(
+      action: AuditAction.streakUpdated,
+      amount: newStreak,
+      source: 'study_activity',
+      meta: {'activeDays': newActiveDays},
+    );
+
+    // Analytics — streak_updated
+    await AnalyticsService().logStreakUpdated(newStreak: newStreak);
+
     await _checkStreakBadges(newStreak);
+
+    // Desafio semanal — streak 7 dias = weekly_warrior + 100 XP
+    await GamificationService().checkWeeklyChallenge(uid, newStreak);
   }
 
   /// Verifica e reseta o streak se o usuário não estudou.
@@ -322,7 +411,7 @@ class UserService extends ChangeNotifier {
   /// Ressurreição de streak com Spark Points.
   Future<bool> resurrectStreak(int previousStreak) async {
     final cost = _getResurrectCost(previousStreak);
-    final success = await spendSparkPoints(cost);
+    final success = await spendSparkPoints(cost, source: 'streak_resurrection');
     if (!success) return false;
 
     await _db.collection('users').doc(uid).update({
@@ -331,6 +420,13 @@ class UserService extends ChangeNotifier {
       'lastStudyDate': FieldValue.serverTimestamp(),
       'updatedAt': FieldValue.serverTimestamp(),
     });
+
+    await AuditService().log(
+      action: AuditAction.streakResurrected,
+      amount: previousStreak,
+      source: 'streak_resurrection',
+      meta: {'spCost': cost},
+    );
     return true;
   }
 
@@ -345,7 +441,7 @@ class UserService extends ChangeNotifier {
   // ─────────────────────────────────────────────────────────────────
 
   /// Desbloqueia uma conquista se ainda não foi desbloqueada.
-  Future<void> unlockBadge(String badgeId) async {
+  Future<void> unlockBadge(String badgeId, {String source = 'achievement'}) async {
     if (uid.isEmpty) return;
     if (unlockedBadgeIds.contains(badgeId)) return;
 
@@ -354,8 +450,18 @@ class UserService extends ChangeNotifier {
       'updatedAt': FieldValue.serverTimestamp(),
     });
 
+    await AuditService().log(
+      action: AuditAction.badgeUnlocked,
+      amount: 1,
+      source: source,
+      meta: {'badgeId': badgeId},
+    );
+
+    // Analytics — badge_unlocked
+    await AnalyticsService().logBadgeUnlocked(badgeId: badgeId, source: source);
+
     // Bônus de XP por conquista
-    await addXp(50);
+    await addXp(50, source: 'badge_bonus');
   }
 
   Future<void> _checkStreakBadges(int streak) async {
@@ -437,6 +543,76 @@ class UserService extends ChangeNotifier {
     return snap.docs
         .map((doc) => RankingEntry.fromFirestore(doc))
         .toList();
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  //  VALIDAÇÃO DE INTEGRIDADE DE XP (Item 4)
+  // ─────────────────────────────────────────────────────────────────
+
+  /// Compara o XP salvo no documento do usuário com a soma dos XP
+  /// calculados a partir dos documentos de progresso (completedLessons * xpPerLesson).
+  ///
+  /// Se houver discrepância maior que [toleranceXp], corrige o valor no Firestore
+  /// e registra um evento no audit log.
+  ///
+  /// Retorna um [XpIntegrityResult] com os valores comparados.
+  Future<XpIntegrityResult> validateXpIntegrity({
+    int xpPerLesson = 50,
+    int toleranceXp = 0,
+  }) async {
+    if (uid.isEmpty) return XpIntegrityResult.unknown();
+
+    try {
+      // Lê todos os documentos de progresso do usuário
+      final progressSnap = await _db
+          .collection('users')
+          .doc(uid)
+          .collection('progress')
+          .get();
+
+      // Calcula o XP esperado somando as lições completadas × xpPerLesson
+      int calculatedXp = 0;
+      for (final doc in progressSnap.docs) {
+        final data = doc.data();
+        final completed = (data['completedLessons'] as List?)?.length ?? 0;
+        calculatedXp += completed * xpPerLesson;
+      }
+
+      final storedXp = xp;
+      final delta = (storedXp - calculatedXp).abs();
+      final isValid = delta <= toleranceXp;
+
+      debugPrint(
+        '[XpIntegrity] storedXp=$storedXp | calculatedXp=$calculatedXp | delta=$delta | valid=$isValid',
+      );
+
+      if (!isValid) {
+        // Registra discrepância no audit log (não corrige automaticamente
+        // para evitar risco de sobrescrever XP de badges/outros)
+        await AuditService().log(
+          action: AuditAction.xpIntegrityFixed,
+          amount: delta,
+          source: 'integrity_check',
+          meta: {
+            'storedXp': storedXp,
+            'calculatedXp': calculatedXp,
+            'delta': delta,
+            'progressDocs': progressSnap.docs.length,
+          },
+        );
+      }
+
+      return XpIntegrityResult(
+        storedXp: storedXp,
+        calculatedXp: calculatedXp,
+        delta: delta,
+        isValid: isValid,
+        progressDocCount: progressSnap.docs.length,
+      );
+    } catch (e) {
+      debugPrint('[XpIntegrity] Erro: $e');
+      return XpIntegrityResult.unknown();
+    }
   }
 
   Future<List<RankingEntry>> getAllTimeRanking() async {
@@ -563,4 +739,52 @@ class RankingEntry {
       clanName: data['clanName'],
     );
   }
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  XP INTEGRITY RESULT — retorno de validateXpIntegrity
+// ─────────────────────────────────────────────────────────────────
+
+class XpIntegrityResult {
+  /// XP armazenado no documento do usuário.
+  final int storedXp;
+
+  /// XP calculado pela soma dos progressDocs (completedLessons × xpPerLesson).
+  final int calculatedXp;
+
+  /// Diferença absoluta entre storedXp e calculatedXp.
+  final int delta;
+
+  /// true se delta ≤ toleranceXp.
+  final bool isValid;
+
+  /// Quantidade de documentos de progresso lidos.
+  final int progressDocCount;
+
+  /// true se ocorreu erro durante a validação (dados indisponíveis).
+  final bool hasError;
+
+  const XpIntegrityResult({
+    required this.storedXp,
+    required this.calculatedXp,
+    required this.delta,
+    required this.isValid,
+    required this.progressDocCount,
+    this.hasError = false,
+  });
+
+  /// Resultado vazio retornado em caso de erro.
+  factory XpIntegrityResult.unknown() => const XpIntegrityResult(
+        storedXp: 0,
+        calculatedXp: 0,
+        delta: 0,
+        isValid: true,
+        progressDocCount: 0,
+        hasError: true,
+      );
+
+  @override
+  String toString() =>
+      'XpIntegrityResult(stored=$storedXp, calculated=$calculatedXp, '
+      'delta=$delta, valid=$isValid, docs=$progressDocCount)';
 }

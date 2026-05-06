@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:spark_app/services/analytics_service.dart';
 import 'package:spark_app/services/firebase_service.dart';
 
 class AuthService {
@@ -63,6 +64,9 @@ class AuthService {
         }
       }
 
+      // Analytics
+      await AnalyticsService().logLogin();
+
       return credential;
     } on FirebaseAuthException catch (e) {
       throw _mapAuthException(e);
@@ -112,6 +116,9 @@ class AuthService {
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       });
+      // Analytics
+      await AnalyticsService().logSignUp();
+
       return credential;
 
     } on FirebaseAuthException catch (e) {
