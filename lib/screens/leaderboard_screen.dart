@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -30,6 +32,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
   late AnimationController _controller;
   int _selectedTab = 0; // 0 = Global, 1 = Clã, 2 = Torneio
   final _tournament = TournamentService();
+  final _db = FirebaseFirestore.instance;
 
   // Dados do Firebase
   List<RankingEntry> _globalPlayers = [];
@@ -38,6 +41,9 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
   bool _loadingClan = true;
   String? _errorGlobal;
   String? _errorClan;
+
+  // Real-time stream do ranking global
+  StreamSubscription<QuerySnapshot>? _globalStream;
 
   // Paginação
   int _paginatedGlobalCount = 10;
@@ -49,47 +55,60 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 4))
           ..repeat(reverse: true);
-    _loadRankings();
+    _subscribeGlobal();
+    _loadClanOnce();
   }
 
   @override
   void dispose() {
+    _globalStream?.cancel();
     _controller.dispose();
     super.dispose();
   }
 
-  Future<void> _loadRankings() async {
+  // ── Real-time listener para o ranking global ─────────────────────
+  void _subscribeGlobal() {
     final userService = ref.read(userServiceProvider);
-    await Future.wait([
-      _loadGlobal(userService),
-      _loadClan(userService),
-    ]);
+    final weekKey = userService.currentWeekKey;
+
+    _globalStream?.cancel();
+    _globalStream = _db
+        .collection('rankings')
+        .doc('weekly')
+        .collection(weekKey)
+        .orderBy('weeklyXp', descending: true)
+        .limit(100)
+        .snapshots()
+        .listen(
+      (snap) {
+        final data = snap.docs
+            .map((doc) => RankingEntry.fromFirestore(doc))
+            .toList();
+        for (int i = 0; i < data.length; i++) {
+          data[i].position = i + 1;
+        }
+        if (mounted) {
+          setState(() {
+            _globalPlayers = data;
+            _loadingGlobal = false;
+            _errorGlobal = null;
+          });
+        }
+      },
+      onError: (e) {
+        if (mounted) {
+          setState(() {
+            _errorGlobal = 'Erro ao carregar ranking';
+            _loadingGlobal = false;
+          });
+        }
+      },
+    );
   }
 
-  Future<void> _loadGlobal(UserService userService) async {
-    setState(() {
-      _loadingGlobal = true;
-      _errorGlobal = null;
-    });
-    try {
-      final data = await userService.getGlobalWeeklyRanking();
-      // Atribui posições
-      for (int i = 0; i < data.length; i++) {
-        data[i].position = i + 1;
-      }
-      if (mounted) setState(() {
-        _globalPlayers = data;
-        _loadingGlobal = false;
-      });
-    } catch (e) {
-      if (mounted) setState(() {
-        _errorGlobal = 'Erro ao carregar ranking';
-        _loadingGlobal = false;
-      });
-    }
-  }
-
-  Future<void> _loadClan(UserService userService) async {
+  // ── Carga única do ranking de clã ─────────────────────────────────
+  Future<void> _loadClanOnce() async {
+    final userService = ref.read(userServiceProvider);
     setState(() {
       _loadingClan = true;
       _errorClan = null;
@@ -109,6 +128,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         _loadingClan = false;
       });
     }
+  }
+
+  // ── Refresh manual (pull-to-refresh) ─────────────────────────────
+  Future<void> _loadRankings() async {
+    _subscribeGlobal(); // reinicia o stream
+    await _loadClanOnce();
   }
 
   @override
