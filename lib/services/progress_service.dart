@@ -75,7 +75,7 @@ class ProgressService {
     // Busca as lições concluídas atuais + a nova lição sendo marcada.
     List<String> alreadyCompleted = [];
     if (progSnap.docs.isNotEmpty) {
-      final existingData = progSnap.docs.first.data() as Map<String, dynamic>;
+      final existingData = progSnap.docs.first.data();
       alreadyCompleted = List<String>.from(existingData[FS.completedLessons] ?? []);
     }
     // Garante que a lição atual está incluída no conjunto
@@ -97,14 +97,20 @@ class ProgressService {
 
     final newXp = userData.xp + xpEarned;
 
-    batch.update(userRef, {
-      FS.xp: FieldValue.increment(xpEarned),
-      FS.weeklyXp: FieldValue.increment(xpEarned),
-      FS.monthlyXp: FieldValue.increment(xpEarned),
-      FS.sparkPoints: FieldValue.increment(spEarned),
-      FS.tensionLevel: _calcTension(newXp),
-      FS.totalLessonsCompleted: FieldValue.increment(1),
-    });
+    if (xpEarned > 0 || spEarned > 0) {
+      batch.update(userRef, {
+        FS.xp: FieldValue.increment(xpEarned),
+        FS.weeklyXp: FieldValue.increment(xpEarned),
+        FS.monthlyXp: FieldValue.increment(xpEarned),
+        FS.sparkPoints: FieldValue.increment(spEarned),
+        FS.tensionLevel: _calcTension(newXp),
+        FS.totalLessonsCompleted: FieldValue.increment(1),
+      });
+    } else {
+      batch.update(userRef, {
+        FS.totalLessonsCompleted: FieldValue.increment(1),
+      });
+    }
 
     if (userData.clanId != null && userData.clanId!.isNotEmpty) {
        final clanRef = _fs.collection(FS.clans).doc(userData.clanId);

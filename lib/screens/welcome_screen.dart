@@ -7,6 +7,10 @@ import 'package:spark_app/theme/app_theme.dart';
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
+  /// Ativado pela RegisterScreen antes de criar o usuário.
+  /// Impede o auto-login de destruir a tela de cadastro antes do popup.
+  static bool skipAutoLogin = false;
+
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
@@ -24,9 +28,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     )..repeat();
 
     // ── Auto-Login ──────────────────────────────────────────
-    // Se a sessão do Firebase persistiu, pula o Welcome direto pro Home
+    // Se a sessão do Firebase persistiu, pula o Welcome direto pro Home.
+    // skipAutoLogin é ativado pelo fluxo de registro para evitar race condition.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (FirebaseAuth.instance.currentUser != null) {
+      if (!WelcomeScreen.skipAutoLogin &&
+          FirebaseAuth.instance.currentUser != null) {
         context.go('/home');
       }
     });

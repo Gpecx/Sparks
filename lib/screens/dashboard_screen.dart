@@ -10,6 +10,8 @@ import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/technical_standards_screen.dart';
 import 'package:spark_app/services/covenant_service.dart';
+import 'package:spark_app/services/auth_service.dart';
+import 'package:spark_app/services/user_service.dart';
 
 import 'package:spark_app/services/progress_service.dart';
 import 'package:spark_app/services/standards_service.dart';
@@ -210,9 +212,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 icon: Icons.logout,
                 label: 'Sair',
                 color: AppColors.error,
-                onTap: () {
+                onTap: () async {
                   Navigator.pop(ctx);
-                  context.go('/');
+                  await AuthService().signOut();
+                  UserService().stopListening();
+                  if (context.mounted) context.go('/');
                 },
               ),
               const SizedBox(height: 16),
