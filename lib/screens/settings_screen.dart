@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
@@ -9,14 +10,15 @@ import 'package:spark_app/screens/edit_profile_screen.dart';
 import 'package:spark_app/screens/change_password_screen.dart';
 import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/providers/user_provider.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool _studyReminders = true;
   bool _rankingAlerts = true;
   bool _normUpdates = false;
@@ -322,6 +324,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: _showFaqDialog,
               ),
               const SizedBox(height: 20),
+
+              // ── ADMIN ─────────────────────────────────────────
+              if (ref.watch(userModelProvider).value?.role == 'admin') ...[
+                _sectionTitle('ADMINISTRAÇÃO'),
+                _tile(
+                  icon: Icons.admin_panel_settings_outlined,
+                  title: 'Painel Admin',
+                  subtitle: 'Gerenciar categorias, módulos, lições e questões',
+                  titleColor: AppColors.warning,
+                  onTap: () => context.push('/admin'),
+                ),
+                const SizedBox(height: 8),
+              ],
 
               // Logout
               Container(

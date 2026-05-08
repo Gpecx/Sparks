@@ -14,6 +14,7 @@ class UserModel {
   final String email;
   final String? photoUrl;
   final String role;
+  final String? profession;
   final int sparkPoints;
   final int xp;
   final int level;
@@ -41,6 +42,7 @@ class UserModel {
     required this.email,
     this.photoUrl,
     this.role = 'Técnico',
+    this.profession,
     this.sparkPoints = 0,
     this.xp = 0,
     this.level = 1,
@@ -71,6 +73,7 @@ class UserModel {
       email: data['email'] ?? '',
       photoUrl: data['photoUrl'],
       role: data['role'] ?? 'Técnico',
+      profession: data['profession'],
       sparkPoints: (data['sparkPoints'] as num?)?.toInt() ?? 0,
       xp: (data['xp'] as num?)?.toInt() ?? 0,
       level: (data['level'] as num?)?.toInt() ?? 1,
@@ -104,6 +107,7 @@ class UserModel {
       'email': email,
       'photoUrl': photoUrl,
       'role': role,
+      'profession': profession,
       'sparkPoints': sparkPoints,
       'xp': xp,
       'level': level,
@@ -132,6 +136,7 @@ class UserModel {
     String? email,
     String? photoUrl,
     String? role,
+    String? profession,
     int? sparkPoints,
     int? xp,
     int? level,
@@ -157,6 +162,7 @@ class UserModel {
       email: email ?? this.email,
       photoUrl: photoUrl ?? this.photoUrl,
       role: role ?? this.role,
+      profession: profession ?? this.profession,
       sparkPoints: sparkPoints ?? this.sparkPoints,
       xp: xp ?? this.xp,
       level: level ?? this.level,

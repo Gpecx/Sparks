@@ -170,9 +170,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ Observa UserService reativamente
+    // userServiceProvider = Provider simples (não reconstrói sozinho)
     final userService = ref.watch(userServiceProvider);
-    final user = userService.user;
+    // userModelProvider = StreamProvider — reconstrói quando Firestore responde
+    final userModel = ref.watch(userModelProvider).value;
+    // Usa o role do stream reativo; cai no userService como fallback
+    final role = userModel?.role ?? userService.user?.role;
+    // Alias para manter compatibilidade com uso de user?.photoUrl etc.
+    final user = userModel ?? userService.user;
 
     return SparksBackground(
       child: PcbBackground(
@@ -371,6 +376,32 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5), width: 1.5),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                             padding: const EdgeInsets.symmetric(vertical: 14),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                  ],
+
+                  // ── Painel Admin (role == admin) ──────────────────
+                  if (role == 'admin') ...[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () => context.push('/admin'),
+                          icon: const Icon(Icons.admin_panel_settings, color: Colors.white, size: 20),
+                          label: const Text(
+                            'PAINEL ADMINISTRATIVO',
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13, letterSpacing: 1),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFFF8C00),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            elevation: 4,
+                            shadowColor: const Color(0xFFFF8C00).withValues(alpha: 0.4),
                           ),
                         ),
                       ),

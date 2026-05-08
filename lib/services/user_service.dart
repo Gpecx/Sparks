@@ -140,6 +140,7 @@ class UserService extends ChangeNotifier {
       'email': email,
       'photoUrl': photoUrl,
       'role': 'Técnico',
+      'profession': null,
       'sparkPoints': 100, // Bônus de boas-vindas
       'xp': 0,
       'level': 1,
@@ -644,6 +645,7 @@ class UserService extends ChangeNotifier {
     String? displayName,
     String? photoUrl,
     String? role,
+    String? profession,
   }) async {
     if (uid.isEmpty) return;
 
@@ -653,6 +655,7 @@ class UserService extends ChangeNotifier {
     if (displayName != null) updates['displayName'] = displayName;
     if (photoUrl != null) updates['photoUrl'] = photoUrl;
     if (role != null) updates['role'] = role;
+    if (profession != null) updates['profession'] = profession;
 
     await _db.collection('users').doc(uid).update(updates);
 
