@@ -20,6 +20,8 @@ import 'package:spark_app/models/standard_metadata.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/providers/progress_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 // ─────────────────────────────────────────────────────────────────
 //  DASHBOARD — Versão com Firebase
 //  MUDANÇAS:
@@ -158,6 +160,38 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen()));
                 },
               ),
+              if (userService.user?.isAdmin ?? false)
+                _buildProfileMenuItem(
+                  icon: Icons.admin_panel_settings_outlined,
+                  label: 'Painel Admin',
+                  color: const Color(0xFFFF8C00),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    context.push('/admin');
+                  },
+                )
+              else if (kDebugMode)
+                _buildProfileMenuItem(
+                  icon: Icons.admin_panel_settings_outlined,
+                  label: 'Fix Admin (Dev Only)',
+                  color: Colors.amber,
+                  onTap: () async {
+                    Navigator.pop(ctx);
+                    final auth = FirebaseAuth.instance.currentUser;
+                    if (auth != null) {
+                      await FirebaseFirestore.instance.collection('users').doc(auth.uid).set({
+                        'uid': auth.uid,
+                        'role': 'admin',
+                        'displayName': auth.displayName ?? 'Admin',
+                        'email': auth.email ?? '',
+                        'updatedAt': FieldValue.serverTimestamp(),
+                      }, SetOptions(merge: true));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('✅ Conta promovida a Admin com sucesso!')),
+                      );
+                    }
+                  },
+                ),
               _buildProfileMenuItem(
                 icon: Icons.emoji_events_outlined,
                 label: 'Minhas Conquistas',

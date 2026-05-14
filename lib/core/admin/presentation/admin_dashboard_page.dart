@@ -1,338 +1,474 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spark_app/core/admin/presentation/admin_controller.dart';
-import 'package:spark_app/core/admin/presentation/widgets/admin_entity_form.dart';
-import 'package:spark_app/core/admin/presentation/widgets/admin_entity_list_view.dart';
-import 'package:spark_app/providers/user_provider.dart';
-import 'package:spark_app/theme/app_theme.dart';
+import 'package:go_router/go_router.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../theme/app_theme.dart';
+import '../../constants/fs.dart';
+import 'admin_controller.dart';
+import 'widgets/admin_dialogs_new.dart';
+import 'widgets/admin_cards.dart';
+import 'widgets/admin_content_panel.dart';
 
-// ─────────────────────────────────────────────────────────────────
-//  ADMIN DASHBOARD PAGE
-//  Menu Lateral (Drawer) com navegação entre as 4 entidades.
-// ─────────────────────────────────────────────────────────────────
-
-class AdminDashboardPage extends ConsumerStatefulWidget {
+class AdminDashboardPage extends ConsumerWidget {
   const AdminDashboardPage({super.key});
 
   @override
-  ConsumerState<AdminDashboardPage> createState() => _AdminDashboardPageState();
-}
-
-class _AdminDashboardPageState extends ConsumerState<AdminDashboardPage> {
-  AdminEntity _selected = AdminEntity.categories;
-
-  // ── Definição dos campos de cada entidade ────────────────────────
-  static const _entityFields = <AdminEntity, List<FieldConfig>>{
-    AdminEntity.categories: [
-      FieldConfig(key: 'title', label: 'Título'),
-      FieldConfig(key: 'subtitle', label: 'Subtítulo', required: false),
-      FieldConfig(key: 'description', label: 'Descrição', maxLines: 3, required: false),
-      FieldConfig(key: 'order', label: 'Ordem (número)', hint: 'ex: 1', required: false, keyboardType: TextInputType.number),
-    ],
-    AdminEntity.modules: [
-      FieldConfig(key: 'title', label: 'Título'),
-      FieldConfig(key: 'subtitle', label: 'Subtítulo', required: false),
-      FieldConfig(key: 'categoryId', label: 'ID da Categoria', hint: 'ex: capacitacao_tecnica'),
-      FieldConfig(key: 'order', label: 'Ordem (número)', hint: 'ex: 1', required: false, keyboardType: TextInputType.number),
-    ],
-    AdminEntity.lessons: [
-      FieldConfig(key: 'title', label: 'Título'),
-      FieldConfig(key: 'subtitle', label: 'Subtítulo', required: false),
-      FieldConfig(key: 'moduleId', label: 'ID do Módulo', hint: 'ex: mod01_fundamentos'),
-      FieldConfig(key: 'type', label: 'Tipo', hint: 'lesson | eval'),
-      FieldConfig(key: 'content', label: 'Conteúdo (Markdown)', maxLines: 6, required: false),
-    ],
-    AdminEntity.questions: [
-      FieldConfig(key: 'statement', label: 'Enunciado', maxLines: 3),
-      FieldConfig(key: 'lessonId', label: 'ID da Lição'),
-      FieldConfig(key: 'type', label: 'Tipo', hint: 'multipleChoice | trueFalse | fillInTheBlanks'),
-      FieldConfig(key: 'options', label: 'Opções (separadas por |)', hint: 'A|B|C|D', required: false),
-      FieldConfig(key: 'correctIndex', label: 'Índice correto (0-based)', hint: '0', required: false, keyboardType: TextInputType.number),
-      FieldConfig(key: 'explanation', label: 'Explicação', maxLines: 3),
-    ],
-  };
-
-  static const _entityIcons = <AdminEntity, IconData>{
-    AdminEntity.categories: Icons.category_outlined,
-    AdminEntity.modules:    Icons.layers_outlined,
-    AdminEntity.lessons:    Icons.menu_book_outlined,
-    AdminEntity.questions:  Icons.quiz_outlined,
-  };
-
-  // ── Title/Subtitle extractor por entidade ────────────────────────
-  static String _titleOf(AdminEntity e, Map<String, dynamic> d) => switch (e) {
-        AdminEntity.categories => d['title'] ?? '—',
-        AdminEntity.modules    => d['title'] ?? '—',
-        AdminEntity.lessons    => d['title'] ?? '—',
-        AdminEntity.questions  => d['statement'] ?? '—',
-      };
-
-  static String? _subtitleOf(AdminEntity e, Map<String, dynamic> d) => switch (e) {
-        AdminEntity.categories => d['subtitle'],
-        AdminEntity.modules    => '📂 ${d['categoryId'] ?? ''}  •  ${d['subtitle'] ?? ''}',
-        AdminEntity.lessons    => '📦 ${d['moduleId'] ?? ''}  •  ${d['type'] ?? ''}',
-        AdminEntity.questions  => 'Tipo: ${d['type'] ?? ''}  •  Lição: ${d['lessonId'] ?? ''}',
-      };
-
-  @override
-  Widget build(BuildContext context) {
-    // ── Guard de segurança ───────────────────────────────────────
-    final userAsync = ref.watch(userModelProvider);
-    final role = userAsync.value?.role;
-    if (role != 'admin') {
-      return Scaffold(
-        backgroundColor: AppColors.background,
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.lock_outlined, color: AppColors.error, size: 48),
-              const SizedBox(height: 16),
-              const Text(
-                'Acesso Negado',
-                style: TextStyle(color: AppColors.textPrimary, fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Você não tem permissão para acessar esta página.',
-                style: TextStyle(color: AppColors.textSecondary),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(),
-                style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
-                child: const Text('Voltar', style: TextStyle(color: Colors.white)),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    final adminState = ref.watch(adminControllerProvider);
-
-    // ── Feedback de erro/sucesso via SnackBar ────────────────────
-    ref.listen(adminControllerProvider, (_, next) {
-      if (next.successMessage != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(next.successMessage!),
-            backgroundColor: AppColors.primary,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-        ref.read(adminControllerProvider.notifier).clearMessages();
-      }
-      if (next.errorMessage != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(next.errorMessage!),
-            backgroundColor: AppColors.error,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-        ref.read(adminControllerProvider.notifier).clearMessages();
-      }
-    });
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(adminControllerProvider);
+    final controller = ref.read(adminControllerProvider.notifier);
+    final size = MediaQuery.of(context).size;
+    final isDesktop = size.width >= 1024;
+    final isTablet = size.width >= 600 && size.width < 1024;
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
+      drawer: isDesktop ? null : Drawer(
         backgroundColor: AppColors.surface,
+        child: _buildSidebar(context, ref, state, controller),
+      ),
+      appBar: isDesktop ? null : AppBar(
+        backgroundColor: AppColors.surface,
+        elevation: 0,
         title: Row(
           children: [
+            Icon(Icons.bolt, color: AppColors.primary, size: 20),
+            const SizedBox(width: 8),
+            const Text('SPARK ADMIN', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ],
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: Row(
+        children: [
+          if (isDesktop)
             Container(
-              padding: const EdgeInsets.all(6),
+              width: 260,
               decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(8),
+                color: AppColors.surface,
+                border: Border(right: BorderSide(color: Colors.white.withValues(alpha: 0.05))),
               ),
-              child: const Icon(Icons.admin_panel_settings, color: AppColors.primary, size: 20),
+              child: _buildSidebar(context, ref, state, controller),
             ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          
+          Expanded(
+            child: Column(
               children: [
-                const Text(
-                  'SPARK Admin',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                if (state.sidebarIndex == 1) 
+                  _buildTopNavBar(state, controller, isDesktop || isTablet),
+
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(isDesktop ? 32.0 : 16.0),
+                    child: _buildMainArea(context, ref, state, controller, isDesktop, isTablet),
+                  ),
                 ),
-                Text(
-                  _selected.label,
-                  style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMainArea(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
+    switch (state.sidebarIndex) {
+      case 0: return _buildOverview(context, ref);
+      case 1: return _getContentTab(context, ref, state, controller, isDesktop, isTablet);
+      default: return const Center(child: Text('Em desenvolvimento', style: TextStyle(color: Colors.white)));
+    }
+  }
+
+  Widget _buildOverview(BuildContext context, WidgetRef ref) {
+    return SingleChildScrollView(
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.dashboard_customize_outlined, size: 64, color: AppColors.textMuted),
+            const SizedBox(height: 16),
+            const Text('Bem-vindo ao Painel Admin', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+            const Text('Gerencie seu conteúdo educacional aqui.', style: TextStyle(color: AppColors.textSecondary)),
+            const SizedBox(height: 40),
+            Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              alignment: WrapAlignment.center,
+              children: [
+                _quickActionCard(
+                  context,
+                  icon: Icons.code,
+                  title: 'Importar JSON',
+                  subtitle: 'Carga em massa de conteúdo',
+                  color: AppColors.primary,
+                  onTap: () => AdminDialogs.showImportJSON(context, ref),
+                ),
+                _quickActionCard(
+                  context,
+                  icon: Icons.auto_awesome,
+                  title: 'Gerador de Trilhas',
+                  subtitle: 'Crie estruturas rapidamente',
+                  color: AppColors.orange,
+                  onTap: () => AdminDialogs.showTrailWizard(context, ref),
                 ),
               ],
             ),
           ],
         ),
-        // Badge de loading global
-        actions: [
-          if (adminState.isSaving)
-            const Padding(
-              padding: EdgeInsets.only(right: 16),
-              child: SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(color: AppColors.primary, strokeWidth: 2),
-              ),
-            ),
-        ],
       ),
-      // ── Drawer lateral ────────────────────────────────────────────
-      drawer: Drawer(
-        backgroundColor: AppColors.surface,
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Header do Drawer
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: AppColors.card,
-                  border: Border(bottom: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.4))),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [AppColors.primary, AppColors.accentGreen],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(Icons.admin_panel_settings, color: Colors.white, size: 24),
-                    ),
-                    const SizedBox(height: 12),
-                    const Text(
-                      'Painel Admin',
-                      style: TextStyle(
-                        color: AppColors.textPrimary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      'Gerenciamento de conteúdo',
-                      style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 8),
-              // Items do menu
-              ...AdminEntity.values.map((entity) => _DrawerItem(
-                    icon: _entityIcons[entity]!,
-                    label: entity.label,
-                    isSelected: _selected == entity,
-                    onTap: () {
-                      setState(() => _selected = entity);
-                      Navigator.of(context).pop();
-                    },
-                  )),
-              const Spacer(),
-              // Footer info
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    const Icon(Icons.info_outline, size: 14, color: AppColors.textMuted),
-                    const SizedBox(width: 6),
-                    const Expanded(
-                      child: Text(
-                        'Coleções: categories, modules, lessons, questions',
-                        style: TextStyle(color: AppColors.textMuted, fontSize: 11),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+    );
+  }
+
+  Widget _quickActionCard(BuildContext context, {required IconData icon, required String title, required String subtitle, required Color color, required VoidCallback onTap}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        width: 240,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
         ),
-      ),
-      // ── Body — Lista da entidade selecionada ──────────────────────
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 250),
-        child: AdminEntityListView(
-          key: ValueKey(_selected),
-          entity: _selected,
-          fields: _entityFields[_selected]!,
-          titleExtractor: (data) => _titleOf(_selected, data),
-          subtitleExtractor: (data) => _subtitleOf(_selected, data) ?? '',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(icon, color: color, size: 24),
+            ),
+            const SizedBox(height: 16),
+            Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+            const SizedBox(height: 4),
+            Text(subtitle, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+          ],
         ),
       ),
     );
   }
-}
 
-// ─────────────────────────────────────────────────────────────────
-//  DRAWER ITEM — Widget auxiliar para item do menu lateral
-// ─────────────────────────────────────────────────────────────────
 
-class _DrawerItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
+  Widget _getContentTab(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
+    switch (state.contentTabIndex) {
+      case 0: return _buildCategoriesTab(context, ref, state, controller, isDesktop, isTablet);
+      case 1: return _buildModulesTab(context, ref, state, controller, isDesktop, isTablet);
+      case 2: return _buildTrailsTab(context, ref, state, controller, isDesktop, isTablet);
+      default: return _buildCategoriesTab(context, ref, state, controller, isDesktop, isTablet);
+    }
+  }
 
-  const _DrawerItem({
-    required this.icon,
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
+  // --- TOP NAV BAR ---
+  Widget _buildTopNavBar(AdminState state, AdminController controller, bool showLabels) {
+    return Container(
+      height: 60,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: AppColors.surface, 
+        border: Border(bottom: BorderSide(color: Colors.white.withValues(alpha: 0.05))),
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            _navTab('1. Categorias', isActive: state.contentTabIndex == 0, onTap: () => controller.setContentTab(0)),
+            _navTab('2. Módulos', isActive: state.contentTabIndex == 1, onTap: () => controller.setContentTab(1)),
+            _navTab('3. Trilhas', isActive: state.contentTabIndex == 2, onTap: () => controller.setContentTab(2)),
+          ],
+        ),
+      ),
+    );
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-      child: Material(
-        color: isSelected ? AppColors.primary.withValues(alpha: 0.15) : Colors.transparent,
-        borderRadius: BorderRadius.circular(10),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(10),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            child: Row(
-              children: [
-                Icon(
-                  icon,
-                  color: isSelected ? AppColors.primary : AppColors.textSecondary,
-                  size: 22,
-                ),
-                const SizedBox(width: 14),
-                Text(
-                  label,
-                  style: TextStyle(
-                    color: isSelected ? AppColors.primary : AppColors.textSecondary,
-                    fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,
-                    fontSize: 15,
-                  ),
-                ),
-                if (isSelected) ...[
-                  const Spacer(),
-                  Container(
-                    width: 4,
-                    height: 4,
-                    decoration: const BoxDecoration(
-                      color: AppColors.primary,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ],
-              ],
-            ),
+  Widget _navTab(String title, {required bool isActive, required VoidCallback onTap}) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          border: isActive ? const Border(bottom: BorderSide(color: AppColors.primary, width: 3)) : null,
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          title,
+          style: TextStyle(
+            color: isActive ? AppColors.primary : AppColors.textSecondary,
+            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+            fontSize: 13,
           ),
         ),
       ),
+    );
+  }
+
+  // --- SIDEBAR ---
+  Widget _buildSidebar(BuildContext context, WidgetRef ref, AdminState state, AdminController controller) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 40),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('CONTEÚDO', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+              const SizedBox(height: 16),
+              _sidebarItem(context, Icons.grid_view_rounded, 'Visão Geral', isActive: state.sidebarIndex == 0, onTap: () => controller.setSidebarMenu(0)),
+              _sidebarItem(context, Icons.layers_outlined, 'Estrutura', isActive: state.sidebarIndex == 1, onTap: () => controller.setSidebarMenu(1)),
+            ],
+          ),
+        ),
+        const SizedBox(height: 32),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('SISTEMA', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+              const SizedBox(height: 16),
+              _sidebarItem(context, Icons.people_outline, 'Usuários', isActive: state.sidebarIndex == 2, onTap: () => controller.setSidebarMenu(2)),
+              _sidebarItem(context, Icons.settings_outlined, 'Configurações', isActive: state.sidebarIndex == 3, onTap: () => controller.setSidebarMenu(3)),
+            ],
+          ),
+        ),
+        const Spacer(),
+        Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: _sidebarItem(context, Icons.logout_rounded, 'Voltar ao App', onTap: () => context.go('/')),
+        ),
+      ],
+    );
+  }
+
+  Widget _sidebarItem(BuildContext context, IconData icon, String title, {bool isActive = false, VoidCallback? onTap}) {
+    return InkWell(
+      onTap: () {
+        if (onTap != null) onTap();
+        if (Scaffold.of(context).isDrawerOpen) Navigator.pop(context);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        child: Row(
+          children: [
+            Icon(icon, size: 20, color: isActive ? AppColors.primary : AppColors.textSecondary),
+            const SizedBox(width: 12),
+            Text(title, style: TextStyle(color: isActive ? AppColors.primary : AppColors.textSecondary, fontWeight: isActive ? FontWeight.bold : FontWeight.w500)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // --- CATEGORIAS ---
+  Widget _buildCategoriesTab(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Categorias', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                  Text('Selecione uma categoria para ver seus módulos.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+            Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              alignment: WrapAlignment.end,
+              children: [
+                OutlinedButton.icon(
+                  onPressed: () => AdminDialogs.showImportJSON(context, ref),
+                  icon: const Icon(Icons.code, size: 18),
+                  label: const Text('IMPORTAR JSON'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppColors.textSecondary,
+                    side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
+                    minimumSize: const Size(140, 40),
+                  ),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () => AdminDialogs.showCreateCategory(context, ref),
+                  icon: const Icon(Icons.add, size: 18),
+                  label: const Text('NOVA'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    minimumSize: const Size(100, 40),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        Expanded(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: controller.streamFor(AdminEntity.categories),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+              final docs = snapshot.data?.docs ?? [];
+              if (docs.isEmpty) return const Center(child: Text('Nenhuma categoria.', style: TextStyle(color: Colors.grey)));
+
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1), 
+                  childAspectRatio: 2.5,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                ),
+                itemCount: docs.length,
+                itemBuilder: (context, index) {
+                  final data = docs[index].data() as Map<String, dynamic>;
+                  final isSelected = state.selectedCategoryId == docs[index].id;
+                  return AdminEntityCard(
+                    title: data[FS.title] ?? 'Sem título',
+                    description: data['description'] ?? '',
+                    colorType: AppColors.primary,
+                    badgeText: 'Selecionar',
+                    isActive: isSelected,
+                    onTap: () => controller.selectCategory(docs[index].id),
+                    onDelete: () {
+                      AdminDialogs.showConfirmDelete(
+                        context: context,
+                        title: 'Deletar Categoria',
+                        content: 'Tem certeza que deseja deletar "${data[FS.title]}"? Isso removerá todos os módulos e trilhas vinculados.',
+                        onConfirm: () => controller.delete(AdminEntity.categories, docs[index].id),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  // --- MÓDULOS ---
+  Widget _buildModulesTab(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
+    if (state.selectedCategoryId == null) {
+      return const Center(child: Text('Selecione uma categoria primeiro na aba anterior.', style: TextStyle(color: AppColors.textSecondary)));
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Módulos', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                  Text('Gerencie os blocos de ensino deste módulo.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+            ElevatedButton.icon(
+              onPressed: () => AdminDialogs.showCreateModule(context, ref),
+              icon: const Icon(Icons.add, size: 18),
+              label: const Text('NOVO'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.blue,
+                minimumSize: const Size(100, 40),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        Expanded(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: controller.streamFor(AdminEntity.modules),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+              final docs = snapshot.data?.docs ?? [];
+              if (docs.isEmpty) return const Center(child: Text('Nenhum módulo.', style: TextStyle(color: Colors.grey)));
+
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
+                  childAspectRatio: 2.5,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                ),
+                itemCount: docs.length,
+                itemBuilder: (context, index) {
+                  final data = docs[index].data() as Map<String, dynamic>;
+                  final isSelected = state.selectedModuleId == docs[index].id;
+                  return AdminEntityCard(
+                    title: data[FS.title] ?? 'Sem título',
+                    description: data['subtitle'] ?? '',
+                    colorType: AppColors.blue,
+                    badgeText: 'Selecionar',
+                    isActive: isSelected,
+                    onTap: () => controller.selectModule(docs[index].id),
+                    onDelete: () {
+                      AdminDialogs.showConfirmDelete(
+                        context: context,
+                        title: 'Deletar Módulo',
+                        content: 'Tem certeza que deseja deletar "${data[FS.title]}"? Isso removerá todas as trilhas vinculadas.',
+                        onConfirm: () => controller.delete(AdminEntity.modules, docs[index].id),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  // --- TRILHAS (PAINEL INTERATIVO) ---
+  Widget _buildTrailsTab(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
+    if (state.selectedModuleId == null) {
+      return const Center(child: Text('Selecione um módulo primeiro na aba anterior.', style: TextStyle(color: AppColors.textSecondary)));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Trilhas e Lições', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                Text('Crie a jornada completa com lições e questões.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+              ],
+            ),
+            ElevatedButton.icon(
+              onPressed: () => AdminDialogs.showTrailWizard(context, ref),
+              icon: const Icon(Icons.auto_awesome, size: 18),
+              label: const Text('GERAR TRILHA'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.orange,
+                minimumSize: const Size(140, 40),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        Expanded(
+          child: AdminContentPanel(
+            categoryId: state.selectedCategoryId!,
+            moduleId: state.selectedModuleId!,
+          ),
+        ),
+      ],
     );
   }
 }

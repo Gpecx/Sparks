@@ -1,0 +1,35 @@
+{
+  "category": "Padrão IEC 61850",
+  "module": "Comunicação GOOSE",
+  "lesson": "Introdução ao GOOSE",
+  "questions": [
+    {
+      "type": "multiple_choice",
+      "statement": "O que significa GOOSE?",
+      "options": [
+        "Generic Object Oriented Substation Event",
+        "General Object Oriented System Event",
+        "Generic Object Oriented Software Event",
+        "General Object Oriented Substation Event"
+      ],
+      "correctIndex": 0,
+      "explanation": "GOOSE significa Generic Object Oriented Substation Event, um protocolo de comunicação rápida em subestações.",
+      "difficulty": "MT"
+    },
+    {
+      "type": "true_false",
+      "statement": "GOOSE utiliza TCP para garantir entrega confiável.",
+      "isTrue": false,
+      "explanation": "GOOSE usa UDP multicast, não TCP. A confiabilidade vem da retransmissão periódica.",
+      "difficulty": "AT"
+    },
+    {
+      "type": "fill_blank",
+      "statement": "A configuração de GOOSE é definida no arquivo ____.",
+      "answer": "SCD",
+      "options": ["SCD", "ICD", "CID", "SSD"],
+      "explanation": "SCD (Substation Configuration Description) contém a configuração de GOOSE.",
+      "difficulty": "EAT"
+    }
+  ]
+}

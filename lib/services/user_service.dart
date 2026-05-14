@@ -139,7 +139,7 @@ class UserService extends ChangeNotifier {
       'displayName': displayName,
       'email': email,
       'photoUrl': photoUrl,
-      'role': 'Técnico',
+      'role': 'técnico',
       'profession': null,
       'sparkPoints': 100, // Bônus de boas-vindas
       'xp': 0,

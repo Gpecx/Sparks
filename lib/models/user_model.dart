@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  MODELO PRINCIPAL DO USUÁRIO — Firestore: users/{uid}
@@ -14,6 +15,7 @@ class UserModel {
   final String email;
   final String? photoUrl;
   final String role;
+  bool get isAdmin => role.trim().toLowerCase() == 'admin';
   final String? profession;
   final int sparkPoints;
   final int xp;
@@ -64,38 +66,57 @@ class UserModel {
     required this.updatedAt,
   });
 
-  // ── fromFirestore ───────────────────────────────────────────────
+  // ── fromFirestore (BLINDADO) ───────────────────────────────────────────────
   factory UserModel.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
+    // 1. Garante que se o doc.data() vier nulo, ele vira um Map vazio em vez de quebrar
+    final data = doc.data() as Map<String, dynamic>? ?? {};
+
     return UserModel(
       uid: doc.id,
-      displayName: data['displayName'] ?? data['name'] ?? 'Usuário', // fallback legado
-      email: data['email'] ?? '',
-      photoUrl: data['photoUrl'],
-      role: data['role'] ?? 'Técnico',
-      profession: data['profession'],
+      // O .toString() garante que mesmo que o Firebase grave um número ali, não quebra
+      displayName: (data['displayName'] ?? data['name'])?.toString() ?? 'Usuário',
+      email: data['email']?.toString() ?? '',
+      photoUrl: data['photoUrl']?.toString(),
+      role: (data['role']?.toString() ?? 'Técnico').trim(),
+      profession: data['profession']?.toString(),
       sparkPoints: (data['sparkPoints'] as num?)?.toInt() ?? 0,
       xp: (data['xp'] as num?)?.toInt() ?? 0,
       level: (data['level'] as num?)?.toInt() ?? 1,
-      tensionLevel: data['tensionLevel'] ?? 'BT',
+      tensionLevel: data['tensionLevel']?.toString() ?? 'BT',
       currentStreak: (data['currentStreak'] as num?)?.toInt() ??
-          (data['streak'] as num?)?.toInt() ?? 0, // fallback legado
+          (data['streak'] as num?)?.toInt() ?? 0,
       longestStreak: (data['longestStreak'] as num?)?.toInt() ?? 0,
       activeDays: (data['activeDays'] as num?)?.toInt() ?? 0,
-      lastStudyDate: (data['lastStudyDate'] as Timestamp?)?.toDate(),
-      studiedToday: data['studiedToday'] ?? false,
-      clanId: data['clanId'],
-      clanName: data['clanName'],
-      unlockedBadgeIds: List<String>.from(
-        data['unlockedBadgeIds'] ?? data['badges'] ?? [], // fallback legado
-      ),
+      
+      // Datas: verifica especificamente se é um Timestamp do Firebase
+      lastStudyDate: data['lastStudyDate'] is Timestamp 
+          ? (data['lastStudyDate'] as Timestamp).toDate() 
+          : null,
+          
+      // Booleano: a comparação == true evita quebra se vier nulo ou texto
+      studiedToday: data['studiedToday'] == true,
+      
+      clanId: data['clanId']?.toString(),
+      clanName: data['clanName']?.toString(),
+      
+      // Lista: Blindagem pesada contra listas corrompidas ou nulas
+      unlockedBadgeIds: ((data['unlockedBadgeIds'] ?? data['badges']) as List?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+          
       weeklyXp: (data['weeklyXp'] as num?)?.toInt() ?? 0,
       eloRating: (data['eloRating'] as num?)?.toInt() ?? 1200,
       wins: (data['wins'] as num?)?.toInt() ?? 0,
       losses: (data['losses'] as num?)?.toInt() ?? 0,
       totalDuels: (data['totalDuels'] as num?)?.toInt() ?? 0,
-      createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
-      updatedAt: (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      
+      createdAt: data['createdAt'] is Timestamp 
+          ? (data['createdAt'] as Timestamp).toDate() 
+          : DateTime.now(),
+      updatedAt: data['updatedAt'] is Timestamp 
+          ? (data['updatedAt'] as Timestamp).toDate() 
+          : DateTime.now(),
     );
   }
 

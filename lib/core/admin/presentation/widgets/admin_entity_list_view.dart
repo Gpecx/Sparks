@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/core/admin/presentation/admin_controller.dart';
 import 'package:spark_app/core/admin/presentation/widgets/admin_entity_form.dart';
+import 'package:spark_app/core/admin/presentation/widgets/admin_parent_selector_dialog.dart';
+import 'package:spark_app/core/admin/presentation/widgets/admin_trail_wizard_dialog.dart';
 import 'package:spark_app/theme/app_theme.dart';
 
 // ─────────────────────────────────────────────────────────────────
@@ -15,8 +17,8 @@ class AdminEntityListView extends ConsumerWidget {
   final String Function(Map<String, dynamic> data) titleExtractor;
   final String Function(Map<String, dynamic> data)? subtitleExtractor;
 
-  /// Chamado quando o usuário toca num item (para atualizar contexto hierárquico).
-  final void Function(String docId, Map<String, dynamic> data)? onItemSelected;
+  /// Chamado após criar uma entidade para navegação guiada (opcional)
+  final void Function(String docId, Map<String, dynamic> data)? onAfterCreate;
 
   const AdminEntityListView({
     super.key,
@@ -24,36 +26,156 @@ class AdminEntityListView extends ConsumerWidget {
     required this.fields,
     required this.titleExtractor,
     this.subtitleExtractor,
-    this.onItemSelected,
+    this.onAfterCreate,
   });
 
-  void _openForm(
+  // ── Abre o wizard de trilha ──────────────────────────────────────
+  Future<void> _openTrailWizard(
+    BuildContext context, {
+    String? preselectedCategoryId,
+    String? preselectedModuleId,
+  }) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (_) => AdminTrailWizardDialog(
+        categoryId: preselectedCategoryId,
+        moduleId: preselectedModuleId,
+      ),
+    );
+
+    if (result == true && context.mounted) {
+      showDialog(
+        context: context,
+        builder: (_) => const AdminSuccessDialog(),
+      );
+    }
+  }
+
+  // ── Lógica do FAB — abre seletor de pai depois abre form/wizard ──
+  Future<void> _onFabPressed(BuildContext context, WidgetRef ref) async {
+    switch (entity) {
+      // Categoria: sem pai, abre direto o form
+      case AdminEntity.categories:
+        await _openForm(context, ref);
+
+      // Módulo: seleciona categoria antes
+      case AdminEntity.modules:
+        final sel = await _showParentSelector(
+          context,
+          title: 'Novo Módulo',
+          levels: ['category'],
+        );
+        if (sel == null || !context.mounted) return;
+        await _openForm(
+          context,
+          ref,
+          initialValues: {'categoryId': sel.categoryId ?? ''},
+        );
+
+      // Trilha: abre o wizard (já tem seletor interno)
+      case AdminEntity.trails:
+        await _openTrailWizard(context);
+
+      // Lição: seleciona cat → mod → trilha antes
+      case AdminEntity.lessons:
+        final sel = await _showParentSelector(
+          context,
+          title: 'Nova Lição',
+          levels: ['category', 'module', 'trail'],
+        );
+        if (sel == null || !context.mounted) return;
+        await _openForm(
+          context,
+          ref,
+          initialValues: {
+            '_categoryId': sel.categoryId ?? '',
+            '_moduleId': sel.moduleId ?? '',
+            'trailId': sel.trailId ?? '',
+          },
+        );
+
+      // Questão: seleciona cat → mod → trilha → lição antes
+      case AdminEntity.questions:
+        final sel = await _showParentSelector(
+          context,
+          title: 'Nova Questão',
+          levels: ['category', 'module', 'trail', 'lesson'],
+        );
+        if (sel == null || !context.mounted) return;
+        await _openForm(
+          context,
+          ref,
+          initialValues: {
+            '_categoryId': sel.categoryId ?? '',
+            '_moduleId': sel.moduleId ?? '',
+            '_trailId': sel.trailId ?? '',
+            'lessonId': sel.lessonId ?? '',
+          },
+        );
+    }
+  }
+
+  // ── Abre o seletor de pai ────────────────────────────────────────
+  Future<ParentSelection?> _showParentSelector(
+    BuildContext context, {
+    required String title,
+    required List<String> levels,
+  }) {
+    return showDialog<ParentSelection>(
+      context: context,
+      builder: (_) => AdminParentSelectorDialog(
+        title: title,
+        levels: levels,
+      ),
+    );
+  }
+
+  // ── Abre o form genérico ─────────────────────────────────────────
+  Future<void> _openForm(
     BuildContext context,
     WidgetRef ref, {
     String? docId,
     Map<String, dynamic>? existing,
-  }) {
+    Map<String, String> initialValues = const {},
+  }) async {
     final ctrl = ref.read(adminControllerProvider.notifier);
-    final state = ref.read(adminControllerProvider);
 
-    showDialog(
+    final merged = <String, String>{
+      ...initialValues,
+      ...(existing?.map((k, v) => MapEntry(k, v?.toString() ?? '')) ?? {}),
+    };
+
+    final result = await showDialog<dynamic>(
       context: context,
       builder: (_) => AdminEntityForm(
         title: docId == null ? 'Novo ${entity.label}' : 'Editar ${entity.label}',
         fields: fields,
-        initialValues: existing?.map((k, v) => MapEntry(k, v?.toString() ?? '')) ?? {},
-        isSaving: state.isSaving,
+        initialValues: merged,
         onSave: (data) async {
           if (docId == null) {
-            await ctrl.create(entity, data);
+            return ctrl.create(entity, data);
           } else {
-            // Extrai IDs de pais do documento existente (para hierarquia correta)
             await ctrl.update(entity, docId, data);
+            return '';
           }
-          if (context.mounted) Navigator.of(context).pop();
         },
       ),
     );
+
+    if (!context.mounted) return;
+
+    // result é o docId (String) ou true para edição
+    if (result != null && result != false) {
+      final newDocId = result is String ? result : '';
+      if (docId == null && onAfterCreate != null) {
+        onAfterCreate!(newDocId, existing ?? {});
+        return;
+      }
+      showDialog(
+        context: context,
+        builder: (_) => const AdminSuccessDialog(),
+      );
+    }
   }
 
   void _confirmDelete(
@@ -66,7 +188,8 @@ class AdminEntityListView extends ConsumerWidget {
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: AppColors.card,
-        title: const Text('Confirmar exclusão', style: TextStyle(color: AppColors.textPrimary)),
+        title: const Text('Confirmar exclusão',
+            style: TextStyle(color: AppColors.textPrimary)),
         content: Text(
           'Deseja remover este item de ${entity.label}? Esta ação não pode ser desfeita.',
           style: const TextStyle(color: AppColors.textSecondary),
@@ -74,14 +197,16 @@ class AdminEntityListView extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('CANCELAR', style: TextStyle(color: AppColors.textSecondary)),
+            child: const Text('CANCELAR',
+                style: TextStyle(color: AppColors.textSecondary)),
           ),
           TextButton(
             onPressed: () {
               ref.read(adminControllerProvider.notifier).delete(entity, docId);
               Navigator.of(context).pop();
             },
-            child: const Text('EXCLUIR', style: TextStyle(color: AppColors.error)),
+            child: const Text('EXCLUIR',
+                style: TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -91,6 +216,19 @@ class AdminEntityListView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.read(adminControllerProvider.notifier);
+
+    ref.listen(adminControllerProvider, (prev, next) {
+      if (next.errorMessage != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(next.errorMessage!),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        controller.clearMessages();
+      }
+    });
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -122,16 +260,19 @@ class AdminEntityListView extends ConsumerWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.inbox_outlined, size: 64, color: AppColors.textMuted),
+                  Icon(Icons.inbox_outlined,
+                      size: 64, color: AppColors.textMuted),
                   const SizedBox(height: 16),
                   Text(
                     'Nenhum item em ${entity.label}',
-                    style: const TextStyle(color: AppColors.textMuted, fontSize: 16),
+                    style: const TextStyle(
+                        color: AppColors.textMuted, fontSize: 16),
                   ),
                   const SizedBox(height: 8),
                   const Text(
                     'Use o botão + para adicionar o primeiro.',
-                    style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+                    style:
+                        TextStyle(color: AppColors.textMuted, fontSize: 13),
                   ),
                 ],
               ),
@@ -141,7 +282,7 @@ class AdminEntityListView extends ConsumerWidget {
           return ListView.separated(
             padding: const EdgeInsets.all(16),
             itemCount: docs.length,
-            separatorBuilder: (_, _) => const SizedBox(height: 8),
+            separatorBuilder: (_, idx) => const SizedBox(height: 8),
             itemBuilder: (context, index) {
               final doc = docs[index];
               final data = doc.data() as Map<String, dynamic>;
@@ -149,13 +290,12 @@ class AdminEntityListView extends ConsumerWidget {
                 decoration: BoxDecoration(
                   color: AppColors.card,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
+                  border: Border.all(
+                      color: AppColors.cardBorder.withValues(alpha: 0.4)),
                 ),
                 child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  onTap: onItemSelected != null
-                      ? () => onItemSelected!(doc.id, data)
-                      : null,
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   title: Text(
                     titleExtractor(data),
                     style: const TextStyle(
@@ -166,37 +306,39 @@ class AdminEntityListView extends ConsumerWidget {
                   subtitle: subtitleExtractor != null
                       ? Text(
                           subtitleExtractor!(data),
-                          style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                          style: const TextStyle(
+                              color: AppColors.textSecondary, fontSize: 12),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         )
                       : null,
                   leading: CircleAvatar(
-                    backgroundColor: AppColors.primary.withValues(alpha: 0.15),
+                    backgroundColor:
+                        AppColors.primary.withValues(alpha: 0.15),
                     child: Text(
                       (titleExtractor(data).isNotEmpty
                               ? titleExtractor(data)[0]
                               : '?')
                           .toUpperCase(),
                       style: const TextStyle(
-                          color: AppColors.primary, fontWeight: FontWeight.bold),
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.edit_outlined, color: AppColors.blue, size: 20),
-                        onPressed: () => _openForm(
-                          context,
-                          ref,
-                          docId: doc.id,
-                          existing: data,
-                        ),
+                        icon: const Icon(Icons.edit_outlined,
+                            color: AppColors.blue, size: 20),
+                        onPressed: () => _openForm(context, ref,
+                            docId: doc.id, existing: data),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.delete_outline, color: AppColors.error, size: 20),
-                        onPressed: () => _confirmDelete(context, ref, doc.id, data),
+                        icon: const Icon(Icons.delete_outline,
+                            color: AppColors.error, size: 20),
+                        onPressed: () =>
+                            _confirmDelete(context, ref, doc.id, data),
                       ),
                     ],
                   ),
@@ -207,11 +349,15 @@ class AdminEntityListView extends ConsumerWidget {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _openForm(context, ref),
+        onPressed: () => _onFabPressed(context, ref),
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
-        icon: const Icon(Icons.add),
-        label: Text('Novo ${entity.label.split('/').first}'),
+        icon: entity == AdminEntity.trails
+            ? const Icon(Icons.map_outlined)
+            : const Icon(Icons.add),
+        label: Text(entity == AdminEntity.trails
+            ? 'Nova Trilha'
+            : 'Novo ${entity.label.split('/').first}'),
       ),
     );
   }
