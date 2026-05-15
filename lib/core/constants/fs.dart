@@ -19,6 +19,7 @@ abstract class FS {
   static const String progress = 'progress';
   static const String quizHistory = 'quiz_history';
   static const String modules = 'modules';
+  static const String trails = 'trails';
   static const String lessons = 'lessons';
   static const String questions = 'questions';
   static const String members = 'members';
@@ -59,6 +60,10 @@ abstract class FS {
   static const String totalLessonsCompleted = 'totalLessonsCompleted';
   static const String totalCorrectAnswers = 'totalCorrectAnswers';
   static const String totalAnswers = 'totalAnswers';
+
+  static const String title = 'title';
+  static const String content = 'content';
+  static const String lessonId = 'lessonId';
 
   // ── Aliases legados (dados antigos no Firestore — não usar em código novo) ─
   // ignore: constant_identifier_names

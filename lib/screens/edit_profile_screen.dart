@@ -33,7 +33,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       final u = UserService().user;
       if (mounted && u != null) {
         setState(() {
-          _professionCtrl.text = u.role; // 'role' é o campo de profissão no UserModel
+          _professionCtrl.text = u.profession ?? ''; // Usa 'profession' do UserModel
         });
       }
     }
@@ -55,7 +55,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       // Atualiza Firestore via updateProfile
       await UserService().updateProfile(
         displayName: newName,
-        role: newProfession,
+        profession: newProfession,
       );
       
       if (!mounted) return;

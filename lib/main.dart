@@ -7,6 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/routes/app_router.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/services/fcm_service.dart';
+import 'package:spark_app/services/offline_sync_service.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/firebase_options.dart';
 
@@ -26,6 +28,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // 1b. Inicializa FCM (permissão + handlers)
+  await FcmService().initialize();
+
+  // 1c. Inicializa sincronização offline (Hive + Connectivity)
+  await OfflineSyncService().initialize();
 
   // 2. Erros globais via Crashlytics (Tratamento de Produção)
   // Repassa todas as exceções não capturadas pelo framework Flutter

@@ -156,7 +156,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         content: Row(children: [
           Icon(isActive ? Icons.bug_report_outlined : Icons.bug_report, color: isActive ? Colors.grey : Colors.amber, size: 20),
           const SizedBox(width: 8),
-          Text(isActive ? '🔒 Modo Dev DESATIVADO' : '🔓 Modo Dev ATIVADO — Tudo desbloqueado!',
+          Text(isActive ? '🔒 Modo Dev DESATIVADO' : '🔓 Modo Dev ATIVADO — Painel Admin Liberado!',
               style: const TextStyle(color: Colors.white, fontSize: 13)),
         ]),
         duration: const Duration(seconds: 3),
@@ -170,9 +170,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ Observa UserService reativamente
+    // userServiceProvider = Provider simples (não reconstrói sozinho)
     final userService = ref.watch(userServiceProvider);
-    final user = userService.user;
+    // userModelProvider = StreamProvider — reconstrói quando Firestore responde
+    final userAsync = ref.watch(userModelProvider);
+    final userModel = userAsync.value;
+    // Alias para manter compatibilidade com uso de user?.photoUrl etc.
+    final user = userModel ?? userService.user;
 
     return SparksBackground(
       child: PcbBackground(
@@ -344,6 +348,32 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                   const SizedBox(height: 28),
 
+                  // ── Debug Info (Apenas quando Modo Dev está ativo) ──
+                  if (kDebugMode && ref.watch(devModeProvider)) ...[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.5),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.amber.withValues(alpha: 0.5)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('DEBUG INFO (MODO DEV)', style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 4),
+                            Text('UID: ${userService.uid}', style: const TextStyle(color: Colors.white70, fontSize: 10, fontFamily: 'monospace')),
+                            Text('Role Firestore: ${user?.role ?? "Nula"}', style: const TextStyle(color: Colors.white70, fontSize: 10)),
+                            Text('isAdmin Getter: ${user?.isAdmin ?? "false"}', style: const TextStyle(color: Colors.white70, fontSize: 10)),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+
                   // ── Dev Tools (somente debug) ────────────────────
                   if (kDebugMode) ...[  
                     const Padding(
@@ -378,6 +408,40 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     const SizedBox(height: 24),
                   ],
 
+                  // ── Painel Admin (role == admin) — usa maybeWhen para reagir ao async
+                  Builder(builder: (context) {
+                    final isDevMode = ref.watch(devModeProvider);
+                    final user = userAsync.value;
+                    final isAdmin = (user != null && user.isAdmin) || isDevMode;
+                    if (!isAdmin) return const SizedBox.shrink();
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              onPressed: () => context.push('/admin'),
+                              icon: const Icon(Icons.admin_panel_settings, color: Colors.white, size: 20),
+                              label: const Text(
+                                'PAINEL ADMINISTRATIVO',
+                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13, letterSpacing: 1),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFFFF8C00),
+                                padding: const EdgeInsets.symmetric(vertical: 14),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                elevation: 4,
+                                shadowColor: const Color(0xFFFF8C00).withValues(alpha: 0.4),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                        ],
+                      ),
+                    );
+                  }),
+
                   // ── Conquistas ───────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -409,7 +473,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                   const SizedBox(height: 28),
 
-                  // ── Meu Clã ───────────────────────────────────────
+                  // ── Clã ──────────────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: _ClanSection(
@@ -421,7 +485,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                   const SizedBox(height: 28),
 
-                  // ── Ranking ───────────────────────────────────────
+                  // ── Ranking ──────────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(

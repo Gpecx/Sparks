@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:spark_app/services/analytics_service.dart';
 import 'package:spark_app/services/firebase_service.dart';
 
 class AuthService {
@@ -31,7 +32,7 @@ class AuthService {
               'displayName': user.displayName ?? 'Usuário',
               'email': user.email ?? email,
               'photoUrl': user.photoURL,
-              'role': 'Técnico',
+              'role': 'técnico',
               'sparkPoints': 100,
               'xp': 0,
               'level': 1,
@@ -63,6 +64,9 @@ class AuthService {
         }
       }
 
+      // Analytics
+      await AnalyticsService().logLogin();
+
       return credential;
     } on FirebaseAuthException catch (e) {
       throw _mapAuthException(e);
@@ -91,7 +95,7 @@ class AuthService {
         'displayName': name.trim(),
         'email': email.trim(),
         'photoUrl': null,
-        'role': 'Técnico',
+        'role': 'técnico',
         'sparkPoints': 100, // Bônus de boas-vindas
         'xp': 0,
         'level': 1,
@@ -112,6 +116,9 @@ class AuthService {
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       });
+      // Analytics
+      await AnalyticsService().logSignUp();
+
       return credential;
 
     } on FirebaseAuthException catch (e) {

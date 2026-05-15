@@ -3,6 +3,10 @@ import '../core/constants/fs.dart';
 import '../models/progress_model.dart';
 import '../models/user_model.dart';
 import '../services/achievement_service.dart';
+import '../services/analytics_service.dart';
+import '../services/audit_service.dart';
+import '../services/gamification_service.dart';
+import '../services/offline_sync_service.dart';
 import '../data/lessons_registry.dart';
 
 class ProgressService {
@@ -41,6 +45,19 @@ class ProgressService {
     int spEarned, {
     String moduleName = '',
   }) async {
+    // Se offline, delega ao OfflineSyncService e retorna
+    if (!OfflineSyncService().isOnline) {
+      await OfflineSyncService().enqueueMarkLesson(
+        uid: uid,
+        catId: catId,
+        modId: modId,
+        lessonId: lessonId,
+        xpEarned: xpEarned,
+        spEarned: spEarned,
+        moduleName: moduleName,
+      );
+      return;
+    }
     final userRef = _fs.collection(FS.users).doc(uid);
     final userDoc = await userRef.get();
     
@@ -128,9 +145,36 @@ class ProgressService {
 
     await batch.commit();
 
-    // Usa o total de lições completadas calculado pelo conjunto local (alreadyCompleted + nova)
+    // Audit log
+    await AuditService().logForUser(
+      uid: uid,
+      action: AuditAction.lessonCompleted,
+      amount: xpEarned,
+      source: 'lesson',
+      meta: {
+        'moduleId': modId,
+        'categoryId': catId,
+        'lessonId': lessonId,
+        'spEarned': spEarned,
+        'moduleCompleted': moduleCompleted,
+      },
+    );
+
+    // Analytics — lesson_completed (evento principal GA4)
+    await AnalyticsService().logLessonCompleted(
+      moduleId: modId,
+      lessonId: lessonId,
+      categoryId: catId,
+      xpEarned: xpEarned,
+      spEarned: spEarned,
+    );
+
+    // Achievements baseados em quantidade de lições
     final totalLessonsCompletedSoFar = completedSet.length;
     await AchievementService().checkLessonAchievements(uid, totalLessonsCompletedSoFar);
+
+    // Missão diária — 3 lições = daily_warrior + 50 SP
+    await GamificationService().onLessonCompleted(uid);
   }
 
   Future<bool> isModuleUnlocked(String uid, String requiredModuleId) async {

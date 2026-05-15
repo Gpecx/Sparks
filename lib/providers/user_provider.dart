@@ -1,27 +1,19 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:spark_app/models/user_model.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/models/progress_model.dart';
 import 'package:spark_app/services/progress_service.dart';
 
 // ─────────────────────────────────────────────────────────────────
-//  USER PROVIDER — Riverpod
-//  Expõe o UserService para toda a árvore de widgets.
+//  USER PROVIDER — Riverpod 3.x
+//  Usa StreamProvider para reatividade nativa com o Firestore.
 // ─────────────────────────────────────────────────────────────────
 
 /// Provider do UserService (singleton).
-/// Emulando a reatividade antiga do ChangeNotifierProvider no Riverpod 3.0.
 final userServiceProvider = Provider<UserService>((ref) {
-  final service = UserService();
-  
-  // Força o provider a notificar seus ouvintes quando o Singleton emitir evento
-  void listener() => ref.invalidateSelf();
-  service.addListener(listener);
-  
-  ref.onDispose(() => service.removeListener(listener));
-  
-  return service;
+  return UserService();
 });
 
 /// Provider do usuário atual (stream do Firebase Auth).
@@ -29,10 +21,20 @@ final authStateProvider = StreamProvider<User?>((ref) {
   return FirebaseAuth.instance.authStateChanges();
 });
 
-/// Provider do UserModel (reativo ao stream do Firestore).
-final userModelProvider = Provider<UserModel?>((ref) {
-  final userService = ref.watch(userServiceProvider);
-  return userService.user;
+/// Provider reativo do UserModel via stream direto do Firestore.
+/// Esta é a abordagem correta no Riverpod 3.x — usa StreamProvider
+/// para garantir que a UI seja reconstruída a cada mudança no documento.
+final userModelProvider = StreamProvider<UserModel?>((ref) {
+  final auth = ref.watch(authStateProvider);
+  final uid = auth.value?.uid;
+
+  if (uid == null) return Stream.value(null);
+
+  return FirebaseFirestore.instance
+      .collection('users')
+      .doc(uid)
+      .snapshots()
+      .map((snap) => snap.exists ? UserModel.fromFirestore(snap) : null);
 });
 
 /// Provider para verificar se o usuário está logado.
@@ -54,7 +56,6 @@ final lastActiveModuleProvider = FutureProvider<ProgressModel?>((ref) async {
   final allProgress = await ProgressService().getAllProgress(uid);
   if (allProgress.isEmpty) return null;
 
-  // Retorna o módulo mais recentemente acessado que não esteja 100% completo
   final incomplete = allProgress
       .where((p) => !p.isCompleted)
       .toList()

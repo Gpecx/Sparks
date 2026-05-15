@@ -1,0 +1,474 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../theme/app_theme.dart';
+import '../../constants/fs.dart';
+import 'admin_controller.dart';
+import 'widgets/admin_dialogs_new.dart';
+import 'widgets/admin_cards.dart';
+import 'widgets/admin_content_panel.dart';
+
+class AdminDashboardPage extends ConsumerWidget {
+  const AdminDashboardPage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(adminControllerProvider);
+    final controller = ref.read(adminControllerProvider.notifier);
+    final size = MediaQuery.of(context).size;
+    final isDesktop = size.width >= 1024;
+    final isTablet = size.width >= 600 && size.width < 1024;
+
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      drawer: isDesktop ? null : Drawer(
+        backgroundColor: AppColors.surface,
+        child: _buildSidebar(context, ref, state, controller),
+      ),
+      appBar: isDesktop ? null : AppBar(
+        backgroundColor: AppColors.surface,
+        elevation: 0,
+        title: Row(
+          children: [
+            Icon(Icons.bolt, color: AppColors.primary, size: 20),
+            const SizedBox(width: 8),
+            const Text('SPARK ADMIN', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ],
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: Row(
+        children: [
+          if (isDesktop)
+            Container(
+              width: 260,
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                border: Border(right: BorderSide(color: Colors.white.withValues(alpha: 0.05))),
+              ),
+              child: _buildSidebar(context, ref, state, controller),
+            ),
+          
+          Expanded(
+            child: Column(
+              children: [
+                if (state.sidebarIndex == 1) 
+                  _buildTopNavBar(state, controller, isDesktop || isTablet),
+
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(isDesktop ? 32.0 : 16.0),
+                    child: _buildMainArea(context, ref, state, controller, isDesktop, isTablet),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMainArea(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
+    switch (state.sidebarIndex) {
+      case 0: return _buildOverview(context, ref);
+      case 1: return _getContentTab(context, ref, state, controller, isDesktop, isTablet);
+      default: return const Center(child: Text('Em desenvolvimento', style: TextStyle(color: Colors.white)));
+    }
+  }
+
+  Widget _buildOverview(BuildContext context, WidgetRef ref) {
+    return SingleChildScrollView(
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.dashboard_customize_outlined, size: 64, color: AppColors.textMuted),
+            const SizedBox(height: 16),
+            const Text('Bem-vindo ao Painel Admin', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+            const Text('Gerencie seu conteúdo educacional aqui.', style: TextStyle(color: AppColors.textSecondary)),
+            const SizedBox(height: 40),
+            Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              alignment: WrapAlignment.center,
+              children: [
+                _quickActionCard(
+                  context,
+                  icon: Icons.code,
+                  title: 'Importar JSON',
+                  subtitle: 'Carga em massa de conteúdo',
+                  color: AppColors.primary,
+                  onTap: () => AdminDialogs.showImportJSON(context, ref),
+                ),
+                _quickActionCard(
+                  context,
+                  icon: Icons.auto_awesome,
+                  title: 'Gerador de Trilhas',
+                  subtitle: 'Crie estruturas rapidamente',
+                  color: AppColors.orange,
+                  onTap: () => AdminDialogs.showTrailWizard(context, ref),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _quickActionCard(BuildContext context, {required IconData icon, required String title, required String subtitle, required Color color, required VoidCallback onTap}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        width: 240,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(icon, color: color, size: 24),
+            ),
+            const SizedBox(height: 16),
+            Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+            const SizedBox(height: 4),
+            Text(subtitle, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  Widget _getContentTab(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
+    switch (state.contentTabIndex) {
+      case 0: return _buildCategoriesTab(context, ref, state, controller, isDesktop, isTablet);
+      case 1: return _buildModulesTab(context, ref, state, controller, isDesktop, isTablet);
+      case 2: return _buildTrailsTab(context, ref, state, controller, isDesktop, isTablet);
+      default: return _buildCategoriesTab(context, ref, state, controller, isDesktop, isTablet);
+    }
+  }
+
+  // --- TOP NAV BAR ---
+  Widget _buildTopNavBar(AdminState state, AdminController controller, bool showLabels) {
+    return Container(
+      height: 60,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: AppColors.surface, 
+        border: Border(bottom: BorderSide(color: Colors.white.withValues(alpha: 0.05))),
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            _navTab('1. Categorias', isActive: state.contentTabIndex == 0, onTap: () => controller.setContentTab(0)),
+            _navTab('2. Módulos', isActive: state.contentTabIndex == 1, onTap: () => controller.setContentTab(1)),
+            _navTab('3. Trilhas', isActive: state.contentTabIndex == 2, onTap: () => controller.setContentTab(2)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _navTab(String title, {required bool isActive, required VoidCallback onTap}) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          border: isActive ? const Border(bottom: BorderSide(color: AppColors.primary, width: 3)) : null,
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          title,
+          style: TextStyle(
+            color: isActive ? AppColors.primary : AppColors.textSecondary,
+            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+            fontSize: 13,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // --- SIDEBAR ---
+  Widget _buildSidebar(BuildContext context, WidgetRef ref, AdminState state, AdminController controller) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 40),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('CONTEÚDO', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+              const SizedBox(height: 16),
+              _sidebarItem(context, Icons.grid_view_rounded, 'Visão Geral', isActive: state.sidebarIndex == 0, onTap: () => controller.setSidebarMenu(0)),
+              _sidebarItem(context, Icons.layers_outlined, 'Estrutura', isActive: state.sidebarIndex == 1, onTap: () => controller.setSidebarMenu(1)),
+            ],
+          ),
+        ),
+        const SizedBox(height: 32),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('SISTEMA', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+              const SizedBox(height: 16),
+              _sidebarItem(context, Icons.people_outline, 'Usuários', isActive: state.sidebarIndex == 2, onTap: () => controller.setSidebarMenu(2)),
+              _sidebarItem(context, Icons.settings_outlined, 'Configurações', isActive: state.sidebarIndex == 3, onTap: () => controller.setSidebarMenu(3)),
+            ],
+          ),
+        ),
+        const Spacer(),
+        Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: _sidebarItem(context, Icons.logout_rounded, 'Voltar ao App', onTap: () => context.go('/')),
+        ),
+      ],
+    );
+  }
+
+  Widget _sidebarItem(BuildContext context, IconData icon, String title, {bool isActive = false, VoidCallback? onTap}) {
+    return InkWell(
+      onTap: () {
+        if (onTap != null) onTap();
+        if (Scaffold.of(context).isDrawerOpen) Navigator.pop(context);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        child: Row(
+          children: [
+            Icon(icon, size: 20, color: isActive ? AppColors.primary : AppColors.textSecondary),
+            const SizedBox(width: 12),
+            Text(title, style: TextStyle(color: isActive ? AppColors.primary : AppColors.textSecondary, fontWeight: isActive ? FontWeight.bold : FontWeight.w500)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // --- CATEGORIAS ---
+  Widget _buildCategoriesTab(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Categorias', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                  Text('Selecione uma categoria para ver seus módulos.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+            Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              alignment: WrapAlignment.end,
+              children: [
+                OutlinedButton.icon(
+                  onPressed: () => AdminDialogs.showImportJSON(context, ref),
+                  icon: const Icon(Icons.code, size: 18),
+                  label: const Text('IMPORTAR JSON'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppColors.textSecondary,
+                    side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
+                    minimumSize: const Size(140, 40),
+                  ),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () => AdminDialogs.showCreateCategory(context, ref),
+                  icon: const Icon(Icons.add, size: 18),
+                  label: const Text('NOVA'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    minimumSize: const Size(100, 40),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        Expanded(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: controller.streamFor(AdminEntity.categories),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+              final docs = snapshot.data?.docs ?? [];
+              if (docs.isEmpty) return const Center(child: Text('Nenhuma categoria.', style: TextStyle(color: Colors.grey)));
+
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1), 
+                  childAspectRatio: 2.5,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                ),
+                itemCount: docs.length,
+                itemBuilder: (context, index) {
+                  final data = docs[index].data() as Map<String, dynamic>;
+                  final isSelected = state.selectedCategoryId == docs[index].id;
+                  return AdminEntityCard(
+                    title: data[FS.title] ?? 'Sem título',
+                    description: data['description'] ?? '',
+                    colorType: AppColors.primary,
+                    badgeText: 'Selecionar',
+                    isActive: isSelected,
+                    onTap: () => controller.selectCategory(docs[index].id),
+                    onDelete: () {
+                      AdminDialogs.showConfirmDelete(
+                        context: context,
+                        title: 'Deletar Categoria',
+                        content: 'Tem certeza que deseja deletar "${data[FS.title]}"? Isso removerá todos os módulos e trilhas vinculados.',
+                        onConfirm: () => controller.delete(AdminEntity.categories, docs[index].id),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  // --- MÓDULOS ---
+  Widget _buildModulesTab(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
+    if (state.selectedCategoryId == null) {
+      return const Center(child: Text('Selecione uma categoria primeiro na aba anterior.', style: TextStyle(color: AppColors.textSecondary)));
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Módulos', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                  Text('Gerencie os blocos de ensino deste módulo.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+            ElevatedButton.icon(
+              onPressed: () => AdminDialogs.showCreateModule(context, ref),
+              icon: const Icon(Icons.add, size: 18),
+              label: const Text('NOVO'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.blue,
+                minimumSize: const Size(100, 40),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        Expanded(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: controller.streamFor(AdminEntity.modules),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+              final docs = snapshot.data?.docs ?? [];
+              if (docs.isEmpty) return const Center(child: Text('Nenhum módulo.', style: TextStyle(color: Colors.grey)));
+
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
+                  childAspectRatio: 2.5,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                ),
+                itemCount: docs.length,
+                itemBuilder: (context, index) {
+                  final data = docs[index].data() as Map<String, dynamic>;
+                  final isSelected = state.selectedModuleId == docs[index].id;
+                  return AdminEntityCard(
+                    title: data[FS.title] ?? 'Sem título',
+                    description: data['subtitle'] ?? '',
+                    colorType: AppColors.blue,
+                    badgeText: 'Selecionar',
+                    isActive: isSelected,
+                    onTap: () => controller.selectModule(docs[index].id),
+                    onDelete: () {
+                      AdminDialogs.showConfirmDelete(
+                        context: context,
+                        title: 'Deletar Módulo',
+                        content: 'Tem certeza que deseja deletar "${data[FS.title]}"? Isso removerá todas as trilhas vinculadas.',
+                        onConfirm: () => controller.delete(AdminEntity.modules, docs[index].id),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  // --- TRILHAS (PAINEL INTERATIVO) ---
+  Widget _buildTrailsTab(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
+    if (state.selectedModuleId == null) {
+      return const Center(child: Text('Selecione um módulo primeiro na aba anterior.', style: TextStyle(color: AppColors.textSecondary)));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Trilhas e Lições', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                Text('Crie a jornada completa com lições e questões.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+              ],
+            ),
+            ElevatedButton.icon(
+              onPressed: () => AdminDialogs.showTrailWizard(context, ref),
+              icon: const Icon(Icons.auto_awesome, size: 18),
+              label: const Text('GERAR TRILHA'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.orange,
+                minimumSize: const Size(140, 40),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        Expanded(
+          child: AdminContentPanel(
+            categoryId: state.selectedCategoryId!,
+            moduleId: state.selectedModuleId!,
+          ),
+        ),
+      ],
+    );
+  }
+}

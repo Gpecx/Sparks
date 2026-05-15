@@ -66,7 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'displayName': name,
           'email': email,
           'photoUrl': null,
-          'role': 'Técnico',
+          'role': 'técnico',
           'sparkPoints': 100, // Bônus de boas-vindas
           'xp': 0,
           'level': 1,
