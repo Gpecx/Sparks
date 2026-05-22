@@ -33,10 +33,20 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        create("release") {
+            // PRODUÇÃO: Configure as variáveis de ambiente ou key.properties
+            // storeFile = file(System.getenv("STORE_FILE") ?: "release-keystore.jks")
+            // storePassword = System.getenv("STORE_PASSWORD") ?: ""
+            // keyAlias = System.getenv("KEY_ALIAS") ?: ""
+            // keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // ATENÇÃO: Substitua pelo signingConfigs.getByName("release") antes de publicar
+            // na Play Store. Criar keystore: keytool -genkey -v -keystore release-keystore.jks
             signingConfig = signingConfigs.getByName("debug")
         }
     }

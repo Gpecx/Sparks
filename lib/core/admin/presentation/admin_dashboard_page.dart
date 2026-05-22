@@ -20,6 +20,40 @@ class AdminDashboardPage extends ConsumerWidget {
     final isDesktop = size.width >= 1024;
     final isTablet = size.width >= 600 && size.width < 1024;
 
+    // ── Escuta erros do controller e exibe SnackBar ──────────────
+    ref.listen<AdminState>(adminControllerProvider, (previous, next) {
+      if (next.errorMessage != null &&
+          next.errorMessage != previous?.errorMessage) {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.error_outline, color: Colors.white, size: 20),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    next.errorMessage!,
+                    style: const TextStyle(color: Colors.white, fontSize: 13),
+                  ),
+                ),
+              ],
+            ),
+            backgroundColor: AppColors.error,
+            duration: const Duration(seconds: 6),
+            action: SnackBarAction(
+              label: 'OK',
+              textColor: Colors.white,
+              onPressed: () {
+                controller.clearMessages();
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              },
+            ),
+          ),
+        );
+      }
+    });
+
     return Scaffold(
       backgroundColor: AppColors.background,
       drawer: isDesktop ? null : Drawer(
@@ -248,7 +282,10 @@ class AdminDashboardPage extends ConsumerWidget {
     return InkWell(
       onTap: () {
         if (onTap != null) onTap();
-        if (Scaffold.of(context).isDrawerOpen) Navigator.pop(context);
+        final scaffold = Scaffold.maybeOf(context);
+        if (scaffold != null && scaffold.isDrawerOpen) {
+          Navigator.pop(context);
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
@@ -315,6 +352,7 @@ class AdminDashboardPage extends ConsumerWidget {
             stream: controller.streamFor(AdminEntity.categories),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+              if (snapshot.hasError) return Center(child: Text('Erro: ${snapshot.error}', style: const TextStyle(color: Colors.red)));
               final docs = snapshot.data?.docs ?? [];
               if (docs.isEmpty) return const Center(child: Text('Nenhuma categoria.', style: TextStyle(color: Colors.grey)));
 
@@ -341,7 +379,9 @@ class AdminDashboardPage extends ConsumerWidget {
                         context: context,
                         title: 'Deletar Categoria',
                         content: 'Tem certeza que deseja deletar "${data[FS.title]}"? Isso removerá todos os módulos e trilhas vinculados.',
-                        onConfirm: () => controller.delete(AdminEntity.categories, docs[index].id),
+                        onConfirm: () async {
+                          await controller.delete(AdminEntity.categories, docs[index].id);
+                        },
                       );
                     },
                   );
@@ -392,6 +432,7 @@ class AdminDashboardPage extends ConsumerWidget {
             stream: controller.streamFor(AdminEntity.modules),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+              if (snapshot.hasError) return Center(child: Text('Erro: ${snapshot.error}', style: const TextStyle(color: Colors.red)));
               final docs = snapshot.data?.docs ?? [];
               if (docs.isEmpty) return const Center(child: Text('Nenhum módulo.', style: TextStyle(color: Colors.grey)));
 
@@ -418,7 +459,9 @@ class AdminDashboardPage extends ConsumerWidget {
                         context: context,
                         title: 'Deletar Módulo',
                         content: 'Tem certeza que deseja deletar "${data[FS.title]}"? Isso removerá todas as trilhas vinculadas.',
-                        onConfirm: () => controller.delete(AdminEntity.modules, docs[index].id),
+                        onConfirm: () async {
+                          await controller.delete(AdminEntity.modules, docs[index].id);
+                        },
                       );
                     },
                   );

@@ -95,115 +95,133 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
           return Scaffold(
             floatingActionButton: devFab,
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-            body: Row(
-              children: [
-                NavigationRail(
-                  selectedIndex: _currentIndex,
-                  onDestinationSelected: (index) =>
-                      setState(() => _currentIndex = index),
-                  backgroundColor: AppColors.navBarBackground,
-                  indicatorColor: AppColors.primary.withValues(alpha: 0.2),
-                  selectedIconTheme:
-                      const IconThemeData(color: AppColors.primary),
-                  unselectedIconTheme:
-                      const IconThemeData(color: AppColors.textMuted),
-                  selectedLabelTextStyle: const TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold),
-                  unselectedLabelTextStyle: const TextStyle(
-                      color: AppColors.textMuted, fontSize: 12),
-                  labelType: NavigationRailLabelType.all,
-                  destinations: const [
-                    NavigationRailDestination(
-                        icon: Icon(Icons.home_outlined),
-                        selectedIcon: Icon(Icons.home),
-                        label: Text('Início')),
-                    NavigationRailDestination(
-                        icon: Icon(Icons.route_outlined),
-                        selectedIcon: Icon(Icons.route),
-                        label: Text('Trilha')),
-                    NavigationRailDestination(
-                        icon: Icon(Icons.emoji_events_outlined),
-                        selectedIcon: Icon(Icons.emoji_events),
-                        label: Text('Ranking')),
-                    NavigationRailDestination(
-                        icon: Icon(Icons.person_outline),
-                        selectedIcon: Icon(Icons.person),
-                        label: Text('Perfil')),
-                    NavigationRailDestination(
-                        icon: Icon(Icons.store_outlined),
-                        selectedIcon: Icon(Icons.store),
-                        label: Text('Loja')),
-                  ],
-                ),
-                VerticalDivider(
-                    thickness: 1,
-                    width: 1,
-                    color: AppColors.cardBorder.withValues(alpha: 0.3)),
-                Expanded(
-                  child: Container(
-                    color: AppColors.background,
-                    child: scaffoldBody,
+            body: Semantics(
+              label: 'Tela principal do SPARK',
+              child: Row(
+                children: [
+                  Semantics(
+                    label: 'Menu de navegação lateral',
+                    child: NavigationRail(
+                      selectedIndex: _currentIndex,
+                      onDestinationSelected: (index) =>
+                          setState(() => _currentIndex = index),
+                      backgroundColor: AppColors.navBarBackground,
+                      indicatorColor: AppColors.primary.withValues(alpha: 0.2),
+                      selectedIconTheme:
+                          const IconThemeData(color: AppColors.primary),
+                      unselectedIconTheme:
+                          const IconThemeData(color: AppColors.textMuted),
+                      selectedLabelTextStyle: const TextStyle(
+                          color: AppColors.primary,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                      unselectedLabelTextStyle: const TextStyle(
+                          color: AppColors.textMuted, fontSize: 12),
+                      labelType: NavigationRailLabelType.all,
+                      destinations: const [
+                        NavigationRailDestination(
+                            icon: Icon(Icons.home_outlined, semanticLabel: 'Início'),
+                            selectedIcon: Icon(Icons.home, semanticLabel: 'Início selecionado'),
+                            label: Text('Início')),
+                        NavigationRailDestination(
+                            icon: Icon(Icons.route_outlined, semanticLabel: 'Trilha'),
+                            selectedIcon: Icon(Icons.route, semanticLabel: 'Trilha selecionada'),
+                            label: Text('Trilha')),
+                        NavigationRailDestination(
+                            icon: Icon(Icons.emoji_events_outlined, semanticLabel: 'Ranking'),
+                            selectedIcon: Icon(Icons.emoji_events, semanticLabel: 'Ranking selecionado'),
+                            label: Text('Ranking')),
+                        NavigationRailDestination(
+                            icon: Icon(Icons.person_outline, semanticLabel: 'Perfil'),
+                            selectedIcon: Icon(Icons.person, semanticLabel: 'Perfil selecionado'),
+                            label: Text('Perfil')),
+                        NavigationRailDestination(
+                            icon: Icon(Icons.store_outlined, semanticLabel: 'Loja'),
+                            selectedIcon: Icon(Icons.store, semanticLabel: 'Loja selecionada'),
+                            label: Text('Loja')),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  VerticalDivider(
+                      thickness: 1,
+                      width: 1,
+                      color: AppColors.cardBorder.withValues(alpha: 0.3)),
+                  Expanded(
+                    child: Container(
+                      color: AppColors.background,
+                      child: scaffoldBody,
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         }
 
         // Layout Mobile
-        return Scaffold(
-          floatingActionButton: devFab,
-          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-          body: scaffoldBody,
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: AppColors.navBarBackground,
-              border: Border(
-                top: BorderSide(
-                  color: AppColors.cardBorder.withValues(alpha: 0.3),
-                  width: 1,
+        return Semantics(
+          label: 'Tela principal do SPARK',
+          child: Scaffold(
+            floatingActionButton: devFab,
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            body: scaffoldBody,
+            bottomNavigationBar: Semantics(
+              label: 'Barra de navegação inferior',
+              explicitChildNodes: true,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.navBarBackground,
+                  border: Border(
+                    top: BorderSide(
+                      color: AppColors.cardBorder.withValues(alpha: 0.3),
+                      width: 1,
+                    ),
+                  ),
+                ),
+                child: BottomNavigationBar(
+                  currentIndex: _currentIndex,
+                  onTap: (index) => setState(() => _currentIndex = index),
+                  type: BottomNavigationBarType.fixed,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  selectedItemColor: AppColors.primary,
+                  unselectedItemColor: AppColors.textMuted,
+                  selectedFontSize: 12,
+                  unselectedFontSize: 12,
+                  items: const [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home_outlined, semanticLabel: 'Ir para Início'),
+                      activeIcon: Icon(Icons.home),
+                      label: 'Início',
+                      tooltip: 'Início',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.route_outlined, semanticLabel: 'Ir para Trilha'),
+                      activeIcon: Icon(Icons.route),
+                      label: 'Trilha',
+                      tooltip: 'Trilha de aprendizado',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.emoji_events_outlined, semanticLabel: 'Ir para Ranking'),
+                      activeIcon: Icon(Icons.emoji_events),
+                      label: 'Ranking',
+                      tooltip: 'Ranking de usuários',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.person_outline, semanticLabel: 'Ir para Perfil'),
+                      activeIcon: Icon(Icons.person),
+                      label: 'Perfil',
+                      tooltip: 'Meu perfil',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.store_outlined, semanticLabel: 'Ir para Loja'),
+                      activeIcon: Icon(Icons.store),
+                      label: 'Loja',
+                      tooltip: 'Loja de itens',
+                    ),
+                  ],
                 ),
               ),
-            ),
-            child: BottomNavigationBar(
-              currentIndex: _currentIndex,
-              onTap: (index) => setState(() => _currentIndex = index),
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              selectedItemColor: AppColors.primary,
-              unselectedItemColor: AppColors.textMuted,
-              selectedFontSize: 12,
-              unselectedFontSize: 12,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home_outlined),
-                  activeIcon: Icon(Icons.home),
-                  label: 'Início',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.route_outlined),
-                  activeIcon: Icon(Icons.route),
-                  label: 'Trilha',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.emoji_events_outlined),
-                  activeIcon: Icon(Icons.emoji_events),
-                  label: 'Ranking',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person_outline),
-                  activeIcon: Icon(Icons.person),
-                  label: 'Perfil',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.store_outlined),
-                  activeIcon: Icon(Icons.store),
-                  label: 'Loja',
-                ),
-              ],
             ),
           ),
         );
@@ -247,22 +265,26 @@ class _DevModeBanner extends StatelessWidget {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: onDeactivate,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFB300).withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(
-                    color: const Color(0xFFFFB300).withValues(alpha: 0.4)),
-              ),
-              child: const Text(
-                'DESATIVAR',
-                style: TextStyle(
-                    color: Color(0xFFFFB300),
-                    fontSize: 10,
-                    fontWeight: FontWeight.w800),
+          Semantics(
+            button: true,
+            label: 'Desativar modo desenvolvedor',
+            child: GestureDetector(
+              onTap: onDeactivate,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFB300).withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                      color: const Color(0xFFFFB300).withValues(alpha: 0.4)),
+                ),
+                child: const Text(
+                  'DESATIVAR',
+                  style: TextStyle(
+                      color: Color(0xFFFFB300),
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800),
+                ),
               ),
             ),
           ),

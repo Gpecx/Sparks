@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../models/progress_model.dart';
 import '../core/constants/fs.dart';
 
-final userProgressProvider = StreamProvider.autoDispose<List<ProgressModel>>((ref) {
+// keepAlive = true: mantém o stream ativo mesmo quando o widget sai da tela
+// (ex: ao abrir QuizScreen via Navigator.push), evitando loading ao voltar.
+final userProgressProvider = StreamProvider<List<ProgressModel>>((ref) {
   final uid = FirebaseAuth.instance.currentUser?.uid;
   if (uid == null) return Stream.value([]);
   

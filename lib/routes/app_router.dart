@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/screens/login_screen.dart';
@@ -21,9 +22,26 @@ import 'package:spark_app/screens/onboarding_screen.dart';
 import 'package:spark_app/screens/covenants_screen.dart';
 import 'package:spark_app/core/admin/presentation/admin_dashboard_page.dart';
 
+// Rotas públicas (não requerem autenticação)
+const _publicRoutes = {'/', '/login', '/register', '/registration-success', '/forgot-password', '/onboarding'};
+
 class AppRouter {
   static final router = GoRouter(
     initialLocation: '/',
+    redirect: (context, state) {
+      final user = FirebaseAuth.instance.currentUser;
+      final isLoggedIn = user != null;
+      final path = state.matchedLocation;
+      final isPublic = _publicRoutes.contains(path);
+
+      // Usuário não autenticado tentando acessar rota protegida → redireciona para login
+      if (!isLoggedIn && !isPublic) return '/login';
+
+      // Usuário autenticado tentando acessar Welcome/Login/Register → redireciona para home
+      if (isLoggedIn && (path == '/' || path == '/login' || path == '/register')) return '/home';
+
+      return null; // sem redirecionamento
+    },
     routes: [
       GoRoute(path: '/', builder: (context, state) => const WelcomeScreen()),
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
@@ -40,7 +58,6 @@ class AppRouter {
           return StandardDetailScreen(standardId: standardId);
         },
       ),
-
       GoRoute(path: '/quiz', builder: (context, state) => const QuizScreen()),
       GoRoute(path: '/test-history', builder: (context, state) => const TestHistoryScreen()),
       GoRoute(path: '/store', builder: (context, state) => const StoreScreen()),

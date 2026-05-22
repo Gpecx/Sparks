@@ -1,11 +1,11 @@
 {
-    "name": "spark_app",
-    "short_name": "spark_app",
+    "name": "SPARK — Normas Elétricas",
+    "short_name": "SPARK",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0A0A0F",
+    "theme_color": "#7C3AED",
+    "description": "Aprenda normas técnicas do setor elétrico com gamificação.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

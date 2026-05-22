@@ -10,13 +10,13 @@ import 'package:spark_app/services/question_service.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/widgets/streak_lightning_emitter.dart';
 import 'package:spark_app/models/quiz_models.dart';
-import 'package:spark_app/core/constants/fs.dart';
 
 class QuizScreen extends StatefulWidget {
   final bool isEvaluation;
   final Lesson? lesson; // <-- lição real com questões técnicas
   final String? categoryId;
   final String? moduleId;
+  final String? trailId;
 
   const QuizScreen({
     super.key,
@@ -24,6 +24,7 @@ class QuizScreen extends StatefulWidget {
     this.lesson,
     this.categoryId,
     this.moduleId,
+    this.trailId,
   });
 
   @override
@@ -43,6 +44,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   bool _isCorrect = false;
   int _currentQuestion = 0;
   int _totalCorrect = 0;
+  bool _isCompleting = false;
   int _currentStreak = 0; // Streak da sessão atual
 
   // Controladores de animação épica
@@ -52,6 +54,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
 
   // Estado de carregamento (busca questões do Firestore)
   bool _isLoading = false;
+  bool _noQuestionsFound = false; // true quando a lição não tem questões cadastradas
 
   // ── BANCO DE PERGUNTAS ──
   final List<Map<String, dynamic>> _questions = [
@@ -199,17 +202,17 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
           ..addAll(_convertLessonToQuestions(widget.lesson!));
         _initializeQuestionState();
         _checkEnergy();
-      } else if (widget.categoryId != null && widget.moduleId != null) {
-        // Lição sem questões locais — busca do Firestore
+      } else if (widget.categoryId != null && widget.moduleId != null && widget.trailId != null) {
+        // Lição sem questões locais e com IDs do Firestore — busca do Firestore
         _isLoading = true;
         _loadQuestionsFromFirestore();
       } else {
-        // Sem categoria/módulo — usa banco de mock local
+        // Sem categoria/módulo/trilha — usa banco de mock local (modo demo/standalone)
         _initializeQuestionState();
         _checkEnergy();
       }
     } else {
-      // Sem lição real — usa banco de mock local
+      // Sem lição real — usa banco de mock local (modo demo/standalone)
       _initializeQuestionState();
       _checkEnergy();
     }
@@ -221,32 +224,39 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
       final firestoreQuestions = await QuestionService().getQuestions(
         widget.categoryId!,
         widget.moduleId!,
+        widget.trailId!,
         widget.lesson!.id,
         limit: 20,
       );
 
       if (!mounted) return;
 
-      if (firestoreQuestions.isNotEmpty) {
+      if (firestoreQuestions.items.isNotEmpty) {
+        // Questões encontradas no Firestore — limpa o mock e usa as reais
         _questions
           ..clear()
-          ..addAll(firestoreQuestions.map((q) => q.toQuizMap(widget.lesson!.title)));
+          ..addAll(firestoreQuestions.items.map((q) => q.toQuizMap(widget.lesson!.title)));
+        setState(() {
+          _isLoading = false;
+          _noQuestionsFound = false;
+        });
+        _initializeQuestionState();
+        _checkEnergy();
+      } else {
+        // Nenhuma questão cadastrada nessa lição no Firestore
+        debugPrint('[QuizScreen] Nenhuma questão encontrada no Firestore para a lição: ${widget.lesson!.id}');
+        setState(() {
+          _isLoading = false;
+          _noQuestionsFound = true;
+        });
       }
-      // Se não há questões no Firestore, mantém o mock local
-
-      setState(() {
-        _isLoading = false;
-      });
-      _initializeQuestionState();
-      _checkEnergy();
     } catch (e) {
       debugPrint('[QuizScreen] Erro ao buscar questões do Firestore: $e');
       if (!mounted) return;
       setState(() {
         _isLoading = false;
+        _noQuestionsFound = true;
       });
-      _initializeQuestionState();
-      _checkEnergy();
     }
   }
 
@@ -282,17 +292,28 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         });
       } else if (q is FillInTheBlanks) {
         // Converte FillInTheBlanks para o formato drag existente
+        final answers = q.blanks.map((b) => b.answer).toList();
+        // Gerar distratores para que os chips não entreguem a resposta
+        const fallbackDistractors = [
+          'nenhuma', 'incorreto', 'alternativa', 'outro', 'diferente',
+          'opção X', 'opção Y', 'opção Z',
+        ];
+        final distractors = <String>[];
+        final needed = (answers.length < 2 ? 3 : 2);
+        for (int i = 0; i < needed && i < fallbackDistractors.length; i++) {
+          if (!answers.contains(fallbackDistractors[i])) {
+            distractors.add(fallbackDistractors[i]);
+          }
+        }
+        final allOptions = [...answers, ...distractors]..shuffle();
         result.add({
           'type': 'drag',
           'module': lesson.title,
           'question': q.statement,
           'prefix': q.textWithBlanks.split('____').first,
           'suffix': q.textWithBlanks.split('____').last,
-          'answer': q.blanks.map((b) => b.answer).toList(),
-          'options': [
-            ...q.blanks.map((b) => b.answer),
-            // Opções distrátoras geradas automaticamente
-          ],
+          'answer': answers,
+          'options': allOptions,
           'explanation': q.explanation,
         });
       }
@@ -404,10 +425,10 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     });
   }
 
-  /// Chamado ao terminar todas as questões do quiz.
-  /// Calcula XP com multiplicador de streak, persiste no Firestore,
-  /// registra atividade, salva progresso da lição e desbloqueia badges.
   Future<void> _onQuizComplete() async {
+    if (_isCompleting) return;
+    setState(() => _isCompleting = true);
+
     final double score = _totalCorrect / _questions.length;
     final bool passed = widget.isEvaluation ? score >= 0.8 : score >= 0.7;
     int xpEarned = 0;
@@ -419,55 +440,79 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
       xpEarned = (xpEarned * multiplier).toInt();
       final int spEarned = (xpEarned * 0.1).toInt();
 
-      // ✅ SEMPRE executa: animação + modal de resultado IMEDIATAMENTE (NÃO ESPERA FIREBASE)
+      final uid = FirebaseAuth.instance.currentUser?.uid;
+      if (uid != null && widget.moduleId != null) {
+        // 1. Salvar progresso da lição (prioridade absoluta)
+        try {
+          await ProgressService().markLessonComplete(
+            uid,
+            widget.categoryId ?? '',
+            widget.moduleId!,
+            widget.lesson?.id ?? 'lesson_${_currentQuestion + 1}',
+            xpEarned,
+            spEarned,
+            moduleName: widget.lesson?.title ?? '',
+          ).timeout(const Duration(seconds: 15));
+        } catch (e) {
+          debugPrint('[QuizScreen] Erro crítico ao salvar progresso no Firebase: $e');
+        }
+
+        // 2. Chamadas de gamificação/serviços secundários disparadas em background
+        Future.microtask(() async {
+          try {
+            await _userService.addXp(xpEarned).timeout(const Duration(seconds: 15));
+          } catch (e) {
+            debugPrint('[QuizScreen] Erro ao adicionar XP: $e');
+          }
+        });
+
+        Future.microtask(() async {
+          try {
+            await _userService.addSparkPoints(spEarned).timeout(const Duration(seconds: 15));
+          } catch (e) {
+            debugPrint('[QuizScreen] Erro ao adicionar Spark Points: $e');
+          }
+        });
+
+        Future.microtask(() async {
+          try {
+            await _userService.registerStudyActivity().timeout(const Duration(seconds: 15));
+          } catch (e) {
+            debugPrint('[QuizScreen] Erro ao registrar atividade de estudo: $e');
+          }
+        });
+
+        if (_totalCorrect == _questions.length) {
+          Future.microtask(() async {
+            try {
+              await _userService.unlockBadge('queimador').timeout(const Duration(seconds: 10));
+            } catch (e) {
+              debugPrint('[QuizScreen] Erro ao desbloquear badge queimador: $e');
+            }
+          });
+        }
+        if (_currentStreak >= 10) {
+          Future.microtask(() async {
+            try {
+              await _userService.unlockBadge('sniper').timeout(const Duration(seconds: 10));
+            } catch (e) {
+              debugPrint('[QuizScreen] Erro ao desbloquear badge sniper: $e');
+            }
+          });
+        }
+      }
+
+      if (mounted) setState(() => _isCompleting = false);
+
+      // Só depois que o Firestore foi atualizado, mostra a animação
       HapticFeedback.vibrate();
       if (mounted) {
         _completionController.forward(from: 0).then((_) {
           if (mounted) _showQuizResultModal(true, score, xpEarned);
         });
       }
-
-      // Tenta persistir no Firebase — em BACKGROUND para NÃO bloquear a tela final
-      Future.microtask(() async {
-        try {
-          // ✅ Persiste XP no Firestore via UserService
-          await _userService.addXp(xpEarned);
-
-          // ✅ Persiste Spark Points no Firestore via UserService
-          await _userService.addSparkPoints(spEarned);
-
-          // ✅ Persiste progresso da lição no Firestore (com await para garantir)
-          final uid = FirebaseAuth.instance.currentUser?.uid;
-          if (uid != null && widget.moduleId != null) {
-            await ProgressService().markLessonComplete(
-              uid,
-              widget.categoryId ?? FS.categories,
-              widget.moduleId!,
-              widget.lesson?.id ?? 'lesson_${_currentQuestion + 1}',
-              xpEarned,
-              spEarned,
-              moduleName: widget.lesson?.title ?? '',
-            );
-          }
-
-          // ✅ Registra atividade de estudo (streak diário)
-          await _userService.registerStudyActivity();
-
-          // Progresso da lição já foi salvo pelo ProgressService.markLessonComplete acima.
-
-          // ✅ Verifica conquistas de quiz
-          if (_totalCorrect == _questions.length) {
-            await _userService.unlockBadge('queimador'); // 100% de acerto
-          }
-          if (_currentStreak >= 10) {
-            await _userService.unlockBadge('sniper'); // 10 acertos seguidos
-          }
-        } catch (e) {
-          // Falha de persistência gravado silenciosamente
-          debugPrint('[QuizScreen] Erro ao persistir no Firebase: $e');
-        }
-      });
     } else {
+      if (mounted) setState(() => _isCompleting = false);
       // Reprovado — mostra modal imediatamente
       if (mounted) _showQuizResultModal(false, score, 0);
     }
@@ -524,7 +569,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
               ),
               const SizedBox(height: 24),
               Text(
-                passed ? 'Módulo Concluído!' : 'Desempenho Insuficiente',
+                passed ? 'Lição concluída!' : 'Desempenho Insuficiente',
                 style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
@@ -721,6 +766,67 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   // === UI PRINCIPAL DA TELA ===
   @override
   Widget build(BuildContext context) {
+    // Exibe tela de erro se nenhuma questão foi encontrada no Firestore
+    if (_noQuestionsFound) {
+      return Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: RadialGradient(
+              center: Alignment.center,
+              radius: 1.2,
+              colors: [Color(0xFF091E35), Color(0xFF061629)],
+            ),
+          ),
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 90,
+                  height: 90,
+                  decoration: BoxDecoration(
+                    color: AppColors.error.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                    boxShadow: [BoxShadow(color: AppColors.error.withValues(alpha: 0.2), blurRadius: 30, spreadRadius: 8)],
+                  ),
+                  child: const Icon(Icons.quiz_outlined, size: 44, color: AppColors.error),
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  'Nenhuma questão cadastrada',
+                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Text(
+                    'Esta lição ainda não possui questões cadastradas no sistema. '
+                    'Por favor, entre em contato com o administrador.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 14, height: 1.5),
+                  ),
+                ),
+                const SizedBox(height: 32),
+                SizedBox(
+                  width: 200,
+                  height: 50,
+                  child: ElevatedButton.icon(
+                    onPressed: () => Navigator.pop(context, false),
+                    icon: const Icon(Icons.arrow_back, color: AppColors.background),
+                    label: const Text('VOLTAR', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     // Exibe spinner enquanto busca questões do Firestore
     if (_isLoading || _questions.isEmpty) {
       return Scaffold(
@@ -1102,7 +1208,9 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         const SizedBox(height: 16),
         _SwipeTinderCard(
           key: ValueKey(_currentQuestion),
-          statement: q['statement'],
+          statement: (q['options'] != null && (q['options'] as List).isNotEmpty) 
+              ? q['options'][0] 
+              : 'Sem enunciado',
           onSwiped: (bool isRight) {
             HapticFeedback.mediumImpact();
             setState(() {
@@ -1154,9 +1262,11 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
           SizedBox(
             width: double.infinity, height: 56,
             child: ElevatedButton(
-              onPressed: _nextQuestion,
+              onPressed: _isCompleting ? null : _nextQuestion,
               style: ElevatedButton.styleFrom(backgroundColor: feedbackColor, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
-              child: Text(_currentQuestion + 1 >= _questions.length ? 'FINALIZAR' : 'CONTINUAR', style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
+              child: _isCompleting
+                  ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                  : Text(_currentQuestion + 1 >= _questions.length ? 'FINALIZAR' : 'CONTINUAR', style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
             ),
           ),
         ],

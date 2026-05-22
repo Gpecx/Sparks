@@ -11,20 +11,125 @@ const _kOrange = Color(0xFFFF9800);
 
 // ─── FIELD CONFIGS ────────────────────────────────────────────────
 
-const _lessonFields = <FieldConfig>[
-  FieldConfig(key: 'title',   label: 'Título'),
-  FieldConfig(key: 'content', label: 'Conteúdo (Markdown)', maxLines: 6, required: false),
-  FieldConfig(key: 'type',    label: 'Tipo (lesson | eval)', required: false),
-  FieldConfig(key: 'order',   label: 'Ordem', hint: 'ex: 1', required: false, keyboardType: TextInputType.number),
+const lessonTypeOptions = [
+  ('lesson', '📖 Lição — Conteúdo de aprendizado'),
+  ('eval',   '📝 Avaliação — Quiz com questões'),
 ];
 
-const _questionFields = <FieldConfig>[
-  FieldConfig(key: 'statement',    label: 'Enunciado', maxLines: 3),
-  FieldConfig(key: 'type',         label: 'Tipo', hint: 'multipleChoice | trueFalse | fillInTheBlanks'),
-  FieldConfig(key: 'options',      label: 'Opções (A|B|C|D)', hint: 'A|B|C|D', required: false),
-  FieldConfig(key: 'correctIndex', label: 'Índice correto (0-based)', hint: '0', required: false, keyboardType: TextInputType.number),
-  FieldConfig(key: 'difficulty',   label: 'Dificuldade (easy|medium|hard)', required: false),
-  FieldConfig(key: 'explanation',  label: 'Explicação', maxLines: 3),
+const difficultyOptions = [
+  ('easy',   '🟢 Fácil'),
+  ('medium', '🟡 Médio'),
+  ('hard',   '🔴 Difícil'),
+];
+
+const questionTypeOptions = [
+  ('multipleChoice',  '🔵 Múltipla escolha (A/B/C/D)'),
+  ('trueFalse',       '⚖️ Verdadeiro ou Falso'),
+  ('fillInTheBlanks', '✏️ Preencher lacunas'),
+];
+
+// Opções A/B/C/D para multipleChoice
+const mcOptions = [
+  ('0', 'A — Primeira opção'),
+  ('1', 'B — Segunda opção'),
+  ('2', 'C — Terceira opção'),
+  ('3', 'D — Quarta opção'),
+];
+
+const lessonFields = <FieldConfig>[
+  FieldConfig(key: 'title', label: 'Título'),
+  FieldConfig(key: 'content', label: 'Conteúdo (Markdown)', maxLines: 6, required: false),
+  FieldConfig(
+    key: 'type',
+    label: 'Tipo',
+    fieldType: FieldType.staticDropdown,
+    staticOptions: lessonTypeOptions,
+    required: true,
+    tooltip: 'Escolha se a lição é de conteúdo informativo ou uma avaliação prática com questões (quiz)',
+  ),
+  FieldConfig(
+    key: 'order',
+    label: 'Ordem na trilha',
+    hint: 'ex: 1',
+    required: true,
+    keyboardType: TextInputType.number,
+    tooltip: 'Posição numérica desta lição na trilha (ex: 1 para ser a primeira lição)',
+  ),
+];
+
+const questionFields = <FieldConfig>[
+  FieldConfig(key: 'statement', label: 'Enunciado', maxLines: 3),
+  FieldConfig(
+    key: 'type',
+    label: 'Tipo de questão',
+    fieldType: FieldType.staticDropdown,
+    staticOptions: questionTypeOptions,
+    required: true,
+    tooltip: 'Selecione o formato de questão que você deseja aplicar neste quiz',
+  ),
+  // Opções A/B/C/D — só visível quando tipo = multipleChoice
+  FieldConfig(
+    key: '_optA',
+    label: 'Opção A',
+    required: true,
+    dependsOnKey: 'type',
+    dependsOnValue: 'multipleChoice',
+  ),
+  FieldConfig(
+    key: '_optB',
+    label: 'Opção B',
+    required: true,
+    dependsOnKey: 'type',
+    dependsOnValue: 'multipleChoice',
+  ),
+  FieldConfig(
+    key: '_optC',
+    label: 'Opção C',
+    required: true,
+    dependsOnKey: 'type',
+    dependsOnValue: 'multipleChoice',
+  ),
+  FieldConfig(
+    key: '_optD',
+    label: 'Opção D',
+    required: true,
+    dependsOnKey: 'type',
+    dependsOnValue: 'multipleChoice',
+  ),
+  // Resposta correta para múltipla escolha
+  FieldConfig(
+    key: 'correctIndex',
+    label: 'Alternativa correta',
+    fieldType: FieldType.staticDropdown,
+    staticOptions: mcOptions,
+    required: true,
+    tooltip: 'Escolha qual das 4 alternativas criadas é a resposta correta',
+    dependsOnKey: 'type',
+    dependsOnValue: 'multipleChoice',
+  ),
+  // Resposta correta para verdadeiro ou falso
+  FieldConfig(
+    key: 'correctIndex',
+    label: 'Resposta correta',
+    fieldType: FieldType.staticDropdown,
+    staticOptions: const [
+      ('0', 'Verdadeiro'),
+      ('1', 'Falso'),
+    ],
+    required: true,
+    tooltip: 'Selecione a resposta correta para esta afirmação',
+    dependsOnKey: 'type',
+    dependsOnValue: 'trueFalse',
+  ),
+  FieldConfig(
+    key: 'difficulty',
+    label: 'Dificuldade',
+    fieldType: FieldType.staticDropdown,
+    staticOptions: difficultyOptions,
+    required: true,
+    tooltip: 'Defina a complexidade desta questão para auxiliar no balanceamento do aprendizado',
+  ),
+  FieldConfig(key: 'explanation', label: 'Explicação da resposta', maxLines: 3),
 ];
 
 // ─── MAIN WIDGET ──────────────────────────────────────────────────
@@ -59,6 +164,9 @@ class AdminContentPanel extends ConsumerWidget {
       builder: (ctx, snap) {
         if (snap.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator(color: _kOrange, strokeWidth: 2));
+        }
+        if (snap.hasError) {
+          return Center(child: Text('Erro: ${snap.error}', style: const TextStyle(color: Colors.red)));
         }
         final trails = snap.data?.docs ?? [];
         if (trails.isEmpty) {
@@ -187,10 +295,11 @@ class _TrailCardState extends ConsumerState<_TrailCard> {
                     ),
                     child: const Icon(Icons.route_outlined, color: _kOrange, size: 16),
                   ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(title, style: const TextStyle(color: AppColors.textPrimary, fontSize: 14, fontWeight: FontWeight.bold)),
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: Text(title, style: const TextStyle(color: AppColors.textPrimary, fontSize: 14, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis, maxLines: 1),
                   ),
+                  const SizedBox(width: 4),
                   _SmallIconBtn(icon: Icons.edit_outlined, color: AppColors.blue, onTap: _openTrailEdit),
                   _SmallIconBtn(icon: Icons.delete_outline, color: AppColors.error, onTap: _confirmDeleteTrail),
                   Icon(_expanded ? Icons.expand_less : Icons.expand_more, color: AppColors.textSecondary, size: 20),
@@ -201,9 +310,18 @@ class _TrailCardState extends ConsumerState<_TrailCard> {
           // ── Lessons ─────────────────────────────────────────────
           if (_expanded)
             StreamBuilder<QuerySnapshot>(
-              stream: _trailRef.collection(FS.lessons).orderBy('order').snapshots(),
+              stream: _trailRef.collection(FS.lessons).snapshots(),
               builder: (ctx, snap) {
-                final lessons = snap.data?.docs ?? [];
+                if (snap.hasError) return Center(child: Text('Erro: ${snap.error}', style: const TextStyle(color: Colors.red)));
+                final rawLessons = snap.data?.docs ?? [];
+                final lessons = [...rawLessons]
+                  ..sort((a, b) {
+                    final aData = a.data() as Map<String, dynamic>;
+                    final bData = b.data() as Map<String, dynamic>;
+                    final aOrder = (aData['order'] is num) ? (aData['order'] as num).toInt() : 9999;
+                    final bOrder = (bData['order'] is num) ? (bData['order'] as num).toInt() : 9999;
+                    return aOrder.compareTo(bOrder);
+                  });
                 return Column(
                   children: [
                     ...lessons.map((l) => _LessonNode(
@@ -270,7 +388,7 @@ class _LessonNodeState extends ConsumerState<_LessonNode> {
       context: context,
       builder: (_) => AdminEntityForm(
         title: 'Editar Lição',
-        fields: _lessonFields,
+        fields: lessonFields,
         initialValues: Map<String, String>.from(merged),
         onSave: (d) async {
           _lessonRef.update({...d, FS.updatedAt: FieldValue.serverTimestamp()})
@@ -291,7 +409,8 @@ class _LessonNodeState extends ConsumerState<_LessonNode> {
       title: 'Deletar Lição',
       content: 'Deletar "$title" removerá todas as questões vinculadas.',
       onConfirm: () async {
-        await _lessonRef.delete();
+        await ref.read(adminControllerProvider.notifier)
+            .delete(AdminEntity.lessons, widget.lessonDoc.id);
         if (mounted) _showToast('Lição deletada');
       },
     );
@@ -380,17 +499,35 @@ class _QuestionsSection extends StatelessWidget {
       context: context,
       builder: (_) => AdminEntityForm(
         title: 'Nova Questão',
-        fields: _questionFields,
+        fields: questionFields,
         initialValues: const {},
         onSave: (data) async {
-          final processed = <String, dynamic>{...data};
-          if (processed.containsKey('correctIndex')) {
-            processed['correctIndex'] = int.tryParse(processed['correctIndex'].toString()) ?? 0;
+          final processed = <String, dynamic>{};
+          // Montar options a partir dos campos _optA/_optB/_optC/_optD
+          final type = data['type'] as String? ?? '';
+          if (type == 'multipleChoice') {
+            processed['options'] = [
+              data['_optA'] ?? 'Opção A',
+              data['_optB'] ?? 'Opção B',
+              data['_optC'] ?? 'Opção C',
+              data['_optD'] ?? 'Opção D',
+            ];
+          } else if (type == 'trueFalse') {
+            processed['options'] = ['Verdadeiro', 'Falso'];
           }
-          if (processed.containsKey('options') && processed['options'] is String) {
-            final str = processed['options'] as String;
-            processed['options'] = str.isNotEmpty ? str.split('|').map((e) => e.trim()).toList() : <String>[];
+          processed['type'] = type;
+          if (data.containsKey('correctIndex')) {
+            final idx = int.tryParse(data['correctIndex'].toString()) ?? 0;
+            processed['correctIndex'] = idx;
+            // Persist isTrue boolean for trueFalse so fromFirestore can read it
+            if (type == 'trueFalse') {
+              processed['isTrue'] = idx == 0; // 0 = Verdadeiro, 1 = Falso
+            }
           }
+          processed['difficulty'] = data['difficulty'] ?? 'medium';
+          processed['statement'] = data['statement'] ?? '';
+          processed['explanation'] = data['explanation'] ?? '';
+
           lessonRef.collection(FS.questions).add({
             ...processed,
             'order': nextOrder,
@@ -405,28 +542,51 @@ class _QuestionsSection extends StatelessWidget {
 
   Future<void> _openEditQuestion(BuildContext context, DocumentSnapshot qDoc) async {
     final data   = qDoc.data() as Map<String, dynamic>;
-    // convert options list → pipe-separated string for the form
+    // Converter options list → campos _optA/_optB/_optC/_optD
+    final opts = data['options'] as List? ?? [];
     final merged = <String, String>{
-      ...data.map((k, v) {
-        if (k == 'options' && v is List) return MapEntry(k, (v as List).join('|'));
-        return MapEntry(k, v?.toString() ?? '');
-      }),
+      'statement':    data['statement']?.toString() ?? '',
+      'type':         data['type']?.toString() ?? '',
+      '_optA':        opts.isNotEmpty ? opts[0].toString() : '',
+      '_optB':        opts.length > 1 ? opts[1].toString() : '',
+      '_optC':        opts.length > 2 ? opts[2].toString() : '',
+      '_optD':        opts.length > 3 ? opts[3].toString() : '',
+      'correctIndex': (data['correctIndex'] ?? 0).toString(),
+      'difficulty':   data['difficulty']?.toString() ?? 'medium',
+      'explanation':  data['explanation']?.toString() ?? '',
     };
     await showDialog<dynamic>(
       context: context,
       builder: (_) => AdminEntityForm(
         title: 'Editar Questão',
-        fields: _questionFields,
+        fields: questionFields,
         initialValues: merged,
         onSave: (d) async {
-          final processed = <String, dynamic>{...d};
-          if (processed.containsKey('correctIndex')) {
-            processed['correctIndex'] = int.tryParse(processed['correctIndex'].toString()) ?? 0;
+          final processed = <String, dynamic>{};
+          final type = d['type'] as String? ?? '';
+          if (type == 'multipleChoice') {
+            processed['options'] = [
+              d['_optA'] ?? 'Opção A',
+              d['_optB'] ?? 'Opção B',
+              d['_optC'] ?? 'Opção C',
+              d['_optD'] ?? 'Opção D',
+            ];
+          } else if (type == 'trueFalse') {
+            processed['options'] = ['Verdadeiro', 'Falso'];
           }
-          if (processed.containsKey('options') && processed['options'] is String) {
-            final str = processed['options'] as String;
-            processed['options'] = str.isNotEmpty ? str.split('|').map((e) => e.trim()).toList() : <String>[];
+          processed['type'] = type;
+          if (d.containsKey('correctIndex')) {
+            final idx = int.tryParse(d['correctIndex'].toString()) ?? 0;
+            processed['correctIndex'] = idx;
+            // Persist isTrue boolean for trueFalse so fromFirestore can read it
+            if (type == 'trueFalse') {
+              processed['isTrue'] = idx == 0; // 0 = Verdadeiro, 1 = Falso
+            }
           }
+          processed['difficulty'] = d['difficulty'] ?? 'medium';
+          processed['statement'] = d['statement'] ?? '';
+          processed['explanation'] = d['explanation'] ?? '';
+
           lessonRef.collection(FS.questions).doc(qDoc.id).update({
             ...processed,
             FS.updatedAt: FieldValue.serverTimestamp(),
@@ -454,9 +614,18 @@ class _QuestionsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: lessonRef.collection(FS.questions).orderBy('order').snapshots(),
+      stream: lessonRef.collection(FS.questions).snapshots(),
       builder: (ctx, snap) {
-        final qs = snap.data?.docs ?? [];
+        if (snap.hasError) return Padding(padding: const EdgeInsets.all(8.0), child: Text('Erro: ${snap.error}', style: const TextStyle(color: Colors.red)));
+        final rawQs = snap.data?.docs ?? [];
+        final qs = [...rawQs]
+          ..sort((a, b) {
+            final aData = a.data() as Map<String, dynamic>;
+            final bData = b.data() as Map<String, dynamic>;
+            final aOrder = (aData['order'] is num) ? (aData['order'] as num).toInt() : 9999;
+            final bOrder = (bData['order'] is num) ? (bData['order'] as num).toInt() : 9999;
+            return aOrder.compareTo(bOrder);
+          });
         return Padding(
           padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
           child: Column(
@@ -571,13 +740,18 @@ class _AddLessonButton extends StatelessWidget {
         context: context,
         builder: (_) => AdminEntityForm(
           title: 'Nova Lição',
-          fields: _lessonFields,
+          fields: lessonFields,
           initialValues: const {},
           onSave: (data) async {
-            trailRef.collection(FS.lessons).add({
-              ...data,
-              'order': nextOrder,
+            // Converte 'order' para int se vier como string do formulário
+            final orderVal = int.tryParse(data['order']?.toString() ?? '') ?? nextOrder;
+            final payload = Map<String, dynamic>.from(data);
+            payload.remove('order'); // remove a string, substitui por int
+            await trailRef.collection(FS.lessons).add({
+              ...payload,
+              'order': orderVal,
               FS.createdAt: FieldValue.serverTimestamp(),
+              FS.updatedAt: FieldValue.serverTimestamp(),
             }).catchError((e) => debugPrint('Erro add lesson: $e'));
             return 'ok';
           },

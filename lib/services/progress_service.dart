@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../core/constants/fs.dart';
 import '../models/progress_model.dart';
-import '../models/user_model.dart';
 import '../services/achievement_service.dart';
 import '../services/analytics_service.dart';
 import '../services/audit_service.dart';
@@ -16,12 +15,7 @@ class ProgressService {
 
   final FirebaseFirestore _fs = FirebaseFirestore.instance;
 
-  String _calcTension(int xp) {
-    if (xp < 5000) return 'BT';
-    if (xp < 15000) return 'MT';
-    if (xp < 30000) return 'AT';
-    return 'EAT';
-  }
+
 
   Future<ProgressModel?> getProgress(String uid, String moduleId) async {
     final snap = await _fs.collection(FS.users).doc(uid)
@@ -44,6 +38,7 @@ class ProgressService {
     int xpEarned,
     int spEarned, {
     String moduleName = '',
+    String? trailId,
   }) async {
     // Se offline, delega ao OfflineSyncService e retorna
     if (!OfflineSyncService().isOnline) {
@@ -62,7 +57,6 @@ class ProgressService {
     final userDoc = await userRef.get();
     
     if (!userDoc.exists) return;
-    final userData = UserModel.fromFirestore(userDoc);
     
     final progSnap = await userRef.collection(FS.progress)
         .where(FS.moduleId, isEqualTo: modId).limit(1).get();
@@ -88,19 +82,24 @@ class ProgressService {
       });
     }
 
-    // Calcula o progresso real com base no número de lições do módulo no registry.
-    // Busca as lições concluídas atuais + a nova lição sendo marcada.
+    // Calcula as lições já concluídas + a nova
     List<String> alreadyCompleted = [];
+    int knownTotal = 0;
     if (progSnap.docs.isNotEmpty) {
       final existingData = progSnap.docs.first.data();
       alreadyCompleted = List<String>.from(existingData[FS.completedLessons] ?? []);
+      knownTotal = (existingData['totalLessons'] as int?) ?? 0;
     }
-    // Garante que a lição atual está incluída no conjunto
     final completedSet = {...alreadyCompleted, lessonId};
-    final totalLessons = getLessonsForModule(modId).length;
-    final double updatedProgress = totalLessons > 0
-        ? (completedSet.length / totalLessons).clamp(0.0, 1.0)
-        : 1.0; // Se o módulo não está no registry, assume completo
+
+    // Calcula total de lições sem queries extras ao Firestore (evita timeout)
+    // Usa o registry local legado, ou o total já armazenado no documento de progresso
+    int totalLessons = getLessonsForModule(modId).length;
+    if (totalLessons == 0) totalLessons = knownTotal;
+    // Se ainda desconhecido, usa o maior valor entre as lições concluídas + 1
+    if (totalLessons == 0) totalLessons = completedSet.length;
+
+    final double updatedProgress = (completedSet.length / totalLessons).clamp(0.0, 1.0);
     final bool moduleCompleted = updatedProgress >= 1.0;
 
     batch.update(pRef, {
@@ -112,69 +111,50 @@ class ProgressService {
       if (moduleCompleted) FS.completedAt: FieldValue.serverTimestamp(),
     });
 
-    final newXp = userData.xp + xpEarned;
-
-    if (xpEarned > 0 || spEarned > 0) {
-      batch.update(userRef, {
-        FS.xp: FieldValue.increment(xpEarned),
-        FS.weeklyXp: FieldValue.increment(xpEarned),
-        FS.monthlyXp: FieldValue.increment(xpEarned),
-        FS.sparkPoints: FieldValue.increment(spEarned),
-        FS.tensionLevel: _calcTension(newXp),
-        FS.totalLessonsCompleted: FieldValue.increment(1),
-      });
-    } else {
-      batch.update(userRef, {
-        FS.totalLessonsCompleted: FieldValue.increment(1),
-      });
-    }
-
-    if (userData.clanId != null && userData.clanId!.isNotEmpty) {
-       final clanRef = _fs.collection(FS.clans).doc(userData.clanId);
-       batch.update(clanRef, {
-         FS.totalXp: FieldValue.increment(xpEarned),
-         FS.weeklyXp: FieldValue.increment(xpEarned),
-       });
-       
-       final memberRef = clanRef.collection(FS.members).doc(uid);
-       batch.update(memberRef, {
-         'xpContribution': FieldValue.increment(xpEarned),
-         'weeklyContribution': FieldValue.increment(xpEarned),
-       });
-    }
+    batch.update(userRef, {
+      FS.totalLessonsCompleted: FieldValue.increment(1),
+    });
 
     await batch.commit();
 
-    // Audit log
-    await AuditService().logForUser(
-      uid: uid,
-      action: AuditAction.lessonCompleted,
-      amount: xpEarned,
-      source: 'lesson',
-      meta: {
-        'moduleId': modId,
-        'categoryId': catId,
-        'lessonId': lessonId,
-        'spEarned': spEarned,
-        'moduleCompleted': moduleCompleted,
-      },
-    );
+    // Audit log (sem await para não bloquear UI)
+    Future.microtask(() async {
+      await AuditService().logForUser(
+        uid: uid,
+        action: AuditAction.lessonCompleted,
+        amount: xpEarned,
+        source: 'lesson',
+        meta: {
+          'moduleId': modId,
+          'categoryId': catId,
+          'lessonId': lessonId,
+          'spEarned': spEarned,
+          'moduleCompleted': moduleCompleted,
+        },
+      );
+    });
 
-    // Analytics — lesson_completed (evento principal GA4)
-    await AnalyticsService().logLessonCompleted(
-      moduleId: modId,
-      lessonId: lessonId,
-      categoryId: catId,
-      xpEarned: xpEarned,
-      spEarned: spEarned,
-    );
+    // Analytics — lesson_completed (sem await)
+    Future.microtask(() async {
+      await AnalyticsService().logLessonCompleted(
+        moduleId: modId,
+        lessonId: lessonId,
+        categoryId: catId,
+        xpEarned: xpEarned,
+        spEarned: spEarned,
+      );
+    });
 
-    // Achievements baseados em quantidade de lições
-    final totalLessonsCompletedSoFar = completedSet.length;
-    await AchievementService().checkLessonAchievements(uid, totalLessonsCompletedSoFar);
+    // Achievements baseados em quantidade de lições (sem await)
+    Future.microtask(() async {
+      final totalLessonsCompletedSoFar = completedSet.length;
+      await AchievementService().checkLessonAchievements(uid, totalLessonsCompletedSoFar);
+    });
 
-    // Missão diária — 3 lições = daily_warrior + 50 SP
-    await GamificationService().onLessonCompleted(uid);
+    // Missão diária — 3 lições = daily_warrior + 50 SP (sem await)
+    Future.microtask(() async {
+      await GamificationService().onLessonCompleted(uid);
+    });
   }
 
   Future<bool> isModuleUnlocked(String uid, String requiredModuleId) async {

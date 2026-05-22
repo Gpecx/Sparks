@@ -3,80 +3,141 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // ─── Funções auxiliares ───────────────────────────────────────
+
     function isAuthenticated() {
       return request.auth != null && request.auth.uid != null;
     }
 
     function isAdmin() {
-      return isAuthenticated() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+      return isAuthenticated()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isSelf(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
     }
 
     function isClanMember(clanId) {
-      return isAuthenticated() && exists(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid));
+      return isAuthenticated()
+        && exists(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid));
     }
 
     function isClanChief(clanId) {
-      return isAuthenticated() && get(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid)).data.role == 'chefe';
+      return isAuthenticated()
+        && get(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid)).data.role == 'chefe';
     }
+
+    // Campos controlados exclusivamente pelo servidor (Cloud Functions / Admin SDK).
+    function touchesSensitiveFields() {
+      return request.resource.data.diff(resource.data)
+        .affectedKeys()
+        .hasAny([
+          'xp',
+          'sparkPoints',
+          'level',
+          'tensionLevel',
+          'unlockedBadgeIds',
+          'eloRating',
+          'wins',
+          'losses',
+          'totalDuels',
+          'weeklyXp',
+          'monthlyXp'
+        ]);
+    }
+
+    // ─── USERS ───────────────────────────────────────────────────
 
     match /users/{uid} {
       allow read: if isAuthenticated();
-      // Validação básica para impedir corrupção de valores numéricos críticos
-      allow write: if request.auth.uid == uid
-        && (!request.resource.data.keys().hasAny(['xp']) || request.resource.data.xp is number)
-        && (!request.resource.data.keys().hasAny(['sparkPoints']) || request.resource.data.sparkPoints is number)
-        && (!request.resource.data.keys().hasAny(['level']) || request.resource.data.level is number)
-        && (!request.resource.data.keys().hasAny(['role']) || request.resource.data.role is string);
+      allow create: if isSelf(uid)
+        && request.resource.data.keys().hasAll(['uid', 'email', 'role'])
+        && request.resource.data.role is string
+        && request.resource.data.xp is number
+        && request.resource.data.sparkPoints is number;
+      allow update: if isSelf(uid)
+        && !touchesSensitiveFields()
+        && (!request.resource.data.keys().hasAny(['role'])
+           || request.resource.data.role == resource.data.role);
+      allow write: if isAdmin();
 
       match /progress/{modId} {
-        allow read: if request.auth.uid == uid;
-        // Validação de segurança em progresso
-        allow write: if request.auth.uid == uid
-          && (!request.resource.data.keys().hasAny(['progressPercent']) || request.resource.data.progressPercent is number)
-          && (!request.resource.data.keys().hasAny(['bestScore']) || request.resource.data.bestScore is number);
+        allow read: if isSelf(uid);
+        allow write: if isSelf(uid)
+          && (!request.resource.data.keys().hasAny(['progressPercent'])
+             || request.resource.data.progressPercent is number)
+          && (!request.resource.data.keys().hasAny(['bestScore'])
+             || request.resource.data.bestScore is number);
       }
 
       match /covenants/{covId} {
-        allow read: if request.auth.uid == uid;
-        allow write: if request.auth.uid == uid
-          && (!request.resource.data.keys().hasAny(['currentProgress']) || request.resource.data.currentProgress is number);
+        allow read: if isSelf(uid);
+        allow write: if isSelf(uid)
+          && (!request.resource.data.keys().hasAny(['currentProgress'])
+             || request.resource.data.currentProgress is number);
       }
 
       match /quiz_history/{id} {
-        allow read, write: if request.auth.uid == uid;
+        allow read, write: if isSelf(uid);
       }
 
-      // Histórico de transações financeiras do usuário (compras, ganhos)
       match /transactions/{txId} {
-        allow read: if request.auth.uid == uid;
-        // Escrita apenas via batch no servidor (checkout_screen usa WriteBatch)
-        allow create: if request.auth.uid == uid
+        allow read: if isSelf(uid);
+        allow create: if isSelf(uid)
           && request.resource.data.keys().hasAll(['type', 'amount', 'createdAt'])
           && request.resource.data.amount is int
           && request.resource.data.amount > 0;
         allow update, delete: if false;
       }
+
+      match /audit_log/{logId} {
+        allow read: if isSelf(uid);
+        allow write: if isSelf(uid) || isAdmin();
+      }
+
+      match /notifications/{notifId} {
+        allow read: if isSelf(uid);
+        allow write: if isSelf(uid) || isAdmin();
+      }
+
+      match /missions/{missionId} {
+        allow read: if isSelf(uid);
+        allow write: if isSelf(uid);
+      }
     }
+
+    // ─── CATEGORIES / MODULES / TRAILS / LESSONS / QUESTIONS ─────
+    // IMPORTANTE: Hierarquia correta é categories → modules → trails → lessons → questions
+    // A subcoleção 'trails' estava AUSENTE nas regras anteriores, causando falha silenciosa
+    // nas escritas e leituras de trilhas, lições e questões.
 
     match /categories/{catId} {
       allow read: if isAuthenticated();
       allow write: if isAdmin();
-      
+
       match /modules/{modId} {
         allow read: if isAuthenticated();
         allow write: if isAdmin();
-        
-        match /lessons/{lessonId} {
+
+        match /trails/{trailId} {
           allow read: if isAuthenticated();
           allow write: if isAdmin();
-          
-          match /questions/{questionId} {
+
+          match /lessons/{lessonId} {
             allow read: if isAuthenticated();
             allow write: if isAdmin();
+
+            match /questions/{questionId} {
+              allow read: if isAuthenticated();
+              allow write: if isAdmin();
+            }
           }
         }
       }
     }
+
+    // ─── CLANS ────────────────────────────────────────────────────
 
     match /clans/{clanId} {
       allow read: if isAuthenticated();
@@ -86,32 +147,48 @@ service cloud.firestore {
 
       match /members/{memberUid} {
         allow read: if isAuthenticated();
-        allow write: if request.auth.uid == memberUid || isClanChief(clanId) || isAdmin();
+        allow write: if request.auth.uid == memberUid
+          || isClanChief(clanId)
+          || isAdmin();
       }
 
       match /messages/{id} {
         allow create: if isClanMember(clanId);
         allow read: if isClanMember(clanId);
         allow update: if false;
-        allow delete: if resource.data.uid == request.auth.uid || isClanChief(clanId) || isAdmin();
+        allow delete: if resource.data.uid == request.auth.uid
+          || isClanChief(clanId)
+          || isAdmin();
       }
     }
+
+    // ─── RANKINGS ─────────────────────────────────────────────────
 
     match /rankings/{id} {
       allow read: if isAuthenticated();
       allow write: if false;
     }
 
+    // ─── MATCHES (DUELOS) ─────────────────────────────────────────
+
     match /matches/{matchId} {
-      allow read: if isAuthenticated() && (resource.data.player1Uid == request.auth.uid || resource.data.player2Uid == request.auth.uid);
-      allow create: if isAuthenticated() && (request.resource.data.player1Uid == request.auth.uid || request.resource.data.player2Uid == request.auth.uid);
-      allow update: if isAuthenticated() && (resource.data.player1Uid == request.auth.uid || resource.data.player2Uid == request.auth.uid);
+      allow read: if isAuthenticated()
+        && (resource.data.player1Uid == request.auth.uid
+           || resource.data.player2Uid == request.auth.uid);
+      allow create: if isAuthenticated()
+        && (request.resource.data.player1Uid == request.auth.uid
+           || request.resource.data.player2Uid == request.auth.uid);
+      allow update: if isAuthenticated()
+        && (resource.data.player1Uid == request.auth.uid
+           || resource.data.player2Uid == request.auth.uid);
       allow delete: if false;
     }
 
     match /matchmaking_queue/{uid} {
       allow read, write: if request.auth.uid == uid;
     }
+
+    // ─── LOJA / BADGES / EVENTOS ──────────────────────────────────
 
     match /store_items/{id} {
       allow read: if isAuthenticated();
@@ -128,25 +205,31 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
-    // Metadados de popularidade de normas (clickCount, etc.)
+    // ─── STANDARDS METADATA ───────────────────────────────────────
+
     match /standards_metadata/{stdId} {
       allow read: if isAuthenticated();
-      // incrementClick usa update — permitido para usuários autenticados
       allow update: if isAuthenticated()
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['clickCount']);
+        && request.resource.data.diff(resource.data)
+             .affectedKeys().hasOnly(['clickCount']);
       allow create, delete: if isAdmin();
     }
 
-    // Coleção raiz legada — mantida em modo somente-leitura
-    // Novas transações vão para users/{uid}/transactions
+    // ─── TRANSACTIONS (legado raiz — somente leitura) ─────────────
+
     match /transactions/{id} {
-      allow read: if isAuthenticated() && resource.data.uid == request.auth.uid;
+      allow read: if isAuthenticated()
+        && resource.data.uid == request.auth.uid;
       allow write: if false;
     }
 
+    // ─── VOUCHERS ─────────────────────────────────────────────────
+
     match /voucher_redemptions/{id} {
-      allow read: if isAuthenticated() && resource.data.uid == request.auth.uid;
-      allow create: if isAuthenticated() && request.resource.data.uid == request.auth.uid;
+      allow read: if isAuthenticated()
+        && resource.data.uid == request.auth.uid;
+      allow create: if isAuthenticated()
+        && request.resource.data.uid == request.auth.uid;
       allow update, delete: if false;
     }
   }

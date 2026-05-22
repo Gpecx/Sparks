@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'admin_entity_form.dart';
+import 'admin_content_panel.dart';
 
 /// Widget para editar lições com suporte a múltiplas questões
 class AdminLessonEditor extends StatefulWidget {
@@ -27,8 +28,14 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
   bool _expandedQuestions = false;
 
   Future<void> _addQuestion() async {
-    final questionsSnap = await widget.lessonRef.collection(FS.questions).orderBy('order', descending: true).limit(1).get();
-    final nextOrder = questionsSnap.docs.isEmpty ? 0 : (questionsSnap.docs.first['order'] as int? ?? 0) + 1;
+    final questionsSnap = await widget.lessonRef
+        .collection(FS.questions)
+        .orderBy('order', descending: true)
+        .limit(1)
+        .get();
+    final nextOrder = questionsSnap.docs.isEmpty
+        ? 0
+        : (questionsSnap.docs.first['order'] as int? ?? 0) + 1;
 
     if (!mounted) return;
 
@@ -36,23 +43,30 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
       context: context,
       builder: (_) => AdminEntityForm(
         title: 'Nova Questão',
-        fields: const [
-          FieldConfig(key: 'statement', label: 'Enunciado', maxLines: 3),
-          FieldConfig(key: 'type', label: 'Tipo', hint: 'multipleChoice | trueFalse | fillInTheBlanks'),
-          FieldConfig(key: 'options', label: 'Opções (A|B|C|D)', hint: 'A|B|C|D', required: false),
-          FieldConfig(key: 'correctIndex', label: 'Índice correto (0-based)', hint: '0', required: false),
-          FieldConfig(key: 'difficulty', label: 'Dificuldade (easy|medium|hard)', required: false),
-          FieldConfig(key: 'explanation', label: 'Explicação', maxLines: 3),
-        ],
+        fields: questionFields,
+        initialValues: const {},
         onSave: (data) async {
-          final processed = <String, dynamic>{...data};
-          if (processed.containsKey('correctIndex')) {
-            processed['correctIndex'] = int.tryParse(processed['correctIndex'].toString()) ?? 0;
+          final processed = <String, dynamic>{};
+          final type = data['type'] as String? ?? '';
+          if (type == 'multipleChoice') {
+            processed['options'] = [
+              data['_optA'] ?? 'Opção A',
+              data['_optB'] ?? 'Opção B',
+              data['_optC'] ?? 'Opção C',
+              data['_optD'] ?? 'Opção D',
+            ];
+          } else if (type == 'trueFalse') {
+            processed['options'] = ['Verdadeiro', 'Falso'];
           }
-          if (processed.containsKey('options') && processed['options'] is String) {
-            final str = processed['options'] as String;
-            processed['options'] = str.isNotEmpty ? str.split('|').map((e) => e.trim()).toList() : <String>[];
+          processed['type'] = type;
+          if (data.containsKey('correctIndex')) {
+            processed['correctIndex'] =
+                int.tryParse(data['correctIndex'].toString()) ?? 0;
           }
+          processed['difficulty'] = data['difficulty'] ?? 'medium';
+          processed['statement'] = data['statement'] ?? '';
+          processed['explanation'] = data['explanation'] ?? '';
+
           await widget.lessonRef.collection(FS.questions).add({
             ...processed,
             'order': nextOrder,
@@ -67,7 +81,6 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       decoration: BoxDecoration(
         color: AppColors.card,
@@ -82,8 +95,12 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
             child: Row(
               children: [
                 Icon(
-                  widget.lessonType == 'eval' ? Icons.assignment_outlined : Icons.menu_book_outlined,
-                  color: widget.lessonType == 'eval' ? AppColors.accentGreen : AppColors.blue,
+                  widget.lessonType == 'eval'
+                      ? Icons.assignment_outlined
+                      : Icons.menu_book_outlined,
+                  color: widget.lessonType == 'eval'
+                      ? AppColors.accentGreen
+                      : AppColors.blue,
                   size: 20,
                 ),
                 const SizedBox(width: 12),
@@ -91,13 +108,27 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.lessonTitle, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-                      Text(widget.lessonType == 'eval' ? 'Avaliação' : 'Lição', style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                      Text(
+                        widget.lessonTitle,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        widget.lessonType == 'eval' ? 'Avaliação' : 'Lição',
+                        style: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 12,
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 InkWell(
-                  onTap: () => setState(() => _expandedQuestions = !_expandedQuestions),
+                  onTap: () =>
+                      setState(() => _expandedQuestions = !_expandedQuestions),
                   child: Icon(
                     _expandedQuestions ? Icons.expand_less : Icons.expand_more,
                     color: AppColors.textSecondary,
@@ -114,16 +145,32 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Questões', style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.bold)),
+                  Text(
+                    'Questões',
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(height: 12),
                   StreamBuilder<QuerySnapshot>(
-                    stream: widget.lessonRef.collection(FS.questions).orderBy('order').snapshots(),
+                    stream: widget.lessonRef
+                        .collection(FS.questions)
+                        .orderBy('order')
+                        .snapshots(),
                     builder: (ctx, snap) {
                       final questions = snap.data?.docs ?? [];
                       if (questions.isEmpty) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: Text('Nenhuma questão ainda.', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                          child: Text(
+                            'Nenhuma questão ainda.',
+                            style: TextStyle(
+                              color: AppColors.textMuted,
+                              fontSize: 12,
+                            ),
+                          ),
                         );
                       }
                       return Column(
@@ -137,7 +184,11 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
                               decoration: BoxDecoration(
                                 color: AppColors.background,
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.2)),
+                                border: Border.all(
+                                  color: AppColors.cardBorder.withValues(
+                                    alpha: 0.2,
+                                  ),
+                                ),
                               ),
                               child: Row(
                                 children: [
@@ -145,32 +196,79 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
                                     width: 24,
                                     height: 24,
                                     decoration: BoxDecoration(
-                                      color: AppColors.primary.withValues(alpha: 0.2),
+                                      color: AppColors.primary.withValues(
+                                        alpha: 0.2,
+                                      ),
                                       shape: BoxShape.circle,
                                     ),
                                     child: Center(
-                                      child: Text('${qData['order'] ?? 0}', style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold)),
+                                      child: Text(
+                                        '${qData['order'] ?? 0}',
+                                        style: const TextStyle(
+                                          color: AppColors.primary,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(width: 12),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(stmt.length > 50 ? '${stmt.substring(0, 50)}…' : stmt, style: const TextStyle(color: Colors.white, fontSize: 12), maxLines: 2, overflow: TextOverflow.ellipsis),
+                                        Text(
+                                          stmt.length > 50
+                                              ? '${stmt.substring(0, 50)}…'
+                                              : stmt,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                         if (qData['type'] != null)
-                                          Text(qData['type'], style: TextStyle(color: AppColors.textMuted, fontSize: 10)),
+                                          Text(
+                                            qData['type'],
+                                            style: TextStyle(
+                                              color: AppColors.textMuted,
+                                              fontSize: 10,
+                                            ),
+                                          ),
                                       ],
                                     ),
                                   ),
                                   PopupMenuButton(
                                     itemBuilder: (_) => [
                                       PopupMenuItem(
-                                        child: const Row(children: [Icon(Icons.edit, size: 16), SizedBox(width: 8), Text('Editar')]),
+                                        child: const Row(
+                                          children: [
+                                            Icon(Icons.edit, size: 16),
+                                            SizedBox(width: 8),
+                                            Text('Editar'),
+                                          ],
+                                        ),
                                         onTap: () => _editQuestion(q),
                                       ),
                                       PopupMenuItem(
-                                        child: const Row(children: [Icon(Icons.delete, size: 16, color: AppColors.error), SizedBox(width: 8), Text('Deletar', style: TextStyle(color: AppColors.error))]),
+                                        child: const Row(
+                                          children: [
+                                            Icon(
+                                              Icons.delete,
+                                              size: 16,
+                                              color: AppColors.error,
+                                            ),
+                                            SizedBox(width: 8),
+                                            Text(
+                                              'Deletar',
+                                              style: TextStyle(
+                                                color: AppColors.error,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                         onTap: () => _deleteQuestion(q),
                                       ),
                                     ],
@@ -207,11 +305,17 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
 
   Future<void> _editQuestion(QueryDocumentSnapshot qDoc) async {
     final data = qDoc.data() as Map<String, dynamic>;
+    final opts = data['options'] as List? ?? [];
     final merged = <String, String>{
-      ...data.map((k, v) {
-        if (k == 'options' && v is List) return MapEntry(k, (v as List).join('|'));
-        return MapEntry(k, v?.toString() ?? '');
-      }),
+      'statement': data['statement']?.toString() ?? '',
+      'type': data['type']?.toString() ?? '',
+      '_optA': opts.isNotEmpty ? opts[0].toString() : '',
+      '_optB': opts.length > 1 ? opts[1].toString() : '',
+      '_optC': opts.length > 2 ? opts[2].toString() : '',
+      '_optD': opts.length > 3 ? opts[3].toString() : '',
+      'correctIndex': (data['correctIndex'] ?? 0).toString(),
+      'difficulty': data['difficulty']?.toString() ?? 'medium',
+      'explanation': data['explanation']?.toString() ?? '',
     };
 
     if (!mounted) return;
@@ -220,24 +324,30 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
       context: context,
       builder: (_) => AdminEntityForm(
         title: 'Editar Questão',
-        fields: const [
-          FieldConfig(key: 'statement', label: 'Enunciado', maxLines: 3),
-          FieldConfig(key: 'type', label: 'Tipo', hint: 'multipleChoice | trueFalse | fillInTheBlanks'),
-          FieldConfig(key: 'options', label: 'Opções (A|B|C|D)', hint: 'A|B|C|D', required: false),
-          FieldConfig(key: 'correctIndex', label: 'Índice correto (0-based)', hint: '0', required: false),
-          FieldConfig(key: 'difficulty', label: 'Dificuldade (easy|medium|hard)', required: false),
-          FieldConfig(key: 'explanation', label: 'Explicação', maxLines: 3),
-        ],
+        fields: questionFields,
         initialValues: merged,
         onSave: (d) async {
-          final processed = <String, dynamic>{...d};
-          if (processed.containsKey('correctIndex')) {
-            processed['correctIndex'] = int.tryParse(processed['correctIndex'].toString()) ?? 0;
+          final processed = <String, dynamic>{};
+          final type = d['type'] as String? ?? '';
+          if (type == 'multipleChoice') {
+            processed['options'] = [
+              d['_optA'] ?? 'Opção A',
+              d['_optB'] ?? 'Opção B',
+              d['_optC'] ?? 'Opção C',
+              d['_optD'] ?? 'Opção D',
+            ];
+          } else if (type == 'trueFalse') {
+            processed['options'] = ['Verdadeiro', 'Falso'];
           }
-          if (processed.containsKey('options') && processed['options'] is String) {
-            final str = processed['options'] as String;
-            processed['options'] = str.isNotEmpty ? str.split('|').map((e) => e.trim()).toList() : <String>[];
+          processed['type'] = type;
+          if (d.containsKey('correctIndex')) {
+            processed['correctIndex'] =
+                int.tryParse(d['correctIndex'].toString()) ?? 0;
           }
+          processed['difficulty'] = d['difficulty'] ?? 'medium';
+          processed['statement'] = d['statement'] ?? '';
+          processed['explanation'] = d['explanation'] ?? '';
+
           await widget.lessonRef.collection(FS.questions).doc(qDoc.id).update({
             ...processed,
             FS.updatedAt: FieldValue.serverTimestamp(),
@@ -259,19 +369,34 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: AppColors.card,
-        title: const Text('Deletar Questão', style: TextStyle(color: Colors.white)),
-        content: Text('Deletar "$stmt..."?', style: const TextStyle(color: AppColors.textSecondary)),
+        title: const Text(
+          'Deletar Questão',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: Text(
+          'Deletar "$stmt..."?',
+          style: const TextStyle(color: AppColors.textSecondary),
+        ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('CANCELAR'),
+          ),
           TextButton(
             onPressed: () async {
-              await widget.lessonRef.collection(FS.questions).doc(qDoc.id).delete();
+              await widget.lessonRef
+                  .collection(FS.questions)
+                  .doc(qDoc.id)
+                  .delete();
               if (mounted) {
                 Navigator.pop(context);
                 widget.onUpdate?.call();
               }
             },
-            child: const Text('DELETAR', style: TextStyle(color: AppColors.error)),
+            child: const Text(
+              'DELETAR',
+              style: TextStyle(color: AppColors.error),
+            ),
           ),
         ],
       ),

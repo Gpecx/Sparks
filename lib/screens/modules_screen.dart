@@ -3,49 +3,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
-import 'package:spark_app/models/curriculum_models.dart';
-import 'package:spark_app/models/progress_model.dart';
+import 'package:spark_app/models/spark_admin_models.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/learning_path_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/progress_provider.dart';
+import 'package:spark_app/providers/content_providers.dart';
 
 class ModulesScreen extends ConsumerWidget {
-  final LearningCategory? category;
+  final SPARKCategory? category;
+  // Cor enviada pela tela de Categorias (já que o SPARKCategory não armazena cor diretamente)
+  final Color themeColor;
 
-  const ModulesScreen({super.key, this.category});
+  const ModulesScreen({
+    super.key, 
+    this.category, 
+    this.themeColor = AppColors.primary,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTestMode = kDebugMode && ref.watch(devModeProvider);
-    final cat = category ?? mockCategories.first;
+    
+    // Fallback: se for nulo, apenas volta
+    if (category == null) {
+      return const Scaffold(body: Center(child: Text('Categoria não encontrada')));
+    }
+    final cat = category!;
 
     final userProgressAsync = ref.watch(userProgressProvider);
     final userProgress = userProgressAsync.value ?? [];
 
-    // Calcula de forma dinâmica os módulos usando o progresso realtime
-    bool previousCompleted = true;
-    final dynamicModules = cat.modules.map((mod) {
-      final progIndex = userProgress.indexWhere((p) => p.moduleId == mod.id);
-      final prog = progIndex >= 0 ? userProgress[progIndex] : null;
-      
-      final isLocked = !previousCompleted;
-      final actualProgress = prog?.progressPercent ?? 0.0;
-      
-      previousCompleted = (prog != null && (prog.isCompleted || prog.progressPercent >= 1.0));
-
-      return LearningModule(
-        id: mod.id,
-        title: mod.title,
-        subtitle: mod.subtitle,
-        icon: mod.icon,
-        color: mod.color,
-        progress: actualProgress,
-        isLocked: isLocked,
-        lessons: mod.lessons,
-      );
-    }).toList();
+    final modulesAsync = ref.watch(modulesStreamProvider(cat.id));
 
     return SparksBackground(
       child: PcbBackground(
@@ -71,11 +61,11 @@ class ModulesScreen extends ConsumerWidget {
                         height: 36,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [cat.color, cat.gradientEnd],
+                            colors: [themeColor, themeColor.withValues(alpha: 0.7)],
                           ),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Icon(cat.icon, color: Colors.white, size: 20),
+                        child: const Icon(Icons.category, color: Colors.white, size: 20),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -93,12 +83,16 @@ class ModulesScreen extends ConsumerWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 2),
-                            Text(
-                              '${dynamicModules.length} módulos disponíveis',
-                              style: TextStyle(
-                                color: AppColors.textMuted.withValues(alpha: 0.8),
-                                fontSize: 11,
+                            modulesAsync.when(
+                              data: (modules) => Text(
+                                '${modules.length} módulos disponíveis',
+                                style: TextStyle(
+                                  color: AppColors.textMuted.withValues(alpha: 0.8),
+                                  fontSize: 11,
+                                ),
                               ),
+                              loading: () => const SizedBox.shrink(),
+                              error: (_, __) => const SizedBox.shrink(),
                             ),
                           ],
                         ),
@@ -110,44 +104,80 @@ class ModulesScreen extends ConsumerWidget {
 
                 // ── Lista de Módulos ────────────────────────────
                 Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: dynamicModules.length,
-                    itemBuilder: (context, index) {
-                      final module = dynamicModules[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 14),
-                        child: _ModuleCard(
-                          module: module,
-                          categoryColor: cat.color,
-                          isTestMode: isTestMode,
-                          onTap: () {
-                            if (!isTestMode && module.isLocked) {
-                              HapticFeedback.heavyImpact();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Conclua os módulos anteriores para desbloquear!'),
-                                  backgroundColor: AppColors.error,
-                                ),
-                              );
-                              return;
-                            }
-                            HapticFeedback.lightImpact();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => LearningPathScreen(
-                                  moduleTitle: module.title,
-                                  moduleId: module.id,   // <-- ID para buscar lições reais
-                                  lessons: module.lessons,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                  child: modulesAsync.when(
+                    data: (modules) {
+                      if (modules.isEmpty) {
+                        return const Center(
+                          child: Text(
+                            'Nenhum módulo encontrado nesta categoria.',
+                            style: TextStyle(color: Colors.white54),
+                          ),
+                        );
+                      }
+
+                      bool previousCompleted = true;
+
+                      return ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: modules.length,
+                        itemBuilder: (context, index) {
+                          final module = modules[index];
+                          
+                          // Calcular progresso
+                          final progIndex = userProgress.indexWhere((p) => p.moduleId == module.id);
+                          final prog = progIndex >= 0 ? userProgress[progIndex] : null;
+                          
+                          final isLocked = !previousCompleted;
+                          final actualProgress = prog?.progressPercent ?? 0.0;
+                          
+                          previousCompleted = (prog != null && (prog.isCompleted || prog.progressPercent >= 1.0));
+
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 14),
+                            child: _ModuleCard(
+                              module: module,
+                              progress: actualProgress,
+                              isLocked: isLocked,
+                              categoryColor: themeColor,
+                              isTestMode: isTestMode,
+                              onTap: () {
+                                if (!isTestMode && isLocked) {
+                                  HapticFeedback.heavyImpact();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Conclua os módulos anteriores para desbloquear!'),
+                                      backgroundColor: AppColors.error,
+                                    ),
+                                  );
+                                  return;
+                                }
+                                HapticFeedback.lightImpact();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => LearningPathScreen(
+                                      category: cat,
+                                      module: module,
+                                      themeColor: themeColor,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
                       );
                     },
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(color: AppColors.primary),
+                    ),
+                    error: (err, stack) => Center(
+                      child: Text(
+                        'Erro ao carregar módulos',
+                        style: TextStyle(color: AppColors.error),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -164,13 +194,17 @@ class ModulesScreen extends ConsumerWidget {
 // ─────────────────────────────────────────────────────────────────
 
 class _ModuleCard extends StatefulWidget {
-  final LearningModule module;
+  final SPARKModule module;
+  final double progress;
+  final bool isLocked;
   final Color categoryColor;
   final VoidCallback onTap;
   final bool isTestMode;
 
   const _ModuleCard({
     required this.module,
+    required this.progress,
+    required this.isLocked,
     required this.categoryColor,
     required this.onTap,
     this.isTestMode = false,
@@ -206,8 +240,8 @@ class _ModuleCardState extends State<_ModuleCard>
   @override
   Widget build(BuildContext context) {
     final mod = widget.module;
-    final locked = !widget.isTestMode && mod.isLocked;
-    final color = locked ? AppColors.textMuted : mod.color;
+    final locked = !widget.isTestMode && widget.isLocked;
+    final color = locked ? AppColors.textMuted : widget.categoryColor;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -261,7 +295,7 @@ class _ModuleCardState extends State<_ModuleCard>
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
-                        locked ? Icons.lock : mod.icon,
+                        locked ? Icons.lock : Icons.folder,
                         color: locked ? AppColors.textMuted : color,
                         size: 24,
                       ),
@@ -286,6 +320,8 @@ class _ModuleCardState extends State<_ModuleCard>
                               color: AppColors.textMuted.withValues(alpha: locked ? 0.5 : 1.0),
                               fontSize: 12,
                             ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),
@@ -299,7 +335,7 @@ class _ModuleCardState extends State<_ModuleCard>
                   Row(
                     children: [
                       Text(
-                        '${(mod.progress * 100).toInt()}% Concluído',
+                        '${(widget.progress * 100).toInt()}% Concluído',
                         style: const TextStyle(
                           color: Colors.white70,
                           fontSize: 12,
@@ -307,20 +343,13 @@ class _ModuleCardState extends State<_ModuleCard>
                         ),
                       ),
                       const Spacer(),
-                      Text(
-                        '${mod.lessons.length} lições',
-                        style: TextStyle(
-                          color: AppColors.textMuted.withValues(alpha: 0.7),
-                          fontSize: 11,
-                        ),
-                      ),
                     ],
                   ),
                   const SizedBox(height: 8),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
                     child: LinearProgressIndicator(
-                      value: mod.progress,
+                      value: widget.progress,
                       backgroundColor: AppColors.inputBackground,
                       valueColor: AlwaysStoppedAnimation<Color>(color),
                       minHeight: 6,
@@ -330,7 +359,7 @@ class _ModuleCardState extends State<_ModuleCard>
                 if (locked) ...[
                   const SizedBox(height: 12),
                   Text(
-                    '🔒 Bloqueado · ${mod.lessons.length} lições',
+                    '🔒 Bloqueado',
                     style: TextStyle(
                       color: AppColors.textMuted.withValues(alpha: 0.5),
                       fontSize: 11,

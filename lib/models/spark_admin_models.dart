@@ -249,9 +249,10 @@ class SPARKLesson {
 
   factory SPARKLesson.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
+    final trailIdFromPath = doc.reference.parent.parent?.id ?? '';
     return SPARKLesson(
       id: doc.id,
-      trailId: data['trailId'] as String? ?? '',
+      trailId: data['trailId'] as String? ?? trailIdFromPath,
       title: data['title'] as String? ?? '',
       subtitle: data['subtitle'] as String? ?? '',
       content: data['content'] as String? ?? '',

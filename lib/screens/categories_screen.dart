@@ -3,62 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
-import 'package:spark_app/models/curriculum_models.dart';
-import 'package:spark_app/models/progress_model.dart';
+import 'package:spark_app/models/spark_admin_models.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/modules_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
-import 'package:spark_app/providers/progress_provider.dart';
+import 'package:spark_app/providers/content_providers.dart';
+
+final List<Map<String, dynamic>> _themeConfig = [
+  {'color': const Color(0xFFFFC107), 'gradientEnd': const Color(0xFFFF6F00), 'icon': Icons.bolt},
+  {'color': const Color(0xFF78909C), 'gradientEnd': const Color(0xFF37474F), 'icon': Icons.memory},
+  {'color': const Color(0xFF78909C), 'gradientEnd': const Color(0xFF37474F), 'icon': Icons.gavel},
+  {'color': const Color(0xFF42A5F5), 'gradientEnd': const Color(0xFF1565C0), 'icon': Icons.lightbulb},
+];
 
 class CategoriesScreen extends ConsumerWidget {
   const CategoriesScreen({super.key});
 
-  List<LearningCategory> _getDynamicCategories(List<LearningCategory> baseCategories, List<ProgressModel> userProgress) {
-    return baseCategories.map((cat) {
-      if (cat.isLocked) return cat;
-
-      bool previousCompleted = true; // O primeiro módulo é sempre desbloqueado
-      final newModules = cat.modules.map((mod) {
-        final progIndex = userProgress.indexWhere((p) => p.moduleId == mod.id);
-        final prog = progIndex >= 0 ? userProgress[progIndex] : null;
-        
-        final isLocked = !previousCompleted;
-        final actualProgress = prog?.progressPercent ?? 0.0;
-        
-        // Para desbloquear o próximo, este precisa estar concluído
-        previousCompleted = (prog != null && (prog.isCompleted || prog.progressPercent >= 1.0));
-
-        return LearningModule(
-          id: mod.id,
-          title: mod.title,
-          subtitle: mod.subtitle,
-          icon: mod.icon,
-          color: mod.color,
-          progress: actualProgress,
-          isLocked: isLocked,
-          lessons: mod.lessons,
-        );
-      }).toList();
-
-      return LearningCategory(
-        id: cat.id,
-        title: cat.title,
-        subtitle: cat.subtitle,
-        icon: cat.icon,
-        color: cat.color,
-        gradientEnd: cat.gradientEnd,
-        isLocked: cat.isLocked,
-        modules: newModules,
-      );
-    }).toList();
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTestMode = kDebugMode && ref.watch(devModeProvider);
-    final userProgressAsync = ref.watch(userProgressProvider);
-    final dynamicCategories = _getDynamicCategories(mockCategories, userProgressAsync.value ?? []);
+    final categoriesAsync = ref.watch(categoriesStreamProvider);
 
     return SparksBackground(
       child: PcbBackground(
@@ -98,49 +63,84 @@ class CategoriesScreen extends ConsumerWidget {
 
                 // ── Lista de Categorias ─────────────────────────
                 Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: dynamicCategories.length,
-                    itemBuilder: (context, index) {
-                      final cat = dynamicCategories[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 14),
-                        child: _CategoryCard(
-                          category: cat,
-                          isTestMode: isTestMode,
-                          onTap: (!isTestMode && cat.isLocked)
-                              ? () {
-                                  HapticFeedback.heavyImpact();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Row(
-                                        children: const [
-                                          Icon(Icons.lock, color: Colors.white, size: 16),
-                                          SizedBox(width: 8),
-                                          Text('Esta categoria estará disponível em breve!'),
-                                        ],
-                                      ),
-                                      backgroundColor: const Color(0xFF37474F),
-                                      behavior: SnackBarBehavior.floating,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                  );
-                                }
-                              : () {
-                                  HapticFeedback.lightImpact();
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => ModulesScreen(category: cat),
-                                    ),
-                                  );
-                                },
-                        ),
+                  child: categoriesAsync.when(
+                    data: (categories) {
+                      if (categories.isEmpty) {
+                        return const Center(
+                          child: Text(
+                            'Nenhuma categoria disponível',
+                            style: TextStyle(color: Colors.white54),
+                          ),
+                        );
+                      }
+                      return ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: categories.length,
+                        itemBuilder: (context, index) {
+                          final cat = categories[index];
+                          // Obter o tema de forma cíclica caso haja mais categorias que temas definidos
+                          final theme = _themeConfig[index % _themeConfig.length];
+                          
+                          // Lógica simplificada de bloqueio - atualmente sem um "isLocked" explícito no model SPARKCategory
+                          // Vamos assumir que categorias subsequentes são livres por padrão
+                          final isLocked = false; 
+
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 14),
+                            child: _CategoryCard(
+                              category: cat,
+                              isTestMode: isTestMode,
+                              isLocked: isLocked,
+                              themeColor: theme['color'] as Color,
+                              themeGradientEnd: theme['gradientEnd'] as Color,
+                              themeIcon: theme['icon'] as IconData,
+                              onTap: (!isTestMode && isLocked)
+                                  ? () {
+                                      HapticFeedback.heavyImpact();
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Row(
+                                            children: const [
+                                              Icon(Icons.lock, color: Colors.white, size: 16),
+                                              SizedBox(width: 8),
+                                              Text('Esta categoria estará disponível em breve!'),
+                                            ],
+                                          ),
+                                          backgroundColor: const Color(0xFF37474F),
+                                          behavior: SnackBarBehavior.floating,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  : () {
+                                      HapticFeedback.lightImpact();
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => ModulesScreen(
+                                            category: cat,
+                                            themeColor: theme['color'] as Color,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                            ),
+                          );
+                        },
                       );
                     },
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(color: AppColors.primary),
+                    ),
+                    error: (err, stack) => Center(
+                      child: Text(
+                        'Erro ao carregar categorias: $err',
+                        style: const TextStyle(color: AppColors.error),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -156,22 +156,30 @@ class CategoriesScreen extends ConsumerWidget {
 //  CARD DE CATEGORIA (com estado de bloqueio visual)
 // ─────────────────────────────────────────────────────────────────
 
-class _CategoryCard extends StatefulWidget {
-  final LearningCategory category;
+class _CategoryCard extends ConsumerStatefulWidget {
+  final SPARKCategory category;
   final VoidCallback onTap;
   final bool isTestMode;
+  final bool isLocked;
+  final Color themeColor;
+  final Color themeGradientEnd;
+  final IconData themeIcon;
 
   const _CategoryCard({
     required this.category,
     required this.onTap,
     this.isTestMode = false,
+    this.isLocked = false,
+    required this.themeColor,
+    required this.themeGradientEnd,
+    required this.themeIcon,
   });
 
   @override
-  State<_CategoryCard> createState() => _CategoryCardState();
+  ConsumerState<_CategoryCard> createState() => _CategoryCardState();
 }
 
-class _CategoryCardState extends State<_CategoryCard>
+class _CategoryCardState extends ConsumerState<_CategoryCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _scaleCtrl;
   late Animation<double> _scaleAnim;
@@ -197,11 +205,14 @@ class _CategoryCardState extends State<_CategoryCard>
   @override
   Widget build(BuildContext context) {
     final cat = widget.category;
-    final locked = !widget.isTestMode && cat.isLocked;
+    final locked = !widget.isTestMode && widget.isLocked;
 
     // Cores ficam apagadas quando bloqueada
-    final displayColor = locked ? const Color(0xFF78909C) : cat.color;
-    final displayGradEnd = locked ? const Color(0xFF37474F) : cat.gradientEnd;
+    final displayColor = locked ? const Color(0xFF78909C) : widget.themeColor;
+    final displayGradEnd = locked ? const Color(0xFF37474F) : widget.themeGradientEnd;
+
+    final modulesAsync = ref.watch(modulesStreamProvider(cat.id));
+    final moduleCount = modulesAsync.asData?.value.length ?? 0;
 
     return MouseRegion(
       cursor: locked ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
@@ -271,7 +282,7 @@ class _CategoryCardState extends State<_CategoryCard>
                               ],
                       ),
                       child: Icon(
-                        locked ? Icons.lock : cat.icon,
+                        locked ? Icons.lock : widget.themeIcon,
                         color: Colors.white,
                         size: 28,
                       ),
@@ -325,12 +336,7 @@ class _CategoryCardState extends State<_CategoryCard>
                             const SizedBox(height: 8),
                             Row(
                               children: [
-                                _chip('${cat.modules.length} módulos', displayColor),
-                                const SizedBox(width: 8),
-                                _chip(
-                                  '${cat.modules.where((m) => !m.isLocked).length} disponíveis',
-                                  AppColors.primary,
-                                ),
+                                _chip(modulesAsync.isLoading ? '...' : '$moduleCount módulos', displayColor),
                               ],
                             ),
                           ],
