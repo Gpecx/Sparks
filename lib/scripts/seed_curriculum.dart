@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import '../core/constants/fs.dart';
 import '../data/lessons_registry.dart';
@@ -47,7 +48,7 @@ Map<String, dynamic> _questionToMap(Question q, int order) {
 Future<void> seedLessonsAndQuestions({
   String catId = 'capacitacao_tecnica',
 }) async {
-  final fs = FirebaseFirestore.instance;
+  final fs = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   debugPrint('[Seed] ▶ Iniciando seed → categoria: $catId');
   debugPrint('[Seed] Módulos encontrados: ${lessonsRegistry.keys.join(', ')}');

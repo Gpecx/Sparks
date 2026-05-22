@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -40,7 +41,7 @@ class UserService extends ChangeNotifier {
   UserService._internal();
 
   // ── Firebase refs ───────────────────────────────────────────────
-  final _db = FirebaseFirestore.instance;
+  final _db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
   final _auth = FirebaseAuth.instance;
   final _functions = FirebaseFunctions.instanceFor(region: 'southamerica-east1');
 

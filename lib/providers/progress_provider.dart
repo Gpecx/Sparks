@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/progress_model.dart';
 import '../core/constants/fs.dart';
@@ -10,7 +11,7 @@ final userProgressProvider = StreamProvider<List<ProgressModel>>((ref) {
   final uid = FirebaseAuth.instance.currentUser?.uid;
   if (uid == null) return Stream.value([]);
   
-  return FirebaseFirestore.instance
+  return FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
       .collection(FS.users)
       .doc(uid)
       .collection(FS.progress)

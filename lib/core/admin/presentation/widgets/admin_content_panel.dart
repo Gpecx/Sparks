@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/core/admin/presentation/admin_controller.dart';
@@ -146,7 +147,7 @@ class AdminContentPanel extends ConsumerWidget {
     this.onTrailCreated,
   });
 
-  FirebaseFirestore get _db => FirebaseFirestore.instance;
+  FirebaseFirestore get _db => FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   Stream<QuerySnapshot> get _trailsStream => _db
       .collection(FS.categories)
@@ -212,7 +213,7 @@ class _TrailCard extends ConsumerStatefulWidget {
 
 class _TrailCardState extends ConsumerState<_TrailCard> {
   bool _expanded = true;
-  FirebaseFirestore get _db => FirebaseFirestore.instance;
+  FirebaseFirestore get _db => FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   DocumentReference get _trailRef => _db
       .collection(FS.categories)

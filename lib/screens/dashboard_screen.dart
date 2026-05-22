@@ -21,6 +21,7 @@ import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/providers/progress_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 // ─────────────────────────────────────────────────────────────────
 //  DASHBOARD — Versão com Firebase
@@ -179,7 +180,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     Navigator.pop(ctx);
                     final auth = FirebaseAuth.instance.currentUser;
                     if (auth != null) {
-                      await FirebaseFirestore.instance.collection('users').doc(auth.uid).set({
+                      await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('users').doc(auth.uid).set({
                         'uid': auth.uid,
                         'role': 'admin',
                         'displayName': auth.displayName ?? 'Admin',

@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/models/spark_admin_models.dart';
 
-final _firestoreProvider = Provider((ref) => FirebaseFirestore.instance);
+final _firestoreProvider = Provider((ref) => FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default'));
 
 // ── 1. Categorias ───────────────────────────────────────────────────────────
 final categoriesStreamProvider = StreamProvider<List<SPARKCategory>>((ref) {

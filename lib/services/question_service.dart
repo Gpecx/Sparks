@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import '../core/constants/fs.dart';
 
@@ -18,7 +19,7 @@ import '../core/constants/fs.dart';
 class QuestionService {
   static final QuestionService _instance = QuestionService._internal();
   factory QuestionService() => _instance;
-  QuestionService._internal() : _fs = FirebaseFirestore.instance;
+  QuestionService._internal() : _fs = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   /// Construtor @visibleForTesting — permite injetar um Firestore fake nos testes.
   @visibleForTesting

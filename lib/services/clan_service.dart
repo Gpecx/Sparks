@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import '../core/constants/fs.dart';
 
 class ClanService {
@@ -7,7 +8,7 @@ class ClanService {
   factory ClanService() => _instance;
   ClanService._internal();
 
-  final FirebaseFirestore _fs = FirebaseFirestore.instance;
+  final FirebaseFirestore _fs = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   String _generateInviteCode() { 
      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

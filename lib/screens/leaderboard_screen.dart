@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -32,7 +33,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
   late AnimationController _controller;
   int _selectedTab = 0; // 0 = Global, 1 = Clã, 2 = Torneio
   final _tournament = TournamentService();
-  final _db = FirebaseFirestore.instance;
+  final _db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   // Dados do Firebase
   List<RankingEntry> _globalPlayers = [];

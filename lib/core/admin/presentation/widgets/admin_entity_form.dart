@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 
@@ -114,7 +115,7 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
 
   // ── Query builder ─────────────────────────────────────────────
   Stream<QuerySnapshot>? _buildStream(FieldConfig f) {
-    final db = FirebaseFirestore.instance;
+    final db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
     // Top-level collection (no parent)
     if (f.dropdownParentKeyRef == null) {

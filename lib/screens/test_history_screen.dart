@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -39,7 +40,7 @@ class _TestHistoryScreenState extends State<TestHistoryScreen> {
               const SizedBox(height: 8),
               if (_uid != null)
                 StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance.collection('users').doc(_uid).collection('quiz_history').snapshots(),
+                  stream: FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('users').doc(_uid).collection('quiz_history').snapshots(),
                   builder: (context, snapshot) {
                     int total = 0;
                     double media = 0.0;
@@ -86,7 +87,7 @@ class _TestHistoryScreenState extends State<TestHistoryScreen> {
                 child: _uid == null 
                   ? const Center(child: Text("Faça login para ver seu histórico.", style: TextStyle(color: Colors.white)))
                   : StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('users').doc(_uid).collection('quiz_history').orderBy('timestamp', descending: true).snapshots(),
+                      stream: FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('users').doc(_uid).collection('quiz_history').orderBy('timestamp', descending: true).snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
                         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {

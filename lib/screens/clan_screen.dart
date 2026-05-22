@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/services/clan_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -100,12 +101,12 @@ class _ClanScreenState extends State<ClanScreen> {
   Future<void> _loadUserClan() async {
     if (_currentUserUid == null) return;
     try {
-      final doc = await FirebaseFirestore.instance.collection('users').doc(_currentUserUid).get();
+      final doc = await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('users').doc(_currentUserUid).get();
       if (doc.exists) {
         final data = doc.data()!;
         final clanId = data['clanId'];
         if (clanId != null) {
-          final clanDoc = await FirebaseFirestore.instance.collection('clans').doc(clanId).get();
+          final clanDoc = await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('clans').doc(clanId).get();
           if (mounted && clanDoc.exists) {
             setState(() {
               _myClanId = clanId;
@@ -429,7 +430,7 @@ class _ClanScreenState extends State<ClanScreen> {
           _myClanId == null 
              ? const CircularProgressIndicator()
              : StreamBuilder<QuerySnapshot>(
-                 stream: FirebaseFirestore.instance.collection('clans').doc(_myClanId).collection('members').orderBy('xpContribution', descending: true).snapshots(),
+                 stream: FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('clans').doc(_myClanId).collection('members').orderBy('xpContribution', descending: true).snapshots(),
                  builder: (context, snapshot) {
                    if (!snapshot.hasData) return const CircularProgressIndicator();
                    final docs = snapshot.data!.docs;

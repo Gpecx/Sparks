@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:spark_app/models/covenant_model.dart';
 import 'package:spark_app/core/constants/fs.dart';
 
@@ -104,7 +105,7 @@ class CovenantService extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    _sub = FirebaseFirestore.instance
+    _sub = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
         .collection(FS.users)
         .doc(uid)
         .collection(FS.covenants)
@@ -126,7 +127,7 @@ class CovenantService extends ChangeNotifier {
 
   /// Seeds the full catalog into Firestore for a new user (batch write).
   Future<void> _seedCatalog(String uid) async {
-    final db = FirebaseFirestore.instance;
+    final db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
     final batch = db.batch();
 
     for (final def in _catalog) {
@@ -157,7 +158,7 @@ class CovenantService extends ChangeNotifier {
 
     if (needReset.isEmpty) return;
 
-    final db = FirebaseFirestore.instance;
+    final db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
     final batch = db.batch();
 
     for (final cov in needReset) {
@@ -180,7 +181,7 @@ class CovenantService extends ChangeNotifier {
 
   Future<void> selectCovenant(String id) async {
     if (_uid == null) return;
-    await FirebaseFirestore.instance
+    await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
         .collection(FS.users)
         .doc(_uid)
         .collection(FS.covenants)
@@ -193,7 +194,7 @@ class CovenantService extends ChangeNotifier {
 
   Future<void> deselectCovenant(String id) async {
     if (_uid == null) return;
-    await FirebaseFirestore.instance
+    await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
         .collection(FS.users)
         .doc(_uid)
         .collection(FS.covenants)
@@ -217,7 +218,7 @@ class CovenantService extends ChangeNotifier {
     final newProgress = (cov.currentProgress + amount).clamp(0, cov.maxProgress);
     final completed = newProgress >= cov.maxProgress;
 
-    FirebaseFirestore.instance
+    FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
         .collection(FS.users)
         .doc(_uid)
         .collection(FS.covenants)

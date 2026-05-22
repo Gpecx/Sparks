@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:spark_app/services/analytics_service.dart';
@@ -29,7 +30,7 @@ class GamificationService {
   factory GamificationService() => _instance;
   GamificationService._internal();
 
-  final _db = FirebaseFirestore.instance;
+  final _db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
   final _auth = FirebaseAuth.instance;
 
   // ─────────────────────────────────────────────────────────────────

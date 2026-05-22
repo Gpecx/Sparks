@@ -1,17 +1,21 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 // ─────────────────────────────────────────────────────────────────
-//  OFFLINE SYNC SERVICE
+//  OFFLINE SYNC SERVICE - VERSÃO CORRIGIDA
 //
 //  Fluxo:
 //   1. markLessonComplete() → grava na fila local (Hive)
 //   2. Tenta enviar ao Firebase imediatamente
 //   3. Se offline → entra na fila pendente
 //   4. Quando conectar → _flushQueue() drena a fila
+//
+//  IMPORTANTE: Não tenta atualizar campos sensíveis (xp, sparkPoints)
+//  diretamente. Estes devem ser atualizados via Cloud Functions.
 //
 //  Boxes Hive:
 //   - 'offline_queue' : lista de operações pendentes
@@ -27,7 +31,7 @@ class OfflineSyncService {
   factory OfflineSyncService() => _instance;
   OfflineSyncService._internal();
 
-  final _db = FirebaseFirestore.instance;
+  final _db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
   final _connectivity = Connectivity();
 
   Box? _queueBox;
@@ -163,9 +167,19 @@ class OfflineSyncService {
   }
 
   // ─────────────────────────────────────────────────────────────────
-  //  EXECUÇÃO DAS OPERAÇÕES
+  //  EXECUÇÃO DAS OPERAÇÕES - VERSÃO CORRIGIDA
   // ─────────────────────────────────────────────────────────────────
 
+  /// Sincroniza uma lição completada.
+  /// 
+  /// IMPORTANTE: Esta função NÃO tenta atualizar campos sensíveis como
+  /// 'xp' e 'sparkPoints' diretamente, pois as regras do Firestore os
+  /// protegem. Estes campos devem ser atualizados via Cloud Functions
+  /// pelo UserService.
+  /// 
+  /// Esta função apenas:
+  /// 1. Atualiza o progresso da lição (completedLessons, progressPercent)
+  /// 2. Incrementa totalLessonsCompleted (campo não-sensível)
   Future<void> _executeMarkLesson(Map<String, dynamic> entry) async {
     final uid = entry['uid'] as String;
     final catId = entry['catId'] as String;
@@ -188,7 +202,7 @@ class OfflineSyncService {
     if (progSnap.docs.isNotEmpty) {
       pRef = progSnap.docs.first.reference;
     } else {
-      pRef = userRef.collection('progress').doc();
+      pRef = userRef.collection('progress').doc(modId);
       batch.set(pRef, {
         'moduleId': modId,
         'categoryId': catId,
@@ -203,22 +217,26 @@ class OfflineSyncService {
       });
     }
 
+    // ✅ CORREÇÃO: Apenas atualiza progresso, não tenta atualizar XP/SP
     batch.update(pRef, {
       'completedLessons': FieldValue.arrayUnion([lessonId]),
       'lastAccessed': FieldValue.serverTimestamp(),
     });
 
-    if (xpEarned > 0 || spEarned > 0) {
-      batch.update(userRef, {
-        'xp': FieldValue.increment(xpEarned),
-        'weeklyXp': FieldValue.increment(xpEarned),
-        'sparkPoints': FieldValue.increment(spEarned),
-        'totalLessonsCompleted': FieldValue.increment(1),
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
-    }
+    // ✅ CORREÇÃO: Apenas incrementa totalLessonsCompleted (campo não-sensível)
+    batch.update(userRef, {
+      'totalLessonsCompleted': FieldValue.increment(1),
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
+
+    // ⚠️ IMPORTANTE: XP e Spark Points devem ser atualizados via Cloud Functions
+    // pelo UserService.addXp() e UserService.addSparkPoints()
+    // Não tentamos atualizar aqui pois as regras do Firestore os protegem.
 
     await batch.commit();
+
+    debugPrint('[OfflineSync] ✓ Lição sincronizada: $lessonId (XP: $xpEarned, SP: $spEarned)');
+    debugPrint('[OfflineSync] ⚠️ XP/SP devem ser sincronizados via Cloud Functions');
   }
 
   // ─────────────────────────────────────────────────────────────────

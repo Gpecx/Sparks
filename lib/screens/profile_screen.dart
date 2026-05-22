@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
@@ -97,7 +98,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       // Pega o Auth UID do celular e FORÇA a criação do documento dele com role=admin
       final auth = FirebaseAuth.instance.currentUser;
       if (auth != null) {
-        await FirebaseFirestore.instance.collection('users').doc(auth.uid).set({
+        await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('users').doc(auth.uid).set({
           'uid': auth.uid,
           'displayName': 'Admin Supremo', // Substitui o nome de "Usuario" para confirmar que arrumou
           'email': auth.email ?? '',

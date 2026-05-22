@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:spark_app/models/user_model.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/models/progress_model.dart';
@@ -30,7 +31,7 @@ final userModelProvider = StreamProvider<UserModel?>((ref) {
 
   if (uid == null) return Stream.value(null);
 
-  return FirebaseFirestore.instance
+  return FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
       .collection('users')
       .doc(uid)
       .snapshots()

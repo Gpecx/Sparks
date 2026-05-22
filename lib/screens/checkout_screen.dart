@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
@@ -40,7 +41,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       final uid = FirebaseAuth.instance.currentUser?.uid;
       if (uid == null) throw Exception('Usuário não autenticado');
 
-      final db = FirebaseFirestore.instance;
+      final db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
       final batch = db.batch();
 
       // 1) Registrar transação na coleção 'transactions'
