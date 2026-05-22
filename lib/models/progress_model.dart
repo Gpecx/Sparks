@@ -31,22 +31,20 @@ class ProgressModel {
   });
 
   factory ProgressModel.fromFirestore(DocumentSnapshot doc) {
-    final d = doc.data() as Map<String, dynamic>;
+    final d = doc.data() as Map<String, dynamic>? ?? {};
     return ProgressModel(
       id: doc.id,
-      moduleId: d[FS.moduleId] as String,
-      categoryId: d[FS.categoryId] as String,
+      moduleId: d[FS.moduleId] as String? ?? '',
+      categoryId: d[FS.categoryId] as String? ?? '',
       moduleName: d['moduleName'] as String? ?? '',
-      completedLessons: List<String>.from(d[FS.completedLessons] as List),
-      progressPercent: (d[FS.progressPercent] as num).toDouble(),
-      isCompleted: d[FS.isCompleted] as bool,
-      startedAt: (d[FS.startedAt] as Timestamp).toDate(),
-      completedAt: d[FS.completedAt] != null
-          ? (d[FS.completedAt] as Timestamp).toDate()
-          : null,
-      lastAccessed: (d[FS.lastAccessed] as Timestamp).toDate(),
-      bestScore: (d[FS.bestScore] as num).toInt(),
-      attempts: (d[FS.attempts] as num).toInt(),
+      completedLessons: List<String>.from(d[FS.completedLessons] as List? ?? []),
+      progressPercent: (d[FS.progressPercent] as num?)?.toDouble() ?? 0.0,
+      isCompleted: d[FS.isCompleted] as bool? ?? false,
+      startedAt: (d[FS.startedAt] as Timestamp?)?.toDate() ?? DateTime.now(),
+      completedAt: (d[FS.completedAt] as Timestamp?)?.toDate(),
+      lastAccessed: (d[FS.lastAccessed] as Timestamp?)?.toDate() ?? DateTime.now(),
+      bestScore: (d[FS.bestScore] as num?)?.toInt() ?? 0,
+      attempts: (d[FS.attempts] as num?)?.toInt() ?? 0,
     );
   }
 

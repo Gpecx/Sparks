@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import '../core/constants/fs.dart';
 import '../models/progress_model.dart';
 import '../services/achievement_service.dart';
@@ -54,20 +55,35 @@ class ProgressService {
       return;
     }
     final userRef = _fs.collection(FS.users).doc(uid);
-    final userDoc = await userRef.get();
     
-    if (!userDoc.exists) return;
+    // Tenta buscar do cache primeiro para não depender da rede.
+    // Usamos catch para silenciar erros de cache vazio.
+    QuerySnapshot<Map<String, dynamic>>? progSnap;
+    try {
+      progSnap = await userRef.collection(FS.progress)
+          .where(FS.moduleId, isEqualTo: modId).limit(1)
+          .get(const GetOptions(source: Source.cache));
+    } catch (_) {}
     
-    final progSnap = await userRef.collection(FS.progress)
-        .where(FS.moduleId, isEqualTo: modId).limit(1).get();
-    
+    // Se ainda vazio, e não estamos num ambiente puramente offline (onde falharia rápido),
+    // tentamos da rede com um timeout super curto (1.5s) só para não travar a UI.
+    if (progSnap == null || progSnap.docs.isEmpty) {
+      try {
+         progSnap = await userRef.collection(FS.progress)
+            .where(FS.moduleId, isEqualTo: modId).limit(1)
+            .get().timeout(const Duration(milliseconds: 1500));
+      } catch (_) {}
+    }
+
     final batch = _fs.batch();
     
     DocumentReference pRef;
-    if (progSnap.docs.isNotEmpty) {
+    if (progSnap != null && progSnap.docs.isNotEmpty) {
       pRef = progSnap.docs.first.reference;
     } else {
-      pRef = userRef.collection(FS.progress).doc();
+      // Se não conseguimos ler o progresso, usamos modId como ID para garantir 
+      // que SetOptions(merge: true) encontre o mesmo documento no futuro.
+      pRef = userRef.collection(FS.progress).doc(modId);
       batch.set(pRef, {
         FS.moduleId: modId,
         FS.categoryId: catId,
@@ -79,43 +95,44 @@ class ProgressService {
         FS.lastAccessed: FieldValue.serverTimestamp(),
         FS.bestScore: 0,
         FS.attempts: 0,
-      });
+      }, SetOptions(merge: true));
     }
 
-    // Calcula as lições já concluídas + a nova
+    // Calcula localmente o progresso baseado no que sabemos
     List<String> alreadyCompleted = [];
     int knownTotal = 0;
-    if (progSnap.docs.isNotEmpty) {
+    if (progSnap != null && progSnap.docs.isNotEmpty) {
       final existingData = progSnap.docs.first.data();
       alreadyCompleted = List<String>.from(existingData[FS.completedLessons] ?? []);
       knownTotal = (existingData['totalLessons'] as int?) ?? 0;
     }
+    
     final completedSet = {...alreadyCompleted, lessonId};
-
-    // Calcula total de lições sem queries extras ao Firestore (evita timeout)
-    // Usa o registry local legado, ou o total já armazenado no documento de progresso
     int totalLessons = getLessonsForModule(modId).length;
     if (totalLessons == 0) totalLessons = knownTotal;
-    // Se ainda desconhecido, usa o maior valor entre as lições concluídas + 1
     if (totalLessons == 0) totalLessons = completedSet.length;
 
     final double updatedProgress = (completedSet.length / totalLessons).clamp(0.0, 1.0);
     final bool moduleCompleted = updatedProgress >= 1.0;
 
-    batch.update(pRef, {
+    batch.set(pRef, {
       FS.completedLessons: FieldValue.arrayUnion([lessonId]),
       FS.lastAccessed: FieldValue.serverTimestamp(),
       FS.progressPercent: double.parse(updatedProgress.toStringAsFixed(2)),
       FS.isCompleted: moduleCompleted,
       if (moduleName.isNotEmpty) 'moduleName': moduleName,
       if (moduleCompleted) FS.completedAt: FieldValue.serverTimestamp(),
-    });
+    }, SetOptions(merge: true));
 
-    batch.update(userRef, {
+    batch.set(userRef, {
       FS.totalLessonsCompleted: FieldValue.increment(1),
-    });
+    }, SetOptions(merge: true));
 
-    await batch.commit();
+    // NÃO fazemos await no batch.commit() pois se a rede estiver bloqueada,
+    // ele travaria a UI. O Firestore aplica localmente de forma síncrona.
+    batch.commit().catchError((e) {
+      debugPrint('[ProgressService] Erro ao sincronizar batch: $e');
+    });
 
     // Audit log (sem await para não bloquear UI)
     Future.microtask(() async {
