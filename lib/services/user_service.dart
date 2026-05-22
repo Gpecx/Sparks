@@ -185,29 +185,75 @@ class UserService extends ChangeNotifier {
     if (uid.isEmpty) throw Exception('Usuário não autenticado');
 
     try {
-      final callable = _functions.httpsCallable('addXp');
-      final response = await callable.call<Map<String, dynamic>>({
-        'amount': amount,
-        'source': source,
+      final docRef = _db.collection('users').doc(uid);
+      
+      final currentXp = this.xp;
+      final currentLevel = this.level;
+      
+      final newXp = currentXp + amount;
+      final newLevel = GamificationUtils.calcLevel(newXp);
+      final newTension = GamificationUtils.calcTension(newXp);
+      final leveledUp = newLevel > currentLevel;
+
+      await docRef.update({
+        'xp': FieldValue.increment(amount),
+        'weeklyXp': FieldValue.increment(amount),
+        'monthlyXp': FieldValue.increment(amount),
+        'level': newLevel,
+        'tensionLevel': newTension,
+        'updatedAt': FieldValue.serverTimestamp(),
       });
 
-      final data = response.data;
-      final result = AddXpResult.fromMap(data);
+      // Update Rankings locally
+      final weekKey = GamificationUtils.currentWeekKey();
+      await _db.collection('rankings').doc('weekly').collection(weekKey).doc(uid).set({
+        'uid': uid,
+        'displayName': displayName,
+        'photoUrl': _user?.photoUrl,
+        'clanId': clanId,
+        'clanName': clanName,
+        'weeklyXp': FieldValue.increment(amount),
+        'updatedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
 
-      // Analytics locais — não precisam de servidor
-      if (result.leveledUp) {
+      final badgesUnlocked = <String>[];
+      // Analytics locais
+      if (leveledUp) {
         await AnalyticsService().logLevelUp(
-          oldLevel: level,
-          newLevel: result.newLevel,
-          totalXp: result.newXp,
+          oldLevel: currentLevel,
+          newLevel: newLevel,
+          totalXp: newXp,
         );
-        await AnalyticsService().setUserLevel(result.newLevel);
-        await _sendLevelUpNotification(result.newLevel);
+        await AnalyticsService().setUserLevel(newLevel);
+        await _sendLevelUpNotification(newLevel);
+        
+        final newBadges = GamificationUtils.xpBadgesEarned(newXp);
+        for (final b in newBadges) {
+          if (!unlockedBadgeIds.contains(b)) {
+            badgesUnlocked.add(b);
+            await docRef.update({
+              'unlockedBadgeIds': FieldValue.arrayUnion([b]),
+            });
+            await AnalyticsService().logBadgeUnlocked(badgeId: b, source: source);
+            // Optionally add bonus XP directly
+            await docRef.update({
+              'xp': FieldValue.increment(50),
+              'weeklyXp': FieldValue.increment(50),
+              'monthlyXp': FieldValue.increment(50),
+            });
+          }
+        }
       }
 
-      return result;
-    } on FirebaseFunctionsException catch (e) {
-      debugPrint('[UserService.addXp] CF error: ${e.code} — ${e.message}');
+      return AddXpResult(
+        newXp: newXp,
+        newLevel: newLevel,
+        newTension: newTension,
+        leveledUp: leveledUp,
+        badgesUnlocked: badgesUnlocked,
+      );
+    } catch (e) {
+      debugPrint('[UserService.addXp] Local error: $e');
       rethrow;
     }
   }

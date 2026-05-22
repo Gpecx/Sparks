@@ -26,7 +26,6 @@ const difficultyOptions = [
 const questionTypeOptions = [
   ('multipleChoice',  '🔵 Múltipla escolha (A/B/C/D)'),
   ('trueFalse',       '⚖️ Verdadeiro ou Falso'),
-  ('fillInTheBlanks', '✏️ Preencher lacunas'),
 ];
 
 // Opções A/B/C/D para multipleChoice

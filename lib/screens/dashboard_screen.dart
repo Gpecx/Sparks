@@ -170,28 +170,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     Navigator.pop(ctx);
                     context.push('/admin');
                   },
-                )
-              else if (kDebugMode)
-                _buildProfileMenuItem(
-                  icon: Icons.admin_panel_settings_outlined,
-                  label: 'Fix Admin (Dev Only)',
-                  color: Colors.amber,
-                  onTap: () async {
-                    Navigator.pop(ctx);
-                    final auth = FirebaseAuth.instance.currentUser;
-                    if (auth != null) {
-                      await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('users').doc(auth.uid).set({
-                        'uid': auth.uid,
-                        'role': 'admin',
-                        'displayName': auth.displayName ?? 'Admin',
-                        'email': auth.email ?? '',
-                        'updatedAt': FieldValue.serverTimestamp(),
-                      }, SetOptions(merge: true));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('✅ Conta promovida a Admin com sucesso!')),
-                      );
-                    }
-                  },
                 ),
               _buildProfileMenuItem(
                 icon: Icons.emoji_events_outlined,
