@@ -1,34 +1,55 @@
 import 'package:go_router/go_router.dart';
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/quiz_screen.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
-import 'package:spark_app/models/curriculum_models.dart';
+import 'package:spark_app/models/spark_admin_models.dart';
 import 'package:spark_app/models/quiz_models.dart';
-import 'package:spark_app/data/lessons_registry.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
-import 'package:spark_app/services/progress_service.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/services/covenant_service.dart';
+import 'package:spark_app/providers/content_providers.dart';
+import 'package:spark_app/providers/progress_provider.dart';
+import 'package:spark_app/providers/user_provider.dart';
+
+/// Representa um membro do clã presente neste módulo.
+class ClanMemberPresence {
+  final String uid;
+  final String name;
+  final String? photoUrl;
+  final int lessonIndex; // índice da próxima lição (completedLessons)
+
+  const ClanMemberPresence({
+    required this.uid,
+    required this.name,
+    this.photoUrl,
+    required this.lessonIndex,
+  });
+}
 
 
 class LearningPathScreen extends ConsumerStatefulWidget {
-  final String? moduleTitle;
-  final String? moduleId;           // <-- ID para buscar lições reais
-  final List<MicroLesson>? lessons; // <-- fallback (apenas nomes/tipos)
+  final SPARKCategory? category;
+  final SPARKModule? module;
+  final Color themeColor;
+  final IconData themeIcon;
 
   const LearningPathScreen({
     super.key,
-    this.moduleTitle,
-    this.moduleId,
-    this.lessons,
+    this.category,
+    this.module,
+    this.themeColor = AppColors.primary,
+    this.themeIcon = Icons.school,
   });
 
   @override
@@ -45,13 +66,13 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
   // ── GlobalKey para acionar o glitch ──────────────────────────
   final _glitchKey = GlobalKey<_SparkGlitchWrapperState>();
 
-  int _completedLessons = 0;
+  // Guarda o valor anterior de completedLessons para animar
+  int _prevCompletedLessons = 0;
 
-  // 22 nós: 1 introdução + 10 lições + 1 avaliação + 10 lições + 1 avaliação
-  final List<Map<String, dynamic>> _nodes = [];
-
-  // Lições reais com questões (do registry)
-  List<Lesson> _realLessons = [];
+  // ── Presença do clã ──────────────────────────────────────────
+  StreamSubscription<QuerySnapshot>? _clanPresenceSub;
+  List<ClanMemberPresence> _clanMembers = [];
+  final _fs = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   @override
   void initState() {
@@ -61,88 +82,76 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
       duration: const Duration(milliseconds: 1800),
     )..repeat();
     _energyCtrl.addListener(_onEnergyChanged);
-
-    // Busca lições reais do registry (tem questões)
-    if (widget.moduleId != null) {
-      _realLessons = getLessonsForModule(widget.moduleId!);
-    }
-
-    // Monta nós da trilha
-    // ⚠️ PRIORIDADE: se existem lições reais com questões, usa-as para os nós
-    // Garante que _nodes[i] === _realLessons[i] (sem desencontro de índice)
-    if (_realLessons.isNotEmpty) {
-      for (final lesson in _realLessons) {
-        final type = lesson.type == LessonType.evaluation ? 'eval' : 'lesson';
-        _nodes.add({'type': type, 'title': lesson.title, 'subtitle': lesson.subtitle});
-      }
-    } else if (widget.lessons != null && widget.lessons!.isNotEmpty) {
-      // Fallback: sem conteúdo real, usa MicroLessons do currículo (sem questões)
-      for (final lesson in widget.lessons!) {
-        _nodes.add({'type': lesson.type, 'title': lesson.title, 'subtitle': lesson.subtitle});
-      }
-    } else {
-      _nodes.add({'type': 'lesson', 'title': 'Introdução', 'subtitle': 'Introdução ao Módulo'});
-      for (int i = 1; i <= 10; i++) {
-        _nodes.add({'type': 'lesson', 'title': 'Lição $i', 'subtitle': 'Módulo Base'});
-      }
-      _nodes.add({'type': 'eval', 'title': 'AVALIAÇÃO 1', 'subtitle': 'Certificado Básico'});
-      for (int i = 1; i <= 10; i++) {
-        _nodes.add({'type': 'lesson', 'title': 'Lição ${i + 10}', 'subtitle': 'Módulo Avançado'});
-      }
-      _nodes.add({'type': 'eval', 'title': 'AVALIAÇÃO 2', 'subtitle': 'Certificado Final'});
-    }
-
-    // Carrega o progresso real do Firestore para mostrar cadeados/checks corretamente
-    _loadProgress();
+    _initClanPresence();
   }
 
-  /// Busca o progresso salvo no Firestore e atualiza [_completedLessons].
-  Future<void> _loadProgress() async {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    final moduleId = widget.moduleId;
-    if (uid == null || moduleId == null) return;
-
-    final progress = await ProgressService().getProgress(uid, moduleId);
-    if (!mounted) return;
-
-    if (progress != null) {
-      setState(() {
-        _completedLessons = progress.completedLessons.length;
-      });
-    }
-  }
-
-  /// Chamado ao concluir uma lição. Persiste progresso e atualiza streak.
-  Future<void> _onLessonCompleted(int lessonIndex) async {
-    setState(() => _completedLessons++);
+  /// Grava o módulo atual do usuário e escuta membros do clã no mesmo módulo.
+  Future<void> _initClanPresence() async {
+    final moduleId = widget.module?.id;
+    if (moduleId == null) return;
 
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
 
-    final moduleId = widget.moduleId ?? 'unknown';
-    final categoryId = _findCategoryId(widget.moduleId) ?? 'default_cat';
-    final lessonId = '${moduleId}_l${lessonIndex + 1}';
+    // Grava currentModuleId para que outros membros possam ver onde estou
+    try {
+      await _fs.collection('users').doc(uid).update({
+        'currentModuleId': moduleId,
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+    } catch (_) {}
 
-    // ✅ Persiste na subcoleção progress (fonte de verdade)
-    await ProgressService().markLessonComplete(
-      uid,
-      categoryId,
-      moduleId,
-      lessonId,
-      0, // XP já gerenciado pelo QuizScreen via UserService.addXp
-      0, // SP já gerenciado pelo QuizScreen
-    );
+    // Lê clanId do usuário atual
+    final userDoc = await _fs.collection('users').doc(uid).get();
+    final clanId = userDoc.data()?['clanId'] as String?;
+    if (clanId == null || clanId.isEmpty) return;
 
-    // ✅ Registra atividade de estudo (streak diário)
-    await _userService.registerStudyActivity();
+    // Stream: usuários do mesmo clã no mesmo módulo (exceto eu)
+    _clanPresenceSub = _fs
+        .collection('users')
+        .where('clanId', isEqualTo: clanId)
+        .where('currentModuleId', isEqualTo: moduleId)
+        .snapshots()
+        .listen((snap) async {
+      final members = <ClanMemberPresence>[];
+      for (final doc in snap.docs) {
+        if (doc.id == uid) continue; // pula o próprio usuário
+        final data = doc.data();
+        final memberName = (data['displayName'] as String?)?.trim();
+        if (memberName == null || memberName.isEmpty) continue;
 
-    // ✅ Atualiza pacto de mestria via CovenantService (subcoleção)
-    if (moduleId.contains('nr35') || moduleId.contains('mod')) {
-      final progressPercent =
-          (_completedLessons / _nodes.length * 100).toInt();
-      CovenantService().addProgress('cov_3', progressPercent);
-    }
+        // Busca progresso do membro neste módulo
+        int lessonIndex = 0;
+        try {
+          final progressSnap = await _fs
+              .collection('users')
+              .doc(doc.id)
+              .collection('progress')
+              .where('moduleId', isEqualTo: moduleId)
+              .limit(1)
+              .get();
+          if (progressSnap.docs.isNotEmpty) {
+            final completedLessons =
+                (progressSnap.docs.first.data()['completedLessons'] as List?)?.length ?? 0;
+            lessonIndex = completedLessons;
+          }
+        } catch (_) {}
+
+        members.add(ClanMemberPresence(
+          uid: doc.id,
+          name: memberName,
+          photoUrl: data['photoUrl'] as String?,
+          lessonIndex: lessonIndex,
+        ));
+      }
+
+      if (mounted) setState(() => _clanMembers = members);
+    });
   }
+
+  // _onLessonCompleted foi removido: toda a lógica pós-conclusão
+  // está agora em _handleNodeTap para evitar gravação duplicada no Firestore.
+  // O QuizScreen (_onQuizComplete) já salva progresso, XP e SP.
 
   void _onEnergyChanged() {
     if (mounted) setState(() {});
@@ -150,6 +159,12 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
 
   @override
   void dispose() {
+    _clanPresenceSub?.cancel();
+    // Limpa o currentModuleId ao sair
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null) {
+      _fs.collection('users').doc(uid).update({'currentModuleId': FieldValue.delete()}).catchError((_) {});
+    }
     _controller.dispose();
     _energyCtrl.removeListener(_onEnergyChanged);
     super.dispose();
@@ -157,29 +172,19 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
 
   /// Retorna true se o nó está desbloqueado.
   /// Quando o Modo Dev está ativo (apenas em kDebugMode), tudo é desbloqueado.
-  bool _isNodeUnlocked(int index) {
+  bool _isNodeUnlocked(int index, int completedLessons) {
     if (kDebugMode && ref.read(devModeProvider)) return true;
-    return index <= _completedLessons;
+    return index <= completedLessons;
   }
 
-  String? _findCategoryId(String? moduleId) {
-    if (moduleId == null) return null;
-    for (var cat in mockCategories) {
-      for (var mod in cat.modules) {
-        if (mod.id == moduleId) return cat.id;
-      }
-    }
-    return null;
+  double _getProgressValue(int completedLessons, int totalLessons) {
+    if (totalLessons == 0) return 0.0;
+    return (completedLessons > totalLessons ? totalLessons : completedLessons) / totalLessons;
   }
 
-  double get _progressValue {
-    if (_nodes.isEmpty) return 0.0;
-    return (_completedLessons > _nodes.length ? _nodes.length : _completedLessons) / _nodes.length;
-  }
-
-  void _handleNodeTap(int index) async {
+  void _handleNodeTap(int index, SPARKLesson sparkLesson, int completedLessons, int totalLessons) async {
     final isTestMode = kDebugMode && ref.read(devModeProvider);
-    if (!_isNodeUnlocked(index) && !isTestMode) {
+    if (!_isNodeUnlocked(index, completedLessons) && !isTestMode) {
       _glitchKey.currentState?.triggerGlitch();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -190,49 +195,73 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
       return;
     }
 
-    final node = _nodes[index];
+    // Guarda o valor ANTES de entrar no quiz para animar a barra depois
+    setState(() {
+      _prevCompletedLessons = completedLessons;
+    });
 
-    // Obtém a lição real (com questões) se disponível
-    final Lesson? realLesson = (index < _realLessons.length) ? _realLessons[index] : null;
+    // Cria um Lesson adapter com questions vazias para que o QuizScreen
+    // saiba buscar as questões diretamente do Firestore via categoryId/moduleId/trailId/lessonId.
+    final lessonAdapter = Lesson(
+      id: sparkLesson.id,
+      title: sparkLesson.title,
+      subtitle: sparkLesson.subtitle,
+      type: sparkLesson.type == 'evaluation' ? LessonType.evaluation : LessonType.lesson,
+      content: sparkLesson.content,
+      questions: [], // Vazio → QuizScreen buscará do Firestore
+    );
 
-    // Lógica da Avaliação
-    if (node['type'] == 'eval') {
-      final passed = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => QuizScreen(
-            lesson: realLesson,
-            isEvaluation: true,
-            moduleId: widget.moduleId,
-            categoryId: _findCategoryId(widget.moduleId),
-          ),
+    final isEvaluation = sparkLesson.type == 'evaluation';
+
+    final passed = await Navigator.push<bool>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => QuizScreen(
+          lesson: lessonAdapter,
+          isEvaluation: isEvaluation,
+          moduleId: widget.module?.id,
+          categoryId: widget.category?.id,
+          trailId: sparkLesson.trailId,
         ),
-      );
-      if (passed == true) {
-        await _onLessonCompleted(index);
-      }
-    }
-    // Lição normal (Quiz)
-    else {
-      final passed = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => QuizScreen(
-            lesson: realLesson,
-            isEvaluation: false,
-            moduleId: widget.moduleId,
-            categoryId: _findCategoryId(widget.moduleId),
-          ),
-        ),
-      );
-      if (passed == true) {
-        await _onLessonCompleted(index);
-      }
+      ),
+    );
+
+    if (passed == true && mounted) {
+      // Força rebuild imediato para atualizar os nós desbloqueados.
+      // O StreamProvider já recebeu a atualização do Firestore via batch.commit()
+      // no QuizScreen, mas o setState garante que o widget redesenha agora.
+      setState(() {});
+
+      // Atividade de estudo em background — não bloqueia a UI
+      Future.microtask(() async {
+        try {
+          await _userService.registerStudyActivity();
+        } catch (_) {}
+      });
+
+
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.category == null || widget.module == null) {
+      return const Scaffold(body: Center(child: Text('Erro: Categoria ou Módulo ausente')));
+    }
+
+    // Obter progresso
+    final userProgressAsync = ref.watch(userProgressProvider);
+    final userProgress = userProgressAsync.value ?? [];
+    final progIndex = userProgress.indexWhere((p) => p.moduleId == widget.module!.id);
+    final moduleProgress = progIndex >= 0 ? userProgress[progIndex] : null;
+    final completedLessons = moduleProgress?.completedLessons.length ?? 0;
+
+    // Obter todas as lições em tempo real
+    final lessonsAsync = ref.watch(moduleLessonsProvider((
+      categoryId: widget.category!.id,
+      moduleId: widget.module!.id,
+    )));
+
     return SparksBackground(
       child: _SparkGlitchWrapper(
         key: _glitchKey,
@@ -253,18 +282,39 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          widget.moduleTitle?.toUpperCase() ?? 'SEGURANÇA BÁSICA',
+                          widget.module!.title.toUpperCase(),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
                             letterSpacing: 1.5,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () => context.push('/store'),
-                        child: _buildBadge(Icons.bolt, '250', AppColors.primary),
+                      // Badge SP (Spark Points) — dados reais
+                      ref.watch(userModelProvider).when(
+                        data: (user) => GestureDetector(
+                          onTap: () => context.push('/store'),
+                          child: _buildBadge(
+                            Icons.bolt,
+                            '${user?.sparkPoints ?? 0} SP',
+                            widget.themeColor,
+                          ),
+                        ),
+                        loading: () => _buildBadge(Icons.bolt, '-- SP', widget.themeColor),
+                        error: (_, _) => _buildBadge(Icons.bolt, '0 SP', widget.themeColor),
+                      ),
+                      const SizedBox(width: 6),
+                      // Badge XP — dados reais
+                      ref.watch(userModelProvider).when(
+                        data: (user) => _buildBadge(
+                          Icons.star_rounded,
+                          '${user?.xp ?? 0} XP',
+                          const Color(0xFF4ADE80), // verde-lima suave
+                        ),
+                        loading: () => _buildBadge(Icons.star_rounded, '-- XP', const Color(0xFF4ADE80)),
+                        error: (_, _) => _buildBadge(Icons.star_rounded, '0 XP', const Color(0xFF4ADE80)),
                       ),
                       const SizedBox(width: 10),
                       GestureDetector(
@@ -280,184 +330,208 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                 const SizedBox(height: 16),
 
                 // ── Card de Progresso (Efeito Raio-X / Glassmorphism) ──
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
-                      child: Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          color: AppColors.card.withValues(alpha: 0.45), 
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
+                lessonsAsync.when(
+                  data: (lessons) {
+                    final totalLessons = lessons.length;
+                    final progressValue = _getProgressValue(completedLessons, totalLessons);
+
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
+                          child: Container(
+                            padding: const EdgeInsets.all(14),
+                            decoration: BoxDecoration(
+                              color: AppColors.card.withValues(alpha: 0.45), 
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: widget.themeColor.withValues(alpha: 0.3)),
+                            ),
+                            child: Column(
                               children: [
-                                Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.primary.withValues(alpha: 0.15),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: const Icon(Icons.menu_book, color: AppColors.primary, size: 22),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      const Text('Módulo Atual', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
-                                      const SizedBox(height: 2),
-                                      Text(
-                                        'Em Progresso · $_completedLessons de ${_nodes.length} etapas',
-                                        style: const TextStyle(color: AppColors.textMuted, fontSize: 11),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: widget.themeColor.withValues(alpha: 0.15),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                    ],
-                                  ),
+                                      child: Icon(Icons.menu_book, color: widget.themeColor, size: 22),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const Text('Módulo Atual', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+                                          const SizedBox(height: 2),
+                                          Text(
+                                            'Em Progresso · $completedLessons de $totalLessons etapas',
+                                            style: const TextStyle(color: AppColors.textMuted, fontSize: 11),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Text(
+                                      '${(progressValue * 100).round()}%',
+                                      style: TextStyle(color: widget.themeColor, fontWeight: FontWeight.w800, fontSize: 15),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  '${(_progressValue * 100).round()}%',
-                                  style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 15),
+                                const SizedBox(height: 10),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(4),
+                                  child: TweenAnimationBuilder<double>(
+                                    tween: Tween<double>(begin: 0.0, end: progressValue),
+                                    duration: const Duration(milliseconds: 1200),
+                                    curve: Curves.easeOutCubic,
+                                    builder: (context, value, _) {
+                                      return LinearProgressIndicator(
+                                        value: value,
+                                        backgroundColor: AppColors.inputBackground.withValues(alpha: 0.5),
+                                        valueColor: AlwaysStoppedAnimation<Color>(widget.themeColor),
+                                        minHeight: 5,
+                                      );
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 10),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(4),
-                              child: TweenAnimationBuilder<double>(
-                                tween: Tween<double>(begin: 0.0, end: _progressValue),
-                                duration: const Duration(milliseconds: 1200),
-                                curve: Curves.easeOutCubic,
-                                builder: (context, value, _) {
-                                  return LinearProgressIndicator(
-                                    value: value,
-                                    backgroundColor: AppColors.inputBackground.withValues(alpha: 0.5),
-                                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
-                                    minHeight: 5,
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
+                  loading: () => const SizedBox(height: 80, child: Center(child: CircularProgressIndicator())),
+                  error: (_, _) => const SizedBox(height: 80),
                 ),
                 const SizedBox(height: 8),
 
                 // ── Trilha de Nós ───────────────────────────────
                 Expanded(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final screenWidth = constraints.maxWidth;
-                      final totalHeight = _nodeY(_nodes.length - 1, screenWidth) +
-                          TrailLayout.kNodeSize / 2 +
-                          TrailLayout.kTextHeight +
-                          80.0;
+                  child: lessonsAsync.when(
+                    loading: () => const Center(child: CircularProgressIndicator()),
+                    error: (e, s) => Center(child: Text('Erro: $e', style: const TextStyle(color: Colors.red))),
+                    data: (lessons) {
+                      if (lessons.isEmpty) {
+                        return const Center(child: Text('Nenhuma lição encontrada para este módulo', style: TextStyle(color: Colors.white54)));
+                      }
 
-                      return ScrollConfiguration(
-                        behavior: _NoScrollbarBehavior(),
-                        child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: SizedBox(
-                            width: screenWidth,
-                            height: totalHeight,
-                            child: Stack(
-                              clipBehavior: Clip.none,
-                              children: [
-                                Positioned.fill(
-                                  child: RepaintBoundary(
-                                    child: CustomPaint(
-                                      painter: _PCBBackgroundPainter(
-                                        totalHeight: totalHeight,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned.fill(
-                                  child: TweenAnimationBuilder<double>(
-                                    tween: Tween<double>(end: _completedLessons.toDouble()),
-                                    duration: const Duration(milliseconds: 1500),
-                                    curve: Curves.easeInOutCubic,
-                                    builder: (context, animatedCompleted, child) {
-                                      return AnimatedBuilder(
-                                        animation: _controller,
-                                        builder: (_, __) => CustomPaint(
-                                          painter: _PCBPathPainter(
-                                            nodePositions: List.generate(
-                                              _nodes.length,
-                                              (i) => Offset(
-                                                _nodeX(i, screenWidth),
-                                                _nodeY(i, screenWidth),
-                                              ),
-                                            ),
-                                            completedCount: animatedCompleted, 
-                                            animValue: _controller.value,
+                      return LayoutBuilder(
+                        builder: (context, constraints) {
+                          final screenWidth = constraints.maxWidth;
+                          final totalHeight = _nodeY(lessons.length - 1, screenWidth) +
+                              TrailLayout.kNodeSize / 2 +
+                              TrailLayout.kTextHeight +
+                              80.0;
+
+                          return ScrollConfiguration(
+                            behavior: _NoScrollbarBehavior(),
+                            child: SingleChildScrollView(
+                              physics: const BouncingScrollPhysics(),
+                              child: SizedBox(
+                                width: screenWidth,
+                                height: totalHeight,
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Positioned.fill(
+                                      child: RepaintBoundary(
+                                        child: CustomPaint(
+                                          painter: _PCBBackgroundPainter(
+                                            totalHeight: totalHeight,
+                                            themeColor: widget.themeColor,
                                           ),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                ...List.generate(_nodes.length, (index) {
-                                  final node = _nodes[index];
-                                  final isCompleted = _completedLessons > index;
-                                  final isCurrent   = _completedLessons == index;
-                                  final isUnlocked  = _isNodeUnlocked(index);
-                                  final isEval      = node['type'] == 'eval';
-
-                                  final cx = _nodeX(index, screenWidth);
-                                  final cy = _nodeY(index, screenWidth);
-
-                                  const nodeWidgetW = 120.0;
-                                  
-                                  final List<String> friends = [];
-                                  if (index == 2) friends.add('Mariana');
-                                  if (index == 5) friends.add('Bruno');
-                                  if (index == 8) friends.add('Alex');
-
-                                  return Positioned(
-                                    left: cx - nodeWidgetW / 2,
-                                    top:  cy - TrailLayout.kNodeSize / 2,
-                                    width: nodeWidgetW,
-                                    child: Stack(
-                                      clipBehavior: Clip.none,
-                                      alignment: Alignment.center,
-                                      children: [
-                                        isEval
-                                            ? _buildEvalNode(
-                                                label: node['title'],
-                                                isUnlocked: isUnlocked,
-                                                isCompleted: isCompleted,
-                                                onTap: () => _handleNodeTap(index),
-                                              )
-                                            : _buildLessonNode(
-                                                label: node['title'],
-                                                isCompleted: isCompleted,
-                                                isCurrent: isCurrent,
-                                                isUnlocked: isUnlocked,
-                                                onTap: () => _handleNodeTap(index),
-                                              ),
-                                        if (friends.isNotEmpty)
-                                          Positioned(
-                                            top: -24,
-                                            right: -5,
-                                            child: _buildFriendAvatar(friends.first),
-                                          ),
-                                      ],
+                                      ),
                                     ),
-                                  );
-                                }),
-                              ],
+                                    Positioned.fill(
+                                      child: TweenAnimationBuilder<double>(
+                                        tween: Tween<double>(
+                                          begin: _prevCompletedLessons.toDouble(),
+                                          end: completedLessons.toDouble(),
+                                        ),
+                                        duration: const Duration(milliseconds: 1500),
+                                        curve: Curves.easeInOutCubic,
+                                        builder: (context, animatedCompleted, child) {
+                                          return AnimatedBuilder(
+                                            animation: _controller,
+                                            builder: (_, _) => CustomPaint(
+                                              painter: _PCBPathPainter(
+                                                nodePositions: List.generate(
+                                                  lessons.length,
+                                                  (i) => Offset(
+                                                    _nodeX(i, screenWidth),
+                                                    _nodeY(i, screenWidth),
+                                                  ),
+                                                ),
+                                                completedCount: animatedCompleted,
+                                                animValue: _controller.value,
+                                                themeColor: widget.themeColor,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    ...List.generate(lessons.length, (index) {
+                                      final lesson = lessons[index];
+                                      final isCompleted = completedLessons > index;
+                                      final isCurrent   = completedLessons == index;
+                                      final isUnlocked  = _isNodeUnlocked(index, completedLessons);
+                                      final isEval      = lesson.type == 'evaluation';
+
+                                      final cx = _nodeX(index, screenWidth);
+                                      final cy = _nodeY(index, screenWidth);
+
+                                      const nodeWidgetW = 120.0;
+
+                                      // Membros do clã neste nó
+                                      final membersHere = _clanMembers
+                                          .where((m) => m.lessonIndex == index)
+                                          .toList();
+
+                                      return Positioned(
+                                        left: cx - nodeWidgetW / 2,
+                                        top:  cy - TrailLayout.kNodeSize / 2,
+                                        width: nodeWidgetW,
+                                        child: Stack(
+                                          clipBehavior: Clip.none,
+                                          alignment: Alignment.center,
+                                          children: [
+                                            isEval
+                                                ? _buildEvalNode(
+                                                    label: lesson.title,
+                                                    isUnlocked: isUnlocked,
+                                                    isCompleted: isCompleted,
+                                                    onTap: () => _handleNodeTap(index, lesson, completedLessons, lessons.length),
+                                                  )
+                                                : _buildLessonNode(
+                                                    label: lesson.title,
+                                                    isCompleted: isCompleted,
+                                                    isCurrent: isCurrent,
+                                                    isUnlocked: isUnlocked,
+                                                    onTap: () => _handleNodeTap(index, lesson, completedLessons, lessons.length),
+                                                  ),
+                                            if (membersHere.isNotEmpty)
+                                              Positioned(
+                                                right: -14,
+                                                top: 0,
+                                                child: _buildClanAvatarStack(membersHere),
+                                              ),
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        },
                       );
                     },
                   ),
@@ -488,47 +562,6 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
         TrailLayout.kNodeSize / 2;
   }
 
-  Widget _buildFriendAvatar(String name) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 38,
-          height: 38,
-          decoration: BoxDecoration(
-            color: AppColors.primary,
-            shape: BoxShape.circle,
-            border: Border.all(color: Colors.white, width: 2),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.primary.withValues(alpha: 0.5),
-                blurRadius: 10,
-                spreadRadius: 2,
-              )
-            ],
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            name[0],
-            style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
-        const SizedBox(height: 2),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-          decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.8),
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: Text(
-            name,
-            style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w700),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildLessonNode({
     required String label,
     required bool isCompleted,
@@ -543,22 +576,22 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     IconData icon;
 
     if (isCompleted) {
-      nodeColor = AppColors.primary;
-      borderColor = AppColors.primary;
+      nodeColor = widget.themeColor;
+      borderColor = widget.themeColor;
       iconColor = Colors.white;
       icon = Icons.check;
-      glow = [BoxShadow(color: AppColors.primary.withValues(alpha: 0.35), blurRadius: 18, spreadRadius: 4)];
+      glow = [BoxShadow(color: widget.themeColor.withValues(alpha: 0.35), blurRadius: 18, spreadRadius: 4)];
     } else if (isCurrent) {
       nodeColor = AppColors.card;
-      borderColor = AppColors.primary;
+      borderColor = widget.themeColor;
       iconColor = Colors.white;
       icon = Icons.play_arrow;
-      glow = [BoxShadow(color: AppColors.primary.withValues(alpha: 0.25), blurRadius: 18, spreadRadius: 4)];
+      glow = [BoxShadow(color: widget.themeColor.withValues(alpha: 0.25), blurRadius: 18, spreadRadius: 4)];
     } else {
       nodeColor = AppColors.card;
       borderColor = AppColors.textMuted.withValues(alpha: 0.2);
-      iconColor = AppColors.textMuted;
-      icon = Icons.lock;
+      iconColor = AppColors.textMuted.withValues(alpha: 0.4);
+      icon = widget.themeIcon;
       glow = null;
     }
 
@@ -592,24 +625,16 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                     child: const Icon(Icons.star, color: Colors.white, size: 13),
                   ),
                 ),
-              if (!isUnlocked && !isCompleted)
-                Positioned(
-                  bottom: -4,
-                  right: -4,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(color: AppColors.card, shape: BoxShape.circle),
-                    child: const Icon(Icons.lock, color: AppColors.textMuted, size: 14),
-                  ),
-                ),
+
             ],
           ),
           const SizedBox(height: 8),
           Text(
             label,
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: isCurrent
-                  ? AppColors.primary
+                  ? widget.themeColor
                   : Colors.white.withValues(alpha: isUnlocked ? 1 : 0.35),
               fontSize: 13,
               fontWeight: FontWeight.w800,
@@ -628,7 +653,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     required VoidCallback onTap,
   }) {
     final color = isCompleted
-        ? AppColors.primary
+        ? widget.themeColor
         : isUnlocked
             ? AppColors.gold
             : AppColors.textMuted;
@@ -642,14 +667,14 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
             height: 72,
             decoration: BoxDecoration(
               color: isCompleted
-                  ? AppColors.primary.withValues(alpha: 0.2)
+                  ? widget.themeColor.withValues(alpha: 0.2)
                   : isUnlocked
                       ? AppColors.gold.withValues(alpha: 0.2)
                       : AppColors.card,
               shape: BoxShape.circle,
               border: Border.all(
                 color: isCompleted
-                    ? AppColors.primary
+                    ? widget.themeColor
                     : isUnlocked
                         ? AppColors.gold
                         : AppColors.textMuted.withValues(alpha: 0.2),
@@ -664,7 +689,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                   ? Icons.check
                   : isUnlocked
                       ? Icons.emoji_events
-                      : Icons.lock,
+                      : widget.themeIcon,
               color: color,
               size: 32,
             ),
@@ -672,9 +697,10 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
           const SizedBox(height: 8),
           Text(
             label,
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: isCompleted
-                  ? AppColors.primary
+                  ? widget.themeColor
                   : isUnlocked
                       ? AppColors.gold
                       : Colors.white.withValues(alpha: 0.35),
@@ -684,6 +710,123 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  /// Renderiza avatares empilhados dos membros do clã presentes no nó.
+  Widget _buildClanAvatarStack(List<ClanMemberPresence> members) {
+    const double avatarSize = 32.0;
+    const double overlapOffset = 20.0;
+    final totalWidth = avatarSize + (members.length - 1).clamp(0, 2) * overlapOffset;
+    final visible = members.take(3).toList();
+
+    return SizedBox(
+      width: totalWidth + 8,
+      height: avatarSize + 20, // espaço para o nome
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          ...List.generate(visible.length, (i) {
+            final member = visible[i];
+            return Positioned(
+              left: i * overlapOffset,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Tooltip(
+                    message: member.name,
+                    child: Container(
+                      width: avatarSize,
+                      height: avatarSize,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: widget.themeColor,
+                          width: 2,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: widget.themeColor.withValues(alpha: 0.45),
+                            blurRadius: 8,
+                            spreadRadius: 1,
+                          ),
+                        ],
+                      ),
+                      child: ClipOval(
+                        child: member.photoUrl != null && member.photoUrl!.isNotEmpty
+                            ? Image.network(
+                                member.photoUrl!,
+                                fit: BoxFit.cover,
+                                errorBuilder: (_, _, _) => _avatarFallback(member.name),
+                              )
+                            : _avatarFallback(member.name),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                    decoration: BoxDecoration(
+                      color: AppColors.card.withValues(alpha: 0.92),
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: widget.themeColor.withValues(alpha: 0.4)),
+                    ),
+                    child: Text(
+                      member.name.split(' ').first, // só o primeiro nome
+                      style: TextStyle(
+                        color: widget.themeColor,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+          if (members.length > 3)
+            Positioned(
+              left: 3 * overlapOffset,
+              child: Container(
+                width: avatarSize,
+                height: avatarSize,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.card,
+                  border: Border.all(color: widget.themeColor, width: 2),
+                ),
+                child: Center(
+                  child: Text(
+                    '+${members.length - 3}',
+                    style: TextStyle(
+                      color: widget.themeColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _avatarFallback(String name) {
+    final initial = name.isNotEmpty ? name[0].toUpperCase() : '?';
+    return Container(
+      color: widget.themeColor.withValues(alpha: 0.25),
+      child: Center(
+        child: Text(
+          initial,
+          style: TextStyle(
+            color: widget.themeColor,
+            fontSize: 13,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
       ),
     );
   }
@@ -772,13 +915,15 @@ class _NoScrollbarBehavior extends ScrollBehavior {
 
 class _PCBBackgroundPainter extends CustomPainter {
   final double totalHeight;
-  const _PCBBackgroundPainter({required this.totalHeight});
+  final Color themeColor;
+
+  const _PCBBackgroundPainter({required this.totalHeight, required this.themeColor});
 
   void _drawBackground(Canvas canvas, Size size) {
     final rng = math.Random(42);
 
     final dotPaint = Paint()
-      ..color = AppColors.primary.withValues(alpha: 0.045)
+      ..color = themeColor.withValues(alpha: 0.045)
       ..style = PaintingStyle.fill;
 
     const gridStep = 28.0;
@@ -795,10 +940,11 @@ class _PCBBackgroundPainter extends CustomPainter {
       final alpha        = rng.nextDouble() * 0.055 + 0.015;
       final strokeW      = rng.nextDouble() * 1.2 + 0.8;
       final color        = i % 5 == 0
-          ? AppColors.primary.withValues(alpha: alpha)
+          ? themeColor.withValues(alpha: alpha)
           : AppColors.textMuted.withValues(alpha: alpha * 0.6);
 
-      ghostPaint..color = color..strokeWidth = strokeW;
+      ghostPaint.color = color;
+      ghostPaint.strokeWidth = strokeW;
 
       if (isHorizontal) {
         final y  = rng.nextDouble() * size.height;
@@ -856,11 +1002,13 @@ class _PCBPathPainter extends CustomPainter {
   final List<Offset> nodePositions;
   final double completedCount;
   final double animValue;
+  final Color themeColor;
 
   const _PCBPathPainter({
     required this.nodePositions,
     required this.completedCount,
     required this.animValue,
+    this.themeColor = AppColors.primary,
   });
 
   static const double _bevelRadius  = 12.0;
@@ -911,16 +1059,16 @@ class _PCBPathPainter extends CustomPainter {
   }
 
   void _drawVia(Canvas canvas, Offset center, bool completed) {
-    final outerR = 5.5;
-    final innerR = 2.5;
-    final ringColor = completed ? AppColors.primary : AppColors.textMuted.withValues(alpha: 0.25);
+    const outerR = 5.5;
+    const innerR = 2.5;
+    final ringColor = completed ? themeColor : AppColors.textMuted.withValues(alpha: 0.25);
 
     if (completed) {
       canvas.drawCircle(
         center,
         outerR + 3,
         Paint()
-          ..color = AppColors.primary.withValues(alpha: 0.20)
+          ..color = themeColor.withValues(alpha: 0.20)
           ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5),
       );
     }
@@ -930,7 +1078,9 @@ class _PCBPathPainter extends CustomPainter {
 
   double _pathLength(Path path) {
     double total = 0;
-    for (final m in path.computeMetrics()) total += m.length;
+    for (final m in path.computeMetrics()) {
+      total += m.length;
+    }
     return total;
   }
 
@@ -946,8 +1096,8 @@ class _PCBPathPainter extends CustomPainter {
   }
 
   void _drawGlowingPath(Canvas canvas, Path path) {
-    canvas.drawPath(path, Paint()..color = AppColors.primary.withValues(alpha: 0.22)..strokeWidth = _trackWidth + 12.0..style = PaintingStyle.stroke..maskFilter = const MaskFilter.blur(BlurStyle.normal, _glowBlur));
-    canvas.drawPath(path, Paint()..color = AppColors.primary..strokeWidth = _trackWidth..style = PaintingStyle.stroke..strokeCap = StrokeCap.round);
+    canvas.drawPath(path, Paint()..color = themeColor.withValues(alpha: 0.22)..strokeWidth = _trackWidth + 12.0..style = PaintingStyle.stroke..maskFilter = const MaskFilter.blur(BlurStyle.normal, _glowBlur));
+    canvas.drawPath(path, Paint()..color = themeColor..strokeWidth = _trackWidth..style = PaintingStyle.stroke..strokeCap = StrokeCap.round);
     canvas.drawPath(path, Paint()..color = Colors.white.withValues(alpha: 0.3)..strokeWidth = 1.2..style = PaintingStyle.stroke..strokeCap = StrokeCap.round);
   }
 

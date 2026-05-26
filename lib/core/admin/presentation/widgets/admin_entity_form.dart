@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 
@@ -6,7 +7,7 @@ import 'package:spark_app/theme/app_theme.dart';
 //  FIELD TYPE ENUM
 // ─────────────────────────────────────────────────────────────────
 
-enum FieldType { text, dropdown }
+enum FieldType { text, dropdown, staticDropdown }
 
 // ─────────────────────────────────────────────────────────────────
 //  FIELD CONFIG
@@ -19,20 +20,24 @@ class FieldConfig {
   final bool required;
   final int maxLines;
   final TextInputType? keyboardType;
+  /// Texto do tooltip mostrado ao passar o mouse sobre o label
+  final String? tooltip;
 
-  // Dropdown-specific
+  // Dropdown-specific (Firestore)
   final FieldType fieldType;
-  /// Top-level collection or collectionGroup name
   final String? dropdownCollection;
-  /// If set, query as: collection(dropdownCollection).doc(parentId).collection(dropdownSubCollection)
   final String? dropdownSubCollection;
-  /// Key from the form's current selections used as parent doc ID
   final String? dropdownParentKeyRef;
-  /// Field in each doc to show as display label
   final String dropdownLabelField;
-  /// When true, use collectionGroup(dropdownCollection).where(dropdownGroupFilterField, == parentId)
   final bool dropdownUseCollectionGroup;
   final String? dropdownGroupFilterField;
+
+  // Static dropdown (opções fixas: [valor, labelExibido])
+  final List<(String value, String label)> staticOptions;
+
+  // Condicional: só mostra este campo se [dependsOnKey] tiver valor [dependsOnValue]
+  final String? dependsOnKey;
+  final String? dependsOnValue;
 
   const FieldConfig({
     required this.key,
@@ -41,6 +46,7 @@ class FieldConfig {
     this.required = true,
     this.maxLines = 1,
     this.keyboardType,
+    this.tooltip,
     this.fieldType = FieldType.text,
     this.dropdownCollection,
     this.dropdownSubCollection,
@@ -48,6 +54,9 @@ class FieldConfig {
     this.dropdownLabelField = 'title',
     this.dropdownUseCollectionGroup = false,
     this.dropdownGroupFilterField,
+    this.staticOptions = const [],
+    this.dependsOnKey,
+    this.dependsOnValue,
   });
 }
 
@@ -89,7 +98,8 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
       for (final f in widget.fields.where((f) => f.fieldType == FieldType.text))
         f.key: TextEditingController(text: widget.initialValues[f.key] ?? ''),
     };
-    for (final f in widget.fields.where((f) => f.fieldType == FieldType.dropdown)) {
+    for (final f in widget.fields.where(
+        (f) => f.fieldType == FieldType.dropdown || f.fieldType == FieldType.staticDropdown)) {
       final init = widget.initialValues[f.key];
       _dropdownValues[f.key] = (init != null && init.isNotEmpty) ? init : null;
     }
@@ -105,7 +115,7 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
 
   // ── Query builder ─────────────────────────────────────────────
   Stream<QuerySnapshot>? _buildStream(FieldConfig f) {
-    final db = FirebaseFirestore.instance;
+    final db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
     // Top-level collection (no parent)
     if (f.dropdownParentKeyRef == null) {
@@ -159,6 +169,11 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
     // Build data map
     final raw = <String, dynamic>{};
     for (final f in widget.fields) {
+      // Ignorar campos condicionais que não estão visíveis
+      if (f.dependsOnKey != null) {
+        final parentVal = _dropdownValues[f.dependsOnKey!];
+        if (parentVal != f.dependsOnValue) continue;
+      }
       if (f.fieldType == FieldType.text) {
         raw[f.key] = _textControllers[f.key]!.text.trim();
       } else {
@@ -308,6 +323,86 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
     );
   }
 
+  // ── Label with tooltip ───────────────────────────────────────
+  Widget _buildLabelWithTooltip(FieldConfig f) {
+    final label = Text(
+      f.label.toUpperCase(),
+      style: const TextStyle(
+        color: AppColors.primary,
+        fontSize: 10,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 1.2,
+      ),
+    );
+    if (f.tooltip == null || f.tooltip!.isEmpty) return label;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        label,
+        const SizedBox(width: 4),
+        Tooltip(
+          message: f.tooltip!,
+          preferBelow: false,
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+          ),
+          textStyle: const TextStyle(color: AppColors.textPrimary, fontSize: 12),
+          child: const Icon(Icons.info_outline, size: 13, color: AppColors.textMuted),
+        ),
+      ],
+    );
+  }
+
+  // ── Static dropdown (opções fixas) ───────────────────────────
+  Widget _buildStaticDropdown(FieldConfig f) {
+    final currentVal = _dropdownValues[f.key];
+    final validVal = f.staticOptions.any((o) => o.$1 == currentVal) ? currentVal : null;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            _buildLabelWithTooltip(f),
+            if (f.required)
+              const Text(' *', style: TextStyle(color: AppColors.error, fontSize: 10)),
+          ],
+        ),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<String>(
+          initialValue: validVal,
+          decoration: InputDecoration(
+            fillColor: AppColors.card.withValues(alpha: 0.5),
+            hintText: 'Selecione ${f.label.toLowerCase()}',
+            filled: true,
+          ),
+          dropdownColor: AppColors.surface,
+          style: const TextStyle(color: AppColors.textPrimary),
+          items: f.staticOptions.map((o) {
+            return DropdownMenuItem<String>(
+              value: o.$1,
+              child: Text(o.$2),
+            );
+          }).toList(),
+          onChanged: (val) {
+            setState(() {
+              _dropdownValues[f.key] = val;
+              // Limpar campos dependentes
+              for (final child in widget.fields.where((c) => c.dependsOnKey == f.key)) {
+                _dropdownValues[child.key] = null;
+              }
+            });
+          },
+          validator: f.required
+              ? (_) => _dropdownValues[f.key] == null ? '${f.label} é obrigatório' : null
+              : null,
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -431,48 +526,51 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // ── Fields ───────────────────────────────────────
-                  ...widget.fields.map((f) => Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: f.fieldType == FieldType.dropdown
-                            ? _buildDropdown(f)
-                            : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        f.label.toUpperCase(),
-                                        style: const TextStyle(
-                                          color: AppColors.primary,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 1.2,
+                  ...widget.fields.map((f) {
+                        // Campo condicional: verificar se deve ser exibido
+                        if (f.dependsOnKey != null) {
+                          final parentVal = _dropdownValues[f.dependsOnKey!];
+                          if (parentVal != f.dependsOnValue) {
+                            return const SizedBox.shrink();
+                          }
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: f.fieldType == FieldType.dropdown
+                              ? _buildDropdown(f)
+                              : f.fieldType == FieldType.staticDropdown
+                                  ? _buildStaticDropdown(f)
+                                  : Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            _buildLabelWithTooltip(f),
+                                            if (f.required)
+                                              const Text(' *', style: TextStyle(color: AppColors.error, fontSize: 10)),
+                                          ],
                                         ),
-                                      ),
-                                      if (f.required)
-                                        const Text(' *', style: TextStyle(color: AppColors.error, fontSize: 10)),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 8),
-                                  TextFormField(
-                                    controller: _textControllers[f.key],
-                                    maxLines: f.maxLines,
-                                    keyboardType: f.keyboardType,
-                                    style: const TextStyle(color: AppColors.textPrimary),
-                                    decoration: InputDecoration(
-                                      hintText: f.hint.isNotEmpty ? f.hint : 'Digite aqui...',
-                                      fillColor: AppColors.card.withValues(alpha: 0.5),
-                                      prefixIcon: f.key.contains('icon') ? const Icon(Icons.insert_emoticon, size: 20, color: AppColors.textMuted) : null,
+                                        const SizedBox(height: 8),
+                                        TextFormField(
+                                          controller: _textControllers[f.key],
+                                          maxLines: f.maxLines,
+                                          keyboardType: f.keyboardType,
+                                          style: const TextStyle(color: AppColors.textPrimary),
+                                          decoration: InputDecoration(
+                                            hintText: f.hint.isNotEmpty ? f.hint : 'Digite aqui...',
+                                            fillColor: AppColors.card.withValues(alpha: 0.5),
+                                            prefixIcon: f.key.contains('icon') ? const Icon(Icons.insert_emoticon, size: 20, color: AppColors.textMuted) : null,
+                                          ),
+                                          validator: f.required
+                                              ? (v) => (v == null || v.trim().isEmpty)
+                                                  ? '${f.label} é obrigatório'
+                                                  : null
+                                              : null,
+                                        ),
+                                      ],
                                     ),
-                                    validator: f.required
-                                        ? (v) => (v == null || v.trim().isEmpty)
-                                            ? '${f.label} é obrigatório'
-                                            : null
-                                        : null,
-                                  ),
-                                ],
-                              ),
-                      )),
+                        );
+                      }),
                   const SizedBox(height: 12),
                   // ── Actions ──────────────────────────────────────
                   Row(
@@ -512,7 +610,7 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(Icons.check, size: 20),
-                                      const SizedBox(width: 12),
+                                      SizedBox(width: 12),
                                       Text('FINALIZAR'),
                                     ],
                                   ),
@@ -584,8 +682,12 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
                   onPressed: () {
                     setState(() {
                       _showSuccess = false;
-                      _textControllers.values.forEach((c) => c.clear());
-                      _dropdownValues.keys.forEach((k) => _dropdownValues[k] = null);
+                      for (var c in _textControllers.values) {
+                        c.clear();
+                      }
+                      for (var k in _dropdownValues.keys) {
+                        _dropdownValues[k] = null;
+                      }
                     });
                   },
                   style: OutlinedButton.styleFrom(

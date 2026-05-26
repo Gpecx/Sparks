@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
@@ -33,6 +34,7 @@ abstract class AuditAction {
   static const String dailyMissionCompleted = 'daily_mission_completed';
   static const String weeklyMissionCompleted = 'weekly_mission_completed';
   static const String xpIntegrityFixed = 'xp_integrity_fixed';
+  static const String eloUpdated = 'elo_updated';
 }
 
 class AuditService {
@@ -41,7 +43,7 @@ class AuditService {
   factory AuditService() => _instance;
   AuditService._internal();
 
-  final _db = FirebaseFirestore.instance;
+  final _db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
   final _auth = FirebaseAuth.instance;
 
   String get _uid => _auth.currentUser?.uid ?? '';

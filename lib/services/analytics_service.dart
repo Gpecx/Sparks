@@ -64,9 +64,9 @@ class AnalyticsService {
         parameters: <String, Object>{
           'module_id': moduleId,
           'lesson_id': lessonId,
-          if (categoryId != null) 'category_id': categoryId,
+          'category_id': ?categoryId,
           'time_spent_seconds': timeSpentSeconds,
-          if (score != null) 'score': score,
+          'score': ?score,
           'xp_earned': xpEarned,
           'sp_earned': spEarned,
         },

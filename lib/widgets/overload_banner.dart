@@ -59,7 +59,7 @@ class _OverloadBannerState extends State<OverloadBanner>
             child: IgnorePointer(
               child: AnimatedBuilder(
                 animation: _glowAnim,
-                builder: (_, __) => Container(
+                builder: (_, _) => Container(
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: AppColors.primary.withValues(alpha: _pulseAnim.value * 0.25),
@@ -95,7 +95,7 @@ class _OverloadBannerState extends State<OverloadBanner>
             child: SafeArea(
               child: AnimatedBuilder(
                 animation: _pulseAnim,
-                builder: (_, __) => Container(
+                builder: (_, _) => Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(

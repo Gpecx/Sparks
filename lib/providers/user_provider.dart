@@ -1,10 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:spark_app/models/user_model.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/models/progress_model.dart';
 import 'package:spark_app/services/progress_service.dart';
+import 'package:spark_app/services/notification_service.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  USER PROVIDER — Riverpod 3.x
@@ -30,13 +32,26 @@ final userModelProvider = StreamProvider<UserModel?>((ref) {
 
   if (uid == null) return Stream.value(null);
 
-  return FirebaseFirestore.instance
+  return FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
       .collection('users')
       .doc(uid)
       .snapshots()
       .map((snap) => snap.exists ? UserModel.fromFirestore(snap) : null);
 });
 
+/// Provider reativo do NotificationService.
+final notificationServiceProvider = Provider<NotificationService>((ref) {
+  final service = NotificationService();
+  final auth = ref.watch(authStateProvider);
+  final uid = auth.value?.uid;
+  if (uid != null) {
+    service.startListening(uid);
+  } else {
+    service.stopListening();
+  }
+  ref.onDispose(() => service.dispose());
+  return service;
+});
 /// Provider para verificar se o usuário está logado.
 final isLoggedInProvider = Provider<bool>((ref) {
   final auth = ref.watch(authStateProvider);

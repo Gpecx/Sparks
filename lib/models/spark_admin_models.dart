@@ -78,6 +78,7 @@ class SPARKModule {
   final int order;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final int accessCount;
 
   const SPARKModule({
     required this.id,
@@ -85,6 +86,7 @@ class SPARKModule {
     required this.title,
     required this.subtitle,
     this.order = 0,
+    this.accessCount = 0,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -94,6 +96,7 @@ class SPARKModule {
     'title': title,
     'subtitle': subtitle,
     'order': order,
+    'accessCount': accessCount,
     'createdAt': Timestamp.fromDate(createdAt),
     'updatedAt': Timestamp.fromDate(updatedAt),
   };
@@ -106,6 +109,7 @@ class SPARKModule {
       title: data['title'] as String? ?? '',
       subtitle: data['subtitle'] as String? ?? '',
       order: data['order'] as int? ?? 0,
+      accessCount: data['accessCount'] as int? ?? 0,
       createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       updatedAt: (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
@@ -121,6 +125,7 @@ class SPARKModule {
     title: title ?? this.title,
     subtitle: subtitle ?? this.subtitle,
     order: order ?? this.order,
+    accessCount: accessCount,
     createdAt: createdAt,
     updatedAt: DateTime.now(),
   );
@@ -249,9 +254,10 @@ class SPARKLesson {
 
   factory SPARKLesson.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
+    final trailIdFromPath = doc.reference.parent.parent?.id ?? '';
     return SPARKLesson(
       id: doc.id,
-      trailId: data['trailId'] as String? ?? '',
+      trailId: data['trailId'] as String? ?? trailIdFromPath,
       title: data['title'] as String? ?? '',
       subtitle: data['subtitle'] as String? ?? '',
       content: data['content'] as String? ?? '',

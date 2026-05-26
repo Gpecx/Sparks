@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:spark_app/services/analytics_service.dart';
 import 'package:spark_app/services/firebase_service.dart';
 
@@ -16,52 +17,49 @@ class AuthService {
         password: password,
       );
 
-      // FIX: Caso o cadastro tenha sido interrompido (app fechado no meio), 
-      // garante que o documento seja criado para não mostrar 'Usuário'.
+      // Verifica/cria doc do usuário em background — não bloqueia o login
       final user = credential.user;
       if (user != null) {
-        final docRef = _firestore.collection('users').doc(user.uid);
-        
-        try {
-          // Timeout de 3s para não travar o login se o firestore estiver lento
-          final docSnap = await docRef.get().timeout(const Duration(seconds: 3));
-          
-          if (!docSnap.exists) {
-            await docRef.set({
-              'uid': user.uid,
-              'displayName': user.displayName ?? 'Usuário',
-              'email': user.email ?? email,
-              'photoUrl': user.photoURL,
-              'role': 'técnico',
-              'sparkPoints': 100,
-              'xp': 0,
-              'level': 1,
-              'tensionLevel': 'BT',
-              'currentStreak': 0,
-              'longestStreak': 0,
-              'activeDays': 0,
-              'studiedToday': false,
-              'lastStudyDate': null,
-              'weeklyXp': 0,
-              'monthlyXp': 0,
-              'unlockedBadgeIds': [],
-              'clanId': null,
-              'clanName': null,
-              'totalLessonsCompleted': 0,
-              'totalCorrectAnswers': 0,
-              'totalAnswers': 0,
-              'eloRating': 1200,
-              'wins': 0,
-              'losses': 0,
-              'totalDuels': 0,
-              'createdAt': FieldValue.serverTimestamp(),
-              'updatedAt': FieldValue.serverTimestamp(),
-            }).timeout(const Duration(seconds: 3));
+        Future.microtask(() async {
+          try {
+            final docRef = _firestore.collection('users').doc(user.uid);
+            final docSnap = await docRef.get().timeout(const Duration(seconds: 5));
+            if (!docSnap.exists) {
+              await docRef.set({
+                'uid': user.uid,
+                'displayName': user.displayName ?? 'Usuário',
+                'email': user.email ?? email,
+                'photoUrl': user.photoURL,
+                'role': 'técnico',
+                'sparkPoints': 100,
+                'xp': 0,
+                'level': 1,
+                'tensionLevel': 'BT',
+                'currentStreak': 0,
+                'longestStreak': 0,
+                'activeDays': 0,
+                'studiedToday': false,
+                'lastStudyDate': null,
+                'weeklyXp': 0,
+                'monthlyXp': 0,
+                'unlockedBadgeIds': [],
+                'clanId': null,
+                'clanName': null,
+                'totalLessonsCompleted': 0,
+                'totalCorrectAnswers': 0,
+                'totalAnswers': 0,
+                'eloRating': 1200,
+                'wins': 0,
+                'losses': 0,
+                'totalDuels': 0,
+                'createdAt': FieldValue.serverTimestamp(),
+                'updatedAt': FieldValue.serverTimestamp(),
+              }).timeout(const Duration(seconds: 5));
+            }
+          } catch (e) {
+            debugPrint('Aviso: Falha ao verificar/criar doc do usuário no login: $e');
           }
-        } catch (e) {
-          // Ignora o erro se der timeout ou falhar a rede, para permitir o login continuar
-          print('Aviso: Falha ao verificar/criar doc do usuário no login: \$e');
-        }
+        });
       }
 
       // Analytics
@@ -113,6 +111,10 @@ class AuthService {
         'totalLessonsCompleted': 0,
         'totalCorrectAnswers': 0,
         'totalAnswers': 0,
+        'eloRating': 1200,
+        'wins': 0,
+        'losses': 0,
+        'totalDuels': 0,
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       });

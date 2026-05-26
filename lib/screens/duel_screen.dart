@@ -101,12 +101,14 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
       }
     });
 
-    // Trigger bet deduction animation
+    // Trigger bet deduction animation for non-admins
     Future.delayed(const Duration(milliseconds: 300), () {
-      if (mounted) setState(() => _showBetDeduction = true);
-      Future.delayed(const Duration(seconds: 2), () {
-        if (mounted) setState(() => _showBetDeduction = false);
-      });
+      if (!(_userService.user?.isAdmin ?? false)) {
+        if (mounted) setState(() => _showBetDeduction = true);
+        Future.delayed(const Duration(seconds: 2), () {
+          if (mounted) setState(() => _showBetDeduction = false);
+        });
+      }
     });
 
     _startMatchmaking();
@@ -115,9 +117,14 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
   static const int betAmount = 20;
 
   Future<void> _startMatchmaking() async {
-    // Gasta Spark Points via UserService (persiste no Firestore)
-    final userService = UserService();
-    final spent = await userService.spendSparkPoints(betAmount);
+    final isAdmin = _userService.user?.isAdmin ?? false;
+
+    // Gasta Spark Points via UserService (persiste no Firestore) se não for admin
+    bool spent = true;
+    if (!isAdmin) {
+      spent = await _userService.spendSparkPoints(betAmount);
+    }
+
     if (!spent) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -215,17 +222,16 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
     if (_match != null) {
       final p1Score = _match!.player1TotalScore;
       final p2Score = _match!.player2TotalScore;
+      final isAdmin = _userService.user?.isAdmin ?? false;
 
       if (p1Score > p2Score) {
         // Vitória: +25 ELO + devolve aposta dobrada
-        _userService
-          ..updateElo(eloChange: 25, won: true)
-          ..addSparkPoints(betAmount * 2);
+        _userService.updateElo(eloChange: 25, won: true);
+        if (!isAdmin) _userService.addSparkPoints(betAmount * 2);
       } else if (p1Score == p2Score) {
         // Empate: 0 ELO + devolve aposta
-        _userService
-          ..updateElo(eloChange: 0, won: null)
-          ..addSparkPoints(betAmount);
+        _userService.updateElo(eloChange: 0, won: null);
+        if (!isAdmin) _userService.addSparkPoints(betAmount);
       } else {
         // Derrota: -15 ELO (aposta já foi consumida no início)
         _userService.updateElo(eloChange: -15, won: false);
@@ -312,14 +318,14 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
               // ── Timer circular ──
               AnimatedBuilder(
                 animation: _timerController,
-                builder: (_, __) => _buildTimerBar(),
+                builder: (_, _) => _buildTimerBar(),
               ),
               const SizedBox(height: 4),
 
               // ── Alerta "Oponente respondeu!" ──
               AnimatedBuilder(
                 animation: _opponentAlertAnim,
-                builder: (_, __) {
+                builder: (_, _) {
                   if (_opponentAlertAnim.value < 0.01) return const SizedBox(height: 4);
                   return Opacity(
                     opacity: _opponentAlertAnim.value.clamp(0, 1),
@@ -645,7 +651,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                 // Pulse icon
                 AnimatedBuilder(
                   animation: _pulseAnim,
-                  builder: (_, __) => Opacity(
+                  builder: (_, _) => Opacity(
                     opacity: _pulseAnim.value,
                     child: Container(
                       width: 120,
@@ -782,7 +788,9 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    won ? '+$betAmount Pontos Adquiridos!' : (draw ? 'Seus $betAmount de aposta voltaram.' : 'Você perdeu os $betAmount apostados.'),
+                    (_userService.user?.isAdmin ?? false) 
+                        ? 'Modo Teste de Admin - Nenhum ponto alterado.'
+                        : (won ? '+$betAmount Pontos Adquiridos!' : (draw ? 'Seus $betAmount de aposta voltaram.' : 'Você perdeu os $betAmount apostados.')),
                     style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 14, fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 10),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -57,7 +58,7 @@ class AdminParentSelectorDialog extends StatefulWidget {
 
 class _AdminParentSelectorDialogState
     extends State<AdminParentSelectorDialog> {
-  final _db = FirebaseFirestore.instance;
+  final _db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   String? _categoryId;
   String? _categoryName;

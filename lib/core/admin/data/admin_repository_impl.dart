@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/core/admin/domain/admin_repository.dart';
 
 class AdminRepositoryImpl implements AdminRepository {
-  final FirebaseFirestore _fs = FirebaseFirestore.instance;
+  final FirebaseFirestore _fs = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   // ─── CATEGORIES ────────────────────────────────────────────────
   @override

@@ -8,20 +8,18 @@ import 'package:spark_app/screens/settings_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
-import 'package:spark_app/screens/technical_standards_screen.dart';
 import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/user_service.dart';
 
-import 'package:spark_app/services/progress_service.dart';
-import 'package:spark_app/services/standards_service.dart';
 import 'package:spark_app/models/progress_model.dart';
-import 'package:spark_app/models/standard_metadata.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/providers/progress_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
+import 'package:spark_app/services/notification_service.dart';
+import 'package:spark_app/models/spark_admin_models.dart';
+import 'package:spark_app/providers/content_providers.dart';
+import 'package:spark_app/models/user_model.dart';
+import 'package:spark_app/core/utils/gamification_utils.dart';
 // ─────────────────────────────────────────────────────────────────
 //  DASHBOARD — Versão com Firebase
 //  MUDANÇAS:
@@ -45,9 +43,20 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
     super.initState();
+    CovenantService().addListener(_onCovenantUpdate);
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) setState(() => _isLoading = false);
     });
+  }
+
+  @override
+  void dispose() {
+    CovenantService().removeListener(_onCovenantUpdate);
+    super.dispose();
+  }
+
+  void _onCovenantUpdate() {
+    if (mounted) setState(() {});
   }
 
   String _getDynamicGreeting() {
@@ -57,8 +66,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     return 'Boa noite';
   }
 
-  void _showProfileMenu() {
+  void _showProfileMenu(UserModel? userModel) {
     final userService = ref.read(userServiceProvider);
+    final displayName = userModel?.displayName ?? userService.displayName;
+    final photoUrl = userModel?.photoUrl ?? userService.user?.photoUrl;
+    final email = userModel?.email ?? userService.user?.email ?? '';
+    final role = userModel?.role ?? userService.user?.role ?? 'Técnico';
+    final isAdmin = userModel?.isAdmin ?? userService.user?.isAdmin ?? false;
 
     showModalBottomSheet(
       context: context,
@@ -96,10 +110,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       ),
                       child: CircleAvatar(
                         backgroundColor: AppColors.surface,
-                        backgroundImage: userService.user?.photoUrl != null
-                            ? NetworkImage(userService.user!.photoUrl!)
+                        backgroundImage: photoUrl != null
+                            ? NetworkImage(photoUrl)
                             : null,
-                        child: userService.user?.photoUrl == null
+                        child: photoUrl == null
                             ? const Icon(Icons.person, color: AppColors.accent, size: 30)
                             : null,
                       ),
@@ -109,9 +123,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // ✅ Nome real do Firestore
                           Text(
-                            userService.displayName,
+                            displayName,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -120,7 +133,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            userService.user?.email ?? '',
+                            email,
                             style: TextStyle(
                               color: Colors.white.withValues(alpha: 0.5),
                               fontSize: 13,
@@ -128,7 +141,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            userService.user?.role ?? 'Técnico',
+                            role,
                             style: TextStyle(
                               color: AppColors.primary.withValues(alpha: 0.8),
                               fontSize: 12,
@@ -160,7 +173,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen()));
                 },
               ),
-              if (userService.user?.isAdmin ?? false)
+              if (isAdmin)
                 _buildProfileMenuItem(
                   icon: Icons.admin_panel_settings_outlined,
                   label: 'Painel Admin',
@@ -168,28 +181,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   onTap: () {
                     Navigator.pop(ctx);
                     context.push('/admin');
-                  },
-                )
-              else if (kDebugMode)
-                _buildProfileMenuItem(
-                  icon: Icons.admin_panel_settings_outlined,
-                  label: 'Fix Admin (Dev Only)',
-                  color: Colors.amber,
-                  onTap: () async {
-                    Navigator.pop(ctx);
-                    final auth = FirebaseAuth.instance.currentUser;
-                    if (auth != null) {
-                      await FirebaseFirestore.instance.collection('users').doc(auth.uid).set({
-                        'uid': auth.uid,
-                        'role': 'admin',
-                        'displayName': auth.displayName ?? 'Admin',
-                        'email': auth.email ?? '',
-                        'updatedAt': FieldValue.serverTimestamp(),
-                      }, SetOptions(merge: true));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('✅ Conta promovida a Admin com sucesso!')),
-                      );
-                    }
                   },
                 ),
               _buildProfileMenuItem(
@@ -205,7 +196,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 label: 'Meu Progresso',
                 onTap: () {
                   Navigator.pop(ctx);
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const TechnicalStandardsScreen()));
+                  context.push('/my-progress');
                 },
               ),
               _buildProfileMenuItem(
@@ -213,9 +204,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 label: 'Ajuda / Suporte',
                 onTap: () {
                   Navigator.pop(ctx);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Central de Ajuda em breve!')),
-                  );
+                  context.push('/support');
                 },
               ),
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
@@ -223,23 +212,52 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                 child: Text('NOVAS MECÂNICAS', style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.bold)),
               ),
-              _buildProfileMenuItem(
-                icon: Icons.flash_on,
-                label: 'Duelo de Faíscas (PvP)',
-                color: AppColors.primary,
-                onTap: () {
-                  Navigator.pop(ctx);
-                  context.push('/duel');
-                },
-              ),
-              _buildProfileMenuItem(
-                icon: Icons.precision_manufacturing,
-                label: 'Lab. de Simulação de Erros',
-                color: AppColors.gold,
-                onTap: () {
-                  Navigator.pop(ctx);
-                  context.push('/error-simulation');
-                },
+              // PvP — Em Breve ou Teste Admin
+              Builder(
+                builder: (context) {
+                  final isAdmin = userService.user?.isAdmin ?? false;
+                  if (isAdmin) {
+                    return _buildProfileMenuItem(
+                      icon: Icons.flash_on,
+                      label: 'Duelo de Faíscas (PvP)',
+                      color: AppColors.primary,
+                      onTap: () {
+                        Navigator.pop(ctx);
+                        context.push('/duel');
+                      },
+                    );
+                  }
+                  return Opacity(
+                    opacity: 0.4,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.flash_on, color: Colors.grey, size: 22),
+                          const SizedBox(width: 16),
+                          const Expanded(
+                            child: Text(
+                              'Duelo de Faíscas (PvP)',
+                              style: TextStyle(color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(color: Colors.grey.withValues(alpha: 0.4)),
+                            ),
+                            child: const Text(
+                              'EM BREVE',
+                              style: TextStyle(color: Colors.grey, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
               ),
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
               _buildProfileMenuItem(
@@ -250,7 +268,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   Navigator.pop(ctx);
                   await AuthService().signOut();
                   UserService().stopListening();
-                  if (context.mounted) context.go('/');
+                  if (mounted) context.go('/');
                 },
               ),
               const SizedBox(height: 16),
@@ -298,29 +316,32 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  Widget _buildSectionHeader(String title, VoidCallback onSeeAll) {
+  Widget _buildSectionHeader(String title, [VoidCallback? onSeeAll]) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-        _ResponsiveTapWidget(
-          onTap: onSeeAll,
-          child: const Row(
-            children: [
-              Text('Ver todas', style: TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.bold)),
-              SizedBox(width: 4),
-              Icon(Icons.arrow_forward_ios, color: AppColors.primary, size: 12),
-            ],
+        if (onSeeAll != null)
+          _ResponsiveTapWidget(
+            onTap: onSeeAll,
+            child: const Row(
+              children: [
+                Text('Ver todas', style: TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.bold)),
+                SizedBox(width: 4),
+                Icon(Icons.arrow_forward_ios, color: AppColors.primary, size: 12),
+              ],
+            ),
           ),
-        ),
       ],
     );
   }
 
   // ── Header com nome real do Firestore ───────────────────────────
-  Widget _buildHeader() {
+  Widget _buildHeader(UserModel? userModel) {
     final userService = ref.watch(userServiceProvider);
-    final firstName = userService.displayName.split(' ').first;
+    final displayName = userModel?.displayName ?? userService.displayName;
+    final firstName = displayName.split(' ').first;
+    final photoUrl = userModel?.photoUrl ?? userService.user?.photoUrl;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -333,32 +354,200 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               style: const TextStyle(color: AppColors.textSecondary, fontSize: 16),
             ),
             Text(
-              '$firstName!', // ✅ Nome real do Firestore
+              '$firstName!',
               style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
             ),
           ],
         ),
-        _ResponsiveTapWidget(
-          onTap: _showProfileMenu,
-          child: Container(
-            width: 46,
-            height: 46,
-            decoration: BoxDecoration(
-              color: AppColors.card,
-              borderRadius: BorderRadius.circular(23),
-              border: Border.all(color: AppColors.cardBorder),
+        Row(
+          children: [
+            _buildNotificationBell(),
+            const SizedBox(width: 16),
+            _ResponsiveTapWidget(
+              onTap: () => _showProfileMenu(userModel),
+              child: Container(
+                width: 46,
+                height: 46,
+                decoration: BoxDecoration(
+                  color: AppColors.card,
+                  borderRadius: BorderRadius.circular(23),
+                  border: Border.all(color: AppColors.cardBorder),
+                ),
+                child: photoUrl != null
+                    ? ClipOval(child: Image.network(photoUrl, fit: BoxFit.cover))
+                    : const Icon(Icons.person, color: AppColors.textSecondary, size: 24),
+              ),
             ),
-            child: userService.user?.photoUrl != null
-                ? ClipOval(child: Image.network(userService.user!.photoUrl!, fit: BoxFit.cover))
-                : const Icon(Icons.person, color: AppColors.textSecondary, size: 24),
-          ),
+          ],
         ),
       ],
     );
   }
 
+  Widget _buildNotificationBell() {
+    final notificationService = ref.watch(notificationServiceProvider);
+
+    return ListenableBuilder(
+      listenable: notificationService,
+      builder: (context, child) {
+        final unreadCount = notificationService.unreadCount;
+        return _ResponsiveTapWidget(
+          onTap: () => _showNotificationBottomSheet(notificationService),
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Container(
+                width: 46,
+                height: 46,
+                decoration: BoxDecoration(
+                  color: AppColors.card,
+                  borderRadius: BorderRadius.circular(23),
+                  border: Border.all(color: AppColors.cardBorder),
+                ),
+                child: const Icon(Icons.notifications_outlined, color: Colors.white, size: 24),
+              ),
+              if (unreadCount > 0)
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
+                    child: Text(
+                      unreadCount > 9 ? '9+' : unreadCount.toString(),
+                      style: const TextStyle(color: AppColors.background, fontSize: 10, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showNotificationBottomSheet(NotificationService service) {
+    final uid = ref.read(userServiceProvider).user?.uid;
+    if (uid == null) return;
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (ctx) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.6,
+          minChildSize: 0.4,
+          maxChildSize: 0.9,
+          builder: (_, scrollController) {
+            return Container(
+              decoration: const BoxDecoration(
+                color: AppColors.card,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 12, bottom: 20),
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: AppColors.textMuted.withValues(alpha: 0.4),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Notificações', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                        if (service.unreadCount > 0)
+                          TextButton(
+                            onPressed: () {
+                              service.markAllRead(uid);
+                              Navigator.pop(ctx);
+                            },
+                            child: const Text('Marcar todas como lidas', style: TextStyle(color: AppColors.primary, fontSize: 12)),
+                          ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
+                  Expanded(
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        final service = ref.watch(notificationServiceProvider);
+                        return ListenableBuilder(
+                          listenable: service,
+                          builder: (context, child) {
+                            final notifs = service.notifications;
+                            if (notifs.isEmpty) {
+                              return const Center(
+                                child: Text('Nenhuma notificação no momento.', style: TextStyle(color: AppColors.textMuted)),
+                              );
+                            }
+                            return ListView.builder(
+                              controller: scrollController,
+                              itemCount: notifs.length,
+                              itemBuilder: (context, index) {
+                                final notif = notifs[index];
+                                return Dismissible(
+                                  key: Key(notif.id),
+                                  background: Container(
+                                    color: AppColors.error,
+                                    alignment: Alignment.centerRight,
+                                    padding: const EdgeInsets.only(right: 20),
+                                    child: const Icon(Icons.delete, color: Colors.white),
+                                  ),
+                                  direction: DismissDirection.endToStart,
+                                  onDismissed: (_) => service.deleteNotification(uid, notif.id),
+                                  child: ListTile(
+                                    onTap: () {
+                                      if (!notif.read) service.markAsRead(uid, notif.id);
+                                    },
+                                    leading: CircleAvatar(
+                                      backgroundColor: notif.read ? AppColors.surface : AppColors.primary.withValues(alpha: 0.2),
+                                      child: Text(notif.emoji, style: const TextStyle(fontSize: 18)),
+                                    ),
+                                    title: Text(
+                                      notif.title,
+                                      style: TextStyle(
+                                        color: notif.read ? Colors.white.withValues(alpha: 0.7) : Colors.white,
+                                        fontWeight: notif.read ? FontWeight.normal : FontWeight.bold,
+                                      ),
+                                    ),
+                                    subtitle: Text(
+                                      notif.body,
+                                      style: TextStyle(
+                                        color: AppColors.textSecondary.withValues(alpha: notif.read ? 0.6 : 1),
+                                      ),
+                                    ),
+                                    trailing: notif.read ? null : const Icon(Icons.circle, color: AppColors.primary, size: 10),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userAsync = ref.watch(userModelProvider);
+    final userModel = userAsync.value;
+
     return SparksBackground(
       child: PcbBackground(
         child: Scaffold(
@@ -369,9 +558,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildHeader(),
+                  _buildHeader(userModel),
                   const SizedBox(height: 32),
-                  _buildGamificationCenter(),
+                  _buildGamificationCenter(userModel),
                   const SizedBox(height: 16),
                   _ResponsiveTapWidget(
                     onTap: () {
@@ -385,12 +574,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   const SizedBox(height: 16),
                   _isLoading ? _buildCovenantSkeleton() : _buildCovenantList(),
                   const SizedBox(height: 40),
-                  _buildSectionHeader('Normas em Destaque', () => context.push('/standards')),
+                  _buildSectionHeader('Módulos em Destaque'),
                   const SizedBox(height: 16),
-                  _isLoading ? _buildNormasSkeleton() : _buildNormasList(context),
+                  _isLoading ? _buildModulesSkeleton() : _buildTopModulesList(context),
                   const SizedBox(height: 40),
-                  _buildSecurityHighlightCard(),
-                  const SizedBox(height: 24),
                   _buildPowerplayBanner(),
                   const SizedBox(height: 40),
                 ],
@@ -416,25 +603,31 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  Widget _buildNormasSkeleton() {
+  Widget _buildModulesSkeleton() {
     return SizedBox(
-      height: 140,
+      height: 165,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         clipBehavior: Clip.none,
         itemCount: 3,
         separatorBuilder: (ctx, index) => const SizedBox(width: 16),
-        itemBuilder: (ctx, index) => const _SkeletonBox(width: 140, height: 140),
+        itemBuilder: (ctx, index) => const _SkeletonBox(width: 140, height: 165),
       ),
     );
   }
 
   // ── Gamification Center com dados reais ─────────────────────────
-  Widget _buildGamificationCenter() {
+  Widget _buildGamificationCenter(UserModel? userModel) {
     final userService = ref.watch(userServiceProvider);
-    final streak = userService.currentStreak;
-    final level = userService.level;
-    final multiplier = userService.xpMultiplier;
+    final streak = userModel?.currentStreak ?? userService.currentStreak;
+    final level = userModel?.level ?? userService.level;
+    final xp = userModel?.xp ?? userService.xp;
+    final sparkPoints = userModel?.sparkPoints ?? userService.sparkPoints;
+    final multiplier = userModel != null ? GamificationUtils.xpMultiplier(streak) : userService.xpMultiplier;
+
+    // A cada 500 XP sobe um nível
+    final int xpInCurrentLevel = xp % 500;
+    final double progress = xpInCurrentLevel / 500.0;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -444,6 +637,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         border: Border.all(color: AppColors.primary.withValues(alpha: 0.15)),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -457,7 +651,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Técnico Nível $level', // ✅ Nível real
+                    'Técnico Nível $level',
                     style: TextStyle(color: AppColors.primary.withValues(alpha: 0.8), fontSize: 13, fontWeight: FontWeight.w600),
                   ),
                 ],
@@ -484,7 +678,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       const Icon(Icons.local_fire_department, color: AppColors.gold, size: 16),
                       const SizedBox(width: 4),
                       Text(
-                        '$streak Dias', // ✅ Streak real
+                        '$streak Dias',
                         style: const TextStyle(color: AppColors.gold, fontSize: 13, fontWeight: FontWeight.w800),
                       ),
                     ],
@@ -493,43 +687,134 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
             ],
           ),
+          const SizedBox(height: 16),
+          // ── Barra Física de Progresso de XP ──
+          Row(
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: LinearProgressIndicator(
+                    value: progress,
+                    minHeight: 10,
+                    backgroundColor: const Color(0xFF141414),
+                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Text(
+                '$xpInCurrentLevel / 500 XP',
+                style: const TextStyle(
+                  color: AppColors.textSecondary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'monospace',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          // Rótulo descritivo do XP total e Spark Points
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'XP Total: $xp XP',
+                style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
+              ),
+              Row(
+                children: [
+                  const Icon(Icons.bolt, color: AppColors.primary, size: 16),
+                  const SizedBox(width: 4),
+                  Text(
+                    '$sparkPoints SP',
+                    style: const TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ],
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 14),
             child: Divider(color: AppColors.cardBorder, height: 1),
           ),
-          _ResponsiveTapWidget(
-            onTap: () => _showDailyChallengeModal(context),
-            child: Row(
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.15),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.timer, color: AppColors.primary, size: 20),
-                ),
-                const SizedBox(width: 12),
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          // Desafio Diário — Em Breve
+          Builder(
+            builder: (context) {
+              final isAdmin = userModel?.isAdmin ?? userService.user?.isAdmin ?? false;
+              if (isAdmin) {
+                return _ResponsiveTapWidget(
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Desafio Diário: Em desenvolvimento (Acesso Admin)'),
+                        backgroundColor: AppColors.primary,
+                      ),
+                    );
+                  },
+                  child: Row(
                     children: [
-                      Text('Desafio Diário', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-                      Text('NR-10 • Revisão Rápida', style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.15),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(Icons.timer, color: AppColors.primary, size: 20),
+                      ),
+                      const SizedBox(width: 12),
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Desafio Diário', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+                            Text('Acesso Teste Admin', style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                          ],
+                        ),
+                      ),
+                      const Icon(Icons.arrow_forward_ios, color: AppColors.primary, size: 14),
                     ],
                   ),
+                );
+              }
+              return Opacity(
+                opacity: 0.45,
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.timer, color: Colors.grey, size: 20),
+                    ),
+                    const SizedBox(width: 12),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Desafio Diário', style: TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.bold)),
+                          Text('Em breve...', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withValues(alpha: 0.12),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
+                      ),
+                      child: const Text('EM BREVE', style: TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+                    ),
+                  ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: AppColors.gold.withValues(alpha: 0.15),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Text('+50 XP', style: TextStyle(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.w900)),
-                ),
-              ],
-            ),
+              );
+            }
           ),
         ],
       ),
@@ -866,50 +1151,74 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  Widget _buildNormasList(BuildContext context) {
-    return StreamBuilder<List<StandardMetadata>>(
-      stream: StandardsService().getTopStandards(limit: 3),
-      builder: (context, snap) {
-        // Fallback: show skeleton while loading
-        if (!snap.hasData || snap.data!.isEmpty) {
-          return _buildNormasSkeleton();
+  Widget _buildTopModulesList(BuildContext context) {
+    final asyncModules = ref.watch(topModulesStreamProvider);
+
+    return asyncModules.when(
+      data: (modules) {
+        if (modules.isEmpty) {
+          return Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: AppColors.card,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
+            ),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.auto_awesome_mosaic_outlined, color: AppColors.textMuted, size: 28),
+                SizedBox(height: 8),
+                Text(
+                  'Nenhum módulo em destaque no momento.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'Continue explorando para descobrir novos conteúdos!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                ),
+              ],
+            ),
+          );
         }
 
-        final standards = snap.data!;
+        final top3Modules = modules.take(3).toList();
+
         return SizedBox(
-          height: 140,
+          height: 165,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
-            itemCount: standards.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 16),
+            itemCount: top3Modules.length,
+            separatorBuilder: (_, index) => const SizedBox(width: 16),
             itemBuilder: (ctx, i) {
-              final s = standards[i];
-              Color accent;
-              try {
-                final hex = s.colorHex.replaceAll('#', '');
-                accent = Color(int.parse('FF$hex', radix: 16));
-              } catch (_) {
-                accent = AppColors.primary;
-              }
+              final m = top3Modules[i];
               return SizedBox(
                 width: 140,
-                child: _buildNormaCard(context, s.code, s.title, accent, s.id),
+                child: _buildTopModuleCard(context, m),
               );
             },
           ),
         );
       },
+      loading: () => _buildModulesSkeleton(),
+      error: (err, stack) => SizedBox(
+        height: 165,
+        child: Center(
+          child: Text('Erro ao carregar módulos', style: TextStyle(color: Colors.red.shade300)),
+        ),
+      ),
     );
   }
 
-
-  Widget _buildNormaCard(BuildContext context, String code, String name, Color iconColor, [String? standardId]) {
-    final id = standardId ?? code.toLowerCase().replaceAll(' ', '-');
+  Widget _buildTopModuleCard(BuildContext context, SPARKModule module) {
     return _ResponsiveTapWidget(
       onTap: () {
-        StandardsService().incrementClick(id);
-        context.push('/standard-detail', extra: {'standardId': id});
+        context.push('/module/${module.categoryId}/${module.id}');
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
@@ -921,25 +1230,39 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
             ),
+            padding: const EdgeInsets.all(12),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 56,
-                  height: 56,
-                  decoration: BoxDecoration(color: iconColor.withValues(alpha: 0.2), shape: BoxShape.circle),
-                  child: Center(
-                    child: Container(
-                      width: 28,
-                      height: 28,
-                      decoration: BoxDecoration(color: iconColor, borderRadius: BorderRadius.circular(8)),
-                    ),
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.2),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Center(
+                    child: Icon(Icons.star, color: AppColors.primary, size: 24),
                   ),
                 ),
-                const SizedBox(height: 14),
-                Text(code, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 4),
-                Text(name, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12), textAlign: TextAlign.center),
+                const SizedBox(height: 12),
+                Text(
+                  module.title,
+                  style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                if (module.subtitle.isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    module.subtitle,
+                    style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ],
             ),
           ),
@@ -948,57 +1271,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  Widget _buildSecurityHighlightCard() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        gradient: const LinearGradient(
-          colors: [Color(0xFF0D3B1A), Color(0xFF061629)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        border: Border.all(color: const Color(0xFF0D3B1A).withValues(alpha: 0.5)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: AppColors.accent.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const Icon(Icons.security, color: AppColors.accent, size: 28),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Destaque de Segurança', style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 6),
-                Text(
-                  'Confira as novas diretrizes da NR-10 e mantenha-se atualizado.',
-                  style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 13, height: 1.4),
-                ),
-                const SizedBox(height: 12),
-                _ResponsiveTapWidget(
-                  onTap: () => context.push('/standards'),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: BoxDecoration(color: AppColors.accent, borderRadius: BorderRadius.circular(8)),
-                    child: const Text('Acessar agora', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold, fontSize: 13)),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildPowerplayBanner() {
     return _ResponsiveTapWidget(

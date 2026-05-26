@@ -8,7 +8,10 @@ import '../admin_controller.dart';
 import 'admin_entity_form.dart';
 
 class AdminDialogs {
-  static Future<void> showCreateCategory(BuildContext context, WidgetRef ref) async {
+  static Future<void> showCreateCategory(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
     await showDialog(
       context: context,
       barrierDismissible: true,
@@ -17,18 +20,35 @@ class AdminDialogs {
         fields: const [
           FieldConfig(key: FS.title, label: 'Título', required: true),
           FieldConfig(key: 'description', label: 'Descrição', maxLines: 3),
-          FieldConfig(key: 'icon', label: 'Emoji ou Ícone (Ex: 🚀)', hint: 'Escolha um símbolo marcante', required: false),
-          FieldConfig(key: 'imageUrl', label: 'URL da Imagem de Capa', hint: 'https://exemplo.com/imagem.png', required: false),
+          FieldConfig(
+            key: 'icon',
+            label: 'Emoji ou Ícone (Ex: 🚀)',
+            hint: 'Escolha um símbolo marcante',
+            required: false,
+          ),
+          FieldConfig(
+            key: 'imageUrl',
+            label: 'URL da Imagem de Capa',
+            hint: 'https://exemplo.com/imagem.png',
+            required: false,
+          ),
         ],
         onSave: (data) async {
-          final id = await ref.read(adminControllerProvider.notifier).create(AdminEntity.categories, data);
+          final id = await ref
+              .read(adminControllerProvider.notifier)
+              .create(AdminEntity.categories, data);
           return id ?? '';
         },
       ),
     );
   }
 
-  static Future<void> showEditCategory(BuildContext context, WidgetRef ref, String catId, Map<String, dynamic> data) async {
+  static Future<void> showEditCategory(
+    BuildContext context,
+    WidgetRef ref,
+    String catId,
+    Map<String, dynamic> data,
+  ) async {
     await showDialog(
       context: context,
       barrierDismissible: true,
@@ -42,14 +62,19 @@ class AdminDialogs {
           FieldConfig(key: 'imageUrl', label: 'URL da Imagem', required: false),
         ],
         onSave: (newData) async {
-          await ref.read(adminControllerProvider.notifier).update(AdminEntity.categories, catId, newData);
+          await ref
+              .read(adminControllerProvider.notifier)
+              .update(AdminEntity.categories, catId, newData);
           return 'ok';
         },
       ),
     );
   }
 
-  static Future<void> showCreateModule(BuildContext context, WidgetRef ref) async {
+  static Future<void> showCreateModule(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
     await showDialog(
       context: context,
       barrierDismissible: true,
@@ -62,14 +87,21 @@ class AdminDialogs {
           FieldConfig(key: 'imageUrl', label: 'URL da Imagem', required: false),
         ],
         onSave: (data) async {
-          final id = await ref.read(adminControllerProvider.notifier).create(AdminEntity.modules, data);
+          final id = await ref
+              .read(adminControllerProvider.notifier)
+              .create(AdminEntity.modules, data);
           return id ?? '';
         },
       ),
     );
   }
 
-  static Future<void> showEditModule(BuildContext context, WidgetRef ref, String modId, Map<String, dynamic> data) async {
+  static Future<void> showEditModule(
+    BuildContext context,
+    WidgetRef ref,
+    String modId,
+    Map<String, dynamic> data,
+  ) async {
     await showDialog(
       context: context,
       barrierDismissible: true,
@@ -83,14 +115,19 @@ class AdminDialogs {
           FieldConfig(key: 'imageUrl', label: 'URL da Imagem', required: false),
         ],
         onSave: (newData) async {
-          await ref.read(adminControllerProvider.notifier).update(AdminEntity.modules, modId, newData);
+          await ref
+              .read(adminControllerProvider.notifier)
+              .update(AdminEntity.modules, modId, newData);
           return 'ok';
         },
       ),
     );
   }
 
-  static Future<void> showTrailWizard(BuildContext context, WidgetRef ref) async {
+  static Future<void> showTrailWizard(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
     await showDialog(
       context: context,
       barrierDismissible: true,
@@ -102,7 +139,7 @@ class AdminDialogs {
     await showDialog(
       context: context,
       barrierDismissible: true,
-      builder: (ctx) => _ImportJSONDialog(ref: ref),
+      builder: (ctx) => _JSONImportDialog(ref: ref),
     );
   }
 
@@ -110,56 +147,116 @@ class AdminDialogs {
     required BuildContext context,
     required String title,
     required String content,
-    required VoidCallback onConfirm,
+    required Future<void> Function() onConfirm,
   }) async {
     await showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppColors.surface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Row(
-          children: [
-            const Icon(Icons.warning_amber_rounded, color: AppColors.error, size: 28),
-            const SizedBox(width: 12),
-            Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          ],
-        ),
-        content: Text(content, style: const TextStyle(color: AppColors.textSecondary)),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('CANCELAR', style: TextStyle(color: AppColors.textMuted)),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(ctx);
-              onConfirm();
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.error,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            ),
-            child: const Text('DELETAR', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          ),
-        ],
+      barrierDismissible: true,
+      builder: (ctx) => _ConfirmDeleteDialog(
+        title: title,
+        content: content,
+        onConfirm: onConfirm,
       ),
     );
   }
 }
 
-class _ImportJSONDialog extends StatefulWidget {
-  final WidgetRef ref;
-  const _ImportJSONDialog({required this.ref});
+// ─── CONFIRM DELETE DIALOG (com loading) ─────────────────────────────────────
+class _ConfirmDeleteDialog extends StatefulWidget {
+  final String title;
+  final String content;
+  final Future<void> Function() onConfirm;
+
+  const _ConfirmDeleteDialog({
+    required this.title,
+    required this.content,
+    required this.onConfirm,
+  });
 
   @override
-  State<_ImportJSONDialog> createState() => _ImportJSONDialogState();
+  State<_ConfirmDeleteDialog> createState() => _ConfirmDeleteDialogState();
 }
 
-class _ImportJSONDialogState extends State<_ImportJSONDialog> {
+class _ConfirmDeleteDialogState extends State<_ConfirmDeleteDialog> {
+  bool _isDeleting = false;
+
+  Future<void> _handleDelete() async {
+    setState(() => _isDeleting = true);
+    try {
+      await widget.onConfirm();
+    } finally {
+      if (mounted) Navigator.pop(context);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: AppColors.card,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: const BorderSide(color: AppColors.surface, width: 1),
+      ),
+      title: Row(
+        children: [
+          const Icon(Icons.warning_amber_rounded, color: AppColors.error, size: 28),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              widget.title,
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+      content: Text(
+        widget.content,
+        style: const TextStyle(color: AppColors.textSecondary, height: 1.4),
+      ),
+      actionsPadding: const EdgeInsets.only(right: 24, bottom: 24),
+      actions: [
+        TextButton(
+          onPressed: _isDeleting ? null : () => Navigator.pop(context),
+          style: TextButton.styleFrom(foregroundColor: AppColors.textSecondary),
+          child: const Text('CANCELAR'),
+        ),
+        ElevatedButton(
+          onPressed: _isDeleting ? null : _handleDelete,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.error,
+            foregroundColor: Colors.white,
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          ),
+          child: _isDeleting
+              ? const SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
+                )
+              : const Text('DELETAR', style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+      ],
+    );
+  }
+}
+
+class _JSONImportDialog extends StatefulWidget {
+
+  final WidgetRef ref;
+  const _JSONImportDialog({required this.ref});
+
+  @override
+  State<_JSONImportDialog> createState() => _JSONImportDialogState();
+}
+
+class _JSONImportDialogState extends State<_JSONImportDialog> {
+  final _formKey = GlobalKey<FormState>();
   final _jsonCtrl = TextEditingController();
+
   bool _isSaving = false;
-  bool _showSuccess = false;
-  String? _error;
+  String? _errorMsg;
 
   @override
   void dispose() {
@@ -168,41 +265,44 @@ class _ImportJSONDialogState extends State<_ImportJSONDialog> {
   }
 
   Future<void> _submit() async {
-    final text = _jsonCtrl.text.trim();
-    if (text.isEmpty) {
-      setState(() => _error = 'Cole o conteúdo JSON primeiro.');
-      return;
-    }
-
+    if (!_formKey.currentState!.validate()) return;
     setState(() {
       _isSaving = true;
-      _error = null;
+      _errorMsg = null;
     });
 
     try {
-      final Map<String, dynamic> data = jsonDecode(text);
-      
-      final success = await widget.ref.read(adminControllerProvider.notifier).importFromJSON(data);
+      final Map<String, dynamic> jsonMap = jsonDecode(_jsonCtrl.text);
+      final success = await widget.ref
+          .read(adminControllerProvider.notifier)
+          .importFromJSON(jsonMap);
 
       if (success && mounted) {
-        setState(() {
-          _isSaving = false;
-          _showSuccess = true;
-        });
+        final messenger = ScaffoldMessenger.of(context);
+        Navigator.of(context, rootNavigator: true).pop();
+        messenger.hideCurrentSnackBar();
+        messenger.showSnackBar(
+          const SnackBar(
+            content: Text('JSON importado com sucesso!'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 4),
+          ),
+        );
+        widget.ref.read(adminControllerProvider.notifier).applyPendingNavigation();
       } else {
         if (mounted) {
-          final state = widget.ref.read(adminControllerProvider);
+          final err = widget.ref.read(adminControllerProvider).errorMessage;
           setState(() {
-            _isSaving = false;
-            _error = state.errorMessage ?? 'Ocorreu um erro desconhecido.';
+             _isSaving = false;
+             _errorMsg = err ?? 'Erro desconhecido ao importar JSON';
           });
         }
       }
     } catch (e) {
       if (mounted) {
         setState(() {
-          _isSaving = false;
-          _error = 'JSON Inválido: $e';
+           _isSaving = false;
+           _errorMsg = 'JSON Inválido ou erro: $e';
         });
       }
     }
@@ -223,7 +323,10 @@ class _ImportJSONDialogState extends State<_ImportJSONDialog> {
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: AppColors.primary.withValues(alpha: 0.2), width: 1),
+          border: Border.all(
+            color: AppColors.primary.withValues(alpha: 0.2),
+            width: 1,
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.5),
@@ -234,7 +337,7 @@ class _ImportJSONDialogState extends State<_ImportJSONDialog> {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
-          child: _showSuccess ? _buildSuccessView() : _buildFormView(),
+          child: _buildFormView(),
         ),
       ),
     );
@@ -242,7 +345,9 @@ class _ImportJSONDialogState extends State<_ImportJSONDialog> {
 
   Widget _buildFormView() {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.9,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -251,7 +356,10 @@ class _ImportJSONDialogState extends State<_ImportJSONDialog> {
             padding: const EdgeInsets.fromLTRB(24, 24, 16, 24),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [AppColors.primary.withValues(alpha: 0.15), Colors.transparent],
+                colors: [
+                  AppColors.orange.withValues(alpha: 0.15),
+                  Colors.transparent,
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -261,119 +369,152 @@ class _ImportJSONDialogState extends State<_ImportJSONDialog> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.1),
+                    color: AppColors.orange.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Icon(Icons.code_rounded, color: AppColors.primary, size: 24),
+                  child: const Icon(
+                    Icons.data_object,
+                    color: AppColors.orange,
+                    size: 24,
+                  ),
                 ),
                 const SizedBox(width: 16),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Importar via JSON',
                         style: TextStyle(
                           color: AppColors.textPrimary,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
                         ),
                       ),
                       Text(
-                        'Cole o código JSON para criar a estrutura completa',
-                        style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                        'Cole o conteúdo JSON com as questões, módulo e categoria',
+                        style: TextStyle(
+                          color: AppColors.textSecondary.withValues(alpha: 0.7),
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.close, color: Colors.white70),
-                  onPressed: () => Navigator.pop(context),
+                Material(
+                  color: Colors.transparent,
+                  child: IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white70),
+                    onPressed: () =>
+                        Navigator.of(context, rootNavigator: true).pop(),
+                  ),
                 ),
               ],
             ),
           ),
+          if (_errorMsg != null)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              color: AppColors.error.withValues(alpha: 0.1),
+              child: Text(
+                _errorMsg!,
+                style: const TextStyle(color: AppColors.error, fontSize: 13),
+              ),
+            ),
           Flexible(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text(
-                    'CONTEÚDO JSON',
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  TextField(
-                    controller: _jsonCtrl,
-                    maxLines: 12,
-                    style: const TextStyle(
-                      color: AppColors.textPrimary, 
-                      fontFamily: 'monospace',
-                      fontSize: 13,
-                    ),
-                    decoration: InputDecoration(
-                      hintText: '{\n  "category": "...",\n  "module": "...",\n  "trail": "...",\n  "questions": [...]\n}',
-                      fillColor: Colors.black26,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text(
+                      'CONTEÚDO JSON',
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
                       ),
                     ),
-                  ),
-                  if (_error != null) ...[
-                    const SizedBox(height: 16),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.red.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.red.withValues(alpha: 0.3)),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      controller: _jsonCtrl,
+                      maxLines: 12,
+                      style: const TextStyle(
+                        color: AppColors.textPrimary,
+                        fontFamily: 'monospace',
+                        fontSize: 13,
                       ),
-                      child: Text(
-                        _error!,
-                        style: const TextStyle(color: Colors.redAccent, fontSize: 13),
+                      decoration: InputDecoration(
+                        fillColor: AppColors.card.withValues(alpha: 0.5),
+                        hintText: '{\n  "category": "...",\n  "module": "...",\n  "trail": "...",\n  "questions": [...]\n}',
                       ),
+                      validator: (v) =>
+                          (v == null || v.trim().isEmpty) ? 'Obrigatório' : null,
+                    ),
+                    const SizedBox(height: 32),
+                    Row(
+                      children: [
+                        if (!_isSaving)
+                          Expanded(
+                            flex: 1,
+                            child: TextButton(
+                              onPressed: () => Navigator.of(
+                                context,
+                                rootNavigator: true,
+                              ).pop(),
+                              child: const Text(
+                                'CANCELAR',
+                                style: TextStyle(color: AppColors.textMuted),
+                              ),
+                            ),
+                          ),
+                        if (!_isSaving) const SizedBox(width: 12),
+                        Expanded(
+                          flex: 2,
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            height: 56,
+                            child: ElevatedButton(
+                              onPressed: _isSaving ? null : _submit,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.orange,
+                                elevation: 8,
+                                shadowColor: AppColors.orange.withValues(
+                                  alpha: 0.4,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                              ),
+                              child: _isSaving
+                                  ? const SizedBox(
+                                      height: 24,
+                                      width: 24,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 3,
+                                      ),
+                                    )
+                                  : const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.file_upload, size: 20),
+                                        SizedBox(width: 12),
+                                        Text('IMPORTAR'),
+                                      ],
+                                    ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
-                  const SizedBox(height: 32),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: _isSaving ? null : () => Navigator.pop(context),
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
-                          ),
-                          child: const Text('CANCELAR', style: TextStyle(color: AppColors.textSecondary)),
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        flex: 2,
-                        child: ElevatedButton.icon(
-                          onPressed: _isSaving ? null : _submit,
-                          icon: _isSaving 
-                            ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                            : const Icon(Icons.upload_file_rounded),
-                          label: Text(_isSaving ? 'IMPORTANDO...' : 'IMPORTAR AGORA'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
             ),
           ),
@@ -382,91 +523,8 @@ class _ImportJSONDialogState extends State<_ImportJSONDialog> {
     );
   }
 
-  Widget _buildSuccessView() {
-    return Container(
-      padding: const EdgeInsets.all(40),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [AppColors.primary, AppColors.primaryLight],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.4),
-                  blurRadius: 15,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: const Icon(Icons.check_rounded, color: Colors.white, size: 48),
-          ),
-          const SizedBox(height: 32),
-          const Text(
-            'Importação Concluída!',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.textPrimary,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'O conteúdo JSON foi processado e a estrutura educacional foi criada com sucesso.',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.textSecondary.withValues(alpha: 0.8),
-              fontSize: 14,
-            ),
-          ),
-          const SizedBox(height: 40),
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () {
-                    setState(() {
-                      _showSuccess = false;
-                      _jsonCtrl.clear();
-                      _error = null;
-                    });
-                  },
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5)),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  ),
-                  child: const Text('IMPORTAR OUTRO', style: TextStyle(color: AppColors.primary)),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  ),
-                  child: const Text('FECHAR'),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+
 }
-
 
 class _TrailWizardDialog extends StatefulWidget {
   final WidgetRef ref;
@@ -482,7 +540,7 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
   final _lessonsCtrl = TextEditingController(text: '4');
   final _quizzesCtrl = TextEditingController(text: '1');
   final _questionsCtrl = TextEditingController(text: '5');
-  
+
   bool _isSaving = false;
   bool _showSuccess = false;
 
@@ -500,13 +558,15 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
     setState(() => _isSaving = true);
 
     try {
-      final success = await widget.ref.read(adminControllerProvider.notifier).generateTrail(
-        title: _titleCtrl.text,
-        numLessons: int.tryParse(_lessonsCtrl.text) ?? 0,
-        numEvaluations: int.tryParse(_quizzesCtrl.text) ?? 0,
-        questionsPerLesson: 0,
-        questionsPerEvaluation: int.tryParse(_questionsCtrl.text) ?? 0,
-      );
+      final success = await widget.ref
+          .read(adminControllerProvider.notifier)
+          .generateTrail(
+            title: _titleCtrl.text,
+            numLessons: int.tryParse(_lessonsCtrl.text) ?? 0,
+            numEvaluations: int.tryParse(_quizzesCtrl.text) ?? 0,
+            questionsPerLesson: 0,
+            questionsPerEvaluation: int.tryParse(_questionsCtrl.text) ?? 0,
+          );
 
       if (success && mounted) {
         setState(() {
@@ -521,7 +581,11 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
     }
   }
 
-  Widget _buildTextField(String label, TextEditingController controller, {bool isNumber = false}) {
+  Widget _buildTextField(
+    String label,
+    TextEditingController controller, {
+    bool isNumber = false,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -543,7 +607,8 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
             fillColor: AppColors.card.withValues(alpha: 0.5),
             hintText: 'Digite aqui...',
           ),
-          validator: (v) => (v == null || v.trim().isEmpty) ? 'Obrigatório' : null,
+          validator: (v) =>
+              (v == null || v.trim().isEmpty) ? 'Obrigatório' : null,
         ),
       ],
     );
@@ -564,7 +629,10 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: AppColors.primary.withValues(alpha: 0.2), width: 1),
+          border: Border.all(
+            color: AppColors.primary.withValues(alpha: 0.2),
+            width: 1,
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.5),
@@ -583,7 +651,9 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
 
   Widget _buildFormView() {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.9),
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.9,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -592,7 +662,10 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
             padding: const EdgeInsets.fromLTRB(24, 24, 16, 24),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [AppColors.orange.withValues(alpha: 0.15), Colors.transparent],
+                colors: [
+                  AppColors.orange.withValues(alpha: 0.15),
+                  Colors.transparent,
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -605,7 +678,11 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
                     color: AppColors.orange.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Icon(Icons.auto_awesome, color: AppColors.orange, size: 24),
+                  child: const Icon(
+                    Icons.auto_awesome,
+                    color: AppColors.orange,
+                    size: 24,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -635,7 +712,8 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
                   color: Colors.transparent,
                   child: IconButton(
                     icon: const Icon(Icons.close, color: Colors.white70),
-                    onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                    onPressed: () =>
+                        Navigator.of(context, rootNavigator: true).pop(),
                   ),
                 ),
               ],
@@ -653,13 +731,29 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
                     const SizedBox(height: 20),
                     Row(
                       children: [
-                        Expanded(child: _buildTextField('Qtd. Lições', _lessonsCtrl, isNumber: true)),
+                        Expanded(
+                          child: _buildTextField(
+                            'Qtd. Lições',
+                            _lessonsCtrl,
+                            isNumber: true,
+                          ),
+                        ),
                         const SizedBox(width: 16),
-                        Expanded(child: _buildTextField('Qtd. Provas', _quizzesCtrl, isNumber: true)),
+                        Expanded(
+                          child: _buildTextField(
+                            'Qtd. Provas',
+                            _quizzesCtrl,
+                            isNumber: true,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    _buildTextField('Questões por Prova', _questionsCtrl, isNumber: true),
+                    _buildTextField(
+                      'Questões por Prova',
+                      _questionsCtrl,
+                      isNumber: true,
+                    ),
                     const SizedBox(height: 32),
                     Row(
                       children: [
@@ -667,8 +761,14 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
                           Expanded(
                             flex: 1,
                             child: TextButton(
-                              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-                              child: const Text('CANCELAR', style: TextStyle(color: AppColors.textMuted)),
+                              onPressed: () => Navigator.of(
+                                context,
+                                rootNavigator: true,
+                              ).pop(),
+                              child: const Text(
+                                'CANCELAR',
+                                style: TextStyle(color: AppColors.textMuted),
+                              ),
                             ),
                           ),
                         if (!_isSaving) const SizedBox(width: 12),
@@ -682,17 +782,25 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.orange,
                                 elevation: 8,
-                                shadowColor: AppColors.orange.withValues(alpha: 0.4),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                shadowColor: AppColors.orange.withValues(
+                                  alpha: 0.4,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
                               ),
                               child: _isSaving
                                   ? const SizedBox(
                                       height: 24,
                                       width: 24,
-                                      child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3),
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 3,
+                                      ),
                                     )
                                   : const Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Icon(Icons.auto_awesome, size: 20),
                                         SizedBox(width: 12),
@@ -725,7 +833,10 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
             height: 80,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [AppColors.orange, AppColors.orange.withValues(alpha: 0.7)],
+                colors: [
+                  AppColors.orange,
+                  AppColors.orange.withValues(alpha: 0.7),
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -738,7 +849,11 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
                 ),
               ],
             ),
-            child: const Icon(Icons.check_rounded, color: Colors.white, size: 48),
+            child: const Icon(
+              Icons.check_rounded,
+              color: Colors.white,
+              size: 48,
+            ),
           ),
           const SizedBox(height: 32),
           const Text(
@@ -767,7 +882,9 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.orange,
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
               child: const Text('FECHAR'),
             ),

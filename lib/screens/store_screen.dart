@@ -5,6 +5,7 @@ import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spark_app/providers/user_provider.dart';
 
 class CartNotifier extends Notifier<List<CartItem>> {
   @override
@@ -90,6 +91,52 @@ class StoreScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(cartProvider);
+    final userService = ref.watch(userServiceProvider);
+    
+    if (!(userService.user?.isAdmin ?? false)) {
+      return SparksBackground(
+        child: PcbBackground(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 16, 20, 0),
+                    child: Row(
+                      children: [
+                        _buildSmartBackButton(context),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.lock_outline, size: 80, color: AppColors.primary),
+                          const SizedBox(height: 24),
+                          const Text(
+                            'LOJA EM REFORMA',
+                            style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold, letterSpacing: 2),
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            'Nossos técnicos estão trabalhando em\nnovidades incríveis. Voltaremos em breve!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: AppColors.textSecondary, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return SparksBackground(
       child: PcbBackground(
