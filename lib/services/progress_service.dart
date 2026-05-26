@@ -37,7 +37,9 @@ class ProgressService {
   /// 2. NÃO tenta atualizar XP/SP diretamente (campos sensíveis protegidos)
   /// 3. Delega XP/SP para Cloud Functions via UserService
   /// 4. Funciona offline enfileirando operações
-  Future<void> markLessonComplete(
+  ///
+  /// Retorna [true] se esta lição completou o módulo inteiro.
+  Future<bool> markLessonComplete(
     String uid,
     String catId,
     String modId,
@@ -62,7 +64,7 @@ class ProgressService {
           spEarned: spEarned,
           moduleName: moduleName,
         );
-        return;
+        return false;
       }
 
       final userRef = _fs.collection(FS.users).doc(uid);
@@ -115,19 +117,35 @@ class ProgressService {
       // Calcula localmente o progresso baseado no que sabemos
       List<String> alreadyCompleted = [];
       int knownTotal = 0;
+      bool wasAlreadyCompleted = false;
       if (progSnap != null && progSnap.docs.isNotEmpty) {
         final existingData = progSnap.docs.first.data();
         alreadyCompleted = List<String>.from(existingData[FS.completedLessons] ?? []);
         knownTotal = (existingData['totalLessons'] as int?) ?? 0;
+        wasAlreadyCompleted = (existingData[FS.isCompleted] as bool?) ?? false;
       }
       
       final completedSet = {...alreadyCompleted, lessonId};
       int totalLessons = getLessonsForModule(modId).length;
       if (totalLessons == 0) totalLessons = knownTotal;
-      if (totalLessons == 0) totalLessons = completedSet.length;
+      
+      // Se ainda for 0, tenta buscar a quantidade real de lições do Firestore
+      if (totalLessons == 0) {
+        try {
+           final modSnap = await _fs.collection(FS.categories).doc(catId).collection(FS.modules).doc(modId).get();
+           if (modSnap.exists) {
+             final modData = modSnap.data();
+             totalLessons = (modData?['totalLessons'] as int?) ?? 0;
+           }
+        } catch(e) {
+           debugPrint('[ProgressService] Erro ao buscar totalLessons do modulo: $e');
+        }
+      }
 
-      final double updatedProgress = (completedSet.length / totalLessons).clamp(0.0, 1.0);
-      final bool moduleCompleted = updatedProgress >= 1.0;
+      // Se após todas as tentativas continuar 0, usa um valor alto provisório 
+      // para evitar autocompletar o módulo (ou mantém 0 e impede moduleCompleted = true)
+      final double updatedProgress = totalLessons > 0 ? (completedSet.length / totalLessons).clamp(0.0, 1.0) : 0.0;
+      final bool moduleCompleted = totalLessons > 0 && completedSet.length >= totalLessons;
 
       debugPrint('[ProgressService] Progresso: ${(updatedProgress * 100).toStringAsFixed(1)}% ($completedSet.length/$totalLessons)');
 
@@ -145,6 +163,11 @@ class ProgressService {
       batch.set(userRef, {
         FS.totalLessonsCompleted: FieldValue.increment(1),
         FS.updatedAt: FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+
+      // ✅ Incrementa accessCount para atualizar módulos em destaque
+      batch.set(_fs.collection(FS.categories).doc(catId).collection(FS.modules).doc(modId), {
+        FS.accessCount: FieldValue.increment(1),
       }, SetOptions(merge: true));
 
       // ✅ IMPORTANTE: Aguarda o batch.commit() explicitamente
@@ -169,6 +192,7 @@ class ProgressService {
       // ⚠️ IMPORTANTE: XP e Spark Points devem ser sincronizados separadamente
       // via UserService.addXp() e UserService.addSparkPoints()
       debugPrint('[ProgressService] ⚠️ XP ($xpEarned) e SP ($spEarned) devem ser sincronizados via Cloud Functions');
+      debugPrint('[ProgressService] Módulo completo: $moduleCompleted');
 
       // Audit log (sem await para não bloquear UI)
       Future.microtask(() async {
@@ -225,6 +249,7 @@ class ProgressService {
         }
       });
 
+      return moduleCompleted && !wasAlreadyCompleted;
     } catch (e) {
       debugPrint('[ProgressService] ✗ Erro ao marcar lição como completa: $e');
       rethrow;

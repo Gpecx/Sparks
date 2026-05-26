@@ -119,15 +119,19 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       for (int i = 0; i < data.length; i++) {
         data[i].position = i + 1;
       }
-      if (mounted) setState(() {
+      if (mounted) {
+        setState(() {
         _clanPlayers = data;
         _loadingClan = false;
       });
+      }
     } catch (e) {
-      if (mounted) setState(() {
+      if (mounted) {
+        setState(() {
         _errorClan = 'Erro ao carregar ranking do clã';
         _loadingClan = false;
       });
+      }
     }
   }
 
@@ -264,7 +268,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                       children: [
                                         // Pódio
                                         SizedBox(
-                                          height: 220,
+                                          height: 310,
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,

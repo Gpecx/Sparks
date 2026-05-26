@@ -459,7 +459,7 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
                           _level.sceneBuilder(_foundIds),
                           AnimatedBuilder(
                             animation: _pulseAnim,
-                            builder: (_, __) => CustomPaint(
+                            builder: (_, _) => CustomPaint(
                               painter: _HitZoneOverlayPainter(
                                 hitZones: _level.hitZones,
                                 foundIds: _foundIds,
@@ -910,8 +910,12 @@ class _QuadroPainter extends CustomPainter {
     // Fundo
     rect(Rect.fromLTWH(0,0,560,320), const Color(0xFF111811));
     final gp = Paint()..color=const Color(0xFF141e14)..strokeWidth=0.5;
-    for (double x=0; x<560; x+=20) canvas.drawLine(Offset(x*sx,0), Offset(x*sx,size.height), gp);
-    for (double y=0; y<320; y+=20) canvas.drawLine(Offset(0,y*sy), Offset(size.width,y*sy), gp);
+    for (double x=0; x<560; x+=20) {
+      canvas.drawLine(Offset(x*sx,0), Offset(x*sx,size.height), gp);
+    }
+    for (double y=0; y<320; y+=20) {
+      canvas.drawLine(Offset(0,y*sy), Offset(size.width,y*sy), gp);
+    }
 
     // Gabinete
     rect(Rect.fromLTWH(50,12,370,285), const Color(0xFF0a1a12),
@@ -1066,8 +1070,10 @@ class _PainelIndustrialPainter extends CustomPainter {
 
     void circle(Offset center, double r, Color fill, {Color? stroke, double sw=1}) {
       canvas.drawCircle(Offset(center.dx*sx, center.dy*sy), r*sx, Paint()..color=fill);
-      if (stroke != null) canvas.drawCircle(Offset(center.dx*sx, center.dy*sy), r*sx,
+      if (stroke != null) {
+        canvas.drawCircle(Offset(center.dx*sx, center.dy*sy), r*sx,
         Paint()..color=stroke..style=PaintingStyle.stroke..strokeWidth=sw);
+      }
     }
 
     void text(String t, Offset pos, Color color, {double fs=8, TextAlign align=TextAlign.left}) {
@@ -1082,8 +1088,12 @@ class _PainelIndustrialPainter extends CustomPainter {
     // Fundo + grid
     rect(Rect.fromLTWH(0,0,560,310), const Color(0xFF111811));
     final gp = Paint()..color=const Color(0xFF141e14)..strokeWidth=0.5;
-    for (double x=0; x<560; x+=20) canvas.drawLine(Offset(x*sx,0), Offset(x*sx,size.height), gp);
-    for (double y=0; y<310; y+=20) canvas.drawLine(Offset(0,y*sy), Offset(size.width,y*sy), gp);
+    for (double x=0; x<560; x+=20) {
+      canvas.drawLine(Offset(x*sx,0), Offset(x*sx,size.height), gp);
+    }
+    for (double y=0; y<310; y+=20) {
+      canvas.drawLine(Offset(0,y*sy), Offset(size.width,y*sy), gp);
+    }
 
     // Gabinete
     rect(Rect.fromLTWH(40,10,390,280), const Color(0xFF0c1c0c),

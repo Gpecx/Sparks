@@ -30,6 +30,9 @@ abstract class FS {
   static const String clickCount = 'clickCount';
   static const String colorHex = 'colorHex';
 
+  // ── Module fields ─────────────────────────────────────────────────────────
+  static const String accessCount = 'accessCount';
+
   // ── Covenant selection fields ─────────────────────────────────────────────
   static const String isSelected = 'isSelected';
   static const String weekKey = 'weekKey';
@@ -320,21 +323,23 @@ class ClanModel {
   });
 
   factory ClanModel.fromFirestore(DocumentSnapshot doc) {
-    final d = doc.data() as Map<String, dynamic>;
+    final d = doc.data() as Map<String, dynamic>? ?? {};
     return ClanModel(
       id: doc.id,
-      name: d[FS.name] as String,
-      description: d[FS.description] as String,
-      logoUrl: d[FS.logoUrl] as String,
-      createdAt: (d[FS.createdAt] as Timestamp).toDate(),
-      createdBy: d[FS.createdBy] as String,
-      memberCount: (d[FS.memberCount] as num).toInt(),
-      maxMembers: (d[FS.maxMembers] as num).toInt(),
-      totalXp: (d[FS.totalXp] as num).toInt(),
-      weeklyXp: (d[FS.weeklyXp] as num).toInt(),
-      isPublic: d[FS.isPublic] as bool,
-      inviteCode: d[FS.inviteCode] as String,
-      rank: (d[FS.rank] as num).toInt(),
+      name: d[FS.name] as String? ?? d[FS.displayName] as String? ?? 'Sem nome',
+      description: d[FS.description] as String? ?? '',
+      logoUrl: d[FS.logoUrl] as String? ?? '',
+      createdAt: d[FS.createdAt] != null
+          ? (d[FS.createdAt] as Timestamp).toDate()
+          : DateTime.now(),
+      createdBy: d[FS.createdBy] as String? ?? '',
+      memberCount: (d[FS.memberCount] as num?)?.toInt() ?? 0,
+      maxMembers: (d[FS.maxMembers] as num?)?.toInt() ?? 50,
+      totalXp: (d[FS.totalXp] as num?)?.toInt() ?? 0,
+      weeklyXp: (d[FS.weeklyXp] as num?)?.toInt() ?? 0,
+      isPublic: d[FS.isPublic] as bool? ?? true,
+      inviteCode: d[FS.inviteCode] as String? ?? '',
+      rank: (d[FS.rank] as num?)?.toInt() ?? 0,
     );
   }
 

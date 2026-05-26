@@ -17,7 +17,7 @@
  *  - unlockBadge       : Concede badge se ainda não desbloqueada.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addXp = void 0;
+exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
 const admin = require("firebase-admin");
 const https_1 = require("firebase-functions/v2/https");
 const v2_1 = require("firebase-functions/v2");
@@ -157,6 +157,40 @@ exports.addXp = (0, https_1.onCall)({ region: "southamerica-east1" }, async (req
     }
     v2_1.logger.info(`[addXp] uid=${uid} amount=${amount} newXp=${result.newXp} level=${result.newLevel}`);
     return result;
+});
+exports.addSparkPoints = (0, https_1.onCall)({ region: "southamerica-east1" }, async (request) => {
+    var _a;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    const { amount, source = "reward" } = request.data;
+    if (!amount || typeof amount !== "number" || amount <= 0) {
+        throw new https_1.HttpsError("invalid-argument", "amount deve ser um número positivo.");
+    }
+    const userRef = db.collection("users").doc(uid);
+    let newBalance = 0;
+    await db.runTransaction(async (tx) => {
+        var _a;
+        const snap = await tx.get(userRef);
+        if (!snap.exists) {
+            throw new https_1.HttpsError("not-found", "Documento do usuário não encontrado.");
+        }
+        const currentSp = (_a = snap.data()["sparkPoints"]) !== null && _a !== void 0 ? _a : 0;
+        newBalance = currentSp + amount;
+        tx.update(userRef, {
+            sparkPoints: admin.firestore.FieldValue.increment(amount),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+    });
+    try {
+        await writeAuditLog(uid, "sp_gained", amount, source, { newBalance });
+    }
+    catch (e) {
+        v2_1.logger.warn("[addSparkPoints] Audit log error:", e);
+    }
+    v2_1.logger.info(`[addSparkPoints] uid=${uid} amount=${amount} newBalance=${newBalance}`);
+    return { newBalance };
 });
 exports.spendSparkPoints = (0, https_1.onCall)({ region: "southamerica-east1" }, async (request) => {
     var _a;

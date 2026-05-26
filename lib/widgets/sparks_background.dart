@@ -63,7 +63,6 @@ class _MovingSparksPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final cx = size.width / 2;
-    final cy = size.height / 2;
 
     final sparkPaint = Paint()
       ..color = AppColors.accent.withValues(alpha: 0.15)

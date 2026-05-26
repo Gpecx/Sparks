@@ -23,9 +23,20 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid));
     }
 
-    function isClanChief(clanId) {
+    function isClanAdmin(clanId) {
       return isAuthenticated()
-        && get(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid)).data.role == 'chefe';
+        && exists(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid))
+        && get(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isClanModerator(clanId) {
+      return isAuthenticated()
+        && exists(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid))
+        && get(/databases/$(database)/documents/clans/$(clanId)/members/$(request.auth.uid)).data.role == 'moderador';
+    }
+
+    function isClanAdminOrModerator(clanId) {
+      return isClanAdmin(clanId) || isClanModerator(clanId);
     }
 
     // Campos controlados exclusivamente pelo servidor (Cloud Functions / Admin SDK).
@@ -56,10 +67,18 @@ service cloud.firestore {
         && request.resource.data.role is string
         && request.resource.data.xp is number
         && request.resource.data.sparkPoints is number;
-      allow update: if isSelf(uid)
-        && !touchesSensitiveFields()
-        && (!request.resource.data.keys().hasAny(['role'])
-           || request.resource.data.role == resource.data.role);
+      allow update: if (isSelf(uid)
+          && !('role' in request.resource.data.diff(resource.data).affectedKeys()))
+        || (
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['clanId', 'clanName'])
+          && (
+              isSelf(uid)
+              || !('clanId' in resource.data) 
+              || resource.data.clanId == ""
+              || (('clanId' in resource.data) && resource.data.clanId != "" && (isClanAdminOrModerator(resource.data.clanId) || get(/databases/$(database)/documents/clans/$(resource.data.clanId)).data.createdBy == request.auth.uid))
+              || (('clanId' in request.resource.data) && request.resource.data.clanId != "" && (isClanAdminOrModerator(request.resource.data.clanId) || get(/databases/$(database)/documents/clans/$(request.resource.data.clanId)).data.createdBy == request.auth.uid))
+          )
+        );
       allow write: if isAdmin();
 
       match /progress/{modId} {
@@ -118,7 +137,8 @@ service cloud.firestore {
 
       match /modules/{modId} {
         allow read: if isAuthenticated();
-        allow write: if isAdmin();
+        allow update: if isAdmin() || (isAuthenticated() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['accessCount']));
+        allow create, delete: if isAdmin();
 
         match /trails/{trailId} {
           allow read: if isAuthenticated();
@@ -142,14 +162,25 @@ service cloud.firestore {
     match /clans/{clanId} {
       allow read: if isAuthenticated();
       allow create: if isAuthenticated();
-      allow update: if isClanMember(clanId);
-      allow delete: if false;
+      allow update: if isClanMember(clanId)
+        || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['memberCount']) && isAuthenticated());
+      allow delete: if resource.data.createdBy == request.auth.uid || isClanAdmin(clanId) || isAdmin();
 
       match /members/{memberUid} {
         allow read: if isAuthenticated();
-        allow write: if request.auth.uid == memberUid
-          || isClanChief(clanId)
-          || isAdmin();
+        allow create: if request.auth.uid == memberUid
+          || isClanAdminOrModerator(clanId)
+          || isAdmin()
+          || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
+        allow update: if request.auth.uid == memberUid
+          || isClanAdminOrModerator(clanId)
+          || isAdmin()
+          || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
+        allow delete: if request.auth.uid == memberUid
+          || isAdmin()
+          || (exists(/databases/$(database)/documents/clans/$(clanId))
+              && (isClanAdminOrModerator(clanId)
+                  || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid));
       }
 
       match /messages/{id} {
@@ -157,16 +188,46 @@ service cloud.firestore {
         allow read: if isClanMember(clanId);
         allow update: if false;
         allow delete: if resource.data.uid == request.auth.uid
-          || isClanChief(clanId)
-          || isAdmin();
+          || isClanAdminOrModerator(clanId)
+          || isAdmin()
+          || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
+      }
+
+      match /leagueProgress/{progressId} {
+        allow read: if isAuthenticated();
+        allow write: if isClanAdminOrModerator(clanId) || isAdmin();
+      }
+
+      match /weeklyMissions/{missionId} {
+        allow read: if isAuthenticated();
+        allow write: if isClanAdminOrModerator(clanId) || isAdmin();
+      }
+
+      match /quests/{questId} {
+        allow read: if isAuthenticated();
+        allow write: if isClanAdminOrModerator(clanId) 
+          || isAdmin() 
+          || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
+      }
+
+      match /requests/{requestId} {
+        allow read: if isClanAdminOrModerator(clanId) || isAdmin() || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
+        allow create: if isAuthenticated() && request.auth.uid == requestId;
+        allow update: if isClanAdminOrModerator(clanId) || isAdmin() || request.auth.uid == requestId;
+        allow delete: if isClanAdminOrModerator(clanId) || isAdmin() || request.auth.uid == requestId;
       }
     }
 
     // ─── RANKINGS ─────────────────────────────────────────────────
-
+ 
     match /rankings/{id} {
       allow read: if isAuthenticated();
       allow write: if false;
+
+      match /{weekKey}/{uid} {
+        allow read: if isAuthenticated();
+        allow write: if isAuthenticated() && request.auth.uid == uid;
+      }
     }
 
     // ─── MATCHES (DUELOS) ─────────────────────────────────────────
@@ -231,6 +292,13 @@ service cloud.firestore {
       allow create: if isAuthenticated()
         && request.resource.data.uid == request.auth.uid;
       allow update, delete: if false;
+    }
+
+    // ─── SUPORTE ──────────────────────────────────────────────────
+
+    match /support_tickets/{ticketId} {
+      allow create: if isAuthenticated();
+      allow read, update, delete: if isAdmin();
     }
   }
 }

@@ -15,11 +15,13 @@ class ModulesScreen extends ConsumerWidget {
   final SPARKCategory? category;
   // Cor enviada pela tela de Categorias (já que o SPARKCategory não armazena cor diretamente)
   final Color themeColor;
+  final IconData themeIcon;
 
   const ModulesScreen({
     super.key, 
     this.category, 
     this.themeColor = AppColors.primary,
+    this.themeIcon = Icons.school,
   });
 
   @override
@@ -65,7 +67,7 @@ class ModulesScreen extends ConsumerWidget {
                           ),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Icon(Icons.category, color: Colors.white, size: 20),
+                        child: const Icon(Icons.category, color: AppColors.textPrimary, size: 20),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -75,7 +77,7 @@ class ModulesScreen extends ConsumerWidget {
                             Text(
                               cat.title.toUpperCase(),
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: AppColors.textPrimary,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w800,
                                 letterSpacing: 1.0,
@@ -92,7 +94,7 @@ class ModulesScreen extends ConsumerWidget {
                                 ),
                               ),
                               loading: () => const SizedBox.shrink(),
-                              error: (_, __) => const SizedBox.shrink(),
+                              error: (_, _) => const SizedBox.shrink(),
                             ),
                           ],
                         ),
@@ -110,7 +112,7 @@ class ModulesScreen extends ConsumerWidget {
                         return const Center(
                           child: Text(
                             'Nenhum módulo encontrado nesta categoria.',
-                            style: TextStyle(color: Colors.white54),
+                            style: TextStyle(color: AppColors.textMuted),
                           ),
                         );
                       }
@@ -140,6 +142,7 @@ class ModulesScreen extends ConsumerWidget {
                               progress: actualProgress,
                               isLocked: isLocked,
                               categoryColor: themeColor,
+                              categoryIcon: themeIcon,
                               isTestMode: isTestMode,
                               onTap: () {
                                 if (!isTestMode && isLocked) {
@@ -160,6 +163,7 @@ class ModulesScreen extends ConsumerWidget {
                                       category: cat,
                                       module: module,
                                       themeColor: themeColor,
+                                      themeIcon: themeIcon,
                                     ),
                                   ),
                                 );
@@ -198,6 +202,7 @@ class _ModuleCard extends StatefulWidget {
   final double progress;
   final bool isLocked;
   final Color categoryColor;
+  final IconData categoryIcon;
   final VoidCallback onTap;
   final bool isTestMode;
 
@@ -206,6 +211,7 @@ class _ModuleCard extends StatefulWidget {
     required this.progress,
     required this.isLocked,
     required this.categoryColor,
+    this.categoryIcon = Icons.school,
     required this.onTap,
     this.isTestMode = false,
   });
@@ -295,8 +301,8 @@ class _ModuleCardState extends State<_ModuleCard>
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
-                        locked ? Icons.lock : Icons.folder,
-                        color: locked ? AppColors.textMuted : color,
+                        widget.categoryIcon,
+                        color: locked ? AppColors.textMuted.withValues(alpha: 0.4) : color,
                         size: 24,
                       ),
                     ),
@@ -308,7 +314,7 @@ class _ModuleCardState extends State<_ModuleCard>
                           Text(
                             mod.title,
                             style: TextStyle(
-                              color: locked ? AppColors.textMuted : Colors.white,
+                              color: locked ? AppColors.textMuted : AppColors.textPrimary,
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),
@@ -337,7 +343,7 @@ class _ModuleCardState extends State<_ModuleCard>
                       Text(
                         '${(widget.progress * 100).toInt()}% Concluído',
                         style: const TextStyle(
-                          color: Colors.white70,
+                          color: AppColors.textSecondary,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
@@ -359,7 +365,7 @@ class _ModuleCardState extends State<_ModuleCard>
                 if (locked) ...[
                   const SizedBox(height: 12),
                   Text(
-                    '🔒 Bloqueado',
+                    'Bloqueado',
                     style: TextStyle(
                       color: AppColors.textMuted.withValues(alpha: 0.5),
                       fontSize: 11,
@@ -410,7 +416,7 @@ class _ResponsiveIconButtonState extends State<_ResponsiveIconButton> {
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 100),
         opacity: _pressed ? 0.5 : 1.0,
-        child: Icon(widget.icon, color: Colors.white, size: widget.size),
+        child: Icon(widget.icon, color: AppColors.textPrimary, size: widget.size),
       ),
     );
   }

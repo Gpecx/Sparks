@@ -372,7 +372,7 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
         ),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          value: validVal,
+          initialValue: validVal,
           decoration: InputDecoration(
             fillColor: AppColors.card.withValues(alpha: 0.5),
             hintText: 'Selecione ${f.label.toLowerCase()}',
@@ -610,7 +610,7 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(Icons.check, size: 20),
-                                      const SizedBox(width: 12),
+                                      SizedBox(width: 12),
                                       Text('FINALIZAR'),
                                     ],
                                   ),
@@ -682,8 +682,12 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
                   onPressed: () {
                     setState(() {
                       _showSuccess = false;
-                      _textControllers.values.forEach((c) => c.clear());
-                      _dropdownValues.keys.forEach((k) => _dropdownValues[k] = null);
+                      for (var c in _textControllers.values) {
+                        c.clear();
+                      }
+                      for (var k in _dropdownValues.keys) {
+                        _dropdownValues[k] = null;
+                      }
                     });
                   },
                   style: OutlinedButton.styleFrom(

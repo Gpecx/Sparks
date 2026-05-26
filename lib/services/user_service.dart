@@ -11,6 +11,8 @@ import 'package:spark_app/services/analytics_service.dart';
 import 'package:spark_app/services/audit_service.dart';
 import 'package:spark_app/services/fcm_service.dart';
 import 'package:spark_app/services/gamification_service.dart';
+import 'package:spark_app/services/covenant_service.dart';
+import 'package:spark_app/services/clan_service.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  USER SERVICE — Sincronização completa com Firestore
@@ -176,10 +178,10 @@ class UserService extends ChangeNotifier {
   }
 
   // ─────────────────────────────────────────────────────────────────
-  //  XP E SPARK POINTS — via Cloud Functions
+  //  XP E SPARK POINTS — Direto no Firestore (Client-Side)
   // ─────────────────────────────────────────────────────────────────
 
-  /// Adiciona XP via Cloud Function (transação atômica no servidor).
+  /// Adiciona XP localmente via Firestore.
   /// Retorna os novos valores ou lança exceção em caso de falha.
   Future<AddXpResult> addXp(int amount, {String source = 'app'}) async {
     if (uid.isEmpty) throw Exception('Usuário não autenticado');
@@ -187,8 +189,8 @@ class UserService extends ChangeNotifier {
     try {
       final docRef = _db.collection('users').doc(uid);
       
-      final currentXp = this.xp;
-      final currentLevel = this.level;
+      final currentXp = xp;
+      final currentLevel = level;
       
       final newXp = currentXp + amount;
       final newLevel = GamificationUtils.calcLevel(newXp);
@@ -204,7 +206,7 @@ class UserService extends ChangeNotifier {
         'updatedAt': FieldValue.serverTimestamp(),
       });
 
-      // Update Rankings locally
+      // Atualiza os Rankings localmente
       final weekKey = GamificationUtils.currentWeekKey();
       await _db.collection('rankings').doc('weekly').collection(weekKey).doc(uid).set({
         'uid': uid,
@@ -215,6 +217,15 @@ class UserService extends ChangeNotifier {
         'weeklyXp': FieldValue.increment(amount),
         'updatedAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
+
+      // Atualiza o XP do clã se o usuário fizer parte de um
+      if (clanId != null && clanId!.isNotEmpty) {
+        try {
+          await ClanService().addXpToClan(clanId!, uid, amount);
+        } catch (e) {
+          debugPrint('[UserService.addXp] Erro ao adicionar XP ao clã: \$e');
+        }
+      }
 
       final badgesUnlocked = <String>[];
       // Analytics locais
@@ -235,7 +246,7 @@ class UserService extends ChangeNotifier {
               'unlockedBadgeIds': FieldValue.arrayUnion([b]),
             });
             await AnalyticsService().logBadgeUnlocked(badgeId: b, source: source);
-            // Optionally add bonus XP directly
+            // Opcionalmente adiciona bônus de XP diretamente por conquista
             await docRef.update({
               'xp': FieldValue.increment(50),
               'weeklyXp': FieldValue.increment(50),
@@ -258,83 +269,114 @@ class UserService extends ChangeNotifier {
     }
   }
 
-  /// Gasta Spark Points via Cloud Function.
+  /// Gasta Spark Points localmente via Firestore.
   /// Retorna false se saldo insuficiente.
   Future<bool> spendSparkPoints(int amount, {String source = 'purchase'}) async {
     if (uid.isEmpty) return false;
 
     try {
-      final callable = _functions.httpsCallable('spendSparkPoints');
-      final response = await callable.call<Map<String, dynamic>>({
-        'amount': amount,
-        'source': source,
+      final docRef = _db.collection('users').doc(uid);
+      final currentPoints = sparkPoints;
+      if (currentPoints < amount) return false;
+
+      await docRef.update({
+        'sparkPoints': FieldValue.increment(-amount),
+        'updatedAt': FieldValue.serverTimestamp(),
       });
 
-      return response.data['success'] == true;
-    } on FirebaseFunctionsException catch (e) {
-      debugPrint('[UserService.spendSparkPoints] CF error: ${e.code}');
+      await AuditService().log(
+        action: AuditAction.spSpent,
+        amount: amount,
+        source: source,
+      );
+
+      return true;
+    } catch (e) {
+      debugPrint('[UserService.spendSparkPoints] Local error: $e');
       return false;
     }
   }
 
-  /// Adiciona Spark Points diretamente (bônus, recompensas de missões).
-  /// Mantido no cliente pois é adição, não débito — menos crítico para fraude.
+  /// Adiciona Spark Points diretamente via Firestore (bônus, recompensas de missões).
   Future<void> addSparkPoints(int amount, {String source = 'app'}) async {
     if (uid.isEmpty) return;
-    await _db.collection('users').doc(uid).update({
-      'sparkPoints': FieldValue.increment(amount),
-      'updatedAt': FieldValue.serverTimestamp(),
-    });
-    await AuditService().log(
-      action: AuditAction.spGained,
-      amount: amount,
-      source: source,
-    );
+
+    try {
+      await _db.collection('users').doc(uid).update({
+        'sparkPoints': FieldValue.increment(amount),
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+      await AuditService().log(
+        action: AuditAction.spGained,
+        amount: amount,
+        source: source,
+      );
+    } catch (e) {
+      debugPrint('[UserService.addSparkPoints] Local error: $e');
+    }
   }
 
   // ─────────────────────────────────────────────────────────────────
-  //  DUELO / ELO — via Cloud Function
+  //  DUELO / ELO — Direto no Firestore (Client-Side)
   // ─────────────────────────────────────────────────────────────────
 
   Future<void> updateElo({required int eloChange, required bool? won}) async {
     if (uid.isEmpty) return;
 
     try {
-      final callable = _functions.httpsCallable('updateElo');
-      await callable.call<Map<String, dynamic>>({
-        'eloChange': eloChange,
-        'won': won,
-      });
-    } on FirebaseFunctionsException catch (e) {
-      debugPrint('[UserService.updateElo] CF error: ${e.code}');
+      final docRef = _db.collection('users').doc(uid);
+      
+      final updates = <String, dynamic>{
+        'eloRating': FieldValue.increment(eloChange),
+        'updatedAt': FieldValue.serverTimestamp(),
+      };
+
+      if (won != null) {
+        updates['totalDuels'] = FieldValue.increment(1);
+        if (won) {
+          updates['wins'] = FieldValue.increment(1);
+        } else {
+          updates['losses'] = FieldValue.increment(1);
+        }
+      }
+
+      await docRef.update(updates);
+
+      await AuditService().log(
+        action: AuditAction.eloUpdated,
+        amount: eloChange,
+        source: 'duel',
+        meta: {'won': won},
+      );
+    } catch (e) {
+      debugPrint('[UserService.updateElo] Local error: $e');
       rethrow;
     }
   }
 
   // ─────────────────────────────────────────────────────────────────
-  //  CONQUISTAS (BADGES) — via Cloud Function
+  //  CONQUISTAS (BADGES) — Direto no Firestore (Client-Side)
   // ─────────────────────────────────────────────────────────────────
 
   Future<void> unlockBadge(String badgeId, {String source = 'achievement'}) async {
     if (uid.isEmpty) return;
 
     try {
-      final callable = _functions.httpsCallable('unlockBadge');
-      final response = await callable.call<Map<String, dynamic>>({
-        'badgeId': badgeId,
-        'source': source,
+      if (unlockedBadgeIds.contains(badgeId)) return;
+
+      final docRef = _db.collection('users').doc(uid);
+      await docRef.update({
+        'unlockedBadgeIds': FieldValue.arrayUnion([badgeId]),
       });
 
-      if (response.data['unlocked'] == true) {
-        await AnalyticsService().logBadgeUnlocked(
-          badgeId: badgeId,
-          source: source,
-        );
-        // XP de bônus por conquista — também via CF
-        await addXp(50, source: 'badge_bonus');
-      }
-    } on FirebaseFunctionsException catch (e) {
-      debugPrint('[UserService.unlockBadge] CF error: ${e.code}');
+      await AnalyticsService().logBadgeUnlocked(
+        badgeId: badgeId,
+        source: source,
+      );
+      // XP de bônus por conquista
+      await addXp(50, source: 'badge_bonus');
+    } catch (e) {
+      debugPrint('[UserService.unlockBadge] Local error: $e');
     }
   }
 
@@ -375,6 +417,8 @@ class UserService extends ChangeNotifier {
       'activeDays': newActiveDays,
       'updatedAt': FieldValue.serverTimestamp(),
     });
+
+    CovenantService().addProgress('cov_disciplina', 1);
 
     await AuditService().log(
       action: AuditAction.streakUpdated,
@@ -514,7 +558,7 @@ class UserService extends ChangeNotifier {
 
     final snap = await query.get();
     return snap.docs.map((doc) {
-      final data = doc.data() as Map<String, dynamic>;
+      final data = doc.data();
       return RankingEntry(
         uid: doc.id,
         displayName: data['displayName'] ?? data['name'] ?? 'Usuário',

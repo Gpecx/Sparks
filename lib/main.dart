@@ -12,6 +12,7 @@ import 'package:spark_app/services/fcm_service.dart';
 import 'package:spark_app/services/offline_sync_service.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/firebase_options.dart';
+import 'package:spark_app/providers/colorblind_provider.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -79,12 +80,56 @@ class SparkApp extends StatelessWidget {
       return _GlobalErrorWidget(details: details);
     };
 
-    return MaterialApp.router(
-      title: 'SPARK',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
-      routerConfig: AppRouter.router,
+    return Consumer(
+      builder: (context, ref, child) {
+        final colorblindMode = ref.watch(colorblindProvider);
+
+        return ColorFiltered(
+          colorFilter: _getColorFilter(colorblindMode),
+          child: MaterialApp.router(
+            title: 'SPARK',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.darkTheme,
+            routerConfig: AppRouter.router,
+          ),
+        );
+      },
     );
+  }
+
+  ColorFilter _getColorFilter(ColorblindMode mode) {
+    switch (mode) {
+      case ColorblindMode.protanopia:
+        return const ColorFilter.matrix([
+          0.567, 0.433, 0.000, 0, 0,
+          0.558, 0.442, 0.000, 0, 0,
+          0.000, 0.242, 0.758, 0, 0,
+          0, 0, 0, 1, 0,
+        ]);
+      case ColorblindMode.deuteranopia:
+        return const ColorFilter.matrix([
+          0.625, 0.375, 0.000, 0, 0,
+          0.700, 0.300, 0.000, 0, 0,
+          0.000, 0.300, 0.700, 0, 0,
+          0, 0, 0, 1, 0,
+        ]);
+      case ColorblindMode.tritanopia:
+        return const ColorFilter.matrix([
+          0.950, 0.050, 0.000, 0, 0,
+          0.000, 0.433, 0.567, 0, 0,
+          0.000, 0.475, 0.525, 0, 0,
+          0, 0, 0, 1, 0,
+        ]);
+      case ColorblindMode.none:
+      default:
+        // Identity matrix
+        return const ColorFilter.matrix([
+          1, 0, 0, 0, 0,
+          0, 1, 0, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 0, 1, 0,
+        ]);
+    }
   }
 }
 

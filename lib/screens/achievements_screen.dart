@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spark_app/models/badge_model.dart';
 import 'package:spark_app/providers/user_provider.dart';
 
@@ -137,7 +138,7 @@ class AchievementsScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 24),
                       ElevatedButton.icon(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => context.go('/categories'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
                           foregroundColor: AppColors.background,

@@ -34,6 +34,7 @@ abstract class AuditAction {
   static const String dailyMissionCompleted = 'daily_mission_completed';
   static const String weeklyMissionCompleted = 'weekly_mission_completed';
   static const String xpIntegrityFixed = 'xp_integrity_fixed';
+  static const String eloUpdated = 'elo_updated';
 }
 
 class AuditService {

@@ -8,6 +8,7 @@ import 'admin_controller.dart';
 import 'widgets/admin_dialogs_new.dart';
 import 'widgets/admin_cards.dart';
 import 'widgets/admin_content_panel.dart';
+import 'widgets/admin_support_panel.dart';
 
 class AdminDashboardPage extends ConsumerWidget {
   const AdminDashboardPage({super.key});
@@ -108,6 +109,7 @@ class AdminDashboardPage extends ConsumerWidget {
     switch (state.sidebarIndex) {
       case 0: return _buildOverview(context, ref);
       case 1: return _getContentTab(context, ref, state, controller, isDesktop, isTablet);
+      case 4: return const AdminSupportPanel();
       default: return const Center(child: Text('Em desenvolvimento', style: TextStyle(color: Colors.white)));
     }
   }
@@ -265,6 +267,7 @@ class AdminDashboardPage extends ConsumerWidget {
               Text('SISTEMA', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
               const SizedBox(height: 16),
               _sidebarItem(context, Icons.people_outline, 'Usuários', isActive: state.sidebarIndex == 2, onTap: () => controller.setSidebarMenu(2)),
+              _sidebarItem(context, Icons.support_agent_outlined, 'Suporte', isActive: state.sidebarIndex == 4, onTap: () => controller.setSidebarMenu(4)),
               _sidebarItem(context, Icons.settings_outlined, 'Configurações', isActive: state.sidebarIndex == 3, onTap: () => controller.setSidebarMenu(3)),
             ],
           ),

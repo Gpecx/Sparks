@@ -116,3 +116,40 @@ final moduleLessonsProvider = Provider.family<AsyncValue<List<SPARKLesson>>, Tra
     error: (e, s) => AsyncError(e, s),
   );
 });
+
+// ── 6. Módulos em Destaque ──────────────────────────────────────────────────
+final topModulesStreamProvider = Provider<AsyncValue<List<SPARKModule>>>((ref) {
+  final categoriesAsync = ref.watch(categoriesStreamProvider);
+
+  return categoriesAsync.when(
+    data: (categories) {
+      final List<SPARKModule> allModules = [];
+      bool isLoading = false;
+      bool hasError = false;
+      Object? error;
+      StackTrace? stack;
+
+      for (final cat in categories) {
+        final modulesAsync = ref.watch(modulesStreamProvider(cat.id));
+        modulesAsync.when(
+          data: (modules) => allModules.addAll(modules),
+          loading: () => isLoading = true,
+          error: (e, s) {
+            hasError = true;
+            error = e;
+            stack = s;
+          },
+        );
+      }
+
+      if (hasError) return AsyncError(error!, stack!);
+      if (isLoading) return const AsyncLoading();
+
+      // Ordenar por accessCount decrescente em memória e extrair os 5 principais
+      allModules.sort((a, b) => b.accessCount.compareTo(a.accessCount));
+      return AsyncData(allModules.take(5).toList());
+    },
+    loading: () => const AsyncLoading(),
+    error: (e, s) => AsyncError(e, s),
+  );
+});

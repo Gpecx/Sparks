@@ -10,13 +10,11 @@ import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/clan_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
-import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/screens/pocket_card_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/models/badge_model.dart';
-import 'package:spark_app/scripts/seed_curriculum.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 // ─────────────────────────────────────────────────────────────────
@@ -36,7 +34,6 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
-  final EnergyController _energyCtrl = EnergyController();
 
   int _avatarTapCount = 0;
   static const int _triggerTaps = 7;
@@ -44,7 +41,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   // Posição no ranking (carregada de forma assíncrona)
   int _rankingPosition = 0;
   bool _rankingLoaded = false;
-  bool _seeding = false;
 
   @override
   void initState() {
@@ -63,73 +59,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         _rankingPosition = index >= 0 ? index + 1 : 0;
         _rankingLoaded = true;
       });
-    }
-  }
-
-  /// Executa o seed de lições + questões no Firestore (somente kDebugMode).
-  /// Também aplica um AUTO-FIX na conta do usuário, transformando-o em admin
-  /// e corrigindo o bug da conta "fantasma" / "Usuário".
-  Future<void> _runSeed() async {
-    if (_seeding) return;
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppColors.card,
-        title: const Text('Confirmar Auto-Fix + Seed', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
-        content: const Text(
-          '1. Isso aplicará um FIX na sua conta atual (recuperando seu usuário fantasma e te dando permissão de admin).\n\n'
-          '2. Em seguida, vai popular o Firestore com as lições.\n\nExecute apenas UMA VEZ.',
-          style: TextStyle(color: AppColors.textSecondary),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('CANCELAR', style: TextStyle(color: AppColors.textMuted))),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(ctx, true),
-            style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
-            child: const Text('⚡ EXECUTAR FIX', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
-          ),
-        ],
-      ),
-    );
-    if (confirmed != true || !mounted) return;
-    setState(() => _seeding = true);
-    try {
-      // ── AUTO-FIX DA CONTA "FANTASMA" ──
-      // Pega o Auth UID do celular e FORÇA a criação do documento dele com role=admin
-      final auth = FirebaseAuth.instance.currentUser;
-      if (auth != null) {
-        await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('users').doc(auth.uid).set({
-          'uid': auth.uid,
-          'displayName': 'Admin Supremo', // Substitui o nome de "Usuario" para confirmar que arrumou
-          'email': auth.email ?? '',
-          'role': 'admin',
-          'sparkPoints': 9999, // Presente pra confirmar que atualizou!
-          'createdAt': FieldValue.serverTimestamp(),
-          'updatedAt': FieldValue.serverTimestamp(),
-        }, SetOptions(merge: true));
-        debugPrint('[AutoFix] Conta corrigida e promovida para admin!');
-        
-        // Dá 2 segundos para as regras do Firestore processarem a mudança
-        await Future.delayed(const Duration(seconds: 2));
-      }
-
-      await seedLessonsAndQuestions(catId: 'capacitacao_tecnica');
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('✅ Fix + Seed concluído com sucesso!', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color(0xFF00C402),
-        behavior: SnackBarBehavior.floating,
-      ));
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('❌ Erro no seed: $e', style: const TextStyle(color: Colors.white)),
-        backgroundColor: Colors.red,
-        behavior: SnackBarBehavior.floating,
-        duration: const Duration(seconds: 6),
-      ));
-    } finally {
-      if (mounted) setState(() => _seeding = false);
     }
   }
 
@@ -375,40 +304,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     const SizedBox(height: 16),
                   ],
 
-                  // ── Dev Tools (somente debug) ────────────────────
-                  if (kDebugMode) ...[  
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text('DEV TOOLS', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton.icon(
-                          onPressed: _seeding ? null : _runSeed,
-                          icon: _seeding
-                              ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.primary))
-                              : const Icon(Icons.bolt, color: AppColors.primary, size: 18),
-                          label: Text(
-                            _seeding ? 'Populando Firestore...' : '⚡ SEED FIRESTORE',
-                            style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 13, letterSpacing: 1),
-                          ),
-                          style: OutlinedButton.styleFrom(
-                            side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5), width: 1.5),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                  ],
-
                   // ── Painel Admin (role == admin) — usa maybeWhen para reagir ao async
                   Builder(builder: (context) {
                     final isDevMode = ref.watch(devModeProvider);
@@ -469,7 +364,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      children: _buildBadgesList(userService.unlockedBadgeIds),
+                      children: _buildBadgesList(context, userService.unlockedBadgeIds),
                     ),
                   ),
                   const SizedBox(height: 28),
@@ -529,7 +424,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                     const SizedBox(height: 4),
                                     Text(
                                       _rankingPosition > 0
-                                          ? 'Você está em ${_rankingPosition}º lugar esta semana'
+                                          ? 'Você está em $_rankingPositionº lugar esta semana'
                                           : 'Complete lições para entrar no ranking',
                                       style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
                                     ),
@@ -554,19 +449,48 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   /// Constrói a lista de badges baseada nos IDs desbloqueados no Firestore.
-  List<Widget> _buildBadgesList(List<String> unlockedIds) {
+  List<Widget> _buildBadgesList(BuildContext context, List<String> unlockedIds) {
     final widgets = <Widget>[];
 
-    // Mapeia as badges do registro com o estado real do Firestore
-    final badgesToShow = BadgeRegistry.allBadges.take(4).toList();
+    // ✅ Pega apenas as badges desbloqueadas
+    final badgesToShow = BadgeRegistry.allBadges.where((b) => unlockedIds.contains(b.id)).toList();
+
+    if (badgesToShow.isEmpty) {
+      return [
+        Container(
+          width: MediaQuery.of(context).size.width - 40,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          decoration: BoxDecoration(
+            color: AppColors.card,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
+          ),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.emoji_events_outlined, color: AppColors.textMuted, size: 28),
+              SizedBox(height: 8),
+              Text(
+                'Você não tem conquistas no momento.',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 4),
+              Text(
+                'Bora aprender e desbloquear recompensas!',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
+              ),
+            ],
+          ),
+        )
+      ];
+    }
 
     for (int i = 0; i < badgesToShow.length; i++) {
       final badge = badgesToShow[i];
-      // ✅ Verifica se está desbloqueada no Firestore
-      final isUnlocked = unlockedIds.contains(badge.id);
-
       if (i > 0) widgets.add(const SizedBox(width: 12));
-      widgets.add(_badge(badge.title, badge.emoji, isUnlocked));
+      widgets.add(_badge(badge.title, badge.emoji, true));
     }
 
     return widgets;
@@ -656,40 +580,70 @@ class _ClanSection extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
           const SizedBox(height: 12),
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: AppColors.card,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withValues(alpha: 0.05),
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                )
+              ]
             ),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () =>
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => const ClanScreen(isCreating: true))),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                    child: const Text('CRIAR CLÃ',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13)),
-                  ),
+                const Icon(Icons.shield_moon, size: 40, color: AppColors.primary),
+                const SizedBox(height: 12),
+                const Text(
+                  'Faça parte de um Clã!',
+                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800),
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () =>
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => const ClanScreen(isCreating: false))),
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5), width: 1.5),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                const SizedBox(height: 6),
+                const Text(
+                  'Junte-se a outros alunos, compita em equipe e ganhe recompensas exclusivas.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: () =>
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => const ClanScreen(isCreating: true))),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            elevation: 0,
+                          ),
+                          child: const Text('CRIAR CLÃ',
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                        ),
+                      ),
                     ),
-                    child: const Text('ENTRAR',
-                        style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 13)),
-                  ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: SizedBox(
+                        height: 48,
+                        child: OutlinedButton(
+                          onPressed: () =>
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => const ClanScreen(isCreating: false))),
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5), width: 1.5),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          ),
+                          child: const Text('ENTRAR',
+                              style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 13)),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

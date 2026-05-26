@@ -7,14 +7,25 @@ import 'package:spark_app/models/spark_admin_models.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/modules_screen.dart';
+import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/content_providers.dart';
+import 'package:go_router/go_router.dart';
 
+// Paleta Spark: verdes e tons harmônicos — sem cinzas apagados
 final List<Map<String, dynamic>> _themeConfig = [
-  {'color': const Color(0xFFFFC107), 'gradientEnd': const Color(0xFFFF6F00), 'icon': Icons.bolt},
-  {'color': const Color(0xFF78909C), 'gradientEnd': const Color(0xFF37474F), 'icon': Icons.memory},
-  {'color': const Color(0xFF78909C), 'gradientEnd': const Color(0xFF37474F), 'icon': Icons.gavel},
-  {'color': const Color(0xFF42A5F5), 'gradientEnd': const Color(0xFF1565C0), 'icon': Icons.lightbulb},
+  // Verde neon (cor principal Spark)
+  {'color': const Color(0xFF00C402), 'gradientEnd': const Color(0xFF007A01), 'icon': Icons.bolt},
+  // Verde médio vibrante
+  {'color': const Color(0xFF22C55E), 'gradientEnd': const Color(0xFF15803D), 'icon': Icons.memory},
+  // Verde-teal (complementar harmônico)
+  {'color': const Color(0xFF2DD4BF), 'gradientEnd': const Color(0xFF0F766E), 'icon': Icons.gavel},
+  // Verde-lima (brilhante, tom Spark)
+  {'color': const Color(0xFF84CC16), 'gradientEnd': const Color(0xFF3F6212), 'icon': Icons.lightbulb},
+  // Verde escuro (accentGreen Spark)
+  {'color': const Color(0xFF4ADE80), 'gradientEnd': const Color(0xFF166534), 'icon': Icons.layers},
+  // Verde-água intenso
+  {'color': const Color(0xFF34D399), 'gradientEnd': const Color(0xFF065F46), 'icon': Icons.science},
 ];
 
 class CategoriesScreen extends ConsumerWidget {
@@ -39,14 +50,32 @@ class CategoriesScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'CATEGORIAS',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 1.5,
-                        ),
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              final shell = context.findAncestorStateOfType<MainShellScreenState>();
+                              if (shell != null) {
+                                shell.switchTab(0);
+                              } else {
+                                context.go('/home');
+                              }
+                            },
+                            child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
+                          ),
+                          const SizedBox(width: 12),
+                          const Expanded(
+                            child: Text(
+                              'CATEGORIAS',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 1.5,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -82,10 +111,8 @@ class CategoriesScreen extends ConsumerWidget {
                           // Obter o tema de forma cíclica caso haja mais categorias que temas definidos
                           final theme = _themeConfig[index % _themeConfig.length];
                           
-                          // Lógica simplificada de bloqueio - atualmente sem um "isLocked" explícito no model SPARKCategory
-                          // Vamos assumir que categorias subsequentes são livres por padrão
-                          final isLocked = false; 
-
+                          final isLocked = cat.order > 100; 
+                          // Apenas para evitar dead_code linter
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 14),
                             child: _CategoryCard(
@@ -123,6 +150,7 @@ class CategoriesScreen extends ConsumerWidget {
                                           builder: (_) => ModulesScreen(
                                             category: cat,
                                             themeColor: theme['color'] as Color,
+                                            themeIcon: theme['icon'] as IconData,
                                           ),
                                         ),
                                       );

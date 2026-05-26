@@ -6,6 +6,7 @@ import 'package:spark_app/models/user_model.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/models/progress_model.dart';
 import 'package:spark_app/services/progress_service.dart';
+import 'package:spark_app/services/notification_service.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  USER PROVIDER — Riverpod 3.x
@@ -38,6 +39,19 @@ final userModelProvider = StreamProvider<UserModel?>((ref) {
       .map((snap) => snap.exists ? UserModel.fromFirestore(snap) : null);
 });
 
+/// Provider reativo do NotificationService.
+final notificationServiceProvider = Provider<NotificationService>((ref) {
+  final service = NotificationService();
+  final auth = ref.watch(authStateProvider);
+  final uid = auth.value?.uid;
+  if (uid != null) {
+    service.startListening(uid);
+  } else {
+    service.stopListening();
+  }
+  ref.onDispose(() => service.dispose());
+  return service;
+});
 /// Provider para verificar se o usuário está logado.
 final isLoggedInProvider = Provider<bool>((ref) {
   final auth = ref.watch(authStateProvider);

@@ -345,7 +345,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         itemCount: videos.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 12),
+        separatorBuilder: (_, _) => const SizedBox(width: 12),
         itemBuilder: (ctx, i) {
           final v = videos[i];
           return GestureDetector(

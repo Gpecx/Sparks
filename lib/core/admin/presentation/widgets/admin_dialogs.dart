@@ -67,7 +67,7 @@ class _CategoryStepDialog extends ConsumerWidget {
               FS.title: titleCtrl.text,
               'description': descCtrl.text,
             });
-            if (id != null && context.mounted) Navigator.pop(context, id);
+            if (context.mounted) Navigator.pop(context, id);
           },
           child: isLoading 
             ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white))
@@ -104,7 +104,7 @@ class _ModuleStepDialog extends ConsumerWidget {
             final id = await ref.read(adminControllerProvider.notifier).create(AdminEntity.modules, {
               FS.title: titleCtrl.text,
             });
-            if (id != null && context.mounted) Navigator.pop(context, id);
+            if (context.mounted) Navigator.pop(context, id);
           },
           child: isLoading 
             ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white))

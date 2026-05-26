@@ -112,7 +112,7 @@ const questionFields = <FieldConfig>[
     key: 'correctIndex',
     label: 'Resposta correta',
     fieldType: FieldType.staticDropdown,
-    staticOptions: const [
+    staticOptions: [
       ('0', 'Verdadeiro'),
       ('1', 'Falso'),
     ],

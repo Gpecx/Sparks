@@ -207,7 +207,66 @@ export const addXp = onCall(
 );
 
 // ────────────────────────────────────────────────────────────────
-// 2. spendSparkPoints — Debita Spark Points com verificação de saldo
+// 2. addSparkPoints — Adiciona Spark Points ao usuário (recompensas)
+// ────────────────────────────────────────────────────────────────
+
+interface AddSpData {
+  amount: number;
+  source?: string;
+}
+
+interface AddSpResult {
+  newBalance: number;
+}
+
+export const addSparkPoints = onCall(
+  { region: "southamerica-east1" },
+  async (request: CallableRequest<AddSpData>): Promise<AddSpResult> => {
+    const uid = request.auth?.uid;
+    if (!uid) {
+      throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+
+    const { amount, source = "reward" } = request.data;
+
+    if (!amount || typeof amount !== "number" || amount <= 0) {
+      throw new HttpsError(
+        "invalid-argument",
+        "amount deve ser um número positivo."
+      );
+    }
+
+    const userRef = db.collection("users").doc(uid);
+    let newBalance = 0;
+
+    await db.runTransaction(async (tx) => {
+      const snap = await tx.get(userRef);
+      if (!snap.exists) {
+        throw new HttpsError("not-found", "Documento do usuário não encontrado.");
+      }
+
+      const currentSp = (snap.data()!["sparkPoints"] as number) ?? 0;
+      newBalance = currentSp + amount;
+
+      tx.update(userRef, {
+        sparkPoints: admin.firestore.FieldValue.increment(amount),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    });
+
+    try {
+      await writeAuditLog(uid, "sp_gained", amount, source, { newBalance });
+    } catch (e) {
+      logger.warn("[addSparkPoints] Audit log error:", e);
+    }
+
+    logger.info(`[addSparkPoints] uid=${uid} amount=${amount} newBalance=${newBalance}`);
+    return { newBalance };
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// 3. spendSparkPoints — Debita Spark Points com verificação de saldo
 // ────────────────────────────────────────────────────────────────
 
 interface SpendSpData {

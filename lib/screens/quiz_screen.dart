@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/spark_emitter.dart';
@@ -8,10 +9,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/services/progress_service.dart';
 import 'package:spark_app/services/question_service.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/widgets/streak_lightning_emitter.dart';
 import 'package:spark_app/models/quiz_models.dart';
+import 'package:spark_app/providers/progress_provider.dart';
 
-class QuizScreen extends StatefulWidget {
+class QuizScreen extends ConsumerStatefulWidget {
   final bool isEvaluation;
   final Lesson? lesson; // <-- lição real com questões técnicas
   final String? categoryId;
@@ -28,10 +31,10 @@ class QuizScreen extends StatefulWidget {
   });
 
   @override
-  State<QuizScreen> createState() => _QuizScreenState();
+  ConsumerState<QuizScreen> createState() => _QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
+class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStateMixin {
   final UserService _userService = UserService();
   final EnergyController _energyCtrl = EnergyController();
   
@@ -377,6 +380,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         _totalCorrect++;
         _currentStreak++;
         int bonus = _energyCtrl.registerCorrectAnswer();
+        CovenantService().addProgress('cov_precisao', 1);
         
         // PROGRESSIVE ANIMATIONS LOGIC
         if (_currentStreak == 5) {
@@ -432,32 +436,64 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     final double score = _totalCorrect / _questions.length;
     final bool passed = widget.isEvaluation ? score >= 0.8 : score >= 0.7;
     int xpEarned = 0;
+    int spEarned = 0; // SP só ao completar módulo ou avaliação
 
     if (passed) {
+      CovenantService().addProgress('cov_conhecimento', 1);
       // XP base
       xpEarned = (score * 100).toInt() + (_totalCorrect * 10);
       final multiplier = _userService.xpMultiplier;
       xpEarned = (xpEarned * multiplier).toInt();
-      final int spEarned = (xpEarned * 0.1).toInt();
 
       final uid = FirebaseAuth.instance.currentUser?.uid;
       if (uid != null && widget.moduleId != null) {
-        // 1. Salvar progresso da lição (prioridade absoluta)
-        try {
-          await ProgressService().markLessonComplete(
-            uid,
-            widget.categoryId ?? '',
-            widget.moduleId!,
-            widget.lesson?.id ?? 'lesson_${_currentQuestion + 1}',
-            xpEarned,
-            spEarned,
-            moduleName: widget.lesson?.title ?? '',
-          ).timeout(const Duration(seconds: 15));
-        } catch (e) {
-          debugPrint('[QuizScreen] Erro crítico ao salvar progresso no Firebase: $e');
-        }
+        final lessonId = widget.lesson?.id ?? 'lesson_${_currentQuestion + 1}';
 
-        // 2. Chamadas de gamificação/serviços secundários disparadas em background
+        // 1. Registrar progresso otimista em memória instantaneamente para a UI destravar
+        ref.read(optimisticProgressProvider.notifier).addOptimisticProgress(
+          OptimisticProgress(
+            categoryId: widget.categoryId ?? '',
+            moduleId: widget.moduleId!,
+            lessonId: lessonId,
+            moduleName: widget.lesson?.title ?? '',
+          ),
+        );
+
+        // 2. Disparar gravação no Firestore em segundo plano (background)
+        // e usar o retorno para saber se o módulo foi completado
+        ProgressService().markLessonComplete(
+          uid,
+          widget.categoryId ?? '',
+          widget.moduleId!,
+          lessonId,
+          xpEarned,
+          0, // SP não é passado por lição; é concedido ao completar o módulo
+          moduleName: widget.lesson?.title ?? '',
+        ).then((moduleCompleted) {
+          // Gravação bem-sucedida
+          ref.read(optimisticProgressProvider.notifier).removeOptimisticProgress(
+            widget.moduleId!,
+            lessonId,
+          );
+
+          // 🌟 Concede SP ao completar o módulo inteiro (não por lição)
+          if (moduleCompleted) {
+            final int spModule = (xpEarned * 0.1).toInt().clamp(10, 500);
+            debugPrint('[QuizScreen] Módulo completo! Concedendo +\$spModule SP');
+            _userService.addSparkPoints(spModule, source: 'module_completed')
+                .catchError((e) {
+              debugPrint('[QuizScreen] Erro ao conceder SP de módulo: $e');
+            });
+          }
+        }).catchError((e) {
+          debugPrint('[QuizScreen] Erro ao salvar progresso no Firebase em background: $e');
+          ref.read(optimisticProgressProvider.notifier).removeOptimisticProgress(
+            widget.moduleId!,
+            lessonId,
+          );
+        });
+
+        // XP: concedido por lição (métrica de progresso de aprendizado)
         Future.microtask(() async {
           try {
             await _userService.addXp(xpEarned).timeout(const Duration(seconds: 15));
@@ -466,13 +502,19 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
           }
         });
 
-        Future.microtask(() async {
-          try {
-            await _userService.addSparkPoints(spEarned).timeout(const Duration(seconds: 15));
-          } catch (e) {
-            debugPrint('[QuizScreen] Erro ao adicionar Spark Points: $e');
-          }
-        });
+        // SP para avaliações: concedido ao passar na avaliação
+        if (widget.isEvaluation) {
+          spEarned = (xpEarned * 0.2).toInt().clamp(20, 1000);
+          debugPrint('[QuizScreen] Avaliação aprovada! Concedendo +\$spEarned SP');
+          Future.microtask(() async {
+            try {
+              await _userService.addSparkPoints(spEarned, source: 'evaluation_passed')
+                  .timeout(const Duration(seconds: 15));
+            } catch (e) {
+              debugPrint('[QuizScreen] Erro ao adicionar SP da avaliação: $e');
+            }
+          });
+        }
 
         Future.microtask(() async {
           try {
@@ -508,18 +550,27 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
       HapticFeedback.vibrate();
       if (mounted) {
         _completionController.forward(from: 0).then((_) {
-          if (mounted) _showQuizResultModal(true, score, xpEarned);
+          if (mounted) _showQuizResultModal(true, score, xpEarned, spEarned);
         });
       }
     } else {
       if (mounted) setState(() => _isCompleting = false);
       // Reprovado — mostra modal imediatamente
-      if (mounted) _showQuizResultModal(false, score, 0);
+      if (mounted) _showQuizResultModal(false, score, 0, 0);
     }
   }
 
+  // Constr\u00f3i a mensagem de sucesso baseada no contexto
+  String _buildSuccessMessage(double score, int xpEarned, int spEarned) {
+    final pct = (score * 100).toInt();
+    if (widget.isEvaluation && spEarned > 0) {
+      return 'Parab\u00e9ns! Voc\u00ea alcan\u00e7ou $pct% e ganhou $xpEarned XP + $spEarned Pontos Spark pela avalia\u00e7\u00e3o!';
+    }
+    return 'Parab\u00e9ns! Voc\u00ea alcan\u00e7ou $pct% de acertos e ganhou $xpEarned XP! Pontos Spark ser\u00e3o concedidos ao concluir o m\u00f3dulo completo.';
+  }
+
   // === MODAIS ===
-  void _showQuizResultModal(bool passed, double score, int xpEarned) {
+  void _showQuizResultModal(bool passed, double score, int xpEarned, [int spEarned = 0]) {
     
     showModalBottomSheet(
       context: context,
@@ -569,13 +620,15 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
               ),
               const SizedBox(height: 24),
               Text(
-                passed ? 'Lição concluída!' : 'Desempenho Insuficiente',
+                passed
+                    ? (widget.isEvaluation ? 'Avaliação Aprovada!' : 'Lição concluída!')
+                    : 'Desempenho Insuficiente',
                 style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               Text(
                 passed
-                    ? 'Parabéns! Você alcançou ${(score * 100).toInt()}% de acertos e ganhou $xpEarned XP!'
+                    ? _buildSuccessMessage(score, xpEarned, spEarned)
                     : 'Você obteve ${(score * 100).toInt()}%. É necessário no mínimo ${widget.isEvaluation ? '80%' : '70%'} para avançar. Revise o material e tente novamente.',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15, height: 1.4),
@@ -587,7 +640,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                 child: ElevatedButton.icon(
                   onPressed: () {
                     // Cuidado: capturamos o Navigator da tela principal ANTES de fechar o modal
-                    final rootNavigator = Navigator.of(this.context);
+                    final rootNavigator = Navigator.of(context);
                     Navigator.of(modalCtx).pop(); // fecha BottomSheet
 
                     if (passed) {
@@ -608,7 +661,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
               if (!passed)
                 TextButton(
                   onPressed: () {
-                    final rootNavigator = Navigator.of(this.context);
+                    final rootNavigator = Navigator.of(context);
                     Navigator.of(modalCtx).pop(); 
                     rootNavigator.pop(false); 
                   },
@@ -650,11 +703,14 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                 width: double.infinity, height: 56,
                 child: ElevatedButton.icon(
                   onPressed: () async {
-                    if (await _energyCtrl.rechargeWithSparks()) {
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Energia recarregada!'), backgroundColor: AppColors.primary));
+                    final messenger = ScaffoldMessenger.of(context);
+                    final navigator = Navigator.of(context);
+                    final success = await _energyCtrl.rechargeWithSparks();
+                    if (success) {
+                      navigator.pop();
+                      messenger.showSnackBar(const SnackBar(content: Text('Energia recarregada!'), backgroundColor: AppColors.primary));
                     } else {
-                      ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Pontos Spark insuficientes!'), backgroundColor: AppColors.error));
+                      messenger.showSnackBar(const SnackBar(content: Text('Pontos Spark insuficientes!'), backgroundColor: AppColors.error));
                     }
                   },
                   icon: const Icon(Icons.bolt, color: AppColors.background),
@@ -669,7 +725,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                   onPressed: () {
                     Navigator.pop(context);
                     Navigator.pop(context);
-                    this.context.push('/store');
+                    context.push('/store');
                   },
                   icon: const Icon(Icons.store, color: AppColors.background),
                   label: const Text('IR PARA A LOJA', style: TextStyle(color: AppColors.background, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
@@ -713,7 +769,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                   alignment: Alignment.topRight,
                   child: GestureDetector(
                     onTap: () {
-                      final rootNavigator = Navigator.of(this.context);
+                      final rootNavigator = Navigator.of(context);
                       Navigator.of(dialogCtx).pop(); // Fecha dialog
                       rootNavigator.pop(true);       // Fecha o Quiz
                     },
@@ -746,8 +802,8 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00C402), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
                     onPressed: () {
-                      final rootNavigator = Navigator.of(this.context);
-                      final rootRouter = GoRouter.of(this.context);
+                      final rootNavigator = Navigator.of(context);
+                      final rootRouter = GoRouter.of(context);
                       Navigator.of(dialogCtx).pop();
                       rootNavigator.pop(true);
                       rootRouter.push('/standard-detail');

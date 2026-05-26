@@ -79,7 +79,7 @@ class _ParticlePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    final paint = Paint()..color = AppColors.primary.withOpacity(1.0 - progress);
+    final paint = Paint()..color = AppColors.primary.withValues(alpha: 1.0 - progress);
 
     for (var p in particles) {
       // Calcula o quão longe a partícula foi (baseado no progresso do tempo e velocidade dela)

@@ -6,7 +6,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
-import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/user_service.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -19,7 +18,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _authService = AuthService();
   bool _obscurePassword = true;
   bool _isLoading = false;
 

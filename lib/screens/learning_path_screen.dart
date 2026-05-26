@@ -1,6 +1,10 @@
 import 'package:go_router/go_router.dart';
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,18 +20,36 @@ import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/providers/content_providers.dart';
 import 'package:spark_app/providers/progress_provider.dart';
+import 'package:spark_app/providers/user_provider.dart';
+
+/// Representa um membro do clã presente neste módulo.
+class ClanMemberPresence {
+  final String uid;
+  final String name;
+  final String? photoUrl;
+  final int lessonIndex; // índice da próxima lição (completedLessons)
+
+  const ClanMemberPresence({
+    required this.uid,
+    required this.name,
+    this.photoUrl,
+    required this.lessonIndex,
+  });
+}
 
 
 class LearningPathScreen extends ConsumerStatefulWidget {
   final SPARKCategory? category;
   final SPARKModule? module;
   final Color themeColor;
+  final IconData themeIcon;
 
   const LearningPathScreen({
     super.key,
     this.category,
     this.module,
     this.themeColor = AppColors.primary,
+    this.themeIcon = Icons.school,
   });
 
   @override
@@ -47,6 +69,11 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
   // Guarda o valor anterior de completedLessons para animar
   int _prevCompletedLessons = 0;
 
+  // ── Presença do clã ──────────────────────────────────────────
+  StreamSubscription<QuerySnapshot>? _clanPresenceSub;
+  List<ClanMemberPresence> _clanMembers = [];
+  final _fs = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
+
   @override
   void initState() {
     super.initState();
@@ -55,6 +82,71 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
       duration: const Duration(milliseconds: 1800),
     )..repeat();
     _energyCtrl.addListener(_onEnergyChanged);
+    _initClanPresence();
+  }
+
+  /// Grava o módulo atual do usuário e escuta membros do clã no mesmo módulo.
+  Future<void> _initClanPresence() async {
+    final moduleId = widget.module?.id;
+    if (moduleId == null) return;
+
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+
+    // Grava currentModuleId para que outros membros possam ver onde estou
+    try {
+      await _fs.collection('users').doc(uid).update({
+        'currentModuleId': moduleId,
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+    } catch (_) {}
+
+    // Lê clanId do usuário atual
+    final userDoc = await _fs.collection('users').doc(uid).get();
+    final clanId = userDoc.data()?['clanId'] as String?;
+    if (clanId == null || clanId.isEmpty) return;
+
+    // Stream: usuários do mesmo clã no mesmo módulo (exceto eu)
+    _clanPresenceSub = _fs
+        .collection('users')
+        .where('clanId', isEqualTo: clanId)
+        .where('currentModuleId', isEqualTo: moduleId)
+        .snapshots()
+        .listen((snap) async {
+      final members = <ClanMemberPresence>[];
+      for (final doc in snap.docs) {
+        if (doc.id == uid) continue; // pula o próprio usuário
+        final data = doc.data();
+        final memberName = (data['displayName'] as String?)?.trim();
+        if (memberName == null || memberName.isEmpty) continue;
+
+        // Busca progresso do membro neste módulo
+        int lessonIndex = 0;
+        try {
+          final progressSnap = await _fs
+              .collection('users')
+              .doc(doc.id)
+              .collection('progress')
+              .where('moduleId', isEqualTo: moduleId)
+              .limit(1)
+              .get();
+          if (progressSnap.docs.isNotEmpty) {
+            final completedLessons =
+                (progressSnap.docs.first.data()['completedLessons'] as List?)?.length ?? 0;
+            lessonIndex = completedLessons;
+          }
+        } catch (_) {}
+
+        members.add(ClanMemberPresence(
+          uid: doc.id,
+          name: memberName,
+          photoUrl: data['photoUrl'] as String?,
+          lessonIndex: lessonIndex,
+        ));
+      }
+
+      if (mounted) setState(() => _clanMembers = members);
+    });
   }
 
   // _onLessonCompleted foi removido: toda a lógica pós-conclusão
@@ -67,6 +159,12 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
 
   @override
   void dispose() {
+    _clanPresenceSub?.cancel();
+    // Limpa o currentModuleId ao sair
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null) {
+      _fs.collection('users').doc(uid).update({'currentModuleId': FieldValue.delete()}).catchError((_) {});
+    }
     _controller.dispose();
     _energyCtrl.removeListener(_onEnergyChanged);
     super.dispose();
@@ -141,15 +239,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
         } catch (_) {}
       });
 
-      // Verifica pacto de mestria
-      if (mounted) {
-        final moduleId = widget.module?.id ?? '';
-        if (moduleId.contains('nr35') || moduleId.contains('mod')) {
-          final progressPercent =
-              ((index + 1) / totalLessons * 100).toInt();
-          CovenantService().addProgress('cov_3', progressPercent);
-        }
-      }
+
     }
   }
 
@@ -202,9 +292,29 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () => context.push('/store'),
-                        child: _buildBadge(Icons.bolt, '250', widget.themeColor),
+                      // Badge SP (Spark Points) — dados reais
+                      ref.watch(userModelProvider).when(
+                        data: (user) => GestureDetector(
+                          onTap: () => context.push('/store'),
+                          child: _buildBadge(
+                            Icons.bolt,
+                            '${user?.sparkPoints ?? 0} SP',
+                            widget.themeColor,
+                          ),
+                        ),
+                        loading: () => _buildBadge(Icons.bolt, '-- SP', widget.themeColor),
+                        error: (_, _) => _buildBadge(Icons.bolt, '0 SP', widget.themeColor),
+                      ),
+                      const SizedBox(width: 6),
+                      // Badge XP — dados reais
+                      ref.watch(userModelProvider).when(
+                        data: (user) => _buildBadge(
+                          Icons.star_rounded,
+                          '${user?.xp ?? 0} XP',
+                          const Color(0xFF4ADE80), // verde-lima suave
+                        ),
+                        loading: () => _buildBadge(Icons.star_rounded, '-- XP', const Color(0xFF4ADE80)),
+                        error: (_, _) => _buildBadge(Icons.star_rounded, '0 XP', const Color(0xFF4ADE80)),
                       ),
                       const SizedBox(width: 10),
                       GestureDetector(
@@ -296,7 +406,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                     );
                   },
                   loading: () => const SizedBox(height: 80, child: Center(child: CircularProgressIndicator())),
-                  error: (_, __) => const SizedBox(height: 80),
+                  error: (_, _) => const SizedBox(height: 80),
                 ),
                 const SizedBox(height: 8),
 
@@ -349,7 +459,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                         builder: (context, animatedCompleted, child) {
                                           return AnimatedBuilder(
                                             animation: _controller,
-                                            builder: (_, __) => CustomPaint(
+                                            builder: (_, _) => CustomPaint(
                                               painter: _PCBPathPainter(
                                                 nodePositions: List.generate(
                                                   lessons.length,
@@ -360,6 +470,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                                 ),
                                                 completedCount: animatedCompleted,
                                                 animValue: _controller.value,
+                                                themeColor: widget.themeColor,
                                               ),
                                             ),
                                           );
@@ -377,6 +488,11 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                       final cy = _nodeY(index, screenWidth);
 
                                       const nodeWidgetW = 120.0;
+
+                                      // Membros do clã neste nó
+                                      final membersHere = _clanMembers
+                                          .where((m) => m.lessonIndex == index)
+                                          .toList();
 
                                       return Positioned(
                                         left: cx - nodeWidgetW / 2,
@@ -400,6 +516,12 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                                     isUnlocked: isUnlocked,
                                                     onTap: () => _handleNodeTap(index, lesson, completedLessons, lessons.length),
                                                   ),
+                                            if (membersHere.isNotEmpty)
+                                              Positioned(
+                                                right: -14,
+                                                top: 0,
+                                                child: _buildClanAvatarStack(membersHere),
+                                              ),
                                           ],
                                         ),
                                       );
@@ -468,8 +590,8 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     } else {
       nodeColor = AppColors.card;
       borderColor = AppColors.textMuted.withValues(alpha: 0.2);
-      iconColor = AppColors.textMuted;
-      icon = Icons.lock;
+      iconColor = AppColors.textMuted.withValues(alpha: 0.4);
+      icon = widget.themeIcon;
       glow = null;
     }
 
@@ -503,16 +625,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                     child: const Icon(Icons.star, color: Colors.white, size: 13),
                   ),
                 ),
-              if (!isUnlocked && !isCompleted)
-                Positioned(
-                  bottom: -4,
-                  right: -4,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(color: AppColors.card, shape: BoxShape.circle),
-                    child: const Icon(Icons.lock, color: AppColors.textMuted, size: 14),
-                  ),
-                ),
+
             ],
           ),
           const SizedBox(height: 8),
@@ -576,7 +689,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                   ? Icons.check
                   : isUnlocked
                       ? Icons.emoji_events
-                      : Icons.lock,
+                      : widget.themeIcon,
               color: color,
               size: 32,
             ),
@@ -597,6 +710,123 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  /// Renderiza avatares empilhados dos membros do clã presentes no nó.
+  Widget _buildClanAvatarStack(List<ClanMemberPresence> members) {
+    const double avatarSize = 32.0;
+    const double overlapOffset = 20.0;
+    final totalWidth = avatarSize + (members.length - 1).clamp(0, 2) * overlapOffset;
+    final visible = members.take(3).toList();
+
+    return SizedBox(
+      width: totalWidth + 8,
+      height: avatarSize + 20, // espaço para o nome
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          ...List.generate(visible.length, (i) {
+            final member = visible[i];
+            return Positioned(
+              left: i * overlapOffset,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Tooltip(
+                    message: member.name,
+                    child: Container(
+                      width: avatarSize,
+                      height: avatarSize,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: widget.themeColor,
+                          width: 2,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: widget.themeColor.withValues(alpha: 0.45),
+                            blurRadius: 8,
+                            spreadRadius: 1,
+                          ),
+                        ],
+                      ),
+                      child: ClipOval(
+                        child: member.photoUrl != null && member.photoUrl!.isNotEmpty
+                            ? Image.network(
+                                member.photoUrl!,
+                                fit: BoxFit.cover,
+                                errorBuilder: (_, _, _) => _avatarFallback(member.name),
+                              )
+                            : _avatarFallback(member.name),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                    decoration: BoxDecoration(
+                      color: AppColors.card.withValues(alpha: 0.92),
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: widget.themeColor.withValues(alpha: 0.4)),
+                    ),
+                    child: Text(
+                      member.name.split(' ').first, // só o primeiro nome
+                      style: TextStyle(
+                        color: widget.themeColor,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+          if (members.length > 3)
+            Positioned(
+              left: 3 * overlapOffset,
+              child: Container(
+                width: avatarSize,
+                height: avatarSize,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.card,
+                  border: Border.all(color: widget.themeColor, width: 2),
+                ),
+                child: Center(
+                  child: Text(
+                    '+${members.length - 3}',
+                    style: TextStyle(
+                      color: widget.themeColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _avatarFallback(String name) {
+    final initial = name.isNotEmpty ? name[0].toUpperCase() : '?';
+    return Container(
+      color: widget.themeColor.withValues(alpha: 0.25),
+      child: Center(
+        child: Text(
+          initial,
+          style: TextStyle(
+            color: widget.themeColor,
+            fontSize: 13,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
       ),
     );
   }
@@ -772,11 +1002,13 @@ class _PCBPathPainter extends CustomPainter {
   final List<Offset> nodePositions;
   final double completedCount;
   final double animValue;
+  final Color themeColor;
 
   const _PCBPathPainter({
     required this.nodePositions,
     required this.completedCount,
     required this.animValue,
+    this.themeColor = AppColors.primary,
   });
 
   static const double _bevelRadius  = 12.0;
@@ -827,16 +1059,16 @@ class _PCBPathPainter extends CustomPainter {
   }
 
   void _drawVia(Canvas canvas, Offset center, bool completed) {
-    final outerR = 5.5;
-    final innerR = 2.5;
-    final ringColor = completed ? AppColors.primary : AppColors.textMuted.withValues(alpha: 0.25);
+    const outerR = 5.5;
+    const innerR = 2.5;
+    final ringColor = completed ? themeColor : AppColors.textMuted.withValues(alpha: 0.25);
 
     if (completed) {
       canvas.drawCircle(
         center,
         outerR + 3,
         Paint()
-          ..color = AppColors.primary.withValues(alpha: 0.20)
+          ..color = themeColor.withValues(alpha: 0.20)
           ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5),
       );
     }
@@ -846,7 +1078,9 @@ class _PCBPathPainter extends CustomPainter {
 
   double _pathLength(Path path) {
     double total = 0;
-    for (final m in path.computeMetrics()) total += m.length;
+    for (final m in path.computeMetrics()) {
+      total += m.length;
+    }
     return total;
   }
 
@@ -862,8 +1096,8 @@ class _PCBPathPainter extends CustomPainter {
   }
 
   void _drawGlowingPath(Canvas canvas, Path path) {
-    canvas.drawPath(path, Paint()..color = AppColors.primary.withValues(alpha: 0.22)..strokeWidth = _trackWidth + 12.0..style = PaintingStyle.stroke..maskFilter = const MaskFilter.blur(BlurStyle.normal, _glowBlur));
-    canvas.drawPath(path, Paint()..color = AppColors.primary..strokeWidth = _trackWidth..style = PaintingStyle.stroke..strokeCap = StrokeCap.round);
+    canvas.drawPath(path, Paint()..color = themeColor.withValues(alpha: 0.22)..strokeWidth = _trackWidth + 12.0..style = PaintingStyle.stroke..maskFilter = const MaskFilter.blur(BlurStyle.normal, _glowBlur));
+    canvas.drawPath(path, Paint()..color = themeColor..strokeWidth = _trackWidth..style = PaintingStyle.stroke..strokeCap = StrokeCap.round);
     canvas.drawPath(path, Paint()..color = Colors.white.withValues(alpha: 0.3)..strokeWidth = 1.2..style = PaintingStyle.stroke..strokeCap = StrokeCap.round);
   }
 
