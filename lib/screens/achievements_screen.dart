@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spark_app/models/badge_model.dart';
 import 'package:spark_app/providers/user_provider.dart';
 
@@ -137,7 +138,7 @@ class AchievementsScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 24),
                       ElevatedButton.icon(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => context.go('/categories'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
                           foregroundColor: AppColors.background,
@@ -155,18 +156,6 @@ class AchievementsScreen extends ConsumerWidget {
                 _sectionTitle('BADGES DINÂMICAS'),
                 _buildDynamicBadges(unlockedIds),
                 const SizedBox(height: 8),
-
-                _sectionTitle('NORMAS E CONHECIMENTO'),
-                _achievementGrid(context, [
-                  _AchievementData('Mestre NR-10', Icons.electrical_services, 'Completou todos os módulos da NR-10',
-                      unlockedIds.contains('nr10_master')),
-                  _AchievementData('Expert NFPA 70E', Icons.shield_outlined, 'Completou todos os módulos da NFPA 70E',
-                      unlockedIds.contains('nfpa_expert')),
-                  _AchievementData('Pro em Segurança', Icons.verified_outlined, 'Atingiu 95% de acerto em 5 avaliações',
-                      unlockedIds.contains('safety_pro')),
-                  _AchievementData('Mestre NR-35', Icons.height, 'Completou todos os módulos da NR-35',
-                      unlockedIds.contains('nr35_master')),
-                ]),
 
                 _sectionTitle('DEDICAÇÃO E PRESENÇA'),
                 _achievementGrid(context, [

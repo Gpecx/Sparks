@@ -2,10 +2,10 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
-import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/user_service.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -18,7 +18,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _authService = AuthService();
   bool _obscurePassword = true;
   bool _isLoading = false;
 
@@ -61,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // Se houver instabilidade ou timeout no Firestore, não travamos o usuário.
       // A conta Auth já existe e o AuthService a curará no próximo login.
       try {
-        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('users').doc(user.uid).set({
           'uid': user.uid,
           'displayName': name,
           'email': email,

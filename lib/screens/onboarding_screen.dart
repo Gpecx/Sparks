@@ -156,7 +156,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
                   child: ElevatedButton(
-                    key: ValueKey('btn_$_currentPage\_$_quizCompleted'),
+                    key: ValueKey('btn_${_currentPage}_$_quizCompleted'),
                     onPressed: _currentPage == _pages.length && !_quizCompleted ? null : _nextPage,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: _currentPage == _pages.length && _quizCompleted 

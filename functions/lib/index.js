@@ -1,0 +1,542 @@
+"use strict";
+/**
+ * SPARK Cloud Functions — Lógica de Gamificação no Servidor
+ *
+ * Funções Callable (HTTPS) que substituem as escritas diretas do cliente
+ * no Firestore para campos sensíveis (xp, sparkPoints, eloRating, etc.).
+ *
+ * Todas as funções:
+ *  1. Validam se o chamador está autenticado.
+ *  2. Executam a lógica em uma Transação Firestore, garantindo atomicidade.
+ *  3. Retornam um resultado tipado para o cliente Flutter.
+ *
+ * Funções exportadas:
+ *  - addXp             : Adiciona XP, recalcula nível/tensionLevel e badges.
+ *  - spendSparkPoints  : Debita Spark Points com verificação de saldo.
+ *  - updateElo         : Processa resultado de duelo e atualiza ELO rating.
+ *  - unlockBadge       : Concede badge se ainda não desbloqueada.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.asaasWebhook = exports.createAsaasCheckout = exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
+const admin = require("firebase-admin");
+const firestore_1 = require("firebase-admin/firestore");
+const https_1 = require("firebase-functions/v2/https");
+const v2_1 = require("firebase-functions/v2");
+const params_1 = require("firebase-functions/params");
+const asaasService_1 = require("./services/asaasService");
+// ── Secrets vinculados ao Firebase Secret Manager ────────────────
+const ASAAS_API_KEY = (0, params_1.defineSecret)("ASAAS_API_KEY");
+const ASAAS_BASE_URL = (0, params_1.defineSecret)("ASAAS_BASE_URL");
+const ASAAS_WEBHOOK_TOKEN = (0, params_1.defineSecret)("ASAAS_WEBHOOK_TOKEN");
+// ── Firebase Admin init ──────────────────────────────────────────
+admin.initializeApp({
+    projectId: "spark-v1-e0eb5",
+});
+const db = (0, firestore_1.getFirestore)("default");
+db.settings({ ignoreUndefinedProperties: true });
+// ────────────────────────────────────────────────────────────────
+// HELPERS
+// ────────────────────────────────────────────────────────────────
+function calcLevel(totalXp) {
+    return Math.floor(totalXp / 500) + 1;
+}
+function calcTension(totalXp) {
+    if (totalXp < 5000)
+        return "BT";
+    if (totalXp < 15000)
+        return "MT";
+    if (totalXp < 30000)
+        return "AT";
+    return "EAT";
+}
+function xpBadgesEarned(totalXp) {
+    const badges = [];
+    if (totalXp >= 1000)
+        badges.push("xp_1000");
+    if (totalXp >= 5000)
+        badges.push("xp_5000");
+    if (totalXp >= 10000)
+        badges.push("xp_10000");
+    return badges;
+}
+function currentWeekKey() {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 1);
+    const dayOfYear = Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+    const weekNum = Math.floor((dayOfYear - now.getDay() + 10) / 7);
+    return `${now.getFullYear()}-W${String(weekNum).padStart(2, "0")}`;
+}
+async function writeAuditLog(uid, action, amount, source, meta) {
+    const entry = {
+        action,
+        amount,
+        source,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    };
+    if (meta)
+        entry["meta"] = meta;
+    await db.collection("users").doc(uid).collection("audit_log").add(entry);
+}
+exports.addXp = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    const { amount, source = "app" } = request.data;
+    if (!amount || typeof amount !== "number" || amount <= 0) {
+        throw new https_1.HttpsError("invalid-argument", "amount deve ser um número positivo.");
+    }
+    const userRef = db.collection("users").doc(uid);
+    let result;
+    let rankingData = null;
+    // Transação focada SOMENTE no documento do usuário (sem cross-document)
+    await db.runTransaction(async (tx) => {
+        var _a, _b, _c, _d, _e, _f, _g;
+        const snap = await tx.get(userRef);
+        if (!snap.exists) {
+            throw new https_1.HttpsError("not-found", "Documento do usuário não encontrado.");
+        }
+        const data = snap.data();
+        const currentXp = (_a = data["xp"]) !== null && _a !== void 0 ? _a : 0;
+        const currentWeeklyXp = (_b = data["weeklyXp"]) !== null && _b !== void 0 ? _b : 0;
+        const unlockedBadgeIds = (_c = data["unlockedBadgeIds"]) !== null && _c !== void 0 ? _c : [];
+        const oldLevel = calcLevel(currentXp);
+        const newXp = currentXp + amount;
+        const newLevel = calcLevel(newXp);
+        const newTension = calcTension(newXp);
+        const newWeeklyXp = currentWeeklyXp + amount;
+        const leveledUp = newLevel > oldLevel;
+        const userUpdates = {
+            xp: admin.firestore.FieldValue.increment(amount),
+            weeklyXp: admin.firestore.FieldValue.increment(amount),
+            monthlyXp: admin.firestore.FieldValue.increment(amount),
+            level: newLevel,
+            tensionLevel: newTension,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        };
+        const badgesToCheck = xpBadgesEarned(newXp);
+        const badgesUnlocked = [];
+        const newBadges = badgesToCheck.filter(b => !unlockedBadgeIds.includes(b));
+        if (newBadges.length > 0) {
+            userUpdates.unlockedBadgeIds = admin.firestore.FieldValue.arrayUnion(...newBadges);
+            badgesUnlocked.push(...newBadges);
+        }
+        tx.update(userRef, userUpdates);
+        result = { newXp, newLevel, newTension, leveledUp, badgesUnlocked };
+        // Armazena dados para ranking (será escrito fora da transação)
+        rankingData = {
+            uid,
+            displayName: (_d = data["displayName"]) !== null && _d !== void 0 ? _d : "Usuário",
+            photoUrl: (_e = data["photoUrl"]) !== null && _e !== void 0 ? _e : null,
+            weeklyXp: newWeeklyXp,
+            clanId: (_f = data["clanId"]) !== null && _f !== void 0 ? _f : null,
+            clanName: (_g = data["clanName"]) !== null && _g !== void 0 ? _g : null,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        };
+    });
+    // Ranking atualizado FORA da transação — sem risco de contenção
+    if (rankingData) {
+        const weekKey = currentWeekKey();
+        const rankingRef = db
+            .collection("rankings")
+            .doc("weekly")
+            .collection(weekKey)
+            .doc(uid);
+        try {
+            await rankingRef.set(rankingData, { merge: true });
+        }
+        catch (e) {
+            v2_1.logger.warn("[addXp] Erro ao atualizar ranking (não crítico):", e);
+        }
+    }
+    // Audit log fora da transação (não-crítico)
+    try {
+        await writeAuditLog(uid, "xp_gained", amount, source, {
+            newXp: result.newXp,
+            newLevel: result.newLevel,
+        });
+        if (result.leveledUp) {
+            await writeAuditLog(uid, "level_up", result.newLevel, source, {
+                newLevel: result.newLevel,
+            });
+        }
+    }
+    catch (e) {
+        v2_1.logger.warn("[addXp] Erro no audit log (não crítico):", e);
+    }
+    v2_1.logger.info(`[addXp] uid=${uid} amount=${amount} newXp=${result.newXp} level=${result.newLevel}`);
+    return result;
+});
+exports.addSparkPoints = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    const { amount, source = "reward" } = request.data;
+    if (!amount || typeof amount !== "number" || amount <= 0) {
+        throw new https_1.HttpsError("invalid-argument", "amount deve ser um número positivo.");
+    }
+    const userRef = db.collection("users").doc(uid);
+    let newBalance = 0;
+    await db.runTransaction(async (tx) => {
+        var _a;
+        const snap = await tx.get(userRef);
+        if (!snap.exists) {
+            throw new https_1.HttpsError("not-found", "Documento do usuário não encontrado.");
+        }
+        const currentSp = (_a = snap.data()["sparkPoints"]) !== null && _a !== void 0 ? _a : 0;
+        newBalance = currentSp + amount;
+        tx.update(userRef, {
+            sparkPoints: admin.firestore.FieldValue.increment(amount),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+    });
+    try {
+        await writeAuditLog(uid, "sp_gained", amount, source, { newBalance });
+    }
+    catch (e) {
+        v2_1.logger.warn("[addSparkPoints] Audit log error:", e);
+    }
+    v2_1.logger.info(`[addSparkPoints] uid=${uid} amount=${amount} newBalance=${newBalance}`);
+    return { newBalance };
+});
+exports.spendSparkPoints = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    const { amount, source = "purchase" } = request.data;
+    if (!amount || typeof amount !== "number" || amount <= 0) {
+        throw new https_1.HttpsError("invalid-argument", "amount deve ser um número positivo.");
+    }
+    const userRef = db.collection("users").doc(uid);
+    let result;
+    await db.runTransaction(async (tx) => {
+        var _a;
+        const snap = await tx.get(userRef);
+        if (!snap.exists) {
+            throw new https_1.HttpsError("not-found", "Documento do usuário não encontrado.");
+        }
+        const currentSp = (_a = snap.data()["sparkPoints"]) !== null && _a !== void 0 ? _a : 0;
+        if (currentSp < amount) {
+            result = {
+                success: false,
+                newBalance: currentSp,
+                message: "Saldo insuficiente de Spark Points.",
+            };
+            return; // não faz rollback, só não executa
+        }
+        tx.update(userRef, {
+            sparkPoints: admin.firestore.FieldValue.increment(-amount),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        result = { success: true, newBalance: currentSp - amount };
+    });
+    if (result.success) {
+        try {
+            await writeAuditLog(uid, "sp_spent", amount, source);
+        }
+        catch (e) {
+            v2_1.logger.warn("[spendSparkPoints] Audit log error:", e);
+        }
+    }
+    return result;
+});
+exports.updateElo = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    const { eloChange, won } = request.data;
+    if (typeof eloChange !== "number") {
+        throw new https_1.HttpsError("invalid-argument", "eloChange deve ser um número.");
+    }
+    const userRef = db.collection("users").doc(uid);
+    let result;
+    await db.runTransaction(async (tx) => {
+        var _a, _b, _c;
+        const snap = await tx.get(userRef);
+        if (!snap.exists) {
+            throw new https_1.HttpsError("not-found", "Documento do usuário não encontrado.");
+        }
+        const data = snap.data();
+        const currentElo = (_a = data["eloRating"]) !== null && _a !== void 0 ? _a : 1200;
+        const currentDuels = (_b = data["totalDuels"]) !== null && _b !== void 0 ? _b : 0;
+        const unlockedBadgeIds = (_c = data["unlockedBadgeIds"]) !== null && _c !== void 0 ? _c : [];
+        const updates = {
+            eloRating: admin.firestore.FieldValue.increment(eloChange),
+            totalDuels: admin.firestore.FieldValue.increment(1),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        };
+        if (won === true) {
+            updates["wins"] = admin.firestore.FieldValue.increment(1);
+        }
+        else if (won === false) {
+            updates["losses"] = admin.firestore.FieldValue.increment(1);
+        }
+        tx.update(userRef, updates);
+        // Badge do primeiro duelo (totalDuels era 0 antes da atualização)
+        if (currentDuels === 0) {
+            if (!unlockedBadgeIds.includes("primeiro_duelo")) {
+                updates.unlockedBadgeIds = admin.firestore.FieldValue.arrayUnion("primeiro_duelo");
+            }
+        }
+        result = {
+            newElo: currentElo + eloChange,
+            totalDuels: currentDuels + 1,
+        };
+    });
+    v2_1.logger.info(`[updateElo] uid=${uid} change=${eloChange} won=${won} newElo=${result.newElo}`);
+    return result;
+});
+exports.unlockBadge = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a, _b;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    const { badgeId, source = "achievement" } = request.data;
+    if (!badgeId || typeof badgeId !== "string") {
+        throw new https_1.HttpsError("invalid-argument", "badgeId inválido.");
+    }
+    const userRef = db.collection("users").doc(uid);
+    let unlocked = false;
+    const snap = await userRef.get();
+    if (!snap.exists) {
+        throw new https_1.HttpsError("not-found", "Documento do usuário não encontrado.");
+    }
+    const unlockedBadgeIds = (_b = snap.data()["unlockedBadgeIds"]) !== null && _b !== void 0 ? _b : [];
+    if (!unlockedBadgeIds.includes(badgeId)) {
+        await userRef.update({
+            unlockedBadgeIds: admin.firestore.FieldValue.arrayUnion(badgeId),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        unlocked = true;
+    }
+    if (unlocked) {
+        try {
+            await writeAuditLog(uid, "badge_unlocked", 1, source, { badgeId });
+        }
+        catch (e) {
+            v2_1.logger.warn("[unlockBadge] Audit log error:", e);
+        }
+        v2_1.logger.info(`[unlockBadge] uid=${uid} badge=${badgeId}`);
+    }
+    return { unlocked, badgeId };
+});
+exports.createAsaasCheckout = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a, _b, _c, _d;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    const { items, billingType, customerName, customerEmail, customerCpfCnpj } = request.data;
+    if (!items || items.length === 0) {
+        throw new https_1.HttpsError("invalid-argument", "Carrinho vazio.");
+    }
+    if (!billingType) {
+        throw new https_1.HttpsError("invalid-argument", "billingType é obrigatório.");
+    }
+    // Verifica se a chave do Asaas está configurada
+    const apiKey = (_b = process.env.ASAAS_API_KEY) !== null && _b !== void 0 ? _b : "";
+    if (!apiKey) {
+        v2_1.logger.warn("[createAsaasCheckout] ASAAS_API_KEY não configurada — pagamento indisponível.");
+        throw new https_1.HttpsError("unavailable", "O sistema de pagamentos está em manutenção. Tente novamente em breve.");
+    }
+    const totalPrice = items.reduce((acc, i) => acc + i.price, 0);
+    const totalPoints = items.reduce((acc, i) => acc + i.sparkPointsGranted, 0);
+    // Busca dados do usuário no Firestore para preencher o cliente Asaas
+    const userSnap = await db.collection("users").doc(uid).get();
+    if (!userSnap.exists) {
+        throw new https_1.HttpsError("not-found", "Usuário não encontrado.");
+    }
+    const userData = userSnap.data();
+    const name = (_c = customerName !== null && customerName !== void 0 ? customerName : userData["displayName"]) !== null && _c !== void 0 ? _c : "Usuário Spark";
+    const email = (_d = customerEmail !== null && customerEmail !== void 0 ? customerEmail : userData["email"]) !== null && _d !== void 0 ? _d : `${uid}@spark.app`;
+    // Obtém ou cria o cliente no Asaas
+    let asaasCustomerId = userData["asaasCustomerId"];
+    if (!asaasCustomerId) {
+        asaasCustomerId = await (0, asaasService_1.findOrCreateCustomer)(name, email, customerCpfCnpj);
+        // Persiste o id para reutilização futura
+        await db
+            .collection("users")
+            .doc(uid)
+            .update({ asaasCustomerId });
+    }
+    else if (customerCpfCnpj) {
+        // Se já existia o id, mas recebemos o CPF agora (ex: pagamento PIX), garantimos o update
+        await (0, asaasService_1.updateCustomer)(asaasCustomerId, customerCpfCnpj);
+    }
+    // Cria o pedido pendente no Firestore ANTES de chamar o Asaas
+    const orderRef = db.collection("orders").doc();
+    await orderRef.set({
+        uid,
+        items: items.map((i) => ({
+            name: i.name,
+            description: i.description,
+            price: i.price,
+            sparkPointsGranted: i.sparkPointsGranted,
+        })),
+        totalPrice,
+        totalPoints,
+        billingType,
+        status: "PENDING",
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    const orderId = orderRef.id;
+    const description = items.length === 1
+        ? items[0].name
+        : `${items.length} itens — Loja Spark`;
+    // Cria a cobrança no Asaas
+    const chargeResult = await (0, asaasService_1.createCharge)({
+        customerId: asaasCustomerId,
+        value: Number(totalPrice.toFixed(2)),
+        description,
+        billingType,
+        orderId,
+    });
+    // Salva o chargeId no pedido para reconciliação via webhook
+    await orderRef.update({ chargeId: chargeResult.chargeId });
+    v2_1.logger.info(`[createAsaasCheckout] uid=${uid} orderId=${orderId} chargeId=${chargeResult.chargeId} total=${totalPrice}`);
+    return {
+        orderId,
+        chargeId: chargeResult.chargeId,
+        billingType: chargeResult.billingType,
+        totalPrice,
+        invoiceUrl: chargeResult.invoiceUrl,
+        pixPayload: chargeResult.pixPayload,
+        pixQrCodeBase64: chargeResult.pixQrCodeBase64,
+        pixExpirationDate: chargeResult.pixExpirationDate,
+        bankSlipUrl: chargeResult.bankSlipUrl,
+    };
+});
+// ────────────────────────────────────────────────────────────────
+// 6. asaasWebhook — Processa eventos de pagamento do Asaas
+// ────────────────────────────────────────────────────────────────
+/**
+ * Endpoint HTTP que o Asaas chama quando um pagamento é confirmado.
+ * Configura este URL no painel Asaas → Configurações → Webhook.
+ *
+ * URL: https://southamerica-east1-spark-v1-e0eb5.cloudfunctions.net/asaasWebhook
+ *
+ * Eventos suportados:
+ *  - PAYMENT_RECEIVED   : PIX / Cartão confirmado
+ *  - PAYMENT_CONFIRMED  : Boleto compensado
+ */
+exports.asaasWebhook = (0, https_1.onRequest)({
+    region: "southamerica-east1",
+    secrets: [ASAAS_WEBHOOK_TOKEN],
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (req, res) => {
+    var _a, _b, _c;
+    // 1) Só aceita POST
+    if (req.method !== "POST") {
+        res.status(405).send("Method Not Allowed");
+        return;
+    }
+    // 2) Verifica token do webhook
+    const token = (_a = req.headers["asaas-access-token"]) !== null && _a !== void 0 ? _a : "";
+    if (!(0, asaasService_1.verifyWebhookToken)(token)) {
+        v2_1.logger.warn("[asaasWebhook] Token inválido.");
+        res.status(401).send("Unauthorized");
+        return;
+    }
+    const body = req.body;
+    const { event, payment } = body;
+    v2_1.logger.info(`[asaasWebhook] Evento recebido: ${event}`, { payment });
+    // 3) Processa apenas eventos de pagamento confirmado
+    const isConfirmed = event === "PAYMENT_RECEIVED" || event === "PAYMENT_CONFIRMED";
+    if (!isConfirmed || !payment) {
+        res.status(200).send("Event ignored");
+        return;
+    }
+    const orderId = payment.externalReference;
+    if (!orderId) {
+        v2_1.logger.warn("[asaasWebhook] Pagamento sem externalReference.", payment);
+        res.status(200).send("No externalReference");
+        return;
+    }
+    // 4) Busca o pedido no Firestore
+    const orderRef = db.collection("orders").doc(orderId);
+    const orderSnap = await orderRef.get();
+    if (!orderSnap.exists) {
+        v2_1.logger.error(`[asaasWebhook] Pedido ${orderId} não encontrado.`);
+        res.status(200).send("Order not found");
+        return;
+    }
+    const order = orderSnap.data();
+    // Idempotência — ignora se já foi processado
+    if (order["status"] === "PAID") {
+        v2_1.logger.info(`[asaasWebhook] Pedido ${orderId} já processado. Ignorando.`);
+        res.status(200).send("Already processed");
+        return;
+    }
+    const uid = order["uid"];
+    const totalPoints = (_b = order["totalPoints"]) !== null && _b !== void 0 ? _b : 0;
+    const totalPrice = (_c = order["totalPrice"]) !== null && _c !== void 0 ? _c : 0;
+    // 5) Batch: marca pedido como pago + incrementa pontos + grava transação
+    const batch = db.batch();
+    // Atualiza status do pedido
+    batch.update(orderRef, {
+        status: "PAID",
+        paidAt: admin.firestore.FieldValue.serverTimestamp(),
+        asaasPaymentId: payment.id,
+    });
+    // Incrementa Spark Points (somente se houver pontos)
+    if (totalPoints > 0) {
+        const userRef = db.collection("users").doc(uid);
+        batch.update(userRef, {
+            sparkPoints: admin.firestore.FieldValue.increment(totalPoints),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+    }
+    // Registra transação para histórico financeiro
+    const txRef = db.collection("transactions").doc();
+    batch.set(txRef, {
+        uid,
+        orderId,
+        asaasPaymentId: payment.id,
+        totalPrice,
+        totalPoints,
+        status: "PAID",
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    await batch.commit();
+    // Audit log (não-crítico)
+    try {
+        await writeAuditLog(uid, "sp_purchased", totalPoints, "asaas_payment", {
+            orderId,
+            asaasPaymentId: payment.id,
+            totalPrice,
+        });
+    }
+    catch (e) {
+        v2_1.logger.warn("[asaasWebhook] Audit log error:", e);
+    }
+    v2_1.logger.info(`[asaasWebhook] Pedido ${orderId} confirmado. +${totalPoints} pts para uid=${uid}`);
+    res.status(200).send("OK");
+});
+//# sourceMappingURL=index.js.map

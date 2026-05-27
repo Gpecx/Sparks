@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:35902836822:android:4df6b396dd160d854c6bf7",
+        "android_client_info": {
+          "package_name": "com.gpecx.spark"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDygfR9VtQAIDZN57zSLviBw9J9SHG5CIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:35902836822:android:230baf4c259fc97a4c6bf7",
         "android_client_info": {
           "package_name": "com.spark.spark_app"

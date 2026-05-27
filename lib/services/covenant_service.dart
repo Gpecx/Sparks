@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:spark_app/models/covenant_model.dart';
 import 'package:spark_app/core/constants/fs.dart';
+import 'package:spark_app/services/user_service.dart';
 
 /// Manages weekly covenants (pacts) for the current user.
 ///
@@ -22,25 +24,9 @@ class CovenantService extends ChangeNotifier {
       'id': 'cov_disciplina',
       'title': 'DISCIPLINA',
       'objective': 'Completar 7 dias sem perder streak',
-      'reward': '+250 XP, Badge Exclusiva',
+      'reward': '+250 XP',
       'maxProgress': 7,
       'trackingType': 'dias',
-    },
-    {
-      'id': 'cov_velocidade',
-      'title': 'VELOCIDADE',
-      'objective': '5 Batalhas PvP ganhas',
-      'reward': 'Skin exclusiva',
-      'maxProgress': 5,
-      'trackingType': 'batalhas',
-    },
-    {
-      'id': 'cov_mestria',
-      'title': 'MESTRIA',
-      'objective': 'Completar 100% do módulo NR-35',
-      'reward': 'Certificado Virtual',
-      'maxProgress': 100,
-      'trackingType': '%',
     },
     {
       'id': 'cov_conhecimento',
@@ -54,17 +40,9 @@ class CovenantService extends ChangeNotifier {
       'id': 'cov_precisao',
       'title': 'PRECISÃO',
       'objective': 'Acertar 20 perguntas sem errar',
-      'reward': '+200 XP, Faísca Dupla',
+      'reward': '+200 XP',
       'maxProgress': 20,
       'trackingType': 'acertos',
-    },
-    {
-      'id': 'cov_lideranca',
-      'title': 'LIDERANÇA',
-      'objective': 'Ficar no top 10 do ranking semanal',
-      'reward': 'Badge de Líder',
-      'maxProgress': 1,
-      'trackingType': 'conquista',
     },
   ];
 
@@ -104,7 +82,7 @@ class CovenantService extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    _sub = FirebaseFirestore.instance
+    _sub = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
         .collection(FS.users)
         .doc(uid)
         .collection(FS.covenants)
@@ -126,7 +104,7 @@ class CovenantService extends ChangeNotifier {
 
   /// Seeds the full catalog into Firestore for a new user (batch write).
   Future<void> _seedCatalog(String uid) async {
-    final db = FirebaseFirestore.instance;
+    final db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
     final batch = db.batch();
 
     for (final def in _catalog) {
@@ -157,7 +135,7 @@ class CovenantService extends ChangeNotifier {
 
     if (needReset.isEmpty) return;
 
-    final db = FirebaseFirestore.instance;
+    final db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
     final batch = db.batch();
 
     for (final cov in needReset) {
@@ -180,7 +158,7 @@ class CovenantService extends ChangeNotifier {
 
   Future<void> selectCovenant(String id) async {
     if (_uid == null) return;
-    await FirebaseFirestore.instance
+    await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
         .collection(FS.users)
         .doc(_uid)
         .collection(FS.covenants)
@@ -193,7 +171,7 @@ class CovenantService extends ChangeNotifier {
 
   Future<void> deselectCovenant(String id) async {
     if (_uid == null) return;
-    await FirebaseFirestore.instance
+    await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
         .collection(FS.users)
         .doc(_uid)
         .collection(FS.covenants)
@@ -207,17 +185,18 @@ class CovenantService extends ChangeNotifier {
   // ── Progress ─────────────────────────────────────────────────────
 
   /// Increments the progress of a covenant and persists to Firestore.
-  void addProgress(String id, int amount) {
+  Future<void> addProgress(String id, int amount) async {
     if (_uid == null) return;
     final index = _covenants.indexWhere((c) => c.id == id);
     if (index == -1) return;
     final cov = _covenants[index];
     if (cov.isCompleted) return;
+    if (!cov.isSelected) return;
 
     final newProgress = (cov.currentProgress + amount).clamp(0, cov.maxProgress);
     final completed = newProgress >= cov.maxProgress;
 
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
         .collection(FS.users)
         .doc(_uid)
         .collection(FS.covenants)
@@ -226,6 +205,17 @@ class CovenantService extends ChangeNotifier {
       'currentProgress': newProgress,
       'isCompleted': completed,
     });
+
+    if (completed) {
+      int xpReward = 0;
+      if (cov.reward.contains('150')) xpReward = 150;
+      if (cov.reward.contains('200')) xpReward = 200;
+      if (cov.reward.contains('250')) xpReward = 250;
+
+      if (xpReward > 0) {
+        await UserService().addXp(xpReward, source: 'pacto_$id');
+      }
+    }
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/models/standard_metadata.dart';
 
@@ -14,7 +15,7 @@ class StandardsService {
   factory StandardsService() => _instance;
   StandardsService._internal();
 
-  final _db = FirebaseFirestore.instance;
+  final _db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   CollectionReference<Map<String, dynamic>> get _col =>
       _db.collection(FS.standardsMetadata);

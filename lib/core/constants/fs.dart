@@ -30,6 +30,9 @@ abstract class FS {
   static const String clickCount = 'clickCount';
   static const String colorHex = 'colorHex';
 
+  // ── Module fields ─────────────────────────────────────────────────────────
+  static const String accessCount = 'accessCount';
+
   // ── Covenant selection fields ─────────────────────────────────────────────
   static const String isSelected = 'isSelected';
   static const String weekKey = 'weekKey';
@@ -179,11 +182,16 @@ class QuestionModel {
       options: type == 'multipleChoice' && d[FS.options] != null
           ? List<String>.from(d[FS.options] as List)
           : null,
-      correctIndex: type == 'multipleChoice' && d[FS.correctIndex] != null
+      correctIndex: (type == 'multipleChoice' || type == 'trueFalse' || type == 'true_false') && d[FS.correctIndex] != null
           ? (d[FS.correctIndex] as num).toInt()
           : null,
-      // trueFalse
-      isTrue: type == 'trueFalse' ? d[FS.isTrue] as bool? : null,
+      // trueFalse — derive isTrue from correctIndex when isTrue field is absent
+      isTrue: (type == 'trueFalse' || type == 'true_false')
+          ? (d[FS.isTrue] as bool?)
+              ?? (d[FS.correctIndex] != null
+                  ? (d[FS.correctIndex] as num).toInt() == 0 // 0 = Verdadeiro, 1 = Falso
+                  : null)
+          : null,
       // fillInTheBlanks
       textWithBlanks: type == 'fillInTheBlanks'
           ? d[FS.textWithBlanks] as String?
@@ -207,17 +215,43 @@ class QuestionModel {
           'explanation': explanation,
         };
       case 'trueFalse':
+      case 'true_false':
+        // Derive from correctIndex when isTrue is null (admin saves correctIndex: 0/1)
+        final resolvedAnswer = isTrue ?? (correctIndex != null ? correctIndex == 0 : false);
         return {
           'type': 'swipe',
           'module': moduleName,
           'question': 'Verdadeiro ou Falso?',
-          'statement': statement,
-          'answer': isTrue ?? false,
+          'options': [statement],
+          'answer': resolvedAnswer,
           'explanation': explanation,
         };
       case 'fillInTheBlanks':
         final parts = (textWithBlanks ?? '').split('____');
         final answers = (blanks ?? []).map((b) => b['answer'] as String).toList();
+        // Generate distractors so chips don't just show the correct answers
+        final distractors = <String>[];
+        for (final b in (blanks ?? [])) {
+          final d = b['distractors'];
+          if (d != null && d is List) {
+            distractors.addAll(List<String>.from(d));
+          }
+        }
+        // If no distractors from Firestore, generate generic ones
+        if (distractors.isEmpty) {
+          const fallbackDistractors = [
+            'nenhuma', 'incorreto', 'alternativa', 'outro', 'diferente',
+            'opção X', 'opção Y', 'opção Z',
+          ];
+          // Pick enough distractors so total options >= answers.length + 2
+          final needed = (answers.length < 2 ? 3 : 2);
+          for (int i = 0; i < needed && i < fallbackDistractors.length; i++) {
+            if (!answers.contains(fallbackDistractors[i])) {
+              distractors.add(fallbackDistractors[i]);
+            }
+          }
+        }
+        final allOptions = [...answers, ...distractors]..shuffle();
         return {
           'type': 'drag',
           'module': moduleName,
@@ -225,7 +259,7 @@ class QuestionModel {
           'prefix': parts.isNotEmpty ? parts.first : '',
           'suffix': parts.length > 1 ? parts.last : '',
           'answer': answers,
-          'options': answers,
+          'options': allOptions,
           'explanation': explanation,
         };
       default:
@@ -289,21 +323,23 @@ class ClanModel {
   });
 
   factory ClanModel.fromFirestore(DocumentSnapshot doc) {
-    final d = doc.data() as Map<String, dynamic>;
+    final d = doc.data() as Map<String, dynamic>? ?? {};
     return ClanModel(
       id: doc.id,
-      name: d[FS.name] as String,
-      description: d[FS.description] as String,
-      logoUrl: d[FS.logoUrl] as String,
-      createdAt: (d[FS.createdAt] as Timestamp).toDate(),
-      createdBy: d[FS.createdBy] as String,
-      memberCount: (d[FS.memberCount] as num).toInt(),
-      maxMembers: (d[FS.maxMembers] as num).toInt(),
-      totalXp: (d[FS.totalXp] as num).toInt(),
-      weeklyXp: (d[FS.weeklyXp] as num).toInt(),
-      isPublic: d[FS.isPublic] as bool,
-      inviteCode: d[FS.inviteCode] as String,
-      rank: (d[FS.rank] as num).toInt(),
+      name: d[FS.name] as String? ?? d[FS.displayName] as String? ?? 'Sem nome',
+      description: d[FS.description] as String? ?? '',
+      logoUrl: d[FS.logoUrl] as String? ?? '',
+      createdAt: d[FS.createdAt] != null
+          ? (d[FS.createdAt] as Timestamp).toDate()
+          : DateTime.now(),
+      createdBy: d[FS.createdBy] as String? ?? '',
+      memberCount: (d[FS.memberCount] as num?)?.toInt() ?? 0,
+      maxMembers: (d[FS.maxMembers] as num?)?.toInt() ?? 50,
+      totalXp: (d[FS.totalXp] as num?)?.toInt() ?? 0,
+      weeklyXp: (d[FS.weeklyXp] as num?)?.toInt() ?? 0,
+      isPublic: d[FS.isPublic] as bool? ?? true,
+      inviteCode: d[FS.inviteCode] as String? ?? '',
+      rank: (d[FS.rank] as num?)?.toInt() ?? 0,
     );
   }
 

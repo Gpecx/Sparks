@@ -1,4 +1,5 @@
 /// Modelos de dados para o modo Duelo de Faíscas (PvP).
+library;
 
 enum MatchStatus { waiting, active, finished, disconnected }
 

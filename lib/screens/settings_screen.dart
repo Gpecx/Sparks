@@ -1,5 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -13,6 +12,7 @@ import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
+import 'package:spark_app/providers/colorblind_provider.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -21,10 +21,6 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-  bool _studyReminders = true;
-  bool _rankingAlerts = true;
-  bool _normUpdates = false;
-  bool _emailNotifications = false;
   double _textScale = 1.0;
 
   // Smart Notifications
@@ -240,6 +236,76 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
               const SizedBox(height: 8),
 
+              Container(
+                margin: const EdgeInsets.only(bottom: 4),
+                decoration: BoxDecoration(
+                  color: AppColors.card,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(Icons.remove_red_eye_outlined, color: AppColors.textMuted, size: 22),
+                          SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Modo Daltônico',
+                                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                ),
+                                Text(
+                                  'Ajuste as cores para diferentes tipos de daltonismo',
+                                  style: TextStyle(color: AppColors.textMuted, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Consumer(
+                        builder: (context, ref, child) {
+                          final currentMode = ref.watch(colorblindProvider);
+                          return DropdownButtonFormField<ColorblindMode>(
+                            initialValue: currentMode,
+                            dropdownColor: AppColors.card,
+                            icon: const Icon(Icons.arrow_drop_down, color: AppColors.textMuted),
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: AppColors.inputBackground,
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            items: const [
+                              DropdownMenuItem(value: ColorblindMode.none, child: Text('Nenhum', style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: ColorblindMode.protanopia, child: Text('Protanopia (Vermelho-Verde)', style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: ColorblindMode.deuteranopia, child: Text('Deuteranopia (Verde-Vermelho)', style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: ColorblindMode.tritanopia, child: Text('Tritanopia (Azul-Amarelo)', style: TextStyle(color: Colors.white))),
+                            ],
+                            onChanged: (mode) {
+                              if (mode != null) {
+                                ref.read(colorblindProvider.notifier).setMode(mode);
+                              }
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+
               // ── ADMINISTRAÇÃO ──────────────────────────────────
               Builder(builder: (context) {
                 final userAsync = ref.watch(userModelProvider);
@@ -346,7 +412,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     child: SwitchListTile(
       value: value,
       onChanged: onChanged,
-      activeColor: AppColors.primary,
+      activeThumbColor: AppColors.primary,
       secondary: Icon(icon, color: AppColors.textMuted, size: 22),
       title: Text(title, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600)),
       subtitle: Text(subtitle, style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
@@ -411,17 +477,27 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 }
 
-class _FaqTile extends StatefulWidget {
+class _FaqTile extends StatelessWidget {
   final String q, a;
   const _FaqTile({required this.q, required this.a});
-  @override
-  State<_FaqTile> createState() => __FaqTileState();
-}
 
-class __FaqTileState extends State<_FaqTile> {
-  bool _expanded = false;
   @override
   Widget build(BuildContext context) {
-    return Container(margin: const EdgeInsets.only(bottom: 8), decoration: BoxDecoration(color: AppColors.inputBackground, borderRadius: BorderRadius.circular(10)), child: ExpansionTile(onExpansionChanged: (v) => setState(() => _expanded = v), title: Text(widget.q, style: const TextStyle(color: Colors.white, fontSize: 13)), children: [Padding(padding: const EdgeInsets.all(16), child: Text(widget.a, style: const TextStyle(color: AppColors.textMuted, fontSize: 13)))]));
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+        color: AppColors.inputBackground,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ExpansionTile(
+        title: Text(q, style: const TextStyle(color: Colors.white, fontSize: 13)),
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text(a, style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
+          ),
+        ],
+      ),
+    );
   }
 }

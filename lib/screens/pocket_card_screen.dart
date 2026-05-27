@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 
-class PocketCardScreen extends StatefulWidget {
+class PocketCardScreen extends ConsumerStatefulWidget {
   const PocketCardScreen({super.key});
 
   @override
-  State<PocketCardScreen> createState() => _PocketCardScreenState();
+  ConsumerState<PocketCardScreen> createState() => _PocketCardScreenState();
 }
 
-class _PocketCardScreenState extends State<PocketCardScreen> {
+class _PocketCardScreenState extends ConsumerState<PocketCardScreen> {
   // Variáveis para guardar a inclinação do cartão
   double _xRotation = 0.0;
   double _yRotation = 0.0;
@@ -92,6 +94,12 @@ class _PocketCardScreenState extends State<PocketCardScreen> {
 
   // Desenhando o visual do cartão
   Widget _buildCardUI() {
+    final userService = ref.watch(userServiceProvider);
+    final user = userService.user;
+    final displayName = userService.displayName.toUpperCase();
+    final role = (user?.role ?? 'TÉCNICO').toUpperCase();
+    final level = userService.level;
+
     return Container(
       width: 320,
       height: 500,
@@ -173,17 +181,25 @@ class _PocketCardScreenState extends State<PocketCardScreen> {
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.primary, width: 3),
                       color: AppColors.inputBackground,
+                      image: user?.photoUrl != null
+                          ? DecorationImage(
+                              image: NetworkImage(user!.photoUrl!),
+                              fit: BoxFit.cover,
+                            )
+                          : null,
                     ),
-                    child: const Icon(Icons.person, size: 60, color: AppColors.textMuted),
+                    child: user?.photoUrl == null
+                        ? const Icon(Icons.person, size: 60, color: AppColors.textMuted)
+                        : null,
                   ),
                 ),
                 const SizedBox(height: 24),
                 
                 // Informações do Usuário
-                const Center(
+                Center(
                   child: Text(
-                    'ALEX RODRIGUEZ',
-                    style: TextStyle(
+                    displayName,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -192,10 +208,10 @@ class _PocketCardScreenState extends State<PocketCardScreen> {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Center(
+                Center(
                   child: Text(
-                    'TÉCNICO LÍDER • LVL 12',
-                    style: TextStyle(
+                    '$role • LVL $level',
+                    style: const TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -205,26 +221,7 @@ class _PocketCardScreenState extends State<PocketCardScreen> {
                 ),
                 const SizedBox(height: 32),
                 
-                // Selos / Normas Validadas
-                const Text(
-                  'CERTIFICAÇÕES ATIVAS',
-                  style: TextStyle(
-                    color: AppColors.textMuted,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  children: [
-                    _buildBadge('NR-10'),
-                    const SizedBox(width: 8),
-                    _buildBadge('NR-35'),
-                    const SizedBox(width: 8),
-                    _buildBadge('NFPA 70E'),
-                  ],
-                ),
+
                 const Spacer(),
                 
                 // Código de barras / QR falso para dar um ar realista
@@ -267,23 +264,5 @@ class _PocketCardScreenState extends State<PocketCardScreen> {
     );
   }
 
-  // Mini Widget para os selos
-  Widget _buildBadge(String text) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: AppColors.primary.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.5)),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(
-          color: AppColors.primary,
-          fontSize: 11,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
+
 }

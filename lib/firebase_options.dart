@@ -27,7 +27,7 @@ class DefaultFirebaseOptions {
     projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
     authDomain: dotenv.env['FIREBASE_AUTH_DOMAIN']!,
     storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET']!,
-    measurementId: dotenv.env['FIREBASE_MEASUREMENT_ID']!,
+    measurementId: dotenv.env['FIREBASE_MEASUREMENT_ID'],
   );
 
   static final FirebaseOptions android = FirebaseOptions(
@@ -44,6 +44,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
     projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
     storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET']!,
-    iosBundleId: 'com.spark.sparkApp',
+    iosBundleId: 'com.gpecx.spark',
   );
 }

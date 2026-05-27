@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -28,7 +29,7 @@ class FcmService {
   FcmService._internal();
 
   final _messaging = FirebaseMessaging.instance;
-  final _db = FirebaseFirestore.instance;
+  final _db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
   final _auth = FirebaseAuth.instance;
 
   // ─────────────────────────────────────────────────────────────────

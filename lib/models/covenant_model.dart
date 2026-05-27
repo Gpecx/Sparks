@@ -64,12 +64,29 @@ class CovenantModel {
     };
   }
 
+  /// Retorna a recompensa em XP com base no ID do pacto.
+  /// Valores fixos para evitar inconsistências com dados legados do Firestore.
+  static String _rewardFromId(String id) {
+    switch (id) {
+      case 'cov_disciplina':
+        return '+250 XP';
+      case 'cov_precisao':
+        return '+200 XP';
+      case 'cov_conhecimento':
+        return '+150 XP';
+      default:
+        // fallback: extrai apenas o número do campo salvo, se existir
+        return id.isNotEmpty ? '+XP' : '';
+    }
+  }
+
   factory CovenantModel.fromMap(Map<String, dynamic> map, [String? docId]) {
+    final id = docId ?? map['id'] ?? '';
     return CovenantModel(
-      id: docId ?? map['id'] ?? '',
+      id: id,
       title: map['title'] ?? '',
       objective: map['objective'] ?? '',
-      reward: map['reward'] ?? '',
+      reward: _rewardFromId(id), // sempre derivado do ID, ignora valor do Firestore
       currentProgress: map['currentProgress']?.toInt() ?? 0,
       maxProgress: map['maxProgress']?.toInt() ?? 0,
       isCompleted: map['isCompleted'] ?? false,

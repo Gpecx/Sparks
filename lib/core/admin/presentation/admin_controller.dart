@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:spark_app/core/constants/fs.dart';
 
@@ -51,6 +53,8 @@ class AdminState {
 
   AdminState copyWith({
     bool? isLoading,
+    // Use clearError: true para limpar explicitamente o errorMessage
+    bool clearError = false,
     String? errorMessage,
     int? sidebarIndex,
     int? contentTabIndex,
@@ -61,7 +65,7 @@ class AdminState {
   }) {
     return AdminState(
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage,
+      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
       sidebarIndex: sidebarIndex ?? this.sidebarIndex,
       contentTabIndex: contentTabIndex ?? this.contentTabIndex,
       selectedCategoryId: selectedCategoryId ?? this.selectedCategoryId,
@@ -74,7 +78,7 @@ class AdminState {
 
 // ─── CONTROLLER ────────────────────────────────────────────────────
 class AdminController extends Notifier<AdminState> {
-  final FirebaseFirestore _fs = FirebaseFirestore.instance;
+  final FirebaseFirestore _fs = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   @override
   AdminState build() {
@@ -117,14 +121,14 @@ class AdminController extends Notifier<AdminState> {
   }
 
   void clearMessages() {
-    state = state.copyWith(errorMessage: null);
+    state = state.copyWith(clearError: true);
   }
 
   // ─── STREAMS ───────────────────────────────────────────────────
   Stream<QuerySnapshot> streamFor(AdminEntity entity) {
     switch (entity) {
       case AdminEntity.categories:
-        return _fs.collection(FS.categories).orderBy(FS.order).snapshots();
+        return _fs.collection(FS.categories).snapshots();
       
       case AdminEntity.modules:
         if (state.selectedCategoryId == null) return Stream.empty();
@@ -132,7 +136,6 @@ class AdminController extends Notifier<AdminState> {
             .collection(FS.categories)
             .doc(state.selectedCategoryId!)
             .collection(FS.modules)
-            .orderBy(FS.order)
             .snapshots();
       
       case AdminEntity.trails:
@@ -145,7 +148,6 @@ class AdminController extends Notifier<AdminState> {
             .collection(FS.modules)
             .doc(state.selectedModuleId!)
             .collection(FS.trails)
-            .orderBy(FS.order)
             .snapshots();
       
       case AdminEntity.lessons:
@@ -162,7 +164,6 @@ class AdminController extends Notifier<AdminState> {
             .collection(FS.trails)
             .doc(state.selectedTrailId!)
             .collection(FS.lessons)
-            .orderBy(FS.order)
             .snapshots();
       
       case AdminEntity.questions:
@@ -182,23 +183,21 @@ class AdminController extends Notifier<AdminState> {
             .collection(FS.lessons)
             .doc(state.selectedLessonId!)
             .collection(FS.questions)
-            .orderBy(FS.order)
             .snapshots();
     }
   }
 
   // ─── CREATE ────────────────────────────────────────────────────
   Future<String> create(AdminEntity entity, Map<String, dynamic> data) async {
+    state = state.copyWith(isLoading: true, clearError: true);
     try {
-      state = state.copyWith(isLoading: true, errorMessage: null);
-
       switch (entity) {
         case AdminEntity.categories:
           final doc = _fs.collection(FS.categories).doc();
           data[FS.order] = 0;
           data[FS.createdAt] = FieldValue.serverTimestamp();
           data[FS.updatedAt] = FieldValue.serverTimestamp();
-          doc.set(data).catchError((e) => debugPrint('Erro background: $e'));
+          await doc.set(data);
           state = state.copyWith(isLoading: false);
           return doc.id;
 
@@ -213,7 +212,7 @@ class AdminController extends Notifier<AdminState> {
           data[FS.order] = 0;
           data[FS.createdAt] = FieldValue.serverTimestamp();
           data[FS.updatedAt] = FieldValue.serverTimestamp();
-          doc.set(data).catchError((e) => debugPrint('Erro background: $e'));
+          await doc.set(data);
           state = state.copyWith(isLoading: false);
           return doc.id;
 
@@ -233,7 +232,7 @@ class AdminController extends Notifier<AdminState> {
           data[FS.order] = 0;
           data[FS.createdAt] = FieldValue.serverTimestamp();
           data[FS.updatedAt] = FieldValue.serverTimestamp();
-          doc.set(data).catchError((e) => debugPrint('Erro background: $e'));
+          await doc.set(data);
           state = state.copyWith(isLoading: false);
           return doc.id;
 
@@ -255,7 +254,7 @@ class AdminController extends Notifier<AdminState> {
           data[FS.order] = 0;
           data[FS.createdAt] = FieldValue.serverTimestamp();
           data[FS.updatedAt] = FieldValue.serverTimestamp();
-          doc.set(data).catchError((e) => debugPrint('Erro background: $e'));
+          await doc.set(data);
           state = state.copyWith(isLoading: false);
           return doc.id;
 
@@ -280,16 +279,20 @@ class AdminController extends Notifier<AdminState> {
           data[FS.order] = 0;
           data[FS.createdAt] = FieldValue.serverTimestamp();
           data[FS.updatedAt] = FieldValue.serverTimestamp();
-          doc.set(data).catchError((e) => debugPrint('Erro background: $e'));
+          await doc.set(data);
           state = state.copyWith(isLoading: false);
           return doc.id;
       }
+    } on FirebaseException catch (e) {
+      final msg = 'Erro Firebase ao criar ${entity.label}: [${e.code}] ${e.message}';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+      rethrow;
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'Erro ao criar: $e',
-      );
-      throw e;
+      final msg = 'Erro ao criar ${entity.label}: $e';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+      rethrow;
     }
   }
 
@@ -299,40 +302,37 @@ class AdminController extends Notifier<AdminState> {
     String docId,
     Map<String, dynamic> data,
   ) async {
+    state = state.copyWith(isLoading: true, clearError: true);
     try {
-      state = state.copyWith(isLoading: true, errorMessage: null);
       data[FS.updatedAt] = FieldValue.serverTimestamp();
 
       switch (entity) {
         case AdminEntity.categories:
-          _fs.collection(FS.categories).doc(docId).update(data)
-             .catchError((e) => debugPrint('Erro background: $e'));
+          await _fs.collection(FS.categories).doc(docId).update(data);
           break;
 
         case AdminEntity.modules:
           if (state.selectedCategoryId == null) throw 'Selecione uma categoria';
-          _fs
+          await _fs
               .collection(FS.categories)
               .doc(state.selectedCategoryId!)
               .collection(FS.modules)
               .doc(docId)
-              .update(data)
-              .catchError((e) => debugPrint('Erro background: $e'));
+              .update(data);
           break;
 
         case AdminEntity.trails:
           if (state.selectedCategoryId == null || state.selectedModuleId == null) {
             throw 'Selecione categoria e módulo';
           }
-          _fs
+          await _fs
               .collection(FS.categories)
               .doc(state.selectedCategoryId!)
               .collection(FS.modules)
               .doc(state.selectedModuleId!)
               .collection(FS.trails)
               .doc(docId)
-              .update(data)
-              .catchError((e) => debugPrint('Erro background: $e'));
+              .update(data);
           break;
 
         case AdminEntity.lessons:
@@ -341,7 +341,7 @@ class AdminController extends Notifier<AdminState> {
               state.selectedTrailId == null) {
             throw 'Selecione categoria, módulo e trilha';
           }
-          _fs
+          await _fs
               .collection(FS.categories)
               .doc(state.selectedCategoryId!)
               .collection(FS.modules)
@@ -350,8 +350,7 @@ class AdminController extends Notifier<AdminState> {
               .doc(state.selectedTrailId!)
               .collection(FS.lessons)
               .doc(docId)
-              .update(data)
-              .catchError((e) => debugPrint('Erro background: $e'));
+              .update(data);
           break;
 
         case AdminEntity.questions:
@@ -361,7 +360,7 @@ class AdminController extends Notifier<AdminState> {
               state.selectedLessonId == null) {
             throw 'Selecione categoria, módulo, trilha e lição';
           }
-          _fs
+          await _fs
               .collection(FS.categories)
               .doc(state.selectedCategoryId!)
               .collection(FS.modules)
@@ -372,30 +371,34 @@ class AdminController extends Notifier<AdminState> {
               .doc(state.selectedLessonId!)
               .collection(FS.questions)
               .doc(docId)
-              .update(data)
-              .catchError((e) => debugPrint('Erro background: $e'));
+              .update(data);
           break;
       }
 
       state = state.copyWith(isLoading: false);
       return true;
+    } on FirebaseException catch (e) {
+      final msg = 'Erro Firebase ao atualizar ${entity.label}: [${e.code}] ${e.message}';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+      return false;
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'Erro ao atualizar: $e',
-      );
+      final msg = 'Erro ao atualizar ${entity.label}: $e';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
       return false;
     }
   }
 
-  // ─── DELETE ────────────────────────────────────────────────────
+  // ─── DELETE (com cascata completa) ─────────────────────────────
   Future<bool> delete(AdminEntity entity, String docId) async {
+    state = state.copyWith(isLoading: true, clearError: true);
     try {
-      state = state.copyWith(isLoading: true, errorMessage: null);
 
       switch (entity) {
         case AdminEntity.categories:
-          await _fs.collection(FS.categories).doc(docId).delete();
+          final catRef = _fs.collection(FS.categories).doc(docId);
+          await _deleteCategoryDeep(catRef);
           if (state.selectedCategoryId == docId) {
             state = state.copyWith(
               selectedCategoryId: null,
@@ -408,12 +411,12 @@ class AdminController extends Notifier<AdminState> {
 
         case AdminEntity.modules:
           if (state.selectedCategoryId == null) throw 'Selecione uma categoria';
-          await _fs
+          final modRef = _fs
               .collection(FS.categories)
               .doc(state.selectedCategoryId!)
               .collection(FS.modules)
-              .doc(docId)
-              .delete();
+              .doc(docId);
+          await _deleteModuleDeep(modRef);
           if (state.selectedModuleId == docId) {
             state = state.copyWith(
               selectedModuleId: null,
@@ -427,14 +430,14 @@ class AdminController extends Notifier<AdminState> {
           if (state.selectedCategoryId == null || state.selectedModuleId == null) {
             throw 'Selecione categoria e módulo';
           }
-          await _fs
+          final trailRef = _fs
               .collection(FS.categories)
               .doc(state.selectedCategoryId!)
               .collection(FS.modules)
               .doc(state.selectedModuleId!)
               .collection(FS.trails)
-              .doc(docId)
-              .delete();
+              .doc(docId);
+          await _deleteTrailDeep(trailRef);
           if (state.selectedTrailId == docId) {
             state = state.copyWith(
               selectedTrailId: null,
@@ -449,7 +452,7 @@ class AdminController extends Notifier<AdminState> {
               state.selectedTrailId == null) {
             throw 'Selecione categoria, módulo e trilha';
           }
-          await _fs
+          final lessonRef = _fs
               .collection(FS.categories)
               .doc(state.selectedCategoryId!)
               .collection(FS.modules)
@@ -457,8 +460,8 @@ class AdminController extends Notifier<AdminState> {
               .collection(FS.trails)
               .doc(state.selectedTrailId!)
               .collection(FS.lessons)
-              .doc(docId)
-              .delete();
+              .doc(docId);
+          await _deleteLessonDeep(lessonRef);
           if (state.selectedLessonId == docId) {
             state = state.copyWith(selectedLessonId: null);
           }
@@ -488,13 +491,57 @@ class AdminController extends Notifier<AdminState> {
 
       state = state.copyWith(isLoading: false);
       return true;
+    } on FirebaseException catch (e) {
+      final msg = 'Erro Firebase ao deletar ${entity.label}: [${e.code}] ${e.message}';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+      return false;
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'Erro ao deletar: $e',
-      );
+      final msg = 'Erro ao deletar ${entity.label}: $e';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
       return false;
     }
+  }
+
+  // ─── HELPERS DE CASCATA ─────────────────────────────────────────
+  // Estratégia: Await explícito para garantir que não haja documentos órfãos 
+  // e propagar qualquer erro para a UI.
+
+  Future<void> _deleteCategoryDeep(DocumentReference catRef) async {
+    final modules = await catRef.collection(FS.modules).get();
+    for (final mod in modules.docs) {
+      await _deleteModuleDeep(mod.reference);
+    }
+    await catRef.delete();
+  }
+
+  Future<void> _deleteModuleDeep(DocumentReference modRef) async {
+    final trails = await modRef.collection(FS.trails).get();
+    for (final trail in trails.docs) {
+      await _deleteTrailDeep(trail.reference);
+    }
+    await modRef.delete();
+  }
+
+  Future<void> _deleteTrailDeep(DocumentReference trailRef) async {
+    final lessons = await trailRef.collection(FS.lessons).get();
+    for (final lesson in lessons.docs) {
+      await _deleteLessonDeep(lesson.reference);
+    }
+    await trailRef.delete();
+  }
+
+  Future<void> _deleteLessonDeep(DocumentReference lessonRef) async {
+    final questions = await lessonRef.collection(FS.questions).get();
+    if (questions.docs.isNotEmpty) {
+      final batch = _fs.batch();
+      for (final q in questions.docs) {
+        batch.delete(q.reference);
+      }
+      await batch.commit();
+    }
+    await lessonRef.delete();
   }
 
   // ─── GENERATE TRAIL ────────────────────────────────────────────
@@ -612,14 +659,18 @@ class AdminController extends Notifier<AdminState> {
         }
       }
 
-      batch.commit().catchError((e) => debugPrint('Erro background: $e'));
+      await batch.commit();
       state = state.copyWith(isLoading: false);
       return true;
+    } on FirebaseException catch (e) {
+      final msg = 'Erro Firebase ao gerar trilha: [${e.code}] ${e.message}';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+      return false;
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'Erro ao gerar trilha: $e',
-      );
+      final msg = 'Erro ao gerar trilha: $e';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
       return false;
     }
   }
@@ -651,6 +702,7 @@ class AdminController extends Notifier<AdminState> {
         catRef = _fs.collection(FS.categories).doc();
         batch.set(catRef, {
           FS.title: categoryTitle,
+          'subtitle': 'Importado via JSON',
           'description': 'Importado via JSON',
           FS.order: 0,
           FS.createdAt: FieldValue.serverTimestamp(),
@@ -708,47 +760,115 @@ class AdminController extends Notifier<AdminState> {
       // 5. Adicionar Questões
       if (questionsData != null) {
         for (int i = 0; i < questionsData.length; i++) {
-          final q = questionsData[i];
+          final q = questionsData[i] as Map<String, dynamic>;
           final qRef = lessonRef.collection(FS.questions).doc();
-          
-          batch.set(qRef, {
+
+          // Normaliza o tipo do JSON para camelCase usado no Firestore
+          final rawType = q['type'] as String? ?? 'multiple_choice';
+          final String firestoreType;
+          switch (rawType) {
+            case 'true_false':
+            case 'trueFalse':
+              firestoreType = 'trueFalse';
+              break;
+            case 'fill_blank':
+            case 'fill_in_the_blanks':
+            case 'fillInTheBlanks':
+              firestoreType = 'fillInTheBlanks';
+              break;
+            default:
+              firestoreType = 'multipleChoice';
+          }
+
+          final Map<String, dynamic> qData = {
             FS.statement: q['statement'] ?? 'Sem enunciado',
-            FS.type: q['type'] == 'true_false' ? 'true_false' : 'multipleChoice',
-            FS.options: q['options'] ?? (q['type'] == 'true_false' ? ['Verdadeiro', 'Falso'] : []),
-            FS.correctIndex: q['correctIndex'] ?? (q['isTrue'] == false ? 1 : 0),
+            FS.type: firestoreType,
             FS.explanation: q['explanation'] ?? '',
             FS.difficulty: q['difficulty'] ?? 'medium',
             FS.order: i,
             FS.createdAt: FieldValue.serverTimestamp(),
             FS.updatedAt: FieldValue.serverTimestamp(),
-          });
+          };
+
+          if (firestoreType == 'multipleChoice') {
+            qData[FS.options] = List<String>.from(q['options'] as List? ?? []);
+            qData[FS.correctIndex] = q['correctIndex'] ?? 0;
+          } else if (firestoreType == 'trueFalse') {
+            // Suporta 'isTrue' (bool) ou 'correctIndex' (0=V / 1=F)
+            final bool resolvedIsTrue;
+            if (q['isTrue'] != null) {
+              resolvedIsTrue = q['isTrue'] as bool;
+            } else if (q['correctIndex'] != null) {
+              resolvedIsTrue = (q['correctIndex'] as num).toInt() == 0;
+            } else {
+              resolvedIsTrue = true;
+            }
+            qData[FS.isTrue] = resolvedIsTrue;
+            qData[FS.correctIndex] = resolvedIsTrue ? 0 : 1;
+          } else if (firestoreType == 'fillInTheBlanks') {
+            // Usa textWithBlanks diretamente, ou cai para statement
+            qData[FS.textWithBlanks] =
+                q['textWithBlanks'] as String? ??
+                q['text'] as String? ??
+                q['statement'] as String? ?? '';
+            // blanks: [{answer, distractors?}] ou answers: ['a','b']
+            final rawBlanks = q['blanks'] as List?;
+            final rawAnswers = q['answers'] as List?;
+            if (rawBlanks != null) {
+              qData[FS.blanks] = rawBlanks
+                  .map((b) => Map<String, dynamic>.from(b as Map))
+                  .toList();
+            } else if (rawAnswers != null) {
+              qData[FS.blanks] = rawAnswers
+                  .map((a) => {'answer': a.toString()})
+                  .toList();
+            }
+          }
+
+          batch.set(qRef, qData);
         }
       }
 
       await batch.commit();
       state = state.copyWith(isLoading: false);
       
-      // Atualiza seleção para mostrar o que foi criado
-      state = state.copyWith(
-        selectedCategoryId: catRef.id,
-        selectedModuleId: modRef.id,
-        selectedTrailId: trailRef.id,
-        contentTabIndex: 2,
-      );
+      // Guarda os IDs para navegação após fechar o dialog
+      _pendingCategoryId = catRef.id;
+      _pendingModuleId   = modRef.id;
 
       return true;
+    } on FirebaseException catch (e) {
+      final msg = 'Erro Firebase na importação: [${e.code}] ${e.message}';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+      return false;
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'Erro na importação: $e',
-      );
+      final msg = 'Erro na importação: $e';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
       return false;
     }
   }
 
-  void clearMessage() {
-    state = state.copyWith(errorMessage: null);
+  // Navegação pós-importão (chamar depois de fechar o dialog)
+  String? _pendingCategoryId;
+  String? _pendingModuleId;
+
+  void applyPendingNavigation() {
+    if (_pendingCategoryId != null && _pendingModuleId != null) {
+      state = state.copyWith(
+        sidebarIndex: 1,
+        selectedCategoryId: _pendingCategoryId,
+        selectedModuleId: _pendingModuleId,
+        contentTabIndex: 2,
+      );
+      _pendingCategoryId = null;
+      _pendingModuleId   = null;
+    }
   }
+
+  // clearMessage é alias de clearMessages — mantido por compatibilidade
+  void clearMessage() => clearMessages();
 }
 
 final adminControllerProvider = NotifierProvider<AdminController, AdminState>(() {
