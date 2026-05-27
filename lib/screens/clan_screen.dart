@@ -8,7 +8,7 @@ import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
-
+import 'package:spark_app/screens/leaderboard_screen.dart';
 enum ClanRole { admin, moderador, membro }
 
 class ClanMember {
@@ -133,6 +133,14 @@ class _ClanScreenState extends State<ClanScreen> {
               _myClanId = clanId;
               _myRole = role;
               _clanName = clanDoc.data()?['name'] ?? 'Clã Atual';
+              
+              if (clanDoc.data()?['primaryColor'] != null) {
+                _clanPrimaryColor = Color(clanDoc.data()!['primaryColor']);
+              }
+              if (clanDoc.data()?['iconCodePoint'] != null) {
+                _clanIcon = IconData(clanDoc.data()!['iconCodePoint'], fontFamily: 'MaterialIcons');
+              }
+              
               _clanCreated = true;
             });
           }
@@ -488,7 +496,13 @@ class _ClanScreenState extends State<ClanScreen> {
               const SizedBox(height: 20),
               
               // ESTATÍSTICAS DO CLÃ
-              _buildClanStats(currentLeague, clanData['rank'] ?? 0),
+              FutureBuilder<int>(
+                future: ClanService().getClanGlobalRank(_myClanId!),
+                builder: (context, snapshot) {
+                  final rank = snapshot.data ?? 0;
+                  return _buildClanStats(currentLeague, rank);
+                },
+              ),
               const SizedBox(height: 20),
 
               // PEDIDOS DE ENTRADA
@@ -589,7 +603,9 @@ class _ClanScreenState extends State<ClanScreen> {
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _statCard('Rank Global', rank > 0 ? '#$rank' : '-', Icons.public, AppColors.primary),
+          child: _statCard('Rank Global', rank > 0 ? '#$rank' : '-', Icons.public, _clanPrimaryColor, onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const LeaderboardScreen()));
+          }),
         ),
       ],
     );
@@ -816,19 +832,19 @@ class _ClanScreenState extends State<ClanScreen> {
   }
 
   Widget _buildClanMascot(ClanLeague league) {
-    Color auraColor = league.color;
+    Color auraColor = league.color; // A aura ao redor reflete a liga (Ouro, Platina, etc)
     return Container(
       width: 56,
       height: 56,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.card,
+        color: AppColors.inputBackground,
         boxShadow: [
-          BoxShadow(color: auraColor.withValues(alpha: 0.3), blurRadius: 15, spreadRadius: 2),
+          BoxShadow(color: auraColor.withValues(alpha: 0.4), blurRadius: 15, spreadRadius: 2),
         ],
-        border: Border.all(color: auraColor, width: 2),
+        border: Border.all(color: _clanPrimaryColor, width: 2),
       ),
-      child: Center(child: Icon(league.icon, color: auraColor, size: 28)),
+      child: Center(child: Icon(_clanIcon, color: _clanPrimaryColor, size: 28)),
     );
   }
 
@@ -1014,87 +1030,200 @@ class _ClanScreenState extends State<ClanScreen> {
     final editCtrl = TextEditingController(text: _clanName);
     Color tempColor = _clanPrimaryColor;
     IconData tempIcon = _clanIcon;
+    bool isLoading = false;
 
     showDialog(
       context: context,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setDialogState) {
-          return AlertDialog(
-            backgroundColor: AppColors.card,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide(color: AppColors.primary)),
-            title: const Text('Editar Clã', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextField(
-                    controller: editCtrl,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      hintText: 'Novo nome do clã',
-                      hintStyle: TextStyle(color: AppColors.textMuted),
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.primary)),
-                      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.primary)),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  const Text('Cor Principal', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      AppColors.primary,
-                      AppColors.gold,
-                      Colors.redAccent,
-                      Colors.blueAccent,
-                      Colors.greenAccent,
-                    ].map((c) => GestureDetector(
-                      onTap: () => setDialogState(() => tempColor = c),
-                      child: Container(
-                        width: 30, height: 30,
-                        decoration: BoxDecoration(shape: BoxShape.circle, color: c, border: Border.all(color: Colors.white, width: tempColor == c ? 3 : 0)),
-                      ),
-                    )).toList(),
-                  ),
-                  const SizedBox(height: 24),
-                  const Text('Ícone do Escudo', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icons.shield,
-                      Icons.security,
-                      Icons.bolt,
-                      Icons.local_fire_department,
-                      Icons.pets,
-                    ].map((i) => GestureDetector(
-                      onTap: () => setDialogState(() => tempIcon = i),
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(color: tempIcon == i ? tempColor.withValues(alpha: 0.2) : Colors.transparent, borderRadius: BorderRadius.circular(8)),
-                        child: Icon(i, color: tempIcon == i ? tempColor : AppColors.textMuted, size: 28),
-                      ),
-                    )).toList(),
-                  ),
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: AppColors.card,
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                boxShadow: [
+                  BoxShadow(color: tempColor.withValues(alpha: 0.1), blurRadius: 20, spreadRadius: 5),
                 ],
               ),
-            ),
-            actions: [
-              TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar', style: TextStyle(color: AppColors.textMuted))),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _clanName = editCtrl.text.trim().isEmpty ? _clanName : editCtrl.text.trim();
-                    _clanPrimaryColor = tempColor;
-                    _clanIcon = tempIcon;
-                  });
-                  Navigator.pop(ctx);
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-                child: const Text('SALVAR', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Preview do Escudo
+                    Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.inputBackground,
+                        border: Border.all(color: tempColor, width: 3),
+                        boxShadow: [
+                          BoxShadow(color: tempColor.withValues(alpha: 0.3), blurRadius: 15, spreadRadius: 2),
+                        ],
+                      ),
+                      child: Center(
+                        child: Icon(tempIcon, color: tempColor, size: 40),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    const Text('Editar Clã', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900, letterSpacing: 1)),
+                    const SizedBox(height: 24),
+                    
+                    // Input Name
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: const Text('NOME DO CLÃ', style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                    ),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: editCtrl,
+                      style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                      decoration: InputDecoration(
+                        hintText: 'Novo nome do clã',
+                        hintStyle: const TextStyle(color: AppColors.textMuted),
+                        filled: true,
+                        fillColor: AppColors.inputBackground,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.5))),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.5))),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: tempColor)),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    
+                    // Colors
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: const Text('COR PRINCIPAL', style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                    ),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 12,
+                      runSpacing: 12,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        AppColors.primary,
+                        AppColors.gold,
+                        Colors.redAccent,
+                        Colors.blueAccent,
+                        Colors.greenAccent,
+                        Colors.purpleAccent,
+                        Colors.orangeAccent,
+                        Colors.tealAccent,
+                      ].map((c) => GestureDetector(
+                        onTap: () => setDialogState(() => tempColor = c),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          width: 36, height: 36,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle, 
+                            color: c, 
+                            border: Border.all(color: Colors.white, width: tempColor == c ? 3 : 0),
+                            boxShadow: tempColor == c ? [BoxShadow(color: c.withValues(alpha: 0.4), blurRadius: 8, spreadRadius: 2)] : [],
+                          ),
+                        ),
+                      )).toList(),
+                    ),
+                    const SizedBox(height: 24),
+                    
+                    // Icons
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: const Text('ÍCONE DO CLÃ', style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                    ),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 12,
+                      runSpacing: 12,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        Icons.shield,
+                        Icons.security,
+                        Icons.bolt,
+                        Icons.local_fire_department,
+                        Icons.pets,
+                        Icons.star,
+                        Icons.flash_on,
+                        Icons.eco,
+                        Icons.anchor,
+                        Icons.sports_esports,
+                        Icons.verified_user,
+                        Icons.diamond,
+                      ].map((i) => GestureDetector(
+                        onTap: () => setDialogState(() => tempIcon = i),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: tempIcon == i ? tempColor.withValues(alpha: 0.15) : AppColors.inputBackground, 
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: tempIcon == i ? tempColor.withValues(alpha: 0.5) : AppColors.cardBorder.withValues(alpha: 0.3)),
+                          ),
+                          child: Icon(i, color: tempIcon == i ? tempColor : AppColors.textMuted, size: 28),
+                        ),
+                      )).toList(),
+                    ),
+                    const SizedBox(height: 32),
+                    
+                    // Actions
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: isLoading ? null : () => Navigator.pop(ctx), 
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            ),
+                            child: const Text('Cancelar', style: TextStyle(color: AppColors.textSecondary, fontWeight: FontWeight.w700)),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: isLoading ? null : () async {
+                              final newName = editCtrl.text.trim().isEmpty ? _clanName : editCtrl.text.trim();
+                              setDialogState(() => isLoading = true);
+                              try {
+                                await ClanService().updateClanSettings(_myClanId!, newName, tempColor.value, tempIcon.codePoint);
+                                if (mounted) {
+                                  setState(() {
+                                    _clanName = newName;
+                                    _clanPrimaryColor = tempColor;
+                                    _clanIcon = tempIcon;
+                                  });
+                                  Navigator.pop(ctx);
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Clã atualizado com sucesso!'), backgroundColor: AppColors.primary));
+                                }
+                              } catch (e) {
+                                if (mounted) {
+                                  setDialogState(() => isLoading = false);
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao atualizar clã: $e'), backgroundColor: AppColors.error));
+                                }
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: tempColor, 
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              elevation: 4,
+                            ),
+                            child: isLoading
+                                ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                                : const Text('SALVAR', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ],
+            ),
           );
         }
       ),

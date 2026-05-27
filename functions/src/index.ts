@@ -17,16 +17,34 @@
  */
 
 import * as admin from "firebase-admin";
+import { getFirestore } from "firebase-admin/firestore";
 import {
   onCall,
+  onRequest,
   CallableRequest,
   HttpsError,
 } from "firebase-functions/v2/https";
 import { logger } from "firebase-functions/v2";
+import { defineSecret } from "firebase-functions/params";
+import {
+  findOrCreateCustomer,
+  updateCustomer,
+  createCharge,
+  verifyWebhookToken,
+  AsaasBillingType,
+} from "./services/asaasService";
+
+// ── Secrets vinculados ao Firebase Secret Manager ────────────────
+const ASAAS_API_KEY       = defineSecret("ASAAS_API_KEY");
+const ASAAS_BASE_URL      = defineSecret("ASAAS_BASE_URL");
+const ASAAS_WEBHOOK_TOKEN = defineSecret("ASAAS_WEBHOOK_TOKEN");
 
 // ── Firebase Admin init ──────────────────────────────────────────
-admin.initializeApp();
-const db = admin.firestore();
+admin.initializeApp({
+  projectId: "spark-v1-e0eb5",
+});
+const db = getFirestore("default");
+db.settings({ ignoreUndefinedProperties: true });
 
 // ────────────────────────────────────────────────────────────────
 // HELPERS
@@ -97,7 +115,10 @@ interface AddXpResult {
 }
 
 export const addXp = onCall(
-  { region: "southamerica-east1" },
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
   async (request: CallableRequest<AddXpData>): Promise<AddXpResult> => {
     const uid = request.auth?.uid;
     if (!uid) {
@@ -220,7 +241,10 @@ interface AddSpResult {
 }
 
 export const addSparkPoints = onCall(
-  { region: "southamerica-east1" },
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
   async (request: CallableRequest<AddSpData>): Promise<AddSpResult> => {
     const uid = request.auth?.uid;
     if (!uid) {
@@ -281,7 +305,10 @@ interface SpendSpResult {
 }
 
 export const spendSparkPoints = onCall(
-  { region: "southamerica-east1" },
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
   async (request: CallableRequest<SpendSpData>): Promise<SpendSpResult> => {
     const uid = request.auth?.uid;
     if (!uid) {
@@ -352,7 +379,10 @@ interface UpdateEloResult {
 }
 
 export const updateElo = onCall(
-  { region: "southamerica-east1" },
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
   async (request: CallableRequest<UpdateEloData>): Promise<UpdateEloResult> => {
     const uid = request.auth?.uid;
     if (!uid) {
@@ -428,7 +458,10 @@ interface UnlockBadgeResult {
 }
 
 export const unlockBadge = onCall(
-  { region: "southamerica-east1" },
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
   async (
     request: CallableRequest<UnlockBadgeData>
   ): Promise<UnlockBadgeResult> => {
@@ -471,5 +504,294 @@ export const unlockBadge = onCall(
     }
 
     return { unlocked, badgeId };
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// 5. createAsaasCheckout — Cria cobrança no Asaas (PIX/Cartão/Boleto)
+// ────────────────────────────────────────────────────────────────
+
+interface CheckoutItem {
+  name: string;
+  description: string;
+  price: number;
+  sparkPointsGranted: number;
+}
+
+interface CreateCheckoutData {
+  items: CheckoutItem[];
+  billingType: AsaasBillingType;
+  customerName?: string;
+  customerEmail?: string;
+  customerCpfCnpj?: string;
+}
+
+interface CreateCheckoutResult {
+  orderId: string;
+  chargeId: string;
+  billingType: AsaasBillingType;
+  totalPrice: number;
+  invoiceUrl: string | null;
+  pixPayload: string | null;
+  pixQrCodeBase64: string | null;
+  pixExpirationDate: string | null;
+  bankSlipUrl: string | null;
+}
+
+export const createAsaasCheckout = onCall(
+  {
+    region: "southamerica-east1",
+    secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<CreateCheckoutData>
+  ): Promise<CreateCheckoutResult> => {
+    const uid = request.auth?.uid;
+    if (!uid) {
+      throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+
+    const { items, billingType, customerName, customerEmail, customerCpfCnpj } =
+      request.data;
+
+    if (!items || items.length === 0) {
+      throw new HttpsError("invalid-argument", "Carrinho vazio.");
+    }
+    if (!billingType) {
+      throw new HttpsError("invalid-argument", "billingType é obrigatório.");
+    }
+
+    // Verifica se a chave do Asaas está configurada
+    const apiKey = process.env.ASAAS_API_KEY ?? "";
+    if (!apiKey) {
+      logger.warn("[createAsaasCheckout] ASAAS_API_KEY não configurada — pagamento indisponível.");
+      throw new HttpsError(
+        "unavailable",
+        "O sistema de pagamentos está em manutenção. Tente novamente em breve."
+      );
+    }
+
+    const totalPrice = items.reduce((acc, i) => acc + i.price, 0);
+    const totalPoints = items.reduce((acc, i) => acc + i.sparkPointsGranted, 0);
+
+    // Busca dados do usuário no Firestore para preencher o cliente Asaas
+    const userSnap = await db.collection("users").doc(uid).get();
+    if (!userSnap.exists) {
+      throw new HttpsError("not-found", "Usuário não encontrado.");
+    }
+    const userData = userSnap.data()!;
+    const name =
+      customerName ?? (userData["displayName"] as string) ?? "Usuário Spark";
+    const email =
+      customerEmail ?? (userData["email"] as string) ?? `${uid}@spark.app`;
+
+    // Obtém ou cria o cliente no Asaas
+    let asaasCustomerId: string | undefined = userData["asaasCustomerId"] as
+      | string
+      | undefined;
+
+    if (!asaasCustomerId) {
+      asaasCustomerId = await findOrCreateCustomer(
+        name,
+        email,
+        customerCpfCnpj
+      );
+      // Persiste o id para reutilização futura
+      await db
+        .collection("users")
+        .doc(uid)
+        .update({ asaasCustomerId });
+    } else if (customerCpfCnpj) {
+      // Se já existia o id, mas recebemos o CPF agora (ex: pagamento PIX), garantimos o update
+      await updateCustomer(asaasCustomerId, customerCpfCnpj);
+    }
+
+    // Cria o pedido pendente no Firestore ANTES de chamar o Asaas
+    const orderRef = db.collection("orders").doc();
+    await orderRef.set({
+      uid,
+      items: items.map((i) => ({
+        name: i.name,
+        description: i.description,
+        price: i.price,
+        sparkPointsGranted: i.sparkPointsGranted,
+      })),
+      totalPrice,
+      totalPoints,
+      billingType,
+      status: "PENDING",
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    const orderId = orderRef.id;
+
+    const description =
+      items.length === 1
+        ? items[0].name
+        : `${items.length} itens — Loja Spark`;
+
+    // Cria a cobrança no Asaas
+    const chargeResult = await createCharge({
+      customerId: asaasCustomerId,
+      value: Number(totalPrice.toFixed(2)),
+      description,
+      billingType,
+      orderId,
+    });
+
+    // Salva o chargeId no pedido para reconciliação via webhook
+    await orderRef.update({ chargeId: chargeResult.chargeId });
+
+    logger.info(
+      `[createAsaasCheckout] uid=${uid} orderId=${orderId} chargeId=${chargeResult.chargeId} total=${totalPrice}`
+    );
+
+    return {
+      orderId,
+      chargeId: chargeResult.chargeId,
+      billingType: chargeResult.billingType,
+      totalPrice,
+      invoiceUrl: chargeResult.invoiceUrl,
+      pixPayload: chargeResult.pixPayload,
+      pixQrCodeBase64: chargeResult.pixQrCodeBase64,
+      pixExpirationDate: chargeResult.pixExpirationDate,
+      bankSlipUrl: chargeResult.bankSlipUrl,
+    };
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// 6. asaasWebhook — Processa eventos de pagamento do Asaas
+// ────────────────────────────────────────────────────────────────
+
+/**
+ * Endpoint HTTP que o Asaas chama quando um pagamento é confirmado.
+ * Configura este URL no painel Asaas → Configurações → Webhook.
+ *
+ * URL: https://southamerica-east1-spark-v1-e0eb5.cloudfunctions.net/asaasWebhook
+ *
+ * Eventos suportados:
+ *  - PAYMENT_RECEIVED   : PIX / Cartão confirmado
+ *  - PAYMENT_CONFIRMED  : Boleto compensado
+ */
+export const asaasWebhook = onRequest(
+  {
+    region: "southamerica-east1",
+    secrets: [ASAAS_WEBHOOK_TOKEN],
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (req, res) => {
+    // 1) Só aceita POST
+    if (req.method !== "POST") {
+      res.status(405).send("Method Not Allowed");
+      return;
+    }
+
+    // 2) Verifica token do webhook
+    const token =
+      (req.headers["asaas-access-token"] as string | undefined) ?? "";
+    if (!verifyWebhookToken(token)) {
+      logger.warn("[asaasWebhook] Token inválido.");
+      res.status(401).send("Unauthorized");
+      return;
+    }
+
+    const body = req.body as {
+      event: string;
+      payment?: { id: string; externalReference?: string; status?: string };
+    };
+
+    const { event, payment } = body;
+    logger.info(`[asaasWebhook] Evento recebido: ${event}`, { payment });
+
+    // 3) Processa apenas eventos de pagamento confirmado
+    const isConfirmed =
+      event === "PAYMENT_RECEIVED" || event === "PAYMENT_CONFIRMED";
+
+    if (!isConfirmed || !payment) {
+      res.status(200).send("Event ignored");
+      return;
+    }
+
+    const orderId = payment.externalReference;
+    if (!orderId) {
+      logger.warn("[asaasWebhook] Pagamento sem externalReference.", payment);
+      res.status(200).send("No externalReference");
+      return;
+    }
+
+    // 4) Busca o pedido no Firestore
+    const orderRef = db.collection("orders").doc(orderId);
+    const orderSnap = await orderRef.get();
+
+    if (!orderSnap.exists) {
+      logger.error(`[asaasWebhook] Pedido ${orderId} não encontrado.`);
+      res.status(200).send("Order not found");
+      return;
+    }
+
+    const order = orderSnap.data()!;
+
+    // Idempotência — ignora se já foi processado
+    if (order["status"] === "PAID") {
+      logger.info(`[asaasWebhook] Pedido ${orderId} já processado. Ignorando.`);
+      res.status(200).send("Already processed");
+      return;
+    }
+
+    const uid = order["uid"] as string;
+    const totalPoints = (order["totalPoints"] as number) ?? 0;
+    const totalPrice = (order["totalPrice"] as number) ?? 0;
+
+    // 5) Batch: marca pedido como pago + incrementa pontos + grava transação
+    const batch = db.batch();
+
+    // Atualiza status do pedido
+    batch.update(orderRef, {
+      status: "PAID",
+      paidAt: admin.firestore.FieldValue.serverTimestamp(),
+      asaasPaymentId: payment.id,
+    });
+
+    // Incrementa Spark Points (somente se houver pontos)
+    if (totalPoints > 0) {
+      const userRef = db.collection("users").doc(uid);
+      batch.update(userRef, {
+        sparkPoints: admin.firestore.FieldValue.increment(totalPoints),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    }
+
+    // Registra transação para histórico financeiro
+    const txRef = db.collection("transactions").doc();
+    batch.set(txRef, {
+      uid,
+      orderId,
+      asaasPaymentId: payment.id,
+      totalPrice,
+      totalPoints,
+      status: "PAID",
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    await batch.commit();
+
+    // Audit log (não-crítico)
+    try {
+      await writeAuditLog(uid, "sp_purchased", totalPoints, "asaas_payment", {
+        orderId,
+        asaasPaymentId: payment.id,
+        totalPrice,
+      });
+    } catch (e) {
+      logger.warn("[asaasWebhook] Audit log error:", e);
+    }
+
+    logger.info(
+      `[asaasWebhook] Pedido ${orderId} confirmado. +${totalPoints} pts para uid=${uid}`
+    );
+
+    res.status(200).send("OK");
   }
 );

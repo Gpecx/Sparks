@@ -761,12 +761,12 @@ class RankingEntry {
   });
 
   factory RankingEntry.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
+    final data = doc.data() as Map<String, dynamic>? ?? {};
     return RankingEntry(
       uid: doc.id,
       displayName: data['displayName'] ?? 'Usuário',
       photoUrl: data['photoUrl'],
-      weeklyXp: data['weeklyXp'] ?? 0,
+      weeklyXp: (data['weeklyXp'] as num?)?.toInt() ?? 0,
       clanId: data['clanId'],
       clanName: data['clanName'],
       rawDoc: doc,
