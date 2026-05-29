@@ -23,6 +23,7 @@ class UserModel {
   final int currentStreak;
   final int longestStreak;
   final int activeDays;
+  final bool isPremium;
   final DateTime? lastStudyDate;
   final bool studiedToday;
   final String? clanId;
@@ -51,6 +52,7 @@ class UserModel {
     this.currentStreak = 0,
     this.longestStreak = 0,
     this.activeDays = 0,
+    this.isPremium = false,
     this.lastStudyDate,
     this.studiedToday = false,
     this.clanId,
@@ -86,6 +88,7 @@ class UserModel {
           (data['streak'] as num?)?.toInt() ?? 0,
       longestStreak: (data['longestStreak'] as num?)?.toInt() ?? 0,
       activeDays: (data['activeDays'] as num?)?.toInt() ?? 0,
+      isPremium: data['isPremium'] == true,
       
       // Datas: verifica especificamente se é um Timestamp do Firebase
       lastStudyDate: data['lastStudyDate'] is Timestamp 
@@ -135,6 +138,7 @@ class UserModel {
       'currentStreak': currentStreak,
       'longestStreak': longestStreak,
       'activeDays': activeDays,
+      'isPremium': isPremium,
       'lastStudyDate':
           lastStudyDate != null ? Timestamp.fromDate(lastStudyDate!) : null,
       'studiedToday': studiedToday,
@@ -164,6 +168,7 @@ class UserModel {
     int? currentStreak,
     int? longestStreak,
     int? activeDays,
+    bool? isPremium,
     DateTime? lastStudyDate,
     bool? studiedToday,
     String? clanId,
@@ -190,6 +195,7 @@ class UserModel {
       currentStreak: currentStreak ?? this.currentStreak,
       longestStreak: longestStreak ?? this.longestStreak,
       activeDays: activeDays ?? this.activeDays,
+      isPremium: isPremium ?? this.isPremium,
       lastStudyDate: lastStudyDate ?? this.lastStudyDate,
       studiedToday: studiedToday ?? this.studiedToday,
       clanId: clanId ?? this.clanId,

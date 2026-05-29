@@ -17,7 +17,7 @@
  *  - unlockBadge       : Concede badge se ainda não desbloqueada.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.asaasWebhook = exports.createAsaasCheckout = exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
+exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
 const admin = require("firebase-admin");
 const firestore_1 = require("firebase-admin/firestore");
 const https_1 = require("firebase-functions/v2/https");
@@ -394,12 +394,16 @@ exports.createAsaasCheckout = (0, https_1.onCall)({
     const orderRef = db.collection("orders").doc();
     await orderRef.set({
         uid,
-        items: items.map((i) => ({
-            name: i.name,
-            description: i.description,
-            price: i.price,
-            sparkPointsGranted: i.sparkPointsGranted,
-        })),
+        items: items.map((i) => {
+            var _a;
+            return ({
+                name: i.name,
+                description: i.description,
+                price: i.price,
+                sparkPointsGranted: i.sparkPointsGranted,
+                isSubscription: (_a = i.isSubscription) !== null && _a !== void 0 ? _a : false,
+            });
+        }),
         totalPrice,
         totalPoints,
         billingType,
@@ -433,6 +437,103 @@ exports.createAsaasCheckout = (0, https_1.onCall)({
         bankSlipUrl: chargeResult.bankSlipUrl,
     };
 });
+exports.checkPaymentStatus = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a, _b, _c, _d, _e, _f;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    const { orderId } = request.data;
+    if (!orderId) {
+        throw new https_1.HttpsError("invalid-argument", "orderId é obrigatório.");
+    }
+    // Busca o pedido no Firestore
+    const orderRef = db.collection("orders").doc(orderId);
+    const orderSnap = await orderRef.get();
+    if (!orderSnap.exists) {
+        throw new https_1.HttpsError("not-found", `Pedido ${orderId} não encontrado.`);
+    }
+    const order = orderSnap.data();
+    // Valida que o pedido pertence ao usuário autenticado
+    if (order["uid"] !== uid) {
+        throw new https_1.HttpsError("permission-denied", "Acesso negado ao pedido.");
+    }
+    // Se já foi processado, retorna direto
+    if (order["status"] === "PAID") {
+        return {
+            status: "PAID",
+            processed: false, // já estava pago antes
+            sparkPointsGranted: (_b = order["totalPoints"]) !== null && _b !== void 0 ? _b : 0,
+        };
+    }
+    const chargeId = order["chargeId"];
+    if (!chargeId) {
+        return { status: (_c = order["status"]) !== null && _c !== void 0 ? _c : "PENDING", processed: false, sparkPointsGranted: 0 };
+    }
+    // Consulta o Asaas diretamente usando getChargeStatus
+    const asaasChargeStatus = await (0, asaasService_1.getChargeStatus)(chargeId);
+    v2_1.logger.info(`[checkPaymentStatus] orderId=${orderId} chargeId=${chargeId} asaasStatus=${asaasChargeStatus}`);
+    const isConfirmed = asaasChargeStatus === "RECEIVED" ||
+        asaasChargeStatus === "CONFIRMED" ||
+        asaasChargeStatus === "RECEIVED_IN_CASH";
+    if (!isConfirmed) {
+        return { status: asaasChargeStatus, processed: false, sparkPointsGranted: 0 };
+    }
+    // Pagamento confirmado no Asaas — processa igual ao webhook
+    const totalPoints = (_d = order["totalPoints"]) !== null && _d !== void 0 ? _d : 0;
+    const totalPrice = (_e = order["totalPrice"]) !== null && _e !== void 0 ? _e : 0;
+    const items = (_f = order["items"]) !== null && _f !== void 0 ? _f : [];
+    const hasSubscription = items.some((i) => i.isSubscription === true);
+    const batch = db.batch();
+    batch.update(orderRef, {
+        status: "PAID",
+        paidAt: admin.firestore.FieldValue.serverTimestamp(),
+        asaasPaymentId: chargeId,
+        confirmedVia: "polling",
+    });
+    const userRef = db.collection("users").doc(uid);
+    let userUpdated = false;
+    const userUpdates = { updatedAt: admin.firestore.FieldValue.serverTimestamp() };
+    if (totalPoints > 0) {
+        userUpdates.sparkPoints = admin.firestore.FieldValue.increment(totalPoints);
+        userUpdated = true;
+    }
+    if (hasSubscription) {
+        userUpdates.isPremium = true;
+        userUpdated = true;
+    }
+    if (userUpdated) {
+        batch.update(userRef, userUpdates);
+    }
+    const txRef = db.collection("transactions").doc();
+    batch.set(txRef, {
+        uid,
+        orderId,
+        asaasPaymentId: chargeId,
+        totalPrice,
+        totalPoints,
+        status: "PAID",
+        confirmedVia: "polling",
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    await batch.commit();
+    try {
+        await writeAuditLog(uid, "sp_purchased", totalPoints, "asaas_polling", {
+            orderId,
+            asaasPaymentId: chargeId,
+            totalPrice,
+        });
+    }
+    catch (e) {
+        v2_1.logger.warn("[checkPaymentStatus] Audit log error:", e);
+    }
+    v2_1.logger.info(`[checkPaymentStatus] Pedido ${orderId} processado via polling. +${totalPoints} pts para uid=${uid}`);
+    return { status: "PAID", processed: true, sparkPointsGranted: totalPoints };
+});
 // ────────────────────────────────────────────────────────────────
 // 6. asaasWebhook — Processa eventos de pagamento do Asaas
 // ────────────────────────────────────────────────────────────────
@@ -446,30 +547,71 @@ exports.createAsaasCheckout = (0, https_1.onCall)({
  *  - PAYMENT_RECEIVED   : PIX / Cartão confirmado
  *  - PAYMENT_CONFIRMED  : Boleto compensado
  */
+// deploy-force: 2026-05-29T13:59 — atualiza secret ASAAS_WEBHOOK_TOKEN para versão 8
 exports.asaasWebhook = (0, https_1.onRequest)({
     region: "southamerica-east1",
     secrets: [ASAAS_WEBHOOK_TOKEN],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (req, res) => {
-    var _a, _b, _c;
+    var _a, _b, _c, _d, _e, _f;
     // 1) Só aceita POST
     if (req.method !== "POST") {
         res.status(405).send("Method Not Allowed");
         return;
     }
-    // 2) Verifica token do webhook
-    const token = (_a = req.headers["asaas-access-token"]) !== null && _a !== void 0 ? _a : "";
-    if (!(0, asaasService_1.verifyWebhookToken)(token)) {
-        v2_1.logger.warn("[asaasWebhook] Token inválido.");
-        res.status(401).send("Unauthorized");
-        return;
+    // 2) Parseia o body — o Asaas envia em formato envelope:
+    //    { data: "JSON string com event+payment", accessToken: "..." }
+    //    Também aceita formato direto: { event, payment } (para testes manuais)
+    let event;
+    let payment;
+    const rawBody = req.body;
+    v2_1.logger.info(`[asaasWebhook] Body bruto: ${JSON.stringify(rawBody).substring(0, 500)}`);
+    // Lê o token primariamente do header oficial do Asaas
+    let receivedToken = (_a = req.headers["asaas-access-token"]) !== null && _a !== void 0 ? _a : "";
+    if ((rawBody === null || rawBody === void 0 ? void 0 : rawBody.data) && typeof rawBody.data === "string") {
+        // Formato envelope (pode vir de ferramentas de teste ou proxy)
+        try {
+            const parsed = JSON.parse(rawBody.data);
+            event = parsed.event;
+            payment = parsed.payment;
+            // Fallback para o envelope caso o header não venha
+            if (!receivedToken) {
+                receivedToken = (_b = rawBody.accessToken) !== null && _b !== void 0 ? _b : "";
+            }
+            v2_1.logger.info(`[asaasWebhook] Formato envelope detectado. Event=${event}, paymentId=${payment === null || payment === void 0 ? void 0 : payment.id}`);
+        }
+        catch (e) {
+            v2_1.logger.error(`[asaasWebhook] Erro ao parsear data: ${e}`);
+            res.status(400).send("Invalid data format");
+            return;
+        }
     }
-    const body = req.body;
-    const { event, payment } = body;
-    v2_1.logger.info(`[asaasWebhook] Evento recebido: ${event}`, { payment });
-    // 3) Processa apenas eventos de pagamento confirmado
-    const isConfirmed = event === "PAYMENT_RECEIVED" || event === "PAYMENT_CONFIRMED";
+    else {
+        // Formato direto (Asaas real / chamadas diretas)
+        event = rawBody === null || rawBody === void 0 ? void 0 : rawBody.event;
+        payment = rawBody === null || rawBody === void 0 ? void 0 : rawBody.payment;
+        v2_1.logger.info(`[asaasWebhook] Formato direto detectado. Event=${event}, paymentId=${payment === null || payment === void 0 ? void 0 : payment.id}`);
+    }
+    // 3) Verifica token com lógica corrigida
+    const expectedSecret = (_c = process.env.ASAAS_WEBHOOK_TOKEN) !== null && _c !== void 0 ? _c : "";
+    v2_1.logger.info(`[asaasWebhook] Token recebido='${receivedToken.substring(0, 12)}...' esperado='${expectedSecret.substring(0, 12)}...' match=${receivedToken === expectedSecret}`);
+    if (expectedSecret) {
+        if (receivedToken !== expectedSecret) {
+            v2_1.logger.warn(`[asaasWebhook] Token inválido bloqueado. Esperava o secret configurado no Firebase.`);
+            res.status(401).send("Unauthorized");
+            return;
+        }
+    }
+    else {
+        v2_1.logger.warn(`[asaasWebhook] AVISO: ASAAS_WEBHOOK_TOKEN não está configurado! Processando sem validação (Apenas para testes)`);
+    }
+    v2_1.logger.info(`[asaasWebhook] Evento: ${event}`, { payment });
+    // 4) Processa apenas eventos de pagamento confirmado
+    const isConfirmed = event === "PAYMENT_RECEIVED" ||
+        event === "PAYMENT_CONFIRMED" ||
+        event === "PAYMENT_RECEIVED_IN_CASH";
     if (!isConfirmed || !payment) {
+        v2_1.logger.info(`[asaasWebhook] Evento '${event}' ignorado.`);
         res.status(200).send("Event ignored");
         return;
     }
@@ -495,9 +637,11 @@ exports.asaasWebhook = (0, https_1.onRequest)({
         return;
     }
     const uid = order["uid"];
-    const totalPoints = (_b = order["totalPoints"]) !== null && _b !== void 0 ? _b : 0;
-    const totalPrice = (_c = order["totalPrice"]) !== null && _c !== void 0 ? _c : 0;
-    // 5) Batch: marca pedido como pago + incrementa pontos + grava transação
+    const totalPoints = (_d = order["totalPoints"]) !== null && _d !== void 0 ? _d : 0;
+    const totalPrice = (_e = order["totalPrice"]) !== null && _e !== void 0 ? _e : 0;
+    const items = (_f = order["items"]) !== null && _f !== void 0 ? _f : [];
+    const hasSubscription = items.some((i) => i.isSubscription === true);
+    // 5) Batch: marca pedido como pago + incrementa pontos/premium + grava transação
     const batch = db.batch();
     // Atualiza status do pedido
     batch.update(orderRef, {
@@ -505,13 +649,19 @@ exports.asaasWebhook = (0, https_1.onRequest)({
         paidAt: admin.firestore.FieldValue.serverTimestamp(),
         asaasPaymentId: payment.id,
     });
-    // Incrementa Spark Points (somente se houver pontos)
+    const userRef = db.collection("users").doc(uid);
+    let userUpdated = false;
+    const userUpdates = { updatedAt: admin.firestore.FieldValue.serverTimestamp() };
     if (totalPoints > 0) {
-        const userRef = db.collection("users").doc(uid);
-        batch.update(userRef, {
-            sparkPoints: admin.firestore.FieldValue.increment(totalPoints),
-            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-        });
+        userUpdates.sparkPoints = admin.firestore.FieldValue.increment(totalPoints);
+        userUpdated = true;
+    }
+    if (hasSubscription) {
+        userUpdates.isPremium = true;
+        userUpdated = true;
+    }
+    if (userUpdated) {
+        batch.update(userRef, userUpdates);
     }
     // Registra transação para histórico financeiro
     const txRef = db.collection("transactions").doc();

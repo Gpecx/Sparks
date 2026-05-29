@@ -5,7 +5,6 @@ import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spark_app/providers/user_provider.dart';
 
 class CartNotifier extends Notifier<List<CartItem>> {
   @override
@@ -91,52 +90,6 @@ class StoreScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(cartProvider);
-    final userService = ref.watch(userServiceProvider);
-    
-    if (!(userService.user?.isAdmin ?? false)) {
-      return SparksBackground(
-        child: PcbBackground(
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: SafeArea(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 16, 20, 0),
-                    child: Row(
-                      children: [
-                        _buildSmartBackButton(context),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.lock_outline, size: 80, color: AppColors.primary),
-                          const SizedBox(height: 24),
-                          const Text(
-                            'LOJA EM REFORMA',
-                            style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold, letterSpacing: 2),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            'Nossos técnicos estão trabalhando em\nnovidades incríveis. Voltaremos em breve!',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: AppColors.textSecondary, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    }
 
     return SparksBackground(
       child: PcbBackground(
@@ -254,7 +207,7 @@ class StoreScreen extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(6)),
-                child: const Text('OFERTA DO DIA', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                child: const Text('OFERTA DA SEMANA', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
               ),
               const Spacer(),
               const Icon(Icons.timer_outlined, color: AppColors.primary, size: 16),
@@ -263,7 +216,7 @@ class StoreScreen extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 14),
-          const Text('⚡ Oferta Relâmpago do Dia!', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
+          const Text('⚡ Oferta Relâmpago da Semana!', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
           const SizedBox(height: 4),
           Text('Economize 50% neste pacote exclusivo', style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 13)),
           const SizedBox(height: 14),

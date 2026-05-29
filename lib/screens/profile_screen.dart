@@ -198,10 +198,30 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   Text(userService.displayName,
                       style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
                   const SizedBox(height: 4),
-                  Text(
-                    (user?.role ?? 'TÉCNICO').toUpperCase(),
-                    style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.4), fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        (user?.role ?? 'TÉCNICO').toUpperCase(),
+                        style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.4), fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
+                      ),
+                      if (user?.isPremium ?? false) ...[
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFD700).withValues(alpha: 0.2),
+                            border: Border.all(color: const Color(0xFFFFD700).withValues(alpha: 0.6)),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: const Text(
+                            'ASSINANTE',
+                            style: TextStyle(color: Color(0xFFFFD700), fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 1.5),
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                   const SizedBox(height: 14),
 

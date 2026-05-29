@@ -5,7 +5,7 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/services/payment_service.dart';
 import 'package:spark_app/screens/payment_pending_screen.dart';
-
+import 'package:spark_app/screens/main_shell_screen.dart';
 // CartItem é definido aqui para ser importado pela StoreScreen
 class CartItem {
   final String name;
@@ -15,6 +15,7 @@ class CartItem {
 
   /// Spark Points concedidos ao comprar este item (0 = nenhum)
   final int sparkPointsGranted;
+  final bool isSubscription;
 
   const CartItem({
     required this.name,
@@ -22,6 +23,7 @@ class CartItem {
     required this.price,
     required this.icon,
     this.sparkPointsGranted = 0,
+    this.isSubscription = false,
   });
 }
 
@@ -102,6 +104,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             description: i.description,
             price: i.price,
             sparkPointsGranted: i.sparkPointsGranted,
+            isSubscription: i.isSubscription,
           ))
       .toList();
 
@@ -119,7 +122,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       if (!mounted) return;
 
       // Navega para a tela de aguardo/QR Code
-      await Navigator.push(
+      final shouldGoToProfile = await Navigator.push<bool>(
         context,
         MaterialPageRoute(
           builder: (_) => PaymentPendingScreen(
@@ -129,8 +132,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ),
       );
 
-      // Volta para a loja ao retornar da tela de pagamento
-      if (mounted) Navigator.pop(context);
+      // Volta para a loja ou vai pro perfil ao retornar da tela de pagamento
+      if (mounted) {
+        final shell = context.findAncestorStateOfType<MainShellScreenState>();
+        if (shouldGoToProfile == true) {
+          shell?.switchTab(3);
+        }
+        Navigator.pop(context); // Fecha CheckoutScreen
+      }
     } on FirebaseFunctionsException catch (e) {
       if (!mounted) return;
       // Mensagem amigável por código de erro

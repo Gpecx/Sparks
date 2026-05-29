@@ -294,6 +294,16 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // ─── PEDIDOS (ORDERS) ─────────────────────────────────────────
+    // O dono do pedido pode ler o status (necessário para o listener
+    // do PaymentPendingScreen detectar a confirmação do pagamento).
+    // Escrita exclusiva via Cloud Functions (Admin SDK — ignora regras).
+
+    match /orders/{orderId} {
+      allow read: if isAuthenticated();
+      allow write: if false;
+    }
+
     // ─── SUPORTE ──────────────────────────────────────────────────
 
     match /support_tickets/{ticketId} {
