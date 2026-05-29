@@ -3,13 +3,20 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:go_router/go_router.dart';
+import 'package:spark_app/services/firebase_service.dart';
 import 'package:spark_app/services/payment_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+// Intervalo e tempo máximo de polling (fallback caso o webhook falhe)
+const Duration _kPollInterval = Duration(seconds: 10);
+const Duration _kPollTimeout = Duration(minutes: 15);
 
 /// Tela exibida após o usuário escolher o método de pagamento.
 ///
@@ -34,14 +41,17 @@ class PaymentPendingScreen extends StatefulWidget {
 class _PaymentPendingScreenState extends State<PaymentPendingScreen>
     with SingleTickerProviderStateMixin {
   StreamSubscription<DocumentSnapshot>? _orderSub;
+  Timer? _pollTimer;
   bool _paid = false;
   bool _copied = false;
   late final AnimationController _pulseController;
   late final Animation<double> _pulseAnim;
+  late final DateTime _startedAt;
 
   @override
   void initState() {
     super.initState();
+    _startedAt = DateTime.now();
 
     _pulseController = AnimationController(
       vsync: this,
@@ -57,55 +67,84 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
       WidgetsBinding.instance.addPostFrameCallback((_) => _openExternalLink());
     }
 
-    // Ouve o pedido no Firestore para detectar confirmação
+    // Ouve o pedido no Firestore para detectar confirmação (real-time)
     _listenOrder();
+
+    // Polling como fallback caso o webhook do Asaas não chegue
+    _pollTimer = Timer.periodic(_kPollInterval, (_) => _pollOrderStatus());
   }
 
   void _listenOrder() {
-    final db = FirebaseFirestore.instanceFor(
-      app: Firebase.app(),
-      databaseId: 'default',
-    );
+    final db = FirebaseService.instance.firestore;
 
     _orderSub = db
         .collection('orders')
         .doc(widget.result.orderId)
         .snapshots()
-        .listen((snap) {
-      if (!snap.exists) return;
+        .listen((snap) async {
+      if (!snap.exists) {
+        debugPrint('[PaymentPendingScreen] Pedido ainda não existe ou não foi propagado.');
+        return;
+      }
       final status = snap.data()?['status'] as String?;
+      debugPrint('[PaymentPendingScreen] Status atual do pedido ${widget.result.orderId}: $status');
       if (status == 'PAID' && !_paid) {
         setState(() => _paid = true);
         _pulseController.stop();
 
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Row(
-                children: [
-                  const Icon(Icons.check_circle_rounded, color: Colors.white),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      widget.totalPoints > 0
-                          ? 'Pagamento Confirmado! +${widget.totalPoints} Pontos adicionados.'
-                          : 'Pagamento Confirmado!',
-                      style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-              backgroundColor: AppColors.primary,
-              duration: const Duration(seconds: 4),
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            ),
-          );
-          
-          context.go('/home');
+          await _showSuccessDialog();
+          if (mounted) {
+            Navigator.of(context).pop(true);
+          }
         }
       }
+    }, onError: (e) {
+      debugPrint('[PaymentPendingScreen] Erro no listener do pedido: $e');
     });
+  }
+
+  /// Polling ativo — fallback para quando o webhook Asaas não dispara.
+  /// Chama a Cloud Function [checkPaymentStatus] que consulta o Asaas
+  /// diretamente e processa os pontos caso o pagamento esteja confirmado.
+  Future<void> _pollOrderStatus() async {
+    if (_paid) {
+      _pollTimer?.cancel();
+      return;
+    }
+
+    // Para de fazer polling após o timeout
+    if (DateTime.now().difference(_startedAt) > _kPollTimeout) {
+      debugPrint('[PaymentPendingScreen] Timeout de polling atingido.');
+      _pollTimer?.cancel();
+      return;
+    }
+
+    try {
+      final functions = FirebaseFunctions.instanceFor(region: 'southamerica-east1');
+      final callable = functions.httpsCallable('checkPaymentStatus');
+      final response = await callable.call<Map<String, dynamic>>({
+        'orderId': widget.result.orderId,
+      });
+
+      final data = Map<String, dynamic>.from(response.data);
+      final status = data['status'] as String? ?? 'PENDING';
+      final processed = data['processed'] as bool? ?? false;
+      debugPrint('[PaymentPendingScreen][POLL] status=$status processed=$processed');
+
+      if (status == 'PAID' && !_paid && mounted) {
+        setState(() => _paid = true);
+        _pulseController.stop();
+        _pollTimer?.cancel();
+        await _showSuccessDialog();
+        if (mounted) {
+          Navigator.of(context).pop(true);
+        }
+      }
+    } catch (e) {
+      // Erros de polling são não-críticos — o listener real-time continua ativo
+      debugPrint('[PaymentPendingScreen][POLL] Erro ao consultar status: $e');
+    }
   }
 
   Future<void> _openExternalLink() async {
@@ -127,9 +166,143 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
     });
   }
 
+  Future<void> _showSuccessDialog() async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: const EdgeInsets.all(28),
+          decoration: BoxDecoration(
+            color: const Color(0xFF1A1A2E),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: AppColors.primary.withValues(alpha: 0.4),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withValues(alpha: 0.25),
+                blurRadius: 32,
+                spreadRadius: 4,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Ícone de sucesso com glow
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primary.withValues(alpha: 0.15),
+                  border: Border.all(
+                    color: AppColors.primary.withValues(alpha: 0.5),
+                    width: 2,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.3),
+                      blurRadius: 20,
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.check_circle_rounded,
+                  color: AppColors.primary,
+                  size: 44,
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              const Text(
+                'Pagamento Concluído!',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+
+              Text(
+                'Sua transação foi aprovada com sucesso.',
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.6),
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.center,
+              ),
+
+              // Pontos creditados
+              if (widget.totalPoints > 0) ...[
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.gold.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: AppColors.gold.withValues(alpha: 0.35),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.bolt_rounded,
+                          color: AppColors.gold, size: 22),
+                      const SizedBox(width: 8),
+                      Text(
+                        '+${widget.totalPoints} Pontos Spark creditados!',
+                        style: const TextStyle(
+                          color: AppColors.gold,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+
+              const SizedBox(height: 28),
+
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                  icon: const Icon(Icons.person_rounded,
+                      size: 18, color: Colors.black),
+                  label: const Text(
+                    'CONCLUÍDO',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   void dispose() {
     _orderSub?.cancel();
+    _pollTimer?.cancel();
     _pulseController.dispose();
     super.dispose();
   }

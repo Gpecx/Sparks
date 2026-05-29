@@ -30,7 +30,7 @@ import {
   findOrCreateCustomer,
   updateCustomer,
   createCharge,
-  verifyWebhookToken,
+  getChargeStatus,
   AsaasBillingType,
 } from "./services/asaasService";
 
@@ -516,6 +516,7 @@ interface CheckoutItem {
   description: string;
   price: number;
   sparkPointsGranted: number;
+  isSubscription?: boolean;
 }
 
 interface CreateCheckoutData {
@@ -616,6 +617,7 @@ export const createAsaasCheckout = onCall(
         description: i.description,
         price: i.price,
         sparkPointsGranted: i.sparkPointsGranted,
+        isSubscription: i.isSubscription ?? false,
       })),
       totalPrice,
       totalPoints,
@@ -662,6 +664,150 @@ export const createAsaasCheckout = onCall(
 );
 
 // ────────────────────────────────────────────────────────────────
+// 6. checkPaymentStatus — Consulta status da cobrança diretamente no Asaas
+//    Usado como fallback quando o webhook não é recebido (sandbox/firewall).
+// ────────────────────────────────────────────────────────────────
+
+interface CheckPaymentStatusData {
+  orderId: string;
+}
+
+interface CheckPaymentStatusResult {
+  status: string;
+  processed: boolean;
+  sparkPointsGranted: number;
+}
+
+export const checkPaymentStatus = onCall(
+  {
+    region: "southamerica-east1",
+    secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<CheckPaymentStatusData>
+  ): Promise<CheckPaymentStatusResult> => {
+    const uid = request.auth?.uid;
+    if (!uid) {
+      throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+
+    const { orderId } = request.data;
+    if (!orderId) {
+      throw new HttpsError("invalid-argument", "orderId é obrigatório.");
+    }
+
+    // Busca o pedido no Firestore
+    const orderRef = db.collection("orders").doc(orderId);
+    const orderSnap = await orderRef.get();
+
+    if (!orderSnap.exists) {
+      throw new HttpsError("not-found", `Pedido ${orderId} não encontrado.`);
+    }
+
+    const order = orderSnap.data()!;
+
+    // Valida que o pedido pertence ao usuário autenticado
+    if (order["uid"] !== uid) {
+      throw new HttpsError("permission-denied", "Acesso negado ao pedido.");
+    }
+
+    // Se já foi processado, retorna direto
+    if (order["status"] === "PAID") {
+      return {
+        status: "PAID",
+        processed: false, // já estava pago antes
+        sparkPointsGranted: (order["totalPoints"] as number) ?? 0,
+      };
+    }
+
+    const chargeId = order["chargeId"] as string | undefined;
+    if (!chargeId) {
+      return { status: order["status"] ?? "PENDING", processed: false, sparkPointsGranted: 0 };
+    }
+
+    // Consulta o Asaas diretamente usando getChargeStatus
+    const asaasChargeStatus = await getChargeStatus(chargeId);
+
+    logger.info(
+      `[checkPaymentStatus] orderId=${orderId} chargeId=${chargeId} asaasStatus=${asaasChargeStatus}`
+    );
+
+    const isConfirmed =
+      asaasChargeStatus === "RECEIVED" ||
+      asaasChargeStatus === "CONFIRMED" ||
+      asaasChargeStatus === "RECEIVED_IN_CASH";
+
+    if (!isConfirmed) {
+      return { status: asaasChargeStatus, processed: false, sparkPointsGranted: 0 };
+    }
+
+    // Pagamento confirmado no Asaas — processa igual ao webhook
+    const totalPoints = (order["totalPoints"] as number) ?? 0;
+    const totalPrice = (order["totalPrice"] as number) ?? 0;
+    const items = (order["items"] as any[]) ?? [];
+    const hasSubscription = items.some((i: any) => i.isSubscription === true);
+
+    const batch = db.batch();
+
+    batch.update(orderRef, {
+      status: "PAID",
+      paidAt: admin.firestore.FieldValue.serverTimestamp(),
+      asaasPaymentId: chargeId,
+      confirmedVia: "polling",
+    });
+
+    const userRef = db.collection("users").doc(uid);
+    let userUpdated = false;
+    const userUpdates: any = { updatedAt: admin.firestore.FieldValue.serverTimestamp() };
+
+    if (totalPoints > 0) {
+      userUpdates.sparkPoints = admin.firestore.FieldValue.increment(totalPoints);
+      userUpdated = true;
+    }
+
+    if (hasSubscription) {
+      userUpdates.isPremium = true;
+      userUpdated = true;
+    }
+
+    if (userUpdated) {
+      batch.update(userRef, userUpdates);
+    }
+
+    const txRef = db.collection("transactions").doc();
+    batch.set(txRef, {
+      uid,
+      orderId,
+      asaasPaymentId: chargeId,
+      totalPrice,
+      totalPoints,
+      status: "PAID",
+      confirmedVia: "polling",
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    await batch.commit();
+
+    try {
+      await writeAuditLog(uid, "sp_purchased", totalPoints, "asaas_polling", {
+        orderId,
+        asaasPaymentId: chargeId,
+        totalPrice,
+      });
+    } catch (e) {
+      logger.warn("[checkPaymentStatus] Audit log error:", e);
+    }
+
+    logger.info(
+      `[checkPaymentStatus] Pedido ${orderId} processado via polling. +${totalPoints} pts para uid=${uid}`
+    );
+
+    return { status: "PAID", processed: true, sparkPointsGranted: totalPoints };
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
 // 6. asaasWebhook — Processa eventos de pagamento do Asaas
 // ────────────────────────────────────────────────────────────────
 
@@ -675,6 +821,7 @@ export const createAsaasCheckout = onCall(
  *  - PAYMENT_RECEIVED   : PIX / Cartão confirmado
  *  - PAYMENT_CONFIRMED  : Boleto compensado
  */
+// deploy-force: 2026-05-29T13:59 — atualiza secret ASAAS_WEBHOOK_TOKEN para versão 8
 export const asaasWebhook = onRequest(
   {
     region: "southamerica-east1",
@@ -688,28 +835,65 @@ export const asaasWebhook = onRequest(
       return;
     }
 
-    // 2) Verifica token do webhook
-    const token =
-      (req.headers["asaas-access-token"] as string | undefined) ?? "";
-    if (!verifyWebhookToken(token)) {
-      logger.warn("[asaasWebhook] Token inválido.");
-      res.status(401).send("Unauthorized");
-      return;
+    // 2) Parseia o body — o Asaas envia em formato envelope:
+    //    { data: "JSON string com event+payment", accessToken: "..." }
+    //    Também aceita formato direto: { event, payment } (para testes manuais)
+    let event: string | undefined;
+    let payment: { id: string; externalReference?: string; status?: string } | undefined;
+
+    const rawBody = req.body;
+    logger.info(`[asaasWebhook] Body bruto: ${JSON.stringify(rawBody).substring(0, 500)}`);
+
+    // Lê o token primariamente do header oficial do Asaas
+    let receivedToken = (req.headers["asaas-access-token"] as string | undefined) ?? "";
+
+    if (rawBody?.data && typeof rawBody.data === "string") {
+      // Formato envelope (pode vir de ferramentas de teste ou proxy)
+      try {
+        const parsed = JSON.parse(rawBody.data);
+        event = parsed.event;
+        payment = parsed.payment;
+        // Fallback para o envelope caso o header não venha
+        if (!receivedToken) {
+          receivedToken = rawBody.accessToken ?? "";
+        }
+        logger.info(`[asaasWebhook] Formato envelope detectado. Event=${event}, paymentId=${payment?.id}`);
+      } catch (e) {
+        logger.error(`[asaasWebhook] Erro ao parsear data: ${e}`);
+        res.status(400).send("Invalid data format");
+        return;
+      }
+    } else {
+      // Formato direto (Asaas real / chamadas diretas)
+      event = rawBody?.event;
+      payment = rawBody?.payment;
+      logger.info(`[asaasWebhook] Formato direto detectado. Event=${event}, paymentId=${payment?.id}`);
     }
 
-    const body = req.body as {
-      event: string;
-      payment?: { id: string; externalReference?: string; status?: string };
-    };
+    // 3) Verifica token com lógica corrigida
+    const expectedSecret = process.env.ASAAS_WEBHOOK_TOKEN ?? "";
+    logger.info(`[asaasWebhook] Token recebido='${receivedToken.substring(0, 12)}...' esperado='${expectedSecret.substring(0, 12)}...' match=${receivedToken === expectedSecret}`);
 
-    const { event, payment } = body;
-    logger.info(`[asaasWebhook] Evento recebido: ${event}`, { payment });
+    if (expectedSecret) {
+      if (receivedToken !== expectedSecret) {
+        logger.warn(`[asaasWebhook] Token inválido bloqueado. Esperava o secret configurado no Firebase.`);
+        res.status(401).send("Unauthorized");
+        return;
+      }
+    } else {
+      logger.warn(`[asaasWebhook] AVISO: ASAAS_WEBHOOK_TOKEN não está configurado! Processando sem validação (Apenas para testes)`);
+    }
 
-    // 3) Processa apenas eventos de pagamento confirmado
+    logger.info(`[asaasWebhook] Evento: ${event}`, { payment });
+
+    // 4) Processa apenas eventos de pagamento confirmado
     const isConfirmed =
-      event === "PAYMENT_RECEIVED" || event === "PAYMENT_CONFIRMED";
+      event === "PAYMENT_RECEIVED" || 
+      event === "PAYMENT_CONFIRMED" ||
+      event === "PAYMENT_RECEIVED_IN_CASH";
 
     if (!isConfirmed || !payment) {
+      logger.info(`[asaasWebhook] Evento '${event}' ignorado.`);
       res.status(200).send("Event ignored");
       return;
     }
@@ -743,8 +927,10 @@ export const asaasWebhook = onRequest(
     const uid = order["uid"] as string;
     const totalPoints = (order["totalPoints"] as number) ?? 0;
     const totalPrice = (order["totalPrice"] as number) ?? 0;
+    const items = (order["items"] as any[]) ?? [];
+    const hasSubscription = items.some((i: any) => i.isSubscription === true);
 
-    // 5) Batch: marca pedido como pago + incrementa pontos + grava transação
+    // 5) Batch: marca pedido como pago + incrementa pontos/premium + grava transação
     const batch = db.batch();
 
     // Atualiza status do pedido
@@ -754,13 +940,22 @@ export const asaasWebhook = onRequest(
       asaasPaymentId: payment.id,
     });
 
-    // Incrementa Spark Points (somente se houver pontos)
+    const userRef = db.collection("users").doc(uid);
+    let userUpdated = false;
+    const userUpdates: any = { updatedAt: admin.firestore.FieldValue.serverTimestamp() };
+
     if (totalPoints > 0) {
-      const userRef = db.collection("users").doc(uid);
-      batch.update(userRef, {
-        sparkPoints: admin.firestore.FieldValue.increment(totalPoints),
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      });
+      userUpdates.sparkPoints = admin.firestore.FieldValue.increment(totalPoints);
+      userUpdated = true;
+    }
+
+    if (hasSubscription) {
+      userUpdates.isPremium = true;
+      userUpdated = true;
+    }
+
+    if (userUpdated) {
+      batch.update(userRef, userUpdates);
     }
 
     // Registra transação para histórico financeiro

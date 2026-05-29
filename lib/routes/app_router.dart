@@ -50,7 +50,14 @@ class AppRouter {
       GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
       GoRoute(path: '/registration-success', builder: (context, state) => const RegistrationSuccessScreen()),
       GoRoute(path: '/forgot-password', builder: (context, state) => const ForgotPasswordScreen()),
-      GoRoute(path: '/home', builder: (context, state) => const MainShellScreen()),
+      GoRoute(
+        path: '/home',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final initialTab = extra?['tab'] as int? ?? 0;
+          return MainShellScreen(initialTab: initialTab);
+        },
+      ),
       GoRoute(path: '/my-progress', builder: (context, state) => const MyProgressScreen()),
       GoRoute(
         path: '/standard-detail',

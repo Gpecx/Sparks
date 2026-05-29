@@ -10,6 +10,7 @@ import 'package:spark_app/screens/modules_screen.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/content_providers.dart';
+import 'package:spark_app/providers/user_provider.dart';
 import 'package:go_router/go_router.dart';
 
 // Paleta Spark: verdes e tons harmônicos — sem cinzas apagados
@@ -35,6 +36,8 @@ class CategoriesScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isTestMode = kDebugMode && ref.watch(devModeProvider);
     final categoriesAsync = ref.watch(categoriesStreamProvider);
+    final user = ref.watch(userModelProvider).value;
+    final isPremium = user?.isPremium ?? false;
 
     return SparksBackground(
       child: PcbBackground(
@@ -111,7 +114,7 @@ class CategoriesScreen extends ConsumerWidget {
                           // Obter o tema de forma cíclica caso haja mais categorias que temas definidos
                           final theme = _themeConfig[index % _themeConfig.length];
                           
-                          final isLocked = cat.order > 100; 
+                          final isLocked = (!isPremium && index > 0) || cat.order > 100; 
                           // Apenas para evitar dead_code linter
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 14),
@@ -128,10 +131,12 @@ class CategoriesScreen extends ConsumerWidget {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
                                           content: Row(
-                                            children: const [
-                                              Icon(Icons.lock, color: Colors.white, size: 16),
-                                              SizedBox(width: 8),
-                                              Text('Esta categoria estará disponível em breve!'),
+                                            children: [
+                                              const Icon(Icons.lock, color: Colors.white, size: 16),
+                                              const SizedBox(width: 8),
+                                              Expanded(
+                                                child: Text((!isPremium && index > 0 && cat.order <= 100) ? 'Assine o Premium para acessar esta categoria!' : 'Esta categoria estará disponível em breve!'),
+                                              ),
                                             ],
                                           ),
                                           backgroundColor: const Color(0xFF37474F),

@@ -206,7 +206,7 @@ export async function updateCustomer(
 
   const res = await httpRequest(
     `${baseUrl}/customers/${customerId}`,
-    { method: "POST", headers },
+    { method: "PUT", headers },
     JSON.stringify({ cpfCnpj })
   );
 
@@ -261,7 +261,12 @@ export async function createCharge(
   }
 
   const charge = res.data as AsaasCharge;
-  logger.info(`[Asaas] Cobrança criada: ${charge.id} status=${charge.status}`);
+  // O Asaas Sandbox retorna billingType="UNDEFINED" para cartão de crédito
+  // até o pagamento ser finalizado — normalizamos para CREDIT_CARD
+  if (charge.billingType === "UNDEFINED" && opts.billingType === "CREDIT_CARD") {
+    charge.billingType = "CREDIT_CARD";
+  }
+  logger.info(`[Asaas] Cobrança criada: ${charge.id} status=${charge.status} billingType=${charge.billingType}`);
 
   let pixPayload: string | null = null;
   let pixQrCodeBase64: string | null = null;
@@ -309,4 +314,28 @@ export function verifyWebhookToken(token: string): boolean {
     return true; // não bloqueia em dev sem configuração
   }
   return token === secret;
+}
+
+// ── Get Charge Status ────────────────────────────────────────────
+
+/**
+ * Consulta o status atual de uma cobrança no Asaas.
+ * Usado pelo checkPaymentStatus para polling ativo (fallback ao webhook).
+ */
+export async function getChargeStatus(chargeId: string): Promise<string> {
+  const { apiKey, baseUrl } = getAsaasConfig();
+  const headers = buildHeaders(apiKey);
+
+  const res = await httpRequest(
+    `${baseUrl}/payments/${chargeId}`,
+    { method: "GET", headers }
+  );
+
+  if (res.status >= 400) {
+    logger.error(`[Asaas] Erro ao consultar cobrança ${chargeId}:`, res.data);
+    return "UNKNOWN";
+  }
+
+  const charge = res.data as { status?: string };
+  return charge.status ?? "UNKNOWN";
 }
