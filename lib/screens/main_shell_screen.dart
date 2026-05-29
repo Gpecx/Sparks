@@ -7,6 +7,7 @@ import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/dashboard_screen.dart';
 import 'package:spark_app/screens/categories_screen.dart';
+import 'package:spark_app/screens/tools_screen.dart';
 import 'package:spark_app/screens/leaderboard_screen.dart';
 import 'package:spark_app/screens/profile_screen.dart';
 import 'package:spark_app/screens/store_screen.dart';
@@ -41,6 +42,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
   final List<Widget> _screens = [
     DashboardScreen(),
     CategoriesScreen(),
+    const ToolsScreen(),
     LeaderboardScreen(),
     const ProfileScreen(),
     StoreScreen(),
@@ -107,45 +109,97 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                           setState(() => _currentIndex = index),
                       backgroundColor: AppColors.navBarBackground,
                       indicatorColor: AppColors.primary.withValues(alpha: 0.2),
-                      selectedIconTheme:
-                          const IconThemeData(color: AppColors.primary),
-                      unselectedIconTheme:
-                          const IconThemeData(color: AppColors.textMuted),
+                      selectedIconTheme: const IconThemeData(
+                        color: AppColors.primary,
+                      ),
+                      unselectedIconTheme: const IconThemeData(
+                        color: AppColors.textMuted,
+                      ),
                       selectedLabelTextStyle: const TextStyle(
-                          color: AppColors.primary,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold),
+                        color: AppColors.primary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
                       unselectedLabelTextStyle: const TextStyle(
-                          color: AppColors.textMuted, fontSize: 12),
+                        color: AppColors.textMuted,
+                        fontSize: 12,
+                      ),
                       labelType: NavigationRailLabelType.all,
                       destinations: const [
                         NavigationRailDestination(
-                            icon: Icon(Icons.home_outlined, semanticLabel: 'Início'),
-                            selectedIcon: Icon(Icons.home, semanticLabel: 'Início selecionado'),
-                            label: Text('Início')),
+                          icon: Icon(
+                            Icons.home_outlined,
+                            semanticLabel: 'Início',
+                          ),
+                          selectedIcon: Icon(
+                            Icons.home,
+                            semanticLabel: 'Início selecionado',
+                          ),
+                          label: Text('Início'),
+                        ),
                         NavigationRailDestination(
-                            icon: Icon(Icons.route_outlined, semanticLabel: 'Trilha'),
-                            selectedIcon: Icon(Icons.route, semanticLabel: 'Trilha selecionada'),
-                            label: Text('Trilha')),
+                          icon: Icon(
+                            Icons.route_outlined,
+                            semanticLabel: 'Categorias',
+                          ),
+                          selectedIcon: Icon(
+                            Icons.route,
+                            semanticLabel: 'Categorias selecionada',
+                          ),
+                          label: Text('Categorias'),
+                        ),
                         NavigationRailDestination(
-                            icon: Icon(Icons.emoji_events_outlined, semanticLabel: 'Ranking'),
-                            selectedIcon: Icon(Icons.emoji_events, semanticLabel: 'Ranking selecionado'),
-                            label: Text('Ranking')),
+                          icon: Icon(
+                            Icons.calculate_outlined,
+                            semanticLabel: 'Ferramentas',
+                          ),
+                          selectedIcon: Icon(
+                            Icons.calculate,
+                            semanticLabel: 'Ferramentas selecionada',
+                          ),
+                          label: Text('Ferramentas'),
+                        ),
                         NavigationRailDestination(
-                            icon: Icon(Icons.person_outline, semanticLabel: 'Perfil'),
-                            selectedIcon: Icon(Icons.person, semanticLabel: 'Perfil selecionado'),
-                            label: Text('Perfil')),
+                          icon: Icon(
+                            Icons.emoji_events_outlined,
+                            semanticLabel: 'Ranking',
+                          ),
+                          selectedIcon: Icon(
+                            Icons.emoji_events,
+                            semanticLabel: 'Ranking selecionado',
+                          ),
+                          label: Text('Ranking'),
+                        ),
                         NavigationRailDestination(
-                            icon: Icon(Icons.store_outlined, semanticLabel: 'Loja'),
-                            selectedIcon: Icon(Icons.store, semanticLabel: 'Loja selecionada'),
-                            label: Text('Loja')),
+                          icon: Icon(
+                            Icons.person_outline,
+                            semanticLabel: 'Perfil',
+                          ),
+                          selectedIcon: Icon(
+                            Icons.person,
+                            semanticLabel: 'Perfil selecionado',
+                          ),
+                          label: Text('Perfil'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(
+                            Icons.store_outlined,
+                            semanticLabel: 'Loja',
+                          ),
+                          selectedIcon: Icon(
+                            Icons.store,
+                            semanticLabel: 'Loja selecionada',
+                          ),
+                          label: Text('Loja'),
+                        ),
                       ],
                     ),
                   ),
                   VerticalDivider(
-                      thickness: 1,
-                      width: 1,
-                      color: AppColors.cardBorder.withValues(alpha: 0.3)),
+                    thickness: 1,
+                    width: 1,
+                    color: AppColors.cardBorder.withValues(alpha: 0.3),
+                  ),
                   Expanded(
                     child: Container(
                       color: AppColors.background,
@@ -190,31 +244,55 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                   unselectedFontSize: 12,
                   items: const [
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.home_outlined, semanticLabel: 'Ir para Início'),
+                      icon: Icon(
+                        Icons.home_outlined,
+                        semanticLabel: 'Ir para Início',
+                      ),
                       activeIcon: Icon(Icons.home),
                       label: 'Início',
                       tooltip: 'Início',
                     ),
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.route_outlined, semanticLabel: 'Ir para Trilha'),
+                      icon: Icon(
+                        Icons.route_outlined,
+                        semanticLabel: 'Ir para Categorias',
+                      ),
                       activeIcon: Icon(Icons.route),
-                      label: 'Trilha',
-                      tooltip: 'Trilha de aprendizado',
+                      label: 'Categorias',
+                      tooltip: 'Categorias de aprendizado',
                     ),
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.emoji_events_outlined, semanticLabel: 'Ir para Ranking'),
+                      icon: Icon(
+                        Icons.calculate_outlined,
+                        semanticLabel: 'Ir para Ferramentas',
+                      ),
+                      activeIcon: Icon(Icons.calculate),
+                      label: 'Ferramentas',
+                      tooltip: 'Calculadoras de engenharia',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.emoji_events_outlined,
+                        semanticLabel: 'Ir para Ranking',
+                      ),
                       activeIcon: Icon(Icons.emoji_events),
                       label: 'Ranking',
                       tooltip: 'Ranking de usuários',
                     ),
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.person_outline, semanticLabel: 'Ir para Perfil'),
+                      icon: Icon(
+                        Icons.person_outline,
+                        semanticLabel: 'Ir para Perfil',
+                      ),
                       activeIcon: Icon(Icons.person),
                       label: 'Perfil',
                       tooltip: 'Meu perfil',
                     ),
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.store_outlined, semanticLabel: 'Ir para Loja'),
+                      icon: Icon(
+                        Icons.store_outlined,
+                        semanticLabel: 'Ir para Loja',
+                      ),
                       activeIcon: Icon(Icons.store),
                       label: 'Loja',
                       tooltip: 'Loja de itens',
@@ -271,19 +349,24 @@ class _DevModeBanner extends StatelessWidget {
             child: GestureDetector(
               onTap: onDeactivate,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFFFFB300).withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(
-                      color: const Color(0xFFFFB300).withValues(alpha: 0.4)),
+                    color: const Color(0xFFFFB300).withValues(alpha: 0.4),
+                  ),
                 ),
                 child: const Text(
                   'DESATIVAR',
                   style: TextStyle(
-                      color: Color(0xFFFFB300),
-                      fontSize: 10,
-                      fontWeight: FontWeight.w800),
+                    color: Color(0xFFFFB300),
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
             ),
