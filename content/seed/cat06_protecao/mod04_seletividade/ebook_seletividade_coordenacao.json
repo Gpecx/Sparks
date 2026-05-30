@@ -1,0 +1,64 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Seletividade e Coordenação",
+  "moduleSubtitle": "Coordenação de curvas TCC, critérios IEC/ANSI e coordenação de fusíveis",
+  "moduleOrder": 3,
+  "ebookTitle": "Seletividade e Coordenação de Proteções",
+  "ebookSubtitle": "CTI, curvas IDMT, critérios IEC/ANSI e coordenação em redes radiais e em anel",
+  "estimatedMinutes": 25,
+  "trailFiles": [
+    "t01_conceitos_seletividade.json",
+    "t02_curvas_tcc.json",
+    "t03_criterios_coordenacao.json",
+    "t04_radial_anel.json",
+    "t05_fusiveis_religadores.json"
+  ],
+  "sections": [
+    {
+      "id": "s1",
+      "title": "O que é coordenação e por que ela importa",
+      "type": "text",
+      "body": "Coordenação de proteções é a arte de ajustar os relés em série em um sistema para que, diante de qualquer falta, somente o dispositivo mais próximo da falta atue — isolando o menor pedaço possível da rede. Sem coordenação, uma falta em um ramal secundário pode desligar toda uma subestação de alta tensão. Com coordenação correta, o disjuntor do ramal atua em 0,2 s, enquanto o relé da subestação — que também \"viu\" a falta — aguarda 0,5 s e só atua se o primeiro falhar (retaguarda)."
+    },
+    {
+      "id": "s2",
+      "title": "CTI — Intervalo de Coordenação de Tempo",
+      "type": "formula",
+      "formula": "CTI = t_retaguarda − t_principal  ≥  0,3 s (IEC) ou 0,4 s (ANSI/IEEE)",
+      "explanation": "O CTI (Coordination Time Interval) é a margem mínima entre o tempo de atuação do relé principal e o de retaguarda, para o mesmo nível de corrente de falta. Essa margem existe para absorver: (a) tolerância do relé de retaguarda para operar mais cedo que o ajustado (~0,1 s); (b) tempo de abertura do disjuntor principal (~0,05-0,1 s); (c) sobrecurso (overshoot) do disco eletromecânico ou do relé digital em rejeitar a falta. O CTI de 0,3-0,4 s é um mínimo — em alguns casos, sistemas com IEDs modernos e disjuntores rápidos usam CTI de 0,2 s."
+    },
+    {
+      "id": "s3",
+      "title": "Curvas IDMT: IEC vs IEEE",
+      "type": "list",
+      "items": [
+        "IEC Normal Inversa (NI): t = 0,14·Td / (M^0,02 − 1) — curva suave; padrão em sistemas europeus e brasileiros",
+        "IEC Muito Inversa (VI): t = 13,5·Td / (M − 1) — curva mais inclinada; boa coordenação com fusíveis",
+        "IEC Extremamente Inversa (EI): t = 80·Td / (M² − 1) — curva muito íngreme; excelente para proteger transformadores de distribuição",
+        "IEEE MI (Moderadamente Inversa): t = Td·[0,0515/(M^0,02−1) + 0,114] — equivalente aproximado à IEC NI",
+        "IEEE EI (Extremamente Inversa): t = Td·[28,2/(M²−1) + 0,1217] — muito popular nos EUA para coordenação com fusíveis",
+        "A curva IDMT da calculadora do SPARK tem ~57 variantes de fabricantes — use IEC EI ou IEEE EI quando coordenar com fusíveis"
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Seletividade em redes radiais",
+      "type": "text",
+      "body": "Em redes radiais, a corrente de falta flui em uma única direção — da fonte para a falta. Isso simplifica a coordenação: basta ajustar os relés em série com tempos crescentes à medida que se afasta da carga (o relé mais próximo da falta tem o menor Td). A regra prática é configurar o relé de retaguarda com pickup ligeiramente acima do máximo que o relé principal pode não detectar, e o tempo de retaguarda = tempo do principal (na corrente máxima de falta) + CTI."
+    },
+    {
+      "id": "s5",
+      "title": "Coordenação fusível-relé e fusível-religador",
+      "type": "note",
+      "body": "A coordenação fusível-relé exige que a curva de tempo mínimo de fusão do fusível (minimum melt) esteja acima da curva de atuação do relé a montante — para que o relé nunca interrompa antes do fusível. A curva de tempo total de interrupção do fusível (total clearing) deve ficar abaixo da curva de retaguarda. Religadores adicionam complexidade: eles executam sequências de abertura-fechamento (ex.: instantâneo + 3 tentativas temporizadas) na expectativa de que faltas passageiras se auto-extingam. A coordenação \"fuse-saving\" protege o fusível nas primeiras tentativas; \"fuse-blowing\" sacrifica o fusível para isolar definitivamente a falta."
+    },
+    {
+      "id": "s6",
+      "title": "Resumo: coordenação é a arte do equilíbrio",
+      "type": "summary",
+      "body": "Uma proteção bem coordenada atinge o equilíbrio entre dois objetivos conflitantes: atuar rápido o suficiente para limitar danos ao equipamento, mas lento o suficiente para que o dispositivo a jusante atue primeiro. O CTI é a margem que garante essa hierarquia. As curvas IDMT permitem que a margem em tempo varie naturalmente com a magnitude da falta — quanto maior a corrente, menor o tempo de todos os relés, mas a diferença relativa se mantém. Dominar a plotagem e verificação de coordenação em curvas TCC é a habilidade central do engenheiro de proteção. As trilhas deste módulo vão exercitar exatamente isso."
+    }
+  ]
+}

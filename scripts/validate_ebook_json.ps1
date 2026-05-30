@@ -88,10 +88,10 @@ Write-Host "  Seções  : $($sections.Count)  |  Tempo: $($json.estimatedMinutes
 Write-Host ""
 
 if ($errors.Count -eq 0 -and $warnings.Count -eq 0) {
-  Write-Host "  ✅ VÁLIDO — nenhum problema encontrado." -ForegroundColor Green
+  Write-Host "  [OK] VALIDO -- nenhum problema encontrado." -ForegroundColor Green
 } else {
-  foreach ($e in $errors)   { Write-Host "  ❌ ERRO: $e"    -ForegroundColor Red }
-  foreach ($w in $warnings) { Write-Host "  ⚠️  AVISO: $w"  -ForegroundColor Yellow }
+  foreach ($e in $errors)   { Write-Host "  [ERRO]  $e"   -ForegroundColor Red }
+  foreach ($w in $warnings) { Write-Host "  [AVISO] $w"   -ForegroundColor Yellow }
 }
 Write-Host ""
 

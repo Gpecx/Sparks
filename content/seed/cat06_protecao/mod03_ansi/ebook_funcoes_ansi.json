@@ -1,0 +1,78 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Funções ANSI",
+  "moduleSubtitle": "Numeração padronizada IEEE C37.2 para funções de proteção",
+  "moduleOrder": 2,
+  "ebookTitle": "Funções ANSI/IEEE C37.2 de Proteção",
+  "ebookSubtitle": "As funções mais usadas em proteção de subestações: 50/51, 21, 87, 27/59, 81 e lógica de bloqueio 86",
+  "estimatedMinutes": 25,
+  "trailFiles": [
+    "t01_visao_geral_ansi.json",
+    "t02_funcoes_principais.json",
+    "t03_funcoes_supervisao.json",
+    "t04_logica_protecao_bloqueio.json"
+  ],
+  "sections": [
+    {
+      "id": "s1",
+      "title": "O sistema de numeração ANSI/IEEE C37.2",
+      "type": "text",
+      "body": "O padrão IEEE C37.2 atribui números de função (device function numbers) a cada tipo de proteção ou automação em subestações. Criado nos anos 1940 e revisado continuamente, permite que engenheiros de qualquer país leiam um diagrama lógico (logic diagram) e entendam imediatamente as funções de proteção, sem ambiguidade de nomenclatura. Um IED moderno pode implementar dezenas de funções ANSI simultaneamente — conhecer os números é o vocabulário básico da proteção."
+    },
+    {
+      "id": "s2",
+      "title": "As 10 funções mais presentes em subestações brasileiras",
+      "type": "list",
+      "items": [
+        "50 — Sobrecorrente instantâneo (tempo definido zero); atua em correntes muito acima do pickup sem delay",
+        "51 — Sobrecorrente temporizado (curva IDMT); coordena com outros relés pela característica tempo-corrente",
+        "50N/51N — Versões de neutro das funções 50/51; detectam faltas fase-terra",
+        "21 — Proteção de distância; mede impedância e atua se Z < Z_zona; principal proteção de linhas",
+        "87T/87B/87G — Diferencial de transformador/barramento/gerador; maior seletividade possível",
+        "27 — Subtensão; protege motores e geradores de operação com tensão inadequada",
+        "59 — Sobretensão; protege isolamento de equipamentos",
+        "81 — Sub/sobrefrequência; detecta ilhamento e desequilíbrio geração-carga",
+        "67 — Sobrecorrente direcional; distingue corrente entrando de corrente saindo do barramento",
+        "25 — Verificação de sincronismo; monitora diferença de tensão, ângulo e frequência antes do fechamento de disjuntor"
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Funções 50 e 51: qual a diferença prática?",
+      "type": "note",
+      "body": "A função 50 (instantânea) atua quando a corrente supera o pickup sem qualquer atraso intencional — tempo de operação típico de 16-50 ms, limitado apenas pela velocidade do relé. É usada para faltas severas próximas à subestação, onde qualquer atraso causaria dano irreversível. A função 51 (temporizada) segue uma curva tempo×corrente (IDMT) — quanto maior a corrente, menor o tempo de atuação, mas nunca instantâneo. Ela permite a coordenação entre relés em série no sistema: o relé mais próximo da falta atua primeiro, preservando a continuidade de serviço dos demais clientes."
+    },
+    {
+      "id": "s4",
+      "title": "Função 87 — Proteção diferencial: o padrão ouro",
+      "type": "formula",
+      "formula": "I_dif = |I_primário/n_TC_A + I_secundário/n_TC_B|  ≥  I_pickup_dif",
+      "explanation": "A proteção diferencial compara as correntes que entram e saem do elemento protegido (transformador, barramento, gerador, motor). Em condição normal (carga passante), I_dif ≈ 0. Em falta interna, parte da corrente \"desaparece\" dentro do elemento — I_dif cresce e o relé atua. É a proteção mais seletiva possível: atua SOMENTE para faltas internas à zona protegida, sem atraso de tempo. A limitação são as correntes de inrush (magnetização) e as assimetrias dos TCs, que exigem bloqueio por 2ª harmônica e pendente (slope) mínima."
+    },
+    {
+      "id": "s5",
+      "title": "Funções de supervisão: 27, 59, 81 e 25",
+      "type": "list",
+      "items": [
+        "27 (subtensão): atua quando V < threshold por um tempo definido; nas subestações, geralmente bloqueia partida de motores e protege geradores de perda de campo",
+        "59 (sobretensão): crítica em sistemas com geração distribuída (ilhamento pode elevar tensão); também protege transformadores de excitação excessiva",
+        "81U/81O (sub/sobrefrequência): desequilíbrio entre geração e carga altera a frequência; relés 81 conectam-se ao esquema de corte de carga (load shedding) quando f < 59 Hz",
+        "25 (sincronismo): antes de fechar um disjuntor ligando dois sistemas (ou gerador à rede), verifica se ΔV < 5%, Δf < 0,1 Hz e Δθ < 20° — se fora dos limites, bloqueia o fechamento"
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Lógica de bloqueio — Relé 86 (Lock-out)",
+      "type": "note",
+      "body": "O relé 86 é um relé auxiliar de autotravamento (lock-out) — uma vez acionado por um sinal de trip, permanece travado até ser manualmente resetado por operador. Isso garante que após uma falta grave (ex.: curto interno em transformador), o disjuntor não seja religado automaticamente antes de uma inspeção. Em subestações, o 86 é o último elo da lógica de proteção: proteção principal → trip do disjuntor → acionamento do 86 → bloqueio de religamento automático. O reset manual do 86 é um procedimento crítico que exige autorização e análise da causa raiz."
+    },
+    {
+      "id": "s7",
+      "title": "Resumo: ANSI como idioma comum da proteção",
+      "type": "summary",
+      "body": "Os números de função ANSI são o vocabulário universal da proteção de sistemas elétricos. As funções 50/51 formam a espinha dorsal da proteção de sobrecorrente; a 87 garante a maior seletividade para equipamentos críticos; as funções 27/59/81/25 supervisionam as condições de qualidade da tensão e frequência; e o 86 garante que nenhuma ação automática seja tomada após uma falta grave sem análise humana. Dominar esses números é o primeiro passo para ler e entender qualquer lógica de proteção de subestação. Nas trilhas deste módulo você vai testar esse conhecimento."
+    }
+  ]
+}

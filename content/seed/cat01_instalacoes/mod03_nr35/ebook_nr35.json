@@ -1,0 +1,74 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-35",
+  "moduleSubtitle": "Trabalho em Altura — Segurança e Procedimentos",
+  "moduleOrder": 2,
+  "ebookTitle": "NR-35 — Trabalho em Altura",
+  "ebookSubtitle": "Conceitos, análise de risco, sistemas de ancoragem, EPIs e plano de resgate",
+  "estimatedMinutes": 20,
+  "trailFiles": [
+    "t01_conceitos.json",
+    "t02_analise_risco.json",
+    "t03_ancoragem.json",
+    "t04_epi_epc.json",
+    "t05_resgate.json"
+  ],
+  "sections": [
+    {
+      "id": "s1",
+      "title": "O que é trabalho em altura e quando a NR-35 se aplica",
+      "type": "text",
+      "body": "A NR-35 define trabalho em altura como toda atividade executada acima de 2,0 m do nível inferior, onde haja risco de queda. No setor elétrico isso abrange praticamente toda a manutenção de redes aéreas, linhas de transmissão, postes, estruturas de subestações e coberturas de edifícios. Queda de altura é a segunda maior causa de morte por acidente de trabalho no Brasil, atrás apenas do choque elétrico — o que torna a combinação NR-10 + NR-35 essencial para o eletricista."
+    },
+    {
+      "id": "s2",
+      "title": "Obrigações do empregador",
+      "type": "list",
+      "items": [
+        "Garantir que somente trabalhadores capacitados (treinamento NR-35, mínimo 8h) executem trabalho em altura",
+        "Elaborar a Análise de Risco (AR) antes de cada trabalho — podendo ser genérica para tarefas rotineiras",
+        "Emitir Permissão de Trabalho (PT) para atividades não rotineiras ou de risco elevado",
+        "Fornecer, inspecionar e manter os sistemas de proteção coletiva (EPC) e individual (EPI)",
+        "Garantir que o resgate da vítima possa ser realizado em tempo seguro (máximo 6 minutos em suspensão)"
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Síndrome do arnês: o risco que poucos conhecem",
+      "type": "note",
+      "body": "Uma vítima suspensa por um arnês após uma queda pode entrar em colapso circulatório em 6 a 30 minutos — mesmo sem trauma visível. O peso do corpo comprime as veias das pernas, impedindo o retorno venoso ao coração. Por isso a NR-35 exige que o plano de resgate garanta o atendimento à vítima em até 6 minutos de suspensão. Se o resgate demorar, oriente a vítima consciente a movimentar as pernas e usar os estribos do arnês para aliviar a pressão."
+    },
+    {
+      "id": "s4",
+      "title": "Sistemas de ancoragem: o que a norma exige",
+      "type": "list",
+      "items": [
+        "Ponto de ancoragem deve suportar no mínimo 1500 kgf estático — ou ser certificado para uso como ponto de ancoragem",
+        "Linha de vida horizontal: permite mobilidade lateral; requer cálculo estrutural, pois a força de impacto em linha horizontal é muito maior que em ancoragem vertical",
+        "Trava-quedas retrátil: trava automaticamente em caso de queda; limita a distância de queda a poucos centímetros",
+        "Talabarte Y (duplo): permite transferência de ancoragem sem ficar desprotegido — obrigatório em escadas e estruturas com múltiplos pontos",
+        "Todo sistema deve ser inspecionado antes de cada uso — qualquer dano visível (corte, abrasão, deformação) é motivo de descarte imediato"
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "EPIs específicos para trabalho em altura",
+      "type": "list",
+      "items": [
+        "Capacete de segurança com jugular — a jugular é obrigatória em altura; sem ela o capacete voa antes de proteger",
+        "Arnês de corpo inteiro (tipo paraquedista) — o cinto simples é proibido como proteção contra queda; somente para posicionamento",
+        "Talabarte/trava-quedas — deve ter amortecedor de queda integrado (limitador a 6 kN de força de impacto)",
+        "Calçado de segurança com solado antiderrapante e biqueira de aço",
+        "Luvas de raspa/vaqueta — proteção das mãos no manejo de cordas e estruturas metálicas"
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Resumo NR-35: queda não é acidente, é falha de prevenção",
+      "type": "summary",
+      "body": "A NR-35 parte de um princípio simples: toda queda de altura é previsível e evitável. O tripé da segurança em altura é: capacitação do trabalhador, análise de risco antes do serviço e sistema de ancoragem adequado. Completa esse tripé o plano de resgate — porque mesmo com toda a prevenção, estar preparado para o pior é parte da norma. Nas trilhas deste módulo você vai aprofundar cada etapa desse processo."
+    }
+  ]
+}

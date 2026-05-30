@@ -1,0 +1,85 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-10",
+  "moduleSubtitle": "Segurança em Instalações e Serviços em Eletricidade",
+  "moduleOrder": 1,
+  "ebookTitle": "NR-10 — Segurança em Instalações Elétricas",
+  "ebookSubtitle": "Zonas de risco, habilitação, procedimentos SEP, LOTO e primeiros socorros",
+  "estimatedMinutes": 25,
+  "trailFiles": [
+    "t01_fundamentos.json",
+    "t02_riscos_eletricos.json",
+    "t03_habilitacao.json",
+    "t04_procedimentos_sep.json",
+    "t05_loto.json",
+    "t06_primeiros_socorros.json"
+  ],
+  "sections": [
+    {
+      "id": "s1",
+      "title": "O que a NR-10 protege — e de quê",
+      "type": "text",
+      "body": "A NR-10 estabelece os requisitos e condições mínimas para garantir a segurança e saúde dos trabalhadores que interagem direta ou indiretamente com instalações elétricas em qualquer etapa — projeto, construção, montagem, operação, manutenção, reforma e ampliação. O eletricista que a ignora fica exposto a três riscos principais: choque elétrico (corrente atravessando o corpo), arco elétrico (explosão de plasma a até 20.000 °C) e queimaduras — os três principais causadores de acidentes fatais com eletricidade."
+    },
+    {
+      "id": "s2",
+      "title": "Zonas de risco ao redor de partes energizadas",
+      "type": "list",
+      "items": [
+        "Zona livre — fora de qualquer risco; acesso irrestrito",
+        "Zona controlada — risco baixo; acesso somente com procedimentos de segurança",
+        "Zona de perigo — risco alto; somente profissionais habilitados NR-10 com EPI completo",
+        "Zona de risco — distância inferior ao limite para a tensão aplicada; trabalho somente em equipamento desenergizado ou com sistema especial (ex.: luvas classe 4 para AT)"
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Habilitado, qualificado ou autorizado — qual é a diferença?",
+      "type": "note",
+      "body": "A NR-10 distingue três perfis: o trabalhador qualificado concluiu curso técnico ou profissionalizante em área elétrica. O habilitado é o qualificado que também fez o curso de NR-10 (mínimo 40h para instalações de baixa tensão, 40h adicionais para SEP). O autorizado é aquele — habilitado ou não — que a empresa formalmente designou para executar determinada tarefa em instalação elétrica específica. Sem habilitação, o trabalhador não pode realizar serviços em instalações elétricas."
+    },
+    {
+      "id": "s4",
+      "title": "Os 9 passos para desenergizar com segurança (SEP)",
+      "type": "list",
+      "items": [
+        "1. Identificar todos os pontos de alimentação do circuito",
+        "2. Obter autorização formal (Permissão de Trabalho — PT)",
+        "3. Desligar as fontes de alimentação",
+        "4. Bloquear os dispositivos de manobra (disjuntores, chaves)",
+        "5. Sinalizar com cartão 'NÃO LIGUE'",
+        "6. Verificar a ausência de tensão com voltímetro calibrado",
+        "7. Instalar aterramento temporário de trabalho (ATT)",
+        "8. Proteger contra contatos involuntários (barreiras, coberturas)",
+        "9. Executar o serviço — e ao término, remover em ordem inversa"
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "LOTO — Lockout/Tagout",
+      "type": "formula",
+      "formula": "Segurança = Bloqueio físico (Lockout) + Etiquetagem (Tagout) + Verificação de ausência de energia",
+      "explanation": "O sistema LOTO garante que nenhum trabalhador consiga religar acidentalmente a fonte de energia enquanto outro está no equipamento. Cada trabalhador envolvido coloca o seu próprio cadeado no dispositivo de isolação — o circuito só pode ser religado quando o último cadeado for removido por seu próprio dono. A etiqueta (tag) identifica o responsável, o serviço e a data."
+    },
+    {
+      "id": "s6",
+      "title": "Primeiros socorros em acidente elétrico",
+      "type": "list",
+      "items": [
+        "NÃO toque na vítima sem antes garantir que o circuito está desenergizado — o socorrista pode virar a segunda vítima",
+        "Acione o SAMU (192) ou Bombeiros (193) imediatamente",
+        "Se a vítima não responde: inicie RCP (30 compressões + 2 respirações) se habilitado",
+        "Em caso de parada cardiorrespiratória por choque: DEA (desfibrilador) deve ser aplicado o mais rápido possível — cada minuto sem RCP reduz a sobrevida em ~10%",
+        "Queimaduras: resfrie com água corrente fria (15-20 min), NÃO aplique creme, NÃO estoure bolhas, cubra com pano limpo"
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "Resumo NR-10: os 5 pontos inegociáveis",
+      "type": "summary",
+      "body": "A NR-10 pode ser resumida em 5 pontos: (1) Somente habilitados executam serviços em instalações elétricas. (2) Sempre identifique as zonas de risco antes de qualquer intervenção. (3) Desenergize, bloqueie, etiquete e verifique — nessa ordem. (4) Use os EPIs corretos para a tensão e o risco de arco elétrico envolvidos. (5) Saiba os primeiros socorros — você pode salvar uma vida. Nas trilhas deste módulo você vai aprofundar cada um desses pontos."
+    }
+  ]
+}

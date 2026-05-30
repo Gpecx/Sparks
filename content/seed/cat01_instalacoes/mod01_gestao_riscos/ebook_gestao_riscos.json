@@ -1,0 +1,76 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Gestão de Riscos e Outras NRs",
+  "moduleSubtitle": "NR-01, NR-05, NR-06, NR-12, NR-17, NR-23 e NR-33",
+  "moduleOrder": 0,
+  "ebookTitle": "Gestão de Riscos e Segurança no Trabalho",
+  "ebookSubtitle": "Da identificação de perigos à prática das principais NRs no ambiente elétrico",
+  "estimatedMinutes": 25,
+  "trailFiles": [
+    "t01_nr01_gro.json",
+    "t02_nr05_cipa.json",
+    "t03_nr06_epi.json",
+    "t04_nr12_maquinas.json",
+    "t05_nr17_ergonomia.json",
+    "t06_nr23_incendios.json",
+    "t07_nr33_confinado.json"
+  ],
+  "sections": [
+    {
+      "id": "s1",
+      "title": "Por que um eletricista precisa conhecer as NRs?",
+      "type": "text",
+      "body": "O trabalho em instalações elétricas expõe o profissional a riscos graves — choque elétrico, arco elétrico, queda e incêndio figuram entre as principais causas de acidentes fatais na indústria brasileira. As Normas Regulamentadoras (NRs) do Ministério do Trabalho não são apenas burocracia: cada requisito existe porque um acidente real demonstrou sua necessidade. Conhecer as NRs é a primeira camada de defesa do eletricista."
+    },
+    {
+      "id": "s2",
+      "title": "NR-01 e o GRO: a lógica por trás de todas as outras NRs",
+      "type": "text",
+      "body": "A revisão da NR-01 em 2021 introduziu o Gerenciamento de Riscos Ocupacionais (GRO), tornando-a a espinha dorsal do sistema de SST brasileiro. O GRO exige que toda empresa identifique os perigos presentes, avalie os riscos gerados, defina medidas de controle e implemente um Programa de Gerenciamento de Riscos (PGR). As demais NRs (NR-10, NR-35 etc.) funcionam como requisitos técnicos específicos dentro desse framework."
+    },
+    {
+      "id": "s3",
+      "title": "Hierarquia de controles de risco",
+      "type": "list",
+      "items": [
+        "1. Eliminação — remover o perigo na fonte (ex.: substituir processo que gera tensão perigosa)",
+        "2. Substituição — trocar por algo de menor risco (ex.: tensão reduzida de 127 V → 24 V em ferramentas portáteis)",
+        "3. Controle de engenharia — barreiras físicas, intertravamentos, sistemas de bloqueio (LOTO)",
+        "4. Controle administrativo — procedimentos, treinamentos, sinalização, permissão de trabalho",
+        "5. EPI — última barreira; equipamento de proteção individual (NR-06)"
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "CIPA (NR-05): a voz dos trabalhadores na segurança",
+      "type": "note",
+      "body": "A Comissão Interna de Prevenção de Acidentes é obrigatória em empresas com determinado número de empregados por setor (CNAE). A CIPA não tem poder de interdição, mas mapeia riscos, propõe melhorias e fiscaliza o cumprimento das NRs. Para o eletricista, participar ou interagir com a CIPA é uma forma de garantir que os riscos específicos do seu setor sejam documentados e tratados."
+    },
+    {
+      "id": "s5",
+      "title": "EPIs essenciais para o trabalho elétrico (NR-06)",
+      "type": "list",
+      "items": [
+        "Luvas de borracha isolante (classe 00 a 4, conforme tensão) — obrigatórias em qualquer contato com partes energizadas",
+        "Capacete com aba frontal e jugular — proteção contra impacto e arco elétrico",
+        "Óculos de segurança e protetor facial (face shield) — barreira contra arco elétrico e partículas",
+        "Calçado de segurança dielétrico — isola o trabalhador do potencial de terra",
+        "Vestimenta anti-arco (categoria ATPV conforme NFPA 70E / NBR 16557) — proteção térmica obrigatória em trabalho em alta tensão"
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Espaço confinado (NR-33): alerta especial para subestações",
+      "type": "note",
+      "body": "Caixas de dutos subterrâneos, câmaras de transformadores enterradas e valas de cabos frequentemente se enquadram como espaços confinados — ambientes que têm entrada limitada, não foram projetados para ocupação contínua e podem conter atmosfera perigosa. A NR-33 exige vigília permanente, equipamentos de monitoramento de gases, plano de resgate e supervisor capacitado. Ignorar esses requisitos em trabalhos de manutenção de cabos subterrâneos é uma das principais causas de acidentes fatais no setor elétrico."
+    },
+    {
+      "id": "s7",
+      "title": "Resumo: o que levar da gestão de riscos para o dia a dia",
+      "type": "summary",
+      "body": "A segurança no trabalho elétrico parte da identificação dos perigos (NR-01/GRO), passa pela escolha das medidas de controle corretas — sempre priorizando eliminação antes do EPI — e se concretiza no cumprimento dos requisitos específicos de cada NR. CIPA, EPI, máquinas (NR-12), ergonomia (NR-17), incêndios (NR-23) e espaço confinado (NR-33) são capítulos de uma mesma história: proteger a vida do trabalhador. Nas trilhas deste módulo você vai testar esses conceitos na prática."
+    }
+  ]
+}

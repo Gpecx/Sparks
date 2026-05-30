@@ -1,0 +1,59 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Proteção de Bancos de Capacitores",
+  "moduleSubtitle": "Fundamentos e proteções de bancos de capacitores",
+  "moduleOrder": 5,
+  "ebookTitle": "Proteção de Bancos de Capacitores",
+  "ebookSubtitle": "Tipos de banco, correntes de energização, desequilíbrio e proteções específicas",
+  "estimatedMinutes": 15,
+  "trailFiles": [
+    "t01_fundamentos_capacitores.json"
+  ],
+  "sections": [
+    {
+      "id": "s1",
+      "title": "Por que bancos de capacitores existem no sistema elétrico",
+      "type": "text",
+      "body": "Bancos de capacitores são instalados em subestações e alimentadores para compensação de reativo (elevação do fator de potência), regulação de tensão e redução de perdas. Em linhas longas de transmissão, a compensação série reduz a reatância efetiva da linha, aumentando sua capacidade de transmissão de potência ativa. Apesar de aparentemente simples, os bancos de capacitores apresentam fenômenos transitórios severos (inrush, energização back-to-back) e requerem proteções específicas para garantir operação segura e longa vida útil."
+    },
+    {
+      "id": "s2",
+      "title": "Corrente de energização — o maior desafio",
+      "type": "formula",
+      "formula": "I_inrush ≈ V_nominal / √(L_fonte × C_banco)  [pico em kA]",
+      "explanation": "No instante de energização, o capacitor se comporta como um curto-circuito — a corrente inicial é limitada apenas pela indutância do circuito. Em situações de energização back-to-back (banco adjacente já energizado), a corrente de inrush pode atingir dezenas de kA com frequência de oscilação de centenas de Hz. Isso pode causar abertura indevida dos disjuntores de proteção e, em casos extremos, dano mecânico ao banco. A solução são reatores de amortecimento em série (closing reactors) ou pré-inserção de resistores."
+    },
+    {
+      "id": "s3",
+      "title": "Tipos de banco e suas implicações na proteção",
+      "type": "list",
+      "items": [
+        "Banco aterrado solidamente — fácil detecção de falta à terra via 51N; alta corrente de falta terra; neutro do banco ligado diretamente à terra",
+        "Banco de neutro isolado (não aterrado) — baixa corrente de falta terra; detecção de falta feita por tensão de desequilíbrio (função 59N no neutro)",
+        "Banco em estrela simples vs. dupla estrela — dupla estrela permite detecção de desequilíbrio interno por corrente diferencial entre os dois neutros (função 87N)",
+        "Banco em delta — sem corrente de neutro; detecção de falta depende de monitoramento de tensão ou corrente de desequilíbrio de fase",
+        "Banco série — instalado em série na linha; protege contra sobrecorrente de falta via bypasses automáticos (spark gaps ou MOVs)"
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Proteções características de bancos de capacitores",
+      "type": "list",
+      "items": [
+        "60N — Desequilíbrio de neutro (voltagem ou corrente): detecta falha de elementos capacitivos internos; a proteção mais importante do banco",
+        "50/51 — Sobrecorrente de fase: proteção de falta externa e inrush (com bloqueio temporizado na energização)",
+        "59 — Sobretensão: ressonância com a rede ou operação em tensão elevada pode destruir os elementos capacitivos; limite típico: 110% Vn",
+        "27 — Subtensão: protege contra energização de banco em tensão muito baixa",
+        "81 — Sub/sobrefrequência: ressonância série LC pode ser excitada por harmônicos quando a frequência de ressonância coincide com harmônica dominante do sistema"
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Resumo: capacitores precisam de atenção especial",
+      "type": "summary",
+      "body": "Bancos de capacitores compensam reativo, regulam tensão e melhoram a eficiência do sistema — mas suas características de energização (inrush), sensibilidade ao desequilíbrio interno e potencial de ressonância exigem proteções específicas que vão além do padrão 50/51 de sobrecorrente. A função 60N (desequilíbrio) é o diferencial: detecta a falha de um único elemento capacitivo antes que ela cascateie para todo o banco. Em subestações modernas, o banco de capacitores é um dos equipamentos que mais se beneficia do monitoramento contínuo via IED. Na trilha deste módulo você vai aprofundar esses conceitos."
+    }
+  ]
+}

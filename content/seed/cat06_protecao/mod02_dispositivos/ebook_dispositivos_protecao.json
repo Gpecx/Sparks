@@ -1,0 +1,67 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Dispositivos de Proteção",
+  "moduleSubtitle": "Relés, disjuntores, disparadores e fusíveis",
+  "moduleOrder": 1,
+  "ebookTitle": "Dispositivos de Proteção Elétrica",
+  "ebookSubtitle": "Relés, disjuntores, disparadores e fusíveis — como cada um atua na proteção do sistema",
+  "estimatedMinutes": 20,
+  "trailFiles": [
+    "t01_fundamentos_dispositivos.json",
+    "t02_reles_protecao.json",
+    "t03_disparadores.json",
+    "t04_fusiveis.json"
+  ],
+  "sections": [
+    {
+      "id": "s1",
+      "title": "A cadeia de atuação: relé → disjuntor → isolamento",
+      "type": "text",
+      "body": "Um dispositivo de proteção nunca atua sozinho. O relé detecta a anomalia e envia um sinal de trip para o disjuntor; o disjuntor interrompe o circuito. Esse é o modelo clássico: o relé decide, o disjuntor executa. Em sistemas de distribuição de menor porte, fusíveis e religadores integram as funções de detecção e interrupção em um único dispositivo. Entender a cadeia completa — da detecção à interrupção — é essencial para dimensionar e coordenar corretamente a proteção."
+    },
+    {
+      "id": "s2",
+      "title": "Tipos de relés por princípio de operação",
+      "type": "list",
+      "items": [
+        "Eletromecânico de indução (disco de Ferraris) — princípio do wattímetro; histórico para função 51; substituído pelos numéricos mas ainda presente em instalações antigas",
+        "Estático analógico — circuito RC/RL mimetizando a característica tempo-corrente; mais rápido que eletromecânico",
+        "Digital/numérico (IED) — amostra o sinal analógico (tipicamente 16-64 amostras/ciclo), processa algoritmos de proteção via DSP; multifuncional e comunicante",
+        "Relé de proteção principal — opera na falta dentro da sua zona primária (ex.: 87T para transformador)",
+        "Relé de retaguarda — opera com tempo adicional se a proteção principal falhar (ex.: 51 de retaguarda ao 87)"
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Disparadores de disjuntores",
+      "type": "list",
+      "items": [
+        "Disparador magnético — atua instantaneamente em correntes elevadas (>10 × In); resposta em milissegundos; sem coordenação de tempo",
+        "Disparador bimetálico (térmico) — atua por calor acumulado; para sobrecargas; curva inversa natural",
+        "Disparador eletrônico (trip unit) — micro controlado; define separadamente as regiões de overload (longo retardo), curto de baixa magnitude (retardo curto) e curto severo (instantâneo); melhor coordenação",
+        "Bobina de mínima tensão (27) — desliga o disjuntor quando a tensão cai abaixo de ~70% Vn",
+        "Bobina de trip por tensão (TRIP coil) — recebe o sinal do relé e acciona o mecanismo de abertura; tensão de alimentação crítica — se falhar, o disjuntor não abre"
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Fusíveis: onde ainda fazem sentido",
+      "type": "note",
+      "body": "Com a disseminação dos relés numéricos, os fusíveis poderiam parecer obsoletos — mas continuam sendo a solução de custo-benefício superior em pontos onde: (a) a corrente de curto é elevada e a interrupção deve ser ultra-rápida (fusíveis de alta ruptura interrompem em 1/4 de ciclo, antes mesmo do primeiro pico de corrente de curto); (b) a carga a proteger é pequena e não justifica um relé + disjuntor; (c) é necessária proteção backup de disjuntor (fuse-saving). Em subestações de distribuição, o elo fusível no transformador de distribuição é o dispositivo de proteção mais numeroso do sistema elétrico brasileiro."
+    },
+    {
+      "id": "s5",
+      "title": "IEDs modernos: muito além de um relé",
+      "type": "note",
+      "body": "Um IED (Intelligent Electronic Device) moderno integra em um único chassi: múltiplas funções de proteção (50/51/67/87/21...), medição de qualidade de energia, registro de oscilografias e perturbografias, lógica programável (MICOM/SEL/GE), comunicação IEC 61850 GOOSE e MMS, e interface HMI local. Isso significa que um IED pode substituir 10-20 relés eletromecânicos e ainda fornecer dados que antes exigiriam instrumentos separados. O custo inicial é maior, mas o ciclo de vida e a flexibilidade compensam amplamente."
+    },
+    {
+      "id": "s6",
+      "title": "Resumo: o dispositivo certo para cada aplicação",
+      "type": "summary",
+      "body": "Escolher o dispositivo de proteção correto depende do nível de tensão, da corrente de curto disponível, da necessidade de coordenação e do custo. Fusíveis dominam na distribuição de baixa e média tensão onde a simplicidade e o baixo custo superam a falta de comunicação. Relés numéricos (IEDs) são o padrão em subestações de transmissão e distribuição, onde a coordenação, o registro e a comunicação são essenciais. Disjuntores são o elemento executor — sua especificação correta (poder de corte, tensão nominal, tempo de abertura) é tão crítica quanto a do relé. Nas trilhas deste módulo você vai aprofundar cada dispositivo."
+    }
+  ]
+}

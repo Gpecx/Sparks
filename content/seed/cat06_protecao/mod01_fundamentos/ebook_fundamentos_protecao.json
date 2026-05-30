@@ -1,0 +1,88 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Fundamentos de Proteção",
+  "moduleSubtitle": "Conceitos base, filosofia, TCs, TPs e tipos de falta",
+  "moduleOrder": 0,
+  "ebookTitle": "Fundamentos de Proteção de Sistemas Elétricos",
+  "ebookSubtitle": "Da evolução dos relés aos transformadores de instrumentação e zonas de proteção",
+  "estimatedMinutes": 30,
+  "trailFiles": [
+    "t01_evolucao_reles.json",
+    "t02_principios_gerais.json",
+    "t03_ferramentas_basicas.json",
+    "t04_tipos_falta.json",
+    "t05_correntes_falta.json",
+    "t06_zonas_protecao.json",
+    "t07_filosofia_protecao.json",
+    "t08_transformadores_medicao.json"
+  ],
+  "sections": [
+    {
+      "id": "s1",
+      "title": "Por que proteger o sistema elétrico?",
+      "type": "text",
+      "body": "Faltas (curtos-circuitos) são inevitáveis em sistemas de potência — raios, falhas de isolação, erros operacionais e degradação de equipamentos geram condições anormais que, sem proteção, destruiriam transformadores, cabos e geradores em segundos. O sistema de proteção elétrica é o \"sistema imunológico\" da rede: detecta a falta, isola o menor pedaço possível do sistema e o faz antes que o dano se propague. A evolução dos relés — de eletromecânicos aos numéricos modernos — foi impulsionada pela necessidade de fazer isso com mais velocidade, seletividade e confiabilidade."
+    },
+    {
+      "id": "s2",
+      "title": "Os 4 requisitos fundamentais de proteção",
+      "type": "list",
+      "items": [
+        "Seletividade — isolar somente o elemento em falta, preservando o máximo da rede em operação",
+        "Rapidez — atuar no menor tempo possível para limitar danos ao equipamento e manter a estabilidade",
+        "Sensibilidade — detectar faltas de alta impedância (correntes baixas) que outros dispositivos ignorariam",
+        "Confiabilidade — dois componentes: segurança (não atuar quando não deve) e dependabilidade (atuar quando deve)"
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Ferramentas matemáticas: componentes simétricas e valor por unidade",
+      "type": "note",
+      "body": "Dois recursos matemáticos são indispensáveis em proteção: Componentes Simétricas (Fortescue, 1918) decompõem qualquer sistema desequilibrado em três sequências simétricas (positiva, negativa e zero), simplificando radicalmente o cálculo de faltas assimétricas. O Sistema Por Unidade (PU) normaliza todas as grandezas pela respectiva base, eliminando as transformações de tensão nos cálculos e facilitando a comparação de equipamentos de diferentes níveis de tensão. A área Ferramentas do SPARK tem calculadoras para ambos."
+    },
+    {
+      "id": "s4",
+      "title": "Tipos de falta no sistema elétrico",
+      "type": "list",
+      "items": [
+        "Curto-circuito trifásico (3φ) — mais severo em termos de corrente; raro (2-5% das faltas), mas produz as maiores correntes de curto",
+        "Curto bifásico (FF) — 5-10% das faltas; corrente ≈ 87% do trifásico",
+        "Curto bifásico-terra (FFT) — pode gerar componente de sequência zero elevada",
+        "Curto monofásico-terra (FT) — o mais frequente (~70-80% das faltas); em redes aterradas solidamente gera correntes altas; em redes de neutro isolado, corrente de falta é baixa",
+        "Curto franco vs. com impedância — falta franca: resistência de falta ≈ 0 Ω; falta com impedância (ex.: arco) reduz a corrente e dificulta a detecção"
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Zonas de proteção: o conceito de backup",
+      "type": "text",
+      "body": "Cada equipamento do sistema (transformador, barramento, linha) deve estar coberto por pelo menos uma zona de proteção principal. As zonas adjacentes se sobrepõem ligeiramente, garantindo que nenhum ponto fique descoberto (zona morta). Toda proteção principal deve ter uma proteção de retaguarda (backup) — que pode ser local (o próprio relé em zona mais ampla) ou remota (o relé no terminal oposto da linha). A filosofia é: se a proteção principal falhar, a retaguarda deve eliminar a falta antes que o dano seja irreversível."
+    },
+    {
+      "id": "s6",
+      "title": "Transformadores de Corrente (TC) e Potencial (TP)",
+      "type": "list",
+      "items": [
+        "TC — reduz a corrente do primário para o nível do relé (tipicamente 5 A ou 1 A); classe de exatidão: 0,3/0,6/1,2 para medição; 5P/10P para proteção",
+        "TP — reduz a tensão do primário para o nível do relé (tipicamente 115 V); classes 0,3/0,6/1,2 para medição e proteção de tensão",
+        "Saturação do TC: em faltas severas, o núcleo do TC pode saturar, distorcendo a corrente no secundário e causando operações incorretas — daí a importância da verificação do fator de acurácia (ALF)",
+        "A polaridade dos TCs é fundamental na proteção diferencial — inversão de polaridade gera corrente diferencial espúria e causa trip indevido",
+        "RTC (relação de transformação de corrente) e RTP (relação de transformação de potencial) definem o que o relé enxerga em relação ao sistema primário"
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "Evolução dos relés: de eletromecânicos a numéricos",
+      "type": "note",
+      "body": "Os relés eletromecânicos (1900-1960s) eram simples e robustos, mas lentos e de ajuste limitado. Os estáticos (1960s-1980s) usavam circuitos eletrônicos analógicos, mais rápidos mas sensíveis a interferências. Os digitais (1980s-1990s) introduziram o processamento de sinal amostrado. Os numéricos modernos (IEDs) vão além: executam múltiplas funções de proteção e medição simultaneamente, comunicam via IEC 61850, registram oscilografias e perturbografias, e podem ser reprogramados remotamente. Um único IED moderno substitui dezenas de relés eletromecânicos."
+    },
+    {
+      "id": "s8",
+      "title": "Resumo: a base que sustenta tudo",
+      "type": "summary",
+      "body": "Proteção de sistemas elétricos é uma disciplina que combina teoria matemática (componentes simétricas, PU), física dos circuitos (correntes de falta, sequências) e engenharia de sistemas (zonas, backup, TCs e TPs). Os 4 requisitos — seletividade, rapidez, sensibilidade e confiabilidade — são o critério de avaliação de qualquer solução de proteção. Dominar esses fundamentos é o pré-requisito para entender qualquer função específica de relé. As trilhas deste módulo vão consolidar cada um desses conceitos."
+    }
+  ]
+}

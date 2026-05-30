@@ -1,0 +1,56 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Proteção de Motores Elétricos",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções específicas de motores",
+  "moduleOrder": 4,
+  "ebookTitle": "Proteção de Motores Elétricos",
+  "ebookSubtitle": "Sobrecarga, falta à terra, desequilíbrio de tensão e proteção de rotor bloqueado",
+  "estimatedMinutes": 20,
+  "trailFiles": [
+    "t01_fundamentos_motores.json",
+    "t02_aplicacoes_motores.json",
+    "t03_protecoes_motores.json"
+  ],
+  "sections": [
+    {
+      "id": "s1",
+      "title": "Por que motores precisam de proteção específica?",
+      "type": "text",
+      "body": "Motores elétricos consomem cerca de 70% de toda a energia elétrica industrial no Brasil — e são também os equipamentos mais expostos a condições adversas: variações de carga, desequilíbrio de tensão, partidas frequentes, ambiente úmido e poeiras condutoras. Cada uma dessas condições degrada o isolamento dos enrolamentos de forma cumulativa. A proteção do motor não previne apenas a falha em si, mas prolonga a vida útil do equipamento protegendo o capital investido."
+    },
+    {
+      "id": "s2",
+      "title": "Corrente de partida vs. corrente nominal",
+      "type": "formula",
+      "formula": "I_partida ≈ 6 × I_nominal  (motores de indução, partida direta na linha — DOL)",
+      "explanation": "Na partida direta, o motor de indução trifásico consume de 5 a 8 vezes a corrente nominal durante 2-10 segundos (dependendo do momento de inércia da carga). Esse pico é normal e não representa dano ao motor, mas precisa ser considerado no ajuste dos relés de sobrecorrente: o pickup de fase deve ser maior que o pico de partida para não causar trip indevido, mas pequeno o suficiente para detectar uma falta durante a operação normal."
+    },
+    {
+      "id": "s3",
+      "title": "As proteções essenciais de um motor",
+      "type": "list",
+      "items": [
+        "49 — Relé de sobrecarga térmica: simula o aquecimento cumulativo do motor; atua quando a \"imagem térmica\" supera o limite; leva em conta partidas recentes",
+        "50/51 — Sobrecorrente instantâneo/temporizado: proteção de falta de fase e curto-circuito; pickup acima da corrente de partida para evitar trip indevido",
+        "50N/51N — Falta à terra: detecta corrente de neutro; essencial em ambientes com risco de degradação de isolamento por umidade ou vibração",
+        "46 — Desequilíbrio de corrente: correntes desequilibradas indicam falta de fase, desequilíbrio de tensão ou rotor gaiola rompido; um desequilíbrio de 5% de tensão causa ~50% de desequilíbrio de corrente",
+        "48 — Tempo de partida excessivo (rotor bloqueado): se o motor não atingiu velocidade nominal no tempo esperado, indica sobrecarga mecânica ou travamento",
+        "27 — Subtensão: protege contra partida com tensão inadequada, que aumenta a corrente de partida e o aquecimento"
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Desequilíbrio de tensão: o inimigo silencioso",
+      "type": "note",
+      "body": "Um desequilíbrio de tensão de apenas 3,5% (bem dentro de limites que parecem aceitáveis) causa desequilíbrio de corrente de fase de até 25% e elevação de temperatura dos enrolamentos de até 20%. Para cada 10 °C de aumento na temperatura de operação, a vida útil do isolamento é reduzida à metade (Regra de Montsinger). Isso significa que um motor operando com apenas 3,5% de desequilíbrio por anos terá sua vida útil reduzida em 50-80%. O relé 46 (proteção de desequilíbrio) é muitas vezes subestimado, mas é um dos mais importantes para a longevidade de grandes motores."
+    },
+    {
+      "id": "s5",
+      "title": "Resumo: proteção de motor é proteção de processo",
+      "type": "summary",
+      "body": "A proteção adequada de um motor elétrico não é opcional — é garantia de continuidade do processo industrial. As funções 49, 50/51, 46 e 48 formam o conjunto mínimo para qualquer motor de média tensão. Motores críticos (bombas de alimentação de caldeira, ventiladores de ar forçado) merecem proteção completa com IED dedicado, registros de partida e monitoramento contínuo da imagem térmica. O tempo investido em ajustar corretamente a proteção de um motor é sempre menor do que o custo de substituí-lo após uma falha evitável. Nas trilhas deste módulo você vai consolidar esses conceitos."
+    }
+  ]
+}
