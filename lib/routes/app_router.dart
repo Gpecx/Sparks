@@ -18,6 +18,7 @@ import 'package:spark_app/screens/duel_screen.dart';
 import 'package:spark_app/screens/error_simulation_screen.dart';
 import 'package:spark_app/screens/categories_screen.dart';
 import 'package:spark_app/screens/tools_screen.dart';
+import 'package:spark_app/screens/estudos_screen.dart';
 import 'package:spark_app/screens/change_password_screen.dart';
 import 'package:spark_app/screens/onboarding_screen.dart';
 import 'package:spark_app/screens/covenants_screen.dart';
@@ -71,6 +72,7 @@ class AppRouter {
       GoRoute(path: '/error-simulation', builder: (context, state) => const ErrorSimulationScreen()),
       GoRoute(path: '/categories', builder: (context, state) => const CategoriesScreen()),
       GoRoute(path: '/ferramentas', builder: (context, state) => const ToolsScreen()),
+      GoRoute(path: '/estudos', builder: (context, state) => const EstudosScreen()),
       GoRoute(path: '/change-password', builder: (context, state) => const ChangePasswordScreen()),
       GoRoute(path: '/onboarding', builder: (context, state) => const OnboardingScreen()),
       GoRoute(path: '/covenants', builder: (context, state) => const CovenantsScreen()),

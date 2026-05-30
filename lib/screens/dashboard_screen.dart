@@ -162,7 +162,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 onTap: () {
                   Navigator.pop(ctx);
                   final shell = context.findAncestorStateOfType<MainShellScreenState>();
-                  shell?.switchTab(4);
+                  shell?.switchTab(5);
                 },
               ),
               _buildProfileMenuItem(

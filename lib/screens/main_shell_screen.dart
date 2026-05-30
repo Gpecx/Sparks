@@ -7,6 +7,7 @@ import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/dashboard_screen.dart';
 import 'package:spark_app/screens/categories_screen.dart';
+import 'package:spark_app/screens/estudos_screen.dart';
 import 'package:spark_app/screens/tools_screen.dart';
 import 'package:spark_app/screens/leaderboard_screen.dart';
 import 'package:spark_app/screens/profile_screen.dart';
@@ -42,6 +43,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
   final List<Widget> _screens = [
     DashboardScreen(),
     CategoriesScreen(),
+    const EstudosScreen(),
     const ToolsScreen(),
     LeaderboardScreen(),
     const ProfileScreen(),
@@ -147,6 +149,17 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                             semanticLabel: 'Categorias selecionada',
                           ),
                           label: Text('Categorias'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(
+                            Icons.menu_book_outlined,
+                            semanticLabel: 'Estudos',
+                          ),
+                          selectedIcon: Icon(
+                            Icons.menu_book,
+                            semanticLabel: 'Estudos selecionado',
+                          ),
+                          label: Text('Estudos'),
                         ),
                         NavigationRailDestination(
                           icon: Icon(
@@ -260,6 +273,15 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                       activeIcon: Icon(Icons.route),
                       label: 'Categorias',
                       tooltip: 'Categorias de aprendizado',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.menu_book_outlined,
+                        semanticLabel: 'Ir para Estudos',
+                      ),
+                      activeIcon: Icon(Icons.menu_book),
+                      label: 'Estudos',
+                      tooltip: 'E-books por módulo',
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(
