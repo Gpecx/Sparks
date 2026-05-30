@@ -1,0 +1,184 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Proteção de Linhas de Transmissão",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções específicas de LT",
+  "moduleOrder": 9,
+  "ebookTitle": "Proteção de Linhas de Transmissão",
+  "ebookSubtitle": "Distância (21), teleproteção, diferencial de linha (87L) e religamento",
+  "estimatedMinutes": 75,
+  "trailFiles": [
+    "t01_fundamentos_lt.json",
+    "t02_aplicacoes_lt.json",
+    "t03_protecoes_lt.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Desafios da Proteção de Linhas",
+      "subtitle": "O elemento mais exposto do sistema",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que linhas são diferentes",
+          "type": "text",
+          "body": "As linhas de transmissão são o elemento mais extenso e mais exposto do sistema elétrico — quilômetros de condutores ao tempo, sujeitos a descargas atmosféricas, vento, vegetação, contaminação e vandalismo. A maioria das faltas do sistema ocorre em linhas, e a maioria delas é transitória (um arco por descarga que se auto-extingue). Proteger linhas exige lidar com a distância (o relé está numa ponta, a falta pode estar a 200 km), com a alimentação por dois terminais, e com a alta taxa de faltas transitórias."
+        },
+        {
+          "id": "s2",
+          "title": "Os requisitos específicos",
+          "type": "list",
+          "items": [
+            "Localizar a falta ao longo da linha (não basta saber que há falta, mas onde)",
+            "Eliminar faltas rapidamente em ambos os terminais (estabilidade do sistema)",
+            "Religar após faltas transitórias (restaurar o serviço automaticamente)",
+            "Coordenar com as linhas adjacentes (seletividade)",
+            "Lidar com a infeed (corrente injetada por terminais intermediários que altera a medição)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A questão dos dois terminais",
+          "type": "note",
+          "body": "Diferente de um transformador ou motor (um ponto), a linha tem dois (ou mais) terminais, possivelmente a centenas de km de distância. Uma falta na linha é alimentada pelos dois lados, e idealmente os disjuntores dos dois terminais devem abrir rapidamente. Mas o relé de cada terminal, sozinho, não consegue distinguir com certeza uma falta no fim da sua linha de uma falta logo no início da linha seguinte. Resolver essa ambiguidade — para abertura rápida em toda a extensão — é o problema central da proteção de linhas, resolvido pela teleproteção."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Linhas são o elemento mais extenso e exposto, com a maioria das faltas (em geral transitórias). Sua proteção precisa localizar a falta, eliminar rápido nos dois terminais, religar após transitórias e coordenar com linhas adjacentes. O desafio central é a alimentação por dois terminais distantes — resolver a ambiguidade de localização para abertura rápida em toda a linha é o papel da teleproteção."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Proteção de Distância (21)",
+      "subtitle": "A proteção principal das linhas",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O princípio da medição de impedância",
+          "type": "text",
+          "body": "A função 21 mede a impedância vista pelo relé (Z = V/I). Como a impedância de uma linha é aproximadamente constante por quilômetro, a impedância medida é proporcional à distância até a falta. Se Z medida cai abaixo do alcance ajustado de uma zona, há falta dentro daquele trecho. A grande vantagem da distância é ser inerentemente seletiva sem precisar de comunicação: cada zona cobre uma fração da linha com um tempo associado, dando uma proteção autônoma."
+        },
+        {
+          "id": "s2",
+          "title": "As zonas de distância",
+          "type": "list",
+          "items": [
+            "Zona 1 — 80-85% da linha, instantânea (subdimensionada para não invadir a linha seguinte por erros de medição)",
+            "Zona 2 — 100% da linha + ~50% da seguinte, com tempo (~0,3-0,4 s) para coordenar e cobrir o trecho final da própria linha",
+            "Zona 3 — retaguarda remota, alcance estendido com tempo maior (~0,8-1,5 s)",
+            "Zona reversa — para esquemas de teleproteção e proteção de barra de retaguarda"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Características de operação no plano R-X",
+          "type": "text",
+          "body": "As zonas de distância são representadas no plano R-X (resistência × reatância) por características geométricas: a Mho (circular, autopolarizada, clássica), a quadrilateral (retangular, melhor para faltas com resistência de arco), e variantes poligonais. A escolha da característica afeta a capacidade de detectar faltas resistivas e a imunidade à oscilação de potência. Os relés numéricos modernos oferecem características ajustáveis e adaptativas. A calculadora de Proteção de Distância (21) do SPARK calcula o alcance das zonas."
+        },
+        {
+          "id": "s4",
+          "title": "Limitações da distância: infeed e resistência de falta",
+          "type": "note",
+          "body": "A distância tem limitações conhecidas: a corrente injetada por terminais intermediários (infeed) faz o relé 'enxergar' a falta mais longe do que realmente está, encurtando o alcance efetivo; e a resistência de falta (arco) adiciona uma componente resistiva que pode tirar a falta da característica de operação (especialmente em faltas à terra de alta resistência). Conhecer essas limitações é essencial para ajustar corretamente os alcances e escolher a característica adequada."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A 21 mede impedância (proporcional à distância da falta), seletiva sem comunicação, com zonas escalonadas (Z1 instantânea 80-85%, Z2/Z3 temporizadas, reversa). As características no plano R-X (Mho, quadrilateral) definem a detecção de faltas resistivas. Suas limitações — infeed (encurta o alcance) e resistência de falta — devem ser consideradas no ajuste."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Teleproteção e Diferencial de Linha",
+      "subtitle": "Eliminando faltas em 100% da linha instantaneamente",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que a teleproteção",
+          "type": "text",
+          "body": "A zona 1 da distância só cobre 80-85% da linha instantaneamente; os 15-20% finais (e o início, visto do outro terminal) ficam na zona 2, com tempo. Para faltas no trecho final, isso significaria um terminal abrindo rápido (zona 1) e o outro abrindo com atraso (zona 2) — indesejável para a estabilidade. A teleproteção resolve isso: os relés dos dois terminais trocam informação por um canal de comunicação, permitindo abertura instantânea em 100% da linha."
+        },
+        {
+          "id": "s2",
+          "title": "Esquemas de teleproteção",
+          "type": "list",
+          "items": [
+            "Comparação direcional / POTT (Permissive Overreach Transfer Trip) — cada terminal envia permissão ao outro quando vê falta à frente; trip rápido se ambos concordam",
+            "PUTT (Permissive Underreach Transfer Trip) — permissão baseada na zona 1",
+            "DTT (Direct Transfer Trip) — trip direto comandado remotamente",
+            "Bloqueio (Blocking) — o terminal envia sinal de bloqueio se vê falta reversa, impedindo trip do outro",
+            "DCB / DCUB — variantes com bloqueio direcional"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Diferencial de linha (87L)",
+          "type": "text",
+          "body": "A diferencial de linha (87L) aplica o princípio diferencial à linha inteira: compara as correntes dos dois terminais via um canal de comunicação dedicado (geralmente fibra óptica). Como qualquer diferencial, é altamente seletiva (só opera para faltas internas à linha) e cobre 100% da linha instantaneamente, sem os problemas de alcance, infeed e resistência de falta da distância. Sua limitação é a dependência total do canal de comunicação — sem ele, a 87L não funciona, exigindo uma proteção de retaguarda (geralmente a própria distância)."
+        },
+        {
+          "id": "s4",
+          "title": "Distância vs. diferencial de linha",
+          "type": "note",
+          "body": "Distância e diferencial de linha são as duas filosofias principais de proteção de LT. A distância é autônoma (funciona sem comunicação, na zona 1) mas tem alcance limitado e é sensível a infeed/resistência. A 87L cobre 100% instantaneamente e é imune a essas limitações, mas depende do canal. Em linhas críticas, é comum usar AMBAS — uma como principal e outra como redundância (esquema de proteção dupla, principal A e B independentes), garantindo cobertura mesmo com falha de uma delas ou do canal."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A teleproteção troca informação entre os terminais para abertura instantânea em 100% da linha, em esquemas permissivos (POTT/PUTT/DTT) ou de bloqueio. A diferencial de linha (87L) compara as correntes dos dois terminais via fibra — seletiva e cobrindo 100%, mas dependente do canal. Distância (autônoma, alcance limitado) e 87L (100%, mas precisa de canal) são as duas filosofias, frequentemente usadas juntas em redundância."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Religamento e Esquema Completo",
+      "subtitle": "Restaurando o serviço após faltas transitórias",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Religamento automático (79)",
+          "type": "text",
+          "body": "Como a maioria das faltas em linhas é transitória (o arco da descarga atmosférica se extingue ao desligar a linha), faz sentido tentar religar automaticamente após um curto tempo morto (dead time). A função 79 (religamento automático) faz isso: após o trip, espera o tempo morto e religa. Se a falta era transitória, a linha volta ao serviço sem intervenção; se era permanente, a proteção atua de novo e o religamento bloqueia (lockout), exigindo análise. Isso reduz drasticamente o tempo de interrupção para a maioria das faltas."
+        },
+        {
+          "id": "s2",
+          "title": "Religamento monopolar vs. tripolar",
+          "type": "list",
+          "items": [
+            "Tripolar — abre e religa as três fases; mais simples, usado na maioria dos casos",
+            "Monopolar — em faltas monofásicas (a maioria), abre só a fase em falta e religa só ela",
+            "Vantagem do monopolar — mantém a transmissão pelas duas fases sãs durante o tempo morto, melhorando a estabilidade em linhas de EAT",
+            "Exige proteção capaz de selecionar a fase em falta (seleção de fase)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Verificação de sincronismo no religamento",
+          "type": "note",
+          "body": "Ao religar uma linha que conecta dois sistemas, é preciso verificar se eles ainda estão em sincronismo (função 25) — religar fora de sincronismo causaria correntes e esforços severos. O religamento pode ser com verificação de sincronismo (check synchronism) ou com linha morta/barra viva (dead line check). Essa coordenação entre o religamento e a verificação de sincronismo é parte essencial do esquema de proteção de linhas interligadas."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O religamento (79) tenta restaurar a linha após o tempo morto, aproveitando que a maioria das faltas é transitória — religando se a falta sumiu, ou bloqueando (lockout) se é permanente. Pode ser tripolar ou monopolar (este mantém a estabilidade abrindo só a fase em falta), com verificação de sincronismo (25). O esquema completo de LT une distância (21), teleproteção/87L, sobrecorrente de retaguarda e religamento — uma das proteções mais sofisticadas do sistema."
+        }
+      ]
+    }
+  ]
+}

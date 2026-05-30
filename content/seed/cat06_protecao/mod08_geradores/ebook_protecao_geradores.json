@@ -1,0 +1,170 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Proteção de Geradores",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções específicas de geradores",
+  "moduleOrder": 7,
+  "ebookTitle": "Proteção de Geradores",
+  "ebookSubtitle": "As funções específicas da máquina síncrona: 87G, 40, 46, 32, 64 e mais",
+  "estimatedMinutes": 70,
+  "trailFiles": [
+    "t01_fundamentos_geradores.json",
+    "t02_aplicacoes_geradores.json",
+    "t03_protecoes_geradores.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — O Gerador e seus Riscos Únicos",
+      "subtitle": "Por que a máquina síncrona é especial",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O gerador como elemento crítico",
+          "type": "text",
+          "body": "O gerador síncrono é o coração da geração de energia — e um equipamento de altíssimo valor, com modos de falha próprios que não existem em outros equipamentos. Diferente de um transformador (passivo), o gerador é uma máquina ativa: produz tensão, tem um sistema de excitação, gira mecanicamente, e interage dinamicamente com o sistema. Isso cria riscos exclusivos — perda de excitação, motorização, sobre-excitação, faltas no rotor — que exigem proteções específicas."
+        },
+        {
+          "id": "s2",
+          "title": "Modos de falha exclusivos do gerador",
+          "type": "list",
+          "items": [
+            "Faltas no estator (entre fases, fase-terra, entre espiras)",
+            "Perda de excitação — o gerador perde o campo e passa a absorver reativo (risco de instabilidade)",
+            "Motorização — o gerador passa a consumir potência da rede e 'motoriza' a turbina (risco mecânico)",
+            "Desequilíbrio / sequência negativa — aquece intensamente o rotor",
+            "Sobre-excitação (V/Hz) — satura o núcleo",
+            "Faltas no rotor e perda de sincronismo (out-of-step)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Proteção integrada à máquina e à turbina",
+          "type": "note",
+          "body": "A proteção do gerador não atua isolada — ela se integra à proteção da turbina, ao sistema de excitação e ao regulador de velocidade. Um trip de gerador frequentemente envolve uma sequência coordenada: abrir o disjuntor, desexcitar o campo, e atuar na turbina (fechar válvulas de vapor/água). Essa coordenação entre as proteções elétricas e os sistemas mecânicos é uma característica única da proteção de geradores."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O gerador síncrono é uma máquina ativa de alto valor com modos de falha exclusivos: perda de excitação, motorização, desequilíbrio, sobre-excitação e faltas no rotor/estator. Sua proteção é a mais rica em funções específicas e se integra à turbina, à excitação e ao regulador — um trip envolve disjuntor, desexcitação e atuação na turbina de forma coordenada."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Proteção do Estator",
+      "subtitle": "Diferencial e faltas à terra",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Diferencial do gerador (87G)",
+          "type": "text",
+          "body": "A 87G protege o enrolamento do estator contra faltas entre fases, comparando as correntes nos dois terminais de cada fase (neutro e saída). Como os dois conjuntos de TCs são idênticos e não há defasagem nem inrush (diferente do transformador), a 87G é mais simples que a 87T e pode ser muito sensível. Atua instantaneamente para faltas internas no estator, que são severas e exigem eliminação imediata."
+        },
+        {
+          "id": "s2",
+          "title": "Proteção de falta à terra do estator (64G)",
+          "type": "text",
+          "body": "A proteção de falta à terra do estator depende de como o neutro do gerador é aterrado (geralmente por alta impedância, para limitar a corrente de falta à terra). A 95% (59N — sobretensão de neutro) cobre a maior parte do enrolamento, mas tem um ponto cego próximo ao neutro, onde a tensão de falta à terra é baixa. Para cobertura de 100%, usam-se técnicas adicionais (3ª harmônica ou injeção de sinal), garantindo que nenhuma parte do estator fique sem proteção de terra."
+        },
+        {
+          "id": "s3",
+          "title": "Por que o aterramento de alta impedância",
+          "type": "note",
+          "body": "Geradores costumam ter o neutro aterrado por alta impedância (resistor ou transformador de aterramento). A razão: limitar a corrente de falta à terra a valores baixos (amperes), reduzindo o dano ao núcleo do estator numa falta à terra interna (que, com corrente alta, poderia fundir o ferro do núcleo, exigindo reparo caríssimo). O preço é que a detecção da falta à terra precisa ser por tensão (59N), não por corrente — o que exige as técnicas de 100% de cobertura."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A 87G protege o estator contra faltas entre fases — simples e sensível (sem defasagem ou inrush). A falta à terra (64G) depende do aterramento, normalmente de alta impedância para limitar a corrente e proteger o núcleo; detecta-se por tensão de neutro (59N), com técnicas de 3ª harmônica/injeção para cobrir os 100% do enrolamento."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Proteções de Condições Anormais",
+      "subtitle": "As funções que só o gerador tem",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Perda de excitação (40)",
+          "type": "text",
+          "body": "Se o gerador perde a excitação (campo), ele não consegue mais manter a tensão e passa a absorver grande quantidade de reativo da rede para se manter magnetizado, podendo perder o sincronismo e sobreaquecer o rotor. A função 40 detecta essa condição monitorando a impedância vista nos terminais (que entra numa região característica no plano R-X quando há perda de campo) e atua para desconectar o gerador antes que cause instabilidade no sistema."
+        },
+        {
+          "id": "s2",
+          "title": "Potência reversa / motorização (32)",
+          "type": "text",
+          "body": "Se a turbina perde o suprimento de energia mecânica (falha de combustível, fechamento de válvula), o gerador, ainda conectado à rede, passa a consumir potência ativa e a girar como motor — 'motorizando' a turbina. Isso pode danificar a turbina (especialmente a vapor, por superaquecimento das pás com baixo fluxo). A função 32 (potência reversa) detecta o fluxo de potência ativa entrando no gerador e atua para protegê-lo."
+        },
+        {
+          "id": "s3",
+          "title": "Desequilíbrio / sequência negativa (46)",
+          "type": "text",
+          "body": "Correntes desequilibradas (de faltas assimétricas externas ou cargas desequilibradas) geram corrente de sequência negativa que, no gerador, induz correntes de dupla frequência no rotor, aquecendo-o intensamente e podendo danificá-lo rapidamente. A função 46 monitora a sequência negativa (I2) com uma característica I2²·t que reflete a capacidade térmica do rotor, atuando antes do dano. É uma proteção crítica para a integridade do rotor."
+        },
+        {
+          "id": "s4",
+          "title": "Sobre-excitação (24) e outras",
+          "type": "list",
+          "items": [
+            "24 (V/Hz) — sobre-excitação: tensão alta ou frequência baixa satura o núcleo (crítico na partida/parada)",
+            "81 (frequência) — sub/sobrefrequência",
+            "27/59 — sub/sobretensão",
+            "78 — perda de sincronismo (out-of-step)",
+            "64F — falta à terra do rotor (campo)",
+            "Proteções de retaguarda do sistema (21 ou 51V — sobrecorrente com restrição de tensão)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As proteções de condições anormais são a marca do gerador: 40 (perda de excitação, via impedância no plano R-X), 32 (potência reversa/motorização, protege a turbina), 46 (sequência negativa, protege o rotor com característica I2²·t), 24 (sobre-excitação V/Hz), além de 78 (out-of-step), 64F (terra do rotor) e 51V. São funções que não existem em outros equipamentos."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — O Esquema Completo de Proteção",
+      "subtitle": "Integração e filosofia de trip",
+      "estimatedMinutes": 10,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Tipos de trip do gerador",
+          "type": "list",
+          "items": [
+            "Trip total (shutdown) — abre o disjuntor, desexcita e atua na turbina (para faltas internas graves)",
+            "Trip do disjuntor + desexcitação — desconecta da rede e remove o campo",
+            "Trip do disjuntor apenas — desconecta mas mantém a máquina girando (para algumas condições do sistema)",
+            "Alarme — apenas sinaliza, para condições que não exigem trip imediato",
+            "A escolha do tipo de trip depende da natureza da falha"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "A matriz de trip",
+          "type": "text",
+          "body": "Cada função de proteção é associada a um tipo de trip numa 'matriz de trip' — um documento que define, para cada proteção, quais ações ela dispara (qual disjuntor, se desexcita, se atua na turbina, se apenas alarma). Essa matriz é o coração da lógica de proteção do gerador, e sua correta implementação e teste no comissionamento é fundamental: um trip que não desexcita, por exemplo, deixa o gerador alimentando uma falta interna mesmo após abrir o disjuntor."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O esquema do gerador define tipos de trip (total, com desexcitação, só disjuntor, alarme) conforme a natureza da falha, organizados numa matriz de trip que associa cada função às suas ações. A proteção de geradores é a mais rica e específica — 87G e 64G no estator, e as funções de condição anormal (40, 32, 46, 24, 78) que só a máquina síncrona possui — integrada à turbina e à excitação."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Esquemas Especiais de Proteção",
+  "moduleSubtitle": "Conceitos, aplicações e implementação de EAP/SEP",
+  "moduleOrder": 11,
+  "ebookTitle": "Esquemas Especiais de Proteção (SEP/EAP)",
+  "ebookSubtitle": "Proteção sistêmica: corte de carga, RAS/SPS e a defesa contra blackouts",
+  "estimatedMinutes": 60,
+  "trailFiles": [
+    "t01_conceitos_eap.json",
+    "t02_aplicacoes_eap.json",
+    "t03_implementacao_eap.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Da Proteção Local à Proteção Sistêmica",
+      "subtitle": "Quando proteger o equipamento não basta",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O conceito de esquema especial de proteção",
+          "type": "text",
+          "body": "A proteção convencional protege equipamentos individuais (linha, transformador, gerador) contra faltas. Mas o sistema elétrico como um todo pode entrar em colapso mesmo sem nenhuma falta de equipamento — por instabilidade, sobrecarga em cascata, ou desequilíbrio entre geração e carga. Os Esquemas Especiais de Proteção (SEP/EAP), também chamados de RAS (Remedial Action Schemes) ou SPS (System Protection Schemes), são proteções SISTÊMICAS: detectam condições anormais do sistema e tomam ações para preservar a integridade da rede, evitando o blackout."
+        },
+        {
+          "id": "s2",
+          "title": "Proteção convencional vs. sistêmica",
+          "type": "list",
+          "items": [
+            "Convencional — protege um equipamento contra falta; atua local e rapidamente",
+            "Sistêmica (SEP) — protege o sistema contra instabilidade/colapso; atua de forma ampla e coordenada",
+            "A convencional responde a curtos; a sistêmica responde a condições operativas (perda de geração, sobrecarga, baixa tensão/frequência)",
+            "A sistêmica frequentemente envolve múltiplas subestações e comunicação entre elas"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Por que os SEP existem",
+          "type": "note",
+          "body": "Grandes blackouts históricos (como o de 2009 no Brasil ou o de 2003 nos EUA) mostraram que a perda de poucos elementos pode cascatear para o colapso de todo o sistema interligado. Os SEP são a 'última linha de defesa' contra esses eventos: quando a proteção convencional não é suficiente para evitar a propagação, os esquemas especiais tomam ações drásticas e coordenadas (cortar carga, separar a rede em ilhas) para salvar o máximo do sistema. Eles trocam uma interrupção controlada e limitada por um blackout total."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os Esquemas Especiais de Proteção (SEP/EAP, RAS/SPS) são proteções sistêmicas que protegem a rede inteira contra instabilidade e colapso — não equipamentos individuais. Diferente da proteção convencional (local, contra faltas), eles respondem a condições operativas e atuam de forma ampla e coordenada. São a última linha de defesa contra blackouts em cascata, trocando uma interrupção controlada por um colapso total."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Tipos de Esquemas Especiais",
+      "subtitle": "As ações de defesa do sistema",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Corte de carga por subfrequência (UFLS)",
+          "type": "text",
+          "body": "Quando há um déficit de geração (perda de uma grande usina, separação de áreas), a frequência cai. O Esquema de Corte de Carga por Subfrequência (Underfrequency Load Shedding) corta carga em estágios conforme a frequência decai (ex.: cortar 5% em 58,5 Hz, mais 5% em 58,2 Hz...), restaurando o equilíbrio geração-carga antes que a frequência caia a ponto de desligar as próprias usinas (que têm proteção 81 e seriam perdidas, agravando o colapso). É o SEP mais comum e fundamental."
+        },
+        {
+          "id": "s2",
+          "title": "Outros tipos de corte e separação",
+          "type": "list",
+          "items": [
+            "UVLS (corte por subtensão) — corta carga quando a tensão colapsa, prevenindo o colapso de tensão",
+            "Corte de geração — em excesso de geração ou sobrecarga de linhas, reduz a injeção",
+            "Separação controlada (islanding) — divide o sistema em ilhas autossuficientes antes que o colapso se propague",
+            "Esquemas anti-colapso de tensão — chaveamento de reativo, bloqueio de tap de transformadores"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "RAS / SPS específicos",
+          "type": "text",
+          "body": "Muitos SEP são projetados sob medida para contingências específicas conhecidas de um sistema. Por exemplo: 'se a linha A e a linha B saírem simultaneamente, a usina C ficará instável — então, ao detectar essa contingência dupla, corte parte da geração da usina C automaticamente'. Esses esquemas RAS/SPS são definidos por estudos de estabilidade que identificam as contingências críticas e as ações remediais necessárias, programadas em controladores dedicados que monitoram as condições e disparam as ações."
+        },
+        {
+          "id": "s4",
+          "title": "A lógica baseada em eventos vs. em resposta",
+          "type": "note",
+          "body": "Há duas filosofias de SEP. A baseada em eventos (event-based) monitora contingências específicas (ex.: abertura de linhas) e dispara ações predefinidas — rápida, mas precisa antecipar os cenários. A baseada em resposta (response-based) monitora a resposta real do sistema (frequência, tensão, fluxos) e atua conforme a severidade medida — mais robusta a cenários imprevistos, porém um pouco mais lenta. Esquemas modernos combinam as duas para robustez e velocidade."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os SEP incluem corte de carga por subfrequência (UFLS, o mais comum, restaura o equilíbrio antes de perder as usinas), por subtensão (UVLS), corte de geração e separação controlada em ilhas. Os RAS/SPS específicos são feitos sob medida para contingências críticas identificadas em estudos. As filosofias event-based (rápida) e response-based (robusta) são combinadas nos esquemas modernos."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Implementação e Confiabilidade",
+      "subtitle": "Construindo um SEP confiável",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Arquitetura de um SEP",
+          "type": "text",
+          "body": "Um SEP típico tem três partes: a detecção (sensores e relés que medem as condições — frequência, tensão, fluxos, status de disjuntores em várias subestações), a lógica de decisão (um controlador que avalia as medições contra os critérios programados) e a ação (comandos de trip, corte de carga, redução de geração enviados a múltiplos pontos). Como envolve várias subestações, a comunicação rápida e confiável entre elas é parte crítica da arquitetura."
+        },
+        {
+          "id": "s2",
+          "title": "O dilema da confiabilidade ampliado",
+          "type": "note",
+          "body": "O dilema dependabilidade × segurança é ainda mais crítico nos SEP. Uma falha em atuar (baixa dependabilidade) pode resultar num blackout total — o pior cenário. Mas uma atuação indevida (baixa segurança) corta carga ou separa o sistema sem necessidade, causando uma interrupção desnecessária e grande. Como os SEP tomam ações drásticas e amplas, ambos os erros têm consequências severas — exigindo arquiteturas redundantes, lógica de votação e testes rigorosos."
+        },
+        {
+          "id": "s3",
+          "title": "Boas práticas de implementação",
+          "type": "list",
+          "items": [
+            "Redundância de detecção, lógica e comunicação (sem ponto único de falha)",
+            "Lógica de votação (ex.: 2 de 3) para evitar atuação por falha de um sensor",
+            "Comunicação determinística e supervisionada entre subestações",
+            "Documentação e estudos que justifiquem cada ação remedial",
+            "Testes periódicos end-to-end de todo o esquema",
+            "Coordenação com o operador do sistema (no Brasil, o ONS)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Um SEP tem detecção (medições em várias subestações), lógica de decisão (controlador) e ação (comandos amplos), com comunicação crítica entre subestações. O dilema dependabilidade × segurança é amplificado — falhar causa blackout, atuar indevido causa interrupção grande. Exige redundância, votação, comunicação supervisionada, estudos justificando cada ação e testes end-to-end periódicos."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Tendências e Visão Sistêmica",
+      "subtitle": "Wide-Area Protection e o futuro",
+      "estimatedMinutes": 9,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "WAMPAC e sincrofasores",
+          "type": "text",
+          "body": "A evolução dos SEP caminha para a proteção de área ampla (Wide-Area Monitoring, Protection and Control — WAMPAC), baseada em sincrofasores (PMUs — Phasor Measurement Units) sincronizados por GPS. As PMUs medem fasores de tensão e corrente em tempo real, com referência de tempo comum, em pontos distantes do sistema. Isso permite 'enxergar' o estado dinâmico de todo o sistema interligado e detectar instabilidades emergentes (oscilações, perda de sincronismo) antes que se tornem colapsos."
+        },
+        {
+          "id": "s2",
+          "title": "O valor da visão sistêmica",
+          "type": "note",
+          "body": "A grande mudança de paradigma dos SEP e do WAMPAC é a visão sistêmica: em vez de cada proteção 'olhar' apenas seu equipamento, a rede passa a ser monitorada e protegida como um todo coordenado. Isso é essencial num sistema cada vez mais complexo, com muita geração renovável intermitente, eletrônica de potência e fluxos variáveis. A proteção do futuro será cada vez mais adaptativa, comunicante e sistêmica — e os esquemas especiais são a vanguarda dessa transformação."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Os SEP evoluem para a proteção de área ampla (WAMPAC) com sincrofasores (PMUs sincronizados por GPS), que enxergam o estado dinâmico de todo o sistema e detectam instabilidades emergentes. A visão sistêmica — proteger a rede como um todo coordenado, não equipamentos isolados — é a fronteira da proteção, essencial num sistema com muita renovável e eletrônica de potência. Os esquemas especiais são a defesa final contra blackouts e a vanguarda da proteção moderna."
+        }
+      ]
+    }
+  ]
+}
