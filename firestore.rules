@@ -101,6 +101,10 @@ service cloud.firestore {
         allow read, write: if isSelf(uid);
       }
 
+      match /ebook_progress/{ebookId} {
+        allow read, write: if isSelf(uid);
+      }
+
       match /transactions/{txId} {
         allow read: if isSelf(uid);
         allow create: if isSelf(uid)
@@ -153,6 +157,12 @@ service cloud.firestore {
               allow write: if isAdmin();
             }
           }
+        }
+
+        // ── E-books (área de Estudos) ─────────────────────────────
+        match /ebooks/{ebookId} {
+          allow read: if isAuthenticated();
+          allow write: if isAdmin();
         }
       }
     }
