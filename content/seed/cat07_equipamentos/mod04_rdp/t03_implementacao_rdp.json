@@ -1,0 +1,213 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Registradores Digitais de Perturbação",
+  "moduleSubtitle": "RDP, oscilografia, COMTRADE e análise de perturbações",
+  "moduleOrder": 3,
+  "trail": "Implementação (COMTRADE e Integração)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que o parametro 'Captured Waveform Prior to Trigger' define na configuracao da oscilografia do rele?",
+      "options": [
+        "A duracao do registro no periodo pre-falta.",
+        "A duracao do registro no periodo pos-falta.",
+        "O tempo maximo de fechamento do disjuntor.",
+        "A taxa de amostragem em hertz da onda."
+      ],
+      "correctIndex": 0,
+      "explanation": "Esse parametro define a duracao do registro imediatamente anterior ao evento, constituindo a janela de pre-falta. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o parametro 'Captured Waveform after Event' estabelece na oscilografia?",
+      "options": [
+        "O ganho analogico do canal de tensao.",
+        "O tempo de gravacao mantido apos a eliminacao da falta.",
+        "O intervalo de tempo de pre-falta.",
+        "O nivel de disparo instantaneo do rele."
+      ],
+      "correctIndex": 1,
+      "explanation": "O ajuste define o tempo que o RDP continuara gravando apos a extincao do evento, o pos-falta. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as oscilografias e os registros de eventos sao predominantemente adquiridos em RDPs modernos?",
+      "options": [
+        "Por impressao direta em rolos de papel no painel.",
+        "Via inspecao visual diaria das bandeiras dos reles.",
+        "Remotamente atraves de modernos meios de comunicacao.",
+        "Pela analise mecanica de discos de inducao."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os dados digitais passaram a ser adquiridos remotamente via rede SCADA, otimizando tempo e dispensando visitas locais. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual formato de codigo de tempo serial e comumente associado ao receptor GPS para sincronizar os RDPs?",
+      "options": [
+        "NTP-Serial.",
+        "Modbus-RTU.",
+        "IRIG-B.",
+        "ASCII-8."
+      ],
+      "correctIndex": 2,
+      "explanation": "O GPS e normalmente utilizado com o protocolo IRIG-B para sincronizar os dispositivos na mesma base de tempo precisa. (Fonte: Ed50_marco_protecao).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a vantagem de parametrizar o gatilho da oscilografia como 'Trigger with Trip'?",
+      "options": [
+        "O registro so e salvo permanentemente se houver um comando de trip confirmado.",
+        "A oscilografia grava continuamente todos os ciclos do sistema sem sobrescrever.",
+        "O rele bloqueia a protecao principal de sobrecorrente.",
+        "A taxa de amostragem do rele e dobrada durante o arco."
+      ],
+      "correctIndex": 0,
+      "explanation": "A oscilografia parte com a deteccao, mas so guarda o arquivo se ocorrer o disparo, poupando memoria util. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o efeito indesejado de uma taxa de amostragem insuficiente no registrador digital de perturbacoes?",
+      "options": [
+        "Criacao de falsos alarmes termicos.",
+        "A forma de onda real fica mascarada e perde transientes de alta frequencia.",
+        "O relogio interno do RDP e resetado para os padroes de fabrica.",
+        "As correntes sao automaticamente convertidas para sequencia zero."
+      ],
+      "correctIndex": 1,
+      "explanation": "Taxas baixas causam o efeito aliasing, mascarando a onda e impedindo a analise de transientes rapidos e fenomenos de arco. (Fonte: Virtus-Anorm.Sist. Potencia).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos relatorios de perturbacao do IED, o que significa a sigla SER acompanhada da oscilografia?",
+      "options": [
+        "Synchronized Energy Register.",
+        "System Event Relay.",
+        "Sequential Events Recorder.",
+        "Serial Ethernet Router."
+      ],
+      "correctIndex": 2,
+      "explanation": "O SER (Sequential Events Recorder) lista a ordem cronologica exata das mudancas de estado digitais durante a falta. (Fonte: Ensaio de Reles Avancado).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No Brasil, qual entidade consolidou a analise de ocorrencias e coleta de oscilografias originada pelo antigo GCOI?",
+      "options": [
+        "Operador Nacional do Sistema Eletrico (ONS).",
+        "ANEEL.",
+        "Eletrobras.",
+        "ABNT."
+      ],
+      "correctIndex": 0,
+      "explanation": "O ONS herdou e sistematizou a coleta e o processamento de dados de perturbacoes e oscilografias no sistema interligado. (Fonte: Virtus-Anorm.Sist. Potencia).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o ajuste 'Max. length of a Waveform Capture Record' controla no rele?",
+      "options": [
+        "A potencia aparente consumida pelo RDP em watts.",
+        "A quantidade maxima de canais de tensao gravados.",
+        "O tamanho ou duracao total maxima de um unico registro oscilografico.",
+        "A resolucao de amplitude em bits do conversor analogico-digital."
+      ],
+      "correctIndex": 2,
+      "explanation": "O parametro estipula o tempo maximo (ex: 1.20 s) de duracao do arquivo de oscilografia gerado para cada evento. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em relacao ao protocolo IRIG-B usado no sincronismo do RDP, qual e a sua taxa de pulsos transmitida?",
+      "options": [
+        "1 pulso por segundo.",
+        "10 pulsos por segundo.",
+        "100 pulsos por segundo.",
+        "1000 pulsos por segundo."
+      ],
+      "correctIndex": 2,
+      "explanation": "O codigo de tempo IRIG-B possui uma taxa de sinal de temporizacao de 100 pulsos por segundo (PPS). (Fonte: Ed50_marco_protecao).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Modernos reles digitais agregam a funcionalidade nativa de oscilografia, eliminando a exigencia de registradores fisicos separados e isolados.",
+      "correctAnswer": true,
+      "explanation": "As protecoes digitais reúnem multiplas funcoes, como medicao, localizacao de defeitos e registro oscilografico em um unico hardware. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O parametro 'Captured Waveform after Event' define a duracao do registro pos-falta na configuracao da oscilografia.",
+      "correctAnswer": true,
+      "explanation": "Este ajuste dita quanto tempo o RDP continuara capturando e salvando dados logo apos a extincao do evento. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O padrao IRIG-B DCLS difere do IRIG-B tradicional por transmitir os pulsos de sincronismo sem o sinal de portadora de 1 kHz.",
+      "correctAnswer": true,
+      "explanation": "O IRIG-B normal modula os dados numa portadora de 1 kHz, enquanto a variacao DCLS transmite as transicoes DC sem portadora. (Fonte: Ed50_marco_protecao).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A coleta remota dos dados oscilograficos facilita a integracao do IED com os centros de operacao, reduzindo drasticamente o tempo de analise das.",
+      "correctAnswer": true,
+      "explanation": "A aquisicao remota de dados de eventos e oscilografia economiza o deslocamento de equipes e acelera os diagnosticos do sistema. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Registradores digitais do tipo 'stand alone' exigem testes periodicos de afericao de calibracao a cada 4 anos, exatamente como os reles.",
+      "correctAnswer": false,
+      "explanation": "Dispositivos digitais possuem autodiagnostico continuo, dispensando testes periodicos de afericao metrologica ou calibracao manual. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O arquivo tabular que acompanha a oscilografia e lista a ordem cronologica exata de atuacao de contatos e logicas no IED e chamado de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SER"
+        }
+      ],
+      "explanation": "O Sequential Events Recorder (SER) armazena a sequencia precisa de status digitais em milissegundos durante o disturbio. (Fonte: Ensaio de Reles Avancado).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A janela de gravacao da forma de onda que antecede o instante de disparo (gatilho) no RDP e definida no ajuste de registro _____-falta.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "pre"
+        }
+      ],
+      "explanation": "O ajuste 'Captured Waveform Prior to Trigger' assegura a gravacao da condicao de pre-falta imediatamente antes do inicio do surto. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O formato de codigo de sincronismo de tempo serial com 100 pulsos por segundo frequentemente associado a receptores GPS e o _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "IRIG-B"
+        }
+      ],
+      "explanation": "O protocolo IRIG-B e o padrao de tempo mais utilizado nas subestacoes para garantir a marcacao precisa das oscilografias registradas. (Fonte: Ed50_marco_protecao).",
+      "difficulty": "hard"
+    }
+  ]
+}

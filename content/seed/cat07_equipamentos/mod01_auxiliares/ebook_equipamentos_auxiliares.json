@@ -1,0 +1,173 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Equipamentos Auxiliares SPCS",
+  "moduleSubtitle": "Alimentação CC/CA, baterias, retificadores e serviços auxiliares",
+  "moduleOrder": 0,
+  "ebookTitle": "Equipamentos Auxiliares de SPCS",
+  "ebookSubtitle": "A alimentação que mantém a proteção viva: baterias, retificadores e serviços auxiliares CC/CA",
+  "estimatedMinutes": 60,
+  "trailFiles": [
+    "t01_fundamentos_auxiliares.json",
+    "t02_aplicacoes_auxiliares.json",
+    "t03_implementacao_baterias.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Por que os Serviços Auxiliares são Críticos",
+      "subtitle": "A energia que a proteção precisa para funcionar",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O paradoxo da alimentação da proteção",
+          "type": "text",
+          "body": "A proteção precisa funcionar exatamente quando há uma falta — momento em que a tensão da rede pode colapsar. Se a proteção dependesse da própria rede para se alimentar, ela falharia justamente quando mais é necessária. Por isso, todo o sistema de proteção, controle e supervisão (SPCS) é alimentado por serviços auxiliares independentes: bancos de baterias que garantem energia mesmo com a rede totalmente fora. Os auxiliares são a fundação invisível sobre a qual toda a proteção repousa."
+        },
+        {
+          "id": "s2",
+          "title": "Os sistemas auxiliares de uma subestação",
+          "type": "list",
+          "items": [
+            "Sistema de corrente contínua (CC) — baterias + retificadores; alimenta relés, bobinas de trip, sinalização",
+            "Sistema de corrente alternada (CA) auxiliar — serviços que toleram interrupção (iluminação, tomadas, motores)",
+            "Retificadores / carregadores de bateria — convertem CA em CC e mantêm a bateria carregada",
+            "Inversores / no-breaks (UPS) — para cargas CA críticas (SCADA, comunicação)",
+            "Quadros de distribuição CC e CA com proteção própria"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Tensões CC típicas",
+          "type": "note",
+          "body": "As tensões CC mais comuns em subestações são 125 Vcc (transmissão) e 48 Vcc (telecomunicações e sistemas menores), embora 24 Vcc e 220 Vcc também apareçam. A escolha equilibra a queda de tensão nos longos circuitos de comando (favorecendo tensões maiores) e a segurança/compatibilidade dos equipamentos. O dimensionamento do sistema CC considera a corrente de fechamento das bobinas de disjuntor, que pode ser elevada."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A proteção precisa funcionar quando a rede falha, por isso é alimentada por serviços auxiliares independentes — principalmente o sistema CC com baterias. Os auxiliares incluem CC (relés, trip), CA auxiliar, retificadores, no-breaks e quadros de distribuição. As tensões CC típicas são 125 Vcc e 48 Vcc. São a fundação invisível de todo o SPCS."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Baterias e Retificadores",
+      "subtitle": "O coração do sistema CC",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O banco de baterias",
+          "type": "text",
+          "body": "O banco de baterias é a fonte de energia garantida do sistema CC. Em operação normal, o retificador alimenta as cargas e mantém a bateria em flutuação (carregada). Quando a CA falha, a bateria assume instantaneamente, sem interrupção, alimentando a proteção e o comando pelo tempo de autonomia projetado (tipicamente algumas horas). A bateria é o que garante que um trip possa ser comandado mesmo num blackout total."
+        },
+        {
+          "id": "s2",
+          "title": "Tipos de bateria",
+          "type": "list",
+          "items": [
+            "Chumbo-ácido ventilada (VLA) — tradicional, longa vida, exige sala ventilada e manutenção",
+            "Chumbo-ácido regulada por válvula (VRLA) — selada, menos manutenção, vida menor",
+            "Níquel-cádmio (Ni-Cd) — robusta a temperaturas extremas, longa vida, maior custo",
+            "Cada tipo tem características de vida útil, manutenção e comportamento que afetam a escolha"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Modos de carga do retificador",
+          "type": "text",
+          "body": "O retificador (carregador) opera em diferentes modos: flutuação (float) — tensão constante que mantém a bateria carregada compensando a autodescarga, o modo normal; e equalização (boost) — tensão mais alta, periódica, que uniformiza a carga entre as células e recupera a bateria após uma descarga. A tensão de flutuação correta é crítica: muito alta acelera a corrosão e o consumo de água; muito baixa deixa a bateria sulfatar e perder capacidade."
+        },
+        {
+          "id": "s4",
+          "title": "Autonomia e dimensionamento",
+          "type": "note",
+          "body": "O dimensionamento do banco de baterias parte do perfil de carga (consumo contínuo + picos de fechamento de disjuntores) e do tempo de autonomia exigido (ex.: 5 a 10 horas, conforme a criticidade e o tempo de restauração da CA). Subdimensionar significa que, num blackout prolongado, a bateria pode descarregar e deixar a subestação sem proteção e sem comando — uma situação perigosa. O dimensionamento segue normas específicas (ex.: IEEE 485 para chumbo-ácido)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A bateria assume instantaneamente quando a CA falha, garantindo proteção e comando por horas. Os tipos (VLA, VRLA, Ni-Cd) variam em vida e manutenção. O retificador opera em flutuação (normal) e equalização (periódica), com tensão crítica para a saúde da bateria. O dimensionamento (autonomia, perfil de carga, normas como IEEE 485) garante que a bateria não falte num blackout prolongado."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Distribuição CC e Supervisão",
+      "subtitle": "Levar a energia com confiabilidade",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A distribuição CC",
+          "type": "text",
+          "body": "Do banco de baterias, a energia CC é distribuída por quadros para todas as cargas: relés, bobinas de trip e fechamento, sinalização, sistemas de comunicação. Cada circuito tem proteção própria (disjuntores ou fusíveis CC) dimensionada e coordenada — uma falta num circuito não pode derrubar todo o sistema CC. A interrupção de corrente contínua é mais difícil que a CA (não há passagem natural por zero), exigindo dispositivos específicos para CC."
+        },
+        {
+          "id": "s2",
+          "title": "Supervisão do sistema CC",
+          "type": "list",
+          "items": [
+            "Supervisão de tensão CC — alarme de tensão alta/baixa",
+            "Supervisão de aterramento (terra no CC) — detecta fuga de isolação, crítica pois um segundo terra pode causar operação indevida",
+            "Supervisão do circuito de trip (função 3) — monitora a integridade da bobina de trip e da fiação",
+            "Supervisão do retificador e do estado da bateria",
+            "Alarmes integrados ao SCADA para diagnóstico remoto"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O perigo do terra no sistema CC",
+          "type": "note",
+          "body": "O sistema CC de subestação é geralmente isolado da terra (não aterrado). Um primeiro contato acidental de um polo com a terra (terra no CC) não causa problema imediato, mas é um defeito latente: se um SEGUNDO terra surgir em outro ponto, pode fechar um circuito que energize uma bobina de trip indevidamente — causando uma operação espúria. Por isso a supervisão de terra no CC é essencial, alarmando o primeiro terra para que seja corrigido antes do segundo aparecer."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A distribuição CC leva energia a relés, bobinas e sinalização, com proteção coordenada por circuito (e dispositivos específicos para CC). A supervisão monitora tensão, aterramento, circuito de trip, retificador e bateria, integrada ao SCADA. O terra no CC isolado é um defeito latente perigoso — um segundo terra pode causar trip indevido — daí a criticidade da supervisão de aterramento."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Manutenção e Confiabilidade dos Auxiliares",
+      "subtitle": "Cuidar da fundação invisível",
+      "estimatedMinutes": 9,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Manutenção do banco de baterias",
+          "type": "list",
+          "items": [
+            "Medição periódica da tensão de cada célula (identificar células fracas)",
+            "Verificação da densidade do eletrólito e nível (em baterias ventiladas)",
+            "Teste de capacidade (descarga controlada) para confirmar a autonomia real",
+            "Inspeção de conexões (aperto, corrosão) e temperatura",
+            "Controle das condições da sala (temperatura, ventilação)"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "A falha silenciosa",
+          "type": "note",
+          "body": "O grande risco dos auxiliares é a falha silenciosa: uma bateria degradada parece normal em flutuação, mas não entrega a corrente necessária quando a CA cai — e isso só se descobre num blackout real, tarde demais. Por isso o teste de capacidade (descarga controlada) é insubstituível: é a única forma de comprovar que a bateria realmente entrega a autonomia projetada. Confiar apenas na tensão de flutuação dá uma falsa sensação de segurança."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A manutenção dos auxiliares inclui medição de células, densidade, teste de capacidade, inspeção de conexões e controle da sala. O maior risco é a falha silenciosa — uma bateria degradada só se revela num blackout real, por isso o teste de capacidade é insubstituível. Os serviços auxiliares são a fundação invisível do SPCS: sem eles, nenhuma proteção funciona quando mais se precisa."
+        }
+      ]
+    }
+  ]
+}

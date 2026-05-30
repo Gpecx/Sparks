@@ -1,0 +1,162 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Supervisão HMI-SCADA",
+  "moduleSubtitle": "Painéis HMI, sistemas SCADA e arquitetura de supervisão",
+  "moduleOrder": 5,
+  "ebookTitle": "Supervisão HMI e SCADA",
+  "ebookSubtitle": "Da interface local de operação à supervisão remota do sistema elétrico",
+  "estimatedMinutes": 55,
+  "trailFiles": [
+    "t01_fundamentos_hmi.json",
+    "t02_aplicacoes_hmi.json",
+    "t03_implementacao_arquitetura.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — O que é HMI e SCADA",
+      "subtitle": "Os olhos e as mãos do operador",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Definições",
+          "type": "text",
+          "body": "HMI (Human-Machine Interface — Interface Homem-Máquina) é a interface gráfica pela qual o operador visualiza o estado do sistema e envia comandos. SCADA (Supervisory Control and Data Acquisition — Controle Supervisório e Aquisição de Dados) é o sistema mais amplo que coleta dados de campo, os apresenta, registra históricos e permite o controle remoto de instalações distantes. A HMI é a 'tela' que o operador vê; o SCADA é toda a infraestrutura por trás que coleta, processa e armazena os dados de múltiplas instalações."
+        },
+        {
+          "id": "s2",
+          "title": "O que o SCADA faz",
+          "type": "list",
+          "items": [
+            "Aquisição de dados — coleta medições e estados dos IEDs e RTUs do campo",
+            "Supervisão — apresenta o estado do sistema em telas (unifilares, gráficos)",
+            "Controle — envia comandos de manobra remotos (com SBO e intertravamentos)",
+            "Alarmes — sinaliza condições anormais e exige reconhecimento do operador",
+            "Históricos e tendências — armazena dados para análise posterior",
+            "Registro de eventos (SOE) — sequência cronológica do que aconteceu"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A pirâmide da automação",
+          "type": "note",
+          "body": "O SCADA se encaixa numa hierarquia: no nível de campo (process bus), estão os equipamentos primários, merging units e sensores; no nível de bay, os IEDs de proteção e controle; no nível de estação, a HMI local e o gateway da subestação; e no nível de centro de operação (COS/COD), o SCADA corporativo que supervisiona muitas subestações. Cada nível agrega e abstrai a informação do nível abaixo. Entender essa hierarquia ajuda a situar onde cada função acontece."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A HMI é a interface gráfica de operação (a tela); o SCADA é o sistema amplo que coleta dados, supervisiona, controla remotamente, gera alarmes e registra históricos de múltiplas instalações. Ele se encaixa na pirâmide da automação — do campo ao bay, à estação e ao centro de operação — cada nível agregando a informação do anterior."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Arquitetura de Supervisão",
+      "subtitle": "Da subestação ao centro de operação",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A HMI local da subestação",
+          "type": "text",
+          "body": "Na subestação, a HMI local (na sala de comando) apresenta o unifilar da instalação com os estados em tempo real, permite manobras locais com SBO e intertravamentos, exibe alarmes e medições, e dá acesso aos registros. Ela é a estação de trabalho do operador local e o ponto de operação quando o controle remoto não está disponível. Na subestação digital, a HMI local é um software que se comunica com os IEDs via IEC 61850 (MMS)."
+        },
+        {
+          "id": "s2",
+          "title": "O gateway e a comunicação com o centro de operação",
+          "type": "text",
+          "body": "O gateway (ou RTU) da subestação concentra os dados dos IEDs e os disponibiliza ao centro de operação remoto, traduzindo entre os protocolos internos (IEC 61850/MMS) e os protocolos de telecontrole usados no enlace com o COS/COD (tipicamente DNP3 ou IEC 60870-5-104). Ele é a ponte entre o mundo da subestação e o mundo do centro de operação, fazendo a adaptação de protocolos e o mapeamento de pontos."
+        },
+        {
+          "id": "s3",
+          "title": "Redundância na supervisão",
+          "type": "list",
+          "items": [
+            "Servidores SCADA redundantes (principal e reserva, com failover automático)",
+            "Gateways/RTUs redundantes na subestação",
+            "Múltiplos canais de comunicação com o centro de operação",
+            "HMI local independente, que opera mesmo sem o centro remoto",
+            "A redundância garante que a supervisão e o controle não tenham ponto único de falha"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A HMI local apresenta o unifilar, permite manobras (SBO/intertravamento) e exibe alarmes/medições, comunicando-se com os IEDs via MMS. O gateway/RTU concentra os dados e os leva ao centro de operação, traduzindo entre IEC 61850 e protocolos de telecontrole (DNP3/104). A redundância (servidores, gateways, canais, HMI local) elimina pontos únicos de falha na supervisão."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Telas, Alarmes e Boas Práticas de HMI",
+      "subtitle": "Interface que ajuda o operador a decidir",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O projeto das telas",
+          "type": "text",
+          "body": "Uma boa HMI não é apenas bonita — ela ajuda o operador a tomar decisões corretas rapidamente, especialmente sob estresse de um evento. Boas práticas (como as da norma ISA-101) recomendam telas claras, com hierarquia de informação, uso comedido de cores (cor com significado, não decoração), destaque para anomalias, e navegação intuitiva. Uma tela poluída ou com cores mal usadas pode esconder a informação crítica no momento em que ela mais importa."
+        },
+        {
+          "id": "s2",
+          "title": "Gestão de alarmes",
+          "type": "note",
+          "body": "A gestão de alarmes é um dos aspectos mais críticos e mais negligenciados da supervisão. O 'dilúvio de alarmes' (alarm flood) — centenas de alarmes disparando simultaneamente num evento — pode paralisar o operador, escondendo o alarme realmente importante. Boas práticas (norma ISA-18.2 / EEMUA 191) incluem: priorizar alarmes por criticidade, eliminar alarmes redundantes e supérfluos, agrupar alarmes relacionados, e garantir que cada alarme exija uma ação clara. Um sistema de alarmes bem projetado guia o operador; um mal projetado o sobrecarrega."
+        },
+        {
+          "id": "s3",
+          "title": "Cores e estados padronizados",
+          "type": "list",
+          "items": [
+            "Cores com significado consistente (ex.: vermelho = energizado/fechado, verde = desenergizado/aberto — ou a convenção adotada)",
+            "Estados de equipamento claramente distinguíveis (aberto, fechado, em trânsito, inválido)",
+            "Indicação clara de qualidade do dado (válido, suspeito, indisponível)",
+            "Destaque visual e sonoro para alarmes não reconhecidos"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Uma boa HMI (ISA-101) ajuda o operador a decidir rápido sob estresse: telas claras, hierarquia, cores com significado e destaque para anomalias. A gestão de alarmes (ISA-18.2/EEMUA 191) evita o dilúvio de alarmes — priorizando, eliminando redundâncias e exigindo ação clara. Cores e estados padronizados e a indicação de qualidade do dado completam a interface eficaz."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Integração e Tendências",
+      "subtitle": "SCADA na era digital",
+      "estimatedMinutes": 8,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Integração com sistemas corporativos",
+          "type": "text",
+          "body": "O SCADA moderno não fica isolado — integra-se com sistemas de gestão (EMS — Energy Management System, gestão de ativos, manutenção, faturamento) por interfaces padronizadas (OPC-UA, ICCP entre centros de operação). Essa integração transforma os dados operativos em informação para decisões de negócio: previsão de carga, gestão da manutenção baseada em condição, e otimização da operação. O SCADA é a fonte de dados que alimenta toda a inteligência operacional."
+        },
+        {
+          "id": "s2",
+          "title": "Cibersegurança da supervisão",
+          "type": "note",
+          "body": "Com a integração e a conectividade, o SCADA tornou-se um alvo de ciberataques que podem ter consequências físicas graves (desligamentos, danos a equipamentos). A cibersegurança (normas IEC 62443, IEC 62351) é hoje parte indissociável do projeto de supervisão: segmentação de redes, controle de acesso, criptografia, monitoramento de intrusão e atualização gerenciada. Proteger o SCADA é proteger a operação do sistema elétrico contra ameaças digitais."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O SCADA moderno integra-se a sistemas corporativos (EMS, gestão de ativos) via OPC-UA/ICCP, transformando dados operativos em inteligência de negócio. A cibersegurança (IEC 62443/62351) é parte indissociável da supervisão, dada a conectividade. HMI e SCADA — da interface local ao centro de operação, com boas práticas de tela, alarmes e segurança — são os olhos e as mãos da operação do sistema elétrico."
+        }
+      ]
+    }
+  ]
+}

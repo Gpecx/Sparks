@@ -1,0 +1,213 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Supervisão HMI-SCADA",
+  "moduleSubtitle": "Painéis HMI, sistemas SCADA e arquitetura de supervisão",
+  "moduleOrder": 5,
+  "trail": "Fundamentos de Supervisão HMI-SCADA",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Onde os computadores de IHM local e o Gateway estao tipicamente posicionados na arquitetura da IEC 61850?",
+      "options": [
+        "No nivel de processo junto aos sensores.",
+        "No nivel de bay interligando as chaves.",
+        "No nivel de estacao interligados pelo station bus.",
+        "Diretamente na sala do centro nacional de despacho."
+      ],
+      "correctIndex": 2,
+      "explanation": "Na arquitetura padronizada da norma IEC 61850, as estacoes de operacao, servidores HMI e Gateways encontram-se operando no nivel de estacao por meio do station bus.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na padronizacao focada em telecomando e supervisao remota, qual protocolo interage nativamente operando no perfil de redes TCP-IP?",
+      "options": [
+        "IEC 60870-5-104",
+        "MODBUS-RTU",
+        "IEC 60870-5-103",
+        "IEEE 802.1Q"
+      ],
+      "correctIndex": 0,
+      "explanation": "O protocolo IEC 60870-5-104 fornece o perfil de comunicacao sobre redes TCP-IP para envio confiavel de telecontrole e informacoes SCADA.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual modelo estrutural o SCADA utiliza para coletar relatorios de eventos (MMS) a partir dos reles do nivel de bay?",
+      "options": [
+        "Modelo Publish-Subscribe distribuido via Multicast nativo.",
+        "Modelo Cliente-Servidor baseado no estabelecimento formal de conexao.",
+        "Arquitetura de Token Ring utilizando a passagem de permissao ciclica.",
+        "Configuracao Mestre-Escravo aplicada em enlaces puramente seriais RS-485."
+      ],
+      "correctIndex": 1,
+      "explanation": "A comunicacao vertical de relatorios e telemetria usa o protocolo MMS, que atua no modelo Cliente-Servidor com conexoes ponto-a-ponto estabelecidas nas sete camadas OSI.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a finalidade primordial do Gateway instalado no nivel de estacao perante a arquitetura total do sistema de automacao?",
+      "options": [
+        "Isolar as tensoes primarias no barramento de processo.",
+        "Compatibilizar e mapear os dados internos para protocolos de telecontrole (como DNP3 ou IEC 104) rumo ao Centro de Operacao remoto.",
+        "Disparar diretamente o bloco de protecao instantanea nas falhas criticas.",
+        "Interligar e converter transformadores opticos em medidores de demanda."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Gateway atua como fronteira de telecontrole, concentrando dados do station bus e comunicando com os Centros de Controle de Operacao (NCC) utilizando protocolos de telemetria remota.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o SCADA local exibe consistentemente a ordem exata dos eventos cronologicos ocorridos durante falhas no link da IHM?",
+      "options": [
+        "Baseando-se em interrogacoes unbuffered exclusivas.",
+        "Recebendo Buffered Reports (BRCB) que asseguram e transmitem os eventos guardados com suas estampas de tempo (time stamp).",
+        "Apoiando-se no relogio interno padrao do microcomputador no instante da leitura.",
+        "Por deducao estatistica gerada baseando-se no endereco MAC do equipamento afetado."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os Buffered Reports guardam eventos com estampas temporais precisas no IED e os transferem quando o link volta, garantindo a integridade dos logs Sequence of Events (SOE) no SCADA.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre na execucao de um comando utilizando a mecanica Select Before Operate (SBO) no sistema de supervisao SCADA?",
+      "options": [
+        "O operador solicita a manobra e ela atua fisicamente em fracoes de microssegundo.",
+        "O sistema seleciona e bloqueia a chave logica aguardando a confirmacao antes de expedir a autorizacao final de operacao.",
+        "O disjuntor analisa o status de falta e opera decidindo de maneira solitaria.",
+        "O SCADA impede e trava as malhas GOOSE ate que todas as chaves finalizem o percurso."
+      ],
+      "correctIndex": 1,
+      "explanation": "No cenario do SBO (Select Before Operate), a rotina de atuacao se divide no passo primario de selecao para validacao seguido do pulso de confirmacao do operar logico.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Com base na modelagem de responsabilidades da norma, qual rol de tarefas cabe inteiramente as funcoes tipicas abrigadas no nivel de estacao (SCADA/HMI)?",
+      "options": [
+        "Coletar sinais puramente analogicos efetuando sincronismo veloz e amostral.",
+        "Promover o envio massivo de multicast para isolar rapidamente as falhas em barramento.",
+        "Gerir restritamente a integridade autonoma dos limites termicos dos transformadores de medicao.",
+        "Garantir a integracao logica manuseando os eventos os alarmes as armazenagens e os controles operacionais interativos."
+      ],
+      "correctIndex": 3,
+      "explanation": "Operacao de chaves, armazenagem de dados, lista de eventos e gerencia de alarmes sao alocacoes base que caracterizam os potentes sistemas computacionais abrigados nas operacoes do nivel de estacao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No convivio em paineis e centros de operacao, como os engenheiros e tecnicos interagem ativamente com a manobra do sistema utilizando os padroes modernos?",
+      "options": [
+        "Preenchendo matrizes de planilhas de blocos de controle de dados via codigo linha a linha.",
+        "Navegando nos esquemas com diagrama unifilar dinamico atrelado a faceplates acopladas aos sinais reais.",
+        "Forcando a memoria fisica pelo display acoplado no gateway conversor do protocolo.",
+        "Monitorando registros de comunicacao UDP injetados ininterruptamente nos buffers remotos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A interacao padrao foca em telas exibindo o diagrama unifilar da planta em tempo real e abrindo faceplates que espelham perfeitamente o arranjo de status e comandos mapeados do frontal.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na parametrizacao da IEC 61850 para suportar grandes comunicacoes SCADA, o que reprime o disparo em avalanche e previne que o servidor sobrecarregue os canais?",
+      "options": [
+        "A operacao nativa que tranca as mensagens restritamente aos canais de radios seriais dedicados.",
+        "O agrupamento das variacoes notaveis moldado em Data Sets associado ao estrito regulamento imposto pelo Report Control Block.",
+        "O bloqueio geral programado no switch local suprimindo todo tipo de alerta apos 3 ocorrencias.",
+        "O uso dos contadores Ethernet nativos para interromper envios prolongados e suprimir o MAC respectivo."
+      ],
+      "correctIndex": 1,
+      "explanation": "Datasets aglomeram e consolidam pontualmente os dados estrategicos da estacao. Os RCBs disciplinam estas variaveis emitindo relatorios de supervisao e vetando avalanches que causariam colapso.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Embora perfeitamente flexivel e estavel nos servicos rotineiros do sistema local o modelo Cliente-Servidor (MMS) inviabiliza aplicacoes ligadas a trips velozes devido a que caracteristica limitante?",
+      "options": [
+        "Sua construcao dispensa o roteamento IP para depender exclusivamente da serializacao de cabos dedicados.",
+        "Seu processamento empenhar as 7 camadas completas OSI baseadas em conexoes consumindo tempo incompativel para as funcoes criticas.",
+        "Exigir rotuladores de MAC estaticos inviabilizando adaptabilidades nas malhas com switches interativos.",
+        "Recusar codigos para variaveis booleanas e operar unicamente focando nos perfis integrados fasoriais e matematicos."
+      ],
+      "correctIndex": 1,
+      "explanation": "MMS envolve negociacoes profundas e confirmacoes rodando toda a pilha TCP-IP OSI que somam milissegundos excessivos, incapacitando o protocolo de atuar na faixa de tempo restrita a trips.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Sistemas de supervisionamento IHM posicionados internamente nas subestacoes possibilitam as equipes de plantao interagir visualmente com operacoes de disjuntores e consolidam alarmes locais vitais.",
+      "correctAnswer": true,
+      "explanation": "O Station Level engloba ativamente IHMs, concedendo representacoes graficas amigaveis localizadas nas sedes propiciando ao mantenedor atestar condicoes operacionais via unifilar.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A adesao universal as plataformas em IEC 61850 bane e reprime categoricamente os lacos de comunicacao legados direcionados ao despacho corporativo como os protocolos DNP3 e o IEC 60870-5-104.",
+      "correctAnswer": false,
+      "explanation": "Longe de erradicar os perfis antigos, o sistema da subestacao emprega flexiveis gateways orientados a decodificar as tabelas da 61850 para as sintaxes DNP3 ou 104 alinhando-se as bases telemetricas vigentes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao impor o requisito Select Before Operate vinculado as configuracoes do modelo enhanced security as ordens garantem o bloqueio exclusivista de atuacao validando a acao confiavel contra operacoes simultaneas desgovernadas.",
+      "correctAnswer": true,
+      "explanation": "A tecnica do SBO with enhanced security aciona lacos logicos verificadores confirmando a estabilidade da manobra e segurando as acoes cruzadas evitando colapsos na supervisao SCADA.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Atuando com um formato agregador e ciclico a interface de comunicacao vertical consolidando o modelo da subestacao do bay para a estacao adquire a caracterizacao funcional de um potente aspirador de dados.",
+      "correctAnswer": true,
+      "explanation": "A literatura da norma ilustra esse intenso fluxo reportado verticalmente engolindo blocos e logicas pontuais provenientes de cada bay rumo as centrais como a funcionalidade de um Data Vacuum Cleaner.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Composicoes e blocos base que organizam a malha de informacoes (Application Service Data Unit) na transmissao IEC 60870-5-104 adotam comumente na abertura um primeiro byte formatado invariavelmente exibindo 68H na camada de controle APCI.",
+      "correctAnswer": true,
+      "explanation": "Nas modelagens deste protocolo telemecanico tcp, o bloco estrutural encarregado do controle inicia compulsoriamente (START) exibindo a sentinela no byte prefixado no formato 68H visando ancorar o alinhamento da mensagem.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na catalogacao e avaliacao metodica mantida ativamente pelo SCADA a compreensao das acoes logicas ordenadas depende profundamente da cronologia garantida e agrupada pelas descricoes que utilizam a sigla inglesa _____, listando sequencialmente as anomalias e ocorrencias fidedignas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SOE"
+        }
+      ],
+      "explanation": "O agrupamento ou Sequence of Events (SOE) representa a colecao historiada dos processos mantendo o alinhamento rigoroso gerado baseando-se nos apontamentos dos reports confiaveis.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As grandezas fisicas despachadas junto as codificacoes dos pacotes do protocolo de telecontrole IEC 60870-5-104 formam os atributos vitais do bloco contido e modelado inteiramente sob a abreviacao de aplicacao _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ASDU"
+        }
+      ],
+      "explanation": "Os payloads portadores reais dos conteudos, identificadores do tipo de informacao util e causa de transmissao na norma IEC 104 integram o estamento denominado Application Service Data Unit (ASDU).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A area grafica na IHM acessivel instantaneamente pelos controladores e mantenedores sempre que uma seletividade isolada ou disjuntor logico no diagrama sofre interacao exibe de imediato o panorama espelhado de suas condicoes atraves da tela dedicada tecnicamente chamada de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "faceplate"
+        }
+      ],
+      "explanation": "A interacao SCADA expande do unifilar principal subjanelas modulares e frontais virtuais de comando, consagradas no segmento pelo mnemonico tecnico correspondente a faceplate de operacao.",
+      "difficulty": "hard"
+    }
+  ]
+}

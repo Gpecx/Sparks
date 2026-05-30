@@ -1,0 +1,213 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Infraestrutura de Rede SPCS",
+  "moduleSubtitle": "Switches, fibra, VLANs, topologias e redundância",
+  "moduleOrder": 1,
+  "trail": "Implementação e Diagnóstico de Rede",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Para capturar e analisar o trafego GOOSE com o Wireshark em uma rede comutada, qual ajuste e obrigatorio na porta do switch?",
+      "options": [
+        "Habilitar o espelhamento de porta (Port Mirroring).",
+        "Desabilitar a seguranca MAC Address.",
+        "Ativar o Spanning Tree Protocol.",
+        "Mudar a interface para o modo Half-Duplex."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Port Mirroring copia os pacotes da rede para uma unica porta auxiliar, permitindo a captura integral pelo software analisador sem causar interrupcoes no processo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual protocolo padrao e utilizado pela engenharia para monitorar o status e contadores de erro das portas do switch remotamente?",
+      "options": [
+        "SNMP",
+        "GOOSE",
+        "MMS",
+        "ARP"
+      ],
+      "correctIndex": 0,
+      "explanation": "O Simple Network Management Protocol (SNMP) e usado para ler diagnosticos, status operacionais e gerenciar ativamente parametros de ativos de rede industriais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante o diagnostico fisico das portas de fibra otica no modulo de comunicacao, qual parametro atesta uma boa qualidade de sinal luminoso na recepcao?",
+      "options": [
+        "O OptLevel com valores superiores a 2000 mV.",
+        "O RxCRCErrFrm igual a 100 por cento.",
+        "A tensao de LinkUp operando em 5 Volts.",
+        "A taxa de colisao nTxLateCollision proxima a 10."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os manuais de troubleshooting atestam que um nivel eletro-optico (OptLevel) saudavel em links fisicos estabelecidos deve figurar com voltagem superior a 2000 mV.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas ferramentas de diagnostico de rede aplicadas a subestacoes, qual arquivo e capaz de importar as configuracoes de IP e a topologia logica dos IEDs automaticamente?",
+      "options": [
+        "Arquivo SCD",
+        "Arquivo MIB",
+        "Arquivo PDF",
+        "Arquivo COMTRADE"
+      ],
+      "correctIndex": 0,
+      "explanation": "O arquivo SCD (Substation Configuration Description) consolida a arquitetura completa, enderecamento IP e as conexoes GOOSE e pode ser processado pelo software de mapeamento da rede.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual configuracao basica implementada nos switches industriais impede que tempestades de broadcast paralisem a comunicacao inteira da planta?",
+      "options": [
+        "Limitadores de banda por porta (Port Rate Limiting).",
+        "Espelhamento irrestrito de trafego de dados.",
+        "Extensao indiscriminada dos limites do payload Ethernet.",
+        "Desativacao compulsoria de todas as VLANs nativas na LAN."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os limitadores de banda estipulam tetos maximos de taxa de transmissao por porta para prevenir que anomalias de injecao massiva de broadcast asfixiem as malhas de rede operantes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante o troubleshooting de comunicacao, o que ocorre se um pacote GOOSE for despachado para a rede segmentada sem marcacao de VLAN (untagged)?",
+      "options": [
+        "O switch descarta a mensagem sumariamente bloqueando a porta fisica do dispositivo.",
+        "Ele recebe a atribuicao da VLAN nativa da porta, podendo burlar as restricoes e vazar indevidamente para outras plantas.",
+        "A rotina interna do switch converte o quadro L2 GOOSE diretamente num relatorio L7 MMS.",
+        "A prioridade inerente da mensagem e amplificada imediatamente para o limite maximo de operacao."
+      ],
+      "correctIndex": 1,
+      "explanation": "Pacotes untagged herdam a VLAN nativa indiscriminada (como a do MMS). Isso permite evadir aos bloqueios especificos montados para confinar a referida VLAN GOOSE, resultando em acoes acidentais longinquas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao investigar a quebra temporaria de um anel e a reconfiguracao logica do RSTP no concentrador de acesso, qual registro de eventos evidencia de forma rapida essa alteracao de caminhos?",
+      "options": [
+        "Total Topology Changes",
+        "nRxMismatchTel",
+        "nFrameLoss",
+        "Bridge Priority"
+      ],
+      "correctIndex": 0,
+      "explanation": "O registro Total Topology Changes e ativamente incrementado no roteador de borda toda vez que ha uma mudanca fisica percebida ou recalculo de rotas pela quebra do laco optico.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na avaliacao puramente tecnica de frames Ethernet interceptados com auxilio de um sniffer como o Wireshark, qual Ethertype especifico comprova o trafego de um datagrama GOOSE?",
+      "options": [
+        "0x8100",
+        "0x0800",
+        "0x88b8",
+        "0x88ba"
+      ],
+      "correctIndex": 2,
+      "explanation": "As camadas inferiores desenhadas para o protocolo IEC 61850 reservam formalmente o Ethertype 0x88b8 como identificador fixo para todas as transmissoes baseadas em regras GOOSE nativas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao processar contadores lidos via gerenciador de rede nas malhas do modulo IED, qual variavel alerta quanto a recepcao de frames corrompidos e descartados pelo hardware no nivel inferior?",
+      "options": [
+        "nRxCRCErrFrm",
+        "nTxHeartBeat",
+        "nRxMatchedTel",
+        "LinkUpChan1"
+      ],
+      "correctIndex": 0,
+      "explanation": "O parametro de falha nRxCRCErrFrm contabiliza o somatorio de tramas danificadas recebidas que apresentaram quebras na integridade ou erro de verificacao de redundancia ciclica (CRC).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No comissionamento da Qualidade de Servico (QoS) nos equipamentos comutadores, que valor tipico costuma ser validado na tag de prioridade 802.1Q de mensagens criticas para assegurar tratamento VIP nas filas?",
+      "options": [
+        "0",
+        "1",
+        "4",
+        "7"
+      ],
+      "correctIndex": 2,
+      "explanation": "Nas arquiteturas aderentes a norma, prioriza-se ativamente as mensagens horizontais criticas aplicando o valor 4 no campo PRI (Prioridade) dos marcadores de Ethernet avancada.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Softwares analisadores conhecidos por sniffers realizam comissionamentos e analises praticas processando a captura continua de frames diretamente na interface local ligada ao barramento Ethernet da planta.",
+      "correctAnswer": true,
+      "explanation": "O analisador de pacotes extrai dados da camada de rede avaliando a integridade das marcacoes VLANs, o fluxo temporal repassado pelo publicador GOOSE e eventuais divergencias logicas do processo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos exames severos de redundancia amparados unicamente pelo protocolo legado Spanning Tree (STP), o desligamento instantaneo ou corte de uma fibra no campo manifesta recomposicao imediata atestada pela total ausencia de lacunas de transmissao no sniffer.",
+      "correctAnswer": false,
+      "explanation": "As diretrizes pontuam que lacos reconfigurados puramente com as geracoes primitivas de STP sofrem latencias e perdas substanciais em funcao de etapas metodicas operacionais de escuta, nao caracterizando tolerancia seamless.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O monitoramento de qualidade logica em arquiteturas criticas atesta que a inclusao da tag IEEE 802.1Q embute um identificador reservando nativamente 12 bits para a VLAN e 3 bits para a aplicabilidade de priorizacoes de fila QoS.",
+      "correctAnswer": true,
+      "explanation": "A moldura avancada e certificada IEEE 802.1Q/p altera as cabecas MAC das tramas preenchendo as tags estruturais vitais necessarias a identificacao dos caminhos estritos das VLANs e alocamento das prioridades operacionais em nivel de comutador.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A ativacao satisfatoria dos planos taticos que preveem o confinamento logico em usinas modernas e verificada assim que as regras severas nos switches de uplink proibirem emissoes de quadros listados saindo do ambiente original.",
+      "correctAnswer": true,
+      "explanation": "A tecnica de confinamento e efetivada aplicando listas estritas de negacao para as VLAN ID correspondentes aos pacotes GOOSE, enclausurando eficientemente a transmissao perigosa dessas trocas no perimetro abrigado da area estipulada.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na rotina de troubleshooting via base de dados de gestao, localizar acrescimos sucessivos no status do MIB nomeado nRxMismatchTel aponta deficiencias irrecuperaveis geradas pela invasao em massa e colisao originada por falhas eletricas fisicas.",
+      "correctAnswer": false,
+      "explanation": "O parametro de controle logico nRxMismatchTel mensura meramente as injecoes sadias recepcionadas que cruzaram o modulo mas cujo conteudo da comunicacao nao constava ou era indiferente para as inscricoes enderecadas da aplicacao logica subjacente do proprio IED.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nas configuracoes mandatorias destinadas a auditar fluxos colossais das interligacoes centrais rumo ao dispositivo portatil do comissionador, o sistema operacional do switch demanda o ajuste referenciado como Port _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Mirroring"
+        }
+      ],
+      "explanation": "A solucao tecnica denominada de Port Mirroring reflete e encaminha sigilosamente copias identicas do intercambio comutado destinando-os exclusivamente a interface designada ao analisador de pacotes para mapeamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para ratificar comportamentos defensivos dinamicos avaliados perante o bloqueio simulado de roteamentos opticos do laco logico fechado no protocolo RSTP, fiscaliza-se no software nativo a frequencia do historico da estatistica Total Topology _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Changes"
+        }
+      ],
+      "explanation": "As alteracoes arborescentes de recomposicao causadas por supressoes subitas de continuidade na arquitetura provocam elevacoes categoricas nas afericoes rotuladas de Topology Changes catalogadas pelo switch mestre.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Buscando extrair e visualizar os apontadores intrinsecos de confiabilidade dos lacos operantes sem paralisar transacoes em curso o pessoal emprega estacoes alinhadas ao padrao Simple Network Management Protocol referenciado no jargao geral por _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SNMP"
+        }
+      ],
+      "explanation": "A especificacao administrativa SNMP confere acesso a bases indexadas permitindo extracoes nao intrusivas do panorama fisico das conexoes, falhas em checksum e status gerais requeridos no monitoramento industrial remoto.",
+      "difficulty": "hard"
+    }
+  ]
+}

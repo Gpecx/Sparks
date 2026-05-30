@@ -1,0 +1,213 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Merging Units (Digitalização)",
+  "moduleSubtitle": "MUs, IEC 61850-9-2, comissionamento e fabricantes",
+  "moduleOrder": 6,
+  "trail": "Comissionamento e Fabricantes",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Ao utilizar um analisador de rede para capturar e comissionar o fluxo de Sampled Values, qual Ethertype especifico atesta a identificacao destes pacotes no barramento?",
+      "options": [
+        "0x0800",
+        "0x8100",
+        "0x88B8",
+        "0x88BA"
+      ],
+      "correctIndex": 3,
+      "explanation": "A pilha de comunicacao IEC 61850 reserva explicitamente o Ethertype 0x88BA para a identificacao nativa do trafego de Sampled Values.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a precisao critica de sincronismo de tempo exigida durante os testes para a correta comparacao de ondas e fasores via Sampled Values?",
+      "options": [
+        "Cerca de 1 segundo.",
+        "Cerca de 1 milissegundo.",
+        "Cerca de 1 microssegundo.",
+        "Cerca de 1 minuto."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para funcoes como o calculo de fasores e comparacao de ondas senoidais, o sincronismo das amostras demanda alta precisao, ao redor de 1 microssegundo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No comissionamento da redundancia para barramentos criticos, como o protocolo PRP transmite os pacotes para garantir zero tempo de recuperacao?",
+      "options": [
+        "Desativando portas ativas temporariamente usando Spanning Tree.",
+        "Usando roteamento TCP direto em cabos seriais dedicados.",
+        "Transmitindo simultaneamente os pacotes clonados pelas redes independentes LAN A e LAN B.",
+        "Comutando a rota IP apenas apos a falha confirmada do link principal."
+      ],
+      "correctIndex": 2,
+      "explanation": "O PRP envia frames duplicados e simultaneos por duas arquiteturas Ethernet paralelas isoladas, garantindo recomposicao sem perda de amostras.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento e citado normativamente como ferramenta capaz de simular entradas analogicas e medir o tempo de reacao de trip durante o comissionamento do sistema?",
+      "options": [
+        "O switch Ethernet gerenciavel.",
+        "A mala de teste de protecao.",
+        "O Gateway serial mestre.",
+        "O servidor OPC corporativo."
+      ],
+      "correctIndex": 1,
+      "explanation": "Ferramentas como a mala de teste sao recomendadas para ensaios de injecao de sinais, simulacao de faltas e medicao precisa do tempo do trip.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual arquivo padronizado da engenharia e importado pelas ferramentas de teste para simular processos e equipamentos faltantes na planta?",
+      "options": [
+        "Arquivo XML de interface web.",
+        "Arquivo MIB de gerencia SNMP.",
+        "Arquivo SCD do sistema.",
+        "Arquivo COMTRADE de oscilografia."
+      ],
+      "correctIndex": 2,
+      "explanation": "O arquivo SCD fornece a topologia completa e as definicoes do projeto, habilitando simuladores a testar logicas de equipamentos nao montados fisicamente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante os ensaios logicos da medicao, qual atributo nativo atesta aos IEDs assinantes a validade e a integridade da amostra recebida?",
+      "options": [
+        "O atributo ctlModel.",
+        "O atributo de qualidade q.",
+        "O atributo de estampa de tempo t.",
+        "O atributo de status booleano stVal."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Data Attribute q (quality) acompanha o dado de medicao para certificar as funcoes assinantes sobre a condicao de validade e sanidade do sinal gerado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual funcionalidade suportada pelo modelo de dados permite aos mantenedores imputar valores ficticios a sinais do IED para diagnosticar logicas de supervisao sem atuar em carga?",
+      "options": [
+        "O servico de Substituicao manipulado pelos atributos subEna e subVal.",
+        "O envio massivo de broadcast storming direcionado na porta.",
+        "A remocao fisica sucessiva das fibras oticas do painel traseiro.",
+        "O bloqueio do sincronismo SNTP local gerando drift cronologico."
+      ],
+      "correctIndex": 0,
+      "explanation": "O mecanismo de substitution facilita os ensaios no SCADA forcando estados simulados (subVal) ao habilitar o flag de teste local (subEna).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre nativamente na modelagem dos IEDs para alertar a perda ou falha severa do sinal de relogio GPS utilizado na amostragem?",
+      "options": [
+        "A ativacao subita do alarme de saude BatFail.",
+        "A ativacao da variavel de estado ClkFail mapeada logicamente no LPHD0.",
+        "O desligamento automatico preventivo do disjuntor principal da planta.",
+        "A conversao compulsoria dos dados L2 para o formato serial Modbus."
+      ],
+      "correctIndex": 1,
+      "explanation": "Anomalias fisicas no sincronismo da fonte horaria ativam o indicativo ClkFail presente nos registros do Logical Node de diagnostico LPHD0.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas capturas de pacotes de dados ageis via Wireshark, qual parametro hexadecimal presente nos detalhes da PDU identifica estritamente a aplicacao original do publicador?",
+      "options": [
+        "O campo IP Address de destino.",
+        "A variavel Time Allowed to Live.",
+        "O identificador AppID da mensagem.",
+        "A versao nativa do protocolo ARP."
+      ],
+      "correctIndex": 2,
+      "explanation": "A analise de nivel L2 demonstra que o Application ID (AppID) carrega e expoe a identificacao de qual bloco de dados e remetente emite aquele fluxo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao avaliar falhas apos atualizacoes de firmware as-built, qual parametro atesta que o emissor e os receptores do fluxo operam perfeitamente na mesma revisao configurada?",
+      "options": [
+        "O MAC Address estatico cravado fisicamente na placa.",
+        "A verificacao harmonica do numero contido em ConfRev do bloco de controle.",
+        "O indicador Ethertype 0x88B8 puro do cabecalho Ethernet.",
+        "O valor cumulativo lido nativamente no contador de operacoes OpCnt."
+      ],
+      "correctIndex": 1,
+      "explanation": "Erros de comunicacao como o ConfRev mismatch barram assinaturas caso o Configuration Revision da base transmitida destoe das assinaturas projetadas na recepcao.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Softwares analisadores de protocolo como o Wireshark sao comumente utilizados no comissionamento de campo para capturar e inspecionar pacotes decodificando a malha do barramento.",
+      "correctAnswer": true,
+      "explanation": "O sniffer de rede examina e audita o trafego instantaneo das comunicacoes garantindo a checagem das tags e valores transitados.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em testes dinamicos de sistema onde vaos estao parcialmente concluidos, as interacoes logicas podem ser averiguadas simulando virtualmente os IEDs a partir dos arquivos descritivos SCD.",
+      "correctAnswer": true,
+      "explanation": "As diretrizes atestam que a topologia formal arquivada no SCD sustenta operacoes de simulacao em softwares avancados validando a performance sem a peca fisica.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A documentacao as-built requer consistencia centralizada garantindo que as modificacoes finais exportadas em campo sejam preservadas unicamente sobre um arquivo SCL de referencia unificado.",
+      "correctAnswer": true,
+      "explanation": "Evitando perdas e discrepancias funcionais o material corrobora a importancia na gestao das versoes extraidas armazenando-as nos descritivos globais do banco da engenharia.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O atributo categorizado como Test atrelado ao quadro publicado informa ao IED assinante que o valor recebido pertence as praticas de ensaio e invalida seu emprego em comandos reais na planta.",
+      "correctAnswer": true,
+      "explanation": "Acionar e transitar com a indicacao do Test Mode defende o arranjo impedindo que lances de teste propiciem deflagracoes de disparos operacionais legitimos indesejados.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos ensaios rigorosos testando rompimento da fibra otica sob a batuta do antigo protocolo STP, as tramas prioritarias comutam de laco de forma imperceptivel possuindo recomposicao agil igual a do PRP.",
+      "correctAnswer": false,
+      "explanation": "Enquanto o PRP demonstra comportamento transparente operando redes duplas, a recuperacao do STP abrange cortes parciais devido a calculos lentos da sua arvore de redirecionamento.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para auditar a precisao do sincronismo das amostras e atestar retardos na base do relogio frente ao mestre, utiliza-se a afericao de desvio temporal catalogada nos diagnosticos web como Tx _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "diff"
+        }
+      ],
+      "explanation": "A apuracao cronometrica extraida das respostas SNTP expressa o parametro Tx diff determinando a discrepancia real avaliada no equipamento durante avaliacoes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Ao simular perturbacoes gravissimas no sensor, o bit agregador de qualidade indica condicao duvidosa e carente de confirmacao alterando tecnicamente o campo descritivo respectivo para o status logico _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "questionable"
+        }
+      ],
+      "explanation": "Quando uma distorcao detectada pelas premissas das funcoes afeta a medicao mantendo-a suspeita o protocolo assinala o indicativo do diagnostico formatado como questionable.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O colapso originado pelo descarte imediato da leitura no destino durante etapas pos-testes provocado pela falta de atualizacao do arquivo da base de dados reporta nos trace logs a classica anomalia identificada como _____ mismatch.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "confRev"
+        }
+      ],
+      "explanation": "A listagem interna de erros atesta e cancela fluxos desequilibrados emitindo as avaliacoes de divergencia rotuladas textualmente de confRev mismatch caso edicoes nao se alinhem.",
+      "difficulty": "hard"
+    }
+  ]
+}

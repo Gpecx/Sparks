@@ -1,0 +1,168 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Controle SPCS",
+  "moduleSubtitle": "Bay control, comando, intertravamento e SBO",
+  "moduleOrder": 4,
+  "ebookTitle": "Controle de SPCS",
+  "ebookSubtitle": "Bay controllers, comando seguro (SBO) e intertravamentos da subestação",
+  "estimatedMinutes": 55,
+  "trailFiles": [
+    "t01_fundamentos_controle.json",
+    "t02_aplicacoes_controle.json",
+    "t03_implementacao_controle.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos do Controle de Subestação",
+      "subtitle": "Comandar com segurança",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é o controle de SPCS",
+          "type": "text",
+          "body": "Enquanto a proteção atua automaticamente em faltas, o controle trata das manobras operacionais: abrir e fechar disjuntores e seccionadoras, comutar taps de transformadores, ligar e desligar bancos de capacitores — comandos iniciados por operadores (local ou remotamente) ou por automação. O controle de SPCS deve garantir que essas manobras sejam executadas de forma segura, correta e rastreável, evitando operações que coloquem em risco pessoas e equipamentos."
+        },
+        {
+          "id": "s2",
+          "title": "Níveis de controle",
+          "type": "list",
+          "items": [
+            "Local no equipamento — comando direto no próprio disjuntor/seccionadora (manutenção)",
+            "Local no painel / bay controller — comando no painel da bay, na subestação",
+            "Local na sala de comando (HMI da subestação) — supervisão e comando de toda a subestação",
+            "Remoto (centro de operação / SCADA) — comando à distância pelo COS/COD",
+            "A chave Local/Remoto define quem tem o comando, evitando conflitos"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O bay controller (controlador de bay)",
+          "type": "text",
+          "body": "Na subestação digital, cada bay (vão — conjunto de equipamentos de um circuito: disjuntor, seccionadoras, TCs, TPs) tem um controlador de bay (bay controller), um IED que concentra o controle e a supervisão daquele vão. Ele executa os comandos, aplica os intertravamentos, lê os estados dos equipamentos, e comunica-se com o nível de estação (HMI/SCADA) via IEC 61850. O bay controller frequentemente integra também funções de medição e, às vezes, de proteção — sendo o cérebro de controle de cada circuito."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O controle trata das manobras operacionais (abrir/fechar disjuntores, comutar taps), iniciadas por operadores ou automação, de forma segura e rastreável. Os níveis de controle vão do local no equipamento ao remoto no centro de operação, com a chave Local/Remoto definindo quem comanda. O bay controller é o IED que concentra controle e supervisão de cada vão na subestação digital."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Comando Seguro: Select-Before-Operate (SBO)",
+      "subtitle": "Evitando manobras acidentais",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O risco do comando direto",
+          "type": "text",
+          "body": "Um comando de manobra numa subestação tem consequências sérias: abrir o disjuntor errado pode desenergizar cargas críticas; fechar uma seccionadora sob carga pode causar um arco elétrico catastrófico. Um único clique acidental no equipamento errado é um risco real. Para evitá-lo, o controle de SPCS usa o protocolo Select-Before-Operate (SBO) — selecionar antes de operar — que adiciona uma etapa de confirmação deliberada antes de qualquer manobra."
+        },
+        {
+          "id": "s2",
+          "title": "Como funciona o SBO",
+          "type": "list",
+          "items": [
+            "1. Seleção — o operador seleciona o equipamento e a ação desejada (ex.: abrir disjuntor X)",
+            "2. Verificação — o sistema confere os intertravamentos e responde se a seleção é válida",
+            "3. Confirmação — o operador confirma deliberadamente a operação selecionada",
+            "4. Execução — só então o comando é efetivamente enviado ao equipamento",
+            "Um timeout cancela a seleção se a confirmação não vier a tempo"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "SBO no IEC 61850",
+          "type": "note",
+          "body": "O IEC 61850 padroniza o SBO em seus modelos de controle: SBOes (Select-Before-Operate enhanced security), que exige a sequência seleção-confirmação com verificação, e o controle direto (direct control) para casos menos críticos. O modelo de controle 'enhanced security' adiciona ainda uma confirmação de que o comando foi efetivamente executado. Essa padronização garante que o comando seguro funcione de forma interoperável entre equipamentos de diferentes fabricantes."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Comandos de manobra têm consequências sérias — abrir/fechar o equipamento errado pode causar desligamentos ou arco. O Select-Before-Operate (SBO) previne manobras acidentais com a sequência selecionar → verificar → confirmar → executar, com timeout. O IEC 61850 padroniza o SBO (incluindo enhanced security com confirmação de execução), garantindo comando seguro e interoperável."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Intertravamentos",
+      "subtitle": "Impedindo manobras perigosas",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que são intertravamentos",
+          "type": "text",
+          "body": "Intertravamentos (interlocks) são condições lógicas que IMPEDEM uma manobra perigosa, mesmo que o operador a comande. Eles garantem que os equipamentos só sejam operados numa sequência segura. O exemplo clássico: uma seccionadora (chave sem capacidade de interromper corrente) só pode ser aberta ou fechada com o disjuntor correspondente ABERTO — operar uma seccionadora sob carga causaria um arco elétrico destrutivo. O intertravamento bloqueia o comando de seccionadora se o disjuntor estiver fechado."
+        },
+        {
+          "id": "s2",
+          "title": "Exemplos de intertravamentos típicos",
+          "type": "list",
+          "items": [
+            "Seccionadora só manobra com disjuntor aberto (evita arco em chave sem capacidade de corte)",
+            "Seccionadora de aterramento só fecha com a linha/barra comprovadamente desenergizada",
+            "Não fechar disjuntor sobre seccionadora de aterramento fechada",
+            "Transferência de barra: sequência segura de manobra das chaves",
+            "Verificação de sincronismo (25) antes de fechar disjuntor de paralelismo"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Intertravamento por hardware e por software",
+          "type": "note",
+          "body": "Os intertravamentos podem ser implementados em hardware (relés auxiliares, contatos elétricos em série no circuito de comando — robustos, independentes) e em software (lógica no bay controller — flexíveis, fáceis de modificar). A prática moderna combina os dois: o software fornece a lógica abrangente e a interface, enquanto intertravamentos de hardware críticos servem de retaguarda independente. Para manobras especialmente perigosas, a redundância de hardware + software é uma camada de segurança importante."
+        },
+        {
+          "id": "s4",
+          "title": "Intertravamento de estação vs. de bay",
+          "type": "text",
+          "body": "Intertravamentos de bay envolvem apenas os equipamentos de um vão (ex.: disjuntor e suas seccionadoras) e podem ser resolvidos localmente. Intertravamentos de estação envolvem condições de outros vãos ou de toda a subestação (ex.: uma transferência de barra que depende do estado de vários circuitos) e exigem que o bay controller conheça o estado dos demais — o que, na subestação digital, é feito pela troca de informação via GOOSE entre os bay controllers. A correta implementação e teste dos intertravamentos é parte crítica do comissionamento."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Intertravamentos impedem manobras perigosas mesmo que comandadas — o clássico é a seccionadora só manobrar com o disjuntor aberto (evita arco). Exemplos incluem seccionadora de aterramento, transferência de barra e sincronismo. Podem ser por hardware (robusto) e software (flexível), idealmente combinados. Intertravamentos de estação usam GOOSE para conhecer o estado de outros vãos."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Automação e Rastreabilidade",
+      "subtitle": "Sequências automáticas e registro de comandos",
+      "estimatedMinutes": 8,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Sequências automáticas de manobra",
+          "type": "text",
+          "body": "Além dos comandos individuais, o controle moderno permite sequências automáticas: transferência automática de fonte (ATS) ao perder a alimentação principal, restauração automática após falta, sequências de manobra programadas. Essas automações reduzem o tempo de restauração e os erros humanos, mas devem respeitar todos os intertravamentos e o SBO em cada passo — uma automação que ignore a segurança das manobras seria perigosa."
+        },
+        {
+          "id": "s2",
+          "title": "Registro e rastreabilidade",
+          "type": "note",
+          "body": "Todo comando de manobra deve ser registrado: quem comandou, de onde, quando, qual ação, e se foi bem-sucedido (registro sequencial de eventos — SOE). Essa rastreabilidade é essencial para a investigação de incidentes (uma manobra incorreta) e para a auditoria operacional. Na subestação digital, esses registros são automáticos e sincronizados no tempo, integrados ao SCADA — permitindo reconstruir exatamente a sequência de comandos e estados em qualquer evento."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A automação (transferência de fonte, restauração, sequências) reduz tempo e erros, sempre respeitando intertravamentos e SBO. A rastreabilidade (SOE — quem, de onde, quando, qual ação) é essencial para investigação e auditoria, automática e sincronizada na subestação digital. O controle de SPCS — bay controllers, SBO, intertravamentos e automação rastreável — garante manobras seguras e confiáveis."
+        }
+      ]
+    }
+  ]
+}

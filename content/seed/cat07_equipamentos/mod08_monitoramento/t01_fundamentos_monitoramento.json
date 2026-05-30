@@ -1,0 +1,213 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Monitoramento SPCS",
+  "moduleSubtitle": "Automonitoração, supervisão de trip e diagnóstico",
+  "moduleOrder": 7,
+  "trail": "Fundamentos de Monitoramento",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a funcao do dispositivo watchdog em um rele digital?",
+      "options": [
+        "Reseta o sistema caso ocorra erro no programa principal.",
+        "Supervisiona a corrente de fuga a terra no equipamento.",
+        "Conta o numero de partidas sucessivas do disjuntor.",
+        "Desliga o banco de capacitores em falha."
+      ],
+      "correctIndex": 0,
+      "explanation": "O watchdog dispara um reset ao sistema caso ocorra alguma condicao de erro no laco do programa. (Fonte: Ed50_marco_protecao_seletividade)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual funcao ANSI e dedicada a supervisao do circuito de trip do disjuntor?",
+      "options": [
+        "ANSI 50BF.",
+        "ANSI 74TC.",
+        "ANSI 60.",
+        "ANSI 27."
+      ],
+      "correctIndex": 1,
+      "explanation": "A funcao ANSI 74TC refere-se a Trip Circuit Supervision, essencial para a confiabilidade do disparo. (Fonte: Virtus_ProtLT)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A funcao ANSI 60 e responsavel por supervisionar qual evento especifico na subestacao?",
+      "options": [
+        "Saturacao do nucleo magnetico dos TCs.",
+        "Desgaste mecanico dos contatos do disjuntor.",
+        "Queima de fusiveis dos transformadores de potencial.",
+        "Perda de pressao do gas isolante SF6."
+      ],
+      "correctIndex": 2,
+      "explanation": "A funcao 60 supervisiona a queima de fusiveis de TPs checando a variacao assimetrica da tensao. (Fonte: ed58_fasc_protecao)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal vantagem da automonitoracao continua em IEDs?",
+      "options": [
+        "Reduz imediatamente a corrente de curto-circuito na barra.",
+        "Detecta defeitos internamente sem aguardar a proxima manutencao.",
+        "Elimina a necessidade fisica de disjuntores de potencia.",
+        "Disputa o canal de comunicacao otico com as mensagens GOOSE."
+      ],
+      "correctIndex": 1,
+      "explanation": "A autodiagnose e o monitoramento continuo permitem a deteccao imediata de falhas de software e hardware. (Fonte: Virtus_CProtBL2Cd3)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a caracteristica de autocheck verifica rotineiramente no rele digital?",
+      "options": [
+        "O tempo real de abertura mecanica do disjuntor no patio.",
+        "A temperatura interna da cabine primaria de forca.",
+        "Se todas as suas funcoes internas estao operativas e corretas.",
+        "O fator de potencia atualizado da instalacao industrial."
+      ],
+      "correctIndex": 2,
+      "explanation": "O autocheck verifica continuamente se todas as funcoes e componentes do rele estao operativos e corretos. (Fonte: Ed50_marco_protecao_seletividade)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o IED reage apos a funcao ANSI 60 confirmar a queima do fusivel do TP?",
+      "options": [
+        "Envia um sinal de trip tripolar instantaneo para o barramento.",
+        "Bloqueia todas as funcoes de protecao que utilizam tensao para operar.",
+        "Eleva a tensao de excitacao do gerador sincrono.",
+        "Aterra imediatamente as fases do circuito de alta tensao."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para evitar falsa operacao, a funcao 60 retira de operacao o regulador e bloqueia protecoes dependentes de tensao. (Fonte: ed58_fasc_protecao)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a protecao digital realiza o autoteste do circuito de saida de trip sem impactar a operacao?",
+      "options": [
+        "Ignorando temporariamente as correntes de sequencia zero medidas.",
+        "Aplicando um nivel de DC elevado diretamente na entrada analogica.",
+        "Demandando sinal interno de trip enquanto isola o circuito de controle externo.",
+        "Utilizando as chaves de aterramento rapido presentes no alimentador."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para testar as saidas de disparo de modo seguro, o controle externo ao disjuntor e isolado logicamente. (Fonte: Virtus_CProtBL2Cd3)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a logica de monitoramento de disjuntor aciona caso ele esteja inoperante durante uma falta?",
+      "options": [
+        "Gera um trip tripolar instantaneo para os demais disjuntores da barra.",
+        "Desabilita a gravacao da oscilografia local de eventos.",
+        "Muda a curva temporizada da protecao para tempo muito inverso.",
+        "Encerra a comunicacao remota no barramento de processo."
+      ],
+      "correctIndex": 0,
+      "explanation": "Se o disjuntor supervisionado nao esta operativo, ocorre trip instantaneo para isolar os demais disjuntores associados a barra. (Fonte: Virtus_ProtBarras)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o periodo de indisponibilidade de protecao imposto pelo monitoramento continuo do IED?",
+      "options": [
+        "Aproximadamente 100 milissegundos por varredura.",
+        "Algumas horas consecutivas a cada teste anual.",
+        "Zero, a protecao permanece ativa ininterruptamente.",
+        "Metade do tempo especificado para a janela de oscilografia."
+      ],
+      "correctIndex": 2,
+      "explanation": "Diferente dos tradicionais testes manuais, o monitoramento continuo roda em paralelo e possui periodo sem protecao igual a zero. (Fonte: Virtus_CProtBL2Cd3)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o monitoramento continuo do rele atesta a integridade de seus proprios ajustes em memoria EPROM?",
+      "options": [
+        "Comparando as diferencas entre dois conjuntos iguais de ajustes armazenados.",
+        "Injetando corrente de sequencia negativa constante nas entradas.",
+        "Lendo os registradores fisicos de eventos do SCADA central.",
+        "Aferindo a impedancia eletrica dos cabos da rede ethernet local."
+      ],
+      "correctIndex": 0,
+      "explanation": "O IED valida seus ajustes comparando ciclicamente as diferencas entre dois conjuntos idênticos contidos na memoria nao volatil. (Fonte: Virtus_CProtBL2Cd3)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A autodiagnose e o monitoramento continuo dos IEDs reduzem as atuacoes incorretas e dispensam a necessidade de afericoes periodicas manuais de.",
+      "correctAnswer": true,
+      "explanation": "Esses recursos atestam com seguranca a integridade de processamento do rele sem a necessidade da antiga afericao metrologica eletromecanica. (Fonte: Virtus_CProtBL2Cd3)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A funcao ANSI 60 monitora a queima de fusivel comparando assimetrias de tensoes entre dois conjuntos distintos de TPs conectados ao sistema.",
+      "correctAnswer": true,
+      "explanation": "O esquema habitual utiliza dois conjuntos de TPs, e o rele cruza os sinais de uma mesma fase para checar a perda isolada de potencial. (Fonte: ed58_fasc_protecao)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o autoteste de 100 ms executado de forma ciclica pelos reles numericos, o sistema de potencia permanece sem qualquer atuacao de protecao.",
+      "correctAnswer": false,
+      "explanation": "O intervalo do autoteste isolado e da ordem de 100 ms e o monitoramento continuo tem tempo zero de indisponibilidade, nao durando horas. (Fonte: Virtus_CProtBL2Cd3)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A supervisao automatica dos TCs no IED e realizada conferindo continuamente se os somatorios fasoriais medidos respeitam limites logicos maximos e.",
+      "correctAnswer": true,
+      "explanation": "A saude dos circuitos de entrada (TC e TP) e avaliada usando equacoes que delimitam as janelas aceitaveis de somatorio e simetria do sistema trifasico. (Fonte: Virtus_CProtBL2Cd3)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A mensagem de stole alarm e disparada e reportada pelo sistema sempre que o IED perde o contato fisico com o disjuntor devido ao rompimento dos.",
+      "correctAnswer": false,
+      "explanation": "O stole alarm e na verdade um pulso de confirmacao OK enviado ciclicamente para indicar a um hardware externo que o programa do rele opera sem travamentos. (Fonte: Virtus_CProtBL2Cd3)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O mecanismo embarcado responsavel por forcar um reset seguro caso ocorram travamentos inesperados no software do rele digital e o _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "watchdog"
+        }
+      ],
+      "explanation": "O componente watchdog funciona como um guardiao de ciclo de clock, disparando o rearme do processador quando o programa fica inoperante. (Fonte: Ed50_marco_protecao_seletividade)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para atestar ao sistema de controle externo que o laco de programa roda em plena normalidade, o IED emite ciclicamente o sinal stole _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "alarm"
+        }
+      ],
+      "explanation": "O sinal de stole alarm encaminha pulsos que confirmam a atividade e saude contínua do sistema operacional do rele. (Fonte: Virtus_CProtBL2Cd3)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A funcao ANSI 60 avalia a simetria de tensao na entrada para bloquear as atuacoes equivocadas do rele digital no caso de queima de fusivel dos _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "TPs"
+        }
+      ],
+      "explanation": "A funcao identifica a perda de potencial originada pela queima do fusivel primario ou secundario dos Transformadores de Potencial. (Fonte: ed58_fasc_protecao_capXI)",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Merging Units (Digitalização)",
+  "moduleSubtitle": "MUs, IEC 61850-9-2, comissionamento e fabricantes",
+  "moduleOrder": 6,
+  "ebookTitle": "Merging Units e a Digitalização da Medição",
+  "ebookSubtitle": "A interface entre o mundo analógico e o process bus IEC 61850-9-2",
+  "estimatedMinutes": 55,
+  "trailFiles": [
+    "t01_fundamentos_mu.json",
+    "t02_aplicacoes_mu.json",
+    "t03_comissionamento_mu.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — O que é uma Merging Unit",
+      "subtitle": "Digitalizando corrente e tensão na fonte",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A função da MU",
+          "type": "text",
+          "body": "A Merging Unit (MU) é o equipamento que digitaliza as grandezas analógicas (corrente e tensão) na fonte e as publica na rede como Sampled Values (SV). Ela se conecta aos TCs/TPs convencionais (ou a sensores ópticos/não-convencionais), amostra os sinais com alta taxa e precisão, agrega (merge) as amostras de todos os canais com uma estampa de tempo comum, e as transmite pelo process bus. A MU é a ponte entre o mundo analógico tradicional e o mundo digital do IEC 61850."
+        },
+        {
+          "id": "s2",
+          "title": "Por que digitalizar na fonte",
+          "type": "list",
+          "items": [
+            "Elimina a fiação de cobre de TC/TP até a sala de relés (longos cabos sujeitos a EMI)",
+            "Acaba com o risco de TC com secundário aberto (a MU fica junto ao TC)",
+            "Permite sensores não-convencionais (ópticos) sem saturação e com ampla faixa",
+            "Um único fluxo SV alimenta vários IEDs (compartilhamento da medição)",
+            "Reduz burden e problemas de fiação secundária"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "MU convencional vs. NCIT",
+          "type": "note",
+          "body": "Há dois cenários: a MU 'stand-alone' conectada a TCs/TPs convencionais (digitaliza os 5A/115V tradicionais — uma evolução incremental que reaproveita os transformadores existentes); e os transformadores de instrumentação não-convencionais (NCIT — sensores ópticos/Rogowski) que já incorporam a MU e entregam SV diretamente. Os NCIT eliminam a saturação e oferecem faixa enorme, mas exigem toda a cadeia digital. A escolha depende do nível de digitalização da subestação."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A Merging Unit digitaliza corrente e tensão na fonte, agrega as amostras com estampa de tempo comum e as publica como Sampled Values no process bus — a ponte entre o analógico e o IEC 61850. Digitalizar na fonte elimina fiação de cobre, o risco de TC aberto e a saturação (com NCIT), e permite compartilhar a medição entre vários IEDs."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — IEC 61850-9-2 e os Sampled Values",
+      "subtitle": "O padrão do process bus",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O process bus",
+          "type": "text",
+          "body": "O process bus é a rede que conecta o nível de processo (MUs, sensores, atuadores) ao nível de bay (IEDs de proteção e controle). É por ele que trafegam os Sampled Values das MUs e os GOOSE de trip para os disjuntores. Separar o process bus do station bus (que carrega MMS e GOOSE de nível de estação) é uma prática comum, pois o tráfego intenso e contínuo dos SV exige uma rede dedicada e bem dimensionada."
+        },
+        {
+          "id": "s2",
+          "title": "A norma IEC 61850-9-2 e o '9-2LE'",
+          "type": "text",
+          "body": "A IEC 61850-9-2 define o formato e a transmissão dos Sampled Values. Como a norma original deixava margem para variações, a indústria criou o perfil '9-2 Light Edition' (9-2LE) — uma especificação de implementação que padroniza taxas de amostragem (80 amostras/ciclo para proteção, 256 para qualidade de energia/medição) e o conteúdo das mensagens, garantindo a interoperabilidade entre MUs e IEDs de fabricantes diferentes. O 9-2LE tornou-se o padrão de fato do process bus."
+        },
+        {
+          "id": "s3",
+          "title": "Taxas de amostragem e tráfego",
+          "type": "formula",
+          "formula": "Pacotes/s = amostras_por_ciclo × frequência   (ex.: 80 × 60 = 4800 quadros/s)",
+          "explanation": "Cada MU publica milhares de quadros SV por segundo continuamente (4800/s para proteção a 60 Hz). Com várias MUs na rede, o tráfego é intenso e constante — o que exige dimensionar a rede do process bus com banda adequada, priorização e, idealmente, segregação por VLAN. É um tráfego de natureza muito diferente do GOOSE (esporádico)."
+        },
+        {
+          "id": "s4",
+          "title": "A dependência crítica do sincronismo",
+          "type": "note",
+          "body": "Os Sampled Values exigem sincronismo de tempo rigoroso entre as MUs (via PTP/IEEE 1588). Se duas MUs amostram em instantes ligeiramente diferentes, uma proteção que compara correntes de fontes distintas (diferencial) verá um erro de ângulo que pode causar operação indevida. Por isso o PTP é parte indissociável do process bus, e a perda de sincronismo deve ser detectada — levando a proteção a bloquear em vez de operar com dados não confiáveis."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O process bus conecta MUs/sensores aos IEDs, carregando SV e GOOSE de trip, separado do station bus por causa do tráfego intenso. A IEC 61850-9-2, no perfil 9-2LE, padroniza taxas (80/256 amostras/ciclo) e interoperabilidade. O tráfego é contínuo e intenso (4800 quadros/s a 60 Hz), exigindo rede dimensionada. O sincronismo PTP é crítico — sua perda deve bloquear a proteção."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Comissionamento e Aplicação de MUs",
+      "subtitle": "Testando a cadeia digital de medição",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que muda no comissionamento",
+          "type": "text",
+          "body": "Comissionar uma MU é diferente de comissionar a fiação de TC convencional. Verifica-se: a conexão analógica de entrada (TC/TP à MU), a configuração da MU (relação, escala, identificação), a publicação correta dos SV na rede (com analisador de protocolo), a recepção pelos IEDs assinantes, e a qualidade do sincronismo PTP. A injeção de teste pode ser analógica (na entrada da MU) ou digital (a mala publica SV simulando a MU para testar os IEDs)."
+        },
+        {
+          "id": "s2",
+          "title": "Roteiro de comissionamento de MU",
+          "type": "list",
+          "items": [
+            "Verificar a fiação analógica de entrada (TC/TP à MU) e a polaridade",
+            "Conferir a configuração (relação, identificação SV, taxa de amostragem)",
+            "Injetar corrente/tensão na entrada e confirmar os SV publicados (sniffer)",
+            "Verificar que os IEDs assinantes recebem e processam corretamente os SV",
+            "Confirmar a qualidade e a sincronização PTP",
+            "Testar o comportamento na perda de SV ou de sincronismo (bloqueio adequado)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Interoperabilidade entre fabricantes",
+          "type": "note",
+          "body": "Um ponto crítico: a MU de um fabricante deve ser corretamente assinada pelo IED de outro fabricante. Apesar do perfil 9-2LE, diferenças de interpretação podem causar incompatibilidades sutis. Por isso, o comissionamento de process bus multifabricante (especialmente no FAT) deve testar exaustivamente a interoperabilidade MU-IED — confirmando que cada IED interpreta corretamente os SV de cada MU, com a escala e a fase corretas."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Comissionar MUs envolve verificar a entrada analógica, a configuração, a publicação dos SV (sniffer), a recepção pelos IEDs e a qualidade do PTP — com injeção analógica ou digital (mala publicando SV). A interoperabilidade MU-IED multifabricante é crítica e deve ser testada exaustivamente. A Merging Unit digitaliza a medição na fonte, e o process bus (IEC 61850-9-2/9-2LE) a distribui — o futuro da subestação digital, dependente de rede e sincronismo confiáveis."
+        }
+      ]
+    }
+  ]
+}
