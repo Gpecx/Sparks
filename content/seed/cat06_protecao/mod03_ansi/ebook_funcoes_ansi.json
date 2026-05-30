@@ -6,73 +6,266 @@
   "moduleSubtitle": "Numeração padronizada IEEE C37.2 para funções de proteção",
   "moduleOrder": 2,
   "ebookTitle": "Funções ANSI/IEEE C37.2 de Proteção",
-  "ebookSubtitle": "As funções mais usadas em proteção de subestações: 50/51, 21, 87, 27/59, 81 e lógica de bloqueio 86",
-  "estimatedMinutes": 25,
+  "ebookSubtitle": "O idioma universal da proteção: 50/51, 67, 87, 21, 27/59/81, 25 e a lógica 86",
+  "estimatedMinutes": 95,
   "trailFiles": [
     "t01_visao_geral_ansi.json",
     "t02_funcoes_principais.json",
     "t03_funcoes_supervisao.json",
     "t04_logica_protecao_bloqueio.json"
   ],
-  "sections": [
+  "chapters": [
     {
-      "id": "s1",
-      "title": "O sistema de numeração ANSI/IEEE C37.2",
-      "type": "text",
-      "body": "O padrão IEEE C37.2 atribui números de função (device function numbers) a cada tipo de proteção ou automação em subestações. Criado nos anos 1940 e revisado continuamente, permite que engenheiros de qualquer país leiam um diagrama lógico (logic diagram) e entendam imediatamente as funções de proteção, sem ambiguidade de nomenclatura. Um IED moderno pode implementar dezenas de funções ANSI simultaneamente — conhecer os números é o vocabulário básico da proteção."
-    },
-    {
-      "id": "s2",
-      "title": "As 10 funções mais presentes em subestações brasileiras",
-      "type": "list",
-      "items": [
-        "50 — Sobrecorrente instantâneo (tempo definido zero); atua em correntes muito acima do pickup sem delay",
-        "51 — Sobrecorrente temporizado (curva IDMT); coordena com outros relés pela característica tempo-corrente",
-        "50N/51N — Versões de neutro das funções 50/51; detectam faltas fase-terra",
-        "21 — Proteção de distância; mede impedância e atua se Z < Z_zona; principal proteção de linhas",
-        "87T/87B/87G — Diferencial de transformador/barramento/gerador; maior seletividade possível",
-        "27 — Subtensão; protege motores e geradores de operação com tensão inadequada",
-        "59 — Sobretensão; protege isolamento de equipamentos",
-        "81 — Sub/sobrefrequência; detecta ilhamento e desequilíbrio geração-carga",
-        "67 — Sobrecorrente direcional; distingue corrente entrando de corrente saindo do barramento",
-        "25 — Verificação de sincronismo; monitora diferença de tensão, ângulo e frequência antes do fechamento de disjuntor"
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — O Padrão ANSI/IEEE C37.2",
+      "subtitle": "O idioma comum da proteção",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que existem os números ANSI",
+          "type": "text",
+          "body": "O padrão IEEE C37.2 atribui um número a cada função de proteção, controle e automação. Criado nos anos 1940 e continuamente atualizado, ele permite que um engenheiro de proteção de qualquer país leia um diagrama lógico e entenda imediatamente cada função, sem ambiguidade de nomenclatura. Quando alguém diz 'a função 87 atuou', todo profissional entende: proteção diferencial. Esses números são o vocabulário básico — dominá-los é pré-requisito para ler qualquer projeto de proteção."
+        },
+        {
+          "id": "s2",
+          "title": "Estrutura da numeração",
+          "type": "text",
+          "body": "O número base identifica a função (ex.: 51 = sobrecorrente temporizado). Sufixos de letra especificam a grandeza ou aplicação: N para neutro (51N), G para terra/gerador (87G), T para transformador (87T), B para barramento (87B), V para tensão (51V). Assim, '51N' é sobrecorrente temporizado de neutro, e '87T' é diferencial de transformador. Essa combinação de número + sufixo descreve precisamente cada proteção."
+        },
+        {
+          "id": "s3",
+          "title": "Onde os números aparecem",
+          "type": "list",
+          "items": [
+            "Diagramas unifilares — indicam as funções de cada relé/IED",
+            "Diagramas lógicos e funcionais — mostram a lógica de trip e intertravamento",
+            "Especificações técnicas e folhas de dados de IEDs",
+            "Relatórios de eventos e análise de faltas",
+            "Comunicação entre engenheiros — o jargão diário da proteção"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O padrão IEEE C37.2 dá um número a cada função de proteção, criando um idioma universal. O número identifica a função e os sufixos (N, G, T, B, V) especificam a grandeza/aplicação. Esses códigos aparecem em diagramas, especificações e relatórios — dominá-los é o vocabulário básico para ler qualquer projeto de proteção."
+        }
       ]
     },
     {
-      "id": "s3",
-      "title": "Funções 50 e 51: qual a diferença prática?",
-      "type": "note",
-      "body": "A função 50 (instantânea) atua quando a corrente supera o pickup sem qualquer atraso intencional — tempo de operação típico de 16-50 ms, limitado apenas pela velocidade do relé. É usada para faltas severas próximas à subestação, onde qualquer atraso causaria dano irreversível. A função 51 (temporizada) segue uma curva tempo×corrente (IDMT) — quanto maior a corrente, menor o tempo de atuação, mas nunca instantâneo. Ela permite a coordenação entre relés em série no sistema: o relé mais próximo da falta atua primeiro, preservando a continuidade de serviço dos demais clientes."
-    },
-    {
-      "id": "s4",
-      "title": "Função 87 — Proteção diferencial: o padrão ouro",
-      "type": "formula",
-      "formula": "I_dif = |I_primário/n_TC_A + I_secundário/n_TC_B|  ≥  I_pickup_dif",
-      "explanation": "A proteção diferencial compara as correntes que entram e saem do elemento protegido (transformador, barramento, gerador, motor). Em condição normal (carga passante), I_dif ≈ 0. Em falta interna, parte da corrente \"desaparece\" dentro do elemento — I_dif cresce e o relé atua. É a proteção mais seletiva possível: atua SOMENTE para faltas internas à zona protegida, sem atraso de tempo. A limitação são as correntes de inrush (magnetização) e as assimetrias dos TCs, que exigem bloqueio por 2ª harmônica e pendente (slope) mínima."
-    },
-    {
-      "id": "s5",
-      "title": "Funções de supervisão: 27, 59, 81 e 25",
-      "type": "list",
-      "items": [
-        "27 (subtensão): atua quando V < threshold por um tempo definido; nas subestações, geralmente bloqueia partida de motores e protege geradores de perda de campo",
-        "59 (sobretensão): crítica em sistemas com geração distribuída (ilhamento pode elevar tensão); também protege transformadores de excitação excessiva",
-        "81U/81O (sub/sobrefrequência): desequilíbrio entre geração e carga altera a frequência; relés 81 conectam-se ao esquema de corte de carga (load shedding) quando f < 59 Hz",
-        "25 (sincronismo): antes de fechar um disjuntor ligando dois sistemas (ou gerador à rede), verifica se ΔV < 5%, Δf < 0,1 Hz e Δθ < 20° — se fora dos limites, bloqueia o fechamento"
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Sobrecorrente: 50 e 51",
+      "subtitle": "A base de toda proteção",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "50 — Sobrecorrente instantâneo",
+          "type": "text",
+          "body": "A função 50 atua quando a corrente ultrapassa o valor de pickup, sem atraso intencional — o tempo de operação é o mínimo possível do relé (tipicamente 16 a 50 ms). É usada para faltas severas próximas, onde qualquer atraso causaria dano. Seu pickup é ajustado acima da maior corrente de falta que o dispositivo a jusante deve eliminar, garantindo que o instantâneo só atue para faltas dentro de sua própria zona, sem invadir a zona seguinte."
+        },
+        {
+          "id": "s2",
+          "title": "51 — Sobrecorrente temporizado",
+          "type": "text",
+          "body": "A função 51 segue uma curva tempo-corrente (IDMT — Inverse Definite Minimum Time): quanto maior a corrente, menor o tempo de atuação, mas nunca instantâneo. Essa característica inversa permite a coordenação entre relés em série: o relé mais próximo da falta atua antes do relé a montante. Os ajustes principais são o pickup (corrente de partida) e o dial de tempo (Td/TMS), que desloca a curva no tempo."
+        },
+        {
+          "id": "s3",
+          "title": "A equação das curvas IDMT",
+          "type": "formula",
+          "formula": "t = (A · Td) / (M^P − 1)   onde   M = I / I_pickup",
+          "explanation": "A, P são constantes que definem o formato da curva. IEC Normal Inversa: A=0,14, P=0,02. Muito Inversa: A=13,5, P=1. Extremamente Inversa: A=80, P=2. Quanto maior P, mais íngreme a curva (atua muito mais rápido em correntes altas) — ideal para coordenar com fusíveis. A calculadora de Curvas de Sobrecorrente (51) do SPARK tem ~57 variantes IEC/IEEE/ANSI."
+        },
+        {
+          "id": "s4",
+          "title": "Versões de neutro: 50N e 51N",
+          "type": "text",
+          "body": "As funções 50N/51N são as versões de neutro (terra) das 50/51. Elas respondem à corrente residual (3·I0, soma das três fases), que é zero em condição equilibrada e cresce em faltas à terra. Como as faltas à terra são as mais comuns e geralmente têm corrente menor que as faltas entre fases, as proteções de neutro podem ter pickup mais baixo e sensível, sem risco de operar com a carga normal equilibrada."
+        },
+        {
+          "id": "s5",
+          "title": "Ajuste do pickup",
+          "type": "note",
+          "body": "O pickup de fase deve ficar acima da máxima corrente de carga (incluindo sobrecargas admissíveis e correntes de partida de motores) e abaixo da mínima corrente de falta que deve detectar — uma janela que nem sempre é confortável. Tipicamente, ajusta-se o pickup de fase em 1,2 a 1,5 vezes a corrente nominal de carga. O pickup de neutro pode ser bem mais baixo (10 a 30% da nominal), pois não há corrente residual em carga equilibrada."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A função 50 (instantânea) atua sem atraso para faltas severas; a 51 (temporizada) segue curva IDMT (t = A·Td/(M^P−1)) permitindo coordenação. P define a inclinação (NI, VI, EI). As versões de neutro (50N/51N) respondem à corrente residual 3·I0 e podem ter pickup sensível. Pickup de fase ≈ 1,2-1,5×In; de neutro, 10-30%."
+        }
       ]
     },
     {
-      "id": "s6",
-      "title": "Lógica de bloqueio — Relé 86 (Lock-out)",
-      "type": "note",
-      "body": "O relé 86 é um relé auxiliar de autotravamento (lock-out) — uma vez acionado por um sinal de trip, permanece travado até ser manualmente resetado por operador. Isso garante que após uma falta grave (ex.: curto interno em transformador), o disjuntor não seja religado automaticamente antes de uma inspeção. Em subestações, o 86 é o último elo da lógica de proteção: proteção principal → trip do disjuntor → acionamento do 86 → bloqueio de religamento automático. O reset manual do 86 é um procedimento crítico que exige autorização e análise da causa raiz."
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Direcional (67) e Diferencial (87)",
+      "subtitle": "Discriminação por sentido e por zona",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "67 — Sobrecorrente direcional",
+          "type": "text",
+          "body": "A função 67 adiciona à sobrecorrente a informação de sentido: ela só atua se a corrente de falta flui na direção definida. Para isso, compara a corrente com uma tensão de referência (polarização) e mede o ângulo entre elas. É essencial em sistemas com mais de uma fonte ou em anéis, onde a corrente de falta pode vir de qualquer lado. Sem direcionalidade, um relé de sobrecorrente em anel não conseguiria discriminar qual trecho está em falta."
+        },
+        {
+          "id": "s2",
+          "title": "Como a direcionalidade funciona",
+          "type": "text",
+          "body": "O relé direcional define uma 'linha de máximo torque' (MTA — Maximum Torque Angle), determinada pelo ângulo de polarização ajustado. Se o fasor da corrente de falta cai dentro do semiplano de operação (tipicamente ±90° em torno do MTA), o relé permite atuar; fora dele, bloqueia. A escolha da grandeza de polarização (tensão de sequência positiva, negativa ou zero) depende do tipo de falta a discriminar."
+        },
+        {
+          "id": "s3",
+          "title": "87 — Proteção diferencial",
+          "type": "text",
+          "body": "A proteção diferencial é a mais seletiva que existe: ela compara as correntes que entram e saem do elemento protegido. Em operação normal ou falta externa (corrente passante), o que entra é igual ao que sai, e a corrente diferencial é praticamente nula. Numa falta interna, parte da corrente 'some' dentro da zona — a diferencial cresce e o relé atua, instantaneamente e sem necessidade de coordenação de tempo, pois ela só enxerga sua própria zona."
+        },
+        {
+          "id": "s4",
+          "title": "A característica de restrição (slope)",
+          "type": "formula",
+          "formula": "I_dif = |I_entrada + I_saída|   ·   atua se   I_dif > slope × I_restrição",
+          "explanation": "Para evitar trip indevido por erros de TC (saturação, relações não idênticas) que geram uma pequena corrente diferencial espúria em faltas externas, usa-se uma característica percentual (slope): a corrente diferencial necessária para operar cresce proporcionalmente à corrente de restrição (passante). Assim, a diferencial fica estável em faltas externas severas e sensível a faltas internas."
+        },
+        {
+          "id": "s5",
+          "title": "Desafios da diferencial de transformador (87T)",
+          "type": "note",
+          "body": "A 87T tem desafios extras: (1) a corrente de inrush de magnetização na energização do trafo gera corrente diferencial sem que haja falta — resolve-se com bloqueio por 2ª harmônica (rica no inrush); (2) a defasagem angular do trafo (ex.: Dyn11 = 30°) e as diferentes relações de TC exigem compensação — feita por software nos IEDs modernos; (3) a sobre-excitação gera 5ª harmônica, também usada para bloqueio. A calculadora de Balanço Diferencial (87T) do SPARK ajuda no ajuste dos coeficientes de compensação."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A função 67 adiciona sentido à sobrecorrente (compara corrente com tensão de polarização, MTA), essencial em redes com múltiplas fontes e anéis. A 87 (diferencial) compara entrada e saída — máxima seletividade, atuação instantânea só na zona. A característica de slope a estabiliza contra erros de TC. A 87T exige bloqueio por 2ª/5ª harmônica (inrush, sobre-excitação) e compensação de defasagem e relação de TC."
+        }
+      ]
     },
     {
-      "id": "s7",
-      "title": "Resumo: ANSI como idioma comum da proteção",
-      "type": "summary",
-      "body": "Os números de função ANSI são o vocabulário universal da proteção de sistemas elétricos. As funções 50/51 formam a espinha dorsal da proteção de sobrecorrente; a 87 garante a maior seletividade para equipamentos críticos; as funções 27/59/81/25 supervisionam as condições de qualidade da tensão e frequência; e o 86 garante que nenhuma ação automática seja tomada após uma falta grave sem análise humana. Dominar esses números é o primeiro passo para ler e entender qualquer lógica de proteção de subestação. Nas trilhas deste módulo você vai testar esse conhecimento."
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Distância (21) e Funções de Supervisão",
+      "subtitle": "Proteção de linhas e qualidade da tensão",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "21 — Proteção de distância",
+          "type": "text",
+          "body": "A função 21 é a principal proteção de linhas de transmissão. Ela mede a impedância vista pelo relé (tensão/corrente) — que é proporcional à distância até a falta, pois a impedância de uma linha é aproximadamente constante por quilômetro. Se a impedância medida cai abaixo do alcance ajustado, há falta dentro daquele trecho. Sua grande vantagem é ser inerentemente seletiva sem depender de comunicação: cada zona cobre uma fração da linha com um tempo associado."
+        },
+        {
+          "id": "s2",
+          "title": "As zonas de distância",
+          "type": "list",
+          "items": [
+            "Zona 1 — alcance de 80-85% da linha, atuação instantânea (não cobre 100% para não invadir a linha seguinte)",
+            "Zona 2 — cobre 100% da linha + parte da seguinte, com tempo (~0,3-0,4 s) para coordenar",
+            "Zona 3 — retaguarda remota, alcance estendido com tempo maior (~0,8-1,0 s)",
+            "A calculadora de Proteção de Distância (21) do SPARK calcula o alcance das zonas (primário e secundário)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Funções de supervisão de tensão e frequência",
+          "type": "list",
+          "items": [
+            "27 — Subtensão: protege motores e geradores contra tensão baixa; bloqueia partidas",
+            "59 — Sobretensão: protege isolamento; crítica em sistemas com geração distribuída",
+            "81 — Sub/sobrefrequência: detecta desequilíbrio geração-carga e ilhamento; aciona corte de carga (load shedding)",
+            "47 — Sequência de fase/sequência negativa de tensão: detecta inversão de fases e desequilíbrios"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "25 — Verificação de sincronismo",
+          "type": "text",
+          "body": "A função 25 verifica, antes de fechar um disjuntor que conecta dois sistemas (ou um gerador à rede), se as condições são seguras: diferença de tensão (ΔV), de frequência (Δf) e de ângulo (Δθ) dentro de limites aceitáveis (tipicamente ΔV < 5%, Δf < 0,1 Hz, Δθ < 10-20°). Fechar fora de sincronismo pode causar enormes correntes transitórias e danos mecânicos a geradores. O 25 é um intertravamento de segurança fundamental em manobras de paralelismo."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A função 21 (distância) mede impedância proporcional à distância da falta, com zonas escalonadas (Z1 instantânea 80-85%, Z2/Z3 temporizadas) — seletiva sem comunicação. As funções de supervisão 27/59 (tensão), 81 (frequência) e 47 (sequência) cuidam da qualidade da rede. A 25 (sincronismo) verifica ΔV, Δf, Δθ antes do paralelismo, evitando fechamento fora de fase."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Lógica de Proteção e Bloqueio",
+      "subtitle": "Coordenando as funções e travando após a falta",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Da função ao trip: a lógica",
+          "type": "text",
+          "body": "As funções de proteção não atuam isoladas: elas se combinam numa lógica que decide quando, como e o que desligar. Nos IEDs modernos, essa lógica é programável (equações booleanas, temporizadores, biestáveis) e pode incluir intertravamentos, esquemas de seletividade lógica, e condicionamento de trip. A lógica é o que transforma um conjunto de funções num sistema de proteção coerente."
+        },
+        {
+          "id": "s2",
+          "title": "86 — Relé de bloqueio (lock-out)",
+          "type": "text",
+          "body": "O relé 86 é um relé auxiliar de autotravamento. Quando uma proteção grave atua (ex.: diferencial de transformador), ela aciona o 86, que abre todos os disjuntores associados E permanece travado, impedindo o religamento até que um operador o resete manualmente. Isso garante que, após uma falta interna grave, ninguém religue o equipamento antes de uma inspeção. O reset do 86 é um ato deliberado, que exige análise prévia da causa."
+        },
+        {
+          "id": "s3",
+          "title": "50BF — Proteção de falha de disjuntor",
+          "type": "note",
+          "body": "E se o disjuntor receber o comando de trip mas não abrir (mecanismo travado, bobina queimada)? A função 50BF (Breaker Failure) monitora isso: após emitir o trip, se a corrente persistir além de um tempo curto, ela conclui que o disjuntor falhou e comanda a abertura dos disjuntores adjacentes (a montante), isolando a falta de outra forma. É a última linha de defesa contra a falha do elemento interruptor — sem ela, uma falha de disjuntor numa falta deixaria o defeito sem eliminação."
+        },
+        {
+          "id": "s4",
+          "title": "Seletividade lógica (interlock)",
+          "type": "text",
+          "body": "A seletividade lógica usa comunicação entre relés para acelerar a coordenação: quando um relé detecta falta, ele envia um sinal de bloqueio ao relé a montante. Se o relé a montante detecta a falta mas recebe o bloqueio, ele espera (a falta é a jusante); se não recebe bloqueio, atua rapidamente (a falta é na sua zona). Isso elimina os longos tempos de coordenação cronométrica, reduzindo drasticamente o tempo de eliminação em barramentos — muito usado com GOOSE (IEC 61850)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A lógica programável dos IEDs combina as funções num sistema coerente. O relé 86 (lock-out) trava o religamento após faltas graves, exigindo reset manual. A 50BF (falha de disjuntor) comanda os disjuntores adjacentes se o disjuntor não abrir. A seletividade lógica (com GOOSE/IEC 61850) acelera a coordenação por bloqueio entre relés, reduzindo o tempo de eliminação de faltas em barramentos."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Aplicando as Funções ANSI por Equipamento",
+      "subtitle": "Que funções proteger cada elemento",
+      "estimatedMinutes": 10,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Conjuntos típicos de funções",
+          "type": "list",
+          "items": [
+            "Linha de transmissão — 21 (distância), 67/67N (direcional), 79 (religamento), 85 (teleproteção)",
+            "Transformador — 87T (diferencial), 50/51 e 50N/51N (sobrecorrente backup), 49 (térmica), 63 (Buchholz)",
+            "Barramento — 87B (diferencial de barra), 50BF (falha de disjuntor)",
+            "Gerador — 87G, 40 (perda de excitação), 46 (sequência negativa), 32 (potência reversa), 81 (frequência)",
+            "Motor — 49 (térmica), 50/51, 46 (desequilíbrio), 48 (rotor bloqueado), 37 (subcorrente)"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "A lógica da escolha",
+          "type": "text",
+          "body": "A escolha das funções segue a natureza dos defeitos a que cada equipamento está sujeito. Um gerador precisa de 40 (perda de excitação) e 32 (potência reversa) porque são modos de falha próprios de máquinas síncronas. Um transformador precisa de 87T e 63 (Buchholz, que detecta gás de arcos internos). Conhecer os modos de falha de cada equipamento é o que orienta a seleção correta das funções ANSI."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Cada equipamento tem um conjunto típico de funções ANSI conforme seus modos de falha: linhas (21, 67, 79), transformadores (87T, 50/51, 49, 63), barras (87B, 50BF), geradores (87G, 40, 46, 32) e motores (49, 50/51, 46, 48). Dominar os números ANSI e saber aplicá-los por equipamento é a essência da engenharia de proteção — e a base para os módulos de seletividade e proteções específicas."
+        }
+      ]
     }
   ]
 }

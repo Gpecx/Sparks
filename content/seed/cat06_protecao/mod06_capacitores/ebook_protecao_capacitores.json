@@ -6,54 +6,187 @@
   "moduleSubtitle": "Fundamentos e proteções de bancos de capacitores",
   "moduleOrder": 5,
   "ebookTitle": "Proteção de Bancos de Capacitores",
-  "ebookSubtitle": "Tipos de banco, correntes de energização, desequilíbrio e proteções específicas",
-  "estimatedMinutes": 15,
+  "ebookSubtitle": "Energização, ressonância, desequilíbrio interno e as proteções específicas de bancos",
+  "estimatedMinutes": 60,
   "trailFiles": [
     "t01_fundamentos_capacitores.json"
   ],
-  "sections": [
+  "chapters": [
     {
-      "id": "s1",
-      "title": "Por que bancos de capacitores existem no sistema elétrico",
-      "type": "text",
-      "body": "Bancos de capacitores são instalados em subestações e alimentadores para compensação de reativo (elevação do fator de potência), regulação de tensão e redução de perdas. Em linhas longas de transmissão, a compensação série reduz a reatância efetiva da linha, aumentando sua capacidade de transmissão de potência ativa. Apesar de aparentemente simples, os bancos de capacitores apresentam fenômenos transitórios severos (inrush, energização back-to-back) e requerem proteções específicas para garantir operação segura e longa vida útil."
-    },
-    {
-      "id": "s2",
-      "title": "Corrente de energização — o maior desafio",
-      "type": "formula",
-      "formula": "I_inrush ≈ V_nominal / √(L_fonte × C_banco)  [pico em kA]",
-      "explanation": "No instante de energização, o capacitor se comporta como um curto-circuito — a corrente inicial é limitada apenas pela indutância do circuito. Em situações de energização back-to-back (banco adjacente já energizado), a corrente de inrush pode atingir dezenas de kA com frequência de oscilação de centenas de Hz. Isso pode causar abertura indevida dos disjuntores de proteção e, em casos extremos, dano mecânico ao banco. A solução são reatores de amortecimento em série (closing reactors) ou pré-inserção de resistores."
-    },
-    {
-      "id": "s3",
-      "title": "Tipos de banco e suas implicações na proteção",
-      "type": "list",
-      "items": [
-        "Banco aterrado solidamente — fácil detecção de falta à terra via 51N; alta corrente de falta terra; neutro do banco ligado diretamente à terra",
-        "Banco de neutro isolado (não aterrado) — baixa corrente de falta terra; detecção de falta feita por tensão de desequilíbrio (função 59N no neutro)",
-        "Banco em estrela simples vs. dupla estrela — dupla estrela permite detecção de desequilíbrio interno por corrente diferencial entre os dois neutros (função 87N)",
-        "Banco em delta — sem corrente de neutro; detecção de falta depende de monitoramento de tensão ou corrente de desequilíbrio de fase",
-        "Banco série — instalado em série na linha; protege contra sobrecorrente de falta via bypasses automáticos (spark gaps ou MOVs)"
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Por que Existem Bancos de Capacitores",
+      "subtitle": "Compensação de reativo e regulação de tensão",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A função dos capacitores no sistema",
+          "type": "text",
+          "body": "Bancos de capacitores fornecem potência reativa (kvar) ao sistema elétrico. Cargas indutivas — motores, transformadores, reatores — consomem reativo, o que reduz o fator de potência, aumenta as perdas e provoca queda de tensão. Os capacitores compensam esse reativo localmente, próximos às cargas, elevando o fator de potência, reduzindo perdas nos condutores e melhorando o perfil de tensão. São, portanto, equipamentos de eficiência e qualidade de energia."
+        },
+        {
+          "id": "s2",
+          "title": "Tipos de aplicação",
+          "type": "list",
+          "items": [
+            "Capacitores shunt (paralelo) — compensação de reativo e correção de fator de potência (o mais comum)",
+            "Capacitores série — inseridos em série na linha, reduzem a reatância efetiva e aumentam a capacidade de transmissão",
+            "Bancos fixos — sempre conectados",
+            "Bancos automáticos (chaveados) — ligados/desligados em estágios conforme a demanda de reativo"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Configurações de ligação",
+          "type": "list",
+          "items": [
+            "Estrela aterrada — neutro à terra; caminho para correntes de sequência zero e harmônicas",
+            "Estrela isolada — neutro flutuante; sem corrente de neutro à terra",
+            "Dupla estrela — dois grupos em paralelo, permite detecção de desequilíbrio entre neutros",
+            "Delta (triângulo) — usado em bancos menores de baixa/média tensão"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Bancos de capacitores fornecem reativo, corrigindo o fator de potência, reduzindo perdas e melhorando a tensão. Podem ser shunt (correção de FP) ou série (aumento de transmissão), fixos ou chaveados. As ligações (estrela aterrada/isolada, dupla estrela, delta) definem o comportamento frente a faltas e a estratégia de detecção de desequilíbrio."
+        }
       ]
     },
     {
-      "id": "s4",
-      "title": "Proteções características de bancos de capacitores",
-      "type": "list",
-      "items": [
-        "60N — Desequilíbrio de neutro (voltagem ou corrente): detecta falha de elementos capacitivos internos; a proteção mais importante do banco",
-        "50/51 — Sobrecorrente de fase: proteção de falta externa e inrush (com bloqueio temporizado na energização)",
-        "59 — Sobretensão: ressonância com a rede ou operação em tensão elevada pode destruir os elementos capacitivos; limite típico: 110% Vn",
-        "27 — Subtensão: protege contra energização de banco em tensão muito baixa",
-        "81 — Sub/sobrefrequência: ressonância série LC pode ser excitada por harmônicos quando a frequência de ressonância coincide com harmônica dominante do sistema"
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Os Desafios Únicos dos Capacitores",
+      "subtitle": "Energização, ressonância e harmônicas",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A corrente de energização (inrush)",
+          "type": "text",
+          "body": "No instante em que um banco de capacitores é energizado, ele se comporta momentaneamente como um curto-circuito — a tensão do capacitor não pode mudar instantaneamente, então a corrente inicial é limitada apenas pela indutância do circuito. Isso gera uma corrente de inrush de alta magnitude e alta frequência. A situação piora na energização 'back-to-back' (quando um banco é ligado estando outro já energizado próximo): a corrente pode atingir dezenas de kA a frequências de centenas de Hz a kHz."
+        },
+        {
+          "id": "s2",
+          "title": "Mitigação do inrush",
+          "type": "list",
+          "items": [
+            "Reatores de pré-inserção / amortecimento (closing reactors) em série",
+            "Resistores de pré-inserção no disjuntor",
+            "Chaveamento sincronizado (point-on-wave) — fecha o disjuntor no instante de tensão zero",
+            "Esses recursos reduzem o pico de inrush, protegendo o banco e o disjuntor"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Ressonância com o sistema",
+          "type": "text",
+          "body": "O capacitor forma, com a indutância do sistema, um circuito LC com uma frequência de ressonância. Se essa frequência coincidir com uma harmônica presente na rede (gerada por cargas não-lineares como inversores e fornos), ocorre amplificação dessa harmônica — correntes e tensões podem crescer perigosamente, sobrecarregando o capacitor e distorcendo a rede. Por isso, o projeto de bancos em ambientes com harmônicas deve verificar a frequência de ressonância e, se necessário, usar bancos dessintonizados (com reator anti-ressonante)."
+        },
+        {
+          "id": "s4",
+          "title": "Sensibilidade à sobretensão",
+          "type": "note",
+          "body": "Capacitores são especialmente sensíveis à sobretensão: a corrente que circula é proporcional à tensão e à frequência (I = V·ω·C), então sobretensões e harmônicas elevam a corrente e o aquecimento dos elementos capacitivos. Operar um banco acima de ~110% da tensão nominal acelera a degradação e pode levar à falha em cascata dos elementos internos. A proteção de sobretensão (59) é, portanto, essencial nos bancos."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Capacitores têm desafios únicos: o inrush de energização (alto e de alta frequência, pior no back-to-back), mitigado por reatores, resistores de pré-inserção ou chaveamento sincronizado; a ressonância LC com o sistema, que amplifica harmônicas (exigindo bancos dessintonizados); e a sensibilidade à sobretensão (I = V·ω·C), que torna a proteção 59 essencial."
+        }
       ]
     },
     {
-      "id": "s5",
-      "title": "Resumo: capacitores precisam de atenção especial",
-      "type": "summary",
-      "body": "Bancos de capacitores compensam reativo, regulam tensão e melhoram a eficiência do sistema — mas suas características de energização (inrush), sensibilidade ao desequilíbrio interno e potencial de ressonância exigem proteções específicas que vão além do padrão 50/51 de sobrecorrente. A função 60N (desequilíbrio) é o diferencial: detecta a falha de um único elemento capacitivo antes que ela cascateie para todo o banco. Em subestações modernas, o banco de capacitores é um dos equipamentos que mais se beneficia do monitoramento contínuo via IED. Na trilha deste módulo você vai aprofundar esses conceitos."
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Proteções do Banco de Capacitores",
+      "subtitle": "As funções específicas",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "60 / 60N — Desequilíbrio: a proteção principal",
+          "type": "text",
+          "body": "A proteção de desequilíbrio é a mais importante e característica dos bancos. Um banco é formado por dezenas ou centenas de unidades/elementos capacitivos. Quando um elemento falha (curto interno), o equilíbrio do banco se rompe, gerando uma corrente ou tensão de desequilíbrio detectável. A proteção 60 (por corrente) ou 60N (por tensão de neutro) detecta essa pequena assimetria e alarma ou desliga ANTES que a sobretensão nos elementos sãos remanescentes provoque uma falha em cascata. É o que permite detectar a perda de um único elemento, preservando o banco."
+        },
+        {
+          "id": "s2",
+          "title": "Detecção conforme a configuração",
+          "type": "list",
+          "items": [
+            "Dupla estrela — mede a corrente entre os dois neutros (87 de desequilíbrio); muito sensível",
+            "Estrela isolada — mede a tensão de deslocamento do neutro (59N)",
+            "Estrela aterrada — mede a corrente de neutro à terra",
+            "Cada configuração tem seu método de detectar a perda de elementos internos"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Proteções complementares",
+          "type": "list",
+          "items": [
+            "50/51 — sobrecorrente de fase: faltas externas e curto no banco; com bloqueio/retardo na energização para tolerar o inrush",
+            "59 — sobretensão: protege os elementos contra tensão excessiva (limite típico 110%)",
+            "27 — subtensão: evita re-energização indevida e desliga o banco em falta de tensão (importante para não religar com carga residual)",
+            "51N — falta à terra (em bancos aterrados)",
+            "Detecção de surto/ressonância em aplicações específicas"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "O cuidado da subtensão (27) e a descarga",
+          "type": "note",
+          "body": "Quando um banco é desligado, ele permanece carregado com tensão perigosa. É obrigatório que tenha resistores de descarga que reduzam a tensão a um valor seguro num tempo definido (tipicamente abaixo de 50 V em poucos minutos). A proteção 27 (subtensão) também garante que o banco seja desligado em interrupções de tensão e não seja re-energizado enquanto ainda há carga residual — re-energizar um capacitor carregado com polaridade oposta gera transitórios severos. Segurança na manutenção exige confirmar a descarga antes de qualquer contato."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A proteção 60/60N (desequilíbrio) é a principal: detecta a perda de elementos internos antes da falha em cascata, com método conforme a ligação (dupla estrela, estrela isolada, aterrada). Complementam-na 50/51 (com tolerância ao inrush), 59 (sobretensão, limite ~110%), 27 (subtensão, evita re-energizar com carga residual) e 51N. Resistores de descarga e confirmação da descarga são essenciais à segurança."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Aplicação e Boas Práticas",
+      "subtitle": "Projetando e operando com segurança",
+      "estimatedMinutes": 10,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Boas práticas de projeto",
+          "type": "list",
+          "items": [
+            "Verificar a frequência de ressonância com o sistema; usar reator de dessintonia se houver harmônicas relevantes",
+            "Dimensionar a mitigação de inrush (reator/resistor de pré-inserção) conforme o cenário back-to-back",
+            "Especificar resistores de descarga adequados",
+            "Escolher a configuração de ligação que permita boa detecção de desequilíbrio",
+            "Coordenar o disjuntor do banco para suportar as correntes transitórias de chaveamento"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Operação e manutenção",
+          "type": "text",
+          "body": "Bancos chaveados sofrem estresse a cada manobra (inrush e transitórios). Limitar a frequência de chaveamento e usar controle inteligente (que evita ligar/desligar repetidamente em torno de um setpoint) prolonga a vida do equipamento. Na manutenção, jamais tocar no banco sem confirmar a descarga completa — mesmo com os resistores de descarga, a verificação com medição é obrigatória, pois um resistor de descarga defeituoso deixa o banco carregado e letal."
+        },
+        {
+          "id": "s3",
+          "title": "Monitoramento moderno",
+          "type": "note",
+          "body": "Em bancos de média tensão modernos, IEDs dedicados monitoram continuamente a corrente de desequilíbrio, registrando a tendência. Isso permite detectar a degradação progressiva (perda gradual de elementos) muito antes da falha — um caso clássico de manutenção preditiva. O alarme de desequilíbrio de primeiro estágio avisa para programar a manutenção; o trip de segundo estágio protege contra a falha em cascata."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Boas práticas: verificar ressonância (reator de dessintonia), mitigar inrush, especificar descarga e escolher a ligação para boa detecção de desequilíbrio. Na operação, limitar o chaveamento e SEMPRE confirmar a descarga antes de tocar o banco. O monitoramento do desequilíbrio por IED (alarme + trip em estágios) leva à manutenção preditiva. Capacitores melhoram a eficiência, mas exigem proteções específicas por suas características únicas de energização, ressonância e sensibilidade à sobretensão."
+        }
+      ]
     }
   ]
 }

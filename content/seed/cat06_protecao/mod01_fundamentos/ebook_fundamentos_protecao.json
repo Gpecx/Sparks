@@ -6,8 +6,8 @@
   "moduleSubtitle": "Conceitos base, filosofia, TCs, TPs e tipos de falta",
   "moduleOrder": 0,
   "ebookTitle": "Fundamentos de Proteção de Sistemas Elétricos",
-  "ebookSubtitle": "Da evolução dos relés aos transformadores de instrumentação e zonas de proteção",
-  "estimatedMinutes": 30,
+  "ebookSubtitle": "Da filosofia de proteção às ferramentas de cálculo, faltas, zonas e TCs/TPs",
+  "estimatedMinutes": 110,
   "trailFiles": [
     "t01_evolucao_reles.json",
     "t02_principios_gerais.json",
@@ -18,71 +18,375 @@
     "t07_filosofia_protecao.json",
     "t08_transformadores_medicao.json"
   ],
-  "sections": [
+  "chapters": [
     {
-      "id": "s1",
-      "title": "Por que proteger o sistema elétrico?",
-      "type": "text",
-      "body": "Faltas (curtos-circuitos) são inevitáveis em sistemas de potência — raios, falhas de isolação, erros operacionais e degradação de equipamentos geram condições anormais que, sem proteção, destruiriam transformadores, cabos e geradores em segundos. O sistema de proteção elétrica é o \"sistema imunológico\" da rede: detecta a falta, isola o menor pedaço possível do sistema e o faz antes que o dano se propague. A evolução dos relés — de eletromecânicos aos numéricos modernos — foi impulsionada pela necessidade de fazer isso com mais velocidade, seletividade e confiabilidade."
-    },
-    {
-      "id": "s2",
-      "title": "Os 4 requisitos fundamentais de proteção",
-      "type": "list",
-      "items": [
-        "Seletividade — isolar somente o elemento em falta, preservando o máximo da rede em operação",
-        "Rapidez — atuar no menor tempo possível para limitar danos ao equipamento e manter a estabilidade",
-        "Sensibilidade — detectar faltas de alta impedância (correntes baixas) que outros dispositivos ignorariam",
-        "Confiabilidade — dois componentes: segurança (não atuar quando não deve) e dependabilidade (atuar quando deve)"
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Por que proteger sistemas elétricos",
+      "subtitle": "A missão da proteção e a evolução dos relés",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Faltas são inevitáveis",
+          "type": "text",
+          "body": "Nenhum sistema elétrico está imune a faltas. Descargas atmosféricas, falhas de isolação por envelhecimento, contato de árvores e animais, erros operacionais e defeitos de equipamento produzem curtos-circuitos e condições anormais. Sem um sistema de proteção, uma única falta poderia destruir transformadores, queimar cabos, danificar geradores e provocar incêndios e blackouts em cascata. A proteção é o sistema imunológico da rede: ela não evita a falta, mas detecta e isola o defeito antes que ele cause dano irreversível ou se propague."
+        },
+        {
+          "id": "s2",
+          "title": "O que faz um sistema de proteção",
+          "type": "list",
+          "items": [
+            "Detectar a condição anormal (falta, sobrecarga, sub/sobretensão)",
+            "Decidir se deve ou não atuar, e em quanto tempo",
+            "Isolar o menor trecho possível, preservando o restante do sistema",
+            "Acionar o disjuntor para interromper a corrente de falta",
+            "Sinalizar e registrar o evento para análise posterior (oscilografia)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Evolução tecnológica dos relés",
+          "type": "list",
+          "items": [
+            "Eletromecânicos — disco de indução e atração eletromagnética; robustos, mas lentos e de ajuste limitado",
+            "Estáticos — circuitos eletrônicos analógicos; mais rápidos, sensíveis a interferência",
+            "Digitais — microprocessados, amostram o sinal e aplicam algoritmos",
+            "Numéricos (IEDs) — multifuncionais, comunicantes (IEC 61850), com registro e lógica programável"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "A revolução dos IEDs",
+          "type": "note",
+          "body": "Um IED (Intelligent Electronic Device) moderno concentra dezenas de funções de proteção, medição de qualidade de energia, oscilografia, lógica programável e comunicação digital num único equipamento. Isso reduziu drasticamente o espaço em painel, a fiação e o custo de manutenção, ao mesmo tempo em que aumentou a capacidade de diagnóstico. Um único IED substitui o que antes exigia uma parede inteira de relés eletromecânicos."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Faltas são inevitáveis; a proteção detecta, decide, isola o menor trecho e aciona o disjuntor antes do dano se propagar. Os relés evoluíram de eletromecânicos a numéricos (IEDs), que integram proteção, medição, registro e comunicação num só equipamento. Entender essa missão e essa evolução é a base de tudo que vem a seguir."
+        }
       ]
     },
     {
-      "id": "s3",
-      "title": "Ferramentas matemáticas: componentes simétricas e valor por unidade",
-      "type": "note",
-      "body": "Dois recursos matemáticos são indispensáveis em proteção: Componentes Simétricas (Fortescue, 1918) decompõem qualquer sistema desequilibrado em três sequências simétricas (positiva, negativa e zero), simplificando radicalmente o cálculo de faltas assimétricas. O Sistema Por Unidade (PU) normaliza todas as grandezas pela respectiva base, eliminando as transformações de tensão nos cálculos e facilitando a comparação de equipamentos de diferentes níveis de tensão. A área Ferramentas do SPARK tem calculadoras para ambos."
-    },
-    {
-      "id": "s4",
-      "title": "Tipos de falta no sistema elétrico",
-      "type": "list",
-      "items": [
-        "Curto-circuito trifásico (3φ) — mais severo em termos de corrente; raro (2-5% das faltas), mas produz as maiores correntes de curto",
-        "Curto bifásico (FF) — 5-10% das faltas; corrente ≈ 87% do trifásico",
-        "Curto bifásico-terra (FFT) — pode gerar componente de sequência zero elevada",
-        "Curto monofásico-terra (FT) — o mais frequente (~70-80% das faltas); em redes aterradas solidamente gera correntes altas; em redes de neutro isolado, corrente de falta é baixa",
-        "Curto franco vs. com impedância — falta franca: resistência de falta ≈ 0 Ω; falta com impedância (ex.: arco) reduz a corrente e dificulta a detecção"
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Os Requisitos Fundamentais de Proteção",
+      "subtitle": "Seletividade, rapidez, sensibilidade e confiabilidade",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Seletividade",
+          "type": "text",
+          "body": "Seletividade (ou coordenação) é a capacidade do sistema de isolar apenas o elemento em falta, mantendo o restante em operação. Uma falta num ramal não deve desligar a subestação inteira. A seletividade pode ser cronométrica (por tempo), amperimétrica (por nível de corrente), lógica (por comunicação entre relés) ou por zona (proteções unitárias como a diferencial). É o requisito que garante a continuidade do fornecimento."
+        },
+        {
+          "id": "s2",
+          "title": "Rapidez",
+          "type": "text",
+          "body": "Quanto mais rápido a falta é eliminada, menor o dano ao equipamento, menor a energia do arco elétrico (e o risco às pessoas) e maior a estabilidade do sistema. Mas rapidez conflita com seletividade: o relé a montante precisa esperar o de jusante atuar primeiro. A engenharia de proteção busca o equilíbrio — eliminar a falta o mais rápido possível, respeitando a hierarquia de coordenação."
+        },
+        {
+          "id": "s3",
+          "title": "Sensibilidade",
+          "type": "text",
+          "body": "Sensibilidade é a capacidade de detectar faltas, mesmo as de alta impedância (que geram correntes baixas, como um cabo caído em solo seco). Uma proteção pouco sensível pode não 'enxergar' uma falta incipiente. Mas excesso de sensibilidade leva a atuações indevidas em condições normais (correntes de carga, inrush). O ajuste de pickup busca esse equilíbrio: sensível à menor falta, imune à maior condição normal."
+        },
+        {
+          "id": "s4",
+          "title": "Confiabilidade: segurança e dependabilidade",
+          "type": "note",
+          "body": "Confiabilidade tem dois componentes que se contrapõem. Dependabilidade é a certeza de atuar quando deve (não falhar na falta real). Segurança (security) é a certeza de NÃO atuar quando não deve (não dar trip indevido). Esquemas redundantes (proteção principal + retaguarda) aumentam a dependabilidade; esquemas de votação e supervisão aumentam a segurança. O projeto de proteção sempre equilibra os dois conforme a criticidade da aplicação."
+        },
+        {
+          "id": "s5",
+          "title": "O conflito entre os requisitos",
+          "type": "text",
+          "body": "Os quatro requisitos competem entre si: aumentar a rapidez prejudica a seletividade; aumentar a sensibilidade prejudica a segurança; aumentar a dependabilidade (mais proteções) pode reduzir a segurança (mais chances de trip indevido). Não existe ajuste 'perfeito' universal — existe o ajuste adequado ao contexto, fruto de uma análise criteriosa de cada instalação. Essa é a essência da engenharia de proteção."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Toda proteção é avaliada por quatro requisitos: seletividade (isolar só o defeito), rapidez (eliminar rápido), sensibilidade (detectar faltas fracas) e confiabilidade (atuar quando deve = dependabilidade; não atuar quando não deve = segurança). Eles competem entre si — o bom projeto encontra o equilíbrio adequado a cada instalação, não um ajuste universal."
+        }
       ]
     },
     {
-      "id": "s5",
-      "title": "Zonas de proteção: o conceito de backup",
-      "type": "text",
-      "body": "Cada equipamento do sistema (transformador, barramento, linha) deve estar coberto por pelo menos uma zona de proteção principal. As zonas adjacentes se sobrepõem ligeiramente, garantindo que nenhum ponto fique descoberto (zona morta). Toda proteção principal deve ter uma proteção de retaguarda (backup) — que pode ser local (o próprio relé em zona mais ampla) ou remota (o relé no terminal oposto da linha). A filosofia é: se a proteção principal falhar, a retaguarda deve eliminar a falta antes que o dano seja irreversível."
-    },
-    {
-      "id": "s6",
-      "title": "Transformadores de Corrente (TC) e Potencial (TP)",
-      "type": "list",
-      "items": [
-        "TC — reduz a corrente do primário para o nível do relé (tipicamente 5 A ou 1 A); classe de exatidão: 0,3/0,6/1,2 para medição; 5P/10P para proteção",
-        "TP — reduz a tensão do primário para o nível do relé (tipicamente 115 V); classes 0,3/0,6/1,2 para medição e proteção de tensão",
-        "Saturação do TC: em faltas severas, o núcleo do TC pode saturar, distorcendo a corrente no secundário e causando operações incorretas — daí a importância da verificação do fator de acurácia (ALF)",
-        "A polaridade dos TCs é fundamental na proteção diferencial — inversão de polaridade gera corrente diferencial espúria e causa trip indevido",
-        "RTC (relação de transformação de corrente) e RTP (relação de transformação de potencial) definem o que o relé enxerga em relação ao sistema primário"
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Ferramentas Matemáticas: PU e Componentes Simétricas",
+      "subtitle": "A base de cálculo da proteção",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O sistema por unidade (PU)",
+          "type": "text",
+          "body": "O sistema por unidade normaliza todas as grandezas (tensão, corrente, impedância, potência) dividindo-as por valores de base. A grande vantagem: as relações de transformação dos transformadores 'desaparecem' dos cálculos, e equipamentos de diferentes níveis de tensão tornam-se diretamente comparáveis. Uma impedância de 0,1 pu significa o mesmo grau de 'limitação de corrente' independentemente de ser em 13,8 kV ou 500 kV. Isso simplifica enormemente os cálculos de curto-circuito em sistemas com múltiplos níveis de tensão."
+        },
+        {
+          "id": "s2",
+          "title": "Fórmulas básicas do PU",
+          "type": "formula",
+          "formula": "Z_base = V_base² / S_base   ·   I_base = S_base / (√3 · V_base)   ·   Z_pu = Z_real / Z_base",
+          "explanation": "Com S_base em MVA e V_base em kV, Z_base sai em ohms e I_base em kA. A mudança de base é frequente ao combinar equipamentos com bases diferentes: Z_pu_novo = Z_pu_velho × (S_novo/S_velho) × (V_velho/V_novo)². A calculadora de PU do SPARK automatiza essas conversões."
+        },
+        {
+          "id": "s3",
+          "title": "Componentes simétricas",
+          "type": "text",
+          "body": "O teorema de Fortescue (1918) permite decompor qualquer conjunto de três fasores desequilibrados em três conjuntos equilibrados: a sequência positiva (gira no sentido normal ABC), a negativa (sentido inverso, presente em faltas e desequilíbrios) e a zero (três fasores em fase, associada a faltas à terra). Essa decomposição transforma o cálculo de uma falta assimétrica — complexo no domínio das fases — em três circuitos de sequência desacoplados e simples de resolver."
+        },
+        {
+          "id": "s4",
+          "title": "Por que as sequências importam na proteção",
+          "type": "list",
+          "items": [
+            "Sequência positiva — existe em qualquer condição (carga normal e faltas)",
+            "Sequência negativa — aparece em desequilíbrios e faltas assimétricas; base das proteções 46 (desequilíbrio) e direcionais",
+            "Sequência zero — circula em faltas à terra; base das proteções de neutro (51N, 67N) e diferencial de terra",
+            "Medir a sequência certa permite proteções seletivas para cada tipo de falta"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Aplicação prática",
+          "type": "note",
+          "body": "Um relé de sobrecorrente de neutro (51N) responde essencialmente à corrente de sequência zero (3·I0). Um relé de desequilíbrio de motor (46) responde à sequência negativa (I2). Compreender componentes simétricas não é exercício acadêmico: é o que permite ajustar corretamente essas funções e interpretar registros de falta. A calculadora de Componentes Simétricas do SPARK ajuda a decompor e sintetizar fasores na prática."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O PU normaliza grandezas pela base, fazendo as relações de transformação sumirem e equipamentos de tensões diferentes serem comparáveis (Z_base = V²/S). As componentes simétricas decompõem desequilíbrios em sequências positiva, negativa e zero, simplificando o cálculo de faltas assimétricas e fundamentando as proteções de neutro (seq. zero) e desequilíbrio (seq. negativa)."
+        }
       ]
     },
     {
-      "id": "s7",
-      "title": "Evolução dos relés: de eletromecânicos a numéricos",
-      "type": "note",
-      "body": "Os relés eletromecânicos (1900-1960s) eram simples e robustos, mas lentos e de ajuste limitado. Os estáticos (1960s-1980s) usavam circuitos eletrônicos analógicos, mais rápidos mas sensíveis a interferências. Os digitais (1980s-1990s) introduziram o processamento de sinal amostrado. Os numéricos modernos (IEDs) vão além: executam múltiplas funções de proteção e medição simultaneamente, comunicam via IEC 61850, registram oscilografias e perturbografias, e podem ser reprogramados remotamente. Um único IED moderno substitui dezenas de relés eletromecânicos."
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Tipos de Falta no Sistema Elétrico",
+      "subtitle": "Classificação e características",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "As faltas em derivação (shunt)",
+          "type": "list",
+          "items": [
+            "Trifásica (3φ) — simétrica; a mais severa em corrente, mas a mais rara (2-5% dos casos)",
+            "Bifásica (FF) — entre duas fases; corrente ≈ 87% da trifásica",
+            "Bifásica-terra (FFT) — duas fases e a terra; gera sequência zero",
+            "Monofásica-terra (FT) — uma fase à terra; a mais frequente (70-80% das faltas)"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Falta franca vs. com impedância",
+          "type": "text",
+          "body": "Uma falta franca tem resistência de falta praticamente nula (contato metálico direto), produzindo a máxima corrente de curto. Já uma falta com impedância — um arco elétrico, um cabo caído em solo seco, uma raiz de árvore — insere uma resistência que limita a corrente. Faltas de alta impedância são um desafio para a proteção: a corrente pode ser tão baixa que se confunde com a carga normal, exigindo proteções sensíveis e técnicas especiais de detecção."
+        },
+        {
+          "id": "s3",
+          "title": "Faltas evolutivas e permanentes vs. transitórias",
+          "type": "text",
+          "body": "Muitas faltas são transitórias (passageiras) — uma descarga atmosférica que provoca um arco que se auto-extingue. É por isso que existem os religadores: eles abrem e tentam fechar novamente, na expectativa de que a falta tenha sumido. Faltas permanentes (cabo rompido, isolador quebrado) persistem e exigem isolamento definitivo. Faltas evolutivas começam num tipo (ex.: monofásica) e evoluem para outro (bifásica, trifásica) à medida que o arco se espalha."
+        },
+        {
+          "id": "s4",
+          "title": "O impacto do aterramento do neutro",
+          "type": "note",
+          "body": "A forma de aterramento do neutro do sistema define o comportamento das faltas à terra. Em sistemas solidamente aterrados, a falta monofásica gera corrente alta (fácil de detectar, mas perigosa). Em sistemas de neutro isolado ou aterrado por impedância, a corrente de falta à terra é baixa (mais segura, mas difícil de detectar — exige proteções sensíveis de sequência zero ou detecção por tensão de deslocamento de neutro). A escolha do aterramento é uma decisão de projeto que afeta toda a filosofia de proteção de terra."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As faltas se classificam em trifásica (mais severa, rara), bifásica, bifásica-terra e monofásica-terra (a mais comum). Podem ser francas (corrente máxima) ou com impedância (arco, alta impedância — difícil detecção), transitórias ou permanentes, e evolutivas. O aterramento do neutro define a magnitude das faltas à terra e, portanto, a estratégia das proteções de terra."
+        }
+      ]
     },
     {
-      "id": "s8",
-      "title": "Resumo: a base que sustenta tudo",
-      "type": "summary",
-      "body": "Proteção de sistemas elétricos é uma disciplina que combina teoria matemática (componentes simétricas, PU), física dos circuitos (correntes de falta, sequências) e engenharia de sistemas (zonas, backup, TCs e TPs). Os 4 requisitos — seletividade, rapidez, sensibilidade e confiabilidade — são o critério de avaliação de qualquer solução de proteção. Dominar esses fundamentos é o pré-requisito para entender qualquer função específica de relé. As trilhas deste módulo vão consolidar cada um desses conceitos."
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Cálculo de Correntes de Falta",
+      "subtitle": "Quantificando o curto-circuito",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que calcular as correntes de falta",
+          "type": "text",
+          "body": "O cálculo de curto-circuito é a base de quase todo o projeto de proteção. Ele define a capacidade de interrupção dos disjuntores (que deve superar a maior corrente de falta), os ajustes dos relés (pickup entre a carga máxima e a falta mínima), o dimensionamento dos TCs (para não saturarem), e a energia do arco elétrico (segurança das pessoas). Sem conhecer as correntes de falta, qualquer ajuste é um chute."
+        },
+        {
+          "id": "s2",
+          "title": "Cálculo simplificado por sequências",
+          "type": "formula",
+          "formula": "I_3φ = E / Z1   ·   I_FF = √3·E / (Z1+Z2)   ·   I_FT = 3·E / (Z1+Z2+Z0+3·Zf)",
+          "explanation": "Com E = tensão de fase (V_LL/√3) e Z1, Z2, Z0 as impedâncias de sequência até o ponto de falta. A trifásica usa só a sequência positiva; a bifásica usa positiva + negativa; a monofásica-terra envolve as três sequências em série, mais a impedância de falta (Zf). A calculadora de Curto-Circuito do SPARK aplica essas fórmulas."
+        },
+        {
+          "id": "s3",
+          "title": "Componente DC e assimetria",
+          "type": "text",
+          "body": "No instante da falta, além da componente alternada (CA) simétrica, surge uma componente contínua (CC) que decai exponencialmente segundo a relação X/R do circuito. Essa componente DC torna a corrente assimétrica nos primeiros ciclos, com um pico que pode chegar a quase o dobro do valor eficaz simétrico. O dimensionamento dos disjuntores e a análise de esforços eletrodinâmicos devem considerar esse pico assimétrico, não apenas o valor simétrico."
+        },
+        {
+          "id": "s4",
+          "title": "Contribuições de fontes",
+          "type": "list",
+          "items": [
+            "Concessionária (rede) — a maior fonte, modelada por sua potência de curto-circuito",
+            "Geradores locais — contribuem com corrente que decai (regime subtransitório → transitório → permanente)",
+            "Motores de indução — contribuem brevemente para o curto (corrente subtransitória), relevante em barramentos industriais",
+            "Bancos de capacitores — contribuição transitória de alta frequência"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Normas de cálculo",
+          "type": "note",
+          "body": "Dois padrões dominam o cálculo de curto-circuito: o IEC 60909 (mais usado no Brasil e na Europa, com fatores de correção e tensão equivalente) e o método ANSI/IEEE (com multiplicadores de assimetria e tratamento específico de motores). Ambos chegam a resultados próximos, mas adotam premissas diferentes. É importante saber qual padrão o estudo seguiu para interpretar corretamente os resultados e os ajustes deles derivados."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Calcular curtos define capacidade dos disjuntores, ajustes de relés, dimensionamento de TCs e energia de arco. As fórmulas por sequências dão 3φ (E/Z1), FF (√3E/(Z1+Z2)) e FT (3E/(Z1+Z2+Z0)). A componente DC torna a corrente assimétrica (pico até ~2× o simétrico), e várias fontes contribuem (rede, geradores, motores). IEC 60909 e ANSI/IEEE são os padrões de cálculo."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Zonas de Proteção e Filosofia de Backup",
+      "subtitle": "Cobertura total e redundância",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O conceito de zona de proteção",
+          "type": "text",
+          "body": "Cada equipamento do sistema (gerador, transformador, barramento, linha, motor) deve estar dentro de pelo menos uma zona de proteção. A zona é definida pela localização dos TCs e pelo alcance dos relés. O princípio fundamental: as zonas devem se sobrepor ligeiramente, de modo que não exista nenhum ponto 'cego' (zona morta) entre duas zonas adjacentes. Uma falta em qualquer ponto deve ser vista por pelo menos uma zona."
+        },
+        {
+          "id": "s2",
+          "title": "Sobreposição de zonas",
+          "type": "note",
+          "body": "A sobreposição das zonas é obtida posicionando os TCs em lados opostos do disjuntor. Isso garante que o próprio disjuntor esteja dentro de duas zonas — eliminando o ponto cego. O custo dessa sobreposição é que uma falta exatamente na região sobreposta aciona as duas zonas (desliga um pouco mais que o necessário), mas isso é amplamente preferível a deixar um ponto sem proteção."
+        },
+        {
+          "id": "s3",
+          "title": "Proteção principal e de retaguarda",
+          "type": "list",
+          "items": [
+            "Proteção principal — atua primeiro, rápido, para faltas na sua zona",
+            "Retaguarda local — outra função no mesmo painel, atua se a principal falhar (ex.: 51 de retaguarda ao 87)",
+            "Retaguarda remota — relé no terminal oposto/montante, atua com tempo adicional se a proteção local falhar inteira",
+            "Proteção de falha de disjuntor (50BF) — atua se o disjuntor não abrir após o comando de trip"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Filosofia de proteção",
+          "type": "text",
+          "body": "A filosofia de proteção é o conjunto de decisões de projeto: quais funções usar em cada equipamento, como coordená-las, qual o grau de redundância, como tratar as faltas à terra. Ela equilibra custo, criticidade e os quatro requisitos fundamentais. Uma linha de transmissão de 500 kV terá proteção dupla redundante (principal A e B independentes), enquanto um ramal de distribuição pode ter apenas sobrecorrente. A filosofia adequada é proporcional à importância e ao risco do que se protege."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Toda parte do sistema deve estar em uma zona de proteção, e as zonas se sobrepõem (TCs em lados opostos do disjuntor) para eliminar pontos cegos. Cada proteção principal tem retaguarda (local, remota e falha de disjuntor 50BF). A filosofia de proteção define funções, coordenação e redundância de forma proporcional à criticidade do equipamento protegido."
+        }
+      ]
+    },
+    {
+      "id": "c07",
+      "order": 6,
+      "title": "Capítulo 7 — Transformadores de Instrumentação (TC e TP)",
+      "subtitle": "Os olhos da proteção",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que reduzir corrente e tensão",
+          "type": "text",
+          "body": "Os relés não podem ser conectados diretamente às altas correntes e tensões do sistema de potência. Os Transformadores de Corrente (TC) e de Potencial (TP) reduzem essas grandezas a valores padronizados e seguros — tipicamente 5 A ou 1 A para corrente e 115 V para tensão — além de isolar galvanicamente o circuito secundário (relés e medidores) do primário de alta tensão. São, literalmente, os olhos da proteção: o relé só enxerga o que o TC/TP lhe mostra."
+        },
+        {
+          "id": "s2",
+          "title": "Relações de transformação (RTC e RTP)",
+          "type": "formula",
+          "formula": "RTC = I_primário_nom / I_secundário_nom   ·   RTP = V_primário_nom / V_secundário_nom",
+          "explanation": "Um TC de 600/5 tem RTC = 120: uma corrente de 600 A no primário gera 5 A no secundário. O relé mede 5 A mas 'sabe' que correspondem a 600 A reais. A calculadora RTC/RTP do SPARK faz essas conversões, essenciais para ajustes e para ensaios de injeção secundária."
+        },
+        {
+          "id": "s3",
+          "title": "Classes de exatidão",
+          "type": "list",
+          "items": [
+            "TC de medição — classes 0,3 / 0,6 / 1,2; alta exatidão em corrente nominal, satura cedo para proteger o medidor",
+            "TC de proteção — classes 5P / 10P; mantém exatidão até altas correntes de falta (ALF — fator limite de exatidão, ex.: 10P20 = 10% de erro a 20× a nominal)",
+            "TP — classes 0,3 / 0,6 / 1,2 para medição e proteção de tensão",
+            "Usar TC de medição para proteção (ou vice-versa) compromete o desempenho — cada um é projetado para um propósito"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Saturação do TC: o calcanhar de Aquiles",
+          "type": "note",
+          "body": "Em faltas severas, o núcleo do TC pode saturar — a corrente secundária deixa de reproduzir fielmente a primária, ficando distorcida e reduzida. Isso pode atrasar ou impedir a atuação da proteção, ou causar operação indevida na diferencial. A saturação depende da corrente de falta, da carga conectada (burden) e da resistência interna do TC. O dimensionamento correto (verificando a tensão de joelho Vk contra a tensão exigida na falta) evita esse problema. A calculadora de Saturação de TC do SPARK auxilia nessa verificação."
+        },
+        {
+          "id": "s5",
+          "title": "Polaridade e o ponto de marcação",
+          "type": "text",
+          "body": "A polaridade dos TCs é crítica, especialmente em proteções direcionais (67) e diferenciais (87). O ponto de marcação indica o sentido de referência da corrente. Uma inversão de polaridade na ligação de um TC pode fazer a proteção diferencial 'enxergar' uma corrente de carga normal como falta interna — causando trip indevido — ou, pior, deixar de operar numa falta real. Conferir a polaridade é etapa obrigatória no comissionamento."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "TCs e TPs reduzem corrente/tensão a valores seguros (5/1 A, 115 V) e isolam os relés — são os olhos da proteção. A RTC/RTP define o que o relé enxerga. Classes de medição (0,3-1,2) e proteção (5P/10P com ALF) têm propósitos distintos. A saturação do TC em faltas severas é um risco que se evita por dimensionamento (Vk), e a polaridade correta é vital para proteções direcionais e diferenciais."
+        }
+      ]
+    },
+    {
+      "id": "c08",
+      "order": 7,
+      "title": "Capítulo 8 — Integração dos Fundamentos",
+      "subtitle": "Como os conceitos se conectam na prática",
+      "estimatedMinutes": 9,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Do conceito ao ajuste real",
+          "type": "text",
+          "body": "Os fundamentos deste e-book convergem para uma única tarefa prática: ajustar corretamente uma proteção. O processo típico é: (1) levantar o sistema e calcular as correntes de falta (com PU e sequências); (2) escolher as funções de proteção (filosofia); (3) definir as zonas e a coordenação; (4) selecionar TCs/TPs adequados (sem saturação); (5) calcular os ajustes de pickup e tempo; (6) verificar a seletividade. Cada etapa usa um dos fundamentos estudados."
+        },
+        {
+          "id": "s2",
+          "title": "As ferramentas do SPARK que apoiam esses fundamentos",
+          "type": "list",
+          "items": [
+            "Componentes Simétricas e Valor por Unidade (PU) — base de cálculo",
+            "Curto-Circuito — correntes 3φ/FF/FT por sequências",
+            "RTC/RTP e Saturação de TC — dimensionamento dos transformadores de instrumentação",
+            "Curvas de Sobrecorrente (51) e Coordenação — ajustes e seletividade",
+            "Proteção de Distância (21) e Balanço Diferencial (87T) — funções específicas"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Os fundamentos — requisitos, PU, componentes simétricas, tipos e cálculo de faltas, zonas, filosofia e TCs/TPs — convergem na tarefa de ajustar uma proteção. O processo vai do cálculo de faltas à verificação de seletividade, e cada etapa usa uma ferramenta. Dominar estes fundamentos é o pré-requisito para qualquer função de proteção específica. As trilhas e calculadoras do SPARK consolidam esse conhecimento na prática."
+        }
+      ]
     }
   ]
 }
