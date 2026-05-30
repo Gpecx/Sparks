@@ -160,6 +160,14 @@ class AdminDialogs {
     );
   }
 
+  static Future<void> showBulkImportEbooks(BuildContext context, WidgetRef ref) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => _BulkEbookImportDialog(ref: ref),
+    );
+  }
+
   static Future<void> showDeleteAllContent(BuildContext context, WidgetRef ref) async {
     await showDialog(
       context: context,
@@ -1446,6 +1454,204 @@ class _EbookImportDialogState extends State<_EbookImportDialog> {
           ),
         ),
       ),
+    );
+  }
+}
+
+// ─── BULK EBOOK IMPORT DIALOG ────────────────────────────────────────────────
+class _BulkEbookImportDialog extends StatefulWidget {
+  final WidgetRef ref;
+  const _BulkEbookImportDialog({required this.ref});
+
+  @override
+  State<_BulkEbookImportDialog> createState() => _BulkEbookImportDialogState();
+}
+
+class _BulkEbookImportDialogState extends State<_BulkEbookImportDialog> {
+  _Phase _phase = _Phase.idle;
+  int _done = 0;
+  int _total = 0;
+  int _success = 0;
+  int _failed = 0;
+  String? _errorMsg;
+
+  Future<void> _pickAndImport() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      withData: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+
+    final bytes = result.files.first.bytes;
+    if (bytes == null) {
+      setState(() => _errorMsg = 'Não foi possível ler o arquivo.');
+      return;
+    }
+
+    List<dynamic> jsonList;
+    try {
+      final raw = utf8.decode(bytes);
+      jsonList = jsonDecode(raw) as List<dynamic>;
+    } catch (e) {
+      setState(() => _errorMsg = 'Arquivo inválido (esperado um array de e-books): $e');
+      return;
+    }
+
+    setState(() {
+      _phase = _Phase.loading;
+      _total = jsonList.length;
+      _done = 0;
+      _success = 0;
+      _failed = 0;
+      _errorMsg = null;
+    });
+
+    final counts = await widget.ref
+        .read(adminControllerProvider.notifier)
+        .importBulkEbooksFromJSON(
+          jsonList,
+          onProgress: (done, total) {
+            if (mounted) setState(() => _done = done);
+          },
+        );
+
+    if (mounted) {
+      setState(() {
+        _phase = _Phase.done;
+        _success = counts['success'] ?? 0;
+        _failed = counts['failed'] ?? 0;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: AppColors.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 480),
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF2DD4BF).withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.library_books, color: Color(0xFF2DD4BF), size: 26),
+                  ),
+                  const SizedBox(width: 16),
+                  const Expanded(
+                    child: Text(
+                      'Importar E-books em Massa',
+                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  if (_phase != _Phase.loading)
+                    IconButton(
+                      icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                      onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 28),
+              if (_phase == _Phase.idle) ...[
+                const Text(
+                  'Selecione o arquivo all_ebooks.json com todos os e-books.',
+                  style: TextStyle(color: AppColors.textSecondary, height: 1.5),
+                  textAlign: TextAlign.center,
+                ),
+                if (_errorMsg != null) ...[
+                  const SizedBox(height: 12),
+                  Text(_errorMsg!, style: const TextStyle(color: AppColors.error, fontSize: 13)),
+                ],
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    icon: const Icon(Icons.folder_open),
+                    label: const Text('SELECIONAR all_ebooks.json'),
+                    onPressed: _pickAndImport,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF2DD4BF),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+              ] else if (_phase == _Phase.loading) ...[
+                Text(
+                  'Importando e-books...',
+                  style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 15),
+                ),
+                const SizedBox(height: 16),
+                LinearProgressIndicator(
+                  value: _total > 0 ? _done / _total : 0,
+                  backgroundColor: AppColors.card,
+                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF2DD4BF)),
+                  minHeight: 8,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  '$_done / $_total',
+                  style: const TextStyle(color: Color(0xFF2DD4BF), fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+              ] else ...[
+                Icon(
+                  _failed == 0 ? Icons.check_circle : Icons.warning_amber_rounded,
+                  color: _failed == 0 ? Colors.green : AppColors.orange,
+                  size: 52,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _failed == 0 ? 'Importação concluída!' : 'Importação com erros',
+                  style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                _statRow(Icons.check, '$_success e-books importados', Colors.green),
+                if (_failed > 0) ...[
+                  const SizedBox(height: 6),
+                  _statRow(Icons.close, '$_failed com erro', AppColors.error),
+                ],
+                const SizedBox(height: 28),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF2DD4BF),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('FECHAR'),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _statRow(IconData icon, String label, Color color) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color, size: 18),
+        const SizedBox(width: 8),
+        Text(label, style: TextStyle(color: color, fontSize: 14)),
+      ],
     );
   }
 }
