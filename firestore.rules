@@ -73,7 +73,7 @@ service cloud.firestore {
           request.resource.data.diff(resource.data).affectedKeys().hasOnly(['clanId', 'clanName'])
           && (
               isSelf(uid)
-              || !('clanId' in resource.data) 
+              || !('clanId' in resource.data)
               || resource.data.clanId == ""
               || (('clanId' in resource.data) && resource.data.clanId != "" && (isClanAdminOrModerator(resource.data.clanId) || get(/databases/$(database)/documents/clans/$(resource.data.clanId)).data.createdBy == request.auth.uid))
               || (('clanId' in request.resource.data) && request.resource.data.clanId != "" && (isClanAdminOrModerator(request.resource.data.clanId) || get(/databases/$(database)/documents/clans/$(request.resource.data.clanId)).data.createdBy == request.auth.uid))
@@ -215,8 +215,8 @@ service cloud.firestore {
 
       match /quests/{questId} {
         allow read: if isAuthenticated();
-        allow write: if isClanAdminOrModerator(clanId) 
-          || isAdmin() 
+        allow write: if isClanAdminOrModerator(clanId)
+          || isAdmin()
           || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
       }
 
@@ -229,7 +229,7 @@ service cloud.firestore {
     }
 
     // ─── RANKINGS ─────────────────────────────────────────────────
- 
+
     match /rankings/{id} {
       allow read: if isAuthenticated();
       allow write: if false;
@@ -302,6 +302,16 @@ service cloud.firestore {
       allow create: if isAuthenticated()
         && request.resource.data.uid == request.auth.uid;
       allow update, delete: if false;
+    }
+
+    // ─── PEDIDOS (ORDERS) ─────────────────────────────────────────
+    // O dono do pedido pode ler o status (necessário para o listener
+    // do PaymentPendingScreen detectar a confirmação do pagamento).
+    // Escrita exclusiva via Cloud Functions (Admin SDK — ignora regras).
+
+    match /orders/{orderId} {
+      allow read: if isAuthenticated();
+      allow write: if false;
     }
 
     // ─── SUPORTE ──────────────────────────────────────────────────
