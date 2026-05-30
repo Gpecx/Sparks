@@ -1,0 +1,213 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "DNP3",
+  "moduleSubtitle": "Arquitetura, objetos e segurança DNP3 SA",
+  "moduleOrder": 1,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a principal aplicacao do protocolo DNP3 em um sistema de automacao de subestacoes (SAS)?",
+      "options": [
+        "Sincronismo de tempo de alta precisao para fasores.",
+        "Comunicacao entre IEDs ou RTUs em campo e o centro de controle (SCADA).",
+        "Substituicao do barramento de processo para envio de tensoes e correntes.",
+        "Ligacao fisica exclusiva para reles eletromecanicos antigos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O DNP3 e amplamente utilizado para integracao confiavel entre equipamentos de campo e os centros de controle SCADA (Informacao externa as fontes).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em arquiteturas modernas de automacao de subestacoes baseadas no padrao IEC 61850, como equipamentos legados operando em DNP3 sao integrados ao.",
+      "options": [
+        "Substituindo suas placas de rede por conectores RS-232.",
+        "Por meio da utilizacao de um equipamento denominado Station Gateway.",
+        "Conectando-os diretamente ao barramento de processo de alta velocidade.",
+        "Atraves de conversores analogico-digitais exclusivos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme ilustrado nas arquiteturas do IEC 61850, protocolos legados como o DNP (DNP3) sao integrados ao nivel de estacao atraves de uma Station Gateway.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um sistema SCADA, o que representam as telessinalizacoes coletadas via protocolo DNP3 a partir de um IED de protecao?",
+      "options": [
+        "Comandos de bloqueio de rele enviados pelo mestre.",
+        "Valores em tempo real de tensao e corrente do sistema.",
+        "Estados digitais, como a posicao de um disjuntor (aberto ou fechado) e seus alarmes.",
+        "Configuracoes de relogio interno do equipamento de campo."
+      ],
+      "correctIndex": 2,
+      "explanation": "As telessinalizacoes (Binary Inputs no DNP3) indicam mudancas de status e alarmes fisicos dos equipamentos supervisionados (Informacao externa).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na modernizacao das redes de comunicacao industriais, como o DNP3 foi adaptado para operar sobre as redes Ethernet de subestacao?",
+      "options": [
+        "O protocolo foi reescrito descartando totalmente a sua camada de enlace original.",
+        "O quadro DNP3 original foi encapsulado sobre os protocolos de transporte da pilha TCP/IP.",
+        "Foi criado o padrao IEC 60870-5-104 exclusivamente para substituir o DNP3 IP.",
+        "Os dados passaram a ser transmitidos via cabo coaxial usando CSMA/CD puro."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para uso em Ethernet, o DNP3 mantem sua estrutura base encapsulando o quadro nativo dentro de protocolos de transporte TCP ou UDP (Informacao externa).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal vantagem do relatorio por excecao com time-stamp nativo do DNP3 para a operacao do SPCS?",
+      "options": [
+        "Dispensar totalmente a necessidade de um switch Ethernet na rede corporativa.",
+        "Garantir a analise precisa da Sequencia de Eventos (SOE) no centro de controle.",
+        "Aumentar a velocidade das mensagens multicast GOOSE no barramento local.",
+        "Limitar a emissao de alarmes apenas aos equipamentos da mesma marca comercial."
+      ],
+      "correctIndex": 1,
+      "explanation": "O carimbo de tempo gerado na origem permite ao SCADA reconstruir a ordem exata (SOE) em que as faltas e manobras ocorreram no sistema (Informacao externa).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para a execucao de telecomandos criticos pelo SCADA, como a abertura de um disjuntor, qual mecanismo do DNP3 confere maior seguranca contra.",
+      "options": [
+        "O uso de comandos de broadcast nao confirmados pela rede LAN.",
+        "A execucao em uma unica etapa sem verificacao denominada Direct Operate.",
+        "O mecanismo Select-Before-Operate, que exige armar e validar o ponto no IED antes da atuacao.",
+        "A encriptacao obrigatoria de todos os pacotes UDP enviados do mestre para a remota."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Select-Before-Operate (SBO) garante que o SCADA selecione e confirme a disponibilidade do ponto de controle antes de ordenar a atuacao final (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o DNP3 informa ao SCADA que uma telemedida coletada em campo apresenta problemas no sensor ou estourou os limites do conversor?",
+      "options": [
+        "Parando indefinidamente a comunicacao geral com o mestre TCP/IP.",
+        "Enviando o valor numerico zero repetidamente sem emitir outros avisos.",
+        "Por meio da inclusao de flags de qualidade de dados (data flags) anexadas a medicao enviada.",
+        "Solicitando um reinicio do servidor OPC remoto atraves de uma mensagem de excecao."
+      ],
+      "correctIndex": 2,
+      "explanation": "O DNP3 incorpora um byte contendo flags de qualidade para os pontos de dados (indicando falhas, over-range, etc), alertando sobre a integridade da medicao (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No contexto de engenharia e integracao de IEDs DNP3, qual e a funcao tecnica do Documento de Perfil do Dispositivo (Device Profile Document)?",
+      "options": [
+        "Descrever graficamente o esquema eletrico unifilar do barramento da subestacao.",
+        "Listar de forma padronizada as funcoes, objetos e as exatas capacidades de comunicacao suportadas pelo equipamento.",
+        "Substituir completamente a necessidade dos arquivos ICD e SCD definidos pela norma IEC 61850.",
+        "Fornecer ao operador as senhas e niveis de acesso as lógicas internas de protecao do rele."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Device Profile e um documento essencial que detalha as caracteristicas, grupos de objetos e limitacoes da implementacao DNP3 para aquele IED especifico (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando um sistema SCADA deve preferir utilizar a funcao Direct Operate em vez da seguranca extra do Select-Before-Operate no protocolo DNP3?",
+      "options": [
+        "Quando a rede ethernet local da subestacao apresenta um alto indice de colisao de pacotes.",
+        "Para operacoes em pontos de controle menos criticos, como o reset de alarmes, que dispensam verificacao em duas etapas.",
+        "Sempre que o comando for destinado a abrir ou fechar chaves seccionadoras motorizadas de alta tensao.",
+        "Exclusivamente quando o meio fisico de comunicacao empregado for RS-485 operando a dois fios."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Direct Operate executa o telecomando em uma unica etapa, sendo ideal para acoes secundarias que nao exigem a seguranca rigida de validacao do SBO (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante a integracao de um IED periferico rodando DNP3 ao barramento IEC 61850 via Station Gateway, qual grande desafio de engenharia deve ser.",
+      "options": [
+        "O mapeamento minucioso dos indices de pontos e classes do DNP3 para as semanticas de Logical Nodes (LNs) do IEC 61850.",
+        "A conversao eletronica de links de fibra optica multimodo diretamente para conexoes coaxiais RG-58 de alta perda.",
+        "A capacidade de forcar o rele DNP3 a publicar nativamente mensagens GOOSE no barramento da estacao.",
+        "A desabilitacao obrigatoria de todos os relatorios por excecao do IED para evitar colisoes com relatorios IEC 61850."
+      ],
+      "correctIndex": 0,
+      "explanation": "A gateway realiza a traducao semantica correlacionando indices de dados numericos do DNP3 as variaveis e estruturas de objetos orientados do IEC 61850 (Informacao externa).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Embora o DNP3 tenha sido projetado originalmente para comunicacao em meios seriais assincronos, adaptacoes posteriores permitiram a sua aplicacao.",
+      "correctAnswer": true,
+      "explanation": "O DNP3 evoluiu alem de sua arquitetura base serial, sendo rotineiramente encapsulado em pacotes IP para operar nas LANs industriais sobre Ethernet (Informacao externa).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Uma grande vantagem do protocolo DNP3 sobre os protocolos mais antigos focados puramente em polling e a sua capacidade de armazenar eventos com.",
+      "correctAnswer": true,
+      "explanation": "O DNP3 armazena mudancas de estado como eventos no buffer do IED, retransmitindo todo o historico armazenado quando a rede com o SCADA e reestabelecida (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em projetos de expansao do sistema de potencia usando DNP3 LAN, a avaliacao de compatibilidade e interoperabilidade independe da leitura dos Device.",
+      "correctAnswer": false,
+      "explanation": "O Ethernet resolve o enlace, mas para as aplicacoes DNP3 operarem em harmonia, os Device Profiles precisam ser analisados para alinhar os dados e capacidades (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A utilizacao da tecnica Select-Before-Operate (SBO) no DNP3 insere uma seguranca fundamental para manobras de disjuntor, embora resulte.",
+      "correctAnswer": true,
+      "explanation": "A verificacao dupla do SBO (select, response, operate, response) previne operacoes falhas por ruidos de comunicacao, aumentando levemente a latencia do telecomando (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No que diz respeito as flags de qualidade do DNP3 aplicadas a telemedidas, o recebimento de um dado com o bit da flag ONLINE marcado em nivel baixo.",
+      "correctAnswer": false,
+      "explanation": "Ao contrario, o estado ONLINE igual a zero (OFFLINE) serve como alerta para que o centro de controle ignore aquele valor, indicando problema na origem da medicao (Informacao externa).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O mecanismo do DNP3 que capacita o equipamento remoto a transmitir espontaneamente eventos criticos e alarmes ao SCADA, prescindindo do ciclo de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Responses"
+        }
+      ],
+      "explanation": "As Respostas Nao Solicitadas (Unsolicited Responses) viabilizam reportar imediatamente variaveis de estado e alarmes a fim de manter o SPCS em estado de alerta rapido (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O carimbo de tempo preciso gerado pelos IEDs DNP3 no instante da falta possibilita ao centro de operacoes realizar a reconstrucao fiel da Sequencia _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SOE"
+        }
+      ],
+      "explanation": "O recurso de analise da Sequencia de Eventos (SOE - Sequence Of Events) usa os dados com time-stamp milissegundo do DNP3 para avaliar o desempenho do sistema pos-falta (Informacao externa).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No agrupamento padrao de dados configurados no DNP3 para um IED, os dados estaticos correntes correspondentes ao estado presente e telemedidas nao _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "0"
+        }
+      ],
+      "explanation": "Toda leitura integral de valores estaticos da base de dados do IED sem analise temporal de ocorrencias e lida pelo SCADA solicitando interrogacao a Classe 0 (Informacao externa).",
+      "difficulty": "hard"
+    }
+  ]
+}

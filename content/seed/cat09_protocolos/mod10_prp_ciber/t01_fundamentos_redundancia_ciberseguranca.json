@@ -1,0 +1,213 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "PRP/HSR e Cibersegurança",
+  "moduleSubtitle": "Redundância PRP/HSR, IEC 62443 e IEC 62351",
+  "moduleOrder": 9,
+  "trail": "Fundamentos de Redundância e Cibersegurança",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza fisicamente a topologia de rede implementada com o protocolo PRP (Parallel Redundancy Protocol)?",
+      "options": [
+        "O uso de cabos seriais RS-485 unicamente.",
+        "A utilizacao de duas redes paralelas independentes chamadas LAN A e LAN B.",
+        "O confinamento das redes virtuais em um unico switch ethernet.",
+        "A montagem de equipamentos legados em um anel simples."
+      ],
+      "correctIndex": 1,
+      "explanation": "O protocolo PRP implementa redundancia transmitindo dados simultaneamente em duas redes paralelas e fisicamente separadas (PRP-A e PRP-B).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a topologia base estrutural e o limite de dispositivos documentado para a aplicacao do protocolo de redundancia HSR?",
+      "options": [
+        "Topologia em estrela com ate 10 IEDs.",
+        "Topologia em anel fechado interligando ate 50 IEDs.",
+        "Topologia em barramento linear sem limite de nos.",
+        "Malha completa com roteadores de borda L3."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme as fontes, o HSR (High-Availability Seamless Redundancy) e aplicado nativamente em aneis suportando ate 50 IEDs, permitindo reconfiguracao transparente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento e tecnicamente necessario para conectar dispositivos comuns, que nao possuem suporte nativo a redundancia, em redes PRP ou HSR?",
+      "options": [
+        "RedBox (Redundancy Manager in a Box).",
+        "Firewall fisico do nivel de estacao.",
+        "Servidor OPC dedicado.",
+        "Conversor analógico serial RS-232."
+      ],
+      "correctIndex": 0,
+      "explanation": "O RedBox atua como gerenciador de redundancia intermediario, sendo inserido para acoplar dispositivos simples sem suporte nativo aos protocolos PRP ou HSR.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual facilidade operacional dos IEDs modernos baseados na norma introduz um risco de ciberseguranca que exige a adocao de politicas rigorosas?",
+      "options": [
+        "A substituicao de reles eletromecanicos por fusiveis ultra-rapidos.",
+        "O acesso remoto aos IEDs pela rede, que possibilita a troca de parametros a longa distancia.",
+        "A visualizacao local de leituras em paineis analogicos.",
+        "A eliminacao completa de sistemas supervisorios locais."
+      ],
+      "correctIndex": 1,
+      "explanation": "A comodidade do acesso remoto possibilita alteracoes a distancia, o que pode resultar em desligamentos graves se o agente for mal-intencionado, exigindo politicas de acesso.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em relacao ao tempo de recomposicao da rede apos uma falha, como o protocolo legado RSTP se diferencia dos modernos protocolos PRP e HSR?",
+      "options": [
+        "O RSTP possui reconfiguracao de tempo zero, enquanto PRP e HSR levam 30 segundos para curar o link.",
+        "O RSTP leva menos de 5ms por nó para recompor, enquanto PRP e HSR oferecem reconfiguracao transparente (tempo zero de recuperacao).",
+        "Ambos possuem exatamente o mesmo tempo fixo de parada de 1 segundo.",
+        "O RSTP requer intervencao manual do operador SCADA efetuando resets nos switches."
+      ],
+      "correctIndex": 1,
+      "explanation": "O RSTP tem atraso de comutacao (recupera falhas em tempos menores que 5ms por nó), enquanto as tecnologias PRP e HSR provem zero recovery time (reconfiguracao transparente).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na terminologia da norma IEC 62439-3, como sao chamados tecnicamente os nos nativos que se conectam as duas redes LAN distintas do protocolo PRP?",
+      "options": [
+        "Nós SAN (Single Attached Node).",
+        "Nós DANP (Doubly Attached Node implementing PRP).",
+        "RedBoxes Proxy Universais.",
+        "Hosts DANH (High-availability Ring Node)."
+      ],
+      "correctIndex": 1,
+      "explanation": "Nos nativos de PRP sao referidos na norma IEC 62439-3 como DANP para atestar sua conexao dupla as redes A e B (Informacao nao contida nas fontes. Recomenda-se verificacao independente).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Diferente da abordagen paralela do protocolo PRP, qual e a exigencia topologica descrita pela IEC 62439-3 para os nos nativos (DANH) implementarem.",
+      "options": [
+        "Eles devem ser conectados a dois roteadores L3 independentes operando em topologia estrela.",
+        "Eles operam inseridos em topologia de anel, fechando o laco e repassando os quadros diretamente entre suas duas portas.",
+        "Eles exigem comunicacao exclusiva por links de micro-ondas.",
+        "Eles funcionam de forma isolada, desabilitando conexoes ethernet ativas."
+      ],
+      "correctIndex": 1,
+      "explanation": "No HSR (IEC 62439-3), os nos DANH compoem diretamente o anel de comunicacao, onde injetam tramas nas duas direcoes e repassam as demais adiante de forma nativa (Informacao nao contida nas fontes. Recomenda-se verificacao independente).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Alem das restricoes logicas em servidores de dominio, que tipo de medida fisica os documentos de automacao recomendam para incrementar a.",
+      "options": [
+        "O emprego exclusivo de cabeamentos coaxiais em detrimento da fibra otica.",
+        "A implementacao real de dispositivos de bloqueio fisico impedindo acessos de conexao frontal.",
+        "A publicacao irrestrita das senhas operacionais nos manuais entregues em campo.",
+        "A supressao compulsoria do protocolo de tempo nas interfaces industriais."
+      ],
+      "correctIndex": 1,
+      "explanation": "As fontes citam literalmente que dispositivos de bloqueio fisico podem ser implementados diretamente nos IEDs e nos switches, conferindo a rede um nivel de seguranca maior.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais restricoes sao comumente indicadas nas politicas de seguranca do servidor de dominio corporativo para mitigar as ameacas na rede de automacao?",
+      "options": [
+        "Habilitacao de rotas abertas e indiscriminadas de VLAN para a rede Wi-Fi corporativa.",
+        "Definicao de senhas fortes com caracteres especiais, prazo de validade das senhas e bloqueio massivo de portas USB.",
+        "Uso obrigatorio do antigo protocolo FTP transmitindo mensagens autenticadas em texto claro.",
+        "Aceitacao universal de perfis genericos e conexoes moveis nao autorizadas."
+      ],
+      "correctIndex": 1,
+      "explanation": "As recomendacoes de mitigacao em TI/OT incluem politicas de senhas complexas, regras de validade ciclica e o isolamento periferico atraves do bloqueio de portas USB.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No modelo de ciberseguranca embasado nos Principios CIA para Sistemas de Controle Industrial e normativas como a IEC 62351, qual requisito detem.",
+      "options": [
+        "A estrita Confidencialidade (C) dos fasores eletricos, precedendo as demais normas.",
+        "A Disponibilidade (A) do sistema, fundamental para assegurar a operacao e protecao ininterruptas perante faltas no processo.",
+        "A exclusividade do uso de impressoras locais em salas restritas.",
+        "A criacao de datacenters blindados imunes a manutencao de engenharia."
+      ],
+      "correctIndex": 1,
+      "explanation": "Em sistemas criticos de supervisao (OT), a Disponibilidade (Availability) para envio de trips tem prioridade maxima de operacao frente as condicoes de Confidencialidade comuns as areas de TI (Informacao nao contida nas fontes. Recomenda-se verificacao independente).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No fluxo operacional do protocolo de redundancia PRP, os IEDs ativos efetuam o envio das exatas mesmas tramas simultaneamente por ambas as.",
+      "correctAnswer": true,
+      "explanation": "As descricoes tecnicas mostram que o PRP transmite simultaneamente quadros clonados pelas redes independentes PRP-A e PRP-B.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O uso de modulos RedBox (Redundancy Manager in a Box) e proibido em arranjos de anel HSR, sendo seu emprego valido unicamente no protocolo.",
+      "correctAnswer": false,
+      "explanation": "A documentacao exibe diagramas atestando que os modulos RedBoxes sao perfeitamente aplicaveis em aneis HSR para pendurar na rede switches ou IEDs sem este protocolo nativo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o funcionamento normal e saudavel de um anel sob o protocolo RSTP, o mecanismo elege uma porta para atuar com o status Discarding visando.",
+      "correctAnswer": true,
+      "explanation": "Para prevenir as tempestades de broadcast associadas aos loops infinitos, a topologia logica do RSTP bloqueia preventivamente o fluxo excedente na porta Alternate/Discarding.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para auxiliar o log e auditoria de seguranca nos IEDs mais recentes, a ocorrencia e as metricas de invasoes de ciberseguranca podem ser.",
+      "correctAnswer": true,
+      "explanation": "A arvore de dados do equipamento dispoe o objeto CybSecEvt (Evento de Cyber Security) incorporado aos registros do LPHD0 para alertar quebras de defesa.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na arquitetura moderna, a normativa IEC 62443 organiza as condicoes de defesa cibernetica na subestacao segmentando logicamente os ativos.",
+      "correctAnswer": true,
+      "explanation": "A IEC 62443 formaliza a defesa em profundidade estruturando o isolamento de componentes em Zonas de seguranca unidas por regras de Conduites de comunicacao (Informacao nao contida nas fontes. Recomenda-se verificacao independente).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para administrar senhas com efetividade centralizada e proteger o sistema contra incidentes ciberneticos, a engenharia estabelece as restricoes e _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "dominio"
+        }
+      ],
+      "explanation": "Os manuais orientam ao time de automacao implementar politicas de senhas e bloqueios perante toda a arvore concentrando as diretrizes de acesso pelo servidor de dominio.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na infraestrutura pautada pelo protocolo High-Availability Seamless Redundancy (HSR), a capacidade escalavel imposta pelas diretrizes das _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "50"
+        }
+      ],
+      "explanation": "As indicacoes de design assinalam expressamente o limite maximo compativel de operacao em anel fechado para o protocolo HSR sendo dimensionado para ate 50 devices per ring.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Os computadores de automacao e relés convencionais providos de porta comunicante unica que requerem o encapsulamento de um equipamento RedBox para _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SAN"
+        }
+      ],
+      "explanation": "A nomenclatura Single Attached Node (SAN) representa as estacoes legadas ou de entrada simples, incapazes de aplicar as transmissoes bidirecionais simultaneas sem o RedBox atrelado (Informacao nao contida nas fontes. Recomenda-se verificacao independente).",
+      "difficulty": "hard"
+    }
+  ]
+}

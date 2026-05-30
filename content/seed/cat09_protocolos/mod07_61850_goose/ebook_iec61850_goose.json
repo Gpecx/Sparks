@@ -1,0 +1,140 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 61850 - GOOSE",
+  "moduleSubtitle": "Fundamentos, configuração SCL, testes e validação",
+  "moduleOrder": 6,
+  "ebookTitle": "IEC 61850 — GOOSE",
+  "ebookSubtitle": "Trip e intertravamento digitais: o GOOSE substituindo a fiação de cobre",
+  "estimatedMinutes": 60,
+  "trailFiles": [
+    "t01_fundamentos_goose.json",
+    "t02_aplicacoes_goose.json",
+    "t03_implementacao_testes_goose.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — O que é GOOSE",
+      "subtitle": "A mensagem que substitui o fio de trip",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O conceito",
+          "type": "text",
+          "body": "O GOOSE (Generic Object Oriented Substation Event) é o serviço da IEC 61850 para a troca rápida de informação entre IEDs — substituindo a fiação de cobre de trip, intertravamento e bloqueio. Em vez de um fio conectando o contato de um relé à entrada de outro, uma mensagem GOOSE multicast leva o estado (ex.: 'trip ativado', 'disjuntor aberto') de um IED a todos os interessados na rede, em poucos milissegundos. É um dos pilares da subestação digital."
+        },
+        {
+          "id": "s2",
+          "title": "Características que tornam o GOOSE adequado a proteção",
+          "type": "list",
+          "items": [
+            "Multicast — uma mensagem chega a múltiplos assinantes simultaneamente",
+            "Rápido — entrega em poucos milissegundos (requisito típico < 4 ms para trip)",
+            "Camada 2 (Ethernet) — sem a sobrecarga do TCP/IP, para máxima velocidade",
+            "Retransmissão e supervisão — garante entrega e detecta falha do enlace",
+            "Carrega estados (não medições contínuas) — eventos discretos"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Por que camada 2 (sem TCP/IP)",
+          "type": "note",
+          "body": "O GOOSE roda diretamente sobre Ethernet (camada 2), sem TCP/IP. A razão é a velocidade: o handshake e a confirmação do TCP adicionariam latência incompatível com os requisitos de proteção (milissegundos). Em vez de confiar na confirmação do TCP, o GOOSE garante a entrega por outro mecanismo: a retransmissão repetida. Por ser camada 2, o GOOSE é confinado ao domínio de broadcast (a VLAN/segmento) — não atravessa roteadores, ficando dentro da subestação."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O GOOSE substitui a fiação de cobre de trip/intertravamento por mensagens multicast rápidas (ms) entre IEDs. É multicast, em camada 2 (sem TCP/IP, para velocidade — requisito típico <4 ms), com retransmissão e supervisão. Carrega estados discretos (eventos), não medições contínuas, e fica confinado ao segmento de rede da subestação."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Retransmissão e Supervisão",
+      "subtitle": "Como o GOOSE garante confiabilidade",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O mecanismo de retransmissão",
+          "type": "text",
+          "body": "Sem a confirmação do TCP, o GOOSE garante a entrega pela retransmissão. Em repouso (sem mudanças), a mensagem é repetida periodicamente com um intervalo longo (heartbeat — ex.: a cada segundo), apenas para 'dizer que está vivo'. Quando ocorre um evento (mudança de estado), o GOOSE dispara uma rajada de retransmissões muito rápidas (ex.: a cada poucos ms), que vão espaçando progressivamente até voltar ao intervalo de repouso. Essa rajada garante que o evento crítico chegue, mesmo que alguns pacotes se percam."
+        },
+        {
+          "id": "s2",
+          "title": "Os contadores StNum e SqNum",
+          "type": "list",
+          "items": [
+            "StNum (State Number) — incrementa a cada novo evento (mudança de estado); diz 'esta é uma informação nova'",
+            "SqNum (Sequence Number) — incrementa a cada retransmissão dentro do mesmo estado; diz 'esta é mais uma cópia do mesmo evento'",
+            "Juntos, permitem ao assinante distinguir um evento novo de uma retransmissão e detectar perda de mensagens",
+            "Um salto no StNum sem as retransmissões intermediárias indica que algo foi perdido"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A auto-supervisão (Time Allowed to Live)",
+          "type": "note",
+          "body": "Cada mensagem GOOSE informa o 'tempo de vida' (Time Allowed to Live) — quando a próxima mensagem deve chegar. O assinante monitora isso: se a próxima mensagem não chega no prazo (cabo rompido, IED desligado, switch com problema), o assinante detecta a perda de comunicação e alarma. Esta é uma vantagem enorme sobre o fio de cobre: um fio de trip rompido só seria descoberto numa falta; a perda de um GOOSE é detectada e alarmada imediatamente — supervisão contínua do enlace de proteção."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O GOOSE garante entrega por retransmissão: heartbeat lento em repouso, rajada rápida (que vai espaçando) ao mudar de estado. O StNum (novo evento) e o SqNum (retransmissão) permitem distinguir evento de cópia e detectar perdas. O Time Allowed to Live habilita a auto-supervisão — a perda do GOOSE é detectada e alarmada na hora, ao contrário de um fio de trip rompido."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Configuração e Testes de GOOSE",
+      "subtitle": "Do SCL à validação em campo",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Configuração via SCL",
+          "type": "text",
+          "body": "A configuração do GOOSE é feita nos arquivos SCL: define-se o dataset (quais dados o GOOSE carrega), o GOOSE Control Block (GoCB — que configura a publicação: APPID, endereço MAC multicast, VLAN, intervalos), e as assinaturas (quais IEDs recebem e o que fazem com cada dado). A matriz de comunicação, derivada do SCD, documenta todas as publicações e assinaturas — o 'mapa' do GOOSE da subestação, equivalente ao diagrama de fiação da subestação convencional."
+        },
+        {
+          "id": "s2",
+          "title": "Parâmetros-chave do GOOSE",
+          "type": "list",
+          "items": [
+            "APPID — identificador da aplicação, distingue mensagens GOOSE diferentes na rede",
+            "MAC multicast — endereço de destino (faixa reservada para GOOSE)",
+            "VLAN ID e prioridade — segmentação e QoS para o tráfego crítico",
+            "GoID / GoCB Reference — identificam o control block",
+            "confRev — número de revisão da configuração (detecta incompatibilidade)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Testando o GOOSE",
+          "type": "text",
+          "body": "O teste de GOOSE tem várias frentes: verificar a publicação com um analisador de rede (sniffer) — confirmar que o IED publica o GOOSE esperado; verificar a assinatura — confirmar que o IED assinante reage; e o teste ponta a ponta com mala de teste IEC 61850 — a mala publica um GOOSE simulando o publicador (para testar o assinante) ou assina o GOOSE de trip (para medir o tempo de resposta de um IED a uma falta injetada). Mede-se o tempo total do evento à reação, que deve atender ao requisito (tipicamente < 4 ms para trip)."
+        },
+        {
+          "id": "s4",
+          "title": "Testar a supervisão da perda",
+          "type": "note",
+          "body": "Um teste essencial e às vezes esquecido: simular a PERDA do GOOSE (desconectar o cabo, parar a publicação) e confirmar que o IED assinante detecta e alarma a perda de comunicação, e que a lógica reage adequadamente (ex.: bloqueia a função que depende daquele GOOSE em vez de operar indevidamente). Testar apenas o caminho feliz (GOOSE chegando) sem testar a falha deixa um cenário crítico sem validação."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O GOOSE é configurado via SCL (dataset, GoCB com APPID/MAC/VLAN, assinaturas), documentado na matriz de comunicação. O teste verifica publicação (sniffer), assinatura, ponta a ponta (mala publica/assina GOOSE) e o tempo total (<4 ms para trip), além de simular a PERDA do GOOSE para confirmar a supervisão e o bloqueio adequado. O GOOSE substitui a fiação de trip com velocidade, confiabilidade e supervisão contínua."
+        }
+      ]
+    }
+  ]
+}

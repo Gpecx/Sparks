@@ -1,0 +1,213 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "OPC-UA",
+  "moduleSubtitle": "Arquitetura, address space e segurança",
+  "moduleOrder": 4,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Na arquitetura descrita nas fontes, como e realizada a comunicacao entre o sistema supervisorio e os IEDs de campo?",
+      "options": [
+        "Por paineis de controle puramente eletromecanicos.",
+        "Utilizando um servidor OPC com drive MMS instalado na infraestrutura do datacenter.",
+        "Via links seriais ponto a ponto sem conversao de protocolo.",
+        "Por mensagens GOOSE diretas para a tela do SCADA."
+      ],
+      "correctIndex": 1,
+      "explanation": "A comunicacao entre o sistema supervisorio e os IEDs e feita utilizando um servidor OPC com drive MMS instalado no datacenter.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual solucao tecnologica foi testada no Laboratorio de Praticas Eletricas (LPE) visando atualizar e integrar os novos CLPs da planta?",
+      "options": [
+        "Um rele eletromecanico auxiliar.",
+        "O cartao OPC UA disponivel para o novo modelo de PLC.",
+        "Uma antena Wi-Fi 5G corporativa.",
+        "Um conversor serial RS-232 padrao."
+      ],
+      "correctIndex": 1,
+      "explanation": "No LPE foi documentado o teste de um cartao OPC UA disponivel para o novo modelo de PLC visando a atualizacao tecnologica.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual dos seguintes testes de integracao com o PLC de processo foi realizado e validado no Laboratorio de Praticas Eletricas (LPE)?",
+      "options": [
+        "O bloqueio fisico das redes Ethernet.",
+        "O funcionamento do padrao OPC comunicando com o PLC de processo.",
+        "O comando direto de abertura de disjuntores de 230kV por painel local.",
+        "O desligamento da fonte de alimentacao do GPS."
+      ],
+      "correctIndex": 1,
+      "explanation": "A tabela de testes do LPE relata o teste bem-sucedido de funcionamento do OPC comunicando com o PLC de processo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Onde o servidor OPC com drive MMS, que interliga o SCADA aos IEDs, costuma ser alocado fisicamente na arquitetura do SAS?",
+      "options": [
+        "No painel de media tensao externo.",
+        "Sempre dentro da caixa do transformador de forca.",
+        "Em uma infraestrutura de datacenter da planta.",
+        "Apenas no patio de chaves ao ar livre."
+      ],
+      "correctIndex": 2,
+      "explanation": "A arquitetura consolida as maquinas e servidores, como o servidor OPC com drive MMS, em uma infraestrutura segura de datacenter.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o papel conceitual do padrao OPC-UA na arquitetura de sistemas industriais modernos?",
+      "options": [
+        "Substituir os cabos de forca primarios de alta tensao.",
+        "Atuar como ponte padronizada integrando o nivel de automacao (OT) aos sistemas de gestao (TI).",
+        "Restringir a comunicacao exclusivamente a antigas redes seriais RS-485.",
+        "Descartar completamente a existencia e necessidade do SCADA."
+      ],
+      "correctIndex": 1,
+      "explanation": "O OPC-UA atua como uma camada agnostica de interoperabilidade, fluindo dados do chao de fabrica (OT) ate o ERP/Cloud (TI) (Informacao externa).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De que forma o padrao OPC-UA viabiliza a integracao de subestações IEC 61850 aos sistemas corporativos (MES e ERP)?",
+      "options": [
+        "Ignorando completamente a semantica dos logical nodes originais da norma.",
+        "Pelo mapeamento fiel das estruturas e objetos do IEC 61850 para o Address Space do servidor OPC-UA.",
+        "Convertendo os dados digitais em puros sinais analogicos de 4-20mA.",
+        "Bloqueando a rede corporativa TCP com firewalls fisicos no gateway."
+      ],
+      "correctIndex": 1,
+      "explanation": "Ha um mapeamento tecnico padronizado que traduz Logical Nodes e Data Objects do IEC 61850 para a hierarquia de Nos do OPC-UA (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual recurso especifico do OPC-UA otimiza o uso da banda de rede ao enviar telemedidas dinâmicas para o SCADA?",
+      "options": [
+        "O mecanismo de assinatura de dados (Subscriptions) reportando valores somente quando ocorrem variacoes.",
+        "A compressao fisica aplicada nativamente aos cabos ethernet.",
+        "O envio continuo e massivo de mensagens de broadcast UDP para toda a planta.",
+        "A reducao da taxa de transmissao do link em switches de borda."
+      ],
+      "correctIndex": 0,
+      "explanation": "O modelo Pub-Sub e o recurso de Subscriptions reportam apenas por excecao (mudancas de dados), otimizando a carga na rede (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para gerenciar de forma estruturada as anomalias e atuacoes de reles, como o OPC-UA modela as ocorrencias criticas da subestação?",
+      "options": [
+        "Pelo antigo padrao OPC Data Access (DA) voltado para variaveis estaticas.",
+        "Utilizando o perfil especifico e servicos de Alarmes e Eventos (A e C - Alarms and Conditions).",
+        "Requisitando a leitura sequencial de logs exportados em arquivos de texto.",
+        "Pulsando contatos fisicos nas portas RS-232 da Station Gateway."
+      ],
+      "correctIndex": 1,
+      "explanation": "O perfil Alarms and Conditions (A e C) estrutura a troca de eventos, limites de alarme e alertas do equipamento remoto ao servidor (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em instalacoes que mesclam tecnologias antigas e novas, como equipamentos legados sem suporte ethernet sao inseridos em uma arquitetura OPC-UA?",
+      "options": [
+        "Isolando-os atraves do uso de transformadores de potencial (TP).",
+        "Por meio da utilizacao de gateways conversores de protocolo que embarcam um Servidor OPC-UA.",
+        "Mudando diretamente a base de hardware do relatorio de faltas no barramento de processo.",
+        "Somente os descartando, pois arquiteturas hibridas nao operam o protocolo OPC-UA."
+      ],
+      "correctIndex": 1,
+      "explanation": "Gateways realizam a aquisicao via protocolos seriais/legados (ex: modbus) e expoem essa base na rede Ethernet como um Server OPC-UA (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao planejar a integracao de dados na perspectiva da Industria 4.0, qual vantagem nativa do modelo de informacao do OPC-UA se sobressai perante o.",
+      "options": [
+        "A dependencia intrinseca a tecnologias Microsoft DCOM.",
+        "A transmissao de registradores brutos sem contexto para poupar bytes.",
+        "O fornecimento de rica semantica, conectando variaveis a seus significados, unidades e metadados diretamente na origem.",
+        "A operacao exclusiva em topologias passivas de Token Ring."
+      ],
+      "correctIndex": 2,
+      "explanation": "O OPC-UA carrega um modelo orientado a objetos auto-descritivo, informando a estrutura logica, unidade e contexto do dado para o cliente de TI (Informacao externa).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Registros do Laboratorio de Praticas Eletricas (LPE) documentaram testes de avaliacao que comprovaram o funcionamento do padrao OPC na comunicacao.",
+      "correctAnswer": true,
+      "explanation": "As fontes citam literalmente o Teste de funcionamento do OPC comunicando com o PLC de processo executado no LPE.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em projetos modernos de automacao da planta, e recomendado o uso de um servidor OPC com drive MMS operando a partir do datacenter para concentrar e.",
+      "correctAnswer": true,
+      "explanation": "As fontes indicam que a comunicacao com o supervisorio utiliza servidor OPC com drive MMS instalado fisicamente na infraestrutura de datacenter.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O teste de um cartao OPC UA disponivel para o novo modelo de PLC evidencia a iniciativa das equipes de engenharia em inserir novas interfaces de.",
+      "correctAnswer": true,
+      "explanation": "A execucao de teste de cartao OPC UA para o novo modelo de PLC foi documentada na tabela de solucoes validadas pela engenharia no laboratorio LPE.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No mapeamento da integracao, o modelo hierarquico IEC 61850 (Logical Devices, Logical Nodes) precisa ser totalmente destruido e formatado.",
+      "correctAnswer": false,
+      "explanation": "O OPC-UA Address Space possui grande flexibilidade orientada a objetos, permitindo mapear perfeitamente a rica arvore e hierarquia da norma IEC 61850 (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Diferentemente dos protocolos abertos mais antigos que dependem apenas de firewalls de rede, o OPC-UA possui perfil de ciberseguranca nativo.",
+      "correctAnswer": true,
+      "explanation": "A especificacao OPC-UA possui recursos integrados Secure Channel suportando certificados X.509 e encriptacao AES, mitigando riscos de acesso (Informacao externa).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A concentracao e interface dos dados entre a rede de IEDs da subestacao e o sistema SCADA no datacenter e gerenciada pela utilizacao de um servidor _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "OPC"
+        }
+      ],
+      "explanation": "O servidor OPC equipado com drives MMS consolida os relatorios dos reles para a operacao centralizada pelo sistema supervisorio na planta.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Buscando atualizar o controle operacional das usinas com padroes de Industria 4.0, o LPE documentou testes utilizando o novo cartao nativo _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "OPC UA"
+        }
+      ],
+      "explanation": "A documentacao do LPE listou os testes funcionais do cartao OPC UA visando incorporar os novos padroes de conectividade ao sistema de automacao de processos.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No monitoramento avancado de perturbacoes do sistema de potencia pelo OPC-UA, o perfil que padroniza o envio de limites extrapolados e atencao _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Conditions"
+        }
+      ],
+      "explanation": "O modulo Alarms and Conditions (A e C) do OPC-UA cuida de notificar, armazenar e reconhecer ocorrencias criticas no ambiente supervisionado (Informacao externa).",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 61850 - MMS e Modelo de Dados",
+  "moduleSubtitle": "LDs, LNs, DOs, SCL e serviços MMS",
+  "moduleOrder": 5,
+  "trail": "Implementação (LDs, LNs, DOs, SCL)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que significa a sigla SCL na engenharia de sistemas baseados na norma IEC 61850?",
+      "options": [
+        "Substation Configuration description Language.",
+        "System Control Logic.",
+        "Substation Communication Link.",
+        "Serial Control Language."
+      ],
+      "correctIndex": 0,
+      "explanation": "SCL (Substation Configuration description Language) e a linguagem padronizada baseada em XML usada para descrever formalmente o sistema.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual arquivo SCL e utilizado para descrever as capacidades funcionais e comunicacao de exatamente um unico IED de forma nativa?",
+      "options": [
+        "SCD",
+        "ICD",
+        "CID",
+        "SSD"
+      ],
+      "correctIndex": 1,
+      "explanation": "O arquivo ICD (IED Capability Description) e fornecido pelo fabricante para descrever exatamente as capacidades e limites de um unico IED.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na hierarquia do modelo de dados do IED, qual e a funcao tecnica primária de um Logical Device (LD)?",
+      "options": [
+        "Substituir o roteador de borda da subestacao.",
+        "Agrupar Logical Nodes relacionados a funcoes afins do processo.",
+        "Transmitir as mensagens multicast no barramento de processo.",
+        "Executar isoladamente o sincronismo de tempo via satelite."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Logical Device atua como um conteiner agrupador de Logical Nodes afins, simplificando a organizacao das funcoes do equipamento.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual tipo de arquivo SCL consolida a subestacao completa contendo todos os IEDs, parametros de rede e a topologia primaria?",
+      "options": [
+        "ICD",
+        "CID",
+        "SCD",
+        "SSD"
+      ],
+      "correctIndex": 2,
+      "explanation": "O SCD (Substation Configuration Description) e o arquivo de sistema que consolida todos os IEDs, redes e a descricao do unifilar da subestacao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a sequencia correta da hierarquia estrutural de dados definida pela IEC 61850 do nivel de topo para a base?",
+      "options": [
+        "LN -> LD -> Server -> DO.",
+        "Server -> Logical Device -> Logical Node -> Data Object -> Data Attribute.",
+        "Data Object -> Logical Node -> Logical Device -> Server.",
+        "Server -> Data Object -> Logical Node -> Logical Device."
+      ],
+      "correctIndex": 1,
+      "explanation": "A estruturacao hierarquica base inicia no Server (IED), desce para Logical Devices, depois Logical Nodes, Data Objects e finalmente Data Attributes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No modelo de dados, como as variaveis operacionais ctlVal e stVal sao classificadas hierarquicamente?",
+      "options": [
+        "Como Logical Devices segmentados por protecao.",
+        "Como Servers isolados no mapa de memoria.",
+        "Como Data Attributes alocados dentro de Data Objects.",
+        "Como Common Data Classes de nivel estacao."
+      ],
+      "correctIndex": 2,
+      "explanation": "Variaveis como ctlVal (valor de controle) e stVal (status) sao atributos de dados (Data Attributes) que compoem as propriedades dos Data Objects.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na estruturacao de atributos de dados, o que a restrição Functional Constraint MX representa tecnicamente?",
+      "options": [
+        "Comandos e lógicas de operacao critica.",
+        "Valores analogicos mensurados (Measurements).",
+        "Informacoes discretas de status.",
+        "Configuracoes estaticas do dispositivo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O FC MX caracteriza atributos vinculados a valores analogicos medidos em campo, a exemplo de tensoes e correntes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o protocolo garante o controle e consistencia de versao de Data Sets e Control Blocks em sistemas distribuidos?",
+      "options": [
+        "Atraves do uso de assinaturas e certificados X.509.",
+        "Por meio do atributo de revisao de configuracao ConfRev embutido nos pacotes.",
+        "Bloqueando o endereco MAC de todos os IEDs desatualizados na rede.",
+        "Exigindo aceitacao manual do operador a cada novo frame MMS recebido."
+      ],
+      "correctIndex": 1,
+      "explanation": "O ConfRev contabiliza as alteracoes de configuracao e e verificado online para assegurar que publicador e assinante operem na mesma versao estrutural.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas ferramentas de engenharia de sistema, qual e a principal caracteristica da abordagem de projeto conhecida como top-down?",
+      "options": [
+        "Foca puramente no detalhamento individual sem diagrama unifilar.",
+        "Suporta a engenharia do sistema off-line a partir da especificacao e unifilar globais.",
+        "Restringe a configuracao as lógicas locais de um unico rele isolado.",
+        "Ignora completamente a modelagem e nomenclatura dos IEDs fisicos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A abordagem top-down inicia pela modelagem do sistema global e do unifilar (SSD), permitindo associar os Logical Nodes exigidos antes mesmo do detalhamento local do rele.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na formacao do nome exclusivo de um Logical Node (LNName), qual e a composicao concatenada correta estipulada pela norma?",
+      "options": [
+        "Apenas o nome padrao da classe de protecao.",
+        "Um prefixo livre, seguido pela classe padronizada e pelo numero obrigatorio da instancia.",
+        "O endereco IP do equipamento acoplado a sigla do Logical Device.",
+        "O numero MAC Address mesclado a familia do Logical Node."
+      ],
+      "correctIndex": 1,
+      "explanation": "O LNName e composto pelo Prefixo do LN (livre), a Classe de LN (fixa/padrao) e o Numero de Instancia, garantindo a distincao em LNs da mesma classe.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O arquivo CID (Configured IED Description) e projetado para descrever um IED destacado e individual, contemplando as configuracoes do projeto que.",
+      "correctAnswer": true,
+      "explanation": "O arquivo CID e derivado do projeto global para fornecer exatamente a base de configuracao necessaria que devera ser carregada na memoria daquele IED especifico.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A diretriz de livre alocacao de funcoes afeta severamente o padrao, pois ao misturar os Logical Nodes entre diferentes LDs, a interoperabilidade e.",
+      "correctAnswer": false,
+      "explanation": "A livre alocacao de Logical Nodes suporta diferentes arquiteturas sem perturbar a interoperabilidade, sendo este um dos pilares de otimizacao permitidos pela norma.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A linguagem baseada em XML utilizada na engenharia das subestacoes digitais e a SCL, que inclui o detalhamento da topologia fisica, as conexoes.",
+      "correctAnswer": true,
+      "explanation": "O XML Substation Configuration Language (SCL) consolida o desenho unifilar, o mapeamento funcional (LNs), os pacotes de rede e o hardware em uma linguagem de intercâmbio padrao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Atributos com Functional Constraint FC ST identificam nativamente informacoes exclusivas e acionamentos para as lógicas de controle operacional.",
+      "correctAnswer": false,
+      "explanation": "A constraint ST refere-se a valores de Status (Status Value), indicando a posicao atual ou saude. Os dados designados para ordem/acionamento utilizam o FC CO (Control).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na aplicacao pratica das ferramentas de integracao, o arquivo SSD atua fornecendo a especificacao do unifilar da subestacao com todos os LNs.",
+      "correctAnswer": true,
+      "explanation": "O System Specification Description (SSD) modela as expectativas estruturais e logicas da estacao sem a obrigacao de alocar as marcas comerciais e IEDs na fase conceitual do projeto.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para agrupar definicoes e viabilizar reutilizacao no arquivo SCL, os moldes e estruturas de todos os LNs e atributos sao catalogados na sessao Data _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Templates"
+        }
+      ],
+      "explanation": "A sessao DataTypeTemplates do SCL consolida os tipos base, garantindo que as instancias ao longo do arquivo herdem corretamente essas formatacoes de dados reduzindo o tamanho e erros.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A sintaxe exata e as hierarquias de formatacao requeridas num arquivo SCL sao verificadas ativamente por analisadores automaticos utilizando as _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Esquema"
+        }
+      ],
+      "explanation": "O Esquema XML (XML Schema) dita o formato, a ordem obrigatoria e as tags permitidas que tornam o arquivo SCL compreensivel para quaisquer configuradores do mercado.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As colecoes de variaveis montadas pelos engenheiros para envio via GOOSE devem sobreviver a perda de associacao de cliente, exigindo ser _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Persistente"
+        }
+      ],
+      "explanation": "Data Sets vinculados as transmissoes deterministas (GOOSE) e armazenados definitavemente no relatorio de configuracao sao classificados estruturalmente como persistentes (persistent data sets).",
+      "difficulty": "hard"
+    }
+  ]
+}

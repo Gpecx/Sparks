@@ -1,0 +1,142 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 60870-5-101",
+  "moduleSubtitle": "Telecontrol serial, ASDUs e IOAs",
+  "moduleOrder": 2,
+  "ebookTitle": "IEC 60870-5-101",
+  "ebookSubtitle": "O padrão europeu de telecontrole serial: ASDUs, IOAs e tipos de informação",
+  "estimatedMinutes": 50,
+  "trailFiles": [
+    "t01_fundamentos_101.json",
+    "t02_aplicacoes_101.json",
+    "t03_implementacao_101.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos da IEC 60870-5-101",
+      "subtitle": "O telecontrole padronizado",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A família IEC 60870-5",
+          "type": "text",
+          "body": "A série IEC 60870-5 é o conjunto de normas europeias para telecontrole (telecontrol) de sistemas de potência. A parte 101 (IEC 60870-5-101) define o protocolo de telecontrole sobre links seriais. É amplamente usada na Europa, no Brasil e em muitos países para a comunicação entre subestações e centros de operação, cumprindo papel equivalente ao do DNP3 nas Américas. É um protocolo maduro, robusto e padronizado internacionalmente."
+        },
+        {
+          "id": "s2",
+          "title": "Características principais",
+          "type": "list",
+          "items": [
+            "Telecontrole de subestações e centros de operação (comando e monitoramento)",
+            "Estampa de tempo nos eventos (para SOE)",
+            "Transmissão por iniciativa (relatório espontâneo de mudanças) e por interrogação",
+            "Robustez em links seriais (rádio, linha dedicada)",
+            "Modelo de dados padronizado com endereçamento hierárquico"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Comparação com DNP3",
+          "type": "note",
+          "body": "IEC 60870-5-101 e DNP3 são, na essência, primos: ambos derivam dos mesmos conceitos da IEC 60870-5 (camada de enlace, modelo EPA), ambos fazem telecontrole de energia com estampa de tempo e relatório por exceção. A diferença é geográfica e de detalhe: o 101 predomina na Europa/Brasil, o DNP3 nas Américas. Quem domina os conceitos de um entende rapidamente o outro — eles resolvem o mesmo problema com sotaques diferentes."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A IEC 60870-5-101 é o padrão europeu/brasileiro de telecontrole serial de sistemas de potência, equivalente ao DNP3 nas Américas (ambos derivam da IEC 60870-5). Tem estampa de tempo, transmissão espontânea e por interrogação, robustez serial e modelo de dados padronizado com endereçamento hierárquico."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — ASDUs e Endereçamento (IOA)",
+      "subtitle": "Como a informação é estruturada",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A ASDU — unidade de dados de aplicação",
+          "type": "text",
+          "body": "A ASDU (Application Service Data Unit) é a unidade fundamental de informação do 101. Cada ASDU tem um TIPO (que define a natureza da informação — estado digital, medida, comando), uma causa de transmissão (por que está sendo enviada — espontânea, interrogação, comando), e os objetos de informação propriamente ditos. Entender a estrutura da ASDU é entender como o protocolo organiza e transmite cada dado."
+        },
+        {
+          "id": "s2",
+          "title": "Tipos de ASDU comuns",
+          "type": "list",
+          "items": [
+            "Single point / Double point — estados digitais (um ou dois bits, este distingue aberto/fechado/em trânsito/inválido)",
+            "Measured value — valores medidos (normalizado, escalonado ou ponto flutuante)",
+            "Step position — posição de comutador de tap",
+            "Single/Double command — comandos de manobra",
+            "Setpoint command — comandos de ajuste analógico",
+            "Versões com estampa de tempo (CP56Time2a) para eventos"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O endereço do objeto (IOA)",
+          "type": "text",
+          "body": "Cada ponto de informação tem um endereço único: o IOA (Information Object Address). Combinado com o endereço comum da ASDU (que identifica a estação/setor), o IOA localiza precisamente cada grandeza no sistema. Configurar a integração 101 é, em boa parte, mapear corretamente os IOAs — definir qual endereço corresponde a qual disjuntor, medição ou comando. Um IOA mal mapeado leva o centro de operação a ler ou comandar o ponto errado."
+        },
+        {
+          "id": "s4",
+          "title": "A causa de transmissão",
+          "type": "note",
+          "body": "Um conceito importante do 101 é a causa de transmissão (COT — Cause of Transmission): cada ASDU indica POR QUE está sendo enviada — espontânea (mudança detectada), resposta à interrogação geral, confirmação de comando (ativação/terminação), etc. Isso permite ao receptor interpretar corretamente o contexto da informação. Por exemplo, uma confirmação de comando tem COT diferente de um relato espontâneo de mudança de estado, mesmo que o dado seja o mesmo."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A ASDU é a unidade de dados do 101, com tipo, causa de transmissão (COT) e objetos. Os tipos incluem single/double point, measured value, comandos e setpoints, com versões com estampa de tempo. O IOA (Information Object Address) endereça cada ponto — mapear IOAs corretamente é o cerne da integração. A COT informa por que a ASDU foi enviada (espontânea, interrogação, confirmação)."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Implementação e Boas Práticas",
+      "subtitle": "Integrando com o centro de operação",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Interrogação geral e inicialização",
+          "type": "text",
+          "body": "Ao iniciar a comunicação (ou após uma reconexão), o mestre faz uma interrogação geral (general interrogation): pede ao escravo o estado atual de todos os pontos, para sincronizar sua imagem do sistema. Depois, a operação normal é por exceção (mudanças espontâneas). A sincronização de tempo também é parte da inicialização — o mestre envia o horário para que os escravos estampem os eventos com tempo correto."
+        },
+        {
+          "id": "s2",
+          "title": "Boas práticas de integração",
+          "type": "list",
+          "items": [
+            "Documentar a lista de pontos (IOA, tipo, descrição) — a 'matriz de pontos'",
+            "Garantir sincronização de tempo para SOE confiável",
+            "Configurar corretamente as causas de transmissão e a interrogação geral",
+            "Testar comandos com cuidado (confirmar mapeamento antes de manobrar equipamento real)",
+            "Validar a comunicação em condições de link degradado (robustez)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O lugar do 101 e a evolução para o 104",
+          "type": "note",
+          "body": "O 101 (serial) é robusto e maduro, mas limitado pela infraestrutura serial. Com a disseminação das redes IP, sua evolução natural é o IEC 60870-5-104, que adapta o mesmo modelo de ASDUs para rodar sobre TCP/IP. Quem domina o 101 domina o 104 — o modelo de dados é praticamente o mesmo, mudando a camada de transporte. Em modernizações, gateways convertem 101 serial para 104 sobre IP."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A integração 101 começa com interrogação geral (sincroniza a imagem) e segue por exceção, com sincronização de tempo para SOE. Boas práticas: documentar a matriz de pontos (IOA), sincronizar tempo, configurar COT/interrogação e testar comandos com cuidado. O 101 (serial, robusto, maduro) evolui para o 104 (mesmo modelo sobre TCP/IP) — dominar um é dominar o outro."
+        }
+      ]
+    }
+  ]
+}

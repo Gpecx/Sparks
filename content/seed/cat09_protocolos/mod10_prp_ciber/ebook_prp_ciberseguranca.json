@@ -1,0 +1,156 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "PRP/HSR e Cibersegurança",
+  "moduleSubtitle": "Redundância PRP/HSR, IEC 62443 e IEC 62351",
+  "moduleOrder": 9,
+  "ebookTitle": "Redundância de Rede e Cibersegurança",
+  "ebookSubtitle": "PRP/HSR sem perda de pacote e a defesa cibernética da subestação digital",
+  "estimatedMinutes": 65,
+  "trailFiles": [
+    "t01_fundamentos_redundancia_ciberseguranca.json",
+    "t02_aplicacoes_prp_ciber.json",
+    "t03_implementacao_62439_62443_62351.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Redundância de Rede sem Perda (PRP e HSR)",
+      "subtitle": "Quando a rede não pode falhar nem por um pacote",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que redundância sem tempo de recuperação",
+          "type": "text",
+          "body": "Na subestação digital, a rede carrega a proteção (GOOSE de trip, Sampled Values). Para esse tráfego crítico, os protocolos de redundância convencionais (como o RSTP, que recupera um anel em dezenas a centenas de ms) são lentos demais — durante a recuperação, pacotes se perdem, o que poderia atrasar um trip ou cegar uma proteção SV. A solução é a redundância SEM tempo de recuperação (bumpless): o PRP e o HSR, padronizados na IEC 62439-3."
+        },
+        {
+          "id": "s2",
+          "title": "PRP (Parallel Redundancy Protocol)",
+          "type": "text",
+          "body": "No PRP, cada nó crítico (DAN — Doubly Attached Node) conecta-se a DUAS redes independentes e paralelas (LAN A e LAN B). Cada quadro é enviado simultaneamente pelas duas redes; o receptor usa o primeiro que chega e descarta o duplicado. Se uma rede falha completamente, a outra já está entregando os mesmos dados — sem nenhuma perda de pacote e sem tempo de recuperação. O custo é a infraestrutura dupla (duas redes completas)."
+        },
+        {
+          "id": "s3",
+          "title": "HSR (High-availability Seamless Redundancy)",
+          "type": "text",
+          "body": "O HSR alcança o mesmo resultado (zero perda) com uma topologia em anel: cada nó envia o quadro nos dois sentidos do anel simultaneamente. O quadro circula até retornar ao emissor, que o remove. O receptor usa a primeira cópia e descarta a segunda. Se o anel é rompido em um ponto, os quadros ainda chegam pelo outro sentido — sem perda. O HSR usa um único anel (economiza infraestrutura em relação ao PRP), mas exige que os nós sejam HSR-capazes."
+        },
+        {
+          "id": "s4",
+          "title": "PRP vs HSR",
+          "type": "list",
+          "items": [
+            "PRP — duas redes paralelas independentes; mais infraestrutura, mas usa switches comuns",
+            "HSR — um anel; menos infraestrutura, mas exige nós HSR-capazes e switches específicos",
+            "Ambos — zero tempo de recuperação (bumpless), exigência para GOOSE/SV",
+            "RedBox — dispositivo que conecta nós simples (SAN) a uma rede PRP/HSR",
+            "A escolha depende do custo de infraestrutura, da topologia e dos equipamentos"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Para proteção (GOOSE/SV), o RSTP é lento demais (perde pacotes na recuperação). PRP e HSR (IEC 62439-3) dão redundância sem perda (bumpless): PRP envia por duas redes paralelas (o receptor usa a primeira que chega); HSR envia nos dois sentidos de um anel. PRP usa mais infraestrutura com switches comuns; HSR usa um anel com nós capazes. RedBox conecta nós simples."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — A Ameaça Cibernética à Subestação",
+      "subtitle": "Quando o digital vira alvo",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que a subestação digital é um alvo",
+          "type": "text",
+          "body": "A digitalização e a conectividade trouxeram enormes benefícios — mas também expuseram a infraestrutura crítica a ameaças cibernéticas com consequências físicas reais. Um ataque bem-sucedido pode desligar cargas, danificar equipamentos, ou causar blackouts. Casos reais (como os ataques à rede elétrica da Ucrânia em 2015 e 2016) demonstraram que a ameaça é concreta. A cibersegurança deixou de ser opcional e tornou-se parte indissociável do projeto de SPCS."
+        },
+        {
+          "id": "s2",
+          "title": "As superfícies de ataque",
+          "type": "list",
+          "items": [
+            "Acesso remoto (manutenção, telecontrole) — porta de entrada se mal protegida",
+            "Protocolos sem segurança nativa (MODBUS, DNP3/104 puros) — comandos podem ser forjados",
+            "Mídias removíveis e notebooks de manutenção — vetor de malware",
+            "Convergência TI/TO — a rede corporativa comprometida pode alcançar a TO",
+            "Cadeia de suprimentos — equipamentos/firmware comprometidos na origem",
+            "Falta de atualização e senhas padrão — vulnerabilidades conhecidas não corrigidas"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "TI vs TO: prioridades diferentes",
+          "type": "note",
+          "body": "A cibersegurança de TO (Tecnologia Operacional — automação) tem prioridades diferentes da TI corporativa. Na TI, a tríade clássica prioriza Confidencialidade > Integridade > Disponibilidade. Na TO, a ordem se inverte: Disponibilidade e Integridade vêm primeiro (o sistema PRECISA funcionar e os dados PRECISAM ser confiáveis), e a confidencialidade é secundária. Além disso, sistemas de TO têm ciclos de vida longos (décadas) e não podem ser simplesmente reiniciados ou atualizados a qualquer momento. Aplicar soluções de TI cegamente na TO pode ser contraproducente."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A digitalização expôs a subestação a ciberataques com consequências físicas (desligamentos, danos, blackouts) — ameaça já demonstrada em casos reais. As superfícies de ataque incluem acesso remoto, protocolos inseguros, mídias, convergência TI/TO e cadeia de suprimentos. A cibersegurança de TO prioriza Disponibilidade e Integridade (ao contrário da TI), com ciclos de vida longos — exigindo abordagem própria."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — As Normas: IEC 62443 e IEC 62351",
+      "subtitle": "O arcabouço da defesa",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "IEC 62443 — segurança de sistemas de automação",
+          "type": "text",
+          "body": "A IEC 62443 é a principal família de normas de cibersegurança para sistemas de automação industrial (IACS). Ela aborda a segurança de forma sistêmica: define níveis de segurança (SL), o conceito de zonas e condutos (segmentar a rede em zonas de confiança, controlando o tráfego entre elas pelos condutos), requisitos para fornecedores e integradores, e um programa de gestão de segurança. É a base para estruturar a cibersegurança de toda a instalação, não apenas pontos isolados."
+        },
+        {
+          "id": "s2",
+          "title": "Zonas e condutos (defense in depth)",
+          "type": "list",
+          "items": [
+            "Segmentar a rede em zonas de confiança (ex.: zona de proteção, zona de SCADA, zona corporativa)",
+            "Controlar o tráfego entre zonas pelos condutos (firewalls, DMZ)",
+            "Defesa em profundidade — múltiplas camadas, não um único perímetro",
+            "Princípio do menor privilégio — cada um acessa só o necessário",
+            "Uma zona comprometida não deve dar acesso livre às demais"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "IEC 62351 — segurança dos protocolos de potência",
+          "type": "text",
+          "body": "A IEC 62351 trata especificamente da segurança dos protocolos de comunicação de sistemas de potência. Ela adiciona segurança aos protocolos que nasceram sem ela: o 62351-3 protege a camada de transporte (TLS) para protocolos sobre TCP/IP (como o 104 e o MMS); o 62351-4 trata do MMS; o 62351-5 do DNP3 (Secure Authentication); e o 62351-6 dos GOOSE e SV (autenticação para impedir mensagens forjadas). É a norma que torna os protocolos de SPCS resistentes a ataques."
+        },
+        {
+          "id": "s4",
+          "title": "Boas práticas de cibersegurança",
+          "type": "list",
+          "items": [
+            "Segmentação de rede (zonas e condutos) e firewalls entre TI e TO",
+            "Controle de acesso forte (sem senhas padrão), gestão de usuários e privilégios mínimos",
+            "Monitoramento de intrusão e registro de eventos de segurança",
+            "Gestão de atualizações (patches) de forma controlada",
+            "Hardening dos dispositivos (desabilitar serviços não usados)",
+            "Backup seguro das configurações e plano de resposta a incidentes",
+            "Aplicação do IEC 62351 nos protocolos e do IEC 62443 no sistema"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A IEC 62443 estrutura a cibersegurança do sistema (níveis SL, zonas e condutos, defesa em profundidade); a IEC 62351 protege os protocolos de potência (TLS para 104/MMS, SA para DNP3, autenticação de GOOSE/SV). As boas práticas unem segmentação, controle de acesso, monitoramento, atualização e hardening. Redundância (PRP/HSR) garante disponibilidade da rede, e a cibersegurança garante sua integridade — pilares indissociáveis da subestação digital confiável."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 61850 - MMS e Modelo de Dados",
+  "moduleSubtitle": "LDs, LNs, DOs, SCL e serviços MMS",
+  "moduleOrder": 5,
+  "trail": "Fundamentos de IEC 61850 (Modelo de Dados)",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o principal objetivo da norma IEC 61850 na comunicacao entre IEDs de diferentes fabricantes em uma subestacao?",
+      "options": [
+        "Garantir a interoperabilidade de funcoes e equipamentos.",
+        "Assegurar a intercambiabilidade fisica de hardware.",
+        "Padronizar apenas o cabeamento de cobre.",
+        "Restringir a comunicacao a links seriais assincronos."
+      ],
+      "correctIndex": 0,
+      "explanation": "A norma visa garantir a interoperabilidade entre os IEDs, permitindo a troca e uso correto de informacoes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a finalidade de separar o modelo de dados da pilha de protocolos na arquitetura IEC 61850?",
+      "options": [
+        "Limitar o numero de relés de protecao na rede.",
+        "Manter as aplicacoes independentes da tecnologia especifica de rede e protocolo.",
+        "Forcar a utilizacao exclusiva de cabos coaxiais.",
+        "Aumentar a velocidade das mensagens de tempo critico GOOSE."
+      ],
+      "correctIndex": 1,
+      "explanation": "A abstracao separa os dados da comunicacao para manter a aplicacao a prova de futuras mudancas na tecnologia de rede.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na hierarquia do modelo de dados da norma IEC 61850, o Physical Device (IED) atua sob qual designacao na rede?",
+      "options": [
+        "Client",
+        "Server",
+        "Gateway",
+        "Router"
+      ],
+      "correctIndex": 1,
+      "explanation": "O equipamento fisico IED e modelado formalmente como um Server (Servidor) que hospeda a hierarquia de dados.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No modelo de dados padronizado, o Logical Node com o mnemônico XCBR representa qual equipamento primario do sistema?",
+      "options": [
+        "Transformador de corrente",
+        "Chave seccionadora",
+        "Disjuntor de circuito",
+        "Relé de sobrecorrente"
+      ],
+      "correctIndex": 2,
+      "explanation": "A sigla XCBR e o Logical Node padronizado que modela os dados referentes ao disjuntor (Circuit Breaker).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A comunicacao cliente-servidor (MMS) no padrao IEC 61850 utiliza nativamente quantas camadas do modelo de referencia ISO/OSI?",
+      "options": [
+        "Apenas 2 camadas.",
+        "3 camadas restritas.",
+        "5 camadas.",
+        "As 7 camadas completas."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os servicos Cliente-Servidor (como o MMS sobre TCP/IP) utilizam toda a pilha das 7 camadas do modelo ISO/OSI.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com o padrao de nomenclatura dos Logical Nodes, o que a sigla MMXU designa no modelo de dados?",
+      "options": [
+        "Funcao de protecao diferencial.",
+        "Unidade de medicao de grandezas operacionais.",
+        "Lógica de controle de intertravamento.",
+        "Supervisao local do circuito de trip."
+      ],
+      "correctIndex": 1,
+      "explanation": "A sigla MMXU define a unidade de medicao que concentra correntes, tensoes e potencias calculadas no processo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a hierarquia de dados, qual elemento estrutural tem a funcao de agrupar os Logical Nodes (LNs)?",
+      "options": [
+        "Data Object",
+        "Server",
+        "Logical Device",
+        "Data Attribute"
+      ],
+      "correctIndex": 2,
+      "explanation": "O Logical Device (LD) e o container responsavel por agrupar funcoes afins representadas pelos Logical Nodes (LNs).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual servico MMS de diretorio deve ser utilizado por um cliente para obter a lista de Logical Devices de um Server?",
+      "options": [
+        "GetServerDirectory",
+        "GetDataDirectory",
+        "GetLogicalNodeDirectory",
+        "FileTransfer"
+      ],
+      "correctIndex": 0,
+      "explanation": "O servico GetServerDirectory permite explorar os Logical Devices e arquivos contidos inicialmente no Server.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em qual parte da norma IEC 61850 as Common Data Classes (CDC) e seus atributos estao formalmente definidos?",
+      "options": [
+        "Parte 7-1",
+        "Parte 7-2",
+        "Parte 7-3",
+        "Parte 8-1"
+      ],
+      "correctIndex": 2,
+      "explanation": "As classes comuns de dados (CDC) padronizadas, como DPC e SPS, sao detalhadas e especificadas na Parte 7-3.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o nome da interface padrao que garante a abstracao entre a aplicacao e a rede, permitindo interoperabilidade independente do protocolo?",
+      "options": [
+        "Specific Communication Service Mapping (SCSM)",
+        "Abstract Communication Services Interface (ACSI)",
+        "Manufacturing Message Specification (MMS)",
+        "Generic Object Oriented Substation Event (GOOSE)"
+      ],
+      "correctIndex": 1,
+      "explanation": "A ACSI prove modelos de servicos abstratos para garantir independencia da comunicacao frente as tecnologias especificas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A norma IEC 61850 define que interoperabilidade e a capacidade de IEDs trocarem informacoes e usarem esses dados para a execucao correta das funcoes.",
+      "correctAnswer": true,
+      "explanation": "Interoperabilidade foca na troca e uso eficiente de dados operacionais, diferindo da intercambiabilidade fisica de hardware.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os servicos cliente-servidor utilizando o protocolo MMS sao projetados especificamente para a transmissao de mensagens de tempo critico, como os.",
+      "correctAnswer": false,
+      "explanation": "O envio de comandos e mensagens criticas de tempo, como trips, e feito por GOOSE, enquanto o MMS e usado para funcoes nao criticas de tempo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O modelo de dados da IEC 61850 suporta a livre alocacao das funcoes e dos Logical Nodes nos equipamentos IEDs, permitindo flexibilidade na.",
+      "correctAnswer": true,
+      "explanation": "A norma permite livre alocacao dos Logical Nodes, possibilitando solucoes centralizadas ou totalmente distribuidas de acordo com a engenharia.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na hierarquia da IEC 61850, as variaveis como ctlVal (valor de controle) e stVal (valor de status) sao denominadas e configuradas como Logical.",
+      "correctAnswer": false,
+      "explanation": "Essas variaveis sao tecnicamente definidas como Data Attributes, localizados dentro de Data Objects sob a hierarquia do Logical Node.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A definicao do mapeamento concreto (SCSM) dos modelos abstratos ACSI para as estruturas do MMS operando sobre TCP/IP e detalhada na Parte 8-1 da.",
+      "correctAnswer": true,
+      "explanation": "A Parte 8-1 da IEC 61850 estabelece a traducao formal do modelo abstrato para as estruturas concretas utilizando ISO 9506 e TCP/IP.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O Logical Node de protecao responsavel pelo elemento de sobrecorrente temporizada no modelo IEC 61850 e designado pela sigla padrao _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "PTOC"
+        }
+      ],
+      "explanation": "O PTOC modela o elemento de sobrecorrente (Protection Time Overcurrent) conforme definido nos grupos de Logical Nodes da norma.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na hierarquia do modelo, a estrutura que organiza as funcoes internas do IED agrupando os Logical Nodes em categorias funcionais e o Logical _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Device"
+        }
+      ],
+      "explanation": "Os Logical Devices (LDs) consolidam os Logical Nodes para simplificar a localizacao e modelamento funcional dentro do IED Servidor.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A linguagem baseada em formato XML que descreve formalmente a configuracao do sistema da subestacao para garantir interoperabilidade entre _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SCL"
+        }
+      ],
+      "explanation": "SCL significa Substation Configuration description Language e descreve a topologia e as interconexoes dos dispositivos na norma.",
+      "difficulty": "hard"
+    }
+  ]
+}

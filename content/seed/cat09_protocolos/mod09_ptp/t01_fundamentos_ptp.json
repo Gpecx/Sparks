@@ -1,0 +1,213 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "PTP e Sincronismo de Tempo",
+  "moduleSubtitle": "IEEE 1588, SNTP, grandmaster e testes",
+  "moduleOrder": 8,
+  "trail": "Fundamentos de PTP (IEEE 1588) e SNTP",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a precisao de sincronismo de tempo exigida pela norma IEC 61850 para a comparacao de fasores e coleta de Sampled Values?",
+      "options": [
+        "Cerca de 1 segundo.",
+        "Cerca de 1 milissegundo.",
+        "Cerca de 1 microssegundo.",
+        "Cerca de 1 minuto."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para funcoes vitais baseadas em SV, como calculo fasorial e comparacao de ondas, o sincronismo e critico e estipulado na ordem de 1 microssegundo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual protocolo de tempo e tipicamente utilizado nas redes industriais para registrar a estampa de eventos convencionais com precisao na casa dos.",
+      "options": [
+        "PTP",
+        "SNTP",
+        "GOOSE",
+        "MMS"
+      ],
+      "correctIndex": 1,
+      "explanation": "O SNTP atende bem a necessidade de estampar eventos e logs com exatidao de milissegundos para o SCADA local.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual protocolo foi desenvolvido a partir do padrao IEEE 1588 para prover sincronismo na faixa sub-microssegundo em redes Ethernet?",
+      "options": [
+        "SNTP",
+        "NTP",
+        "PTP",
+        "PRP"
+      ],
+      "correctIndex": 2,
+      "explanation": "O Precision Time Protocol (PTP) normatizado pelo IEEE 1588 fornece sincronizacao critica na faixa de microssegundos ou sub-microssegundos (Informacao externa).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um sistema de automacao, qual equipamento comumente atua como a fonte primaria global garantindo a mesma base de tempo a todos os IEDs?",
+      "options": [
+        "O switch ethernet gerenciavel.",
+        "O servidor OPC.",
+        "O receptor de satelite GPS.",
+        "O rele de protecao de distancia."
+      ],
+      "correctIndex": 2,
+      "explanation": "Um dispositivo GPS (Global Positioning System) devidamente configurado atua como fonte primaria, referenciando o sistema na mesma base de tempo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na aplicacao em subestacoes digitais, qual e a principal diferenca pratica de adocao entre os protocolos SNTP e PTP?",
+      "options": [
+        "O SNTP e restrito a fibra otica e o PTP usa cobre.",
+        "O SNTP atende o registro de eventos gerais, enquanto o PTP e exigido para fluxos criticos de processo como o Sampled Values.",
+        "O PTP nao funciona em redes com switches ethernet.",
+        "O SNTP entrega precisao de picossegundos enquanto o PTP atinge apenas segundos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O SNTP entrega precisao de milissegundos (suficiente para Sequence of Events), ja o PTP entrega microssegundos para Sampled Values e fasores.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a finalidade do algoritmo BMCA (Best Master Clock Algorithm) presente no padrao PTP?",
+      "options": [
+        "Aumentar o tamanho do pacote ethernet para evitar colisoes.",
+        "Eleger automaticamente o relogio de maior precisao e estabilidade na rede para atuar como referencia primaria.",
+        "Mudar a VLAN dos pacotes de tempo para a rede corporativa.",
+        "Descartar dados analogicos corrompidos na Merging Unit."
+      ],
+      "correctIndex": 1,
+      "explanation": "O BMCA avalia a qualidade e os atributos dos relogios disponiveis para determinar dinamicamente qual assumira o papel de mestre da rede (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na hierarquia de sincronismo do protocolo IEEE 1588, como e denominado o relogio principal que injeta e distribui a referencia absoluta de tempo.",
+      "options": [
+        "Boundary Clock.",
+        "Transparent Clock.",
+        "Grandmaster Clock.",
+        "Slave Clock."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Grandmaster Clock ocupa o topo da hierarquia do PTP, sendo a fonte primaria baseada em sinais GNSS/GPS para os escravos (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No mecanismo de troca de mensagens do protocolo PTP, qual pacote o relogio mestre emite de forma periodica para iniciar o ciclo de alinhamento.",
+      "options": [
+        "Delay_Req.",
+        "Delay_Resp.",
+        "Sync.",
+        "Announce."
+      ],
+      "correctIndex": 2,
+      "explanation": "A mensagem Sync e transmitida pelo mestre para marcar o tempo inicial de saida, iniciando o sincronismo do lado escravo (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para que serve exatamente a etapa de envio das mensagens Delay_Req e Delay_Resp entre o escravo e o mestre no PTP?",
+      "options": [
+        "Calcular a banda consumida pelo switch.",
+        "Medir e compensar o tempo de propagacao (atraso) que o pacote sofreu no cabo de rede.",
+        "Transferir os parametros de protecao para o rele.",
+        "Criar um tunel virtual criptografado na rede."
+      ],
+      "correctIndex": 1,
+      "explanation": "As mensagens de requisicao e resposta de atraso medem a latencia unidirecional do enlace fisico, viabilizando a correcao exata no escravo (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os Transparent Clocks (TC) mitigam o atraso variavel provocado pela permanencia do pacote nas filas dos switches durante a operacao do PTP?",
+      "options": [
+        "Roteando os pacotes pela porta serial em vez da porta ethernet.",
+        "Eles medem o tempo de residencia do pacote no switch e adicionam esse valor no campo de correcao da mensagem PTP em transito.",
+        "Bloqueando a passagem de qualquer outro protocolo que nao seja PTP.",
+        "Eles enviam uma mensagem de erro forçando o Grandmaster a reiniciar o ciclo."
+      ],
+      "correctIndex": 1,
+      "explanation": "Transparent clocks calculam o tempo que o pacote PTP levou para cruzar o hardware (residence time) e atualizam o pacote para evitar imprecisao (Informacao externa).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A utilizacao de um dispositivo de tempo GPS garante que todos os IEDs, servidores e switches do projeto operem na mesma base, gerando logs e.",
+      "correctAnswer": true,
+      "explanation": "A adocao de um relogio satelital central permite que todos os equipamentos apliquem a mesma estampa de tempo (timestamp) de forma confiavel.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O protocolo SNTP apresenta resolucao nativa compativel com fracoes de microssegundo, sendo o padrao isolado recomendado para o Barramento de.",
+      "correctAnswer": false,
+      "explanation": "O SNTP atende somente resolucao em milissegundos. Amostras de ondas e fasores (SV) requerem microssegundos, o que exige protocolos avancados como o PTP.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No modo operacional em duas etapas (two-step) do PTP, o mestre complementa o fluxo expedindo uma mensagem Follow_Up logo apos o disparo da mensagem.",
+      "correctAnswer": true,
+      "explanation": "No modelo two-step, devido a limitacoes de hardware em inserir o tempo on-the-fly, a mensagem Follow_Up e usada para enviar o tempo exato em que a Sync anterior saiu (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O padrao IEC 61850-9-3, tambem reconhecido pela IEEE C37.238, padroniza um perfil focado nas exigencias do setor de energia chamado especificamente.",
+      "correctAnswer": true,
+      "explanation": "O Power Profile harmoniza os parametros do PTP (como mapeamento direto na camada de enlace e tempos fixos) unicamente para os requisitos de subestacoes eletricas (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na arquitetura de topologia de tempo, um equipamento classificado como Boundary Clock restringe sua acao a atuar apenas como escravo passivo e.",
+      "correctAnswer": false,
+      "explanation": "O Boundary Clock atua simultaneamente como escravo na porta voltada para o Grandmaster e como mestre nas demais portas, cascateando o relogio com precisao limpa (Informacao externa).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para reconstituir a exata cronologia de atuacao dos reles no SCADA, o registro que cataloga os alarmes de subestacao em milissegundos e conhecido _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Events"
+        }
+      ],
+      "explanation": "O log ou Sequencia de Eventos (SOE) necessita de um relogio coerente para determinar qual contato atuou primariamente perante uma falta.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A norma e especificacao tecnica criada pela entidade global de engenharia que introduziu e balizou a utilizacao do Precision Time Protocol (PTP) _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "1588"
+        }
+      ],
+      "explanation": "O IEEE 1588 e o pilar internacional de normatizacao para relogios sincronizados de ultraprecisao voltados a ambientes de rede em malha (Informacao externa).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Durante perdas criticas de sinal satelital, o mecanismo algoritmico interno da rede confere a um relogio secundario pre-ajustado o status _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Grandmaster"
+        }
+      ],
+      "explanation": "Pelo algoritmo BMCA, na ocorrencia de falha da antena principal, a fonte reserva com melhor pontuacao de estratificacao ascende ao papel de Grandmaster (Informacao externa).",
+      "difficulty": "hard"
+    }
+  ]
+}

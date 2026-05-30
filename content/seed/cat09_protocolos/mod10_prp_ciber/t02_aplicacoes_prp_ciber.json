@@ -1,0 +1,213 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "PRP/HSR e Cibersegurança",
+  "moduleSubtitle": "Redundância PRP/HSR, IEC 62443 e IEC 62351",
+  "moduleOrder": 9,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Na aplicacao pratica de redes industriais, qual e o limite de equipamentos e a topologia base recomendada para o protocolo HSR?",
+      "options": [
+        "Anel fechado com ate 50 IEDs interligados.",
+        "Estrela simples com infinitos IEDs.",
+        "Barramento linear com ate 10 IEDs.",
+        "Malha completa roteada com 5 IEDs."
+      ],
+      "correctIndex": 0,
+      "explanation": "Conforme detalhado no documento sobre arquiteturas, o HSR e utilizado em topologias de anel suportando de forma ideal ate 50 dispositivos SIPROTEC.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o protocolo PRP implementa a redundancia fisica na arquitetura de comunicacao do sistema?",
+      "options": [
+        "Utilizando um anel simples bidirecional gerenciado por Spanning Tree.",
+        "Trafegando dados clonados simultaneamente em duas redes paralelas e independentes.",
+        "Desativando portas sobressalentes temporariamente em roteadores L3.",
+        "Usando unicamente links seriais RS-232 redundantes em cascata."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Parallel Redundancy Protocol (PRP) transmite simultaneamente a mesma informacao atraves de duas redes totalmente paralelas e separadas (PRP-A e PRP-B).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento permite integrar IEDs legados ou convencionais que nao possuem suporte nativo a redundancia em redes PRP ou HSR?",
+      "options": [
+        "Um firewall corporativo de borda.",
+        "Um Switch nao gerenciavel de camada 2.",
+        "Um modulo conversor RedBox.",
+        "Um servidor de tempo SNTP."
+      ],
+      "correctIndex": 2,
+      "explanation": "O RedBox (Redundancy Manager in a Box) atua como um gerenciador intermediario que acopla equipamentos de porta unica (sem redundancia nativa) as redes redundantes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual pratica e essencial na politica de ciberseguranca para mitigar riscos oriundos do acesso remoto aos IEDs modernos?",
+      "options": [
+        "Desativar todas as senhas operacionais para agilizar emergencias.",
+        "Definir senhas fortes, aplicar prazo de validade logica e bloquear portas USB fisicas.",
+        "Usar redes abertas Wi-Fi sem criptografia para agilizar a manutencao.",
+        "Abolir inteiramente a utilizacao do sistema supervisorio SCADA."
+      ],
+      "correctIndex": 1,
+      "explanation": "E fundamental implementar politicas de seguranca no servidor de dominio que exijam senhas fortes, com troca ciclica obrigatoria e bloqueios ao uso indevido de portas USB nos equipamentos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual tecnica e aplicada por engenheiros para evitar acionamentos indevidos gerados por conflito de MAC Address virtuais entre subestacoes.",
+      "options": [
+        "O confinamento das mensagens GOOSE valendo-se do bloqueio de VLAN especifica nos switches de fronteira.",
+        "A exclusao permanente das conexoes em fibra otica entre as plantas.",
+        "O envelopamento obrigatorio de todas as mensagens GOOSE dentro de datagramas TCP.",
+        "A utilizacao exlusiva de IEDs de apenas um unico fabricante no complexo industrial."
+      ],
+      "correctIndex": 0,
+      "explanation": "A tecnica de confinamento configura as VLANs nos switches para restringir o trafego das mensagens GOOSE ao ambiente local da subestacao original.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por qual razao tecnica os protocolos PRP e HSR sao as solucoes preferidas frente ao tradicional RSTP em fluxos criticos de Sampled Values e GOOSE?",
+      "options": [
+        "Eles reduzem significativamente a carga e o consumo de banda dos switches de rede.",
+        "Eles oferecem recomposicao transparente com tempo zero de perda de pacotes frente a falhas fisicas.",
+        "Eles exigem menor processamento computacional da CPU do rele.",
+        "Eles operam baseados no roteamento estatico nativo da camada 3 e 4 do modelo OSI."
+      ],
+      "correctIndex": 1,
+      "explanation": "PRP e HSR garantem zero recovery time (reconfiguracao transparente), ao passo que o RSTP leva alguns milissegundos para comutar a rota e ocasiona perda provisoria de trafego.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Alem de diretrizes de software geridas via servidores de dominio, qual barreira fisica e documentada como boa pratica defensiva na ciberseguranca.",
+      "options": [
+        "A aplicacao e instalacao de dispositivos reais de bloqueio fisico nas portas dos IEDs e switches.",
+        "A remocao por completo das interfaces Ethernet em todos os IEDs locais.",
+        "O abandono da topologia estrela em prol de links de fibra dedicados e nao emendados.",
+        "A substituicao compulsiva de todos os reles digitais por modelos eletromecanicos."
+      ],
+      "correctIndex": 0,
+      "explanation": "Alem das defesas logicas, dispositivos mecânicos de bloqueio fisico acoplados a IEDs e switches incrementam consistentemente as camadas de seguranca local.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Dentro da modelagem de dados para o SIPROTEC 5, qual Data Object sinaliza ativamente ao sistema a ocorrencia de um evento de seguranca cibernetica?",
+      "options": [
+        "BatFail",
+        "ClkFail",
+        "CybSecEvt",
+        "GoStop"
+      ],
+      "correctIndex": 2,
+      "explanation": "Localizado sob o Logical Node LPHD0 da aplicacao, o objeto CybSecEvt e o encarregado nativo de registrar e alarmar eventos ou ataques na ciberseguranca.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De que maneira praticada no estudo de caso os pacotes GOOSE de uma subestacao puderam quebrar o confinamento logico e vazar de forma indevida pela.",
+      "options": [
+        "Desabilitando o relogio GPS da antena mestre.",
+        "Pois foram configurados sem VLAN no IED (untagged) e o switch os envelopou com a VLAN nativa de comunicacao MMS permitida.",
+        "Devido ao roteador converter compulsoriamente os MAC Address dos datasets para multicast ARP.",
+        "Atraves de uma falha eletrica catastrofica generalizada na CPU do controlador mestre."
+      ],
+      "correctIndex": 1,
+      "explanation": "Mensagens sem marcacao (untagged) assumem o tag da VLAN nativa da porta (normalmente a do MMS, que tinha livre transito), escapando da regra que bloquearia a VLAN GOOSE exclusiva.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o efeito negativo imediato gerado pelo protocolo Spanning Tree (STP) sobre fluxos logicos criticos durante o instante exato da ocorrencia de.",
+      "options": [
+        "A comunicacao prossegue viavel porem perdendo apenas a leitura da estampa de tempo.",
+        "Ocasiona uma lacuna temporaria grave na comunicacao pois o algoritmo transita compulsoriamente pelas fases ativas de Listening e Learning.",
+        "O algoritmo muda os canais base de camada 2 diretamente para trafego encapsulado na camada 7, atrasando as mensagens.",
+        "Todos os disjuntores da subestacao acionam o comando de desarme generalizado preventivamente."
+      ],
+      "correctIndex": 1,
+      "explanation": "Diferente da redundancia seamless, o Spanning Tree carece de alguns segundos (passando por etapas estritas de calculo e escuta) antes de viabilizar a comutacao, inviabilizando trip via GOOSE nesse periodo.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A tecnologia e o esquema logico base do protocolo HSR proporcionam conectar e integrar nativamente ate 50 equipamentos compativeis operando.",
+      "correctAnswer": true,
+      "explanation": "A documentacao expoe que modulos ou redes HSR asseguram a reconfiguracao transparente abrangendo topologias que operam ate 50 IEDs conectados em anel.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O uso de modulos RedBox restringe-se integralmente a projetos baseados no protocolo PRP, sendo sua aplicacao impossivel de ocorrer em malhas HSR.",
+      "correctAnswer": false,
+      "explanation": "O RedBox atua como proxy universal da redundancia e pode ser empregado confiavelmente tanto em barramentos baseados no padrao PRP quanto em aneis HSR.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A politica de seguranca aplicada a servidores corporativos deve administrar requisitos de rede OT, regulamentando tanto parametros de senhas.",
+      "correctAnswer": true,
+      "explanation": "A protecao centralizada deve consolidar as restricoes por meio de gerenciamento de senhas fortes, rodizio de validade e desativacao de features marginais a exemplo das interfaces USB.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O mecanismo de redundancia calcado no Spanning Tree Protocol (STP) opera sob as limitacoes de camada 3 IP roteado e entrega recomposicao invisivel.",
+      "correctAnswer": false,
+      "explanation": "O STP atua unicamente na camada 2 (Enlace) para prevenir loops em aneis e, notavelmente, sofre de atraso consideravel de recomposicao ao inves da recuperacao instantanea invisivel requerida.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A configuracao falha que deixa os pacotes GOOSE nativamente sem tag de VLAN (untagged) em suas propriedades internas acarreta um severo risco de.",
+      "correctAnswer": true,
+      "explanation": "Sem a insercao formal da tag VLAN no frame GOOSE, os switches incorporam aos pacotes a VLAN nativa indiscriminada (ex: VLAN 100), o que burla sumariamente as regras filtradas exclusivas para segurar o confinamento local (ex: VLAN 101).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As estrategias de redundancia ativas que se apoderam de duas redes LAN totalmente destituidas de interconexoes e enviam trafegos duplicados sao _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "PRP"
+        }
+      ],
+      "explanation": "O Parallel Redundancy Protocol (PRP) consolida esse conceito espelhando frames operacionais integralmente por redes paralelas desvencilhadas de comutacao reativa.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Dentro da estrutura digital normatizada a auditoria defensiva em relacao a ataques computacionais e intrusoes e atestada no equipamento por meio de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "CybSecEvt"
+        }
+      ],
+      "explanation": "O Data Object especifico para delatar vulnerabilidades e anomalias de conexoes pre-mapeadas e materializado em rede pela variavel CybSecEvt (Cyber Security Event).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para impossibilitar desastres operacionais derivados do conflito e repeticao logica do MAC Address das publicacoes originarias de subestacoes _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "confinamento"
+        }
+      ],
+      "explanation": "O confinamento dos pacotes GOOSE e o plano tecnico valioso fundamentado na restricao severa de portas para engaiolar localmente as transmissoes inter-reles predeterminadas.",
+      "difficulty": "hard"
+    }
+  ]
+}

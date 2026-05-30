@@ -1,0 +1,147 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 61850 - MMS e Modelo de Dados",
+  "moduleSubtitle": "LDs, LNs, DOs, SCL e serviços MMS",
+  "moduleOrder": 5,
+  "ebookTitle": "IEC 61850 — Modelo de Dados e MMS",
+  "ebookSubtitle": "A linguagem da subestação digital: Logical Nodes, modelo de dados, SCL e serviços MMS",
+  "estimatedMinutes": 65,
+  "trailFiles": [
+    "t01_fundamentos_61850_mms.json",
+    "t02_aplicacoes_61850_mms.json",
+    "t03_implementacao_61850_mms.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — A Revolução da IEC 61850",
+      "subtitle": "Mais que um protocolo, um padrão de sistema",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é a IEC 61850",
+          "type": "text",
+          "body": "A IEC 61850 não é apenas um protocolo de comunicação — é um padrão abrangente para sistemas de automação de subestações. Ela define um modelo de dados padronizado (como representar funções e equipamentos), serviços de comunicação (como trocar informação: MMS, GOOSE, SV), uma linguagem de configuração (SCL) e requisitos de engenharia e teste. Seu objetivo central é a interoperabilidade: equipamentos de fabricantes diferentes que se entendem por falarem a mesma 'língua' semântica."
+        },
+        {
+          "id": "s2",
+          "title": "Os três serviços de comunicação",
+          "type": "list",
+          "items": [
+            "MMS (cliente-servidor) — supervisão, comando e configuração entre IEDs e SCADA/HMI; não crítico em tempo",
+            "GOOSE — mensagens rápidas (ms) entre IEDs para trip, intertravamento e bloqueio",
+            "Sampled Values (SV) — amostras de corrente/tensão das merging units",
+            "Os três compartilham o mesmo modelo de dados, mas têm desempenho e uso distintos"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A grande promessa: interoperabilidade",
+          "type": "note",
+          "body": "Antes da IEC 61850, integrar IEDs de fabricantes diferentes exigia conversores de protocolo e mapeamentos manuais trabalhosos. A IEC 61850 padroniza não só o transporte, mas o SIGNIFICADO dos dados — um 'disjuntor' é representado da mesma forma por qualquer fabricante. Isso reduz drasticamente o esforço de engenharia e permite sistemas multifabricante. Na prática, diferenças de interpretação ainda exigem testes de interoperabilidade, mas o avanço em relação aos protocolos legados é enorme."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A IEC 61850 é um padrão abrangente de automação de subestações — modelo de dados, serviços (MMS, GOOSE, SV), linguagem de configuração (SCL) e engenharia/teste — com a interoperabilidade como objetivo central. Os três serviços compartilham o mesmo modelo de dados mas têm usos distintos: MMS (supervisão), GOOSE (trip rápido) e SV (medição digital)."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — O Modelo de Dados Hierárquico",
+      "subtitle": "Server, LD, LN, DO, DA",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A hierarquia dos dados",
+          "type": "text",
+          "body": "A IEC 61850 organiza os dados numa hierarquia clara e auto-descritiva: o Servidor (o IED) contém Dispositivos Lógicos (Logical Devices — LD), que contêm Nós Lógicos (Logical Nodes — LN), que contêm Objetos de Dados (Data Objects — DO), que contêm Atributos de Dados (Data Attributes — DA). Essa estrutura permite localizar qualquer informação por um caminho hierárquico padronizado e compreensível, em vez de endereços numéricos sem significado."
+        },
+        {
+          "id": "s2",
+          "title": "Os Logical Nodes (LN)",
+          "type": "text",
+          "body": "O Logical Node é o conceito central: representa uma função padronizada. A IEC 61850 define dezenas de LNs com nomes padronizados de 4 letras: PTOC (proteção de sobrecorrente temporizada), PDIS (proteção de distância), PDIF (proteção diferencial), XCBR (disjuntor), CSWI (controle de chave), MMXU (medição). A primeira letra indica o grupo (P=proteção, X=equipamento de manobra, C=controle, M=medição). Saber ler os LNs é ler a funcionalidade de um IED de forma padronizada."
+        },
+        {
+          "id": "s3",
+          "title": "Exemplos de Logical Nodes",
+          "type": "list",
+          "items": [
+            "PTOC — sobrecorrente temporizada (função 51)",
+            "PIOC — sobrecorrente instantânea (função 50)",
+            "PDIS — proteção de distância (função 21)",
+            "PDIF — proteção diferencial (função 87)",
+            "XCBR — disjuntor; XSWI — seccionadora",
+            "CSWI — controle de chaveamento; MMXU — medição de grandezas"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Data Objects e a semântica",
+          "type": "note",
+          "body": "Dentro de cada LN, os Data Objects (DO) carregam a informação com semântica padronizada e Common Data Classes (CDC): por exemplo, um DO de posição (Pos) tem o estado (stVal), a qualidade (q) e a estampa de tempo (t). Essa estrutura padronizada — valor + qualidade + tempo — é uma das grandes forças da IEC 61850: cada dado vem com sua qualidade e o instante em que foi gerado, fundamentais para a confiabilidade e o SOE."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O modelo é hierárquico e auto-descritivo: Servidor → Logical Device → Logical Node → Data Object → Data Attribute. Os Logical Nodes representam funções padronizadas (PTOC=51, PDIS=21, PDIF=87, XCBR=disjuntor, MMXU=medição). Os Data Objects usam Common Data Classes com valor + qualidade + estampa de tempo — a base da confiabilidade e do SOE na IEC 61850."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — SCL e os Serviços MMS",
+      "subtitle": "Configuração e comunicação cliente-servidor",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A linguagem de configuração SCL",
+          "type": "text",
+          "body": "A SCL (Substation Configuration Language), em XML, é a forma padronizada de descrever a configuração: a capacidade de cada IED (ICD), a especificação da subestação (SSD), a configuração completa do sistema (SCD) e a configuração instanciada de cada IED (IID/CID). A SCL é o que permite a engenharia padronizada e a interoperabilidade — ferramentas de diferentes fabricantes trocam configurações via SCL. A engenharia de uma subestação digital gira em torno desses arquivos."
+        },
+        {
+          "id": "s2",
+          "title": "Os serviços MMS",
+          "type": "text",
+          "body": "O MMS (Manufacturing Message Specification) é o serviço cliente-servidor da IEC 61850, usado para a comunicação entre IEDs e o SCADA/HMI. Por ele trafegam: leitura e escrita de dados, comandos de controle (com SBO — select-before-operate), relatórios (reporting), e acesso a arquivos e configurações. O MMS não é crítico em tempo (não é usado para trip), mas é a espinha dorsal da supervisão e do controle na subestação digital."
+        },
+        {
+          "id": "s3",
+          "title": "Datasets e Reporting",
+          "type": "list",
+          "items": [
+            "Dataset — um conjunto agrupado de Data Objects/Attributes para transmissão eficiente",
+            "Report Control Block (RCB) — configura o relatório de um dataset ao cliente",
+            "Buffered reports — armazenam eventos mesmo se o cliente desconectar (não perde dados)",
+            "Unbuffered reports — relatam apenas o estado atual",
+            "O reporting é a forma eficiente do MMS notificar mudanças por exceção"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "O reporting por exceção",
+          "type": "note",
+          "body": "Em vez de o SCADA varrer continuamente cada dado (polling), o MMS usa o reporting: o IED é configurado (via Report Control Block) para enviar ao cliente os dados de um dataset quando eles mudam (com qualidade e estampa de tempo). Os buffered reports são especialmente valiosos — eles bufferizam os eventos quando o cliente está desconectado e os entregam na reconexão, garantindo que nenhum evento se perca. É a eficiência e a confiabilidade do relatório por exceção aplicadas à supervisão."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A SCL (XML: ICD, SSD, SCD, IID/CID) descreve a configuração de forma padronizada, base da engenharia e interoperabilidade. O MMS é o serviço cliente-servidor (IED↔SCADA): leitura/escrita, comandos (SBO), reporting e arquivos. Os datasets agrupam dados e os Report Control Blocks configuram o reporting por exceção, com buffered reports que não perdem eventos. O modelo de dados + SCL + MMS são a base da subestação digital."
+        }
+      ]
+    }
+  ]
+}

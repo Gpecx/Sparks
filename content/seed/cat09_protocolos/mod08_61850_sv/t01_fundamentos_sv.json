@@ -1,0 +1,213 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 61850 - Sampled Values",
+  "moduleSubtitle": "Sampled Values, merging units e testes de sincronismo",
+  "moduleOrder": 7,
+  "trail": "Fundamentos de Sampled Values",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que representam os Sampled Values (SV) no contexto da norma IEC 61850?",
+      "options": [
+        "Mensagens de texto do SCADA.",
+        "Amostras digitais de corrente e tensao.",
+        "Comandos de abertura de disjuntor.",
+        "Sinais de sincronismo de relogio."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os SV consistem em informacoes analogicas digitalizadas de tempo critico, como amostras de corrente e tensao (Sampled Measurement Values).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em qual barramento do sistema de automacao as mensagens de Sampled Values normalmente trafegam?",
+      "options": [
+        "Barramento de estacao.",
+        "Barramento corporativo.",
+        "Barramento de processo.",
+        "Barramento serial de controle."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os SV trafegam no barramento de processo (process bus), conectando sensores e atuadores diretamente ao nivel de bay.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais camadas do modelo OSI sao utilizadas para a transmissao das mensagens criticas de Sampled Values?",
+      "options": [
+        "Apenas as camadas 1 e 2.",
+        "Todas as 7 camadas completas.",
+        "Apenas a camada de aplicacao.",
+        "Camadas de transporte e rede nativas."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os servicos de tempo critico como o SV usam apenas as duas camadas inferiores (Fisica e Enlace) do modelo OSI para obter altissima velocidade e baixa latencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a precisao de sincronismo de tempo critica exigida para o correto processamento dos Sampled Values?",
+      "options": [
+        "Cerca de 1 segundo.",
+        "Cerca de 1 milissegundo.",
+        "Cerca de 1 microssegundo.",
+        "Cerca de 1 minuto."
+      ],
+      "correctIndex": 2,
+      "explanation": "O sincronismo de tempo para SV e critico (aproximadamente 1 microssegundo) para garantir a comparacao precisa de ondas senoidais e calculo de fasores.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e uma das grandes vantagens da aplicacao de Sampled Values e do barramento de processo em uma subestacao digital?",
+      "options": [
+        "Substituicao da pesada fiacao analogica de cobre entre o patio e a sala de reles.",
+        "Eliminacao completa da necessidade de medicoes no sistema eletrico.",
+        "Reducao total da banda de rede Ethernet consumida.",
+        "Extincao da necessidade de um sistema supervisorio SCADA."
+      ],
+      "correctIndex": 0,
+      "explanation": "O SV converte medicoes eletricas em dados de rede diretamente no patio, substituindo os longos e custosos cabos de cobre dos TCs e TPs ate a sala de controle.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento e responsavel por digitalizar os sinais analogicos dos TCs e TPs e publica-los como Sampled Values na rede?",
+      "options": [
+        "Switch Ethernet.",
+        "Merging Unit.",
+        "Roteador de Borda.",
+        "Gateway MMS."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Merging Unit (MU) atua fisicamente no nivel de processo convertendo grandezas analogicas convencionais ou opticas em fluxos de rede SV (Informacao externa as fontes).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na aplicacao pratica da IEC 61850-9-2LE, quais sao as taxas de amostragem padronizadas para aplicacoes de protecao e medicao, respectivamente?",
+      "options": [
+        "4 e 16 amostras por ciclo.",
+        "80 e 256 amostras por ciclo.",
+        "1000 e 5000 amostras por ciclo.",
+        "60 e 120 amostras por ciclo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O documento de implementacao 9-2LE estabelece as taxas de 80 amostras por ciclo para funcoes de protecao e 256 para medicao e qualidade de energia (Informacao externa as fontes).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as mensagens SV sao entregues aos multiplos reles de protecao conectados ao barramento de processo?",
+      "options": [
+        "Por TCP/IP com confirmacao rigorosa de entrega.",
+        "Por transmissao multicast diretamente na camada de enlace.",
+        "Atraves de tuneis VPN com roteamento unicast.",
+        "Por polling sequencial mestre-escravo."
+      ],
+      "correctIndex": 1,
+      "explanation": "Assim como o GOOSE, os Sampled Values sao transmitidos via multicast na camada de enlace (camada 2), permitindo que varios IEDs assinem o fluxo simultaneamente sem sobrecarregar a origem.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre com os algoritmos de protecao caso haja a perda ocasional de alguns pacotes individuais de Sampled Values na rede?",
+      "options": [
+        "O rele desliga toda a subestacao imediatamente por seguranca.",
+        "O sistema trava aguardando a retransmissao TCP obrigatoria do pacote.",
+        "A perda de alguns valores pontuais e manejada sem problemas pelas funcoes que os recebem.",
+        "A Merging Unit reinicia o envio do buffer desde o primeiro pacote do dia."
+      ],
+      "correctIndex": 2,
+      "explanation": "Apesar dos SV nao possuirem confirmacao de entrega, a perda esporadica de alguns valores e compensada sem problemas graves de atuacao pelos algoritmos de protecao receptores.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual evento especifico define a condicao basilar para a geracao sincronizada e o envio dos pacotes de Sampled Values para a rede?",
+      "options": [
+        "Mudanca abrupta de estado de um contato binario.",
+        "A ocorrencia ciclica de um clock event.",
+        "A ultrapassagem de uma banda morta pre-ajustada pelo operador.",
+        "Um pedido explicito de interrogacao do SCADA."
+      ],
+      "correctIndex": 1,
+      "explanation": "Ao contrario de relatorios e mensagens GOOSE que ocorrem baseados em variacoes de estado (dchg, qchg), as condicoes para envio sincronizado dos Sampled Values baseiam-se na ocorrencia de um clock event.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A transmissao de Sampled Values opera utilizando conexoes exclusivas ponto-a-ponto com confirmacao de recebimento bidirecional para garantir que.",
+      "correctAnswer": false,
+      "explanation": "Os SV utilizam o modelo Publisher-Subscriber com transmissao multicast na camada de enlace, sem qualquer mecanismo de confirmacao de recebimento (Ack) por parte do receptor.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A norma define na especificacao IEC 61850-9-2 as regras e mapeamentos necessarios para o envio dos Sampled Values diretamente sobre as redes.",
+      "correctAnswer": true,
+      "explanation": "A parte 9-2 padroniza exatamente a transmissao continua de valores amostrados (Sampled Values) operando nativamente sobre a camada de rede ISO 8802-3 (Ethernet).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Devido a enorme quantidade de medicoes publicadas por segundo, o trafego de Sampled Values gera alta carga no barramento, exigindo projetos de rede.",
+      "correctAnswer": true,
+      "explanation": "Enviar grandes volumes de amostras (ex: 80 amostras/ciclo) inunda a rede com um fluxo intenso de dados. Confinamento por VLANs e regras de prioridade sao requeridos para manter a integridade da comunicacao em tempo real (Informacao abordada ao longo dos documentos sobre arquiteturas Ethernet).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O protocolo SNTP, que fornece resolucao tipica na casa dos milissegundos, e considerado tecnicamente suficiente e recomendado para sincronizar as.",
+      "correctAnswer": false,
+      "explanation": "Os SV requerem sincronismo muito preciso, na ordem de 1 microssegundo, para a reconstrucao confiavel de fasores. O SNTP atende apenas a precisao de milissegundos, tornando imperativa a adocao de protocolos como o IEEE 1588 PTP (Precision Time Protocol).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para auxiliar a rede a priorizar e rotear o trafego nas camadas inferiores, os pacotes de Sampled Values carregam no seu cabecalho Ethernet o.",
+      "correctAnswer": true,
+      "explanation": "O stack tecnico da IEC 61850 preve a utilizacao de codigos Ethertype especificos; o 0x88B8 pertence ao GOOSE e o 0x88BA e atribuido unicamente aos Sampled Values.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A rede dedicada ou segmento especifico que interliga os sensores e equipamentos fisicos localizados no patio as unidades de controle e protecao _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "processo"
+        }
+      ],
+      "explanation": "O process bus ou barramento de processo e a via responsavel por transitar as variaveis brutas e amostras digitalizadas das grandezas do patio ate os IEDs de bay.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A unidade eletronica inteligente fisicamente encarregada de fazer a leitura e digitalizacao sincronizada dos TCs e TPs convencionais para inje-los _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Merging"
+        }
+      ],
+      "explanation": "A Merging Unit (MU) atua como a ponte conversora do nivel analogico para o digital, empacotando os sinais primarios em fluxos de Sampled Values para a rede (Informacao externa as fontes).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para manter a taxa constante e o momento exato de captura necessarios a recriacao da senoide, o disparo das amostras dos SV e rigorosamente guiado _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "clock"
+        }
+      ],
+      "explanation": "A publicacao de valores SV e orientada pelo tempo. As fontes relatam que a condicao para o envio sincronizado e a presenca instigante de um clock event.",
+      "difficulty": "hard"
+    }
+  ]
+}

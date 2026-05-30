@@ -1,0 +1,213 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "DNP3",
+  "moduleSubtitle": "Arquitetura, objetos e segurança DNP3 SA",
+  "moduleOrder": 1,
+  "trail": "Implementação (DNP3/TCP, Secure Authentication)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Em implementacoes do protocolo DNP3 operando sobre redes TCP/IP, qual e a porta padrao registrada e reservada para essa comunicacao?",
+      "options": [
+        "Porta TCP 502.",
+        "Porta TCP/UDP 20000.",
+        "Porta TCP 104.",
+        "Porta UDP 80."
+      ],
+      "correctIndex": 1,
+      "explanation": "A porta padrao TCP e UDP designada na industria para o trafego do protocolo DNP3 e a 20000 (Informacao externa as fontes).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na configuracao da camada de enlace do protocolo DNP3, quais parametros sao essenciais para identificar inequivocamente quem envia e quem recebe a.",
+      "options": [
+        "Enderecos de Origem e Destino (Link Addresses).",
+        "Enderecos de IP e mascara de sub-rede.",
+        "Nomes de dominio (DNS) e VLAN ID.",
+        "Identificadores GOOSE e MAC Address multicast."
+      ],
+      "correctIndex": 0,
+      "explanation": "O DNP3 exige a configuracao estrita dos Link Addresses de origem (Source) e destino (Destination) no nivel de enlace (Informacao externa as fontes).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o objetivo principal da execucao de um Integrity Poll (Varredura de Integridade) pelo mestre DNP3 na inicializacao?",
+      "options": [
+        "Sincronizar o relogio global da estacao remota via satelite.",
+        "Ler todos os dados estaticos (Classe 0) e eventos pendentes garantindo a sincronizacao da base.",
+        "Reiniciar o equipamento de campo e limpar o buffer de eventos.",
+        "Renovar as chaves criptograficas da sessao TCP/IP."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Integrity Poll interroga a Classe 0 e os eventos nas Classes 1, 2 e 3 para sincronizar e atualizar a base do mestre (Informacao externa as fontes).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para que uma remota DNP3 envie eventos espontaneamente (Unsolicited Responses), qual procedimento deve ser realizado na configuracao?",
+      "options": [
+        "O mestre deve habilitar explicitamente a remota para enviar respostas nao solicitadas.",
+        "A remota deve trocar seu endereco IP nativo para o formato de broadcast.",
+        "O cabo de comunicacao deve possuir um pino de interrupcao dedicado.",
+        "O mestre deve bloquear a sua porta de escuta TCP 20000 temporariamente."
+      ],
+      "correctIndex": 0,
+      "explanation": "O envio de Unsolicited Responses precisa ser habilitado na remota pelo equipamento mestre mediante comando especifico (Informacao externa as fontes).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o DNP3 tradicionalmente garante que os eventos no campo (SOE) recebam uma estampa de tempo (time-stamp) correta?",
+      "options": [
+        "A remota le o relogio analogico do medidor de energia via porta serial.",
+        "Utiliza-se exclusivamente o protocolo PTP de 1 microssegundo no barramento de processo.",
+        "O mestre DNP3 envia comandos periodicos de sincronizacao de tempo para ajustar o relogio da remota.",
+        "O protocolo ignora o tempo na remota e estampa os eventos apenas quando chegam ao SCADA."
+      ],
+      "correctIndex": 2,
+      "explanation": "O mestre DNP3 pode realizar a Time Synchronization enviando a hora exata ou avaliando o atraso da linha para ajustar a remota (Informacao externa as fontes).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual mecanismo fundamental o DNP3 Secure Authentication (DNP3 SA) utiliza para verificar a identidade sem transmitir senhas visiveis na rede?",
+      "options": [
+        "Criptografia simetrica AES-256 aplicada em todo o pacote TCP de ponta a ponta.",
+        "Certificados X.509 transmitidos em texto claro a cada nova conexao de telemetria.",
+        "Assinatura digital de curva eliptica aplicada apenas aos frames broadcast de enlace.",
+        "Mecanismo Challenge-Response (Desafio-Resposta) utilizando chaves matematicas ocultas."
+      ],
+      "correctIndex": 3,
+      "explanation": "O DNP3 SA (IEC 62351-5) implementa autenticacao por Challenge-Response para evitar a transmissao de senhas interceptaveis (Informacao externa as fontes).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na parametrizacao do banco de dados de um IED DNP3, o que define agrupar um ponto nas Classes 1, 2 ou 3 em vez da Classe 0?",
+      "options": [
+        "A velocidade em baud rate que a porta RS-485 opera na instalacao.",
+        "O nivel de criptografia TLS exigido pelo setor de tecnologia da informacao corporativa.",
+        "A tensao nominal de alimentacao em corrente continua do relé no painel.",
+        "A prioridade e a caracteristica de ser um evento (mudanca de estado) para o envio ao mestre."
+      ],
+      "correctIndex": 3,
+      "explanation": "As Classes 1, 2 e 3 organizam e priorizam eventos processados. A Classe 0 e restrita aos valores estaticos de momento (Informacao externa as fontes).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o DNP3 Secure Authentication impede ataques de repeticao (replay attacks) no sistema de controle SCADA?",
+      "options": [
+        "Desligando as portas Ethernet automaticamente se o trafego ultrapassar cem pacotes por segundo.",
+        "Alterando o endereco MAC do switch a cada interrogatorio de integridade do controlador.",
+        "Validando a autenticidade por meio de contadores de sequencia e variacao regular das Chaves de Sessao (Session Keys).",
+        "Encapsulando os pacotes DNP3 seriais dentro de tuneis IPSec roteados pela internet."
+      ],
+      "correctIndex": 2,
+      "explanation": "O uso de Session Keys atualizadas e contadores de chave (KSQ) inviabiliza que comandos capturados por invasores sejam retransmitidos (Informacao externa as fontes).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante o comissionamento e analise de trafego do DNP3/TCP, qual ferramenta de software pode ser adotada para verificar os dados trocados?",
+      "options": [
+        "Um software analisador de protocolos de rede como o Wireshark.",
+        "Uma maleta de testes de injecao de corrente e tensao analogica trifasica.",
+        "Um osciloscopio portatil para medir a amplitude do sinal RS-232.",
+        "Um medidor de resistencia de aterramento focado no neutro do transformador."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Wireshark e uma ferramenta de diagnostico de rede citada nas fontes para captura e analise de protocolos industriais em comissionamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No contexto da especificacao DNP3 Secure Authentication, qual e a funcao tecnica da implementacao do HMAC?",
+      "options": [
+        "Esconder completamente os valores de leitura analogica para que os dados fiquem criptografados.",
+        "Fornecer um Hash calculado com uma chave secreta para assegurar a autenticidade e a integridade da mensagem sem criptografar o payload.",
+        "Garantir roteamento direto entre redes com IPv4 e IPv6 usando as portas da gateway DNP3.",
+        "Realizar a compressao zip dos dados nas redes de baixa velocidade para otimizar a latencia."
+      ],
+      "correctIndex": 1,
+      "explanation": "O HMAC (Hash-based Message Authentication Code) cria uma assinatura que prova a identidade do emissor sem a necessidade de cifrar os dados (Informacao externa as fontes).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A ativacao de Unsolicited Responses (respostas nao solicitadas) na remota DNP3 anula completamente a necessidade de o mestre efetuar o Integrity.",
+      "correctAnswer": false,
+      "explanation": "Mesmo quando as Unsolicited Responses estao habilitadas, o mestre deve obrigatoriamente executar o Integrity Poll inicial para parear a base de dados estatica (Informacao externa as fontes).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na implementacao do modelo de dados DNP3, um objeto especifico pode ser lido utilizando diferentes Variacoes (Variations), o que altera o formato.",
+      "correctAnswer": true,
+      "explanation": "O protocolo usa Variacoes para permitir que o mestre escolha os atributos desejados do ponto (como flags e estampa de tempo) economizando largura de banda (Informacao externa as fontes).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Quando operado sobre o modelo TCP/IP, o protocolo DNP3 descarta e exclui os enderecos de enlace (Link Addresses) do quadro original, dependendo.",
+      "correctAnswer": false,
+      "explanation": "O DNP3 sobre IP encapsula todo o pseudo-transporte e camada de enlace nativos (incluindo os Link Addresses) dentro da area de payload do TCP (Informacao externa as fontes).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No esquema de gerenciamento de chaves do DNP3 Secure Authentication, utilizam-se chaves de longa duracao (Update Keys) cuja finalidade principal e.",
+      "correctAnswer": true,
+      "explanation": "As Update Keys (simetricas ou assimetricas) fornecem o ambiente seguro para realizar a troca periodica das chaves operacionais ou de sessao (Session Keys) (Informacao externa as fontes).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para proteger os fluxos de operacao remota contra falsificacao e escuta (spoofing), a diretriz IEC 62351-5 exige a criptografia mandatória de 100%.",
+      "correctAnswer": false,
+      "explanation": "A norma IEC 62351-5 e o DNP3 SA focam em autenticacao (Challenge-Response/HMAC) para prevenir spoofing, sem aplicar criptografia obrigatoria no payload analogico/digital em si (Informacao externa as fontes).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No encapsulamento padrao do DNP3 para as redes de subestacao baseadas em LAN e roteamento IP, o numero estipulado pela IANA para comunicacao em _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "20000"
+        }
+      ],
+      "explanation": "A porta TCP/UDP 20000 e a designacao de porta bem conhecida para o trafego de rede envolvendo equipamentos em DNP3 (Informacao externa as fontes).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A seguranca e autenticacao estendida do protocolo DNP3 no combate as invasoes ciberneticas (SA) atende as orientacoes estipuladas _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "62351-5"
+        }
+      ],
+      "explanation": "O padrao IEC 62351-5 estabelece a arquitetura e as diretrizes de seguranca da informacao e autenticacao (SA) para o DNP3 e o IEC 60870-5 (Informacao externa as fontes).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Ao utilizar o procedimento de Challenge-Response, a remota gera uma assinatura criptografica calculada sobre a mensagem utilizando a chave de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "HMAC"
+        }
+      ],
+      "explanation": "O HMAC e a estrutura do codigo hash calculada com base na chave de sessao corrente validando a integridade absoluta da transacao remota (Informacao externa as fontes).",
+      "difficulty": "hard"
+    }
+  ]
+}

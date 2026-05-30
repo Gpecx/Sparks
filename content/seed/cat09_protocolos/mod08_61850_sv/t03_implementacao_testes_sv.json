@@ -1,0 +1,213 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 61850 - Sampled Values",
+  "moduleSubtitle": "Sampled Values, merging units e testes de sincronismo",
+  "moduleOrder": 7,
+  "trail": "Implementação e Testes",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Quais camadas do modelo ISO/OSI sao utilizadas nativamente pelas tramas de Sampled Values para garantir o tempo critico de transmissao no.",
+      "options": [
+        "Apenas as camadas 1 (Fisica) e 2 (Enlace de Dados).",
+        "Camadas 3 (Rede) e 4 (Transporte) via TCP/IP.",
+        "Todas as 7 camadas do modelo OSI.",
+        "Apenas a camada 7 de Aplicacao por meio de relatorios MMS."
+      ],
+      "correctIndex": 0,
+      "explanation": "Conforme o mapeamento do protocolo, os servicos de tempo critico como o SV usam apenas as duas camadas inferiores (Fisica e Enlace) do modelo OSI para atingir baixissima latencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No comissionamento da rede, o que ocorre com os algoritmos de protecao dos reles caso alguns poucos telegramas esporadicos de Sampled Values sejam.",
+      "options": [
+        "O IED de protecao reinicia compulsoriamente acusando falha grave.",
+        "A perda de alguns pacotes e manejada sem problemas diretos pelas funcoes que os recebem.",
+        "O equipamento trava e solicita imediatamente a retransmissao TCP dos pacotes.",
+        "O disjuntor e acionado por precaucao pelo mecanismo de falha do switch."
+      ],
+      "correctIndex": 1,
+      "explanation": "A documentacao atesta que os SV nao sao confirmados (ACK), mas a perda de valores pontuais e lidada de forma tolerante e sem problemas operacionais pelos algoritmos de protecao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante testes e avaliacao de qualidade do sinal, qual a precisao de sincronismo temporal exigida para comparar ondas senoidais e calcular fasores.",
+      "options": [
+        "Cerca de 1 microssegundo.",
+        "Cerca de 1 milissegundo.",
+        "Cerca de 1 segundo.",
+        "Cerca de 100 milissegundos."
+      ],
+      "correctIndex": 0,
+      "explanation": "Para funcoes vitais da subestacao baseadas em SV, como calculo fasorial e comparacao de ondas, o sincronismo de tempo e extremante critico, estipulado na ordem de 1 microssegundo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No cenario de implementacao de barramento de processo, como as mensagens de Sampled Values sao transmitidas aos varios IEDs interessados.",
+      "options": [
+        "Por mensagens do tipo Unicast para roteadores especificos.",
+        "Apenas via comunicacao Cliente-Servidor (polling).",
+        "Por meio do modo Multicast na camada de enlace.",
+        "Atraves de tuneis IPsec criptografados para cada rele."
+      ],
+      "correctIndex": 2,
+      "explanation": "Da mesma forma que o protocolo GOOSE, os Sampled Values realizam o compartilhamento horizontal enviando informacao orientada a Multicast para grupos de estacoes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual ferramenta abordada na documentacao e indicada para capturar, analisar e realizar diagnosticos de baixo nivel nos quadros ethernet contendo.",
+      "options": [
+        "O protocolo FTP nativo do servidor SCADA.",
+        "Um software analisador de rede como o Wireshark ou Ethereal.",
+        "O painel frontal eletromecanico do transformador de potencial.",
+        "O terminal Hyperterminal conectado via porta serial RS-232."
+      ],
+      "correctIndex": 1,
+      "explanation": "Ferramentas analisadoras de rede como o Wireshark (antigo Ethereal) sao aplicadas no diagnostico para capturar e ler detalhadamente as mensagens transitando na camada Ethernet.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao avaliar os quadros capturados no Wireshark, qual o Ethertype padronizado hexadecimal utilizado exclusivamente para identificar pacotes Sampled.",
+      "options": [
+        "0x0800",
+        "0x8100",
+        "0x88B8",
+        "0x88BA"
+      ],
+      "correctIndex": 3,
+      "explanation": "A pilha tecnica da norma IEC 61850 designa o Ethertype x88B8 para o GOOSE e reserva especificamente o Ethertype x88BA para as tramas de Sampled Values.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Diferente de relatorios e do GOOSE que sao disparados por variacao de estado, qual e o evento base que desencadeia a transmissao sincronizada dos.",
+      "options": [
+        "Um evento de general interrogation do SCADA.",
+        "Um evento ciclico denominado clock event.",
+        "A operacao manual direta do disjuntor.",
+        "Um data-update disparado pela memoria RAM."
+      ],
+      "correctIndex": 1,
+      "explanation": "A arquitetura e os diagramas da pilha Soft-Time/Hard-Time mostram que o disparo e alinhamento dos envios de SV sao geridos por sinais de tempo referidos como clock event.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No comissionamento do modelo de dados focado em amostragem, qual a utilidade logica dos parametros identificados como subEna e subVal?",
+      "options": [
+        "Desativar definitivamente o link de fibra otica da Merging Unit.",
+        "Habilitar a substituicao local de valores para permitir a simulacao e os testes com a IHM.",
+        "Garantir a varredura anti-virus (cyber security) da mensagem.",
+        "Configurar a mascara de sub-rede do equipamento no roteador IP."
+      ],
+      "correctIndex": 1,
+      "explanation": "O recurso substitution (ativado via subEna) acopla o atributo subVal para substituir e mascarar medidas durante ensaios sem a necessidade de acoes fisicas perigosas no patio.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na mitigacao da perda de amostras SV por rompimento de cabos, qual protocolo de redundancia aplica duas redes paralelas independentes para obter.",
+      "options": [
+        "Spanning Tree Protocol (STP).",
+        "Rapid Spanning Tree Protocol (RSTP).",
+        "Parallel Redundancy Protocol (PRP).",
+        "Internet Control Message Protocol (ICMP)."
+      ],
+      "correctIndex": 2,
+      "explanation": "O protocolo PRP (Parallel Redundancy Protocol) opera com redes paralelas (LAN A e LAN B), publicando o fluxo simultaneamente em ambas sem necessidade de recálculos de topologia e com recomposicao transparente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na infraestrutura do barramento de processo, qual e a principal limitacao do protocolo SNTP que exige a sua substituicao por protocolos mais.",
+      "options": [
+        "Ele funciona apenas em enlaces sem fio (wireless).",
+        "O SNTP providencia exatidao apenas na ordem de milissegundos, incapaz de atender o 1 microssegundo exigido pelo fluxo SV.",
+        "O protocolo consome quase 100% da banda da fibra otica bloqueando as transferencias MMS.",
+        "Ele exige licenciamento proprietario exclusivo de operadoras de internet banda larga."
+      ],
+      "correctIndex": 1,
+      "explanation": "O SNTP oferta sincronismo em milissegundos, atendendo apenas logs e SCADA. Para gerar Sampled Values com coerencia fasorial, o PTP torna-se vital para garantir o desvio maximo de 1 microssegundo.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O mecanismo padronizado de transmissao das tramas de Sampled Values exige obrigatoriamente que o IED assinante emita uma confirmacao de recepcao.",
+      "correctAnswer": false,
+      "explanation": "Os pacotes de Sampled Values transitam sob formato multicast best-effort em camada 2 e nao utilizam respostas de confirmacao do receptor em nenhuma etapa do envio.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O protocolo HSR (High-Availability Seamless Redundancy) baseia-se em equipamentos com portas em anel e garante redundancia transparente sem perda.",
+      "correctAnswer": true,
+      "explanation": "Semelhante ao PRP, o HSR possibilita o tempo zero de recomposicao fechando aneis nos proprios equipamentos (sem switches intermediarios exclusivos), ideal para barramentos de SV e GOOSE criticos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante as rotinas de diagnostico do barramento de SV utilizando o Wireshark, a porta especifica do switch industrial onde o PC esta plugado.",
+      "correctAnswer": true,
+      "explanation": "Para capturar fluxos multicast e trafego alheio que naturalmente nao iriam para a porta do notebook de testes, o switch demanda a ativacao da funcionalidade Mirroring.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A propriedade de Qualidade (Quality) transmitida junto ao bloco de dados possui uma flag logica designada como Test, indicando categoricamente ao.",
+      "correctAnswer": true,
+      "explanation": "A norma pontua o bit Test na palavra de Qualidade, assegurando que o IED destino classifique a amostragem como simulacao e ignore-a em comandos efetivos de desligamento ou intertravamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Devido a vulnerabilidade de redes LAN, a norma orienta que todo pacote de Sampled Values trafegue obrigatoriamente envelopado dentro do nivel TCP.",
+      "correctAnswer": false,
+      "explanation": "O Sampled Value repudia as camadas de Transporte e Rede para evitar atrasos (latencia). Ele opera mapeado estritamente sobre a camada 2 (Enlace Ethernet) sem uso do protocolo TCP/IP.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O bloco de controle que define o stream de Sampled Values publicado por uma merging unit no SCL é o _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SvCB"
+        }
+      ],
+      "explanation": "O SvCB (Sampled Value Control Block) parametriza svID, dataset, APPID e taxa de amostragem do stream SV.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A sigla adotada para representar o protocolo de redundancia aplicado na camada de rede em que as Merging Units despacham tramas duplicadas e.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "BA"
+        }
+      ],
+      "explanation": "A arquitetura Hard Real-Time da IEC 61850 estipula firmemente o Ethertype x88BA como a tag definidora de pacotes contendo matrizes de amostras SV.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para assegurar a precisao temporal e o espaçamento simetrico exigidos na captura pontual da onda de corrente pela Merging Unit, os envios de SV _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "clock"
+        }
+      ],
+      "explanation": "Diferentemente do GOOSE que depende de variacao estocastica das grandezas de status, as amostras digitais do processo fluem de maneira metodica pautadas por sincronismos pontuais de clock.",
+      "difficulty": "hard"
+    }
+  ]
+}

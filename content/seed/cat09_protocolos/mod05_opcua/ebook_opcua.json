@@ -1,0 +1,142 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "OPC-UA",
+  "moduleSubtitle": "Arquitetura, address space e segurança",
+  "moduleOrder": 4,
+  "ebookTitle": "OPC-UA",
+  "ebookSubtitle": "A interoperabilidade industrial moderna: address space, modelagem de informação e segurança nativa",
+  "estimatedMinutes": 55,
+  "trailFiles": [
+    "t01_fundamentos_opcua.json",
+    "t02_aplicacoes_opcua.json",
+    "t03_implementacao_seguranca_opcua.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos do OPC-UA",
+      "subtitle": "Interoperabilidade independente de plataforma",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Do OPC Classic ao OPC-UA",
+          "type": "text",
+          "body": "O OPC (OLE for Process Control) clássico foi por muito tempo o padrão de interoperabilidade entre sistemas industriais no mundo Windows, mas dependia de tecnologia Microsoft (DCOM), com problemas de configuração e segurança. O OPC-UA (Unified Architecture) é a reformulação completa: independente de plataforma (roda em Windows, Linux, embarcado), orientado a serviços, com modelagem de informação rica e segurança nativa. É o padrão moderno de interoperabilidade da Indústria 4.0 e da integração entre TI e automação (TO)."
+        },
+        {
+          "id": "s2",
+          "title": "Características principais",
+          "type": "list",
+          "items": [
+            "Independente de plataforma e fabricante",
+            "Orientado a serviços (cliente-servidor e, mais recentemente, publish-subscribe)",
+            "Modelagem de informação rica e semântica (address space com objetos, tipos, relações)",
+            "Segurança nativa robusta (autenticação, criptografia, integridade)",
+            "Escalável — de sensores embarcados a sistemas corporativos (MES, ERP)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O papel do OPC-UA em SPCS",
+          "type": "note",
+          "body": "Em SPCS, o OPC-UA não substitui os protocolos de proteção (IEC 61850) nem o telecontrole (DNP3/104). Seu papel é a integração de alto nível: conectar o SCADA a sistemas corporativos (gestão de ativos, manutenção, MES/ERP), integrar sistemas heterogêneos, e servir de ponte na convergência TI/TO. É a 'cola' de interoperabilidade que leva os dados operativos para o mundo da gestão, com segurança e semântica."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O OPC-UA é a reformulação do OPC clássico: independente de plataforma, orientado a serviços, com modelagem de informação rica e segurança nativa — o padrão moderno de interoperabilidade (Indústria 4.0, convergência TI/TO). Em SPCS, complementa (não substitui) os protocolos de proteção e telecontrole, fazendo a integração de alto nível com sistemas corporativos."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Address Space e Modelagem de Informação",
+      "subtitle": "Dados com significado",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O address space",
+          "type": "text",
+          "body": "O coração do OPC-UA é o address space: um modelo de informação onde os dados não são apenas valores soltos, mas nós (nodes) organizados, tipados e relacionados. Um nó pode ser uma variável (um valor), um objeto (que agrupa variáveis e métodos), um tipo, ou uma referência (relação entre nós). Isso permite representar a estrutura real do sistema de forma semântica — um cliente pode 'navegar' pelo address space e descobrir o que existe e como se relaciona, sem precisar de um mapa externo."
+        },
+        {
+          "id": "s2",
+          "title": "A diferença em relação ao MODBUS/DNP3",
+          "type": "note",
+          "body": "Enquanto o MODBUS exige um mapa de registros externo (o protocolo não diz o que é cada endereço), o OPC-UA é auto-descritivo: o próprio servidor expõe a estrutura, os tipos e os metadados dos dados. Um cliente OPC-UA pode descobrir, em tempo de execução, quais dados existem, seus nomes, unidades, faixas e relações. Isso elimina a configuração manual de mapeamento e os erros associados — um salto qualitativo em interoperabilidade."
+        },
+        {
+          "id": "s3",
+          "title": "Companion Specifications",
+          "type": "text",
+          "body": "O OPC-UA permite modelos de informação padronizados por domínio, chamados Companion Specifications. Há companions para diversos setores e, relevante para SPCS, há trabalhos de integração com o IEC 61850 — mapeando o modelo de dados da subestação (Logical Nodes, Data Objects) para o address space do OPC-UA. Isso permite que sistemas corporativos consumam os dados da subestação de forma padronizada e semântica, unindo o mundo da proteção ao mundo da gestão."
+        },
+        {
+          "id": "s4",
+          "title": "Serviços do OPC-UA",
+          "type": "list",
+          "items": [
+            "Read/Write — ler e escrever valores de nós",
+            "Subscribe/Monitor — receber notificações de mudança (por exceção, eficiente)",
+            "Browse — navegar pelo address space descobrindo a estrutura",
+            "Method call — chamar métodos (ações) expostos pelo servidor",
+            "Historical access — acessar dados históricos armazenados"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O address space organiza os dados como nós tipados e relacionados (variáveis, objetos, referências), tornando o OPC-UA auto-descritivo — diferente do MODBUS, que exige mapa externo. As Companion Specifications padronizam modelos por domínio (incluindo mapeamento do IEC 61850). Os serviços incluem read/write, subscribe (por exceção), browse, method call e acesso histórico."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Segurança e Implementação",
+      "subtitle": "Segurança por design",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Segurança nativa do OPC-UA",
+          "type": "text",
+          "body": "Diferente dos protocolos legados, o OPC-UA foi projetado com segurança desde a concepção (security by design). Ele oferece autenticação (de aplicações via certificados e de usuários via credenciais), criptografia da comunicação (confidencialidade), e integridade (assinatura das mensagens, impedindo adulteração). A segurança é configurável em níveis — desde 'sem segurança' (para ambientes isolados) até criptografia e assinatura completas para comunicação sobre redes não confiáveis."
+        },
+        {
+          "id": "s2",
+          "title": "Os pilares de segurança",
+          "type": "list",
+          "items": [
+            "Autenticação de aplicação — certificados X.509 trocados entre cliente e servidor",
+            "Autenticação de usuário — usuário/senha, certificado ou token",
+            "Confidencialidade — criptografia das mensagens",
+            "Integridade — assinatura digital impede adulteração",
+            "Auditabilidade — registro de eventos de segurança",
+            "Modos: None, Sign (assina), SignAndEncrypt (assina e criptografa)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Boas práticas de implementação",
+          "type": "note",
+          "body": "Implementar OPC-UA com segurança exige uma infraestrutura de certificados (PKI): gerar, distribuir e gerenciar os certificados das aplicações; configurar o modo de segurança adequado (SignAndEncrypt para redes não confiáveis); restringir o acesso por usuário; e manter os certificados atualizados. Um erro comum é deixar a segurança em 'None' por conveniência durante o comissionamento e esquecer de ativá-la — deixando uma porta aberta na infraestrutura crítica."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O OPC-UA tem segurança por design: autenticação (certificados X.509 e usuário), confidencialidade (criptografia) e integridade (assinatura), em modos None/Sign/SignAndEncrypt. A implementação exige gestão de certificados (PKI) e configuração cuidadosa — não deixar a segurança desativada em produção. O OPC-UA é a interoperabilidade moderna, auto-descritiva e segura, que une a operação SPCS aos sistemas corporativos."
+        }
+      ]
+    }
+  ]
+}
