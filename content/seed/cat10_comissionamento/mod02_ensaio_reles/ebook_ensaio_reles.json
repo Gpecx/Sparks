@@ -1,0 +1,246 @@
+{
+  "category": "Comissionamento SPCS",
+  "categorySubtitle": "Metodologia, ensaio de relés e comissionamento IEC 61850",
+  "categoryOrder": 9,
+  "module": "Ensaio de Relés de Proteção",
+  "moduleSubtitle": "Pré-comissionamento, injeção primária/secundária e FAT/SAT",
+  "moduleOrder": 1,
+  "ebookTitle": "Ensaio de Relés de Proteção",
+  "ebookSubtitle": "Da mala de teste à injeção primária: como provar que cada função protege",
+  "estimatedMinutes": 85,
+  "trailFiles": [
+    "t01_fundamentos_ensaios.json",
+    "t02_tipos_ensaios.json",
+    "t03_implementacao_ensaios.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos do Ensaio de Relés",
+      "subtitle": "Por que e como testar uma proteção",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O objetivo do ensaio",
+          "type": "text",
+          "body": "Ensaiar um relé é submetê-lo a condições controladas que simulam o sistema elétrico — correntes e tensões normais e de falta — para verificar se ele responde exatamente como ajustado. Como a proteção só atua em eventos raros, o ensaio é a única forma de garantir, com antecedência, que ela funcionará na hora certa. O ensaio responde a três perguntas: a proteção atua quando deve? Não atua quando não deve? E no tempo correto?"
+        },
+        {
+          "id": "s2",
+          "title": "A mala de teste de relés",
+          "type": "text",
+          "body": "A ferramenta central do ensaio é a mala de teste (test set): um equipamento que gera correntes e tensões trifásicas controladas, com módulo, ângulo e frequência ajustáveis, e mede o tempo de atuação do relé com alta precisão. As malas modernas são controladas por software, executam sequências automáticas de teste, e podem reproduzir oscilografias (replay COMTRADE) e mensagens GOOSE (IEC 61850). Dominar a mala de teste é uma competência essencial do comissionador."
+        },
+        {
+          "id": "s3",
+          "title": "Grandezas verificadas num ensaio típico",
+          "type": "list",
+          "items": [
+            "Pickup — a corrente/tensão mínima que faz a função operar",
+            "Tempo de atuação — o tempo entre a aplicação da falta e o trip, comparado à curva ajustada",
+            "Dropout / razão de retorno — o ponto em que a função desarma após operar",
+            "Direcionalidade — para funções 67/87, o sentido em que opera",
+            "Característica de operação — curva IDMT, zonas de distância, slope diferencial"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Esperado vs. medido e a tolerância",
+          "type": "note",
+          "body": "Todo ensaio compara o valor MEDIDO com o valor ESPERADO (calculado a partir dos ajustes), e o resultado é aprovado se o desvio estiver dentro da tolerância (tipicamente ±5% para pickup e ±5% ou alguns ms para tempo). A calculadora de Comissionamento do SPARK ajuda a verificar essa tolerância (medido vs. esperado → erro % → aprovado/reprovado) e a converter valores primários para os de injeção secundária via RTC/RTP."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Ensaiar um relé é simular condições controladas para provar que ele atua quando deve, não atua quando não deve, e no tempo certo. A mala de teste gera correntes/tensões precisas e mede o tempo de atuação. Verificam-se pickup, tempo, dropout, direcionalidade e característica. Cada medição é comparada ao esperado, aprovada dentro da tolerância (~±5%)."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Injeção Secundária",
+      "subtitle": "Testando o relé pelo lado dos TCs/TPs",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é injeção secundária",
+          "type": "text",
+          "body": "Na injeção secundária, a mala de teste injeta correntes e tensões diretamente nos terminais secundários do relé (no nível de 5 A / 1 A e 115 V), substituindo os sinais que viriam dos TCs e TPs. É o método mais comum de ensaio, pois testa o relé, sua fiação secundária, lógicas e o comando de trip — sem precisar energizar o sistema primário. É rápido, seguro e permite testar exaustivamente cada função."
+        },
+        {
+          "id": "s2",
+          "title": "Convertendo valores primários para secundários",
+          "type": "formula",
+          "formula": "I_injeção = I_primária / RTC   ·   V_injeção = V_primária / RTP",
+          "explanation": "Para simular uma falta de, por exemplo, 6000 A no primário com um TC de 1200/5 (RTC = 240), injeta-se 6000/240 = 25 A no secundário. A calculadora de Comissionamento do SPARK faz essa conversão automaticamente. Atenção à corrente máxima da mala — faltas muito altas podem exigir testar em múltiplos da nominal em vez do valor real."
+        },
+        {
+          "id": "s3",
+          "title": "Roteiro de ensaio por injeção secundária",
+          "type": "list",
+          "items": [
+            "Isolar o relé do sistema (abrir as chaves de teste / bloco de teste)",
+            "Conferir a parametrização contra a folha de ajustes",
+            "Testar o pickup de cada função (subir a grandeza até operar)",
+            "Testar o tempo de atuação em múltiplos pontos da curva",
+            "Testar a direcionalidade (variando o ângulo) e a característica",
+            "Verificar o comando de trip ao disjuntor e a sinalização/comunicação",
+            "Restaurar a configuração e remover os bloqueios de teste"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Os blocos e chaves de teste",
+          "type": "note",
+          "body": "Painéis bem projetados têm blocos de teste (test blocks) que permitem isolar o relé e conectar a mala de teste com segurança, sem desfazer a fiação. Um cuidado crítico: ao isolar um TC para teste, seu secundário JAMAIS pode ficar em aberto enquanto o primário está energizado — um TC com secundário aberto desenvolve tensões altíssimas e perigosas. Os blocos de teste curto-circuitam automaticamente o TC ao serem operados, evitando esse risco."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A injeção secundária injeta sinais nos terminais do relé (5/1 A, 115 V), testando relé, fiação, lógica e trip sem energizar o primário. Converte-se o valor primário pela RTC/RTP. O roteiro vai de isolar o relé a testar pickup, tempo, direcionalidade e trip. Os blocos de teste isolam com segurança — e nunca se deixa um TC com secundário aberto sob carga."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Injeção Primária e Ensaios em Campo",
+      "subtitle": "Testando a cadeia completa",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é injeção primária",
+          "type": "text",
+          "body": "Na injeção primária, injeta-se corrente elevada diretamente no circuito primário (nas barras ou condutores de alta corrente), de modo que a corrente atravesse os TCs reais e o sinal chegue ao relé pelo caminho verdadeiro. Diferente da secundária, ela testa a cadeia COMPLETA: o TC (incluindo sua relação e polaridade reais), toda a fiação do TC ao relé, e o relé. É o teste definitivo de integridade do circuito de corrente."
+        },
+        {
+          "id": "s2",
+          "title": "Quando usar injeção primária",
+          "type": "list",
+          "items": [
+            "Verificar a relação de transformação real do TC (RTC)",
+            "Confirmar a polaridade e a fiação do TC ao relé (ponta a ponta)",
+            "Testar a saturação do TC em condições reais",
+            "Comissionar proteções diferenciais (verificação da estabilidade com corrente passante real)",
+            "Quando há dúvida sobre a integridade do circuito de corrente que a injeção secundária não resolve"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Vantagens e limitações",
+          "type": "text",
+          "body": "A injeção primária é mais completa, mas também mais cara, lenta e exige equipamento de alta corrente (centenas a milhares de ampères). Por isso, na prática, a injeção secundária é o método principal (testa a maior parte das funções), e a injeção primária é usada pontualmente para validar o que a secundária não alcança — principalmente a relação, a polaridade e a integridade física do circuito de TC. As duas são complementares."
+        },
+        {
+          "id": "s4",
+          "title": "Ensaios de comissionamento em campo (lista)",
+          "type": "list",
+          "items": [
+            "Resistência de isolamento (megôhmetro) de cabos e enrolamentos",
+            "Relação de transformação e polaridade de TCs e TPs",
+            "Curva de saturação do TC (tensão de joelho Vk)",
+            "Resistência de contato de disjuntores e tempos de operação",
+            "Testes funcionais ponta a ponta (do sensor ao disjuntor)",
+            "Testes de lógica, intertravamento e esquemas de proteção (ex.: falha de disjuntor)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A injeção primária injeta corrente no circuito primário, testando a cadeia completa (TC real, fiação, relé) — ideal para verificar relação, polaridade e integridade do TC. É mais cara e lenta que a secundária, por isso usada pontualmente; as duas se complementam. Os ensaios de campo incluem ainda isolação, saturação de TC, tempos de disjuntor e testes funcionais ponta a ponta."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Ensaios por Função de Proteção",
+      "subtitle": "Como testar cada tipo de relé",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Sobrecorrente (50/51)",
+          "type": "text",
+          "body": "Para a sobrecorrente, testa-se o pickup (subir a corrente até a função partir) e o tempo de atuação em vários múltiplos do pickup, comparando com a curva IDMT ajustada. A calculadora de Curvas de Sobrecorrente (51) do SPARK fornece o tempo esperado para cada ponto, que se compara ao tempo medido pela mala. Testa-se separadamente fase (50/51) e neutro (50N/51N), e a unidade instantânea (50) com sua ausência de retardo."
+        },
+        {
+          "id": "s2",
+          "title": "Direcional (67) e Distância (21)",
+          "type": "list",
+          "items": [
+            "67 — varia-se o ângulo entre corrente e tensão de polarização para mapear a zona de operação (linha de máximo torque)",
+            "21 — injeta-se pontos de impedância (V/I) dentro e fora de cada zona, verificando alcance e tempo de cada zona",
+            "Testa-se nas bordas das zonas (alcance) para confirmar a seletividade",
+            "Verifica-se o comportamento para diferentes tipos de falta (fase-fase, fase-terra)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Diferencial (87)",
+          "type": "text",
+          "body": "O ensaio da diferencial verifica a corrente de pickup, a característica de restrição (slope) e a estabilidade. Injeta-se corrente passante (entrando e saindo) para confirmar que a diferencial NÃO opera (estabilidade), e depois simula-se falta interna para confirmar que opera. Para a 87T, verifica-se também o bloqueio por harmônica (inrush) e a compensação de defasagem. A calculadora de Balanço Diferencial (87T) do SPARK apoia o cálculo dos pontos de teste."
+        },
+        {
+          "id": "s4",
+          "title": "Funções de tensão e frequência",
+          "type": "note",
+          "body": "Para 27/59 (sub/sobretensão) e 81 (frequência), a mala gera a grandeza correspondente e varia-a até a função operar, medindo o nível de pickup e o tempo. Funções de frequência exigem que a mala gere frequência variável com precisão. A verificação de sincronismo (25) testa-se variando ΔV, Δf e Δθ em torno dos limites ajustados, confirmando que o fechamento só é permitido dentro da janela segura."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Cada função tem seu roteiro: sobrecorrente (pickup + tempo na curva), direcional (varredura de ângulo), distância (pontos de impedância por zona), diferencial (pickup, slope, estabilidade com corrente passante e harmônica), e tensão/frequência/sincronismo (varredura da grandeza até operar). As calculadoras do SPARK fornecem os valores esperados para comparar com o medido."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Boas Práticas e Segurança no Ensaio",
+      "subtitle": "Testar com qualidade e sem riscos",
+      "estimatedMinutes": 10,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Segurança durante os ensaios",
+          "type": "list",
+          "items": [
+            "Nunca deixe o secundário de um TC em aberto com o primário energizado",
+            "Use blocos de teste para isolar o relé sem desfazer fiação",
+            "Garanta que o trip de teste não desligue disjuntores em serviço (bloqueio de trip quando necessário)",
+            "Sinalize a área de teste e comunique a equipe de operação",
+            "Confirme a desenergização adequada antes de injeção primária"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Qualidade dos resultados",
+          "type": "text",
+          "body": "Um ensaio de qualidade não se resume a 'passou'. Registra-se o valor esperado, o medido, o desvio e o veredito de cada ponto; salvam-se as oscilografias dos testes; e documenta-se qualquer ajuste feito. Esses registros viram a referência (baseline) — quando, anos depois, uma manutenção encontrar um tempo de atuação diferente, a comparação com o baseline do comissionamento revela a degradação."
+        },
+        {
+          "id": "s3",
+          "title": "Restauração ao final",
+          "type": "note",
+          "body": "Um erro perigoso é esquecer de restaurar a configuração após o teste: deixar uma função desabilitada, um bloqueio de trip ativo, um ajuste de teste no lugar do definitivo, ou um bloco de teste aberto. A restauração ao estado operacional é uma etapa formal do ensaio, com checklist próprio. Um relé que ficou com a proteção desabilitada após um teste é uma bomba-relógio — parece protegido, mas não está."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Ensaiar com segurança: nunca abrir secundário de TC sob carga, usar blocos de teste, bloquear trip indevido, sinalizar e comunicar. Qualidade significa registrar esperado/medido/desvio/veredito e salvar oscilografias como baseline. A restauração ao estado operacional ao final é etapa formal e crítica — esquecer de reabilitar uma proteção a deixa latente e perigosa. O ensaio bem feito é a prova final de que a proteção protege."
+        }
+      ]
+    }
+  ]
+}
