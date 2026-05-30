@@ -163,6 +163,12 @@ service cloud.firestore {
         match /ebooks/{ebookId} {
           allow read: if isAuthenticated();
           allow write: if isAdmin();
+
+          // Capítulos do e-book (conteúdo carregado sob demanda)
+          match /chapters/{chapterId} {
+            allow read: if isAuthenticated();
+            allow write: if isAdmin();
+          }
         }
       }
     }

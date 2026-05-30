@@ -1,6 +1,6 @@
 # validate_ebook_json.ps1
-# Valida um arquivo JSON de e-book do SPARK.
-# Uso: powershell -File scripts/validate_ebook_json.ps1 -Path "content/seed/cat01_instalacoes/mod01_gestao_riscos/ebook_nr06.json"
+# Valida um arquivo JSON de e-book do SPARK (formato em capitulos).
+# Uso: powershell -File scripts/validate_ebook_json.ps1 -Path "content/seed/.../ebook_xxx.json"
 
 param(
   [Parameter(Mandatory=$true)]
@@ -10,81 +10,93 @@ param(
 $errors = @()
 $warnings = @()
 
-# ── 1. Arquivo existe e é JSON válido ────────────────────────────
+# ── 1. Arquivo existe e e JSON valido ────────────────────────────
 if (-not (Test-Path $Path)) {
-  Write-Error "Arquivo não encontrado: $Path"
+  Write-Error "Arquivo nao encontrado: $Path"
   exit 1
 }
 
 try {
   $json = Get-Content -Path $Path -Raw -Encoding UTF8 | ConvertFrom-Json
 } catch {
-  Write-Error "JSON inválido: $_"
+  Write-Error "JSON invalido: $_"
   exit 1
 }
 
-# ── 2. Campos obrigatórios de cabeçalho ──────────────────────────
-$required = @('category','categoryOrder','module','moduleOrder','ebookTitle','ebookSubtitle','estimatedMinutes','sections')
+# ── 2. Campos obrigatorios de cabecalho ──────────────────────────
+$required = @('category','categoryOrder','module','moduleOrder','ebookTitle','ebookSubtitle','estimatedMinutes','chapters')
 foreach ($field in $required) {
   if ($null -eq $json.$field) {
-    $errors += "Campo obrigatório ausente: '$field'"
+    $errors += "Campo obrigatorio ausente: '$field'"
   }
 }
 
-# ── 3. Seções ────────────────────────────────────────────────────
-$sections = $json.sections
-if ($sections -and $sections.Count -gt 0) {
-  $validTypes = @('text','list','note','formula','summary')
+$validTypes = @('text','list','note','formula','summary')
+
+function Test-Sections($sections, $ctx) {
+  $script:localErrors = @()
   $ids = @()
-
+  if (-not $sections -or $sections.Count -eq 0) {
+    $script:errors += "$ctx sem secoes"
+    return
+  }
   foreach ($s in $sections) {
-    if (-not $s.id)    { $errors += "Seção sem 'id'" }
-    if (-not $s.title) { $errors += "Seção '$($s.id)' sem 'title'" }
-    if (-not $s.type)  { $errors += "Seção '$($s.id)' sem 'type'" }
+    if (-not $s.id)    { $script:errors += "$ctx secao sem 'id'" }
+    if (-not $s.title) { $script:errors += "$ctx secao '$($s.id)' sem 'title'" }
+    if (-not $s.type)  { $script:errors += "$ctx secao '$($s.id)' sem 'type'" }
     elseif ($s.type -notin $validTypes) {
-      $errors += "Seção '$($s.id)': tipo inválido '$($s.type)'. Válidos: $($validTypes -join ', ')"
+      $script:errors += "$ctx secao '$($s.id)': tipo invalido '$($s.type)'"
     }
-
-    # validações por tipo
     switch ($s.type) {
-      'text'    { if (-not $s.body)    { $warnings += "Seção '$($s.id)' (text) sem 'body'" } }
-      'list'    { if (-not $s.items -or $s.items.Count -eq 0) { $errors += "Seção '$($s.id)' (list) sem itens" } }
-      'note'    { if (-not $s.body)    { $warnings += "Seção '$($s.id)' (note) sem 'body'" } }
-      'formula' { if (-not $s.formula) { $errors += "Seção '$($s.id)' (formula) sem 'formula'" } }
-      'summary' { if (-not $s.body)    { $warnings += "Seção '$($s.id)' (summary) sem 'body'" } }
+      'list'    { if (-not $s.items -or $s.items.Count -eq 0) { $script:errors += "$ctx secao '$($s.id)' (list) sem itens" } }
+      'formula' { if (-not $s.formula) { $script:errors += "$ctx secao '$($s.id)' (formula) sem 'formula'" } }
+      'text'    { if (-not $s.body)    { $script:warnings += "$ctx secao '$($s.id)' (text) sem 'body'" } }
+      'note'    { if (-not $s.body)    { $script:warnings += "$ctx secao '$($s.id)' (note) sem 'body'" } }
+      'summary' { if (-not $s.body)    { $script:warnings += "$ctx secao '$($s.id)' (summary) sem 'body'" } }
     }
-
-    # IDs únicos
-    if ($s.id -in $ids) { $errors += "ID de seção duplicado: '$($s.id)'" }
+    if ($s.id -in $ids) { $script:errors += "$ctx id de secao duplicado: '$($s.id)'" }
     $ids += $s.id
   }
+}
 
-  # Contagem mínima
-  if ($sections.Count -lt 4) {
-    $warnings += "Poucas seções ($($sections.Count)). Recomendado: 4-8"
+# ── 3. Capitulos ─────────────────────────────────────────────────
+$chapters = $json.chapters
+$totalSections = 0
+if ($chapters -and $chapters.Count -gt 0) {
+  $chIds = @()
+  $idx = 0
+  foreach ($ch in $chapters) {
+    $idx++
+    $ctx = "Cap.$idx"
+    if (-not $ch.title) { $errors += "$ctx sem 'title'" }
+    if ($null -eq $ch.sections) { $errors += "$ctx sem 'sections'" }
+    else {
+      Test-Sections $ch.sections $ctx
+      $totalSections += $ch.sections.Count
+      if ($ch.sections.Count -lt 3) { $warnings += "$ctx tem poucas secoes ($($ch.sections.Count)); recomendado >= 3" }
+    }
+    # ultima secao do capitulo deve ser summary (recomendado)
+    if ($ch.sections -and $ch.sections.Count -gt 0 -and $ch.sections[-1].type -ne 'summary') {
+      $warnings += "$ctx nao termina com 'summary'"
+    }
+    if ($ch.id -and ($ch.id -in $chIds)) { $errors += "Id de capitulo duplicado: '$($ch.id)'" }
+    if ($ch.id) { $chIds += $ch.id }
   }
 
-  # Deve terminar com summary
-  $lastType = $sections[-1].type
-  if ($lastType -ne 'summary') {
-    $warnings += "Última seção é '$lastType'. Recomendado terminar com 'summary'"
+  if ($chapters.Count -lt 3) {
+    $warnings += "Poucos capitulos ($($chapters.Count)). Para e-book completo recomenda-se 5-12."
   }
 } else {
-  $errors += "Campo 'sections' está vazio ou ausente"
+  $errors += "Campo 'chapters' esta vazio ou ausente"
 }
 
-# ── 4. estimatedMinutes ──────────────────────────────────────────
-if ($json.estimatedMinutes -and ($json.estimatedMinutes -lt 5 -or $json.estimatedMinutes -gt 120)) {
-  $warnings += "estimatedMinutes=$($json.estimatedMinutes) fora do intervalo esperado (5-120)"
-}
-
-# ── 5. Relatório ─────────────────────────────────────────────────
+# ── 4. Relatorio ─────────────────────────────────────────────────
 $file = Split-Path $Path -Leaf
 Write-Host ""
-Write-Host "=== Validação E-book: $file ===" -ForegroundColor Cyan
-Write-Host "  Título  : $($json.ebookTitle)"
-Write-Host "  Módulo  : $($json.module)"
-Write-Host "  Seções  : $($sections.Count)  |  Tempo: $($json.estimatedMinutes) min"
+Write-Host "=== Validacao E-book: $file ===" -ForegroundColor Cyan
+Write-Host "  Titulo    : $($json.ebookTitle)"
+Write-Host "  Modulo    : $($json.module)"
+Write-Host "  Capitulos : $($chapters.Count)  |  Secoes (total): $totalSections  |  Tempo: $($json.estimatedMinutes) min"
 Write-Host ""
 
 if ($errors.Count -eq 0 -and $warnings.Count -eq 0) {
