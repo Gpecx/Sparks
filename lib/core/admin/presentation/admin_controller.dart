@@ -390,6 +390,118 @@ class AdminController extends Notifier<AdminState> {
     }
   }
 
+  // ─── DELETE ALL CONTENT (cascata em todas as categorias) ───────
+  Future<Map<String, int>> deleteAllContent({
+    void Function(int done, int total)? onProgress,
+  }) async {
+    state = state.copyWith(isLoading: true, clearError: true);
+    int success = 0;
+    int failed = 0;
+    try {
+      final snap = await _fs.collection(FS.categories).get();
+      final total = snap.docs.length;
+      for (int i = 0; i < total; i++) {
+        try {
+          await _deleteCategoryDeep(snap.docs[i].reference);
+          success++;
+        } catch (_) {
+          failed++;
+        }
+        onProgress?.call(i + 1, total);
+      }
+      state = state.copyWith(
+        isLoading: false,
+        selectedCategoryId: null,
+        selectedModuleId: null,
+        selectedTrailId: null,
+        selectedLessonId: null,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: 'Erro ao limpar conteúdo: $e',
+      );
+    }
+    return {'success': success, 'failed': failed};
+  }
+
+  // ─── REORDER ───────────────────────────────────────────────────
+  Future<void> reorderItems(AdminEntity entity, List<String> orderedIds) async {
+    state = state.copyWith(isLoading: true, clearError: true);
+    try {
+      final batch = _fs.batch();
+      for (int i = 0; i < orderedIds.length; i++) {
+        final DocumentReference ref;
+        switch (entity) {
+          case AdminEntity.categories:
+            ref = _fs.collection(FS.categories).doc(orderedIds[i]);
+          case AdminEntity.modules:
+            if (state.selectedCategoryId == null) throw 'Selecione uma categoria';
+            ref = _fs
+                .collection(FS.categories)
+                .doc(state.selectedCategoryId!)
+                .collection(FS.modules)
+                .doc(orderedIds[i]);
+          case AdminEntity.trails:
+            if (state.selectedCategoryId == null || state.selectedModuleId == null) {
+              throw 'Selecione categoria e módulo';
+            }
+            ref = _fs
+                .collection(FS.categories)
+                .doc(state.selectedCategoryId!)
+                .collection(FS.modules)
+                .doc(state.selectedModuleId!)
+                .collection(FS.trails)
+                .doc(orderedIds[i]);
+          case AdminEntity.lessons:
+            if (state.selectedCategoryId == null ||
+                state.selectedModuleId == null ||
+                state.selectedTrailId == null) {
+              throw 'Selecione categoria, módulo e trilha';
+            }
+            ref = _fs
+                .collection(FS.categories)
+                .doc(state.selectedCategoryId!)
+                .collection(FS.modules)
+                .doc(state.selectedModuleId!)
+                .collection(FS.trails)
+                .doc(state.selectedTrailId!)
+                .collection(FS.lessons)
+                .doc(orderedIds[i]);
+          case AdminEntity.questions:
+            if (state.selectedCategoryId == null ||
+                state.selectedModuleId == null ||
+                state.selectedTrailId == null ||
+                state.selectedLessonId == null) {
+              throw 'Selecione categoria, módulo, trilha e lição';
+            }
+            ref = _fs
+                .collection(FS.categories)
+                .doc(state.selectedCategoryId!)
+                .collection(FS.modules)
+                .doc(state.selectedModuleId!)
+                .collection(FS.trails)
+                .doc(state.selectedTrailId!)
+                .collection(FS.lessons)
+                .doc(state.selectedLessonId!)
+                .collection(FS.questions)
+                .doc(orderedIds[i]);
+        }
+        batch.update(ref, {FS.order: i, FS.updatedAt: FieldValue.serverTimestamp()});
+      }
+      await batch.commit();
+      state = state.copyWith(isLoading: false);
+    } on FirebaseException catch (e) {
+      final msg = 'Erro Firebase ao reordenar ${entity.label}: [${e.code}] ${e.message}';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+    } catch (e) {
+      final msg = 'Erro ao reordenar ${entity.label}: $e';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+    }
+  }
+
   // ─── DELETE (com cascata completa) ─────────────────────────────
   Future<bool> delete(AdminEntity entity, String docId) async {
     state = state.copyWith(isLoading: true, clearError: true);
@@ -680,9 +792,14 @@ class AdminController extends Notifier<AdminState> {
     try {
       state = state.copyWith(isLoading: true, errorMessage: null);
       
-      final categoryTitle = json['category'] as String?;
-      final moduleTitle = json['module'] as String?;
-      final trailTitle = json['trail'] ?? json['lesson'] as String?; // Usa lesson como trail se não houver trail
+      final categoryTitle    = json['category'] as String?;
+      final categorySubtitle = json['categorySubtitle'] as String? ?? '';
+      final categoryOrder    = json['categoryOrder'] as int? ?? 0;
+      final moduleTitle      = json['module'] as String?;
+      final moduleSubtitle   = json['moduleSubtitle'] as String? ?? '';
+      final moduleOrder      = json['moduleOrder'] as int? ?? 0;
+      final trailTitle = json['trail'] ?? json['lesson'] as String?;
+      final trailOrder       = json['trailOrder'] as int? ?? 0;
       final questionsData = json['questions'] as List?;
 
       if (categoryTitle == null || moduleTitle == null || trailTitle == null) {
@@ -696,15 +813,15 @@ class AdminController extends Notifier<AdminState> {
           .where(FS.title, isEqualTo: categoryTitle)
           .limit(1)
           .get();
-      
+
       DocumentReference catRef;
       if (catQuery.docs.isEmpty) {
         catRef = _fs.collection(FS.categories).doc();
         batch.set(catRef, {
           FS.title: categoryTitle,
-          'subtitle': 'Importado via JSON',
-          'description': 'Importado via JSON',
-          FS.order: 0,
+          'subtitle': categorySubtitle.isNotEmpty ? categorySubtitle : categoryTitle,
+          'description': categorySubtitle.isNotEmpty ? categorySubtitle : categoryTitle,
+          FS.order: categoryOrder,
           FS.createdAt: FieldValue.serverTimestamp(),
           FS.updatedAt: FieldValue.serverTimestamp(),
         });
@@ -723,9 +840,9 @@ class AdminController extends Notifier<AdminState> {
         modRef = catRef.collection(FS.modules).doc();
         batch.set(modRef, {
           FS.title: moduleTitle,
-          'subtitle': 'Importado via JSON',
+          'subtitle': moduleSubtitle.isNotEmpty ? moduleSubtitle : moduleTitle,
           FS.categoryId: catRef.id,
-          FS.order: 0,
+          FS.order: moduleOrder,
           FS.createdAt: FieldValue.serverTimestamp(),
           FS.updatedAt: FieldValue.serverTimestamp(),
         });
@@ -733,7 +850,16 @@ class AdminController extends Notifier<AdminState> {
         modRef = modQuery.docs.first.reference;
       }
 
-      // 3. Criar Trilha
+      // 3. Buscar trilha existente com mesmo título — se existir, deletar (cascata)
+      // para evitar duplicatas ao reimportar
+      final existingTrailQuery = await modRef.collection(FS.trails)
+          .where(FS.title, isEqualTo: trailTitle)
+          .get();
+      for (final existing in existingTrailQuery.docs) {
+        await _deleteTrailDeep(existing.reference);
+      }
+
+      // Criar Trilha (nova)
       final trailRef = modRef.collection(FS.trails).doc();
       batch.set(trailRef, {
         FS.title: trailTitle,
@@ -741,7 +867,7 @@ class AdminController extends Notifier<AdminState> {
         'numEvaluations': 0,
         FS.categoryId: catRef.id,
         FS.moduleId: modRef.id,
-        FS.order: 0,
+        FS.order: trailOrder,
         FS.createdAt: FieldValue.serverTimestamp(),
         FS.updatedAt: FieldValue.serverTimestamp(),
       });
@@ -848,6 +974,32 @@ class AdminController extends Notifier<AdminState> {
       state = state.copyWith(isLoading: false, errorMessage: msg);
       return false;
     }
+  }
+
+  // ─── BULK IMPORT FROM JSON ARRAY ─────────────────────────────
+  /// Importa uma lista de objetos JSON sequencialmente.
+  /// Retorna {'success': n, 'failed': n}.
+  Future<Map<String, int>> importBulkFromJSON(
+    List<dynamic> jsonList, {
+    void Function(int done, int total)? onProgress,
+  }) async {
+    state = state.copyWith(isLoading: true, errorMessage: null);
+    int success = 0;
+    int failed = 0;
+    final total = jsonList.length;
+
+    for (int i = 0; i < total; i++) {
+      try {
+        final ok = await importFromJSON(Map<String, dynamic>.from(jsonList[i] as Map));
+        if (ok) { success++; } else { failed++; }
+      } catch (_) {
+        failed++;
+      }
+      onProgress?.call(i + 1, total);
+    }
+
+    state = state.copyWith(isLoading: false);
+    return {'success': success, 'failed': failed};
   }
 
   // Navegação pós-importão (chamar depois de fechar o dialog)

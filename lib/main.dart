@@ -37,15 +37,14 @@ void main() async {
   // 1c. Inicializa sincronização offline (Hive + Connectivity)
   await OfflineSyncService().initialize();
 
-  // 2. Erros globais via Crashlytics (Tratamento de Produção)
-  // Repassa todas as exceções não capturadas pelo framework Flutter
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-
-  // Repassa exceções assíncronas que o Flutter não consegue pegar nativamente
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
+  // 2. Erros globais via Crashlytics — apenas em mobile (não suportado na Web)
+  if (!kIsWeb) {
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+  }
 
   // 2. Escuta mudanças de autenticação para iniciar/parar o listener
   FirebaseAuth.instance.authStateChanges().listen((user) {

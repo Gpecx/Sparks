@@ -1,0 +1,45 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Gestão de Riscos e Outras NRs",
+  "moduleSubtitle": "NR-01, NR-05, NR-06, NR-12, NR-17, NR-23 e NR-33",
+  "moduleOrder": 0,
+  "trail": "NR-01 (Gestão de Riscos Ocupacionais)",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "EXEMPLO — Conforme a NR-01, qual é a sigla do programa de gerenciamento de riscos previsto na norma?",
+      "options": [
+        "PCMSO — Programa de Controle Médico de Saúde Ocupacional",
+        "PGR — Programa de Gerenciamento de Riscos",
+        "PPRA — Programa de Prevenção de Riscos Ambientais",
+        "PCA — Programa de Conservação Auditiva"
+      ],
+      "correctIndex": 1,
+      "explanation": "O subitem 1.5.3.1.1 da NR-01 estabelece que o gerenciamento de riscos ocupacionais deve constituir um Programa de Gerenciamento de Riscos - PGR. O PPRA foi substituído pelo PGR.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "EXEMPLO — O histórico das atualizações do inventário de riscos deve ser mantido por um período mínimo de 20 anos.",
+      "correctAnswer": true,
+      "explanation": "O subitem 1.5.7.3.3.1 da NR-01 estabelece que o histórico das atualizações do inventário de riscos deve ser mantido por um período mínimo de 20 (vinte) anos ou pelo período estabelecido em normatização específica.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "EXEMPLO — A hierarquia das medidas de prevenção previstas na NR-01 estabelece a seguinte ordem de prioridade: 1) _____ dos fatores de risco; 2) Medidas de proteção _____; 3) Medidas _____ ou de organização do trabalho; 4) Medidas de proteção _____.",
+      "blanks": [
+        { "index": 0, "answer": "eliminação" },
+        { "index": 1, "answer": "coletiva" },
+        { "index": 2, "answer": "administrativas" },
+        { "index": 3, "answer": "individual" }
+      ],
+      "explanation": "Conforme o subitem 1.4.1 alínea 'g' da NR-01, a hierarquia das medidas é: eliminação → proteção coletiva → administrativas/organizacionais → proteção individual.",
+      "difficulty": "hard"
+    }
+  ],
+  "_meta_note": "Este é um arquivo TEMPLATE com 3 questões de exemplo (uma de cada tipo). O JSON real do NotebookLM virá com 18 questões na ordem: 10 MC + 5 V/F + 3 lacunas. Será salvo como t01_nr01_gro.json (sem o prefixo _TEMPLATE)."
+}

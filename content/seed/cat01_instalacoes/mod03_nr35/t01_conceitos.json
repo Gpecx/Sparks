@@ -1,0 +1,213 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-35",
+  "moduleSubtitle": "Trabalho em Altura",
+  "moduleOrder": 2,
+  "trail": "Trabalho em Altura - Conceitos e Obrigações",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-35, qual é o parâmetro exato que define normativamente o trabalho em altura?",
+      "options": [
+        "Qualquer atividade executada acima do nível do solo, independentemente da altura.",
+        "Toda atividade com diferença de nível acima de 1,5m do nível inferior.",
+        "Toda atividade com diferença de nível acima de 2,0m do nível inferior, onde haja risco de queda.",
+        "Trabalhos executados exclusivamente em andaimes ou plataformas acima de 2,0m."
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme o item 35.2.1 da NR-35, a norma aplica-se a toda atividade executada com diferença de nível acima de 2,0m do nível inferior, onde haja risco de queda.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na fase de planejamento do trabalho em altura, qual é a ordem correta da hierarquia de medidas de proteção segundo a NR-35?",
+      "options": [
+        "Minimizar as consequências, eliminar o risco e, por fim, evitar o trabalho em altura.",
+        "Evitar o trabalho em altura, eliminar o risco de queda e minimizar as consequências da queda.",
+        "Eliminar o risco de queda, evitar o trabalho em altura e minimizar as consequências da queda.",
+        "Evitar o trabalho em altura, minimizar as consequências da queda e eliminar o risco."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 35.5.2 estabelece a hierarquia: a) evitar o trabalho em altura; b) eliminar o risco de queda; e c) minimizar as consequências da queda.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para quais atividades a Permissão de Trabalho (PT) é obrigatoriamente exigida pela NR-35?",
+      "options": [
+        "Para todos os trabalhos em altura, sem qualquer exceção.",
+        "Apenas para atividades rotineiras constantes no procedimento operacional.",
+        "Para as atividades de trabalho em altura consideradas não rotineiras.",
+        "Exclusivamente para trabalhos em alturas superiores a 5 metros."
+      ],
+      "correctIndex": 2,
+      "explanation": "De acordo com o item 35.5.7, as atividades de trabalho em altura consideradas não rotineiras devem ser previamente autorizadas mediante Permissão de Trabalho (PT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual representa uma responsabilidade legal atribuída diretamente ao trabalhador segundo a NR-35?",
+      "options": [
+        "Elaborar a Análise de Risco (AR) e emitir a Permissão de Trabalho (PT).",
+        "Cumprir as disposições da NR-35, os procedimentos operacionais e as disposições do item 1.4.2 da NR-01.",
+        "Assegurar a suspensão dos trabalhos caso verifique qualquer condição de risco.",
+        "Disponibilizar instruções de segurança a todos os integrantes da equipe antes da atividade."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 35.3.2 estabelece que cabe ao trabalhador cumprir as disposições previstas na NR-35, no item 1.4.2 da NR-01 (direito de recusa), bem como os procedimentos operacionais do empregador.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a carga horária mínima exigida para o treinamento inicial em trabalho em altura?",
+      "options": [
+        "8 horas, a ser realizado obrigatoriamente antes de o trabalhador iniciar a atividade.",
+        "4 horas, podendo ser concluído nos primeiros 30 dias de trabalho.",
+        "12 horas, sendo metade em teoria e metade em prática de resgate.",
+        "8 horas, exigidas apenas se o trabalhador for utilizar sistema de acesso por cordas."
+      ],
+      "correctIndex": 0,
+      "explanation": "Segundo o item 35.4.2.1, o treinamento inicial deve ter carga horária mínima de 8 horas e ser realizado antes de o trabalhador iniciar a atividade.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por qual período mínimo a organização deve assegurar o arquivamento da documentação de trabalho em altura, conforme a NR-35?",
+      "options": [
+        "1 ano.",
+        "5 anos.",
+        "10 anos.",
+        "20 anos, em conjunto com o prontuário médico."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 35.3.1, alínea 'j', determina que cabe à organização assegurar o arquivamento da documentação por um período mínimo de 5 anos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a periodicidade e a carga horária mínima do treinamento periódico de reciclagem em trabalho em altura?",
+      "options": [
+        "Anualmente, com carga horária mínima de 4 horas.",
+        "A cada dois anos, com carga horária mínima de oito horas.",
+        "A cada três anos, com carga horária mínima de doze horas.",
+        "Semestralmente, com carga horária mínima de duas horas."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme o subitem 35.4.2.2, o treinamento periódico deve ser realizado a cada dois anos, com carga horária mínima de 8 horas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o limite máximo de força de impacto transmitida ao trabalhador durante a retenção de queda pelo SPIQ?",
+      "options": [
+        "No máximo 2 kN.",
+        "No máximo 4 kN.",
+        "No máximo 5 kN.",
+        "No máximo 6 kN."
+      ],
+      "correctIndex": 3,
+      "explanation": "De acordo com o item 35.6.7, o SPIQ deve ser selecionado de forma que a força de impacto máxima transmitida ao corpo do trabalhador seja de no máximo 6 kN.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o limite de validade de uma Permissão de Trabalho (PT) em trabalho em altura, conforme a NR-35?",
+      "options": [
+        "24 horas consecutivas, independentemente dos turnos.",
+        "Limitada à duração da atividade, restrita ao turno ou à jornada de trabalho.",
+        "Válida para toda a semana útil, desde que a Análise de Risco não sofra alterações.",
+        "Indeterminada, perdurando até a total conclusão da obra ou reparo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 35.5.8.2 é categórico: a Permissão de Trabalho tem validade limitada à duração da atividade, restritamente ao turno ou à jornada de trabalho.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o subitem 35.6.11.1.1 da NR-35 proíbe expressamente quanto ao uso do talabarte?",
+      "options": [
+        "É proibido o talabarte de material sintético se houver risco elétrico.",
+        "O talabarte não pode ser conectado a outro talabarte, elemento de ligação ou extensor, nem ter nós ou laços.",
+        "O talabarte não pode ser usado com absorvedor de energia em sistemas de restrição de movimentação.",
+        "É proibido o uso de talabartes com extensão superior a 0,90m salvo autorização do engenheiro."
+      ],
+      "correctIndex": 1,
+      "explanation": "O subitem 35.6.11.1.1 proíbe que o talabarte seja conectado a outro talabarte, elemento de ligação ou extensor, vedando também o uso com nós ou laços.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Todo trabalho em altura, seja rotineiro ou não rotineiro, deve ser precedido de uma Análise de Risco (AR).",
+      "correctAnswer": true,
+      "explanation": "A afirmação é verdadeira. O item 35.5.5 estabelece que todo trabalho em altura deve ser precedido de Análise de Risco (AR), sem exceções.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um trabalhador é automaticamente autorizado para trabalho em altura ao receber o certificado do treinamento de 8 horas.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 35.4.1.1 exige que o trabalhador autorizado seja capacitado E tenha seu estado de saúde avaliado e considerado apto. A autorização é um processo formal da organização, não automática.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A inspeção do SPIQ deve ser realizada pelo Serviço de Segurança do Trabalho no mínimo uma vez a cada 12 meses — essa é a definição de inspeção rotineira.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 35.6.6 define que a inspeção ROTINEIRA ocorre antes do início dos trabalhos diários. A inspeção no mínimo a cada 12 meses é a inspeção PERIÓDICA.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em sistemas de retenção de quedas e acesso por cordas, o cinturão deve ser obrigatoriamente do tipo paraquedista.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. O item 35.6.9 exige expressamente o cinturão de segurança tipo paraquedista para sistemas de retenção de queda e acesso por cordas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O plano de emergência deve maximizar o tempo de suspensão inerte do trabalhador caído para estabilizar a coluna cervical antes da descida.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 35.7.1, alínea 'd', exige que as técnicas e sistemas de resgate REDUZAM o tempo de suspensão inerte, prevenindo o choque de suspensão.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A aptidão do trabalhador para o trabalho em altura deve ser consignada no documento denominado _____, regulamentado pela NR-07.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ASO"
+        }
+      ],
+      "explanation": "O subitem 35.4.4.1 estabelece que a aptidão para trabalho em altura deve ser anotada no Atestado de Saúde Ocupacional (ASO).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A área compreendida entre o ponto de ancoragem e o obstáculo inferior mais próximo, contra o qual o trabalhador poderia colidir em caso de queda, é tecnicamente chamada de _____ Livre de Queda.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Zona"
+        }
+      ],
+      "explanation": "De acordo com o glossário da norma, essa métrica fundamental é definida como Zona Livre de Queda (ZLQ).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A razão matemática entre a distância que o trabalhador percorreria durante a queda e o comprimento útil do equipamento destinado a detê-lo é denominada _____ de queda.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Fator"
+        }
+      ],
+      "explanation": "O Glossário da NR-35 define essa premissa fundamental do dimensionamento dos impactos como 'Fator de queda'.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -11,13 +11,11 @@ import 'package:spark_app/theme/app_theme.dart';
 //  ENTITY LIST VIEW — Lista genérica para qualquer entidade admin
 // ─────────────────────────────────────────────────────────────────
 
-class AdminEntityListView extends ConsumerWidget {
+class AdminEntityListView extends ConsumerStatefulWidget {
   final AdminEntity entity;
   final List<FieldConfig> fields;
   final String Function(Map<String, dynamic> data) titleExtractor;
   final String Function(Map<String, dynamic> data)? subtitleExtractor;
-
-  /// Chamado após criar uma entidade para navegação guiada (opcional)
   final void Function(String docId, Map<String, dynamic> data)? onAfterCreate;
 
   const AdminEntityListView({
@@ -28,6 +26,51 @@ class AdminEntityListView extends ConsumerWidget {
     this.subtitleExtractor,
     this.onAfterCreate,
   });
+
+  @override
+  ConsumerState<AdminEntityListView> createState() =>
+      _AdminEntityListViewState();
+}
+
+class _AdminEntityListViewState extends ConsumerState<AdminEntityListView> {
+  bool _reorderMode = false;
+  List<QueryDocumentSnapshot>? _localDocs;
+
+  void _enterReorderMode(List<QueryDocumentSnapshot> docs) {
+    setState(() {
+      _reorderMode = true;
+      _localDocs = List.from(docs);
+    });
+  }
+
+  void _cancelReorderMode() {
+    setState(() {
+      _reorderMode = false;
+      _localDocs = null;
+    });
+  }
+
+  Future<void> _saveOrder() async {
+    if (_localDocs == null) return;
+    final ids = _localDocs!.map((d) => d.id).toList();
+    await ref
+        .read(adminControllerProvider.notifier)
+        .reorderItems(widget.entity, ids);
+    if (mounted) {
+      setState(() {
+        _reorderMode = false;
+        _localDocs = null;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Ordem salva com sucesso!'),
+          backgroundColor: Color(0xFF4CAF50),
+          behavior: SnackBarBehavior.floating,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
 
   // ── Abre o wizard de trilha ──────────────────────────────────────
   Future<void> _openTrailWizard(
@@ -51,14 +94,11 @@ class AdminEntityListView extends ConsumerWidget {
     }
   }
 
-  // ── Lógica do FAB — abre seletor de pai depois abre form/wizard ──
-  Future<void> _onFabPressed(BuildContext context, WidgetRef ref) async {
-    switch (entity) {
-      // Categoria: sem pai, abre direto o form
+  Future<void> _onFabPressed(BuildContext context) async {
+    switch (widget.entity) {
       case AdminEntity.categories:
-        await _openForm(context, ref);
+        await _openForm(context);
 
-      // Módulo: seleciona categoria antes
       case AdminEntity.modules:
         final sel = await _showParentSelector(
           context,
@@ -68,15 +108,12 @@ class AdminEntityListView extends ConsumerWidget {
         if (sel == null || !context.mounted) return;
         await _openForm(
           context,
-          ref,
           initialValues: {'categoryId': sel.categoryId ?? ''},
         );
 
-      // Trilha: abre o wizard (já tem seletor interno)
       case AdminEntity.trails:
         await _openTrailWizard(context);
 
-      // Lição: seleciona cat → mod → trilha antes
       case AdminEntity.lessons:
         final sel = await _showParentSelector(
           context,
@@ -86,7 +123,6 @@ class AdminEntityListView extends ConsumerWidget {
         if (sel == null || !context.mounted) return;
         await _openForm(
           context,
-          ref,
           initialValues: {
             '_categoryId': sel.categoryId ?? '',
             '_moduleId': sel.moduleId ?? '',
@@ -94,7 +130,6 @@ class AdminEntityListView extends ConsumerWidget {
           },
         );
 
-      // Questão: seleciona cat → mod → trilha → lição antes
       case AdminEntity.questions:
         final sel = await _showParentSelector(
           context,
@@ -104,7 +139,6 @@ class AdminEntityListView extends ConsumerWidget {
         if (sel == null || !context.mounted) return;
         await _openForm(
           context,
-          ref,
           initialValues: {
             '_categoryId': sel.categoryId ?? '',
             '_moduleId': sel.moduleId ?? '',
@@ -115,7 +149,6 @@ class AdminEntityListView extends ConsumerWidget {
     }
   }
 
-  // ── Abre o seletor de pai ────────────────────────────────────────
   Future<ParentSelection?> _showParentSelector(
     BuildContext context, {
     required String title,
@@ -130,10 +163,8 @@ class AdminEntityListView extends ConsumerWidget {
     );
   }
 
-  // ── Abre o form genérico ─────────────────────────────────────────
   Future<void> _openForm(
-    BuildContext context,
-    WidgetRef ref, {
+    BuildContext context, {
     String? docId,
     Map<String, dynamic>? existing,
     Map<String, String> initialValues = const {},
@@ -148,14 +179,16 @@ class AdminEntityListView extends ConsumerWidget {
     final result = await showDialog<dynamic>(
       context: context,
       builder: (_) => AdminEntityForm(
-        title: docId == null ? 'Novo ${entity.label}' : 'Editar ${entity.label}',
-        fields: fields,
+        title: docId == null
+            ? 'Novo ${widget.entity.label}'
+            : 'Editar ${widget.entity.label}',
+        fields: widget.fields,
         initialValues: merged,
         onSave: (data) async {
           if (docId == null) {
-            return ctrl.create(entity, data);
+            return ctrl.create(widget.entity, data);
           } else {
-            await ctrl.update(entity, docId, data);
+            await ctrl.update(widget.entity, docId, data);
             return '';
           }
         },
@@ -164,11 +197,10 @@ class AdminEntityListView extends ConsumerWidget {
 
     if (!context.mounted) return;
 
-    // result é o docId (String) ou true para edição
     if (result != null && result != false) {
       final newDocId = result is String ? result : '';
-      if (docId == null && onAfterCreate != null) {
-        onAfterCreate!(newDocId, existing ?? {});
+      if (docId == null && widget.onAfterCreate != null) {
+        widget.onAfterCreate!(newDocId, existing ?? {});
         return;
       }
       showDialog(
@@ -180,7 +212,6 @@ class AdminEntityListView extends ConsumerWidget {
 
   void _confirmDelete(
     BuildContext context,
-    WidgetRef ref,
     String docId,
     Map<String, dynamic> data,
   ) {
@@ -191,7 +222,7 @@ class AdminEntityListView extends ConsumerWidget {
         title: const Text('Confirmar exclusão',
             style: TextStyle(color: AppColors.textPrimary)),
         content: Text(
-          'Deseja remover este item de ${entity.label}? Esta ação não pode ser desfeita.',
+          'Deseja remover este item de ${widget.entity.label}? Esta ação não pode ser desfeita.',
           style: const TextStyle(color: AppColors.textSecondary),
         ),
         actions: [
@@ -202,19 +233,95 @@ class AdminEntityListView extends ConsumerWidget {
           ),
           TextButton(
             onPressed: () {
-              ref.read(adminControllerProvider.notifier).delete(entity, docId);
+              ref
+                  .read(adminControllerProvider.notifier)
+                  .delete(widget.entity, docId);
               Navigator.of(context).pop();
             },
-            child: const Text('EXCLUIR',
-                style: TextStyle(color: AppColors.error)),
+            child:
+                const Text('EXCLUIR', style: TextStyle(color: AppColors.error)),
           ),
         ],
       ),
     );
   }
 
+  Widget _buildItem(
+    BuildContext context,
+    QueryDocumentSnapshot doc, {
+    bool showDragHandle = false,
+  }) {
+    final data = doc.data() as Map<String, dynamic>;
+    return Container(
+      key: ValueKey(doc.id),
+      decoration: BoxDecoration(
+        color: AppColors.card,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: showDragHandle
+              ? AppColors.primary.withValues(alpha: 0.4)
+              : AppColors.cardBorder.withValues(alpha: 0.4),
+        ),
+      ),
+      child: ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        title: Text(
+          widget.titleExtractor(data),
+          style: const TextStyle(
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        subtitle: widget.subtitleExtractor != null
+            ? Text(
+                widget.subtitleExtractor!(data),
+                style: const TextStyle(
+                    color: AppColors.textSecondary, fontSize: 12),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              )
+            : null,
+        leading: showDragHandle
+            ? const Icon(Icons.drag_handle,
+                color: AppColors.primary, size: 24)
+            : CircleAvatar(
+                backgroundColor: AppColors.primary.withValues(alpha: 0.15),
+                child: Text(
+                  (widget.titleExtractor(data).isNotEmpty
+                          ? widget.titleExtractor(data)[0]
+                          : '?')
+                      .toUpperCase(),
+                  style: const TextStyle(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+        trailing: showDragHandle
+            ? null
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.edit_outlined,
+                        color: AppColors.blue, size: 20),
+                    onPressed: () =>
+                        _openForm(context, docId: doc.id, existing: data),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete_outline,
+                        color: AppColors.error, size: 20),
+                    onPressed: () =>
+                        _confirmDelete(context, doc.id, data),
+                  ),
+                ],
+              ),
+      ),
+    );
+  }
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final controller = ref.read(adminControllerProvider.notifier);
 
     ref.listen(adminControllerProvider, (prev, next) {
@@ -233,7 +340,7 @@ class AdminEntityListView extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: StreamBuilder<QuerySnapshot>(
-        stream: controller.streamFor(entity),
+        stream: controller.streamFor(widget.entity),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
@@ -247,13 +354,22 @@ class AdminEntityListView extends ConsumerWidget {
               ),
             );
           }
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting &&
+              _localDocs == null) {
             return const Center(
               child: CircularProgressIndicator(color: AppColors.primary),
             );
           }
 
-          final docs = snapshot.data?.docs ?? [];
+          final streamDocs =
+              snapshot.data?.docs.cast<QueryDocumentSnapshot>() ?? [];
+
+          // Atualiza docs locais somente fora do modo reordenação
+          if (!_reorderMode) {
+            _localDocs = null;
+          }
+
+          final docs = _reorderMode ? (_localDocs ?? streamDocs) : streamDocs;
 
           if (docs.isEmpty) {
             return Center(
@@ -264,7 +380,7 @@ class AdminEntityListView extends ConsumerWidget {
                       size: 64, color: AppColors.textMuted),
                   const SizedBox(height: 16),
                   Text(
-                    'Nenhum item em ${entity.label}',
+                    'Nenhum item em ${widget.entity.label}',
                     style: const TextStyle(
                         color: AppColors.textMuted, fontSize: 16),
                   ),
@@ -279,86 +395,120 @@ class AdminEntityListView extends ConsumerWidget {
             );
           }
 
-          return ListView.separated(
-            padding: const EdgeInsets.all(16),
-            itemCount: docs.length,
-            separatorBuilder: (_, idx) => const SizedBox(height: 8),
-            itemBuilder: (context, index) {
-              final doc = docs[index];
-              final data = doc.data() as Map<String, dynamic>;
-              return Container(
-                decoration: BoxDecoration(
-                  color: AppColors.card,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                      color: AppColors.cardBorder.withValues(alpha: 0.4)),
-                ),
-                child: ListTile(
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  title: Text(
-                    titleExtractor(data),
-                    style: const TextStyle(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  subtitle: subtitleExtractor != null
-                      ? Text(
-                          subtitleExtractor!(data),
-                          style: const TextStyle(
-                              color: AppColors.textSecondary, fontSize: 12),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      : null,
-                  leading: CircleAvatar(
-                    backgroundColor:
-                        AppColors.primary.withValues(alpha: 0.15),
-                    child: Text(
-                      (titleExtractor(data).isNotEmpty
-                              ? titleExtractor(data)[0]
-                              : '?')
-                          .toUpperCase(),
-                      style: const TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
+          if (_reorderMode) {
+            return Column(
+              children: [
+                // Banner informativo
+                Container(
+                  width: double.infinity,
+                  color: AppColors.primary.withValues(alpha: 0.12),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 10),
+                  child: Row(
                     children: [
-                      IconButton(
-                        icon: const Icon(Icons.edit_outlined,
-                            color: AppColors.blue, size: 20),
-                        onPressed: () => _openForm(context, ref,
-                            docId: doc.id, existing: data),
+                      const Icon(Icons.info_outline,
+                          color: AppColors.primary, size: 18),
+                      const SizedBox(width: 8),
+                      const Expanded(
+                        child: Text(
+                          'Arraste os itens para reordenar. Toque em SALVAR para confirmar.',
+                          style: TextStyle(
+                              color: AppColors.primary, fontSize: 13),
+                        ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.delete_outline,
-                            color: AppColors.error, size: 20),
-                        onPressed: () =>
-                            _confirmDelete(context, ref, doc.id, data),
+                      TextButton(
+                        onPressed: _cancelReorderMode,
+                        child: const Text('CANCELAR',
+                            style:
+                                TextStyle(color: AppColors.textSecondary)),
+                      ),
+                      const SizedBox(width: 4),
+                      ElevatedButton(
+                        onPressed: _saveOrder,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                        ),
+                        child: const Text('SALVAR'),
                       ),
                     ],
                   ),
                 ),
-              );
-            },
+                Expanded(
+                  child: ReorderableListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: docs.length,
+                    onReorder: (oldIndex, newIndex) {
+                      setState(() {
+                        if (newIndex > oldIndex) newIndex--;
+                        final item = _localDocs!.removeAt(oldIndex);
+                        _localDocs!.insert(newIndex, item);
+                      });
+                    },
+                    itemBuilder: (context, index) => Padding(
+                      key: ValueKey(docs[index].id),
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: _buildItem(context, docs[index],
+                          showDragHandle: true),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
+
+          return ListView.separated(
+            padding: const EdgeInsets.all(16),
+            itemCount: docs.length,
+            separatorBuilder: (_, idx) => const SizedBox(height: 8),
+            itemBuilder: (context, index) =>
+                _buildItem(context, docs[index]),
           );
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _onFabPressed(context, ref),
-        backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
-        icon: entity == AdminEntity.trails
-            ? const Icon(Icons.map_outlined)
-            : const Icon(Icons.add),
-        label: Text(entity == AdminEntity.trails
-            ? 'Nova Trilha'
-            : 'Novo ${entity.label.split('/').first}'),
-      ),
+      floatingActionButton: _reorderMode
+          ? null
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                // Botão reordenar
+                FloatingActionButton.small(
+                  heroTag: 'reorder_${widget.entity.name}',
+                  onPressed: () {
+                    final ctrl =
+                        ref.read(adminControllerProvider.notifier);
+                    final stream = ctrl.streamFor(widget.entity);
+                    stream.first.then((snap) {
+                      if (mounted) {
+                        _enterReorderMode(
+                            snap.docs.cast<QueryDocumentSnapshot>());
+                      }
+                    });
+                  },
+                  backgroundColor: AppColors.card,
+                  foregroundColor: AppColors.primary,
+                  tooltip: 'Reordenar',
+                  child: const Icon(Icons.swap_vert),
+                ),
+                const SizedBox(height: 8),
+                // Botão adicionar
+                FloatingActionButton.extended(
+                  heroTag: 'add_${widget.entity.name}',
+                  onPressed: () => _onFabPressed(context),
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
+                  icon: widget.entity == AdminEntity.trails
+                      ? const Icon(Icons.map_outlined)
+                      : const Icon(Icons.add),
+                  label: Text(widget.entity == AdminEntity.trails
+                      ? 'Nova Trilha'
+                      : 'Novo ${widget.entity.label.split('/').first}'),
+                ),
+              ],
+            ),
     );
   }
 }

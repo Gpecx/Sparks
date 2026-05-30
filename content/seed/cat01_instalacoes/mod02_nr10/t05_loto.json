@@ -1,0 +1,213 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-10",
+  "moduleSubtitle": "Segurança em Instalações e Serviços com Eletricidade",
+  "moduleOrder": 1,
+  "trail": "Bloqueio e Etiquetagem (LOTO)",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "A NR-10 determina uma sequência rígida para considerar uma instalação desenergizada. Qual é a primeira etapa dessa sequência obrigatória?",
+      "options": [
+        "Instalação de aterramento temporário.",
+        "Seccionamento.",
+        "Constatação da ausência de tensão.",
+        "Impedimento de reenergização."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme o item 10.5.1, alínea 'a', da NR-10, a sequência obrigatória inicia-se pelo seccionamento.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o glossário da NR-10 define 'Impedimento de reenergização'?",
+      "options": [
+        "Ligação elétrica efetiva à terra, destinada a garantir a equipotencialidade.",
+        "Condição que garante a não energização do circuito através de recursos e procedimentos apropriados.",
+        "Envoltório de partes energizadas destinado a impedir qualquer contato com partes internas.",
+        "Dispositivo que impede qualquer contato com partes energizadas adjacentes."
+      ],
+      "correctIndex": 1,
+      "explanation": "Segundo o Glossário da NR-10, essa é a definição normativa exata do termo 'Impedimento de reenergização'.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos projetos de instalações elétricas, o que a NR-10 exige obrigatoriamente quanto aos dispositivos de desligamento de circuitos?",
+      "options": [
+        "Que possuam recursos para impedimento de reenergização e para sinalização de advertência.",
+        "Que sejam acionados exclusivamente por sistemas de controle remoto em áreas classificadas.",
+        "Que tenham rearme automático de segurança temporizado após o fim das manobras.",
+        "Que sejam operados somente por engenheiros eletricistas habilitados e registrados no CREA."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 10.3.1 da NR-10 exige que os projetos especifiquem dispositivos de desligamento com recursos para impedimento de reenergização e sinalização de advertência.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante a reenergização de uma instalação elétrica, qual é a última etapa estabelecida pela NR-10?",
+      "options": [
+        "Remoção da sinalização de impedimento de reenergização.",
+        "Destravamento e religação dos dispositivos de seccionamento.",
+        "Remoção do aterramento temporário.",
+        "Retirada das ferramentas e utensílios."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.5.2, alínea 'e', lista o 'destravamento e religação dos dispositivos de seccionamento' como o último passo da reenergização.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-10, a sinalização de segurança deve ser adotada para quais situações relacionadas a bloqueios?",
+      "options": [
+        "Travamentos e bloqueios de dispositivos e sistemas de manobra, e impedimento de energização.",
+        "Apenas em subestações de entrada acima de 138kV.",
+        "Identificação de aterramentos temporários, exclusivamente.",
+        "Somente para delimitação de áreas não energizadas fora do SEP."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 10.10.1 (alíneas 'b' e 'f') determina expressamente a adoção de sinalização para travamentos, bloqueios e impedimento de energização.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Após a instalação do aterramento temporário com equipotencialização dos condutores, qual é o próximo passo da desenergização exigido pela NR-10?",
+      "options": [
+        "Instalação da sinalização de impedimento de reenergização.",
+        "Constatação da ausência de tensão.",
+        "Impedimento de reenergização.",
+        "Proteção dos elementos energizados existentes na zona controlada."
+      ],
+      "correctIndex": 3,
+      "explanation": "Conforme o item 10.5.1, a alínea 'e' (proteção dos elementos energizados na zona controlada) deve ocorrer logo após a alínea 'd' (aterramento temporário).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em que momento da sequência de desenergização deve ser realizada a constatação da ausência de tensão?",
+      "options": [
+        "Imediatamente após a instalação do aterramento temporário.",
+        "Antes da execução do seccionamento do circuito elétrico.",
+        "Após o seccionamento e o impedimento de reenergização do circuito.",
+        "Como última etapa, após a instalação da sinalização e etiquetagem."
+      ],
+      "correctIndex": 2,
+      "explanation": "De acordo com o item 10.5.1, a constatação da ausência de tensão (alínea 'c') deve ocorrer após o seccionamento (alínea 'a') e o impedimento de reenergização (alínea 'b').",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O aterramento temporário deve ser removido em qual momento da reenergização?",
+      "options": [
+        "Antes da retirada das ferramentas e utensílios do local de trabalho.",
+        "Imediatamente antes da remoção da sinalização de impedimento de reenergização.",
+        "Após o destravamento e religação dos dispositivos de seccionamento.",
+        "Antes da retirada da zona controlada de todos os trabalhadores não envolvidos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Segundo o item 10.5.2, a remoção do aterramento temporário (alínea 'c') precede diretamente a remoção da sinalização de impedimento (alínea 'd').",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a NR-10 exige sobre os procedimentos para serviços em instalações elétricas que necessitam de bloqueio?",
+      "options": [
+        "Ser baseados apenas no conhecimento empírico do trabalhador capacitado.",
+        "Ser planejados e realizados conforme procedimentos específicos, padronizados, com descrição detalhada passo a passo, assinados por profissional autorizado.",
+        "Ser feitos com ordens de serviço emitidas apenas no final da jornada para fins de registro.",
+        "Dispensar a sinalização restritiva caso os travamentos mecânicos sejam visualmente inspecionados antes do início."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.11.1 exige que os serviços sejam realizados conforme procedimentos de trabalho específicos, padronizados, detalhados passo a passo, e assinados por profissional autorizado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a ordem sequencial correta das três primeiras etapas da reenergização, conforme o item 10.5.2 da NR-10?",
+      "options": [
+        "Retirada das ferramentas; remoção do aterramento temporário; remoção da sinalização.",
+        "Retirada das ferramentas; retirada da zona controlada de todos os trabalhadores não envolvidos; remoção do aterramento temporário e equipotencialização.",
+        "Retirada de trabalhadores não envolvidos; destravamento dos dispositivos; retirada das ferramentas e painéis.",
+        "Remoção do aterramento temporário; retirada das ferramentas e EPIs; destravamento dos seccionadores."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.5.2 define como ordem inicial: (a) retirada das ferramentas e utensílios, (b) retirada dos trabalhadores não envolvidos da zona controlada, e (c) remoção do aterramento temporário.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A instalação da sinalização de impedimento de reenergização é a sexta e última etapa (alínea 'f') do procedimento de desenergização estipulado pela NR-10.",
+      "correctAnswer": true,
+      "explanation": "A afirmação é correta. O item 10.5.1 da NR-10 define a instalação da sinalização de impedimento como o passo final obrigatório para considerar a instalação desenergizada.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao iniciar a reenergização, é normativamente permitido que as ferramentas permaneçam na zona controlada até que a sinalização de impedimento seja removida.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O item 10.5.2 define que a retirada das ferramentas, utensílios e equipamentos deve ser a primeira etapa (alínea 'a') da reenergização.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A constatação da ausência de tensão substitui o aterramento temporário em instalações de Baixa Tensão, tornando-o opcional na NR-10.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. A sequência do item 10.5.1 é compulsória e prevê tanto a constatação da ausência de tensão (alínea 'c') quanto a posterior instalação do aterramento temporário (alínea 'd'), sem substituição.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Toda equipe que intervém em circuitos desenergizados com bloqueio deve ter um trabalhador indicado para supervisionar e conduzir os trabalhos.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira, sustentada pelo item 10.11.6, que exige a indicação de um trabalhador da equipe para supervisão e condução segura dos trabalhos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para operações elementares em baixa tensão com equipamentos em perfeito estado, a NR-10 exige obrigatoriamente a execução por trabalhador formalmente autorizado e com uso do sistema LOTO.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O subitem 10.6.1.2 permite que operações elementares em BT com equipamentos em perfeito estado sejam realizadas por pessoas não advertidas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A segunda etapa da sequência de desenergização da NR-10 é o ______ de reenergização.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "impedimento"
+        }
+      ],
+      "explanation": "A alínea 'b' do item 10.5.1 descreve o passo 'impedimento de reenergização', realizado após o seccionamento do circuito.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Antes do início de qualquer tarefa que envolva bloqueio das fontes de energia, a NR-10 exige que os serviços sejam precedidos de ______ de serviço específicas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ordens"
+        }
+      ],
+      "explanation": "O item 10.11.2 estabelece que 'Os serviços devem ser precedidos de ordens de serviço específicas'.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A quinta etapa da desenergização (alínea 'e') prevê a proteção técnica de todos os elementos energizados existentes na zona ______.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "controlada"
+        }
+      ],
+      "explanation": "Conforme o item 10.5.1 (alínea 'e'), a etapa exigida é a 'proteção dos elementos energizados existentes na zona controlada'.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -8,6 +8,10 @@
 .build/
 .buildlog/
 .history
+
+# Local dev scripts com credenciais (NUNCA commitar)
+run-spark.bat
+run-spark.sh
 .svn/
 .swiftpm/
 migrate_working_dir/
@@ -47,4 +51,8 @@ app.*.map.json
 # Environment variables
 .env*
 !.env.example
+
+# Local Agent configuration
+.agent/
+agents/
 

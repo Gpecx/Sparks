@@ -1,0 +1,213 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Gestão de Riscos e Outras NRs",
+  "moduleSubtitle": "NR-01, NR-05, NR-06, NR-12, NR-17, NR-23 e NR-33",
+  "moduleOrder": 0,
+  "trail": "NR-23 (Proteção Contra Incêndios)",
+  "trailOrder": 5,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o objetivo principal da NR-23?",
+      "options": [
+        "Estabelecer regras de segurança em instalações elétricas.",
+        "Estabelecer medidas de prevenção contra incêndios nos ambientes de trabalho.",
+        "Definir diretrizes para o dimensionamento da brigada de incêndio e CIPA.",
+        "Padronizar o uso de Equipamentos de Proteção Individual contra chamas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 23.1.1 da NR-23 define expressamente que a norma estabelece medidas de prevenção contra incêndios nos ambientes de trabalho.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a NR-23, a organização deve adotar medidas de prevenção contra incêndios em conformidade primordial com qual base legal?",
+      "options": [
+        "Legislação municipal de alvarás de funcionamento.",
+        "Convenções coletivas de trabalho intersindicais.",
+        "Legislação estadual e, quando aplicável, normas técnicas oficiais.",
+        "Diretrizes e manuais internacionais de segurança do trabalho."
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme o item 23.3.1, toda organização deve adotar medidas de prevenção contra incêndios em conformidade com a legislação estadual e, complementarmente, normas técnicas oficiais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No que tange aos dispositivos e respostas a emergências, a NR-23 determina que a organização providencie informações a todos os trabalhadores sobre:",
+      "options": [
+        "O dimensionamento estrutural e hierárquico do SESMT local.",
+        "A utilização de ferramentas elétricas pesadas na evacuação.",
+        "A utilização dos equipamentos de combate ao incêndio e dispositivos de alarme.",
+        "A carga horária máxima de trabalho contínuo da brigada florestal."
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo o item 23.3.2, alíneas 'a' e 'c', a organização deve informar a todos os trabalhadores sobre a utilização dos equipamentos de combate ao incêndio e dos dispositivos de alarme existentes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a regra geral estabelecida pela NR-23 quanto às saídas de emergência durante o horário de expediente?",
+      "options": [
+        "Devem permanecer trancadas à chave para evitar acessos não autorizados de terceiros.",
+        "Nenhuma saída de emergência deve ser fechada à chave ou presa durante a jornada de trabalho.",
+        "Devem possuir chaves eletrônicas sob controle exclusivo do gerente do setor operacional.",
+        "Devem ser abertas apenas e estritamente durante exercícios simulados anuais de evacuação."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 23.3.5 da norma é claro ao determinar que nenhuma saída de emergência deve ser fechada à chave ou presa durante toda a jornada de trabalho.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sobre a quantidade de saídas de emergência em um local de trabalho, a NR-23 determina que elas devem:",
+      "options": [
+        "Estar dispostas em número suficiente para permitir o abandono com rapidez e segurança.",
+        "Ser exatamente e invariavelmente duas por andar, independentemente do tamanho do pavilhão.",
+        "Ser limitadas a uma única saída principal e larga para facilitar a contagem dos trabalhadores.",
+        "Ser dimensionadas exclusivamente em função do número de brigadistas de plantão."
+      ],
+      "correctIndex": 0,
+      "explanation": "De acordo com o item 23.3.3 da NR-23, os locais de trabalho devem dispor de saídas em número suficiente e dispostas para abandono rápido e seguro em caso de emergência.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sobre a sinalização de aberturas, saídas e vias de passagem de emergência, qual informação deve ser indicada visualmente aos trabalhadores segundo as diretrizes da NR-23?",
+      "options": [
+        "O nome de guerra do responsável legal pela brigada de incêndio.",
+        "O prazo de validade estipulado para os extintores posicionados.",
+        "A direção da saída para facilitar o processo de abandono.",
+        "A temperatura máxima de acionamento dos chuveiros tipo sprinkler."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 23.3.4 da NR-23 exige que as aberturas, saídas e vias de emergência sejam identificadas e sinalizadas indicando visualmente a direção da saída.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A NR-23 proíbe trancar portas de emergência à chave durante o expediente. Contudo, ela permite o uso de dispositivos de travamento sob qual condição específica de segurança?",
+      "options": [
+        "Desde que a chave seja mantida permanentemente em uma caixa de vidro frágil fixada na parede.",
+        "Desde que os dispositivos permitam fácil abertura diretamente do interior do estabelecimento.",
+        "Desde que o setor de Segurança do Trabalho (SESMT) autorize sua instalação formalmente por escrito.",
+        "Desde que a central do Corpo de Bombeiros possua previamente cópia de todas as chaves."
+      ],
+      "correctIndex": 1,
+      "explanation": "O subitem 23.3.5.1 da NR-23 prevê expressamente que as saídas de emergência podem ser equipadas com dispositivos de travamento, desde que permitam fácil abertura do interior do estabelecimento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A que ambientes se aplicam legalmente as medidas de prevenção contra incêndios estabelecidas pela norma regulamentadora NR-23?",
+      "options": [
+        "Apenas às áreas operacionais e industriais classificadas como de alto risco termelétrico.",
+        "Exclusivamente aos edifícios comerciais que possuam agrupamento de mais de três pavimentos.",
+        "De forma ampla, a todos os estabelecimentos e demais locais de trabalho da organização.",
+        "Apenas aos canteiros operacionais da indústria e incorporações de construção civil."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 23.2.1 estabelece que as medidas de prevenção se aplicam aos estabelecimentos e locais de trabalho.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A manutenção contínua das vias de passagem e aberturas de emergência é uma medida essencial na norma. O que a NR-23 exige especificamente sobre o estado físico dessas passagens?",
+      "options": [
+        "Devem possuir barreiras físicas catracadas para controle de fluxo de entrada e saída.",
+        "Devem ser mantidas permanentemente desobstruídas para garantir livre circulação.",
+        "Devem ser bloqueadas fora do horário comercial com o uso de correntes e cadeados robustos.",
+        "Podem ser utilizadas para armazenar paletes temporários se restar espaço lateral de 1,20m."
+      ],
+      "correctIndex": 1,
+      "explanation": "O subitem 23.3.4.1 da NR-23 é categórico ao exigir que as aberturas, saídas e vias de passagem de emergência sejam mantidas sempre desobstruídas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A organização tem o dever legal de informar os trabalhadores sobre diversos aspectos da emergência. Com base estritamente na NR-23, qual conjunto de informações abaixo reflete exatamente as exigências comunicacionais?",
+      "options": [
+        "Uso correto de EPI retardante de chamas, mapas de risco industriais e rotas de fuga primárias.",
+        "Procedimentos unificados de primeiros socorros, manuseio de mangotes e lista de telefones úteis.",
+        "Utilização de equipamentos de combate ao incêndio, procedimentos de evacuação e dispositivos de alarme.",
+        "Classificação da carga de incêndio local e procedimento para acionamento de hidrantes públicos urbanos."
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme o item 23.3.2, as informações que devem ser providenciadas envolvem: a) utilização dos equipamentos de combate ao incêndio; b) procedimentos para evacuação; e c) dispositivos de alarme existentes.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A organização está legalmente dispensada de fornecer aos trabalhadores as informações relativas aos dispositivos de alarme caso o ambiente possua sistema automático de detecção integrado e gerido por equipe de monitoramento terceirizada.",
+      "correctAnswer": false,
+      "explanation": "A afirmação é falsa. O item 23.3.2, alínea 'c', estabelece expressamente a obrigatoriedade incondicional de a organização providenciar para todos os trabalhadores informações sobre os dispositivos de alarme existentes, não prevendo tal isenção.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A NR-23 determina objetivamente que a adoção de medidas de prevenção contra incêndios nas organizações deve observar a conformidade com a legislação estadual aplicável, complementada pelas normas técnicas oficiais.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira e está fundamentada de forma direta no item 23.3.1 da norma, que subordina as medidas preventivas à legislação estadual e às normas técnicas oficiais como complemento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Apesar da obrigatoriedade de se manterem livres e funcionais, as aberturas e vias de passagem de emergência podem ser temporariamente obstruídas por lotes de produção, desde que o período de obstrução verificado seja comprovadamente inferior a uma hora útil.",
+      "correctAnswer": false,
+      "explanation": "A afirmação é integralmente falsa. O item 23.3.4.1 determina rigidamente que as aberturas, saídas e vias de passagem de emergência devem ser mantidas desobstruídas, não havendo ressalva normativa para obstruções momentâneas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para resguardar a viabilidade de um rápido e seguro abandono de área, é terminantemente proibido pela norma instalar qualquer dispositivo mecânico de travamento nas portas de saídas de emergência, mesmo aqueles operados apenas do interior.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O subitem 23.3.5.1 flexibiliza e autoriza explicitamente que as saídas de emergência sejam equipadas com dispositivos de travamento (como barras antipânico), desde que permitam a fácil abertura do interior do estabelecimento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O dever formativo da organização abrange o repasse de informações de resposta a cenários de emergências aos trabalhadores, bem como dos procedimentos para que ocorra a evacuação dos locais de trabalho de forma segura.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira, pois reflete com exatidão o mandamento legal e literal estipulado na alínea 'b' do item 23.3.2 da norma de proteção contra incêndios.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A identificação e sinalização padronizada das aberturas e de todas as vias de passagem de emergência devem ser elaboradas de modo a indicar de forma inequívoca aos ocupantes a _____ da saída.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "direção"
+        }
+      ],
+      "explanation": "De acordo com a parte final do item 23.3.4 da NR-23, a sinalização disposta nas vias de emergência tem o dever funcional de indicar expressamente a direção da saída.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Constitui um dever de toda organização fornecer informações para todos os seus trabalhadores sobre a adequada utilização prática dos equipamentos de _____ ao incêndio que estão instalados em seu ambiente laboral.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "combate"
+        }
+      ],
+      "explanation": "O item 23.3.2, alínea 'a', da norma prevê como informação obrigatória a ser repassada a todos os trabalhadores o correto manuseio e utilização dos equipamentos de combate ao incêndio.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em caráter de regra absoluta de evacuação, as saídas de emergência do estabelecimento não podem, de modo algum, ser fechadas à _____ ou mantidas presas durante toda a duração da jornada de trabalho.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "chave"
+        }
+      ],
+      "explanation": "O item 23.3.5 da norma determina textualmente que nenhuma saída classificada como de emergência deve ser fechada à chave ou mantida presa enquanto perdurar a jornada de trabalho.",
+      "difficulty": "hard"
+    }
+  ]
+}

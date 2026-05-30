@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -140,6 +141,22 @@ class AdminDialogs {
       context: context,
       barrierDismissible: true,
       builder: (ctx) => _JSONImportDialog(ref: ref),
+    );
+  }
+
+  static Future<void> showBulkImportJSON(BuildContext context, WidgetRef ref) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => _BulkJSONImportDialog(ref: ref),
+    );
+  }
+
+  static Future<void> showDeleteAllContent(BuildContext context, WidgetRef ref) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => _DeleteAllContentDialog(ref: ref),
     );
   }
 
@@ -890,6 +907,434 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ─── BULK JSON IMPORT DIALOG ─────────────────────────────────────────────────
+class _BulkJSONImportDialog extends StatefulWidget {
+  final WidgetRef ref;
+  const _BulkJSONImportDialog({required this.ref});
+
+  @override
+  State<_BulkJSONImportDialog> createState() => _BulkJSONImportDialogState();
+}
+
+class _BulkJSONImportDialogState extends State<_BulkJSONImportDialog> {
+  _Phase _phase = _Phase.idle;
+  int _done = 0;
+  int _total = 0;
+  int _success = 0;
+  int _failed = 0;
+  String? _errorMsg;
+
+  Future<void> _pickAndImport() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      withData: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+
+    final bytes = result.files.first.bytes;
+    if (bytes == null) {
+      setState(() => _errorMsg = 'Não foi possível ler o arquivo.');
+      return;
+    }
+
+    List<dynamic> jsonList;
+    try {
+      final raw = utf8.decode(bytes);
+      jsonList = jsonDecode(raw) as List<dynamic>;
+    } catch (e) {
+      setState(() => _errorMsg = 'Arquivo inválido: $e');
+      return;
+    }
+
+    setState(() {
+      _phase = _Phase.loading;
+      _total = jsonList.length;
+      _done = 0;
+      _success = 0;
+      _failed = 0;
+      _errorMsg = null;
+    });
+
+    final counts = await widget.ref
+        .read(adminControllerProvider.notifier)
+        .importBulkFromJSON(
+          jsonList,
+          onProgress: (done, total) {
+            if (mounted) setState(() => _done = done);
+          },
+        );
+
+    if (mounted) {
+      setState(() {
+        _phase = _Phase.done;
+        _success = counts['success'] ?? 0;
+        _failed = counts['failed'] ?? 0;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: AppColors.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 480),
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.upload_file, color: AppColors.primary, size: 26),
+                  ),
+                  const SizedBox(width: 16),
+                  const Expanded(
+                    child: Text(
+                      'Importação em Massa',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  if (_phase != _Phase.loading)
+                    IconButton(
+                      icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                      onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 28),
+              if (_phase == _Phase.idle) ...[
+                const Text(
+                  'Selecione o arquivo all_trails.json gerado pelo script de seed.',
+                  style: TextStyle(color: AppColors.textSecondary, height: 1.5),
+                  textAlign: TextAlign.center,
+                ),
+                if (_errorMsg != null) ...[
+                  const SizedBox(height: 12),
+                  Text(_errorMsg!, style: const TextStyle(color: AppColors.error, fontSize: 13)),
+                ],
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    icon: const Icon(Icons.folder_open),
+                    label: const Text('SELECIONAR all_trails.json'),
+                    onPressed: _pickAndImport,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+              ] else if (_phase == _Phase.loading) ...[
+                Text(
+                  'Importando trilhas...',
+                  style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 15),
+                ),
+                const SizedBox(height: 16),
+                LinearProgressIndicator(
+                  value: _total > 0 ? _done / _total : 0,
+                  backgroundColor: AppColors.card,
+                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  minHeight: 8,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  '$_done / $_total',
+                  style: const TextStyle(
+                    color: AppColors.primary,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ] else ...[
+                Icon(
+                  _failed == 0 ? Icons.check_circle : Icons.warning_amber_rounded,
+                  color: _failed == 0 ? Colors.green : AppColors.orange,
+                  size: 52,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _failed == 0 ? 'Importação concluída!' : 'Importação com erros',
+                  style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                _statRow(Icons.check, '$_success trilhas importadas', Colors.green),
+                if (_failed > 0) ...[
+                  const SizedBox(height: 6),
+                  _statRow(Icons.close, '$_failed com erro', AppColors.error),
+                ],
+                const SizedBox(height: 28),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('FECHAR'),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _statRow(IconData icon, String label, Color color) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color, size: 18),
+        const SizedBox(width: 8),
+        Text(label, style: TextStyle(color: color, fontSize: 14)),
+      ],
+    );
+  }
+}
+
+enum _Phase { idle, loading, done }
+
+// ─── DELETE ALL CONTENT DIALOG ───────────────────────────────────────────────
+class _DeleteAllContentDialog extends StatefulWidget {
+  final WidgetRef ref;
+  const _DeleteAllContentDialog({required this.ref});
+
+  @override
+  State<_DeleteAllContentDialog> createState() => _DeleteAllContentDialogState();
+}
+
+class _DeleteAllContentDialogState extends State<_DeleteAllContentDialog> {
+  _Phase _phase = _Phase.idle;
+  int _done = 0;
+  int _total = 0;
+  int _success = 0;
+  int _failed = 0;
+  final _confirmCtrl = TextEditingController();
+
+  @override
+  void dispose() {
+    _confirmCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _execute() async {
+    setState(() => _phase = _Phase.loading);
+    final counts = await widget.ref
+        .read(adminControllerProvider.notifier)
+        .deleteAllContent(
+          onProgress: (done, total) {
+            if (mounted) {
+              setState(() {
+                _done = done;
+                _total = total;
+              });
+            }
+          },
+        );
+    if (mounted) {
+      setState(() {
+        _phase = _Phase.done;
+        _success = counts['success'] ?? 0;
+        _failed = counts['failed'] ?? 0;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final canConfirm = _confirmCtrl.text.trim().toUpperCase() == 'LIMPAR';
+    return Dialog(
+      backgroundColor: AppColors.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 480),
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.error.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.warning_amber_rounded,
+                        color: AppColors.error, size: 26),
+                  ),
+                  const SizedBox(width: 16),
+                  const Expanded(
+                    child: Text(
+                      'Limpar Todo o Conteúdo',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  if (_phase != _Phase.loading)
+                    IconButton(
+                      icon: const Icon(Icons.close,
+                          color: AppColors.textSecondary),
+                      onPressed: () =>
+                          Navigator.of(context, rootNavigator: true).pop(),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              if (_phase == _Phase.idle) ...[
+                const Text(
+                  'Esta ação remove TODAS as categorias, módulos, trilhas, lições e questões do Firestore. Esta operação NÃO PODE ser desfeita.',
+                  style: TextStyle(
+                      color: AppColors.textSecondary,
+                      height: 1.5,
+                      fontSize: 14),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Digite LIMPAR para confirmar:',
+                  style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+                ),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: _confirmCtrl,
+                  onChanged: (_) => setState(() {}),
+                  style: const TextStyle(color: AppColors.textPrimary),
+                  decoration: InputDecoration(
+                    hintText: 'LIMPAR',
+                    filled: true,
+                    fillColor: AppColors.card,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () =>
+                            Navigator.of(context, rootNavigator: true).pop(),
+                        child: const Text('CANCELAR',
+                            style:
+                                TextStyle(color: AppColors.textSecondary)),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: canConfirm ? _execute : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.error,
+                          foregroundColor: Colors.white,
+                          padding:
+                              const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
+                        child: const Text('LIMPAR TUDO'),
+                      ),
+                    ),
+                  ],
+                ),
+              ] else if (_phase == _Phase.loading) ...[
+                Text(
+                  'Removendo categorias...',
+                  style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.85),
+                      fontSize: 15),
+                ),
+                const SizedBox(height: 16),
+                LinearProgressIndicator(
+                  value: _total > 0 ? _done / _total : 0,
+                  backgroundColor: AppColors.card,
+                  valueColor:
+                      const AlwaysStoppedAnimation<Color>(AppColors.error),
+                  minHeight: 8,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  '$_done / $_total',
+                  style: const TextStyle(
+                      color: AppColors.error,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+              ] else ...[
+                Icon(
+                  _failed == 0
+                      ? Icons.check_circle
+                      : Icons.warning_amber_rounded,
+                  color: _failed == 0 ? Colors.green : AppColors.orange,
+                  size: 52,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _failed == 0
+                      ? 'Limpeza concluída!'
+                      : 'Limpeza com erros',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                Text('$_success categorias removidas',
+                    style: const TextStyle(
+                        color: Colors.green, fontSize: 14)),
+                if (_failed > 0)
+                  Text('$_failed com erro',
+                      style: const TextStyle(
+                          color: AppColors.error, fontSize: 14)),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () =>
+                        Navigator.of(context, rootNavigator: true).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    child: const Text('FECHAR'),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
       ),
     );
   }

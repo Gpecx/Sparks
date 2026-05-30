@@ -16,6 +16,11 @@ import 'package:spark_app/screens/tools/ct_saturation_screen.dart';
 import 'package:spark_app/screens/tools/coordination_screen.dart';
 import 'package:spark_app/screens/tools/distance_protection_screen.dart';
 import 'package:spark_app/screens/tools/ground_grid_screen.dart';
+import 'package:spark_app/screens/tools/signal_scaling_screen.dart';
+import 'package:spark_app/screens/tools/equipment_current_screen.dart';
+import 'package:spark_app/screens/tools/power_triangle_screen.dart';
+import 'package:spark_app/screens/tools/thermal_severity_screen.dart';
+import 'package:spark_app/screens/tools/commissioning_screen.dart';
 
 class _ToolConfig {
   final String title;
@@ -43,6 +48,10 @@ const _catFaltas = 'Curto-Circuito & Faltas';
 const _catReles = 'Proteção (Relés)';
 const _catSistema = 'Sistema de Potência';
 const _catAterramento = 'Aterramento & Segurança';
+const _catEquip = 'Equipamentos';
+const _catAutomacao = 'Automação & Instrumentação';
+const _catTermografia = 'Termografia & Manutenção';
+const _catComissionamento = 'Comissionamento & Ensaios';
 
 class ToolsScreen extends ConsumerStatefulWidget {
   const ToolsScreen({super.key});
@@ -70,6 +79,15 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       color: const Color(0xFF2DD4BF),
       gradientEnd: const Color(0xFF0F766E),
       builder: (_) => const PerUnitScreen(),
+    ),
+    _ToolConfig(
+      title: 'Triângulo de Potências',
+      description: 'Converte entre P (kW), Q (kvar), S (kVA) e FP',
+      category: _catConversoes,
+      icon: Icons.change_history,
+      color: const Color(0xFF14B8A6),
+      gradientEnd: const Color(0xFF115E59),
+      builder: (_) => const PowerTriangleScreen(),
     ),
     _ToolConfig(
       title: 'RTC / RTP',
@@ -160,6 +178,42 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       color: const Color(0xFFCA8A04),
       gradientEnd: const Color(0xFF713F12),
       builder: (_) => const GroundGridScreen(),
+    ),
+    _ToolConfig(
+      title: 'Corrente Nominal',
+      description: 'In de transformador e motor + inrush / partida',
+      category: _catEquip,
+      icon: Icons.electrical_services,
+      color: const Color(0xFF22C55E),
+      gradientEnd: const Color(0xFF15803D),
+      builder: (_) => const EquipmentCurrentScreen(),
+    ),
+    _ToolConfig(
+      title: 'Escalonamento 4–20 mA',
+      description: 'Converte sinal de instrumentação ↔ grandeza de engenharia',
+      category: _catAutomacao,
+      icon: Icons.sensors,
+      color: const Color(0xFF06B6D4),
+      gradientEnd: const Color(0xFF0E7490),
+      builder: (_) => const SignalScalingScreen(),
+    ),
+    _ToolConfig(
+      title: 'Severidade Térmica',
+      description: 'Classifica anomalia por ΔT + correção por carga',
+      category: _catTermografia,
+      icon: Icons.thermostat,
+      color: const Color(0xFFF97316),
+      gradientEnd: const Color(0xFF9A3412),
+      builder: (_) => const ThermalSeverityScreen(),
+    ),
+    _ToolConfig(
+      title: 'Comissionamento / Ensaios',
+      description: 'Tolerância de ensaio (pass/fail) e injeção secundária',
+      category: _catComissionamento,
+      icon: Icons.fact_check_outlined,
+      color: const Color(0xFF84CC16),
+      gradientEnd: const Color(0xFF3F6212),
+      builder: (_) => const CommissioningScreen(),
     ),
   ];
 

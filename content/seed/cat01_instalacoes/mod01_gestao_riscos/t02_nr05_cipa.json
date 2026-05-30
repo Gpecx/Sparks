@@ -1,0 +1,204 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Gestão de Riscos e Outras NRs",
+  "moduleSubtitle": "NR-01, NR-05, NR-06, NR-12, NR-17, NR-23 e NR-33",
+  "moduleOrder": 0,
+  "trail": "NR-05 (CIPA)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a NR-05, qual é o objetivo principal da Comissão Interna de Prevenção de Acidentes e de Assédio (CIPA)?",
+      "options": [
+        "Prevenir acidentes e doenças relacionadas ao trabalho, compatibilizando o trabalho com a preservação da vida.",
+        "Garantir a punição disciplinar de trabalhadores que cometam infrações de segurança corporativas.",
+        "Substituir o Serviço Especializado em Engenharia de Segurança e em Medicina do Trabalho (SESMT) na elaboração de laudos.",
+        "Elaborar de forma autônoma e exclusiva o Programa de Gerenciamento de Riscos (PGR) da organização."
+      ],
+      "correctIndex": 0,
+      "explanation": "Conforme o item 5.1.1 da NR-05, o objetivo central da CIPA é a prevenção de acidentes e doenças relacionadas ao trabalho, de modo a tornar compatível permanentemente o trabalho com a preservação da vida e promoção da saúde do trabalhador.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A NR-05 passou por atualizações para incluir uma atribuição adicional à CIPA relacionada à dinâmica psicossocial e comportamental no ambiente de trabalho. Qual é essa atribuição legal?",
+      "options": [
+        "Fiscalizar o uso obrigatório de uniformes padronizados pelos empregados e relatar infrações ao RH.",
+        "Incluir temas referentes à prevenção e ao combate ao assédio sexual e a outras formas de violência no trabalho.",
+        "Aplicar multas e suspensões aos trabalhadores que cometerem atos de assédio moral ou brigas no canteiro.",
+        "Atuar como câmara técnica de conciliação para dissídios coletivos e acordos sindicais anuais."
+      ],
+      "correctIndex": 1,
+      "explanation": "De acordo com o item 5.3.1, alínea 'j', constitui atribuição da CIPA incluir temas referentes à prevenção e ao combate ao assédio sexual e a outras formas de violência no trabalho nas suas atividades e práticas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No processo eleitoral da CIPA, o cronograma estipula que o período de inscrições não pode ser curto demais, garantindo a ampla participação. Qual é o período mínimo exigido para a inscrição individual dos candidatos?",
+      "options": [
+        "5 dias úteis.",
+        "10 dias corridos.",
+        "15 dias corridos.",
+        "30 dias úteis."
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo o item 5.5.3, alínea 'b' da NR-05, o processo eleitoral deve observar a inscrição e eleição individual, garantindo que o período mínimo para inscrição será de 15 (quinze) dias corridos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Considerando a estabilidade da comissão e a continuidade de seus trabalhos, qual é a duração formal estipulada pela NR-05 para o mandato dos membros eleitos da CIPA?",
+      "options": [
+        "Dois anos, vedada qualquer tipo de reeleição consecutiva.",
+        "Um ano, permitida uma reeleição para mandato subsequente.",
+        "Dois anos, permitidas até duas reeleições caso aprovado pelo SESMT.",
+        "Um ano, sendo legalmente obrigatória a alternância de todos os membros."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 5.4.6 da NR-05 é taxativo ao afirmar que o mandato dos membros eleitos da CIPA terá a duração de um ano, sendo permitida uma reeleição.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para que a CIPA desempenhe suas funções corretamente de forma periódica, a norma define uma cadência para a realização de suas deliberações em colegiado. Qual é a frequência padrão das reuniões ordinárias da CIPA?",
+      "options": [
+        "Semanais, integradas obrigatoriamente aos Diálogos Diários de Segurança (DDS).",
+        "Mensais, ocorrendo de acordo com o calendário preestabelecido da comissão.",
+        "Bimestrais, sem exceção, independentemente do porte da empresa ou grau de risco.",
+        "Semestrais, sendo que uma delas deve ocorrer necessariamente em conjunto com a SIPAT."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme o item 5.6.1 da NR-05, a regra geral é que a CIPA terá reuniões ordinárias mensais, de acordo com o calendário preestabelecido.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A CIPA possui atribuições cruciais na rotina da empresa. Qual das alternativas abaixo corresponde a uma ação que a CIPA deve promover anualmente de forma conjunta com o Serviço Especializado em Engenharia de Segurança e em Medicina do Trabalho (SESMT), onde houver?",
+      "options": [
+        "Registrar a percepção dos riscos por meio do mapa de risco com aprovação do sindicato laboral.",
+        "Promover a Semana Interna de Prevenção de Acidentes do Trabalho (SIPAT).",
+        "Elaborar o Programa de Controle Médico de Saúde Ocupacional (PCMSO) e os exames periódicos.",
+        "Aprovar a aquisição de novos maquinários industriais para garantir a ergonomia no layout."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 5.3.1, alínea 'i', estabelece que é atribuição da CIPA promover, anualmente, em conjunto com o SESMT (onde houver), a Semana Interna de Prevenção de Acidentes do Trabalho (SIPAT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para a formação legal e paritária da CIPA em um estabelecimento, como devem ser escolhidos os membros que representarão o empregador (organização) e os que representarão os trabalhadores (empregados)?",
+      "options": [
+        "Ambos os representantes são eleitos em escrutínio secreto por todos os trabalhadores do estabelecimento.",
+        "Os representantes da organização e dos empregados são indicados pela diretoria em acordo sindical.",
+        "Os representantes dos empregados são sorteados, e os da organização são indicados pelo líder do SESMT.",
+        "Os representantes da organização são por ela designados, e os dos empregados são eleitos em escrutínio secreto."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os itens 5.4.3 e 5.4.4 indicam que os representantes da organização são por ela designados, enquanto os representantes dos empregados são eleitos em escrutínio secreto, do qual participam exclusivamente os empregados interessados.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para assegurar a representatividade, a NR-05 exige um quórum mínimo para a validade do processo eleitoral da CIPA. O que deve ocorrer se, no dia da eleição, a participação for inferior a cinquenta por cento dos empregados?",
+      "options": [
+        "A comissão eleitoral empossa imediatamente os candidatos mais votados pelos presentes.",
+        "O Ministério do Trabalho deve ser notificado para intervir formalmente no estabelecimento e indicar os eleitos.",
+        "Não haverá apuração de votos, e o período de votação deverá ser prorrogado para o dia subsequente, validando-se com mínimo de um terço de participação.",
+        "A eleição será cancelada e um novo período de 15 dias de inscrição será reaberto após 30 dias de carência."
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme estipulado no item 5.5.4, caso haja participação inferior a 50%, não haverá apuração dos votos; a comissão eleitoral prorrogará a votação para o dia subsequente, quando será válida a eleição se a participação for de, no mínimo, um terço dos empregados.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A legislação brasileira e a NR-05 conferem ao trabalhador eleito para a CIPA uma garantia contra demissões arbitrárias. Qual é o período exato de duração dessa garantia de emprego?",
+      "options": [
+        "Desde o início formal de seu mandato até o último dia vigente de sua participação na comissão.",
+        "Somente durante o período das eleições até a publicação da ata de posse no mural do estabelecimento.",
+        "Desde o momento do registro de sua candidatura até o período de um ano após o final de seu mandato.",
+        "Desde a data da sua posse até o limite máximo de dois anos após o seu afastamento da comissão."
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo o item 5.4.12 da NR-05, é expressamente vedada a dispensa arbitrária ou sem justa causa do empregado eleito para cargo de direção da CIPA desde o registro de sua candidatura até um ano após o final de seu mandato.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Uma organização classificada como grau de risco 3 (conforme NR-04) montou uma CIPA e os membros eleitos estão em seu primeiro mandato. Segundo a norma, qual deve ser a carga horária mínima do treinamento fornecido pela empresa e o respectivo prazo legal para realizá-lo?",
+      "options": [
+        "A carga deve ser de 20 horas e deve ser realizado antes do início do processo eleitoral.",
+        "A carga deve ser de 12 horas e pode ser ministrado no prazo máximo de 60 dias da eleição.",
+        "A carga deve ser de 16 horas e deve ser estritamente finalizado antes do dia da posse oficial.",
+        "A carga deve ser de 16 horas e, por se tratar do primeiro mandato, poderá ser realizado no prazo máximo de 30 dias contados da data da posse."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 5.7.4 (alínea 'c') define que a carga horária de treinamento para grau de risco 3 é de 16 horas. O item 5.7.1.1 abre exceção permitindo que, no primeiro mandato, o treinamento seja concluído em até 30 dias contados a partir da posse.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "É atribuição exclusiva da comissão eleitoral, liderada pelo sindicato da categoria dominante, convocar formalmente as eleições para os representantes dos empregados na CIPA com um prazo mínimo de 60 dias antes do fim do mandato anterior.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O item 5.5.1 da NR-05 determina expressamente que compete ao empregador (e não ao sindicato ou à comissão eleitoral) convocar as eleições para a escolha dos representantes dos empregados no prazo de 60 dias.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Organizações especializadas em prestação de serviços a terceiros têm a obrigação normativa de constituir uma CIPA centralizada se o número total de seus empregados alocados dentro da mesma Unidade da Federação atingir a quantidade prevista no Quadro I da NR-05.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira. O item 5.8.1 estabelece que a organização de prestação de serviços deve constituir CIPA centralizada quando o total de seus empregados na Unidade da Federação se enquadrar no Quadro I do dimensionamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Se um membro titular eleito pelos empregados ausentar-se sem justificativa a mais de três reuniões extraordinárias ao longo de um ano, ele perderá sumariamente o seu mandato e deverá ser substituído pelo suplente.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa em dois pontos. Primeiro, o item 5.6.6 estipula a perda do mandato do titular quando ele faltar a mais de quatro reuniões (e não três). Segundo, a norma faz menção explícita às faltas injustificadas em reuniões ordinárias, não extraordinárias.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "De acordo com o Anexo I da NR-05, que trata especificamente da indústria da construção, a organização responsável é dispensada de constituir CIPA para cada frente de trabalho isolada, centralizando-a por canteiro de obras se atingir o dimensionamento.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira. Conforme exposto no item 3.1.2 do Anexo I, a organização responsável pela obra está dispensada de constituir CIPA por frente de trabalho (aplicando-se os critérios para canteiros).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Mesmo os profissionais que já atuam regularmente no SESMT, ao integrarem a constituição da CIPA como representantes da organização, são obrigados a realizar o treinamento da comissão, porém com uma redução de 50% na carga horária prevista.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é totalmente falsa. O subitem 5.7.4.5 da NR-05 garante de forma absoluta que o integrante do SESMT fica completamente dispensado da necessidade de realizar o treinamento da CIPA.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Como regra de flexibilização administrativa, a NR-05 estabelece que, a critério da própria CIPA, as reuniões ordinárias nas Microempresas (ME) e Empresas de Pequeno Porte (EPP) classificadas em graus de risco 1 e 2 poderão ser _____.",
+      "blanks": [
+        { "index": 0, "answer": "bimestrais" }
+      ],
+      "explanation": "A norma permite essa desburocratização no subitem 5.6.1.1, estipulando que a critério da comissão, em ME e EPP (graus 1 e 2), a frequência exigida das reuniões pode passar a ser bimestral em vez de mensal.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No Anexo I dedicado à Construção Civil, fica determinado que canteiros de obras que possuam previsão de duração de até _____ dias estão sumariamente dispensadas de constituir a CIPA, bastando o envio da Comunicação Prévia.",
+      "blanks": [
+        { "index": 0, "answer": "180" }
+      ],
+      "explanation": "O item 3.3 do Anexo I da NR-05 especifica que obras com até 180 (cento e oitenta) dias de duração estão formalmente dispensadas da obrigatoriedade de constituição da CIPA.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para solucionar eventuais empates verificados durante a contagem de votos da eleição dos representantes dos trabalhadores da CIPA, o critério legal estipula que deverá assumir aquele empregado que tiver maior _____ no estabelecimento.",
+      "blanks": [
+        { "index": 0, "answer": "tempo de serviço" }
+      ],
+      "explanation": "O item 5.5.7 prevê expressamente que, em caso de empate na apuração eleitoral, o desempate privilegiará a experiência e vínculo do empregado, assumindo o candidato que tiver maior tempo de serviço no estabelecimento.",
+      "difficulty": "hard"
+    }
+  ]
+}

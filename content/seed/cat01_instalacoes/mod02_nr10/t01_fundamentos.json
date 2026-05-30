@@ -1,0 +1,213 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-10",
+  "moduleSubtitle": "Segurança em Instalações e Serviços com Eletricidade",
+  "moduleOrder": 1,
+  "trail": "Fundamentos e Aplicação da NR-10",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a NR-10, qual é o campo de aplicação das medidas de controle e sistemas preventivos estabelecidos pela norma?",
+      "options": [
+        "Apenas para as fases de geração e transmissão de energia elétrica.",
+        "Para as fases de geração, transmissão, distribuição e consumo, incluindo todas as etapas de projeto e manutenção.",
+        "Exclusivamente para a etapa de consumo industrial em Alta Tensão.",
+        "Apenas para instalações integrantes do Sistema Elétrico de Potência (SEP)."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme o item 10.1.2, a NR-10 se aplica às fases de geração, transmissão, distribuição e consumo, incluindo etapas de projeto, construção, montagem, operação e manutenção.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-10, o que as empresas estão obrigadas a manter atualizado em relação às suas instalações elétricas, independentemente do valor da carga instalada?",
+      "options": [
+        "Esquemas unifilares das instalações elétricas, com especificações de aterramento e proteção.",
+        "O Prontuário de Instalações Elétricas impresso e plastificado.",
+        "O laudo técnico de insalubridade e periculosidade.",
+        "Certificações internacionais dos equipamentos elétricos."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 10.2.3 determina que as empresas estão obrigadas a manter esquemas unifilares atualizados das instalações elétricas dos seus estabelecimentos, com as especificações do sistema de aterramento e dispositivos de proteção.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos trabalhos em instalações elétricas, qual medida de proteção coletiva deve ser adotada prioritariamente, segundo a NR-10?",
+      "options": [
+        "O uso de placas e barreiras de sinalização.",
+        "A desenergização elétrica.",
+        "A adoção de obstáculos e anteparos de isolamento.",
+        "O bloqueio do religamento automático."
+      ],
+      "correctIndex": 1,
+      "explanation": "De acordo com o item 10.2.8.2 da norma, as medidas de proteção coletiva compreendem, prioritariamente, a desenergização elétrica e, na sua impossibilidade, o emprego de tensão de segurança.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A respeito do uso de adornos pessoais nos trabalhos com instalações elétricas, o que a NR-10 estabelece?",
+      "options": [
+        "É permitido o uso, desde que os adornos não sejam metálicos ou condutores.",
+        "É expressamente vedado o uso de adornos pessoais nos trabalhos com instalações elétricas ou em suas proximidades.",
+        "É permitido se o trabalhador estiver utilizando Luvas Isolantes de Borracha.",
+        "A norma proíbe apenas o uso de anéis, permitindo relógios e cordões finos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.2.9.3 da NR-10 é categórico ao afirmar que é vedado o uso de adornos pessoais nos trabalhos com instalações elétricas ou em suas proximidades.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Das alternativas abaixo, qual representa uma responsabilidade específica dos trabalhadores estabelecida pela NR-10?",
+      "options": [
+        "Informar os riscos aos contratantes e fornecedores.",
+        "Garantir a atualização do Prontuário de Instalações Elétricas.",
+        "Comunicar imediatamente situações de risco à segurança e saúde.",
+        "Elaborar os procedimentos de trabalho detalhados passo a passo."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 10.13.4, alínea 'c', estabelece que cabe aos trabalhadores comunicar imediatamente ao responsável pela execução do serviço as situações de risco para sua segurança e saúde.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A partir de qual carga instalada a NR-10 exige que os estabelecimentos constituam e mantenham o Prontuário de Instalações Elétricas?",
+      "options": [
+        "50 kW.",
+        "75 kW.",
+        "100 kW.",
+        "150 kW."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme o item 10.2.4 da NR-10, os estabelecimentos com carga instalada superior a 75 kW devem obrigatoriamente constituir e manter o Prontuário de Instalações Elétricas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para que uma instalação elétrica seja considerada desenergizada e liberada para trabalho, a NR-10 exige uma sequência rigorosa. Qual é a ordem correta dos três primeiros procedimentos?",
+      "options": [
+        "Seccionamento; constatação da ausência de tensão; aterramento temporário.",
+        "Impedimento de reenergização; seccionamento; sinalização.",
+        "Seccionamento; impedimento de reenergização; constatação da ausência de tensão.",
+        "Constatação da ausência de tensão; seccionamento; aterramento temporário."
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo o item 10.5.1 da NR-10, a sequência obrigatória inicia com: a) seccionamento; b) impedimento de reenergização; e c) constatação da ausência de tensão.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com o Glossário da NR-10, quais são os limites de tensão que definem a Extra-Baixa Tensão (EBT)?",
+      "options": [
+        "Tensão não superior a 50V em CA ou 120V em CC.",
+        "Tensão não superior a 120V em CA ou 50V em CC.",
+        "Tensão inferior a 1000V em CA, independentemente da CC.",
+        "Tensão máxima de 24V tanto em CA quanto em CC."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Glossário da NR-10 define a Extra-Baixa Tensão (EBT) como a tensão não superior a 50V em corrente alternada (CA) ou 120V em corrente contínua (CC).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Conforme o Glossário da NR-10, qual é a principal diferença técnica nas exigências de acesso entre a Zona de Risco e a Zona Controlada?",
+      "options": [
+        "A Zona de Risco exige EPI especial, enquanto a Zona Controlada exige apenas ferramentas isoladas.",
+        "A Zona de Risco exige a adoção de técnicas, instrumentos e equipamentos apropriados para o acesso de autorizados.",
+        "A Zona Controlada é aplicável apenas a instalações em Alta Tensão.",
+        "Não há diferença de acesso, ambas permitem a entrada de pessoas advertidas sem EPI."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Glossário define que a Zona de Risco exige que a aproximação por profissionais autorizados ocorra com a adoção de técnicas, instrumentos e equipamentos apropriados, exigência esta ausente na definição de Zona Controlada.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "As empresas que operam em instalações ou equipamentos integrantes do Sistema Elétrico de Potência (SEP) devem acrescentar documentações específicas ao seu Prontuário de Instalações Elétricas. Quais são elas?",
+      "options": [
+        "Laudos de aterramento e os diagramas unifilares coloridos.",
+        "Descrição dos procedimentos para emergências e certificações dos EPCs e EPIs.",
+        "Resultados dos testes de isolação elétrica e as Anotações de Responsabilidade Técnica.",
+        "Apenas a certificação atualizada dos EPIs contra arcos elétricos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.2.5 estipula que o Prontuário para as instalações que integram o SEP deve ser acrescido da: a) descrição dos procedimentos para emergências; e b) certificações dos equipamentos de proteção coletiva e individual.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As vestimentas de trabalho utilizadas em instalações elétricas devem ser adequadas às atividades, devendo o tecido contemplar especificações sobre condutibilidade, inflamabilidade e influências eletromagnéticas.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira e está descrita textualmente no item 10.2.9.2 da NR-10, o qual regulamenta o uso e as características das vestimentas no ambiente elétrico.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o processo de reenergização de uma instalação elétrica, o primeiro passo a ser executado é a remoção do aterramento temporário e da equipotencialização.",
+      "correctAnswer": false,
+      "explanation": "A afirmação é falsa. De acordo com o item 10.5.2 da NR-10, o primeiro passo para reenergizar é a retirada das ferramentas, utensílios e equipamentos, seguido pela retirada dos trabalhadores da zona controlada.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os serviços realizados em instalações elétricas energizadas em Alta Tensão (AT), bem como aqueles executados no Sistema Elétrico de Potência (SEP), não podem ser realizados individualmente.",
+      "correctAnswer": true,
+      "explanation": "A afirmação é verdadeira. O item 10.7.3 da norma determina expressamente que os serviços em AT e no SEP não podem ser realizados individualmente para garantir maior segurança na operação.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os projetos de instalações elétricas devem prever obrigatoriamente condições e dispositivos de desligamento de circuitos que possuam recursos para impedimento de reenergização e sinalização de advertência.",
+      "correctAnswer": true,
+      "explanation": "A afirmação é verdadeira e reflete exatamente a exigência de segurança de projetos descrita no item 10.3.1 da NR-10.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Trabalhador capacitado é aquele que possui registro no conselho de classe competente e que recebe treinamento sob orientação direta de um técnico da empresa.",
+      "correctAnswer": false,
+      "explanation": "A afirmação é falsa. Pelo Glossário e o item 10.8.2, é o 'Profissional Legalmente Habilitado' que possui registro no conselho de classe. O capacitado apenas recebe capacitação sob responsabilidade de um profissional habilitado (10.8.3).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Segundo a NR-10, deve ser realizado um treinamento de reciclagem ________ e sempre que ocorrer troca de função, mudança de empresa ou retorno de afastamento superior a três meses.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "bienal"
+        }
+      ],
+      "explanation": "O item 10.8.8.2 da norma estabelece a obrigatoriedade da reciclagem do treinamento com periodicidade bienal (a cada dois anos) ou em situações específicas de mudanças.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O Glossário da NR-10 define a Zona de ________ como o entorno de parte condutora energizada cuja aproximação só é permitida a profissionais autorizados com a adoção de técnicas, instrumentos e equipamentos apropriados.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "risco"
+        }
+      ],
+      "explanation": "A definição exata no Glossário da NR-10 para a 'Zona de Risco' destaca a necessidade obrigatória do uso de técnicas e equipamentos apropriados, o que a difere da 'Zona Controlada'.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na definição dos níveis da NR-10, a Baixa Tensão (BT) corresponde à tensão superior a 50V em CA ou ________V em CC e igual ou inferior a 1000V em CA ou 1500V em CC.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "120"
+        }
+      ],
+      "explanation": "Conforme o Glossário da norma, a Baixa Tensão (BT) tem como limite inferior 50 Volts em Corrente Alternada ou 120 Volts em Corrente Contínua.",
+      "difficulty": "hard"
+    }
+  ]
+}

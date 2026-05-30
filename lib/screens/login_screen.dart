@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
@@ -16,6 +17,22 @@ class _LoginScreenState extends State<LoginScreen> {
   final _authService = AuthService();
   bool _obscurePassword = true;
   bool _isLoading = false;
+
+  static const _devEmail = String.fromEnvironment('SPARK_DEV_EMAIL');
+  static const _devPassword = String.fromEnvironment('SPARK_DEV_PASSWORD');
+  static const _devAutoLogin = bool.fromEnvironment('SPARK_DEV_AUTOLOGIN', defaultValue: false);
+
+  @override
+  void initState() {
+    super.initState();
+    if (kDebugMode && _devEmail.isNotEmpty && _devPassword.isNotEmpty) {
+      _emailController.text = _devEmail;
+      _passwordController.text = _devPassword;
+      if (_devAutoLogin) {
+        WidgetsBinding.instance.addPostFrameCallback((_) => _handleLogin());
+      }
+    }
+  }
 
   Future<void> _handleLogin() async {
     final email = _emailController.text.trim();

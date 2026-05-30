@@ -1,0 +1,204 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Gestão de Riscos e Outras NRs",
+  "moduleSubtitle": "NR-01, NR-05, NR-06, NR-12, NR-17, NR-23 e NR-33",
+  "moduleOrder": 0,
+  "trail": "NR-01 (Gestão de Riscos Ocupacionais)",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "A observância das Normas Regulamentadoras (NR) desobriga as organizações do cumprimento de outras legislações ou códigos locais?",
+      "options": [
+        "Sim, a NR-01 se sobrepõe a qualquer lei estadual ou municipal vigente.",
+        "Não, a observância das NRs não desobriga o cumprimento de disposições em códigos de obras ou regulamentos sanitários estaduais e municipais.",
+        "Sim, contanto que a empresa possua um PGR devidamente atualizado e aprovado por profissional habilitado.",
+        "Não, a menos que o estabelecimento seja gerido exclusivamente por microempreendedores individuais (MEI)."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme o item 1.2.2 da NR-01, a observância das NRs não desobriga as organizações do cumprimento de outras disposições incluídas em códigos de obras ou regulamentos sanitários dos Estados ou Municípios, nem oriundas de convenções coletivas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a NR-01, o empregador deve implementar medidas de prevenção seguindo uma ordem estrita de prioridade. Qual das opções representa corretamente essa hierarquia preventiva?",
+      "options": [
+        "1º EPI, 2º Medidas Administrativas, 3º Proteção Coletiva, 4º Eliminação do risco.",
+        "1º Medidas Administrativas, 2º Proteção Coletiva, 3º Eliminação do risco, 4º EPI.",
+        "1º Eliminação dos fatores de risco, 2º Proteção Coletiva, 3º Medidas Administrativas, 4º EPI.",
+        "1º Proteção Coletiva, 2º Eliminação dos fatores de risco, 3º EPI, 4º Medidas Administrativas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo o item 1.4.1, alínea 'g' da NR-01, a ordem de prioridade deve ser: I. eliminação dos fatores de risco; II. adoção de medidas de proteção coletiva; III. medidas administrativas ou de organização do trabalho; e IV. adoção de medidas de proteção individual (EPI).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O Gerenciamento de Riscos Ocupacionais (GRO) deve abranger diversos tipos de riscos gerados pelas atividades. Segundo o texto da norma, qual fator listado abaixo deve ser incluído de forma explícita nessa gestão?",
+      "options": [
+        "Fatores de risco psicossociais relacionados ao trabalho.",
+        "Fatores de risco de trajeto fora do horário de expediente.",
+        "Fatores de risco de degradação do meio ambiente externo (poluição).",
+        "Fatores de risco vinculados a perdas financeiras exclusivas do empregador."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 1.5.3.1.4 da NR-01 determina expressamente que o GRO deve abranger riscos decorrentes de agentes físicos, químicos, biológicos, de acidentes e ergonômicos, incluindo os fatores de risco psicossociais relacionados ao trabalho.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Com base nas regras de tratamento diferenciado da NR-01, qual é a obrigatoriedade do Microempreendedor Individual (MEI) em relação à elaboração do Programa de Gerenciamento de Riscos (PGR)?",
+      "options": [
+        "O MEI deve apresentar o PGR periodicamente ao Ministério do Trabalho.",
+        "O MEI está dispensado de elaborar o PGR, independentemente de sua atividade.",
+        "O MEI é obrigado a preencher somente o Plano de Ação do PGR.",
+        "O MEI só é dispensado se não utilizar produtos perigosos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme o item 1.8.1 da NR-01, o Microempreendedor Individual (MEI) está legalmente dispensado de elaborar o Programa de Gerenciamento de Riscos (PGR).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sobre a preparação e resposta a emergências em uma organização, o que a NR-01 estabelece acerca dos exercícios simulados práticos?",
+      "options": [
+        "Eles devem ocorrer mensalmente, de acordo com as regras do corpo de bombeiros local.",
+        "Sua realização é optativa e só recomendada em estabelecimentos com grau de risco 4.",
+        "A organização deve realizar exercícios simulados conforme seu procedimento interno, gerando evidências de sua realização.",
+        "Devem ser conduzidos apenas pelos integrantes do SESMT, não abrangendo os demais trabalhadores."
+      ],
+      "correctIndex": 2,
+      "explanation": "De acordo com os itens 1.5.6.3 e 1.5.6.3.1 da NR-01, a organização deve realizar exercícios simulados conforme a periodicidade prevista em seus procedimentos e devem ser geradas evidências do exercício quando realizado.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o nível de risco ocupacional de um estabelecimento deve ser determinado, segundo as diretrizes de avaliação contidas na NR-01?",
+      "options": [
+        "Avaliando apenas a concentração do agente nocivo em relação aos limites da NR-15.",
+        "Calculando o número total de trabalhadores expostos ao risco diariamente.",
+        "Pela combinação da severidade das possíveis lesões ou agravos à saúde com a probabilidade de sua ocorrência.",
+        "Somando o custo potencial de indenizações e a taxa de rotatividade da equipe."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 1.5.4.4.2 da NR-01 é claro ao definir que, para cada risco, o nível deve ser indicado e determinado pela combinação da severidade das possíveis lesões ou agravos à saúde com a probabilidade de sua ocorrência.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na documentação formal do Programa de Gerenciamento de Riscos (PGR), a NR-01 exige a existência mínima de dois documentos integrados. Quais são eles?",
+      "options": [
+        "A Análise Ergonômica do Trabalho e o PCMSO.",
+        "O Inventário de Riscos e o Plano de Ação.",
+        "O Mapa de Riscos e o Laudo de Insalubridade.",
+        "A Permissão de Entrada (PET) e o Prontuário de Máquinas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 1.5.7.1 da NR-01 estipula que o PGR deve conter, no mínimo, os seguintes documentos documentados: a) inventário de riscos e b) plano de ação.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sobre as regras de capacitação da NR-01, quando a organização pode reaproveitar o conteúdo de treinamentos ministrados anteriormente ao trabalhador na mesma empresa?",
+      "options": [
+        "Apenas se o treinamento anterior tiver sido fornecido por entidades governamentais.",
+        "Sempre que desejar, uma vez que o certificado de SST não tem prazo de validade legal.",
+        "Se o conteúdo anterior tiver sido ministrado há menos de 2 anos e englobar a carga horária atual, mediante validação técnica.",
+        "É terminantemente proibido o aproveitamento de treinamentos na modalidade Segurança e Saúde."
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme o item 1.7.6 da NR-01, permite-se o aproveitamento se o conteúdo engloba as requisições, ocorreu há menos de 2 anos (ou no prazo da NR), e se validado pelo responsável técnico do treinamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Considerando o Gerenciamento de Riscos nas relações de prestação de serviços a terceiros, como devem ser definidas as medidas de prevenção caso os riscos resultem da interação das atividades da contratante com as contratadas no mesmo local?",
+      "options": [
+        "Cada empresa contratada desenvolve seu plano isolado sem comunicar a contratante.",
+        "Em conjunto, sob a coordenação da organização contratante.",
+        "O plano é definido pelo Ministério Público do Trabalho após vistoria conjunta.",
+        "Exclusivamente pelo técnico de segurança terceirizado da empreiteira de maior porte."
+      ],
+      "correctIndex": 1,
+      "explanation": "Segundo o item 1.5.8.4 da NR-01, se os riscos resultarem da interação das atividades das organizações contratadas no estabelecimento da contratante, as medidas de prevenção devem ser definidas em conjunto, sob coordenação da contratante.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A avaliação de riscos do PGR é um processo contínuo. Segundo a NR-01, qual é o prazo padrão de revisão dessa avaliação de riscos e a exceção de prazo para empresas que possuírem certificações em sistema de gestão de SST?",
+      "options": [
+        "Revisão padrão a cada 1 ano, certificadas a cada 2 anos.",
+        "Revisão padrão a cada 2 anos, certificadas a cada 3 anos.",
+        "Revisão padrão a cada 3 anos, certificadas a cada 5 anos.",
+        "Apenas mediante a ocorrência de acidente com lesão fatal, não havendo prazo fixo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 1.5.4.4.6 estipula a revisão a cada 2 (dois) anos como regra geral. Já o item 1.5.4.4.6.1 estabelece que, para organizações certificadas em sistemas de gestão de SST, esse prazo pode se estender por até 3 (três) anos.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O trabalhador tem o direito garantido por norma de interromper as suas atividades sempre que constatar uma situação de trabalho que, por motivos razoáveis, envolva um risco grave e iminente para a sua vida, devendo informar imediatamente ao superior hierárquico.",
+      "correctAnswer": true,
+      "explanation": "Essa afirmação é verdadeira e fundamentada no item 1.4.3 da NR-01, que garante o direito de recusa e de interrupção de atividades frente a risco grave e iminente à vida ou saúde.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Pelo fato de o MEI estar dispensado de elaborar o PGR, a organização contratante também fica desobrigada de incluir em seu próprio PGR os riscos associados às atividades do MEI, mesmo se ele atuar dentro de suas dependências.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O item 1.8.1.1 da NR-01 prevê que a dispensa do MEI não alcança a contratante, que deverá obrigatoriamente incluí-lo em seu PGR quando este atuar em suas dependências ou local convencionado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O conteúdo prático dos treinamentos de Segurança e Saúde no Trabalho é permanentemente proibido de ser lecionado através das modalidades de Ensino a Distância (EaD) ou semipresencial, devendo ser integralmente presencial em todos os casos.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. De acordo com o subitem 1.7.9.1 da NR-01, o conteúdo prático do treinamento pode sim ser realizado em modalidade EaD ou semipresencial, contanto que exista previsão em NR específica.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Caso um risco ocupacional evidente seja identificado na fase de levantamento preliminar e não seja possível a adoção imediata de medidas para reduzi-lo ou controlá-lo, tais medidas devem ser programadas no plano de ação e o risco formalizado no inventário de riscos.",
+      "correctAnswer": true,
+      "explanation": "Isso é verdadeiro. O item 1.5.4.2.1.3 da NR-01 orienta exatamente esse fluxo: impossibilidade de correção imediata no levantamento exige a inclusão do risco no inventário e as medidas de controle correspondentes no plano de ação do PGR.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As Microempresas (ME) e as Empresas de Pequeno Porte (EPP) de graus de risco 1 e 2 são dispensadas da elaboração do PCMSO caso declarem ausência de agentes físicos, químicos e biológicos, independentemente de identificarem riscos relacionados a fatores ergonômicos.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O item 1.8.6 é explícito: a dispensa do PCMSO para ME/EPP graus 1 e 2 só ocorre se não identificarem exposições a riscos físicos, químicos, biológicos E riscos ergonômicos simultaneamente.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A NR-01 define que o histórico das atualizações do inventário de riscos ocupacionais do PGR deve ser arquivado e mantido por um período mínimo de _____ anos ou pelo período estabelecido em normatização específica.",
+      "blanks": [
+        { "index": 0, "answer": "20" }
+      ],
+      "explanation": "De acordo com o subitem 1.5.7.3.3.1 da NR-01, o histórico das atualizações documentais do inventário deve ser mantido por um prazo mínimo de 20 (vinte) anos, garantindo a rastreabilidade da exposição do trabalhador.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Ao avaliar a probabilidade de ocorrência de agravos relacionados a fatores ergonômicos e riscos psicossociais, a avaliação de risco deve considerar as exigências da _____ e a eficácia das medidas preventivas já estabelecidas.",
+      "blanks": [
+        { "index": 0, "answer": "atividade de trabalho" }
+      ],
+      "explanation": "Conforme delineado pelo item 1.5.4.4.5.3 da NR-01 (texto modificado pela Portaria MTE nº 1.419/2024), a análise de probabilidade nestes casos baseia-se diretamente na consideração das 'exigências da atividade de trabalho'.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na determinação do nível do risco, a severidade deve ser mensurada. Caso um mesmo perigo identificado apresente mais de uma consequência possível, a NR-01 obriga a seleção sistemática daquela que possuir a maior _____.",
+      "blanks": [
+        { "index": 0, "answer": "magnitude" }
+      ],
+      "explanation": "O item 1.5.4.4.4.1 da NR-01 estipula categoricamente que, havendo mais de uma consequência plausível advinda de um único perigo avaliado, deve prevalecer para o cálculo da severidade a consequência de maior magnitude.",
+      "difficulty": "hard"
+    }
+  ]
+}
