@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Barras",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de barras",
+  "moduleOrder": 8,
+  "trail": "Aplicações (Barra Simples, Dupla, Anel)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a característica da proteção diferencial em um arranjo de barra simples?",
+      "options": [
+        "Possui quatro zonas distintas intertravadas.",
+        "Apresenta uma única zona de proteção.",
+        "Exige obrigatoriamente disjuntor de acoplamento.",
+        "Utiliza sempre o esquema de disjuntor e meio."
+      ],
+      "correctIndex": 1,
+      "explanation": "O esquema de barra simples possui apenas uma zona de proteção delimitada por disjuntores. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento interliga os barramentos em um esquema de barra dupla?",
+      "options": [
+        "Disjuntor de transferência.",
+        "Chave de aterramento rápido.",
+        "Disjuntor de acoplamento.",
+        "Reator shunt."
+      ],
+      "correctIndex": 2,
+      "explanation": "O esquema de barra dupla utiliza o disjuntor de acoplamento (paralelo de barras) para a interligação. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual arranjo de barras é frequentemente utilizado em sistemas de Extra Alta Tensão (EAT)?",
+      "options": [
+        "Barra simples sem seccionamento.",
+        "Esquema disjuntor e meio.",
+        "Barra de transferência isolada.",
+        "Anel aberto com fusíveis."
+      ],
+      "correctIndex": 1,
+      "explanation": "O esquema disjuntor e meio é geralmente utilizado para sistemas de Extra Alta Tensão. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a função do disjuntor de transferência no arranjo de barra dupla?",
+      "options": [
+        "Reduzir a potência de curto-circuito.",
+        "Interligar as duas barras principais permanentemente.",
+        "Substituir o disjuntor de um circuito em manutenção.",
+        "Filtrar componentes harmônicas da subestação."
+      ],
+      "correctIndex": 2,
+      "explanation": "O disjuntor de transferência assume a condução do circuito cujo disjuntor for isolado para manutenção. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a vantagem operativa do arranjo disjuntor e meio durante um curto na barra?",
+      "options": [
+        "O fluxo de energia nas linhas não é interrompido.",
+        "A barra em falta atua como gerador de energia reativa.",
+        "O disjuntor atua como chave seccionadora de aterramento.",
+        "As duas barras assumem imediatamente a mesma tensão."
+      ],
+      "correctIndex": 0,
+      "explanation": "No esquema disjuntor e meio, não há interrupção dos fluxos de energia mesmo com falta em uma das barras. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as zonas de proteção se comportam na barra simples com seccionamento por seccionadora?",
+      "options": [
+        "Apresentam quatro zonas fixas e sobrepostas.",
+        "Possui uma zona com seccionadora fechada e duas com ela aberta.",
+        "É sempre uma única zona, independentemente da chave.",
+        "Anulam a impedância mútua entre os lados da barra."
+      ],
+      "correctIndex": 1,
+      "explanation": "Há uma única zona com a seccionadora fechada e duas zonas distintas quando ela está aberta. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O esquema com dois disjuntores por circuito apresenta quantas zonas de proteção de barra?",
+      "options": [
+        "Uma zona única global.",
+        "Duas zonas distintas delimitadas pelos disjuntores.",
+        "Três zonas de proteção sobrepostas.",
+        "Quatro zonas com acoplamento duplo."
+      ],
+      "correctIndex": 1,
+      "explanation": "Assim como no disjuntor e meio, esse esquema apresenta duas zonas distintas de proteção de barras. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a função da 'réplica de seccionadoras' na proteção diferencial de barras digitais?",
+      "options": [
+        "Associar correntes medidas e bays envolvidos para garantir seletividade.",
+        "Medir a temperatura dos contatos móveis do disjuntor.",
+        "Substituir os transformadores de potencial capacitivos da linha.",
+        "Bloquear a atuação da proteção térmica do transformador."
+      ],
+      "correctIndex": 0,
+      "explanation": "A réplica de seccionadoras associa correntes e bays por software, assegurando seletividade com base no estado das chaves. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual configuração de barras minimiza a perda de circuitos adjacentes em falhas de disjuntor (50BF)?",
+      "options": [
+        "Barra simples com disjuntor de seccionamento.",
+        "Esquema disjuntor e meio.",
+        "Barra dupla com único acoplamento.",
+        "Barra de transferência operada a vazio."
+      ],
+      "correctIndex": 1,
+      "explanation": "A configuração disjuntor e meio preserva a continuidade do serviço da melhor forma perante a falha de um disjuntor. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a réplica de seccionadoras garante segurança na aquisição do estado das chaves?",
+      "options": [
+        "Utiliza tensão alternada para induzir o fechamento cego.",
+        "Avalia o cruzamento por zero da corrente primária.",
+        "Utiliza dois contatos (um NA e um NF) para considerar o tempo de transição.",
+        "Mede a resistência de arco gerada durante a manobra."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para segurança, a lógica utiliza dois contatos por seccionadora (NA e NF), permitindo monitorar o tempo de transição. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O esquema de barra simples possui apenas uma zona de proteção, sendo a configuração mais simples existente.",
+      "correctAnswer": true,
+      "explanation": "Trata-se da configuração mais simples numa subestação, apresentando uma zona única de proteção delimitada por disjuntores. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No esquema de barra dupla, a proteção diferencial atua de forma global, desligando sempre ambas as barras para qualquer curto.",
+      "correctAnswer": false,
+      "explanation": "A proteção diferencial deve adequar-se à configuração e ser estritamente seletiva para isolar apenas a zona em falta. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O arranjo disjuntor e meio exige obrigatoriamente a aplicação de proteção diferencial para aproveitar suas vantagens.",
+      "correctAnswer": true,
+      "explanation": "O esquema requer a proteção diferencial para detectar a falta na barra correta e garantir o isolamento sem derrubar os fluxos de energia. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na perda de tensão auxiliar das seccionadoras, o relé diferencial digital emite trip global imediato por perder a referência.",
+      "correctAnswer": false,
+      "explanation": "No caso de falha da tensão auxiliar, o último estado da seccionadora é apenas memorizado e emite-se um alarme. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A barra dupla com seccionamento de barras e dois disjuntores de acoplamento possui exatamente quatro zonas distintas de proteção.",
+      "correctAnswer": true,
+      "explanation": "Trata-se de um arranjo oneroso que exibe quatro zonas distintas delimitadas por disjuntores. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No esquema de barra simples, o espaço físico desprotegido entre os TCs e os respectivos disjuntores é chamado de zona _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "morta"
+        }
+      ],
+      "explanation": "Esse espaço sem aparente cobertura de medição caracteriza a zona morta, exigindo lógicas específicas para proteção. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A adequação automática às topologias de barra dupla em relés digitais é garantida por software através da _____ de seccionadoras.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "réplica"
+        }
+      ],
+      "explanation": "A lógica chamada réplica de seccionadoras cruza o estado das chaves com as correntes, definindo as fronteiras de proteção. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A configuração de EAT onde a falha da barra não afeta a continuidade do fluxo de energia das linhas é o esquema disjuntor e _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "meio"
+        }
+      ],
+      "explanation": "Com o arranjo disjuntor e meio, mesmo se houver o isolamento de uma barra em curto, o fluxo pelos circuitos paralelos é garantido. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard"
+    }
+  ]
+}

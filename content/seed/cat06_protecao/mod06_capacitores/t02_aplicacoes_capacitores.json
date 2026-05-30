@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Bancos de Capacitores",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de bancos de capacitores",
+  "moduleOrder": 5,
+  "trail": "Aplicações (Correção de FP, Filtros, Compensação)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a função principal dos bancos de capacitores shunt?",
+      "options": [
+        "Fornecer potência reativa.",
+        "Absorver potência ativa.",
+        "Diminuir a tensão da rede.",
+        "Bloquear correntes contínuas."
+      ],
+      "correctIndex": 0,
+      "explanation": "Bancos shunt fornecem potência reativa para compensar a absorvida pelas cargas. (Fonte: Virtus-Anorm. Sist. Potência / Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como atuam os capacitores série nas linhas de transmissão?",
+      "options": [
+        "Aumentam a reatância indutiva da linha.",
+        "Atuam como reguladores automáticos de tensão.",
+        "Reduzem a capacidade de transmissão.",
+        "Aumentam as perdas ativas no circuito."
+      ],
+      "correctIndex": 1,
+      "explanation": "Eles diminuem a reatância indutiva e atuam como reguladores automáticos de tensão. (Fonte: Caminha).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o objetivo de bancos de capacitores montados como filtros?",
+      "options": [
+        "Aumentar o escorregamento dos motores.",
+        "Gerar correntes de alta frequência.",
+        "Reduzir e sequestrar tensões e correntes harmônicas.",
+        "Elevar a impedância de aterramento."
+      ],
+      "correctIndex": 2,
+      "explanation": "Capacitores com indutores formam filtros sintonizados para barrar correntes harmônicas. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O relé de fator de potência (ANSI 55) atua em qual situação?",
+      "options": [
+        "Quando o fator de potência sai dos limites predeterminados.",
+        "Quando há inversão da potência ativa.",
+        "Apenas em fator de potência unitário.",
+        "Quando a potência reativa chega a zero."
+      ],
+      "correctIndex": 0,
+      "explanation": "A função 55 opera quando o fator de potência cai abaixo ou sobe acima de um valor ajustado. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o banco de capacitores shunt altera a tensão da rede?",
+      "options": [
+        "Regula a tensão no sentido de aumentá-la.",
+        "Regula a tensão no sentido de reduzi-la.",
+        "Mantém a tensão em zero.",
+        "Causa afundamento severo contínuo."
+      ],
+      "correctIndex": 0,
+      "explanation": "Sendo uma capacitância entre fase e terra, fornece potência reativa e aumenta a tensão. (Fonte: Virtus-Anorm. Sist. Potência).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como se limita a corrente inrush no chaveamento back-to-back?",
+      "options": [
+        "Através de relés de subtensão.",
+        "Usando fusíveis de expulsão.",
+        "Com a inserção de reatores série.",
+        "Utilizando capacitores em paralelo."
+      ],
+      "correctIndex": 2,
+      "explanation": "Reatores série amortecem e limitam as correntes transitórias de alta intensidade no chaveamento. (Fonte: Virtus-Anorm. Sist. Potência).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o efeito de cargas não lineares em bancos de capacitores?",
+      "options": [
+        "Melhoram o isolamento térmico.",
+        "Causam sobrecarga contínua por correntes harmônicas.",
+        "Zeram a tensão residual.",
+        "Eliminam o uso de fusíveis."
+      ],
+      "correctIndex": 1,
+      "explanation": "Correntes harmônicas geram sobrecargas de longa duração, exigindo proteção 49RMS ou 51. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como opera um compensador estático de reativos?",
+      "options": [
+        "Abre e fecha chaves seccionadoras lentamente.",
+        "Atua manualmente via relé 86.",
+        "Chaveia capacitores e reatores via tiristores.",
+        "Utiliza motores de rotor bobinado."
+      ],
+      "correctIndex": 2,
+      "explanation": "Opera chaveando reatores e capacitores com tiristores associados ao regulador de tensão. (Fonte: Virtus-Anorm. Sist. Potência).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o capacitor série é protegido durante um curto-circuito?",
+      "options": [
+        "Desconectando a linha inteira.",
+        "Um gape-centelhador curto-circuita o banco.",
+        "Invertendo a polaridade local.",
+        "Reduzindo a capacitância."
+      ],
+      "correctIndex": 1,
+      "explanation": "Um gape-centelhador protegido curto-circuita o banco durante a corrente de defeito. (Fonte: Caminha).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o impacto de um capacitor série na proteção de distância?",
+      "options": [
+        "Diminui a reatância lida, fazendo a falta parecer mais próxima.",
+        "Melhora o alcance da zona 3.",
+        "Aumenta a reatância medida.",
+        "Anula a polarização cruzada."
+      ],
+      "correctIndex": 0,
+      "explanation": "A capacitância negativa reduz a reatância aparente, dando a impressão de que a falta está mais perto. (Fonte: Caminha).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Bancos de capacitores shunt absorvem potência reativa da rede para atenuar sobretensões.",
+      "correctAnswer": false,
+      "explanation": "Bancos shunt injetam potência reativa para elevar a tensão. Quem absorve reativo é o reator paralelo. (Fonte: Virtus-Anorm. Sist. Potência).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A função ANSI 51 é utilizada para proteger capacitores contra curtos-circuitos.",
+      "correctAnswer": true,
+      "explanation": "Curtos-circuitos nos capacitores são detectados por relés de sobrecorrente temporizada (ANSI 51). (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Capacitores com indutores formam filtros passivos contra correntes harmônicas poluidoras.",
+      "correctAnswer": true,
+      "explanation": "Filtros LC oferecem baixa reatância para frequências específicas, sequestrando as harmônicas da rede. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O chaveamento back-to-back de capacitores produz correntes transitórias de baixa frequência.",
+      "correctAnswer": false,
+      "explanation": "Produz correntes de altíssima intensidade e altas frequências de oscilação transitória. (Fonte: Virtus-Anorm. Sist. Potência).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na compensação série, um único banco deve compensar 100% da reatância da linha.",
+      "correctAnswer": false,
+      "explanation": "Recomenda-se compensar no máximo metade da reatância com um banco. Valores maiores exigem subdivisão. (Fonte: Caminha).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A relação entre a potência ativa e a potência aparente de uma carga é chamada de _____ de potência.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "fator"
+        }
+      ],
+      "explanation": "O fator de potência (cos φ) relaciona a potência ativa com a aparente da instalação. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A manobra na qual um banco de capacitores é conectado a uma barra que já possui outro banco ativo é chamada de chaveamento _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "back-to-back"
+        }
+      ],
+      "explanation": "O chaveamento back-to-back ocorre quando um banco é energizado em paralelo com outro já em operação. (Fonte: Virtus-Anorm. Sist. Potência).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O _____ estático de reativos utiliza tiristores para chavear subunidades capacitivas e indutivas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "compensador"
+        }
+      ],
+      "explanation": "Compensadores estáticos chaveiam reatores e capacitores via tiristores para o controle contínuo da tensão. (Fonte: Virtus-Anorm. Sist. Potência).",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Geradores",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de geradores",
+  "moduleOrder": 7,
+  "trail": "Aplicações de Geradores",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza a conexão unitária de um gerador síncrono?",
+      "options": [
+        "O gerador conecta-se à rede através de um transformador elevador dedicado.",
+        "O gerador supre energia diretamente às cargas em baixa tensão.",
+        "O equipamento opera sem o uso de disjuntores de campo.",
+        "A máquina tem o estator aterrado solidamente na malha."
+      ],
+      "correctIndex": 0,
+      "explanation": "Na conexão unitária (em bloco), o gerador liga-se ao sistema por meio de um transformador elevador próprio. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual esquema de aterramento é padrão para grupos geradores-transformadores?",
+      "options": [
+        "Aterramento sólido no neutro do estator.",
+        "Aterramento de alta impedância no neutro.",
+        "Aterramento por reator de compensação contínua.",
+        "Aterramento capacitivo paralelo à carcaça."
+      ],
+      "correctIndex": 1,
+      "explanation": "Utiliza-se aterramento de alta impedância (com transformador de distribuição) para reduzir faltas fase-terra. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual relé avalia os limites de tensão, frequência e ângulo antes do acoplamento do gerador?",
+      "options": [
+        "Relé de subfrequência (81L).",
+        "Relé de verificação de sincronismo (25).",
+        "Relé direcional de potência (32).",
+        "Relé de salto de vetor (78)."
+      ],
+      "correctIndex": 1,
+      "explanation": "O dispositivo 25 opera quando os dois circuitos estão dentro dos limites para permitir a sincronização. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual aterramento é comum em geradores conectados diretamente para alimentar cargas?",
+      "options": [
+        "Aterramento via capacitor série.",
+        "Isolamento galvânico do neutro.",
+        "Aterramento solidamente aterrado ou de baixa reatância.",
+        "Aterramento por transformador de distribuição."
+      ],
+      "correctIndex": 2,
+      "explanation": "Sistemas solidamente aterrados ou de baixa reatância são usados quando geradores conectam-se diretamente à carga. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A proteção contra energização acidental do gerador evita qual falha grave?",
+      "options": [
+        "O aumento excessivo da excitação do rotor pelo AVR.",
+        "O curto-circuito bifásico nas buchas de saída do estator.",
+        "A perda de sincronismo durante as oscilações de potência.",
+        "A máquina atuar como motor e danificar o acionamento mecânico."
+      ],
+      "correctIndex": 3,
+      "explanation": "Ao ser energizado acidentalmente, o gerador se comporta como motor, podendo danificar a máquina de acionamento. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal finalidade da função salto de vetor no ponto de conexão industrial?",
+      "options": [
+        "Proteger cogeradores contra o religamento assíncrono da concessionária.",
+        "Sincronizar a partida da turbina com o campo girante.",
+        "Supervisionar o circuito de fechamento do disjuntor principal.",
+        "Reduzir a corrente subtransitória imposta aos relés."
+      ],
+      "correctIndex": 0,
+      "explanation": "A função atua para desconectar o gerador e protegê-lo de danos caso a rede religue fora de sincronismo. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a proteção de energização acidental (50/27) exige para não atuar na partida normal?",
+      "options": [
+        "A injeção de corrente contínua direta no estator principal.",
+        "Uma temporização sem presença de corrente antes do acoplamento.",
+        "A operação instantânea do relé de subfrequência na barra.",
+        "O curto-circuito mecânico dos anéis coletores do gerador."
+      ],
+      "correctIndex": 1,
+      "explanation": "Uma temporização autoriza a partida do gerador, exigindo ausência de corrente antes do acoplamento real com a rede. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como se detecta a perda de excitação em redes isoladas apenas com unidades próprias?",
+      "options": [
+        "Por um relé de sobrevelocidade mecânico (12).",
+        "Por uma proteção temporizada de subimpedância (40).",
+        "Por um relé de sobretensão residual no neutro (59N).",
+        "Por uma proteção de sobrecorrente instantânea (50)."
+      ],
+      "correctIndex": 1,
+      "explanation": "Em operações independentes, a perda de excitação é monitorada pela medição de subimpedância via relé 40. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para geradores até 500 kW, qual é o conjunto de proteção mínima sem exigência de TP?",
+      "options": [
+        "Sincronismo (25), sobretensão (59) e direcional (67).",
+        "Distância (21), perda de campo (40) e falha de disjuntor (50BF).",
+        "Diferencial (87G), direcional de potência (32) e térmica (49T).",
+        "Sobrecorrente (51/51N), desbalanço (46) e sobrecarga térmica (49)."
+      ],
+      "correctIndex": 3,
+      "explanation": "Para pequenos geradores, a proteção mínima básica dispensa TPs e foca em corrente, terra, desequilíbrio e calor. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na proteção de geradores médios de neutro isolado, como é feita a detecção de terra estator?",
+      "options": [
+        "Usa-se relés de sobrecorrente temporizados comuns (51) em todas as fases.",
+        "Usa-se um TP monofásico de alta impedância para medir a tensão residual 3V0.",
+        "Aterra-se o estator unicamente via TC secundário ligado à função 51G.",
+        "Mede-se a corrente de desbalanço via TC alocado no fechamento em delta."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para geradores com neutro isolado, mede-se a tensão residual via TP monofásico no neutro ou terciário em delta aberto. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na conexão direta, o gerador fornece energia sem a intervenção de um transformador elevador próprio.",
+      "correctAnswer": true,
+      "explanation": "Na conexão direta, a máquina supre a carga no nível de tensão gerada. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A proteção de energização acidental atua apenas quando o gerador atinge sua plena carga térmica.",
+      "correctAnswer": false,
+      "explanation": "Ela atua quando a máquina parada ou em partida é indevidamente conectada à rede. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O aterramento de alta impedância do neutro do bloco gerador é projetado para limitar a corrente fase-terra entre 5 e 25 A.",
+      "correctAnswer": true,
+      "explanation": "Isso reduz severamente o dano ao núcleo do estator em curtos para a terra. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Cogeradores conectados à concessionária sofrem risco de dano mecânico se a rede realizar um religamento assíncrono.",
+      "correctAnswer": true,
+      "explanation": "O religamento automático da rede sobre a máquina fora de sincronismo provoca torques mecânicos perigosos. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A proteção diferencial de grupo gerador-transformador detecta e atua para curtos-circuitos nas linhas externas da subestação.",
+      "correctAnswer": false,
+      "explanation": "A função diferencial (87U) é unitária e opera unicamente para falhas dentro de sua própria zona delimitada. (Fonte: Guia Proteção 2008).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A conexão _____ ocorre quando o gerador se liga ao sistema por meio de um transformador elevador exclusivo.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "unitária"
+        }
+      ],
+      "explanation": "No modelo de conexão unitária ou bloco, o gerador não alimenta cargas locais diretamente. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A função que avalia as condições de tensão, frequência e ângulo para liberar o fechamento do disjuntor é o _____ de sincronismo.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "check"
+        }
+      ],
+      "explanation": "A função 25 (check de sincronismo) exige conformidade dos três parâmetros para autorizar a manobra paralela. (Fonte: Virtus_CProtBL2).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para proteger cogeradores industriais contra religamentos da rede fora de fase, aplica-se a detecção de salto de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "vetor"
+        }
+      ],
+      "explanation": "O salto de vetor atua muito rapidamente, desligando a interconexão antes do religador da concessionária atuar. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "hard"
+    }
+  ]
+}

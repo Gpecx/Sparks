@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Funções ANSI",
+  "moduleSubtitle": "Codificação IEEE C37.2, funções principais, supervisão e lógica",
+  "moduleOrder": 2,
+  "trail": "Funções de Supervisão (Tensão 27/59, Frequência 81, Direcional 67, Sincronismo 25)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O relé da função ANSI 27 atua sob qual condição operativa?",
+      "options": [
+        "Quando a frequência da rede ultrapassa 60 Hz.",
+        "Quando a tensão de entrada é menor do que um valor mínimo predeterminado.",
+        "Quando há inversão no sentido do fluxo de potência reativa.",
+        "Quando a corrente de sequência zero excede o limite térmico."
+      ],
+      "correctIndex": 1,
+      "explanation": "A função 27 (subtensão) atua quando a tensão cai abaixo de um valor pré-ajustado, protegendo contra operação em tensão insuficiente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em quais equipamentos a sobretensão (ANSI 59) é classicamente aplicada para evitar a deterioração da isolação?",
+      "options": [
+        "Apenas em cabos subterrâneos e ramais radiais.",
+        "Em motores de gaiola operando a vazio.",
+        "Em transformadores de potência, reatores e grandes máquinas rotativas.",
+        "Exclusivamente em retificadores e bancos de baterias CC."
+      ],
+      "correctIndex": 2,
+      "explanation": "A função 59 protege transformadores, reatores e máquinas rotativas, onde picos de tensão deterioram a isolação.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual função atua nos Esquemas Regionais de Alívio de Carga (ERAC) para equilibrar o déficit de geração?",
+      "options": [
+        "Relé direcional de potência (ANSI 32).",
+        "Relé de subimpedância (ANSI 21B).",
+        "Relé de frequência (ANSI 81).",
+        "Relé de sobrecorrente residual (ANSI 51N)."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os ERAC usam relés de subfrequência (ANSI 81) para desligar blocos de carga quando o déficit de geração provoca queda da frequência.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que é fundamental para que um relé direcional de sobrecorrente (ANSI 67) determine o sentido do fluxo da falta?",
+      "options": [
+        "Uma grandeza extra como tensão de referência, conhecida como polarização.",
+        "O aterramento isolado obrigatório do neutro do transformador adjacente.",
+        "Um enlace de comunicação permissivo por fibra óptica.",
+        "A medição contínua da componente DC na corrente de fuga."
+      ],
+      "correctIndex": 0,
+      "explanation": "Para definir a direção do curto, o relé 67 necessita de uma referência de tensão fixa, técnica denominada polarização.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais grandezas o relé de verificação de sincronismo (ANSI 25) monitora antes de permitir o fechamento de um disjuntor?",
+      "options": [
+        "A corrente de inrush e o limiar térmico.",
+        "A frequência, a magnitude da tensão e o ângulo de fase (defasagem) entre os dois circuitos.",
+        "O escorregamento do rotor em relação à curva de capabilidade.",
+        "A impedância transitória da linha no último evento."
+      ],
+      "correctIndex": 1,
+      "explanation": "A função 25 checa se dois circuitos AC têm diferenças aceitáveis de frequência, ângulo de fase e tensão para autorizar o paralelismo seguro.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em sistemas com neutro isolado, como a sobretensão de neutro (ANSI 59N) detecta uma falta fase-terra?",
+      "options": [
+        "Medindo a sobrecarga simétrica da corrente capacitiva.",
+        "Aferindo o escorregamento mecânico de sequência negativa.",
+        "Monitorando a tensão residual (3V0) no secundário de TPs ligados em delta aberto.",
+        "Detectando o decréscimo da impedância de sequência positiva."
+      ],
+      "correctIndex": 2,
+      "explanation": "Em sistemas não aterrados, faltas à terra geram forte tensão residual. A 59N detecta esse 3V0 nos secundários dos TPs em delta aberto.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na polarização cruzada do relé direcional de fase (67), qual referência é usada para um curto na fase A?",
+      "options": [
+        "A corrente da fase B defasada em 180°.",
+        "A tensão de linha das fases sãs (VBC), referência direcional imutável.",
+        "A tensão interna transiente da própria fase A.",
+        "Apenas a grandeza residual calculada pelos TCs."
+      ],
+      "correctIndex": 1,
+      "explanation": "Na polarização cruzada, como a tensão da fase faltosa (VA) colapsa a zero, o relé usa a tensão entre as duas fases sadias (VBC) como referência direcional.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a vantagem da função de taxa de variação de frequência (ANSI 81R - df/dt) sobre o relé de subfrequência (81L)?",
+      "options": [
+        "Realiza a frenagem térmica da turbina antes da separação mecânica.",
+        "É mais rápida e estável para o chaveamento de ilhamento preventivo em perturbações violentas.",
+        "Bloqueia as componentes de sequência zero nas ressonâncias subsíncronas.",
+        "Restaura os taps sob carga sem cortar consumidores."
+      ],
+      "correctIndex": 1,
+      "explanation": "O monitoramento da derivada df/dt (81R) antecipa a queda e é mais ágil que os relés de limite de frequência para desacoplar seções vitais da rede.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como atuam em coordenação as funções de sincronismo (25) e religamento (79) na recomposição de malhas?",
+      "options": [
+        "O 25 emite trip direcional enquanto o 79 extingue o arco na câmara.",
+        "O 79 testa a rigidez do condutor para que o 25 religue com atraso inverso.",
+        "O relé 25 atua como permissivo, verificando se tensões e ângulos estão estáveis para autorizar que o 79 feche o disjuntor sem chocar as máquinas.",
+        "Ambas operam acopladas à proteção diferencial, disparando seccionadoras de barra."
+      ],
+      "correctIndex": 2,
+      "explanation": "Em religamentos de sistemas em anel, o religador (79) só fecha se o check de sincronismo (25) constatar que linha e barra estão síncronas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em subestações com capacitores shunt, por que o relé direcional 67 pode atuar intempestivamente se mal ajustado?",
+      "options": [
+        "Porque os capacitores injetam alta sequência zero, cegando a polarização.",
+        "Pois o fornecimento de reativos do capacitor pode inverter o ângulo da corrente e sensibilizar a zona reversa do relé.",
+        "Porque o capacitor afunda a frequência, neutralizando o filtro anti-aliasing.",
+        "Porque a descarga satura os TCs e bloqueia a diferencial de barra."
+      ],
+      "correctIndex": 1,
+      "explanation": "Capacitores injetam energia reativa na rede. Se o fluxo passar para o sentido da concessionária, o relé 67 pode ver isso como falta reversa e emitir trip indesejado.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O relé de subtensão (ANSI 27) atua quando a voltagem do equipamento sofre um aumento drástico que ultrapassa os limites térmicos da isolação.",
+      "correctAnswer": false,
+      "explanation": "Falso. A função 27 (subtensão) atua quando a tensão diminui ou cai abaixo de um limiar mínimo ajustado, prevenindo danos por perda de tensão.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A função subtensão remanente (ANSI 27R) verifica se a tensão induzida pelo motor desligado já decaiu a níveis seguros antes de permitir o fechamento em outra fonte.",
+      "correctAnswer": true,
+      "explanation": "Correto. A 27R monitora o decaimento residual da tensão mantida pela inércia e campo do motor após o desligamento, permitindo a realimentação sem choque em oposição de fase.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A função direcional de terra (67G/67N) é recomendada em redes com neutro isolado ou compensado para distinguir faltas fase-terra reais das correntes capacitivas de trechos sadios.",
+      "correctAnswer": true,
+      "explanation": "Correto. Em sistemas de baixa corrente de falta, as capacitâncias das linhas geram correntes que simulam defeitos. A direcional de terra é mandatória para distinguir o sentido da falta.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A função de sincronismo (ANSI 25) bloqueia irreversivelmente a religação sempre que detectar um dos lados do disjuntor desenergizado (linha morta).",
+      "correctAnswer": false,
+      "explanation": "Falso. Além de conferir paralelismo entre circuitos vivos, a função 25 tem ajustes que autorizam lógicas 'linha viva / barra morta' ou 'linha morta / barra viva'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No relé de sobretensão (ANSI 59), a tensão de reset (drop-out) é ajustada para um valor superior à tensão de disparo (pick-up).",
+      "correctAnswer": false,
+      "explanation": "Falso. O drop-out (nível em que o relé cessa a atuação) é sempre inferior ao pick-up, evitando oscilações instáveis ('repique') nos limiares.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Diante de acentuada falta de geração frente à carga, a função ANSI 81 promove os cortes dos Esquemas Regionais de Alívio de Carga (ERAC), atuando ao ler variações danosas da _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "frequência"
+        }
+      ],
+      "explanation": "A função ANSI 81 (relé de frequência) fiscaliza os decréscimos de velocidade síncrona e deflagra os blocos do ERAC, salvando a rede do colapso.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos relés direcionais de sobrecorrente (ANSI 67), a corrente de falta é contrastada com uma tensão de base inalterada que rege seu eixo de atuação — preceito conhecido como grandeza de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "polarização"
+        }
+      ],
+      "explanation": "Para definir o sentido do curto, os relés direcionais usam os TPs como sinal de base angular contra o qual as correntes faltosas são referenciadas — a tensão de polarização.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em redes de média tensão com neutro isolado, para captar o deslocamento homopolar (3V0) e comandar a função 59N, interligam-se os secundários de três TPs na topologia conhecida como delta _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "aberto"
+        }
+      ],
+      "explanation": "O 59N (sobretensão residual) apura a falta fase-terra pela soma fasorial recolhida nos TPs associados no arranjo em delta aberto.",
+      "difficulty": "hard"
+    }
+  ]
+}

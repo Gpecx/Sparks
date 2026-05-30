@@ -1,0 +1,213 @@
+{
+  "category": "Comissionamento SPCS",
+  "categorySubtitle": "Metodologia, ensaio de relés e comissionamento IEC 61850",
+  "categoryOrder": 9,
+  "module": "Metodologia de Comissionamento",
+  "moduleSubtitle": "Planejamento, FAT/SAT, checklists e relatórios",
+  "moduleOrder": 0,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que representa o diagrama as-built inspecionado e validado durante o comissionamento da subestação?",
+      "options": [
+        "A planta arquitetônica original do edifício de controle.",
+        "A revisão do projeto que contempla todas as modificações realizadas durante a construção.",
+        "O diagrama lógico interno padronizado do fabricante do relé.",
+        "A lista de parametrização estática da mala de testes."
+      ],
+      "correctIndex": 1,
+      "explanation": "O termo as-built define a revisão do projeto contendo todas as modificações práticas feitas na montagem da instalação. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual teste básico deve verificar fisicamente os circuitos de comando e proteção logo após a montagem do painel?",
+      "options": [
+        "O ensaio de rigidez dielétrica do óleo isolante.",
+        "O teste de continuidade da fiação de comando, medição e proteção.",
+        "A emissão contínua de saltos de vetor angulares.",
+        "O ensaio de resistência térmica do disjuntor."
+      ],
+      "correctIndex": 1,
+      "explanation": "A verificação de continuidade atesta que as interligações de fiação no painel estão íntegras e conectadas. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal finalidade da verificação do intertravamento entre seccionadora e disjuntor no comissionamento?",
+      "options": [
+        "Aumentar a velocidade mecânica de fechamento do disjuntor.",
+        "Permitir a abertura da seccionadora somente quando o disjuntor estiver aberto.",
+        "Bloquear a medição do transformador de potencial capacitivo.",
+        "Limitar a corrente de inrush na energização inicial."
+      ],
+      "correctIndex": 1,
+      "explanation": "O intertravamento é testado para garantir segurança, impedindo a abertura da seccionadora com o circuito em carga. (Fonte: Ed54_fasc_protecao).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos relés digitais, como o sistema de automonitoramento verifica o circuito de trip (saída) sem acionar o disjuntor?",
+      "options": [
+        "Por ensaio de tensão aplicada na bobina principal.",
+        "Exigindo injeção de corrente primária na barra.",
+        "Pela demanda de um sinal interno de trip mantendo o circuito externo devidamente isolado.",
+        "Fechando chaves de aterramento rápido na linha."
+      ],
+      "correctIndex": 2,
+      "explanation": "O relé demanda um sinal de teste de trip interno, devendo a automação isolar a saída para não desligar a carga real. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual função ANSI é exaustivamente testada no comissionamento para validar os alarmes e indicações visuais de painel?",
+      "options": [
+        "Função ANSI 30 (relé anunciador).",
+        "Função ANSI 27 (subtensão).",
+        "Função ANSI 50 (instantâneo).",
+        "Função ANSI 87 (diferencial)."
+      ],
+      "correctIndex": 0,
+      "explanation": "O relé anunciador (30) fornece indicações visuais e sonoras de atuações de proteção para os operadores. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante o ensaio de saturação de um TC de proteção, como se identifica graficamente o ponto de joelho (knee point)?",
+      "options": [
+        "Pelo pico máximo da corrente térmica suportável.",
+        "Pelo ponto na curva bilogarítmica onde uma reta tangente faz inclinação de 45 ou 30 graus com as abscissas.",
+        "Pelo cruzamento por zero da tensão alternada.",
+        "Pela quebra de isolação na rigidez dielétrica."
+      ],
+      "correctIndex": 1,
+      "explanation": "O joelho demarca o início da saturação magnética e é definido por tangentes de 45° ou 30° na curva de excitação. (Fonte: Ed48).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a proteção digital garante a confiabilidade dos parâmetros (settings) inseridos no comissionamento?",
+      "options": [
+        "Desligando o relé a cada ciclo de 60 Hz.",
+        "Transferindo a carga para relés eletromecânicos.",
+        "Através de autoverificação comparando continuamente as diferenças entre dois conjuntos de ajustes iguais na EPROM.",
+        "Injetando sinais de onda portadora na fonte DC."
+      ],
+      "correctIndex": 2,
+      "explanation": "O relé checa continuamente dois blocos de memória (settings) para atestar que os ajustes não foram corrompidos. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para garantir a atuação ponta a ponta (end-to-end), com que frequência canais de teleproteção devem ser testados?",
+      "options": [
+        "Mensalmente via injeção primária.",
+        "A cada 10 anos devido à degradação óptica.",
+        "Com a mesma frequência estipulada para a aferição dos relés de proteção aos quais pertencem.",
+        "Apenas após a ocorrência de curtos-circuitos."
+      ],
+      "correctIndex": 2,
+      "explanation": "Canais de teleproteção exigem manutenção e testes periódicos na mesma frequência dos relés associados. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na injeção secundária, como a mala de testes avalia a lógica direcional ou de distância do relé IED?",
+      "options": [
+        "Injetando apenas corrente contínua em ambas as entradas.",
+        "Aplicando fasores de correntes e tensões simultaneamente com defasagens e módulos configuráveis.",
+        "Alterando a resistência física do circuito primário.",
+        "Medindo a resistência de isolação dos bornes traseiros."
+      ],
+      "correctIndex": 1,
+      "explanation": "A mala de testes gera fasores controlados (V, I e ângulo) para simular faltas complexas nas entradas de medição do relé. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na parametrização de relés digitais em proteção diferencial, como se compensam os TCs de relações diferentes sem TCs auxiliares físicos?",
+      "options": [
+        "Ajustando o tap do transformador de força.",
+        "Inserindo reatores shunt no circuito de corrente.",
+        "Fazendo o condicionamento de dados por software através de TCs auxiliares digitais internos ao relé.",
+        "Curto-circuitando o TC de menor relação."
+      ],
+      "correctIndex": 2,
+      "explanation": "Relés digitais usam TCs digitais (fatores matemáticos de correção) no software, dispensando o hardware externo antigo. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um comissionamento adequado prevê a verificação de sinalizações e alarmes do painel, garantindo orientação correta aos operadores pós-falta.",
+      "correctAnswer": true,
+      "explanation": "A proteção deve fornecer informações precisas, por sinalizações e registros, para a adequada tomada de decisão da operação. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Testes automáticos internos dos IEDs verificam a saída de trip disparando diretamente os disjuntores de potência em plena carga.",
+      "correctAnswer": false,
+      "explanation": "O teste automático demanda bloqueio/isolamento do circuito de saída externo (trip) para evitar o desligamento indevido da carga. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O ensaio de TTR avalia a relação de espiras entre os enrolamentos de alta e baixa tensão durante o comissionamento.",
+      "correctAnswer": true,
+      "explanation": "O TTR (Transformer Turn Ratio) mede a precisão da relação de espiras dos transformadores antes da energização. (Fonte: Cabine Primária).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A documentação As-Built da subestação é descartada após a aceitação do comissionamento pelo cliente final.",
+      "correctAnswer": false,
+      "explanation": "O as-built reflete as reais condições instaladas e deve ser guardado no prontuário para consultas futuras e manutenções. (Fonte: Cabine Primária).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A verificação da marca de polaridade dos TCs é desnecessária em relés digitais, que corrigem inversões físicas so sozinhos via hardware de aquisição.",
+      "correctAnswer": false,
+      "explanation": "A polaridade física correta é vital; se invertida na instalação sem a compensação declarada no software, funções diferenciais atuarão indevidamente. (Fonte: Apostila Proteção / Virtus).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No ensaio de injeção secundária de proteção direcional, aplica-se simultaneamente a corrente e uma tensão de _____ para definir o sentido do fluxo.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "polarização"
+        }
+      ],
+      "explanation": "A tensão de polarização atua como referência angular para o relé determinar a direção do curto-circuito. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos ensaios de saturação realizados em TCs de proteção, o gráfico bilogarítmico gerado visa encontrar o valor exato da tensão do ponto de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "joelho"
+        }
+      ],
+      "explanation": "O ponto de joelho (knee point) marca o fim da região linear do núcleo magnético do transformador de corrente. (Fonte: Ed48_fasc_protecao).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para validar tempos e lógicas em campo, baixa-se e analisa-se a _____ de eventos gravada na memória do relé.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "oscilografia"
+        }
+      ],
+      "explanation": "O registro oscilográfico guarda a forma de onda do evento de trip simulado, permitindo validar tempos de partida e atuação. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    }
+  ]
+}

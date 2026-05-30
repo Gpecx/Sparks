@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Fundamentos de Proteção",
+  "moduleSubtitle": "Evolução dos relés, princípios, ferramentas básicas, faltas e zonas",
+  "moduleOrder": 0,
+  "trail": "Filosofia de Proteção",
+  "trailOrder": 6,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Como são classicamente divididas as situações operacionais de um sistema elétrico na análise da filosofia de proteção?",
+      "options": [
+        "Normal, Anormal e Curto-Circuito.",
+        "Primária, Secundária e Terciária.",
+        "Transitória, Permanente e Semi-permanente.",
+        "Equilibrada, Desequilibrada e Oscilante."
+      ],
+      "correctIndex": 0,
+      "explanation": "As situações operacionais são: Normal (sem anomalias), Anormal (perturbações como elevação/redução de tensão ou perda de sincronismo) e Curto-Circuito (situação crítica).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual preceito justifica o grau de investimento no sistema de proteção na análise econômica?",
+      "options": [
+        "A proteção deve ter custo de instalação superior ao do equipamento que protege.",
+        "Quanto mais caro for o sistema protegido, mais se justifica o investimento na confiabilidade do seu sistema de proteção.",
+        "A viabilidade prioriza substituir o relé a cada cinco anos, desvinculada do equipamento.",
+        "A análise preconiza descartar a retaguarda remota pelo custo de manutenção."
+      ],
+      "correctIndex": 1,
+      "explanation": "Na relação custo x benefício, quanto mais caro for o sistema protegido, mais se justifica o investimento na confiabilidade e dependabilidade da proteção.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o sistema de proteção deve atuar na ocorrência de um defeito, segundo o preceito de atuação seletiva?",
+      "options": [
+        "Desligar o mínimo necessário de componentes para isolar a falha no menor tempo, provendo máxima continuidade ao restante sadio.",
+        "Desligar todos os equipamentos do barramento principal para eliminar riscos térmicos.",
+        "Operar unicamente após a retaguarda remota atuar.",
+        "Alterar passivamente tensão e frequência para extinguir o arco transitório."
+      ],
+      "correctIndex": 0,
+      "explanation": "O preceito de seletividade postula desligar o menor número de componentes para isolar a falha, no menor tempo, provendo a máxima continuidade de serviço.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como é denominado o esquema responsável pela detecção imediata de anormalidades numa zona, atuando como primeira linha de defesa?",
+      "options": [
+        "Proteção de Retaguarda.",
+        "Proteção Auxiliar.",
+        "Proteção Principal (Primária).",
+        "Proteção de Sobrealcance."
+      ],
+      "correctIndex": 2,
+      "explanation": "A Proteção Principal (Primária) detecta imediatamente anormalidades, atuando como primeira linha de defesa da zona protegida, antes da retaguarda intervir.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que se entende pelo conceito de 'coordenação' dos relés e dispositivos de proteção?",
+      "options": [
+        "Garantia de que todos os disjuntores tenham molas com velocidades de ruptura idênticas.",
+        "Estudo e aplicação de ajustes/esquemas para garantir seletividade e velocidade, assegurando retaguarda confiável sem comprometer as atuações ordenadas.",
+        "Eliminação integral dos relés de sobrecorrente em redes radiais.",
+        "Interligação obrigatória dos medidores de faturamento com a interface SCADA."
+      ],
+      "correctIndex": 1,
+      "explanation": "Coordenação é o estudo e aplicação de ajustes para garantir seletividade e velocidade, organizando os dispositivos em cascata para que a proteção mais próxima limpe a falta com apoio de retaguarda.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a prática atual na especificação da duplicação Proteção Primária + Alternada em linhas de EAT?",
+      "options": [
+        "Componentes eletromecânicos no primário e digitais no secundário.",
+        "Duplicação plena no terminal, utilizando relés de mesma fabricação, tecnologia e modelo para ambas as frentes.",
+        "Instalar a alternada apenas numa subestação vizinha remota.",
+        "Condensar a redundância num único relé multifuncional operando os dois canais."
+      ],
+      "correctIndex": 1,
+      "explanation": "Recomenda-se redundância plena em cada terminal de linha da Rede Básica, com relés da mesma fabricação, tecnologia e modelo, facilitando a manutenção e reduzindo peças sobressalentes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual esquema é classificado como 'inerentemente seletivo', delimitando a falha sem temporizações com zonas adjacentes?",
+      "options": [
+        "Proteção Gradativa por tempo / Relé de Sobrecorrente de Tempo Inverso.",
+        "Proteção de Retaguarda Remota / Relé Direcional de Potência.",
+        "Proteção Unitária / Relé Diferencial.",
+        "Proteção Distribuída / Relé de Frequência ou Subtensão."
+      ],
+      "correctIndex": 2,
+      "explanation": "A proteção unitária (diferencial) é inerentemente seletiva: compara grandezas que entram e saem do elemento, localizando o defeito precisamente sem escalonamento temporal.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a coordenação evita que o relé de retaguarda atue desnecessariamente antes do relé principal da zona faltosa?",
+      "options": [
+        "Comandando o corte instantâneo da excitação do gerador via chaves de transferência.",
+        "Através de temporização intencional prolongada, aguardando a proteção principal operar primeiro e limpar o defeito.",
+        "Por bloqueio de hardware, pois o secundário do TC satura inviabilizando correntes reversas.",
+        "A retaguarda usa exclusivamente Unidades de Medição Fasorial sob comando do despachante."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para preservar a seletividade, a retaguarda opera com temporização intencional. Aguarda; só após expirar seu degrau de coordenação é que comanda a abertura, se a primária falhar.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais condicionantes integram as 'considerações físicas' na análise geral da proteção?",
+      "options": [
+        "Correntes assimétricas, picos de sobretensão e reatâncias subtransitórias.",
+        "Custo do equipamento de manobra e transformadores definindo o tipo de proteção.",
+        "Facilidades de manutenção, restrição de distância entre relés (comprimento de cabos de TCs) e arranjo dos painéis.",
+        "Cálculo de amortecimento de oscilações via compensadores estáticos."
+      ],
+      "correctIndex": 2,
+      "explanation": "As considerações físicas cuidam da localização de instalação, distâncias entre TCs e relés, espaços em painéis, fios pilotos e facilidades de mantenabilidade.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em quais duas sub-propriedades opostas a Confiabilidade Operacional é classificada?",
+      "options": [
+        "Temporização Dinâmica e Margem de Sensibilidade.",
+        "Seletividade Amperimétrica e Coordenação Lógica.",
+        "Flexibilidade Configurável e Imunidade Algorítmica.",
+        "Dependabilidade (certeza de atuar quando deve) e Segurança (certeza de não atuar quando não deve)."
+      ],
+      "correctIndex": 3,
+      "explanation": "A confiabilidade é definida por: dependabilidade (atuar sempre e corretamente na presença de defeito real) e segurança (evitar operações acidentais quando a rede está normal).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As proteções por relés não devem expedir ordens de disparo a menos que haja defeito validado em sua zona, pois um desligamento intempestivo acidental pode ser pior que a omissão de atuação.",
+      "correctAnswer": true,
+      "explanation": "Este é o pilar do requisito de Segurança. A proteção não deve atuar com o sistema saudável; atuações intempestivas agravam problemas sistêmicos e prejudicam a estabilidade.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os esquemas de releamento devem ser sempre concebidos com o máximo grau de complexidade eletrônica e redundância física possível, abolindo arquiteturas simples.",
+      "correctAnswer": false,
+      "explanation": "Contradiz o requisito de Simplicidade. Um esquema mais simples, que cubra os requisitos técnicos, é preferível: tem menor probabilidade de atuações falsas e facilita a intervenção e o custo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Quando a proteção primária local falha e a limpeza do defeito provém de relés nas subestações vizinhas que suprem o alimentador defeituoso, o arranjo denomina-se retaguarda remota.",
+      "correctAnswer": true,
+      "explanation": "Correto. Se a limpeza vem de relés nas subestações terminais vizinhas, o arranjo é retaguarda remota (diferente da retaguarda local, feita por relés na própria estação).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em subestações de EAT com duplicação plena de proteção, é obrigatório que a Proteção Primária e Alternada partilhem uma única bateria CC e o mesmo circuito de TC, simplificando custos.",
+      "correctAnswer": false,
+      "explanation": "Incorreto. A duplicação exige núcleos de TCs distintos, secundários de TPs diferentes e bancos de baterias/circuitos CC independentes, para evitar que um evento de 'causa comum' afete as duas proteções.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As proteções graduadas (relés de sobrecorrente de tempo inverso) delimitam suas bordas sem escalonamento temporal, enquanto as proteções unitárias dependem de temporizações sucessivas para coordenar.",
+      "correctAnswer": false,
+      "explanation": "Descreve as propriedades invertidas. As proteções unitárias (diferenciais) delimitam a zona entre seus TCs com seletividade inerente. As gradativas (sobrecorrente) não controlam o fim da zona, precisando de temporizações escalonadas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A habilidade de atuar nos curtos em que deve, parte da Confiabilidade Operacional, é tecnicamente chamada de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "dependabilidade"
+        }
+      ],
+      "explanation": "A Confiabilidade Operacional desdobra-se em Dependabilidade (atuar quando há falta que a solicita) e Segurança (permanecer inerte em ausência de faltas).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O requisito de velocidade procura conter o estresse térmico grave, ciente de que a devastação cresce proporcionalmente ao produto do tempo de exposição pelo quadrado da _____ violenta que flui na falta.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "corrente"
+        }
+      ],
+      "explanation": "O efeito joule letal aos isolamentos varia pela parcela quadrática da corrente multiplicada pelo tempo (I²t), justificando a velocidade da intervenção relé-disjuntor.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As zonas de atuação primárias, em seu limite delimitado pelos TCs na fronteira dos disjuntores, devem prever uma margem de _____ das bordas para que falhas nos extremos não fiquem em pontos cegos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "sobreposição"
+        }
+      ],
+      "explanation": "A sobreposição contínua nas imediações dos disjuntores assegura que ocorrências no gargalo físico dos contatos caiam na porção comum das duas zonas, em vez da omissão (zona morta).",
+      "difficulty": "hard"
+    }
+  ]
+}

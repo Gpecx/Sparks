@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Motores Elétricos",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de motores",
+  "moduleOrder": 4,
+  "trail": "Aplicações de Motores",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual método de partida reduz a corrente e o torque de partida para aproximadamente 1/3 dos valores da partida direta?",
+      "options": [
+        "Partida Direta.",
+        "Partida Estrela-Triângulo (Y-Δ).",
+        "Partida por Inversor de Frequência.",
+        "Partida por Soft-starter."
+      ],
+      "correctIndex": 1,
+      "explanation": "A partida Estrela-Triângulo reduz a tensão de fase na partida, resultando em corrente e torque reduzidos a um terço. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal vantagem do uso de Inversores de Frequência (VFD) em aplicações de bombas e ventiladores?",
+      "options": [
+        "Redução da isolação galvânica do estator.",
+        "Controle de velocidade e economia de energia em cargas variáveis.",
+        "Aumento da corrente de rotor bloqueado para 20 vezes a nominal.",
+        "Eliminação total da necessidade de proteção contra curto-circuito."
+      ],
+      "correctIndex": 1,
+      "explanation": "VFDs permitem ajustar a velocidade do motor à demanda da carga, otimizando o consumo de energia. (Fonte: Guia Proteção 2008 Schneider).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre se o tempo de aceleração da carga for superior ao tempo de rotor bloqueado (te) do motor?",
+      "options": [
+        "O motor aumenta sua eficiência térmica automaticamente.",
+        "A proteção térmica poderá atuar antes do motor atingir a velocidade de regime.",
+        "O escorregamento torna-se negativo para compensar o calor.",
+        "A tensão de linha sobe para acelerar a massa inercial."
+      ],
+      "correctIndex": 1,
+      "explanation": "Se a partida for mais lenta que o limite térmico do motor parado, a proteção (ANSI 49/51) desarma o motor. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual destes métodos de partida impõe o maior estresse mecânico e térmico inicial ao motor e à rede?",
+      "options": [
+        "Partida Direta.",
+        "Partida Estrela-Triângulo.",
+        "Partida com Soft-starter.",
+        "Partida com Inversor de Frequência."
+      ],
+      "correctIndex": 0,
+      "explanation": "A partida direta aplica tensão plena, gerando correntes de 6 a 10 vezes a nominal instantaneamente. (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual função de proteção é comumente aplicada em grandes motores de Alta Tensão (AT) e raramente em pequenos de Baixa Tensão (BT)?",
+      "options": [
+        "Proteção de sobrecorrente temporizada (51).",
+        "Proteção diferencial de motor (87M).",
+        "Proteção de subtensão (27).",
+        "Proteção de sobrecarga térmica (49)."
+      ],
+      "correctIndex": 1,
+      "explanation": "A função 87M protege contra curtos internos e é padrão em motores de grande porte pela sua rapidez e seletividade. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Cargas de alta inércia, como grandes ventiladores industriais, exigem qual cuidado nos ajustes de proteção?",
+      "options": [
+        "Desativação total da proteção contra curto-circuito durante a operação.",
+        "Ajuste de uma curva de partida que suporte tempos de aceleração longos.",
+        "Uso obrigatório de fusíveis ultra-rápidos classe aM.",
+        "Redução do fator de serviço para 0,5 durante a partida."
+      ],
+      "correctIndex": 1,
+      "explanation": "Cargas inerciais demoram a acelerar; a proteção deve ser ajustada para não desarmar durante esse período legítimo. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a diferença funcional básica entre uma Soft-starter e um Inversor de Frequência (VFD)?",
+      "options": [
+        "A Soft-starter altera a frequência e o VFD apenas a tensão.",
+        "A Soft-starter controla apenas a rampa de tensão, enquanto o VFD controla tensão e frequência.",
+        "O VFD não pode ser usado para partidas suaves, apenas para paradas.",
+        "A Soft-starter é usada exclusivamente em motores de corrente contínua."
+      ],
+      "correctIndex": 1,
+      "explanation": "Soft-starters agem na tensão para reduzir torque/corrente; VFDs controlam a velocidade variando a frequência. (Fonte: Guia Proteção 2008 Schneider).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para motores com partidas frequentes, qual função ANSI é essencial para evitar o acúmulo de calor excessivo?",
+      "options": [
+        "ANSI 27 (Subtensão).",
+        "ANSI 66 (Número de partidas por hora).",
+        "ANSI 59 (Sobretensão).",
+        "ANSI 32 (Direcional de Potência)."
+      ],
+      "correctIndex": 1,
+      "explanation": "A função 66 limita o número de tentativas de partida em um intervalo de tempo para permitir o resfriamento. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em ambientes de 'áreas classificadas' (risco de explosão), qual o impacto nos ajustes da proteção térmica do motor?",
+      "options": [
+        "Os ajustes devem ser mais permissivos para evitar paradas de processo.",
+        "A proteção deve garantir que a temperatura da carcaça não atinja a temperatura de ignição do gás.",
+        "Motores em áreas explosivas não utilizam proteção de sobrecarga.",
+        "Deve-se utilizar apenas proteção magnética instantânea ajustada em 1,0x In."
+      ],
+      "correctIndex": 1,
+      "explanation": "Em áreas classificadas, a proteção térmica deve ser rigorosa para evitar que o motor se torne uma fonte de ignição. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na proteção de motores com partida pesada, o uso de um relé de sobrecorrente com 'restrição de tensão' serve para:",
+      "options": [
+        "Aumentar o torque de partida injetando reativos na rede.",
+        "Permitir a partida com subtensão sem desarmar indevidamente a proteção.",
+        "Bloquear o motor caso a tensão de linha suba acima de 120%.",
+        "Substituir o uso de transformadores de corrente (TCs)."
+      ],
+      "correctIndex": 1,
+      "explanation": "A restrição de tensão ajusta a sensibilidade do relé 51 para distinguir partidas normais de curtos-circuitos. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A partida direta é o método que resulta na menor elevação de temperatura nos enrolamentos durante o processo de aceleração.",
+      "correctAnswer": false,
+      "explanation": "A partida direta gera a maior corrente inicial, provocando aquecimento rápido por efeito Joule (I²t). (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As Soft-starters permitem o controle preciso da velocidade do motor em regime permanente, substituindo os inversores de frequência.",
+      "correctAnswer": false,
+      "explanation": "Soft-starters controlam apenas a partida e a parada; o controle de velocidade em regime exige inversores (VFD). (Fonte: Guia Proteção 2008 Schneider).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A proteção diferencial (87M) é recomendada para motores de alta tensão para detectar faltas entre fases ou fase-terra precocemente.",
+      "correctAnswer": true,
+      "explanation": "A função 87M compara correntes de entrada e saída, sendo extremamente sensível a faltas internas. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Cargas como bombas centrífugas e ventiladores possuem um conjugado (torque) que varia proporcionalmente ao quadrado da velocidade.",
+      "correctAnswer": true,
+      "explanation": "Essas cargas são classificadas como de conjugado variável/quadrático, facilitando a partida com tensão reduzida. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O uso de VFDs pode causar correntes de eixo e danos aos rolamentos devido aos altos índices de dV/dt na saída do inversor.",
+      "correctAnswer": true,
+      "explanation": "As rápidas comutações dos IGBTs nos inversores geram tensões capacitivas que podem romper a isolação do filme de óleo dos rolamentos. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A função ANSI _____ é responsável por monitorar e limitar o número de partidas consecutivas permitidas para um motor.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "66"
+        }
+      ],
+      "explanation": "A proteção 66 evita o estresse térmico cumulativo decorrente de múltiplas tentativas de partida em curto intervalo. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em aplicações de motores para áreas classificadas, a proteção deve assegurar que a temperatura da carcaça não exceda a temperatura de _____ do ambiente.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ignição"
+        }
+      ],
+      "explanation": "A conformidade com a 'Classe de Temperatura' (T1-T6) é vital para evitar explosões em ambientes inflamáveis. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para proteger motores contra o travamento do rotor durante o funcionamento ou partida incompleta, utiliza-se a função ANSI _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "48"
+        }
+      ],
+      "explanation": "A função 48 detecta se o motor não acelerou dentro do tempo previsto, indicando rotor bloqueado ou sobrecarga mecânica excessiva. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "hard"
+    }
+  ]
+}

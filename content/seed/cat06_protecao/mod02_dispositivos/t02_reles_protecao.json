@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Dispositivos de Proteção",
+  "moduleSubtitle": "Relés, disparadores e fusíveis - conceitos e tipos",
+  "moduleOrder": 1,
+  "trail": "Relés de Proteção",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são as três categorias principais de relés quanto à tecnologia construtiva ao longo da evolução da proteção?",
+      "options": [
+        "Primários, secundários e terciários.",
+        "Eletromecânicos, estáticos e digitais (ou numéricos).",
+        "Diretos, indiretos e semi-diretos.",
+        "Magnéticos, térmicos e fotovoltaicos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A classificação por tecnologia divide os relés em três gerações: eletromecânicos, estáticos e digitais (microprocessados).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a norma ANSI, as funções 50 e 51 correspondem, respectivamente, a quais relés?",
+      "options": [
+        "Sobrecorrente instantâneo e Sobrecorrente temporizado.",
+        "Sobrecorrente temporizado e Sobrecorrente direcional.",
+        "Sobrecorrente direcional e Sobrecorrente com restrição de tensão.",
+        "Sobrecorrente de neutro e Sobrecorrente de fase."
+      ],
+      "correctIndex": 0,
+      "explanation": "A função 50 designa o sobrecorrente instantâneo (sem retardo intencional) e a 51 o sobrecorrente temporizado (curvas de tempo definido ou inverso).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a finalidade principal do relé auxiliar ANSI 86?",
+      "options": [
+        "Medir o fator de potência e disparar alarmes visuais.",
+        "Bloquear a operação (relé de bloqueio), desligando o circuito e mantendo os equipamentos inoperantes até rearme manual ou elétrico intencional.",
+        "Realizar o religamento automático sequencial de linhas após curtos transitórios.",
+        "Proteger barramentos contra afundamentos de tensão em regime permanente."
+      ],
+      "correctIndex": 1,
+      "explanation": "O relé 86 (lock-out) é auxiliar e atua para desligar e manter fora de serviço (bloqueado) um equipamento em condições anormais severas, exigindo rearme intencional.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza um contato do tipo NA no circuito de comando do disjuntor?",
+      "options": [
+        "Normalmente Ativado, com a bobina de trip sempre energizada em regime.",
+        "Neutro Aterrado, aplicado no circuito lógico residual de fuga à terra.",
+        "Normalmente Aberto, fechando-se apenas quando o relé atua, completando o circuito de disparo.",
+        "Nível de Alarme, usado na sinalização paralela ao SCADA."
+      ],
+      "correctIndex": 2,
+      "explanation": "NA = Normalmente Aberto: o contato permanece aberto com o relé inativo e fecha apenas quando a proteção detecta a falta e opera, transmitindo o comando ao disjuntor.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em qual situação a aplicação do relé direcional de sobrecorrente (ANSI 67) é imprescindível para a seletividade?",
+      "options": [
+        "Em redes radiais com fonte única sem retroalimentação de curtos.",
+        "Em redes em anel fechado ou sistemas interligados com alimentação bilateral, onde a proteção isola a falha baseando-se no sentido do fluxo de corrente.",
+        "Na proteção contra perda de campo em máquinas síncronas.",
+        "Na proteção de bancos de capacitores contra descargas atmosféricas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O relé 67 atua com a medição de sobrecorrente para evitar desligamentos indevidos quando a corrente inverte o sentido, sendo essencial em sistemas em anel ou com fontes múltiplas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal característica da curva 'extremamente inversa' em comparação com a 'normal inversa'?",
+      "options": [
+        "Apresenta tempos de disparo invariáveis independentemente do múltiplo de corrente.",
+        "Possui declividade muito mais acentuada (relação I²t), operando rapidamente para curtos severos e lentamente para baixas correntes, facilitando coordenação com elos fusíveis.",
+        "É desenhada para não atuar frente às componentes contínuas subtransitórias.",
+        "Inibe o disparo forçando o uso de relés de balanço de tensão após 3 segundos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A curva extremamente inversa é bastante inclinada (I²t=constante), ideal em alimentadores de distribuição para coordenar com a característica térmica de elos fusíveis de expulsão.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o papel da bobina de 'restrição' na proteção diferencial percentual (ANSI 87)?",
+      "options": [
+        "Desviar harmonicamente os surtos de ferroressonância para os resistores do delta aberto.",
+        "Calibrar dinamicamente os limites de trip térmico da imagem de temperatura (ANSI 49).",
+        "Aumentar a corrente diferencial exigida para operação à medida que as correntes passantes se elevam, evitando disparos por erro ou saturação de TCs em defeitos externos.",
+        "Cancelar a defasagem angular delta-estrela das buchas do transformador."
+      ],
+      "correctIndex": 2,
+      "explanation": "O circuito de restrição eleva proporcionalmente o limiar de disparo conforme a corrente passante aumenta, evitando atuações espúrias por saturação transitória dos TCs em curtos externos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o princípio fundamental de operação do relé de distância (ANSI 21)?",
+      "options": [
+        "Integram a temperatura e flechas térmicas do condutor via sensores OPGW.",
+        "Monitoram o quociente entre os fasores de tensão (V) e corrente (I) da linha, obtendo uma impedância (Z) proporcional ao trecho defeituoso.",
+        "Comparam por rádio a polaridade de retorno das ondas de sequência zero nos terminais.",
+        "Medem harmônicas refletidas nos reatores shunt e geram trips por ressonância."
+      ],
+      "correctIndex": 1,
+      "explanation": "Como a impedância por km da linha é constante, o relé 21 calcula Z = V/I na barra. A impedância aparente sob defeito permite aferir a distância até o curto, escalonando a seletividade em zonas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a aplicação operacional mais crítica dos relés de subfrequência (ANSI 81)?",
+      "options": [
+        "Atuar nos freios eletromecânicos do rotor de geradores de indução.",
+        "Comandar o corte automático de blocos de carga (Load Shedding) para impedir o colapso por deficiência de geração.",
+        "Regular a queda de tensão via comutadores de derivação (OLTC).",
+        "Bloquear a proteção diferencial sujeita a correntes magnetizantes de partida."
+      ],
+      "correctIndex": 1,
+      "explanation": "Na perda maciça de geração, a frequência cai; o relé 81 aciona os Esquemas Regionais de Alívio de Carga (ERAC), desligando consumidores progressivamente para restabelecer o equilíbrio carga-geração e evitar blackouts.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza um relé de proteção 'secundário' em oposição a um de atuação primária?",
+      "options": [
+        "Atua garantindo o retardo sequencial em zonas de retaguarda remota, independentemente dos TCs.",
+        "Consiste em equipamentos termomagnéticos de painéis até 1 kV sem temporização.",
+        "Temporiza falhas via componentes passivos ligados às molas dos disjuntores.",
+        "Não está ligado fisicamente aos circuitos de alta tensão; obtém os parâmetros do defeito via acoplamento galvânico rebaixado de TCs e TPs."
+      ],
+      "correctIndex": 3,
+      "explanation": "Relés primários ligam-se diretamente ao fluxo principal (quase extintos em AT). Relés secundários processam os sinais isolados e seguros dos redutores de medição (TCs em 5A, TPs em 115V).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Segundo a norma ANSI, os códigos 27 e 59 representam, respectivamente, o relé de subtensão e o relé de sobretensão.",
+      "correctAnswer": true,
+      "explanation": "Correto. O número 27 designa o relé de subtensão (decaimento sub-nominal) e o 59 o relé de sobretensão (superação do limite).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na curva de tempo definido (Definite Time), o tempo de disparo decresce hiperbolicamente sempre que a magnitude da sobrecorrente aumenta.",
+      "correctAnswer": false,
+      "explanation": "Falso. Isso descreve as curvas de tempo inverso. No tempo definido, uma vez superado o pick-up, o trip ocorre após um tempo fixo pré-ajustado, independentemente da severidade do curto.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O dispositivo ANSI 94 (Trip Relay) é um relé auxiliar de atuação rápida e contatos de elevado poder de ruptura, capaz de transmitir a ordem direta à bobina do disjuntor de força aliviando o circuito lógico principal.",
+      "correctAnswer": true,
+      "explanation": "Correto. O relé auxiliar 94 possui contatos de alta capacidade e atuação instantânea, isolando os circuitos lógicos delicados e repassando a corrente bruta para o destravamento do disjuntor.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A classificação dos relés pela grandeza de atuação limita-se a apenas duas vertentes: detectores de Tensão e detectores de Corrente.",
+      "correctAnswer": false,
+      "explanation": "Falso. A classificação por grandeza de atuação inclui também Potência (real/reativa), Frequência, Temperatura, Ângulo de fase, Impedância e Admitância, além de tensão e corrente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para imunizar os relés contra os afundamentos de tensão CA durante as faltas, o circuito de trip e as lógicas de proteção vitais são alimentados por uma fonte de corrente contínua (CC) sustentada por bancos de baterias flutuantes na subestação.",
+      "correctAnswer": true,
+      "explanation": "Correto. Como as faltas causam afundamentos perigosos na tensão CA, o trip e as lógicas de proteção contam com imunidade fornecida por circuitos CC sustentados por bancos de baterias na casa de comando.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos relés direcionais (ANSI 67), a corrente passante é comparada vetorialmente a uma referência angular constante (tensão de suprimento ou corrente residual), denominada grandeza de _____, que sustenta a confiabilidade da decisão direcional.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "polarização"
+        }
+      ],
+      "explanation": "A tensão (ou sinal) de polarização é a referência firme e inalterável contra a qual a corrente de falta é comparada para determinar o sentido do curto, viabilizando a direcionalidade.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No diagrama R-X, o relé de distância (ANSI 21) cuja característica circular passa pela origem dos eixos cartesianos — conferindo segurança inerente contra oscilações reversas — é universalmente conhecido como relé tipo _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "mho"
+        }
+      ],
+      "explanation": "O relé tipo MHO baseia-se na unidade de admitância; sua circunferência, que contém o trecho Z da linha e passa pelo vetor zero, garante imunidade na direcionalidade da proteção.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos relés eletromecânicos clássicos de temporização ANSI 51, dois fluxos AC defasados por anéis de sombra induziam torque em correntes de Foucault, deslocando uma peça metálica de indução denominada _____ que arrastava as palhetas até o trip.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "disco"
+        }
+      ],
+      "explanation": "Os relés de indução eletromecânicos usavam o 'disco de indução' (roda de alumínio) movido por correntes de Foucault para realizar a conversão tempo-corrente da curva inversa até o acionamento do trip.",
+      "difficulty": "hard"
+    }
+  ]
+}

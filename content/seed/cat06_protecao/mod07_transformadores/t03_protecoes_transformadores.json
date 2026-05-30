@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Transformadores",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de transformadores",
+  "moduleOrder": 6,
+  "trail": "Proteções de Transformadores",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal função do relé Buchholz (ANSI 63) em transformadores a óleo?",
+      "options": [
+        "Monitorar a temperatura externa da carcaça metálica.",
+        "Detectar acúmulo de gases ou fluxo de óleo advindos de falhas internas.",
+        "Controlar a tensão através da comutação automática de taps.",
+        "Medir a corrente de fuga do neutro aterrado."
+      ],
+      "correctIndex": 1,
+      "explanation": "O relé 63 atua detectando a emissão de gases ou deslocamento de óleo gerados por falhas elétricas internas. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual harmônica é utilizada para bloquear a proteção diferencial (87T) durante a energização?",
+      "options": [
+        "Segunda harmônica.",
+        "Terceira harmônica.",
+        "Quinta harmônica.",
+        "Sétima harmônica."
+      ],
+      "correctIndex": 0,
+      "explanation": "A corrente de magnetização (inrush) possui forte componente de segunda harmônica, usada para inibir atuações indevidas. (Fonte: Virtus_ProtTrafo).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a função de imagem térmica (ANSI 49RMS) protege no transformador?",
+      "options": [
+        "Surtos de tensão atmosféricos.",
+        "Sobrecargas de longa duração.",
+        "Curtos-circuitos instantâneos.",
+        "Perda de sincronismo do sistema."
+      ],
+      "correctIndex": 1,
+      "explanation": "A função 49RMS protege contra sobrecargas estimando o aquecimento através da corrente (I²t) e inércia térmica. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o código ANSI do relé (termostato) que monitora a temperatura do óleo dielétrico?",
+      "options": [
+        "ANSI 26.",
+        "ANSI 50.",
+        "ANSI 63.",
+        "ANSI 87T."
+      ],
+      "correctIndex": 0,
+      "explanation": "A função 26 atua devido à elevação de temperatura do líquido dielétrico (óleo) do transformador. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A função diferencial de terra restrita (64REF) atua para proteger qual tipo de circuito?",
+      "options": [
+        "Faltas fase-fase no enrolamento em delta.",
+        "Faltas fase-terra em enrolamentos conectados em estrela aterrada.",
+        "Sobretensões transitórias nos terminais primários.",
+        "Faltas por arco no comutador de taps."
+      ],
+      "correctIndex": 1,
+      "explanation": "A proteção 64REF detecta fugas à terra altamente sensíveis em enrolamentos conectados em estrela aterrada. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que a quinta harmônica é empregada na proteção diferencial de transformadores?",
+      "options": [
+        "Para compensar erros do comutador de taps sob carga.",
+        "Para detectar sobrefluxo no núcleo gerado por sobretensão, bloqueando atuações falsas.",
+        "Para acelerar o disparo durante faltas de alta impedância à terra.",
+        "Para corrigir o defasamento de 30 graus do transformador."
+      ],
+      "correctIndex": 1,
+      "explanation": "A saturação por sobretensão gera correntes de quinta harmônica, sendo usada para bloquear (restrição) atuações errôneas da diferencial. (Fonte: Virtus_ProtTrafo).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como é implementada a proteção de carcaça (massa-cuba) em transformadores?",
+      "options": [
+        "O tanque é isolado da terra e aterrado apenas através de um TC ligado a um relé 51G.",
+        "Usando proteção diferencial de alta impedância nas três fases do primário.",
+        "Conectando relés de pressão (63) nos isoladores de bucha.",
+        "Medindo a tensão de sequência negativa do gerador."
+      ],
+      "correctIndex": 0,
+      "explanation": "A proteção massa-cuba isola o tanque e o aterra por um TC com relé de sobrecorrente (51G) para detectar faltas internas à carcaça. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na falha de disjuntor (50BF) de transformadores, por que utiliza-se a lógica 'sem corrente' (contato auxiliar)?",
+      "options": [
+        "Para acelerar a temporização da função direcional.",
+        "Para atuar após disparo do Buchholz, onde a corrente de falta pode ser baixa ou nula.",
+        "Para bloquear o religador automático de forma instantânea.",
+        "Para detectar curtos-circuitos francos no barramento."
+      ],
+      "correctIndex": 1,
+      "explanation": "Faltas incipientes detectadas pelo Buchholz não geram sobrecorrente. A lógica 50BF deve usar o contato auxiliar do disjuntor para operar. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a função do relé instantâneo de fase (ANSI 50) no primário do transformador?",
+      "options": [
+        "Ajustar automaticamente a tensão de saída.",
+        "Detectar fugas residuais de alta impedância à terra.",
+        "Eliminar curtos-circuitos violentos no primário garantindo seletividade com o secundário.",
+        "Bloquear a corrente de inrush na partida."
+      ],
+      "correctIndex": 2,
+      "explanation": "A função 50 é regulada acima da máxima falta no secundário, atuando instantaneamente apenas para curtos no primário. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para bloquear a sequência zero de curtos externos na diferencial convencional, como se conectam os TCs de um enrolamento estrela-aterrada?",
+      "options": [
+        "Em estrela isolada.",
+        "Em ligação delta.",
+        "Em série dupla.",
+        "Em delta aberto resistivo."
+      ],
+      "correctIndex": 1,
+      "explanation": "A conexão em delta nos TCs atua como circuito aberto, impedindo que a sequência zero chegue ao relé diferencial para curtos externos. (Fonte: Virtus_ProtTrafo).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A proteção diferencial (87T) é ajustada para atuar rapidamente contra curtos-circuitos internos fase-fase.",
+      "correctAnswer": true,
+      "explanation": "A função diferencial compara entrada e saída, oferecendo proteção primária ultra-rápida contra defeitos internos entre fases. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A proteção diferencial restrita de terra (64REF) exige a instalação de um TC no aterramento do neutro do transformador.",
+      "correctAnswer": true,
+      "explanation": "A 64REF atua pela diferença entre a corrente no neutro (via TC do aterramento) e a corrente residual das fases. (Fonte: Virtus_ProtTrafo).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A função de sobrecarga térmica (49RMS) estima o aquecimento interno baseando-se estritamente na medição da tensão do equipamento.",
+      "correctAnswer": false,
+      "explanation": "A função 49RMS calcula a imagem térmica a partir da medição da corrente de carga (I²t) e da inércia térmica do transformador. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O relé Buchholz (63) é o dispositivo intrínseco principal de proteção interna para transformadores do tipo seco.",
+      "correctAnswer": false,
+      "explanation": "Falso. O relé Buchholz exige meio líquido (óleo) para funcionar, pois detecta fluxo e acúmulo de gases. Transformadores secos usam sondas de temperatura. (Fonte: Cabine Primária).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na proteção de falha de disjuntor (50BF), apenas o sensor de sobrecorrente é o suficiente para detectar disparos do relé Buchholz.",
+      "correctAnswer": false,
+      "explanation": "Disparos térmicos ou pelo Buchholz podem não ter corrente elevada. O esquema exige também a leitura do contato mecânico do disjuntor (lógica sem corrente). (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A função ANSI que supervisiona a temperatura do líquido dielétrico no tanque do transformador é o termostato código _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "26"
+        }
+      ],
+      "explanation": "O código ANSI 26 representa o termostato que age quando a temperatura do fluido de refrigeração sai dos limites. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para bloquear atuações indevidas por inrush, a proteção diferencial avalia a presença da _____ harmônica na corrente.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "segunda"
+        }
+      ],
+      "explanation": "A energização gera forte corrente transitória rica em segunda harmônica, que é extraída para restringir o relé. (Fonte: Virtus_ProtTrafo).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na proteção de carcaça-cuba, o tanque do transformador é isolado e aterrado exclusivamente através de um _____ ligado ao relé.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "TC"
+        }
+      ],
+      "explanation": "O tanque isolado é conectado à terra apenas por um transformador de corrente (TC), que alimenta o relé de fuga à terra 51G. (Fonte: Caminha / Guia 2008).",
+      "difficulty": "hard"
+    }
+  ]
+}

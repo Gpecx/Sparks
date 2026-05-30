@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Seletividade e Coordenação",
+  "moduleSubtitle": "Conceitos, TCC, critérios, topologia e fusíveis/religadores",
+  "moduleOrder": 3,
+  "trail": "Coordenação de Sobrecorrente em Radial e Anel",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Em sistemas elétricos puramente radiais, qual é a principal característica direcional do fluxo de corrente sob curto-circuito?",
+      "options": [
+        "Flui bidirecionalmente, convergindo intensamente para a falta.",
+        "Flui em um único sentido, da fonte geradora para o defeito.",
+        "Flui da carga para a fonte impulsionado pela inércia.",
+        "Alterna de sentido ciclicamente até a extinção do arco elétrico."
+      ],
+      "correctIndex": 1,
+      "explanation": "Em sistemas radiais, a energia trafega num só sentido; logo, a corrente de curto-circuito sempre flui do sentido da fonte para o local do defeito. (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em sistemas em anel, o defeito é alimentado por múltiplos lados. Qual relé é essencial para manter a seletividade nesse caso?",
+      "options": [
+        "Relé de subfrequência regional (81).",
+        "Relé direcional de sobrecorrente (67).",
+        "Relé de sobretensão residual (59N).",
+        "Relé de verificação de sincronismo (25)."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para manter seletividade em redes em anel, a proteção deve possuir características direcionais (67) para atuar com base no sentido do fluxo de falta. (Fontes: Apostila Proteção / Virtus CProt).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na coordenação de relés em um sistema radial em cascata, como deve ser o escalonamento dos tempos de atuação?",
+      "options": [
+        "Maior tempo no relé mais próximo à carga e menor na fonte.",
+        "Tempos idênticos em toda a cascata para garantir interrupção simultânea.",
+        "Menor tempo no relé mais próximo ao defeito, com retardo crescente até a fonte.",
+        "Ajuste fixo de tempo baseado exclusivamente na bitola térmica do cabo."
+      ],
+      "correctIndex": 2,
+      "explanation": "A coordenação cria uma 'escada de tempo' onde o relé mais próximo à falta atua de forma mais rápida (vanguarda), e o tempo cresce em direção à fonte. (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em uma rede de distribuição operada em malha aberta, onde a proteção de sobrecorrente é tipicamente alocada?",
+      "options": [
+        "Apenas nos enrolamentos terciários dos transformadores de carga.",
+        "No topo da malha (extremidades alimentadoras equipadas com disjuntores).",
+        "No centro exato do anel, usando chaves seccionadoras manuais.",
+        "Exclusivamente no condutor neutro da rede subterrânea."
+      ],
+      "correctIndex": 1,
+      "explanation": "Redes operadas em malha aberta têm a proteção assegurada nas extremidades da malha (topo da malha), que são equipadas com os disjuntores principais. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a principal vantagem operativa da proteção de um sistema elétrico fechado em anel em relação ao sistema radial?",
+      "options": [
+        "Utiliza esquemas de relés de sobrecorrente não direcionais mais baratos.",
+        "A proteção desconecta a linha defeituosa sem desenergizar as barras de carga.",
+        "Elimina a necessidade de utilizar disjuntores de potência e TC's.",
+        "Assegura que o sistema não sofra com faltas assimétricas do tipo fase-terra."
+      ],
+      "correctIndex": 1,
+      "explanation": "A grande vantagem do anel é que a proteção seletiva atua isolando somente a linha de transmissão em curto, mantendo o suprimento de energia para as cargas. (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que a presença de múltiplas fontes inviabiliza o uso exclusivo de relés de sobrecorrente não direcionais em uma rede malhada?",
+      "options": [
+        "Porque as harmônicas subtransitórias dos geradores bloqueiam a unidade de indução.",
+        "Pois fluxos reversos de faltas externas podem acionar os relés, desligando trechos sãos.",
+        "Porque a alta oscilação da frequência impede a atuação por indução magnética.",
+        "Devido ao excesso de tensão capacitiva residual retida nos barramentos de carga."
+      ],
+      "correctIndex": 1,
+      "explanation": "Com alimentação bilateral, faltas externas podem reverter o sentido das correntes e acionar relés de sobrecorrente não direcionais indevidamente, quebrando a seletividade. (Fonte: Apostila Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na proteção de linhas de transmissão paralelas supridas por um gerador, onde se torna essencial o uso de relés direcionais?",
+      "options": [
+        "Apenas no centro elétrico das linhas de transmissão, via seccionalizadores.",
+        "Nos disjuntores de saída localizados junto ao barramento do gerador.",
+        "Nos disjuntores da extremidade receptora, localizados próximos ao barramento de carga.",
+        "Não é necessário o uso de relé direcional em topologias com linhas paralelas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Numa falta em uma das linhas, a corrente a alimenta reversamente através da linha sã e do barramento receptor, exigindo relé direcional nesse lado da carga. (Fonte: KLS - Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas redes de distribuição em malha fechada, como se obtém a seletividade ao usar proteção de sobrecorrente combinada com lógica direcional?",
+      "options": [
+        "O disjuntor só atua se receber liberação direta via onda portadora Carrier da usina.",
+        "Qualquer relé que reconheça a falta a jusante emite comando de espera lógica para a montante.",
+        "A malha é mecanicamente aberta no centro antes da liberação de trip para os disjuntores.",
+        "A função direcional bloqueia-se para correntes simétricas, atuando só com o desbalanço 3V0."
+      ],
+      "correctIndex": 1,
+      "explanation": "Na seletividade lógica em malha fechada, a proteção mais próxima à falta envia uma 'espera lógica' (não trip) para travar os relés a montante, garantindo trip seletivo. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para garantir a seletividade direcional em redes em anel, o relé ANSI 67 necessita de qual grandeza analítica extra para operar?",
+      "options": [
+        "Corrente contínua injetada pela bateria auxiliar da subestação.",
+        "Tensão de polarização fasorial cruzada para determinar a referência direcional.",
+        "Admitância reativa do cabeamento mensurada em vazio.",
+        "Sinal em radiofrequência emitido pelo TC na saturação."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para definir inequivocamente a direção, o relé 67 exige polarização, isto é, uma tensão fixa de referência contra a qual o ângulo da corrente é verificado. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em anéis alimentados bilateralmente, obtém-se seletividade calibrando os relés de ambos os sentidos e impondo qual condição ao relé local?",
+      "options": [
+        "Ele deve atuar com retardos escalonados exponencialmente independentes da posição fasorial.",
+        "O relé só atua se a corrente vier no sentido oposto de seu par, olhando exclusivamente para a barra.",
+        "Ele deve olhar unicamente para o trecho protegido, bloqueando-se caso a corrente de falta venha do sentido reverso.",
+        "A direcionalidade deve ser inibida para faltas francas para acelerar o corte em tempo definido."
+      ],
+      "correctIndex": 2,
+      "explanation": "A seletividade em anel requer que cada relé 'olhe' somente para a linha protegida (para frente) e imponha um bloqueio se a corrente for fornecida pela direção contrária (reversa). (Fonte: Apostila Proteção).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em sistemas radiais alimentados unilateralmente, a coordenação cronométrica dita que o relé mais afastado atue num tempo inferior ao relé de retaguarda próximo à fonte.",
+      "correctAnswer": true,
+      "explanation": "A lógica do sistema radial dita tempos de retardo crescentes das cargas para a fonte, sendo o relé no final da linha o de menor temporização (vanguarda). (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O principal inconveniente da adoção de sistemas puramente radiais é sua excessiva continuidade, visto que defeitos não causam perda de nenhum consumidor.",
+      "correctAnswer": false,
+      "explanation": "Pelo contrário, o maior problema da rede puramente radial é a baixa continuidade: a atuação de uma proteção deixa todos os consumidores daquele trecho para jusante sem energia. (Fonte: Apostila Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em arranjos fechados em anel, o curto-circuito é suprido por todos os lados; logo, relés com características direcionais são obrigatórios para aferir o fluxo da falta.",
+      "correctAnswer": true,
+      "explanation": "Como a falta em anel atrai corrente de múltiplas direções, os relés exigem direcionalidade para discriminar curtos da linha protegida contra curtos externos na barra traseira. (Fonte: Apostila Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No esquema de LTs paralelas supridas por um só gerador, os disjuntores receptores independem de funções direcionais, operando exclusivamente por sobrecorrente de tempo definido.",
+      "correctAnswer": false,
+      "explanation": "Em linhas paralelas, a falta reverte o fluxo de corrente via barramento receptor na linha sã. Relés da extremidade receptora necessitam obrigatoriamente ser direcionais. (Fonte: KLS - Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas distribuições em malha fechada, a proteção diferencial de linha (87L) atua identificando perfeitamente falhas no trecho protegido sem depender de retardo cronométrico direcional.",
+      "correctAnswer": true,
+      "explanation": "A proteção diferencial (87L) é altamente seletiva e célere, sendo plenamente aplicável e imune às reversões de fluxo das malhas fechadas, sem precisar de cascata cronométrica. (Fonte: Guia Proteção 2008).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para reduzir desligamentos, projeta-se o sistema radial com _____, usando chaves para reenergizar seções por fontes alternativas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "recursos"
+        }
+      ],
+      "explanation": "O modelo 'radial com recursos' aplica chaveamentos que permitem isolar a anomalia e transferir a carga das áreas não afetadas para outras vias. (Fonte: Apostila Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na filosofia da coordenação em escada, o relé alocado na origem protege sua seção e garante a ação de _____ remota se a unidade frontal não isolar a falta na linha.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "retaguarda"
+        }
+      ],
+      "explanation": "Além da função principal de sua zona, o relé à montante vigia as áreas adjacentes na capacidade de proteção de 'retaguarda', deflagrando o desarme se ocorrer falha na operação frontal. (Fonte: Apostila Proteção).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para garantir a seletividade direcional (67) durante quedas de tensão na falta, os IEDs usam a tensão de _____ cruzada como referência fasorial.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "polarização"
+        }
+      ],
+      "explanation": "Os relés exigem uma tensão forte e fixa para orientar a direção (tensão de polarização). Em faltas extremas, utiliza-se a defasagem entre as fases sadias (polarização cruzada). (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "hard"
+    }
+  ]
+}

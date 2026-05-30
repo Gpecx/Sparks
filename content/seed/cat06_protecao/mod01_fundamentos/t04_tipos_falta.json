@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Fundamentos de Proteção",
+  "moduleSubtitle": "Evolução dos relés, princípios, ferramentas básicas, faltas e zonas",
+  "moduleOrder": 0,
+  "trail": "Tipos de Falta no Sistema Elétrico",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual tipo de curto-circuito é responsável pela esmagadora maioria das falhas em linhas de transmissão e distribuição (entre 80% e 93% dos casos)?",
+      "options": [
+        "Curto-circuito trifásico.",
+        "Curto-circuito bifásico franco.",
+        "Curto-circuito monofásico à terra.",
+        "Curto-circuito bifásico à terra."
+      ],
+      "correctIndex": 2,
+      "explanation": "O curto-circuito monofásico à terra (fase-terra) é o mais frequente, abrangendo cerca de 80% a 93% das ocorrências, frequentemente causado por descargas atmosféricas ou contato acidental.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as faltas são classificadas quanto à sua localização nos elementos do sistema elétrico?",
+      "options": [
+        "Transiente e Permanente.",
+        "Interno e Externo.",
+        "Simétrico e Assimétrico.",
+        "Sólido e por Arco Elétrico."
+      ],
+      "correctIndex": 1,
+      "explanation": "Faltas são classificadas como internas (dentro do equipamento, ex: entre espiras de um transformador) e externas (nas conexões elétricas, cabos ou barramentos).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual das opções agrupa predominantemente causas mecânicas para a ocorrência de curtos-circuitos?",
+      "options": [
+        "Sobretensões transitórias, degradação de isolante e oscilação de frequência.",
+        "Ventos fortes, quedas de árvores sobre a rede e interferência de aves ou animais.",
+        "Erros na sequência de manobra de chaves seccionadoras e vandalismo.",
+        "Descargas atmosféricas severas e contaminação salina."
+      ],
+      "correctIndex": 1,
+      "explanation": "Causas mecânicas de curtos envolvem contato físico dos condutores provocado por forças externas: ventos intensos, galhos e animais, distinguindo-se das falhas de origem elétrica ou humana.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como são denominados genericamente os curtos-circuitos do tipo fase-fase, fase-fase-terra e fase-terra?",
+      "options": [
+        "Faltas simétricas.",
+        "Faltas homopolares.",
+        "Faltas transitórias reversas.",
+        "Faltas assimétricas."
+      ],
+      "correctIndex": 3,
+      "explanation": "Faltas que afetam diferentemente as fases (fase-fase, fase-fase-terra, fase-terra) causam desequilíbrio e são classificadas como faltas assimétricas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são as principais consequências destrutivas diretas dos curtos-circuitos francos nos equipamentos?",
+      "options": [
+        "Forte esforço mecânico (forças eletrodinâmicas) e estresse térmico grave capaz de queimar isolamentos e fundir condutores.",
+        "Elevação generalizada do fator de potência e aumento das frequências nominais.",
+        "Desmagnetização total dos núcleos de transformadores.",
+        "Bloqueio imediato da produção de harmônicos, extinguindo perdas no cobre."
+      ],
+      "correctIndex": 0,
+      "explanation": "Correntes de curto-circuito geram fortes estresses mecânicos (esforços eletrodinâmicos que podem romper estruturas) e enormes solicitações térmicas (que derretem cabos e queimam o isolamento).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a distinção fundamental entre um curto-circuito metálico franco (bolted fault) e um curto-circuito por arco (arcing fault)?",
+      "options": [
+        "O curto metálico possui alta resistência não linear; o arco é puramente indutivo.",
+        "O curto metálico é de baixa impedância resultando na corrente máxima; o arco tem maior impedância mas concentra elevadíssima liberação de calor.",
+        "A falta por arco não afeta o isolamento secundário e se apaga instantaneamente.",
+        "O curto franco sempre queima por si só abrindo o circuito; o arco solda barramentos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Faltas sólidas (bolted) têm baixa impedância e máxima corrente. Faltas por arco, com impedância maior, geram gigantescas liberações de energia térmica que vaporizam o material condutor.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a particularidade do curto-circuito trifásico que justifica sua importância no dimensionamento do sistema?",
+      "options": [
+        "É o mais comum, representando 80% dos desligamentos.",
+        "Não causa queda de tensão generalizada, preservando a estabilidade das máquinas síncronas.",
+        "Por ser simétrico e sem terra, produz forte aumento da corrente de sequência zero.",
+        "Geralmente produz os valores mais elevados de corrente, determinando o poder de interrupção dos disjuntores."
+      ],
+      "correctIndex": 3,
+      "explanation": "Apesar de menos comum, o curto trifásico é simétrico e geralmente acarreta a corrente mais severa da rede, ditando a capacidade de ruptura dos disjuntores.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como é denominada a falta em que um condutor cai sobre superfície de alta resistividade (asfalto, concreto) e qual é seu desafio protetivo?",
+      "options": [
+        "Curto-circuito franco subtransitório; não gera corrente ativa.",
+        "Falta de alta impedância; gera correntes muito baixas que não sensibilizam relés convencionais.",
+        "Falta por arco reverso; induz inversão de potência ativa.",
+        "Curto-circuito bifásico simulado; força o SCADA a religar instantaneamente."
+      ],
+      "correctIndex": 1,
+      "explanation": "A falta de alta impedância limita severamente a corrente (a poucos amperes), impedindo o desarme por relés convencionais de sobrecorrente e causando alto risco à vida humana.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a proporção esperada da corrente de um curto bifásico (fase-fase sem terra) em relação ao curto trifásico no mesmo local?",
+      "options": [
+        "Aproximadamente 87% (raiz de três sobre dois) da corrente trifásica.",
+        "Idêntica, pois ambos não envolvem o retorno pelo solo.",
+        "150% superior ao curto trifásico.",
+        "Apenas 33,3% da corrente trifásica."
+      ],
+      "correctIndex": 0,
+      "explanation": "A corrente do defeito bifásico equivale à tensão de linha dividida pelo dobro da impedância, resultando em cerca de 87% da corrente trifásica (√3/2 ≈ 0,87).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que faltas assimétricas podem gerar correntes maiores que a falta simétrica diretamente nos terminais de geradores síncronos?",
+      "options": [
+        "O aterramento dos geradores amplifica a tensão de excitação dobrando a corrente.",
+        "A reatância transitória decai a zero apenas com assimetria de carga.",
+        "A impedância de sequência zero (e às vezes negativa) do gerador é inferior à sua impedância subtransitória de sequência positiva.",
+        "O regulador de velocidade reverte o fluxo de energia cinética nas falhas bifásicas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Como a impedância de sequência zero dos alternadores é 2 a 3 vezes menor que a subtransitória de sequência positiva, a corrente para falta fase-terra ou fase-fase próxima aos terminais pode superar a do curto trifásico.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A vasta maioria dos curtos-circuitos em linhas aéreas resulta em danos permanentes que exigem manutenção física antes da reenergização.",
+      "correctAnswer": false,
+      "explanation": "A maioria das faltas nas linhas aéreas (85% a 95%) possui natureza transitória ou fugitiva. Após o desligamento rápido, as linhas suportam religamento automático sem exigir reparo mecânico.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em transformadores a óleo, o arco de um curto interno provoca formação de gases que podem gerar sobrepressões, incendiando ou destruindo o tanque.",
+      "correctAnswer": true,
+      "explanation": "Falhas e curtos internos criam arcos com temperaturas elevadas que decompõem o óleo, emitindo gases que podem romper violentamente o invólucro do transformador.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No curto-circuito trifásico, o método de Fortescue descarta os circuitos de sequência zero e negativa.",
+      "correctAnswer": true,
+      "explanation": "O defeito trifásico simétrico resulta em componentes de sequência zero e negativa matematicamente nulos, resumindo os cálculos unicamente à malha do diagrama de sequência positiva.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Relés digitais modernos usam exclusivamente a detecção do desbalanço no fator de potência em 60Hz para detectar faltas de alta impedância.",
+      "correctAnswer": false,
+      "explanation": "Faltas de alta impedância geram correntes próximas de zero, invisíveis às proteções convencionais. Relés modernos usam algoritmos não convencionais, buscando assinaturas de alta frequência ou arcos no espectro harmônico.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas faltas bifásicas sem terra, a corrente de sequência zero é nula, e a análise conecta em paralelo apenas os diagramas de sequência positiva e negativa.",
+      "correctAnswer": true,
+      "explanation": "Nos curtos entre duas fases sem terra, não há escoamento pela terra (I0 = 0). A análise conecta em paralelo apenas os diagramas de sequência positiva e negativa.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O tipo de curto-circuito causador de 80% a 93% dos desligamentos nas linhas de transmissão é o curto-circuito _____ à terra.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "monofásico"
+        }
+      ],
+      "explanation": "O curto-circuito monofásico à terra (fase-terra) é a falta elétrica mais corriqueira nos sistemas aéreos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O curto-circuito por _____ apresenta expressiva volatilização de material e dissipação termomecânica devastadora na estrutura acometida, apesar de ter maior impedância que a falta metálica.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "arco"
+        }
+      ],
+      "explanation": "Faltas por arco (arcing faults) originam alta temperatura, gerando calor intenso e vapores, em oposição às faltas sólidas (bolted) de resistência desprezível.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O desequilíbrio persistente nas três fases ocasionado por faltas assimétricas induz fluxos associados à corrente de sequência _____, superaquecendo as estruturas amortecedoras e o ferro do rotor dos geradores síncronos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "negativa"
+        }
+      ],
+      "explanation": "A componente de sequência negativa decorre das faltas desbalanceadas, originando campo reversível que cruza os componentes do rotor em rotação dupla, resultando em aquecimento destrutivo (I2²t).",
+      "difficulty": "hard"
+    }
+  ]
+}

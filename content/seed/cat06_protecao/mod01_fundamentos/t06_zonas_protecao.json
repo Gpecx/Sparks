@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Fundamentos de Proteção",
+  "moduleSubtitle": "Evolução dos relés, princípios, ferramentas básicas, faltas e zonas",
+  "moduleOrder": 0,
+  "trail": "Zonas de Proteção",
+  "trailOrder": 5,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que define conceitualmente uma 'zona de proteção' em um esquema de releamento?",
+      "options": [
+        "Área geográfica onde é proibida a instalação de religadores e fusíveis.",
+        "Região limite definida, usualmente delimitada por disjuntores ao redor de cada elemento, atribuindo a responsabilidade de protegê-lo contra faltas.",
+        "Trecho de linha onde a proteção diferencial é obrigatória pelo elevado fluxo de potência.",
+        "Espaço físico dentro dos painéis que acomoda os relés e medidores."
+      ],
+      "correctIndex": 1,
+      "explanation": "A zona de proteção é uma linha-limite ao redor de cada elemento do sistema, estabelecida com vistas à seletividade e usualmente delimitada por disjuntores.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais componentes tipicamente recebem zonas de proteção individuais?",
+      "options": [
+        "Apenas geradores de grande porte e transformadores elevadores.",
+        "Barramentos de baixa tensão, quadros de medidores residenciais e para-raios.",
+        "Geradores, transformadores de potência, barramentos, linhas de transmissão/distribuição e grandes motores.",
+        "Exclusivamente linhas da Rede Básica e compensadores estáticos."
+      ],
+      "correctIndex": 2,
+      "explanation": "Uma zona separada é estabelecida para geradores, transformadores, barras, linhas de transmissão, circuitos de distribuição e motores.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que é imprescindível que zonas de proteção adjacentes tenham sobreposição (overlap)?",
+      "options": [
+        "Para eliminar 'pontos cegos', assegurando que qualquer curto esteja contido em pelo menos uma zona.",
+        "Para permitir que a retaguarda remota atue instantaneamente antes do relé primário.",
+        "Para elevar a tensão aplicada aos relés, aumentando a sensibilidade contra curtos de alta impedância.",
+        "Para impedir disparos errôneos durante faltas transitórias de descargas atmosféricas."
+      ],
+      "correctIndex": 0,
+      "explanation": "O overlap das zonas existe para evitar 'pontos cegos'. Sem ele, um defeito na divisa não seria visto por nenhuma zona, o que é inaceitável.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais equipamentos delimitam as fronteiras das zonas de proteção?",
+      "options": [
+        "Relés de verificação de sincronismo e bancos de reatores.",
+        "Transformadores de potencial capacitivos e para-raios.",
+        "Disjuntores de potência e transformadores de corrente (TCs).",
+        "Fusíveis de expulsão e chaves de aterramento rápido."
+      ],
+      "correctIndex": 2,
+      "explanation": "As zonas são delimitadas pela localização dos TCs (que medem os sinais fronteiriços) e pelos disjuntores de potência (que isolam os trechos).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a desvantagem imediata quando uma falta ocorre dentro da região de sobreposição de duas zonas?",
+      "options": [
+        "Nenhuma proteção primária atua, sendo extinta pela terceira zona.",
+        "Haverá disparo de todos os disjuntores das duas zonas, desligando mais componentes do que o necessário.",
+        "O relé de distância entra em bloqueio permanente por oscilação de potência.",
+        "Os TCs de ambas as zonas entram em saturação magnética simultânea."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para curtos na área de sobreposição, ambas as zonas enxergam o defeito como interno, abrindo mais disjuntores do que o mínimo, mas garantindo o isolamento.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O surgimento de uma 'Zona Morta' (Dead Zone) é resultado direto de qual falha no arranjo físico?",
+      "options": [
+        "Instalação de TCs em apenas um dos lados do disjuntor, não sobrepondo perfeitamente o disjuntor.",
+        "Ajuste das curvas tempo-corrente com temporizações de retaguarda superiores a três segundos.",
+        "Aplicação de proteção diferencial percentual com circuito residual em transformadores sem neutro aterrado.",
+        "Falha do canal primário de telecomunicação na proteção direcional por onda portadora."
+      ],
+      "correctIndex": 0,
+      "explanation": "Uma zona morta é criada quando os TCs estão situados apenas de um lado do disjuntor, deixando uma região (entre o TC e o disjuntor) não abarcada pela proteção principal.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o zoneamento interage com a atuação primária e de retaguarda quando ocorre falha no disjuntor local?",
+      "options": [
+        "A retaguarda atua imediatamente, inibindo o relé primário para preservar o disjuntor.",
+        "A retaguarda local é sempre instantânea, relegando à primária só oscilografia.",
+        "A proteção primária tenta isolar a falta na própria zona; se ela ou o disjuntor falharem, a retaguarda desliga os disjuntores das zonas adjacentes, isolando porção maior.",
+        "A retaguarda opera só nos circuitos A/D da zona morta, sem sinalizar zonas vizinhas."
+      ],
+      "correctIndex": 2,
+      "explanation": "A proteção primária atua primeiro; se falhar, a retaguarda é acionada com retardo e tripula disjuntores adjacentes, removendo fatia maior do sistema mas evitando dano sistêmico.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o arranjo construtivo recomendado para os TCs nos terminais de um disjuntor para garantir a sobreposição ideal?",
+      "options": [
+        "As duas buchas livres de TCs, todos centralizados nos barramentos.",
+        "Os TCs de zonas adjacentes posicionados de ambos os lados do disjuntor (lados opostos), permitindo as zonas cruzarem sobre ele.",
+        "Um único TC de janela englobando os três condutores à jusante do disjuntor.",
+        "TCs da primária só no lado da linha; os da retaguarda no cubículo de transferência."
+      ],
+      "correctIndex": 1,
+      "explanation": "O arranjo preferível usa TCs de ambos os lados do disjuntor, fazendo as zonas se cruzarem sobre ele e a sobreposição englobar fisicamente todo o aparelho interruptor.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O dimensionamento restrito de uma zona de proteção visa fundamentalmente garantir a:",
+      "options": [
+        "Padronização e calibração unificada de todos os relés num disparo instantâneo.",
+        "Seletividade, garantindo a desconexão rápida apenas dos componentes acometidos pelo defeito.",
+        "Eliminação dos esquemas de teleproteção, reduzindo despesas com fibras ópticas.",
+        "Estabilidade transitória dos rotores de máquinas de indução antes do sincronismo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O estabelecimento das zonas visa máxima seletividade: um defeito numa zona abre apenas os disjuntores da sua divisa, garantindo a menor interrupção possível para o resto do sistema.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em arranjos onde a sobreposição ocorre apenas em um dos lados do disjuntor, qual comportamento é requerido para uma falta entre o disjuntor e o TC situado após ele?",
+      "options": [
+        "A atuação deve ser bloqueada, confiando na extinção natural do arco.",
+        "O relé da zona que sobrepõe o disjuntor atua nos disjuntores da própria zona e também dispara disjuntores da zona adjacente para bloquear o fluxo inverso.",
+        "Um fusível seccionador funde e envia sinal ao SCADA desligando barramentos a jusante.",
+        "Desarme apenas do disjuntor local da zona cega; o residual é tripado por disjuntores de BT."
+      ],
+      "correctIndex": 1,
+      "explanation": "Quando o overlap é de um lado só, o relé da zona expandida detecta curtos além do disjuntor e deve enviar ordem para abrir também os disjuntores da zona vizinha, removendo a alimentação do outro lado.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O planejamento ideal prevê que as zonas terminem estritamente lado a lado, proibindo sobreposição para evitar atuação desnecessária de disjuntores.",
+      "correctAnswer": false,
+      "explanation": "Falso. A engenharia exige o inverso: as zonas adjacentes devem se sobrepor (overlap), preferencialmente em torno de um disjuntor, para impossibilitar pontos cegos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Uma proteção de retaguarda instalada em zona adjacente à do componente com defeito, que isola a falha tripando os disjuntores de sua própria zona caso o relé principal falhe, é classificada como retaguarda remota.",
+      "correctAnswer": true,
+      "explanation": "Correto. Quando a retaguarda é feita por relés numa subestação vizinha, protegendo a fronteira primária de longe, ela é denominada retaguarda remota.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O zoneamento e as fronteiras de proteção em alta tensão são estabelecidos exclusivamente pelo posicionamento dos Transformadores de Potencial (TPs).",
+      "correctAnswer": false,
+      "explanation": "Falso. As divisões das zonas são definidas fundamentalmente pela localização dos disjuntores associados aos Transformadores de Corrente (TCs), não pelos TPs.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A 'Zona Morta' descreve a pequena porção não protegida adequadamente resultante da alocação de TCs em apenas um dos lados do disjuntor.",
+      "correctAnswer": true,
+      "explanation": "Correto. Com TCs de um lado só, surge um trecho (entre disjuntor e TC) sem sobreposição de proteção, denominado zona morta.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Se o projeto sobrepõe as zonas englobando o disjuntor (TCs de ambos os lados), uma falta no interior do disjuntor levará à atuação simultânea das proteções primárias de ambas as zonas.",
+      "correctAnswer": true,
+      "explanation": "Correto. Com TCs abraçando o disjuntor pelas duas pontas, ele é elemento comum às duas zonas. Uma falha no disjuntor é detectada como interna por ambas, fazendo as duas operarem.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para assegurar que não haja regiões desprotegidas, a demarcação das áreas adjacentes deve estabelecer uma _____ (overlap) nas fronteiras, englobando os disjuntores para extinguir pontos cegos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "sobreposição"
+        }
+      ],
+      "explanation": "A sobreposição entre as zonas elimina os pontos cegos, de modo que um componente fronteiriço seja vigiado duplamente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Quando o arranjo disponibiliza TCs instalados apenas de um lado do disjuntor, gera-se uma falha construtiva na fronteira chamada de zona _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "morta"
+        }
+      ],
+      "explanation": "O TC alocado de um lado só resulta num perímetro imperfeitamente superposto, batizado de zona morta (dead zone).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A arquitetura de releamento que suprime defeitos como primeira linha de defesa, protegendo fielmente os limites de uma zona específica antes da retaguarda intervir, é conhecida como proteção _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "unitária"
+        }
+      ],
+      "explanation": "A proteção principal atua como sistema inerente para a própria zona, caracterizando-se como proteção unitária (diferencial), avaliando apenas faltas dentro de seu domínio.",
+      "difficulty": "hard"
+    }
+  ]
+}

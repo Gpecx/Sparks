@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Bancos de Capacitores",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de bancos de capacitores",
+  "moduleOrder": 5,
+  "trail": "Fundamentos de Bancos de Capacitores",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal finalidade da instalação de bancos de capacitores shunt (em derivação) na rede elétrica?",
+      "options": [
+        "Fornecer potência reativa para compensar a energia reativa absorvida pelas cargas, melhorando a qualidade da rede.",
+        "Melhorar o isolamento térmico das máquinas síncronas de base.",
+        "Fornecer estritamente potência ativa pura para compensar as perdas da transmissão.",
+        "Elevar o escorregamento dos motores e a frequência sistêmica da rede em horários de ponta."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os capacitores são utilizados para fornecer (injetar) potência reativa, compensando a que é absorvida pelas cargas e melhorando o perfil de tensão da rede elétrica. (Fonte: Guia Proteção 2008 / Virtus-Anorm.Sist.Potência).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os capacitores unitários (células) são internamente arranjados e combinados para atingir as grandezas de tensão e potência requeridas para o banco?",
+      "options": [
+        "São agrupados apenas em série para equalizar a resistência de fuga.",
+        "São agrupados apenas em paralelo para maximizar a corrente de curto-circuito.",
+        "São montados em série para suportar a tensão requerida e em paralelo para obter a potência desejada.",
+        "São conectados em malhas fechadas radiais com relés seccionalizadores em cada célula."
+      ],
+      "correctIndex": 2,
+      "explanation": "Um capacitor de potência é composto de capacitores unitários montados em grupos série (para suportabilidade da tensão) e paralelo (para obter a potência reativa necessária). (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre no fenômeno transitório de energização de capacitores comumente conhecido como manobra 'back-to-back'?",
+      "options": [
+        "A energização de um banco com outro vizinho já em operação, gerando intensas correntes inrush de alta frequência.",
+        "A descarga mútua entre dois geradores no momento exato em que a barra de transferência fecha.",
+        "A anulação total da potência reativa gerada devido a sobretensões sustentadas de sequência zero.",
+        "A ressonância paralela do ponto neutro do transformador causando a abertura automática de fusíveis base."
+      ],
+      "correctIndex": 0,
+      "explanation": "O chaveamento 'back-to-back' ocorre na energização de um banco onde outro banco vizinho já opera, produzindo correntes circulantes inrush de altíssima intensidade e frequência. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em capacitores construídos com o recurso de proteção interna, o que acontece logo após a ocorrência de um curto-circuito no dielétrico de uma das células?",
+      "options": [
+        "O disjuntor principal enxerga a falta remota e abre imediatamente todo o alimentador da subestação.",
+        "O fusível associado atua, eliminando exclusivamente o capacitor unitário em falha, e o resto do banco segue operando.",
+        "O gás gerado pelo arco cega o relé 87B, provocando uma sobrepressão que explode o banco inteiro.",
+        "A tensão de toda a rede compensada sofre uma queda para zero instantaneamente devido à carga resistiva."
+      ],
+      "correctIndex": 1,
+      "explanation": "Com proteção interna, a queima do respectivo fusível elimina (isola) o capacitor unitário em falha. O capacitor mestre permanece operando, sofrendo apenas a modificação de sua impedância final. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na configuração de bancos de capacitores ligados em arranjo de dupla estrela, a modificação indesejada de impedância por perda de células é supervisionada avaliando-se qual grandeza?",
+      "options": [
+        "A elevação da tensão fundamental da fase em defeito contra a terra pura.",
+        "O decréscimo drástico do fator de potência médio das barras associadas.",
+        "A circulação de uma corrente de desbalanço fluindo no laço entre os pontos neutros de ambas as estrelas.",
+        "A injeção de correntes capacitivas homopolares originadas diretamente no gerador de base."
+      ],
+      "correctIndex": 2,
+      "explanation": "A ligação estrela dupla apresenta altíssima sensibilidade a defeitos, pois o menor desbalanço das impedâncias entre as duas estrelas provoca imediata circulação de corrente na ligação inter-neutros, lida pelo relé 51. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para bancos conectados na configuração back-to-back, qual dispositivo é amplamente implementado em série para suprimir a severidade do transitório inicial de inrush?",
+      "options": [
+        "O acoplamento de chaves fusíveis tipo K retardadas na entrada do painel principal.",
+        "A inserção em série de indutâncias de amortecimento (reatores limitadores) com cada estágio operante.",
+        "O uso imperativo de relés numéricos do tipo diferencial de alta impedância (87B) bloqueados por harmônicas.",
+        "A interligação paralela de resistores passivos de aterramento diretamente aos polos do motor."
+      ],
+      "correctIndex": 1,
+      "explanation": "As sobrecorrentes oscilatórias de curta duração geradas na energização estagiada back-to-back são limitadas e amortecidas na amplitude pela instalação de reatores (indutâncias) em série nos terminais. (Fontes: Virtus-Anorm.Sist. Potência / Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O envelhecimento prematuro e a sobrecarga contínua em bancos de capacitores provocados pela operação de fornos a arco ou conversores estáticos estão diretamente associados à:",
+      "options": [
+        "Intensificação extrema do escorregamento das cargas motrizes.",
+        "Exposição à queda permanente e acentuada dos limites de tensão nominais na rede básica.",
+        "Penetração contínua e excessiva de correntes harmônicas derivadas dessas cargas não lineares.",
+        "Formação de potência ativa residual fluindo através do sistema isolado no aterramento."
+      ],
+      "correctIndex": 2,
+      "explanation": "Fornos a arco e inversores comportam-se como cargas não lineares, despejando correntes harmônicas perigosas na rede; tais harmônicas sobrecarregam os bancos capacitivos reduzindo suas capacidades e vidas úteis. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos momentos de chaveamento elétrico ou descarga massiva dos capacitores devido a curtos-circuitos no sistema primário, qual consequência indesejada surge no circuito dos TCs?",
+      "options": [
+        "Gera o trancamento galvânico do sentido de fluxo ativo injetado pela usina.",
+        "Surgem correntes de alta frequência que induzem sobretensões secundárias severas nos transformadores de corrente e relés.",
+        "As correntes harmônicas de sequência zero anulam estaticamente as leituras do diferencial de barramento.",
+        "O retardo mecânico da câmara a gás extingue passivamente o surto evitando o registro digital de oscilografia."
+      ],
+      "correctIndex": 1,
+      "explanation": "Descargas e comutações de bancos capacitivos disparam oscilações de alta frequência, as quais induzem altíssimas tensões transitórias sobre o secundário do TC e respectivos fios de proteção ligados. (Fonte: Ed48_janeiro_protecao).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na blindagem dos capacitores, a função ajustada para responder prontamente aos perigos inerentes da absorção continuada de sobrecargas harmônicas atende universalmente por qual dispositivo?",
+      "options": [
+        "A unidade padronizada pela ANSI como 49RMS ou a unidade ANSI 51 ponderada termicamente pelas harmônicas.",
+        "A proteção algorítmica temporizada ANSI 27R aliada a varistores de restrição de linha.",
+        "A unidade ANSI 87M sintonizada na captação exclusiva de defasagens nulas.",
+        "A proteção contra salto angular do vetor (78) acoplada por fibras de teleproteção POTT."
+      ],
+      "correctIndex": 0,
+      "explanation": "As sobrecargas longas produzidas por surtos harmônicos são fiscalizadas termicamente empregando a proteção de sobrecarga (49RMS) ou, sob sintonia de frequência, pela unidade sobrecorrente (51). (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Do ponto de vista dielétrico, por que a perda (pela fusão de elo interno) de uma célula de capacitor avariada requer desarme célere em bancos na conexão de dupla estrela com pontos flutuantes isolados?",
+      "options": [
+        "Porque o circuito fica aberto gerando inversão rotacional instantânea na barra alimentadora local.",
+        "Porque o aumento da impedância do ramo afetado propaga um desbalanço que pode sobrecarregar com elevada tensão os capacitores sadios coligados no mesmo grupo.",
+        "Pois os fusíveis internos em queima expelem chispas e gases que sensibilizam os detectores volumétricos (63) nos transformadores.",
+        "Pois as capacitâncias se transformam espontaneamente em reatores, forçando uma grave ressonância cruzada entre linhas paralelas."
+      ],
+      "correctIndex": 1,
+      "explanation": "A fusão do elo protetor desliga o capacitor e eleva a impedância daquele estágio particular. Isso provoca, fatalmente, uma escalada na tensão de serviço das outras unidades sadias em série, requerendo desarme ágil. (Fonte: Guia Proteção 2008).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Bancos de capacitores shunt absorvem o excedente de potência reativa das cargas, atenuando as sobretensões nos finais de linha radiais.",
+      "correctAnswer": false,
+      "explanation": "Essa premissa é fisicamente incorreta. Os bancos shunt injetam ou suprem a rede de potência reativa, elevando localmente a tensão para mitigar o déficit causado por cargas reativas. Quem suga o reativo é o reator paralelo. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As frequências ressonantes excitadas por surtos de manobra e energização de bancos capacitivos costumam ficar na faixa de 200 a 1000 Hz.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. As frequências de recuo elétrico decorrentes de abertura e fechamento das baterias capacitivas, diferente das perturbações em 60 Hz, situam-se classicamente em espectros entre 200 a 1000 Hz. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em instalações com cargas não lineares (conversores estáticos), capacitores podem compor filtros passivos para barrar correntes harmônicas.",
+      "correctAnswer": true,
+      "explanation": "Correto. Quando estrategicamente calculados, os conjuntos capacitivos reúnem-se a indutores para formar blocos sintonizados (filtros) que oferecem baixíssima reatância, sequestrando as correntes harmônicas poluidoras para si e depurando a rede. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Com o neutro do banco aterrado, a detecção de faltas à terra exige funções residuais 51G ou 51N.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. As prescrições técnicas exigem que bancos capacitivos com seus centros eletricamente referenciados (aterrados) disponham do monitoramento sistêmico ANSI 51N/51G, fiscalizando fugas lentas e correntes francas de retorno que corram às carcaças. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em bancos sem fusível interno, um curto dentro de uma unidade gera acúmulo de gás, exigindo desligamento pela proteção de sobrecorrente (51) de retaguarda.",
+      "correctAnswer": true,
+      "explanation": "Em bancos não dotados de fusíveis limitadores internos individuais para blindar cada caneca, o defeito em ativos provoca bolhas e explosiva pressão letal, transferindo aos relés principais (50/51) o papel mandatário e incontornável de retirar de urgência as linhas do capacitor estourado em menos de 0,1s. (Fonte: Guia Proteção 2008).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em bancos de alta tensão e alto kvar, o arranjo em _____ dupla usa o desbalanço entre os ramos para detectar células defeituosas via um TC central.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "estrela"
+        }
+      ],
+      "explanation": "A configuração conhecida como estrela dupla fornece uma solução requintada onde o banco se subdivide, criando laços de referência puramente nulos que só escoarão corrente transversal caso os fusíveis rompam alguma célula, provocando desequilíbrio e atuando a proteção. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A energização de um banco junto a outro já ligado na mesma barra é o chaveamento _____, que gera elevada corrente de inrush.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "back-to-back"
+        }
+      ],
+      "explanation": "As agressões transitórias oriundas do chaveamento em escalões sucessivos num único barramento - situação onde unidades ativas esvaziam-se violentamente carregando os paralelos adormecidos que acabaram de entrar - cunham o fenômeno Back-to-Back com correntes perigosas que atestam pela inserção mandante de reatores amortecedores no loop elétrico. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A unidade capacitiva com pequenos elos em série com os elementos internos, para isolar micro-curtos, é classificada como banco com _____ interno.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "fusível"
+        }
+      ],
+      "explanation": "Os bancos que contemplam a filosofia de montagem 'com proteção interna' encapsulam diminutos fios fusíveis acoplados a cada capacitor unitário das dezenas montados em paralelo; estourando esse microssensor em caso da falta pontual na pastilha capacitiva, salva a câmara toda de expansões de óleo ou rupturas globais do invólucro do capacitor-mãe. (Fonte: Guia Proteção 2008).",
+      "difficulty": "hard"
+    }
+  ]
+}

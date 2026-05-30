@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Seletividade e Coordenação",
+  "moduleSubtitle": "Conceitos, TCC, critérios, topologia e fusíveis/religadores",
+  "moduleOrder": 3,
+  "trail": "Conceitos de Seletividade e Coordenação",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a definição correta de seletividade em sistemas de proteção?",
+      "options": [
+        "Capacidade de isolar apenas o componente em falta, mantendo o restante do sistema energizado.",
+        "Atuação simultânea de todos os disjuntores da subestação para garantir a extinção do arco.",
+        "Atraso intencional de todos os relés para permitir que a falta se extinga naturalmente.",
+        "Uso exclusivo de fusíveis em todos os pontos da rede para simplificar a operação."
+      ],
+      "correctIndex": 0,
+      "explanation": "A seletividade visa desligar o menor trecho possível do sistema para isolar um defeito, preservando a continuidade do fornecimento. (Fonte: Caminha e Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza a proteção instalada a 'jusante' em relação a um ponto de falta?",
+      "options": [
+        "É a proteção localizada entre a fonte e o ponto da falta.",
+        "É a proteção localizada entre o ponto da falta e a carga.",
+        "É a proteção que atua como retaguarda remota de todo o sistema.",
+        "É o dispositivo que possui o maior tempo de retardo na coordenação."
+      ],
+      "correctIndex": 1,
+      "explanation": "No fluxo de potência, 'jusante' refere-se à direção da carga. A proteção a jusante está logicamente após o ponto de referência. (Fonte: Ed48_janeiro_protecao_seletividade_capI).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A seletividade cronométrica baseia-se em qual critério para garantir a atuação correta?",
+      "options": [
+        "Diferentes níveis de corrente de curto-circuito.",
+        "Escalonamento de tempos de atuação (atrasos intencionais) entre os dispositivos.",
+        "Uso de sinais de comunicação via fibra óptica entre os relés.",
+        "Comparação direta entre as correntes de entrada e saída de uma barra."
+      ],
+      "correctIndex": 1,
+      "explanation": "A seletividade cronométrica consiste em atribuir diferentes tempos de atuação aos dispositivos em série, sendo o mais rápido o mais próximo da carga. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o principal objetivo da coordenação de proteção?",
+      "options": [
+        "Garantir que o disjuntor de maior capacidade sempre abra primeiro.",
+        "Ajustar os dispositivos para que operem em uma sequência ordenada e seletiva.",
+        "Impedir que qualquer corrente de sobrecarga flua pelos transformadores.",
+        "Reduzir o custo de manutenção dos relés eletromecânicos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A coordenação é o processo de selecionar ajustes de tempo e corrente para que os dispositivos operem na sequência correta durante uma falta. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O termo 'montante' refere-se a qual posição em um sistema elétrico?",
+      "options": [
+        "Em direção à carga ou final do circuito.",
+        "Em direção à fonte de alimentação ou início do circuito.",
+        "Exclusivamente aos dispositivos instalados no neutro do transformador.",
+        "Aos equipamentos de medição instalados no centro da linha."
+      ],
+      "correctIndex": 1,
+      "explanation": "Montante indica a direção oposta ao fluxo de carga, ou seja, em direção à fonte. (Fonte: Ed48_janeiro_protecao_seletividade_capI).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que define a 'Seletividade Total' entre dois dispositivos em série?",
+      "options": [
+        "A seletividade é garantida apenas para correntes de sobrecarga.",
+        "Os dispositivos operam ao mesmo tempo para qualquer falta no sistema.",
+        "A seletividade é mantida para qualquer valor de corrente até o máximo curto-circuito possível.",
+        "O dispositivo de montante é sempre mais rápido que o de jusante."
+      ],
+      "correctIndex": 2,
+      "explanation": "Na seletividade total, o dispositivo a jusante isola a falta sem que o de montante atue, para qualquer nível de curto-circuito. (Fonte: Ed49_fevereiro_protecao_seletividade_capII).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A seletividade amperimétrica é geralmente aplicada em quais condições?",
+      "options": [
+        "Quando há uma impedância significativa entre os dispositivos de proteção.",
+        "Em circuitos onde a corrente de curto-circuito é constante em todos os pontos.",
+        "Apenas em sistemas de extra-alta tensão com religamento unipolar.",
+        "Quando os dispositivos possuem o mesmo ajuste de tempo e corrente."
+      ],
+      "correctIndex": 0,
+      "explanation": "A seletividade amperimétrica exige que o nível de curto-circuito diminua significativamente à medida que se afasta da fonte. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que compõe o Intervalo de Coordenação (Degrau de Tempo) entre dois relés?",
+      "options": [
+        "Apenas o tempo de fechamento do disjuntor de reserva.",
+        "Tempo de abertura do disjuntor, erros de relé/TC e margem de segurança.",
+        "Somente o tempo de pré-aquecimento dos elos fusíveis tipo K.",
+        "A soma das correntes nominais de todos os transformadores a jusante."
+      ],
+      "correctIndex": 1,
+      "explanation": "O degrau de tempo deve ser suficiente para o disjuntor de jusante abrir e para cobrir erros de medição e margens de segurança. (Fonte: Ed50_marco_protecao_seletividade_capIII).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a vantagem da seletividade lógica em relação à cronométrica?",
+      "options": [
+        "Permite tempos de eliminação de falta reduzidos em todos os níveis da rede.",
+        "Elimina a necessidade de transformadores de corrente em subestações.",
+        "Dispensa o uso de disjuntores, utilizando apenas chaves seccionadoras.",
+        "Garante que o disjuntor de montante atue sempre antes do disjuntor de jusante."
+      ],
+      "correctIndex": 0,
+      "explanation": "A seletividade lógica usa comunicação entre relés para isolar a falta instantaneamente, sem os atrasos acumulados da cronométrica. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em uma seletividade parcial, o que ocorre se a corrente de falta ultrapassar o 'limite de seletividade'?",
+      "options": [
+        "O dispositivo de jusante para de funcionar permanentemente.",
+        "Apenas o dispositivo de montante atuará, deixando a carga energizada.",
+        "Ambos os dispositivos (montante e jusante) podem atuar simultaneamente.",
+        "A corrente de falta será automaticamente limitada por reatores shunt."
+      ],
+      "correctIndex": 2,
+      "explanation": "Acima da corrente limite de seletividade, as curvas dos dispositivos podem se cruzar ou sobrepor, resultando na atuação indesejada de ambos. (Fonte: Ed49_fevereiro_protecao_seletividade_capII).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A seletividade de proteção é essencial para aumentar a confiabilidade e reduzir a área afetada por uma interrupção de energia.",
+      "correctAnswer": true,
+      "explanation": "Ao isolar apenas o trecho faltoso, a seletividade minimiza o número de consumidores desligados. (Fonte: Caminha e Virtus_CProtBL2Cd1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na seletividade cronométrica, o relé mais próximo da carga deve ter o maior tempo de retardo para permitir que a fonte se estabilize.",
+      "correctAnswer": false,
+      "explanation": "O relé mais próximo da carga deve ser o mais rápido; os tempos aumentam em direção à fonte. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A seletividade lógica requer que os relés possuam canais de comunicação entre si para trocar sinais de bloqueio ou permissão.",
+      "correctAnswer": true,
+      "explanation": "Diferente da cronométrica, a lógica depende de fiação ou barramento de comunicação para coordenar os disparos. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um sistema com seletividade parcial é perfeitamente aceitável se as correntes de falta prováveis estiverem abaixo do limite de seletividade ajustado.",
+      "correctAnswer": true,
+      "explanation": "Se os curtos-circuitos reais não atingirem a zona de atuação simultânea, a seletividade parcial cumpre seu papel prático. (Fonte: Ed49_fevereiro_protecao_seletividade_capII).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O degrau de coordenação de tempo (CTI) entre relés digitais modernos costuma ser maior que o utilizado para relés eletromecânicos antigos.",
+      "correctAnswer": false,
+      "explanation": "Relés digitais são mais precisos e rápidos, permitindo intervalos de coordenação menores (ex: 0,2s vs 0,4s). (Fonte: Ed50_marco_protecao_seletividade_capIII).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O tempo mínimo necessário para garantir que o dispositivo de jusante opere antes do de montante é chamado de _____ de coordenação.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "intervalo"
+        }
+      ],
+      "explanation": "Também chamado de degrau de tempo, o intervalo de coordenação evita a atuação intempestiva do dispositivo de retaguarda. (Fonte: Ed50_marco_protecao_seletividade_capIII).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Quando a seletividade entre dois dispositivos só é garantida até um certo valor de corrente de curto-circuito, ela é classificada como _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "parcial"
+        }
+      ],
+      "explanation": "A seletividade parcial é comum em disjuntores de baixa tensão onde as curvas de atuação magnética se sobrepõem. (Fonte: Ed49_fevereiro_protecao_seletividade_capII).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A seletividade que utiliza o sentido do fluxo da corrente para diferenciar faltas internas de externas é chamada de seletividade _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "direcional"
+        }
+      ],
+      "explanation": "Relés direcionais (ANSI 67) são fundamentais para garantir seletividade em sistemas com múltiplas fontes ou em anel. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "hard"
+    }
+  ]
+}

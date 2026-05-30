@@ -1,0 +1,213 @@
+{
+  "category": "Comissionamento SPCS",
+  "categorySubtitle": "Metodologia, ensaio de relés e comissionamento IEC 61850",
+  "categoryOrder": 9,
+  "module": "Comissionamento IEC 61850",
+  "moduleSubtitle": "Validação SCL/IID, testes GOOSE em campo e FAT de sistemas",
+  "moduleOrder": 2,
+  "trail": "Aplicações em Subestação Digital",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal vantagem da comunicação por fibra óptica em novas subestações com processamento distribuído?",
+      "options": [
+        "Elimina a necessidade de transformadores de potência.",
+        "Reduz substancialmente os cabos de comando e controle de cobre.",
+        "Aumenta a corrente de curto-circuito suportável.",
+        "Dispensa o uso de disjuntores de alta tensão."
+      ],
+      "correctIndex": 1,
+      "explanation": "O uso de fibras ópticas reduz os cabos de controle de cobre, principalmente em arquiteturas distribuídas. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os IEDs facilitam a implantação da seletividade lógica na subestação?",
+      "options": [
+        "Utilizando chaves faca mecânicas.",
+        "Aumentando a bitola dos condutores de cobre.",
+        "Realizando a lógica internamente com pouca fiação externa entre relés.",
+        "Transferindo o processamento para a concessionária."
+      ],
+      "correctIndex": 2,
+      "explanation": "A seletividade lógica é feita dentro do relé, demandando pouca fiação entre os equipamentos. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é uma das desvantagens da utilização de IEDs apontada pelas fontes?",
+      "options": [
+        "A detenção da programação do software por alguns fabricantes.",
+        "A incapacidade de medir correntes de fase.",
+        "A ausência de normas internacionais padronizadoras.",
+        "A exclusividade de operação em corrente contínua pura."
+      ],
+      "correctIndex": 0,
+      "explanation": "Uma das desvantagens é a detenção (exclusividade) do software de programação por certos fabricantes. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como é feita a conexão entre os painéis de pátio e a Unidade Central na proteção de barras distribuída?",
+      "options": [
+        "Através de cabos coaxiais de 50 ohms.",
+        "Através de fibra óptica.",
+        "Por meio de ondas portadoras na linha de transmissão.",
+        "Utilizando condutores de alumínio nu."
+      ],
+      "correctIndex": 1,
+      "explanation": "A conexão é feita por fibra óptica, eliminando efeitos de interferência eletromagnética. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que os IEDs projetados para os padrões da norma IEC 61850 englobam?",
+      "options": [
+        "Apenas a medição de faturamento de energia.",
+        "Funções mecânicas de extinção de arco elétrico.",
+        "Funções de medição, comando/controle, monitoramento e proteção.",
+        "Exclusivamente a regulação térmica dos transformadores."
+      ],
+      "correctIndex": 2,
+      "explanation": "IEDs são dispositivos microprocessados que agrupam automação, proteção, medição e controle. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a topologia do barramento é atualizada na proteção digital distribuída?",
+      "options": [
+        "Pela variação térmica do óleo dos disjuntores.",
+        "Pelas Unidades de Bay que adquirem e enviam os estados das seccionadoras e disjuntores.",
+        "Por meio da medição analógica de relés eletromecânicos.",
+        "Através do relé de subfrequência regional."
+      ],
+      "correctIndex": 1,
+      "explanation": "As Unidades de Bay adquirem os estados dos dispositivos locais e comunicam à Unidade Central digitalmente. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No teste de IEDs usando mala de injeção, qual parâmetro de filtro é ajustado para as entradas GOOSE?",
+      "options": [
+        "Nível de tensão contínua.",
+        "Tempo de debounce.",
+        "Fator de compensação residual.",
+        "Impedância de sequência zero."
+      ],
+      "correctIndex": 1,
+      "explanation": "Nos softwares de ensaio, os filtros para entradas GOOSE exigem a configuração do tempo de debounce (ex: 3,00 ms). (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre com as lógicas de controle eletromecânicas com a introdução da subestação digital?",
+      "options": [
+        "São substituídas por chaves pneumáticas.",
+        "São realizadas digitalmente, diminuindo significativamente a quantidade de cabos de controle.",
+        "Exigem o dobro de condutores de cobre por segurança.",
+        "Tornam-se isoladas a gás SF6."
+      ],
+      "correctIndex": 1,
+      "explanation": "Lógicas antes feitas por relés eletromecânicos são processadas digitalmente, reduzindo cablagens. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a norma IEC 61850, qual nó lógico representa a função ANSI 21 (Proteção de Distância)?",
+      "options": [
+        "PTOC",
+        "PDIS",
+        "PTOV",
+        "PTR"
+      ],
+      "correctIndex": 1,
+      "explanation": "Na modelagem IEC 61850, a função de distância (ANSI 21) é mapeada para o nó lógico PDIS. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Apesar de reduzir a fiação entre painéis, qual é a desvantagem física gerada pela solução de múltiplos IEDs?",
+      "options": [
+        "A alta concentração de fiação nos cubículos específicos onde os IEDs estão instalados.",
+        "O aumento do tamanho das baterias estacionárias.",
+        "O aquecimento excessivo dos contatos de disjuntores.",
+        "A necessidade de resfriamento a água dos painéis."
+      ],
+      "correctIndex": 0,
+      "explanation": "A centralização das funções em poucos IEDs causa uma elevada concentração de fiação nos seus respectivos cubículos. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os IEDs projetados nos padrões IEC 61850 permitem elevada quantidade de entradas analógicas e I/O digitais.",
+      "correctAnswer": true,
+      "explanation": "Os IEDs modernos permitem receber diversas entradas analógicas de medição e grande número de I/O digitais para automação. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A implantação da seletividade lógica com IEDs exige uma complexa e extensa fiação externa entre os painéis.",
+      "correctAnswer": false,
+      "explanation": "A seletividade lógica é facilitada pelos IEDs, demandando pouca fiação entre relés, pois a lógica ocorre via software. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na proteção de barras digital distribuída, a lógica de desligamento é feita inteiramente sem a participação da Unidade Central.",
+      "correctAnswer": false,
+      "explanation": "A lógica de desligamento seletivo ocorre em conjunto com a Unidade Central, que recebe os dados de todos os bays. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A comunicação óptica e o processamento digital distribuído em novas subestações reduzem a interferência eletromagnética.",
+      "correctAnswer": true,
+      "explanation": "O uso de fibra óptica elimina os efeitos da interferência eletromagnética (EMI) inerente às fiações metálicas. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O advento dos IEDs eliminou por completo a dificuldade de programação, pois todos os softwares são abertos e universais.",
+      "correctAnswer": false,
+      "explanation": "As fontes citam como desvantagem o maior grau de dificuldade de programação e a detenção do software por fabricantes. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos relés digitais e malas de teste, configura-se o tempo de _____ para filtrar e processar as entradas das mensagens GOOSE.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "debounce"
+        }
+      ],
+      "explanation": "O tempo de debounce é parametrizado nos filtros de entradas GOOSE e binárias para validar o status do sinal digital. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Apesar da redução global de cabos, o uso de IEDs gera uma desvantagem devido à _____ de fiação dentro dos próprios cubículos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "concentração"
+        }
+      ],
+      "explanation": "A alta densidade de funções nos IEDs obriga que muitos cabos sejam concentrados no mesmo cubículo. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O uso de fibras ópticas na comunicação distribuída (process bus) elimina os efeitos nocivos da interferência _____ nas conexões.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "eletromagnética"
+        }
+      ],
+      "explanation": "As fibras ópticas são imunes aos campos magnéticos e ruídos (EMI) comuns nos pátios de subestações de alta tensão. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard"
+    }
+  ]
+}

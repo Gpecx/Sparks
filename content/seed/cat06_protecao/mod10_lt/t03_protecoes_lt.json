@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Linhas de Transmissão",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de linhas de transmissão",
+  "moduleOrder": 9,
+  "trail": "Proteções de LT (Distância, Diferencial, Auto-religamento)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o princípio operacional da proteção diferencial de linha (87L)?",
+      "options": [
+        "Compara a tensão e a frequência nos barramentos.",
+        "Mede a impedância até o curto-circuito.",
+        "Compara as correntes nos dois terminais da linha.",
+        "Detecta fluxo reverso de potência."
+      ],
+      "correctIndex": 2,
+      "explanation": "A função 87L compara as correntes de entrada e saída nos extremos da linha via telecomunicação. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o alcance típico da Primeira Zona (Z1) do relé de distância?",
+      "options": [
+        "120% da impedância da linha.",
+        "80% da impedância da linha.",
+        "100% da linha mais 50% da adjacente.",
+        "50% do comprimento da linha."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Z1 cobre cerca de 80% da linha para garantir seletividade e não atuar em faltas da barra remota. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual função atua junto com o religamento automático (79) tripolar?",
+      "options": [
+        "Direcional de potência (32).",
+        "Falha de disjuntor (50BF).",
+        "Verificação de sincronismo (25).",
+        "Sobrecorrente de neutro (51N)."
+      ],
+      "correctIndex": 2,
+      "explanation": "A função 25 verifica tensão, ângulo e frequência antes do fechamento tripolar automático. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a proteção direcional de sobrecorrente (67) exige para operar?",
+      "options": [
+        "Corrente acima do ajuste em um sentido específico.",
+        "Frequência da rede abaixo do limite nominal.",
+        "Subtensão simétrica nas três fases.",
+        "Abertura de uma chave seccionadora."
+      ],
+      "correctIndex": 0,
+      "explanation": "A função 67 atua apenas com sobrecorrente fluindo no sentido definido pela grandeza de polarização. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a função 68 detecta oscilações de potência?",
+      "options": [
+        "Monitorando o aquecimento térmico dos cabos.",
+        "Medindo o tempo de travessia do vetor impedância entre duas zonas.",
+        "Calculando a corrente residual de sequência zero.",
+        "Registrando perdas de sinal na fibra óptica."
+      ],
+      "correctIndex": 1,
+      "explanation": "O relé mede o tempo que a impedância leva para cruzar duas zonas. Tempos longos indicam oscilação, não curto. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a consequência do efeito infeed na medição do relé de distância?",
+      "options": [
+        "Medição de impedância menor (sobrealcance).",
+        "Anulação da componente resistiva.",
+        "Medição de impedância maior (subalcance).",
+        "Inversão de polaridade da corrente zero."
+      ],
+      "correctIndex": 2,
+      "explanation": "A injeção remota de corrente eleva a tensão na falta. O relé mede impedância maior e reduz seu alcance real. (Fonte: Virtus-Seminario Prot.LT R2).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a lógica de trip no esquema de teleproteção POTT?",
+      "options": [
+        "Exige partida na zona sobrealcançada e recepção do sinal remoto.",
+        "A zona sobrealcançada atua de forma autônoma sem sinal remoto.",
+        "O sinal recebido bloqueia a atuação instantânea da zona 1.",
+        "O sinal de trip atua no disjuntor ignorando a supervisão local."
+      ],
+      "correctIndex": 0,
+      "explanation": "No esquema permissivo com sobrealcance (POTT), o trip depende da detecção local e da permissão da outra extremidade. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que a característica quadrilateral é superior à mho para certas faltas?",
+      "options": [
+        "Dispensa os TPs capacitivos na linha.",
+        "Oferece ajuste resistivo maior para curtos com resistência de arco.",
+        "Anula o acoplamento mútuo de sequência zero.",
+        "Evita atuações por inrush de transformadores."
+      ],
+      "correctIndex": 1,
+      "explanation": "A característica quadrilateral possui limites retos, permitindo maior alcance no eixo R para acomodar arco e pé de torre. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o religamento automático monopolar exige da proteção?",
+      "options": [
+        "Uso de relés puramente estáticos.",
+        "Identificação correta da fase em curto-circuito.",
+        "Bloqueio da função de distância.",
+        "Verificação prévia de sincronismo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O esquema monopolar obriga o relé a selecionar com exatidão a fase faltosa para abrir apenas um polo. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a principal diferença da transferência direta (DUTT) para as permissivas (PUTT/POTT)?",
+      "options": [
+        "O DUTT opera sem canal de telecomunicação.",
+        "No DUTT o sinal recebido desliga o disjuntor sem supervisão direcional local.",
+        "O DUTT usa apenas fio-piloto.",
+        "Esquemas permissivos operam apenas com subimpedância reversa."
+      ],
+      "correctIndex": 1,
+      "explanation": "No DUTT, o sinal remoto abre o disjuntor diretamente. Nos permissivos, exige-se confirmação do relé direcional local. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A Segunda Zona (Z2) da proteção de distância atua sem temporização para faltas na barra remota.",
+      "correctAnswer": false,
+      "explanation": "A Zona 2 possui retardo de tempo (ex: 0,5s) para coordenar com as proteções da subestação remota. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A proteção diferencial de linha (87L) exige telecomunicação veloz e confiável entre os terminais.",
+      "correctAnswer": true,
+      "explanation": "A 87L compara os fasores das duas extremidades continuamente, exigindo um canal robusto, como OPGW. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O relé direcional de sobrecorrente (67) precisa de uma grandeza de polarização.",
+      "correctAnswer": true,
+      "explanation": "Para definir o sentido do fluxo, a função utiliza uma tensão ou corrente de referência (polarização). (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No esquema de teleproteção por bloqueio (DCB), a falha do canal inibe o trip local de curtos internos.",
+      "correctAnswer": false,
+      "explanation": "No esquema de bloqueio, o trip ocorre na ausência de sinal. Se o canal falhar, o relé atua (até indevidamente para faltas externas). (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A Zona Reversa (Z4) da proteção de distância atua instantaneamente em curtos no barramento local.",
+      "correctAnswer": false,
+      "explanation": "A Zona Reversa atua sempre com temporização elevada para servir apenas de retaguarda, preservando a seletividade da barra. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O esquema POTT utiliza o ajuste de zona com _____ para enviar o sinal de permissão.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "sobrealcance"
+        }
+      ],
+      "explanation": "O POTT ajusta a zona além da subestação remota para garantir a cobertura completa da linha assistida. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A característica mho apresenta problemas de subalcance perante a alta resistência de _____ em faltas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "arco"
+        }
+      ],
+      "explanation": "O arco elétrico altera a parte resistiva da impedância medida, deslocando-a para fora da área de operação circular do relé. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A função 79 define o tempo _____ como o intervalo entre a abertura do disjuntor e o comando de religamento.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "morto"
+        }
+      ],
+      "explanation": "O tempo morto permite a extinção do arco elétrico e a desionização do ar antes de religar a linha. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    }
+  ]
+}

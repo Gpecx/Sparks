@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Seletividade e Coordenação",
+  "moduleSubtitle": "Conceitos, TCC, critérios, topologia e fusíveis/religadores",
+  "moduleOrder": 3,
+  "trail": "Critérios de Coordenação IEC/ANSI",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que é o intervalo de coordenação (degrau de tempo ou CTI) na proteção entre relés em série?",
+      "options": [
+        "O tempo necessário para carregar a mola do disjuntor após o seu primeiro rearme.",
+        "O atraso intencional garantido ao relé a montante para permitir a atuação prévia do relé a jusante.",
+        "O tempo de partida (pickup) imutável da unidade de sobrecorrente instantânea (função 50).",
+        "A diferença geométrica entre a corrente de fase plena e a corrente residual de neutro."
+      ],
+      "correctIndex": 1,
+      "explanation": "O degrau de tempo (CTI) garante a seletividade, separando cronologicamente os tempos de atuação do relé principal e do relé de retaguarda. (Fonte: Caminha, Cap. 14).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o pickup da função de sobrecorrente de fase (50/51) deve ser ajustado em relação à carga do circuito?",
+      "options": [
+        "Deve ser igual à corrente mínima de magnetização do transformador em vazio.",
+        "Deve ser ajustado acima da corrente máxima de carga para evitar atuações indevidas na operação normal.",
+        "Deve ser ajustado em zero para proporcionar a máxima sensibilidade térmica.",
+        "Deve basear-se exclusivamente no nível contínuo da corrente de sequência zero."
+      ],
+      "correctIndex": 1,
+      "explanation": "A sensibilidade da função de fase é limitada pela carga máxima, devendo o pickup prever uma margem de segurança acima dela (ex: 1,5 x In). (Fonte: Apostila Proteção / Virtus).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que o relé de sobrecorrente de neutro (50N/51N) permite ajustes muito mais sensíveis do que o relé de fase?",
+      "options": [
+        "Porque ele opera unicamente em altas frequências transitórias de chaveamento na rede.",
+        "Pois não é afetado pela corrente de carga equilibrada, medindo apenas o desbalanço residual da falta à terra.",
+        "Devido ao uso de TCs exclusivos de alta tensão instalados diretamente no topo das torres.",
+        "Porque atua premonitoriamente antes que a falta evolua para um curto-circuito franco pleno."
+      ],
+      "correctIndex": 1,
+      "explanation": "A função de neutro avalia o circuito residual (desequilíbrio); em condições normais, a corrente de carga equilibrada não o afeta, permitindo maior sensibilidade. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o objetivo principal de ajustar a unidade instantânea (50) para um curto-circuito calculado em 80% a 85% da linha protegida?",
+      "options": [
+        "Maximizar propositalmente o sobrealcance para que atue como retaguarda global sem restrições.",
+        "Sincronizar as fases defasadas do gerador elétrico durante as operações de religamento.",
+        "Evitar que ela atue para curtos na barra ou na linha subsequente, prevenindo o sobrealcance e garantindo a seletividade.",
+        "Permitir a medição segura das componentes harmônicas pares puramente transitórias."
+      ],
+      "correctIndex": 2,
+      "explanation": "Ajustar o instantâneo (50) para cerca de 80-85% do trecho evita que o relé enxergue falhas na barra ou circuito adjacente, prevenindo atuações não seletivas. (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual família de padronização classifica as curvas características nos perfis 'Extremamente Inversa' e 'Normal Inversa'?",
+      "options": [
+        "ANSI/IEEE e IEC.",
+        "NEMA e DIN.",
+        "ABNT e UL.",
+        "ISO e ASTM."
+      ],
+      "correctIndex": 0,
+      "explanation": "As curvas de tempo inverso são estritamente modeladas e padronizadas matematicamente pelas formulações universais das normas ANSI/IEEE e IEC. (Fonte: Ed50_marco_protecao).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na coordenação relé-relé com tecnologia eletromecânica clássica, qual é o valor típico adotado para a margem do degrau de tempo (CTI)?",
+      "options": [
+        "0,05 a 0,10 segundos.",
+        "0,15 a 0,25 segundos.",
+        "0,30 a 0,50 segundos.",
+        "1,00 a 2,00 segundos."
+      ],
+      "correctIndex": 2,
+      "explanation": "O intervalo de coordenação prático (CTI) para relés eletromecânicos é da ordem de 0,3 a 0,5 segundos, cobrindo o tempo do disjuntor e inércias de disco. (Fonte: Caminha, Cap. 13).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual fator de corrente é crítico ao coordenar graficamente as curvas temporizadas de dois relés de sobrecorrente dispostos em série (montante e jusante)?",
+      "options": [
+        "A coordenação e o degrau de tempo devem ser garantidos para a máxima corrente de curto-circuito passante calculada no local do relé a jusante.",
+        "Ambos os dispositivos devem possuir exatamente a mesma corrente de pickup e discar a mesma alavanca de tempo.",
+        "O relé a jusante deve possuir curva de tempo definido e o de montante atuar de modo instantâneo puro.",
+        "A curva do relé a montante deve invariavelmente cruzar a curva do jusante exatamente no seu limite de carga térmica."
+      ],
+      "correctIndex": 0,
+      "explanation": "Na coordenação relé-relé, o ponto crítico que garante a margem de retaguarda (Delta t) é verificado sob a máxima corrente de curto no TC do equipamento a jusante. (Fonte: Apostila Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas formulações padronizadas inseridas em IEDs, as equações de tempo ANSI/IEEE diferem das curvas IEC principalmente por qual característica?",
+      "options": [
+        "As curvas IEC operam exclusivamente com base na detecção da subtensão residual da barra.",
+        "A equação ANSI incorpora parcelas adicionais para ajustar fisicamente o tempo da assíntota e a sua intersecção de disparo.",
+        "As curvas IEC são bloqueadas em correntes inferiores a 20 vezes a corrente nominal preestabelecida.",
+        "A norma ANSI/IEEE aboliu o dial de tempo, fixando a operação estritamente em frações de ciclos fixos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Diferente da IEC, a equação base ANSI (C37.112) soma fatores lineares e constantes atreladas ao denominador para moldar a aproximação assintótica em altos múltiplos. (Fonte: Ed50_marco_protecao).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A parametrização do pickup (partida) da função de sobrecorrente de terra (51N/51G) é frequentemente realizada com qual referencial prático?",
+      "options": [
+        "Ajusta-se pelo menos em dez vezes a corrente nominal da máquina para superar curtos transitórios.",
+        "Ajusta-se tipicamente abaixo da carga nominal, focado em alta sensibilidade aos pequenos desbalanços residuais.",
+        "Ajusta-se com precisão na corrente de curto-circuito subtransitória máxima de três fases da subestação.",
+        "Ajusta-se englobado ao limite térmico de sobrecarga de 150% imposto aos condutores."
+      ],
+      "correctIndex": 1,
+      "explanation": "A função de terra avalia a corrente residual livre das correntes de carga balanceadas, sendo calibrada para alta sensibilidade (frequentemente 10% a 30% de In). (Fonte: Virtus_ProtTrafo).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a consolidação e a precisão dos relés digitais alteraram a fixação do intervalo de coordenação de tempo (CTI) perante os antigos relés eletromecânicos?",
+      "options": [
+        "Os relés digitais exigem um CTI consideravelmente maior em virtude da morosidade dos filtros anti-aliasing.",
+        "Reduziu-se a necessidade temporal do CTI, uma vez que a tecnologia digital praticamente elimina o erro de sobrepercurso inercial.",
+        "Excluiu-se plenamente a obrigatoriedade de se usar CTI na retaguarda, substituído por teleproteção.",
+        "O CTI das matrizes digitais manteve-se inalterado e estritamente atrelado pelas antigas restrições do NEC."
+      ],
+      "correctIndex": 1,
+      "explanation": "Com o processamento digital o erro de 'overshoot' (sobrepercurso do disco inercial) não ocorre e os aparelhos são exatos, possibilitando achatamentos de CTI de 0,4s para até 0,2s. (Fonte: Caminha / Virtus).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A principal meta da coordenação e ajustes entre o dispositivo a jusante e a proteção a montante é atuar cooperativamente visando desenergizar apenas a menor porção seletiva em defeito da rede elétrica.",
+      "correctAnswer": true,
+      "explanation": "Esse é o princípio basilar e soberano da coordenação seletiva em sistemas radiais: desligar e isolar somente as áreas acidentadas salvaguardando a operação continuada das zonas saudáveis limítrofes. (Fonte: Caminha, Cap 14).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao regular a proteção de sobrecorrente de fase (51), o pickup deve ser parametrizado num valor nominal idêntico à corrente de carga do circuito em regime de pico.",
+      "correctAnswer": false,
+      "explanation": "O ajusto de pickup requer imperativamente o cômputo de uma margem preestabelecida de folga acima da corrente máxima de carga (ex: 1,2 a 1,5 x In) garantindo a imunidade sistêmica para oscilações normais sem emissão de falsos trips. (Fonte: Apostila Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A verificação e cálculo do CTI em malhas de relés de retaguarda de tempo inverso exige imperiosamente analisar a sobreposição de tempo originada no patamar do pior cenário de curto-circuito na barra logo a frente do relé a jusante.",
+      "correctAnswer": true,
+      "explanation": "Para se garantir coordenação limpa, assegura-se cronometricamente que as curvas das duas proteções em cascata separem-se em Delta t no cenário crítico: a amplitude máxima do curto na fronteira do dispositivo secundário protegido. (Fonte: Apostila Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As correntes parasitas coletadas pelo relé residual (50N/51N) apresentam valor de repouso igual a zero perante curtos-circuitos classificados como simétricos trifásicos limpos e sem contato com aterramentos.",
+      "correctAnswer": true,
+      "explanation": "Tratando-se de faltas integralmente simétricas e trifásicas a soma vetorial contínua se anula na ligação das três fases não despejando correntes homopolares, inibindo atuações restritas as caixas de terra 51N. (Fonte: Virtus CProtBL2Cd1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em redes clássicas radiais não telecomunicadas, visando eliminar zonas mortas de sobrealcance da função 50 instalada, prescreve-se compulsoriamente seu limite subalcançado a cobrir 120% até a vizinhança total da barra remota.",
+      "correctAnswer": false,
+      "explanation": "As unidades rápidas puras sem defasamento logístico (como as funções de disparo 50) não suportam o sobrealcance irrestrito de 120%; seu pick-up regula-se rigorosamente para as correntes do defeito correspondente à parcela subalcançada estrita de 80 a 85% do trecho interno ao qual supervisiona garantindo seletividade bruta. (Fonte: Apostila Proteção).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A corrente limite calibrada que faz o relé partir e iniciar a contagem de tempo é a corrente de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "pickup"
+        }
+      ],
+      "explanation": "As correntes engatilhadas de partida inicial (cujos limiares disparam o sensoriamento ou a matemática para ativar contatos internos de verificação) caracterizam-se no termo consagrado e de uso comum pickup (ou pick-up). (Fonte: Virtus CProtBL2).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O degrau de tempo mínimo entre dois relés para garantir a coordenação é designado pela sigla _____ (Coordination Time Interval).",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "CTI"
+        }
+      ],
+      "explanation": "Designado em literatura internacional por CTI (Intervalo Temporal de Coordenação ou Coordination Time Interval) e de ordem aproximada de 0.2 a 0.4s na modelagem bilogarítmica, ele provê a folga necessária e insubstituível para seletividade da retaguarda. (Fonte: Ed50_marco_protecao_seletividade).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em relés eletromecânicos de disco, o atraso extra causado pela inércia do disco após a falta cessar é o erro de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "sobrepercurso"
+        }
+      ],
+      "explanation": "Ao eliminar a falta a inércia motriz mantinha os induzidos em rotação defasada pelo peso; fenômeno amplamente referido na proteção analógica como os erros operantes de sobrepercurso inercial (overshoot) requerendo acréscimos diretos na cascata de tempo. (Fonte: Caminha, Cap 13).",
+      "difficulty": "hard"
+    }
+  ]
+}

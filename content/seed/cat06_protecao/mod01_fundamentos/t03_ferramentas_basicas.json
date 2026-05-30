@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Fundamentos de Proteção",
+  "moduleSubtitle": "Evolução dos relés, princípios, ferramentas básicas, faltas e zonas",
+  "moduleOrder": 0,
+  "trail": "Ferramentas Básicas (Componentes Simétricas, Valor por Unidade)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O Teorema de Fortescue afirma que qualquer sistema trifásico desequilibrado pode ser decomposto na adição de três sistemas equilibrados. Quais são as sequências?",
+      "options": [
+        "Direta, indireta e nula.",
+        "Positiva, negativa e zero.",
+        "Ativa, reativa e aparente.",
+        "Simétrica, assimétrica e referencial."
+      ],
+      "correctIndex": 1,
+      "explanation": "O teorema de Fortescue decompõe um sistema trifásico não equilibrado em três sistemas de vetores equilibrados: sequência positiva, sequência negativa e sequência zero.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que define estritamente o valor por unidade (pu) de uma grandeza elétrica?",
+      "options": [
+        "A razão entre a grandeza medida e o valor base adotado para aquela mesma grandeza.",
+        "O produto da tensão pela corrente dividido por cem para proporção percentual da carga.",
+        "O valor nominal do equipamento primário subtraído da sua perda ôhmica na temperatura de operação.",
+        "A raiz quadrada da potência aparente nominal multiplicada pela impedância base do sistema."
+      ],
+      "correctIndex": 0,
+      "explanation": "O valor em por unidade (pu) é definido como a relação da quantidade pelo seu próprio valor base, expresso como um decimal adimensional.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a principal característica dos fasores do sistema de sequência zero (homopolar)?",
+      "options": [
+        "Os três fasores possuem a mesma sequência de fase e ordem de rotação do sistema original.",
+        "Os três fasores são iguais em módulo e defasados de 120° entre si.",
+        "Os três fasores são iguais em módulo e possuem deslocamento de fase zero entre si.",
+        "Os três fasores possuem sequência de fase estritamente inversa à do sistema original."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os componentes de sequência zero consistem em três fasores iguais em módulo e com deslocamento de fase zero um do outro — estão em fase no tempo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são as duas grandezas comumente adotadas como base de cálculo no sistema pu com transformadores?",
+      "options": [
+        "Corrente Base e Impedância Base.",
+        "Potência Base e Corrente Base.",
+        "Potência Base e Tensão Base.",
+        "Impedância Base e Tensão Base."
+      ],
+      "correctIndex": 2,
+      "explanation": "Fixam-se arbitrariamente a Potência Base (válida para todo o sistema) e a Tensão Base de linha para um trecho. Com elas calculam-se as bases derivadas de corrente e impedância.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual condição do sistema causa diretamente o surgimento de correntes de sequência negativa, provocando aquecimento no rotor de geradores e motores?",
+      "options": [
+        "Um curto-circuito trifásico equilibrado sem impedância de contato.",
+        "Variação no fator de potência decorrente da excitação das máquinas rotativas.",
+        "Desbalanços no sistema trifásico, como fases abertas ou curtos-circuitos assimétricos.",
+        "Partida de motores síncronos em vazio com harmônicas de sequência zero."
+      ],
+      "correctIndex": 2,
+      "explanation": "Qualquer desbalanço num sistema trifásico (fases abertas, curto fase-terra, bifásico, carga desequilibrada) faz surgir componentes de sequência negativa, gerando campos reversos e aquecimento no rotor.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a grande vantagem do sistema pu na representação da impedância de um transformador de dois enrolamentos?",
+      "options": [
+        "Permite que o transformador bloqueie passivamente correntes de sequência positiva.",
+        "O valor em pu da impedância é único, eliminando a necessidade de referir a impedância do primário para o secundário pelo quadrado da relação de espiras.",
+        "O sistema pu elimina automaticamente o ângulo das perdas no ferro do núcleo.",
+        "Garante que o fator de potência dos nós se torne unitário sem capacitores shunt."
+      ],
+      "correctIndex": 1,
+      "explanation": "A impedância em pu de um transformador é a mesma independentemente do lado em que for calculada, eliminando a complexidade de transpor valores ôhmicos pela relação de espiras ao quadrado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para Vbase=138 kV e MVAbase=100 MVA, como é equacionada a Impedância Base?",
+      "options": [
+        "Zbase = (138)² / 100",
+        "Zbase = (138 / √3) / 100",
+        "Zbase = 100 / (138)²",
+        "Zbase = (138 * √3) / 100"
+      ],
+      "correctIndex": 0,
+      "explanation": "A Impedância Base é dada por Zbase = (kV_Base)² / MVA_Base. Substituindo: Zbase = 138² / 100 = 190,44 ohms.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para um curto-circuito monofásico (fase-terra) pelo método de componentes simétricas, como devem ser interligados os circuitos de sequência?",
+      "options": [
+        "Em paralelo, pois apenas as tensões das três redes se igualam no ponto do curto.",
+        "Em série das sequências positiva, negativa e zero, garantindo I0 = I1 = I2.",
+        "Apenas o circuito de sequência zero é mantido; os demais ficam com as pontas abertas.",
+        "O diagrama de sequência positiva é ligado em série com o paralelo de negativa e zero."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para faltas fase-terra, as condições de contorno exigem I0 = I1 = I2. Portanto, as três malhas de sequência são interligadas em série.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são os efeitos corretos das operações por 'a' e 'a²' sobre um dado fasor?",
+      "options": [
+        "O 'a' avança o fasor em 90° e o 'a²' inverte em 180°.",
+        "O operador 'a' rotaciona o fasor 120° no sentido positivo (anti-horário), e o 'a²' rotaciona 240° no sentido positivo.",
+        "O 'a' causa atraso de 120° e o 'a²' atraso complementar de 60°.",
+        "O 'a' multiplica o módulo por 120 e o 'a²' isola harmônicas de ordem ímpar."
+      ],
+      "correctIndex": 1,
+      "explanation": "O operador 'a' aplica rotação de 120° anti-horário. O operador 'a²' aplica rotação de 240° anti-horário (equivalente a -120°).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como devem ser conectados os circuitos de sequência para modelar um curto-circuito bifásico-terra (fase-fase-terra)?",
+      "options": [
+        "Os três circuitos em série.",
+        "Os circuitos positivo e negativo em série; zero em aberto.",
+        "Os circuitos de sequência positiva, negativa e zero em paralelo (Va1 = Va2 = Va0).",
+        "Apenas o circuito de sequência zero; positiva e negativa omitidas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para falta bifásica com terra, as tensões de sequência se igualam no ponto da falta. A representação correta é conectar as três malhas de sequência em paralelo.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em circuitos onde a soma das tensões fasoriais do sistema é nula (como tensões de linha), a ocorrência do componente de sequência zero é impossível.",
+      "correctAnswer": true,
+      "explanation": "A componente de sequência zero é igual a 1/3 da soma fasorial das tensões. Se a soma é nula (tensões de linha, correntes trifásicas sem terra), as componentes de sequência zero não existem.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A impedância de um transformador lida em sua placa pode ser usada de forma imediata e inalterada no diagrama geral de impedâncias, mesmo que as bases do estudo sejam diferentes das nominais.",
+      "correctAnswer": false,
+      "explanation": "Ao usar bases diferentes das de placa, os valores em pu devem ser obrigatoriamente recalculados para a base do estudo. Não podem ser usados diretamente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No curto-circuito trifásico simétrico, as correntes fluem pelos diagramas de sequência positiva, negativa e zero.",
+      "correctAnswer": false,
+      "explanation": "O curto-circuito trifásico simétrico é equilibrado, produzindo estritamente componente de sequência positiva. As correntes de sequência zero e negativa são nulas neste tipo de falta.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para um curto bifásico sem terra, os circuitos de sequência positiva e negativa são conectados em paralelo e o circuito de sequência zero é descartado.",
+      "correctAnswer": true,
+      "explanation": "Para curtos entre duas fases sem terra, I0 = 0. Os circuitos positivo e negativo são conectados em paralelo, e o circuito de sequência zero é omitido.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A ligação em triângulo (Delta) dos transformadores bloqueia correntes de sequência zero para fora dos terminais de linha, embora possam circular internamente no laço delta.",
+      "correctAnswer": true,
+      "explanation": "O transformador em Delta funciona como bloqueador de correntes de sequência zero na linha, mas permite sua circulação internamente nas bobinas. Isso é representado por um circuito aberto nos terminais externos da rede de seq. zero.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A tensão da fase A é dada pela soma de seus componentes: Va = Va1 + Va2 + _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Va0"
+        }
+      ],
+      "explanation": "Cada vetor desequilibrado é obtido somando as componentes de sequência correspondentes. A parcela faltante é a tensão de sequência zero (Va0).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A Impedância Base em ohms é igual ao quadrado da tensão kV_Base dividida pela potência _____ trifásica escolhida.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "MVABase"
+        }
+      ],
+      "explanation": "A equação da base de Impedância é: Zbase = (kV_Base)² / MVA_Base.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos transformadores de núcleo de três colunas, os fluxos de sequência zero se fecham pelo ar e carcaça (alta relutância), de modo que a reatância de _____ não pode ser desprezada do diagrama de sequência zero.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "magnetização"
+        }
+      ],
+      "explanation": "Nos transformadores de 3 colunas, a alta relutância do caminho externo torna a reatância magnetizante de sequência zero não desprezível, devendo ser representada nos circuitos equivalentes.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Fundamentos de Proteção",
+  "moduleSubtitle": "Evolução dos relés, princípios, ferramentas básicas, faltas e zonas",
+  "moduleOrder": 0,
+  "trail": "Transformadores de Medição (TPs e TCs)",
+  "trailOrder": 7,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a finalidade principal dos transformadores para instrumentos (TCs e TPs)?",
+      "options": [
+        "Elevar a potência de transmissão ativa para grandes distâncias.",
+        "Reduzir os valores de tensão e corrente para níveis nominais seguros, além de promover isolação galvânica entre a alta tensão e os instrumentos.",
+        "Melhorar o fator de potência dos barramentos primários.",
+        "Compensar as perdas por efeito corona em linhas de EAT."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os transformadores para instrumentos reduzem fielmente a tensão e a corrente (ex: para 115V e 5A) e garantem o isolamento galvânico dos equipamentos de proteção, controle e medição frente à rede de alta tensão.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são os valores de corrente secundária nominal típicos dos Transformadores de Corrente (TCs)?",
+      "options": [
+        "1 A e 5 A.",
+        "10 A e 20 A.",
+        "67 V e 115 V.",
+        "10 mA e 50 mA."
+      ],
+      "correctIndex": 0,
+      "explanation": "O secundário dos TCs de controle e proteção fornece padrão nominal de 5 A (comum no Brasil, influência ANSI) ou 1 A (padrão em muitas normas europeias).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a diferença fundamental entre TCs de medição (faturamento) e TCs de proteção quanto à saturação magnética?",
+      "options": [
+        "Os TCs de proteção devem saturar prematuramente, atuando como limitadores de surtos.",
+        "Não existe diferença; ambos saturam nos valores exatos de curto-circuito.",
+        "TCs de medição saturam em baixos múltiplos da corrente nominal para preservar os instrumentos, enquanto os de proteção suportam elevados múltiplos sem saturar para reportar os curtos com fidelidade.",
+        "TCs de proteção dispensam núcleos de ferro magnéticos, sendo imunes a saturação."
+      ],
+      "correctIndex": 2,
+      "explanation": "TCs de medição saturam logo após a corrente nominal (ex: 2 a 4x In) para proteger os medidores. TCs de proteção exigem núcleos que evitem a saturação em múltiplos severos (ex: 20x In) para retratar o defeito ao relé.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o risco de um Transformador de Corrente (TC) com o circuito secundário aberto acidentalmente?",
+      "options": [
+        "A corrente primária cai a zero, desenergizando a linha imediatamente.",
+        "Toda a corrente primária atua como excitação, gerando fluxo e saturação elevadíssimos que induzem picos de tensão letais nos terminais secundários.",
+        "O TC passa a atuar como Transformador de Potencial, gerando 115V fixos.",
+        "A ausência de corrente secundária resfria o núcleo, limitando perdas."
+      ],
+      "correctIndex": 1,
+      "explanation": "Com o secundário aberto (Is=0), toda a corrente primária força a excitação do núcleo. O fluxo distorce pela saturação, induzindo ondas pontiagudas de tensão muito altas nos terminais abertos, com risco à isolação e à vida de operadores.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a regra de polaridade considerando as marcações 'P1/S1' e 'P2/S2' nos terminais de um TC?",
+      "options": [
+        "A corrente primária entra no terminal polarizado e a secundária emerge invertida em 180° do não marcado.",
+        "Se a corrente primária entra por P1, a secundária também entra na marca S1.",
+        "A polaridade especifica apenas qual terminal secundário deve ser aterrado.",
+        "Quando a corrente primária entra por P1, a secundária sai da respectiva marca S1, mantendo-se em fase teórica."
+      ],
+      "correctIndex": 3,
+      "explanation": "Se a corrente primária 'entra' pela marca de polaridade primária, a corrente secundária 'sai' pela respectiva marca secundária. Considera-se que estão virtualmente em fase, o que é imprescindível na fiação de esquemas direcionais e diferenciais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que é o Fator de Sobrecorrente Nominal (FS) de um TC de proteção?",
+      "options": [
+        "A relação entre a máxima corrente assimétrica subtransitória tolerável e a tensão nominal da rede.",
+        "A razão entre a máxima corrente do primário com a qual o TC ainda assegura o erro de sua classe e a sua corrente primária nominal.",
+        "A porcentagem de distorção admitida na componente AC na região não linear.",
+        "O fator multiplicativo ajustável no relé digital para neutralizar o burden de fechamento."
+      ],
+      "correctIndex": 1,
+      "explanation": "O FS expressa a relação entre a máxima corrente de curto que o primário pode experimentar mantendo a precisão (erro tolerável, ex: 10%) e o seu limite de corrente nominal. Exemplo clássico é FS = 20 (norma ANSI e ABNT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Um TC de proteção com classe '10B100' (ANSI / NBR 6856) informa tecnicamente que:",
+      "options": [
+        "Erro máximo de 10% a 20x a corrente nominal, de Baixa impedância interna (B), com tensão máxima de 100 V nos terminais secundários.",
+        "Erro de 10% à carga nominal, tipo Bucha capacitiva (B), com sobrecarga contínua de 100 A térmicos.",
+        "Classe térmica de 10°C ao atingir pico, limitando a saturação a 100 kV.",
+        "Componente blindado a gás (B), tolerante a desvios de 10% com impedância fixa de 100 MVA."
+      ],
+      "correctIndex": 0,
+      "explanation": "'10B100' atesta: 10% de margem de erro durante curto-circuito (sob fator 20x In); B (Baixa impedância) gerando até 100 Volts secundários sem colapsar a magnetização.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais elementos devem ser somados para computar o 'burden' (carga secundária) total de um TC?",
+      "options": [
+        "Apenas a reatância da bobina de atração do relé digital e sua histerese local.",
+        "Apenas o consumo em VA dos aparelhos de tarifação, excluindo ligações e disjuntores.",
+        "A reatância de dispersão secundária do núcleo e a impedância mútua dos isoladores em paralelo.",
+        "A impedância dos cabos condutores (fiação do painel) somada à impedância dos relés e equipamentos em série no loop secundário."
+      ],
+      "correctIndex": 3,
+      "explanation": "O burden total inclui a resistência dos cabos de controle desde o pátio até o painel, somada ao consumo/impedância dos próprios relés operando em série no circuito secundário fechado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que se substitui o TP indutivo pelo Divisor Capacitivo de Potencial (TPC/DCP) em subestações de EAT?",
+      "options": [
+        "Para converter sinais reativos em tensões estáticas, inibindo a saturação do núcleo.",
+        "O peso, volume e custo do isolamento dos TPs indutivos para tensões muito altas inviabilizam economicamente o equipamento, justificando rebaixar a tensão num estágio capacitivo mais compacto.",
+        "Por imposição contratual da Aneel, os divisores bloqueiam oscilações pendulares antes dos conversores A/D.",
+        "Módulos LC evitam o envelhecimento dos invólucros em óleo mineral sob curtos de alta intensidade."
+      ],
+      "correctIndex": 1,
+      "explanation": "Em linhas acima de 138 kV, o peso, volume e custo do isolamento dos TPs eletromagnéticos são inviáveis. No TPC, colunas capacitivas reduzem parte considerável da tensão antes do núcleo indutivo inferior, tornando o equipamento mais compacto e econômico.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sobre a Tensão do Ponto de Joelho (Knee Point) na curva de magnetização de um TC ANSI, qual afirmação está correta?",
+      "options": [
+        "É o ponto onde a reta tangente forma 30° com as abscissas; a saturação é precipitada pela componente AC simétrica.",
+        "Corresponde ao fluxo de 1,8 Tesla sob ângulo de 60°, impulsionado por harmônicas do rotor.",
+        "É o cruzamento da tangente a 45° onde os transitórios se atenuam, eliminando a dependabilidade temporal.",
+        "É o ponto onde a reta tangente forma 45° com as abscissas; as componentes DC transitórias (apriódicas) durante o curto forçam o núcleo rapidamente ao limiar de saturação."
+      ],
+      "correctIndex": 3,
+      "explanation": "No gráfico bi-logarítmico (TCs sem entreferro), o joelho é o ponto de tangência a 45° que demarca a queda de resposta. A componente DC exponencial durante o curto representa a sobrecarga de fluxo que satura o TC precocemente.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos TCs de proteção, a precisão perfeita para ondas rotineiras (erro < 0,3%) não é o compromisso primordial; admite-se distorção da ordem de 10% durante curtos-circuitos, desde que o TC não sature plenamente para o relé.",
+      "correctAnswer": true,
+      "explanation": "Diferentemente dos TCs de medição, a função vital dos TCs de proteção (classes 10P, 5P) é tolerar sem saturação as ondas de defeito. Erros de relação de 10% nos picos são margens seguras para a correta detecção pelo relé.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O limite da carga (VA) conectada ao secundário do Transformador de Potencial (TP) é definido unicamente para proteger o material do bobinado contra sobreaquecimento térmico, não tendo relação com a tolerância dos erros de classe de exatidão.",
+      "correctAnswer": false,
+      "explanation": "Falso. A 'Carga Nominal' do TP é o limite no qual a máquina mantém o rigor atrelado à sua Classe de Exatidão (evitando quedas de tensão que geram erro). O limite térmico opera em outro patamar, distinto do somatório de fiação e consumo das lógicas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O fenômeno destrutivo da Ferroressonância afeta majoritariamente os Transformadores de Corrente (TCs), exigindo conjuntos resistivos dissipadores em série em seus blocos indutivos.",
+      "correctAnswer": false,
+      "explanation": "Falso. A Ferroressonância afeta os Transformadores de Potencial (TPs) indutivos, surgindo da interação do núcleo ferromagnético com as capacitâncias da rede. As contramedidas (reatores/resistores de amortecimento) são instaladas no secundário em Delta-Aberto dos TPs.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O Divisor Capacitivo de Potencial (TPC), além de rebaixar a tensão de 60Hz, serve como acoplador para o sistema de comunicação por onda portadora (OPLAT/carrier) de teleproteção pela injeção de sinais de alta frequência.",
+      "correctAnswer": true,
+      "explanation": "Correto. Como o TPC já possui colunas capacitivas para rebaixar a tensão, ele funciona simultaneamente como canal passivo para as faixas portadoras de teleproteção (sinais OPLAT na faixa de kHz), servindo de terminal acoplador para a comunicação da concessionária.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos esquemas de Religamento Automático (função 79) em linhas de EAT, recomenda-se TCs das classes TPY ou TPZ (norma IEC), com núcleos de entreferro ('air gap') e fluxo remanescente baixo/nulo, para evitar a acumulação de magnetismo espúrio nos religamentos sucessivos.",
+      "correctAnswer": true,
+      "explanation": "Correto. Durante os ciclos de religamento (79), os solavancos repetitivos geram magnetismo remanescente que deturpa as curvas. A IEC normatizou as classes TPY e TPZ com núcleos de entreferro, cujo escoamento rápido garante a repetitividade operativa e inibe atuações erradas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O índice que engloba a impedância dos longos cabos de comando entre os TCs e a sala de IEDs, somada ao consumo das bobinas dos relés no laço secundário, e que não pode extrapolar a folha de precisão do instrumento, é designado pelo termo inglês '_____'.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "burden"
+        }
+      ],
+      "explanation": "O Burden (carga conectada ao secundário) engloba a impedância da fiação do pátio ao painel e o consumo dos relés. Seu limite corrobora a exigência contra a saturação na fase pós-falta.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No modelo do TC, as perdas por desvios de ângulo e razão são inerentes, originando-se da parcela desviada no ramo central L-R que sustenta a magnetização do núcleo. Essa parcela é chamada de corrente de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "excitação"
+        }
+      ],
+      "explanation": "A Corrente de Excitação (Ie) é a fração desviada no ramo de magnetização do circuito equivalente do TC, somando a corrente de magnetização (Im) às perdas por Foucault e histerese. Ela justifica os erros de relação e ângulo.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para detectar correntes de falta fase-terra (homopolares), conectam-se os três enrolamentos secundários dos TPs em série, na configuração consagrada chamada de _____ aberto (broken delta), fornecendo a soma algébrica 3·V0.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "delta"
+        }
+      ],
+      "explanation": "A conexão em Delta Aberto (Broken Delta) amarra os secundários dos TPs em série, fornecendo a tensão residual 3·V0 que alimenta relés de sobretensão de neutro (59N) e direcionais de terra sensíveis em sistemas de neutro isolado/flutuante.",
+      "difficulty": "hard"
+    }
+  ]
+}

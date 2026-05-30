@@ -1,0 +1,213 @@
+{
+  "category": "Comissionamento SPCS",
+  "categorySubtitle": "Metodologia, ensaio de relés e comissionamento IEC 61850",
+  "categoryOrder": 9,
+  "module": "Comissionamento IEC 61850",
+  "moduleSubtitle": "Validação SCL/IID, testes GOOSE em campo e FAT de sistemas",
+  "moduleOrder": 2,
+  "trail": "Implementação (Validação SCL/IID, Testes GOOSE em Campo, FAT)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que é avaliado prioritariamente no FAT (Factory Acceptance Test) de um painel de proteção digital?",
+      "options": [
+        "A parametrização inserida e as lógicas funcionais do IED simuladas antes do envio a campo.",
+        "A suportabilidade térmica dos cabos do barramento de 230 kV.",
+        "O fator de potência primário da subestação real.",
+        "O tempo físico de fusão dos elos fusíveis primários."
+      ],
+      "correctIndex": 0,
+      "explanation": "No FAT testa-se a parametrização e o intertravamento lógico do IED ainda nas instalações da fábrica. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como devem ser tratados os arquivos de parametrização off-line do relé durante o comissionamento de campo (SAT)?",
+      "options": [
+        "Devem ser implementados sem questionamento.",
+        "Devem ser obrigatoriamente adequados e validados conforme a topologia real da subestação.",
+        "Devem ser excluídos pelo operador local.",
+        "Devem ser enviados via GOOSE para o ONS."
+      ],
+      "correctIndex": 1,
+      "explanation": "Ajustes criados off-line dependem de validação e correções em campo (SAT) para refletir a fiação construída. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No software da mala de testes, qual parâmetro atua como filtro de sinais para as mensagens GOOSE simuladas?",
+      "options": [
+        "A reatância de sequência zero.",
+        "A corrente de magnetização.",
+        "O tempo de debounce.",
+        "A tensão de polarização residual."
+      ],
+      "correctIndex": 2,
+      "explanation": "O software de ensaio utiliza o ajuste de tempo de debounce (ex: 3,00 ms) para filtrar as entradas GOOSE. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No contexto da norma IEC 61850, qual é a definição para IEDs?",
+      "options": [
+        "Chaves mecânicas de seccionamento.",
+        "Dispositivos eletrônicos inteligentes microprocessados voltados para automação, proteção e controle.",
+        "Transformadores de potencial capacitivos estáticos.",
+        "Baterias estacionárias de chumbo-ácido."
+      ],
+      "correctIndex": 1,
+      "explanation": "IEDs são dispositivos microprocessados que englobam proteção e automação nos padrões IEC 61850. (Fonte: ed52_fasc_protecao_seletividade).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a finalidade da documentação as-built ao término do comissionamento SAT de um sistema digital?",
+      "options": [
+        "Descartar os arquivos de configuração antigos.",
+        "Registrar a revisão do projeto com as modificações práticas implementadas na obra.",
+        "Cancelar a ordem de serviço da concessionária.",
+        "Isentar os fabricantes da garantia dos painéis."
+      ],
+      "correctIndex": 1,
+      "explanation": "O as-built registra e atualiza o projeto contemplando os imprevistos sanados durante o comissionamento físico. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante o comissionamento, que adequação deve ser feita nos dispositivos SIPROTEC para operar na rede IEC 61850?",
+      "options": [
+        "Desabilitar o relé de distância.",
+        "Adequar devidamente os endereços IEC e números dos feeders para a rede da subestação real.",
+        "Substituir endereços IP por interfaces de 4-20mA.",
+        "Bloquear as portas seriais de retaguarda."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os endereços lógicos IEC e dos feeders configurados devem ser alinhados à topologia digital definitiva da planta. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o IED digital garante a confiabilidade dos seus parâmetros de ajuste (settings) contra corrupção de dados?",
+      "options": [
+        "Comparando as diferenças entre dois conjuntos iguais de ajustes mantidos em EPROM.",
+        "Injetando pulso DC na fonte de controle.",
+        "Gerando relatórios impressos automáticos.",
+        "Transmitindo pacotes Sampled Values continuamente."
+      ],
+      "correctIndex": 0,
+      "explanation": "O relé usa autodiagnóstico checando a integridade entre dois bancos idênticos de memória de ajustes. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual segurança é mandatória ao usar rotinas de autoteste para simular a saída de trip do IED em operação?",
+      "options": [
+        "Elevar a tensão de alimentação.",
+        "Isolar física ou logicamente o circuito de comando externo para não desligar o disjuntor em carga.",
+        "Desabilitar o filtro anti-aliasing.",
+        "Fazer bypass manual dos transformadores de corrente."
+      ],
+      "correctIndex": 1,
+      "explanation": "O circuito de disparo externo deve ser isolado para garantir que a simulação de trip não provoque um corte de energia. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a norma IEC 61850, qual nó lógico deve ser validado para aferir a proteção de distância (ANSI 21)?",
+      "options": [
+        "PTOC.",
+        "PDIS.",
+        "PDIF.",
+        "PTOV."
+      ],
+      "correctIndex": 1,
+      "explanation": "O nó lógico PDIS corresponde à função de proteção de distância no mapeamento ANSI/IEC. (Fonte: ed52_fasc_protecao_seletividade).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a equipe atesta a exatidão das lógicas temporais acionadas pelo relé perante faltas simuladas pela mala de teste?",
+      "options": [
+        "Medindo a temperatura da bobina móvel.",
+        "Baixando e analisando a oscilografia gravada pelo IED digital.",
+        "Testando a rigidez dielétrica do barramento.",
+        "Checando o estado de operação do filtro anti-aliasing com o megôhmetro."
+      ],
+      "correctIndex": 1,
+      "explanation": "O registro oscilográfico do relé grava as formas de onda e as ações lógicas em milissegundos, comprovando a eficácia. (Fonte: Ensaio Avançado).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o FAT (Factory Acceptance Test), atestam-se os intertravamentos e as configurações do painel ainda nas dependências da fábrica.",
+      "correctAnswer": true,
+      "explanation": "O FAT visa garantir a integridade da lógica e da parametrização do equipamento antes de o enviar para o SAT em campo. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O software de ensaio de relés exige a parametrização do tempo de debounce para filtrar sinais em mensagens GOOSE.",
+      "correctAnswer": true,
+      "explanation": "Tanto as entradas binárias físicas quanto as lógicas de GOOSE utilizam o filtro debounce para validar a permanência do sinal. (Fonte: Ensaio de Reles).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A injeção secundária consiste em forçar altas correntes diretamente nas barras de força de AT para excitar o primário dos TCs.",
+      "correctAnswer": false,
+      "explanation": "A injeção secundária insere correntes e tensões reduzidas diretamente nos bornes do relé (secundário), e não no circuito de potência. (Fonte: Cabine Primária).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No modelo de dados da IEC 61850, a proteção contra sobretensão (ANSI 59) está referenciada no nó lógico PTOC.",
+      "correctAnswer": false,
+      "explanation": "O nó PTOC mapeia funções de sobrecorrente. A sobretensão (59) é coberta pelo nó lógico PTOV. (Fonte: ed52_fasc_protecao_seletividade).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Imprevistos operacionais resolvidos durante o SAT não devem ser registrados nas folhas de ensaio para evitar retrabalho burocrático.",
+      "correctAnswer": false,
+      "explanation": "As alterações práticas devem ser obrigatoriamente documentadas no as-built e incorporadas ao prontuário da NR-10. (Fonte: Cabine Primária).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O ensaio de aceitação que valida as lógicas e o painel de proteção ainda na fábrica recebe a sigla _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "FAT"
+        }
+      ],
+      "explanation": "O Factory Acceptance Test (FAT) é a rotina prévia de testes que assegura o funcionamento antes do envio do painel à obra. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A checagem em campo que compatibiliza o sistema digital à infraestrutura da subestação real é chamada de _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SAT"
+        }
+      ],
+      "explanation": "O Site Acceptance Test (SAT) confirma a operação ponta-a-ponta, fiação e rede óptica no próprio local da usina. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para anular oscilações e ruídos lógicos indesejados nas mensagens GOOSE, regula-se o filtro temporal conhecido como _____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "debounce"
+        }
+      ],
+      "explanation": "O tempo de debounce confirma se uma mudança de status digital é real ou ruído transiente (ex: trepidação de contato virtual). (Fonte: Ensaio Avançado).",
+      "difficulty": "hard"
+    }
+  ]
+}
