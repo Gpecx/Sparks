@@ -996,10 +996,26 @@ class AdminController extends Notifier<AdminState> {
       final trailFiles       = json['trailFiles'] != null
           ? List<String>.from(json['trailFiles'] as List)
           : <String>[];
-      final sections         = json['sections'] as List? ?? [];
 
       if (categoryTitle == null || moduleTitle == null || ebookTitle == null) {
         throw 'JSON inválido: category, module e ebookTitle são obrigatórios';
+      }
+
+      // Normaliza para o formato de capítulos.
+      // Aceita: (a) json['chapters'] = [{title, sections...}]
+      //         (b) json['sections'] legado → vira 1 capítulo único.
+      List<Map<String, dynamic>> chapters;
+      if (json['chapters'] is List && (json['chapters'] as List).isNotEmpty) {
+        chapters = (json['chapters'] as List)
+            .map((c) => Map<String, dynamic>.from(c as Map))
+            .toList();
+      } else {
+        chapters = [
+          {
+            'title': ebookTitle,
+            'sections': json['sections'] as List? ?? [],
+          }
+        ];
       }
 
       final batch = _fs.batch();
@@ -1055,8 +1071,37 @@ class AdminController extends Notifier<AdminState> {
         batch.delete(doc.reference);
       }
 
-      // 4. Criar e-book
+      // 4. Criar e-book (metadados + índice de capítulos)
       final ebookRef = modRef.collection(FS.ebooks).doc();
+      final chapterIndex = <Map<String, dynamic>>[];
+
+      for (var i = 0; i < chapters.length; i++) {
+        final ch = chapters[i];
+        final chSections = ch['sections'] as List? ?? [];
+        final chId = 'c${(i + 1).toString().padLeft(2, '0')}';
+        final chTitle = ch['title'] as String? ?? 'Capítulo ${i + 1}';
+        final chMinutes = (ch['estimatedMinutes'] as num?)?.toInt() ?? 0;
+
+        // Documento do capítulo (subcoleção chapters)
+        final chRef = ebookRef.collection(FS.chapters).doc(chId);
+        batch.set(chRef, {
+          'order': i,
+          'title': chTitle,
+          if (ch['subtitle'] != null) 'subtitle': ch['subtitle'],
+          'estimatedMinutes': chMinutes,
+          'sections': chSections,
+        });
+
+        // Item leve no índice (vive no doc do e-book)
+        chapterIndex.add({
+          'id': chId,
+          'order': i,
+          'title': chTitle,
+          'sectionCount': chSections.length,
+          'estimatedMinutes': chMinutes,
+        });
+      }
+
       batch.set(ebookRef, {
         'title': ebookTitle,
         'subtitle': ebookSubtitle,
@@ -1064,7 +1109,7 @@ class AdminController extends Notifier<AdminState> {
         'moduleId': modRef.id,
         'estimatedMinutes': estimatedMinutes,
         'trailIds': trailFiles,
-        'sections': sections,
+        'chapterIndex': chapterIndex,
         FS.updatedAt: FieldValue.serverTimestamp(),
       });
 

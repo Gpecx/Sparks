@@ -320,8 +320,8 @@ class _EbookCard extends StatelessWidget {
                             _tag(Icons.timer_outlined,
                                 '${ebook.estimatedMinutes} min'),
                             const SizedBox(width: 8),
-                            _tag(Icons.list_outlined,
-                                '${ebook.sectionCount} seções'),
+                            _tag(Icons.collections_bookmark_outlined,
+                                '${ebook.chapterCount} capítulos'),
                             if (done) ...[
                               const SizedBox(width: 8),
                               _tag(Icons.check, 'Concluído',

@@ -7,7 +7,10 @@ import 'package:spark_app/providers/ebook_providers.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 
-class EbookReaderScreen extends ConsumerStatefulWidget {
+// ─────────────────────────────────────────────────────────────────
+//  TELA 1 — ÍNDICE DO E-BOOK (lista de capítulos)
+// ─────────────────────────────────────────────────────────────────
+class EbookReaderScreen extends ConsumerWidget {
   final EbookModel ebook;
   final Color themeColor;
 
@@ -18,314 +21,447 @@ class EbookReaderScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<EbookReaderScreen> createState() => _EbookReaderScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final progress = ref.watch(ebookProgressProvider(ebook.id));
+    final completedChapters = progress?.completedChapters ?? const [];
+    final chapters = [...ebook.chapterIndex]..sort((a, b) => a.order.compareTo(b.order));
 
-class _EbookReaderScreenState extends ConsumerState<EbookReaderScreen> {
-  late final ScrollController _scroll;
-  int _currentSectionIndex = 0;
-  bool _completed = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _scroll = ScrollController();
-    _scroll.addListener(_onScroll);
-    final saved = ref
-        .read(ebookProgressProvider(widget.ebook.id));
-    if (saved != null) {
-      _completed = saved.completed;
-      final idx = widget.ebook.sections
-          .indexWhere((s) => s.id == saved.lastSectionId);
-      if (idx >= 0) _currentSectionIndex = idx;
-    }
-  }
-
-  @override
-  void dispose() {
-    _scroll.dispose();
-    super.dispose();
-  }
-
-  void _onScroll() {
-    if (!_scroll.hasClients) return;
-    final maxScroll = _scroll.position.maxScrollExtent;
-    if (maxScroll <= 0) return;
-    final fraction = _scroll.offset / maxScroll;
-    final idx = (fraction * (widget.ebook.sections.length - 1)).round()
-        .clamp(0, widget.ebook.sections.length - 1);
-    if (idx != _currentSectionIndex) {
-      setState(() => _currentSectionIndex = idx);
-      _saveProgress(completed: false);
-    }
-  }
-
-  Future<void> _saveProgress({required bool completed}) async {
-    if (widget.ebook.sections.isEmpty) return;
-    final sectionId = widget.ebook.sections[_currentSectionIndex].id;
-    await saveEbookProgress(
-      ebookId: widget.ebook.id,
-      lastSectionId: sectionId,
-      completed: completed,
-    );
-    if (completed) setState(() => _completed = true);
-  }
-
-  void _markComplete() {
-    HapticFeedback.mediumImpact();
-    _saveProgress(completed: true);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Row(
-          children: [
-            Icon(Icons.check_circle, color: widget.themeColor, size: 18),
-            const SizedBox(width: 8),
-            const Text('E-book concluído!'),
-          ],
+    return SparksBackground(
+      child: PcbBackground(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            title: const Text('Sumário'),
+          ),
+          body: SafeArea(
+            top: false,
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 760),
+                child: ListView(
+                  padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    // Capa
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: LinearGradient(
+                          colors: [
+                            themeColor.withValues(alpha: 0.18),
+                            themeColor.withValues(alpha: 0.05),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        border:
+                            Border.all(color: themeColor.withValues(alpha: 0.35)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.menu_book, color: themeColor, size: 32),
+                          const SizedBox(height: 12),
+                          Text(
+                            ebook.title,
+                            style: const TextStyle(
+                              color: AppColors.textPrimary,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            ebook.subtitle,
+                            style: const TextStyle(
+                              color: AppColors.textSecondary,
+                              fontSize: 13,
+                              height: 1.4,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [
+                              _tag(Icons.collections_bookmark_outlined,
+                                  '${ebook.chapterCount} capítulos', themeColor),
+                              const SizedBox(width: 10),
+                              _tag(Icons.timer_outlined,
+                                  '${ebook.estimatedMinutes} min', themeColor),
+                            ],
+                          ),
+                          if (chapters.isNotEmpty) ...[
+                            const SizedBox(height: 14),
+                            _ProgressBar(
+                              value: completedChapters.length / chapters.length,
+                              color: themeColor,
+                              label:
+                                  '${completedChapters.length} de ${chapters.length} capítulos lidos',
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 4, bottom: 8),
+                      child: Text(
+                        'CAPÍTULOS',
+                        style: TextStyle(
+                          color: AppColors.textMuted,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
+                    ),
+                    if (chapters.isEmpty)
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: AppColors.card,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                              color: AppColors.cardBorder.withValues(alpha: 0.3)),
+                        ),
+                        child: const Text('Capítulos em elaboração.',
+                            style: TextStyle(color: AppColors.textMuted)),
+                      )
+                    else
+                      ...chapters.asMap().entries.map((e) {
+                        final i = e.key;
+                        final ch = e.value;
+                        final done = completedChapters.contains(ch.id);
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: _ChapterTile(
+                            number: i + 1,
+                            chapterRef: ch,
+                            done: done,
+                            color: themeColor,
+                            onTap: () {
+                              HapticFeedback.lightImpact();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => ChapterReaderScreen(
+                                    ebook: ebook,
+                                    chapterId: ch.id,
+                                    chapterTitle: ch.title,
+                                    chapterNumber: i + 1,
+                                    totalChapters: chapters.length,
+                                    themeColor: themeColor,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      }),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
-        backgroundColor: AppColors.card,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
   }
 
-  double get _readProgress {
-    if (widget.ebook.sections.isEmpty) return 0;
-    return (_currentSectionIndex + 1) / widget.ebook.sections.length;
+  Widget _tag(IconData icon, String text, Color color) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: color, size: 13),
+        const SizedBox(width: 4),
+        Text(text, style: TextStyle(color: color, fontSize: 12)),
+      ],
+    );
+  }
+}
+
+class _ChapterTile extends StatelessWidget {
+  final int number;
+  final EbookChapterRef chapterRef;
+  final bool done;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _ChapterTile({
+    required this.number,
+    required this.chapterRef,
+    required this.done,
+    required this.color,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: 'Capítulo $number: ${chapterRef.title}',
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.card,
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                color: done
+                    ? color.withValues(alpha: 0.45)
+                    : AppColors.cardBorder.withValues(alpha: 0.4),
+              ),
+            ),
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: done
+                        ? color.withValues(alpha: 0.2)
+                        : AppColors.surface,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: done
+                          ? color.withValues(alpha: 0.5)
+                          : AppColors.cardBorder.withValues(alpha: 0.5),
+                    ),
+                  ),
+                  child: done
+                      ? Icon(Icons.check, color: color, size: 20)
+                      : Text('$number',
+                          style: TextStyle(
+                              color: color,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 16)),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        chapterRef.title,
+                        style: const TextStyle(
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        '${chapterRef.sectionCount} seções'
+                        '${chapterRef.estimatedMinutes > 0 ? ' · ${chapterRef.estimatedMinutes} min' : ''}',
+                        style: const TextStyle(
+                            color: AppColors.textMuted, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(Icons.chevron_right, color: color.withValues(alpha: 0.6)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ProgressBar extends StatelessWidget {
+  final double value;
+  final Color color;
+  final String label;
+
+  const _ProgressBar(
+      {required this.value, required this.color, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(
+            value: value.clamp(0.0, 1.0),
+            backgroundColor: AppColors.cardBorder.withValues(alpha: 0.3),
+            valueColor: AlwaysStoppedAnimation<Color>(color),
+            minHeight: 5,
+          ),
+        ),
+        const SizedBox(height: 6),
+        Text(label,
+            style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
+      ],
+    );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  TELA 2 — LEITURA DE UM CAPÍTULO (lazy load das seções)
+// ─────────────────────────────────────────────────────────────────
+class ChapterReaderScreen extends ConsumerStatefulWidget {
+  final EbookModel ebook;
+  final String chapterId;
+  final String chapterTitle;
+  final int chapterNumber;
+  final int totalChapters;
+  final Color themeColor;
+
+  const ChapterReaderScreen({
+    super.key,
+    required this.ebook,
+    required this.chapterId,
+    required this.chapterTitle,
+    required this.chapterNumber,
+    required this.totalChapters,
+    this.themeColor = AppColors.primary,
+  });
+
+  @override
+  ConsumerState<ChapterReaderScreen> createState() =>
+      _ChapterReaderScreenState();
+}
+
+class _ChapterReaderScreenState extends ConsumerState<ChapterReaderScreen> {
+  Future<void> _markChapterComplete() async {
+    HapticFeedback.mediumImpact();
+    final prev = ref.read(ebookProgressProvider(widget.ebook.id));
+    final done = {...(prev?.completedChapters ?? const []), widget.chapterId}
+        .toList();
+    final allDone = done.length >= widget.totalChapters;
+    await saveEbookProgress(
+      ebookId: widget.ebook.id,
+      lastChapterId: widget.chapterId,
+      lastSectionId: '',
+      completedChapters: done,
+      completed: allDone,
+    );
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(allDone
+              ? 'E-book concluído! 🎉'
+              : 'Capítulo ${widget.chapterNumber} concluído'),
+          backgroundColor: AppColors.card,
+          behavior: SnackBarBehavior.floating,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+      );
+      Navigator.pop(context);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final ebook = widget.ebook;
+    final chapterAsync = ref.watch(ebookChapterProvider((
+      categoryId: widget.ebook.categoryId,
+      moduleId: widget.ebook.moduleId,
+      ebookId: widget.ebook.id,
+      chapterId: widget.chapterId,
+    )));
     final color = widget.themeColor;
 
     return SparksBackground(
       child: PcbBackground(
         child: Scaffold(
           backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            title: Text('Cap. ${widget.chapterNumber}/${widget.totalChapters}'),
+          ),
           body: SafeArea(
-            child: Column(
-              children: [
-                _buildHeader(ebook, color),
-                _buildProgressBar(color),
-                Expanded(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final isWide = constraints.maxWidth >= 800;
-                      if (isWide) {
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _buildToc(ebook, color),
-                            const VerticalDivider(
-                                width: 1,
-                                color: AppColors.cardBorder),
-                            Expanded(child: _buildContent(ebook, color)),
-                          ],
-                        );
-                      }
-                      return _buildContent(ebook, color);
-                    },
-                  ),
-                ),
-                _buildFooter(color),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHeader(EbookModel ebook, Color color) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 14, 16, 0),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: const Icon(Icons.arrow_back_ios_new,
-                color: Colors.white, size: 20),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  ebook.title,
-                  style: const TextStyle(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 15,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  '${ebook.estimatedMinutes} min · ${ebook.sectionCount} seções',
-                  style: const TextStyle(
-                      color: AppColors.textMuted, fontSize: 11),
-                ),
-              ],
-            ),
-          ),
-          if (_completed)
-            Icon(Icons.check_circle, color: color, size: 22)
-          else
-            TextButton(
-              onPressed: _markComplete,
-              child: Text('Concluir',
-                  style: TextStyle(color: color, fontWeight: FontWeight.w700)),
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildProgressBar(Color color) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: LinearProgressIndicator(
-              value: _readProgress,
-              backgroundColor: AppColors.cardBorder.withValues(alpha: 0.3),
-              valueColor: AlwaysStoppedAnimation<Color>(color),
-              minHeight: 4,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Seção ${_currentSectionIndex + 1} de ${widget.ebook.sectionCount}',
-            style: const TextStyle(color: AppColors.textMuted, fontSize: 10),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Sumário lateral (apenas em telas largas ≥ 800 px)
-  Widget _buildToc(EbookModel ebook, Color color) {
-    return SizedBox(
-      width: 220,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 8, 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'SUMÁRIO',
-              style: TextStyle(
-                color: color.withValues(alpha: 0.9),
-                fontSize: 10,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 1.0,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: ebook.sections.length,
-                itemBuilder: (context, i) {
-                  final s = ebook.sections[i];
-                  final active = i == _currentSectionIndex;
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() => _currentSectionIndex = i);
-                      _scroll.animateTo(
-                        _offsetForSection(i),
-                        duration: const Duration(milliseconds: 350),
-                        curve: Curves.easeInOut,
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
-                        s.title,
-                        style: TextStyle(
-                          color: active ? color : AppColors.textSecondary,
-                          fontSize: 12,
-                          fontWeight: active ? FontWeight.w700 : FontWeight.w400,
-                        ),
-                      ),
-                    ),
+            top: false,
+            child: chapterAsync.when(
+              data: (chapter) {
+                if (chapter == null) {
+                  return const Center(
+                    child: Text('Capítulo não encontrado.',
+                        style: TextStyle(color: Colors.white54)),
                   );
-                },
-              ),
+                }
+                return Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 760),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ListView(
+                            padding:
+                                const EdgeInsets.fromLTRB(20, 8, 20, 24),
+                            physics: const BouncingScrollPhysics(),
+                            children: [
+                              Text(
+                                chapter.title,
+                                style: const TextStyle(
+                                  color: AppColors.textPrimary,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              if (chapter.subtitle != null) ...[
+                                const SizedBox(height: 6),
+                                Text(
+                                  chapter.subtitle!,
+                                  style: const TextStyle(
+                                    color: AppColors.textSecondary,
+                                    fontSize: 14,
+                                    height: 1.4,
+                                  ),
+                                ),
+                              ],
+                              const SizedBox(height: 8),
+                              Divider(
+                                  color: color.withValues(alpha: 0.3)),
+                              const SizedBox(height: 12),
+                              ...chapter.sections.asMap().entries.map((e) =>
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 28),
+                                    child: _SectionWidget(
+                                      section: e.value,
+                                      themeColor: color,
+                                      index: e.key,
+                                    ),
+                                  )),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              onPressed: _markChapterComplete,
+                              icon: const Icon(Icons.check_circle_outline),
+                              label: Text(
+                                widget.chapterNumber < widget.totalChapters
+                                    ? 'CONCLUIR CAPÍTULO'
+                                    : 'CONCLUIR E-BOOK',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              loading: () => const Center(
+                  child: CircularProgressIndicator(color: AppColors.primary)),
+              error: (e, _) => Center(
+                  child: Text('Erro ao carregar capítulo: $e',
+                      style: const TextStyle(color: AppColors.error))),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  double _offsetForSection(int index) {
-    const estimatedSectionHeight = 220.0;
-    return (index * estimatedSectionHeight)
-        .clamp(0.0, _scroll.position.maxScrollExtent);
-  }
-
-  Widget _buildContent(EbookModel ebook, Color color) {
-    return ListView.builder(
-      controller: _scroll,
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
-      physics: const BouncingScrollPhysics(),
-      itemCount: ebook.sections.length,
-      itemBuilder: (context, i) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 28),
-          child: _SectionWidget(
-            section: ebook.sections[i],
-            themeColor: color,
-            index: i,
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildFooter(Color color) {
-    if (_completed) {
-      return Padding(
-        padding: const EdgeInsets.all(16),
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.12),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: color.withValues(alpha: 0.4)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.check_circle, color: color, size: 20),
-              const SizedBox(width: 8),
-              Text(
-                'E-book concluído! Agora pratique nas trilhas.',
-                style: TextStyle(
-                    color: color, fontWeight: FontWeight.w700, fontSize: 13),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-      child: SizedBox(
-        width: double.infinity,
-        child: Semantics(
-          button: true,
-          label: 'Marcar e-book como concluído',
-          child: ElevatedButton.icon(
-            onPressed: _markComplete,
-            icon: const Icon(Icons.check_circle_outline),
-            label: const Text('MARCAR COMO CONCLUÍDO'),
           ),
         ),
       ),
@@ -333,7 +469,9 @@ class _EbookReaderScreenState extends ConsumerState<EbookReaderScreen> {
   }
 }
 
-// ── Renderer de seção ────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────
+//  RENDERER DE SEÇÃO (compartilhado)
+// ─────────────────────────────────────────────────────────────────
 class _SectionWidget extends StatelessWidget {
   final EbookSection section;
   final Color themeColor;
@@ -350,17 +488,16 @@ class _SectionWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Título da seção
         Row(
           children: [
             Container(
               width: 24,
               height: 24,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: themeColor.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(6),
               ),
-              alignment: Alignment.center,
               child: Text(
                 '${index + 1}',
                 style: TextStyle(
@@ -398,8 +535,7 @@ class _SectionWidget extends StatelessWidget {
       case 'note':
         return _noteBlock(section.body ?? '');
       case 'formula':
-        return _formulaBlock(
-            section.formula ?? '', section.explanation ?? '');
+        return _formulaBlock(section.formula ?? '', section.explanation ?? '');
       case 'summary':
         return _summaryBlock(section.body ?? '');
       default:
@@ -493,7 +629,8 @@ class _SectionWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.5)),
+            border:
+                Border.all(color: AppColors.cardBorder.withValues(alpha: 0.5)),
           ),
           child: Text(
             formula,

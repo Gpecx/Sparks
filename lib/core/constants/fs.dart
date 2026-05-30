@@ -22,6 +22,7 @@ abstract class FS {
   static const String trails = 'trails';
   static const String lessons = 'lessons';
   static const String ebooks = 'ebooks';
+  static const String chapters = 'chapters';
   static const String ebookProgress = 'ebook_progress';
   static const String questions = 'questions';
   static const String members = 'members';
