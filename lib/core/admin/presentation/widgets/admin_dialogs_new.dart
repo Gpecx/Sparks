@@ -152,6 +152,14 @@ class AdminDialogs {
     );
   }
 
+  static Future<void> showImportEbook(BuildContext context, WidgetRef ref) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (ctx) => _EbookImportDialog(ref: ref),
+    );
+  }
+
   static Future<void> showDeleteAllContent(BuildContext context, WidgetRef ref) async {
     await showDialog(
       context: context,
@@ -274,11 +282,37 @@ class _JSONImportDialogState extends State<_JSONImportDialog> {
 
   bool _isSaving = false;
   String? _errorMsg;
+  String? _loadedFileName;
 
   @override
   void dispose() {
     _jsonCtrl.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      withData: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+    final bytes = result.files.first.bytes;
+    if (bytes == null) {
+      setState(() => _errorMsg = 'Não foi possível ler o arquivo.');
+      return;
+    }
+    try {
+      final raw = utf8.decode(bytes);
+      jsonDecode(raw);
+      setState(() {
+        _jsonCtrl.text = raw;
+        _loadedFileName = result.files.first.name;
+        _errorMsg = null;
+      });
+    } catch (e) {
+      setState(() => _errorMsg = 'Arquivo JSON inválido: $e');
+    }
   }
 
   Future<void> _submit() async {
@@ -447,15 +481,51 @@ class _JSONImportDialogState extends State<_JSONImportDialog> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text(
-                      'CONTEÚDO JSON',
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                      ),
+                    Row(
+                      children: [
+                        const Text(
+                          'CONTEÚDO JSON',
+                          style: TextStyle(
+                            color: AppColors.primary,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        const Spacer(),
+                        OutlinedButton.icon(
+                          onPressed: _isSaving ? null : _pickFile,
+                          icon: const Icon(Icons.folder_open, size: 16),
+                          label: const Text('SELECIONAR ARQUIVO .JSON'),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.primary,
+                            side: const BorderSide(color: AppColors.primary),
+                            textStyle: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.8,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                          ),
+                        ),
+                      ],
                     ),
+                    if (_loadedFileName != null) ...[
+                      const SizedBox(height: 6),
+                      Row(
+                        children: [
+                          const Icon(Icons.check_circle,
+                              color: Colors.green, size: 14),
+                          const SizedBox(width: 6),
+                          Text(
+                            'Arquivo carregado: $_loadedFileName',
+                            style: const TextStyle(
+                                color: Colors.green, fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ],
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _jsonCtrl,
@@ -467,7 +537,7 @@ class _JSONImportDialogState extends State<_JSONImportDialog> {
                       ),
                       decoration: InputDecoration(
                         fillColor: AppColors.card.withValues(alpha: 0.5),
-                        hintText: '{\n  "category": "...",\n  "module": "...",\n  "trail": "...",\n  "questions": [...]\n}',
+                        hintText: 'Cole o JSON aqui ou clique em SELECIONAR ARQUIVO acima\n\n{\n  "category": "...",\n  "module": "...",\n  "trail": "...",\n  "questions": [...]\n}',
                       ),
                       validator: (v) =>
                           (v == null || v.trim().isEmpty) ? 'Obrigatório' : null,
@@ -1117,6 +1187,187 @@ class _BulkJSONImportDialogState extends State<_BulkJSONImportDialog> {
 }
 
 enum _Phase { idle, loading, done }
+
+// ─── EBOOK IMPORT DIALOG ─────────────────────────────────────────────────────
+class _EbookImportDialog extends StatefulWidget {
+  final WidgetRef ref;
+  const _EbookImportDialog({required this.ref});
+
+  @override
+  State<_EbookImportDialog> createState() => _EbookImportDialogState();
+}
+
+class _EbookImportDialogState extends State<_EbookImportDialog> {
+  final _jsonCtrl = TextEditingController();
+  bool _isLoading = false;
+  String? _errorMsg;
+
+  @override
+  void dispose() {
+    _jsonCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pickFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      withData: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+    final bytes = result.files.first.bytes;
+    if (bytes == null) {
+      setState(() => _errorMsg = 'Não foi possível ler o arquivo.');
+      return;
+    }
+    try {
+      _jsonCtrl.text = utf8.decode(bytes);
+      setState(() => _errorMsg = null);
+    } catch (e) {
+      setState(() => _errorMsg = 'Arquivo inválido: $e');
+    }
+  }
+
+  Future<void> _import() async {
+    final raw = _jsonCtrl.text.trim();
+    if (raw.isEmpty) {
+      setState(() => _errorMsg = 'Cole ou selecione um arquivo JSON.');
+      return;
+    }
+    Map<String, dynamic> jsonMap;
+    try {
+      jsonMap = jsonDecode(raw) as Map<String, dynamic>;
+    } catch (e) {
+      setState(() => _errorMsg = 'JSON inválido: $e');
+      return;
+    }
+    setState(() { _isLoading = true; _errorMsg = null; });
+    try {
+      final ok = await widget.ref
+          .read(adminControllerProvider.notifier)
+          .importEbookFromJSON(jsonMap);
+      if (!mounted) return;
+      if (ok) {
+        Navigator.of(context, rootNavigator: true).pop();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('E-book importado com sucesso!')),
+        );
+      } else {
+        final err = widget.ref.read(adminControllerProvider).errorMessage;
+        setState(() => _errorMsg = err ?? 'Erro desconhecido ao importar e-book');
+      }
+    } catch (e) {
+      if (mounted) setState(() => _errorMsg = 'Erro: $e');
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: AppColors.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 520, maxHeight: 640),
+        child: Padding(
+          padding: const EdgeInsets.all(28),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF2DD4BF).withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(Icons.menu_book, color: Color(0xFF2DD4BF), size: 24),
+                  ),
+                  const SizedBox(width: 14),
+                  const Expanded(
+                    child: Text(
+                      'Importar E-book',
+                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                    onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                'Cole o JSON gerado pela Edu E-booker ou selecione o arquivo ebook_*.json.',
+                style: TextStyle(color: AppColors.textSecondary, fontSize: 13, height: 1.4),
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: TextField(
+                  controller: _jsonCtrl,
+                  maxLines: null,
+                  expands: true,
+                  style: const TextStyle(color: AppColors.textPrimary, fontSize: 12, fontFamily: 'monospace'),
+                  decoration: InputDecoration(
+                    hintText: '{\n  "category": "...",\n  "module": "...",\n  "ebookTitle": "...",\n  "sections": [...]\n}',
+                    hintStyle: const TextStyle(color: AppColors.textMuted, fontSize: 11),
+                    alignLabelWithHint: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: AppColors.cardBorder),
+                    ),
+                  ),
+                ),
+              ),
+              if (_errorMsg != null) ...[
+                const SizedBox(height: 8),
+                Text(_errorMsg!, style: const TextStyle(color: AppColors.error, fontSize: 12)),
+              ],
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: _isLoading ? null : _pickFile,
+                    icon: const Icon(Icons.folder_open, size: 18),
+                    label: const Text('SELECIONAR ARQUIVO'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.textSecondary,
+                      side: const BorderSide(color: AppColors.cardBorder),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: _isLoading ? null : _import,
+                      icon: _isLoading
+                          ? const SizedBox(
+                              width: 16, height: 16,
+                              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                            )
+                          : const Icon(Icons.upload, size: 18),
+                      label: Text(_isLoading ? 'IMPORTANDO...' : 'IMPORTAR'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF2DD4BF),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 // ─── DELETE ALL CONTENT DIALOG ───────────────────────────────────────────────
 class _DeleteAllContentDialog extends StatefulWidget {

@@ -148,6 +148,14 @@ class AdminDashboardPage extends ConsumerWidget {
                 ),
                 _quickActionCard(
                   context,
+                  icon: Icons.menu_book,
+                  title: 'Importar E-book',
+                  subtitle: 'Importar um e-book via JSON',
+                  color: const Color(0xFF2DD4BF),
+                  onTap: () => AdminDialogs.showImportEbook(context, ref),
+                ),
+                _quickActionCard(
+                  context,
                   icon: Icons.auto_awesome,
                   title: 'Gerador de Trilhas',
                   subtitle: 'Crie estruturas rapidamente',

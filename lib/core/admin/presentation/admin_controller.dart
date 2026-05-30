@@ -976,6 +976,115 @@ class AdminController extends Notifier<AdminState> {
     }
   }
 
+  // ─── IMPORT E-BOOK FROM JSON ─────────────────────────────────
+  /// Importa um e-book a partir do JSON gerado pela Edu E-booker.
+  /// Cria/reutiliza a categoria e o módulo existentes (mesmo critério
+  /// de importFromJSON), depois grava o e-book como subcoleção do módulo.
+  Future<bool> importEbookFromJSON(Map<String, dynamic> json) async {
+    try {
+      state = state.copyWith(isLoading: true, errorMessage: null);
+
+      final categoryTitle    = json['category'] as String?;
+      final categorySubtitle = json['categorySubtitle'] as String? ?? '';
+      final categoryOrder    = (json['categoryOrder'] as num?)?.toInt() ?? 0;
+      final moduleTitle      = json['module'] as String?;
+      final moduleSubtitle   = json['moduleSubtitle'] as String? ?? '';
+      final moduleOrder      = (json['moduleOrder'] as num?)?.toInt() ?? 0;
+      final ebookTitle       = json['ebookTitle'] as String?;
+      final ebookSubtitle    = json['ebookSubtitle'] as String? ?? '';
+      final estimatedMinutes = (json['estimatedMinutes'] as num?)?.toInt() ?? 15;
+      final trailFiles       = json['trailFiles'] != null
+          ? List<String>.from(json['trailFiles'] as List)
+          : <String>[];
+      final sections         = json['sections'] as List? ?? [];
+
+      if (categoryTitle == null || moduleTitle == null || ebookTitle == null) {
+        throw 'JSON inválido: category, module e ebookTitle são obrigatórios';
+      }
+
+      final batch = _fs.batch();
+
+      // 1. Buscar ou criar Categoria
+      final catQuery = await _fs
+          .collection(FS.categories)
+          .where(FS.title, isEqualTo: categoryTitle)
+          .limit(1)
+          .get();
+      DocumentReference catRef;
+      if (catQuery.docs.isEmpty) {
+        catRef = _fs.collection(FS.categories).doc();
+        batch.set(catRef, {
+          FS.title: categoryTitle,
+          'subtitle': categorySubtitle.isNotEmpty ? categorySubtitle : categoryTitle,
+          'description': categorySubtitle.isNotEmpty ? categorySubtitle : categoryTitle,
+          FS.order: categoryOrder,
+          FS.createdAt: FieldValue.serverTimestamp(),
+          FS.updatedAt: FieldValue.serverTimestamp(),
+        });
+      } else {
+        catRef = catQuery.docs.first.reference;
+      }
+
+      // 2. Buscar ou criar Módulo
+      final modQuery = await catRef
+          .collection(FS.modules)
+          .where(FS.title, isEqualTo: moduleTitle)
+          .limit(1)
+          .get();
+      DocumentReference modRef;
+      if (modQuery.docs.isEmpty) {
+        modRef = catRef.collection(FS.modules).doc();
+        batch.set(modRef, {
+          FS.title: moduleTitle,
+          'subtitle': moduleSubtitle.isNotEmpty ? moduleSubtitle : moduleTitle,
+          FS.categoryId: catRef.id,
+          FS.order: moduleOrder,
+          FS.createdAt: FieldValue.serverTimestamp(),
+          FS.updatedAt: FieldValue.serverTimestamp(),
+        });
+      } else {
+        modRef = modQuery.docs.first.reference;
+      }
+
+      // 3. Remover e-book com mesmo título (evita duplicatas ao reimportar)
+      final existingQuery = await modRef
+          .collection(FS.ebooks)
+          .where('title', isEqualTo: ebookTitle)
+          .get();
+      for (final doc in existingQuery.docs) {
+        batch.delete(doc.reference);
+      }
+
+      // 4. Criar e-book
+      final ebookRef = modRef.collection(FS.ebooks).doc();
+      batch.set(ebookRef, {
+        'title': ebookTitle,
+        'subtitle': ebookSubtitle,
+        'categoryId': catRef.id,
+        'moduleId': modRef.id,
+        'estimatedMinutes': estimatedMinutes,
+        'trailIds': trailFiles,
+        'sections': sections,
+        FS.updatedAt: FieldValue.serverTimestamp(),
+      });
+
+      await batch.commit();
+
+      state = state.copyWith(isLoading: false);
+      return true;
+    } on FirebaseException catch (e) {
+      final msg = 'Erro Firebase na importação do e-book: [${e.code}] ${e.message}';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+      return false;
+    } catch (e) {
+      final msg = 'Erro na importação do e-book: $e';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+      return false;
+    }
+  }
+
   // ─── BULK IMPORT FROM JSON ARRAY ─────────────────────────────
   /// Importa uma lista de objetos JSON sequencialmente.
   /// Retorna {'success': n, 'failed': n}.
