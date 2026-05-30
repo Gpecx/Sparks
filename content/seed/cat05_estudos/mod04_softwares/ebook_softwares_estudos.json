@@ -1,0 +1,212 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Softwares de Estudos Elétricos",
+  "moduleSubtitle": "PowerFactory, ETAP, PSS/E, PTW, ANAREDE, ANAFAS, Organon, PSCAD e ATP/EMTP",
+  "moduleOrder": 3,
+  "ebookTitle": "Softwares de Estudos Elétricos",
+  "ebookSubtitle": "Panorama das ferramentas de simulação: industrial, sistemas de potência e transitórios",
+  "estimatedMinutes": 70,
+  "trailFiles": [
+    "t01_fundamentos_software.json",
+    "t05_ptw_skm.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Por que usar Software de Estudos",
+      "subtitle": "O papel das ferramentas computacionais",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Da conta manual ao modelo computacional",
+          "type": "text",
+          "body": "Estudos elétricos de sistemas reais envolvem dezenas a milhares de barras, equações não-lineares e milhares de cenários. Resolver isso à mão é inviável. Os softwares de estudos elétricos permitem modelar o sistema uma vez e executar fluxo de carga, curto-circuito, coordenação, arco elétrico, estabilidade e transitórios sobre o mesmo modelo, de forma rápida, precisa e repetível. Eles são a ferramenta de trabalho central do engenheiro de estudos."
+        },
+        {
+          "id": "s2",
+          "title": "O que um bom software oferece",
+          "type": "list",
+          "items": [
+            "Modelagem gráfica do sistema (unifilar interativo)",
+            "Biblioteca de equipamentos (cabos, transformadores, relés, fusíveis reais)",
+            "Múltiplos tipos de estudo sobre o mesmo modelo",
+            "Geração automática de relatórios e pranchas de coordenação",
+            "Gestão de cenários (configurações operativas diferentes)",
+            "Validação e verificação de consistência dos dados"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O modelo é o ativo, não o software",
+          "type": "note",
+          "body": "Um princípio importante: o valor está no MODELO bem construído e validado, não no software em si. Um modelo correto produz bons estudos em qualquer ferramenta; um modelo errado produz lixo no software mais caro do mundo. Por isso, o domínio dos conceitos (fluxo, curto, coordenação) é mais importante que o domínio dos botões de um software específico — a ferramenta muda, os fundamentos permanecem."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Softwares de estudos permitem modelar o sistema uma vez e rodar múltiplos estudos (fluxo, curto, coordenação, transitórios) com rapidez e repetibilidade — inviáveis à mão. Oferecem modelagem gráfica, bibliotecas, cenários e relatórios. O valor está no modelo validado, não no software: os fundamentos importam mais que os botões."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Softwares para Sistemas Industriais",
+      "subtitle": "ETAP, PTW (SKM) e PowerFactory",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O foco industrial",
+          "type": "text",
+          "body": "Softwares voltados a instalações industriais e comerciais (plantas, subestações de consumidor) priorizam o fluxo de carga, o curto-circuito, a coordenação de proteção e o arco elétrico, com bibliotecas extensas de equipamentos comerciais (relés, disjuntores, fusíveis de fabricantes reais). Eles geram diretamente as pranchas de coordenação e os relatórios de arc flash exigidos em projetos industriais."
+        },
+        {
+          "id": "s2",
+          "title": "Ferramentas líderes",
+          "type": "list",
+          "items": [
+            "ETAP — muito usado em indústria e energia; amplo conjunto de módulos integrados",
+            "PTW (SKM PowerTools) — forte em coordenação de proteção e arc flash; tradicional na indústria",
+            "PowerFactory (DIgSILENT) — versátil, cobre de industrial a grandes sistemas e estudos dinâmicos",
+            "EasyPower, CYME — outras opções com forças específicas"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "PTW (SKM): coordenação e arc flash",
+          "type": "text",
+          "body": "O PTW, da SKM, é particularmente reconhecido pelos módulos de coordenação de proteção (Captor) e de arco elétrico (Arc Flash Evaluation, conforme IEEE 1584). Ele permite plotar as curvas tempo-corrente de forma interativa, ajustar dispositivos arrastando as curvas, e gerar etiquetas de arc flash com a energia incidente e o EPI necessário em cada ponto. É uma ferramenta de referência para estudos de coordenação e segurança em instalações industriais."
+        },
+        {
+          "id": "s4",
+          "title": "Critérios de escolha",
+          "type": "note",
+          "body": "A escolha do software industrial depende do escopo (só coordenação? também dinâmica?), da biblioteca de equipamentos disponível para os fabricantes usados, da exigência de normas (IEEE 1584 para arc flash), da integração com outros sistemas, e do custo de licença e treinamento. Muitas empresas padronizam numa ferramenta para acumular conhecimento e reaproveitar modelos."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Softwares industriais (ETAP, PTW/SKM, PowerFactory) focam em fluxo, curto, coordenação e arc flash, com bibliotecas de equipamentos comerciais. O PTW é referência em coordenação (Captor) e arc flash (IEEE 1584). A escolha considera escopo, bibliotecas, normas, integração e custo — e muitas empresas padronizam numa ferramenta."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Softwares para Sistemas de Potência",
+      "subtitle": "PSS/E, ANAREDE, ANAFAS e Organon",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O foco em grandes sistemas",
+          "type": "text",
+          "body": "Para sistemas de transmissão e grandes redes interligadas, usam-se ferramentas voltadas a fluxo de potência em larga escala, estabilidade e análise de contingências. No Brasil, o setor elétrico (ONS, geradoras, transmissoras) usa fortemente as ferramentas do CEPEL, padronizadas para os estudos do sistema interligado nacional."
+        },
+        {
+          "id": "s2",
+          "title": "Ferramentas do setor de transmissão",
+          "type": "list",
+          "items": [
+            "ANAREDE (CEPEL) — fluxo de potência e análise de redes; padrão no SIN brasileiro",
+            "ANAFAS (CEPEL) — análise de faltas (curto-circuito) em grandes sistemas",
+            "Organon — análise de segurança em tempo real e estática/dinâmica",
+            "PSS/E (Siemens) — referência internacional para fluxo, curto e estabilidade",
+            "PowerWorld — forte em visualização e análise de grandes sistemas"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Industrial vs. potência: focos diferentes",
+          "type": "note",
+          "body": "A diferença essencial: ferramentas industriais detalham a proteção (coordenação, arc flash, bibliotecas de relés) numa instalação; ferramentas de sistemas de potência detalham o comportamento de grandes redes (estabilidade, contingências N-1, fluxo em milhares de barras), com menos foco na coordenação fina de cada dispositivo. O engenheiro escolhe a ferramenta conforme a escala e o objetivo do estudo."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Para grandes sistemas usam-se ANAREDE/ANAFAS (CEPEL, padrão no SIN), Organon, PSS/E e PowerWorld, focados em fluxo em larga escala, faltas, estabilidade e contingências. Diferem das ferramentas industriais, que detalham a coordenação e o arc flash de uma instalação. A escala e o objetivo do estudo definem a ferramenta."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Softwares de Transitórios Eletromagnéticos",
+      "subtitle": "PSCAD e ATP/EMTP",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Quando os transitórios importam",
+          "type": "text",
+          "body": "Fluxo e curto-circuito analisam o regime permanente (fasores em 60 Hz). Mas muitos fenômenos são transitórios rápidos: energização de transformadores e linhas, manobras de disjuntores, surtos atmosféricos e de manobra, ressonância, ferrorressonância e interação de eletrônica de potência. Para esses, usam-se softwares de transitórios eletromagnéticos (EMT), que simulam as formas de onda instantâneas no domínio do tempo, não apenas os fasores."
+        },
+        {
+          "id": "s2",
+          "title": "Ferramentas EMT",
+          "type": "list",
+          "items": [
+            "ATP/EMTP — Alternative Transients Program; tradicional e amplamente usado, gratuito para licenciados",
+            "PSCAD/EMTDC — interface gráfica poderosa; forte em HVDC, FACTS e eletrônica de potência",
+            "EMTP-RV — versão comercial avançada do EMTP",
+            "Usados para estudos de sobretensões, coordenação de isolamento, e validação de modelos de eletrônica"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Aplicações típicas em proteção",
+          "type": "note",
+          "body": "Em proteção, os softwares EMT são usados para gerar formas de onda realistas de faltas (incluindo saturação de TC, componente DC, transitórios) que alimentam testes de relés via replay COMTRADE — testando o relé com sinais muito mais próximos da realidade que uma injeção senoidal pura. Também são essenciais para estudar a saturação de TCs e o desempenho de proteções em condições transitórias severas."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Softwares EMT (ATP/EMTP, PSCAD/EMTDC) simulam formas de onda instantâneas no domínio do tempo, para transitórios rápidos: energização, surtos, ressonância e eletrônica de potência. Em proteção, geram sinais realistas (com saturação de TC e componente DC) para testar relés via replay COMTRADE e estudar desempenho em condições transitórias severas."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Boas Práticas no Uso de Software",
+      "subtitle": "Garantir resultados confiáveis",
+      "estimatedMinutes": 9,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Validar antes de confiar",
+          "type": "text",
+          "body": "Software não substitui o julgamento de engenharia. Resultados devem ser sempre validados: conferir se os números fazem sentido físico, comparar casos simples com cálculos manuais (uma falta trifásica simples pode ser conferida à mão), e desconfiar de resultados muito diferentes do esperado. O software calcula o que você modelou — se o modelo está errado, o resultado estará errado de forma convincente."
+        },
+        {
+          "id": "s2",
+          "title": "Boas práticas de modelagem",
+          "type": "list",
+          "items": [
+            "Documentar a fonte e a data de cada dado de entrada",
+            "Validar dados críticos (impedâncias, RTC/RTP) contra a realidade",
+            "Conferir as bases (potência e tensão) e as conversões de impedância",
+            "Verificar a convergência e a plausibilidade dos resultados",
+            "Versionar os modelos e manter rastreabilidade das alterações",
+            "Comparar com estudos anteriores e com cálculos manuais de referência"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Softwares de estudos cobrem o industrial (ETAP, PTW, PowerFactory), os grandes sistemas (ANAREDE/ANAFAS, PSS/E, Organon) e os transitórios (ATP, PSCAD). O valor está no modelo validado, não na ferramenta. Sempre valide os resultados contra o sentido físico e cálculos manuais — o software calcula o que você modela. Domine os fundamentos: as ferramentas mudam, os conceitos permanecem."
+        }
+      ]
+    }
+  ]
+}

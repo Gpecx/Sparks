@@ -1,0 +1,283 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Coordenação e Seletividade",
+  "moduleSubtitle": "Estudo de coordenação - dados, metodologia, curvas e relatórios",
+  "moduleOrder": 2,
+  "ebookTitle": "Estudo de Coordenação e Seletividade",
+  "ebookSubtitle": "Do levantamento de campo às curvas TCC e ao relatório de seletividade",
+  "estimatedMinutes": 90,
+  "trailFiles": [
+    "t01_fundamentos_coordenacao.json",
+    "t02_levantamento_dados.json",
+    "t03_metodologia_coordenacao.json",
+    "t04_curvas_coordenacao.json",
+    "t05_verificacao_seletividade.json",
+    "t06_relatorios_coordenacao.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos do Estudo de Coordenação",
+      "subtitle": "O objetivo e os conceitos",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é um estudo de coordenação",
+          "type": "text",
+          "body": "O estudo de coordenação e seletividade define os ajustes de todos os dispositivos de proteção de uma instalação de modo que, para qualquer falta, atue apenas o dispositivo mais próximo do defeito, isolando o menor trecho possível. É a tradução prática da filosofia de proteção em números — pickups, dials, curvas — que serão parametrizados nos relés. Sem esse estudo, os ajustes seriam arbitrários, comprometendo a segurança e a continuidade."
+        },
+        {
+          "id": "s2",
+          "title": "Seletividade e suas formas",
+          "type": "list",
+          "items": [
+            "Cronométrica — por diferença de tempo (CTI entre dispositivos em série)",
+            "Amperimétrica — por diferença de nível de corrente entre pontos",
+            "Lógica — por comunicação entre relés (bloqueio)",
+            "Por zona — proteções unitárias (diferenciais) que só veem sua própria zona"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O intervalo de coordenação (CTI)",
+          "type": "formula",
+          "formula": "CTI = t_montante − t_jusante ≥ 0,3 a 0,4 s",
+          "explanation": "O CTI é a margem mínima de tempo entre o dispositivo de retaguarda e o principal, para a mesma corrente. Compõe-se do tempo de abertura do disjuntor, do sobrecurso do relé, das tolerâncias e de uma margem. A calculadora de Coordenação do SPARK calcula o CTI real entre dois relés e indica se a margem é suficiente."
+        },
+        {
+          "id": "s4",
+          "title": "Equilíbrio entre objetivos conflitantes",
+          "type": "note",
+          "body": "O estudo de coordenação é um exercício de equilíbrio: a proteção deve ser rápida o suficiente para limitar danos, mas lenta o suficiente para permitir que o dispositivo a jusante atue primeiro. Aumentar a seletividade tende a aumentar os tempos junto à fonte; priorizar a rapidez pode comprometer a seletividade. O bom estudo encontra o melhor compromisso possível para a instalação específica, documentando os limites alcançados."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O estudo de coordenação define os ajustes para que só o dispositivo mais próximo da falta atue. A seletividade pode ser cronométrica, amperimétrica, lógica ou por zona. O CTI (0,3-0,4 s) é a margem entre retaguarda e principal. O estudo equilibra rapidez e seletividade — objetivos conflitantes — buscando o melhor compromisso para cada instalação."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Levantamento de Dados de Campo",
+      "subtitle": "A base de qualquer estudo confiável",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que o levantamento é crítico",
+          "type": "text",
+          "body": "Um estudo de coordenação é tão bom quanto os dados que o alimentam. Diagramas desatualizados, dados de placa ilegíveis, ajustes existentes desconhecidos — tudo isso compromete o resultado. O levantamento de campo é a etapa, muitas vezes subestimada, de coletar e validar todas as informações necessárias antes de qualquer cálculo. Um erro de dado de entrada se propaga silenciosamente para ajustes errados."
+        },
+        {
+          "id": "s2",
+          "title": "Dados a levantar",
+          "type": "list",
+          "items": [
+            "Diagrama unifilar atualizado (as-built) com todos os dispositivos",
+            "Dados dos equipamentos: transformadores (potência, impedância, ligação), geradores, motores",
+            "Relações de TCs e TPs (RTC/RTP) instalados",
+            "Modelos e capacidades dos disjuntores, relés e fusíveis existentes",
+            "Ajustes atuais das proteções (se houver)",
+            "Dados da concessionária (potência de curto-circuito no ponto de conexão)",
+            "Correntes de carga máxima e perfil de operação"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Validação dos dados",
+          "type": "note",
+          "body": "Coletar não basta — é preciso validar. Conferir a impedância da placa do transformador contra o valor de projeto, verificar se a RTC anotada confere com o TC instalado, confirmar o modelo do relé. Inconsistências devem ser resolvidas antes do cálculo. Uma boa prática é o levantamento ser feito ou supervisionado por quem fará o estudo, evitando o 'telefone sem fio' de dados que passam por várias mãos e se corrompem."
+        },
+        {
+          "id": "s4",
+          "title": "Documentando as condições atuais",
+          "type": "text",
+          "body": "Além dos dados de equipamento, registra-se a condição atual das proteções: ajustes existentes, estado dos dispositivos, eventuais problemas conhecidos (atuações indevidas, falhas). Esse retrato do 'antes' permite comparar com a proposta do estudo e justificar as mudanças. Em retrofits, entender por que os ajustes atuais foram feitos (e por que falham) é parte do diagnóstico."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O levantamento de campo coleta e valida tudo que alimenta o estudo: unifilar as-built, dados de equipamentos, RTC/RTP, dispositivos, ajustes atuais, dados da concessionária e cargas. Validar os dados (placa vs. projeto, TC vs. anotação) antes do cálculo evita ajustes errados. Documentar a condição atual embasa e justifica as mudanças propostas."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Metodologia do Estudo",
+      "subtitle": "O passo a passo dos ajustes",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A sequência de cálculo",
+          "type": "list",
+          "items": [
+            "Montar o modelo do sistema e calcular as correntes de curto (máxima e mínima) em cada ponto",
+            "Definir os pickups: acima da carga máxima (e inrush/partida) e abaixo da falta mínima",
+            "Começar pelo dispositivo mais a jusante, com o menor tempo",
+            "Subir nível a nível, garantindo o CTI na corrente de coordenação",
+            "Ajustar as unidades instantâneas (50) abaixo da falta máxima da própria zona",
+            "Verificar a seletividade em toda a faixa de corrente"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Ajuste do pickup",
+          "type": "text",
+          "body": "O pickup de fase deve ficar acima da máxima corrente de carga (tipicamente 1,2 a 1,5 vezes), incluindo sobrecargas admissíveis e correntes de partida de motores, e abaixo da mínima corrente de falta que deve detectar. O pickup de neutro pode ser bem mais baixo (10 a 30% da nominal), pois não há corrente residual em carga equilibrada. Essa janela entre carga e falta nem sempre é confortável — em sistemas com muita partida de motor, exige cuidado."
+        },
+        {
+          "id": "s3",
+          "title": "Escolha da curva",
+          "type": "text",
+          "body": "A escolha da família de curva (Normal, Muito ou Extremamente Inversa) afeta a coordenação. Curvas extremamente inversas casam melhor com fusíveis e dão tempos baixos em correntes altas. Curvas normais inversas dão coordenação mais suave entre relés. Frequentemente, dispositivos que precisam coordenar devem usar a mesma família de curva, para que a margem (CTI) se mantenha consistente em toda a faixa de corrente, sem cruzamentos."
+        },
+        {
+          "id": "s4",
+          "title": "Coordenação amperimétrica para reduzir tempos",
+          "type": "note",
+          "body": "A coordenação puramente cronométrica acumula tempo junto à fonte — justamente onde as faltas são maiores. A coordenação amperimétrica usa as unidades instantâneas (50), ajustadas pela diferença de impedância entre os pontos, para eliminar rapidamente faltas próximas sem prejudicar a seletividade das faltas distantes. Combinar as duas técnicas é a chave para uma coordenação rápida e seletiva ao mesmo tempo."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A metodologia: calcular curtos (máx/mín), definir pickups (acima da carga, abaixo da falta), ajustar do mais jusante ao montante garantindo o CTI, posicionar instantâneos e verificar a seletividade em toda a faixa. O pickup de fase é ~1,2-1,5×In; o de neutro, 10-30%. A escolha da curva (mesma família para coordenar) e a coordenação amperimétrica reduzem tempos sem perder seletividade."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Elaboração das Curvas de Coordenação",
+      "subtitle": "A prancha tempo-corrente",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A prancha TCC",
+          "type": "text",
+          "body": "O resultado visual do estudo é a prancha de coordenação: um gráfico log-log com as curvas tempo-corrente de todos os dispositivos em série empilhadas. Nela, verifica-se de relance se a coordenação está correta — as curvas dos dispositivos a jusante devem ficar abaixo (atuar antes) das de montante, com a margem (CTI) preservada em toda a faixa de corrente de interesse. A calculadora de Curvas de Sobrecorrente (51) do SPARK plota essas curvas."
+        },
+        {
+          "id": "s2",
+          "title": "O que marcar na prancha",
+          "type": "list",
+          "items": [
+            "As curvas de todos os dispositivos em série (relés, fusíveis, disjuntores)",
+            "As correntes de falta (máxima e mínima) em cada ponto, como linhas verticais",
+            "As correntes de carga e de partida/inrush (limite inferior dos pickups)",
+            "As curvas de dano dos equipamentos (transformadores, cabos, motores)",
+            "Os pontos de coordenação onde o CTI é verificado"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Curvas de dano: proteger o equipamento",
+          "type": "note",
+          "body": "Além de coordenar entre dispositivos, a proteção deve ficar ABAIXO da curva de dano do equipamento protegido (transformador, cabo, motor) — ou seja, atuar antes que a corrente de falta danifique o equipamento. Plotar a curva de dano (ex.: a curva ANSI de suportabilidade do transformador, a curva I²t do cabo) na mesma prancha permite verificar simultaneamente a coordenação entre dispositivos E a proteção do equipamento. Os dois objetivos convivem na mesma prancha."
+        },
+        {
+          "id": "s4",
+          "title": "Lendo cruzamentos e gaps",
+          "type": "text",
+          "body": "Numa prancha bem feita, busca-se ausência de cruzamentos (curvas que se cruzam perdem coordenação na corrente do cruzamento) e margens consistentes. Um gap excessivo entre curvas significa tempo desnecessariamente alto junto à fonte; um gap insuficiente significa risco de atuação simultânea. Ajustar o estudo é, em boa parte, manipular dials e curvas para obter essas margens ideais em toda a faixa."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A prancha TCC empilha as curvas dos dispositivos em série (jusante abaixo de montante), com as correntes de falta, carga e as curvas de dano dos equipamentos marcadas. A proteção deve coordenar entre dispositivos E ficar abaixo da curva de dano. Busca-se ausência de cruzamentos e margens (CTI) consistentes em toda a faixa de corrente."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Verificação de Seletividade",
+      "subtitle": "Confirmar que funciona em todos os cenários",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Verificar em toda a faixa de corrente",
+          "type": "text",
+          "body": "A coordenação deve ser verificada para todos os tipos de falta (3φ, FF, FT) e em todo o intervalo entre o curto mínimo e o máximo. Um erro comum é verificar apenas no curto máximo: a coordenação pode estar correta lá e falhar no curto mínimo (onde os tempos são maiores e as curvas podem se aproximar). A verificação completa cobre todos os pares de dispositivos e todos os pontos de falta relevantes."
+        },
+        {
+          "id": "s2",
+          "title": "Cenários operativos",
+          "type": "list",
+          "items": [
+            "Configuração normal de operação",
+            "Configurações alternativas (transferências, manobras, fontes alternativas)",
+            "Com geração distribuída ligada e desligada (muda as correntes de falta)",
+            "Diferentes níveis de carga (afetam os pickups e a corrente mínima de falta)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Quando a seletividade total não é viável",
+          "type": "note",
+          "body": "Em alguns sistemas, a seletividade total (em toda a faixa de corrente e cenários) não é economicamente ou tecnicamente viável. Nesses casos, documenta-se a seletividade parcial: até que nível de corrente a coordenação é garantida, e onde ela se perde. Essa documentação é honesta e essencial — o operador precisa saber os limites da proteção. Esconder a seletividade parcial dá uma falsa sensação de segurança."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A seletividade é verificada para todos os tipos de falta e em toda a faixa (curto mínimo ao máximo), não só no máximo, e em diferentes cenários operativos (manobras, geração distribuída, níveis de carga). Quando a seletividade total não é viável, documenta-se a parcial — até onde a coordenação é garantida — de forma honesta, para que o operador conheça os limites."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Relatórios de Coordenação",
+      "subtitle": "Entregar o estudo de forma utilizável",
+      "estimatedMinutes": 10,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que um relatório deve conter",
+          "type": "list",
+          "items": [
+            "Introdução, escopo e critérios adotados (CTI, normas, premissas)",
+            "Dados de entrada utilizados (com fonte e data)",
+            "Resultados do cálculo de curto-circuito",
+            "Tabela de ajustes propostos para cada dispositivo",
+            "Pranchas de coordenação (curvas TCC) comentadas",
+            "Análise da seletividade obtida e suas limitações",
+            "Conclusões e recomendações"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "A tabela de ajustes",
+          "type": "text",
+          "body": "O produto mais utilizado do estudo é a tabela de ajustes: para cada relé, todas as funções habilitadas com seus valores (pickup, dial, curva, instantâneo). É essa tabela que será efetivamente parametrizada nos dispositivos e verificada no comissionamento. Ela deve ser clara, completa e sem ambiguidade — um ajuste mal especificado vira um erro de parametrização no campo."
+        },
+        {
+          "id": "s3",
+          "title": "O elo com o comissionamento",
+          "type": "note",
+          "body": "O estudo de coordenação não termina no relatório — ele se conecta ao comissionamento, onde os ajustes propostos são parametrizados e os valores são testados (a calculadora de Curvas 51 do SPARK fornece os tempos esperados que a mala de teste vai confirmar). Um bom relatório é escrito pensando em quem vai usá-lo no campo: o parametrizador e o comissionador. O estudo só cumpre seu papel quando vira proteção real e testada na instalação."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O relatório contém critérios, dados, resultados de curto, a tabela de ajustes, as pranchas TCC comentadas e a análise da seletividade (com limitações). A tabela de ajustes é o produto que será parametrizado e testado no comissionamento. O estudo de coordenação — do levantamento ao relatório — só cumpre seu papel quando se transforma em proteção real, parametrizada e verificada em campo."
+        }
+      ]
+    }
+  ]
+}

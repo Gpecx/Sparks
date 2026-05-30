@@ -1,0 +1,281 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Fluxo de Carga",
+  "moduleSubtitle": "Conceitos, modelagem, métodos, OPF e contingências",
+  "moduleOrder": 0,
+  "ebookTitle": "Estudo de Fluxo de Carga",
+  "ebookSubtitle": "Da modelagem do sistema ao Newton-Raphson, OPF e análise de contingências",
+  "estimatedMinutes": 95,
+  "trailFiles": [
+    "t01_conceitos_fluxo.json",
+    "t02_modelagem_sistema.json",
+    "t03_metodos_calculo.json",
+    "t04_analise_resultados.json",
+    "t05_opf.json",
+    "t06_contingencias.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Conceitos de Fluxo de Potência",
+      "subtitle": "O estudo elétrico mais fundamental",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é o fluxo de potência",
+          "type": "text",
+          "body": "O estudo de fluxo de potência (ou fluxo de carga) determina o estado de regime permanente do sistema elétrico: as tensões em cada barra (módulo e ângulo), e os fluxos de potência ativa e reativa em cada linha e transformador, para uma dada condição de geração e carga. É o estudo mais básico e mais utilizado do planejamento e da operação — responde à pergunta fundamental: 'dadas as cargas e gerações, como o sistema vai se comportar?'."
+        },
+        {
+          "id": "s2",
+          "title": "Para que serve",
+          "type": "list",
+          "items": [
+            "Verificar se as tensões ficam dentro dos limites (tipicamente 0,95 a 1,05 pu)",
+            "Verificar se linhas e transformadores não ficam sobrecarregados",
+            "Calcular as perdas do sistema",
+            "Dimensionar compensação de reativo (capacitores, reatores)",
+            "Servir de base (condição pré-falta) para os estudos de curto-circuito e estabilidade",
+            "Planejar expansões e avaliar cenários operativos"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Tipos de barra",
+          "type": "list",
+          "items": [
+            "Barra de carga (PQ) — conhece-se P e Q; calcula-se V e θ (a maioria das barras)",
+            "Barra de geração (PV) — conhece-se P e |V| (controlada pelo gerador); calcula-se Q e θ",
+            "Barra de referência (slack/swing) — conhece-se |V| e θ (=0); calcula-se P e Q (fecha o balanço de potência e perdas)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Por que não é um cálculo trivial",
+          "type": "note",
+          "body": "O fluxo de potência é descrito por um sistema de equações NÃO-LINEARES (a potência depende do produto de tensões e do seno/cosseno de diferenças angulares). Não há solução fechada — é preciso métodos numéricos iterativos. Essa não-linearidade é a razão de existirem softwares dedicados e de o estudo exigir convergência cuidadosa. Compreender isso é entender por que o fluxo de carga é uma disciplina em si."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O fluxo de potência determina tensões (módulo e ângulo) e fluxos de P e Q em regime permanente, dada a geração e a carga. Serve para verificar tensões, carregamentos e perdas, dimensionar reativo e embasar outros estudos. As barras são PQ (carga), PV (geração) e slack (referência). Por ser um sistema não-linear, exige métodos numéricos iterativos."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Modelagem do Sistema Elétrico",
+      "subtitle": "Representar a realidade em parâmetros",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A importância da boa modelagem",
+          "type": "text",
+          "body": "Um estudo só é tão bom quanto seu modelo. Modelar o sistema é representar cada componente — geradores, linhas, transformadores, cargas — por seus parâmetros elétricos. Erros de modelagem (uma impedância errada, um tap de transformador equivocado) produzem resultados incorretos que parecem corretos. A coleta e validação dos dados de modelagem é, frequentemente, a parte mais trabalhosa e mais crítica de qualquer estudo elétrico."
+        },
+        {
+          "id": "s2",
+          "title": "Modelo das linhas de transmissão",
+          "type": "text",
+          "body": "Linhas são representadas pelo modelo π: uma impedância série (R + jX) e uma admitância shunt (capacitância) dividida nas duas extremidades. Em linhas curtas, a capacitância pode ser desprezada; em linhas longas de alta tensão, ela é significativa e pode até elevar a tensão em condições de carga leve (efeito Ferranti). Os parâmetros vêm da geometria da linha (bitola, espaçamento, comprimento)."
+        },
+        {
+          "id": "s3",
+          "title": "Modelo de transformadores e geradores",
+          "type": "list",
+          "items": [
+            "Transformador — impedância série (do ensaio de curto) + relação de tap (incluindo taps de regulação e defasadores)",
+            "Gerador — modelado como barra PV (P e V controlados); para curto, usa-se a reatância subtransitória",
+            "Carga — modelada como potência constante (PQ), impedância constante, corrente constante, ou modelos compostos (ZIP)",
+            "Compensação — capacitores e reatores shunt como admitâncias; compensação série como impedância negativa"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Sistema por unidade na modelagem",
+          "type": "note",
+          "body": "Todo o sistema é modelado em por unidade (pu), com uma base comum de potência (ex.: 100 MVA) e as bases de tensão de cada nível. Isso faz os transformadores 'desaparecerem' como relação (viram apenas impedância) e permite montar a matriz de admitâncias (Ybus) do sistema inteiro de forma consistente. A escolha das bases e a conversão correta das impedâncias para a base comum são passos fundamentais — um erro de base contamina todo o estudo."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Modelar é representar cada componente por seus parâmetros — e o estudo vale o que vale o modelo. Linhas usam o modelo π (série RX + shunt capacitivo); transformadores, impedância + tap; geradores, barra PV; cargas, modelos PQ/ZIP. Tudo em pu com base comum, o que simplifica os transformadores e permite montar a Ybus. A coleta e validação de dados é a etapa mais crítica."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Métodos de Cálculo",
+      "subtitle": "Gauss-Seidel, Newton-Raphson e desacoplado",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A necessidade de métodos iterativos",
+          "type": "text",
+          "body": "Como as equações de fluxo são não-lineares, parte-se de uma estimativa inicial (geralmente 1,0 pu e 0° em todas as barras — o 'flat start') e refina-se a solução iterativamente até a convergência (quando os erros de potência ficam abaixo de uma tolerância). Diferentes métodos diferem em velocidade de convergência, robustez e esforço computacional por iteração."
+        },
+        {
+          "id": "s2",
+          "title": "Gauss-Seidel",
+          "type": "text",
+          "body": "O método de Gauss-Seidel atualiza a tensão de cada barra usando os valores mais recentes das demais. É simples de implementar e usa pouca memória, mas converge lentamente (linearmente) e pode ter dificuldade em sistemas grandes ou mal condicionados. Foi o primeiro método amplamente usado, hoje mais didático que prático para grandes sistemas."
+        },
+        {
+          "id": "s3",
+          "title": "Newton-Raphson",
+          "type": "text",
+          "body": "O Newton-Raphson é o método padrão da indústria. Ele lineariza as equações em torno da estimativa atual usando a matriz Jacobiana (derivadas das potências em relação a tensões e ângulos) e resolve o sistema linear a cada iteração. Sua convergência é quadrática — dobra os dígitos corretos a cada passo — exigindo tipicamente apenas 3 a 5 iterações mesmo em grandes sistemas. O custo é montar e inverter a Jacobiana a cada iteração."
+        },
+        {
+          "id": "s4",
+          "title": "Newton-Raphson Desacoplado Rápido (FDLF)",
+          "type": "note",
+          "body": "Uma observação física dos sistemas de potência permite uma otimização poderosa: a potência ativa (P) é fortemente acoplada aos ângulos (θ), e a reativa (Q) aos módulos de tensão (|V|), com acoplamento cruzado fraco. O método Desacoplado Rápido (Fast Decoupled Load Flow) explora isso, separando o cálculo de P-θ e Q-V e usando uma Jacobiana constante (calculada uma vez). É mais rápido por iteração que o Newton completo, ideal para análises repetitivas como contingências."
+        },
+        {
+          "id": "s5",
+          "title": "Convergência e divergência",
+          "type": "text",
+          "body": "Nem todo fluxo converge: sistemas muito carregados, perto do colapso de tensão, ou mal modelados podem divergir ou convergir para soluções sem sentido físico. A não-convergência é, ela própria, uma informação — pode indicar que o ponto de operação é inviável. O analista deve saber interpretar a divergência, ajustar a estimativa inicial, verificar a modelagem, e reconhecer os limites de carregamento do sistema."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O fluxo é resolvido iterativamente a partir de um flat start. Gauss-Seidel é simples mas lento (didático). Newton-Raphson é o padrão, com convergência quadrática (3-5 iterações) via Jacobiana. O Desacoplado Rápido explora o acoplamento P-θ / Q-V para acelerar análises repetitivas. A não-convergência é informação — pode indicar ponto de operação inviável ou modelagem incorreta."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Análise e Interpretação de Resultados",
+      "subtitle": "O que fazer com os números",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Verificação de tensões",
+          "type": "text",
+          "body": "O primeiro resultado a analisar são as tensões nas barras. Tensões abaixo do limite (subtensão) indicam falta de suporte de reativo ou carregamento excessivo; acima do limite (sobretensão) podem indicar excesso de capacitância em carga leve. As correções típicas incluem ajuste de taps de transformadores, chaveamento de capacitores/reatores, e redespacho de geração. O perfil de tensão é o termômetro da saúde do sistema."
+        },
+        {
+          "id": "s2",
+          "title": "Carregamento de linhas e transformadores",
+          "type": "list",
+          "items": [
+            "Verificar se nenhum equipamento excede sua capacidade nominal (ampacidade)",
+            "Identificar gargalos (equipamentos próximos do limite)",
+            "Avaliar margens para crescimento de carga e para contingências",
+            "Considerar limites térmicos de curta e longa duração"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Perdas e fator de potência",
+          "type": "text",
+          "body": "O fluxo calcula as perdas ativas (I²R nas linhas e transformadores), que representam energia desperdiçada e custo. Perdas elevadas podem justificar investimentos em compensação de reativo, recondutoramento ou novos níveis de tensão. A análise do fluxo de reativo revela onde a compensação é mais eficaz — instalar capacitores próximos às cargas indutivas reduz o reativo transportado e, com ele, as perdas e a queda de tensão."
+        },
+        {
+          "id": "s4",
+          "title": "O perigo do resultado 'bonito mas errado'",
+          "type": "note",
+          "body": "Um fluxo que convergiu e mostra tudo dentro dos limites pode ainda estar errado se a modelagem ou os dados de entrada estiverem incorretos. O bom analista valida os resultados contra a realidade: confere se os fluxos fazem sentido físico, se as perdas estão na faixa esperada (tipicamente poucos %), e se as tensões são plausíveis. Confiar cegamente num resultado convergido, sem crítica, é uma armadilha comum."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Analisar o fluxo é verificar tensões (corrigidas por tap, reativo, redespacho), carregamentos (gargalos e margens), e perdas (que justificam compensação). O fluxo de reativo orienta onde compensar. Cuidado com o resultado 'bonito mas errado': valide sempre contra o sentido físico — convergir não garante que os dados estavam corretos."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Fluxo de Potência Ótimo (OPF)",
+      "subtitle": "Otimizar, não apenas calcular",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Do fluxo convencional ao OPF",
+          "type": "text",
+          "body": "O fluxo convencional responde 'como o sistema se comporta nesta condição?'. O Fluxo de Potência Ótimo (OPF) vai além: 'qual é a MELHOR condição possível?'. Ele ajusta as variáveis de controle (despacho de geração, taps, compensação) para otimizar um objetivo — tipicamente minimizar o custo de geração ou as perdas — respeitando todas as restrições operativas (limites de tensão, carregamento, capacidade dos geradores)."
+        },
+        {
+          "id": "s2",
+          "title": "Componentes de um problema de OPF",
+          "type": "list",
+          "items": [
+            "Função objetivo — o que minimizar (custo de geração, perdas, desvio de tensão)",
+            "Variáveis de controle — o que pode ser ajustado (geração, taps, capacitores)",
+            "Restrições de igualdade — as equações de fluxo de potência",
+            "Restrições de desigualdade — limites de tensão, carregamento, capacidade de geração"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Aplicações do OPF",
+          "type": "note",
+          "body": "O OPF é a base do despacho econômico e da operação otimizada dos sistemas de potência. Os operadores de sistema (no Brasil, o ONS) usam variantes de OPF para decidir quais geradores despachar e como ajustar os controles para atender a demanda ao menor custo, com segurança. O OPF com restrições de segurança (SCOPF) garante que a solução ótima permaneça viável mesmo após contingências."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O OPF otimiza as variáveis de controle (geração, taps, compensação) para minimizar um objetivo (custo, perdas) respeitando as restrições de fluxo e operativas. É a base do despacho econômico e da operação otimizada. O SCOPF adiciona segurança, mantendo a solução viável pós-contingência. É o salto de 'calcular o sistema' para 'operar o sistema da melhor forma'."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Análise de Contingências",
+      "subtitle": "E se um equipamento falhar?",
+      "estimatedMinutes": 10,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O critério N-1",
+          "type": "text",
+          "body": "Um sistema seguro deve suportar a perda de qualquer um de seus elementos (uma linha, um transformador, um gerador) sem violar limites operativos — é o critério N-1. A análise de contingências simula, uma a uma, a saída de cada elemento e verifica se o sistema resultante (com N-1 elementos) permanece dentro dos limites de tensão e carregamento. É a base do planejamento e da operação seguros."
+        },
+        {
+          "id": "s2",
+          "title": "Como a análise é feita",
+          "type": "list",
+          "items": [
+            "Partir de um caso base convergido",
+            "Para cada contingência, remover o elemento e recalcular o fluxo",
+            "Verificar violações de tensão e de carregamento no caso pós-contingência",
+            "Ranquear as contingências por severidade (as que causam mais violações)",
+            "Definir medidas corretivas/preventivas para as contingências críticas"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Por que o desacoplado rápido brilha aqui",
+          "type": "note",
+          "body": "A análise de contingências exige resolver centenas ou milhares de fluxos (um por contingência). É aqui que o método Desacoplado Rápido (FDLF) e as técnicas de fatores de distribuição (que estimam o efeito de uma contingência sem resolver o fluxo completo) são essenciais — permitem varrer todas as contingências em tempo viável, inclusive em tempo real na sala de controle."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A análise de contingências aplica o critério N-1: o sistema deve suportar a perda de qualquer elemento sem violar limites. Simula-se a saída de cada elemento, verificam-se violações e ranqueiam-se as contingências críticas. Métodos rápidos (FDLF, fatores de distribuição) viabilizam varrer milhares de casos. O fluxo de carga — do conceito ao OPF e às contingências — é o alicerce de todos os estudos elétricos."
+        }
+      ]
+    }
+  ]
+}

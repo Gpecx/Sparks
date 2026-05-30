@@ -1,0 +1,236 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Normas IEEE para Estudos",
+  "moduleSubtitle": "IEEE Color Books, C37, 1584 (Arc Flash) e 519",
+  "moduleOrder": 4,
+  "ebookTitle": "Normas IEEE para Estudos Elétricos",
+  "ebookSubtitle": "Os Color Books, C37, 1584 (arc flash) e 519 (harmônicas) na prática de engenharia",
+  "estimatedMinutes": 85,
+  "trailFiles": [
+    "t01_ieee141_red.json",
+    "t02_ieee242_buff.json",
+    "t03_ieee399_brown.json",
+    "t04_ieee446_orange.json",
+    "t05_ieee_c37.json",
+    "t06_ieee1584_arcflash.json",
+    "t07_ieee519_harmonicas.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Os IEEE Color Books",
+      "subtitle": "A biblioteca clássica da engenharia industrial",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que são os Color Books",
+          "type": "text",
+          "body": "Os IEEE Color Books são uma série histórica de normas/guias, cada um identificado por uma cor, que consolidam as melhores práticas de engenharia de sistemas elétricos industriais e comerciais. Por décadas, foram a referência fundamental do projetista. Embora o IEEE esteja consolidando-os na série IEEE 3000 (Dotted Standards), os Color Books continuam sendo a base conceitual e amplamente citados na prática."
+        },
+        {
+          "id": "s2",
+          "title": "Os principais Color Books",
+          "type": "list",
+          "items": [
+            "Red Book (IEEE 141) — projeto de distribuição de energia em plantas industriais",
+            "Buff Book (IEEE 242) — proteção e coordenação de sistemas industriais e comerciais",
+            "Brown Book (IEEE 399) — análise de sistemas de potência industriais (estudos)",
+            "Orange Book (IEEE 446) — sistemas de emergência e standby",
+            "Green Book (IEEE 142) — aterramento",
+            "Gray Book (IEEE 241) — sistemas comerciais; Gold Book (493) — confiabilidade"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Por que ainda importam",
+          "type": "note",
+          "body": "Mesmo com a migração para a série IEEE 3000, os Color Books permanecem relevantes porque consolidam princípios atemporais de engenharia, com explicações didáticas e exemplos. Um projetista que domina o Red Book (distribuição), o Buff Book (proteção) e o Brown Book (estudos) tem uma base sólida que transcende qualquer software ou tecnologia específica. Eles são leitura formativa para o engenheiro de estudos."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os IEEE Color Books são guias clássicos por cor que consolidam as melhores práticas de sistemas industriais/comerciais: Red (141, distribuição), Buff (242, proteção), Brown (399, estudos), Orange (446, emergência), Green (142, aterramento) e outros. Migrando para a série IEEE 3000, mas ainda referência conceitual atemporal."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — IEEE 141 (Red) e 242 (Buff)",
+      "subtitle": "Distribuição e proteção industrial",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Red Book (IEEE 141) — distribuição industrial",
+          "type": "text",
+          "body": "O Red Book trata do projeto da distribuição de energia em plantas industriais: arranjos de sistema (radial, radial seletivo, secundário seletivo, spot network), níveis de tensão, dimensionamento de transformadores e alimentadores, qualidade de energia e regulação de tensão. É o guia de como estruturar a 'espinha dorsal' elétrica de uma indústria, equilibrando confiabilidade, custo e flexibilidade."
+        },
+        {
+          "id": "s2",
+          "title": "Arranjos de distribuição",
+          "type": "list",
+          "items": [
+            "Radial simples — econômico, mas uma falha interrompe tudo a jusante",
+            "Radial seletivo (primário seletivo) — dupla alimentação com transferência",
+            "Secundário seletivo — dois transformadores com barramento interligável",
+            "Spot network — alta confiabilidade, múltiplas fontes em paralelo com network protectors"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Buff Book (IEEE 242) — proteção e coordenação",
+          "type": "text",
+          "body": "O Buff Book é a referência clássica de proteção e coordenação para sistemas industriais e comerciais. Ele cobre os princípios de proteção, as características dos dispositivos (relés, disjuntores, fusíveis), as curvas de dano de equipamentos, e a metodologia de coordenação por curvas tempo-corrente. É o guia que orienta como ajustar e coordenar a proteção de uma planta — o conteúdo que se aplica diretamente nos estudos de coordenação."
+        },
+        {
+          "id": "s4",
+          "title": "As curvas de dano no Buff Book",
+          "type": "note",
+          "body": "Uma contribuição central do Buff Book são as curvas de dano e os pontos ANSI dos equipamentos — especialmente a curva de suportabilidade de transformadores (pontos ANSI) e as curvas I²t de cabos. Esses limites definem 'até onde' a proteção pode demorar sem danificar o equipamento, e são plotados nas pranchas de coordenação junto com as curvas dos dispositivos. Coordenar é, em parte, manter a proteção abaixo dessas curvas de dano."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O Red Book (141) orienta a distribuição industrial: arranjos (radial, seletivo, spot network), níveis de tensão e dimensionamento. O Buff Book (242) é a referência de proteção e coordenação, com princípios, características de dispositivos e, notavelmente, as curvas de dano (pontos ANSI de transformador, I²t de cabo) que limitam o tempo da proteção."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — IEEE 399 (Brown) e 446 (Orange)",
+      "subtitle": "Estudos e sistemas de emergência",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Brown Book (IEEE 399) — análise de sistemas",
+          "type": "text",
+          "body": "O Brown Book é o guia dos estudos de sistemas industriais: descreve a metodologia e as boas práticas para fluxo de carga, curto-circuito, estabilidade, partida de motores, harmônicas e confiabilidade. É a referência que ensina COMO conduzir cada tipo de estudo — quais dados coletar, quais premissas adotar, como interpretar resultados. Para o engenheiro de estudos, o Brown Book é praticamente um manual da profissão."
+        },
+        {
+          "id": "s2",
+          "title": "Os estudos cobertos pelo Brown Book",
+          "type": "list",
+          "items": [
+            "Fluxo de carga e regulação de tensão",
+            "Curto-circuito e capacidade dos equipamentos",
+            "Coordenação de proteção",
+            "Partida de motores (impacto na tensão)",
+            "Estabilidade transitória e dinâmica",
+            "Análise de harmônicas e confiabilidade"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Orange Book (IEEE 446) — emergência e standby",
+          "type": "text",
+          "body": "O Orange Book trata dos sistemas de energia de emergência e standby: geradores de emergência, no-breaks (UPS), baterias, e os critérios para sistemas que devem manter cargas críticas energizadas durante falhas da rede. É essencial para instalações onde a continuidade é vital — hospitais, data centers, processos contínuos. Define tempos de transferência, autonomia e a coordenação entre fonte normal e de emergência."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O Brown Book (399) é o manual dos estudos industriais — fluxo, curto, coordenação, partida de motores, estabilidade e harmônicas: ensina como conduzir cada estudo. O Orange Book (446) trata de energia de emergência e standby (geradores, UPS, baterias) para cargas críticas, definindo tempos de transferência, autonomia e coordenação entre fontes."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — IEEE C37 e IEEE 1584 (Arc Flash)",
+      "subtitle": "Disjuntores e o estudo de arco elétrico",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A família IEEE C37",
+          "type": "text",
+          "body": "A série IEEE C37 reúne as normas de equipamentos de manobra e proteção: especificação e ensaio de disjuntores (C37.04, C37.06, C37.09), a numeração de funções de proteção (C37.2 — os números ANSI), os relés (C37.90), e as equações das curvas IDMT (C37.112). É a referência técnica para especificar, ensaiar e aplicar disjuntores e relés — o vocabulário e os critérios que sustentam toda a engenharia de proteção."
+        },
+        {
+          "id": "s2",
+          "title": "IEEE 1584 — cálculo de arco elétrico",
+          "type": "text",
+          "body": "A IEEE 1584 é a norma que padroniza o cálculo da energia incidente de arco elétrico (arc flash). A partir da corrente de curto-circuito, do tempo de eliminação da falta e da geometria (distância de trabalho, configuração dos eletrodos), ela calcula a energia incidente (em cal/cm²) a que um trabalhador estaria exposto. Esse valor define a categoria de vestimenta anti-arco (ATPV) necessária e a fronteira de arco elétrico — base da segurança do trabalho energizado."
+        },
+        {
+          "id": "s3",
+          "title": "A relação entre proteção e arc flash",
+          "type": "note",
+          "body": "Um insight crucial da IEEE 1584: a energia de arco é proporcional ao TEMPO de eliminação da falta. Isso significa que uma proteção mais rápida não só protege o equipamento, mas reduz diretamente o risco de queimadura grave às pessoas. Em alguns casos, ajustar a proteção para atuar mais rápido (ou adicionar uma função de manutenção que reduz o tempo durante intervenções) é a forma mais eficaz de reduzir a categoria de arc flash — ligando diretamente a engenharia de proteção à segurança humana."
+        },
+        {
+          "id": "s4",
+          "title": "Etiquetas e fronteiras de arc flash",
+          "type": "list",
+          "items": [
+            "Energia incidente (cal/cm²) no ponto de trabalho",
+            "Fronteira de arco elétrico (distância onde a energia = 1,2 cal/cm², limite de queimadura de 2º grau)",
+            "Categoria de EPI / nível de ATPV da vestimenta necessária",
+            "Essas informações compõem a etiqueta de arc flash afixada nos painéis (NR-10/NFPA 70E)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A série IEEE C37 cobre disjuntores, a numeração ANSI (C37.2), relés (C37.90) e as curvas IDMT (C37.112). A IEEE 1584 padroniza o cálculo da energia incidente de arco (cal/cm²) a partir da corrente, do tempo de eliminação e da geometria, definindo a vestimenta anti-arco e a fronteira. Proteção mais rápida reduz a energia de arco — ligando proteção e segurança humana."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — IEEE 519 (Harmônicas)",
+      "subtitle": "Qualidade de energia e distorção harmônica",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O problema das harmônicas",
+          "type": "text",
+          "body": "Cargas não-lineares — inversores de frequência, retificadores, fontes chaveadas, fornos a arco — drenam corrente em formas de onda distorcidas, injetando harmônicas no sistema. Essas harmônicas causam aquecimento adicional em transformadores e motores, mau funcionamento de equipamentos, ressonância com bancos de capacitores e erros de medição. Com a proliferação da eletrônica de potência, o controle de harmônicas tornou-se uma questão central de qualidade de energia."
+        },
+        {
+          "id": "s2",
+          "title": "O que a IEEE 519 estabelece",
+          "type": "text",
+          "body": "A IEEE 519 define os limites recomendados de distorção harmônica no ponto de acoplamento comum (PCC) entre a concessionária e o consumidor. Ela estabelece limites tanto para a distorção de TENSÃO (responsabilidade compartilhada do sistema) quanto para a distorção de CORRENTE injetada pelo consumidor (que depende da relação entre a corrente de curto e a corrente de carga no PCC). É um acordo técnico: o consumidor limita a corrente harmônica que injeta, e a concessionária mantém a tensão dentro dos limites."
+        },
+        {
+          "id": "s3",
+          "title": "THD e os índices de distorção",
+          "type": "formula",
+          "formula": "THD = √(Σ Vh²) / V1 × 100%   (h = 2, 3, 4, ...)",
+          "explanation": "A Distorção Harmônica Total (THD) é a razão entre o valor eficaz das harmônicas e o da fundamental. A IEEE 519 também usa o TDD (Total Demand Distortion), que normaliza a distorção de corrente pela demanda máxima, em vez da corrente instantânea — uma medida mais justa do impacto do consumidor."
+        },
+        {
+          "id": "s4",
+          "title": "Mitigação de harmônicas",
+          "type": "list",
+          "items": [
+            "Filtros passivos sintonizados — desviam harmônicas específicas",
+            "Filtros ativos — injetam correntes que cancelam as harmônicas em tempo real",
+            "Reatores de linha e bancos dessintonizados — evitam ressonância com capacitores",
+            "Transformadores de múltiplos pulsos (12, 18 pulsos) — reduzem harmônicas na fonte",
+            "Especificação de acionamentos com baixa distorção (front-end ativo)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Cargas não-lineares injetam harmônicas que aquecem equipamentos, causam ressonância e mau funcionamento. A IEEE 519 limita a distorção de tensão e de corrente no PCC (acordo técnico consumidor-concessionária), usando THD e TDD. A mitigação inclui filtros passivos/ativos, reatores e transformadores multipulso. As normas IEEE — Color Books, C37, 1584 e 519 — formam o arcabouço técnico dos estudos elétricos, da concepção à segurança e à qualidade de energia."
+        }
+      ]
+    }
+  ]
+}
