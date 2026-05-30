@@ -1049,6 +1049,72 @@ class _BulkJSONImportDialogState extends State<_BulkJSONImportDialog> {
     }
   }
 
+  Future<void> _pickMultipleAndImport() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      withData: true,
+      allowMultiple: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+
+    final List<dynamic> jsonList = [];
+    final List<String> parseErrors = [];
+
+    for (final file in result.files) {
+      final bytes = file.bytes;
+      if (bytes == null) {
+        parseErrors.add('${file.name}: bytes nulos');
+        continue;
+      }
+      try {
+        final raw = utf8.decode(bytes);
+        final parsed = jsonDecode(raw);
+        if (parsed is Map<String, dynamic>) {
+          jsonList.add(parsed);
+        } else if (parsed is List) {
+          jsonList.addAll(parsed);
+        } else {
+          parseErrors.add('${file.name}: formato não suportado');
+        }
+      } catch (e) {
+        parseErrors.add('${file.name}: $e');
+      }
+    }
+
+    if (jsonList.isEmpty) {
+      setState(() => _errorMsg =
+          'Nenhum arquivo válido. Erros:\n${parseErrors.take(3).join("\n")}');
+      return;
+    }
+
+    setState(() {
+      _phase = _Phase.loading;
+      _total = jsonList.length;
+      _done = 0;
+      _success = 0;
+      _failed = 0;
+      _errorMsg = null;
+    });
+
+    final counts = await widget.ref
+        .read(adminControllerProvider.notifier)
+        .importBulkFromJSON(
+          jsonList,
+          onProgress: (done, total) {
+            if (mounted) setState(() => _done = done);
+          },
+        );
+
+    if (mounted) {
+      setState(() {
+        _phase = _Phase.done;
+        _success = counts['success'] ?? 0;
+        _failed = (counts['failed'] ?? 0) + parseErrors.length;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -1092,7 +1158,7 @@ class _BulkJSONImportDialogState extends State<_BulkJSONImportDialog> {
               const SizedBox(height: 28),
               if (_phase == _Phase.idle) ...[
                 const Text(
-                  'Selecione o arquivo all_trails.json gerado pelo script de seed.',
+                  'Escolha uma das opções:\n• Arquivo único: all_trails.json (array)\n• Múltiplos arquivos: vários .json de uma vez (Ctrl+clique)',
                   style: TextStyle(color: AppColors.textSecondary, height: 1.5),
                   textAlign: TextAlign.center,
                 ),
@@ -1104,12 +1170,27 @@ class _BulkJSONImportDialogState extends State<_BulkJSONImportDialog> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(
-                    icon: const Icon(Icons.folder_open),
-                    label: const Text('SELECIONAR all_trails.json'),
-                    onPressed: _pickAndImport,
+                    icon: const Icon(Icons.folder_copy),
+                    label: const Text('SELECIONAR MÚLTIPLOS ARQUIVOS .JSON'),
+                    onPressed: _pickMultipleAndImport,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    icon: const Icon(Icons.folder_open),
+                    label: const Text('SELECIONAR all_trails.json (array)'),
+                    onPressed: _pickAndImport,
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.primary,
+                      side: const BorderSide(color: AppColors.primary),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
                   ),

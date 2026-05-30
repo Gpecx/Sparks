@@ -1130,6 +1130,33 @@ class AdminController extends Notifier<AdminState> {
     }
   }
 
+  // ─── BULK IMPORT DE E-BOOKS ──────────────────────────────────
+  /// Importa uma lista de e-books (all_ebooks.json) sequencialmente.
+  /// Retorna {'success': n, 'failed': n}.
+  Future<Map<String, int>> importBulkEbooksFromJSON(
+    List<dynamic> jsonList, {
+    void Function(int done, int total)? onProgress,
+  }) async {
+    state = state.copyWith(isLoading: true, errorMessage: null);
+    int success = 0;
+    int failed = 0;
+    final total = jsonList.length;
+
+    for (int i = 0; i < total; i++) {
+      try {
+        final ok = await importEbookFromJSON(
+            Map<String, dynamic>.from(jsonList[i] as Map));
+        if (ok) { success++; } else { failed++; }
+      } catch (_) {
+        failed++;
+      }
+      onProgress?.call(i + 1, total);
+    }
+
+    state = state.copyWith(isLoading: false);
+    return {'success': success, 'failed': failed};
+  }
+
   // ─── BULK IMPORT FROM JSON ARRAY ─────────────────────────────
   /// Importa uma lista de objetos JSON sequencialmente.
   /// Retorna {'success': n, 'failed': n}.

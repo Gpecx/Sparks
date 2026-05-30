@@ -156,6 +156,14 @@ class AdminDashboardPage extends ConsumerWidget {
                 ),
                 _quickActionCard(
                   context,
+                  icon: Icons.library_books,
+                  title: 'Importar E-books (massa)',
+                  subtitle: 'Carregar all_ebooks.json completo',
+                  color: const Color(0xFF14B8A6),
+                  onTap: () => AdminDialogs.showBulkImportEbooks(context, ref),
+                ),
+                _quickActionCard(
+                  context,
                   icon: Icons.auto_awesome,
                   title: 'Gerador de Trilhas',
                   subtitle: 'Crie estruturas rapidamente',
