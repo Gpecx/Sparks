@@ -21,6 +21,9 @@ import 'package:spark_app/screens/tools/equipment_current_screen.dart';
 import 'package:spark_app/screens/tools/power_triangle_screen.dart';
 import 'package:spark_app/screens/tools/thermal_severity_screen.dart';
 import 'package:spark_app/screens/tools/commissioning_screen.dart';
+import 'package:spark_app/screens/tools/ons_voltage_screen.dart';
+import 'package:spark_app/screens/tools/power_quality_screen.dart';
+import 'package:spark_app/screens/tools/network_cable_screen.dart';
 
 class _ToolConfig {
   final String title;
@@ -52,6 +55,8 @@ const _catEquip = 'Equipamentos';
 const _catAutomacao = 'Automação & Instrumentação';
 const _catTermografia = 'Termografia & Manutenção';
 const _catComissionamento = 'Comissionamento & Ensaios';
+const _catQualidade = 'Qualidade de Energia';
+const _catRedes = 'Redes & Comunicação';
 
 class ToolsScreen extends ConsumerStatefulWidget {
   const ToolsScreen({super.key});
@@ -88,6 +93,15 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       color: const Color(0xFF14B8A6),
       gradientEnd: const Color(0xFF115E59),
       builder: (_) => const PowerTriangleScreen(),
+    ),
+    _ToolConfig(
+      title: 'Tensão pu — Base ONS × TP',
+      description: 'Converte pu do estudo ONS para V no secundário do TP',
+      category: _catConversoes,
+      icon: Icons.swap_vert,
+      color: const Color(0xFF38BDF8),
+      gradientEnd: const Color(0xFF0369A1),
+      builder: (_) => const OnsVoltageScreen(),
     ),
     _ToolConfig(
       title: 'RTC / RTP',
@@ -178,6 +192,24 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       color: const Color(0xFFCA8A04),
       gradientEnd: const Color(0xFF713F12),
       builder: (_) => const GroundGridScreen(),
+    ),
+    _ToolConfig(
+      title: 'Qualidade de Energia',
+      description: 'Carregamento de trafo e desequilíbrio (PRODIST Mód. 8)',
+      category: _catQualidade,
+      icon: Icons.insights_outlined,
+      color: const Color(0xFFA855F7),
+      gradientEnd: const Color(0xFF6B21A8),
+      builder: (_) => const PowerQualityScreen(),
+    ),
+    _ToolConfig(
+      title: 'Cabos de Rede (RJ-45)',
+      description: 'Pinagem T568A/B + tabela de categorias de cabo',
+      category: _catRedes,
+      icon: Icons.lan_outlined,
+      color: const Color(0xFF06B6D4),
+      gradientEnd: const Color(0xFF0E7490),
+      builder: (_) => const NetworkCableScreen(),
     ),
     _ToolConfig(
       title: 'Corrente Nominal',
