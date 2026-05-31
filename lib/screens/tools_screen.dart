@@ -26,6 +26,7 @@ import 'package:spark_app/screens/tools/power_quality_screen.dart';
 import 'package:spark_app/screens/tools/network_cable_screen.dart';
 import 'package:spark_app/screens/tools/arc_flash_screen.dart';
 import 'package:spark_app/screens/tools/restricted_differential_screen.dart';
+import 'package:spark_app/screens/tools/directional_67_screen.dart';
 
 class _ToolConfig {
   final String title;
@@ -170,12 +171,21 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     ),
     _ToolConfig(
       title: 'Proteção de Distância (21)',
-      description: 'Alcance das zonas Z1/Z2/Z3 (primário e secundário)',
+      description: 'Zonas Z1/Z2/Z3 + característica mho no plano R-X',
       category: _catReles,
       icon: Icons.social_distance_outlined,
       color: const Color(0xFF15803D),
       gradientEnd: const Color(0xFF14532D),
       builder: (_) => const DistanceProtectionScreen(),
+    ),
+    _ToolConfig(
+      title: 'Direcional 67 / 67N',
+      description: 'Elemento direcional de fase e neutro (3V0/3I0): direta ou reversa',
+      category: _catReles,
+      icon: Icons.explore_outlined,
+      color: const Color(0xFF22C55E),
+      gradientEnd: const Color(0xFF15803D),
+      builder: (_) => const Directional67Screen(),
     ),
     _ToolConfig(
       title: 'Queda de Tensão',
