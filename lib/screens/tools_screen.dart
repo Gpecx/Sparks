@@ -25,6 +25,7 @@ import 'package:spark_app/screens/tools/ons_voltage_screen.dart';
 import 'package:spark_app/screens/tools/power_quality_screen.dart';
 import 'package:spark_app/screens/tools/network_cable_screen.dart';
 import 'package:spark_app/screens/tools/arc_flash_screen.dart';
+import 'package:spark_app/screens/tools/restricted_differential_screen.dart';
 
 class _ToolConfig {
   final String title;
@@ -148,6 +149,15 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       color: const Color(0xFF4ADE80),
       gradientEnd: const Color(0xFF166534),
       builder: (_) => const DifferentialBalanceScreen(),
+    ),
+    _ToolConfig(
+      title: '87 — Diferencial c/ Restrição',
+      description: 'Característica Idiff × Irest (dupla inclinação): opera ou restringe',
+      category: _catReles,
+      icon: Icons.show_chart_outlined,
+      color: const Color(0xFF34D399),
+      gradientEnd: const Color(0xFF065F46),
+      builder: (_) => const RestrictedDifferentialScreen(),
     ),
     _ToolConfig(
       title: 'Coordenação / Seletividade',
