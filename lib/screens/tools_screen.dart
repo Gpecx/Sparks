@@ -24,6 +24,7 @@ import 'package:spark_app/screens/tools/commissioning_screen.dart';
 import 'package:spark_app/screens/tools/ons_voltage_screen.dart';
 import 'package:spark_app/screens/tools/power_quality_screen.dart';
 import 'package:spark_app/screens/tools/network_cable_screen.dart';
+import 'package:spark_app/screens/tools/arc_flash_screen.dart';
 
 class _ToolConfig {
   final String title;
@@ -132,7 +133,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     ),
     _ToolConfig(
       title: 'Curvas de Sobrecorrente (51)',
-      description: 'Tempo de atuação IDMT + gráfico, ~57 curvas IEC/IEEE/ANSI',
+      description: 'IDMT: cálculo de 1 curva ou coordenograma (comparar curvas + CTI)',
       category: _catReles,
       icon: Icons.show_chart,
       color: const Color(0xFF84CC16),
@@ -194,6 +195,15 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const GroundGridScreen(),
     ),
     _ToolConfig(
+      title: 'Arc Flash (energia incidente)',
+      description: 'Energia incidente e categoria de EPI (IEEE 1584 / Lee)',
+      category: _catAterramento,
+      icon: Icons.local_fire_department_outlined,
+      color: const Color(0xFFF97316),
+      gradientEnd: const Color(0xFF9A3412),
+      builder: (_) => const ArcFlashScreen(),
+    ),
+    _ToolConfig(
       title: 'Qualidade de Energia',
       description: 'Carregamento de trafo e desequilíbrio (PRODIST Mód. 8)',
       category: _catQualidade,
@@ -213,7 +223,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     ),
     _ToolConfig(
       title: 'Corrente Nominal',
-      description: 'In de transformador e motor + inrush / partida',
+      description: 'In de trafo/motor, partida e inrush de banco (multi-trafo)',
       category: _catEquip,
       icon: Icons.electrical_services,
       color: const Color(0xFF22C55E),
