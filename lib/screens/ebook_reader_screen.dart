@@ -335,8 +335,10 @@ class _ChapterReaderScreenState extends ConsumerState<ChapterReaderScreen> {
   Future<void> _markChapterComplete() async {
     HapticFeedback.mediumImpact();
     final prev = ref.read(ebookProgressProvider(widget.ebook.id));
-    final done = {...(prev?.completedChapters ?? const []), widget.chapterId}
-        .toList();
+    final done = <String>{
+      ...(prev?.completedChapters ?? const <String>[]),
+      widget.chapterId,
+    }.toList();
     final allDone = done.length >= widget.totalChapters;
     await saveEbookProgress(
       ebookId: widget.ebook.id,
