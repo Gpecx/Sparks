@@ -1,0 +1,324 @@
+{
+  "category": "Qualidade da Energia",
+  "categoryOrder": 2,
+  "module": "Transitórios e Surtos",
+  "moduleOrder": 2,
+  "moduleSubtitle": "Da origem física dos transitórios à proteção e coordenação de isolamento",
+  "ebookTitle": "Transitórios e Surtos",
+  "ebookSubtitle": "Tipos, causas, medição e proteção contra transitórios e sobretensões em sistemas elétricos",
+  "estimatedMinutes": 80,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Tipos e Causas de Transitórios",
+      "subtitle": "Impulsivos e oscilatórios segundo a IEEE 1159",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Os dois grandes grupos de transitórios",
+          "type": "text",
+          "body": "A dissertação sobre distúrbios do IFPB afirma textualmente que, de um modo geral, os fenômenos transitórios podem ser classificados em dois grupos: impulsivos e oscilatórios. O transitório impulsivo é definido como uma alteração súbita que se caracteriza por uma polaridade estritamente unidirecional (positiva ou negativa). Já o transitório oscilatório é definido por uma mudança repentina nas condições com alteração de polaridade bidirecional (positiva e negativa). Essa distinção de polaridade é o primeiro critério para identificar com qual tipo de fenômeno se está lidando."
+        },
+        {
+          "id": "s2",
+          "title": "Transitórios impulsivos e suas faixas",
+          "type": "list",
+          "items": [
+            "São geralmente causados por descargas atmosféricas, o que lhes confere níveis de frequência distintos da rede (dissertação do IFPB)",
+            "Possuem polaridade tipicamente unidirecional, com ocorrências velozes restritas entre a faixa dos nanossegundos até no máximo reduzidos milissegundos (IFPB e IEEE 1159)",
+            "Para a classe Impulsivo Nanossegundo, o Quadro 02 da IEEE 1159 prevê duração na faixa de 5 ns a 50 ns",
+            "A dissertação baseada em Dugan et al. e na IEEE 1159 confirma as subdivisões de nanossegundos, microssegundos e milissegundos"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Transitórios oscilatórios e o notching",
+          "type": "text",
+          "body": "Segundo o Quadro 02 da Norma IEEE 1159 presente na dissertação do IFPB, transitórios oscilatórios de baixa frequência possuem espectro menor que 5 kHz e magnitude de 0 a 4 pu; os de média frequência (5 a 500 kHz) têm duração de 20 microssegundos com magnitudes entre 0 e 8 pu; e os de alta frequência situam-se na faixa de 0,5 MHz a 5 MHz. O material do IFPB explica que os conversores trifásicos causam notching devido à ocorrência de um curto-circuito momentâneo entre duas fases durante a comutação da corrente — curto que ocorre exatamente enquanto a corrente está sofrendo o processo eletro-físico de comutação das chaves entre as fases. As interrupções pontiagudas originárias do notching introduzem frequências que podem ultrapassar 3,6 kHz."
+        },
+        {
+          "id": "s4",
+          "title": "Surtos de manobra e surtos induzidos",
+          "type": "text",
+          "body": "O guia Finder determina que surtos de manobra referem-se a transitórios originados de acionamento de interruptores, variações súbitas de carga ou partidas de motores na operação da rede. O Guia Finder subdivide os surtos transitórios em endógenos (causados internamente, por manobras) e exógenos (causados externamente, com destaque para a origem atmosférica). O informativo técnico DPS Finder afirma que surtos induzidos (impacto indireto) ocorrem devido ao forte campo eletromagnético da corrente do raio, que por variável acoplamento indutivo cria as sobretensões na fiação interna em laço."
+        },
+        {
+          "id": "s5",
+          "title": "Efeitos e mitigação",
+          "type": "note",
+          "body": "A dissertação do IFPB alerta que os transitórios oscilatórios podem provocar diversos efeitos negativos, como diminuir a vida útil de motores e causar mau funcionamento de dispositivos controlados eletronicamente. O texto contido no arquivo base Análise de Distúrbios do IFPB afirma literalmente que, visando à sua redução, podem-se utilizar como solução: supressores de surto, transformadores isoladores e filtros. O material não prescreve exclusividade a capacitores em paralelo como medida mitigadora de transientes deste nível."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os fenômenos transitórios dividem-se em impulsivos (polaridade unidirecional, ligados a descargas atmosféricas, faixas de ns a ms) e oscilatórios (polaridade bidirecional, classificados em baixa, média e alta frequência pela IEEE 1159). O notching dos conversores trifásicos decorre de curto-circuito momentâneo na comutação. Os surtos podem ser endógenos (manobra) ou exógenos (atmosféricos), e a mitigação dos oscilatórios envolve supressores de surto, transformadores isoladores e filtros."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Sobretensões Atmosféricas e de Manobra",
+      "subtitle": "Origem dos raios, formas de onda e surtos induzidos",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A origem atmosférica do raio",
+          "type": "text",
+          "body": "Conforme o Guia Finder, os surtos de origem atmosférica surgem quando raios atingem um ponto durante uma tempestade, devido ao acúmulo de cargas positivas e negativas que superam a resistência dielétrica do ar. O Guia confirma que, no caso do ar limpo e seco, a rigidez corresponde a 30 kV/cm, e devido à umidade e às partículas de poeira presentes a resistência cai para poucos kV/cm. O Guia Finder identifica as três famílias naturais de raios com base no percurso da descarga: raios entre nuvens, raios intranuvem e raios entre nuvem e terra."
+        },
+        {
+          "id": "s2",
+          "title": "Impacto direto e suas consequências",
+          "type": "list",
+          "items": [
+            "O raio, ao ser descarregado na terra, eleva o potencial do aterramento; os surtos resistivos contêm energia suficiente para iniciar um incêndio ou destruir os equipamentos conectados (Guia Finder)",
+            "Se um raio atingir uma linha de energia elétrica, a corrente do raio se propaga em ambos os sentidos da linha, dividindo-se em partes iguais",
+            "A forma de onda 10/350 us simula o primeiro impacto direto do raio e é utilizada para determinar a corrente de impulso Iimp dos DPS de Classe I",
+            "Surtos de tensão repetidos de baixa amplitude comprometem a resistência dielétrica dos isolamentos, reduzindo a vida útil até o equipamento falhar permanentemente"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Surtos induzidos por impacto indireto",
+          "type": "text",
+          "body": "Nas explanações do Guia Finder para surtos de tensão induzidos, o documento estabelece que a corrente que atravessa a bobina ligada ao referencial gera, por acoplamento indutivo, o surto. O Guia adverte que o campo eletromagnético do raio cria efeitos desastrosos se ele se conectar com uma bobina de grande diâmetro, gerando por acoplamento indutivo um surto de tensão. Esses surtos induzidos, com amplitude de 3 a 5 kV provenientes do impacto indireto de um raio, não têm energia suficiente para iniciar um incêndio, mas podem destruir os equipamentos."
+        },
+        {
+          "id": "s4",
+          "title": "Cálculo do surto induzido",
+          "type": "formula",
+          "formula": "U = Lm · di/dt",
+          "explanation": "O Guia Finder estabelece que a corrente que atravessa a bobina ligada ao referencial gera, por acoplamento indutivo, o surto quantificado por U = Lm·di/dt. A rapidíssima variação da corrente do raio (di/dt) é o que torna a sobretensão induzida tão elevada."
+        },
+        {
+          "id": "s5",
+          "title": "As formas de onda normalizadas",
+          "type": "list",
+          "items": [
+            "Forma de onda de tensão 1,2/50 us — identifica o pulso de tensão, distinguindo-se da representação 8/20 us pertencente à corrente (Guia Finder)",
+            "10/350 us — simula o primeiro impacto direto do raio; determina a corrente de impulso Iimp dos DPS de Classe I",
+            "8/20 us — típica dos surtos de tensão induzidos por campos magnéticos; prescrita para testar a corrente nominal (In) e a corrente máxima (Imax) dos DPS de Classe II",
+            "DPS de Classe III — testado com gerador misto, Tensão sem carga (Uoc) com forma de onda normalizada de 1,2/50 us (e não 10/350 us, que é da Classe I)"
+          ]
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os raios surgem do acúmulo de cargas que vencem a rigidez dielétrica do ar (30 kV/cm no ar limpo e seco). O impacto direto eleva o potencial de terra e pode iniciar incêndios; o impacto indireto induz surtos de 3 a 5 kV por acoplamento indutivo (U = Lm·di/dt), que destroem equipamentos sem incendiar. As formas de onda normalizadas — 10/350 us (Classe I), 8/20 us (Classe II) e 1,2/50 us (tensão / Classe III) — diferenciam os ensaios e classes de DPS."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Análise e Medição de Transitórios",
+      "subtitle": "Da FFT à STFT e os analisadores modernos",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Limites das ferramentas no domínio da frequência",
+          "type": "text",
+          "body": "A dissertação do IFPB afirma que, na FFT, a representação se dá no domínio da frequência e a informação temporal fica indisponível, impossibilitando afirmar quando um determinado evento ocorreu — o que dificulta a análise de sinais com características transitórias. A dissertação confirma ainda que a STFT usa técnicas de janelamento móvel e que, uma vez escolhido um determinado tamanho de janela, essa janela deve ser usada para todas as frequências, restringindo assim os resultados a serem obtidos. Compreender essas limitações é essencial para escolher a ferramenta correta de análise de transitórios."
+        },
+        {
+          "id": "s2",
+          "title": "Parâmetros de duração e magnitude pela IEEE 1159",
+          "type": "list",
+          "items": [
+            "Transitório oscilatório de Média Frequência — Magnitude estipulada de 0 a 8 pu (Quadro 02, IEEE 1159 / IFPB)",
+            "Transitório Oscilatório de Alta Frequência (0,5 - 5 MHz) — duração típica de 5 us",
+            "Transitórios oscilatórios de Baixa Frequência — conteúdo espectral menor que 5 kHz",
+            "Faixa de Média Frequência (5 a 500 kHz) — duração de referência de 20 us"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Impulsivo versus oscilatório na medição",
+          "type": "text",
+          "body": "A base metodológica do IFPB, ancorada na norma IEEE 1159, indica que a polaridade bidirecional caracteriza os oscilatórios; enquanto o transitório impulsivo pode ser definido por uma alteração súbita tendo como característica impulsos unidirecionais em polaridade (positiva ou negativa), e não bidirecional. Distinguir esses comportamentos na captura é fundamental para classificar corretamente o evento medido."
+        },
+        {
+          "id": "s4",
+          "title": "Capacidades dos analisadores modernos",
+          "type": "list",
+          "items": [
+            "O Guia da Wrindu sobre analisadores frisa que esses equipamentos se destacam na captura de transientes de até 1 microssegundo, muito inferiores à marca do milissegundo",
+            "Conversores analógico-digitais (ADCs) de alta resolução, com taxa de amostragem de 1 MS/s, capturam transientes rápidos invisíveis para dispositivos mais lentos",
+            "Os analisadores utilizam processadores DSP para cálculos no próprio dispositivo, reduzindo a necessidade de pós-processamento; a computação de borda permite processar informações localmente, minimizando a latência",
+            "A sincronização de tempo por GPS garante uma correlação precisa em sistemas de monitoramento de qualidade de energia em múltiplos locais"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Interpretando as formas de onda dos ensaios",
+          "type": "note",
+          "body": "O Guia Finder mostra em seus diagramas a frente de descida explicitando que, na forma 10/350 us, os 350 figuram como os microssegundos dedicados ao tempo de descida da crista (T2 = 50 us representa o tempo necessário para chegar a 50% do valor da frente descendente). Já na forma 8/20 us, T1 = 8 us representa o tempo necessário para ir de 10 a 90% da frente ascendente. Entender esses parâmetros temporais ajuda a interpretar corretamente os registros e ensaios de transitórios."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A FFT perde a informação temporal e a STFT impõe uma janela fixa para todas as frequências — limitações relevantes na análise de transitórios. A IEEE 1159 fornece os parâmetros de magnitude e duração por faixa de frequência. Os analisadores modernos (Wrindu) capturam transientes de até 1 us com ADCs de 1 MS/s, processam localmente via DSP e correlacionam eventos por GPS. Os tempos T1 e T2 das formas 8/20 e 10/350 us orientam a leitura dos ensaios."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Proteção Contra Surtos (DPS)",
+      "subtitle": "Parâmetros, tecnologias e técnicas de instalação",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Classes de DPS e seus ensaios",
+          "type": "list",
+          "items": [
+            "Classe I — testados com forma de onda 10/350 us, que simula o primeiro impacto de um raio direto; obrigatórios em edifícios com para-raios (Guia Finder)",
+            "Classe II — Corrente nominal de descarga [In 8/20]: valor de pico da corrente que atravessa o DPS quando testado com forma de onda 8/20 us",
+            "Classe III — papel de terminação, testados com gerador combinado que gera tensão Uoc 1,2/50 us capaz de transmitir corrente 8/20 us"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Parâmetros de catálogo essenciais",
+          "type": "text",
+          "body": "Segundo a seção de características do Guia Finder, a Up representa o valor máximo de tensão que permanece nos terminais durante a operação limitadora; com base no valor associado a Up pode-se inferir a qualidade do DPS, sendo que quanto mais baixa for a Up, melhor será a qualidade. O Guia estabelece ainda que Uc é o valor da tensão abaixo do qual o DPS certamente não será acionado, devendo ser pelo menos igual a 110% da tensão nominal do sistema (Un). A Corrente nominal de descarga [In 8/20] é o valor de pico quando testado com a forma de onda de 8/20 us."
+        },
+        {
+          "id": "s3",
+          "title": "Varistores e centelhadores (GDT)",
+          "type": "text",
+          "body": "No material técnico DPS Finder, ao confrontar os DPSs por limitação (varistores), a principal desvantagem explícita listada é que eles não garantem o isolamento galvânico, portanto a corrente de fuga não é zero, diferindo da atuação a vazio das ampolas do GDT. O Guia adverte que, na operação do centelhador, a Ures alcança um nível ínfimo, impondo o risco de que a tensão da rede, sendo maior do que a Ures, mantenha o dispositivo ligado mantendo o arco; tais drenos adicionais retirados da malha pública formam a dita corrente residual prolongada. O dispositivo de desconexão comanda e garante desligar o DPS quando atinge o final de sua vida útil devido ao envelhecimento ou corrente de fuga muito elevada, indicando visualmente a transição quando o visor troca a coloração de verde para vermelho."
+        },
+        {
+          "id": "s4",
+          "title": "A indutância parasita dos condutores",
+          "type": "formula",
+          "formula": "Delta-U = L · di/dt",
+          "explanation": "Em sua seção dedicada às Técnicas de Instalação, o Guia Finder alerta que a indutância parasita dos condutores desempenha papel fundamental, calculando-se o valor pela equação Delta-U = L·di/dt, o que compõe um agravante ao cálculo do limitador. Por isso o Guia instrui que o comprimento dos cabos de e para o DPS não deve ser maior que 50 cm, e recomenda a Conexão série (V-Shape), que elimina a tensão induzida pelos terminais do DPS, diferindo das perdas associadas às configurações convencionais em paralelo (tipo T-Shape)."
+        },
+        {
+          "id": "s5",
+          "title": "Sistemas de back-up e fenômenos de reflexão",
+          "type": "note",
+          "body": "Na seção de sistemas de back-up do Guia Finder, resultados práticos comprovam que disjuntores sofrem aberturas precoces frente às grandes variações impulsivas (di/dt); por isso o guia sugere usar sempre fusíveis que não piorem a Up/f. O Guia também alerta sobre as ondas refletidas: quando uma onda de tensão encontra uma carga não ajustada, ela se reflete, e pelo fenômeno das ondas estacionárias a tensão no fim da linha pode até mesmo dobrar, atingindo 2 Ures. Na seção fotovoltaica, conforme o prEN 50539-11, se a Iscpv for menor ou igual a Iscwpv, o DPS pode ser instalado diretamente entre os condutores (+ e -) sem sistema de proteção de reserva, como fusíveis ou disjuntores."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os DPS dividem-se em Classe I (10/350 us, raio direto), Classe II (8/20 us, In) e Classe III (1,2/50 us, terminação). Parâmetros-chave são Up (quanto menor, melhor), Uc (≥ 110% de Un) e In. Varistores não garantem isolamento galvânico; o GDT atua a vazio mas pode manter arco se a rede exceder a Ures. A indutância parasita (Delta-U = L·di/dt) exige cabos ≤ 50 cm e conexão V-Shape. Disjuntores abrem precocemente sob di/dt — prefira fusíveis — e as ondas refletidas podem dobrar a tensão (2 Ures)."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Coordenação de Isolamento",
+      "subtitle": "Zonas LPZ, categorias de instalação e a regra Up/f < Uw/2",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "As zonas de proteção contra raios (LPZ)",
+          "type": "text",
+          "body": "O Guia Finder define LPZ 0A como zonas livres, sem nenhuma proteção, onde existe a possibilidade de incidência direta do raio e, portanto, a corrente é alta e o campo eletromagnético não é atenuado. A LPZ 1 situa-se no interior do edifício, depois do primeiro DPS, onde a corrente do raio é limitada e o campo ELM é atenuado. A LPZ 2 inclui outro DPS, onde a corrente do raio é ainda mais limitada e o campo ELM é muito atenuado. O Guia esclarece que quanto mais alto for o número, mais os efeitos dos raios serão atenuados."
+        },
+        {
+          "id": "s2",
+          "title": "Categorias de instalação e tensões de resistência",
+          "type": "list",
+          "items": [
+            "Categoria I — equipamentos muito sensíveis a picos de tensão (TV, PCs); tensão de resistência de 1,5 kV (Guia Finder)",
+            "Categoria II — aparelhos como eletrodomésticos; resistência a impulso de 2,5 kV",
+            "Categoria III — aparelhos que fazem parte do sistema (interruptores, tomadas, quadros); tensão de resistência de 4 kV",
+            "Categoria IV — dispositivos instalados antes do quadro de distribuição (como contatores); tensão de resistência ao impulso de 6 kV"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Coordenação de energia entre DPSs",
+          "type": "text",
+          "body": "As cláusulas do título Sistema de DPS e coordenação de energia do Guia Finder elucidam que a coordenação ocorre distanciando adequadamente os DPSs. O Guia indica que a indutância é introduzida automaticamente pelos cabos utilizados no sistema elétrico, sendo parametrizada a 1 uH/m — o que para 5 metros equivale aos citados 5 uH. A coordenação assegura uma divisão dos surtos de modo que o primeiro absorve a energia de forma a não danificar o segundo (apêndice 4 da norma EN 62305). Cabe ao fabricante garantir que os dispositivos vizinhos à fonte suportem surtos maiores em relação aos mais distantes e limitados."
+        },
+        {
+          "id": "s4",
+          "title": "A regra de margem segura",
+          "type": "formula",
+          "formula": "Up/f < Uw/2",
+          "explanation": "O Guia Finder assevera que, para garantir a proteção oferecida pelo DPS instalado, é sempre melhor verificar a equação Up/f < Uw/2. Essa margem se justifica porque a onda do surto que passa do DPS está sujeita a fenômenos de reflexão que podem dobrar o seu valor em terminais com circuitos abertos (atingindo 2 Up/f); o critério garante que a Uw do aparelho não seja ultrapassada nem com essas oscilações."
+        },
+        {
+          "id": "s5",
+          "title": "Ondas refletidas e distância de proteção",
+          "type": "note",
+          "body": "O Guia Finder explica o fenômeno das ondas refletidas: se a onda de tensão encontrar no fim da linha um circuito aberto, ela se refletirá e a tensão no fim da linha pode dobrar, atingindo 2 Ures. Em conformação estacionária, as anomalias por rebatimento culminam em cenário no qual a tensão no fim da linha pode até mesmo dobrar. As indicações de dimensionamento sobre a Distância de proteção advertem que essa fórmula não se aplica a menos de 10 m."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A coordenação de isolamento organiza o ambiente em zonas LPZ (0A sem proteção até zonas internas cada vez mais atenuadas) e categorias de instalação com tensões de resistência crescentes (1,5 / 2,5 / 4 / 6 kV). A coordenação de energia entre DPSs vale-se da indutância dos cabos (1 uH/m) para que o primeiro absorva a energia sem danificar o segundo (EN 62305). A regra Up/f < Uw/2 garante margem segura mesmo com ondas refletidas, que podem dobrar a tensão (2 Ures); a fórmula de distância de proteção não se aplica abaixo de 10 m."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Normas de Transitórios (IEC 61000-4)",
+      "subtitle": "Ondas de ensaio, classes de DPS e referências normativas",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "As ondas de ensaio e suas classes",
+          "type": "text",
+          "body": "Consultando a tabela do Guia Finder que correlaciona os testes, a regra atesta que o gerador combinado (Uoc 1,2/50 us provendo correntes 8/20 us associadas) refere-se à aferição dos aparelhos limitadores de Classe III (Tipo 3); enquanto a Classe II (Tipo 2/Classe C) depende dos injetores para a onda indutiva característica cravada em 8/20 us, fixando In e Imax; ficando a Iimp com a onda 10/350 us reservada somente para a Classe I. O Guia afirma objetivamente que a Classe II tem seus DPSs testados com forma de onda 8/20 us, curva típica adotada normativamente para representar surtos de tensão induzidos."
+        },
+        {
+          "id": "s2",
+          "title": "Energia das formas de onda",
+          "type": "note",
+          "body": "Os quadros de onda fornecidos no Guia Finder afirmam que a contribuição energética, representada pela área sob as curvas, é maior para a forma de onda 10/350 us (típica do primeiro impacto do raio), o que a designa como a onda do duro ensaio da Classe I, sendo a 8/20 us de menor área designada tipicamente à Classe II. De forma textual, o Guia dita que a Corrente de impulso corresponde ao valor de pico do impulso com forma de onda 10/350 us, com o qual o DPS de Classe I é testado, definindo o desempenho em termos de corrente de impulso: Iimp."
+        },
+        {
+          "id": "s3",
+          "title": "Categorias de instalação na referência normativa",
+          "type": "list",
+          "items": [
+            "Categoria de instalação I — o fabricante deve garantir uma tensão de resistência de 1,5 kV (Guia Finder)",
+            "Categoria de instalação III — aparelhos que fazem parte do sistema (interruptores, tomadas, quadros); tensão de resistência de 4 kV",
+            "Categoria de instalação IV — dispositivos instalados antes do quadro de distribuição; tensão de resistência ao impulso de 6 kV"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Zonas LPZ e a regra de margem na norma",
+          "type": "text",
+          "body": "Ao expor a fundação teórica das engrenagens limitadoras do impacto dos raios, o Guia Finder enuncia que, fazendo referência à norma 62305-1, podemos dividir em regiões o ambiente eletromagnético associado à descarga de um raio (LPZ - Zona de Proteção contra Raios). O Guia dita que a onda do surto que passa do DPS está sujeita a fenômenos de reflexão que podem dobrar o seu valor em terminais com circuitos abertos (atingindo 2 Up/f); para que a Uw do aparelho não seja ultrapassada nem com essas oscilações, a recomendação básica para margem segura se consolida em Up/f < Uw/2."
+        },
+        {
+          "id": "s5",
+          "title": "Inovações fotovoltaicas e referências base",
+          "type": "text",
+          "body": "O Guia Finder explica as inovações da norma prEN 50539-11 afirmando que, se a Iscpv for menor ou igual a Iscwpv, o DPS pode ser instalado diretamente entre os condutores (+ e -) sem instalar nenhum sistema de proteção de reserva, tais como fusíveis ou disjuntores. O Iscwpv é a corrente máxima de curto-circuito do gerador fotovoltaico que o DPS é capaz de suportar, e o disjuntor térmico interno pode desconectar com segurança o DPS no final da vida útil até Iscwpv. Na seção de bibliografia, o Guia exibe as normas que fundamentam essas tecnologias: CEI EN 62305 para proteção contra raios e CEI EN 61643-11 dedicada propriamente aos dispositivos de surto (DPS)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As ondas de ensaio definem as classes de DPS: 10/350 us (Classe I, maior área/energia, Iimp), 8/20 us (Classe II, In e Imax) e gerador combinado 1,2/50 us com 8/20 us (Classe III). As categorias de instalação (1,5 / 4 / 6 kV) e o zoneamento LPZ derivam da EN 62305-1, com a margem Up/f < Uw/2 contra ondas refletidas. A prEN 50539-11 dispensa proteção de reserva fotovoltaica quando Iscpv ≤ Iscwpv. As referências base são a CEI EN 62305 (proteção contra raios) e a CEI EN 61643-11 (DPS)."
+        }
+      ]
+    }
+  ]
+}

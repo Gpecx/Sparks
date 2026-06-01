@@ -1,0 +1,170 @@
+{
+  "category": "Equipamentos SPCS",
+  "categoryOrder": 6,
+  "module": "Relés de Proteção",
+  "moduleOrder": 2,
+  "moduleSubtitle": "Arquitetura interna dos IEDs, aplicações em SPCS e principais fabricantes",
+  "ebookTitle": "Relés de Proteção",
+  "ebookSubtitle": "Do hardware do IED às aplicações em SPCS e aos modelos dos grandes fabricantes",
+  "estimatedMinutes": 41,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de Relés de Proteção",
+      "subtitle": "Evolução tecnológica, arquitetura interna e autodiagnóstico do IED",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Da eletromecânica ao relé digital",
+          "type": "text",
+          "body": "A evolução da tecnologia dos relés de proteção passou pelas fases eletromecânica, estática (estado sólido) e digital (microprocessada). Os relés digitais (IEDs) dispensam discos de indução ou peças móveis, efetuando todas as análises via equações e algoritmos processados pela CPU. Os IEDs são dispositivos microprocessados que englobam medição, comando, monitoramento e proteção no mesmo hardware. No relé digital, os valores medidos são amostrados e convertidos em dados numéricos pelo conversor A/D para processamento da CPU."
+        },
+        {
+          "id": "s2",
+          "title": "Como o sinal analógico vira dado para a CPU",
+          "type": "list",
+          "items": [
+            "O multiplexador (MUX) seleciona e encaminha em sequência cada canal analógico de TC/TP para o conversor A/D compartilhado, otimizando o hardware do IED",
+            "O bloco Sample and Hold amostra a forma de onda e mantém o nível de tensão constante enquanto o conversor A/D efetua a leitura",
+            "O filtro anti-aliasing elimina componentes de alta frequência que poderiam causar distorções severas e falsas leituras na digitalização",
+            "O conversor A/D amostra os valores medidos e os converte em dados numéricos para processamento da CPU",
+            "A saída digital exterioriza sinais de disparo (trip), alarmes e condições lógicas calculadas pela CPU"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Por que o filtro anti-aliasing é indispensável",
+          "type": "text",
+          "body": "O filtro anti-aliasing previne o mascaramento dos sinais da rede (50/60Hz) por transientes ruidosos superiores que induziriam a atuação falsa. Sem ele, componentes de alta frequência poderiam causar distorções severas e falsas leituras na digitalização, comprometendo as análises feitas pela CPU."
+        },
+        {
+          "id": "s4",
+          "title": "Proteção contra ruído e continuidade de alimentação",
+          "type": "text",
+          "body": "Cuidados como a separação elétrica e o uso de acopladores ópticos protegem a CPU sensível contra ruídos do pátio da subestação. A alimentação CC assegura que a proteção atue corretamente mesmo com o colapso e queda da tensão CA durante curtos-circuitos. A memória EPROM/Flash armazena parâmetros e ajustes para manter os dados íntegros mesmo quando o relé é desligado da fonte."
+        },
+        {
+          "id": "s5",
+          "title": "Watchdog e autodiagnóstico: a proteção que se vigia",
+          "type": "note",
+          "body": "O watchdog verifica continuamente o ciclo de clock e força a reinicialização caso o software operacional congele; ele atua como o cão de guarda do sistema operacional, reiniciando o relé automaticamente ao constatar travamento do ciclo de clock. O autodiagnóstico do IED valida seus ajustes comparando as divergências entre duas cópias íntegras na memória não volátil. Diferente dos testes antigos, o monitoramento contínuo do IED roda em background, possuindo período de indisponibilidade da proteção igual a zero."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os relés evoluíram das fases eletromecânica e estática até a digital (microprocessada), na qual o IED reúne medição, comando, monitoramento e proteção no mesmo hardware. O sinal de TC/TP percorre MUX, Sample and Hold, filtro anti-aliasing e conversor A/D até virar dado numérico para a CPU. Acopladores ópticos e alimentação CC garantem operação confiável no ambiente ruidoso da subestação, e o watchdog mais o autodiagnóstico mantêm a proteção vigiando a si mesma, com indisponibilidade igual a zero."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Aplicações em SPCS",
+      "subtitle": "Lógicas, registros de eventos, supervisão de disparo e localização de falta",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Marshalling e lógicas programáveis",
+          "type": "text",
+          "body": "A matriz de Marshalling é a interface de software responsável por direcionar os sinais do processador aos contatos secos e indicações visuais; ela associa as lógicas (equações booleanas) geradas pela CPU aos módulos físicos de I/O e sinalização. Os IEDs oferecem flexibilidade por meio de equações lógicas para definir condições exatas de acionamento de saídas e bloqueios. A programação das lógicas, portas e relações de transformação pode ser completamente elaborada no computador e depois carregada no relé."
+        },
+        {
+          "id": "s2",
+          "title": "O que o IED registra durante o evento",
+          "type": "list",
+          "items": [
+            "O SER (Sequential Events Recorder) cria uma lista detalhada de eventos digitais para ajudar na análise e reconstrução do incidente",
+            "O SER é uma tabela sequencial em milissegundos que documenta as atuações de alarmes, lógicas e contatos durante o evento",
+            "O parâmetro Prior to Trigger define o registro da janela de pré-falta (antes do evento), e não do período de pós-falta",
+            "A opção de condicionar o salvamento definitivo do oscilograma à confirmação real de um desligamento poupa memória útil",
+            "Os canais de comunicação permitem o acesso remoto e local para baixar oscilografias, alterar lógicas e integrar à automação"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Supervisão do circuito de disparo (74TC)",
+          "type": "text",
+          "body": "A função Trip Circuit Supervision (74TC) monitora a prontidão operativa do laço de disparo do disjuntor. É importante distinguir funções: o watchdog é um circuito de segurança (hardware/software) que força o rearme do processador caso ocorra travamento de laço, não sendo uma função de sobrecorrente. Para evitar corrupção de dados, o autodiagnóstico valida os ajustes checando duas cópias íntegras na memória não volátil."
+        },
+        {
+          "id": "s4",
+          "title": "Grupos de ajuste e acesso local",
+          "type": "text",
+          "body": "Os relés armazenam múltiplos grupos de ajuste na memória não volátil para adequar rapidamente a seletividade a mudanças da rede. Essa liberação permite que a equipe atue diretamente na interface do painel (local) para alterar parâmetros e efetuar manobras seguras, complementando o acesso remoto pelos canais de comunicação."
+        },
+        {
+          "id": "s5",
+          "title": "Cálculo da corrente secundária do TC",
+          "type": "text",
+          "body": "O valor da corrente secundária é calculado pela proporção do TC. Exemplo 1: Isec = 80 x (5 / 400) = 1,0 A. Exemplo 2, convertendo o primário para o secundário: Isec = 50 / (100/5) = 50 / 20 = 2,5 A."
+        },
+        {
+          "id": "s6",
+          "title": "Localizando a falta na linha de transmissão",
+          "type": "note",
+          "body": "O Fault Locator utiliza os fasores medidos no momento da falta para estimar a localização física do defeito na LT. Os IEDs modernos incorporam a função Fault Locator para calcular a distância exata até a falta com base nas impedâncias medidas, agilizando o restabelecimento e a inspeção de campo."
+        },
+        {
+          "id": "s7",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Em aplicações de SPCS, a matriz de Marshalling direciona as equações booleanas da CPU aos contatos e sinalizações, com lógicas elaboradas no computador e carregadas no relé. O SER documenta os eventos digitais em milissegundos e a oscilografia registra a janela de pré-falta (Prior to Trigger). A função 74TC supervisiona o laço de disparo, os múltiplos grupos de ajuste adaptam a seletividade, a corrente secundária segue a proporção do TC e o Fault Locator estima a distância até a falta pelas impedâncias medidas."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Fabricantes e Modelos",
+      "subtitle": "Padronização ANSI/IEC 61850 e linhas de ABB, GE, SEL, Siemens, Schneider, NARI, PEXTRON e ZIV",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A linguagem comum: ANSI e IEC 61850",
+          "type": "text",
+          "body": "A norma ANSI C37.2 define os números de dispositivo (device numbers) usados globalmente pelos fabricantes para padronizar os relés. A numeração ANSI padroniza a designação das funções em diagramas e manuais, facilitando a interpretação técnica independente do vendor. Por exemplo, a função ANSI 25 verifica se diferenças de tensão, frequência e ângulo estão nos limites antes do paralelismo. No modelo de dados da IEC 61850, o nó lógico PDIS representa padronizadamente a proteção de distância."
+        },
+        {
+          "id": "s2",
+          "title": "Siemens: SIPROTEC, MLFB e DIGSI",
+          "type": "text",
+          "body": "A Siemens utiliza a codificação padrão para sua linha mundial de proteções numéricas SIPROTEC. O software DIGSI realiza a configuração geral, o roteamento de matriz e o diagnóstico dos IEDs da família Siemens. A sigla MLFB (Machine-Readable Product Designation) descreve as propriedades vitais e a identificação única do IED, construída sob medida: define o código de encomenda e as propriedades do relé, especificando as placas e versões exatas de fábrica. O modelo 7SS52 é um relé de proteção diferencial de barras (87B) notório por adotar uma arquitetura de rede distribuída com Unidades de Bay locais."
+        },
+        {
+          "id": "s3",
+          "title": "SEL: famílias e ferramentas AcSELerator",
+          "type": "text",
+          "body": "A família SEL-387 é focada nativamente na proteção diferencial de transformadores de potência, possuindo controle de tap e inrush, não barramentos. O relé SEL-300G é o IED multifuncional voltado especificamente para as funções e a proteção avançada de geradores. O ambiente computacional AcSELerator consolida a comunicação e o ajuste gráfico de toda a linha de relés da Schweitzer, e o AcSELerator QuickSet é a ferramenta oficial de software para acesso, lógica e ajuste dos IEDs da SEL."
+        },
+        {
+          "id": "s4",
+          "title": "ABB e Schneider Electric",
+          "type": "text",
+          "body": "O relé digital REL356 da ABB efetua a comparação diferencial compondo correntes com uso de componentes simétricas de forma digital. Os relés Sepam são os equipamentos multifunção padrão listados para aplicações de proteção industrial da Schneider Electric."
+        },
+        {
+          "id": "s5",
+          "title": "Lendo o código do modelo: sufixos de curva e tempo",
+          "type": "list",
+          "items": [
+            "Sufixo C (Curve / Variável Curve) — permite escolher entre curvas normais, muito inversas ou modelos padronizados IEC/ANSI",
+            "Sufixo P (Pickup) — define estritamente o valor de partida do elemento de proteção para iniciar a temporização",
+            "Sufixo D — determina o multiplicador ou atraso de tempo (Time Delay/Dial), enquanto a curva em si é selecionada pelo sufixo C (Curve)"
+          ]
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os fabricantes (ABB, GE, SEL, Siemens, Schneider, NARI, PEXTRON, ZIV) compartilham linguagens comuns: a ANSI C37.2 padroniza os números de dispositivo (como a função 25 de paralelismo) e a IEC 61850 padroniza nós lógicos como o PDIS. Cada linha tem identidade própria: SIPROTEC/MLFB/DIGSI na Siemens (incluindo o 7SS52 de barras), SEL-387 e SEL-300G com AcSELerator/QuickSet na SEL, REL356 na ABB e Sepam na Schneider. Os sufixos C, P e D no código do modelo informam, respectivamente, curva, pickup e atraso de tempo."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,322 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Distúrbios, distorções e conformidade da energia elétrica",
+  "categoryOrder": 2,
+  "module": "Harmônicas e Distorção",
+  "moduleSubtitle": "Origem, impactos, análise, mitigação e limites normativos das harmônicas",
+  "moduleOrder": 1,
+  "ebookTitle": "Harmônicas e Distorção",
+  "ebookSubtitle": "Dos fundamentos das harmônicas às fontes, impactos, análise, filtros e limites IEEE 519, IEC 61000-3 e PRODIST",
+  "estimatedMinutes": 80,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de Harmônicas",
+      "subtitle": "O que são harmônicas, distorção e os conceitos das normas",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que são harmônicas",
+          "type": "text",
+          "body": "Harmônicas são componentes dos sinais com frequências que são múltiplos inteiros da frequência fundamental. As harmônicas são componentes de corrente com frequência em geral superiores à frequência fundamental de 50 ou 60 Hz. O PRODIST Módulo 8 define distorções harmônicas como deformações nas formas de onda das tensões e correntes em relação à onda senoidal da frequência fundamental. Todas as cargas não lineares produzem harmônicas devido ao fato da corrente não ter forma senoidal pura."
+        },
+        {
+          "id": "s2",
+          "title": "Cargas que geram harmônicas",
+          "type": "list",
+          "items": [
+            "Lâmpadas fluorescentes, fontes chaveadas, fornos a arco e inversores de frequência são exemplos de cargas não lineares",
+            "Todas as cargas não lineares produzem harmônicas porque a corrente não tem forma senoidal pura",
+            "Resistores e lâmpadas incandescentes são cargas lineares; as reais produtoras de harmônicas são as cargas não lineares",
+            "As harmônicas causam perdas, reduzem o fator de potência e provocam aquecimento excessivo de componentes elétricos"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Indicadores e siglas do PRODIST Módulo 8",
+          "type": "note",
+          "body": "No PRODIST Módulo 8, o indicador DITh% é a Distorção harmônica individual de tensão de ordem h. O PRODIST Módulo 8 subdivide a distorção total em componentes pares não múltiplas de 3, ímpares não múltiplas de 3 e múltiplas de 3, e define a Distorção harmônica total de tensão para as componentes ímpares não múltiplas de 3 com a nomenclatura DTTi%. O PRODIST Módulo 8 estabelece que para medição com TP em V ou delta aberto, os limites de DTT correspondem a 50 por cento dos limites totais permitidos. O PRODIST Módulo 8 confirma que medidores Classe A devem considerar subgrupos harmônicos para os registros."
+        },
+        {
+          "id": "s4",
+          "title": "THD e TDD: a diferença essencial",
+          "type": "formula",
+          "formula": "IEEE 519 (PCC): THD(V) ≤ 5 %  para linhas até 1,0 kV",
+          "explanation": "A recomendação da IEEE 519 no PCC é de que a THD de tensão seja menor ou igual a 5 por cento para linhas até 1.0 kV. A IEEE 519-2022 explica que a TDD expressa as harmônicas como percentual da corrente máxima de demanda, diferindo da THD que foca na fundamental. A IEEE 519-2022 especifica que as medições de THD e TDD excluem especificamente as interharmônicas."
+        },
+        {
+          "id": "s5",
+          "title": "Mitigação e efeitos",
+          "type": "text",
+          "body": "Filtros passivos e ativos evitam a circulação de harmônicas e reduzem as distorções na rede. A utilização de indutor no link CC reduz significativamente a emissão de harmônicos na comparação com equipamentos de 6 pulsos comuns. Na IEEE 519-2022 os limites dos harmônicos pares são os mesmos dos ímpares, exceto o segundo, quarto e sexto, limitados a 50 por cento."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Harmônicas são componentes dos sinais com frequências múltiplas inteiras da fundamental (50 ou 60 Hz); o PRODIST Módulo 8 as define como deformações das ondas de tensão e corrente em relação à senoide fundamental. Todas as cargas não lineares (lâmpadas fluorescentes, fontes chaveadas, fornos a arco, inversores) geram harmônicas, enquanto resistores e lâmpadas incandescentes são lineares. A THD foca na fundamental e a TDD na corrente máxima de demanda; a IEEE 519 recomenda THD(V) ≤ 5 % no PCC até 1,0 kV. Filtros e indutor no link CC reduzem as distorções."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Fontes Geradoras de Harmônicas",
+      "subtitle": "Cargas não lineares, conversores e o fenômeno do notching",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que as cargas não lineares geram harmônicas",
+          "type": "text",
+          "body": "O catálogo da WEG indica que a produção de correntes harmônicas ocorre porque a corrente absorvida pela carga não tem a forma senoidal padrão. O documento da WEG explica que as cargas não lineares produzem harmônicas pelo fato de a corrente absorvida não ter forma senoidal. O manual da WEG especifica que todas as cargas não lineares produzem correntes harmônicas que são injetadas no sistema de potência."
+        },
+        {
+          "id": "s2",
+          "title": "Exemplos de cargas geradoras",
+          "type": "list",
+          "items": [
+            "A WEG diferencia cargas lineares das não lineares, citando motores, resistores de aquecimento e lâmpadas incandescentes como cargas lineares",
+            "O catálogo da WEG lista os inversores de frequência como exemplos diretos de cargas não lineares geradoras de harmônicas",
+            "O material da WEG lista lâmpadas fluorescentes e fontes chaveadas exatamente como exemplos clássicos de cargas não lineares que geram harmônicas",
+            "Os fornos a arco são explicitamente listados no manual da WEG e na dissertação do IFPB como importantes geradores de harmônicas e distorções",
+            "A publicação da ABB cita computadores pessoais, lâmpadas fluorescentes e máquinas de solda como equipamentos que causam distorções harmônicas",
+            "O guia sobre fator de potência da ABB confirma que conversores estáticos e máquinas de solda causam o mau funcionamento decorrente de distorções harmônicas"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O fenômeno do notching",
+          "type": "note",
+          "body": "A dissertação do IFPB aponta que o notching decorre de curtos-circuitos momentâneos entre duas fases durante a comutação de conversores trifásicos. O texto do IFPB define notching como o distúrbio decorrente dos curtos-circuitos momentâneos causados pela comutação das fases em conversores eletrônicos. A dissertação do IFPB esclarece que o notching é um distúrbio periódico na comutação de conversores de eletrônica de potência, causando picos e ruídos, não um aumento RMS constante."
+        },
+        {
+          "id": "s4",
+          "title": "THD de corrente conforme a topologia",
+          "type": "formula",
+          "formula": "Drive 6 pulsos sem indutor no link CC: THD(I) típica ≈ 81,5 %   vs.   AFE regenerativo com filtro LCL: THD(I) ≤ 5 %",
+          "explanation": "A tabela comparativa no documento da WEG mostra que o drive de 6 pulsos sem indutor no link CC possui uma THD de corrente típica de 81,5 por cento. A tabela comparativa da WEG especifica que o drive regenerativo AFE com filtro LCL atinge THD de corrente menor ou igual a 5 por cento. O guia de automação da WEG indica que a presença de indutor no link CC reduz significativamente a emissão de harmônicos comparado a modelos sem indutor."
+        },
+        {
+          "id": "s5",
+          "title": "Soluções de 12 e 18 pulsos",
+          "type": "text",
+          "body": "O manual da WEG aponta que a solução de 18 pulsos atende a IEEE 519 e reduz harmônicos, mas devido ao alto custo, costuma exigir um transformador defasador dedicado. O material da WEG cita especificamente os retificadores em 12 pulsos ou 18 pulsos como soluções que atendem à norma IEEE 519 aplicáveis a potências maiores que 500 kW. O manual da WEG relata que retificadores de 12 e 18 pulsos são soluções tradicionais para mitigação de harmônicos, atendendo a IEEE 519."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As cargas não lineares produzem harmônicas porque a corrente absorvida não tem forma senoidal padrão, e essas correntes são injetadas no sistema de potência. São exemplos inversores de frequência, lâmpadas fluorescentes, fontes chaveadas, fornos a arco e máquinas de solda; motores, resistores e lâmpadas incandescentes são lineares. O notching é um distúrbio periódico por curtos-circuitos momentâneos na comutação de conversores. A THD de corrente varia muito com a topologia — de ~81,5 % no drive de 6 pulsos sem indutor a ≤ 5 % no AFE com filtro LCL; retificadores de 12 e 18 pulsos atendem a IEEE 519 acima de 500 kW."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Impactos das Harmônicas",
+      "subtitle": "Aquecimento, perdas, falhas de proteção e prejuízos reais",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Perdas e redução do fator de potência",
+          "type": "text",
+          "body": "O documento da WEG informa que as correntes harmônicas geram correntes adicionais que não produzem trabalho, ocasionando perdas e reduzindo o fator de potência. O manual da WEG informa expressamente que as correntes adicionais provenientes de harmônicas não produzem trabalho, ocasionam perdas sistemáticas e reduzem o fator de potência. O documento Soluções WEG afirma diretamente que as correntes harmônicas fluindo produzem distorções de tensão em pontos de interligação com outras cargas."
+        },
+        {
+          "id": "s2",
+          "title": "Efeitos negativos nos equipamentos",
+          "type": "list",
+          "items": [
+            "O manual Soluções WEG cita o aquecimento excessivo de componentes como motores, capacitores e transformadores como um efeito negativo direto das harmônicas",
+            "A literatura de Soluções da WEG lista diretamente o aumento da temperatura nos cabos e equipamentos de manobra",
+            "O documento de automação da WEG aponta a queima de reatores e lâmpadas de descarga como um dos efeitos negativos gerados pelas harmônicas",
+            "O catálogo da WEG sobre mitigação lista explicitamente as interferências eletromagnéticas como um dos efeitos negativos",
+            "A literatura da WEG lista vibrações e ruído acústico entre os efeitos adversos decorrentes da presença de harmônicas",
+            "O manual da WEG relata que um dos efeitos negativos é o aumento da corrente total, o que acaba limitando futuras ampliações do sistema elétrico"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Impacto na proteção e nos capacitores",
+          "type": "note",
+          "body": "O documento da WEG lista explicitamente entre os danos causados a ocorrência de funcionamento irregular nos equipamentos de proteção e controle. O Guia de Proteção Schneider afirma que as indutâncias de amortecimento atenuam sobrecorrentes de curta duração na energização, ao passo que as sobrecorrentes harmônicas exigem uma proteção de sobrecarga térmica ou sobrecorrente. O Guia de Proteção Schneider afirma que a sobrecarga nos capacitores por circulação de correntes harmônicas gera aquecimento prejudicial e conduz ao envelhecimento prematuro."
+        },
+        {
+          "id": "s4",
+          "title": "Um caso real de prejuízo",
+          "type": "text",
+          "body": "O artigo da Wrindu relata o caso real de uma siderúrgica onde a distorção harmônica identificada causava elevados prejuízos financeiros por falhas sucessivas de motores. Segundo o artigo da ABB sobre correção de fator de potência, a presença de harmônicas implica em distorção da energia elétrica que pode causar o mau funcionamento dos equipamentos."
+        },
+        {
+          "id": "s5",
+          "title": "Como os filtros atenuam os impactos",
+          "type": "text",
+          "body": "O documento técnico da ABB sobre correção de fator de potência explica que filtros evitam a circulação de harmônicas, reduzindo assim tensões harmônicas a montante e as distorções na baixa tensão. O texto da ABB esclarece o funcionamento dos filtros ativos informando que eles injetam harmônicas de corrente com a fase exatamente oposta àquelas que deverão ser filtradas."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As correntes harmônicas geram correntes adicionais que não produzem trabalho, ocasionando perdas, reduzindo o fator de potência e produzindo distorções de tensão nos pontos de interligação. Entre os efeitos: aquecimento excessivo de motores, capacitores, transformadores e cabos; queima de reatores e lâmpadas; interferências eletromagnéticas; vibrações e ruído; e funcionamento irregular da proteção e controle. Capacitores sofrem envelhecimento prematuro. Um caso real numa siderúrgica mostrou prejuízos por falhas sucessivas de motores. Filtros — inclusive os ativos, que injetam harmônicas em fase oposta — atenuam esses impactos."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Análise de Harmônicas",
+      "subtitle": "THD, FFT, métodos VMD/EMD e medição Classe A",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Quantificando a distorção com a THD",
+          "type": "text",
+          "body": "O manual de Soluções da WEG define que a maneira de quantificar a distorção total de uma forma de onda é através da Distorção Harmônica Total. O documento ABB IEEE 519-2022 especifica que a THD e a TDD consideram as componentes harmônicas até a 50 ordem (quinquagésima ordem). Segundo o guia de revisão da ABB sobre a IEEE 519-2022, o cálculo do conteúdo harmônico exclui especificamente as interharmônicas, e o texto oficial de revisão da ABB expressa literalmente que os componentes interharmônicos devem ser especificamente excluídos dos índices TDD e THD."
+        },
+        {
+          "id": "s2",
+          "title": "FFT e suas limitações",
+          "type": "text",
+          "body": "O artigo Wrindu sobre analisadores de energia indica claramente que o condicionamento de sinal garante precisão de ondas para os cálculos harmônicos baseados em FFT. A dissertação do IFPB aponta que na FFT a informação temporal fica indisponível, impossibilitando afirmar quando determinado evento ocorreu no sinal analisado."
+        },
+        {
+          "id": "s3",
+          "title": "Métodos avançados: EMD e VMD",
+          "type": "list",
+          "items": [
+            "A pesquisa do IFPB avalia a EMD como sendo ineficiente na detecção das características de banda lateral e altamente sensível a ruído quando comparada com o método VMD",
+            "O estudo da IFPB relata que a maior robustez do VMD em presença de ruído ocorre devido ao filtro de Wiener estar embutido no processo de atualização de modos do algoritmo",
+            "O texto do IFPB descreve que a largura de banda do sinal de cada modo no algoritmo VMD é estimada por meio quadrado da norma L2 do gradiente do sinal de demodulação",
+            "Na dissertação do IFPB, as decomposições VMD exibem a frequência de 60 Hz fundamental isolada de forma eficaz e limpa na IMF 1, para avaliação das demais frequências nas outras IMFs"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Medição Classe A, Classe S e percentil do PRODIST",
+          "type": "note",
+          "body": "O material KRA2 Energia detalha que a Classe S pode usar Grupos ou Subgrupos Harmônicos, e o cálculo do desequilíbrio de sequência zero é opcional. O documento informativo da KRA2 Energia dita que a incerteza de medição para distorções harmônicas na Classe A deve ser inferior ou igual a 5 por cento da tensão medida; o material informativo do PRODIST pela KRA2 Energia fixa normativamente que a incerteza de medição na Classe A é inferior ou igual a ±5,0 por cento da tensão. A Tabela 1 e a metodologia do PRODIST Módulo 8 definem que o percentil correspondente ao DTT95% diz respeito ao valor superado em apenas 5 por cento das 1008 leituras válidas."
+        },
+        {
+          "id": "s5",
+          "title": "Siglas de distorção total do PRODIST",
+          "type": "text",
+          "body": "O PRODIST Módulo 8 define a sigla DTTi% como a distorção para componentes ímpares. As componentes pares não múltiplas de três recebem a sigla DTTp%. O PRODIST Módulo 8 define explicitamente a sigla DTT3% como a distorção harmônica total de tensão para as componentes múltiplas de 3."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A Distorção Harmônica Total quantifica a distorção total da forma de onda; THD e TDD consideram componentes até a 50ª ordem e excluem as interharmônicas. A FFT, com bom condicionamento de sinal, dá precisão aos cálculos, mas perde a informação temporal. Entre os métodos avançados, a EMD é sensível a ruído, enquanto o VMD é mais robusto (filtro de Wiener embutido) e isola a fundamental de 60 Hz na IMF 1. Na medição, a Classe A exige incerteza ≤ ±5,0 % da tensão; o DTT95% é o valor superado em apenas 5 % das 1008 leituras válidas. O PRODIST distingue DTTi%, DTTp% e DTT3%."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Filtros Passivos e Ativos",
+      "subtitle": "Topologias de mitigação, eficiência e fator de potência",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Filtros ativos: função tripla e operação",
+          "type": "text",
+          "body": "O informativo da ABB destaca que os filtros ativos PQF executam uma tripla função: filtragem harmônica, compensação de energia reativa e balanceamento de carga. O material informativo da ABB detalha que o processamento digital dos filtros ativos ocorre através do componente DSP (Processador de Sinal Digital). O documento ABB Correção de fator de potência relata que os filtros ativos injetam harmônicas de corrente com fase exatamente oposta às que deverão ser filtradas."
+        },
+        {
+          "id": "s2",
+          "title": "Comparativo de topologias WEG",
+          "type": "list",
+          "items": [
+            "A tabela comparativa da WEG detalha que o drive de 6 pulsos operando com reatância de rede possui uma THD de corrente típica de 39 por cento",
+            "A tabela da WEG indica que a THD do drive com reatância no link CC varia de 30 a 40 por cento, valor consideravelmente superior aos 5 por cento atingidos pelo filtro ativo",
+            "A tabela comparativa da WEG lista explicitamente o drive de 12 pulsos com transformador defasador possuindo THD típica entre 8,5 e 14 por cento",
+            "A tabela comparativa e o texto do catálogo da WEG especificam que a solução em 18 pulsos apresenta THD entre 4,5 e 6 por cento, exigindo transformador em potências altas",
+            "A tabela comparativa da WEG estabelece para o drive com filtro ativo uma THD típica ≤ 5 por cento e um fator de potência típico ≥ 0,99",
+            "A tabela comparativa de soluções WEG atesta a eficiência do drive de 18 pulsos em 96 por cento, enquanto o drive de 6 pulsos com filtro passivo registra 97 por cento"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Filtro passivo: vantagens e limitações",
+          "type": "note",
+          "body": "O manual Soluções WEG relata literalmente que a utilização de inversores com filtro passivo atende aos limites recomendados pela IEEE 519. O manual Soluções WEG cita que o filtro passivo atende a IEEE 519, porém aumenta as perdas por aquecimento e reduz o fator de potência. O documento Soluções WEG afirma que o indutor no link CC reduz significativamente a emissão de harmônicos em relação aos inversores sem indutor."
+        },
+        {
+          "id": "s4",
+          "title": "AFE com filtro LCL e 18 pulsos",
+          "type": "text",
+          "body": "O catálogo de mitigação da WEG indica que a solução AFE com filtro LCL é especialmente atrativa quando se regenera energia ou há múltiplos motores em um barramento CC. O guia técnico da WEG descreve a solução 'Acionamento Regenerativo AFE + Filtro LCL' como a alternativa ideal para permitir regeneração de energia garantindo baixa distorção harmônica. O manual da WEG relata que o retificador de 18 pulsos atende a IEEE 519, mas devido ao alto custo tende a exigir um transformador defasador dedicado."
+        },
+        {
+          "id": "s5",
+          "title": "Custo e aplicação por potência",
+          "type": "text",
+          "body": "Segundo o guia de mitigação da WEG, a solução de filtro ativo é ótima, mas possui custo mais elevado em relação ao filtro passivo por ser uma tecnologia relativamente mais recente. Segundo o catálogo da WEG, devido ao alto custo, os retificadores de 12 e 18 pulsos tendem a ser utilizados com potências geralmente maiores que 500 kW."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os filtros ativos PQF da ABB cumprem tripla função (filtragem harmônica, compensação de reativos e balanceamento de carga), são processados por DSP e injetam correntes em fase oposta. No comparativo WEG, a THD cai de ~39 % no drive de 6 pulsos com reatância e 8,5–14 % no de 12 pulsos para 4,5–6 % no de 18 pulsos e ≤ 5 % no filtro ativo (FP ≥ 0,99). O filtro passivo atende a IEEE 519, mas aumenta perdas e reduz o fator de potência. O AFE com filtro LCL é ideal para regeneração e múltiplos motores no barramento CC. Filtro ativo e retificadores de 12/18 pulsos têm custo elevado, estes últimos aplicados acima de 500 kW."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Limites IEEE 519 e IEC 61000-3",
+      "subtitle": "PCC, tabelas de TDD/DTT e conformidade normativa",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O PCC e as grandezas de referência",
+          "type": "text",
+          "body": "O termo PCC é traduzido e referenciado diretamente pelo material da WEG como Ponto de Acoplamento Comum. O documento da WEG define a sigla PCC repetidas vezes como Ponto de Acoplamento Comum, sendo o local onde a norma exige a análise. As notas da Tabela 2 no documento da WEG e ABB definem Isc como a máxima corrente de curto-circuito no PCC (Point of Common Coupling), e definem IL como a máxima corrente demandada pela carga (componente fundamental) no PCC."
+        },
+        {
+          "id": "s2",
+          "title": "Limites de TDD da IEEE 519",
+          "type": "formula",
+          "formula": "Isc/IL < 20: TDD ≤ 5,0 %   ·   50 a 100: TDD = 12,0 %   ·   > 1000: TDD = 20,0 %   ·   (11 ≤ h ≤ 17, Isc/IL < 20): ≤ 2,0 %",
+          "explanation": "A tabela reproduzida no manual da WEG estabelece que, para Isc/IL menor que 20, o limite máximo da TDD é de 5,0 por cento. A tabela da IEEE 519 no manual WEG mostra que para a faixa entre 50 e 100 o limite da TDD é de 12,0 por cento, e não 15,0 por cento. De acordo com a Tabela da IEEE 519 reproduzida nos materiais da WEG e ABB, a TDD limite para proporções maiores que 1000 é estipulada em 20,0 por cento. A Tabela II do manual da WEG detalha que, para Isc/IL menor que 20 e ordens harmônicas entre 11 e 17, o limite máximo é exatamente 2,0 por cento."
+        },
+        {
+          "id": "s3",
+          "title": "THD de tensão e harmônicos pares",
+          "type": "text",
+          "body": "O manual Soluções WEG especifica que a recomendação da IEEE 519 é de que no PCC a THD(V) seja menor ou igual a 5 por cento. O documento da ABB informa na nota a da Tabela 2 que para harmônicos de ordem menor ou igual a 6, os pares são limitados a 50 por cento dos limites ímpares mostrados. O guia de revisão da ABB sobre a IEEE 519-2022 destaca que a THD e a TDD consideram harmônicos até a 50 ordem, especificamente excluindo as interharmônicas."
+        },
+        {
+          "id": "s4",
+          "title": "Limites de DTT95% do PRODIST Módulo 8",
+          "type": "list",
+          "items": [
+            "A Tabela 2 do PRODIST Módulo 8 lista o limite de DTT95% para tensão nominal menor que 2,3 kV exatamente como 10,0 por cento",
+            "A Tabela 2 do PRODIST Módulo 8 estipula que a faixa de tensão de 2,3 kV até 69 kV possui o limite DTT95% fixado em 8,0 por cento",
+            "A Tabela 2 do PRODIST Módulo 8 define explicitamente que, para tensões de 69 kV a 230 kV, o limite do DTT95% é de 5,0 por cento"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "O alcance e os limites da norma",
+          "type": "note",
+          "body": "O manual da WEG ressalta claramente que a IEEE 519 diz respeito aos sistemas de distribuição e não aos equipamentos individuais. O texto de revisão da ABB adverte exatamente o oposto, declarando que os limites dados no documento não têm a intenção de serem usados para a avaliação de equipamentos. O manual da WEG relata que não é economicamente viável nem possível eliminar todas as harmônicas do sistema."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A IEEE 519 exige a análise no PCC (Ponto de Acoplamento Comum), com Isc (máxima corrente de curto-circuito) e IL (máxima corrente de demanda fundamental) como referências. O limite de TDD cresce com Isc/IL — de 5,0 % (Isc/IL < 20) a 12,0 % (50–100) e 20,0 % (> 1000) —, e a THD(V) recomendada no PCC é ≤ 5 %; harmônicos pares de ordem ≤ 6 ficam limitados a 50 % dos ímpares. No PRODIST Módulo 8, o DTT95% varia de 10,0 % (< 2,3 kV) a 8,0 % (2,3–69 kV) e 5,0 % (69–230 kV). A IEEE 519 aplica-se a sistemas de distribuição, não a equipamentos individuais, e não é viável eliminar todas as harmônicas."
+        }
+      ]
+    }
+  ]
+}

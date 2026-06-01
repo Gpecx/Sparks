@@ -1,0 +1,286 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categoryOrder": 0,
+  "module": "NBRs Elétricas",
+  "moduleOrder": 1,
+  "moduleSubtitle": "Baixa tensão, alta tensão, conjuntos de manobra, gestão de ativos e confiabilidade",
+  "ebookTitle": "NBRs Elétricas Essenciais",
+  "ebookSubtitle": "Da NBR 5410 à NBR 5462: instalações, proteção, manobra e confiabilidade na prática industrial",
+  "estimatedMinutes": 67,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — NBR 5410: Instalações Elétricas de Baixa Tensão",
+      "subtitle": "Definições, medidas de controle do risco elétrico e aterramento",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é baixa tensão",
+          "type": "text",
+          "body": "Baixa Tensão é definida como tensão superior a 50V e igual ou inferior a 1000V em corrente alternada. Dentro desse universo, a tensão de segurança é a extra baixa tensão originada em uma fonte de segurança. O projeto de uma instalação de BT não trata apenas de dimensionar condutores: ele deve prever as precauções aplicáveis em face das influências externas do ambiente, definindo expressamente a interligação ou não entre o condutor neutro e o de proteção. Essa decisão de projeto orienta todo o esquema de aterramento e as medidas de segurança que se seguem."
+        },
+        {
+          "id": "s2",
+          "title": "Medidas de controle do risco elétrico",
+          "type": "list",
+          "items": [
+            "Seccionamento automático da alimentação, que desliga o circuito ao detectar a falta",
+            "Dispositivos a corrente de fuga (DR), indicados expressamente como medida de controle",
+            "Isolação dupla ou reforçada, entre as medidas de controle do risco elétrico",
+            "Barreiras e invólucros, que protegem contra contatos diretos",
+            "Extra baixa tensão de segurança, originada em uma fonte de segurança"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Invólucros e equipamentos ativos",
+          "type": "text",
+          "body": "Invólucro é o envoltório de partes energizadas que protege fisicamente contra contatos diretos. Barreiras e invólucros são, portanto, medidas de controle do risco elétrico contra contatos diretos. Já os disjuntores e fusíveis são classificados como equipamentos ativos, pois são destinados a eliminar a corrente de curto-circuito — eles não apenas protegem, eles atuam para interromper a falta."
+        },
+        {
+          "id": "s4",
+          "title": "Esquemas de aterramento e suportabilidade térmica",
+          "type": "note",
+          "body": "O aterramento funcional é classificado nas tipologias TN, TT e IT. No neutro isolado (esquema IT), a corrente de falha capacitiva é baixa, o que permite a continuidade de serviço na primeira falha. A suportabilidade térmica dos cabos e condutores é expressa em kA eficaz durante 1 a 5 segundos. Na equação térmica, o tempo admissível é diretamente proporcional ao quadrado da seção transversal do condutor: condutores mais grossos suportam a corrente de falta por mais tempo."
+        },
+        {
+          "id": "s5",
+          "title": "Documentação e aterramento temporário",
+          "type": "list",
+          "items": [
+            "O item 10.2.4 alínea b da NR-10 torna obrigatória a documentação das inspeções do SPDA e dos aterramentos",
+            "O item 10.2.4 alínea e da NR-10 exige incondicionalmente os resultados dos testes de isolação elétrica no prontuário",
+            "O aterramento elétrico temporário garante a equipotencialidade no local de trabalho",
+            "Exige-se a instalação de aterramento temporário com a equipotencialização dos condutores"
+          ]
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NBR 5410 rege instalações de baixa tensão (superior a 50V e até 1000V em CA). O projeto deve definir a relação neutro–proteção e prever influências externas. As medidas de controle incluem seccionamento automático, DR, isolação dupla/reforçada, barreiras e invólucros. O aterramento funcional segue as tipologias TN, TT e IT, e a suportabilidade térmica (kA eficaz por 1 a 5 s) cresce com o quadrado da seção do condutor. A NR-10 exige documentar inspeções de SPDA, aterramentos e testes de isolação, e o aterramento temporário garante equipotencialidade no trabalho."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — NBR 14039: Instalações Elétricas de Alta Tensão",
+      "subtitle": "Definição de AT, esquemas de neutro, proteções ANSI e zonas de risco",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é alta tensão",
+          "type": "text",
+          "body": "O glossário da NR-10 define Alta Tensão (AT) como a tensão superior a 1000V em corrente alternada ou 1500V em corrente contínua. Nesse domínio, os esforços de curto-circuito e os riscos de aproximação tornam-se mais severos. A suportabilidade eletrodinâmica é expressa em kA pico para caracterizar a resistência mecânica aos esforços de curto-circuito, enquanto a capacidade Ith de curtos é nomeada suportabilidade térmica e expressa o aquecimento admissível do material."
+        },
+        {
+          "id": "s2",
+          "title": "Esquemas de aterramento de neutro",
+          "type": "text",
+          "body": "No neutro isolado, a primeira falha provoca apenas uma baixa corrente capacitiva, permitindo a continuidade temporária do serviço. Já no aterramento por baixa reatância, a continuidade de serviço é degradada, exigindo trip automático rápido na primeira falta. A reatância de compensação, conhecida como bobina de Petersen, ajusta e compensa a capacitância fase-terra da rede na fuga à terra. A chave seccionadora tem a função de isolação da rede, mas não a função de chaveamento de corrente em serviço."
+        },
+        {
+          "id": "s3",
+          "title": "Funções de proteção ANSI em AT",
+          "type": "list",
+          "items": [
+            "51 — relé de sobrecorrente de fase temporizada",
+            "64G — associa o 59N para deslocamento de neutro e o 27TN para falhas do lado do neutro",
+            "64REF — protação diferencial de fuga à terra restrita",
+            "63 — relé Buchholz (detecção de gás e pressão), protege transformadores a óleo contra falhas internas",
+            "49RMS — calcula a sobrecarga estimando a liberação e o acúmulo de calor no transformador ou motor",
+            "Restrição H2 — mede o harmônico de segunda ordem para detectar a energização e inibir o falso trip"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Zonas de risco e trabalho em AT",
+          "type": "note",
+          "body": "A aproximação na Zona Controlada é restrita e só é permitida a profissionais autorizados. O Anexo II da NR-10 fixa que, para 10 a 15 kV, o raio da Zona de Risco é de 0,38 metros e a Zona Controlada é de 1,38 metros. O item 10.7.3 da NR-10 estabelece que os serviços em instalações energizadas em AT não podem ser realizados individualmente, e o item 10.7.7 torna compulsória a desativação (bloqueio) de conjuntos de religamento automático durante intervenções na zona de risco."
+        },
+        {
+          "id": "s5",
+          "title": "Prontuário e cargas instaladas",
+          "type": "text",
+          "body": "O item 10.2.4 da NR-10 exige a formação do Prontuário para todo estabelecimento comercial ou industrial com carga instalada superior a 75 kW. Esse prontuário consolida a documentação técnica da instalação e é o instrumento formal que organiza inspeções, testes e procedimentos de segurança da rede de alta tensão."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NBR 14039 trata de instalações de alta tensão — acima de 1000V em CA ou 1500V em CC. A suportabilidade eletrodinâmica (kA pico) mede a resistência mecânica e a térmica (Ith) o aquecimento admissível. O esquema de neutro define a estratégia: neutro isolado permite continuidade na primeira falha, baixa reatância exige trip rápido, e a bobina de Petersen compensa a capacitância fase-terra. Funções ANSI como 51, 64G, 64REF, 63, 49RMS e a restrição H2 estruturam a proteção. A NR-10 fixa zonas de risco (0,38 m) e controlada (1,38 m) para 10–15 kV, proíbe trabalho individual em AT e exige prontuário acima de 75 kW."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — NBR IEC 60439: Conjuntos de Manobra e Controle",
+      "subtitle": "Painéis, bloqueio LOTO, intertravamento e arco elétrico",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O perigo do arco elétrico",
+          "type": "text",
+          "body": "Os conjuntos de manobra e controle concentram energia e risco. A temperatura do arco pode ultrapassar, em seu centro, os 10000 graus Celsius. Por isso, o projeto e a operação desses painéis exigem barreiras físicas e procedimentos rígidos. O glossário da NR-10 define invólucro como o envoltório de partes energizadas destinado a impedir qualquer contato com partes internas, reforçando a proteção contra contatos diretos nesses conjuntos."
+        },
+        {
+          "id": "s2",
+          "title": "Suportabilidade dos conjuntos",
+          "type": "text",
+          "body": "Dois conceitos distintos caracterizam a robustez de um conjunto frente ao curto-circuito. A suportabilidade eletrodinâmica é a resistência mecânica aos esforços físicos do curto-circuito, expressa em kA pico. A suportabilidade térmica caracteriza o sobreaquecimento e é expressa em kA eficaz (não pico) durante 1 a 5 segundos — o pico é usado para a eletrodinâmica. Confundir os dois leva a especificações erradas: pico para esforço mecânico, eficaz para aquecimento."
+        },
+        {
+          "id": "s3",
+          "title": "Bloqueio (LOTO) e intertravamento",
+          "type": "list",
+          "items": [
+            "O glossário oficial da NR-10 define a ação crítica da LOTO como o impedimento de reenergização",
+            "O item 12.11.5 da NR-12 exige que cada trabalhador possua seu dispositivo de bloqueio individual e independente",
+            "O item 10.10.1 alínea b da NR-10 obriga aplicar sinalização para travamentos e bloqueios de dispositivos e sistemas de manobra",
+            "O item 12.5.6 da NR-12 determina que protações móveis sejam sempre associadas a dispositivos de intertravamento de segurança",
+            "O item 10.3.9 alínea b da NR-10 especifica posição Verde (D) para desligado e Vermelho (L) para ligado"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Requisitos construtivos dos quadros (NR-12)",
+          "type": "list",
+          "items": [
+            "O item 12.3.5 exige que os quadros de comando tenham porta de acesso permanentemente fechada",
+            "O item 12.3.5 alínea e exige grau de proteção adequado ao ambiente",
+            "O item 12.3.2 exige o aterramento obrigatório das carcaças, invólucros e blindagens dos painéis",
+            "O item 12.3.8 alínea b proíbe expressamente a utilização de chaves tipo faca nos circuitos elétricos",
+            "O item 10.4.4.1 da NR-10 proíbe utilizar compartimentos e invólucros de equipamentos elétricos para armazenamento"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Seccionadora e proteção de massa-cuba",
+          "type": "note",
+          "body": "A seccionadora tem função de isolação, porém não possui a função de chaveamento de corrente em serviço ou curto-circuito — ela isola, mas não interrompe corrente sob carga. Na proteção de massa-cuba (carcaça), o armário é isolado da terra exceto através do primário de um TC que alimenta um relé de sobrecorrente, detectando fugas para a carcaça do conjunto."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NBR IEC 60439 rege conjuntos de manobra e controle, onde o arco pode passar de 10000 °C no centro. A suportabilidade eletrodinâmica (kA pico) mede a resistência mecânica e a térmica (kA eficaz, 1–5 s) o sobreaquecimento. A segurança operacional depende do bloqueio LOTO (impedimento de reenergização, dispositivo individual por trabalhador), da sinalização e do intertravamento de proteções móveis. A NR-12 impõe porta fechada, grau de proteção adequado, aterramento de carcaças e proíbe chaves tipo faca. A seccionadora apenas isola, e a proteção de massa-cuba usa um TC no aterramento do armário."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — NBR ISO 55000: Gestão de Ativos",
+      "subtitle": "Confiabilidade, custo da proteção, IEDs e documentação do ciclo de vida",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Proteção como ativo: um seguro barato",
+          "type": "text",
+          "body": "Gerir ativos de proteção começa por reconhecer seu valor relativo. A proteção custa cerca de 2 a 5% do equipamento protegido, sendo um seguro barato face ao tempo de depreciação. A confiabilidade de um ativo de proteção é a probabilidade do componente satisfazer a sua função prevista sob dadas circunstâncias. Esse pequeno investimento protege equipamentos de altíssimo valor ao longo de toda a sua vida útil."
+        },
+        {
+          "id": "s2",
+          "title": "Causas de operação incorreta",
+          "type": "list",
+          "items": [
+            "Falhas de configuração",
+            "Erros de instalação",
+            "Testes incorretos, que são causas diretas de falhas de proteção",
+            "Desgaste de utilização",
+            "Atuação intempestiva (falso trip) sem defeito real, que pode ser pior do que a falha de atuação"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Manutenção, testes e robustez",
+          "type": "text",
+          "body": "O releamento de retaguarda não substitui uma boa manutenção, nem vice-versa — são complementares. Os testes periódicos são recomendados devido à longa inatividade dos relés, justificada pela raridade das faltas internas nos barramentos. Essa longa inatividade exige o oposto: simplicidade e robustez para garantir alta confiabilidade na atuação. O item 12.11.2 da NR-12 exige que a manutenção considere as recomendações do fabricante, normas, histórico e estudos de probabilidade de falhas."
+        },
+        {
+          "id": "s4",
+          "title": "IEDs e manutenibilidade",
+          "type": "note",
+          "body": "Os relés digitais possuem alta confiabilidade graças aos sistemas integrados de autoteste e autodiagnose. Sua modularidade permite complementar o IED com placas e módulos adicionais. Os IEDs integram sub-rotinas de monitoramento e diagnóstico (autodiagnose) que melhoram a manutenibilidade, facilitando a gestão do ativo ao longo de seu ciclo de vida."
+        },
+        {
+          "id": "s5",
+          "title": "Documentação do ciclo de vida (Prontuário)",
+          "type": "list",
+          "items": [
+            "A NR-10 exige que o relatório técnico das inspeções atualizadas com recomendações componha obrigatoriamente o Prontuário de Instalações Elétricas",
+            "A alínea g do item 10.2.4 da NR-10 determina que o Prontuário inclua esse relatório técnico das inspeções atualizadas com as recomendações",
+            "O item 10.2.4 alínea f da NR-10 exige as certificações dos equipamentos e materiais elétricos em áreas classificadas integrando o Prontuário",
+            "O subitem 1.5.7.3.3.1 da NR-01 exige que o histórico de atualizações seja mantido por no mínimo 20 anos",
+            "O item 35.6.6.5 da NR-35 afirma que elementos do SPIQ que sofrerem impacto de queda devem ser inutilizados e descartados, proibindo reparos"
+          ]
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Sob a ótica da NBR ISO 55000, a proteção é um ativo de baixo custo (2 a 5% do equipamento protegido) e alto valor, cuja confiabilidade é a probabilidade de cumprir sua função sob dadas circunstâncias. Falhas vêm de configuração, instalação, testes incorretos e desgaste — e o falso trip pode ser pior que a falha de atuação. Retaguarda e manutenção são complementares; a longa inatividade exige simplicidade e robustez e testes periódicos. IEDs elevam confiabilidade e manutenibilidade com autoteste e modularidade. O Prontuário (NR-10) e o histórico de 20 anos (NR-01) documentam o ciclo de vida do ativo."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — NBR 5462: Confiabilidade e Mantenabilidade",
+      "subtitle": "Retaguarda, seletividade, falha de disjuntor e estatísticas de falha",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é confiabilidade na proteção",
+          "type": "text",
+          "body": "A confiabilidade é definida como a probabilidade de um componente ou sistema satisfazer a função prevista sob dadas circunstâncias. A proteção nunca deve dar ordens se não existe defeito, devendo atuar com exatidão apenas na presença de falhas no sistema. Atuar de modo intempestivo (falso trip) pode ser pior do que a falha de atuação, comprometendo a confiabilidade. A proteção atua incorretamente, falhando em sua confiabilidade, devido a erros de dimensionamento, configuração, instalação e desgaste."
+        },
+        {
+          "id": "s2",
+          "title": "Releamento de retaguarda (socorro)",
+          "type": "text",
+          "body": "O releamento de retaguarda, ou de socorro, atua para suprir a eventual falha do releamento primário. A protação de retaguarda remota atua quando identifica uma falta fora da subestação local que não foi eliminada pela proteção principal. A proteção alternada funciona como um backup para cobrir falhas na proteção principal, garantindo a alta confiabilidade do sistema. Releamento de retaguarda e manutenção são complementares e um não substitui o outro."
+        },
+        {
+          "id": "s3",
+          "title": "Seletividade, rapidez e supervisão",
+          "type": "list",
+          "items": [
+            "A seletividade aumenta a disponibilidade global isolando somente a falha e preservando a continuidade das partes sadias",
+            "Uma proteção de alta velocidade diminui a extensão do dano e reduz o tempo total de paralisação dos consumidores",
+            "A rapidez e a confiabilidade objetivam diminuir o tempo total de paralisação do fornecimento de energia elétrica",
+            "A função falha de disjuntor (ANSI 50BF) detecta a falha na abertura do disjuntor e aciona os disjuntores adjacentes",
+            "A supervisão do circuito de trip eleva a confiabilidade e a disponibilidade ao indicar falhas no circuito de disparo do disjuntor"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Inatividade e robustez dos relés",
+          "type": "note",
+          "body": "A inatividade longa exige o oposto: o equipamento de proteção deve ter simplicidade e robustez para não falhar quando solicitado. A confiabilidade dos IEDs é ampliada graças às sub-rotinas de monitoramento contínuo com autoteste e autodiagnose. A vantagem dos relés digitais inclui justamente a alta confiabilidade proporcionada pelos sistemas de autoteste e autodiagnose incorporados."
+        },
+        {
+          "id": "s5",
+          "title": "Estatísticas clássicas de falha",
+          "type": "text",
+          "body": "As estatísticas clássicas apontam 73% de falhas de natureza elétrica, 12% na atuação de relés e dispositivos automáticos, e 15% por erros de pessoal. Esses números mostram que a maior parcela das falhas é de origem elétrica, mas que a soma de problemas em relés e erros humanos (27%) é significativa — reforçando a importância de testes corretos, configuração adequada e capacitação das equipes para sustentar a confiabilidade do sistema."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NBR 5462 define confiabilidade como a probabilidade de cumprir a função prevista sob dadas circunstâncias: a proteção só deve atuar na presença real de falha, pois o falso trip pode ser pior que a falha de atuação. O releamento de retaguarda (socorro) supre a falha do primário, a retaguarda remota cobre faltas externas e a seletividade preserva as partes sadias. A função 50BF detecta falha do disjuntor e aciona os adjacentes, e a supervisão do circuito de trip eleva a disponibilidade. A inatividade longa pede simplicidade e robustez. As estatísticas clássicas: 73% de falhas elétricas, 12% em relés/automáticos e 15% por erro de pessoal."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "category": "Automação",
+  "categoryOrder": 7,
+  "module": "Linguagens de Programação (IEC 61131-3)",
+  "moduleOrder": 1,
+  "moduleSubtitle": "A norma que padroniza as linguagens de CLP, suas aplicações e boas práticas",
+  "ebookTitle": "Linguagens de Programação IEC 61131-3",
+  "ebookSubtitle": "Dos fundamentos da norma às linguagens LADDER, ST, FBD, SFC e IL e à implementação na prática",
+  "estimatedMinutes": 40,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos da IEC 61131-3",
+      "subtitle": "A norma, as linguagens e os blocos de organização do programa",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que padronizar a programação de CLPs",
+          "type": "text",
+          "body": "A IEC 61131-3 é a norma que padroniza as linguagens de programação de controladores lógicos programáveis. Essa padronização permite que os usuários programem diferentes CLPs garantindo portabilidade, sem que o código fique preso a um único sistema (IEC 61131-3: A Norma que padroniza a Automação Industrial). Ela padroniza linguagens garantindo que dispositivos de diferentes fabricantes operem em harmonia, facilitando a portabilidade e integração (A importância da IEC 61131-3 para a programação de CLP - Altus). A norma divide-se em Definições Gerais, Hardware, Linguagens, Diretrizes do Usuário, Comunicação e adendos como Controle Fuzzy e lógicas aplicadas (A importância da IEC 61131-3 para a programação de CLP - Altus)."
+        },
+        {
+          "id": "s2",
+          "title": "As cinco linguagens da norma",
+          "type": "list",
+          "items": [
+            "A norma divide as linguagens em versões textuais, como Lista de Instruções e Texto Estruturado, e gráficas, como Ladder e Bloco de Função (Marco Antônio Ribeiro - Kufunda.net)",
+            "A linguagem Ladder (LD) utiliza símbolos familiares de contatos e bobinas, assemelhando-se aos diagramas elétricos de relés (IEC 61131-3: A Norma que padroniza a Automação Industrial)",
+            "A linguagem ST (Structured Text) é textual e de alto nível, excelente para desenvolver cálculos, manipulação de dados e lógicas matemáticas avançadas (A importância da IEC 61131-3 para a programação de CLP - Altus)",
+            "A sigla FBD refere-se ao Function Block Diagram, linguagem gráfica ideal para processos contínuos e visibilidade do fluxo de dados (IEC 61131-3: A Norma que padroniza a Automação Industrial)",
+            "O SFC (Sequential Function Chart) divide o processo em etapas e transições, sendo perfeito para operações que seguem sequências lógicas organizadas (IEC 61131-3: A Norma que padroniza a Automação Industrial)",
+            "Sendo uma linguagem textual de baixo nível (semelhante ao assembly), a IL é preferida quando a performance de processamento e o controle de hardware são críticos (A importância da IEC 61131-3 para a programação de CLP - Altus)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "POUs: as Unidades de Organização do Programa",
+          "type": "text",
+          "body": "Programas, funções isoladas e blocos de função encapsulados são tecnicamente denominados e estruturados como Unidades de Organização do Programa (POUs) (Marco Antônio Ribeiro - Kufunda.net). Diferente das Funções que existem apenas na execução e geram o mesmo resultado, os Blocos Funcionais mantêm instâncias e dados na memória para avaliações do algoritmo interno (A importância da IEC 61131-3 para a programação de CLP - Altus). A capacidade da norma IEC permite gerar novos blocos funcionais derivados através do uso e agrupamento de blocos preexistentes, multiplicando a reutilização de código (A importância da IEC 61131-3 para a programação de CLP - Altus)."
+        },
+        {
+          "id": "s4",
+          "title": "Tipos de dados e escopo de variáveis",
+          "type": "list",
+          "items": [
+            "Definir rigorosamente os tipos de dados (Inteiro, Booleano, Real, Data) previne operações indevidas e corrompimento de informações na fase inicial de desenvolvimento (A importância da IEC 61131-3 para a programação de CLP - Altus)",
+            "O escopo comum das variáveis é local e limitado à unidade na qual foram declaradas; variáveis acessíveis por outras partes devem ser declaradas como globais (A importância da IEC 61131-3 para a programação de CLP - Altus)",
+            "A norma determina a associação de variáveis a endereços de hardware (entradas/saídas) explicitamente, gerando independência entre a máquina física e as lógicas programadas do software (A importância da IEC 61131-3 para a programação de CLP - Altus)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Recursos e Tarefas (Tasks)",
+          "type": "note",
+          "body": "Os Recursos hospedam elementos processadores que executam programas e têm como característica mandatória ser independentes, sem influência cruzada entre si (A importância da IEC 61131-3 para a programação de CLP - Altus). A Tarefa (Task) controla e escalona a execução das diferentes partes do programa ou blocos de modo preemptivo ou não preemptivo (A importância da IEC 61131-3 para a programação de CLP - Altus)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A IEC 61131-3 padroniza a programação de CLPs para garantir portabilidade e integração entre fabricantes diferentes. Ela define cinco linguagens — Ladder (LD), Texto Estruturado (ST), Diagrama de Blocos de Função (FBD), Gráfico de Função Sequencial (SFC) e Lista de Instruções (IL) — organizadas em textuais e gráficas. O código se estrutura em POUs (Programas, Funções e Blocos Funcionais), com tipagem rigorosa de dados, escopo local ou global das variáveis e associação explícita ao hardware. Recursos hospedam os processadores e Tarefas escalonam a execução."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Aplicações das Linguagens (LADDER, ST, FBD, SFC, IL)",
+      "subtitle": "Como cada linguagem funciona e onde é aplicada",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Ladder (LD): a lógica dos relés",
+          "type": "text",
+          "body": "A linguagem Ladder (LD) aplica símbolos visuais de contatos que simulam a lógica tradicional de relés eletromecânicos (IEC 61131-3: A Norma que padroniza a Automação Industrial). Na linguagem LD o sentido do fluxo de potência ou continuidade virtual segue rigidamente o formato da esquerda para a direita (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s2",
+          "title": "Texto Estruturado (ST) e Lista de Instruções (IL)",
+          "type": "list",
+          "items": [
+            "A Structured Text (ST) é na verdade uma linguagem textual de alto nível muito similar ao Pascal ou C (IEC 61131-3: A Norma que padroniza a Automação Industrial)",
+            "Sendo uma linguagem textual de alto nível, ST oferece grande poder de sintaxe para algoritmos lógicos detalhados e matemática complexa (A importância da IEC 61131-3 para a programação de CLP - Altus)",
+            "As diretrizes normativas da sintaxe em ST exigem que todo comando executado seja finalizado com o caractere ponto e vírgula (Marco Antônio Ribeiro - Kufunda.net)",
+            "A execução do comando EXIT encerra prematuramente a sequência iterativa forçando a rotina a sair das laçadas estruturadas de repetição (Marco Antônio Ribeiro - Kufunda.net)",
+            "A Instruction List (IL) entrega comandos simples parecidos com assembly, permitindo eficiência extrema e um controle muito preciso do hardware (A importância da IEC 61131-3 para a programação de CLP - Altus)",
+            "O modificador de parentização indica que a resolução do operador atrelado ficará suspensa e só terminará na leitura do fecho do parêntesis (Marco Antônio Ribeiro - Kufunda.net)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Diagrama de Blocos de Função (FBD)",
+          "type": "text",
+          "body": "A linguagem FBD é ideal para aplicações contínuas com processamento de sinais e visualização do fluxo de dados (IEC 61131-3: A Norma que padroniza a Automação Industrial). O percurso de fluxo do sinal em linguagens FBD avança partindo da saída (direita) de um bloco para a entrada (esquerda) do bloco correspondente (Marco Antônio Ribeiro - Kufunda.net). No FBD a norma define que qualquer circuito originário conclua a emissão dos seus sinais lógicos antes do ciclo que receberá essas saídas ser avaliado (Marco Antônio Ribeiro - Kufunda.net). No diagrama FBD as saídas não podem ser diretamente atadas em conjunto, exigindo-se o uso de um bloco OR explícito para tal operação (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s4",
+          "title": "Gráfico de Função Sequencial (SFC)",
+          "type": "list",
+          "items": [
+            "A linguagem SFC (Sequential Function Chart) controla eventos organizando-os claramente em sequências de etapas e transições (IEC 61131-3: A Norma que padroniza a Automação Industrial)",
+            "O diagrama SFC é construído graficamente através da concatenação lógica de passos, elos de ligação e transições de mudança (Marco Antônio Ribeiro - Kufunda.net)",
+            "A transição apresenta a validação condicional que faz o processo sair do passo anterior avançando e habilitando os comandos do passo sucessor (Marco Antônio Ribeiro - Kufunda.net)",
+            "As operações do SFC podem carregar letras de qualificação associadas, como 'S' indicando o armazenamento da ação que foi desencadeada (Marco Antônio Ribeiro - Kufunda.net)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Modificadores e instruções condicionais",
+          "type": "note",
+          "body": "A letra C sinaliza uma instrução avaliada condicionalmente forçando a execução daquela linha apenas quando a operação vigente computar como verdadeira ou 1 (Marco Antônio Ribeiro - Kufunda.net). A norma divide as linguagens em versões textuais, como Lista de Instruções e Texto Estruturado, e gráficas, como Ladder e FBD (A importância da IEC 61131-3 para a programação de CLP - Altus)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Cada linguagem da norma tem um perfil de aplicação. Ladder (LD) reproduz a lógica de relés com fluxo da esquerda para a direita. ST é de alto nível (similar a Pascal/C), com comandos encerrados por ponto e vírgula e controle de laços por EXIT. IL é de baixo nível (estilo assembly), para eficiência e controle de hardware. FBD é gráfica para processos contínuos, com fluxo de sinal definido e proibição de unir saídas sem bloco OR explícito. SFC organiza o processo em passos, transições e elos, com letras de qualificação como 'S' nas ações."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Implementação e Boas Práticas",
+      "subtitle": "Programação estruturada, reuso, escopo e ciclo de varredura",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Programação estruturada e o ciclo de varredura",
+          "type": "text",
+          "body": "A programação estruturada constrói arquiteturas contendo um fluxo linear simples organizado via elementos de única entrada e única saída, desencorajando ativamente as ramificações e saltos condicionados complexos (Marco Antônio Ribeiro - Kufunda.net). O fluxo iterativo do controlador termina a etapa da varredura mandando o resultado dos processamentos lógicos e transferindo as decisões prontas para a atualização das saídas (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum). A norma impede estritamente as inconsistências, obrigando que a cadeia seja avaliada apenas após todas as condições prévias que alimentam a entrada daquele nó estarem plenamente atualizadas no scan (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s2",
+          "title": "Reuso de código: tipos derivados e blocos funcionais",
+          "type": "list",
+          "items": [
+            "Os ambientes padronizados oferecem e aceitam definições avançadas em que tipos de dados podem ser derivados especificamente para compor variáveis recorrentes limpas reduzindo o tempo final (A importância da IEC 61131-3 para a programação de CLP - Altus)",
+            "Usuários programadores e engenheiros podem derivar e desenhar ativamente matrizes e novos Blocos Funcionais personalizados a partir do agrupamento dos modelos elementares padrão (A importância da IEC 61131-3 para a programação de CLP - Altus)",
+            "Diferente de rotinas simples, os blocos funcionais mantêm seu conjunto de dados ativo e salvo na memória do CLP durante a existência de uma instância (A importância da IEC 61131-3 para a programação de CLP - Altus)",
+            "Funções são instâncias ágeis que existem apenas durante o tempo de execução e não possuem persistência interna de informações lógicas (A importância da IEC 61131-3 para a programação de CLP - Altus)",
+            "A norma técnica segmenta e intitula especificamente os Programas diretos, as Funções simples e os Blocos Funcionais parametrizados como Unidades de Organização do Programa (Marco Antônio Ribeiro - Kufunda.net)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Tipagem, escopo e separação hardware-software",
+          "type": "text",
+          "body": "A tipagem de dados previne a mistura indevida de matrizes logo no início do projeto, evitando operações incorretas como a divisão de uma data por um inteiro (A importância da IEC 61131-3 para a programação de CLP - Altus). Limitar as variáveis ao escopo local blinda as rotinas específicas, evitando conflitos de endereços de rede e a eventual corrupção de código ao longo do processamento (A importância da IEC 61131-3 para a programação de CLP - Altus). A programação define que para existir o compartilhamento limpo de estados e acessos amplos em várias unidades, a variável requer o status de declaração de escopo global (A importância da IEC 61131-3 para a programação de CLP - Altus). A norma incentiva e demanda que variáveis sejam associadas explicitamente aos recursos de hardware, permitindo a separação e promovendo o elevado reuso do software (A importância da IEC 61131-3 para a programação de CLP - Altus)."
+        },
+        {
+          "id": "s4",
+          "title": "Boas práticas de manutenção e legibilidade",
+          "type": "list",
+          "items": [
+            "Os métodos interativos contínuos facilitam as alterações seguras on-line onde, sob regime Run/Program, retifica-se os desvios indesejáveis em código evitando paralisar as máquinas em trabalho (Marco Antônio Ribeiro - Kufunda.net)",
+            "A ferramenta do comentário atua como registro interno construtivo, fornecendo legibilidade direta ao desenvolvedor mas sendo descartada nas lógicas de processamento da CPU (Marco Antônio Ribeiro - Kufunda.net)",
+            "O acionamento inteligente por tarefas (Tasks) permite o útil escalonamento e o controle da dinâmica com a qual cada componente ou bloco de dados roda (A importância da IEC 61131-3 para a programação de CLP - Altus)",
+            "A norma impõe restrições contra simulações indiretas conhecidas como 'OR fiado', de forma que essas consolidações devam instanciar claramente seus correspondentes blocos lógicos explícitos (Marco Antônio Ribeiro - Kufunda.net)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Interoperabilidade em plantas complexas",
+          "type": "note",
+          "body": "A padronização da norma garante que os sistemas sejam interoperáveis, facilitando a integração entre dispositivos de fabricantes distintos (A importância da IEC 61131-3 para a programação de CLP - Altus). Plantas mais complexas contêm e unificam várias configurações e até múltiplos CLPs acoplados de modo inteligente e confiável por protocolos padronizados de troca contínua (A importância da IEC 61131-3 para a programação de CLP - Altus)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A boa implementação segue a programação estruturada (elementos de única entrada e saída) e respeita o ciclo de varredura, avaliando cada nó só após suas entradas estarem atualizadas. O reuso vem de tipos de dados derivados e Blocos Funcionais (que persistem dados na memória, ao contrário das Funções). A tipagem evita operações indevidas, o escopo local blinda rotinas e o global permite compartilhamento, com associação explícita ao hardware separando software de máquina. Boas práticas incluem edição on-line em Run/Program, comentários para legibilidade, escalonamento por Tasks e a proibição do 'OR fiado'. A padronização garante interoperabilidade em plantas com múltiplos CLPs."
+        }
+      ]
+    }
+  ]
+}

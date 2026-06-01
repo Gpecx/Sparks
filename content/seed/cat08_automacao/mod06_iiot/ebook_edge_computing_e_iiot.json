@@ -1,0 +1,172 @@
+{
+  "category": "Automação",
+  "categoryOrder": 7,
+  "module": "Edge Computing e IIoT",
+  "moduleOrder": 5,
+  "moduleSubtitle": "Processamento na borda, a Internet Industrial das Coisas e sua aplicação em SPCS",
+  "ebookTitle": "Edge Computing e IIoT",
+  "ebookSubtitle": "Dos fundamentos da computação na borda à implementação prática em sistemas industriais",
+  "estimatedMinutes": 42,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de Edge Computing e IIoT",
+      "subtitle": "Processar dados próximo à origem e conectar o chão de fábrica",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é Edge Computing",
+          "type": "text",
+          "body": "O Edge Computing baseia-se no processamento de dados próximo à sua origem, reduzindo a necessidade de envios constantes à nuvem (Edge AI na Indústria). A inteligência instalada no Edge resolve dados locais repassando à nuvem somente o essencial, reduzindo o tráfego de banda e os altos custos de armazenagem (Edge AI na Indústria). O processamento descentralizado na borda elimina a latência da nuvem, sendo vital para o controle e tomada de decisões críticas em milissegundos (Edge AI na Indústria). Uma enorme vantagem é a segurança, visto que processar os dados sensíveis localmente inibe o envio para fora e a exposição aos ataques cibernéticos em nuvem (Edge AI na Indústria)."
+        },
+        {
+          "id": "s2",
+          "title": "A Internet Industrial das Coisas (IIoT) e as tecnologias associadas",
+          "type": "list",
+          "items": [
+            "A Internet Industrial das Coisas (IIoT) trabalha atrelada aos dispositivos Edge coletando massivamente a base de informação necessária para o controle inteligente (Tendências para o setor de automação industrial em 2026)",
+            "O futuro da automação atrela intimamente o Edge AI às capacidades poderosas das novas redes 5G, dos simuladores de Gêmeos Digitais e das plataformas maciças do IIoT (Edge AI na Indústria)",
+            "Os Digital Twins permitem prever com exatidão o desgaste e otimizar processos em tempo real através de simulações, operando simultaneamente aos equipamentos reais (Tendências para o setor de automação industrial em 2026)",
+            "A evolução do setor industrial populariza o uso de AMRs (Autonomous Mobile Robots) operando integrados aos sistemas logísticos de chão de fábrica (Tendências para o setor de automação industrial em 2026)",
+            "Os robôs colaborativos (cobots) são concebidos para operarem mais seguros, versáteis e integrados organicamente aos humanos nos sistemas atuais (Tendências para o setor de automação industrial em 2026)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Onde a inteligência da borda fica instalada",
+          "type": "text",
+          "body": "Os algoritmos de borda são incorporados nos próprios controladores (CLPs), em gateways dedicados e sensores inteligentes distribuídos pelo chão de fábrica (Edge AI na Indústria). Nas arquiteturas, o Edge Analytics localiza-se extraindo dados velozes do controle real (CLP) para processá-los ativamente antes de subirem ao sistema corporativo MES (Edge AI na Indústria). A camada de borda (Edge Layer) não substitui, mas complementa a arquitetura de tempo real existente (PLC/DCS), agindo entre eles e a camada gerencial MES (Edge AI na Indústria). As lógicas baseadas em Edge operam independentes da conectividade externa, permitindo que a produção continue mesmo durante quedas severas da rede corporativa (Edge AI na Indústria)."
+        },
+        {
+          "id": "s4",
+          "title": "Decisões preditivas e visão computacional na borda",
+          "type": "text",
+          "body": "Analisando padrões complexos na própria máquina, as decisões automáticas do Edge previnem acidentes ou paradas custosas de modo preditivo e imediato (Edge AI na Indústria). Os algoritmos embarcados nessas câmeras processam a visão computacional ativamente nas próprias linhas identificando falhas rapidamente sem necessitar dos servidores em nuvem (Edge AI na Indústria). Modelos avançados dependem criticamente de dados limpos, integrados, de alta qualidade e rastreabilidade para tomar as decisões exatas em solo (Edge AI na Indústria)."
+        },
+        {
+          "id": "s5",
+          "title": "O desafio do legado e da superfície cibernética",
+          "type": "note",
+          "body": "Muitas instalações ainda possuem maquinários legados analógicos difíceis de digitalizar ou extrair os dados necessários à nova arquitetura Edge (Edge AI na Indústria). Além disso, a pulverização de dispositivos inteligentes (edge) acaba aumentando severamente a superfície de exposição cibernética, o que demanda políticas e firewalls extremamente rigorosos no sistema (Edge AI na Indústria / CIBERSEGURANÇA EM SISTEMAS SCADA)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O Edge Computing processa dados próximo à origem, reduzindo latência, tráfego de banda e custos de armazenagem, e mantém a operação mesmo sem conectividade externa. A IIoT coleta massivamente os dados e se conecta a 5G, Digital Twins, AMRs e cobots. A inteligência de borda fica nos CLPs, gateways e sensores, complementando — sem substituir — a arquitetura PLC/DCS e a camada MES. Os principais desafios são o maquinário legado de difícil digitalização e o aumento da superfície de exposição cibernética."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Aplicações em SPCS",
+      "subtitle": "Edge e IIoT aplicados à operação, à manutenção e à convergência TI/TO",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Eficiência de dados e contenção de custos",
+          "type": "text",
+          "body": "O conceito fundamental do modelo restringe o gasto do tráfego enviando externamente somente as consolidações simplificadas e essenciais da rotina ao descartar todo resíduo irrelevante localmente (Edge AI na Indústria). O menor volume de dados brutos enviados à nuvem ajuda as empresas na contenção drástica dos custos gerais de transmissão e de armazenamento (Edge AI na Indústria). O modelo Edge Computing destaca-se por aproximar o processamento analítico ativamente para junto dos maquinários produtores da informação (Tendências para o setor de automação industrial em 2026). O processamento local descentralizado reduz significativamente a latência e viabiliza a tomada de decisões em milissegundos para o controle crítico (Edge AI na Indústria)."
+        },
+        {
+          "id": "s2",
+          "title": "Autonomia, gateways e camadas de arquitetura",
+          "type": "list",
+          "items": [
+            "Dispositivos baseados em inteligência computacional de borda conservam sua autonomia rodando e protegendo a operação mesmo durante interrupções perigosas na conectividade geral (Edge AI na Indústria)",
+            "Gateways inteligentes atuam interligando os domínios de campo com algoritmos eficientes instalados na borda para realizar as coletas e ações preditivas (Edge AI na Indústria)",
+            "Arquiteturalmente, a fina camada inteligente Edge se localiza colhendo do controle real (nível CLP/DCS) para analisar e passar dados filtrados para a gestão (MES) (Edge AI na Indústria)",
+            "A integração dos sistemas novos só funciona corretamente graças aos protocolos organizacionais de comunicação que se mantiveram indispensáveis garantindo flexibilidade coesa em toda planta e rastreabilidade escalável normatizada (Tendências para o setor de automação industrial em 2026)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Manutenção preditiva, visão e simulação",
+          "type": "text",
+          "body": "A avaliação detalhada local feita nos padrões captados por sensores de vibração possibilita ações exatas de manutenção prevenida antes do colapso falho na máquina (Edge AI na Indústria). As câmeras com IA embarcada identificam defeitos na produção através de visão computacional em tempo real e sem precisar de processamento externo (Edge AI na Indústria). A capacidade realística e dinâmica de simulação em tempo real dos Digital Twins permite testes confiáveis e previsão apurada sem causar riscos operacionais (Tendências para o setor de automação industrial em 2026). A robótica se expandiu muito e as unidades inteligentes de Robôs Móveis Autônomos fornecem grande adaptabilidade flexível auxiliando na entrega e deslocamento interno otimizado dos estoques fabris (Tendências para o setor de automação industrial em 2026)."
+        },
+        {
+          "id": "s4",
+          "title": "Convergência TI/TO e segurança dos dados",
+          "type": "text",
+          "body": "Unir ambientes flexíveis da TI aos controladores legados operativos de TO induz fortes níveis de exposição de acessos irregulares e ciberataques complexos (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea). Manter os dados sensíveis processados internamente na fábrica minimiza o envio para a nuvem e blinda a infraestrutura contra ataques (Edge AI na Indústria). Modelos robustos alimentam-se unicamente extraindo análises exatas caso o dado seja estruturalmente de elevada procedência, impondo que instabilidades e registros faltantes sujos não comprometam a acurácia global na tomada lógica de decisões (Edge AI na Indústria)."
+        },
+        {
+          "id": "s5",
+          "title": "Modernizar plantas legadas com isolamento e defesas pontuais",
+          "type": "note",
+          "body": "Como a planta não é totalmente recriada para um projeto e hospeda painéis defasados isolados por muitos anos, sua complexa transição e integração impõem árduos esforços práticos limitantes às companhias inovadoras (Edge AI na Indústria). Modernizações escalonadas utilizando rigoroso isolamento e métodos técnicos contínuos focados em inserir defesas virtuais pontuais auxiliam ativamente os equipamentos sensíveis defasados contra vulnerabilidades crônicas externas em rede (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea). O futuro promissor industrial repousa consolidado conectando massivamente as infraestruturas descentralizadas aliando a IA Edge às velozes e sólidas arquiteturas da telecomunicação em rede (Edge AI na Indústria)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Em SPCS, o Edge filtra dados localmente — enviando à nuvem só o essencial — para conter custos e tomar decisões em milissegundos com autonomia mesmo sem conectividade. Gateways interligam o campo e a camada Edge colhe do nível CLP/DCS para entregar dados filtrados ao MES. As aplicações incluem manutenção preditiva por vibração, visão computacional embarcada, Digital Twins e AMRs. A convergência TI/TO amplia a exposição cibernética, exigindo processamento interno dos dados sensíveis, dados de alta procedência e modernização escalonada com isolamento e defesas pontuais."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Implementação e Casos de Uso",
+      "subtitle": "Arquiteturas, protocolos, gateways, segurança e retorno do investimento",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Arquiteturas de borda: Edge, Fog e MEC",
+          "type": "text",
+          "body": "O Edge AI atua realizando a computação e a análise da inteligência artificial localmente nos dispositivos alocados na borda do chão de fábrica (Edge AI na Indústria). A principal distinção repousa no escopo alocado onde MEC age nas arquiteturas da rede móvel (Base Stations), em contraposição às integrações LAN usuais operantes nos níveis hierárquicos dos switches em nós Fog (Estudo de modelos de Edge Computing utilizando arquitetura em nuvem - Insper). O recurso focado nos algoritmos de recompensas atua sobre a camada Cloud da arquitetura promovendo constante aprendizado e direcionamento das condutas de inteligências a toda teia do framework industrial autônomo (Self-Evolving Multi-Agent Network for Industrial IoT Predictive Maintenance)."
+        },
+        {
+          "id": "s2",
+          "title": "Gateways: a ponte entre o legado OT e a TI moderna",
+          "type": "text",
+          "body": "Um gateway traduz sinais legados OT convertendo-os em formatos digitais IP modernos orientando e pré-processando a transição dessa comunicação para a TI (O que é um gateway de IoT industrial? - Maisvch). Atuadores industriais não contêm endereços ou linguagem IP modernos e o emprego forte de Gateways permanece a peça mediadora estrutural chave promovendo o processamento limpo bem como seguranças da interface nativamente em bordo (O que é um gateway de IoT industrial? - Maisvch). Gêmeos Digitais atuam como as representações digitais exatas que simulam otimizações processuais e o desgaste local do chão de fábrica (Tendências para o setor de automação industrial em 2026)."
+        },
+        {
+          "id": "s3",
+          "title": "Protocolos de comunicação IIoT",
+          "type": "list",
+          "items": [
+            "O MQTT baseia-se na arquitetura publish/subscribe com as informações publicadas e divididas em tópicos para os dispositivos inscritos (Uma Arquitetura para a Aplicação da Internet das Coisas Industrial)",
+            "Todo coração provedor num sistema dinâmico publish/subscribe para a distribuição MQTT carrega como núcleo a figura técnica da gerência de conexões do broker (Uma Arquitetura para a Aplicação da Internet das Coisas Industrial)",
+            "Como mecanismo seguro caso um cliente se desprenda da rede sem sinal de alerta, a mensagem Last Will é ativada pelo broker publicando seu status ausente à rede (Uma Arquitetura para a Aplicação da Internet das Coisas Industrial)",
+            "Em casos onde os erros impactam com danos os dados (QoS nível 2) firmam a exigência transacional exata onde a mensagem atinge sem qualquer multiplicidade indevida seu trajeto final via MQTT (Uma Arquitetura para a Aplicação da Internet das Coisas Industrial)",
+            "O Constrained Application Protocol constrói com exímia praticidade e afinidade na malha IoT a fluidez técnica com transações restritas similares as diretivas originárias no HTTP para acoplar ambientes conectados leves a interfaces padrão na rede online global M2M (Uma Arquitetura para a Aplicação da Internet das Coisas Industrial)",
+            "O modelo OPC UA cria uma estrutura padrão de independência focada para as trocas contínuas e abertas de dados seguras aos ecossistemas industriais mistos (Uma análise comparativa entre os protocolos OPC-UA E MQTT em uma aplicação de IIOT)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Casos de uso: manutenção preditiva, segurança e mineração",
+          "type": "text",
+          "body": "A manutenção preditiva age processando as variáveis em tempo real com modelos analíticos para antecipar desvios e problemas reais do desgaste de uso (IoT Industrial: Casos de Uso e ROI - Baita Aceleradora). O propósito técnico da implantação dessas ferramentas foca severamente na garantia contínua rastreável da segurança aos humanos, checando o meio para evitar exposição de mortes e incidentes nos processos industriais isolados (INTERNET DAS COISAS (IoT) NA MINERAÇÃO - UFC)."
+        },
+        {
+          "id": "s5",
+          "title": "Cibersegurança e confiança zero",
+          "type": "text",
+          "body": "A defesa por remendos virtuais adiciona camadas extras baseadas na filtragem perene que barram requisições ofensivas sem a obrigação mecânica severa e os perigos cruciais em reescrever um código central legado da máquina operante que já perdeu o suporte de software orgânico (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea). O conceito fundamental e a base imposta na matriz de confiança zero exigem contínuas validações em instâncias a todo requerimento negando assim os supostos atalhos em dispositivos alocados localmente (Cybersecurity Strategies for Integrating Industrial IoT and Edge Computing)."
+        },
+        {
+          "id": "s6",
+          "title": "Justificar o investimento: do problema financeiro ao ROI",
+          "type": "note",
+          "body": "Antes de adquirir sensores, a organização deve definir o problema financeiro crítico criando uma linha de base do custo atual (IoT Industrial: Casos de Uso e ROI - Baita Aceleradora). Cálculo autêntico requer definir os gargalos reais em baselines financeiras (como tempo inativo) antes da compra, avaliando onde doerá caso IoT não preencha o custo esperado ao sanar o déficit (IoT Industrial: Casos de Uso e ROI - Baita Aceleradora)."
+        },
+        {
+          "id": "s7",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A implementação distingue Edge (no chão de fábrica), Fog (nós em switches LAN) e MEC (rede móvel, base stations), com a Cloud orquestrando o aprendizado. Os gateways traduzem o legado OT para IP moderno, e protocolos como MQTT (publish/subscribe, broker, Last Will, QoS 2), CoAP e OPC UA estruturam a comunicação. Os casos de uso incluem manutenção preditiva, segurança de pessoas e mineração. A segurança apoia-se em remendos virtuais e confiança zero, e todo projeto deve partir de uma linha de base de custo para justificar o ROI."
+        }
+      ]
+    }
+  ]
+}

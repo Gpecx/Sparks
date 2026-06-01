@@ -1,0 +1,345 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categoryOrder": 0,
+  "module": "Geração Distribuída e Fotovoltaicos",
+  "moduleOrder": 5,
+  "moduleSubtitle": "Fundamentos de GD, sistemas FV, inversores, BESS, regulamentação ANEEL e conexão à rede",
+  "ebookTitle": "Geração Distribuída e Sistemas Fotovoltaicos",
+  "ebookSubtitle": "Da proteção de desacoplamento à conexão à rede, com base na regulamentação ANEEL e nas normas NBR 16149/16150",
+  "estimatedMinutes": 80,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de Geração Distribuída",
+      "subtitle": "Desacoplamento, sincronismo e proteções de gerador",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que desacoplar a geração local da rede",
+          "type": "text",
+          "body": "Falhas da rede pública causam violentas variações de tensão e de frequência no barramento local. O desacoplamento evita disturbios e variações extremas após falhas da rede pública, separando de forma segura a geração local da rede. Esse desacoplamento depende da monitoração contínua das frequências e de proteções dedicadas que atuam quando os limites aceitáveis são ultrapassados, isolando as fontes antes que a perturbação se propague para os equipamentos locais."
+        },
+        {
+          "id": "s2",
+          "title": "Funções de proteção para o desacoplamento",
+          "type": "list",
+          "items": [
+            "Subfrequência (ANSI 81L) e sobrefrequência (ANSI 81H) — monitoram desvios de frequência e separam a geração local da rede de forma segura",
+            "Taxa de variação de frequência df/dt (ANSI 81R) — proteção sensível à variação rápida de frequência, garantindo desacoplamento ágil",
+            "Salto de fase ou de vetor (ANSI 78) — assegura o desacoplamento isolando as fontes",
+            "Perda de sincronismo (ANSI 78PS) — avalia a instabilidade pela relação das áreas ou oscilações de potência"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Controle de sincronismo (synchro-check, ANSI 25)",
+          "type": "text",
+          "body": "A função de controle de sincronismo ANSI 25 (synchro-check) verifica amplitude, fase e frequência aceitáveis no acoplamento de redes, antes que a fonte local seja conectada. Ela garante que a geração só seja paralelada quando os limites de amplitude, fase e frequência estiverem dentro da faixa aceitável. Na gestão de energia com fontes em paralelo, o número de fontes deve ser adaptado à potência requerida."
+        },
+        {
+          "id": "s4",
+          "title": "Proteções específicas do gerador",
+          "type": "list",
+          "items": [
+            "Perda de excitação (ANSI 40, subimpedância, ou 32Q) — detecta falha grave; na perda de excitação o gerador funciona em modo assíncrono e absorve alta potência reativa da rede",
+            "Potência ativa reversa (ANSI 32P) — detecta a motorização, quando o gerador passa a operar como motor",
+            "Sequência negativa (ANSI 46) — o desbalanço gera correntes de sequência negativa, provocando aquecimento rápido e severo do rotor"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Comportamento da impedância e contribuição de curto",
+          "type": "note",
+          "body": "A impedância interna do gerador não é constante: ela aumenta progressivamente do estágio subtransitório ao permanente, reduzindo a corrente ao longo do tempo. No curto-circuito, os motores síncronos e assíncronos se comportam como geradores, contribuindo ativamente com a falha. Por isso o dimensionamento das proteções de GD precisa considerar tanto a contribuição inicial elevada quanto a sua redução progressiva."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A geração distribuída precisa se desacoplar da rede com segurança quando há falhas, usando proteções de frequência (81L, 81H, df/dt 81R), salto de vetor (78) e perda de sincronismo (78PS). O sincronismo é verificado pelo synchro-check (ANSI 25), que confere amplitude, fase e frequência. No próprio gerador, a perda de excitação (40/32Q), a motorização (32P) e o desbalanço (46) exigem proteções dedicadas, lembrando que a impedância interna varia e que motores também contribuem para o curto."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Sistemas Fotovoltaicos: Fundamentos",
+      "subtitle": "Da célula ao arranjo, tipos de sistema e o efeito fotovoltaico",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Da célula ao arranjo",
+          "type": "text",
+          "body": "As células fotovoltaicas são montadas em módulos, que por sua vez são agrupados em arranjos para formar a central geradora (Fonte 3). O efeito fotovoltaico foi constatado pela primeira vez em 1839 na França pelo físico Alexandre Edmond Becquerel (Fonte 2). As placas solares utilizam películas de EVA (etileno-vinil-acetato) para o encapsulamento e proteção das células fotovoltaicas (Fonte 2). O inversor/condicionador de potência tem a finalidade de compatibilizar a energia da geração fotovoltaica com o padrão da rede conectada (Fonte 3)."
+        },
+        {
+          "id": "s2",
+          "title": "Eficiência e perdas na célula",
+          "type": "list",
+          "items": [
+            "Células de silício monocristalino possuem a maior eficiência, entre 15% e 18%, por utilizarem uma forma mais pura de silício (Fonte 2)",
+            "O sombreamento dos contatos frontais e a resistência em série são fatores que causam perdas de eficiência na célula solar (Fonte 2)",
+            "O microinversor converte eletricidade DC em AC no nível de cada painel, permitindo operação independente e evitando perdas por sombreamento (Fonte 5)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Tipos de sistema: isolado, híbrido e conectado",
+          "type": "text",
+          "body": "Os sistemas independentes (isolados) fornecem potência em Corrente Contínua (DC) sem necessitar de baterias ou inversores para a carga (Fonte 3). Quando não há geração solar, o controlador de carga extrai a energia armazenada nas baterias, e não do inversor, para a carga (Fonte 3). O sistema híbrido é independente, mas possui um gerador secundário para auxiliar, junto aos painéis, no abastecimento das cargas ou baterias (Fonte 3)."
+        },
+        {
+          "id": "s4",
+          "title": "Micro e minigeração e o sistema de compensação",
+          "type": "list",
+          "items": [
+            "A microgeração abrange centrais com potência menor ou igual a 75 kW; o limite superior a 75 kW caracteriza a minigeração distribuída (Fonte 4)",
+            "A energia excedente gerada é transformada em crédito válido para compensação pelo prazo de 60 meses (Fonte 4)",
+            "O autoconsumo remoto ocorre quando a compensação da energia excedente é feita em unidades de mesma titularidade localizadas em endereços diferentes (Fonte 4)",
+            "O medidor bidirecional é necessário para diferenciar a energia ativa consumida da energia elétrica ativa que é injetada na rede da distribuidora (Fonte 6)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Requisitos de proteção e qualidade na conexão",
+          "type": "note",
+          "body": "A proteção contra ilhamento determina que o sistema deve cessar de fornecer energia à rede em até 2 segundos após a perda da rede (Fonte 6). O limite para injeção de componente de corrente contínua (C.C.) na rede elétrica é de 0,5%, exigindo desconexão em até 1 segundo (Fonte 6). A reconexão automática do sistema só deve ocorrer por um período de 20 a 300 segundos após o retorno das condições normais da rede (Fonte 6). Sistemas menores ou iguais a 3 kW possuem tolerância de fator de potência entre 0,98 indutivo e 0,98 capacitivo (Fonte 6)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A central FV parte da célula, agrupada em módulos e arranjos (Fonte 3); o efeito fotovoltaico data de 1839 (Becquerel). O silício monocristalino tem a maior eficiência (15% a 18%), e sombreamento e resistência série causam perdas. Os sistemas podem ser isolados, híbridos ou conectados; a microgeração vai até 75 kW e a minigeração acima disso. A compensação gera créditos válidos por 60 meses, exige medidor bidirecional e proteções como anti-ilhamento (2 s), limite de C.C. (0,5%) e reconexão entre 20 e 300 s."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Inversores e Conversores de Potência",
+      "subtitle": "String, microinversores e as proteções embarcadas",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Inversores string vs. microinversores",
+          "type": "text",
+          "body": "Inversores de string são sistemas centralizados que costumam apresentar um custo inicial mais baixo em comparação com os microinversores (Loja Deye - DeyeStore). O microinversor converte eletricidade DC em energia AC diretamente no nível de cada painel solar (Loja Deye - DeyeStore). A arquitetura do microinversor permite um rastreamento individual do sistema, monitorando a performance no nível de cada módulo (panel-level) (Loja Deye - DeyeStore)."
+        },
+        {
+          "id": "s2",
+          "title": "Função do inversor no fluxo de energia",
+          "type": "text",
+          "body": "O inversor atua junto ao controlador extraindo a energia contínua do arranjo ou baterias e fornecendo corrente alternada para a carga (Geração Distribuída de Energia Elétrica — APREPRO). Sendo a geração originalmente em AC, deve-se aplicar um retificador de tensão com potência adequada entre a geração e o inversor (EDP pt.dt.pdn.00059 06). O sistema híbrido independe da rede e utiliza um gerador secundário (como a diesel) associado aos painéis para garantir o suprimento (Geração Distribuída de Energia Elétrica — APREPRO)."
+        },
+        {
+          "id": "s3",
+          "title": "Proteções embarcadas e o anti-ilhamento",
+          "type": "list",
+          "items": [
+            "Muitos inversores já incluem proteções internas correspondentes às de uma String Box, como DPS de fusível e chave seccionadora, agilizando o comissionamento (SOUTH AMERICA - Revista Potência)",
+            "O anti-ilhamento interrompe o fornecimento em caso de falha, evitando acidentes na manutenção da rede de distribuição (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES)",
+            "A proteção de anti-ilhamento exige que a geração distribuída cesse o fornecimento em até 2 segundos após a perda da rede (EDP pt.dt.pdn.00059 06)",
+            "As funções de subtensão, sobretensão, subfrequência e sobrefrequência são obrigatórias (EDP pt.dt.pdn.00059 06)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Sincronização, frequência e fator de potência",
+          "type": "list",
+          "items": [
+            "A conexão de qualquer microgerador à rede de distribuição deve ser sincronizada em corrente alternada com frequência de 60 Hz (EDP pt.dt.pdn.00059 06)",
+            "Sistemas maiores que 6 kW devem ter capacidade de trabalhar com fator de potência ajustável de 0,90 indutivo até 0,90 capacitivo (EDP pt.dt.pdn.00059 06)",
+            "O limite para injeção contínua na rede é 0,5% da corrente nominal, exigindo parada em 1 segundo (EDP pt.dt.pdn.00059 06)",
+            "A reconexão não é imediata; o sistema deve aguardar um atraso de 20 a 300 segundos com a rede normalizada (EDP pt.dt.pdn.00059 06)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Estabilidade, religamento e responsabilidade do acessante",
+          "type": "note",
+          "body": "A operação não deve causar cintilação acima dos limites permitidos, resguardando a estabilidade da tensão local. O sistema deve ser capaz de suportar religamento automático da rede fora de fase, inclusive na pior condição possível, que é a oposição de fase. A função de espera do tempo de reconexão é exigida para a conexão de microgeradores e identificada pelo código ANSI 62. As diretrizes estabelecem que é de total responsabilidade do acessante garantir a sincronização do seu sistema com a rede elétrica (EDP pt.dt.pdn.00059 06)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Inversores string são centralizados e mais baratos; microinversores convertem DC em AC por painel, com rastreamento individual. O inversor extrai energia do arranjo ou baterias e entrega CA à carga. Muitos já trazem proteções da String Box e funções obrigatórias (27/59/81). O anti-ilhamento exige parada em 2 s, a sincronização em 60 Hz é do acessante, o fator de potência ajusta-se de 0,90 ind a 0,90 cap acima de 6 kW, o C.C. é limitado a 0,5% (parada em 1 s) e a reconexão espera de 20 a 300 s (ANSI 62)."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Armazenamento de Energia (Baterias e BESS)",
+      "subtitle": "Controlador de carga, tecnologias de bateria e regulação do BESS",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O papel do controlador de carga",
+          "type": "text",
+          "body": "O controlador de carga direciona a saída do arranjo fotovoltaico para a carga e para a recarga das baterias, regulando os fluxos energéticos (Geração Distribuída de Energia Elétrica — APREPRO). Quando o arranjo não gera energia, o controlador de carga extrai a energia previamente acumulada na bateria para abastecer a carga do sistema (APREPRO). O controlador de carga é fundamental pois regula a energia e os níveis de tensão e corrente que as baterias vão receber das placas (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES). O inversor atua transformando a corrente contínua (CC) originária das baterias em corrente alternada (CA) para uso dos equipamentos da edificação (GUIA INTERATIVO)."
+        },
+        {
+          "id": "s2",
+          "title": "Capacidade, profundidade de descarga e o BMS",
+          "type": "list",
+          "items": [
+            "Nos sistemas fotovoltaicos, a capacidade de carga é classificada na unidade de ampères-horas (Ah) (APREPRO)",
+            "A profundidade de descarga (DOD) especifica quanto da energia armazenada em estado máximo pode ser extraída sem causar danos à bateria (APREPRO)",
+            "O BMS atua internamente na bateria (DC) para proteção contra descarga, sobrecarga, temperatura e balanceamento, não sendo responsável pela inversão AC (SOUTH AMERICA - Revista Potência)",
+            "No frio extremo, a bateria passa a consumir mais energia e o seu processo de carregamento também se torna mais lento (GUIA INTERATIVO)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Tecnologias de bateria: LiFePO4 e o BESS",
+          "type": "list",
+          "items": [
+            "BESS é a sigla internacional para Battery Energy Storage Systems (SOUTH AMERICA - Revista Potência)",
+            "As baterias LiFePO4 apresentam maior tolerância a variações térmicas e uma maior profundidade de descarga sem prejuízo à sua vida útil projetada (SOUTH AMERICA)",
+            "A energia específica das baterias de íons de lítio (LiFePO4) chega a ser quatro vezes maior quando comparada aos níveis das tradicionais baterias chumbo-ácidas (SOUTH AMERICA)",
+            "As baterias B BOX (Battery Box) apresentam como característica técnica uma vida útil de três mil ciclos completos (SOUTH AMERICA)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Flexibilidade, despacho e o debate regulatório",
+          "type": "text",
+          "body": "O armazenamento é vital para enfrentar preocupações de flexibilidade, incluindo os crescentes episódios de 'curtailment', que é o corte forçado da geração (ANEEL retomará debate sobre regras para baterias). Para ser fonte despachável, o armazenamento em baterias deve modular uma quantidade de, pelo menos, 20% da capacidade de geração mensal da central (GUIA INTERATIVO). A 'tarifa dupla' defendida pela área técnica propõe que os sistemas sejam tarifados tanto ao carregar a energia (consumo) quanto na sua injeção na rede (ANEEL retomará debate)."
+        },
+        {
+          "id": "s5",
+          "title": "Modelos de tarifação e o leilão de 2026",
+          "type": "note",
+          "body": "Fernando Mosna comparou com o modelo do Reino Unido, onde os sistemas de armazenamento passaram a ser tarifados apenas no momento da injeção da energia (ANEEL retomará debate sobre regras para baterias). O ministro Alexandre Silveira confirmou que o primeiro leilão brasileiro direcionado a baterias de armazenamento está programado para ocorrer no ano de 2026 (ANEEL retomará debate sobre regras para baterias)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O controlador de carga regula o fluxo entre arranjo, carga e baterias, e fornece energia armazenada quando não há geração; o inversor converte a CC das baterias em CA. Capacidade mede-se em Ah, a DOD limita a extração segura e o BMS protege internamente em DC. As baterias LiFePO4 toleram melhor variações térmicas e têm energia específica até 4× maior que chumbo-ácido. No BESS, o armazenamento combate curtailment, precisa modular ao menos 20% para ser despachável, e o Brasil discute tarifa dupla e prepara seu primeiro leilão de baterias para 2026."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Regulamentação ANEEL (REN 482/687/1000 e Lei 14.300)",
+      "subtitle": "Marcos legais, compensação, modalidades e prazos",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A evolução dos marcos regulatórios",
+          "type": "list",
+          "items": [
+            "A Resolução Normativa ANEEL nº 482/2012 foi a inovação original que instituiu a micro/minigeração distribuída e o Sistema de Compensação (Portal Gov.br)",
+            "As regras atualizadas de micro e minigeração pela Resolução 1.059 foram consolidadas na Resolução Normativa ANEEL nº 1.000/2021 (Portal Gov.br)",
+            "A Lei nº 14.300/2022 é considerada o marco legal da Micro e Minigeração Distribuída e institui o novo Sistema de Compensação de Energia Elétrica (GUIA INTERATIVO)"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Definições de potência e o Sistema de Compensação",
+          "type": "list",
+          "items": [
+            "A microgeração distribuída é definida como uma central geradora com potência instalada de até 75 quilowatts (kW) (Portal Gov.br)",
+            "A minigeração distribuída é a central com potência acima de 75 kW e menor ou igual a 3 MW para fontes não despacháveis (Portal Gov.br)",
+            "A energia excedente injetada é cedida por empréstimo gratuito e transformada em crédito para compensar o consumo dos meses seguintes (Portal Gov.br)",
+            "O prazo de validade dos créditos é de 60 meses (Portal Gov.br)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Modalidades de geração",
+          "type": "text",
+          "body": "O autoconsumo remoto ocorre quando a compensação é feita em local diferente de onde a energia foi efetivamente gerada (Portal Gov.br). A geração compartilhada reúne diversos interessados via consórcio ou cooperativa para instalar e utilizar a energia de uma central comum (GUIA INTERATIVO). Essa configuração em condomínios divide a energia pelas regras de investimento, enquadrando-se em Empreendimento com Múltiplas Unidades Consumidoras (GUIA INTERATIVO). É expressamente vedada a divisão de central geradora em unidades de menor porte para burlar ou enquadrar-se nos limites de potência estipulados na legislação (Portal Gov.br)."
+        },
+        {
+          "id": "s4",
+          "title": "Custos, encargos e custo de disponibilidade",
+          "type": "list",
+          "items": [
+            "O marco estipula incidência de 100% das componentes tarifárias de remuneração dos ativos de distribuição e reintegração/depreciação para essas unidades maiores (GUIA INTERATIVO)",
+            "Além das componentes da distribuição (Fio B), essas usinas pagam até 2028 100% dos encargos de P&D, EE e a TFSEE sobre a energia faturada (GUIA INTERATIVO)",
+            "Para ligação trifásica do grupo B, cobra-se no faturamento o custo de disponibilidade em valor equivalente a 100 kWh mensais (Portal Gov.br)",
+            "Os custos de melhorias na rede, por conta exclusivamente da microgeração, não fazem parte da participação do consumidor, sendo arcados pela distribuidora (EDP pt.dt.pdn.00059 06)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Prazos de vistoria e orçamento de conexão",
+          "type": "note",
+          "body": "Conforme a regulamentação, a vistoria pela concessionária para liberação em tensão menor que 2,3 kV deve ser feita em até 5 dias úteis (EDP pt.dt.pdn.00059 06). O orçamento de conexão deve ser encaminhado em até 15 dias se não houver necessidade de melhoria ou reforço na rede (EDP pt.dt.pdn.00059 06). O Orçamento de Conexão (antigo Parecer de Acesso) consolida a viabilidade e informa prazos e Condições de Acesso (EDP pt.dt.pdn.00059 06)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A regulação evoluiu da REN 482/2012 à REN 1.000/2021 (que consolidou a 1.059) e à Lei 14.300/2022, marco legal da GD. Microgeração vai até 75 kW e minigeração de 75 kW a 3 MW; o excedente vira crédito válido por 60 meses. As modalidades incluem autoconsumo remoto, geração compartilhada e múltiplas unidades consumidoras, sendo vedado fracionar centrais. Há cobrança do Fio B, encargos até 2028 e custo de disponibilidade (100 kWh trifásico do grupo B). A vistoria sai em até 5 dias úteis e o orçamento de conexão em até 15 dias."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Conexão à Rede (NBR 16149 e NBR 16150)",
+      "subtitle": "Sincronização, proteções obrigatórias e segurança",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Sincronização e ponto de conexão",
+          "type": "text",
+          "body": "A conexão de sistemas à rede deve ser realizada em corrente alternada obrigatoriamente com frequência de 60 Hz (EDP pt.dt.pdn.00059 06). A norma dita que o ponto de conexão da central geradora é idêntico ao da unidade consumidora, proibindo modificações baseadas apenas na existência da geração (EDP pt.dt.pdn.00059 06). O acessante (cliente) é o único responsável pela sincronização adequada de suas instalações com o sistema de distribuição acessado (EDP pt.dt.pdn.00059 06). Nos casos em que a energia for gerada originalmente em AC pela fonte primária, o projeto deve prever a instalação de um retificador de tensão apropriado antes do inversor (EDP pt.dt.pdn.00059 06)."
+        },
+        {
+          "id": "s2",
+          "title": "Proteções obrigatórias na conexão",
+          "type": "list",
+          "items": [
+            "Subtensão (ANSI 27), sobretensão (ANSI 59), subfrequência (ANSI 81U) e sobrefrequência (ANSI 81O) são essenciais para qualidade e segurança (EDP pt.dt.pdn.00059 06)",
+            "O anti-ilhamento cessa o fornecimento de energia para a rede em caso de falha, evitando acidentes na manutenção da rede de distribuição (GUIA INTERATIVO)",
+            "O sistema de proteção anti-ilhamento exige que a geração distribuída cesse o fornecimento em até 2 segundos após a perda da rede (EDP pt.dt.pdn.00059 06)",
+            "A funcionalidade bidirecional é exigida no medidor para contabilizar e diferenciar a energia ativa consumida da energia injetada (EDP pt.dt.pdn.00059 06)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Injeção de C.C., reconexão e fator de potência",
+          "type": "list",
+          "items": [
+            "O sistema deve cessar o fornecimento se a injeção de componente C.C. na rede elétrica ultrapassar o limite de 0,5% da corrente nominal do inversor (EDP pt.dt.pdn.00059 06)",
+            "A reconexão com a rede após uma anomalia exige que o inversor aguarde um atraso configurado por um período de 20 a 300 segundos (EDP pt.dt.pdn.00059 06)",
+            "Sistemas maiores que 6 kW devem ter a capacidade de trabalhar com o fator de potência ajustável de 0,90 indutivo até 0,90 capacitivo (EDP pt.dt.pdn.00059 06)",
+            "Todo sistema de geração distribuída deve suportar o religamento automático fora de fase, inclusive na pior condição possível (oposição de fase) (EDP pt.dt.pdn.00059 06)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Certificação Inmetro e sinalização de segurança",
+          "type": "note",
+          "body": "O acessante deve apresentar certificados de que os inversores foram ensaiados em conformidade com normas vigentes ou o número de registro no Inmetro (EDP pt.dt.pdn.00059 06). As placas obrigatórias devem alertar as equipes de manutenção estampando a mensagem: CUIDADO – RISCO DE CHOQUE ELÉTRICO – GERAÇÃO PRÓPRIA (EDP pt.dt.pdn.00059 06). É expressamente vedada a divisão de central geradora em unidades de menor porte na tentativa de enquadrá-las nos limites de potência para microgeração ou minigeração (Portal Gov.br)."
+        },
+        {
+          "id": "s5",
+          "title": "Prazos e responsabilidade de custos",
+          "type": "text",
+          "body": "Para conexões na rede de baixa tensão (tensão menor que 2,3 kV), a vistoria deve ser realizada pela distribuidora em até 5 dias úteis (EDP pt.dt.pdn.00059 06). Quando não há necessidade de obras de melhoria na rede, a distribuidora deve encaminhar o Orçamento de Conexão em até 15 dias (EDP pt.dt.pdn.00059 06). Os custos de melhorias na rede, em função exclusivamente da microgeração, não fazem parte da participação do consumidor, sendo arcados pela distribuidora (EDP pt.dt.pdn.00059 06)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A conexão exige CA em 60 Hz, ponto de conexão idêntico ao da unidade consumidora e sincronização sob responsabilidade do acessante. São obrigatórias as proteções 27, 59, 81U e 81O, o anti-ilhamento (parada em 2 s) e o medidor bidirecional. O sistema cessa o fornecimento se a C.C. passar de 0,5%, reconecta entre 20 e 300 s, ajusta fator de potência de 0,90 ind a 0,90 cap acima de 6 kW e suporta religamento fora de fase. Inversores precisam de registro Inmetro, placas de advertência são obrigatórias, e os prazos de vistoria (5 dias úteis) e orçamento (15 dias) são definidos em norma."
+        }
+      ]
+    }
+  ]
+}

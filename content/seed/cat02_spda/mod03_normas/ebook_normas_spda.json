@@ -1,0 +1,280 @@
+{
+  "category": "SPDA",
+  "categoryOrder": 1,
+  "module": "Normas SPDA",
+  "moduleOrder": 2,
+  "moduleSubtitle": "NBR 5419, série IEC 62305 e a prática de inspeção e manutenção",
+  "ebookTitle": "Normas de SPDA (NBR 5419 / IEC 62305)",
+  "ebookSubtitle": "Da estrutura da norma à análise de risco, danos físicos, proteção de eletrônicos e manutenção do SPDA",
+  "estimatedMinutes": 80,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — NBR 5419 Parte 1: Princípios Gerais",
+      "subtitle": "Conceitos fundamentais, perdas, danos, fontes e níveis de proteção",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é o SPDA e como a norma se organiza",
+          "type": "text",
+          "body": "O SPDA é um conjunto de componentes instalados em uma edificação destinado a interceptar, conduzir e dissipar de forma segura a corrente elétrica de uma descarga atmosférica para o solo (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia). A ABNT NBR 5419 mantém a organização estrutural dividida em quatro partes: Parte 1 — Princípios gerais; Parte 2 — Análise de risco; Parte 3 — Danos físicos a estruturas e perigos à vida; Parte 4 — Sistemas elétricos e eletrônicos internos à estrutura (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA). A Parte 1 (Princípios Gerais) estabelece os conceitos fundamentais, definições e parâmetros básicos para compreensão dos fenômenos atmosféricos e seus efeitos nas estruturas (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "Tipos de perdas e tipos de danos",
+          "type": "list",
+          "items": [
+            "Perdas consideradas pela ABNT: perda de vidas humanas (L1); perda de instalação de serviço ao público (L2); perda de memória cultural (L3); e perda de valor econômico (L4) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "Tipos de danos: ferimentos aos seres vivos (D1); danos físicos às estruturas (D2); e falhas nos sistemas elétricos e eletrônicos (D3) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "Fontes de danos avaliadas no estudo de proteção: descargas diretamente na estrutura (S1) e próximo à estrutura (S2); a classificação inclui ainda descargas nas linhas elétricas que adentram a edificação (S3) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Parâmetros da descarga e níveis de proteção (LPL)",
+          "type": "text",
+          "body": "A Tabela 3 da NBR 5419 estabelece que o Pico de Corrente (Ip) causa efeitos mecânicos (forças eletrodinâmicas), centelhamento e danos por onda de choque acústico (Fonte: A física dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3). Conforme a mesma tabela, a Carga Elétrica (Q) é o parâmetro responsável pelos danos térmicos nos pontos de impacto (erosão de materiais, perfuração de chapas), e o valor fixado para o NP-I referente à energia específica (W/R) da primeira descarga de retorno positiva (1DR+) é de 10.000 kJ/ohm (Fonte: A física dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3). O LPL I (Proteção Máxima) oferece proteção contra 99% das correntes de raio, sendo obrigatório para estruturas críticas como hospitais, centrais de emergência e instalações com risco de explosão; o LPL IV é o nível de proteção básica (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)."
+        },
+        {
+          "id": "s4",
+          "title": "SPDA, MPS e o conceito de PDA",
+          "type": "note",
+          "body": "O termo SPDA divide espaço com o termo MPS, e os dois juntos trazem o novo e mais abrangente conceito de PDA. O SPDA atua contra danos à estrutura, enquanto as MPS tratam da proteção aos sistemas elétricos e eletrônicos (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). A Parte 4 da norma técnica ABNT NBR 5419 apresenta as Medidas de Proteção contra Surtos (MPS) (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O SPDA intercepta, conduz e dissipa a corrente de descarga para o solo, e a NBR 5419 se organiza em quatro partes. A Parte 1 fixa conceitos fundamentais: as perdas (L1 a L4), os danos (D1 a D3) e as fontes de danos (S1, S2, S3). A Tabela 3 associa parâmetros da descarga aos efeitos (Ip a efeitos mecânicos/centelhamento, Q a danos térmicos). Os níveis LPL I a IV graduam a proteção, com o LPL I cobrindo 99% das correntes para estruturas críticas. SPDA e MPS, juntos, compõem o conceito de PDA."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — NBR 5419 Parte 2: Gerenciamento de Risco",
+      "subtitle": "Componentes de risco, risco tolerável e o processo iterativo de proteção",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A equação fundamental do risco",
+          "type": "formula",
+          "formula": "Rx = Nx × Px × Lx",
+          "explanation": "Na composição do risco, Nx é o número de eventos perigosos, Px é a probabilidade de dano à estrutura e Lx é a perda consequente associada ao dano (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). O parâmetro Nd representa o número anual de eventos perigosos devido às descargas incidentes em uma estrutura, calculado pelo produto da densidade de raios (Ng) pela área de exposição (Ae); Ng é a densidade de descargas atmosféricas (raios/km²/ano) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s2",
+          "title": "As componentes de risco",
+          "type": "list",
+          "items": [
+            "RA — ferimentos em seres vivos causados por tensão de passo e de toque (descargas na estrutura); não tem relação com falhas de eletrônicos por LEMP (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "RB — danos físicos por centelhamentos dentro da edificação, originando risco de incêndio ou explosão por descargas na estrutura (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "RC — falha no sistema interno com origem em LEMPs decorrentes de descargas que atingem diretamente a edificação (Fonte de Dano S1) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "RM — falhas do sistema eletroeletrônico decorrentes de LEMP originado por descargas que incidem em áreas próximas à edificação (S2) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "RU, RV e RW — referentes a choques, incêndio e falhas provenientes de descargas na linha de serviço; podem ser assumidos como zero se o cabo externo tiver blindagem contínua interligada ao barramento de equipotencialização na entrada (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Risco tolerável e zonas de estudo",
+          "type": "text",
+          "body": "O Risco Tolerável (RT) é o valor limite estabelecido pela norma; o risco total calculado (R) é comparado com o RT para decidir a necessidade e o nível de proteção (SPDA) (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). Os índices típicos toleráveis indicados na norma estabelecem que, para a perda de vida humana ou ferimentos permanentes, o risco tolerável (RT) é de 10^-5; para perda de serviço ao público (R2) é de 10^-3; e para perda de memória ou patrimônio cultural (R3) é de 10^-4 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015 / HazOp Engenharia). É possível dividir a estrutura em zonas de estudo (ZS) e assim avaliar cada componente de risco separadamente; o risco total da edificação será a soma dos riscos de cada zona. O risco R1 é referente à perda de vida humana — se na edificação ou zona em estudo não há presença de pessoas, então R1 torna-se igual a zero (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s4",
+          "title": "O processo iterativo de seleção do LPL",
+          "type": "note",
+          "body": "O LPL adequado não é escolhido arbitrariamente. O processo é iterativo: calcula-se o risco inicial; se R > RT, implementam-se medidas de proteção progressivamente do menor nível (LPL IV) ao maior rigor (LPL I) até que o risco seja tolerável (R menor ou igual a RT), evitando sobrecustos desnecessários com superdimensionamento (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). Se R for menor ou igual ao RT, a edificação encontra-se dentro da tolerância normativa e o fluxograma indica que a estrutura está protegida, não necessitando novas medidas (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A Parte 2 trata da análise de risco. Cada componente segue Rx = Nx × Px × Lx, e Nd = Ng × Ae estima os eventos anuais. As componentes RA e RB ligam-se a descargas na estrutura; RC e RM a LEMP (S1 e S2); RU/RV/RW à linha de serviço, podendo zerar com blindagem interligada à equipotencialização. O risco calculado R é comparado ao tolerável RT (10^-5 para vida humana, 10^-3 para R2, 10^-4 para R3). Quando R > RT, aplicam-se medidas iterativamente do LPL IV ao LPL I até atingir a tolerância."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — NBR 5419 Parte 3: Danos Físicos a Estruturas",
+      "subtitle": "Captação, descidas, aterramento e métodos de proteção",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Subsistemas e métodos de captação",
+          "type": "text",
+          "body": "A Parte 3 da NBR 5419 trata de Danos físicos a estruturas e perigos à vida, provendo os requisitos para a proteção de uma estrutura física e proteção de seres vivos (Fonte: ABNT NBR 5419:2026 Guia prático / Cleiton Junior Lopes). O SPDA é dividido nos seguintes subsistemas principais: Sistema de Captação, Sistema de Descidas e Sistema de Aterramento (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia). Os três métodos de dimensionamento do sistema de captação descritos na norma são: método da esfera rolante (eletrogeométrico), método das malhas (Faraday) e método do ângulo de proteção (Franklin) (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA). A gaiola de Faraday atua distribuindo a corrente elétrica ao longo dos condutores e, devido a essa disposição física, o campo elétrico interno à gaiola é anulado, protegendo o interior da edificação (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "Esfera rolante, malhas e descidas",
+          "type": "list",
+          "items": [
+            "O raio da esfera rolante depende da classe do SPDA, sendo estipulado em 20 metros para o Nível de proteção I (Classe I) (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
+            "A tabela que relaciona a classe do SPDA ao método de captação indica que, para o Nível II, o máximo afastamento dos condutores da malha é de 10 x 10 metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "De acordo com a tabela de distâncias normativas, o espaçamento médio dos condutores de descidas não naturais para o Nível de proteção IV é de 25 metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "A determinação do volume de proteção considera apenas as dimensões físicas reais dos captores, de modo que sistemas não convencionais como os captores do tipo ESE permanecem fora dos métodos aceitos pela NBR 5419 (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Aterramento e materiais",
+          "type": "text",
+          "body": "Na tabela de materiais e dimensões mínimas para eletrodos de aterramento, a configuração de cobre encordoado (não cravado) exige uma área de seção mínima de 50 mm² (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). A instalação dos condutores de aterramento deverá ser enterrada em uma profundidade de 0,5 m no mínimo, e ser posicionada a uma distância mínima de 1 m ao redor da edificação a ser protegida (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). Para utilizar eletrodos naturais, deve-se garantir a continuidade elétrica; no caso específico de concreto protendido, os cabos de aço não podem ser utilizados como condutores para o sistema de aterramento elétrico (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). As hastes de aterramento continuam não sendo permitidas como único componente do sistema, podendo ser utilizadas apenas como complemento de malhas ou anéis (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)."
+        },
+        {
+          "id": "s4",
+          "title": "Mudanças na revisão 2026",
+          "type": "note",
+          "body": "A atualização da norma introduziu a proibição do uso de aço zincado a quente (aço galvanizado) na transição entre o concreto e o solo no sistema de aterramento, para mitigar corrosão. Os condutores de aço cobreado passaram a ter seções nominais equiparadas às do cobre, sendo 35 mm² para os subsistemas de captação e descida e 50 mm² para o subsistema de aterramento. Para os captores verticais maciços ou tubulares, a norma revisada exige formalmente que seja realizado o dimensionamento mecânico capaz de suportar os esforços do vento conforme a ABNT NBR 6123. No subsistema de descida, passou a ser admitida a utilização de condutores com isolação específica conforme a IEC TS 62561-8, o que permite manter a distância de segurança e reduzir centelhamentos (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA). A nova redação passa a permitir a instalação interna do anel em edificações geminadas, porém devem ser previstas medidas para mitigar os riscos de tensões perigosas de superfície, como tensão de passo e de toque (Fonte: ABNT NBR 5419:2026 / Mesh Engenharia)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A Parte 3 cobre danos físicos e perigos à vida. O SPDA divide-se em captação, descidas e aterramento, e a captação usa três métodos: esfera rolante (raio 20 m para Classe I), malhas/Faraday (10x10 m no Nível II) e ângulo de proteção/Franklin; captores ESE ficam fora da norma. No aterramento, cobre encordoado exige 50 mm², condutores enterrados a 0,5 m e a 1 m da edificação, e hastes só como complemento. A revisão 2026 proíbe aço galvanizado na transição concreto/solo, equipara seções do aço cobreado (35/50 mm²), exige cálculo de vento (NBR 6123) e admite condutores isolados (IEC TS 62561-8)."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — NBR 5419 Parte 4: Sistemas Elétricos e Eletrônicos",
+      "subtitle": "MPS, LEMP, zonas de proteção (ZPR) e coordenação de DPS",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O propósito da Parte 4 e as MPS",
+          "type": "text",
+          "body": "A Parte 4 fornece informações para projeto, instalação, inspeção, manutenção e ensaio de sistemas de proteção para equipamentos elétricos e eletrônicos (MPS), a fim de reduzir o risco de danos permanentes internos (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). As MPS significam Medidas de Proteção contra Surtos, apresentadas na Parte 4 da norma para evitar falhas temporárias ou permanentes nas instalações elétricas e de sinal (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria). Os pulsos eletromagnéticos devido aos raios, que causam falhas nos sistemas elétricos e eletrônicos, são conhecidos pela sigla LEMP (Lightning Electromagnetic Impulse); são decorrentes de descargas diretas (RC) ou próximas (RM), responsáveis pelas sobretensões induzidas que danificam o sistema interno (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s2",
+          "title": "As quatro Medidas de Proteção contra Surtos",
+          "type": "list",
+          "items": [
+            "Aterramento e equipotencialização (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
+            "Blindagem magnética e roteamento de linhas (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
+            "Coordenação de DPS (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
+            "Interfaces isolantes (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Zonas de Proteção contra Raios (ZPR) e DPS",
+          "type": "text",
+          "body": "As Zonas de Proteção contra Raios (ZPR) definem as interfaces onde as blindagens são avaliadas e os DPS coordenados devem atuar; a norma caracteriza interfaces como a zona ZPR 0/1, onde devem ser avaliadas as blindagens e posicionados os DPS (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). O parâmetro Ks1 leva em consideração a eficiência da blindagem por malha da estrutura, SPDA ou outra blindagem na interface ZPR 0/1 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). As MPS podem ser utilizadas de forma individual ou coletivamente, sem que exista uma hierarquia entre elas, devendo cada caso ser avaliado de acordo com a necessidade (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria). No caso dos dispositivos de proteção contra surtos, os requisitos técnicos passam a ser direcionados à série ABNT NBR IEC 61643, responsável pela padronização desses dispositivos (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)."
+        },
+        {
+          "id": "s4",
+          "title": "O que o DPS faz (e o que não faz)",
+          "type": "note",
+          "body": "Um DPS não estabiliza a tensão, nem filtra perturbações em regime permanente; ele apenas protege contra sobretensões temporárias originadas por raios e chaveamentos (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria). O aterramento, a equipotencialização e o roteamento de cabos já farão parte de um projeto de instalação elétrica e deverão ser adequados; apenas a instalação de DPS é exclusivamente uma MPS. As blindagens e o isolamento galvânico têm o objetivo de minimizar ruídos e perturbações, entre eles os surtos de tensão e corrente, podendo ou não ser utilizados como MPS (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A Parte 4 trata da proteção de sistemas elétricos e eletrônicos internos por meio das MPS, que combatem os danos do LEMP (sobretensões induzidas por descargas diretas — RC — ou próximas — RM). São quatro MPS: aterramento/equipotencialização, blindagem e roteamento, coordenação de DPS e interfaces isolantes, sem hierarquia entre elas. As ZPR definem interfaces (ZPR 0/1) onde se avaliam blindagens e se posicionam DPS, cujos requisitos seguem a série ABNT NBR IEC 61643. O DPS protege contra surtos transitórios, mas não estabiliza nem filtra a tensão em regime permanente."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — A Série IEC 62305 e a Harmonização Normativa",
+      "subtitle": "A base internacional da NBR 5419 e as normas correlatas",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A IEC 62305 como texto base",
+          "type": "text",
+          "body": "Tendo como texto base a norma internacional IEC 62305/2010, a ABNT NBR 5419:2015 segue com a mesma estrutura e organização desta IEC, composta por quatro volumes normativos (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). A ABNT NBR 5419:2015 está harmonizada com as normas internacionais da série IEC 62305, garantindo que as práticas brasileiras estejam alinhadas com os mais avançados padrões mundiais de engenharia de proteção (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). O Volume 2 (Parte 2) trata do Gerenciamento de Risco, tendo como base a documentação da IEC 62305-2:2010 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s2",
+          "title": "Softwares de cálculo baseados na IEC 62305-2",
+          "type": "text",
+          "body": "Já existem alguns softwares que foram desenvolvidos tanto no Brasil quanto no exterior, com base na IEC 62305-2:2010, que facilitam o cálculo de riscos (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). Tanto a estruturação da norma ABNT NBR 5419 quanto o desenvolvimento de softwares de cálculo de risco brasileiros (ex.: TUPAN) utilizam como base científica a normativa internacional IEC 62305-2:2010 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s3",
+          "title": "Normas correlatas e níveis de proteção",
+          "type": "list",
+          "items": [
+            "No caso dos dispositivos de proteção contra surtos, os requisitos técnicos passam a ser direcionados à série ABNT NBR IEC 61643, responsável pela padronização desses dispositivos (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
+            "No subsistema de descida, passa a ser admitida a utilização de condutores com isolação específica (como o DEHN HVI) conforme a IEC TS 62561-8, para manter distâncias de segurança e reduzir o risco de centelhamentos (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
+            "Para a Perda de Vidas Humanas (Risco R1), o critério mais rigoroso da norma estabelece o Risco Tolerável (RT) aceitável como 1 em 100.000 por ano (10^-5) (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia / Cleiton Junior Lopes)",
+            "O LPL III, classificado como Proteção Convencional (aplicável a residenciais e comerciais padrão), possui uma corrente mínima estipulada de 10,1 kA e raio da esfera rolante de 45 m (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "ZPR e o conceito ampliado de PDA",
+          "type": "note",
+          "body": "A norma define as Zonas de Proteção contra Raios (ZPR) para caracterizar as interfaces (ZPR 0/1) onde as blindagens eletromagnéticas devem ser avaliadas e os DPS posicionados coordenadamente contra os LEMPs (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). O termo SPDA divide agora espaço com as MPS (Medidas de Proteção contra Surtos), e os dois termos juntos trazem o novo e mais abrangente conceito de proteção contra descargas atmosféricas (PDA) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NBR 5419 tem como texto base a IEC 62305/2010 e está harmonizada com essa série de quatro volumes; a Parte 2 baseia-se na IEC 62305-2:2010, que também fundamenta softwares de cálculo de risco como o TUPAN. Normas correlatas incluem a série ABNT NBR IEC 61643 (DPS) e a IEC TS 62561-8 (condutores isolados de descida). O critério de risco tolerável para vida humana é 10^-5, e os níveis LPL graduam a corrente e o raio da esfera (LPL III: 10,1 kA, 45 m). As ZPR e o conceito de PDA integram SPDA e MPS sob a base internacional."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Inspeção e Manutenção de SPDA",
+      "subtitle": "Periodicidade, ensaios, documentação e responsabilidade técnica",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que e quando inspecionar",
+          "type": "text",
+          "body": "Não existe isenção de manutenção. A norma exige que haja um período previsto para inspeções visuais e completas, essencial para garantir que o material esteja em boas condições de atuação, dependendo da classe de risco e do ambiente (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios / Cleiton Junior Lopes). As inspeções têm como objetivo assegurar que o SPDA executado está da forma projetada, os materiais estão em boas condições sem corrosões, e que o arranjo de aterramento garante a resistência exigida (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). Toda edificação precisa passar por inspeções assim que a obra é concluída e antes que o prédio seja ocupado, garantindo conformidade para operação segura; uma inspeção deve ocorrer a qualquer momento em que a construção passar por modificações, ou se for identificado/suspeito que a edificação foi atingida por um raio (Fonte: Cleiton Junior Lopes / ABNT NBR 5419:2026 Guia prático)."
+        },
+        {
+          "id": "s2",
+          "title": "Periodicidade das inspeções completas",
+          "type": "list",
+          "items": [
+            "Construções comuns (residenciais, comerciais, agrícolas) sem risco de explosão e condições severas: período máximo de 5 anos (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "Construções com grande concentração de pessoas (hospitais, shoppings, estádios): período máximo de 3 anos (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "Construções expostas a condições severas (maresia, ambientes industriais com produtos agressivos, armazenagem de explosivos): período máximo de 1 ano (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "Anualmente é necessária uma inspeção visual para todos os elementos aparentes do SPDA (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "Recomendação de manutenção por classe: Classe I: anual; Classe II: a cada 2 anos; Classe III: a cada 3 anos; Classe IV: a cada 5 anos (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios)",
+            "Verificação fora de época permanece exigida na suspeita de impacto e na atuação de DPS Classe I na entrada da instalação elétrica (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Ensaios e manutenção do aterramento",
+          "type": "text",
+          "body": "A cada descarga elétrica, a eficiência do sistema pode ser comprometida, tornando-se essencial a manutenção regular para constatar danos aparentes e desgaste após a ocorrência de impactos (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios). A manutenção inclui testar a resistência de aterramento usando dispositivos adequados e garantir que as conexões entre os componentes e as hastes estejam firmes (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios / HazOp Engenharia). A norma indica que, se for utilizado um software adequado e a estratificação do solo no projeto, pode-se aferir o valor de resistência e assim é dispensado outras medições de campo inicialmente (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s4",
+          "title": "Documentação e responsabilidade técnica",
+          "type": "note",
+          "body": "O Prontuário de Instalações Elétricas (PIE), documento obrigatório pela NR-10, deve conter o Laudo de Inspeção do SPDA com periodicidade definida, e é onde devem obrigatoriamente constar os laudos, relatórios de medição e ARTs de SPDA (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). A ART (Anotação de Responsabilidade Técnica) é o documento emitido pelo Engenheiro e obrigatório para a validação legal do Laudo de SPDA; apenas o Engenheiro Eletricista registrado no CREA é habilitado para emitir e assinar o Laudo de Inspeção e Manutenção do SPDA, assumindo a responsabilidade legal, não sendo competência dos técnicos (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios / HazOp Engenharia). A documentação técnica (relatórios, desenhos, dados do solo) deve estar atualizada e mantida no local ou com a pessoa encarregada pela manutenção (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Não há isenção de manutenção: o SPDA exige inspeções visuais e completas conforme classe e ambiente, além de verificações na entrega da obra, após modificações ou suspeita de raio. A inspeção completa tem período máximo de 5 anos (construções comuns), 3 anos (grande concentração de pessoas) e 1 ano (condições severas), com inspeção visual anual e verificação extra após impacto ou atuação de DPS Classe I. A manutenção testa a resistência de aterramento e firmeza das conexões. A documentação fica no PIE (NR-10), e o Laudo só pode ser emitido por Engenheiro Eletricista registrado no CREA, com ART."
+        }
+      ]
+    }
+  ]
+}

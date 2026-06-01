@@ -1,0 +1,244 @@
+{
+  "category": "Qualidade da Energia",
+  "categoryOrder": 2,
+  "module": "Instrumentação e Medição de QE",
+  "moduleOrder": 3,
+  "moduleSubtitle": "Sensores, analisadores, campanhas PRODIST, análise de dados e laudos de QE",
+  "ebookTitle": "Instrumentação e Medição de Qualidade da Energia",
+  "ebookSubtitle": "Dos sensores e analisadores às campanhas PRODIST, análise de dados e elaboração de laudos",
+  "estimatedMinutes": 67,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Equipamentos de Medição de QE",
+      "subtitle": "Sensores, transformadores instrumentais, analisadores e classes de medidor",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Transformadores instrumentais e sensores de corrente",
+          "type": "text",
+          "body": "A medição de qualidade da energia começa pela aquisição correta dos sinais de tensão e corrente. A Apostila Proteção (Pio Décimo) explica que o objetivo dos Transformadores Instrumentais, como os TPs, é reduzir os valores de tensão a níveis baixos e normatizados sem inserir erros, e não elevar a tensão. Conforme a mesma Apostila de Proteção (Pio Décimo), os TCs reduzem a corrente a níveis padronizados no secundário, sendo o padrão de 5 A ou 1 A. No Guia de Proteção da Schneider consta claramente que 5P e 10P são as classes de precisão normalizadas para os TCs de proteção, atestando sua nomenclatura convencional para suportar situações limite. Ainda segundo o Guia de Proteção da Schneider, os sensores tipo LPCT possuem uma resposta linear em uma ampla faixa de corrente e somente começam a saturar acima das altíssimas correntes a serem interrompidas."
+        },
+        {
+          "id": "s2",
+          "title": "O que os analisadores de QE fazem",
+          "type": "list",
+          "items": [
+            "O artigo sobre Analisadores da Wrindu afirma que eles capturam dados em tempo real sobre formas de onda, sendo essenciais para detectar anomalias que podem danificar máquinas sensíveis ou causar paralisações",
+            "O guia da Wrindu descreve que tecnologias como conversores analógico-digitais (ADCs) de alta resolução, com taxa de amostragem de 1 MS/s, capturam transientes rápidos invisíveis para dispositivos mais lentos",
+            "O guia de analisadores da Wrindu explica que os analisadores operam por amostragem de alta velocidade e condicionamento de sinal, o qual filtra o ruído garantindo representação precisa para cálculos baseados em FFT",
+            "O guia comercial da Wrindu afirma que os analisadores utilizam processadores DSP (Processador de Sinal Digital) para cálculos no próprio dispositivo, reduzindo a necessidade de pós-processamento em softwares remotos",
+            "O material definitivo sobre analisadores da Wrindu lista como tecnologia essencial o fato de que a sincronização de tempo por GPS garante uma correlação precisa em sistemas de monitoramento em múltiplos locais",
+            "O documento Guia Wrindu afirma textualmente que a integração da computação de borda permite que os analisadores processem informações localmente, minimizando a latência em locais remotos"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Medidores Classe A e Classe S",
+          "type": "text",
+          "body": "Segundo o material KRA2 Energia, o Medidor Classe S é utilizado principalmente para propósitos estatísticos, como campanhas de medição. O documento da KRA2 Energia estabelece diretamente que o Medidor Classe A é obrigatório em aplicações envolvendo disputas judiciais. O texto da KRA2 Energia dita textualmente para o medidor Classe S que o VTCD (amplitude e duração do evento) possui incertezas máximas de +/- 1,0 por cento da tensão de referência e de 1 ciclo, e não de 5 por cento. O informativo técnico da KRA2 Energia dita claramente que no medidor Classe A o valor eficaz da tensão (VTCD) deve ser calculado a cada meio ciclo, incluindo distorções. O material da KRA2 Energia dita que para a Classe S é obrigatório apenas o registro de sequência negativa, sendo totalmente opcional o cálculo do desequilíbrio de tensão de sequência zero."
+        },
+        {
+          "id": "s4",
+          "title": "Incertezas exigidas pelo PRODIST",
+          "type": "note",
+          "body": "O documento informativo da KRA2 Energia sobre o PRODIST especifica que na Classe A a incerteza para indicadores de distorções harmônicas deve ser inferior ou igual a 5,0 por cento da tensão medida. O artigo informativo do PRODIST elaborado pela KRA2 Energia fixa normativamente como requisito para o Medidor Classe A que a incerteza para os indicadores FD2% e FD0% não deve ser superior a +/- 0,15 por cento da tensão de referência. Já o artigo guia da Wrindu relata na seção de tecnologias essenciais que o aprendizado de máquina aprimora a previsão da qualidade da energia, prevendo distúrbios a partir de tendências históricas."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A medição de QE parte dos transformadores instrumentais (TPs reduzem tensão, TCs reduzem corrente a 5 A ou 1 A) e sensores como o LPCT, com classes de precisão 5P e 10P para proteção. Os analisadores capturam formas de onda em tempo real usando ADCs de alta resolução (1 MS/s), DSP, GPS e computação de borda. Os medidores dividem-se em Classe A (obrigatório em disputas judiciais, com VTCD calculado a cada meio ciclo) e Classe S (propósitos estatísticos), cada um com incertezas máximas definidas pelo PRODIST."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Pontos de Medição e Planejamento de Campanha",
+      "subtitle": "PCC, pontos de conexão, modalidades de medição e sorteio amostral da ANEEL",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Onde medir: PCC e pontos de conexão",
+          "type": "text",
+          "body": "O manual Soluções WEG define a sigla PCC como Ponto de Acoplamento Comum (Point of Common Coupling), sendo o local exato da instalação para análise de conformidade. O item 16 do PRODIST Módulo 8 estabelece que a conformidade dos níveis de tensão deve ser avaliada explicitamente nos pontos de conexão com a Rede de Distribuição. O PRODIST Módulo 8 (Item 16) determina textualmente que a conformidade dos níveis de tensão deve ser avaliada nos pontos de conexão com a Rede de Distribuição (entre distribuidoras e entre distribuidoras e unidades consumidoras)."
+        },
+        {
+          "id": "s2",
+          "title": "Modalidades de medição em regime permanente",
+          "type": "list",
+          "items": [
+            "O item 89 do PRODIST Módulo 8 dita com clareza que a medição da tensão em regime permanente ocorre nas modalidades: eventual (por reclamação), amostral ou permanente",
+            "A classificação exata listada no PRODIST Módulo 8 (Item 89) detalha que a medição eventual ocorre pontualmente por reclamação ou indicação da ANEEL",
+            "O item 113 do PRODIST Módulo 8 determina categoricamente que o sistema de medição permanente de qualidade requerido deve ser instalado no prazo de até 60 dias a partir da solicitação do usuário",
+            "O item 112 do PRODIST Módulo 8 dita que o sistema é instalado pela distribuidora, devendo a diferença de custo em relação ao medidor convencional ser paga pelo usuário interessado",
+            "O item 121 (h) determina que o comunicado pré-instalação de longa duração seja entregue com antecedência mínima de 48 horas da realização da medição"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O sorteio amostral conduzido pela ANEEL",
+          "type": "text",
+          "body": "Como referenciado no PRODIST Módulo 8 (Item 92), o sorteio das amostras destas medições é executado aleatoriamente pela ANEEL em outubro com base integral nas informações do BDGD. Segundo o item 92 do PRODIST Módulo 8, o sorteio da amostra é realizado pela ANEEL por meio de critério estatístico aleatório, a partir das Bases de Dados Geográficas das Distribuidoras (BDGD). As bases textuais do regulamento indicam expressamente que o referencial informacional geográfico que norteia e possibilita a base do dimensionamento analítico para os medidores amostrais pertence às tabelas da BDGD de cada ano (Item 92 PRODIST Módulo 8). A norma dita no item 96 do PRODIST Módulo 8 que, ocorrendo o encerramento da relação contratual, a distribuidora deve solicitar à ANEEL a substituição da unidade consumidora mediante novo sorteio até o mês de setembro."
+        },
+        {
+          "id": "s4",
+          "title": "A base de acompanhamento e a duração da campanha",
+          "type": "note",
+          "body": "O estatuto normativo PRODIST (Módulo 8, Item 93) especifica abertamente que as unidades consumidoras que caírem no sorteio passarão a compor a base de acompanhamento e devem ser monitoradas de forma permanente. O item 93 do PRODIST Módulo 8 reforça expressamente que a unidade consumidora sorteada passa a compor a base amostral e deve ser monitorada de forma permanente. O item 26.2 do PRODIST Módulo 8 estipula o registro obrigatório de 1.008 leituras válidas obtidas em intervalos consecutivos de 10 minutos, o que perfaz 168 horas completas. A alínea h do item 121 do PRODIST Módulo 8 exige informar ao usuário com antecedência mínima de 48 horas da realização da medição de no mínimo 168 horas."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A conformidade de tensão é avaliada nos pontos de conexão com a Rede de Distribuição, sendo o PCC (Ponto de Acoplamento Comum) o local de análise. A medição em regime permanente pode ser eventual (por reclamação), amostral ou permanente; o sistema permanente é instalado pela distribuidora em até 60 dias, com a diferença de custo paga pelo usuário. A ANEEL sorteia as amostras em outubro a partir do BDGD, e as unidades sorteadas passam a compor a base de acompanhamento, com campanhas de 1.008 leituras de 10 minutos (168 horas) e aviso prévio de 48 horas."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Metodologia de Campanhas de Medição",
+      "subtitle": "Leituras válidas, expurgos, agregação de eventos e o Fator de Impacto",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "As 1.008 leituras válidas e os expurgos",
+          "type": "text",
+          "body": "O item 26.2 do PRODIST Módulo 8 fixa de forma direta e inequívoca a necessidade de 1.008 leituras válidas capturadas em trechos ininterruptos de 10 minutos cada, totalizando estatisticamente 168 horas. A regra descrita no item 26.2 do PRODIST Módulo 8 estipula que a composição de indicadores individuais utiliza registros em intervalos consecutivos de 10 minutos, e não de 15. O item 26.3 do PRODIST Módulo 8 determina que, no intuito de obter-se as 1.008 leituras válidas integrais, os intervalos adicionais sejam agregados para suprir expurgos, ocorrendo sempre consecutivamente. Nenhuma norma sugere manipular ou falsear leituras impondo valores artificiais adequados: o item 86/87 do Módulo 8 prevê apenas que o intervalo de 10 minutos deve ser expurgado e substituído por igual número de leituras válidas coletadas sucessivamente à frente."
+        },
+        {
+          "id": "s2",
+          "title": "Regras de expurgo e substituição",
+          "type": "list",
+          "items": [
+            "O item 86 do PRODIST Módulo 8 dita que para as medições de harmônicas, desequilíbrios e flutuações, na ocorrência de VTCD ou interrupções longas, o intervalo de 10 minutos deve ser expurgado e substituído",
+            "De acordo com o item 87 do PRODIST Módulo 8, na medição em regime permanente, o expurgo de variações temporárias ou interrupções longas é obrigatório, sendo opcional o expurgo de intervalos com variações momentâneas de tensão",
+            "Conforme o item 26.3 do PRODIST Módulo 8, no intuito de obter-se 1.008 leituras válidas, intervalos adicionais devem ser agregados para substituir as leituras expurgadas, sempre consecutivamente",
+            "O item 26.2 do PRODIST Módulo 8 estabelece diretamente que para a composição dos indicadores individuais deve-se considerar o registro de 1.008 leituras válidas"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Detecção e agregação de eventos de VTCD",
+          "type": "text",
+          "body": "A alínea a do item 88 do PRODIST Módulo 8 esclarece que a detecção deve considerar como parâmetro uma tensão fixa ou uma tensão média deslizante Vsr(n) calculada a partir do valor eficaz dos 12 ciclos mais recentes. O item 88 (c) do PRODIST Módulo 8 estipula objetivamente que eventos consecutivos englobados em um período de 3 minutos no mesmo ponto são compulsoriamente agregados, compondo um único evento temporal conjunto (agregação temporal). O item 88 (d) do PRODIST Módulo 8 especifica que o afundamento ou a elevação de tensão que representa o intervalo de 3 minutos é o de menor ou de maior amplitude da tensão, respectivamente. A alínea e do item 88 do PRODIST Módulo 8 define explicitamente que a agregação de fases pelo critério de união implica que a duração é o intervalo entre a primeira transposição e o último retorno da tensão ao limite estável."
+        },
+        {
+          "id": "s4",
+          "title": "O Fator de Impacto (FI)",
+          "type": "note",
+          "body": "De acordo com o item 74 do PRODIST Módulo 8, o indicador responsável que caracteriza estritamente o patamar de severidade da incidência da frequência de eventos de VTCD em função de uma ponderação de base recebe oficialmente o nome Fator de Impacto - FI. A Equação 22 e o texto do item 74 no PRODIST Módulo 8 evidenciam que o FI é originado pela soma dos produtos das frequências reais pelos fatores de ponderação fpond(i), o conjunto dividido em relação ao FIbase correspondente. O item 77 do PRODIST Módulo 8 assinala formalmente que o valor de referência do indicador Fator de Impacto (FI) para o SDMT e o SDAT no período de 30 dias consecutivos é de 1,0 pu."
+        },
+        {
+          "id": "s5",
+          "title": "O cálculo do DRP",
+          "type": "formula",
+          "formula": "DRP = (nlp / 1.008) × 100",
+          "explanation": "A Equação 1 do PRODIST Módulo 8 define matematicamente o DRP como (nlp / 1.008) x 100, onde nlp é o maior valor entre as fases de leituras na faixa precária. O denominador 1.008 corresponde justamente ao total de leituras válidas de 10 minutos exigidas na campanha, equivalentes às 168 horas ininterruptas previstas no item 26.2."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A campanha exige 1.008 leituras válidas de 10 minutos consecutivos (168 horas); intervalos com VTCD ou interrupções longas são expurgados e substituídos por leituras válidas consecutivas, nunca falseados. A detecção de VTCD usa uma tensão média deslizante dos 12 ciclos mais recentes, e eventos consecutivos em 3 minutos no mesmo ponto são agregados num único evento. O Fator de Impacto (FI) caracteriza a severidade dos VTCDs com referência de 1,0 pu em 30 dias, e o DRP é calculado como (nlp / 1.008) × 100."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Análise de Dados e Software de QE",
+      "subtitle": "Técnicas de processamento de sinais, VMD, Random Forest e recursos de software",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Limitações das técnicas clássicas: FFT e STFT",
+          "type": "text",
+          "body": "A dissertação do IFPB aponta que na FFT a representação se dá no domínio da frequência e a informação temporal fica indisponível, dificultando a análise de sinais não estacionários. O documento do IFPB assevera que a FFT não é adequada para sinais não estacionários, pois na FFT a representação ocorre puramente no domínio da frequência, logo, a informação temporal do instante exato do evento fica indisponível. A revisão de técnicas clássicas documentada pela dissertação do IFPB aponta que a STFT ou Fourier de Curta Duração aplica e lida intrinsecamente com restrições de operação valendo-se das abordagens envolvendo técnicas de janelamento móvel ao longo do eixo do tempo. A pesquisa do IFPB explica que a STFT usa janelamento móvel para avaliar áreas menores, mas a largura fixa da janela restringe os resultados, limitando a flexibilidade para lidar com eventos muito curtos."
+        },
+        {
+          "id": "s2",
+          "title": "Decomposição de sinais: IMF, EMD e VMD",
+          "type": "text",
+          "body": "A dissertação do IFPB define que essas técnicas decompõem o sinal em Funções de Modo Intrínseco, traduzidas e referenciadas do inglês como Intrinsic Mode Function (IMF). A dissertação de pesquisa do IFPB atesta que as técnicas baseadas em EMD são altamente sensíveis ao ruído, resultando em situações onde as frequências não são alocadas apropriadamente, ocasionando distorções na decomposição dos sinais originais. A dissertação do IFPB baseia sua metodologia híbrida na classificação de distúrbios utilizando a técnica da Decomposição Variacional de Modos (VMD) associada ao algoritmo classificador Random Forest (RF). O estudo do IFPB conclui que a VMD apresenta desempenho superior à EMD na filtragem de ruído porque um filtro de Wiener está embutido no processo de atualização dos seus modos."
+        },
+        {
+          "id": "s3",
+          "title": "Fundamentos matemáticos da VMD",
+          "type": "list",
+          "items": [
+            "A dissertação de pesquisa do IFPB detalha matematicamente que, no algoritmo VMD, a largura de banda do sinal de cada modo é estimada por meio quadrado da norma L2 do gradiente do sinal de demodulação",
+            "O estudo metodológico formal do IFPB aponta que, para resolver satisfatoriamente o problema de otimização restrito exposto pela VMD, são inseridas operações com a penalidade quadrática conjunta aos multiplicadores Lagrangianos",
+            "Conforme o equacionamento da atualização do domínio espectral providenciado na literatura do IFPB, tal procedimento pode ser identificado em engenharia como a submissão a um filtro passa-baixa de Wiener centralizado em torno da frequência requerida, propiciando imunidade extra a ruídos",
+            "A dissertação do IFPB elenca que as características (atributos) extraídas de cada sinal decomposto pela IMF para o reconhecimento de padrões com o Random Forest abrangem a TCZ, a energia, a Curtose e Skewness, entre outros limites e métricas"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Recursos de software e inteligência artificial",
+          "type": "note",
+          "body": "O Guia de compra da Wrindu orienta que o comprador avalie sempre a compatibilidade do software do analisador de qualidade de energia com o Excel ou o MATLAB para facilitar a geração de relatórios personalizados. Segundo o Guia Wrindu, os displays em tempo real dos analisadores exibem diagramas fasoriais, gráficos de tendência e alertas de eventos para rápida identificação de falhas. O Guia Wrindu afirma que a integração da computação de borda permite que os analisadores processem informações localmente, minimizando a latência em locais remotos. O texto técnico do Guia Wrindu atesta que a detecção de anomalias baseada em IA, presente em softwares de última geração, atua eficazmente identificando padrões sutis que normalmente passam despercebidos pelos limites convencionais estabelecidos. O artigo sobre Analisadores da Wrindu ressalta que o aprendizado de máquina aprimora a previsão da qualidade da energia, prevendo distúrbios a partir de tendências históricas."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As técnicas clássicas têm limites: a FFT perde a informação temporal (ruim para sinais não estacionários) e a STFT tem janela de largura fixa. A decomposição em IMF via EMD é sensível ao ruído, enquanto a VMD, com filtro de Wiener embutido, apresenta desempenho superior e fundamenta a metodologia híbrida VMD + Random Forest do IFPB, que extrai atributos como TCZ, energia, Curtose e Skewness. No software, a Wrindu destaca compatibilidade com Excel/MATLAB, displays em tempo real, computação de borda e detecção de anomalias por IA."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Elaboração de Laudos de QE",
+      "subtitle": "Relatório padronizado, validação de conformidade, prazos e guarda de registros",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Classificação das leituras e validação da conformidade",
+          "type": "text",
+          "body": "O item 19 do PRODIST Módulo 8 exige que para cada tensão de referência, as leituras a ela associadas se classifiquem nestas três categorias exatas: adequadas, precárias ou críticas. A condição de validação no item 126 do PRODIST Módulo 8 é restrita: a regularização do nível de tensão será comprovada quando os valores de DRP e DRC mensais forem inferiores aos valores de DRPlimite e DRClimite. A condição de validação estrita firmada no item 126 do PRODIST Módulo 8 estipula objetivamente que a regularização do nível de tensão será comprovada quando os valores de DRP e DRC mensais forem inferiores aos valores de DRPlimite e DRClimite."
+        },
+        {
+          "id": "s2",
+          "title": "Conteúdo obrigatório do relatório padronizado",
+          "type": "list",
+          "items": [
+            "O item 131, alínea f (itens iii e iv) do PRODIST Módulo 8 determina que o relatório para o consumidor deve conter alternativas para solução ou mitigação do problema e ações de atuação",
+            "O PRODIST Módulo 8 (Item 131, alínea f, inciso v) dita que o relatório contendo a análise incorporará ações de atuação por parte do usuário identificadas com o dever de equacionar ou atenuar o impacto perturbador",
+            "O texto do PRODIST Módulo 8 em seu item 131, alínea i (subitem ii), fixa legalmente que o relatório padronizado, entregue formalmente ao usuário da ponta, deve listar explicitamente os limites e valor de referência existentes no regulamento",
+            "De acordo com a Tabela 11 (Detalhamento dos eventos de VTCD registrados), as colunas 3 e 4 determinam relatar especificamente a Amplitude do evento em pu e a Duração do evento em ms",
+            "No detalhamento da Tabela 11, nota 6, o PRODIST dita que se deve registrar o evento correspondente no Relatório Diário de Operação (RDO) da distribuidora, descrevendo o cruzamento de horários para a justificativa e indicação da causa raiz na rede"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Prazos de entrega e responsabilidades de atuação",
+          "type": "text",
+          "body": "As cláusulas operativas de prazo na legislação do PRODIST (Módulo 8, Item 131-i) definem o estrito teto onde os resultados da medição devem compor um relatório padronizado, a ser entregue no prazo máximo de 30 dias após o final da medição. Conforme o item 131, alínea i, do PRODIST Módulo 8, os resultados da medição devem compor um relatório padronizado a ser entregue no prazo máximo de 30 dias após o final da medição. A diretriz descrita no item 133, alínea c, do PRODIST Módulo 8 expressa que, verificada a existência de usuários perturbadores, a distribuidora deve notificá-los, recomendando ações. O item 138 do PRODIST Módulo 8 define formalmente que a instalação de equipamentos de correção deve ser providenciada pelo usuário ou distribuidora, de acordo com as responsabilidades apuradas nos estudos."
+        },
+        {
+          "id": "s4",
+          "title": "Guarda de registros e medidor de fé pública",
+          "type": "note",
+          "body": "Pelo longo escopo do PRODIST Módulo 8, diversos itens (exemplificados em 107, 122 e 132) frisam sistematicamente o período de guarda de registros disponíveis imposto para durar no mínimo 10 anos integrais em bancos de servidores seguros ou arquivos correspondentes. O PRODIST Módulo 8 (itens 122 e 132) determina que os registros, logs e dados de reclamações sobre problemas com a qualidade do produto devem ser mantidos pela distribuidora por um período mínimo de 10 anos. O descritivo do documento oficial INSTRUMENTOS DE MEDIÇÃO - PRODIST MOD 8 da KRA2 Energia assevera que o medidor Classe A é obrigatório em aplicações envolvendo disputas judiciais, ficando o equipamento da Classe S voltado a propósitos de controle estatístico. O artigo guia referenciado pela Wrindu relata que o registro seguro por blockchain fornece registros invioláveis confiáveis face às auditorias regulatórias."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O laudo de QE classifica cada leitura como adequada, precária ou crítica, e a regularização só se comprova quando DRP e DRC mensais ficam abaixo de DRPlimite e DRClimite (item 126). O relatório padronizado deve listar limites e valores de referência, alternativas de solução, ações de atuação e os eventos de VTCD (Tabela 11: amplitude em pu e duração em ms, com cruzamento via RDO), sendo entregue em até 30 dias após o fim da medição. A distribuidora notifica usuários perturbadores, define responsabilidades de correção e mantém os registros por no mínimo 10 anos."
+        }
+      ]
+    }
+  ]
+}

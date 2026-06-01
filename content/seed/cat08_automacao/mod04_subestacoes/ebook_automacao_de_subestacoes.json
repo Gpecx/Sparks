@@ -1,0 +1,174 @@
+{
+  "category": "Automação",
+  "categoryOrder": 7,
+  "module": "Automação de Subestações",
+  "moduleOrder": 3,
+  "moduleSubtitle": "Fundamentos da IEC 61850, aplicações SAS e implementação com arquivos SCL",
+  "ebookTitle": "Automação de Subestações",
+  "ebookSubtitle": "Da arquitetura hierárquica e GOOSE/MMS às aplicações SAS e à engenharia com arquivos SCL",
+  "estimatedMinutes": 42,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de Automação de Subestações",
+      "subtitle": "Arquitetura hierárquica, IEC 61850 e os protocolos de comunicação",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é e para que serve um SAS",
+          "type": "text",
+          "body": "O Sistema de Automação de Subestação (SAS) tem como objetivo principal garantir monitoramento contínuo e possibilitar rápida atuação operacional e proteção do sistema. A Proteção compõe uma parte legítima e fortemente integrada dentro das fronteiras funcionais do Sistema de Automação de Subestação — ou seja, proteger não é algo à parte da automação, e sim uma de suas funções centrais. O contexto introduzido com a IEC 61850 outorgou aos relés multifuncionais as lógicas embarcadas de intertravamento, dispensando em peso a arquitetura centralizada dos PLCs legados. A figura do PLC centralizador deixou de existir na maioria das aplicações, pois as lógicas de intertravamento passaram a residir diretamente nos IEDs."
+        },
+        {
+          "id": "s2",
+          "title": "Os três níveis hierárquicos",
+          "type": "list",
+          "items": [
+            "Nível de Processo — abriga o fluxo das amostras vitais (correntes e tensões) oriundas do processo; a interface lógica 4 é reservada para viabilizar esse fluxo pontual e constante",
+            "Nível de Bay — abriga funções vitais de controle e proteção que processam dados locais e atuam majoritariamente sobre o equipamento primário do respectivo vão",
+            "Nível de Estação — congrega as interconexões inter-bays e o vínculo ascendente direcionado ao nível da estação SCADA; é onde opera o Gateway",
+            "O Gateway é a interface que opera na estação responsável por conectar o SAS e os protocolos locais aos centros de controle remotos"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Logical Nodes e alocação funcional flexível",
+          "type": "text",
+          "body": "A padronização que propicia a interoperabilidade fragmenta funções extensas da automação em subfunções atreladas e intercambiáveis conhecidas por Logical Nodes (LN). A alocação funcional não é fixa: a norma flexibiliza e suporta arranjos livres de funções baseados na disponibilidade, necessidade técnica e filosofias operacionais. As funções de um SAS moderno são alocadas nos níveis hierárquicos estabelecidos como Nível de Processo, Nível de Bay e Nível de Estação, mas a distribuição exata dessas funções entre os níveis permanece aberta ao projeto."
+        },
+        {
+          "id": "s4",
+          "title": "GOOSE, MMS e a base ACSI",
+          "type": "list",
+          "items": [
+            "GOOSE — assegura a troca de eventos de caráter crítico e de altíssima velocidade horizontalmente entre as unidades de proteção conectadas",
+            "MMS — a comunicação vertical do SAS, responsável por dados não críticos com o supervisório, é realizada por mensagens MMS no padrão cliente-servidor",
+            "Ethernet — a comunicação Ethernet trafega as mensagens GOOSE, reduzindo drasticamente os cabos elétricos antes usados para seletividade e intertravamento",
+            "ACSI — sua premissa é ofertar flexibilidade separando a modelagem semântica da volatilidade da rede física subjacente, permitindo a base de estação fluir sobre estruturas modernas como a rede Ethernet"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "As interfaces lógicas e o sincronismo de tempo",
+          "type": "note",
+          "body": "A norma delimita a interface 5 como a encarregada do envio da malha de comandos partindo do nível de bay incidindo diretamente sobre a infraestrutura física do processo. Já a interface lógica 4 é reservada para viabilizar o fluxo pontual e constante das amostras vitais (correntes e tensões) oriundas do processo. As exigências cronológicas de suporte de sistema delimitam o teto rigoroso de 1 microssegundo aplicado essencialmente para a análise simétrica dos fasores — um requisito de sincronismo que sustenta a confiabilidade das medições."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O SAS garante monitoramento contínuo, atuação operacional rápida e proteção, sendo a Proteção parte integrada dele. A IEC 61850 distribuiu o intertravamento nos IEDs e aposentou o PLC centralizador, organizando as funções em três níveis: Processo, Bay e Estação (com o Gateway ligando ao controle remoto). As funções extensas são fragmentadas em Logical Nodes com alocação flexível. A comunicação usa GOOSE (eventos críticos horizontais), MMS (dados não críticos com o supervisório) e a base ACSI sobre Ethernet, com sincronismo de até 1 microssegundo para análise de fasores."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Aplicações do SAS (Substation Automation System)",
+      "subtitle": "Intertravamento por GOOSE, seletividade lógica, religamento e gestão de carga",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "IEDs assumem o controle e o intertravamento",
+          "type": "text",
+          "body": "Os IEDs assumiram as funções de controle, intertravamento lógico e medição, eliminando a arquitetura centralizada dos antigos PLCs. A comunicação via rede Ethernet trafegando GOOSE reduz o cabeamento e a fiação elétrica demandados para lógicas de seletividade e bloqueios. A interação com os LNs permite ao operador evocar interfaces visuais de controle específico (faceplates) reproduzindo as propriedades dos painéis de campo — trazendo o painel físico para dentro da tela de operação."
+        },
+        {
+          "id": "s2",
+          "title": "Intertravamento e bloqueio via GOOSE",
+          "type": "list",
+          "items": [
+            "No caso de abertura por subtensão, o IED desta entrada envia a sinalização de disjuntor aberto para o IED da barra via rede GOOSE",
+            "O sinal de 86T recebido via GOOSE entra na lógica de bloqueio de fechamento dos IEDs a montante e jusante, efetuando o intertravamento local sem fios extras",
+            "Se a falta persistir expirando a temporização, a proteção 50BF dispara e envia o GOOSE como gatilho para abertura do disjuntor a montante",
+            "O relé do alimentador em pick-up envia sinal de bloqueio GOOSE à entrada, preservando a seletividade e desarmando apenas o equipamento afetado"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Seletividade lógica e resiliência",
+          "type": "text",
+          "body": "O relé do alimentador em pick-up envia sinal de bloqueio GOOSE à entrada, preservando a seletividade e desarmando apenas o equipamento afetado. A automação também provê resiliência: no recobrimento de lógica, ao notar a quebra de enlace do IED falho, os demais IEDs assumem uma lógica emergencial ou alteram seu grupo de ajuste para proteger a região desguarnecida. Os ajustes dinâmicos viabilizam a alteração do Setting Group mantendo as proteções atuantes, fato comum ao ajustar a malha para diferentes configurações de alimentação."
+        },
+        {
+          "id": "s4",
+          "title": "Religamento, reaceleração e gestão de carga",
+          "type": "text",
+          "body": "Após confirmar a estabilização das grandezas, os relés orientam sequencialmente acionamentos religando gradativamente as máquinas, efetuando a reaceleração. Os estágios de corte são setados nos IEDs considerando a matriz de prioridades do SCADA, executando o descarte coordenado de carga via função 81. Os IEDs modernos abrigam rotinas de integração supervisionando os períodos regulamentados a fim de abater alimentadores perante tetos estabelecidos por limites de demanda contratada."
+        },
+        {
+          "id": "s5",
+          "title": "Registro de eventos, sincronismo e modo de teste",
+          "type": "note",
+          "body": "Os Buffered Reports (BRCB) memorizam estados com estampa de tempo para suportar sem perdas o log de eventos (SOE) mesmo perante perdas passageiras do enlace. Um dispositivo GPS atua na rede garantindo que IEDs e servidores gerem eventos e logs na mesma base horária. Para a comissionamento seguro, operações válidas ocorrem apenas se a flag TestMode mantiver-se FALSE, pois valores com Test em TRUE inabilitam qualquer ação real sobre as manobras."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Com os IEDs assumindo controle, intertravamento e medição, o GOOSE sobre Ethernet substitui a fiação de bloqueio e seletividade: sinais de disjuntor aberto, 86T, 50BF e bloqueio de alimentador trafegam horizontalmente, desarmando apenas o equipamento afetado. A automação ainda traz resiliência (recobrimento de lógica e troca de Setting Group), religamento com reaceleração, e gestão de carga (corte via função 81 e abatimento por demanda contratada). BRCB com estampa de tempo e GPS garantem o SOE confiável, e a flag TestMode protege contra manobras durante testes."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Implementação e Casos",
+      "subtitle": "Arquivos SCL, VLAN/GOOSE, segurança e casos reais de trip indevido",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A família de arquivos SCL",
+          "type": "list",
+          "items": [
+            "SCL — Substation Configuration description Language: a configuração parametrizável apoia sua solidez formal sob os domínios XML referenciados por esse termo",
+            "SSD — System Specification Description: modela essencialmente as interconexões primárias arquitetônicas do projeto elétrico (diagrama)",
+            "SCD — Substation Configuration Description: descreve todos os IEDs e a comunicação global da planta",
+            "CID — Configured IED Description: derivado do SCD, contém a configuração particular designada unicamente ao IED alvo"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Engenharia top-down e gestão do espelho central",
+          "type": "text",
+          "body": "Ferramentas de sistema possibilitam administração off-line e modelagem top-down avançada, baseando-se na especificação. As plataformas amparadas no arquivo SCL permitem simular integralmente os fluxos do ambiente interconectado, viabilizando o teste de IEDs ainda fisicamente incompletos. A metodologia orienta extrair o espelho centralizado atualizado, impedindo descompassos causados por compilações autônomas perdidas em notebooks — uma disciplina de configuração que mantém a planta coerente."
+        },
+        {
+          "id": "s3",
+          "title": "VLAN, GOOSE e os riscos de vazamento",
+          "type": "text",
+          "body": "O confinamento da mensagem GOOSE por VLAN impede que a duplicidade de MAC Address cause operações indesejadas inter-plantas, e a segregação e o confinamento via VLAN impedem que pacotes GOOSE de uma usina vazem e atinjam IEDs de outras subestações. O risco aparece quando essa fronteira é burlada: mensagens sem identificação da VLAN do GOOSE recebem na porta do switch a VLAN do tráfego nativo (frequentemente o MMS), burlando as regras exclusivas designadas a confiná-las. Os quadros untagged tomam a VLAN nativa da respectiva porta, ignorando fronteiras e burlando as lógicas de filtragem."
+        },
+        {
+          "id": "s4",
+          "title": "Casos de trip indevido por validação incompleta",
+          "type": "note",
+          "body": "Houve trips indevidos porque o assinante validava unicamente a coincidência isolada do APPID, aceitando espuriamente o comando de um vizinho. Ao desconsiderar a verificação global, os painéis deflagravam comandos enganados por tramas idênticas que portavam apenas a mesma marcação de APPID. A validação correta vai além: ocorre a rejeição da assinatura caso o ConfRev do bloco do publicador seja diferente do referencial alocado no IED receptor — protegendo contra mensagens com configuração divergente."
+        },
+        {
+          "id": "s5",
+          "title": "Sincronismo, diagnóstico e segurança cibernética",
+          "type": "list",
+          "items": [
+            "Requer-se um caminho via gateway validado na planta para que redes apartadas referenciem e alcancem os pacotes do relógio mestre",
+            "Entre os status abrigados na definição do LPHD0 destaca-se a condição associada ao diagnóstico de Cyber Security Event (CybSecEvt)",
+            "O servidor de domínio (Active Directory) gerencia senhas rotativas complexas e restringe as portas periféricas, barrando interações indevidas",
+            "O espelhamento de porta (Mirroring) direciona uma cópia fiel do tráfego passante ao analisador de rede sem paralisar o envio real do sistema",
+            "Ao seccionar a fibra com STP, as etapas arborescentes de aprendizagem impõem tempo alto de comutação, afetando duramente as transmissões ativas"
+          ]
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A implementação gira em torno dos arquivos SCL: SSD (diagrama primário), SCD (IEDs e comunicação global), CID (configuração do IED alvo), todos em XML. A engenharia top-down off-line simula a planta e exige manter o espelho central atualizado. A segregação por VLAN confina o GOOSE, mas quadros untagged tomam a VLAN nativa e podem vazar entre plantas. Os trips indevidos reais vieram de validar só o APPID — a verificação correta inclui o ConfRev do publicador. Por fim, sincronismo via gateway, diagnóstico de CybSecEvt no LPHD0, Active Directory, mirroring para análise e a lentidão do STP completam o quadro de implementação."
+        }
+      ]
+    }
+  ]
+}

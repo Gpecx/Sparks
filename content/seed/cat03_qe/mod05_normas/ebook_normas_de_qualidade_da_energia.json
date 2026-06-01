@@ -1,0 +1,248 @@
+{
+  "category": "Qualidade da Energia",
+  "categoryOrder": 2,
+  "module": "Normas de Qualidade da Energia",
+  "moduleOrder": 4,
+  "moduleSubtitle": "IEEE 519, IEC 61000, EN 50160 e PRODIST/ANEEL na prática",
+  "ebookTitle": "Normas de Qualidade da Energia",
+  "ebookSubtitle": "As quatro referências normativas que regem distorção, flutuação, limites de tensão e direitos do consumidor",
+  "estimatedMinutes": 54,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — IEEE 519: limites de distorção no PCC",
+      "subtitle": "TDD, THD e o ponto de acoplamento comum",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O foco da norma: o sistema no PCC",
+          "type": "text",
+          "body": "O manual Solucoes WEG e o documento ABB ressaltam fortemente que a norma IEEE 519 diz respeito aos sistemas de distribuicao no ponto de acoplamento comum e nao aos equipamentos individuais. Tanto o material da WEG quanto a analise da ABB salientam expressamente que as recomendacoes da IEEE 519 dizem respeito aos sistemas de distribuicao agregados no PCC, e nao as avaliacoes de equipamentos individuais isolados. O catalogo de mitigacao da WEG define a sigla PCC como Ponto de Acoplamento Comum (Point of Common Coupling), o local exato da analise de limites, e as publicacoes de analises e manutencao da WEG bem como da ABB referenciam repetidas vezes esse no nodal de testes pelo acronimo oriundo do ingles PCC (Point of Common Coupling)."
+        },
+        {
+          "id": "s2",
+          "title": "Definições que sustentam a Tabela 2",
+          "type": "list",
+          "items": [
+            "As notas explicativas da Tabela 2 presentes no manual da WEG e da ABB definem Isc expressamente como a maxima corrente de curto-circuito no Ponto de Acoplamento Comum.",
+            "A legenda oficial da Tabela de distorcoes descrita na publicacao da WEG e da ABB define formalmente IL como maxima corrente demandada pela carga (componente fundamental de frequencia) no PCC.",
+            "A revisao da ABB sobre as alteracoes da IEEE 519-2022 especifica na propria definicao metodologica que THD e TDD consideram os componentes harmonicos ate a quinquagesima ordem.",
+            "O documento de revisao da ABB sobre a IEEE 519-2022 destaca na definicao dos limites que o calculo da THD e TDD exclui especificamente as interharmonicas.",
+            "Na secao referente as mudancas metodologicas, a ABB destaca nos quadros as definicoes e as frisa salientando que os componentes que configuram as interharmonicas (interharmonics) sao especificamente excluidas da conta de THD e TDD."
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Os valores-limite da Tabela 2",
+          "type": "list",
+          "items": [
+            "A Tabela II da IEEE 519 documentada no manual de Solucoes WEG define que, para a razao Isc/IL menor que 20, o limite correspondente da TDD e exatamente 5,0 por cento.",
+            "De acordo com os valores da Tabela limite referenciada na IEEE 519-2014/2022 presente nos materiais da WEG e ABB, o valor exato apontado para a distorcao TDD na ultima lacuna da razao acima de 1.000 equivale a 20,0 por cento.",
+            "O guia de atualizacao da IEEE 519-2022 da ABB afirma que para harmonicos de ordem menor ou igual a 6, os pares sao limitados a 50 por cento dos limites impares mostrados na tabela.",
+            "A documentacao tecnica de Solucoes WEG especifica que a recomendacao normativa da IEEE 519 no PCC e de que a THD de tensao seja menor ou igual a 5 por cento."
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "As mudanças metodológicas da revisão 2022",
+          "type": "note",
+          "body": "A nota da ABB explica tecnicamente que o denominador do calculo do TDD foi alterado de Ifund para Itotal, sendo Itotal a composicao RSS (Root Sum Square) da corrente fundamental e harmonica. O estudo da ABB explica que houve inclusao da nota (c) para esclarecer que essa limitacao de 5,0 por cento de TDD nao precisa ser mandatoriamente cumprida para instalacoes de backup ilhadas, sendo a distorcao de tensao na verdade o fator chave. A nota da ABB destaca que a secao 5.2 sobre limitacao de distorcao direciona que instalacoes primariamente com IBR devem utilizar normas correspondentes e aplicaveis como a IEEE 1547 ou IEEE 2800."
+        },
+        {
+          "id": "s5",
+          "title": "Mitigação: atingir os limites na prática",
+          "type": "text",
+          "body": "O catalogo tecnico de Solucoes da WEG afirma textualmente que existem inumeras formas de minimiza-las para que fiquem dentro dos limites aceitaveis, pois nao e economicamente viavel nem possivel eliminar todas as harmonicas. O manual da WEG relata repetidas vezes nas secoes de acionamentos CA que a utilizacao de inversores com retificadores em 12 e 18 pulsos constitui uma solucao tradicional que atende aos limites recomendados pela IEEE 519."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A IEEE 519 recomenda limites de distorcao para o sistema agregado no Ponto de Acoplamento Comum (PCC), nao para equipamentos individuais. A Tabela 2 cruza a razao Isc/IL com limites de TDD que vao de 5,0 por cento (Isc/IL < 20) ate 20,0 por cento (razao acima de 1.000), considerando harmonicos ate a 50a ordem e excluindo interharmonicas. A revisao 2022 mudou o denominador do TDD para Itotal (RSS), criou a nota (c) para backup ilhado e remeteu instalacoes com IBR a IEEE 1547/2800. Como nao e viavel eliminar todas as harmonicas, solucoes como retificadores de 12 e 18 pulsos ajudam a cumprir os limites."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — IEC 61000 Series: classes de medição e flicker",
+      "subtitle": "Classe A, Classe S e os indicadores Pst e Plt",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Os protocolos de medição da série 4",
+          "type": "text",
+          "body": "O material da KRA2 Energia cita explicitamente que os analisadores de energia devem atender aos protocolos definidos pela norma da IEC 61000 serie 4, seguindo os metodos Classe A ou S da IEC 61000-4-30. O documento de parametros da KRA2 Energia define que o Medidor Classe S e utilizado principalmente para propositos estatisticos, como campanhas de medicao. A nota de rodape contida no documento instrucional KRA2 Energia emite o parecer contrario asseverando que a Classe B existe essencialmente apenas para abarcar os antigos medidores que comprovadamente nao atendem aos devidos criterios da norma IEC 61000-4-30 e que ha efetivamente as devidas recomendacoes para que as areas tecnicas determinem com clareza a sua nao utilizacao."
+        },
+        {
+          "id": "s2",
+          "title": "Classe A vs. Classe S: incertezas e usos",
+          "type": "list",
+          "items": [
+            "O documento informativo da KRA2 Energia estipula de forma direta que o Medidor Classe A e obrigatorio em aplicacoes envolvendo disputas judiciais.",
+            "O conjunto normativo e o manual da KRA2 Energia exposto pelo PRODIST determina com clareza as exatas tolerancias fisicas citadas, fixando incertezas da amplitude VTCD cravadas em 0,2 por cento limitante a Classe A em contraposicao as restricoes mais laxas de 1,0 por cento designadas aos equipamentos estatisticos de Classe S.",
+            "Conforme descrito de forma objetiva no documento da KRA2 Energia, a incerteza de medicao requerida para as distorcoes harmonicas na Classe A deve ser inferior ou igual a 5,0 por cento da tensao medida.",
+            "O documento da KRA2 Energia sobre o PRODIST assinala que a incerteza de medicao para os indicadores FD2 por cento e FD0 por cento nao deve ser superior a 0,15 por cento na Classe A e 0,30 por cento na Classe S.",
+            "As clausulas e as caracteristicas informadas no relatorio da KRA2 que descrevem de forma simultanea as qualidades tanto dos dispositivos validados na Classe A quanto aos designados para a Classe S sublinham de modo textual que as incertezas de medicao associadas aos referidos agregados do Pst e Plt devem ser estatisticamente inferiores ou igualadas aos estritos limites de 5,0 por cento da propria variacao."
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Como a Classe A mede tensão e harmônicas",
+          "type": "text",
+          "body": "O informe tecnico da KRA2 Energia sobre o PRODIST especifica que, na Classe A, o valor eficaz da tensao (VTCD) deve ser calculado a cada meio ciclo (1/2), incluindo obrigatoriamente as harmonicas e inter-harmonicas. O documento informativo da KRA2 Energia expoe as regras ditando o exato oposto, relatando especificamente para o equipamento de Classe A que a medicao das distorcoes harmonicas deve sim considerar a aplicacao de Subgrupos Harmonicos para realizar a devida composicao dos registros de 12 ciclos. Na apresentacao sistemica das hierarquias e finalidades metrologicas oriundas no manual instrutivo pertinente, a KRA2 Energia atesta abertamente em seu primeiro item enumerado referente ao equipamento da Classe A sendo este considerado obrigatorio em aplicacoes envolvendo disputas judiciais."
+        },
+        {
+          "id": "s4",
+          "title": "Os indicadores de flicker Pst e Plt",
+          "type": "list",
+          "items": [
+            "O item 58 do PRODIST Modulo 8 define que o indicador Pst representa a severidade associada a flutuacao de tensao verificada num periodo continuo de 10 minutos.",
+            "O item 59 do PRODIST Modulo 8 estipula que o indicador Plt representa a severidade dos niveis de cintilacao luminosa num periodo continuo de exatas 2 horas.",
+            "A nomenclatura normatizada para as analises visuais detalhada na redacao oficial do Modulo 8 do PRODIST item 59 garante textualizando que o indicador Plt representa a severidade dos niveis de cintilacao luminosa associados a flutuacao de tensao verificada num periodo continuo de 2 horas.",
+            "O item 61 do PRODIST Modulo 8 referencia especificamente a norma IEC 61000-4-15 Flickermeter Functional and Design Specifications para fundamentar os arranjos e caracteristicas da funcao do Pst.",
+            "O material especializado sobre FLICKER do portal Procobre informa claramente que a avaliacao da severidade do flicker pode ser realizada a partir de dois criterios baseados nas medicoes de um dia ou de uma semana para consolidar os indices de curta e longa duracao."
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "O cálculo do Plt a partir do Pst",
+          "type": "formula",
+          "formula": "Plt = ((1/12) · Σ Pst_i³)^(1/3),  para 12 amostras consecutivas de Pst",
+          "explanation": "A Equacao 18 e o item 62 do PRODIST Modulo 8 determinam que o indicador Plt seja calculado aplicando a raiz cubica da media da soma dos cubos gerados por 12 amostras consecutivas do indice Pst. A documentacao embutida nas definicoes de indicadores Pst abordadas do PRODIST Modulo 8 reproduz o referencial normativo ditando textualmente o documento internacional sob o carimbo de IEC 61000-4-15 Flickermeter Functional and Design Specifications que fornece tal suporte teorico ao arranjo das medicoes."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A IEC 61000 serie 4 define os protocolos de medicao: analisadores devem seguir Classe A ou S da IEC 61000-4-30. A Classe A tem incertezas mais estritas (0,2 por cento na amplitude VTCD contra 1,0 por cento da Classe S) e e obrigatoria em disputas judiciais; a Classe S serve para fins estatisticos e campanhas, e a Classe B existe so para medidores antigos fora de criterio. Na Classe A o VTCD e calculado a cada meio ciclo com harmonicas e inter-harmonicas. O flicker e medido por Pst (10 minutos) e Plt (2 horas), com o Plt obtido pela raiz cubica da media dos cubos de 12 amostras de Pst (item 62 / Equacao 18), fundamentado na IEC 61000-4-15."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — EN 50160: características da tensão na Europa",
+      "subtitle": "Tensão, frequência, THD, flicker e desequilíbrio em redes públicas",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O escopo: características da tensão fornecida",
+          "type": "text",
+          "body": "Pelo contrário, o foco da EN 50160 é especificar as características da tensão que devem ser atendidas sob condições normais de operação em redes elétricas públicas AC de baixa, média e alta tensão. (EN 50160 Power Quality Report APPLICATION NOTE - NEO Messtechnik) A norma especifica as características principais que a tensão da rede deve atender no terminal de suprimento do usuário em redes públicas AC de baixa, média e alta tensão. (EN 50160 Power Quality Report APPLICATION NOTE - NEO Messtechnik) O relatório de qualidade da EN 50160 avalia grandezas como tensão, desequilíbrio e THD registrando os valores médios ao longo de janelas de 10 minutos. (EN 50160 Power Quality Report APPLICATION NOTE - NEO Messtechnik)"
+        },
+        {
+          "id": "s2",
+          "title": "Tensão nominal e limites de variação",
+          "type": "list",
+          "items": [
+            "Na Europa, a tensão da rede de baixa tensão resulta em uma tensão de fase (condutor de fase e neutro L-N) de 230 V. (Características de qualidade do fornecimento de energia - Jensys)",
+            "Na Baixa Tensão (BT), a tensão nominal é Un = 230V entre o condutor de fase e o condutor neutro. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)",
+            "A norma estipula que 95% dos valores eficazes médios de 10 minutos para cada período de uma semana devem situar-se na gama de Un ± 10%. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)",
+            "Para redes isoladas, os limites de variação permitidos para o valor eficaz da tensão de alimentação são +10% e -15%. (Regulação tensão-frequência em redes fracas com produção distribuída e armazenamento de energia Engenharia Eletrotécnica - Técnico Lisboa)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Frequência da rede",
+          "type": "list",
+          "items": [
+            "A frequência nominal deve ser igual a 50 Hz nas redes, com avaliação realizada em intervalos médios de 10 minutos. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)",
+            "O valor médio da frequência medido em intervalos de 10 minutos deve estar entre 49,5 e 50,5 Hz durante 95% do tempo em uma semana. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)",
+            "São aceitáveis variações de ± 1% da frequência da rede (50 Hz) durante 99,5% de um ano em sistemas com ligação síncrona. (Regulação tensão-frequência em redes fracas com produção distribuída e armazenamento de energia Engenharia Eletrotécnica - Técnico Lisboa)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Distorção harmônica, flicker e desequilíbrio",
+          "type": "list",
+          "items": [
+            "Os valores definidos pela EN 50160 para a distorção harmônica exigem que, na Baixa Tensão, o THD seja menor que 8%. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)",
+            "Os valores definidos pela norma para a distorção harmônica global na Baixa Tensão estipulam que o THD deve ser < 8%. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)",
+            "O padrão realiza o agrupamento em harmônicas pares e ímpares (múltiplas e não múltiplas de 3) devido às características de soma nos sistemas trifásicos. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)",
+            "Os valores de cintilação exigidos são o flicker de curto prazo Pst (10 minutos) e o de longo prazo Plt (2 horas). (EN 50160 Power Quality Report APPLICATION NOTE - NEO Messtechnik)",
+            "Para qualquer período de uma semana, a severidade de longa duração deve ser Plt < 1 durante 95% do tempo de avaliação. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)",
+            "O desequilíbrio de tensão exige que, para cada período de uma semana, 95% dos valores eficazes médios de 10 minutos da componente inversa não ultrapassem 2% da componente direta. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Interrupções e quedas de tensão",
+          "type": "note",
+          "body": "A DIN EN 50160 afirma que um corte de tensão (interrupção) ocorre quando o valor da tensão fica abaixo de 5% da tensão nominal. (Características de qualidade do fornecimento de energia - Jensys) A norma DIN EN 50160 define uma queda de tensão como uma queda repentina de um valor RMS de tensão para um valor entre 85% e 5% de um valor definido. (Características de qualidade do fornecimento de energia - Jensys)"
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A EN 50160 especifica as características da tensão fornecida em redes públicas AC de BT, MT e AT, avaliando grandezas em janelas médias de 10 minutos. Na BT a tensão nominal é 230 V (L-N), com 95% dos valores de 10 minutos da semana dentro de Un ± 10% (e +10%/-15% em redes isoladas). A frequência nominal é 50 Hz, ficando entre 49,5 e 50,5 Hz em 95% do tempo. O THD na BT deve ser < 8%, o flicker usa Pst (10 min) e Plt (2 h, com Plt < 1 em 95% da semana), e o desequilíbrio limita a componente inversa a 2% da direta. Interrupção é tensão abaixo de 5% da nominal; queda de tensão é a redução brusca para entre 85% e 5% do valor definido."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — PRODIST e Resoluções ANEEL",
+      "subtitle": "Indicadores de tensão, campanhas de medição e compensação ao consumidor",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O objeto do Módulo 8: as três qualidades",
+          "type": "list",
+          "items": [
+            "O item 2 da Secao 8.0 do PRODIST Modulo 8 estabelece que o objetivo e regulamentar os procedimentos relativos a qualidade do fornecimento de energia eletrica (produto, servico e comercial).",
+            "O item 3 da Secao 8.0 do PRODIST Modulo 8 define a qualidade do produto como os fenomenos relativos a conformidade da onda de tensao em regime permanente e transitorio.",
+            "O item 4 do PRODIST Modulo 8 define que os fenomenos relacionados a qualidade do servico sao aqueles relativos a continuidade do fornecimento e ao atendimento a ocorrencias emergenciais.",
+            "O item 5 do PRODIST Modulo 8 define a qualidade comercial exatamente como a qualidade do atendimento telefonico, o tratamento das reclamacoes e outras demandas, e o cumprimento dos prazos."
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Indicadores de tensão em regime permanente",
+          "type": "text",
+          "body": "O item 19 do PRODIST Modulo 8 classifica as leituras de tensao em tres categorias: adequadas, precarias ou criticas, baseando-se no afastamento em relacao a tensao de referencia. O item 26.1 do PRODIST Modulo 8 apresenta textualmente e oficializa que os indicadores individuais de tensao em regime permanente sao a Duracao Relativa da Transgressao de Tensao Precaria (DRP) e a Duracao Relativa da Transgressao de Tensao Critica (DRC). O item 22, alinea c, do PRODIST Modulo 8 define claramente que a tensao a ser contratada nos pontos de conexao pelos usuarios atendidos em tensao inferior a 2,3 kV deve ser a tensao nominal do sistema."
+        },
+        {
+          "id": "s3",
+          "title": "A campanha de medição: amostras e protocolos",
+          "type": "list",
+          "items": [
+            "O item 26.2 do PRODIST Modulo 8 determina que se deve considerar o registro exato de 1.008 leituras validas obtidas em intervalos consecutivos de 10 minutos cada, e nao 500 leituras a cada 15 minutos.",
+            "O informativo da KRA2 Energia ressalta que os instrumentos de medicao devem atender aos protocolos da IEC 61000 serie 4, seguindo o metodo de medicao Classe A ou S.",
+            "O documento informativo da KRA2 Energia sobre o PRODIST Modulo 8 estabelece explicitamente na lista de requisitos que o Medidor Classe A e obrigatorio em aplicacoes envolvendo disputas judiciais.",
+            "A normativa presente no item 92 do PRODIST Modulo 8 estipula objetivamente que as campanhas analiticas de sorteio executadas ocorrem a partir da exploracao das Bases de Dados Geograficas das Distribuidoras, conhecidas largamente pelo acronimo BDGD.",
+            "As diretrizes estabelecidas na alinea h do artigo 121 no bojo legal do PRODIST Modulo 8 requerem que a distribuidora atue com a acao de informar ao usuario, com antecedencia minima de 48 horas da realizacao da medicao pelo periodo minimo de 168 horas."
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Relatórios, prazos e guarda de dados",
+          "type": "list",
+          "items": [
+            "O item 131, alinea i, do PRODIST Modulo 8 fixa que os resultados da medicao devem compor um relatorio padronizado a ser entregue no prazo maximo de 30 dias apos o final da medicao.",
+            "Os itens 107, 118, 122 e 132 do PRODIST Modulo 8 afirmam sistematicamente que os dados devem ser mantidos em meio digital por um periodo minimo de 10 anos.",
+            "Os itens 112 e 113 do PRODIST Modulo 8 ditam que o sistema deve ser instalado no prazo de ate 60 dias da solicitacao e a diferenca de custo e de responsabilidade do usuario interessado."
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Compensação ao consumidor",
+          "type": "note",
+          "body": "O item 31 do PRODIST Modulo 8 estabelece que o valor da compensacao deve ser creditado na fatura emitida no prazo maximo de 2 meses subsequentes ao mes civil de referencia da ultima medicao. O item 34 do PRODIST Modulo 8 assegura tal direito ditando que, caso haja troca de titularidade, a distribuidora deve creditar o valor integralmente ao novo titular da unidade consumidora. O item 35 do PRODIST Modulo 8 e categorico ao informar que a compensacao devida ao consumidor nao isenta a distribuidora de responder por outras perdas e danos causados pelo servico inadequado de energia eletrica."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O Módulo 8 do PRODIST regulamenta as três qualidades do fornecimento: produto (conformidade da onda de tensão em regime permanente e transitório), serviço (continuidade e emergências) e comercial (atendimento, reclamações e prazos). As leituras de tensão são adequadas, precárias ou críticas, com os indicadores DRP e DRC em regime permanente. A campanha de medição usa 1.008 leituras válidas em intervalos de 10 minutos, com medidor Classe A ou S da IEC 61000 série 4, sorteio via BDGD e aviso ao usuário com 48 h de antecedência por no mínimo 168 horas. O relatório padronizado é entregue em até 30 dias, os dados são guardados por no mínimo 10 anos, e a compensação ao consumidor é creditada em até 2 meses, transferível em troca de titularidade e sem isentar a distribuidora de outras perdas e danos."
+        }
+      ]
+    }
+  ]
+}
