@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Na arquitetura de automacao, qual equipamento converte e envia dados do barramento de estacao local para os centros remotos de despacho?",
       "options": [
-        "O Gateway de comunicacao.",
-        "O Switch de processo.",
         "O Relé de Arco.",
+        "O Switch de processo.",
+        "O Gateway de comunicacao.",
         "A Merging Unit (MU)."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O Gateway atua como fronteira, concentrando dados do station bus e comunicando com os Centros de Controle de Operacao remoto.",
       "difficulty": "easy"
     },
@@ -26,11 +26,11 @@
       "statement": "Para a integracao de telecontrole com o centro de operacao corporativo, quais protocolos as arquiteturas costumam empregar nativamente nos Gateways?",
       "options": [
         "Apenas GOOSE e SMV.",
-        "Protocolos focados em telemetria remota como DNP3 e IEC 60870-5-104.",
+        "PTP e SNTP.",
         "Exclusivamente PRP e HSR.",
-        "PTP e SNTP."
+        "Protocolos focados em telemetria remota como DNP3 e IEC 60870-5-104."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Os Gateways traduzem dados da IEC 61850 para protocolos classicos de telecontrole corporativo, como DNP3 e IEC 104.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Qual a resolucao tipica de sincronismo exigida normativamente para a gravacao confiavel da sequencia de alarmes e eventos (SOE) no SCADA?",
       "options": [
-        "1 picossegundo.",
-        "1 segundo.",
         "1 milissegundo.",
+        "1 segundo.",
+        "1 picossegundo.",
         "1 microssegundo."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Eventos nao criticos e listas de alarmes cronologicas (SOE) demandam sincronismo confiavel na ordem de 1 milissegundo.",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Na interacao do operador via SCADA, como sao nomeadas tecnicamente as subjanelas que espelham o painel real ao se clicar em um disjuntor?",
       "options": [
-        "Faceplates",
-        "VLAN tags",
         "Ethertypes",
+        "VLAN tags",
+        "Faceplates",
         "Sampled Values"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Ao clicar num equipamento do unifilar, abre-se a faceplate, que espelha o arranjo de status e comandos mapeados no frontal fisico do IED.",
       "difficulty": "easy"
     },
@@ -91,11 +91,11 @@
       "statement": "Durante o mapeamento de IHM, em qual Logical Node padrao o status do comutador de operacao Local/Remoto da chave costuma ser atrelado?",
       "options": [
         "No grupo PDIS.",
-        "Nos atributos do XCBR ou XSWI relacionados a chave.",
+        "Apenas no relatorio estatico MMXU.",
         "Dentro do bloco de logica PTOC.",
-        "Apenas no relatorio estatico MMXU."
+        "Nos atributos do XCBR ou XSWI relacionados a chave."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A variavel de local/remoto (Loc) pertence primariamente aos LNs que regem e relatam manobras de switchgear, como o XCBR (disjuntor).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Nos intertravamentos distribuidos, como a atuacao do rele de bloqueio virtual (86) afeta os demais bays via rede?",
       "options": [
-        "O SCADA retira a energia de toda a cabine por medida de precaucao.",
         "O sinal 86T disseminado via GOOSE entra ativamente na logica dos reles a montante e jusante bloqueando o fechamento dos disjuntores.",
+        "O SCADA retira a energia de toda a cabine por medida de precaucao.",
         "A mensagem SMS e disparada aos manutentores avisando que o patio ira desarmar.",
         "Os switches reiniciam limpando o evento do buffer MAC."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O sinal 86T recebido via GOOSE restringe a linha de comando no IED alvo, intertravando instantaneamente as condicoes de fechamento inseguras.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "No paradigma das subestacoes atualizadas o rele de protecao incorpora as funcoes de comando e sinalizacao direta do patio, o que comumente extingue a necessidade de ter PLCs paralelos para a mesma finalidade.",
       "correctAnswer": true,
       "explanation": "Na concepcao com IEC 61850 os IEDs acumulam a funcao de controle e intertravamento local, eliminando o hardware legado (PLC) das cabines e simplificando a arquitetura.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Quando o link entre a IHM e o IED e rompido por algumas horas os relatorios em buffer (BRCB) perdem irremediavelmente as estampas de tempo fisicas armazenadas no relogio de origem.",
       "correctAnswer": false,
       "explanation": "Buffered Reports (BRCB) armazenam internamente todos os eventos acompanhados de suas estampas de tempo exatas. Ao reestabelecer o link, a IHM atualiza a cronologia SOE sem perdas horarias.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O servico restrito de Substituicao de Valor suportado pela norma viabiliza aos controladores do SCADA imputar valores ficticios a sinais do IED permitindo diagnosticar reacoes em tela sem manobrar ativos em carga.",
       "correctAnswer": true,
       "explanation": "O conceito substitution ativa a troca artificial de operacoes e status no data object (subVal), facilitando simular o feedback no sistema SCADA e rotinas do painel pacificamente.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Na base de modelagem de equipamentos, o diagnostico a respeito de quebra grave ou isolamento no sincronismo do clock GPS e delatado a supervisao sob a insignia da variavel ClkFail do LPHD0.",
       "correctAnswer": true,
       "explanation": "O Logical Node atrelado a saude estrutural do processador (LPHD0) congrega e gerencia ativamente os danos de hardware, dentre eles a anomalia de tempo catalogada como ClkFail.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Para promover confiabilidade isolada o padrao IEC 60870-5-104 despacha os sinais do Gateway para os Centros de Controle abdicando e ignorando por completo as restricoes da arquitetura TCP/IP comum a internet.",
       "correctAnswer": false,
       "explanation": "Contrariando a sentenca, o protocolo IEC 60870-5-104 consiste precisamente na adequacao (perfil de transporte) da norma basica ao ecossistema de redes suportadas intrinsecamente pela conexao TCP/IP.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Na consolidacao do intertravamento logico do bay de um projeto de automacao a funcao estrita que processa os permissivos de bloqueio do comutador obedece as formatacoes do no virtual denominado _____.",
+      "statement": "Na consolidacao do intertravamento logico do bay de um projeto de automacao a funcao estrita que processa os permissivos de bloqueio do comutador obedece as formatacoes do no virtual denominado ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A imposicao de regras centralizadas exigindo trocas de perfis com senhas longas e expurgando as credenciais padroes de fabrica nas centrais e capitaneada nas gestoes confiaveis unicamente pelo servidor de _____ corporativo.",
+      "statement": "A imposicao de regras centralizadas exigindo trocas de perfis com senhas longas e expurgando as credenciais padroes de fabrica nas centrais e capitaneada nas gestoes confiaveis unicamente pelo servidor de ____ corporativo.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "As grandezas analogicas ou variaveis de campo encapsuladas junto a suas estampas horarias dentro dos envelopes longos destinados a centros Nacionais via IEC 104 formam os atributos da unidade de dados de aplicacao referenciada pelo mnemonico _____.",
+      "statement": "As grandezas analogicas ou variaveis de campo encapsuladas junto a suas estampas horarias dentro dos envelopes longos destinados a centros Nacionais via IEC 104 formam os atributos da unidade de dados de aplicacao referenciada pelo mnemonico ____.",
       "blanks": [
         {
           "index": 0,

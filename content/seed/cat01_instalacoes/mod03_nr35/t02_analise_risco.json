@@ -40,10 +40,10 @@
       "options": [
         "O custo de implementação dos pontos de ancoragem.",
         "A emissão de ART com renovação diária.",
-        "As condições meteorológicas adversas.",
-        "A obrigatoriedade de contratação de seguro de vida para a equipe."
+        "A obrigatoriedade de contratação de seguro de vida para a equipe.",
+        "As condições meteorológicas adversas."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "O item 35.5.5.1, alínea 'd', determina que a AR deve considerar 'as condições meteorológicas adversas'.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "Qual outro risco de queda, além da queda de pessoas, deve ser explicitamente considerado na AR segundo a NR-35?",
       "options": [
         "Risco de queda de tensão operacional na rede elétrica adjacente.",
-        "Risco de queda das barreiras de isolamento acústico.",
         "Risco de queda de materiais e ferramentas.",
+        "Risco de queda das barreiras de isolamento acústico.",
         "Risco de queda da pressão atmosférica em grande altitude."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "O item 35.5.5.1, alínea 'f', exige que a AR considere 'o risco de queda de materiais e ferramentas'.",
       "difficulty": "easy"
     },
@@ -104,11 +104,11 @@
       "statement": "Quais são os requisitos mínimos da AR relacionados a situações de emergência e supervisão?",
       "options": [
         "A emergência deve ser terceirizada ao Corpo de Bombeiros e a supervisão feita por auditor externo.",
-        "A AR deve considerar as situações de emergência, o planejamento do resgate e primeiros socorros, e a forma de supervisão.",
         "A AR só aborda resgate se o canteiro não possuir brigada de incêndio.",
+        "A AR deve considerar as situações de emergência, o planejamento do resgate e primeiros socorros, e a forma de supervisão.",
         "A forma de supervisão é definida exclusivamente pelo trabalhador autorizado durante a execução."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "As alíneas 'k' e 'm' do item 35.5.5.1 exigem que a AR considere as situações de emergência, planejamento do resgate e primeiros socorros, bem como a forma de supervisão.",
       "difficulty": "medium"
     },
@@ -118,10 +118,10 @@
       "options": [
         "Possui validade semanal contínua, podendo ser prorrogada após vistoria.",
         "É válida por trinta dias para atividades não rotineiras no mesmo ambiente.",
-        "Tem validade limitada à duração da atividade, restrita ao turno ou à jornada de trabalho.",
-        "É indeterminada e perde validade apenas quando o ASO vencer."
+        "É indeterminada e perde validade apenas quando o ASO vencer.",
+        "Tem validade limitada à duração da atividade, restrita ao turno ou à jornada de trabalho."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Segundo o item 35.5.8.2, a PT tem validade limitada à duração da atividade, restrita ao turno ou jornada de trabalho.",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Para ventos entre 40 km/h e 46 km/h no acesso por cordas (Anexo I), o que é exigido para autorizar o trabalho?",
       "options": [
-        "Presença ininterrupta do engenheiro de segurança no nível inferior e uso de rádio amador.",
+        "Justificativa, Análise de Risco (AR) complementar, medidas adicionais e operação assistida.",
         "Utilização compulsória de cinto paraquedista conectado a três cordas simultâneas.",
         "Autorização expressa da chefia imediata e emissão de PT com validade fracionada de 2 horas.",
-        "Justificativa, Análise de Risco (AR) complementar, medidas adicionais e operação assistida."
+        "Presença ininterrupta do engenheiro de segurança no nível inferior e uso de rádio amador."
       ],
-      "correctIndex": 3,
+      "correctIndex": 0,
       "explanation": "O item 6.2 do Anexo I permite excepcionalmente o trabalho com ventos entre 40 e 46 km/h mediante: justificativa, AR complementar, medidas adicionais e operação assistida.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "É responsabilidade exclusiva dos trabalhadores a elaboração da AR e a emissão e guarda da PT.",
       "correctAnswer": false,
       "explanation": "Falso. O item 35.3.1, alíneas 'b' e 'j', atribui à organização (não exclusivamente aos trabalhadores) assegurar a realização da AR, emissão da PT e o arquivamento da documentação.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Condições impeditivas são situações que impedem a realização ou continuidade do serviço por colocarem em risco a saúde ou integridade física do trabalhador.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. Esta é exatamente a definição de Condições Impeditivas no Glossário da NR-35, cujo levantamento integra o conteúdo mínimo da AR (alínea 'j' do item 35.5.5.1).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A AR fica dispensada de considerar atividades simultâneas de outras equipes trabalhando no solo no mesmo local.",
       "correctAnswer": false,
       "explanation": "Falso. O item 35.5.5.1, alínea 'g', exige que a AR considere 'os trabalhos simultâneos que apresentem riscos específicos', sem isenções por ocorrerem no nível do solo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A AR deve considerar previamente o estabelecimento dos sistemas e pontos de ancoragem que serão utilizados.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. A alínea 'c' do subitem 35.5.5.1 determina que a AR deve considerar 'o estabelecimento dos sistemas e pontos de ancoragem'.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A Permissão de Trabalho (PT) pode ser emitida verbalmente pelo supervisor, com medidas repassadas no Diálogo Diário de Segurança.",
       "correctAnswer": false,
       "explanation": "Falso. O Glossário define PT como 'Documento escrito' e o item 35.5.8 exige que seja emitida em meio físico ou digital, desautorizando emissões verbais.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A AR deve assegurar que o elemento de ligação do SPIQ limite a força de impacto transmitida ao trabalhador ao máximo de _____ kN.",
+      "statement": "A AR deve assegurar que o elemento de ligação do SPIQ limite a força de impacto transmitida ao trabalhador ao máximo de ____ kN.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A AR determina que seja considerada a real necessidade de se implantar um sistema de _____ para facilitar o gerenciamento de crise e o resgate.",
+      "statement": "A AR determina que seja considerada a real necessidade de se implantar um sistema de ____ para facilitar o gerenciamento de crise e o resgate.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para dimensionar as folgas do SPIQ e evitar colisões, a AR requer o cálculo da _____ Livre de Queda, que é a distância da ancoragem ao primeiro obstáculo inferior.",
+      "statement": "Para dimensionar as folgas do SPIQ e evitar colisões, a AR requer o cálculo da ____ Livre de Queda, que é a distância da ancoragem ao primeiro obstáculo inferior.",
       "blanks": [
         {
           "index": 0,

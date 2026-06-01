@@ -1,0 +1,218 @@
+{
+  "category": "Termografia Infravermelha",
+  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categoryOrder": 3,
+  "module": "Termografia em Sistemas Elétricos",
+  "moduleSubtitle": "Inspecao de subestacoes, paineis, motores, linhas e pontos quentes",
+  "moduleOrder": 2,
+  "trail": "Aplicações em Subestações (AT/MT)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal causa de pontos quentes em circuitos eletricos de subestacoes?",
+      "options": [
+        "Excesso de umidade e correntes capacitivas ambientais.",
+        "Deficiencia de contato, corrosao ou oxidacao.",
+        "Emissividade extremamente elevada dos cabos condutores.",
+        "Presenca de gas de isolamento nos disjuntores fechados."
+      ],
+      "correctIndex": 1,
+      "explanation": "Pontos quentes sao causados pela deficiencia de contato, corrosao, oxidacao ou defeito de componentes. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-10, qual procedimento de seguranca e essencial antes de inspecionar uma subestacao?",
+      "options": [
+        "Lavar os contatos do disjuntor com agua desmineralizada.",
+        "Desligar totalmente a energia de toda a subestacao.",
+        "Realizar uma analise de risco da tarefa juntamente com o responsavel.",
+        "Reduzir imediatamente a carga do transformador para zero absoluto."
+      ],
+      "correctIndex": 2,
+      "explanation": "O planejamento deve atender a NR-10, realizando analise de risco da tarefa quando necessario para seguranca. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que indica um delta T de 24,8 graus Celsius medido entre as fases da bucha de um transformador de potencia?",
+      "options": [
+        "Uma operacao em equilibrio termodinamico ideal e seguro.",
+        "Um aquecimento anormal que caracteriza falha e exige intervencao.",
+        "Uma falha exclusiva no sistema de resfriamento do termovisor.",
+        "A ausencia total de corrente eletrica fluindo na fase afetada."
+      ],
+      "correctIndex": 1,
+      "explanation": "Um alto delta T entre fases aponta aquecimento anormal severo e clara necessidade de intervencao. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que as anomalias termicas detectadas em equipamentos eletricos geralmente indicam preventivamente?",
+      "options": [
+        "Elas precedem falhas, tornando a temperatura uma excelente ferramenta de diagnostico.",
+        "Elas confirmam que o equipamento atingiu sua maxima eficiencia energetica operacional.",
+        "Elas indicam a total ausencia de resistencia ohmica no circuito avaliado.",
+        "Elas garantem que a emissividade da superficie da peca e exatamente igual a um."
+      ],
+      "correctIndex": 0,
+      "explanation": "Anomalias termicas geralmente precedem falhas, sendo a medicao de temperatura uma das principais ferramentas de analise. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual tipo de energia o termovisor captura ao inspecionar fisicamente chaves seccionadoras e disjuntores?",
+      "options": [
+        "A energia ultravioleta fortemente refletida pelas nuvens.",
+        "A energia cinetica microscopica dos eletrons livres isolados.",
+        "A energia infravermelha termica diretamente emitida pelo objeto enquadrado.",
+        "A energia acustica residual gerada por vibracoes mecanicas locais."
+      ],
+      "correctIndex": 2,
+      "explanation": "O termovisor captura a energia infravermelha emitida pelo objeto em inspecao e a converte em imagem termica. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o delta T maximo permitido para garantir a aprovacao e operacao normal de conexoes eletricas de alta tensao?",
+      "options": [
+        "5 graus Celsius.",
+        "8 graus Celsius.",
+        "15 graus Celsius.",
+        "30 graus Celsius."
+      ],
+      "correctIndex": 0,
+      "explanation": "O delta T maximo permitido em conexoes rigorosas de alta tensao e de exatos 5 graus Celsius. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o limite maximo de delta T aceitavel para o funcionamento seguro de conexoes eletricas de media tensao?",
+      "options": [
+        "3 graus Celsius.",
+        "5 graus Celsius.",
+        "8 graus Celsius.",
+        "12 graus Celsius."
+      ],
+      "correctIndex": 2,
+      "explanation": "O delta T maximo permitido para diagnosticar normalidade em conexoes de media tensao e 8 graus Celsius. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual acao corretiva deve ser tomada ao detectar forte aquecimento em uma chave seccionadora devido a parafusos frouxos?",
+      "options": [
+        "Aplicar imediatamente fita adesiva de alta emissividade sobre os contatos.",
+        "Realizar limpeza nas superficies e verificar rigorosamente o aperto dos parafusos.",
+        "Aumentar instantaneamente a corrente nominal de projeto do circuito afetado.",
+        "Trocar a camera termografica por uma lente de resolucao geometrica maior."
+      ],
+      "correctIndex": 1,
+      "explanation": "O plano de acao correto consiste em limpar as superficies de contato afetadas e verificar o aperto das conexoes. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a tabela de prioridades de diagnostico, o que se exige quando o delta T e superior a 40 graus Celsius?",
+      "options": [
+        "Medidas corretivas tomadas unicamente no proximo periodo de manutencao.",
+        "Medidas corretivas realizadas com agendamento previo e planejamento folgado.",
+        "Medidas corretivas a serem tomadas assim que for possivel para a equipe.",
+        "Medidas corretivas imediatas devido a altissima criticidade da falha termica."
+      ],
+      "correctIndex": 3,
+      "explanation": "Para diferencas de temperatura acima de 40 graus Celsius a acao obrigatoria e a tomada de medidas corretivas imediatas. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o criterio metodologico Delta T determina de fato a severidade de uma anomalia em equipamentos da subestacao?",
+      "options": [
+        "Somando a umidade do ar ao valor maximo lido pelo termovisor na tela do painel.",
+        "Avaliando a variacao de temperatura entre um elemento e outro componente similar comprovadamente saudavel.",
+        "Multiplicando a temperatura ambiente refletida pela taxa de absorcao termica do cobre polido.",
+        "Subtraindo a corrente de carga nominal exata da respectiva temperatura superficial maxima medida."
+      ],
+      "correctIndex": 1,
+      "explanation": "A gravidade da anomalia e classificada e avaliada pela variacao de temperatura comparada com outro elemento similar saudavel. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A termografia em sistemas eletricos identifica problemas ocultos monitorando exatamente a relacao entre a corrente e o aumento da resistencia ohmica.",
+      "correctAnswer": true,
+      "explanation": "A tecnica visualiza problemas causados pelo aumento da resistencia ohmica local que gera calor induzido no componente sob carga. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em conexoes ativas de alta tensao, registrar um delta T de 14,7 graus Celsius entre as fases e totalmente aceitavel e dispensa intervencao da equipe de manutencao.",
+      "correctAnswer": false,
+      "explanation": "O delta T maximo permitido em conexoes isoladas de alta tensao e de apenas 5 graus Celsius, exigindo intervencao acima disso. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na avaliacao qualitativa visual, uma diferenca confirmada de 4 graus Celsius entre dois componentes semelhantes operando sob a mesma carga ja comprova nitido comportamento anormal.",
+      "correctAnswer": true,
+      "explanation": "Diferencas de 4 graus Celsius entre componentes estritamente similares ja sao provas reais de comportamento anormal que exige investigacao urgente. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O aquecimento excessivo na garra metalica do porta fusivel de um banco de capacitores de subestacao nao afeta em nada a seguranca e a rotina do processo.",
+      "correctAnswer": false,
+      "explanation": "Qualquer aquecimento anormal nesse estagio indica severa falha e pode comprometer drasticamente o fornecimento de energia e a seguranca local. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para garantir uma analise termografica com precisao real, e rigorosamente exigido que o painel eletrico inspecionado opere ininterruptamente por no minimo duas horas com pelo menos trinta por cento de carga total.",
+      "correctAnswer": true,
+      "explanation": "O equipamento de forca deve operar ininterruptamente por no minimo duas horas e possuir ao menos trinta por cento da carga base para assegurar confiabilidade termica no diagnostico. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na rotina de inspecao da subestacao, os severos pontos quentes surgem ativamente devido ao aumento da resistencia de contato causado por deficiencia de torque, corrosao ou ____, gerando calor localizado.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "oxidacao"
+        }
+      ],
+      "explanation": "Pontos quentes concentrados em circuitos eletricos sao rotineiramente causados por deficiencia estrutural de contato, corrosao quimica ou oxidacao dos metais. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A rigorosa inspecao no disjuntor apos a intervencao corretiva mostrou condicoes normais de uso, pois o parametro de delta T maximo permitido para avaliacao de conexoes de ____ tensao e travado em exatos 5 graus Celsius.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "alta"
+        }
+      ],
+      "explanation": "O diagnostico oficial aprovou a condicao normal baseando-se no limite tecnico maximo de 5 graus Celsius validado para equipamentos operantes em alta tensao. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A tabela de classificacao de severidade indica que anomalias termicas com delta T na faixa entre 1 e 10 graus Celsius exigem que as medidas corretivas sejam feitas no proximo periodo planejado de ____ preditiva ou preventiva.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "manutencao"
+        }
+      ],
+      "explanation": "A prioridade mais baixa da tabela padrao de falhas orienta que essas leves correcoes ocorram de forma programada no proximo periodo de manutencao do setor. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "hard"
+    }
+  ]
+}

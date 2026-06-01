@@ -26,11 +26,11 @@
       "statement": "Qual reatância deve ser utilizada para calcular a máxima corrente de curto-circuito inicial de uma máquina síncrona?",
       "options": [
         "Reatância síncrona (Xd).",
-        "Reatância transitória (X'd).",
         "Reatância subtransitória (X''d).",
+        "Reatância transitória (X'd).",
         "Reatância de sequência negativa (X2)."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A corrente subtransitória (valor eficaz simétrico inicial), a mais elevada da falta, é determinada pela reatância subtransitória (X''d) da máquina.",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "O que define a magnitude da componente contínua (DC) na corrente de falta assimétrica?",
       "options": [
         "A velocidade de rotação do rotor e o fator de potência pré-falta.",
-        "O valor exato (ângulo de incidência) da onda de tensão no instante em que o curto-circuito ocorre.",
         "A capacitância total equivalente da linha de transmissão envolvida.",
+        "O valor exato (ângulo de incidência) da onda de tensão no instante em que o curto-circuito ocorre.",
         "O número de polos da máquina de indução conectada na mesma barra."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A componente DC depende do instante (ângulo) da onda de tensão em que o curto ocorre, podendo ser nula se a falta ocorrer no pico máximo da tensão.",
       "difficulty": "easy"
     },
@@ -53,10 +53,10 @@
       "options": [
         "Eles se desconectam instantaneamente da rede.",
         "Absorvem elevada potência reativa, atuando como carga puramente indutiva.",
-        "Devido à inércia mecânica e energia magnética residual, passam a atuar como geradores, contribuindo com corrente de curto.",
-        "Bloqueiam o fluxo das correntes de sequência zero e negativa."
+        "Bloqueiam o fluxo das correntes de sequência zero e negativa.",
+        "Devido à inércia mecânica e energia magnética residual, passam a atuar como geradores, contribuindo com corrente de curto."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Motores de indução comportam-se como geradores imediatamente após a falta, contribuindo com a corrente de falta durante o período subtransitório.",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Como a impedância interna de um gerador síncrono se comporta durante um curto-circuito em seus terminais?",
       "options": [
-        "Permanece estritamente constante.",
         "Aumenta progressivamente, fazendo a corrente diminuir ao longo dos ciclos.",
+        "Permanece estritamente constante.",
         "Diminui progressivamente, ocasionando elevação contínua da corrente.",
         "Alterna entre valores altos e baixos de forma senoidal."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A impedância interna aumenta progressivamente enquanto o fluxo magnético se acomoda, fazendo a corrente decair dos valores subtransitórios para os permanentes.",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Qual parâmetro determina a constante de tempo do decaimento da componente DC?",
       "options": [
-        "A relação X/R da impedância do sistema vista do ponto de curto.",
         "A razão entre X''d / X'd da máquina mais próxima.",
+        "A relação X/R da impedância do sistema vista do ponto de curto.",
         "A potência de curto-circuito térmica suportável pelo transformador.",
         "A capacidade de interrupção em kA do disjuntor."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "A componente DC decai exponencialmente com constante de tempo L/R, proporcional à relação X/R da impedância Thévenin no ponto de curto.",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "Por que a contribuição dos motores de indução é frequentemente desconsiderada no cálculo da corrente de interrupção para disjuntores lentos (2 a 4 ciclos)?",
       "options": [
         "Porque geram exclusivamente correntes de sequência zero.",
-        "Porque a constante de tempo de queda do fluxo é muito rápida, menor que 1 ciclo, esgotando a contribuição antes da abertura.",
+        "Porque o escorregamento reverte instantaneamente o campo magnético.",
         "Porque a reatância subtransitória atinge o infinito quando a tensão decai.",
-        "Porque o escorregamento reverte instantaneamente o campo magnético."
+        "Porque a constante de tempo de queda do fluxo é muito rápida, menor que 1 ciclo, esgotando a contribuição antes da abertura."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O campo magnético do motor de indução decai muito rapidamente (constante < 1 ciclo), esgotando a contribuição no período subtransitório antes que disjuntores de 2 a 4 ciclos atuem.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Para dimensionar o poder de interrupção de um disjuntor de 5 ciclos, o IEEE recomenda:",
       "options": [
-        "Adotar Xd para todos os geradores e multiplicar por 1,6.",
-        "Desprezar X''d e usar apenas Xd nominal de motores.",
         "Calcular a corrente inicial simétrica (subtransitória) e multiplicar por fator corretivo tabelado (ex: 1,1 para 5 ciclos).",
+        "Desprezar X''d e usar apenas Xd nominal de motores.",
+        "Adotar Xd para todos os geradores e multiplicar por 1,6.",
         "Considerar unicamente a componente DC."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Calcula-se a corrente eficaz simétrica inicial e aplica-se fator de multiplicação empírico para a componente DC remanescente. Para disjuntores de 5 ciclos, recomenda-se o fator 1,1.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "A corrente permanente de curto-circuito de um gerador síncrono é muito mais elevada que a corrente subtransitória inicial.",
       "correctAnswer": false,
       "explanation": "A corrente subtransitória é a que atinge os maiores valores (5 a 10 vezes a nominal). A corrente permanente decai para valores muito menores, muitas vezes entre 0,5 e 2 vezes a nominal.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Se o curto ocorrer quando a tensão está no seu valor máximo, a corrente de defeito surgirá sem componente DC assimétrica.",
       "correctAnswer": true,
       "explanation": "O deslocamento DC depende do ângulo da tensão. Se a falta ocorre no pico da tensão, não haverá componente DC na corrente daquela fase.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A reatância transitória (X'd) é sempre numericamente inferior à reatância subtransitória (X''d).",
       "correctAnswer": false,
       "explanation": "É o contrário: X''d é a MENOR das reatâncias. Por ser menor, a corrente inicial (E/X''d) atinge a máxima magnitude de todo o curto-circuito.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Para calcular a corrente subtransitória, máquinas síncronas e motores de indução são modelados pelas suas reatâncias subtransitórias no diagrama de sequência positiva.",
       "correctAnswer": true,
       "explanation": "Para encontrar a corrente subtransitória, aplica-se o Teorema de Thévenin modelando geradores e motores pelas fontes de tensão pré-falta em série com as reatâncias subtransitórias (X''d).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Para disjuntores lentos, deve-se usar a reatância subtransitória para todos os componentes e nunca aplicar fatores corretivos multiplicadores.",
       "correctAnswer": false,
       "explanation": "Para corrente de interrupção de disjuntores lentos, recomenda-se usar reatância transitória em motores e aplicar fatores de multiplicação baseados nos ciclos do disjuntor para acomodar a componente DC remanescente.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A onda de corrente de falta é composta pelo termo alternado e por uma componente apriódica decrescente chamada componente _____, responsável por elevar o valor de crista da corrente de defeito.",
+      "statement": "A onda de corrente de falta é composta pelo termo alternado e por uma componente apriódica decrescente chamada componente ____, responsável por elevar o valor de crista da corrente de defeito.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O esforço eletrodinâmico máximo e o dimensionamento do poder de fechamento do disjuntor são avaliados sempre no período _____, utilizando as impedâncias operativas mais baixas dos geradores.",
+      "statement": "O esforço eletrodinâmico máximo e o dimensionamento do poder de fechamento do disjuntor são avaliados sempre no período ____, utilizando as impedâncias operativas mais baixas dos geradores.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Segundo o Teorema de _____, o circuito de curto-circuito é simplificado pelo equivalente de fonte de tensão pré-falta em série com a impedância equivalente de malha, viabilizando o ajuste dos relés e dimensionamento de disjuntores.",
+      "statement": "Segundo o Teorema de ____, o circuito de curto-circuito é simplificado pelo equivalente de fonte de tensão pré-falta em série com a impedância equivalente de malha, viabilizando o ajuste dos relés e dimensionamento de disjuntores.",
       "blanks": [
         {
           "index": 0,

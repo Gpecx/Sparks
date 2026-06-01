@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Sistemas Distribuídos (DCS)",
+  "moduleSubtitle": "Conceitos, aplicacoes em SPCS e integracao",
+  "moduleOrder": 4,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a aplicação original e principal do Sistema Digital de Controle Distribuído (SDCD/DCS) na indústria?",
+      "options": [
+        "Controle contínuo PID.",
+        "Acionamento de relés mecânicos.",
+        "Roteamento de redes corporativas.",
+        "Gestão financeira de manufatura."
+      ],
+      "correctIndex": 0,
+      "explanation": "O SDCD foi criado para substituir instrumentos analógicos em aplicações de controle contínuo PID (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em uma arquitetura DCS, qual componente fornece a interface principal para a visualização e operação do processo?",
+      "options": [
+        "Válvula proporcional.",
+        "Estação de operação com monitores.",
+        "Fonte de alimentação.",
+        "Chave de intertravamento."
+      ],
+      "correctIndex": 1,
+      "explanation": "A estação de operação possui monitores de vídeo e teclados, substituindo os painéis convencionais (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a principal diferença conceitual entre um SCADA e um DCS em automação industrial?",
+      "options": [
+        "DCS é um software visual de painel e SCADA é um hardware de campo.",
+        "SCADA monitora e adquire dados via software, enquanto DCS é um sistema completo de controle.",
+        "DCS funciona apenas com redes locais sem fio, e SCADA exige cabos ópticos.",
+        "SCADA executa controle PID contínuo e DCS apenas registra alarmes."
+      ],
+      "correctIndex": 1,
+      "explanation": "SCADA é um software de design para monitoramento, enquanto o DCS é um sistema dedicado para controlar processos contínuos (PLC vs SCADA vs DCS).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os Sistemas Digitais de Controle Distribuído (SDCD) lidam com a exigência de alta disponibilidade e segurança?",
+      "options": [
+        "Através do uso exclusivo de baterias locais nos sensores de campo.",
+        "Exigindo que operadores confirmem manualmente cada ciclo de varredura.",
+        "Oferecendo redundância total do sistema, incluindo I/O, CPU e comunicação.",
+        "Implementando algoritmos de inteligência artificial na nuvem externa."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os circuitos de SDCD são projetados para oferecer redundância total sem falha de ponto isolado (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a pirâmide de automação ISA-95, em qual nível os SDCDs e CLPs atuam diretamente no controle automatizado da planta?",
+      "options": [
+        "Nível 1.",
+        "Nível 2.",
+        "Nível 3.",
+        "Nível 4."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Nível 2 compreende equipamentos como CLPs e SDCDs que realizam ativamente o controle automatizado dos processos (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na integração entre CLP e SDCD, qual benefício técnico é alcançado ao combinar ambas as tecnologias no chão de fábrica?",
+      "options": [
+        "O CLP assume todo o controle PID, enquanto o SDCD atua apenas como gateway.",
+        "Combina a eficiência do CLP em lógicas discretas com o poder do SDCD no controle regulatório contínuo.",
+        "O SDCD converte sinais analógicos em pneumáticos para as matrizes do CLP.",
+        "Bloqueia fisicamente a comunicação corporativa aumentando a cibersegurança."
+      ],
+      "correctIndex": 1,
+      "explanation": "A integração une a rapidez do CLP para E/S discretas ao controle avançado e interface amigável do SDCD (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza fortemente a base de dados de um sistema DCS em comparação com a arquitetura de CLPs isolados?",
+      "options": [
+        "O DCS exige tabelas SQL criadas manualmente para cada malha local.",
+        "O DCS fornece nativamente uma base de dados global e unificada de todo o sistema.",
+        "O DCS apaga dados voláteis a cada desligamento de energia por segurança.",
+        "O DCS fragmenta a base de dados impedindo o compartilhamento em rede."
+      ],
+      "correctIndex": 1,
+      "explanation": "Diferente de CLPs tradicionais, o SDCD oferece uma base de dados global unificada para gerenciar o sistema de forma integrada (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao integrar um Banco de Dados em Tempo Real (RTDB) em uma arquitetura DCS, qual é o objetivo técnico de utilizar um Gateway dedicado?",
+      "options": [
+        "Processar lógicas de desligamento seguro antes que o sinal alcance a caldeira.",
+        "Evitar a sobrecarga da CPU do SDCD ao fornecer dados gerenciais, preservando o tempo de resposta do controle.",
+        "Converter compulsoriamente os protocolos abertos TCP/IP para sinalização analógica 4-20mA.",
+        "Trancar todas as válvulas solenóides em caso de perda pontual de conexão com o banco corporativo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O gateway RTDB atua como buffer, evitando que as consultas externas saturem o SDCD e prejudiquem o controle da planta (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No arranjo de votação de segurança (ex: 2 de 3) integrado a um DCS, qual é a vantagem de utilizar transmissores fisicamente interligados a módulos de entrada distintos?",
+      "options": [
+        "Evita que a quebra de um único módulo E/S colapse a medição inteira gerando um desligamento indevido da planta.",
+        "Reduz a exatidão das medidas para facilitar a programação manual da matriz pelas equipes de operação.",
+        "Exclui as funções PID do software focando unicamente na comutação física de contato seco.",
+        "Diminui os alertas sônicos permitindo que falhas de módulo fiquem passivamente ocultas do operador."
+      ],
+      "correctIndex": 0,
+      "explanation": "Repartir as conexões impede a vulnerabilidade de falha de modo comum, onde a perda de um único módulo acionaria o desarme geral da unidade (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a arquitetura moderna dos sistemas DCS se tornou a escolha preferida para o gerenciamento de processos complexos de batelada multiprodutos?",
+      "options": [
+        "Empregando relés eletromecânicos blindados que executam lógicas invariáveis com imensa rapidez física.",
+        "Isolando cada batelada num controlador sem displays, garantindo imunidade cega contra cibercriminosos.",
+        "Ao incorporar nativamente gestão de receitas, blocos lógicos sequenciais, rastreabilidade plena e interface unificada.",
+        "Forçando o uso restrito da sintaxe Assembly para todas as estações gerenciais do planejamento produtivo."
+      ],
+      "correctIndex": 2,
+      "explanation": "Apesar de ter nascido no controle contínuo, o DCS se tornou imbatível na batelada ao unir lógicas discretas e gestão avançada e histórica de receitas (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O Sistema Digital de Controle Distribuído (SDCD) tem a característica de distribuir suas funções de controle geograficamente pela planta.",
+      "correctAnswer": true,
+      "explanation": "O SDCD distribui as funções dos instrumentos geograficamente, substituindo controladores centralizados de painel (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os SDCDs foram desenvolvidos originalmente na década de 1970 com o propósito exclusivo de gerenciar lógicas discretas e bateladas.",
+      "correctAnswer": false,
+      "explanation": "Os primeiros SDCDs eram dedicados ao controle de processos contínuos em refinarias e complexos petroquímicos (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em um sistema SDCD, a falha de um único módulo de processamento interrompe de imediato as operações de todo o barramento da planta.",
+      "correctAnswer": false,
+      "explanation": "No modelo distribuído, cada módulo possui inteligência própria e opera independentemente, evitando que falhas isoladas afetem toda a rede (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em instalações industriais críticas, os alarmes de segurança e intertravamentos costumam ser segregados do DCS e controlados por CLPs redundantes.",
+      "correctAnswer": true,
+      "explanation": "Para garantir máxima segurança e disponibilidade, lógicas vitais de desligamento são separadas do controle contínuo em CLPs dedicados (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O princípio avançado de controle preditivo antecipatório (feedforward) não pode ser configurado em arquiteturas DCS, limitando-se ao Nível 4 corporativo.",
+      "correctAnswer": false,
+      "explanation": "Controladores instalados em arranjos SDCD executam ativamente o controle preditivo e cascata com excelentes tempos de computação e resposta local (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O ____ é um sistema de computador digital dedicado, composto por controladores poderosos para automatizar fábricas inteiras em processos contínuos ou em lote.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "DCS"
+        }
+      ],
+      "explanation": "O DCS (Sistema de Controle Distribuído) atua interligando os PLCs e controlando o processo produtivo de modo unificado (PLC vs SCADA vs DCS).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A integração de sistemas de automação orienta que a comunicação peer-to-peer entre controladores seja baseada em nomes de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "tag"
+        }
+      ],
+      "explanation": "Utilizar nomes de tag facilita a identificação global e a implementação de estratégias de controle mistas (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O sistema de comunicação digital que conecta as unidades de controle e estações de operação em um DCS é chamado de data ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "highway"
+        }
+      ],
+      "explanation": "O data highway, ou via de dados, é responsável por trafegar as informações de forma bidirecional por toda a arquitetura SDCD (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    }
+  ]
+}

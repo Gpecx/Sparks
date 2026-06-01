@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Qual relé detecta curtos-circuitos fase-fase internos no estator do gerador?",
       "options": [
-        "Relé diferencial (87G).",
         "Relé de sobretensão (59).",
+        "Relé diferencial (87G).",
         "Relé direcional de potência (32).",
         "Relé de subfrequência (81L)."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "A proteção diferencial (87G) atua de modo rápido e sensível para faltas internas entre fases no gerador. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Qual função evita que o gerador opere como motor síncrono?",
       "options": [
-        "Direcional de potência ativa (32P).",
-        "Direcional de potência reativa (32Q).",
         "Subtensão remanente (27R).",
+        "Direcional de potência reativa (32Q).",
+        "Direcional de potência ativa (32P).",
         "Sobrecorrente instantânea (50)."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O relé 32P detecta a inversão do fluxo de potência ativa, protegendo a máquina primária contra motorização. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "O desequilíbrio de corrente no estator é detectado por qual função?",
       "options": [
         "Tensão residual (59N).",
-        "Sequência negativa (46).",
+        "Salto de vetor (78).",
         "Perda de campo (40).",
-        "Salto de vetor (78)."
+        "Sequência negativa (46)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A função 46 detecta correntes de sequência negativa geradas por desequilíbrios, que causam aquecimento rotórico. (Fonte: Virtus_ProtGeradores).",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Como a perda de excitação (40) é detectada por relés de distância?",
       "options": [
         "Pela medição do aumento da resistência de aterramento.",
-        "Pela variação da impedância vista dos terminais para dentro da máquina.",
         "Pelo aumento súbito da tensão de sequência zero no neutro.",
+        "Pela variação da impedância vista dos terminais para dentro da máquina.",
         "Pela detecção de harmônicas de terceira ordem no estator."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A perda de campo faz a impedância traçar um percurso no plano R-X rumo à reatância da máquina. (Fonte: Ed58_fasc_protecao).",
       "difficulty": "medium"
     },
@@ -91,11 +91,11 @@
       "statement": "Qual o benefício da função 51V na retaguarda de proteção do gerador?",
       "options": [
         "Atua independentemente do decaimento da corrente de curto-circuito.",
-        "Opera com limites de corrente menores supervisionados por quedas de tensão.",
+        "Dispensa o uso de transformadores de potencial na medição.",
         "Bloqueia faltas monofásicas provenientes do barramento infinito.",
-        "Dispensa o uso de transformadores de potencial na medição."
+        "Opera com limites de corrente menores supervisionados por quedas de tensão."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A restrição ou supervisão de tensão reduz o pick-up de corrente durante curtos, melhorando a sensibilidade. (Fonte: Ed58_fasc_protecao).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Qual é a aplicação da função salto de vetor (78) na geração distribuída?",
       "options": [
-        "Evitar a sobrecarga contínua no transformador elevador.",
         "Desconectar o cogerador antes de um religamento assíncrono da concessionária.",
+        "Evitar a sobrecarga contínua no transformador elevador.",
         "Bloquear o sistema de excitação em caso de curto-circuito trifásico.",
         "Controlar remotamente o despacho de potência ativa."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Protege cogeradores contra o religamento automático da rede elétrica fora de sincronismo. (Fonte: Virtus_ProtGeradores).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Qual função protege os 5% do estator próximos ao neutro contra faltas à terra?",
       "options": [
-        "Subtensão de terceira harmônica (27TN).",
         "Sobretensão de sequência negativa (47).",
+        "Subtensão de terceira harmônica (27TN).",
         "Sobrecorrente instantânea direcional (67G).",
         "Direcional de potência reativa (32Q)."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "A função 27TN monitora a tensão de terceira harmônica no neutro para cobrir os 100% do estator. (Fonte: Guia Proteção 2008).",
       "difficulty": "medium"
     },
@@ -130,11 +130,11 @@
       "statement": "Como o esquema Blinder duplo detecta a perda de sincronismo (78)?",
       "options": [
         "Medindo a subtensão remanente permanente no estator.",
-        "Avaliando o tempo que a impedância leva para cruzar limites no plano R-X.",
         "Calculando a derivada da frequência no barramento do gerador.",
+        "Avaliando o tempo que a impedância leva para cruzar limites no plano R-X.",
         "Monitorando o ângulo de carga mecânica exclusivamente pelo rotor."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A instabilidade transitória é detectada quando a trajetória da impedância cruza os blinders no plano R-X. (Fonte: Apostila).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A perda de excitação faz o gerador operar como gerador de indução, absorvendo reativo da rede.",
       "correctAnswer": true,
       "explanation": "Sem campo, a máquina perde sincronismo, acelera e passa a absorver potência reativa do sistema. (Fonte: Ed58_fasc_protecao).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O desequilíbrio de corrente no estator induz correntes de dupla frequência no rotor.",
       "correctAnswer": true,
       "explanation": "A sequência negativa cria um campo girante oposto, induzindo correntes de 120 Hz que aquecem o rotor. (Fonte: Virtus_ProtGeradores).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A proteção por taxa de variação de frequência (81R) atua de modo mais rápido que a função 81 comum.",
       "correctAnswer": true,
       "explanation": "A monitoração df/dt (ROCOF) é mais rápida que as proteções de frequência absolutas normais. (Fonte: Guia Proteção 2008).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A função de sobrecorrente com restrição de tensão (51V) opera perfeitamente sem os sinais de tensão.",
       "correctAnswer": false,
       "explanation": "A função 51V exige medição de tensão através de TPs para restringir ou supervisionar o ajuste de sobrecorrente. (Fonte: Ed58_fasc_protecao).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Um curto-circuito no neutro do gerador anula a tensão de terceira harmônica medida nesse ponto.",
       "correctAnswer": true,
       "explanation": "O curto no fechamento do neutro zera a tensão de terceira harmônica, permitindo atuar a proteção 100%. (Fonte: Virtus_ProtGeradores).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "A função salto de _____ (78) desconecta o gerador antes do religamento assíncrono da concessionária.",
+      "statement": "A função salto de ____ (78) desconecta o gerador antes do religamento assíncrono da concessionária.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A proteção contra perda de excitação (40) monitora a _____ vista a partir dos terminais da máquina.",
+      "statement": "A proteção contra perda de excitação (40) monitora a ____ vista a partir dos terminais da máquina.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A proteção terra estator 100% monitora a tensão de _____ harmônica para faltas próximas ao neutro.",
+      "statement": "A proteção terra estator 100% monitora a tensão de ____ harmônica para faltas próximas ao neutro.",
       "blanks": [
         {
           "index": 0,

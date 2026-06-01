@@ -26,11 +26,11 @@
       "statement": "A chave fusível (chave matthews) das redes primárias desempenha quais funções básicas?",
       "options": [
         "Apenas proteção térmica contra curtos bifásicos.",
-        "Medição de tensão e proteção diferencial de barras.",
         "Seccionamento de circuito sem carga e proteção contra curto-circuito/sobrecorrente.",
+        "Medição de tensão e proteção diferencial de barras.",
         "Religamento automático e sincronismo de fases."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A chave matthews executa o seccionamento de circuito sem carga e a proteção contra curto/sobrecorrente pela queima do seu elo fusível.",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "O que caracteriza os elos fusíveis do tipo K na distribuição?",
       "options": [
         "São elos de atuação muito lenta (alto surto).",
-        "São elos rápidos com relação de rapidez (SR) entre 6 e 8.",
         "Operam estritamente como fusíveis limitadores de corrente.",
+        "São elos rápidos com relação de rapidez (SR) entre 6 e 8.",
         "Possuem retardo intencional superior a 300 segundos."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Os elos tipo K são rápidos, com Speed Ratio (SR) entre 6 e 8.",
       "difficulty": "easy"
     },
@@ -53,10 +53,10 @@
       "options": [
         "Injetando gás SF6 sob alta pressão no tubo.",
         "Comprimindo as molas do contato móvel.",
-        "O calor funde o elo e a fibra do tubo gera gases que comprimem e expelem o arco.",
-        "Resfriando o arco em câmara a vácuo selada."
+        "Resfriando o arco em câmara a vácuo selada.",
+        "O calor funde o elo e a fibra do tubo gera gases que comprimem e expelem o arco."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "No princípio de expulsão, a fibra interna aquece com o arco, produzindo gases que comprimem e expulsam o arco do tubo.",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Os elos fusíveis do tipo T são caracterizados como:",
       "options": [
-        "Elos ultra-rápidos para semicondutores.",
+        "Elos lentos com relação de rapidez (SR) entre 10 e 13.",
         "Elos rápidos com SR entre 6 e 8.",
         "Elos limitadores para 1/4 de ciclo.",
-        "Elos lentos com relação de rapidez (SR) entre 10 e 13."
+        "Elos ultra-rápidos para semicondutores."
       ],
-      "correctIndex": 3,
+      "correctIndex": 0,
       "explanation": "Os elos tipo T são lentos, com SR (relação de rapidez) entre 10 e 13.",
       "difficulty": "easy"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Quais são as principais curvas características de um elo fusível?",
       "options": [
-        "Tempo mínimo de fusão, tempo máximo de fusão, tempo total de extinção do arco e curta duração.",
-        "Curva de pick-up, drop-out, tempo definido e inverso.",
         "Curva de saturação, histerese, admitância e tempo reverso.",
+        "Curva de pick-up, drop-out, tempo definido e inverso.",
+        "Tempo mínimo de fusão, tempo máximo de fusão, tempo total de extinção do arco e curta duração.",
         "Tempo subtransitório, transitório, permanente e de rearme."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Os fusíveis apresentam quatro curvas: tempo mínimo de fusão, tempo máximo de fusão, tempo total de extinção do arco e curta duração.",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "Na coordenação entre dois elos fusíveis em série, qual a regra de tempo (fator de segurança)?",
       "options": [
         "O tempo de extinção do protetor deve ser 150% do tempo do protegido.",
-        "O tempo total de extinção do protetor não deve exceder 75% do tempo mínimo de fusão do protegido.",
+        "O tempo máximo de fusão do protegido não deve exceder 75% do tempo do protetor.",
         "A margem exige que o protetor atue em até 10 segundos.",
-        "O tempo máximo de fusão do protegido não deve exceder 75% do tempo do protetor."
+        "O tempo total de extinção do protetor não deve exceder 75% do tempo mínimo de fusão do protegido."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O tempo total de mitigação do elo protetor (a jusante) não deve exceder 75% do tempo mínimo de fusão do elo protegido (a montante).",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Com religador a montante e fusível a jusante, qual relação de curvas define a máxima corrente coordenada?",
       "options": [
-        "O ponto onde a curva lenta do religador cruza a curva de extinção do arco do fusível.",
         "O ponto de interseção entre a curva de tempo mínimo de fusão do elo e a curva rápida do religador.",
+        "O ponto onde a curva lenta do religador cruza a curva de extinção do arco do fusível.",
         "O limite onde a corrente de inrush supera a capacidade de ruptura do elo.",
         "A região assintótica da curva de tempo definido do disjuntor de EAT."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A máxima corrente coordenada está no ponto de interseção entre a curva de tempo mínimo de fusão do elo e a curva rápida do religador.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Os elos fusíveis do tipo H são de atuação muito lenta (alto surto), usados tipicamente na proteção de transformadores.",
       "correctAnswer": true,
       "explanation": "Os elos tipo H suportam correntes transitórias de alto valor, com atuação lenta para coordenar com o inrush, sendo usados na proteção de transformadores.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A coordenação entre dois fusíveis em série permite que a curva de tempo máximo de fusão de ambos se cruze sem afetar a seletividade.",
       "correctAnswer": false,
       "explanation": "Falso. Para haver seletividade, a curva de tempo total do fusível protetor deve ficar abaixo (75%) da curva de tempo mínimo de fusão do protegido, sem cruzá-la.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Os fusíveis dividem-se em duas grandes classes de tensão: Baixa Tensão (até 1 kV) e Média/Alta Tensão (acima de 1 kV).",
       "correctAnswer": true,
       "explanation": "Correto. Os fusíveis agrupam-se em Baixa Tensão (inferiores a 1 kV) e Média/Alta Tensão (superiores a 1 kV).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O tempo mínimo de fusão de um elo fusível define o momento em que o arco interno é completamente extinto e a corrente zerada.",
       "correctAnswer": false,
       "explanation": "Falso. O tempo mínimo de fusão é apenas quando o filamento começa a romper. A eliminação completa da corrente ocorre no 'tempo total de extinção do arco'.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Com religador a montante e elo fusível a jusante, o tempo total de extinção do arco do elo deve ser maior que o tempo da curva lenta do religador.",
       "correctAnswer": false,
       "explanation": "Falso. O correto é o inverso: o tempo total de extinção do elo deve ser MENOR que o da curva lenta do religador, permitindo que o elo isole a falta permanente.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A taxa de velocidade (SR) de um elo fusível é a razão entre a corrente mínima de fusão em 0,1 segundo e a corrente mínima de fusão no tempo de _____ segundos.",
+      "statement": "A taxa de velocidade (SR) de um elo fusível é a razão entre a corrente mínima de fusão em 0,1 segundo e a corrente mínima de fusão no tempo de ____ segundos.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Os elos fusíveis operam majoritariamente pelo princípio de _____, onde o calor ioniza a fibra do tubo, gerando gases que comprimem e ejetam o arco elétrico.",
+      "statement": "Os elos fusíveis operam majoritariamente pelo princípio de ____, onde o calor ioniza a fibra do tubo, gerando gases que comprimem e ejetam o arco elétrico.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Na coordenação entre dois elos fusíveis, o tempo de mitigação do elo protetor não deve ultrapassar _____% do tempo mínimo de fusão do elo protegido.",
+      "statement": "Na coordenação entre dois elos fusíveis, o tempo de mitigação do elo protetor não deve ultrapassar ____% do tempo mínimo de fusão do elo protegido.",
       "blanks": [
         {
           "index": 0,

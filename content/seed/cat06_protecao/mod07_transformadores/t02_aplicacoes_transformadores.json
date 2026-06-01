@@ -14,10 +14,10 @@
       "options": [
         "Apenas fusíveis limitadores de corrente.",
         "Relés de sobrecorrente temporizada simples.",
-        "Proteção diferencial percentual e relé de gás.",
-        "Proteção de distância com zonas independentes."
+        "Proteção de distância com zonas independentes.",
+        "Proteção diferencial percentual e relé de gás."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Grandes transformadores usam proteção diferencial e Buchholz por segurança e seletividade. (Fonte: Caminha).",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Qual a principal finalidade de um transformador de aterramento zig-zag?",
       "options": [
-        "Isolar galvânicamente dois sistemas elétricos aterrados.",
         "Prover um ponto de terra para sistemas originalmente isolados.",
+        "Isolar galvânicamente dois sistemas elétricos aterrados.",
         "Elevar a tensão de geração para níveis de transmissão.",
         "Reduzir a reatância de dispersão da linha de transmissão."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Ele fornece um caminho de terra para a corrente de curto-circuito em sistemas isolados. (Fonte: Virtus_Ferramentas).",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Qual a proteção térmica recomendada para transformadores do tipo seco?",
       "options": [
-        "Monitoramento da temperatura dos enrolamentos (ANSI 49T).",
         "Relé de deslocamento de óleo e gás (ANSI 63).",
+        "Monitoramento da temperatura dos enrolamentos (ANSI 49T).",
         "Termostato no fluido dielétrico isolante (ANSI 26).",
         "Válvula de alívio de pressão do tanque principal."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "Em transformadores secos, monitora-se a temperatura direta dos enrolamentos. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Como devem ser conectados os TCs de proteção no lado delta do transformador?",
       "options": [
         "Em conexão triângulo isolado.",
-        "Em conexão estrela aterrada.",
         "Em série simples sem fechamento.",
+        "Em conexão estrela aterrada.",
         "Em delta aberto com resistor."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A regra exige TCs em estrela aterrada no lado delta do transformador. (Fonte: Virtus_CProtBL2Cd1).",
       "difficulty": "easy"
     },
@@ -66,10 +66,10 @@
       "options": [
         "Em conexão estrela aterrada.",
         "Em conexão estrela flutuante.",
-        "Em conexão delta.",
-        "Em antiparalelo cruzado."
+        "Em antiparalelo cruzado.",
+        "Em conexão delta."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "A conexão delta nos TCs bloqueia a corrente de sequência zero do lado estrela aterrada. (Fonte: Virtus_CProtBL2Cd1).",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Por que o comutador de taps sob carga afeta a proteção diferencial?",
       "options": [
-        "Ele desliga temporariamente o neutro do sistema.",
         "Altera a relação de transformação gerando desbalanço de corrente.",
+        "Ele desliga temporariamente o neutro do sistema.",
         "Produz correntes contínuas que saturam os TCs de medição.",
         "Anula as correntes de sequência negativa do gerador."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Mudanças de tap alteram a relação de transformação, exigindo margem no ajuste diferencial. (Fonte: Virtus_ProtTrafo).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Como interligar TCs na proteção diferencial de barramentos disjuntor-e-meio?",
       "options": [
-        "Conecta-se os secundários dos TCs do vão em paralelo.",
-        "Isola-se o secundário do TC mais próximo da carga.",
         "Cruza-se as fases formando um delta aberto resistivo.",
+        "Isola-se o secundário do TC mais próximo da carga.",
+        "Conecta-se os secundários dos TCs do vão em paralelo.",
         "Usa-se relés direcionais bloqueando um dos TCs."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "As correntes são somadas através da conexão em paralelo dos secundários dos TCs do vão. (Fonte: Virtus_ProtTrafo).",
       "difficulty": "medium"
     },
@@ -118,10 +118,10 @@
       "options": [
         "Com capacitores série externos aos relés.",
         "Utilizando transformadores auxiliares mecânicos no painel.",
-        "Aplicando fatores de correção matemática via software interno.",
-        "Alterando a carga nominal dos TCs diretamente."
+        "Alterando a carga nominal dos TCs diretamente.",
+        "Aplicando fatores de correção matemática via software interno."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Relés numéricos usam 'TCs digitais' em software para corrigir módulos e ângulos das correntes. (Fonte: Virtus_ProtTrafo).",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "No autotransformador, onde instalam-se os TCs para medir a sequência zero do terciário?",
       "options": [
-        "No neutro principal do barramento isolado.",
         "Internos à conexão triângulo do enrolamento terciário.",
+        "No neutro principal do barramento isolado.",
         "Nas buchas de alta tensão exclusivamente.",
         "Em paralelo com os capacitores de acoplamento."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "TCs internos ao triângulo medem a sequência zero circulante para compensar a proteção diferencial. (Fonte: Virtus_ProtTrafo).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Transformadores de distribuição menores que 1 MVA são protegidos comumente por relés de sobrecorrente e fusíveis.",
       "correctAnswer": true,
       "explanation": "Pequenas unidades usam fusíveis e relés de sobrecorrente temporizados por razões econômicas. (Fonte: Caminha).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O relé Buchholz é o dispositivo primário para proteção interna de transformadores do tipo seco.",
       "correctAnswer": false,
       "explanation": "O relé Buchholz exige meio líquido (óleo) para detectar fluxo e acúmulo de gases de falhas. (Fonte: Cabine Primária).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O transformador zig-zag permite que as correntes de sequência zero retornem à fonte durante faltas fase-terra.",
       "correctAnswer": true,
       "explanation": "A conexão zig-zag compensa ampères-espiras, criando um caminho físico para a corrente de terra. (Fonte: Virtus_Ferramentas).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A proteção diferencial não precisa ser ajustada para absorver o erro introduzido pela variação de taps.",
       "correctAnswer": false,
       "explanation": "O comutador de taps muda a relação tensão-corrente, exigindo margem de erro (mismatch) no ajuste. (Fonte: Caminha).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A zona de proteção diferencial de um transformador abaixador pode englobar um transformador zig-zag conectado ao seu secundário.",
       "correctAnswer": true,
       "explanation": "A área diferencial pode abranger o trafo de aterramento, garantindo proteção completa do conjunto. (Fonte: Virtus_ProtTrafo).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Em transformadores a óleo, o termostato ANSI 26 atua monitorando diretamente a temperatura do _____.",
+      "statement": "Em transformadores a óleo, o termostato ANSI 26 atua monitorando diretamente a temperatura do ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A ligação em delta dos TCs auxiliares atua como circuito aberto bloqueando as correntes de sequência _____.",
+      "statement": "A ligação em delta dos TCs auxiliares atua como circuito aberto bloqueando as correntes de sequência ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "No autotransformador, TCs instalados internamente ao _____ compensam a sequência zero circulante no relé diferencial.",
+      "statement": "No autotransformador, TCs instalados internamente ao ____ compensam a sequência zero circulante no relé diferencial.",
       "blanks": [
         {
           "index": 0,

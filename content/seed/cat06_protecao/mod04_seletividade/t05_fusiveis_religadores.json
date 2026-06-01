@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Qual é o critério básico de tempo adotado para garantir a coordenação entre dois elos fusíveis ligados em série?",
       "options": [
-        "O tempo de extinção do protetor não deve exceder 75% do tempo mínimo de fusão do elo protegido.",
+        "O elo a montante deve sempre fundir antes do elo a jusante para qualquer nível de falta.",
         "O tempo de fusão do protetor deve ser 150% do tempo total de extinção do elo protegido.",
         "Ambos os elos devem possuir tempos de arco rigorosamente idênticos para garantir o corte.",
-        "O elo a montante deve sempre fundir antes do elo a jusante para qualquer nível de falta."
+        "O tempo de extinção do protetor não deve exceder 75% do tempo mínimo de fusão do elo protegido."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "A regra de segurança impõe que o tempo total para extinção da falta no elo protetor (jusante) não ultrapasse 75% do tempo mínimo de fusão do protegido (montante). (Fonte: KLS - Proteção p. 132).",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Segundo as padronizações das concessionárias e a taxa de velocidade (SR), como são classificados os elos fusíveis do tipo K?",
       "options": [
-        "Lentos, com SR (Speed Ratio) variando entre 10 e 13.",
         "Rápidos, apresentando SR (Speed Ratio) variando entre 6 e 8.",
+        "Lentos, com SR (Speed Ratio) variando entre 10 e 13.",
         "De alto surto, voltados apenas para motores de indução.",
         "Ultra-rápidos, desenvolvidos estritamente para eletrônica."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Os elos tipo K são definidos como elos rápidos, possuindo uma taxa de velocidade (Speed Ratio - SR) entre 6 e 8. (Fonte: KLS - Proteção p. 106).",
       "difficulty": "easy"
     },
@@ -79,10 +79,10 @@
       "options": [
         "Curva de tempo longo constante (tempo definido).",
         "Curva normal inversa da IEC.",
-        "Curva extremamente inversa (ANSI ou IEC).",
-        "Curva de tempo subtransitório puro."
+        "Curva de tempo subtransitório puro.",
+        "Curva extremamente inversa (ANSI ou IEC)."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "As curvas dos fusíveis são extremamente inclinadas. Assim, relés com curva extremamente inversa coordenam melhor, sendo lentos em sobrecargas e muito rápidos em curtos severos. (Fontes: Apostila Proteção p. 64 / Ed50 p. 32).",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Ao coordenar um religador a montante e um fusível a jusante, o que a interseção da curva rápida do religador com a curva de fusão do elo determina?",
       "options": [
-        "O ponto de bloqueio por harmônicos da rede.",
         "A máxima corrente de falta que assegura a perfeita coordenação do esquema.",
+        "O ponto de bloqueio por harmônicos da rede.",
         "A falha do mecanismo de mola da chave fusível.",
         "A mínima corrente de pickup da função direcional de terra."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Nessa configuração, a máxima corrente de falta passível de coordenação salva-fusível é dada pelo ponto onde a curva de tempo mínimo de fusão do elo cruza a curva rápida do religador. (Fonte: KLS - Proteção p. 135).",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "Por qual motivo aplica-se o fator multiplicativo 'k' na curva temporizada de um religador a jusante coordenado com um elo a montante?",
       "options": [
         "Para acelerar o disparo instantâneo e ignorar curtos capacitivos.",
-        "Para limitar a tensão de restabelecimento na câmara de extinção a gás.",
         "Para moldar e atrasar a curva do religador, compensando a fadiga térmica acumulada no elo durante as operações sucessivas.",
+        "Para limitar a tensão de restabelecimento na câmara de extinção a gás.",
         "Para adequar o ajuste do dial de tempo às variações da corrente nominal rural."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "Como o religador faz múltiplas operações, o elo sofre fadiga (acumula calor). O fator 'k' atrasa matematicamente a curva de segurança, garantindo que as sucessivas atuações não causem a fusão prematura. (Fonte: KLS - Proteção p. 134-135).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Matematicamente, como é definido o parâmetro SR (Speed Ratio) que diferencia os elos fusíveis nas normas das concessionárias?",
       "options": [
-        "A razão entre a corrente mínima de fusão em 0,1 segundo e a corrente mínima em 300 segundos.",
-        "A proporção entre a capacidade de interrupção dinâmica e o valor nominal térmico contínuo.",
         "O inverso quadrático do tempo total de extinção do arco elétrico na fase defeituosa.",
+        "A proporção entre a capacidade de interrupção dinâmica e o valor nominal térmico contínuo.",
+        "A razão entre a corrente mínima de fusão em 0,1 segundo e a corrente mínima em 300 segundos.",
         "O logaritmo da tensão residual máxima multiplicado pela reatância de expulsão do tubo."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O SR ou taxa de velocidade é estabelecido por convenção pela divisão da corrente que causa a fusão mínima em 0,1 s pela corrente que causa a fusão em 300 s. (Fonte: KLS - Proteção p. 106).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "No jargão da coordenação entre dois elos fusíveis, o dispositivo instalado mais distante da fonte e mais próximo da carga é denominado 'elo protetor'.",
       "correctAnswer": true,
       "explanation": "O fusível mais próximo da falta (a jusante) recebe o nome de elo protetor e deve atuar antes. O equipamento localizado atrás dele (a montante) é a retaguarda, chamada de protegido. (Fonte: KLS - Proteção p. 131).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Os elos fusíveis de distribuição classe 'T' são caracterizados como equipamentos de 'alto surto', apresentando taxas ultra-rápidas com SR entre 20 e 30.",
       "correctAnswer": false,
       "explanation": "Elos tipo T são 'lentos' com SR entre 10 e 13. Elos classe 'H' é que são definidos normativamente como dispositivos de alto surto utilizados para transformadores. (Fonte: KLS - Proteção p. 106).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Na configuração de um religador a montante e um fusível a jusante, o tempo de extinção do arco do elo deve ser menor que a curva temporizada lenta do religador para garantir que faltas permanentes queimem o elo.",
       "correctAnswer": true,
       "explanation": "Para curtos permanentes, a proteção almeja a abertura final do elo. Por isso, a curva do fusível (tempo total) deve ficar abaixo da curva lenta do religador (tempo maior). (Fonte: KLS - Proteção p. 135).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Para obter a 'curva de dano' ou margem de segurança de um elo protegido, deve-se traçar o limite correspondente a exatos 100% de seu tempo máximo de interrupção térmica.",
       "correctAnswer": false,
       "explanation": "O critério imperativo adota a margem de segurança de 75% da curva de tempo MÍNIMO de fusão do elo protegido, criando o espaço de coordenação seguro contra estresse mecânico. (Fonte: Virtus_CProtBL2Cd1 p. 14).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Para coordenar seletivamente um religador que executa ciclo 2A+2B (quatro operações totais) com um seccionalizador, a lógica manda ajustar o seccionalizador para efetuar a abertura no tempo morto após 3 contagens.",
       "correctAnswer": true,
       "explanation": "A regra de coordenação determina que o seccionalizador seja programado com (N-1) operações do religador. Sendo N=4 operações para o religador, o seccionalizador operará com segurança na 3ª contagem (3 aberturas). (Fonte: KLS - Proteção p. 136).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O intervalo entre a abertura por falta e o religamento automático do religador é chamado de tempo _____.",
+      "statement": "O intervalo entre a abertura por falta e o religamento automático do religador é chamado de tempo ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A norma estipula que a curva de extinção total do elo protetor não exceda _____% do tempo mínimo de fusão do elo protegido.",
+      "statement": "A norma estipula que a curva de extinção total do elo protetor não exceda ____% do tempo mínimo de fusão do elo protegido.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para coordenar relés numéricos com elos fusíveis a jusante em redes de distribuição, adota-se a curva de retardo do tipo _____ inversa na proteção de base.",
+      "statement": "Para coordenar relés numéricos com elos fusíveis a jusante em redes de distribuição, adota-se a curva de retardo do tipo ____ inversa na proteção de base.",
       "blanks": [
         {
           "index": 0,

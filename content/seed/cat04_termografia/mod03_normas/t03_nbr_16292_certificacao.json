@@ -1,0 +1,218 @@
+{
+  "category": "Termografia Infravermelha",
+  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categoryOrder": 3,
+  "module": "Normas e Laudos de Termografia",
+  "moduleSubtitle": "NBR 15572, ISO 10878, NBR 16292, laudos e gestao preditiva",
+  "moduleOrder": 3,
+  "trail": "NBR 16292 (Certificação de Termografistas)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual norma internacional estabelece os requisitos para qualificacao e avaliacao de pessoal no metodo de termografia?",
+      "options": [
+        "ISO 18436-7",
+        "ISO 18434-1",
+        "ISO 9712",
+        "ISO 10878"
+      ],
+      "correctIndex": 0,
+      "explanation": "A certificacao em termografia atende aos criterios da ISO 18436-7 nas categorias I, II e III. (Fonte: Qualificacao ISO 18436-7, Abendi)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na certificacao ABENDI, qual e a principal limitacao das responsabilidades de um termografista de Nivel 1?",
+      "options": [
+        "Nao interpretar os dados ou tomar decisoes baseadas nos resultados.",
+        "Nao utilizar equipamentos de termografia em campo.",
+        "Nao realizar coletas de dados sem um Nivel 3 presente no local.",
+        "Nao registrar dados em sistemas informatizados."
+      ],
+      "correctIndex": 0,
+      "explanation": "O tecnico de Nivel 1 nao e responsavel por interpretar os dados ou tomar decisoes baseadas nos resultados termicos. (Fonte: Nossas certificacoes, Thermovisao)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao as competencias de um profissional certificado como Nivel 2 em termografia?",
+      "options": [
+        "Realizar vistorias independentes, interpretar resultados e elaborar relatorios detalhados.",
+        "Apenas coletar imagens termicas seguindo procedimentos de Nivel 1.",
+        "Focar exclusivamente na calibracao em laboratorio de termovisores industriais.",
+        "Atuar unicamente como especialista em auditorias e validacoes de procedimentos complexos."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Nivel 2 possui habilidade para vistoriar de forma independente, interpretar resultados e elaborar relatorios. (Fonte: Nossas certificacoes, Thermovisao)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a principal responsabilidade tecnica atribuida a um termografista certificado como Nivel 3?",
+      "options": [
+        "Realizar medicoes termograficas basicas sob supervisao de um Nivel 2.",
+        "Desenvolver procedimentos, interpretar resultados criticos e atuar como especialista em auditorias.",
+        "Operar exclusivamente a camera para registro de dados brutos da industria.",
+        "Limitar-se a tarefas de manutencao preventiva em paineis de baixa tensao."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Nivel 3 atua como especialista, desenvolve procedimentos, interpreta resultados complexos e supervisiona equipes. (Fonte: Nossas certificacoes, Thermovisao)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o requisito de escolaridade exigido para a certificacao na Categoria I de termografia pela Abendi?",
+      "options": [
+        "Ensino Fundamental completo.",
+        "Ensino Medio.",
+        "Ensino Superior incompleto.",
+        "Ensino Superior em Engenharia Mecanica."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para a Categoria I, e recomendado e exigido o nivel de escolaridade correspondente ao Ensino Medio. (Fonte: Qualificacao ISO 18436-7, Abendi)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a carga horaria de treinamento e o tempo de experiencia profissional exigidos para a certificacao na Categoria II?",
+      "options": [
+        "32 horas de treinamento e 12 meses de experiencia.",
+        "64 horas de treinamento e 24 meses de experiencia.",
+        "96 horas de treinamento e 48 meses de experiencia.",
+        "120 horas de treinamento e 60 meses de experiencia."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Categoria II exige 64 horas de treinamento especifico e 24 meses de experiencia profissional comprovada. (Fonte: Qualificacao ISO 18436-7, Abendi)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para a certificacao na Categoria III da ISO 18436-7, quais sao os rigorosos requisitos de formacao e experiencia exigidos?",
+      "options": [
+        "Ensino Medio, 64 horas de treinamento e 24 meses de experiencia.",
+        "Nivel Superior, 96 horas de treinamento e 48 meses de experiencia.",
+        "Ensino Fundamental, 32 horas de treinamento e 12 meses de experiencia.",
+        "Ensino Superior, 120 horas de treinamento e 60 meses de experiencia."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Categoria III exige Nivel Superior, 96 horas de treinamento e 48 meses de experiencia profissional previa. (Fonte: Qualificacao ISO 18436-7, Abendi)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a ABENDI categoriza as areas de certificacao em termografia conforme o contexto de trabalho especifico?",
+      "options": [
+        "Nivel 1, Nivel 2 e Nivel 3.",
+        "Infravermelho Curto, Medio e Longo.",
+        "Eletrica, Mecanica, Civil, Processo e Edificacoes.",
+        "Termovisor pontual e termovisor matricial."
+      ],
+      "correctIndex": 2,
+      "explanation": "As categorias referem-se as areas especificas de aplicacao: Eletrica, Mecanica, Civil, Processo e Edificacoes. (Fonte: Nossas certificacoes, Thermovisao)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como deve ser realizada a validacao da experiencia do candidato durante o processo rigoroso de certificacao em termografia?",
+      "options": [
+        "Por autodeclaracao registrada em cartorio publico.",
+        "Pela assinatura de uma pessoa independente na evidencia documental.",
+        "Por um teste escrito online gerado pelo sistema da empresa certificadora.",
+        "Apenas pela apresentacao do certificado de conclusao do Ensino Medio."
+      ],
+      "correctIndex": 1,
+      "explanation": "O processo de validacao da experiencia requer a assinatura de uma pessoa independente na evidencia documental apresentada. (Fonte: Qualificacao ISO 18436-7, Abendi)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a exigencia obrigatoria em relacao a progressao de categorias na certificacao ISO 18436-7 para um termografista?",
+      "options": [
+        "A certificacao nas Categorias II e III requer experiencia previa na categoria anterior.",
+        "E possivel iniciar diretamente na Categoria III caso o candidato possua doutorado.",
+        "O Nivel 1 pode emitir relatorios finais se possuir o Ensino Medio tecnico.",
+        "Nao existe ordem sequencial obrigatoria entre as categorias de certificacao."
+      ],
+      "correctIndex": 0,
+      "explanation": "As certificacoes conforme as Categorias II e III requerem obrigatoriamente experiencia previa na categoria anterior. (Fonte: Qualificacao ISO 18436-7, Abendi)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Tecnicos de Nivel 1 realizam coletas de dados termograficos de forma autonoma e emitem diagnosticos definitivos baseados nos termogramas.",
+      "correctAnswer": false,
+      "explanation": "Tecnicos de Nivel 1 operam sob supervisao de um Nivel 2 ou 3 e nao tomam decisoes baseadas nos resultados. (Fonte: Nossas certificacoes, Thermovisao)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Conforme diretrizes de inspecao, o cliente e o prestador de servicos devem concordar previamente com a categoria exigida do termografista antes de iniciar o trabalho.",
+      "correctAnswer": true,
+      "explanation": "A categoria exigida do termografista deve ser acordada expressamente pelo cliente e provedor antes do inicio dos trabalhos. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Candidatos a Categoria II e III devem possuir capacidade para realizar equacoes algebricas simples e utilizar calculadora cientifica basica.",
+      "correctAnswer": true,
+      "explanation": "A norma recomenda que candidatos das Categorias II e III realizem equacoes algebricas e utilizem calculadoras cientificas com familiaridade. (Fonte: Qualificacao ISO 18436-7, Abendi)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os termos nivel e categoria na certificacao da ABENDI possuem o mesmo significado pratico, indicando apenas o tempo de experiencia profissional.",
+      "correctAnswer": false,
+      "explanation": "Niveis referem-se a qualificacao e competencias, enquanto categorias determinam as areas especificas de aplicacao do profissional avaliado. (Fonte: Nossas certificacoes, Thermovisao)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A categoria de certificacao denominada Processo e focada estritamente na vistoria de componentes mecanicos basicos como motores e rolamentos industriais.",
+      "correctAnswer": false,
+      "explanation": "A categoria Processo e utilizada para monitorar temperaturas em processos produtivos inteiros, enquanto a categoria Mecanica foca em componentes como motores. (Fonte: Nossas certificacoes, Thermovisao)",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A certificacao em Termografia atende aos rigorosos criterios internacionais estabelecidos pelas normativas da ISO ____, abarcando suas categorias.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "18436-7"
+        }
+      ],
+      "explanation": "A norma que fundamenta os requisitos para qualificacao e avaliacao de pessoal em termografia e a ISO 18436-7. (Fonte: Qualificacao ISO 18436-7, Abendi)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Os profissionais certificados no Nivel ____ tem o mais alto conhecimento, sendo responsaveis por desenvolver os procedimentos e validar os resultados criticos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "3"
+        }
+      ],
+      "explanation": "Os especialistas de Nivel 3 desenvolvem os procedimentos avancados e atuam ativamente como validadores e auditores em termografia. (Fonte: Nossas certificacoes, Thermovisao)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O candidato a categoria I em termografia deve comprovar uma carga de ____ horas de treinamento direcionado para validar sua inscricao.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "32"
+        }
+      ],
+      "explanation": "A categoria I exige obrigatoriamente que o candidato comprove 32 horas de treinamento certificado juntamente com 12 meses de experiencia pratica. (Fonte: Qualificacao ISO 18436-7, Abendi)",
+      "difficulty": "medium"
+    }
+  ]
+}

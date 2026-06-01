@@ -1,0 +1,218 @@
+{
+  "category": "SPDA",
+  "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
+  "categoryOrder": 1,
+  "module": "Fundamentos de SPDA",
+  "moduleSubtitle": "Fisica dos raios, conceitos, tipos e categorias de protecao",
+  "moduleOrder": 0,
+  "trail": "Categorias de Proteção NBR 5419",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com o Guia PDA (SPDA + MPS), qual e a eficiencia percentual de interceptacao das correntes de raio oferecida pelo Nivel de Protecao I (LPL I)?",
+      "options": [
+        "80%",
+        "90%",
+        "95%",
+        "99%"
+      ],
+      "correctIndex": 3,
+      "explanation": "O Nivel de Protecao I (LPL I) oferece protecao maxima, interceptando 99% das correntes de raio, sendo obrigatorio para estruturas criticas. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual foi a mudanca conceitual introduzida na NBR 5419:2015 em relacao a nomenclatura utilizada para definir as categorias de rigor do SPDA (anteriormente conhecidas como classes de SPDA)?",
+      "options": [
+        "Substituicao pelo termo Zona de Protecao contra Raios (ZPR).",
+        "Substituicao pelo conceito de Nivel de Protecao (NP) ou LPL.",
+        "Eliminacao de categorias, passando a existir apenas um nivel unico.",
+        "Substituicao pelo Indice Isoceraunico de Risco (IIR)."
+      ],
+      "correctIndex": 1,
+      "explanation": "Entre as mudancas conceituais mais relevantes esta a substituicao do termo classe de SPDA pelo conceito de nivel de protecao (NP) ou LPL. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No dimensionamento do subsistema de captacao pelo metodo da esfera rolante, qual e o raio exigido para estruturas classificadas no Nivel de Protecao I (LPL I)?",
+      "options": [
+        "20 metros.",
+        "30 metros.",
+        "45 metros.",
+        "60 metros."
+      ],
+      "correctIndex": 0,
+      "explanation": "Para o LPL I (Protecao Maxima), o raio da esfera rolante exigido para o dimensionamento do subsistema de captacao e de 20 metros. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em relacao ao subsistema de descidas de um SPDA, qual e o espacamento medio maximo permitido para os condutores de descida nao naturais no Nivel de Protecao IV (LPL IV)?",
+      "options": [
+        "10 metros.",
+        "15 metros.",
+        "20 metros.",
+        "25 metros."
+      ],
+      "correctIndex": 2,
+      "explanation": "De acordo com a NBR 5419-3:2015, o espacamento para os condutores de descida e aneis na Classe IV (LPL IV) foi atualizado para 20 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo os criterios de definicao do LPL (Nivel de Protecao), quais estruturas sao exemplos classicos de aplicacao obrigatoria do Nivel de Protecao I (LPL I, Protecao Maxima)?",
+      "options": [
+        "Edificacoes residenciais e pequenas industrias.",
+        "Estruturas com explosivos, hospitais e centrais nucleares.",
+        "Edificios comerciais de grande porte, museus e bibliotecas.",
+        "Estruturas agricolas e galpoes de baixo valor economico."
+      ],
+      "correctIndex": 1,
+      "explanation": "O LPL I (Protecao Maxima) e obrigatorio para estruturas com explosivos, hospitais, centrais nucleares e areas de grande aglomeracao publica. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao utilizar o Metodo das Malhas no projeto de SPDA, o tamanho maximo do afastamento dos condutores e definido pelo Nivel de Protecao. Quais sao as dimensoes corretas para a malha no Nivel de Protecao I (LPL I) e Nivel de Protecao II (LPL II), respectivamente?",
+      "options": [
+        "5 x 5 metros (LPL I) e 10 x 10 metros (LPL II).",
+        "10 x 10 metros (LPL I) e 15 x 15 metros (LPL II).",
+        "15 x 15 metros (LPL I) e 20 x 20 metros (LPL II).",
+        "20 x 20 metros (LPL I) e 30 x 30 metros (LPL II)."
+      ],
+      "correctIndex": 0,
+      "explanation": "Para o Metodo das Malhas, a norma define que o afastamento maximo dos condutores e de 5 x 5 metros para a Classe I (LPL I) e de 10 x 10 metros para a Classe II (LPL II). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para o correto dimensionamento geometrico no metodo da esfera rolante, cada Nivel de Protecao estipula uma corrente minima de raio que o sistema consegue interceptar. Qual e a corrente minima associada ao Nivel de Protecao II (LPL II)?",
+      "options": [
+        "2,9 kA",
+        "5,4 kA",
+        "10,1 kA",
+        "15,7 kA"
+      ],
+      "correctIndex": 1,
+      "explanation": "O LPL II (Protecao Elevada) utiliza para seus parametros geometricos, como a esfera de 30m, uma corrente minima presumida interceptavel de 5,4 kA. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A ABNT NBR 5419:2015 eliminou a escolha arbitraria ou baseada em tabelas simples para a definicao do Nivel de Protecao (LPL). Como o LPL deve ser determinado de acordo com a norma em vigor?",
+      "options": [
+        "Por decisao exclusiva do Corpo de Bombeiros atraves de vistorias locais.",
+        "Pela escolha tecnica do arquiteto da obra com base na altura da edificacao.",
+        "Atraves do indice Td (dias de trovoada), padronizando LPL I para Td maior que 50.",
+        "Pelo resultado do calculo iterativo do Gerenciamento de Risco (Parte 2)."
+      ],
+      "correctIndex": 3,
+      "explanation": "O nivel de protecao adequado nao e escolhido arbitrariamente. Ele resulta do calculo iterativo do Gerenciamento de Risco (Parte 2), onde se compara o risco inicial (R) com o Risco Toleravel (RT). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sobre o Nivel de Protecao IV (LPL IV), qual e a corrente minima adotada para fins de dimensionamento e a qual tipo de aplicacao ele geralmente se destina?",
+      "options": [
+        "2,9 kA; destinado a centrais nucleares e hospitais.",
+        "10,1 kA; destinado a edificios comerciais de grande porte e museus.",
+        "15,7 kA; destinado a estruturas agricolas, galpoes de baixo valor e estruturas temporarias.",
+        "5,4 kA; destinado a industrias petroquimicas e refinarias."
+      ],
+      "correctIndex": 2,
+      "explanation": "O LPL IV, classificado como Protecao Basica, possui uma corrente minima de 15,7 kA e e aplicavel a estruturas agricolas, galpoes de baixo valor e estruturas temporarias. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Conforme a Tabela 3 da NBR 5419 que especifica os parametros relevantes da corrente dos raios, qual e o valor fixado da energia especifica (W/R) para a primeira descarga de retorno de polaridade positiva (1DR+) no Nivel de Protecao I (NP-I)?",
+      "options": [
+        "550 kJ/ohm",
+        "10.000 kJ/ohm",
+        "15.000 kJ/ohm",
+        "300 kJ/ohm"
+      ],
+      "correctIndex": 1,
+      "explanation": "Na Tabela 3, para a primeira descarga de retorno positiva (1DR+), o valor fixado da energia especifica (W/R) exigido para o Nivel de Protecao I (NP-I) e de 10.000 kJ/ohm. (Fonte: A fisica dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No metodo eletrogeometrico para projeto de SPDA, o raio da esfera rolante estipulado para o Nivel de Protecao IV (LPL IV) e de 60 metros.",
+      "correctAnswer": true,
+      "explanation": "O LPL IV, que confere a protecao basica do SPDA, tem o raio da esfera rolante fixado em 60 metros. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia / Professor Pablo Guimaraes)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Estruturas como edificios comerciais de grande porte, museus, bibliotecas e centros de dados exigem, compulsoriamente, a utilizacao do Nivel de Protecao I (LPL I, Protecao Maxima).",
+      "correctAnswer": false,
+      "explanation": "Estas estruturas enquadram-se nas aplicacoes tipicas do LPL II (Protecao Elevada), e nao do LPL I. O LPL I e voltado para estruturas com explosivos, hospitais, centrais nucleares, etc. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "De acordo com os valores atualizados na NBR 5419:2015, os Niveis de Protecao I e II (LPL I e LPL II) possuem o mesmo espacamento medio maximo exigido entre os condutores de descida nao naturais, sendo ambos de 10 metros.",
+      "correctAnswer": true,
+      "explanation": "Conforme a Tabela de distancias da versao 2015, tanto a Classe do SPDA I quanto a Classe II possuem o espacamento de 10 m para as descidas. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o Gerenciamento de Risco, se o Risco calculado (R) for maior que o Risco Toleravel (RT), o projetista deve testar e implementar medidas progressivamente do nivel de protecao mais rigoroso (LPL I) e ir relaxando para o LPL IV, ate encontrar a solucao mais barata.",
+      "correctAnswer": false,
+      "explanation": "O processo e inverso: implementam-se as medidas progressivamente dos niveis menos rigorosos para os mais rigorosos (do LPL IV ao LPL I), ate que o risco R seja menor ou igual a RT, evitando superdimensionamento. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na Tabela de parametros da corrente da NBR 5419, o valor de crista da Carga Eletrica total (Q) fixado para o Nivel de Protecao I (NP-I) da descarga de retorno positiva (RD+) e de 300 C.",
+      "correctAnswer": true,
+      "explanation": "Conforme a Tabela 3 da NBR 5419 que trata dos parametros relevantes da corrente dos raios, o valor fixado de Q para o NP-I no raio descendente positivo (RD+) e de 300 Coulombs. (Fonte: A fisica dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3)",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A eficiencia na interceptacao das descargas atmosfericas varia de acordo com o LPL. O Nivel de Protecao I (LPL I), utilizado para estruturas de protecao maxima, e projetado para oferecer protecao contra ____ por cento das correntes de raio.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "99"
+        }
+      ],
+      "explanation": "O LPL I oferece protecao maxima e intercepta 99% das correntes de raio, sendo exigido para locais criticos com risco de explosao e hospitais. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para projetar a captacao de uma estrutura com Nivel de Protecao II (LPL II) utilizando o Metodo das Malhas, a norma especifica que o afastamento maximo tolerado para a formacao dos retangulos (modulos da malha) e de ____ x 10 metros.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "10"
+        }
+      ],
+      "explanation": "O Metodo das Malhas exige dimensoes especificas de acordo com a classe do SPDA. Para a Classe II (LPL II), a dimensao maxima do modulo da malha e de 10 x 10 m. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para as edificacoes convencionais, frequentemente enquadradas no Nivel de Protecao III (LPL III), o dimensionamento no metodo eletrogeometrico utiliza uma esfera rolante com raio fixado em exatamente ____ metros.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "45"
+        }
+      ],
+      "explanation": "O LPL III e classificado como Protecao Convencional e utiliza para seus parametros fisicos (metodo da esfera rolante) um raio de 45 metros, operando com corrente minima de 10,1 kA. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Projetos Elétricos Industriais",
+  "moduleSubtitle": "Fundamentos, normas, dimensionamento e documentação de projetos",
+  "moduleOrder": 3,
+  "trail": "Fundamentos de Projetos Elétricos",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-10, a quais fases das instalacoes se aplicam as exigencias de projeto?",
+      "options": [
+        "Apenas consumo e manutencao",
+        "Somente distribuicao de alta tensao",
+        "Exclusivamente projeto e execucao",
+        "Geracao a consumo incluindo projetos"
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 10.1.2 afirma que a norma se aplica as fases de geracao a consumo, incluindo projetos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que as empresas devem manter atualizado nos projetos de suas instalacoes?",
+      "options": [
+        "Esquemas unifilares e aterramento",
+        "Apenas faturas de energia",
+        "Somente projeto arquitetonico",
+        "O manual dos reles"
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 10.2.3 obriga manter esquemas unifilares atualizados com sistema de aterramento.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quem tem a responsabilidade tecnica de assinar o projeto eletrico industrial?",
+      "options": [
+        "O proprietario da instalacao",
+        "Um profissional legalmente habilitado",
+        "Um trabalhador capacitado",
+        "O tecnico de seguranca"
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.3.8 exige que o projeto seja assinado por profissional legalmente habilitado.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Onde o projeto deve indicar a posicao dos dispositivos de manobra?",
+      "options": [
+        "No laudo ergonomico",
+        "Na ordem de servico",
+        "No memorial descritivo",
+        "No certificado do EPI"
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 10.3.9 alinea b determina essa inclusao no memorial descritivo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o projeto de instalacoes eletricas deve especificar obrigatoriamente?",
+      "options": [
+        "Reles estaticos",
+        "Sensores de presenca",
+        "Geradores de emergencia",
+        "Dispositivos com impedimento de reenergizacao"
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 10.3.1 obriga especificar dispositivos de desligamento com recurso para impedimento de reenergizacao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o memorial descritivo do projeto deve prever sobre o ambiente de instalacao?",
+      "options": [
+        "Precaucoes contra influencias externas",
+        "A cor dos condutores",
+        "O custo total dos materiais",
+        "Dimensionamento do ar condicionado"
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 10.3.9 alinea e exige prever precaucoes aplicaveis em face das influencias externas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual padrao de cores para manobra e citado para o memorial descritivo?",
+      "options": [
+        "Verde ligado e vermelho desligado",
+        "Verde desligado e vermelho ligado",
+        "Amarelo ligado e azul desligado",
+        "Preto ligado e branco desligado"
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.3.9 alinea b especifica Verde para desligado e Vermelho para ligado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a definicao de Baixa Tensao em projetos CA, segundo a norma?",
+      "options": [
+        "Abaixo de 50V",
+        "Superior a 50V e ate 1000V",
+        "Acima de 1000V",
+        "Somente 220V ou 380V"
+      ],
+      "correctIndex": 1,
+      "explanation": "O glossario define Baixa Tensao como superior a 50V e igual ou inferior a 1000V em CA.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o projeto eletrico deve definir sobre a conexao de aterramento?",
+      "options": [
+        "Isencao para maquinas rotativas",
+        "Uso exclusivo de hastes de cobre nu",
+        "A configuracao do esquema de aterramento",
+        "A profundidade exata dos pocos"
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 10.3.4 diz que o projeto deve definir a configuracao do esquema de aterramento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como devem ser validados materiais previstos em projetos de areas classificadas?",
+      "options": [
+        "Dispensam avaliacao se possuirem selo ISO",
+        "Testados pelo fabricante sem certificacao",
+        "Aprovados apenas pela CIPA local",
+        "Avaliados no Sistema Brasileiro de Certificacao"
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 10.9.2 exige avaliacao de conformidade no Sistema Brasileiro de Certificacao para areas explosivas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O projeto eletrico deve prever condicoes para a adocao de aterramento temporario.",
+      "correctAnswer": true,
+      "explanation": "Correto. O item 10.3.6 obriga a previsao de aterramento temporario nos projetos.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O projeto eletrico pode ignorar as normas regulamentadoras caso adote padroes internacionais.",
+      "correctAnswer": false,
+      "explanation": "Incorreto. O item 10.3.8 obriga o atendimento as NRs e regulamentacoes tecnicas oficiais.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O memorial descritivo do projeto dispensa a descricao de compatibilidade das protecoes com a instalacao.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 10.3.9 alinea g exige a descricao da compatibilidade dos dispositivos de protecao.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O projeto deve definir a obrigatoriedade ou nao da interligacao entre o condutor neutro e o de protecao.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. Essa definicao de projeto e exigida expressamente pelo item 10.3.4.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Projetos de instalacoes integrantes do SEP estao dispensados de incluir procedimentos para emergencias.",
+      "correctAnswer": false,
+      "explanation": "Incorreto. O item 10.2.5 alinea a exige acrescentar descricao dos procedimentos para emergencias.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O memorial descritivo do projeto deve especificar caracteristicas contra choques eletricos e ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "queimaduras"
+        }
+      ],
+      "explanation": "O item 10.3.9 alinea a exige protecao contra choques eletricos, queimaduras e outros riscos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O memorial descritivo exige a descricao do sistema de ____ de circuitos eletricos e equipamentos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "identificacao"
+        }
+      ],
+      "explanation": "O item 10.3.9 alinea c torna obrigatoria a descricao do sistema de identificacao.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para fins de projeto, Alta Tensao e definida como superior a 1000V em CA ou ____ em CC.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "1500V"
+        }
+      ],
+      "explanation": "O glossario principal estabelece o limite de 1500V em CC para caracterizar Alta Tensao.",
+      "difficulty": "hard"
+    }
+  ]
+}

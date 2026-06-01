@@ -26,11 +26,11 @@
       "statement": "Qual e a topologia base estrutural e o limite de dispositivos documentado para a aplicacao do protocolo de redundancia HSR?",
       "options": [
         "Topologia em estrela com ate 10 IEDs.",
-        "Topologia em anel fechado interligando ate 50 IEDs.",
         "Topologia em barramento linear sem limite de nos.",
+        "Topologia em anel fechado interligando ate 50 IEDs.",
         "Malha completa com roteadores de borda L3."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Conforme as fontes, o HSR (High-Availability Seamless Redundancy) e aplicado nativamente em aneis suportando ate 50 IEDs, permitindo reconfiguracao transparente.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Qual equipamento e tecnicamente necessario para conectar dispositivos comuns, que nao possuem suporte nativo a redundancia, em redes PRP ou HSR?",
       "options": [
-        "RedBox (Redundancy Manager in a Box).",
+        "Conversor analógico serial RS-232.",
         "Firewall fisico do nivel de estacao.",
         "Servidor OPC dedicado.",
-        "Conversor analógico serial RS-232."
+        "RedBox (Redundancy Manager in a Box)."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "O RedBox atua como gerenciador de redundancia intermediario, sendo inserido para acoplar dispositivos simples sem suporte nativo aos protocolos PRP ou HSR.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Qual facilidade operacional dos IEDs modernos baseados na norma introduz um risco de ciberseguranca que exige a adocao de politicas rigorosas?",
       "options": [
-        "A substituicao de reles eletromecanicos por fusiveis ultra-rapidos.",
         "O acesso remoto aos IEDs pela rede, que possibilita a troca de parametros a longa distancia.",
+        "A substituicao de reles eletromecanicos por fusiveis ultra-rapidos.",
         "A visualizacao local de leituras em paineis analogicos.",
         "A eliminacao completa de sistemas supervisorios locais."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A comodidade do acesso remoto possibilita alteracoes a distancia, o que pode resultar em desligamentos graves se o agente for mal-intencionado, exigindo politicas de acesso.",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Na terminologia da norma IEC 62439-3, como sao chamados tecnicamente os nos nativos que se conectam as duas redes LAN distintas do protocolo PRP?",
       "options": [
         "Nós SAN (Single Attached Node).",
-        "Nós DANP (Doubly Attached Node implementing PRP).",
         "RedBoxes Proxy Universais.",
+        "Nós DANP (Doubly Attached Node implementing PRP).",
         "Hosts DANH (High-availability Ring Node)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Nos nativos de PRP sao referidos na norma IEC 62439-3 como DANP para atestar sua conexao dupla as redes A e B (Informacao nao contida nas fontes. Recomenda-se verificacao independente).",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "Alem das restricoes logicas em servidores de dominio, que tipo de medida fisica os documentos de automacao recomendam para incrementar a.",
       "options": [
         "O emprego exclusivo de cabeamentos coaxiais em detrimento da fibra otica.",
-        "A implementacao real de dispositivos de bloqueio fisico impedindo acessos de conexao frontal.",
+        "A supressao compulsoria do protocolo de tempo nas interfaces industriais.",
         "A publicacao irrestrita das senhas operacionais nos manuais entregues em campo.",
-        "A supressao compulsoria do protocolo de tempo nas interfaces industriais."
+        "A implementacao real de dispositivos de bloqueio fisico impedindo acessos de conexao frontal."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "As fontes citam literalmente que dispositivos de bloqueio fisico podem ser implementados diretamente nos IEDs e nos switches, conferindo a rede um nivel de seguranca maior.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Quais restricoes sao comumente indicadas nas politicas de seguranca do servidor de dominio corporativo para mitigar as ameacas na rede de automacao?",
       "options": [
-        "Habilitacao de rotas abertas e indiscriminadas de VLAN para a rede Wi-Fi corporativa.",
         "Definicao de senhas fortes com caracteres especiais, prazo de validade das senhas e bloqueio massivo de portas USB.",
+        "Habilitacao de rotas abertas e indiscriminadas de VLAN para a rede Wi-Fi corporativa.",
         "Uso obrigatorio do antigo protocolo FTP transmitindo mensagens autenticadas em texto claro.",
         "Aceitacao universal de perfis genericos e conexoes moveis nao autorizadas."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "As recomendacoes de mitigacao em TI/OT incluem politicas de senhas complexas, regras de validade ciclica e o isolamento periferico atraves do bloqueio de portas USB.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "No fluxo operacional do protocolo de redundancia PRP, os IEDs ativos efetuam o envio das exatas mesmas tramas simultaneamente por ambas as.",
       "correctAnswer": true,
       "explanation": "As descricoes tecnicas mostram que o PRP transmite simultaneamente quadros clonados pelas redes independentes PRP-A e PRP-B.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O uso de modulos RedBox (Redundancy Manager in a Box) e proibido em arranjos de anel HSR, sendo seu emprego valido unicamente no protocolo.",
       "correctAnswer": false,
       "explanation": "A documentacao exibe diagramas atestando que os modulos RedBoxes sao perfeitamente aplicaveis em aneis HSR para pendurar na rede switches ou IEDs sem este protocolo nativo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Durante o funcionamento normal e saudavel de um anel sob o protocolo RSTP, o mecanismo elege uma porta para atuar com o status Discarding visando.",
       "correctAnswer": true,
       "explanation": "Para prevenir as tempestades de broadcast associadas aos loops infinitos, a topologia logica do RSTP bloqueia preventivamente o fluxo excedente na porta Alternate/Discarding.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Para auxiliar o log e auditoria de seguranca nos IEDs mais recentes, a ocorrencia e as metricas de invasoes de ciberseguranca podem ser.",
       "correctAnswer": true,
       "explanation": "A arvore de dados do equipamento dispoe o objeto CybSecEvt (Evento de Cyber Security) incorporado aos registros do LPHD0 para alertar quebras de defesa.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Na arquitetura moderna, a normativa IEC 62443 organiza as condicoes de defesa cibernetica na subestacao segmentando logicamente os ativos.",
       "correctAnswer": true,
       "explanation": "A IEC 62443 formaliza a defesa em profundidade estruturando o isolamento de componentes em Zonas de seguranca unidas por regras de Conduites de comunicacao (Informacao nao contida nas fontes. Recomenda-se verificacao independente).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Para administrar senhas com efetividade centralizada e proteger o sistema contra incidentes ciberneticos, a engenharia estabelece as restricoes e _____.",
+      "statement": "Para administrar senhas com efetividade centralizada e proteger o sistema contra incidentes ciberneticos, a engenharia estabelece as restricoes e ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Na infraestrutura pautada pelo protocolo High-Availability Seamless Redundancy (HSR), a capacidade escalavel imposta pelas diretrizes das _____.",
+      "statement": "Na infraestrutura pautada pelo protocolo High-Availability Seamless Redundancy (HSR), a capacidade escalavel imposta pelas diretrizes das ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Os computadores de automacao e relés convencionais providos de porta comunicante unica que requerem o encapsulamento de um equipamento RedBox para _____.",
+      "statement": "Os computadores de automacao e relés convencionais providos de porta comunicante unica que requerem o encapsulamento de um equipamento RedBox para ____.",
       "blanks": [
         {
           "index": 0,

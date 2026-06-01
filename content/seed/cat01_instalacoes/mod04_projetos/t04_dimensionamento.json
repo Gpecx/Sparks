@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Projetos Elétricos Industriais",
+  "moduleSubtitle": "Fundamentos, normas, dimensionamento e documentação de projetos",
+  "moduleOrder": 3,
+  "trail": "Dimensionamento de Instalações",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Como a suportabilidade termica dos equipamentos e condutores passivos e caracterizada no dimensionamento?",
+      "options": [
+        "Pelo pico da corrente assimetrica suportada em 10 milissegundos.",
+        "Pela relacao de agrupamento dos cabos nas bandejas.",
+        "Em kA eficaz durante 1 a 5 segundos, indicando o sobreaquecimento admissivel.",
+        "Pela queda de tensao maxima tolerada na partida."
+      ],
+      "correctIndex": 2,
+      "explanation": "A suportabilidade termica caracteriza o sobreaquecimento admissivel e e expressa em kA eficaz durante 1 a 5 segundos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No dimensionamento da protecao termica contra sobrecargas para motores, qual dispositivo e constante de tempo sao recomendados?",
+      "options": [
+        "Protecao diferencial 87M sem temporizacao.",
+        "Sobrecorrente de neutro 51N com tempo nulo.",
+        "Subtensao 27D com ajuste de 0.8 Un.",
+        "Sobrecarga termica 49RMS com constante de tempo entre 10 e 20 minutos."
+      ],
+      "correctIndex": 3,
+      "explanation": "A funcao 49RMS (sobrecarga termica) com constante de tempo na faixa de 10 a 20 minutos protege o motor.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O poder de interrupcao exigido no dimensionamento de um disjuntor ativo e definido como:",
+      "options": [
+        "A corrente maxima eficaz que o dispositivo e capaz de interromper sob condicoes especificas.",
+        "A corrente continua maxima da rede.",
+        "A corrente de magnetizacao inicial do transformador.",
+        "A suportabilidade eletrodinamica de curta duracao."
+      ],
+      "correctIndex": 0,
+      "explanation": "O poder de interrupcao e a corrente maxima eficaz do componente CA que o disjuntor e capaz de interromper.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o criterio base de dimensionamento para o ajuste minimo de corrente do rele de sobrecorrente de tempo inverso?",
+      "options": [
+        "Deve ser igual a corrente de partida do motor.",
+        "Deve ser de no minimo 1,5 vezes a corrente nominal de carga.",
+        "Deve ser sempre a metade da corrente de curto-circuito.",
+        "Deve ser inferior a corrente de magnetizacao."
+      ],
+      "correctIndex": 1,
+      "explanation": "O ajuste do rele deve ser maior ou igual a 1,5 vezes a corrente nominal de carga para garantir sensibilidade.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No dimensionamento da protecao de um transformador, a corrente de curto-circuito trifasico permanente varia tipicamente em qual faixa?",
+      "options": [
+        "0.5 a 2 vezes a corrente nominal.",
+        "1 a 3 vezes a corrente nominal.",
+        "6 a 20 vezes a corrente nominal.",
+        "Acima de 50 vezes a corrente nominal."
+      ],
+      "correctIndex": 2,
+      "explanation": "O curto-circuito permanente nos terminais de um transformador varia de 6 a 20 vezes a corrente nominal segundo a potencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como e calculado o tempo maximo de solicitacao permissivel para o dimensionamento do condutor primario face a um curto-circuito constante?",
+      "options": [
+        "O tempo e inversamente proporcional a temperatura admissivel.",
+        "O tempo e diretamente proporcional ao quadrado da corrente de falha.",
+        "O tempo e proporcional ao quadrado da secao transversal do condutor.",
+        "O tempo depende exclusivamente da tensao de operacao da rede."
+      ],
+      "correctIndex": 2,
+      "explanation": "Pela formula termica, o tempo admissivel e diretamente proporcional ao quadrado da secao do condutor.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No dimensionamento de disjuntores em 50 Hz sob a norma IEC 60056, qual e a relacao estipulada para o poder de fechamento por curto-circuito?",
+      "options": [
+        "Igual ao poder de interrupcao simetrico.",
+        "A raiz quadrada da potencia de curto-circuito.",
+        "1,5 vezes a corrente termica de curta duracao.",
+        "2,5 vezes o valor eficaz da corrente de interrupcao."
+      ],
+      "correctIndex": 3,
+      "explanation": "O poder de fechamento de um disjuntor em 50 Hz deve ser 2,5 vezes a corrente eficaz de interrupcao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em circuitos de motores controlados por contatores e fusiveis, como as funcoes de protecao devem ser distribuidas no dimensionamento?",
+      "options": [
+        "Os fusiveis asseguram a protecao contra curtos-circuitos violentos.",
+        "O contator elimina curtos-circuitos e o fusivel as sobrecargas leves.",
+        "A protecao diferencial substitui o uso de fusiveis e contatores.",
+        "O rele de subtensao atua sozinho como protecao de curto-circuito."
+      ],
+      "correctIndex": 0,
+      "explanation": "Se o dispositivo de interrupcao for um contator, este sera associado a fusiveis para assegurar a protecao contra curtos-circuitos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a regulagem tipica recomendada para o dimensionamento da funcao de rotor bloqueado (ANSI 51LR) em motores?",
+      "options": [
+        "Nivel de 1.0 In com 10 segundos de temporizacao.",
+        "Nivel de 2.5 In com temporizacao de 0.5 a 1 segundo.",
+        "Nivel de 6.0 In com trip instantaneo.",
+        "Nivel de 0.2 In dependente da classe de isolacao."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para rotor bloqueado (ANSI 51LR) recomenda-se o nivel de 2.5 In e temporizacao de 0.5 a 1 segundo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao dimensionar a protecao diferencial (87T) de um transformador de potencia, o que deve ser considerado para evitar falso trip durante o inrush?",
+      "options": [
+        "Utilizar uma curva de tempo extremamente inversa sem limite de corrente.",
+        "Aumentar o tap de corrente de atuacao para 20 vezes a corrente nominal.",
+        "Medir o harmonico de 2a ordem para bloquear a protecao (restricao H2).",
+        "Usar reles com constante de tempo de 1 hora."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para evitar trip intempestivo no inrush, deve-se medir o harmonico de 2a ordem para detectar a energizacao (restricao H2).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O dimensionamento das protecoes deve prever que um curto-circuito perturba a rede causando queda de tensao brusca nas proximidades da falha.",
+      "correctAnswer": true,
+      "explanation": "O curto-circuito perturba o ambiente da rede nas proximidades da falha ocasionando uma queda de tensao brusca.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao dimensionar o ajuste do rele de sobrecorrente, limitar a corrente de ajuste pelo limite termico do alimentador da liberdade para crescimento de carga sem alterar o rele.",
+      "correctAnswer": true,
+      "explanation": "Ajustar o rele pelo limite termico do alimentador permite crescimento sem a preocupacao com mudanca imediata no ajuste.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O dimensionamento do projeto eletrico dispensa a definicao formal da interligacao entre o condutor neutro e o condutor de protecao (PE), deixando a criterio do instalador.",
+      "correctAnswer": false,
+      "explanation": "A NR-10 exige que o projeto defina expressamente a obrigatoriedade ou nao da interligacao entre o condutor neutro e o de protecao.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No dimensionamento da carga de um Transformador de Corrente (TC), a impedancia da fiacao que corre nos eletrodutos entre o TC e a sala de controle deve ser ignorada.",
+      "correctAnswer": false,
+      "explanation": "A distancia e grande e deve-se considerar obrigatoriamente a impedancia dos fios de cobre na carga total do TC.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para o dimensionamento da protecao do transformador, a Norma ANSI estipula que a corrente maxima de curto-circuito simetrico admissivel e sempre de 25 vezes a corrente nominal.",
+      "correctAnswer": false,
+      "explanation": "A tabela ANSI mostra que a corrente maxima admissivel varia conforme a impedancia (ex: 25 In para 4%, 16,6 In para 6%).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No dimensionamento mecanico contra curtos-circuitos, a suportabilidade ____ dos condutores e barramentos avalia a resistencia aos esforcos e e expressa em kA pico.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "eletrodinâmica"
+        }
+      ],
+      "explanation": "A suportabilidade eletrodinamica e a caracteristica de resistencia mecanica aos esforcos fisicos dimensionada em kA pico.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O fator termico de um TC e a relacao entre a maxima corrente primaria admissivel em regime ____ e a sua corrente nominal, permitindo carga plena sem perda de vida util.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "permanente"
+        }
+      ],
+      "explanation": "O Fator Termico e a relacao entre a maxima corrente primaria admissivel em regime permanente e a sua corrente nominal.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O limite termico para dimensionar a ____ transversal minima do condutor de cobre no primario de um equipamento e calculado dividindo-se o limite termico da corrente por uma constante.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "seção"
+        }
+      ],
+      "explanation": "No calculo termico, usa-se a formula baseada no limite termico para encontrar a secao transversal minima.",
+      "difficulty": "hard"
+    }
+  ]
+}

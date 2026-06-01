@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "",
+  "categoryOrder": 0,
+  "module": "Geração Distribuída e Fotovoltaicos",
+  "moduleSubtitle": "Sistemas GD, fotovoltaicos, inversores, armazenamento e conexão à rede",
+  "moduleOrder": 5,
+  "trail": "Armazenamento de Energia (Baterias e BESS)",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "O que mede a métrica conhecida como 'profundidade de descarga' nas baterias de um sistema fotovoltaico?",
+      "options": [
+        "A vida útil projetada e o número de ciclos totais de recarga.",
+        "A tensão nominal medida exclusivamente em Volts (V).",
+        "O percentual da energia em estado máximo que pode ser extraída sem danificar a bateria.",
+        "O tempo total necessário para transferir a corrente das baterias ao inversor."
+      ],
+      "correctIndex": 2,
+      "explanation": "A profundidade de descarga (DOD) especifica quanto da energia armazenada em estado máximo pode ser extraída sem causar danos à bateria (Geração Distribuída de Energia Elétrica: Uma Revisão Sistemática da Literatura Distributed Generation of Electric Power: - APREPRO)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Em sistemas solares independentes (off-grid), qual é a principal função prática do controlador de carga?",
+      "options": [
+        "Sincronizar a energia gerada com a frequência de 60 Hz da concessionária local.",
+        "Direcionar a energia produzida para a carga e gerenciar a recarga das baterias.",
+        "Limitar as emissões de calor do painel fotovoltaico durante altas temperaturas.",
+        "Transformar diretamente a corrente contínua das baterias em corrente alternada."
+      ],
+      "correctIndex": 1,
+      "explanation": "O controlador de carga direciona a saída do arranjo fotovoltaico para a carga e para a recarga das baterias, regulando os fluxos energéticos (Geração Distribuída de Energia Elétrica: Uma Revisão Sistemática da Literatura Distributed Generation of Electric Power: - APREPRO)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "No debate sobre a regulamentação do BESS (Battery Energy Storage Systems) na ANEEL, o modelo apelidado de 'tarifa dupla' defende que as baterias devem ser cobradas em quais momentos?",
+      "options": [
+        "Apenas no instante em que a energia for injetada na rede.",
+        "Tanto no momento em que carregam a energia quanto ao fazer a injeção na rede.",
+        "Exclusivamente durante episódios conhecidos como curtailment (corte forçado).",
+        "Apenas no período noturno, quando a demanda de autoconsumo é maior."
+      ],
+      "correctIndex": 1,
+      "explanation": "A 'tarifa dupla' defendida pela área técnica propõe que os sistemas sejam tarifados tanto ao carregar a energia (consumo) quanto na sua injeção na rede (ANEEL retomará debate sobre regras para baterias em meio à pressão do mercado)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Ao criticar a tarifa dupla para baterias no Brasil, o diretor da ANEEL, Fernando Mosna, citou como contraponto o modelo positivo de qual país?",
+      "options": [
+        "Alemanha.",
+        "Reino Unido.",
+        "Estados Unidos.",
+        "Austrália."
+      ],
+      "correctIndex": 1,
+      "explanation": "Fernando Mosna comparou com o modelo do Reino Unido, onde os sistemas de armazenamento passaram a ser tarifados apenas no momento da injeção da energia (ANEEL retomará debate sobre regras para baterias em meio à pressão do mercado)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "O Sistema de Gerenciamento Inteligente de Bateria (BMS) protege baterias BESS contra vários riscos. Das opções abaixo, assinale a que NÃO é uma função do BMS:",
+      "options": [
+        "Proteção contra excesso de corrente de carga e sobrecarga.",
+        "Proteção contra descarga profunda nas células da bateria.",
+        "Controle de harmônicos e inversão automática da onda AC.",
+        "Balanceamento automático das células e proteção térmica."
+      ],
+      "correctIndex": 2,
+      "explanation": "O BMS atua internamente na bateria (DC) para proteção contra descarga, sobrecarga, temperatura e balanceamento, não sendo responsável pela inversão AC (SOUTH AMERICA - Revista Potência)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Em sistemas BESS de 2ª geração, como as baterias de lítio do modelo B BOX da BYD, a vida útil é estimada em quantos ciclos?",
+      "options": [
+        "Mil ciclos completos.",
+        "Duas mil recargas parciais.",
+        "Três mil ciclos completos.",
+        "Oito mil recargas parciais."
+      ],
+      "correctIndex": 2,
+      "explanation": "As baterias B BOX (Battery Box) apresentam como característica técnica uma vida útil de três mil ciclos completos (SOUTH AMERICA - Revista Potência)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Tratando-se de baterias utilizadas em veículos elétricos e infraestrutura off-grid, sob qual condição climática ocorre consumo maior e lentidão na recarga?",
+      "options": [
+        "Frio extremo.",
+        "Excesso de sombreamento.",
+        "Umidade atmosférica alta.",
+        "Pressão atmosférica reduzida."
+      ],
+      "correctIndex": 0,
+      "explanation": "No frio extremo, a bateria passa a consumir mais energia e o seu processo de carregamento também se torna mais lento (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Em sistemas isolados (off-grid), caso as placas não estejam gerando energia por ausência de sol, qual dispositivo atua para enviar a energia armazenada às cargas?",
+      "options": [
+        "O retificador de sinal.",
+        "O inversor string on-grid.",
+        "O controlador de carga.",
+        "O medidor bidirecional primário."
+      ],
+      "correctIndex": 2,
+      "explanation": "Quando o arranjo não gera energia, o controlador de carga extrai a energia previamente acumulada na bateria para abastecer a carga do sistema (Geração Distribuída de Energia Elétrica: Uma Revisão Sistemática da Literatura Distributed Generation of Electric Power: - APREPRO)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "A expansão das energias renováveis trouxe aumento nos episódios de corte forçado de geração. O armazenamento via BESS ajuda a atenuar esse problema, conhecido pelo termo:",
+      "options": [
+        "Flicker (cintilação).",
+        "Curtailment.",
+        "Ilhamento.",
+        "Bypass elétrico."
+      ],
+      "correctIndex": 1,
+      "explanation": "O armazenamento é vital para enfrentar preocupações de flexibilidade, incluindo os crescentes episódios de 'curtailment', que é o corte forçado da geração (ANEEL retomará debate sobre regras para baterias em meio à pressão do mercado)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Na adoção de baterias modernas para sistemas estacionários BESS, qual é a vantagem da energia específica da tecnologia Lítio Ferro Fosfato (LiFePO4)?",
+      "options": [
+        "É até quatro vezes maior do que os níveis das baterias de chumbo-ácido.",
+        "Sua energia específica é idêntica à das células a combustível de hidrogênio.",
+        "É menor, porém mais barata que as antigas baterias ventiladas.",
+        "Apresenta níveis dez vezes maiores do que os capacitores industriais."
+      ],
+      "correctIndex": 0,
+      "explanation": "A energia específica das baterias de íons de lítio (LiFePO4) chega a ser quatro vezes maior quando comparada aos níveis das tradicionais baterias chumbo-ácidas (SOUTH AMERICA - Revista Potência)."
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "Em sistemas isolados (off-grid), a eletricidade armazenada no banco de baterias depende do inversor para ser transformada de corrente contínua em corrente alternada.",
+      "correctAnswer": true,
+      "explanation": "O inversor atua transformando a corrente contínua (CC) originária das baterias em corrente alternada (CA) para uso dos equipamentos da edificação (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES).",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Baterias com a tecnologia de Lítio Ferro Fosfato (LiFePO4) oferecem uma maior profundidade de descarga sem prejudicar sua vida útil esperada.",
+      "correctAnswer": true,
+      "explanation": "As baterias LiFePO4 apresentam maior tolerância a variações térmicas e uma maior profundidade de descarga sem que haja prejuízo à sua vida útil projetada (SOUTH AMERICA - Revista Potência).",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "Para que uma geração solar seja considerada de 'fonte despachável', o armazenamento em baterias deve modular ao menos 50% da capacidade mensal.",
+      "correctAnswer": false,
+      "explanation": "Para ser fonte despachável, o armazenamento em baterias deve modular uma quantidade de, pelo menos, 20% da capacidade de geração mensal da central (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES).",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "O sistema fotovoltaico híbrido é configurado de forma independente da rede, mas dispõe de um gerador secundário para o abastecimento complementar das baterias.",
+      "correctAnswer": true,
+      "explanation": "O sistema fotovoltaico híbrido conta com painéis e um gerador elétrico secundário atuando em conjunto para abastecer baterias ou cargas CA/CC (Geração Distribuída de Energia Elétrica: Uma Revisão Sistemática da Literatura Distributed Generation of Electric Power: - APREPRO).",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "A realização do primeiro leilão federal exclusivo para a contratação de sistemas de armazenamento de energia (BESS) no Brasil foi confirmada pelo Ministério de Minas e Energia para 2026.",
+      "correctAnswer": true,
+      "explanation": "O ministro Alexandre Silveira confirmou que o primeiro leilão brasileiro direcionado a baterias de armazenamento está programado para ocorrer no ano de 2026 (ANEEL retomará debate sobre regras para baterias em meio à pressão do mercado).",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "A capacidade de carga é uma métrica utilizada para especificar o potencial de armazenamento de baterias, sendo classificada em unidades de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ampères-horas"
+        }
+      ],
+      "explanation": "Nos sistemas fotovoltaicos, a capacidade de carga é classificada na unidade de ampères-horas (Ah) (Geração Distribuída de Energia Elétrica: Uma Revisão Sistemática da Literatura Distributed Generation of Electric Power: - APREPRO)."
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "BESS é a sigla em inglês consolidada para Sistemas de Armazenamento em Energia e significa ____ Energy Storage Systems.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Battery"
+        }
+      ],
+      "explanation": "BESS é a sigla internacional para Battery Energy Storage Systems (SOUTH AMERICA - Revista Potência)."
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "hard",
+      "statement": "O ____ de carga é a peça do sistema que regula a energia e os níveis de tensão e corrente recebidos pelas baterias.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "controlador"
+        }
+      ],
+      "explanation": "O controlador de carga é fundamental pois regula a energia e os níveis de tensão e corrente que as baterias vão receber das placas (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES)."
+    }
+  ]
+}

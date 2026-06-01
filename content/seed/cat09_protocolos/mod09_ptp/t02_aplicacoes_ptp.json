@@ -13,11 +13,11 @@
       "statement": "Qual a precisao de sincronismo temporal exigida para calcular fasores e comparar ondas senoidais via Sampled Values?",
       "options": [
         "Cerca de 1 segundo.",
-        "Cerca de 1 milissegundo.",
         "Cerca de 1 microssegundo.",
+        "Cerca de 1 milissegundo.",
         "Cerca de 1 minuto."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A norma exige precisao critica na ordem de 1 microssegundo para a correta integracao de ondas senoidais e calculos fasoriais.",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "O que ocorre com a medicao se a rede nao atingir o sincronismo critico demandado pelo Barramento de Processo?",
       "options": [
         "A protecao atua mais rapido por precaucao.",
-        "Ocorre imprecisao ou erro na comparacao de ondas e calculo de fasores.",
+        "A rede converte os pacotes IP para formato GOOSE.",
         "O IED comuta automaticamente para comunicacao serial.",
-        "A rede converte os pacotes IP para formato GOOSE."
+        "Ocorre imprecisao ou erro na comparacao de ondas e calculo de fasores."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A falta de sincronismo impede o correto alinhamento das ondas senoidais entre diferentes equipamentos.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "Em que tipo de aplicacao da automacao o sincronismo de tempo em milissegundos atende plenamente aos requisitos funcionais?",
       "options": [
         "Substituicao de cabos de TC e TP.",
-        "Protecao diferencial de barras distribuida.",
         "Registro cronologico de alarmes e eventos no SCADA.",
+        "Protecao diferencial de barras distribuida.",
         "Medicao fasorial PMU de tempo real."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A precisao de milissegundos cumpre o papel no registro de sequencia de eventos e alarmes da IHM.",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "No diagnostico do servidor de tempo, o que indica que a fonte primaria apresenta uma falha critica ou desvio inaceitavel?",
       "options": [
-        "Um escorregamento excessivo ou grande diferenca de sincronismo medida no IED.",
-        "A recepcao continua de pacotes multicast GOOSE.",
         "O incremento do contador de pacotes UDP na interface.",
+        "A recepcao continua de pacotes multicast GOOSE.",
+        "Um escorregamento excessivo ou grande diferenca de sincronismo medida no IED.",
         "A falha de redundancia do anel RSTP."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Uma variacao elevada na diferenca de tempo evidencia escorregamento grave, caracterizando falha severa na origem.",
       "difficulty": "medium"
     },
@@ -91,11 +91,11 @@
       "statement": "Como o sistema garante a operacao continua do sincronismo no modulo de comunicacao caso o relogio primario falhe?",
       "options": [
         "Gerando tempos aleatorios no processador.",
-        "Utilizando um relogio secundario configurado previamente nas redes.",
+        "Descartando as medicoes afetadas sem gerar logs.",
         "Paralisando a comunicacao ate a troca manual da placa.",
-        "Descartando as medicoes afetadas sem gerar logs."
+        "Utilizando um relogio secundario configurado previamente nas redes."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Os diagnosticos de tempo exibem a configuracao de servidores redundantes (Primario e Secundario) para previnir perdas de clock.",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "De acordo com a arquitetura descrita nas fontes, o protocolo SNTP esta alocado em qual camada operacional?",
       "options": [
-        "Na pilha restrita de camada de Enlace (Ethernet pura).",
-        "Na malha GOOSE prioritario.",
         "Na pilha Soft-Time atuando sobre a malha de transporte UDP.",
+        "Na malha GOOSE prioritario.",
+        "Na pilha restrita de camada de Enlace (Ethernet pura).",
         "No Barramento de Processo exclusivista."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "O SNTP opera sobre a arquitetura UDP/IP padrao classificada como Soft-Time stack, suprindo a faixa temporal dos relatorios.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "O protocolo SNTP, por garantir precisao apenas na ordem dos milissegundos, e considerado tecnicamente insuficiente para as rotinas que operam.",
       "correctAnswer": true,
       "explanation": "Como a amostragem critica exige 1 microssegundo para exatidao fasorial, o SNTP atende apenas os modulos logicos e SCADA, necessitando de solucoes aprimoradas para SV.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No esquema interno de um IED, a variavel de status ClkFail mapeada sob o Logical Node da aplicacao alerta o sistema sempre que ha falha ou perda da.",
       "correctAnswer": true,
       "explanation": "O sinal ClkFail inserido no LN do equipamento (LPHD0) e o ponto nativo encarregado de alarmar perdas de sincronismo horologico na planta.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No registro Sequence of Events de um SPCS, a estampa de tempo definitiva e criada pelo servidor corporativo do SCADA apenas quando a informacao MMS.",
       "correctAnswer": false,
       "explanation": "A estampa de tempo (Time Stamp) e gravada na origem pelo proprio IED no exato momento do evento, gracas a fonte referencial de tempo sincronizada em campo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Durante o diagnostico de redes em laboratorios de subestacao, a avaliacao de logs do SNTP expoe a saude da conexao exibindo metricas de diferenca.",
       "correctAnswer": true,
       "explanation": "Os registros nativos listam dados cruciais como o Tx diff, monitorando o desvio temporal dos pacotes SNTP provindos do relogio fonte em relacao ao cristal local.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A arquitetura Hard Real-Time da IEC 61850 define que o sinal de clock event e o responsavel direto por governar a publicacao dos reports.",
       "correctAnswer": false,
       "explanation": "O clock event e a premissa de disparo periodico dos Sampled Values. Relatorios (MMS) e GOOSE sao orientados a mudanca estocastica de estado (data-change ou quality-change).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Para analisar com total precisao a matriz eletrica da rede de potencia, os modernos recursos de aquisicao fasorial sincronizada aplicados na IEC _____.",
+      "statement": "Para analisar com total precisao a matriz eletrica da rede de potencia, os modernos recursos de aquisicao fasorial sincronizada aplicados na IEC ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Nos diagnosticos extraidos de modulos de comunicacao operantes em campo, a constatacao de um escorregamento do tempo muito grande frente a base _____.",
+      "statement": "Nos diagnosticos extraidos de modulos de comunicacao operantes em campo, a constatacao de um escorregamento do tempo muito grande frente a base ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "No esquema de modelagem das condicoes do equipamento dentro da camada Application, o nó logico encarregado de notificar os alarmes de hardware e _____.",
+      "statement": "No esquema de modelagem das condicoes do equipamento dentro da camada Application, o nó logico encarregado de notificar os alarmes de hardware e ____.",
       "blanks": [
         {
           "index": 0,

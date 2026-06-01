@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Segundo o Anexo III da NR-10, o Curso Básico deve abordar os riscos típicos associados à eletricidade. Qual das opções abaixo lista corretamente riscos expressamente citados na programação mínima?",
       "options": [
-        "Choque elétrico, arcos elétricos e campos eletromagnéticos.",
-        "Tensão de passo, ruído contínuo e vibração ocupacional.",
         "Radiação não ionizante, arco elétrico e soterramento.",
+        "Tensão de passo, ruído contínuo e vibração ocupacional.",
+        "Choque elétrico, arcos elétricos e campos eletromagnéticos.",
         "Choque elétrico, radiação ionizante e esforço físico extremo."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Segundo o Anexo III (Item 2) da NR-10, a programação mínima do Curso Básico abrange os riscos: choque elétrico (mecanismos e efeitos), arcos elétricos, queimaduras, quedas e campos eletromagnéticos.",
       "difficulty": "easy"
     },
@@ -26,11 +26,11 @@
       "statement": "Durante a operação e manutenção de instalações elétricas, a NR-10 estabelece que medidas preventivas devem ser adotadas para riscos adicionais em ambientes elétricos. Quais são os riscos adicionais listados na norma?",
       "options": [
         "Exposição a ruído contínuo, agentes biológicos e asfixia mecânica.",
-        "Altura, confinamento, campos elétricos e magnéticos, explosividade, umidade, poeira, fauna e flora.",
+        "Movimentação tática de cargas e estresse térmico severo em caldeiras.",
         "Choque elétrico direto, arco elétrico e queimaduras de segundo grau nos membros superiores.",
-        "Movimentação tática de cargas e estresse térmico severo em caldeiras."
+        "Altura, confinamento, campos elétricos e magnéticos, explosividade, umidade, poeira, fauna e flora."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O item 10.4.2 da NR-10 determina de forma expressa que devem ser adotadas medidas preventivas para riscos adicionais, tais como: altura, confinamento, campos elétricos e magnéticos, explosividade, umidade, poeira, fauna e flora.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Para áreas com atmosferas potencialmente explosivas, o que a NR-10 exige quanto aos materiais, peças e equipamentos elétricos aplicados nessas instalações?",
       "options": [
-        "Devem possuir selo de garantia internacional emitido exclusivamente pela IEC.",
         "Devem ser avaliados quanto à sua conformidade, no âmbito do Sistema Brasileiro de Certificação.",
+        "Devem possuir selo de garantia internacional emitido exclusivamente pela IEC.",
         "Podem ser os mesmos aplicados em áreas não classificadas, desde que estejam fisicamente blindados.",
         "Devem possuir certificação de estanqueidade emitida apenas pelo Corpo de Bombeiros local."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O item 10.9.2 da NR-10 exige taxativamente que materiais, peças, equipamentos e sistemas para ambientes com atmosferas potencialmente explosivas sejam avaliados quanto à conformidade no âmbito do Sistema Brasileiro de Certificação.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Com base no glossário da NR-10, como se define a 'Atmosfera Explosiva'?",
       "options": [
-        "Mistura com o ar de substâncias inflamáveis (gás, vapor, névoa, poeira ou fibras) na qual, após a ignição, a combustão se propaga.",
         "Qualquer ambiente fabril que possua transformadores a óleo e painéis de alta tensão sem sistema de ventilação mecânica.",
+        "Mistura com o ar de substâncias inflamáveis (gás, vapor, névoa, poeira ou fibras) na qual, após a ignição, a combustão se propaga.",
         "Local contendo gás metano em concentrações superiores a 50% do volume do ar ambiente de trabalho.",
         "Espaço confinado subterrâneo onde a concentração natural de oxigênio é inferior a 19,5% durante a intervenção elétrica."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "O Glossário da NR-10 define Atmosfera Explosiva como a mistura com o ar, sob condições atmosféricas, de substâncias inflamáveis na forma de gás, vapor, névoa, poeira ou fibras, na qual após a ignição a combustão se propaga.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "De acordo com a NR-10, o que deve constar obrigatoriamente na alínea 'a' do memorial descritivo dos projetos de instalações?",
       "options": [
         "Apenas a indicação de posição dos dispositivos de manobra.",
-        "Especificação das características relativas à proteção contra choques elétricos, queimaduras e outros riscos adicionais.",
         "O cálculo exato da energia incidente do arco elétrico e a respectiva distância de segurança de aproximação.",
+        "Especificação das características relativas à proteção contra choques elétricos, queimaduras e outros riscos adicionais.",
         "O mapa de risco detalhado de todo o ambiente de trabalho onde o projeto será executado."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O item 10.3.9, alínea 'a', da NR-10 estabelece que o memorial descritivo deve conter a especificação das características relativas à proteção contra choques elétricos, queimaduras e outros riscos adicionais.",
       "difficulty": "easy"
     },
@@ -79,10 +79,10 @@
       "options": [
         "É o local isolado onde já ocorreu uma explosão por curto-circuito e que encontra-se sob investigação legal.",
         "É a área delimitada por barreiras de policarbonato para impedir o acesso a partes energizadas.",
-        "É formalmente definida como o local com potencialidade de ocorrência de atmosfera explosiva.",
-        "É um sinônimo exato de zona de risco, onde a aproximação só é permitida mediante técnicas especiais."
+        "É um sinônimo exato de zona de risco, onde a aproximação só é permitida mediante técnicas especiais.",
+        "É formalmente definida como o local com potencialidade de ocorrência de atmosfera explosiva."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Segundo o Glossário da NR-10, o termo 'Área Classificada' é definido como o 'local com potencialidade de ocorrência de atmosfera explosiva'.",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Qual é a definição normativa de 'Barreira' segundo o glossário da NR-10?",
       "options": [
-        "Envoltório contínuo de partes energizadas destinado a impedir absolutamente qualquer contato com as partes internas.",
         "Dispositivo físico que impede qualquer contato com as partes energizadas do circuito elétrico.",
+        "Envoltório contínuo de partes energizadas destinado a impedir absolutamente qualquer contato com as partes internas.",
         "Equipamento de proteção individual polimérico utilizado exclusivamente por trabalhadores capacitados.",
         "Ligação elétrica efetiva intencional à terra para garantir a total equipotencialidade do sistema."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O Glossário da NR-10 define Barreira como: 'dispositivo que impede qualquer contato com partes energizadas'. A alternativa 'A' refere-se ao conceito de Invólucro.",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "Segundo o glossário da NR-10, o que constitui um 'Invólucro'?",
       "options": [
         "Qualquer vestimenta de trabalho ignífuga que possua resistência comprovada a chamas e às radiações do arco elétrico.",
-        "O entorno não segregado de uma parte condutora energizada e facilmente acessível aos operadores.",
         "O envoltório de partes energizadas destinado a impedir qualquer contato dos trabalhadores com partes internas do sistema.",
+        "O entorno não segregado de uma parte condutora energizada e facilmente acessível aos operadores.",
         "O dispositivo de indução eletromagnética que isola o circuito elétrico primário do secundário de medição."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "Conforme o Glossário da NR-10, 'Invólucro' é o 'envoltório de partes energizadas destinado a impedir qualquer contato com partes internas', provendo proteção integral contra o contato acidental.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Qual grupo de riscos é especificamente listado na programação mínima do Curso Complementar (SEP) da NR-10?",
       "options": [
-        "Proximidade/contatos com partes energizadas, indução, descargas atmosféricas, estática, campos elétricos e magnéticos.",
-        "Exclusivamente arcos elétricos de baixa tensão, tensão de passo em redes primárias e exposição à radiação ionizante.",
         "Risco de explosões em ambientes confinados, asfixia súbita, queimaduras por substâncias químicas e intoxicação por gases.",
+        "Exclusivamente arcos elétricos de baixa tensão, tensão de passo em redes primárias e exposição à radiação ionizante.",
+        "Proximidade/contatos com partes energizadas, indução, descargas atmosféricas, estática, campos elétricos e magnéticos.",
         "Desenvolvimento de fibrilação ventricular isolada, paradas respiratórias severas e doenças ergonômicas crônicas."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Conforme o item 5 do Curso Complementar (Anexo III da NR-10), os riscos no SEP incluem proximidade/contatos com partes energizadas, indução, descargas atmosféricas, estática, campos elétricos e magnéticos, além de comunicação e trabalhos em altura.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "Segundo a NR-10, campos elétricos e magnéticos nas instalações, bem como a presença de fauna e flora no local de intervenção, são classificados como riscos adicionais para os quais devem ser adotadas medidas preventivas.",
       "correctAnswer": true,
       "explanation": "A afirmativa é verdadeira e reflete o item 10.4.2 da NR-10, o qual exige medidas preventivas para riscos adicionais mencionando especificamente os campos elétricos, magnéticos, bem como a fauna e flora locais.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Materiais e equipamentos destinados a ambientes com atmosferas potencialmente explosivas estão dispensados da avaliação do Sistema Brasileiro de Certificação, desde que possuam certificado internacional emitido pelo fabricante.",
       "correctAnswer": false,
       "explanation": "A afirmativa é falsa. O item 10.9.2 da NR-10 determina que equipamentos para atmosferas potencialmente explosivas devem obrigatoriamente ser avaliados no âmbito do Sistema Brasileiro de Certificação.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A programação do Curso Básico da NR-10 exclui o treinamento sobre arcos elétricos e queimaduras, restringindo essa temática exclusivamente ao Curso Complementar do SEP.",
       "correctAnswer": false,
       "explanation": "A afirmativa é incorreta. O Anexo III (Curso Básico), item 2, inclui explicitamente o treinamento sobre 'arcos elétricos' e 'queimaduras' para todos os trabalhadores autorizados.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A 'Tensão de Segurança' é conceituada no glossário da NR-10 simplesmente como sendo uma extra baixa tensão originada em uma fonte de segurança.",
       "correctAnswer": true,
       "explanation": "A afirmativa é verdadeira. O Glossário da NR-10 define 'Tensão de Segurança' como 'extra baixa tensão originada em uma fonte de segurança'.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Segundo a NR-10, as vestimentas de trabalho devem contemplar prioritariamente o nível de isolação dielétrica do material, não havendo exigência sobre influências eletromagnéticas na roupa.",
       "correctAnswer": false,
       "explanation": "A afirmação é falsa. O item 10.2.9.2 da NR-10 exige que as vestimentas contemplem a condutibilidade, inflamabilidade e influências eletromagnéticas.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O glossário da NR-10 define a Extra-Baixa Tensão (EBT) como tensão não superior a 50V em CA ou _____ em CC.",
+      "statement": "O glossário da NR-10 define a Extra-Baixa Tensão (EBT) como tensão não superior a 50V em CA ou ____ em CC.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O Anexo III da NR-10 lista, entre as medidas de controle do risco elétrico, os dispositivos a corrente de _____.",
+      "statement": "O Anexo III da NR-10 lista, entre as medidas de controle do risco elétrico, os dispositivos a corrente de ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O Anexo III da NR-10 exige que o treinamento de Primeiros Socorros inclua massagem cardíaca e a técnica de _____, intervenção capital no atendimento cardiorrespiratório.",
+      "statement": "O Anexo III da NR-10 exige que o treinamento de Primeiros Socorros inclua massagem cardíaca e a técnica de ____, intervenção capital no atendimento cardiorrespiratório.",
       "blanks": [
         {
           "index": 0,

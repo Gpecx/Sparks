@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Qual a finalidade principal dos testes periódicos em sistemas de proteção?",
       "options": [
-        "Aumentar a capacidade de interrupção térmica do disjuntor de alta tensão.",
         "Garantir a atuação confiável e correta na ocorrência de anomalias.",
+        "Aumentar a capacidade de interrupção térmica do disjuntor de alta tensão.",
         "Substituir integralmente os ensaios de tipo (Type Tests) dos fabricantes.",
         "Reduzir o consumo de energia da bobina de disparo do relé."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Sistemas inativos por muito tempo exigem ensaios periódicos para garantir atuação correta sob falta. (Fonte: Cabine Primária).",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Qual procedimento de segurança é exigido na energização durante os comissionamentos?",
       "options": [
-        "O uso obrigatório de comando remoto de disjuntores.",
         "A desativação global das proteções diferenciais de barra.",
+        "O uso obrigatório de comando remoto de disjuntores.",
         "A manutenção do aterramento temporário nas fases.",
         "O bloqueio mecânico direto das chaves seccionadoras."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "Deve-se utilizar comando remoto para afastar o operador e garantir sua integridade física na manobra. (Fonte: Ed54_fasc_protecao).",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "O que ocorre na etapa de inspeção da concessionária após a montagem da subestação?",
       "options": [
         "A concessionária elabora o projeto executivo de proteção.",
-        "Um técnico da distribuidora vistoria a conformidade com o projeto aprovado.",
+        "Os ensaios em fábrica (FAT) são repetidos na íntegra.",
         "O consumidor assume o comissionamento do medidor de faturamento.",
-        "Os ensaios em fábrica (FAT) são repetidos na íntegra."
+        "Um técnico da distribuidora vistoria a conformidade com o projeto aprovado."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Um técnico da distribuidora inspeciona se a instalação física atende ao projeto previamente aprovado. (Fonte: Cabine Primária).",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Qual documento guarda os relatórios de comissionamento e certificações segundo a NR-10?",
       "options": [
-        "Ordem de Serviço Restrita.",
         "Prontuário de Instalações Elétricas.",
+        "Ordem de Serviço Restrita.",
         "Diagrama Unifilar de Operação.",
         "Relatório de Ajustes do ONS."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O Prontuário deve ser atualizado com resultados de testes elétricos, inspeções e certificações. (Fonte: Cabine Primária).",
       "difficulty": "easy"
     },
@@ -91,11 +91,11 @@
       "statement": "Como é testada a proteção diferencial (87) utilizando a mala de injeção secundária?",
       "options": [
         "Simulando exclusivamente variações de frequência nos canais do relé.",
-        "Injetando simultaneamente correntes de operação (Idif) e restrição (Irest).",
         "Aplicando alta tensão contínua isoladamente nas entradas de potencial.",
+        "Injetando simultaneamente correntes de operação (Idif) e restrição (Irest).",
         "Emitindo saltos de vetor angulares puros."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O teste da função 87 injeta correntes simuladas para avaliar a rampa da região de operação (Idif x Irest). (Fonte: Ensaio de Reles Avançado_PECS).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Qual ensaio verifica a suportabilidade dielétrica de barramentos blindados novos?",
       "options": [
-        "Ensaio de tensão aplicada (Hipot).",
+        "Avaliação de resistência de contato.",
         "Medição da resistência de aterramento.",
         "Teste de saturação magnética de TCs.",
-        "Avaliação de resistência de contato."
+        "Ensaio de tensão aplicada (Hipot)."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "O equipamento Hipot realiza o ensaio de tensão aplicada para atestar a suportabilidade da isolação à alta tensão. (Fonte: Cabine Primária).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Conforme a NR-10, qual é a última etapa para considerar uma instalação desenergizada e segura para testes?",
       "options": [
-        "Impedimento mecânico de reenergização.",
-        "Constatação da ausência de tensão via detector.",
         "Instalação da sinalização de impedimento de reenergização.",
+        "Constatação da ausência de tensão via detector.",
+        "Impedimento mecânico de reenergização.",
         "Aterramento temporário da malha secundária."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "A sexta e última etapa obrigatória na desenergização (NR-10 10.5.1) é a sinalização de impedimento. (Fonte: Cabine Primária).",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Nas folhas de ensaio de transformadores, quais conexões definem o teste de isolação Rab?",
       "options": [
-        "Linha em Alta, Guard na Carcaça e Earth em Baixa.",
         "Linha em Alta, Guard em Baixa e Earth na Carcaça.",
+        "Linha em Alta, Guard na Carcaça e Earth em Baixa.",
         "Linha em Baixa, Guard na Carcaça e Earth em Alta.",
         "Linha na Carcaça, Guard em Alta e Earth em Baixa."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "O teste entre os enrolamentos de Alta e Baixa (Rab) exige Line na Alta, Earth na Baixa e Guard na Carcaça. (Fonte: Cabine Primária).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Ferramentas e dispositivos isolantes usados no comissionamento de alta tensão exigem testes elétricos periódicos ou ensaios de laboratório.",
       "correctAnswer": true,
       "explanation": "A NR-10 item 10.7.8 obriga submeter dispositivos isolantes a testes periódicos anuais ou especificados pelo fabricante. (Fonte: Cabine Primária).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A distribuidora de energia pode exigir relatórios de testes de comissionamento durante a vistoria de ligação da subestação.",
       "correctAnswer": true,
       "explanation": "Durante a vistoria, o técnico da distribuidora pode exigir laudos e relatórios dos testes de comissionamento. (Fonte: Cabine Primária).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O ensaio de relés digitais por injeção secundária exige a aplicação simulada de fasores de corrente e tensão pela mala de testes.",
       "correctAnswer": true,
       "explanation": "Malas de teste (ex: CE-6006) validam as funções injetando fasores de correntes e tensões configuráveis nos canais do relé. (Fonte: Ensaio de Reles Avançado_PECS).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O microhmímetro é empregado no comissionamento para atestar a resistência de isolação das muflas de cabos subterrâneos.",
       "correctAnswer": false,
       "explanation": "O microhmímetro testa exclusivamente a resistência de contato ôhmico (ex: contatos de disjuntores), e não a isolação. (Fonte: Cabine Primária).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Durante o teste comissionamento da função 51V, a mala de testes deve injetar variação de corrente simultânea à variação de tensão.",
       "correctAnswer": true,
       "explanation": "A função 51V é sobrecorrente com restrição de tensão; o ensaio simula as duas grandezas para aferir a curva mista. (Fonte: Ensaio de Reles Avançado_PECS).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O ensaio não-destrutivo focado na detecção de pontos de sobreaquecimento nas conexões da subestação é a inspeção por _____.",
+      "statement": "O ensaio não-destrutivo focado na detecção de pontos de sobreaquecimento nas conexões da subestação é a inspeção por ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Antes de aplicar o aterramento temporário em ensaios, a equipe deve obrigatoriamente constatar a _____ de tensão no circuito.",
+      "statement": "Antes de aplicar o aterramento temporário em ensaios, a equipe deve obrigatoriamente constatar a ____ de tensão no circuito.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O relatório de comissionamento de transformadores a óleo registra a avaliação do líquido isolante conhecida como teste de rigidez _____.",
+      "statement": "O relatório de comissionamento de transformadores a óleo registra a avaliação do líquido isolante conhecida como teste de rigidez ____.",
       "blanks": [
         {
           "index": 0,

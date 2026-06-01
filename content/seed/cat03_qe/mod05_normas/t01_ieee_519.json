@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Normas de Qualidade da Energia",
+  "moduleSubtitle": "IEEE 519, IEC 61000, EN 50160 e PRODIST",
+  "moduleOrder": 4,
+  "trail": "IEEE 519",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o foco principal de aplicabilidade dos limites recomendados pela norma IEEE 519 nas instalacoes eletricas?",
+      "options": [
+        "Apenas equipamentos eletronicos individuais isolados.",
+        "Sistemas de distribuicao de energia no ponto de acoplamento.",
+        "Rigorosamente os geradores sincronos de grande porte.",
+        "Sistemas de armazenamento por baterias em corrente continua."
+      ],
+      "correctIndex": 1,
+      "explanation": "O manual Solucoes WEG e o documento ABB ressaltam fortemente que a norma IEEE 519 diz respeito aos sistemas de distribuicao no ponto de acoplamento comum e nao aos equipamentos individuais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No contexto da norma IEEE 519, o que significa a sigla PCC, local onde os parametros de qualidade devem ser avaliados?",
+      "options": [
+        "Ponto de Controle Continuo.",
+        "Potencial de Curto-Circuito.",
+        "Ponto de Acoplamento Comum.",
+        "Perfil de Carga Capacitiva."
+      ],
+      "correctIndex": 2,
+      "explanation": "O catalogo de mitigacao da WEG define a sigla PCC como Ponto de Acoplamento Comum (Point of Common Coupling), o local exato da analise de limites.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a norma IEEE 519, qual e a recomendacao para o limite maximo de Distorcao Harmonica Total de Tensao (THD V) no PCC para a grande maioria das aplicacoes?",
+      "options": [
+        "Menor ou igual a 3 por cento.",
+        "Menor ou igual a 5 por cento.",
+        "Menor ou igual a 8 por cento.",
+        "Menor ou igual a 10 por cento."
+      ],
+      "correctIndex": 1,
+      "explanation": "A documentacao tecnica de Solucoes WEG especifica que a recomendacao normativa da IEEE 519 no PCC e de que a THD de tensao seja menor ou igual a 5 por cento.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De que forma a atualizacao da IEEE 519-2022 lida com as interharmonicas durante o calculo dos indicadores THD e TDD?",
+      "options": [
+        "Elas sao multiplicadas pelo valor da componente fundamental em regime.",
+        "Elas sao especificamente excluidas do somatorio nos calculos.",
+        "Elas recebem peso dobrado na identificacao de anomalias na planta.",
+        "Elas atuam como a unica variavel na composicao da distorcao."
+      ],
+      "correctIndex": 1,
+      "explanation": "O documento de revisao da ABB sobre a IEEE 519-2022 destaca na definicao dos limites que o calculo da THD e TDD exclui especificamente as interharmonicas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas tabelas que determinam os limites de distorcao harmonica de corrente da IEEE 519, o que o parametro Isc representa fisicamente?",
+      "options": [
+        "A corrente induzida por sequencia zero nos transformadores a seco.",
+        "A corrente de demanda maxima medida de forma confiavel pelo relogio.",
+        "A maxima corrente de curto-circuito disponivel no PCC.",
+        "A corrente de magnetizacao do circuito de aterramento."
+      ],
+      "correctIndex": 2,
+      "explanation": "As notas explicativas da Tabela 2 presentes no manual da WEG e da ABB definem Isc expressamente como a maxima corrente de curto-circuito no Ponto de Acoplamento Comum.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ate qual ordem harmonica as novas regras da IEEE 519-2022 determinam que os componentes devem ser contabilizados no somatorio de THD e TDD?",
+      "options": [
+        "Ate a ordem 25.",
+        "Ate a ordem 40.",
+        "Ate a ordem 50.",
+        "Ate a ordem 100."
+      ],
+      "correctIndex": 2,
+      "explanation": "A revisao da ABB sobre as alteracoes da IEEE 519-2022 especifica na propria definicao metodologica que THD e TDD consideram os componentes harmonicos ate a quinquagesima ordem.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em relacao a atualizacao da IEEE 519-2022, qual e o limite determinado especificamente para os harmonicos pares de ordem 2, 4 e 6?",
+      "options": [
+        "Nao possuem tolerancia na norma e devem ser totalmente suprimidos.",
+        "Eles sao limitados a 25 por cento dos limites dos impares da tabela.",
+        "Eles sao limitados a 50 por cento dos limites estabelecidos para os impares.",
+        "Possuem margens de tolerancia rigorosamente iguais aos impares."
+      ],
+      "correctIndex": 2,
+      "explanation": "O guia de atualizacao da IEEE 519-2022 da ABB afirma que para harmonicos de ordem menor ou igual a 6, os pares sao limitados a 50 por cento dos limites impares mostrados na tabela.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Conforme o documento da ABB, qual mudanca sutil porem importante ocorreu na equacao de calculo da TDD na transicao para a versao IEEE 519-2022?",
+      "options": [
+        "O denominador mudou da corrente fundamental para a corrente total (Raiz quadrada da soma dos quadrados da fundamental e harmonica).",
+        "O limite foi indexado pela tensao de linha media ao inves da corrente de fase nominal.",
+        "Substituiu-se a corrente de demanda permanente pela impedancia efetiva do barramento isolado.",
+        "Passou a utilizar apenas os picos assimetricos, descartando os valores eficazes reais."
+      ],
+      "correctIndex": 0,
+      "explanation": "A nota da ABB explica tecnicamente que o denominador do calculo do TDD foi alterado de Ifund para Itotal, sendo Itotal a composicao RSS (Root Sum Square) da corrente fundamental e harmonica.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para uma instalacao onde o calculo da relacao Isc/IL resulte num valor menor que 20, qual e a Distorcao de Demanda Total (TDD) maxima permitida pela norma IEEE 519?",
+      "options": [
+        "3,0 por cento.",
+        "5,0 por cento.",
+        "8,0 por cento.",
+        "12,0 por cento."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Tabela II da IEEE 519 documentada no manual de Solucoes WEG define que, para a razao Isc/IL menor que 20, o limite correspondente da TDD e exatamente 5,0 por cento.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com o documento tecnico de revisao da IEEE 519-2022 feito pela ABB, qual parametro normativo e aconselhado para instalacoes cujo foco primario seja composto de Inverter-Based Resources (IBR)?",
+      "options": [
+        "Devem cumprir os limites da propria IEEE 519-2022 multiplicados por um fator duplo de seguranca termica.",
+        "A norma obriga a isolacao galvanica e as isenta de regulamentacao na barra principal.",
+        "Os usuarios destas fontes sao direcionados e avaliados por normas aplicaveis distintas como IEEE 1547 ou IEEE 2800.",
+        "Eles estao sujeitos apenas as tolerancias harmonicas impares de decima ordem."
+      ],
+      "correctIndex": 2,
+      "explanation": "A nota da ABB destaca que a secao 5.2 sobre limitacao de distorcao direciona que instalacoes primariamente com IBR devem utilizar normas correspondentes e aplicaveis como a IEEE 1547 ou IEEE 2800.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na essencia de sua criacao e aplicabilidade, a norma IEEE 519 e primordialmente formulada com o intuito de testar, avaliar e certificar pecas e equipamentos eletricos de modo isolado no mercado industrial.",
+      "correctAnswer": false,
+      "explanation": "Tanto o material da WEG quanto a analise da ABB salientam expressamente que as recomendacoes da IEEE 519 dizem respeito aos sistemas de distribuicao agregados no PCC, e nao as avaliacoes de equipamentos individuais isolados.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Do ponto de vista pratico na engenharia, os manuais descrevem que nao e economicamente viavel e nem e plenamente possivel buscar a eliminacao total de todas as correntes harmonicas de um sistema eletrico de potencia.",
+      "correctAnswer": true,
+      "explanation": "O catalogo tecnico de Solucoes da WEG afirma textualmente que existem inumeras formas de minimiza-las para que fiquem dentro dos limites aceitaveis, pois nao e economicamente viavel nem possivel eliminar todas as harmonicas.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao analisar os parametros IL expostos pelas tabelas da norma IEEE 519, este valor retrata fundamentalmente a corrente maxima demandada pela carga correspondendo puramente ao componente na frequencia fundamental no PCC.",
+      "correctAnswer": true,
+      "explanation": "A legenda oficial da Tabela de distorcoes descrita na publicacao da WEG e da ABB define formalmente IL como maxima corrente demandada pela carga (componente fundamental de frequencia) no PCC.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A adocao de sistemas inversores acoplados e alimentados por retificadores atuantes em topologias de 12 pulsos ou 18 pulsos consistem em solucoes que comprovadamente mitigam harmonicos atingindo os limites da IEEE 519.",
+      "correctAnswer": true,
+      "explanation": "O manual da WEG relata repetidas vezes nas secoes de acionamentos CA que a utilizacao de inversores com retificadores em 12 e 18 pulsos constitui uma solucao tradicional que atende aos limites recomendados pela IEEE 519.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No tocante as alteracoes trazidas na revisao normativa IEEE 519-2022 para sistemas providos de geradores de emergencia isolados (back-up gensets), tornou-se obrigatorio que a Distorcao de Demanda Total de corrente jamais ultrapasse os 5,0 por cento.",
+      "correctAnswer": false,
+      "explanation": "O estudo da ABB explica que houve inclusao da nota (c) para esclarecer que essa limitacao de 5,0 por cento de TDD nao precisa ser mandatoriamente cumprida para instalacoes de backup ilhadas, sendo a distorcao de tensao na verdade o fator chave.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A abreviatura que designa o Ponto de Acoplamento Comum, local mandatorio estipulado na instalacao para medir os limites consolidados da norma IEEE 519, e identificada globalmente pelo acronimo ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "PCC"
+        }
+      ],
+      "explanation": "As publicacoes de analises e manutencao da WEG bem como da ABB referenciam repetidas vezes esse no nodal de testes pelo acronimo oriundo do ingles PCC (Point of Common Coupling).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A avaliacao da distorcao global baseada na norma IEEE 519-2022 estipula na formacao do numerador para TDD e THD a obrigatoriedade de contemplar frequencias limitadas a ordem 50, com a exclusao especifica no calculo das ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "interharmonicas"
+        }
+      ],
+      "explanation": "Na secao referente as mudancas metodologicas, a ABB destaca nos quadros as definicoes e as frisa salientando que os componentes que configuram as interharmonicas (interharmonics) sao especificamente excluidas da conta de THD e TDD.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Aplicando-se a tabela de restricao de distorcao harmonica da demanda base (TDD) para proporcoes muito distantes das fontes, constata-se que em locais com razao de robustez Isc/IL classificada rigorosamente superior ao fator de 1000, e admissivel tolerar um maximo percentual TDD igual a ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "20,0"
+        }
+      ],
+      "explanation": "De acordo com os valores da Tabela limite referenciada na IEEE 519-2014/2022 presente nos materiais da WEG e ABB, o valor exato apontado para a distorcao TDD na ultima lacuna da razao acima de 1.000 equivale a 20,0 por cento.",
+      "difficulty": "hard"
+    }
+  ]
+}

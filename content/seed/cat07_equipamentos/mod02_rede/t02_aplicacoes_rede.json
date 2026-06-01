@@ -5,7 +5,7 @@
   "module": "Infraestrutura de Rede SPCS",
   "moduleSubtitle": "Switches, fibra, VLANs, topologias e redundância",
   "moduleOrder": 1,
-  "trail": "Aplicações de Rede SPCS",
+  "trail": "Aplicações em SPCS",
   "trailOrder": 1,
   "questions": [
     {
@@ -13,11 +13,11 @@
       "statement": "Nos projetos praticos de subestacoes digitais, qual problema as empresas evitam ao priorizar cabos de fibra otica em detrimento aos cabos coaxiais de cobre na interligacao com o switch?",
       "options": [
         "A incompatibilidade do cobre com a transmissao de Sampled Values em Multicast.",
-        "A susceptibilidade do laco metalico as fortes interferencias eletromagneticas (EMI) presentes no patio.",
         "A incapacidade dos links metalicos suportarem redes logicas particionadas por VLAN.",
+        "A susceptibilidade do laco metalico as fortes interferencias eletromagneticas (EMI) presentes no patio.",
         "A incompatibilidade do cobre em trafegar as mensagens GOOSE orientadas ao protocolo Spanning Tree."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "No ambiente agressivo do sistema eletrico as suscetibilidades de inducao recomendam fortemente a adocao da fibra otica que e imune as interferencias eletromagneticas radiadas e conduzidas.",
       "difficulty": "easy"
     },
@@ -27,10 +27,10 @@
       "options": [
         "A substituicao compulsiva do firmware de todos os switches L2 por firmwares de roteadores L3.",
         "A insercao de um Firewall transparente convertendo o trafego para links puramente seriais.",
-        "A utilizacao operacional de modulos conversores RedBox intermediando a integracao destas SANs as redes compostas.",
-        "O encapsulamento das portas do IED aplicando exclusividade com cabos CAT-5 blindados."
+        "O encapsulamento das portas do IED aplicando exclusividade com cabos CAT-5 blindados.",
+        "A utilizacao operacional de modulos conversores RedBox intermediando a integracao destas SANs as redes compostas."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "O modulo auxiliar RedBox (Redundancy Manager in a Box) atua como um tradutor ou gateway logico possibilitando plugar IEDs de porta simples diretamente nas redes PRP ou HSR redundantes.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "No design e mapeamento estrutural das redes baseadas na IEC 61850, o barramento dedicado em trazer de forma instantanea as amostras digitalizadas de TC e TP do patio ate os IEDs e denominado:",
       "options": [
-        "Barramento de Engenharia.",
-        "Barramento Corporativo (Corporate Bus).",
         "Barramento de Processo (Process bus).",
+        "Barramento Corporativo (Corporate Bus).",
+        "Barramento de Engenharia.",
         "Barramento de Estacao (Station bus)."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "A documentacao expoe que a infraestrutura logica e fisica que conecta LNs de medicao imediata dos sensores (patio) as cabines e o barramento de processo.",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Caso a infraestrutura do projeto especifique o protocolo de tolerancia a falha ininterrupta HSR para integrar os IEDs da cabine, qual topologia fisica limite deve ser obedecida?",
       "options": [
-        "Conexao em anel fechado suportando convencionalmente interligacao direta em cadeias com ate 50 IEDs.",
-        "Estrutura bifurcada conectada livremente a quatro estacoes com redes corporativas em estrela paralela.",
         "Arranjo linear abrangendo repetidores isolados limitando a transmissao em blocos de 5 reles.",
+        "Estrutura bifurcada conectada livremente a quatro estacoes com redes corporativas em estrela paralela.",
+        "Conexao em anel fechado suportando convencionalmente interligacao direta em cadeias com ate 50 IEDs.",
         "Implementacao malha (mesh) roteada compulsoriamente integrando mais de 500 switches IP de borda."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "As indicacoes topologicas e manuais delimitam os aneis High-Availability Seamless Redundancy (HSR) em ate 50 maquinas compativeis agrupadas compondo o fechamento sem o emprego de roteadores.",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Para executar plenamente a priorizacao do trafego (QoS) nos equipamentos da LAN, quantos bits reservados no cabecalho padronizado da Ethernet marcam ativamente o grau de urgencia de despacho?",
       "options": [
         "Um unico bit binario discriminando ativo ou nulo.",
-        "Exatos 3 bits providos pelo cabecalho da IEEE 802.1Q.",
+        "Injecao arbitraria na secao de 12 bytes do tamanho real do PDU.",
         "Sequencia macica de 16 bits de QoS estendido.",
-        "Injecao arbitraria na secao de 12 bytes do tamanho real do PDU."
+        "Exatos 3 bits providos pelo cabecalho da IEEE 802.1Q."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A especificacao padronizada introduziu os 3 bits cruciais (etiqueta PRI do padrao 802.1Q/p) que classificam perante o switch a importancia da mensagem, garantindo prioridade ao pacote de tempo critico.",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Na gestao de VLANs em grandes plantas, se uma mensagem de trip for originada pelo rele com omissao logica no seu cabecalho do tag restritivo (pacote untagged), o que ocorrera indevidamente no Switch L2?",
       "options": [
-        "O quadro e destruido e deletado nas portas da planta impedindo operacao manual.",
         "O pacote assimila integralmente o tag da VLAN nativa aberta burlando as paredes do confinamento e escoando indevidamente pelo link principal.",
+        "O quadro e destruido e deletado nas portas da planta impedindo operacao manual.",
         "A prioridade da mensagem retrocede convertendo seu transporte unicamente a ciclos de integridade do MMS.",
         "Ocorre desligamento por falha de tempo provocando parada automatica nas filas do equipamento destino."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Emissoes untagged assumem tacitamente o VLAN ID nativo da porta, evadindo aos bloqueios direcionados as malhas puristas segregadas e provocando atuacoes acidentais em unidades distantes.",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "A principal e decisiva vantagem em adotar tecnologias contemporaneas como as arquiteturas em PRP ou HSR operando em fluxos continuos perante o padrao obsoleto suportado pelo Spanning Tree (STP) atrela-se a:",
       "options": [
         "Nao exigirem cabeamento imune a inducoes em alta tensao.",
-        "Facultarem aplicacao baseada em cabos RS-485 para telemetria.",
         "Propiciarem recuperacao em tempo zero e comutacao transparente desprovida de quaisquer descartes ou extravio da transmissao perante um dano fisico.",
+        "Facultarem aplicacao baseada em cabos RS-485 para telemetria.",
         "Omitirem a obrigatoriedade da inclusao de estampa de sincronismo temporal (Time Allowed To Live) nos frames da rede ethernet."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "Estes novos padroes espelham e redobram o laco assegurando a manutencao transparente da topologia sem o bloqueio inibitorio ou perdas (zero recovery time) que afetam algoritmos como o STP/RSTP nas quebras de cordao optico.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "No fluxo comunicativo implementado pela norma base, os chamados protocolos MMS efetuam conversacoes tipificadas como cliente-servidor orientadas estritamente na direcao vertical enquanto a malha GOOSE e horizontal.",
       "correctAnswer": true,
       "explanation": "O MMS realiza a passagem aciclica de solicitacoes (cliente e servidor/vertical), enquanto o modelo de subscricao GOOSE foca transferencias horizontais extremamente rapidas peer-to-peer (IED para IED).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Para assegurar robustez inquestionavel perante quebras unitarias da fibra otica, a aplicacao rigorosa do protocolo PRP obriga o fechamento nativo dos equipamentos operando em um desenho topologico em forma de Anel interligado.",
       "correctAnswer": false,
       "explanation": "A logica e fundamentacao do PRP impoe a criacao de duas vias radiculares, separadas e independentes correndo em redes divergentes (LAN A e LAN B) rechacando o emprego em lacos ou formato anelar que pertencem ao metodo HSR.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Nos ensaios de rompimento documentados baseados unicamente em topologias comutadas sob amparo dos primeiros algoritmos Spanning Tree puros (STP), ocorrem severas lacunas de bloqueio comunicativo provocado pelas defasagens exigidas de avaliacao e leitura do relogio interno de reestruturacao L2.",
       "correctAnswer": true,
       "explanation": "O mecanismo antigo passa por cronometragens obrigatorias e defasagens nas operacoes fixas e transicoes (ex.: estagio logico Listening, Learning), gerando cortes longos inaceitaveis diante aplicacoes velozes.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A exigencia da implantacao massiva de comutadores categorizados como Switches Gerenciaveis no ambiente industrial lastreia-se na imperatividade base de segmentar o isolamento das malhas utilizando as tecnologias de particionamento (VLANs).",
       "correctAnswer": true,
       "explanation": "Os manuais de design assinalam expressamente que Switches nao administrados omitem aplicacao de VLANs e QoS, itens fundamentais na gerencia de desempenho isolando logicamente as tempestades do agrupamento de portas.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Seguindo os preceitos de implantacao abordados pela norma no que compete ao Barramento de Processo em instalacoes gigantescas, a solucao Alternativa 3 de via unificada impoe obrigatoriamente a multiplicacao na adocao de roteadores limitadores focando conter as vazoes Sampled Values.",
       "correctAnswer": false,
       "explanation": "O material expositivo exibe a Alternativa 3 focando barramentos consolidados singulares isentos da utilidade de roteadores porem em contrapartida cobrando infraestruturas altissimas de suporte de banda centralizada no switch.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Buscando organizar e rotular as passagens de pacotes confiaveis diante das imensas sobrecargas normais de processamento nos componentes L2 a padronizacao implementa os niveis de exigencia de trafego inserindo a tag de prioridade baseada formalmente no rotulo IEEE 802.1_____.",
+      "statement": "Buscando organizar e rotular as passagens de pacotes confiaveis diante das imensas sobrecargas normais de processamento nos componentes L2 a padronizacao implementa os niveis de exigencia de trafego inserindo a tag de prioridade baseada formalmente no rotulo IEEE 802.1____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Nos exames de redes baseadas em reestruturacoes em Anel com Spanning Tree avaliados no configurador grafico do Switch a interrupcao metodica imposta administrativamente impedindo a reproducao do loop nas portas ociosas recebe a status logico discriminatorio identificado em rede como _____.",
+      "statement": "Nos exames de redes baseadas em reestruturacoes em Anel com Spanning Tree avaliados no configurador grafico do Switch a interrupcao metodica imposta administrativamente impedindo a reproducao do loop nas portas ociosas recebe a status logico discriminatorio identificado em rede como ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O impedimento deliberado do escapamento transitorio de datasets para alem das paredes virtuais da respectiva planta industrial obtido travando e aplicando as listas restritivas de redes nos uplink de roteadores compoe a tecnica vital denominada de _____ da mensagem GOOSE.",
+      "statement": "O impedimento deliberado do escapamento transitorio de datasets para alem das paredes virtuais da respectiva planta industrial obtido travando e aplicando as listas restritivas de redes nos uplink de roteadores compoe a tecnica vital denominada de ____ da mensagem GOOSE.",
       "blanks": [
         {
           "index": 0,

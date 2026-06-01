@@ -1,0 +1,218 @@
+{
+  "category": "SPDA",
+  "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
+  "categoryOrder": 1,
+  "module": "Projeto de SPDA",
+  "moduleSubtitle": "Projeto, risco, posicionamento, volume, materiais e documentacao",
+  "moduleOrder": 3,
+  "trail": "Avaliação de Risco e Necessidade de SPDA",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NBR 5419, os danos causados por descargas atmosfericas sao agrupados em tres tipos fundamentais. O que representam os tipos D1, D2 e D3, respectivamente?",
+      "options": [
+        "Ferimentos a seres vivos, Danos fisicos a estrutura, Falhas de sistemas eletricos e eletronicos.",
+        "Danos fisicos, Danos financeiros, Danos ambientais.",
+        "Falhas mecanicas, Incendios, Danos eletricos.",
+        "Danos estruturais, Ferimentos a animais, Curto-circuito em redes."
+      ],
+      "correctIndex": 0,
+      "explanation": "Sao considerados tres tipos de danos: os ferimentos aos seres vivos (D1), os danos fisicos as estruturas (D2) e as falhas nos sistemas eletricos e eletronicos (D3). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No calculo para o gerenciamento de risco de SPDA, o parametro Ng e de extrema importancia. O que ele representa fisicamente?",
+      "options": [
+        "A area de exposicao equivalente da estrutura.",
+        "O numero de dias de trovoada por ano em uma regiao.",
+        "A densidade de descargas atmosfericas para a terra por quilometro quadrado por ano.",
+        "A probabilidade de danos a seres vivos por tensoes de passo."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Ng e o numero de descargas atmosfericas para a terra por km2 por ano, sendo um parametro fundamental no calculo de risco. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O estudo para determinar a protecao avalia as fontes de danos onde acontecem as descargas. A fonte de dano denominada S1 corresponde a qual tipo de ocorrencia?",
+      "options": [
+        "Descargas na linha eletrica que adentra a edificacao.",
+        "Descargas diretas na estrutura em estudo.",
+        "Descargas em areas proximas a estrutura.",
+        "Descargas em areas proximas as linhas eletricas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O estudo avalia as fontes de danos: descargas diretamente na estrutura (S1), proximo a estrutura (S2), nas linhas eletricas (S3) e proximas as linhas (S4). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao realizar a analise de risco baseada na NBR 5419, o projetista avalia as possiveis perdas. O que caracteriza a perda categorizada como L1?",
+      "options": [
+        "Perda de memoria cultural.",
+        "Perda de valor economico.",
+        "Perda de vidas humanas.",
+        "Perda de instalacao de servico ao publico."
+      ],
+      "correctIndex": 2,
+      "explanation": "A ABNT considera os seguintes tipos de perdas: perda de vidas humanas (L1); perda de instalacao de servico ao publico (L2); perda de memoria cultural (L3); e perda de valor economico (L4). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante a avaliacao de risco, os valores calculados sao comparados aos indices tipicos toleraveis (RT). Qual e o Risco Toleravel (RT) estabelecido pela NBR 5419 para o risco de perda de vida humana (R1)?",
+      "options": [
+        "10^-3 (1 em 1.000 por ano)",
+        "10^-4 (1 em 10.000 por ano)",
+        "10^-5 (1 em 100.000 por ano)",
+        "10^-6 (1 em 1.000.000 por ano)"
+      ],
+      "correctIndex": 2,
+      "explanation": "Para a Perda de Vidas Humanas (Risco R1), o criterio mais rigoroso da norma estabelece o Risco Toleravel (RT) aceitavel como sendo de 1 em 100.000 por ano (10^-5). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na divisao dos riscos em diversas componentes para analise detalhada, o que representa a componente de risco RA?",
+      "options": [
+        "Danos fisicos causados por centelhamentos perigosos dentro da edificacao.",
+        "Falhas no sistema que tem origem em impulsos eletromagneticos (LEMP).",
+        "Risco de ferimentos em seres vivos causados por tensoes de passo e de toque devido a descargas na estrutura.",
+        "Sobretensoes induzidas nas redes eletricas que entram na estrutura."
+      ],
+      "correctIndex": 2,
+      "explanation": "A componente RA trata de riscos a ferimentos em seres vivos que sejam causados devido tensao de passo e de toque decorrentes de descargas na estrutura. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na avaliacao dos componentes de risco (R1, R2, R3, R4), como proceder caso um dos riscos se refira a um tipo de perda para a qual os objetos de risco nao estao presentes na edificacao (ex: um galpao automatizado sem a presenca de pessoas)?",
+      "options": [
+        "Aplica-se o valor padrao de RT = 10^-5 para nao omitir calculos estatisticos.",
+        "O respectivo risco (ex: R1) torna-se igual a zero, pois nao e possivel perder o que nao se tem.",
+        "Transfere-se a probabilidade daquela perda para o risco de perda economica (R4).",
+        "A norma exige que se assuma sempre a presenca minima de uma pessoa para calculo de R1."
+      ],
+      "correctIndex": 1,
+      "explanation": "Se na edificacao em estudo nao ha presenca de pessoas, entao torna-se zero o risco R1, pois os riscos sao referentes a algum tipo de perda, e nao e possivel perder aquilo que nao se tem. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A decisao sobre a necessidade de protecao e sua abrangencia e baseada na comparacao entre o risco calculado (R) e o risco toleravel (RT). Qual a diretriz correta do processo iterativo do gerenciamento de risco?",
+      "options": [
+        "Se R <= RT, a estrutura necessita apenas de MPS, dispensando sempre o SPDA externo.",
+        "O nivel de protecao e escolhido antes do calculo, com base exclusiva no Td (dias de trovoada).",
+        "Se R > RT, implementam-se medidas de protecao progressivamente do LPL IV ao LPL I ate que R fique menor ou igual a RT.",
+        "A estrutura esta automaticamente protegida se o fator Ng for menor que 2, sem necessidade de calcular R."
+      ],
+      "correctIndex": 2,
+      "explanation": "O resultado do calculo iterativo do Gerenciamento de Risco dita que, caso R > RT, implementam-se medidas de protecao progressivamente (do LPL IV ao LPL I) ate que R fique menor ou igual a RT. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para calcular cada uma das componentes de risco na NBR 5419-2, utiliza-se a equacao Rx = Nx x Px x Lx. Qual o significado de cada um desses tres fatores matematicos, respectivamente?",
+      "options": [
+        "Nx: Numero de dias de trovoada; Px: Protecao existente; Lx: Localizacao da estrutura.",
+        "Nx: Nivel de protecao (LPL); Px: Probabilidade de dano; Lx: Limite toleravel.",
+        "Nx: Numero de eventos perigosos por ano; Px: Probabilidade de dano a estrutura; Lx: Perda consequente.",
+        "Nx: Numero de pessoas na zona; Px: Perda economica; Lx: Limite da area de exposicao."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para o calculo de cada uma das componentes de risco, utiliza-se a equacao Rx = Nx x Px x Lx, onde Nx e o numero de eventos perigosos por ano, Px e a probabilidade de dano a estrutura e Lx e a perda consequente. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "As componentes de risco RU, RV e RW estao ligadas aos perigos originados por descargas que atingem diretamente as linhas de servico (S3) que alimentam a edificacao. Como a norma permite reduzir esses tres riscos a zero?",
+      "options": [
+        "Adotando SPDA Classe I (LPL I) na estrutura principal, com captores Franklin a 10 metros de altura.",
+        "Instalando uma resistencia de aterramento inferior a 1 Ohm no quadro geral de distribuicao (QGD).",
+        "Interligando a blindagem continua dos cabos protegidos ao barramento de equipotencializacao na entrada da linha.",
+        "Substituindo os condutores de descida de cobre por cabos isolados do tipo HVI."
+      ],
+      "correctIndex": 2,
+      "explanation": "Todos esses tres riscos (RU, RV, RW) podem ser zero se o tipo de linha for cabo protegido/em dutos metalicos e se essa blindagem for interligada, na entrada da linha, ao mesmo barramento de equipotencializacao que o equipamento. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A area de exposicao equivalente (Ae) da estrutura e determinada exclusivamente pelo comprimento e largura da edificacao, ignorando a altura, visto que descargas atmosfericas atingem areas planas verticalmente.",
+      "correctAnswer": false,
+      "explanation": "A area de exposicao equivalente (Ae) e calculada considerando o comprimento (L), a largura (W) e tambem a altura (H) da edificacao, incluindo a area circular ao redor influenciada pela altura (Ae = LW + 2LH + 2WH + pi*H2). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para facilitar a avaliacao dos riscos e as medidas de protecao, o projetista pode dividir a estrutura em diversas zonas de estudo, onde o risco total da edificacao sera a soma do risco calculado para cada uma de suas zonas.",
+      "correctAnswer": true,
+      "explanation": "E possivel dividir a estrutura em zonas de estudo (ZS) e avaliar cada componente separadamente. A planilha permite escolher zonas e o risco total sera a soma de cada risco de sua respectiva zona. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A componente R3 avalia o risco de perda de patrimonio ou memoria cultural. Em edificios residenciais comuns ou comerciais sem valor historico, esse risco assumira valor zero na analise de gerenciamento de risco.",
+      "correctAnswer": true,
+      "explanation": "Em um edificio residencial, onde nao ha a presenca de equipamento eletroeletronico para servico essencial ao publico e nem patrimonio cultural, os riscos R2 e R3 sao iguais a zero. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O risco de falha de sistemas internos provocado por impulsos eletromagneticos (LEMP) decorrentes de descargas diretas na estrutura (fonte S1) e modelado matematicamente pela componente de risco RM.",
+      "correctAnswer": false,
+      "explanation": "O risco relativo a falha no sistema interno originado por LEMPs de descargas diretas na edificacao (S1) e a componente RC. A componente RM refere-se a falhas por LEMP de descargas proximas a edificacao (S2). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Com as atualizacoes trazidas na edicao da ABNT NBR 5419:2026, as perdas L2 (servico ao publico) e L4 (valor economico) deixaram de integrar o escopo da Parte 1, mantendo-se o foco apenas nas perdas L1 (vida humana) e L3 (patrimonio cultural) para a analise basica de necessidade.",
+      "correctAnswer": true,
+      "explanation": "As perdas classificadas como L2 (perda de servico ao publico) e L4 (perda de valor economico) deixam de integrar o corpo normativo da Parte 1. Permanecem apenas as perdas L1 e L3. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A frequencia media anual previsivel, ou seja, o numero de eventos perigosos diretos em uma estrutura por ano (fator ____), e calculada multiplicando-se a densidade de descargas atmosfericas (Ng) pela area de exposicao equivalente (Ae).",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Nd"
+        }
+      ],
+      "explanation": "O parametro Nd representa o numero anual de eventos perigosos, calculado pelo produto da densidade de raios (Ng) pela area de exposicao (Ae). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A componente de risco que avalia os danos fisicos a estrutura provocados por centelhamentos perigosos dentro da edificacao, e que podem originar incendio ou explosao, e tecnicamente identificada pela sigla ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "RB"
+        }
+      ],
+      "explanation": "A componente RB esta relacionada aos danos fisicos que podem ser causados por centelhamentos dentro da edificacao originando risco de incendio ou explosao. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Antes do mapeamento detalhado por sensores e satelites do INPE com a grandeza Ng, a antiga versao de 2005 calculava empiricamente a densidade de descargas usando mapas que mostravam a quantidade media de dias de trovoadas por ano, uma variavel identificada pela sigla ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Td"
+        }
+      ],
+      "explanation": "O Ng era calculado pela equacao Ng = 0,04 x Td^1,25, onde Td e a quantidade media de dias que ocorreram trovoadas ao longo de um ano. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "hard"
+    }
+  ]
+}

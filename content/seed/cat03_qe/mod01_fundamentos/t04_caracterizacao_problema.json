@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Fundamentos de Qualidade da Energia",
+  "moduleSubtitle": "Conceitos, indicadores, disturbios e legislacao",
+  "moduleOrder": 0,
+  "trail": "Caracterização do Problema de QE",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao os impactos economicos diretos gerados pela falta de qualidade da energia eletrica em instalacoes industriais?",
+      "options": [
+        "O custo financeiro da perda de participacao no mercado de energia a longo prazo.",
+        "Perda de producao, danos a equipamentos e recursos irrecuperaveis.",
+        "Evacuacao de edificios residenciais vizinhos em cenarios criticos.",
+        "Reclamacoes trabalhistas e previdenciarias devido a reducao da eficiencia e seguranca."
+      ],
+      "correctIndex": 1,
+      "explanation": "O documento Analise de Disturbios do IFPB (baseado em Fuchs; Masoum) divide os impactos em diretos, indiretos e de seguranca, classificando explicitamente a perda de producao e os danos a equipamentos como impactos economicos diretos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O disturbio de afundamento de tensao afeta diversos equipamentos de usuarios finais. Quais dispositivos de tecnologia sao citados na literatura tecnica como sensiveis a esse problema?",
+      "options": [
+        "Lampadas incandescentes antigas e resistores puros de aquecimento isolado.",
+        "Transformadores de potencial passivos operando a vazio.",
+        "Motores de inducao convencionais operando estritamente sem carga no eixo.",
+        "Controladores logicos programaveis, drives de velocidade e equipamentos de robotica."
+      ],
+      "correctIndex": 3,
+      "explanation": "Segundo a dissertacao do IFPB, a queda de tensao afeta o equipamento do usuario em termos de mau funcionamento de computadores, controladores de processo, controladores logicos programaveis, drives de velocidade ajustavel e robotica.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento e essencial para monitorar, realizar o diagnostico do desempenho de sistemas eletricos e obter registros detalhados para garantir conformidade normativa?",
+      "options": [
+        "Banco de capacitores de compensacao estatica e dinamica.",
+        "Analisador de qualidade de energia.",
+        "Rele de sobrecorrente de tempo extremamente inverso.",
+        "Transformador de potencial capacitivo de distribuicao."
+      ],
+      "correctIndex": 1,
+      "explanation": "O guia comercial da Wrindu afirma que os analisadores de qualidade de energia sao ferramentas essenciais para monitorar e diagnosticar o desempenho, garantindo fornecimento confiavel e conformidade com normas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo dados de viabilidade na mitigacao de disturbios, como a distorcao harmonica afetou financeiramente uma siderurgica especifica antes das devidas correcoes no sistema?",
+      "options": [
+        "Gerou enormes prejuizos na ordem de 150 mil dolares por ano devido a falhas sucessivas de motores.",
+        "Reduziu as faturas de energia mensais, contudo elevou substancialmente as multas reativas capacitivas.",
+        "Aumentou os danos e curtos-circuitos exclusivamente nos paineis solares do sistema secundario.",
+        "Causou a perda total e cassacao da licenca de operacao critica junto a concessionaria local."
+      ],
+      "correctIndex": 0,
+      "explanation": "O documento sobre Analisadores da Wrindu cita o caso real de uma siderurgica que identificou distorcao harmonica que causava prejuizos de 150 mil dolares por ano em falhas de motores.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na metodologia de estudos especificos para conexao de cargas, se a concessionaria constatar a existencia de problemas gerados por cargas perturbadoras, de quem e a responsabilidade por instalar equipamentos de correcao?",
+      "options": [
+        "Exclusivamente e mandatoriamente do Operador Nacional do Sistema Eletrico em alta tensao.",
+        "Apenas da distribuidora local, independentemente do tipo de disturbio provocado.",
+        "Do usuario ou da distribuidora, sendo as responsabilidades financeiras e tecnicas apuradas nos proprios estudos.",
+        "De empresas independentes e terceirizadas detentoras das Demais Instalacoes de Transmissao."
+      ],
+      "correctIndex": 2,
+      "explanation": "O PRODIST Modulo 8, item 138, determina que se houver problema de qualidade por causa perturbadora, a instalacao de correcoes deve ser providenciada pelo usuario ou distribuidora, de acordo com as responsabilidades apuradas nos estudos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na literatura tecnica pertinente a qualidade da energia, quais disturbios sao apontados como tendo um impacto obvio e imediatamente perceptivel nas instalacoes devido a paradas subitas?",
+      "options": [
+        "Pequenos desequilibrios de tensao cumulativos ao longo de dezenas de anos.",
+        "Distorcao harmonica de ordens impares e de faixa lateral de baixa densidade.",
+        "Presenca constante e cronica de ruido branco gaussiano em barramentos isolados.",
+        "Afundamentos (sags), interrupcoes temporarias e transientes eletromagneticos."
+      ],
+      "correctIndex": 3,
+      "explanation": "A dissertacao do IFPB, com base em Elphick et al., ressalta que o impacto economico e imediatamente perceptivel devido a danos ou tempo de inatividade, sendo esse o caso particularmente de quedas (sags), interrupcoes e transientes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Conforme a metodologia do PRODIST para gerir reclamacoes de tensao em regime permanente, qual e a acao inicial obrigatoria que a distribuidora deve efetuar se o usuario nao possuir medidor permanente instalado?",
+      "options": [
+        "Efetuar inspecao tecnica no local e realizar a medicao instantanea do valor eficaz de duas leituras com um intervalo de tempo de 5 minutos.",
+        "Substituir imediatamente de modo preventivo os cabos do ramal de ligacao e os conectores primarios do barramento.",
+        "Emitir de imediato o laudo tecnico contendo as penalidades por infracoes devido ao excesso de harmonicos do consumidor.",
+        "Instalar de antemao o sistema de medicao permanente de 168 horas antes de se deslocar para qualquer verificacao pontual no medidor."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 121 (a) do PRODIST Modulo 8 exige claramente que a concessionaria efetue inspecao tecnica para avaliar a reclamacao, incluindo a medicao instantanea no ponto de conexao de duas leituras, com intervalo minimo de 5 minutos entre elas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Considerando o retorno financeiro da instalacao de analisadores de qualidade de energia em setores sensiveis como Data Centers, o que foi diagnosticado pelas concessionarias em um caso pratico apresentado?",
+      "options": [
+        "O monitoramento conseguiu triplicar o faturamento por permitir desligar grupos geradores sem riscos adicionais.",
+        "A reducao do tempo de inatividade das operacoes em 40 por cento, conseguindo evitar pagamentos de multas no valor de meio milhao de dolares.",
+        "Os analisadores digitais causaram falhas intermitentes nos roteadores devido ao intenso envio de logs em nuvem sem latencia.",
+        "O tempo morto das quedas cresceu em virtude da complexidade tecnica introduzida pelos equipamentos da distribuidora."
+      ],
+      "correctIndex": 1,
+      "explanation": "O artigo guia da Wrindu relata um caso onde os operadores de Data Centers europeus reduziram o tempo de inatividade em 40 por cento, o que na pratica evitou severas multas de US$ 500 mil relacionadas a interrupcoes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Se a distribuidora realizar o diagnostico no barramento e descobrir que disturbios da Qualidade da Energia estao sendo originados por usuarios perturbadores vizinhos ao reclamante, o que determina o padrao oficial de analise?",
+      "options": [
+        "Exigir legalmente a desconexao forcada da unidade consumidora perturbadora em ate tres dias ininterruptos.",
+        "Fornecer e custear passivamente filtros passivos para cada motor indutivo detectado no relatorio no momento da falha.",
+        "Notificar esses referidos usuarios perturbadores oficialmente, recomendando e estabelecendo as acoes tecnicas a serem desenvolvidas.",
+        "Transferir no sistema interno as multas geradas por transitorios diretamente para as faturas de media tensao do usuario causador."
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme o PRODIST Modulo 8, no item 133(c), verificada a existencia de usuarios perturbadores de QE na regiao de analise, a distribuidora deve notifica-los, recomendando acoes a serem desenvolvidas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sob o espectro do diagnostico por metodos avancados na pesquisa computacional para sinais distorcidos, qual fator tecnico proporciona superioridade na robustez ao ruido do algoritmo VMD em comparacao as falhas conhecidas na decomposicao EMD?",
+      "options": [
+        "A dependencia direta das tecnicas empiricas sobre a transformacao de valores discretos puros de Laplace com amortecimento duplo.",
+        "A utilizacao de filtro passa-baixa de Wiener de forma embutida e parametrizada em seu proprio processo iterativo de atualizacao matematica.",
+        "O emprego de conversores pseudo-aleatorios exclusivos para correntes harmonicas de frequencias sempre superiores a base de 10kHz estaticos.",
+        "A obrigatoriedade de amostragem sincrona via receptores sem fio GPS impedindo as falsas defasagens lineares."
+      ],
+      "correctIndex": 1,
+      "explanation": "De acordo com o estudo cientifico do IFPB sobre analise de disturbios, a VMD ganha maior robustez no ambiente de ruido, superando as perdas do EMD, justamente devido ao seu funcionamento baseado no filtro de Wiener embutido em cada iteracao modal.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Segundo a teoria economica dos disturbios, os prejuizos derivados de ocorrencias de problemas da energia manifestam-se inteiramente de forma abrupta ou instantanea, nao existindo registros e categorias de danos por efeito progressivo ao longo da duracao da maquina.",
+      "correctAnswer": false,
+      "explanation": "O referencial de Analise de Disturbios do IFPB aponta (baseado em Elphick et al.) que, embora alguns casos sejam imediatos, em outros casos o impacto so e observado com o tempo, podendo citar o envelhecimento de equipamentos.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o processo das medicoes permanentes para caracterizar a qualidade estipulada pelo PRODIST, caso ocorra simultaneamente no circuito medido uma Variacao de Tensao de Curta Duracao (VTCD), o intervalo da metrica fixo em 10 minutos deve, por regra, ser expurgado da amostragem global.",
+      "correctAnswer": true,
+      "explanation": "O item 86 e seguintes do PRODIST (Modulo 8) determina formalmente que na ocorrencia de VTCD ou interrupcoes longas que poluam os indices macro de DRP ou harmonicas, o intervalo correspondente a estes 10 minutos e expurgado e substituido.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em instalacoes sensiveis, se for levada em consideracao as manifestacoes de flutuacao de tensao que levam ao fenomeno denominado cintilacao (flicker), percebe-se que as lampadas com reatores eletronicos sofrem uma acentuada queda visual superando intensamente o desconforto causado nas lampadas incandescentes convencionais.",
+      "correctAnswer": false,
+      "explanation": "O guia especifico sobre FLICKER publicado pelo Procobre garante tecnicamente o contrario: as lampadas fluorescentes tem uma sensibilidade as variacoes de tensao duas ou tres vezes menor que as lampadas incandescentes.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No que tange aos procedimentos e deveres formais descritos no gerenciamento de reclamacoes, uma vez acionado para colocar medicoes ininterruptas pelo periodo minimo de 168 horas no quadro do cliente, o responsavel tecnico da concessionaria tem como prazo limite de entrega formal do laudo pericial a quantia fechada de 60 dias corridos.",
+      "correctAnswer": false,
+      "explanation": "O PRODIST Modulo 8 define claramente no item 121 que a exigencia fixada para os resultados oficiais destas acoes no prazo de entrega obrigatoria dos relatorios resultantes pelo medidor e de ate 30 dias contados a partir da data de reclamacao.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao avaliar os amplos custos categorizados como consequencia das paradas da falta de qualidade, danos severos as proprias maquinas, limitacoes fisicas por queima do equipamento industrial e atraso pela linha semi-acabada na esteira representam o rol referenciado primariamente como impacto economico indireto da instalacao.",
+      "correctAnswer": false,
+      "explanation": "No material do IFPB citando a fonte global de Fuchs e Masoum, esses infortunios (danos fisicos, perda fabril, tempo de maquina morta, material semi-acabado, penalidades) representam os denominados impactos economicos DIRETOS. Indiretos estao ligados ao mercado e vendas perdidas.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em condicoes de disturbio enquadrado como afundamento da amplitude de tensao, maquinas e processos motrizes assincronos perdem expressiva velocidade fisica, o que tambem obrigatoriamente forca uma reducao substancial na capacidade util do seu ____ no eixo, acompanhado do aumento da corrente absorvida.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "conjugado"
+        }
+      ],
+      "explanation": "O Guia de Protecao em sua secao dedicada a perturbacoes sobre motores da conta de que a queda de tensao provoca a diminuicao do conjugado do motor e da velocidade: a desaceleracao provoca um aumento da corrente e das perdas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A estruturacao formal imposta pelas normas que estabelecem a metodologia de trato das reclamacoes da qualidade ressalta que toda a carga dedutiva proveniente de diagnosticos de inspecao e dados gravados devem permanecer em meio de armazenamento seguro com posse da concessionaria pelo intervalo estipulado de ____ anos seguidos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "10"
+        }
+      ],
+      "explanation": "A documentacao oficial em vigor PRODIST em seu modulo oitavo, item 122, exige que os dados devem ser mantidos pela distribuidora, em meio digital, por um periodo minimo de 10 anos.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para embasar relatorios que mensuram um alto retorno dos investimentos efetuados na modernizacao de identificacao de anomalias com os modernos analisadores integrados, os registros oficiais contabilizam que um parque eolico americano operante conseguiu reverter a rejeicao de energia imposta pela rede principal de tal forma que o rendimento geral gerou um crescimento financeiro direto pontuado na ordem exata de ____ por cento em receita.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "12"
+        }
+      ],
+      "explanation": "O texto de analise da Wrindu menciona que um parque eolico no Texas implantou unidades para resolver uma rejeicao de energia de 15 por cento por parte da operadora da rede, aumentando a receita em 12 por cento.",
+      "difficulty": "hard"
+    }
+  ]
+}

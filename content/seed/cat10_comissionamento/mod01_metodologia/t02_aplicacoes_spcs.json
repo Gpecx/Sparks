@@ -39,11 +39,11 @@
       "statement": "Qual a principal finalidade da verificação do intertravamento entre seccionadora e disjuntor no comissionamento?",
       "options": [
         "Aumentar a velocidade mecânica de fechamento do disjuntor.",
-        "Permitir a abertura da seccionadora somente quando o disjuntor estiver aberto.",
         "Bloquear a medição do transformador de potencial capacitivo.",
+        "Permitir a abertura da seccionadora somente quando o disjuntor estiver aberto.",
         "Limitar a corrente de inrush na energização inicial."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O intertravamento é testado para garantir segurança, impedindo a abertura da seccionadora com o circuito em carga. (Fonte: Ed54_fasc_protecao).",
       "difficulty": "easy"
     },
@@ -53,10 +53,10 @@
       "options": [
         "Por ensaio de tensão aplicada na bobina principal.",
         "Exigindo injeção de corrente primária na barra.",
-        "Pela demanda de um sinal interno de trip mantendo o circuito externo devidamente isolado.",
-        "Fechando chaves de aterramento rápido na linha."
+        "Fechando chaves de aterramento rápido na linha.",
+        "Pela demanda de um sinal interno de trip mantendo o circuito externo devidamente isolado."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "O relé demanda um sinal de teste de trip interno, devendo a automação isolar a saída para não desligar a carga real. (Fonte: Virtus_CProtBL2Cd3).",
       "difficulty": "easy"
     },
@@ -105,10 +105,10 @@
       "options": [
         "Mensalmente via injeção primária.",
         "A cada 10 anos devido à degradação óptica.",
-        "Com a mesma frequência estipulada para a aferição dos relés de proteção aos quais pertencem.",
-        "Apenas após a ocorrência de curtos-circuitos."
+        "Apenas após a ocorrência de curtos-circuitos.",
+        "Com a mesma frequência estipulada para a aferição dos relés de proteção aos quais pertencem."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Canais de teleproteção exigem manutenção e testes periódicos na mesma frequência dos relés associados. (Fonte: Virtus_CProtBL2Cd3).",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Na parametrização de relés digitais em proteção diferencial, como se compensam os TCs de relações diferentes sem TCs auxiliares físicos?",
       "options": [
-        "Ajustando o tap do transformador de força.",
-        "Inserindo reatores shunt no circuito de corrente.",
         "Fazendo o condicionamento de dados por software através de TCs auxiliares digitais internos ao relé.",
+        "Inserindo reatores shunt no circuito de corrente.",
+        "Ajustando o tap do transformador de força.",
         "Curto-circuitando o TC de menor relação."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Relés digitais usam TCs digitais (fatores matemáticos de correção) no software, dispensando o hardware externo antigo. (Fonte: Virtus_CProtBL2Cd1).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Um comissionamento adequado prevê a verificação de sinalizações e alarmes do painel, garantindo orientação correta aos operadores pós-falta.",
       "correctAnswer": true,
       "explanation": "A proteção deve fornecer informações precisas, por sinalizações e registros, para a adequada tomada de decisão da operação. (Fonte: Virtus_CProtBL2Cd1).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Testes automáticos internos dos IEDs verificam a saída de trip disparando diretamente os disjuntores de potência em plena carga.",
       "correctAnswer": false,
       "explanation": "O teste automático demanda bloqueio/isolamento do circuito de saída externo (trip) para evitar o desligamento indevido da carga. (Fonte: Virtus_CProtBL2Cd3).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O ensaio de TTR avalia a relação de espiras entre os enrolamentos de alta e baixa tensão durante o comissionamento.",
       "correctAnswer": true,
       "explanation": "O TTR (Transformer Turn Ratio) mede a precisão da relação de espiras dos transformadores antes da energização. (Fonte: Cabine Primária).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A documentação As-Built da subestação é descartada após a aceitação do comissionamento pelo cliente final.",
       "correctAnswer": false,
       "explanation": "O as-built reflete as reais condições instaladas e deve ser guardado no prontuário para consultas futuras e manutenções. (Fonte: Cabine Primária).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A verificação da marca de polaridade dos TCs é desnecessária em relés digitais, que corrigem inversões físicas so sozinhos via hardware de aquisição.",
       "correctAnswer": false,
       "explanation": "A polaridade física correta é vital; se invertida na instalação sem a compensação declarada no software, funções diferenciais atuarão indevidamente. (Fonte: Apostila Proteção / Virtus).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "No ensaio de injeção secundária de proteção direcional, aplica-se simultaneamente a corrente e uma tensão de _____ para definir o sentido do fluxo.",
+      "statement": "No ensaio de injeção secundária de proteção direcional, aplica-se simultaneamente a corrente e uma tensão de ____ para definir o sentido do fluxo.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Nos ensaios de saturação realizados em TCs de proteção, o gráfico bilogarítmico gerado visa encontrar o valor exato da tensão do ponto de _____.",
+      "statement": "Nos ensaios de saturação realizados em TCs de proteção, o gráfico bilogarítmico gerado visa encontrar o valor exato da tensão do ponto de ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para validar tempos e lógicas em campo, baixa-se e analisa-se a _____ de eventos gravada na memória do relé.",
+      "statement": "Para validar tempos e lógicas em campo, baixa-se e analisa-se a ____ de eventos gravada na memória do relé.",
       "blanks": [
         {
           "index": 0,

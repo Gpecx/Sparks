@@ -1,0 +1,218 @@
+{
+  "category": "Termografia Infravermelha",
+  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categoryOrder": 3,
+  "module": "Fundamentos de Termografia",
+  "moduleSubtitle": "Fisica do IR, transferencia de calor, equipamentos e calibracao",
+  "moduleOrder": 1,
+  "trail": "Equipamentos e Câmeras IR",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao as duas partes basicas que compoem a matriz de plano focal (FPA) de um termovisor?",
+      "options": [
+        "Lente objetiva e tela LCD de alta resolucao.",
+        "Sensor infravermelho e circuito integrado de leitura (ROIC).",
+        "Filtro de luz visivel e microprocessador de imagem.",
+        "Microbolometro de vanadio e anemometro integrado."
+      ],
+      "correctIndex": 1,
+      "explanation": "O FPA e constituido basicamente pelo sensor infravermelho sensivel a radiacao e pelo ROIC. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a regra fundamental sobre o ajuste de foco ao utilizar uma camera termografica?",
+      "options": [
+        "Pode ser corrigido no software de analise apos o salvamento da imagem.",
+        "O foco deve ser ajustado perfeitamente antes de salvar a imagem.",
+        "O foco automatico dispensa qualquer verificacao visual do operador.",
+        "Imagens fora de foco ainda exibem as medicoes de temperatura corretas."
+      ],
+      "correctIndex": 1,
+      "explanation": "Uma imagem fora de foco exibe temperatura incorreta e seu ajuste deve ser perfeito antes de ser salva. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o parametro NETD quantifica em um termovisor?",
+      "options": [
+        "A resolucao geometrica limite do conjunto optico da camera.",
+        "A sensibilidade termica ou resolucao de temperatura do termovisor.",
+        "O campo de visao instantaneo (IFOV) de um unico detector.",
+        "A largura da faixa espectral de operacao da camera termica."
+      ],
+      "correctIndex": 1,
+      "explanation": "A resolucao de temperatura de um sistema radiometrico e dada pelo NETD, que quantifica sua sensibilidade termica. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual tipo de detector e predominantemente utilizado nos termovisores indicados para manutencao eletrica?",
+      "options": [
+        "Fotodiodos compostos por arseneto de indio e galio (InGaAs).",
+        "Microbolometros nao refrigerados.",
+        "Detectores de poco quantico (QWIP) refrigerados.",
+        "Sensores fotonicos sensiveis a radiacao ultravioleta."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os termovisores indicados para manutencao eletrica utilizam predominantemente microbolometros nao refrigerados. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a selecao de uma faixa de medicao de temperatura mais alta afeta o NETD da camera termica?",
+      "options": [
+        "Reduz o NETD da camera, melhorando drasticamente sua sensibilidade termica.",
+        "Nao altera o NETD, pois o ruido eletronico e constante e calibrado.",
+        "Aumenta o nivel de ruido associado a medicao, resultando em um NETD pior.",
+        "Aumenta a precisao das leituras de emissividade da camera termica."
+      ],
+      "correctIndex": 2,
+      "explanation": "O NETD sofre aumento no nivel de ruido quando o equipamento e ajustado para operar em faixas de medicao mais altas. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o principio de funcionamento de um detector do tipo bolometro?",
+      "options": [
+        "Opera de forma passiva na faixa de transmissao de luz visivel.",
+        "Sua resistencia eletrica varia em funcao da elevacao da temperatura absorvida.",
+        "Converte fotons infravermelhos em corrente eletrica sem variacao de calor.",
+        "Utiliza um resfriamento criogenico extremo para refletir a radiacao local."
+      ],
+      "correctIndex": 1,
+      "explanation": "O bolometro e um detector matricial no qual a resistencia eletrica varia em funcao da irradiacao infravermelha absorvida. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que representa o fator de preenchimento (fill factor) em uma matriz de plano focal (FPA)?",
+      "options": [
+        "O nivel de carga suportado pela bateria em ciclos de inspecao continua.",
+        "A razao entre a area com celulas sensiveis ao infravermelho e a area total.",
+        "A quantidade de tons diferentes utilizados na paleta de cores do software.",
+        "O limite maximo de pixels inoperantes tolerados pelo sistema optico."
+      ],
+      "correctIndex": 1,
+      "explanation": "O fator de preenchimento e a razao entre a area efetivamente preenchida com celulas sensiveis e a area total do FPA. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual tecnologia substituiu os sistemas volumosos de refrigeracao a gas nos sensores infravermelhos das cameras modernas?",
+      "options": [
+        "Sistemas de dissipacao por circulacao continua de agua destilada.",
+        "Sistemas termoeletricos compactos que usam o efeito Peltier.",
+        "Trocadores de calor aletados acoplados a microventiladores.",
+        "Camaras seladas de vacuo absoluto para anular a conducao termica."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os antigos sistemas de refrigeracao foram substituidos por compactos sistemas termoeletricos que usam o efeito Peltier. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como e calculado o parametro optico conhecido como numero-F da lente de um termovisor?",
+      "options": [
+        "Pela multiplicacao da area do detector pelo campo de visao instantaneo.",
+        "Pela relacao entre a distancia focal e o diametro de abertura da lente.",
+        "Pelo decaimento logaritmico em relacao a distancia do alvo inspecionado.",
+        "Pela soma total dos angulos horizontal e vertical captados pelo FOV."
+      ],
+      "correctIndex": 1,
+      "explanation": "O numero-F e a relacao direta entre a distancia focal da lente e o seu diametro de abertura. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Devido ao fenomeno de difracao SRF (Slit Response Function), qual deve ser o tamanho minimo do alvo para uma medicao correta?",
+      "options": [
+        "Devera ser exatamente o limite da resolucao projetada por um unico IFOV.",
+        "Metade da largura do campo de visao instantaneo (IFOV) da camera.",
+        "Cerca de duas a tres vezes o tamanho minimo calculado a partir do IFOV.",
+        "O tamanho independe do IFOV se a emissividade do material for unitaria."
+      ],
+      "correctIndex": 2,
+      "explanation": "O objeto inspecionado deve medir de duas a tres vezes o tamanho minimo estipulado pelo IFOV para evitar erros da fenda. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os softwares de apoio aos termovisores disponibilizados pelos fabricantes permitem a selecao de diferentes paletas de cores para analise visual das imagens.",
+      "correctAnswer": true,
+      "explanation": "Esses softwares incluem o recurso pratico de aplicar paletas de cores selecionaveis aos termogramas. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As cameras termograficas de baixo custo, por possuirem menor resolucao, sao improprias para qualquer tipo de inspecao em manutencao preditiva.",
+      "correctAnswer": false,
+      "explanation": "Uma camera basica de menor custo tem muitos usos e oferece excelente performance em diversas aplicacoes simples. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para minimizar erros de medicao, recomenda-se ligar o termovisor no ambiente de inspecao e aguardar alguns minutos para que ele alcance o equilibrio termico.",
+      "correctAnswer": true,
+      "explanation": "Mudancas na temperatura ambiente afetam a camera, sendo indicado mante-la no local por alguns minutos antes do uso. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A substituicao da lente objetiva de um termovisor dispensa novos ajustes ou calibracoes de fabrica, visto que o sensor do FPA mantem precisao absoluta.",
+      "correctAnswer": false,
+      "explanation": "A troca da lente muda propriedades opticas como transmitancia e numero-F, o que pode requerer um novo ajuste. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao avaliar um mesmo arranjo detector (FPA), quanto maior for o campo de visao (FOV) da camera, melhor sera a sua resolucao espacial da imagem.",
+      "correctAnswer": false,
+      "explanation": "Quanto menor o FOV da camera, melhor a resolucao espacial, ja que o mesmo numero de pixels foca em uma area menor. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos termovisores modernos baseados em tecnologia staring system, a ____ distribui os detectores em colunas e linhas para receber a irradiacao simultaneamente.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "matriz de plano focal"
+        }
+      ],
+      "explanation": "Na matriz de plano focal (FPA), os detectores recebem simultaneamente toda a irradiacao direcionada pelas lentes. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O sinal de saida de um termovisor deve ser corrigido por algoritmos internos para remover o ____ termico induzido pela radiacao das pecas e circuitos da propria camera.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "offset"
+        }
+      ],
+      "explanation": "O aquecimento interno da camera causa um deslocamento, conhecido como offset, que deve ser corrigido ativamente pelo sistema. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Dentro da estrutura da matriz de plano focal (FPA), o componente eletronico de silicone voltado a leitura e amplificacao do sinal gerado pelo sensor termico e denominado ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ROIC"
+        }
+      ],
+      "explanation": "O circuito integrado de leitura (ROIC) realiza a leitura, amplificacao e processamento do sinal oriundo do sensor infravermelho. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "hard"
+    }
+  ]
+}

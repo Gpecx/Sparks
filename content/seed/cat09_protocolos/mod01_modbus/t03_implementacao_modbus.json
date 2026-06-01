@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "No protocolo MODBUS TCP, a verificacao de integridade de dados via checksum (como o CRC) e delegada a qual camada da arquitetura de rede?",
       "options": [
-        "A camada de Transporte e Rede da pilha TCP/IP.",
-        "A camada de Aplicacao exclusiva do cabecalho MBAP.",
         "A interface fisica do link serial RS-485.",
+        "A camada de Aplicacao exclusiva do cabecalho MBAP.",
+        "A camada de Transporte e Rede da pilha TCP/IP.",
         "A camada de Sessao do modelo OSI OSI."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O MODBUS TCP remove o CRC do quadro RTU original, delegando a verificacao de erros e integridade para a pilha TCP/IP subjacente (Informacao externa as fontes).",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Quais sao os parametros fundamentais que devem ser configurados de forma idêntica entre mestre e escravo em uma conexao serial MODBUS RTU?",
       "options": [
-        "Baud rate, paridade e stop bits.",
+        "VLAN ID, MAC address e porta TCP 502.",
         "Enderecos de IP e mascara de sub-rede.",
         "Function codes e offsets do mapa de registros.",
-        "VLAN ID, MAC address e porta TCP 502."
+        "Baud rate, paridade e stop bits."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Para sincronizar a comunicacao serial assincrona, mestre e escravo devem possuir os exatos mesmos ajustes fisicos de baud rate, paridade e stop bits (Informacao externa).",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Em uma implementacao padrao de MODBUS RTU sobre RS-485, quem e o elemento responsavel por iniciar a comunicacao e enderecar os dispositivos no.",
       "options": [
-        "O equipamento escravo por meio de reports espontaneos por excecao.",
         "O equipamento mestre enviando o endereco do escravo no primeiro byte do quadro.",
+        "O equipamento escravo por meio de reports espontaneos por excecao.",
         "Qualquer dispositivo da rede utilizando mensagens multicast peer-to-peer.",
         "Um switch Ethernet configurado como roteador de borda utilizando regras de NAT."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O MODBUS utiliza padrao mestre-escravo estrito, onde somente o mestre inicia transacoes identificando o endereco do escravo no byte inicial (Informacao externa).",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Em uma arquitetura de rede Ethernet em subestacao, qual e a porta reservada nativamente para a comunicacao do protocolo MODBUS TCP?",
       "options": [
         "Porta TCP 80.",
-        "Porta TCP 102.",
         "Porta TCP 502.",
+        "Porta TCP 102.",
         "Porta TCP 4000."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A porta TCP 502 e reservada e padronizada globalmente para conexoes operando o protocolo MODBUS TCP (Informacao externa).",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "Por que o padrao RS-485 a 2 fios e o meio fisico mais adotado para implementacao do protocolo MODBUS RTU em ambientes agressivos industriais?",
       "options": [
         "Porque permite conexoes em estrela com switches gerenciaveis.",
-        "Pela capacidade de interligar multiplos dispositivos (multidrop) a longas distancias com alta imunidade a ruidos.",
         "Por suportar nativamente roteamento dinamico de IPs e VLAN tagging corporativo.",
+        "Pela capacidade de interligar multiplos dispositivos (multidrop) a longas distancias com alta imunidade a ruidos.",
         "Porque dispensa o uso de paridade e bits de parada na configuracao do mestre."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O padrao RS-485 e diferencial e suporta redes multidrop com alta imunidade a ruido eletromagnetico, ideal para conversores e reles em campo (Informacao externa).",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Ao elaborar o mapa de registros de um equipamento, o que o endereco base comecando em 40001 (por exemplo, 40001 a 49999) indica convencionalmente?",
       "options": [
         "Um Coil digital boolean exclusivo de leitura e escrita.",
-        "O inicio do bloco de Holding Registers analogicos, que suportam leitura e escrita.",
+        "Um codigo de erro indicando um registro de excecao (Exception Register).",
         "Um Input Register dedicado unicamente a leitura de sensores de campo.",
-        "Um codigo de erro indicando um registro de excecao (Exception Register)."
+        "O inicio do bloco de Holding Registers analogicos, que suportam leitura e escrita."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Na convencao de enderecamento legada do MODBUS, a faixa de 4xxxx mapeia Holding Registers, que possuem permissao de leitura e escrita (Informacao externa).",
       "difficulty": "medium"
     },
@@ -130,11 +130,11 @@
       "statement": "No contexto da migracao para o MODBUS TCP, qual e a principal finalidade do campo Transaction Identifier de 2 bytes inserido no cabecalho MBAP?",
       "options": [
         "Autenticar criptograficamente o IP da estacao operadora do SCADA.",
-        "Realizar o pareamento unico entre requisicoes do mestre e as respostas recebidas do escravo no ambiente assincrono TCP/IP.",
+        "Indicar a prioridade de multicast de acordo com a norma IEEE 802.1Q (VLAN).",
         "Servir como substituto exato para o calculo de CRC no fechamento do pacote.",
-        "Indicar a prioridade de multicast de acordo com a norma IEEE 802.1Q (VLAN)."
+        "Realizar o pareamento unico entre requisicoes do mestre e as respostas recebidas do escravo no ambiente assincrono TCP/IP."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O cabecalho MBAP adiciona o Transaction Identifier para que o cliente consiga relacionar respostas assincronas recebidas atraves do TCP/IP com as suas consultas iniciais (Informacao externa).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Uma boa pratica essencial na implementacao de um mestre MODBUS e configurar parametros de timeout; caso contrario, pacotes RTU corrompidos por.",
       "correctAnswer": true,
       "explanation": "Como o MODBUS opera por request-reply sem handshakes extras de confirmacao, configurar tempos limite (timeouts) corretos impede o travamento de varredura diante da perda de quadros (Informacao externa).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Em implementacoes nativas MODBUS baseadas em RS-232, a topologia da rede fisica permite enderecar multiplos reles escravos em cascata.",
       "correctAnswer": false,
       "explanation": "O meio fisico RS-232 restringe a aplicacao a uma conexao ponto a ponto de curta distancia, sendo o RS-485 ou o roteamento sobre IP (Ethernet) exigidos para redes com multiplos IEDs (Informacao externa).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Um equipamento documentado com o holding register 40010 deve ser solicitado no protocolo utilizando o offset logico zero-based de 0009 no quadro.",
       "correctAnswer": true,
       "explanation": "Os enderecos transmitidos no pacote MODBUS utilizam offsets reais baseados em zero. Portanto, o mapeamento comercial 40010 corresponde ao offset tecnico de numero 9 (Informacao externa).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O cabecalho MBAP, criado para o protocolo MODBUS TCP, manteve o byte dedicado ao endereco do escravo e o renomeou para Unit Identifier, facilitando.",
       "correctAnswer": true,
       "explanation": "O campo Unit ID permite que a gateway identifique para qual escravo RS-485 (na rede serial traseira) o comando TCP encapsulado deve ser repassado (Informacao externa).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A principal tecnica utilizada pelo protocolo MODBUS RTU para delimitar o inicio e o encerramento de um quadro em uma linha serial baseia-se na.",
       "correctAnswer": true,
       "explanation": "No modo RTU, os quadros nao possuem caracteres de inicio/fim como no modo ASCII; um temporizador observa um silencio estrito de t3.5 na linha serial para constatar a finalizacao da mensagem (Informacao externa).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Na parametrizacao do canal fisico de um link MODBUS RTU, a velocidade configurada no painel para troca de dados assincronos, como 9600 ou 19200 _____.",
+      "statement": "Na parametrizacao do canal fisico de um link MODBUS RTU, a velocidade configurada no painel para troca de dados assincronos, como 9600 ou 19200 ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A area do mapa de registros reservada a dados analogicos, com leitura realizada exclusivamente pelo mestre a partir do equipamento de campo _____.",
+      "statement": "A area do mapa de registros reservada a dados analogicos, com leitura realizada exclusivamente pelo mestre a partir do equipamento de campo ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Quando o equipamento emite dados de 16 bits na rede, a especificacao padrao orienta enviar primeiro o byte mais significativo (MSB) do registro _____.",
+      "statement": "Quando o equipamento emite dados de 16 bits na rede, a especificacao padrao orienta enviar primeiro o byte mais significativo (MSB) do registro ____.",
       "blanks": [
         {
           "index": 0,

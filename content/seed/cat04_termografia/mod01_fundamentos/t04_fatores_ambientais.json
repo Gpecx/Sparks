@@ -1,0 +1,218 @@
+{
+  "category": "Termografia Infravermelha",
+  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categoryOrder": 3,
+  "module": "Fundamentos de Termografia",
+  "moduleSubtitle": "Fisica do IR, transferencia de calor, equipamentos e calibracao",
+  "moduleOrder": 1,
+  "trail": "Fatores Ambientais (Refletividade, Atmosfera, Vento)",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Quais moleculas mais atenuam a radiacao infravermelha por absorcao na atmosfera?",
+      "options": [
+        "Nitrogenio e oxigenio.",
+        "Vapor de agua, dioxido de carbono e ozonio.",
+        "Helio e gas carbonico.",
+        "Argonio e hidrogenio."
+      ],
+      "correctIndex": 1,
+      "explanation": "As moleculas de agua, dioxido de carbono e ozonio sao os principais absorvedores na faixa operacional dos termovisores. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que o nitrogenio e o oxigenio nao apresentam absorcao molecular da radiacao infravermelha?",
+      "options": [
+        "Porque possuem emissividade unitaria constante.",
+        "Por serem moleculas homonucleares sem dipolo magnetico.",
+        "Porque refratam e bloqueiam totalmente a luz termica.",
+        "Por estarem presentes em baixissima concentracao no ar."
+      ],
+      "correctIndex": 1,
+      "explanation": "Nitrogenio e oxigenio sao homonucleares, nao possuem dipolo magnetico e nao absorvem a radiacao. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais condicoes meteorologicas apresentam exigencia normativa de interrupcao da inspecao termografica em instalacoes eletricas?",
+      "options": [
+        "Dias extremamente ensolarados e secos.",
+        "Ventos laminares abaixo de 1 metro por segundo.",
+        "Nevoeiro forte, ocorrencia de chuva ou neve.",
+        "Umidade relativa do ar continua abaixo de 50%."
+      ],
+      "correctIndex": 2,
+      "explanation": "Ha exigencia de nao executar servicos sob condicoes de perigo para os trabalhadores, como nevoeiro forte, chuva ou neve. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que o termografista deve ajustar o parametro de temperatura refletida na camera termica?",
+      "options": [
+        "Para compensar de modo automatico o resfriamento convectivo do vento.",
+        "Para anular a propriedade de emissividade das camadas de ar vizinhas.",
+        "Porque a camera capta calor emitido pelo alvo e a energia refletida de corpos adjacentes.",
+        "Para corrigir o desvio de foco e o IFOV da lente padrao do termovisor."
+      ],
+      "correctIndex": 2,
+      "explanation": "A camera capta o calor emitido pelo objeto e tambem a energia refletida de corpos adjacentes. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a diferenca fundamental entre absorcao e espalhamento na propagacao da radiacao infravermelha?",
+      "options": [
+        "Ambos os fatores causam exatamente a mesma perda de temperatura radiante na onda.",
+        "A absorcao causa perda real de energia, enquanto o espalhamento redireciona a energia do campo.",
+        "O espalhamento destroi a onda original e a absorcao a reflete integralmente para a fonte.",
+        "A absorcao aumenta o brilho da imagem termica e o espalhamento reduz a resolucao."
+      ],
+      "correctIndex": 1,
+      "explanation": "A absorcao causa perda real de energia do campo eletromagnetico, enquanto o espalhamento apenas redireciona essa energia. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual instrumento de medicao e utilizado em campo para permitir a correcao do resfriamento causado pelo vento no componente inspecionado?",
+      "options": [
+        "Anemometro.",
+        "Luximetro.",
+        "Decibelimetro.",
+        "Barometro."
+      ],
+      "correctIndex": 0,
+      "explanation": "O anemometro mede a velocidade do vento incidente para permitir correcoes na temperatura do componente. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual parametro geometrico define o angulo sob o qual um unico detector da matriz percebe a radiacao do objeto?",
+      "options": [
+        "Fator de preenchimento.",
+        "IFOV (Instantaneous Field of View).",
+        "SRF (Slit Response Function).",
+        "Coeficiente de transmitancia atmosferica."
+      ],
+      "correctIndex": 1,
+      "explanation": "O IFOV fornece o angulo sob o qual um unico elemento detector percebe a radiacao do objeto inspecionado. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que as bandas espectrais de 3 a 5 micrometros e 8 a 12 micrometros sao as mais indicadas para termovisores?",
+      "options": [
+        "Devido ao alto nivel de radiacao ultravioleta incidente sobre os equipamentos.",
+        "Porque nessas janelas a atenuacao atmosferica e significativamente menos restritiva.",
+        "Porque refletem integralmente a luz visivel presente no ambiente de inspecao.",
+        "Porque nessas frequencias e possivel anular totalmente a emissividade do cobre."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os termovisores operam nessas janelas porque a atenuacao atmosferica e menos restritiva ao sinal infravermelho. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na janela espectral de 6 a 15 micrometros, o calculo de atenuacao atmosferica resume-se a atenuacao por qual elemento?",
+      "options": [
+        "Pela variacao na concentracao do gas dioxido de carbono.",
+        "Pela quantidade de poeira e aerossois suspensos no ar.",
+        "Pelas abundantes moleculas inertes de nitrogenio.",
+        "Pela quantidade de agua precipitavel no caminho de propagacao."
+      ],
+      "correctIndex": 3,
+      "explanation": "Nessa janela, a influencia do dioxido de carbono e irrelevante, limitando o calculo a quantidade de agua precipitavel. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais medicoes executadas pelo termografista permitem determinar a umidade absoluta do ar no caminho de propagacao?",
+      "options": [
+        "A emissividade calculada e a refletividade global.",
+        "A velocidade instantanea do vento e a pressao atmosferica.",
+        "A umidade relativa do ar e a temperatura atmosferica.",
+        "O IFOV nominal e a distancia aferida do alvo."
+      ],
+      "correctIndex": 2,
+      "explanation": "A umidade absoluta e obtida matematicamente a partir das medicoes de umidade relativa e da temperatura atmosferica. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O nitrogenio e o oxigenio, gases abundantes na atmosfera, causam elevada absorcao molecular da radiacao infravermelha.",
+      "correctAnswer": false,
+      "explanation": "O oxigenio e o nitrogenio nao possuem dipolo magnetico e nao apresentam absorcao molecular. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O termovisor capta apenas o calor emitido pelo alvo, ignorando automaticamente qualquer energia termica refletida pelo ambiente.",
+      "correctAnswer": false,
+      "explanation": "Termovisores sao equipamentos passivos que captam a radiacao emitida pelo alvo somada a energia refletida do ambiente. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O IFOV determina a dimensao minima que um objeto deve possuir a uma certa distancia para que seja detectado pelo termovisor.",
+      "correctAnswer": true,
+      "explanation": "O IFOV combinado com a distancia permite calcular a dimensao minima do objeto que preenche plenamente o detector. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em inspecoes termograficas a curtas distancias, a parcela de radiacao termica emitida pela propria coluna de ar interposta e considerada insignificante.",
+      "correctAnswer": true,
+      "explanation": "Para curtas distancias de inspecao, a radiacao termica originada pela coluna de ar interposta e desprezivel e ignorada no calculo. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os coeficientes de espalhamento e absorcao aerossol dependem diretamente das variacoes de umidade relativa e temperatura do ar.",
+      "correctAnswer": false,
+      "explanation": "Os coeficientes de absorcao e espalhamento aerossol sao independentes das variacoes de umidade relativa e temperatura atmosferica. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em equipamentos externos, a transferencia de calor por ____, intensificada pela velocidade do vento, resfria a superficie e mascara o aquecimento.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "conveccao"
+        }
+      ],
+      "explanation": "O vento acelera a transferencia de calor por adveccao, mascarando a real elevacao termica das falhas. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Alem do ajuste correto do foco, a inspecao exige avaliar o ____, parametro que define o angulo de visao de um pixel para deteccao na distancia.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "IFOV"
+        }
+      ],
+      "explanation": "O IFOV determina o tamanho minimo de um objeto detectavel pela camera em funcao da distancia do alvo. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na janela de 6 a 15 micrometros, a atenuacao do sinal se reduz ao calculo da quantidade de agua ____ no caminho de propagacao.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "precipitavel"
+        }
+      ],
+      "explanation": "A atenuacao atmosferica na faixa principal de operacao dos termovisores depende diretamente da quantidade de agua precipitavel no meio. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "hard"
+    }
+  ]
+}

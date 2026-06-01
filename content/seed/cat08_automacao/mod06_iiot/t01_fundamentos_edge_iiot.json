@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Edge Computing e IIoT",
+  "moduleSubtitle": "Industria 4.0, edge computing, IIoT e casos de uso",
+  "moduleOrder": 5,
+  "trail": "Fundamentos de Edge Computing e IIoT",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que define fundamentalmente o modelo tecnológico conhecido como Edge Computing no ambiente industrial?",
+      "options": [
+        "Processamento exclusivo em grandes datacenters globais isolados.",
+        "Processamento de dados próximo à origem, como máquinas e sensores.",
+        "Armazenamento físico de fitas magnéticas em cofres corporativos.",
+        "Descarte contínuo de dados analíticos nas camadas superiores."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Edge Computing baseia-se no processamento de dados próximo à sua origem, reduzindo a necessidade de envios constantes à nuvem (Edge AI na Indústria).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é um dos principais benefícios operacionais obtidos pela execução de decisões através do Edge AI no chão de fábrica?",
+      "options": [
+        "Aumento da dependência incondicional de conectividade 5G externa.",
+        "Decisões rápidas tomadas em milissegundos devido à baixa latência local.",
+        "Substituição completa e imediata de todos os sistemas corporativos de gestão.",
+        "Atraso programado nativo na atuação autônoma das válvulas PID."
+      ],
+      "correctIndex": 1,
+      "explanation": "O processamento descentralizado na borda elimina a latência da nuvem, sendo vital para o controle e tomada de decisões críticas em milissegundos (Edge AI na Indústria).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De que maneira a implementação do processamento na borda (Edge Computing) ajuda a reduzir significativamente os custos de infraestrutura em projetos de IIoT?",
+      "options": [
+        "Aumentando massivamente o uso de relés eletromecânicos tradicionais nas linhas.",
+        "Removendo as exigências rigorosas de calibração física mensal dos instrumentos de medição.",
+        "Diminuindo drasticamente o volume e os custos de transmissão de dados enviados à nuvem.",
+        "Isolando estritamente todas as redes seriais assíncronas do chão de fábrica e do controle regulatório."
+      ],
+      "correctIndex": 2,
+      "explanation": "A inteligência instalada no Edge resolve dados locais repassando à nuvem somente o essencial, reduzindo o tráfego de banda e os altos custos de armazenagem (Edge AI na Indústria).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Dentro da arquitetura de inteligência descentralizada da Indústria 4.0, quais equipamentos costumam executar localmente os modelos de processamento Edge AI?",
+      "options": [
+        "Transmissores puramente pneumáticos cegos e atuadores de válvula mecânicos.",
+        "Dispositivos digitais locais como CLPs, gateways industriais, sistemas embarcados e sensores inteligentes.",
+        "Painéis lógicos clássicos e exclusivos das redes corporativas administrativas de TI.",
+        "Datacenters centralizados dedicados estritamente ao planejamento contábil da produção."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os algoritmos de borda são incorporados nos próprios controladores (CLPs), em gateways dedicados e sensores inteligentes distribuídos pelo chão de fábrica (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No que diz respeito à evolução e maturidade da Indústria 4.0, como os Gêmeos Digitais (Digital Twins) impulsionam as operações modernas?",
+      "options": [
+        "Evoluindo para atuar como ferramentas operacionais em tempo real para prever falhas sem interferir na produção.",
+        "Bloqueando a automação descentralizada para forçar o uso de comandos exclusivamente manuais.",
+        "Limitando o sistema MES (ISA-95) convertendo seus protocolos abertos em matrizes analógicas de 4-20mA.",
+        "Destruindo o ciclo físico autônomo dos robôs operando sob a inteligência artificial embarcada."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os Digital Twins permitem prever com exatidão o desgaste e otimizar processos em tempo real através de simulações, operando simultaneamente aos equipamentos reais (Tendências para o setor de automação industrial em 2026).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao planejar uma integração completa seguindo as padronizações da ISA-95, o modelo Edge Layer e Analytics preenche adequadamente a lacuna existente entre quais níveis?",
+      "options": [
+        "A base acionada por compressores térmicos mecânicos e o controle analógico local.",
+        "O controle de máquinas vital em tempo real (CLP/DCS) e as rotinas corporativas de Execução da Manufatura (MES).",
+        "A rede social da área administrativa externa e os pacotes contábeis ERP nativos.",
+        "O sistema isolado pneumático das chaves limites e o roteamento mundial em fibra ótica da nuvem pública."
+      ],
+      "correctIndex": 1,
+      "explanation": "Nas arquiteturas, o Edge Analytics localiza-se extraindo dados velozes do controle real (CLP) para processá-los ativamente antes de subirem ao sistema corporativo MES (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual vantagem mecânica a adoção direta de rotinas de Edge AI provê à manutenção preditiva nas instalações ativas?",
+      "options": [
+        "Suspende inteiramente todas calibrações de campo exigidas pela instrumentação de rede clássica.",
+        "Processa e avalia localmente dados críticos de vibração e temperatura das máquinas evitando que as falhas iminentes parem a linha.",
+        "Atua desativando os controladores lógicos PID forçando as malhas a regredir ao estrito comportamento on-off cego.",
+        "Inibe a comunicação serial do chão de fábrica para proteger unicamente a camada superior ERP das fábricas vizinhas."
+      ],
+      "correctIndex": 1,
+      "explanation": "Analisando padrões complexos na própria máquina as decisões automáticas do Edge previnem acidentes ou paradas custosas de modo preditivo e imediato (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para que os algoritmos de analytics e IA local extraiam real utilidade produtiva da planta, o que o sistema distribuído e os Data Lakes industriais devem fundamentalmente assegurar?",
+      "options": [
+        "O fim permanente e estrutural da camada autônoma de CLPs operando através de normas IEC.",
+        "A conexão forçada e dependente aos servidores espaciais por antenas via telemetria constante.",
+        "Que as coletas sejam organizadas possuindo base em dados estruturados consistentes e de alta qualidade e confiabilidade.",
+        "O retorno tecnológico incondicional aos displays puramente analógicos de ponteiro nas cabines de operação."
+      ],
+      "correctIndex": 2,
+      "explanation": "Modelos avançados dependem criticamente de dados limpos, integrados, de alta qualidade e rastreabilidade para tomar as decisões exatas em solo (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sob o aspecto prático de engenharia de implementação da Indústria 4.0, qual desafio é habitualmente imposto pelas malhas de chão de fábrica baseadas em tecnologias Edge?",
+      "options": [
+        "A paralisação da produção contínua forçada pela incompatibilidade biológica dos sensores modernos de vazão eletromagnética.",
+        "A integração complexa e a respectiva adaptação de equipamentos de controle legados muito antigos (sem rede nativa) aos atuais algoritmos.",
+        "A erradicação imediata das lógicas redundantes de intertravamento de segurança aplicadas em refinarias petroquímicas.",
+        "O bloqueio incondicional das operações com banco de dados relacionais e SQL limitando-se ao Assembly nativo."
+      ],
+      "correctIndex": 1,
+      "explanation": "Muitas instalações ainda possuem maquinários legados analógicos difíceis de digitalizar ou extrair os dados necessários à nova arquitetura Edge (Edge AI na Indústria).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como tecnologia vital da próxima geração fabril, com quais vetores essenciais o Edge Computing busca alinhamento para promover indústrias amplamente flexíveis, preditivas e autônomas?",
+      "options": [
+        "Arquiteturas orientadas exclusivamente aos controles de malha em cascata pneumática.",
+        "Integrações orgânicas conectando as malhas locais do Edge com o tráfego e latência otimizada das redes industriais modernas como o 5G, Gêmeos Digitais e o IIoT.",
+        "A exclusão normativa de todas as interfaces humano-máquina visuais (IHM) para restringir o controle aos microprocessadores não escaláveis.",
+        "Substituição e expurgo do planejamento MES forçando o rastreio estritamente através dos sistemas físicos abertos e relés dedicados a atuadores cegos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O futuro da automação atrela intimamente o Edge AI às capacidades poderosas das novas redes 5G, dos simuladores de Gêmeos Digitais e das plataformas maciças do IIoT (Edge AI na Indústria).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Com o uso da arquitetura Edge, os sistemas industriais de manufatura perdem totalmente suas capacidades de operação em caso de falha na rede de internet externa.",
+      "correctAnswer": false,
+      "explanation": "As lógicas baseadas em Edge operam independentes da conectividade externa, permitindo que a produção continue mesmo durante quedas severas da rede corporativa (Edge AI na Indústria).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O processamento de dados na borda da planta reduz a exposição cibernética, pois garante que as informações sensíveis permaneçam dentro do perímetro de segurança da fábrica.",
+      "correctAnswer": true,
+      "explanation": "Uma enorme vantagem é a segurança, visto que processar os dados sensíveis localmente inibe o envio para fora e a exposição aos ataques cibernéticos em nuvem (Edge AI na Indústria).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Metodologicamente, a introdução do sistema Edge Layer descarta por completo os controladores dedicados a lógicas contínuas em tempo real do nível de campo.",
+      "correctAnswer": false,
+      "explanation": "A camada de borda (Edge Layer) não substitui, mas complementa a arquitetura de tempo real existente (PLC/DCS), agindo entre eles e a camada gerencial MES (Edge AI na Indústria).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As câmeras industriais inteligentes baseadas em Edge Computing realizam a inspeção técnica de qualidade dos produtos de forma instantânea na própria malha produtiva.",
+      "correctAnswer": true,
+      "explanation": "Os algoritmos embarcados nessas câmeras processam a visão computacional ativamente nas próprias linhas identificando falhas rapidamente sem necessitar dos servidores em nuvem (Edge AI na Indústria).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Do ponto de vista das rotinas de Cibersegurança, adotar centenas de dispositivos processadores descentralizados na arquitetura de rede facilita a defesa, eliminando inteiramente a necessidade de firewalls na camada TO.",
+      "correctAnswer": false,
+      "explanation": "A pulverização de dispositivos inteligentes (edge) acaba aumentando severamente a superfície de exposição cibernética, o que demanda políticas e firewalls extremamente rigorosos no sistema (Edge AI na Indústria / CIBERSEGURANÇA EM SISTEMAS SCADA).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A convergência tecnológica da Internet Industrial das Coisas, conhecida também como ____, fornece a base contínua de captura de dados em tempo real para os dispositivos de borda.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "IIoT"
+        }
+      ],
+      "explanation": "A Internet Industrial das Coisas (IIoT) trabalha atrelada aos dispositivos Edge coletando massivamente a base de informação necessária para o controle inteligente (Tendências para o setor de automação industrial em 2026).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No campo da logística industrial inteligente, os robôs móveis autônomos, representados pela sigla ____, elevam a capacidade de automação e flexibilidade interna da planta.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "AMRs"
+        }
+      ],
+      "explanation": "A evolução do setor industrial populariza o uso de AMRs (Autonomous Mobile Robots) operando integrados aos sistemas logísticos de chão de fábrica (Tendências para o setor de automação industrial em 2026).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Alinhada ao constante aumento de conectividade inteligente e interação com processos humanos em tempo real, a robótica avança investindo largamente nos manipuladores flexíveis chamados de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "cobots"
+        }
+      ],
+      "explanation": "Os robôs colaborativos (cobots) são concebidos para operarem mais seguros, versáteis e integrados organicamente aos humanos nos sistemas atuais (Tendências para o setor de automação industrial em 2026).",
+      "difficulty": "hard"
+    }
+  ]
+}

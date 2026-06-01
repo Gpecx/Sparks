@@ -26,11 +26,11 @@
       "statement": "Qual a principal vantagem do uso de Inversores de Frequência (VFD) em aplicações de bombas e ventiladores?",
       "options": [
         "Redução da isolação galvânica do estator.",
-        "Controle de velocidade e economia de energia em cargas variáveis.",
         "Aumento da corrente de rotor bloqueado para 20 vezes a nominal.",
+        "Controle de velocidade e economia de energia em cargas variáveis.",
         "Eliminação total da necessidade de proteção contra curto-circuito."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "VFDs permitem ajustar a velocidade do motor à demanda da carga, otimizando o consumo de energia. (Fonte: Guia Proteção 2008 Schneider).",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "O que ocorre se o tempo de aceleração da carga for superior ao tempo de rotor bloqueado (te) do motor?",
       "options": [
         "O motor aumenta sua eficiência térmica automaticamente.",
-        "A proteção térmica poderá atuar antes do motor atingir a velocidade de regime.",
+        "A tensão de linha sobe para acelerar a massa inercial.",
         "O escorregamento torna-se negativo para compensar o calor.",
-        "A tensão de linha sobe para acelerar a massa inercial."
+        "A proteção térmica poderá atuar antes do motor atingir a velocidade de regime."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Se a partida for mais lenta que o limite térmico do motor parado, a proteção (ANSI 49/51) desarma o motor. (Fonte: Virtus_ProtMotores_Ed1).",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Cargas de alta inércia, como grandes ventiladores industriais, exigem qual cuidado nos ajustes de proteção?",
       "options": [
         "Desativação total da proteção contra curto-circuito durante a operação.",
-        "Ajuste de uma curva de partida que suporte tempos de aceleração longos.",
         "Uso obrigatório de fusíveis ultra-rápidos classe aM.",
+        "Ajuste de uma curva de partida que suporte tempos de aceleração longos.",
         "Redução do fator de serviço para 0,5 durante a partida."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Cargas inerciais demoram a acelerar; a proteção deve ser ajustada para não desarmar durante esse período legítimo. (Fonte: Virtus_ProtMotores_Ed1).",
       "difficulty": "medium"
     },
@@ -91,11 +91,11 @@
       "statement": "Qual a diferença funcional básica entre uma Soft-starter e um Inversor de Frequência (VFD)?",
       "options": [
         "A Soft-starter altera a frequência e o VFD apenas a tensão.",
-        "A Soft-starter controla apenas a rampa de tensão, enquanto o VFD controla tensão e frequência.",
+        "A Soft-starter é usada exclusivamente em motores de corrente contínua.",
         "O VFD não pode ser usado para partidas suaves, apenas para paradas.",
-        "A Soft-starter é usada exclusivamente em motores de corrente contínua."
+        "A Soft-starter controla apenas a rampa de tensão, enquanto o VFD controla tensão e frequência."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Soft-starters agem na tensão para reduzir torque/corrente; VFDs controlam a velocidade variando a frequência. (Fonte: Guia Proteção 2008 Schneider).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Para motores com partidas frequentes, qual função ANSI é essencial para evitar o acúmulo de calor excessivo?",
       "options": [
-        "ANSI 27 (Subtensão).",
         "ANSI 66 (Número de partidas por hora).",
+        "ANSI 27 (Subtensão).",
         "ANSI 59 (Sobretensão).",
         "ANSI 32 (Direcional de Potência)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A função 66 limita o número de tentativas de partida em um intervalo de tempo para permitir o resfriamento. (Fonte: Virtus_ProtMotores_Ed1).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "A partida direta é o método que resulta na menor elevação de temperatura nos enrolamentos durante o processo de aceleração.",
       "correctAnswer": false,
       "explanation": "A partida direta gera a maior corrente inicial, provocando aquecimento rápido por efeito Joule (I²t). (Fonte: Apostila Proteção).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "As Soft-starters permitem o controle preciso da velocidade do motor em regime permanente, substituindo os inversores de frequência.",
       "correctAnswer": false,
       "explanation": "Soft-starters controlam apenas a partida e a parada; o controle de velocidade em regime exige inversores (VFD). (Fonte: Guia Proteção 2008 Schneider).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A proteção diferencial (87M) é recomendada para motores de alta tensão para detectar faltas entre fases ou fase-terra precocemente.",
       "correctAnswer": true,
       "explanation": "A função 87M compara correntes de entrada e saída, sendo extremamente sensível a faltas internas. (Fonte: Virtus_ProtMotores_Ed1).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Cargas como bombas centrífugas e ventiladores possuem um conjugado (torque) que varia proporcionalmente ao quadrado da velocidade.",
       "correctAnswer": true,
       "explanation": "Essas cargas são classificadas como de conjugado variável/quadrático, facilitando a partida com tensão reduzida. (Fonte: Virtus_ProtMotores_Ed1).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O uso de VFDs pode causar correntes de eixo e danos aos rolamentos devido aos altos índices de dV/dt na saída do inversor.",
       "correctAnswer": true,
       "explanation": "As rápidas comutações dos IGBTs nos inversores geram tensões capacitivas que podem romper a isolação do filme de óleo dos rolamentos. (Fonte: Virtus_ProtMotores_Ed1).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "A função ANSI _____ é responsável por monitorar e limitar o número de partidas consecutivas permitidas para um motor.",
+      "statement": "A função ANSI ____ é responsável por monitorar e limitar o número de partidas consecutivas permitidas para um motor.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Em aplicações de motores para áreas classificadas, a proteção deve assegurar que a temperatura da carcaça não exceda a temperatura de _____ do ambiente.",
+      "statement": "Em aplicações de motores para áreas classificadas, a proteção deve assegurar que a temperatura da carcaça não exceda a temperatura de ____ do ambiente.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para proteger motores contra o travamento do rotor durante o funcionamento ou partida incompleta, utiliza-se a função ANSI _____.",
+      "statement": "Para proteger motores contra o travamento do rotor durante o funcionamento ou partida incompleta, utiliza-se a função ANSI ____.",
       "blanks": [
         {
           "index": 0,

@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "",
+  "categoryOrder": 4,
+  "module": "Softwares de Estudos Elétricos",
+  "moduleSubtitle": "Ferramentas de analise de sistemas eletricos de potencia",
+  "moduleOrder": 3,
+  "trail": "Organon",
+  "trailOrder": 7,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "O que é o programa computacional Organon e qual é o seu objetivo principal no setor elétrico?",
+      "options": [
+        "Software exclusivo para o projeto físico de placas e semicondutores eletrônicos.",
+        "Ferramenta para avaliação da segurança operativa de sistemas elétricos (estática e dinâmica).",
+        "Programa de otimização de faturamento e tarifação de energia a longo prazo.",
+        "Aplicativo exclusivo para análise de curto-circuito em painéis fotovoltaicos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Organon é um aplicativo de avaliação de segurança de sistemas elétricos, englobando aspectos de regime permanente e dinâmicos em um ambiente integrado. (1 AVALIAÇÃO DA SEGURANÇA EM SISTEMAS ELÉTRICOS DE POTÊNCIA UTILIZANDO O PROGRAMA COMPUTACIONAL ORGANON Pedro Henrique Loure)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Na sua concepção, qual é a ordem de prioridade dos critérios adotada no desenvolvimento do Organon?",
+      "options": [
+        "Fidelidade da simulação, seguida de robustez e velocidade computacional.",
+        "Apenas interface gráfica moderna com recursos multimídia 3D.",
+        "Velocidade computacional em detrimento da precisão da simulação.",
+        "Uso exclusivo de métodos lineares aproximados para simplificar o tempo de máquina."
+      ],
+      "correctIndex": 0,
+      "explanation": "O programa prioriza pela fidelidade de simulação (modelos detalhados), seguido de robustez e velocidade computacional, o que o distingue de muitas ferramentas de tempo real puramente velozes. (1 AVALIAÇÃO DA SEGURANÇA EM SISTEMAS ELÉTRICOS DE POTÊNCIA UTILIZANDO O PROGRAMA COMPUTACIONAL ORGANON Pedro Henrique Loure)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "O que representa a Região de Segurança gerada pelo Organon como ferramenta de apoio à decisão no ONS?",
+      "options": [
+        "O polígono de aterramento e malha de terra da subestação limitando tensões de passo.",
+        "Uma área geográfica reservada onde não podem ser instaladas linhas de transmissão aéreas.",
+        "O resultado da exploração de pontos de operação, a partir da condição atualizada, revelando eventuais violações de limites e critérios.",
+        "Um gráfico que detalha apenas a atuação térmica de proteção contra descargas atmosféricas."
+      ],
+      "correctIndex": 2,
+      "explanation": "A Região de Segurança é o resultado da exploração de pontos de operação, a partir da condição atualizada, apontando onde podem ocorrer violações de limites e critérios operativos do sistema. (RT-CT.BR.01 - Conceitos e entendimento da Região de Segurança para uso em Tempo Real - ONS)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual método o Organon utiliza nativamente para realizar as simulações dinâmicas no domínio do tempo?",
+      "options": [
+        "Integração numérica com passo estritamente fixo de 200 microssegundos.",
+        "Integração de Euler explícito e sequencial sem correção iterativa.",
+        "Integração numérica com passo e ordem variáveis, do tipo Preditor-Corretor.",
+        "Método espectral baseado na transformada de Laplace direta no núcleo do software."
+      ],
+      "correctIndex": 2,
+      "explanation": "Na análise dinâmica, o Organon utiliza um método de integração numérica com passo e ordem variáveis (Preditor-Corretor), adequado para eficiência em simulações de curto e longo prazo. (1 AVALIAÇÃO DA SEGURANÇA EM SISTEMAS ELÉTRICOS DE POTÊNCIA UTILIZANDO O PROGRAMA COMPUTACIONAL ORGANON Pedro Henrique Loure)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Quais modelos internos o Organon emprega para implementar e simular um sistema VSC-HVDC no domínio do tempo?",
+      "options": [
+        "Modelos universais clássicos de máquina de indução.",
+        "Multiterminal VSC Link Data (MLD) e Voltage Source Converter with Control via d-q (VSC02).",
+        "Apenas os modelos nativos de tiristores do tipo LCC-HVDC acoplados com conversores buck.",
+        "Exclusivamente componentes de matrizes RLC através de blocos passivos TACS."
+      ],
+      "correctIndex": 1,
+      "explanation": "No ORGANON, o modelo VSC-HVDC é implementado através do objeto Multi-terminal VSC Link Data (MLD) para parâmetros estáticos e do modelo dinâmico VSC02 para malhas de controle via referencial d-q. (Implementação e validação de um sistema equivalente contemplando um elo VSC-HVDC tipo embutido na ferramenta Organon)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Para calcular e exibir as projeções de deslocamento em um nomograma de Região de Segurança, as usinas são divididas em quantos grupos operacionais?",
+      "options": [
+        "Apenas um grupo de usinas equivalentes do sistema.",
+        "Dois grupos, correspondentes a geradores térmicos e hidráulicos.",
+        "Três grupos de geração.",
+        "Seis grupos divididos estritamente pelas áreas do SIN."
+      ],
+      "correctIndex": 2,
+      "explanation": "A definição é baseada em três grupos de geração, o que permite a exploração da vizinhança do ponto de operação, resultando em nomogramas com as projeções bidimensionais (Ex: Grupo 1 vs. Grupo 2). (RT-CT.BR.01 - Conceitos e entendimento da Região de Segurança para uso em Tempo Real - ONS)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Qual é a diferença central no método de processamento das contingências durante o cálculo das Regiões de Segurança Estática (RSE) e Dinâmica (RSD) no Organon?",
+      "options": [
+        "A RSE ignora contingências e analisa apenas o caso base.",
+        "A RSE simula as contingências via Fluxo de Potência convencional, enquanto a RSD simula a lista usando integração no domínio do tempo.",
+        "A RSD analisa as contingências pelo fluxo de potência continuado (focando apenas nas curvas PxV).",
+        "A RSD restringe o cálculo a apenas faltas monofásicas na barra swing."
+      ],
+      "correctIndex": 1,
+      "explanation": "A diferença está no método de solução: na RSE, a análise de contingências é simulada por Fluxo de Potência convencional; na RSD, as contingências são simuladas no domínio do tempo. (1 AVALIAÇÃO DA SEGURANÇA EM SISTEMAS ELÉTRICOS DE POTÊNCIA UTILIZANDO O PROGRAMA COMPUTACIONAL ORGANON Pedro Henrique Loure)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "O Organon possui o método FPDS para solução alternativa do fluxo. O que esta sigla significa e qual a sua característica perante o método tradicional?",
+      "options": [
+        "Fator de Potência Dinâmico e Sequencial, para sistemas em corrente contínua.",
+        "Fluxo de Potência por Dinâmica Sintética, transformando o problema algébrico convencional em um problema algébrico-diferencial robusto.",
+        "Filtro Programável de Descargas Simétricas, essencial em coordenação de proteção.",
+        "Função Parametrizada de Despacho Seguro, focada apenas em otimização de custo (OPF)."
+      ],
+      "correctIndex": 1,
+      "explanation": "FPDS significa Fluxo de Potência por Dinâmica Sintética, um método robusto onde o problema algébrico é convertido num problema algébrico-diferencial, superando problemas de divergência do método de Newton. (1 AVALIAÇÃO DA SEGURANÇA EM SISTEMAS ELÉTRICOS DE POTÊNCIA UTILIZANDO O PROGRAMA COMPUTACIONAL ORGANON Pedro Henrique Loure)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Na validação temporal do modelo de HVDC do Organon em comparação ao software PSCAD, qual indicador foi adotado no trabalho para quantificar as discrepâncias?",
+      "options": [
+        "Apenas a diferença percentual simples sobre os picos em regime estacionário RMS.",
+        "A Transformada Rápida de Fourier (FFT) para verificar sobreposições de matriz de admitância nodal.",
+        "A métrica IDT1, que utiliza a norma do vetor de erros relativos obtidos nas amostras de sinal sincronizadas.",
+        "Um sistema estatístico baseado na Função de Densidade de Probabilidade de Weibull."
+      ],
+      "correctIndex": 2,
+      "explanation": "A metodologia empregada quantifica o desempenho por meio da análise temporal das ondas utilizando a métrica IDT1 (baseada no cálculo da norma de erros relativos entre amostras equalizadas). (Implementação e validação de um sistema equivalente contemplando um elo VSC-HVDC tipo embutido na ferramenta Organon)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Ao parametrizar transformadores de um elo VSC-HVDC oriundos do PSCAD (bases de 750/700 MVA) no Organon, que ajuste foi necessário para a conversão exata da reatância de dispersão?",
+      "options": [
+        "Inversão dos sinais matemáticos nos parâmetros reativos em pu.",
+        "Mudança estrita da topologia de ligação delta-estrela para estrela-estrela sem carga.",
+        "Modificação e conversão analítica das impedâncias em per-unit para a base unificada de 100 MVA estabelecida no Organon.",
+        "Desconsideração da indutância de dispersão devido à integração por Preditor-Corretor."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para obter equivalência do transformador no sistema PU do Organon, foi necessário realizar a mudança de base de potência, das originais no PSCAD para a base unificada de 100 MVA (ex: Xt/7.5 para o retificador). (Implementação e validação de um sistema equivalente contemplando um elo VSC-HVDC tipo embutido na ferramenta Organon)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "O Organon é utilizado pelo Operador Nacional do Sistema Elétrico (ONS) como uma ferramenta institucionalizada na gestão e planejamento da segurança operativa.",
+      "correctAnswer": true,
+      "explanation": "O Organon é uma das ferramentas utilizadas nas Salas de Controle do ONS para identificar a condição de segurança operativa em tempo real e planejamento. (RT-CT.BR.01 - Conceitos e entendimento da Região de Segurança para uso em Tempo Real - ONS)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "O Organon restringe todo o seu cálculo operacional a uma única CPU local, sendo impossível utilizar computação paralela ou processamento distribuído para varredura de contingências.",
+      "correctAnswer": false,
+      "explanation": "Os processos de avaliação de segurança do Organon são baseados em processamento distribuído, utilizando um sistema do tipo Mestre-Escravo que reduz massivamente o tempo computacional total de contingências. (1 AVALIAÇÃO DA SEGURANÇA EM SISTEMAS ELÉTRICOS DE POTÊNCIA UTILIZANDO O PROGRAMA COMPUTACIONAL ORGANON Pedro Henrique Loure)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Dentro da exibição de nomogramas da Região de Segurança, a 'Curva do Nariz' representa o limite térmico em que cabos aéreos de transmissão perdem sua integridade mecânica.",
+      "correctAnswer": false,
+      "explanation": "A curva do nariz (Limite de estabilidade de tensão) representa o limite verificado onde ocorreu o esgotamento do suporte de potência reativa, não sendo um limitador diretamente atrelado a integridade mecânica de cabos. (RT-CT.BR.01 - Conceitos e entendimento da Região de Segurança para uso em Tempo Real - ONS)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "A tecnologia VSC-HVDC, plenamente possível de ser simulada pelo Organon, possui a capacidade intrínseca de estabelecer uma rede elétrica trifásica do zero (Blackstart).",
+      "correctAnswer": true,
+      "explanation": "Devido à comutação forçada, o conversor VSC pode sintetizar uma rede trifásica equilibrada, permitindo a partida com a rede CA inicialmente desligada (Blackstart), diferente do tradicional LCC. (Implementação e validação de um sistema equivalente contemplando um elo VSC-HVDC tipo embutido na ferramenta Organon)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Na determinação da Região de Segurança Dinâmica (RSD) no Organon, os critérios e limites de tensão dos barramentos são checados e validados apenas antes de ocorrer a contingência (regime base).",
+      "correctAnswer": false,
+      "explanation": "No cálculo da RSD, o Organon verifica os critérios de limite térmico e de tensão somente após a solução no domínio do tempo da lista de contingências (pós-contingência), ignorando infrações unicamente do caso base. (1 AVALIAÇÃO DA SEGURANÇA EM SISTEMAS ELÉTRICOS DE POTÊNCIA UTILIZANDO O PROGRAMA COMPUTACIONAL ORGANON Pedro Henrique Loure)",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "O sistema de visualização e cálculo automatizado de condições onde há risco operativo, utilizado em ambientes do Operador Nacional do Sistema (ONS), é chamado de Região de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Segurança"
+        }
+      ],
+      "explanation": "O Organon automatiza a Avaliação da Segurança através do conceito de Região de Segurança (estática e dinâmica), gerando limites operacionais explícitos. (1 AVALIAÇÃO DA SEGURANÇA EM SISTEMAS ELÉTRICOS DE POTÊNCIA UTILIZANDO O PROGRAMA COMPUTACIONAL ORGANON Pedro Henrique Loure)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "Para apoiar a análise visual em Tempo Real, as fronteiras e limites dos cenários gerados pela exploração dos grupos de geração são grafados em projeções 2D chamadas de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "nomogramas"
+        }
+      ],
+      "explanation": "Nomograma é a definição dada à projeção da região de segurança em gráficos bidimensionais (como Grupo 1 x Grupo 2). (RT-CT.BR.01 - Conceitos e entendimento da Região de Segurança para uso em Tempo Real - ONS)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "A Região de Segurança Estática baseia a busca dos seus limites de colapso utilizando o método do Fluxo de Potência ____ (baseado em Preditor-Corretor em PxV).",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Continuado"
+        }
+      ],
+      "explanation": "No cálculo da RSE, o Organon avança o ponto de operação e analisa as violações fazendo uso extensivo do Fluxo de Potência Continuado. (1 AVALIAÇÃO DA SEGURANÇA EM SISTEMAS ELÉTRICOS DE POTÊNCIA UTILIZANDO O PROGRAMA COMPUTACIONAL ORGANON Pedro Henrique Loure)"
+    }
+  ]
+}

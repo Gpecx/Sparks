@@ -13,11 +13,11 @@
       "statement": "Qual recurso substitui a fiacao convencional de cobre no intertravamento entre reles na IEC 61850?",
       "options": [
         "Cabos coaxiais seriais.",
-        "Mensagens GOOSE sobre Ethernet.",
+        "Sinais analogicos 4-20mA.",
         "Mensagens MMS via TCP.",
-        "Sinais analogicos 4-20mA."
+        "Mensagens GOOSE sobre Ethernet."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O protocolo GOOSE envia status de modo rapido e confiavel via rede, dispensando a maioria dos cabos fisicos de controle.",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Na protecao de falha de disjuntor (50BF) via GOOSE, qual acao e executada apos o tempo de falha expirar?",
       "options": [
         "O IED envia um GOOSE para fechar o disjuntor falho mecanicamente.",
-        "O IED envia um GOOSE de trip para abrir o disjuntor a montante.",
         "O sistema SCADA emite um MMS para religamento automatico.",
+        "O IED envia um GOOSE de trip para abrir o disjuntor a montante.",
         "A rede comuta para o link redundante do switch isolando a falta."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A protecao 50BF atua como gatilho para o envio de uma mensagem GOOSE visando disparar a abertura do disjuntor a montante.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "No esquema de Transferencia Automatica de Linha (TAL), como a condicao de subtensao de uma entrada e comunicada?",
       "options": [
         "O IED envia a leitura analogica de tensao via GOOSE para o SCADA.",
-        "O IED da entrada com subtensao envia sinalizacao de disjuntor aberto via GOOSE para o IED da barra.",
+        "O IED da entrada desliga a rede Ethernet temporariamente para evitar danos.",
         "O IED da barra envia um bloqueio reverso via GOOSE para as entradas.",
-        "O IED da entrada desliga a rede Ethernet temporariamente para evitar danos."
+        "O IED da entrada com subtensao envia sinalizacao de disjuntor aberto via GOOSE para o IED da barra."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Em caso de abertura por subtensao, o IED afetado notifica seu status enviando um GOOSE de disjuntor aberto ao IED do barramento.",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Para evitar operacoes indevidas por duplicidade de MAC em redes integradas, qual tecnica de projeto e recomendada para GOOSE?",
       "options": [
-        "O uso exclusivo de enderecos IP fixos para roteamento.",
         "O confinamento das mensagens GOOSE utilizando VLANs nos switches.",
+        "O uso exclusivo de enderecos IP fixos para roteamento.",
         "A desativacao completa do protocolo Spanning Tree.",
         "A utilizacao de servidores OPC redundantes processando os MACs."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O confinamento via VLAN impede que pacotes GOOSE vazem para outras subestacoes, mitigando riscos de MACs virtuais duplicados.",
       "difficulty": "medium"
     },
@@ -91,11 +91,11 @@
       "statement": "Em um esquema de protecao com rele de bloqueio virtual (86T), como o bloqueio do transformador e propagado aos vaos?",
       "options": [
         "Atraves de fios de cobre correndo pelo patio ate o painel de comando.",
-        "Pelo disparo rapido de mensagens cliente-servidor MMS para os disjuntores.",
         "O sinal 86T e emitido via rede GOOSE para bloquear o fechamento dos disjuntores associados.",
+        "Pelo disparo rapido de mensagens cliente-servidor MMS para os disjuntores.",
         "Atraves do corte deliberado do link de fibra otica principal."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A atuacao da protecao diferencial (87) ativa um rele 86T virtual cujo sinal e disseminado via GOOSE para intertravar equipamentos.",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "O que deve ocorrer com as logicas de intertravamento caso o link GOOSE sofra uma falha grave de comunicacao?",
       "options": [
         "A subestacao deve ser imediatamente desenergizada pelo SCADA.",
-        "Os IEDs sadios bloqueiam as logicas referentes apenas ao IED com falha, mantendo o restante operante.",
         "O switch ethernet assume o papel de IED e envia comandos substitutos.",
+        "Os IEDs sadios bloqueiam as logicas referentes apenas ao IED com falha, mantendo o restante operante.",
         "A rede reinicia alterando o MAC address de todos os IEDs ativos."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Em caso de falha no IED ou link, os demais bloqueiam apenas as lógicas dependentes daquele no, recobrindo a protecao se configurado.",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "Como a Vale Itabira implementou uma metodologia de teste pratico de comunicacao GOOSE sem utilizar maletas de injecao?",
       "options": [
         "Usando o metodo ping-pong configurado nos servidores SCADA.",
-        "Pressionando teclas no frontal do IED para gerar pulsos mapeados em datasets GOOSE monitorados por LEDs.",
+        "Alterando a porta TCP do switch gerenciador para espelhar o trafego.",
         "Desconectando a fibra otica repetidamente para forcar a mensagem de erro.",
-        "Alterando a porta TCP do switch gerenciador para espelhar o trafego."
+        "Pressionando teclas no frontal do IED para gerar pulsos mapeados em datasets GOOSE monitorados por LEDs."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Foi criada uma logica onde botoes frontais geram pulsos de teste transmitidos por GOOSE e sinalizados por LEDs no IED assinante.",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Ao implementar a protecao de barra distribuida (PBDF) com base na IEC 61850, como a topologia dos Logical Nodes se estrutura?",
       "options": [
-        "Um unico IED central capta fisicamente todos os cabos de cobre dos TCs da subestacao.",
         "Uma instancia PBDF de estacao e processada recebendo dados via rede (GOOSE/SMV) das instancias de vao.",
+        "Um unico IED central capta fisicamente todos os cabos de cobre dos TCs da subestacao.",
         "A protecao dispensa totalmente o uso de LNs focando em polling MMS.",
         "Os IEDs de vao bloqueiam a comunicacao horizontal durante curtos-circuitos."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A protecao de barra e modelada de forma distribuida com unidades de vao enviando dados a uma unidade central na estacao.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A aplicacao de mensagens GOOSE substitui grande parte da fiacao de controle em cobre usada nos intertravamentos convencionais de subestacoes.",
       "correctAnswer": true,
       "explanation": "O GOOSE elimina a necessidade de fios fisicos de comando, transmitindo estados e bloqueios de forma confiavel pela rede local.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No esquema de seletividade logica, o IED localizado a montante utiliza o protocolo GOOSE para enviar um trip acelerado ao IED a jusante.",
       "correctAnswer": false,
       "explanation": "O fluxo e inverso: o IED a jusante (mais proximo da falta) que percebe o curto envia um GOOSE de bloqueio ao IED a montante.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O confinamento de GOOSE impede a propagacao indevida de mensagens criticas para outras subestacoes por meio de restricoes baseadas em VLAN ID nos.",
       "correctAnswer": true,
       "explanation": "Filtros de VLAN nos switches limitam o trafego da VLAN GOOSE (ex: VLAN 101), confinando a mensagem no ambiente de rede da planta local.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A utilizacao da rede para troca dinamica de grupo de ajustes via GOOSE ou SCL e inviavel, pois compromete o tempo de execucao do algoritmo de.",
       "correctAnswer": false,
       "explanation": "A troca de ajustes de forma dinamica (para adequacao de topologias) e plenamente suportada e executada com o rele em operacao segura.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Na metodologia de testes implementada na planta industrial da Vale, a tecla frontal de teste da falha de disjuntor (50BF) deve permanecer ativada.",
       "correctAnswer": false,
       "explanation": "Como o teste da funcao 50BF resulta no trip efetivo do disjuntor a montante, a tecla deve permanecer desabilitada para evitar o desligamento real da usina.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Para eliminar o curto-circuito caso o equipamento do vao trave mecanicamente, o rele de protecao envia um sinal GOOSE a montante ativando a logica _____.",
+      "statement": "Para eliminar o curto-circuito caso o equipamento do vao trave mecanicamente, o rele de protecao envia um sinal GOOSE a montante ativando a logica ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A arquitetura de protecao que utiliza GOOSE para bloquear a sobrecorrente a montante e permitir a atuacao focada na zona faltosa a jusante e _____.",
+      "statement": "A arquitetura de protecao que utiliza GOOSE para bloquear a sobrecorrente a montante e permitir a atuacao focada na zona faltosa a jusante e ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para sanar problemas com MAC Address virtuais duplicados em infraestruturas unificadas, aplica-se a restricao nas portas dos roteadores tecnica _____.",
+      "statement": "Para sanar problemas com MAC Address virtuais duplicados em infraestruturas unificadas, aplica-se a restricao nas portas dos roteadores tecnica ____.",
       "blanks": [
         {
           "index": 0,

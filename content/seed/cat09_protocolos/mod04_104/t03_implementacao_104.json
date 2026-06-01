@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Na formatacao do quadro de controle APCI do protocolo IEC 104, qual e o valor padrao do byte de inicio (Start byte)?",
       "options": [
-        "68H",
-        "10H",
         "55H",
+        "10H",
+        "68H",
         "FFH"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O formato basico das mensagens do IEC 104 estipula que o primeiro byte da APCI de controle sempre sera 68H.",
       "difficulty": "easy"
     },
@@ -40,10 +40,10 @@
       "options": [
         "64 bytes.",
         "128 bytes.",
-        "253 bytes.",
-        "1500 bytes."
+        "1500 bytes.",
+        "253 bytes."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "O segundo byte do cabecalho APCI restringe o tamanho maximo da mensagem de aplicacao transmitida a 253 bytes.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Nas Mensagens do formato I (Informacao) no protocolo IEC 104, o que os parametros NS e NR representam tecnicamente no fluxo logico?",
       "options": [
-        "Numero do sistema central e numero do roteador de borda.",
         "Quantidade de mensagens transmitidas (NS) e recebidas (NR) por um determinado lado.",
+        "Numero do sistema central e numero do roteador de borda.",
         "Network Source e Network Receiver do link IP.",
         "Nivel de seguranca (NS) e nivel de redundancia (NR) do switch."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "As Mensagens de Informacao (Formato I) utilizam os contadores NS e NR para sinalizar mensagens enviadas e processadas entre as partes.",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Para ativar corretamente o fluxo de dados da aplicacao no IEC 104, qual comando logico a estacao controladora deve enviar primeiramente?",
       "options": [
-        "STARTDT ACT",
-        "TESTFR CON",
         "STOPDT ACT",
+        "TESTFR CON",
+        "STARTDT ACT",
         "ASDU INIT"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "A mensagem de enlace STARTDT ACT (Start Data Transfer Activation) e enviada pela controladora para autorizar e inicializar o envio de dados.",
       "difficulty": "medium"
     },
@@ -91,11 +91,11 @@
       "statement": "Atraves de qual mensagem o sistema SCADA monitora a disponibilidade e a integridade da conexao TCP com as remotas IEC 104 silenciosas?",
       "options": [
         "Enviando interrogacoes ciclicas baseadas em multicast GOOSE.",
-        "Emitindo periodicamente o comando de enlace logico conhecido como TESTFR.",
+        "Forcando a leitura continua dos qualificadores de bloqueio (BL) nos escravos.",
         "Verificando ativamente as retransmissoes nativas do protocolo ARP da camada 2.",
-        "Forcando a leitura continua dos qualificadores de bloqueio (BL) nos escravos."
+        "Emitindo periodicamente o comando de enlace logico conhecido como TESTFR."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O comando TESTFR (Test Frame) e uma mensagem do formato U reservada unicamente para testar a atividade e integridade logica do link em periodos ociosos.",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Ao mapear pontos operacionais no IEC 104, quais campos da ASDU representam obrigatoriamente o escravo de origem e o endereco especifico da grandeza?",
       "options": [
-        "Type Identification (TI) e Cause of Transmission (COT).",
         "Common Address of ASDU (CAA) e Information Object Address (IOA).",
+        "Type Identification (TI) e Cause of Transmission (COT).",
         "Variable Structure Qualifier (VSQ) e Receive Sequence Number (NR).",
         "Application Control Information (APCI) e o MAC Address do roteador."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O campo CAA atesta o numero comum correspondente a remota que transmite os dados, ao passo que o IOA e o indexador especifico do ponto medido.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "Para se adaptar ao novo formato TCP/IP, o protocolo IEC 60870-5-104 removeu integralmente a semantica da camada ASDU original do IEC 101.",
       "correctAnswer": false,
       "explanation": "A implementacao da camada de aplicacao do IEC 104 permaneceu exatamente identica a do IEC 101, reutilizando os mesmos blocos e definicoes de ASDU.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Quando o equipamento em campo sofre congelamento de rotina e deixa de atualizar internamente os valores, a mensagem ASDU pode reportar esse ponto.",
       "correctAnswer": true,
       "explanation": "O protocolo atrela qualificadores ao IOA de cada ponto transmitido, utilizando as flags como NT (Nao Atualizado), IV (Invalido) e BL (Bloqueado) para sinalizar integridade.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A estacao mestre utiliza a emissao da mensagem de enlace STOPDT ACT para sinalizar o fim da ativacao ou forcar a parada da transmissao de dados.",
       "correctAnswer": true,
       "explanation": "A mensagem de formato U denominada STOPDT (Stop Data Transfer) interrompe a troca dos blocos da APDU mediante comando do controlador.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Uma Application Data Unit (APDU) trafegada atraves de um tunel seguro de VPN contendo pacotes IEC 104 congrega sempre os bytes de controle APCI.",
       "correctAnswer": true,
       "explanation": "O modelo estrutural mostra que a mensagem global TCP (APDU) compoe-se sistematicamente da somatoria dos bytes de cabecalho APCI e dos dados operacionais ASDU.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Para auxiliar o diagnostico de redes com falhas latentes em aplicacoes IEC 104, o Timeout t3 e utilizado para regular o intervalo de tempo inativo.",
       "correctAnswer": true,
       "explanation": "O timer t3 (idle timeout) avalia se a linha TCP ficou estagnada e envia o pedido TESTFR mantendo o soquete de telemetria ciente da vitalidade da sessao (Informacao externa).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O qualificador empregado no cabecalho da ASDU para sinalizar se os enderecos dos varios pontos anexos (IOA) seguem de forma sequencial ou nao e _____.",
+      "statement": "O qualificador empregado no cabecalho da ASDU para sinalizar se os enderecos dos varios pontos anexos (IOA) seguem de forma sequencial ou nao e ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O campo especifico do protocolo responsavel por categorizar se a grandeza transmitida no frame origina-se de uma interrogacao geral ou de uma _____.",
+      "statement": "O campo especifico do protocolo responsavel por categorizar se a grandeza transmitida no frame origina-se de uma interrogacao geral ou de uma ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Na logica algoritmica que controla o handshaking do IEC 104, o parametro limitante de ajuste responsavel por ditar o maximo de quadros de formato I _____.",
+      "statement": "Na logica algoritmica que controla o handshaking do IEC 104, o parametro limitante de ajuste responsavel por ditar o maximo de quadros de formato I ____.",
       "blanks": [
         {
           "index": 0,

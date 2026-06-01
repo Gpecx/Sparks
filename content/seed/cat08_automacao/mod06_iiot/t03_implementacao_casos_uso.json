@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Edge Computing e IIoT",
+  "moduleSubtitle": "Industria 4.0, edge computing, IIoT e casos de uso",
+  "moduleOrder": 5,
+  "trail": "Implementação e Casos de Uso",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o primeiro passo recomendado para iniciar a implementação da IoT Industrial com foco no retorno financeiro?",
+      "options": [
+        "Adquirir imediatamente sensores modernos de rede sem fio 5G.",
+        "Definir com clareza qual é o problema de negócio prioritário a ser resolvido.",
+        "Descartar todas as máquinas antigas da fábrica e comprar as conectadas.",
+        "Desenvolver lógicas exclusivas em nuvem para cada CLP isolado."
+      ],
+      "correctIndex": 1,
+      "explanation": "Antes de adquirir sensores, a organização deve definir o problema financeiro crítico criando uma linha de base do custo atual (IoT Industrial: Casos de Uso e ROI - Baita Aceleradora).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na arquitetura de Edge AI na indústria, onde ocorre majoritariamente o processamento analítico dos dados gerados?",
+      "options": [
+        "Exclusivamente no sistema gerencial da nuvem corporativa pública.",
+        "Dentro de datacenters geolocalizados focados no faturamento empresarial.",
+        "Próximo à própria origem do dado, como em máquinas e gateways instalados no chão de fábrica.",
+        "Nos painéis antigos analógicos desprovidos de comunicação digital serial."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Edge AI atua realizando a computação e a análise da inteligência artificial localmente nos dispositivos alocados na borda do chão de fábrica (Edge AI na Indústria).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De que forma o protocolo de comunicação MQTT estrutura a transmissão e o repasse de informações em arquiteturas IIoT?",
+      "options": [
+        "Aplicando um elo contínuo mestre-escravo por fiação analógica de corrente 4-20mA.",
+        "Exigindo conexões diretas ponto a ponto baseadas apenas no modelo OSI da Camada 2.",
+        "Através de consultas diretas a arquivos temporários de texto gravados localmente no atuador.",
+        "Utilizando um modelo publish/subscribe onde mensagens são distribuídas com base em tópicos."
+      ],
+      "correctIndex": 3,
+      "explanation": "O MQTT baseia-se na arquitetura publish/subscribe com as informações publicadas e divididas em tópicos para os dispositivos inscritos (Uma Arquitetura para a Aplicação da Internet das Coisas Industrial).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas integrações tecnológicas aplicadas na Indústria 4.0, qual se sobressai como o pilar da finalidade do protocolo aberto OPC UA?",
+      "options": [
+        "Apresentar uma plataforma agnóstica para promover forte comunicação unificada, confiável e interoperável aos múltiplos sistemas de campo ou gerenciais.",
+        "Agir sendo estritamente o único formato válido na comunicação de redes locais sem fio corporativas de baixa frequência baseadas no Bluetooth.",
+        "Converter compulsoriamente interfaces em comandos físicos analógicos dedicados exclusos à proteção em chaves bimetálicas térmicas da rede.",
+        "Remover toda criptografia da rede para simplificar o tráfego aberto de dados originários da automação robótica de esteiras na produção em série."
+      ],
+      "correctIndex": 0,
+      "explanation": "O modelo OPC UA cria uma estrutura padrão de independência focada para as trocas contínuas e abertas de dados seguras aos ecossistemas industriais mistos (Uma análise comparativa entre os protocolos OPC-UA E MQTT em uma aplicação de IIOT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para lidar ativamente com as oscilações e quebras de comunicação em rede, que artifício inteligente atrelado ao formato do protocolo MQTT o projetista pode incluir na conexão inicial?",
+      "options": [
+        "O envio do comando Flush limpando todo código fonte gerencial nas remotas sem energia em campo.",
+        "O estabelecimento de uma mensagem Last Will and Testament prevendo o anúncio exato das quedas não planejadas feitas aos outros entes vinculados na rede.",
+        "O emprego estrito da arquitetura Modbus desativando por completo todas diretrizes de QoS impostas às informações retidas originadas em borda.",
+        "A formatação contínua das áreas flash nos servidores corporativos que rodam lógicas complexas nos bancos de dados unificados tipo SQL no sistema global."
+      ],
+      "correctIndex": 1,
+      "explanation": "Como mecanismo seguro caso um cliente se desprenda da rede sem sinal de alerta, a mensagem Last Will é ativada pelo broker publicando seu status ausente à rede (Uma Arquitetura para a Aplicação da Internet das Coisas Industrial).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Analisando de forma arquitetural a disposição em rede descentralizada, de que modo o modelo Fog Computing tipicamente destoa dos esquemas instalados via Mobile Edge Computing (MEC)?",
+      "options": [
+        "Fog anula o papel da roteirização física estática da infraestrutura ao requerer roteadores puros operando em nuvem de órbita via comunicações a satélite.",
+        "MEC foca na incorporação da inteligência aos servidores alocados junto às torres das estações base de rede móvel (celular), enquanto Fog posiciona seus dados fixos na linha hierárquica baseada nos roteadores e gateways.",
+        "O formato MEC roda as coletas industriais valendo-se unicamente da energia das baterias solares em sensores móveis, desconsiderando o papel dos nós centralizados.",
+        "O princípio do Fog emprega robôs logísticos móveis puramente em tráfego cego fabril para a extração do log centralizado do computador mainframe em malhas legadas."
+      ],
+      "correctIndex": 1,
+      "explanation": "A principal distinção repousa no escopo alocado onde MEC age nas arquiteturas da rede móvel (Base Stations), em contraposição às integrações LAN usuais operantes nos níveis hierárquicos dos switches em nós Fog (Estudo de modelos de Edge Computing utilizando arquitetura em nuvem - Insper).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas boas práticas para obtenção assertiva dos Retornos sobre Investimento (ROI) nos novos programas escaláveis em IIoT, que etapa primordial antecede os gastos e a compra dos maquinários tecnológicos de controle?",
+      "options": [
+        "O envio antecipado massivo de sensores avulsos a todos painéis para tentar medir ganhos passivos nos gargalos que sequer possuíam um norte no fluxo orçamentário prévio em caixa.",
+        "Excluir os dados corporativos em software ERP implementando protocolos seriais puros de isolação e bloqueio de informações nas pontas descentralizadas nas rotinas diárias.",
+        "Levantar as métricas e quantificar severamente a base de gastos e o volume dos prejuízos atuais nas máquinas chaves mapeando uma sólida linha de base comparativa nos pilares em atuação.",
+        "A substituição compulsória dos funcionários no chão de fábrica e das IHMs visuais apostando de imediato em IA gerativa pura a fim de antecipar o avanço autônomo total da planta em operação."
+      ],
+      "correctIndex": 2,
+      "explanation": "Cálculo autêntico requer definir os gargalos reais em baselines financeiras (como tempo inativo) antes da compra avaliando onde doerá caso IoT não preencha o custo esperado ao sanar o déficit (IoT Industrial: Casos de Uso e ROI - Baita Aceleradora).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao avaliar os desafios restritos às condições ruidosas no meio do controle via rede IIoT baseada em MQTT, qual vantagem tática vital a escolha técnica fixada sobre o QoS do nível 2 garante nas mensagens críticas transferidas entre as esteiras?",
+      "options": [
+        "Inibe as quedas da latência exigindo entrega paralela da rede desconfigurando o canal Mestre do protocolo antigo.",
+        "Emite comandos garantidos pela base mas que assumem duplicações contínuas aos dispositivos lentos que recusam enviar recebimentos do flag DUP.",
+        "Promete e firma com uso de protocolo transacional em quatro etapas a entrega limpa executada unicamente uma exata e singular vez descartando qualquer erro iterativo ou duplicidade indesejada no alerta final.",
+        "Libera o pacote em UDP sem nenhuma exigência garantida visando unicamente salvar o volume na taxa analógica enviada de consumo local."
+      ],
+      "correctIndex": 2,
+      "explanation": "Em casos onde os erros impactam com danos os dados (QoS nível 2) firmam a exigência transacional exata onde a mensagem atinge sem qualquer multiplicidade indevida seu trajeto final via MQTT (Uma Arquitetura para a Aplicação da Internet das Coisas Industrial).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Analisando um ecossistema com redes multicamadas distribuídas aos Agentes Inteligentes (SEMAS), de que forma as rotinas ativas no algoritmo de aprimoramento PPO (Proximal Policy Optimization) interagem no arranjo complexo suportando as análises da previsão e alertas a falhas na manutenção do chão de fábrica?",
+      "options": [
+        "Estabilizam globalmente o aprendizado a longo prazo evoluindo taticamente de forma perene as decisões otimizadas a partir dos prêmios das condições de base nos centros gerenciais em rede Cloud e distribuindo melhorias em feedback cíclico.",
+        "Descartam ativamente e fisicamente a leitura das válvulas que se comportem variando e sobrecarregam de modo constante com comandos do tipo assembly a memória base dos módulos fog em bordo limitados no processo contínuo industrial local.",
+        "Recuperam instantaneamente a comunicação sem a internet reajustando unicamente calibrações passivas mecânicas de forma independente nas caixas de redução das guias rolantes baseadas na detecção manual pura estática local isolada no Edge.",
+        "Comprimem as emissões volumosas do ruído em redes do tipo Profibus DP transcrevendo e traduzindo para contatos elétricos isolados diretos a 24 volts as exigências da matriz do atuador no módulo relé."
+      ],
+      "correctIndex": 0,
+      "explanation": "O recurso focado nos algoritmos de recompensas atua sobre a camada Cloud da arquitetura promovendo constante aprendizado e direcionamento das condutas de inteligências a toda teia do framework industrial autônomo (Self-Evolving Multi-Agent Network for Industrial IoT Predictive Maintenance).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O desafio prático enfrentado sobre infraestruturas defasadas engajadas no meio dinâmico das arquiteturas conectadas de OT com TI ressalta vulnerabilidades profundas; diante a inviabilidade e limitação funcional técnica de atualizar o código raiz antigo destas IHM no cenário real, como a conduta baseada em \"Virtual Patching\" (patches virtuais) resguarda esses equipamentos em controle na usina ou no processamento de rede IIoT?",
+      "options": [
+        "Transformam radicalmente as estações lógicas nativas em computação avançada quântica para impossibilitar com hardware puro os acessos criminosos externos focados unicamente nas chaves lógicas do software aberto livre base das válvulas passivas industriais.",
+        "Elimina os códigos legados convertendo instantaneamente matrizes dos CLPs antigos em rotinas na nuvem fechada em servidores alugados AWS retirando do local físico toda função de autonomia ou painéis da leitura nativa.",
+        "Aplicando as travas robustas virtuais, protegem via barreiras do tráfego atreladas à inspeção sem precisar corromper ou mexer no delicado e incompatível firmware primitivo residente dentro do próprio processador desatualizado mantendo as defesas mitigadoras limpas em rotas sensíveis aos perigos atípicos sistêmicos e exploráveis da rede online.",
+        "Bloqueiam a criptografia na conexão do chão transferindo as responsabilidades diretas sobre as invasões à sintaxe estrita da linguagem Assembly restritiva que age nas remotas cegas na área do laboratório isolado."
+      ],
+      "correctIndex": 2,
+      "explanation": "A defesa por remendos virtuais adiciona camadas extras baseadas na filtragem perene que barram requisições ofensivas sem a obrigação mecânica severa e os perigos cruciais em reescrever um código central legado da máquina operante que já perdeu o suporte de software orgânico (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A implantação da manutenção preditiva baseada em IIoT atua prevendo falhas mediante algoritmos estáticos que simplesmente recomendam a troca de peças em intervalos fixos definidos de fábrica.",
+      "correctAnswer": false,
+      "explanation": "A manutenção preditiva age processando as variáveis em tempo real com modelos analíticos para antecipar desvios e problemas reais do desgaste de uso (IoT Industrial: Casos de Uso e ROI - Baita Aceleradora).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Gateways IoT industriais são encarregados de estabelecer a conexão entre ativos legados do campo e a nuvem corporativa efetuando tradução de protocolos e análise local de dados.",
+      "correctAnswer": true,
+      "explanation": "Um gateway traduz sinais legados OT convertendo-os em formatos digitais IP modernos orientando e pré-processando a transição dessa comunicação para a TI (O que é um gateway de IoT industrial? - Maisvch).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos projetos engajados no setor de extração da mineração o conceito técnico da IoT adotando vestimentas como os 'smart helmets' foca somente e estritamente no controle financeiro automatizado das frotas de pás carregadeiras em transporte via nuvem.",
+      "correctAnswer": false,
+      "explanation": "O propósito técnico da implantação dessas ferramentas foca severamente na garantia contínua rastreável da segurança aos humanos, checando o meio para evitar exposição de mortes e incidentes nos processos industriais isolados (INTERNET DAS COISAS (IoT) NA MINERAÇÃO - UFC).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Envolvendo segurança defensiva do sistema operacional crítico industrial o perfil arquitetural designado como Zero Trust determina verificação analítica perene desconsiderando inteiramente a suposta confiança apenas baseada no estar abrigado na borda interna da fábrica.",
+      "correctAnswer": true,
+      "explanation": "O conceito fundamental e a base imposta na matriz de confiança zero exigem contínuas validações em instâncias a todo requerimento negando assim os supostos atalhos em dispositivos alocados localmente (Cybersecurity Strategies for Integrating Industrial IoT and Edge Computing).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Com base em princípios atuais os clássicos softwares SCADAs já prescindem do uso contínuo dos Gateways industriais por operarem dados na Web possuindo uma malha de criptografia digital unificada compatível em rede com termopares ou medidores isolados.",
+      "correctAnswer": false,
+      "explanation": "Atuadores industriais não contêm endereços ou linguagem IP modernos e o emprego forte de Gateways permanece a peça mediadora estrutural chave promovendo o processamento limpo bem como seguranças da interface nativamente em bordo (O que é um gateway de IoT industrial? - Maisvch).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para promover simulações da manufatura preditiva sem interferir nas operações físicas, a Indústria 4.0 aplica intensamente o monitoramento e espelhamento dinâmico virtual chamados de ____ Digitais.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Gêmeos"
+        }
+      ],
+      "explanation": "Gêmeos Digitais atuam como as representações digitais exatas que simulam otimizações processuais e o desgaste local do chão de fábrica (Tendências para o setor de automação industrial em 2026).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na troca massiva baseada em IoT o elemento contínuo servidor configurado no centro do cenário de MQTT direcionando organicamente mensagens nos variados tópicos em campo é classificado sendo o ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "broker"
+        }
+      ],
+      "explanation": "Todo coração provedor num sistema dinâmico publish/subscribe para a distribuição MQTT carrega como núcleo a figura técnica da gerência de conexões do broker (Uma Arquitetura para a Aplicação da Internet das Coisas Industrial).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Arquitetado sobremaneira atrelado à limitação da baixa energia das baterias sem fio e tráfegos exíguos limitados ao meio M2M, o protocolo comunicacional ____ incorpora as regras funcionais abertas e padronizadas com os mesmos princípios que delineiam as orientações via REST das aplicações corriqueiras da Web na requisição HTTP.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "CoAP"
+        }
+      ],
+      "explanation": "O Constrained Application Protocol constrói com exímia praticidade e afinidade na malha IoT a fluidez técnica com transações restritas similares as diretivas originárias no HTTP para acoplar ambientes conectados leves a interfaces padrão na rede online global M2M (Uma Arquitetura para a Aplicação da Internet das Coisas Industrial).",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Qual a principal função do 'Watchdog' nos relés digitais?",
       "options": [
-        "Disparar um reset ou alarme caso ocorra uma condição de erro (travamento) no programa principal.",
-        "Registrar a oscilografia das correntes nos primeiros três ciclos da falta.",
         "Sincronizar o relógio interno (RTC) do IED via GPS.",
+        "Registrar a oscilografia das correntes nos primeiros três ciclos da falta.",
+        "Disparar um reset ou alarme caso ocorra uma condição de erro (travamento) no programa principal.",
         "Converter os sinais analógicos em dados digitais filtrados."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O Watchdog é um autodiagnóstico que vigia o microprocessador; se o software travar, emite reset ou bloqueia o IED para prevenir atuações falsas.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Como opera a 'seletividade lógica' entre dois relés de sobrecorrente em série?",
       "options": [
-        "O relé a jusante (próximo à falta) envia um comando de 'espera lógica' ao relé a montante para retardar sua atuação.",
+        "A temporização é ajustada remotamente via SCADA a cada variação de carga.",
         "O relé a montante atua instantaneamente, inibindo a bobina do disjuntor a jusante.",
         "Ambos disparam simultaneamente e o religamento reconecta a zona sã.",
-        "A temporização é ajustada remotamente via SCADA a cada variação de carga."
+        "O relé a jusante (próximo à falta) envia um comando de 'espera lógica' ao relé a montante para retardar sua atuação."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Na seletividade lógica, a proteção que enxerga a falta a jusante emite um comando de bloqueio ('espera lógica') à proteção a montante, garantindo que só a seção com defeito abra rapidamente.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Qual condição é imperativa para que o esquema de falha de disjuntor (ANSI 50BF) envie trip aos disjuntores adjacentes?",
       "options": [
-        "A detecção de perda de tensão pelas funções 27 e 59 no barramento.",
         "A emissão de um comando prévio de trip seguida pela persistência da corrente de falta lida pelo sensor 50BF.",
+        "A detecção de perda de tensão pelas funções 27 e 59 no barramento.",
         "O bloqueio do relé 79 durante a contagem do tempo mecânico.",
         "A elevação térmica da câmara SF6 monitorada pela função 49."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O 50BF é ativado quando a proteção primária dá o comando de trip, mas o sensor continua detectando corrente (indicando falha de abertura), vencendo a temporização do 62BF.",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Como se comporta a porta lógica 'E' (AND) no circuito de controle de um relé digital?",
       "options": [
-        "Produz saída (nível 1) somente se ambos os sinais estiverem simultaneamente presentes nas entradas.",
         "Garante saída instantânea assim que a primeira variável ultrapassa o nível mínimo.",
+        "Produz saída (nível 1) somente se ambos os sinais estiverem simultaneamente presentes nas entradas.",
         "Inverte o sinal magnético antes de enviar o pulso à bobina de trip.",
         "Realiza a soma fasorial das entradas residuais de terra."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "A porta E (AND) libera a saída estritamente se todos os sinais necessários estiverem simultaneamente presentes e habilitados na entrada.",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Qual o objetivo da 'bobina de selo' (seal-in) nos esquemas de disparo de relés?",
       "options": [
         "Reduzir o tempo de extinção do arco injetando CC inversa no núcleo.",
-        "Fechar um contato paralelo robusto para sustentar a corrente de disparo, protegendo o frágil contato de medição contra arcos.",
         "Inibir que oscilações subsíncronas saturem o TC associado.",
+        "Fechar um contato paralelo robusto para sustentar a corrente de disparo, protegendo o frágil contato de medição contra arcos.",
         "Prevenir o desarme não intencional gerado por vibrações no invólucro."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A bobina de selo fecha um contato paralelo aos contatos de medida do relé, aliviando e protegendo a sensível palheta, que não suportaria a forte corrente da bobina do disjuntor.",
       "difficulty": "medium"
     },
@@ -91,11 +91,11 @@
       "statement": "No esquema POTT (teleproteção permissiva), qual a condição lógica que efetiva o disparo instantâneo da linha?",
       "options": [
         "Atuação da zona de subalcance somada ao bloqueio de inversão temporal.",
-        "Detecção de falta pela unidade de sobrealcance local coincidente com o recebimento do sinal permissivo do terminal remoto.",
+        "Falha monofásica de alta impedância monitorada só pela retaguarda.",
         "Bloqueio do sinal de rádio por capacitores shunt nas barras locais.",
-        "Falha monofásica de alta impedância monitorada só pela retaguarda."
+        "Detecção de falta pela unidade de sobrealcance local coincidente com o recebimento do sinal permissivo do terminal remoto."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "No POTT, os relés de distância detectam faltas com sobrealcance. Para disparar sem retardo, a lógica exige detectar a falta localmente E receber a permissão via canal da outra extremidade.",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Qual a utilidade do sinal de bloqueio na teleproteção por Comparação Direcional tipo 'Blocking'?",
       "options": [
-        "Avisar estações limítrofes de balanços para inibir os relés de subfrequência.",
-        "Transferir sem verificação a ordem do esquema de falha de disjuntor.",
         "Informar o terminal oposto que a falta detectada está atrás (reversa) da proteção local, bloqueando o disparo da zona sobrealcançada alheia.",
+        "Transferir sem verificação a ordem do esquema de falha de disjuntor.",
+        "Avisar estações limítrofes de balanços para inibir os relés de subfrequência.",
         "Comandar o fechamento acelerado das seccionadoras tripolares do anel."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "No esquema Blocking, envia-se um sinal quando o relé constata defeito em direção REVERSA. Esse sinal bloqueia o disparo temporizado da zona estendida do relé distante, garantindo estabilidade externa.",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "Qual elemento crítico a função 74TC supervisiona nos IEDs de proteção?",
       "options": [
         "A tolerância do ângulo pendular no TC do reator.",
-        "O aterramento das blindagens de cabos de telemetria SCADA.",
         "A integridade, alimentação e continuidade das bobinas e do circuito de disparo (trip) do disjuntor.",
+        "O aterramento das blindagens de cabos de telemetria SCADA.",
         "O estado da câmara de SF6 pela temperatura do arco."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A 74TC (Trip Circuit Supervision) verifica a tensão e fiação no laço da bobina de trip, identificando quebras no cabo ou oxidação nos conectores DC e enviando alarme.",
       "difficulty": "medium"
     },
@@ -130,11 +130,11 @@
       "statement": "No arranjo disjuntor-e-meio, em que situação a função 'STUB Bus' (50STUB) opera instantaneamente?",
       "options": [
         "Quando a seccionadora de transferência está em manobra no centro morto.",
-        "Quando a seccionadora de linha está aberta e ao menos um disjuntor do ramo é mantido fechado.",
         "Quando as bobinas de religamento perdem a sincronia em polos apartados.",
+        "Quando a seccionadora de linha está aberta e ao menos um disjuntor do ramo é mantido fechado.",
         "Assim que ocorre extinção deficiente no seccionalizador, ativando o contator NA."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Com a seccionadora de linha aberta e o disjuntor fechado, pode ocorrer curto entre eles (zona morta). A função STUB, habilitada pelo contato da seccionadora aberta, desarma velozmente faltas nessa região (stub).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Na seletividade lógica, o disjuntor a montante que recebe o sinal de bloqueio (espera lógica) nunca mais atuará para extinguir aquela falta.",
       "correctAnswer": false,
       "explanation": "Falso. O sinal de 'espera lógica' bloqueia apenas a atuação instantânea. A proteção a montante age de retaguarda: se a falta perdurar por falha da proteção a jusante, ela efetuará o trip temporizado de segurança.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O esquema 50BF sempre exige a passagem de sobrecorrente pelo TC, tornando inviável sua aplicação em disparos de baixa corrente como os do relé Buchholz.",
       "correctAnswer": false,
       "explanation": "Falso. Em faltas de baixa corrente (ex: disparo por Buchholz), o 50BF invoca a lógica 'sem corrente', baseada na permanência anormal do contato auxiliar do próprio disjuntor não manobrado.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A norma ANSI/IEEE C37.2 designa o código 3 ao relé de verificação ou intertravamento (interlocking), que libera ou inibe manobras conforme a posição de outros aparelhos.",
       "correctAnswer": true,
       "explanation": "Correto. A tabela IEEE C37.2 destina o número 3 a dispositivos 'Checking or Interlocking', que autorizam a operação segura em cascata conforme condições lógicas de outros disjuntores e seccionadores.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No esquema 50BF, insere-se um temporizador (típico de 0,3s, o 62BF) que aguarda a ruptura do arco nas câmaras originais antes de remover os barramentos via relé 86.",
       "correctAnswer": true,
       "explanation": "Correto. A lógica 50BF usa um temporizador (62BF) que dá ao disjuntor faltoso o tempo de desobstruir a corrente, evitando a abertura desnecessária de toda a barra pelas retaguardas.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A lógica Weak Infeed (Echo) nos esquemas POTT proíbe os chaveamentos monopolares quando a corrente decai abaixo dos níveis de inrush no terminal emissor.",
       "correctAnswer": false,
       "explanation": "Falso. A lógica Weak Infeed (Echo) socorre um terminal quando a injeção local de corrente é tão fraca que o relé não parte; ele devolve ('ecoa') o sinal recebido, permitindo a operação segura do terminal forte.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O módulo de autodiagnóstico que expede um Reset compulsório sobre a CPU do IED quando detecta laços operacionais travados (pane) é denominado _____.",
+      "statement": "O módulo de autodiagnóstico que expede um Reset compulsório sobre a CPU do IED quando detecta laços operacionais travados (pane) é denominado ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O esquema que estabelece enlace de estado entre relés em painéis, no qual o relé mais próximo da falta inibe o disjuntor principal via um sinal de bloqueio (em vez de atraso de tempo), chama-se seletividade _____.",
+      "statement": "O esquema que estabelece enlace de estado entre relés em painéis, no qual o relé mais próximo da falta inibe o disjuntor principal via um sinal de bloqueio (em vez de atraso de tempo), chama-se seletividade ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A porta lógica que valida o comando de trip se houver falta à terra OU falta de fase (qualquer uma das condições), nas equações configuráveis do relé numérico, é a porta _____.",
+      "statement": "A porta lógica que valida o comando de trip se houver falta à terra OU falta de fase (qualquer uma das condições), nas equações configuráveis do relé numérico, é a porta ____.",
       "blanks": [
         {
           "index": 0,

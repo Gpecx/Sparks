@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Qual a funcao de ferramentas de diagnostico como Wireshark e Ethereal durante os testes de IEC 61850?",
       "options": [
-        "Realizar a analise de trafego e captura de pacotes GOOSE na rede Ethernet.",
         "Parametrizar remotamente os ajustes de protecao do rele digital.",
+        "Realizar a analise de trafego e captura de pacotes GOOSE na rede Ethernet.",
         "Injetar correntes e tensoes analogicas nos reles de protecao.",
         "Desenhar o diagrama unifilar da subestacao no sistema SCADA."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "Ferramentas como Wireshark (ou Ethereal) sao analisadores de rede utilizados no comissionamento para capturar, filtrar e inspecionar pacotes GOOSE em baixo nivel.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Qual parametro configuravel no cabecalho Ethernet identifica unicamente a aplicacao GOOSE transmitida na rede?",
       "options": [
-        "O parametro APPID.",
-        "O endereço IP do servidor.",
         "A porta TCP de controle.",
+        "O endereço IP do servidor.",
+        "O parametro APPID.",
         "O marcador ConfRev."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O APPID (Application Identifier) e o parametro hexadecimal que identifica de forma unica qual aplicacao GOOSE esta sendo trafegada pelo IED na rede local.",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Como ocorre o fluxo basico de publicacao e assinatura GOOSE mapeado entre os IEDs na rede Ethernet?",
       "options": [
         "Atraves de consultas mestre-escravo utilizando TCP/IP.",
-        "Pelo modelo Publisher-Subscriber com envio em modo multicast.",
+        "Usando passagem de permissao no formato Token Ring.",
         "Por conexoes unicast com requisicao e resposta sequencial.",
-        "Usando passagem de permissao no formato Token Ring."
+        "Pelo modelo Publisher-Subscriber com envio em modo multicast."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O GOOSE adota o modelo horizontal Publisher-Subscriber, onde um equipamento publica em modo multicast e os assinantes capturam o evento na rede simultaneamente.",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Qual o objetivo tecnico do parametro Tmin parametrizado no Goose Control Block?",
       "options": [
-        "Limitar o numero total de retransmissoes por hora.",
         "Definir o menor intervalo de retransmissao de mensagem logo apos uma mudanca de estado.",
+        "Limitar o numero total de retransmissoes por hora.",
         "Agendar a manutencao preventiva do cartao de rede do IED.",
         "Ajustar a banda morta das telemedidas analogicas enviadas ao SCADA."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O Tmin indica o menor tempo de retransmissao da mensagem disparada instantaneamente logo apos uma ocorrencia (mudanca de estado), garantindo sua entrega rapida.",
       "difficulty": "easy"
     },
@@ -91,11 +91,11 @@
       "statement": "O que o IED assinante executa se o tempo maximo de espera (Time Allowed to Live) expirar sem receber novos pacotes GOOSE?",
       "options": [
         "Ele passa a publicar o mesmo GOOSE para tentar reestabelecer o link.",
-        "Ele altera a qualidade dos sinais recebidos para o estado questionavel ou antigo, bloqueando atuações inseguras.",
         "Ele envia um ping ICMP solicitando que o roteador de borda reinicie as portas.",
+        "Ele altera a qualidade dos sinais recebidos para o estado questionavel ou antigo, bloqueando atuações inseguras.",
         "Ele desconecta o disjuntor principal da subestacao imediatamente."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O Time Allowed to Live e um mecanismo de supervisao; se expirar, a qualidade (q) do sinal e marcada como invalida ou velha (oldData), impedindo falsos trips.",
       "difficulty": "medium"
     },
@@ -105,10 +105,10 @@
       "options": [
         "Que o pacote possui falha grave de checksum e deve ser descartado pelo switch.",
         "Que o IED publicador perdeu o sinal do relogio GPS da subestacao.",
-        "Que os valores do pacote sao simulados e nao devem ser utilizados para fins operacionais normais.",
-        "Que a mensagem contem uma calibracao automatica de sensores de corrente."
+        "Que a mensagem contem uma calibracao automatica de sensores de corrente.",
+        "Que os valores do pacote sao simulados e nao devem ser utilizados para fins operacionais normais."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "A flag Test informa aos assinantes que a mensagem faz parte de uma simulacao ou comissionamento e seus dados nao devem acarretar manobras ou disparos reais no processo.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Como a norma IEC 61850 orienta avaliar tecnicamente a latencia e o tempo de ida e volta da mensagem GOOSE em ensaios?",
       "options": [
-        "Injetando sinais diretos na porta USB de manutencao do IED.",
         "Por meio do ensaio de desempenho conhecido especificamente como GOOSE ping-pong.",
+        "Injetando sinais diretos na porta USB de manutencao do IED.",
         "Acessando o site do fabricante e lendo os logs em formato PDF.",
         "Utilizando um multimetro convencional conectado ao borne de rede."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O metodo normativo definido para medir o atraso (roundtrip time) e avaliar o desempenho dinamico das mensagens horizontais de tempo critico e o GOOSE ping-pong.",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Durante o comissionamento de campo, o que ocorre se o relé publicador envia o GOOSE em modo Teste, mas o assinante esta em modo Normal?",
       "options": [
-        "O IED assinante bloqueia a atuacao e ignora a mensagem de teste recebida.",
         "O IED assinante efetua o trip e gera um alarme critico na IHM.",
+        "O IED assinante bloqueia a atuacao e ignora a mensagem de teste recebida.",
         "O relé assinante repassa a mensagem para o sistema SCADA forçando o reconhecimento.",
         "O sistema desliga completamente a alimentação de 48V da subestacao."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "Segundo a norma, para que uma operacao de teste tenha efeito no assinante, ele tambem deve estar com o modo de teste devidamente habilitado. Caso contrario, o sinal simulado e ignorado.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "O endereço MAC de destino do pacote GOOSE visualizado no analisador de rede utiliza um endereço fisico padronizado associado à faixa de multicast.",
       "correctAnswer": true,
       "explanation": "As mensagens GOOSE utilizam endereços MAC virtuais estipulados para operacao multicast da norma, como a faixa iniciada em 01-0C-CD-01.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O parametro sqNum (Sequence Number) do pacote GOOSE fica paralisado em zero sempre que o IED transmite mensagens continuas sem variacoes de estado.",
       "correctAnswer": false,
       "explanation": "O Sequence Number (sqNum) e incrementado a cada repeticao de envio da mensagem no barramento, mesmo nos momentos estaveis em que nao ha mudanca no processo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A configuracao cuidadosa do VLAN ID no SCL permite confinar o trafego GOOSE nos switches apropriados, mitigando riscos de operacoes indevidas entre.",
       "correctAnswer": true,
       "explanation": "O confinamento utilizando VLANs assegura que pacotes criticos nao se propaguem para redes externas indesejadas, evitando duplicidade de MACs e operacoes falhas em plantas vizinhas.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Nos ensaios de campo, o uso de maletas de injecao de corrente dispensa totalmente a necessidade de parametrizar e configurar o Goose Control Block.",
       "correctAnswer": false,
       "explanation": "Mesmo com o uso de maletas de injecao fisica, toda a estrutura de GOOSE Application e o Goose Control Block devem estar plenamente configurados e habilitados no SCL do rele para que ele publique os eventos na rede.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Durante o troubleshooting de comunicacao, a indicacao de erro do tipo ConfRev mismatch indica que a versao do dataset GOOSE no IED publicador.",
       "correctAnswer": true,
       "explanation": "O atributo ConfRev atesta a revisao atual da configuracao. O erro confRev mismatch sinaliza divergencias causadas por desatualizacao entre o transmissor e o receptor, travando o enlace logico.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O conjunto logico configurado pelo usuario que engloba as variaveis exatas a serem publicadas pela mensagem GOOSE recebe o nome tecnico de _____.",
+      "statement": "O conjunto logico configurado pelo usuario que engloba as variaveis exatas a serem publicadas pela mensagem GOOSE recebe o nome tecnico de ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A integridade da conexao sem fio de confirmacao e verificada pelo assinante que aguarda o recebimento do pacote limitando-se ao tempo estipulado em _____.",
+      "statement": "A integridade da conexao sem fio de confirmacao e verificada pelo assinante que aguarda o recebimento do pacote limitando-se ao tempo estipulado em ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Nos ensaios dinâmicos definidos pela Parte 10 da IEC 61850, o desempenho de latência de comunicacao entre IEDs e medido aplicando o metodo GOOSE _____.",
+      "statement": "Nos ensaios dinâmicos definidos pela Parte 10 da IEC 61850, o desempenho de latência de comunicacao entre IEDs e medido aplicando o metodo GOOSE ____.",
       "blanks": [
         {
           "index": 0,

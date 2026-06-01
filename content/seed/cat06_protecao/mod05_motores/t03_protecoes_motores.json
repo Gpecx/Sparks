@@ -13,11 +13,11 @@
       "statement": "Qual a função principal do relé de sobrecarga térmica (ANSI 49) na proteção de motores?",
       "options": [
         "Detectar curtos-circuitos fase-fase instantâneos no estator.",
-        "Proteger o isolamento dos enrolamentos contra aquecimento excessivo por sobrecarga.",
         "Monitorar a vibração excessiva nos mancais de rolamento.",
+        "Proteger o isolamento dos enrolamentos contra aquecimento excessivo por sobrecarga.",
         "Impedir a motorização do gerador por fluxo reverso de potência."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A função 49 utiliza um modelo térmico para estimar a temperatura dos enrolamentos e evitar a degradação da isolação. (Fonte: Virtus_ProtMotores_Ed1.pdf).",
       "difficulty": "easy"
     },
@@ -26,11 +26,11 @@
       "statement": "Na proteção de motores, qual a distinção funcional entre as unidades ANSI 50 e 51?",
       "options": [
         "A 50 protege contra subtensão e a 51 contra sobretensão.",
-        "A 50 é para curtos-circuitos instantâneos e a 51 para sobrecorrentes temporizadas.",
+        "A 50 é usada em baixa tensão e a 51 exclusivamente em alta tensão.",
         "A 50 monitora a temperatura e a 51 o número de partidas.",
-        "A 50 é usada em baixa tensão e a 51 exclusivamente em alta tensão."
+        "A 50 é para curtos-circuitos instantâneos e a 51 para sobrecorrentes temporizadas."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A unidade 50 atua sem retardo intencional em faltas severas, enquanto a 51 provê proteção temporizada contra sobrecorrentes. (Fonte: Apostila Proteção.pdf).",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Qual o objetivo da função ANSI 66 nos relés de proteção de motores de médio e grande porte?",
       "options": [
-        "Controlar a velocidade síncrona através da variação de frequência.",
         "Limitar o número de partidas em um intervalo para permitir o resfriamento térmico.",
+        "Controlar a velocidade síncrona através da variação de frequência.",
         "Detectar a reversão acidental da sequência de fases na alimentação.",
         "Medir a resistência de isolamento do estator antes de cada partida."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A função 66 evita o acúmulo de calor proveniente de sucessivas correntes de partida (inrush). (Fonte: Virtus_ProtMotores_Ed1.pdf).",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "Qual a aplicação típica da proteção de subcorrente ou subpotência (ANSI 37) em motores?",
       "options": [
         "Detectar curtos-circuitos de baixa intensidade no centro do enrolamento.",
-        "Proteger bombas contra operação em vazio (perda de carga/fluxo).",
         "Atuar como reserva para a proteção diferencial de fase (87M).",
+        "Proteger bombas contra operação em vazio (perda de carga/fluxo).",
         "Monitorar o excesso de carga mecânica no eixo do motor."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A queda brusca de corrente em bombas indica falta de fluido, o que pode danificar selos e mancais. (Fonte: Guia Proteção 2008.pdf).",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Por que o desequilíbrio de corrente ou sequência negativa (ANSI 46) é crítico para o rotor do motor?",
       "options": [
         "Porque anula o campo girante impedindo a partida do motor.",
-        "Pois induz correntes de alta frequência no rotor, causando aquecimento severo.",
+        "Pois inverte o sentido de rotação do motor instantaneamente.",
         "Porque aumenta a tensão nos terminais do estator provocando arcos.",
-        "Pois inverte o sentido de rotação do motor instantaneamente."
+        "Pois induz correntes de alta frequência no rotor, causando aquecimento severo."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A sequência negativa cria um campo oposto que induz correntes de dupla frequência no rotor, gerando calor intenso. (Fonte: Virtus_ProtMotores_Ed1.pdf).",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Qual a função da unidade de proteção contra rotor bloqueado (ANSI 48/51LR)?",
       "options": [
-        "Sincronizar o rotor com a frequência da rede antes do fechamento.",
         "Desligar o motor caso ele não acelere dentro do tempo previsto na partida.",
+        "Sincronizar o rotor com a frequência da rede antes do fechamento.",
         "Manter o motor energizado em baixa velocidade para evitar umidade.",
         "Inibir o trip térmico durante o período de inrush da partida."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A função 48 detecta a falha na aceleração (stall), protegendo o motor contra o estresse térmico do rotor travado. (Fonte: Virtus_ProtMotores_Ed1.pdf).",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "O que caracteriza a proteção por 'imagem térmica' (ANSI 49R) nos relés numéricos modernos?",
       "options": [
         "Uma câmera infravermelha integrada que monitora a carcaça do motor.",
-        "Um algoritmo que simula o aquecimento e resfriamento baseando-se na corrente I²t.",
         "O uso exclusivo de sensores RTD tipo Pt100 instalados no entreferro.",
+        "Um algoritmo que simula o aquecimento e resfriamento baseando-se na corrente I²t.",
         "A medição da dilatação mecânica dos enrolamentos durante a partida."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A imagem térmica modela o comportamento térmico do motor, considerando inclusive o calor acumulado de eventos anteriores. (Fonte: Virtus_ProtMotores_Ed1.pdf).",
       "difficulty": "medium"
     },
@@ -130,11 +130,11 @@
       "statement": "Para um ajuste seguro da proteção de partida prolongada (ANSI 48), qual deve ser o critério em relação ao tempo de rotor bloqueado (te)?",
       "options": [
         "O tempo de ajuste deve ser sempre o dobro do tempo de rotor bloqueado.",
-        "O ajuste deve ser maior que o tempo de aceleração e menor que o tempo de rotor bloqueado (te).",
+        "O tempo de ajuste deve ser fixo em 1 segundo para qualquer tipo de carga.",
         "A função deve ser desativada caso o motor utilize partida estrela-triângulo.",
-        "O tempo de ajuste deve ser fixo em 1 segundo para qualquer tipo de carga."
+        "O ajuste deve ser maior que o tempo de aceleração e menor que o tempo de rotor bloqueado (te)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O ajuste deve permitir a partida normal, mas atuar antes que o motor atinja seu limite térmico de rotor travado. (Fonte: Virtus_ProtMotores_Ed1.pdf).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A função ANSI 50 é utilizada para proteger o motor contra sobrecargas térmicas leves e prolongadas através de curvas inversas.",
       "correctAnswer": false,
       "explanation": "Falso. A função 50 é instantânea para curtos-circuitos; a proteção contra sobrecargas térmicas é feita pela função 49 ou 51. (Fonte: Apostila Proteção.pdf).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A proteção contra sequência negativa (ANSI 46) é fundamental para detectar a perda de uma fase na alimentação do motor.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. A perda de fase gera um grande desequilíbrio e sequência negativa, o que aquece rapidamente o rotor. (Fonte: Virtus_ProtMotores_Ed1.pdf).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A função ANSI 66 monitora apenas o tempo total de operação do motor, sem considerar o número de partidas sucessivas.",
       "correctAnswer": false,
       "explanation": "Falso. A função 66 limita especificamente o número de partidas por hora e define o tempo mínimo entre elas. (Fonte: Virtus_ProtMotores_Ed1.pdf).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Sensores de temperatura tipo RTD (ANSI 38/49) instalados nos enrolamentos oferecem uma proteção térmica mais direta que o modelo de imagem térmica.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. Sensores medem a temperatura real no ponto de instalação, enquanto a imagem térmica é uma estimativa baseada na corrente. (Fonte: Guia Proteção 2008.pdf).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Em sistemas com neutro isolado, a função 50G instalada em um TC toroidal terá alta sensibilidade para detectar faltas fase-terra de baixa impedância.",
       "correctAnswer": false,
       "explanation": "Falso. Em sistemas isolados, a corrente de falta fase-terra é muito baixa (capacitiva), dificultando a detecção por sobrecorrente simples. (Fonte: Virtus_ProtMotores_Ed1.pdf).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A função ANSI _____ protege o motor contra o aquecimento excessivo resultante de sobrecargas de longa duração.",
+      "statement": "A função ANSI ____ protege o motor contra o aquecimento excessivo resultante de sobrecargas de longa duração.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para proteger o motor contra o travamento do rotor durante a partida, utiliza-se a função de proteção de partida _____ (ANSI 48).",
+      "statement": "Para proteger o motor contra o travamento do rotor durante a partida, utiliza-se a função de proteção de partida ____ (ANSI 48).",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A proteção contra _____ de fase detecta se a sequência de alimentação foi invertida, o que causaria a rotação do motor no sentido contrário.",
+      "statement": "A proteção contra ____ de fase detecta se a sequência de alimentação foi invertida, o que causaria a rotação do motor no sentido contrário.",
       "blanks": [
         {
           "index": 0,

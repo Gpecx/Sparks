@@ -1,0 +1,218 @@
+{
+  "category": "SPDA",
+  "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
+  "categoryOrder": 1,
+  "module": "Aterramento e Equipotencialização",
+  "moduleSubtitle": "Aterramento, eletrodos, resistividade, malhas e EPT",
+  "moduleOrder": 1,
+  "trail": "Tipos de Sistemas (TN, TT, IT)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Na classificacao dos esquemas de aterramento segundo a NBR 5410, o que significa a primeira letra T?",
+      "options": [
+        "Isolacao de todas as partes vivas em relacao a terra.",
+        "Um ponto da alimentacao diretamente aterrado.",
+        "Massas diretamente aterradas por eletrodo independente.",
+        "Massas ligadas ao ponto de alimentacao aterrado."
+      ],
+      "correctIndex": 1,
+      "explanation": "A primeira letra determina a situacao da alimentacao em relacao a terra, onde T = um ponto diretamente aterrado. (Fonte: Apresentacao Tecnica Sistema IT Medico, RDI Bender, Instituto de Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No que diz respeito a situacao das massas da instalacao eletrica, o que indica a segunda letra N na sigla do esquema de aterramento?",
+      "options": [
+        "Massas diretamente aterradas de forma independente.",
+        "Massas conectadas exclusivamente a uma malha de terra de referencia (MTR).",
+        "Massas isoladas de qualquer sistema de aterramento.",
+        "Massas ligadas ao ponto da alimentacao aterrado (normalmente o neutro)."
+      ],
+      "correctIndex": 3,
+      "explanation": "A segunda letra refere-se as massas, onde N = massas ligadas ao ponto da alimentacao aterrado (em corrente alternada, o ponto aterrado e normalmente o ponto neutro). (Fonte: Apresentacao Tecnica Sistema IT Medico, RDI Bender, Instituto de Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como e caracterizado eletricamente o esquema de aterramento do tipo TT?",
+      "options": [
+        "O neutro e as massas compartilham o mesmo condutor de protecao (PEN).",
+        "O neutro da fonte e aterrado por alta impedancia e as massas sao isoladas.",
+        "O neutro da fonte e aterrado e as massas sao ligadas ao neutro por meio de um condutor PE.",
+        "O neutro da fonte e ligado a terra, e as massas da instalacao sao ligadas a um eletrodo de aterramento independente."
+      ],
+      "correctIndex": 3,
+      "explanation": "No ESQUEMA TT, o neutro da fonte e ligado diretamente a terra, estando as massas da instalacao ligadas a um eletrodo de aterramento independente do eletrodo da fonte. (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No esquema de aterramento TN-S, como sao distribuidas as funcoes dos condutores de neutro e de protecao?",
+      "options": [
+        "As funcoes de neutro e protecao sao combinadas em um unico condutor chamado PEN.",
+        "As funcoes de neutro e protecao sao realizadas por condutores separados (N e PE) por toda a instalacao.",
+        "O neutro e isolado da terra, enquanto a protecao e feita por um condutor PE aterrado.",
+        "Ambas as funcoes sao descartadas, utilizando-se apenas fases ativas interligadas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O esquema pode ser do tipo TN-S, quando as funcoes de neutro e protecao forem realizadas por condutores separados (N = neutro e PE = protecao). (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a principal caracteristica operacional do esquema de aterramento IT em casos de primeira falta (curto-circuito fase-massa)?",
+      "options": [
+        "A primeira falta gera uma corrente elevadissima que dispara imediatamente o disjuntor geral.",
+        "A fonte e aterrada por uma alta impedancia, limitando a corrente de falta, o que impede que a primeira falta desligue o sistema.",
+        "O sistema IT transforma-se automaticamente em TN-C ao detectar a primeira falha.",
+        "A primeira falta e bloqueada fisicamente por dispositivos DR de 30mA obrigatoriamente instalados em todos os circuitos."
+      ],
+      "correctIndex": 1,
+      "explanation": "No Esquema IT, o aterramento da fonte e realizado atraves da insercao de uma impedancia de valor elevado, limitando a corrente de falta a um valor desejado, de forma a nao permitir que uma primeira falta desligue o sistema. (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que o esquema TT exige normalmente a utilizacao de Dispositivos Diferenciais Residuais (DR) para garantir a protecao contra choques eletricos?",
+      "options": [
+        "Porque o percurso da corrente de falta nao inclui a terra, gerando tensoes infinitas.",
+        "Porque a corrente de falta fase-massa atinge valores de curto-circuito pleno (kA), danificando os fios.",
+        "Porque o percurso da corrente de falta inclui a terra (alta resistencia), limitando a corrente a valores insuficientes para acionar disjuntores ou fusiveis.",
+        "Porque o esquema TT e exclusivo para sistemas de alta tensao, onde disjuntores comuns nao atuam."
+      ],
+      "correctIndex": 2,
+      "explanation": "No esquema TT, o percurso de uma corrente fase-massa inclui a terra, limitando a corrente a valores insuficientes para acionar disjuntores ou fusiveis, mas perigosos para as pessoas. Assim, deve ser eliminada por dispositivos DR. (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um esquema de aterramento do tipo TN-C, qual e a nomenclatura tecnica do condutor que acumula dupla funcao na instalacao eletrica?",
+      "options": [
+        "Condutor PE.",
+        "Condutor N.",
+        "Condutor de Equipotencializacao.",
+        "Condutor PEN."
+      ],
+      "correctIndex": 3,
+      "explanation": "No esquema TN-C, as funcoes de neutro e protecao sao realizadas pelo mesmo condutor, denominado PEN (Protective Earth Neutral). (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que acontece com um sistema inicialmente configurado como TN caso ocorra o rompimento (perda) do condutor neutro da concessionaria antes da entrada consumidora?",
+      "options": [
+        "O sistema deixa de ter energia instantaneamente, desligando todas as fases.",
+        "O sistema ira se transformar eletricamente em um esquema TT na perspectiva da falta.",
+        "O sistema se converte automaticamente em um esquema IT, garantindo isolamento total.",
+        "As massas dos equipamentos ficam energizadas com 380V independentemente da falta."
+      ],
+      "correctIndex": 1,
+      "explanation": "No caso da perda do condutor neutro antes da entrada consumidora, o sistema ira se transformar em TT, o que leva a conclusao de que e sempre conveniente utilizar dispositivos DR mesmo em esquemas TN. (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com os exemplos de calculo baseados na NBR 5410, para uma protecao provida por um Dispositivo DR de 30 mA e uma tensao limite de contato de 50 V em esquemas TT, qual e a resistencia maxima de aterramento (Ra) aceitavel?",
+      "options": [
+        "10 ohms.",
+        "50 ohms.",
+        "1.700 ohms (1,7 kohm).",
+        "5.000 ohms (5 kohm)."
+      ],
+      "correctIndex": 2,
+      "explanation": "No caso de um dispositivo DR com corrente de sensibilidade de 30 mA, para a tensao limite de 50 V, a resistencia maxima resulta em R = 50 V / 0,03 A = 1.700 ohms (1,7 kohm). (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos modernos Esquemas IT Medicos (locais do grupo 2 em hospitais), qual dispositivo e obrigatoriamente utilizado para supervisionar o sistema e localizar a primeira falta a terra sem que a energia precise ser desligada?",
+      "options": [
+        "Disjuntor Termomagnetico Curva C.",
+        "Dispositivo Diferencial Residual (DR) de 10 mA.",
+        "Centelhador de Isolamento Galvanico.",
+        "Dispositivo Supervisor de Isolamento (DSI)."
+      ],
+      "correctIndex": 3,
+      "explanation": "O esquema IT medico deve ser equipado com Dispositivo Supervisor de Isolamento (DSI) para supervisionar o sistema e indicar um alarme visual e sonoro quando encontra a primeira falta, sem interromper a energia. (Fonte: Apresentacao Tecnica Sistema IT Medico, RDI Bender, Instituto de Engenharia)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na designacao dos esquemas de aterramento pela norma, a primeira letra I indica que todas as partes vivas da alimentacao estao isoladas em relacao a terra ou que o aterramento de um ponto e feito atraves de uma alta impedancia.",
+      "correctAnswer": true,
+      "explanation": "A primeira letra (I) aponta a situacao da alimentacao: I = isolacao de todas as partes vivas em relacao a terra ou aterramento de um ponto atraves de impedancia. (Fonte: Apresentacao Tecnica Sistema IT Medico, RDI Bender, Instituto de Engenharia)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em instalacoes alimentadas diretamente pela rede publica de baixa tensao da concessionaria de energia eletrica no Brasil, o esquema de aterramento do tipo TN e o mais comumente encontrado e aplicado.",
+      "correctAnswer": true,
+      "explanation": "No Brasil, o esquema TN e o mais comum, quando se tratam de instalacoes alimentadas diretamente pela rede publica de baixa tensao da concessionaria de energia eletrica. (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A segunda letra T na composicao da sigla do esquema de aterramento (como em TT e IT) indica que as massas da instalacao estao obrigatoriamente ligadas ao condutor neutro fornecido pela concessionaria.",
+      "correctAnswer": false,
+      "explanation": "A segunda letra T significa que as massas sao diretamente aterradas, independentemente do aterramento eventual de um ponto da alimentacao, e nao ligadas ao neutro (o que seria a letra N). (Fonte: Apresentacao Tecnica Sistema IT Medico, RDI Bender, Instituto de Engenharia)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Uma das grandes caracteristicas da protecao por seccionamento automatico no esquema TN e que, devido a baixissima impedancia do percurso de defeito (via cabos de cobre), a corrente de falta atinge valores elevados que disparam disjuntores ou fusiveis facilmente.",
+      "correctAnswer": true,
+      "explanation": "No esquema TN, o percurso de uma corrente fase-massa e de baixissima impedancia (cobre) e a corrente pode atingir valores elevados, suficientes para serem detectados e interrompidos ate mesmo por disjuntores ou fusiveis. (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O uso do esquema IT e largamente incentivado para instalacoes residenciais simples, pois permite economizar no dimensionamento dos disjuntores de entrada da edificacao.",
+      "correctAnswer": false,
+      "explanation": "O uso dos sistemas IT e restrito aos casos onde uma primeira falha nao pode desligar imediatamente a alimentacao, interrompendo processos importantes (como em salas cirurgicas, certos processos metalurgicos, etc.), nao sendo o padrao para residencias. (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Existe uma variacao mista do esquema TN, em que o condutor de protecao e o neutro compartilham a mesma fiacao no trecho inicial da instalacao e depois se separam internamente. Esse esquema e tecnicamente designado como TN-____-S.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "C"
+        }
+      ],
+      "explanation": "Ha o esquema misto, chamado de TN-C-S, onde o condutor PEN entra na edificacao e a partir do Barramento de Equipotencializacao Principal (BEP) passa a ser dividido em condutores separados N e PE. (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Segundo os estudos e recomendacoes embasados na NBR 5410 sobre limites de choque eletrico em locais considerados normais (Situacao 1), as pessoas estao teoricamente livres de choques perigosos se estiverem submetidas a tensoes eletricas em corrente alternada inferiores a ____ Volts.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "50"
+        }
+      ],
+      "explanation": "A literatura da IEC e a norma estabelecem que pessoas estao livres de choques perigosos se submetidas a tensoes eletricas inferiores a 50 V (alternados) na situacao 1 (locais normais como salas, quartos). (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No esquema de aterramento IT, a ligacao do neutro ou do ponto de alimentacao com a terra nao e direta, mas sim efetuada intencionalmente atraves da insercao de uma ____ de valor elevado, limitando drasticamente a corrente de falta.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "impedancia"
+        }
+      ],
+      "explanation": "No esquema IT, o aterramento da fonte e realizado atraves da insercao de uma impedancia de valor elevado (resistencia ou indutancia), para limitar a corrente de falta. (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "difficulty": "hard"
+    }
+  ]
+}

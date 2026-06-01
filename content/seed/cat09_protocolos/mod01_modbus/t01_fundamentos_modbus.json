@@ -39,11 +39,11 @@
       "statement": "Qual arquitetura de comunicacao define o comportamento padrao do protocolo MODBUS tradicional?",
       "options": [
         "Produtor-Consumidor orientada a eventos.",
-        "Cliente-Servidor (Mestre-Escravo) baseada em polling.",
         "Peer-to-Peer sem controle central.",
+        "Cliente-Servidor (Mestre-Escravo) baseada em polling.",
         "Publish-Subscribe para dados multicast."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O MODBUS opera tradicionalmente no modelo Mestre-Escravo (Cliente-Servidor), onde apenas o mestre inicia a comunicacao (Informacao externa complementar).",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "De acordo com as fontes, qual estrategia foi utilizada com sucesso para integrar equipamentos de processo operando em MODBUS em um SAS baseado em.",
       "options": [
         "Substituicao completa dos reles de protecao legados.",
-        "Uso de uma gateway responsavel pela conversao do protocolo MODBUS em IEC 61850.",
+        "Mudanca do protocolo dos IEDs para MODBUS TCP de forma nativa.",
         "Descarte da rede ethernet em favor de ligacoes seriais ponto a ponto.",
-        "Mudanca do protocolo dos IEDs para MODBUS TCP de forma nativa."
+        "Uso de uma gateway responsavel pela conversao do protocolo MODBUS em IEC 61850."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Na usina Caue, foi utilizada com sucesso uma gateway de conversao do protocolo modbus em IEC 61850 aplicada no acionamento de motores de media tensao\n3\n.",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Qual o meio de transmissao fisico mais comum e historico associado a implementacao do protocolo MODBUS RTU?",
       "options": [
-        "Fibra optica monomodo.",
-        "Redes Ethernet 100Base-FX.",
         "Linhas seriais assincronas como RS-485 ou RS-232.",
+        "Redes Ethernet 100Base-FX.",
+        "Fibra optica monomodo.",
         "Conexoes sem fio Wi-Fi ou Bluetooth."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "O MODBUS RTU tipicamente opera sobre interfaces fisicas seriais industriais, predominando o padrao RS-485 (Informacao externa aos documentos).",
       "difficulty": "easy"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Como a deteccao de erros e garantida em um quadro (frame) transmitido nativamente em MODBUS RTU?",
       "options": [
-        "Por meio da aplicacao de um Codigo de Redundancia Ciclica (CRC) anexado ao final do quadro.",
+        "Atraves de pacotes multicast nao confirmados semelhantes ao GOOSE.",
         "Utilizando checagem de redundancia longitudinal (LRC) em cada byte.",
         "Apenas atraves de um bit de paridade no cabecalho MBAP.",
-        "Atraves de pacotes multicast nao confirmados semelhantes ao GOOSE."
+        "Por meio da aplicacao de um Codigo de Redundancia Ciclica (CRC) anexado ao final do quadro."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "O quadro MODBUS RTU inclui um campo de checksum CRC de 16 bits no final para verificar a integridade da transmissao (Informacao externa).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "O que diferencia a codificacao do quadro no MODBUS RTU em relacao ao MODBUS ASCII?",
       "options": [
-        "O RTU usa caracteres imprimiveis e o ASCII usa compressao zip.",
         "O RTU transmite dados em formato binario compacto, enquanto o ASCII utiliza caracteres codificados em hexadecimal legivel.",
+        "O RTU usa caracteres imprimiveis e o ASCII usa compressao zip.",
         "O RTU suporta apenas enderecamento IP, e o ASCII suporta conexoes seriais.",
         "Nao ha diferencas de codificacao, mudando apenas a velocidade do baud rate."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "No MODBUS RTU cada byte transmite dois caracteres hexadecimais em formato binario puro, otimizando o tamanho do quadro frente ao modo ASCII (Informacao externa).",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Qual e a alteracao estrutural basica no quadro (frame) ao se migrar de MODBUS RTU para MODBUS TCP/IP?",
       "options": [
-        "O MODBUS TCP adiciona um cabecalho especifico MBAP e remove o campo de checksum CRC.",
         "O MODBUS TCP mantem o checksum CRC do RTU mas o encapsula diretamente em pacotes UDP.",
+        "O MODBUS TCP adiciona um cabecalho especifico MBAP e remove o campo de checksum CRC.",
         "O MODBUS TCP altera todos os Function Codes para adequar-se as 7 camadas OSI.",
         "O MODBUS TCP reduz o tamanho do campo de dados para permitir VLAN tagging prioritario."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "No MODBUS TCP, o endereco do escravo e o checksum CRC sao removidos e substituidos por um cabecalho MBAP de 7 bytes; a integridade e garantida pelo TCP (Informacao externa).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Segundo o historico dos protocolos industriais mencionado nas fontes, o MODBUS era utilizado como uma solucao proprietaria e centralizada de.",
       "correctAnswer": true,
       "explanation": "O MODBUS, assim como DNP e PROFIBUS, sao listados nas fontes como padronizacoes antigas (proprietarias/especificas) contrapostas a padronizacao global aberta do IEC 61850\n1\n2\n.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No mapa de memoria do protocolo MODBUS, os Input Registers possuem permissao tanto de leitura quanto de escrita pelo equipamento mestre da rede.",
       "correctAnswer": false,
       "explanation": "No modelo de dados do MODBUS, os Input Registers suportam apenas operacoes de leitura (read-only), diferentemente dos Holding Registers que permitem leitura e escrita (Informacao externa).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O enderecamento logico padrao para escravos em um link fisico serial operando com o protocolo MODBUS RTU possui limite pratico de 247 enderecos.",
       "correctAnswer": true,
       "explanation": "A especificacao original do protocolo MODBUS estabelece enderecos de 1 a 247 para os escravos (Informacao externa aos documentos).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "As fontes citam que, devido a incompatibilidade do modelo cliente-servidor do MODBUS, foi inviavel utilizar conversores (gateways) para sua.",
       "correctAnswer": false,
       "explanation": "Ao contrario, as fontes relatam explicitamente um teste e aplicacao bem sucedida de uma gateway para converter o protocolo modbus em IEC 61850 para motores de media tensao\n3\n.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Em contraste com as mensagens GOOSE do padrao IEC 61850, o protocolo MODBUS baseia-se num modelo de polling, nao possuindo um mecanismo nativo e.",
       "correctAnswer": true,
       "explanation": "As mensagens GOOSE permitem envio multicast veloz e nao confirmado entre equipamentos (horizontal)\n4\n5\n, o que nao e suportado nativamente pelo modelo de pooling mestre-escravo do MODBUS (Informacao hibrida).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O tipo de dado discreto de leitura e escrita do protocolo MODBUS, capaz de controlar fisicamente uma saida digital, recebe a denominacao tecnica de _____.",
+      "statement": "O tipo de dado discreto de leitura e escrita do protocolo MODBUS, capaz de controlar fisicamente uma saida digital, recebe a denominacao tecnica de ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O Function Code responsavel por instruir o escravo MODBUS a escrever dados em multiplos Holding Registers contiguos e o FC numero _____ (valor.",
+      "statement": "O Function Code responsavel por instruir o escravo MODBUS a escrever dados em multiplos Holding Registers contiguos e o FC numero ____ (valor.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para permitir a comunicacao sobre o modelo de camadas do TCP/IP, o quadro MODBUS recebe um cabecalho especial de 7 bytes conhecido pela sigla _____.",
+      "statement": "Para permitir a comunicacao sobre o modelo de camadas do TCP/IP, o quadro MODBUS recebe um cabecalho especial de 7 bytes conhecido pela sigla ____.",
       "blanks": [
         {
           "index": 0,

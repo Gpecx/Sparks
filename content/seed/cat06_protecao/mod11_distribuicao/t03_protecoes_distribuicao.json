@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Qual é o objetivo do esquema salva-fusível na coordenação religador-fusível?",
       "options": [
-        "O religador atua em sua curva rápida antes da fusão do elo para faltas temporárias.",
+        "O fusível atua apenas para sobrecargas lentas.",
         "O fusível queima antes da abertura do disjuntor geral.",
         "O religador bloqueia permanentemente no primeiro defeito.",
-        "O fusível atua apenas para sobrecargas lentas."
+        "O religador atua em sua curva rápida antes da fusão do elo para faltas temporárias."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "O religador atua na curva rápida antes do tempo mínimo de fusão do elo, salvando-o em faltas transientes. (Fonte: KLS - Proteção).",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Qual característica dificulta a detecção de faltas de alta impedância por relés convencionais?",
       "options": [
-        "O excesso de harmônicas de tensão.",
         "A corrente de falta apresenta magnitude muito baixa.",
+        "O excesso de harmônicas de tensão.",
         "O religamento tripolar automático imediato.",
         "A inversão do fluxo de potência reativa."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Faltas de alta impedância geram correntes muito baixas que não sensibilizam relés de sobrecorrente. (Fonte: KLS - Proteção).",
       "difficulty": "easy"
     },
@@ -91,11 +91,11 @@
       "statement": "Na coordenação religador a montante e fusível a jusante, o que ocorre em uma falta permanente?",
       "options": [
         "O religador bloqueia antes da atuação do fusível.",
-        "O religador utiliza sua curva lenta, permitindo a queima do fusível.",
         "O fusível atua instantaneamente antes da curva rápida.",
+        "O religador utiliza sua curva lenta, permitindo a queima do fusível.",
         "O seccionalizador abre travado após o primeiro trip."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O religador esgota as tentativas rápidas e passa para a curva lenta, aguardando a queima isoladora do fusível. (Fonte: KLS - Proteção).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Qual a principal função da chave Network Protector em redes subterrâneas Spot Network?",
       "options": [
-        "Detectar fluxo reverso de corrente de falta e isolar a rede.",
+        "Aterrar o neutro do gerador de emergência.",
         "Religar automaticamente falhas transientes no cabo.",
         "Bloquear correntes de inrush do transformador.",
-        "Aterrar o neutro do gerador de emergência."
+        "Detectar fluxo reverso de corrente de falta e isolar a rede."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "A Network Protector detecta a inversão do fluxo de falta nos alimentadores paralelos e abre o circuito. (Fonte: KLS - Proteção).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Qual função de proteção evita o religamento assíncrono da concessionária sobre um gerador distribuído?",
       "options": [
-        "Diferencial de linha (87L).",
-        "Sobrecarga térmica (49).",
         "Salto de vetor (78) ou taxa de variação de frequência (81R).",
+        "Sobrecarga térmica (49).",
+        "Diferencial de linha (87L).",
         "Sobrecorrente instantânea (50)."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Relés anti-ilhamento (78 ou 81R) detectam a perda da rede e desconectam a geração distribuída rapidamente. (Fonte: Guia Proteção 2008).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "O elo fusível protege a rede interrompendo a corrente de falta através da fusão mecânica de seu filamento interno.",
       "correctAnswer": true,
       "explanation": "O aquecimento causado pela sobrecorrente derrete o filamento, interrompendo fisicamente o circuito. (Fonte: KLS - Proteção).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Os seccionalizadores eletrônicos são projetados para abrir seus contatos e interromper correntes plenas de curto-circuito.",
       "correctAnswer": false,
       "explanation": "Seccionalizadores não possuem poder de interrupção de curto-circuito; abrem apenas sem corrente. (Fonte: KLS - Proteção).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Na automação de redes em malha aberta, após o isolamento do cabo em falta, o dispositivo normalmente aberto é fechado para realimentar o trecho são.",
       "correctAnswer": true,
       "explanation": "A automação isola o defeito e fecha o ponto de interligação para restaurar o fluxo de energia. (Fonte: Guia Proteção 2008).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A inserção de geradores distribuídos em alimentadores radiais não exige a alteração da proteção de sobrecorrente da subestação.",
       "correctAnswer": false,
       "explanation": "A geração distribuída altera os fluxos de curto-circuito, exigindo adequação com relés direcionais e anti-ilhamento. (Fonte: Guia Proteção 2008).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Na coordenação entre dois elos fusíveis, o tempo de extinção do elo protetor deve exceder o tempo de fusão do elo protegido em 25%.",
       "correctAnswer": false,
       "explanation": "O tempo de extinção total do protetor não deve ultrapassar 75% do tempo mínimo de fusão do protegido. (Fonte: KLS - Proteção).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O intervalo ajustável entre a abertura e o novo fechamento automático dos contatos do religador é denominado tempo _____.",
+      "statement": "O intervalo ajustável entre a abertura e o novo fechamento automático dos contatos do religador é denominado tempo ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O esquema salva-fusível exige que o religador a montante utilize inicialmente sua curva _____ para evitar a queima do elo.",
+      "statement": "O esquema salva-fusível exige que o religador a montante utilize inicialmente sua curva ____ para evitar a queima do elo.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para detectar a ilha elétrica e evitar o religamento assíncrono da rede sobre a geração distribuída, utiliza-se a função salto de _____.",
+      "statement": "Para detectar a ilha elétrica e evitar o religamento assíncrono da rede sobre a geração distribuída, utiliza-se a função salto de ____.",
       "blanks": [
         {
           "index": 0,

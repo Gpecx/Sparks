@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "EXEMPLO — Conforme a NR-01, qual é a sigla do programa de gerenciamento de riscos previsto na norma?",
       "options": [
-        "PCMSO — Programa de Controle Médico de Saúde Ocupacional",
         "PGR — Programa de Gerenciamento de Riscos",
+        "PCMSO — Programa de Controle Médico de Saúde Ocupacional",
         "PPRA — Programa de Prevenção de Riscos Ambientais",
         "PCA — Programa de Conservação Auditiva"
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O subitem 1.5.3.1.1 da NR-01 estabelece que o gerenciamento de riscos ocupacionais deve constituir um Programa de Gerenciamento de Riscos - PGR. O PPRA foi substituído pelo PGR.",
       "difficulty": "easy"
     },
@@ -26,16 +26,29 @@
       "statement": "EXEMPLO — O histórico das atualizações do inventário de riscos deve ser mantido por um período mínimo de 20 anos.",
       "correctAnswer": true,
       "explanation": "O subitem 1.5.7.3.3.1 da NR-01 estabelece que o histórico das atualizações do inventário de riscos deve ser mantido por um período mínimo de 20 (vinte) anos ou pelo período estabelecido em normatização específica.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
       "statement": "EXEMPLO — A hierarquia das medidas de prevenção previstas na NR-01 estabelece a seguinte ordem de prioridade: 1) _____ dos fatores de risco; 2) Medidas de proteção _____; 3) Medidas _____ ou de organização do trabalho; 4) Medidas de proteção _____.",
       "blanks": [
-        { "index": 0, "answer": "eliminação" },
-        { "index": 1, "answer": "coletiva" },
-        { "index": 2, "answer": "administrativas" },
-        { "index": 3, "answer": "individual" }
+        {
+          "index": 0,
+          "answer": "eliminação"
+        },
+        {
+          "index": 1,
+          "answer": "coletiva"
+        },
+        {
+          "index": 2,
+          "answer": "administrativas"
+        },
+        {
+          "index": 3,
+          "answer": "individual"
+        }
       ],
       "explanation": "Conforme o subitem 1.4.1 alínea 'g' da NR-01, a hierarquia das medidas é: eliminação → proteção coletiva → administrativas/organizacionais → proteção individual.",
       "difficulty": "hard"

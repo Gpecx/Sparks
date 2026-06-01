@@ -13,11 +13,11 @@
       "statement": "Qual lei fundamenta o funcionamento do transformador relacionando fluxo e força eletromotriz?",
       "options": [
         "Lei de Ohm.",
-        "Lei de Faraday.",
         "Lei de Kirchhoff.",
+        "Lei de Faraday.",
         "Lei de Lenz."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A força eletromotriz induzida no transformador corresponde à variação do fluxo magnético no tempo, segundo Faraday. (Fonte: Virtus_Ferramentas).",
       "difficulty": "easy"
     },
@@ -27,10 +27,10 @@
       "options": [
         "Pela razão inversa das correntes de magnetização.",
         "Pela soma fasorial das tensões nominais.",
-        "Pela razão direta do número de espiras entre primário e secundário.",
-        "Pelo produto das impedâncias de base."
+        "Pelo produto das impedâncias de base.",
+        "Pela razão direta do número de espiras entre primário e secundário."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "A relação de tensões e1/e2 é proporcional à relação de espiras N1/N2 do transformador. (Fonte: Virtus_Ferramentas).",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "O que significa a sigla ONAN no sistema de refrigeração de transformadores?",
       "options": [
-        "Óleo natural e água natural.",
         "Óleo natural e ar natural.",
+        "Óleo natural e água natural.",
         "Óleo forçado e ar forçado.",
         "Óleo forçado e água natural."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A sigla ONAN designa refrigeração com circulação natural de óleo interno e ar externo. (Fonte: Cabine Primária).",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "O que é a corrente de inrush em um transformador de potência?",
       "options": [
-        "Corrente de magnetização transitória na energização do equipamento.",
         "Corrente de falta à terra causada por isolamento defeituoso.",
+        "Corrente de magnetização transitória na energização do equipamento.",
         "Corrente contínua injetada para testes do estator.",
         "Corrente de carga nominal em regime permanente."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "Inrush é a corrente de magnetização transitória normal e elevada que surge na energização primária. (Fonte: Ed56_fasc_protecao).",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "Qual a função do relé Buchholz instalado em transformadores a óleo?",
       "options": [
         "Medir a temperatura externa da carcaça metálica.",
-        "Detectar acúmulo de gases e fluxo de óleo por falhas internas.",
         "Regular a tensão de saída atuando no comutador de taps.",
+        "Detectar acúmulo de gases e fluxo de óleo por falhas internas.",
         "Medir a corrente de fuga no cabo de aterramento do neutro."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O relé Buchholz atua detectando a emissão de gases gerados por falhas térmicas ou elétricas internas. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -79,10 +79,10 @@
       "options": [
         "Altera a frequência fundamental em 30 Hz.",
         "Elimina a corrente de sequência positiva.",
-        "Introduz um defasamento angular padronizado de 30 graus.",
-        "Iguala as impedâncias base de ambos os lados."
+        "Iguala as impedâncias base de ambos os lados.",
+        "Introduz um defasamento angular padronizado de 30 graus."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Conexões delta-estrela introduzem um deslocamento de fase de 30 graus elétricos entre os lados. (Fonte: Virtus_ProtTrafo).",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "O que define o ponto de joelho na curva de excitação de um transformador de corrente?",
       "options": [
-        "O ponto onde a corrente secundária atinge exatos 5 A.",
         "O limiar de tensão secundária que inicia a saturação do núcleo.",
+        "O ponto onde a corrente secundária atinge exatos 5 A.",
         "O limite térmico máximo suportado em curto-circuito.",
         "A operação com fator de potência unitário e perdas nulas."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O ponto de joelho delimita o fim da região linear e marca o início da saturação magnética. (Fonte: Caminha).",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "Por que o ajuste de partida da proteção diferencial deve considerar o comutador de taps?",
       "options": [
         "Porque a variação de taps desliga o neutro fisicamente.",
-        "A mudança de taps altera a relação de transformação gerando desbalanço aparente.",
         "Porque o comutador insere harmônicas de 5ª ordem na rede.",
+        "A mudança de taps altera a relação de transformação gerando desbalanço aparente.",
         "Pois os taps operam exclusivamente com corrente contínua."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A alteração de taps modifica a relação tensão-corrente, exigindo margem no ajuste diferencial para evitar falsos trips. (Fonte: Virtus_ProtTrafo).",
       "difficulty": "medium"
     },
@@ -131,10 +131,10 @@
       "options": [
         "Amplifica a corrente de sequência zero para a linha externa.",
         "Curto-circuita correntes de fase blindando a sequência positiva.",
-        "Opera como circuito aberto impedindo a saída de corrente de sequência zero.",
-        "Inverte a polaridade transformando-a em sequência negativa."
+        "Inverte a polaridade transformando-a em sequência negativa.",
+        "Opera como circuito aberto impedindo a saída de corrente de sequência zero."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "A conexão delta atua como circuito aberto isolando a corrente de sequência zero dentro do enrolamento. (Fonte: Virtus_Ferramentas).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "O óleo mineral do transformador tem a função de garantir a isolação elétrica e refrigerar os enrolamentos.",
       "correctAnswer": true,
       "explanation": "O óleo preenche os espaços isolando partes vivas e transportando o calor gerado pelas perdas para dissipação externa. (Fonte: Cabine Primária).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A proteção diferencial usa bloqueio por segunda harmônica para evitar atuações indevidas pelo inrush.",
       "correctAnswer": true,
       "explanation": "A corrente de inrush possui forte componente de segunda harmônica, utilizada pelas proteções para inibir atuações falsas. (Fonte: Virtus_ProtTrafo).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O sobrefluxo no núcleo gerado por sobretensão produz correntes de magnetização ricas em quinta harmônica.",
       "correctAnswer": true,
       "explanation": "O aumento de tensão satura o núcleo, gerando grande elevação das correntes de terceira e quinta harmônicas. (Fonte: Virtus_ProtTrafo).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Para corrigir o defasamento de um trafo triângulo-estrela, relés antigos ligam os TCs do triângulo em triângulo.",
       "correctAnswer": false,
       "explanation": "Em proteções eletromecânicas convencionais, os TCs do lado triângulo são ligados obrigatoriamente em estrela. (Fonte: Caminha).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Transformadores trifásicos de núcleo envolvido apresentam reatância de magnetização de sequência zero infinita.",
       "correctAnswer": false,
       "explanation": "Núcleos envolvidos (três pernas) apresentam reatância de sequência zero finita, fechando o fluxo pelo óleo ou tanque. (Fonte: Virtus_Ferramentas).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O modelo térmico de proteção avalia as perdas no transformador assumindo que o aquecimento é proporcional ao _____ da corrente.",
+      "statement": "O modelo térmico de proteção avalia as perdas no transformador assumindo que o aquecimento é proporcional ao ____ da corrente.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A magnetização inicial violenta (inrush) é severamente agravada pela presença de fluxo _____ deixado no núcleo em desenergizações prévias.",
+      "statement": "A magnetização inicial violenta (inrush) é severamente agravada pela presença de fluxo ____ deixado no núcleo em desenergizações prévias.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Na conexão estrela aterrada, faltas à terra externas impõem passagem de corrente de sequência _____ através do neutro do transformador.",
+      "statement": "Na conexão estrela aterrada, faltas à terra externas impõem passagem de corrente de sequência ____ através do neutro do transformador.",
       "blanks": [
         {
           "index": 0,

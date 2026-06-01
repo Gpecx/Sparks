@@ -1,0 +1,218 @@
+{
+  "category": "SPDA",
+  "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
+  "categoryOrder": 1,
+  "module": "Fundamentos de SPDA",
+  "moduleSubtitle": "Fisica dos raios, conceitos, tipos e categorias de protecao",
+  "moduleOrder": 0,
+  "trail": "Física dos Raios e Formação",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o tipo de raio mais frequente na atmosfera, representando de 80 a 90% dos casos, e que nao atinge o solo?",
+      "options": [
+        "Raio nuvem-solo (descendente)",
+        "Raio intranuvem (na nuvem)",
+        "Raio solo-nuvem (ascendente)",
+        "Raio de recuo continuo"
+      ],
+      "correctIndex": 1,
+      "explanation": "Os raios que nao tocam o solo sao a maioria, representando em torno de 80 a 90% das descargas, sendo denominados raios na nuvem ou intranuvem. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos raios descendentes (nuvem-solo), qual e a polaridade predominante da carga liquida que e transferida ao longo da descarga?",
+      "options": [
+        "Sempre neutra, pois os eletrons e protons se anulam.",
+        "Predominantemente positiva em 80 a 90% dos casos.",
+        "Predominantemente negativa em 80 a 90% dos casos.",
+        "Alternada, mudando de positiva para negativa a cada descarga subsequente."
+      ],
+      "correctIndex": 2,
+      "explanation": "Na fase ativa da tempestade, os raios descendentes de polaridade negativa costumam ser os mais frequentes, correspondendo de 80 a 90% dos casos. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante uma tempestade, por que um observador normalmente percebe o clarao luminoso do relampago antes de escutar o som do trovao?",
+      "options": [
+        "Porque as ondas sonoras sofrem intensa reflexao nas gotas de chuva e gelo (graupel).",
+        "Porque a velocidade da luz (aprox. 3x10^8 m/s) e incomparavelmente superior a velocidade do som no ar (aprox. 340 m/s).",
+        "Porque o fenomeno luminoso ocorre primeiro na nuvem e o som apenas e gerado no impacto com o solo.",
+        "Porque o sistema auditivo humano tem maior inercia de resposta em comparacao ao sistema visual durante a tempestade."
+      ],
+      "correctIndex": 1,
+      "explanation": "Como a luz emitida se propaga a 3x10^8 m/s e o som a 340 m/s, a diferenca de velocidade faz com que observemos primeiro o clarao e depois escutemos o trovao. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como sao denominadas fisicamente as descargas atmosfericas que se iniciam a partir da extremidade de alguma estrutura alta na superficie terrestre e se propagam em direcao a nuvem?",
+      "options": [
+        "Raios descendentes",
+        "Raios intranuvem",
+        "Raios de recuo continuo",
+        "Raios ascendentes"
+      ],
+      "correctIndex": 3,
+      "explanation": "Os raios ascendentes (ou solo-nuvem) sao descargas que se iniciam a partir da extremidade de alguma estrutura alta no solo, propagando-se para cima. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No interior de uma nuvem de tempestade (Cumulonimbus), medicoes ja indicaram intensos valores de campo eletrico que impulsionam a formacao de raios. Qual a ordem de grandeza desse campo medido na literatura cientifica?",
+      "options": [
+        "Inferiores a 10 V/m",
+        "Cerca de 10 a 50 kV/m",
+        "Superiores a 100 kV/m",
+        "Exatamente 300 V/m"
+      ],
+      "correctIndex": 2,
+      "explanation": "A literatura cientifica registra que campos eletricos superiores a 100 kV/m ja foram medidos no interior das nuvens que produzem raios. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com os modelos fisicos modernos, qual e a estrutura eletrica basica de distribuicao de cargas que melhor aproxima uma nuvem de tempestade (Cumulonimbus)?",
+      "options": [
+        "Tripolar: centro positivo proximo ao topo, centro negativo no meio, e um centro menor positivo proximo a base.",
+        "Bipolar: cargas positivas concentradas estritamente no topo e cargas negativas localizadas apenas na base.",
+        "Tripolar: centro negativo no topo, centro positivo no meio, e centro negativo na base.",
+        "Monopolar: constituida quase exclusivamente por cristais com ions negativos isolados na area central."
+      ],
+      "correctIndex": 0,
+      "explanation": "A estrutura eletrica simples mais aproximada para uma nuvem de tempestade e a tripolar, com centro de cargas positivas no topo, um negativo no meio e um menor positivo na base. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante o processo de formacao de um raio nuvem-solo, ocorre um colapso repentino da isolacao quando os lideres se tocam. Como e chamada a etapa mais intensa e luminosa do raio que acontece neste exato instante?",
+      "options": [
+        "Descarga de retorno",
+        "Componente M",
+        "Lider de recuo",
+        "Descarga escalonada bidirecional"
+      ],
+      "correctIndex": 0,
+      "explanation": "Quando um lider ascendente se conecta ao lider descendente, tem inicio o fluxo intenso de corrente gerando a etapa mais intensa e luminosa denominada descarga de retorno. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na formacao dos danos gerados pelos raios, qual parametro fisico da corrente eletrica esta associado as mais extremas temperaturas, responsaveis por derretimento de metais, perfuracoes severas e combustao nas estruturas?",
+      "options": [
+        "O extremo tempo de subida (di/dt) na frente da onda.",
+        "O elevado pico de corrente imediato das descargas de retorno.",
+        "A intensidade dos campos eletromagneticos gerados em VHF.",
+        "A corrente continua de longa duracao que prolonga o canal eletrico."
+      ],
+      "correctIndex": 3,
+      "explanation": "A corrente continua, embora possua menor intensidade (dezenas a centenas de amperes), pode durar muito mais tempo (ate 1 segundo) sendo a principal responsavel pelos danos termicos agudos como fusao e combustao. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O fenomeno perceptivel a olho nu da cintilacao em um relampago, que faz parecer que o raio esta piscando por varias fracoes de segundo no ceu, esta associado a qual etapa do desenvolvimento do raio?",
+      "options": [
+        "A emanacao de radiacao ionizante e feixes de raios gama em formato de pulso.",
+        "A repeticao de multiplas descargas de retorno subsequentes ao longo de um mesmo caminho ionizado.",
+        "A mudanca abrupta da polaridade magnetica entre cargas positivas e negativas na base do Cumulonimbus.",
+        "A oscilacao intermitente da componente M gerada pela expansao do gas superaquecido."
+      ],
+      "correctIndex": 1,
+      "explanation": "Quando percebemos a cintilacao (o piscar do raio), isso se deve a ocorrencia de multiplas descargas de retorno que se repetem num mesmo canal em intervalos de dezenas de milissegundos. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com os parametros da corrente dos raios fundamentados na ABNT NBR 5419 (Tabela 3), quais os principais efeitos da Carga Eletrica (Q) e da Energia Especifica (W/R), respectivamente?",
+      "options": [
+        "(Q) Danos mecanicos por forca eletrodinamica; (W/R) Choque acustico gerado pela expansao do ar.",
+        "(Q) Danos termicos locais como erosao e perfuracao; (W/R) Efeitos de aquecimento resistivo (termicos) e mecanicos.",
+        "(Q) Efeitos de tensao e centelhamento por inducao magnetica; (W/R) Falhas operacionais em eletronicos de baixa tensao.",
+        "(Q) Queima de transformadores no pico de corrente; (W/R) Ruptura da blindagem das linhas de descida."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme Tabela 3 da NBR 5419, a Carga Eletrica (Q) causa danos termicos nos pontos de impacto (erosao/perfuracao), enquanto a Energia Especifica (W/R) esta associada aos efeitos termicos de aquecimento resistivo e mecanicos. (Fonte: NBR 5419 Tabela 3, citada em A fisica dos raios, SciELO)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Apesar de representarem estatisticamente a minoria das descargas atmosfericas formadas em tempestades, os raios descendentes e ascendentes que tocam o solo sao os causadores da maior parte dos danos fisicos e perigos a vida.",
+      "correctAnswer": true,
+      "explanation": "Os raios que tocam o solo sao a minoria (pois cerca de 80 a 90% ocorrem dentro das nuvens), porem produzem muito mais danos porque interagem diretamente com construcoes, pessoas e instalacoes. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O inicio fisico do raio descendente ocorre quando o alto campo eletrico rompe a rigidez dieletrica nas nuvens e cria uma descarga lider bidirecional entre centros de carga de polaridade oposta.",
+      "correctAnswer": true,
+      "explanation": "Os raios descendentes se iniciam no interior da nuvem entre centros de carga opostas, surgindo uma descarga lider bidirecional, em que as pontas positiva e negativa propagam-se para lados opostos. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em geral, os raios descendentes positivos diferem dos negativos por apresentarem frequentemente alta multiplicidade, gerando quase sempre mais de dez descargas de retorno sucessivas ao solo.",
+      "correctAnswer": false,
+      "explanation": "E exatamente o contrario. Os raios positivos costumam terminar apos uma unica descarga de retorno (em 80% dos casos), sem descargas subsequentes expressivas, enquanto a alta multiplicidade de descargas e comum nos raios negativos. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Lideres descendentes negativos emitem grande quantidade de radiacao eletromagnetica em VHF (Frequencia Muito Alta) em decorrencia de sua propagacao natural que ocorre em passos.",
+      "correctAnswer": true,
+      "explanation": "Os lideres negativos propagam-se de forma escalonada (em passos) atraves de microdescargas em ar virgem, e este comportamento gera intensa emissao de radiacao eletromagnetica, particularmente em VHF. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A componente M manifesta-se atraves de um violento decaimento da corrente e luminosidade no canal do raio, provocada quando a nuvem perde de imediato seu campo de retroalimentacao eletrico.",
+      "correctAnswer": false,
+      "explanation": "A componente M e o oposto de um decaimento: e uma subita intensificacao da corrente eletrica e da luminosidade, originada pela conexao de lideres de recuo na base da nuvem com o canal continuo ainda ativo. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As estruturas altas no solo induzem descargas que tentam conectar-se ao raio. O lider que finalmente se acopla e chamado de conectivo (LAC), e aqueles que fracassam nessa conexao e retraem chamam-se lideres ascendentes ____ (LANC).",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "nao-conectivos"
+        }
+      ],
+      "explanation": "A nomenclatura define que os lideres iniciados no solo que se conectam ao canal do raio principal sao os conectivos (LAC), enquanto os demais que restam e retraem sao os lideres ascendentes nao-conectivos (LANC). (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Enquanto um lider que desbrava o ar nao ionizado salta em formato escalonado, o lider da descarga subsequente que escoa por um canal de ar pre-ionizado viaja cerca de 100 vezes mais rapido e de forma uniforme, recebendo o nome de lider ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "continuo"
+        }
+      ],
+      "explanation": "Quando o lider (negativo) viaja por um trecho de ar ja previamente ionizado por descargas de retorno anteriores, os passos (escaloes) tendem a sumir, ganhando velocidade e recebendo o nome de lider continuo. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O extremo salto de temperatura da corrente eletrica no ar gera de forma muito subita uma expansao termica termodinamica. Tal energia gera uma onda de choque mecanica perceptivel acusticamente e chamada na fisica de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "trovao"
+        }
+      ],
+      "explanation": "O intenso aquecimento gerado pela conducao da corrente eletrica no ar causa rapida dilatacao dos gases e compressao do ar em volta, criando a onda de choque que nossos ouvidos captam como o trovao. (Fonte: A fisica dos raios Parte 1, SciELO)",
+      "difficulty": "hard"
+    }
+  ]
+}

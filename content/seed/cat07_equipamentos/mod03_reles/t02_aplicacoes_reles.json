@@ -1,0 +1,218 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Relés de Proteção",
+  "moduleSubtitle": "Fabricantes ABB, GE, SEL, Siemens, Schneider, NARI, PEXTRON, ZIV e outros",
+  "moduleOrder": 2,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o proposito principal de se configurar diferentes grupos de ajuste (Setting Groups) no software do IED?",
+      "options": [
+        "Multiplicar o limite fisico de saturacao magnetica dos TCs conectados.",
+        "Aumentar a capacidade de armazenamento de oscilografias na memoria RAM.",
+        "Eliminar completamente a necessidade de fontes auxiliares de corrente continua.",
+        "Permitir a comutacao rapida de parametros para adaptar a protecao a diferentes topologias ou condicoes do sistema."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os reles armazenam multiplos grupos de ajuste na memoria nao volatil para adequar rapidamente a seletividade a mudancas da rede.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as portas seriais e de comunicacao (como PROFIBUS ou EIA-232) sao tipicamente utilizadas em um IED digital?",
+      "options": [
+        "Para parametrizacao, testes e integracao com sistemas de supervisao SCADA para diagnosticos remotos.",
+        "Exclusivamente para alimentar as bobinas de trip do disjuntor de alta tensao.",
+        "Para realizar o aterramento de seguranca do circuito de corrente continua.",
+        "Para medir diretamente a alta tensao primaria do barramento."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os canais de comunicacao permitem o acesso remoto e local para baixar oscilografias, alterar logicas e integrar a automacao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a funcao da matriz de configuracao Marshalling no software de parametrizacao do IED?",
+      "options": [
+        "Aumenta a tensao primaria do transformador de potencial capacitivo.",
+        "Roteia os alarmes e trips logicos internos para os contatos de saida fisicos e LEDs do equipamento.",
+        "Atua diretamente na camara de extincao do disjuntor para apagar arcos eletricos.",
+        "Sincroniza automaticamente a base de tempo do rele sem uso de satelite."
+      ],
+      "correctIndex": 1,
+      "explanation": "A matriz Marshalling associa as logicas (equacoes booleanas) geradas pela CPU aos modulos fisicos de I/O e sinalizacao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual funcao adicional configuravel nos IEDs de transmissao direciona a equipe de manutencao ao ponto exato do defeito na linha?",
+      "options": [
+        "Aceleracao Logica de Zona.",
+        "Supervisao do Circuito de Trip (74TC).",
+        "Localizador de Faltas (Fault Locator).",
+        "Filtro Anti-aliasing Passivo."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os IEDs modernos incorporam a funcao Fault Locator para calcular a distancia exata ate a falta com base nas impedancias medidas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na parametrizacao da oscilografia, o que o ajuste Trigger with Trip assegura ao equipamento?",
+      "options": [
+        "Inicia a gravacao na deteccao da falta, mas salva o arquivo permanentemente apenas se houver comando de trip.",
+        "Fecha o disjuntor automaticamente logo apos o registro do evento.",
+        "Grava dados continuamente apagando todo o historico anterior a cada segundo.",
+        "Gera um sinal de trip tripolar caso a memoria do IED atinja 100 por cento."
+      ],
+      "correctIndex": 0,
+      "explanation": "Essa opcao poupa memoria util, condicionando o salvamento definitivo do oscilograma a confirmacao real de um desligamento.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Se um IED de In=5A e alimentado por um TC de 400/5A e requer um ajuste de pickup primario de 80A, qual o valor secundario correspondente?",
+      "options": [
+        "0,5 A.",
+        "5,0 A.",
+        "4,0 A.",
+        "1,0 A."
+      ],
+      "correctIndex": 3,
+      "explanation": "O valor da corrente secundaria e calculado pela proporcao do TC: Isec = 80 x (5 / 400) = 1,0 A.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o relatorio SER (Sequential Events Recorder) extraido do IED via software fornece para a analise de faltas?",
+      "options": [
+        "A sequencia e a ordem cronologica exata das mudancas de status das logicas e entradas digitais.",
+        "A curva termica de degradacao dos transformadores de potencia em tempo real.",
+        "A impedancia puramente capacitiva medida nos bornes do gerador.",
+        "O valor instantaneo de carga do banco de baterias em Volts CC."
+      ],
+      "correctIndex": 0,
+      "explanation": "O SER e uma tabela sequencial em milissegundos que documenta as atuacoes de alarmes, logicas e contatos durante o evento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na parametrizacao do IED, o que a ativacao da funcao ANSI 74TC supervisiona de forma continua?",
+      "options": [
+        "O volume e a pressao do gas isolante SF6 no interior da chave seccionadora.",
+        "A integridade fisica da fiacao e da bobina do circuito de disparo do disjuntor.",
+        "O desgaste e a sulfatacao da memoria nao volatil EPROM.",
+        "O paralelismo e a defasagem angular entre duas redes distintas."
+      ],
+      "correctIndex": 1,
+      "explanation": "A funcao Trip Circuit Supervision (74TC) monitora a prontidao operativa do laco de disparo do disjuntor.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao parametrizar o IED, para que serve colocar o ajuste Control release for bay units no modo released?",
+      "options": [
+        "Permitir mudancas de parametros e comandos locais via frontal do rele durante intervencoes de manutencao.",
+        "Bloquear as operacoes do centro de controle do SCADA de forma definitiva.",
+        "Liberar a mola de fechamento do disjuntor sem necessidade de tensao auxiliar.",
+        "Apagar autonomamente os registros de oscilografia gravados no mes anterior."
+      ],
+      "correctIndex": 0,
+      "explanation": "Essa liberacao permite que a equipe atue diretamente na interface do painel (local) para alterar parametros e efetuar manobras seguras.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o software do IED garante a validade de suas proprias configuracoes (settings) atraves do recurso de autocheck?",
+      "options": [
+        "Enviando medicoes de impedancia falsas pela rede Ethernet.",
+        "Testando o pulso de trip a cada 100 ms diretamente no disjuntor de patio.",
+        "Comparando ciclicamente as diferencas entre dois conjuntos identicos de ajustes mantidos em EPROM.",
+        "Checando a corrente DC reversa da malha de terra da subestacao."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para evitar corrupcao de dados, o autodiagnostico valida os ajustes checando duas copias integras na memoria nao volatil.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Softwares de parametrizacao, como o AcSELerator QuickSet, permitem ajustar curvas, grupos de configuracao e equacoes logicas offline antes de enviar os dados ao IED.",
+      "correctAnswer": true,
+      "explanation": "A programacao das logicas, portas e relacoes de transformacao pode ser completamente elaborada no computador e depois carregada no rele.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na logica de oscilografia do IED, o parametro Captured Waveform Prior to Trigger dita exatamente o tempo que o rele continuara gravando o pos-falta.",
+      "correctAnswer": false,
+      "explanation": "O parametro Prior to Trigger define o registro da janela de pre-falta (antes do evento), e nao do periodo de pos-falta.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para um equipamento com TC de 100/5A, se desejamos um pickup primario de 50A, o valor secundario inserido no software do IED sera de 2,5A.",
+      "correctAnswer": true,
+      "explanation": "O calculo converte o primario para o secundario: Isec = 50 / (100/5) = 50 / 20 = 2,5 A.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A logica programavel interna (SELogic) permite combinar variaveis de protecao com entradas binarias fisicas para criar equacoes booleanas de trip customizadas.",
+      "correctAnswer": true,
+      "explanation": "Os IEDs oferecem flexibilidade por meio de equacoes logicas para definir condicoes exatas de acionamento de saidas e bloqueios.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O parametro watchdog no software do rele e uma funcao de sobrecorrente termica que bloqueia fechamentos manuais repetidos do disjuntor.",
+      "correctAnswer": false,
+      "explanation": "O watchdog e um circuito de seguranca (hardware/software) que forca o rearme do processador caso ocorra travamento de laco, nao sendo uma funcao de sobrecorrente.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O registro textual extraido do IED que documenta a ordem cronologica em milissegundos das atuacoes logicas e alarmes e chamado de Registrador Sequencial de Eventos ou ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SER"
+        }
+      ],
+      "explanation": "O SER (Sequential Events Recorder) cria uma lista detalhada de eventos digitais para ajudar na analise e reconstrucao do incidente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A tabela do software de configuracao onde as variaveis logicas e alarmes internos sao vinculados aos reles de saida e LEDs fisicos denomina-se matriz de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Marshalling"
+        }
+      ],
+      "explanation": "A matriz de Marshalling e a interface de software responsavel por direcionar os sinais do processador aos contatos secos e indicacoes visuais.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A funcao agregada no IED de linhas que calcula computacionalmente a quilometragem do curto-circuito e conhecida como ____ Locator.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Fault"
+        }
+      ],
+      "explanation": "O Fault Locator utiliza os fasores medidos no momento da falta para estimar a localizacao fisica do defeito na LT.",
+      "difficulty": "hard"
+    }
+  ]
+}

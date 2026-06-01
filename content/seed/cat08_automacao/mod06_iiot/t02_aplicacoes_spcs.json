@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Edge Computing e IIoT",
+  "moduleSubtitle": "Industria 4.0, edge computing, IIoT e casos de uso",
+  "moduleOrder": 5,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o principal benefício operacional obtido ao se executar a Inteligência Artificial na borda (Edge AI) do chão de fábrica?",
+      "options": [
+        "Aumento compulsório da latência na rede em nuvem.",
+        "Decisões ultrarrápidas tomadas em milissegundos devido à baixa latência local.",
+        "Substituição física integral do nível gerencial corporativo ERP.",
+        "Atraso nativo e padronizado na resposta autônoma das chaves lógicas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O processamento local descentralizado reduz significativamente a latência e viabiliza a tomada de decisões em milissegundos para o controle crítico (Edge AI na Indústria).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No que tange à infraestrutura de redes industriais, o que ocorre com os dados da planta ao utilizar a arquitetura de Edge Computing?",
+      "options": [
+        "São automaticamente deletados sem avaliação prévia dos atuadores locais.",
+        "Devem ser armazenados exclusivamente em planilhas físicas pelos operadores.",
+        "Dados sensíveis permanecem dentro da planta fabril, reduzindo a exposição a riscos cibernéticos.",
+        "São roteados via conexões seriais abertas de cobre sem nenhum tipo de barreira."
+      ],
+      "correctIndex": 2,
+      "explanation": "Manter os dados sensíveis processados internamente na fábrica minimiza o envio para a nuvem e blinda a infraestrutura contra ataques (Edge AI na Indústria).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a utilidade direta de um Gêmeo Digital (Digital Twin) no monitoramento prático das fábricas modernas?",
+      "options": [
+        "Suprimir a automação descentralizada em prol de comandos puramente mecânicos.",
+        "Prever falhas, avaliar melhorias de rotinas e otimizar processos na planta sem interferir na produção real.",
+        "Substituir de maneira visual o controle isolado nos painéis elétricos baseados em relés de sobrecarga.",
+        "Bloquear o acesso da operação a qualquer tipo de diagnóstico e alerta provindo do sistema SCADA central."
+      ],
+      "correctIndex": 1,
+      "explanation": "A capacidade realística e dinâmica de simulação em tempo real dos Digital Twins permite testes confiáveis e previsão apurada sem causar riscos operacionais (Tendências para o setor de automação industrial em 2026).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o emprego prático do Edge AI favorece a eficácia da manutenção preditiva de equipamentos rotativos industriais?",
+      "options": [
+        "Inibindo as leituras e calibrações em todos os instrumentos da rede Profibus e DeviceNet na linha.",
+        "Bloqueando controladores para regredir ativamente os laços de malhas à lógica contínua passiva pura.",
+        "Avaliando vibrações e temperaturas locais sem latência e revelando defeitos incipientes que previnem as paradas não programadas.",
+        "Requisitando constantemente ordens diretas de substituição mecânica para o sistema de fornecedores na web."
+      ],
+      "correctIndex": 2,
+      "explanation": "A avaliação detalhada local feita nos padrões captados por sensores de vibração possibilita ações exatas de manutenção prevenida antes do colapso falho na máquina (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Do ponto de vista da arquitetura em pirâmide (ISA-95), o modelo de Edge Layer industrial é frequentemente posicionado conectando quais patamares organizacionais?",
+      "options": [
+        "Os módulos logísticos de venda corporativa externa e os sistemas emulados de nuvem ERP em bases financeiras globais.",
+        "A rede elétrica e os comandos primários isolados em contadores analógicos da camada puramente física da esteira rolante.",
+        "A camada real do controle de maquinários vitais (PLC/DCS) e o ambiente das rotinas lógicas no sistema Execução da Manufatura (MES).",
+        "Os links das malhas seriais dos atuadores simples cegos de corrente 4-20 mA à camada puramente teórica predial."
+      ],
+      "correctIndex": 2,
+      "explanation": "Arquiteturalmente a fina camada inteligente Edge se localiza colhendo do controle real (nível CLP/DCS) para analisar e passar dados filtrados para a gestão (MES) (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a integração veloz da rede IIoT (Tecnologia da Informação com Operacional) gera como desafio colateral preocupante na gerência do sistema de supervisão SCADA?",
+      "options": [
+        "A substituição e inutilização da sintaxe universal de linguagem Ladder original nas unidades gerenciais remanescentes.",
+        "A elevação alarmante dos riscos de falhas perigosas e das invasões em plataformas de controle industrial não preparadas.",
+        "O retorno contínuo aos comandos manuais acoplados pelas antigas linhas hidráulicas de distribuição por todo prédio.",
+        "O decréscimo drástico do uso operacional de dispositivos portáteis operando de modo transparente por Wi-Fi na nuvem."
+      ],
+      "correctIndex": 1,
+      "explanation": "Unir ambientes flexíveis da TI aos controladores legados operativos de TO induz fortes níveis de exposição de acessos irregulares e ciberataques complexos (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para agregar escalabilidade e flexibilidade na malha de suprimentos logísticos (Indústria 4.0), que solução robótica inovadora vem ampliando largamente a logística interna das plantas automáticas?",
+      "options": [
+        "A introdução maciça de robôs móveis autônomos (AMRs) circulando e manipulando cargas pelo chão de fábrica com facilidade conectada.",
+        "A substituição estrutural de robôs guiados dinamicamente visuais por modelos tradicionais cegos dependentes de esteiras puramente estacionárias de roletes mecânicos.",
+        "A erradicação imediata das lógicas redundantes de controle contínuo em refinarias complexas operando no ambiente petroquímico e inflamável.",
+        "O isolamento estrutural e o enclausuramento contínuo de manipuladores cartesianos enormes operando estritamente em áreas mortas e lacradas permanentemente aos analistas."
+      ],
+      "correctIndex": 0,
+      "explanation": "A robótica se expandiu muito e as unidades inteligentes de Robôs Móveis Autônomos fornecem grande adaptabilidade flexível auxiliando na entrega e deslocamento interno otimizado dos estoques fabris (Tendências para o setor de automação industrial em 2026).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Considerando os sistemas operacionais do chão de fábrica, qual é um dos empecilhos de engenharia mais usuais em tentativas modernas para implantar rotinas Edge AI?",
+      "options": [
+        "O congelamento sistemático da capacidade autônoma de processamento ladder isolado operante de forma segura no controle relé mecânico das usinas de álcool.",
+        "A inevitável integração trabalhosa com hardwares ou sistemas antigos de controle nativamente analógicos (legados) que não foram criados com recursos lógicos para coletar e expor seus dados.",
+        "A exclusão normativa compulsória exigida pela regulamentação global que descarta e anula definitivamente toda interface gráfica (IHM) para garantir eficiência analítica restritamente aos microprocessadores estáticos.",
+        "O travamento automático exigido nas linhas hidráulicas e elétricas devido a perigos biológicos de contaminação causados pelo escoamento natural induzido em atuadores eletromecânicos acionados por redes 5G e Fieldbus."
+      ],
+      "correctIndex": 1,
+      "explanation": "Como a planta não é totalmente recriada para um projeto e hospeda painéis defasados isolados por muitos anos, sua complexa transição e integração impõem árduos esforços práticos limitantes às companhias inovadoras (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em plantas automatizadas IIoT operando com protocolos antigos suscetíveis e fracos às invasões sistêmicas pela rede conectada, como atenuar e mitigar os severos riscos ao sistema nos casos nos quais é impraticável fazer uma parada rotineira focando em atualizações de código ou hardware nativo?",
+      "options": [
+        "Cortando permanentemente o cabo cego analógico que nutre o barramento remoto dos relés principais da planta operacional.",
+        "Adicionando alarmes sonoros temporizados a fim de assustar o acesso contínuo aos dados nas salas remotas conectadas em série elétrica de forma estritamente direta sem relatórios ao controlador primário unificado.",
+        "Por imposição e gestão robusta combinando métodos focados em patches virtuais isolantes bem como enclausuramentos robustos (DMZ) entre a estrutura interna arcaica perigosa e o risco contínuo cibernético corporativo em rotas amplas.",
+        "Removendo radical e ativamente qualquer mecanismo inibidor contínuo das hierarquias mestre/escravo a fim de desimpedir a avaliação cruzada sem o controle visual e senhas nas remotas locais isoladas nas casamatas do controlador antigo."
+      ],
+      "correctIndex": 2,
+      "explanation": "Modernizações escalonadas utilizando rigoroso isolamento e métodos técnicos contínuos focados em inserir defesas virtuais pontuais auxiliam ativamente os equipamentos sensíveis defasados contra vulnerabilidades crônicas externas em rede (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando as infraestruturas IIoT capturam dados para prever a saúde das máquinas através de Machine Learning via Edge ou modelos Analytics na nuvem, que desafio imperativo inerente às fontes define o limite principal prático em atestar as eficácias dos laços algorítmicos?",
+      "options": [
+        "A anulação das varreduras pneumáticas e o fechamento em redes híbridas Ethernet onde não existe a retroação nas lógicas digitais em ambientes agressivos isolados e cegos sem o barramento I/O estrito aos CLP clássicos.",
+        "O emprego mandatário focado na sintaxe C pura a fim de bloquear integrações dos painéis que hospedam os conversores lógicos cegos dedicados na geração passiva visual sem matriz interligada em cascata.",
+        "A dependência absoluta no fornecimento garantido constante, de dados qualitativamente limpos e fidedignos, haja vista a inutilidade de tentar prever padrões matematicamente e fisicamente reais com o uso maciço e massivo de registros imprecisos do processo analógico ruidoso sujo em chão de fábrica.",
+        "O uso das medições limitando todas e quaisquer oscilações temporais das chaves mecânicas forçando um descarte maciço imposto pelo barramento de cobre serial operando assincronamente as matrizes discretas da estação original na usina mestre remota em painel."
+      ],
+      "correctIndex": 2,
+      "explanation": "Modelos robustos alimentam-se unicamente extraindo análises exatas caso o dado seja estruturalmente de elevada procedência, impondo que instabilidades e registros faltantes sujos não comprometam a acurácia global na tomada lógica de decisões (Edge AI na Indústria).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Câmeras industriais inteligentes baseadas em Edge Computing realizam a inspeção técnica de qualidade dos produtos somente após enviarem as imagens para servidores externos.",
+      "correctAnswer": false,
+      "explanation": "As câmeras com IA embarcada identificam defeitos na produção através de visão computacional em tempo real e sem precisar de processamento externo (Edge AI na Indústria).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A adesão conjunta à Internet Industrial das Coisas (IIoT) e ao processamento Edge reduz severamente o volume desnecessário de dados transmitidos à nuvem.",
+      "correctAnswer": true,
+      "explanation": "O menor volume de dados brutos enviados à nuvem ajuda as empresas na contenção drástica dos custos gerais de transmissão e de armazenamento (Edge AI na Indústria).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em ocorrências atípicas de falha severa na conexão de internet, os sistemas que operam algoritmos críticos em modelos locais (Edge AI) costumam interromper prontamente o controle das máquinas.",
+      "correctAnswer": false,
+      "explanation": "Dispositivos baseados em inteligência computacional de borda conservam sua autonomia rodando e protegendo a operação mesmo durante interrupções perigosas na conectividade geral (Edge AI na Indústria).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A convergência industrial que possibilita processar inteligência diretamente na borda agrava a saturação da banda larga transmitindo obrigatoriamente volumes densos e maciços de imagens até o ERP corporativo.",
+      "correctAnswer": false,
+      "explanation": "O conceito fundamental do modelo restringe o gasto do tráfego enviando externamente somente as consolidações simplificadas e essenciais da rotina ao descartar todo resíduo irrelevante localmente (Edge AI na Indústria).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os avanços trazidos pelo modelo de processamento descentralizado e do Edge Computing suprimiram as exigências originais de uso e suporte das padronizações, protocolos e normas de interoperabilidade no chão de fábrica da Indústria 4.0.",
+      "correctAnswer": false,
+      "explanation": "A integração dos sistemas novos só funciona corretamente graças aos protocolos organizacionais de comunicação que se mantiveram indispensáveis garantindo flexibilidade coesa em toda planta e rastreabilidade escalável normatizada (Tendências para o setor de automação industrial em 2026).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nas tendências tecnológicas modernas, o paradigma do ____ Computing processa grande parte dos dados próximo das máquinas reduzindo diretamente a latência.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Edge"
+        }
+      ],
+      "explanation": "O modelo Edge Computing destaca-se por aproximar o processamento analítico ativamente para junto dos maquinários produtores da informação (Tendências para o setor de automação industrial em 2026).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos ambientes autônomos, os controladores lógicos industriais e potentes ____ instalados fisicamente na planta assumem a tarefa de executar a IA e gerenciar a base do processo.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "gateways"
+        }
+      ],
+      "explanation": "Gateways inteligentes atuam interligando os domínios de campo com algoritmos eficientes instalados na borda para realizar as coletas e ações preditivas (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A convergência entre o Edge Computing, robótica autônoma e as redes robustas como o ultrarrápido ____ industrial viabilizará fábricas autônomas mais dinâmicas e sem cabos complexos no chão.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "5G"
+        }
+      ],
+      "explanation": "O futuro promissor industrial repousa consolidado conectando massivamente as infraestruturas descentralizadas aliando a IA Edge às velozes e sólidas arquiteturas da telecomunicação em rede (Edge AI na Indústria).",
+      "difficulty": "hard"
+    }
+  ]
+}

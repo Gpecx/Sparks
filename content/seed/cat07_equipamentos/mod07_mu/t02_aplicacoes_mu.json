@@ -13,11 +13,11 @@
       "statement": "Na aplicacao da IEC 61850 em protecao, qual interface logica transporta as amostras brutas de TC e TP do patio para o nivel de bay?",
       "options": [
         "Interface 1 de comunicacao vertical cliente-servidor.",
-        "Interface 4 de troca instantanea de dados no barramento de processo.",
+        "Interface 10 de telemetria corporativa remota.",
         "Interface 8 de intertravamento horizontal entre bays.",
-        "Interface 10 de telemetria corporativa remota."
+        "Interface 4 de troca instantanea de dados no barramento de processo."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A norma mapeia o fluxo de dados instantaneos de transformadores (como o SV) rigidamente pelo roteiro delimitado da Interface logica 4.",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "Na modelagem de dados, quais Logical Nodes representam e disponibilizam as medidas digitais de corrente e tensao as funcoes de protecao?",
       "options": [
         "CSWI e CILO.",
-        "PTOC e PDIS.",
         "TCTR e TVTR.",
+        "PTOC e PDIS.",
         "XCBR e XSWI."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "Os nos TCTR (Transformador de Corrente) e TVTR (Transformador de Tensao) sao os responsaveis nativos pela amostragem do processo primario.",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Em uma arquitetura de protecao digital, como as amostras de SV originadas nos sensores atingem simultaneamente varios reles assinantes?",
       "options": [
         "Via mensagens de broadcast destrutivo em IP.",
-        "Via enderecamento unificado Multicast na camada de enlace.",
         "Por conexoes cliente-servidor MMS TCP/IP.",
+        "Via enderecamento unificado Multicast na camada de enlace.",
         "Atraves de tuneis seriais RS-485 roteados."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A aplicacao faz uso do enderecamento Multicast para enviar o fluxo paralelamente a todas as estacoes de protecao designadas a escuta-lo.",
       "difficulty": "easy"
     },
@@ -91,11 +91,11 @@
       "statement": "Em projetos contendo barramento de processo unificado (Alternativa 3), qual e o principal impacto ou gargalo arquitetural esperado?",
       "options": [
         "As chaves e disjuntores primarios desarmam compulsoriamente.",
-        "Isola as medicoes impedindo que os reles realizem atuacoes locais.",
         "O barramento necessita suportar uma elevadissima taxa de uso da banda de dados.",
+        "Isola as medicoes impedindo que os reles realizem atuacoes locais.",
         "Os IEDs retornam para operacao exclusiva em modelo eletromecanico."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "O agrupamento de todas as medicoes da planta em um unico segmento (Alternativa 3) requisita redes robustas devido a volumosa banda absorvida pelo SV.",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "O que acontece rotineiramente aos algoritmos de protecao da subestacao caso eles sofram a perda infima e ocasional de amostras na rede?",
       "options": [
         "O equipamento trava aguardando resincronizacao manual de fabrica.",
-        "As funcoes toleram e processam essas perdas isoladas sem induzir falhas operacionais graves.",
         "O rele emite a mensagem MMS imediata desarmando os alimentadores.",
+        "As funcoes toleram e processam essas perdas isoladas sem induzir falhas operacionais graves.",
         "A rede reinicia as portas do switch atraves do protocolo RSTP."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Como os canais de fluxo cru nao aplicam reconhecimento ACK, perdas isoladas sao absorvidas silenciosamente sem comprometer a seguranca do algoritmo logico.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "A principal vantagem da arquitetura baseada em SV e o compartilhamento simultaneo de uma mesma medicao digitalizada (sensor TCTR) por multiplos reles assinantes.",
       "correctAnswer": true,
       "explanation": "O fluxo multicast converte a medicao isolada em variavel publica, franqueando que inumeros IEDs da zona absorvam os mesmos dados cooperativamente.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Os projetos adotando a arquitetura orientada a funcao limitam os segmentos SV de modo que a rede seja moldada refletindo fielmente a abrangencia das zonas de protecao eletrica.",
       "correctAnswer": true,
       "explanation": "Na Alternativa 4 descrita no escopo as redes do process bus acompanham diretamente as zonas geofisicas estritas limitando colapsos generalizados.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Para atestar a sanidade dos sinais em falhas fisicas os fluxos da rede transportam agregado ao bloco de dados o atributo de qualidade designado pelo codigo q.",
       "correctAnswer": true,
       "explanation": "O Data Attribute q (Quality) repassa aos assinantes o diagnostico fidedigno assegurando se o equipamento originario lida com falhas marginais em sua medicao.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O servico de medicao e amostragem SV exige a operacao em padrao TCP orientado a conexao para validar a comparacao instantanea dos fasores diferenciais.",
       "correctAnswer": false,
       "explanation": "O Sampled Values utiliza modelo Publisher Subscriber com trafego Ethernet direto (camada 2), sem utilizar o TCP IP nem efetuar confirmacoes rotineiras.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Diferentemente do padrao estocastico do GOOSE motivado por ocorrencias abruptas as transferencias SMV obedecem estritamente ditames temporais chamados clock events.",
       "correctAnswer": true,
       "explanation": "Os manuais tecnicos ratificam que a publicacao constante para reconstituir os ciclos baseia-se inflexivelmente em disparos atrelados a sinais de relogio ou clock events.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O nivel hierarquico e o segmento de rede destinado prioritariamente a unificacao das conexoes e envio das amostras geradas no equipamento de patio recebe o titulo normativo de barramento de _____.",
+      "statement": "O nivel hierarquico e o segmento de rede destinado prioritariamente a unificacao das conexoes e envio das amostras geradas no equipamento de patio recebe o titulo normativo de barramento de ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A estrita garantia e avaliacao das discrepancias de angulo adotadas nos arranjos de distancia exigem que as estacoes apliquem sincronismo apurado da ordem base de um _____.",
+      "statement": "A estrita garantia e avaliacao das discrepancias de angulo adotadas nos arranjos de distancia exigem que as estacoes apliquem sincronismo apurado da ordem base de um ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "As variaveis eletricas vitais ao disparo geradas periodicamente pelos TCs e TPs digitais circulam na malha identificadas de modo homogeneo atraves do servico batizado Sampled _____ Values.",
+      "statement": "As variaveis eletricas vitais ao disparo geradas periodicamente pelos TCs e TPs digitais circulam na malha identificadas de modo homogeneo atraves do servico batizado Sampled ____ Values.",
       "blanks": [
         {
           "index": 0,

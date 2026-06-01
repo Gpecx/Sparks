@@ -13,11 +13,11 @@
       "statement": "O que define a etapa de planejamento do comissionamento em uma subestação?",
       "options": [
         "A compra dos materiais elétricos.",
-        "A elaboração prévia de um roteiro definindo escopos, etapas e responsabilidades.",
         "O comissionamento direto à quente sem uso de diagramas unifilares.",
+        "A elaboração prévia de um roteiro definindo escopos, etapas e responsabilidades.",
         "A energização teste inicial para verificar a saturação dos TCs."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Planejar é preparar antecipadamente a execução definindo o roteiro e as responsabilidades. (Fonte: Cabine Primária).",
       "difficulty": "easy"
     },
@@ -26,11 +26,11 @@
       "statement": "Qual a principal função das folhas de ensaio (checklists) durante o comissionamento?",
       "options": [
         "Substituir o memorial descritivo aprovado pela concessionária.",
-        "Registrar verificações, condições reais dos equipamentos e providências recomendadas.",
+        "Avaliar apenas as perdas não técnicas do alimentador em carga.",
         "Anotar estritamente as leituras de faturamento de energia para a tarifa.",
-        "Avaliar apenas as perdas não técnicas do alimentador em carga."
+        "Registrar verificações, condições reais dos equipamentos e providências recomendadas."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "As folhas de ensaio servem para documentar as inspeções e registrar recomendações de adequação. (Fonte: Cabine Primária).",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Durante o Teste de Aceitação em Fábrica (FAT) dos painéis de proteção, qual o escopo prioritário de verificação?",
       "options": [
         "A resistência de pé de torre das linhas de transmissão aéreas.",
-        "A parametrização inserida e as lógicas funcionais do IED simuladas antes do envio a campo.",
         "A tensão de passo na malha de terra da subestação final.",
+        "A parametrização inserida e as lógicas funcionais do IED simuladas antes do envio a campo.",
         "A injeção primária direta no barramento de força (138 kV)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "No FAT, verifica-se a parametrização e o intertravamento lógico do painel antes da instalação física. (Fonte: Virtus_ProtBarras).",
       "difficulty": "medium"
     },
@@ -91,11 +91,11 @@
       "statement": "Como devem ser tratados os arquivos de parametrização off-line (ajustes prévios) durante o SAT em campo?",
       "options": [
         "Devem ser implementados sem questionamentos, assumindo-se o projeto como ideal.",
-        "Devem ser obrigatoriamente checados e adequados à topologia física real da subestação.",
+        "O IED deve retornar à fábrica para a gravação definitiva na sua EPROM.",
         "Devem ser excluídos e formatados pelo relé para criar um novo banco de dados no local.",
-        "O IED deve retornar à fábrica para a gravação definitiva na sua EPROM."
+        "Devem ser obrigatoriamente checados e adequados à topologia física real da subestação."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Ajustes off-line exigem validação e possíveis correções conforme a realidade construtiva da instalação. (Fonte: Virtus_ProtBarras).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Como a equipe de comissionamento deve tratar imprevistos não mapeados durante a montagem?",
       "options": [
-        "Refazer o projeto do zero sem reportar ao cliente.",
-        "Improvisar adaptações e pular a documentação para acelerar o cronograma.",
         "Consultar o projetista original e registrar formalmente as alterações no as-built.",
+        "Improvisar adaptações e pular a documentação para acelerar o cronograma.",
+        "Refazer o projeto do zero sem reportar ao cliente.",
         "Solicitar imediatamente a devolução e troca de todos os relés da cabine."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Imprevistos devem ser avaliados tecnicamente e documentados no as-built, compondo o prontuário. (Fonte: Cabine Primária).",
       "difficulty": "medium"
     },
@@ -130,11 +130,11 @@
       "statement": "Como os relés avaliam o circuito de saída (trip) via automonitoramento, simulando atuações no comissionamento sem desligar a carga?",
       "options": [
         "Interrompendo a alimentação de controle DC das bobinas.",
-        "Demandando sinal de trip via firmware com a obrigatoriedade de isolamento externo da carga na lógica de projeto.",
         "Injetando 10% da corrente de Inrush pelo secundário dos TCs associados.",
+        "Demandando sinal de trip via firmware com a obrigatoriedade de isolamento externo da carga na lógica de projeto.",
         "Acionando contatores eletromecânicos de by-pass no fechamento."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Para testar as saídas via autoteste (Watchdog/Test Mode), a automação externa deve estar isolada ou o circuito projetado de modo a não acionar a bobina. (Fonte: Virtus_CProtBL2Cd3).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "As folhas de ensaio no comissionamento perdem a validade caso sejam anotados vazamentos ou discrepâncias pontuais nos equipamentos.",
       "correctAnswer": false,
       "explanation": "As folhas existem exatamente para registrar anomalias, condições indesejadas e definir a lista de pendências (punch list). (Fonte: Cabine Primária).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A documentação as-built espelha as correções reais do comissionamento e compõe obrigatoriamente o Prontuário de Instalações Elétricas.",
       "correctAnswer": true,
       "explanation": "O as-built atualiza o projeto conforme a realidade em campo, sendo exigência de registro para a NR-10 no prontuário. (Fonte: Cabine Primária).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Os testes de comissionamento em subestações privadas (consumidores livres) são executados exclusivamente pela equipe técnica da distribuidora.",
       "correctAnswer": false,
       "explanation": "O consumidor monta e testa sua instalação (comissionamento); a distribuidora apenas vistoria e aprova o ponto de entrega. (Fonte: Cabine Primária).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A parametrização inicial preparada off-line (no escritório) nunca deve ser aplicada cegamente sem o cruzamento com as fiações lidas no FAT/SAT.",
       "correctAnswer": true,
       "explanation": "Arquivos off-line dependem de validação em campo (SAT), pois há frequentes discrepâncias com a construção física final. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A sinalização por LEDs e as indicações visuais do painel dispensam testes pontuais, pois vêm pré-validadas de fábrica no sistema operacional do IED.",
       "correctAnswer": false,
       "explanation": "É crítico testar integralmente o mapeamento (marshalling) de alarmes e LEDs para atestar a leitura correta do operador sob falta. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A lista de não conformidades e pendências a resolver antes da entrega final é chamada de lista de _____.",
+      "statement": "A lista de nao conformidades e itens a resolver antes da entrega final e chamada de lista de ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A elaboração prévia do roteiro com etapas sequenciais e responsáveis pela execução dos ensaios em campo é conhecida como etapa de .",
+      "statement": "A documentacao final que traduz as interferencias reais mapeadas em campo e corrige o projeto original e conhecida como documentacao as-____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Todos os certificados, manuais, laudos e os relatórios de comissionamento de campo devem ser mantidos no _____ de Instalações Elétricas.",
+      "statement": "Todos os certificados, manuais, laudos e os relatórios de comissionamento de campo devem ser mantidos no ____ de Instalações Elétricas.",
       "blanks": [
         {
           "index": 0,

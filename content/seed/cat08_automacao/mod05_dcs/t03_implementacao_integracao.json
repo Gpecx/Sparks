@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Sistemas Distribuídos (DCS)",
+  "moduleSubtitle": "Conceitos, aplicacoes em SPCS e integracao",
+  "moduleOrder": 4,
+  "trail": "Implementação e Integração",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a diferença fundamental entre um sistema DCS e um software SCADA na automação industrial?",
+      "options": [
+        "DCS é apenas um hardware de campo isolado e SCADA é um controlador físico central.",
+        "SCADA monitora processos via interface gráfica, enquanto DCS é um sistema dedicado para controle contínuo.",
+        "DCS é usado exclusivamente para lógicas discretas manuais e SCADA para controle PID.",
+        "Ambos são sistemas puramente corporativos de TI que não operam no chão de fábrica."
+      ],
+      "correctIndex": 1,
+      "explanation": "O SCADA é um software focado em monitoramento, enquanto o DCS consiste em um sistema completo e dedicado ao controle de processos contínuos (PLC vs SCADA vs DCS: Principais diferenças explicadas).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em qual nível da pirâmide de automação (ISA-95) os sistemas DCS e CLPs operam ativamente no controle de um processo?",
+      "options": [
+        "Nível 1.",
+        "Nível 2.",
+        "Nível 4.",
+        "Nível 5."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Nível 2 abriga os equipamentos como CLPs e SDCDs (DCS) responsáveis por realizar o controle automatizado da planta (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual vantagem operacional a integração de um Banco de Dados em Tempo Real (RTDB) via gateway traz ao sistema DCS?",
+      "options": [
+        "Anula a comunicação digital forçando uso de redes analógicas de 4 a 20 mA.",
+        "Transforma válvulas de controle puramente em atuadores discretos de segurança.",
+        "Impede que as consultas corporativas saturem a CPU do DCS, preservando seu tempo de resposta.",
+        "Remove completamente a necessidade de uma Interface Homem-Máquina na sala de controle."
+      ],
+      "correctIndex": 2,
+      "explanation": "O gateway com RTDB atua como buffer, impedindo que excessos de requisições gerenciais atrasem o tempo de processamento contínuo do controle (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual vulnerabilidade cibernética é severamente agravada pela integração massiva das redes corporativas (TI) com as redes operacionais (TO) de um DCS?",
+      "options": [
+        "Eliminação da latência normal nos sistemas pneumáticos industriais.",
+        "A exposição dos sistemas de controle legados a acessos não autorizados e ataques cibernéticos.",
+        "O bloqueio automático do roteamento nos hardwares com protocolos fechados.",
+        "A ocorrência de falsos alarmes causados por surtos de ruído eletromagnético natural."
+      ],
+      "correctIndex": 1,
+      "explanation": "A convergência entre TI e TO expõe plataformas operacionais antigas a vulnerabilidades severas que exigem mitigação contínua de cibersegurança (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na integração de instrumentos via barramento Fieldbus Foundation, o que define a característica funcional de interoperabilidade?",
+      "options": [
+        "A substituição do controlador mestre unicamente por matrizes de chaves fim de curso.",
+        "A conversão obrigatória de todos os sinais digitais em ondas eletromagnéticas cegas.",
+        "A restrição que proíbe equipamentos de fornecedores concorrentes de rodarem na mesma rede.",
+        "A capacidade de trocar um dispositivo de um fabricante por outro exigindo apenas certa reconfiguração no sistema."
+      ],
+      "correctIndex": 3,
+      "explanation": "A interoperabilidade garante que dispositivos de diferentes marcas operem juntos na rede Fieldbus após uma reconfiguração parametrizada (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na arquitetura integrada de dados da planta, qual protocolo ou rede é normalmente indicado para a camada superior visando abranger áreas geográficas extensas?",
+      "options": [
+        "Ethernet.",
+        "Modbus RTU serial em cobre.",
+        "Circuito nativo 4 a 20 mA.",
+        "Rede de relés eletromecânicos."
+      ],
+      "correctIndex": 0,
+      "explanation": "No nível de informação as aplicações corporativas e corporações geográficas amplas baseiam-se dominantemente nas redes flexíveis do tipo Ethernet (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual prática de engenharia é recomendada para viabilizar a comunicação e o controle peer-to-peer limpo na integração entre CLPs e DCSs?",
+      "options": [
+        "Empregar exclusivamente endereçamentos em nível de hardware MAC isolado.",
+        "Basear o intercâmbio de comunicação utilizando identificadores baseados em nomes de tag.",
+        "Ocultar obrigatoriamente as variáveis analógicas do barramento principal Mestre.",
+        "Adotar moduladores sonoros entre as redes seriais assíncronas do chão de fábrica."
+      ],
+      "correctIndex": 1,
+      "explanation": "O uso unificado de nomes de tag facilita imensamente o reconhecimento de dados e a elaboração de malhas de controle híbridas eficientes (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao adotar o protocolo Fieldbus Foundation (H1) na integração em campo, como é solucionada a questão técnica de alimentação elétrica dos instrumentos?",
+      "options": [
+        "A energia é gerada de forma autônoma por micro painéis solares na carcaça da válvula.",
+        "Exige a passagem de cabo extra dedicado trifásico isolado do barramento.",
+        "Permite que os instrumentos do circuito sejam alimentados diretamente através do próprio par de fios trançado.",
+        "Usa indução mecânica produzida exclusivamente pelas próprias tubulações de ar da planta."
+      ],
+      "correctIndex": 2,
+      "explanation": "A tecnologia H1 provê comunicação bidirecional a 31,25 kbit/s e fornece alimentação embutida utilizando os mesmos condutores de rede (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na implantação de cibersegurança do DCS, como deve-se proteger equipamentos de arquiteturas legadas antigas onde a aplicação convencional de atualizações por patch falha ou é tecnicamente impraticável?",
+      "options": [
+        "Desligando sumariamente toda interface IHM convertendo o sistema de volta a chaves cegas.",
+        "Utilizando algoritmos limitados apenas ao processamento analógico em redes de relé.",
+        "Implementando políticas de patches virtuais combinadas com fortes camadas de isolamento em rede.",
+        "Removendo todas as senhas de acesso do controlador de campo para evitar os travamentos de buffer."
+      ],
+      "correctIndex": 2,
+      "explanation": "Sistemas de automação legados exigem modernizações graduais e estratégias compensatórias rigorosas, tal como isolamento lógico de rede e patches virtuais (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante o comissionamento de uma infraestrutura Profibus em um DCS, qual é o dever operacional provido pelo acoplador de segmento na rede?",
+      "options": [
+        "Bloquear acessos de hackers aplicando criptografia ponta a ponta na matriz de atuação do chão de fábrica.",
+        "Adaptar e regular a velocidade de dados de 12 Mbit/s oriunda da rede DP para atingir os 31,25 kbit/s requeridos pelo barramento de campo PA.",
+        "Eliminar alarmes errôneos cortando fisicamente a modulação mecânica das válvulas borboleta saturadas.",
+        "Trabalhar como roteador wireless primário conectando ilhas de sensores passivos do processo batelada."
+      ],
+      "correctIndex": 1,
+      "explanation": "O uso do acoplador adapta os ritmos, rebaixando as frequências brutas do backbone DP para abastecer simultaneamente as exigências precisas do segmento físico PA (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Sistemas de Controle Distribuído (DCS) podem ser integrados aos sistemas MES e ERP empresariais seguindo a norma ISA-95 para ampliar a gestão e rastreabilidade.",
+      "correctAnswer": true,
+      "explanation": "As arquiteturas modernas permitem que a camada de controle se integre perfeitamente aos níveis de manufatura (MES) e corporativo (ERP) alinhados à ISA-95 (Edge AI na Indústria).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um sistema de controle DCS operante em chão de fábrica é intrinsecamente imune a ciberataques externos, tornando desnecessário o uso de firewalls.",
+      "correctAnswer": false,
+      "explanation": "Com a convergência TI/TO e integração à rede corporativa, sistemas DCS exigem firewalls e rigoroso monitoramento para evitar acessos indevidos (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na adoção do Fieldbus Foundation junto ao DCS, as funções lógicas e malhas PID podem ser descentralizadas, sendo migradas e executadas diretamente nos dispositivos de campo inteligentes.",
+      "correctAnswer": true,
+      "explanation": "O protocolo foca na missão de transferir recursos antes restritos, delegando algoritmos e processamentos cruciais para os instrumentos da linha de campo (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas integrações de plantas complexas que empregam DCS, as malhas vitais de proteção e os intertravamentos de segurança devem obrigatoriamente compartilhar o mesmo controlador regulatório normal da planta.",
+      "correctAnswer": false,
+      "explanation": "Boas práticas de engenharia determinam que a segurança vital (Shut down) opere segregada em sistemas de CLPs independentes do controle primário SDCD (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na expansão técnica de malhas Profibus, as redes focadas em alta velocidade necessitam impreterivelmente de acopladores de segmento entre nós pois suas ramificações alteram profundamente a camada física operante.",
+      "correctAnswer": false,
+      "explanation": "Para as redes Profibus configuradas integralmente em alta velocidade o hardware independe de acopladores, visto que a camada física estrutural se mantém a mesma para cada segmento (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O ____ é um sistema digital robusto que aplica múltiplos controladores para automatizar fábricas inteiras unificando processos contínuos e complexos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "DCS"
+        }
+      ],
+      "explanation": "O DCS, ou Sistema de Controle Distribuído, age no controle massivo e contínuo interligando lógicas e dispositivos por toda a fábrica (PLC vs SCADA vs DCS: Principais diferenças explicadas).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em implementações modernas para proteger a arquitetura DCS contra o acesso indevido vindo da nuvem corporativa, utilizam-se firewalls formando zonas desmilitarizadas, chamadas pela sigla ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "DMZs"
+        }
+      ],
+      "explanation": "A criação técnica de DMZs (Demilitarized Zones) separa ativamente o tráfego corporativo livre do ambiente selado da automação SCADA e DCS (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Baseado em diretrizes abertas produtor-consumidor de redes no DCS, o tipo restrito de tráfego de dados emitido somente na ocorrência momentânea de um alarme é classificado tecnicamente como tráfego de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "eventos"
+        }
+      ],
+      "explanation": "A transmissão otimizada baseada em eventos ocorre esporadicamente liberando o fluxo da rede para focar na entrega prioritária durante os instantes de anormalidade (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    }
+  ]
+}

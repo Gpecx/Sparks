@@ -1,0 +1,218 @@
+{
+  "category": "Termografia Infravermelha",
+  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categoryOrder": 3,
+  "module": "Normas e Laudos de Termografia",
+  "moduleSubtitle": "NBR 15572, ISO 10878, NBR 16292, laudos e gestao preditiva",
+  "moduleOrder": 3,
+  "trail": "ISO 10878",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que define tecnicamente um termograma em ensaios nao destrutivos?",
+      "options": [
+        "Mapa termico ou imagem onde tons e cores representam a distribuicao da energia radiante sobre o alvo.",
+        "Grafico impresso da variacao historica da umidade absoluta do ambiente de inspecao.",
+        "Tabela de calibracao laboratorial relacionando a corrente eletrica e a resistencia de contato.",
+        "Registro acustico da radiacao convertida instantaneamente em mapa de calor tatil."
+      ],
+      "correctIndex": 0,
+      "explanation": "O termograma e a imagem termica onde cores ou tons representam a radiacao termica da superficie analisada. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na terminologia da termografia, o que caracteriza perfeitamente um corpo negro?",
+      "options": [
+        "Um corpo que reflete e refrata integralmente toda a luz do espectro visivel.",
+        "Um emissor e absorvedor ideal e perfeito de radiacao termica em todos os comprimentos de onda.",
+        "Um objeto real que opera com temperatura restrita a faixa criogenica de laboratorio.",
+        "Uma lente de material opaco usada para calibracao do foco na camera termica."
+      ],
+      "correctIndex": 1,
+      "explanation": "Um corpo negro e perfeitamente opaco e ideal, emitindo e absorvendo a maxima radiacao termica possivel. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que um ponto quente (hot spot) representa visualmente no termograma de um equipamento?",
+      "options": [
+        "Uma poca de condensacao extrema decorrente do congelamento atmosferico instantaneo.",
+        "Uma area calibrada de isolamento termico impecavel e ventilacao adequada.",
+        "Uma regiao de leitura nula causada por pixels inoperantes na matriz do termovisor.",
+        "Uma area de alta temperatura que sinaliza indicios criticos de sobrecarga ou desgaste mecanico."
+      ],
+      "correctIndex": 3,
+      "explanation": "Pontos de calor indicam areas de alta temperatura alertando sobre evidentes quadros de sobrecarga ou estresse mecanico. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a temperatura refletida aparente e definida nas medicoes em campo aberto?",
+      "options": [
+        "E a temperatura limite dos circuitos de silicio integrados de leitura da camera.",
+        "E a temperatura aparente de outros objetos do ambiente que e refletida pelo alvo para o termovisor.",
+        "E o calor disperso internamente nas lentes opticas por efeito Joule das baterias.",
+        "E a somatoria absoluta da temperatura do sol com o vento cruzado convectivo."
+      ],
+      "correctIndex": 1,
+      "explanation": "Ela corresponde a radiacao proveniente de objetos vizinhos que incide sobre o alvo e reflete diretamente na lente da camera. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que descreve corretamente o parametro fisico de emissividade de uma superficie alvo?",
+      "options": [
+        "O angulo maximo de abertura das lentes para captacao infravermelha periferica.",
+        "A taxa de absorcao de umidade do material sob exposicao a radiacao ultravioleta.",
+        "A razao entre a radiancia do alvo e a radiancia de um corpo negro a mesma temperatura e faixa espectral.",
+        "O limite exato de temperatura que o corpo suporta antes da fusao de sua carcaca externa."
+      ],
+      "correctIndex": 2,
+      "explanation": "A emissividade e a base comparativa entre a excitancia do objeto real e a de um corpo negro sob igual temperatura termica. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o parametro normatizado NETD quantifica em uma camera termografica?",
+      "options": [
+        "A quantidade fisica de baterias suportadas pelo circuito integrado de leitura analogico.",
+        "A sensibilidade ou diferenca de temperatura minima detectavel para uma relacao sinal ruido unitaria.",
+        "O grau de distorcao optica das lentes de germanio ao focar objetos milimetricos.",
+        "A distancia radial maxima possivel para medir temperatura sob forte nevoeiro."
+      ],
+      "correctIndex": 1,
+      "explanation": "O NETD expressa a resolucao em temperatura equivalente ao incremento termico do desvio padrao devido ao ruido de imagem. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "As siglas SW, MW e LW definem faixas espectrais de termovisores referentes a quais janelas, respectivamente?",
+      "options": [
+        "Ultravioleta C, Ultravioleta B e Ultravioleta A visivel.",
+        "Infravermelho proximo (1 a 3 micrometros), medio (3 a 6 micrometros) e distante (6 a 15 micrometros).",
+        "Radio curto, micro-ondas magnetico e ondas longas de televisao satelital.",
+        "Espectro audivel agudo, espectro vocal medio e frequencias graves sonoras."
+      ],
+      "correctIndex": 1,
+      "explanation": "A classificacao divide os termovisores nas janelas de operacao LW, MW e SW onde a atenuacao atmosferica e menos relevante. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na avaliacao radiometrica de sistemas eletricos, o que compoe a radiosidade total de uma superficie inspecionada?",
+      "options": [
+        "Exclusivamente o fator de difracao de fenda SRF refletido pelo cobre.",
+        "A subtracao da absorcao de oxigenio pelo ganho digital da lente protetora.",
+        "A soma da radiacao termica emitida pela propria superficie com a parcela nela refletida proveniente do ambiente.",
+        "A temperatura teorica na qual o equipamento interrompe a geracao de fotons."
+      ],
+      "correctIndex": 2,
+      "explanation": "A radiosidade total consolida em equacao a componente emitida ativamente pelo objeto com a parcela passiva refletida por este. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na normalizacao de ensaios nao destrutivos, como e conceituada a temperatura aparente de um objeto?",
+      "options": [
+        "E a leitura compensada pelo software que extrai a radiacao de corpos vizinhos quentes.",
+        "E o calor de contato aferido exclusivamente com sondas de termopar e pirometros opticos.",
+        "E a leitura radiometrica nao compensada da camera contendo toda a radiacao incidente no detector, independentemente da fonte.",
+        "E a temperatura calculada matematicamente pelo criterio delta T entre duas fases identicas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Trata-se da leitura bruta capturada pelo sensor que nao isola as variadas contribuicoes de reflexao e transmitancia do meio de inspecao. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em metrologia termografica, o que define a sigla de campo de visao instantaneo (IFOV)?",
+      "options": [
+        "A vida util garantida de um unico pixel na matriz sensivel de varredura.",
+        "A potencia minima da bateria para iniciar o circuito de leitura FPA.",
+        "A umidade absoluta concentrada estritamente sobre a fenda das lentes da camera.",
+        "A abrangencia angular sob a qual um unico elemento detector da matriz percebe a radiacao do alvo."
+      ],
+      "correctIndex": 3,
+      "explanation": "O IFOV e o angulo de visao especifico de um pixel que afeta criticamente a resolucao espacial da imagem termica formada. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Uma anomalia termica e tipicamente diagnosticada quando um componente eletrico em operacao apresenta temperatura superior a sua maxima temperatura admissivel de projeto.",
+      "correctAnswer": true,
+      "explanation": "Operar acima dos limites maximos admissiveis especificados em projeto caracteriza de forma indubitavel uma anomalia termica e falha funcional. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A propriedade fisica da refletividade e a proporcao exata da energia infravermelha incidente que atravessa integralmente a materia do objeto sem sofrer atenuacao.",
+      "correctAnswer": false,
+      "explanation": "A proporcao da radiacao que atravessa livremente a materia do objeto e a sua transmitancia, e nao a refletividade superficial. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O parametro optico geometrico campo de visao (FOV) define a abrangencia angular total do cenario que pode ser enxergado pelo termovisor.",
+      "correctAnswer": true,
+      "explanation": "O FOV depende diretamente das dimensoes da lente e da matriz focal para estipular e limitar toda a area de visao da camera. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O calculo da atenuacao optica nas janelas de transmissao atmosferica infravermelha desconsidera completamente a quantidade de agua precipitavel presente no ar.",
+      "correctAnswer": false,
+      "explanation": "A umidade e a agua precipitavel sao fatores essenciais e limitantes na determinacao da atenuacao e absorcao molecular do meio percorrido. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Segundo os padroes, a emissividade espectral compara a radiacao de um corpo real com a de um corpo negro medidos obrigatoriamente em faixas de comprimento de onda totalmente diferentes e assimetricas.",
+      "correctAnswer": false,
+      "explanation": "A razao da emissividade compara a radiancia do alvo e do corpo negro estritamente sob a mesma temperatura e no mesmo intervalo espectral. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A razao tecnica entre a energia termica total refletida por uma superficie e a energia total incidente sobre essa mesma superficie e quantificada e denominada ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "refletividade"
+        }
+      ],
+      "explanation": "A propriedade da refletividade mede e quantifica a capacidade do material alvo de refletir a energia provinda do ambiente radiante. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O incremento de temperatura equivalente ao desvio padrao causado pelo ruido interno do detector define a resolucao termica, tambem nomeada na calibracao pela sigla ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "NETD"
+        }
+      ],
+      "explanation": "O parametro NETD quantifica a diferenca de temperatura minima detectavel pela camera frente ao seu proprio ruido eletronico embutido. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O instrumento optoeletronico que coleta a energia radiante infravermelha da superficie de um alvo e produz imagens com tons relacionados a sua distribuicao termica e amplamente chamado de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "termovisor"
+        }
+      ],
+      "explanation": "Termovisores industriais convertem a radiacao capturada de forma remota por lentes e sensores em termogramas altamente visiveis ao operador. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    }
+  ]
+}

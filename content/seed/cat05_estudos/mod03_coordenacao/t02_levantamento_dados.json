@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Coordenação e Seletividade",
+  "moduleSubtitle": "Estudo de coordenação - dados, metodologia, curvas e relatórios",
+  "moduleOrder": 2,
+  "trail": "Levantamento de Dados de Campo",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual documento base representa a topologia e as conexoes do sistema eletrico para iniciar o levantamento de campo do estudo de coordenacao?",
+      "options": [
+        "Cronograma de manutencao de disjuntores.",
+        "Relatorio de inspecao termografica.",
+        "Fatura de energia eletrica mensal.",
+        "Diagrama unifilar atualizado."
+      ],
+      "correctIndex": 3,
+      "explanation": "O diagrama unifilar atualizado e a base topologica indispensavel que reflete todas as interligacoes dos equipamentos para a modelagem no software.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais dados da concessionaria de energia sao fundamentais para modelar o equivalente da fonte supridora nos simuladores de curto-circuito?",
+      "options": [
+        "Potencia de curto-circuito trifasico e monofasico e a relacao X sobre R.",
+        "Consumo medio e demanda contratada em quilowatts.",
+        "Tensao de operacao a vazio e fator de carga anual.",
+        "Fator de potencia e distorcao harmonica total da rede."
+      ],
+      "correctIndex": 0,
+      "explanation": "A modelagem fiel da fonte requer os valores de curto-circuito trifasico e fase-terra com suas respectivas relacoes de reatancia sobre resistencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para modelar corretamente as linhas e cabos no estudo de seletividade quais dados construtivos devem ser levantados em campo?",
+      "options": [
+        "Cor nominal, fabricante do conduite e data de validade.",
+        "Comprimento, bitola, material do condutor e tipo de isolacao.",
+        "Fator de temperatura, altitude e indice de polarizacao.",
+        "Nivel de emissao eletromagnetica e peso por metro."
+      ],
+      "correctIndex": 1,
+      "explanation": "O levantamento de cabos requer parametros construtivos como bitola, comprimento e material para derivar as impedancias de sequencia positiva e zero.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na coleta de dados de transformadores de corrente para protecao quais parametros informados na placa de identificacao sao essenciais?",
+      "options": [
+        "Tensao de isolacao e frequencia de ressonancia.",
+        "Relacao de transformacao e classe de exatidao.",
+        "Fator de potencia e classe de isolamento termico.",
+        "Fator de servico e conjugado de partida."
+      ],
+      "correctIndex": 1,
+      "explanation": "A relacao de transformacao define a leitura primaria e a classe de exatidao assegura a margem de saturacao requerida nas correntes de defeito.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a existencia de incoerencias ou a falta de um diagrama atualizado e revisado em campo provoca diretamente no estudo de coordenacao?",
+      "options": [
+        "Reducao automatica da impedancia de sequencia zero de todos os geradores da planta.",
+        "Aumento imediato do custo da fatura de energia reativa cobrada pela concessionaria.",
+        "Incertezas nos dados que podem resultar em operacoes indevidas ou sobreposicao incorreta de zonas de protecao.",
+        "Aprovacao acelerada e isenta de riscos do relatorio pelos orgaos reguladores governamentais."
+      ],
+      "correctIndex": 2,
+      "explanation": "Levantamentos imprecisos geram modelagens irreais que comprometem a seguranca, a exatidao das curvas temporizadas e a real seletividade.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais caracteristicas operacionais de motores de inducao de grande porte devem ser levantadas em catalogos para a correta coordenacao termica?",
+      "options": [
+        "Fator de potencia a vazio e velocidade sincrona polar.",
+        "Tempo de rotor bloqueado, corrente de partida e curva de aceleracao.",
+        "Resistencia do estator em corrente continua e tensao de passo.",
+        "Eficiencia luminosa e taxa de distorcao harmonica injetada no neutro."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para protecoes de motor e preciso assegurar que o rele permita a partida sem atuar falsamente, exigindo dados de irrupcao e limites termicos de rotor.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante a inspecao de paineis contendo reles de protecao existentes o que deve ser rigorosamente documentado alem do modelo e fabricante?",
+      "options": [
+        "Os ajustes atuais de pickup, curvas de tempo e temporizacoes de todas as funcoes habilitadas.",
+        "Apenas o numero de serie do equipamento eletromecanico e o seu respectivo ano de fabricacao impresso.",
+        "O tipo de tinta utilizada na fixacao do painel frontal e a tensao exata de operacao dos leds indicadores.",
+        "O historico de acionamentos falsos anotado pelo operador de turno no livro de ocorrencias diario."
+      ],
+      "correctIndex": 0,
+      "explanation": "E vital levantar e registrar os taps e multiplicadores de tempo ativos nos reles para aferir graficamente a coordenacao no estado atual da planta.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No levantamento de dados de placa de geradores sincronos para estudos computacionais quais reatancias sao primordiais para o software de simulacao?",
+      "options": [
+        "Reatancias capacitivas de magnetizacao estrita do entreferro rotativo.",
+        "Susceptancia shunt nula e reatancia de dispersao do campo constante do enrolamento amortecedor.",
+        "Impedancia caracteristica de surto e resistencia de aterramento parasita superficial.",
+        "Reatancias subtransitoria, transitoria, sincrona e reatancia de sequencia zero."
+      ],
+      "correctIndex": 3,
+      "explanation": "O modelo da maquina sincrona requer a reatancia subtransitoria para faltas velozes, a transitoria para temporizacoes longas e a homopolar para faltas a terra.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para verificar as correntes passantes e limites de dano termico de um transformador de potencia em planta qual informacao e imprescindivel coletar?",
+      "options": [
+        "A impedancia percentual de curto-circuito, potencia nominal e grupos de ligacao dos enrolamentos.",
+        "O volume absoluto de oleo isolante termico e o tipo estrutural do comutador de operacao manual.",
+        "A corrente de magnetizacao a vazio padrao e as perdas magneticas fixas originadas no nucleo ferroso.",
+        "O indice de polarizacao quimica do papel e as dimensoes externas longitudinais do tanque."
+      ],
+      "correctIndex": 0,
+      "explanation": "A impedancia percentual dita a magnitude da falha na barra secundaria e os grupos de ligacao definem a defasagem vetorial e o fluxo da sequencia zero.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as incertezas encontradas no levantamento de campo de fusiveis antigos sem identificacao clara de classe e amperagem afetam as diretrizes de.",
+      "options": [
+        "Os fusiveis sao sumariamente ignorados no programa considerando-se uma ligacao solida direta para o relatorio.",
+        "Exigem a adocao de curvas padrao muito conservadoras ou a substituicao imediata dos elementos por novos componentes documentados.",
+        "A seletividade e garantida por interpolacao linear simples cruzando eixos com o disjuntor mais proximo da fronteira.",
+        "Requerem o uso mandatorio de reles digitais auxiliares acoplados diretamente ao corpo plastico do fusivel obsoleto operante."
+      ],
+      "correctIndex": 1,
+      "explanation": "Quando dados da curva tempo-corrente de um dispositivo limitador sao desconhecidos assume-se uma margem extretamente conservadora ou a troca do componente para garantir a confiabilidade.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O diagrama unifilar atualizado juntamente com os relatorios de ensaios de rotina dos equipamentos formam a base de dados principal para a modelagem.",
+      "correctAnswer": true,
+      "explanation": "Esses documentos tecnicos trazem as interligacoes de rede e as grandezas fisicas comprovadas dos transformadores, motores e condutores para garantir uma analise fiel.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A relacao de reatancia sobre resistencia informada no ponto de conexao pela concessionaria pode ser deliberadamente ignorada no levantamento pois.",
+      "correctAnswer": false,
+      "explanation": "A relacao X sobre R e basilar e essencial para calcular a constante de tempo do decaimento da corrente continua determinando a assimetria e o pico de interrupcao.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No minucioso levantamento de dados de campo pertinente aos transformadores de potencial (TPs) utilizados na protecao a coleta das classes de.",
+      "correctAnswer": true,
+      "explanation": "Relacoes colhidas incorretamente resultam em tensoes secundarias lidas de forma erronea pelos reles de tensao, corrompendo gravemente a conversao dos ajustes nominais aplicados.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para modelar agregados de cargas motorizadas equivalentes nos barramentos industriais o engenheiro deve coletar apenas o somatorio da potencia.",
+      "correctAnswer": false,
+      "explanation": "A inercia girante dos motores contribui massivamente nos instantes iniciais de curto, exigindo levantamento e modelagem subtransitoria de impedancias mesmo para motores consolidados.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A imprecisao na metrica de levantamento dos comprimentos e bitolas dos cabos de baixa tensao compromete as simulacoes, pois distorce o.",
+      "correctAnswer": true,
+      "explanation": "Especialmente em topologias de baixa tensao, a impedancia dos cabos representa a maior parcela limitadora do laco; omissoes e falhas no seu levantamento distorcem drasticamente as correntes presuntivas.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na inspecao de quadros de media tensao o projetista levanta rigorosamente em campo as relacoes e as classes de exatidao dos transformadores de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "corrente"
+        }
+      ],
+      "explanation": "Os transformadores de corrente (TCs) sao responsaveis por reduzir a forte corrente primaria do defeito a niveis compativeis e estaveis com os terminais de medicao do rele protetor.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O documento diagramatico estrutural revisado e validado na planta que espelha fielmente a montagem de cabeamento e as caracteristicas fisicas ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "as-built"
+        }
+      ],
+      "explanation": "O desenho referenciado como as-built retrata as condicoes veridicas de instalacao consolidada da fabrica, constituindo o respaldo incontestavel para preencher as lacunas praticas do projeto incial conceitual.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A coleta laboriosa em prancheta dos dados graficos de placa das maquinas que balizam as capacidades limites suportaveis ao longo do tempo gera de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "dano"
+        }
+      ],
+      "explanation": "Conhecidas na literatura americana como damage curves, estas informacoes graficas atreladas a levantamentos termicos ditam o limiar maximo admissivel antes do estresse calorico definitivo ou rompimento no equipamento.",
+      "difficulty": "hard"
+    }
+  ]
+}

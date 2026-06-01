@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Como e classificada a relacao de comunicacao tradicional padronizada no DNP3?",
       "options": [
-        "Cliente-Servidor no formato Mestre-Outstation.",
-        "Publish-Subscribe com transmissao Multicast.",
         "Topologia estrita de anel Token Ring.",
+        "Publish-Subscribe com transmissao Multicast.",
+        "Cliente-Servidor no formato Mestre-Outstation.",
         "Comunicacao Peer-to-Peer sem equipamento controlador."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "A operacao basica do DNP3 segue o modelo onde um ou mais Mestre centraliza o controle interagindo com os dispositivos de campo denominados Outstations (Informacao externa).",
       "difficulty": "easy"
     },
@@ -53,10 +53,10 @@
       "options": [
         "Analog Inputs.",
         "Binary Outputs.",
-        "Binary Inputs.",
-        "Counters."
+        "Counters.",
+        "Binary Inputs."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Os estados e alarmes digitais provenientes do campo sao mapeados e organizados como variaveis do tipo Binary Inputs no protocolo (Informacao externa).",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "O que um sistema mestre solicita ao enviar um comando de leitura exclusivo da Classe 0 para uma remota DNP3?",
       "options": [
-        "Apenas eventos criticos com time-stamp.",
         "Os valores estaticos atuais (correntes) de todos os pontos mapeados.",
+        "Apenas eventos criticos com time-stamp.",
         "Falhas estatisticas da camada de rede TCP/IP.",
         "O bloqueio total da operacao remota do equipamento."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A requisicao de Classe 0 tem a funcao de ler os dados estaticos momentaneos dos equipamentos escravos (polling de integridade) (Informacao externa).",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Qual e a utilidade pratica da segmentacao de dados nas Classes 1, 2 e 3 dentro do protocolo DNP3?",
       "options": [
         "Definir a tensao de alimentacao dos reles supervisionados.",
-        "Classificar cabos de rede e velocidades de porta Ethernet.",
         "Organizar e priorizar os eventos com mudancas de estado registrados na remota.",
+        "Classificar cabos de rede e velocidades de porta Ethernet.",
         "Limitar os acessos criptograficos de operadores do SCADA."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "Eventos (dados que sofreram mudanca de estado e precisam ser reportados) sao agrupados nas Classes 1, 2 e 3, garantindo priorizacao de leitura pelo mestre (Informacao externa).",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Qual caracteristica descreve corretamente o modo Unsolicited Responses (Respostas Nao Solicitadas) do DNP3?",
       "options": [
-        "A remota transmite eventos espontaneamente ao mestre ao inves de aguardar o polling.",
-        "O mestre envia controles sequenciais que os reles ignoram em caso de alarme.",
         "A remota envia dados anonimos para broadcasts da rede MAC.",
+        "O mestre envia controles sequenciais que os reles ignoram em caso de alarme.",
+        "A remota transmite eventos espontaneamente ao mestre ao inves de aguardar o polling.",
         "O mestre opera por broadcast UDP sem confirmacao da remota."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "As Respostas Nao Solicitadas permitem que a outstation funcione ativamente, reportando excecoes sem que o mestre as peca explicitamente por interrogacao ciclica (Informacao externa).",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "Qual recurso nativo o DNP3 oferece para a analise precisa da Sequencia de Eventos (SOE), superando protocolos puramente voltados a polling passivo?",
       "options": [
         "Redundancia fisica do cabeamento em anel RSTP embutido na camada de aplicacao.",
-        "Geracao da estampa de tempo (time-stamp) diretamente na origem do evento pela remota.",
+        "Criptografia nativa em curva eliptica nos dados analogicos.",
         "Comandos GOOSE embutidos para transmissao multicast de status digital.",
-        "Criptografia nativa em curva eliptica nos dados analogicos."
+        "Geracao da estampa de tempo (time-stamp) diretamente na origem do evento pela remota."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O DNP3 atribui a estampa de tempo (time-stamp) aos eventos na propria outstation no momento da ocorrencia, fornecendo precisao essencial para a SOE no centro de operacao (Informacao externa).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Embora adote uma arquitetura de 3 camadas (EPA), o DNP3 insere uma subcamada de pseudo-transporte. Qual e a sua funcao principal?",
       "options": [
-        "Substituir roteadores fisicos BGP no nivel corporativo.",
         "Segmentar e remontar mensagens longas da aplicacao para caberem nos quadros restritos do Enlace.",
+        "Substituir roteadores fisicos BGP no nivel corporativo.",
         "Adicionar checksum CRC de 32 bits as variaveis analogicas.",
         "Criar túneis virtuais VPN para seguranca de telemetria remota."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A funcao do pseudo-transporte e dividir mensagens da aplicacao que excedem os limites da camada de enlace em múltiplos fragmentos e remonta-los no destino (Informacao externa).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "Para integracao e evolucao do SPCS descritas nas fontes IEC 61850, protocolos industriais proprietarios e legados como o DNP (DNP3) podem ser.",
       "correctAnswer": true,
       "explanation": "A documentacao aponta esquemas modernos de integracao substituindo padronizacoes unificadas antigas como DNP e MODBUS acoplando-os a nova arquitetura central via Station Gateways.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O DNP3 requer exclusivamente um mecanismo de interrogacao ciclica (polling) operado continuamente pelo Mestre para que falhas ou excecoes nos.",
       "correctAnswer": false,
       "explanation": "O DNP3 fornece capacidade hibrida possuindo suporte a Unsolicited Responses, ou seja, reportes por excecao espontaneos emitidos pelas estacoes remotas ao Mestre (Informacao externa).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Na definicao de objetos de banco de dados do DNP3, informacoes relativas a leituras fisicas de tensao, corrente ou pressao obtidas de sensores da.",
       "correctAnswer": false,
       "explanation": "Grandezas de entrada monitoradas pela remota (leituras de processo) sao identificadas como Analog Inputs. As Analog Outputs sao referencias de setpoint emitidas em sentido reverso pelo controlador (Informacao externa).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A execucao de um Integrity Poll no DNP3 consiste fundamentalmente em o Mestre interrogar os dados estaticos atuais (Class 0) de forma combinada com.",
       "correctAnswer": true,
       "explanation": "A interrogacao de integridade garante a sincronizacao da base de dados do SCADA, pois le os valores correntes da Class 0 e, consequentemente, confirma quaisquer transicoes contidas como eventos de outras classes (Informacao externa).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Nas implementacoes DNP3 sobre redes Ethernet LAN nativas, o quadro de dados descarta por completo os blocos seriais de Enlace (incluindo o checksum.",
       "correctAnswer": false,
       "explanation": "Ao contrario de protocolos com variacoes puramente IP como Modbus TCP, o DNP3 sobre IP encapsula todo o quadro DNP nativo (mantendo a redundancia de sua propria camada de enlace CRC) na area de payload do TCP/UDP (Informacao externa).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "No sistema de polling do DNP3, a leitura da Classe _____ garante que a base de dados do controlador mestre se atualize com os ultimos estados.",
+      "statement": "No sistema de polling do DNP3, a leitura da Classe ____ garante que a base de dados do controlador mestre se atualize com os ultimos estados.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Pela terminologia formal do DNP3, os dispositivos de medicao localizados no campo e sob coordenacao de um master central sao tipicamente chamados _____.",
+      "statement": "Pela terminologia formal do DNP3, os dispositivos de medicao localizados no campo e sob coordenacao de um master central sao tipicamente chamados ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A utilizacao estrategica apenas das camadas Fisica, Enlace e Aplicacao do modelo OSI em arquiteturas eficientes de telecontrole recebe a sigla _____.",
+      "statement": "A utilizacao estrategica apenas das camadas Fisica, Enlace e Aplicacao do modelo OSI em arquiteturas eficientes de telecontrole recebe a sigla ____.",
       "blanks": [
         {
           "index": 0,

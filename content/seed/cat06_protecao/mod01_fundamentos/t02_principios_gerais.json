@@ -39,11 +39,11 @@
       "statement": "Como se define o conceito geral de confiabilidade de um sistema de proteção elétrica?",
       "options": [
         "A capacidade de responder instantaneamente apenas a faltas de alta impedância.",
-        "A probabilidade de um componente, equipamento ou sistema satisfazer a função prevista, sob dadas circunstâncias.",
+        "A garantia de que o relé atua exclusivamente durante sobretensões transitórias.",
         "A velocidade em que um disjuntor interrompe o arco elétrico em uma falta fase-terra.",
-        "A garantia de que o relé atua exclusivamente durante sobretensões transitórias."
+        "A probabilidade de um componente, equipamento ou sistema satisfazer a função prevista, sob dadas circunstâncias."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Confiabilidade é a probabilidade de um componente ou sistema satisfazer a função prevista sob condições e circunstâncias dadas de operação.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "O que se deve garantir na definição das zonas de proteção para evitar 'pontos cegos'?",
       "options": [
-        "Reduzir artificialmente a potência de curto-circuito do sistema.",
-        "Separar geograficamente os esquemas de barramento e transformadores.",
         "Garantir que as zonas de proteção se sobreponham em torno dos disjuntores.",
+        "Separar geograficamente os esquemas de barramento e transformadores.",
+        "Reduzir artificialmente a potência de curto-circuito do sistema.",
         "Eliminar completamente o emprego de releamento auxiliar nas subestações."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Para evitar pontos cegos, as zonas de proteção devem se interpor ou sobrepor, geralmente abrangendo o disjuntor, assegurando que nenhuma porção fique desprotegida.",
       "difficulty": "easy"
     },
@@ -104,11 +104,11 @@
       "statement": "Em que princípio se baseia a seletividade amperimétrica (por correntes)?",
       "options": [
         "Nos níveis de tensão que sobem proporcionalmente conforme o afastamento do ponto de falta.",
-        "No fato de que a corrente de falha medida é menor quanto mais distante a falta estiver da fonte.",
+        "Na exigência de que o tempo de trip seja constante e a tensão do disjuntor diminua a zero.",
         "Na variação de defasagem angular decorrente do efeito capacitivo dos cabos subterrâneos.",
-        "Na exigência de que o tempo de trip seja constante e a tensão do disjuntor diminua a zero."
+        "No fato de que a corrente de falha medida é menor quanto mais distante a falta estiver da fonte."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A seletividade amperimétrica baseia-se no fato de que a magnitude da corrente de curto-circuito decresce à medida que a falta se encontra mais distante da fonte geradora.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Um esquema de proteção unitária (como diferencial) apresenta qual característica de seletividade?",
       "options": [
-        "Exige tempos longos de espera lógica para coordenar equipamentos distantes.",
         "É inerentemente seletiva, isolando a falta instantaneamente por atuar apenas em falhas internas à sua zona.",
+        "Exige tempos longos de espera lógica para coordenar equipamentos distantes.",
         "Opera de forma ideal sem o uso de TCs, contando apenas com relógios de precisão.",
         "Garante atuação exclusiva contra desbalanços térmicos e faltas extintas espontaneamente."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A proteção diferencial (unitária) compara grandezas nas duas pontas do equipamento e atua somente para faltas internas à sua zona, o que a torna inerentemente seletiva sem temporizações intencionais.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "Sensibilidade é a capacidade da proteção em ignorar correntes de baixa intensidade, evitando disparo em qualquer situação para manter máxima continuidade de serviço.",
       "correctAnswer": false,
       "explanation": "Sensibilidade é a capacidade do relé em perceber defeitos sob a condição que produz a menor tendência de operação (menor corrente de curto-circuito), garantindo proteção para desvios mínimos.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Ao usar TCs apenas de um lado do disjuntor para demarcar limites de proteção, cria-se uma 'zona morta' que requer lógicas ou esquemas especiais de proteção.",
       "correctAnswer": true,
       "explanation": "Quando TCs de zonas adjacentes não se interpõem no disjuntor, uma pequena região cega (zona morta) surge entre o TC e o disjuntor, exigindo filosofias especiais de proteção.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A seletividade lógica permite reduzir substancialmente os retardos de trip próximos à fonte através da troca rápida de sinais de espera entre relés adjacentes após reconhecimento de falta.",
       "correctAnswer": true,
       "explanation": "A seletividade lógica resolve o problema dos grandes tempos da cronométrica: o relé a jusante envia sinal de bloqueio ao relé a montante, garantindo disparo rápido do elemento defeituoso.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Um dispositivo de proteção em 'Estado de Falha' se auto-desliga automaticamente da rede e o operador é obrigado a intervir imediatamente.",
       "correctAnswer": false,
       "explanation": "Um equipamento em 'Estado de Falha' muitas vezes permanece na operação (falha oculta) até ser solicitado para atuar e então falhar, ou atuar acidentalmente sem solicitação.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A função 50BF (Falha de Disjuntor) minimiza a importância da proteção de retaguarda remota no que tange às falhas operacionais do disjuntor local, mas não substitui a remota em caso de falha completa do relé primário vizinho.",
       "correctAnswer": true,
       "explanation": "A 50BF cuida do disjuntor que não abriu sob comando, mas se o relé da linha adjacente não enxergar o defeito, a proteção de retaguarda remota ainda é fundamental.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "A capacidade da proteção em distinguir as condições para as quais uma operação imediata é requerida, em oposição àquelas onde se exige retardo, é tecnicamente conhecida como _____.",
+      "statement": "A capacidade da proteção em distinguir as condições para as quais uma operação imediata é requerida, em oposição àquelas onde se exige retardo, é tecnicamente conhecida como ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Na coordenação cronométrica, o tempo de operação ajustado em um relé a montante deve sempre superar o tempo do relé a _____ acrescido do degrau de coordenação (ΔT).",
+      "statement": "Na coordenação cronométrica, o tempo de operação ajustado em um relé a montante deve sempre superar o tempo do relé a ____ acrescido do degrau de coordenação (ΔT).",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A confiabilidade operacional é composta pela dependabilidade e pela propriedade da _____, que assegura que o relé não efetuará desligamentos intempestivos acidentais quando as condições nominais do sistema estiverem sadias.",
+      "statement": "A confiabilidade operacional é composta pela dependabilidade e pela propriedade da ____, que assegura que o relé não efetuará desligamentos intempestivos acidentais quando as condições nominais do sistema estiverem sadias.",
       "blanks": [
         {
           "index": 0,

@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Na aplicacao pratica de redes industriais, qual e o limite de equipamentos e a topologia base recomendada para o protocolo HSR?",
       "options": [
-        "Anel fechado com ate 50 IEDs interligados.",
-        "Estrela simples com infinitos IEDs.",
         "Barramento linear com ate 10 IEDs.",
+        "Estrela simples com infinitos IEDs.",
+        "Anel fechado com ate 50 IEDs interligados.",
         "Malha completa roteada com 5 IEDs."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Conforme detalhado no documento sobre arquiteturas, o HSR e utilizado em topologias de anel suportando de forma ideal ate 50 dispositivos SIPROTEC.",
       "difficulty": "easy"
     },
@@ -26,11 +26,11 @@
       "statement": "Como o protocolo PRP implementa a redundancia fisica na arquitetura de comunicacao do sistema?",
       "options": [
         "Utilizando um anel simples bidirecional gerenciado por Spanning Tree.",
-        "Trafegando dados clonados simultaneamente em duas redes paralelas e independentes.",
+        "Usando unicamente links seriais RS-232 redundantes em cascata.",
         "Desativando portas sobressalentes temporariamente em roteadores L3.",
-        "Usando unicamente links seriais RS-232 redundantes em cascata."
+        "Trafegando dados clonados simultaneamente em duas redes paralelas e independentes."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O Parallel Redundancy Protocol (PRP) transmite simultaneamente a mesma informacao atraves de duas redes totalmente paralelas e separadas (PRP-A e PRP-B).",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Qual equipamento permite integrar IEDs legados ou convencionais que nao possuem suporte nativo a redundancia em redes PRP ou HSR?",
       "options": [
-        "Um firewall corporativo de borda.",
-        "Um Switch nao gerenciavel de camada 2.",
         "Um modulo conversor RedBox.",
+        "Um Switch nao gerenciavel de camada 2.",
+        "Um firewall corporativo de borda.",
         "Um servidor de tempo SNTP."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "O RedBox (Redundancy Manager in a Box) atua como um gerenciador intermediario que acopla equipamentos de porta unica (sem redundancia nativa) as redes redundantes.",
       "difficulty": "easy"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Alem de diretrizes de software geridas via servidores de dominio, qual barreira fisica e documentada como boa pratica defensiva na ciberseguranca.",
       "options": [
-        "A aplicacao e instalacao de dispositivos reais de bloqueio fisico nas portas dos IEDs e switches.",
-        "A remocao por completo das interfaces Ethernet em todos os IEDs locais.",
         "O abandono da topologia estrela em prol de links de fibra dedicados e nao emendados.",
+        "A remocao por completo das interfaces Ethernet em todos os IEDs locais.",
+        "A aplicacao e instalacao de dispositivos reais de bloqueio fisico nas portas dos IEDs e switches.",
         "A substituicao compulsiva de todos os reles digitais por modelos eletromecanicos."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Alem das defesas logicas, dispositivos mecânicos de bloqueio fisico acoplados a IEDs e switches incrementam consistentemente as camadas de seguranca local.",
       "difficulty": "medium"
     },
@@ -105,10 +105,10 @@
       "options": [
         "BatFail",
         "ClkFail",
-        "CybSecEvt",
-        "GoStop"
+        "GoStop",
+        "CybSecEvt"
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Localizado sob o Logical Node LPHD0 da aplicacao, o objeto CybSecEvt e o encarregado nativo de registrar e alarmar eventos ou ataques na ciberseguranca.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "De que maneira praticada no estudo de caso os pacotes GOOSE de uma subestacao puderam quebrar o confinamento logico e vazar de forma indevida pela.",
       "options": [
-        "Desabilitando o relogio GPS da antena mestre.",
         "Pois foram configurados sem VLAN no IED (untagged) e o switch os envelopou com a VLAN nativa de comunicacao MMS permitida.",
+        "Desabilitando o relogio GPS da antena mestre.",
         "Devido ao roteador converter compulsoriamente os MAC Address dos datasets para multicast ARP.",
         "Atraves de uma falha eletrica catastrofica generalizada na CPU do controlador mestre."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Mensagens sem marcacao (untagged) assumem o tag da VLAN nativa da porta (normalmente a do MMS, que tinha livre transito), escapando da regra que bloquearia a VLAN GOOSE exclusiva.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "A tecnologia e o esquema logico base do protocolo HSR proporcionam conectar e integrar nativamente ate 50 equipamentos compativeis operando.",
       "correctAnswer": true,
       "explanation": "A documentacao expoe que modulos ou redes HSR asseguram a reconfiguracao transparente abrangendo topologias que operam ate 50 IEDs conectados em anel.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O uso de modulos RedBox restringe-se integralmente a projetos baseados no protocolo PRP, sendo sua aplicacao impossivel de ocorrer em malhas HSR.",
       "correctAnswer": false,
       "explanation": "O RedBox atua como proxy universal da redundancia e pode ser empregado confiavelmente tanto em barramentos baseados no padrao PRP quanto em aneis HSR.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A politica de seguranca aplicada a servidores corporativos deve administrar requisitos de rede OT, regulamentando tanto parametros de senhas.",
       "correctAnswer": true,
       "explanation": "A protecao centralizada deve consolidar as restricoes por meio de gerenciamento de senhas fortes, rodizio de validade e desativacao de features marginais a exemplo das interfaces USB.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O mecanismo de redundancia calcado no Spanning Tree Protocol (STP) opera sob as limitacoes de camada 3 IP roteado e entrega recomposicao invisivel.",
       "correctAnswer": false,
       "explanation": "O STP atua unicamente na camada 2 (Enlace) para prevenir loops em aneis e, notavelmente, sofre de atraso consideravel de recomposicao ao inves da recuperacao instantanea invisivel requerida.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A configuracao falha que deixa os pacotes GOOSE nativamente sem tag de VLAN (untagged) em suas propriedades internas acarreta um severo risco de.",
       "correctAnswer": true,
       "explanation": "Sem a insercao formal da tag VLAN no frame GOOSE, os switches incorporam aos pacotes a VLAN nativa indiscriminada (ex: VLAN 100), o que burla sumariamente as regras filtradas exclusivas para segurar o confinamento local (ex: VLAN 101).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "As estrategias de redundancia ativas que se apoderam de duas redes LAN totalmente destituidas de interconexoes e enviam trafegos duplicados sao _____.",
+      "statement": "As estrategias de redundancia ativas que se apoderam de duas redes LAN totalmente destituidas de interconexoes e enviam trafegos duplicados sao ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Dentro da estrutura digital normatizada a auditoria defensiva em relacao a ataques computacionais e intrusoes e atestada no equipamento por meio de _____.",
+      "statement": "Dentro da estrutura digital normatizada a auditoria defensiva em relacao a ataques computacionais e intrusoes e atestada no equipamento por meio de ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para impossibilitar desastres operacionais derivados do conflito e repeticao logica do MAC Address das publicacoes originarias de subestacoes _____.",
+      "statement": "Para impossibilitar desastres operacionais derivados do conflito e repeticao logica do MAC Address das publicacoes originarias de subestacoes ____.",
       "blanks": [
         {
           "index": 0,

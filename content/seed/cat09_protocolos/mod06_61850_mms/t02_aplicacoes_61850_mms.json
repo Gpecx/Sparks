@@ -13,11 +13,11 @@
       "statement": "Na arquitetura da IEC 61850, qual e a finalidade principal da comunicacao MMS estabelecida no barramento de estacao?",
       "options": [
         "Trocar dados criticos entre reles em 3 milissegundos.",
-        "Permitir a comunicacao cliente-servidor para operacao entre o IED e a estacao de supervisao.",
         "Sincronizar os relogios da rede LAN com precisao de microssegundos.",
+        "Permitir a comunicacao cliente-servidor para operacao entre o IED e a estacao de supervisao.",
         "Substituir cabos analogicos de corrente no barramento de processo."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A comunicacao MMS opera no modelo cliente-servidor para funcoes nao criticas, como o envio de relatorios de status e telemedidas para a IHM/SCADA.",
       "difficulty": "easy"
     },
@@ -26,11 +26,11 @@
       "statement": "O que caracteriza a substituicao da automacao convencional pela norma IEC 61850 nas subestacoes modernas?",
       "options": [
         "O uso de varios CLPs dedicados para concentrar todos os sinais fisicos de campo.",
-        "A integracao simultanea de funcoes de protecao, controle e medicao em um unico IED.",
+        "O isolamento total entre as redes IP corporativas e o sistema de controle.",
         "A utilizacao exclusiva de meios seriais RS-485 em vez de cabos de cobre.",
-        "O isolamento total entre as redes IP corporativas e o sistema de controle."
+        "A integracao simultanea de funcoes de protecao, controle e medicao em um unico IED."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Na automacao moderna com IEC 61850, o IED assume controle, medicao, protecao e comunicacao, dispensando os antigos CLPs centralizadores da fiacao.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Em uma aplicacao de controle modelada na IEC 61850, qual Logical Node representa o disjuntor fisico da instalacao?",
       "options": [
-        "PTOC",
-        "MMXU",
         "XCBR",
+        "MMXU",
+        "PTOC",
         "TVTR"
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "O Logical Node XCBR modela os dados referentes a atuacao e posicionamento do disjuntor de circuito (Circuit Breaker).",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Para enviar eventos e status espontaneamente ao SCADA via MMS sem causar avalanche na rede, a norma IEC 61850 utiliza quais elementos associados?",
       "options": [
-        "Report Control Blocks controlando os agrupamentos chamados Data Sets.",
         "Logical Devices emitindo pacotes broadcast de Virtual LANs.",
+        "Report Control Blocks controlando os agrupamentos chamados Data Sets.",
         "Multicasts GOOSE baseados estritamente nos MAC Addresses.",
         "Conversores de hardware injetando Sampled Values na IHM."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "O envio espontaneo de variaveis e otimizado agrupando dados em Data Sets, cujo disparo e gerido pelos parametros do Report Control Block.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "Na definicao de relatorios, qual a funcionalidade que difere o Buffered Report (BRCB) do Unbuffered Report (URCB)?",
       "options": [
         "O BRCB envia via GOOSE e o URCB via pacotes MMS.",
-        "O BRCB armazena os eventos temporariamente para retransmissao caso a conexao MMS seja perdida.",
         "O URCB opera restrito apenas ao barramento de processo das subestacoes.",
+        "O BRCB armazena os eventos temporariamente para retransmissao caso a conexao MMS seja perdida.",
         "O BRCB descarta qualquer evento ocorrido fora do ciclo fixo de polling."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O Buffered Report Control Block evita perda de dados guardando eventos ocorridos durante interrupcoes de conexao com o cliente SCADA.",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "No modelo de controle chamado Select before Operate (SBO), qual fluxo e exigido do cliente MMS?",
       "options": [
         "O comando e enviado e executado no mesmo instante pela remota local.",
-        "O cliente SCADA reserva e valida o equipamento no IED antes de despachar a ordem de manobra.",
+        "O IED efetua a operacao fisicamente e depois reporta o log ao gateway.",
         "O servidor rejeita a operacao MMS caso nao seja interceptada por mensagem GOOSE.",
-        "O IED efetua a operacao fisicamente e depois reporta o log ao gateway."
+        "O cliente SCADA reserva e valida o equipamento no IED antes de despachar a ordem de manobra."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A sequencia SBO exige o passo de selecao e bloqueio do ponto (Selected) precedendo a confirmacao do comando de operacao final (Operate).",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Qual opcao de disparo (Trigger Option) configurada em um Report notificara o SCADA caso a validade de uma medicao fique comprometida?",
       "options": [
-        "data-change (dchg)",
+        "quality-change (qchg)",
         "data-update (dupd)",
         "general-interrogation (GI)",
-        "quality-change (qchg)"
+        "data-change (dchg)"
       ],
-      "correctIndex": 3,
+      "correctIndex": 0,
       "explanation": "O parametro qchg ativa a emissao de um relatorio quando a qualidade (Quality) do atributo sofre alteracao, como passar de good para invalid.",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "O que ocorre quando o sistema SCADA submete um comando de General Interrogation (GI) ao Report Control Block do IED?",
       "options": [
-        "O IED remete os valores atuais estacionarios de todos os membros indexados no Data Set correspondente.",
         "O IED deleta integralmente seu buffer interno de falhas e eventos do relé.",
+        "O IED remete os valores atuais estacionarios de todos os membros indexados no Data Set correspondente.",
         "O IED invoca imediatamente a rotina de abertura do disjuntor principal da planta.",
         "O IED muda a chave virtual do modo remoto MMS para modo exclusivo de GOOSE."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "A Interrogacao Geral requisita a varredura absoluta dos dados correntes associados ao Data Set para sincronizar a base do SCADA.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Como o protocolo MMS de comunicacao cliente-servidor interage estruturalmente com as redes fisicas das subestacoes?",
       "options": [
-        "Mapeia os dados abstraidos operando sobre a pilha completa de 7 camadas ISO-OSI e protocolos TCP-IP.",
-        "Trabalha em modelo ping-pong usando nativamente apenas enderecos MAC da camada 2.",
         "Ignora roteadores IP por limitar sua infraestrutura apenas a enlaces seriais Token Ring.",
+        "Trabalha em modelo ping-pong usando nativamente apenas enderecos MAC da camada 2.",
+        "Mapeia os dados abstraidos operando sobre a pilha completa de 7 camadas ISO-OSI e protocolos TCP-IP.",
         "Exige tunelamento MMS com modulos criptograficos baseados somente em chaves WEP."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Diferente dos sinais GOOSE que dispensam camadas superiores, o MMS emprega todas as 7 camadas ISO-OSI suportadas no TCP-IP.",
       "difficulty": "medium"
     },
@@ -131,10 +131,10 @@
       "options": [
         "sboClass",
         "stSeld",
-        "ctlModel",
-        "ctlNum"
+        "ctlNum",
+        "ctlModel"
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "O atributo ctlModel define a seguranca do ponto determinando modelos como direct-with-normal-security ou sbo-with-enhanced-security.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Segundo a norma IEC 61850, o conceito de livre alocacao autoriza que um unico IED hospede de forma conjunta os Logical Nodes de protecao, medicao e.",
       "correctAnswer": true,
       "explanation": "O agrupamento em Logical Devices possibilita construir aplicacoes distribuidas ou centralizadas mesclando num equipamento funcoes do tipo PTOC, MMXU e CSWI.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Na aplicacao de Buffered Reports MMS, o atributo EntryID preenchido pelo cliente notifica ao IED o ponteiro exato do ultimo evento recebido.",
       "correctAnswer": true,
       "explanation": "Ao informar o EntryID da ultima ocorrencia consumida, o SCADA aciona o Buffered Report Control Block para despachar apenas os logs represados a partir daquele marcador.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Os Data Sets dinamicos do subtipo nao persistente criados pelo gateway permanecem fixos no IED mesmo apos a queda de todas as associacoes de sessao.",
       "correctAnswer": false,
       "explanation": "Um Dataset do tipo nao persistente criado via servicos on-line do cliente MMS e compulsoriamente apagado caso a associacao logica do cliente e servidor acabe (TPAA goes down).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O servico padrao de Log na IEC 61850 atua armazenando os eventos disparados diretamente no armazenamento interno do relé com ajuda de Log Control.",
       "correctAnswer": true,
       "explanation": "Analogamente aos reports orientados a rede, os Logs usam Control Blocks para salvar e rotular eventos na memoria do IED para servicos e avaliacoes off-line posteriores.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Configurar o gatilho data-update (dupd) de um relatorio indica que a mensagem so deve ser publicada para o SCADA quando o valor numerico lido da.",
       "correctAnswer": false,
       "explanation": "O gatilho data-update forca a criacao de um relatorio sempre que a rotina atualiza o timestamp ou o valor do atributo, ate mesmo nos casos em que a informacao numerica nao mudou fisicamente. Mudanca de banda morta e data-change (dchg).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "No serviço de Reporting da IEC 61850, o conjunto de dados monitorados e enviados em um relatório é definido por um _____.",
+      "statement": "No serviço de Reporting da IEC 61850, o conjunto de dados monitorados e enviados em um relatório é definido por um ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Durante o controle de manobra, o operador remoto envia comandos que sao recebidos logicamente e gerenciados pelas funcoes de controle do vao.",
+      "statement": "No bloco de relatorio bufferizado (BRCB) do IEC 61850, o parametro que define o tempo de integracao dos eventos antes da transmissao ao cliente e o Buf____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A execucao de um comando simples imediato configurado sem retencao de seguranca avancada e nomeado tecnicamente pela propriedade de ctlModel como _____.",
+      "statement": "A execucao de um comando simples imediato configurado sem retencao de seguranca avancada e nomeado tecnicamente pela propriedade de ctlModel como ____.",
       "blanks": [
         {
           "index": 0,

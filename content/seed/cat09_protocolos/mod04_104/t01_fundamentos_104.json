@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Qual o principal objetivo do protocolo IEC 60870-5-104 em relacao a norma original IEC 101?",
       "options": [
-        "Adaptar o protocolo IEC 101 para acesso a redes TCP/IP.",
+        "Criar um padrao exclusivo para protecao de reles.",
         "Substituir totalmente a camada de aplicacao do 101.",
         "Limitar a transmissao a meios seriais assincronos.",
-        "Criar um padrao exclusivo para protecao de reles."
+        "Adaptar o protocolo IEC 101 para acesso a redes TCP/IP."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "O IEC 104 adapta o transporte, rede e link do IEC 101 para operar sobre redes baseadas em TCP/IP.",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Como a camada de aplicacao se comporta na migracao do IEC 101 para o IEC 104?",
       "options": [
-        "E totalmente reescrita para o formato XML.",
         "Permanece a mesma, utilizando os mesmos tipos de dados ASDU.",
+        "E totalmente reescrita para o formato XML.",
         "E encapsulada dentro de mensagens GOOSE.",
         "E descartada em favor do protocolo proprietario MMS."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A camada de aplicacao do IEC 104 e identica a do IEC 101, reusando as mesmas ASDUs de dados.",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "Na estrutura basica do quadro IEC 104, qual o significado tecnico da sigla APCI?",
       "options": [
         "Application Process Control Internet.",
-        "Asynchronous Protocol Control Interface.",
+        "Application Control Information.",
         "Application Protocol Communication Identifier.",
-        "Application Control Information."
+        "Asynchronous Protocol Control Interface."
       ],
-      "correctIndex": 3,
+      "correctIndex": 1,
       "explanation": "APCI significa Application Control Information e representa o cabecalho de controle da mensagem.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Qual e o valor obrigatorio do byte de inicio (Start byte) transmitido no cabecalho APCI do IEC 104?",
       "options": [
-        "68H",
-        "10H",
         "55H",
+        "10H",
+        "68H",
         "FFH"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O formato padrao estipula que o primeiro byte da APCI sera sempre o valor hexadecimal 68H.",
       "difficulty": "easy"
     },
@@ -66,10 +66,10 @@
       "options": [
         "TCP Payload",
         "Control Field",
-        "ASDU",
-        "APDU"
+        "APDU",
+        "ASDU"
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "A ASDU (Application Service Data Unit) carrega os dados de processo e controle da aplicacao.",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Segundo o cabecalho de controle da APCI, qual e o tamanho util maximo permitido para a informacao transportada?",
       "options": [
-        "64 bytes.",
-        "128 bytes.",
         "253 bytes.",
+        "128 bytes.",
+        "64 bytes.",
         "1500 bytes."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "O segundo byte da APCI define o tamanho util da mensagem, que pode ser no maximo 253 bytes.",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "No contexto das Mensagens U (Enlace) do IEC 104, para que serve a requisicao TESTFR?",
       "options": [
         "Testar a precisao do conversor analogico do TC.",
-        "Verificar a disponibilidade das estacoes remotas na rede.",
+        "Forcar o reinicio a frio do equipamento remoto.",
         "Validar a soma de verificacao CRC do pacote Ethernet.",
-        "Forcar o reinicio a frio do equipamento remoto."
+        "Verificar a disponibilidade das estacoes remotas na rede."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O comando TESTFR (Test Frame) atua no enlace para checar se a contraparte ainda esta disponivel e respondendo na rede TCP/IP.",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Como a estacao controlada responde a um pedido de ativacao do tipo STARTDT enviado pelo mestre?",
       "options": [
-        "Respondendo com uma mensagem I contendo toda a base de dados.",
-        "Fechando a porta TCP para reiniciar a varredura.",
         "Retornando um quadro U do tipo STARTDT CON (Confirmacao).",
+        "Fechando a porta TCP para reiniciar a varredura.",
+        "Respondendo com uma mensagem I contendo toda a base de dados.",
         "Emitindo um comando S com os contadores zerados."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Para iniciar a transferencia, o mestre envia STARTDT ACT e a remota deve devolver STARTDT CON confirmando a operacao de enlace.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "O protocolo IEC 60870-5-104 foi concebido como uma extensao direta do IEC 101 para habilitar a transmissao em redes Ethernet TCP/IP.",
       "correctAnswer": true,
       "explanation": "O IEC 104 altera as camadas inferiores do IEC 101 justamente para aproveitar a infraestrutura de redes locais em TCP/IP.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "As mensagens do tipo U (Enlace) carregam rotineiramente no seu interior os objetos de dados da aplicacao (ASDU) para atualizar as medicoes de energia.",
       "correctAnswer": false,
       "explanation": "As Mensagens U possuem apenas a APCI e gerenciam o enlace (start, stop, test), nao carregando as ASDUs de dados do processo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A migracao de um sistema SCADA de IEC 101 para IEC 104 exige a programacao de novos tipos de dados, pois as ASDUs sofrem total alteracao no formato.",
       "correctAnswer": false,
       "explanation": "A camada de aplicacao do IEC 104 e a mesma do 101, o que significa que as estruturas de ASDUs sao completamente reaproveitadas.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A APDU (Application Data Unit) e definida como a mensagem completa transportada pela pilha TCP, compreendendo as areas de controle (APCI) e dados.",
       "correctAnswer": true,
       "explanation": "No formato da norma, a APDU engloba a mensagem inteira e e dividida nos blocos funcionais APCI e ASDU.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Durante o controle de fluxo, quando a estacao mestre envia uma Mensagem S de quitacao, ela deve incluir a quantidade de mensagens que transmitiu no.",
       "correctAnswer": false,
       "explanation": "A Mensagem S (Supervisory) contem apenas o contador NR informando qual a proxima mensagem que espera receber, nao possuindo o campo NS.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Na formatacao da APCI do protocolo IEC 104, o byte inicial responsavel por indicar o start da trama recebe sempre o valor hexadecimal _____.",
+      "statement": "Na formatacao da APCI do protocolo IEC 104, o byte inicial responsavel por indicar o start da trama recebe sempre o valor hexadecimal ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O cabecalho obrigatorio inserido no inicio da mensagem TCP do IEC 104, responsavel por comandar o fluxo de pacotes e o enlace, atende pela sigla _____.",
+      "statement": "O cabecalho obrigatorio inserido no inicio da mensagem TCP do IEC 104, responsavel por comandar o fluxo de pacotes e o enlace, atende pela sigla ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para que o fluxo de dados seja autorizado, a estacao controladora precisa enviar um quadro U com o pedido de ativacao conhecido especificamente _____.",
+      "statement": "Para que o fluxo de dados seja autorizado, a estacao controladora precisa enviar um quadro U com o pedido de ativacao conhecido especificamente ____.",
       "blanks": [
         {
           "index": 0,

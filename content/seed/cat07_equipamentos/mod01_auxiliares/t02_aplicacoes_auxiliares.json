@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Por que o comando de disjuntores utiliza corrente continua e nao a corrente alternada da propria subestacao?",
       "options": [
-        "Porque a tensao CA cai durante curtos-circuitos, inviabilizando o disparo.",
-        "Porque os disjuntores modernos nao operam com tensoes alternadas.",
         "Para evitar a saturacao magnetica dos transformadores de corrente.",
+        "Porque os disjuntores modernos nao operam com tensoes alternadas.",
+        "Porque a tensao CA cai durante curtos-circuitos, inviabilizando o disparo.",
         "Para anular as componentes harmonicas de sequencia zero."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Em falhas, a tensao CA cai severamente, impossibilitando o comando, exigindo alimentacao DC. (Fonte: ed53).",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "Quais sao os dois principais tipos de baterias utilizados em subestacoes?",
       "options": [
         "Litio-ion e Prata-zinco.",
-        "Chumbo-acido e Alcalinas de niquel-cadmio.",
+        "Sodio-enxofre e Alcalinas puras.",
         "Zinco-carbono e Niquel-metal.",
-        "Sodio-enxofre e Alcalinas puras."
+        "Chumbo-acido e Alcalinas de niquel-cadmio."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Os principais tipos de baterias utilizados atualmente sao chumbo-acido e alcalinas. (Fonte: ed53).",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Qual equipamento carrega e mantem a tensao do banco de baterias em condicoes normais?",
       "options": [
-        "Inversor de frequencia isolado.",
         "Retificador ou carregador de baterias.",
+        "Inversor de frequencia isolado.",
         "Compensador sincrono rotativo.",
         "Transformador de potencial indutivo."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O modulo retificador (carregador) e projetado para carregar e manter a bateria do banco. (Fonte: ed53).",
       "difficulty": "easy"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Em condicao de falha na alimentacao auxiliar CC (DC fail), como atua a logica de uma seccionadora no IED?",
       "options": [
-        "Emite alarme e memoriza o ultimo estado valido do equipamento.",
+        "Comanda o trip do disjuntor principal da barra.",
         "Abre a chave de forma autonoma pelas molas.",
         "Bloqueia permanentemente toda a subestacao.",
-        "Comanda o trip do disjuntor principal da barra."
+        "Emite alarme e memoriza o ultimo estado valido do equipamento."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Para seguranca, na falta de tensao auxiliar a ultima posicao valida e memorizada e um alarme e gerado. (Fonte: Virtus_ProtBarras).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "No dimensionamento, qual o impacto de adotar um numero de elementos que exceda a tensao maxima na carga?",
       "options": [
-        "Aumenta a autonomia em 50 por cento automaticamente.",
         "Impoe solucoes onerosas como Unidades de Diodos de Queda (UDQ).",
+        "Aumenta a autonomia em 50 por cento automaticamente.",
         "Permite usar conversores sem ponte retificadora.",
         "Melhora o tempo de resposta do disjuntor."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Ultrapassar a tensao maxima do sistema exige solucoes menos confiaveis e mais caras como UDQs. (Fonte: ed53).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "O comando de trip dos disjuntores emprega corrente continua para nao depender da tensao alternada durante as faltas.",
       "correctAnswer": true,
       "explanation": "A energia CC fornecida pelas baterias assegura a operacao mesmo com colapso na tensao CA. (Fonte: Apostila Protecao).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O nobreak AC e composto exclusivamente por um retificador e um banco de baterias, operando sem inversores.",
       "correctAnswer": false,
       "explanation": "O nobreak AC difere do carregador CC justamente por conter um inversor que converte a energia da bateria para CA. (Fonte: ed53).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "As baterias alcalinas possuem tempos nominais de descarga padronizados unicamente para 10 horas.",
       "correctAnswer": false,
       "explanation": "Diferente das chumbo-acidas (10h), as alcalinas podem apresentar faixas de 3, 5 ou 10 horas. (Fonte: ed53).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Os reles de protecao digitais extraem a tensao de operacao direto dos TCs, dispensando o uso de baterias auxiliares externas.",
       "correctAnswer": false,
       "explanation": "Todo rele digital depende criticamente da alimentacao auxiliar continua das baterias para manter seu processamento. (Fonte: Apostila Protecao).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Ao dimensionar a bateria, usar um numero de elementos calculado pela menor tensao final melhora o aproveitamento e reduz custos.",
       "correctAnswer": true,
       "explanation": "Focar na tensao minima reduz a capacidade total exigida e extrai melhor rendimento, gerando economia. (Fonte: ed53).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O intervalo onde a bateria mantem a tensao minima necessaria as cargas apos a queda do retificador e chamado de _____.",
+      "statement": "O intervalo onde a bateria mantem a tensao minima necessaria as cargas apos a queda do retificador e chamado de ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Baterias chumbo-acido nao seladas exigem a instalacao de um sistema de _____ nas salas devido a perigosa emanacao de gas hidrogenio.",
+      "statement": "Baterias chumbo-acido nao seladas exigem a instalacao de um sistema de ____ nas salas devido a perigosa emanacao de gas hidrogenio.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A confiabilidade do nobreak CA e inferior a de um carregador CC direto devido a probabilidade de falha associada ao seu _____.",
+      "statement": "A confiabilidade do nobreak CA e inferior a de um carregador CC direto devido a probabilidade de falha associada ao seu ____.",
       "blanks": [
         {
           "index": 0,

@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Qual e a principal aplicacao da norma IEC 60870-5-101 descrita nos documentos?",
       "options": [
-        "Padroes basicos originais para as tarefas de telecontrole.",
+        "Controle de processos via fibra optica.",
         "Padroes exclusivos para envio de fasores.",
         "Roteamento dinamico de redes LAN.",
-        "Controle de processos via fibra optica."
+        "Padroes basicos originais para as tarefas de telecontrole."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "A norma IEC 60870-5-101 estabelece os padroes basicos originais focados estritamente em tarefas de telecontrole.",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Na arquitetura de automacao de subestacoes, onde os protocolos IEC 60870-5-101 ou 104 costumam atuar?",
       "options": [
-        "No barramento de processo de altissima velocidade.",
         "Na comunicacao entre IEDs e o Station Gateway para ligacao com o SCADA.",
+        "No barramento de processo de altissima velocidade.",
         "Apenas no envio de mensagens multicast GOOSE.",
         "Na geracao de estampas de tempo fisicas para reles de protecao."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Nas arquiteturas, o IEC 60870-5-101/4 atua interligando os Station Gateways as funcoes centrais SCADA.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "O que a norma IEC 60870-5 define em relacao ao seu perfil de comunicacao?",
       "options": [
-        "O envio de mensagens basicas de telecontrole entre dois sistemas.",
         "A transmissao exclusiva de video da subestacao.",
+        "O envio de mensagens basicas de telecontrole entre dois sistemas.",
         "A substituicao funcional completa dos reles de protecao.",
         "A interligacao por barramento optico dedicado."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "Ela fornece um perfil de comunicacao padronizado para o envio de mensagens basicas de telecontrole entre dois sistemas.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Segundo as fontes, como o protocolo IEC 60870-5-104 convive e se relaciona com o IEC 60870-5-101?",
       "options": [
-        "O 104 e uma extensao do 101 com alteracoes para permitir acesso a rede TCP/IP.",
-        "O 104 descarta e substitui toda a camada de aplicacao do 101.",
         "Nao existe coexistencia tecnica entre os protocolos.",
+        "O 104 descarta e substitui toda a camada de aplicacao do 101.",
+        "O 104 e uma extensao do 101 com alteracoes para permitir acesso a rede TCP/IP.",
         "O 101 encapsula pacotes IP dentro de canais seriais do 104."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O protocolo 104 e uma extensao do 101 que altera as camadas de transporte para se adequar nativamente ao TCP/IP.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "No contexto da norma IEC 60870-5, o que significa a sigla APCI que compoe as mensagens de telecontrole?",
       "options": [
         "Application Protocol Control Interface.",
-        "Application Control Information.",
+        "Application Process Communication Internet.",
         "Asynchronous Process Control Identifier.",
-        "Application Process Communication Internet."
+        "Application Control Information."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "APCI (Application Control Information) e a mensagem de controle contida no inicio do quadro de transmissao.",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Qual e a finalidade da Causa de Transmissao que possui valor 20H (14H hexadecimal) na aplicacao do protocolo?",
       "options": [
-        "Apagar o log de eventos do equipamento remoto instantaneamente.",
         "Indicar que a transmissao e uma resposta de integridade (Interrogacao Geral).",
+        "Apagar o log de eventos do equipamento remoto instantaneamente.",
         "Configurar a camada fisica do link serial.",
         "Iniciar o envio de mensagens multicast na subestacao."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O codigo 14H (20 decimal) no campo Cause of Transmission identifica que os dados enviados sao uma resposta de integridade.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Em um sistema de telecontrole, como os estados operacionais criticos (ex: nao atualizado, invalido) de um ponto sao transmitidos?",
       "options": [
-        "Por bits localizados nos qualificadores anexados apos o IOA.",
+        "Pelo preenchimento do campo CAA com valor nulo.",
         "Pelo envio de um pacote APCI especifico de falha.",
         "Apenas interrompendo a comunicacao geral.",
-        "Pelo preenchimento do campo CAA com valor nulo."
+        "Por bits localizados nos qualificadores anexados apos o IOA."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Logo apos o endereco do ponto (IOA), encontram-se seus qualificadores contendo flags como NT, IV, SB e BL.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "O protocolo IEC 60870-5-104 opera utilizando exatamente a mesma camada de aplicacao (ASDU) que fundamenta as redes seriais do IEC 60870-5-101.",
       "correctAnswer": true,
       "explanation": "A camada de aplicacao do IEC 104 e identica a do IEC 101, garantindo interoperabilidade dos dados uteis mesmo mudando as camadas inferiores para IP.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No telecontrole de subestacoes, as mensagens transmitidas via IEC 60870-5-101 mapeiam os pontos monitorados unicamente atraves do campo conhecido.",
       "correctAnswer": true,
       "explanation": "O campo IOA (Information Object Address) carrega o endereco especifico do ponto que esta sendo transmitido pela ASDU.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Quando o sistema SCADA emite telecomandos pelo IEC 101, o primeiro byte obrigatorio que compoe a mensagem APCI sofre alteracao para o valor 80H.",
       "correctAnswer": false,
       "explanation": "As regras de formatacao indicam que o primeiro byte da APCI da mensagem de controle e sempre mantido em 68H.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O protocolo IEC 101 anexa qualificadores as variaveis transmitidas que permitem ao operador reconhecer rapidamente se um dado esta bloqueado (BL).",
       "correctAnswer": true,
       "explanation": "Os qualificadores sao enviados apos o endereco do objeto e informam diretamente a qualidade da medida captada em campo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A causa de transmissao (COT) codificada com o valor hexadecimal 14H e empregada para indicar ao centro de operacao que o dado e proveniente de.",
       "correctAnswer": false,
       "explanation": "O valor 14H corresponde ao decimal 20, sendo designado exclusivamente como resposta de integridade (interrogacao geral) e nao para transmissao espontanea.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A norma define que as regras aplicaveis a transmissao de dados entre as subestacoes e o centro de operacao proveem mensagens basicas de _____.",
+      "statement": "A norma define que as regras aplicaveis a transmissao de dados entre as subestacoes e o centro de operacao proveem mensagens basicas de ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para reportar telessinalizacoes operacionais contendo estampa de tempo (Single-point with date time), o Type Identification (TI) configurado deve _____.",
+      "statement": "Para reportar telessinalizacoes operacionais contendo estampa de tempo (Single-point with date time), o Type Identification (TI) configurado deve ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para certificar a origem dos dados na arquitetura mestre-escravo, a ASDU incorpora um campo padronizado de identificacao da remota transmissora _____.",
+      "statement": "Para certificar a origem dos dados na arquitetura mestre-escravo, a ASDU incorpora um campo padronizado de identificacao da remota transmissora ____.",
       "blanks": [
         {
           "index": 0,

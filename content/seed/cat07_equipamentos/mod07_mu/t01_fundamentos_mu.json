@@ -13,11 +13,11 @@
       "statement": "Onde ocorre a troca de dados instantanea de amostras de TC e TP na arquitetura IEC 61850?",
       "options": [
         "No barramento de estacao corporativo.",
-        "No barramento de processo inferior.",
         "Em conexoes seriais RS-232 isoladas.",
+        "No barramento de processo inferior.",
         "No gateway mestre de telecontrole."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A troca instantanea de dados de TC e TP no formato de amostras ocorre entre o nivel de processo e o nivel de bay usando o barramento de processo.",
       "difficulty": "easy"
     },
@@ -27,10 +27,10 @@
       "options": [
         "Servidores dedicados de banco de dados.",
         "Estacoes de trabalho remotas da operacao.",
-        "Sensores e interfaces de E/S remotas inteligentes.",
-        "Gateways industriais de comunicacao DNP3."
+        "Gateways industriais de comunicacao DNP3.",
+        "Sensores e interfaces de E/S remotas inteligentes."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Os dispositivos situados no nivel do processo geralmente sao as interfaces de entradas e saidas remotas, sensores e atuadores inteligentes ligados ao patio.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Como a norma IEC 61850 define tecnicamente o servico de transmissao de dados analogicos digitalizados?",
       "options": [
-        "MMS direcionado a relatorios bufferizados.",
         "SMV ou SV para amostragem de medicao.",
+        "MMS direcionado a relatorios bufferizados.",
         "SNTP para gerenciamento de hora na rede.",
         "GOOSE para mensagens binarias horizontais."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Para o barramento de processo, a norma define o servico SMV ou Sampled Measurement Values focado na troca de informacoes analogicas digitalizadas de tempo critico.",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Qual a precisao de sincronismo exigida para a correta comparacao de ondas e fasores das amostras de SV?",
       "options": [
         "Precisao estipulada em 1 segundo.",
-        "Precisao na faixa de 1 milissegundo.",
         "Precisao critica de cerca de 1 microssegundo.",
+        "Precisao na faixa de 1 milissegundo.",
         "Precisao aproximada de 1 minuto."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "O sincronismo de tempo para amostragem e extremamente critico e estipulado em cerca de 1 microssegundo para permitir calculos exatos de fasores.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "Qual e uma vantagem pratica da aplicacao de medicao via barramento de processo frente as ligacoes convencionais?",
       "options": [
         "A eliminacao normativa da necessidade de utilizar TCs na planta.",
-        "A reducao consideravel do numero de cabos eletricos sujeitos a falhas mecanicas.",
         "A elevacao da tensao de alimentacao dos reles diretos para 480V CA.",
+        "A reducao consideravel do numero de cabos eletricos sujeitos a falhas mecanicas.",
         "A conversao instantanea de todo protocolo legado em sinais de radio AM."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A adocao da rede digital garante um numero muito menor de conexoes eletricas de cobre com o patio, diminuindo falhas e simplificando consideravelmente os projetos.",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Como os fluxos de Sampled Values sao normalmente distribuidos para uso multiplo na rede da subestacao?",
       "options": [
         "Por meio de interrogacao ciclica do SCADA.",
-        "Via trafego de modelo Multicast para as estacoes interessadas.",
+        "Por relatorios confirmados e armazenados em buffer interno.",
         "Apenas via conexoes TCP exclusivas baseadas em sessao IP.",
-        "Por relatorios confirmados e armazenados em buffer interno."
+        "Via trafego de modelo Multicast para as estacoes interessadas."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Os Sampled Values aproveitam a caracteristica da transmissao Multicast para despachar os dados na rede a todas as estacoes de protecao que requerem os sinais.",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Em uma arquitetura de barramento de processo unificado (Alternativa 3 do padrao), qual e o principal impacto de rede esperado?",
       "options": [
-        "Diminui drasticamente a utilizacao dos switches.",
         "Exige uma taxa de dados imensa no barramento eliminando o uso de roteadores paralelos.",
+        "Diminui drasticamente a utilizacao dos switches.",
         "Impossibilita definitivamente a conversa horizontal GOOSE entre os bays vizinhos.",
         "Gera atrasos severos obrigando as conexoes em condutores coaxiais diretos."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Conectar todos os medidores a um barramento geral nivelado requer elevadissima capacidade de banda para suportar a montanha de dados de SV em tempo real.",
       "difficulty": "medium"
     },
@@ -131,10 +131,10 @@
       "options": [
         "Uma oscilacao grave detectada em modo de falta.",
         "Um pulso e mudanca isolada dos estados booleanos.",
-        "Um evento sincronizado exato nomeado de clock event.",
-        "Uma superacao do limite e banda morta em malha de controle."
+        "Uma superacao do limite e banda morta em malha de controle.",
+        "Um evento sincronizado exato nomeado de clock event."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Contrario a logs regidos por mudanca de status, as amostras baseadas no servico SMV/SV disparam sua publicacao atreladas rigorosamente a um evento de clock.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A malha que incorpora e acopla nativamente os sensores inteligentes de campo interligados em nivel secundario recebe o nome exclusivo de barramento de estacao.",
       "correctAnswer": false,
       "explanation": "O segmento reservado ao recebimento dos conversores e TCs digitais em direcao aos reles e chamado tecnicamente de barramento de processo e nao de estacao.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O descritor especifico de qualidade incorporado a publicacao pode alertar ao sistema que determinado pacote processado no sensor se encontra deteriorado ou atrasado.",
       "correctAnswer": true,
       "explanation": "Os atributos do tipo q avaliam as qualidades operacionais, classificando a sanidade dos sinais lidos em estado deficiente ou obsoleto perante os assinantes.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Com as limitacoes de garantia da Ethernet as amostras ininterruptas carecem obrigatoriamente das sete camadas OSI exigindo pontas de verificacao TCP.",
       "correctAnswer": false,
       "explanation": "SV flui pela infraestrutura Hard Real-Time da norma que repudia o transporte roteado nas sete camadas priorizando somente as camadas inferiores Enlace e Fisica.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Em topologias propostas e delimitadas pela norma baseadas em barramentos segmentados por funcao as areas logicas de dados moldam-se alinhadas as zonas isoladas de protecao.",
       "correctAnswer": true,
       "explanation": "Na alternativa 4 de distribuicao as divisoes restritas do process bus sao mapeadas e confinadas em correspondencia as fronteiras da propria protecao eletrica do laco.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No esquema representativo os nos geradores logicos incumbidos de suprir os canais de processo com as medicoes diretas sao indicados pela tipificacao TCTR e TVTR.",
       "correctAnswer": true,
       "explanation": "TCTR condensa as amostragens referentes as derivacoes de Transformadores de Corrente e TVTR absorve as variaveis extraidas dos Transformadores de Tensao associados.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O servico da norma IEC 61850 dedicado a troca continua de amostras digitalizadas de corrente e tensao no barramento de processo e abreviado pela sigla _____.",
+      "statement": "O servico da norma IEC 61850 dedicado a troca continua de amostras digitalizadas de corrente e tensao no barramento de processo e abreviado pela sigla ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O envio constante exigido para a recriacao fasorial despacha datagramas do campo aos reles receptores trafegando especificamente as ordens regidas pelo canal denominado interface _____.",
+      "statement": "O envio constante exigido para a recriacao fasorial despacha datagramas do campo aos reles receptores trafegando especificamente as ordens regidas pelo canal denominado interface ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Os nos logicos da norma encarregados de digitalizar e disponibilizar as amostras de corrente do Transformador de Corrente no barramento de processo sao tipificados pela sigla _____.",
+      "statement": "Os nos logicos da norma encarregados de digitalizar e disponibilizar as amostras de corrente do Transformador de Corrente no barramento de processo sao tipificados pela sigla ____.",
       "blanks": [
         {
           "index": 0,

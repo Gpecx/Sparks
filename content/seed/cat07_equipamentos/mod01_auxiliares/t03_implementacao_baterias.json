@@ -5,19 +5,19 @@
   "module": "Equipamentos Auxiliares SPCS",
   "moduleSubtitle": "Alimentação CC/CA, baterias, retificadores e serviços auxiliares",
   "moduleOrder": 0,
-  "trail": "Implementação (Baterias e Distribuição CC)",
+  "trail": "Instalação, Operação e Manutenção",
   "trailOrder": 2,
   "questions": [
     {
       "type": "multipleChoice",
       "statement": "Qual e a principal finalidade do banco de baterias em uma subestacao eletrica?",
       "options": [
-        "Alimentar circuitos de comando e protecao com tensao continua.",
-        "Elevar a tensao do suprimento primario da concessionaria local.",
         "Reduzir as correntes de curto-circuito no barramento de media tensao.",
+        "Elevar a tensao do suprimento primario da concessionaria local.",
+        "Alimentar circuitos de comando e protecao com tensao continua.",
         "Fornecer energia reativa capacitiva para compensacao do fator de potencia."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O banco alimenta circuitos de comando em corrente continua para torna-los independentes de falhas no sistema eletrico de corrente alternada. Fonte: Apostila Protecao.",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Quais sao os dois tipos principais de baterias comumente utilizados em subestacoes?",
       "options": [
-        "Chumbo-acido e alcalinas de niquel-cadmio.",
+        "Sodio-enxofre e alcalinas puras.",
         "Litio-ion e prata-zinco.",
         "Zinco-carbono e niquel-metal-hidreto.",
-        "Sodio-enxofre e alcalinas puras."
+        "Chumbo-acido e alcalinas de niquel-cadmio."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Os principais tipos de bateria utilizados atualmente sao as de chumbo-acido e as alcalinas de niquel-cadmio. Fonte: ed53.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "O que e compulsorio na sala de baterias caso os elementos instalados nao sejam do tipo selado?",
       "options": [
-        "Sistema de exaustao devido a liberacao de gas hidrogenio no processo de eletrolise.",
         "Sistema de injecao de gas SF6 para extinguir eventuais arcos voltaicos.",
+        "Sistema de exaustao devido a liberacao de gas hidrogenio no processo de eletrolise.",
         "Sistema de refrigeracao liquida continua operando nas estantes de suporte.",
         "Piso isolante de 100 kV com malha de terra dedicada e independente."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "E obrigatoria a exaustao para evitar a concentracao explosiva de hidrogenio liberado pelas baterias abertas ou nao seladas. Fonte: ed53.",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Como a logica de controle do IED reage diante da perda da alimentacao auxiliar de corrente continua em uma seccionadora?",
       "options": [
-        "Memoriza o ultimo estado valido conhecido da chave e emite um alarme de falha.",
-        "Envia comando de abertura imediata ao disjuntor principal da barra correspondente.",
         "Abre a seccionadora automaticamente por acao de molas pre-carregadas.",
+        "Envia comando de abertura imediata ao disjuntor principal da barra correspondente.",
+        "Memoriza o ultimo estado valido conhecido da chave e emite um alarme de falha.",
         "Reseta imediatamente as configuracoes operacionais da memoria EPROM."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Para evitar atuacoes incorretas na falha CC, a ultima posicao valida e memorizada por seguranca e um alarme e gerado. Fonte: Virtus ProtBarras.",
       "difficulty": "easy"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "No dimensionamento pratico de um banco de baterias, quais folgas adicionais costumam ser aplicadas ao valor calculado de capacidade?",
       "options": [
-        "Correcao por idade de aprox 10 por cento e reserva para expansoes futuras de aprox 15 por cento.",
+        "Fator de sobrecarga do carregador de aprox 50 por cento e degradacao por sulfatacao de aprox 40 por cento.",
         "Correcao termica de aprox 30 por cento e compensacao de perdas no inversor CA de aprox 20 por cento.",
         "Correcao de altitude de aprox 5 por cento e tolerancia de fabricacao do rele de aprox 2 por cento.",
-        "Fator de sobrecarga do carregador de aprox 50 por cento e degradacao por sulfatacao de aprox 40 por cento."
+        "Correcao por idade de aprox 10 por cento e reserva para expansoes futuras de aprox 15 por cento."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "O valor calculado deve ser corrigido considerando o envelhecimento natural e a reserva para ampliacoes futuras da carga. Fonte: ed53.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Qual e a faixa de tensao de flutuacao usual recomendada para elementos de baterias do tipo chumbo-acido?",
       "options": [
-        "2,15 V a 2,20 V por elemento.",
         "1,38 V a 1,42 V por elemento.",
+        "2,15 V a 2,20 V por elemento.",
         "1,60 V a 1,85 V por elemento.",
         "2,30 V a 2,50 V por elemento."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "Para baterias chumbo-acido, a tensao de flutuacao constante situa-se tipicamente entre 2,15 V e 2,20 V por elemento. Fonte: ed53.",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "No dimensionamento do sistema, qual e o impacto de se basear a escolha do numero de elementos na menor tensao final de descarga admissivel?",
       "options": [
-        "Otimiza o aproveitamento da energia, conduzindo ao calculo de uma bateria de menor capacidade e menor custo global.",
-        "Exige a aquisicao de baterias com o dobro do volume fisico para suportar a inevitavel elevacao termica nas salas de paineis.",
         "Reduz a vida util do banco de baterias pela metade devido a rapida e irreversivel sulfatacao das placas internas.",
+        "Exige a aquisicao de baterias com o dobro do volume fisico para suportar a inevitavel elevacao termica nas salas de paineis.",
+        "Otimiza o aproveitamento da energia, conduzindo ao calculo de uma bateria de menor capacidade e menor custo global.",
         "Obriga a instalacao de multiplas Unidades de Diodos de Queda no circuito primario para evitar trips acidentais."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Um numero de elementos focado na tensao minima final reduz a capacidade total Ah exigida, aproveitando melhor a curva e gerando solucoes mais economicas. Fonte: ed53.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "O circuito de comando de abertura dos disjuntores utiliza corrente continua das baterias com o proposito de manter a operacao independente de.",
       "correctAnswer": true,
       "explanation": "A energia CC assegura a prontidao operativa e a abertura eficaz do disjuntor mesmo no caso de colapso severo na rede CA. Fonte: Apostila Protecao.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Especialistas em sistemas de protecao recomendam a utilizacao de nobreaks CA em vez de retificadores CC diretos, visto que apresentam uma.",
       "correctAnswer": false,
       "explanation": "O nobreak CA possui um inversor em serie que adiciona mais um componente sujeito a avarias, reduzindo o tempo medio entre falhas e a confiabilidade se comparado ao retificador CC. Fonte: ed53.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "As baterias de tecnologia alcalina de niquel-cadmio sao restritas e padronizadas para tempos nominais de descarga de exatas 10 horas.",
       "correctAnswer": false,
       "explanation": "Diferente das baterias chumbo-acidas que geralmente focam na capacidade de 10h, as alcalinas apresentam capacidades padronizadas em faixas de 3, 5 ou 10 horas. Fonte: ed53.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Para calcular a vazao de ar no sistema de exaustao de uma sala de baterias, a formula matematica baseia-se na corrente de recarga e no numero de.",
       "correctAnswer": true,
       "explanation": "A equacao de vazao e expressa por Q igual a 55 vezes o numero de elementos vezes a corrente de recarga. Fonte: ed53.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No calculo do banco de baterias, o primeiro criterio que assegura o limite de tensao maxima e dado pela divisao direta da tensao maxima admissivel.",
       "correctAnswer": false,
       "explanation": "Para nao ultrapassar a tensao maxima, divide-se a tensao maxima admissivel pelos equipamentos pela tensao de equalizacao da bateria, e nao pela tensao de descarga. Fonte: ed53.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Para evitar que a tensao enviada as cargas sensiveis ultrapasse o limite maximo tolerado durante a fase de carga profunda da bateria, instala-se _____.",
+      "statement": "Para evitar que a tensao enviada as cargas sensiveis ultrapasse o limite maximo tolerado durante a fase de carga profunda da bateria, instala-se ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Na equacao de dimensionamento da capacidade do banco de baterias, as variacoes de corrente do perfil de carga sao multiplicadas iterativamente pelo _____.",
+      "statement": "Na equacao de dimensionamento da capacidade do banco de baterias, as variacoes de corrente do perfil de carga sao multiplicadas iterativamente pelo ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para dimensionar corretamente o sistema de exaustao obrigatorio na sala, a corrente de recarga parametrizada na formula equivale a 0,4 vezes a _____.",
+      "statement": "Para dimensionar corretamente o sistema de exaustao obrigatorio na sala, a corrente de recarga parametrizada na formula equivale a 0,4 vezes a ____.",
       "blanks": [
         {
           "index": 0,

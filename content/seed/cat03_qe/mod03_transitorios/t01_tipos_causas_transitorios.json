@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Transitórios e Surtos",
+  "moduleSubtitle": "Tipos, sobretensoes, medicao, DPS e coordenacao",
+  "moduleOrder": 2,
+  "trail": "Tipos e Causas de Transitórios",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza fisicamente a polaridade de um transitorio do tipo impulsivo nos sistemas eletricos, diferenciando-o de outras anomalias da rede?",
+      "options": [
+        "Apresenta polaridade bidirecional (positiva e negativa) com longo amortecimento.",
+        "Possui polaridade alternada e variavel ao longo de 60 ciclos senoidais.",
+        "Tem polaridade exclusivamente nula em condicoes de regime permanente.",
+        "Mantem uma polaridade estritamente unidirecional (apenas positiva ou negativa)."
+      ],
+      "correctIndex": 3,
+      "explanation": "A dissertacao Analise de Disturbios do IFPB define o transitorio impulsivo como uma alteracao subita que se caracteriza por uma polaridade estritamente unidirecional.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a literatura tecnica analisada, qual e a principal causa natural atribuida ao surgimento de transitorios impulsivos no sistema eletrico de potencia?",
+      "options": [
+        "O chaveamento sucessivo de fornos a arco.",
+        "A comutacao rapida em conversores trifasicos.",
+        "A incidencia de descargas atmosfericas nas instalacoes.",
+        "O desequilibrio cronico das cargas puramente indutivas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme descrito pela dissertacao do IFPB, os transitorios impulsivos sao geralmente causados por descargas atmosfericas, o que lhes confere niveis de frequencia distintos da rede.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Diferentemente do disturbio impulsivo, como se apresenta o comportamento de polaridade de um transitorio classificado formalmente como oscilatorio?",
+      "options": [
+        "Tem sua polaridade confinada bidirecionalmente (assumindo valores positivos e negativos).",
+        "Esteriliza a variacao de amplitude impondo uma polaridade unicamente neutra.",
+        "Opera exclusivamente injetando distorcoes de polaridade puramente continua.",
+        "Limita o sinal a exibir oscilacoes unidirecionais com pulsos apenas positivos."
+      ],
+      "correctIndex": 0,
+      "explanation": "O material do IFPB assinala que um transitorio oscilatorio e definido por uma mudanca repentina nas condicoes com alteracao de polaridade bidirecional (positiva e negativa).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual condicao operacional da eletronica de potencia e tida como a principal responsavel pelo surgimento de disturbios de tensao denominados notching?",
+      "options": [
+        "Descargas atmosfericas indiretas nas linhas de conversao.",
+        "O uso estendido de conversores de frequencia que operem em modo regenerativo sem capacitores.",
+        "O curto-circuito momentaneo entre duas fases verificado quando a corrente e comutada em conversores trifasicos.",
+        "O aumento acentuado e inercial da frequencia fundamental do inversor durante frenagens em rampa longa."
+      ],
+      "correctIndex": 2,
+      "explanation": "A fonte do IFPB explica claramente que os conversores trifasicos causam notching devido a ocorrencia de um curto-circuito momentaneo entre duas fases durante a comutacao da corrente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo o Guia de Protecao contra Surtos da Finder, os transitorios e surtos de tensao de manobra (endogenos) sao causados majoritariamente por quais eventos na rede eletrica?",
+      "options": [
+        "Descargas atmosfericas ou impactos indiretos do raio sobre a subestacao e suas conexoes.",
+        "A interrupcao abrupta imposta pela queima e explosao de reatores passivos instalados na geracao.",
+        "A operacao normal e chaveamentos, como as variacoes subitas de carga ou acionamento de interruptores e motores.",
+        "A saturacao prematura dos transformadores de corrente durante medicoes com carga nominal constante."
+      ],
+      "correctIndex": 2,
+      "explanation": "O guia Finder determina que surtos de manobra referem-se a transitorios originados de acionamento de interruptores, variacoes subitas de carga ou partidas de motores na operacao da rede.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a Norma IEEE 1159 (reproduzida pelo IFPB), qual e a faixa de frequencia que delimita a classificacao de um transitorio oscilatorio de Baixa Frequencia?",
+      "options": [
+        "Frequencias menores que 5 kHz.",
+        "Frequencias entre 5 e 500 kHz.",
+        "Frequencias entre 0,5 e 5 MHz.",
+        "Frequencias superiores a 10 MHz."
+      ],
+      "correctIndex": 0,
+      "explanation": "Segundo o Quadro 02 da Norma IEEE 1159 presente na dissertacao do IFPB, transitorios oscilatorios de baixa frequencia possuem espectro menor que 5 kHz.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Conforme o Quadro de classificacoes da Norma IEEE 1159 citado no estudo do IFPB, os transitorios oscilatorios categorizados como Media Frequencia apresentam, caracteristicamente, qual intervalo de duracao e limites de magnitude associados?",
+      "options": [
+        "Duracao de 0,3 a 50 milissegundos operando com picos contidos na faixa de 0 ate 4 pu.",
+        "Duracao tipica de 20 microssegundos podendo atingir magnitudes variando de 0 a 8 pu.",
+        "Duracao de 5 microssegundos exatos induzindo picos com tolerancia fixada restritamente de 1,1 a 1,8 pu.",
+        "Duracoes sempre superiores a 3 segundos sustentando valores eficazes da ordem nominal basica em 0,1 a 0,9 pu."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Quadro 02 da Norma IEEE 1159 (no material do IFPB) designa para os transitorios de Media Frequencia (5 a 500 kHz) uma duracao de 20 microssegundos com magnitudes entre 0 e 8 pu.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Pela segmentacao oficial da IEEE 1159 referenciada no material do IFPB, em qual faixa de frequencia se encontram os transitorios oscilatorios classificados tecnicamente como Alta Frequencia?",
+      "options": [
+        "Na banda de 0,5 a 5 MHz.",
+        "Na banda de 5 a 500 kHz.",
+        "Na banda menor que 5 kHz.",
+        "Na banda inter-harmonica abaixo de 100 Hz."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Quadro 02 do IFPB (Norma IEEE 1159) indica explicitamente que a faixa compreendida entre 0,5 MHz e 5 MHz corresponde aos transitorios oscilatorios de Alta Frequencia.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Com relacao a origem das sobretensoes transitorias nas redes, como a literatura tecnica (Guia Finder) segmenta e identifica os surtos de tensao de origem atmosferica (descargas de raios)?",
+      "options": [
+        "Surtos transientes puramente capacitivos e defasados.",
+        "Surtos com caracteristica basilar totalmente endogena.",
+        "Surtos transitorios de classificacao exogena.",
+        "Surtos limitados como sendo da classe inter-harmonica de comutacao."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Guia Finder subdivide os surtos transitorios em endogenos (causados internamente, por manobras) e exogenos (causados externamente, com destaque para a origem atmosferica).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No que se refere a fisiologia das correntes oscilatorias prejudiciais, por que as instalacoes industriais dotadas de conversores trifasicos passam a sofrer intrinsecamente com a incidencia subita do notching?",
+      "options": [
+        "Visto que os tiristores exigem uma tensao residual oscilante em frequencia muito reduzida, forcando a criacao prolongada de sub-harmonicas espurias.",
+        "Dado que, quando a corrente e comutada sucessivamente entre os terminais destas fases eletronicas ativas, impoe-se instantaneamente um curto-circuito momentaneo entre elas no percurso.",
+        "Devido a elevacao gradual e amortecida da corrente das cargas passivas ligadas as baterias em derivacao que saturam por excesso do fluxo reativo das ilhas.",
+        "Pois o notching resulta da operacao puramente mecanica isolada dos contatores auxiliares lentos sem conexao eletrica, limitando temporariamente as bobinas do painel."
+      ],
+      "correctIndex": 1,
+      "explanation": "O material cientifico do IFPB explana com clareza o disturbio apontando que o curto-circuito momentaneo ocorre exatamente enquanto a corrente esta sofrendo o processo eletro-fisico de comutacao das chaves entre as fases em questao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os transitorios oscilatorios produzem impacto negligenciavel e atenuado nos aparelhos microprocessados atuais, e sua passagem sequer e capaz de afetar sensivelmente a vida util ou gerar mau funcionamento de maquinas motrizes no chao de fabrica.",
+      "correctAnswer": false,
+      "explanation": "A dissertacao do IFPB esclarece o oposto ao alertar que os transitorios oscilatorios podem provocar diversos efeitos negativos como diminuir a vida util de motores e causar mau funcionamento de dispositivos controlados eletronicamente.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A analise da documentacao fornecida pelo guia Finder demonstra que surtos eletromagneticos altamente variaveis, originados pela queda de uma descarga atmosferica sem impacto direto na planta, podem gerar transitorios indesejados nas instalacoes atraves do acoplamento indutivo na fiacao.",
+      "correctAnswer": true,
+      "explanation": "O informativo tecnico DPS Finder afirma que surtos induzidos (impacto indireto) ocorrem devido ao forte campo eletromagnetico da corrente do raio que por variavel acoplamento indutivo cria as sobretensoes na fiacao interna em laco.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As ocorrencias de corte sucessivo classificadas como notching podem inserir harmonicamente perturbacoes na forma da onda da instalacao alcancando espectros agudos cujas componentes chegam a ultrapassar a barreira de 3,6 kHz.",
+      "correctAnswer": true,
+      "explanation": "A dissertacao de pesquisa sobre analise de disturbios do IFPB atesta que as interrupcoes pontiagudas originarias deste disturbio (notching) introduzem frequencias que podem ultrapassar 3,6 kHz.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O transitorio categorizado pela denominacao impulsivo distingue-se de forma clara em sua anatomia de onda pois, segundo ditames da IEEE 1159, ele mantem sua acao restrita aos limites unicamente das dezenas de segundos com polaridade variavel bidirecional.",
+      "correctAnswer": false,
+      "explanation": "A base bibliografica exposta nos arquivos (IFPB e IEEE 1159) contraria tal avaliacao estipulando ao inves que a polaridade e tipicamente unidirecional, possuindo ocorrencias velozes restritas entre a faixa dos nanosegundos ate no maximo reduzidos milissegundos.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para assegurar o expurgo ou mitigacao fisica eficaz direcionada contra disturbios resultantes de transitorios de carater oscilatorio nas industrias afetadas, recomendam-se estritamente e exclusivamente a aplicacao imediata de arranjos que contenham capacitores operando em paralelo com os conversores retificadores CA-CC ligados a barra principal de suprimento.",
+      "correctAnswer": false,
+      "explanation": "Os meios listados pela fonte do IFPB como remedios para anular transitorios oscilatorios englobam primariamente o uso de supressores de surto, transformadores isoladores e filtros. O material nao prescreve exclusividade a capacitores em paralelo como medida mitigadora de transientes deste nivel.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Tendo em conta os parametros definidores impostos e tabelados pelo Quadro 02 da classificacao IEEE 1159, pode-se constatar que um evento transitorio tido como impulsivo manifestado na estrita escala temporal do nanossegundo dispoe de tempos e duracao classificada para repousar entre os marcos definidos a partir de 5 e indo ate limitados 50 ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ns"
+        }
+      ],
+      "explanation": "A observacao do Quadro 02 retirado das instrucoes publicadas pela Norma IEEE 1159 e constantes na dissertacao do IFPB certifica que para o nicho categorizado transitorio Impulsivo Nanossegundo, a duracao prevista estende-se na faixa de 5 ns a 50 ns.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As tolerancias para anomalias transitorias de baixa frequencia de padrao oscilatorio regulamentadas nas tabelas de qualidade estatuem e toleram que o pico submetido alcancando os equipamentos por tais disturbios oscile apresentando picos desde 0 ate picos extremos quantificados de grandeza correspondendo a exatos ____ pu.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "4"
+        }
+      ],
+      "explanation": "A informacao colhida na transcricao do Quadro 02 da IEEE 1159 contida na biblioteca do IFPB evidencia a coluna Magnitude listando o valor de 0 a 4 pu associado a classe oscilatoria de Baixa Frequencia.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "De acordo com os ensinamentos trazidos na literatura para controle basico de qualidade (citados expressamente no referencial do IFPB), para neutralizacao e eliminacao robusta dos efeitos nocivos inerentes aos transitorios oscilatorios, pode-se valer de filtros passivos alocados, atuacao de supressores voltados aos surtos transientes do sistema juntamente com o auxilio e bloqueio imposto pela implementacao tecnica atraves de transformadores ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "isoladores"
+        }
+      ],
+      "explanation": "O texto contido no arquivo base Analise de Disturbios do IFPB afirma literalmente que visando a sua reducao podem-se utilizar como solucao: supressores de surto, transformadores isoladores e filtros.",
+      "difficulty": "hard"
+    }
+  ]
+}

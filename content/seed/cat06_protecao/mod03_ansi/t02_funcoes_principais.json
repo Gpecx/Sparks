@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Qual é a principal diferença operacional entre os relés de sobrecorrente ANSI 50 e 51?",
       "options": [
-        "O 50 atua de modo instantâneo, enquanto o 51 opera com retardo intencional de tempo.",
+        "O 50 atua com restrição de tensão, enquanto o 51 atua em modo diferencial.",
         "O 50 protege contra sobrecarga térmica, e o 51 contra subfrequência.",
         "O 50 é exclusivo para neutro (50N), e o 51 para fases.",
-        "O 50 atua com restrição de tensão, enquanto o 51 atua em modo diferencial."
+        "O 50 atua de modo instantâneo, enquanto o 51 opera com retardo intencional de tempo."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "A função 50 designa o relé instantâneo (sem retardo); a 51 designa o temporizado (tempo definido ou inverso).",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Qual princípio fundamenta o funcionamento da proteção diferencial (ANSI 87)?",
       "options": [
-        "Monitorar o colapso da tensão e atuar se a impedância ultrapassar limites.",
         "Comparar as correntes que entram e saem do equipamento, operando caso surja uma diferença (falta).",
+        "Monitorar o colapso da tensão e atuar se a impedância ultrapassar limites.",
         "Avaliar o sentido do fluxo de potência ativa para impedir motorização.",
         "Temporizar a abertura com base no quadrado da corrente de carga."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A proteção 87 baseia-se na comparação entre as correntes que entram e saem do circuito protegido, operando quando há diferença.",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "O relé de distância (ANSI 21) afere a localização do curto medindo primariamente qual grandeza?",
       "options": [
         "O fator de potência (cos φ) da carga instalada.",
-        "O escorregamento e o desvio de sequência negativa.",
         "A impedância (ou reatância e admitância) pela relação entre tensão e corrente local.",
+        "O escorregamento e o desvio de sequência negativa.",
         "A potência reativa absorvida pelos capacitores série."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A função 21 afere a impedância aparente entre a subestação e o defeito pela relação Z = V/I.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Como o relé diferencial de transformador (87T) evita trips indevidos pela corrente de magnetização de partida (inrush)?",
       "options": [
-        "Utilizando restrição ou bloqueio baseado na medição da segunda harmônica.",
-        "Desligando temporariamente os TPCs de medição da linha.",
         "Ajustando o pickup instantâneo para 50% da carga nominal.",
+        "Desligando temporariamente os TPCs de medição da linha.",
+        "Utilizando restrição ou bloqueio baseado na medição da segunda harmônica.",
         "Aplicando as temporizações do esquema de falha de disjuntor (50BF)."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O relé usa filtros que detectam o harmônico de 2ª ordem para ativar a restrição ou bloqueio, evitando disparo pela corrente de inrush.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "Por que os relés de sobrecorrente de terra (50/51N) atingem sensibilidades muito maiores que os de fase?",
       "options": [
         "Porque são conectados ao primário dos autotransformadores elevadores.",
-        "Pois a corrente equilibrada da carga normal não circula no circuito residual, isentando a restrição.",
+        "Pois usam curvas de tempo constante sem retardo de pico.",
         "Porque leem a tensão de sequência positiva do barramento.",
-        "Pois usam curvas de tempo constante sem retardo de pico."
+        "Pois a corrente equilibrada da carga normal não circula no circuito residual, isentando a restrição."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A função de fase é limitada pela carga normal; a função de terra lê apenas a corrente de desbalanço/residual, permitindo alta sensibilidade.",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Na proteção diferencial percentual (ANSI 87), qual a função da bobina de restrição (slope)?",
       "options": [
-        "Ampliar o tempo de atuação para coordenar com fusíveis a jusante.",
+        "Elevar o limiar de operação conforme a corrente externa cresce, evitando atuações espúrias por erros de TCs.",
         "Neutralizar a leitura de magnetização durante sobrecargas longas.",
         "Compensar perdas por Foucault e histerese nos TPs.",
-        "Elevar o limiar de operação conforme a corrente externa cresce, evitando atuações espúrias por erros de TCs."
+        "Ampliar o tempo de atuação para coordenar com fusíveis a jusante."
       ],
-      "correctIndex": 3,
+      "correctIndex": 0,
       "explanation": "O slope de restrição percentual aumenta a corrente diferencial necessária para o trip conforme cresce a corrente passante, garantindo imunidade a saturação de TC em curtos externos.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Na proteção diferencial de barras (87B), qual o pior risco perante um curto externo grave?",
       "options": [
-        "A saturação assimétrica dos TCs, que produz leituras de diferença espúria.",
+        "A quebra de impedância pelo repique de religadores lentos.",
         "A corrente subtransitória homopolar do inrush dos rotores.",
         "O desarme por relés de subfrequência conectados à barra.",
-        "A quebra de impedância pelo repique de religadores lentos."
+        "A saturação assimétrica dos TCs, que produz leituras de diferença espúria."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Em curtos externos, os enormes fluxos saturam os TCs de forma desigual, gerando diferenças espúrias de leitura que provocariam falsos trips na 87B.",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Num curto trifásico sólido adjacente ao relé 21 (tensão = 0), a direcionalidade fica cega. Qual recurso mitiga isso?",
       "options": [
-        "O algoritmo de sequência zero com chaves resistivas em série.",
         "A 'memória de tensão' pré-falta ou a polarização por fases sãs/cruzadas.",
+        "O algoritmo de sequência zero com chaves resistivas em série.",
         "O repasse do comutador de tapes sob carga do TP.",
         "Uma leitura paralela com relés temporizados substituindo a curva MHO."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Para curtos severos na origem (V=0), proteções de AT invocam a memória da tensão pré-falta ou extraem o vetor de polarização das fases sadias.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Um relé de sobrecorrente de tempo inverso (ANSI 51) acelera progressivamente o seu tempo de disparo quanto maior for a amplitude da corrente de curto.",
       "correctAnswer": true,
       "explanation": "Correto. Nas curvas inversas, correntes de falta maiores resultam em menores tempos de operação, isolando agilmente a subestação.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O relé diferencial do gerador (87G) detecta confiavelmente curtos fase-terra em todo o estator independentemente de a máquina operar com neutro isolado da terra.",
       "correctAnswer": false,
       "explanation": "Falso. Com neutro isolado (ou de altíssima impedância), os defeitos à terra drenam corrente mínima, indetectável pela 87G amperimétrica, exigindo o relé 59N.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Na proteção 21, a Zona 2 deve sobrealcançar todo o trecho protegido (tipicamente 120% da linha), cobrindo o fim da linha e a retaguarda dos disjuntores da barra adjacente.",
       "correctAnswer": true,
       "explanation": "Correto. A Z2 se estende além da barra adjacente (ex: 120%) para cobrir os pontos mortos, atuando como retaguarda sob uma margem intencional de tempo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O relé ANSI 51V (sobrecorrente com restrição de tensão) reduz o limiar de pickup quando ocorrem curtos que rebaixam a tensão das barras.",
       "correctAnswer": true,
       "explanation": "Correto. O 51V torna o sobrecorrente mais sensível (baixando o ajuste) quando constata as quedas de tensão que acompanham curtos graves.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O relé de distância tipo reatância isola curtos sem auxílio de unidade MHO, pois é invulnerável a fluxo reverso de potência.",
       "correctAnswer": false,
       "explanation": "Falso. A zona de Reatância, por sua característica 'aberta' no diagrama, atua bidirecionalmente (sem direcionalidade), exigindo o apoio de um elemento MHO supervisor de partida.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A ligação dos secundários dos três TCs num ponto comum para somar as correntes e drená-las à bobina do relé de neutro (50/51N) chama-se ligação em modo _____.",
+      "statement": "A ligação dos secundários dos três TCs num ponto comum para somar as correntes e drená-las à bobina do relé de neutro (50/51N) chama-se ligação em modo ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "No relé diferencial de transformador (87T), a medição da componente de _____ harmônica permite bloquear o desarme indevido provocado por sobre-excitação (sobrefluxo / V/Hz).",
+      "statement": "No relé diferencial de transformador (87T), a medição da componente de ____ harmônica permite bloquear o desarme indevido provocado por sobre-excitação (sobrefluxo / V/Hz).",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Uma limitação dos relés de impedância/MHO (função 21) em faltas próximas é a influência da resistência de _____, que eleva o R aparente e pode levar a leitura para fora do círculo de operação.",
+      "statement": "Uma limitação dos relés de impedância/MHO (função 21) em faltas próximas é a influência da resistência de ____, que eleva o R aparente e pode levar a leitura para fora do círculo de operação.",
       "blanks": [
         {
           "index": 0,

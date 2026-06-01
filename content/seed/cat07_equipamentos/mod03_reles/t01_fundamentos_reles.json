@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Quais as tres principais geracoes tecnologicas na evolucao dos reles de protecao?",
       "options": [
-        "Eletromecanica, estatica e digital.",
-        "Pneumatica, analogica e quantica.",
         "Hidraulica, termica e optica.",
+        "Pneumatica, analogica e quantica.",
+        "Eletromecanica, estatica e digital.",
         "Mecanica, valvular e magnetica."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "A evolucao da tecnologia dos reles de protecao passou pelas fases eletromecanica, estatica (estado solido) e digital (microprocessada).",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Alem da protecao, quais funcoes sao tipicamente integradas em um IED (Intelligent Electronic Device) moderno?",
       "options": [
-        "Medicao, controle, automacao e oscilografia.",
+        "Retificacao de potencia e filtragem passiva.",
         "Extincao de arco e isolacao a gas.",
         "Elevacao de tensao e compensacao reativa.",
-        "Retificacao de potencia e filtragem passiva."
+        "Medicao, controle, automacao e oscilografia."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "IEDs sao dispositivos microprocessados que englobam medicao, comando, monitoramento e protecao no mesmo hardware.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Qual bloco interno do hardware do IED converte os sinais analogicos dos TCs e TPs em dados processaveis?",
       "options": [
-        "O modulo de saidas binarias.",
         "O conversor Analogico-Digital (A/D).",
+        "O modulo de saidas binarias.",
         "O transformador de potencial capacitivo.",
         "A interface homem-maquina frontal."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "No rele digital, os valores medidos sao amostrados e convertidos em dados numericos pelo conversor A/D para processamento da CPU.",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Qual a finalidade da fonte de alimentacao auxiliar em corrente continua (CC) conectada ao IED?",
       "options": [
-        "Garantir a operacao da eletronica interna do rele de forma independente de colapsos na rede CA.",
-        "Gerar campos magneticos intensos para extinguir arcos no disjuntor.",
         "Carregar as baterias estacionarias da subestacao principal.",
+        "Gerar campos magneticos intensos para extinguir arcos no disjuntor.",
+        "Garantir a operacao da eletronica interna do rele de forma independente de colapsos na rede CA.",
         "Aterrar a carcaca metalica e o circuito de neutro do painel de controle."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "A alimentacao CC assegura que a protecao atue corretamente mesmo com o colapso e queda da tensao CA durante curtos-circuitos.",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "O que executa o componente de seguranca watchdog no hardware do rele digital?",
       "options": [
         "Atua bloqueando fisicamente as sobretensoes oriundas da rede primaria.",
-        "Dispara um reset ou bloqueio de seguranca caso ocorra travamento no laco do programa principal.",
+        "Converte grandezas analogicas extremas em sinais luminosos infravermelhos.",
         "Altera os grupos de ajuste de coordenacao automaticamente.",
-        "Converte grandezas analogicas extremas em sinais luminosos infravermelhos."
+        "Dispara um reset ou bloqueio de seguranca caso ocorra travamento no laco do programa principal."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O watchdog verifica continuamente o ciclo de clock e forca a reinicializacao caso o software operacional congele.",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Onde os reles numericos armazenam seus parametros e grupos de ajuste para nao perde-los em faltas de energia?",
       "options": [
-        "Em memorias volateis do tipo RAM dinamica.",
         "Em memorias nao volateis do tipo EPROM ou Flash.",
+        "Em memorias volateis do tipo RAM dinamica.",
         "Nos registradores de deslocamento do conversor A/D.",
         "Nos transformadores de isolacao optica."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A memoria EPROM/Flash armazena parametros e ajustes para manter os dados integros mesmo quando o rele e desligado da fonte.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Como a rotina de autocheck do IED avalia a integridade dos ajustes (settings) salvos na sua memoria interna?",
       "options": [
-        "Comparando ciclicamente as diferencas entre dois conjuntos identicos de ajustes mantidos em EPROM.",
-        "Injetando picos de sobretensao nas portas de comunicacao ethernet.",
         "Analisando diariamente o banco de dados da oscilografia de falha.",
+        "Injetando picos de sobretensao nas portas de comunicacao ethernet.",
+        "Comparando ciclicamente as diferencas entre dois conjuntos identicos de ajustes mantidos em EPROM.",
         "Enviando pulsos teste para a bobina do disjuntor de alta tensao."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O autodiagnostico do IED valida seus ajustes comparando as divergencias entre duas copias integras na memoria nao volatil.",
       "difficulty": "medium"
     },
@@ -130,11 +130,11 @@
       "statement": "Qual circuito do IED retem a amostra do sinal analogico por um instante preciso para permitir a quantizacao pelo conversor A/D?",
       "options": [
         "O multiplexador optico de sinais.",
-        "O circuito Sample and Hold (S/H).",
+        "O oscilador de clock principal da CPU.",
         "O filtro passa-baixa indutivo ativo.",
-        "O oscilador de clock principal da CPU."
+        "O circuito Sample and Hold (S/H)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O bloco Sample and Hold amostra a forma de onda e mantem o nivel de tensao constante enquanto o conversor A/D efetua a leitura.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Na arquitetura de hardware dos reles digitais, existe uma separacao fisica e eletrica entre a parte suja (contatos externos sujeitos a surtos) e a parte limpa (eletronica do processador).",
       "correctAnswer": true,
       "explanation": "Cuidados como a separacao eletrica e o uso de acopladores opticos protegem a CPU sensivel contra ruidos do patio da subestacao.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A matriz de configuracao logica, conhecida como Marshalling, e a ferramenta do IED que roteia alarmes e trips internos para os LEDs frontais e para os reles de saida fisicos.",
       "correctAnswer": true,
       "explanation": "O Marshalling e a matriz que associa as logicas geradas pelo microprocessador aos hardware de interface I/O (LEDs e contatos).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O sistema de autodiagnostico e monitoramento continuo dos IEDs exige que a protecao do circuito seja desativada por alguns minutos diariamente para o relatorio de varredura.",
       "correctAnswer": false,
       "explanation": "Diferente dos testes antigos, o monitoramento continuo do IED roda em background, possuindo periodo de indisponibilidade da protecao igual a zero.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "As portas de comunicacao dos reles numericos permitem a conexao do equipamento as redes de supervisao (SCADA) para parametrizacao, controle e download de oscilografias remotamente.",
       "correctAnswer": true,
       "explanation": "Os canais de comunicacao (seriais e opticos) proporcionam a integracao local e o acesso remoto, facilitando a automacao da usina.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Diferente dos modelos estaticos, os modernos IEDs executam a comparacao fasorial de grandezas atraves de unidades de inducao magnetica com pequenos discos giratorios miniaturizados internamente.",
       "correctAnswer": false,
       "explanation": "Reles digitais (IEDs) dispensam discos de inducao ou pecas moveis, efetuando todas as analises via equacoes e algoritmos processados pela CPU.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O componente de hardware que intercala e envia sequencialmente varios canais analogicos de leitura para um unico conversor A/D no rele digital e o _____.",
+      "statement": "O componente de hardware que intercala e envia sequencialmente varios canais analogicos de leitura para um unico conversor A/D no rele digital e o ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O filtro instalado na entrada analogica do IED que impede o recobrimento de frequencia, evitando que ruidos de alta frequencia mascarem o sinal fundamental amostrado, e o filtro anti-_____.",
+      "statement": "O filtro instalado na entrada analogica do IED que impede o recobrimento de frequencia, evitando que ruidos de alta frequencia mascarem o sinal fundamental amostrado, e o filtro anti-____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A rotina embarcada que atua forcando um reset de seguranca caso ocorra congelamento da logica principal do microprocessador e chamada de _____.",
+      "statement": "A rotina embarcada que atua forcando um reset de seguranca caso ocorra congelamento da logica principal do microprocessador e chamada de ____.",
       "blanks": [
         {
           "index": 0,

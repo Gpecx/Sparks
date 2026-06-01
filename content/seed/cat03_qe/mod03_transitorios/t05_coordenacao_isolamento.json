@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Transitórios e Surtos",
+  "moduleSubtitle": "Tipos, sobretensoes, medicao, DPS e coordenacao",
+  "moduleOrder": 2,
+  "trail": "Coordenação de Isolamento",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que define a Categoria de Instalacao I em relacao a tensao de resistencia ao impulso, e que tipo de equipamentos ela abrange?",
+      "options": [
+        "Equipamentos muito sensiveis, como televisores e computadores, com tensao de resistencia de 1,5 kV.",
+        "Ferramentas portateis e eletrodomesticos gerais, com tensao de resistencia de 2,5 kV.",
+        "Equipamentos que fazem parte integrante da instalacao, como quadros eletricos, com 4,0 kV.",
+        "Dispositivos robustos posicionados antes do quadro principal, como contatores, com 6,0 kV."
+      ],
+      "correctIndex": 0,
+      "explanation": "Segundo o Guia Finder (Categorias de instalacao), a Categoria I inclui equipamentos muito sensiveis a picos de tensao (TV, PCs) para os quais o fabricante deve garantir uma tensao de resistencia de 1,5 kV.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a tensao de resistencia garantida para equipamentos pertencentes a Categoria de Instalacao II, segundo a norma citada no Guia Finder?",
+      "options": [
+        "1,5 kV",
+        "2,5 kV",
+        "4,0 kV",
+        "6,0 kV"
+      ],
+      "correctIndex": 1,
+      "explanation": "O Guia Finder especifica que a Categoria de instalacao II inclui aparelhos cuja resistencia a impulso corresponde a 2,5 kV, como eletrodomesticos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual Categoria de Instalacao inclui dispositivos instalados ANTES do quadro de distribuicao (como contatores) e exige resistencia ao impulso de 6 kV?",
+      "options": [
+        "Categoria de Instalacao I",
+        "Categoria de Instalacao II",
+        "Categoria de Instalacao III",
+        "Categoria de Instalacao IV"
+      ],
+      "correctIndex": 3,
+      "explanation": "O Guia Finder define explicitamente que pertencem a Categoria de instalacao IV os dispositivos instalados antes do quadro de distribuicao, com tensao de resistencia ao impulso de 6 kV.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A divisao do ambiente eletromagnetico em Zonas de Protecao contra Raios (LPZ) associa numeros as zonas. O que significa uma LPZ com numero mais alto (ex: LPZ 3)?",
+      "options": [
+        "Maior exposicao a raios diretos e campos nao atenuados.",
+        "Os efeitos dos raios e campos eletromagneticos sao mais atenuados.",
+        "Ausencia total de equipamentos eletronicos permitida.",
+        "Zona exclusivamente externa ao predio."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Guia Finder esclarece sobre as zonas LPZ que quanto mais alto for o numero, mais os efeitos dos raios serao atenuados.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a norma EN 62305 e o Guia Finder recomendam avaliar a margem de seguranca entre o nivel efetivo de protecao (Up/f) do DPS e a tensao de resistencia (Uw) do equipamento a ser protegido?",
+      "options": [
+        "Up/f deve ser exatamente igual a Uw.",
+        "Up/f menor que Uw dividido por 2.",
+        "Up/f maior que 2 vezes Uw.",
+        "Up/f igual a 1,5 vezes Uw."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Guia Finder assevera que, para garantir a protecao oferecida pelo DPS instalado, e sempre melhor verificar a equacao Up/f < Uw/2.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na coordenacao de energia entre dois DPSs instalados em cascata, como e obtida a impedancia necessaria para distanciar e coordenar os dispositivos, caso o fabricante exija uma indutancia minima de 5 uH?",
+      "options": [
+        "Pelo uso exclusivo de resistores de carvao passivos de 10 ohms.",
+        "Inserindo capacitores eletroliticos em serie na fiacao.",
+        "Atraves da indutancia natural dos cabos da instalacao eletrica, considerando que as normas estabelecem 1 uH/m.",
+        "Adicionando supressores de ferrite dedicados a cada 50 cm de fio."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Guia Finder indica que essa indutancia e introduzida automaticamente pelos cabos utilizados no sistema eletrico, pontuando que as normas estabelecem 1 uH/m.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre, segundo as advertencias do Guia Finder sobre a distancia de protecao, quando o surto de tensao residual (Ures) se propaga por uma linha e encontra um circuito aberto ou carga nao ajustada no fim da linha?",
+      "options": [
+        "A tensao e instantaneamente reduzida a zero devido a alta impedancia do ar.",
+        "Ocorre a reflexao da onda, podendo a tensao dobrar e atingir 2 Ures devido ao fenomeno de ondas estacionarias.",
+        "A energia e totalmente dissipada termicamente pela impedancia infinita do conector vazio.",
+        "O surto inverte sua polaridade passando imediatamente a compensar a fuga capacitiva."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Guia Finder explica o fenomeno das ondas refletidas: se a onda de tensao encontrar no fim da linha um circuito aberto, ela se refletira e a tensao no fim da linha pode dobrar, atingindo 2 Ures.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em relacao a Categoria de Instalacao III definida para a coordenacao de isolamento, qual e o nivel de resistencia ao pulso e que tipo de aparelhos estao incluidos nela?",
+      "options": [
+        "1,5 kV para aparelhos eletronicos como computadores.",
+        "2,5 kV para equipamentos moveis como furadeiras.",
+        "4 kV para aparelhos que fazem parte do sistema, como interruptores, tomadas e quadros.",
+        "6 kV para contatores e alimentacoes de grande porte antes do quadro principal."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Guia Finder estabelece explicitamente que a Categoria de instalacao III refere-se aos aparelhos que fazem parte do sistema (interruptores, tomadas, quadros), para os quais a tensao de resistencia e de 4 kV.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com o conceito de Zonas de Protecao contra Raios (LPZ) do Guia Finder, qual e a principal caracteristica da zona LPZ 0A?",
+      "options": [
+        "A corrente do raio e limitada e o campo e atenuado no interior do edificio isolado.",
+        "E uma zona livre com possibilidade de incidencia direta, onde a corrente do raio e alta e o campo ELM nao e atenuado.",
+        "E a zona localizada estritamente apos o primeiro DPS do quadro geral.",
+        "Fica logo abaixo do dispositivo sensor, atenuando integralmente o campo eletromagnetico."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Guia Finder define LPZ 0A como zonas livres onde existe a possibilidade de incidencia direta do raio e, portanto, a corrente e alta e o campo ELM nao e atenuado.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na configuracao de um sistema de DPS, qual e o principal objetivo tecnico de realizar a coordenacao de energia ao se distanciar adequadamente um DPS Tipo 1 de um DPS Tipo 2?",
+      "options": [
+        "Assegurar que o DPS Tipo 2 seja acionado primeiro e dissipe sozinho a totalidade da corrente do raio direto.",
+        "Fazer com que o primeiro DPS (Tipo 1) absorva a maior parte da energia de forma a nao danificar o segundo DPS (Tipo 2) instalado depois dele.",
+        "Cancelar o efeito das ondas refletidas no quadro principal usando unicamente a capacitancia parasita do DPS Tipo 1.",
+        "Dobrar a tensao residual Up de ambos os DPSs em cascata para atingir os requisitos da Categoria de Instalacao IV."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Guia Finder dita sobre Sistemas de DPS que a coordenacao assegura uma divisao dos surtos de modo que o primeiro absorve a energia de forma a nao danificar o segundo (apendice 4 da norma EN 62305).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O agrupamento de equipamentos em Categorias de Instalacao define que os dispositivos destinados a aplicacoes vizinhas ao ponto de alimentacao de energia devem ser construidos para suportar valores de surtos superiores aos dispositivos que geralmente se instalam a distancia.",
+      "correctAnswer": true,
+      "explanation": "O Guia Finder esclarece que a subdivisao ocorre automaticamente, cabendo ao fabricante garantir que os dispositivos vizinhos a fonte suportem surtos maiores em relacao aos mais distantes e limitados.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na tecnica de coordenacao, se dois protetores DPS precisarem ser instalados em cascata e ficarem fisicamente separados por um lance de 5 metros de cabeamento da instalacao, esta fiacao automaticamente introduzira uma indutancia de aproximadamente 5 microhenrys (5 uH), auxiliando ativamente na divisao das energias.",
+      "correctAnswer": true,
+      "explanation": "O Guia Finder pontua na secao Sistema de DPS e coordenacao de energia que a indutancia e introduzida automaticamente pelos cabos, sendo parametrizada a 1 uH/m, o que para 5 metros equivale aos citados 5 uH.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na classificacao do zoneamento contra raios, a zona identificada por LPZ 1 caracteriza-se por localizar-se estritamente no espaco aberto e a ceu aberto da construcao, regiao em que a corrente do raio e o respectivo campo eletromagnetico se mantem imunes e severos.",
+      "correctAnswer": false,
+      "explanation": "O Guia Finder define que a LPZ 1 situa-se no interior do edificio, depois do primeiro DPS, onde a corrente do raio e limitada e o campo ELM e atenuado. A zona sem atenuacoes na area externa e referida como LPZ 0A.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em consequencia do reflexo das ondas, as avaliacoes periciais relatam que devido ao espelhamento das ondas em pontas de cabo aberto, a tensao que se abate sobre as maquinas terminais nunca podera assumir valores superiores ao residual basico imposto pelo DPS.",
+      "correctAnswer": false,
+      "explanation": "A regra ensinada no documento do Finder relata a severidade deste disturbio alertando que em conformacao estacionaria as anomalias por rebatimento culminam em cenario no qual a tensao no fim da linha pode ate mesmo dobrar, atingindo 2 Ures.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para estipular as tolerancias com a influencia do pulso percorrendo fios compridos, as exigencias de calculos expressam a limitacao atraves de uma formula somando o nivel de protecao a uma parcela indutiva, no entanto o manual frisa que tal equacao perde a aplicabilidade se utilizada em lances de cabos medindo menos de 10 metros.",
+      "correctAnswer": true,
+      "explanation": "As indicacoes de dimensionamento listadas ao fim da secao de Distancia de protecao no Guia Finder atestam com a advertencia sobre a relacao de calculo pontuando que esta formula nao se aplica a menos de 10 m.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No trato dos niveis basicos de isolamento e protecao, aparelhos contendo microprocessadores de alta sensibilidade, como computadores (PCs) e televisores, encontram-se tabelados pelo manual normativo sob a Categoria de Instalacao ____, sendo mandatorio possuirem uma resistencia suportavel testada em fabrica equivalente a 1,5 kV.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "I"
+        }
+      ],
+      "explanation": "A documentacao descrita nas divisoes de categorias pelo fabricante Finder aponta para a Categoria de instalacao I, caracterizando equipamentos sensiveis submetidos aos testes de impulsos toleraveis focados em 1,5 kV.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Confinadas e tratadas pelas medidas mitigadoras da compatibilidade eletromagnetica, as areas enclausuradas que abrigam os equipamentos internos dispostos apos um estagio de DPS em duplicidade (insercao de um segundo protetor em cascata), ostentam pelo zoneamento normativo a qualificacao identificada como LPZ ____, ostentando grande reducao do raio e do campo.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "2"
+        }
+      ],
+      "explanation": "Na apresentacao dos topicos do zoneamento global extraida do Guia Finder, assevera-se que a LPZ 2 e a zona caracterizada pela inclusao de outro DPS, onde a corrente do raio e ainda mais limitada e o campo ELM e muito atenuado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O dimensionamento de barramentos em cascata voltado a uma apropriada ____ de energia impoe aos executores a previsao espacial das distancias para a ligacao sucessiva de dois DPSs de classes distintas, viabilizando as limitacoes seguras sem perigosas sobreposicoes que destruiriam o elemento mais sensivel da retaguarda.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "coordenacao"
+        }
+      ],
+      "explanation": "As clausulas de interatividade nos protetores redigidas no titulo Sistema de DPS e coordenacao de energia do Guia Finder elucidam as premissas deste arranjo de cascata para garantir que a coordenacao ocorre distanciando adequadamente os DPSs.",
+      "difficulty": "hard"
+    }
+  ]
+}

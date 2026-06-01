@@ -13,11 +13,11 @@
       "statement": "O que são os disparadores eletrônicos integrados aos modernos disjuntores de baixa tensão?",
       "options": [
         "Unidades de controle restritas a relés a gás Buchholz.",
-        "Módulos microprocessados que moldam as curvas LTD, STD, Instantâneo e Ground.",
+        "Componentes que invertem o fluxo de corrente contínua na subestação.",
         "Bobinas mecânicas que fecham contatos permanentemente sob vácuo.",
-        "Componentes que invertem o fluxo de corrente contínua na subestação."
+        "Módulos microprocessados que moldam as curvas LTD, STD, Instantâneo e Ground."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Disparadores eletrônicos são dispositivos acoplados aos disjuntores que permitem adequar a curva de disparo através das funções LTD, STD, Instantâneo e Ground.",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "Quantos e quais são os ajustes básicos da função STD (Short Time Delay)?",
       "options": [
         "Apenas um ajuste de corrente magnética.",
-        "Apenas um ajuste fixo de tempo em milissegundos.",
         "Dois ajustes independentes: um de corrente e outro de temporização.",
+        "Apenas um ajuste fixo de tempo em milissegundos.",
         "Três ajustes: corrente, tensão limitadora e tempo inverso."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A função de tempo curto (STD) possui dois ajustes principais: um de corrente e outro de temporização.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Como atua a bobina de disparo (shunt trip) de um disjuntor quando é acionada?",
       "options": [
-        "Destrava mecanicamente o dispositivo de liberação, provocando a abertura dos contatos.",
-        "Resfria o arco elétrico circulando gás SF6 na câmara de extinção.",
         "Carrega o conjunto de molas para o fechamento automático da linha.",
+        "Resfria o arco elétrico circulando gás SF6 na câmara de extinção.",
+        "Destrava mecanicamente o dispositivo de liberação, provocando a abertura dos contatos.",
         "Aumenta a impedância passiva do cabo de entrada limitando o curto."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "A bobina de disparo é energizada para produzir o destravamento mecânico da alavanca, liberando a abertura dos contatos.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "O que as siglas MCCB e ICCB representam nos disjuntores de baixa tensão?",
       "options": [
         "Disjuntores a pequeno e a grande volume de óleo isolante.",
-        "Disjuntores em caixa moldada e disjuntores em caixa isolada.",
+        "Disjuntores com acionamento manual e por gás SF6.",
         "Disjuntores a sopro magnético e disjuntores a vácuo.",
-        "Disjuntores com acionamento manual e por gás SF6."
+        "Disjuntores em caixa moldada e disjuntores em caixa isolada."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "MCCB refere-se aos disjuntores de caixa moldada, e ICCB aos disjuntores em caixa isolada.",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Qual a finalidade de ativar a característica 'I²t' na função STD do disjuntor de baixa tensão?",
       "options": [
-        "Neutralizar a corrente contínua do banco de baterias.",
-        "Tornar o disparo STD instantâneo sem retardo intencional.",
         "Acomodar e coordenar melhor a curva do disjuntor com fusíveis ou partidas de motores a jusante.",
+        "Tornar o disparo STD instantâneo sem retardo intencional.",
+        "Neutralizar a corrente contínua do banco de baterias.",
         "Inverter o sentido do fluxo de potência durante a frenagem."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Ligar a característica I²t na função STD molda a curva com rampa inversa, facilitando a coordenação térmica com fusíveis e partidas de motores a jusante.",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "O que caracteriza a atuação direta de um disjuntor de baixa tensão com disparadores internos?",
       "options": [
         "A medição é por TCs que enviam comando a uma bobina externa independente.",
-        "A proteção ocorre exclusivamente pelo software central via SCADA.",
         "O elemento sensor atua em série no circuito e usa a própria energia da falta para desarmar mecanicamente o disjuntor.",
+        "A proteção ocorre exclusivamente pelo software central via SCADA.",
         "A interrupção se dá unicamente por teleproteção de onda portadora."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "Na atuação direta, o disparador está no circuito de força e a energia da corrente de falta atua no mecanismo para separar os contatos, dispensando fonte auxiliar externa.",
       "difficulty": "medium"
     },
@@ -130,11 +130,11 @@
       "statement": "Por que a unidade instantânea de um disjuntor de entrada costuma ficar bloqueada?",
       "options": [
         "Para que a tensão de passo transitória não queime as bobinas do relé 59.",
-        "Porque um curto em qualquer saída a jusante causaria o desligamento geral indesejado.",
         "Pois as câmaras não suportam a extinção de correntes contínuas assimétricas.",
+        "Porque um curto em qualquer saída a jusante causaria o desligamento geral indesejado.",
         "Para acelerar a transferência entre disjuntores em paralelo NA e NF."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A unidade instantânea do disjuntor de entrada é bloqueada para preservar a seletividade; caso contrário, qualquer curto em saídas menores faria a entrada atuar junto.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A função 'Ground' nos disparadores eletrônicos é a unidade dedicada a detectar faltas fase-terra e proteger contra fugas à terra em baixa tensão.",
       "correctAnswer": true,
       "explanation": "Correto. A função Ground (terra) provê monitoramento e trip específico contra correntes residuais ou de falta à terra nos disparadores eletrônicos.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Se o ajuste 'I²t' estiver desligado (OFF) na função STD, a curva de tempo curto será do tipo 'reta' (tempo definido).",
       "correctAnswer": true,
       "explanation": "Correto. Com o I²t desligado para a função STD, a curva torna-se reta ('flat'), caracterizando um atraso de tempo constante/definido, sem declividade.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Disparadores de atuação indireta empregam a energia física direta do curto-circuito primário para acionar mecanicamente as alavancas do disjuntor.",
       "correctAnswer": false,
       "explanation": "Falso. Na atuação indireta, um relé detecta o defeito nos circuitos secundários (TCs/TPs) e envia comando a uma bobina de disparo (com fonte auxiliar) que abre o disjuntor.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O NEC orienta que o pick-up temporizado da proteção de terra em sistemas de BT solidamente aterrados não ultrapasse 1200 A.",
       "correctAnswer": true,
       "explanation": "Correto. Para sistemas de BT solidamente aterrados, o pick-up da unidade de terra não deve superar 1200 A, com atuação em 1 segundo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Na seletividade cronométrica, o disjuntor a jusante (mais próximo da carga) deve ter temporização maior que o disjuntor a montante.",
       "correctAnswer": false,
       "explanation": "Falso. É o inverso: o disjuntor mais próximo da falta (a jusante) deve ser o mais rápido (menor temporização), enquanto o de montante atua como retaguarda (maior temporização).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "No circuito de controle de um disjuntor de potência, a bobina responsável por destravar a mola a partir de um comando elétrico remoto é a bobina de _____.",
+      "statement": "No circuito de controle de um disjuntor de potência, a bobina responsável por destravar a mola a partir de um comando elétrico remoto é a bobina de ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Na modernização de painéis de BT, as curvas LTD e STD passaram a ser geradas com melhor flexibilidade por módulos conhecidos como disparadores _____.",
+      "statement": "Na modernização de painéis de BT, as curvas LTD e STD passaram a ser geradas com melhor flexibilidade por módulos conhecidos como disparadores ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para harmonizar a coordenação térmica com elos fusíveis a jusante, os disparadores microprocessados permitem ligar a característica limitadora térmica _____ diretamente na zona de tempo curto (STD).",
+      "statement": "Para harmonizar a coordenação térmica com elos fusíveis a jusante, os disparadores microprocessados permitem ligar a característica limitadora térmica ____ diretamente na zona de tempo curto (STD).",
       "blanks": [
         {
           "index": 0,

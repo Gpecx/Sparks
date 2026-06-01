@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "",
+  "categoryOrder": 4,
+  "module": "Softwares de Estudos Elétricos",
+  "moduleSubtitle": "Ferramentas de analise de sistemas eletricos de potencia",
+  "moduleOrder": 3,
+  "trail": "ANAREDE (CEPEL)",
+  "trailOrder": 5,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual é a principal finalidade do programa ANAREDE desenvolvido pelo CEPEL?",
+      "options": [
+        "Cálculo de transitórios eletromagnéticos e eletromecânicos.",
+        "Análise de sistemas elétricos de potência em regime permanente.",
+        "Dimensionamento de linhas de transmissão e controle de cheias.",
+        "Monitoramento de descargas parciais em equipamentos ativos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O ANAREDE é voltado para a Análise de sistemas elétricos de potência em regime permanente. (PRODUTOS-Eletrobras Cepel)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual é a abrangência do uso do software ANAREDE no setor elétrico brasileiro, de acordo com as fontes?",
+      "options": [
+        "É restrito a pequenas distribuidoras de energia e testes acadêmicos.",
+        "Ainda está em fase de prototipagem e não é utilizado comercialmente.",
+        "É o programa oficial utilizado pelo setor elétrico brasileiro.",
+        "Foi descontinuado e substituído pelo software ATP."
+      ],
+      "correctIndex": 2,
+      "explanation": "O ANAREDE é o programa oficial utilizado pelo setor elétrico brasileiro, amplamente validado desde a década de 1980. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Como é indicado graficamente o sentido do fluxo de potência ativa no diagrama unifilar do ANAREDE?",
+      "options": [
+        "Usando linhas tracejadas na cor verde claro.",
+        "Através de setas coloridas que apontam a direção do fluxo.",
+        "Pelo piscar intermitente dos nós com fluxo alto.",
+        "Apenas exibindo números de valor negativo ao lado da barra."
+      ],
+      "correctIndex": 1,
+      "explanation": "A interface possui a inclusão de seta no diagrama unifilar que permite identificar visualmente o sentido do fluxo de potência ativa. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "O que faz o Programa de Análise de Contingências integrado ao pacote do ANAREDE?",
+      "options": [
+        "Realiza um cálculo rápido de curtos-circuitos monofásicos nas barras.",
+        "Executa um conjunto de contingências sequencialmente para detectar dificuldades operativas severas.",
+        "Desenha diagramas em blocos para reguladores de velocidade e inércia.",
+        "Analisa transientes em cabos subterrâneos e pára-raios ZnO."
+      ],
+      "correctIndex": 1,
+      "explanation": "Ele executa sequencialmente um conjunto de contingências (perda de linha, gerador, etc.) monitorando a rede e ordenando os casos mais severos. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual a principal finalidade do Programa de Equivalente de Redes do ANAREDE?",
+      "options": [
+        "Simular transitórios rápidos de religamento monopolar.",
+        "Eliminar falhas de modelagem fundindo todas as barras PQ em uma swing.",
+        "Determinar um modelo reduzido de fluxo de potência que represente a resposta do sistema externo.",
+        "Converter todo o sistema de corrente alternada para um elo de corrente contínua."
+      ],
+      "correctIndex": 2,
+      "explanation": "A função é determinar um modelo reduzido que represente com precisão o sistema externo quando a área interna de interesse sofre um impacto. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "No diagrama unifilar do ANAREDE, qual é a função das ferramentas gráficas 'Split' (separar) e 'Merge' (unir)?",
+      "options": [
+        "Separar ou unir barras CA, realocando os equipamentos série e em derivação vinculados a elas.",
+        "Agrupar e desagrupar relatórios de fluxo ativo e reativo na interface DOS.",
+        "Dividir os circuitos de longa distância e uni-los como cabos equivalentes PI.",
+        "Separar falhas de convergência por áreas e uni-las no arquivo de log geral."
+      ],
+      "correctIndex": 0,
+      "explanation": "Split separa a barra transferindo seus equipamentos para uma nova, e Merge une duas barras agrupando todos os equipamentos nelas ligados. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual o uso principal do Programa de Fluxo de Potência Continuado (também parte do ANAREDE)?",
+      "options": [
+        "Resolver matrizes jacobianas exclusivas para curto-circuito em elos DC.",
+        "Determinar as margens de estabilidade de tensão e obter curvas PxV e QxV com o crescimento da demanda.",
+        "Efetuar redespacho otimizado de potência ativa nas barras PV sem alterar tap.",
+        "Estimar as potências perdidas devido às correntes induzidas em malhas desativadas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O fluxo continuado é utilizado para obter curvas PxV/QxV, avaliando as margens de estabilidade de tensão frente a cenários de crescimento de carga. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Ao utilizar o Método de Fluxo de Potência Linearizado (DC) do ANAREDE, qual é o erro percentual médio estimado para os circuitos mais sobrecarregados?",
+      "options": [
+        "Da ordem de ± 1%.",
+        "Da ordem de ± 5%.",
+        "Da ordem de ± 15%.",
+        "Da ordem de ± 30%."
+      ],
+      "correctIndex": 1,
+      "explanation": "As aproximações do fluxo DC permitem estimar os fluxos ativos com precisão aceitável, e o erro para circuitos muito sobrecarregados fica na ordem de ± 5%. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "No relatório gerado pelo Programa de Análise de Sensibilidade de Fluxo do ANAREDE, qual o significado da letra 'I' ao lado do fator?",
+      "options": [
+        "A contingência tornou o circuito inválido ou ilhado.",
+        "O carregamento daquele ramo atingiu o Limite de Intensidade térmica máxima.",
+        "A variação provocou uma alteração (inversão) no sentido do fluxo de potência monitorado.",
+        "As injeções de potências ativas violaram o limite imposto pela barra flutuante."
+      ],
+      "correctIndex": 2,
+      "explanation": "O 'I' indica que a ação provocou uma alteração no sentido original do fluxo no circuito que está sendo monitorado. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Qual é a principal vantagem operativa gerada pela individualização de elementos (como cargas e bancos shunt) introduzida nas atualizações do ANAREDE?",
+      "options": [
+        "Diminuir a dimensão da matriz jacobiana pela metade durante o método Newton-Raphson.",
+        "Desconsiderar resistências estáticas no fluxo DC para reduzir o tempo computacional.",
+        "Permitir converter topologias desbalanceadas em componentes simétricas.",
+        "Facilitar a definição do estado operativo (ligado/desligado) das unidades sem ter que calcular novos equivalentes de barras na alteração."
+      ],
+      "correctIndex": 3,
+      "explanation": "O estado (ligado/desligado) com unidades individualizadas evita a perda de dados e o recálculo frequente de elementos totais/equivalentes durante as contingências. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "A nova interface do ANAREDE dispõe do EditCEPEL, um editor próprio que facilita a criação e alteração de arquivos de dados PWF.",
+      "correctAnswer": true,
+      "explanation": "A nova interface dispõe do editor EditCEPEL, que destaca códigos de execução e suas opções para facilitar a edição dos arquivos. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "No ANAREDE, barras com módulo de tensão superior ao limite especificado são destacadas graficamente em tons crescentes de vermelho.",
+      "correctAnswer": true,
+      "explanation": "No modo de exibição de Violação de Tensão, barras acima do limite ficam vermelhas e barras abaixo do limite ficam azuis. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "A opção de execução ACFP (Avaliação de Casos de Fluxo de Potência) do ANAREDE serve para imprimir relatórios de transformadores que podem causar problemas à convergência.",
+      "correctAnswer": true,
+      "explanation": "A opção ACFP detecta e imprime relatórios sobre transformadores (radiais ou em paralelo) que podem impedir a convergência dos casos de fluxo. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "No ANAREDE, o símbolo gráfico de um gerador se altera caso sua potência ativa gerada seja zero, exibindo a letra 'S' em vez de 'G'.",
+      "correctAnswer": true,
+      "explanation": "O software ajuda o usuário a diferenciar geradores (G) de compensadores síncronos (S) avaliando se a potência ativa P é maior que zero. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "O Comparador de Casos (COMP) do ANAREDE analisa exclusivamente os ângulos e módulos das tensões das barras entre dois estados, não detalhando as alterações de geração e de carga.",
+      "correctAnswer": false,
+      "explanation": "O Comparador não analisa só tensões, mas fornece relatórios de Comparação de Geração e Carga Ativa/Reativa por área, inclusive exibindo razões matemáticas (B/A). (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "O ANAREDE dispõe de três métodos para solução do fluxo de potência: Desacoplado Rápido, de Newton e o Método ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Linearizado"
+        }
+      ],
+      "explanation": "O ANAREDE conta com os métodos Desacoplado Rápido, de Newton e Linearizado para calcular a solução do fluxo de potência. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "A opção de execução ____ realiza o tratamento das ilhas elétricas sem barra de referência, desligando de forma automática as barras não conectadas a ela.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ILHA"
+        }
+      ],
+      "explanation": "O comando ILHA evita erros ao desligar automaticamente as porções ilhadas da rede que não possuem uma barra de referência conectada. (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "Para elevar a capacidade de endereçamento das redes modernas, o ANAREDE passou a aceitar que as Barras CA sejam numeradas com até ____ dígitos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "5"
+        }
+      ],
+      "explanation": "Com o novo esquema de numeração, o programa passou a comportar barras CA com 5 dígitos (e dispõe de um conversor PWF p/ 5 dígitos para casos legados). (NOVAS FACILIDADES DE OPERAÇÃO DO PROGRAMA ANAREDE Luiz Eduardo Benevides Pequeno - Pantheon UFRJ)"
+    }
+  ]
+}

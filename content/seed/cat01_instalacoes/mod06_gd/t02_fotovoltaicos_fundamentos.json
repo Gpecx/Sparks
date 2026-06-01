@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "",
+  "categoryOrder": 0,
+  "module": "Geração Distribuída e Fotovoltaicos",
+  "moduleSubtitle": "Sistemas GD, fotovoltaicos, inversores, armazenamento e conexão à rede",
+  "moduleOrder": 5,
+  "trail": "Sistemas Fotovoltaicos - Fundamentos",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "O fenômeno responsável por converter a energia da luz do sol diretamente em energia elétrica é conhecido como:",
+      "options": [
+        "Efeito fotoelétrico.",
+        "Efeito de recombinação.",
+        "Efeito fotovoltaico.",
+        "Efeito térmico."
+      ],
+      "correctIndex": 2,
+      "explanation": "O efeito fotovoltaico foi constatado pela primeira vez em 1839 na França pelo físico Alexandre Edmond Becquerel (Fonte 2)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Na composição de uma Central Geradora Solar (CGS), qual é a ordem correta de agrupamento dos elementos fundamentais?",
+      "options": [
+        "Módulos, Arranjos, Células.",
+        "Células, Arranjos, Módulos.",
+        "Arranjos, Módulos, Células.",
+        "Células, Módulos, Arranjos."
+      ],
+      "correctIndex": 3,
+      "explanation": "As células fotovoltaicas são montadas em módulos, que por sua vez são agrupados em arranjos para formar a central geradora (Fonte 3)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Sobre as tecnologias de células de silício cristalizado, qual apresenta a maior eficiência na conversão elétrica?",
+      "options": [
+        "Silício Policristalino (p-Si) com 13% a 15%.",
+        "Sulfato de Cádmio (CdS) com até 16%.",
+        "Silício Monocristalino (m-Si) com 15% a 18%.",
+        "Microinversor com 20%."
+      ],
+      "correctIndex": 2,
+      "explanation": "Células de silício monocristalino possuem a maior eficiência, entre 15% e 18%, por utilizarem uma forma mais pura de silício (Fonte 2)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Em sistemas fotovoltaicos conectados à rede (on-grid), qual componente é adicionado para padronizar a geração com a tensão e frequência da concessionária?",
+      "options": [
+        "Bateria de armazenamento.",
+        "Inversor/condicionador de potência.",
+        "Controlador de carga.",
+        "Retificador de tensão D.C."
+      ],
+      "correctIndex": 1,
+      "explanation": "O inversor/condicionador de potência tem a finalidade de compatibilizar a energia da geração fotovoltaica com o padrão da rede conectada (Fonte 3)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Como é chamado o sistema fotovoltaico independente da rede elétrica principal que apresenta um gerador secundário para auxiliar no abastecimento das cargas?",
+      "options": [
+        "Sistema fotovoltaico conectado à rede.",
+        "Sistema diretamente acoplado.",
+        "Sistema fotovoltaico híbrido.",
+        "Microgeração de fonte intermitente."
+      ],
+      "correctIndex": 2,
+      "explanation": "O sistema híbrido é independente, mas possui um gerador secundário para auxiliar, junto aos painéis, no abastecimento das cargas ou baterias (Fonte 3)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "De acordo com os requisitos de segurança, qual é o tempo máximo que o sistema de geração distribuída tem para cessar o fornecimento de energia após a perda da rede (ilhamento)?",
+      "options": [
+        "1 segundo.",
+        "2 segundos.",
+        "10 segundos.",
+        "300 segundos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A proteção contra ilhamento determina que o sistema deve cessar de fornecer energia à rede em até 2 segundos após a perda da rede (Fonte 6)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "O que caracteriza a operação de um microinversor solar em comparação aos inversores tradicionais (string inverters)?",
+      "options": [
+        "Impede o uso em telhados com diferentes orientações.",
+        "Converte energia DC para AC diretamente no nível de cada painel.",
+        "Centraliza a conversão de toda a energia do sistema.",
+        "Diminui a visibilidade de performance do sistema."
+      ],
+      "correctIndex": 1,
+      "explanation": "O microinversor converte eletricidade DC em AC no nível de cada painel, permitindo operação independente e evitando perdas por sombreamento (Fonte 5)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Na fabricação de um módulo fotovoltaico (placa solar), qual material orgânico é comumente utilizado em camadas para encapsular as células conectadas?",
+      "options": [
+        "Vidro temperado.",
+        "Alumínio anodizado.",
+        "EVA (etileno-vinil-acetato).",
+        "Sulfato de Cádmio (CdS)."
+      ],
+      "correctIndex": 2,
+      "explanation": "As placas solares utilizam películas de EVA (etileno-vinil-acetato) para o encapsulamento e proteção das células fotovoltaicas (Fonte 2)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Após uma desconexão causada por uma condição anormal na rede, qual é a faixa de tempo exigida para que o sistema de geração distribuída retome o fornecimento de energia (reconexão)?",
+      "options": [
+        "Imediatamente após a rede normalizar.",
+        "De 1 a 10 segundos.",
+        "De 20 a 300 segundos.",
+        "Acima de 600 segundos."
+      ],
+      "correctIndex": 2,
+      "explanation": "A reconexão automática do sistema só deve ocorrer por um período de 20 a 300 segundos após o retorno das condições normais da rede (Fonte 6)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual modalidade do Sistema de Compensação permite que a energia gerada em um local seja compensada em outro, desde que as unidades consumidoras sejam do mesmo titular?",
+      "options": [
+        "Autoconsumo local.",
+        "Geração compartilhada.",
+        "Múltiplas unidades consumidoras.",
+        "Autoconsumo remoto."
+      ],
+      "correctIndex": 3,
+      "explanation": "O autoconsumo remoto ocorre quando a compensação da energia excedente é feita em unidades de mesma titularidade localizadas em endereços diferentes (Fonte 4)."
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "O percentual de luz aproveitado por uma célula solar pode ser reduzido por perdas provocadas pelo sombreamento dos contatos frontais.",
+      "correctAnswer": true,
+      "explanation": "O sombreamento dos contatos frontais e a resistência em série são fatores que causam perdas de eficiência na célula solar (Fonte 2).",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "O sistema de compensação de energia elétrica exige a utilização de um medidor de energia ativa bidirecional na unidade consumidora.",
+      "correctAnswer": true,
+      "explanation": "O medidor bidirecional é necessário para diferenciar a energia ativa consumida da energia elétrica ativa que é injetada na rede da distribuidora (Fonte 6).",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "A microgeração distribuída é definida como uma central geradora com potência instalada superior a 75 kW e menor ou igual a 3 MW.",
+      "correctAnswer": false,
+      "explanation": "A microgeração abrange centrais com potência menor ou igual a 75 kW; o limite superior a 75 kW caracteriza a minigeração distribuída (Fonte 4).",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "O sistema de geração distribuída deve parar de fornecer energia à rede em 1 segundo se a injeção de componente C.C. for superior a 0,5% da corrente nominal do inversor.",
+      "correctAnswer": true,
+      "explanation": "O limite para injeção de componente de corrente contínua (C.C.) na rede elétrica é de 0,5%, exigindo desconexão em até 1 segundo (Fonte 6).",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "Em sistemas fotovoltaicos autônomos com armazenamento, o controlador de carga extrai a energia diretamente do inversor para alimentar a carga quando não há geração solar.",
+      "correctAnswer": false,
+      "explanation": "Quando não há geração solar, o controlador de carga extrai a energia armazenada nas baterias, e não do inversor, para a carga (Fonte 3).",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "Um sistema fotovoltaico diretamente acoplado fornece potência em Corrente ____ diretamente para a carga.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Contínua"
+        }
+      ],
+      "explanation": "Esses sistemas independentes fornecem potência em Corrente Contínua (DC) sem necessitar de baterias ou inversores para a carga (Fonte 3)."
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "No Sistema de Compensação de Energia Elétrica (SCEE), o prazo de validade dos créditos de energia excedente gerados é de ____ meses.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "60"
+        }
+      ],
+      "explanation": "A energia excedente gerada é transformada em crédito válido para compensação pelo prazo de 60 meses (Fonte 4)."
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "Sistemas de geração com potência nominal de até 3 kW devem operar com fator de potência igual a 1, tolerando uma faixa de 0,98 indutivo até 0,98 ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "capacitivo"
+        }
+      ],
+      "explanation": "Sistemas menores ou iguais a 3 kW possuem tolerância de fator de potência entre 0,98 indutivo e 0,98 capacitivo (Fonte 6)."
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Softwares de Estudos Elétricos",
+  "moduleSubtitle": "PowerFactory, ETAP, PSS/E, PTW, ANAREDE, ANAFAS, Organon, PSCAD e ATP/EMTP",
+  "moduleOrder": 3,
+  "trail": "Fundamentos de Software de Estudos Elétricos",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o principal papel dos softwares de simulacao digital nos estudos eletricos modernos?",
+      "options": [
+        "Reduzir a tensao de operacao das linhas de transmissao longas.",
+        "Apenas desenhar os diagramas unifilares sem processar dados algebricos.",
+        "Eliminar a necessidade de reles fisicos nas subestacoes prediais.",
+        "Substituir calculos manuais e analisadores de rede analogicos em sistemas complexos."
+      ],
+      "correctIndex": 3,
+      "explanation": "A evolucao dos computadores digitais tornou atrativo o desenvolvimento de metodos computacionais para substituir analisadores analogicos e calculos manuais laboriosos nas redes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No software PTW SKM, qual interface principal e utilizada para inserir e gerenciar os parametros eletricos detalhados de cada equipamento do sistema?",
+      "options": [
+        "Component Editor.",
+        "Data Visualizer.",
+        "Time Current Coordinator.",
+        "Reliability Evaluation."
+      ],
+      "correctIndex": 0,
+      "explanation": "O editor de componentes permite a entrada de dados dos componentes do sistema eletrico, caracterizando cada um para todos os tipos de estudo a serem executados.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a funcao basica do modulo CAPTOR dentro do pacote de software PTW?",
+      "options": [
+        "Calcular as quedas de tensao e o fluxo de potencia ativa e reativa da malha.",
+        "Tracar as curvas de tempo versus corrente para analise de coordenacao e seletividade.",
+        "Simular dinamicamente a partida de motores de grande porte da planta.",
+        "Determinar a distorcao harmonica total de tensao imposta pela concessionaria."
+      ],
+      "correctIndex": 1,
+      "explanation": "O estudo do CAPTOR traca as caracteristicas de tempo e corrente da coordenacao para proteger o sistema e verificar o ajuste das protecoes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para simplificar os calculos e unificar os diferentes niveis de tensao nos algoritmos dos softwares, os parametros eletricos sao convertidos para.",
+      "options": [
+        "Constantes resistivas exclusivas de sequencia zero.",
+        "Fatores de assimetria de crista transversais.",
+        "Valores em por unidade ou pu.",
+        "Valores nominais em kiloVolts absolutos estritos."
+      ],
+      "correctIndex": 2,
+      "explanation": "O sistema de valores em por unidade e adotado nos softwares computacionais para lidar com a multiplicidade de niveis de tensao interligados, facilitando incrivelmente as simulacoes matriciais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual modulo do software PTW e especificamente projetado para executar a simulacao dinamica da partida de motores de inducao?",
+      "options": [
+        "Modulo I SIM.",
+        "Modulo DAPPER.",
+        "Modulo HI WAVE.",
+        "Modulo TMS."
+      ],
+      "correctIndex": 3,
+      "explanation": "O estudo do TMS (Transient Motor Starting) executa a simulacao dinamica de partida de motores modelando o arrasto de carga e o conjugado da rede.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que a literatura recomenda estabelecer um caso base inicial preciso ao modelar um estudo de fluxo de carga no computador?",
+      "options": [
+        "Para representar condicoes conhecidas do sistema e validar o modelo computacional checando com a experiencia real de operacao.",
+        "Para forcar os geradores rotativos a operarem com rendimento maximo teorico e ignorar as perdas relativas no nucleo.",
+        "Para minimizar o tempo gasto pela CPU na compilacao logica e matematica da matriz de admitancia nodal do programa.",
+        "Para apagar automaticamente todos os registros de curtos-circuitos transitorios anteriores armazenados na memoria ram."
+      ],
+      "correctIndex": 0,
+      "explanation": "O caso base representa configuracoes e cargas sob condicoes reais conhecidas, permitindo comparar os resultados teoricos e atestar a validade fiel do modelo construido.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em relacao a avaliacao da seguranca na rede, como o software PTW auxilia o engenheiro visualmente a encontrar componentes submetidos a sobrecarga.",
+      "options": [
+        "Destacando e iluminando em cores os componentes reprovados diretamente sobre a tela do diagrama unifilar.",
+        "Desligando automaticamente os disjuntores virtuais dos elementos defeituosos das simulacoes de fluxo de carga.",
+        "Apagando temporariamente as linhas de transmissao do desenho grafico atrelado ao banco de capacitores em falha.",
+        "Mudando a cor de fundo da tela inteira do programa para alertar erros severos de compilacao na placa de video."
+      ],
+      "correctIndex": 0,
+      "explanation": "O software possui a ferramenta Highlight Failed Components para destacar diretamente no diagrama os equipamentos fisicos que falharam nos criterios limites normativos das avaliacoes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a vantagem utilitaria da aplicacao de bibliotecas de equipamentos integradas aos modernos softwares de estudos eletricos industriais?",
+      "options": [
+        "Eliminar completamente a necessidade de se instalar reles de retaguarda analogicos nas cabines primarias subjacentes.",
+        "Agilizar a rapida construcao do sistema ao fornecer dados reais padronizados e editaveis de cabos, transformadores e reles.",
+        "Reduzir de forma fisica o nivel absoluto de curto-circuito injetado na barra fornecedora principal da concessionaria publica.",
+        "Converter de forma automatizada redes configuradas em sistemas radiais instaveis para lacos de operacao em anel fechado."
+      ],
+      "correctIndex": 1,
+      "explanation": "O software incorpora vastas bibliotecas amigaveis contendo caracteristicas testadas de fabricantes, acelerando a definicao construtiva agilizando drasticamente o desenho final do projeto.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na parametrizacao do fluxo de carga do PTW DAPPER, o que os manuais sugerem fazer se o balanco nodal do sistema recusar a convergir utilizando o.",
+      "options": [
+        "Ajustar os fatores de aceleracao iterativa da geracao e da carga testando valores compreendidos estritamente entre 0,1 e 1,0.",
+        "Substituir todos os isolantes dos cabos de baixa tensao subterraneos por modelagens tipicas de barramentos blindados expostos.",
+        "Multiplicar intencionalmente as potencias ativas nominais das linhas por dez visando estabilizar provisoriamente o erro matematico.",
+        "Forcar a conversao logica e compulsoria de todas as maquinas geradoras sincronas em atuadores passivos do tipo motores de inducao."
+      ],
+      "correctIndex": 0,
+      "explanation": "Se ocorrer divergencia iterativa no metodo de convergencia, o projetista deve alterar o Generation Acceleration Factor e o Load Acceleration Factor situando a taxa em fator entre 0,1 e 1,0.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a plataforma PTW gerencia sistematicamente as adequacoes pontuais de topologia elaboradas pelo operador quando se utiliza ativamente a.",
+      "options": [
+        "A respectiva alteracao local fica armazenada restritamente apenas no cenario modificado avaliado, aparecendo diferenciada visualmente por uma cor de realce distinta.",
+        "A respectiva mudanca parametrica e compulsoriamente imposta por lote e forcada a todos os cenarios base adjuntos, apagando irremediavelmente e alterando dados originais sem consultas.",
+        "O modulo sistemico exige compulsoriamente a longa criacao de um novo diretorio de projeto em branco separado para computar isoladamente qualquer minima alteracao de topologia dos componentes.",
+        "O gerenciador de cenario bloqueia automaticamente as indevidas alteracoes de extensao e comprimento fisico de cabeamento objetivando proteger e reter as grandezas de impedancia fixas primordiais."
+      ],
+      "correctIndex": 0,
+      "explanation": "Na aplicabilidade dos Scenarios o programa grava as alteracoes exclusivas e distantes atreladas somente no proprio cenario adotado modificado e destaca graficamente de imediato essas alteracoes isoladas com cores unicas sem suprimir o caso base original.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A construcao de um projeto completo no software PTW impoe necessariamente o uso pre-definido de bases de dados separadas e totalmente independentes.",
+      "correctAnswer": false,
+      "explanation": "Os manuais indicam exatamente o oposto afirmando que o PTW utiliza inteligentemente uma mesma e unica base de dados integradora para suprir todos os seus modulos complementares de estudo de forma coesa e unificada.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As orientacoes diretivas estipulam que o formato dos relatorios computacionais textuais de saida dos estudos documentem e listem minuciosamente.",
+      "correctAnswer": true,
+      "explanation": "O livro marrom atesta que o output report deve listar de maneira legivel as entradas da base de dados garantindo que o projetista verifique o lastro original das variaveis simuladas validadas nos anos sucessivos.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na praxe de simulacoes visando atestar o rompimento estrito originado por correntes subtransitorias de curtos as diretrizes analiticas inseridas.",
+      "correctAnswer": true,
+      "explanation": "As hipoteses adotadas nas rotinas computacionais para curtos desconsideram as cargas estaticas habituais perante a avassaladora predominancia da intensidade da corrente reativa gerada que circula unicamente concentrada alimentando as curtas malhas fechadas faltosas.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ferramentas analiticas consagradas no meio corporativo industrial do porte do aplicativo DIgSILENT PowerFactory servem fundamentalmente operando.",
+      "correctAnswer": true,
+      "explanation": "Estudos pautados no emprego do PowerFactory confirmam cabalmente as aplicabilidades desses tracados coordenogramas no estabelecimento visual fiavel e adequado garantindo sobreposicao logica segura das sensiveis limitacoes de sobrecorrente contra limites categoricos das curvas danosas.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O submodulo flexivel funcional de analise em planilha apelidado de Data Visualizer restringe suas comparacoes unicamente avaliando passivamente.",
+      "correctAnswer": false,
+      "explanation": "O ambiente descrito pelas literaturas assegura e salienta claramente que a matriz Data Visualizer interage nos dois sentidos, ou seja, alteracoes inseridas dinamicamente nas tabelas de tela modificam ativamente e refletem consolidando permanentemente sobre o banco relacional na base de dados raiz de registros operacionais e componentes unicos.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nas configuracoes estaveis dos simuladores SKM o submodulo grafico especificamente projetado para viabilizar tracados logaritmos desenhando ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "CAPTOR"
+        }
+      ],
+      "explanation": "O CAPTOR (Computer Aided Plotting for Time Overcurrent Reporting) constitui o modulo que analisa tolerancias e margens protetivas logicas dos coordenogramas visando atestar conformidade preventiva do intertravamento sistemico perante as anomalias elétricas de fase.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No trato minucioso das grandes manipulacoes logicas filtrando exaustivamente dados do pacote PTW a funcionalidade logica empregada baseada ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Query"
+        }
+      ],
+      "explanation": "Uma Query executa ativamente varreduras focadas operando e pesquisando nas raizes dos dados dos componentes as estritas informacoes desejadas pelo pesquisador para fins exatos filtrando exibicoes confusas perante grandes volumes dos arquivos do desenho computado logico unifilar isolador das avaliacoes conjuntas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos programas elaboradores de fluxos algebricos matriciais focados no laco a facilidade resolutiva contornando a intricada operacao originada ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "unidade"
+        }
+      ],
+      "explanation": "A engenharia superou a grande dificuldade de transitar entre fracoes tensionais operacionais convertendo valores base dos componentes no que conhecemos em programas estáticos universais por sistema por unidade ou sigla puramente em pu igualando lacos e dispensando as constantes variacoes refletidas de espiras em cálculos iterativos longos baseados referenciando correntes reais plenas originais dos modelos trifasicos matriciais de Newton.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Fundamentos de Automação Industrial",
+  "moduleSubtitle": "Conceitos, componentes, malhas de controle e SPCS",
+  "moduleOrder": 0,
+  "trail": "Arquiteturas e Topologias (Pirâmide CIM, ISA-95)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Na pirâmide de automação estruturada pela norma ISA-95, quais equipamentos compõem predominantemente o primeiro nível da hierarquia?",
+      "options": [
+        "Sistemas complexos de gestão ERP e inteligência de negócios corporativos.",
+        "Controladores lógicos programáveis instalados em painéis centrais.",
+        "Sensores, atuadores, transmissores e dispositivos primários de campo.",
+        "Softwares visuais do tipo SCADA e estações dedicadas de IHM."
+      ],
+      "correctIndex": 2,
+      "explanation": "O primeiro nível, também considerado a base, é majoritariamente formado por dispositivos em contato com o processo, como atuadores e sensores (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a finalidade técnica essencial dos equipamentos e módulos dispostos no Nível 2 da pirâmide de automação?",
+      "options": [
+        "Processar cálculos financeiros para a alta diretoria corporativa.",
+        "Realizar de modo efetivo e automatizado o controle das atividades da planta.",
+        "Exibir relatórios estritamente focados na rastreabilidade final de faturamento.",
+        "Fornecer apenas sinais passivos e dados discretos brutos sem tomar decisões."
+      ],
+      "correctIndex": 1,
+      "explanation": "O segundo nível compreende os CLPs e SDCDs criados para executar ativamente o controle automático dos processos industriais da planta (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na classificação hierárquica baseada na norma ISA-95, a qual nível pertence o software de supervisão dos processos (SCADA)?",
+      "options": [
+        "Nível 1.",
+        "Nível 2.",
+        "Nível 3.",
+        "Nível 5."
+      ],
+      "correctIndex": 2,
+      "explanation": "O terceiro nível destina-se explicitamente à supervisão das etapas produtivas com uso de Workstations e sistemas visuais do tipo SCADA (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Dentro de uma arquitetura alinhada com a ISA-95, o que recai essencialmente sobre a esfera de ação dos sistemas classificados como MES?",
+      "options": [
+        "Abrir mecanicamente os respiros térmicos acionados por tiras bimetálicas.",
+        "Garantir estritamente a transmissão via rádio de variáveis meteorológicas.",
+        "Efetuar a gestão centralizada da produção e a rastreabilidade contínua na fábrica.",
+        "Conduzir todo o fechamento contábil e as negociações financeiras de alto nível."
+      ],
+      "correctIndex": 2,
+      "explanation": "A principal missão do Sistema de Execução da Manufatura (MES) consiste em gerenciar e oferecer rastreabilidade às dinâmicas do chão de fábrica (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza o escopo de funcionamento de um sistema de planejamento corporativo (ERP) na integração arquitetônica da indústria?",
+      "options": [
+        "A modulação veloz de frequência harmônica nas inversoras acopladas a motores.",
+        "A coleta em milissegundos de leituras de pressão manométrica via rede serial pura.",
+        "A tomada de decisões voltadas ao intertravamento isolado em caldeiras tubulares.",
+        "A atuação direta no planejamento logístico global e na gestão corporativa de recursos."
+      ],
+      "correctIndex": 3,
+      "explanation": "O ERP consolida-se na camada executiva liderando as integrações referentes ao planejamento e gerenciamento amplos dos recursos organizacionais (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O modelo genérico denominado CIM (Computer Integrated Manufacturing) engloba que porção estrutural da automação em uma planta?",
+      "options": [
+        "As ilhas descentralizadas contendo temporizadores analógicos de vidro cego.",
+        "O topo da arquitetura que entrelaça o sistema de manufatura ao planejamento de negócios.",
+        "Somente o barramento nativo reservado para transmissores de leitura local de 4 a 20 mA.",
+        "A base operacional de conversores de campo para uso unicamente mecânico e fixo."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conceitualmente, o padrão CIM acomoda-se nas camadas mais elevadas visando atrelar diretamente a produção ao plano corporativo macro (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o princípio moderno de integração abrangente de sistemas de automação defende metodologicamente?",
+      "options": [
+        "Separação extrema em ilhas opacas para isolar fisicamente cada CLP montado.",
+        "Comunicações verticais para fluidez de dados atreladas a ligações horizontais cooperativas.",
+        "A exclusão irreversível dos roteadores dedicados em toda instalação do Nível 3.",
+        "Bloqueio mandatório de fluxos corporativos voltados às instâncias puras de produção."
+      ],
+      "correctIndex": 1,
+      "explanation": "A integração real orquestra a comunicação vertical entre as diferentes camadas com o intercâmbio horizontal focado em compartilhar dados comuns (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A convergência interconectada de redes de Tecnologia da Informação (TI) com o chão de fábrica (TO) costuma infligir qual tipo de desvantagem crítica?",
+      "options": [
+        "Provoca falência física imediata em conversores estritos de termopares velhos.",
+        "Expõe a camada operacional de manufatura a vulnerabilidades e agressões cibernéticas.",
+        "Congela as capacidades de processar rotinas ladder simples baseadas em relés secos.",
+        "Inviabiliza a adoção de IHMs em formato de tela de toque para operadores em cabines."
+      ],
+      "correctIndex": 1,
+      "explanation": "O elo entre redes de negócio (TI) e malhas ativas de máquinas (TO) acarreta forte ameaça por elevar severamente os riscos de invasão via internet (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como atua usualmente o microprocessador de otimização tipicamente posicionado na arquitetura superior das antigas malhas de controle computacional?",
+      "options": [
+        "Abre válvulas e atua em cilindros reativos acatando frequências restritas de milissegundos puros.",
+        "Roda o sistema tributário nacional para recalcular cotações e repassar imposto às receitas.",
+        "Gera e armazena os esquemas elétricos puros que acionam estritamente lâmpadas de alerta local.",
+        "Estabelece critérios demorados que buscam maior eficiência geral e ótimo consumo de recursos energéticos."
+      ],
+      "correctIndex": 3,
+      "explanation": "Níveis elevados contendo microprocessadores de otimização aplicam algoritmos demorados orientados a estabelecer políticas de rendimento e conservação energética (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na comunicação das arquiteturas corporativas, qual benefício um servidor concentrador Real Time Data Base (RTDB) fornece acessando o SDCD via Gateway dedicado?",
+      "options": [
+        "Previne uma carga massiva de solicitações SQL corrompendo a rede e atrasando o processamento primário da própria planta.",
+        "Substitui os processadores do painel analógico garantindo que o acionamento de alarme só aconteça se a matriz ordenar.",
+        "Destrói o vínculo físico das unidades remotas (RTU) criando redes aéreas baseadas em sinais acústicos puramente locais.",
+        "Desliga de modo seguro os firewalls internos pois concentra em si todas as políticas exclusivas e intransponíveis de segurança web."
+      ],
+      "correctIndex": 0,
+      "explanation": "Utilizar servidor RTDB independente em arquitetura extrai o peso da requisição de informações mantendo a agilidade de tempo de resposta intrínseca dos SDCDs (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O quinto nível da pirâmide foca estritamente em realizar manobras mecânicas de segurança no chão de fábrica em caso de emergência elétrica.",
+      "correctAnswer": false,
+      "explanation": "O quinto nível ou ápice encarrega-se estritamente do planejamento estratégico e da administração de recursos corporativos macro da empresa (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A pirâmide da automação segmenta o fluxo delegando o controle de máquina aos níveis inferiores, enquanto dados gerenciais ascendem aos níveis superiores.",
+      "correctAnswer": true,
+      "explanation": "As bases da pirâmide mantêm controle em tempo real dos dispositivos, fornecendo suporte para as análises gerenciais tratadas nos níveis superiores (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No sistema hierárquico padrão consolidado no setor as redes SCADA compõem a camada de Nível 3 operando as estações de monitoramento das células.",
+      "correctAnswer": true,
+      "explanation": "Conforme a norma que organiza as fábricas, a camada 3 hospeda tradicionalmente o domínio dos pacotes de softwares em rede focados em supervisão SCADA (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O fluxo dinâmico estabelecido nas pirâmides de automação induz o modelo de negócio corporativo a computar e aplicar pessoalmente a lógica PID nos atuadores.",
+      "correctAnswer": false,
+      "explanation": "Em toda pirâmide consistente a função ágil e direta do cálculo de PID ocorre estritamente na malha autônoma das bases sem pedir comando logístico da matriz (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A expansão técnica de modelos locais focados em Edge Computing descarta por padrão a estrutura e as exigências normativas de rastreabilidade pregadas pela ISA-95.",
+      "correctAnswer": false,
+      "explanation": "Sistemas formatados em Edge AI somam inteligência descentralizada complementando mas não suprimindo a base robusta de gestão MES padronizada pela ISA-95 (Edge AI na Indústria).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O quarto nível focado em programação geral e logística dos suprimentos operacionais recebe o nome de Gerenciamento da ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Planta"
+        }
+      ],
+      "explanation": "O quarto escalão concentra os sistemas focados no controle produtivo geral e leva o título técnico de Gerenciamento da Planta ou Workstation (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A forte aproximação unindo a área de gestão corporativa (____) e os protocolos da área operacional amplia a eficiência e as ameaças da rede fabril integrada.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "TI"
+        }
+      ],
+      "explanation": "A integração veloz entre ambientes de Tecnologia da Informação (TI) e ambientes operativos (TO) define os avanços interconectados vigentes nas plantas (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Dividindo obrigações no segundo nível fabril focado no rigor do processo juntamente com o robusto CLP marcam presença os contínuos ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SDCDs"
+        }
+      ],
+      "explanation": "Sistemas Digitais de Controle Distribuído (SDCDs) compartilham organicamente o Nível 2 juntamente aos CLPs efetuando as ações essenciais ativas na automação (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "hard"
+    }
+  ]
+}

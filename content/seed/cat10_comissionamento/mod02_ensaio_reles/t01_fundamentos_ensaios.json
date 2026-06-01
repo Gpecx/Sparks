@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Como a mala de testes avalia as funções de proteção de um relé digital?",
       "options": [
-        "Injetando fasores configuráveis de tensão e corrente nas entradas.",
-        "Alterando mecanicamente o fluxo do núcleo do TC.",
         "Elevando a temperatura ambiente do painel.",
+        "Alterando mecanicamente o fluxo do núcleo do TC.",
+        "Injetando fasores configuráveis de tensão e corrente nas entradas.",
         "Medindo a resistência de isolação dos circuitos."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "A mala simula faltas aplicando fasores controlados de corrente, tensão, frequência e ângulo. (Fonte: Ensaio de Reles Avançado_PECS).",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "Na injeção secundária para teste da função 21 (distância), quais grandezas a mala aplica ao relé?",
       "options": [
         "Apenas tensão residual homopolar.",
-        "Tensões, correntes e defasagens angulares simultâneas.",
+        "Correntes de sequência zero isoladamente.",
         "Apenas corrente contínua para medição ôhmica.",
-        "Correntes de sequência zero isoladamente."
+        "Tensões, correntes e defasagens angulares simultâneas."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O ensaio de distância exige injeção simultânea de tensão, corrente e ângulo para compor a impedância (R-X). (Fonte: Ensaio de Reles Avançado_PECS).",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "O que deve ser garantido durante a simulação de trip para não desligar a carga real inadvertidamente?",
       "options": [
-        "A elevação da tensão nominal do sistema.",
         "O isolamento físico ou lógico do circuito de saída externo.",
+        "A elevação da tensão nominal do sistema.",
         "O fechamento da chave de terra da linha.",
         "O bypass do transformador de potencial."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Para evitar desligamentos indevidos, a saída (trip) deve ser isolada da automação externa durante testes. (Fonte: Virtus_CProtBL2Cd3).",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Como a função diferencial (87) é aferida pela mala de testes na injeção secundária?",
       "options": [
         "Injetando apenas sobretensões transitórias.",
-        "Simulando correntes de operação e correntes de restrição para checar o slope.",
         "Aplicando saltos de vetor de frequência puros.",
+        "Simulando correntes de operação e correntes de restrição para checar o slope.",
         "Medindo a reatância transitória do equipamento."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A função 87 é testada simulando correntes nas entradas para validar a região de operação (Idif x Irest). (Fonte: Ensaio de Reles Avançado_PECS).",
       "difficulty": "medium"
     },
@@ -91,11 +91,11 @@
       "statement": "Qual é a utilidade das bandas de tolerância (% e absoluta) nos testes automatizados de relés?",
       "options": [
         "Eliminar a calibração periódica da mala de testes.",
-        "Aceitar pequenos desvios aceitáveis entre os valores esperados e os reais medidos.",
+        "Reduzir a potência aparente (burden) injetada pelo instrumento.",
         "Modificar automaticamente o firmware interno do relé.",
-        "Reduzir a potência aparente (burden) injetada pelo instrumento."
+        "Aceitar pequenos desvios aceitáveis entre os valores esperados e os reais medidos."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "As tolerâncias (ex: Tol. t % = 5%) definem os limites de erro aceitáveis para aprovar automaticamente o ensaio. (Fonte: Ensaio de Reles Avançado_PECS).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Para ensaiar corretamente a função 51V, a mala de testes deve injetar variação de quais parâmetros?",
       "options": [
-        "Tensão e Frequência simultaneamente.",
         "Corrente e Tensão simultaneamente.",
+        "Tensão e Frequência simultaneamente.",
         "Corrente e Temperatura seqüencialmente.",
         "Potência Ativa e Potência Reativa."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A função 51V (sobrecorrente com restrição de tensão) exige a injeção conjunta de V e I para aferir a curva mista. (Fonte: Ensaio de Reles Avançado_PECS).",
       "difficulty": "medium"
     },
@@ -130,11 +130,11 @@
       "statement": "No ensaio da proteção direcional (67 ou 32), qual grandeza atua como referência fixa para a mala de testes?",
       "options": [
         "A corrente de sequência zero filtrada.",
-        "A tensão de polarização com ângulo de referência definido.",
         "A corrente contínua da fonte auxiliar.",
+        "A tensão de polarização com ângulo de referência definido.",
         "O harmônico de quinta ordem da fase."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A tensão de polarização serve como referência angular para o relé determinar o sentido do fluxo no ensaio. (Fonte: Virtus_CProtBL2Cd1).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A injeção secundária aplica fasores diretamente nos bornes do relé, dispensando a necessidade de elevar altas correntes no circuito primário.",
       "correctAnswer": true,
       "explanation": "O teste por injeção secundária conecta a mala diretamente às entradas do relé, simulando fielmente as saídas dos TCs. (Fonte: Cabine Primária).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No ensaio de atuação temporal, qualquer desvio de 0,05 segundos reprova o relé sumariamente, independentemente da tolerância parametrizada.",
       "correctAnswer": false,
       "explanation": "A reprovação depende das bandas de tolerância relativa e absoluta (ex: Tol. t Abs.: 0,03 s) ajustadas no software da mala. (Fonte: Ensaio de Reles Avançado_PECS).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O teste do elemento de sobrecorrente instantâneo (50) valida primordialmente o limiar de pick-up e o tempo próprio do hardware, sem curvas inversas.",
       "correctAnswer": true,
       "explanation": "A função 50 atua sem retardo intencional, assim o teste afere apenas a corrente de partida e o curto tempo de disparo. (Fonte: Ensaio de Reles Avançado_PECS).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "As malas de teste utilizadas em comissionamentos devem possuir certificados de calibração rastreáveis para garantir a validade das medições.",
       "correctAnswer": true,
       "explanation": "Instrumentos de ensaio requerem calibração periódica e rastreável para atestar a precisão nos relatórios oficiais. (Fonte: Cabine Primária).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No ensaio do relé de distância (21), os pontos da mala devem ser inseridos unicamente sobre as bordas exatas da característica poligonal R-X.",
       "correctAnswer": false,
       "explanation": "O ensaio utiliza pontos de busca dentro e fora das zonas para mapear e validar a região inteira de atuação no plano R-X. (Fonte: Ensaio de Reles Avançado_PECS).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O teste da função 81 exige que a mala de injeção secundária aplique uma rampa variando o valor da _____ injetada no relé.",
+      "statement": "O teste da função 81 exige que a mala de injeção secundária aplique uma rampa variando o valor da ____ injetada no relé.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para validar as lógicas temporais exatas que o relé interpretou da falta simulada, a equipe baixa e analisa o arquivo de _____ gerado pelo IED.",
+      "statement": "Para validar as lógicas temporais exatas que o relé interpretou da falta simulada, a equipe baixa e analisa o arquivo de ____ gerado pelo IED.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Nas rotinas de teste automático ou em ensaios pontuais de painel, isola-se o circuito externo de _____ para não desarmar indevidamente o disjuntor.",
+      "statement": "Nas rotinas de teste automático ou em ensaios pontuais de painel, isola-se o circuito externo de ____ para não desarmar indevidamente o disjuntor.",
       "blanks": [
         {
           "index": 0,

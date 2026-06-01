@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "Automação Industrial, IEC 61131-3, Subestações, DCS e Edge/IIoT",
+  "categoryOrder": 7,
+  "module": "Lógica de Controle e Intertravamento",
+  "moduleSubtitle": "Conceitos, aplicações em SPCS e implementação",
+  "moduleOrder": 2,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Em um esquema de Transferencia Automatica de Linha, o que motiva o IED da entrada a sinalizar via GOOSE a abertura do seu disjuntor?",
+      "options": [
+        "Comando de bloqueio da protecao 50BF.",
+        "Atuacao exclusiva do rele diferencial de barra.",
+        "Falha no sincronismo de tempo SNTP.",
+        "Queda de subtensao (funcao 27) na alimentacao."
+      ],
+      "correctIndex": 3,
+      "explanation": "A abertura por subtensao (funcao 27) faz o IED local alertar imediatamente o IED de barra via GOOSE.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Apos uma transferencia automatica com perda temporaria de tensao, como o SAS procede para religar as maquinas rotativas com seguranca?",
+      "options": [
+        "O IED ordena o fechamento escalonado dos disjuntores executando a reaceleracao dos motores.",
+        "Aciona simultaneamente todos os disjuntores do barramento em um unico pulso imediato.",
+        "Bloqueia permanentemente os religamentos exigindo intervencao manual do operador local.",
+        "Desativa o rele 86T e comanda os contatores diretos de bypass para reativacao cega."
+      ],
+      "correctIndex": 0,
+      "explanation": "Com o reestabelecimento estavel da tensao, o IED aciona sequencialmente os disjuntores efetuando a reaceleracao gradativa.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que a troca dinamica do grupo de ajustes de protecao e utilizada em mudancas topologicas da subestacao (como arranjos U para L)?",
+      "options": [
+        "Para reiniciar as contagens temporais do protocolo GOOSE no switch Ethernet.",
+        "Para adequar a protecao e mante-la seletiva frente as novas caracteristicas de curto-circuito.",
+        "Visando reduzir o consumo de processamento eletronico interno do IED isolado.",
+        "Para desabilitar de proposito as condicoes seguras de CILO liberando atividades manuais."
+      ],
+      "correctIndex": 1,
+      "explanation": "A mudanca de ajustes online adapta a malha e a torna seletiva frente as diferentes tipologias de alimentacao eletrica.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um estudo de coordenacao seguro em cascata, a curva de atuacao tempo por corrente do disjuntor a montante deve ficar em qual posicao perante a curva a jusante?",
+      "options": [
+        "Posicionada acima da curva da protecao a jusante, salvaguardando a coordenacao.",
+        "Fixada temporalmente abaixo da atuacao a jusante para celeridade de interceptacao.",
+        "Sobreposta a jusante, viabilizando desligamentos cruzados paralelos.",
+        "Cruzando a curva do rele protegido, ativando operacao mutua instantanea."
+      ],
+      "correctIndex": 0,
+      "explanation": "Para manter a seletividade e isolar o defeito, os tempos de montante ficam acima do escalao inferior (jusante).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos ensaios de campo, o acionamento via teclado frontal do IED para a rotina simuladora 50BF permitiu diagnosticar qual operacao pratica no painel?",
+      "options": [
+        "A suspensao momentanea dos gateways WAN focando em processamentos seriais.",
+        "O corte das entradas de sinal do TC bloqueando analises por saturacao.",
+        "O envio do pacote GOOSE exigindo abertura dos reles a montante, simulando a falha de disjuntor.",
+        "O fechamento indiscriminado de reles isoladores de painel para atenuacao termica."
+      ],
+      "correctIndex": 2,
+      "explanation": "A ativacao da tecla permite testar intertravamentos injetando o sinal restritivo na logica dos IEDs a montante, sem maletas de injecao primaria.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na seletividade logica configurada na rede GOOSE, qual acao e desencadeada pelo IED do alimentador ao perceber a passagem da corrente de falta?",
+      "options": [
+        "Emite uma ordem de bloqueio freando a sobrecorrente instantanea do IED a montante.",
+        "Opera o desarme generalizado de todas as seccionadoras do complexo via SCADA.",
+        "Altera a polarizacao do medidor analogico retendo desarmes erraticos locais.",
+        "Comuta seu endereco MAC na arvore do barramento trancando os switches por colisoes."
+      ],
+      "correctIndex": 0,
+      "explanation": "O alimentador percebe a anomalia em sua zona e envia um bloqueio direcional para inibir o IED da retaguarda (montante).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em instalacoes sujeitas a subfrequencia (81), como o SAS controla a logica para o descarte agil de carga?",
+      "options": [
+        "Um pulso fixo desengata a seccionadora principal inibindo os bays menores.",
+        "Os temporizadores PTP sorteiam intermitentemente modulos ociosos a serem apartados.",
+        "O controle computa apenas os limites termicos dissipados ditando cortes por vida util.",
+        "A Matriz de Prioridades pre-definida no SCADA orienta os estagios de corte executados pelo IED."
+      ],
+      "correctIndex": 3,
+      "explanation": "O supervisorio estabelece as classes priorizadas programadas nos estagios do rele, coordenando o descarte acionado pela subfrequencia.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando o sistema diferencial atua desligando o equipamento primario, de que modo o sinal do rele de bloqueio virtual 86T reforca a seguranca operativa?",
+      "options": [
+        "O status virtual difundido via GOOSE entra nos esquemas CILO, travando o rearmamento e o fechamento dos bays atrelados.",
+        "O frame prioriza recomposicoes, adiantando religamentos automaticos repetitivos.",
+        "A anomalia comanda o espelhamento de fibra L2 roteando pacotes ao sniffer.",
+        "O pulso de defeito freia os transdutores SV interrompendo a digitalizacao das Merging Units."
+      ],
+      "correctIndex": 0,
+      "explanation": "As mensagens de 86T ativam o bloqueio sistematico, obstando manobras que religariam tensoes sobre o curto.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em topologias com recobrimento funcional descentralizado, qual providencia e assumida pelos IEDs ativos ao registrarem colapso no equipamento intertravado adjacente?",
+      "options": [
+        "Isolam apenas as logicas inerentes a unidade caida e assumem configuracoes alternativas validas sem desligar a planta inteira.",
+        "Decretam parada imediata desenergizando compulsoriamente os subsistemas vinculados.",
+        "Resetam a gerencia do STP reformatando caches nos roteadores do patio.",
+        "Abandonam as regras Hard Real-Time transitando a telemetria apenas via MMS SCADA."
+      ],
+      "correctIndex": 0,
+      "explanation": "Diante da falha vizinha, o conjunto bloqueia apenas as logicas limitadas e aplica logicas emergenciais restritas, resguardando o transito estavel.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na aplicacao real modelada pela IEC 61850, qual sequenciamento funcional os objetos de manobra realizam para operar disjuntores com seguranca?",
+      "options": [
+        "O CILO manipula operacoes primarias e cabe ao CSWI executar medicoes eletromecanicas das correntes.",
+        "O comando do CSWI verifica as travas dos permissivos do CILO e, autorizado, efetiva o comando no XCBR.",
+        "Os comandos do XCBR ignoram validacoes e fluem disparos aos nos PTOC descartando intertravamentos.",
+        "Toda a decisao concentra-se no computador master, abolindo LNs decisorios dispersos por bay."
+      ],
+      "correctIndex": 1,
+      "explanation": "A ordem logica parte do CSWI, consulta os status do CILO e culmina na operacao fisica aplicada ao XCBR.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante a estabilizacao das transferencias automaticas, os barramentos de alimentacao suportam paralelismo configuravel, tolerando periodos transitorios para evitar afundamento de tensao.",
+      "correctAnswer": true,
+      "explanation": "O sincronismo viabiliza acoplamentos limitados nas malhas, em tempos base minimos, operando o repasse sem interrupcoes abruptas.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na seletividade logica, o tempo de liberacao do bloqueio suprime as lentidoes historicas advindas do formato tradicional de seletividade cronometrica nas malhas Ethernet.",
+      "correctAnswer": true,
+      "explanation": "O escalonamento logico suprime os degraus de tempo fixo, aplicando travas horizontais velozes que reduzem a duracao das faltas.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em paineis de usinas e alimentadores modernos, as logicas de demanda monitoram as correntes consumidas e desligam autonomamente alimentadores para nao estourar cotas pre-contratadas.",
+      "correctAnswer": true,
+      "explanation": "Os controladores integram a potencia e abatem alimentadores nao primordiais para preservar os contratos vigentes de tarifa eletrica.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O Logical Node CILO reune os atributos que balizam as regras de condicoes seguras, vetando movimentos conflitantes em chaves do complexo.",
+      "correctAnswer": true,
+      "explanation": "O LN Control Interlocking centraliza os permissivos operacionais, impedindo acionamentos contrarios a normalidade.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos datasets do GOOSE, a flag de Test setada como TRUE faz com que o IED cliente aplique de modo irrevogavel a execucao fisica local de desarme.",
+      "correctAnswer": false,
+      "explanation": "Ao contrario: a flag Test=TRUE denota simulacao, forcando os receptores a negar a leitura e inviabilizando o trip efetivo sobre a malha viva.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para robustez nas manobras e prevencao de emissoes simultaneas indevidas nos supervisorios, aplica-se a sistematica de dupla validacao formalizada pela codificacao de controle ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SBO"
+        }
+      ],
+      "explanation": "O Select Before Operate (SBO) restringe transicoes forcadas, reservando o objeto ate a confirmacao final do comando.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Ao detectar que os contatos do disjuntor nao interromperam o curto, os paineis geram avisos baseados em tempo e remetem velozmente a retaguarda o bloqueio normatizado classificado como ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "50BF"
+        }
+      ],
+      "explanation": "A protecao de falha de disjuntor (Breaker Failure, 50BF) deflagra um GOOSE protetivo para abrir a energizacao proveniente dos disjuntores da origem.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para blindar usinas adjacentes contra anomalias por sobreposicao de MAC Address virtuais nos dominios multicast, os projetistas trancam os pacotes GOOSE limitando-os as portas pelas marcacoes padronizadas ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "VLAN"
+        }
+      ],
+      "explanation": "A aplicacao de restricoes nas Redes Virtuais confina as interacoes criticas as VLANs exclusivas pre-estabelecidas, evitando vazamentos.",
+      "difficulty": "hard"
+    }
+  ]
+}

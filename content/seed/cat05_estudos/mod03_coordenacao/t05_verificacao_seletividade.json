@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Coordenação e Seletividade",
+  "moduleSubtitle": "Estudo de coordenação - dados, metodologia, curvas e relatórios",
+  "moduleOrder": 2,
+  "trail": "Verificação de Seletividade",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que define a condição de compromisso de seletividade ou perda de seletividade nos estudos de proteção?",
+      "options": [
+        "O isolamento total da instalação devido a falha na proteção diferencial de barras.",
+        "A abertura do disjuntor geral da planta antes do disjuntor do ramal em qualquer condição.",
+        "A situação em que dois dispositivos em série operam simultaneamente para uma mesma falta.",
+        "A falha mecânica do contato principal do disjuntor sob correntes assimétricas severas."
+      ],
+      "correctIndex": 2,
+      "explanation": "A perda intencional ou não da seletividade, onde dois aparelhos em série operam simultaneamente, é definida nos relatórios técnicos como compromisso de seletividade.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para assegurar a seletividade entre dois fusíveis limitadores ligados em série, a relação entre suas correntes nominais deve ser maior que qual valor?",
+      "options": [
+        "Um vírgula dois.",
+        "Três vírgula zero.",
+        "Dois vírgula cinco.",
+        "Um vírgula seis."
+      ],
+      "correctIndex": 3,
+      "explanation": "A regra prática estabelece que a coordenação fusível a fusível é obtida quando a relação das correntes nominais é maior que um vírgula seis para fusíveis limitadores.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a margem de tempo tipicamente recomendada para coordenar a atuação entre dois disjuntores de baixa tensão dispostos em série?",
+      "options": [
+        "Cem a cento e cinquenta milissegundos.",
+        "Dez a cinquenta milissegundos.",
+        "Trezentos a quatrocentos milissegundos.",
+        "Um a dois segundos."
+      ],
+      "correctIndex": 0,
+      "explanation": "O intervalo sugerido entre disjuntores de baixa tensão é de zero vírgula um a zero vírgula quinze segundos, considerando os tempos de abertura e extinção do arco.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na verificação da proteção, o cálculo do curto-circuito mínimo fase para terra é utilizado primariamente para garantir qual característica?",
+      "options": [
+        "A suportabilidade mecânica dos barramentos principais.",
+        "A sensibilidade adequada dos dispositivos para detectar a falta.",
+        "A capacidade extrema de interrupção dos disjuntores a vácuo.",
+        "A limitação da componente contínua nos primeiros ciclos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os valores mínimos de curto-circuito são verificados para atestar a sensibilidade, assegurando que o relé detecte a anomalia e atue de forma segura.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No software PTW, qual módulo é utilizado especificamente para traçar o coordenograma e verificar graficamente a seletividade tempo versus corrente?",
+      "options": [
+        "Módulo DAPPER de fluxo de carga.",
+        "Módulo de estabilidade I SIM.",
+        "Módulo CAPTOR de coordenação.",
+        "Módulo HI WAVE de varredura harmônica."
+      ],
+      "correctIndex": 2,
+      "explanation": "O módulo CAPTOR desenha as características de tempo e corrente, permitindo ao usuário verificar e ajustar graficamente as margens de seletividade.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a seletividade correta entre um fusível a montante e um disjuntor a jusante é graficamente atestada?",
+      "options": [
+        "A curva de tempo mínimo de fusão do fusível deve ficar acima da curva de atuação total do disjuntor.",
+        "As duas curvas devem se cruzar exatamente no ponto de máxima corrente de curto-circuito trifásico.",
+        "A curva de interrupção total do disjuntor deve englobar a curva de fusão do elo fusível limitador.",
+        "A curva de tempo máximo do fusível deve estar posicionada abaixo da banda de atraso longo do disjuntor."
+      ],
+      "correctIndex": 0,
+      "explanation": "Para o disjuntor atuar antes e garantir a seletividade, a curva de tempo mínimo de fusão do fusível protetor a montante deve ficar integralmente acima da curva do disjuntor.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao avaliar a margem seletiva entre relés, o que deve ser alterado caso um relé digital seja substituído por um modelo eletromecânico antigo?",
+      "options": [
+        "A margem de coordenação deve ser reduzida pela metade para compensar a velocidade do disco.",
+        "A seletividade gráfica deve ser abandonada em favor da seletividade puramente amperimétrica.",
+        "Os transformadores de corrente devem ter suas relações de transformação dobradas preventivamente.",
+        "Deve-se acrescentar cerca de cem milissegundos ao intervalo devido à inércia do disco de indução."
+      ],
+      "correctIndex": 3,
+      "explanation": "Relés eletromecânicos possuem sobriviagem devido ao momento de inércia do disco rotativo, exigindo acréscimo de cerca de cem milissegundos nas margens de tempo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o principal benefício operativo alcançado pela adoção da técnica de seletividade lógica em sistemas complexos?",
+      "options": [
+        "Obter tempo de eliminação de falta muito curto, independentemente da posição do defeito na cascata.",
+        "Reduzir fisicamente os níveis de curto-circuito repulsivos nos cabos da subestação.",
+        "Anular o efeito térmico adiabático tolerando faltas sustentadas de impedância muito elevada.",
+        "Transformar a rede interligada em malha em uma topologia puramente radial estática."
+      ],
+      "correctIndex": 0,
+      "explanation": "A seletividade lógica contorna os longos atrasos acumulados na proteção cronométrica, isolando faltas em tempos muito curtos sem perder a seletividade independentemente do local.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que a perda de coordenação evidenciada no cruzamento entre as curvas do disjuntor secundário e do relé primário de um mesmo transformador pode.",
+      "options": [
+        "Devido às diretrizes regulamentares da concessionária que exigem redundância com abertura simultânea nas fronteiras.",
+        "Porque ambos os equipamentos protegem a mesmíssima via em série, não havendo cargas intermediárias que sofreriam desligamento desnecessário.",
+        "Pois curtos-circuitos no primário são fisicamente impossíveis de ocorrer em arranjos industriais confinados.",
+        "Porque a corrente de energização anula qualquer seletividade natural preexistente nas curvas inversas."
+      ],
+      "correctIndex": 1,
+      "explanation": "Quando dispositivos encontram-se em perfeita série sem derivações ou cargas intermediárias, a atuação simultânea é tolerada e não afeta áreas vizinhas sadias.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No software de simulação, como o usuário pode identificar visualmente os equipamentos cuja verificação apontou falhas nos critérios de proteção ou.",
+      "options": [
+        "Analisando os erros fatais de compilação exibidos no console do prompt de comando do sistema.",
+        "Pela remoção automática dos ramos defeituosos do modelo durante o cálculo iterativo matricial.",
+        "Através da função de realçar e destacar em cores os componentes reprovados diretamente no diagrama unifilar.",
+        "Pela redução drástica dos níveis calculados de curto-circuito na respectiva barra."
+      ],
+      "correctIndex": 2,
+      "explanation": "O software PTW possui uma ferramenta visual que destaca componentes reprovados nas avaliações do sistema (Highlight Failed Components) evidenciando as não conformidades.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A verificação primária de seletividade é considerada bem-sucedida quando a proteção mais próxima do ponto de defeito atua mais rápido que a.",
+      "correctAnswer": true,
+      "explanation": "A essência da seletividade é garantir que apenas o dispositivo imediatamente a montante da falha opere, preservando a continuidade do serviço nas partes saudáveis da rede.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Aceitar intencionalmente o compromisso de perda de seletividade é uma prática recomendada quando a solução alternativa colocar em risco a segurança.",
+      "correctAnswer": true,
+      "explanation": "A documentação técnica assevera que a perda de seletividade intencional é válida quando visar prioritariamente a segurança humana e a proteção contra a destruição de equipamentos.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para assegurar a não sobreposição das curvas em sistemas radiais extensos, a verificação por seletividade estritamente cronométrica isenta o.",
+      "correctAnswer": false,
+      "explanation": "Pelo contrário, o grande inconveniente da seletividade puramente cronométrica é justamente o acúmulo aditivo dos tempos de retardo à medida que se aproxima da fonte primária.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na verificação do coordenograma englobando diferentes classes de tensão em transformadores, todas as correntes das curvas devem ser refletidas e.",
+      "correctAnswer": true,
+      "explanation": "Para comparar tempos de atuação numa mesma escala de corrente, os valores lidos em diferentes tensões precisam ser obrigatoriamente referidos a um nível único de tensão.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Quando o estudo evidencia a ausência de dados nominais de um fusível obsoleto na instalação, as diretrizes dispensam a verificação desse elo frente.",
+      "correctAnswer": false,
+      "explanation": "Incertezas nos dados de dispositivos sem documentação obrigam a adoção de margens super conservadoras ou a recomendação de substituição imediata para viabilizar a garantia de seletividade.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Ao realizar o pente fino da coordenação de relés digitais modernos dispostos sucessivamente, a margem de intervalo temporal adotada entre eles ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "cinco"
+        }
+      ],
+      "explanation": "Conforme a padronização e manuais de engenharia, a coordenação entre dois relés microprocessados requer um intervalo limpo de no mínimo duzentos e cinquenta milissegundos para viabilizar folga segura.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A aceitação técnica de duas atuações simultâneas em série para o seccionamento de um defeito recebe nas premissas de projeto a nomenclatura ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "compromisso"
+        }
+      ],
+      "explanation": "Quando imperativos técnicos forçam os analistas a tolerar o desligamento múltiplo de proteções atuando ao mesmo tempo, convenciona-se chamar este gargalo de compromisso de seletividade na literatura técnica.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No ambiente dos softwares de coordenação gráfica, ao sobrepor a verificação das lógicas atuantes nas fronteiras dos transformadores rebaixadores ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "tensão"
+        }
+      ],
+      "explanation": "Qualquer plano bi-logarítmico exigirá, para leitura verdadeira de seletividade em equipamentos separados por transformação magnética, que as amplitudes estejam atreladas à mesmíssima referência de tensão do painel adotado.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Normas IEEE para Estudos",
+  "moduleSubtitle": "IEEE Color Books, C37, 1584 (Arc Flash) e 519",
+  "moduleOrder": 4,
+  "trail": "IEEE 446 (Orange Book - Emergência e Standby)",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o escopo principal da norma IEEE 446 conhecida na bibliografia como Orange Book?",
+      "options": [
+        "Metodos de analise de curto-circuito em redes de altissima tensao.",
+        "Critérios de eficiencia luminosa em galpoes logisticos isolados.",
+        "Padronizacao exclusiva do dimensionamento de cabos de aterramento profundo.",
+        "Recomendacoes para sistemas de energia de emergencia e standby em aplicacoes industriais e comerciais."
+      ],
+      "correctIndex": 3,
+      "explanation": "Conforme evidenciado pelas referencias o IEEE 446 ou Livro Laranja trata das melhores praticas voltadas para os sistemas focados em assegurar energia de emergencia e operacoes de standby.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos conceitos focados na continuidade industrial qual equipamento vital fornece isolacao contra disturbios e alimenta a rede critica continuamente?",
+      "options": [
+        "O sistema do tipo UPS ou no-break estatico.",
+        "O reator limitador acoplado as linhas longas.",
+        "A chave seccionadora de manobra e aterramento.",
+        "O banco banco de capacitores fixos em derivacao."
+      ],
+      "correctIndex": 0,
+      "explanation": "A fonte ininterrupta de energia designada UPS preserva a estabilidade das operacoes e isenta os elementos criticos dos ruidos transitorios falhas e apagões repentinos inerentes a rede normal.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em projetos contendo grupos geradores a figura basica da chave ATS possui qual objetivo centralizador durante um apagao setorial?",
+      "options": [
+        "Filtrar as altas frequências e melhorar o fator de potencia do sistema afetado.",
+        "Comutar de maneira rapida e autonoma as vias de carga da fonte avariada para o suprimento do gerador.",
+        "Reduzir fisicamente o patamar do curto circuito reativo das fases ate níveis de seguranca aceitaveis.",
+        "Acumular eletricidade excedente da rede na forma continua direcionando aos blocos de baterias seladas."
+      ],
+      "correctIndex": 1,
+      "explanation": "A chave ATS identifica o colapso e aciona automaticamente a remanejamento das correntes demandadas viabilizando que o grupo gerador passe a alimentar as cargas sem depender da intervencao de operadores.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o projeto usualmente categoriza e segrega as cargas nobres que suportam os processos fundamentais exigindo acoplamento veloz dos geradores.",
+      "options": [
+        "Cargas capacitivas oscilantes destrutivas.",
+        "Cargas inerciais parasitárias passivas.",
+        "Cargas essenciais ou prioritarias de seguranca.",
+        "Cargas descartaveis ativas do piso fabril."
+      ],
+      "correctIndex": 2,
+      "explanation": "Equipamentos cujas perdas trazem desastres aos humanos falhas irreversiveis nos processos e danos incalculaveis formam o grupo de protecao classificado rigorosamente por essenciais e super criticos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para um grupo gerador a motor tipico alimentado a combustivel fóssil qual e o horizonte de tempo tipico de atraso admitido para estabilizar e.",
+      "options": [
+        "Zero absoluto ocorrendo simultaneamente ao erro na senoide.",
+        "Exigencia normativa englobando aquecimento basal que absorve duas horas.",
+        "Minimo ininterrupto de seis demorados minutos contados da queda exata.",
+        "Atraso aproximado de cinco ate quinze ou trinta segundos mecânicos de rampa."
+      ],
+      "correctIndex": 3,
+      "explanation": "Dada a barreira e as restricoes da rampa fisica inercial de partida e os giros motrizes ate atingirem frequencia plena a entrada dos motores varia ao redor da media tolerada entre dez e alguns decibéis de segundos no total.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No tocante ao uso de condicionadores em sistemas prediais de retaguarda qual componente estritamente delimita a tolerância ou o tempo vital máximo.",
+      "options": [
+        "O conjunto estrutural quimico de blocos formado pelas baterias estacionárias.",
+        "As bobinas reativas das chaves estaticas do circuito supressor de by-pass eletronico ruidoso.",
+        "O processador central da malha de monitoramento de pulso retificado inversor.",
+        "O retificador ativo que amortece exclusivamente as parcelas da segunda e terceira harmonicas geradas."
+      ],
+      "correctIndex": 0,
+      "explanation": "O laco operacional sem alimentacao externa e mantido pelas reações químicas controladas dependentes do armazenamento finito proporcionado aos paineis compostos unicamente pelos bancos de baterias encadeadas em serie.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao organizar procedimentos em grupos motores de contingencia qual é o objetivo basilar preconizado justificando o exercicio e testagem periodica.",
+      "options": [
+        "Deteriorar as margens de seguranca do fabricante promovendo o aliviamento dos fusiveis das areas inativas.",
+        "Consolidar a fidedigna estabilidade assegurando na pratica a operacao imediata sem tropeços mecânicos ou surpresas.",
+        "Elevar momentaneamente a despesa calorica visando evaporar agua residual apenas no quadro de distribuicao em baixa tensao.",
+        "Substituir o gasto do carregador estatico da rede por recargas diretas as celulas da usina vizinha."
+      ],
+      "correctIndex": 1,
+      "explanation": "Equipamentos estacionarios padecem em ociosidade exigindo ligacoes sistematicas sob torque para constatar lubrificacao expurgar carbonizacao testar integridade e atestar o efetivo poder garantindo vida segura as malhas criticas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando o estudo base do alternador prevê alimentar os blocos comutados formados majoritariamente por volumosos equipamentos UPS o projetista.",
+      "options": [
+        "A absoluta inexistencia transitoria da corrente sub-imantadora do nucleo laminado.",
+        "O perfil perfeitamente linear balanceado resistivo ofertado estabilizando o gerador síncrono subjacente.",
+        "A geracao massiva espuria de pesadas cargas das correntes de naturezas harmonicas e distorcidas.",
+        "A extincao total das demandas relativas de natureza de potencia ativa."
+      ],
+      "correctIndex": 2,
+      "explanation": "Inversores tiristorizados ceifam as correntes depletando o sinal resultando e injetando as perniciosas correntes harmonicas de frequências multiplas afetando e aquecendo geradores despreparados provocando regulagens erraticas e super aquecimentos severos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O planejamento das manutencoes em espacos contendo equipamentos baseados na robustez dos motores diesel estacionarios deve contemplar a monitoria.",
+      "options": [
+        "As chapas metálicas de selamento sonoro superficial contra os ruidos na estrutura.",
+        "Os displays indicadores unicamente dedicados as informacoes de corrente residual magnetica.",
+        "A isolacao a seco contida exclusivamente nos terminais neutros aterradores auxiliares dos predios estáticos aditivos.",
+        "O combustivel inflamavel depositado nos tanques que perde caracteristicas quimicas sofre ataque biologico e cria sedimentos."
+      ],
+      "correctIndex": 3,
+      "explanation": "Reservatorios de diesel perdem o grau e estragam ao ficar tempo demasiado gerando fungos borras e lamas entupindo bicos nos exatos instantes em que o motor deve desenvolver RPM na hora da emergencia exigindo tratamento ou rodizios rigorosos de tanques.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em operacoes controladas onde a integridade da producao não tolera oscilações no momento programado do retorno a rede publica sadia as arquiteturas.",
+      "options": [
+        "Desconecta rigorosamente e forçadamente a usina matriz em uma pausa longa para esfriar o arco voltaico das barras reativas.",
+        "Permite que temporariamente o gerador ampare em perfeito paralelismo instantaneo a forca advinda da concessionaria impedindo perdas milimetricas ou piscadelas na luz.",
+        "Corta subitamente os circuitos do hospital deixando a bateria zerar preservando todas as unidades disjuntoras.",
+        "Atua desativando os paineis das cargas passivas alterando a conexao original para converter o no-break num capacitor sincrono de correcao global de perdas em derivação."
+      ],
+      "correctIndex": 1,
+      "explanation": "Na modalidade dita Closed Transition o sistema espelha fase e frequencia unindo o gerador rodando juntamente amparado pela rede da rua sobrepondo ambas forcas em milesimos e comutando brandamente a passagem resultando em retomadas indolores transparentes as linhas sensíveis unificadas nas malhas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em contextos hospitalares e comerciais intensos as maquinas baseadas exclusivamente nos modulos UPS sao adotadas compulsoriamente porque as cargas.",
+      "correctAnswer": true,
+      "explanation": "A intermitencia ou piscadela proveniente do motor termico arruina computadores e maquinas de suporte a vida forçando os projetistas anexarem no-breaks estaticos que suprem a bateria perfeitamente essa ponte ou vazio intercorrente do apagao momentaneo ate o diesel aquecer.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um dispositivo tipico basico de manobra ATS demanda possuir obrigatoriamente um refinado sistema logico dotado do engate de travamento contendo o.",
+      "correctAnswer": true,
+      "explanation": "O bloqueio fisico absoluto impede que as chaves acionem os dois contatos matriciais ligando e injetando potencia privada no fio primario caido na rua evitando reenergizar linhas inativas que eletrocutam e matam os trabalhadores manutentivos focados nos reparos e trocas de transformadores apagados das esquinas regionais externas publicas utilitarias das fornecedoras governamentais.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos meandros da eletronica embutida abrigando modulos operantes no suprimento dos retificadores as secoes protetivas designadas de chave eletronica.",
+      "correctAnswer": false,
+      "explanation": "A chave tiristorizada atuando no desvio paralelo age de forma instantânea socorrendo o ramal quando a usina interna oscila em curto extremado protegendo os capacitores ou ocorrem panes nas placas permitindo jogar a forca original na tomada em zero milissegundos sem perder nada diferindo bruscamente da chave mecânica puramente disjuntora lenta de manutencao do eletricista isoladora manual programada passiva com trancas e cadeados fisicos de seguranca limitantes logicos aplicaveis engessados lentos na planta produtora e consumidora operante.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na rampa de escalonamento dimensionando as partidas submetidas a robustos conjuntos de bombas de grande porte formados pelos fortes motores.",
+      "correctAnswer": true,
+      "explanation": "Rotores absorvem ate sete vezes a amperagem estatica no arranque o que colapsa um alternador mal dimensionado derrubando os Volts logo geradores mais ageis dotados de baixa impedancia interna espelham a reacao e garantem perfil suficiente mantendo iluminacao e torque na retomada do galpao isolado estabilizado no socorro logistico.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Dada a escassez impositiva ou avaria severa contida as vezes e esperada transitoriamente numa usina privada abalada pelas correntes excessivas.",
+      "correctAnswer": true,
+      "explanation": "Rejeitar cargas menores mantem a inercia e salva os equipamentos nobres impedindo que o motor apagado perca torque afunde morra ou queime garantindo suficiencia nos quadros vitais em detrimento de ares condicionados comuns das salas menores perifericas provendo sobrevida essencial inteligente em contingencias severas.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos alicerces dos diagramas dividindo as redes focadas nas categorias de relevância e criticidade nobre os circuitos responsaveis puramente por ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "essencial"
+        }
+      ],
+      "explanation": "As cargas classificadas como essenciais englobam todo recurso eletrico cujo colapso causa perigos ou panes catastroficas inadiáveis compondo a primeira prateleira acoplada as tomadas das matrizes nobres do gerador alternativo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos embasamentos tecnicos atrelados as conversoes e retificacoes robustas da qualidade energetica os modulos compactos formados pelas matrizes de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "UPS"
+        }
+      ],
+      "explanation": "O Uninterruptible Power Supply dita o estandarte mundial UPS caracterizando os sistemas que protegem o lapso transitorio injetando retificacao imediata da forca quimica estatica nas cargas sensíveis de processamento industrial moderno sem atrito ou rotacoes mecânicas retardadas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No exato instante limite da atuacao fisica das chaves monitoradas nas bases das subestacoes se o bloco operativo tracionador promove ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "aberta"
+        }
+      ],
+      "explanation": "Quando existe interrupcao obrigatoria ou um vazio na comutacao entre abrir a via danificada e atracar a mola no gerador novo ocorre o pisco caracterizando a transicao aberta diferente das operacoes unidas em sincronismo temporario brandas isentas de apagão.",
+      "difficulty": "hard"
+    }
+  ]
+}

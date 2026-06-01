@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Fluxo de Carga",
+  "moduleSubtitle": "Conceitos, modelagem, métodos, OPF e contingências",
+  "moduleOrder": 0,
+  "trail": "Modelagem do Sistema Elétrico",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "No sistema por unidade (pu), como se comporta a impedância de um transformador em relação aos seus enrolamentos?",
+      "options": [
+        "Depende diretamente da relação de espiras entre alta e baixa tensão.",
+        "É a mesma independentemente do lado de alta ou de baixa tensão.",
+        "É sempre maior quando referida ao lado de alta tensão.",
+        "É considerada nula para facilitar a convergência do fluxo de carga."
+      ],
+      "correctIndex": 1,
+      "explanation": "A impedância em valor pu de um transformador é idêntica seja vista pelo lado de alta ou de baixa tensão.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual fórmula define corretamente a impedância de base (ZB) na modelagem de um sistema elétrico?",
+      "options": [
+        "ZB = VB × SB",
+        "ZB = VB² / SB",
+        "ZB = SB² / VB",
+        "ZB = √(VB / SB)"
+      ],
+      "correctIndex": 1,
+      "explanation": "A impedância de base é dada pela relação entre a tensão de base ao quadrado e a potência de base (ZB = VB² / SB).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as linhas de transmissão são usualmente representadas no fluxo de carga?",
+      "options": [
+        "Por um modelo T com resistência concentrada no centro.",
+        "Por uma admitância em série sem perdas ôhmicas.",
+        "Pelo modelo π com metade da susceptância shunt em cada extremidade.",
+        "Apenas pelos seus parâmetros de sequência zero."
+      ],
+      "correctIndex": 2,
+      "explanation": "As linhas são representadas pelo modelo π, com resistência e reatância em série e metade da susceptância de carregamento em cada extremo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em análises de fluxo de potência, como um gerador síncrono é tipicamente modelado?",
+      "options": [
+        "Carga com injeção de corrente constante.",
+        "Transformador regulador de ângulo de fase.",
+        "Banco de capacitores com fator de potência unitário.",
+        "Fonte de tensão constante e quantidade agendada de potência ativa (kW)."
+      ],
+      "correctIndex": 3,
+      "explanation": "O gerador é modelado como uma fonte de tensão constante e uma quantidade agendada de potência ativa (barra PV).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a defasagem angular introduzida pelas conexões usuais de transformadores Delta-Estrela?",
+      "options": [
+        "30 graus.",
+        "0 graus.",
+        "60 graus.",
+        "90 graus."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os transformadores com conexão Delta/Estrela normalmente introduzem um deslocamento angular de 30 graus no sistema.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que os parâmetros shunt do transformador são frequentemente desprezados no circuito equivalente série?",
+      "options": [
+        "São puramente indutivos e não consomem potência ativa.",
+        "Eles apresentam valores extremamente elevados em relação aos parâmetros série.",
+        "Eles anulam as perdas nos enrolamentos primários.",
+        "Ficam localizados fora do modelo do núcleo magnético."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os parâmetros shunt possuem valores muito elevados comparados à resistência e reatância série, tornando sua influência pequena.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os reatores shunt podem ser modelados de acordo com os estudos de sobretensões e estabilidade?",
+      "options": [
+        "Como elementos térmicos dissipadores exclusivos de MW.",
+        "Somente como bancos estáticos de capacitância.",
+        "Como equipamentos eletrônicos ou analógicos com saturação variável e perdas.",
+        "Como fontes de injeção direta de corrente contínua."
+      ],
+      "correctIndex": 2,
+      "explanation": "Reatores shunt podem ser totalmente eletrônicos ou analógicos, apresentando características de saturação variável e perdas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre na modelagem do gerador quando o sistema demanda ajuste de tensão via controle de reativos?",
+      "options": [
+        "O gerador altera a potência ativa para equilibrar a tensão local.",
+        "O limite de temperatura do estator define o fluxo de carga.",
+        "O gerador atua puramente como uma barra swing.",
+        "Especifica-se uma faixa de kvar dentro da qual a máquina opera para ajustar a tensão."
+      ],
+      "correctIndex": 3,
+      "explanation": "O analista especifica uma faixa de potência reativa (kvar). Dentro desse limite, a tensão do gerador é ajustada pelo programa.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a principal vantagem matemática do sistema por unidade (pu) na modelagem do sistema elétrico?",
+      "options": [
+        "Independe dos níveis de tensão e dos deslocamentos angulares nos transformadores.",
+        "Descarta a necessidade de conhecer a resistência dos cabos.",
+        "Inverte os valores de impedância entre AT e BT.",
+        "Mapeia diretamente as correntes de sequência zero para sequência positiva."
+      ],
+      "correctIndex": 0,
+      "explanation": "O sistema pu simplifica a rede, pois não depende dos diferentes níveis de tensão e deslocamentos angulares através dos transformadores.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na formação de matrizes nodais, o que a inclusão de um ramo formando uma malha (tipo 3) acarreta temporariamente?",
+      "options": [
+        "Gera a anulação completa da matriz admitância de barra.",
+        "Gera uma linha e uma coluna adicionais na matriz de impedância parcial.",
+        "Remove a diagonal principal da matriz Jacobiana.",
+        "Substitui a barra de referência por uma barra de carga P-Q."
+      ],
+      "correctIndex": 1,
+      "explanation": "A inclusão de um ramo fechando malha (tipo 3) gera temporariamente uma nova linha e coluna na matriz parcial antes da redução de Kron.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A modelagem em valores por unidade (pu) requer a adoção de uma única potência de base para todo o sistema elétrico analisado.",
+      "correctAnswer": true,
+      "explanation": "Adota-se para todo o sistema uma única potência base (como 100 MVA), variando apenas as tensões base de acordo com os transformadores.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No modelo π da linha de transmissão, a susceptância de carregamento (shunt) é alocada integralmente no barramento de envio da linha.",
+      "correctAnswer": false,
+      "explanation": "No modelo π, a capacitância ou susceptância de carregamento é dividida ao meio, colocando-se metade em cada extremidade da linha.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A modelagem de carga do tipo 'Connected Load' em um fluxo de potência calcula as cargas ignorando fatores de diversidade ou demanda.",
+      "correctAnswer": true,
+      "explanation": "Quando modelada como Connected Load, as cargas são assumidas pelo seu valor total conectado, sem aplicar o fator de carga ou diversidade.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A matriz de impedância nodal (ZBARRA) que modela a rede em estudos de sistema é caracterizada por ser esparsa e assimétrica.",
+      "correctAnswer": false,
+      "explanation": "A matriz de impedância nodal (ZBARRA) é caracterizada por ser uma matriz cheia e perfeitamente simétrica.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Se a defasagem angular do transformador (Phase Shift) não for modelada, o software reportará os ângulos das tensões puramente relativos à barra swing.",
+      "correctAnswer": true,
+      "explanation": "Sem a opção de Phase Shift, os ângulos das barras não consideram os saltos nos transformadores, refletindo apenas a diferença para a barra swing.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Os parâmetros que definem a linha de transmissão em modelos completos são: resistência série, indutância série, capacitância shunt e ____ shunt.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "condutância"
+        }
+      ],
+      "explanation": "Os quatro parâmetros distribuídos das linhas de transmissão são R, L, C e G (condutância shunt).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em autotransformadores, a potência transferida ao enrolamento secundário diretamente pela corrente sem passar por transformação magnética é a ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "condutiva"
+        }
+      ],
+      "explanation": "A energia em autotransformadores divide-se em potência transformada (eletromagnética) e potência condutiva (transferência direta).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O deslocamento angular característico que ocorre nas correntes de sequência positiva em um transformador com ligação Y-Delta é de ____ graus.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "30"
+        }
+      ],
+      "explanation": "A conexão Delta-Estrela introduz inerentemente uma defasagem de 30 graus nas grandezas de sequência positiva e negativa.",
+      "difficulty": "hard"
+    }
+  ]
+}

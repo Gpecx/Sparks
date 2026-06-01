@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "O que a proteção diferencial de barras (87B) compara para detectar faltas internas?",
       "options": [
-        "A soma vetorial das correntes de entrada e saída do nó elétrico.",
-        "A magnitude da tensão de polarização das linhas conectadas.",
         "O ângulo de fase das tensões residuais do barramento.",
+        "A magnitude da tensão de polarização das linhas conectadas.",
+        "A soma vetorial das correntes de entrada e saída do nó elétrico.",
         "O escorregamento de frequência dos geradores locais."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O princípio diferencial equaciona a barra como um nó; a soma das correntes deve ser nula se não houver defeito. (Fonte: Caminha).",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Qual é a função da proteção de falha de disjuntor (ANSI 50BF)?",
       "options": [
-        "Desligar os disjuntores adjacentes caso o disjuntor acionado não abra.",
+        "Limitar a corrente de curto-circuito na barra.",
         "Religar automaticamente o disjuntor após faltas transitórias.",
         "Bloquear a proteção diferencial da linha de transmissão.",
-        "Limitar a corrente de curto-circuito na barra."
+        "Desligar os disjuntores adjacentes caso o disjuntor acionado não abra."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "A 50BF atua quando um disjuntor não interrompe a corrente após comando, desconectando os outros circuitos. (Fonte: Virtus_ProtBarras).",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Qual a finalidade da réplica de seccionadoras em relés diferenciais digitais?",
       "options": [
-        "Eliminar a necessidade de usar transformadores de corrente.",
         "Associar as correntes às zonas de proteção conforme o estado das chaves.",
+        "Eliminar a necessidade de usar transformadores de corrente.",
         "Controlar remotamente a abertura da seccionadora com carga.",
         "Forçar a saturação magnética do núcleo de ferro do TC."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A réplica cruza o estado das chaves com as correntes, definindo logicamente as fronteiras da zona de proteção. (Fonte: Virtus_ProtBarras).",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "Na proteção diferencial percentual, qual a função da corrente de restrição?",
       "options": [
         "Acelerar o trip durante sobrecargas leves.",
-        "Aumentar o erro magnético do transformador de corrente.",
         "Impedir a atuação indevida do relé durante curtos-circuitos externos.",
+        "Aumentar o erro magnético do transformador de corrente.",
         "Transferir a medição para a barra de reserva ativa."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A corrente de restrição provê estabilidade contra curtos externos severos, evitando disparos por erros de TC. (Fonte: Virtus_ProtBarras).",
       "difficulty": "easy"
     },
@@ -91,11 +91,11 @@
       "statement": "Qual é a finalidade da lógica de repetição de trip (retrip) na função 50BF?",
       "options": [
         "Recarregar as molas dos contatos principais do disjuntor.",
-        "Enviar um segundo sinal de disparo ao disjuntor antes de isolar a barra.",
+        "Garantir a desionização do arco em faltas temporárias.",
         "Cancelar o religamento monopolar automático.",
-        "Garantir a desionização do arco em faltas temporárias."
+        "Enviar um segundo sinal de disparo ao disjuntor antes de isolar a barra."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O retrip emite um segundo comando ao disjuntor defeituoso (útil quando há duas bobinas), antecedendo o trip adjacente. (Fonte: Virtus_ProtBarras).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Em proteções de barra, o que a zona de supervisão 'Check Zone' realiza?",
       "options": [
-        "Verifica a temperatura dos painéis blindados.",
         "Confirma o curto globalmente na subestação antes de liberar o trip seletivo.",
+        "Verifica a temperatura dos painéis blindados.",
         "Inverte as polaridades dos TCs saturados.",
         "Zera as correntes de sequência negativa do circuito."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O Check Zone engloba todas as conexões como uma única barra, confirmando o desbalanço e aumentando a segurança. (Fonte: Virtus_ProtBarras).",
       "difficulty": "medium"
     },
@@ -130,11 +130,11 @@
       "statement": "Como a proteção atua em curtos na zona morta entre o disjuntor aberto e o TC (End Fault)?",
       "options": [
         "O religador bloqueia fisicamente o curto-circuito.",
-        "Detecta a falta via lógica e desliga os disjuntores que alimentam o trecho.",
         "A ignição do arco queima os fusíveis do TC principal.",
+        "Detecta a falta via lógica e desliga os disjuntores que alimentam o trecho.",
         "O TC de neutro emite um comando de retrip."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A função End Fault usa algoritmo e réplica de chaves para identificar a zona morta, acionando as fontes alimentadoras. (Fonte: Virtus_ProtBarras).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A proteção diferencial de barras atua com retardo intencional de 0,5 segundos para coordenar com as linhas.",
       "correctAnswer": false,
       "explanation": "A função 87B atua sem temporização intencional, visando eliminar o curto-circuito interno o mais rápido possível. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A restrição percentual garante a estabilidade do relé diferencial mesmo com os inevitáveis erros de TC em altas correntes.",
       "correctAnswer": true,
       "explanation": "O princípio diferencial percentual confere estabilidade ao relé durante faltas externas com erros ou saturação parcial de TC. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A função falha de disjuntor (50BF) exige sempre corrente elevada para iniciar o cronômetro de atuação.",
       "correctAnswer": false,
       "explanation": "A função 50BF possui o modo de baixa corrente, usado com sinais do contato auxiliar para faltas como atuações do Buchholz. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O disjuntor de transferência substitui um disjuntor de linha em manutenção sem interromper o fluxo de energia.",
       "correctAnswer": true,
       "explanation": "O esquema de transferência permite que seu disjuntor assuma a condução do circuito cujo disjuntor original for isolado. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A proteção remota de barras opera corretamente usando exclusivamente relés de sobrecorrente simples de tempo definido.",
       "correctAnswer": false,
       "explanation": "Sistemas em anel ou malha exigem que a proteção remota utilize características direcionais ou de distância. (Fonte: Caminha).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Na seletividade lógica, o relé a jusante envia um comando de _____ para inibir a proteção a montante.",
+      "statement": "Na seletividade lógica, o relé a jusante envia um comando de ____ para inibir a proteção a montante.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para evitar disparos espúrios, arranjos complexos validam o trip usando a supervisão global _____ Zone.",
+      "statement": "Para evitar disparos espúrios, arranjos complexos validam o trip usando a supervisão global ____ Zone.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A proteção diferencial de alta impedância insere um _____ ajustável em série com o relé para estabilizá-lo.",
+      "statement": "A proteção diferencial de alta impedância insere um ____ ajustável em série com o relé para estabilizá-lo.",
       "blanks": [
         {
           "index": 0,

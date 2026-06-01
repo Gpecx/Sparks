@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "O que justifica a atuação do esquema de alívio de carga na rede elétrica?",
       "options": [
-        "Déficit de potência causando queda anormal de tensão e frequência.",
         "Excesso de geração e aumento da frequência.",
+        "Déficit de potência causando queda anormal de tensão e frequência.",
         "Sobrecarga térmica em transformadores isolados.",
         "Saturação magnética dos núcleos de transformadores de corrente."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "O alívio atua quando o déficit de potência provoca quedas anormais de tensão e frequência. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -26,11 +26,11 @@
       "statement": "Qual função ANSI inicia a lógica do esquema de rejeição de carga?",
       "options": [
         "Direcional de potência ativa (ANSI 32P).",
-        "Relé de subfrequência (ANSI 81L).",
         "Relé de distância quadrilateral (ANSI 21).",
+        "Relé de subfrequência (ANSI 81L).",
         "Diferencial de linha (ANSI 87L)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Esquemas de rejeição atuam por subfrequência (81L) para balancear a rede. (Fonte: Virtus_CProtBL2Cd1).",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "Qual recurso dos IEDs modernos garante a confiabilidade dos esquemas especiais implementados?",
       "options": [
         "Bobinas móveis de alta precisão magnética.",
-        "Rotinas de autoteste e monitoramento contínuo.",
+        "Filtros analógicos passivos de sequência zero.",
         "Conversores eletromecânicos de frequência.",
-        "Filtros analógicos passivos de sequência zero."
+        "Rotinas de autoteste e monitoramento contínuo."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Circuitos de autodiagnose, monitoramento e autoteste garantem a confiabilidade da proteção digital. (Fonte: Virtus_CProtBL2Cd3).",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Como o controlador lógico adquire o estado físico dos disjuntores no esquema?",
       "options": [
-        "Medindo a variação da reatância de sequência zero.",
         "Através das entradas binárias ligadas aos contatos auxiliares.",
+        "Medindo a variação da reatância de sequência zero.",
         "Lendo a saturação do transformador de corrente.",
         "Calculando a derivada da frequência na barra."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A aquisição de status de chaves e disjuntores é feita via entradas binárias do relé. (Fonte: Virtus_ProtBarras).",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "O que deve ser estruturado ao parametrizar um esquema de rejeição de carga?",
       "options": [
-        "Estágios de rejeição, patamares de frequência e MVA cortado por estágio.",
         "Limite de tensão de arco mecânico em isoladores.",
+        "Estágios de rejeição, patamares de frequência e MVA cortado por estágio.",
         "Fator de compensação residual do relé de distância.",
         "Corrente de magnetização transitória do transformador elevador."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "A lógica exige a definição de patamares, frequências de corte, tempos e MVA rejeitado. (Fonte: Virtus_CProtBL2Cd1).",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Como os esquemas sistêmicos executam ações remediais para sobrecargas em linhas?",
       "options": [
         "Bloqueando permanentemente os relés direcionais de terra.",
-        "Emitindo sinais via canais de comunicação para desligamento automático.",
         "Reduzindo a excitação apenas dos geradores de ponta.",
+        "Emitindo sinais via canais de comunicação para desligamento automático.",
         "Alterando mecanicamente os taps dos transformadores de força."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Canais de comunicação comandam o desligamento remoto para evitar sobrecargas intoleráveis. (Fonte: Virtus_ProtLT).",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Como o sistema reage frente a uma sobrefrequência severa por rejeição brusca de carga?",
       "options": [
-        "Os reguladores de velocidade das máquinas atuam promovendo a redução da geração.",
+        "Injeta-se potência ativa na barra através de capacitores.",
         "O esquema ERAC desconecta os consumidores prioritários.",
         "Reatores shunt são desligados instantaneamente das linhas.",
-        "Injeta-se potência ativa na barra através de capacitores."
+        "Os reguladores de velocidade das máquinas atuam promovendo a redução da geração."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Na sobrefrequência, os reguladores das máquinas reduzem a geração (runback) para estabilizar a rede. (Fonte: Virtus-Anorm.Sist. Potência).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Como os procedimentos de rede exigem a redundância da proteção em linhas de Extra Alta Tensão?",
       "options": [
-        "Uso exclusivo de IEDs numéricos em topologia radial.",
         "Duplicação total com sistemas primário e alternado fisicamente independentes.",
+        "Uso exclusivo de IEDs numéricos em topologia radial.",
         "Instalação de uma única UTR multifuncional sem retaguarda.",
         "Alimentação dos relés pelo mesmo núcleo do transformador de corrente."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Exige-se duplicação completa: alimentação DC, TCs, TPs, bobinas e relés independentes. (Fonte: Virtus_ProtLT).",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Como a lógica digital valida o status de uma seccionadora antes de armar o esquema?",
       "options": [
-        "Utiliza duas entradas binárias (NA e NF) supervisionando o tempo de manobra.",
-        "Mede a resistência ôhmica da lâmina principal.",
         "Compara a tensão nominal com a tensão residual do delta aberto.",
+        "Mede a resistência ôhmica da lâmina principal.",
+        "Utiliza duas entradas binárias (NA e NF) supervisionando o tempo de manobra.",
         "Analisa a corrente de inrush na bobina de fechamento."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "A segurança da lógica utiliza contatos NA e NF para supervisionar os tempos de transição e inconsistências. (Fonte: Virtus_ProtBarras).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A lógica do ERAC desconecta intencionalmente alimentadores prioritários para estabilizar a frequência.",
       "correctAnswer": false,
       "explanation": "O esquema desliga cargas consideradas NÃO-prioritárias para recuperar o equilíbrio das potências. (Fonte: Guia Proteção 2008).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "IEDs digitais asseguram a confiabilidade da lógica através de rotinas cíclicas de autodiagnóstico.",
       "correctAnswer": true,
       "explanation": "Relés numéricos executam autodiagnose e monitoramento contínuo para garantir que atuarão corretamente. (Fonte: Virtus_CProtBL2Cd3).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A redundância exigida para EAP na Rede Básica admite o uso do mesmo núcleo de TC para os relés primário e alternado.",
       "correctAnswer": false,
       "explanation": "A duplicação total exige que os sinais venham de núcleos de TCs distintos e fisicamente separados. (Fonte: Virtus_ProtLT).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A rejeição de carga por subfrequência atua através de múltiplos patamares predefinidos de corte.",
       "correctAnswer": true,
       "explanation": "Os esquemas de rejeição preveem vários estágios com ajustes de frequência e blocos de potência distintos. (Fonte: Virtus_CProtBL2Cd1).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Na falha de aquisição da tensão auxiliar de uma chave, a lógica digital assume imediatamente o estado aberto.",
       "correctAnswer": false,
       "explanation": "Na falha, o relé memoriza o último status válido da seccionadora e emite um alarme de inconsistência. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A desconexão programada de cargas para frear o declínio da frequência compõe o plano de _____.",
+      "statement": "A desconexão programada de cargas para frear o declínio da frequência compõe o plano de ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A lógica do IED que associa correntes e topologias monitorando as entradas binárias é a _____ de seccionadoras.",
+      "statement": "A lógica do IED que associa correntes e topologias monitorando as entradas binárias é a ____ de seccionadoras.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O requisito do esquema de não enviar ordens indevidas durante eventos externos à lógica é a _____.",
+      "statement": "O requisito do esquema de não enviar ordens indevidas durante eventos externos à lógica é a ____.",
       "blanks": [
         {
           "index": 0,

@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Qual função ANSI protege o banco de capacitores contra curtos-circuitos francos?",
       "options": [
-        "Relé de sobrecorrente temporizada (ANSI 51).",
+        "Relé direcional de potência ativa (ANSI 32P).",
         "Relé de subfrequência (ANSI 81L).",
         "Relé de verificação de sincronismo (ANSI 25).",
-        "Relé direcional de potência ativa (ANSI 32P)."
+        "Relé de sobrecorrente temporizada (ANSI 51)."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Os curtos-circuitos nos bancos são detectados pela proteção de sobrecorrente temporizada 51. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Como atua a proteção em capacitores dotados de fusíveis internos?",
       "options": [
-        "O disjuntor principal abre imediatamente todo o alimentador.",
         "O fusível queima, isola a unidade falha e o banco continua operando.",
+        "O disjuntor principal abre imediatamente todo o alimentador.",
         "O banco sofre uma sobrepressão generalizada e explode.",
         "A proteção diferencial bloqueia o fluxo de potência ativa."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O fusível em série elimina o capacitor unitário em falha, mantendo o grupo em serviço com impedância modificada. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "O que causa sobrecarga permanente em bancos de capacitores industriais?",
       "options": [
         "A inércia mecânica dos motores de indução.",
-        "Subtensões sustentadas na rede básica de transmissão.",
         "Correntes harmônicas geradas por cargas não lineares.",
+        "Subtensões sustentadas na rede básica de transmissão.",
         "Falhas de sincronismo nas máquinas térmicas locais."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "Correntes harmônicas de conversores e fornos a arco sobrecarregam termicamente os capacitores. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Qual relé ANSI detecta níveis perigosos de tensão no banco de capacitores?",
       "options": [
         "Relé de subtensão (ANSI 27).",
-        "Relé de sobretensão (ANSI 59).",
         "Relé de distância (ANSI 21).",
+        "Relé de sobretensão (ANSI 59).",
         "Relé direcional de terra (ANSI 67N)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A proteção contra elevação da tensão de alimentação é feita pelo relé de sobretensão 59. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -66,10 +66,10 @@
       "options": [
         "Pela variação de frequência na barra principal.",
         "Pela inversão do fluxo de potência reativa no gerador.",
-        "Pela corrente de desbalanço que circula entre os pontos neutros.",
-        "Através de termostatos instalados nas buchas de média tensão."
+        "Através de termostatos instalados nas buchas de média tensão.",
+        "Pela corrente de desbalanço que circula entre os pontos neutros."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "O desbalanço de impedância provoca a circulação de corrente na ligação entre os neutros, lida por um relé 51 ou 60. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Qual é o ajuste típico recomendado para o relé de sobretensão (ANSI 59) em bancos?",
       "options": [
-        "150% da tensão nominal (Un).",
         "110% da tensão nominal (Un).",
+        "150% da tensão nominal (Un).",
         "80% da tensão nominal (Un).",
         "200% da tensão nominal (Un)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O nível de ajuste recomendado para a função de sobretensão 59 é de 110% da Un. (Fonte: Guia Proteção 2008).",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Como se limitam as severas correntes de surto durante o chaveamento de bancos?",
       "options": [
-        "Instalando indutâncias de amortecimento (reatores) em série.",
         "Utilizando transformadores de isolação galvânica.",
+        "Instalando indutâncias de amortecimento (reatores) em série.",
         "Aterrando diretamente as fases através de resistores.",
         "Bloqueando a atuação do relé diferencial de barra."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "As sobrecorrentes oscilatórias de energização são limitadas pela instalação de reatores em série com os estágios. (Fontes: Guia Proteção 2008 / Virtus).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Qual função detecta o aquecimento causado por sobrecargas harmônicas prolongadas?",
       "options": [
-        "Sobrecarga térmica (ANSI 49RMS).",
-        "Proteção de subimpedância (ANSI 21B).",
         "Relé de perda de excitação (ANSI 40).",
+        "Proteção de subimpedância (ANSI 21B).",
+        "Sobrecarga térmica (ANSI 49RMS).",
         "Proteção contra arco elétrico (Arc Flash)."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "As sobrecorrentes de longa duração por harmônicas são detectadas pela proteção térmica 49RMS ou 51. (Fonte: Guia Proteção 2008).",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "O que ocorre durante um curto-circuito interno em bancos sem fusíveis internos?",
       "options": [
         "A unidade em falha desconecta-se isoladamente de forma mecânica.",
-        "A geração de gás cria sobrepressão, exigindo desarme rápido pela função 51.",
+        "O banco continua operando com 50% de sua potência reativa.",
         "A falha é suprimida passivamente pela capacitância das unidades sãs.",
-        "O banco continua operando com 50% de sua potência reativa."
+        "A geração de gás cria sobrepressão, exigindo desarme rápido pela função 51."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A falha cria arco e sobrepressão que pode romper o invólucro, exigindo eliminação célere pela proteção geral. (Fonte: Guia Proteção 2008).",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Qual código ANSI designa o relé de balanço de tensão ou corrente usado em desequilíbrios?",
       "options": [
-        "ANSI 87.",
         "ANSI 60.",
+        "ANSI 87.",
         "ANSI 46.",
         "ANSI 32."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O relé 60 atua por uma dada diferença na tensão ou na corrente entre dois circuitos. (Fonte: Cabine Primária).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Em bancos com proteção interna, o fusível isola a célula em falha e o grupo capacitivo permanece em serviço.",
       "correctAnswer": true,
       "explanation": "Com proteção interna, a queima do fusível elimina apenas a unidade avariada, mantendo o banco operacional. (Fonte: Guia Proteção 2008).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Faltas à carcaça em bancos aterrados são monitoradas de forma sensível pelas funções ANSI 51N ou 51G.",
       "correctAnswer": true,
       "explanation": "Se o neutro for aterrado, utiliza-se a proteção de fuga à terra temporizada 51N/51G. (Fonte: Guia Proteção 2008).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A manobra back-to-back produz correntes transitórias de baixa frequência que não afetam a proteção.",
       "correctAnswer": false,
       "explanation": "Energizar bancos em paralelo (back-to-back) gera correntes de alta intensidade e alta frequência (inrush). (Fonte: Virtus-Anorm).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A perda de uma célula capacitiva na ligação em dupla estrela não altera a impedância do ramo afetado.",
       "correctAnswer": false,
       "explanation": "A eliminação de uma célula altera a impedância do ramo, gerando desequilíbrio e corrente no ponto neutro. (Fonte: Guia Proteção 2008).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A proteção ANSI 51 contra curto-circuito em bancos é tipicamente ajustada na faixa de 10 vezes a corrente nominal.",
       "correctAnswer": true,
       "explanation": "Para curto-circuitos, a sobrecorrente temporizada 51 é ajustada em 10 In, com atraso de 0,1s. (Fonte: Guia Proteção 2008).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "A energização de um banco em paralelo com outro já em operação é chamada de manobra _____.",
+      "statement": "A energização de um banco em paralelo com outro já em operação é chamada de manobra ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "As sobrecargas térmicas provocadas por excesso de correntes harmônicas exigem a proteção ANSI _____.",
+      "statement": "As sobrecargas térmicas provocadas por excesso de correntes harmônicas exigem a proteção ANSI ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O relé que atua por diferença nas grandezas entre dois circuitos, detectando desbalanço, é o ANSI _____.",
+      "statement": "O relé que atua por diferença nas grandezas entre dois circuitos, detectando desbalanço, é o ANSI ____.",
       "blanks": [
         {
           "index": 0,

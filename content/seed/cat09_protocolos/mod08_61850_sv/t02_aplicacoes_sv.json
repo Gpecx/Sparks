@@ -52,11 +52,11 @@
       "statement": "Alem de alimentar as funcoes de protecao, qual outra funcionalidade do SAS comumente compartilha as amostras do fluxo SV?",
       "options": [
         "A sincronizacao do relogio GPS local.",
-        "A medicao de grandezas operacionais (MMXU) em tempo real.",
+        "O comando manual de chaves seccionadoras.",
         "O descarte de cargas via frequencia.",
-        "O comando manual de chaves seccionadoras."
+        "A medicao de grandezas operacionais (MMXU) em tempo real."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A medicao (MMXU) utiliza simultaneamente as mesmas amostras digitais vindas do processo que os reles de protecao aproveitam.",
       "difficulty": "easy"
     },
@@ -104,11 +104,11 @@
       "statement": "Em uma arquitetura de barramento orientada a funcao (Alternativa 4), como os segmentos de SV da rede sao distribuidos estrategicamente?",
       "options": [
         "Concentrados num unico barramento principal para toda a subestacao.",
-        "Configurados para corresponder as zonas de protecao, minimizando transferencias via roteadores.",
+        "Agrupados exclusivamente pelo fabricante do equipamento primario de manobra.",
         "Desconectados e operados puramente no nivel fisico em RS-485.",
-        "Agrupados exclusivamente pelo fabricante do equipamento primario de manobra."
+        "Configurados para corresponder as zonas de protecao, minimizando transferencias via roteadores."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A arquitetura orientada a funcao modela os segmentos do barramento em estrita conformidade com as zonas de protecao para otimizar os dados exigidos.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Na alternativa de barramento de processo unificado para toda a subestacao (Alternativa 3), qual caracteristica de rede e obrigatoria devido aos.",
       "options": [
-        "Baixa utilizacao e ocupacao de trafego no switch geral.",
-        "Dispensa do uso do meio fisico guiado por fibras opticas.",
         "Elevada taxa de dados exigida no barramento principal devido ao acumulo de amostras.",
+        "Dispensa do uso do meio fisico guiado por fibras opticas.",
+        "Baixa utilizacao e ocupacao de trafego no switch geral.",
         "Eliminacao compulsoria de todo o trafego GOOSE de supervisao do sistema."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Um unico barramento interligando todos os equipamentos requer uma malha de rede com elevadissima capacidade de taxa de dados (banda).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "O fluxo de dados do processo baseados em SV e considerado comunicacao de operacao lenta e deve ser processado pelo servidor MMS na camada de.",
       "correctAnswer": false,
       "explanation": "SV e um servico de tempo criticissimo rodando nas camadas mais baixas da Ethernet e nao no modelo cliente-servidor padrao do MMS.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A interface logica enumerada com o digito 4 na arquitetura da norma estabelece formalmente o fluxo de dados amostrados (SV) originados nos.",
       "correctAnswer": true,
       "explanation": "O escopo da interface logica 4 efetua exatamente a troca instantanea de dados digitais de TC e TP do nivel de processo ao nivel de bay.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Os modernos dispositivos eletronicos instalados no nivel de processo de uma subestacao digital atuam como coletores dos sinais e publicadores dos.",
       "correctAnswer": true,
       "explanation": "No nivel fisico do processo (patio) residem as interfaces remotas e sensores inteligentes, digitalizando e publicando a onda para o barramento de processo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O modelo critico de envio do sistema IEC 61850 exige categoricamente que a recepcao de um frame de amostras SV seja validada com mensagens de.",
       "correctAnswer": false,
       "explanation": "Sampled Values trafegam amplamente em modo multicast e de forma autonoma, desprovidos de qualquer mecanismo de confirmacao de entrega ou Ack.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Em arranjos de protecao diferencial de barras (PBDF) distribuidas sobre a rede de processo, o IED responsavel pode agregar perfeitamente amostras.",
       "correctAnswer": true,
       "explanation": "A funcao distribuida do PBDF integra sinergicamente as correntes do patio unificando as amostras fornecidas pelos TCTRs distribuidos de cada entrada da barra.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "A troca de dados instantaneos correspondentes a medicao das amostras digitalizadas provindas do patio e concebida para atender em primeira _____.",
+      "statement": "A troca de dados instantaneos correspondentes a medicao das amostras digitalizadas provindas do patio e concebida para atender em primeira ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para impossibilitar eventuais desvios de angulo no momento de comparar fases ou calcular fasores nas funcoes da rede, o sincronismo global de tempo _____.",
+      "statement": "Para impossibilitar eventuais desvios de angulo no momento de comparar fases ou calcular fasores nas funcoes da rede, o sincronismo global de tempo ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A engenharia e projeto da arquitetura que vincula e limita diretamente as interconexoes dos barramentos de processo as fronteiras geofisicas da _____.",
+      "statement": "A engenharia e projeto da arquitetura que vincula e limita diretamente as interconexoes dos barramentos de processo as fronteiras geofisicas da ____.",
       "blanks": [
         {
           "index": 0,

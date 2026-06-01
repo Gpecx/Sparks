@@ -1,0 +1,218 @@
+{
+  "category": "Termografia Infravermelha",
+  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categoryOrder": 3,
+  "module": "Normas e Laudos de Termografia",
+  "moduleSubtitle": "NBR 15572, ISO 10878, NBR 16292, laudos e gestao preditiva",
+  "moduleOrder": 3,
+  "trail": "NBR 15572",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o escopo principal da norma brasileira ABNT NBR 15572 sobre termografia infravermelha?",
+      "options": [
+        "Relacionar exclusivamente metodos de afericao laboratorial de bancada.",
+        "Constituir um guia para inspecao de equipamentos eletricos e mecanicos.",
+        "Estabelecer a tabela universal fixa de emissividade termica.",
+        "Definir a periodicidade exata de calibracao laboratorial de cameras."
+      ],
+      "correctIndex": 1,
+      "explanation": "A norma constitui um guia para inspecao de equipamentos eletricos e mecanicos e relaciona as responsabilidades envolvidas. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a termografia e definida no contexto da manutencao preditiva de equipamentos?",
+      "options": [
+        "Tecnica nao destrutiva para medir temperaturas usando radiacao infravermelha.",
+        "Processo destrutivo que expoe o equipamento a altas temperaturas de teste.",
+        "Metodo acustico que mapeia o calor por meio de ondas ultrassonicas.",
+        "Procedimento de contato fisico direto para averiguacao termica interna."
+      ],
+      "correctIndex": 0,
+      "explanation": "A termografia detecta por radiacao infravermelha a temperatura de equipamentos como tecnica nao destrutiva. (Fonte: Termografia em manutencao preditiva, Essentia Editora)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que sao os termogramas gerados pelas cameras durante a avaliacao tecnica?",
+      "options": [
+        "Mapas termicos coloridos onde cada cor representa uma faixa de temperatura.",
+        "Graficos de barras que mostram o consumo eletrico do equipamento ao longo do dia.",
+        "Tabelas de dados brutos mostrando exclusivamente os coeficientes de absorcao molecular.",
+        "Registros acusticos convertidos instantaneamente em imagens monocromaticas."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os termogramas sao imagens coloridas onde cada cor representa uma faixa de temperatura capturada pela camera. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que um ponto quente costuma representar na analise visual de um mapa termico?",
+      "options": [
+        "Uma area com perfeito isolamento termico e refrigeracao adequada.",
+        "O centro exato do campo de visao da lente da camera termica infravermelha.",
+        "Uma area de alta temperatura que pode sinalizar sobrecarga ou desgaste mecanico.",
+        "A temperatura minima admissivel projetada para um componente eletrico."
+      ],
+      "correctIndex": 2,
+      "explanation": "Pontos de calor indicam areas de alta temperatura que sinalizam sinais agudos de sobrecarga ou desgaste. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com as definicoes de inspecao, qual e o papel tecnico do inspetor termografista?",
+      "options": [
+        "Operar o equipamento eletrico a ser inspecionado garantindo seu continuo funcionamento.",
+        "Executar a inspecao, operando o termovisor corretamente e interpretando os resultados.",
+        "Reparar as falhas estruturais imediatamente assim que detectar o ponto quente na rede.",
+        "Redigir as normas de seguranca gerais para o ambiente de trabalho preditivo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O inspetor termografista e o profissional apto para executar a inspecao e interpretar tecnicamente os resultados gerados. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a atribuicao principal do assistente qualificado durante o processo de inspecao termografica?",
+      "options": [
+        "Calibrar fisicamente o sensor de captacao infravermelha em laboratorio antes do uso.",
+        "Elaborar de forma solitaria o laudo conclusivo focado nas variacoes numericas de Delta T.",
+        "Operar o equipamento inspecionado seguindo as normas de seguranca vigentes do setor.",
+        "Alterar a emissividade das superficies pintando os barramentos de cor opaca."
+      ],
+      "correctIndex": 2,
+      "explanation": "O assistente qualificado opera corretamente o equipamento a ser inspecionado e cumpre os requisitos de seguranca. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a norma ABNT NBR 15572 menciona sobre os criterios para avaliar a gravidade das anomalias termicas?",
+      "options": [
+        "Exige que todos os usuarios finais ignorem sumariamente os limites indicados pelos fabricantes originais.",
+        "Determina de modo irredutivel que apenas o limite global de 40 graus Celsius seja o padrao considerado.",
+        "Os usuarios finais podem utilizar seus proprios criterios tecnicos ou os parametros originais do fabricante.",
+        "O termografista nao tem permissao legal para aplicar o criterio de Delta T nas analises."
+      ],
+      "correctIndex": 2,
+      "explanation": "A norma orienta que os usuarios finais podem utilizar criterios proprios ou usar como base os parametros nominais do fabricante. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com os criterios de inspecao de campo, qual situacao caracteriza efetivamente uma anomalia termica?",
+      "options": [
+        "Resistencias de aquecimento do painel apresentando temperatura natural superior a do ambiente livre.",
+        "Equipamento eletrico com temperatura operacional superior a maxima admissivel para aquele componente.",
+        "Barramentos trifasicos operando com exatidao no mesmo padrao termico de seus pares similares.",
+        "Lampadas do quadro acesas gerando calor radiante muito acima da temperatura ambiente do local."
+      ],
+      "correctIndex": 1,
+      "explanation": "Uma das condicoes concretas para anomalia termica e a temperatura ser superior a maxima temperatura admissivel do respectivo componente. (Fonte: Termografia em manutencao preditiva, Essentia Editora)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que define rigorosamente a emissividade de uma superficie na medicao de temperatura por radiacao termica?",
+      "options": [
+        "O valor absoluto do angulo de abertura (FOV) medido na extremidade da lente da camera focada.",
+        "A comparacao proporcional entre a excitancia emitida pelo objeto e a de um corpo negro a mesma temperatura.",
+        "A quantidade pontual de calor conduzida pelo ar atmosferico entre o objeto investigado e a lente da camera.",
+        "A maxima temperatura operacional que um equipamento eletrico suporta antes de iniciar o derretimento plastico."
+      ],
+      "correctIndex": 1,
+      "explanation": "A emissividade e a base comparativa entre a excitancia do objeto estudado e a excitancia de um corpo negro sob igual temperatura. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o conteudo fundamental que deve ser inserido na secao de Resultados do relatorio de inspecao termografica?",
+      "options": [
+        "Apenas citar normas internacionais de seguranca sem necessidade de anexar as fotografias termicas coletadas.",
+        "Apresentar as imagens termograficas acompanhadas de anomalias destacadas e a descricao tecnica de cada uma.",
+        "Sugerir apenas medidas especificas e acoes corretivas mecanicas sem evidenciar a medicao real capturada.",
+        "Explicar e descrever de modo extenso como a camera sensora foi eletronicamente calibrada no laboratorio de origem."
+      ],
+      "correctIndex": 1,
+      "explanation": "A secao de resultados deve apresentar as imagens termograficas com anomalias destacadas e sua respectiva descricao. (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A norma tecnica ABNT NBR 15572 atua como um guia tecnico elaborado exclusivamente para organizar a inspecao termografica de pontes civis.",
+      "correctAnswer": false,
+      "explanation": "A norma referenciada constitui especificamente um guia normativo dedicado a inspecao de equipamentos eletricos e mecanicos. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O assistente qualificado trabalha junto com o termografista, operando ativamente o equipamento com conhecimento vital sobre o historico da instalacao.",
+      "correctAnswer": true,
+      "explanation": "O assistente qualificado conhece e opera o equipamento de forma segura e detem o conhecimento do historico de operacao para direcionar a inspecao. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As informacoes extraidas de imagens termograficas em campo sao sempre restritas a avaliacoes puramente qualitativas, impedindo qualquer levantamento quantitativo.",
+      "correctAnswer": false,
+      "explanation": "As analises produzidas por cameras termicas podem gerar informacoes qualitativas ou quantitativas dependendo do objetivo e calibracao do equipamento. (Fonte: Termografia em manutencao preditiva, Essentia Editora)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A averiguacao e a analise preditiva de um painel eletrico sao inviabilizadas tecnicamente se o referido equipamento encontrar-se completamente desligado da carga operacional.",
+      "correctAnswer": true,
+      "explanation": "Para produzir uma analise termica real o painel deve operar ha no minimo duas horas sob uma carga igual ou maior que 30%. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A norma ABNT NBR 15572 impoe e estabelece limites imutaveis de severidade baseados em valores Delta T inflexiveis identicos para todos os equipamentos existentes.",
+      "correctAnswer": false,
+      "explanation": "A ABNT NBR 15572 flexibiliza a avaliacao permitindo que o usuario aplique os seus proprios criterios corporativos ou siga os parametros previstos pelo fabricante. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Durante o diagnostico rotineiro de mapas termicos, as areas focais exibindo alta temperatura e apontando riscos fisicos eminentes sao chamadas de ____ quentes.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "pontos"
+        }
+      ],
+      "explanation": "Os hot spots ou pontos quentes ilustram regioes demarcadas de alta temperatura alertando sobre evidentes quadros de sobrecarga ou estresse no mecanismo. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A ____ configura-se como um ensaio tecnologico nao destrutivo voltado a mensurar e exibir a distribuicao pontual do calor exalado das superficies e componentes.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "termografia"
+        }
+      ],
+      "explanation": "A termografia consiste na tecnica preditiva focada em observar o mapa ou o perfil de emissao infravermelha dissipado pelos corpos expostos. (Fonte: Termografia em manutencao preditiva, Essentia Editora)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Ajustar antecipadamente a exata ____ termica do objeto investigado e o valor da temperatura refletida no termovisor afasta desvios serios que maculam o rigor do laudo.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "emissividade"
+        }
+      ],
+      "explanation": "Saber definir perfeitamente a emissividade local e a temperatura refletida inserida nos parametros da camera evita ocorrencia de fortes erros na afericao. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "difficulty": "hard"
+    }
+  ]
+}

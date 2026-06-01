@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Como as Unidades de Bay digitais adquirem o estado da topologia em um vao da subestacao?",
       "options": [
-        "Lendo os estados dos contatos de chaves e disjuntores locais.",
         "Medindo a temperatura do oleo do transformador.",
+        "Lendo os estados dos contatos de chaves e disjuntores locais.",
         "Analisando ruidos acusticos no painel.",
         "Injetando corrente DC na malha de aterramento."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "As Unidades de Bay adquirem os estados dos dispositivos locais (chaves/disjuntores) para a topologia. (Fonte: Virtus_ProtBarras).",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Para que servem os intertravamentos mecanicos e eletricos aplicados as seccionadoras?",
       "options": [
-        "Garantir que a seccionadora seja operada apenas com o disjuntor aberto.",
-        "Acelerar a extincao do arco eletrico em carga.",
         "Fechar o disjuntor automaticamente apos uma falta.",
+        "Acelerar a extincao do arco eletrico em carga.",
+        "Garantir que a seccionadora seja operada apenas com o disjuntor aberto.",
         "Reduzir a tensao de passo na malha de terra."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O intertravamento garante seguranca, permitindo abrir a seccionadora apenas se o disjuntor estiver aberto. (Fonte: Ed54_fasc_protecao).",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Por que o comando remoto de disjuntores e recomendado durante a energizacao?",
       "options": [
-        "Para afastar o operador e garantir sua integridade fisica.",
+        "Para evitar a saturacao magnetica dos TCs.",
         "Para reduzir o tempo de arco eletrico.",
         "Para bloquear os reles de retaguarda.",
-        "Para evitar a saturacao magnetica dos TCs."
+        "Para afastar o operador e garantir sua integridade fisica."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Deve-se utilizar comando remoto para afastar o operador e garantir sua seguranca fisica. (Fonte: Ed54_fasc_protecao).",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Como a topologia da barra e atualizada na arquitetura digital distribuida?",
       "options": [
-        "As Unidades de Bay comunicam os estados locais a Unidade Central via fibra optica.",
         "Atraves de reles auxiliares eletromecanicos em paralelo.",
+        "As Unidades de Bay comunicam os estados locais a Unidade Central via fibra optica.",
         "Pela variacao termica da bobina de fechamento.",
         "Por cabos coaxiais de 50 ohms ligados aos TPs."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "As Unidades de Bay adquirem os estados locais e comunicam a Unidade Central digitalmente. (Fonte: Virtus_ProtBarras).",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "No controle avancado de disjuntores, como opera o modo de fechamento sequencial?",
       "options": [
-        "O rele executa comandos de fechamento independentes para cada fase com temporizacoes ajustaveis.",
-        "O rele fecha os tres polos simultaneamente em exatos 50 ms.",
         "O rele abre as seccionadoras instantes antes de fechar o disjuntor principal.",
+        "O rele fecha os tres polos simultaneamente em exatos 50 ms.",
+        "O rele executa comandos de fechamento independentes para cada fase com temporizacoes ajustaveis.",
         "O rele bloqueia o sincronismo da barra durante o transitorio."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "No fechamento sequencial, o rele executa comandos sequenciais para cada fase com temporizacoes ajustaveis. (Fonte: Virtus_ProtTrafo).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Como a logica do IED trata a perda da tensao auxiliar DC do circuito de uma seccionadora?",
       "options": [
-        "Memoriza o ultimo estado valido da chave e emite um alarme de falha.",
+        "Desliga o rele digital por sub-tensao.",
         "Abre a chave automaticamente por acao de molas.",
         "Comanda o trip tripolar do disjuntor do vao.",
-        "Desliga o rele digital por sub-tensao."
+        "Memoriza o ultimo estado valido da chave e emite um alarme de falha."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Em caso de falha de tensao auxiliar, o ultimo estado da seccionadora e memorizado e um alarme e emitido. (Fonte: Virtus_ProtBarras).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "As chaves seccionadoras sao projetadas para realizar manobras de abertura e fechamento de circuitos eletricos conduzindo carga nominal plena.",
       "correctAnswer": false,
       "explanation": "Chaves seccionadoras realizam manobras de abertura e fechamento apenas em circuitos sem carga. (Fonte: Cabine Primaria).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O intertravamento na subestacao garante seguranca ao permitir a abertura de uma seccionadora somente se o disjuntor associado estiver previamente.",
       "correctAnswer": true,
       "explanation": "O intertravamento previne manobras indevidas, garantindo que a seccionadora opere sem carga. (Fonte: Ed54_fasc_protecao).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A integracao da supervisao e controle em IEDs permite que logicas antes feitas por reles eletromecanicos sejam processadas digitalmente, reduzindo.",
       "correctAnswer": true,
       "explanation": "Logicas de comando feitas por reles eletromecanicos sao realizadas via software nos IEDs, diminuindo cabos. (Fonte: Virtus_CProtBL2Cd3).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A funcao de verificacao de sincronismo (ANSI 25) libera o fechamento do disjuntor independentemente da diferenca de angulo e frequencia entre a.",
       "correctAnswer": false,
       "explanation": "A funcao 25 verifica justamente se diferencas de tensao, frequencia e angulo estao dentro de limites seguros para fechar. (Fonte: Virtus_ProtLT).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Na arquitetura distribuida, a replica das seccionadoras e avaliada localmente por cada Bay Unit, que decide o trip sem se comunicar com a Unidade.",
       "correctAnswer": false,
       "explanation": "As logicas de desligamento seletivo sao feitas em conjunto com a Unidade Central, que centraliza os dados de todos os bays. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A funcao que confere se a tensao, a frequencia e o angulo de fase estao dentro dos limites antes de autorizar o fechamento do disjuntor e a _____.",
+      "statement": "A funcao que confere se a tensao, a frequencia e o angulo de fase estao dentro dos limites antes de autorizar o fechamento do disjuntor e a ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Em uma subestacao digital, os equipamentos instalados nos paineis locais que adquirem estados e emitem comandos para o disjuntor do vao sao as _____.",
+      "statement": "Em uma subestacao digital, os equipamentos instalados nos paineis locais que adquirem estados e emitem comandos para o disjuntor do vao sao as ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A logica de software que associa as correntes aos bays correspondentes espelhando os estados fisicos reais das chaves de manobra e a _____ de.",
+      "statement": "A logica de software que associa as correntes aos bays correspondentes espelhando os estados fisicos reais das chaves de manobra e a ____ de.",
       "blanks": [
         {
           "index": 0,

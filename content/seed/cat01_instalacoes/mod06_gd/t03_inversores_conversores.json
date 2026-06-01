@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "",
+  "categoryOrder": 0,
+  "module": "Geração Distribuída e Fotovoltaicos",
+  "moduleSubtitle": "Sistemas GD, fotovoltaicos, inversores, armazenamento e conexão à rede",
+  "moduleOrder": 5,
+  "trail": "Inversores e Conversores de Potência",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual é a função principal de um microinversor em um sistema solar fotovoltaico?",
+      "options": [
+        "Armazenar a energia gerada em bancos de baterias.",
+        "Converter eletricidade DC em energia AC diretamente em cada painel.",
+        "Aumentar a tensão da rede de distribuição para níveis comerciais.",
+        "Proteger o sistema contra descargas atmosféricas e raios."
+      ],
+      "correctIndex": 1,
+      "explanation": "O microinversor converte eletricidade DC em energia AC diretamente no nível de cada painel solar. (O que é um microinversor e como funciona? — Loja Deye - DeyeStore)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Em comparação aos microinversores, qual é uma característica operacional e comercial atribuída aos inversores de string?",
+      "options": [
+        "Eles operam no nível de cada painel isoladamente.",
+        "Possuem um custo inicial significativamente mais elevado.",
+        "São equipamentos centralizados e com menor custo inicial.",
+        "Previnem todas as perdas de performance geradas por sombreamento."
+      ],
+      "correctIndex": 2,
+      "explanation": "Inversores de string são sistemas centralizados que costumam apresentar um custo inicial mais baixo em comparação com os microinversores. (O que é um microinversor e como funciona? — Loja Deye - DeyeStore)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Para sistemas de geração distribuída com potência nominal maior que 6 kW, como o fator de potência deve ser ajustado?",
+      "options": [
+        "Fator de potência fixo em 1.",
+        "Ajustável de 0,98 indutivo até 0,98 capacitivo.",
+        "Ajustável de 0,95 indutivo até 0,95 capacitivo.",
+        "Ajustável de 0,90 indutivo até 0,90 capacitivo."
+      ],
+      "correctIndex": 3,
+      "explanation": "Sistemas maiores que 6 kW devem ter capacidade de trabalhar com fator de potência ajustável de 0,90 indutivo até 0,90 capacitivo. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Para a proteção adequada, em até quanto tempo o sistema de microgeração distribuída deve cessar o fornecimento de energia à rede após ocorrer o ilhamento?",
+      "options": [
+        "1 segundo.",
+        "2 segundos.",
+        "20 segundos.",
+        "300 segundos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A proteção de anti-ilhamento exige que a geração distribuída cesse o fornecimento em até 2 segundos após a perda da rede. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "No contexto da conexão de microgeradores, quais proteções correspondem, respectivamente, aos códigos ANSI 27, 59, 81U e 81O?",
+      "options": [
+        "Sobrecarga, Curto-circuito, Direcional de potência e Religamento.",
+        "Subtensão, Sobretensão, Subfrequência e Sobrefrequência.",
+        "Desequilíbrio de corrente, Anti-ilhamento, Sincronismo e Subtensão.",
+        "Sobretensão, Curto-circuito, Fator de potência e Harmônicos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Esses códigos correspondem às funções de proteção de subtensão, sobretensão, subfrequência e sobrefrequência, que são obrigatórias. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Para assegurar a qualidade de energia e evitar efeitos adversos em outros equipamentos, o sistema não deve causar qual fenômeno elétrico acima dos limites da IEC 61000?",
+      "options": [
+        "Efeito corona.",
+        "Cintilação (flicker).",
+        "Corrente contínua injetada isoladamente.",
+        "Desmagnetização de inversores."
+      ],
+      "correctIndex": 1,
+      "explanation": "A operação não deve causar cintilação acima dos limites permitidos, resguardando a estabilidade da tensão local. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Na sincronização do inversor com a rede brasileira, em qual frequência a conexão em corrente alternada deve ser efetuada?",
+      "options": [
+        "50 Hz.",
+        "60 Hz.",
+        "120 Hz.",
+        "220 Hz."
+      ],
+      "correctIndex": 1,
+      "explanation": "A conexão de qualquer microgerador à rede de distribuição deve ser sincronizada em corrente alternada com frequência de 60 Hz. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "O que deve ser instalado antes do inversor caso a central microgeradora já produza energia elétrica diretamente em corrente alternada (AC)?",
+      "options": [
+        "Um transformador de alta potência.",
+        "Um medidor bidirecional primário.",
+        "Um retificador de tensão.",
+        "Uma string box com fusível DC."
+      ],
+      "correctIndex": 2,
+      "explanation": "Sendo a geração originalmente em AC, deve-se aplicar um retificador de tensão com potência adequada entre a geração e o inversor. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "No aspecto de visibilidade e monitoramento, qual vantagem principal o microinversor oferece em relação aos inversores centrais/string?",
+      "options": [
+        "Exibe os resultados mensais de forma analógica sem internet.",
+        "Permite o acompanhamento de desempenho detalhado no nível de cada painel individualmente.",
+        "Sintetiza todos os dados da instalação num gráfico único sem detalhes periféricos.",
+        "Não exige plataforma computacional, pois o display está embutido nos painéis."
+      ],
+      "correctIndex": 1,
+      "explanation": "A arquitetura do microinversor permite um rastreamento individual do sistema, monitorando a performance no nível de cada módulo (panel-level). (O que é um microinversor e como funciona? — Loja Deye - DeyeStore)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Atualmente, inversores de alta potência (acima de 20 kW) chegam com características 'plug and play'. Que proteção costuma vir incorporada a eles, facilitando a instalação?",
+      "options": [
+        "Cabo solar com liga de proteção armada.",
+        "DPS de fusível e chave seccionadora (funções da String Box).",
+        "Controlador de carga híbrido com acionamento diesel.",
+        "Rastreador de satélite integrado ao chassi."
+      ],
+      "correctIndex": 1,
+      "explanation": "Muitos inversores já incluem proteções internas correspondentes às de uma String Box, como DPS de fusível e chave seccionadora, agilizando o comissionamento. (SOUTH AMERICA - Revista Potência)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "Em sistemas conectados à rede (on-grid), o mecanismo de anti-ilhamento do inversor cessa o fornecimento de energia para a rede em caso de falha da concessionária.",
+      "correctAnswer": true,
+      "explanation": "O anti-ilhamento interrompe o fornecimento em caso de falha, evitando acidentes na manutenção da rede de distribuição. (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "Em sistemas com armazenamento em baterias (off-grid), um inversor é utilizado para converter a energia proveniente das baterias em corrente alternada para alimentar as cargas.",
+      "correctAnswer": true,
+      "explanation": "O inversor atua junto ao controlador extraindo a energia contínua do arranjo ou baterias e fornecendo corrente alternada para a carga. (Geração Distribuída de Energia Elétrica: Uma Revisão Sistemática da Literatura Distributed Generation of Electric Power: - APREPRO)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Após uma desconexão causada por anomalia, o inversor pode retomar imediatamente o fornecimento de energia à rede se os níveis de tensão forem normalizados.",
+      "correctAnswer": false,
+      "explanation": "A reconexão não é imediata; o sistema deve aguardar um atraso de 20 a 300 segundos com a rede normalizada. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Um sistema fotovoltaico híbrido é caracterizado por operar sem conexão com a rede, utilizando simultaneamente os painéis e um gerador secundário.",
+      "correctAnswer": true,
+      "explanation": "O sistema híbrido independe da rede e utiliza um gerador secundário (como a diesel) associado aos painéis para garantir o suprimento. (Geração Distribuída de Energia Elétrica: Uma Revisão Sistemática da Literatura Distributed Generation of Electric Power: - APREPRO)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "O sistema de geração distribuída, via de regra, não precisa suportar o religamento automático fora de fase (em oposição de fase) caso possua um microinversor.",
+      "correctAnswer": false,
+      "explanation": "O sistema deve ser capaz de suportar religamento automático da rede fora de fase, inclusive na pior condição possível, que é a oposição de fase. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "O sistema de geração deve parar de fornecer energia à rede em 1 segundo se a injeção de componente C.C. for superior a ____ % da corrente nominal do inversor.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "0,5"
+        }
+      ],
+      "explanation": "O limite para injeção contínua na rede é 0,5% da corrente nominal, exigindo parada em 1 segundo. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "O ____ é o único responsável pela sincronização adequada de suas instalações com o sistema de distribuição acessado.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "acessante"
+        }
+      ],
+      "explanation": "As diretrizes estabelecem que é de total responsabilidade do acessante garantir a sincronização do seu sistema com a rede elétrica. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "hard",
+      "statement": "A função de espera de tempo de reconexão do sistema elétrico de geração distribuída é designada pelo código ANSI ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "62"
+        }
+      ],
+      "explanation": "A função de espera do tempo de reconexão é exigida para a conexão de microgeradores e identificada pelo código ANSI 62. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    }
+  ]
+}

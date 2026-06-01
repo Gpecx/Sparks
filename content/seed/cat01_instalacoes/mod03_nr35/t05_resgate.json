@@ -13,11 +13,11 @@
       "statement": "Segundo a NR-35, qual é a principal exigência à organização em relação a possíveis acidentes durante o trabalho em altura?",
       "options": [
         "Aguardar a chegada de socorro público em caso de quedas.",
-        "Estabelecer procedimentos de respostas aos cenários de emergências.",
         "Treinar todos os funcionários do administrativo em resgate.",
+        "Estabelecer procedimentos de respostas aos cenários de emergências.",
         "Fornecer equipamentos de resgate apenas para serviços não rotineiros."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Conforme o item 35.7.1 da NR-35, a organização é obrigada a estabelecer procedimentos documentados de respostas aos cenários de emergências de trabalho em altura.",
       "difficulty": "easy"
     },
@@ -27,10 +27,10 @@
       "options": [
         "Retenção de queda.",
         "Restrição de movimentação.",
-        "Suspensão inerte.",
-        "Fator de queda."
+        "Fator de queda.",
+        "Suspensão inerte."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "O glossário da NR-35 define 'Suspensão Inerte' como a situação em que um trabalhador permanece suspenso pelo sistema de segurança até o momento do socorro.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Qual deve ser o objetivo principal das técnicas, equipamentos e sistemas de resgate, segundo o item 35.7.1?",
       "options": [
-        "Aumentar o tempo de suspensão para estabilizar a coluna da vítima.",
         "Reduzir o tempo de suspensão inerte do trabalhador.",
+        "Aumentar o tempo de suspensão para estabilizar a coluna da vítima.",
         "Garantir que a vítima seja resgatada exclusivamente por cordas.",
         "Aguardar avaliação médica antes de iniciar a descida."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A alínea 'd' do item 35.7.1 exige que as técnicas e sistemas de resgate sejam empregados de forma a reduzir o tempo de suspensão inerte.",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Quais habilidades e condições são exigidas das pessoas responsáveis pelo resgate, segundo o item 35.7.3?",
       "options": [
-        "Prestar primeiros socorros e possuir aptidão física e mental.",
         "Possuir formação superior em medicina ou enfermagem.",
+        "Prestar primeiros socorros e possuir aptidão física e mental.",
         "Ter experiência prévia militar e aptidão apenas física.",
         "Serem engenheiros de segurança com especialização em resgate."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "O item 35.7.3 determina que as pessoas responsáveis pelo resgate devem estar capacitadas, prestar primeiros socorros e possuir aptidão física e mental.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "O que o treinamento inicial em trabalho em altura deve abordar sobre situações de emergência?",
       "options": [
         "Técnicas avançadas de intervenção cirúrgica no local.",
-        "Noções básicas de técnicas de resgate e de primeiros socorros.",
         "Como emitir laudos de óbito e perícia técnica.",
+        "Noções básicas de técnicas de resgate e de primeiros socorros.",
         "Exclusivamente como acionar o rádio comunicador."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O item 35.4.2.1, alínea 'g', determina que o treinamento inicial contemple noções básicas de técnicas de resgate e de primeiros socorros.",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "O glossário da NR-35 define a Permissão de Trabalho (PT) como documento contendo:",
       "options": [
         "Apenas a lista de presença e a AR anexada.",
-        "Conjunto de medidas de controle para trabalho seguro, além de medidas de emergência e resgate.",
+        "Lista dos EPIs utilizados no resgate.",
         "Exclusivamente o esquema de montagem do SPCQ.",
-        "Lista dos EPIs utilizados no resgate."
+        "Conjunto de medidas de controle para trabalho seguro, além de medidas de emergência e resgate."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O Glossário define PT como documento escrito contendo conjunto de medidas de controle, visando ao trabalho seguro, além de medidas de emergência e resgate.",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "O item 35.7.1 exige que a organização considere quais fatores na estruturação dos procedimentos de emergência?",
       "options": [
-        "O custo financeiro e o orçamento disponível para o salvamento.",
         "A equipe de emergência e salvamento e o seu dimensionamento.",
+        "O custo financeiro e o orçamento disponível para o salvamento.",
         "O acionamento imediato da defesa civil local para assumir o comando.",
         "A substituição integral do SPIQ utilizado."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O item 35.7.1, alínea 'b', exige que a organização considere a equipe de emergência e salvamento e o seu dimensionamento.",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "O que a NR-35 exige que a Análise de Risco (AR) considere em relação aos procedimentos de socorro?",
       "options": [
         "A contratação de ambulância UTI de prontidão no local.",
-        "A isenção de responsabilidade da empresa caso o socorro demore.",
         "As situações de emergência e o planejamento do resgate e primeiros socorros.",
+        "A isenção de responsabilidade da empresa caso o socorro demore.",
         "A obrigatoriedade de acionar a CIPA antes de iniciar o resgate."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "A alínea 'k' do item 35.5.5.1 exige que a AR considere as situações de emergência e o planejamento do resgate e primeiros socorros.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Qual é a diretriz da norma quanto aos recursos materiais para a operação de salvamento?",
       "options": [
-        "A organização deve assegurar que a equipe de resgate possua os recursos necessários.",
-        "A organização deve orientar os trabalhadores a adquirirem seus próprios kits de resgate.",
         "Deve depender exclusivamente dos recursos do Corpo de Bombeiros.",
+        "A organização deve orientar os trabalhadores a adquirirem seus próprios kits de resgate.",
+        "A organização deve assegurar que a equipe de resgate possua os recursos necessários.",
         "A organização está dispensada se o trabalho for inferior a 5 metros."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "O item 35.7.2 determina que a organização deve assegurar que a equipe de emergência e salvamento possua os recursos necessários.",
       "difficulty": "medium"
     },
@@ -131,10 +131,10 @@
       "options": [
         "O isolamento da área (b) e a seleção do SPCQ (e).",
         "A identificação de riscos adicionais (i) e a forma de supervisão (m).",
-        "As situações de emergência/planejamento de resgate (k) e a necessidade de sistema de comunicação (l).",
-        "As condições meteorológicas (d) e o estabelecimento de pontos de ancoragem (c)."
+        "As condições meteorológicas (d) e o estabelecimento de pontos de ancoragem (c).",
+        "As situações de emergência/planejamento de resgate (k) e a necessidade de sistema de comunicação (l)."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Para a logística de resgate, a AR exige nas alíneas 'k' as situações de emergência/planejamento de resgate e na alínea 'l' a necessidade de sistema de comunicação.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A organização está desobrigada de fornecer recursos de resgate caso delegue formalmente as ações aos órgãos públicos de emergência.",
       "correctAnswer": false,
       "explanation": "Falso. O item 35.7.2 é claro: a própria organização deve assegurar que a equipe possua os recursos necessários para o resgate.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "As técnicas e sistemas de resgate devem ser concebidos para reduzir ao máximo o tempo de suspensão inerte do trabalhador.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. A alínea 'd' do item 35.7.1 exige que as técnicas e sistemas sejam empregados para reduzir o tempo de suspensão inerte.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O glossário da NR-35 define a PT como documento voltado exclusivamente para o trabalho seguro, não sendo local para listar medidas de resgate.",
       "correctAnswer": false,
       "explanation": "Falso. O glossário estabelece que a PT deve conter medidas visando ao trabalho seguro 'além de medidas de emergência e resgate'.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Os procedimentos de emergência devem considerar o tempo estimado para o resgate e os perigos associados à operação.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. O item 35.7.1, alíneas 'a' e 'c', exige que a organização considere os perigos da operação de resgate e o respectivo tempo estimado.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Os responsáveis pelo salvamento devem ter capacitação técnica para resgate, prestar primeiros socorros e apresentar aptidão física e mental.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. O item 35.7.3 exige cumulativamente: capacitação, primeiros socorros e aptidão física e mental.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "A situação em que o trabalhador permanece pendurado pelo sistema de segurança aguardando socorro é denominada de suspensão _____.",
+      "statement": "A situação em que o trabalhador permanece pendurado pelo sistema de segurança aguardando socorro é denominada de suspensão ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Ao estabelecer os procedimentos de emergência, a organização deve considerar a equipe de emergência e salvamento e definir o seu correto _____.",
+      "statement": "Ao estabelecer os procedimentos de emergência, a organização deve considerar a equipe de emergência e salvamento e definir o seu correto ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A Análise de Risco deve avaliar e prever a necessidade de um eficiente sistema de _____ entre os envolvidos no trabalho em altura.",
+      "statement": "A Análise de Risco deve avaliar e prever a necessidade de um eficiente sistema de ____ entre os envolvidos no trabalho em altura.",
       "blanks": [
         {
           "index": 0,

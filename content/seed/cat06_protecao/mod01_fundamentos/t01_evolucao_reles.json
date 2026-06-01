@@ -39,11 +39,11 @@
       "statement": "A sigla IED refere-se a:",
       "options": [
         "Integrated Electrical Device",
-        "Internal Electromagnetic Detector",
+        "Intelligent Electronic Device",
         "Inverse Electromechanical Disk",
-        "Intelligent Electronic Device"
+        "Internal Electromagnetic Detector"
       ],
-      "correctIndex": 3,
+      "correctIndex": 1,
       "explanation": "IED significa Intelligent Electronic Device: dispositivo eletrônico inteligente microprocessado capaz de englobar proteção, medição, controle, monitoramento e comunicação.",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Qual é uma das principais vantagens dos relés de tecnologia digital (numéricos) em relação às gerações anteriores?",
       "options": [
         "Imunidade completa a altas temperaturas e sobretensões atmosféricas sem filtros.",
-        "Agregação de múltiplas funções em um único dispositivo: proteção, medição, localização de defeitos e oscilografia.",
         "Utilização exclusiva de contatos móveis que evitam desgastes prematuros de software.",
+        "Agregação de múltiplas funções em um único dispositivo: proteção, medição, localização de defeitos e oscilografia.",
         "Eliminação total do uso de transformadores de corrente (TC) e de potencial (TP)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "As vantagens dos relés digitais incluem menor custo, tamanho reduzido e funcionalidades agregadas: proteção, localização de defeitos, oscilografia, registro de eventos, entre outras.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "Qual desvantagem típica apresentaram os relés estáticos?",
       "options": [
         "Alto consumo e elevada carga (burden) conectada aos transformadores de instrumentos.",
-        "Maior sensibilidade a surtos eletromagnéticos, exigindo instalações com proteção especial.",
+        "Dependência de molas de retenção que perdem a calibração com variação da pressão atmosférica.",
         "Incapacidade de atingir tempos de atuação rápidos para correntes elevadas de curto-circuito.",
-        "Dependência de molas de retenção que perdem a calibração com variação da pressão atmosférica."
+        "Maior sensibilidade a surtos eletromagnéticos, exigindo instalações com proteção especial."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "As proteções estáticas possuem maior sensibilidade a surtos eletromagnéticos e estão sujeitas ao envelhecimento prematuro de componentes, como capacitores eletrolíticos.",
       "difficulty": "easy"
     },
@@ -91,11 +91,11 @@
       "statement": "Como a função de auto verificação (auto check) dos relés digitais modificou a manutenção no sistema elétrico?",
       "options": [
         "Tornou obrigatória a realização semanal de reparos e testes destrutivos em laboratórios.",
-        "Obrigou o uso de equipamentos eletromecânicos acoplados para o reset manual dos processadores.",
         "Permitiu o aumento do intervalo de intervenções manuais preventivas, podendo eliminar a necessidade de manutenção periódica da proteção em si.",
+        "Obrigou o uso de equipamentos eletromecânicos acoplados para o reset manual dos processadores.",
         "Bloqueou o acesso remoto aos dados da subestação, forçando extração física de oscilografias."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "Com os sistemas de auto check e monitoramento contínuo nos relés digitais, o intervalo para intervenções preventivas pode ser aumentado e eventualmente até eliminado para a proteção em si.",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "Quais funções lógicas são principalmente utilizadas nas unidades de medida dos relés estáticos?",
       "options": [
         "Transformada Discreta de Fourier e Integração Diferencial.",
-        "Funções lógicas do tipo E (AND) e OU (OR).",
+        "Unidades temporizadoras baseadas em relógios com mola e escape.",
         "Algoritmos de mínimos quadrados e equações diferenciais.",
-        "Unidades temporizadoras baseadas em relógios com mola e escape."
+        "Funções lógicas do tipo E (AND) e OU (OR)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Os relés estáticos operam com circuitos transistorizados e semicondutores que desempenham funções lógicas de medição usando principalmente as funções E (AND) e OU (OR).",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Na modelagem de confiabilidade operacional para relés digitais, um relé no 'Estado B' (Em Falha) é aquele que:",
       "options": [
-        "Opera corretamente garantindo tanto dependabilidade como segurança.",
         "Pode operar incorretamente quando solicitado ou acidentalmente sem solicitação.",
+        "Opera corretamente garantindo tanto dependabilidade como segurança.",
         "Está retirado fisicamente de operação em período de manutenção e reparo.",
         "Está temporariamente bloqueado aguardando tempo morto de religamento."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O 'Estado B - Em Falha' é aquele no qual o relé pode operar incorretamente ao ser solicitado ou acidentalmente sem que haja solicitação de defeito.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Os IEDs (Intelligent Electronic Devices) possuem a capacidade de agregar múltiplas funções: medição, comunicação, supervisão e proteção em um único dispositivo microprocessado.",
       "correctAnswer": true,
       "explanation": "É exatamente essa agregação multifuncional que caracteriza um IED: englobam simultaneamente supervisão, medição, controle, monitoramento e proteção em um mesmo hardware.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Uma vantagem exclusiva dos relés estáticos é o não envelhecimento de componentes, tornando-os isentos de substituição ao longo de toda a vida útil da subestação.",
       "correctAnswer": false,
       "explanation": "Uma desvantagem dos relés estáticos é exatamente o envelhecimento dos componentes. Capacitores eletrolíticos precisam ser substituídos em média a cada 8 anos e circuitos de medição perdem características após cerca de 20 anos.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Os relés eletromecânicos apresentam grande sensibilidade a altas temperaturas da subestação quando comparados à tecnologia digital.",
       "correctAnswer": false,
       "explanation": "Relés eletromecânicos têm como vantagens a durabilidade, robustez e tolerância a altas temperaturas, diferentemente dos relés digitais e estáticos, que são muito mais sensíveis ao calor e surtos eletromagnéticos.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Em funções de distância de relés numéricos, o fator de compensação residual k0 permite configurar tanto seu módulo quanto seu ângulo de forma independente.",
       "correctAnswer": true,
       "explanation": "Diferentemente dos relés eletromecânicos, os relés numéricos modernos permitem configurar tanto o módulo como o ângulo do k0 para compensação de falta fase-terra.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Na arquitetura de relés digitais, o filtro anti-aliasing atua como filtro passa-alta que extrai harmônicos de interesse das ondas de falta.",
       "correctAnswer": false,
       "explanation": "O filtro anti-aliasing nos relés digitais atua como filtro passa-baixa, limitando a banda do sinal de entrada para satisfazer a frequência de Nyquist e impedir a sobreposição de espectro.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A evolução tecnológica da proteção passou pelos relés eletromecânicos, evoluindo para a tecnologia de relés de estado sólido denominados _____, até alcançar plataformas baseadas em microprocessadores.",
+      "statement": "A evolução tecnológica da proteção passou pelos relés eletromecânicos, evoluindo para a tecnologia de relés de estado sólido denominados ____, até alcançar plataformas baseadas em microprocessadores.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para evitar sobreposição de espectro na conversão A/D do relé digital, a taxa de amostragem deve ser no mínimo o dobro da frequência máxima do sinal — critério conhecido como frequência de _____.",
+      "statement": "Para evitar sobreposição de espectro na conversão A/D do relé digital, a taxa de amostragem deve ser no mínimo o dobro da frequência máxima do sinal — critério conhecido como frequência de ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Na concepção modular típica dos relés estáticos, o módulo de _____ atua como detector de nível de corrente, sendo constituído por transistores amplificadores e pontes de resistores com diodos zener como tensão de referência.",
+      "statement": "Na concepção modular típica dos relés estáticos, o módulo de ____ atua como detector de nível de corrente, sendo constituído por transistores amplificadores e pontes de resistores com diodos zener como tensão de referência.",
       "blanks": [
         {
           "index": 0,

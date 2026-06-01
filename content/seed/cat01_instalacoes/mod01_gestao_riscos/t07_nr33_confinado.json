@@ -13,11 +13,11 @@
       "statement": "Segundo a NR-33, para que um ambiente seja caracterizado como espaço confinado, ele deve atender simultaneamente a três requisitos. Quais são eles?",
       "options": [
         "Atmosfera IPVS, falta de iluminação permanente e porta de acesso único.",
-        "Não ser projetado para ocupação humana contínua, possuir meios limitados de entrada e saída, e existência ou possibilidade de atmosfera perigosa.",
         "Ser subterrâneo, apresentar ventilação mecânica deficiente e abrigar trabalhos com solda ou a quente.",
+        "Não ser projetado para ocupação humana contínua, possuir meios limitados de entrada e saída, e existência ou possibilidade de atmosfera perigosa.",
         "Possuir área inferior a 2 metros quadrados, sem comunicação externa via rádio e sem ventilação natural."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O item 33.2.2 define que espaço confinado é qualquer área que atenda simultaneamente a três requisitos: a) não ser projetado para ocupação contínua; b) ter meios limitados de entrada/saída; e c) existir ou poder existir atmosfera perigosa.",
       "difficulty": "easy"
     },
@@ -26,11 +26,11 @@
       "statement": "A NR-33 estabelece percentuais de oxigênio (O2) indicados e aceitáveis para a liberação de entrada em espaços confinados. Qual é a faixa de volume de oxigênio considerada aceitável?",
       "options": [
         "Entre 18,0% e 20,0%.",
-        "Entre 19,5% e 23,0%.",
+        "Entre 15,0% e 19,5%.",
         "Entre 20,9% e 25,0%.",
-        "Entre 15,0% e 19,5%."
+        "Entre 19,5% e 23,0%."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Conforme o subitem 33.5.15.2 da NR-33, o percentual de oxigênio indicado é de 20,9%, sendo aceitável o percentual que se encontre na faixa entre 19,5% até 23% de volume.",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "Dentre as atribuições do Vigia estabelecidas pela NR-33, qual das seguintes ações é estritamente de sua competência durante a operação?",
       "options": [
-        "Emitir e assinar a Permissão de Entrada e Trabalho (PET) antes da liberação.",
-        "Entrar no espaço confinado para resgatar os trabalhadores imediatamente em caso de emergência.",
         "Permanecer fora do espaço confinado, mantendo controle contínuo e ordenando o abandono se necessário.",
+        "Entrar no espaço confinado para resgatar os trabalhadores imediatamente em caso de emergência.",
+        "Emitir e assinar a Permissão de Entrada e Trabalho (PET) antes da liberação.",
         "Elaborar os procedimentos de segurança, a identificação dos perigos e o plano de resgate para a equipe."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "De acordo com o item 33.3.4 (alíneas 'c' e 'f'), compete ao Vigia permanecer fora do espaço confinado, em contato permanente, e ordenar o abandono caso reconheça qualquer sinal de perigo ou alarme.",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "A Permissão de Entrada e Trabalho (PET) possui validade restrita para garantir a segurança dinâmica da operação. Qual é o limite máximo absoluto de validade da PET, incluindo eventuais prorrogações?",
       "options": [
         "8 horas.",
-        "12 horas.",
         "24 horas.",
+        "12 horas.",
         "48 horas."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "O subitem 33.5.12.1.1 da norma estabelece categoricamente que a validade da PET, já computando quaisquer prorrogações que sejam realizadas, não pode exceder a 24 (vinte e quatro) horas.",
       "difficulty": "easy"
     },
@@ -65,11 +65,11 @@
       "statement": "A ventilação é uma das medidas de controle essenciais aplicadas antes e durante a atividade em espaços confinados. O que a NR-33 proíbe expressamente em relação a esse procedimento?",
       "options": [
         "A utilização de exaustores mecânicos movidos exclusivamente a energia elétrica.",
-        "A ventilação realizada através da injeção de oxigênio puro.",
         "A ventilação por insuflação direcionada em ambientes que contenham poeiras decantadas.",
+        "A ventilação realizada através da injeção de oxigênio puro.",
         "A ventilação natural combinada simultaneamente com o sistema de exaustão."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O item 33.5.16.3 da NR-33 traz uma diretriz técnica proibitiva fundamental: é estritamente proibida a ventilação com oxigênio puro, devido ao altíssimo risco de explosão e incêndio acelerado.",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "A NR-33 permite que o Supervisor de Entrada desempenhe outra função crítica na operação, desde que expressamente prevista na PET. Qual é essa função?",
       "options": [
         "Responsável Técnico pela elaboração dos projetos de melhoria.",
-        "Vigia.",
+        "Coordenador do laboratório de calibração acreditado pelo INMETRO.",
         "Membro exclusivo da equipe de emergência e salvamento externa.",
-        "Coordenador do laboratório de calibração acreditado pelo INMETRO."
+        "Vigia."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Segundo o item 33.3.3, alínea 'g', compete ao Supervisor de Entrada desempenhar a função de vigia, quando isso estiver expressamente previsto e dimensionado na PET emitida.",
       "difficulty": "medium"
     },
@@ -90,12 +90,12 @@
       "type": "multipleChoice",
       "statement": "Sobre o monitoramento dos gases, como e por quem devem ser realizadas as avaliações atmosféricas iniciais e o monitoramento contínuo em um espaço confinado?",
       "options": [
-        "Inicialmente pelo Vigia dentro do espaço confinado, seguido de monitoramento manual a cada 2 horas.",
         "Inicialmente pelo Supervisor de Entrada fora do espaço confinado, mantendo-se monitoramento contínuo durante a permanência.",
+        "Inicialmente pelo Vigia dentro do espaço confinado, seguido de monitoramento manual a cada 2 horas.",
         "Inicialmente pelo Trabalhador Autorizado antes da entrada, sendo opcional o monitoramento se o ambiente for aberto.",
         "Pelo Responsável Técnico em ambiente laboratorial prévio, dispensando o monitoramento contínuo local."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "De acordo com os itens 33.5.15.1 e 33.5.15.3, as avaliações iniciais devem ser realizadas pelo Supervisor de Entrada fora do espaço, e o monitoramento deve ser contínuo durante toda a permanência dos trabalhadores.",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "Quando a atmosfera de um espaço confinado for avaliada e classificada como IPVS (Imediatamente Perigosa à Vida ou à Saúde), o acesso e trabalho só são permitidos mediante a utilização de qual equipamento de proteção respiratória?",
       "options": [
         "Máscara com filtro químico combinado para vapores orgânicos de alta eficiência e longa duração.",
-        "Máscara autônoma de demanda com pressão positiva ou respirador de linha de ar comprimido com cilindro auxiliar de escape.",
         "Respirador purificador de ar motorizado (PAPR) acoplado diretamente a um capacete industrial vedado.",
+        "Máscara autônoma de demanda com pressão positiva ou respirador de linha de ar comprimido com cilindro auxiliar de escape.",
         "Máscara semifacial com suprimento de ar mecanicamente filtrado a partir da atmosfera adjacente."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O subitem 33.5.17.2 da NR-33 determina que o acesso à atmosfera IPVS exige obrigatoriamente máscara autônoma de demanda com pressão positiva ou respirador de linha de ar comprimido provido de cilindro auxiliar.",
       "difficulty": "medium"
     },
@@ -131,10 +131,10 @@
       "options": [
         "Deve-se utilizar um cadeado único sob responsabilidade intransferível do Supervisor de Entrada, que guardará a chave.",
         "O Responsável Técnico bloqueia o painel de força geral eletronicamente, dispensando uso de cadeados operacionais.",
-        "Cada trabalhador deve possuir seu próprio dispositivo de bloqueio individual e independente, com etiqueta associada.",
-        "Utiliza-se um sistema de bloqueio validado por senha eletrônica corporativa, conhecida apenas pelo Vigia."
+        "Utiliza-se um sistema de bloqueio validado por senha eletrônica corporativa, conhecida apenas pelo Vigia.",
+        "Cada trabalhador deve possuir seu próprio dispositivo de bloqueio individual e independente, com etiqueta associada."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "O item 33.5.14.2 (alíneas 'a' e 'b') é taxativo ao exigir que, no procedimento de bloqueio, cada trabalhador deve possuir seu próprio dispositivo de bloqueio individual e independente, provido da sua respectiva etiqueta inremovível.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A Permissão de Entrada e Trabalho (PET) deve ser rigorosamente encerrada tão logo as atividades sejam completadas, ocorra uma condição não prevista, haja a saída de todos os trabalhadores ou o vigia seja substituído por outro não relacionado no documento.",
       "correctAnswer": true,
       "explanation": "A afirmativa é verdadeira e reproduz na íntegra as condicionais para encerramento obrigatório da PET descritas nas alíneas 'a', 'b', 'c' e 'd' do item 33.5.11 da NR-33.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "É dever da organização elaborar e manter atualizado um cadastro exclusivo dos espaços confinados ativos, estando legalmente dispensada de registrar, rastrear ou medir dimensões daqueles que se encontram na condição de inativos.",
       "correctAnswer": false,
       "explanation": "A afirmativa é falsa. O item 33.4.2 da NR-33 determina que o cadastro do espaço confinado deve contemplar imperativamente a sua condição de operação, seja ele um espaço confinado ativo ou inativo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O Vigia está autorizado a realizar pequenas tarefas de montagem de equipamentos nas adjacências da boca de visita, desde que essa ação não o faça perder o contato visual e a comunicação com os trabalhadores no interior.",
       "correctAnswer": false,
       "explanation": "A afirmativa é falsa. O item 33.3.4, alínea 'g', estabelece que é obrigação do vigia 'não realizar outras tarefas durante as operações em espaços confinados', mantendo seu foco integral e exclusivo na segurança e monitoramento da equipe.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "É de competência do Responsável Técnico identificar e elaborar o cadastro estruturado de espaços confinados, bem como adaptar o modelo da Permissão de Entrada e Trabalho (PET) à realidade da organização.",
       "correctAnswer": true,
       "explanation": "A afirmativa é verdadeira, pois reflete as atribuições diretas de estruturação documental e reconhecimento de área atribuídas ao Responsável Técnico nas alíneas 'a' e 'b' do item 33.3.2.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A capacitação para os trabalhos nesses ambientes estipula cargas horárias distintas por função técnica, sendo exigido normativamente que a carga horária dedicada exclusivamente à parte prática do treinamento de formação seja de, no mínimo, 30% do total.",
       "correctAnswer": false,
       "explanation": "A afirmativa é falsa. A NR-33 determina explicitamente em seu item 33.6 que a carga horária referente à parte prática dos treinamentos deve representar no mínimo 50% (cinquenta por cento) do total de horas aplicadas, e não 30%.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Quando o processo de emissão for realizado em meio físico documentado, a Permissão de Entrada e Trabalho (PET) deve obrigatoriamente conter, no mínimo, _____ vias, que serão resguardadas.",
+      "statement": "Quando o processo de emissão for realizado em meio físico documentado, a Permissão de Entrada e Trabalho (PET) deve obrigatoriamente conter, no mínimo, ____ vias, que serão resguardadas.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O deslocamento planejado e controlado da atmosfera existente em um espaço confinado pela introdução de um gás específico, resultando em um ambiente não combustível e com deficiência intencional de oxigênio, é denominado de _____.",
+      "statement": "O deslocamento planejado e controlado da atmosfera existente em um espaço confinado pela introdução de um gás específico, resultando em um ambiente não combustível e com deficiência intencional de oxigênio, é denominado de ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para assegurar a plena precisão e confiabilidade durante o monitoramento de gases, a calibração do equipamento de avaliações atmosféricas deve ser executada obrigatoriamente por um laboratório de calibração que possua certificação e seja acreditado pelo _____.",
+      "statement": "Para assegurar a plena precisão e confiabilidade durante o monitoramento de gases, a calibração do equipamento de avaliações atmosféricas deve ser executada obrigatoriamente por um laboratório de calibração que possua certificação e seja acreditado pelo ____.",
       "blanks": [
         {
           "index": 0,

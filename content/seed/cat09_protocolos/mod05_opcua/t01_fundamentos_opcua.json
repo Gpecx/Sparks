@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Qual o objetivo principal do padrao OPC-UA na industria e em sistemas SPCS?",
       "options": [
-        "Substituir cabos de forca e disjuntores por transmissoes sem fio.",
         "Garantir interoperabilidade segura e independente de plataforma entre equipamentos.",
+        "Substituir cabos de forca e disjuntores por transmissoes sem fio.",
         "Limitar a comunicacao industrial apenas a redes seriais RS-485 padronizadas.",
         "Substituir integralmente a norma IEC 61850 no barramento de processo."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O OPC-UA visa garantir a interoperabilidade padronizada, segura e independente de fabricantes para a integracao industrial (Informacao externa).",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "Qual componente em um SPCS e frequentemente configurado utilizando um servidor OPC para gerenciar dados do sistema?",
       "options": [
         "O rele eletromecanico de sobrecorrente em paineis isolados.",
-        "O sistema supervisorio (SCADA) e seus drivers de comunicacao.",
         "A chave seccionadora motorizada no patio da subestacao.",
+        "O sistema supervisorio (SCADA) e seus drivers de comunicacao.",
         "O transformador de corrente (TC) do nivel de processo."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Conforme as fontes, sistemas supervisorios comunicam-se frequentemente com IEDs utilizando servidores OPC com drivers especificos.",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Quais sao os dois modelos de comunicacao de dados suportados nativamente pelo padrao OPC-UA?",
       "options": [
         "Apenas o modelo Mestre-Escravo com polling ciclico.",
-        "Cliente-Servidor e Publish-Subscribe.",
+        "Comunicacao Peer-to-Peer e barramento Token Bus.",
         "Token Ring restrito e CSMA/CD em banda larga.",
-        "Comunicacao Peer-to-Peer e barramento Token Bus."
+        "Cliente-Servidor e Publish-Subscribe."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A arquitetura suporta o modelo Cliente-Servidor tradicional e adicionou o modelo Publish-Subscribe para redes escalaveis (Informacao externa).",
       "difficulty": "easy"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Na camada de transporte, quais opcoes o OPC-UA disponibiliza nativamente para equilibrar velocidade e integracao em redes de TI com firewalls?",
       "options": [
-        "Otimizacao via OPC-UA TCP binario e compatibilidade web via HTTPS.",
+        "Envio por tuneis IPSec dedicados e nao padronizados.",
         "Encapsulamento exclusivo em quadros seriais RS-485 padronizados.",
         "Transmissao apenas por mensagens ethernet multicast sem cabecalho IP.",
-        "Envio por tuneis IPSec dedicados e nao padronizados."
+        "Otimizacao via OPC-UA TCP binario e compatibilidade web via HTTPS."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "O padrao preve o transporte TCP binario para alta vazao (OT) e canais HTTPS/WebSockets para ultrapassar firewalls corporativos (TI) (Informacao externa).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Qual caracteristica faz do OPC-UA uma tecnologia facilitadora na unificacao das redes de Tecnologia da Informacao (TI) e Operacao (OT)?",
       "options": [
-        "Sua restricao tecnica que impede conexoes remotas em rede aberta.",
-        "O fato de desativar os protocolos IP nativos nos conversores de fabrica.",
         "A combinacao de modelos de informacao ricos, seguranca embarcada e tecnologias abertas.",
+        "O fato de desativar os protocolos IP nativos nos conversores de fabrica.",
+        "Sua restricao tecnica que impede conexoes remotas em rede aberta.",
         "A capacidade de substituir reles de protecao primarios em geradores."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Com forte semantica de dados e ciberseguranca, o OPC-UA transita desde os sensores de fabrica (OT) ate os servidores na nuvem (TI) confiavelmente (Informacao externa).",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Na logica de Subscription do OPC-UA, como o trafego de rede e otimizado durante o monitoramento de variaveis de processo?",
       "options": [
-        "O servidor agrupa MonitoredItems e so publica (Publish) quando ocorre efetiva alteracao de estado ou valor nas grandezas.",
         "O servidor e forcado a varrer e enviar toda a arvore de dados do Address Space a cada ciclo de milissegundo.",
+        "O servidor agrupa MonitoredItems e so publica (Publish) quando ocorre efetiva alteracao de estado ou valor nas grandezas.",
         "O cliente deve requisitar (polling) continuamente cada No individual para detectar alarmes da aplicacao.",
         "O servidor transmite o dado apenas em formato XML descriptografado para aliviar a carga no processador."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "As Subscriptions gerenciam MonitoredItems; notificacoes ocorrem sob condicoes e prazos definidos apenas se houver variacao, economizando banda (Informacao externa).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "O OPC Unified Architecture (OPC-UA) foi arquitetado para manter a exata dependencia da tecnologia COM/DCOM utilizada em versoes classicas (OPC-DA).",
       "correctAnswer": false,
       "explanation": "A genese do OPC-UA reside na superacao dos limites do COM/DCOM, desenvolvendo-se como padrao de arquitetura neutra e de plataforma aberta (Informacao externa).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "De acordo com experiencias documentadas de integracao na planta industrial, modelos mais novos de CLPs passaram a suportar nativamente a tecnologia.",
       "correctAnswer": true,
       "explanation": "As fontes relatam a execucao de avaliacoes e testes de cartao OPC UA disponivel para as novas familias de CLPs empregados no sistema industrial da planta.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "No Address Space do servidor OPC-UA, os elementos mapeados sob a NodeClass Method podem ser ativados por clientes para acionar rotinas diretas no.",
       "correctAnswer": true,
       "explanation": "O conceito de Methods no OPC-UA viabiliza a chamada de funcoes executaveis (Remote Procedure Calls) controlando rotinas complexas no equipamento remoto (Informacao externa).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O protocolo OPC-UA movimenta essencialmente pacotes brutos desestruturados de bytes, sendo encargo total do software do SCADA criar e deduzir a.",
       "correctAnswer": false,
       "explanation": "Pelo contrario, o OPC-UA fornece Information Models complexos que estruturam nativamente a semantica, metadata e relacoes hierarquicas antes do acesso pelo SCADA (Informacao externa).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Para proteger os fluxos logicos de supervisao, a especificacao do OPC-UA integra suporte nativo a autenticacao mutua e criptografia por meio de.",
       "correctAnswer": true,
       "explanation": "A camada Secure Channel do OPC-UA estabelece confianca e encriptacao validando rigorosamente a identidade por certificados X.509 entre os hosts (Informacao externa).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "No OPC-UA, o conjunto de nós que representa os dados e seus relacionamentos no servidor é chamado de espaço de _____.",
+      "statement": "No OPC-UA, o conjunto de nós que representa os dados e seus relacionamentos no servidor é chamado de espaço de ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A nova geracao de comunicacao industrial orientada a servicos, que expandiu a telemetria legada OLE for Process Control para todas as plataformas.",
+      "statement": "A nova geracao de comunicacao industrial orientada a servicos (que expandiu o legado OLE for Process Control) adiciona ao modelo Cliente-Servidor o mecanismo de notificacao automatica de dados chamado Publish-____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Na hierarquia informacional mapeada pelo OPC-UA, grandezas instantaneas, correntes eletricas ou limiares de alarme lidos sao geralmente _____.",
+      "statement": "Na hierarquia informacional mapeada pelo OPC-UA, grandezas instantaneas, correntes eletricas ou limiares de alarme lidos sao geralmente ____.",
       "blanks": [
         {
           "index": 0,

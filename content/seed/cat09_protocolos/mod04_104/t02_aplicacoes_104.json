@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Onde o protocolo IEC 60870-5-104 e comumente aplicado na arquitetura de automacao de subestacoes?",
       "options": [
-        "No barramento de processo entre sensores e reles.",
         "Na comunicacao entre o Station Gateway e o SCADA (centro de controle).",
+        "No barramento de processo entre sensores e reles.",
         "Apenas na ligacao serial ponto a ponto de IEDs de protecao.",
         "Exclusivamente para sincronismo de tempo via satelite."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Nas arquiteturas de automacao ilustradas, o IEC 104 e empregado nos Station Gateways para enviar e receber informacoes do SCADA remoto (NCC) via WAN.",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Qual a principal adaptacao pratica do protocolo IEC 60870-5-104 em relacao ao padrao original IEC 60870-5-101?",
       "options": [
-        "Altera as camadas de transporte e rede para operar nativamente sobre TCP/IP.",
         "Remove completamente a camada de aplicacao (ASDU).",
+        "Altera as camadas de transporte e rede para operar nativamente sobre TCP/IP.",
         "Adiciona suporte exclusivo para mensagens multicast GOOSE.",
         "Modifica o cabecalho de controle para adequar-se ao roteamento serial RS-485."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "O IEC 104 e uma extensao do IEC 101 que altera transporte, rede e link para se adequar ao acesso as redes baseadas no modelo TCP/IP.",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "Em uma atualizacao de telecontrole do padrao 101 para 104, o que ocorre com as estruturas da camada de aplicacao (ASDU)?",
       "options": [
         "Devem ser substituidas pelo padrao MMS da norma IEC 61850.",
-        "A camada de aplicacao e as ASDUs permanecem as mesmas do protocolo IEC 101.",
         "Recebem criptografia nativa no novo cabecalho APCI.",
+        "A camada de aplicacao e as ASDUs permanecem as mesmas do protocolo IEC 101.",
         "Sao fragmentadas obrigatoriamente em pacotes UDP broadcast."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A camada de aplicacao do IEC 104 e identica a do IEC 101, reusando as mesmas definicoes de ASDU e tipos de dados.",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Qual mensagem de enlace do IEC 104 o SCADA utiliza para monitorar se a conexao TCP com a remota permanece ativa?",
       "options": [
         "STARTDT",
-        "TESTFR",
+        "GOOSE",
         "STOPDT",
-        "GOOSE"
+        "TESTFR"
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A mensagem U do tipo TESTFR (Test Frame) e enviada para testar o enlace e verificar a disponibilidade e integridade da conexao com as estacoes remotas.",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Em um sistema moderno baseado em IEC 61850, qual equipamento normalmente atua integrando o barramento de estacao para transmissao via IEC 104 ao.",
       "options": [
-        "Merging Unit.",
-        "Switch Ethernet gerenciável.",
         "Station Gateway.",
+        "Switch Ethernet gerenciável.",
+        "Merging Unit.",
         "Rele de Protecao e Arco."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "O Station Gateway traduz e concentra protocolos internos do SAS (como IEC 61850) para protocolos de telecontrole em longa distancia (IEC 101/104) com o SCADA.",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Na gestao de fluxo de dados TCP/IP, a mensagem de controle APCI do protocolo IEC 104 inicia-se obrigatoriamente por qual byte?",
       "options": [
-        "68H",
         "10H",
+        "68H",
         "55H",
         "FFH"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "O primeiro byte (start byte) da APCI na transmissao do IEC 104 sempre assume o valor hexadecimal 68H.",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "Como o centro de controle diferencia tecnicamente uma telessinalizacao de um telecomando dentro de um frame de dados IEC 104?",
       "options": [
         "Pela sub-rede e porta TCP utilizadas na transmissao.",
-        "Pelo campo Type Identification (TI) presente no bloco da ASDU.",
+        "Pelo qualificador NT habilitado no cabecalho APCI.",
         "Pelo tamanho em bytes do payload na APDU.",
-        "Pelo qualificador NT habilitado no cabecalho APCI."
+        "Pelo campo Type Identification (TI) presente no bloco da ASDU."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O Type Identification (TI) presente na ASDU identifica inequivocamente o formato e tipo da informacao transportada (ponto simples, duplo, comando, etc).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Qual mecanismo padrao o IEC 104 utiliza para confirmar ao transmissor o sucesso na recepcao de pacotes de dados de processo?",
       "options": [
-        "A emissao de um pacote ICMP Echo Reply pelo roteador.",
         "O envio de uma Mensagem S (Supervisory) contendo o numero da proxima mensagem esperada (NR).",
+        "A emissao de um pacote ICMP Echo Reply pelo roteador.",
         "O disparo de um TESTFR para cada medida recebida no buffer.",
         "A retransmissao da APDU invertendo o byte 68H para 86H."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A quitacao (confirmacao) de entrega de fluxo no IEC 104 e feita enviando Mensagens S que declaram o contador NR de recepcao atualizado.",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "Nas aplicacoes modernas de subestacoes digitais, o IEC 60870-5-104 descarta o uso do Station Gateway, conectando cada IED diretamente ao COS.",
       "correctAnswer": false,
       "explanation": "Conforme arquiteturas documentadas, o Station Gateway mantem papel vital atuando como proxy/conversor entre os barramentos nativos da SE (ex: IEC 61850) e os canais IEC 101/104 do SCADA remoto.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A adaptacao do protocolo IEC 104 para redes ethernet baseadas no conjunto TCP/IP preservou totalmente a semantica de objetos e classes ASDU.",
       "correctAnswer": true,
       "explanation": "A principal caracteristica que facilita a adocao do 104 e que sua camada de aplicacao (incluindo as ASDUs e logicas) e praticamente a mesma validada para o 101.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A Mensagem de formato U (Unnumbered) do IEC 104 e projetada internamente para englobar as telessinalizacoes espontaneas que requerem altissima.",
       "correctAnswer": false,
       "explanation": "Mensagens formato U gerenciam exclusivamente controle de enlace logico (TESTFR, STARTDT, STOPDT) e nao carregam dados ou ASDUs do processo.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "No fluxo normal do IEC 104, os eventos de processo como abertura de disjuntores e leituras de telemedidas sao transportados dentro do formato APDU.",
       "correctAnswer": true,
       "explanation": "As Mensagens do tipo I (Information frames) sao as responsaveis legitimas por carregar as ASDUs contendo os dados uteis provenientes da planta.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Durante o processo de quitacao de pacotes, a Mensagem S (Supervisory) enviada pela remota transporta obrigatoriamente os contadores NS e NR para o.",
       "correctAnswer": false,
       "explanation": "Nas regras do formato APCI, a Mensagem S contem somente o contador de sequencia de recepcao (NR), sendo o contador de envio (NS) exclusivo das Mensagens I.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A arquitetura do SCADA utiliza a mensagem de enlace logico chamada _____ ACT para validar periodicamente se a sessao de comunicacao com o Gateway.",
+      "statement": "A arquitetura do SCADA utiliza a mensagem de enlace logico chamada ____ ACT para validar periodicamente se a sessao de comunicacao com o Gateway.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para delimitar o volume de carga em cada transmissao de telecontrole TCP, o campo da APCI responsavel pelo controle de tamanho estipula um _____.",
+      "statement": "Para delimitar o volume de carga em cada transmissao de telecontrole TCP, o campo da APCI responsavel pelo controle de tamanho estipula um ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A mensagem integral transferida pela pilha TCP na comunicacao IEC 104, englobando o cabecalho de controle de fluxo e os blocos de dados _____.",
+      "statement": "A mensagem integral transferida pela pilha TCP na comunicacao IEC 104, englobando o cabecalho de controle de fluxo e os blocos de dados ____.",
       "blanks": [
         {
           "index": 0,

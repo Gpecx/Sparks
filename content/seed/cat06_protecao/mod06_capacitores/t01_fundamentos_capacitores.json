@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Qual a principal finalidade da instalação de bancos de capacitores shunt (em derivação) na rede elétrica?",
       "options": [
-        "Fornecer potência reativa para compensar a energia reativa absorvida pelas cargas, melhorando a qualidade da rede.",
         "Melhorar o isolamento térmico das máquinas síncronas de base.",
+        "Fornecer potência reativa para compensar a energia reativa absorvida pelas cargas, melhorando a qualidade da rede.",
         "Fornecer estritamente potência ativa pura para compensar as perdas da transmissão.",
         "Elevar o escorregamento dos motores e a frequência sistêmica da rede em horários de ponta."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "Os capacitores são utilizados para fornecer (injetar) potência reativa, compensando a que é absorvida pelas cargas e melhorando o perfil de tensão da rede elétrica. (Fonte: Guia Proteção 2008 / Virtus-Anorm.Sist.Potência).",
       "difficulty": "easy"
     },
@@ -38,12 +38,12 @@
       "type": "multipleChoice",
       "statement": "O que ocorre no fenômeno transitório de energização de capacitores comumente conhecido como manobra 'back-to-back'?",
       "options": [
-        "A energização de um banco com outro vizinho já em operação, gerando intensas correntes inrush de alta frequência.",
+        "A ressonância paralela do ponto neutro do transformador causando a abertura automática de fusíveis base.",
         "A descarga mútua entre dois geradores no momento exato em que a barra de transferência fecha.",
         "A anulação total da potência reativa gerada devido a sobretensões sustentadas de sequência zero.",
-        "A ressonância paralela do ponto neutro do transformador causando a abertura automática de fusíveis base."
+        "A energização de um banco com outro vizinho já em operação, gerando intensas correntes inrush de alta frequência."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "O chaveamento 'back-to-back' ocorre na energização de um banco onde outro banco vizinho já opera, produzindo correntes circulantes inrush de altíssima intensidade e frequência. (Fonte: Virtus-Anorm.Sist. Potência).",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Em capacitores construídos com o recurso de proteção interna, o que acontece logo após a ocorrência de um curto-circuito no dielétrico de uma das células?",
       "options": [
-        "O disjuntor principal enxerga a falta remota e abre imediatamente todo o alimentador da subestação.",
         "O fusível associado atua, eliminando exclusivamente o capacitor unitário em falha, e o resto do banco segue operando.",
+        "O disjuntor principal enxerga a falta remota e abre imediatamente todo o alimentador da subestação.",
         "O gás gerado pelo arco cega o relé 87B, provocando uma sobrepressão que explode o banco inteiro.",
         "A tensão de toda a rede compensada sofre uma queda para zero instantaneamente devido à carga resistiva."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Com proteção interna, a queima do respectivo fusível elimina (isola) o capacitor unitário em falha. O capacitor mestre permanece operando, sofrendo apenas a modificação de sua impedância final. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -104,11 +104,11 @@
       "statement": "Nos momentos de chaveamento elétrico ou descarga massiva dos capacitores devido a curtos-circuitos no sistema primário, qual consequência indesejada surge no circuito dos TCs?",
       "options": [
         "Gera o trancamento galvânico do sentido de fluxo ativo injetado pela usina.",
-        "Surgem correntes de alta frequência que induzem sobretensões secundárias severas nos transformadores de corrente e relés.",
+        "O retardo mecânico da câmara a gás extingue passivamente o surto evitando o registro digital de oscilografia.",
         "As correntes harmônicas de sequência zero anulam estaticamente as leituras do diferencial de barramento.",
-        "O retardo mecânico da câmara a gás extingue passivamente o surto evitando o registro digital de oscilografia."
+        "Surgem correntes de alta frequência que induzem sobretensões secundárias severas nos transformadores de corrente e relés."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Descargas e comutações de bancos capacitivos disparam oscilações de alta frequência, as quais induzem altíssimas tensões transitórias sobre o secundário do TC e respectivos fios de proteção ligados. (Fonte: Ed48_janeiro_protecao).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "Bancos de capacitores shunt absorvem o excedente de potência reativa das cargas, atenuando as sobretensões nos finais de linha radiais.",
       "correctAnswer": false,
       "explanation": "Essa premissa é fisicamente incorreta. Os bancos shunt injetam ou suprem a rede de potência reativa, elevando localmente a tensão para mitigar o déficit causado por cargas reativas. Quem suga o reativo é o reator paralelo. (Fonte: Virtus-Anorm.Sist. Potência).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "As frequências ressonantes excitadas por surtos de manobra e energização de bancos capacitivos costumam ficar na faixa de 200 a 1000 Hz.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. As frequências de recuo elétrico decorrentes de abertura e fechamento das baterias capacitivas, diferente das perturbações em 60 Hz, situam-se classicamente em espectros entre 200 a 1000 Hz. (Fonte: Virtus-Anorm.Sist. Potência).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Em instalações com cargas não lineares (conversores estáticos), capacitores podem compor filtros passivos para barrar correntes harmônicas.",
       "correctAnswer": true,
       "explanation": "Correto. Quando estrategicamente calculados, os conjuntos capacitivos reúnem-se a indutores para formar blocos sintonizados (filtros) que oferecem baixíssima reatância, sequestrando as correntes harmônicas poluidoras para si e depurando a rede. (Fonte: Guia Proteção 2008).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Com o neutro do banco aterrado, a detecção de faltas à terra exige funções residuais 51G ou 51N.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. As prescrições técnicas exigem que bancos capacitivos com seus centros eletricamente referenciados (aterrados) disponham do monitoramento sistêmico ANSI 51N/51G, fiscalizando fugas lentas e correntes francas de retorno que corram às carcaças. (Fonte: Guia Proteção 2008).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Em bancos sem fusível interno, um curto dentro de uma unidade gera acúmulo de gás, exigindo desligamento pela proteção de sobrecorrente (51) de retaguarda.",
       "correctAnswer": true,
       "explanation": "Em bancos não dotados de fusíveis limitadores internos individuais para blindar cada caneca, o defeito em ativos provoca bolhas e explosiva pressão letal, transferindo aos relés principais (50/51) o papel mandatário e incontornável de retirar de urgência as linhas do capacitor estourado em menos de 0,1s. (Fonte: Guia Proteção 2008).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Em bancos de alta tensão e alto kvar, o arranjo em _____ dupla usa o desbalanço entre os ramos para detectar células defeituosas via um TC central.",
+      "statement": "Em bancos de alta tensão e alto kvar, o arranjo em ____ dupla usa o desbalanço entre os ramos para detectar células defeituosas via um TC central.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A energização de um banco junto a outro já ligado na mesma barra é o chaveamento _____, que gera elevada corrente de inrush.",
+      "statement": "A energização de um banco junto a outro já ligado na mesma barra é o chaveamento ____, que gera elevada corrente de inrush.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A unidade capacitiva com pequenos elos em série com os elementos internos, para isolar micro-curtos, é classificada como banco com _____ interno.",
+      "statement": "A unidade capacitiva com pequenos elos em série com os elementos internos, para isolar micro-curtos, é classificada como banco com ____ interno.",
       "blanks": [
         {
           "index": 0,

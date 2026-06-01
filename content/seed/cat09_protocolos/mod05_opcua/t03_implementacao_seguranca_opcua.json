@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "O que estabelece a conexao logica basica entre um cliente e um servidor OPC-UA apos a etapa de descoberta de Endpoints?",
       "options": [
-        "A sessao (Session).",
-        "Um broadcast UDP.",
         "Uma topologia Token Ring.",
+        "Um broadcast UDP.",
+        "A sessao (Session).",
         "Um link serial assincrono."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "A sessao e o canal logico de longo prazo estabelecido pelo cliente apos validar as credenciais e o endpoint (Informacao externa as fontes. Recomenda-se verificacao independente).",
       "difficulty": "easy"
     },
@@ -25,12 +25,12 @@
       "type": "multipleChoice",
       "statement": "Na arquitetura de seguranca do protocolo OPC-UA, qual e o papel desempenhado pelo SecureChannel?",
       "options": [
-        "Garantir a confidencialidade e integridade das mensagens no nivel de comunicacao.",
+        "Traduzir pacotes do protocolo IEC 61850 para linguagem Modbus.",
         "Separar fisicamente os cabos de rede da subestacao.",
         "Apenas realizar a compressao zip dos dados analogicos.",
-        "Traduzir pacotes do protocolo IEC 61850 para linguagem Modbus."
+        "Garantir a confidencialidade e integridade das mensagens no nivel de comunicacao."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "O SecureChannel e a fundacao que garante a seguranca das mensagens em transito, fornecendo criptografia e assinatura de pacotes (Informacao externa as fontes. Recomenda-se verificacao independente).",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Qual o formato padrao adotado mundialmente para os certificados digitais utilizados na autenticacao das aplicacoes OPC-UA?",
       "options": [
-        "Certificados X.509.",
         "Chaves simetricas PGP.",
+        "Certificados X.509.",
         "Identificadores baseados em Hashes MD5.",
         "Senhas textuais codificadas em Base64."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "O padrao OPC-UA exige a utilizacao de certificados digitais X.509 v3 para identificar, validar e autenticar todos os clientes e servidores (Informacao externa as fontes. Recomenda-se verificacao independente).",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Quais sao metodos nativos validos para a autenticacao de usuario previstos na implementacao do OPC-UA?",
       "options": [
-        "Acesso anonimo, credenciais de usuario e senha, e certificado digital.",
-        "Acesso obrigatorio e exclusivo via chaves fisicas USB.",
         "Restricao baseada puramente na filtragem de MAC Address corporativo.",
+        "Acesso obrigatorio e exclusivo via chaves fisicas USB.",
+        "Acesso anonimo, credenciais de usuario e senha, e certificado digital.",
         "Uso exclusivo do relogio GPS sincronizado pelo protocolo PTP."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Alem da autenticacao da aplicacao, o protocolo suporta identificar usuarios finais por acesso anonimo, senhas criptografadas ou certificados (Informacao externa as fontes. Recomenda-se verificacao independente).",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "Como o mecanismo de Discovery (Descoberta) opera e auxilia os clientes durante a implementacao em uma rede OPC-UA?",
       "options": [
-        "Permite que o cliente consulte os Endpoints disponiveis e suas respectivas politicas de seguranca antes de conectar.",
+        "Atua desativando os firewalls de TI corporativos para facilitar as conxoes DCOM.",
         "Realiza um broadcast passivo e continuo de variaveis de processo sem requisicao.",
         "Faz o download automatico dos drivers de hardware para conversores analogicos.",
-        "Atua desativando os firewalls de TI corporativos para facilitar as conxoes DCOM."
+        "Permite que o cliente consulte os Endpoints disponiveis e suas respectivas politicas de seguranca antes de conectar."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Os servicos de Discovery retornam informacoes essenciais para conexao, revelando as URLs dos endpoints e os modos de seguranca aceitos (Informacao externa as fontes. Recomenda-se verificacao independente).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Ao configurar operacoes baseadas em Subscriptions no OPC-UA, o que caracteriza logicamente um MonitoredItem?",
       "options": [
-        "E o nó especifico que o servidor deve observar e monitorar para gerar e publicar relatorios de alteracao.",
         "Consiste em um monitor de hardware dedicado instalado no painel eletrico de baixa tensao.",
+        "E o nó especifico que o servidor deve observar e monitorar para gerar e publicar relatorios de alteracao.",
         "E o protocolo de redundancia aplicado na porta do switch ethernet para analise de colisoes.",
         "Representa a reserva de banda minima nos roteadores para assegurar a passagem do trafego MMS."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "No modelo Publish-Subscribe interno, os clientes definem MonitoredItems vinculados a uma Subscription para reportar apenas o que sofrer variacao (Informacao externa as fontes. Recomenda-se verificacao independente).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Quais garantias ciberneticas sao providas ao aplicar a politica de seguranca SignAndEncrypt em uma conexao OPC-UA operante?",
       "options": [
-        "Garante a integridade dos dados por meio da assinatura e assegura a confidencialidade utilizando criptografia total.",
-        "Assegura unicamente que o tempo limite de conexao (timeout) obedece as normas ONS.",
         "Comprime a carga util (payload) acelerando apenas o trafego de eventos sem uso de chaves hash.",
+        "Assegura unicamente que o tempo limite de conexao (timeout) obedece as normas ONS.",
+        "Garante a integridade dos dados por meio da assinatura e assegura a confidencialidade utilizando criptografia total.",
         "Libera o acesso das variaveis do servidor sem qualquer validacao, simplificando o handshake."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "A opcao SignAndEncrypt inviabiliza alteracoes por invasores (devido a assinatura HMAC) e inibe a interceptacao de leitura (criptografia AES) (Informacao externa as fontes. Recomenda-se verificacao independente).",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "Dentro da arquitetura de seguranca baseada em PKI recomendada para hardening, qual e a funcao estrategica do GDS (Global Discovery Server)?",
       "options": [
-        "Centralizar o processo logico de descoberta e automatizar fortemente a gestao e distribuicao de certificados na rede industrial.",
+        "Operar como um concentrador Hub na camada 1 do modelo OSI ignorando o roteamento TCP.",
         "Atuar unicamente como DNS master fornecendo resolução de nomes mundiais IPv6 corporativos.",
         "Sincronizar a hora global de todos os relés de protecao com exatidao de microssegundos substituindo o PTP.",
-        "Operar como um concentrador Hub na camada 1 do modelo OSI ignorando o roteamento TCP."
+        "Centralizar o processo logico de descoberta e automatizar fortemente a gestao e distribuicao de certificados na rede industrial."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "Em arranjos extensos, o GDS e adotado para otimizar o deploy de certificados X.509, atualizacao de CRLs e descoberta central de servidores (Informacao externa as fontes. Recomenda-se verificacao independente).",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "Na especificacao do OPC-UA, um Endpoint exposto pelo servidor descreve detalhadamente a URL de conexao, o protocolo de transporte embutido e quais.",
       "correctAnswer": true,
       "explanation": "O conceito de Endpoint concentra as informacoes tecnicas necessarias para que um cliente avalie a forma e o nivel de seguranca aceitos (Informacao externa as fontes. Recomenda-se verificacao independente).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Para proteger dados confidenciais do processo industrial, a configuracao do modo de seguranca Sign no OPC-UA providencia a encriptacao plena do.",
       "correctAnswer": false,
       "explanation": "O modo Sign confere a integridade da mensagem via assinatura, porem transmite o payload dos dados em formato visivel (texto claro) na rede (Informacao externa as fontes. Recomenda-se verificacao independente).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A manutencao de logs de auditoria no servidor OPC-UA, capazes de registrar rejeicoes de conexao e certificados invalidos, constitui uma boa pratica.",
       "correctAnswer": true,
       "explanation": "A habilitacao da auditoria mapeando o comportamento de clientes reprovados e essencial para compor o compliance e prevencao de ciberataques industriais (Informacao externa as fontes. Recomenda-se verificacao independente).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "As credenciais de usuario (Username e Password) trafegadas em redes OPC-UA sao obrigatoriamente transmitidas sem protecao, expondo senhas claras.",
       "correctAnswer": false,
       "explanation": "A norma dita que as senhas podem e devem ser criptografadas utilizando a chave publica fornecida pelo servidor, protegendo o login mesmo em modo None (Informacao externa as fontes. Recomenda-se verificacao independente).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A implementacao cruzada por meio das Companion Specifications assegura que as estruturas de dados ricas da IEC 61850 sejam traduzidas linearmente.",
       "correctAnswer": true,
       "explanation": "Um dos trunfos do OPC-UA e a habilidade, chancelada por comites normativos, de incorporar o Data Model complexo do IEC 61850 perfeitamente a sua arquitetura de nos (Informacao externa as fontes. Recomenda-se verificacao independente).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O sistema de hardening e confianca distribuida do protocolo OPC-UA gerencia seus pares de chaves criptograficas utilizando uma infraestrutura de _____.",
+      "statement": "O sistema de hardening e confianca distribuida do protocolo OPC-UA gerencia seus pares de chaves criptograficas utilizando uma infraestrutura de ____.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Buscando economizar ciclos e largura de banda na rede, o cliente OPC-UA agrupa as variaveis a serem monitoradas em uma unica entidade de _____.",
+      "statement": "Buscando economizar ciclos e largura de banda na rede, o cliente OPC-UA agrupa as variaveis a serem monitoradas em uma unica entidade de ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A subcamada critica de comunicacao que assegura a confidencialidade e aplica as regras definidas pela Security Policy selecionada ao empacotar os _____.",
+      "statement": "A subcamada critica de comunicacao que assegura a confidencialidade e aplica as regras definidas pela Security Policy selecionada ao empacotar os ____.",
       "blanks": [
         {
           "index": 0,

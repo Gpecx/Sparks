@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "",
+  "categoryOrder": 4,
+  "module": "Softwares de Estudos Elétricos",
+  "moduleSubtitle": "Ferramentas de analise de sistemas eletricos de potencia",
+  "moduleOrder": 3,
+  "trail": "PSS/E",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual é o foco principal do software PSS/E e sua capacidade típica de escala em sistemas elétricos?",
+      "options": [
+        "Planejamento apenas de redes de distribuição industriais de baixa tensão.",
+        "Dimensionamento de componentes eletrônicos e semicondutores isolados.",
+        "Planejamento de transmissão em grande escala (bulk), suportando mais de 200.000 barras.",
+        "Foco exclusivo na avaliação de arcos elétricos e painéis."
+      ],
+      "correctIndex": 2,
+      "explanation": "O PSS/E é construído primariamente para o planejamento de transmissão em massa e suporta análises de até 200.000 barras. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "No PSS/E, quais são as duas principais extensões de arquivos utilizadas para intercâmbio de dados de rede e de dinâmica?",
+      "options": [
+        ".xml e .json",
+        ".raw e .dyr",
+        ".dwg e .pdf",
+        ".sav e .txt"
+      ],
+      "correctIndex": 1,
+      "explanation": "Os formatos .raw (dados de rede) e .dyr (dados de dinâmica) são o padrão de intercâmbio para estudos de interconexão. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual linguagem de programação é nativamente integrada ao PSS/E com mais de 2.000 APIs abertas para automação de fluxos de trabalho?",
+      "options": [
+        "Java",
+        "Ruby",
+        "Python",
+        "C++"
+      ],
+      "correctIndex": 2,
+      "explanation": "O PSS/E possui mais de 2.000 APIs abertas em Python, cobrindo essencialmente todas as funções de cálculo para automatizar simulações de cenários e contingências. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "De acordo com o material, qual software é considerado o padrão 'de fato' para estudos de interconexão de geradores nos ISOs/RTOs da América do Norte?",
+      "options": [
+        "ETAP",
+        "PowerFactory",
+        "PSS/E",
+        "ATP"
+      ],
+      "correctIndex": 2,
+      "explanation": "O PSS/E é o padrão para estudos de interconexão realizados pelos ISO/RTOs, sendo os modelos em seu formato um requisito. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Para qual tipo principal de simulação de estabilidade o PSS/E é amplamente reconhecido e utilizado?",
+      "options": [
+        "Simulações de harmônicos de altíssima frequência.",
+        "Simulações tipo RMS (Root Mean Square) para estabilidade transitória e dinâmica.",
+        "Simulações térmicas de isolamento.",
+        "Simulações EMT exclusivas para religadores de subestação."
+      ],
+      "correctIndex": 1,
+      "explanation": "O PSS/E é amplamente utilizado para estudos RMS, oferecendo ferramentas abrangentes para análise dinâmica e de estado estacionário de sistemas de potência. (Understanding EMT vs. RMS Simulations in Electrical Power Systems)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Durante as opções de simulação dinâmica no PSS/E, quais campos são preenchidos para definir até quando simular e quando registrar pontos no gráfico?",
+      "options": [
+        "Voltage, Current, Power e Angle.",
+        "Run to, Print every, Write every e Plot every.",
+        "Initial Time, End Time, Delta T e Iterations.",
+        "Pre-fault, Fault, Clearing e Post-fault."
+      ],
+      "correctIndex": 1,
+      "explanation": "As opções de simulação (Simulation options) solicitam do usuário as entradas para 'Run to', 'Print every', 'Write every' e 'Plot every'. (Power System Simulation for Engineers (PSS/E version 30): Stability Analysis)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "O que o módulo de série temporal (Time series power flow) do PSS/E permite analisar de forma automatizada?",
+      "options": [
+        "Cálculos detalhados de proteção de relés de distância e diferenciais.",
+        "Coordenação de fusiveis e arcos elétricos industriais.",
+        "Impactos na rede devido à geração variável (renováveis) em vários pontos ao longo do tempo.",
+        "Avaliação térmica de transformadores secos de baixa tensão."
+      ],
+      "correctIndex": 2,
+      "explanation": "O módulo lida com centenas ou milhares de cenários automaticamente, essencial para estudar impactos da geração renovável variável (ao longo de dia, estação ou ano). (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Qual fenômeno natural atípico tem seus impactos na rede analisados por meio de um módulo específico (GIC) no PSS/E?",
+      "options": [
+        "Surtos de descargas atmosféricas indiretas.",
+        "Correntes induzidas geomagneticamente por tempestades solares.",
+        "Ressonância subsíncrona em longas linhas.",
+        "Vibrações mecânicas em eixos de geradores devidas a abalos sísmicos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O módulo GIC do PSS/E calcula correntes induzidas geomagneticamente, o que é relevante para infraestrutura em altas latitudes sujeitas a tempestades solares. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Segundo o manual de estabilidade do PSS/E, como uma falta em uma barra é efetivamente configurada (simulando um curto-circuito) no programa?",
+      "options": [
+        "Definindo a tensão da barra como valor negativo.",
+        "Isolando a barra no diagrama unifilar.",
+        "Desconectando a carga do transformador.",
+        "Especificando uma susceptância muito grande no aba 'Fixed Shunt' da barra."
+      ],
+      "correctIndex": 3,
+      "explanation": "Colocar um curto-circuito em uma barra é feito especificando uma grande susceptância na barra através da guia 'Fixed Shunt'. (Power System Simulation for Engineers (PSS/E version 30): Stability Analysis)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "O PSS/E difere do ETAP e do PowerFactory por carecer nativamente de qual tipo de modelagem ou abordagem profunda?",
+      "options": [
+        "Análise de estabilidade transitória RMS.",
+        "Fluxo de carga para sistemas interligados.",
+        "Escala de transmissão e geração massiva.",
+        "Modelagem de distribuição detalhada para microrredes e arquitetura de banco de dados relacional."
+      ],
+      "correctIndex": 3,
+      "explanation": "Enquanto o ETAP e o PowerFactory focam forte em distribuição, ambientes industriais ou bancos de dados relacionais, o PSS/E é focado na transmissão sem modelagem aprofundada de distribuição, sendo baseado em arquivos. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "O PSS/E (Power System Simulator for Engineering) foi desenvolvido inicialmente na década de 1970 e hoje faz parte do portfólio de software da Siemens.",
+      "correctAnswer": true,
+      "explanation": "Originalmente desenvolvido pela PTI (Power Technologies Inc.) em 1976, o software é agora de propriedade e desenvolvido pela Siemens Industry Software. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "O software PSS/E não possui suporte para modelos dinâmicos de usinas de geração renovável, focando apenas em geradores síncronos convencionais.",
+      "correctAnswer": false,
+      "explanation": "O PSS/E tem uma vasta biblioteca de modelos dinâmicos que inclui turbinas eólicas, inversores fotovoltaicos, HVDC e dispositivos FACTS. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Ao realizar uma simulação no tempo após a configuração inicial, deve-se clicar no botão 'Initialize' toda vez que atualizar a janela para estender a simulação.",
+      "correctAnswer": false,
+      "explanation": "Para continuar a execução do tempo 0.1 a 10 segundos, não se deve clicar em 'Initialize' na parte inferior da tela, mas sim diretamente no botão 'Run'. (Power System Simulation for Engineers (PSS/E version 30): Stability Analysis)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "A arquitetura de dados do PSS/E baseia-se em arquivos simples, em contraste com a arquitetura de banco de dados relacional usada pelo PowerFactory.",
+      "correctAnswer": true,
+      "explanation": "O PSS/E opera baseado em formatos de arquivos (File-based, como o .raw), enquanto o PowerFactory utiliza uma arquitetura unificada de banco de dados relacional (Relational DB). (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "As simulações do tipo EMT (Electromagnetic Transients) não são a aplicação primária do PSS/E, sendo softwares como PSCAD ou EMTP recomendados para análises super-rápidas no domínio do tempo.",
+      "correctAnswer": true,
+      "explanation": "Para o domínio do tempo com fenômenos rápidos EMT (como surtos de manobra e raios), usam-se ferramentas como PSCAD e EMTP. O PSS/E é voltado para cálculos RMS. (Understanding EMT vs. RMS Simulations in Electrical Power Systems)",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "O formato padrão universal da indústria usado pelo PSS/E para armazenar e compartilhar os dados estáticos de rede é o arquivo com extensão ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "raw"
+        }
+      ],
+      "explanation": "O PSS/E usa o arquivo de rede no formato .raw, que serve como o padrão de intercâmbio na indústria. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "Para inserir dados de simulações dinâmicas e características de máquinas no PSS/E, o usuário utiliza um arquivo de dinâmica com a extensão ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "dyr"
+        }
+      ],
+      "explanation": "Um arquivo .dyr (dynamic data file) possui os dados de máquinas em estudos de estabilidade dinâmica no PSS/E. (Power System Simulation for Engineers (PSS/E version 30): Stability Analysis)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "A extensa automação do PSS/E, que permite varreduras e análises em massa sem intervenção manual, é suportada nativamente pela linguagem de programação ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Python"
+        }
+      ],
+      "explanation": "O software incorpora mais de 2.000 APIs em Python, sendo a linguagem padrão para scripts de automação em escala no PSS/E. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    }
+  ]
+}

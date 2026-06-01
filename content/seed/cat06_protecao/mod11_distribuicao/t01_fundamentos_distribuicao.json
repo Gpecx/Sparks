@@ -26,11 +26,11 @@
       "statement": "O que caracteriza o fluxo elétrico nos alimentadores de um sistema estritamente radial?",
       "options": [
         "A energia flui em múltiplos sentidos em regime normal.",
-        "A energia trafega exclusivamente da fonte para as cargas.",
         "A alimentação ocorre em malha fechada continuamente.",
+        "A energia trafega exclusivamente da fonte para as cargas.",
         "As correntes de curto-circuito fluem em sentidos opostos à carga."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "No sistema radial, a energia e as correntes de defeito trafegam sempre no sentido da subestação para a falha. (Fonte: Apostila Proteção).",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "Qual é o perfil temporal predominante das faltas ocorridas nas redes de distribuição primárias aéreas?",
       "options": [
         "Faltas trifásicas contínuas.",
-        "Cerca de 75% a 90% das faltas são temporárias.",
+        "Faltas sem centelhamento de altíssima impedância.",
         "Faltas permanentes exclusivas de barramentos.",
-        "Faltas sem centelhamento de altíssima impedância."
+        "Cerca de 75% a 90% das faltas são temporárias."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "A maioria absoluta das faltas nas redes primárias é temporária, durando poucos ciclos ou segundos. (Fonte: KLS - Proteção).",
       "difficulty": "easy"
     },
@@ -51,12 +51,12 @@
       "type": "multipleChoice",
       "statement": "Qual a principal função do transformador de distribuição numa rede padrão?",
       "options": [
-        "Elevar a tensão para os limites de transmissão.",
         "Reduzir a tensão primária para os níveis de consumo secundário.",
+        "Elevar a tensão para os limites de transmissão.",
         "Compensar quedas de tensão via injeção reativa.",
         "Mitigar curtos-circuitos bloqueando a componente DC."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "Ele rebaixa a tensão da rede primária (MT) para os níveis de utilização em baixa tensão (BT). (Fonte: E-book Proteção).",
       "difficulty": "easy"
     },
@@ -91,11 +91,11 @@
       "statement": "Como ocorre o fenômeno de falta de alta impedância na distribuição primária?",
       "options": [
         "Pelo rompimento de isoladores em subestações de EAT.",
-        "Pelo contato do condutor vivo com solo de baixa condutividade.",
         "Pela saturação magnética de transformadores de corrente.",
+        "Pelo contato do condutor vivo com solo de baixa condutividade.",
         "Pelo choque direto entre três condutores aéreos."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "Ocorre quando o cabo toca solos isolantes, como areia seca, gerando correntes muito baixas e arcos. (Fonte: KLS - Proteção).",
       "difficulty": "medium"
     },
@@ -103,12 +103,12 @@
       "type": "multipleChoice",
       "statement": "Qual limite restringe a sensibilidade da proteção de sobrecorrente de fase em linhas radiais longas?",
       "options": [
-        "A corrente máxima de carregamento nominal da linha.",
+        "O ângulo de polarização cruzada do relé direcional.",
         "A inversão da corrente de sequência zero na barra.",
         "O nível de suportabilidade térmica do disjuntor.",
-        "O ângulo de polarização cruzada do relé direcional."
+        "A corrente máxima de carregamento nominal da linha."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "explanation": "A proteção de fase não pode ser ajustada abaixo da corrente de carga, o que dificulta o trip em faltas remotas fracas. (Fonte: Virtus_ProtTrafo_Cabine).",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "Quais objetivos operativos orientam a proteção de uma rede primária face aos curtos-circuitos?",
       "options": [
-        "Neutralizar quedas de tensão na transmissão de base.",
         "Minimizar a duração e a frequência da falta na rede.",
+        "Neutralizar quedas de tensão na transmissão de base.",
         "Substituir todos os relés convencionais por fusíveis ultra-rápidos.",
         "Desligar a subestação principal em qualquer defeito."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A proteção atua para reduzir o tempo do defeito e a quantidade de consumidores impactados pela interrupção. (Fonte: KLS - Proteção).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "Em redes de distribuição primárias com topologia radial, os relés de sobrecorrente são os dispositivos de proteção predominantes.",
       "correctAnswer": true,
       "explanation": "Como as faltas produzem correntes unidirecionais maiores que a carga, relés de sobrecorrente são suficientes e predominantes. (Fonte: KLS - Proteção).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Subestações de distribuição com suprimento único e sem chaves de transferência oferecem maior confiabilidade global.",
       "correctAnswer": false,
       "explanation": "Sistemas de suprimento único possuem baixa confiabilidade. Arranjos com chaves NA e NF elevam a continuidade do serviço. (Fonte: KLS - Proteção).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A detecção de faltas de alta impedância exige relés digitais avançados com algoritmos que identificam a assinatura de arcos elétricos.",
       "correctAnswer": true,
       "explanation": "As correntes reduzidas dessas faltas impossibilitam o uso de relés convencionais, exigindo análises espectrais do arco. (Fonte: KLS - Proteção).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "As redes com neutro aterrado por resistência limitam as correntes de terra e reduzem a ocorrência de sobretensões severas.",
       "correctAnswer": true,
       "explanation": "O aterramento resistivo limita a corrente de fuga a valores seguros e facilita a eliminação de sobretensões transitórias. (Fonte: Guia Proteção 2008).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A potência firme de uma subestação assume que nenhum transformador sofra sobrecarga após a falha da maior máquina do pátio.",
       "correctAnswer": false,
       "explanation": "A definição de potência firme permite que os transformadores restantes operem em regime temporário de sobrecarga. (Fonte: KLS - Proteção).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A estrutura de força que recebe tensão de transmissão e a rebaixa para as redes radiais primárias é a _____ de distribuição.",
+      "statement": "A estrutura de força que recebe tensão de transmissão e a rebaixa para as redes radiais primárias é a ____ de distribuição.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Nas faltas de alta impedância, o contato de condutores com solo seco cria um _____ elétrico que os algoritmos de proteção monitoram.",
+      "statement": "Nas faltas de alta impedância, o contato de condutores com solo seco cria um ____ elétrico que os algoritmos de proteção monitoram.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O equipamento instalado em ramais que não interrompe curto-circuitos e conta os desarmes de um religador a montante é o _____.",
+      "statement": "O equipamento instalado em ramais que não interrompe curto-circuitos e conta os desarmes de um religador a montante é o ____.",
       "blanks": [
         {
           "index": 0,

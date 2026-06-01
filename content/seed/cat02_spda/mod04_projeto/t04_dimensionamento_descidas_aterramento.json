@@ -1,0 +1,218 @@
+{
+  "category": "SPDA",
+  "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
+  "categoryOrder": 1,
+  "module": "Projeto de SPDA",
+  "moduleSubtitle": "Projeto, risco, posicionamento, volume, materiais e documentacao",
+  "moduleOrder": 3,
+  "trail": "Dimensionamento de Descidas e Aterramento",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a NBR 5419, qual e o espacamento medio exigido entre os condutores de descida nao naturais para um SPDA classificado nos Niveis de Protecao I e II?",
+      "options": [
+        "10 metros",
+        "15 metros",
+        "20 metros",
+        "25 metros"
+      ],
+      "correctIndex": 0,
+      "explanation": "A tabela de distancias entre os condutores de descida da norma determina que para os Niveis de Protecao I e II, o espacamento medio e de 10 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para uma edificacao com SPDA dimensionado no Nivel III, qual e o espacamento medio estipulado pela NBR 5419 para os condutores de descida nao naturais?",
+      "options": [
+        "10 metros",
+        "15 metros",
+        "20 metros",
+        "25 metros"
+      ],
+      "correctIndex": 1,
+      "explanation": "A tabela normativa especifica que o espacamento medio entre os condutores de descida nao naturais para a Classe do SPDA III e de 15 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao instalar os condutores do anel de aterramento externo ao redor de uma edificacao, qual deve ser a profundidade minima de soterramento exigida pela norma?",
+      "options": [
+        "0,3 metros no minimo.",
+        "0,5 metros no minimo.",
+        "0,8 metros no minimo.",
+        "1,0 metro no minimo."
+      ],
+      "correctIndex": 1,
+      "explanation": "Com relacao a instalacao dos condutores de aterramento, o anel devera ser enterrado em uma profundidade de 0,5m no minimo. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a norma tecnica, o anel de aterramento deve ser posicionado a qual distancia minima recomendada das paredes ao redor da edificacao a ser protegida?",
+      "options": [
+        "0,5 metros.",
+        "1,0 metro.",
+        "1,5 metros.",
+        "2,0 metros."
+      ],
+      "correctIndex": 1,
+      "explanation": "A instalacao do anel de aterramento deve ser posicionada a uma distancia minima de 1m ao redor da edificacao a ser protegida. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Conforme a tabela de secoes minimas dos materiais da NBR 5419, qual e a secao minima exigida para condutores de descida em estruturas com altura superior a 20 metros, utilizando cabo encordoado de cobre?",
+      "options": [
+        "16 mm2",
+        "25 mm2",
+        "35 mm2",
+        "50 mm2"
+      ],
+      "correctIndex": 2,
+      "explanation": "Para condutores de descida em estruturas de altura superior a 20 metros, a area de secao minima para o Cobre (encordoado) e de 35 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao utilizar as armaduras de aco interconectadas nas fundacoes de concreto como eletrodos naturais de aterramento ou descida, a norma estabelece uma restricao para um tipo especifico de estrutura. Qual e?",
+      "options": [
+        "Fundacoes do tipo radier continuo nao sao aceitas para aterramento eletrico.",
+        "O uso de concreto usinado comum inviabiliza a continuidade eletrica do sistema.",
+        "No caso de concreto protendido, os cabos de aco nao podem ser utilizados como condutores.",
+        "Em fundacoes de edificios acima de 20 metros, o aco natural e sempre proibido."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para utilizar os eletrodos naturais, deve-se garantir a continuidade eletrica. No caso de concreto protendido, os cabos de aco nao podem ser utilizados como condutores para o sistema de aterramento. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual material teve o seu uso expressamente proibido pela revisao da ABNT NBR 5419:2026 para realizar a transicao entre o concreto e o solo no subsistema de aterramento?",
+      "options": [
+        "Aco inoxidavel AISI 304.",
+        "Cobre nu encordoado.",
+        "Aco cobreado com 50 mm2.",
+        "Aco zincado a quente."
+      ],
+      "correctIndex": 3,
+      "explanation": "Entre os ajustes da nova NBR 5419:2026 esta a proibicao do uso de aco zincado a quente na transicao entre o concreto e o solo. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para manter a distancia de seguranca (s) e reduzir o risco de centelhamentos perigosos no subsistema de descida, a ABNT NBR 5419:2026 passou a admitir a utilizacao de condutores com isolacao especifica (ex: DEHN HVI). Qual norma internacional rege essa isolacao?",
+      "options": [
+        "IEC 62305-2",
+        "IEC TS 62561-8",
+        "IEEE 142",
+        "IEC 61643-11"
+      ],
+      "correctIndex": 1,
+      "explanation": "No subsistema de descida, passa a ser admitida a utilizacao de condutores com isolacao especifica conforme a IEC TS 62561-8, o que permite manter a distancia de seguranca e reduzir o risco de centelhamentos. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Caso nao seja possivel utilizar eletrodos naturais da edificacao e opte-se por fazer um eletrodo em anel externo, qual a porcentagem minima do comprimento total desse condutor que devera estar em contato direto com o solo?",
+      "options": [
+        "50%",
+        "80%",
+        "90%",
+        "100%"
+      ],
+      "correctIndex": 1,
+      "explanation": "Deve ser feito um anel externo a estrutura, onde o condutor devera estar em contato com o solo no minimo 80% do seu comprimento total. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A tabela de secoes minimas e materiais da NBR 5419 veda o uso de um determinado material como eletrodo de aterramento em contato direto com o solo. Que material e esse?",
+      "options": [
+        "Aco galvanizado a quente.",
+        "Cobre nu.",
+        "Aluminio.",
+        "Aco inoxidavel."
+      ],
+      "correctIndex": 2,
+      "explanation": "Na tabela de materiais do SPDA, o Aluminio nao possui valor de secao para eletrodo de aterramento (a celula apresenta um hifen), sendo vetado o seu uso em contato direto com o solo. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A norma NBR 5419 admite uma tolerancia para o espacamento dos condutores de descida nao naturais, sendo aceitavel que este espacamento tenha no maximo 20% alem dos valores definidos na tabela de distancias.",
+      "correctAnswer": true,
+      "explanation": "A nota da tabela de distancias normativas dita expressamente: e aceitavel que o espacamento dos condutores de descidas tenha no maximo 20% alem dos valores da tabela. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As hastes de aterramento cravadas no solo (eletrodos verticais) podem ser utilizadas livremente como o unico componente do subsistema de aterramento de um SPDA, dispensando a presenca do anel.",
+      "correctAnswer": false,
+      "explanation": "A nova ABNT NBR 5419 reafirma que as hastes de aterramento continuam nao sendo permitidas como unico componente do sistema, podendo ser utilizadas apenas como complemento. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na atualizacao da norma ABNT NBR 5419:2026, os condutores de aco cobreado tiveram suas secoes nominais equiparadas as do cobre, exigindo no minimo 35 mm2 para captacao/descida e 50 mm2 para o aterramento.",
+      "correctAnswer": true,
+      "explanation": "Os condutores de aco cobreado passam a ter secoes nominais equiparadas as dos condutores de cobre, com valores minimos de 35 mm2 para os subsistemas de captacao e descida e de 50 mm2 para aterramento. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em edificacoes do tipo geminadas, devido as dificuldades de acesso ao solo externo, a nova redacao da NBR 5419:2026 proibiu permanentemente a instalacao interna do anel de aterramento.",
+      "correctAnswer": false,
+      "explanation": "Ocorreu o oposto: a nova redacao traz como atualizacao importante o fato de que passa a permitir a instalacao interna do anel de aterramento em edificacoes geminadas. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A revisao normativa de 2026 da NBR 5419 flexibilizou as regras do subsistema de aterramento, passando a permitir oficialmente a interrupcao parcial do anel externo quando este for instalado de forma aparente, fora do solo.",
+      "correctAnswer": false,
+      "explanation": "A atualizacao da norma elimina a possibilidade anteriormente prevista de interrupcao parcial do anel de aterramento quando instalado fora do solo, exigindo agora o seu fechamento continuo. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Conforme a tabela de distancias entre os condutores de descida nao naturais, o espacamento medio maximo exigido de forma primaria para uma estrutura com Nivel de Protecao IV (LPL IV) e de ____ metros.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "20"
+        }
+      ],
+      "explanation": "A tabela estabelece que para a Classe do SPDA IV, o espacamento medio normal (antes da tolerancia) entre os condutores de descida e de 20 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Caso nao seja possivel utilizar o anel externo e o anel de aterramento tiver que ser instalado internamente a edificacao, a norma exige a adocao obrigatoria de medidas para minimizar as tensoes perigosas de superficie, como a tensao de toque e a tensao de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "passo"
+        }
+      ],
+      "explanation": "Se for adotada a instalacao do anel de aterramento internamente a edificacao, devem ser previstas medidas que minimizem os riscos por tensoes perigosas de superficie como tensao de passo e de toque. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A tabela de dimensoes minimas para eletrodos de aterramento estipula regras de secao por tipo de material. Se for empregado o Aco galvanizado a quente na configuracao de fita macica (eletrodo nao cravado), a area de secao minima exigida e de ____ mm2.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "90"
+        }
+      ],
+      "explanation": "Na tabela normativa de dimensoes minimas, o eletrodo de aterramento nao cravado fabricado em Aco galvanizado a quente, na configuracao de fita macica, exige uma area de secao minima de 90 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "hard"
+    }
+  ]
+}

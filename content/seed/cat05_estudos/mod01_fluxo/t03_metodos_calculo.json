@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Fluxo de Carga",
+  "moduleSubtitle": "Conceitos, modelagem, métodos, OPF e contingências",
+  "moduleOrder": 0,
+  "trail": "Métodos de Cálculo (Newton-Raphson, Gauss-Seidel)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual método iterativo de fluxo de carga caracteriza-se por necessitar de um grande número de iterações simples?",
+      "options": [
+        "Eliminação de Gauss.",
+        "Desacoplado Rápido.",
+        "Gauss-Seidel.",
+        "Newton-Raphson."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Gauss-Seidel tende a requerer um grande número de iterações simples, contrastando com o Newton-Raphson que exige poucas iterações complexas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a verificação de erro de potência (mismatch) avalia no critério de convergência do fluxo de carga?",
+      "options": [
+        "A queda de tensão ao longo de todos os alimentadores.",
+        "A tolerância das derivadas do Jacobiano em cada passo.",
+        "O desvio angular máximo permitido para a barra swing.",
+        "A diferença entre a potência especificada e a calculada nas barras."
+      ],
+      "correctIndex": 3,
+      "explanation": "O mismatch de potência calcula a diferença entre a potência especificada e a soma dos fluxos reais e reativos para determinar a precisão da solução.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual matriz armazena as derivadas parciais das relações de potência no método de Newton-Raphson?",
+      "options": [
+        "Matriz Jacobiana.",
+        "Matriz de admitância nodal (Ybus).",
+        "Matriz de incidência.",
+        "Matriz de impedância de sequência zero."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Newton-Raphson utiliza a matriz Jacobiana para armazenar as derivadas parciais das relações do fluxo de carga em relação à tensão.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Comparado ao método de Gauss-Seidel, o Newton-Raphson geralmente atinge a convergência exigindo:",
+      "options": [
+        "Nenhuma iteração, por tratar-se de uma solução matemática direta.",
+        "Poucas iterações com cálculos extensos e complexos.",
+        "Muitas iterações com cálculos simples e diretos.",
+        "Apenas iterações matriciais para correção da matriz Ybus."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Newton-Raphson requer um número relativamente pequeno de iterações para convergir, porém o cálculo necessário em cada iteração é extenso.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para qual tipo de sistema o método desacoplado de Newton-Raphson NÃO costuma funcionar adequadamente?",
+      "options": [
+        "Sistemas de transmissão radiais puros sem malhas fechadas.",
+        "Sistemas industriais com alta relação de resistência por reatância (R/X).",
+        "Redes de transmissão interligadas de ultra-alta tensão.",
+        "Sistemas de potência que possuem muitas barras de geração PV."
+      ],
+      "correctIndex": 1,
+      "explanation": "A técnica desacoplada apresenta falhas em sistemas com relações altas de resistência para reatância nos ramos, típicos de instalações industriais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No método de Newton-Raphson desacoplado, qual aproximação justifica anular termos da matriz Jacobiana?",
+      "options": [
+        "O ângulo de fase da tensão dita unicamente o fluxo de reativos (Q) na rede.",
+        "A potência reativa independe da magnitude da tensão em redes interligadas.",
+        "Pequenas mudanças na magnitude da tensão não afetam muito a potência ativa (P).",
+        "A potência ativa gerada é diretamente proporcional ao quadrado da tensão."
+      ],
+      "correctIndex": 2,
+      "explanation": "A simplificação baseia-se na premissa de que uma pequena variação em |V| altera muito pouco a potência ativa P, permitindo o desacoplamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a inversão da matriz Jacobiana é tratada em programas digitais comerciais de fluxo de potência?",
+      "options": [
+        "A matriz Jacobiana é fisicamente invertida em cada iteração.",
+        "A matriz de admitância é invertida no lugar do Jacobiano para economizar memória.",
+        "O Jacobiano é mantido constante desde a iteração inicial até o fim do processo.",
+        "A correção de tensão é obtida por eliminação de Gauss em vez de inversão explícita."
+      ],
+      "correctIndex": 3,
+      "explanation": "A técnica de eliminação de Gauss é utilizada no lugar da inversão explícita por ser muito mais rápida e requerer menos armazenamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a principal característica da verificação de convergência pela tensão em relação ao erro de potência?",
+      "options": [
+        "A verificação pela tensão é muito mais rápida, porém menos confiável.",
+        "O método pela tensão é completamente imune a variações na barra swing.",
+        "A verificação pela tensão foca apenas nos limites de geração de reativos.",
+        "A verificação pela tensão é mais lenta, exigindo mais memória do computador."
+      ],
+      "correctIndex": 0,
+      "explanation": "Embora a verificação pela mudança de tensão economize tempo computacional comparada à potência, ela é inerentemente menos confiável.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No método de Gauss-Seidel, qual artifício matemático é frequentemente empregado para acelerar a convergência?",
+      "options": [
+        "Decomposição LU iterativa da matriz Ybus.",
+        "Aplicação de fatores de aceleração, usualmente fixados em 1,6.",
+        "Isolamento algébrico temporário da barra swing nas cinco primeiras iterações.",
+        "Remoção das cargas com fator de potência unitário durante os cálculos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Fatores de aceleração (tipicamente na casa de 1,6) são multiplicados às correções do Gauss-Seidel para atingir a solução com menos iterações.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que o método de Gauss-Seidel deixou de ser a principal escolha para estudos modernos de fluxo de carga?",
+      "options": [
+        "Necessita de dados obtidos de um analisador de rede analógico para iniciar a iteração.",
+        "Exige a inversão explícita de matrizes de impedância completas e densas a cada iteração.",
+        "Possui características ruins de convergência e velocidade quando comparado aos métodos de Newton.",
+        "As equações matriciais do método não suportam matematicamente os transformadores defasadores."
+      ],
+      "correctIndex": 2,
+      "explanation": "As iterações do Gauss-Seidel convergem muito lentamente e por vezes divergem, tornando o Newton-Raphson muito mais robusto e preferido.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No algoritmo do método de Gauss-Seidel, o valor recém-calculado de uma variável é usado imediatamente na equação seguinte para achar as próximas.",
+      "correctAnswer": true,
+      "explanation": "É um método de substituição sequencial: cada nova estimativa é utilizada imediatamente nas equações subsequentes da mesma iteração.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O método de Newton-Raphson dispensa o uso de outras técnicas para solucionar sistemas puramente lineares durante a análise do fluxo de potência.",
+      "correctAnswer": false,
+      "explanation": "Ele só é útil para sistemas não lineares, pois cada passo de sua iteração exige a resolução de um sistema de equações lineares subjacente.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na formulação do Newton-Raphson desacoplado, as equações de potência ativa (P) e potência reativa (Q) podem ser avaliadas de forma independente e.",
+      "correctAnswer": true,
+      "explanation": "O desacoplamento zera as derivadas cruzadas no Jacobiano, quebrando o sistema em matrizes menores que são resolvidas de forma independente.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A tolerância de erro (power mismatch) para determinar a convergência satisfatória em programas de fluxo de carga varia normalmente entre 0,01 a.",
+      "correctAnswer": true,
+      "explanation": "A tolerância baseada no descasamento de potência na base de MVA do sistema usualmente recai entre esses limites de p.u.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A taxa de convergência do algoritmo de Newton-Raphson aproxima-se assintoticamente da solução lenta ao longo de todo o cálculo iterativo.",
+      "correctAnswer": false,
+      "explanation": "A convergência do Newton-Raphson não é assintótica; pelo contrário, inicia extremamente rápida e depois apenas diminui à medida que chega próxima à resposta.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No fluxo de carga desacoplado, supõe-se que uma mudança de fase no ângulo da tensão afeta muito pouco o fluxo de potência ____ na rede.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "reativa"
+        }
+      ],
+      "explanation": "A aproximação estipula que a potência reativa (Q) praticamente não muda em resposta a pequenas variações angulares nas tensões.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A matriz que abriga as derivadas parciais do fluxo real e reativo em relação a mudanças de tensão é conhecida como matriz ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Jacobiana"
+        }
+      ],
+      "explanation": "A matriz Jacobiana compõe a essência do método Newton-Raphson relacionando potências residuais aos desvios de tensão.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para que um fluxo de carga seja estritamente exato, o valor de mismatch (erro) deve idealmente ser zero em todas as barras para atender às leis de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Kirchoff"
+        }
+      ],
+      "explanation": "O descasamento total caindo a zero significa o perfeito atendimento às leis de Kirchoff que regem o balanço de energia elétrica nos nós.",
+      "difficulty": "hard"
+    }
+  ]
+}

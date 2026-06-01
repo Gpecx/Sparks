@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Instrumentação e Medição de QE",
+  "moduleSubtitle": "Equipamentos, campanhas, analise e laudos",
+  "moduleOrder": 3,
+  "trail": "Elaboração de Laudos de QE",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Por quanto tempo a distribuidora deve manter armazenados, em meio digital, os dados referentes aos relatorios e registros das reclamacoes associadas a qualidade do produto?",
+      "options": [
+        "1 ano",
+        "5 anos",
+        "10 anos",
+        "20 anos"
+      ],
+      "correctIndex": 2,
+      "explanation": "O PRODIST Modulo 8 (itens 122 e 132) determina expressamente que os registros, logs e dados de reclamacoes sobre problemas com a qualidade do produto devem ser mantidos pela distribuidora por um periodo minimo de 10 anos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o prazo maximo regulamentar para que a distribuidora entregue o relatorio tecnico padronizado contendo os indicadores apos o termino de uma medicao estendida na unidade?",
+      "options": [
+        "10 dias",
+        "15 dias",
+        "30 dias",
+        "60 dias"
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme o item 131, alinea i, do PRODIST Modulo 8, os resultados da medicao devem compor um relatorio padronizado a ser entregue no prazo maximo de 30 dias apos o final da medicao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo o PRODIST, ao encaminhar um laudo ou relatorio apos analise de uma reclamacao por disturbios na energia, qual informacao essencial de diagnostico deve constar no documento para sanar o problema?",
+      "options": [
+        "Os contatos das ouvidorias da ANEEL e do Ministerio de Minas e Energia para judicializacao.",
+        "A fatura detalhada com a cobranca integral do custo dos equipamentos de medicao instalados.",
+        "Alternativas para solucao ou mitigacao do problema e as respectivas acoes a serem tomadas.",
+        "O projeto eletrico completo, redesenhado para aprovacao da concessionaria local."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 131, alinea f (itens iii e iv) do PRODIST Modulo 8, determina que o relatorio para o consumidor deve conter alternativas para solucao ou mitigacao do problema e acoes de atuacao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para facilitar a elaboracao de laudos e relatorios tecnicos de analise de energia, com quais ferramentas o guia comercial da Wrindu orienta que o software de processamento do analisador tenha compatibilidade na exportacao?",
+      "options": [
+        "Excel ou MATLAB.",
+        "Softwares exclusivos de edicao de imagens 3D.",
+        "Plataformas proprietarias e fechadas de nuvem publica.",
+        "Sistemas operacionais obsoletos de 16 bits baseados em DOS."
+      ],
+      "correctIndex": 0,
+      "explanation": "O artigo Analisador de Qualidade de Energia da Wrindu indica considerar sempre a compatibilidade do software do analisador de qualidade de energia com o Excel ou o MATLAB para a geracao de relatorios personalizados.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na estruturacao dos relatorios de conformidade de tensao em regime permanente normatizados, as leituras aferidas devem ser classificadas compulsoriamente em tres faixas referenciadas. Quais sao elas?",
+      "options": [
+        "Continuas, oscilatorias e transitorias.",
+        "Primarias, secundarias e terciarias.",
+        "Altas, medias e baixas.",
+        "Adequadas, precarias ou criticas."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 19 do PRODIST Modulo 8 exige que para cada tensao de referencia, as leituras a ela associadas se classifiquem nestas tres categorias exatas: adequadas, precarias ou criticas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando um estudo especifico de qualidade da energia ou laudo atesta que a nao conformidade observada e originada por instalacoes do proprio usuario que contem cargas perturbadoras, de quem e a responsabilidade regimental por providenciar os filtros ou esquemas de correcao?",
+      "options": [
+        "Do Operador Nacional do Sistema que arca obrigatoriamente com todos os custos de mitigacao das industrias.",
+        "Do usuario ou da distribuidora, sendo parametrizado de acordo com as responsabilidades de cada um apuradas nesses proprios estudos.",
+        "Da distribuidora de energia invariavelmente, que deve custear a solucao sem direito de repasse ao cliente causador.",
+        "Do fabricante ou integrador dos equipamentos eletricos sensiveis afetados."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 138 do PRODIST Modulo 8 define formalmente que a instalacao de equipamentos de correcao deve ser providenciada pelo usuario ou distribuidora, de acordo com as responsabilidades apuradas nos estudos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante a apuracao de problemas de qualidade na geracao do parecer tecnico, se a distribuidora constatar que o local sofre degradacao proveniente de usuarios perturbadores operando em pontos vizinhos proximos, o que ela deve relatar como acao oficial?",
+      "options": [
+        "A suspensao preventiva e automatica do fornecimento de toda a area sem aviso em ate 24 horas.",
+        "A instalacao imediata de filtros passivos nos postes com o custo totalmente transferido na fatura dos referidos usuarios.",
+        "Deve notificar esses usuarios perturbadores identificados, estabelecendo e recomendando acoes a serem desenvolvidas para mitigar os impactos.",
+        "Processar de oficio o rebaixamento permanente da tensao nominal provinda do barramento central da subestacao da cidade."
+      ],
+      "correctIndex": 2,
+      "explanation": "A diretriz descrita no item 133, alinea c, do PRODIST Modulo 8 expressa que verificada a existencia de usuarios perturbadores, a distribuidora deve notifica-los, recomendando acoes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao registrar de forma minuciosa os eventos do tipo Variacao de Tensao de Curta Duracao (VTCD) no anexo detalhado do laudo de conformidade (Tabela 11 do PRODIST), quais grandezas fisicas fundamentais representam e listam cada anomalia?",
+      "options": [
+        "O angulo instantaneo de defasagem simetrica e o correspondente fator de potencia indutivo.",
+        "A impedancia real equivalente da linha de medicao e a leitura do nivel de curto-circuito pleno (em kA).",
+        "A amplitude transitoria relativa do evento (em pu) e a afericao da duracao do evento no sistema (em ms).",
+        "A relacao nominal da Distorcao Harmonica Total (DTT%) calculada exclusivamente sobre a taxa residual Pst."
+      ],
+      "correctIndex": 2,
+      "explanation": "De acordo com a Tabela 11, intitulada Detalhamento dos eventos de VTCD registrados no PRODIST Modulo 8, as colunas 3 e 4 determinam relatar especificamente a Amplitude do evento em pu e a Duracao do evento em ms.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Conforme a metrica oficial, apos a expedicao do laudo e da implementacao de medidas para correcao tecnica da infraestrutura no fornecimento permanente, a situacao adquire o estado de regularizacao homologada somente quando os indicadores apontam que cenario mensal?",
+      "options": [
+        "Sempre que o histograma do medidor nao registrar absolutamente nenhuma ocorrencia de afundamento isolado num periodo movel de doze meses completos.",
+        "No momento em que os indices matematicos apurados individualmente para DRP e DRC ficarem comprovadamente inferiores aos valores regulamentares DRPlimite e DRClimite.",
+        "Ao instante no qual o indicador estipulado de Fator de Impacto base (FI) retroceder e permanecer rigorosamente travado em niveis identicos ou inferiores a 0,5 p.u.",
+        "Quando for observado que a base de frequencia fundamental retornou perfeitamente travada sobre o referencial inercial estrito de 60,0 Hz durante um Dia Critico chuvoso."
+      ],
+      "correctIndex": 1,
+      "explanation": "A condicao de validacao no item 126 do PRODIST Modulo 8 e restrita: a regularizacao do nivel de tensao sera comprovada quando os valores de DRP e DRC mensais forem inferiores aos valores de DRPlimite e DRClimite.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para elevar o lastro de rastreabilidade de um laudo, as orientacoes de preenchimento do relatorio padronizado para listagem de VTCDs (Tabela 11 do PRODIST) exigem que, quando aplicavel, a concessionaria detalhe o fato referenciando internamente qual documento para apontar a causa operante da ocorrencia?",
+      "options": [
+        "Por correlacionar obrigatoriamente a falha visualizada com o respectivo registro e fato anotado no Relatorio Diario de Operacao (RDO) do sistema interno da propria distribuidora.",
+        "Apenas mediante anexacao do historico universal do servidor de protecoes mantido unicamente em nuvem pelo desenvolvedor do firmware e relogios do GPS do analisador.",
+        "Emitindo formalmente um pareamento fidedigno contra os indicadores mundiais transitorios estipulados nos dados das ultimas regressoes mantidas nos foruns padronizadores da IEEE 1159.",
+        "Mapeando a oscilacao impulsiva diretamente com base em laudos das emissoes parciais termograficas dos comutadores sob carga executadas pelos provedores fabris de transformadores."
+      ],
+      "correctIndex": 0,
+      "explanation": "No detalhamento obrigatorio constante na Tabela 11, nota 6, o PRODIST dita que se deve registrar o evento correspondente registrado no Relatorio Diario de Operacao (RDO) da distribuidora, descrevendo o cruzamento de horarios para a justificativa e indicacao da causa raiz na rede.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na producao automatizada de relatorios de auditoria elaborados para satisfazer imposicoes de fiscalizacoes regulatorias em Data Centers e industrias, modernos sistemas embarcados no analisador de energia ja garantem confiabilidade tecnica extra ao entregar registros protegidos com uso do recurso imutavel de blockchain.",
+      "correctAnswer": true,
+      "explanation": "O artigo guia referenciado pela Wrindu na secao de tecnologias relata claramente que o registro seguro por blockchain fornece registros inviolaveis confiaveis face as auditorias regulatorias.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao confeccionar e apresentar o documento com o laudo pericial gerado em decorrencia da reclamacao protocolada do consumidor na concessionaria, a legislacao desobriga as prestadoras de informarem os limites normativos no texto do relatorio, focando tao somente em expor de forma inequivoca e direta as leituras numericas obtidas.",
+      "correctAnswer": false,
+      "explanation": "O texto do PRODIST Modulo 8 em seu item 131, alinea i (subitem ii), fixa legalmente que o relatorio padronizado, entregue formalmente ao usuario da ponta, deve listar explicitamente os limites e valor de referencia existentes no regulamento.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No trato normativo de conflitos, se for deflagrada formalizacao com litigio, a regulamentacao atual determina imperativamente a utilizacao legal do referencial e medidor tipificado como Classe S para a medicao valida nos laudos submetidos as acoes em cortes de disputas judiciais envolvendo perdas financeiras na rede.",
+      "correctAnswer": false,
+      "explanation": "O descritivo do documento oficial e manual INSTRUMENTOS DE MEDICAO - PRODIST MOD 8 proveniente da KRA2 Energia assevera objetivamente que o medidor Classe A e que e obrigatorio em aplicacoes envolvendo disputas judiciais, ficando o equipamento da Classe S voltado a propositos de controle estatistico.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos relatorios emitidos em retorno a uma reclamacao investigada de distorcao ou interrupcao severa, a distribuidora deve prever em suas recomendacoes listadas as solucoes cabiveis, englobando formalmente inclusive propostas detalhadas com as acoes de atuacao que devem recair pela conta de reparo por parte do proprio usuario afetado.",
+      "correctAnswer": true,
+      "explanation": "O paragrafo pertinente no PRODIST Modulo 8 (Item 131, alinea f, inciso v) dita na integra que o relatorio contendo a analise de fato incorporara acoes de atuacao por parte do usuario identificadas com o dever de equacionar ou atenuar o impacto perturbador.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "De acordo com os protocolos descritos para consolidacao metodologica que embasa os relatorios de VTCD, nos casos isolados em que houver recorrencias sucessivas destas ocorrencias dentro de um curto segmento temporal delimitado em exatos 3 minutos em um unico no de rede, todas as flutuacoes devem ser obrigatoriamente grafadas como registros apartados na emissao.",
+      "correctAnswer": false,
+      "explanation": "A alinea c do item 88 do PRODIST (Modulo 8) disciplina de forma diametralmente oposta quando pontua: eventos consecutivos, em um periodo de 3 minutos, no mesmo ponto, devem ser agregados compondo um unico evento temporal. Isso significa que nao ha fracionamento no laudo final para as entradas deste recorte confinado.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O planejamento das diretrizes ligadas aos lacos documentais exige do controle da distribuidora que as bases completas em padrao eletronico comportando medicao de parametros, indicadores de reclamacoes, acoes resolutivas operadas nos historicos e laudos da qualidade originados devam ser mantidos compulsoriamente arquivados e inalterados para fins de guarda pelo marco estipulado minimo exato equivalente a ____ anos consecutivos na linha temporal.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "10"
+        }
+      ],
+      "explanation": "Pelo longo escopo do PRODIST Modulo 8, diversos capitulos (exemplificados em itens 107, 122, 132) frisam sistematicamente e de modo formal o periodo de guarda de registros disponiveis requeridos imposto para durar no minimo 10 anos integrais em bancos de servidores seguros ou arquivos correspondentes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para concluir adequadamente a formalidade legal em relacao as exigencias que acompanham um acompanhamento do tipo de medicao estendida ou monitoracao com base em um prazo minimo estipulado em 30 dias continuos em razao das desordens identificadas, a emissao processada e a consequente entrega fisica do pertinente relatorio padronizado contendo limites apurados tem um teto de acao imperativo que limita-se ate no maximo a marcacao contada em estritos ____ dias corridos de prazo sucedendo a hora exata da conclusao ou retira eletronica de coleta no sistema local.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "30"
+        }
+      ],
+      "explanation": "As clausulas operativas de prazo na legislacao do PRODIST (Modulo 8, Item 131-i) apontam sem dubiedade ao definir formalmente o estrito teto onde os resultados da medicao devem compor um relatorio padronizado, a ser entregue no prazo maximo de 30 dias apos o final da medicao.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos meandros da fiscalizacao executada a partir de dados consolidados do faturamento e correcoes do nivel da qualidade subjacentes ao fornecimento de operacao continua na tensao basica de uma base consumidora detentora de medicao permanente, a chancela do status efetivo com aprovacao final para regularizacao consolidada dos problemas reportados baseia-se sumariamente na verificacao matematica unificada em que os indicadores operacionais se mantem confinados revelando escores inequivocamente inferiores aos topes tabulados dos limites DRClimite e da correlata expressao superior identificada nominalmente na rede por ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "DRPlimite"
+        }
+      ],
+      "explanation": "A condicao de validacao estrita na regra de resolucao firmada no item 126 do PRODIST Modulo 8 estipula objetivamente e diretamente ao relatorio apuratorio da fiscalizacao interna: a regularizacao do nivel de tensao sera comprovada quando os valores de DRP e DRC mensais forem inferiores aos valores de DRPlimite e DRClimite.",
+      "difficulty": "hard"
+    }
+  ]
+}

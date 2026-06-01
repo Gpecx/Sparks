@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Geração Distribuída e Fotovoltaicos",
+  "moduleSubtitle": "Sistemas GD, fotovoltaicos, inversores, armazenamento e conexão à rede",
+  "moduleOrder": 5,
+  "trail": "Fundamentos de Geração Distribuída",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual protecao verifica as diferencas de tensao, fase e frequencia antes do fechamento do disjuntor de acoplamento da geracao com a rede?",
+      "options": [
+        "Direcional de potencia ANSI 32",
+        "Controle de sincronismo ANSI 25",
+        "Religador automatico ANSI 79",
+        "Salto de vetor ANSI 78"
+      ],
+      "correctIndex": 1,
+      "explanation": "A funcao de controle de sincronismo ANSI 25 verifica amplitude, fase e frequencia aceitaveis no acoplamento de redes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na operacao em paralelo com a rede, como os geradores e motores sincronos reagem imediatamente a ocorrencia de um curto-circuito na instalacao?",
+      "options": [
+        "Absorvem energia reativa da falha e desligam o disjuntor",
+        "Reduzem a corrente de defeito a zero por acao do estator",
+        "Comportam-se como geradores alimentando a corrente do defeito",
+        "Operam como cargas passivas e resistivas estabilizando a tensao"
+      ],
+      "correctIndex": 2,
+      "explanation": "No curto-circuito, os motores sincronos e assincronos se comportam como geradores, contribuindo ativamente com a falha.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual funcao de protecao detecta a operacao de um gerador como motor quando este passa a absorver potencia ativa da rede interligada?",
+      "options": [
+        "Sobrecorrente temporizada ANSI 51",
+        "Subtensao de sequencia positiva ANSI 27D",
+        "Subfrequencia direcional ANSI 81L",
+        "Direcional de potencia reversa ANSI 32P"
+      ],
+      "correctIndex": 3,
+      "explanation": "A operacao como motor (motorizacao) e detectada por um rele que avalia a potencia ativa reversa ANSI 32P.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a funcao de desacoplamento rapido ANSI 81R monitora para separar uma fonte propria da rede da concessionaria durante falhas?",
+      "options": [
+        "A taxa de variacao de frequencia df por dt",
+        "A corrente de fuga a terra resistiva",
+        "O aquecimento do estator da maquina",
+        "O nivel de potencia reativa capacitiva"
+      ],
+      "correctIndex": 0,
+      "explanation": "A ANSI 81R e a protecao sensivel a taxa de variacao de frequencia (df/dt) para desacoplamento rapido.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para a gestao de geradores em paralelo, qual e a regra basica para manter a estabilidade em relacao a carga?",
+      "options": [
+        "O numero de fontes deve ser adaptado a potencia requerida pelas cargas",
+        "Todas as fontes devem operar sempre em carga maxima fixa",
+        "Desconectar os transformadores de aterramento do barramento",
+        "Desligar a protecao diferencial ANSI 87G em regime leve"
+      ],
+      "correctIndex": 0,
+      "explanation": "Na gestao de energia com fontes em paralelo, o numero de fontes deve ser adaptado a potencia requerida.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na perda de excitacao de um gerador sincrono acoplado, ele passa a operar de modo assincrono. O que ocorre com o fluxo de potencia reativa?",
+      "options": [
+        "Ele gera potencia reativa maxima para a rede publica",
+        "Ele absorve potencia reativa da rede sobreaquecendo o estator",
+        "Ele isola a troca de potencia reativa com a concessionaria",
+        "Ele zera a potencia ativa e reativa simultaneamente no ponto"
+      ],
+      "correctIndex": 1,
+      "explanation": "Na perda de excitacao o gerador funciona em modo assincrono e absorve alta potencia reativa da rede.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Alem do salto de fase ANSI 78, qual outra medicao de variacao e monitorada para evitar disturbios de interligacao apos falha na rede publica?",
+      "options": [
+        "Vibracao mecanica do eixo do gerador ANSI 39",
+        "Direcao da potencia reativa gerada ANSI 32Q",
+        "Monitoracao por subfrequencia 81L e sobrefrequencia 81H",
+        "Desbalanco de tensao de sequencia negativa ANSI 47"
+      ],
+      "correctIndex": 2,
+      "explanation": "O desacoplamento seguro exige a monitoracao das frequencias e protecao contra subfrequencia 81L e sobrefrequencia 81H.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual falha severa em um gerador em paralelo justifica o uso da protecao de subimpedancia ANSI 40 ou direcional de sobrepotencia reativa ANSI 32Q?",
+      "options": [
+        "Curto-circuito externo bifasico",
+        "Energizacao acidental fora de fase",
+        "Sobrecarga termica do estator",
+        "Perda de excitacao do rotor"
+      ],
+      "correctIndex": 3,
+      "explanation": "A protecao 32Q ou subimpedancia ANSI 40 e usada para detectar a falha grave de perda de excitacao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual protecao detecta a perda de sincronismo do gerador frente a rede publica baseando-se na oscilacao de potencia ou escorregamento?",
+      "options": [
+        "Perda de sincronismo pole slip ANSI 78PS",
+        "Religador automatico de linha ANSI 79",
+        "Rele diferencial de alta impedancia ANSI 87G",
+        "Subtensao remanente do estator ANSI 27R"
+      ],
+      "correctIndex": 0,
+      "explanation": "A protecao de perda de sincronismo ANSI 78PS avalia a instabilidade pela relacao das areas ou oscilacoes de potencia.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um gerador isolado ou cogerador fracamente interligado, por que o curto-circuito em seus terminais tem correntes decrescentes e dificeis de detectar pela ANSI 51?",
+      "options": [
+        "A resistencia da linha de transmissao aumenta exponencialmente com o calor",
+        "A impedancia interna da maquina aumenta do estagio subtransitorio ao permanente",
+        "A reatancia de aterramento satura imediatamente na primeira meia onda",
+        "A excitacao do gerador e cortada instantaneamente pelo disjuntor de campo"
+      ],
+      "correctIndex": 1,
+      "explanation": "A impedancia interna do gerador nao e constante, aumentando progressivamente do estagio subtransitorio ao permanente e reduzindo a corrente.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O desacoplamento de uma fonte autonoma da rede de distribuicao na ocorrencia de falha da rede publica visa evitar disturbios e trocas perigosas de corrente entre as fontes.",
+      "correctAnswer": true,
+      "explanation": "O desacoplamento evita disturbios e variacoes extremas apos falhas da rede publica.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O controle de fluxo de potencia ativa para impedir a motorizacao de um gerador interligado a rede e feito exclusivamente por um rele de sobrecorrente temporizado simples.",
+      "correctAnswer": false,
+      "explanation": "A motorizacao e detectada especificamente por um rele direcional de potencia ativa reversa ANSI 32P.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A protecao de salto de vetor ANSI 78 e um dos metodos recomendados para assegurar o desacoplamento rapido da instalacao de geracao local caso a rede publica falhe abruptamente.",
+      "correctAnswer": true,
+      "explanation": "A protecao de salto de fase ou vetor ANSI 78 e um meio de assegurar o desacoplamento isolando as fontes.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Quando diversas fontes de geracao estao em paralelo no ponto de acoplamento comum, o desbalanco de tensao na rede e irrelevante e nao causa sobreaquecimento nos rotores.",
+      "correctAnswer": false,
+      "explanation": "O desbalanco gera correntes de sequencia negativa ANSI 46, provocando aquecimento rapido e severo do rotor.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O rele de subfrequencia ANSI 81L atua exclusivamente para alivio e rejeicao de carga, sendo proibido o seu uso como criterio para desacoplamento de geradores da rede publica.",
+      "correctAnswer": false,
+      "explanation": "A monitoracao de subfrequencia 81L tambem e usada no desacoplamento para separar de forma segura a geracao local da rede.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na protecao do ponto de interligacao, a funcao ANSI 25 atua bloqueando o fechamento do disjuntor caso as fontes da geracao e da rede nao estejam em perfeito ____ verificado.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "sincronismo"
+        }
+      ],
+      "explanation": "A funcao ANSI 25 e o controle de sincronismo (synchro-check), que verifica limites aceitaveis de amplitude, fase e frequencia antes do acoplamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O desacoplamento extremamente rapido do gerador na perda da rede concessionaria pode ser feito avaliando a variacao df por dt, funcao normativa ANSI 81R definida como ____ de variacao de frequencia.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "taxa"
+        }
+      ],
+      "explanation": "A funcao ANSI 81R e a protecao baseada na taxa de variacao de frequencia para garantir o desacoplamento agil.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em redes contendo geracao local, a interrupcao abrupta da interligacao com a rede externa provoca instabilidades severas gerando flutuacoes anormais de frequencia e de ____ no barramento interno.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "tensão"
+        }
+      ],
+      "explanation": "Falhas da rede publica causam violentas variacoes de tensao e de frequencia no barramento local.",
+      "difficulty": "hard"
+    }
+  ]
+}

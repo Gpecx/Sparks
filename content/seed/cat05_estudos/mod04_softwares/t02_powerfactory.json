@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "",
+  "categoryOrder": 4,
+  "module": "Softwares de Estudos Elétricos",
+  "moduleSubtitle": "Ferramentas de analise de sistemas eletricos de potencia",
+  "moduleOrder": 3,
+  "trail": "PowerFactory (DIgSILENT)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual é um dos grandes diferenciais do DIgSILENT PowerFactory em termos de abrangência de modelagem de rede?",
+      "options": [
+        "Foca exclusivamente em sistemas industriais e prediais.",
+        "É uma plataforma unificada que abrange da transmissão à distribuição.",
+        "Requer softwares de terceiros para modelar geradores renováveis.",
+        "É baseado apenas em planilhas sem diagrama unifilar interativo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O PowerFactory lida com tudo, desde a transmissão HV até a distribuição LV em um único modelo hierárquico unificado. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Quais são os dois principais tipos de simulação dinâmica disponíveis no PowerFactory?",
+      "options": [
+        "Cálculo estático e otimização heurística.",
+        "Fluxo de potência DC e análise de arco elétrico.",
+        "Simulações EMT (valores instantâneos) e RMS (valores eficazes).",
+        "Análise nodal contínua e análise espectral."
+      ],
+      "correctIndex": 2,
+      "explanation": "O programa permite o cálculo dinâmico EMT, utilizando valores instantâneos para transitórios rápidos, e o cálculo RMS para estabilidade eletromecânica com valores eficazes. (Desenvolvimento de Modelos no Programa DigSILENT PowerFactory para o Estudo de Estabilidade Transitória em Sistemas Elétricos)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Quais linguagens de programação o PowerFactory suporta nativamente para automatizar cálculos e processar resultados?",
+      "options": [
+        "C++ e Java",
+        "DPL (DIgSILENT Programming Language) e Python",
+        "Visual Basic e MATLAB",
+        "Fortran e R"
+      ],
+      "correctIndex": 1,
+      "explanation": "O PowerFactory suporta nativamente a linguagem de script embutida DPL e possui uma interface robusta em Python para automação e acesso a objetos. (PowerFactory Training Overview - DIgSILENT Webshop)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Quais normas internacionais o PowerFactory utiliza primariamente para os cálculos de curto-circuito em sua plataforma?",
+      "options": [
+        "Somente o padrão GOST para indústrias petroquímicas.",
+        "Apenas recomendações técnicas locais da DIgSILENT.",
+        "Padrões IEC 60909 e as normas ANSI/IEEE.",
+        "Exclusivamente o padrão de segurança NFPA 70E."
+      ],
+      "correctIndex": 2,
+      "explanation": "A plataforma realiza cálculos de curto-circuito em total conformidade com o padrão internacional IEC 60909 e com as normas ANSI/IEEE. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "No PowerFactory, qual interface visual é utilizada para a implementação e conexão dos blocos de controladores lógicos e modelos de turbinas?",
+      "options": [
+        "Grid (Rede)",
+        "Virtual Instrument Panel (Painel de Instrumentos Virtuais)",
+        "Database Manager (Gerenciador de Banco de Dados)",
+        "Block Diagram (Diagrama de Blocos)"
+      ],
+      "correctIndex": 3,
+      "explanation": "O 'Block Diagram' é a tela dedicada à implementação das lógicas de controle, modelos de reguladores e turbinas com a interligação de suas variáveis. (Desenvolvimento de Modelos no Programa DigSILENT PowerFactory para o Estudo de Estabilidade Transitória em Sistemas Elétricos)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Como o PowerFactory arquiteta e gerencia os dados de elementos da rede, comparado a ferramentas baseadas em arquivos simples?",
+      "options": [
+        "Utiliza uma arquitetura de banco de dados relacional.",
+        "Compila todos os dados hardcoded em um executável.",
+        "Salva os modelos e cenários em múltiplas planilhas do Excel.",
+        "Grava cada subestação em um arquivo de texto isolado sem ligação."
+      ],
+      "correctIndex": 0,
+      "explanation": "O PowerFactory emprega uma arquitetura de banco de dados relacional, na qual todo elemento é um objeto, facilitando a gestão de versões e cenários (Study Cases). (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "O que significa a sigla DSL no contexto de modelagem dinâmica e controle do PowerFactory?",
+      "options": [
+        "Dynamic System Load",
+        "DIgSILENT Simulation Language",
+        "Direct Scripting Link",
+        "Digital State Locator"
+      ],
+      "correctIndex": 1,
+      "explanation": "DSL significa DIgSILENT Simulation Language, uma ferramenta de modelagem que oferece interface gráfica e sintaxe para desenvolver modelos dinâmicos customizados. (PowerFactory Training Overview - DIgSILENT Webshop)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Em uma simulação RMS com o modelo de 5ª ordem do gerador síncrono no PowerFactory, como são tratados os transitórios do estator?",
+      "options": [
+        "Calculados com o método dos trapézios de alta frequência.",
+        "Desprezados, sendo as derivadas do fluxo de estator iguais a zero.",
+        "Simulados com valores instantâneos na frequência da rede.",
+        "Representados de forma detalhada para simular surtos de manobra."
+      ],
+      "correctIndex": 1,
+      "explanation": "Na simulação RMS, o modelo de 5ª ordem despreza os transitórios eletromagnéticos no estator, assumindo derivadas do fluxo do estator iguais a zero. (Desenvolvimento de Modelos no Programa DigSILENT PowerFactory para o Estudo de Estabilidade Transitória em Sistemas Elétricos)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Qual padrão aberto de modelagem para sistemas físicos foi introduzido nas versões 2024/2025 do PowerFactory para criar controladores customizados?",
+      "options": [
+        "VHDL-AMS",
+        "Spice",
+        "Modelica",
+        "Simulink"
+      ],
+      "correctIndex": 2,
+      "explanation": "O PowerFactory passou a suportar o Modelica, um padrão aberto para modelagem dinâmica de sistemas físicos, permitindo portabilidade e customização padronizada. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "O que torna o PowerFactory frequentemente apontado como a ferramenta mais apta para integração de usinas eólicas e solares?",
+      "options": [
+        "Seu foco exclusivo no cálculo de perdas térmicas nos painéis fotovoltaicos.",
+        "Sua arquitetura baseada estritamente no fluxo de carga Gauss-Seidel.",
+        "Sua dependência de planilhas de cálculo manuais de curva PQ.",
+        "Sua verificação automatizada de 'grid code' e os modelos nativos avançados dos conversores."
+      ],
+      "correctIndex": 3,
+      "explanation": "O PowerFactory se destaca na integração de renováveis graças aos modelos detalhados (turbinas, BESS, inversores grid-forming) combinados com funções automatizadas de verificação de conformidade ao código de rede (grid code). (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "O PowerFactory pode gerar gráficos em tempo real, permitindo análises dinâmicas sem precisar esperar o fim total da simulação.",
+      "correctAnswer": true,
+      "explanation": "O software gera gráficos em tempo real no Virtual Instrument Panel, permitindo ao engenheiro visualizar e analisar variáveis mesmo durante a execução de longas simulações. (Desenvolvimento de Modelos no Programa DigSILENT PowerFactory para o Estudo de Estabilidade Transitória em Sistemas Elétricos)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "O software PowerFactory é capaz de modelar unicamente redes elétricas de alta tensão (transmissão).",
+      "correctAnswer": false,
+      "explanation": "O PowerFactory é uma plataforma versátil que lida simultaneamente com a transmissão (HV) até a distribuição (LV) dentro do mesmo modelo. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "DPL refere-se à DIgSILENT Programming Language, linguagem focada em realizar automações e relatórios de fluxo de carga e curtos-circuitos no PowerFactory.",
+      "correctAnswer": true,
+      "explanation": "A DIgSILENT Programming Language (DPL) é a linguagem de script embarcada desenhada para automação, análise e varredura de parâmetros. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "A tela 'Virtual Instrument Panel' do PowerFactory é usada exclusivamente para desenhar o diagrama unifilar das subestações e cabos.",
+      "correctAnswer": false,
+      "explanation": "O 'Virtual Instrument Panel' é voltado à criação de gráficos e plotagens de variáveis ao longo do tempo. O diagrama unifilar e a topologia são construídos na interface 'Grid'. (Desenvolvimento de Modelos no Programa DigSILENT PowerFactory para o Estudo de Estabilidade Transitória em Sistemas Elétricos)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Simulações do tipo EMT (Electromagnetic Transients) capturam valores instantâneos de tensão e corrente, descrevendo fenômenos transientes rápidos como manobras de chaves.",
+      "correctAnswer": true,
+      "explanation": "Simulações EMT resolvem equações diferenciais no domínio do tempo utilizando valores instantâneos, tornando-se ideais para fenômenos eletromagnéticos extremamente rápidos. (Understanding EMT vs. RMS Simulations in Electrical Power Systems)",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "Para avaliar a estabilidade transitória ignorando transientes rápidos de estator, o software utiliza a simulação ____, que realiza os cálculos baseando-se nos valores eficazes das grandezas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "RMS"
+        }
+      ],
+      "explanation": "O cálculo dinâmico RMS (Root Mean Square) usa valores eficazes de tensão e corrente, ideal para avaliar o comportamento eletromecânico e de estabilidade. (Desenvolvimento de Modelos no Programa DigSILENT PowerFactory para o Estudo de Estabilidade Transitória em Sistemas Elétricos)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "No PowerFactory, engenheiros podem automatizar execuções e integrar rotinas extensas desenvolvendo scripts usando o DPL nativo ou a linguagem externa ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Python"
+        }
+      ],
+      "explanation": "A plataforma possui a DIgSILENT Programming Language (DPL) e forte integração com scripts Python para varreduras de parâmetros e automação geral do projeto. (PowerFactory Training Overview - DIgSILENT Webshop)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "O PowerFactory organiza os elementos da rede, cenários e resultados através de uma interface chamada Gerenciador de ____ (Data Manager).",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "dados"
+        }
+      ],
+      "explanation": "As informações de todo o projeto são manipuladas em uma arquitetura de banco de dados relacional e visualizadas no Gerenciador de dados do software. (Desenvolvimento de Modelos no Programa DigSILENT PowerFactory para o Estudo de Estabilidade Transitória em Sistemas Elétricos)"
+    }
+  ]
+}

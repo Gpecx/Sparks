@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Fluxo de Carga",
+  "moduleSubtitle": "Conceitos, modelagem, métodos, OPF e contingências",
+  "moduleOrder": 0,
+  "trail": "Análise e Interpretação de Resultados",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O estudo de fluxo de cargas do software PTW calcula especificamente quais grandezas em cada ramo do sistema eletrico?",
+      "options": [
+        "Correntes assimetricas e correntes de pico transitorias.",
+        "Fator de potencia de curto-circuito e componente DC.",
+        "Niveis de distorcao armonica e ressonancia paralela.",
+        "Queda de tensao e fluxo de potencia."
+      ],
+      "correctIndex": 3,
+      "explanation": "O Estudo de Fluxo de Cargas calcula a queda de tensao em cada alimentador, a tensao em cada barra, e o fluxo de carga em todos os ramos, conforme o manual do PTW.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com o manual do PTW, qual e a principal utilidade do estudo de fluxo de carga para a analise fisica do sistema?",
+      "options": [
+        "Identificar sobrecargas em cabos, transformadores e dispositivos de protecao.",
+        "Dimensionar fisicamente o barramento quanto a esforcos eletrodinamicos.",
+        "Calcular a impedancia de sequencia zero dos motores sincronos.",
+        "Determinar a corrente de inrush exata de transformadores de forca."
+      ],
+      "correctIndex": 0,
+      "explanation": "O estudo e utilizado primariamente para analisar a distribuicao de cargas e identificar a existencia de sobrecargas nos componentes do sistema.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a norma IEEE Std 399 sugere testar no simulador para remediar problemas de baixa tensao apontados nos resultados do fluxo de carga?",
+      "options": [
+        "Mudanca da secao nominal dos condutores de aterramento.",
+        "Adicao de capacitores shunt e mudanca de posicao dos taps de transformadores.",
+        "Elevacao do carregamento ativo e reativo em todas as barras de carga.",
+        "Desconexao dos reatores shunt para aumentar os fluxos de curto-circuito."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para remediar baixas tensoes, o IEEE Std 399 indica alterar taps de transformadores, aumentar tensao nos geradores ou adicionar capacitores shunt.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Conforme a IEEE Std 141, como o fator de potencia do sistema pode ser efetivamente melhorado para reduzir gargalos na transmissao?",
+      "options": [
+        "Instalando bancos de reatores em serie com a fonte principal.",
+        "Fornecendo a demanda de vars localmente atraves de capacitores.",
+        "Reduzindo a secao nominal dos cabos da instalacao industrial.",
+        "Aumentando as correntes de magnetizacao dos motores assincronos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A provisao de energia reativa localmente com capacitores reduz o fluxo de vars pelas linhas principais, melhorando o fator de potencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante a analise dos relatorios do PTW, como sao indicadas as barras e os ramos que violaram os limites estabelecidos de queda de tensao?",
+      "options": [
+        "Por meio do bloqueio dos relatorios de fluxo de potencia da barra afetada.",
+        "Por relatorios separados contendo a mensagem de erro fatal de sub-tensao.",
+        "Com a sinalizacao do simbolo do cifrao ao lado do componente no relatorio.",
+        "Com a conversao automatica das cargas afetadas para impedancia constante."
+      ],
+      "correctIndex": 2,
+      "explanation": "O software PTW informa as barras e os ramos que excederam os limites de queda de tensao pre-definidos utilizando o simbolo do cifrao no relatorio.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo os preceitos detalhados nas normas IEEE para a analise de fluxo de carga, o que costuma ocorrer com o perfil de tensao ao se introduzir.",
+      "options": [
+        "A tensao da respectiva barra e das barras proximas sofre uma reducao.",
+        "As perdas termicas do transformador a montante aumentam consideravelmente.",
+        "A frequencia da rede decai para manter o balanco de potencia reativa.",
+        "A tensao da barra local tende a sofrer uma elevacao compensatoria."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os bancos de capacitores fornecem vars localmente, aliviando as linhas e elevando o nivel de tensao da barra e das imediacoes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em uma planta industrial, o que tipicamente ocorre com as perdas tecnicas globais quando ha grande transporte de energia reativa pelas linhas longas?",
+      "options": [
+        "Aumentam, pois o fluxo de vars exige mais corrente circulando pelos condutores.",
+        "As perdas termicas reduzem pois a corrente reativa resfria os cabos.",
+        "Permanecem constantes, dado que apenas a potencia ativa causa perdas.",
+        "Diminuem proporcionalmente ao aumento da resistencia dos alimentadores."
+      ],
+      "correctIndex": 0,
+      "explanation": "O fluxo de potencia reativa aumenta a corrente total da linha, o que, consequentemente, eleva as perdas do tipo I ao quadrado vezes R (efeito Joule).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O relatorio gerado pelo modulo Load Flow do PTW fornece informacoes diretas sobre perdas de energia. Qual afirmacao descreve corretamente essa.",
+      "options": [
+        "Apresenta somente as perdas no barramento de referencia (swing bus).",
+        "Calcula as perdas em cada ramo individual e a perda total do sistema de potencia.",
+        "Determina apenas as perdas ocasionadas por distorcoes harmonicas na rede.",
+        "Deduz as perdas ativas transferindo-as inteiramente para as cargas fixas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O estudo calcula detalhadamente o fluxo, reportando perdas em cada ramo (linha ou transformador) e totalizando as perdas do sistema.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para analisar restricoes de sobrecarga (gargalos) apontadas pelo fluxo de carga, a IEEE Std 399 sugere as seguintes medidas paleativas, EXCETO:",
+      "options": [
+        "Reconfiguracao do sistema para deslocar a carga para linhas com maior capacidade.",
+        "Adicao de capacitores em derivacao para aliviar o fluxo de corrente reativa.",
+        "Aumento intencional da impedancia da barra de balanco para limitar a corrente nominal.",
+        "Mudanca nas posicoes de tap dos transformadores, caso os limites permitam."
+      ],
+      "correctIndex": 2,
+      "explanation": "Aumentar a impedancia da barra de balanco nao e uma solucao valida para sobrecargas, as solucoes focam em redistribuicao, capacitores ou controle de tensao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A IEEE Std 141 apresenta a equacao VD = I(R cos phi + X sin phi) para estimar quedas de tensao. O que o termo X sin phi retrata matematicamente na.",
+      "options": [
+        "A magnitude da assimetria DC em relacao as perdas condutivas transitorias.",
+        "A taxa de decaimento subtransitorio percorrida ao longo do alimentador.",
+        "O ajuste necessario no angulo das tensoes para o referencial da barra swing.",
+        "A fracao da queda de tensao diretamente causada pelo fluxo de potencia reativa."
+      ],
+      "correctIndex": 3,
+      "explanation": "Nessa equacao aproximada, a parcela que envolve a reatancia X e o seno retrata a contribuicao direta da corrente reativa na queda de tensao global.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O estudo de fluxo de carga pode ser utilizado para determinar antecipadamente niveis criticos de tensao alta ou baixa no sistema sob varias.",
+      "correctAnswer": true,
+      "explanation": "Sim, um dos focos principais e avaliar como a tensao se comporta em todos os barramentos para prever problemas e adequar as operacoes.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para reduzir gargalos operacionais e deficts de tensao observados no relatorio, a IEEE Std 399 reconhece a mudanca da tensao agendada nos geradores.",
+      "correctAnswer": true,
+      "explanation": "A norma cita explicitamente que elevar a tensao de schedule dos geradores e uma medida valida para ajustar deficiencias no perfil de tensao.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Segundo o manual do PTW, quando os limites de queda de tensao inseridos pelo usuario sao violados, a simulacao de fluxo de potencia e abortada.",
+      "correctAnswer": false,
+      "explanation": "O limite de queda de tensao configurado serve unicamente para marcar alertas nos relatorios com um simbolo caracteristico, nao abortando o processo iterativo.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O aumento prolongado da demanda de potencia reativa em determinado ramo da planta resultara em uma diminuicao consideravel da queda de tensao no.",
+      "correctAnswer": false,
+      "explanation": "Na verdade, um aumento no fluxo de reativos acarretara um aumento na corrente total transportada, resultando numa maior queda de tensao (reduzindo a tensao final).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O metodo de solucao Approximate no software PTW altera temporariamente as cargas de potencia constante para impedancia constante, auxiliando a.",
+      "correctAnswer": true,
+      "explanation": "Como a impedancia constante possui menores perdas, converte-se temporariamente para ajudar na convergencia inicial e diagnosticar de onde partem os erros na rede.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Conforme a IEEE Std 399, para atenuar deficts de tensao no sistema e aliviar a corrente das linhas, podemos adotar a instalacao local de bancos de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "reativa"
+        }
+      ],
+      "explanation": "Os bancos de capacitores fornecem localmente os reativos necessarios (vars), melhorando a tensao e reduzindo a exigencia na subestacao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No software PTW, se a configuracao incluir a caixa Include Source Impedance marcada, o fluxo de carga utiliza a capacidade de curto-circuito ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "impedancia"
+        }
+      ],
+      "explanation": "O software baseia-se na potencia de curto-circuito proveniente da concessionaria para derivar a impedancia de equivalente de Thevenin para a sequencia positiva.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A norma IEEE Std 141 estabelece uma equacao aproximada da queda de tensao com base na corrente, resistencia e reatancia da linha, expressa pelos ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "phi"
+        }
+      ],
+      "explanation": "A expressao classica que estima a queda de tensao aproxima os efeitos angulares multiplicando a resistencia pelo cosseno e a reatancia pelo seno do angulo.",
+      "difficulty": "hard"
+    }
+  ]
+}

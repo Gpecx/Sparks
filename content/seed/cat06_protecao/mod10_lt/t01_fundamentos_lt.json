@@ -26,11 +26,11 @@
       "statement": "Como o arco elétrico é representado no loop de medição da proteção?",
       "options": [
         "Como reatância indutiva pura.",
-        "Como admitância capacitiva.",
         "Como resistência elétrica.",
+        "Como admitância capacitiva.",
         "Como fonte de tensão constante."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "No arco elétrico a tensão e a corrente estão em fase, comportando-se como resistência elétrica. (Fonte: Virtus-Seminario Prot.LT R2).",
       "difficulty": "easy"
     },
@@ -66,10 +66,10 @@
       "options": [
         "Sequência positiva.",
         "Sequência negativa.",
-        "Sequência zero.",
-        "Corrente nominal de carga."
+        "Corrente nominal de carga.",
+        "Sequência zero."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "O acoplamento mútuo indutivo é significativo apenas para correntes de sequência zero. (Fonte: Virtus-Seminario Prot.LT R2).",
       "difficulty": "easy"
     },
@@ -77,12 +77,12 @@
       "type": "multipleChoice",
       "statement": "O que o efeito infeed causa na medição do relé de distância?",
       "options": [
-        "Zera a reatância aparente da linha.",
         "Mede uma impedância maior, causando subalcance.",
+        "Zera a reatância aparente da linha.",
         "Mede uma impedância menor, causando sobrealcance.",
         "Anula a medição da resistência de falta."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "A injeção de corrente aumenta a queda de tensão, fazendo o relé medir uma impedância maior. (Fonte: Virtus-Seminario Prot.LT R2).",
       "difficulty": "medium"
     },
@@ -91,11 +91,11 @@
       "statement": "Como o capacitor série afeta a medição do relé de distância?",
       "options": [
         "Aumenta a reatância vista, gerando subalcance.",
-        "Não altera a medição fasorial de curto-circuito.",
+        "Reduz a reatância vista, dando falsa impressão de falta próxima.",
         "Zera a resistência de arco aparente.",
-        "Reduz a reatância vista, dando falsa impressão de falta próxima."
+        "Não altera a medição fasorial de curto-circuito."
       ],
-      "correctIndex": 3,
+      "correctIndex": 1,
       "explanation": "A capacitância reduz a reatância aparente da linha, aproximando ficticiamente a falta do relé. (Fonte: Caminha).",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "Qual característica adicional a resistência de pé de torre introduz no circuito?",
       "options": [
         "Reatância capacitiva parasita.",
-        "Parcela indutiva devida aos cabos guarda.",
         "Defasagem de 180 graus na tensão.",
+        "Parcela indutiva devida aos cabos guarda.",
         "Curto-circuito bifásico secundário."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "A resistência de pé de torre não é pura, possuindo parcela indutiva dos cabos guarda. (Fonte: Virtus-Seminario Prot.LT R2).",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "Como se modela o circuito de sequência positiva para linhas médias?",
       "options": [
         "Modelo puramente resistivo.",
-        "Modelo Pi com capacitância shunt dividida nos extremos.",
+        "Modelo sem capacitância shunt.",
         "Modelo T com capacitância concentrada no centro.",
-        "Modelo sem capacitância shunt."
+        "Modelo Pi com capacitância shunt dividida nos extremos."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "Linhas médias utilizam o modelo Pi, com os parâmetros shunt divididos nas extremidades. (Fonte: Virtus_Ferramentas).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "Reatores shunt absorvem potência reativa excedente em linhas longas de transmissão.",
       "correctAnswer": true,
       "explanation": "Reatores compensam o efeito capacitivo shunt, evitando sobretensões e absorvendo reativos. (Fonte: Virtus-Anorm.Sist. Potência).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "O fator de compensação residual independe da impedância de sequência zero.",
       "correctAnswer": false,
       "explanation": "O fator k0 é calculado pela relação entre as impedâncias de sequência zero e positiva. (Fonte: Virtus-Seminario Prot.LT R2).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Cabos subterrâneos possuem menor capacitância shunt que as linhas aéreas equivalentes.",
       "correctAnswer": false,
       "explanation": "Cabos isolados possuem capacitância paralela significativamente maior que as linhas aéreas. (Fonte: Guia Proteção).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Correntes de terra no mesmo sentido em linhas paralelas causam sobrealcance no relé.",
       "correctAnswer": false,
       "explanation": "Correntes no mesmo sentido induzem tensão aditiva, elevando a impedância lida e gerando subalcance. (Fonte: Virtus-Seminario Prot.LT R2).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O cálculo da resistência de arco considera o alongamento pelo vento durante a falta.",
       "correctAnswer": true,
       "explanation": "Fórmulas práticas usam a velocidade do vento e o tempo para modelar o alongamento do arco. (Fonte: Virtus-Seminario Prot.LT R2).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Instala-se um _____ para curto-circuitar o banco de capacitores série durante a falta.",
+      "statement": "Instala-se um ____ para curto-circuitar o banco de capacitores série durante a falta.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O acoplamento mútuo entre linhas paralelas afeta exclusivamente a rede de sequência _____.",
+      "statement": "O acoplamento mútuo entre linhas paralelas afeta exclusivamente a rede de sequência ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A injeção de corrente por fontes remotas no ponto da falta caracteriza o efeito _____.",
+      "statement": "A injeção de corrente por fontes remotas no ponto da falta caracteriza o efeito ____.",
       "blanks": [
         {
           "index": 0,

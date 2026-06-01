@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "O que o barramento representa em um sistema elétrico de potência?",
       "options": [
-        "Uma carga resistiva fixa do sistema.",
-        "Um equipamento exclusivo para injeção de reativos.",
         "Um nó elétrico de despacho e convergência de energia.",
+        "Um equipamento exclusivo para injeção de reativos.",
+        "Uma carga resistiva fixa do sistema.",
         "Um filtro passivo de harmônicas de alta frequência."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "O barramento é definido como um nó elétrico fundamental de despacho de energia, tendo mais de duas extremidades conectadas. (Fonte: Guia Proteção 2008).",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Em um arranjo de barra dupla, qual equipamento interliga fisicamente os dois barramentos principais?",
       "options": [
         "O disjuntor de transferência de bay.",
-        "O disjuntor de acoplamento (paralelo de barras).",
+        "O reator shunt de aterramento.",
         "O contator principal a vácuo (master contactor).",
-        "O reator shunt de aterramento."
+        "O disjuntor de acoplamento (paralelo de barras)."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O esquema de barra dupla utiliza um disjuntor específico de acoplamento para interligar as duas barras. (Fonte: Virtus_ProtBarras).",
       "difficulty": "easy"
     },
@@ -64,12 +64,12 @@
       "type": "multipleChoice",
       "statement": "Qual fenômeno agrava rapidamente a saturação do núcleo do TC durante um curto-circuito na barra?",
       "options": [
-        "A componente de sequência negativa do gerador.",
-        "A tensão residual homopolar no barramento.",
         "A presença da componente contínua (DC) transitória na corrente.",
+        "A tensão residual homopolar no barramento.",
+        "A componente de sequência negativa do gerador.",
         "A componente harmônica de 3ª ordem."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "A corrente contínua (DC) transitória desloca o eixo da corrente e leva o TC à saturação do fluxo magnético. (Fonte: Virtus_ProtBarras).",
       "difficulty": "easy"
     },
@@ -91,11 +91,11 @@
       "statement": "Qual a principal função operativa da barra e do disjuntor de transferência no arranjo de subestação?",
       "options": [
         "Somar de forma vetorial as correntes de todos os alimentadores locais.",
-        "Substituir o disjuntor de qualquer circuito para permitir sua manutenção sem corte de carga.",
         "Aterrar a barra principal ativamente em caso de energização acidental.",
+        "Substituir o disjuntor de qualquer circuito para permitir sua manutenção sem corte de carga.",
         "Filtrar as harmônicas geradas por fornos a arco interligados."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O disjuntor de transferência assume a condução do circuito cujo disjuntor for isolado para manutenção. (Fonte: Virtus_ProtBarras).",
       "difficulty": "medium"
     },
@@ -105,10 +105,10 @@
       "options": [
         "A proteção instantânea do relé Buchholz do transformador adjacente.",
         "O elemento instantâneo de sobrecorrente do alimentador principal.",
-        "A segunda zona (temporizada) dos relés de distância dos terminais remotos.",
-        "A unidade diferencial de linha (87L) via comunicação óptica dedicada."
+        "A unidade diferencial de linha (87L) via comunicação óptica dedicada.",
+        "A segunda zona (temporizada) dos relés de distância dos terminais remotos."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "A proteção remota de barra limpa a falta com retardo de tempo, tipicamente operando através da 2ª zona (aprox. 0,5s) dos relés adjacentes. (Fonte: Virtus_ProtBarras).",
       "difficulty": "medium"
     },
@@ -143,39 +143,44 @@
       "statement": "A proteção diferencial local de barras atua normalmente com um retardo intencional ajustado em 0,5 segundos.",
       "correctAnswer": false,
       "explanation": "A proteção diferencial (87B) atua instantaneamente, sem temporização intencional, visando eliminar o curto interno com máxima rapidez. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Os relés diferenciais de barramento baseiam-se na Lei de Kirchhoff, exigindo que a soma fasorial das correntes no nó seja nula em operação normal.",
       "correctAnswer": true,
       "explanation": "O princípio diferencial equaciona a barra como um nó; se a soma das correntes (entrada e saída) não for zero, infere-se falta interna. (Fonte: Caminha).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Em um curto-circuito severo fora da barra, a saturação desigual dos TCs pode gerar uma corrente diferencial falsa e causar trip indevido.",
       "correctAnswer": true,
       "explanation": "Faltas externas violentas saturam TCs de modo irregular, criando erros de medição que resultam em falsas correntes diferenciais operantes. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A montagem dos TCs em apenas um lado do disjuntor de seccionamento previne por completo a formação de zonas mortas de proteção.",
       "correctAnswer": false,
       "explanation": "Instalar TCs apenas em um dos lados do disjuntor cria invariavelmente uma zona morta física entre o disjuntor e o respectivo TC. (Fonte: Virtus_ProtBarras).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Na proteção de barras por seletividade lógica, o relé do alimentador envia sinal de bloqueio ao relé de entrada quando detecta falta na linha.",
       "correctAnswer": true,
       "explanation": "A seletividade lógica permite que o relé a jusante iniba o relé a montante, garantindo que faltas externas à barra não desarmem a alimentação geral. (Fonte: Guia Proteção 2008).",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Caso um disjuntor se recuse a abrir após o comando de trip da barra, a função de falha de _____ (50BF) atua para desligar os disjuntores adjacentes.",
+      "statement": "Caso o equipamento de interrupcao se recuse a abrir apos o comando de trip da barra, a funcao de falha de ____ (50BF) atua para desligar os adjacentes.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para evitar atuação por saturação de TC, usa-se a proteção diferencial de alta _____, estabilizada por um resistor em série com o relé.",
+      "statement": "Para evitar atuação por saturação de TC, usa-se a proteção diferencial de alta ____, estabilizada por um resistor em série com o relé.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O TC satura mais rápido quando a componente DC da falta se soma ao fluxo magnético _____ preexistente no núcleo.",
+      "statement": "O TC satura mais rápido quando a componente DC da falta se soma ao fluxo magnético ____ preexistente no núcleo.",
       "blanks": [
         {
           "index": 0,

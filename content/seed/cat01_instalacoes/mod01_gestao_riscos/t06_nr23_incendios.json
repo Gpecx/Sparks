@@ -40,10 +40,10 @@
       "options": [
         "O dimensionamento estrutural e hierárquico do SESMT local.",
         "A utilização de ferramentas elétricas pesadas na evacuação.",
-        "A utilização dos equipamentos de combate ao incêndio e dispositivos de alarme.",
-        "A carga horária máxima de trabalho contínuo da brigada florestal."
+        "A carga horária máxima de trabalho contínuo da brigada florestal.",
+        "A utilização dos equipamentos de combate ao incêndio e dispositivos de alarme."
       ],
-      "correctIndex": 2,
+      "correctIndex": 3,
       "explanation": "Segundo o item 23.3.2, alíneas 'a' e 'c', a organização deve informar a todos os trabalhadores sobre a utilização dos equipamentos de combate ao incêndio e dos dispositivos de alarme existentes.",
       "difficulty": "easy"
     },
@@ -78,11 +78,11 @@
       "statement": "Sobre a sinalização de aberturas, saídas e vias de passagem de emergência, qual informação deve ser indicada visualmente aos trabalhadores segundo as diretrizes da NR-23?",
       "options": [
         "O nome de guerra do responsável legal pela brigada de incêndio.",
-        "O prazo de validade estipulado para os extintores posicionados.",
         "A direção da saída para facilitar o processo de abandono.",
+        "O prazo de validade estipulado para os extintores posicionados.",
         "A temperatura máxima de acionamento dos chuveiros tipo sprinkler."
       ],
-      "correctIndex": 2,
+      "correctIndex": 1,
       "explanation": "O item 23.3.4 da NR-23 exige que as aberturas, saídas e vias de emergência sejam identificadas e sinalizadas indicando visualmente a direção da saída.",
       "difficulty": "medium"
     },
@@ -117,11 +117,11 @@
       "statement": "A manutenção contínua das vias de passagem e aberturas de emergência é uma medida essencial na norma. O que a NR-23 exige especificamente sobre o estado físico dessas passagens?",
       "options": [
         "Devem possuir barreiras físicas catracadas para controle de fluxo de entrada e saída.",
-        "Devem ser mantidas permanentemente desobstruídas para garantir livre circulação.",
+        "Podem ser utilizadas para armazenar paletes temporários se restar espaço lateral de 1,20m.",
         "Devem ser bloqueadas fora do horário comercial com o uso de correntes e cadeados robustos.",
-        "Podem ser utilizadas para armazenar paletes temporários se restar espaço lateral de 1,20m."
+        "Devem ser mantidas permanentemente desobstruídas para garantir livre circulação."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O subitem 23.3.4.1 da NR-23 é categórico ao exigir que as aberturas, saídas e vias de passagem de emergência sejam mantidas sempre desobstruídas.",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "A organização tem o dever legal de informar os trabalhadores sobre diversos aspectos da emergência. Com base estritamente na NR-23, qual conjunto de informações abaixo reflete exatamente as exigências comunicacionais?",
       "options": [
-        "Uso correto de EPI retardante de chamas, mapas de risco industriais e rotas de fuga primárias.",
-        "Procedimentos unificados de primeiros socorros, manuseio de mangotes e lista de telefones úteis.",
         "Utilização de equipamentos de combate ao incêndio, procedimentos de evacuação e dispositivos de alarme.",
+        "Procedimentos unificados de primeiros socorros, manuseio de mangotes e lista de telefones úteis.",
+        "Uso correto de EPI retardante de chamas, mapas de risco industriais e rotas de fuga primárias.",
         "Classificação da carga de incêndio local e procedimento para acionamento de hidrantes públicos urbanos."
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "explanation": "Conforme o item 23.3.2, as informações que devem ser providenciadas envolvem: a) utilização dos equipamentos de combate ao incêndio; b) procedimentos para evacuação; e c) dispositivos de alarme existentes.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "A organização está legalmente dispensada de fornecer aos trabalhadores as informações relativas aos dispositivos de alarme caso o ambiente possua sistema automático de detecção integrado e gerido por equipe de monitoramento terceirizada.",
       "correctAnswer": false,
       "explanation": "A afirmação é falsa. O item 23.3.2, alínea 'c', estabelece expressamente a obrigatoriedade incondicional de a organização providenciar para todos os trabalhadores informações sobre os dispositivos de alarme existentes, não prevendo tal isenção.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A NR-23 determina objetivamente que a adoção de medidas de prevenção contra incêndios nas organizações deve observar a conformidade com a legislação estadual aplicável, complementada pelas normas técnicas oficiais.",
       "correctAnswer": true,
       "explanation": "A afirmativa é verdadeira e está fundamentada de forma direta no item 23.3.1 da norma, que subordina as medidas preventivas à legislação estadual e às normas técnicas oficiais como complemento.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "Apesar da obrigatoriedade de se manterem livres e funcionais, as aberturas e vias de passagem de emergência podem ser temporariamente obstruídas por lotes de produção, desde que o período de obstrução verificado seja comprovadamente inferior a uma hora útil.",
       "correctAnswer": false,
       "explanation": "A afirmação é integralmente falsa. O item 23.3.4.1 determina rigidamente que as aberturas, saídas e vias de passagem de emergência devem ser mantidas desobstruídas, não havendo ressalva normativa para obstruções momentâneas.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Para resguardar a viabilidade de um rápido e seguro abandono de área, é terminantemente proibido pela norma instalar qualquer dispositivo mecânico de travamento nas portas de saídas de emergência, mesmo aqueles operados apenas do interior.",
       "correctAnswer": false,
       "explanation": "A afirmativa é falsa. O subitem 23.3.5.1 flexibiliza e autoriza explicitamente que as saídas de emergência sejam equipadas com dispositivos de travamento (como barras antipânico), desde que permitam a fácil abertura do interior do estabelecimento.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O dever formativo da organização abrange o repasse de informações de resposta a cenários de emergências aos trabalhadores, bem como dos procedimentos para que ocorra a evacuação dos locais de trabalho de forma segura.",
       "correctAnswer": true,
       "explanation": "A afirmativa é verdadeira, pois reflete com exatidão o mandamento legal e literal estipulado na alínea 'b' do item 23.3.2 da norma de proteção contra incêndios.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "A identificação e sinalização padronizada das aberturas e de todas as vias de passagem de emergência devem ser elaboradas de modo a indicar de forma inequívoca aos ocupantes a _____ da saída.",
+      "statement": "A identificação e sinalização padronizada das aberturas e de todas as vias de passagem de emergência devem ser elaboradas de modo a indicar de forma inequívoca aos ocupantes a ____ da saída.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Constitui um dever de toda organização fornecer informações para todos os seus trabalhadores sobre a adequada utilização prática dos equipamentos de _____ ao incêndio que estão instalados em seu ambiente laboral.",
+      "statement": "Constitui um dever de toda organização fornecer informações para todos os seus trabalhadores sobre a adequada utilização prática dos equipamentos de ____ ao incêndio que estão instalados em seu ambiente laboral.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Em caráter de regra absoluta de evacuação, as saídas de emergência do estabelecimento não podem, de modo algum, ser fechadas à _____ ou mantidas presas durante toda a duração da jornada de trabalho.",
+      "statement": "Em caráter de regra absoluta de evacuação, as saídas de emergência do estabelecimento não podem, de modo algum, ser fechadas à ____ ou mantidas presas durante toda a duração da jornada de trabalho.",
       "blanks": [
         {
           "index": 0,

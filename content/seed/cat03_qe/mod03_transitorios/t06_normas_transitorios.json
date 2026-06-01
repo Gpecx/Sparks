@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Transitórios e Surtos",
+  "moduleSubtitle": "Tipos, sobretensoes, medicao, DPS e coordenacao",
+  "moduleOrder": 2,
+  "trail": "Normas de Transitórios (IEC 61000-4)",
+  "trailOrder": 5,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual forma de onda normalizada e prescrita para simular o primeiro impacto de um raio direto em ensaios de DPS de Classe I, definindo seu desempenho frente a descargas severas?",
+      "options": [
+        "8/20 us",
+        "1,2/50 us",
+        "10/350 us",
+        "100/1000 us"
+      ],
+      "correctIndex": 2,
+      "explanation": "O Guia Finder detalha na sua secao sobre as classes que os DPSs da Classe I sao testados pelo fabricante com uma forma de onda de 10/350 us, a qual e usada para simular o primeiro impacto de um raio direto.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para definir o desempenho em termos de corrente nominal (In) e corrente maxima (Imax) dos DPSs enquadrados na Classe II (Tipo 2), qual forma de onda tipica de surtos induzidos e utilizada nos testes de laboratorio?",
+      "options": [
+        "10/350 us",
+        "8/20 us",
+        "1,2/50 us",
+        "50/60 Hz"
+      ],
+      "correctIndex": 1,
+      "explanation": "O Guia Finder de protecao contra surtos afirma objetivamente que a Classe II tem seus DPSs testados com um gerador de forma de onda 8/20 us, que e a curva tipica adotada normativamente para representar surtos de tensao induzidos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo o Guia Finder, qual e a tensao de resistencia ao impulso exigida normativamente para aparelhos da Categoria de instalacao I, que engloba equipamentos eletronicos muito sensiveis como TVs e modems?",
+      "options": [
+        "1,5 kV",
+        "2,5 kV",
+        "4,0 kV",
+        "6,0 kV"
+      ],
+      "correctIndex": 0,
+      "explanation": "Na segmentacao de categorias baseada nas normas vigentes, o Guia Finder indica explicitamente que a Categoria de instalacao I requer que o fabricante garanta uma tensao de resistencia de 1,5 kV.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A norma de coordenacao de isolamento especifica que dispositivos robustos instalados antes do quadro de distribuicao principal, tais como grandes contatores de entrada, devem suportar qual tensao de resistencia ao impulso e a qual categoria pertencem?",
+      "options": [
+        "Categoria I com suportabilidade de 1,5 kV.",
+        "Categoria II com suportabilidade de 2,5 kV.",
+        "Categoria III com suportabilidade de 4,0 kV.",
+        "Categoria IV com suportabilidade de 6,0 kV."
+      ],
+      "correctIndex": 3,
+      "explanation": "O Guia Finder define, no mapeamento das Categorias, que pertencem a Categoria de instalacao IV os dispositivos instalados antes do quadro de distribuicao, cuja tensao de resistencia ao impulso e de 6 kV.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A norma prEN 50539-11 (aplicacoes fotovoltaicas) estabelece um novo criterio sobre a protecao de reserva dos DPSs. O que a referida norma define caso a corrente maxima de curto-circuito da cadeia (Iscpv) seja menor ou igual a corrente Iscwpv do DPS?",
+      "options": [
+        "Exige a instalacao obrigatoria de disjuntores de curva C em serie.",
+        "O DPS deve ser obrigatoriamente protegido por fusiveis de acao ultra-rapida gR.",
+        "O DPS pode ser instalado diretamente sem a necessidade de nenhum sistema de protecao de reserva.",
+        "A instalacao requer a adicao mandatoria de varistores em paralelo para dividir a corrente excessiva da string."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Guia Finder explica as inovacoes da norma prEN 50539-11 afirmando que se a Iscpv for menor ou igual a Iscwpv, o DPS pode ser instalado diretamente entre os condutores (+ e -) sem instalar nenhum sistema de protecao de reserva, tais como fusiveis ou disjuntores.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a caracteristica funcional exigida pelo gerador de teste do tipo combinado, o qual e utilizado rotineiramente para testar e classificar o desempenho normativo dos DPSs de Classe III (Tipo 3)?",
+      "options": [
+        "Gera unicamente uma onda de corrente 10/350 us com frente ascendente amortecida por resistores.",
+        "Gera uma tensao sem carga com forma de onda 1,2/50 us capaz de transmitir concomitantemente uma corrente 8/20 us.",
+        "Aplica repetidos pulsos de tensao com frequencia industrial rigorosamente estabilizada na marca de 60 Hz.",
+        "Emite ondas de corrente de descargas exclusivas em 8/20 us restritas a uma tensao maxima estatica de apenas 1,5 kV."
+      ],
+      "correctIndex": 1,
+      "explanation": "O manual Guia Finder indica que os DPSs enquadrados no Tipo 3 desempenham um papel de terminacao e por isso sao testados com um gerador do tipo combinado, que gera uma tensao sem carga Uoc com forma de onda de 1,2/50 us, capaz de transmitir o valor de corrente nominal In com forma de onda de 8/20 us.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com as diretrizes de protecao baseadas na norma EN 62305, como se atinge corretamente a coordenacao de energia entre dois protetores DPS (como Tipo 1 e Tipo 2) instalados em cascata?",
+      "options": [
+        "Distanciando-os adequadamente atraves da insercao de uma indutancia, normalmente introduzida de forma natural pelos proprios cabos na proporcao normativa de 1 microhenry por metro (1 uH/m).",
+        "Ligando-os rigorosamente no mesmo borne sem distancia geometrica para maximizar e garantir a conducao termica simultanea de ambos os cartuchos no painel.",
+        "Inserindo exclusivamente resistores de altissima potencia de fio entre eles para limitar a corrente residual de fuga passiva a malha de terra.",
+        "Utilizando centelhadores a gas (GDTs) puramente no primeiro estagio e ignorando qualquer exigencia de afastamento em relacao ao segundo estagio de varistores."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Guia Finder na sua secao de coordenacao de energia ensina que a protecao coordenada ocorre distanciando os DPSs, valendo-se da indutancia que e introduzida automaticamente pelos cabos utilizados no sistema, sendo que as normas estabelecem 1 uH/m, conforme exigencia do apendice 4 da norma EN 62305.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O nivel eficaz de protecao (Up/f) de um DPS deve ser adequadamente dimensionado perante a tensao de resistencia ao pulso (Uw) do equipamento protegido. Qual relacao o Guia Finder recomenda para garantir a imunidade, considerando inclusive que a onda pode refletir nos cabos e dobrar sua tensao no fim da linha?",
+      "options": [
+        "Up/f igual a 2 vezes Uw",
+        "Up/f menor que Uw dividido por 2",
+        "Up/f maior que Uw mais 1 kV",
+        "Up/f igual a Uw exato"
+      ],
+      "correctIndex": 1,
+      "explanation": "O Guia Finder dita que a onda do surto que passa do DPS esta sujeita a fenomenos de reflexao que podem dobrar o seu valor em terminais com circuitos abertos (atingindo 2 Up/f). Para que a Uw do aparelho nao seja ultrapassada nem com essas oscilacoes, a recomendacao basica para margem segura se consolida em Up/f < Uw/2.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A regulamentacao tecnica e as regras de dimensionamento descritas no material do Guia Finder para DPS estao amparadas em um conjunto especifico de normas reconhecidas. Quais normas europeias/internacionais citadas na bibliografia do catalogo regem, respectivamente, a protecao global da estrutura contra raios e as exigencias construtivas para os proprios modulos de DPS?",
+      "options": [
+        "O sistema do PRODIST Modulo 8 ditando as regras construtivas e a norma IEC 61000-4-30 medindo a tolerancia passiva dos raios.",
+        "O padrao regulatorio CEI EN 62305 lidando com os raios e a norma de fabricacao CEI EN 61643-11 avaliando rigorosamente os DPSs.",
+        "O conjunto normativo CEI 64-8 abarcando a geracao termeletrica pesada aliado ao estatuto da IEEE 519 validando as blindagens do painel.",
+        "A legislacao europeia EN 50160 definindo as qualidades do ar atmosferico aliada a norma emissiva IEC 61000-3-2 restringindo harmonicos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Na secao dedicada a bibliografia e normas base, o Guia Finder exibe explicitamente as referencias listando as normas que fundamentam essas tecnologias: CEI EN 62305 para protecao contra raios e CEI EN 61643-11 dedicada propriamente aos dispositivos de surto (DPS).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No contexto do enquadramento das zonas e dos limites ditados para a classificacao dos DPSs, qual e a principal finalidade tatica exigida para a instalacao dos dispositivos certificados como pertencentes a Classe III (Tipo 3)?",
+      "options": [
+        "Atuar isoladamente na entrada principal e aerea da linha de energia para descarregar o brutal impacto primario e magnetico de um raio direto.",
+        "Desempenhar um papel de terminacao muito proximo aos aparelhos sensiveis, atuando rapidamente com baixissima tensao residual compativel com os equipamentos finais.",
+        "Elevar ativamente e permanentemente a tensao da instalacao rural exposta para compensar as duras perdas reativas de motores pesados sob queda continua.",
+        "Substituir todos os antigos disjuntores magneticos mecanicos para prover unicamente a eliminacao de faltas diretas oriundas em correntes continuas solares."
+      ],
+      "correctIndex": 1,
+      "explanation": "A documentacao instrucional de projeto do Guia Finder relata na secao de categorizacao (Tipos de DPS) que os componentes de Classe III desempenham um papel de terminacao, sao os mais rapidos e eliminam os surtos de tensao residuais, instalados proximos aos aparelhos eletroeletronicos finais, lidando com uma baixa tensao residual de seguranca.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As avaliacoes baseadas na norma de projeto fotovoltaico prEN 50539-11 estipulam tecnicamente que o disjuntor termico interno do DPS deve conseguir desconecta-lo com garantia e seguranca no final da sua vida util, desde que a corrente maxima de curto-circuito real do gerador em que esta nao exceda a suportabilidade atestada e impressa no proprio dispositivo como Iscwpv.",
+      "correctAnswer": true,
+      "explanation": "O Guia Finder (capitulo de Instalacoes Fotovoltaicas) atesta a nova regra listando que o Iscwpv e a corrente maxima de curto-circuito do gerador fotovoltaico que o DPS e capaz de suportar, e o disjuntor termico interno pode desconectar com seguranca o DPS no final da vida util ate Iscwpv, anulando assim as velhas exigencias forcadas de fusiveis adicionais em certas condicoes.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O agrupamento sistematico dos componentes eletricos em Categorias de Instalacao (ou de surto de tensao) determina que os equipamentos pertencentes a Categoria III devem atender de fabrica a uma rigidez suportavel e resistencia ao impulso correspondente a 4 kV, enquadrando ai os componentes fixos e inerentes ao proprio sistema como quadros, tomadas e interruptores de forca.",
+      "correctAnswer": true,
+      "explanation": "No detalhamento das caracteristicas, o Guia Finder enumera que a Categoria de instalacao III refere-se aos aparelhos que fazem parte do sistema, como interruptores, tomadas e quadros, para os quais a tensao de resistencia e de 4 kV.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Analisando a padronizacao laboratorial imposta para as ondas de ensaio, os documentos comprovam que a curva rapida com forma de onda 8/20 us insere e carrega aos aparelhos uma contribuicao energetica massivamente superior a da larga onda de 10/350 us, sendo por esta severidade destrutiva escolhida exclusivamente para o arduo teste inicial exigido aos DPSs blindados de Classe I.",
+      "correctAnswer": false,
+      "explanation": "Os quadros de onda fornecidos no Guia Finder advertem e contrapoem exatamente isso afirmando o inverso, indicando que a contribuicao energetica, representada pela area sob as curvas, e maior para a forma de onda 10/350 (tipica do primeiro impacto do raio), o que a designa como a onda do duro ensaio da Classe I, sendo a 8/20 us de menor area designada tipicamente a Classe II.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Uma das regras contidas nas equivalencias das normativas globais de nomenclaturas (IEC/Europa/VDE) confirma que os dispositivos apontados como de Tipo 2 (ou outrora rotulados como de Classe C na alema VDE) sao submetidos com prioridade central unicamente ao teste conjugado emitido por gerador combinado Uoc de 1,2/50 us para validar e estampar sua suportabilidade principal extrema Iimp.",
+      "correctAnswer": false,
+      "explanation": "Consultando a tabela do Guia Finder que correlaciona os testes, a regra atesta que o gerador combinado (Uoc 1,2/50 us provendo correntes 8/20 us associadas) refere-se a afericao dos aparelhos limitadores de Classe III (Tipo 3), enquanto a Classe II (Tipo 2/Classe C) depende dos injetores para a onda indutiva caracteristica cravada em 8/20 us fixando In e Imax, ficando a Iimp com a onda 10/350 reservada somente para a Classe I.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A regulamentacao e engenharia atinentes as instalacoes eletricas preveem que a onda impulsiva de um surto de tensao, apos atravessar a atenuacao de um DPS na entrada do quadro, ainda fica sujeita a sofrer perigosos fenomenos oriundos de reflexoes causados pela terminacao dos fios estendidos em aberto, acarretando ondas estacionarias com poder suficiente para ate mesmo dobrar sua amplitude ao chocar-se na carga final desajustada.",
+      "correctAnswer": true,
+      "explanation": "Ao focar nas tecnicas de instalacao, o Guia Finder orienta sobre os maleficios alertando sobre as ondas refletidas, nas quais uma onda de tensao encontra uma carga nao ajustada e se reflete, e pelo fenomeno das ondas estacionarias a tensao no fim da linha pode ate mesmo dobrar, justificando os elevados criterios de seguranca com a Up estrita adotada pelo tecnico em seu projeto.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As especificacoes ditam que a comprovacao da corrente de descarga exigida em laboratorios certificadores para avaliar o indice da suportabilidade de um DPS focado na Classe II se baseia na injecao da Corrente Nominal (In) retratada nos osciloscopios atraves da rigorosa forma de onda tipica de referencia regulada globalmente em ____ us.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "8/20"
+        }
+      ],
+      "explanation": "No trato dos parametros das ondas normalizadas para afericao referidas na publicacao Finder assevera-se que a Corrente nominal de descarga [In 8/20] e o valor de pico quando testado com uma forma de onda de 8/20 us, sendo o teste caracteristico para os DPSs de Classe II.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nas metodologias voltadas ao ordenamento europeu sobre a correta disposicao espacial nos predios baseadas nas graduacoes toleradas para a furia eletromagnetica decorrente das intemperies, a norma internacional responsavel que alicerca oficialmente e trata estruturalmente das Zonas de Protecao LPZ e citada e referenciada nas diretrizes fundamentais do guia pelo codigo indicativo de matriz EN ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "62305"
+        }
+      ],
+      "explanation": "Na explanacao em que a publicacao ensina a fundacao teorica das engrenagens limitadoras do impacto ambiental dos raios, expoe-se a matriz tecnica enunciando que, fazendo referencia a norma 62305-1, podemos dividir em regioes o ambiente eletromagnetico associado a descarga de um raio (LPZ - Zona de Protecao contra Raios). A norma citada na bibliografia e a CEI EN 62305.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos quadros estampados pelas listagens de fornecedores submetidos as avaliacoes robustas de resistencia e supressao para as intemperies, o violento valor de pico estipulado e conferido perante a aplicacao simulada com a severa injetora de onda primaria bruta formatada em 10/350 us atrelado aos blocos classificados como Tipo 1 obedece universalmente pela sigla de Corrente de Impulso indicada nas tabelas como ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Iimp"
+        }
+      ],
+      "explanation": "De forma textual e direta ao repassar as bases sobre o preenchimento laboratorial exigido, as instrucoes dispostas pelo Guia Finder ditam a vinculacao da sigla quando expressam que a Corrente de impulso corresponde ao valor de pico do impulso com forma de onda de 10/350 us, com o qual o DPS de Classe I e testado, definindo o desempenho do DPS em termos de corrente de impulso: Iimp.",
+      "difficulty": "medium"
+    }
+  ]
+}

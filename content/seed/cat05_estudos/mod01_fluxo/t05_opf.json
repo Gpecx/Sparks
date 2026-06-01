@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Fluxo de Carga",
+  "moduleSubtitle": "Conceitos, modelagem, métodos, OPF e contingências",
+  "moduleOrder": 0,
+  "trail": "Fluxo de Potência Ótimo (OPF)",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Em sistemas SCADA, os fluxos de carga em tempo real sao utilizados primariamente como ferramentas de operacao para qual finalidade basica de.",
+      "options": [
+        "Otimizacao de geracao, controle de reativos, despacho e perdas.",
+        "Otimizacao de coordenacao de reles e dimensionamento de cabos.",
+        "Otimizacao de correntes assimetricas e tempo de arco.",
+        "Otimizacao puramente da resistencia de aterramento da planta."
+      ],
+      "correctIndex": 0,
+      "explanation": "Segundo a IEEE Std 399, esses sistemas sao usados intensivamente para a otimizacao de geracao, despacho, perdas e controle de reativos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No planejamento do sistema, o estudo de fluxo de carga ajuda a determinar o tamanho otimo e a localizacao de qual equipamento para melhorar o fator.",
+      "options": [
+        "Transformadores de aterramento.",
+        "Capacitores.",
+        "Geradores de emergencia.",
+        "Reles diferenciais."
+      ],
+      "correctIndex": 1,
+      "explanation": "A IEEE 399 define que o estudo determina o tamanho e a localizacao otimos de capacitores para a devida correcao do fator de potencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais variaveis sao controlaveis e especificadas para unidades geradoras na formulacao inicial do fluxo de potencia?",
+      "options": [
+        "Potencia ativa e potencia reativa.",
+        "Potencia reativa e angulo da tensao.",
+        "Potencia ativa e magnitude da tensao.",
+        "Magnitude e angulo da tensao."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para geradores, a potencia ativa e a magnitude da tensao sao variaveis de controle ajustaveis via regulador de velocidade e sistema de excitacao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na otimizacao de redes industriais, a manutencao de um alto fator de potencia resulta em quais beneficios diretos para o fluxo de carga?",
+      "options": [
+        "Aumento do fluxo de potencia reativa e elevacao generalizada da tensao.",
+        "Reducao da capacidade do sistema e aumento de perdas no ferro do nucleo.",
+        "Aumento das perdas por efeito corona e histerese nos cabos principais.",
+        "Liberacao de capacidade do sistema e diminuicao das perdas resistivas."
+      ],
+      "correctIndex": 3,
+      "explanation": "A melhoria do fator de potencia libera capacidade do sistema e diminui as perdas eletricas do tipo corrente ao quadrado vezes resistencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No software PTW, qual subvisualizacao do Component Editor reune os dados de fluxo de potencia otimo para barras e concessionarias?",
+      "options": [
+        "Optimal Power Flow.",
+        "Reliability Data.",
+        "Harmonic Source.",
+        "User-Defined Fields."
+      ],
+      "correctIndex": 0,
+      "explanation": "O menu Optimal Power Flow esta disponivel na interface do Component Editor para a insercao e configuracao de dados de otimizacao dos componentes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao os quatro parametros primarios avaliados em cada barra eletrica durante a solucao e otimizacao do fluxo de carga?",
+      "options": [
+        "Resistencia, reatancia, capacitancia e condutancia.",
+        "Tensao, corrente, frequencia e distorcao armonica.",
+        "Potencia ativa, potencia reativa, magnitude e angulo da tensao.",
+        "Potencia ativa, potencia aparente, fator de potencia e perdas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os parametros nodais fundamentais calculados e especificados sao potencia ativa, potencia reativa, magnitude da tensao e angulo da tensao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual principio fisico teorico dita o balanco do fluxo de potencia eletrica entre os ramos da rede, atuando como restricao de igualdade matematica?",
+      "options": [
+        "Lei de Faraday.",
+        "Leis de Kirchoff.",
+        "Lei de Lenz.",
+        "Teorema de Fortescue."
+      ],
+      "correctIndex": 1,
+      "explanation": "O fluxo de potencia eletrica se divide rigorosamente pelas malhas ate atingir um balanco que satisfaca as leis de Kirchoff.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na analise e otimizacao do fluxo de potencia, quais condicoes operacionais devem ser obrigatoriamente monitoradas para evitar violacoes de seguranca?",
+      "options": [
+        "O desvio de frequencia e o escorregamento do rotor em tempo real.",
+        "As correntes assimetricas transitorias e a componente de corrente continua.",
+        "O carregamento dos componentes e as tensoes de barra em regime permanente.",
+        "O fator de assimetria e a constante de tempo decrescente."
+      ],
+      "correctIndex": 2,
+      "explanation": "O fluxo de carga determina as tensoes de regime permanente nas barras e o nivel de carregamento dos circuitos, prevenindo severas sobrecargas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a liberacao de capacidade otimiza a operacao e a expansao do sistema quando o fator de potencia global e melhorado?",
+      "options": [
+        "Aumenta as correntes de magnetizacao dos transformadores de subestacao.",
+        "Transforma instantaneamente toda a potencia reativa em potencia condutiva.",
+        "Eleva as perdas ativas nas linhas de transmissao radiais ja existentes.",
+        "Reduz o fluxo de corrente total, permitindo atender cargas adicionais com o mesmo sistema."
+      ],
+      "correctIndex": 3,
+      "explanation": "A reducao drastica do fluxo de potencia reativa diminui a corrente total transportada, liberando capacidade do sistema para acomodar novas cargas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No contexto do despacho economico e minimizacao de custos industriais, quais sao as duas tarifas de concessionarias fundamentais que as industrias.",
+      "options": [
+        "A taxa de energia medida em quilowatt-hora e a taxa de demanda em quilowatt ou kVA.",
+        "A taxa de perdas capacitivas e a taxa estrita de energia reativa pura.",
+        "A tarifa de desvio de frequencia e a taxa de falha de interrupcao.",
+        "A tarifa de pico de curto-circuito e a taxa de assimetria transitoria."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os custos regulares da concessionaria incluem primariamente a taxa de energia baseada no consumo e a taxa de demanda baseada na capacidade instalada.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Fluxos de carga em tempo real sao amplamente empregados pelas utilidades em sistemas SCADA para supervisao e controle automatico de variaveis de.",
+      "correctAnswer": true,
+      "explanation": "A norma IEEE Std 399 atesta que os fluxos de carga online integrados aos sistemas SCADA otimizam ativamente a operacao em tempo real.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Solucoes estaticas de fluxo de carga para diferentes cenarios determinam modos otimos de operacao, a exemplo do ajuste adequado dos dispositivos de.",
+      "correctAnswer": true,
+      "explanation": "Avaliar multiplas condicoes de carregamento garante o melhor e mais seguro ajuste dos equipamentos de controle de tensao para uma operacao otimizada.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na otimizacao de projetos eletricos, a avaliacao do custo das perdas determina o montante exato de investimento adicional justificado para cada.",
+      "correctAnswer": true,
+      "explanation": "A minuciosa analise do custo de perdas eletricas e fundamental para justificar investimentos pontuais em equipamentos de altissima eficiencia energetica.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A tatica de reducao de picos de demanda utilizando equipamentos de emergencia e invariavelmente economica, dispensando comparacoes com o custo de.",
+      "correctAnswer": false,
+      "explanation": "A utilizacao diaria de geradores para reducao de pico de demanda demanda analise cautelosa dos custos de combustivel, manutencao extra e perda de vida util contra a real economia na tarifa.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As perdas tecnicas de transmissao sao desconhecidas antes da solucao do fluxo de carga, exigindo a alocacao de uma barra de balanco livre para.",
+      "correctAnswer": true,
+      "explanation": "A barra swing ou de referencia computa a variacao exata e necessaria de potencia real e reativa requerida para cobrir completamente as perdas da rede.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No software PTW, a interface do editor de componentes disponibiliza uma subvisualizacao dedicada aos modernos estudos de fluxo de potencia otimo ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Optimal"
+        }
+      ],
+      "explanation": "As propriedades individuais dos equipamentos possuem uma aba especifica oficialmente denominada Optimal Power Flow para gerenciar os ajustes matematicos de otimizacao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em sistemas industriais SCADA, os modelos numericos estaticos sao atualizados online para executar rotineiramente a ____ da geracao, do.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "otimizacao"
+        }
+      ],
+      "explanation": "Os complexos fluxos de carga online operam continuamente como ferramentas integradas para otimizar os custos reais de geracao, despacho e perdas elétricas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na rigorosa formulacao nodal de potencia, a magnitude de tensao dos geradores e tida como uma variavel de controle puramente ajustada por meio dos ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "excitacao"
+        }
+      ],
+      "explanation": "A magnitude da tensao eletrica produzida e rigorosamente controlada pela ajustavel regulacao interna do sistema de excitacao da propria maquina sincrona.",
+      "difficulty": "hard"
+    }
+  ]
+}

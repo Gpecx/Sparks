@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Coordenação e Seletividade",
+  "moduleSubtitle": "Estudo de coordenação - dados, metodologia, curvas e relatórios",
+  "moduleOrder": 2,
+  "trail": "Metodologia de Estudos de Coordenação",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a sequência de direção padrão para iniciar a verificação e o ajuste da coordenação dos dispositivos de proteção em um estudo de seletividade?",
+      "options": [
+        "Das cargas extremas para as fontes supridoras de jusante para montante.",
+        "Das fontes de geração para os quadros de distribuição de cargas.",
+        "A partir do barramento principal de tensão mais elevada de forma radial.",
+        "A partir do equipamento que demanda maior potência na planta isolada."
+      ],
+      "correctIndex": 0,
+      "explanation": "A metodologia padronizada exige iniciar o ajuste pelos dispositivos das cargas (jusante) subindo hierarquicamente até os dispositivos das fontes (montante).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na metodologia gráfica do estudo de coordenação e seletividade, qual tipo de diagrama é essencial para visualizar a atuação conjunta dos equipamentos?",
+      "options": [
+        "Diagrama linear de tensão de operação versus impedância nodal equivalente.",
+        "Gráfico logarítmico plotando o tempo de atuação versus a corrente passante.",
+        "Gráfico polar de admitância e susceptância concentradas do núcleo.",
+        "Gráfico exponencial que correlaciona fluxo de potência reativa com frequência."
+      ],
+      "correctIndex": 1,
+      "explanation": "O processo de aplicar e coordenar as tolerâncias é feito de forma visual e direta em folhas com escalas logarítmicas exibindo tempo versus corrente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com os princípios metodológicos gerais de proteção, qual grandeza de falta fundamenta tipicamente as bases para regular as unidades de.",
+      "options": [
+        "A componente de irrupção capacitiva subtransitória da rede.",
+        "O pico assimétrico de tensão contínua retificada no secundário dos TPs.",
+        "O valor eficaz máximo associado às correntes simétricas de curto-circuito.",
+        "A integral térmica instantânea da corrente de sequência zero em malha aberta."
+      ],
+      "correctIndex": 2,
+      "explanation": "A literatura assevera que o valor eficaz máximo das correntes simétricas é usado convencionalmente para estabelecer os limites cronométricos das unidades temporizadas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na determinação minuciosa dos ajustes voltados às unidades instantâneas de trip, qual referencial dinâmico da falta é tecnicamente indispensável.",
+      "options": [
+        "O decaimento progressivo das tensões transitórias fase neutro de regime permanente.",
+        "O fluxo disperso gerado nos enrolamentos terciários de transformadores estabilizadores.",
+        "O nível resistivo da impedância de aterramento multiplicada pela indutância mutua.",
+        "Os valores instantâneos resultantes das correntes assimétricas de curto-circuito."
+      ],
+      "correctIndex": 3,
+      "explanation": "Para balizar os parâmetros de atuação instantânea sem erros, o projetista precisa imprescindivelmente conhecer os patamares plenos das correntes assimétricas primordiais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na plotagem computacional das curvas de proteção de um transformador de potência, o cômputo da corrente de inrush atua frequentemente ancorado em.",
+      "options": [
+        "Cerca de doze vezes o valor da corrente nominal do equipamento.",
+        "Exatamente uma vez o valor eficaz medido na corrente a vazio rotineira.",
+        "Metade do montante nominal acrescido do fator assintótico unipolar.",
+        "Sessenta vezes a impedância percentual multiplicada pelo fluxo base."
+      ],
+      "correctIndex": 0,
+      "explanation": "É prática recorrente assumir correntes de inrush estimadas graficamente no patamar de oito a doze vezes o valor da corrente em regime nominal para evadir atuações intempestivas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No traçado protetivo e na definição dos limites operativos de transformadores com enrolamento delta estrela solidamente aterrados a curva ANSI de.",
+      "options": [
+        "Oscilações eletromecânicas severas oriundas do desbalanço capacitivo do primário indutor.",
+        "Faltas exclusivas do tipo fase terra manifestadas no barramento secundário do transformador.",
+        "Curtos circuitos bifásicos isolados transcorridos nos condutores internos radiais à montante.",
+        "Elevações transitórias de subtensão propagadas pelo rompimento isolante do aterramento base."
+      ],
+      "correctIndex": 1,
+      "explanation": "Essa curva ANSI específica provê a checagem extra demandada contra os severos defeitos da classe fase terra ocorridos no enrolamento secundário devido aos fatores restritivos no transporte dos fasores pela configuração.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em sistemas industriais puramente fechados que nas condições rotineiras de regime não escoam corrente estacionária de neutro como deve ser.",
+      "options": [
+        "O limiar protetivo do trip de sobrecorrente de terra deve ser parametrizado no maior valor possível imposto pelo fusível geral.",
+        "A calibração do neutro precisa exceder substancialmente o fluxo resistivo máximo de bloqueio admitido na barra mestra oscilante.",
+        "A regulagem de acionamento do elemento de terra deve ser inserida adotando se o menor valor técnico e sensível de partida factível.",
+        "A restrição operativa do relé de proteção é travada ignorando se por completo a matriz primitiva gerada pelas admitâncias transversais."
+      ],
+      "correctIndex": 2,
+      "explanation": "Sistemas equilibrados isentos da circulação normal homopolar oferecem a vantagem de tolerar e demandar que o pickup do componente sensível de terra atue em patamares baixíssimos incrementando a presteza de atuação.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A averiguação detalhada no gráfico que acomoda a partida funcional da carga de um motor impõe que a família de curvas traçadas do relé resguarde.",
+      "options": [
+        "O vértice máximo restrito pela corrente de magnetização aliada ao fator temporal de isolamento das blindagens de cobertura resistivas.",
+        "A curva dinâmica temporal do esforço de aceleração estator rotor casada em simultâneo com a plena corrente imposta na sua partida real.",
+        "O cruzamento restrito do limite calórico admissível frente as tensões rotativas simétricas em repouso da máquina excitatriz motriz.",
+        "O platô limite do arco extinto no disjuntor geral em sintonia com a impedância de sequencia negativa de bloqueio passivo gerado."
+      ],
+      "correctIndex": 3,
+      "explanation": "Para evitar os dispendiosos e inoportunos falsos acionamentos as unidades precisam abrigar as tolerâncias contidas entre a corrente de inércia da partida casada no mesmo envelope que estipula o tempo integral de aceleração destas máquinas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na coordenação hierárquica final atrelada à manipulação lógica dos ajustes do dial temporal de curvas inversas, a literatura aponta qual margem.",
+      "options": [
+        "Um intervalo de seletividade balizado em média variando ao redor de 0,3 a 0,4 segundos exatos contados do defeito.",
+        "Um afastamento de simultaneidade temporal entre um até dois segundos ininterruptos redondos de retardo.",
+        "Uma latência protetora exígua em torno de cinquenta milissegundos estritos cravados firmemente.",
+        "Um bloqueio seletivo instantâneo exigindo a atuação conjunta de ambos disjuntores em cascata totalizando trip zero."
+      ],
+      "correctIndex": 0,
+      "explanation": "As boas práticas na formulação de relatórios recomendam que a folga do dial temporal obedeça a margens variando ao redor da faixa clássica de 0,3 até 0,4 segundos visando assegurar a eliminação do arco em níveis lógicos sem precipitação.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sob determinadas conjecturas limitantes nas plantas antigas a perda analítica da seletividade ou os cruzamentos imprecisos nas projeções podem ser.",
+      "options": [
+        "Quando ambas chaves envolvidas estão ligadas estritamente dispostas em formato paralelo divergente segregando ramais primários totalmente desconexos operacionais e geográficos entre si.",
+        "Quando todos os componentes eletrônicos limitadores perdem o referencial do filtro ativo defasando vetorialmente a injeção espúria do sistema reativo das malhas estáticas oscilantes.",
+        "Quando os dispositivos da instalação avaliada estão fixados eletricamente montados associados operando diretamente contíguos de modo sucessivo no mesmíssimo ramo passante da planta elétrica.",
+        "Quando as exigências de pico subtransitório impõem correntes tão altas e severas que forçam a parametrização do disjuntor terminal desconsiderar a potência ativa entregue pelo suprimento."
+      ],
+      "correctIndex": 1,
+      "explanation": "O consenso normativo aceita a quebra conceitual da restrição que demanda a desconexão seletiva exclusiva de um equipamento mediante circunstâncias particulares em que dois dispositivos situam se coligados em plena série interdependente sobre a mesma via elétrica unifilar inseparável.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O planejamento consistente focado no desenvolvimento metódico do ajuste das proteções elétricas exige de maneira prévia, indispensável e integral o.",
+      "correctAnswer": true,
+      "explanation": "Como todos os delineamentos e calibragens relativas às curvas ou retardo de relés encontram morada sobre as extremas amplitudes apuradas nas redes defeituosas as tabulações resultantes do referido estudo balizam inquestionavelmente todo procedimento ordenador adotado.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na transcrição visual efetuada em formulários gráficos atrelada ao comportamento dos disjuntores modernos em caixa moldada e baixa tensão atesta se.",
+      "correctAnswer": true,
+      "explanation": "A configuração da inteligência eletrônica aplicada no interior destes seccionadores flexibiliza os pontos balizadores alinhando a atuação segmentada subdividida no percurso que comporta a restrição contínua longa, a restrição suportável curta e as clivagens velozes imediatas sem dilação impostas nas falhas agudas.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Sob o aspecto focado na preservação imaculada do limite condutivo estrutural de cabos e máquinas o ajuste seletivo coordenado obriga.",
+      "correctAnswer": false,
+      "explanation": "Por lógica preventiva incontestável os aparelhos designados ao isolamento físico devem ser regulados para atuar seccionando o fornecimento com celeridade antes de findado o período termicamente danoso alocando os limitadores obrigatoriamente grafados na porção esquerda antecessora cronométrica ficando fisicamente localizados na tela abaixo dos traçados estáticos referentes à fusão limitadora inerente as curvas de danos catastróficos apurados nos cabos e transformadores.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No delineamento das faixas críticas a unidade reguladora instantânea alocada estrategicamente na seção do lado primário alimentador do respectivo.",
+      "correctAnswer": false,
+      "explanation": "Se a unidade recebesse limiar tão baixo ficaria inerentemente sujeita a desativar a linha erroneamente ao menor fechamento motivado pelo transitório natural sendo portando requerido parametrizar o limiar ultrapassando o inrush e salvaguardando a estabilidade rotineira da ativação do transformador principal na chave principal de manobra diária rotineira.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao englobar na grade geral os arcaicos medidores balizados nos relés de natureza puramente eletromecânicos a margem protetiva estipulada em relação.",
+      "correctAnswer": true,
+      "explanation": "A construção robusta dessas peças clássicas as torna passíveis dos efeitos de arraste giratório que induzem falsa continuidade do comando perante curtos encerrados forçando a adição pragmática de centenas de frações de segundos extras garantidores da tranquilidade na seletividade sequencial encadeada sem tropeços erráticos sobrepostas inadequadamente de outras seções distantes das plantas ativas e obsoletas vigentes.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O contorno exato da família de regulagens estabelecidas nas atuações temporizadas visando a segurança efetiva perante motores exige alocar suas ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "partida"
+        }
+      ],
+      "explanation": "A tolerância das rampas longas impede cortes e panes infundados no esforço acelerador da rotação da massa ligada que demanda excessivo pico transitório característico absorvido inerente a partida (ou equivalente irrupção aceleração e aranque) que cessa e decai posteriormente restabelecendo patamares comportados.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As abordagens restritivas traçadas pela engenharia nas recomendações consolidadas no corpo normativo IEEE 242 estipulam que o uso mandatório na ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "4"
+        }
+      ],
+      "explanation": "As premissas distinguem as categorias conforme os portes sendo exigível para grandes blocos na Categoria Quatro a consideração estrita dos perigos físicos por dilaceração de barramentos sendo a fronteira vital do tracionamento imperativo computado na prevenção de sinistros de colapso de carcaças destas unidades dispendiosas isoladas a gás e fluído isolante.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos intrincados dimensionamentos e planilhas das matrizes contendo as margens das coordenações que distam cronometricamente entre a atuação ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "arco"
+        }
+      ],
+      "explanation": "A condutividade sustentada e mantida ativa temporariamente por inércia calorífica gerando faíscas nos ares após o início da ruptura espacial dos contatos deve estar cessada completamente demandando décimos cruciais absorvidos compondo a parcela definida para o arco no cômputo seletivo base.",
+      "difficulty": "hard"
+    }
+  ]
+}

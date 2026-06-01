@@ -12,12 +12,12 @@
       "type": "multipleChoice",
       "statement": "Na NR-35, qual é a ordem de prioridade correta da hierarquia de planejamento para proteção contra quedas?",
       "options": [
-        "Privilegiar o SPCQ, depois o SPIQ e, por fim, evitar o trabalho.",
         "Medidas para evitar o trabalho em altura, medidas que eliminem o risco de queda e medidas que minimizem as consequências.",
+        "Privilegiar o SPCQ, depois o SPIQ e, por fim, evitar o trabalho.",
         "Implementar SPIQ, priorizar a AR e evitar o trabalho.",
         "Minimizar as consequências, evitar o trabalho e eliminar o risco."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O item 35.5.2 estabelece: a) evitar o trabalho em altura; b) eliminar o risco de queda; e c) minimizar as consequências da queda.",
       "difficulty": "easy"
     },
@@ -39,11 +39,11 @@
       "statement": "Quais os dois subsistemas que a organização deve considerar ao selecionar um Sistema de Proteção contra Quedas (SPQ)?",
       "options": [
         "Apenas o SPIQ homologado pelo fabricante local.",
-        "O Sistema de Proteção Coletiva Contra Quedas (SPCQ) e o Sistema de Proteção Individual Contra Quedas (SPIQ).",
         "Exclusivamente os sistemas de acesso por cordas industriais.",
+        "O Sistema de Proteção Coletiva Contra Quedas (SPCQ) e o Sistema de Proteção Individual Contra Quedas (SPIQ).",
         "Apenas redes de proteção horizontais atadas na estrutura principal."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O item 35.6.3 determina que a seleção do SPQ deve considerar o SPCQ e o SPIQ.",
       "difficulty": "easy"
     },
@@ -52,11 +52,11 @@
       "statement": "Como o glossário da NR-35 define 'Trava-queda'?",
       "options": [
         "Elemento com função de limitar a força de impacto a 6 kN por dissipação de energia cinética.",
-        "Dispositivo de segurança para proteção do usuário contra quedas em operações com movimentação vertical ou horizontal.",
+        "Acessório do cinto abdominal para conter e distribuir forças de suspensão inerte.",
         "Ponto estrutural fixo ou móvel para suportar o peso de até dois trabalhadores simultâneos.",
-        "Acessório do cinto abdominal para conter e distribuir forças de suspensão inerte."
+        "Dispositivo de segurança para proteção do usuário contra quedas em operações com movimentação vertical ou horizontal."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O Glossário da NR-35 define Trava-queda como 'dispositivo de segurança para proteção do usuário contra quedas em operações com movimentação vertical ou horizontal'.",
       "difficulty": "easy"
     },
@@ -91,11 +91,11 @@
       "statement": "Quando o SPIQ é usado para retenção de queda, o que o item 35.6.9.1.1 exige sobre o cinturão?",
       "options": [
         "Deve ser fabricado em cabo de aço galvanizado.",
-        "O cinturão deve ser dotado obrigatoriamente de talabarte integrado com absorvedor de energia.",
         "O talabarte não pode ultrapassar 0,90m da ancoragem.",
+        "O cinturão deve ser dotado obrigatoriamente de talabarte integrado com absorvedor de energia.",
         "Deve ser conectado a um extensor elástico para aumentar a mobilidade."
       ],
-      "correctIndex": 1,
+      "correctIndex": 2,
       "explanation": "O subitem 35.6.9.1.1 estipula que quando utilizado para retenção de queda, o cinturão deve ser dotado de talabarte integrado com o absorvedor de energia.",
       "difficulty": "medium"
     },
@@ -104,11 +104,11 @@
       "statement": "Qual é a periodicidade máxima para a inspeção periódica dos sistemas de ancoragem (Anexo II)?",
       "options": [
         "Não superior a 6 meses.",
-        "Não superior a 12 meses.",
+        "A cada 5 anos, juntamente com a revalidação da ancoragem.",
         "Não superior a 24 meses.",
-        "A cada 5 anos, juntamente com a revalidação da ancoragem."
+        "Não superior a 12 meses."
       ],
-      "correctIndex": 1,
+      "correctIndex": 3,
       "explanation": "O item 4.1.2 do Anexo II exige que a 'inspeção periódica deve ser efetuada com periodicidade não superior a 12 meses'.",
       "difficulty": "medium"
     },
@@ -116,12 +116,12 @@
       "type": "multipleChoice",
       "statement": "O item 35.6.11.1.1 proíbe quais condutas em relação ao talabarte?",
       "options": [
-        "É vedado o uso simultâneo de dois talabartes nas alças peitorais do cinturão paraquedista.",
         "É proibido que o talabarte seja conectado a outro talabarte, elemento de ligação ou extensor, bem como com nós ou laços.",
+        "É vedado o uso simultâneo de dois talabartes nas alças peitorais do cinturão paraquedista.",
         "A norma proíbe talabartes com absorvedor de energia em sistemas de retenção.",
         "Fica vedado o engate do talabarte diretamente nos pontos de ancoragem estrutural."
       ],
-      "correctIndex": 1,
+      "correctIndex": 0,
       "explanation": "O item 35.6.11.1.1 proíbe o talabarte: a) conectado a outro talabarte, elemento de ligação ou extensor, e b) usado com nós ou laços.",
       "difficulty": "medium"
     },
@@ -129,12 +129,12 @@
       "type": "multipleChoice",
       "statement": "O que a AR deve considerar sobre o elemento de ligação e a força de impacto no SPIQ?",
       "options": [
-        "Garantir a utilização de elemento de ligação que assegure impacto máximo de 6 kN transmitido ao corpo.",
         "Garantir que a força de impacto seja limitada a 2 kN para preservar ancoragens provisórias.",
+        "Garantir a utilização de elemento de ligação que assegure impacto máximo de 6 kN transmitido ao corpo.",
         "Assegurar que o elemento seja rígido para transferir e dissipar a força na estrutura.",
         "Assegurar que a força seja anulada por talabartes restritivos sem absorvedores."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "A alínea 'd' do item 35.6.11 e o item 35.6.7 exigem a utilização de elemento de ligação que garanta força de impacto máxima de 6 kN.",
       "difficulty": "hard"
     },
@@ -143,39 +143,44 @@
       "statement": "O Sistema de Proteção Contra Quedas (SPQ) é destinado unicamente a impedir que o trabalhador atinja o solo, sem função de eliminar o risco de queda.",
       "correctAnswer": false,
       "explanation": "Falso. O Glossário define SPQ como 'sistema destinado a eliminar o risco de queda dos trabalhadores ou a minimizar as consequências da queda', atuando em duas vertentes.",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "Para retenção de queda ou acesso por cordas, o cinturão deve ser exclusivamente do tipo paraquedista.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. O item 35.6.9 exige exclusivamente o cinturão paraquedista para sistemas de retenção e acesso por cordas.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": true
     },
     {
       "type": "trueFalse",
       "statement": "A Zona Livre de Queda (ZLQ) é calculada como o comprimento total do talabarte acrescido do absorvedor de energia, desconsiderando a posição do ponto de ancoragem.",
       "correctAnswer": false,
       "explanation": "Falso. O Glossário define ZLQ como 'região compreendida entre o ponto de ancoragem e o obstáculo inferior mais próximo contra o qual o trabalhador possa colidir em caso de queda'.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "A ancoragem estrutural pode ser projetada por trabalhador certificado na capacitação básica de 8 horas da NR-35.",
       "correctAnswer": false,
       "explanation": "Falso. O Anexo II, item 3.2, exige que a ancoragem estrutural e seus fixadores sejam 'projetados e construídos sob responsabilidade de profissional legalmente habilitado'.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "isTrue": false
     },
     {
       "type": "trueFalse",
       "statement": "O Fator de Queda é a razão entre a distância que o trabalhador percorreria na queda e o comprimento do equipamento que irá detê-lo.",
       "correctAnswer": true,
       "explanation": "Verdadeiro. Esta é exatamente a definição de Fator de Queda no Glossário da NR-35.",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O absorvedor de energia é o elemento projetado para limitar a força de impacto por dissipação da energia _____ gerada durante a queda.",
+      "statement": "O absorvedor de energia é o elemento projetado para limitar a força de impacto por dissipação da energia ____ gerada durante a queda.",
       "blanks": [
         {
           "index": 0,
@@ -187,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O Anexo II estabelece que a ancoragem estrutural e os elementos de fixação devem ser projetados sob a responsabilidade de profissional legalmente _____.",
+      "statement": "O Anexo II estabelece que a ancoragem estrutural e os elementos de fixação devem ser projetados sob a responsabilidade de profissional legalmente ____.",
       "blanks": [
         {
           "index": 0,
@@ -199,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Elementos do SPIQ que sofrerem impactos de uma queda devem ser prontamente inutilizados e _____ do acervo da empresa.",
+      "statement": "Elementos do SPIQ que sofrerem impactos de uma queda devem ser prontamente inutilizados e ____ do acervo da empresa.",
       "blanks": [
         {
           "index": 0,
