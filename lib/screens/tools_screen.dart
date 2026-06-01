@@ -352,31 +352,24 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       const hPad = 16.0;
-                      const spacing = 14.0;
-                      final columns = constraints.maxWidth >= 600 ? 2 : 1;
-                      final cardWidth = (constraints.maxWidth -
-                              hPad * 2 -
-                              spacing * (columns - 1)) /
-                          columns;
+                      const spacing = 12.0;
+                      // Grade responsiva: alvo ~108px por tile, mín. 3 colunas.
+                      final available = constraints.maxWidth - hPad * 2;
+                      var columns = (available / 120).floor();
+                      if (columns < 3) columns = 3;
+                      final tileWidth =
+                          (available - spacing * (columns - 1)) / columns;
 
                       return ListView(
                         padding: const EdgeInsets.fromLTRB(hPad, 4, hPad, 24),
                         physics: const BouncingScrollPhysics(),
                         children: [
                           for (final category in _categories) ...[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(4, 14, 4, 10),
-                              child: Text(
-                                category.toUpperCase(),
-                                style: TextStyle(
-                                  color: AppColors.primary
-                                      .withValues(alpha: 0.9),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 1.0,
-                                ),
-                              ),
+                            _CategoryHeader(
+                              title: category,
+                              count: _tools
+                                  .where((t) => t.category == category)
+                                  .length,
                             ),
                             Wrap(
                               spacing: spacing,
@@ -385,9 +378,9 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                                 for (final tool in _tools
                                     .where((t) => t.category == category))
                                   SizedBox(
-                                    width: cardWidth,
-                                    height: 148,
-                                    child: _ToolCard(
+                                    width: tileWidth,
+                                    height: tileWidth,
+                                    child: _ToolTile(
                                       tool: tool,
                                       onTap: () => _open(tool),
                                     ),
@@ -409,11 +402,66 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
   }
 }
 
-class _ToolCard extends StatelessWidget {
+// Cabeçalho de uma categoria, com a contagem de ferramentas.
+class _CategoryHeader extends StatelessWidget {
+  final String title;
+  final int count;
+
+  const _CategoryHeader({required this.title, required this.count});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(4, 18, 4, 12),
+      child: Row(
+        children: [
+          Container(
+            width: 4,
+            height: 16,
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              title.toUpperCase(),
+              style: TextStyle(
+                color: AppColors.primary.withValues(alpha: 0.95),
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 1.0,
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            decoration: BoxDecoration(
+              color: AppColors.primary.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              '$count',
+              style: TextStyle(
+                color: AppColors.primary.withValues(alpha: 0.9),
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Tile quadrado (estilo launcher): ícone grande em destaque + título.
+class _ToolTile extends StatelessWidget {
   final _ToolConfig tool;
   final VoidCallback onTap;
 
-  const _ToolCard({required this.tool, required this.onTap});
+  const _ToolTile({required this.tool, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -442,66 +490,48 @@ class _ToolCard extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: tool.color.withValues(alpha: 0.1),
-                  blurRadius: 12,
+                  blurRadius: 10,
                   spreadRadius: 1,
                 ),
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(10),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 44,
-                        height: 44,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [tool.color, tool.gradientEnd],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: tool.color.withValues(alpha: 0.35),
-                              blurRadius: 10,
-                              spreadRadius: 1,
-                            ),
-                          ],
+                  Container(
+                    width: 46,
+                    height: 46,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [tool.color, tool.gradientEnd],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(13),
+                      boxShadow: [
+                        BoxShadow(
+                          color: tool.color.withValues(alpha: 0.4),
+                          blurRadius: 10,
+                          spreadRadius: 1,
                         ),
-                        child: Icon(tool.icon, color: Colors.white, size: 24),
-                      ),
-                      const Spacer(),
-                      Icon(
-                        Icons.chevron_right,
-                        color: tool.color.withValues(alpha: 0.6),
-                        size: 24,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    tool.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      ],
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                    child: Icon(tool.icon, color: Colors.white, size: 26),
                   ),
-                  const SizedBox(height: 4),
-                  Expanded(
+                  const SizedBox(height: 10),
+                  Flexible(
                     child: Text(
-                      tool.description,
-                      style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.5),
-                        fontSize: 12,
+                      tool.title,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.w600,
+                        height: 1.15,
                       ),
-                      maxLines: 2,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
