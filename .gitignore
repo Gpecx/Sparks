@@ -51,8 +51,22 @@ app.*.map.json
 # Environment variables
 .env*
 !.env.example
+# Catch standalone `env` file (no dot prefix)
+/env
 
 # Local Agent configuration
 .agent/
 agents/
 
+# Claude Code local settings (contain personal credentials/preferences)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+
+# Scratch directory (temp work files)
+scratch/
+
+# Internal/temporary working files inside seed/scripts (prefixed with _)
+content/seed/_*
+content/seed/**/*.bak*
+scripts/_*
+scripts/_briefs/
