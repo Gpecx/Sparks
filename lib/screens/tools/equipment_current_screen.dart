@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/equipment_current.dart';
 import 'package:spark_app/utils/inrush_bank.dart';
+import 'package:spark_app/utils/inrush_estimate.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
 class EquipmentCurrentScreen extends StatefulWidget {
@@ -25,7 +26,14 @@ class _BankRow {
 }
 
 class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
-  int _mode = 0; // 0 = transformador, 1 = motor, 2 = inrush de banco
+  int _mode = 0; // 0 = transformador, 1 = motor, 2 = inrush banco, 3 = inrush real
+
+  // Inrush real (estima o pico a partir do trafo)
+  final _irPower = TextEditingController(text: '1000');
+  final _irVolt = TextEditingController(text: '13.8');
+  final _irZcc = TextEditingController(text: '6');
+  final _irResidual = TextEditingController(text: '0.6');
+  final _irPickup50 = TextEditingController(text: '');
 
   // Transformador
   final _power = TextEditingController(text: '1000');
@@ -60,6 +68,7 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
       _power, _vPrim, _vSec, _inrush,
       _mPower, _mVolt, _mPf, _mEff, _startFactor,
       _bankVolt, _coincidence, _pickup50,
+      _irPower, _irVolt, _irZcc, _irResidual, _irPickup50,
     ]) {
       c.dispose();
     }
@@ -91,8 +100,10 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
       _calcTransformer();
     } else if (_mode == 1) {
       _calcMotor();
-    } else {
+    } else if (_mode == 2) {
       _calcBank();
+    } else {
+      _calcInrushReal();
     }
   }
 
@@ -232,7 +243,7 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
       title: 'Corrente Nominal',
       children: [
         ToolSegmented(
-          labels: const ['Transformador', 'Motor', 'Inrush banco'],
+          labels: const ['Transformador', 'Motor', 'Inrush banco', 'Inrush real'],
           selected: _mode,
           onSelect: (i) => setState(() {
             _mode = i;
@@ -242,7 +253,14 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
           }),
         ),
         const SizedBox(height: 16),
-        if (_mode == 0) _transformerCard() else if (_mode == 1) _motorCard() else _bankCard(),
+        if (_mode == 0)
+          _transformerCard()
+        else if (_mode == 1)
+          _motorCard()
+        else if (_mode == 2)
+          _bankCard()
+        else
+          _inrushRealCard(),
         const SizedBox(height: 20),
         ToolButton(label: 'CALCULAR', onPressed: _calculate),
         if (_warning != null || _results != null) ...[
@@ -290,6 +308,81 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
         ]),
         const SizedBox(height: 12),
         ToolField(controller: _startFactor, label: 'Fator de partida (×)'),
+      ],
+    );
+  }
+
+  // ── Inrush real (estima o pico a partir do trafo) ───────
+  void _calcInrushReal() {
+    final s = _p(_irPower);
+    final v = _p(_irVolt);
+    final z = _p(_irZcc);
+    final br = _p(_irResidual) ?? 0.6;
+    if (s == null || v == null || z == null || s <= 0 || v <= 0 || z <= 0) {
+      setState(() {
+        _warning = 'Preencha potência (kVA), tensão (kV) e Z% (> 0).';
+        _results = null;
+        _verdict = null;
+      });
+      return;
+    }
+    final est = estimateInrush(
+      powerKva: s, voltageKv: v, zccPercent: z, residualFlux: br,
+    );
+    final results = <ToolResult>[
+      ToolResult('In', '${fmtNumber(est.ratedCurrent, decimals: 1)} A'),
+      ToolResult('Fator de pico k', '${fmtNumber(est.peakFactor, decimals: 1)}× In'),
+      ToolResult('Pico de inrush', '${fmtNumber(est.peakCurrent, decimals: 0)} A'),
+      ToolResult('2º harmônico estimado', '${fmtNumber(est.secondHarmonicRatio, decimals: 0)} %'),
+    ];
+
+    String? verdict;
+    bool bad = false;
+    final pickup = _p(_irPickup50);
+    if (pickup != null && pickup > 0) {
+      if (est.peakCurrent > pickup) {
+        bad = true;
+        verdict = 'Pico de inrush (${fmtNumber(est.peakCurrent, decimals: 0)} A) '
+            'ULTRAPASSA o ajuste 50 (${fmtNumber(pickup, decimals: 0)} A). '
+            'Use bloqueio por 2º harmônico ou temporize o 50.';
+      } else {
+        verdict = 'Pico de inrush dentro do ajuste 50 '
+            '(${fmtNumber(pickup, decimals: 0)} A).';
+      }
+    } else {
+      verdict = est.harmonicBlockOk
+          ? '2º harmônico (~${fmtNumber(est.secondHarmonicRatio, decimals: 0)}%) '
+              'suficiente para o bloqueio típico (15%) do diferencial.'
+          : '2º harmônico estimado abaixo de 15% — verifique o bloqueio.';
+      bad = !est.harmonicBlockOk;
+    }
+
+    setState(() {
+      _warning = null;
+      _results = results;
+      _verdict = verdict;
+      _verdictBad = bad;
+    });
+  }
+
+  Widget _inrushRealCard() {
+    return ToolCard(
+      title: 'Inrush real (energização)',
+      subtitle:
+          'Estima o pico a partir dos dados do trafo, em vez de chutar o k. '
+          'k ≈ (1 + fluxo residual) / (Z%/100), limitado fisicamente.',
+      children: [
+        ToolFieldRow(children: [
+          ToolField(controller: _irPower, label: 'Potência S (kVA)'),
+          ToolField(controller: _irVolt, label: 'V energizado (kV)'),
+        ]),
+        const SizedBox(height: 12),
+        ToolFieldRow(children: [
+          ToolField(controller: _irZcc, label: 'Z curto (%)'),
+          ToolField(controller: _irResidual, label: 'Fluxo residual (0–0,8)'),
+        ]),
+        const SizedBox(height: 12),
+        ToolField(controller: _irPickup50, label: 'Ajuste 50 (A) — opcional'),
       ],
     );
   }

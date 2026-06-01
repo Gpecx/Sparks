@@ -27,6 +27,8 @@ import 'package:spark_app/screens/tools/network_cable_screen.dart';
 import 'package:spark_app/screens/tools/arc_flash_screen.dart';
 import 'package:spark_app/screens/tools/restricted_differential_screen.dart';
 import 'package:spark_app/screens/tools/directional_67_screen.dart';
+import 'package:spark_app/screens/tools/spda_risk_screen.dart';
+import 'package:spark_app/screens/tools/spda_calc_screen.dart';
 
 class _ToolConfig {
   final String title;
@@ -222,6 +224,24 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       color: const Color(0xFFF97316),
       gradientEnd: const Color(0xFF9A3412),
       builder: (_) => const ArcFlashScreen(),
+    ),
+    _ToolConfig(
+      title: 'SPDA — Análise de Risco',
+      description: 'Triagem de necessidade e nível de SPDA (NBR 5419-2)',
+      category: _catAterramento,
+      icon: Icons.flash_on_outlined,
+      color: const Color(0xFFEAB308),
+      gradientEnd: const Color(0xFF854D0E),
+      builder: (_) => const SpdaRiskScreen(),
+    ),
+    _ToolConfig(
+      title: 'SPDA — Cálculos (5419-3)',
+      description: 'Esfera rolante, descidas, distância de segurança, impulso',
+      category: _catAterramento,
+      icon: Icons.bolt_outlined,
+      color: const Color(0xFFF59E0B),
+      gradientEnd: const Color(0xFF92400E),
+      builder: (_) => const SpdaCalcScreen(),
     ),
     _ToolConfig(
       title: 'Qualidade de Energia',
