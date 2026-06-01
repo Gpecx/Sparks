@@ -24,6 +24,8 @@ import 'package:spark_app/screens/tools/commissioning_screen.dart';
 import 'package:spark_app/screens/tools/ons_voltage_screen.dart';
 import 'package:spark_app/screens/tools/power_quality_screen.dart';
 import 'package:spark_app/screens/tools/network_cable_screen.dart';
+import 'package:spark_app/screens/tools/iec61850_screen.dart';
+import 'package:spark_app/screens/tools/modbus_register_screen.dart';
 import 'package:spark_app/screens/tools/arc_flash_screen.dart';
 import 'package:spark_app/screens/tools/restricted_differential_screen.dart';
 import 'package:spark_app/screens/tools/directional_67_screen.dart';
@@ -260,6 +262,24 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       color: const Color(0xFF06B6D4),
       gradientEnd: const Color(0xFF0E7490),
       builder: (_) => const NetworkCableScreen(),
+    ),
+    _ToolConfig(
+      title: 'IEC 61850 — GOOSE / SV',
+      description: 'Timing de retransmissão, taxa de SV e endereçamento MAC/VLAN',
+      category: _catRedes,
+      icon: Icons.hub_outlined,
+      color: const Color(0xFF0EA5E9),
+      gradientEnd: const Color(0xFF075985),
+      builder: (_) => const Iec61850Screen(),
+    ),
+    _ToolConfig(
+      title: 'Modbus — Registradores',
+      description: 'Junta 2 registradores em float32/int32 (ordem de byte/word)',
+      category: _catRedes,
+      icon: Icons.memory_outlined,
+      color: const Color(0xFF0891B2),
+      gradientEnd: const Color(0xFF155E75),
+      builder: (_) => const ModbusRegisterScreen(),
     ),
     _ToolConfig(
       title: 'Corrente Nominal',
