@@ -5,7 +5,6 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
-import 'package:spark_app/screens/technical_standards_screen.dart';
 import 'package:spark_app/screens/edit_profile_screen.dart';
 import 'package:spark_app/screens/change_password_screen.dart';
 import 'package:spark_app/services/auth_service.dart';
@@ -75,8 +74,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               _tile(
                 icon: Icons.trending_up,
                 title: 'Meu Progresso',
-                subtitle: 'Normas técnicas recomendadas',
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TechnicalStandardsScreen())),
+                subtitle: 'Acompanhar progresso nos módulos',
+                onTap: () => context.push('/my-progress'),
               ),
               _tile(
                 icon: Icons.lock_outline,
@@ -348,13 +347,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 icon: Icons.headset_mic_outlined,
                 title: 'Suporte Técnico',
                 subtitle: 'Reporte um problema',
-                onTap: _showSupportDialog,
+                onTap: () => context.push('/support'),
               ),
               _tile(
                 icon: Icons.description_outlined,
                 title: 'Termos de Uso',
                 subtitle: 'Leia nossos termos',
-                onTap: () => _snack('Termos de Uso'),
+                onTap: () => context.push('/terms-of-use'),
               ),
               const SizedBox(height: 20),
 
@@ -437,32 +436,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ),
     ),
   );
-
-  void _snack(String m) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(m), backgroundColor: AppColors.card, behavior: SnackBarBehavior.floating));
-
-  void _showSupportDialog() {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppColors.card,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        title: const Text('Suporte Técnico', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Nossa equipe analisará o log do seu dispositivo.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
-            const SizedBox(height: 16),
-            Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: AppColors.inputBackground, borderRadius: BorderRadius.circular(8)), child: Row(children: const [Icon(Icons.email_outlined, color: AppColors.primary, size: 18), SizedBox(width: 8), Text('suporte@exssolutions.com.br', style: TextStyle(color: Colors.white, fontSize: 13))])),
-          ],
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Fechar', style: TextStyle(color: AppColors.textMuted))),
-          ElevatedButton(onPressed: () { Navigator.pop(ctx); _snack('E-mail copiado!'); }, style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))), child: const Text('ENVIAR E-MAIL', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, letterSpacing: 1, color: Colors.white))),
-        ],
-      ),
-    );
-  }
 
   void _showFaqDialog() {
     final faqs = [

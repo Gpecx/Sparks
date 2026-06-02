@@ -16,6 +16,7 @@ class CartItem {
   /// Spark Points concedidos ao comprar este item (0 = nenhum)
   final int sparkPointsGranted;
   final bool isSubscription;
+  final String? planId;
 
   const CartItem({
     required this.name,
@@ -24,6 +25,7 @@ class CartItem {
     required this.icon,
     this.sparkPointsGranted = 0,
     this.isSubscription = false,
+    this.planId,
   });
 }
 
@@ -105,6 +107,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             price: i.price,
             sparkPointsGranted: i.sparkPointsGranted,
             isSubscription: i.isSubscription,
+            planId: i.planId,
           ))
       .toList();
 

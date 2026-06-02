@@ -21,6 +21,7 @@ import 'package:spark_app/screens/change_password_screen.dart';
 import 'package:spark_app/screens/onboarding_screen.dart';
 import 'package:spark_app/screens/covenants_screen.dart';
 import 'package:spark_app/screens/support_screen.dart';
+import 'package:spark_app/screens/terms_of_use_screen.dart';
 import 'package:spark_app/core/admin/presentation/admin_dashboard_page.dart';
 import 'package:spark_app/screens/module_routing_screen.dart';
 
@@ -80,6 +81,7 @@ class AppRouter {
       GoRoute(path: '/onboarding', builder: (context, state) => const OnboardingScreen()),
       GoRoute(path: '/covenants', builder: (context, state) => const CovenantsScreen()),
       GoRoute(path: '/support', builder: (context, state) => const SupportScreen()),
+      GoRoute(path: '/terms-of-use', builder: (context, state) => const TermsOfUseScreen()),
       GoRoute(path: '/admin', builder: (context, state) => const AdminDashboardPage()),
       GoRoute(
         path: '/module/:categoryId/:moduleId',

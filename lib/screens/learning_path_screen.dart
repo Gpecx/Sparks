@@ -857,7 +857,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     final ratio = _energyCtrl.energy / EnergyController.maxEnergy;
 
     if (_energyCtrl.isPremiumUser) {
-      batteryIcon = Icons.battery_charging_full;
+      batteryIcon = Icons.all_inclusive;
     } else if (ratio >= 0.7) {
       batteryIcon = Icons.battery_full;
     } else if (ratio >= 0.4) {
