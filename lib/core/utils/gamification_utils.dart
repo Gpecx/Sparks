@@ -90,9 +90,12 @@ abstract class GamificationUtils {
 
   /// Retorna a chave da semana atual no formato "YYYY-Www".
   static String currentWeekKey([DateTime? date]) {
-    final now = date ?? DateTime.now();
-    final dayOfYear = now.difference(DateTime(now.year, 1, 1)).inDays + 1;
-    final weekNum = ((dayOfYear - now.weekday + 10) / 7).floor();
-    return '${now.year}-W${weekNum.toString().padLeft(2, '0')}';
+    final dt = date ?? DateTime.now();
+    final nowBrt = dt.toUtc().subtract(const Duration(hours: 3));
+    final nowUtc = DateTime.utc(nowBrt.year, nowBrt.month, nowBrt.day);
+    final startOfYearUtc = DateTime.utc(nowBrt.year, 1, 1);
+    final dayOfYear = nowUtc.difference(startOfYearUtc).inDays + 1;
+    final weekNum = ((dayOfYear - nowUtc.weekday + 10) / 7).floor();
+    return '${nowBrt.year}-W${weekNum.toString().padLeft(2, '0')}';
   }
 }

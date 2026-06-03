@@ -24,6 +24,7 @@ import {
   CallableRequest,
   HttpsError,
 } from "firebase-functions/v2/https";
+import { onSchedule } from "firebase-functions/v2/scheduler";
 import { logger } from "firebase-functions/v2";
 import { defineSecret } from "firebase-functions/params";
 import {
@@ -517,6 +518,7 @@ interface CheckoutItem {
   price: number;
   sparkPointsGranted: number;
   isSubscription?: boolean;
+  planId?: string;
 }
 
 interface CreateCheckoutData {
@@ -618,6 +620,7 @@ export const createAsaasCheckout = onCall(
         price: i.price,
         sparkPointsGranted: i.sparkPointsGranted,
         isSubscription: i.isSubscription ?? false,
+        planId: i.planId ?? null,
       })),
       totalPrice,
       totalPoints,
@@ -768,6 +771,10 @@ export const checkPaymentStatus = onCall(
 
     if (hasSubscription) {
       userUpdates.isPremium = true;
+      const subItem = items.find((i: any) => i.isSubscription === true);
+      if (subItem && subItem.planId) {
+        userUpdates.subscriptionPlanId = subItem.planId;
+      }
       userUpdated = true;
     }
 
@@ -951,6 +958,10 @@ export const asaasWebhook = onRequest(
 
     if (hasSubscription) {
       userUpdates.isPremium = true;
+      const subItem = items.find((i: any) => i.isSubscription === true);
+      if (subItem && subItem.planId) {
+        userUpdates.subscriptionPlanId = subItem.planId;
+      }
       userUpdated = true;
     }
 
@@ -988,5 +999,155 @@ export const asaasWebhook = onRequest(
     );
 
     res.status(200).send("OK");
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// 9. startTrial — Ativa 7 dias gratuitos do Spark Pro
+//    Chamada pelo TrialCheckoutScreen após tokenizar o cartão.
+// ────────────────────────────────────────────────────────────────
+
+interface StartTrialData {
+  planId: string;
+  cardTokenId?: string;
+}
+
+interface StartTrialResult {
+  success: boolean;
+  trialEndsAt: string;
+}
+
+export const startTrial = onCall(
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (request: CallableRequest<StartTrialData>): Promise<StartTrialResult> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    const { planId, cardTokenId } = request.data;
+    if (!planId) throw new HttpsError("invalid-argument", "planId é obrigatório.");
+
+    const userRef = db.collection("users").doc(uid);
+    const snap = await userRef.get();
+    if (!snap.exists) throw new HttpsError("not-found", "Usuário não encontrado.");
+
+    const data = snap.data()!;
+
+    if (data["isOnTrial"] === true) {
+      throw new HttpsError("already-exists", "Usuário já possui um trial ativo.");
+    }
+    if (data["hadTrial"] === true) {
+      throw new HttpsError("already-exists", "Usuário já utilizou o período de trial.");
+    }
+
+    const trialEndsAt = new Date();
+    trialEndsAt.setDate(trialEndsAt.getDate() + 7);
+
+    await userRef.update({
+      isOnTrial: true,
+      hadTrial: true,
+      trialEndsAt: admin.firestore.Timestamp.fromDate(trialEndsAt),
+      subscriptionPlanId: planId,
+      isPremium: true,
+      trialCardTokenId: cardTokenId ?? null,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    try {
+      await writeAuditLog(uid, "trial_started", 7, "startTrial", {
+        planId,
+        trialEndsAt: trialEndsAt.toISOString(),
+      });
+    } catch (e) {
+      logger.warn("[startTrial] Audit log error:", e);
+    }
+
+    logger.info(`[startTrial] uid=${uid} plan=${planId} endsAt=${trialEndsAt.toISOString()}`);
+    return { success: true, trialEndsAt: trialEndsAt.toISOString() };
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// 10. cancelTrial — Cancela trial antes do vencimento
+// ────────────────────────────────────────────────────────────────
+
+export const cancelTrial = onCall(
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (request: CallableRequest<Record<string, never>>): Promise<{ success: boolean }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    const userRef = db.collection("users").doc(uid);
+    const snap = await userRef.get();
+    if (!snap.exists) throw new HttpsError("not-found", "Usuário não encontrado.");
+
+    const data = snap.data()!;
+    if (!data["isOnTrial"]) {
+      throw new HttpsError("failed-precondition", "Usuário não possui trial ativo.");
+    }
+
+    await userRef.update({
+      isOnTrial: false,
+      isPremium: false,
+      trialEndsAt: null,
+      subscriptionPlanId: null,
+      trialCardTokenId: null,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    try {
+      await writeAuditLog(uid, "trial_cancelled", 0, "cancelTrial", {});
+    } catch (e) {
+      logger.warn("[cancelTrial] Audit log error:", e);
+    }
+
+    logger.info(`[cancelTrial] uid=${uid} trial cancelado.`);
+    return { success: true };
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// 11. processTrialExpiry — Agendada diariamente (Cloud Scheduler)
+//     Revoga isPremium de todos os trials vencidos.
+// ────────────────────────────────────────────────────────────────
+
+export const processTrialExpiry = onSchedule(
+  {
+    schedule: "every day 03:00",
+    timeZone: "America/Sao_Paulo",
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async () => {
+    const now = admin.firestore.Timestamp.now();
+
+    const expiredSnap = await db
+      .collection("users")
+      .where("isOnTrial", "==", true)
+      .where("trialEndsAt", "<=", now)
+      .get();
+
+    if (expiredSnap.empty) {
+      logger.info("[processTrialExpiry] Nenhum trial vencido.");
+      return;
+    }
+
+    const batch = db.batch();
+    expiredSnap.docs.forEach((doc) => {
+      batch.update(doc.ref, {
+        isOnTrial: false,
+        isPremium: false,
+        trialEndsAt: null,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    });
+
+    await batch.commit();
+    logger.info(`[processTrialExpiry] ${expiredSnap.size} trial(s) expirado(s) e revogado(s).`);
   }
 );

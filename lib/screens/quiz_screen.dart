@@ -697,28 +697,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
               const SizedBox(height: 24),
               const Text('Bateria Esgotada!', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
               const SizedBox(height: 12),
-              Text('Você gastou toda a sua energia nas revisões. Aguarde a recarga automática ou recarregue agora usando seus Pontos Spark na loja.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15, height: 1.4)),
+              Text('Você gastou toda a sua energia. Aguarde a recarga automática (5 min por unidade) ou assine um plano para ter bateria infinita ∞.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15, height: 1.4)),
               const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity, height: 56,
-                child: ElevatedButton.icon(
-                  onPressed: () async {
-                    final messenger = ScaffoldMessenger.of(context);
-                    final navigator = Navigator.of(context);
-                    final success = await _energyCtrl.rechargeWithSparks();
-                    if (success) {
-                      navigator.pop();
-                      messenger.showSnackBar(const SnackBar(content: Text('Energia recarregada!'), backgroundColor: AppColors.primary));
-                    } else {
-                      messenger.showSnackBar(const SnackBar(content: Text('Pontos Spark insuficientes!'), backgroundColor: AppColors.error));
-                    }
-                  },
-                  icon: const Icon(Icons.bolt, color: AppColors.background),
-                  label: Text('RECARREGAR (${EnergyController.fullRechargeSparkCost} Sparks)', style: const TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
-                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
-                ),
-              ),
-              const SizedBox(height: 12),
               SizedBox(
                 width: double.infinity, height: 56,
                 child: ElevatedButton.icon(
@@ -727,9 +707,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     Navigator.pop(context);
                     context.push('/store');
                   },
-                  icon: const Icon(Icons.store, color: AppColors.background),
-                  label: const Text('IR PARA A LOJA', style: TextStyle(color: AppColors.background, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
-                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.accent, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+                  icon: const Icon(Icons.all_inclusive, color: AppColors.background),
+                  label: const Text('VER PLANOS COM BATERIA ∞', style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
                 ),
               ),
               const SizedBox(height: 16),
@@ -916,7 +896,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
 
     IconData batteryIcon;
     final ratio = _energyCtrl.energy / EnergyController.maxEnergy;
-    if (_energyCtrl.isPremiumUser) { batteryIcon = Icons.battery_charging_full; }
+    if (_energyCtrl.isPremiumUser) { batteryIcon = Icons.all_inclusive; }
     else if (ratio >= 0.7) { batteryIcon = Icons.battery_full; }
     else if (ratio >= 0.4) { batteryIcon = Icons.battery_4_bar; }
     else if (ratio >= 0.2) { batteryIcon = Icons.battery_2_bar; }

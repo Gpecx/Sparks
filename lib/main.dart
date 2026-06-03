@@ -56,8 +56,6 @@ void main() async {
       if (!WelcomeScreen.skipAutoLogin) {
         // Usuário logou normalmente: inicia escuta em tempo real
         UserService().startListening();
-        // Verifica se streak precisa ser resetado
-        UserService().checkAndResetStreakIfNeeded();
       }
     } else {
       // Usuário saiu: para a escuta

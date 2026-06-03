@@ -64,6 +64,7 @@ class CheckoutItemPayload {
   final double price;
   final int sparkPointsGranted;
   final bool isSubscription;
+  final String? planId;
 
   const CheckoutItemPayload({
     required this.name,
@@ -71,6 +72,7 @@ class CheckoutItemPayload {
     required this.price,
     required this.sparkPointsGranted,
     this.isSubscription = false,
+    this.planId,
   });
 
   Map<String, dynamic> toMap() => {
@@ -79,6 +81,7 @@ class CheckoutItemPayload {
         'price': price,
         'sparkPointsGranted': sparkPointsGranted,
         'isSubscription': isSubscription,
+        if (planId != null) 'planId': planId,
       };
 }
 

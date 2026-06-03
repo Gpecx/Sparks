@@ -89,7 +89,11 @@ class UserService extends ChangeNotifier {
   // Delega para GamificationUtils (sem duplicar lógica)
   double get xpMultiplier => GamificationUtils.xpMultiplier(currentStreak);
   String get xpMultiplierLabel => GamificationUtils.xpMultiplierLabel(currentStreak);
-  bool get isStreakAtRisk => !studiedToday && DateTime.now().hour >= 12;
+  bool get isStreakAtRisk {
+    if (studiedToday) return false;
+    final nowBrt = DateTime.now().toUtc().subtract(const Duration(hours: 3));
+    return nowBrt.hour >= 12;
+  }
 
   // ─────────────────────────────────────────────────────────────────
   //  INICIALIZAÇÃO
@@ -108,6 +112,10 @@ class UserService extends ChangeNotifier {
       (snap) {
         if (snap.exists) {
           _user = UserModel.fromFirestore(snap);
+          
+          // Verifica e reseta a streak caso o usuário não tenha estudado ontem/hoje
+          checkAndResetStreakIfNeeded();
+
           if (!tokenSaved) {
             tokenSaved = true;
             FcmService().saveTokenAfterLogin();
@@ -347,7 +355,8 @@ class UserService extends ChangeNotifier {
     if (uid.isEmpty) return;
 
     final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
+    final nowBrt = now.toUtc().subtract(const Duration(hours: 3));
+    final today = DateTime.utc(nowBrt.year, nowBrt.month, nowBrt.day);
 
     if (_user?.studiedToday == true) return;
 
@@ -356,12 +365,14 @@ class UserService extends ChangeNotifier {
     int newActiveDays = activeDays + 1;
 
     if (lastStudy != null) {
-      final lastDay = DateTime(lastStudy.year, lastStudy.month, lastStudy.day);
+      final lastStudyBrt = lastStudy.toUtc().subtract(const Duration(hours: 3));
+      final lastDay = DateTime.utc(lastStudyBrt.year, lastStudyBrt.month, lastStudyBrt.day);
       final diff = today.difference(lastDay).inDays;
       if (diff == 1) {
         newStreak = currentStreak + 1;
       } else if (diff == 0) {
-        return;
+        newStreak = currentStreak;
+        newActiveDays = activeDays; // Não incrementa dias ativos se já estudou hoje mas de alguma forma studiedToday estava falso.
       }
       // diff > 1 → streak quebrada, newStreak permanece 1
     }
@@ -405,12 +416,13 @@ class UserService extends ChangeNotifier {
       return;
     }
 
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
+    final nowBrt = DateTime.now().toUtc().subtract(const Duration(hours: 3));
+    final today = DateTime.utc(nowBrt.year, nowBrt.month, nowBrt.day);
     final lastStudy = _user?.lastStudyDate;
     if (lastStudy == null) return;
 
-    final lastDay = DateTime(lastStudy.year, lastStudy.month, lastStudy.day);
+    final lastStudyBrt = lastStudy.toUtc().subtract(const Duration(hours: 3));
+    final lastDay = DateTime.utc(lastStudyBrt.year, lastStudyBrt.month, lastStudyBrt.day);
     final diff = today.difference(lastDay).inDays;
 
     if (diff >= 1 && (_user?.studiedToday == true)) {

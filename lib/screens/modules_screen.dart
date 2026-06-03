@@ -10,6 +10,7 @@ import 'package:spark_app/screens/learning_path_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/progress_provider.dart';
 import 'package:spark_app/providers/content_providers.dart';
+import 'package:spark_app/core/utils/theme_utils.dart';
 
 class ModulesScreen extends ConsumerWidget {
   final SPARKCategory? category;
@@ -141,8 +142,8 @@ class ModulesScreen extends ConsumerWidget {
                               module: module,
                               progress: actualProgress,
                               isLocked: isLocked,
-                              categoryColor: themeColor,
-                              categoryIcon: themeIcon,
+                              themeColor: themeColor,
+                              themeIcon: themeIcon,
                               isTestMode: isTestMode,
                               onTap: () {
                                 if (!isTestMode && isLocked) {
@@ -201,8 +202,8 @@ class _ModuleCard extends StatefulWidget {
   final SPARKModule module;
   final double progress;
   final bool isLocked;
-  final Color categoryColor;
-  final IconData categoryIcon;
+  final Color themeColor;
+  final IconData themeIcon;
   final VoidCallback onTap;
   final bool isTestMode;
 
@@ -210,8 +211,8 @@ class _ModuleCard extends StatefulWidget {
     required this.module,
     required this.progress,
     required this.isLocked,
-    required this.categoryColor,
-    this.categoryIcon = Icons.school,
+    required this.themeColor,
+    this.themeIcon = Icons.school,
     required this.onTap,
     this.isTestMode = false,
   });
@@ -247,7 +248,7 @@ class _ModuleCardState extends State<_ModuleCard>
   Widget build(BuildContext context) {
     final mod = widget.module;
     final locked = !widget.isTestMode && widget.isLocked;
-    final color = locked ? AppColors.textMuted : widget.categoryColor;
+    final color = locked ? AppColors.textMuted : widget.themeColor;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -301,7 +302,7 @@ class _ModuleCardState extends State<_ModuleCard>
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
-                        widget.categoryIcon,
+                        widget.themeIcon,
                         color: locked ? AppColors.textMuted.withValues(alpha: 0.4) : color,
                         size: 24,
                       ),

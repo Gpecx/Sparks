@@ -53,7 +53,7 @@ class EnergyController extends ChangeNotifier {
   bool get hasEnergy => _isPremiumUser || _energy > 0;
   bool get isRecharging => _energy < maxEnergy && !_isPremiumUser;
   DateTime? get nextRegenTime => _nextRegenTime;
-  String get energyDisplay => _isPremiumUser ? 'MAX' : '$_energy';
+  String get energyDisplay => _isPremiumUser ? '∞' : '$_energy';
 
   String get regenTimeRemaining {
     if (_nextRegenTime == null || !isRecharging) return '';

@@ -12,22 +12,9 @@ import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/content_providers.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:spark_app/core/utils/theme_utils.dart';
 
-// Paleta Spark: verdes e tons harmônicos — sem cinzas apagados
-final List<Map<String, dynamic>> _themeConfig = [
-  // Verde neon (cor principal Spark)
-  {'color': const Color(0xFF00C402), 'gradientEnd': const Color(0xFF007A01), 'icon': Icons.bolt},
-  // Verde médio vibrante
-  {'color': const Color(0xFF22C55E), 'gradientEnd': const Color(0xFF15803D), 'icon': Icons.memory},
-  // Verde-teal (complementar harmônico)
-  {'color': const Color(0xFF2DD4BF), 'gradientEnd': const Color(0xFF0F766E), 'icon': Icons.gavel},
-  // Verde-lima (brilhante, tom Spark)
-  {'color': const Color(0xFF84CC16), 'gradientEnd': const Color(0xFF3F6212), 'icon': Icons.lightbulb},
-  // Verde escuro (accentGreen Spark)
-  {'color': const Color(0xFF4ADE80), 'gradientEnd': const Color(0xFF166534), 'icon': Icons.layers},
-  // Verde-água intenso
-  {'color': const Color(0xFF34D399), 'gradientEnd': const Color(0xFF065F46), 'icon': Icons.science},
-];
+// A configuração de tema agora é dinâmica via ThemeUtils
 
 class CategoriesScreen extends ConsumerWidget {
   const CategoriesScreen({super.key});
@@ -111,8 +98,8 @@ class CategoriesScreen extends ConsumerWidget {
                         itemCount: categories.length,
                         itemBuilder: (context, index) {
                           final cat = categories[index];
-                          // Obter o tema de forma cíclica caso haja mais categorias que temas definidos
-                          final theme = _themeConfig[index % _themeConfig.length];
+                          // Obter o tema de forma semântica baseada no nome da categoria
+                          final theme = ThemeUtils.getThemeForContent(cat.title, fallbackIndex: index);
                           
                           final isLocked = (!isPremium && index > 0) || cat.order > 100; 
                           // Apenas para evitar dead_code linter

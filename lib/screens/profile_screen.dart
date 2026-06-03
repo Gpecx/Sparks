@@ -215,9 +215,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             border: Border.all(color: const Color(0xFFFFD700).withValues(alpha: 0.6)),
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: const Text(
-                            'ASSINANTE',
-                            style: TextStyle(color: Color(0xFFFFD700), fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 1.5),
+                          child: Text(
+                            (user?.subscriptionPlanId == 'student' 
+                                ? 'ESTUDANTE' 
+                                : (user?.subscriptionPlanId ?? 'PRO')).toUpperCase(),
+                            style: const TextStyle(color: Color(0xFFFFD700), fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 1.5),
                           ),
                         ),
                       ],
