@@ -17,18 +17,21 @@
  *  - unlockBadge       : Concede badge se ainda não desbloqueada.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.processTrialExpiry = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
+exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.processTrialExpiry = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
 const admin = require("firebase-admin");
 const firestore_1 = require("firebase-admin/firestore");
 const https_1 = require("firebase-functions/v2/https");
 const scheduler_1 = require("firebase-functions/v2/scheduler");
 const v2_1 = require("firebase-functions/v2");
 const params_1 = require("firebase-functions/params");
+const nodemailer = require("nodemailer");
 const asaasService_1 = require("./services/asaasService");
 // ── Secrets vinculados ao Firebase Secret Manager ────────────────
 const ASAAS_API_KEY = (0, params_1.defineSecret)("ASAAS_API_KEY");
 const ASAAS_BASE_URL = (0, params_1.defineSecret)("ASAAS_BASE_URL");
 const ASAAS_WEBHOOK_TOKEN = (0, params_1.defineSecret)("ASAAS_WEBHOOK_TOKEN");
+const SMTP_USER = (0, params_1.defineSecret)("SMTP_USER");
+const SMTP_PASS = (0, params_1.defineSecret)("SMTP_PASS");
 // ── Firebase Admin init ──────────────────────────────────────────
 admin.initializeApp({
     projectId: "spark-v1-e0eb5",
@@ -812,6 +815,154 @@ exports.processTrialExpiry = (0, scheduler_1.onSchedule)({
     await batch.commit();
     v2_1.logger.info(`[processTrialExpiry] ${expiredSnap.size} trial(s) expirado(s) e revogado(s).`);
 });
-nexport;
-const fixAdmin = require("firebase-functions/v2/https").onRequest(async (req, res) => { await admin.firestore().collection("users").doc("UK0YSmASDJbXjq6XMTwTGJFr2ah1").update({ subscriptionPlanId: "premium" }); res.send("Fixed"); });
+exports.sendEmailVerificationCode = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    secrets: [SMTP_USER, SMTP_PASS],
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a, _b, _c, _d, _e, _f, _g;
+    // Aceita chamadas autenticadas (login) e também não-autenticadas
+    // (registro antes do primeiro login) — o e-mail é validado abaixo.
+    const { email } = request.data;
+    if (!email || typeof email !== "string" || !email.includes("@")) {
+        throw new https_1.HttpsError("invalid-argument", "E-mail inválido.");
+    }
+    // Rate-limit simples: máx. 5 envios por hora por e-mail
+    const rateLimitRef = db
+        .collection("_otp_rate_limits")
+        .doc(email.toLowerCase().replace(/[^a-z0-9]/g, "_"));
+    const rlSnap = await rateLimitRef.get();
+    if (rlSnap.exists) {
+        const rlData = rlSnap.data();
+        const windowStart = (_b = (_a = rlData["windowStart"]) === null || _a === void 0 ? void 0 : _a.toMillis()) !== null && _b !== void 0 ? _b : 0;
+        const count = (_c = rlData["count"]) !== null && _c !== void 0 ? _c : 0;
+        const now = Date.now();
+        if (now - windowStart < 60 * 60 * 1000 && count >= 5) {
+            throw new https_1.HttpsError("resource-exhausted", "Muitas tentativas. Aguarde 1 hora antes de solicitar um novo código.");
+        }
+        if (now - windowStart >= 60 * 60 * 1000) {
+            // Nova janela
+            await rateLimitRef.set({ windowStart: admin.firestore.Timestamp.now(), count: 1 });
+        }
+        else {
+            await rateLimitRef.update({ count: admin.firestore.FieldValue.increment(1) });
+        }
+    }
+    else {
+        await rateLimitRef.set({ windowStart: admin.firestore.Timestamp.now(), count: 1 });
+    }
+    // Gera código OTP de 6 dígitos
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    const expiresAt = admin.firestore.Timestamp.fromMillis(Date.now() + 10 * 60 * 1000); // 10 min
+    // Salva o OTP no Firestore (a coleção usa o e-mail normalizado como doc ID)
+    const uid = (_e = (_d = request.auth) === null || _d === void 0 ? void 0 : _d.uid) !== null && _e !== void 0 ? _e : null;
+    const otpDocId = email.toLowerCase().replace(/[^a-z0-9]/g, "_");
+    await db.collection("_email_otps").doc(otpDocId).set({
+        email,
+        code: otp,
+        uid,
+        expiresAt,
+        attempts: 0,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    // Envia o e-mail via SMTP
+    const smtpUser = (_f = process.env.SMTP_USER) !== null && _f !== void 0 ? _f : "";
+    const smtpPass = (_g = process.env.SMTP_PASS) !== null && _g !== void 0 ? _g : "";
+    if (!smtpUser || !smtpPass) {
+        v2_1.logger.error("[sendEmailVerificationCode] SMTP_USER ou SMTP_PASS não configurados.");
+        throw new https_1.HttpsError("internal", "Serviço de e-mail não configurado. Entre em contato com o suporte.");
+    }
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: { user: smtpUser, pass: smtpPass },
+    });
+    await transporter.sendMail({
+        from: `"SPARK" <${smtpUser}>`,
+        to: email,
+        subject: "Seu código de verificação SPARK",
+        html: `
+        <div style="font-family:sans-serif;max-width:480px;margin:0 auto;background:#0d1117;color:#fff;padding:32px;border-radius:16px;">
+          <h1 style="color:#00ff88;margin:0 0 8px;">⚡ SPARK</h1>
+          <p style="color:#aaa;margin:0 0 24px;">Verificação de Identidade</p>
+          <p style="margin:0 0 16px;">Use o código abaixo para confirmar seu login:</p>
+          <div style="background:#1a2332;border:2px solid #00ff88;border-radius:12px;padding:24px;text-align:center;margin:0 0 24px;">
+            <span style="font-size:40px;font-weight:900;letter-spacing:12px;color:#00ff88;">${otp}</span>
+          </div>
+          <p style="color:#aaa;font-size:13px;">Este código expira em <strong style='color:#fff;'>10 minutos</strong>.</p>
+          <p style="color:#555;font-size:12px;">Se você não solicitou este código, ignore este e-mail.</p>
+        </div>
+      `,
+    });
+    v2_1.logger.info(`[sendEmailVerificationCode] OTP enviado para ${email} (uid=${uid}).`);
+    return { sent: true };
+});
+exports.verifyEmailCode = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a, _b;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    const { code, deviceId, deviceName } = request.data;
+    if (!code || code.length !== 6) {
+        return { verified: false, error: "Código inválido." };
+    }
+    if (!deviceId) {
+        return { verified: false, error: "Identificador de dispositivo ausente." };
+    }
+    // Busca o OTP pelo uid do usuário autenticado
+    const otpQuery = await db
+        .collection("_email_otps")
+        .where("uid", "==", uid)
+        .orderBy("createdAt", "desc")
+        .limit(1)
+        .get();
+    if (otpQuery.empty) {
+        return { verified: false, error: "Nenhum código encontrado. Solicite um novo." };
+    }
+    const otpDoc = otpQuery.docs[0];
+    const otp = otpDoc.data();
+    // Verifica expiração
+    const expiresAt = otp["expiresAt"].toMillis();
+    if (Date.now() > expiresAt) {
+        await otpDoc.ref.delete();
+        return { verified: false, error: "Código expirado. Solicite um novo." };
+    }
+    // Verifica tentativas (máx. 5)
+    const attempts = (_b = otp["attempts"]) !== null && _b !== void 0 ? _b : 0;
+    if (attempts >= 5) {
+        await otpDoc.ref.delete();
+        return { verified: false, error: "Muitas tentativas. Solicite um novo código." };
+    }
+    // Compara o código
+    if (otp["code"] !== code) {
+        await otpDoc.ref.update({
+            attempts: admin.firestore.FieldValue.increment(1),
+        });
+        const remaining = 4 - attempts;
+        return {
+            verified: false,
+            error: `Código incorreto. ${remaining > 0 ? `${remaining} tentativa(s) restante(s).` : "Solicite um novo código."}`
+        };
+    }
+    // Código correto — registra dispositivo confiável e remove o OTP
+    const batch = db.batch();
+    const deviceRef = db
+        .collection("users")
+        .doc(uid)
+        .collection("trusted_devices")
+        .doc(deviceId);
+    batch.set(deviceRef, {
+        deviceId,
+        deviceName: deviceName !== null && deviceName !== void 0 ? deviceName : "Dispositivo desconhecido",
+        verifiedAt: admin.firestore.FieldValue.serverTimestamp(),
+        lastSeenAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    batch.delete(otpDoc.ref);
+    await batch.commit();
+    v2_1.logger.info(`[verifyEmailCode] uid=${uid} dispositivo ${deviceId} verificado com sucesso.`);
+    return { verified: true };
+});
 //# sourceMappingURL=index.js.map

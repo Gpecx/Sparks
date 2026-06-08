@@ -310,8 +310,9 @@ export async function createCharge(
 export function verifyWebhookToken(token: string): boolean {
   const secret = process.env.ASAAS_WEBHOOK_TOKEN ?? "";
   if (!secret) {
-    logger.warn("[Asaas] ASAAS_WEBHOOK_TOKEN não configurado — aceitando em modo dev.");
-    return true; // não bloqueia em dev sem configuração
+    // Falha FECHADA: sem secret configurado, nada é aceito.
+    logger.error("[Asaas] ASAAS_WEBHOOK_TOKEN não configurado — rejeitando webhook.");
+    return false;
   }
   return token === secret;
 }

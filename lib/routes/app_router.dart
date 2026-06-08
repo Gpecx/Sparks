@@ -47,7 +47,16 @@ class AppRouter {
     },
     routes: [
       GoRoute(path: '/', builder: (context, state) => const WelcomeScreen()),
-      GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
+      GoRoute(
+        path: '/login',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return LoginScreen(
+            prefillEmail: extra?['email'] as String?,
+            prefillPassword: extra?['password'] as String?,
+          );
+        },
+      ),
       GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
       GoRoute(path: '/registration-success', builder: (context, state) => const RegistrationSuccessScreen()),
       GoRoute(path: '/forgot-password', builder: (context, state) => const ForgotPasswordScreen()),

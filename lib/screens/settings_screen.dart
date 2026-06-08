@@ -310,7 +310,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 final userAsync = ref.watch(userModelProvider);
                 final isDevMode = ref.watch(devModeProvider);
                 final user = userAsync.value;
-                final isAdmin = (user != null && user.isAdmin) || isDevMode;
+                final isAdmin = (user != null && user.isAdmin);
 
                 if (!isAdmin) return const SizedBox.shrink();
 

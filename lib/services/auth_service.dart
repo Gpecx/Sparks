@@ -4,6 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:spark_app/services/analytics_service.dart';
 import 'package:spark_app/services/firebase_service.dart';
 
+/// Lançada quando o usuário fecha/cancela o popup de login do Google.
+/// Não é um erro — a UI deve apenas ignorar silenciosamente.
+class GoogleSignInCancelled implements Exception {}
+
 class AuthService {
   final _auth = FirebaseService.instance.auth;
   final _firestore = FirebaseService.instance.firestore;
@@ -128,12 +132,132 @@ class AuthService {
     }
   }
 
+  /// Login/cadastro com a conta Google.
+  ///
+  /// Funciona tanto na web (popup) quanto em mobile/desktop (fluxo nativo do
+  /// provedor OAuth via `signInWithProvider`) usando apenas o `firebase_auth`.
+  /// Se for a primeira vez do usuário, cria o documento dele no Firestore.
+  Future<UserCredential> signInWithGoogle() async {
+    try {
+      final googleProvider = GoogleAuthProvider()
+        ..addScope('email')
+        ..setCustomParameters({'prompt': 'select_account'});
+
+      final UserCredential credential = kIsWeb
+          ? await _auth.signInWithPopup(googleProvider)
+          : await _auth.signInWithProvider(googleProvider);
+
+      final user = credential.user;
+      if (user != null) {
+        await _ensureUserDoc(user);
+      }
+
+      // Analytics — distingue primeiro cadastro de login recorrente
+      final isNewUser = credential.additionalUserInfo?.isNewUser ?? false;
+      if (isNewUser) {
+        await AnalyticsService().logSignUp();
+      } else {
+        await AnalyticsService().logLogin();
+      }
+
+      return credential;
+    } on FirebaseAuthException catch (e) {
+      // Cancelamento pelo usuário não é um erro — propaga como sinal silencioso.
+      const cancelCodes = {
+        'popup-closed-by-user',
+        'cancelled-popup-request',
+        'user-cancelled',
+        'web-context-canceled',
+      };
+      if (cancelCodes.contains(e.code)) {
+        throw GoogleSignInCancelled();
+      }
+      throw _mapAuthException(e);
+    }
+  }
+
+  /// Garante que exista um documento em `users/{uid}` para o usuário.
+  /// Usado pelo login com Google, onde não há um cadastro prévio explícito.
+  Future<void> _ensureUserDoc(User user) async {
+    try {
+      final docRef = _firestore.collection('users').doc(user.uid);
+      final docSnap = await docRef.get().timeout(const Duration(seconds: 5));
+      if (!docSnap.exists) {
+        await docRef
+            .set(_defaultUserData(
+              uid: user.uid,
+              displayName: user.displayName ?? 'Usuário',
+              email: user.email ?? '',
+              photoUrl: user.photoURL,
+            ))
+            .timeout(const Duration(seconds: 5));
+      }
+    } catch (e) {
+      debugPrint('Aviso: falha ao verificar/criar doc do usuário (Google): $e');
+    }
+  }
+
+  /// Esquema padrão do UserModel para um novo usuário — única fonte de verdade.
+  Map<String, dynamic> _defaultUserData({
+    required String uid,
+    required String displayName,
+    required String email,
+    String? photoUrl,
+  }) =>
+      {
+        'uid': uid,
+        'displayName': displayName,
+        'email': email,
+        'photoUrl': photoUrl,
+        'role': 'técnico',
+        'sparkPoints': 100, // Bônus de boas-vindas
+        'xp': 0,
+        'level': 1,
+        'tensionLevel': 'BT',
+        'currentStreak': 0,
+        'longestStreak': 0,
+        'activeDays': 0,
+        'studiedToday': false,
+        'lastStudyDate': null,
+        'weeklyXp': 0,
+        'monthlyXp': 0,
+        'unlockedBadgeIds': [],
+        'clanId': null,
+        'clanName': null,
+        'totalLessonsCompleted': 0,
+        'totalCorrectAnswers': 0,
+        'totalAnswers': 0,
+        'eloRating': 1200,
+        'wins': 0,
+        'losses': 0,
+        'totalDuels': 0,
+        'createdAt': FieldValue.serverTimestamp(),
+        'updatedAt': FieldValue.serverTimestamp(),
+      };
+
 
   Future<void> signOut() async {
     try {
       await _auth.signOut();
     } on FirebaseAuthException catch (e) {
       throw _mapAuthException(e);
+    }
+  }
+
+  /// Verifica se [deviceId] já foi validado para o usuário [uid].
+  Future<bool> checkDeviceVerification(String uid, String deviceId) async {
+    try {
+      final doc = await _firestore
+          .collection('users')
+          .doc(uid)
+          .collection('trustedDevices')
+          .doc(deviceId)
+          .get()
+          .timeout(const Duration(seconds: 5));
+      return doc.exists;
+    } catch (e) {
+      debugPrint('Aviso: falha ao checar dispositivo confiável: $e');
+      return false;
     }
   }
 
@@ -157,6 +281,8 @@ class AuthService {
         return Exception('Senha incorreta.');
       case 'email-already-in-use':
         return Exception('E-mail já cadastrado.');
+      case 'account-exists-with-different-credential':
+        return Exception('Já existe uma conta com este e-mail usando outro método de login. Entre com e-mail e senha.');
       case 'operation-not-allowed':
         return Exception('Operação não permitida.');
       case 'weak-password':

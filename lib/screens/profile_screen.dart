@@ -64,7 +64,27 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   void _onAvatarTap() {
     if (!kDebugMode) return;
+
+    final userAsync = ref.read(userModelProvider);
+    final userService = ref.read(userServiceProvider);
+    final user = userAsync.value ?? userService.user;
+    
     _avatarTapCount++;
+
+    if (user == null || !user.isAdmin) {
+      if (_avatarTapCount >= _triggerTaps) {
+        _avatarTapCount = 0;
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Acesso Negado: Apenas administradores podem ativar o Modo Dev.', style: TextStyle(color: Colors.white, fontSize: 13)),
+          duration: Duration(seconds: 3),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.all(16),
+        ));
+      }
+      return;
+    }
 
     if (_avatarTapCount < _triggerTaps) {
       final remaining = _triggerTaps - _avatarTapCount;
@@ -328,9 +348,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
                   // ── Painel Admin (role == admin) — usa maybeWhen para reagir ao async
                   Builder(builder: (context) {
-                    final isDevMode = ref.watch(devModeProvider);
                     final user = userAsync.value;
-                    final isAdmin = (user != null && user.isAdmin) || isDevMode;
+                    final isAdmin = (user != null && user.isAdmin);
                     if (!isAdmin) return const SizedBox.shrink();
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
