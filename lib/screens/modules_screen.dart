@@ -10,7 +10,6 @@ import 'package:spark_app/screens/learning_path_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/progress_provider.dart';
 import 'package:spark_app/providers/content_providers.dart';
-import 'package:spark_app/core/utils/theme_utils.dart';
 
 class ModulesScreen extends ConsumerWidget {
   final SPARKCategory? category;
@@ -118,44 +117,28 @@ class ModulesScreen extends ConsumerWidget {
                         );
                       }
 
-                      bool previousCompleted = true;
-
                       return ListView.builder(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         physics: const BouncingScrollPhysics(),
                         itemCount: modules.length,
                         itemBuilder: (context, index) {
                           final module = modules[index];
-                          
+
                           // Calcular progresso
                           final progIndex = userProgress.indexWhere((p) => p.moduleId == module.id);
                           final prog = progIndex >= 0 ? userProgress[progIndex] : null;
-                          
-                          final isLocked = !previousCompleted;
                           final actualProgress = prog?.progressPercent ?? 0.0;
-                          
-                          previousCompleted = (prog != null && (prog.isCompleted || prog.progressPercent >= 1.0));
 
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 14),
                             child: _ModuleCard(
                               module: module,
                               progress: actualProgress,
-                              isLocked: isLocked,
+                              isLocked: false, // Navegação livre — sem prerequisito sequencial
                               themeColor: themeColor,
                               themeIcon: themeIcon,
                               isTestMode: isTestMode,
                               onTap: () {
-                                if (!isTestMode && isLocked) {
-                                  HapticFeedback.heavyImpact();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('Conclua os módulos anteriores para desbloquear!'),
-                                      backgroundColor: AppColors.error,
-                                    ),
-                                  );
-                                  return;
-                                }
                                 HapticFeedback.lightImpact();
                                 Navigator.push(
                                   context,

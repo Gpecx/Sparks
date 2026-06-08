@@ -10,7 +10,6 @@ import 'package:spark_app/screens/modules_screen.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/content_providers.dart';
-import 'package:spark_app/providers/user_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spark_app/core/utils/theme_utils.dart';
 
@@ -23,8 +22,6 @@ class CategoriesScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isTestMode = kDebugMode && ref.watch(devModeProvider);
     final categoriesAsync = ref.watch(categoriesStreamProvider);
-    final user = ref.watch(userModelProvider).value;
-    final isPremium = user?.isPremium ?? false;
 
     return SparksBackground(
       child: PcbBackground(
@@ -98,32 +95,32 @@ class CategoriesScreen extends ConsumerWidget {
                         itemCount: categories.length,
                         itemBuilder: (context, index) {
                           final cat = categories[index];
-                          // Obter o tema de forma semântica baseada no nome da categoria
+                          // Tema semântico baseado no nome da categoria
                           final theme = ThemeUtils.getThemeForContent(cat.title, fallbackIndex: index);
-                          
-                          final isLocked = (!isPremium && index > 0) || cat.order > 100; 
-                          // Apenas para evitar dead_code linter
+
+                          // "Em breve" apenas para conteúdo ainda não publicado (order > 100)
+                          final isComingSoon = cat.order > 100;
+
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 14),
                             child: _CategoryCard(
                               category: cat,
                               isTestMode: isTestMode,
-                              isLocked: isLocked,
+                              isLocked: false, // Navegação livre — sem bloqueio por plano
+                              isComingSoon: isComingSoon,
                               themeColor: theme['color'] as Color,
                               themeGradientEnd: theme['gradientEnd'] as Color,
                               themeIcon: theme['icon'] as IconData,
-                              onTap: (!isTestMode && isLocked)
+                              onTap: isComingSoon
                                   ? () {
-                                      HapticFeedback.heavyImpact();
+                                      HapticFeedback.mediumImpact();
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
-                                          content: Row(
+                                          content: const Row(
                                             children: [
-                                              const Icon(Icons.lock, color: Colors.white, size: 16),
-                                              const SizedBox(width: 8),
-                                              Expanded(
-                                                child: Text((!isPremium && index > 0 && cat.order <= 100) ? 'Assine o Premium para acessar esta categoria!' : 'Esta categoria estará disponível em breve!'),
-                                              ),
+                                              Icon(Icons.construction_rounded, color: Colors.white, size: 16),
+                                              SizedBox(width: 8),
+                                              Expanded(child: Text('Esta categoria estará disponível em breve!')),
                                             ],
                                           ),
                                           backgroundColor: const Color(0xFF37474F),
@@ -181,6 +178,7 @@ class _CategoryCard extends ConsumerStatefulWidget {
   final VoidCallback onTap;
   final bool isTestMode;
   final bool isLocked;
+  final bool isComingSoon;
   final Color themeColor;
   final Color themeGradientEnd;
   final IconData themeIcon;
@@ -190,6 +188,7 @@ class _CategoryCard extends ConsumerStatefulWidget {
     required this.onTap,
     this.isTestMode = false,
     this.isLocked = false,
+    this.isComingSoon = false,
     required this.themeColor,
     required this.themeGradientEnd,
     required this.themeIcon,
@@ -226,16 +225,17 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
   Widget build(BuildContext context) {
     final cat = widget.category;
     final locked = !widget.isTestMode && widget.isLocked;
+    final comingSoon = widget.isComingSoon;
 
-    // Cores ficam apagadas quando bloqueada
-    final displayColor = locked ? const Color(0xFF78909C) : widget.themeColor;
-    final displayGradEnd = locked ? const Color(0xFF37474F) : widget.themeGradientEnd;
+    // Cores apagadas apenas para conteúdo "Em breve"
+    final displayColor = comingSoon ? const Color(0xFF78909C) : widget.themeColor;
+    final displayGradEnd = comingSoon ? const Color(0xFF37474F) : widget.themeGradientEnd;
 
     final modulesAsync = ref.watch(modulesStreamProvider(cat.id));
     final moduleCount = modulesAsync.asData?.value.length ?? 0;
 
     return MouseRegion(
-      cursor: locked ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+      cursor: comingSoon ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
       child: GestureDetector(
         onTapDown: (_) => _scaleCtrl.forward(),
         onTapUp: (_) {
@@ -250,7 +250,7 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
             child: child,
           ),
           child: Opacity(
-            opacity: locked ? 0.55 : 1.0,
+            opacity: comingSoon ? 0.55 : 1.0,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
@@ -325,7 +325,7 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
                                   ),
                                 ),
                               ),
-                              if (locked)
+                              if (comingSoon)
                                 Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8, vertical: 3),
@@ -352,7 +352,7 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
                               fontSize: 12,
                             ),
                           ),
-                          if (!locked) ...[
+                          if (!comingSoon) ...[
                             const SizedBox(height: 8),
                             Row(
                               children: [
@@ -363,8 +363,8 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
                         ],
                       ),
                     ),
-                    // Seta (só quando desbloqueado)
-                    if (!locked)
+                    // Seta (oculta apenas para "Em breve")
+                    if (!comingSoon)
                       Icon(
                         Icons.chevron_right,
                         color: displayColor.withValues(alpha: 0.6),

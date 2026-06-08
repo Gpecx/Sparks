@@ -519,7 +519,7 @@ class UserService extends ChangeNotifier {
     DocumentSnapshot? lastDocument,
   }) async {
     var query = _db
-        .collection('users')
+        .collection('public_profiles')
         .orderBy('xp', descending: true)
         .limit(limit);
 

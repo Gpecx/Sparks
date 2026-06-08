@@ -88,9 +88,11 @@ class _ClanScreenState extends State<ClanScreen> {
   String? _currentUserUid;
   String? _myName;
   final _nameCtrl = TextEditingController();
+  final _descCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _joinPasswordCtrl = TextEditingController();
   final _joinCodeCtrl = TextEditingController();
+  final _chatCtrl = TextEditingController();
 
   final _formKeyCreate = GlobalKey<FormState>();
   final _formKeyJoin = GlobalKey<FormState>();
@@ -98,7 +100,6 @@ class _ClanScreenState extends State<ClanScreen> {
   Color _clanPrimaryColor = AppColors.primary;
   IconData _clanIcon = Icons.shield;
 
-  final _chatCtrl = TextEditingController();
   final ScrollController _scrollCtrl = ScrollController();
 
   @override
@@ -153,12 +154,13 @@ class _ClanScreenState extends State<ClanScreen> {
 
   @override
   void dispose() {
+    _scrollCtrl.dispose();
     _nameCtrl.dispose();
+    _descCtrl.dispose();
     _passwordCtrl.dispose();
     _joinPasswordCtrl.dispose();
     _joinCodeCtrl.dispose();
     _chatCtrl.dispose();
-    _scrollCtrl.dispose();
     super.dispose();
   }
 
@@ -249,7 +251,17 @@ class _ClanScreenState extends State<ClanScreen> {
                         _nameCtrl, 
                         'Ex: EXS Técnicos SP', 
                         Icons.shield_outlined,
+                        maxLength: 50,
                         validator: (v) => (v == null || v.trim().length <= 3) ? 'Nome deve ter mais que 3 caracteres' : null,
+                      ),
+                      const SizedBox(height: 16),
+                      _label('Descrição do Clã'),
+                      const SizedBox(height: 8),
+                      _inputField(
+                        _descCtrl, 
+                        'Sobre o clã...', 
+                        Icons.description_outlined,
+                        maxLength: 300,
                       ),
                       const SizedBox(height: 16),
                       _label('Senha do Clã'),
@@ -389,7 +401,7 @@ class _ClanScreenState extends State<ClanScreen> {
 
         return StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
-              .collection('users')
+              .collection('public_profiles')
               .where('clanId', isEqualTo: _myClanId)
               .snapshots(),
           builder: (context, usersSnapshot) {
@@ -753,11 +765,13 @@ class _ClanScreenState extends State<ClanScreen> {
                         ),
                         child: TextField(
                           controller: _chatCtrl,
+                          maxLength: 500,
                           style: const TextStyle(color: Colors.white, fontSize: 13),
                           decoration: const InputDecoration(
                             hintText: 'Digite uma mensagem...',
                             hintStyle: TextStyle(color: AppColors.textMuted, fontSize: 13),
                             border: InputBorder.none,
+                            counterText: '',
                           ),
                           onSubmitted: (_) => _sendMessage(),
                         ),
@@ -808,14 +822,16 @@ class _ClanScreenState extends State<ClanScreen> {
 
   Widget _label(String t) => Text(t, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13, fontWeight: FontWeight.w600));
 
-  Widget _inputField(TextEditingController ctrl, String hint, IconData icon, {bool isPassword = false, String? Function(String?)? validator}) {
+  Widget _inputField(TextEditingController ctrl, String hint, IconData icon, {bool isPassword = false, String? Function(String?)? validator, int? maxLength}) {
     return TextFormField(
       controller: ctrl,
       obscureText: isPassword,
       validator: validator,
+      maxLength: maxLength,
       style: const TextStyle(color: Colors.white, fontSize: 14),
       decoration: InputDecoration(
         hintText: hint,
+        counterText: '',
         hintStyle: const TextStyle(color: AppColors.textMuted, fontSize: 13),
         prefixIcon: Icon(icon, color: AppColors.textMuted, size: 20),
         filled: true,
@@ -932,11 +948,12 @@ class _ClanScreenState extends State<ClanScreen> {
     final messenger = ScaffoldMessenger.of(context);
     try {
       final name = _nameCtrl.text.trim();
+      final desc = _descCtrl.text.trim().isEmpty ? 'Novo clã EXS' : _descCtrl.text.trim();
       final pwd = _passwordCtrl.text.trim();
       
       final clanId = await ClanService().createClan(
         name,
-        'Novo clã EXS',
+        desc,
         _currentUserUid!,
         pwd.isEmpty,
         pwd.isEmpty ? null : pwd,
@@ -1082,9 +1099,11 @@ class _ClanScreenState extends State<ClanScreen> {
                     const SizedBox(height: 8),
                     TextField(
                       controller: editCtrl,
+                      maxLength: 50,
                       style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                       decoration: InputDecoration(
                         hintText: 'Novo nome do clã',
+                        counterText: '',
                         hintStyle: const TextStyle(color: AppColors.textMuted),
                         filled: true,
                         fillColor: AppColors.inputBackground,
@@ -1691,7 +1710,7 @@ class _MemberTile extends StatelessWidget {
 
     return StreamBuilder<DocumentSnapshot>(
       stream: FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
-          .collection('users')
+          .collection('public_profiles')
           .doc(member.uid)
           .snapshots(),
       builder: (context, snapshot) {

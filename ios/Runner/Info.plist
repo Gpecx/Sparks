@@ -26,6 +26,21 @@
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
+		<!-- Login com Google (Firebase Auth signInWithProvider).
+		     Substitua o valor abaixo pelo REVERSED_CLIENT_ID que está no
+		     arquivo GoogleService-Info.plist baixado do Firebase Console.
+		     Formato: com.googleusercontent.apps.35902836822-xxxxxxxxxxxx -->
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>REVERSED_CLIENT_ID_AQUI</string>
+				</array>
+			</dict>
+		</array>
 		<key>UIApplicationSceneManifest</key>
 		<dict>
 			<key>UIApplicationSupportsMultipleScenes</key>

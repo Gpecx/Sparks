@@ -8,7 +8,7 @@ import '../services/analytics_service.dart';
 import '../services/audit_service.dart';
 import '../services/gamification_service.dart';
 import '../services/offline_sync_service.dart';
-import '../data/lessons_registry.dart';
+
 
 class ProgressService {
   static final ProgressService _instance = ProgressService._internal();
@@ -126,8 +126,7 @@ class ProgressService {
       }
       
       final completedSet = {...alreadyCompleted, lessonId};
-      int totalLessons = getLessonsForModule(modId).length;
-      if (totalLessons == 0) totalLessons = knownTotal;
+      int totalLessons = knownTotal;
       
       // Se ainda for 0, tenta buscar a quantidade real de lições do Firestore
       if (totalLessons == 0) {

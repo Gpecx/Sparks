@@ -189,8 +189,9 @@ function verifyWebhookToken(token) {
     var _a;
     const secret = (_a = process.env.ASAAS_WEBHOOK_TOKEN) !== null && _a !== void 0 ? _a : "";
     if (!secret) {
-        logger.warn("[Asaas] ASAAS_WEBHOOK_TOKEN não configurado — aceitando em modo dev.");
-        return true; // não bloqueia em dev sem configuração
+        // Falha FECHADA: sem secret configurado, nada é aceito.
+        logger.error("[Asaas] ASAAS_WEBHOOK_TOKEN não configurado — rejeitando webhook.");
+        return false;
     }
     return token === secret;
 }

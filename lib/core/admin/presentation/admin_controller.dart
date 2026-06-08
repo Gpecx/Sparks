@@ -774,7 +774,8 @@ class AdminController extends Notifier<AdminState> {
             case 'fill_blank':
             case 'fill_in_the_blanks':
             case 'fillInTheBlanks':
-              firestoreType = 'fillInTheBlanks';
+              // Converte para multipleChoice diretamente
+              firestoreType = 'multipleChoice';
               break;
             default:
               firestoreType = 'multipleChoice';
@@ -805,24 +806,34 @@ class AdminController extends Notifier<AdminState> {
             }
             qData[FS.isTrue] = resolvedIsTrue;
             qData[FS.correctIndex] = resolvedIsTrue ? 0 : 1;
-          } else if (firestoreType == 'fillInTheBlanks') {
-            // Usa textWithBlanks diretamente, ou cai para statement
-            qData[FS.textWithBlanks] =
-                q['textWithBlanks'] as String? ??
-                q['text'] as String? ??
-                q['statement'] as String? ?? '';
-            // blanks: [{answer, distractors?}] ou answers: ['a','b']
-            final rawBlanks = q['blanks'] as List?;
-            final rawAnswers = q['answers'] as List?;
-            if (rawBlanks != null) {
-              qData[FS.blanks] = rawBlanks
-                  .map((b) => Map<String, dynamic>.from(b as Map))
-                  .toList();
-            } else if (rawAnswers != null) {
-              qData[FS.blanks] = rawAnswers
-                  .map((a) => {'answer': a.toString()})
-                  .toList();
+          } else if (firestoreType == 'multipleChoice' && (q['type'] == 'fill_blank' || q['type'] == 'fill_in_the_blanks' || q['type'] == 'fillInTheBlanks')) {
+            // fill_blank convertido para multipleChoice:
+            // options já existem no JSON; caso não existam, usa answer + fallback
+            final rawOptions = q['options'] as List?;
+            final rawAnswer = q['answer'] as String?;
+            List<String> opts;
+            int correctIdx = 0;
+            if (rawOptions != null && rawOptions.isNotEmpty) {
+              opts = List<String>.from(rawOptions);
+              correctIdx = rawAnswer != null ? opts.indexOf(rawAnswer) : 0;
+              if (correctIdx < 0) correctIdx = 0;
+            } else if (rawAnswer != null) {
+              const fallback = ['Nenhuma das anteriores', 'Incorreto', 'Não se aplica', 'Outra opção'];
+              final distractors = <String>[];
+              for (final f in fallback) {
+                if (f != rawAnswer) {
+                  distractors.add(f);
+                  if (distractors.length >= 3) break;
+                }
+              }
+              opts = [rawAnswer, ...distractors];
+              opts.shuffle();
+              correctIdx = opts.indexOf(rawAnswer);
+            } else {
+              opts = ['Opção A', 'Opção B', 'Opção C', 'Opção D'];
             }
+            qData[FS.options] = opts;
+            qData[FS.correctIndex] = correctIdx;
           }
 
           batch.set(qRef, qData);

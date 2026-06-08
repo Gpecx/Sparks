@@ -1,11 +1,19 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
 import 'package:spark_app/services/auth_service.dart';
+import 'package:spark_app/services/device_service.dart';
+import 'package:spark_app/widgets/email_verification_dialog.dart';
+import 'package:spark_app/widgets/google_auth_button.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, this.prefillEmail, this.prefillPassword});
+
+  final String? prefillEmail;
+  final String? prefillPassword;
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -16,6 +24,18 @@ class _LoginScreenState extends State<LoginScreen> {
   final _authService = AuthService();
   bool _obscurePassword = true;
   bool _isLoading = false;
+  bool _isGoogleLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.prefillEmail != null) {
+      _emailController.text = widget.prefillEmail!;
+    }
+    if (widget.prefillPassword != null) {
+      _passwordController.text = widget.prefillPassword!;
+    }
+  }
 
   Future<void> _handleLogin() async {
     final email = _emailController.text.trim();
@@ -31,7 +51,55 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
 
     try {
-      await _authService.signInWithEmail(email, password);
+      final credential = await _authService.signInWithEmail(email, password);
+      final user = credential.user;
+      if (!mounted || user == null) return;
+
+      // ── Verificação de dispositivo ──────────────────────────────
+      final deviceService = DeviceService();
+      final deviceId = await deviceService.getDeviceId();
+      final isTrusted = await _authService.checkDeviceVerification(user.uid, deviceId);
+
+      if (!mounted) return;
+
+      if (!isTrusted) {
+        // Mantém o usuário LOGADO para que as Cloud Functions tenham o uid.
+        // Envia o código OTP para o e-mail do usuário
+        try {
+          final fn = FirebaseFunctions.instanceFor(region: 'southamerica-east1');
+          await fn.httpsCallable('sendEmailVerificationCode').call({'email': email});
+        } catch (e) {
+          // Falhou ao enviar — desloga e mostra erro
+          await _authService.signOut();
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Erro ao enviar código: ${e.toString().replaceAll('Exception: ', '')}'),
+              backgroundColor: AppColors.error,
+            ),
+          );
+          return;
+        }
+
+        if (!mounted) return;
+
+        // Exibe o popup de verificação (usuário ainda logado)
+        final verified = await showEmailVerificationDialog(
+          context,
+          email: email,
+          uid: user.uid,
+        );
+
+        if (!mounted) return;
+        if (!verified) {
+          // Usuário cancelou a verificação — desloga por segurança
+          await _authService.signOut();
+          return;
+        }
+        // Código OTP confirmado, dispositivo registrado como confiável.
+        // O usuário já está logado — segue direto para /home.
+      }
+
       if (mounted) context.go('/home');
     } catch (e) {
       if (mounted) {
@@ -44,6 +112,33 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  Future<void> _handleGoogleSignIn() async {
+    setState(() => _isGoogleLoading = true);
+
+    try {
+      final credential = await _authService.signInWithGoogle();
+      final user = credential.user;
+      if (!mounted || user == null) return;
+
+      // O Google já verifica a identidade do usuário, então pulamos a
+      // verificação de dispositivo por OTP e vamos direto para a home.
+      if (mounted) context.go('/home');
+    } on GoogleSignInCancelled {
+      // Usuário fechou o popup — não é erro, ignora silenciosamente.
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceAll('Exception: ', '')),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isGoogleLoading = false);
     }
   }
 
@@ -133,6 +228,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
             ]),
+            const SizedBox(height: 20),
+            GoogleAuthButton(
+              label: 'Entrar com Google',
+              isLoading: _isGoogleLoading,
+              onPressed: (_isLoading || _isGoogleLoading) ? null : _handleGoogleSignIn,
+            ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
