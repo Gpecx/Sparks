@@ -446,7 +446,61 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   void _deleteDialog() {
-    showDialog(context: context, builder: (ctx) => AlertDialog(backgroundColor: AppColors.card, title: const Text('Eliminar Conta?', style: TextStyle(color: Colors.white)), actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar')), ElevatedButton(onPressed: () => context.go('/'), style: ElevatedButton.styleFrom(backgroundColor: AppColors.error), child: const Text('ELIMINAR'))]));
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.card,
+        title: const Text('Eliminar Conta?', style: TextStyle(color: Colors.white)),
+        content: const Text(
+          'Esta ação é permanente. Todos os seus dados — XP, progresso, '
+          'sua posição no ranking e seu vínculo com clãs — serão apagados '
+          'e não poderão ser recuperados.',
+          style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancelar'),
+          ),
+          ElevatedButton(
+            onPressed: () => _confirmDelete(ctx),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
+            child: const Text('ELIMINAR'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _confirmDelete(BuildContext dialogCtx) async {
+    final router = GoRouter.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    Navigator.pop(dialogCtx); // fecha o diálogo de confirmação
+
+    // Diálogo de progresso (não-cancelável)
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(child: CircularProgressIndicator()),
+    );
+
+    try {
+      await AuthService().deleteAccount();
+      UserService().stopListening();
+      if (!mounted) return;
+      Navigator.of(context, rootNavigator: true).pop(); // fecha o progresso
+      router.go('/');
+    } catch (e) {
+      if (!mounted) return;
+      Navigator.of(context, rootNavigator: true).pop(); // fecha o progresso
+      messenger.showSnackBar(
+        SnackBar(
+          backgroundColor: AppColors.error,
+          content: Text('Falha ao eliminar conta: $e'),
+        ),
+      );
+    }
   }
 }
 

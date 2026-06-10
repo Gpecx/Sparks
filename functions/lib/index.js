@@ -17,15 +17,17 @@
  *  - unlockBadge       : Concede badge se ainda não desbloqueada.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.processTrialExpiry = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
+exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.processTrialExpiry = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
 const admin = require("firebase-admin");
 const firestore_1 = require("firebase-admin/firestore");
+const crypto = require("crypto");
 const https_1 = require("firebase-functions/v2/https");
 const scheduler_1 = require("firebase-functions/v2/scheduler");
 const v2_1 = require("firebase-functions/v2");
 const params_1 = require("firebase-functions/params");
 const nodemailer = require("nodemailer");
 const asaasService_1 = require("./services/asaasService");
+const rateLimiter_1 = require("./rateLimiter");
 // ── Secrets vinculados ao Firebase Secret Manager ────────────────
 const ASAAS_API_KEY = (0, params_1.defineSecret)("ASAAS_API_KEY");
 const ASAAS_BASE_URL = (0, params_1.defineSecret)("ASAAS_BASE_URL");
@@ -81,6 +83,112 @@ async function writeAuditLog(uid, action, amount, source, meta) {
         entry["meta"] = meta;
     await db.collection("users").doc(uid).collection("audit_log").add(entry);
 }
+// Removido _unlockBadgeInTx para evitar multiplos updates na mesma transacao
+/** Comparação de strings em tempo constante (evita timing attacks no token). */
+function safeEqual(a, b) {
+    const ab = Buffer.from(a);
+    const bb = Buffer.from(b);
+    if (ab.length !== bb.length)
+        return false;
+    return crypto.timingSafeEqual(ab, bb);
+}
+/**
+ * Remove um usuário do seu clã de forma consistente:
+ *  - apaga o documento de membro;
+ *  - se ele era o último membro, apaga o clã inteiro (some do ranking de clãs);
+ *  - se era o criador mas há outros membros, transfere a liderança;
+ *  - decrementa memberCount.
+ * Usa Admin SDK (ignora as Security Rules).
+ */
+async function removeUserFromClan(clanId, uid) {
+    var _a, _b;
+    const clanRef = db.collection("clans").doc(clanId);
+    const clanSnap = await clanRef.get();
+    if (!clanSnap.exists)
+        return;
+    const wasCreator = ((_a = clanSnap.data()) === null || _a === void 0 ? void 0 : _a["createdBy"]) === uid;
+    // Apaga o documento de membro do usuário
+    await clanRef.collection("members").doc(uid).delete().catch(() => { });
+    // Verifica se sobrou alguém
+    const remaining = await clanRef.collection("members").limit(2).get();
+    if (remaining.empty) {
+        // Era o último membro → apaga o clã e todas as subcoleções.
+        // Como o ranking de clãs lê direto de /clans, o clã some do ranking.
+        await db.recursiveDelete(clanRef);
+        return;
+    }
+    // Ainda há membros → ajusta a contagem
+    await clanRef
+        .update({ memberCount: admin.firestore.FieldValue.increment(-1) })
+        .catch(() => { });
+    // Se o criador saiu, promove outro membro a líder/admin
+    if (wasCreator) {
+        const next = (_b = remaining.docs.find((d) => d.id !== uid)) !== null && _b !== void 0 ? _b : remaining.docs[0];
+        await clanRef.update({ createdBy: next.id }).catch(() => { });
+        await next.ref.update({ role: "admin" }).catch(() => { });
+    }
+}
+const PLAN_CATALOG = {
+    student: { monthlyPrice: 19.90, annualPrice: 199, points: 0 },
+    pro: { monthlyPrice: 39.90, annualPrice: 399, points: 0 },
+    premium: { monthlyPrice: 79.90, annualPrice: 799, points: 0 },
+    business: { monthlyPrice: 29, annualPrice: null, points: 0 },
+};
+/** Tolerância para casar preço float enviado pelo cliente (centavos). */
+const PRICE_EPSILON = 0.01;
+/** Tetos por chamada — mitigam farming até a migração para recompensas
+ *  100% autoritativas no servidor (ver memória spark-security-pending). */
+const MAX_XP_PER_CALL = 1000;
+const MAX_SP_PER_CALL = 500;
+const MAX_ELO_DELTA = 50;
+/** Badges que o servidor concede automaticamente — NÃO podem ser
+ *  reivindicadas manualmente via unlockBadge. */
+const SERVER_ONLY_BADGES = new Set([
+    "xp_1000", "xp_5000", "xp_10000", "primeiro_duelo",
+]);
+/** Badges que o cliente pode reivindicar (conquistas ainda não
+ *  verificáveis no servidor). Qualquer ID fora deste conjunto é rejeitado. */
+const CLIENT_CLAIMABLE_BADGES = new Set([
+    "queimador", "sniper", "noturno", "top3", "teorico", "veloz",
+    "cla_unido", "streak_3_days", "streak_7", "streak_30",
+    "first_lesson", "lesson_10", "lesson_50",
+]);
+/**
+ * Resolve um item do carrinho contra o catálogo do servidor.
+ * Lança HttpsError se o plano for desconhecido ou o preço não casar
+ * com nenhum período do plano.
+ */
+function resolveCatalogItem(item) {
+    var _a;
+    const planId = item.planId;
+    if (!planId || !PLAN_CATALOG[planId]) {
+        throw new https_1.HttpsError("invalid-argument", `Plano inválido ou indisponível: ${planId !== null && planId !== void 0 ? planId : "(vazio)"}.`);
+    }
+    const plan = PLAN_CATALOG[planId];
+    const submitted = typeof item.price === "number" ? item.price : NaN;
+    let period;
+    let price;
+    if (Math.abs(submitted - plan.monthlyPrice) <= PRICE_EPSILON) {
+        period = "monthly";
+        price = plan.monthlyPrice;
+    }
+    else if (plan.annualPrice != null &&
+        Math.abs(submitted - plan.annualPrice) <= PRICE_EPSILON) {
+        period = "annual";
+        price = plan.annualPrice;
+    }
+    else {
+        throw new https_1.HttpsError("invalid-argument", `Preço inválido para o plano ${planId}.`);
+    }
+    return {
+        name: ((_a = item.name) !== null && _a !== void 0 ? _a : planId).slice(0, 120),
+        planId,
+        price,
+        points: plan.points,
+        isSubscription: true,
+        period,
+    };
+}
 exports.addXp = (0, https_1.onCall)({
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -90,9 +198,13 @@ exports.addXp = (0, https_1.onCall)({
     if (!uid) {
         throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
     }
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("gamification", uid, "addXp"), rateLimiter_1.RATE_GAMIFICATION.limit, rateLimiter_1.RATE_GAMIFICATION.windowMs);
     const { amount, source = "app" } = request.data;
-    if (!amount || typeof amount !== "number" || amount <= 0) {
+    if (!amount || typeof amount !== "number" || !Number.isFinite(amount) || amount <= 0) {
         throw new https_1.HttpsError("invalid-argument", "amount deve ser um número positivo.");
+    }
+    if (amount > MAX_XP_PER_CALL) {
+        throw new https_1.HttpsError("invalid-argument", `amount excede o máximo permitido por chamada (${MAX_XP_PER_CALL}).`);
     }
     const userRef = db.collection("users").doc(uid);
     let result;
@@ -184,9 +296,13 @@ exports.addSparkPoints = (0, https_1.onCall)({
     if (!uid) {
         throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
     }
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("gamification", uid, "addSparkPoints"), rateLimiter_1.RATE_GAMIFICATION.limit, rateLimiter_1.RATE_GAMIFICATION.windowMs);
     const { amount, source = "reward" } = request.data;
-    if (!amount || typeof amount !== "number" || amount <= 0) {
+    if (!amount || typeof amount !== "number" || !Number.isFinite(amount) || amount <= 0) {
         throw new https_1.HttpsError("invalid-argument", "amount deve ser um número positivo.");
+    }
+    if (amount > MAX_SP_PER_CALL) {
+        throw new https_1.HttpsError("invalid-argument", `amount excede o máximo permitido por chamada (${MAX_SP_PER_CALL}).`);
     }
     const userRef = db.collection("users").doc(uid);
     let newBalance = 0;
@@ -221,8 +337,9 @@ exports.spendSparkPoints = (0, https_1.onCall)({
     if (!uid) {
         throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
     }
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("gamification", uid, "spendSparkPoints"), rateLimiter_1.RATE_GAMIFICATION.limit, rateLimiter_1.RATE_GAMIFICATION.windowMs);
     const { amount, source = "purchase" } = request.data;
-    if (!amount || typeof amount !== "number" || amount <= 0) {
+    if (!amount || typeof amount !== "number" || !Number.isFinite(amount) || amount <= 0) {
         throw new https_1.HttpsError("invalid-argument", "amount deve ser um número positivo.");
     }
     const userRef = db.collection("users").doc(uid);
@@ -267,9 +384,13 @@ exports.updateElo = (0, https_1.onCall)({
     if (!uid) {
         throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
     }
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("gamification", uid, "updateElo"), rateLimiter_1.RATE_GAMIFICATION.limit, rateLimiter_1.RATE_GAMIFICATION.windowMs);
     const { eloChange, won } = request.data;
-    if (typeof eloChange !== "number") {
+    if (typeof eloChange !== "number" || !Number.isFinite(eloChange)) {
         throw new https_1.HttpsError("invalid-argument", "eloChange deve ser um número.");
+    }
+    if (Math.abs(eloChange) > MAX_ELO_DELTA) {
+        throw new https_1.HttpsError("invalid-argument", `eloChange fora do intervalo permitido (±${MAX_ELO_DELTA}).`);
     }
     const userRef = db.collection("users").doc(uid);
     let result;
@@ -318,9 +439,18 @@ exports.unlockBadge = (0, https_1.onCall)({
     if (!uid) {
         throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
     }
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("gamification", uid, "unlockBadge"), rateLimiter_1.RATE_GAMIFICATION.limit, rateLimiter_1.RATE_GAMIFICATION.windowMs);
     const { badgeId, source = "achievement" } = request.data;
     if (!badgeId || typeof badgeId !== "string") {
         throw new https_1.HttpsError("invalid-argument", "badgeId inválido.");
+    }
+    // Badges concedidas pelo servidor (XP/duelo) não podem ser reivindicadas.
+    if (SERVER_ONLY_BADGES.has(badgeId)) {
+        throw new https_1.HttpsError("permission-denied", "Esta conquista é concedida automaticamente pelo servidor.");
+    }
+    // Só badges conhecidas e reivindicáveis pelo cliente são aceitas.
+    if (!CLIENT_CLAIMABLE_BADGES.has(badgeId)) {
+        throw new https_1.HttpsError("invalid-argument", `badgeId desconhecido: ${badgeId}.`);
     }
     const userRef = db.collection("users").doc(uid);
     let unlocked = false;
@@ -357,6 +487,8 @@ exports.createAsaasCheckout = (0, https_1.onCall)({
     if (!uid) {
         throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
     }
+    // Rate limit: evita criação em massa de pedidos / abuso da API Asaas.
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("payment", uid, "createAsaasCheckout"), rateLimiter_1.RATE_PAYMENT.limit, rateLimiter_1.RATE_PAYMENT.windowMs);
     const { items, billingType, customerName, customerEmail, customerCpfCnpj } = request.data;
     if (!items || items.length === 0) {
         throw new https_1.HttpsError("invalid-argument", "Carrinho vazio.");
@@ -370,8 +502,12 @@ exports.createAsaasCheckout = (0, https_1.onCall)({
         v2_1.logger.warn("[createAsaasCheckout] ASAAS_API_KEY não configurada — pagamento indisponível.");
         throw new https_1.HttpsError("unavailable", "O sistema de pagamentos está em manutenção. Tente novamente em breve.");
     }
-    const totalPrice = items.reduce((acc, i) => acc + i.price, 0);
-    const totalPoints = items.reduce((acc, i) => acc + i.sparkPointsGranted, 0);
+    // SEGURANÇA: resolve cada item pelo catálogo do servidor. Preço e
+    // pontos são definidos pelo servidor — o que o cliente enviar é
+    // ignorado (exceto para escolher mensal/anual, já validado).
+    const resolvedItems = items.map((i) => resolveCatalogItem(i));
+    const totalPrice = resolvedItems.reduce((acc, i) => acc + i.price, 0);
+    const totalPoints = resolvedItems.reduce((acc, i) => acc + i.points, 0);
     // Busca dados do usuário no Firestore para preencher o cliente Asaas
     const userSnap = await db.collection("users").doc(uid).get();
     if (!userSnap.exists) {
@@ -398,17 +534,14 @@ exports.createAsaasCheckout = (0, https_1.onCall)({
     const orderRef = db.collection("orders").doc();
     await orderRef.set({
         uid,
-        items: items.map((i) => {
-            var _a, _b;
-            return ({
-                name: i.name,
-                description: i.description,
-                price: i.price,
-                sparkPointsGranted: i.sparkPointsGranted,
-                isSubscription: (_a = i.isSubscription) !== null && _a !== void 0 ? _a : false,
-                planId: (_b = i.planId) !== null && _b !== void 0 ? _b : null,
-            });
-        }),
+        items: resolvedItems.map((i) => ({
+            name: i.name,
+            price: i.price,
+            sparkPointsGranted: i.points,
+            isSubscription: i.isSubscription,
+            planId: i.planId,
+            period: i.period,
+        })),
         totalPrice,
         totalPoints,
         billingType,
@@ -416,9 +549,9 @@ exports.createAsaasCheckout = (0, https_1.onCall)({
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
     const orderId = orderRef.id;
-    const description = items.length === 1
-        ? items[0].name
-        : `${items.length} itens — Loja Spark`;
+    const description = resolvedItems.length === 1
+        ? resolvedItems[0].name
+        : `${resolvedItems.length} itens — Loja Spark`;
     // Cria a cobrança no Asaas
     const chargeResult = await (0, asaasService_1.createCharge)({
         customerId: asaasCustomerId,
@@ -452,6 +585,7 @@ exports.checkPaymentStatus = (0, https_1.onCall)({
     if (!uid) {
         throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
     }
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("payment", uid, "checkPaymentStatus"), rateLimiter_1.RATE_PAYMENT.limit, rateLimiter_1.RATE_PAYMENT.windowMs);
     const { orderId } = request.data;
     if (!orderId) {
         throw new https_1.HttpsError("invalid-argument", "orderId é obrigatório.");
@@ -559,10 +693,10 @@ exports.checkPaymentStatus = (0, https_1.onCall)({
 // deploy-force: 2026-05-29T13:59 — atualiza secret ASAAS_WEBHOOK_TOKEN para versão 8
 exports.asaasWebhook = (0, https_1.onRequest)({
     region: "southamerica-east1",
-    secrets: [ASAAS_WEBHOOK_TOKEN],
+    secrets: [ASAAS_WEBHOOK_TOKEN, ASAAS_API_KEY, ASAAS_BASE_URL],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (req, res) => {
-    var _a, _b, _c, _d, _e, _f;
+    var _a, _b, _c, _d, _e, _f, _g;
     // 1) Só aceita POST
     if (req.method !== "POST") {
         res.status(405).send("Method Not Allowed");
@@ -574,7 +708,7 @@ exports.asaasWebhook = (0, https_1.onRequest)({
     let event;
     let payment;
     const rawBody = req.body;
-    v2_1.logger.info(`[asaasWebhook] Body bruto: ${JSON.stringify(rawBody).substring(0, 500)}`);
+    // Não logamos o corpo bruto (pode conter PII do cliente).
     // Lê o token primariamente do header oficial do Asaas
     let receivedToken = (_a = req.headers["asaas-access-token"]) !== null && _a !== void 0 ? _a : "";
     if ((rawBody === null || rawBody === void 0 ? void 0 : rawBody.data) && typeof rawBody.data === "string") {
@@ -601,18 +735,18 @@ exports.asaasWebhook = (0, https_1.onRequest)({
         payment = rawBody === null || rawBody === void 0 ? void 0 : rawBody.payment;
         v2_1.logger.info(`[asaasWebhook] Formato direto detectado. Event=${event}, paymentId=${payment === null || payment === void 0 ? void 0 : payment.id}`);
     }
-    // 3) Verifica token com lógica corrigida
+    // 3) Verifica token — FAIL-CLOSED: sem secret configurado, rejeita tudo.
+    //    (Nunca logamos o valor/prefixo do secret.)
     const expectedSecret = (_c = process.env.ASAAS_WEBHOOK_TOKEN) !== null && _c !== void 0 ? _c : "";
-    v2_1.logger.info(`[asaasWebhook] Token recebido='${receivedToken.substring(0, 12)}...' esperado='${expectedSecret.substring(0, 12)}...' match=${receivedToken === expectedSecret}`);
-    if (expectedSecret) {
-        if (receivedToken !== expectedSecret) {
-            v2_1.logger.warn(`[asaasWebhook] Token inválido bloqueado. Esperava o secret configurado no Firebase.`);
-            res.status(401).send("Unauthorized");
-            return;
-        }
+    if (!expectedSecret) {
+        v2_1.logger.error("[asaasWebhook] ASAAS_WEBHOOK_TOKEN não configurado — rejeitando webhook.");
+        res.status(401).send("Unauthorized");
+        return;
     }
-    else {
-        v2_1.logger.warn(`[asaasWebhook] AVISO: ASAAS_WEBHOOK_TOKEN não está configurado! Processando sem validação (Apenas para testes)`);
+    if (!safeEqual(receivedToken, expectedSecret)) {
+        v2_1.logger.warn("[asaasWebhook] Token inválido bloqueado.");
+        res.status(401).send("Unauthorized");
+        return;
     }
     v2_1.logger.info(`[asaasWebhook] Evento: ${event}`, { payment });
     // 4) Processa apenas eventos de pagamento confirmado
@@ -650,6 +784,29 @@ exports.asaasWebhook = (0, https_1.onRequest)({
     const totalPrice = (_e = order["totalPrice"]) !== null && _e !== void 0 ? _e : 0;
     const items = (_f = order["items"]) !== null && _f !== void 0 ? _f : [];
     const hasSubscription = items.some((i) => i.isSubscription === true);
+    // DEFESA EM PROFUNDIDADE: nunca confia só no corpo do webhook.
+    // Reconsulta a cobrança no Asaas e confirma que ela está paga E pelo
+    // valor esperado do pedido antes de conceder qualquer benefício.
+    const orderChargeId = (_g = order["chargeId"]) !== null && _g !== void 0 ? _g : payment.id;
+    const charge = await (0, asaasService_1.getChargeDetails)(orderChargeId);
+    if (!charge) {
+        v2_1.logger.error(`[asaasWebhook] Não foi possível reconsultar a cobrança ${orderChargeId}. Abortando concessão.`);
+        res.status(200).send("Charge re-verification failed");
+        return;
+    }
+    const asaasConfirmed = charge.status === "RECEIVED" ||
+        charge.status === "CONFIRMED" ||
+        charge.status === "RECEIVED_IN_CASH";
+    if (!asaasConfirmed) {
+        v2_1.logger.warn(`[asaasWebhook] Cobrança ${orderChargeId} não confirmada no Asaas (status=${charge.status}). Ignorando.`);
+        res.status(200).send("Charge not confirmed at Asaas");
+        return;
+    }
+    if (Math.abs(charge.value - totalPrice) > PRICE_EPSILON) {
+        v2_1.logger.error(`[asaasWebhook] Valor divergente: Asaas=${charge.value} pedido=${totalPrice}. Abortando concessão.`);
+        res.status(200).send("Amount mismatch");
+        return;
+    }
     // 5) Batch: marca pedido como pago + incrementa pontos/premium + grava transação
     const batch = db.batch();
     // Atualiza status do pedido
@@ -710,9 +867,13 @@ exports.startTrial = (0, https_1.onCall)({
     const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
     if (!uid)
         throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("payment", uid, "startTrial"), rateLimiter_1.RATE_PAYMENT.limit, rateLimiter_1.RATE_PAYMENT.windowMs);
     const { planId, cardTokenId } = request.data;
     if (!planId)
         throw new https_1.HttpsError("invalid-argument", "planId é obrigatório.");
+    if (!PLAN_CATALOG[planId]) {
+        throw new https_1.HttpsError("invalid-argument", `Plano inválido: ${planId}.`);
+    }
     const userRef = db.collection("users").doc(uid);
     const snap = await userRef.get();
     if (!snap.exists)
@@ -815,18 +976,65 @@ exports.processTrialExpiry = (0, scheduler_1.onSchedule)({
     await batch.commit();
     v2_1.logger.info(`[processTrialExpiry] ${expiredSnap.size} trial(s) expirado(s) e revogado(s).`);
 });
+exports.checkDeviceTrust = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    const { deviceId } = request.data;
+    if (!deviceId) {
+        return { trusted: false };
+    }
+    try {
+        const deviceRef = db
+            .collection("users")
+            .doc(uid)
+            .collection("trusted_devices")
+            .doc(deviceId);
+        const snap = await deviceRef.get();
+        if (!snap.exists) {
+            return { trusted: false };
+        }
+        const data = snap.data();
+        // Checa expiração
+        if (data["expiresAt"]) {
+            const expiresAt = data["expiresAt"].toMillis();
+            if (Date.now() > expiresAt) {
+                // Expirado — remove em background
+                deviceRef.delete().catch(() => { });
+                return { trusted: false };
+            }
+        }
+        // Atualiza lastSeenAt sem bloquear a resposta
+        deviceRef.update({ lastSeenAt: admin.firestore.FieldValue.serverTimestamp() }).catch(() => { });
+        v2_1.logger.info(`[checkDeviceTrust] uid=${uid} deviceId=${deviceId} trusted=true`);
+        return { trusted: true };
+    }
+    catch (e) {
+        v2_1.logger.error(`[checkDeviceTrust] Erro ao verificar dispositivo: ${e}`);
+        return { trusted: false };
+    }
+});
 exports.sendEmailVerificationCode = (0, https_1.onCall)({
     region: "southamerica-east1",
     secrets: [SMTP_USER, SMTP_PASS],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
-    var _a, _b, _c, _d, _e, _f, _g;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
     // Aceita chamadas autenticadas (login) e também não-autenticadas
     // (registro antes do primeiro login) — o e-mail é validado abaixo.
     const { email } = request.data;
     if (!email || typeof email !== "string" || !email.includes("@")) {
         throw new https_1.HttpsError("invalid-argument", "E-mail inválido.");
     }
+    // Rate-limit por IP (impede bombardeio de muitos e-mails distintos a
+    // partir do mesmo cliente / abuso do SMTP). 5 envios / 15 min por IP.
+    const ip = (_b = (_a = request.rawRequest) === null || _a === void 0 ? void 0 : _a.ip) !== null && _b !== void 0 ? _b : "unknown";
+    await (0, rateLimiter_1.checkRateLimit)(`auth:ip_${ip}:sendOtp`, rateLimiter_1.RATE_AUTH.limit, rateLimiter_1.RATE_AUTH.windowMs);
     // Rate-limit simples: máx. 5 envios por hora por e-mail
     const rateLimitRef = db
         .collection("_otp_rate_limits")
@@ -834,8 +1042,8 @@ exports.sendEmailVerificationCode = (0, https_1.onCall)({
     const rlSnap = await rateLimitRef.get();
     if (rlSnap.exists) {
         const rlData = rlSnap.data();
-        const windowStart = (_b = (_a = rlData["windowStart"]) === null || _a === void 0 ? void 0 : _a.toMillis()) !== null && _b !== void 0 ? _b : 0;
-        const count = (_c = rlData["count"]) !== null && _c !== void 0 ? _c : 0;
+        const windowStart = (_d = (_c = rlData["windowStart"]) === null || _c === void 0 ? void 0 : _c.toMillis()) !== null && _d !== void 0 ? _d : 0;
+        const count = (_e = rlData["count"]) !== null && _e !== void 0 ? _e : 0;
         const now = Date.now();
         if (now - windowStart < 60 * 60 * 1000 && count >= 5) {
             throw new https_1.HttpsError("resource-exhausted", "Muitas tentativas. Aguarde 1 hora antes de solicitar um novo código.");
@@ -851,11 +1059,11 @@ exports.sendEmailVerificationCode = (0, https_1.onCall)({
     else {
         await rateLimitRef.set({ windowStart: admin.firestore.Timestamp.now(), count: 1 });
     }
-    // Gera código OTP de 6 dígitos
-    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    // Gera código OTP de 6 dígitos com gerador criptograficamente seguro
+    const otp = String(crypto.randomInt(100000, 1000000));
     const expiresAt = admin.firestore.Timestamp.fromMillis(Date.now() + 10 * 60 * 1000); // 10 min
     // Salva o OTP no Firestore (a coleção usa o e-mail normalizado como doc ID)
-    const uid = (_e = (_d = request.auth) === null || _d === void 0 ? void 0 : _d.uid) !== null && _e !== void 0 ? _e : null;
+    const uid = (_g = (_f = request.auth) === null || _f === void 0 ? void 0 : _f.uid) !== null && _g !== void 0 ? _g : null;
     const otpDocId = email.toLowerCase().replace(/[^a-z0-9]/g, "_");
     await db.collection("_email_otps").doc(otpDocId).set({
         email,
@@ -866,8 +1074,8 @@ exports.sendEmailVerificationCode = (0, https_1.onCall)({
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
     // Envia o e-mail via SMTP
-    const smtpUser = (_f = process.env.SMTP_USER) !== null && _f !== void 0 ? _f : "";
-    const smtpPass = (_g = process.env.SMTP_PASS) !== null && _g !== void 0 ? _g : "";
+    const smtpUser = (_h = process.env.SMTP_USER) !== null && _h !== void 0 ? _h : "";
+    const smtpPass = (_j = process.env.SMTP_PASS) !== null && _j !== void 0 ? _j : "";
     if (!smtpUser || !smtpPass) {
         v2_1.logger.error("[sendEmailVerificationCode] SMTP_USER ou SMTP_PASS não configurados.");
         throw new https_1.HttpsError("internal", "Serviço de e-mail não configurado. Entre em contato com o suporte.");
@@ -905,6 +1113,9 @@ exports.verifyEmailCode = (0, https_1.onCall)({
     if (!uid) {
         throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
     }
+    // Rate limit por uid: impede brute-force do OTP (complementa o cap de
+    // 5 tentativas por código já existente).
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("auth", uid, "verifyEmailCode"), rateLimiter_1.RATE_AUTH.limit, rateLimiter_1.RATE_AUTH.windowMs);
     const { code, deviceId, deviceName } = request.data;
     if (!code || code.length !== 6) {
         return { verified: false, error: "Código inválido." };
@@ -954,15 +1165,90 @@ exports.verifyEmailCode = (0, https_1.onCall)({
         .doc(uid)
         .collection("trusted_devices")
         .doc(deviceId);
+    // rememberDevice=true → 30 dias; false/omitido → 1 dia
+    const rememberDevice = request.data.rememberDevice === true;
+    const daysToTrust = rememberDevice ? 30 : 1;
+    const deviceExpiresAt = admin.firestore.Timestamp.fromMillis(Date.now() + daysToTrust * 24 * 60 * 60 * 1000);
     batch.set(deviceRef, {
         deviceId,
         deviceName: deviceName !== null && deviceName !== void 0 ? deviceName : "Dispositivo desconhecido",
         verifiedAt: admin.firestore.FieldValue.serverTimestamp(),
         lastSeenAt: admin.firestore.FieldValue.serverTimestamp(),
+        expiresAt: deviceExpiresAt,
+        rememberDevice,
     });
     batch.delete(otpDoc.ref);
     await batch.commit();
     v2_1.logger.info(`[verifyEmailCode] uid=${uid} dispositivo ${deviceId} verificado com sucesso.`);
     return { verified: true };
+});
+// ────────────────────────────────────────────────────────────────
+// deleteAccount — Exclui PERMANENTEMENTE a conta e todos os dados
+// ────────────────────────────────────────────────────────────────
+// Remove tudo que se refere ao usuário, inclusive o nome dele no
+// ranking (em TODAS as semanas). Roda com Admin SDK, então ignora as
+// Security Rules que bloqueiam escrita em /rankings. Ordem:
+//   1. Sai do clã (transfere liderança ou apaga o clã se ficar vazio)
+//   2. Apaga as entradas de ranking de todas as semanas
+//   3. Apaga public_profiles/{uid}
+//   4. Apaga users/{uid} + todas as subcoleções
+//   5. Apaga o usuário do Firebase Auth
+// ────────────────────────────────────────────────────────────────
+exports.deleteAccount = (0, https_1.onCall)({
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a, _b;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid) {
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    }
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("auth", uid, "deleteAccount"), rateLimiter_1.RATE_AUTH.limit, rateLimiter_1.RATE_AUTH.windowMs);
+    const userRef = db.collection("users").doc(uid);
+    const userSnap = await userRef.get();
+    const clanId = userSnap.exists
+        ? (_b = userSnap.data()) === null || _b === void 0 ? void 0 : _b["clanId"]
+        : undefined;
+    // 1. Sai do clã
+    if (clanId) {
+        try {
+            await removeUserFromClan(clanId, uid);
+        }
+        catch (e) {
+            v2_1.logger.warn(`[deleteAccount] falha ao sair do clã ${clanId}:`, e);
+        }
+    }
+    // 2. Remove o usuário do ranking em TODAS as semanas
+    try {
+        const weeklyDoc = db.collection("rankings").doc("weekly");
+        const weekCols = await weeklyDoc.listCollections();
+        await Promise.all(weekCols.map((col) => col.doc(uid).delete().catch(() => { })));
+    }
+    catch (e) {
+        v2_1.logger.warn("[deleteAccount] falha ao limpar rankings:", e);
+    }
+    // 3. Apaga o perfil público
+    try {
+        await db.recursiveDelete(db.collection("public_profiles").doc(uid));
+    }
+    catch (e) {
+        v2_1.logger.warn("[deleteAccount] falha ao apagar public_profile:", e);
+    }
+    // 4. Apaga o documento do usuário e todas as subcoleções
+    try {
+        await db.recursiveDelete(userRef);
+    }
+    catch (e) {
+        v2_1.logger.warn("[deleteAccount] falha ao apagar user doc:", e);
+    }
+    // 5. Apaga o usuário do Firebase Auth (por último)
+    try {
+        await admin.auth().deleteUser(uid);
+    }
+    catch (e) {
+        v2_1.logger.warn("[deleteAccount] falha ao apagar auth user:", e);
+    }
+    v2_1.logger.info(`[deleteAccount] conta ${uid} excluída permanentemente.`);
+    return { ok: true };
 });
 //# sourceMappingURL=index.js.map

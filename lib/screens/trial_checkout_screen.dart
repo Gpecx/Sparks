@@ -105,7 +105,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
 
       await callable.call<Map<String, dynamic>>({
         'planId': widget.plan.planId,
-        'cpfCnpj': _cpfCtrl.text.trim().replaceAll(RegExp(r'\D'), ''),
+        'cpfCnpj': _cpfCtrl.text.trim(),
         'cardHolderName': _holderCtrl.text.trim(),
         'cardNumber': _cardCtrl.text.replaceAll(' ', ''),
         'cardExpiryMonth': expParts.isNotEmpty ? expParts[0] : '',
@@ -370,13 +370,13 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                 const SizedBox(height: 12),
                 _buildField(
                   controller: _cpfCtrl,
-                  hint: 'CPF (somente números)',
+                  hint: 'CPF/CNPJ',
                   icon: Icons.badge_outlined,
-                  keyboardType: TextInputType.number,
-                  maxLength: 11,
+                  keyboardType: TextInputType.text,
+                  maxLength: 14,
                   validator: (v) {
                     final d = v?.trim() ?? '';
-                    if (d.length != 11) return 'CPF deve ter 11 dígitos';
+                    if (d.length < 11) return 'CPF/CNPJ inválido';
                     return null;
                   },
                 ),

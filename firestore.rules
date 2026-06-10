@@ -1,5 +1,10 @@
 rules_version = '2';
 
+// Endurecimento de segurança pré-lançamento (2026-06-10):
+// - orders: leitura restrita ao dono;
+// - rankings: escrita só via Cloud Functions (Admin SDK);
+// - clãs: bloqueio de auto-promoção a admin e de autoria forjada.
+
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -192,18 +197,28 @@ service cloud.firestore {
 
     match /clans/{clanId} {
       allow read: if isAuthenticated();
-      allow create: if isAuthenticated();
-      allow update: if isClanMember(clanId)
+      // O criador deve ser sempre o próprio chamador (impede forjar dono).
+      allow create: if isAuthenticated() && request.resource.data.createdBy == request.auth.uid;
+      // Só admin/moderador/dono podem reescrever o doc do clã.
+      // Membros comuns só podem mexer no contador (memberCount) ao entrar/sair.
+      allow update: if isClanAdminOrModerator(clanId)
+        || resource.data.createdBy == request.auth.uid
+        || isAdmin()
         || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['memberCount']) && isAuthenticated());
       allow delete: if resource.data.createdBy == request.auth.uid || isClanAdmin(clanId) || isAdmin();
 
       match /members/{memberUid} {
         allow read: if isAuthenticated();
-        allow create: if request.auth.uid == memberUid
-          || isClanAdminOrModerator(clanId)
+        // Auto-cadastro só é permitido como 'membro'. Papéis elevados
+        // (admin/moderador) só por admin/mod existente ou pelo dono do clã.
+        allow create: if isClanAdminOrModerator(clanId)
           || isAdmin()
-          || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
-        allow update: if request.auth.uid == memberUid
+          || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid
+          || (request.auth.uid == memberUid && request.resource.data.role == 'membro');
+        // O próprio membro pode editar seu doc, MAS nunca o campo 'role'
+        // (impede auto-promoção a admin/moderador do clã).
+        allow update: if (request.auth.uid == memberUid
+            && !('role' in request.resource.data.diff(resource.data).affectedKeys()))
           || isClanAdminOrModerator(clanId)
           || isAdmin()
           || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
@@ -215,7 +230,10 @@ service cloud.firestore {
       }
 
       match /messages/{id} {
-        allow create: if isClanMember(clanId);
+        // Só membros postam, e o autor (uid) precisa ser o próprio chamador
+        // (impede mensagens com autoria forjada).
+        allow create: if isClanMember(clanId)
+          && request.resource.data.uid == request.auth.uid;
         allow read: if isClanMember(clanId);
         allow update: if false;
         allow delete: if resource.data.uid == request.auth.uid
@@ -257,7 +275,9 @@ service cloud.firestore {
 
       match /{weekKey}/{uid} {
         allow read: if isAuthenticated();
-        allow write: if isAuthenticated() && request.auth.uid == uid;
+        // Pontuação do ranking é escrita SOMENTE pelas Cloud Functions
+        // (Admin SDK ignora estas regras). Cliente não pode forjar score.
+        allow write: if false;
       }
     }
 
@@ -331,7 +351,9 @@ service cloud.firestore {
     // Escrita exclusiva via Cloud Functions (Admin SDK — ignora regras).
 
     match /orders/{orderId} {
-      allow read: if isAuthenticated();
+      // Apenas o DONO do pedido pode ler (evita vazamento de dados de
+      // pagamento/PII entre usuários). Escrita só via Cloud Functions.
+      allow read: if isAuthenticated() && resource.data.uid == request.auth.uid;
       allow write: if false;
     }
 

@@ -25,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscurePassword = true;
   bool _isLoading = false;
   bool _isGoogleLoading = false;
+  bool _rememberDevice = false;
 
   @override
   void initState() {
@@ -88,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
           context,
           email: email,
           uid: user.uid,
+          rememberDevice: _rememberDevice,
         );
 
         if (!mounted) return;
@@ -200,6 +202,35 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             const SizedBox(height: 12),
+            // Checkbox "Lembrar este dispositivo"
+            Row(
+              children: [
+                SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: Checkbox(
+                    value: _rememberDevice,
+                    onChanged: (v) => setState(() => _rememberDevice = v ?? false),
+                    activeColor: AppColors.primary,
+                    checkColor: Colors.black,
+                    side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5), width: 1.5),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () => setState(() => _rememberDevice = !_rememberDevice),
+                  child: Text(
+                    'Lembrar este dispositivo por 30 dias',
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.7),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(

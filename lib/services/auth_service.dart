@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:spark_app/services/analytics_service.dart';
@@ -244,17 +245,30 @@ class AuthService {
     }
   }
 
-  /// Verifica se [deviceId] já foi validado para o usuário [uid].
+  /// Exclui PERMANENTEMENTE a conta do usuário e todos os dados associados.
+  ///
+  /// Chama a Cloud Function `deleteAccount`, que (via Admin SDK) apaga:
+  /// ranking de todas as semanas, vínculo/clã, public_profiles, o documento
+  /// users/{uid} com subcoleções e o próprio usuário do Firebase Auth.
+  /// Como o usuário do Auth é removido no servidor, não é necessário
+  /// reautenticar no cliente. Ao final, encerra a sessão local.
+  Future<void> deleteAccount() async {
+    final fn = FirebaseFunctions.instanceFor(region: 'southamerica-east1');
+    await fn.httpsCallable('deleteAccount').call();
+    // O usuário do Auth já não existe no servidor; limpa a sessão local.
+    try {
+      await _auth.signOut();
+    } catch (_) {}
+  }
+
+  /// Verifica via Cloud Function se [deviceId] é confiável e ainda não expirou.
+  /// Usa Admin SDK no backend, evitando bloqueio por Security Rules client-side.
   Future<bool> checkDeviceVerification(String uid, String deviceId) async {
     try {
-      final doc = await _firestore
-          .collection('users')
-          .doc(uid)
-          .collection('trustedDevices')
-          .doc(deviceId)
-          .get()
-          .timeout(const Duration(seconds: 5));
-      return doc.exists;
+      final fn = FirebaseFunctions.instanceFor(region: 'southamerica-east1');
+      final result = await fn.httpsCallable('checkDeviceTrust').call({'deviceId': deviceId});
+      final data = result.data as Map<dynamic, dynamic>;
+      return data['trusted'] == true;
     } catch (e) {
       debugPrint('Aviso: falha ao checar dispositivo confiável: $e');
       return false;
