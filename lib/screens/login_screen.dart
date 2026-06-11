@@ -29,26 +29,26 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _rememberDevice = false;
 
   @override
-  void initState() {
-    super.initState();
-    if (widget.prefillEmail != null) {
-      _emailController.text = widget.prefillEmail!;
-    }
-    if (widget.prefillPassword != null) {
-      _passwordController.text = widget.prefillPassword!;
-    }
-  }
-
-  static const _devEmail = String.fromEnvironment('SPARK_DEV_EMAIL');
+ static const _devEmail = String.fromEnvironment('SPARK_DEV_EMAIL');
   static const _devPassword = String.fromEnvironment('SPARK_DEV_PASSWORD');
   static const _devAutoLogin = bool.fromEnvironment('SPARK_DEV_AUTOLOGIN', defaultValue: false);
 
   @override
   void initState() {
     super.initState();
+
+    // Prefill explícito (ex: vindo do cadastro) tem prioridade.
+    if (widget.prefillEmail != null) {
+      _emailController.text = widget.prefillEmail!;
+    }
+    if (widget.prefillPassword != null) {
+      _passwordController.text = widget.prefillPassword!;
+    }
+
+    // Autofill de dev: só em debug, e só se o campo ainda estiver vazio.
     if (kDebugMode && _devEmail.isNotEmpty && _devPassword.isNotEmpty) {
-      _emailController.text = _devEmail;
-      _passwordController.text = _devPassword;
+      if (_emailController.text.isEmpty) _emailController.text = _devEmail;
+      if (_passwordController.text.isEmpty) _passwordController.text = _devPassword;
       if (_devAutoLogin) {
         WidgetsBinding.instance.addPostFrameCallback((_) => _handleLogin());
       }
