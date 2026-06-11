@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/progress_model.dart';
 import '../core/constants/fs.dart';
-import '../data/lessons_registry.dart';
+
 
 /// Representa uma atualização de progresso otimista em memória.
 class OptimisticProgress {
@@ -79,10 +79,7 @@ final userProgressProvider = Provider<AsyncValue<List<ProgressModel>>>((ref) {
         if (existing != null) {
           if (!existing.completedLessons.contains(opt.lessonId)) {
             final updatedLessons = <String>[...existing.completedLessons, opt.lessonId];
-            final totalLessons = getLessonsForModule(opt.moduleId).length;
-            final progressPercent = totalLessons > 0
-                ? (updatedLessons.length / totalLessons).clamp(0.0, 1.0)
-                : existing.progressPercent;
+            final progressPercent = existing.progressPercent;
             final isCompleted = progressPercent >= 1.0;
 
             mergedMap[opt.moduleId] = ProgressModel(
@@ -103,10 +100,7 @@ final userProgressProvider = Provider<AsyncValue<List<ProgressModel>>>((ref) {
         } else {
           // Novo progresso iniciado localmente
           final updatedLessons = <String>[opt.lessonId];
-          final totalLessons = getLessonsForModule(opt.moduleId).length;
-          final progressPercent = totalLessons > 0
-              ? (updatedLessons.length / totalLessons).clamp(0.0, 1.0)
-              : 1.0;
+          const progressPercent = 0.0;
           final isCompleted = progressPercent >= 1.0;
 
           mergedMap[opt.moduleId] = ProgressModel(

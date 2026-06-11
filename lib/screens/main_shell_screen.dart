@@ -13,20 +13,23 @@ import 'package:spark_app/screens/leaderboard_screen.dart';
 import 'package:spark_app/screens/profile_screen.dart';
 import 'package:spark_app/screens/store_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
+import 'package:spark_app/providers/user_provider.dart';
 
 class MainShellScreen extends ConsumerStatefulWidget {
-  const MainShellScreen({super.key});
+  final int initialTab;
+  const MainShellScreen({super.key, this.initialTab = 0});
 
   @override
   ConsumerState<MainShellScreen> createState() => MainShellScreenState();
 }
 
 class MainShellScreenState extends ConsumerState<MainShellScreen> {
-  int _currentIndex = 0;
+  late int _currentIndex;
 
   @override
   void initState() {
     super.initState();
+    _currentIndex = widget.initialTab;
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid != null) {
       CovenantService().initialize(uid);
@@ -60,6 +63,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
   @override
   Widget build(BuildContext context) {
     final isTestMode = ref.watch(devModeProvider);
+    final isAdmin = ref.watch(userModelProvider.select((user) => user.value?.isAdmin ?? false));
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -74,7 +78,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
 
         // ── Wrapper com banner TEST MODE (só em kDebugMode) ─────
         Widget scaffoldBody = mainContent;
-        if (kDebugMode && isTestMode) {
+        if (kDebugMode && isTestMode && isAdmin) {
           scaffoldBody = Column(
             children: [
               // Banner de aviso TEST MODE ACTIVE
@@ -89,7 +93,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
 
         // ── FAB de controle do Dev Mode ─────────────────────────
         Widget? devFab;
-        if (kDebugMode && isTestMode) {
+        if (kDebugMode && isTestMode && isAdmin) {
           devFab = _DevModeFab(
             onToggle: () => ref.read(devModeProvider.notifier).deactivate(),
           );

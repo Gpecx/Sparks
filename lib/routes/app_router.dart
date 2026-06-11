@@ -23,6 +23,7 @@ import 'package:spark_app/screens/change_password_screen.dart';
 import 'package:spark_app/screens/onboarding_screen.dart';
 import 'package:spark_app/screens/covenants_screen.dart';
 import 'package:spark_app/screens/support_screen.dart';
+import 'package:spark_app/screens/terms_of_use_screen.dart';
 import 'package:spark_app/core/admin/presentation/admin_dashboard_page.dart';
 import 'package:spark_app/screens/module_routing_screen.dart';
 
@@ -48,11 +49,27 @@ class AppRouter {
     },
     routes: [
       GoRoute(path: '/', builder: (context, state) => const WelcomeScreen()),
-      GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
+      GoRoute(
+        path: '/login',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return LoginScreen(
+            prefillEmail: extra?['email'] as String?,
+            prefillPassword: extra?['password'] as String?,
+          );
+        },
+      ),
       GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
       GoRoute(path: '/registration-success', builder: (context, state) => const RegistrationSuccessScreen()),
       GoRoute(path: '/forgot-password', builder: (context, state) => const ForgotPasswordScreen()),
-      GoRoute(path: '/home', builder: (context, state) => const MainShellScreen()),
+      GoRoute(
+        path: '/home',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final initialTab = extra?['tab'] as int? ?? 0;
+          return MainShellScreen(initialTab: initialTab);
+        },
+      ),
       GoRoute(path: '/my-progress', builder: (context, state) => const MyProgressScreen()),
       GoRoute(
         path: '/standard-detail',
@@ -77,6 +94,7 @@ class AppRouter {
       GoRoute(path: '/onboarding', builder: (context, state) => const OnboardingScreen()),
       GoRoute(path: '/covenants', builder: (context, state) => const CovenantsScreen()),
       GoRoute(path: '/support', builder: (context, state) => const SupportScreen()),
+      GoRoute(path: '/terms-of-use', builder: (context, state) => const TermsOfUseScreen()),
       GoRoute(path: '/admin', builder: (context, state) => const AdminDashboardPage()),
       GoRoute(
         path: '/module/:categoryId/:moduleId',

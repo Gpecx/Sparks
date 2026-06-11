@@ -15,11 +15,39 @@ import 'package:cached_network_image/cached_network_image.dart';
 //  LEADERBOARD SCREEN — Versão com Firebase
 //  MUDANÇAS:
 //  - Aba Global: busca ranking real do Firestore (weeklyXp)
-//  - Aba Clã: filtra pelo clanId do usuário logado
+//  - Aba Clã: exibe o ranking global de clãs
 //  - Aba Torneio: mantida como estava (TournamentService)
-//  - Posição do usuário logado destacada em todas as listas
-//  - Paginação com "Carregar mais" continua funcionando
+//  - Posição do usuário/clã destacada em todas as listas
 // ─────────────────────────────────────────────────────────────────
+
+class ClanRankingEntry {
+  final String id;
+  final String name;
+  final int weeklyXp;
+  final int iconCodePoint;
+  final String primaryColor;
+  int position;
+
+  ClanRankingEntry({
+    required this.id,
+    required this.name,
+    required this.weeklyXp,
+    required this.iconCodePoint,
+    required this.primaryColor,
+    this.position = 0,
+  });
+
+  factory ClanRankingEntry.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>? ?? {};
+    return ClanRankingEntry(
+      id: doc.id,
+      name: data['name'] ?? 'Clã',
+      weeklyXp: (data['weeklyXp'] as num?)?.toInt() ?? 0,
+      iconCodePoint: (data['iconCodePoint'] as num?)?.toInt() ?? Icons.shield.codePoint,
+      primaryColor: data['primaryColor']?.toString() ?? '#FFD700',
+    );
+  }
+}
 
 class LeaderboardScreen extends ConsumerStatefulWidget {
   const LeaderboardScreen({super.key});
@@ -37,14 +65,15 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
 
   // Dados do Firebase
   List<RankingEntry> _globalPlayers = [];
-  List<RankingEntry> _clanPlayers = [];
+  List<ClanRankingEntry> _clanRankings = [];
   bool _loadingGlobal = true;
   bool _loadingClan = true;
   String? _errorGlobal;
   String? _errorClan;
 
-  // Real-time stream do ranking global
+  // Real-time stream do ranking global e de clãs
   StreamSubscription<QuerySnapshot>? _globalStream;
+  StreamSubscription<QuerySnapshot>? _clanStream;
 
   // Paginação
   int _paginatedGlobalCount = 10;
@@ -57,12 +86,13 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         AnimationController(vsync: this, duration: const Duration(seconds: 4))
           ..repeat(reverse: true);
     _subscribeGlobal();
-    _loadClanOnce();
+    _subscribeClans();
   }
 
   @override
   void dispose() {
     _globalStream?.cancel();
+    _clanStream?.cancel();
     _controller.dispose();
     super.dispose();
   }
@@ -107,38 +137,46 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     );
   }
 
-  // ── Carga única do ranking de clã ─────────────────────────────────
-  Future<void> _loadClanOnce() async {
-    final userService = ref.read(userServiceProvider);
-    setState(() {
-      _loadingClan = true;
-      _errorClan = null;
-    });
-    try {
-      final data = await userService.getClanWeeklyRanking();
-      for (int i = 0; i < data.length; i++) {
-        data[i].position = i + 1;
-      }
-      if (mounted) {
-        setState(() {
-        _clanPlayers = data;
-        _loadingClan = false;
-      });
-      }
-    } catch (e) {
-      if (mounted) {
-        setState(() {
-        _errorClan = 'Erro ao carregar ranking do clã';
-        _loadingClan = false;
-      });
-      }
-    }
+  // ── Real-time listener para o ranking de clãs ───────────────────
+  void _subscribeClans() {
+    _clanStream?.cancel();
+    _clanStream = _db
+        .collection('clans')
+        .orderBy('weeklyXp', descending: true)
+        .limit(100)
+        .snapshots()
+        .listen(
+      (snap) {
+        final data = snap.docs
+            .map((doc) => ClanRankingEntry.fromFirestore(doc))
+            .toList();
+        for (int i = 0; i < data.length; i++) {
+          data[i].position = i + 1;
+        }
+        if (mounted) {
+          setState(() {
+            _clanRankings = data;
+            _loadingClan = false;
+            _errorClan = null;
+          });
+        }
+      },
+      onError: (e) {
+        if (mounted) {
+          setState(() {
+            _errorClan = 'Erro ao carregar ranking de clãs';
+            _loadingClan = false;
+          });
+        }
+      },
+    );
   }
 
   // ── Refresh manual (pull-to-refresh) ─────────────────────────────
   Future<void> _loadRankings() async {
     _subscribeGlobal(); // reinicia o stream
-    await _loadClanOnce();
+    _subscribeClans();
+    await Future.delayed(const Duration(milliseconds: 800));
   }
 
   @override
@@ -147,7 +185,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     final myUid = userService.uid;
 
     final players = _selectedTab == 1
-        ? _clanPlayers
+        ? _clanRankings
         : _globalPlayers.take(_paginatedGlobalCount).toList();
 
     final topThree = players.take(3).toList();
@@ -169,7 +207,15 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                   child: Row(
                     children: [
-                      _MoleculeIcon(size: 22),
+                      if (Navigator.canPop(context))
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                          onPressed: () => Navigator.pop(context),
+                        )
+                      else
+                        const _MoleculeIcon(size: 22),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -281,7 +327,8 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                                     2,
                                                     AppColors.greenDark,
                                                     120,
-                                                    myUid),
+                                                    myUid,
+                                                    userService.clanId),
                                               const SizedBox(width: 10),
                                               if (topThree.isNotEmpty)
                                                 _buildPodiumItem(
@@ -289,7 +336,8 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                                     1,
                                                     AppColors.primary,
                                                     160,
-                                                    myUid),
+                                                    myUid,
+                                                    userService.clanId),
                                               const SizedBox(width: 10),
                                               if (topThree.length > 2)
                                                 _buildPodiumItem(
@@ -297,14 +345,15 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                                     3,
                                                     const Color(0xFF5A9A6E),
                                                     100,
-                                                    myUid),
+                                                    myUid,
+                                                    userService.clanId),
                                             ],
                                           ),
                                         ),
                                         const SizedBox(height: 14),
                                         // Lista (posições 4+)
                                         ...rest.map((player) => _buildPlayerRow(
-                                            player, myUid)),
+                                            player, myUid, userService.clanId)),
                                         if (canLoadMoreGlobal)
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
@@ -338,9 +387,46 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
   }
 
   // ── Pódio ────────────────────────────────────────────────────────
+  Color _parseColor(String hexColor) {
+    hexColor = hexColor.replaceAll('#', '');
+    if (hexColor.length == 6) hexColor = 'FF$hexColor';
+    return Color(int.parse(hexColor, radix: 16));
+  }
+
   Widget _buildPodiumItem(
-      RankingEntry player, int place, Color color, double height, String myUid) {
-    final isMe = player.uid == myUid;
+      dynamic player, int place, Color color, double height, String myUid, String? myClanId) {
+    bool isMe = false;
+    String photoUrl = '';
+    String displayName = '';
+    int weeklyXp = 0;
+    Widget avatar;
+
+    if (player is RankingEntry) {
+      isMe = player.uid == myUid;
+      photoUrl = player.photoUrl ?? '';
+      displayName = player.displayName;
+      weeklyXp = player.weeklyXp;
+      
+      avatar = photoUrl.isNotEmpty
+          ? CachedNetworkImage(
+              imageUrl: photoUrl,
+              fit: BoxFit.cover,
+              errorWidget: (c, u, e) => _defaultAvatar(color))
+          : _defaultAvatar(color);
+    } else if (player is ClanRankingEntry) {
+      isMe = player.id == myClanId;
+      displayName = player.name;
+      weeklyXp = player.weeklyXp;
+      
+      final clanColor = _parseColor(player.primaryColor);
+      avatar = Container(
+        color: clanColor.withValues(alpha: 0.2),
+        child: Icon(IconData(player.iconCodePoint, fontFamily: 'MaterialIcons'), color: clanColor, size: 24),
+      );
+    } else {
+      return const SizedBox();
+    }
+
     final medal = place == 1 ? '🥇' : place == 2 ? '🥈' : '🥉';
 
     return Expanded(
@@ -357,18 +443,11 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
               border: Border.all(
                   color: isMe ? AppColors.gold : color, width: isMe ? 2.5 : 2),
             ),
-            child: ClipOval(
-              child: player.photoUrl != null
-                  ? CachedNetworkImage(
-                      imageUrl: player.photoUrl!,
-                      fit: BoxFit.cover,
-                      errorWidget: (c, u, e) => _defaultAvatar(color))
-                  : _defaultAvatar(color),
-            ),
+            child: ClipOval(child: avatar),
           ),
           const SizedBox(height: 6),
           Text(
-            _shortName(player.displayName),
+            _shortName(displayName),
             style: TextStyle(
                 color: isMe ? AppColors.gold : Colors.white,
                 fontSize: 11,
@@ -378,7 +457,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           ),
           const SizedBox(height: 4),
           Text(
-            '${player.weeklyXp} XP',
+            '$weeklyXp XP',
             style:
                 TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w600),
           ),
@@ -412,8 +491,41 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
   }
 
   // ── Linha de jogador (posições 4+) ──────────────────────────────
-  Widget _buildPlayerRow(RankingEntry player, String myUid) {
-    final isMe = player.uid == myUid;
+  Widget _buildPlayerRow(dynamic player, String myUid, String? myClanId) {
+    bool isMe = false;
+    String displayName = '';
+    String? subName;
+    int weeklyXp = 0;
+    int position = 0;
+    Widget avatar;
+
+    if (player is RankingEntry) {
+      isMe = player.uid == myUid;
+      displayName = isMe ? '${player.displayName} (Você)' : player.displayName;
+      subName = player.clanName;
+      weeklyXp = player.weeklyXp;
+      position = player.position;
+
+      avatar = player.photoUrl != null
+          ? CachedNetworkImage(
+              imageUrl: player.photoUrl!,
+              fit: BoxFit.cover,
+              errorWidget: (c, u, e) => _defaultAvatar(AppColors.primary))
+          : _defaultAvatar(AppColors.primary);
+    } else if (player is ClanRankingEntry) {
+      isMe = player.id == myClanId;
+      displayName = isMe ? '${player.name} (Seu Clã)' : player.name;
+      weeklyXp = player.weeklyXp;
+      position = player.position;
+
+      final clanColor = _parseColor(player.primaryColor);
+      avatar = Container(
+        color: clanColor.withValues(alpha: 0.2),
+        child: Icon(IconData(player.iconCodePoint, fontFamily: 'MaterialIcons'), color: clanColor, size: 20),
+      );
+    } else {
+      return const SizedBox();
+    }
 
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
@@ -433,7 +545,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           SizedBox(
             width: 32,
             child: Text(
-              '#${player.position}',
+              '#$position',
               style: TextStyle(
                   color: isMe ? AppColors.primary : AppColors.textMuted,
                   fontSize: 13,
@@ -451,15 +563,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                       ? AppColors.primary
                       : AppColors.cardBorder.withValues(alpha: 0.4)),
             ),
-            child: ClipOval(
-              child: player.photoUrl != null
-                  ? CachedNetworkImage(
-                      imageUrl: player.photoUrl!,
-                      fit: BoxFit.cover,
-                      errorWidget: (c, u, e) =>
-                          _defaultAvatar(AppColors.primary))
-                  : _defaultAvatar(AppColors.primary),
-            ),
+            child: ClipOval(child: avatar),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -467,21 +571,21 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  isMe ? '${player.displayName} (Você)' : player.displayName,
+                  displayName,
                   style: TextStyle(
                       color: isMe ? AppColors.primary : Colors.white,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
                 ),
-                if (player.clanName != null)
-                  Text(player.clanName!,
+                if (subName != null)
+                  Text(subName,
                       style: const TextStyle(
                           color: AppColors.textMuted, fontSize: 11)),
               ],
             ),
           ),
           Text(
-            '${player.weeklyXp} XP',
+            '$weeklyXp XP',
             style: TextStyle(
                 color: isMe ? AppColors.primary : AppColors.textSecondary,
                 fontSize: 12,
@@ -492,32 +596,48 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     );
   }
 
-  /// Mostra a posição do usuário fixada no fundo se ele não estiver
+  /// Mostra a posição do usuário ou clã fixada no fundo se ele não estiver
   /// na lista visível.
   Widget _buildMyPositionFooter(
-      List<RankingEntry> visiblePlayers, String myUid, UserService userService) {
-    final isVisible = visiblePlayers.any((p) => p.uid == myUid);
-    if (isVisible) return const SizedBox.shrink();
+      List<dynamic> visiblePlayers, String myUid, UserService userService) {
+    if (_selectedTab == 0) {
+      final isVisible = visiblePlayers.any((p) => p is RankingEntry && p.uid == myUid);
+      if (isVisible) return const SizedBox.shrink();
 
-    // Encontra nos dados completos
-    final allPlayers =
-        _selectedTab == 0 ? _globalPlayers : _clanPlayers;
-    final myIndex = allPlayers.indexWhere((p) => p.uid == myUid);
-    if (myIndex < 0) return const SizedBox.shrink();
+      final myIndex = _globalPlayers.indexWhere((p) => p.uid == myUid);
+      if (myIndex < 0) return const SizedBox.shrink();
 
-    final me = allPlayers[myIndex];
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Text('• • •',
-              style: TextStyle(
-                  color: AppColors.textMuted.withValues(alpha: 0.5),
-                  fontSize: 14)),
-        ),
-        _buildPlayerRow(me, myUid),
-      ],
-    );
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text('• • •', style: TextStyle(color: AppColors.textMuted.withValues(alpha: 0.5), fontSize: 14)),
+          ),
+          _buildPlayerRow(_globalPlayers[myIndex], myUid, userService.clanId),
+        ],
+      );
+    } else if (_selectedTab == 1) {
+      final myClanId = userService.clanId;
+      if (myClanId == null) return const SizedBox.shrink();
+
+      final isVisible = visiblePlayers.any((p) => p is ClanRankingEntry && p.id == myClanId);
+      if (isVisible) return const SizedBox.shrink();
+
+      final myIndex = _clanRankings.indexWhere((c) => c.id == myClanId);
+      if (myIndex < 0) return const SizedBox.shrink();
+
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text('• • •', style: TextStyle(color: AppColors.textMuted.withValues(alpha: 0.5), fontSize: 14)),
+          ),
+          _buildPlayerRow(_clanRankings[myIndex], myUid, userService.clanId),
+        ],
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 
   Widget _buildErrorView() {
@@ -550,7 +670,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           const SizedBox(height: 12),
           Text(
             _selectedTab == 1
-                ? 'Seu clã ainda não tem membros no ranking'
+                ? 'Nenhum clã no ranking esta semana'
                 : 'Nenhum dado de ranking esta semana',
             style: const TextStyle(color: AppColors.textSecondary),
             textAlign: TextAlign.center,
@@ -662,7 +782,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         // Usa dados globais reais no torneio também
         ..._globalPlayers.take(8).map((player) {
           final userService = ref.read(userServiceProvider);
-          return _buildPlayerRow(player, userService.uid);
+          return _buildPlayerRow(player, userService.uid, userService.clanId);
         }),
       ],
     );

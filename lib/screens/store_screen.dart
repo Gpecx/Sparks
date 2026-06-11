@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/checkout_screen.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
+import 'package:spark_app/screens/trial_checkout_screen.dart';
+import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spark_app/providers/user_provider.dart';
 
 class CartNotifier extends Notifier<List<CartItem>> {
   @override
@@ -22,59 +23,208 @@ class CartNotifier extends Notifier<List<CartItem>> {
 
 final cartProvider = NotifierProvider<CartNotifier, List<CartItem>>(CartNotifier.new);
 
-class SparkPackage {
-  final int points;
-  final double price;
-  final String? badge;
-  const SparkPackage({required this.points, required this.price, this.badge});
-}
-
-const List<SparkPackage> sparkPackages = [
-  SparkPackage(points: 100, price: 4.99),
-  SparkPackage(points: 300, price: 12.99, badge: 'Popular'),
-  SparkPackage(points: 500, price: 19.99),
-  SparkPackage(points: 1000, price: 34.99, badge: 'Melhor Valor'),
-  SparkPackage(points: 2500, price: 79.99),
-];
-
-const int promoPoints = 500;
-const double promoOriginalPrice = 19.99;
-const double promoDiscountPrice = 9.99;
+// ─── Modelos de Plano ───────────────────────────────────────────────────────
 
 class SubscriptionPlan {
+  final String id;
   final String name;
+  final String subtitle;
   final double monthlyPrice;
-  final int bonusPoints;
-  final String period;
+  final double? annualPrice;
+  final String annualLabel;
+  final String targetAudience;
+  final List<String> features;
+  final IconData icon;
+  final Color accentColor;
+  final bool highlighted;
+  final bool perUser;
+  final int? minUsers;
   final String? badge;
-  const SubscriptionPlan({required this.name, required this.monthlyPrice, required this.bonusPoints, required this.period, this.badge});
+
+  const SubscriptionPlan({
+    required this.id,
+    required this.name,
+    required this.subtitle,
+    required this.monthlyPrice,
+    this.annualPrice,
+    this.annualLabel = '',
+    required this.targetAudience,
+    required this.features,
+    required this.icon,
+    required this.accentColor,
+    this.highlighted = false,
+    this.perUser = false,
+    this.minUsers,
+    this.badge,
+  });
 }
 
 const List<SubscriptionPlan> subscriptionPlans = [
-  SubscriptionPlan(name: 'Mensal', monthlyPrice: 29.90, bonusPoints: 200, period: '/mês'),
-  SubscriptionPlan(name: 'Trimestral', monthlyPrice: 24.90, bonusPoints: 350, period: '/mês', badge: 'Economize 17%'),
-  SubscriptionPlan(name: 'Semestral', monthlyPrice: 19.90, bonusPoints: 500, period: '/mês', badge: 'Mais Popular'),
-  SubscriptionPlan(name: 'Anual', monthlyPrice: 14.90, bonusPoints: 800, period: '/mês', badge: 'Melhor Oferta'),
+  SubscriptionPlan(
+    id: 'free',
+    name: 'SPARK Free',
+    subtitle: 'Comece sua jornada',
+    monthlyPrice: 0,
+    targetAudience: 'Curioso / experimentador',
+    icon: Icons.explore_outlined,
+    accentColor: Color(0xFF6B7280),
+    features: [
+      'Acesso a módulos básicos',
+      'Bateria limitada (recarrega em 5 min/unidade)',
+      'Ranking público',
+      'Conquistas básicas',
+    ],
+  ),
+  SubscriptionPlan(
+    id: 'student',
+    name: 'SPARK Student',
+    subtitle: 'Para quem está estudando',
+    monthlyPrice: 19.90,
+    annualPrice: 199,
+    annualLabel: 'Economia de 17%',
+    targetAudience: 'Estudante (com comprovação)',
+    icon: Icons.school_outlined,
+    accentColor: Color(0xFF3B82F6),
+    features: [
+      'Tudo do Free',
+      'Bateria infinita ∞',
+      'Acesso a módulos intermediários',
+      'Suporte via chat',
+      'Comprovante de matrícula necessário',
+    ],
+    badge: 'ACESSÍVEL',
+  ),
+  SubscriptionPlan(
+    id: 'pro',
+    name: 'SPARK Pro',
+    subtitle: 'Para profissionais individuais',
+    monthlyPrice: 39.90,
+    annualPrice: 399,
+    annualLabel: 'Economia de 17%',
+    targetAudience: 'Profissional individual',
+    icon: Icons.workspace_premium_outlined,
+    accentColor: AppColors.primary,
+    highlighted: true,
+    features: [
+      'Tudo do Student',
+      'Bateria infinita ∞',
+      'Todos os módulos desbloqueados',
+      'Duelos PvP',
+      'Certificados digitais',
+      'Suporte prioritário',
+    ],
+    badge: 'MAIS POPULAR',
+  ),
+  SubscriptionPlan(
+    id: 'premium',
+    name: 'SPARK Premium',
+    subtitle: 'Para sêniores e consultores',
+    monthlyPrice: 79.90,
+    annualPrice: 799,
+    annualLabel: 'Economia de 17%',
+    targetAudience: 'Sênior / consultor',
+    icon: Icons.diamond_outlined,
+    accentColor: Color(0xFFFFD700),
+    features: [
+      'Tudo do Pro',
+      'Bateria infinita ∞',
+      'Conteúdo avançado exclusivo',
+      'Mentoria em grupo mensal',
+      'Acesso antecipado a novidades',
+      'Suporte VIP 24h',
+    ],
+    badge: 'PREMIUM',
+  ),
+  SubscriptionPlan(
+    id: 'business',
+    name: 'SPARK Business',
+    subtitle: 'Para empresas e consultorias',
+    monthlyPrice: 29,
+    annualPrice: null,
+    annualLabel: 'Faturado anual',
+    targetAudience: 'Empresas e consultorias',
+    icon: Icons.business_outlined,
+    accentColor: Color(0xFF8B5CF6),
+    perUser: true,
+    minUsers: 5,
+    features: [
+      'Tudo do Premium por usuário',
+      'Bateria infinita ∞ para todos',
+      'Painel administrativo',
+      'Relatórios de progresso da equipe',
+      'Integração com RH',
+      'Gerente de conta dedicado',
+    ],
+    badge: 'EMPRESAS',
+  ),
 ];
 
-class StoreScreen extends ConsumerWidget {
+// ─── Tela da Loja ───────────────────────────────────────────────────────────
+
+class StoreScreen extends ConsumerStatefulWidget {
   const StoreScreen({super.key});
 
-  void _addToCart(BuildContext context, WidgetRef ref, CartItem item) {
+  @override
+  ConsumerState<StoreScreen> createState() => _StoreScreenState();
+}
+
+class _StoreScreenState extends ConsumerState<StoreScreen>
+    with SingleTickerProviderStateMixin {
+  bool _isAnnual = false;
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _onSubscribe(SubscriptionPlan plan) {
+    final period = _isAnnual && plan.annualPrice != null ? 'Anual' : 'Mensal';
+    final price = (_isAnnual && plan.annualPrice != null)
+        ? plan.annualPrice!
+        : plan.monthlyPrice;
+
+    final item = CartItem(
+      name: '${plan.name} — $period',
+      description: plan.subtitle,
+      price: price,
+      icon: plan.icon,
+      sparkPointsGranted: 0,
+      isSubscription: true,
+      planId: plan.id,
+    );
+
     ref.read(cartProvider.notifier).add(item);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${item.name} adicionado!'), backgroundColor: AppColors.primary, duration: const Duration(seconds: 1)),
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => CheckoutScreen(items: [item])),
+    ).then((_) => ref.read(cartProvider.notifier).clear());
+  }
+
+  void _onTrial(SubscriptionPlan plan) {
+    final info = TrialPlanInfo(
+      planId: plan.id,
+      planName: plan.name,
+      monthlyPrice: plan.monthlyPrice,
+      accentColor: plan.accentColor,
+      icon: plan.icon,
+    );
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => TrialCheckoutScreen(plan: info)),
     );
   }
 
-  void _openCheckout(BuildContext context, WidgetRef ref, List<CartItem> cart) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => CheckoutScreen(items: List.from(cart)))).then((_) {
-      ref.read(cartProvider.notifier).clear();
-    });
-  }
-
-  // === BOTÃO VOLTAR INTELIGENTE ===
-  Widget _buildSmartBackButton(BuildContext context) {
+  Widget _buildSmartBackButton() {
     return IconButton(
       icon: const Icon(Icons.arrow_back, color: Colors.white),
       onPressed: () {
@@ -89,133 +239,75 @@ class StoreScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final cart = ref.watch(cartProvider);
-    final userService = ref.watch(userServiceProvider);
-    
-    if (!(userService.user?.isAdmin ?? false)) {
-      return SparksBackground(
-        child: PcbBackground(
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: SafeArea(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 16, 20, 0),
-                    child: Row(
-                      children: [
-                        _buildSmartBackButton(context),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.lock_outline, size: 80, color: AppColors.primary),
-                          const SizedBox(height: 24),
-                          const Text(
-                            'LOJA EM REFORMA',
-                            style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold, letterSpacing: 2),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            'Nossos técnicos estão trabalhando em\nnovidades incríveis. Voltaremos em breve!',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: AppColors.textSecondary, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
+  Widget build(BuildContext context) {
     return SparksBackground(
       child: PcbBackground(
         child: Scaffold(
-          backgroundColor: Colors.transparent, 
+          backgroundColor: Colors.transparent,
           body: SafeArea(
             child: Column(
               children: [
-                // Header
+                // ── Header ─────────────────────────────────────────
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 16, 20, 0),
                   child: Row(
                     children: [
-                      _buildSmartBackButton(context), 
+                      _buildSmartBackButton(),
                       const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('LOJA SPARK', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 2)),
+                            Text('LOJA SPARK',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 2)),
                             SizedBox(height: 2),
-                            Text('Potencialize seu aprendizado', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                            Text('Escolha o plano ideal para você',
+                                style: TextStyle(
+                                    color: AppColors.textMuted, fontSize: 12)),
                           ],
                         ),
-                      ),
-                      // Carrinho
-                      MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                        onTap: cart.isEmpty ? null : () => _openCheckout(context, ref, cart),
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: AppColors.card,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: cart.isNotEmpty ? AppColors.primary.withValues(alpha: 0.5) : AppColors.cardBorder.withValues(alpha: 0.4)),
-                          ),
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Icon(Icons.shopping_cart_outlined, color: cart.isNotEmpty ? AppColors.primary : AppColors.textMuted, size: 22),
-                              if (cart.isNotEmpty)
-                                Positioned(
-                                  top: -6, right: -6,
-                                  child: Container(
-                                    width: 17, height: 17,
-                                    decoration: const BoxDecoration(color: AppColors.error, shape: BoxShape.circle),
-                                    child: Center(child: Text('${cart.length}', style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w800))),
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
-                Expanded(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(height: 20),
+
+                // ── Toggle Mensal / Anual ───────────────────────────
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: AppColors.card,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                          color: AppColors.cardBorder.withValues(alpha: 0.4)),
+                    ),
+                    child: Row(
                       children: [
-                        // Promo card
-                        _promoCard(context, ref),
-                        const SizedBox(height: 28),
-                        _sectionTitle('PACOTES DE PONTOS', Icons.bolt),
-                        const SizedBox(height: 12),
-                        ...sparkPackages.map((p) => Padding(padding: const EdgeInsets.only(bottom: 10), child: _packageCard(context, ref, p))),
-                        const SizedBox(height: 16),
-                        _sectionTitle('PLANOS DE ASSINATURA', Icons.card_membership_outlined),
-                        const SizedBox(height: 4),
-                        Text('Ganhe pontos bônus todo mês automaticamente!', style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 12)),
-                        const SizedBox(height: 12),
-                        ...subscriptionPlans.map((p) => Padding(padding: const EdgeInsets.only(bottom: 10), child: _planCard(context, ref, p))),
-                        const SizedBox(height: 32),
+                        _buildToggleOption('Mensal', !_isAnnual, () {
+                          setState(() => _isAnnual = false);
+                        }),
+                        _buildToggleOption('Anual', _isAnnual, () {
+                          setState(() => _isAnnual = true);
+                        }, badge: 'Economize 17%'),
                       ],
                     ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // ── Lista de Planos ─────────────────────────────────
+                Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(20, 4, 20, 32),
+                    itemCount: subscriptionPlans.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 12),
+                    itemBuilder: (_, i) =>
+                        _buildPlanCard(subscriptionPlans[i]),
                   ),
                 ),
               ],
@@ -226,179 +318,368 @@ class StoreScreen extends ConsumerWidget {
     );
   }
 
-  Widget _sectionTitle(String t, IconData icon) {
-    return Row(
-      children: [
-        Icon(icon, color: AppColors.primary, size: 16),
-        const SizedBox(width: 8),
-        Text(t, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
-      ],
+  Widget _buildToggleOption(String label, bool selected, VoidCallback onTap,
+      {String? badge}) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          decoration: BoxDecoration(
+            color: selected ? AppColors.primary : Colors.transparent,
+            borderRadius: BorderRadius.circular(9),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                label,
+                style: TextStyle(
+                  color: selected ? Colors.white : AppColors.textMuted,
+                  fontWeight:
+                      selected ? FontWeight.w800 : FontWeight.w500,
+                  fontSize: 13,
+                ),
+              ),
+              if (badge != null) ...[
+                const SizedBox(width: 6),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: selected
+                        ? Colors.white.withValues(alpha: 0.2)
+                        : AppColors.primary.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    badge,
+                    style: TextStyle(
+                      color: selected ? Colors.white : AppColors.primary,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
     );
   }
 
-  Widget _promoCard(BuildContext context, WidgetRef ref) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
+  Widget _buildPlanCard(SubscriptionPlan plan) {
+    final isFree = plan.monthlyPrice == 0;
+    final isAnnualAvailable = plan.annualPrice != null;
+    final showAnnual = _isAnnual && isAnnualAvailable;
+
+    final displayPrice = isFree
+        ? 'Grátis'
+        : showAnnual
+            ? 'R\$ ${(plan.annualPrice! / 12).toStringAsFixed(2)}/mês'
+            : 'R\$ ${plan.monthlyPrice.toStringAsFixed(2)}${plan.perUser ? '/usuário/mês' : '/mês'}';
+
+    final subPrice = isFree
+        ? null
+        : showAnnual
+            ? 'R\$ ${plan.annualPrice!.toStringAsFixed(0)} faturados anualmente'
+            : plan.perUser
+                ? 'Mín. ${plan.minUsers} usuários • Faturado anual'
+                : (isAnnualAvailable ? 'Ou ${plan.annualLabel} no plano anual' : plan.annualLabel);
+
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 250),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        gradient: const LinearGradient(colors: [Color(0xFF0D3B1A), Color(0xFF061629)], begin: Alignment.topLeft, end: Alignment.bottomRight),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.4), width: 1.5),
-        boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.12), blurRadius: 20, spreadRadius: 2)],
+        color: plan.highlighted
+            ? plan.accentColor.withValues(alpha: 0.08)
+            : AppColors.card,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: plan.highlighted
+              ? plan.accentColor.withValues(alpha: 0.6)
+              : AppColors.cardBorder.withValues(alpha: 0.3),
+          width: plan.highlighted ? 1.5 : 1,
+        ),
+        boxShadow: plan.highlighted
+            ? [
+                BoxShadow(
+                  color: plan.accentColor.withValues(alpha: 0.15),
+                  blurRadius: 20,
+                  spreadRadius: 2,
+                )
+              ]
+            : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(6)),
-                child: const Text('OFERTA DO DIA', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
-              ),
-              const Spacer(),
-              const Icon(Icons.timer_outlined, color: AppColors.primary, size: 16),
-              const SizedBox(width: 4),
-              Text('Expira em breve', style: TextStyle(color: AppColors.primary.withValues(alpha: 0.7), fontSize: 11)),
-            ],
-          ),
-          const SizedBox(height: 14),
-          const Text('⚡ Oferta Relâmpago do Dia!', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
-          const SizedBox(height: 4),
-          Text('Economize 50% neste pacote exclusivo', style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 13)),
-          const SizedBox(height: 14),
-          Row(
-            children: [
-              const Icon(Icons.bolt, color: AppColors.primary, size: 20),
-              const SizedBox(width: 6),
-              const Text('500 Pontos Spark', style: TextStyle(color: AppColors.primary, fontSize: 16, fontWeight: FontWeight.w700)),
-              const Spacer(),
-              Text('R\$ ${promoOriginalPrice.toStringAsFixed(2)}', style: TextStyle(color: Colors.white.withValues(alpha: 0.35), fontSize: 13, decoration: TextDecoration.lineThrough, decorationColor: Colors.white38)),
-              const SizedBox(width: 8),
-              Text('R\$ ${promoDiscountPrice.toStringAsFixed(2)}', style: const TextStyle(color: AppColors.primary, fontSize: 20, fontWeight: FontWeight.w800)),
-            ],
-          ),
-          const SizedBox(height: 14),
-          SizedBox(
-            width: double.infinity, height: 46,
-            child: ElevatedButton(
-              onPressed: () => _addToCart(context, ref, CartItem(name: '500 Pontos Spark (Promo)', description: 'Oferta Relâmpago', price: promoDiscountPrice, icon: Icons.bolt, sparkPointsGranted: promoPoints)),
-              child: const Text('APROVEITAR AGORA', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
+          // ── Cabeçalho do card ─────────────────────────────
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Ícone
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: plan.accentColor.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                        color: plan.accentColor.withValues(alpha: 0.3)),
+                  ),
+                  child: Icon(plan.icon, color: plan.accentColor, size: 24),
+                ),
+                const SizedBox(width: 12),
+                // Nome e público
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            plan.name,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          if (plan.badge != null) ...[
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 7, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: plan.accentColor.withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                    color:
+                                        plan.accentColor.withValues(alpha: 0.4)),
+                              ),
+                              child: Text(
+                                plan.badge!,
+                                style: TextStyle(
+                                  color: plan.accentColor,
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        plan.subtitle,
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.5),
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Preço
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      displayPrice,
+                      style: TextStyle(
+                        color: isFree ? AppColors.textMuted : plan.accentColor,
+                        fontSize: isFree ? 16 : 17,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    if (subPrice != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: Text(
+                          subPrice,
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.35),
+                            fontSize: 9,
+                          ),
+                          textAlign: TextAlign.end,
+                        ),
+                      ),
+                  ],
+                ),
+              ],
             ),
+          ),
+
+          // ── Features ──────────────────────────────────────
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+            child: Column(
+              children: plan.features
+                  .map((f) => _buildFeatureRow(f, plan.accentColor))
+                  .toList(),
+            ),
+          ),
+
+          const SizedBox(height: 14),
+
+          // ── Botões contextuais ────────────────────────────────
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: _buildPlanButtons(plan),
           ),
         ],
       ),
     );
   }
 
-  Widget _packageCard(BuildContext context, WidgetRef ref, SparkPackage pkg) {
-    final hasBadge = pkg.badge != null;
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-      onTap: () => _addToCart(context, ref, CartItem(name: '${pkg.points} Pontos Spark', description: 'Pacote avulso', price: pkg.price, icon: Icons.bolt, sparkPointsGranted: pkg.points)),
-      child: Container(
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: AppColors.card, borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: hasBadge ? AppColors.primary.withValues(alpha: 0.4) : AppColors.cardBorder.withValues(alpha: 0.3)),
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 44, height: 44,
-              decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(10)),
-              child: const Icon(Icons.bolt, color: AppColors.primary, size: 24),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(children: [
-                    Text('${pkg.points} pts', style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700)),
-                    if (hasBadge) ...[
-                      const SizedBox(width: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                        decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(5), border: Border.all(color: AppColors.primary.withValues(alpha: 0.3))),
-                        child: Text(pkg.badge!, style: const TextStyle(color: AppColors.primary, fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 0.5)),
-                      ),
-                    ],
-                  ]),
-                  Text('R\$ ${(pkg.price / pkg.points * 100).toStringAsFixed(1)} por 100 pts', style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
-                ],
+  Widget _buildFeatureRow(String text, Color color) {
+    final isInfinity = text.contains('∞');
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: [
+          Icon(
+            isInfinity ? Icons.all_inclusive : Icons.check_circle_outline,
+            color: isInfinity ? color : color.withValues(alpha: 0.7),
+            size: 15,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(
+                color: isInfinity
+                    ? color
+                    : Colors.white.withValues(alpha: 0.75),
+                fontSize: 12,
+                fontWeight:
+                    isInfinity ? FontWeight.w700 : FontWeight.normal,
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text('R\$ ${pkg.price.toStringAsFixed(2)}', style: const TextStyle(color: AppColors.primary, fontSize: 17, fontWeight: FontWeight.w800)),
-                const Icon(Icons.add_shopping_cart, color: AppColors.textMuted, size: 16),
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-    ),
+    );
+  }
+  // ── Botões contextuais baseados no estado do usuário ─────────────────────
+
+  Widget _buildPlanButtons(SubscriptionPlan plan) {
+    final user = ref.watch(userModelProvider).value;
+    final isFree = plan.monthlyPrice == 0;
+
+    if (isFree) {
+      final isCurrentPlan = user == null || (!user.isPremium && !user.isOnTrial);
+      return _disabledButton(isCurrentPlan ? 'SEU PLANO ATUAL' : 'PLANO BÁSICO');
+    }
+
+    // Em trial nesse plano
+    if (user?.isOnTrial == true && user?.subscriptionPlanId == plan.id) {
+      final remaining = _trialDaysRemaining(user!.trialEndsAt);
+      return _disabledButton(
+        remaining > 0
+            ? 'TRIAL ATIVO — $remaining dia${remaining == 1 ? '' : 's'} restante${remaining == 1 ? '' : 's'}'
+            : 'TRIAL ENCERRADO',
+        color: plan.accentColor,
+      );
+    }
+
+    // Já assina esse plano
+    if (user?.isPremium == true && user?.isOnTrial != true && user?.subscriptionPlanId == plan.id) {
+      return _disabledButton('PLANO ATUAL ✓', color: plan.accentColor);
+    }
+
+    // Assinante de outro plano — upgrade
+    if (user?.isPremium == true || user?.isOnTrial == true) {
+      return SizedBox(
+        width: double.infinity,
+        height: 44,
+        child: ElevatedButton(
+          onPressed: () => _onSubscribe(plan),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: plan.accentColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          ),
+          child: Text(
+            'FAZER UPGRADE PARA ${plan.name.split(' ').last.toUpperCase()}',
+            style: const TextStyle(
+                color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 0.8),
+          ),
+        ),
+      );
+    }
+
+    // Usuário Free — Assinar + Trial
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          height: 44,
+          child: ElevatedButton(
+            onPressed: () => _onSubscribe(plan),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: plan.accentColor,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            ),
+            child: Text(
+              'ASSINAR ${plan.name.split(' ').last.toUpperCase()}',
+              style: const TextStyle(
+                  color: Colors.white, fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        SizedBox(
+          width: double.infinity,
+          height: 38,
+          child: OutlinedButton.icon(
+            onPressed: () => _onTrial(plan),
+            style: OutlinedButton.styleFrom(
+              side: BorderSide(color: plan.accentColor.withValues(alpha: 0.5)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            ),
+            icon: Icon(Icons.all_inclusive, color: plan.accentColor, size: 14),
+            label: Text(
+              'TESTAR 7 DIAS GRÁTIS',
+              style: TextStyle(
+                  color: plan.accentColor, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.8),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _planCard(BuildContext context, WidgetRef ref, SubscriptionPlan plan) {
-    final isBest = plan.badge == 'Melhor Oferta';
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-      onTap: () => _addToCart(context, ref, CartItem(name: 'Plano ${plan.name}', description: '+${plan.bonusPoints} pts bônus/mês', price: plan.monthlyPrice, icon: isBest ? Icons.workspace_premium : Icons.card_membership, sparkPointsGranted: plan.bonusPoints)),
-      child: Container(
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: isBest ? AppColors.primary.withValues(alpha: 0.08) : AppColors.card,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: isBest ? AppColors.primary.withValues(alpha: 0.5) : AppColors.cardBorder.withValues(alpha: 0.3), width: isBest ? 1.5 : 1),
+  Widget _disabledButton(String label, {Color? color}) {
+    return SizedBox(
+      width: double.infinity,
+      height: 44,
+      child: OutlinedButton(
+        onPressed: null,
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(color: (color ?? AppColors.textMuted).withValues(alpha: 0.3)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 44, height: 44,
-              decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: isBest ? 0.18 : 0.10), borderRadius: BorderRadius.circular(10)),
-              child: Icon(isBest ? Icons.workspace_premium : Icons.card_membership_outlined, color: AppColors.primary, size: 22),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(children: [
-                    Text(plan.name, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
-                    if (plan.badge != null) ...[
-                      const SizedBox(width: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                        decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(5), border: Border.all(color: AppColors.primary.withValues(alpha: 0.3))),
-                        child: Text(plan.badge!, style: const TextStyle(color: AppColors.primary, fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 0.5)),
-                      ),
-                    ],
-                  ]),
-                  Row(children: [
-                    const Icon(Icons.bolt, color: AppColors.primary, size: 13),
-                    const SizedBox(width: 3),
-                    Text('+${plan.bonusPoints} pts/mês', style: const TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w600)),
-                  ]),
-                ],
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text('R\$ ${plan.monthlyPrice.toStringAsFixed(2)}', style: const TextStyle(color: AppColors.primary, fontSize: 16, fontWeight: FontWeight.w800)),
-                Text(plan.period, style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
-              ],
-            ),
-          ],
+        child: Text(
+          label,
+          style: TextStyle(
+              color: color ?? AppColors.textMuted,
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.5),
         ),
       ),
-    ),
     );
   }
+
+  int _trialDaysRemaining(DateTime? endsAt) {
+    if (endsAt == null) return 0;
+    final diff = endsAt.difference(DateTime.now());
+    return diff.isNegative ? 0 : diff.inDays;
+  }
+
 }

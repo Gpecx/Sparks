@@ -267,6 +267,15 @@ class ClanService {
     await memberRef.update({FS.role: newRole});
   }
 
+  Future<void> updateClanSettings(String clanId, String name, int colorValue, int iconCodePoint) async {
+    final clanRef = _fs.collection(FS.clans).doc(clanId);
+    await clanRef.update({
+      FS.name: name,
+      'primaryColor': colorValue,
+      'iconCodePoint': iconCodePoint,
+    });
+  }
+
   Future<void> kickMember(String clanId, String uid) async {
     await leaveClan(clanId, uid);
   }
@@ -322,5 +331,26 @@ class ClanService {
      });
      
      await batch.commit();
+  }
+
+  // Calculates the global rank of a clan based on weeklyXp
+  Future<int> getClanGlobalRank(String clanId) async {
+    try {
+      final querySnapshot = await _fs
+          .collection(FS.clans)
+          .orderBy(FS.weeklyXp, descending: true)
+          .get();
+      
+      final docs = querySnapshot.docs;
+      for (int i = 0; i < docs.length; i++) {
+        if (docs[i].id == clanId) {
+          return i + 1;
+        }
+      }
+      return 0; // fallback if not found
+    } catch (e) {
+      debugPrint('Erro ao obter rank global do clã: $e');
+      return 0;
+    }
   }
 }

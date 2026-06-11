@@ -64,7 +64,27 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   void _onAvatarTap() {
     if (!kDebugMode) return;
+
+    final userAsync = ref.read(userModelProvider);
+    final userService = ref.read(userServiceProvider);
+    final user = userAsync.value ?? userService.user;
+    
     _avatarTapCount++;
+
+    if (user == null || !user.isAdmin) {
+      if (_avatarTapCount >= _triggerTaps) {
+        _avatarTapCount = 0;
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Acesso Negado: Apenas administradores podem ativar o Modo Dev.', style: TextStyle(color: Colors.white, fontSize: 13)),
+          duration: Duration(seconds: 3),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.all(16),
+        ));
+      }
+      return;
+    }
 
     if (_avatarTapCount < _triggerTaps) {
       final remaining = _triggerTaps - _avatarTapCount;
@@ -198,10 +218,32 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   Text(userService.displayName,
                       style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
                   const SizedBox(height: 4),
-                  Text(
-                    (user?.role ?? 'TÉCNICO').toUpperCase(),
-                    style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.4), fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        (user?.role ?? 'TÉCNICO').toUpperCase(),
+                        style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.4), fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
+                      ),
+                      if (user?.isPremium ?? false) ...[
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFD700).withValues(alpha: 0.2),
+                            border: Border.all(color: const Color(0xFFFFD700).withValues(alpha: 0.6)),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            (user?.subscriptionPlanId == 'student' 
+                                ? 'ESTUDANTE' 
+                                : (user?.subscriptionPlanId ?? 'PRO')).toUpperCase(),
+                            style: const TextStyle(color: Color(0xFFFFD700), fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 1.5),
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                   const SizedBox(height: 14),
 
@@ -306,9 +348,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
                   // ── Painel Admin (role == admin) — usa maybeWhen para reagir ao async
                   Builder(builder: (context) {
-                    final isDevMode = ref.watch(devModeProvider);
                     final user = userAsync.value;
-                    final isAdmin = (user != null && user.isAdmin) || isDevMode;
+                    final isAdmin = (user != null && user.isAdmin);
                     if (!isAdmin) return const SizedBox.shrink();
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),

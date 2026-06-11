@@ -39,7 +39,10 @@ void main() async {
 
   // 2. Erros globais via Crashlytics — apenas em mobile (não suportado na Web)
   if (!kIsWeb) {
+    // Repassa todas as exceções não capturadas pelo framework Flutter
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+    // Repassa exceções assíncronas que o Flutter não consegue pegar nativamente
     PlatformDispatcher.instance.onError = (error, stack) {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
@@ -53,8 +56,6 @@ void main() async {
       if (!WelcomeScreen.skipAutoLogin) {
         // Usuário logou normalmente: inicia escuta em tempo real
         UserService().startListening();
-        // Verifica se streak precisa ser resetado
-        UserService().checkAndResetStreakIfNeeded();
       }
     } else {
       // Usuário saiu: para a escuta

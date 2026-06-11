@@ -5,7 +5,6 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
-import 'package:spark_app/screens/technical_standards_screen.dart';
 import 'package:spark_app/screens/edit_profile_screen.dart';
 import 'package:spark_app/screens/change_password_screen.dart';
 import 'package:spark_app/services/auth_service.dart';
@@ -75,8 +74,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               _tile(
                 icon: Icons.trending_up,
                 title: 'Meu Progresso',
-                subtitle: 'Normas técnicas recomendadas',
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TechnicalStandardsScreen())),
+                subtitle: 'Acompanhar progresso nos módulos',
+                onTap: () => context.push('/my-progress'),
               ),
               _tile(
                 icon: Icons.lock_outline,
@@ -311,7 +310,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 final userAsync = ref.watch(userModelProvider);
                 final isDevMode = ref.watch(devModeProvider);
                 final user = userAsync.value;
-                final isAdmin = (user != null && user.isAdmin) || isDevMode;
+                final isAdmin = (user != null && user.isAdmin);
 
                 if (!isAdmin) return const SizedBox.shrink();
 
@@ -348,13 +347,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 icon: Icons.headset_mic_outlined,
                 title: 'Suporte Técnico',
                 subtitle: 'Reporte um problema',
-                onTap: _showSupportDialog,
+                onTap: () => context.push('/support'),
               ),
               _tile(
                 icon: Icons.description_outlined,
                 title: 'Termos de Uso',
                 subtitle: 'Leia nossos termos',
-                onTap: () => _snack('Termos de Uso'),
+                onTap: () => context.push('/terms-of-use'),
               ),
               const SizedBox(height: 20),
 
@@ -438,32 +437,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     ),
   );
 
-  void _snack(String m) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(m), backgroundColor: AppColors.card, behavior: SnackBarBehavior.floating));
-
-  void _showSupportDialog() {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppColors.card,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        title: const Text('Suporte Técnico', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Nossa equipe analisará o log do seu dispositivo.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
-            const SizedBox(height: 16),
-            Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: AppColors.inputBackground, borderRadius: BorderRadius.circular(8)), child: Row(children: const [Icon(Icons.email_outlined, color: AppColors.primary, size: 18), SizedBox(width: 8), Text('suporte@exssolutions.com.br', style: TextStyle(color: Colors.white, fontSize: 13))])),
-          ],
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Fechar', style: TextStyle(color: AppColors.textMuted))),
-          ElevatedButton(onPressed: () { Navigator.pop(ctx); _snack('E-mail copiado!'); }, style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))), child: const Text('ENVIAR E-MAIL', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, letterSpacing: 1, color: Colors.white))),
-        ],
-      ),
-    );
-  }
-
   void _showFaqDialog() {
     final faqs = [
       {'q': 'Como funciona o sistema de energia?', 'a': 'Cada lição consome 1 ponto de energia.'},
@@ -473,7 +446,61 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   void _deleteDialog() {
-    showDialog(context: context, builder: (ctx) => AlertDialog(backgroundColor: AppColors.card, title: const Text('Eliminar Conta?', style: TextStyle(color: Colors.white)), actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar')), ElevatedButton(onPressed: () => context.go('/'), style: ElevatedButton.styleFrom(backgroundColor: AppColors.error), child: const Text('ELIMINAR'))]));
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.card,
+        title: const Text('Eliminar Conta?', style: TextStyle(color: Colors.white)),
+        content: const Text(
+          'Esta ação é permanente. Todos os seus dados — XP, progresso, '
+          'sua posição no ranking e seu vínculo com clãs — serão apagados '
+          'e não poderão ser recuperados.',
+          style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancelar'),
+          ),
+          ElevatedButton(
+            onPressed: () => _confirmDelete(ctx),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
+            child: const Text('ELIMINAR'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _confirmDelete(BuildContext dialogCtx) async {
+    final router = GoRouter.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    Navigator.pop(dialogCtx); // fecha o diálogo de confirmação
+
+    // Diálogo de progresso (não-cancelável)
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(child: CircularProgressIndicator()),
+    );
+
+    try {
+      await AuthService().deleteAccount();
+      UserService().stopListening();
+      if (!mounted) return;
+      Navigator.of(context, rootNavigator: true).pop(); // fecha o progresso
+      router.go('/');
+    } catch (e) {
+      if (!mounted) return;
+      Navigator.of(context, rootNavigator: true).pop(); // fecha o progresso
+      messenger.showSnackBar(
+        SnackBar(
+          backgroundColor: AppColors.error,
+          content: Text('Falha ao eliminar conta: $e'),
+        ),
+      );
+    }
   }
 }
 

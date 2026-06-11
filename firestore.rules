@@ -1,5 +1,10 @@
 rules_version = '2';
 
+// Endurecimento de segurança pré-lançamento (2026-06-10):
+// - orders: leitura restrita ao dono;
+// - rankings: escrita só via Cloud Functions (Admin SDK);
+// - clãs: bloqueio de auto-promoção a admin e de autoria forjada.
+
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -40,7 +45,10 @@ service cloud.firestore {
     }
 
     // Campos controlados exclusivamente pelo servidor (Cloud Functions / Admin SDK).
-    function touchesSensitiveFields() {
+    // Qualquer escrita do cliente que toque um destes campos é BLOQUEADA — somente
+    // o Admin SDK (que ignora as regras) pode alterá-los. Isso garante que a economia
+    // (XP, Spark Points, ELO) e o status de assinatura/pagamento não sejam adulterados.
+    function touchesServerControlledFields() {
       return request.resource.data.diff(resource.data)
         .affectedKeys()
         .hasAny([
@@ -48,27 +56,48 @@ service cloud.firestore {
           'sparkPoints',
           'level',
           'tensionLevel',
-          'unlockedBadgeIds',
           'eloRating',
           'wins',
           'losses',
           'totalDuels',
           'weeklyXp',
-          'monthlyXp'
+          'monthlyXp',
+          // ── Assinatura / Pagamento (somente Cloud Functions) ──
+          'isPremium',
+          'isOnTrial',
+          'hadTrial',
+          'trialEndsAt',
+          'subscriptionPlanId',
+          'trialCardTokenId',
+          'asaasCustomerId'
         ]);
     }
 
     // ─── USERS ───────────────────────────────────────────────────
 
     match /users/{uid} {
-      allow read: if isAuthenticated();
+      // LGPD: o documento do usuário contém dados pessoais (email, dados de
+      // assinatura, tokens de pagamento). Só o próprio usuário e admins leem.
+      // Dados públicos (nome, foto, xp, nível, clã) ficam em /public_profiles.
+      allow read: if isSelf(uid) || isAdmin();
+      // Na criação, o usuário não pode "nascer" com saldo/benefícios arbitrários:
+      // os valores iniciais são FIXOS (papel padrão, XP 0, bônus de boas-vindas de
+      // 100 SP, ELO base). Premium/trial nunca podem vir ativos. Qualquer aumento
+      // posterior só é concedido via Cloud Functions (Admin SDK).
       allow create: if isSelf(uid)
         && request.resource.data.keys().hasAll(['uid', 'email', 'role'])
-        && request.resource.data.role is string
-        && request.resource.data.xp is number
-        && request.resource.data.sparkPoints is number;
+        && request.resource.data.role == 'técnico'
+        && request.resource.data.xp == 0
+        && request.resource.data.sparkPoints == 100
+        && (!('eloRating' in request.resource.data) || request.resource.data.eloRating == 1200)
+        && (!('isPremium' in request.resource.data) || request.resource.data.isPremium == false)
+        && (!('isOnTrial' in request.resource.data) || request.resource.data.isOnTrial == false)
+        && (!('hadTrial' in request.resource.data) || request.resource.data.hadTrial == false);
+      // Update do próprio usuário: pode editar perfil (nome, foto, streak, etc.),
+      // mas NUNCA campos controlados pelo servidor (economia/assinatura) nem 'role'.
       allow update: if (isSelf(uid)
-          && !('role' in request.resource.data.diff(resource.data).affectedKeys()))
+          && !('role' in request.resource.data.diff(resource.data).affectedKeys())
+          && !touchesServerControlledFields())
         || (
           request.resource.data.diff(resource.data).affectedKeys().hasOnly(['clanId', 'clanName'])
           && (
@@ -107,27 +136,34 @@ service cloud.firestore {
 
       match /transactions/{txId} {
         allow read: if isSelf(uid);
-        allow create: if isSelf(uid)
-          && request.resource.data.keys().hasAll(['type', 'amount', 'createdAt'])
-          && request.resource.data.amount is int
-          && request.resource.data.amount > 0;
-        allow update, delete: if false;
+        allow write: if false;
       }
 
       match /audit_log/{logId} {
         allow read: if isSelf(uid);
-        allow write: if isSelf(uid) || isAdmin();
+        allow write: if isAdmin();
       }
 
       match /notifications/{notifId} {
         allow read: if isSelf(uid);
-        allow write: if isSelf(uid) || isAdmin();
+        allow update: if isSelf(uid) && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isRead', 'readAt']);
+        allow create, delete: if isAdmin();
       }
 
       match /missions/{missionId} {
         allow read: if isSelf(uid);
         allow write: if isSelf(uid);
       }
+    }
+
+    // ─── PUBLIC PROFILES ──────────────────────────────────────────
+    // Espelho somente-leitura com APENAS campos públicos (nome, foto, xp,
+    // nível, clã). Mantido pela Cloud Function syncPublicProfile. Nenhum
+    // dado pessoal sensível trafega aqui. Escrita exclusiva do servidor.
+
+    match /public_profiles/{uid} {
+      allow read: if isAuthenticated();
+      allow write: if false;
     }
 
     // ─── CATEGORIES / MODULES / TRAILS / LESSONS / QUESTIONS ─────
@@ -177,18 +213,28 @@ service cloud.firestore {
 
     match /clans/{clanId} {
       allow read: if isAuthenticated();
-      allow create: if isAuthenticated();
-      allow update: if isClanMember(clanId)
+      // O criador deve ser sempre o próprio chamador (impede forjar dono).
+      allow create: if isAuthenticated() && request.resource.data.createdBy == request.auth.uid;
+      // Só admin/moderador/dono podem reescrever o doc do clã.
+      // Membros comuns só podem mexer no contador (memberCount) ao entrar/sair.
+      allow update: if isClanAdminOrModerator(clanId)
+        || resource.data.createdBy == request.auth.uid
+        || isAdmin()
         || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['memberCount']) && isAuthenticated());
       allow delete: if resource.data.createdBy == request.auth.uid || isClanAdmin(clanId) || isAdmin();
 
       match /members/{memberUid} {
         allow read: if isAuthenticated();
-        allow create: if request.auth.uid == memberUid
-          || isClanAdminOrModerator(clanId)
+        // Auto-cadastro só é permitido como 'membro'. Papéis elevados
+        // (admin/moderador) só por admin/mod existente ou pelo dono do clã.
+        allow create: if isClanAdminOrModerator(clanId)
           || isAdmin()
-          || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
-        allow update: if request.auth.uid == memberUid
+          || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid
+          || (request.auth.uid == memberUid && request.resource.data.role == 'membro');
+        // O próprio membro pode editar seu doc, MAS nunca o campo 'role'
+        // (impede auto-promoção a admin/moderador do clã).
+        allow update: if (request.auth.uid == memberUid
+            && !('role' in request.resource.data.diff(resource.data).affectedKeys()))
           || isClanAdminOrModerator(clanId)
           || isAdmin()
           || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
@@ -200,7 +246,10 @@ service cloud.firestore {
       }
 
       match /messages/{id} {
-        allow create: if isClanMember(clanId);
+        // Só membros postam, e o autor (uid) precisa ser o próprio chamador
+        // (impede mensagens com autoria forjada).
+        allow create: if isClanMember(clanId)
+          && request.resource.data.uid == request.auth.uid;
         allow read: if isClanMember(clanId);
         allow update: if false;
         allow delete: if resource.data.uid == request.auth.uid
@@ -242,7 +291,9 @@ service cloud.firestore {
 
       match /{weekKey}/{uid} {
         allow read: if isAuthenticated();
-        allow write: if isAuthenticated() && request.auth.uid == uid;
+        // Pontuação do ranking é escrita SOMENTE pelas Cloud Functions
+        // (Admin SDK ignora estas regras). Cliente não pode forjar score.
+        allow write: if false;
       }
     }
 
@@ -316,7 +367,9 @@ service cloud.firestore {
     // Escrita exclusiva via Cloud Functions (Admin SDK — ignora regras).
 
     match /orders/{orderId} {
-      allow read: if isAuthenticated();
+      // Apenas o DONO do pedido pode ler (evita vazamento de dados de
+      // pagamento/PII entre usuários). Escrita só via Cloud Functions.
+      allow read: if isAuthenticated() && resource.data.uid == request.auth.uid;
       allow write: if false;
     }
 

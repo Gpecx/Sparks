@@ -89,7 +89,11 @@ class UserService extends ChangeNotifier {
   // Delega para GamificationUtils (sem duplicar lógica)
   double get xpMultiplier => GamificationUtils.xpMultiplier(currentStreak);
   String get xpMultiplierLabel => GamificationUtils.xpMultiplierLabel(currentStreak);
-  bool get isStreakAtRisk => !studiedToday && DateTime.now().hour >= 12;
+  bool get isStreakAtRisk {
+    if (studiedToday) return false;
+    final nowBrt = DateTime.now().toUtc().subtract(const Duration(hours: 3));
+    return nowBrt.hour >= 12;
+  }
 
   // ─────────────────────────────────────────────────────────────────
   //  INICIALIZAÇÃO
@@ -108,6 +112,10 @@ class UserService extends ChangeNotifier {
       (snap) {
         if (snap.exists) {
           _user = UserModel.fromFirestore(snap);
+          
+          // Verifica e reseta a streak caso o usuário não tenha estudado ontem/hoje
+          checkAndResetStreakIfNeeded();
+
           if (!tokenSaved) {
             tokenSaved = true;
             FcmService().saveTokenAfterLogin();
@@ -181,78 +189,46 @@ class UserService extends ChangeNotifier {
   //  XP E SPARK POINTS — Direto no Firestore (Client-Side)
   // ─────────────────────────────────────────────────────────────────
 
-  /// Adiciona XP localmente via Firestore.
+  /// Adiciona XP via Cloud Function.
   /// Retorna os novos valores ou lança exceção em caso de falha.
   Future<AddXpResult> addXp(int amount, {String source = 'app'}) async {
     if (uid.isEmpty) throw Exception('Usuário não autenticado');
 
     try {
-      final docRef = _db.collection('users').doc(uid);
-      
-      final currentXp = xp;
-      final currentLevel = level;
-      
-      final newXp = currentXp + amount;
-      final newLevel = GamificationUtils.calcLevel(newXp);
-      final newTension = GamificationUtils.calcTension(newXp);
-      final leveledUp = newLevel > currentLevel;
-
-      await docRef.update({
-        'xp': FieldValue.increment(amount),
-        'weeklyXp': FieldValue.increment(amount),
-        'monthlyXp': FieldValue.increment(amount),
-        'level': newLevel,
-        'tensionLevel': newTension,
-        'updatedAt': FieldValue.serverTimestamp(),
+      final response = await _functions.httpsCallable('addXp').call({
+        'amount': amount,
+        'source': source,
       });
 
-      // Atualiza os Rankings localmente
-      final weekKey = GamificationUtils.currentWeekKey();
-      await _db.collection('rankings').doc('weekly').collection(weekKey).doc(uid).set({
-        'uid': uid,
-        'displayName': displayName,
-        'photoUrl': _user?.photoUrl,
-        'clanId': clanId,
-        'clanName': clanName,
-        'weeklyXp': FieldValue.increment(amount),
-        'updatedAt': FieldValue.serverTimestamp(),
-      }, SetOptions(merge: true));
+      final data = response.data as Map;
+      final badges = List<String>.from(data['badgesUnlocked'] ?? []);
+
+      final leveledUp = data['leveledUp'] as bool? ?? false;
+      final newLevel = data['newLevel'] as int? ?? 1;
+      final newXp = data['newXp'] as int? ?? 0;
+      final newTension = data['newTension'] as String? ?? 'BT';
 
       // Atualiza o XP do clã se o usuário fizer parte de um
       if (clanId != null && clanId!.isNotEmpty) {
         try {
           await ClanService().addXpToClan(clanId!, uid, amount);
         } catch (e) {
-          debugPrint('[UserService.addXp] Erro ao adicionar XP ao clã: \$e');
+          debugPrint('[UserService.addXp] Erro ao adicionar XP ao clã: $e');
         }
       }
 
-      final badgesUnlocked = <String>[];
       // Analytics locais
       if (leveledUp) {
         await AnalyticsService().logLevelUp(
-          oldLevel: currentLevel,
+          oldLevel: level,
           newLevel: newLevel,
           totalXp: newXp,
         );
         await AnalyticsService().setUserLevel(newLevel);
         await _sendLevelUpNotification(newLevel);
         
-        final newBadges = GamificationUtils.xpBadgesEarned(newXp);
-        for (final b in newBadges) {
-          if (!unlockedBadgeIds.contains(b)) {
-            badgesUnlocked.add(b);
-            await docRef.update({
-              'unlockedBadgeIds': FieldValue.arrayUnion([b]),
-            });
-            await AnalyticsService().logBadgeUnlocked(badgeId: b, source: source);
-            // Opcionalmente adiciona bônus de XP diretamente por conquista
-            await docRef.update({
-              'xp': FieldValue.increment(50),
-              'weeklyXp': FieldValue.increment(50),
-              'monthlyXp': FieldValue.increment(50),
-            });
-          }
+        for (final b in badges) {
+          await AnalyticsService().logBadgeUnlocked(badgeId: b, source: source);
         }
       }
 
@@ -261,95 +237,86 @@ class UserService extends ChangeNotifier {
         newLevel: newLevel,
         newTension: newTension,
         leveledUp: leveledUp,
-        badgesUnlocked: badgesUnlocked,
+        badgesUnlocked: badges,
       );
     } catch (e) {
-      debugPrint('[UserService.addXp] Local error: $e');
+      debugPrint('[UserService.addXp] Cloud Function error: $e');
       rethrow;
     }
   }
 
-  /// Gasta Spark Points localmente via Firestore.
-  /// Retorna false se saldo insuficiente.
+  /// Gasta Spark Points via Cloud Function.
+  /// Retorna false se saldo insuficiente ou falha.
   Future<bool> spendSparkPoints(int amount, {String source = 'purchase'}) async {
     if (uid.isEmpty) return false;
 
     try {
-      final docRef = _db.collection('users').doc(uid);
-      final currentPoints = sparkPoints;
-      if (currentPoints < amount) return false;
-
-      await docRef.update({
-        'sparkPoints': FieldValue.increment(-amount),
-        'updatedAt': FieldValue.serverTimestamp(),
+      final response = await _functions.httpsCallable('spendSparkPoints').call({
+        'amount': amount,
+        'source': source,
       });
 
-      await AuditService().log(
-        action: AuditAction.spSpent,
-        amount: amount,
-        source: source,
-      );
+      final data = response.data as Map;
+      final success = data['success'] as bool? ?? false;
 
-      return true;
+      if (success) {
+        await AuditService().log(
+          action: AuditAction.spSpent,
+          amount: amount,
+          source: source,
+        );
+      }
+
+      return success;
     } catch (e) {
-      debugPrint('[UserService.spendSparkPoints] Local error: $e');
+      debugPrint('[UserService.spendSparkPoints] Cloud Function error: $e');
       return false;
     }
   }
 
-  /// Adiciona Spark Points diretamente via Firestore (bônus, recompensas de missões).
+  /// Adiciona Spark Points via Cloud Function (bônus, recompensas de missões).
   Future<void> addSparkPoints(int amount, {String source = 'app'}) async {
     if (uid.isEmpty) return;
 
     try {
-      await _db.collection('users').doc(uid).update({
-        'sparkPoints': FieldValue.increment(amount),
-        'updatedAt': FieldValue.serverTimestamp(),
+      await _functions.httpsCallable('addSparkPoints').call({
+        'amount': amount,
+        'source': source,
       });
+
       await AuditService().log(
         action: AuditAction.spGained,
         amount: amount,
         source: source,
       );
     } catch (e) {
-      debugPrint('[UserService.addSparkPoints] Local error: $e');
+      debugPrint('[UserService.addSparkPoints] Cloud Function error: $e');
     }
   }
 
   // ─────────────────────────────────────────────────────────────────
-  //  DUELO / ELO — Direto no Firestore (Client-Side)
+  //  DUELO / ELO — Via Cloud Functions
   // ─────────────────────────────────────────────────────────────────
 
   Future<void> updateElo({required int eloChange, required bool? won}) async {
     if (uid.isEmpty) return;
 
     try {
-      final docRef = _db.collection('users').doc(uid);
-      
-      final updates = <String, dynamic>{
-        'eloRating': FieldValue.increment(eloChange),
-        'updatedAt': FieldValue.serverTimestamp(),
-      };
+      final response = await _functions.httpsCallable('updateElo').call({
+        'eloChange': eloChange,
+        'won': won,
+      });
 
-      if (won != null) {
-        updates['totalDuels'] = FieldValue.increment(1);
-        if (won) {
-          updates['wins'] = FieldValue.increment(1);
-        } else {
-          updates['losses'] = FieldValue.increment(1);
-        }
-      }
-
-      await docRef.update(updates);
+      final data = response.data as Map;
 
       await AuditService().log(
         action: AuditAction.eloUpdated,
         amount: eloChange,
         source: 'duel',
-        meta: {'won': won},
+        meta: {'won': won, 'newElo': data['newElo']},
       );
     } catch (e) {
-      debugPrint('[UserService.updateElo] Local error: $e');
+      debugPrint('[UserService.updateElo] Cloud Function error: $e');
       rethrow;
     }
   }
@@ -388,7 +355,8 @@ class UserService extends ChangeNotifier {
     if (uid.isEmpty) return;
 
     final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
+    final nowBrt = now.toUtc().subtract(const Duration(hours: 3));
+    final today = DateTime.utc(nowBrt.year, nowBrt.month, nowBrt.day);
 
     if (_user?.studiedToday == true) return;
 
@@ -397,12 +365,14 @@ class UserService extends ChangeNotifier {
     int newActiveDays = activeDays + 1;
 
     if (lastStudy != null) {
-      final lastDay = DateTime(lastStudy.year, lastStudy.month, lastStudy.day);
+      final lastStudyBrt = lastStudy.toUtc().subtract(const Duration(hours: 3));
+      final lastDay = DateTime.utc(lastStudyBrt.year, lastStudyBrt.month, lastStudyBrt.day);
       final diff = today.difference(lastDay).inDays;
       if (diff == 1) {
         newStreak = currentStreak + 1;
       } else if (diff == 0) {
-        return;
+        newStreak = currentStreak;
+        newActiveDays = activeDays; // Não incrementa dias ativos se já estudou hoje mas de alguma forma studiedToday estava falso.
       }
       // diff > 1 → streak quebrada, newStreak permanece 1
     }
@@ -446,12 +416,13 @@ class UserService extends ChangeNotifier {
       return;
     }
 
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
+    final nowBrt = DateTime.now().toUtc().subtract(const Duration(hours: 3));
+    final today = DateTime.utc(nowBrt.year, nowBrt.month, nowBrt.day);
     final lastStudy = _user?.lastStudyDate;
     if (lastStudy == null) return;
 
-    final lastDay = DateTime(lastStudy.year, lastStudy.month, lastStudy.day);
+    final lastStudyBrt = lastStudy.toUtc().subtract(const Duration(hours: 3));
+    final lastDay = DateTime.utc(lastStudyBrt.year, lastStudyBrt.month, lastStudyBrt.day);
     final diff = today.difference(lastDay).inDays;
 
     if (diff >= 1 && (_user?.studiedToday == true)) {
@@ -548,7 +519,7 @@ class UserService extends ChangeNotifier {
     DocumentSnapshot? lastDocument,
   }) async {
     var query = _db
-        .collection('users')
+        .collection('public_profiles')
         .orderBy('xp', descending: true)
         .limit(limit);
 
@@ -761,12 +732,12 @@ class RankingEntry {
   });
 
   factory RankingEntry.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
+    final data = doc.data() as Map<String, dynamic>? ?? {};
     return RankingEntry(
       uid: doc.id,
       displayName: data['displayName'] ?? 'Usuário',
       photoUrl: data['photoUrl'],
-      weeklyXp: data['weeklyXp'] ?? 0,
+      weeklyXp: (data['weeklyXp'] as num?)?.toInt() ?? 0,
       clanId: data['clanId'],
       clanName: data['clanName'],
       rawDoc: doc,

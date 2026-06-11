@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:spark_app/providers/content_providers.dart';
 
 import 'package:spark_app/screens/learning_path_screen.dart';
+import 'package:spark_app/core/utils/theme_utils.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
@@ -18,14 +19,7 @@ class ModuleRoutingScreen extends ConsumerWidget {
     required this.moduleId,
   });
 
-  static const List<Map<String, dynamic>> _themeConfig = [
-    {'color': Color(0xFF00C402), 'icon': Icons.bolt},
-    {'color': Color(0xFF22C55E), 'icon': Icons.memory},
-    {'color': Color(0xFF2DD4BF), 'icon': Icons.gavel},
-    {'color': Color(0xFF84CC16), 'icon': Icons.lightbulb},
-    {'color': Color(0xFF4ADE80), 'icon': Icons.layers},
-    {'color': Color(0xFF34D399), 'icon': Icons.science},
-  ];
+  // A configuração de tema agora é dinâmica via ThemeUtils
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -48,7 +42,7 @@ class ModuleRoutingScreen extends ConsumerWidget {
             }
             final module = modules[moduleIndex];
 
-            final theme = _themeConfig[categoryIndex % _themeConfig.length];
+            final theme = ThemeUtils.getThemeForContent(module.title, fallbackIndex: moduleIndex);
             final themeColor = theme['color'] as Color;
             final themeIcon = theme['icon'] as IconData;
 

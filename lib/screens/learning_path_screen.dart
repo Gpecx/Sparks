@@ -17,7 +17,6 @@ import 'package:spark_app/models/spark_admin_models.dart';
 import 'package:spark_app/models/quiz_models.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/services/user_service.dart';
-import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/providers/content_providers.dart';
 import 'package:spark_app/providers/progress_provider.dart';
 import 'package:spark_app/providers/user_provider.dart';
@@ -107,8 +106,9 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     if (clanId == null || clanId.isEmpty) return;
 
     // Stream: usuários do mesmo clã no mesmo módulo (exceto eu)
+    // Lê de public_profiles (dados públicos) — /users é privado por LGPD.
     _clanPresenceSub = _fs
-        .collection('users')
+        .collection('public_profiles')
         .where('clanId', isEqualTo: clanId)
         .where('currentModuleId', isEqualTo: moduleId)
         .snapshots()
@@ -171,19 +171,39 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
   }
 
   /// Retorna true se o nó está desbloqueado.
-  /// Quando o Modo Dev está ativo (apenas em kDebugMode), tudo é desbloqueado.
+  /// Com a navegação não linear, todos os nós base são desbloqueados. O controle freemium é feito à parte.
   bool _isNodeUnlocked(int index, int completedLessons) {
-    if (kDebugMode && ref.read(devModeProvider)) return true;
-    return index <= completedLessons;
+    return true;
   }
+
+  /// Verifica se um nó está bloqueado pelo modelo freemium.
+  /// Regra: apenas a 1ª lição do módulo (índice global 0) é grátis.
+  bool _isFreemiumLocked(int index, SPARKLesson lesson, List<SPARKLesson> allLessons) {
+    if (kDebugMode && ref.read(devModeProvider)) return false;
+    final user = ref.read(userModelProvider).value;
+    final isPremium = (user?.isPremium ?? false) || (user?.isOnTrial ?? false);
+    if (isPremium) return false;
+
+    // Ordena as lições do módulo por order para garantir o índice correto
+    final sorted = [...allLessons]..sort((a, b) => a.order.compareTo(b.order));
+    final globalIndex = sorted.indexWhere((l) => l.id == lesson.id);
+
+    debugPrint('🔒 FREEMIUM │ lessonId=${lesson.id} │ globalIndex=$globalIndex │ locked=${globalIndex != 0}');
+
+    // Apenas a primeira lição do módulo (índice 0) é liberada para free
+    return globalIndex != 0;
+  }
+
 
   double _getProgressValue(int completedLessons, int totalLessons) {
     if (totalLessons == 0) return 0.0;
     return (completedLessons > totalLessons ? totalLessons : completedLessons) / totalLessons;
   }
 
-  void _handleNodeTap(int index, SPARKLesson sparkLesson, int completedLessons, int totalLessons) async {
+  void _handleNodeTap(int index, SPARKLesson sparkLesson, int completedLessons, int totalLessons, List<SPARKLesson> allLessons) async {
     final isTestMode = kDebugMode && ref.read(devModeProvider);
+
+    // ── Verificação de unlock sequencial (removido para navegação livre) ─
     if (!_isNodeUnlocked(index, completedLessons) && !isTestMode) {
       _glitchKey.currentState?.triggerGlitch();
       ScaffoldMessenger.of(context).showSnackBar(
@@ -192,6 +212,138 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
           backgroundColor: AppColors.error,
         ),
       );
+      return;
+    }
+
+    // ── Verificação se a lição já foi feita (Farm de XP block) ─
+    final userProgress = ref.read(userProgressProvider).value ?? [];
+    final progIndex = userProgress.indexWhere((p) => p.moduleId == widget.module!.id);
+    final moduleProgress = progIndex >= 0 ? userProgress[progIndex] : null;
+    final isAlreadyCompleted = moduleProgress?.completedLessons.contains(sparkLesson.id) ?? false;
+
+    if (isAlreadyCompleted && !isTestMode) {
+      HapticFeedback.mediumImpact();
+      showGeneralDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierLabel: 'Fechar',
+        barrierColor: Colors.black.withValues(alpha: 0.7),
+        transitionDuration: const Duration(milliseconds: 350),
+        pageBuilder: (_, __, ___) => const SizedBox.shrink(),
+        transitionBuilder: (ctx, anim, _, __) {
+          final curved = CurvedAnimation(parent: anim, curve: Curves.easeOutCubic);
+          return SlideTransition(
+            position: Tween<Offset>(begin: const Offset(0, 0.15), end: Offset.zero).animate(curved),
+            child: FadeTransition(
+              opacity: curved,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(24),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                      child: Container(
+                        padding: const EdgeInsets.all(28),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0D1B14).withValues(alpha: 0.92),
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(color: AppColors.accent.withValues(alpha: 0.3), width: 1.5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.accent.withValues(alpha: 0.15),
+                              blurRadius: 32,
+                              spreadRadius: 4,
+                            ),
+                          ],
+                        ),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                width: 64,
+                                height: 64,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: RadialGradient(
+                                    colors: [
+                                      AppColors.accent.withValues(alpha: 0.3),
+                                      AppColors.accent.withValues(alpha: 0.05),
+                                    ],
+                                  ),
+                                ),
+                                child: const Icon(Icons.check_circle_rounded, color: AppColors.accent, size: 36),
+                              ),
+                              const SizedBox(height: 20),
+                              const Text(
+                                'Lição Concluída!',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: -0.5,
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                'Você já completou esta lição. Para manter o desafio, refazê-la não está disponível no momento.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white.withValues(alpha: 0.7),
+                                  fontSize: 15,
+                                  height: 1.4,
+                                ),
+                              ),
+                              const SizedBox(height: 28),
+                              GestureDetector(
+                                onTap: () => Navigator.pop(ctx),
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(16),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.accent.withValues(alpha: 0.3),
+                                        blurRadius: 12,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Text(
+                                    'ENTENDIDO',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF0B1410),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w900,
+                                      letterSpacing: 1.2,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      );
+      return;
+    }
+
+    // ── Verificação freemium (Apenas a 1ª lição é grátis por trilha) ──
+    if (!isTestMode && _isFreemiumLocked(index, sparkLesson, allLessons)) {
+      _showProUpgradeDialog();
       return;
     }
 
@@ -227,20 +379,40 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     );
 
     if (passed == true && mounted) {
-      // Força rebuild imediato para atualizar os nós desbloqueados.
-      // O StreamProvider já recebeu a atualização do Firestore via batch.commit()
-      // no QuizScreen, mas o setState garante que o widget redesenha agora.
       setState(() {});
 
-      // Atividade de estudo em background — não bloqueia a UI
       Future.microtask(() async {
         try {
           await _userService.registerStudyActivity();
         } catch (_) {}
       });
-
-
     }
+  }
+
+  // ── Popup de upgrade Pro (freemium) ──────────────────────────────
+  void _showProUpgradeDialog() {
+    HapticFeedback.heavyImpact();
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: 'Fechar',
+      barrierColor: Colors.black.withValues(alpha: 0.7),
+      transitionDuration: const Duration(milliseconds: 350),
+      pageBuilder: (_, _, _) => const SizedBox.shrink(),
+      transitionBuilder: (ctx, anim, _, _) {
+        final curved = CurvedAnimation(parent: anim, curve: Curves.easeOutCubic);
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0, 0.15),
+            end: Offset.zero,
+          ).animate(curved),
+          child: FadeTransition(
+            opacity: curved,
+            child: _ProUpgradeDialog(themeColor: widget.themeColor),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -496,7 +668,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
 
                                       return Positioned(
                                         left: cx - nodeWidgetW / 2,
-                                        top:  cy - TrailLayout.kNodeSize / 2,
+                                        top: cy - TrailLayout.kNodeSize / 2,
                                         width: nodeWidgetW,
                                         child: Stack(
                                           clipBehavior: Clip.none,
@@ -507,14 +679,15 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                                     label: lesson.title,
                                                     isUnlocked: isUnlocked,
                                                     isCompleted: isCompleted,
-                                                    onTap: () => _handleNodeTap(index, lesson, completedLessons, lessons.length),
+                                                    onTap: () => _handleNodeTap(index, lesson, completedLessons, lessons.length, lessons),
                                                   )
                                                 : _buildLessonNode(
                                                     label: lesson.title,
                                                     isCompleted: isCompleted,
                                                     isCurrent: isCurrent,
                                                     isUnlocked: isUnlocked,
-                                                    onTap: () => _handleNodeTap(index, lesson, completedLessons, lessons.length),
+                                                    isFreemiumLocked: _isFreemiumLocked(index, lesson, lessons),
+                                                    onTap: () => _handleNodeTap(index, lesson, completedLessons, lessons.length, lessons),
                                                   ),
                                             if (membersHere.isNotEmpty)
                                               Positioned(
@@ -567,6 +740,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     required bool isCompleted,
     required bool isCurrent,
     required bool isUnlocked,
+    bool isFreemiumLocked = false,
     required VoidCallback onTap,
   }) {
     Color nodeColor;
@@ -581,6 +755,13 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
       iconColor = Colors.white;
       icon = Icons.check;
       glow = [BoxShadow(color: widget.themeColor.withValues(alpha: 0.35), blurRadius: 18, spreadRadius: 4)];
+    } else if (isFreemiumLocked) {
+      // Visual especial freemium: cadeado âmbar/dourado
+      nodeColor = AppColors.card;
+      borderColor = AppColors.gold.withValues(alpha: 0.6);
+      iconColor = AppColors.gold;
+      icon = Icons.lock_rounded;
+      glow = [BoxShadow(color: AppColors.gold.withValues(alpha: 0.20), blurRadius: 14, spreadRadius: 3)];
     } else if (isCurrent) {
       nodeColor = AppColors.card;
       borderColor = widget.themeColor;
@@ -625,7 +806,21 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                     child: const Icon(Icons.star, color: Colors.white, size: 13),
                   ),
                 ),
-
+              if (isFreemiumLocked)
+                Positioned(
+                  top: -4,
+                  right: -8,
+                  child: Container(
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: AppColors.gold,
+                      shape: BoxShape.circle,
+                      boxShadow: [BoxShadow(color: AppColors.gold.withValues(alpha: 0.5), blurRadius: 6)],
+                    ),
+                    child: const Icon(Icons.workspace_premium, color: Colors.white, size: 12),
+                  ),
+                ),
             ],
           ),
           const SizedBox(height: 8),
@@ -633,9 +828,11 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
             label,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: isCurrent
-                  ? widget.themeColor
-                  : Colors.white.withValues(alpha: isUnlocked ? 1 : 0.35),
+              color: isFreemiumLocked
+                  ? AppColors.gold.withValues(alpha: 0.7)
+                  : isCurrent
+                      ? widget.themeColor
+                      : Colors.white.withValues(alpha: isUnlocked ? 1 : 0.35),
               fontSize: 13,
               fontWeight: FontWeight.w800,
               letterSpacing: 0.5,
@@ -645,6 +842,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
       ),
     );
   }
+
 
   Widget _buildEvalNode({
     required String label,
@@ -857,7 +1055,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     final ratio = _energyCtrl.energy / EnergyController.maxEnergy;
 
     if (_energyCtrl.isPremiumUser) {
-      batteryIcon = Icons.battery_charging_full;
+      batteryIcon = Icons.all_inclusive;
     } else if (ratio >= 0.7) {
       batteryIcon = Icons.battery_full;
     } else if (ratio >= 0.4) {
@@ -897,7 +1095,258 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
   }
 }
 
+// ─────────────────────────────────────────────────────────────────
+//  POPUP DE UPGRADE PRO (Freemium Test Drive)
+// ─────────────────────────────────────────────────────────────────
+
+class _ProUpgradeDialog extends StatefulWidget {
+  final Color themeColor;
+  const _ProUpgradeDialog({required this.themeColor});
+
+  @override
+  State<_ProUpgradeDialog> createState() => _ProUpgradeDialogState();
+}
+
+class _ProUpgradeDialogState extends State<_ProUpgradeDialog>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _pulseCtrl;
+  late Animation<double> _pulse;
+
+  @override
+  void initState() {
+    super.initState();
+    _pulseCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1400),
+    )..repeat(reverse: true);
+    _pulse = Tween<double>(begin: 0.85, end: 1.0).animate(
+      CurvedAnimation(parent: _pulseCtrl, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _pulseCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 28),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+            child: Material(
+              color: Colors.transparent,
+              child: Container(
+                padding: const EdgeInsets.all(28),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF0D1B14).withValues(alpha: 0.92),
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.4),
+                      blurRadius: 32,
+                      spreadRadius: 4,
+                    ),
+                  ],
+                ),
+                child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // ── Ícone pulsante ──────────────────────────────
+                  AnimatedBuilder(
+                    animation: _pulse,
+                    builder: (_, child) => Transform.scale(
+                      scale: _pulse.value,
+                      child: child,
+                    ),
+                    child: Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: RadialGradient(
+                          colors: [
+                            AppColors.gold.withValues(alpha: 0.3),
+                            AppColors.gold.withValues(alpha: 0.05),
+                          ],
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.gold.withValues(alpha: 0.25),
+                            blurRadius: 20,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.workspace_premium_rounded,
+                        color: AppColors.gold,
+                        size: 40,
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  // ── Título ──────────────────────────────────────
+                  const Text(
+                    'Test Drive Concluído! 🚀',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 0.3,
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // ── Descrição ───────────────────────────────────
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: const TextSpan(
+                      style: TextStyle(
+                        color: Color(0xFFB0BEC5),
+                        fontSize: 14,
+                        height: 1.5,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Você já usou sua lição gratuita desta trilha.\n\nAssine o ',
+                        ),
+                        TextSpan(
+                          text: 'Spark Pro',
+                          style: TextStyle(
+                            color: AppColors.gold,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' para desbloquear\ntodas as lições sem limites.',
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  // ── Chips de benefícios ─────────────────────────
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 6,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      _benefitChip(Icons.all_inclusive, 'Lições ilimitadas'),
+                      _benefitChip(Icons.bolt, 'Energia ilimitada'),
+                      _benefitChip(Icons.emoji_events, 'Certificados'),
+                    ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // ── Botão principal ─────────────────────────────
+                  SizedBox(
+                    width: double.infinity,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        context.push('/store');
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [AppColors.gold, Color(0xFFFFB300)],
+                          ),
+                          borderRadius: BorderRadius.circular(14),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.gold.withValues(alpha: 0.4),
+                              blurRadius: 16,
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.workspace_premium_rounded, color: Colors.black87, size: 20),
+                            SizedBox(width: 8),
+                            Text(
+                              'Ver Planos Pro',
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // ── Botão secundário ────────────────────────────
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 6),
+                      child: Text(
+                        'Agora não',
+                        style: TextStyle(
+                          color: Color(0xFF78909C),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _benefitChip(IconData icon, String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: AppColors.gold.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: AppColors.gold, size: 13),
+          const SizedBox(width: 4),
+          Text(
+            label,
+            style: const TextStyle(
+              color: AppColors.gold,
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class TrailLayout {
+
   static const double kNodeSize   = 40.0;
   static const double kTextHeight = 38.0;
   static const double kGapBetween = 100.0;

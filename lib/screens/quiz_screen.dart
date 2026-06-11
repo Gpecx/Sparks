@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -294,29 +295,25 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           'explanation': q.explanation,
         });
       } else if (q is FillInTheBlanks) {
-        // Converte FillInTheBlanks para o formato drag existente
-        final answers = q.blanks.map((b) => b.answer).toList();
-        // Gerar distratores para que os chips não entreguem a resposta
-        const fallbackDistractors = [
-          'nenhuma', 'incorreto', 'alternativa', 'outro', 'diferente',
-          'opção X', 'opção Y', 'opção Z',
-        ];
+        // Converte FillInTheBlanks para múltipla escolha
+        final correctAnswer = q.blanks.isNotEmpty ? q.blanks.first.answer : q.statement;
+        // Coleta distratores genéricos (não há distractors no modelo local FillInTheBlanks)
+        const fallback = ['Nenhuma das anteriores', 'Incorreto', 'Não se aplica', 'Outra opção'];
         final distractors = <String>[];
-        final needed = (answers.length < 2 ? 3 : 2);
-        for (int i = 0; i < needed && i < fallbackDistractors.length; i++) {
-          if (!answers.contains(fallbackDistractors[i])) {
-            distractors.add(fallbackDistractors[i]);
+        for (final f in fallback) {
+          if (f != correctAnswer) {
+            distractors.add(f);
+            if (distractors.length >= 3) break;
           }
         }
-        final allOptions = [...answers, ...distractors]..shuffle();
+        final mcOptions = <String>[correctAnswer, ...distractors];
+        mcOptions.shuffle();
         result.add({
-          'type': 'drag',
+          'type': 'multiple',
           'module': lesson.title,
           'question': q.statement,
-          'prefix': q.textWithBlanks.split('____').first,
-          'suffix': q.textWithBlanks.split('____').last,
-          'answer': answers,
-          'options': allOptions,
+          'options': mcOptions,
+          'correct': mcOptions.indexOf(correctAnswer),
           'explanation': q.explanation,
         });
       }
@@ -697,28 +694,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
               const SizedBox(height: 24),
               const Text('Bateria Esgotada!', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
               const SizedBox(height: 12),
-              Text('Você gastou toda a sua energia nas revisões. Aguarde a recarga automática ou recarregue agora usando seus Pontos Spark na loja.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15, height: 1.4)),
+              Text('Você gastou toda a sua energia. Aguarde a recarga automática (5 min por unidade) ou assine um plano para ter bateria infinita ∞.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15, height: 1.4)),
               const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity, height: 56,
-                child: ElevatedButton.icon(
-                  onPressed: () async {
-                    final messenger = ScaffoldMessenger.of(context);
-                    final navigator = Navigator.of(context);
-                    final success = await _energyCtrl.rechargeWithSparks();
-                    if (success) {
-                      navigator.pop();
-                      messenger.showSnackBar(const SnackBar(content: Text('Energia recarregada!'), backgroundColor: AppColors.primary));
-                    } else {
-                      messenger.showSnackBar(const SnackBar(content: Text('Pontos Spark insuficientes!'), backgroundColor: AppColors.error));
-                    }
-                  },
-                  icon: const Icon(Icons.bolt, color: AppColors.background),
-                  label: Text('RECARREGAR (${EnergyController.fullRechargeSparkCost} Sparks)', style: const TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
-                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
-                ),
-              ),
-              const SizedBox(height: 12),
               SizedBox(
                 width: double.infinity, height: 56,
                 child: ElevatedButton.icon(
@@ -727,9 +704,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     Navigator.pop(context);
                     context.push('/store');
                   },
-                  icon: const Icon(Icons.store, color: AppColors.background),
-                  label: const Text('IR PARA A LOJA', style: TextStyle(color: AppColors.background, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
-                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.accent, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+                  icon: const Icon(Icons.all_inclusive, color: AppColors.background),
+                  label: const Text('VER PLANOS COM BATERIA ∞', style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
                 ),
               ),
               const SizedBox(height: 16),
@@ -815,6 +792,161 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
             ),
           ),
         );
+      },
+    );
+  }
+
+  void _showExitConfirmationModal() {
+    HapticFeedback.mediumImpact();
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: 'Fechar',
+      barrierColor: Colors.black.withValues(alpha: 0.7),
+      transitionDuration: const Duration(milliseconds: 350),
+      pageBuilder: (_, __, ___) => const SizedBox.shrink(),
+      transitionBuilder: (ctx, anim, _, __) {
+        final curved = CurvedAnimation(parent: anim, curve: Curves.easeOutCubic);
+        return SlideTransition(
+          position: Tween<Offset>(begin: const Offset(0, 0.15), end: Offset.zero).animate(curved),
+          child: FadeTransition(
+            opacity: curved,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 28),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(24),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                    child: Container(
+                      padding: const EdgeInsets.all(28),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF0D1B14).withValues(alpha: 0.92),
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(color: AppColors.error.withValues(alpha: 0.3), width: 1.5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.error.withValues(alpha: 0.15),
+                            blurRadius: 32,
+                            spreadRadius: 4,
+                          ),
+                        ],
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 64,
+                              height: 64,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: RadialGradient(
+                                  colors: [
+                                    AppColors.error.withValues(alpha: 0.3),
+                                    AppColors.error.withValues(alpha: 0.05),
+                                  ],
+                                ),
+                              ),
+                              child: const Icon(Icons.warning_amber_rounded, color: AppColors.error, size: 36),
+                            ),
+                            const SizedBox(height: 20),
+                            const Text(
+                              'Tem certeza?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: -0.5,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              'Você vai perder todo seu progresso na lição se sair.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white.withValues(alpha: 0.7),
+                                fontSize: 15,
+                                height: 1.4,
+                              ),
+                            ),
+                            const SizedBox(height: 28),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () => Navigator.pop(ctx),
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(vertical: 16),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withValues(alpha: 0.05),
+                                        borderRadius: BorderRadius.circular(16),
+                                        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                                      ),
+                                      child: const Text(
+                                        'CANCELAR',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: 1.2,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.pop(ctx);
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(vertical: 16),
+                                      decoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                          colors: [AppColors.error, Color(0xFFEF4444)],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                        ),
+                                        borderRadius: BorderRadius.circular(16),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: AppColors.error.withValues(alpha: 0.3),
+                                            blurRadius: 12,
+                                            offset: const Offset(0, 4),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Text(
+                                        'SAIR',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w900,
+                                          letterSpacing: 1.2,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ), // Column
+                      ), // Material
+                    ), // Container
+                  ), // BackdropFilter
+                ), // ClipRRect
+              ), // Padding
+            ), // Center
+          ), // FadeTransition
+        ); // SlideTransition
       },
     );
   }
@@ -916,7 +1048,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
 
     IconData batteryIcon;
     final ratio = _energyCtrl.energy / EnergyController.maxEnergy;
-    if (_energyCtrl.isPremiumUser) { batteryIcon = Icons.battery_charging_full; }
+    if (_energyCtrl.isPremiumUser) { batteryIcon = Icons.all_inclusive; }
     else if (ratio >= 0.7) { batteryIcon = Icons.battery_full; }
     else if (ratio >= 0.4) { batteryIcon = Icons.battery_4_bar; }
     else if (ratio >= 0.2) { batteryIcon = Icons.battery_2_bar; }
@@ -946,7 +1078,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                           padding: const EdgeInsets.all(20),
                           child: Row(
                             children: [
-                              GestureDetector(onTap: () => Navigator.pop(context), child: const Icon(Icons.close, color: Colors.white, size: 28)),
+                              GestureDetector(onTap: _showExitConfirmationModal, child: const Icon(Icons.close, color: Colors.white, size: 28)),
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 16),

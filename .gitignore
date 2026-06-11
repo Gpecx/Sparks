@@ -70,3 +70,21 @@ content/seed/_*
 content/seed/**/*.bak*
 scripts/_*
 scripts/_briefs/
+
+# Dados pessoais / exports de autenticação (LGPD — NUNCA versionar)
+users.json
+**/users-export*.json
+**/auth-export*.json
+serviceAccount*.json
+*-firebase-adminsdk-*.json
+
+# Scripts administrativos pontuais com UIDs/dados reais
+fix_admin.js
+fix_name.dart
+update_admin.js
+functions/update_admin.js
+patch_functions*.js
+
+# Segredos locais (chaves de API, tokens)
+setup_asaas_env.sh
+.env.secrets

@@ -157,18 +157,6 @@ class AchievementsScreen extends ConsumerWidget {
                 _buildDynamicBadges(unlockedIds),
                 const SizedBox(height: 8),
 
-                _sectionTitle('NORMAS E CONHECIMENTO'),
-                _achievementGrid(context, [
-                  _AchievementData('Mestre NR-10', Icons.electrical_services, 'Completou todos os módulos da NR-10',
-                      unlockedIds.contains('nr10_master')),
-                  _AchievementData('Expert NFPA 70E', Icons.shield_outlined, 'Completou todos os módulos da NFPA 70E',
-                      unlockedIds.contains('nfpa_expert')),
-                  _AchievementData('Pro em Segurança', Icons.verified_outlined, 'Atingiu 95% de acerto em 5 avaliações',
-                      unlockedIds.contains('safety_pro')),
-                  _AchievementData('Mestre NR-35', Icons.height, 'Completou todos os módulos da NR-35',
-                      unlockedIds.contains('nr35_master')),
-                ]),
-
                 _sectionTitle('DEDICAÇÃO E PRESENÇA'),
                 _achievementGrid(context, [
                   _AchievementData('Streak 7 dias', Icons.local_fire_department, 'Estudou 7 dias consecutivos',

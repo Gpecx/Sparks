@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 /// Types of intelligent notifications the app can send.
 enum NotificationType {
@@ -62,7 +63,7 @@ class SparkNotification {
 
 /// Notification service for real-time Firestore notifications.
 class NotificationService extends ChangeNotifier {
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
   StreamSubscription<QuerySnapshot>? _subscription;
 
   // User preferences

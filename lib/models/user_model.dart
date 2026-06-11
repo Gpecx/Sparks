@@ -23,6 +23,12 @@ class UserModel {
   final int currentStreak;
   final int longestStreak;
   final int activeDays;
+  final bool isPremium;
+  // ── Trial ──────────────────────────────────────────────────────
+  final bool isOnTrial;
+  final DateTime? trialEndsAt;
+  final String? subscriptionPlanId;   // 'pro' | 'premium' | 'student' | 'business'
+  final String? asaasSubscriptionId;
   final DateTime? lastStudyDate;
   final bool studiedToday;
   final String? clanId;
@@ -51,6 +57,11 @@ class UserModel {
     this.currentStreak = 0,
     this.longestStreak = 0,
     this.activeDays = 0,
+    this.isPremium = false,
+    this.isOnTrial = false,
+    this.trialEndsAt,
+    this.subscriptionPlanId,
+    this.asaasSubscriptionId,
     this.lastStudyDate,
     this.studiedToday = false,
     this.clanId,
@@ -86,12 +97,19 @@ class UserModel {
           (data['streak'] as num?)?.toInt() ?? 0,
       longestStreak: (data['longestStreak'] as num?)?.toInt() ?? 0,
       activeDays: (data['activeDays'] as num?)?.toInt() ?? 0,
-      
-      // Datas: verifica especificamente se é um Timestamp do Firebase
-      lastStudyDate: data['lastStudyDate'] is Timestamp 
-          ? (data['lastStudyDate'] as Timestamp).toDate() 
+      isPremium: data['isPremium'] == true,
+      isOnTrial: data['isOnTrial'] == true,
+      trialEndsAt: data['trialEndsAt'] is Timestamp
+          ? (data['trialEndsAt'] as Timestamp).toDate()
           : null,
-          
+      subscriptionPlanId: data['subscriptionPlanId']?.toString(),
+      asaasSubscriptionId: data['asaasSubscriptionId']?.toString(),
+
+      // Datas: verifica especificamente se é um Timestamp do Firebase
+      lastStudyDate: data['lastStudyDate'] is Timestamp
+          ? (data['lastStudyDate'] as Timestamp).toDate()
+          : null,
+
       // Booleano: a comparação == true evita quebra se vier nulo ou texto
       studiedToday: data['studiedToday'] == true,
       
@@ -135,6 +153,11 @@ class UserModel {
       'currentStreak': currentStreak,
       'longestStreak': longestStreak,
       'activeDays': activeDays,
+      'isPremium': isPremium,
+      'isOnTrial': isOnTrial,
+      'trialEndsAt': trialEndsAt != null ? Timestamp.fromDate(trialEndsAt!) : null,
+      'subscriptionPlanId': subscriptionPlanId,
+      'asaasSubscriptionId': asaasSubscriptionId,
       'lastStudyDate':
           lastStudyDate != null ? Timestamp.fromDate(lastStudyDate!) : null,
       'studiedToday': studiedToday,
@@ -164,6 +187,11 @@ class UserModel {
     int? currentStreak,
     int? longestStreak,
     int? activeDays,
+    bool? isPremium,
+    bool? isOnTrial,
+    DateTime? trialEndsAt,
+    String? subscriptionPlanId,
+    String? asaasSubscriptionId,
     DateTime? lastStudyDate,
     bool? studiedToday,
     String? clanId,
@@ -190,6 +218,11 @@ class UserModel {
       currentStreak: currentStreak ?? this.currentStreak,
       longestStreak: longestStreak ?? this.longestStreak,
       activeDays: activeDays ?? this.activeDays,
+      isPremium: isPremium ?? this.isPremium,
+      isOnTrial: isOnTrial ?? this.isOnTrial,
+      trialEndsAt: trialEndsAt ?? this.trialEndsAt,
+      subscriptionPlanId: subscriptionPlanId ?? this.subscriptionPlanId,
+      asaasSubscriptionId: asaasSubscriptionId ?? this.asaasSubscriptionId,
       lastStudyDate: lastStudyDate ?? this.lastStudyDate,
       studiedToday: studiedToday ?? this.studiedToday,
       clanId: clanId ?? this.clanId,

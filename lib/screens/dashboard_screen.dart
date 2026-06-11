@@ -336,6 +336,61 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
+  // ── Banner de Trial Ativo ────────────────────────────────────────
+  Widget _buildTrialBanner(UserModel user) {
+    final endsAt = user.trialEndsAt;
+    final daysLeft = endsAt != null
+        ? endsAt.difference(DateTime.now()).inDays.clamp(0, 7)
+        : 0;
+
+    return GestureDetector(
+      onTap: () => context.push('/store'),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.primary.withValues(alpha: 0.25),
+              const Color(0xFF8B5CF6).withValues(alpha: 0.25),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(
+              color: AppColors.primary.withValues(alpha: 0.4), width: 1.5),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.all_inclusive, color: AppColors.primary, size: 28),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Trial Pro Ativo — $daysLeft dia${daysLeft == 1 ? '' : 's'} restante${daysLeft == 1 ? '' : 's'}',
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w800),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    'Assine agora para não perder o acesso',
+                    style: TextStyle(
+                        color: Colors.white.withValues(alpha: 0.55),
+                        fontSize: 11),
+                  ),
+                ],
+              ),
+            ),
+            Icon(Icons.arrow_forward_ios,
+                color: AppColors.primary.withValues(alpha: 0.7), size: 14),
+          ],
+        ),
+      ),
+    );
+  }
+
   // ── Header com nome real do Firestore ───────────────────────────
   Widget _buildHeader(UserModel? userModel) {
     final userService = ref.watch(userServiceProvider);
@@ -559,7 +614,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildHeader(userModel),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 16),
+                  if (userModel?.isOnTrial == true)
+                    _buildTrialBanner(userModel!),
+                  const SizedBox(height: 16),
                   _buildGamificationCenter(userModel),
                   const SizedBox(height: 16),
                   _ResponsiveTapWidget(

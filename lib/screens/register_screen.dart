@@ -2,11 +2,15 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
+import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/widgets/email_verification_dialog.dart';
+import 'package:spark_app/widgets/google_auth_button.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -18,8 +22,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _authService = AuthService();
   bool _obscurePassword = true;
   bool _isLoading = false;
+  bool _isGoogleLoading = false;
 
   Future<void> _handleRegister() async {
     final name = _nameController.text.trim();
@@ -50,8 +56,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       // 2. Atualiza o nome do usuário com try/catch e timeout
       try {
-        await user.updateDisplayName(name).timeout(const Duration(seconds: 4));
-        await user.reload().timeout(const Duration(seconds: 2));
+        await user.updateDisplayName(name).timeout(const Duration(seconds: 1));
+        await user.reload().timeout(const Duration(seconds: 1));
       } catch (e) {
         debugPrint('Aviso: updateDisplayName demorou ou falhou: $e');
       }
@@ -96,99 +102,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       if (!mounted) return;
 
-      // 4. Só aqui mostra o popup (A conta foi criada com sucesso)
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (ctx) => Dialog(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          insetPadding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Container(
-            padding: const EdgeInsets.all(28),
-            decoration: BoxDecoration(
-              color: AppColors.card,
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: AppColors.primary.withValues(alpha: 0.3), width: 1.5),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.15),
-                  blurRadius: 32,
-                  spreadRadius: 8,
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.check_circle_outline,
-                    color: AppColors.primary,
-                    size: 56,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  'Conta Criada!',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  'Sua conta foi criada com sucesso.\nVocê já pode acessar o SPARK.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.7),
-                    fontSize: 15,
-                    height: 1.5,
-                  ),
-                ),
-                const SizedBox(height: 32),
-                SizedBox(
-                  width: double.infinity,
-                  height: 52,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.white,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    onPressed: () async {
-                      Navigator.pop(ctx);
-                      final router = GoRouter.of(context);
-                      WelcomeScreen.skipAutoLogin = false;
-                      await FirebaseAuth.instance.signOut();
-                      UserService().stopListening();
-                      router.go('/login');
-                    },
-                    child: const Text(
-                      'IR PARA O LOGIN',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 1.5,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+      // 4. Envia código OTP (primeiro cadastro sempre verifica)
+      try {
+        final fn = FirebaseFunctions.instanceFor(region: 'southamerica-east1');
+        await fn.httpsCallable('sendEmailVerificationCode').call({'email': email});
+      } catch (e) {
+        debugPrint('Aviso: falha ao enviar OTP pós-cadastro: $e');
+        // Não bloqueia o fluxo — o usuário poderá reenviar no popup
+      }
+
+      if (!mounted) return;
+
+      // 5. Exibe popup OTP — usuário deve verificar antes de ir para o login
+      final verified = await showEmailVerificationDialog(
+        context,
+        email: email,
+        uid: user.uid,
       );
+
+      if (!mounted) return;
+
+      // Após verificação (ou se fechou), navega para login com prefill
+      final router = GoRouter.of(context);
+      final registeredEmail = email;
+      final registeredPassword = password;
+      WelcomeScreen.skipAutoLogin = false;
+      await FirebaseAuth.instance.signOut();
+      UserService().stopListening();
+
+      if (verified) {
+        router.go('/login', extra: {
+          'email': registeredEmail,
+          'password': registeredPassword,
+        });
+      } else {
+        // Cancelou verificação — vai para login sem prefill
+        router.go('/login');
+      }
 
     } catch (e) {
       WelcomeScreen.skipAutoLogin = false;
@@ -201,6 +151,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
     } finally {
       if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  Future<void> _handleGoogleSignIn() async {
+    setState(() => _isGoogleLoading = true);
+
+    try {
+      final credential = await _authService.signInWithGoogle();
+      final user = credential.user;
+      if (!mounted || user == null) return;
+
+      // O Google já verifica a identidade do usuário, então vamos direto
+      // para a home (sem o fluxo de OTP do cadastro por e-mail/senha).
+      if (mounted) context.go('/home');
+    } on GoogleSignInCancelled {
+      // Usuário fechou o popup — não é erro, ignora silenciosamente.
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString().replaceAll('Exception: ', '')),
+          backgroundColor: AppColors.error,
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _isGoogleLoading = false);
     }
   }
 
@@ -234,8 +210,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 8),
             TextField(
               controller: _nameController,
+              maxLength: 50,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(hintText: 'Digite seu nome completo', prefixIcon: Icon(Icons.person_outline, color: AppColors.textMuted)),
+              decoration: const InputDecoration(hintText: 'Digite seu nome completo', prefixIcon: Icon(Icons.person_outline, color: AppColors.textMuted), counterText: ''),
             ),
             const SizedBox(height: 20),
             _fieldLabel('Endereço de E-mail'),
@@ -243,8 +220,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
+              maxLength: 100,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(hintText: 'Digite seu e-mail', prefixIcon: Icon(Icons.mail_outline, color: AppColors.textMuted)),
+              decoration: const InputDecoration(hintText: 'Digite seu e-mail', prefixIcon: Icon(Icons.mail_outline, color: AppColors.textMuted), counterText: ''),
             ),
             const SizedBox(height: 20),
             _fieldLabel('Senha'),
@@ -252,10 +230,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             TextField(
               controller: _passwordController,
               obscureText: _obscurePassword,
+              maxLength: 128,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Crie uma senha',
                 prefixIcon: const Icon(Icons.lock_outline, color: AppColors.textMuted),
+                counterText: '',
                 suffixIcon: IconButton(
                   icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility, color: AppColors.textMuted),
                   onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
@@ -269,11 +249,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
               width: double.infinity,
               height: 52,
               child: ElevatedButton(
-                onPressed: _isLoading ? null : _handleRegister,
-                child: _isLoading 
+                onPressed: (_isLoading || _isGoogleLoading) ? null : _handleRegister,
+                child: _isLoading
                     ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
                     : const Text('CADASTRAR', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
               ),
+            ),
+            const SizedBox(height: 20),
+            // Linha divisória com texto
+            Row(children: [
+              Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Text('ou', style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 12)),
+              ),
+              Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
+            ]),
+            const SizedBox(height: 20),
+            GoogleAuthButton(
+              label: 'Cadastrar com Google',
+              isLoading: _isGoogleLoading,
+              onPressed: (_isLoading || _isGoogleLoading) ? null : _handleGoogleSignIn,
             ),
             const SizedBox(height: 20),
             Row(

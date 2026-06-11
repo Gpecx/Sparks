@@ -230,39 +230,38 @@ class QuestionModel {
           'explanation': explanation,
         };
       case 'fillInTheBlanks':
-        final parts = (textWithBlanks ?? '').split('____');
-        final answers = (blanks ?? []).map((b) => b['answer'] as String).toList();
-        // Generate distractors so chips don't just show the correct answers
-        final distractors = <String>[];
+        // Converte para múltipla escolha: a resposta correta é blanks[0].answer
+        // e as opções vêm dos distractors + a resposta correta.
+        final correctAnswer = (blanks != null && blanks!.isNotEmpty)
+            ? (blanks!.first['answer'] as String? ?? '')
+            : (textWithBlanks ?? statement);
+        final allDistractors = <String>[];
         for (final b in (blanks ?? [])) {
           final d = b['distractors'];
           if (d != null && d is List) {
-            distractors.addAll(List<String>.from(d));
+            allDistractors.addAll(List<String>.from(d));
           }
         }
-        // If no distractors from Firestore, generate generic ones
-        if (distractors.isEmpty) {
-          const fallbackDistractors = [
-            'nenhuma', 'incorreto', 'alternativa', 'outro', 'diferente',
-            'opção X', 'opção Y', 'opção Z',
-          ];
-          // Pick enough distractors so total options >= answers.length + 2
-          final needed = (answers.length < 2 ? 3 : 2);
-          for (int i = 0; i < needed && i < fallbackDistractors.length; i++) {
-            if (!answers.contains(fallbackDistractors[i])) {
-              distractors.add(fallbackDistractors[i]);
+        // Garante pelo menos 3 distratores
+        if (allDistractors.length < 3) {
+          const fallback = ['Nenhuma das anteriores', 'Incorreto', 'Não se aplica', 'Outra opção'];
+          for (final f in fallback) {
+            if (!allDistractors.contains(f) && f != correctAnswer) {
+              allDistractors.add(f);
+              if (allDistractors.length >= 3) break;
             }
           }
         }
-        final allOptions = [...answers, ...distractors]..shuffle();
+        // Monta lista com a correta + até 3 distratores e embaralha
+        final mcOptions = <String>[correctAnswer, ...allDistractors.take(3).toList()];
+        mcOptions.shuffle();
+        final mcCorrectIndex = mcOptions.indexOf(correctAnswer);
         return {
-          'type': 'drag',
+          'type': 'multiple',
           'module': moduleName,
           'question': statement,
-          'prefix': parts.isNotEmpty ? parts.first : '',
-          'suffix': parts.length > 1 ? parts.last : '',
-          'answer': answers,
-          'options': allOptions,
+          'options': mcOptions,
+          'correct': mcCorrectIndex,
           'explanation': explanation,
         };
       default:
