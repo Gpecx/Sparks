@@ -340,3 +340,34 @@ export async function getChargeStatus(chargeId: string): Promise<string> {
   const charge = res.data as { status?: string };
   return charge.status ?? "UNKNOWN";
 }
+
+/**
+ * Consulta status + valor de uma cobrança no Asaas.
+ * Usado para reverificar pagamentos (defesa em profundidade no webhook):
+ * confirma que a cobrança realmente foi paga E pelo valor esperado, em vez
+ * de confiar no corpo da requisição.
+ *
+ * Retorna null em caso de erro de consulta.
+ */
+export async function getChargeDetails(
+  chargeId: string
+): Promise<{ status: string; value: number } | null> {
+  const { apiKey, baseUrl } = getAsaasConfig();
+  const headers = buildHeaders(apiKey);
+
+  const res = await httpRequest(
+    `${baseUrl}/payments/${chargeId}`,
+    { method: "GET", headers }
+  );
+
+  if (res.status >= 400) {
+    logger.error(`[Asaas] Erro ao consultar cobrança ${chargeId}:`, res.data);
+    return null;
+  }
+
+  const charge = res.data as { status?: string; value?: number };
+  return {
+    status: charge.status ?? "UNKNOWN",
+    value: typeof charge.value === "number" ? charge.value : 0,
+  };
+}

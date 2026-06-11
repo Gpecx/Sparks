@@ -56,8 +56,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       // 2. Atualiza o nome do usuário com try/catch e timeout
       try {
-        await user.updateDisplayName(name).timeout(const Duration(seconds: 4));
-        await user.reload().timeout(const Duration(seconds: 2));
+        await user.updateDisplayName(name).timeout(const Duration(seconds: 1));
+        await user.reload().timeout(const Duration(seconds: 1));
       } catch (e) {
         debugPrint('Aviso: updateDisplayName demorou ou falhou: $e');
       }

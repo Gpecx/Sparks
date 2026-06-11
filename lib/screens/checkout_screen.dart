@@ -317,10 +317,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       size: 20),
                                 ),
                                 validator: (v) {
-                                  final digits = v?.replaceAll(RegExp(r'\D'), '') ?? '';
-                                  if (digits.isEmpty) return 'Informe o CPF ou CNPJ';
-                                  if (digits.length != 11 && digits.length != 14) {
-                                    return 'CPF deve ter 11 dígitos ou CNPJ 14 dígitos';
+                                  final text = v?.trim() ?? '';
+                                  if (text.isEmpty) return 'Informe o CPF ou CNPJ';
+                                  if (text.length < 11) {
+                                    return 'CPF/CNPJ inválido (muito curto)';
                                   }
                                   return null;
                                 },

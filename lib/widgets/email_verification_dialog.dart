@@ -14,19 +14,25 @@ Future<bool> showEmailVerificationDialog(
   BuildContext context, {
   required String email,
   required String uid,
+  bool rememberDevice = false,
 }) {
   return showDialog<bool>(
     context: context,
     barrierDismissible: false,
-    builder: (_) => _EmailVerificationDialog(email: email, uid: uid),
+    builder: (_) => _EmailVerificationDialog(email: email, uid: uid, rememberDevice: rememberDevice),
   ).then((v) => v ?? false);
 }
 
 class _EmailVerificationDialog extends StatefulWidget {
   final String email;
   final String uid;
+  final bool rememberDevice;
 
-  const _EmailVerificationDialog({required this.email, required this.uid});
+  const _EmailVerificationDialog({
+    required this.email,
+    required this.uid,
+    required this.rememberDevice,
+  });
 
   @override
   State<_EmailVerificationDialog> createState() => _EmailVerificationDialogState();
@@ -132,6 +138,7 @@ class _EmailVerificationDialogState extends State<_EmailVerificationDialog>
         'code': code,
         'deviceId': deviceId,
         'deviceName': deviceName,
+        'rememberDevice': widget.rememberDevice,
       });
 
       final data = result.data as Map<dynamic, dynamic>;

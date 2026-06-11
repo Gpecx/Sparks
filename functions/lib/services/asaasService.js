@@ -18,6 +18,7 @@ exports.updateCustomer = updateCustomer;
 exports.createCharge = createCharge;
 exports.verifyWebhookToken = verifyWebhookToken;
 exports.getChargeStatus = getChargeStatus;
+exports.getChargeDetails = getChargeDetails;
 const logger = require("firebase-functions/logger");
 const https = require("https");
 const http = require("http");
@@ -211,5 +212,28 @@ async function getChargeStatus(chargeId) {
     }
     const charge = res.data;
     return (_a = charge.status) !== null && _a !== void 0 ? _a : "UNKNOWN";
+}
+/**
+ * Consulta status + valor de uma cobrança no Asaas.
+ * Usado para reverificar pagamentos (defesa em profundidade no webhook):
+ * confirma que a cobrança realmente foi paga E pelo valor esperado, em vez
+ * de confiar no corpo da requisição.
+ *
+ * Retorna null em caso de erro de consulta.
+ */
+async function getChargeDetails(chargeId) {
+    var _a;
+    const { apiKey, baseUrl } = getAsaasConfig();
+    const headers = buildHeaders(apiKey);
+    const res = await httpRequest(`${baseUrl}/payments/${chargeId}`, { method: "GET", headers });
+    if (res.status >= 400) {
+        logger.error(`[Asaas] Erro ao consultar cobrança ${chargeId}:`, res.data);
+        return null;
+    }
+    const charge = res.data;
+    return {
+        status: (_a = charge.status) !== null && _a !== void 0 ? _a : "UNKNOWN",
+        value: typeof charge.value === "number" ? charge.value : 0,
+    };
 }
 //# sourceMappingURL=asaasService.js.map
