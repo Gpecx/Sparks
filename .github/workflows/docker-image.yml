@@ -6,27 +6,39 @@ on:
 
 jobs:
   deploy:
-    name: Setup Gcloud Account
+    name: Build & Deploy to Cloud Run
     runs-on: ubuntu-latest
     environment: gcp-prod
     env:
-      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/site:latest
+      PROJECT_ID: spark-v1-e0eb5
+      REGION: southamerica-east1
+      REPO: sparksite
+      SERVICE: site
+      # Artifact Registry (gcr.io foi desligado pela Google em 18/03/2025)
+      IMAGE_NAME: southamerica-east1-docker.pkg.dev/spark-v1-e0eb5/sparksite/site:latest
     steps:
       # 1. Git checkout
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      # 2. Login to GCP
-      - uses: google-github-actions/setup-gcloud@v0.2.0
+      # 2. Autenticacao na GCP (action dedicada, padrao atual)
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
         with:
-          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-      # 3. Configure Docker
+      # 3. Cloud SDK
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+
+      # 4. Configura o Docker para o Artifact Registry de Sao Paulo
       - name: Configure Docker
-        run: gcloud auth configure-docker --quiet
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
 
-      # 4. GERA O ARQUIVO .ENV PRIMEIRO COM AS CHAVES DO SPARK
+      # 5. Gera o arquivo .env com as chaves do Spark
+      #    (consumido pelo `flutter build web` dentro do Dockerfile)
       - name: Generate .env file
         run: |
           echo "FIREBASE_API_KEY_ANDROID=${{ secrets.FIREBASE_API_KEY_ANDROID }}" >> .env
@@ -41,20 +53,21 @@ jobs:
           echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> .env
           echo "FIREBASE_STORAGE_BUCKET=${{ secrets.FIREBASE_STORAGE_BUCKET }}" >> .env
 
-      # 5. CONSTROI A IMAGEM DOCKER (O Docker vai copiar o .env gerado acima)
+      # 6. Constroi a imagem Docker (o build copia o .env gerado acima)
       - name: Build Docker image
         run: docker build -t $IMAGE_NAME .
 
-      # 6. PUSH PARA O GOOGLE CLOUD
+      # 7. Push para o Artifact Registry
       - name: Push Docker image
         run: docker push $IMAGE_NAME
 
-      # 7. DEPLOY NO CLOUD RUN (Apenas as flags essenciais e a porta 80)
-      - name: Deploy Docker image
+      # 8. Deploy no Cloud Run (mesma regiao do Artifact Registry / Functions)
+      - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy site \
+          gcloud run deploy ${{ env.SERVICE }} \
             --image $IMAGE_NAME \
-            --region us-central1 \
+            --project ${{ env.PROJECT_ID }} \
+            --region ${{ env.REGION }} \
             --memory 512Mi \
             --min-instances 0 \
             --max-instances 1 \
