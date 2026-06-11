@@ -102,7 +102,7 @@ service cloud.firestore {
           request.resource.data.diff(resource.data).affectedKeys().hasOnly(['clanId', 'clanName'])
           && (
               isSelf(uid)
-              || !('clanId' in resource.data) 
+              || !('clanId' in resource.data)
               || resource.data.clanId == ""
               || (('clanId' in resource.data) && resource.data.clanId != "" && (isClanAdminOrModerator(resource.data.clanId) || get(/databases/$(database)/documents/clans/$(resource.data.clanId)).data.createdBy == request.auth.uid))
               || (('clanId' in request.resource.data) && request.resource.data.clanId != "" && (isClanAdminOrModerator(request.resource.data.clanId) || get(/databases/$(database)/documents/clans/$(request.resource.data.clanId)).data.createdBy == request.auth.uid))
@@ -127,6 +127,10 @@ service cloud.firestore {
       }
 
       match /quiz_history/{id} {
+        allow read, write: if isSelf(uid);
+      }
+
+      match /ebook_progress/{ebookId} {
         allow read, write: if isSelf(uid);
       }
 
@@ -188,6 +192,18 @@ service cloud.firestore {
               allow read: if isAuthenticated();
               allow write: if isAdmin();
             }
+          }
+        }
+
+        // ── E-books (área de Estudos) ─────────────────────────────
+        match /ebooks/{ebookId} {
+          allow read: if isAuthenticated();
+          allow write: if isAdmin();
+
+          // Capítulos do e-book (conteúdo carregado sob demanda)
+          match /chapters/{chapterId} {
+            allow read: if isAuthenticated();
+            allow write: if isAdmin();
           }
         }
       }
@@ -254,8 +270,8 @@ service cloud.firestore {
 
       match /quests/{questId} {
         allow read: if isAuthenticated();
-        allow write: if isClanAdminOrModerator(clanId) 
-          || isAdmin() 
+        allow write: if isClanAdminOrModerator(clanId)
+          || isAdmin()
           || get(/databases/$(database)/documents/clans/$(clanId)).data.createdBy == request.auth.uid;
       }
 
@@ -268,7 +284,7 @@ service cloud.firestore {
     }
 
     // ─── RANKINGS ─────────────────────────────────────────────────
- 
+
     match /rankings/{id} {
       allow read: if isAuthenticated();
       allow write: if false;

@@ -1,0 +1,129 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Monitoramento SPCS",
+  "moduleSubtitle": "Automonitoração, supervisão de trip e diagnóstico",
+  "moduleOrder": 7,
+  "ebookTitle": "Monitoramento de SPCS",
+  "ebookSubtitle": "Automonitoração, supervisão do circuito de trip e a manutenção baseada em condição",
+  "estimatedMinutes": 50,
+  "trailFiles": [
+    "t01_fundamentos_monitoramento.json",
+    "t02_aplicacoes_monitoramento.json",
+    "t03_implementacao_diagnostico.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Por que Monitorar o Sistema de Proteção",
+      "subtitle": "Detectar a falha antes da falta",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O problema da proteção dormente",
+          "type": "text",
+          "body": "O sistema de proteção tem uma característica perigosa: ele fica 'dormente' a maior parte do tempo, atuando apenas em faltas raras. Isso significa que um defeito na própria proteção (um relé com falha, uma bobina de trip queimada, um TC com problema) pode permanecer invisível por meses — até que uma falta aconteça e a proteção, que deveria atuar, falhe. O monitoramento existe para resolver isso: detectar os defeitos na própria proteção ANTES que uma falta os revele da pior forma possível."
+        },
+        {
+          "id": "s2",
+          "title": "O conceito de automonitoração (self-supervision)",
+          "type": "text",
+          "body": "Os IEDs numéricos têm uma vantagem enorme sobre os relés antigos: a automonitoração. Eles testam continuamente seu próprio hardware (memória, conversores, processador), suas entradas analógicas e digitais, e a integridade da comunicação. Ao detectar um defeito interno, o IED se sinaliza como indisponível (alarme) e, frequentemente, bloqueia para não atuar de forma errada. Essa capacidade transforma uma falha dormente numa falha imediatamente conhecida e tratável."
+        },
+        {
+          "id": "s3",
+          "title": "Disponibilidade da proteção",
+          "type": "note",
+          "body": "A confiabilidade da proteção depende não só de ela atuar corretamente, mas de estar DISPONÍVEL quando necessária. Um relé com defeito não detectado tem disponibilidade comprometida — parece protegido, mas não está. O monitoramento eleva a disponibilidade ao reduzir o tempo em que um defeito permanece desconhecido (o 'tempo de exposição'). Quanto antes um defeito é detectado e corrigido, menor a chance de que uma falta o pegue desprevenido."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A proteção fica dormente e um defeito nela pode ficar invisível até uma falta o revelar — falhando quando mais se precisa. O monitoramento detecta esses defeitos antes. A automonitoração dos IEDs testa continuamente hardware, entradas e comunicação, alarmando e bloqueando ao achar defeito. Isso eleva a DISPONIBILIDADE da proteção, reduzindo o tempo em que um defeito fica desconhecido."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Supervisão do Circuito de Trip",
+      "subtitle": "Garantindo que o trip chega ao disjuntor",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O elo mais crítico e mais vulnerável",
+          "type": "text",
+          "body": "De nada adianta um relé perfeito detectar a falta se o comando de trip não chegar ao disjuntor. O circuito de trip — a fiação do relé à bobina de abertura do disjuntor, passando pela alimentação CC — é um elo crítico e vulnerável: a bobina pode queimar, um fio pode romper, um contato pode oxidar, a alimentação CC pode faltar. E, como o trip raramente é acionado, esse defeito ficaria invisível. A supervisão do circuito de trip (função ANSI 3 — TCS, Trip Circuit Supervision) monitora continuamente a integridade desse elo."
+        },
+        {
+          "id": "s2",
+          "title": "Como funciona a TCS",
+          "type": "text",
+          "body": "A supervisão do circuito de trip faz circular uma pequena corrente de monitoração através de toda a cadeia (fiação + bobina de trip), tanto com o disjuntor aberto quanto fechado. Se essa corrente de supervisão for interrompida (fio rompido, bobina queimada, perda de CC), o sistema detecta e alarma imediatamente — revelando o defeito antes que ele cause uma falha de trip numa falta real. É uma das supervisões mais valiosas de uma subestação."
+        },
+        {
+          "id": "s3",
+          "title": "O que mais se supervisiona",
+          "type": "list",
+          "items": [
+            "Circuito de trip (TCS — função 3) — integridade da bobina e fiação de abertura",
+            "Circuito de fechamento — integridade da bobina de fechamento",
+            "Alimentação CC — tensão presente e adequada",
+            "Continuidade dos TCs e TPs — detecção de fusível de TP queimado (Fuse Failure)",
+            "Posição e consistência dos contatos auxiliares dos disjuntores"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Fuse Failure (supervisão de TP)",
+          "type": "note",
+          "body": "A supervisão de falha de fusível de TP (Fuse Failure Supervision) é outra função importante: se um fusível do TP queima, a tensão medida cai a zero numa fase mesmo sem falta — e funções que dependem da tensão (distância 21, direcional 67, sincronismo 25) poderiam atuar indevidamente, 'achando' que há uma falta. A função detecta a perda de tensão sem a correspondente corrente de falta e bloqueia as funções dependentes de tensão, evitando o trip indevido. É a proteção contra um defeito da própria medição."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O circuito de trip (relé → bobina do disjuntor) é crítico e vulnerável, e seu defeito ficaria invisível. A supervisão do circuito de trip (TCS, função 3) faz circular corrente de monitoração e alarma ao detectar rompimento. Supervisiona-se ainda fechamento, CC, TCs/TPs e contatos. A Fuse Failure detecta perda de fusível de TP e bloqueia funções dependentes de tensão (21, 67, 25), evitando trip indevido."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Diagnóstico e Manutenção Baseada em Condição",
+      "subtitle": "Do monitoramento à decisão de manutenção",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Monitoramento de equipamentos primários",
+          "type": "text",
+          "body": "O monitoramento moderno vai além da proteção: monitora a condição dos equipamentos primários. Disjuntores têm contadores de operação, monitoração do tempo de abertura, do desgaste dos contatos (I²t acumulado), e da pressão do gás SF6. Transformadores têm monitoração de temperatura, análise de gases dissolvidos no óleo (DGA), e da condição das buchas e do comutador de tap. Esses dados permitem conhecer a 'saúde' real de cada equipamento em tempo real."
+        },
+        {
+          "id": "s2",
+          "title": "Manutenção baseada em condição (CBM)",
+          "type": "note",
+          "body": "O monitoramento contínuo viabiliza a mudança da manutenção baseada em tempo (trocar/revisar em intervalos fixos) para a manutenção baseada em condição (CBM — agir quando os dados indicam degradação). A CBM reduz custos (não se faz manutenção desnecessária em equipamento saudável) e aumenta a confiabilidade (intervém-se antes da falha em equipamento que está se degradando). É uma das maiores vantagens da subestação digital monitorada — manutenção na hora certa, nem antes nem depois."
+        },
+        {
+          "id": "s3",
+          "title": "Registro sequencial de eventos (SOE) e diagnóstico",
+          "type": "text",
+          "body": "O registro sequencial de eventos (SOE), com estampa de tempo de alta precisão, registra a ordem exata em que tudo aconteceu: qual proteção partiu primeiro, quando o disjuntor abriu, quando os alarmes surgiram. Combinado com a oscilografia (RDP), o SOE permite reconstruir e diagnosticar qualquer evento com precisão. Para problemas intermitentes ou eventos complexos, esses registros são a única forma de chegar à causa raiz."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O monitoramento abrange equipamentos primários (disjuntores: operações, tempo, desgaste, SF6; transformadores: temperatura, DGA), viabilizando a manutenção baseada em condição (CBM) — agir quando os dados indicam degradação, não em intervalos fixos. O SOE com estampa de tempo precisa, somado à oscilografia, permite diagnóstico de causa raiz. O monitoramento transforma a proteção dormente num sistema que se conhece, se diagnostica e se mantém na hora certa."
+        }
+      ]
+    }
+  ]
+}

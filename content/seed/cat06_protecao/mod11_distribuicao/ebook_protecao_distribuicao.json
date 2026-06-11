@@ -1,0 +1,179 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Proteção de Redes de Distribuição",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções específicas de distribuição",
+  "moduleOrder": 10,
+  "ebookTitle": "Proteção de Redes de Distribuição",
+  "ebookSubtitle": "Religadores, fusíveis, coordenação fuse-saving e o impacto da geração distribuída",
+  "estimatedMinutes": 65,
+  "trailFiles": [
+    "t01_fundamentos_distribuicao.json",
+    "t02_aplicacoes_distribuicao.json",
+    "t03_protecoes_distribuicao.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — As Particularidades da Distribuição",
+      "subtitle": "Radial, extensa e cheia de ramais",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O sistema de distribuição",
+          "type": "text",
+          "body": "A rede de distribuição (média tensão, tipicamente 13,8 a 34,5 kV) leva a energia da subestação até os consumidores. É predominantemente radial, extensa, ramificada e exposta — com milhares de quilômetros de redes aéreas atravessando áreas urbanas e rurais. Suas faltas são, na maioria, transitórias e na rede aérea (vegetação, animais, descargas). A proteção de distribuição prioriza o custo-benefício e a continuidade do serviço ao maior número de consumidores."
+        },
+        {
+          "id": "s2",
+          "title": "Os dispositivos da distribuição",
+          "type": "list",
+          "items": [
+            "Relé do alimentador (na subestação) — sobrecorrente de fase e neutro (50/51, 50N/51N), com religamento (79)",
+            "Religadores (no meio da linha) — sobrecorrente com sequências de religamento automático",
+            "Seccionalizadores — contam as operações do religador e abrem no tempo morto para isolar o trecho",
+            "Fusíveis (nos ramais e transformadores) — o dispositivo mais numeroso, protege ramais e trafos de distribuição",
+            "Chaves fusível e chaves-faca para manobra e isolação"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A filosofia da continuidade",
+          "type": "note",
+          "body": "Na distribuição, os indicadores de qualidade (DEC, FEC — duração e frequência das interrupções) regem a operação. A proteção é projetada para minimizar o número de consumidores afetados e o tempo de interrupção. É por isso que o religamento e a coordenação fuse-saving são tão importantes: a maioria das faltas é transitória, e religar evita interrupções permanentes desnecessárias, melhorando os índices de continuidade."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A distribuição (MT, radial, extensa, exposta) tem a maioria das faltas transitórias na rede aérea. Seus dispositivos são o relé do alimentador (com 79), religadores, seccionalizadores e fusíveis (os mais numerosos). A filosofia prioriza continuidade (DEC/FEC), minimizando consumidores afetados — daí a importância do religamento e da coordenação fuse-saving."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Religadores e Seccionalizadores",
+      "subtitle": "A automação da rede",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Como funciona o religador",
+          "type": "text",
+          "body": "O religador é um disjuntor com proteção e religamento automático integrados, instalado ao longo da linha. Ao detectar uma falta, ele abre e, após um tempo morto, religa — repetindo a sequência um número programado de vezes (tipicamente até 3-4 tentativas) com curvas e tempos crescentes. Se a falta era transitória, ela se extingue numa das tentativas e a linha volta. Se persiste, o religador completa a sequência e abre definitivamente (lockout), isolando o trecho."
+        },
+        {
+          "id": "s2",
+          "title": "A sequência de operação típica",
+          "type": "list",
+          "items": [
+            "1ª e 2ª operações — curva rápida (instantânea), tentando salvar o fusível do ramal (fuse-saving)",
+            "3ª e 4ª operações — curva lenta (temporizada), dando tempo para o fusível do ramal queimar e isolar a falta permanente",
+            "Tempos mortos entre operações — permitem a extinção do arco transitório",
+            "Lockout — após a última operação sem sucesso, abre definitivamente",
+            "Reset — se a linha permanece sã por um tempo, a sequência é reiniciada"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Seccionalizadores",
+          "type": "text",
+          "body": "O seccionalizador não interrompe corrente de falta — ele trabalha em conjunto com o religador a montante. Ele conta as operações (aberturas) do religador e, após um número programado de contagens, abre durante o tempo morto (quando a linha está sem corrente), isolando o trecho defeituoso a jusante. Isso permite que o religador continue protegendo o restante da rede, enquanto só o trecho com falta permanente fica desligado. É uma forma econômica de seccionar a rede sem um disjuntor adicional."
+        },
+        {
+          "id": "s4",
+          "title": "Coordenação religador-fusível",
+          "type": "note",
+          "body": "A coordenação fuse-saving busca poupar o fusível do ramal em faltas transitórias: o religador atua na curva rápida ANTES do fusível queimar, dando chance à falta de se extinguir. Se não se extinguir, o religador passa à curva lenta, permitindo que o fusível queime e isole o ramal permanentemente — preservando o restante do alimentador. A alternativa (fuse-blowing) sacrifica o fusível imediatamente para evitar piscadas em todos os clientes do alimentador. A escolha reflete a prioridade da concessionária."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O religador integra proteção e religamento, executando sequências (rápida → lenta) contra faltas transitórias, com lockout no fim. O seccionalizador conta as operações do religador e abre no tempo morto para isolar o trecho, sem interromper corrente. A coordenação fuse-saving poupa o fusível em faltas transitórias (curva rápida) e o sacrifica em permanentes (curva lenta) — ou fuse-blowing, conforme a prioridade."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Faltas à Terra e Alta Impedância",
+      "subtitle": "O desafio do cabo partido",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Proteção de neutro na distribuição",
+          "type": "text",
+          "body": "A maioria das faltas na distribuição envolve a terra (galho tocando a fase, cabo partido caindo no solo). A proteção de neutro (50N/51N) responde à corrente residual (3·I0) e pode ter pickup bem mais baixo que a de fase, detectando faltas à terra que a proteção de fase não veria. Em sistemas com neutro multiaterrado, a corrente de falta à terra é razoável; em sistemas com neutro de alta impedância, ela é baixa e exige proteções mais sensíveis."
+        },
+        {
+          "id": "s2",
+          "title": "O problema da falta de alta impedância (HIZ)",
+          "type": "note",
+          "body": "A falta de alta impedância (High Impedance Fault) é um dos maiores desafios da distribuição: um cabo energizado que cai num solo seco, asfalto ou areia gera uma corrente de falta tão baixa (poucos amperes) que se confunde com a corrente de carga normal — a proteção convencional não a detecta. Mas o cabo no chão é um risco de vida (eletrocução de pessoas). Tecnologias específicas de detecção de HIZ analisam padrões de arco e harmônicas para identificar essas faltas que escapam à proteção tradicional."
+        },
+        {
+          "id": "s3",
+          "title": "Detecção de HIZ",
+          "type": "list",
+          "items": [
+            "Análise de harmônicas e do comportamento aleatório do arco intermitente",
+            "Algoritmos de reconhecimento de padrão em relés numéricos especializados",
+            "Monitoramento da assinatura da corrente residual no tempo",
+            "Trade-off entre sensibilidade (detectar a HIZ) e segurança (não atuar com chaveamentos normais)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Faltas à terra dominam a distribuição; a proteção de neutro (50N/51N) responde a 3·I0 com pickup sensível. A falta de alta impedância (cabo no solo seco) gera corrente baixíssima que escapa à proteção convencional, mas é um risco de vida — exigindo tecnologias de detecção de HIZ baseadas em padrões de arco e harmônicas, equilibrando sensibilidade e segurança."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Geração Distribuída e Redes Inteligentes",
+      "subtitle": "Como a GD muda a proteção",
+      "estimatedMinutes": 10,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O fim do fluxo unidirecional",
+          "type": "text",
+          "body": "A proteção tradicional de distribuição assume fluxo unidirecional (da subestação para a carga). A geração distribuída (GD) — solar, eólica, biomassa conectada na rede de distribuição — quebra essa premissa: agora há fontes injetando corrente em vários pontos, e o fluxo pode se inverter. Isso afeta a coordenação (a corrente de falta vem de múltiplas direções), pode cegar proteções, causar atuações indevidas e dificultar o religamento."
+        },
+        {
+          "id": "s2",
+          "title": "Os desafios da GD para a proteção",
+          "type": "list",
+          "items": [
+            "Cegamento de proteção (blinding) — a GD reduz a corrente vista pelo relé da subestação para faltas além dela",
+            "Disparo indevido (sympathetic tripping) — a contribuição da GD pode fazer um alimentador são disparar",
+            "Religamento fora de sincronismo — a GD pode manter o trecho energizado (ilhamento), e o religamento ocorre fora de fase",
+            "Anti-ilhamento (função obrigatória) — a GD deve se desconectar ao detectar que ficou ilhada",
+            "Necessidade de proteção direcional e adaptativa"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A proteção adaptativa e as smart grids",
+          "type": "note",
+          "body": "A solução para a complexidade trazida pela GD é a proteção adaptativa: relés que ajustam seus parâmetros conforme a topologia e a presença de GD em tempo real, comunicando-se entre si (IEC 61850) para coordenar dinamicamente. As redes inteligentes (smart grids) integram proteção, automação e comunicação para lidar com a bidirecionalidade do fluxo, o ilhamento intencional (microgrids) e a restauração automática. A proteção de distribuição está evoluindo de estática para adaptativa e comunicante."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A geração distribuída quebra o fluxo unidirecional, causando cegamento, disparo indevido e religamento fora de sincronismo, e exigindo anti-ilhamento. A solução são a proteção direcional e a adaptativa, com comunicação (IEC 61850) e smart grids que coordenam dinamicamente. A proteção de distribuição — de religadores e fusíveis à GD adaptativa — evolui para acompanhar a rede moderna, sempre priorizando a continuidade e a segurança."
+        }
+      ]
+    }
+  ]
+}

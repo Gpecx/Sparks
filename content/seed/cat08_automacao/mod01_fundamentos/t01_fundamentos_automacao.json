@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Fundamentos de Automação Industrial",
+  "moduleSubtitle": "Conceitos, componentes, malhas de controle e SPCS",
+  "moduleOrder": 0,
+  "trail": "Fundamentos de Automação Industrial",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o objetivo principal da automação industrial em um processo de manufatura?",
+      "options": [
+        "Substituir a tomada de decisão gerencial das empresas.",
+        "Aumentar a produtividade e diminuir os custos operacionais.",
+        "Eliminar completamente a necessidade de manutenção física.",
+        "Manter a produção dependente do julgamento humano constante."
+      ],
+      "correctIndex": 1,
+      "explanation": "A automação utiliza potência mecânica e eletrônica para realizar tarefas de forma eficiente, diminuindo custos e elevando a produtividade da planta (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a principal função de um sensor primário dentro do ambiente de controle automático?",
+      "options": [
+        "Atuar fisicamente sobre o fluxo de fluídos nas válvulas.",
+        "Processar os dados complexos na unidade lógica do CLP.",
+        "Modular o tráfego da rede Ethernet do chão de fábrica.",
+        "Converter um parâmetro físico em um sinal equivalente operável."
+      ],
+      "correctIndex": 3,
+      "explanation": "Sensores são os equipamentos dedicados a detectar as variações físicas do processo e traduzi-las em dados ou sinais elétricos (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a responsabilidade primária entregue por um sistema de software SCADA na indústria?",
+      "options": [
+        "Garantir a força motriz hidráulica direta nos braços robóticos.",
+        "Monitorar o processo e adquirir dados em interfaces visuais.",
+        "Substituir o algoritmo lógico residente nos microcontroladores PID.",
+        "Atuar como protocolo físico exclusivo para os roteadores corporativos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O software SCADA fornece as ferramentas visuais e digitais necessárias para monitorar a planta e coletar os dados operacionais contínuos (PLC vs SCADA vs DCS).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um controlador industrial PID, qual é o principal efeito corretivo fornecido pela ação integral?",
+      "options": [
+        "Eliminar permanentemente o desvio residual chamado de offset.",
+        "Antecipar qualquer desvio operando estritamente como uma rampa cega.",
+        "Aumentar o erro em regime permanente focando apenas na velocidade de resposta.",
+        "Desligar por completo a força mecânica em caso de sobreaquecimento térmico."
+      ],
+      "correctIndex": 0,
+      "explanation": "O controle integral compensa os erros estáveis deixados pela parcela proporcional, removendo ativamente a distorção de offset do sistema (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a regulamentação global estabelecida pela norma IEC 61131-3 define prioritariamente?",
+      "options": [
+        "A resistência mecânica exata exigida para painéis herméticos em mar aberto.",
+        "O padrão para o envio de pulsos pneumáticos nas tubulações restritivas.",
+        "A padronização internacional aplicável às linguagens de programação de CLPs.",
+        "A largura de banda mínima requerida nos protocolos de comunicação sem fio."
+      ],
+      "correctIndex": 2,
+      "explanation": "A referida norma unifica e regulamenta de forma internacional os métodos e as lógicas de programação aceitas em controladores lógicos (IEC 61131-3: A Norma que padroniza a Automação Industrial).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que justifica a grande e tradicional adoção do protocolo Modbus TCP em instalações automáticas modernas?",
+      "options": [
+        "Requerer obrigatoriamente circuitos dedicados exclusivamente analógicos de fibra dupla.",
+        "Funcionamento restrito aos processadores fabricados para servidores de nuvem.",
+        "Ser uma arquitetura de protocolo aberto aliada a uma implementação bastante simples.",
+        "Inibir de forma nativa a comunicação entre redes corporativas conectadas via IP."
+      ],
+      "correctIndex": 2,
+      "explanation": "Criado na década de 1970, o protocolo se consolidou pela sua enorme simplicidade técnica e formato aberto aplicável livremente em múltiplos dispositivos (Conhecendo os protocolos Modbus TCP, EtherNet/IP e PROFINET - Altus).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando se torna imperativo adotar um Sistema de Controle Distribuído (DCS) em vez de focar apenas no CLP de grande porte?",
+      "options": [
+        "Em células estanques de soldagem operadas unicamente por robôs dedicados.",
+        "Em cenários onde as válvulas não suportam as redes padronizadas digitais.",
+        "Quando o escopo engloba plantas contínuas inteiras cujos limites extrapolam as E/S de um CLP.",
+        "Quando os dados necessitam se manter ocultos para a rede corporativa principal (TI)."
+      ],
+      "correctIndex": 2,
+      "explanation": "A integração DCS assume o controle massivo nas fábricas contínuas em que um CLP isolado perde eficiência perante milhares de requisições de processo simultâneas (PLC vs SCADA vs DCS).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual vantagem operacional é alcançada processando a inteligência artificial diretamente no Edge Computing fabril?",
+      "options": [
+        "Garantia de tomada de decisões autônomas velozes e com baixíssima latência.",
+        "Afastamento total das etapas críticas para datacenters geolocalizados longe.",
+        "Fim imediato da necessidade de calibração física dos motores síncronos de indução.",
+        "Elevação da dependência contínua aos links instáveis da internet nas esteiras."
+      ],
+      "correctIndex": 0,
+      "explanation": "Aplicar algoritmos analíticos nos equipamentos de borda elimina a latência da nuvem viabilizando respostas essenciais ocorrendo em milissegundos localmente (Edge AI na Indústria).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o método primitivo da Curva de Resposta proposto por Ziegler-Nichols direciona os procedimentos de sintonia experimental do algoritmo PID?",
+      "options": [
+        "Invertendo abruptamente a constante de tempo em ciclos harmônicos progressivos limitados.",
+        "Aumentando gradualmente o esforço da bomba centrífuga principal em circuito hermético fechado.",
+        "Aplicando subitamente um estímulo em degrau unitário enquanto o controlador está em malha aberta.",
+        "Avaliando a ressonância exata decorrente da desconexão programada do cabo terra nas placas."
+      ],
+      "correctIndex": 2,
+      "explanation": "A calibração do Ziegler-Nichols captura a assinatura e formato S do processo lendo sua resposta temporal a um pulso puro simulado de forma aberta (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que causa um acréscimo considerável dos riscos às informações contidas e monitoradas pelas estações operacionais SCADA no ambiente corporativo recente?",
+      "options": [
+        "A substituição sumária das antigas conexões elétricas locais por sinais hidráulicos independentes.",
+        "A integração e a convergência constante das arquiteturas de TI com o chão de fábrica (TO).",
+        "A impossibilidade técnica severa de modernizar roteadores em datacenters globais fechados.",
+        "A utilização compulsória de controles estritos do tipo pneumático nos tanques perigosos restritos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Juntar a Tecnologia da Informação corporativa aos protocolos abertos da Tecnologia Operacional insere falhas lógicas perigosas que expõem máquinas (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O sistema de controle operando em malha fechada utiliza a medição do próprio sinal de saída como retroação para ser comparada com a meta desejada.",
+      "correctAnswer": true,
+      "explanation": "A malha fechada caracteriza-se pelo uso constante do feedback da saída para a compensação e correção contínua dos desvios (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os sinais da instrumentação do tipo analógicos transmitem informações restritas a dois estados operacionais, como ligado e desligado.",
+      "correctAnswer": false,
+      "explanation": "Sinais analógicos, como a faixa de 4 a 20 mA, modulam uma grandeza contínua que representa percentualmente o valor medido em toda sua escala (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A história da eletrônica revela que os primeiros Controladores Lógicos Programáveis apareceram apenas nos anos 1990 para dar suporte ao protocolo Internet.",
+      "correctAnswer": false,
+      "explanation": "Os primeiros CLPs foram desenvolvidos e aplicados em 1969 pela indústria automotiva para modernizar os quadros defasados de relés mecânicos (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No esquema metodológico de controle em cascata dois controladores funcionam atrelados enviando comandos independentes para duas válvulas separadas.",
+      "correctAnswer": false,
+      "explanation": "Sistemas formatados em cascata ligam de forma subordinada os laços dos controladores forçando-os a manipular e operar um único atuador (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na estratégia de controle por faixa dividida (split range) o mesmo processador consegue coordenar em sequência a abertura progressiva e o fechamento oposto de duas válvulas atuando no mesmo processo.",
+      "correctAnswer": true,
+      "explanation": "Um controle avançado na faixa dividida usa o intervalo do seu sinal de saída rateado para mover dispositivos seqüenciais em vetores inversos na planta (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O ____ atua como elemento final na malha de controle, recebendo os sinais diretos do sistema para desempenhar e aplicar a força física sobre a planta.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "atuador"
+        }
+      ],
+      "explanation": "Os atuadores exercem o trabalho mecânico final, mudando posições de válvulas ou ligando sistemas rotativos conforme a ordem da automação (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na configuração clássica de controle PID o ganho focado em antecipar o erro provendo força de oposição a mudanças é chamado de ação ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "derivativa"
+        }
+      ],
+      "explanation": "A parte derivativa amortece as dinâmicas reagindo rapidamente à taxa com que os desvios se deslocam do alvo (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Um dispositivo inteligente de medição do tipo ____ inspeciona passivamente o fluxo nas tubulações para bloquear por precaução equipamentos em caso de estancamento.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "fluxostato"
+        }
+      ],
+      "explanation": "Módulos de verificação como os fluxostatos fecham o circuito interrompendo as etapas que dependem rigorosamente do escoamento estável contínuo (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Harmônicas e Distorção",
+  "moduleSubtitle": "Fundamentos, fontes, impactos, analise e mitigacao",
+  "moduleOrder": 1,
+  "trail": "Filtros Passivos e Ativos",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Como os filtros ativos eliminam as distorcoes harmonicas presentes em uma instalacao eletrica?",
+      "options": [
+        "Bloqueando a passagem das correntes pela elevacao da impedancia de sequencia zero.",
+        "Injetando harmonicas de corrente com a fase exatamente oposta a aquelas que deverao ser filtradas.",
+        "Aumentando a frequencia fundamental da rede para valores acima de 60 Hz.",
+        "Desconectando automaticamente os equipamentos geradores durante os picos de carga."
+      ],
+      "correctIndex": 1,
+      "explanation": "O documento ABB Correcao de fator de potencia relata que os filtros ativos injetam harmonicas de corrente com fase exatamente oposta as que deverao ser filtradas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e uma desvantagem tradicional do uso de acionamento CA em 6 pulsos com filtro passivo?",
+      "options": [
+        "Nao consegue atender aos limites de distorcao estabelecidos pela norma IEEE 519.",
+        "Aumenta as perdas por aquecimento e reduz o fator de potencia da instalacao.",
+        "Exige a instalacao de um transformador defasador dedicado para o seu funcionamento.",
+        "Opera exclusivamente em aplicacoes que regeneram energia para a rede eletrica."
+      ],
+      "correctIndex": 1,
+      "explanation": "O manual Solucoes WEG cita que o filtro passivo atende a IEEE 519, porem aumenta as perdas por aquecimento e reduz o fator de potencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em inversores de frequencia, o uso de retificadores de 12 e 18 pulsos e recomendado geralmente para potencias superiores a qual valor?",
+      "options": [
+        "50 kW.",
+        "100 kW.",
+        "500 kW.",
+        "1000 kW."
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo o catalogo da WEG, devido ao alto custo, os retificadores de 12 e 18 pulsos tendem a ser utilizados com potencias geralmente maiores que 500 kW.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o beneficio direto da utilizacao de indutor no link CC em inversores de frequencia em 6 pulsos?",
+      "options": [
+        "Anula completamente a necessidade de capacitores no barramento de corrente continua.",
+        "Amplifica as correntes de sequencia zero em sistemas com aterramento solido.",
+        "Reduz significativamente a emissao de harmonicos em relacao aos modelos sem o indutor.",
+        "Permite a regeneracao total da energia cinetica do motor de volta para a rede."
+      ],
+      "correctIndex": 2,
+      "explanation": "O documento Solucoes WEG afirma que o indutor no link CC reduz significativamente a emissao de harmonicos em relacao aos inversores sem indutor.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando a solucao de acionamento regenerativo AFE com filtro LCL se torna especialmente atrativa para o sistema?",
+      "options": [
+        "Quando e possivel regenerar energia para a rede ou ao acionar diversos motores por um unico barramento CC.",
+        "Quando o sistema isolado possui potencias inferiores a 5 kW operando com fator de potencia unitario.",
+        "Quando a instalacao exige exclusivamente filtros passivos sintonizados na terceira ordem.",
+        "Quando o nivel de curto-circuito da rede e extremamente baixo e impossibilita o uso de diodos."
+      ],
+      "correctIndex": 0,
+      "explanation": "O catalogo de mitigacao da WEG indica que a solucao AFE com filtro LCL e especialmente atrativa quando se regenera energia ou ha multiplos motores em um barramento CC.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o valor tipico da Distorcao Harmonica Total de Corrente (THD) para um drive de 6 pulsos equipado com reatancia de rede?",
+      "options": [
+        "81,5 por cento.",
+        "39 por cento.",
+        "8,5 a 14 por cento.",
+        "Inferior a 5 por cento."
+      ],
+      "correctIndex": 1,
+      "explanation": "A tabela comparativa da WEG detalha que o drive de 6 pulsos operando com reatancia de rede possui uma THD de corrente tipica de 39 por cento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a tabela da WEG, qual configuracao de drive apresenta uma THD de corrente tipica na faixa entre 8,5 e 14 por cento?",
+      "options": [
+        "Drive de 6 pulsos sem indutor no link CC.",
+        "Drive de 6 pulsos com filtro ativo.",
+        "Drive de 18 pulsos com transformador defasador.",
+        "Drive de 12 pulsos com transformador defasador."
+      ],
+      "correctIndex": 3,
+      "explanation": "A tabela comparativa da WEG lista explicitamente o drive de 12 pulsos com transformador defasador possuindo THD tipica entre 8,5 e 14 por cento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Alem da filtragem de correntes harmonicas, quais outras funcoes de correcao sao executadas pelos filtros ativos da linha PQF da ABB?",
+      "options": [
+        "Compensacao de energia reativa e balanceamento de carga.",
+        "Elevacao da tensao nominal e geracao de energia ativa.",
+        "Isolamento galvanico e estabilizacao da frequencia da rede.",
+        "Supressao de surtos atmosfericos e protecao diferencial."
+      ],
+      "correctIndex": 0,
+      "explanation": "O informativo da ABB destaca que os filtros ativos PQF executam uma tripla funcao: filtragem harmonica, compensacao de energia reativa e balanceamento de carga.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em relacao aos conversores de 6 pulsos convencionais, por que a solucao de 18 pulsos, mesmo atendendo a norma IEEE 519, apresenta uso mais restrito?",
+      "options": [
+        "Devido a sua alta emissao de ruidos em radiofrequencia que afeta os sistemas de medicao.",
+        "Por apresentar custo elevado, exigindo geralmente um transformador defasador dedicado.",
+        "Por operar exclusivamente com motores sincronos de polos lisos em alta rotacao.",
+        "Pela impossibilidade tecnica de acoplar transformadores em configuracao estrela-triangulo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O manual da WEG relata que o retificador de 18 pulsos atende a IEEE 519, mas devido ao alto custo tende a exigir um transformador defasador dedicado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo o comparativo da WEG, quais sao os valores tipicos de THD de corrente e fator de potencia (a vazio ou plena carga) para um drive de 6 pulsos equipado com filtro ativo?",
+      "options": [
+        "THD menor ou igual a 5 por cento e fator de potencia maior ou igual a 0,99.",
+        "THD de 4,5 a 6 por cento e fator de potencia entre 0,9 e 0,99.",
+        "THD de 30 a 40 por cento e fator de potencia entre 0,7 e 0,94.",
+        "THD de 8,5 a 14 por cento e fator de potencia entre 0,9 e 0,99."
+      ],
+      "correctIndex": 0,
+      "explanation": "A tabela comparativa da WEG estabelece para o drive com filtro ativo uma THD tipica menor ou igual a 5 por cento e um fator de potencia tipico maior ou igual a 0,99.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os filtros ativos atuam eliminando as distorcoes da rede injetando correntes harmonicas que possuem exatamente a mesma fase daquelas geradas pelas cargas nao lineares originais.",
+      "correctAnswer": false,
+      "explanation": "O documento da ABB sobre correcao de fator de potencia explica que os filtros injetam correntes harmonicas com a fase exatamente oposta a aquelas que deverao ser filtradas.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A utilizacao de inversores acoplados com filtro passivo na entrada e considerada uma solucao tradicional para mitigacao de harmonicos que consegue atender aos rigorosos limites da IEEE 519.",
+      "correctAnswer": true,
+      "explanation": "O manual Solucoes WEG relata literalmente que a utilizacao de inversores com filtro passivo atende aos limites recomendados pela IEEE 519.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A solucao baseada em drive de 6 pulsos com reatancia instalada no link CC atinge uma reducao na THD de corrente para valores inferiores a 5 por cento, superando a eficiencia do filtro ativo.",
+      "correctAnswer": false,
+      "explanation": "A tabela da WEG indica que a THD do drive com reatancia no link CC varia de 30 a 40 por cento, um valor consideravelmente superior aos 5 por cento atingidos pelo filtro ativo.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os filtros ativos sao capazes de reduzir as correntes harmonicas melhorando a performance do sistema como um todo, porem o seu custo comercial e mais elevado se comparado aos filtros passivos convencionais.",
+      "correctAnswer": true,
+      "explanation": "Segundo o guia de mitigacao da WEG, a solucao de filtro ativo e otima, mas possui custo mais elevado em relacao ao filtro passivo por ser uma tecnologia relativamente mais recente.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A analise da tabela comparativa de solucoes revela que a configuracao de drive em 18 pulsos com transformador defasador apresenta uma eficiencia tipica de 96 por cento, sendo inferior a eficiencia alcancada pelo drive de 6 pulsos com filtro passivo.",
+      "correctAnswer": true,
+      "explanation": "A tabela comparativa de solucoes WEG atesta a eficiencia do drive de 18 pulsos em 96 por cento, enquanto o drive de 6 pulsos com filtro passivo registra 97 por cento.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Os modernos filtros ativos processam as medicoes complexas de correntes harmonicas como sinais puramente digitais em alta potencia, utilizando para essa tarefa um componente denominado ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "DSP"
+        }
+      ],
+      "explanation": "O material informativo da ABB detalha que o processamento digital dos filtros ativos ocorre atraves do componente DSP (Processador de Sinal Digital).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para aplicacoes que exigem a regeneracao de energia de volta para a rede com atendimento aos limites normativos, uma solucao recomendada engloba um acionamento regenerativo AFE conectado em conjunto com um filtro ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "LCL"
+        }
+      ],
+      "explanation": "O guia tecnico da WEG descreve a solucao 'Acionamento Regenerativo AFE + Filtro LCL' como a alternativa ideal para permitir regeneracao de energia garantindo baixa distorcao harmonica.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Aplicado preferencialmente em paineis com potencia excedendo 500 kW, o acionamento alimentado por um retificador operando em ____ pulsos requer o uso de transformador defasador para garantir THD na faixa de 4,5 a 6 por cento.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "18"
+        }
+      ],
+      "explanation": "A tabela comparativa e o texto do catalogo da WEG especificam que a solucao em 18 pulsos e a configuracao que apresenta THD entre 4,5 e 6 por cento, exigindo transformador em potencias altas.",
+      "difficulty": "hard"
+    }
+  ]
+}

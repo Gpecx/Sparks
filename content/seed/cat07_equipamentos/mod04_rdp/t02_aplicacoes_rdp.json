@@ -1,0 +1,218 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Registradores Digitais de Perturbação",
+  "moduleSubtitle": "RDP, oscilografia, COMTRADE e análise de perturbações",
+  "moduleOrder": 3,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que o registro oscilográfico de um relé permite comprovar durante a operação e a análise pós-falta?",
+      "options": [
+        "A forma de onda da perturbação e o tempo exato de atuação das lógicas.",
+        "O consumo de energia do painel auxiliar de corrente contínua.",
+        "A rigidez dielétrica e a temperatura do óleo do transformador.",
+        "A saturação magnética e a polaridade do núcleo do TP."
+      ],
+      "correctIndex": 0,
+      "explanation": "O registro oscilográfico grava a forma de onda do evento e as ações lógicas em milissegundos, comprovando a eficácia e o tempo de atuação da proteção. (Fonte: Ensaio Avançado_PECS).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os dados oscilográficos de perturbações auxiliam a equipe de manutenção em relés digitais modernos?",
+      "options": [
+        "Dispensam totalmente a necessidade de aplicação de aterramento temporário.",
+        "A análise regular dos eventos capturados permite acompanhar o desempenho e atestar a saúde operativa do relé.",
+        "Evitam a execução de testes funcionais periódicos nas bobinas dos disjuntores.",
+        "Alteram fisicamente e de forma automática os contatos de trip do equipamento."
+      ],
+      "correctIndex": 1,
+      "explanation": "A análise regular dos eventos e oscilogramas de perturbações permite acompanhar remotamente o desempenho do relé, suportando a manutenção preditiva. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual informação vital pode ser visualizada na oscilografia das correntes de um gerador submetido a um curto-circuito trifásico?",
+      "options": [
+        "A impedância capacitiva puramente teórica do estator.",
+        "A curva de magnetização de excitação do TP capacitivo.",
+        "A transição cronológica exata entre os períodos subtransitório, transitório e de regime da falta.",
+        "A resistência de contato dos pólos do disjuntor após a sua abertura."
+      ],
+      "correctIndex": 2,
+      "explanation": "O oscilograma de um curto-circuito nos terminais do gerador permite distinguir claramente a evolução temporal das correntes nos períodos subtransitório, transitório e de regime. (Fonte: Virtus_Ferramentas_Ed4).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a análise de perturbações sistêmicas via oscilografia e RDP proporciona ao Operador Nacional do Sistema (ONS)?",
+      "options": [
+        "O bloqueio mecânico autônomo das chaves seccionadoras de transferência em falhas evolutivas.",
+        "O controle tarifário direto sobre o faturamento de energia reativa excedente das indústrias.",
+        "A eliminação total e definitiva do uso de relés de sobrecorrente na rede básica.",
+        "A realimentação investigativa necessária para a correção de desvios operacionais e para a melhoria dos esquemas de proteção."
+      ],
+      "correctIndex": 3,
+      "explanation": "A análise sistemática das ocorrências e oscilografias fornece realimentação crítica para diagnósticos pós-operação, visando corrigir falhas e melhorar a confiabilidade. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual função agregada em modernos relés numéricos utiliza diretamente os dados oscilográficos para otimizar o tempo das equipes de manutenção de linha?",
+      "options": [
+        "A função de localização de faltas (Fault Locator), que aponta a quilometragem do defeito na linha de transmissão.",
+        "A função de sobrecarga térmica com compensação por curva cruzada I2t.",
+        "A função direcional estrita de subpotência reativa regional.",
+        "A função de salto de vetor atuando em frequências sub-harmônicas independentes."
+      ],
+      "correctIndex": 0,
+      "explanation": "Proteções digitais agregam funcionalidades como a medição e a localização de defeitos (Fault Locator) a partir das amostras da oscilografia, direcionando a equipe de reparo. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No diagnóstico de curtos-circuitos em oscilogramas reais, qual fenômeno explica o notório deslocamento de eixo (componente DC) visível nas correntes?",
+      "options": [
+        "O chaveamento rápido de circuitos de carga fortemente resistivos.",
+        "O transitório eletromagnético inerente ao chaveamento de circuitos predominantemente indutivos (RL) no exato instante da falta.",
+        "A atuação imprecisa e adiantada do relé de subfrequência local.",
+        "A saturação precoce do transformador de potencial operando em vazio sob alta temperatura."
+      ],
+      "correctIndex": 1,
+      "explanation": "O deslocamento de eixo, ou componente DC aperiódica na corrente, decorre do transitório no momento da falha em circuitos fortemente indutivos (LR). (Fonte: Virtus_Ferramentas_Ed4).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal utilidade do Registrador Sequencial de Eventos (SER) quando analisado em conjunto com o arquivo de oscilografia COMTRADE?",
+      "options": [
+        "Elevar os valores da tensão de polarização residual aplicada ao circuito magnético do relé.",
+        "Sincronizar forçadamente as frequências de dois geradores isolados em modo de ilhamento estrito.",
+        "Registrar a ordem cronológica exata das mudanças de estado das entradas, saídas, alarmes e lógicas do IED durante a perturbação.",
+        "Injetar pulsos analógicos de alta frequência para executar o autoteste rotineiro do conversor A/D."
+      ],
+      "correctIndex": 2,
+      "explanation": "O SER armazena a cronologia e a sequência lógica exata das alterações de estados digitais (pickups, trips, inputs) fundamentais para reconstituir a falha. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para analisar a inrush provocada pela energização de um transformador via oscilografia, que padrão o engenheiro deve identificar na forma de onda?",
+      "options": [
+        "A presença de uma corrente de magnetização transitória assimétrica e altamente rica em componentes harmônicas pares, principalmente a segunda harmônica.",
+        "O surgimento de uma corrente puramente resistiva e simétrica de altíssima frequência e rápido decaimento.",
+        "O estabelecimento de uma tensão de sequência negativa plana e constante circulando via condutor de neutro.",
+        "A ausência prolongada e completa de corrente no enrolamento primário durante os primeiros segundos."
+      ],
+      "correctIndex": 0,
+      "explanation": "A energização de transformadores gera correntes de magnetização transitória (inrush) com forte assimetria e elevado conteúdo de segunda e quarta harmônicas. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o registro oscilográfico auxilia na comprovação e ajuste do esquema de bloqueio contra oscilação de potência (ANSI 68)?",
+      "options": [
+        "Zera os harmônicos de terceira ordem gerados pela carga desequilibrada da linha.",
+        "Comanda o aterramento temporário no enrolamento primário dos transformadores de corrente adjacentes.",
+        "Acelera proativamente o tempo de disparo do disjuntor principal da linha de transmissão sob falta.",
+        "Permite visualizar a transição lenta da impedância, evidenciando o bloqueio intencional do relé de distância ante oscilações do sistema."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os registradores de eventos são imprescindíveis para revelar a forma da oscilação lenta da impedância e confirmar o desempenho correto do relé de bloqueio (Power Swing). (Fonte: Caminha).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na avaliação analítica de fenômenos transitórios muito rápidos utilizando arquivos de RDP, qual o efeito indesejado de uma taxa de amostragem.",
+      "options": [
+        "A forma de onda sofre distorção e seus transientes reais ficam mascarados, dificultando a análise fina da perturbação e do arco elétrico.",
+        "O arquivo COMTRADE gerado converte autonomamente todos os fasores nominais para componentes de sequência zero restrita.",
+        "O relé atua fisicamente e de forma imediata na zona 1 de distância, ignorando a curva de tempo inverso.",
+        "O relógio do equipamento rejeita por definitivo a modulação IRIG-B e impõe um reset de fábrica ao tempo absoluto do IED."
+      ],
+      "correctIndex": 0,
+      "explanation": "Uma taxa de amostragem baixa causa mascaramento do sinal (aliasing) impedindo a reprodução e análise fidedigna de transitórios de alta frequência da falta. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A análise atenta de um oscilograma permite ao analista identificar exatamente os instantes de detecção de falta, emissão de trip pelo relé e.",
+      "correctAnswer": true,
+      "explanation": "O registro digital guarda simultaneamente as formas de onda analógicas e os status digitais milissegundo a milissegundo, validando o tempo total de eliminação da falta. (Fonte: Ensaio de Relés Avançado).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Registradores e oscilografias não capturam a componente DC das correntes de curto-circuito, exibindo nos laudos pós-falta apenas a parte puramente.",
+      "correctAnswer": false,
+      "explanation": "A oscilografia captura a corrente real que flui no circuito, sendo perfeitamente visível a componente contínua e o deslocamento inicial de eixo gerado pelo transitório (LR). (Fonte: Virtus_Ferramentas_Ed4).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para as concessionárias, a análise regular e sistemática das oscilografias extraídas dos relés gera um diagnóstico essencial visando detectar.",
+      "correctAnswer": true,
+      "explanation": "A coleta e análise dos registros pós-perturbação produzem a realimentação indispensável para corrigir desvios operacionais da proteção, conforme praticado também pelo ONS. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Uma das evidências primordiais de ferroressonância nos oscilogramas de tensão do RDP é a existência de ondas excessivamente amortecidas e.",
+      "correctAnswer": false,
+      "explanation": "Ao contrário de sinais isentos de distorção, a ferroressonância exibe sobretensões sustentadas e anormais caracterizadas por elevado e persistente conteúdo de distorção harmônica. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O parâmetro de configuração 'Trigger with Trip' num relé garante que o registro oscilográfico seja gerado e gravado mesmo para correntes espúrias.",
+      "correctAnswer": false,
+      "explanation": "A opção 'Trigger with Trip' visa exatamente o inverso: ela condiciona o salvamento do registro à ocorrência confirmada do comando de abertura (Trip), poupando memória com falsos arranques. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O arquivo tabular acoplado à oscilografia, que documenta em lista a exata ordem cronológica do acionamento de alarmes e lógicas do relé, é o ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SER"
+        }
+      ],
+      "explanation": "O Sequential Events Recorder (SER) armazena a cronologia e mudanças de estados digitais (status e lógicas) para análise e reconstituição de faltas. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Ao analisar um transitório de energização de transformador de força, o oscilograma exibirá uma inrush fortemente desequilibrada e rica na ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "segunda"
+        }
+      ],
+      "explanation": "A corrente de magnetização transitória (inrush) é reconhecida em oscilogramas pelo seu elevado componente assimétrico de segunda harmônica, que bloqueia o relé diferencial. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na análise pós-falta, verificar a transição lenta e suave da impedância no plano R-X plotada pelo registrador ajuda a comprovar a correta atuação ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "potência"
+        }
+      ],
+      "explanation": "A função Power Swing (ANSI 68) distingue uma transição lenta da impedância (oscilação de potência) de uma falta instantânea real para efetuar o bloqueio correto. (Fonte: Caminha).",
+      "difficulty": "hard"
+    }
+  ]
+}

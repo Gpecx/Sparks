@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "",
+  "categoryOrder": 4,
+  "module": "Softwares de Estudos Elétricos",
+  "moduleSubtitle": "Ferramentas de analise de sistemas eletricos de potencia",
+  "moduleOrder": 3,
+  "trail": "ATP/EMTP",
+  "trailOrder": 9,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual é a finalidade principal da simulação no programa ATP/EMTP?",
+      "options": [
+        "Calcular o fluxo de carga linearizado em regime permanente.",
+        "Dimensionar o ciclo de vida de painéis solares residenciais.",
+        "Simular transitórios eletromagnéticos no domínio do tempo.",
+        "Realizar cálculos de curto-circuito estatístico estritamente em CC."
+      ],
+      "correctIndex": 2,
+      "explanation": "O ATP é um programa digital que permite a simulação de fenômenos transitórios eletromagnéticos em redes polifásicas através do domínio do tempo. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Quais eventos típicos em sistemas de potência causam as variações súbitas estudadas em análises de transitórios com o ATP?",
+      "options": [
+        "Descargas atmosféricas, faltas no sistema ou operação de disjuntores.",
+        "Flutuações lentas de carga ao longo de uma estação do ano.",
+        "Aumento gradual da temperatura ambiente em transformadores.",
+        "Variações na tarifa de energia elétrica e balanço de mercado."
+      ],
+      "correctIndex": 0,
+      "explanation": "A área de transitórios envolve variações súbitas provocadas por descargas atmosféricas, faltas no sistema ou operações de disjuntores (manobras). (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "As simulações EMT capturam os valores instantâneos de tensões e correntes, tornando-as ideais para quais tipos de estudos?",
+      "options": [
+        "Avaliação do despacho econômico de energia a longo prazo.",
+        "Fenômenos transientes rápidos como manobras de chaves e descargas atmosféricas.",
+        "Cálculo do fator de potência médio em regime permanente.",
+        "Redespacho otimizado de potência reativa em 24 horas."
+      ],
+      "correctIndex": 1,
+      "explanation": "Simulações EMT (como as do ATP/EMTP) resolvem equações diferenciais no domínio do tempo, sendo ideais para análises de fenômenos transitórios rápidos como manobras, falhas e quedas de raios. (Understanding EMT vs. RMS Simulations in Electrical Power Systems)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "O conhecimento das sobretensões entre fase e terra nos estudos de transitórios é importante principalmente para qual finalidade prática?",
+      "options": [
+        "Definir a seção transversal nominal dos condutores neutros.",
+        "Especificar pára-raios e realizar a coordenação de isolamento.",
+        "Ajustar as funções de proteção de distância de relés digitais.",
+        "Otimizar o fluxo de potência ótimo e o despacho de geradores."
+      ],
+      "correctIndex": 1,
+      "explanation": "O conhecimento das sobretensões fase-terra permite a especificação correta dos pára-raios e o estudo de coordenação de isolamento das subestações. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual método de integração numérica o programa ATP utiliza nativamente para a solução das equações diferenciais em elementos de parâmetros concentrados?",
+      "options": [
+        "Regra de Simpson de alta ordem.",
+        "Método de Euler explícito iterativo.",
+        "Regra de integração trapezoidal.",
+        "Método de Runge-Kutta de 4ª ordem."
+      ],
+      "correctIndex": 2,
+      "explanation": "A formulação matemática do ATP usa o método de Bergeron para parâmetros distribuídos e a regra de integração trapezoidal para elementos com parâmetros concentrados. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual programa foi incorporado para prover uma interface gráfica amigável ao ATP, permitindo construir os circuitos através de diagramas unifilares?",
+      "options": [
+        "EditCepel",
+        "ATPDraw",
+        "PowerFactory",
+        "PSCAD"
+      ],
+      "correctIndex": 1,
+      "explanation": "A partir de 1996-1997 foi incorporado o ATPDraw, que proveu interface gráfica ao ATP, permitindo construir circuitos em diagramas unifilares selecionando componentes. (Desenvolvimento de Modelos no Programa DigSILENT PowerFactory para o Estudo de Estabilidade Transitória em Sistemas Elétricos)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "No ATP, para levantar a distribuição estatística de sobretensões durante uma energização de linha, qual modelo de chave é recomendado utilizar?",
+      "options": [
+        "Chaves de tempo controlado estáticas e precisas.",
+        "Chaves controladas puramente por sinais lógicos da TACS.",
+        "Chaves estatísticas, gerando tempos de fechamento conforme distribuições normais ou uniformes.",
+        "Chaves de medição que permanecem permanentemente fechadas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Chaves estatísticas são usadas para simular o disjuntor considerando a dispersão dos tempos de fechamento (gerados conforme uma distribuição normal ou uniforme) para levantar distribuições de sobretensão. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Qual é a finalidade principal das rotinas integradas TACS e MODELS dentro da estrutura do ATP?",
+      "options": [
+        "Calcular numericamente os parâmetros R, L e C de cabos subterrâneos.",
+        "Simular as interações dinâmicas e algoritmos lógicos de sistemas de controle.",
+        "Obter as características magnéticas da curva de saturação do núcleo do transformador.",
+        "Realizar a integração assintótica para o fluxo de potência linearizado DC."
+      ],
+      "correctIndex": 1,
+      "explanation": "A TACS foi desenvolvida para simular interações dinâmicas entre a rede e sistemas de controle, e o MODELS é uma versão moderna da TACS para simulação de algoritmos de sistemas de controle complexos. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Como os modernos pára-raios de óxido de zinco (ZnO), desprovidos de centelhadores em série, costumam ser representados nas simulações do programa ATP?",
+      "options": [
+        "Por um banco de capacitores em paralelo com chaves sistemáticas.",
+        "Exclusivamente como um circuito PI equivalente dependente da frequência.",
+        "Através de elementos do tipo resistor não-linear (como o elemento tipo 99).",
+        "Como compensadores síncronos modelados em eixos direto e quadratura."
+      ],
+      "correctIndex": 2,
+      "explanation": "A grande maioria dos pára-raios de ZnO é desprovida de centelhadores e a sua representação é realizada através de resistores não-lineares, como o elemento não-linear tipo 99 do ATP. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Quando a variação dos parâmetros de uma linha de transmissão aérea com a frequência não pode ser ignorada nos transitórios, quais modelos o ATP oferece?",
+      "options": [
+        "Modelos BCTRAN e XFORMER.",
+        "Modelos JMARTI e SEMLYEN.",
+        "Modelos em cascata estrita de PI's lineares.",
+        "Modelos baseados em fluxo de carga de Newton-Raphson."
+      ],
+      "correctIndex": 1,
+      "explanation": "O ATP permite modelar linhas com parâmetros dependentes da frequência usando as opções dos modelos JMARTI ou SEMLYEN, gerados a partir de suas rotinas auxiliares. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "A Tensão de Restabelecimento Transitória (TRT) é a severa sobretensão que aparece através dos contatos de um pólo de disjuntor logo após a extinção do arco elétrico.",
+      "correctAnswer": true,
+      "explanation": "A Tensão de Restabelecimento Transitória (TRT) aparece através dos contatos de um disjuntor após a extinção do arco em sua câmara, podendo causar a reignição da falta se exceder a suportabilidade. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "Sendo um programa digital, o ATP calcula soluções de forma analítica contínua no tempo, não exigindo que o usuário especifique um passo de integração discreto.",
+      "correctAnswer": false,
+      "explanation": "Como o programa digital não permite obter uma solução contínua, são calculados valores em intervalos discretos, exigindo que o usuário defina o passo de integração (delta T). (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "A seleção do passo de integração (delta T) no ATP depende muito do fenômeno estudado, exigindo passos extremamente pequenos para fenômenos de altas frequências como o 'lightning'.",
+      "correctAnswer": true,
+      "explanation": "A seleção do intervalo de integração é influenciada pelo fenômeno: simulações de altas frequências (como 'lightning') requerem passos de 0,01 a 0,1 microssegundos, enquanto manobras permitem passos maiores. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Ao simular a energização de um transformador de potência no ATP, o fluxo residual remanente do núcleo não tem importância, podendo sempre ser desconsiderado.",
+      "correctAnswer": false,
+      "explanation": "O fluxo residual remanente no núcleo tem uma importância relevante nas sobretensões resultantes da energização de transformadores e deve ser levado em consideração. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "O código ATP embute a rotina auxiliar LINE CONSTANTS, desenvolvida com o objetivo de calcular as matrizes R, L e C a partir da geometria e das características físicas dos cabos da linha.",
+      "correctAnswer": true,
+      "explanation": "A rotina LINE CONSTANTS embutida no ATP calcula matrizes de resistências, indutâncias e capacitâncias de configurações arbitrárias de cabos aéreos, baseando-se na disposição física. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "A formulação matemática do ATP para solucionar elementos de linha com parâmetros distribuídos baseia-se no clássico método das características, conhecido também como método de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Bergeron"
+        }
+      ],
+      "explanation": "A formulação é baseada no método das características (método de Bergeron) para elementos com parâmetros distribuídos e regra trapezoidal para concentrados. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "Para facilitar o reuso e a criação de grandes sistemas, o recurso de modularização do ATP permite encapsular elementos em bibliotecas que são inseridas nos casos através do comando $____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "INCLUDE"
+        }
+      ],
+      "explanation": "Os módulos criados pela DATA BASE MODULE são facilmente inseridos no arquivo do caso a ser simulado através do comando $INCLUDE. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "A rotina auxiliar embutida no ATP utilizada especificamente para gerar as características magnéticas da curva de saturação do transformador (fluxo x corrente) é a ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SATURATION"
+        }
+      ],
+      "explanation": "A rotina SATURATION é utilizada para a obtenção da característica de saturação de transformadores sob a forma de fluxo versus corrente. (ATP ALTERNATIVE TRANSIENTS PROGRAM - Docentes, Funcionário(a)s, Laboratórios e Projetos.)"
+    }
+  ]
+}

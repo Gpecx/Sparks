@@ -1,0 +1,258 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Dispositivos de Proteção",
+  "moduleSubtitle": "Relés, disjuntores, disparadores e fusíveis",
+  "moduleOrder": 1,
+  "ebookTitle": "Dispositivos de Proteção Elétrica",
+  "ebookSubtitle": "Relés, disjuntores, disparadores e fusíveis: como cada um detecta e interrompe",
+  "estimatedMinutes": 80,
+  "trailFiles": [
+    "t01_fundamentos_dispositivos.json",
+    "t02_reles_protecao.json",
+    "t03_disparadores.json",
+    "t04_fusiveis.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — A Cadeia de Proteção",
+      "subtitle": "Da detecção à interrupção",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Detectar, decidir, interromper",
+          "type": "text",
+          "body": "Nenhum dispositivo de proteção atua sozinho. A proteção é uma cadeia: o elemento sensor (TC/TP) mede, o relé decide, o disjuntor interrompe, e a fonte auxiliar (bateria) alimenta tudo. Compreender essa cadeia é essencial — uma falha em qualquer elo compromete toda a proteção. Um relé perfeito não protege nada se o disjuntor não abrir, ou se a bateria de comando estiver descarregada."
+        },
+        {
+          "id": "s2",
+          "title": "Os elos da cadeia",
+          "type": "list",
+          "items": [
+            "Sensores — TCs e TPs que reduzem corrente e tensão para o relé",
+            "Relé/IED — compara as medições com os ajustes e decide atuar",
+            "Circuito de trip — fiação e contatos que levam o comando ao disjuntor",
+            "Disjuntor — interrompe fisicamente a corrente de falta",
+            "Fonte auxiliar — bateria/retificador que alimenta relés e bobinas de trip (independente da rede)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A importância da fonte auxiliar",
+          "type": "note",
+          "body": "Um detalhe frequentemente subestimado: a proteção precisa funcionar exatamente quando há uma falta — momento em que a tensão da rede pode colapsar. Por isso o sistema de proteção é alimentado por uma fonte auxiliar independente: bancos de baterias (geralmente 125 Vcc ou 48 Vcc) mantidos por retificadores. Uma bateria mal mantida é uma proteção que falha silenciosamente: tudo parece normal até a falta acontecer e o disjuntor não receber comando para abrir."
+        },
+        {
+          "id": "s4",
+          "title": "Dispositivos integrados vs. separados",
+          "type": "text",
+          "body": "Em alta e média tensão, a cadeia é composta por elementos separados (TC + relé + disjuntor). Em baixa tensão e distribuição, é comum encontrar dispositivos que integram detecção e interrupção num só corpo: o disjuntor com disparador embutido e o fusível. Cada arquitetura tem seu lugar — a separada oferece flexibilidade e coordenação fina; a integrada oferece simplicidade e custo baixo."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A proteção é uma cadeia: sensores (TC/TP) → relé → circuito de trip → disjuntor, alimentada por fonte auxiliar independente (baterias). Cada elo é crítico; uma bateria fraca anula toda a proteção. Em AT/MT os elementos são separados; em BT/distribuição, dispositivos como disjuntores com disparador e fusíveis integram detecção e interrupção."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Relés de Proteção",
+      "subtitle": "O cérebro da decisão",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Relés por tecnologia",
+          "type": "list",
+          "items": [
+            "Eletromecânicos — disco de indução (tipo wattímetro) para temporizados, unidade de atração para instantâneos; robustos, mas sem registro nem comunicação",
+            "Estáticos — eletrônica analógica; mais rápidos e com mais ajustes que os eletromecânicos",
+            "Digitais — microprocessados; amostram o sinal e calculam fasores via DFT",
+            "Numéricos (IEDs) — multifunção, comunicantes, com oscilografia e lógica programável"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Como um relé numérico funciona por dentro",
+          "type": "text",
+          "body": "Um IED amostra as correntes e tensões dos TCs/TPs muitas vezes por ciclo (tipicamente 16 a 64 amostras). Um filtro digital (geralmente a Transformada Discreta de Fourier) extrai a componente fundamental — módulo e ângulo dos fasores. Com esses fasores, o IED calcula as grandezas de operação de cada função (corrente de sequência, impedância, corrente diferencial) e compara com os ajustes. Se a condição de trip é satisfeita por tempo suficiente, ele emite o comando. Tudo isso em poucos milissegundos."
+        },
+        {
+          "id": "s3",
+          "title": "Relés por função (visão geral)",
+          "type": "list",
+          "items": [
+            "Sobrecorrente (50/51) — o mais comum; atua por excesso de corrente",
+            "Direcional (67) — sobrecorrente com sentido; distingue falta a montante de jusante",
+            "Diferencial (87) — compara entrada e saída; proteção unitária de máxima seletividade",
+            "Distância (21) — mede impedância; principal proteção de linhas",
+            "Tensão/frequência (27/59/81) — supervisão da qualidade da rede"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Multifuncionalidade dos IEDs",
+          "type": "note",
+          "body": "Um único IED moderno implementa simultaneamente dezenas de funções ANSI. Isso traz economia e flexibilidade, mas exige cuidado: o engenheiro deve habilitar e ajustar apenas as funções pertinentes àquela aplicação, e entender como elas interagem na lógica interna do relé. Um IED mal configurado — com funções conflitantes ou ajustes inadequados — pode ser tão perigoso quanto a ausência de proteção."
+        },
+        {
+          "id": "s5",
+          "title": "Registros e oscilografia",
+          "type": "text",
+          "body": "Além de proteger, os IEDs registram. A oscilografia (forma de onda das correntes e tensões durante a falta) e os registros sequenciais de eventos (SOE) são ferramentas valiosíssimas para análise pós-falta: permitem reconstruir exatamente o que aconteceu, verificar se a proteção atuou corretamente, e diagnosticar a causa raiz. Um bom analista de proteção 'lê' uma oscilografia como um médico lê um eletrocardiograma."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os relés evoluíram de eletromecânicos a IEDs numéricos, que amostram o sinal, extraem fasores (DFT) e comparam com os ajustes em milissegundos. Implementam dezenas de funções (50/51, 67, 87, 21, 27/59/81) num só corpo — exigindo configuração criteriosa. Os registros e oscilografias dos IEDs são essenciais para a análise pós-falta."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Disjuntores e Disparadores",
+      "subtitle": "O músculo que interrompe a corrente",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O papel do disjuntor",
+          "type": "text",
+          "body": "O disjuntor é o dispositivo que efetivamente interrompe a corrente de falta. Ele precisa extinguir o arco elétrico que se forma entre seus contatos ao abrir sob corrente — uma tarefa difícil em alta tensão e alta corrente. As tecnologias de extinção variam: a vácuo (comum em média tensão), a SF6 (gás isolante, em alta tensão), a óleo (mais antiga) e a ar comprimido. A especificação correta do poder de interrupção (kA) é vital: um disjuntor que não consegue interromper a corrente de falta disponível pode explodir."
+        },
+        {
+          "id": "s2",
+          "title": "Parâmetros críticos de um disjuntor",
+          "type": "list",
+          "items": [
+            "Tensão nominal — a tensão do sistema onde será instalado",
+            "Corrente nominal — a corrente de carga que conduz continuamente",
+            "Capacidade de interrupção (kA) — a maior corrente de curto que consegue interromper com segurança",
+            "Tempo de abertura — quão rápido abre após receber o comando (ciclos)",
+            "Sequência de operação — capacidade de religamento (O-CO, religadores)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Disparadores de disjuntores de baixa tensão",
+          "type": "list",
+          "items": [
+            "Térmico (bimetálico) — atua por aquecimento acumulado; protege contra sobrecarga; curva inversa natural",
+            "Magnético — atua instantaneamente em correntes muito altas (curto); resposta em milissegundos",
+            "Termomagnético — combina os dois; o disjuntor residencial/industrial mais comum",
+            "Eletrônico (trip unit) — microprocessado; ajusta separadamente longo retardo (sobrecarga), curto retardo e instantâneo, permitindo coordenação fina"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "A curva do disjuntor termomagnético",
+          "type": "note",
+          "body": "A curva característica de um disjuntor BT tem duas regiões: a térmica (tempo inverso, para sobrecargas — quanto maior a corrente, menor o tempo) e a magnética (tempo definido muito curto, praticamente instantânea, para curtos). As curvas B, C, D dos disjuntores residenciais/industriais diferem no limiar de atuação magnética (3-5×In para B, 5-10×In para C, 10-20×In para D). A escolha da curva considera a corrente de partida da carga — um motor com alta corrente de partida exige curva D para não disparar na energização."
+        },
+        {
+          "id": "s5",
+          "title": "Bobinas de comando e supervisão",
+          "type": "text",
+          "body": "Disjuntores de média e alta tensão têm bobinas de abertura (trip coil) e fechamento (close coil), comandadas pelo relé e pelo operador. A bobina de trip é tão crítica que muitos esquemas têm supervisão do circuito de trip (função 3 — trip circuit supervision): um circuito que monitora continuamente a integridade da bobina e da fiação, alarmando se houver rompimento. Afinal, descobrir que a bobina de trip está queimada apenas durante uma falta é tarde demais."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O disjuntor interrompe a corrente e extingue o arco (vácuo, SF6, óleo, ar). Seus parâmetros críticos são tensão, corrente nominal, capacidade de interrupção (kA) e tempo de abertura. Disparadores BT são térmico (sobrecarga), magnético (curto) ou eletrônico (ajuste fino); as curvas B/C/D diferem no limiar magnético. A supervisão do circuito de trip evita a falha silenciosa da bobina de abertura."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Fusíveis",
+      "subtitle": "Simplicidade e velocidade",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Como o fusível funciona",
+          "type": "text",
+          "body": "O fusível é o dispositivo de proteção mais simples e antigo — e ainda assim insubstituível em muitas aplicações. Um elemento metálico calibrado se funde quando a corrente excede um valor por um tempo determinado, interrompendo o circuito. Apesar da simplicidade, fusíveis de alta capacidade de ruptura (HRC) são extraordinariamente rápidos: interrompem a corrente de curto em menos de meio ciclo, frequentemente antes que o primeiro pico de corrente seja atingido (corrente limitada), protegendo os equipamentos a jusante de esforços térmicos e dinâmicos severos."
+        },
+        {
+          "id": "s2",
+          "title": "Curvas do fusível: tempo de fusão e de interrupção",
+          "type": "list",
+          "items": [
+            "Tempo mínimo de fusão (minimum melt) — quando o elemento começa a derreter",
+            "Tempo total de interrupção (total clearing) — quando o arco se extingue e a corrente cessa",
+            "Entre essas duas curvas está a banda de tolerância do fusível",
+            "A coordenação com outros dispositivos usa essas curvas: a curva de quem está a montante deve ficar acima da total clearing do fusível"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Tipos de fusível e aplicações",
+          "type": "list",
+          "items": [
+            "Fusível de distribuição (elo fusível tipo K, T) — em transformadores de distribuição, o dispositivo de proteção mais numeroso da rede",
+            "Fusível HRC (NH, D) — alta capacidade de ruptura, em quadros industriais BT",
+            "Fusível limitador de corrente — limita o pico de corrente de curto, protegendo equipamentos sensíveis",
+            "Fusível de média tensão — proteção de transformadores e ramais de MT"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Vantagens e limitações",
+          "type": "note",
+          "body": "Vantagens do fusível: custo baixíssimo, alta velocidade, capacidade de limitação de corrente, e nenhuma necessidade de fonte auxiliar (atua por si só). Limitações: atua uma única vez (precisa ser substituído), não tem comunicação nem registro, pode causar falta de fase (queima um fusível de três, deixando a carga bifásica — perigoso para motores), e a substituição por valor incorreto compromete a proteção. Em redes modernas, o fusível convive com relés: cada um no seu nicho de melhor custo-benefício."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O fusível funde seu elemento calibrado ao exceder corrente×tempo; os HRC interrompem em menos de meio ciclo (corrente limitada). Suas curvas (mínimo de fusão e total de interrupção) regem a coordenação. É barato, rápido, autônomo e limitador — mas atua uma vez só, sem comunicação, e pode causar falta de fase. Convive com os relés, cada um em seu nicho ideal."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Escolhendo o Dispositivo Certo",
+      "subtitle": "Critérios de aplicação e integração",
+      "estimatedMinutes": 9,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Critérios de seleção",
+          "type": "list",
+          "items": [
+            "Nível de tensão e corrente de curto disponível no ponto",
+            "Necessidade de coordenação fina com outros dispositivos",
+            "Necessidade de comunicação, registro e monitoramento (IEDs)",
+            "Criticidade da carga e custo aceitável",
+            "Necessidade de religamento automático (religadores em distribuição)"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Convivência dos dispositivos",
+          "type": "text",
+          "body": "Num sistema real, todos esses dispositivos coexistem coordenados: o IED protege o alimentador na subestação, o religador reenergiza após faltas transitórias no meio da linha, e os fusíveis protegem os ramais e transformadores de distribuição. A coordenação entre eles (relé-religador-fusível) é uma das tarefas mais sofisticadas da engenharia de proteção, e tema central do módulo de Seletividade e Coordenação."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A escolha do dispositivo depende de tensão, corrente de curto, necessidade de coordenação/comunicação, criticidade e custo. Na prática, IEDs, disjuntores, religadores e fusíveis coexistem coordenados — do alimentador na subestação aos ramais de distribuição. Entender as características de cada dispositivo é o que permite projetar uma proteção eficaz e econômica, tema que se aprofunda em Seletividade e Coordenação."
+        }
+      ]
+    }
+  ]
+}

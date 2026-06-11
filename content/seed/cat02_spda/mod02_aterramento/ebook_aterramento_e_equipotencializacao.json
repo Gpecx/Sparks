@@ -1,0 +1,362 @@
+{
+  "category": "SPDA",
+  "categoryOrder": 1,
+  "module": "Aterramento e Equipotencialização",
+  "moduleOrder": 1,
+  "moduleSubtitle": "Subsistema de aterramento, esquemas TN/TT/IT, eletrodos, resistividade, malhas, equipotencialização e medição de resistência de terra",
+  "ebookTitle": "Aterramento e Equipotencialização",
+  "ebookSubtitle": "Do subsistema de aterramento do SPDA aos esquemas de aterramento, eletrodos, resistividade do solo, malhas, EPT e medição de resistência de terra",
+  "estimatedMinutes": 91,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de Aterramento",
+      "subtitle": "O papel do subsistema de aterramento no SPDA e as normas que o regem",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que o subsistema de aterramento existe",
+          "type": "text",
+          "body": "Um SPDA não impede que a descarga atmosférica ocorra. O sistema de aterramento tem como objetivo dispersar a corrente proveniente da descarga atmosférica para a terra a fim de minimizar qualquer sobretensão potencialmente perigosa (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). Ligado a esse propósito está o conceito de Equalização de Potencial, que serve para minimizar diferenças de potencial elétrico na estrutura, evitando arcos elétricos perigosos (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia). Apesar do sistema de aterramento ter que respeitar a norma NBR 15751 (Sistema de aterramento de subestações), aos olhos do SPDA ela deve complementarmente respeitar a NBR 5419; ou seja, uma norma não anula a outra (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "Como dimensionar e instalar o aterramento",
+          "type": "list",
+          "items": [
+            "Para dimensionar o sistema podemos primeiramente considerar os eletrodos naturais, que são as armaduras de aço interconectadas nas fundações de concreto, ou outras estruturas metálicas subterrâneas disponíveis (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+            "Para utilizar esses eletrodos naturais devemos garantir a continuidade elétrica (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+            "Caso não seja possível utilizar os eletrodos naturais, deve ser feito um anel externo à estrutura, onde o condutor deverá estar em contato com o solo no mínimo 80% do seu comprimento total (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+            "Com relação à instalação dos condutores de aterramento, deverá ser enterrado em uma profundidade de 0,5 m no mínimo, e ser posicionado a uma distância mínima de 1 m ao redor da edificação a ser protegida (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+            "É interessante assumir uma única estrutura de aterramento integrando todos os propósitos como o SPDA, sistemas de energia e sinal (telecomunicações, dados etc.); essa estratégia proporciona maior economia e facilidade durante a manutenção e instalação (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O que mudou na NBR 5419:2026",
+          "type": "note",
+          "body": "A nova redação traz atualizações importantes: passa a permitir a instalação interna do anel de aterramento em edificações geminadas (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). Caso não seja possível realizar a configuração em anel do aterramento, pode ser adotada a instalação do anel internamente à edificação, devendo ser previstas medidas que minimizem os riscos por tensões perigosas de superfície como tensão de passo e de toque (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). Por outro lado, a atualização de 2026 elimina a possibilidade anteriormente prevista de interrupção parcial do anel quando instalado fora do solo, exigindo seu fechamento contínuo (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). As hastes de aterramento continuam não sendo permitidas como único componente do sistema, podendo ser utilizadas apenas como complemento (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)."
+        },
+        {
+          "id": "s4",
+          "title": "Cuidados com materiais e continuidade",
+          "type": "text",
+          "body": "Os condutores de aço cobreado passam a ter seções nominais equiparadas às dos condutores de cobre, sendo de 50 mm² para o subsistema de aterramento (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). Para utilizar os eletrodos naturais devemos garantir a continuidade elétrica; no caso de concreto protendido, os cabos de aço não podem ser utilizados como condutores para o sistema de aterramento (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O subsistema de aterramento não impede a descarga, mas dispersa sua corrente para a terra, minimizando sobretensões perigosas. Ele atende simultaneamente à NBR 15751 e à NBR 5419 — uma não anula a outra. Dimensiona-se preferindo eletrodos naturais (armaduras das fundações), com continuidade elétrica garantida; na ausência deles, usa-se anel externo (80% em contato com o solo, 0,5 m de profundidade, 1 m da edificação). A NBR 5419:2026 passou a permitir o anel interno em geminadas, mas exige seu fechamento contínuo fora do solo, mantendo as hastes apenas como complemento."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Tipos de Sistemas (TN, TT, IT)",
+      "subtitle": "A classificação por letras e o comportamento de cada esquema na falta",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O código de letras dos esquemas",
+          "type": "list",
+          "items": [
+            "A primeira letra determina a situação da alimentação em relação à terra, onde T = um ponto diretamente aterrado (Fonte: Apresentacao Tecnica Sistema IT Medico, RDI Bender, Instituto de Engenharia)",
+            "A primeira letra (I) aponta a situação da alimentação: I = isolação de todas as partes vivas em relação à terra ou aterramento de um ponto através de impedância (Fonte: Apresentacao Tecnica Sistema IT Medico, RDI Bender, Instituto de Engenharia)",
+            "A segunda letra refere-se às massas, onde N = massas ligadas ao ponto da alimentação aterrado (em corrente alternada, o ponto aterrado é normalmente o ponto neutro) (Fonte: Apresentacao Tecnica Sistema IT Medico, RDI Bender, Instituto de Engenharia)",
+            "A segunda letra T significa que as massas são diretamente aterradas, independentemente do aterramento eventual de um ponto da alimentação, e não ligadas ao neutro (o que seria a letra N) (Fonte: Apresentacao Tecnica Sistema IT Medico, RDI Bender, Instituto de Engenharia)"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Esquema TN e suas variações",
+          "type": "text",
+          "body": "No Brasil, o esquema TN é o mais comum, quando se tratam de instalações alimentadas diretamente pela rede pública de baixa tensão da concessionária de energia elétrica (Fonte: Aterramento Eletrico, Revista Potencia). No esquema TN, o percurso de uma corrente fase-massa é de baixíssima impedância (cobre) e a corrente pode atingir valores elevados, suficientes para serem detectados e interrompidos até mesmo por disjuntores ou fusíveis (Fonte: Aterramento Eletrico, Revista Potencia). O esquema pode ser do tipo TN-S, quando as funções de neutro e proteção forem realizadas por condutores separados (N = neutro e PE = proteção). No esquema TN-C, as funções de neutro e proteção são realizadas pelo mesmo condutor, denominado PEN (Protective Earth Neutral). Há ainda o esquema misto, chamado de TN-C-S, onde o condutor PEN entra na edificação e a partir do Barramento de Equipotencialização Principal (BEP) passa a ser dividido em condutores separados N e PE (Fonte: Aterramento Eletrico, Revista Potencia)."
+        },
+        {
+          "id": "s3",
+          "title": "Esquema TT e o papel do DR",
+          "type": "text",
+          "body": "No ESQUEMA TT, o neutro da fonte é ligado diretamente à terra, estando as massas da instalação ligadas a um eletrodo de aterramento independente do eletrodo da fonte (Fonte: Aterramento Eletrico, Revista Potencia). No esquema TT, o percurso de uma corrente fase-massa inclui a terra, limitando a corrente a valores insuficientes para acionar disjuntores ou fusíveis, mas perigosos para as pessoas. Assim, deve ser eliminada por dispositivos DR (Fonte: Aterramento Eletrico, Revista Potencia). No caso da perda do condutor neutro antes da entrada consumidora, o sistema irá se transformar em TT, o que leva à conclusão de que é sempre conveniente utilizar dispositivos DR mesmo em esquemas TN (Fonte: Aterramento Eletrico, Revista Potencia)."
+        },
+        {
+          "id": "s4",
+          "title": "A resistência máxima de aterramento no TT",
+          "type": "text",
+          "body": "A literatura da IEC e a norma estabelecem que pessoas estão livres de choques perigosos se submetidas a tensões elétricas inferiores a 50 V (alternados) na situação 1 (locais normais como salas, quartos) (Fonte: Aterramento Eletrico, Revista Potencia). No caso de um dispositivo DR com corrente de sensibilidade de 30 mA, para a tensão limite de 50 V, a resistência máxima resulta em R = 50 V / 0,03 A = 1.700 ohms (1,7 kΩ) (Fonte: Aterramento Eletrico, Revista Potencia)."
+        },
+        {
+          "id": "s5",
+          "title": "Esquema IT e a aplicação médica",
+          "type": "text",
+          "body": "No Esquema IT, o aterramento da fonte é realizado através da inserção de uma impedância de valor elevado (resistência ou indutância), limitando a corrente de falta a um valor desejado, de forma a não permitir que uma primeira falta desligue o sistema (Fonte: Aterramento Eletrico, Revista Potencia). O uso dos sistemas IT é restrito aos casos onde uma primeira falha não pode desligar imediatamente a alimentação, interrompendo processos importantes (como em salas cirúrgicas, certos processos metalúrgicos, etc.), não sendo o padrão para residências (Fonte: Aterramento Eletrico, Revista Potencia). O esquema IT médico deve ser equipado com Dispositivo Supervisor de Isolamento (DSI) para supervisionar o sistema e indicar um alarme visual e sonoro quando encontra a primeira falta, sem interromper a energia (Fonte: Apresentacao Tecnica Sistema IT Medico, RDI Bender, Instituto de Engenharia)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os esquemas de aterramento são codificados por letras: a primeira indica a alimentação (T = ponto aterrado, I = isolada ou aterrada por impedância) e a segunda, as massas (T = aterradas independentemente, N = ligadas ao neutro). O TN, mais comum no Brasil, tem baixa impedância e permite atuação de disjuntores/fusíveis (variações TN-S, TN-C, TN-C-S). No TT, a corrente de falta passa pela terra e é insuficiente para fusíveis, exigindo DR — daí a regra prática R = 50 V / 0,03 A = 1,7 kΩ. O IT usa impedância elevada para não desligar na primeira falta, com DSI alarmando, sendo aplicado em salas cirúrgicas e processos críticos."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Eletrodos e Materiais de Aterramento",
+      "subtitle": "Seleção de condutores, eletrodos e seções mínimas conforme a norma",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Eletrodos naturais e suas restrições",
+          "type": "text",
+          "body": "Para dimensionar o sistema podemos primeiramente considerar os eletrodos naturais, que são as armaduras de aço interconectadas nas fundações de concreto, ou outras estruturas metálicas subterrâneas disponíveis (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). Para utilizar esses eletrodos devemos garantir a continuidade elétrica; no caso de concreto protendido, os cabos de aço não podem ser utilizados como condutores para o sistema de aterramento (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). Caso não seja possível utilizar os eletrodos naturais, deve ser feito um anel externo à estrutura, onde o condutor deverá estar em contato com o solo no mínimo 80% do seu comprimento total (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "Materiais permitidos na NBR 5419:2026",
+          "type": "list",
+          "items": [
+            "Entre os ajustes das tabelas de materiais na revisão da norma, está a admissão oficial de condutores de cobre no concreto (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+            "Passam a ser permitidos, no aterramento, cabos de cobre ou de aço cobreado com formação de 7 ou 19 fios (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+            "Os condutores de aço cobreado passam a ter seções nominais equiparadas às dos condutores de cobre, com valores mínimos de 50 mm² para o subsistema de aterramento (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+            "A norma de 2026 trouxe como ajuste a proibição do uso de aço zincado a quente na transição entre o concreto e o solo, para mitigar problemas de corrosão (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+            "A nova redação da NBR 5419:2026 traz a permissão para a instalação interna do anel de aterramento em edificações geminadas, reconhecendo a limitação de espaço externo (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Seções e dimensões mínimas dos eletrodos",
+          "type": "list",
+          "items": [
+            "Conforme a tabela de seções mínimas dos materiais da norma, o cobre utilizado como eletrodo de aterramento deve possuir seção mínima de 50 mm² (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+            "Conforme a Tabela de seções mínimas, o eletrodo de aterramento em aço galvanizado a quente possui seção mínima exigida de 80 mm² para suportar a corrosão, enquanto o cobre exige 50 mm² (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+            "A Tabela de dimensões mínimas determina que o eletrodo não cravado em configuração de fita maciça de aço inoxidável deve possuir área de seção mínima de 100 mm² e espessura de 2 mm (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+            "A tabela normativa de dimensões mínimas especifica que para a configuração de eletrodo cravado (haste arredondada maciça) em aço cobreado, o diâmetro mínimo é de 12,7 mm (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+            "Com relação à instalação dos condutores de aterramento, deverá ser enterrado em uma profundidade de 0,5 m no mínimo, e ser posicionado a uma distância mínima de 1 m ao redor da edificação a ser protegida (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Materiais proibidos e o papel das hastes",
+          "type": "note",
+          "body": "Na tabela de seções mínimas dos materiais, a célula correspondente ao eletrodo de aterramento para o Alumínio é hifenizada (vazia/proibida), não sendo permitido o uso de alumínio no contato direto com o solo para aterramento (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). No caso de concreto protendido, os cabos de aço não podem ser utilizados como condutores para o sistema de aterramento elétrico (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). E as hastes de aterramento continuam não sendo permitidas como único componente do sistema, podendo ser utilizadas apenas como complemento (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A seleção de materiais começa pelos eletrodos naturais (armaduras das fundações), garantida a continuidade elétrica — exceto cabos de aço de concreto protendido, que são vedados. A NBR 5419:2026 admite cobre no concreto, cabos de cobre ou aço cobreado de 7 ou 19 fios (50 mm² no aterramento) e proíbe aço zincado a quente na transição concreto-solo. As seções mínimas exigem 50 mm² para cobre, 80 mm² para aço galvanizado a quente e diâmetro de 12,7 mm para haste de aço cobreado. Alumínio é proibido em contato direto com o solo, e hastes só valem como complemento."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Resistividade do Solo e Estratificação",
+      "subtitle": "Medição pelo método de Wenner, fatores de influência e modelagem em camadas",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é resistividade do solo",
+          "type": "text",
+          "body": "A resistividade elétrica do solo é definida tecnicamente como a resistência entre faces opostas de um volume de solo consistindo em um cubo homogêneo e isotrópo cuja aresta mede uma unidade de comprimento (Fonte: Capitulo XI Medicao da resistividade do solo, IEE/USP; Instituto Federal Goiano). A resistividade elétrica do solo é determinada e expressa oficialmente na unidade ohm-metro (ohm.m) (Fonte: Desenvolvimento de Software para Dimensionamento de Malha). A norma ABNT NBR 7117 estabelece os parâmetros do solo para projetos de aterramento, definindo os métodos de medição da resistividade e a modelagem geoelétrica/estratificação (Fonte: Capitulo XI Medicao da resistividade, IEE/USP; Instituto Federal Goiano)."
+        },
+        {
+          "id": "s2",
+          "title": "Fatores que influenciam a resistividade",
+          "type": "list",
+          "items": [
+            "Diversos fatores influenciam na resistividade do solo, destacando-se: tipo e composição do solo, teor de umidade, temperatura, concentração de sais dissolvidos na água retida, compactação e granulometria (Fonte: Analise dos Efeitos de Sobretensao em Aerogeradores; Instituto Federal Goiano)",
+            "Em condições não saturadas, o aumento da umidade de compactação e do volume de água diminui a resistividade do solo, tornando solos mais úmidos mais adequados para sistemas de aterramento (Fonte: Estudo da eletroresistividade aplicada, Instituto Federal Goiano)",
+            "Quando se mantém a mesma umidade e altera-se o grau de compactação, o solo tem o seu grau de saturação aumentado (já que o número de vazios é diminuído), o que faz a eletrorresistividade do solo diminuir (Fonte: Estudo da eletroresistividade aplicada a analises de solos)",
+            "O primeiro aspecto prático da elevação de temperatura é que ela faz a água intersticial evaporar, resultando em menor umidade e aumento vertiginoso da resistividade quando o solo seca (ramo seco) (Fonte: Instituto Federal Goiano)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Medição pelo método de Wenner",
+          "type": "text",
+          "body": "Para a realização da medição com o método de Wenner, é necessário que quatro eletrodos sejam cravados em linha, à mesma profundidade e igualmente espaçados entre eles (Fonte: Desenvolvimento de Software para Dimensionamento de Malha, Instituto Federal Goiano). O terrômetro injeta uma corrente elétrica de ensaio entre os eletrodos externos (C1 e C2) e, simultaneamente, mede-se a diferença de potencial (tensão) gerada entre os eletrodos internos (P1 e P2) (Fonte: Desenvolvimento de Software para Dimensionamento de Malha; Capitulo XI, IEE/USP). O método de Wenner considera que a distribuição de corrente se concentra principalmente até uma profundidade equivalente ao espaçamento a entre as hastes, interpretando o valor de resistência como representativo da camada até essa profundidade a (Fonte: Desenvolvimento de Software para Dimensionamento de Malha). A norma NBR 7117 instrui que os espaçamentos devem ser prospectados a partir de 1 metro e, se possível, em potências de 2 (1m, 2m, 4m, 8m, 16m, 32m...) (Fonte: Instituto Federal Goiano)."
+        },
+        {
+          "id": "s4",
+          "title": "A fórmula de Wenner simplificada",
+          "type": "text",
+          "body": "Quando a profundidade de cravação (b) é muito menor que o espaçamento (a), o denominador da equação aproxima-se de 2, permitindo que a equação seja simplificada para a fórmula clássica rho = 2*pi*a*R (Fonte: Capitulo XI Medicao da resistividade do solo, IEE/USP; Instituto Federal Goiano). O método de amostragem laboratorial é utilizado geralmente apenas como critério comparativo. A medição local in loco (Método de Wenner) é indispensável para extrair a modelagem e projetar a dissipação real das correntes em grandes volumes de terra, não podendo ser substituída (Fonte: Capitulo XI, IEE/USP; Desenvolvimento de Software)."
+        },
+        {
+          "id": "s5",
+          "title": "Estratificação e modelo de duas camadas",
+          "type": "text",
+          "body": "Na maioria dos casos, os solos não são homogêneos e estratificam-se em camadas. O modelo de duas camadas destaca-se por abranger a maior parte dos casos práticos onde o solo possui características diferentes em profundidade (Fonte: Desenvolvimento de Software para Dimensionamento de Malha). O coeficiente de divergência beta representa exatamente a razão entre a resistividade da camada mais profunda do solo (rho2) e a resistividade equivalente das camadas superiores (rho1), operado pela equação beta = rho2 / rho1 (Fonte: Desenvolvimento de Software para Dimensionamento de Malha). A análise da curva rho_a(a) permite identificar o comportamento em profundidade: se a resistividade aparente diminui com o aumento do espaçamento, significa que a camada superficial é mais resistiva que a camada profunda, indicando a relação rho1 > rho2 (Fonte: Desenvolvimento de Software para Dimensionamento de Malha). A determinação gráfica de rho1 é realizada a partir do prolongamento da curva de resistividade gerada até interceptar o eixo das ordenadas, ou seja, o ponto onde o espaçamento tenderia a 0 (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A resistividade do solo (ohm.m) é a resistência entre faces de um cubo unitário homogêneo e isotrópo, regida pela NBR 7117. Ela depende de tipo de solo, umidade, temperatura, sais, compactação e granulometria — solos úmidos e compactados conduzem melhor, enquanto o aquecimento seca o solo e dispara a resistividade. Mede-se in loco pelo método de Wenner (quatro eletrodos em linha, espaçamentos em potências de 2), com a fórmula simplificada rho = 2*pi*a*R quando b << a. Como os solos se estratificam, usa-se o modelo de duas camadas, com o coeficiente beta = rho2/rho1 e análise da curva rho_a(a)."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Projeto de Malha de Aterramento",
+      "subtitle": "Eletrodos, materiais, anel e a integração de propósitos no projeto",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Objetivo e normas do projeto de malha",
+          "type": "text",
+          "body": "O sistema de aterramento tem como objetivo dispersar a corrente proveniente da descarga atmosférica para a terra a fim de minimizar qualquer sobretensão potencialmente perigosa (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). Apesar do sistema de aterramento ter que respeitar a norma NBR 15751 (Sistema de aterramento de subestações), aos olhos do SPDA ela deve complementarmente respeitar a NBR 5419 — uma não anula a outra (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). É interessante assumir uma única estrutura de aterramento integrando todos os propósitos como o SPDA, sistemas de energia e sinal (telecomunicações, dados etc.); essa estratégia proporciona maior economia e facilidade durante a manutenção e instalação (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "Concepção dos eletrodos e do anel",
+          "type": "list",
+          "items": [
+            "Para dimensionar o sistema podemos primeiramente considerar os eletrodos naturais, que são as armaduras de aço interconectadas nas fundações de concreto, ou outras estruturas metálicas subterrâneas disponíveis (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+            "Para utilizar os eletrodos naturais devemos garantir a continuidade elétrica na edificação; no caso de concreto protendido, os cabos de aço não podem ser utilizados como condutores (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+            "Caso não seja possível utilizar os eletrodos naturais da edificação, deve ser feito um anel externo à estrutura, onde o condutor deverá estar em contato com o solo no mínimo 80% do seu comprimento total (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+            "Caso não seja possível realizar a configuração em anel externamente, pode ser adotada a instalação do anel internamente à edificação, devendo ser previstas medidas que minimizem os riscos por tensões perigosas de superfície como tensão de passo e de toque (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+            "Com relação à instalação dos condutores de aterramento, deverá ser enterrado em uma profundidade de 0,5 m no mínimo, e ser posicionado a uma distância mínima de 1 m ao redor da edificação a ser protegida (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Posicionamento de eletrodos adicionais e hastes",
+          "type": "text",
+          "body": "Caso haja necessidade de instalar eletrodos adicionais, estes devem ser instalados o mais próximo possível dos pontos de conexão com o subsistema de descida (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). As hastes de aterramento continuam não sendo permitidas como único componente do sistema, podendo ser utilizadas apenas como complemento de malhas ou anéis (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)."
+        },
+        {
+          "id": "s4",
+          "title": "Materiais e seções no projeto da malha",
+          "type": "list",
+          "items": [
+            "Os condutores de aço cobreado passam a ter seções equiparadas ao cobre, com valores mínimos de 35 mm² para captação e descida e de 50 mm² para o subsistema de aterramento (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+            "Passam a ser permitidos, no aterramento, cabos de cobre ou de aço cobreado com formação de 7 ou 19 fios (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+            "Entre os ajustes na norma 5419:2026 estão a admissão de condutores de cobre no concreto e a proibição do uso de aço zincado a quente na transição entre o concreto e o solo (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+            "A célula para o eletrodo de aterramento feito em Alumínio é hifenizada nas tabelas da norma, indicando que seu uso é vetado e proibido para contato direto com o solo como eletrodo (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+            "A tabela determina que, para aço galvanizado a quente, na configuração fita maciça como eletrodo não cravado, a área de seção mínima é 90 mm² (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Continuidade do anel na NBR 5419:2026",
+          "type": "note",
+          "body": "A nova redação da norma elimina a possibilidade anteriormente prevista de interrupção parcial do anel quando instalado fora do solo, exigindo continuidade (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). Esse fechamento contínuo reforça a estratégia de integrar todos os propósitos em uma única estrutura de aterramento — SPDA, energia e sinal — buscando economia e facilidade de manutenção (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O projeto da malha visa dispersar a corrente da descarga para a terra, atendendo NBR 15751 e NBR 5419 e, idealmente, integrando SPDA, energia e sinal numa única estrutura. Prioriza-se o eletrodo natural (armaduras das fundações, com continuidade elétrica) e, na falta dele, o anel externo (80% no solo, 0,5 m de profundidade, 1 m da edificação) ou, em último caso, o anel interno com mitigação de tensões de passo e toque. Eletrodos adicionais ficam junto às descidas e hastes só complementam. Em materiais: aço cobreado de 35 mm² (captação/descida) e 50 mm² (aterramento), cobre no concreto admitido, alumínio e aço zincado a quente vedados; a malha de 2026 exige anel contínuo fora do solo."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Equipotencialização (EPT)",
+      "subtitle": "Equalização de potencial, MPS e o barramento de equipotencialização",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é equalizar potencial",
+          "type": "text",
+          "body": "Segundo a A3A Engenharia, a Equalização de Potencial serve para minimizar diferenças de potencial elétrico na estrutura, evitando arcos elétricos perigosos (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia). De acordo com a A3A Engenharia, a equalização atua para minimizar diferenças de potencial elétrico na estrutura, evitando arcos elétricos perigosos (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia). A Mesh Engenharia afirma que é interessante assumir uma única estrutura de aterramento integrando todos os propósitos como o SPDA, sistemas de energia e sinal, pois essa integração unificada proporciona maior economia e facilidade durante a manutenção e instalação (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "EPT como Medida de Proteção contra Surtos (MPS)",
+          "type": "list",
+          "items": [
+            "Segundo a Lambda Consultoria, as MPS apresentadas pela norma incluem o aterramento e equipotencialização, além da blindagem magnética, DPS e interfaces isolantes (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+            "A Lambda Consultoria corrobora que o aterramento, a equipotencialização e o roteamento de cabos já farão parte de um projeto de uma instalação elétrica (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+            "A Lambda Consultoria afirma que o aterramento e a equipotencialização já farão parte de um projeto de uma instalação elétrica, e que apenas a instalação de DPS é exclusivamente uma MPS (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+            "Conforme a Lambda Consultoria, utiliza-se um DPS para equipotencialização indireta de condutores normalmente energizados (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+            "O Guia PDA da HazOp lista na Parte 3 os requisitos técnicos para projeto e instalação do sistema de proteção externo (captação, descidas, aterramento e equipotencialização) (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O barramento de equipotencialização e a blindagem",
+          "type": "text",
+          "body": "O material de Cleiton Junior Lopes adverte que o risco é anulado se essa blindagem for interligada, na entrada da linha, ao mesmo barramento de equipotencialização que o equipamento (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). O texto de Cleiton Junior Lopes orienta que a blindagem deve ser interligada ao mesmo barramento de equipotencialização que o equipamento para zerar os riscos de falhas internas (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). Conforme Cleiton Junior Lopes, o risco RB poderá assumir o valor zero no caso da zona definida para a área externa da edificação, onde não há carga de incêndio e nem área classificada explosiva (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)."
+        },
+        {
+          "id": "s4",
+          "title": "Ajustes de seção na EPT pela NBR 5419:2026",
+          "type": "note",
+          "body": "O Guia da NBR 5419:2026 destaca que algumas revisões envolvem ajustes nas seções transversais de componentes utilizados na equipotencialização (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). A Mesh Engenharia orienta que, na instalação interna, devem ser previstas medidas que minimizem os riscos por tensões perigosas de superfície como tensão de passo e de toque (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A equalização (ou equipotencialização) minimiza diferenças de potencial na estrutura, evitando arcos perigosos. Ela é uma das MPS previstas na norma, ao lado de blindagem magnética, DPS e interfaces isolantes — sendo que o DPS faz a equipotencialização indireta de condutores energizados. Aterramento e EPT já integram o projeto elétrico da instalação, conforme a Lambda Consultoria e o Guia PDA da HazOp. O ponto-chave é o barramento de equipotencialização: interligar a blindagem a ele, na entrada da linha, anula riscos de falhas internas. A NBR 5419:2026 ajustou seções transversais de componentes da EPT."
+        }
+      ]
+    },
+    {
+      "id": "c07",
+      "order": 6,
+      "title": "Capítulo 7 — Medição de Resistência de Terra",
+      "subtitle": "Método da queda de potencial, curva de patamar e cuidados de campo",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O método da queda de potencial",
+          "type": "text",
+          "body": "O método da queda de potencial é recomendado para medições por meio de equipamentos específicos, por exemplo, o terrômetro (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP). O método consiste em fazer circular uma corrente e, simultaneamente, medir a tensão entre a malha (sob ensaio) e o terra de referência, por meio de uma sonda ou eletrodo auxiliar de potencial (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP). A tensão é medida através do uso de um eletrodo auxiliar de tensão, também referenciado na norma e literaturas como sonda de potencial (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP). A ABNT NBR 15749, publicada em 2009, estabelece os critérios e métodos de medição de resistência de sistemas de aterramento e de potenciais na superfície do solo (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)."
+        },
+        {
+          "id": "s2",
+          "title": "Posicionamento dos eletrodos e a curva de patamar",
+          "type": "list",
+          "items": [
+            "Em geral, a distância d da periferia da malha de aterramento sob ensaio até o eletrodo de corrente deve ser de, no mínimo, três vezes a maior dimensão da malha (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+            "A sonda deve ser deslocada a partir da periferia do sistema sob ensaio em intervalos regulares de medição iguais a 5% da distância d (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+            "A curva apresenta zonas de influência mútua e uma zona chamada de patamar de potencial, onde se pode encontrar o valor verdadeiro de aterramento no trecho horizontal (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+            "Para solos homogêneos e sistemas de aterramentos considerados pequenos (maior dimensão inferior a 10 metros), o ponto S (sonda) dista aproximadamente 62% da distância d (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+            "Na ausência de patamar, as zonas de influência podem estar se sobrepondo, não sendo possível obter um valor confiável, tornando necessário um afastamento do eletrodo de corrente ainda maior (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Validação da medida e fontes de erro",
+          "type": "text",
+          "body": "Devem ser tomadas medições variando a posição do eletrodo de potencial em 5% de d para a direita e esquerda. Se a porcentagem entre a diferença dos valores não ultrapassar 10%, toma-se o valor medido (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP). Para sistemas com valores muito baixos (abaixo de 1 ohm), o efeito do acoplamento entre os cabos de interligação dos circuitos de corrente e potencial é um fator importante nas medições devido aos grandes comprimentos (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP). A regra prática afirma que os problemas de acoplamento são desprezíveis para resistências acima de 10 ohms, mas são críticos e muito importantes para as medições de valores abaixo de 1 ohm (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)."
+        },
+        {
+          "id": "s4",
+          "title": "Interferências e segurança no campo",
+          "type": "note",
+          "body": "A presença de condutores enterrados, tubulações ou aterramentos vizinhos interfere brutalmente. Em áreas urbanas ou industriais, torna-se muito difícil, e muitas vezes impossível, usar esse método (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP). Uma das medidas adequadas para problemas de ruídos ou correntes espúrias (frequência industrial) é a utilização de filtros e instrumentos de banda estreita que usam frequências diferentes da industrial (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP). Certas regras técnicas e de segurança são recomendadas, incluindo utilizar calçados e luvas com nível de isolamento compatível com os riscos do método aplicado e níveis de tensão e corrente injetados ou espúrios (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)."
+        },
+        {
+          "id": "s5",
+          "title": "O número não é o objetivo final",
+          "type": "text",
+          "body": "O objetivo do aterramento não é bater um número. Na prática, um aterramento pode funcionar perfeitamente com valor maior que 10 ohms desde que o sistema esteja corretamente projetado e as proteções atuem (Fonte: A resistencia de aterramento precisa ter menos de 10 ohms? O que a NBR 5410 realmente exige, Mothe Engenharia). Esse princípio se conecta ao dimensionamento do esquema TT: no caso de um dispositivo DR com corrente de sensibilidade de 30 mA, para a tensão limite de 50 V, a resistência máxima resulta em R = 50 V / 0,03 A = 1,7 kohm, valor muito elevado e fácil de obter (Fonte: Aterramento Eletrico, Revista Potencia)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A resistência de terra mede-se com terrômetro pelo método da queda de potencial (NBR 15749): injeta-se corrente e mede-se a tensão pela sonda de potencial. O eletrodo de corrente fica a, no mínimo, três vezes a maior dimensão da malha; a sonda avança em passos de 5% de d até achar o patamar de potencial — que para malhas pequenas (< 10 m) está a cerca de 62% de d. Valida-se deslocando ±5% e aceitando se a diferença for até 10%. Abaixo de 1 ohm o acoplamento entre cabos é crítico; aterramentos vizinhos e ruídos atrapalham (use filtros e EPI). E o essencial: o objetivo não é bater 10 ohms — um aterramento bem projetado funciona mesmo acima disso, como mostra a regra R = 50 V / 0,03 A = 1,7 kΩ no esquema TT."
+        }
+      ]
+    }
+  ]
+}

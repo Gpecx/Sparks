@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Sistemas Distribuídos (DCS)",
+  "moduleSubtitle": "Conceitos, aplicacoes em SPCS e integracao",
+  "moduleOrder": 4,
+  "trail": "Fundamentos de DCS",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Em qual tipo de processo a aplicação do Sistema Digital de Controle Distribuído (SDCD/DCS) se destaca historicamente em relação ao CLP?",
+      "options": [
+        "Processos contínuos focados estritamente em controle regulatório PID.",
+        "Processos de manufatura mecânica puros operando chaves liga-desliga.",
+        "Lógicas de intertravamento isoladas em plataformas elétricas prediais.",
+        "Redes de automação para pequenos escritórios corporativos via Wi-Fi."
+      ],
+      "correctIndex": 0,
+      "explanation": "O SDCD foi desenvolvido na década de 1970 primordialmente para atuar no controle regulatório e contínuo através de algoritmos PID complexos (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é considerada uma das maiores limitações e desvantagens de um Sistema Digital de Controle Distribuído (SDCD) tradicional na indústria?",
+      "options": [
+        "A incapacidade de trabalhar com as variáveis analógicas dos transmissores de campo.",
+        "Seu altíssimo custo, raramente sendo viável para plantas que não sejam de grande porte.",
+        "A ausência total de interfaces visuais para o acompanhamento dos alarmes do processo.",
+        "O limite físico irredutível de apenas dez conexões diretas por matriz mestre."
+      ],
+      "correctIndex": 1,
+      "explanation": "A maior desvantagem do SDCD reside em seu altíssimo custo de hardware e software, justificando-se apenas em grandes complexos com forte suporte econômico (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual elemento estrutural do SDCD é encarregado de prover ao operador a visão do processo por meio de monitores e telas gráficas mímicas?",
+      "options": [
+        "O conversor puro de sinais analógicos atrelado à porta serial cega.",
+        "O relé térmico interligado estritamente à matriz do barramento principal.",
+        "A estação de operação ou interface homem-máquina (IHM) centralizada.",
+        "O gateway corporativo isolado atuando sobre a base de relatórios financeiros."
+      ],
+      "correctIndex": 2,
+      "explanation": "A interface visual principal para o operador monitorar os diagramas do processo, atuar nas malhas e ver alarmes é centralizada na estação de operação do SDCD (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as arquiteturas de Sistemas Digitais de Controle Distribuído (SDCD) tratam de modo nativo a questão crítica da confiabilidade de hardware?",
+      "options": [
+        "Eliminando a capacidade do operador de interferir no painel central de máquinas.",
+        "Utilizando rotinas em nuvem com tolerância de atrasos na ordem de dezenas de minutos.",
+        "Oferecendo circuitos projetados para alta disponibilidade e redundância total no sistema.",
+        "Restringindo as saídas a contatos puramente mecânicos para bloquear surtos elétricos."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para evitar paradas catastróficas, os sistemas SDCD fornecem de modo inerente redundância total de E/S, CPUs e comunicações sem ter falhas de ponto isolado (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em qual patamar da pirâmide estrutural de automação (ISA-95) os equipamentos SDCDs se posicionam efetivamente para realizar o controle físico da planta?",
+      "options": [
+        "No Nível 1, desempenhando papel isolado de elemento sensor primário cego.",
+        "No Nível 2, compartilhando de modo robusto e orgânico as atividades de controle automático.",
+        "No Nível 4, rodando os cálculos corporativos contábeis para o faturamento logístico.",
+        "No Nível 5, estruturando o planejamento estratégico puro e isolado da empresa matriz."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os SDCDs em conjunto com os CLPs operam consolidando ativamente o Nível 2 de controle na pirâmide tradicional de automação industrial (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a função vital do sistema de comunicação digital (Data Highway) interligando os módulos em uma arquitetura típica de SDCD?",
+      "options": [
+        "Acionar chaves puramente pneumáticas de compressores satélites a três elementos.",
+        "Rastrear e barrar toda invasão provinda da inteligência de negócios fora da rede corporativa.",
+        "Estabelecer prioridades de comando, arbitrar a comunicação de dados e detectar falhas de interligação.",
+        "Forçar a parada unânime de equipamentos caso a base de dados SQL falhe na gravação do histórico."
+      ],
+      "correctIndex": 2,
+      "explanation": "O sistema de comunicação une todas as esferas operacionais, arbitrando prioridades de fluxo na rede e diagnosticando falhas da interligação do barramento (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que define e embasa a tendência moderna de convergência observada entre as tecnologias de CLP e SDCD na indústria de processo?",
+      "options": [
+        "A adoção de algoritmos analógicos defasados apenas em plantas puramente acadêmicas.",
+        "A incorporação de blocos PID no CLP e funções discretas complexas/lógicas embutidas no SDCD.",
+        "A limitação imposta pela rede elétrica inviabilizando roteamentos seriais em plantas mistas.",
+        "O isolamento sumário decretado entre malhas sequenciais simples e circuitos abertos PID."
+      ],
+      "correctIndex": 1,
+      "explanation": "Na prática, os fabricantes integraram lógicas sequenciais e ligas-desligas aos potentes SDCDs enquanto adicionaram malhas avançadas PID no escopo do CLP tradicional (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que os sistemas híbridos modernos com arquitetura SDCD em plantas químicas ainda exigem a forte presença segregada de CLPs dedicados à segurança (Safety PLCs)?",
+      "options": [
+        "Pois as engenharias financeiras dos SDCDs bloqueiam relatórios contábeis exigidos pela auditoria global.",
+        "Para realizar as rotinas estritas de Desligamento e Intertravamento Crítico de forma nativamente imune e paralela ao controle normal.",
+        "Devido às antenas de rádio satélite dos CLPs não sofrerem latência durante tempestades nas plataformas.",
+        "Porque o microprocessador SDCD é fisicamente incapaz de converter ou processar um contato seco aberto (booleano)."
+      ],
+      "correctIndex": 1,
+      "explanation": "Sistemas críticos de segurança e intertravamentos devem ser processados separadamente em redes redundantes (CLPs tolerantes) isentas de conflitos com a malha controladora contínua normal (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a justificativa técnica para a implementação de um Servidor de Banco de Dados em Tempo Real (RTDB) interligado mediante Gateway à via do SDCD?",
+      "options": [
+        "Inibir as válvulas em falha segura, retirando o sinal de ar pressurizado enquanto os painéis locais realizam varreduras cíclicas.",
+        "Coletar dados instantâneos preservando o curto tempo de resposta das rotinas do SDCD por aliviá-lo da enorme carga das solicitações SQL do sistema gerencial corporativo.",
+        "Anular completamente a comunicação digital no chão de fábrica forçando roteamentos baseados em redes analógicas simples de cobre fiado para proteção.",
+        "Modificar algoritmos profundos de inteligência artificial desinstalando recursos visuais legados das bases Mestre e Escravo unificadas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O gateway independente RTDB atua como buffer coletando dados do processo, o que protege a CPU de controle principal de lentidões em seu tempo de processamento contínuo da planta (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na gestão de processos de batelada (batch) com profundo controle de receitas e estágios sincronizados, por que um sistema SDCD moderno é tecnicamente mais indicado do que células de CLPs isolados?",
+      "options": [
+        "Por ignorar os tempos de ciclo priorizando unicamente os contatos lógicos de partida rotatória rápida em motores pneumáticos.",
+        "O SDCD impõe limitações elétricas que preservam termopares de alta densidade sem necessitar do uso de interfaces dedicadas caras.",
+        "Por fornecer nativamente a integração robusta do hardware com o gerenciamento de bateladas unificado, rastreabilidade plena e interface gráfica orquestrada.",
+        "Devido ao algoritmo em linguagem Assembly forçar os equipamentos a atuar unicamente pelo padrão de pulso cego da frequência natural corporativa."
+      ],
+      "correctIndex": 2,
+      "explanation": "Em indústrias voltadas a multiprodutos, as soluções batelada rodando via arquitetura SDCD fornecem hardware integrado a potentes bancos relacionais unificados, gestão de receita e interface consolidada (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Uma característica fundamental do SDCD é que seus módulos funcionais de controle podem ser distribuídos tanto logica quanto geograficamente pela planta.",
+      "correctAnswer": true,
+      "explanation": "O SDCD permite que pequenas salas de controle sejam instaladas localmente nas unidades operacionais, interligadas a um centro operacional principal via barramento (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Enquanto o SDCD realiza o controle automático direto do processo, o software SCADA atua fisicamente no campo como um atuador eletromecânico.",
+      "correctAnswer": false,
+      "explanation": "O SCADA não é um hardware atuador, mas sim um software de design utilizado para monitorar o processo através de interfaces gráficas (PLC vs SCADA vs DCS: Principais diferenças explicadas).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Historicamente, a interface de operação nativa e original do CLP oferecia poderosos monitores de vídeo gráficos (TRC), superando muito os primeiros SDCDs.",
+      "correctAnswer": false,
+      "explanation": "O oposto ocorreu: os primeiros CLPs possuíam interface muito rudimentar (botoeiras, lâmpadas), enquanto os SDCDs nasceram integrando poderosos consoles de vídeo para o operador (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em uma arquitetura de inteligência distribuída, a falha abrupta de um módulo periférico específico do SDCD causa por design a paralisação completa da unidade.",
+      "correctAnswer": false,
+      "explanation": "O conceito distribuído segmenta o processamento; logo, falhas de módulo isoladas prejudicam no máximo a funcionalidade residente nele próprio, não colapsando o restante da rede (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas consolidadas redes operacionais baseadas em Sistema Digital de Controle Distribuído não existe possibilidade técnica viável para interfacear pacotes baseados em CLPs convencionais no mesmo barramento de operação.",
+      "correctAnswer": false,
+      "explanation": "Na realidade, com o avanço de redes abertas de automação e gateways dedicados, CLPs e SDCDs são corriqueiramente integrados dividindo lógicas e comandos sob a mesma interface gráfica amigável (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A Honeywell foi a pioneira ao lançar no mercado em 1975 o sistema TDC 2000, consolidado como o primeiro ____ criado para substituir painéis analógicos no controle contínuo.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SDCD"
+        }
+      ],
+      "explanation": "O TDC 2000 da Honeywell foi o primeiro Sistema Digital de Controle Distribuído (SDCD), revolucionando a instrumentação da década de 1970 (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Diferente de CLPs antigos aglomerados via conversores de terceiros, os modernos sistemas SDCD nativamente provêm e gerenciam uma base de dados ____ de todo o sistema.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "global"
+        }
+      ],
+      "explanation": "Uma enorme facilidade dos SDCDs é prover a base de dados integrada de forma global unificando o acesso às informações unânimes de todo o barramento (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A arquitetura do SDCD original evoluiu agrupando geograficamente as funções dos instrumentos de modo a substituir os antigos controladores dedicados de natureza ____ de painel cego.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "analógica"
+        }
+      ],
+      "explanation": "O SDCD substituiu os esquemas legados dos instrumentos focados no controle contínuo analógico baseados em sinal pneumático ou sinais eletrônicos simples de 4-20mA (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    }
+  ]
+}

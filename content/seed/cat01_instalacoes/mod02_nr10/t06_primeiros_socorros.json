@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-10",
+  "moduleSubtitle": "Segurança em Instalações e Serviços com Eletricidade",
+  "moduleOrder": 1,
+  "trail": "Primeiros Socorros e Atendimento a Acidentes Elétricos",
+  "trailOrder": 5,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-10, os trabalhadores autorizados devem estar aptos a executar o resgate e prestar primeiros socorros especialmente por meio de qual procedimento vital?",
+      "options": [
+        "Estancamento de hemorragias com torniquetes industriais.",
+        "Traqueostomia de emergência no local do acidente.",
+        "Reanimação cardiorrespiratória.",
+        "Imobilização de fraturas com talas improvisadas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme o item 10.12.2 da NR-10, os trabalhadores autorizados devem estar aptos a executar o resgate e prestar primeiros socorros, especialmente por meio de reanimação cardiorrespiratória.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A programação mínima do Curso Básico (Anexo III) da NR-10 exige o treinamento em quais técnicas específicas de primeiros socorros?",
+      "options": [
+        "Administração intravenosa de medicamentos e RCP.",
+        "Apenas massagem cardíaca e uso de macas hospitalares.",
+        "Sutura primária e estancamento de hemorragias graves.",
+        "RCP, massagem cardíaca, técnicas de remoção e transporte."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 14 da Programação Mínima do Curso Básico (Anexo III) exige treinamento em 'Primeiros socorros (RCP, massagem cardíaca, técnicas de remoção e transporte)'.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quem a NR-10 define que deve estar apto a executar o resgate e prestar os primeiros socorros em instalações elétricas?",
+      "options": [
+        "Os trabalhadores autorizados.",
+        "Apenas os membros eleitos e atuantes da CIPA.",
+        "Apenas a equipe médica especializada da empresa.",
+        "Qualquer funcionário da organização."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 10.12.2 da NR-10 determina expressamente que os trabalhadores autorizados devem estar aptos a executar o resgate e prestar os primeiros socorros.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Além do resgate e dos primeiros socorros, a NR-10 exige que os trabalhadores autorizados estejam aptos a operar equipamentos destinados a qual outra situação de emergência?",
+      "options": [
+        "Resgate avançado em ambientes confinados alagados.",
+        "Prevenção e combate a incêndio.",
+        "Desobstrução de vias públicas adjacentes.",
+        "Comunicação de emergência via rádio amador de longa distância."
+      ],
+      "correctIndex": 1,
+      "explanation": "Segundo o item 10.12.4 da norma, os trabalhadores autorizados devem também estar aptos a manusear e operar equipamentos de prevenção e combate a incêndio.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o dever fundamental do trabalhador ao se deparar com uma situação de risco elétrico, segundo a NR-10?",
+      "options": [
+        "Aguardar a próxima inspeção formal da CIPA para relatar o problema.",
+        "Tentar resolver o problema sozinho sem informar o superior.",
+        "Comunicar imediatamente as situações de risco.",
+        "Registrar no livro de ocorrências apenas ao final do expediente."
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme o item 10.13.4, alínea 'c', da NR-10, cabe diretamente aos trabalhadores comunicar imediatamente as situações de risco.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De quem é a obrigação legal de manter os trabalhadores informados sobre os riscos elétricos a que estão expostos?",
+      "options": [
+        "Do sindicato da categoria profissional dominante.",
+        "Exclusivamente do SESMT.",
+        "Do Ministério do Trabalho durante fiscalizações.",
+        "Dos contratantes."
+      ],
+      "correctIndex": 3,
+      "explanation": "De acordo com o item 10.13.2 da norma, é responsabilidade dos contratantes manter os trabalhadores informados sobre os riscos a que estão expostos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No Curso Complementar SEP (Anexo III), o treinamento sobre acidentes exige foco em quais aspectos?",
+      "options": [
+        "Acidentes típicos - análise, discussão e medidas de proteção.",
+        "Treinamento exclusivo em combate a incêndios de classe C.",
+        "Acidentes de trajeto rodoviário e suas consequências jurídicas.",
+        "Análise de risco exclusivamente em trabalhos desenergizados e aterrados."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 17 da programação mínima do Curso Complementar (Anexo III) especifica 'Acidentes típicos - análise, discussão, medidas de proteção'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No Curso Básico (Anexo III) da NR-10, como a norma exige que o tema acidentes de origem elétrica seja abordado?",
+      "options": [
+        "Através da memorização exaustiva de estatísticas governamentais.",
+        "Por meio da abordagem de causas e da discussão de casos.",
+        "Apenas pelo treinamento prático de imobilização em manequins hospitalares.",
+        "Através do ensino de elaboração de laudos periciais do Ministério Público."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme o item 13 do Curso Básico no Anexo III, a programação mínima inclui 'Acidentes de origem elétrica (causas e discussão de casos)'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No Curso Complementar SEP, qual é a exigência em relação ao atendimento de emergências e acidentados?",
+      "options": [
+        "O curso foca apenas no isolamento térmico da área, dispensando o contato com a vítima.",
+        "Obriga a formação de cada trabalhador como socorrista avançado e paramédico.",
+        "Exige treinamento em técnicas de remoção e atendimento de acidentados.",
+        "O atendimento a acidentados deve ser ensinado apenas no Curso Básico."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 16 da Programação Mínima do Curso Complementar (Anexo III) estabelece 'Treinamento em técnicas de remoção e atendimento de acidentados'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual alternativa descreve corretamente um elemento curricular exigido no Curso Básico e um no Curso Complementar SEP, respectivamente?",
+      "options": [
+        "Básico: Acidentes típicos no SEP; Complementar: Primeiros socorros com RCP avançado.",
+        "Básico: Liberação de instalação para serviço; Complementar: Causas e discussão de casos em baixa tensão.",
+        "Básico: Prevenção de incêndio florestal; Complementar: RCP e massagem cardíaca exclusiva.",
+        "Básico: Técnicas de remoção e transporte; Complementar: Acidentes típicos - análise, discussão, medidas de proteção."
+      ],
+      "correctIndex": 3,
+      "explanation": "O Curso Básico inclui 'Primeiros socorros (RCP, massagem cardíaca, técnicas de remoção e transporte)' (item 14), enquanto o Complementar foca em 'Acidentes típicos - análise, discussão, medidas de proteção' (item 17).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A NR-10 estabelece que os trabalhadores autorizados devem estar aptos a executar o resgate de acidentados, com especial obrigatoriedade para a técnica de reanimação cardiorrespiratória.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa está correta. O item 10.12.2 determina que os trabalhadores autorizados devem estar aptos a executar o resgate e prestar primeiros socorros, especialmente por reanimação cardiorrespiratória.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O treinamento em técnicas de remoção e transporte da vítima de acidente elétrico é um módulo opcional, devendo ser realizado exclusivamente pela equipe médica da empresa.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 14 da ementa do Curso Básico (Anexo III) exige que a programação mínima para todos os trabalhadores autorizados abranja 'Primeiros socorros (RCP, massagem cardíaca, técnicas de remoção e transporte)'.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A comunicação imediata de situações de risco é responsabilidade exclusiva do engenheiro de segurança, isentando o eletricista executante dessa obrigação.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 10.13.4, alínea 'c', estabelece que é responsabilidade dos próprios trabalhadores comunicar imediatamente situações de risco.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Além da capacitação para resgate e primeiros socorros, a NR-10 exige que os trabalhadores autorizados estejam aptos a operar equipamentos de combate a incêndio.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. O subitem 10.12.4 determina que os trabalhadores autorizados devem estar aptos a manusear e operar equipamentos de prevenção e combate a incêndio.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para os profissionais do SEP, a norma isenta o treinamento de remoção de vítimas no Curso Complementar, pois o Curso Básico já cobriu todos os aspectos práticos.",
+      "correctAnswer": false,
+      "explanation": "Falso. O Curso Complementar do SEP exige especificamente 'Treinamento em técnicas de remoção e atendimento de acidentados', conforme o item 16 do Anexo III.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Segundo a NR-10, os trabalhadores autorizados devem estar aptos a executar o resgate e prestar primeiros socorros, com foco especial na técnica de reanimação ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "cardiorrespiratória"
+        }
+      ],
+      "explanation": "O item 10.12.2 da NR-10 exige a aptidão para executar o resgate e prestar primeiros socorros com foco especial na reanimação cardiorrespiratória.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A ementa de Primeiros Socorros do Curso Básico (Anexo III) deve contemplar RCP, massagem cardíaca e técnicas de remoção e ____ das vítimas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "transporte"
+        }
+      ],
+      "explanation": "O item 14 da programação mínima do Curso Básico define que o conteúdo deve englobar 'RCP, massagem cardíaca, técnicas de remoção e transporte'.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A NR-10 estabelece que é responsabilidade dos ____ manter os trabalhadores continuamente informados sobre os riscos elétricos a que estão expostos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "contratantes"
+        }
+      ],
+      "explanation": "Conforme o item 10.13.2, 'É de responsabilidade dos contratantes manter os trabalhadores informados sobre os riscos a que estão expostos'.",
+      "difficulty": "hard"
+    }
+  ]
+}

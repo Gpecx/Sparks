@@ -1,0 +1,324 @@
+{
+  "category": "Termografia Infravermelha",
+  "categoryOrder": 3,
+  "module": "Fundamentos de Termografia",
+  "moduleOrder": 0,
+  "moduleSubtitle": "Física do infravermelho, transferência de calor, emissividade, fatores ambientais, câmeras IR e calibração",
+  "ebookTitle": "Fundamentos de Termografia",
+  "ebookSubtitle": "Da radiação infravermelha aos equipamentos e à calibração: a base física da inspeção termográfica",
+  "estimatedMinutes": 80,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Física do Infravermelho",
+      "subtitle": "Radiação térmica, corpo negro e o espectro infravermelho",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é radiação térmica",
+          "type": "text",
+          "body": "Radiação é a energia emitida pela matéria proporcional à sua temperatura e não necessita de um meio físico para que ocorra seu transporte (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR). Todos os objetos com temperatura acima de -273,15 °C (zero absoluto) emitem radiação eletromagnética na forma de calor (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia). A radiação infravermelha é parte do espectro eletromagnético, compreendendo comprimentos de onda entre aproximadamente 700 nanômetros e 1 milímetro (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "O corpo negro como referência",
+          "type": "text",
+          "body": "Um corpo negro é um corpo perfeitamente opaco que, como resultado de sua temperatura, emite a máxima radiação possível, sendo considerado um radiador ou emissor perfeito (Fonte: Termografia Infravermelha, Editora do Ifes). A propriedade emissividade espectral é definida como a comparação entre a excitância emitida pelo objeto analisado e a excitância emitida por um corpo negro, ambos à mesma temperatura (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s3",
+          "title": "Leis da radiação: Planck, Wien e Stefan-Boltzmann",
+          "type": "formula",
+          "formula": "Wien: λ_máx ∝ 1/T   ·   Stefan-Boltzmann: E = σ · T⁴",
+          "explanation": "A Lei de Planck descreve a emissão de radiação do corpo negro relacionando a distribuição espectral da radiação emitida por ele a uma determinada temperatura absoluta (T), por unidade de comprimento de onda (Fonte: Termografia Infravermelha, Editora do Ifes). A localização do comprimento de onda onde ocorre a excitância máxima, em função da temperatura, pode ser obtida através da Lei de Deslocamento de Wien (Fonte: Termografia Infravermelha, Editora do Ifes). O poder emissivo de um corpo negro (emissor perfeito) é E = σ × T⁴, onde σ é a constante de Stefan-Boltzmann (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)."
+        },
+        {
+          "id": "s4",
+          "title": "As faixas do espectro infravermelho",
+          "type": "list",
+          "items": [
+            "Short wave infrared (Infravermelho próximo): a tabela da ABNT NBR 15572 designa a faixa de 1,1 a 3 micrômetros (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Mid wave infrared (Infravermelho médio): 3 a 6 micrômetros (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Sistemas LW (long wave): operam na faixa de 8 a 12 micrômetros (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Os termovisores comercialmente disponíveis e indicados para uso em manutenção de equipamentos elétricos, em sua grande maioria, operam na faixa de 3 a 15 micrômetros (Fonte: Termografia Infravermelha, Editora do Ifes)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Por que ~10 µm em equipamentos elétricos",
+          "type": "note",
+          "body": "Corpos a temperaturas em torno de 300 a 400 K, típicas de equipamentos elétricos em operação, possuem excitância máxima em comprimentos de onda em torno de 10 micrômetros (Fonte: Termografia Infravermelha, Editora do Ifes). Isso explica por que os termovisores de manutenção elétrica operam predominantemente na faixa long wave: é onde os equipamentos em operação emitem mais radiação."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Todo corpo acima do zero absoluto emite radiação térmica, parte dela no infravermelho (≈700 nm a 1 mm). O corpo negro é o emissor perfeito de referência. A Lei de Planck descreve a distribuição espectral; Wien localiza o comprimento de onda de excitância máxima; Stefan-Boltzmann (E = σ·T⁴) quantifica o poder emissivo. Como equipamentos a 300–400 K têm máximo em torno de 10 µm, os termovisores de manutenção operam principalmente na faixa de 3 a 15 µm."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Transferência de Calor",
+      "subtitle": "Condução, convecção, radiação e o sobreaquecimento na termografia",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Os três modos de transferência de calor",
+          "type": "text",
+          "body": "Existe uma definição conceitual rigorosa separando a energia térmica, associada à estrutura e temperatura da matéria, do calor, que é sempre energia em trânsito por gradiente térmico (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR). A radiação térmica é emitida por alterações nos níveis eletrônicos liberando ondas eletromagnéticas que viajam perfeitamente pelo espaço livre ou vácuo, dispensando meio material (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)."
+        },
+        {
+          "id": "s2",
+          "title": "Condução, convecção e radiação: as leis",
+          "type": "list",
+          "items": [
+            "Condução: descrita pela Lei de Fourier, onde a condutividade térmica do material atua como constante de proporcionalidade para o gradiente de temperatura (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
+            "O termo dT/dx equivale ao gradiente de temperatura, medido em K/m, que governa a direção e a magnitude do fluxo de calor na condução (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
+            "Convecção: envolve o efeito combinado da condução e o movimento (advecção) do fluido, sendo regida pela Lei de Newton do resfriamento (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
+            "A convecção pode ser livre (natural), baseada em variações de densidade, ou forçada (por movimentos induzidos no meio), alterando os valores do coeficiente de convecção h (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
+            "Radiação: o poder emissivo de um emissor perfeito (corpo negro) segue a lei de Stefan-Boltzmann, dependendo da constante de Stefan-Boltzmann e da quarta potência da temperatura (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Lei de Fourier e o coeficiente de convecção",
+          "type": "formula",
+          "formula": "Condução (Fourier): q = -k · (dT/dx)   ·   Balanço em regime permanente: q(condução) - q(convecção) - q(radiação) = 0",
+          "explanation": "Na Lei de Fourier, o k atua como constante de proporcionalidade e representa a condutividade térmica, expressa em W/(m·K) (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR). O parâmetro h é o coeficiente de convecção local, responsável por quantificar a troca de calor entre a superfície e o fluido em escoamento ou movimento livre (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR). Em condição de regime permanente, a equação do balanço de energia na superfície é dada por q(condução) - q(convecção) - q(radiação) = 0 (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)."
+        },
+        {
+          "id": "s4",
+          "title": "Regime transiente e a Lei de Kirchhoff",
+          "type": "text",
+          "body": "Em regime transiente, a variação da energia armazenada internamente antes do equilíbrio permanente depende da massa e do calor específico da substância conforme ela aquece (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR). A Lei de Kirchhoff estabelece que a absortividade é igual à emissividade (α = ε) sob certas condições de radiação com a vizinhança (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)."
+        },
+        {
+          "id": "s5",
+          "title": "Por que conexões esquentam: o efeito Joule",
+          "type": "note",
+          "body": "O acúmulo resistivo em um ponto de junção ou conexão defeituosa é denominado resistência de mau contato, elevando expressivamente o efeito térmico (Fonte: Termografia Infravermelha, Editora do Ifes). O aumento da resistência em uma conexão eleva a potência dissipada (proporcional a R vezes I ao quadrado), ocasionando o sobreaquecimento visível na termografia (Fonte: Inspeção em Subestações Utilizando a Termografia; Termografia Infravermelha, Editora do Ifes). O aquecimento dissipado é proporcional ao quadrado da corrente. As extrapolações de carga aplicam expoentes específicos (entre 1,4 e 2,0) sobre a relação de correntes, demonstrando o comportamento não linear do efeito Joule (Fonte: Termografia Infravermelha, Editora do Ifes). Em circuitos paralelos sob falha de resistência de contato excessivamente alta, a corrente desvia para o circuito sadio, aumentando a potência dissipada nele e tornando o cabo normal mais quente que o danificado (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Calor é energia em trânsito por gradiente térmico, transferida por condução (Lei de Fourier, q = -k·dT/dx), convecção (Lei de Newton do resfriamento, coeficiente h, livre ou forçada) e radiação (Stefan-Boltzmann, ∝ T⁴). Em regime permanente vale o balanço q_cond - q_conv - q_rad = 0; em transiente, a energia armazenada depende da massa e do calor específico. A Lei de Kirchhoff iguala absortividade e emissividade. O sobreaquecimento detectado na termografia vem do efeito Joule (∝ R·I²) em conexões de mau contato."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Emissividade e Temperatura",
+      "subtitle": "Corpos reais, radiosidade, reflexão e erros de leitura",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Corpo negro x corpos reais",
+          "type": "text",
+          "body": "O corpo negro teórico detém condição de emissividade perfeitamente unitária (igual a um), uniforme em todas as direções de radiação, comportando-se como emissor radiador isotropicamente perfeito (Fonte: Termografia Infravermelha, Editora do Ifes). A uma mesma temperatura, os corpos reais emitem sempre radiação menor e variável em relação à radiação máxima possível emitida por um corpo negro (radiador perfeito) (Fonte: Termografia Infravermelha, Editora do Ifes). A emissividade é uma característica intrínseca de cada objeto e depende da direção de radiação, do comprimento de onda analisado e de suas características superficiais (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s2",
+          "title": "Emissividade e refletividade em corpos opacos",
+          "type": "formula",
+          "formula": "Corpos opacos: refletividade = 1 - emissividade",
+          "explanation": "A emissividade é um fator complementar à refletividade para corpos opacos, de forma que a refletividade pode ser representada pela equação refletividade = 1 - emissividade (Fonte: Termografia Infravermelha, Editora do Ifes). A propriedade emissividade espectral é definida como a razão entre a excitância emitida pelo objeto analisado e a excitância emitida por um corpo negro (emissor perfeito), desde que ambos estejam à mesma temperatura (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s3",
+          "title": "Radiosidade total e radiação refletida",
+          "type": "text",
+          "body": "A radiação total captada pelo termovisor em uma superfície, somando a radiação emitida pela própria superfície e a refletida de corpos do entorno, recebe o nome de radiosidade total (Fonte: Termografia Infravermelha, Editora do Ifes). A radiação total proveniente de uma superfície inspecionada corresponde à soma da radiação emitida pela própria superfície com a parcela por ela refletida proveniente do ambiente (Fonte: Termografia Infravermelha, Editora do Ifes). Os termovisores são equipamentos passivos e captam também a radiação refletida do ambiente. O que vemos não se limita ao calor emitido pelo objeto, mas pode ser resultado de energia refletida de corpos adjacentes, gerando uma leitura aparente modificada (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)."
+        },
+        {
+          "id": "s4",
+          "title": "Dependência angular e emitância",
+          "type": "list",
+          "items": [
+            "A emissividade de corpos não ideais é variável em função do ângulo de emissão. Corpos reais têm emissividade inferior à de um radiador perfeito e que varia conforme o ângulo de emissão (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Materiais não condutores apresentam queda acentuada de emissividade ao aumentar o ângulo de visada; materiais condutores tendem a mostrar discreta elevação inicial, declinando apenas sob ângulos muito altos, próximos de oitenta graus (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Materiais condutores tendem a apresentar inicialmente uma elevação da emissividade e somente para ângulos de visada extremamente altos, em torno de 80 graus, começam a apresentar diminuição. Para ângulos menores que 45 graus, a mudança é irrelevante (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "O termo emissividade deveria ser empregado somente para amostras de materiais planas e livres de porosidades e alterações superficiais. Para corpos reais com rugosidade, curvaturas ou oxidação, utiliza-se o termo emitância (Fonte: Termografia Infravermelha, Editora do Ifes)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Superfícies brilhantes e leituras falsas",
+          "type": "note",
+          "body": "Superfícies que possuem brilho têm emissividade muito baixa e podem fornecer leituras falsas de temperatura aparente, pois refletem a temperatura e energia de corpos do ambiente adjacente (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil). O que parece ser apenas uma pequena diferença de temperatura entre dois pedaços de cobre brilhante é na verdade muito maior, diferença que é revelada pelo uso de uma tira de fita de alta emissividade sobre o material (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil). Emissividade, temperatura refletida e outros parâmetros do objeto devem ser ajustados corretamente, caso contrário, as medições apresentarão desvios podendo gerar erros de avaliação e diagnósticos muito significativos (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O corpo negro tem emissividade unitária; corpos reais emitem menos e de forma variável. A emissividade é intrínseca e depende de direção, comprimento de onda e superfície; em corpos opacos, refletividade = 1 - emissividade. O termovisor capta a radiosidade total (emitida + refletida do ambiente). A emissividade varia com o ângulo (condutores e não condutores se comportam de modo oposto) e usa-se 'emitância' para superfícies reais rugosas. Superfícies brilhantes têm emissividade baixa e geram leituras falsas — daí ajustar corretamente emissividade e temperatura refletida."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Fatores Ambientais",
+      "subtitle": "Refletividade, atmosfera, janelas de transmitância e vento",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Absorção e espalhamento na atmosfera",
+          "type": "text",
+          "body": "A absorção causa perda real de energia do campo eletromagnético, enquanto o espalhamento apenas redireciona essa energia (Fonte: Termografia Infravermelha, Editora do Ifes). A combinação das diferentes concentrações dessas moléculas produz um perfil de transmitância atmosférica que é função do comprimento de onda, as chamadas janelas de transmitância atmosféricas (Fonte: Termografia Infravermelha, Editora do Ifes). Os termovisores operam nessas janelas porque a atenuação atmosférica é menos restritiva ao sinal infravermelho (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s2",
+          "title": "Quais moléculas absorvem (e quais não)",
+          "type": "list",
+          "items": [
+            "As moléculas de água, dióxido de carbono e ozônio são os principais absorvedores na faixa operacional dos termovisores (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Os dois gases presentes em maior abundância na atmosfera, nitrogênio (N2) e oxigênio (O2), são homonucleares, não possuindo dipolo e não apresentam absorção molecular (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Nitrogênio e oxigênio são homonucleares, não possuem dipolo magnético e não absorvem a radiação (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Os coeficientes de absorção e espalhamento aerossol são independentes das variações de umidade relativa e temperatura atmosférica (Fonte: Termografia Infravermelha, Editora do Ifes)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Água precipitável e distância de inspeção",
+          "type": "text",
+          "body": "A atenuação atmosférica na faixa principal de operação dos termovisores depende diretamente da quantidade de água precipitável no meio (Fonte: Termografia Infravermelha, Editora do Ifes). Nessa janela, a influência do dióxido de carbono é irrelevante, limitando o cálculo à quantidade de água precipitável (Fonte: Termografia Infravermelha, Editora do Ifes). Para curtas distâncias de inspeção, a radiação térmica originada pela coluna de ar interposta é desprezível e ignorada no cálculo (Fonte: Termografia Infravermelha, Editora do Ifes). A umidade absoluta é obtida matematicamente a partir das medições de umidade relativa e da temperatura atmosférica (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s4",
+          "title": "O efeito do vento e as condições de segurança",
+          "type": "note",
+          "body": "O vento acelera a transferência de calor por advecção, mascarando a real elevação térmica das falhas (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR). O anemômetro mede a velocidade do vento incidente para permitir correções na temperatura do componente (Fonte: Termografia Infravermelha, Editora do Ifes). Há exigência de não executar serviços sob condições de perigo para os trabalhadores, como nevoeiro forte, chuva ou neve (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s5",
+          "title": "Refletividade do ambiente e o IFOV",
+          "type": "list",
+          "items": [
+            "A câmera capta o calor emitido pelo objeto e também a energia refletida de corpos adjacentes (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+            "Termovisores são equipamentos passivos que captam a radiação emitida pelo alvo somada à energia refletida do ambiente (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+            "O IFOV determina o tamanho mínimo de um objeto detectável pela câmera em função da distância do alvo (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "O IFOV fornece o ângulo sob o qual um único elemento detector percebe a radiação do objeto inspecionado (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "O IFOV combinado com a distância permite calcular a dimensão mínima do objeto que preenche plenamente o detector (Fonte: Termografia Infravermelha, Editora do Ifes)"
+          ]
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Na atmosfera, a absorção perde energia e o espalhamento a redireciona; os termovisores operam nas janelas de transmitância onde a atenuação é menor. Água, CO2 e ozônio são os principais absorvedores; N2 e O2 são homonucleares e não absorvem. A atenuação depende da água precipitável, e a curtas distâncias a coluna de ar é desprezível. O vento mascara a elevação térmica (mede-se com anemômetro), e não se inspeciona sob nevoeiro, chuva ou neve. O termovisor passivo também capta reflexões do ambiente, e o IFOV define o menor objeto detectável em função da distância."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Equipamentos e Câmeras IR",
+      "subtitle": "Detectores, FPA, óptica e resolução térmica e espacial",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Detectores: bolômetros não refrigerados",
+          "type": "text",
+          "body": "Os termovisores indicados para manutenção elétrica utilizam predominantemente microbolômetros não refrigerados (Fonte: Termografia Infravermelha, Editora do Ifes). O bolômetro é um detector matricial no qual a resistência elétrica varia em função da irradiação infravermelha absorvida (Fonte: Termografia Infravermelha, Editora do Ifes). Os antigos sistemas de refrigeração foram substituídos por compactos sistemas termoelétricos que usam o efeito Peltier (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s2",
+          "title": "A matriz de plano focal (FPA) e o ROIC",
+          "type": "list",
+          "items": [
+            "Na matriz de plano focal (FPA), os detectores recebem simultaneamente toda a irradiação direcionada pelas lentes (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "O FPA é constituído basicamente pelo sensor infravermelho sensível à radiação e pelo ROIC (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "O circuito integrado de leitura (ROIC) realiza a leitura, amplificação e processamento do sinal oriundo do sensor infravermelho (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "O fator de preenchimento é a razão entre a área efetivamente preenchida com células sensíveis e a área total do FPA (Fonte: Termografia Infravermelha, Editora do Ifes)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Óptica: número-F, FOV e IFOV",
+          "type": "text",
+          "body": "O número-F é a relação direta entre a distância focal da lente e o seu diâmetro de abertura (Fonte: Termografia Infravermelha, Editora do Ifes). Quanto menor o FOV da câmera, melhor a resolução espacial, já que o mesmo número de pixels foca em uma área menor (Fonte: Termografia Infravermelha, Editora do Ifes). O objeto inspecionado deve medir de duas a três vezes o tamanho mínimo estipulado pelo IFOV para evitar erros da fenda (Fonte: Termografia Infravermelha, Editora do Ifes). A troca da lente muda propriedades ópticas como transmitância e número-F, o que pode requerer um novo ajuste (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s4",
+          "title": "Resolução térmica: o NETD",
+          "type": "text",
+          "body": "A resolução de temperatura de um sistema radiométrico é dada pelo NETD, que quantifica sua sensibilidade térmica (Fonte: Termografia Infravermelha, Editora do Ifes). O NETD sofre aumento no nível de ruído quando o equipamento é ajustado para operar em faixas de medição mais altas (Fonte: Termografia Infravermelha, Editora do Ifes). O aquecimento interno da câmera causa um deslocamento, conhecido como offset, que deve ser corrigido ativamente pelo sistema (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s5",
+          "title": "Cuidados práticos de operação",
+          "type": "note",
+          "body": "Mudanças na temperatura ambiente afetam a câmera, sendo indicado mantê-la no local por alguns minutos antes do uso (Fonte: Termografia Infravermelha, Editora do Ifes). Uma imagem fora de foco exibe temperatura incorreta e seu ajuste deve ser perfeito antes de ser salva (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil). Os softwares incluem o recurso prático de aplicar paletas de cores selecionáveis aos termogramas (Fonte: Termografia Infravermelha, Editora do Ifes). Uma câmera básica de menor custo tem muitos usos e oferece excelente performance em diversas aplicações simples (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os termovisores de manutenção elétrica usam microbolômetros não refrigerados (resistência varia com a irradiação), com resfriamento por efeito Peltier quando aplicável. O FPA reúne o sensor e o ROIC (leitura e processamento), e o fator de preenchimento mede a área sensível útil. A óptica é descrita pelo número-F, pelo FOV (menor FOV = melhor resolução espacial) e pelo IFOV (o objeto deve ter 2 a 3 vezes o tamanho mínimo). O NETD define a sensibilidade térmica e piora em faixas mais altas; offset interno, aclimatação, foco perfeito e paletas de cores são cuidados de operação."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Calibração e Aferição de Câmeras IR",
+      "subtitle": "Verificação intermediária, exatidão, incerteza e ruído",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Ajuste de fábrica e normas de verificação",
+          "type": "text",
+          "body": "Para o procedimento de ajuste em fábrica, são usados corpos negros a diferentes temperaturas (Fonte: Termografia Infravermelha, Editora do Ifes). A norma ABNT NBR 15718 fornece diretrizes para a verificação de termovisores pelo usuário final (Fonte: Termografia Infravermelha, Editora do Ifes). A troca da lente pode implicar em mudança do número-F ou da transmitância espectral óptica, exigindo novos ajustes de calibração (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s2",
+          "title": "Por que verificações intermediárias",
+          "type": "list",
+          "items": [
+            "A periodicidade de calibração deve ser frequentemente reavaliada e otimizada por meio de planos de verificação intermediária (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
+            "A calibração periódica não previne o uso de instrumentos fora das especificações, justificando a adoção de verificações intermediárias frequentes (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
+            "As verificações intermediárias são necessárias para manter a confiança na situação de calibração do instrumento (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
+            "As verificações de medição levam em conta as condições ambientais, e fatores como temperatura ambiente e umidade relativa do ar interferem nas calibrações (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Como avaliar a exatidão",
+          "type": "text",
+          "body": "A exatidão deve ser determinada em pelo menos 5 pontos da faixa nominal com no mínimo 5 medições em cada um deles (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI). A exatidão, de acordo com o VIM, é um conceito qualitativo e não deve ser representado por um número específico (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI). A distância deve ser a menor possível para que a influência da transmitância atmosférica seja considerada unitária e não afete a calibração (Fonte: Termografia Infravermelha, Editora do Ifes). A recomendação determina avaliar o campo de visão (FOV) e o campo de visão instantâneo (IFOV) para definir as características de resolução espacial (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)."
+        },
+        {
+          "id": "s4",
+          "title": "Incerteza admissível",
+          "type": "formula",
+          "formula": "Incerteza típica: ±2 K ou ±2% da temperatura medida   ·   Incerteza máxima do sistema ≈ (1/3) da tolerância do processo",
+          "explanation": "A incerteza para a maioria dos termovisores disponíveis no mercado é de ±2 K ou ±2% da temperatura medida (Fonte: Termografia Infravermelha, Editora do Ifes). A incerteza máxima admissível para todo o sistema deve ser da ordem de 1/3 da tolerância do processo para garantir segurança no diagnóstico preditivo (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s5",
+          "title": "Ruído, NETD e uniformidade do campo",
+          "type": "note",
+          "body": "O NETD define a resolução em temperatura, equivalente ao desvio padrão devido ao ruído em um termograma (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI). O ruído interno possui natureza aleatória cuja distribuição de probabilidade se aproxima tipicamente do modelo de uma distribuição gaussiana (Fonte: Termografia Infravermelha, Editora do Ifes). O ensaio afere a instabilidade a um campo não uniforme medindo a diferença máxima de temperatura entre fragmentos do termograma padrão (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI). Mudanças na temperatura ambiente afetam a própria câmera, gerando um offset no sinal e exigindo a aclimatação prévia do instrumento no local (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O ajuste de fábrica usa corpos negros a várias temperaturas, e a ABNT NBR 15718 orienta a verificação pelo usuário. Como a calibração periódica não impede o uso fora de especificação, adotam-se verificações intermediárias frequentes, sensíveis às condições ambientais. A exatidão (conceito qualitativo pelo VIM) é avaliada em ao menos 5 pontos com 5 medições cada, à menor distância possível. A incerteza típica é ±2 K ou ±2%, e a do sistema deve ser ≈1/3 da tolerância do processo. O NETD reflete o ruído (gaussiano) e a uniformidade do campo, exigindo aclimatação prévia do instrumento."
+        }
+      ]
+    }
+  ]
+}

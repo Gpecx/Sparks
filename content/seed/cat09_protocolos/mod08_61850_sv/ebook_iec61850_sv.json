@@ -1,0 +1,143 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 61850 - Sampled Values",
+  "moduleSubtitle": "Sampled Values, merging units e testes de sincronismo",
+  "moduleOrder": 7,
+  "ebookTitle": "IEC 61850 — Sampled Values",
+  "ebookSubtitle": "A medição digitalizada: substituindo a fiação de TC/TP pelo process bus",
+  "estimatedMinutes": 60,
+  "trailFiles": [
+    "t01_fundamentos_sv.json",
+    "t02_aplicacoes_sv.json",
+    "t03_implementacao_testes_sv.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — O que são Sampled Values",
+      "subtitle": "A digitalização da corrente e da tensão",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O conceito",
+          "type": "text",
+          "body": "Os Sampled Values (SV) são o serviço da IEC 61850 que digitaliza as medições de corrente e tensão e as transmite pela rede. Uma merging unit, conectada aos TCs/TPs, amostra os sinais analógicos com alta taxa e os publica como pacotes SV no process bus. Os IEDs de proteção, em vez de receber fios analógicos dos TCs/TPs, assinam esses pacotes SV. Os SV completam a digitalização da subestação: o GOOSE substitui a fiação de trip, e os SV substituem a fiação de medição."
+        },
+        {
+          "id": "s2",
+          "title": "Vantagens da medição digital",
+          "type": "list",
+          "items": [
+            "Elimina os longos cabos de cobre de TC/TP até a sala de relés (sujeitos a EMI)",
+            "Acaba com o risco de TC com secundário aberto (a MU fica junto ao TC)",
+            "Permite sensores não-convencionais (ópticos) sem saturação e com ampla faixa",
+            "Um único fluxo SV alimenta vários IEDs (compartilhamento da medição)",
+            "Reduz burden, fiação e pontos de falha"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "SV vs GOOSE: tráfego muito diferente",
+          "type": "note",
+          "body": "GOOSE e SV são ambos da IEC 61850 e ambos em camada 2 multicast, mas têm naturezas opostas de tráfego. O GOOSE é esporádico (só transmite eventos, com heartbeat lento em repouso). Os SV são contínuos e intensos: cada MU publica milhares de pacotes por segundo, sem parar, pois precisa entregar o fluxo de amostras ininterruptamente. Essa diferença torna o dimensionamento da rede e a segregação de tráfego (VLANs, prioridade) ainda mais críticos para os SV."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os Sampled Values digitalizam corrente/tensão na merging unit e as transmitem pela rede; os IEDs assinam os pacotes em vez de receber fios de TC/TP. Vantagens: elimina cabos de cobre, risco de TC aberto e saturação (com NCIT), e compartilha a medição. Diferente do GOOSE (esporádico), os SV geram tráfego contínuo e intenso — exigindo rede bem dimensionada."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Taxas de Amostragem e o Process Bus",
+      "subtitle": "O fluxo contínuo de amostras",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "As taxas de amostragem (IEC 61850-9-2 / 9-2LE)",
+          "type": "formula",
+          "formula": "Pacotes/s = amostras_por_ciclo × frequência  (proteção: 80 × 60 = 4800 quadros/s)",
+          "explanation": "O perfil 9-2LE padroniza duas taxas: 80 amostras por ciclo para proteção (4000/s a 50 Hz, 4800/s a 60 Hz) e 256 amostras por ciclo para qualidade de energia e medição (mais resolução). Cada merging unit publica esse fluxo contínuo, e a soma de várias MUs na rede gera um tráfego intenso e constante que deve ser dimensionado com cuidado."
+        },
+        {
+          "id": "s2",
+          "title": "O process bus",
+          "type": "text",
+          "body": "O process bus é a rede dedicada que carrega os SV das merging units aos IEDs (e os GOOSE de trip aos disjuntores). É separado do station bus (que carrega MMS e GOOSE de estação) justamente por causa do tráfego intenso e contínuo dos SV — misturar os dois sobrecarregaria a rede. O process bus exige switches de alto desempenho, segregação por VLAN, e dimensionamento de banda generoso."
+        },
+        {
+          "id": "s3",
+          "title": "Qualidade e identificação dos SV",
+          "type": "list",
+          "items": [
+            "svID — identificador do fluxo SV (qual merging unit/conjunto)",
+            "smpCnt (sample count) — contador de amostras, permite detectar perda de pacotes",
+            "smpSynch — indica se as amostras estão sincronizadas no tempo (qualidade do sincronismo)",
+            "Flags de qualidade de cada canal (válido, suspeito, etc.)",
+            "Esses campos permitem ao IED avaliar a confiabilidade do fluxo recebido"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O perfil 9-2LE padroniza 80 amostras/ciclo (proteção) e 256 (qualidade), gerando fluxo contínuo (4800 quadros/s a 60 Hz por MU). O process bus, dedicado e separado do station bus, carrega esse tráfego intenso — exigindo switches de alto desempenho e VLANs. Os campos svID, smpCnt e smpSynch identificam o fluxo, detectam perdas e indicam a qualidade do sincronismo."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Sincronismo e Testes de SV",
+      "subtitle": "A dependência crítica do tempo",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que o sincronismo é vital",
+          "type": "text",
+          "body": "Diferente do GOOSE (eventos esporádicos), os SV exigem sincronismo de tempo rigoroso entre as merging units. A razão: uma proteção que compara correntes de fontes diferentes (diferencial) precisa que as amostras dessas fontes correspondam ao mesmo instante. Se duas MUs amostram com uma pequena defasagem de tempo, o IED verá um erro de ângulo entre as correntes que pode causar operação indevida da diferencial. Por isso o PTP (Precision Time Protocol, IEEE 1588) é parte indissociável de uma subestação com SV."
+        },
+        {
+          "id": "s2",
+          "title": "O tratamento da perda de sincronismo",
+          "type": "note",
+          "body": "Se o sincronismo de tempo é perdido (falha do grandmaster PTP, problema de rede), as amostras das diferentes MUs deixam de ser confiáveis para comparação. O campo smpSynch sinaliza isso, e a proteção deve reagir adequadamente — tipicamente bloqueando as funções que dependem da comparação entre fontes (diferencial) em vez de operar com dados não confiáveis. Testar esse comportamento (forçar a perda de sincronismo e verificar o bloqueio) é parte essencial do comissionamento de SV."
+        },
+        {
+          "id": "s3",
+          "title": "Testando os Sampled Values",
+          "type": "list",
+          "items": [
+            "Verificar a publicação do SV pela merging unit (sniffer): taxa, svID, dados corretos",
+            "Confirmar que os IEDs assinam e processam corretamente (escala, fase)",
+            "Injetar corrente/tensão na entrada da MU (teste analógico) e verificar a resposta do IED",
+            "Publicar SV simulados com a mala de teste (teste digital) para testar o IED isoladamente",
+            "Verificar a qualidade e a precisão do sincronismo PTP",
+            "Simular perda de SV e de sincronismo, confirmando o bloqueio adequado da proteção"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Interoperabilidade MU-IED",
+          "type": "text",
+          "body": "Como nos demais serviços da IEC 61850, a interoperabilidade entre a MU de um fabricante e o IED de outro deve ser testada exaustivamente — confirmando que o IED interpreta corretamente o fluxo SV (escala, ordem de fases, qualidade) da MU. Diferenças sutis de implementação podem causar erros de medição que comprometeriam a proteção. O FAT de process bus multifabricante é onde essas incompatibilidades são descobertas e resolvidas, antes do campo."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Os SV exigem sincronismo rigoroso (PTP/IEEE 1588): MUs defasadas no tempo geram erro de ângulo que pode causar operação indevida da diferencial. A perda de sincronismo (sinalizada por smpSynch) deve bloquear a proteção dependente de comparação. O teste verifica publicação, assinatura, injeção analógica/digital, qualidade do PTP, e a reação à perda de SV/sincronismo. A interoperabilidade MU-IED multifabricante é crítica. Os SV completam a digitalização da medição na subestação."
+        }
+      ]
+    }
+  ]
+}

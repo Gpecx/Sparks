@@ -1,0 +1,218 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Equipamentos Auxiliares SPCS",
+  "moduleSubtitle": "Alimentação CC/CA, baterias, retificadores e serviços auxiliares",
+  "moduleOrder": 0,
+  "trail": "Instalação, Operação e Manutenção",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a principal finalidade do banco de baterias em uma subestacao eletrica?",
+      "options": [
+        "Reduzir as correntes de curto-circuito no barramento de media tensao.",
+        "Elevar a tensao do suprimento primario da concessionaria local.",
+        "Alimentar circuitos de comando e protecao com tensao continua.",
+        "Fornecer energia reativa capacitiva para compensacao do fator de potencia."
+      ],
+      "correctIndex": 2,
+      "explanation": "O banco alimenta circuitos de comando em corrente continua para torna-los independentes de falhas no sistema eletrico de corrente alternada. Fonte: Apostila Protecao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao os dois tipos principais de baterias comumente utilizados em subestacoes?",
+      "options": [
+        "Sodio-enxofre e alcalinas puras.",
+        "Litio-ion e prata-zinco.",
+        "Zinco-carbono e niquel-metal-hidreto.",
+        "Chumbo-acido e alcalinas de niquel-cadmio."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os principais tipos de bateria utilizados atualmente sao as de chumbo-acido e as alcalinas de niquel-cadmio. Fonte: ed53.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que define a autonomia da bateria no dimensionamento do sistema auxiliar de CC?",
+      "options": [
+        "O intervalo de tempo em que a bateria mantem a tensao minima por elemento para alimentar as cargas.",
+        "O tempo necessario para recarga total apos um ciclo profundo de descarga operativa.",
+        "A capacidade de operar ininterruptamente em temperaturas superiores a 50 graus Celsius.",
+        "O tempo de vida util projetado antes da substituicao e descarte ambiental do banco."
+      ],
+      "correctIndex": 0,
+      "explanation": "Autonomia e o tempo em que a bateria sustenta a tensao minima necessaria para manter as cargas em funcionamento sem o carregador. Fonte: ed53.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que e compulsorio na sala de baterias caso os elementos instalados nao sejam do tipo selado?",
+      "options": [
+        "Sistema de injecao de gas SF6 para extinguir eventuais arcos voltaicos.",
+        "Sistema de exaustao devido a liberacao de gas hidrogenio no processo de eletrolise.",
+        "Sistema de refrigeracao liquida continua operando nas estantes de suporte.",
+        "Piso isolante de 100 kV com malha de terra dedicada e independente."
+      ],
+      "correctIndex": 1,
+      "explanation": "E obrigatoria a exaustao para evitar a concentracao explosiva de hidrogenio liberado pelas baterias abertas ou nao seladas. Fonte: ed53.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a logica de controle do IED reage diante da perda da alimentacao auxiliar de corrente continua em uma seccionadora?",
+      "options": [
+        "Abre a seccionadora automaticamente por acao de molas pre-carregadas.",
+        "Envia comando de abertura imediata ao disjuntor principal da barra correspondente.",
+        "Memoriza o ultimo estado valido conhecido da chave e emite um alarme de falha.",
+        "Reseta imediatamente as configuracoes operacionais da memoria EPROM."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para evitar atuacoes incorretas na falha CC, a ultima posicao valida e memorizada por seguranca e um alarme e gerado. Fonte: Virtus ProtBarras.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como e calculada a capacidade total da bateria a partir de sua caracteristica de descarga para cargas sequenciais diversas?",
+      "options": [
+        "Pelo somatorio das parcelas do fator K multiplicadas pelas variacoes de corrente nos intervalos de descarga.",
+        "Somando todas as correntes de pico e multiplicando o resultado pela tensao de flutuacao nominal.",
+        "Dividindo a tensao final de descarga pela potencia aparente total de curto-circuito da planta.",
+        "Integrando a resistencia interna da bateria sobre a corrente de inrush maxima do painel."
+      ],
+      "correctIndex": 0,
+      "explanation": "A capacidade e calculada somando os produtos do fator K da curva do fabricante pelas variacoes de corrente nos trechos. Fonte: ed53.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No dimensionamento pratico de um banco de baterias, quais folgas adicionais costumam ser aplicadas ao valor calculado de capacidade?",
+      "options": [
+        "Fator de sobrecarga do carregador de aprox 50 por cento e degradacao por sulfatacao de aprox 40 por cento.",
+        "Correcao termica de aprox 30 por cento e compensacao de perdas no inversor CA de aprox 20 por cento.",
+        "Correcao de altitude de aprox 5 por cento e tolerancia de fabricacao do rele de aprox 2 por cento.",
+        "Correcao por idade de aprox 10 por cento e reserva para expansoes futuras de aprox 15 por cento."
+      ],
+      "correctIndex": 3,
+      "explanation": "O valor calculado deve ser corrigido considerando o envelhecimento natural e a reserva para ampliacoes futuras da carga. Fonte: ed53.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a finalidade de uma Unidade de Diodo de Queda UDQ no sistema de corrente continua da subestacao?",
+      "options": [
+        "Atuar em serie com o retificador para manter a tensao entregue dentro dos limites maximos permissiveis pelos equipamentos.",
+        "Proteger o carregador contra correntes reversas subitas vindas do banco de capacitores de media tensao.",
+        "Retificar a corrente alternada para alimentar diretamente as bobinas sem passar pelos polos da bateria.",
+        "Fornecer pulsos de sincronismo limpos de ruidos para a base de tempo do rele de protecao."
+      ],
+      "correctIndex": 0,
+      "explanation": "A UDQ e instalada em serie para promover uma queda de tensao e garantir que os equipamentos nao recebam niveis acima da Vmax tolerada. Fonte: ed53.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a faixa de tensao de flutuacao usual recomendada para elementos de baterias do tipo chumbo-acido?",
+      "options": [
+        "1,38 V a 1,42 V por elemento.",
+        "2,15 V a 2,20 V por elemento.",
+        "1,60 V a 1,85 V por elemento.",
+        "2,30 V a 2,50 V por elemento."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para baterias chumbo-acido, a tensao de flutuacao constante situa-se tipicamente entre 2,15 V e 2,20 V por elemento. Fonte: ed53.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No dimensionamento do sistema, qual e o impacto de se basear a escolha do numero de elementos na menor tensao final de descarga admissivel?",
+      "options": [
+        "Reduz a vida util do banco de baterias pela metade devido a rapida e irreversivel sulfatacao das placas internas.",
+        "Exige a aquisicao de baterias com o dobro do volume fisico para suportar a inevitavel elevacao termica nas salas de paineis.",
+        "Otimiza o aproveitamento da energia, conduzindo ao calculo de uma bateria de menor capacidade e menor custo global.",
+        "Obriga a instalacao de multiplas Unidades de Diodos de Queda no circuito primario para evitar trips acidentais."
+      ],
+      "correctIndex": 2,
+      "explanation": "Um numero de elementos focado na tensao minima final reduz a capacidade total Ah exigida, aproveitando melhor a curva e gerando solucoes mais economicas. Fonte: ed53.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O circuito de comando de abertura dos disjuntores utiliza corrente continua das baterias com o proposito de manter a operacao independente de.",
+      "correctAnswer": true,
+      "explanation": "A energia CC assegura a prontidao operativa e a abertura eficaz do disjuntor mesmo no caso de colapso severo na rede CA. Fonte: Apostila Protecao.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Especialistas em sistemas de protecao recomendam a utilizacao de nobreaks CA em vez de retificadores CC diretos, visto que apresentam uma.",
+      "correctAnswer": false,
+      "explanation": "O nobreak CA possui um inversor em serie que adiciona mais um componente sujeito a avarias, reduzindo o tempo medio entre falhas e a confiabilidade se comparado ao retificador CC. Fonte: ed53.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As baterias de tecnologia alcalina de niquel-cadmio sao restritas e padronizadas para tempos nominais de descarga de exatas 10 horas.",
+      "correctAnswer": false,
+      "explanation": "Diferente das baterias chumbo-acidas que geralmente focam na capacidade de 10h, as alcalinas apresentam capacidades padronizadas em faixas de 3, 5 ou 10 horas. Fonte: ed53.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para calcular a vazao de ar no sistema de exaustao de uma sala de baterias, a formula matematica baseia-se na corrente de recarga e no numero de.",
+      "correctAnswer": true,
+      "explanation": "A equacao de vazao e expressa por Q igual a 55 vezes o numero de elementos vezes a corrente de recarga. Fonte: ed53.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No calculo do banco de baterias, o primeiro criterio que assegura o limite de tensao maxima e dado pela divisao direta da tensao maxima admissivel.",
+      "correctAnswer": false,
+      "explanation": "Para nao ultrapassar a tensao maxima, divide-se a tensao maxima admissivel pelos equipamentos pela tensao de equalizacao da bateria, e nao pela tensao de descarga. Fonte: ed53.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para evitar que a tensao enviada as cargas sensiveis ultrapasse o limite maximo tolerado durante a fase de carga profunda da bateria, instala-se ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Queda"
+        }
+      ],
+      "explanation": "A UDQ e o dispositivo que gera uma queda de tensao passiva e estavel, ajustando a tensao na saida para o quadro de distribuicao CC. Fonte: ed53.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na equacao de dimensionamento da capacidade do banco de baterias, as variacoes de corrente do perfil de carga sao multiplicadas iterativamente pelo ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "K"
+        }
+      ],
+      "explanation": "A soma das parcelas do produto entre a variacao de corrente do degrau e o respectivo Fator K define a capacidade nominal necessaria em Ampere-hora. Fonte: ed53.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para dimensionar corretamente o sistema de exaustao obrigatorio na sala, a corrente de recarga parametrizada na formula equivale a 0,4 vezes a ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "alcalinas"
+        }
+      ],
+      "explanation": "O parametro de corrente e maior 0,4C para baterias alcalinas, em contraste com a adocao de 0,25C para arranjos chumbo-acido. Fonte: ed53.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "",
+  "categoryOrder": 4,
+  "module": "Softwares de Estudos Elétricos",
+  "moduleSubtitle": "Ferramentas de analise de sistemas eletricos de potencia",
+  "moduleOrder": 3,
+  "trail": "ANAFAS (CEPEL)",
+  "trailOrder": 6,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual é a principal aplicação do programa ANAFAS em sistemas elétricos de potência, segundo o texto?",
+      "options": [
+        "Análise de fluxo de carga DC linearizado.",
+        "Simulação de curtos-circuitos em sistemas elétricos de potência.",
+        "Estudo de transitórios eletromagnéticos rápidos (EMT).",
+        "Coordenação de isolamento térmico de cabos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O ANAFAS é um programa essencialmente voltado para a simulação de curtos-circuitos em sistemas elétricos de potência. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Onde os usuários do ANAFAS podem encontrar os arquivos de dados oficiais referentes ao Sistema Interligado Nacional (SIN)?",
+      "options": [
+        "Apenas nos relatórios impressos do Ministério de Minas e Energia.",
+        "Nos sites oficiais do ONS e da EPE.",
+        "Em bibliotecas acadêmicas universitárias norte-americanas.",
+        "Nos bancos de dados confidenciais das concessionárias."
+      ],
+      "correctIndex": 1,
+      "explanation": "Arquivos de dados para o ANAFAS referentes ao Sistema Interligado Nacional (SIN) estão disponíveis para download nos sites do ONS e da EPE. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Como o ANAFAS modela de forma própria os novos geradores eólicos e fotovoltaicos conectados ao sistema elétrico?",
+      "options": [
+        "Representando-os estritamente como bancos de capacitores ideais.",
+        "Através de inversores usando fontes de corrente controladas.",
+        "Omitindo-os da matriz de admitância nodal.",
+        "Como máquinas síncronas de rotor cilíndrico de 7ª ordem."
+      ],
+      "correctIndex": 1,
+      "explanation": "O programa utiliza um modelo próprio para a modelagem de geradores conectados ao sistema por inversores usando fontes de corrente controladas. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "De acordo com o material, a simulação de curtos-circuitos no ANAFAS é essencial para quais tipos de estudos além dos ajustes de proteção?",
+      "options": [
+        "Dimensionamento/superação de equipamentos e elaboração de equivalentes de rede para estabilidade.",
+        "Planejamento de fluxo de potência ótimo e estabilidade de tensão a longo prazo.",
+        "Análise de harmônicos e de ressonância subsíncrona em elos CC.",
+        "Medição de descargas parciais e diagnóstico preditivo em tempo real."
+      ],
+      "correctIndex": 0,
+      "explanation": "As simulações são essenciais para ajustes de proteção, dimensionamento e verificação de superação de equipamentos, e elaboração de equivalentes de rede para estabilidade. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual é a capacidade do ANAFAS em relação à execução das situações de falta no sistema de potência?",
+      "options": [
+        "Permite simular apenas uma falta trifásica maciça por processamento.",
+        "Realiza a execução individual ou sequencial de uma grande variedade de situações de faltas.",
+        "Executa apenas curtos-circuitos monofásicos em sistemas radiais isolados.",
+        "Restringe a análise a faltas deslizantes durante a fase de planejamento de expansão."
+      ],
+      "correctIndex": 1,
+      "explanation": "O ANAFAS é um programa para cálculo de curtos-circuitos que permite a execução individual ou sequencial de grande variedade de situações de faltas. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Como o ANAFAS auxilia o usuário quando existe a necessidade de comparar duas configurações diferentes do sistema elétrico?",
+      "options": [
+        "Imprimindo obrigatoriamente todos os jacobianos em arquivos de texto.",
+        "Pintando de vermelho todas as subestações com níveis de tensão abaixo de 0,9 pu.",
+        "Gerando automaticamente arquivos de alteração a partir da comparação entre as configurações.",
+        "Realizando um fluxo de carga continuado até o ponto de colapso de tensão."
+      ],
+      "correctIndex": 2,
+      "explanation": "Um dos diferenciais do programa é a geração automática de arquivos de alteração a partir da comparação entre duas configurações de rede. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Ao utilizar o recurso de equivalentes de rede no ANAFAS, quais características são levadas em conta na formulação?",
+      "options": [
+        "Erros estatísticos empíricos e compensação reativa em série constante.",
+        "Erro máximo predefinido e a minimização do número de ligações equivalentes criadas.",
+        "Tempo de eliminação de falta e ajuste do relé de sobrecorrente temporizado.",
+        "Otimização do tap dos transformadores defasadores para controle de fluxo."
+      ],
+      "correctIndex": 1,
+      "explanation": "A criação de equivalentes de rede é otimizada, contando com erro máximo predefinido e minimização do número de ligações equivalentes criadas. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Segundo as fontes sobre o ANAFAS, como se dá a modelagem matemática adotada para inserir o impacto dos novos geradores fotovoltaicos durante os curtos?",
+      "options": [
+        "Adotando fontes de tensão equivalentes conectadas a reatâncias subsíncronas.",
+        "Desconsiderando sua contribuição por possuírem baixíssima inércia mecânica.",
+        "Utilizando fontes de corrente controladas que representam os inversores do sistema.",
+        "Representando a conexão através de capacitores série para simular a resposta lenta."
+      ],
+      "correctIndex": 2,
+      "explanation": "O ANAFAS se atualizou e modela geradores eólicos e fotovoltaicos conectados ao sistema por inversores usando fontes de corrente controladas. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Qual das alternativas reflete um dos propósitos de se analisar os resultados de curto-circuito fornecidos pelo ANAFAS para outros estudos elétricos complexos?",
+      "options": [
+        "Dimensionamento da iluminação eficiente e de painéis de distribuição prediais.",
+        "Alocação ideal de bancos de baterias e descarregamento dinâmico em Data Centers.",
+        "Elaboração de equivalentes de rede a serem exportados para estudos de estabilidade dinâmica.",
+        "Previsão meteorológica das taxas de ventos que alimentam a usina eólica associada."
+      ],
+      "correctIndex": 2,
+      "explanation": "As simulações de curtos-circuitos no ANAFAS servem, além dos ajustes de proteção, para a elaboração de equivalentes de rede para os estudos de estabilidade. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Para auxiliar o estudo de contingências da base nacional, qual arquivo os sites oficiais do ONS e da EPE disponibilizam abertamente para uso no ANAFAS?",
+      "options": [
+        "Apenas códigos-fonte obsoletos em Fortran 77 das matrizes de admitância.",
+        "Os diagramas em blocos TACS para dimensionamento de controladores.",
+        "Relatórios semanais de descargas parciais (IMA-DP) nas subestações de alta tensão.",
+        "Os arquivos de dados de rede referentes ao Sistema Interligado Nacional (SIN)."
+      ],
+      "correctIndex": 3,
+      "explanation": "Arquivos de dados para o ANAFAS referentes ao Sistema Interligado Nacional (SIN) estão disponíveis para download de forma nativa nos sites do ONS e da EPE. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "O ANAFAS é um programa importado, motivo pelo qual a sua documentação e assistência técnica oficial são disponibilizadas estritamente em inglês.",
+      "correctAnswer": false,
+      "explanation": "O programa é desenvolvido com tecnologia nacional, e o Cepel provê documentação e assistência técnica 100% em português. (ANAFAS-Eletrobras Cepel)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "O ANAFAS possui a funcionalidade de calcular automaticamente a evolução dos níveis de curto-circuito ao longo do tempo ou de diferentes configurações.",
+      "correctAnswer": true,
+      "explanation": "O programa possui facilidades avançadas como o cálculo automático da evolução dos níveis de curto-circuito. (ANAFAS-Eletrobras Cepel)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "A criação de equivalentes de rede no ANAFAS é feita de maneira fixa, sem a possibilidade de minimizar as ligações ou predefinir um erro máximo desejado.",
+      "correctAnswer": false,
+      "explanation": "O programa possui como diferencial o cálculo de equivalentes de rede com erro máximo predefinido e minimização do número de ligações equivalentes criadas. (ANAFAS-Eletrobras Cepel)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "O ANAFAS carece de interface visual e é operado estritamente por linhas de comando, tornando impossível visualizar os resultados nos diagramas unifilares.",
+      "correctAnswer": false,
+      "explanation": "O ANAFAS possui uma interface gráfica com editor de diagramas unifilares incorporado, permitindo fácil visualização de resultados. (ANAFAS-Eletrobras Cepel)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "O ANAFAS não automatiza o estudo de superação de disjuntores, obrigando o usuário a verificar individualmente as correntes simétricas de interrupção em cada caso.",
+      "correctAnswer": false,
+      "explanation": "As facilidades do ANAFAS incluem justamente o estudo automático de superação de disjuntores nas situações simuladas de curtos-circuitos. (ANAFAS-Eletrobras Cepel)",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "O ANAFAS possui integração nativa com o programa auxiliar ____, que inclui um editor gráfico de diagramas unifilares.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "EditCepel"
+        }
+      ],
+      "explanation": "O programa é integrado ao programa auxiliar EditCepel e possui editor gráfico de diagramas unifilares para facilitar a interação. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "Além da simulação de faltas através de impedâncias, o ANAFAS permite analisar faltas deslizantes que podem ser visualizadas diretamente no diagrama ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "fasorial"
+        }
+      ],
+      "explanation": "O software oferece ferramentas visuais como faltas deslizantes com visualização no diagrama fasorial. (ANAFAS-Eletrobras Cepel)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "O ANAFAS é amplamente utilizado por instituições centrais do setor elétrico nacional, como ONS, Aneel, MME e a ____ (Empresa de Pesquisa Energética).",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "EPE"
+        }
+      ],
+      "explanation": "O ANAFAS tem uso amplamente difundido por empresas como Eletrobras, ONS, EPE, MME, Aneel, concessionárias e universidades. (ANAFAS-Eletrobras Cepel)"
+    }
+  ]
+}

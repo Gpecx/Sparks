@@ -1,0 +1,287 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Curto-Circuito",
+  "moduleSubtitle": "Fundamentos, tipos de falta, modelagem, cálculo e aplicação",
+  "moduleOrder": 1,
+  "ebookTitle": "Estudo de Curto-Circuito",
+  "ebookSubtitle": "Das componentes simétricas ao cálculo IEC 60909/ANSI e à capacidade dos equipamentos",
+  "estimatedMinutes": 95,
+  "trailFiles": [
+    "t01_fundamentos_curto.json",
+    "t02_tipos_falta.json",
+    "t03_modelagem_equipamentos.json",
+    "t04_calculo_iec_ansi.json",
+    "t05_capacidade_equipamentos.json",
+    "t06_interpretacao_aplicacao.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de Curto-Circuito",
+      "subtitle": "Por que calcular faltas",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é um curto-circuito",
+          "type": "text",
+          "body": "Um curto-circuito é uma conexão de baixa impedância, acidental ou intencional, entre pontos de diferentes potenciais — entre fases, ou entre fase e terra. Sem a impedância normal da carga limitando a corrente, circula uma corrente muito elevada, limitada apenas pelas impedâncias das fontes e dos condutores até o ponto de falta. Essa corrente de curto produz esforços térmicos e dinâmicos severos, e é o que os sistemas de proteção devem detectar e interromper."
+        },
+        {
+          "id": "s2",
+          "title": "Por que o estudo de curto é indispensável",
+          "type": "list",
+          "items": [
+            "Especificar a capacidade de interrupção dos disjuntores (deve superar a maior corrente de falta)",
+            "Definir a capacidade de suportabilidade (térmica e dinâmica) de barramentos, cabos e equipamentos",
+            "Ajustar as proteções (pickup entre a carga máxima e a falta mínima)",
+            "Dimensionar TCs (verificar saturação) e malhas de aterramento",
+            "Calcular a energia incidente de arco elétrico (segurança das pessoas — NR-10 / NFPA 70E)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Corrente simétrica e assimétrica",
+          "type": "text",
+          "body": "No instante da falta, além da componente alternada simétrica, surge uma componente contínua (CC) que decai exponencialmente conforme a relação X/R do circuito. Nos primeiros ciclos, a soma das duas torna a corrente assimétrica, com um pico que pode aproximar-se do dobro do valor eficaz simétrico. A componente simétrica define a capacidade de interrupção; o pico assimétrico define os esforços dinâmicos e a capacidade de fechamento (making capacity) dos equipamentos."
+        },
+        {
+          "id": "s4",
+          "title": "X/R e o fator de assimetria",
+          "type": "formula",
+          "formula": "i_pico ≈ √2 · I_simétrica · κ,   κ = 1,02 + 0,98·e^(−3R/X)",
+          "explanation": "O fator de pico κ depende da relação X/R: quanto maior X/R (mais indutivo), mais lenta a decadência da componente CC e maior a assimetria. Em pontos próximos a geradores e grandes transformadores (X/R alto), o pico assimétrico é mais severo — por isso o cálculo deve considerar a assimetria, não apenas o valor simétrico."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Curto-circuito é uma conexão de baixa impedância que gera corrente elevada, limitada só pelas impedâncias das fontes e condutores. O estudo é indispensável para especificar disjuntores, suportabilidade, ajustes, TCs, aterramento e energia de arco. A corrente tem componente simétrica (define interrupção) e assimétrica (pico até ~2×, define esforços), regida pela relação X/R via o fator κ."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Tipos de Falta e Componentes Simétricas",
+      "subtitle": "A ferramenta que simplifica tudo",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Os tipos de falta",
+          "type": "list",
+          "items": [
+            "Trifásica (3φ) — simétrica, a mais severa em corrente, mas rara (2-5%)",
+            "Bifásica (FF) — entre duas fases (~5-10%)",
+            "Bifásica-terra (FFT) — duas fases e a terra",
+            "Monofásica-terra (FT) — a mais comum (70-80%)"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "As componentes simétricas",
+          "type": "text",
+          "body": "Faltas assimétricas (FF, FT, FFT) desequilibram o sistema, tornando o cálculo direto complexo. O teorema de Fortescue decompõe qualquer conjunto de fasores desequilibrados em três sistemas equilibrados: sequência positiva (Z1), negativa (Z2) e zero (Z0). Cada sequência tem seu circuito equivalente, e a falta determina como esses circuitos se conectam. Isso transforma um problema desequilibrado complexo em circuitos de sequência simples de resolver."
+        },
+        {
+          "id": "s3",
+          "title": "As conexões dos circuitos de sequência",
+          "type": "list",
+          "items": [
+            "Trifásica — apenas a sequência positiva (sistema permanece equilibrado): I = E/Z1",
+            "Bifásica — sequências positiva e negativa em série: I = √3·E/(Z1+Z2)",
+            "Monofásica-terra — as três sequências em série: I = 3E/(Z1+Z2+Z0+3Zf)",
+            "Bifásica-terra — positiva em série com o paralelo de negativa e zero"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "O papel da sequência zero",
+          "type": "note",
+          "body": "A sequência zero (Z0) só aparece em faltas que envolvem a terra, e seu valor depende fortemente do aterramento do sistema e do tipo de conexão dos transformadores (um delta bloqueia a sequência zero; uma estrela aterrada a deixa passar). É por isso que a falta monofásica-terra pode, em alguns casos, gerar corrente até MAIOR que a trifásica (quando Z0 < Z1) ou muito menor (em sistemas de neutro isolado). A calculadora de Curto-Circuito do SPARK aplica essas fórmulas por sequência."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As faltas são 3φ (severa, rara), FF, FFT e FT (a mais comum). As componentes simétricas (positiva, negativa, zero) decompõem o desequilíbrio em circuitos simples, conectados conforme o tipo de falta. A sequência zero só surge em faltas à terra e depende do aterramento e das conexões dos trafos — podendo tornar a falta monofásica mais ou menos severa que a trifásica."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Modelagem de Equipamentos para Curto",
+      "subtitle": "As impedâncias que importam",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Fontes de corrente de curto",
+          "type": "list",
+          "items": [
+            "Concessionária / rede — modelada pela potência de curto-circuito no ponto de conexão",
+            "Geradores síncronos — contribuição que decai (reatâncias subtransitória X''d, transitória X'd, síncrona Xd)",
+            "Motores de indução — contribuição subtransitória breve, relevante em barramentos industriais",
+            "Motores síncronos — contribuem como geradores por mais tempo",
+            "Bancos de capacitores — contribuição transitória de alta frequência"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "As reatâncias do gerador no tempo",
+          "type": "text",
+          "body": "A contribuição de um gerador para o curto não é constante: nos primeiros ciclos vale a reatância subtransitória X''d (a menor, maior corrente); depois a transitória X'd; e em regime, a síncrona Xd (a maior, menor corrente). O estudo de curto usa a reatância apropriada conforme o instante de interesse: subtransitória para o pico e a capacidade de interrupção dos primeiros ciclos, e valores maiores para análises de regime."
+        },
+        {
+          "id": "s3",
+          "title": "Impedâncias de transformadores e linhas",
+          "type": "text",
+          "body": "Transformadores são modelados por sua impedância de curto-circuito (do ensaio, em % na base do equipamento), convertida à base do estudo. Linhas, por suas impedâncias de sequência (Z1=Z2 pela geometria; Z0 tipicamente 2,5 a 3,5 vezes Z1, dependendo do retorno por terra e cabos para-raios). A correta modelagem da sequência zero das linhas é especialmente importante para o cálculo de faltas à terra."
+        },
+        {
+          "id": "s4",
+          "title": "Cuidado com as bases e os dados",
+          "type": "note",
+          "body": "O erro mais comum no estudo de curto é de conversão de bases: uma impedância de transformador em % na base do equipamento precisa ser convertida à base comum do estudo. Esquecer essa conversão produz correntes de curto completamente erradas. Da mesma forma, usar a reatância errada do gerador (síncrona em vez de subtransitória) subestima perigosamente a corrente de falta. A disciplina com bases e dados é o que separa um estudo confiável de um perigoso."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As fontes de curto são rede, geradores (com X''d/X'd/Xd conforme o instante), motores (contribuição subtransitória) e capacitores. Transformadores entram pela impedância de ensaio (convertida à base do estudo); linhas, pelas sequências (Z0 ~2,5-3,5×Z1). O erro mais comum e perigoso é a conversão de bases e o uso da reatância errada do gerador."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Cálculo: IEC 60909 e ANSI/IEEE",
+      "subtitle": "Os dois padrões da indústria",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que existem dois métodos",
+          "type": "text",
+          "body": "Há duas escolas principais para o cálculo de curto-circuito: a IEC 60909 (de origem europeia, predominante no Brasil) e o método ANSI/IEEE (C37, de origem norte-americana). Ambos calculam essencialmente a mesma física, mas adotam premissas, fatores de correção e nomenclaturas diferentes. Saber qual método um estudo seguiu é essencial para interpretar corretamente os resultados e os ajustes deles derivados."
+        },
+        {
+          "id": "s2",
+          "title": "IEC 60909 — principais conceitos",
+          "type": "list",
+          "items": [
+            "Usa uma fonte de tensão equivalente no ponto de falta (c·Un/√3), com fator de tensão c",
+            "Define correntes características: I''k (inicial simétrica), ip (pico), Ib (interrupção), Ik (permanente)",
+            "Aplica fatores de correção de impedância para geradores e transformadores",
+            "Distingue faltas próximas e distantes de geradores (decaimento da contribuição)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "ANSI/IEEE — principais conceitos",
+          "type": "list",
+          "items": [
+            "Trabalha com redes de impedância separadas para diferentes instantes (momentâneo, interrupção)",
+            "Usa multiplicadores de assimetria baseados na relação X/R do ponto",
+            "Tratamento específico para a contribuição de motores conforme o tipo e porte",
+            "Foca na capacidade momentânea (pico/fechamento) e de interrupção dos disjuntores"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Convergência prática",
+          "type": "note",
+          "body": "Apesar das diferenças metodológicas, IEC e ANSI chegam a resultados próximos para a maioria dos casos — as discrepâncias aparecem em situações específicas (faltas muito próximas a geradores, alta relação X/R). Na prática, o engenheiro usa o método exigido pela norma aplicável ao projeto ou pelo software disponível, e mantém a consistência: especificar um disjuntor por critério ANSI e ajustar a proteção por valores IEC, sem atenção, pode gerar inconsistências."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "IEC 60909 (fonte equivalente c·Un/√3, correntes I''k/ip/Ib/Ik, fatores de correção) e ANSI/IEEE (redes por instante, multiplicadores de assimetria por X/R) são os dois padrões. Calculam a mesma física com premissas diferentes, convergindo na maioria dos casos. O essencial é saber qual método foi usado e manter consistência entre especificação de equipamentos e ajuste de proteção."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Capacidade de Curto dos Equipamentos",
+      "subtitle": "Verificando a suportabilidade",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Capacidade de interrupção e de fechamento",
+          "type": "text",
+          "body": "Cada disjuntor tem uma capacidade de interrupção (a maior corrente simétrica que consegue interromper com segurança) e uma capacidade de fechamento/momentânea (o maior pico assimétrico que suporta ao fechar sobre um curto). O estudo de curto deve confirmar que a corrente de falta no ponto NÃO excede essas capacidades. Um disjuntor subdimensionado pode falhar catastroficamente (explodir) ao tentar interromper uma falta maior que sua capacidade."
+        },
+        {
+          "id": "s2",
+          "title": "Suportabilidade térmica e dinâmica",
+          "type": "list",
+          "items": [
+            "Suportabilidade térmica — capacidade de suportar o calor (I²t) durante o tempo da falta sem dano (barramentos, cabos)",
+            "Suportabilidade dinâmica — capacidade de suportar os esforços mecânicos do pico de corrente (forças entre condutores)",
+            "Ambas devem ser maiores que os valores calculados no estudo de curto",
+            "O tempo de eliminação da falta (proteção) influencia diretamente a solicitação térmica"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A relação entre proteção rápida e suportabilidade",
+          "type": "note",
+          "body": "Há uma conexão direta entre o estudo de curto, a proteção e o dimensionamento: quanto mais rápida a proteção eliminar a falta, menor a energia térmica (I²t) imposta aos equipamentos e menor a energia de arco elétrico. Em alguns casos, uma proteção mais rápida pode permitir usar equipamentos de menor suportabilidade térmica — mostrando como esses estudos são interdependentes e devem ser feitos de forma integrada."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O estudo confirma que a corrente de falta não excede a capacidade de interrupção e de fechamento dos disjuntores, nem a suportabilidade térmica (I²t) e dinâmica de barramentos e cabos. O tempo de eliminação da proteção influencia a solicitação térmica e a energia de arco — ligando o estudo de curto ao de coordenação e ao dimensionamento de forma integrada."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Interpretação e Aplicação dos Resultados",
+      "subtitle": "Transformar números em decisões",
+      "estimatedMinutes": 10,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que o estudo entrega",
+          "type": "list",
+          "items": [
+            "Correntes de falta (3φ, FF, FT, FFT) em cada barra",
+            "Contribuições de cada fonte/ramo para a falta",
+            "Pico assimétrico e relação X/R em cada ponto",
+            "Verificação da capacidade dos equipamentos",
+            "Dados para o ajuste das proteções (faltas máxima e mínima)"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Curto máximo e curto mínimo",
+          "type": "text",
+          "body": "Dois valores são especialmente importantes para a proteção: o curto MÁXIMO (todas as fontes presentes, falta franca) define a capacidade dos equipamentos e o ajuste do instantâneo; o curto MÍNIMO (fontes mínimas, falta com impedância, fim de linha) define a sensibilidade necessária — a proteção precisa detectar até a menor falta. Ajustar a proteção considerando apenas o curto máximo é um erro que pode deixar faltas reais sem detecção."
+        },
+        {
+          "id": "s3",
+          "title": "Integração com os demais estudos",
+          "type": "note",
+          "body": "O estudo de curto não vive isolado: ele consome o caso de fluxo de carga (condição pré-falta), alimenta o estudo de coordenação (correntes para ajustar as proteções), o estudo de arco elétrico (energia incidente) e o de aterramento (corrente de falta à terra para a malha). Por isso, na prática, esses estudos são feitos em conjunto, com dados consistentes — uma cadeia integrada que sustenta todo o projeto de proteção e a segurança da instalação."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O estudo entrega correntes de falta, contribuições, picos e a verificação de equipamentos. O curto máximo dimensiona equipamentos e o instantâneo; o curto mínimo define a sensibilidade — ambos são necessários. O estudo de curto integra-se ao fluxo de carga (pré-falta), à coordenação, ao arco elétrico e ao aterramento. Dominá-lo é base para proteção e segurança — e a calculadora de Curto-Circuito do SPARK apoia esses cálculos."
+        }
+      ]
+    }
+  ]
+}

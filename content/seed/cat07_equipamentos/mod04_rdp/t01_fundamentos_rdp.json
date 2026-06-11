@@ -1,0 +1,218 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Registradores Digitais de Perturbação",
+  "moduleSubtitle": "RDP, oscilografia, COMTRADE e análise de perturbações",
+  "moduleOrder": 3,
+  "trail": "Fundamentos de RDPs",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a utilidade fundamental dos registradores de eventos e oscilógrafos em um sistema de proteção?",
+      "options": [
+        "Aumentar a tensão de operação das linhas de transmissão.",
+        "Substituir o uso de baterias na subestação.",
+        "Eliminar fisicamente curtos-circuitos da rede de distribuição.",
+        "Mostrar a forma das oscilações e o desempenho da proteção ajustada sob falta."
+      ],
+      "correctIndex": 3,
+      "explanation": "Esses aparelhos mostram a forma das oscilações e avaliam o desempenho da proteção perante distúrbios. (Fonte: Introdução à Proteção dos Sistemas Elétricos - Amadeu C Caminha).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os dados de oscilografia são predominantemente adquiridos em sistemas digitais modernos?",
+      "options": [
+        "Remotamente através de modernos meios de comunicação.",
+        "Através de leitura analógica do disco de indução do relé.",
+        "Impressos em rolos de papel fotográfico mantidos localmente.",
+        "Via inspeção visual diária dos painéis de pátio."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os dados de eventos e oscilografia passaram a ser adquiridos remotamente via comunicação, economizando tempo e pessoal. (Fonte: Virtus_CProtBL2Cd3_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Além das lógicas de proteção em si, quais funções são agregadas nos relés digitais modernos?",
+      "options": [
+        "Lubrificação e refrigeração mecânica de disjuntores.",
+        "Medição, localização de defeitos, oscilografia e registro de eventos.",
+        "Compensação reativa síncrona rotativa.",
+        "Aterramento físico temporário das carcaças dos painéis."
+      ],
+      "correctIndex": 1,
+      "explanation": "Proteções digitais agregam medição, localização de defeitos, oscilografia e registro de eventos. (Fonte: Virtus_CProtBL2Cd3_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o parâmetro 'Captured Waveform Prior to Trigger' define na configuração da oscilografia?",
+      "options": [
+        "A taxa de amostragem em hertz da onda capturada.",
+        "A duração do registro no período pós-falta.",
+        "A duração do registro no período pré-falta.",
+        "O nível de tensão nominal do sistema."
+      ],
+      "correctIndex": 2,
+      "explanation": "Esse parâmetro define a duração do registro imediatamente anterior ao evento, ou seja, o registro pré-falta. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual formato de código de tempo é comumente associado ao GPS para sincronizar a base de tempo dos relés?",
+      "options": [
+        "ASCII-8.",
+        "NTP-Serial.",
+        "Modbus-RTU.",
+        "IRIG-B."
+      ],
+      "correctIndex": 3,
+      "explanation": "Normalmente, o GPS é utilizado com IRIG-B para sincronizar os dispositivos a uma mesma base de tempo precisa. (Fonte: Ed50_marco_protecao_seletividade_capIII).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que significa a sigla SER nos relatórios de perturbação extraídos de relés como o SEL-300G?",
+      "options": [
+        "Sequential Events Recorder.",
+        "System Event Relay.",
+        "Synchronized Energy Register.",
+        "Serial Ethernet Router."
+      ],
+      "correctIndex": 0,
+      "explanation": "SER significa Sequential Events Recorder (Registrador Sequencial de Eventos). (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que pode causar o mascaramento da forma de onda real em um registrador digital de perturbações?",
+      "options": [
+        "O uso de cabos coaxiais curtos.",
+        "Quantidade insuficiente de amostragens por segundo por ciclo.",
+        "A utilização de alta frequência fundamental na rede.",
+        "A sincronização via satélite GPS ativo."
+      ],
+      "correctIndex": 1,
+      "explanation": "A forma de onda pode ficar mascarada se a taxa de amostragem do equipamento for insuficiente para capturar os detalhes do sinal. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como opera o gatilho (trigger) parametrizado como 'Save with Trip' na função de oscilografia?",
+      "options": [
+        "Grava a oscilografia a partir da partida, mas salva o registro de forma permanente apenas se houver comando de trip.",
+        "Salva o registro continuamente a cada hora independentemente de faltas.",
+        "Salva o registro apenas em oscilações de potência estáveis sem curto-circuito.",
+        "Apaga automaticamente o registro anterior sempre que o disjuntor for fechado manualmente."
+      ],
+      "correctIndex": 0,
+      "explanation": "A oscilografia parte com a detecção, mas só guarda o registro se efetivamente ocorrer o disparo (trip). (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No Brasil, qual entidade consolidou e deu prosseguimento à análise sistemática de ocorrências iniciada pelo GCOI?",
+      "options": [
+        "ANEEL.",
+        "Eletrobrás.",
+        "Operador Nacional do Sistema Elétrico (ONS).",
+        "Associação Brasileira de Normas Técnicas (ABNT)."
+      ],
+      "correctIndex": 2,
+      "explanation": "O ONS herdou e deu prosseguimento à coleta e processamento de dados de ocorrências no sistema interligado. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com os códigos de instrumentação de tempo (IRIG), qual é a taxa de pulsos do formato IRIG-B?",
+      "options": [
+        "1 pulso por segundo.",
+        "10 pulsos por segundo.",
+        "1000 pulsos por segundo.",
+        "100 pulsos por segundo."
+      ],
+      "correctIndex": 3,
+      "explanation": "O IRIG-B possui uma taxa de sinal de temporização de 100 pulsos por segundo (PPS). (Fonte: Ed50_marco_protecao_seletividade_capIII).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os relés de proteção digitais não possuem a capacidade de gravar oscilografias, exigindo equipamentos registradores autônomos à parte.",
+      "correctAnswer": false,
+      "explanation": "Relés digitais agregam múltiplas funções em um único hardware, incluindo a oscilografia e o registro de eventos. (Fonte: Virtus_CProtBL2Cd3_Ed1).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O parâmetro 'Captured Waveform after Event' define a duração do registro oscilográfico pós-falta no relé de proteção.",
+      "correctAnswer": true,
+      "explanation": "O ajuste 'after Event' determina o tempo que o relé continuará gravando após a eliminação da falta (pós-falta). (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A análise das perturbações sistêmicas fornece a realimentação necessária para a correção de desvios de operação do sistema elétrico.",
+      "correctAnswer": true,
+      "explanation": "Essa análise gera diagnósticos essenciais na fase de pós-operação para prevenir novas ocorrências e corrigir falhas. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O protocolo IRIG-B padrão envia dados em uma portadora (carrier) de 1 kHz, mas sua versão DCLS opera sem esse sinal portador.",
+      "correctAnswer": true,
+      "explanation": "O IRIG-B envia os dados modulados em 1 kHz, enquanto a variação IRIG-B DCLS (deslocamento de nível DC) transmite sem essa portadora. (Fonte: Ed50_marco_protecao_seletividade_capIII).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao parametrizar a oscilografia para 'Trigger with Trip', o relé salva o registro de todas as partidas (pickups), mesmo que a falta seja extinta sem.",
+      "correctAnswer": false,
+      "explanation": "Esse parâmetro serve exatamente para evitar o salvamento de registros para todas as partidas, guardando apenas as que confirmam o trip. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A funcionalidade nativa de um relé digital que grava as formas de onda de tensão e corrente sob falta é denominada ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "oscilografia"
+        }
+      ],
+      "explanation": "A oscilografia digital armazena amostras do sinal analógico que permitem reconstituir o distúrbio para análise posterior. (Fonte: Virtus_CProtBL2Cd3_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O formato de código de tempo serial com 100 pulsos por segundo empregado junto ao receptor GPS para sincronismo é conhecido como ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "IRIG-B"
+        }
+      ],
+      "explanation": "O protocolo IRIG-B é o formato de sincronização de tempo mais comum nos relés para marcação precisa dos eventos. (Fonte: Ed50_marco_protecao_seletividade_capIII).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O ajuste 'Captured Waveform Prior to Trigger' estipula a janela de registro denominada ____ na configuração de oscilografia do relé.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "pré-falta"
+        }
+      ],
+      "explanation": "O termo técnico para o registro dos instantes de onda capturados imediatamente antes do início da perturbação é registro de pré-falta. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    }
+  ]
+}

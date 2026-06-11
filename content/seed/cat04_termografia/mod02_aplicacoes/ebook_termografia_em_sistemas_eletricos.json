@@ -1,0 +1,321 @@
+{
+  "category": "Termografia Infravermelha",
+  "categoryOrder": 3,
+  "module": "Termografia em Sistemas Elétricos",
+  "moduleOrder": 1,
+  "moduleSubtitle": "Metodologia, aplicações, critérios de avaliação e causas raiz de pontos quentes",
+  "ebookTitle": "Termografia em Sistemas Elétricos",
+  "ebookSubtitle": "Da metodologia de inspeção aos critérios de Delta T e à identificação de causas raiz",
+  "estimatedMinutes": 78,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Metodologia de Inspeção Termográfica",
+      "subtitle": "Como planejar e executar uma inspeção confiável",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Análise qualitativa e quantitativa",
+          "type": "text",
+          "body": "A inspeção termográfica pode ser conduzida de forma qualitativa ou quantitativa. A análise quantitativa busca a temperatura exata do componente, exigindo câmeras de melhor resolução e rigorosos ajustes (Fonte: Tipos de análise termográfica em painel elétrico). Em outras palavras, as análises quantitativas precisam aferir a temperatura exata da falha, demandando equipamentos calibrados de maior qualidade óptica e radiométrica (Fonte: Tipos de análise termográfica em painel elétrico). O diagnóstico pautado por medições comparativas avalia a diferença de temperatura (Delta T) entre componentes semelhantes operando no mesmo regime elétrico (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s2",
+          "title": "Condições de carga e segurança",
+          "type": "list",
+          "items": [
+            "O painel elétrico deve estar com pelo menos 30% de sua carga e operando há no mínimo duas horas para garantir precisão térmica (Fonte: Termografia aplicada em painéis elétricos)",
+            "É recomendado normativamente que o painel opere com pelo menos 30 por cento de sua carga por no mínimo duas horas para garantir precisão da carga térmica (Fonte: Termografia aplicada em painéis elétricos)",
+            "O planejamento e as ações desenvolvidas na inspeção devem atender a todos os requisitos de segurança da NR 10 (Fonte: Inspeção em Subestações Utilizando a Termografia)",
+            "O assistente qualificado é a pessoa que opera o equipamento inspecionado seguindo as normas de segurança como a NR 10 (Fonte: Termografia aplicada em painéis elétricos)",
+            "A distância de 1 metro garante segurança operacional e minimiza efeitos de variáveis espúrias na imagem capturada (Fonte: Termografia aplicada em painéis elétricos)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O detalhe que engana: a fase fria",
+          "type": "note",
+          "body": "Uma diferença acentuada de temperatura em apenas uma fase de um circuito trifásico é um forte indício de anomalia (Fonte: Tipos de análise termográfica em painel elétrico). Mas atenção a um caso contraintuitivo: em falhas de resistência altíssima de mau contato, a corrente se desvia para o cabo saudável aquecendo-o mais, deixando o cabo defeituoso frio (Fonte: Termografia Infravermelha, Editora do Ifes). Por isso, parâmetros incorretos geram desvios de medição que causam erros significativos de avaliação e diagnóstico (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)."
+        },
+        {
+          "id": "s4",
+          "title": "Ângulo de visada e referências normativas",
+          "type": "text",
+          "body": "A emissividade varia com o ângulo de emissão, e ângulos de visada maiores que 45 graus introduzem erros significativos na medição térmica (Fonte: Termografia Infravermelha, Editora do Ifes). Diferenças de 4 graus Celsius entre componentes semelhantes comprovam comportamento anormal que deve ser urgentemente investigado (Fonte: Termografia Infravermelha, Editora do Ifes). A ABNT NBR 15572 constitui o guia para inspeção de equipamentos, relacionando responsabilidades do usuário final e do termografista atuante (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s5",
+          "title": "O relatório de inspeção",
+          "type": "text",
+          "body": "As imagens termográficas (ou termogramas) são peças essenciais nos relatórios para documentar e localizar com precisão as anomalias de temperatura detectadas (Fonte: Como Fazer um Relatório de Inspeção Termográfica, GNR Ambiental). A seção de resultados deve apresentar as imagens termográficas com as anomalias destacadas e descritas detalhadamente (Fonte: Como Fazer um Relatório de Inspeção Termográfica, GNR Ambiental). A conclusão e as recomendações em um relatório servem para resumir as descobertas obtidas, sugerir ações corretivas amplas e citar medidas específicas reparadoras (Fonte: Como Fazer um Relatório de Inspeção Termográfica, GNR Ambiental)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A inspeção termográfica pode ser qualitativa ou quantitativa, esta última exigindo câmeras de melhor resolução e ajustes rigorosos. Para precisão, o painel deve ter ao menos 30% de carga e operar há pelo menos duas horas, sempre atendendo à NR 10 e à NBR 15572. Cuidado com o caso da fase fria (mau contato de altíssima resistência) e com ângulos de visada acima de 45 graus. Os termogramas documentam as anomalias, e o relatório resume descobertas e recomenda ações corretivas."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Aplicações em Subestações (AT/MT)",
+      "subtitle": "Diagnóstico de pontos quentes em alta e média tensão",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Como o termovisor enxerga a falha",
+          "type": "text",
+          "body": "O termovisor captura a energia infravermelha emitida pelo objeto em inspeção e a converte em imagem térmica (Fonte: Inspeção em Subestações Utilizando a Termografia). A técnica visualiza problemas causados pelo aumento da resistência ôhmica local que gera calor induzido no componente sob carga (Fonte: Inspeção em Subestações Utilizando a Termografia). Anomalias térmicas geralmente precedem falhas, sendo a medição de temperatura uma das principais ferramentas de análise (Fonte: Termografia aplicada em painéis elétricos)."
+        },
+        {
+          "id": "s2",
+          "title": "Limites de Delta T por nível de tensão",
+          "type": "list",
+          "items": [
+            "O delta T máximo permitido em conexões rigorosas de alta tensão é de exatos 5 graus Celsius (Fonte: Inspeção em Subestações Utilizando a Termografia)",
+            "O diagnóstico oficial aprovou a condição normal baseando-se no limite técnico máximo de 5 graus Celsius validado para equipamentos operantes em alta tensão (Fonte: Inspeção em Subestações Utilizando a Termografia)",
+            "O delta T máximo permitido para diagnosticar normalidade em conexões de média tensão é 8 graus Celsius (Fonte: Inspeção em Subestações Utilizando a Termografia)",
+            "Para diferenças de temperatura acima de 40 graus Celsius a ação obrigatória é a tomada de medidas corretivas imediatas (Fonte: Termografia aplicada em painéis elétricos)",
+            "Diferenças de 4 graus Celsius entre componentes estritamente similares já são provas reais de comportamento anormal que exige investigação urgente (Fonte: Termografia Infravermelha, Editora do Ifes)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O que causa os pontos quentes",
+          "type": "text",
+          "body": "Pontos quentes são causados pela deficiência de contato, corrosão, oxidação ou defeito de componentes (Fonte: Inspeção em Subestações Utilizando a Termografia). Pontos quentes concentrados em circuitos elétricos são rotineiramente causados por deficiência estrutural de contato, corrosão química ou oxidação dos metais (Fonte: Inspeção em Subestações Utilizando a Termografia). Um alto delta T entre fases aponta aquecimento anormal severo e clara necessidade de intervenção (Fonte: Inspeção em Subestações Utilizando a Termografia), e qualquer aquecimento anormal nesse estágio indica severa falha e pode comprometer drasticamente o fornecimento de energia e a segurança local (Fonte: Inspeção em Subestações Utilizando a Termografia)."
+        },
+        {
+          "id": "s4",
+          "title": "Plano de ação e planejamento seguro",
+          "type": "note",
+          "body": "O plano de ação correto consiste em limpar as superfícies de contato afetadas e verificar o aperto das conexões (Fonte: Inspeção em Subestações Utilizando a Termografia). A gravidade da anomalia é classificada e avaliada pela variação de temperatura comparada com outro elemento similar saudável (Fonte: Termografia aplicada em painéis elétricos); a prioridade mais baixa da tabela padrão de falhas orienta que essas leves correções ocorram de forma programada no próximo período de manutenção do setor (Fonte: Termografia aplicada em painéis elétricos). O planejamento deve atender à NR-10, realizando análise de risco da tarefa quando necessário para segurança (Fonte: Inspeção em Subestações Utilizando a Termografia)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O termovisor converte energia infravermelha em imagem térmica e revela o calor induzido pelo aumento da resistência ôhmica sob carga. Em subestações, o Delta T máximo é 5 graus Celsius em alta tensão e 8 graus Celsius em média tensão; acima de 40 graus Celsius, a ação é imediata. Os pontos quentes nascem de deficiência de contato, corrosão e oxidação, e o plano de ação típico é limpar as superfícies e reapertar conexões, sempre sob a NR-10."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Aplicações em Painéis de BT e Motores",
+      "subtitle": "Avaliação de circuitos, disjuntores e dispositivos de estado sólido",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Quando o ponto quente é normal",
+          "type": "text",
+          "body": "Pontos quentes podem indicar meramente o regime contínuo de trabalho normal de um circuito, não sendo sempre caracterização obrigatória de defeito (Fonte: Tipos de análise termográfica em painel elétrico). A temperatura de 65 graus é totalmente normal para um disjuntor em regime contínuo, não significando defeito se for o único circuito ativo (Fonte: Tipos de análise termográfica em painel elétrico). Por isso, conhecer a temperatura máxima admissível de projeto do componente (MTA) constitui o limiar fundamental ao classificar precisamente se a ocorrência é de fato perigosa ou rotineira (Fonte: Termografia aplicada em painéis elétricos). A MTA de componentes varia diretamente de acordo com as especificações próprias do fabricante e com a capacidade nominal de cada disjuntor (Fonte: Termografia aplicada em painéis elétricos)."
+        },
+        {
+          "id": "s2",
+          "title": "Sinais de anomalia em painéis e motores",
+          "type": "list",
+          "items": [
+            "O aquecimento de apenas uma fase em um circuito trifásico mostra uma anormalidade, pois as três fases deveriam atuar equilibradas (Fonte: Tipos de análise termográfica em painel elétrico)",
+            "Sob forte mau contato resistivo em um cabo, a corrente desvia para a conexão saudável, fazendo a fiação boa superaquecer (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Os hot spots indicam áreas de elevadíssima temperatura que podem ser evidências de sobrecarga ou desgaste mecânico acentuado (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
+            "Problemas elétricos térmicos são normalmente provocados por conexões oxidadas, problemas de aperto, sobrecargas ou pelas falhas de componentes (Fonte: Termografia aplicada em painéis elétricos)",
+            "As variações de calor mapeadas pelo termovisor habitualmente alertam as falhas físicas e elétricas antes de sua completa ruptura sistêmica (Fonte: Termografia aplicada em painéis elétricos)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Dispositivos de estado sólido",
+          "type": "note",
+          "body": "Alguns dispositivos executam seu chaveamento valendo-se integralmente de arranjos semicondutores como SCRs ou Mosfets, sem exigir atuadores contatados físicos mecanizados (Fonte: Termografia aplicada em painéis elétricos). Por não dependerem de contatos mecânicos, seu comportamento térmico segue uma lógica distinta da de conexões parafusadas, reforçando a necessidade de conhecer a MTA e o regime de cada componente antes de concluir por defeito."
+        },
+        {
+          "id": "s4",
+          "title": "Prioridades de ação por Delta T",
+          "type": "list",
+          "items": [
+            "Para um Delta T superior a 40 graus Celsius classificado como prioridade um, a ação recomendada exige medidas corretivas imediatas (Fonte: Termografia aplicada em painéis elétricos)",
+            "Pela tabela normativa de Delta T, a prioridade 2 exige obrigatoriamente que as medidas corretivas ocorram assim que possível, e não no ano seguinte (Fonte: Termografia aplicada em painéis elétricos)",
+            "Para prioridade quatro com Delta T entre 1 e 10 graus Celsius, as medidas corretivas devem ser tomadas no próximo período de manutenção (Fonte: Termografia aplicada em painéis elétricos)",
+            "Qualquer divergência a partir de 4 graus Celsius entre equipamentos semelhantes operando homogeneamente atesta forte sintoma comportamental anormal e suspeito (Fonte: Termografia Infravermelha, Editora do Ifes)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Um caso real de torque inadequado",
+          "type": "text",
+          "body": "A causa direta de um superaquecimento em painel foi a aplicação de um torque inadequado que deteriorou severamente o terminal elétrico focado (Fonte: Termografia aplicada em painéis elétricos). Em outro caso, o aquecimento anormal de uma conexão foi causado especificamente pela falta de manutenção preventiva, demandando limpeza e reaperto emergencial (Fonte: Termografia aplicada em painéis elétricos). Para precisão diagnóstica, recomenda-se que o painel possua no mínimo 30 por cento da carga e opere ativamente há pelo menos duas horas (Fonte: Termografia aplicada em painéis elétricos)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Nem todo ponto quente é defeito: um disjuntor solitário em regime contínuo pode chegar a 65 graus sem anomalia, e a MTA do fabricante é o limiar que separa o perigoso do rotineiro. Sinais reais de falha incluem aquecimento de uma só fase, fiação saudável superaquecendo por mau contato vizinho e hot spots por sobrecarga. As ações seguem prioridades por Delta T (imediata acima de 40 graus, programada entre 1 e 10 graus), e causas comuns são torque inadequado e falta de manutenção."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Aplicações em Linhas de Transmissão",
+      "subtitle": "Inspeção remota, óptica, drones e correções ambientais",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Inspeção remota sem interromper o sistema",
+          "type": "text",
+          "body": "O processo preditivo remoto da captação termográfica não interfere no andamento do sistema e não pede o corte de energia na rotina produtiva (Fonte: Inspeção em Subestações Utilizando a Termografia). As mudanças nas anomalias térmicas precedem de modo sistemático rupturas e quebras nos elementos elétricos operantes, atuando como forte diagnóstico preventivo (Fonte: Termografia aplicada em painéis elétricos). Os pontos quentes concentram-se nas conexões e contatos dos condutores, gerados por deficiência de contato, corrosão ou oxidação (Fonte: Inspeção em Subestações Utilizando a Termografia)."
+        },
+        {
+          "id": "s2",
+          "title": "Óptica para objetos afastados",
+          "type": "list",
+          "items": [
+            "A troca de componentes ópticos pela lente telescópica estreita fortemente o FOV captado, maximizando o aproveitamento da resolução para avaliar objetos afastados (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Lentes telescópicas de FOV menor melhoram a resolução espacial porque focam os mesmos pixels em uma área significativamente mais estrita (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "O IFOV fornece o ângulo sob o qual um único elemento detector do FPA percebe a radiação do objeto inspecionado (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "O objeto deve medir de duas a três vezes o tamanho mínimo delineado pelo IFOV para prevenir erros limitantes de difração na lente (Fonte: Termografia Infravermelha, Editora do Ifes)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Drones nas torres de transmissão",
+          "type": "text",
+          "body": "Drones com câmeras térmicas alcançam locais altos e perigosos como torres de transmissão, minimizando o trabalho manual em área de risco (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia). A integração propiciada pela tecnologia de drones embarcados minimiza o uso braçal humano de andaimes ao avaliar partes críticas nas torres elevadas de energia (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia). Ventos fortes, porém, prejudicam o uso de drones e criam desafios que dependem de equipamentos robustos tolerantes a intempéries para superação (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)."
+        },
+        {
+          "id": "s4",
+          "title": "Correções ambientais ao ar livre",
+          "type": "note",
+          "body": "Ao ar livre, variáveis ambientais distorcem a leitura. Um anemômetro mede a velocidade do vento incidente no componente para permitir as devidas correções térmicas (Fonte: Termografia Infravermelha, Editora do Ifes). O choque advectivo gerado pela velocidade do vento afeta termicamente a medição, promovendo trocas acentuadas e camuflagem no calor dos terminais metálicos avaliados ao ar livre (Fonte: Termografia Infravermelha, Editora do Ifes). A quantidade limitante de água precipitável é equacionada aferindo a umidade relativa local e a temperatura atmosférica do caminho da visada (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s5",
+          "title": "O paradoxo do cabo bom que esquenta",
+          "type": "text",
+          "body": "No cabo com forte mau contato resistivo a corrente se desvia para conexões saudáveis, fazendo o fio ruim aquecer menos que o cabo bom (Fonte: Termografia Infravermelha, Editora do Ifes). O mau contato excessivo gera altíssima resistência forçando a passagem da corrente para fios vizinhos, aquecendo ironicamente os cabos intactos e saudáveis (Fonte: Termografia Infravermelha, Editora do Ifes). A elevação de temperatura focada e a sua respectiva carga medida da corrente elétrica são os robustos indicadores de gravidade do defeito (Fonte: Termografia Infravermelha, Editora do Ifes), e os hot spots captados revelam áreas térmicas que sinalizam fadiga e indicam riscos reais de forte sobrecarga e desgaste mecânico (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A termografia remota inspeciona linhas sem cortar energia e antecipa rupturas. Para objetos afastados, lentes telescópicas de FOV menor melhoram a resolução espacial, e o objeto deve medir de duas a três vezes o mínimo do IFOV. Drones alcançam torres perigosas, mas sofrem com ventos fortes. Ao ar livre, vento e umidade exigem correção (anemômetro, água precipitável). E vale o paradoxo: em mau contato de altíssima resistência, o cabo bom esquenta mais que o defeituoso."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Critérios de Avaliação de Pontos Quentes",
+      "subtitle": "Delta T, MTA, prioridades e correção por carga",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é Delta T",
+          "type": "text",
+          "body": "O critério focado na diferença de temperatura entre elementos iguais sob funcionamento idêntico é mundialmente referenciado como Delta T (Fonte: Termografia aplicada em painéis elétricos). O critério engloba também avaliar a variação de temperatura entre um componente e outro elemento similar idêntico operando no circuito (Fonte: Termografia aplicada em painéis elétricos). A gravidade da anomalia é classificada pela variação de temperatura entre o elemento focado e outro componente similar (Fonte: Termografia aplicada em painéis elétricos). Diferenças de temperatura a partir de 4 graus Celsius entre componentes semelhantes operando homogeneamente são provas de anormalidade (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s2",
+          "title": "Limites de Delta T por contexto",
+          "type": "list",
+          "items": [
+            "O Delta T máximo permitido em conexões que operam em alta tensão é de 5 graus Celsius (Fonte: Inspeção em Subestações Utilizando a Termografia)",
+            "O parâmetro limitante adotado para autorizar ou reprovar as conexões elétricas ligadas a barramentos de média tensão é 8 graus Celsius (Fonte: Inspeção em Subestações Utilizando a Termografia)",
+            "A aprovação de componentes em alta tensão limita o valor de Delta T a no máximo 5 graus Celsius antes de requerer correção (Fonte: Inspeção em Subestações Utilizando a Termografia)",
+            "Para conexões operantes em média tensão, o delta T máximo permitido é estabelecido em 8 graus Celsius (Fonte: Inspeção em Subestações Utilizando a Termografia)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A tabela de prioridades",
+          "type": "list",
+          "items": [
+            "Pela tabela de classificação de severidade, a prioridade número 1 abarca ocorrências agudas acima de 40 graus que necessitam intervenção imediata (Fonte: Termografia aplicada em painéis elétricos)",
+            "Para variações maiores que 20 e até 40 graus, a ação recomendada na prioridade 2 é aplicar medidas corretivas assim que possível (Fonte: Termografia aplicada em painéis elétricos)",
+            "O Delta T situado entre 10 e 20 graus confere a prioridade 3 e demanda medidas corretivas programadas com agendamento (Fonte: Termografia aplicada em painéis elétricos)",
+            "A prioridade 4 abrange anomalias com Delta T entre 1 e 10 graus Celsius para serem reparadas na próxima manutenção (Fonte: Termografia aplicada em painéis elétricos)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "MTA e critérios da NBR 15572",
+          "type": "note",
+          "body": "O termografista deve conhecer a temperatura máxima admissível de projeto na qual o componente atua sem sofrer degradação (Fonte: Termografia aplicada em painéis elétricos). Os valores de MTA variam conforme as especificações próprias do fabricante e são essenciais para classificar a anomalia do componente (Fonte: Termografia aplicada em painéis elétricos). A NBR 15572 menciona que os usuários podem usar critérios próprios de avaliação ou basear-se nos parâmetros do fabricante (Fonte: Termografia aplicada em painéis elétricos)."
+        },
+        {
+          "id": "s5",
+          "title": "Correção da elevação térmica pela carga",
+          "type": "text",
+          "body": "Como diferentes cargas geram aquecimentos distintos, é metodologicamente necessário corrigir o valor lido simulando o aquecimento gerado em plena carga (Fonte: Termografia Infravermelha, Editora do Ifes). A elevação térmica é corrigida multiplicando a medição por uma fração da corrente nominal e de teste elevada a um coeficiente (Fonte: Termografia Infravermelha, Editora do Ifes). Esse ajuste evita subestimar anomalias detectadas com o equipamento operando abaixo da carga nominal."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Delta T é a diferença de temperatura entre elementos iguais sob funcionamento idêntico, e a partir de 4 graus já indica anormalidade. Os limites de aprovação são 5 graus Celsius em alta tensão e 8 graus Celsius em média tensão. A tabela de prioridades vai de 1 (acima de 40 graus, imediata) a 4 (entre 1 e 10 graus, próxima manutenção). A MTA do fabricante e a NBR 15572 fundamentam a classificação, e a elevação térmica deve ser corrigida para plena carga."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Identificação de Falhas e Causas Raiz",
+      "subtitle": "Física do mau contato, resistência e padrões térmicos",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A física do mau contato",
+          "type": "text",
+          "body": "A potência elétrica dissipada no mau contato é o produto entre a queda de tensão pontual na conexão e a corrente elétrica que a atravessa (Fonte: Termografia Infravermelha, Editora do Ifes). Quanto menor for a área preservada de contato metálico entre as peças, mais alta será a resistência e muito maior o salto da temperatura medida (Fonte: Termografia Infravermelha, Editora do Ifes). Quanto menor for a área útil de contato de uma conexão, maior será a sua resistência elétrica restritiva e a consequente geração térmica (Fonte: Termografia Infravermelha, Editora do Ifes). O modelo formulado aponta que, à medida que a temperatura eleva-se agressivamente, a área de contato elétrico cai de maneira inversamente correlacionada (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s2",
+          "title": "Causas raiz dos pontos quentes",
+          "type": "list",
+          "items": [
+            "Pontos quentes em circuitos elétricos são gerados por deficiência de contato nos componentes, corrosão, oxidação ou falhas físicas (Fonte: Inspeção em Subestações Utilizando a Termografia)",
+            "Muitas avarias são produzidas fisicamente nas instalações pela oxidação progressiva ou pela falta do aperto recomendado na junção dos condutores metálicos (Fonte: Termografia aplicada em painéis elétricos)",
+            "Problemas como conexões frouxas, curtos-circuitos, aquecimento por indução e cargas desbalanceadas podem ser atestados pela termografia (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "Os aquecimentos nessas conexões de fusíveis ocorrem ativamente devido ao aumento da resistência de contato gerado por deficiências, corrosões ou oxidações (Fonte: Inspeção em Subestações Utilizando a Termografia)",
+            "A distribuição térmica difusa ou irregular em superfícies indica habitualmente vazamentos sistêmicos ou falhas críticas no isolamento térmico protetor (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Resistência ôhmica e corrente de carga",
+          "type": "text",
+          "body": "A termografia identifica problemas térmicos provocados pela relação entre a corrente de carga e o aumento da resistência ôhmica (Fonte: Inspeção em Subestações Utilizando a Termografia). O calor nas chaves e barramentos cresce induzido especificamente pela elevação concentrada da resistência ôhmica devido ao estado de desgaste das conexões instaladas (Fonte: Inspeção em Subestações Utilizando a Termografia). A inspeção localiza predominantemente os acúmulos térmicos (hot spots) que sinalizam sobrecargas e problemas estruturais mecânicos nos equipamentos (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)."
+        },
+        {
+          "id": "s4",
+          "title": "A armadilha da conexão fria",
+          "type": "note",
+          "body": "Em casos de mau contato de altíssima resistência, a corrente se desvia para os cabos saudáveis, tornando a conexão falha a mais fria do conjunto (Fonte: Termografia Infravermelha, Editora do Ifes). Da mesma forma, um disjuntor atuando de modo solitário em regime contínuo atinge pontualmente uma temperatura alta, constituindo trabalho normal e não atestando obrigatoriamente um defeito (Fonte: Tipos de análise termográfica em painel elétrico). Reconhecer essas exceções evita tanto falsos positivos quanto a perigosa negligência de uma conexão crítica que aparece fria no termograma."
+        },
+        {
+          "id": "s5",
+          "title": "Da anomalia à ação corretiva",
+          "type": "text",
+          "body": "A variação anormal e repentina de calor costuma ser o estágio inicial latente que antecede de maneira sistemática as graves rupturas eletromecânicas (Fonte: Termografia aplicada em painéis elétricos). A falha geradora do aquecimento foi a aplicação de um torque inadequado na conexão que deteriorou fisicamente a fixação do terminal (Fonte: Termografia aplicada em painéis elétricos). A falha ocorreu por falta de manutenção e exigiu a pronta limpeza e o rigoroso reaperto mecânico do terminal aquecido (Fonte: Termografia aplicada em painéis elétricos). Identificar a causa raiz orienta a correção definitiva, e não apenas o alívio temporário do sintoma térmico."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O calor do mau contato é o produto da queda de tensão pela corrente: quanto menor a área de contato, maior a resistência e o salto de temperatura. As causas raiz típicas são deficiência de contato, corrosão, oxidação, falta de aperto, conexões frouxas e torque inadequado. Atenção às exceções — a conexão de altíssima resistência pode aparecer fria, e um disjuntor solitário quente pode estar normal. Toda anomalia precede rupturas, por isso a correção deve atacar a causa raiz, com limpeza e reaperto."
+        }
+      ]
+    }
+  ]
+}

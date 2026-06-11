@@ -1,0 +1,233 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Proteção de Motores Elétricos",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções específicas de motores",
+  "moduleOrder": 4,
+  "ebookTitle": "Proteção de Motores Elétricos",
+  "ebookSubtitle": "Da partida à falta: sobrecarga, desequilíbrio, rotor bloqueado e proteções específicas",
+  "estimatedMinutes": 75,
+  "trailFiles": [
+    "t01_fundamentos_motores.json",
+    "t02_aplicacoes_motores.json",
+    "t03_protecoes_motores.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Por que Proteger Motores",
+      "subtitle": "O coração da indústria",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A importância dos motores",
+          "type": "text",
+          "body": "Motores elétricos consomem cerca de 70% de toda a energia elétrica industrial no Brasil. São o coração de bombas, ventiladores, compressores, esteiras e processos contínuos. Quando um motor crítico falha, frequentemente toda uma planta para — o custo da indisponibilidade supera em muito o custo do próprio motor. Proteger motores não é apenas evitar danos ao equipamento, mas garantir a continuidade do processo e a segurança das pessoas."
+        },
+        {
+          "id": "s2",
+          "title": "O que danifica um motor",
+          "type": "list",
+          "items": [
+            "Sobrecarga térmica — corrente acima da nominal aquece os enrolamentos e degrada o isolamento",
+            "Falta de fase / desequilíbrio — gera sequência negativa que aquece intensamente o rotor",
+            "Rotor bloqueado / partida prolongada — corrente de partida persistente sem o resfriamento do giro",
+            "Falta à terra — degradação do isolamento entre enrolamento e carcaça",
+            "Subtensão / sobretensão — operação fora dos limites prejudica o desempenho e a vida útil"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A lei de Montsinger",
+          "type": "note",
+          "body": "A vida do isolamento de um motor é regida pela temperatura: pela regra de Montsinger, a cada ~10 °C de aumento na temperatura de operação, a vida útil do isolamento cai pela METADE. Isso explica por que a proteção térmica é tão importante: um motor operando cronicamente sobrecarregado ou com desequilíbrio não falha de imediato, mas tem sua vida drasticamente reduzida. A proteção age para manter a temperatura dentro do limite da classe de isolamento."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Motores consomem ~70% da energia industrial e são críticos para os processos — sua falha para a planta. São danificados por sobrecarga térmica, desequilíbrio/falta de fase, rotor bloqueado, falta à terra e variações de tensão. Pela lei de Montsinger, cada +10 °C reduz à metade a vida do isolamento — por isso a proteção térmica é central."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Comportamento do Motor: Partida e Operação",
+      "subtitle": "Entender para proteger",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A corrente de partida",
+          "type": "text",
+          "body": "Na partida direta (DOL), o motor de indução consome uma corrente muito superior à nominal — tipicamente de 6 a 8 vezes a corrente nominal — porque, com o rotor parado, ele se comporta como um transformador em curto. Essa corrente alta persiste por alguns segundos, até o motor acelerar e atingir a velocidade nominal. É um comportamento NORMAL, e a proteção deve tolerá-lo: o ajuste não pode disparar na partida, mas deve detectar uma partida anormalmente longa (rotor bloqueado)."
+        },
+        {
+          "id": "s2",
+          "title": "Corrente nominal e dimensionamento",
+          "type": "formula",
+          "formula": "In = P / (√3 · V · cosφ · η)",
+          "explanation": "Com P em W, V em V, resulta In em A. Por exemplo, um motor de 75 kW, 380 V, FP 0,85 e rendimento 0,93 tem In ≈ 144 A, e corrente de partida de ~865-1150 A. A calculadora de Corrente Nominal do SPARK calcula In e a estimativa de partida — essenciais para ajustar a proteção e dimensionar contatores e cabos."
+        },
+        {
+          "id": "s3",
+          "title": "Métodos de partida e seu impacto na proteção",
+          "type": "list",
+          "items": [
+            "Partida direta (DOL) — corrente plena de partida (6-8×In); proteção deve tolerar o pico",
+            "Estrela-triângulo — reduz a corrente de partida a ~1/3; transição gera transitórios",
+            "Soft-starter — partida suave por rampa de tensão; reduz o estresse",
+            "Inversor de frequência (VFD) — partida controlada; muda a filosofia de proteção (o inversor protege internamente)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "A curva de capacidade térmica (damage curve)",
+          "type": "note",
+          "body": "Cada motor tem uma curva de dano térmico que indica, para cada nível de corrente, por quanto tempo ele suporta antes de danificar o isolamento. A proteção térmica (49) deve operar SEMPRE abaixo dessa curva (proteger antes do dano) e ACIMA da curva de partida (não disparar na partida normal). Ajustar a proteção é, em essência, encaixar a curva do relé nessa janela entre a partida e o dano — uma janela que pode ser apertada em motores com partida pesada."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A partida direta consome 6-8×In por alguns segundos — comportamento normal que a proteção deve tolerar. In = P/(√3·V·cosφ·η). Métodos de partida (DOL, estrela-triângulo, soft-starter, VFD) afetam a corrente e a filosofia de proteção. A proteção térmica deve operar entre a curva de partida (abaixo dela não dispara) e a curva de dano (acima dela não deixa danificar)."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — As Proteções Essenciais do Motor",
+      "subtitle": "As funções ANSI aplicadas a motores",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "49 — Sobrecarga térmica",
+          "type": "text",
+          "body": "A função 49 é a proteção mais importante do motor. Os relés modernos implementam um modelo térmico (imagem térmica) que estima a temperatura dos enrolamentos a partir da corrente medida, integrando o aquecimento ao longo do tempo. Esse modelo considera o histórico recente — um motor que acabou de operar carregado já está quente, e o relé reduz proporcionalmente o tempo admissível na próxima sobrecarga. A imagem térmica também limita o número de partidas por hora, evitando o sobreaquecimento por partidas sucessivas."
+        },
+        {
+          "id": "s2",
+          "title": "46 — Desequilíbrio / sequência negativa",
+          "type": "text",
+          "body": "A função 46 protege contra desequilíbrio de corrente, que pode vir de falta de fase, desequilíbrio de tensão da rede ou problemas internos. O perigo é grande: a corrente de sequência negativa gira no sentido oposto ao rotor, induzindo correntes de dupla frequência que aquecem o rotor intensamente. Um desequilíbrio de tensão de apenas 3,5% pode gerar 25% de desequilíbrio de corrente e elevar muito a temperatura. Por isso a 46 é uma das proteções mais valiosas e, infelizmente, mais subestimadas."
+        },
+        {
+          "id": "s3",
+          "title": "48 / 51LR — Partida longa e rotor bloqueado",
+          "type": "text",
+          "body": "A função 48 (partida longa) detecta quando o motor não acelera no tempo esperado — sinal de carga excessiva ou problema mecânico. A proteção de rotor bloqueado (51LR) detecta a condição em que o rotor não gira: a corrente de partida persiste sem o resfriamento proporcionado pela rotação e pela ventilação, levando ao sobreaquecimento rápido. Ambas usam um temporizador associado à corrente de partida, com cuidado para distinguir uma partida normal pesada de uma falha real."
+        },
+        {
+          "id": "s4",
+          "title": "Demais proteções de motor",
+          "type": "list",
+          "items": [
+            "50/51 — sobrecorrente de fase (curto-circuito), com pickup acima da corrente de partida",
+            "50N/51N — falta à terra, sensível (a falta à terra no motor costuma começar com baixa corrente)",
+            "37 — subcorrente (perda de carga, ex.: bomba operando a seco, correia rompida)",
+            "27 — subtensão (protege contra partida ou operação com tensão inadequada)",
+            "87M — diferencial (em motores de grande porte e alta criticidade)",
+            "38 — temperatura de mancais (RTDs); 49RTD — temperatura direta dos enrolamentos"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "RTDs: medir a temperatura diretamente",
+          "type": "note",
+          "body": "Motores de grande porte vêm com sensores de temperatura (RTDs — Resistance Temperature Detectors) embutidos nos enrolamentos e mancais. Isso permite que o relé proteja pela temperatura REAL medida (49RTD/38), e não apenas pela estimativa da imagem térmica baseada na corrente. É a proteção térmica mais precisa, pois capta também aquecimentos não relacionados à corrente (falha de ventilação, ambiente quente, problema de mancal)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O conjunto de proteção de motor: 49 (sobrecarga térmica, com imagem térmica e limite de partidas/hora), 46 (desequilíbrio/sequência negativa — crítica e subestimada), 48/51LR (partida longa e rotor bloqueado), 50/51 e 50N/51N (curto e falta à terra), 37 (subcorrente), 27 (subtensão), 87M (diferencial em grandes motores) e RTDs (49RTD/38) para temperatura real."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Ajuste e Aplicação Prática",
+      "subtitle": "Configurando a proteção do motor",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Dados necessários para o ajuste",
+          "type": "list",
+          "items": [
+            "Corrente nominal (In), tensão e fator de serviço do motor",
+            "Corrente e tempo de partida (rotor bloqueado)",
+            "Curva de dano térmico do fabricante",
+            "Número máximo de partidas por hora (a frio e a quente)",
+            "Constante de tempo térmica de aquecimento e resfriamento",
+            "Relação dos TCs instalados"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Diretrizes de ajuste",
+          "type": "list",
+          "items": [
+            "49 (térmica): ajustar conforme In e fator de serviço, encaixando entre a curva de partida e a de dano",
+            "46 (desequilíbrio): pickup típico de 10-15% de desequilíbrio, com tempo inverso conforme a sequência negativa",
+            "50 (instantâneo): acima da corrente de partida assimétrica (tipicamente 1,6-2× a corrente de partida) para não disparar na energização",
+            "48/51LR: tempo ligeiramente acima do tempo de partida normal, abaixo do tempo de rotor bloqueado seguro",
+            "50N/51N: pickup baixo e sensível, pois faltas à terra começam pequenas"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O cuidado com o instantâneo na partida",
+          "type": "note",
+          "body": "Um erro comum é ajustar o instantâneo (50) baixo demais e fazê-lo disparar na partida do motor — a corrente de partida, especialmente com sua componente assimétrica (DC) nos primeiros ciclos, pode atingir picos elevados. Por isso o pickup do instantâneo deve ficar acima do pico de partida assimétrico. Alternativamente, alguns esquemas bloqueiam o instantâneo durante a janela de partida. Disparos indevidos na partida frustram a operação e levam a desabilitações perigosas da proteção."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Ajustar a proteção do motor exige os dados do fabricante (In, partida, curva de dano, partidas/hora, constantes térmicas). A 49 encaixa entre partida e dano; a 46 dispara em ~10-15% de desequilíbrio; o instantâneo (50) fica acima do pico de partida assimétrico para não disparar na energização; e a 50N/51N é sensível. O cuidado central é não disparar na partida normal nem deixar danificar."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Motores Críticos e Tendências",
+      "subtitle": "Proteção avançada e monitoramento",
+      "estimatedMinutes": 9,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Proteção de motores de grande porte",
+          "type": "text",
+          "body": "Motores de média tensão e grande porte (centenas de kW a MW) — como bombas de alimentação de caldeira, compressores e ventiladores de tiragem — merecem proteção completa com IED dedicado: imagem térmica com RTDs, diferencial (87M), desequilíbrio, e monitoramento de mancais. Para essas máquinas, o custo do IED é irrelevante frente ao custo de uma falha e à criticidade do processo. A proteção dedicada inclui ainda registros de partida para análise de tendência."
+        },
+        {
+          "id": "s2",
+          "title": "Manutenção preditiva e monitoramento",
+          "type": "list",
+          "items": [
+            "Registro do número e duração das partidas (estresse acumulado)",
+            "Tendência da corrente e do desequilíbrio ao longo do tempo",
+            "Temperatura dos enrolamentos e mancais (RTDs)",
+            "Análise de assinatura de corrente (MCSA) para detectar barras de rotor quebradas",
+            "Integração com sistemas de gestão de ativos via IEC 61850"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Motores críticos de grande porte exigem IED dedicado com imagem térmica, RTDs, 87M, 46 e monitoramento de mancais. O monitoramento contínuo (partidas, tendências, temperatura, assinatura de corrente) move a proteção para a manutenção preditiva. Proteger um motor é proteger o processo — e a proteção bem ajustada, entre a curva de partida e a de dano, é o que garante longa vida e disponibilidade."
+        }
+      ]
+    }
+  ]
+}

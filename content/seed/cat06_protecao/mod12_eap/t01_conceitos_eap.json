@@ -1,0 +1,218 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Esquemas Especiais de Proteção",
+  "moduleSubtitle": "Conceitos, aplicações e implementação de EAP/SPS",
+  "moduleOrder": 11,
+  "trail": "Conceitos de Esquemas Especiais",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o objetivo principal dos esquemas de controle de emergência e proteção sistêmica?",
+      "options": [
+        "Sincronizar os geradores com a rede durante a partida rotineira.",
+        "Proteger individualmente os motores de indução contra curtos-circuitos.",
+        "Controlar o fluxo de potência reativa durante a operação normal.",
+        "Evitar a perda de sincronismo e salvar o sistema de perturbações severas."
+      ],
+      "correctIndex": 3,
+      "explanation": "A proteção sistêmica atua para manter a integridade, evitar o colapso (blecaute) e a perda de sincronismo durante perturbações. (Fontes: Caminha / Virtus).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a proteção sistêmica (Esquemas Especiais) difere da proteção convencional de equipamentos?",
+      "options": [
+        "A sistêmica foca na estabilidade do sistema global, enquanto a convencional isola componentes defeituosos.",
+        "A sistêmica utiliza apenas elos fusíveis de distribuição de ação ultra-rápida.",
+        "A sistêmica prescinde de relés digitais, atuando somente via chaves mecânicas.",
+        "A convencional opera preventivamente e a sistêmica atua apenas para sobrecargas."
+      ],
+      "correctIndex": 0,
+      "explanation": "A proteção sistêmica reage a condições globais (ex: subfrequência) para evitar o colapso, diferente da proteção unitária de componentes. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o esquema de alívio de carga (EAP) executa em uma contingência com déficit severo de geração?",
+      "options": [
+        "Aumenta a excitação dos rotores dos geradores térmicos de base.",
+        "Desconecta cargas pré-estabelecidas para recuperar o equilíbrio das potências e a frequência.",
+        "Injeta potência reativa maciça usando bancos de capacitores série.",
+        "Curto-circuita o barramento principal para forçar o desarme global."
+      ],
+      "correctIndex": 1,
+      "explanation": "O plano de alívio desconecta consumidores não-prioritários para restaurar o equilíbrio do sistema frente a quedas anormais de frequência. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual função ANSI é classicamente utilizada nos esquemas sistêmicos de rejeição de carga?",
+      "options": [
+        "Relé de proteção diferencial (87).",
+        "Relé de distância quadrilateral (21).",
+        "Relé de subfrequência (81L).",
+        "Relé de sobrecorrente direcional (67)."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os esquemas de rejeição ou alívio de carga operam com base na detecção de subfrequência (81L) na rede. (Fontes: Caminha / Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual documento define os requisitos mínimos exigidos para os sistemas de proteção e esquemas associados no Brasil?",
+      "options": [
+        "Guia de Aplicação de Tarifas da ANEEL.",
+        "Norma Regulamentadora NR-10.",
+        "Padrão IEEE C37.90.",
+        "Procedimentos de Rede do ONS."
+      ],
+      "correctIndex": 3,
+      "explanation": "O submódulo 2.5 dos Procedimentos de Rede do ONS estabelece os requisitos mínimos dos Sistemas de Proteção no Brasil. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos esquemas de proteção sistêmica, o que o requisito fundamental de 'segurança' garante?",
+      "options": [
+        "Que o sistema de proteção não atue de forma desnecessária ou indevida.",
+        "Que o relé suporte termicamente altas correntes de curto-circuito sem danos.",
+        "Que a atuação ocorra sempre em tempo instantâneo, sem temporização.",
+        "Que os sinais transmitidos por fibra óptica sejam fortemente criptografados."
+      ],
+      "correctIndex": 0,
+      "explanation": "A segurança (security) é a habilidade do sistema de proteção evitar operações desnecessárias quando não solicitado. (Fontes: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que define a 'dependabilidade' (confiabilidade operacional) de um esquema de proteção?",
+      "options": [
+        "A dependência técnica de múltiplos canais de comunicação via micro-ondas.",
+        "A habilidade de atuar corretamente e com precisão sempre que for solicitado.",
+        "A necessidade obrigatória de intervenção humana para validar o trip.",
+        "O travamento mecânico do disjuntor caso a tensão auxiliar de controle falhe."
+      ],
+      "correctIndex": 1,
+      "explanation": "A dependabilidade é a garantia de que a proteção atuará de forma correta quando o sistema exigir a sua operação. (Fontes: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que os esquemas sistêmicos emergenciais devem atuar antes que ocorra a completa perda de sincronismo nas áreas afetadas?",
+      "options": [
+        "Para anular as perdas por efeito corona nos barramentos isolados a gás.",
+        "Para impedir o derretimento imediato dos cabos guarda das linhas.",
+        "Para evitar a perda global do sistema por desequilíbrio severo entre geração e carga.",
+        "Para bloquear permanentemente a operação do relé Buchholz dos transformadores."
+      ],
+      "correctIndex": 2,
+      "explanation": "A rejeição de carga previne o colapso e a perda de sincronismo, evitando blecautes globais por desequilíbrio de potência. (Fonte: Caminha).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o objetivo principal do controle de emergência atuando durante um ilhamento acidental do sistema elétrico?",
+      "options": [
+        "Forçar imediatamente o religamento assíncrono com a concessionária principal.",
+        "Desativar completamente os reguladores de velocidade mecânicos das turbinas.",
+        "Elevar a tensão residual para forçar a atuação da proteção de terra local.",
+        "Salvar a parte isolada do sistema equilibrando pontualmente a carga e a geração."
+      ],
+      "correctIndex": 3,
+      "explanation": "Esquemas de emergência para ilhamentos atuam para salvar parte do sistema, equilibrando as potências locais durante a separação da rede. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para linhas da Rede Básica, como os Procedimentos do ONS exigem a configuração de hardware de proteção visando altíssima confiabilidade?",
+      "options": [
+        "Pela duplicação total com dois conjuntos (Primária e Alternada) totalmente redundantes e independentes.",
+        "Pela instalação de uma única proteção multifuncional sem relés de retaguarda.",
+        "Através do uso de relés eletromecânicos combinados unicamente com fusíveis.",
+        "Adoção de esquema de transferência direta (DUTT) apenas por rádio de UHF."
+      ],
+      "correctIndex": 0,
+      "explanation": "O ONS exige duplicação total (Primária e Alternada) com TPs, TCs, alimentação DC e relés totalmente independentes. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O plano de alívio de carga age desconectando alimentadores e consumidores considerados prioritários para elevar a tensão da rede em regime normal.",
+      "correctAnswer": false,
+      "explanation": "O plano de alívio desconecta alimentadores definidos como não-prioritários durante um déficit severo de potência para evitar o colapso. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Déficit de geração frente à carga causa subfrequência, demandando esquemas especiais de rejeição (corte) de carga.",
+      "correctAnswer": true,
+      "explanation": "Esquemas de rejeição de carga atuam em severas quedas de frequência para tentar salvar o sistema e evitar o blecaute. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Estabilidade é a capacidade do sistema de potência de alcançar um novo ponto de equilíbrio após um distúrbio.",
+      "correctAnswer": true,
+      "explanation": "A estabilidade é a capacidade da rede retornar ao equilíbrio ou manter o sincronismo logo após sofrer uma perturbação. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Esquemas muito complexos nem sempre aumentam a segurança; podem elevar a chance de atuação indevida.",
+      "correctAnswer": false,
+      "explanation": "Um esquema mais simples reduz a probabilidade de atuação acidental. O acréscimo excessivo de redundâncias pode diminuir a segurança e gerar atuações indevidas. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para redundância plena, as proteções primária e alternada não devem usar o mesmo núcleo de TC.",
+      "correctAnswer": false,
+      "explanation": "Os Procedimentos de Rede exigem que a informação para cada conjunto independente venha de núcleos de TCs distintos e separados. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A desconexão programada e emergencial de circuitos menos prioritários para evitar a perda de sincronismo e o blecaute é o esquema de ____ de carga.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "rejeição"
+        }
+      ],
+      "explanation": "Esquemas de rejeição (ou alívio) de carga baseiam-se em relés de subfrequência para salvar o balanço energético da rede. (Fontes: Caminha / Guia 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A característica exigida do sistema de proteção e de controle sistêmico de não atuar indevidamente ou desnecessariamente recebe o nome de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "segurança"
+        }
+      ],
+      "explanation": "A segurança (security) assegura que o relé fique bloqueado ou inerte para oscilações ou falhas que não lhe dizem respeito. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No Brasil, os requisitos de confiabilidade da proteção na Rede Básica constam nos Procedimentos de Rede do ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ONS"
+        }
+      ],
+      "explanation": "O ONS (Operador Nacional do Sistema Elétrico) elabora o Submódulo 2.5 que dita as normas e duplicações para os EAP e proteções vitais. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    }
+  ]
+}

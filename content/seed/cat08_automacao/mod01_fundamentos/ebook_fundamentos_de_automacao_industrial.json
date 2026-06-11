@@ -1,0 +1,183 @@
+{
+  "category": "Automação",
+  "categoryOrder": 7,
+  "module": "Fundamentos de Automação Industrial",
+  "moduleOrder": 0,
+  "moduleSubtitle": "Dos sensores e CLPs aos protocolos abertos, sistemas de segurança e à pirâmide CIM / ISA-95",
+  "ebookTitle": "Fundamentos de Automação Industrial",
+  "ebookSubtitle": "Conceitos, componentes, aplicações em SPCS e arquiteturas de automação industrial",
+  "estimatedMinutes": 41,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de Automação Industrial",
+      "subtitle": "Sensores, atuadores, CLPs, sinais e controle de malha",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é automação e para que serve",
+          "type": "text",
+          "body": "A automação utiliza potência mecânica e eletrônica para realizar tarefas de forma eficiente, diminuindo custos e elevando a produtividade da planta (Marco Antônio Ribeiro - Kufunda.net). Na base de qualquer sistema automatizado estão os elementos que percebem o processo e os que agem sobre ele. Sensores são os equipamentos dedicados a detectar as variações físicas do processo e traduzi-las em dados ou sinais elétricos (Marco Antônio Ribeiro - Kufunda.net). Os atuadores exercem o trabalho mecânico final, mudando posições de válvulas ou ligando sistemas rotativos conforme a ordem da automação (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)."
+        },
+        {
+          "id": "s2",
+          "title": "O CLP e a norma que o padroniza",
+          "type": "list",
+          "items": [
+            "Os primeiros CLPs foram desenvolvidos e aplicados em 1969 pela indústria automotiva para modernizar os quadros defasados de relés mecânicos (Marco Antônio Ribeiro - Kufunda.net)",
+            "A referida norma unifica e regulamenta de forma internacional os métodos e as lógicas de programação aceitas em controladores lógicos (IEC 61131-3: A Norma que padroniza a Automação Industrial)",
+            "A integração DCS assume o controle massivo nas fábricas contínuas em que um CLP isolado perde eficiência perante milhares de requisições de processo simultâneas (PLC vs SCADA vs DCS)",
+            "O software SCADA fornece as ferramentas visuais e digitais necessárias para monitorar a planta e coletar os dados operacionais contínuos (PLC vs SCADA vs DCS)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Sinais, protocolos e a faixa de 4 a 20 mA",
+          "type": "text",
+          "body": "Sinais analógicos, como a faixa de 4 a 20 mA, modulam uma grandeza contínua que representa percentualmente o valor medido em toda sua escala (Marco Antônio Ribeiro - Kufunda.net). Para que os dispositivos conversem entre si, surgem os protocolos abertos: criado na década de 1970, o protocolo se consolidou pela sua enorme simplicidade técnica e formato aberto aplicável livremente em múltiplos dispositivos (Conhecendo os protocolos Modbus TCP, EtherNet/IP e PROFINET - Altus)."
+        },
+        {
+          "id": "s4",
+          "title": "Controle em malha fechada e o PID",
+          "type": "list",
+          "items": [
+            "A malha fechada caracteriza-se pelo uso constante do feedback da saída para a compensação e correção contínua dos desvios (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)",
+            "O controle integral compensa os erros estáveis deixados pela parcela proporcional, removendo ativamente a distorção de offset do sistema (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)",
+            "A parte derivativa amortece as dinâmicas reagindo rapidamente à taxa com que os desvios se deslocam do alvo (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)",
+            "A calibração do Ziegler-Nichols captura a assinatura e formato S do processo lendo sua resposta temporal a um pulso puro simulado de forma aberta (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Controle avançado e processamento na borda",
+          "type": "note",
+          "body": "Sistemas formatados em cascata ligam de forma subordinada os laços dos controladores forçando-os a manipular e operar um único atuador (Marco Antônio Ribeiro - Kufunda.net). Um controle avançado na faixa dividida usa o intervalo do seu sinal de saída rateado para mover dispositivos seqüenciais em vetores inversos na planta (Marco Antônio Ribeiro - Kufunda.net). Já módulos de verificação como os fluxostatos fecham o circuito interrompendo as etapas que dependem rigorosamente do escoamento estável contínuo (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum). Aplicar algoritmos analíticos nos equipamentos de borda elimina a latência da nuvem viabilizando respostas essenciais ocorrendo em milissegundos localmente (Edge AI na Indústria)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A automação usa potência mecânica e eletrônica para reduzir custos e elevar a produtividade. Sensores detectam variações físicas e atuadores executam o trabalho mecânico final. Os CLPs, criados em 1969 para substituir relés mecânicos, são padronizados pela IEC 61131-3, enquanto DCS e SCADA atendem processos contínuos e a supervisão. Sinais analógicos como 4 a 20 mA e protocolos abertos conectam os dispositivos, e o controle de malha fechada (com PID e técnicas como cascata e faixa dividida) corrige os desvios continuamente."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Aplicações em SPCS",
+      "subtitle": "RTUs, telemetria, intertravamento, alarmes e segurança",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "SCADA, RTUs e telemetria",
+          "type": "text",
+          "body": "SCADA significa Supervisory Control And Data Acquisition, traduzido como Sistema de Supervisão e Aquisição de Dados (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea). As RTUs interligam os dispositivos de campo à rede de controle, comunicando os status operacionais aos servidores e IHMs do sistema SCADA (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea). Telemetria é a transmissão da informação de medição para locais remotos por meios como fios, ondas de rádio ou linhas telefônicas (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s2",
+          "title": "Da aquisição do sinal à tela do operador",
+          "type": "list",
+          "items": [
+            "O conversor analógico-digital (A/D) converte o sinal contínuo do multiplexador em um formato digital paralelo que passa para a interface do microcomputador (Marco Antônio Ribeiro - Kufunda.net)",
+            "O conjunto responsável por multiplexar, converter sinais e modular/demodular para transmissão é tecnicamente denominado de modem (Marco Antônio Ribeiro - Kufunda.net)",
+            "O monitor do computador substitui os painéis convencionais com botoeiras e anunciadores, criando chaves lógicas e instrumentos virtuais na tela (Marco Antônio Ribeiro - Kufunda.net)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Intertravamento, votação e falha segura",
+          "type": "text",
+          "body": "Para garantir máxima proteção, o princípio técnico exige que os sistemas de intertravamento sejam totalmente separados e independentes do controle regulatório do processo (Marco Antônio Ribeiro - Kufunda.net). O esquema de votação cruza os dados de múltiplos sensores para evitar desligamentos equivocados (trip falso) gerados pela falha de um único instrumento (Marco Antônio Ribeiro - Kufunda.net). Um sistema seguro em falha desenergiza os relés ou solenóides, abrindo os contatos e garantindo a falha segura na perda de alimentação (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s4",
+          "title": "Proteção por relés e disjuntores",
+          "type": "list",
+          "items": [
+            "Os relés são usados para proteger equipamentos de sobrecarga quando variáveis como tensão ou corrente excedem os limites estabelecidos (Marco Antônio Ribeiro - Kufunda.net)",
+            "O disjuntor utiliza bobinas eletromagnéticas ou tiras bimetálicas térmicas para liberar a trava e abrir o circuito em caso de excesso de corrente (Marco Antônio Ribeiro - Kufunda.net)",
+            "O relé eletromecânico possui alta confiabilidade e imunidade a ruídos elétricos, provendo excelente isolação entre os circuitos de controle e de carga (Marco Antônio Ribeiro - Kufunda.net)",
+            "Superada a fase de queima prematura (burn-in), os componentes eletrônicos do CLP garantem confiabilidade e MTBF significativamente maiores que contatos mecânicos sujeitos a desgaste (Marco Antônio Ribeiro - Kufunda.net)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Anunciadores de alarme: a sequência operacional",
+          "type": "note",
+          "body": "O circuito Reflash permite que novas condições anormais reativem o estado de alarme e o piscamento, mesmo que uma condição anterior ainda esteja pendente (Marco Antônio Ribeiro - Kufunda.net). A característica 'first-out' ou 'first alert' indica precisamente o primeiro alarme acionado dentro de um conjunto, essencial para descobrir a causa do desligamento (Marco Antônio Ribeiro - Kufunda.net). Ao pressionar 'Conhecimento', o operador silencia a buzina e a lâmpada do painel ou tela para de piscar e fica continuamente acesa (Marco Antônio Ribeiro - Kufunda.net). A sequência Ringback indica através de som ou piscamento diferenciado (geralmente lento) que a condição do processo retornou à normalidade (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s6",
+          "title": "Segurança cibernética na integração TI/TO",
+          "type": "text",
+          "body": "A integração TI/TO traz vantagens competitivas na coleta de dados e agilidade, mas expõe infraestruturas legadas a novas vulnerabilidades cibernéticas (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea). Esse elo entre a Tecnologia da Informação corporativa e os protocolos abertos da Tecnologia Operacional insere falhas lógicas perigosas que expõem máquinas (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea)."
+        },
+        {
+          "id": "s7",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Em SPCS, o SCADA (Supervisão e Aquisição de Dados) reúne RTUs, telemetria e a cadeia de aquisição (conversor A/D, modem) para levar o campo até a tela do operador. A segurança operacional apoia-se em intertravamento independente, votação entre sensores e o princípio de falha segura, com relés e disjuntores protegendo contra sobrecarga. Os anunciadores de alarme seguem sequências definidas (Reflash, first-out, Conhecimento e Ringback). A integração TI/TO agrega agilidade, mas exige atenção às vulnerabilidades cibernéticas das infraestruturas legadas."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Arquiteturas e Topologias (Pirâmide CIM, ISA-95)",
+      "subtitle": "Os níveis da automação, do chão de fábrica ao planejamento corporativo",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A pirâmide de automação e suas bases",
+          "type": "text",
+          "body": "Conceitualmente, o padrão CIM acomoda-se nas camadas mais elevadas visando atrelar diretamente a produção ao plano corporativo macro (Marco Antônio Ribeiro - Kufunda.net). As bases da pirâmide mantêm controle em tempo real dos dispositivos, fornecendo suporte para as análises gerenciais tratadas nos níveis superiores (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum). O primeiro nível, também considerado a base, é majoritariamente formado por dispositivos em contato com o processo, como atuadores e sensores (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)."
+        },
+        {
+          "id": "s2",
+          "title": "Os cinco níveis da pirâmide",
+          "type": "list",
+          "items": [
+            "O segundo nível compreende os CLPs e SDCDs criados para executar ativamente o controle automático dos processos industriais da planta (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)",
+            "O terceiro nível destina-se explicitamente à supervisão das etapas produtivas com uso de Workstations e sistemas visuais do tipo SCADA (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)",
+            "O quarto escalão concentra os sistemas focados no controle produtivo geral e leva o título técnico de Gerenciamento da Planta ou Workstation (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)",
+            "O quinto nível ou ápice encarrega-se estritamente do planejamento estratégico e da administração de recursos corporativos macro da empresa (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Controle distribuído e o PID na base",
+          "type": "text",
+          "body": "Sistemas Digitais de Controle Distribuído (SDCDs) compartilham organicamente o Nível 2 juntamente aos CLPs efetuando as ações essenciais ativas na automação (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum). Em toda pirâmide consistente a função ágil e direta do cálculo de PID ocorre estritamente na malha autônoma das bases sem pedir comando logístico da matriz (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum). Utilizar servidor RTDB independente em arquitetura extrai o peso da requisição de informações mantendo a agilidade de tempo de resposta intrínseca dos SDCDs (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s4",
+          "title": "ERP, MES e a norma ISA-95",
+          "type": "list",
+          "items": [
+            "O ERP consolida-se na camada executiva liderando as integrações referentes ao planejamento e gerenciamento amplos dos recursos organizacionais (Edge AI na Indústria)",
+            "A principal missão do Sistema de Execução da Manufatura (MES) consiste em gerenciar e oferecer rastreabilidade às dinâmicas do chão de fábrica (Edge AI na Indústria)",
+            "Conforme a norma que organiza as fábricas, a camada 3 hospeda tradicionalmente o domínio dos pacotes de softwares em rede focados em supervisão SCADA (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)",
+            "Níveis elevados contendo microprocessadores de otimização aplicam algoritmos demorados orientados a estabelecer políticas de rendimento e conservação energética (Marco Antônio Ribeiro - Kufunda.net)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Integração vertical, horizontal e Edge AI",
+          "type": "note",
+          "body": "A integração real orquestra a comunicação vertical entre as diferentes camadas com o intercâmbio horizontal focado em compartilhar dados comuns (Marco Antônio Ribeiro - Kufunda.net). A integração veloz entre ambientes de Tecnologia da Informação (TI) e ambientes operativos (TO) define os avanços interconectados vigentes nas plantas (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea). Sistemas formatados em Edge AI somam inteligência descentralizada complementando mas não suprimindo a base robusta de gestão MES padronizada pela ISA-95 (Edge AI na Indústria). Atenção: o elo entre redes de negócio (TI) e malhas ativas de máquinas (TO) acarreta forte ameaça por elevar severamente os riscos de invasão via internet (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A pirâmide de automação organiza a planta em camadas: a base (Nível 1) reúne sensores e atuadores em contato com o processo; o Nível 2 traz CLPs e SDCDs com o PID rodando na malha autônoma; o Nível 3 faz a supervisão via SCADA; e os níveis superiores tratam do gerenciamento da planta e do planejamento corporativo (CIM no topo). A ISA-95 estrutura essa hierarquia, com ERP no plano executivo e MES dando rastreabilidade ao chão de fábrica. A integração vertical e horizontal, somada ao Edge AI, complementa o MES, mas o elo TI/TO eleva os riscos de invasão."
+        }
+      ]
+    }
+  ]
+}

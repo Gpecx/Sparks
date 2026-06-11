@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NBRs Elétricas",
+  "moduleSubtitle": "NBR 5410, NBR 14039, NBR IEC 60439, NBR ISO 55000 e NBR 5462",
+  "moduleOrder": 4,
+  "trail": "NBR IEC 60439 (Conjuntos de Manobra e Controle)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que a NR-12 exige obrigatoriamente para as portas dos quadros e paineis de comando eletrico?",
+      "options": [
+        "Que fiquem permanentemente abertas para ventilacao.",
+        "Que possuam fechadura com chave entregue a qualquer operador.",
+        "Que sejam mantidas permanentemente fechadas.",
+        "Que sejam fabricadas exclusivamente em material acrilico."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 12.3.5 da NR-12 exige expressamente que os quadros de comando tenham porta de acesso permanentemente fechada.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o glossario da NR-10 define tecnicamente o envoltorio destinado a impedir contatos com partes energizadas de paineis?",
+      "options": [
+        "Obstaculo.",
+        "Bloqueio de zona.",
+        "Barreira.",
+        "Involucro."
+      ],
+      "correctIndex": 3,
+      "explanation": "O glossario da NR-10 define involucro como o envoltorio de partes energizadas destinado a impedir qualquer contato com partes internas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-10, e permitido utilizar compartimentos e involucros de equipamentos eletricos para guardar materiais?",
+      "options": [
+        "Nao, e expressamente proibido utiliza-los para armazenamento.",
+        "Sim, desde que os materiais sejam isolantes termicos.",
+        "Sim, apenas para guardar ferramentas de manutencao do painel.",
+        "Nao, salvo com autorizacao escrita do engenheiro chefe."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 10.4.4.1 da NR-10 proibe expressamente utilizar compartimentos e involucros de equipamentos eletricos para fins de armazenamento.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A NR-10 exige sinalizacao de seguranca em instalacoes eletricas. Nos paineis, qual cor deve indicar a posicao desligada de manobra?",
+      "options": [
+        "Amarelo.",
+        "Verde.",
+        "Azul.",
+        "Vermelho."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.3.9 alinea b da NR-10 especifica a indicacao de posicao Verde (D) para desligado e Vermelho (L) para ligado.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre na temperatura do centro de um arco eletrico devido a um curto-circuito em um barramento de media tensao, segundo o Guia de Protecao?",
+      "options": [
+        "Nao excede 1000 graus Celsius devido a blindagem.",
+        "Atinge no maximo 3000 graus Celsius.",
+        "Pode ultrapassar 10000 graus Celsius.",
+        "E controlada pela reatancia do ar a 500 graus Celsius."
+      ],
+      "correctIndex": 2,
+      "explanation": "A temperatura do arco pode ultrapassar em seu centro os 10000 graus Celsius.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Alem da identificacao dos circuitos, o que a NR-12 exige quanto a protecao dos componentes internos dos quadros eletricos contra o meio externo?",
+      "options": [
+        "Isolamento a vacuo dos barramentos principais.",
+        "Uso de ventilacao forcada em todos os paineis modulares.",
+        "Instalacao de resistores de aquecimento padrao europeu.",
+        "Grau de protecao adequado ao ambiente."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 12.3.5 alinea e da NR-12 exige especificamente que os quadros de comando tenham grau de protecao adequado ao ambiente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em conjuntos de manobra e maquinas, as protecoes moveis que dao acesso a zonas de perigo devem obrigatoriamente estar associadas a qual dispositivo?",
+      "options": [
+        "Dispositivos de intertravamento.",
+        "Rele de sobrecorrente termico.",
+        "Chaves faca manuais de grande porte.",
+        "Sinalizacao luminosa rotativa de alerta."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 12.5.6 da NR-12 determina que as protecoes moveis devem ser invariavelmente associadas a dispositivos de intertravamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A suportabilidade eletrodinamica dos barramentos em quadros eletricos caracteriza a resistencia a quais esforcos da rede?",
+      "options": [
+        "Esforcos termicos de sobrecarga permanente em kW.",
+        "Esforcos mecanicos durante curtos-circuitos em kA pico.",
+        "Esforcos dieletricos de sobretensoes de manobra em kV.",
+        "Esforcos termicos durante a partida de motores em HP."
+      ],
+      "correctIndex": 1,
+      "explanation": "A suportabilidade eletrodinamica e a resistencia mecanica aos esforcos fisicos do curto-circuito, expressa em kA pico.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No procedimento de bloqueio de paineis energizados (LOTO) exigido pela NR-12, quem deve possuir o dispositivo de bloqueio fisico?",
+      "options": [
+        "Apenas o engenheiro supervisor da fabrica local.",
+        "O tecnico de seguranca do trabalho encarregado do turno.",
+        "Cada trabalhador que execute a intervencao, de forma individual.",
+        "Somente o lider da equipe de manutencao eletrica industrial."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 12.11.5 da NR-12 exige que cada trabalhador executando intervencoes possua seu dispositivo de bloqueio individual e independente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em barramentos de subestacoes externas do tipo blindado em armarios (metal-clad), como a fonte descreve que e feita a protecao de massa-cuba do painel?",
+      "options": [
+        "O armario e aterrado em multiplos pontos para dividir a corrente de defeito.",
+        "Utiliza-se um rele direcional de potencia inversamente ligado a malha profunda.",
+        "O armario e conectado rigidamente ao neutro do transformador principal de forca.",
+        "O armario e isolado da terra exceto atraves do primario de um TC de medicao de fuga."
+      ],
+      "correctIndex": 3,
+      "explanation": "Na protecao de massa-cuba (carcaca) o armario e isolado da terra exceto atraves do primario de um TC que alimenta um rele de sobrecorrente.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A NR-12 permite a utilizacao de chaves tipo faca expostas nos circuitos eletricos de potencia e comando de paineis industriais.",
+      "correctAnswer": false,
+      "explanation": "O item 12.3.8 alinea b da NR-12 proibe expressamente a utilizacao de chaves tipo faca nos circuitos eletricos.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Diferente dos disjuntores, as chaves seccionadoras montadas em cabines de media tensao nao possuem a funcao de chaveamento de corrente em servico ou em condicao de falha.",
+      "correctAnswer": true,
+      "explanation": "A seccionadora tem funcao de isolacao, porem nao possui a funcao de chaveamento de corrente em servico ou curto-circuito.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As carcacas, involucros e blindagens de paineis de controle e CCMs podem dispensar o aterramento eletrico fisico caso operem inteiramente com tensao de seguranca extra baixa.",
+      "correctAnswer": false,
+      "explanation": "O item 12.3.2 da NR-12 exige o aterramento obrigatorio das carcacas, involucros e blindagens dos paineis.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para assegurar os procedimentos de manutencao corretos, a NR-10 exige a adocao de sinalizacao de seguranca especifica para travamentos e bloqueios de dispositivos de manobra em paineis.",
+      "correctAnswer": true,
+      "explanation": "O item 10.10.1 alinea b da NR-10 estabelece a obrigatoriedade de aplicar sinalizacao para travamentos e bloqueios de dispositivos e sistemas de manobra.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A suportabilidade termica de um barramento passivo de quadro de distribuicao e avaliada pelo componente aperiodico do curto-circuito, sendo expressa tecnicamente em kA de pico instantaneo.",
+      "correctAnswer": false,
+      "explanation": "A suportabilidade termica caracteriza o sobreaquecimento e e expressa em kA eficaz (nao pico) durante 1 a 5 segundos. O pico e usado para a eletrodinamica.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Visando resguardar a integridade em operacoes normais, a NR-12 exige que as protecoes moveis do painel ou maquina estejam obrigatoriamente associadas a dispositivos de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "intertravamento"
+        }
+      ],
+      "explanation": "O item 12.5.6 da NR-12 determina que protecoes moveis sejam sempre associadas a dispositivos de intertravamento de seguranca.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A NR-10 define no seu glossario que a condicao estrita que garante a nao energizacao de um circuito no painel, atraves de procedimentos fisicos apropriados, e o ____ de reenergizacao.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "impedimento"
+        }
+      ],
+      "explanation": "O glossario oficial da NR-10 define a acao critica da LOTO como o Impedimento de reenergizacao.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Um equipamento passivo como um barramento ou cabo dentro de um painel possui sua resistencia mecanica a severos esforcos de curto-circuito definida por sua suportabilidade ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "eletrodinâmica"
+        }
+      ],
+      "explanation": "A suportabilidade eletrodinamica, expressa em kA pico, avalia a resistencia mecanica aos esforcos da falha.",
+      "difficulty": "hard"
+    }
+  ]
+}

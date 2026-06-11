@@ -1,0 +1,190 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Proteção de Transformadores",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções específicas de transformadores",
+  "moduleOrder": 6,
+  "ebookTitle": "Proteção de Transformadores",
+  "ebookSubtitle": "Diferencial 87T, inrush, proteções mecânicas e térmicas do transformador de potência",
+  "estimatedMinutes": 70,
+  "trailFiles": [
+    "t01_fundamentos_transformadores.json",
+    "t02_aplicacoes_transformadores.json",
+    "t03_protecoes_transformadores.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — O Transformador e seus Modos de Falha",
+      "subtitle": "O que protegemos e contra o quê",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que o transformador é crítico",
+          "type": "text",
+          "body": "O transformador de potência é um dos equipamentos mais caros e mais críticos de uma subestação. Sua falha causa longa indisponibilidade (substituição leva meses), alto custo, e risco de incêndio com o óleo isolante. Proteger bem o transformador é proteger um ativo estratégico — por isso ele recebe um conjunto robusto de proteções elétricas e mecânicas, redundantes e complementares."
+        },
+        {
+          "id": "s2",
+          "title": "Modos de falha do transformador",
+          "type": "list",
+          "items": [
+            "Faltas internas entre espiras (curto entre espiras) — difíceis de detectar no início",
+            "Faltas fase-terra internas (no enrolamento ou nas buchas)",
+            "Faltas externas que impõem esforços (sobrecorrente passante)",
+            "Sobrecarga térmica — degradação do isolamento por aquecimento",
+            "Sobre-excitação (sobrefluxo) — tensão/frequência fora dos limites satura o núcleo",
+            "Falhas mecânicas (comutador de tap, vazamentos, deslocamento de enrolamento)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Proteções elétricas vs. mecânicas",
+          "type": "note",
+          "body": "O transformador tem dois grandes grupos de proteção complementares: as elétricas (diferencial, sobrecorrente, terra restrita), que respondem a grandezas elétricas medidas por TCs; e as mecânicas/térmicas (Buchholz, válvula de alívio, imagem térmica, temperatura do óleo e enrolamento), que respondem a fenômenos físicos internos (gás, pressão, calor). Os dois grupos pegam coisas diferentes — um curto entre poucas espiras pode gerar pouca corrente diferencial mas muito gás (detectado pelo Buchholz)."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O transformador é um ativo crítico (caro, longa reposição, risco de incêndio). Seus modos de falha incluem curto entre espiras, faltas à terra internas, sobrecarga, sobre-excitação e falhas mecânicas. A proteção combina dois grupos complementares — elétricas (via TCs) e mecânicas/térmicas (gás, pressão, calor) — que detectam fenômenos diferentes."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — A Proteção Diferencial 87T",
+      "subtitle": "A principal proteção elétrica",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O princípio aplicado ao transformador",
+          "type": "text",
+          "body": "A diferencial 87T compara a corrente que entra no transformador com a que sai, referidas a uma base comum. Em operação normal ou falta externa, elas se equilibram (corrente diferencial ~0); numa falta interna, o equilíbrio se rompe e a 87T atua instantaneamente. É a proteção mais seletiva, pois só responde a faltas dentro da zona delimitada pelos TCs dos dois lados."
+        },
+        {
+          "id": "s2",
+          "title": "Os desafios próprios do transformador",
+          "type": "list",
+          "items": [
+            "Defasagem angular (grupo vetorial, ex.: Dyn11 = 30°) — exige compensação",
+            "Relações de TC diferentes nos dois lados — exigem ajuste de coeficientes de balanço",
+            "Corrente de inrush de magnetização na energização — gera diferencial sem falta",
+            "Sobre-excitação — gera 5ª harmônica e corrente diferencial",
+            "Comutador de tap sob carga (OLTC) — varia a relação e gera pequena diferencial"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Compensação de defasagem e balanço",
+          "type": "note",
+          "body": "Nos relés numéricos, a compensação da defasagem do grupo vetorial e das relações de TC é feita por software, configurando o grupo vetorial e as correntes nominais de cada lado. Nos relés antigos, isso era feito pela ligação física dos TCs (delta de um lado, estrela do outro). A calculadora de Balanço Diferencial (87T) do SPARK ajuda a calcular os coeficientes de balanço que equilibram as correntes secundárias dos dois lados."
+        },
+        {
+          "id": "s4",
+          "title": "Bloqueio por harmônicas",
+          "type": "text",
+          "body": "Para distinguir uma falta interna de fenômenos que geram diferencial sem falta, a 87T usa o conteúdo harmônico: a corrente de inrush de magnetização é rica em 2ª harmônica, e a sobre-excitação em 5ª harmônica. O relé bloqueia (ou restringe) a operação quando detecta essas harmônicas acima de um limite, evitando trip indevido na energização ou em sobretensão. Uma falta interna real tem corrente predominantemente fundamental, sem essas harmônicas — e a 87T opera."
+        },
+        {
+          "id": "s5",
+          "title": "Característica de restrição (slope)",
+          "type": "formula",
+          "formula": "I_dif > slope × I_restrição (slope tipicamente 20-40%, com 2 inclinações)",
+          "explanation": "A característica percentual estabiliza a 87T contra erros de TC (saturação, OLTC) em faltas externas severas. O slope cresce a corrente diferencial necessária para operar conforme a corrente passante. Usa-se frequentemente uma característica de dupla inclinação: mais sensível em correntes baixas, mais estável em correntes altas (onde a saturação de TC é provável)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A 87T compara correntes de entrada e saída, atuando instantânea e seletivamente em faltas internas. Seus desafios — defasagem do grupo vetorial, relações de TC diferentes, inrush e sobre-excitação — são tratados por compensação (software/balanço), bloqueio por 2ª/5ª harmônica e característica de slope. É a principal proteção elétrica do transformador."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Proteções Mecânicas e Térmicas",
+      "subtitle": "Detectando o que a elétrica não vê",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Relé Buchholz (63)",
+          "type": "text",
+          "body": "O relé Buchholz é instalado na tubulação entre o tanque do transformador e o conservador de óleo. Ele detecta a formação de gás — produto da decomposição do óleo e do isolamento por arcos e aquecimento internos. Uma falta incipiente (curto entre poucas espiras) gera gás lentamente: o Buchholz acumula esse gás e emite alarme. Uma falta severa gera um surto de óleo/gás que aciona o trip. O Buchholz detecta faltas internas mesmo quando a corrente é pequena demais para a diferencial — é uma proteção complementar valiosíssima."
+        },
+        {
+          "id": "s2",
+          "title": "Proteções térmicas e de pressão",
+          "type": "list",
+          "items": [
+            "Imagem térmica (49) — estima a temperatura do enrolamento a partir da corrente e da temperatura do óleo",
+            "Termômetros de óleo e de enrolamento — medem a temperatura real, com estágios de alarme e trip",
+            "Válvula de alívio de pressão (sudden pressure) — alivia/sinaliza sobrepressão súbita de uma falta interna",
+            "Detector de nível de óleo — alarma vazamentos",
+            "Proteção do comutador de tap sob carga (OLTC) — Buchholz próprio do compartimento do comutador"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A importância da redundância",
+          "type": "note",
+          "body": "As proteções mecânicas (Buchholz, sudden pressure) são independentes das elétricas e dos TCs — funcionam por fenômenos físicos. Essa independência é deliberada: se houver uma falha na cadeia elétrica (TC, fiação, relé), as mecânicas ainda protegem, e vice-versa. Para um ativo tão crítico, essa redundância de princípios diferentes é uma camada de segurança essencial. Um curto entre espiras que a diferencial mal detecta é claramente visto pelo Buchholz."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As proteções mecânicas/térmicas complementam as elétricas: o Buchholz (63) detecta gás de faltas incipientes (que a diferencial mal vê), a imagem térmica e termômetros cuidam da sobrecarga, e a válvula de alívio responde à sobrepressão súbita. Sendo independentes dos TCs, oferecem redundância de princípio físico — essencial para um ativo tão crítico."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Proteções de Sobrecorrente e o Conjunto Completo",
+      "subtitle": "Backup e proteção de terra",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Sobrecorrente como retaguarda",
+          "type": "text",
+          "body": "Além da diferencial, o transformador tem proteções de sobrecorrente (50/51 e 50N/51N) em um ou ambos os lados, funcionando como retaguarda da 87T e como proteção contra faltas externas não eliminadas pela proteção a jusante. O ajuste deve coordenar com as proteções dos alimentadores (jusante) e ficar abaixo da curva de dano do transformador (a curva ANSI de suportabilidade)."
+        },
+        {
+          "id": "s2",
+          "title": "Terra restrita (REF — 64REF)",
+          "type": "text",
+          "body": "A proteção de terra restrita (Restricted Earth Fault) é uma diferencial de terra sensível para o enrolamento aterrado em estrela. Ela compara a corrente de neutro do enrolamento com a corrente residual das três fases. Em falta externa à terra, elas se equilibram; em falta interna à terra (mesmo próxima ao neutro, onde a tensão e a corrente são baixas), aparece desequilíbrio. A REF detecta faltas à terra internas que a diferencial de fase e a sobrecorrente de neutro não conseguem ver com sensibilidade suficiente."
+        },
+        {
+          "id": "s3",
+          "title": "O conjunto típico de proteção de um transformador de potência",
+          "type": "list",
+          "items": [
+            "87T — diferencial (proteção principal)",
+            "64REF — terra restrita (faltas à terra internas)",
+            "50/51 e 50N/51N — sobrecorrente de fase e neutro (retaguarda e faltas externas)",
+            "49 — imagem térmica (sobrecarga)",
+            "63 — Buchholz e sudden pressure (mecânicas)",
+            "Termômetros de óleo e enrolamento (alarme e trip por temperatura)",
+            "24 — sobre-excitação (V/Hz), em transformadores próximos a geração"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A sobrecorrente (50/51, 50N/51N) faz retaguarda à 87T e protege contra faltas externas, coordenada com jusante e abaixo da curva de dano. A terra restrita (64REF) detecta faltas à terra internas com alta sensibilidade. O conjunto completo do transformador une 87T, 64REF, sobrecorrente, imagem térmica, Buchholz/sudden pressure e termômetros — proteções elétricas e mecânicas redundantes para um ativo crítico."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Normas IEEE para Estudos",
+  "moduleSubtitle": "IEEE Color Books, C37, 1584 (Arc Flash) e 519",
+  "moduleOrder": 4,
+  "trail": "IEEE C37 (Disjuntores e Fusíveis)",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual norma IEEE C37 estabelece a estrutura de classificacao para disjuntores de alta tensao baseada em corrente simetrica?",
+      "options": [
+        "IEEE C37.04",
+        "IEEE C37.5",
+        "IEEE C37.13",
+        "IEEE C37.2"
+      ],
+      "correctIndex": 0,
+      "explanation": "A norma IEEE C37.04 foca nos criterios de classificacao para disjuntores operando em corrente alternada baseados restritamente na corrente simetrica eficaz.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A norma ANSI IEEE C37.5 orienta o calculo de correntes de falta para disjuntores de alta tensao classificados sob qual base primaria?",
+      "options": [
+        "Corrente simetrica pura alternada.",
+        "Corrente de base total com assimetria absorvida.",
+        "Potencia reativa maxima de interrupcao oscilante.",
+        "Fator restritivo de tensao constante polarizada."
+      ],
+      "correctIndex": 1,
+      "explanation": "O padrao da serie C37.5 atua como guia primordial orientando calculos de correntes de falta para disjuntores estruturados na antiquada base de corrente total.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A norma de projeto IEEE C37.2 e amplamente reconhecida e utilizada em projetos eletricos industriais para padronizar qual atributo fundamental?",
+      "options": [
+        "O dimensionamento exato das isolacoes de condutores de aterramento subterraneos.",
+        "A numeracao padrao unificada e os codigos de funcoes dos dispositivos eletricos.",
+        "A integral térmica capacitiva para o esforco disruptivo das manobras das chaves secas.",
+        "A atenuacao correta e calculada do fator c de tensao da fonte theveniniana pre falta."
+      ],
+      "correctIndex": 1,
+      "explanation": "A normativa C37.2 e responsavel por criar e consolidar os numeros e descricoes das funcoes padronizadas como rele 50, 51 e 87 integrados mundialmente em plantas de energia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas avaliacoes operacionais das normas C37, qual grandeza estabelece precisamente a capacidade de fechamento e travamento mecânico das chaves de.",
+      "options": [
+        "A parcela da integral continua aferida termicamente da corrente de curto no primeiro segundo temporal.",
+        "A afericao exclusiva computada sobre o valor eficaz puro da porcao simetrica de quebra na abertura total.",
+        "A metrica extrema impulsionada avaliando o maior e absoluto valor instantaneo transitorio suportado ao fechar.",
+        "A circulacao exata estatica restrita inerente das correntes unidirecionais das manobras isoladas magnéticas."
+      ],
+      "correctIndex": 2,
+      "explanation": "O cume de forca exigida para suportar repulsões sem estragos atesta a vital competência do contato fechar com seguranca exposto as assimetrias no primeiro instante transiente de tracionamento mecanico resistivo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual codificacao oriunda da respectiva serie de regulamentacao da classe IEEE C37 aborda e delimita aplicacoes atreladas unicamente aos limitadores.",
+      "options": [
+        "IEEE C37.2",
+        "IEEE C37.41",
+        "IEEE C37.010",
+        "IEEE C37.13"
+      ],
+      "correctIndex": 3,
+      "explanation": "O escopo pre-definido alocado nos indexadores destina inteiramente a codificacao e detalhamento descritivos atrelados aos modernos e convencionais disjuntores e seccionadoras montados em quadros formatados de baixa tensao industrial diretamente e isoladamente na norma C37.13 catalogada nas bibliografias aplicadas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No trato rigoroso voltado aos requisitos primordiais as severas prescricoes documentais e normativas impostas na IEEE C37.41 estabelecem.",
+      "options": [
+        "Os importantes conjuntos blindados contendo as chaves fusiveis de manobra as unificadas seccionadoras do ramal.",
+        "Os avancados blocos de reles logicos operantes atuando distanciados das centrais nas redes tele-operadas.",
+        "As imponentes torres dotadas unicamente de conjuntos de chaves compensadoras das correntes magnetizantes passivas e cegas.",
+        "As pesadas baterias isoladas retificadas armazenadoras das tensoes estacionarias continuas dos geradores cilindricos primários."
+      ],
+      "correctIndex": 0,
+      "explanation": "As premissas consolidadas regendo o conjunto padronizador focado nos limites isoladores disruptivos da numeracao documentada em 41 abrangem as exigencias aplicadas testificando fisicamente e assegurando chaves fusíveis sub-sistemas aereos os respectivos suportes operantes montados singelos com seus conectivos operacionais.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Conforme delineado metodologicamente e imposto pelos guias dos estudos computacionais baseados perante orientacoes estritas do regimento pratico.",
+      "options": [
+        "Extrair precisamente a energia consumida aquecendo a blindagem e fundindo os terminais termicos das barras de forca dispostas limitando os tempos de disparo base longos e retardados da unidade numerica acoplada no trafo principal interligado ativamente.",
+        "Consolidar as exatas pre-analises assegurando as apuracoes do esforco repulsivo apurado garantindo a validacao das exatas correntes instantâneas originárias vitais limitando os impulsivos fatores de crista mecanicos assinalados nas rupturas de acoplamento primários dinâmicos da chave.",
+        "Atestar sem as oscilacoes de ruidos puros estaticos as correntes puras embutindo decaimentos exponenciais de inercia estabilizando todo e qualquer conjunto motriz intermitente passivo e compensador sincrono transitorio do fluxo de baixa carga.",
+        "Reduzir gradativamente ignorando as porções unidirecionais das energias de sequencia mutua embutida nas fases das correntes equilibrando unicamente os harmonicos parasitas residuais passivos sem afetar a avaliacao mecânica das tracoes passantes."
+      ],
+      "correctIndex": 1,
+      "explanation": "As redes processadas nas exigências focadas na fracao estrita temporizada inicial verificam grandezas altissimas assimétricas do cume ou apíce da irrupção visando amparar se a montagem tem suporte trativo repulsivo mecanico admissível resistindo tração balistica submetida violentamente as alavancas do elemento físico comutador.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos indexadores balizadores tabulados delineando os criterios dos disjuntores da industria enquadrados pela IEEE na faixa das tensões.",
+      "options": [
+        "O encurtamento fixado temporal das correntes dissipativas estaticas nas unidades extintoras da camera resfriada impedindo atrito e prolongando tempos operativos nominais decrescentes em conjunto com atuacoes logicas simultaneas protetivas pre dimensionadas ajustantes.",
+        "O amortecimento das distorcoes reativas originarias das altas frequencias da magnetizacao passiva intercorrentes reduzindo proporcionalmente o gradiente transitorio da tensao continua nos terminais retificados sem afetar chaves ou condutores atrelados diretamente adjacentes das areas de controle da geradora.",
+        "A avaliacao e expansao permitida da ampliacao suportavel de quebra interrruptiva simetrica em condicao onde a alimentacao exigida do equipamento decresce aquem estabilizando nos limites pre-dimensionados da alta voltagem isolada original fabril padronizada basica da concessionaria interligada ativa radial limitando rupturas operacionais do suprimento local.",
+        "As fracoes termicas relativas absorvidas adiabaticas somadas pelo desgaste calorico da sobretemperatura toleravel das armaduras dissipadas dos condutores de aterramentos de isolamento seco expurgadas nas malhas submersas confinando transicoes e comutacoes bruscas continuas simetricas atenuadas em barramentos sub-equipados em limites rasos operantes."
+      ],
+      "correctIndex": 2,
+      "explanation": "O parametro multiplicador logico inserido designado como K rege e reflete matematicamente os acrecimos suportáveis autorizados de desempenho de sobrecorrente transitoria aceita nos arranjos de quebra em interrupção quando a máquina isolante distribuidora esta temporariamente ligada limitando sua atuacao nas medias de variacao suportável tensionais minimizadas de fabrica contidas nas tabelas dos guias.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Com fulcro nos intrincados delineamentos procedimentais da normatizacao estruturante analitica das rupturas de interrupcao de projeto de curto.",
+      "options": [
+        "O laco compensador refletindo equivalencias parasitas transientes espelhadas capacitivas do aterramento direto.",
+        "A intrinseca e balizadora malha definidora estipulando relacoes vetoriais relativas de reatancia sobre resistencia extraidas pontualmente e estritamente atreladas a fronteira theveniniana correspondente ao local da falta disruptiva passante operante tracionadora destrutiva em falha analitica extrema basica de calculos simuladores restritos puros do diagrama avaliado isolado central das plantas supridas emalhadas.",
+        "O quociente puramente de transformacao magnetica passiva originario das matrizes defasadoras e atenuadoras das indutancias das bobinas isolantes atreladas subjacentes das medições dos TCs das linhas passivas.",
+        "A limitacao das derivacoes logicas oriundas exclusivamente dos transitorios harmônicos múltiplos ativados estabilizadores presentes irradiados sobre as tensoes de fonte estatica parasita oscilante estabilizada das cargas lineares passivas submetidas atenuantes termicas."
+      ],
+      "correctIndex": 1,
+      "explanation": "No rigor logico processual imposto normativamente as margens multiplicadoras corretivas adicionadas aos apices das correntes estipulam a assimetria absorvida restritamente baseadas e vinculadas atenuantes nas proporcoes exatas oriundas do cruzamento nodal resistivo perante as impedâncias das linhas ou arranjos da razao fundamental global e matriz das associacoes de reatancia sob resistência originada na malha geradora ate a ponte do defeito transiente transcorrida apurada.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos imponentes cadernos de certificacoes listando e descrevendo tabelas padronizadas relativas as suportabilidades pre fixadas garantidoras.",
+      "options": [
+        "Os multiplicadores puramente aditivos absorvendo tensoes submetidas 3.0 limitadas das correntes simetricas submetidas atenuantes termicas originárias dos harmonicos passivos irradiados dos paineis restritivos radiais submetidos passivos das malhas defasadoras geradoras primárias das bases cegas industriais.",
+        "A imposicao de valores de sobrecargas continuas atreladas a constantes termicas oscilando limitantes operantes nos modulos isolados absorvidos contendo 1.5 acrescidos atenuados linearmente nos intervalos assimetricos da frequencia oscilatoria dos reles eletronicos estáticos das proteções redundantes submetidas ativas radiadas das malhas cegas radiais.",
+        "As fracoes limitadas baseadas da fracao estatica absorvidas com 1.2 atenuantes radiais espelhados contendo tensoes mutuas oscilatorias restritivas transitorias das operacoes ativas de quebra contidas nos intertravamentos subtransitorios reativos das malhas fechadas isoladas.",
+        "A adicao imperativa formatando a capacidade requerida ancorada usando a constante definida atinente exata fixada correspondente aos exatos 2.7 multiplicados do fator balizador estrito aplicavel da respectiva e exigida tolerancia base operante avaliada da respectiva corrente termica passante contínua da quebra isoladora referenciada apurada nos simuladores de curtos base padrao referenciados das chaves atuadoras estaticas de montante primárias submetidas restritamente."
+      ],
+      "correctIndex": 3,
+      "explanation": "O parametro mandatorio pre estabelecido balizador referenciando e limitando as operacoes das tensoes nos guias americanos de projetos da avaliacao de disjuntores atesta o imperioso cume atrelado estritamente multiplicando e alavancando 2.7K vezes o indice asssimetrico inicial maximo crista originario referenciado pela apurada e estimada simetrica de rotina garantindo imunidade de repulsão atritante e destrutiva contida nas partes metalicas condutoras sob fechamento das lamelas em curto cirtuito pleno.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A vasta coletanea internacional balizadora referenciada nas bibliografias unificadoras como familia das normatizacoes formatadoras do padrao IEEE.",
+      "correctAnswer": true,
+      "explanation": "A documentacao tecnica compila e solidifica com exclusividade os limites estritos formatando bases aceitaveis testificadas e balizadoras referenciadas operantes nas homologacoes estritas direcionando selecoes avaliativas atreladas universalmente nas operacoes primarias vitais dos aparelhos estaticos dinamicos repulsivos que compoem malhas e restricoes dos curtos abrangendo dos disjuntores a retaguarda dos fusiveis expurgadores passantes unifilares das malhas vitais.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As orientacoes diretivas expostas norteando o avaliador nos intrincados calculos abordados contidos internamente nos guias da secao documentada e.",
+      "correctAnswer": false,
+      "explanation": "O manual ou caderno foca indubitavelmente e prescreve compulsoriamente aos engenheiros todos preceitos orientadores das diretrizes atreladas balizadoras eficientes regendo sem restricoes os amplos calculos operantes abrangentes voltados apurando com esmero e confianca as severas oscilacoes originadas nas violentas magnitudes relativas aos curtos asssimetricos e estaticos de interrupcao e estabelecimento operacionais de rotina orientando plenamente a determinacao e homologacao estruturante trativa dos quadros alavancadores dinamicos do sistema disjuntor de alta atrelado ativo no arranjo nao focando exclusivamente em estados a vazio ociosos magnetizantes inoperantes.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O apurado levantamento documentado garantidor atestando sem surpresas a suportabilidade estrita associada das operacoes dinamicas alavancadoras.",
+      "correctAnswer": true,
+      "explanation": "O limite avaliativo pre condicionante trativo de restabelecimento atrelado indica e comprova em laudo fisico irrefutavel que o contatores alavancadores mecanicos internos tem constituicao impeditiva massiva suficiente rechaçando sem empenos nem destruicao trativa as impetuosas agressoes magneticas assinaladas submetidas na mola irradiadas pelas forcas repulsivas indutivas formadas brutalmente defasadas atreladas unicamente ao cume maximo crista defasador balizador injetado do curtissimo e imediato pico inicial avaliado das correntes preexistentes ou instaladas irradiadas de falta estrita de pre ignicao sem atenuacoes temporizadas amortecedoras protetoras limitantes transitorias.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O limiar calorico destrutivo documentado avaliando o limite padronizador operacional restritivo exposto como capacidade toleravel nominal pre.",
+      "correctAnswer": true,
+      "explanation": "A capacidade operativa calorica e termicamente limitada descrita balizadora referenciada por tempo transitorio atesta fisicamente e valida precondicionante o poder de escoamento trativo sem avarias e perdas integridade do isolamento reativo em virtude das injecoes submetidas acumulativas calóricas dissipadas na ligacao fechada avaliando e restringindo sem fadigamentos dobras ou rupturas as longas ou demoradas latências toleradas antes da chave final abrir interrompendo as integracoes do quadrado de energia de defeito simuladas nas malhas radiadas subjacentes das plantas e chaves avaliadas transientes toleraveis contidas.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o estrito e meticuloso processamento iterativo exarado processando as matrizes aplicadas e computadas subjacentes alocadas simulando a.",
+      "correctAnswer": false,
+      "explanation": "O calculo de interrompimento e atenuacao e substancialmente isolado independente em rotina separada decaindo os patamares da simulacao do pico primeiro crista pois na interrupcao retardada decaimentos das usinas estatoricas ocorrem mitigando correntes mudando impedancias da matriz de arranjo passando componentes subtransitorios a transitorios baseados na dissipacao motriz em milesimos dependentes ou ignorando as tensoes de inducao das malhas menores defasadas ativas extinguindo-as ou minimizando-as diferenciando brutalmente a formacao das duas correntes apuradas garantindo exatidao realista.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No trato rigoroso referenciador avaliativo contido alocando seguranca dos intertravamentos protetores a designacao numeral codificada mundialmente ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "2"
+        }
+      ],
+      "explanation": "A normativa pre estabelecida codificadora unificada contida na terminologia estruturadora padrao 2 estabelece as famosas funcoes logicas numéricas de bloqueio interrupção restritivas garantidoras operacionais padronizadas como por exemplo rele 50 ou 87 e seccionadoras estaticas padronizando universalmente os diagramas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O valioso guia atestado base balizador restritivo de certificacoes documentadas norteando avaliacoes logicas transientes referenciado e codificado ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "simetrica"
+        }
+      ],
+      "explanation": "O marco normatizador fixado na resolucao e adocao das chaves na industria atual impôs como base consolidada pura eficaz o componente estavel das correntes isentas da assimetria fugaz como a grandeza balizadora referenciada primária suprimindo a base de corrente total usada em testes defasados.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nas apuracoes logicas atreladas a elaboracao minuciosa da avaliacao de escolhas parametrizando o laco de projeto e especificacao tecnica ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "K"
+        }
+      ],
+      "explanation": "O coeficiente reativo operativo referenciado de voltage range ou estritamente Fator K atrelado a tensao nominal norteia as modificacoes e os decrescimos operacionais avaliativos multiplicativos pre condicionando a capacidade interruptiva crista balizadora atrelada absorvida limitante contida operante reativa quando a chave forjada para atuacao da maxima atenuada na tensao topo superior for forçada operando na rede intermitente local e menor avaliativa pre condicionante estipulando limites toleraveis pre fixados transitorios seguros em tabelas restritivas garantidoras de vida util balizadoras de fabricantes padrao.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "category": "Comissionamento SPCS",
+  "categorySubtitle": "Metodologia, Ensaios de Relés, Testes Funcionais e IEC 61850",
+  "categoryOrder": 9,
+  "module": "Metodologia de Comissionamento",
+  "moduleSubtitle": "Conceitos, Etapas e Documentação de Comissionamento",
+  "moduleOrder": 0,
+  "ebookTitle": "Metodologia de Comissionamento de SPCS",
+  "ebookSubtitle": "Do planejamento ao relatório: FAT, SAT, checklists e a entrega de um sistema confiável",
+  "estimatedMinutes": 80,
+  "trailFiles": [
+    "t01_fundamentos_comissionamento.json",
+    "t02_aplicacoes_spcs.json",
+    "t03_implementacao_metodologia.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — O que é Comissionamento e por que importa",
+      "subtitle": "Garantir que o sistema faz o que foi projetado para fazer",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Definição de comissionamento",
+          "type": "text",
+          "body": "Comissionamento é o processo sistemático de verificar, testar e documentar que uma instalação foi montada, ajustada e funciona conforme o projeto e os requisitos do cliente, antes de entrar em operação comercial. Em sistemas de proteção, controle e supervisão (SPCS), o comissionamento é especialmente crítico: um erro de fiação, de ajuste ou de lógica que passe despercebido pode resultar em falha de proteção numa falta real — exatamente quando o sistema mais precisa funcionar. Comissionar bem é a diferença entre um sistema que protege e um que apenas parece proteger."
+        },
+        {
+          "id": "s2",
+          "title": "Por que SPCS exige comissionamento rigoroso",
+          "type": "list",
+          "items": [
+            "A proteção só atua em condições raras (faltas) — defeitos latentes ficam invisíveis até o evento",
+            "Um único fio invertido pode anular uma proteção diferencial ou direcional",
+            "Ajustes incorretos causam atuação indevida (perda de continuidade) ou falha de atuação (dano)",
+            "Lógicas de intertravamento mal implementadas podem impedir manobras ou causar acidentes",
+            "A integração de múltiplos fornecedores (relés, RTU, SCADA) cria pontos de falha nas interfaces"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Comissionamento não é 'ligar e ver se funciona'",
+          "type": "note",
+          "body": "Um erro comum é confundir comissionamento com energização. Energizar e ver que 'aparentemente está funcionando' não testa as proteções — elas só atuam em falta. O comissionamento correto simula as condições anormais (injeta correntes e tensões de falta, força lógicas) para verificar que cada função responde como projetada. É um processo de provar a proteção, não de assumi-la."
+        },
+        {
+          "id": "s4",
+          "title": "Os benefícios de um bom comissionamento",
+          "type": "list",
+          "items": [
+            "Detecta erros de projeto, montagem e ajuste antes da operação",
+            "Cria a documentação de referência (as-built) para toda a vida útil",
+            "Estabelece os valores de base para futuras manutenções e comparações",
+            "Reduz o tempo de partida e evita retrabalho caro com a planta operando",
+            "Garante a segurança das pessoas e a confiabilidade do sistema"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Comissionamento é verificar, testar e documentar que o sistema funciona conforme o projeto antes da operação. Em SPCS é crítico porque a proteção só atua em faltas raras — defeitos latentes ficam invisíveis. Comissionar não é energizar e observar, mas simular condições anormais para provar cada função. O resultado é segurança, confiabilidade e documentação para toda a vida útil."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — As Etapas do Comissionamento",
+      "subtitle": "Do projeto à operação assistida",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Visão geral do ciclo",
+          "type": "text",
+          "body": "O comissionamento não é um evento único, mas uma sequência de etapas que acompanham o projeto desde a fábrica até a operação. Cada etapa filtra erros progressivamente: o que não foi pego na fábrica deve ser pego no campo, antes da energização. Entender essa sequência evita que testes sejam pulados ou feitos fora de ordem — o que comprometeria a confiabilidade do resultado."
+        },
+        {
+          "id": "s2",
+          "title": "As etapas principais",
+          "type": "list",
+          "items": [
+            "Revisão de projeto — verificar diagramas, ajustes e especificações antes de fabricar/montar",
+            "FAT (Factory Acceptance Test) — testes na fábrica, antes do envio",
+            "Inspeção de recebimento — conferir o que chegou ao campo",
+            "Pré-comissionamento — verificações com o sistema desenergizado (fiação, isolação, continuidade)",
+            "Comissionamento (SAT — Site Acceptance Test) — testes funcionais no campo",
+            "Energização e testes em carga — verificações com o sistema energizado",
+            "Operação assistida — acompanhamento inicial da operação comercial"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Pré-comissionamento: a base de tudo",
+          "type": "text",
+          "body": "O pré-comissionamento, com o sistema desenergizado, é onde se verificam os fundamentos: a fiação corresponde aos diagramas (point-to-point), a resistência de isolamento dos cabos e enrolamentos está adequada (megômetro), a continuidade e a polaridade dos TCs/TPs estão corretas, os aterramentos estão conectados. Pular ou fazer mal essa etapa significa energizar com erros básicos não detectados — a causa raiz de muitos acidentes de comissionamento."
+        },
+        {
+          "id": "s4",
+          "title": "A ordem importa",
+          "type": "note",
+          "body": "As etapas têm uma ordem lógica que não deve ser violada: não se faz teste funcional antes de verificar a fiação; não se energiza antes de confirmar a isolação; não se aplica carga antes dos testes a vazio. Cada etapa pressupõe que a anterior foi concluída com sucesso. Comprimir prazos pulando etapas é a forma mais comum de transformar o comissionamento numa fonte de problemas em vez de uma garantia."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O comissionamento segue uma sequência: revisão de projeto → FAT → recebimento → pré-comissionamento (desenergizado) → SAT (funcional) → energização → operação assistida. O pré-comissionamento (fiação, isolação, polaridade de TC/TP) é a base que sustenta tudo. A ordem das etapas é lógica e não deve ser violada — cada uma pressupõe o sucesso da anterior."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — FAT e SAT",
+      "subtitle": "Testes de aceitação em fábrica e em campo",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "FAT — Factory Acceptance Test",
+          "type": "text",
+          "body": "O FAT é o teste de aceitação realizado na fábrica do fornecedor, antes do envio do equipamento ao campo. Seu objetivo é verificar, num ambiente controlado, que os painéis, relés e lógicas funcionam conforme a especificação — antes de gastar tempo e dinheiro transportando e instalando. Encontrar um erro no FAT custa uma fração do que custaria encontrá-lo no campo, com a obra parada. Um bom FAT testa a fiação interna, as funções de proteção, as lógicas, as interfaces de comunicação e a interface homem-máquina."
+        },
+        {
+          "id": "s2",
+          "title": "O que se testa no FAT",
+          "type": "list",
+          "items": [
+            "Inspeção visual e mecânica dos painéis (montagem, identificação, aperto)",
+            "Verificação da fiação interna contra os diagramas",
+            "Teste das funções de proteção com mala de teste (injeção secundária)",
+            "Teste das lógicas de intertravamento e sinalização",
+            "Teste das comunicações (protocolos, mapeamento de pontos)",
+            "Simulação da interface com o SCADA / sistema supervisório"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "SAT — Site Acceptance Test",
+          "type": "text",
+          "body": "O SAT é o teste de aceitação no local de instalação, após a montagem. Ele repete e complementa o FAT no ambiente real, agora com a fiação de campo (TCs, TPs, disjuntores reais) conectada. O SAT verifica o que o FAT não pode: a integração com os equipamentos primários, a fiação de campo, os aterramentos reais, e o funcionamento ponta a ponta. É no SAT que se confirma que o sistema completo — e não apenas o painel isolado — funciona."
+        },
+        {
+          "id": "s4",
+          "title": "FAT e SAT se complementam",
+          "type": "note",
+          "body": "Um erro de gestão é tratar FAT e SAT como redundantes e pular um deles. Eles testam coisas diferentes: o FAT valida o painel e as lógicas em ambiente controlado (onde é barato corrigir); o SAT valida a integração com o mundo real (onde só é possível testar no local). Um FAT rigoroso reduz drasticamente os problemas no SAT, encurtando o tempo de obra. Os dois juntos formam a rede de segurança completa."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O FAT testa o painel e as lógicas na fábrica (ambiente controlado, correção barata); o SAT testa a integração no campo, com TCs/TPs/disjuntores reais e fiação de campo. Não são redundantes — testam coisas diferentes e se complementam. Um FAT rigoroso encurta o SAT e a obra. Juntos, garantem que tanto o painel quanto o sistema completo funcionam."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Documentação e Checklists",
+      "subtitle": "O comissionamento que não é documentado não aconteceu",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que documentar tudo",
+          "type": "text",
+          "body": "No comissionamento, a documentação não é burocracia — é a evidência objetiva de que cada teste foi feito e aprovado. Um teste sem registro é, na prática, um teste que não aconteceu: não há como provar o resultado, comparar com futuras manutenções, ou rastrear a causa de um problema posterior. A documentação de comissionamento se torna a referência (baseline) para toda a vida útil do sistema."
+        },
+        {
+          "id": "s2",
+          "title": "Documentos típicos de comissionamento",
+          "type": "list",
+          "items": [
+            "Plano de comissionamento — escopo, sequência, responsáveis e cronograma",
+            "Checklists de inspeção e teste — por equipamento e por função",
+            "Folhas de teste de relés — valores ajustados, valores medidos, desvios e veredito",
+            "Registros de injeção (oscilografias dos testes)",
+            "Lista de pendências (punch list) — itens a corrigir e seu status",
+            "Relatório final de comissionamento e documentação as-built atualizada"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O checklist como ferramenta",
+          "type": "note",
+          "body": "O checklist transforma o conhecimento em processo repetível e à prova de esquecimento. Mesmo o técnico mais experiente pode pular um passo sob pressão de prazo — o checklist garante que nada seja esquecido. Um bom checklist de comissionamento é específico para o equipamento, segue a ordem lógica dos testes, e tem espaço para registrar o resultado de cada item (OK / não-OK / não-aplicável) e a assinatura do responsável."
+        },
+        {
+          "id": "s4",
+          "title": "A lista de pendências (punch list)",
+          "type": "text",
+          "body": "Raramente um comissionamento termina sem nenhuma pendência. A punch list registra cada item que precisa de correção, classificando-os por criticidade: pendências que impedem a operação (devem ser resolvidas antes da energização) e pendências menores (podem ser tratadas depois, sob acordo). Gerir a punch list com disciplina garante que nenhum problema seja esquecido e que a decisão de operar seja consciente dos riscos residuais."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Documentação é a evidência objetiva do comissionamento — um teste sem registro não aconteceu, e os registros viram a referência para toda a vida útil. Os documentos-chave são o plano, os checklists, as folhas de teste de relés, os registros de injeção, a punch list e o relatório final com as-built. O checklist garante repetibilidade; a punch list garante que nenhuma pendência seja esquecida."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Comissionamento na Prática de SPCS",
+      "subtitle": "Aplicando a metodologia",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O comissionamento de uma proteção típica",
+          "type": "text",
+          "body": "Comissionar uma função de proteção segue um fluxo lógico: confere-se a parametrização do relé contra a folha de ajustes; verifica-se a fiação e a polaridade dos TCs/TPs; injeta-se corrente/tensão com a mala de teste para confirmar pickup e tempo de atuação; verifica-se o comando de trip ao disjuntor; e testa-se a lógica e a sinalização. Cada passo é registrado. Ao final, tem-se a prova de que aquela proteção fará exatamente o que dela se espera numa falta real."
+        },
+        {
+          "id": "s2",
+          "title": "Erros comuns evitados pelo comissionamento",
+          "type": "list",
+          "items": [
+            "TC com polaridade invertida (anula diferencial/direcional)",
+            "Ajuste digitado errado (vírgula, unidade, escala)",
+            "Fio trocado entre fases ou entre funções",
+            "Lógica de trip apontando para o disjuntor errado",
+            "Comunicação com pontos mapeados incorretamente no SCADA",
+            "Aterramento de TC ausente ou em ponto errado"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A mentalidade do comissionador",
+          "type": "note",
+          "body": "O bom comissionador é metódico e cético: não assume que algo está certo só porque deveria estar. Ele testa, mede, compara com o esperado e registra. Essa postura — provar em vez de presumir — é o que captura os erros sutis que, do contrário, ficariam latentes até causar um acidente ou uma falha de proteção. A disciplina do comissionamento é, no fundo, uma cultura de qualidade aplicada à segurança."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Comissionar uma proteção é conferir ajuste, fiação e polaridade, injetar para confirmar pickup/tempo, verificar trip e lógica — tudo registrado. Esse processo captura erros clássicos (TC invertido, ajuste errado, fio trocado, lógica equivocada). A mentalidade é provar, não presumir. A metodologia de comissionamento — etapas, FAT/SAT, documentação e disciplina — é o que garante que o SPCS entregue protege de verdade."
+        }
+      ]
+    }
+  ]
+}

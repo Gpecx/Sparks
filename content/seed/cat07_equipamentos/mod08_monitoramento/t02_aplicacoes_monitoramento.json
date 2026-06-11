@@ -1,0 +1,218 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Monitoramento SPCS",
+  "moduleSubtitle": "Automonitoração, supervisão de trip e diagnóstico",
+  "moduleOrder": 7,
+  "trail": "Aplicações em SPCS (PMUs, Sincrofasores, QE, IIoT)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que a funcao ANSI 60 (supervisao de queima de fusiveis de TP) bloqueia ao detectar perda de potencial?",
+      "options": [
+        "Funcoes de protecao dependentes de tensao (ex: 21, 32, 40).",
+        "O circuito de fechamento do disjuntor.",
+        "Apenas a medicao local de corrente.",
+        "A atuacao do rele diferencial do gerador."
+      ],
+      "correctIndex": 0,
+      "explanation": "Bloqueia protecoes que usam tensao para evitar atuacoes indevidas ou falsas operacoes. (Fonte: ed58_fasc_protecao_capXI).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a acao imediata do IED ao identificar falha de comunicacao com a Unidade Central via fibra optica?",
+      "options": [
+        "Envia comando de trip tripolar ao disjuntor.",
+        "Emite um alarme de falha de comunicacao e pode bloquear a protecao.",
+        "Aumenta a tensao no barramento para compensar perdas.",
+        "Reinicia o sincronismo do GPS de forma autonoma."
+      ],
+      "correctIndex": 1,
+      "explanation": "A falha de link gera alarme visual e bloqueio preventivo de seguranca. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o monitoramento da condicao do disjuntor estima o desgaste dos contatos principais (Breaker Wear Monitor)?",
+      "options": [
+        "Pela variacao termica da bobina de trip.",
+        "Pela medicao do gas isolante SF6.",
+        "Pelo acumulo de correntes de curto-circuito interrompidas.",
+        "Pelo tempo de recarga da mola de fechamento."
+      ],
+      "correctIndex": 2,
+      "explanation": "O IED avalia o desgaste calculando a soma das correntes de curto acumuladas e interrompidas pelo disjuntor. (Fonte: Guia Protecao 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a utilidade pratica de enviar os alarmes e relatorios de status do IED para o sistema SCADA?",
+      "options": [
+        "Substituir a necessidade de chaves seccionadoras manuais no patio.",
+        "Eliminar o uso do banco de baterias em corrente continua.",
+        "Aumentar a corrente de curto-circuito na barra da subestacao.",
+        "Permitir analise remota e manutencao preditiva, reduzindo idas a campo."
+      ],
+      "correctIndex": 3,
+      "explanation": "A aquisicao remota de dados agiliza o diagnostico e apoia a manutencao baseada na condicao real do equipamento. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a funcao de supervisao do circuito de trip (ANSI 74TC) garante em uma instalacao eletrica?",
+      "options": [
+        "A indicacao de que a fiacao da bobina de abertura do disjuntor esta integra e pronta para operar.",
+        "A presenca de gas SF6 nos polos da chave seccionadora.",
+        "A recarga das baterias estacionarias da subestacao.",
+        "A medicao correta da potencia ativa reversa do gerador."
+      ],
+      "correctIndex": 0,
+      "explanation": "Monitora permanentemente o circuito de disparo para garantir que o disjuntor podera abrir quando solicitado pela protecao. (Fonte: Guia Protecao 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o IED reage diante da perda severa da alimentacao auxiliar de corrente continua?",
+      "options": [
+        "Atua as protecoes de sobrecorrente em modo de emergencia.",
+        "Emite alarme de falha de suprimento e memoriza o ultimo estado dos equipamentos.",
+        "Desliga o barramento acionando trip por subtensao AC.",
+        "Transfere o controle operacional para os TPs capacitivos locais."
+      ],
+      "correctIndex": 1,
+      "explanation": "Em falha de tensao auxiliar (DC fail), um alarme e emitido e os ultimos estados das chaves sao memorizados por seguranca. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o procedimento do sistema de monitoramento de disjuntor caso detecte discordancia de polos ou posicao invalida da chave?",
+      "options": [
+        "Forca o fechamento mecanico das tres fases simultaneamente.",
+        "Reduz a corrente de magnetizacao do transformador principal.",
+        "Bloqueia manobras e emite alarme de falha de posicao ou anomalia mecanica.",
+        "Aplica corrente continua inversamente nas bobinas de abertura."
+      ],
+      "correctIndex": 2,
+      "explanation": "O monitoramento gera alarme de anomalia mecanica e impede operacoes indevidas (Isolator position faulty). (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as mensagens GOOSE sao validadas nas entradas do IED para evitar operacoes indevidas causadas por ruidos?",
+      "options": [
+        "Isolando galvanicamente a malha externa de alta tensao.",
+        "Usando conversores eletromecanicos limitadores de 60 Hz.",
+        "Injetando corrente contínua pura nas fibras da rede Ethernet.",
+        "Filtrando o sinal com o tempo de debounce ajustavel para confirmar o status real."
+      ],
+      "correctIndex": 3,
+      "explanation": "Filtros para entradas binarias e GOOSE utilizam temporizacao de debounce para evitar falsos alarmes por transientes. (Fonte: Ensaio de Reles Avancado).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Se a automonitoracao do IED detectar uma falha grave de hardware interno, qual e a acao imediata fail-safe?",
+      "options": [
+        "O rele bloqueia suas operacoes e emite alarme de falha de equipamento.",
+        "O rele dispara todos os disjuntores ativando a protecao diferencial.",
+        "O rele inverte o fluxo de potencia ativa global da subestacao.",
+        "O rele altera sua programacao para curvas de tempo extremamente inversas."
+      ],
+      "correctIndex": 0,
+      "explanation": "O sistema bloqueia preventivamente a protecao e sinaliza falha do Bay Unit para evitar trips espurios e acidentais. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em arranjos redundantes, como a supervisao da queima de fusivel de TP (ANSI 60) comprova a perda de potencial?",
+      "options": [
+        "Medindo a variacao da corrente de magnetizacao de Inrush do trafo de forca.",
+        "Comparando assimetrias de tensoes entre dois conjuntos distintos de TPs conectados ao mesmo sistema.",
+        "Verificando a mudanca abrupta no escorregamento do rotor do motor sincrono.",
+        "Injetando um pulso de tensao DC no enrolamento secundario do TC."
+      ],
+      "correctIndex": 1,
+      "explanation": "O rele compara as mesmas fases de dois conjuntos de TPs independentes para detectar a queda de tensao ocasionada por falha de fusivel. (Fonte: ed58_fasc_protecao).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A supervisao do circuito de disparo (74TC) so atua quando o disjuntor esta na posicao fechado, nao monitorando as condicoes do sistema em modo aberto.",
+      "correctAnswer": false,
+      "explanation": "O monitoramento da bobina de trip e continuo e abrange tanto o estado aberto quanto o fechado, assegurando total prontidao operativa. (Fonte: Guia Protecao 2008).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os registros de oscilografia auxiliam a manutencao preditiva ao gravar as correntes do motor e os tempos de abertura dos contatos do disjuntor.",
+      "correctAnswer": true,
+      "explanation": "A analise regular dos oscilogramas revela lentidao mecanica e desgaste operacional do disjuntor, baseando a manutencao na sua real condicao. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao diagnosticar uma falha de tempo de curso em uma seccionadora, o relatorio do IED emite alarme de falha e proibe novas manobras no equipamento.",
+      "correctAnswer": true,
+      "explanation": "Falhas no tempo de movimentacao (run time) ou anomalia na posicao geram alarme isolator fault e bloqueio preventivo de operacao. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O esgotamento das baterias estacionarias da subestacao nao interrompe a protecao, pois IEDs digitais sao autoalimentados pela propria corrente.",
+      "correctAnswer": false,
+      "explanation": "IEDs digitais dependem totalmente da fonte auxiliar CC (baterias) para operacao eletronica e comando das bobinas, possuindo alarme especifico para falha de DC. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Se o disjuntor com relatorio de falha perder a pressao do SF6, a logica de monitoramento pode isolar a barra instantaneamente se um trip for.",
+      "correctAnswer": true,
+      "explanation": "O monitoramento acelera o trip para o resto da barra (Trip repetition) se o equipamento defeituoso receber ordem de atuar e acusar inoperancia mecanica. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A quantidade acumulada de operacoes de abertura sob curtos-circuitos pelo disjuntor e monitorada em IEDs modernos para avaliar seu ____ e apoiar.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "desgaste"
+        }
+      ],
+      "explanation": "O Breaker Wear Monitor contabiliza correntes interrompidas e estimar o final da vida util dos contatos. (Fonte: Guia Protecao 2008 / Ensaio Avancado).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Caso a autochecagem constante do IED localize travamentos de logica no software principal, um dispositivo eletronico denominado ____ emite pulso.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "watchdog"
+        }
+      ],
+      "explanation": "O mecanismo de watchdog atua como guardiao do processador e forca a reinicializacao ou bloqueio de atuacao caso constate congelamento do relogio. (Fonte: Ed50_marco_protecao_seletividade).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A falha de leitura da tensao provocada pela interrupcao de fusiveis e indicada pela funcao 60, tambem referenciada como Loss of ____, bloqueando.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Potential"
+        }
+      ],
+      "explanation": "O estado LOP (Loss of Potential) imobiliza funcoes direcionais ou de distancia para que curtos falsos por falta de referencial de tensao nao disparem a subestacao. (Fonte: Ensaio de Reles Avancado).",
+      "difficulty": "hard"
+    }
+  ]
+}

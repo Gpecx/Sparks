@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path lib -Recurse -Filter \"*.dart\")",
+      "Bash(Measure-Object)",
+      "Bash(cd \"e:/0- VMIND/Projetos/Spark/lib\" && grep -rn \"Color\\(0xFF\" --include=\"*.dart\" | grep -v \"AppColors\\\\.\" > /tmp/all_colors.txt && wc -l /tmp/all_colors.txt)",
+      "Read(//tmp/**)",
+      "Bash(flutter test *)",
+      "WebFetch(domain:www.gov.br)",
+      "PowerShell($bytes = [System.IO.File]::ReadAllBytes\\(\"C:\\\\Users\\\\fabio\\\\.claude\\\\projects\\\\e--0--VMIND-Projetos-Spark\\\\7a224368-f7b8-4ec1-9ceb-7b5c7795d3d5\\\\tool-results\\\\webfetch-1780081309575-lgpifp.pdf\"\\); $b64 = [Convert]::ToBase64String\\($bytes\\); $outPath = \"C:\\\\Users\\\\fabio\\\\.claude\\\\projects\\\\e--0--VMIND-Projetos-Spark\\\\7a224368-f7b8-4ec1-9ceb-7b5c7795d3d5\\\\tool-results\\\\nr01_b64.txt\"; [System.IO.File]::WriteAllText\\($outPath, $b64\\); Write-Output \"Size: $\\($bytes.Length\\) bytes, Base64 length: $\\($b64.Length\\)\")",
+      "Bash(mkdir -p \"e:/0- VMIND/Projetos/Spark/content/source_pdfs/NRs\")",
+      "Bash(cp \"C:/Users/fabio/.claude/projects/e--0--VMIND-Projetos-Spark/7a224368-f7b8-4ec1-9ceb-7b5c7795d3d5/tool-results/webfetch-1780081309575-lgpifp.pdf\" \"e:/0- VMIND/Projetos/Spark/content/source_pdfs/NRs/NR-01_atualizada_2025.pdf\")",
+      "Bash(cp webfetch-1780081394638-37gz01.pdf \"e:/0- VMIND/Projetos/Spark/content/source_pdfs/NRs/NR-05_atualizada_2022.pdf\")",
+      "Bash(cp webfetch-1780081402107-4twgst.pdf \"e:/0- VMIND/Projetos/Spark/content/source_pdfs/NRs/NR-12_atualizada_2022.pdf\")",
+      "Bash(cp webfetch-1780081401049-panvny.pdf \"e:/0- VMIND/Projetos/Spark/content/source_pdfs/NRs/NR-17_atualizada_2022.pdf\")",
+      "Bash(cp webfetch-1780081404551-boskxa.pdf \"e:/0- VMIND/Projetos/Spark/content/source_pdfs/NRs/NR-35_atualizada_2022.pdf\")",
+      "WebFetch(domain:acesso.mte.gov.br)",
+      "Bash(cp webfetch-1780081530313-cxuwve.pdf \"e:/0- VMIND/Projetos/Spark/content/source_pdfs/NRs/NR-23_atualizada_2022.pdf\")",
+      "Bash(cp webfetch-1780081532778-d357z5.pdf \"e:/0- VMIND/Projetos/Spark/content/source_pdfs/NRs/NR-06_atualizada_2022.pdf\")",
+      "Bash(cp webfetch-1780081569046-t2qd5j.pdf \"e:/0- VMIND/Projetos/Spark/content/source_pdfs/NRs/NR-10_atualizada_2019.pdf\")",
+      "Bash(cp webfetch-1780081569868-em58mc.pdf \"e:/0- VMIND/Projetos/Spark/content/source_pdfs/NRs/NR-33_atualizada_2022.pdf\")",
+      "Bash(pip show *)",
+      "Bash(pdftotext -layout \"NR-01_atualizada_2025.pdf\" \"NR-01.txt\")",
+      "Bash(pdftotext -layout -enc UTF-8 \"NR-01_atualizada_2025.pdf\" \"NR-01.txt\")",
+      "Bash(mkdir -p \"e:/0- VMIND/Projetos/Spark/content/seed/cat01_instalacoes/mod01_gestao_riscos\" && ls \"e:/0- VMIND/Projetos/Spark/content/seed/cat01_instalacoes/\" 2>/dev/null | head -10)",
+      "PowerShell(.\\\\scripts\\\\validate_trail_json.ps1 -Path \"content\\\\seed\\\\cat01_instalacoes\\\\mod01_gestao_riscos\\\\t01_nr01_gro.json\")",
+      "PowerShell(.\\\\scripts\\\\validate_trail_json.ps1 -Path \"content\\\\seed\\\\cat01_instalacoes\\\\mod01_gestao_riscos\\\\t02_nr05_cipa.json\")",
+      "Bash(git commit -m 'feat\\(ferramentas\\): adiciona suite de 12 calculadoras de P&C' -m 'Nova area Ferramentas com calculadoras de engenharia para Protecao, *)",
+      "Bash(flutter analyze *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(git commit -m 'feat\\(estudos\\): adiciona area de estudos com leitor de e-books' -m 'Nova secao Estudos no app SPARK: *)",
+      "Bash(git commit -m 'feat\\(admin\\): adiciona importacao de e-books no painel admin' -m '- importEbookFromJSON\\(\\) no AdminController: busca/cria categoria *)",
+      "Bash(git commit -m 'content\\(ebooks\\): adiciona 9 e-books validados \\(cat01 NRs + cat06 Protecao\\)' -m 'E-books gerados cobrindo todos os modulos com trilhas existentes: *)",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
+    ],
+    "additionalDirectories": [
+      "e:\\0- VMIND\\Projetos\\Spark\\content\\seed\\cat01_instalacoes\\mod01_gestao_riscos",
+      "E:\\0- VMIND\\Projetos\\OpenSquad_GPECx\\squads\\SPARK_Trails",
+      "C:\\Users\\fabio\\.claude"
+    ]
+  }
+}

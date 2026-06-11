@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Coordenação e Seletividade",
+  "moduleSubtitle": "Estudo de coordenação - dados, metodologia, curvas e relatórios",
+  "moduleOrder": 2,
+  "trail": "Relatórios de Coordenação e Seletividade",
+  "trailOrder": 5,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual seção de um relatório formal de proteção registra as alterações e o histórico das emissões do documento ao longo do projeto?",
+      "options": [
+        "A tabela de graduação dos relés.",
+        "O relatório de componentes falhos.",
+        "A folha de seletividade gráfica.",
+        "O índice de revisões."
+      ],
+      "correctIndex": 3,
+      "explanation": "O índice de revisões documenta a rastreabilidade do estudo, indicando as datas, descrições das alterações e os responsáveis por cada emissão.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Além dos gráficos de seletividade, qual elemento do relatório consolida os parâmetros que serão efetivamente inseridos nos relés em campo?",
+      "options": [
+        "A tabela de graduação ou ajustes.",
+        "O diagrama unifilar simplificado.",
+        "A lista de dados da concessionária.",
+        "O registro de oscilografia do relé."
+      ],
+      "correctIndex": 0,
+      "explanation": "As tabelas de graduação reúnem todos os ajustes calculados, como tap, curva, dial de tempo e unidades instantâneas, servindo de guia para o comissionamento.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como é denominada a condição justificada no relatório quando dois dispositivos em série operam simultaneamente para a mesma falta?",
+      "options": [
+        "Proteção diferencial de barra.",
+        "Compromisso de seletividade.",
+        "Falha de disjuntor intrínseca.",
+        "Sobreposição de zona primária."
+      ],
+      "correctIndex": 1,
+      "explanation": "O compromisso de seletividade é a perda intencional de seletividade, aceita e documentada quando soluções alternativas são inviáveis ou perigosas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De que forma os níveis de curto-circuito são apresentados no relatório para embasar o estudo de proteção?",
+      "options": [
+        "Através do consumo de energia reativa mensal.",
+        "Por meio do fluxo de potência ativa nas barras.",
+        "Em tabelas listando as correntes simétricas e assimétricas por barra.",
+        "Apenas pelo valor da corrente de magnetização dos transformadores."
+      ],
+      "correctIndex": 2,
+      "explanation": "O relatório de curto-circuito anexo ao estudo detalha as correntes de falta simétricas e assimétricas, essenciais para parametrizar e validar os dispositivos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual recurso gráfico é obrigatoriamente anexado ao relatório para comprovar visualmente a coordenação entre os dispositivos?",
+      "options": [
+        "Gráficos polares de admitância nodal.",
+        "Diagramas de blocos da automação.",
+        "Esquemas trifilares de interligação dos TCs.",
+        "Folhas de seletividade ou gráficos tempo-corrente."
+      ],
+      "correctIndex": 3,
+      "explanation": "As folhas de seletividade, plotadas em escala log-log, ilustram as curvas de tempo versus corrente, evidenciando as margens de coordenação adotadas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a seção de premissas do relatório deve definir claramente antes de apresentar os cálculos analíticos do sistema?",
+      "options": [
+        "A condição operacional e a topologia da rede estudada.",
+        "As lógicas de controle de iluminação da planta.",
+        "As marcas das tintas usadas nos painéis elétricos.",
+        "O cronograma de manutenção preditiva anual."
+      ],
+      "correctIndex": 0,
+      "explanation": "As premissas estabelecem a capacidade de despacho, a configuração dos disjuntores e o arranjo topológico considerado como base para simular os defeitos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os relatórios gerados por softwares dedicados identificam equipamentos que violam os limites nominais de capacidade térmica ou interrupção?",
+      "options": [
+        "Desconectando-os fisicamente da rede simulada.",
+        "Destacando os componentes reprovados na avaliação do sistema.",
+        "Alterando a impedância de sequência zero da fonte.",
+        "Zerando o fluxo de potência ativa no diagrama unifilar."
+      ],
+      "correctIndex": 1,
+      "explanation": "Ferramentas como o PTW possuem funções que destacam componentes falhos, permitindo ao engenheiro apontar as não conformidades no relatório final.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo os memoriais de proteção, quando os ajustes de sinalização visual e comunicação com o nível superior devem ser tipicamente executados?",
+      "options": [
+        "Apenas durante a fabricação primária do relé.",
+        "Antes da elaboração do diagrama unifilar geral.",
+        "Durante os ensaios de comissionamento em fábrica ou campo.",
+        "Simultaneamente ao cálculo da malha de aterramento."
+      ],
+      "correctIndex": 2,
+      "explanation": "As notas de projeto indicam que ajustes secundários como LEDs e lógicas de supervisão são parametrizados durante o comissionamento e testes finais.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais campos asseguram a rastreabilidade e a aprovação formal do estudo na capa ou folha de rosto do relatório?",
+      "options": [
+        "Os nomes dos operadores de turno da subestação.",
+        "O índice de modulação harmônica e fator de potência.",
+        "O registro dos endereços IPs dos relés digitais.",
+        "As assinaturas de elaboração, verificação e aprovação com respectivas datas."
+      ],
+      "correctIndex": 3,
+      "explanation": "O controle de qualidade documental exige que o relatório seja formalmente assinado pelos responsáveis pela elaboração, verificação técnica e aprovação final.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sob qual justificativa técnica o relatório pode recomendar a aceitação formal de uma perda intencional de seletividade?",
+      "options": [
+        "Quando a solução seletiva colocar em risco a vida humana ou a integridade dos equipamentos.",
+        "Para reduzir o tempo de simulação matricial no software.",
+        "Para simplificar o traçado das curvas logarítmicas de fase e neutro.",
+        "Sempre que os relés instalados possuírem tecnologia puramente estática."
+      ],
+      "correctIndex": 0,
+      "explanation": "O compromisso de seletividade é adotado quando a obtenção da coordenação perfeita implica tempos longos que ameaçam a segurança de pessoas e máquinas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O relatório de coordenação deve apresentar o diagrama unifilar do sistema indicando a topologia e a localização exata dos dispositivos de proteção.",
+      "correctAnswer": true,
+      "explanation": "O diagrama unifilar é o documento base integrado ao relatório para contextualizar a hierarquia e as conexões elétricas dos componentes avaliados.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As tabelas de graduação anexadas ao relatório detalham apenas os valores de partida em amperes, omitindo intencionalmente as famílias de curvas e.",
+      "correctAnswer": false,
+      "explanation": "As tabelas de graduação são abrangentes e listam a relação dos TCs, as curvas adotadas, os dials de tempo e os pickups de todas as funções habilitadas.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os memoriais descritivos atestam que as programações de lógicas puras de automação e supervisão fabril não fazem parte do escopo principal do.",
+      "correctAnswer": true,
+      "explanation": "A documentação técnica ressalta que ajustes de automação, lógicas de processo e comandos não previstos na proteção fogem ao escopo direto do relatório de seletividade.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O índice de revisões é fundamental para a gestão do relatório, pois garante a rastreabilidade do documento ao registrar alterações motivadas por.",
+      "correctAnswer": true,
+      "explanation": "O controle de emissões mapeia as mudanças efetuadas, garantindo que adequações solicitadas pelo cliente sejam formalmente incorporadas e rastreadas.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O relatório de coordenação atesta que as funções de proteção voltadas para comandos lógicos de controle e intertravamento de processo produtivo são.",
+      "correctAnswer": false,
+      "explanation": "O memorial de proteção especifica que comandos lógicos e intertravamentos operacionais que não afetam a proteção são programados e testados somente no comissionamento, não pelo software de curto-circuito.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No relatório técnico, a seção que documenta formalmente a capacidade de despacho, a topologia inicial e as condições de contorno adotadas é ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "premissas"
+        }
+      ],
+      "explanation": "As premissas embasam todo o escopo analítico, delineando os cenários operativos e as considerações iniciais assumidas pelo projetista.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A situação deliberadamente documentada no relatório na qual dois dispositivos em série atuam simultaneamente devido a limitações de segurança ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "compromisso"
+        }
+      ],
+      "explanation": "O compromisso de seletividade formaliza a impossibilidade de coordenar dois equipamentos sem comprometer a integridade física da instalação.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para assegurar a validade e a responsabilização técnica, a folha de rosto do memorial exige as assinaturas nominais de elaboração, verificação e ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "aprovacao"
+        }
+      ],
+      "explanation": "O fluxo de controle de qualidade do projeto culmina com a aprovação final, atestando que os cálculos e ajustes cumprem as normativas vigentes.",
+      "difficulty": "hard"
+    }
+  ]
+}

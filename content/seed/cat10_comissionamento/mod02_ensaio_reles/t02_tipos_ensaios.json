@@ -1,0 +1,218 @@
+{
+  "category": "Comissionamento SPCS",
+  "categorySubtitle": "Metodologia, ensaio de relés e comissionamento IEC 61850",
+  "categoryOrder": 9,
+  "module": "Ensaio de Relés de Proteção",
+  "moduleSubtitle": "Pré-comissionamento, injeção primária/secundária e FAT/SAT",
+  "moduleOrder": 1,
+  "trail": "Aplicações (Tipos: Pré-Comissionamento, FAT, SAT)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o objetivo dos ensaios de comissionamento e testes periódicos em relés?",
+      "options": [
+        "Substituir os ensaios de tipo de fábrica.",
+        "Reduzir o consumo da bobina.",
+        "Garantir a atuação correta sob falta.",
+        "Aumentar a rigidez dielétrica."
+      ],
+      "correctIndex": 2,
+      "explanation": "Testes atestam que o sistema atuará corretamente na ocorrência de anomalias reais. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o ensaio FAT (Factory Acceptance Test) avalia nos painéis de proteção?",
+      "options": [
+        "O medidor de faturamento da concessionária.",
+        "O comissionamento com carga e tensão reais.",
+        "A isolação da malha de terra da subestação.",
+        "A parametrização e as lógicas funcionais antes do envio a campo."
+      ],
+      "correctIndex": 3,
+      "explanation": "No FAT, testa-se a parametrização e o intertravamento lógico do painel ainda na fábrica. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quem executa os testes de comissionamento (SAT) em uma subestação primária de consumidor?",
+      "options": [
+        "O próprio consumidor ou sua empresa contratada.",
+        "A concessionária de distribuição local.",
+        "O Operador Nacional do Sistema (ONS).",
+        "Os fabricantes dos transformadores de potência."
+      ],
+      "correctIndex": 0,
+      "explanation": "O consumidor constrói e testa a cabine; a concessionária apenas inspeciona e aprova a ligação. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a finalidade do relatório técnico gerado no comissionamento de relés?",
+      "options": [
+        "Solicitar o aumento da demanda faturável.",
+        "Registrar os resultados dos ensaios, atuações e embasar manutenções.",
+        "Dispensar a necessidade de manutenções preventivas.",
+        "Isentar o projetista da responsabilidade técnica (ART)."
+      ],
+      "correctIndex": 1,
+      "explanation": "O relatório consolida medições e atuações, servindo de base para o plano de manutenção. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Onde os laudos de comissionamento e ensaios devem ser arquivados conforme a NR-10?",
+      "options": [
+        "No diagrama unifilar da concessionária.",
+        "No manual de operação do relé.",
+        "No Prontuário de Instalações Elétricas.",
+        "Na ordem de serviço de montagem."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Prontuário arquiva projetos, relatórios de ensaios e certificados técnicos da instalação. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como devem ser tratados os ajustes off-line do relé durante o ensaio SAT?",
+      "options": [
+        "Devem ser enviados de volta à fábrica para gravação na EPROM.",
+        "Devem ser aplicados cegamente assumindo o projeto como ideal.",
+        "Devem ser apagados para criação de uma base nova em campo.",
+        "Devem ser validados e adequados à topologia física real da subestação."
+      ],
+      "correctIndex": 3,
+      "explanation": "Arquivos off-line exigem validação e possíveis correções conforme a realidade construtiva. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que os relés digitais modernos dispensam os ensaios periódicos de calibração (aferição)?",
+      "options": [
+        "Porque realizam autodiagnóstico e monitoramento contínuo.",
+        "Porque são blindados e isolados a gás SF6.",
+        "Porque operam exclusivamente com conversores analógicos passivos.",
+        "Porque suas bobinas móveis não sofrem desgaste mecânico."
+      ],
+      "correctIndex": 0,
+      "explanation": "O monitoramento contínuo e o autoteste atestam a integridade, dispensando testes periódicos de aferição. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual medida de segurança é vital ao testar o circuito de saída (trip) do relé no comissionamento?",
+      "options": [
+        "Elevar a tensão de alimentação auxiliar em 10%.",
+        "Isolar ou bloquear o circuito externo para evitar o desligamento indevido da carga.",
+        "Curto-circuitar os TPs do painel de proteção.",
+        "Desativar permanentemente o watchdog do IED."
+      ],
+      "correctIndex": 1,
+      "explanation": "A saída de disparo (trip) deve ser isolada fisicamente ou logicamente para não desligar a carga real. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos ensaios funcionais de manutenção, qual a periodicidade típica para relés digitais segundo o PJM?",
+      "options": [
+        "10 anos.",
+        "6 meses.",
+        "4 anos.",
+        "1 mês."
+      ],
+      "correctIndex": 2,
+      "explanation": "Práticas típicas recomendam testes funcionais (não aferição) a cada 4 anos para proteções digitais. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a equipe de comissionamento deve fazer ao encontrar imprevistos não mapeados durante o SAT?",
+      "options": [
+        "Substituir o painel inteiro e acionar a garantia.",
+        "Improvisar para não atrasar o cronograma de energização.",
+        "Omitir a falha no relatório de pendências (punch list).",
+        "Avaliar tecnicamente, aplicar a solução e registrar formalmente no as-built."
+      ],
+      "correctIndex": 3,
+      "explanation": "Imprevistos sanados em campo devem ser avaliados e documentados no as-built para atualizar o projeto. (Fonte: Cabine Primária).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O ensaio FAT (Factory Acceptance Test) é realizado com o painel já instalado na sua posição final na subestação.",
+      "correctAnswer": false,
+      "explanation": "O FAT é a inspeção da parametrização e das lógicas de intertravamento na própria fábrica, antes do envio a campo. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A parametrização feita off-line pode divergir da construção final, necessitando de validação em campo durante o SAT.",
+      "correctAnswer": true,
+      "explanation": "Ajustes off-line dependem de validação cruzada no SAT para adequação à topologia real. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A concessionária de energia é responsável por executar e custear os testes SAT de uma subestação de consumidor primário.",
+      "correctAnswer": false,
+      "explanation": "O próprio consumidor constrói e comissiona; a concessionária apenas inspeciona as instalações. (Fonte: Cabine Primária).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Circuitos e equipamentos externos aos relés digitais ainda exigem ensaios funcionais periódicos para garantir a confiabilidade.",
+      "correctAnswer": true,
+      "explanation": "Apesar do automonitoramento do relé, fiações, chaves e disjuntores externos exigem testes periódicos. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A simulação de atuações de trip no comissionamento exige o isolamento do comando externo para evitar desligamentos reais.",
+      "correctAnswer": true,
+      "explanation": "Para testar a saída com segurança e sem impacto operativo, bloqueia-se o disparo externo para o disjuntor. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A inspeção e o teste de aceitação realizados nas instalações do fabricante recebem a sigla ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "FAT"
+        }
+      ],
+      "explanation": "O Factory Acceptance Test (FAT) garante a validação funcional prévia dos painéis. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A fase de ensaios de aceitação feita em campo para validar fisicamente a instalação é designada pela sigla ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SAT"
+        }
+      ],
+      "explanation": "O Site Acceptance Test (SAT) compatibiliza lógicas, parametrização e fiação real. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "De acordo com a NR-10, os laudos de comissionamento devem obrigatoriamente integrar o ____ de Instalações Elétricas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Prontuário"
+        }
+      ],
+      "explanation": "O Prontuário arquiva os relatórios, garantindo o histórico de segurança da instalação. (Fonte: Cabine Primária).",
+      "difficulty": "hard"
+    }
+  ]
+}

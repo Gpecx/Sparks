@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Gestão de Riscos e Outras NRs",
+  "moduleSubtitle": "NR-01, NR-05, NR-06, NR-12, NR-17, NR-23 e NR-33",
+  "moduleOrder": 0,
+  "trail": "NR-06 (Equipamentos de Proteção Individual)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-06, qual é a definição normativa de Equipamento de Proteção Individual (EPI)?",
+      "options": [
+        "Equipamento projetado para a proteção coletiva de toda a equipe de trabalho atuante em área classificada.",
+        "Qualquer peça de vestuário fornecida pelo empregador e utilizada pelo trabalhador rotineiramente no ambiente de trabalho.",
+        "Dispositivo ou produto de uso individual utilizado pelo trabalhador, concebido e fabricado para oferecer proteção contra os riscos ocupacionais.",
+        "Ferramenta de uso pessoal utilizada para aumentar a produtividade operacional e mitigar acidentes de trajeto."
+      ],
+      "correctIndex": 2,
+      "explanation": "Conforme o item 6.3.1, considera-se EPI o dispositivo ou produto de uso individual utilizado pelo trabalhador, concebido e fabricado para oferecer proteção contra os riscos ocupacionais existentes no ambiente de trabalho.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em relação ao fornecimento de EPI, qual é a obrigação legal da organização estabelecida pela NR-06?",
+      "options": [
+        "Fornecer o EPI ao empregado, podendo descontar até 5% do salário pelo seu custo de aquisição.",
+        "Fornecer o EPI apenas aos trabalhadores que o solicitarem formalmente ao SESMT ou ao departamento de Recursos Humanos.",
+        "Exigir que o trabalhador adquira seu próprio EPI certificado, reembolsando-o mediante apresentação de nota fiscal.",
+        "Fornecer gratuitamente ao empregado EPI adequado ao risco, em perfeito estado de conservação e funcionamento."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 6.5.1, alínea 'c', determina expressamente que cabe à organização fornecer ao empregado, gratuitamente, EPI adequado ao risco, em perfeito estado de conservação e funcionamento.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual das seguintes alternativas representa uma responsabilidade atribuída exclusivamente ao trabalhador em relação ao EPI, de acordo com a NR-06?",
+      "options": [
+        "Registrar o fornecimento do equipamento e atualizá-lo sempre que houver troca periódica.",
+        "Adquirir somente equipamentos de proteção que possuam Certificado de Aprovação válido.",
+        "Responsabilizar-se pela limpeza, guarda e conservação do EPI recebido.",
+        "Promover testes de qualidade e eficácia do equipamento antes de utilizá-lo nas operações."
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo o item 6.6.1, alínea 'c' da norma, cabe ao trabalhador, quanto ao EPI, responsabilizar-se pela sua limpeza, guarda e conservação.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para que um Equipamento de Proteção Individual, seja de fabricação nacional ou importado, possa ser posto à venda ou utilizado nas empresas, o que a NR-06 exige obrigatoriamente?",
+      "options": [
+        "A indicação do Certificado de Aprovação (CA) expedido pelo órgão nacional competente em matéria de segurança e saúde no trabalho.",
+        "O selo de qualidade expedido pelo Inmetro em conjunto com o sindicato laboral.",
+        "A aprovação técnica prévia e laudo emitido pelo Conselho Regional de Engenharia local.",
+        "A certificação internacional de segurança do trabalho comprovada através da aduana no país de origem."
+      ],
+      "correctIndex": 0,
+      "explanation": "Conforme o item 6.4.1 da NR-06, o EPI só pode ser posto à venda ou utilizado com a indicação do Certificado de Aprovação (CA), expedido pelo órgão competente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O Anexo I da NR-06 classifica os equipamentos de acordo com a parte do corpo protegida. Qual das alternativas contém unicamente EPI listado normativamente para proteção auditiva (Categoria C)?",
+      "options": [
+        "Capacete contra impactos, capuz termo-acústico e balaclava.",
+        "Protetor auditivo circum-auricular, protetor auditivo de inserção e protetor auditivo semiauricular.",
+        "Respirador purificador de ar motorizado e filtros abafadores de partículas.",
+        "Perneiras acústicas e óculos com proteção auricular acoplada."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Anexo I, item C.1, lista especificamente para proteção auditiva: a) protetor auditivo circum-auricular; b) protetor auditivo de inserção; e c) protetor auditivo semiauricular.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Todo EPI deve apresentar marcações em caracteres indeléveis, legíveis e visíveis. Segundo a NR-06, quais informações devem constar obrigatoriamente nessas marcações efetuadas pelo fabricante ou importador?",
+      "options": [
+        "Nome do trabalhador, data de validade de uso e o nome do órgão fiscalizador regional.",
+        "CNPJ do fabricante original, vida útil do produto e o selo de conforto térmico.",
+        "Nome comercial do fabricante ou do importador, o lote de fabricação e o número do CA.",
+        "Número do CA, laudo de aprovação do SESMT e tipo de risco ocupacional mitigado."
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo o item 6.9.3 da norma, todo EPI deve apresentar marcações indeléveis com o nome comercial do fabricante ou importador, o lote de fabricação e o número do CA.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante a seleção de um EPI para um trabalhador que necessita usar correção visual (óculos de grau) na execução de suas tarefas, como a organização deve proceder segundo a NR-06?",
+      "options": [
+        "O trabalhador deve custear as lentes corretivas adaptáveis para serem acopladas ao EPI da empresa.",
+        "A organização deve proibir o trabalhador de exercer aquela função específica se o EPI interferir nos óculos de grau.",
+        "O EPI padrão dispensa adaptação, cabendo ao empregado obrigatoriamente migrar para o uso de lentes de contato descartáveis.",
+        "A organização deve considerar o uso de óculos de segurança de sobrepor ou a adaptação do EPI sem ônus financeiro para o empregado."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 6.5.4 estabelece que a seleção deve considerar o uso de óculos de segurança de sobrepor em conjunto com lentes corretivas ou a adaptação do EPI, sem ônus para o empregado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando o EPI fornecido ao trabalhador for extraviado, ou apresentar danos durante a sua utilização rotineira, qual é a conduta imediata exigida da organização?",
+      "options": [
+        "Substituir o equipamento danificado ou extraviado imediatamente.",
+        "Registrar formalmente o fato e solicitar ao empregado que arque com a compra de reposição no próximo ciclo mensal.",
+        "Providenciar a substituição no prazo legal de até 5 dias úteis, adotando medidas administrativas paliativas.",
+        "Aguardar o retorno e conserto oficial da assistência técnica do fabricante, afastando o empregado das atividades."
+      ],
+      "correctIndex": 0,
+      "explanation": "De acordo com o item 6.5.1, alínea 'g', cabe à organização substituir imediatamente o EPI, quando o mesmo for danificado ou extraviado, não havendo tolerância para atrasos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Dentre as obrigações pertinentes aos fabricantes e importadores na comercialização de EPI, qual das exigências normativas abaixo consta na NR-06?",
+      "options": [
+        "Comercializar o EPI com manual de instruções nos idiomas do Mercosul simultaneamente.",
+        "Registrar eletronicamente a entrega do EPI para o usuário final, utilizando dados biométricos do trabalhador.",
+        "Comercializar o EPI acompanhado de manual de instruções em língua portuguesa, orientando utilização, limpeza e manutenção.",
+        "Fornecer periodicamente treinamentos práticos de uso em todas as instalações físicas das empresas compradoras."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 6.8.1, alínea 'b', determina expressamente que o fabricante/importador deve comercializar o EPI com manual de instruções em língua portuguesa, orientando uso, manutenção e limpeza.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O processo de seleção dos Equipamentos de Proteção Individual (EPI) por parte da organização deve seguir critérios participativos. Segundo a NR-06, quem deve participar dessa seleção?",
+      "options": [
+        "A diretoria da empresa isoladamente, baseando-se no Programa de Controle Médico de Saúde Ocupacional (PCMSO).",
+        "O SESMT, quando houver, após serem ouvidos os empregados usuários e a Comissão Interna de Prevenção de Acidentes (CIPA) ou nomeado.",
+        "O fabricante do EPI, que vistoriará as dependências e determinará unilateralmente as proteções necessárias.",
+        "O sindicato da categoria dominante, através de assembleia para aprovação conjunta dos modelos sugeridos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme o item 6.5.2.2 da NR-06, a seleção do EPI deve ser realizada pela organização com a participação do SESMT (quando houver), após ouvidos os empregados usuários e a CIPA ou nomeado.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A fim de facilitar e modernizar os trâmites, a organização está plenamente autorizada pela norma a utilizar sistemas eletrônicos e até biometria para cumprir a obrigatoriedade de registro de fornecimento de EPI aos seus empregados.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira. O item 6.5.1, alínea 'd', da NR-06 especifica que a organização deve registrar o fornecimento, podendo adotar livros, fichas ou sistema eletrônico, inclusive por sistema biométrico.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Quando for técnica ou administrativamente inviável o registro individual e exato de fornecimento de EPI descartável ou creme de proteção, a organização fica automaticamente desobrigada de disponibilizá-los.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. Segundo o subitem 6.5.1.2, havendo inviabilidade no registro, a organização deve garantir a disponibilização desses EPI descartáveis na embalagem original e em quantidade suficiente, assegurando reposição imediata.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Entende-se por Equipamento Conjugado de Proteção Individual qualquer dispositivo de segurança montado de maneira improvisada e autônoma pelo trabalhador para se proteger de múltiplos riscos simultâneos encontrados na obra.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O item 6.3.2 define Equipamento Conjugado de Proteção Individual apenas como aquele em que o 'fabricante' tenha conjugado os dispositivos contra os riscos, invalidando improvisações feitas por trabalhadores.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "É terminantemente vedada pela NR-06 a cessão do Certificado de Aprovação (CA) emitido para um fabricante específico a fim de que um terceiro utilize-o para comercialização, ressalvando-se desta proibição apenas os casos de relação entre matriz e filial.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira. O item 6.9.4 veda a cessão de uso do CA de um fabricante/importador para outro sem que este se submeta ao procedimento regular, ressalvados os casos de matriz e filial.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Conforme disposto no Anexo I da NR-06, o creme protetor de segurança é tecnicamente enquadrado na categoria H, destinada aos Equipamentos de Proteção do Corpo Inteiro contra agentes agressivos químicos e biológicos.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O Anexo I classifica o creme protetor de segurança (F.2) rigorosamente na Categoria F, que abrange os EPI para a proteção exclusiva dos Membros Superiores contra agentes químicos.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para garantir a segurança, a NR-06 estipula em suas disposições que cabe ao trabalhador comunicar prontamente à organização quando o EPI fornecido for extraviado, ____ ou sofrer qualquer alteração que o torne impróprio para uso.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "danificado"
+        }
+      ],
+      "explanation": "Conforme o item 6.6.1, alínea 'd', o trabalhador tem a responsabilidade expressa de comunicar à organização caso o equipamento sofra danos, seja extraviado ou sofra alterações.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "É dever legal do fabricante e do importador promover, sempre que solicitado e se for tecnicamente possível, a ____ do EPI que detém CA para que pessoas com deficiência possam utilizá-lo sem perda de eficácia protetiva.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "adaptação"
+        }
+      ],
+      "explanation": "O item 6.8.1, alínea 'e' da NR-06, elenca entre as responsabilidades do fabricante/importador promover a adaptação do EPI detentor de CA para pessoas com deficiência.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na proteção respiratória listada no Anexo I (D.4), o respirador de adução de ar do tipo máscara autônoma é o EPI especificamente designado para ambientes perigosos classificados como atmosferas ____, que traduz 'Imediatamente Perigosas à Vida e à Saúde'.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "IPVS"
+        }
+      ],
+      "explanation": "O Anexo I, em seu item D.4, detalha que o respirador de adução de ar tipo máscara autônoma é o equipamento correto para atmosferas IPVS (Imediatamente Perigosas à Vida e à Saúde).",
+      "difficulty": "hard"
+    }
+  ]
+}

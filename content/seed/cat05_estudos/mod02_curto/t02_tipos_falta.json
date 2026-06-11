@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Curto-Circuito",
+  "moduleSubtitle": "Fundamentos, tipos de falta, modelagem, cálculo e aplicação",
+  "moduleOrder": 1,
+  "trail": "Tipos de Falta e Componentes Simétricas",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual tipo de curto-circuito apresenta a maior frequencia de ocorrencia nos sistemas eletricos de potencia?",
+      "options": [
+        "Curto-circuito trifasico franco.",
+        "Curto-circuito bifasico isolado.",
+        "Curto-circuito monofasico a terra.",
+        "Curto-circuito bifasico a terra."
+      ],
+      "correctIndex": 2,
+      "explanation": "De acordo com a literatura, o curto-circuito monofasico a terra corresponde a cerca de 70 por cento de todas as ocorrencias nas redes eletricas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Apesar de ter a menor probabilidade de ocorrencia, qual curto-circuito e considerado o mais severo e serve de base principal para o dimensionamento?",
+      "options": [
+        "Curto-circuito bifasico isolado.",
+        "Curto-circuito bifasico a terra.",
+        "Curto-circuito monofasico a terra.",
+        "Curto-circuito trifasico."
+      ],
+      "correctIndex": 3,
+      "explanation": "A falta trifasica possui ocorrencia relativa pequena (cerca de 5 a 6 por cento), mas e considerada a mais severa e a mais analisada em estudos de suporte a falhas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O Teorema de Fortescue afirma que um sistema trifasico desequilibrado pode ser decomposto em quantos sistemas de fasores equilibrados?",
+      "options": [
+        "Tres sistemas de sequencias positiva, negativa e zero.",
+        "Dois sistemas simetricos e um harmonico.",
+        "Quatro sistemas incluindo componentes de retorno subtransitorias.",
+        "Seis sistemas de fasores unidirecionais parciais."
+      ],
+      "correctIndex": 0,
+      "explanation": "Fortescue provou que um sistema desbalanceado pode ser totalmente representado por tres conjuntos equilibrados chamados de componentes de sequencia positiva, negativa e zero.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual componente simetrica e constituida rigorosamente por tres fasores de modulos iguais e que estao totalmente em fase entre si?",
+      "options": [
+        "Sequencia positiva.",
+        "Sequencia zero.",
+        "Sequencia negativa.",
+        "Sequencia diferencial."
+      ],
+      "correctIndex": 1,
+      "explanation": "A sequencia zero e formada por tres fasores de modulos iguais que nao apresentam defasagem angular entre si, girando no mesmo sentido do sistema original.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um curto-circuito trifasico simetrico, quais componentes de sequencia estao presentes nas malhas de calculo do sistema?",
+      "options": [
+        "Apenas a componente de sequencia zero.",
+        "Apenas a componente de sequencia positiva.",
+        "Componentes de sequencias positiva e negativa em paralelo.",
+        "Todas as tres componentes simetricas simultaneamente."
+      ],
+      "correctIndex": 1,
+      "explanation": "O defeito trifasico mantem a simetria da rede, gerando exclusivamente correntes e tensoes pertencentes a rede de sequencia positiva.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as redes de sequencia devem ser eletricamente conectadas para simular as condicoes de um curto-circuito monofasico a terra franco?",
+      "options": [
+        "Apenas as redes positiva e negativa em arranjo de malha paralela.",
+        "As redes positiva, negativa e zero conectadas estritamente em paralelo.",
+        "As redes positiva, negativa e zero conectadas em serie.",
+        "As redes positiva e zero conectadas em serie com exclusao da negativa."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para satisfazer as condicoes de contorno de falta fase-terra, a formulacao obriga que as matrizes ou diagramas das tres sequencias sejam ligados em serie.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para analisar um curto-circuito bifasico isolado, qual e a conexao correta requerida para as redes equivalentes de sequencia no ponto de defeito?",
+      "options": [
+        "Positiva e negativa em serie.",
+        "Positiva e zero em paralelo com o bloqueio da negativa.",
+        "Positiva, negativa e zero em serie.",
+        "Positiva e negativa em paralelo."
+      ],
+      "correctIndex": 3,
+      "explanation": "A falta bifasica sem envolvimento do terra exige que as quedas de tensao sejam iguais e as correntes se anulem, forcando as redes positiva e negativa a ficarem em paralelo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A circulacao efetiva da corrente de sequencia zero na topologia do sistema eletrico exige obrigatoriamente a observancia de qual condicao fisica?",
+      "options": [
+        "Existencia de um caminho fisico de retorno provido por fechamento de neutro aterrado ou pela terra.",
+        "A ocorrencia exata de uma falta trifasica muito proxima a um terminal gerador.",
+        "Existencia de um arranjo puramente radial com cargas indutivas ativas.",
+        "A presenca de maquinas sincronas de rotor de polos salientes na matriz de suprimento."
+      ],
+      "correctIndex": 0,
+      "explanation": "Fasores de sequencia zero estao em fase e fluem no mesmo sentido, requerendo um circuito com retorno via terra ou cabos neutros para circular (sistema aterrado).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual configuracao especifica de falta desequilibrada demanda analiticamente a conexao de todas as redes (positiva, negativa e zero) agrupadas em.",
+      "options": [
+        "Curto-circuito trifasico com impedancia de arco elevada.",
+        "Curto-circuito bifasico a terra.",
+        "Curto-circuito bifasico isolado.",
+        "Curto-circuito monofasico a terra."
+      ],
+      "correctIndex": 1,
+      "explanation": "As condicoes de contorno que zeram as tensoes de duas fases simultaneamente levam a necessidade matematica de conectar as tres redes de sequencia em paralelo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na definicao dos operadores de Fortescue, qual e o valor e o significado real do operador fasorial alfa elevado ao cubo?",
+      "options": [
+        "Zero absoluto, extinguindo a componente assimetrica continua.",
+        "Menos meio menos jota raiz de tres sobre dois, correspondendo a uma defasagem exata de duzentos e quarenta graus.",
+        "Um positivo, representando a rotacao completa do fasor devolvendo-o a sua posicao de origem.",
+        "Mais jota, indicando o surgimento de uma defasagem capacitiva de noventa graus na malha."
+      ],
+      "correctIndex": 2,
+      "explanation": "O operador alfa introduz saltos rotacionais de cento e vinte graus por unidade; elevando-o ao cubo totaliza trezentos e sessenta graus (revolucao completa), resultando no escalar um.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O curto-circuito do tipo fase a terra constitui o evento faltoso mais frequente nas redes de energia de potencia, abrangendo ate 70 por cento dos.",
+      "correctAnswer": true,
+      "explanation": "Estatisticas internacionais e operacionais demonstram que curtos monofasicos a terra sao largamente predominantes nos sistemas de transmissão e distribuicao.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A malha de sequencia negativa e modelada por tres fasores perfeitamente simetricos que giram sincronizados com a mesma sequencia de fase que o.",
+      "correctAnswer": false,
+      "explanation": "O sistema de sequencia negativa e definido por uma sequencia de giro de fases exatamente inversa ou contraria em relacao a ordem do arranjo original.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em topologias industriais onde a fonte opera sem aterramento (neutro isolado), correntes falhas do tipo fase a terra nao suscitam fluxo de.",
+      "correctAnswer": true,
+      "explanation": "Sem a ligacao galvânica para a terra no neutro, a malha de retorno equivalente para os componentes de sequencia zero fica permanentemente em aberto, zerando essa corrente.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em analises de um curto-circuito bifasico a terra abrangendo as fases b e c, a corrente transitoria na fase a eleva-se dramaticamente assumindo seu.",
+      "correctAnswer": false,
+      "explanation": "Pela propria condicao teorica e pratica de contorno estipulada para os defeitos restritos as fases b e c, a corrente drenada na fase integra a permanece nula.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A estruturacao da rede de sequencia zero para linhas de transmissao aereas multiplas exige rigorosamente a consideracao dos parametros das.",
+      "correctAnswer": true,
+      "explanation": "Linhas paralelas proximas induzem correntes de sequencia zero de alta relevância entre si; nao anular esse efeito pode causar subavaliacao fatal dos defeitos e perdas de seletividade da protecao.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Dentro da teoria das componentes simetricas, o artificio matematico chamado operador alfa imprime ao fasor sob analise uma rotacao de precisos ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "120"
+        }
+      ],
+      "explanation": "A notacao do operador de fase introduz saltos sucessivos de cento e vinte graus geometricos para espelhar as simetrias vetoriais das grandezas trifasicas estaveis.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para a resolucao classica de um curto-circuito unifilar fase a terra, sabe-se que a corrente eficaz de defeito da fase atingida atinge a magnitude ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "3"
+        }
+      ],
+      "explanation": "A condicao imposta revela que os tres fluxos sequenciais tornam-se iguais entre si no defeito; portanto, a sintese na fase em falta congrega a multiplicacao direta da grandeza homopolar por tres.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos modelos simplificados para suprimentos e maquinas sincronas simetricas, atesta-se que as forcas eletromotrizes ou tensoes originalmente geradas ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "positiva"
+        }
+      ],
+      "explanation": "Geradores adequadamente confeccionados produzem apenas tensoes de perfil sequencial direto original, despindo inteiramente de fontes as representacoes em diagramas das sequencias negativa e zero.",
+      "difficulty": "hard"
+    }
+  ]
+}

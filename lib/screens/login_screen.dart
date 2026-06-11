@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -35,6 +36,22 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     if (widget.prefillPassword != null) {
       _passwordController.text = widget.prefillPassword!;
+    }
+  }
+
+  static const _devEmail = String.fromEnvironment('SPARK_DEV_EMAIL');
+  static const _devPassword = String.fromEnvironment('SPARK_DEV_PASSWORD');
+  static const _devAutoLogin = bool.fromEnvironment('SPARK_DEV_AUTOLOGIN', defaultValue: false);
+
+  @override
+  void initState() {
+    super.initState();
+    if (kDebugMode && _devEmail.isNotEmpty && _devPassword.isNotEmpty) {
+      _emailController.text = _devEmail;
+      _passwordController.text = _devPassword;
+      if (_devAutoLogin) {
+        WidgetsBinding.instance.addPostFrameCallback((_) => _handleLogin());
+      }
     }
   }
 

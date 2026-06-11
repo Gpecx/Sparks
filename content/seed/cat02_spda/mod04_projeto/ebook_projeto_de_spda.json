@@ -1,0 +1,279 @@
+{
+  "category": "SPDA",
+  "categoryOrder": 1,
+  "module": "Projeto de SPDA",
+  "moduleOrder": 3,
+  "moduleSubtitle": "Da análise de risco ao laudo: o projeto completo de SPDA segundo a ABNT NBR 5419",
+  "ebookTitle": "Projeto de SPDA",
+  "ebookSubtitle": "Fundamentos, avaliação de risco, captação, descidas, aterramento, materiais, DPS e legalização do projeto de SPDA",
+  "estimatedMinutes": 80,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de Projeto de SPDA",
+      "subtitle": "A estrutura da NBR 5419, o papel do engenheiro e o gerenciamento de risco",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A estrutura da norma e quem pode projetar",
+          "type": "text",
+          "body": "A ABNT NBR 5419 é estruturada em 4 partes: Princípios gerais (1), Análise de risco (2), Danos físicos a estruturas (3) e Sistemas elétricos e eletrônicos internos (4) (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA). O CREA regulamenta que somente o Engenheiro eletricista, por sua formação e registro, tem a competência legal e responsabilidade para projetar, instalar, inspecionar e emitir laudos de SPDA (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia). A malha de aterramento deve ser dimensionada conforme os requisitos da norma NBR 15751 (Sistema de aterramento de subestações), que deve atuar de maneira complementar à NBR 5419 (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "O gerenciamento de risco como etapa inicial",
+          "type": "list",
+          "items": [
+            "O Gerenciamento de Risco (Parte 2) é a etapa preliminar essencial para a avaliação quantitativa, determinação da necessidade do SPDA e seleção do nível de proteção adequado para o projeto (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+            "A Análise de Risco (Gerenciamento de Risco) não pode ser omitida; o nível de proteção adequado NÃO é escolhido arbitrariamente, mas sim como resultado do cálculo iterativo do Risco inicial contra o Risco Tolerável (RT) (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+            "Se R > RT (Risco maior que o Tolerável), o projetista deve implementar medidas de proteção de forma progressiva (SPDA, MPS, etc.) até que o risco seja reduzido a um nível tolerável (R menor ou igual a RT) (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+            "O processo de decisão é iterativo: calcula-se o risco inicial; se R > RT, implementam-se medidas de proteção progressivamente, do nível mais básico (LPL IV) ao mais rigoroso (LPL I), até que R menor ou igual a RT, evitando superdimensionamento (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Ferramentas e parâmetros de apoio",
+          "type": "text",
+          "body": "O Instituto de Energia e Ambiente da USP desenvolveu uma planilha (software) chamada TUPAN para auxiliar na análise e no gerenciamento de risco da ABNT NBR 5419 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). O parâmetro que representa a Densidade de descargas atmosféricas (raios/km2/ano) da localidade no cálculo do Gerenciamento de Risco e que rege a probabilidade de impacto é denominado Ng (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s4",
+          "title": "Métodos de captação, MPS e responsabilidade técnica",
+          "type": "note",
+          "body": "Os métodos de posicionamento do subsistema de captação permitidos na norma permanecem sendo: Método da esfera rolante, Método das malhas (Faraday) e Método do ângulo de proteção (Franklin) (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA). As diretrizes da Parte 4 apresentam as Medidas de Proteção contra Surtos (MPS), fundamentais para evitar falhas ou a queima de instalações eletroeletrônicas (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria). A emissão da ART (Anotação de Responsabilidade Técnica) é obrigatória para formalizar a responsabilidade técnica do Engenheiro e dar validade ao laudo e ao projeto de SPDA (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NBR 5419 tem 4 partes (princípios, análise de risco, danos físicos e sistemas internos) e exige Engenheiro eletricista registrado no CREA com ART. O Gerenciamento de Risco (Parte 2) é a etapa inicial obrigatória: o nível de proteção resulta de um cálculo iterativo de R contra RT, implementando medidas progressivamente do LPL IV ao LPL I até R menor ou igual a RT. O parâmetro Ng (densidade de descargas) é central, e ferramentas como o TUPAN apoiam o cálculo. Os três métodos de captação e as MPS (Parte 4) completam o arcabouço do projeto."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Avaliação de Risco e Necessidade de SPDA",
+      "subtitle": "Perdas, fontes de danos, componentes de risco e cálculo quantitativo",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Tipos de perdas e tipos de danos",
+          "type": "text",
+          "body": "A ABNT considera os seguintes tipos de perdas: perda de vidas humanas (L1); perda de instalação de serviço ao público (L2); perda de memória cultural (L3); e perda de valor econômico (L4) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). São considerados três tipos de danos: os ferimentos aos seres vivos (D1), os danos físicos às estruturas (D2) e as falhas nos sistemas elétricos e eletrônicos (D3) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). Na atualização, as perdas classificadas como L2 (perda de serviço ao público) e L4 (perda de valor econômico) deixam de integrar o corpo normativo da Parte 1; permanecem apenas as perdas L1 e L3 (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)."
+        },
+        {
+          "id": "s2",
+          "title": "Fontes de danos e componentes de risco",
+          "type": "list",
+          "items": [
+            "O estudo avalia as fontes de danos: descargas diretamente na estrutura (S1), próximo à estrutura (S2), nas linhas elétricas (S3) e próximas às linhas (S4) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "A componente RA trata de riscos a ferimentos em seres vivos que sejam causados devido tensão de passo e de toque decorrentes de descargas na estrutura (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "A componente RB está relacionada aos danos físicos que podem ser causados por centelhamentos dentro da edificação originando risco de incêndio ou explosão (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "O risco relativo à falha no sistema interno originado por LEMPs de descargas diretas na edificação (S1) é a componente RC. A componente RM refere-se a falhas por LEMP de descargas próximas à edificação (S2) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "Todos esses três riscos (RU, RV, RW) podem ser zero se o tipo de linha for cabo protegido/em dutos metálicos e se essa blindagem for interligada, na entrada da linha, ao mesmo barramento de equipotencialização que o equipamento (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Cálculo das componentes de risco",
+          "type": "text",
+          "body": "Para o cálculo de cada uma das componentes de risco, utiliza-se a equação Rx = Nx x Px x Lx, onde Nx é o número de eventos perigosos por ano, Px é a probabilidade de dano à estrutura e Lx é a perda consequente (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). O parâmetro Nd representa o número anual de eventos perigosos, calculado pelo produto da densidade de raios (Ng) pela área de exposição (Ae): Nd = Ng x Ae. A área de exposição equivalente (Ae) considera o comprimento (L), a largura (W) e a altura (H) da edificação, incluindo a área circular ao redor influenciada pela altura: Ae = LW + 2LH + 2WH + pi*H2 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). O Ng era calculado pela equação Ng = 0,04 x Td^1,25, onde Td é a quantidade média de dias que ocorreram trovoadas ao longo de um ano (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s4",
+          "title": "Risco tolerável, zonas e zeragem de riscos",
+          "type": "note",
+          "body": "Para a Perda de Vidas Humanas (Risco R1), o critério mais rigoroso da norma estabelece o Risco Tolerável (RT) aceitável como sendo de 1 em 100.000 por ano (10^-5) (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). É possível dividir a estrutura em zonas de estudo (ZS) e avaliar cada componente separadamente; a planilha permite escolher zonas e o risco total será a soma de cada risco de sua respectiva zona (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). Em um edifício residencial, onde não há a presença de equipamento eletroeletrônico para serviço essencial ao público e nem patrimônio cultural, os riscos R2 e R3 são iguais a zero. Se na edificação em estudo não há presença de pessoas, então torna-se zero o risco R1, pois os riscos são referentes a algum tipo de perda, e não é possível perder aquilo que não se tem (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A avaliação de risco considera quatro perdas (L1, L2, L3, L4 — na atualização permanecem L1 e L3), três danos (D1, D2, D3) e quatro fontes (S1 a S4), traduzidas em componentes (RA, RB, RC, RM, RU, RV, RW). Cada componente segue Rx = Nx x Px x Lx, com Nd = Ng x Ae e Ng = 0,04 x Td^1,25. O RT para vidas humanas (R1) é 10^-5 por ano. Riscos podem ser zerados conforme o uso da edificação (R2 e R3 em residência; R1 sem pessoas) e a estrutura pode ser dividida em zonas, somando-se os riscos para decidir a necessidade de SPDA."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Métodos de Posicionamento de Captação",
+      "subtitle": "Esfera rolante, malhas (Faraday) e ângulo de proteção (Franklin)",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Os três métodos aceitos pela norma",
+          "type": "text",
+          "body": "Os métodos de posicionamento do subsistema de captação permanecem os mesmos: método da esfera rolante, método das malhas e método do ângulo de proteção (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA). O método que forma uma rede de condutores (Gaiola de Faraday) e que na norma também se reflete na instalação de condutores horizontais no topo é chamado de Método das Malhas (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia; ABNT NBR 5419:2026). O método baseia-se na distribuição da corrente da descarga pelos condutores interligados em malha ao redor/sobre a edificação, anulando o campo elétrico interno, e não na atração iônica para o centro (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "Esfera rolante e ângulo de proteção (Franklin)",
+          "type": "list",
+          "items": [
+            "Neste método utiliza-se uma esfera fictícia a qual rola pela estrutura. Se nenhum ponto da estrutura, com exceção do subsistema de captação, tocar na esfera, a área está protegida (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
+            "A definição do método de Franklin determina que o volume de proteção provido por um mastro é definido pela forma de um cone circular cujo vértice está posicionado no eixo do mastro (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "O novo conceito substitui a tabela por um gráfico que permite, em situações específicas para estruturas baixas (até 2 metros), trabalhar com ângulos maiores, variando de 70 até quase 80 graus (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "Caso a estrutura tenha altura superior a 60 metros, a chance de uma descarga atmosférica atingir sua lateral deixa de ser desprezível, passando a ser considerada a necessidade de instalação de captação na lateral da construção (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Distância de atração e raio da esfera por classe",
+          "type": "text",
+          "body": "A ABNT NBR 5419 utiliza as constantes k = 10 e p = 0,65 na equação elaborada pelo GT-33 da CIGRE para determinar a distância de atração (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães). A equação R = k x Imax^p demonstra que a distância de atração (R) é função direta da intensidade (valor de crista Imax) do raio, e não restrita à topografia do terreno (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães). O raio da esfera rolante depende da classe do SPDA, sendo estipulado rigorosamente em 20 metros para a Classe I. Para a Classe IV, o raio estipulado para a esfera rolante é de 60 metros, sendo o raio de 45 metros correspondente à Classe III (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães; Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s4",
+          "title": "Dimensões das malhas, captores naturais e ESE",
+          "type": "note",
+          "body": "A tabela de dimensões do Método das Malhas indica que, para o Nível II (Classe II), o máximo afastamento dos condutores da malha é de 10 x 10 metros. De acordo com a tabela normativa para o Método das Malhas, a distância máxima (afastamento) dos condutores para a Classe III de SPDA é de 15 x 15 metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). É possível utilizar elementos naturais da cobertura, como o próprio telhado metálico, para captação, desde que atendam às características técnicas mínimas exigidas pela norma (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). O texto explicita que a determinação do volume de proteção considera apenas dimensões físicas reais, reforçando que sistemas não convencionais como os captores tipo ESE permanecem fora dos métodos aceitos pela norma (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A captação usa três métodos: esfera rolante (esfera fictícia que rola; área protegida se nada além do captor a tocar), malhas/Faraday (rede de condutores que distribui a corrente e anula o campo interno) e ângulo de proteção/Franklin (cone com vértice no mastro). A distância de atração segue R = k x Imax^p com k = 10 e p = 0,65 (GT-33 da CIGRE); o raio da esfera é 20 m (Classe I), 45 m (Classe III) e 60 m (Classe IV). As malhas têm afastamento de 10 x 10 m (Classe II) e 15 x 15 m (Classe III). Captores naturais são aceitos; sistemas ESE permanecem fora da norma."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Dimensionamento de Descidas e Aterramento",
+      "subtitle": "Espaçamento de descidas, anel de aterramento e seções mínimas",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Espaçamento dos condutores de descida",
+          "type": "list",
+          "items": [
+            "A tabela de distâncias entre os condutores de descida da norma determina que para os Níveis de Proteção I e II, o espaçamento médio é de 10 metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "A tabela normativa especifica que o espaçamento médio entre os condutores de descida não naturais para a Classe do SPDA III é de 15 metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "A tabela estabelece que para a Classe do SPDA IV, o espaçamento médio normal (antes da tolerância) entre os condutores de descida é de 20 metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "A nota da tabela de distâncias normativas dita expressamente: é aceitável que o espaçamento dos condutores de descidas tenha no máximo 20% além dos valores da tabela (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Instalação do anel de aterramento",
+          "type": "text",
+          "body": "Com relação à instalação dos condutores de aterramento, o anel deverá ser enterrado em uma profundidade de 0,5 m no mínimo (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). Deve ser feito um anel externo à estrutura, onde o condutor deverá estar em contato com o solo no mínimo 80% do seu comprimento total. A instalação do anel de aterramento deve ser posicionada a uma distância mínima de 1 m ao redor da edificação a ser protegida (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia). Para utilizar os eletrodos naturais, deve-se garantir a continuidade elétrica; no caso de concreto protendido, os cabos de aço não podem ser utilizados como condutores para o sistema de aterramento (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)."
+        },
+        {
+          "id": "s3",
+          "title": "Seções mínimas dos condutores",
+          "type": "text",
+          "body": "Para condutores de descida em estruturas de altura superior a 20 metros, a área de seção mínima para o Cobre (encordoado) é de 35 mm2 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). Na tabela normativa de dimensões mínimas, o eletrodo de aterramento não cravado fabricado em Aço galvanizado a quente, na configuração de fita maciça, exige uma área de seção mínima de 90 mm2 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). Na tabela de materiais do SPDA, o Alumínio não possui valor de seção para eletrodo de aterramento (a célula apresenta um hífen), sendo vetado o seu uso em contato direto com o solo (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). Os condutores de aço cobreado passam a ter seções nominais equiparadas às dos condutores de cobre, com valores mínimos de 35 mm2 para os subsistemas de captação e descida e de 50 mm2 para aterramento (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)."
+        },
+        {
+          "id": "s4",
+          "title": "Mudanças da NBR 5419:2026 no aterramento e descidas",
+          "type": "note",
+          "body": "No subsistema de descida, passa a ser admitida a utilização de condutores com isolação específica conforme a IEC TS 62561-8, o que permite manter a distância de segurança e reduzir o risco de centelhamentos (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA). A atualização da norma elimina a possibilidade anteriormente prevista de interrupção parcial do anel de aterramento quando instalado fora do solo, exigindo agora o seu fechamento contínuo. Entre os ajustes está a proibição do uso de aço zincado a quente na transição entre o concreto e o solo. A nova redação passa a permitir a instalação interna do anel de aterramento em edificações geminadas; se adotada essa instalação interna, devem ser previstas medidas que minimizem os riscos por tensões perigosas de superfície como tensão de passo e de toque (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA; Subsistema de Aterramento em SPDA, Mesh Engenharia). A nova ABNT NBR 5419 reafirma que as hastes de aterramento continuam não sendo permitidas como único componente do sistema, podendo ser utilizadas apenas como complemento (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O espaçamento dos condutores de descida é 10 m (Níveis I e II), 15 m (Classe III) e 20 m (Classe IV), com tolerância de até 20% além da tabela. O anel de aterramento deve ser enterrado a no mínimo 0,5 m, posicionado a pelo menos 1 m da edificação e em contato com o solo em ao menos 80% do comprimento. Seções mínimas: 35 mm2 para cobre encordoado nas descidas (estruturas acima de 20 m) e 90 mm2 para fita de aço galvanizado a quente como eletrodo não cravado; alumínio é vetado em contato direto com o solo. A NBR 5419:2026 admite isolação IEC TS 62561-8, exige anel contínuo, proíbe aço zincado na transição concreto-solo, permite anel interno em geminadas e mantém hastes só como complemento."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Materiais, Componentes e DPS",
+      "subtitle": "Tabelas de materiais, normas de componentes e a função dos DPS",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Materiais e dimensões mínimas dos eletrodos",
+          "type": "list",
+          "items": [
+            "Na tabela de materiais e dimensões mínimas, a célula para o Alumínio como eletrodo de aterramento possui um traço (hífen), o que significa que o seu uso não é permitido em contato direto com o solo (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "A tabela de dimensões mínimas para eletrodos de aterramento dita que a fita maciça fabricada de aço galvanizado a quente como eletrodo não cravado exige no mínimo 90 mm2 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "De acordo com a Tabela normativa de dimensões mínimas para eletrodo, o material Cobre, na configuração construtiva Encordoado e atuando como Eletrodo não cravado possui como exigência a área de seção mínima de 50 mm2 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "O texto confirma que passam a ser permitidos, no aterramento, cabos de cobre ou de aço cobreado com formação de 7 ou 19 fios (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Atualizações de componentes na NBR 5419:2026",
+          "type": "text",
+          "body": "No caso dos dispositivos de proteção contra surtos, os requisitos técnicos passam a ser direcionados à série ABNT NBR IEC 61643, responsável pela padronização desses dispositivos (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA). Para os captores verticais maciços ou tubulares, como postes e mastros, passa a existir orientação formal para que seja realizado o dimensionamento mecânico capaz de suportar os esforços do vento, conforme a ABNT NBR 6123 (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA). Os condutores de aço cobreado passam a ter seções nominais equiparadas às do cobre, com valores mínimos de 35 mm2 para os subsistemas de captação e descida e de 50 mm2 para o subsistema de aterramento. A norma atualizada de 2026 passou a admitir oficialmente o uso de condutores de cobre no concreto da edificação, e proíbe o uso de aço zincado a quente na transição entre o concreto e o solo (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)."
+        },
+        {
+          "id": "s3",
+          "title": "Tipos de DPS e sua eficiência",
+          "type": "text",
+          "body": "O texto destaca a diferença clara de eficiência em relação a dois tipos de aparelhos: os dispositivos comutadores, como é o caso dos DPS centelhadores; e os dispositivos limitadores de tensão, como aqueles baseados em varistores (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA). A norma cita textualmente a utilização de dispositivos de proteção contra surtos Classe I como parte das medidas de proteção contra choques elétricos associados às descargas atmosféricas (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)."
+        },
+        {
+          "id": "s4",
+          "title": "O que o DPS faz (e o que não faz)",
+          "type": "note",
+          "body": "Apenas a instalação de DPS é exclusivamente uma MPS e não cumpre nenhuma função adicional em uma instalação elétrica, enquanto aterramento, equipotencialização e roteamento já farão parte de um projeto de instalação (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria). Um DPS não estabiliza a tensão, nem filtra perturbações em regime permanente; ele apenas protege contra sobretensões temporárias originadas por raios e chaveamentos (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria). O material apresenta a instalação de DPS como medida essencial de vinculação indireta das fases ativas, indicando: DPS para equipotencialização indireta de condutores normalmente energizados (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria). Os riscos podem ser minimizados a zero se a linha em cabo protegido tiver a sua blindagem interligada, na entrada, ao mesmo barramento de equipotencialização que o equipamento (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As tabelas de materiais definem seções mínimas (90 mm2 para fita de aço galvanizado a quente; 50 mm2 para cobre encordoado como eletrodo não cravado) e vetam o alumínio em contato direto com o solo. A NBR 5419:2026 direciona os DPS à série ABNT NBR IEC 61643, exige dimensionamento mecânico de mastros pela NBR 6123, equipara o aço cobreado ao cobre, admite cobre no concreto e proíbe aço zincado na transição concreto-solo. Há dois tipos de DPS: comutadores (centelhadores) e limitadores (varistores), com uso de DPS Classe I contra choques. O DPS é exclusivamente uma MPS: protege contra sobretensões de raios e chaveamentos, mas não estabiliza tensão nem filtra perturbações."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Documentação e Legalização",
+      "subtitle": "ART, laudo, PIE/NR-10, AVCB e periodicidade de inspeções",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Competência legal, CREA e ART",
+          "type": "text",
+          "body": "Apenas o Engenheiro eletricista registrado no CREA tem competência legal para projetar, instalar, inspecionar e emitir laudos sobre sistemas de proteção contra descargas atmosféricas (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia). O CREA fiscaliza o exercício profissional, garantindo que os projetos e execuções de SPDA sejam realizados por profissionais habilitados e com ART registrada (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia). A emissão da ART (Anotação de Responsabilidade Técnica) pelo Engenheiro é obrigatória para atestar a validade legal do laudo de SPDA perante os órgãos de fiscalização. Apenas o Engenheiro Eletricista registrado no CREA é habilitado para assinar o Laudo de Inspeção do SPDA; nem técnicos nem eletricistas possuem a atribuição legal para emitir e assinar esse tipo de laudo (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "Documentação técnica e o PIE da NR-10",
+          "type": "list",
+          "items": [
+            "A documentação técnica deve conter desenhos gráficos em formato e escala que possibilitem a verificação das dimensões, materiais e posição de todo sistema de SPDA, garantindo a sua rastreabilidade e manutenção futura (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
+            "O Relatório de Medições deve documentar as medições de resistência de aterramento e a integridade do SPDA, realizadas conforme as recomendações da NBR 5419 (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
+            "A NR-10 determina obrigatoriamente que o Prontuário de Instalações Elétricas (PIE) para estabelecimentos com carga acima de 75 kW deve abrigar o projeto e o laudo de SPDA válidos e as medições de aterramento (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+            "O PIE deve conter: Projeto completo do SPDA com memorial de cálculo, Certificados de conformidade dos materiais, Laudo de inspeção, Medições de resistência de aterramento, ART de projeto/inspeção e Procedimentos de manutenção (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+            "A integração entre a NBR 5419 e a NR-10 exige que o Prontuário de Instalações Elétricas (PIE) contenha o projeto completo, o Laudo de Inspeção do SPDA, medições e a ART do engenheiro (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "AVCB e implicações legais",
+          "type": "text",
+          "body": "Em muitos estados, o Corpo de Bombeiros verifica o SPDA como parte das exigências essenciais para a liberação do Auto de Vistoria do Corpo de Bombeiros (AVCB); verifica a existência e a manutenção adequada dos SPDAs como parte dessas exigências (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia). A implicação legal é crítica: a ausência ou não-conformidade do Laudo de SPDA no PIE constitui infração à NR-10, sujeitando o estabelecimento a autuações do Ministério do Trabalho e interdições (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)."
+        },
+        {
+          "id": "s4",
+          "title": "Periodicidade de inspeções",
+          "type": "note",
+          "body": "Conforme a ABNT, deve haver um período de tempo previsto para as inspeções, sendo que anualmente é necessária uma inspeção visual para todos os elementos aparentes do SPDA (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). As recomendações de frequência de inspeções indicam que para a Classe I, a inspeção deve ser anual; conforme as recomendações da norma, para a Classe III a inspeção completa deve ocorrer a cada 3 anos (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia). A norma exige um período máximo de 1 ano para a inspeção completa de construções expostas a condições severas, como regiões de maresia, ambientes industriais com produtos agressivos e locais para armazenamento de explosivos (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015). Se houver alterações nas características da edificação, como reformas, mudanças nas áreas protegidas ou nos equipamentos do SPDA, uma nova inspeção deve ser realizada, independente do prazo anterior (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Somente o Engenheiro eletricista registrado no CREA pode projetar, inspecionar e assinar o laudo de SPDA, sempre com ART, que dá validade legal ao documento. A documentação exige desenhos em escala e relatório de medições; o PIE (NR-10, cargas acima de 75 kW) deve conter projeto, memorial, certificados, laudo, medições, ART e procedimentos de manutenção. O Corpo de Bombeiros exige SPDA para o AVCB, e a ausência ou não-conformidade do laudo no PIE gera autuações e interdições. As inspeções são anuais (visuais e Classe I), a cada 3 anos para Classe III, anuais para ambientes severos, e antecipadas sempre que houver reformas ou alterações na edificação."
+        }
+      ]
+    }
+  ]
+}

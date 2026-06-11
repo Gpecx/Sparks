@@ -1,0 +1,268 @@
+{
+  "category": "SPDA",
+  "categoryOrder": 1,
+  "module": "Fundamentos de SPDA",
+  "moduleOrder": 0,
+  "moduleSubtitle": "Física dos raios, mapas ceráunicos, conceitos, tipos e níveis de proteção",
+  "ebookTitle": "Fundamentos de SPDA",
+  "ebookSubtitle": "Da formação física do raio aos níveis de proteção da NBR 5419",
+  "estimatedMinutes": 67,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Física dos Raios e Formação",
+      "subtitle": "Como nasce e se propaga uma descarga atmosférica",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A nuvem de tempestade e seus centros de carga",
+          "type": "text",
+          "body": "Para entender o raio é preciso começar pela nuvem que o produz. A estrutura elétrica simples mais aproximada para uma nuvem de tempestade é a tripolar, com centro de cargas positivas no topo, um negativo no meio e um menor positivo na base (Fonte: A fisica dos raios Parte 1, SciELO). É dentro dessa configuração que se acumulam campos elétricos extremos: a literatura científica registra que campos elétricos superiores a 100 kV/m já foram medidos no interior das nuvens que produzem raios (Fonte: A fisica dos raios Parte 1, SciELO). Quando esse campo se torna intenso o suficiente, o ar deixa de isolar e tem início a descarga."
+        },
+        {
+          "id": "s2",
+          "title": "Raios descendentes, ascendentes e intranuvem",
+          "type": "list",
+          "items": [
+            "Os raios descendentes se iniciam no interior da nuvem entre centros de carga opostas, surgindo uma descarga líder bidirecional, em que as pontas positiva e negativa propagam-se para lados opostos (Fonte: A fisica dos raios Parte 1, SciELO)",
+            "Os raios ascendentes (ou solo-nuvem) são descargas que se iniciam a partir da extremidade de alguma estrutura alta no solo, propagando-se para cima (Fonte: A fisica dos raios Parte 1, SciELO)",
+            "Na fase ativa da tempestade, os raios descendentes de polaridade negativa costumam ser os mais frequentes, correspondendo de 80 a 90% dos casos (Fonte: A fisica dos raios Parte 1, SciELO)",
+            "Os raios que não tocam o solo são a maioria, representando em torno de 80 a 90% das descargas, sendo denominados raios na nuvem ou intranuvem (Fonte: A fisica dos raios Parte 1, SciELO)",
+            "Os raios que tocam o solo são a minoria, porém produzem muito mais danos porque interagem diretamente com construções, pessoas e instalações (Fonte: A fisica dos raios Parte 1, SciELO)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Líderes, passos e a descarga de retorno",
+          "type": "text",
+          "body": "O canal do raio se forma por etapas. Os líderes negativos propagam-se de forma escalonada (em passos) através de microdescargas em ar virgem, e este comportamento gera intensa emissão de radiação eletromagnética, particularmente em VHF (Fonte: A fisica dos raios Parte 1, SciELO). Quando o líder negativo viaja por um trecho de ar já previamente ionizado por descargas de retorno anteriores, os passos (escalões) tendem a sumir, ganhando velocidade e recebendo o nome de líder contínuo (Fonte: A fisica dos raios Parte 1, SciELO). Os líderes iniciados no solo que se conectam ao canal do raio principal são os conectivos (LAC), enquanto os demais que restam e retraem são os líderes ascendentes não-conectivos (LANC) (Fonte: A fisica dos raios Parte 1, SciELO). Quando um líder ascendente se conecta ao líder descendente, tem início o fluxo intenso de corrente gerando a etapa mais intensa e luminosa denominada descarga de retorno (Fonte: A fisica dos raios Parte 1, SciELO)."
+        },
+        {
+          "id": "s4",
+          "title": "Multiplicidade, componente M e a cintilação",
+          "type": "text",
+          "body": "Nem todo raio se resume a uma única descarga. Os raios positivos costumam terminar após uma única descarga de retorno (em 80% dos casos), sem descargas subsequentes expressivas, enquanto a alta multiplicidade de descargas é comum nos raios negativos (Fonte: A fisica dos raios Parte 1, SciELO). Quando percebemos a cintilação (o piscar do raio), isso se deve à ocorrência de múltiplas descargas de retorno que se repetem num mesmo canal em intervalos de dezenas de milissegundos (Fonte: A fisica dos raios Parte 1, SciELO). Há ainda a componente M, que é o oposto de um decaimento: é uma súbita intensificação da corrente elétrica e da luminosidade, originada pela conexão de líderes de recuo na base da nuvem com o canal contínuo ainda ativo (Fonte: A fisica dos raios Parte 1, SciELO)."
+        },
+        {
+          "id": "s5",
+          "title": "Trovão, danos térmicos e parâmetros da corrente",
+          "type": "note",
+          "body": "O intenso aquecimento gerado pela condução da corrente elétrica no ar causa rápida dilatação dos gases e compressão do ar em volta, criando a onda de choque que nossos ouvidos captam como o trovão (Fonte: A fisica dos raios Parte 1, SciELO). Como a luz emitida se propaga a 3x10^8 m/s e o som a 340 m/s, a diferença de velocidade faz com que observemos primeiro o clarão e depois escutemos o trovão (Fonte: A fisica dos raios Parte 1, SciELO). Quanto aos danos: a corrente contínua, embora possua menor intensidade (dezenas a centenas de amperes), pode durar muito mais tempo (até 1 segundo), sendo a principal responsável pelos danos térmicos agudos como fusão e combustão (Fonte: A fisica dos raios Parte 1, SciELO). Conforme a Tabela 3 da NBR 5419, a Carga Elétrica (Q) causa danos térmicos nos pontos de impacto (erosão/perfuração), enquanto a Energia Específica (W/R) está associada aos efeitos térmicos de aquecimento resistivo e mecânicos (Fonte: NBR 5419 Tabela 3, citada em A fisica dos raios, SciELO)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A nuvem de tempestade tem estrutura tripolar e abriga campos elétricos acima de 100 kV/m. Os raios podem ser descendentes (80 a 90% negativos na fase ativa), ascendentes ou intranuvem (a maioria das descargas). O canal se forma por líderes escalonados que, ao se conectarem, disparam a descarga de retorno — a etapa mais luminosa. Raios negativos têm alta multiplicidade; positivos quase sempre uma só descarga. O trovão nasce da onda de choque do ar aquecido, e os parâmetros da corrente (carga Q e energia específica W/R da Tabela 3 da NBR 5419) definem os tipos de dano."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Estatísticas e Mapas Ceráunicos do Brasil",
+      "subtitle": "Td, Ng e a incidência de raios no país",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O Brasil e a incidência de raios",
+          "type": "text",
+          "body": "O Brasil ocupa posição de destaque mundial quando o assunto é descarga atmosférica. Segundo o Instituto Nacional de Pesquisas Espaciais (INPE), o Brasil é líder mundial na incidência deste fenômeno (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). Os índices indicam que a cada 50 mortes por raio no mundo, uma acontece no Brasil, com 1.790 vítimas fatais registradas entre 2000 e 2014 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). A incidência é variável: a região de Londrina-PR tem aproximadamente 5 raios/km2/ano, ao passo que lugares excepcionais como o lago Maracaibo na Venezuela chegam a 140 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)."
+        },
+        {
+          "id": "s2",
+          "title": "Td: o nível ceráunico",
+          "type": "text",
+          "body": "O ponto de partida histórico dos cálculos é o Td. O Td é a quantidade média de dias que ocorreram trovoadas ao longo de um ano, consultado através de um mapa isoceráunico (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). Esse parâmetro pode ser consultado através de um mapa isoceráunico do Brasil, com curvas de contorno (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). A quantidade média de dias com trovoadas ao longo de um ano é representada pela sigla Td, que era consultada nos mapas isoceráunicos (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)."
+        },
+        {
+          "id": "s3",
+          "title": "Ng: a densidade de descargas",
+          "type": "list",
+          "items": [
+            "O parâmetro Ng representa a densidade de descargas atmosféricas para a terra (raios/km2/ano), sendo fundamental nos cálculos modernos de risco da NBR 5419 (Fonte: ABNT NBR 5419:2026 Guia pratico / Cleiton Junior Lopes)",
+            "A densidade de descargas atmosféricas (Ng) é quantificada e representada nos mapas na unidade descargas/km2/ano, ou seja, raios por quilômetro quadrado por ano (Fonte: Cleiton Junior Lopes / ABNT NBR 5419:2026 Guia pratico)",
+            "Na edição de 2005, o Ng era calculado pela equação Ng = 0,04 x Td elevado a 1,25 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+            "O Ng passa agora a ser obtido de uma forma mais precisa através de mapas diretos de densidade fornecidos pelo INPE, sem a necessidade de calcular a partir do nível ceráunico (Td) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+            "O INPE disponibilizou um mapa do Brasil e mais cinco mapas das regiões brasileiras nos quais se pode obter diretamente o Ng (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Do Td ao Ng: a fórmula histórica",
+          "type": "formula",
+          "formula": "Ng = 0,04 × Td^1,25",
+          "explanation": "Na edição de 2005 da norma, a densidade de descargas Ng (raios/km2/ano) era estimada a partir do nível ceráunico Td (dias de trovoada por ano) por esta equação (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). Hoje o Ng passa a ser obtido de forma mais precisa através de mapas diretos de densidade fornecidos pelo INPE, sem a necessidade de calcular a partir do Td (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)."
+        },
+        {
+          "id": "s5",
+          "title": "O que mudou na apresentação dos dados",
+          "type": "note",
+          "body": "A norma de 2026 modificou a apresentação dos dados, exigindo que cada município adote um único valor de referência que corresponde à maior densidade de descargas observada em seus limites territoriais (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). Os novos valores foram obtidos por meio de dados coletados por satélites e sensores, com melhorias no processamento das informações (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). Como resultado dessa atualização, diversos municípios brasileiros passaram a apresentar valores de referência mais elevados, não menores (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). Esses dados alimentam o cálculo de risco: o número previsível de descargas (Nd) na estrutura é calculado pelo produto de Ng x Ae, onde Ae é a Área de exposição equivalente em m2 (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O Brasil é líder mundial em incidência de raios, com forte variação regional (cerca de 5 raios/km2/ano em Londrina). O Td (dias de trovoada por ano) era lido em mapas isoceráunicos e convertido em Ng pela fórmula Ng = 0,04 × Td^1,25 na edição de 2005. Hoje o Ng (densidade de descargas, raios/km2/ano) vem direto de mapas do INPE. A NBR 5419:2026 passou a exigir um único valor de referência por município — a maior densidade observada —, com valores em geral mais elevados. O Ng alimenta o cálculo Nd = Ng × Ae do gerenciamento de risco."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Conceitos e Categorias de SPDA",
+      "subtitle": "O que é, o que protege e o conceito de PDA",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é o SPDA",
+          "type": "text",
+          "body": "O SPDA é um conjunto de componentes destinado a interceptar, conduzir e dissipar de forma segura a corrente elétrica de uma descarga atmosférica para o solo, protegendo pessoas e estruturas (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia). É importante entender seu limite: um SPDA não impede que a descarga atmosférica ocorra. Além disso, mesmo um sistema instalado corretamente de acordo com a ABNT não pode garantir proteção absoluta e total, servindo para minimizar drasticamente os riscos (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)."
+        },
+        {
+          "id": "s2",
+          "title": "Os subsistemas do SPDA",
+          "type": "list",
+          "items": [
+            "Conforme a norma ABNT NBR 5419:2015, o SPDA é dividido nos seguintes subsistemas principais: sistema de captação, sistema de descidas e sistema de aterramento (Fonte: A3A Engenharia e Mesh Engenharia, Subsistema de Aterramento em SPDA)",
+            "Os métodos de posicionamento do subsistema de captação aceitos são o método da esfera rolante, método das malhas e método do ângulo de proteção (Franklin) (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+            "Sistemas não convencionais como ESE (Early Streamer Emission) permanecem fora dos métodos aceitos (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+            "É interessante assumir uma única estrutura de aterramento integrando todos os propósitos como o SPDA, sistemas de energia e sinal (telecomunicações, dados), proporcionando economia e facilidade na manutenção e impedindo diferenças perigosas de potencial (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Os Níveis de Proteção (LPL)",
+          "type": "text",
+          "body": "A NBR 5419 estabelece quatro Níveis de Proteção contra Raios (Lightning Protection Level - LPL), classificados numericamente de I a IV (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). O raio da esfera rolante para o Nível de Proteção I (LPL I, proteção máxima), o mais exigente da norma, é estipulado em 20 metros (Fonte: HazOp Engenharia / Professor Pablo Guimaraes, Metodo da Esfera Rolante). Para o LPL I, obrigatório em locais como hospitais e áreas com explosivos, a corrente mínima considerada para penetração da esfera é de 2,9 kA com raio de 20 m (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). Já a tabela para o Método da Esfera Rolante determina que o LPL II deve utilizar uma esfera fictícia com raio rigoroso de 30 metros (Fonte: HazOp Engenharia e Professor Pablo Guimaraes, Metodo da Esfera Rolante). Quanto às descidas, o espaçamento médio estipulado para os condutores de descida de Nível IV (LPL IV) é de 25 metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)."
+        },
+        {
+          "id": "s4",
+          "title": "Do SPDA às MPS: o conceito de PDA",
+          "type": "text",
+          "body": "A proteção moderna vai além da estrutura física. A parte 4 da norma técnica ABNT NBR 5419:2015 apresenta as Medidas de Proteção contra Surtos (MPS), essenciais para proteger equipamentos internos (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria). O SPDA continua sendo a proteção contra danos físicos à estrutura e à vida humana, enquanto as MPS tratam especificamente da proteção de equipamentos e sistemas elétricos e eletrônicos (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). O termo SPDA divide agora espaço com o termo MPS: os dois termos abordados juntos (estrutural e elétrica) trazem o novo e mais abrangente conceito de Proteção contra Descargas Atmosféricas, o PDA (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). As MPS (aterramento, equipotencialização, blindagem, roteamento, DPS e interfaces isolantes) podem ser utilizadas de forma individual ou coletivamente, sem que exista uma hierarquia pré-determinada entre elas (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)."
+        },
+        {
+          "id": "s5",
+          "title": "DPS, blindagem e a Gaiola de Faraday",
+          "type": "note",
+          "body": "Apenas a instalação de DPS é exclusivamente uma MPS e não cumpre nenhuma função adicional em uma instalação elétrica, diferente do aterramento ou roteamento de cabos que já integram o projeto padrão de elétrica (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria). As blindagens e o isolamento galvânico têm o objetivo técnico de minimizar ruídos e perturbações, entre eles os surtos de tensão e corrente advindos do LEMP (Lightning Electromagnetic Impulse) (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria). Já a Gaiola de Faraday distribui a corrente elétrica da descarga ao longo dos condutores, reduzindo o impacto num ponto isolado, de forma que o campo elétrico interno à gaiola seja anulado, protegendo o interior da edificação (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O SPDA intercepta, conduz e dissipa a corrente do raio para o solo, mas não impede a descarga nem garante proteção total — apenas minimiza riscos. Divide-se em captação, descidas e aterramento, com métodos aceitos de esfera rolante, malhas e ângulo de proteção (ESE fica fora). A NBR 5419 define quatro níveis (LPL I a IV), do mais exigente (esfera de 20 m) ao básico. A parte 4 trouxe as MPS (aterramento, equipotencialização, blindagem, roteamento, DPS, interfaces isolantes), que somadas ao SPDA formam o conceito ampliado de PDA."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Tipos de SPDA: Franklin, Faraday e Eletrogeométrico",
+      "subtitle": "Métodos de captação e quando usar cada um",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Os três métodos de posicionamento da captação",
+          "type": "text",
+          "body": "A ABNT NBR 5419:2026 estipula que os métodos de posicionamento do subsistema de captação permanecem os mesmos: método da esfera rolante, método das malhas e método do ângulo de proteção (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). O texto explicita que a determinação do volume de proteção considera apenas dimensões físicas reais, reforçando que sistemas não convencionais como ESE (Early Streamer Emission) permanecem fora dos métodos aceitos pela norma (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). Pela norma atualizada, os captores verticais maciços ou tubulares (postes e mastros) passam a ter a exigência formal para o dimensionamento mecânico capaz de suportar os esforços do vento conforme a NBR 6123 (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)."
+        },
+        {
+          "id": "s2",
+          "title": "O captor Franklin (ângulo de proteção)",
+          "type": "text",
+          "body": "O captor Franklin intercepta o raio antes que atinja a estrutura, baseando-se no princípio de que pontos agudos intensificam o campo elétrico, atraindo a descarga para o aterramento (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia). O volume de proteção provido por um mastro pelo método Franklin é definido pela forma de um cone circular cujo vértice está posicionado no eixo do mastro, com ângulo dependendo da classe do SPDA e sua altura (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). O novo conceito substituiu a tabela por um gráfico que permite trabalhar com ângulos maiores em alturas baixas, chegando a quase 80 graus em casos de captores de até dois metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). A Tabela de Comparação entre os Tipos de SPDA define a Ponta Franklin com complexidade de instalação baixa, custo baixo e aplicabilidade voltada essencialmente para estruturas altas (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)."
+        },
+        {
+          "id": "s3",
+          "title": "A Gaiola de Faraday (método das malhas)",
+          "type": "text",
+          "body": "O Sistema de Condutores Horizontais disposto no topo ou nos telhados planos, similar ao conceito de Faraday de laços quadrangulares, é chamado oficialmente de Método das Malhas (Fonte: A3A Engenharia / Cleiton Junior Lopes). A Gaiola de Faraday atua criando uma rede de condutores metálicos dispostos ao redor e sobre a edificação: isso distribui a corrente e anula o campo elétrico interno, protegendo o volume (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia). Esse fenômeno garante que o campo elétrico interno à gaiola seja anulado, protegendo o edifício (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia). O método da Gaiola de Faraday possui alta complexidade e alto custo, sendo voltado para grandes edificações horizontais; para estruturas altas e estreitas como torres, a Ponta Franklin é a ideal (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)."
+        },
+        {
+          "id": "s4",
+          "title": "O método eletrogeométrico (esfera rolante)",
+          "type": "list",
+          "items": [
+            "O método eletrogeométrico utiliza uma esfera fictícia que rola pela edificação; a proteção é validada se apenas o subsistema de captação entrar em contato com a esfera (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+            "No Método da Esfera Rolante, o raio da esfera fictícia depende rigidamente da classe do SPDA desejado, variando de 20m para o Nível I até 60m para o Nível IV (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+            "O raio da esfera rolante (R) correspondente à Classe de SPDA I (nível máximo de proteção) é estipulado em 20 metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+            "Para a Classe do SPDA III, o raio da esfera rolante é 45m e o máximo afastamento dos condutores da malha é de 15 x 15 metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+            "Se a estrutura tem altura superior a 60 metros, a chance de uma descarga atingir a lateral deixa de ser desprezível, passando a ser considerada a necessidade de instalação de captores na fachada lateral (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "A distância de atração do GT-33 da CIGRE",
+          "type": "formula",
+          "formula": "R = k × Imax^p,  com k = 10 e p = 0,65",
+          "explanation": "A equação da distância de atração (R) elaborada pelo GT-33 da CIGRE adota para a ABNT NBR 5419 as constantes k = 10 e p = 0,65 no cálculo dependente de Imax (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes). É essa distância de atração que fundamenta o raio da esfera fictícia usada no método eletrogeométrico. Complementarmente, o sistema de Cabos de Guarda intercepta raios através de fios esticados por mastros ou torres e é muito comum em linhas de transmissão ou para proteger pátios abertos (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NBR 5419:2026 mantém três métodos de captação: esfera rolante, malhas e ângulo de proteção (Franklin); o ESE segue fora. O Franklin protege um cone a partir de ponta aguda — simples, barato, ideal para torres. A Gaiola de Faraday (método das malhas) cerca a edificação com condutores que anulam o campo interno — complexa e cara, ideal para grandes edifícios horizontais. O método eletrogeométrico valida a proteção rolando uma esfera fictícia (20 m no Nível I a 60 m no Nível IV), com a distância de atração R = k·Imax^p (k=10, p=0,65) do GT-33 da CIGRE. Acima de 60 m de altura, considera-se captação na fachada lateral."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Categorias de Proteção da NBR 5419",
+      "subtitle": "Níveis LPL I a IV, parâmetros e gerenciamento de risco",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "De classe de SPDA a nível de proteção (NP / LPL)",
+          "type": "text",
+          "body": "Entre as mudanças conceituais mais relevantes está a substituição do termo classe de SPDA pelo conceito de nível de proteção (NP) ou LPL (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA). Esses níveis vão do mais ao menos rigoroso: o Nível de Proteção I (LPL I) oferece proteção máxima, interceptando 99% das correntes de raio, sendo obrigatório para estruturas críticas (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). O LPL I é obrigatório para estruturas com explosivos, hospitais, centrais nucleares e áreas de grande aglomeração pública (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). Estruturas menos críticas enquadram-se nas aplicações típicas do LPL II (Proteção Elevada), e não do LPL I (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "Os quatro níveis e suas correntes mínimas",
+          "type": "list",
+          "items": [
+            "LPL I (Proteção Máxima) — raio da esfera rolante de 20 metros e corrente mínima de 2,9 kA; intercepta 99% das correntes de raio; obrigatório em locais críticos com risco de explosão e hospitais (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+            "LPL II (Proteção Elevada) — esfera de 30 m com corrente mínima presumida interceptável de 5,4 kA (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+            "LPL III (Proteção Convencional) — raio da esfera rolante de 45 metros, operando com corrente mínima de 10,1 kA (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+            "LPL IV (Proteção Básica) — corrente mínima de 15,7 kA e raio da esfera rolante fixado em 60 metros; aplicável a estruturas agrícolas, galpões de baixo valor e estruturas temporárias (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia / Professor Pablo Guimaraes)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Malhas e descidas por classe",
+          "type": "text",
+          "body": "Cada nível impõe dimensões geométricas específicas. O Método das Malhas exige dimensões de acordo com a classe do SPDA: a norma define que o afastamento máximo dos condutores é de 5 x 5 metros para a Classe I (LPL I) e de 10 x 10 metros para a Classe II (LPL II) (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). Para a Classe II (LPL II), a dimensão máxima do módulo da malha é de 10 x 10 m (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). Quanto às descidas, conforme a Tabela de distâncias da versão 2015, tanto a Classe do SPDA I quanto a Classe II possuem o espaçamento de 10 m para as descidas (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015). Já de acordo com a NBR 5419-3:2015, o espaçamento para os condutores de descida e anéis na Classe IV (LPL IV) foi atualizado para 20 metros (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)."
+        },
+        {
+          "id": "s4",
+          "title": "Parâmetros da Tabela 3 para o NP-I",
+          "type": "note",
+          "body": "A Tabela 3 da NBR 5419 fixa os valores mais severos justamente para o nível mais exigente. Conforme a Tabela 3, que trata dos parâmetros relevantes da corrente dos raios, o valor fixado de Q para o NP-I no raio descendente positivo (RD+) é de 300 Coulombs (Fonte: A fisica dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3). Na mesma Tabela 3, para a primeira descarga de retorno positiva (1DR+), o valor fixado da energia específica (W/R) exigido para o Nível de Proteção I (NP-I) é de 10.000 kJ/ohm (Fonte: A fisica dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3). São esses parâmetros que o SPDA do NP-I precisa suportar sem falhar."
+        },
+        {
+          "id": "s5",
+          "title": "Como o nível é escolhido: gerenciamento de risco",
+          "type": "text",
+          "body": "O nível de proteção adequado não é escolhido arbitrariamente. Ele resulta do cálculo iterativo do Gerenciamento de Risco (Parte 2), onde se compara o risco inicial (R) com o Risco Tolerável (RT) (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). O processo é progressivo: implementam-se as medidas dos níveis menos rigorosos para os mais rigorosos (do LPL IV ao LPL I), até que o risco R seja menor ou igual a RT, evitando superdimensionamento (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia). Assim, o nível final é consequência técnica do risco calculado, e não de uma escolha de preferência do projetista."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A norma substituiu classe de SPDA por nível de proteção (NP/LPL), de I a IV. O LPL I (máxima, esfera 20 m, 2,9 kA, malha 5x5) intercepta 99% das correntes e é obrigatório em hospitais e áreas com explosivos; seguem-se LPL II (30 m, 5,4 kA, malha 10x10), LPL III (45 m, 10,1 kA) e LPL IV (60 m, 15,7 kA, descidas 20 m). A Tabela 3 fixa para o NP-I os valores severos de Q (300 C) e W/R (10.000 kJ/ohm). O nível não é arbitrário: vem do Gerenciamento de Risco da Parte 2, aplicando medidas do LPL IV ao LPL I até que R ≤ RT, evitando superdimensionamento."
+        }
+      ]
+    }
+  ]
+}

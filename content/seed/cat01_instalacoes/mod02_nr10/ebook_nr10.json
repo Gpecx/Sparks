@@ -1,0 +1,407 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-10",
+  "moduleSubtitle": "Segurança em Instalações e Serviços em Eletricidade",
+  "moduleOrder": 1,
+  "ebookTitle": "NR-10 — Segurança em Instalações Elétricas",
+  "ebookSubtitle": "Guia completo: riscos, desenergização, SEP, LOTO e atendimento a emergências",
+  "estimatedMinutes": 100,
+  "trailFiles": [
+    "t01_fundamentos.json",
+    "t02_riscos_eletricos.json",
+    "t03_habilitacao.json",
+    "t04_procedimentos_sep.json",
+    "t05_loto.json",
+    "t06_primeiros_socorros.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos e Campo de Aplicação da NR-10",
+      "subtitle": "O que a norma cobre e os documentos exigidos",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Objetivo e abrangência",
+          "type": "text",
+          "body": "A NR-10 estabelece os requisitos e condições mínimas para garantir a segurança e a saúde dos trabalhadores que, direta ou indiretamente, interajam em instalações elétricas e serviços com eletricidade. Sua abrangência é ampla: cobre todas as fases — geração, transmissão, distribuição e consumo — e todas as etapas do ciclo de vida da instalação: projeto, construção, montagem, operação, manutenção, reforma e ampliação. Mesmo quem 'apenas trabalha perto' de instalações energizadas está sob a NR-10."
+        },
+        {
+          "id": "s2",
+          "title": "Medidas de controle: a ordem de prioridade",
+          "type": "list",
+          "items": [
+            "Desenergização — sempre a primeira escolha; trabalhar em circuito morto é o mais seguro",
+            "Aterramento funcional e de proteção — equipotencialização e aterramento temporário de trabalho",
+            "Seccionamento — isolar eletricamente o trecho de trabalho",
+            "Barreiras e invólucros — impedir contato acidental com partes vivas",
+            "Bloqueios e impedimentos — garantir que não haja religamento (LOTO)",
+            "Sinalização — alertar sobre o risco e o estado da instalação"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Documentação obrigatória do estabelecimento",
+          "type": "list",
+          "items": [
+            "Prontuário de Instalações Elétricas (PIE) — para instalações acima de 75 kW",
+            "Conjunto de procedimentos e instruções técnicas e administrativas de segurança",
+            "Documentação das inspeções e medições do SPDA e aterramentos",
+            "Especificação dos EPIs e EPCs e o registro de seu fornecimento",
+            "Diagramas unifilares atualizados com indicação de proteções e seccionamentos",
+            "Relatório técnico das inspeções com recomendações e cronograma"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "O Prontuário de Instalações Elétricas (PIE)",
+          "type": "note",
+          "body": "O PIE é o 'documento mestre' da segurança elétrica do estabelecimento. Ele reúne toda a documentação técnica, procedimentos, certificações de pessoal, laudos e o resultado dos estudos (incluindo o estudo de arco elétrico, quando aplicável). Empresas com carga instalada acima de 75 kW são obrigadas a mantê-lo permanentemente atualizado. Um PIE bem mantido é a evidência de que a instalação é gerida com segurança."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NR-10 cobre todo o ciclo de vida das instalações elétricas e quem interage com elas. Suas medidas de controle priorizam a desenergização, seguida de aterramento, seccionamento, barreiras, bloqueios e sinalização. O estabelecimento deve manter documentação completa, sendo o PIE (acima de 75 kW) o documento central que consolida toda a gestão de segurança elétrica."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Os Riscos Elétricos",
+      "subtitle": "Choque, arco elétrico, queimaduras e riscos adicionais",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O choque elétrico e seus efeitos no corpo",
+          "type": "text",
+          "body": "O choque elétrico ocorre quando o corpo se torna parte de um circuito. A gravidade depende da intensidade da corrente, do percurso pelo corpo, do tempo de exposição e da frequência. É a corrente, não a tensão, que mata — embora a tensão determine a corrente que circulará dada a resistência do corpo. Correntes da ordem de 10-20 mA já causam contração muscular que impede soltar o condutor (tetanização); acima de ~30 mA por alguns segundos há risco de parada respiratória; correntes de 50-100 mA atravessando o tórax podem provocar fibrilação ventricular — a principal causa de morte por choque."
+        },
+        {
+          "id": "s2",
+          "title": "Limiares de corrente (60 Hz, percurso mão-mão/mão-pé)",
+          "type": "list",
+          "items": [
+            "1 mA — limiar de percepção (formigamento)",
+            "10 a 16 mA — limiar de 'não-soltar' (tetanização muscular)",
+            "30 mA — risco de asfixia por contração do diafragma (por isso DRs disparam em 30 mA)",
+            "50 a 100 mA — fibrilação ventricular provável",
+            "Acima de alguns A — parada cardíaca, queimaduras profundas e carbonização"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O arco elétrico: a explosão de plasma",
+          "type": "text",
+          "body": "O arco elétrico é frequentemente mais letal que o choque. É a descarga de corrente através do ar ionizado, criando um plasma que pode atingir temperaturas de até 20.000 °C — mais quente que a superfície do Sol. O arco gera uma onda de pressão (arc blast) capaz de arremessar pessoas e estilhaços, intenso clarão (que causa cegueira temporária ou permanente), ruído acima de 140 dB, e principalmente radiação térmica que provoca queimaduras graves mesmo a metros de distância, sem contato físico com a parte energizada."
+        },
+        {
+          "id": "s4",
+          "title": "Energia incidente e o estudo de arco",
+          "type": "formula",
+          "formula": "E_incidente (cal/cm²) = f(I_curto, t_eliminação, distância de trabalho)",
+          "explanation": "A severidade do arco é quantificada pela energia incidente (cal/cm²) a uma dada distância de trabalho. Ela cresce com a corrente de curto-circuito e, principalmente, com o TEMPO de eliminação da falta — daí a importância da coordenação de proteção rápida. O estudo de arco elétrico (IEEE 1584) calcula essa energia para definir a categoria de vestimenta anti-arco e a distância de aproximação segura."
+        },
+        {
+          "id": "s5",
+          "title": "Riscos adicionais",
+          "type": "list",
+          "items": [
+            "Campos eletromagnéticos — exposição prolongada em subestações e linhas de AT",
+            "Eletricidade estática — risco de ignição em ambientes com gases/poeiras inflamáveis",
+            "Quedas — provocadas por contração muscular involuntária durante o choque",
+            "Riscos do ambiente — altura, espaço confinado, umidade (que reduz a resistência do corpo)"
+          ]
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os riscos elétricos centrais são o choque (a corrente mata; fibrilação a partir de ~50 mA) e o arco elétrico (plasma a 20.000 °C, onda de pressão, radiação térmica que queima à distância). A energia incidente do arco cresce com a corrente de curto e com o tempo de eliminação — reforçando a importância de proteção rápida. Há ainda riscos adicionais como campos, estática e quedas."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Habilitação, Qualificação e Autorização",
+      "subtitle": "Quem pode fazer o quê",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "As quatro categorias de trabalhador",
+          "type": "list",
+          "items": [
+            "Qualificado — comprovadamente concluiu curso específico na área elétrica reconhecido pelo sistema oficial de ensino",
+            "Habilitado — o profissional qualificado COM registro no conselho de classe competente (ex.: CREA)",
+            "Capacitado — trabalhador que recebeu capacitação sob orientação de profissional habilitado/qualificado e trabalha sob sua responsabilidade",
+            "Autorizado — qualquer um dos acima (qualificado, habilitado ou capacitado) que a empresa formalmente autorizou a trabalhar em instalações elétricas"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Os cursos da NR-10",
+          "type": "text",
+          "body": "A NR-10 exige treinamentos específicos. O curso básico (Segurança em Instalações e Serviços em Eletricidade) tem carga horária mínima de 40 horas e é obrigatório para todos que trabalham em instalações elétricas. Para quem atua no Sistema Elétrico de Potência (SEP) e suas proximidades, há um curso complementar (SEP) com mais 40 horas. Há ainda a reciclagem bienal e a obrigatoriedade de novo treinamento quando há mudança de função, retorno de afastamento prolongado ou alteração significativa nas instalações."
+        },
+        {
+          "id": "s3",
+          "title": "Aptidão e estado de saúde",
+          "type": "note",
+          "body": "Além da capacitação técnica, a NR-10 condiciona a autorização ao estado de saúde compatível com as atividades, comprovado em exame médico (vinculado ao PCMSO). Um trabalhador com condições que aumentem o risco (ex.: certos problemas cardíacos para trabalho em alta tensão) pode ser considerado inapto para determinadas tarefas. A aptidão é parte integrante da autorização — competência técnica não basta sozinha."
+        },
+        {
+          "id": "s4",
+          "title": "Responsabilidades e supervisão",
+          "type": "text",
+          "body": "O trabalhador capacitado só pode atuar sob supervisão e responsabilidade de profissional habilitado ou qualificado. Isso cria uma cadeia de responsabilidade técnica: a empresa autoriza, o profissional habilitado responde tecnicamente, e o capacitado executa dentro dos limites de sua capacitação. Compreender essa cadeia evita que tarefas sejam executadas por quem não tem o nível de habilitação exigido — uma das causas mais comuns de acidentes graves."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NR-10 define quatro categorias: qualificado (formação), habilitado (qualificado + registro no conselho), capacitado (treinado e supervisionado) e autorizado (formalmente designado pela empresa). Exige curso básico de 40h, complementar SEP de mais 40h, reciclagem bienal e aptidão de saúde. A supervisão por profissional habilitado é obrigatória para o capacitado."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Procedimentos de Desenergização (SEP)",
+      "subtitle": "A sequência que salva vidas",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A regra de ouro: trabalhar desenergizado",
+          "type": "text",
+          "body": "Sempre que tecnicamente viável, o trabalho deve ser realizado em instalação desenergizada. Trabalho energizado é exceção, permitido apenas quando a desenergização for inviável e mediante procedimentos especiais e autorização. A desenergização não é simplesmente 'desligar a chave' — é uma sequência rigorosa de etapas que garante, comprova e mantém o estado seguro durante todo o serviço."
+        },
+        {
+          "id": "s2",
+          "title": "A sequência de desenergização (6 etapas)",
+          "type": "list",
+          "items": [
+            "1. Seccionamento — abrir o circuito em todas as fontes de alimentação",
+            "2. Impedimento de reenergização — bloquear os dispositivos de manobra (LOTO)",
+            "3. Constatação da ausência de tensão — medir com detector/voltímetro adequado e testado",
+            "4. Instalação de aterramento temporário de trabalho (ATT) — com equipotencialização",
+            "5. Proteção dos elementos energizados na zona controlada — barreiras e sinalização",
+            "6. Instalação da sinalização de impedimento de reenergização"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A reenergização: ordem inversa e rigorosa",
+          "type": "list",
+          "items": [
+            "1. Retirada de ferramentas, utensílios e equipamentos",
+            "2. Retirada da zona controlada de todos os trabalhadores não envolvidos",
+            "3. Remoção do aterramento temporário e demais equipamentos de proteção",
+            "4. Remoção da sinalização de impedimento",
+            "5. Destravamento e religamento dos dispositivos de seccionamento"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Por que constatar a ausência de tensão",
+          "type": "note",
+          "body": "A etapa de constatação de ausência de tensão é onde muitos acidentes graves são evitados — ou causados. Um circuito que 'deveria estar desligado' pode estar energizado por: erro de identificação, alimentação por outra fonte, retroalimentação de gerador/nobreak, tensão induzida de circuitos paralelos, ou capacitância residual. SEMPRE meça com instrumento adequado e testado antes e depois (teste do detector numa fonte conhecida). Nunca confie apenas na posição da chave."
+        },
+        {
+          "id": "s5",
+          "title": "Aterramento temporário de trabalho (ATT)",
+          "type": "text",
+          "body": "O ATT cria um caminho de baixa impedância à terra, de modo que qualquer reenergização acidental seja transformada num curto-circuito que aciona a proteção, em vez de energizar o trabalhador. Ele deve ser instalado conectando primeiro a terra e depois às fases (e removido na ordem inversa). O dimensionamento do cabo de aterramento deve suportar a corrente de curto-circuito do local — um ATT subdimensionado pode se romper durante uma reenergização e deixar o circuito energizado."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Trabalhar desenergizado é a regra; energizado é exceção controlada. A desenergização segue 6 etapas (seccionar, impedir religamento, constatar ausência de tensão, aterrar, proteger, sinalizar) e a reenergização ocorre na ordem inversa. Constatar a ausência de tensão com instrumento testado é crítico — há muitas formas de um circuito 'desligado' continuar vivo. O ATT transforma reenergização acidental em curto que aciona a proteção."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Bloqueio e Etiquetagem (LOTO)",
+      "subtitle": "Lockout/Tagout: garantindo que ninguém religue",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O conceito LOTO",
+          "type": "text",
+          "body": "LOTO (Lockout/Tagout — Bloqueio/Etiquetagem) é o conjunto de procedimentos que garante que uma fonte de energia perigosa permaneça isolada durante a manutenção. O Lockout é o bloqueio físico do dispositivo de isolação (cadeado num disjuntor, numa chave), impedindo mecanicamente o religamento. O Tagout é a etiqueta de advertência que identifica quem bloqueou, por quê e quando. Juntos, eliminam o risco de energização inesperada — uma das maiores causas de mortes em manutenção."
+        },
+        {
+          "id": "s2",
+          "title": "Elementos de um programa LOTO",
+          "type": "list",
+          "items": [
+            "Dispositivos de bloqueio — cadeados individuais, garras (hasps) para múltiplos cadeados, bloqueadores de disjuntor",
+            "Etiquetas (tags) — padronizadas, resistentes, com nome, data e motivo",
+            "Cadeado individual e intransferível — cada trabalhador tem o seu, com chave única",
+            "Procedimento escrito — passo a passo específico para cada equipamento/energia",
+            "Caixa de bloqueio coletivo (group lockbox) — para tarefas com múltiplas equipes"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A regra do cadeado individual",
+          "type": "note",
+          "body": "O princípio inviolável do LOTO: cada trabalhador envolvido na tarefa coloca seu próprio cadeado, e somente ele pode removê-lo. Se cinco pessoas trabalham no circuito, há cinco cadeados na garra — e o equipamento só pode ser religado quando o último cadeado for retirado por seu dono. Isso impede que alguém religue o circuito enquanto outro ainda está exposto. Jamais remova o cadeado de outra pessoa, e jamais empreste sua chave."
+        },
+        {
+          "id": "s4",
+          "title": "LOTO de múltiplas energias",
+          "type": "text",
+          "body": "Equipamentos modernos frequentemente têm múltiplas fontes de energia perigosa, não apenas a elétrica: energia hidráulica, pneumática, mecânica (molas, gravidade, inércia), térmica e química. Um procedimento LOTO completo deve identificar e neutralizar TODAS as energias antes da intervenção. Bloquear só a elétrica de uma máquina que ainda tem um acumulador hidráulico pressurizado, por exemplo, deixa um risco letal ativo."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "LOTO garante que a energia isolada permaneça isolada durante a manutenção: Lockout (cadeado físico) + Tagout (etiqueta de advertência). A regra inviolável é o cadeado individual e intransferível — cada um coloca e só o dono remove o seu. Procedimentos completos neutralizam TODAS as energias (elétrica, hidráulica, pneumática, mecânica, térmica), não só a elétrica."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Primeiros Socorros e Atendimento a Emergências",
+      "subtitle": "O que fazer nos primeiros minutos",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A primeira ação: garantir a própria segurança",
+          "type": "note",
+          "body": "Diante de uma vítima de choque elétrico, o instinto é correr para ajudar — e é exatamente isso que mata socorristas. A PRIMEIRA ação é garantir que o circuito está desenergizado. Se você tocar uma vítima ainda em contato com a parte energizada, você se torna a segunda vítima. Desligue a fonte, ou — se impossível — afaste a vítima do contato usando material isolante seco (cabo de madeira, isolante), nunca com as mãos nuas."
+        },
+        {
+          "id": "s2",
+          "title": "Avaliação inicial da vítima",
+          "type": "list",
+          "items": [
+            "Verifique a responsividade — chame, toque o ombro",
+            "Acione o socorro especializado imediatamente — SAMU (192) ou Bombeiros (193)",
+            "Verifique respiração e sinais de circulação",
+            "Se não respira e não responde: inicie a RCP (reanimação cardiopulmonar)",
+            "Localize e prepare o DEA (desfibrilador externo automático), se disponível"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "RCP e desfibrilação",
+          "type": "text",
+          "body": "A fibrilação ventricular causada pelo choque só é revertida pela desfibrilação — e cada minuto sem RCP e desfibrilação reduz a chance de sobrevivência em cerca de 7 a 10%. A RCP de qualidade (compressões torácicas de 5-6 cm de profundidade, a 100-120 por minuto, com mínima interrupção) mantém o cérebro oxigenado até a chegada do DEA ou do socorro. Por isso a NR-10 valoriza tanto o treinamento prático em primeiros socorros: nos primeiros minutos, quem está ao lado da vítima é quem decide o desfecho."
+        },
+        {
+          "id": "s4",
+          "title": "Atendimento a queimaduras elétricas",
+          "type": "list",
+          "items": [
+            "Queimaduras elétricas costumam ser mais graves do que aparentam — o dano interno (no trajeto da corrente) é maior que a lesão visível na pele",
+            "Resfrie a área com água corrente em temperatura ambiente por 10-20 minutos",
+            "NÃO aplique gelo diretamente, cremes, pomadas ou pasta de dente",
+            "NÃO estoure bolhas nem remova roupa grudada na queimadura",
+            "Cubra com pano limpo e seco e encaminhe ao atendimento médico"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "No socorro a choque elétrico, a prioridade absoluta é não virar a segunda vítima: desenergize antes de tocar. Depois, avalie responsividade, acione o SAMU/Bombeiros, e inicie RCP se necessário — a desfibrilação precoce é o que reverte a fibrilação. Queimaduras elétricas são mais graves por dentro; resfrie com água, não aplique substâncias e encaminhe ao médico. O treinamento prático faz a diferença nos primeiros minutos."
+        }
+      ]
+    },
+    {
+      "id": "c07",
+      "order": 6,
+      "title": "Capítulo 7 — Trabalho Energizado e Proximidade",
+      "subtitle": "Quando a desenergização não é possível",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Quando o trabalho energizado é permitido",
+          "type": "text",
+          "body": "A NR-10 permite o trabalho energizado apenas em situações específicas: quando a desenergização introduzir riscos maiores, quando for tecnicamente inviável, ou em serviços em instalações elétricas que exijam continuidade (ex.: hospitais, processos contínuos). Mesmo assim, exige procedimentos específicos, autorização formal, equipe treinada e supervisão. Trabalho energizado nunca é a opção padrão — é uma exceção justificada e documentada."
+        },
+        {
+          "id": "s2",
+          "title": "Zonas de risco e controlada",
+          "type": "list",
+          "items": [
+            "Zona de risco — área próxima à parte energizada onde só se entra com procedimentos e EPI específicos, ou trabalhando energizado autorizado",
+            "Zona controlada — área restrita onde o acesso exige autorização e está sujeita a procedimentos",
+            "Zona livre — fora das distâncias de risco, acesso sem restrições específicas",
+            "As distâncias que delimitam essas zonas dependem da tensão (quanto maior a tensão, maiores as distâncias)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Procedimentos para trabalho energizado",
+          "type": "list",
+          "items": [
+            "Análise de risco específica e Permissão de Trabalho (PT)",
+            "Equipe treinada em métodos de trabalho ao potencial / à distância / em contato",
+            "EPIs e EPCs dimensionados (luvas classe adequada, vestimenta anti-arco pela energia incidente)",
+            "Ferramentas isoladas e testadas",
+            "Supervisão permanente e plano de emergência ativo"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Trabalho energizado é exceção, permitido só quando a desenergização é inviável ou mais arriscada, sempre com análise de risco, PT, equipe treinada, EPIs dimensionados e supervisão. As zonas de risco, controlada e livre são delimitadas por distâncias que crescem com a tensão. A regra permanece: energizado nunca é o padrão — é exceção justificada e documentada."
+        }
+      ]
+    },
+    {
+      "id": "c08",
+      "order": 7,
+      "title": "Capítulo 8 — Síntese: a NR-10 na prática diária",
+      "subtitle": "Transformando a norma em comportamento",
+      "estimatedMinutes": 9,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Do papel para o canteiro",
+          "type": "text",
+          "body": "A NR-10 só protege quando deixa de ser um documento na gaveta e vira comportamento automático: medir antes de tocar, bloquear antes de trabalhar, vestir o EPI correto, recusar a tarefa quando as condições não são seguras. A diferença entre um profissional seguro e um acidentado raramente é conhecimento — é disciplina na aplicação consistente dos procedimentos, todos os dias, mesmo na tarefa rotineira."
+        },
+        {
+          "id": "s2",
+          "title": "Checklist mental antes de qualquer intervenção",
+          "type": "list",
+          "items": [
+            "Estou autorizado e capacitado para esta tarefa específica?",
+            "Foi feita a análise de risco? Existe Permissão de Trabalho?",
+            "O circuito está desenergizado, bloqueado, sinalizado e a ausência de tensão foi constatada?",
+            "O aterramento temporário está instalado?",
+            "Estou com os EPIs corretos para a tensão e o risco de arco?",
+            "Sei onde está o socorro e como acioná-lo?"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A NR-10 se concretiza na disciplina diária: medir, bloquear, sinalizar, vestir o EPI certo e recusar o inseguro. O checklist mental — autorização, análise de risco, desenergização constatada, aterramento, EPI e plano de socorro — resume todo o e-book em perguntas práticas. Conhecimento sem disciplina não protege; a segurança elétrica é construída tarefa a tarefa, todos os dias."
+        }
+      ]
+    }
+  ]
+}

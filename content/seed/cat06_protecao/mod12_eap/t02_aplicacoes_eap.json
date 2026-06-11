@@ -1,0 +1,218 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Esquemas Especiais de Proteção",
+  "moduleSubtitle": "Conceitos, aplicações e implementação de EAP/SPS",
+  "moduleOrder": 11,
+  "trail": "Aplicações (Quando Usar EAP/SPS)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que justifica a atuação da função de alívio de carga em um sistema elétrico?",
+      "options": [
+        "Déficit severo de potência causando queda anormal de tensão e frequência.",
+        "Excesso de geração e aumento súbito da frequência nominal.",
+        "Sobrecarga térmica pontual em um transformador de distribuição.",
+        "Elevação da impedância de sequência zero nas linhas curtas."
+      ],
+      "correctIndex": 0,
+      "explanation": "O alívio de carga atua quando o déficit de potência provoca quedas anormais de tensão e frequência. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais critérios ou funções ANSI são classicamente utilizados para iniciar o plano de alívio de carga?",
+      "options": [
+        "Direcional de potência ativa (32) e direcional de terra (67N).",
+        "Subtensão (27), subfrequência (81L) e taxa de variação de frequência (81R).",
+        "Diferencial de linha (87L) e falha de disjuntor (50BF).",
+        "Sobrecorrente instantânea (50) e sobrecarga térmica (49)."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os critérios de alívio adotados são subtensão (27), subfrequência (81L) e taxa de variação de frequência (81R). (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a finalidade dos esquemas de controle de emergência para ilhamentos acidentais?",
+      "options": [
+        "Desconectar imediatamente todos os geradores da área afetada.",
+        "Aumentar a potência de curto-circuito na barra isolada.",
+        "Salvar parte do sistema equilibrando pontualmente a carga e a geração.",
+        "Reduzir a tensão de linha para evitar o religamento automático."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os esquemas para ilhamentos atuam no sentido de salvar parte do sistema equilibrando cargas e geradores locais. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que a separação do sistema e o alívio de carga devem atuar o quanto antes?",
+      "options": [
+        "Para garantir a atuação da proteção direcional de terra.",
+        "Para impedir a saturação magnética dos transformadores de corrente.",
+        "Para anular o acoplamento mútuo de sequência zero entre linhas.",
+        "Para evitar a completa perda de sincronismo e a perda do sistema global."
+      ],
+      "correctIndex": 3,
+      "explanation": "A separação e a rejeição previnem a completa perda de sincronismo e o consequente blecaute do sistema. (Fonte: Caminha).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual recurso é usado para evitar sobrecargas sistêmicas intoleráveis nas linhas de transmissão?",
+      "options": [
+        "O envio de sinais de comunicação para o desligamento automático de linhas e equipamentos.",
+        "A transmissão de onda portadora para bloquear os relés de distância locais.",
+        "O uso de fibra óptica para alterar os taps dos transformadores de distribuição.",
+        "O rádio UHF para reduzir instantaneamente a excitação dos geradores."
+      ],
+      "correctIndex": 0,
+      "explanation": "Canais de comunicação são usados para comandar o desligamento automático de linhas e evitar condições anormais como sobrecargas. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os relés de subfrequência devem operar no programa de rejeição de carga?",
+      "options": [
+        "Devem desligar as usinas geradoras de base para conter o déficit de potência.",
+        "Devem desligar cargas ou circuitos menos prioritários durante a separação do sistema.",
+        "Devem abrir os disjuntores de interligação apenas no nível de distribuição primária.",
+        "Devem atuar instantaneamente sobre os barramentos de extra alta tensão."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os relés são calibrados para desligar circuitos menos prioritários e evitar a perda de sincronismo. (Fonte: Caminha).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual parâmetro é essencial na elaboração de um esquema de rejeição de carga por subfrequência?",
+      "options": [
+        "A impedância transitória de sequência zero dos geradores hidráulicos.",
+        "O limite térmico de operação dos relés direcionais de potência.",
+        "A quantidade de estágios de rejeição e o MVA correspondente a cada estágio.",
+        "O tempo de recarga da mola dos disjuntores de média tensão."
+      ],
+      "correctIndex": 2,
+      "explanation": "O esquema requer a definição da quantidade de estágios, ajuste de frequência, temporização e MVA por estágio. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o sistema elétrico deve responder a uma acentuada sobrefrequência causada por perda brusca de carga?",
+      "options": [
+        "Aumenta-se a corrente de excitação no rotor dos geradores síncronos.",
+        "Atua o esquema de rejeição de carga para desconectar os consumidores prioritários.",
+        "Inserem-se bancos de capacitores série nas linhas de transmissão longas.",
+        "Atuam os reguladores de velocidade das máquinas geradoras para reduzir a geração excessiva."
+      ],
+      "correctIndex": 3,
+      "explanation": "Em sobrefrequência acentuada, os reguladores de velocidade atuam para reduzir a geração. Rejeição de carga atua na subfrequência. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o alívio de carga busca equilibrar ao desconectar alimentadores da rede?",
+      "options": [
+        "Recuperar o equilíbrio desejado das potências para normalizar a tensão e a frequência.",
+        "Igualar a reatância capacitiva com a reatância indutiva da linha afetada.",
+        "Eliminar as correntes circulantes de terceira harmônica no barramento.",
+        "Restabelecer o sincronismo mecânico dos comutadores de taps."
+      ],
+      "correctIndex": 0,
+      "explanation": "O alívio desconecta alimentadores em um cenário preestabelecido para recuperar o equilíbrio das potências. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em oscilações severas, como se evita a atuação indevida e a fragmentação errônea do sistema pelos relés de distância?",
+      "options": [
+        "Altera-se a característica do relé de quadrilateral para mho deslocada.",
+        "Equipamentos de bloqueio monitoram a variação lenta da impedância e inibem o disparo do relé de distância.",
+        "Transfere-se a carga para os relés direcionais de terra via teleproteção.",
+        "Reduz-se temporariamente o fator de compensação residual do relé direcional."
+      ],
+      "correctIndex": 1,
+      "explanation": "Um relé de bloqueio detecta a variação lenta da impedância característica da oscilação de potência e bloqueia o relé de distância. (Fonte: Caminha).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O plano de alívio de carga desliga consumidores preestabelecidos para conter o déficit de potência e a queda anormal de frequência.",
+      "correctAnswer": true,
+      "explanation": "A função de alívio desconecta alimentadores segundo um cenário preestabelecido para recuperar o equilíbrio energético. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O esquema de rejeição de carga por subfrequência é ajustado para operar em um único estágio global, desligando 100% da carga instantaneamente.",
+      "correctAnswer": false,
+      "explanation": "O esquema deve considerar uma quantidade de estágios de rejeição, com ajustes de frequência e MVA distintos para cada um. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O controle de emergência para ilhamentos visa manter o equilíbrio entre geração e carga na porção isolada do sistema.",
+      "correctAnswer": true,
+      "explanation": "O esquema para ilhamento atua para salvar a parte isolada do sistema, equilibrando pontualmente a carga e a geração. (Fonte: Virtus_CProtBL2Cd1).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O desligamento automático de linhas de transmissão para evitar sobrecargas intoleráveis requer o uso de canais de comunicação.",
+      "correctAnswer": true,
+      "explanation": "Canais de comunicação são utilizados para comandar o desligamento remoto de linhas e equipamentos ao atingir condições de sobrecarga. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em eventos de sobrefrequência causados por perda de carga, a proteção sistêmica atua prioritariamente desconectando os alimentadores de distribuição.",
+      "correctAnswer": false,
+      "explanation": "Na sobrefrequência, atuam os reguladores de velocidade das máquinas geradoras para reduzir a geração, e não o corte de cargas. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O esquema que desliga alimentadores não prioritários durante déficit de potência é o plano de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "alívio"
+        }
+      ],
+      "explanation": "A função de alívio segue um cenário preestabelecido (plano de alívio) para recuperar o equilíbrio das potências. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O uso de relés de subfrequência para separação do sistema e desligamento de cargas visa atuar antes que ocorra a completa perda de ____ da geração.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "sincronismo"
+        }
+      ],
+      "explanation": "Os relés devem desligar cargas antes que ocorra a completa perda de sincronismo da geração e a perda do sistema global. (Fonte: Caminha).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em condições operacionais anormais de sobrecarga, canais de ____ são utilizados para promover o rápido desligamento automático das linhas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "comunicação"
+        }
+      ],
+      "explanation": "Esquemas automáticos utilizam um ou mais canais de comunicação para desligar linhas quando sobrecargas ou condições anormais são atingidas. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    }
+  ]
+}

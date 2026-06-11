@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Gestão de Riscos e Outras NRs",
+  "moduleSubtitle": "NR-01, NR-05, NR-06, NR-12, NR-17, NR-23 e NR-33",
+  "moduleOrder": 0,
+  "trail": "NR-12 (Segurança no Trabalho em Máquinas e Equipamentos)",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-12, qual é a ordem de prioridade que deve ser estritamente seguida na adoção das medidas de proteção para o trabalho em máquinas e equipamentos?",
+      "options": [
+        "EPI, Medidas Administrativas, Medidas de proteção coletiva.",
+        "Medidas Administrativas, Medidas de proteção coletiva, EPI.",
+        "Medidas de proteção coletiva, EPI, Medidas Administrativas.",
+        "Medidas de proteção coletiva, Medidas Administrativas, EPI."
+      ],
+      "correctIndex": 3,
+      "explanation": "Conforme o item 12.1.8 da NR-12, a ordem de prioridade exigida é: a) Medidas de proteção coletiva; b) Medidas administrativas ou de organização do trabalho; c) Medidas de proteção individual.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sobre o arranjo físico e as instalações, o que a NR-12 determina em relação às máquinas móveis que possuem rodízios?",
+      "options": [
+        "Pelo menos dois de seus rodízios devem possuir travas.",
+        "Devem possuir travas fixas em todos os rodízios simultaneamente.",
+        "São proibidas no ambiente industrial se tiverem peso superior a 50 kg.",
+        "Devem possuir sistema de freio automático a disco acoplado."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 12.2.7 da norma estabelece de forma direta que, nas máquinas móveis com rodízios, pelo menos dois deles devem possuir travas para garantir a estabilidade física.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O dispositivo de parada de emergência é um componente crítico nas máquinas. Segundo a NR-12, qual deve ser a sua padronização visual?",
+      "options": [
+        "Identificado na cor amarela com fundo vermelho.",
+        "Identificado na cor vermelha com fundo amarelo.",
+        "Identificado com luzes intermitentes vermelhas e botão de ação verde.",
+        "Identificado na cor vermelha com fundo branco."
+      ],
+      "correctIndex": 1,
+      "explanation": "De acordo com o item 12.6.2, alínea 'a' da NR-12, o dispositivo de parada de emergência deve ser identificado na cor vermelha com fundo amarelo e formato de botão tipo cogumelo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em qual idioma os manuais de instruções das máquinas e equipamentos devem ser obrigatoriamente disponibilizados aos trabalhadores no Brasil, de acordo com a NR-12?",
+      "options": [
+        "Exclusivamente no idioma nativo do país fabricante da máquina.",
+        "Em inglês, por ser universalmente adotado como idioma padrão internacional.",
+        "Em português.",
+        "Em português e inglês simultaneamente em páginas conjugadas."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 12.13.1 e 12.12.4 da NR-12 são explícitos ao exigir que as máquinas e equipamentos devem possuir manual de instruções e sinalizações redigidos em português.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para garantir a segurança das instalações elétricas das máquinas, a NR-12 proíbe expressamente o uso de determinados componentes. Qual das alternativas indica uma dessas proibições?",
+      "options": [
+        "O uso de contatores de segurança duplos ligados em série.",
+        "A instalação de quadros de comando fechados com porta de acesso.",
+        "O uso de inversores de frequência no sistema de acionamento contínuo.",
+        "A utilização de chaves tipo faca nos circuitos elétricos."
+      ],
+      "correctIndex": 3,
+      "explanation": "Segundo o item 12.3.8, alínea 'b' da NR-12, é terminantemente proibida nas máquinas e equipamentos a utilização de chaves tipo faca nos circuitos elétricos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na aplicação de sistemas de segurança em zonas de perigo, como as proteções móveis devem ser adequadamente equipadas para garantir a integridade do operador, segundo a NR-12?",
+      "options": [
+        "Devem ser associadas a dispositivos de intertravamento.",
+        "Devem possuir fechaduras com chaves codificadas que fiquem de posse exclusiva do supervisor.",
+        "Devem possuir alarmes sonoros estridentes que disparem continuamente enquanto a máquina operar.",
+        "Devem ser construídas exclusivamente de material acrílico e sem fixação fixa."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 12.5.6 da norma determina categoricamente que as proteções móveis devem ser associadas a dispositivos de intertravamento, interrompendo o perigo quando abertas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Os dispositivos de partida, acionamento e parada das máquinas devem ser projetados e instalados de modo seguro. Qual característica é exigida pela NR-12 em relação ao retorno da energia após uma interrupção súbita?",
+      "options": [
+        "Devem possuir religamento automático imediato para não interromper a cadeia de produção.",
+        "Devem ter proteção contra religamento automático após interrupção e retorno da energia.",
+        "Devem requerer a substituição mecânica de um dispositivo de retardo em cada queda de energia.",
+        "Devem acionar automaticamente um gerador a diesel acoplado à máquina em menos de 10 segundos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 12.4 da NR-12 estabelece que os dispositivos de comando devem ter proteção contra religamento automático após interrupção e retorno da energia elétrica, impedindo o acionamento inadvertido e inesperado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante procedimentos de manutenção e aplicação do LOTO (Lockout/Tagout), se houver a intervenção simultânea de mais de um trabalhador em uma máquina, qual é o procedimento normativo correto quanto ao bloqueio?",
+      "options": [
+        "Apenas o líder ou supervisor de manutenção instala o bloqueio representativo da equipe.",
+        "O bloqueio físico se torna opcional caso a máquina esteja sendo vigiada ininterruptamente.",
+        "Cada trabalhador que execute intervenções deve possuir dispositivo de bloqueio individual e independente.",
+        "Um único cadeado compartilhado deve ser utilizado e a respectiva chave guardada no quadro de comando."
+      ],
+      "correctIndex": 2,
+      "explanation": "De acordo com o item 12.11.5 da NR-12, é imperativo que cada trabalhador que execute intervenções nas máquinas possua e instale o seu próprio dispositivo de bloqueio de energia de forma individual e independente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A NR-12 referencia a norma NBR ISO 13849-1 para as Categorias de Sistemas de Segurança. Essas classificações são baseadas no nível de performance. Dentre as opções, qual representa o nível mais alto de performance de segurança (Performance Level)?",
+      "options": [
+        "PL a",
+        "PL c",
+        "Categoria 4",
+        "PL e"
+      ],
+      "correctIndex": 3,
+      "explanation": "Conforme o subitem 12.5.1 que menciona as Categorias de Sistemas de Segurança da NBR ISO 13849-1, a escala de Performance Level (PL) varia do 'PL a' (o nível mais baixo) até chegar ao 'PL e' (considerado o mais alto).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Analise as características do dispositivo de parada de emergência segundo a NR-12 e selecione a afirmação correta sobre o seu acionamento e processo de desativação ou reset.",
+      "options": [
+        "Deve gerar comando de parada que se mantém até que seja resetado manualmente, sendo o seu desacionamento de retorno estritamente manual.",
+        "Deve gerar um comando de parada que se mantém atuante ininterruptamente, devendo ser desativado exclusivamente por reset automatizado temporizado.",
+        "Substitui completamente a necessidade de proteções físicas fixas desde que possua tempo de resposta mecânica inferior a 0,5 segundos.",
+        "Uma vez acionado pelo operador, o seu rearme exige obrigatoriamente a utilização de senha mestre do fabricante e validação em software."
+      ],
+      "correctIndex": 0,
+      "explanation": "Segundo as alíneas 'd' e 'e' do item 12.6.2, o dispositivo de parada de emergência somente deve ser desativado manualmente e gera um comando de parada que se mantém até ser resetado manualmente. Ademais, o item 12.6.4 alerta que ele não substitui as proteções.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O 'bypass' (anulação) dos dispositivos e sistemas de segurança das máquinas é estritamente proibido durante a operação normal, sendo normativamente admitido apenas quando a máquina operar em modo de manutenção devidamente sinalizado e controlado.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira. O item 12.5.11 da NR-12 determina textualmente que o bypass de proteções é proibido, abrindo exceção apenas quando ocorrer em modo de manutenção, de forma devidamente sinalizada e controlada por procedimentos seguros.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As diretrizes técnicas da NR-12 aplicam-se universal e compulsoriamente a qualquer tipo de equipamento do mercado, abrangendo integralmente os eletrodomésticos comerciais e todas as máquinas que sejam movidas exclusivamente por força humana.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O item 12.1.4 da NR-12 lista de forma clara as exceções para as quais a norma NÃO se aplica, que incluem expressamente as máquinas movidas por força humana ou animal e os eletrodomésticos.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O arranjo físico das instalações deve assegurar que o posicionamento das máquinas impeça que ocorra o transporte e a movimentação aérea de quaisquer materiais diretamente sobre os trabalhadores no galpão.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira. Conforme normatizado no item 12.2.8, as máquinas estacionárias devem ser posicionadas de modo seguro para que não ocorra, em nenhuma hipótese, o transporte e movimentação aérea de materiais sobre os trabalhadores.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas etiquetas de segurança utilizadas obrigatoriamente durante o procedimento de LOTO (Lockout/Tagout), a norma exige que conste unicamente o logotipo da empresa terceirizada de manutenção e um aviso de perigo genérico.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O item 12.11.6 da NR-12 determina de forma bem estrita que as etiquetas devem possuir rastreabilidade e dados críticos contendo: nome, função do trabalhador, data, hora e o serviço que está sendo executado.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "De acordo com as definições técnicas do glossário da NR-12, uma proteção fixa é aquela mantida em sua posição fechada por meios de fixação magnéticos, projetada para ser removida e reposicionada manualmente a qualquer momento, dispensando o uso de ferramentas.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é totalmente falsa. O Glossário da norma (Anexo IV) define expressamente a Proteção Fixa como sendo a proteção mantida em sua posição por meio de elementos de fixação que requerem obrigatoriamente o uso de ferramentas físicas para sua remoção.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A NR-12 estabelece em suas instalações elétricas que é terminantemente proibida a utilização de chave ____ como dispositivo exclusivo de partida e de parada de máquinas e equipamentos, visando coibir manobras perigosas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "geral"
+        }
+      ],
+      "explanation": "Segundo as proibições elencadas no item 12.3.8 (alínea 'a') da NR-12, é expressamente proibida a utilização de chave geral para funcionar como dispositivo rotineiro de partida e parada da máquina.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Os transportadores contínuos de materiais em um ambiente fabril devem ser equipados com dispositivos de parada de emergência que fiquem instalados e distribuídos ao longo de toda a sua ____, garantindo rápido acesso em incidentes.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "extensão"
+        }
+      ],
+      "explanation": "Conforme delineado no item 12.8.1 da NR-12, transportadores de materiais devem possuir dispositivos de parada de emergência de forma acessível ao longo de toda a sua extensão.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos tratores e máquinas utilizadas no setor agrícola e florestal, a norma determina a presença obrigatória de uma estrutura projetada especificamente para proteção do operador contra capotamento, referenciada no glossário e Anexo XI pela sigla em inglês ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ROPS"
+        }
+      ],
+      "explanation": "De acordo com o Glossário Técnico (Anexo IV) bem como no Anexo XI, a sigla ROPS (Roll-Over Protective Structure) traduz-se oficialmente na exigência de uma estrutura de proteção contra capotamento implementada em tratores.",
+      "difficulty": "hard"
+    }
+  ]
+}

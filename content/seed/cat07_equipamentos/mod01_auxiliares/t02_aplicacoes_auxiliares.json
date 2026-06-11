@@ -1,0 +1,218 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Equipamentos Auxiliares SPCS",
+  "moduleSubtitle": "Alimentação CC/CA, baterias, retificadores e serviços auxiliares",
+  "moduleOrder": 0,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a finalidade principal do banco de baterias em uma subestacao?",
+      "options": [
+        "Elevar a tensao de suprimento primario.",
+        "Alimentar circuitos de comando e protecao com tensao continua.",
+        "Reduzir a corrente de curto-circuito na barra principal.",
+        "Suprir energia reativa para os geradores."
+      ],
+      "correctIndex": 1,
+      "explanation": "O banco de baterias alimenta comandos em corrente continua para ficarem independentes da rede alternada. (Fonte: Apostila Protecao).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que o comando de disjuntores utiliza corrente continua e nao a corrente alternada da propria subestacao?",
+      "options": [
+        "Para evitar a saturacao magnetica dos transformadores de corrente.",
+        "Porque os disjuntores modernos nao operam com tensoes alternadas.",
+        "Porque a tensao CA cai durante curtos-circuitos, inviabilizando o disparo.",
+        "Para anular as componentes harmonicas de sequencia zero."
+      ],
+      "correctIndex": 2,
+      "explanation": "Em falhas, a tensao CA cai severamente, impossibilitando o comando, exigindo alimentacao DC. (Fonte: ed53).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao os dois principais tipos de baterias utilizados em subestacoes?",
+      "options": [
+        "Litio-ion e Prata-zinco.",
+        "Sodio-enxofre e Alcalinas puras.",
+        "Zinco-carbono e Niquel-metal.",
+        "Chumbo-acido e Alcalinas de niquel-cadmio."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os principais tipos de baterias utilizados atualmente sao chumbo-acido e alcalinas. (Fonte: ed53).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que define a autonomia da bateria no sistema de servicos auxiliares?",
+      "options": [
+        "A capacidade de operar em temperaturas acima de 50 graus.",
+        "O tempo necessario para recarga total apos um ciclo profundo.",
+        "O tempo em que a bateria mantem a tensao minima para alimentar as cargas.",
+        "A vida util projetada antes da troca definitiva."
+      ],
+      "correctIndex": 2,
+      "explanation": "Autonomia e o intervalo onde a bateria sustenta a tensao minima necessaria ao funcionamento. (Fonte: ed53).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento carrega e mantem a tensao do banco de baterias em condicoes normais?",
+      "options": [
+        "Retificador ou carregador de baterias.",
+        "Inversor de frequencia isolado.",
+        "Compensador sincrono rotativo.",
+        "Transformador de potencial indutivo."
+      ],
+      "correctIndex": 0,
+      "explanation": "O modulo retificador (carregador) e projetado para carregar e manter a bateria do banco. (Fonte: ed53).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que especialistas em protecao preferem retificadores puros aos nobreaks AC nas subestacoes?",
+      "options": [
+        "O nobreak AC reduz correntes de arco nos contatores.",
+        "O inversor do nobreak AC diminui a disponibilidade e a confiabilidade global.",
+        "Reles digitais apenas comunicam via fibra optica em DC.",
+        "Nobreaks AC exigem baterias exclusivas de litio."
+      ],
+      "correctIndex": 1,
+      "explanation": "O nobreak AC tem confiabilidade menor devido ao componente extra em serie, o inversor. (Fonte: ed53).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual instalacao predial e obrigatoria na sala de baterias que operam com elementos nao selados?",
+      "options": [
+        "Sistema de refrigeracao liquida continua.",
+        "Sistema de injecao de gas SF6 anti-chama.",
+        "Sistema de exaustao devido a liberacao de gas hidrogenio.",
+        "Piso com malha de aterramento independente."
+      ],
+      "correctIndex": 2,
+      "explanation": "Exige-se exaustao para evitar a concentracao explosiva de hidrogenio liberado na eletrolise. (Fonte: ed53).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em condicao de falha na alimentacao auxiliar CC (DC fail), como atua a logica de uma seccionadora no IED?",
+      "options": [
+        "Comanda o trip do disjuntor principal da barra.",
+        "Abre a chave de forma autonoma pelas molas.",
+        "Bloqueia permanentemente toda a subestacao.",
+        "Emite alarme e memoriza o ultimo estado valido do equipamento."
+      ],
+      "correctIndex": 3,
+      "explanation": "Para seguranca, na falta de tensao auxiliar a ultima posicao valida e memorizada e um alarme e gerado. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No dimensionamento, qual o impacto de adotar um numero de elementos que exceda a tensao maxima na carga?",
+      "options": [
+        "Impoe solucoes onerosas como Unidades de Diodos de Queda (UDQ).",
+        "Aumenta a autonomia em 50 por cento automaticamente.",
+        "Permite usar conversores sem ponte retificadora.",
+        "Melhora o tempo de resposta do disjuntor."
+      ],
+      "correctIndex": 0,
+      "explanation": "Ultrapassar a tensao maxima do sistema exige solucoes menos confiaveis e mais caras como UDQs. (Fonte: ed53).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como e calculada a capacidade total da bateria para um perfil de cargas sequenciais diversas?",
+      "options": [
+        "Somando as correntes de pico e multiplicando pela tensao de flutuacao.",
+        "Pelo somatorio das parcelas do fator K multiplicadas pelas variacoes de corrente nos intervalos.",
+        "Dividindo a tensao final de descarga pela potencia aparente do patio.",
+        "Somando linearmente as reatancias dos TC e TP da subestacao."
+      ],
+      "correctIndex": 1,
+      "explanation": "A capacidade e o somatorio dos produtos do fator K da curva pelas variacoes de corrente nos trechos de descarga. (Fonte: ed53).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O comando de trip dos disjuntores emprega corrente continua para nao depender da tensao alternada durante as faltas.",
+      "correctAnswer": true,
+      "explanation": "A energia CC fornecida pelas baterias assegura a operacao mesmo com colapso na tensao CA. (Fonte: Apostila Protecao).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O nobreak AC e composto exclusivamente por um retificador e um banco de baterias, operando sem inversores.",
+      "correctAnswer": false,
+      "explanation": "O nobreak AC difere do carregador CC justamente por conter um inversor que converte a energia da bateria para CA. (Fonte: ed53).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As baterias alcalinas possuem tempos nominais de descarga padronizados unicamente para 10 horas.",
+      "correctAnswer": false,
+      "explanation": "Diferente das chumbo-acidas (10h), as alcalinas podem apresentar faixas de 3, 5 ou 10 horas. (Fonte: ed53).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os reles de protecao digitais extraem a tensao de operacao direto dos TCs, dispensando o uso de baterias auxiliares externas.",
+      "correctAnswer": false,
+      "explanation": "Todo rele digital depende criticamente da alimentacao auxiliar continua das baterias para manter seu processamento. (Fonte: Apostila Protecao).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao dimensionar a bateria, usar um numero de elementos calculado pela menor tensao final melhora o aproveitamento e reduz custos.",
+      "correctAnswer": true,
+      "explanation": "Focar na tensao minima reduz a capacidade total exigida e extrai melhor rendimento, gerando economia. (Fonte: ed53).",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O intervalo onde a bateria mantem a tensao minima necessaria as cargas apos a queda do retificador e chamado de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "autonomia"
+        }
+      ],
+      "explanation": "A autonomia dita o periodo em horas que o sistema opera seguro alimentado so pelo acumulo da bateria. (Fonte: ed53).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Baterias chumbo-acido nao seladas exigem a instalacao de um sistema de ____ nas salas devido a perigosa emanacao de gas hidrogenio.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "exaustao"
+        }
+      ],
+      "explanation": "A exaustao ou ventilacao forcada impede a concentracao explosiva de hidrogenio durante a recarga. (Fonte: ed53).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A confiabilidade do nobreak CA e inferior a de um carregador CC direto devido a probabilidade de falha associada ao seu ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "inversor"
+        }
+      ],
+      "explanation": "O inversor CC-CA insere uma etapa extra de conversao sujeita a avarias, reduzindo o tempo medio entre falhas do conjunto. (Fonte: ed53).",
+      "difficulty": "hard"
+    }
+  ]
+}

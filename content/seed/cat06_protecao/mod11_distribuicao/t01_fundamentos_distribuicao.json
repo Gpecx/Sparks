@@ -1,0 +1,218 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Redes de Distribuição",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de redes de distribuição",
+  "moduleOrder": 10,
+  "trail": "Fundamentos de Redes de Distribuição",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Como as normas classificam os níveis de Média Tensão (MT) e Baixa Tensão (BT) nas redes elétricas?",
+      "options": [
+        "MT entre 1 e 36,3 kV e BT até 1 kV.",
+        "MT entre 69 e 230 kV e BT até 13,8 kV.",
+        "MT entre 110 e 380 V e BT abaixo de 110 V.",
+        "MT até 69 kV e BT acima de 1 kV."
+      ],
+      "correctIndex": 0,
+      "explanation": "A Média Tensão assume valores entre 1 e 36,3 kV. A Baixa Tensão tem valores de até 1 kV. (Fonte: Virtus_ProtTrafo_Cabine_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza o fluxo elétrico nos alimentadores de um sistema estritamente radial?",
+      "options": [
+        "A energia flui em múltiplos sentidos em regime normal.",
+        "A alimentação ocorre em malha fechada continuamente.",
+        "A energia trafega exclusivamente da fonte para as cargas.",
+        "As correntes de curto-circuito fluem em sentidos opostos à carga."
+      ],
+      "correctIndex": 2,
+      "explanation": "No sistema radial, a energia e as correntes de defeito trafegam sempre no sentido da subestação para a falha. (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o perfil temporal predominante das faltas ocorridas nas redes de distribuição primárias aéreas?",
+      "options": [
+        "Faltas trifásicas contínuas.",
+        "Faltas sem centelhamento de altíssima impedância.",
+        "Faltas permanentes exclusivas de barramentos.",
+        "Cerca de 75% a 90% das faltas são temporárias."
+      ],
+      "correctIndex": 3,
+      "explanation": "A maioria absoluta das faltas nas redes primárias é temporária, durando poucos ciclos ou segundos. (Fonte: KLS - Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal função do transformador de distribuição numa rede padrão?",
+      "options": [
+        "Reduzir a tensão primária para os níveis de consumo secundário.",
+        "Elevar a tensão para os limites de transmissão.",
+        "Compensar quedas de tensão via injeção reativa.",
+        "Mitigar curtos-circuitos bloqueando a componente DC."
+      ],
+      "correctIndex": 0,
+      "explanation": "Ele rebaixa a tensão da rede primária (MT) para os níveis de utilização em baixa tensão (BT). (Fonte: E-book Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que define a cobrança por tarifa binômia para consumidores industriais em MT?",
+      "options": [
+        "Faturamento restrito a horários de ponta.",
+        "Cobrança conjunta da energia ativa consumida e da demanda de potência.",
+        "Medição separada entre iluminação e cargas motrizes.",
+        "Pagamento de taxa fixa em alta e baixa tensão."
+      ],
+      "correctIndex": 1,
+      "explanation": "A tarifa binômia fatura não apenas o consumo de energia (kWh), mas a demanda de potência requerida. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que muitas redes de distribuição aplicam o neutro solidamente aterrado?",
+      "options": [
+        "Para anular a corrente de sequência zero local.",
+        "Para garantir alta corrente de terra e facilitar o trip da proteção.",
+        "Para reduzir o limite térmico exigido dos disjuntores.",
+        "Para permitir operações contínuas com uma fase em curto."
+      ],
+      "correctIndex": 1,
+      "explanation": "O aterramento sólido gera correntes de falta fase-terra intensas, permitindo a atuação efetiva dos relés. (Fonte: Virtus_Ferramentas).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como ocorre o fenômeno de falta de alta impedância na distribuição primária?",
+      "options": [
+        "Pelo rompimento de isoladores em subestações de EAT.",
+        "Pela saturação magnética de transformadores de corrente.",
+        "Pelo contato do condutor vivo com solo de baixa condutividade.",
+        "Pelo choque direto entre três condutores aéreos."
+      ],
+      "correctIndex": 2,
+      "explanation": "Ocorre quando o cabo toca solos isolantes, como areia seca, gerando correntes muito baixas e arcos. (Fonte: KLS - Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual limite restringe a sensibilidade da proteção de sobrecorrente de fase em linhas radiais longas?",
+      "options": [
+        "O ângulo de polarização cruzada do relé direcional.",
+        "A inversão da corrente de sequência zero na barra.",
+        "O nível de suportabilidade térmica do disjuntor.",
+        "A corrente máxima de carregamento nominal da linha."
+      ],
+      "correctIndex": 3,
+      "explanation": "A proteção de fase não pode ser ajustada abaixo da corrente de carga, o que dificulta o trip em faltas remotas fracas. (Fonte: Virtus_ProtTrafo_Cabine).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais objetivos operativos orientam a proteção de uma rede primária face aos curtos-circuitos?",
+      "options": [
+        "Minimizar a duração e a frequência da falta na rede.",
+        "Neutralizar quedas de tensão na transmissão de base.",
+        "Substituir todos os relés convencionais por fusíveis ultra-rápidos.",
+        "Desligar a subestação principal em qualquer defeito."
+      ],
+      "correctIndex": 0,
+      "explanation": "A proteção atua para reduzir o tempo do defeito e a quantidade de consumidores impactados pela interrupção. (Fonte: KLS - Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em redes subterrâneas Spot Network, como o equipamento Network Protector isola a falha?",
+      "options": [
+        "Aciona TCs de fuga à terra nas buchas dos transformadores.",
+        "Detecta a reversão da corrente de falta e abre a conexão defeituosa.",
+        "Eleva a reatância síncrona do alimentador principal local.",
+        "Mede a tensão residual por meio de transdutores de efeito Hall."
+      ],
+      "correctIndex": 1,
+      "explanation": "A chave Network Protector detecta fluxos reversos gerados por falhas nos alimentadores paralelos e abre o circuito. (Fonte: KLS - Proteção).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em redes de distribuição primárias com topologia radial, os relés de sobrecorrente são os dispositivos de proteção predominantes.",
+      "correctAnswer": true,
+      "explanation": "Como as faltas produzem correntes unidirecionais maiores que a carga, relés de sobrecorrente são suficientes e predominantes. (Fonte: KLS - Proteção).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Subestações de distribuição com suprimento único e sem chaves de transferência oferecem maior confiabilidade global.",
+      "correctAnswer": false,
+      "explanation": "Sistemas de suprimento único possuem baixa confiabilidade. Arranjos com chaves NA e NF elevam a continuidade do serviço. (Fonte: KLS - Proteção).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A detecção de faltas de alta impedância exige relés digitais avançados com algoritmos que identificam a assinatura de arcos elétricos.",
+      "correctAnswer": true,
+      "explanation": "As correntes reduzidas dessas faltas impossibilitam o uso de relés convencionais, exigindo análises espectrais do arco. (Fonte: KLS - Proteção).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As redes com neutro aterrado por resistência limitam as correntes de terra e reduzem a ocorrência de sobretensões severas.",
+      "correctAnswer": true,
+      "explanation": "O aterramento resistivo limita a corrente de fuga a valores seguros e facilita a eliminação de sobretensões transitórias. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A potência firme de uma subestação assume que nenhum transformador sofra sobrecarga após a falha da maior máquina do pátio.",
+      "correctAnswer": false,
+      "explanation": "A definição de potência firme permite que os transformadores restantes operem em regime temporário de sobrecarga. (Fonte: KLS - Proteção).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A estrutura de força que recebe tensão de transmissão e a rebaixa para as redes radiais primárias é a ____ de distribuição.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "subestação"
+        }
+      ],
+      "explanation": "As subestações contêm os transformadores responsáveis por converter as tensões para o nível da distribuição. (Fonte: Cabine Primária).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nas faltas de alta impedância, o contato de condutores com solo seco cria um ____ elétrico que os algoritmos de proteção monitoram.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "arco"
+        }
+      ],
+      "explanation": "Os algoritmos inferem faltas pela detecção de características e padrões no espectro de frequências criados pelo arco elétrico. (Fonte: KLS - Proteção).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O equipamento instalado em ramais que não interrompe curto-circuitos e conta os desarmes de um religador a montante é o ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "seccionalizador"
+        }
+      ],
+      "explanation": "Seccionalizadores não têm poder de corte para curtos. Eles atuam com a rede morta após contarem aberturas do religador. (Fonte: KLS - Proteção).",
+      "difficulty": "hard"
+    }
+  ]
+}

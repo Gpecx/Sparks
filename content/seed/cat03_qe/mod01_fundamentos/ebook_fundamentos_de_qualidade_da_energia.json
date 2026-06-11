@@ -1,0 +1,248 @@
+{
+  "category": "Qualidade da Energia",
+  "categoryOrder": 2,
+  "module": "Fundamentos de Qualidade da Energia",
+  "moduleOrder": 0,
+  "moduleSubtitle": "História, indicadores, distúrbios, caracterização do problema e a regulação do PRODIST",
+  "ebookTitle": "Fundamentos de Qualidade da Energia",
+  "ebookSubtitle": "Por que a QEE importa, como medi-la, quais distúrbios existem e o que o PRODIST exige",
+  "estimatedMinutes": 67,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — História e importância da Qualidade da Energia",
+      "subtitle": "Por que a QEE virou prioridade técnica e econômica",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O objetivo de um Sistema Elétrico de Potência",
+          "type": "text",
+          "body": "Segundo o documento Apostila Proteção, os objetivos fundamentais de um Sistema Elétrico de Potência são suprir a demanda com qualidade e confiabilidade, englobando tensão e frequência constantes. A dissertação do IFPB afirma que a preocupação com a QEE tem se tornado mais evidente devido a diversos fatores, entre os quais os prejuízos financeiros acarretados pelos Distúrbios da Qualidade da Energia Elétrica (DQEE). O IFPB, em sua dissertação, declara ainda que a expansão do setor elétrico é acompanhada pelas preocupações referentes aos temas relacionados à Qualidade da Energia Elétrica, pela obrigatoriedade da adequação às normas."
+        },
+        {
+          "id": "s2",
+          "title": "O custo de não cuidar da QEE",
+          "type": "list",
+          "items": [
+            "O documento Guia da Wrindu ilustra fortes perdas, como uma usina perdendo US$ 150 mil por ano e Data Centers expostos a penalizações de US$ 500 mil, evidenciando que o retorno sobre o investimento em analisadores geralmente é alcançado em 6 a 12 meses.",
+            "O estudo de Distúrbios do IFPB afirma que o impacto da perturbação QEE é óbvio e imediatamente perceptível devido a danos ao equipamento, custos de reinicialização de sistemas, perda de processo produtivo ou inatividade.",
+            "Segundo o trabalho do IFPB que cita as teorias de Fuchs e Masoum, os impactos econômicos indiretos abrangem os custos para uma organização de receitas sendo adiados e o custo financeiro da perda de participação no mercado.",
+            "Conforme a referência aos estudos globais de Fuchs e Masoum relatados no IFPB, os danos como queima e deterioração da produção semi-acabada estão textualmente descritos sob a lista de impactos econômicos diretos.",
+            "O catálogo Soluções WEG detalha que os harmônicos são correntes adicionais que não produzem trabalho e, portanto, ocasionam perdas e reduzem fator de potência, o que leva ao aumento do custo da energia elétrica."
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Cargas modernas e a Quarta Revolução Industrial",
+          "type": "text",
+          "body": "O documento do IFPB menciona que, na Quarta Revolução Industrial, a robotização é utilizada em grande escala e, para isso, é fundamental o fornecimento de energia de qualidade. A dissertação do IFPB referencia as consequências do fornecimento de energia instável abordando a Indústria 4.0, conhecida como Quarta Revolução Industrial, ressaltando a relevância da robótica nela inserida. Segundo o estudo do IFPB baseado nos autores Deckmann e Pomilio, os consumidores e seus aparelhos estão sucessivamente mais dependentes das condições de operação do sistema, fruto do aumento da complexidade das funcionalidades. O documento do IFPB aponta que tecnologias como geração distribuída e veículos elétricos acessam a rede por meio de conversores, e essa conexão acentuada de cargas não lineares são fontes de distúrbios de QEE."
+        },
+        {
+          "id": "s4",
+          "title": "Monitoramento, dados e tendências",
+          "type": "note",
+          "body": "O artigo sobre Analisadores da Wrindu especifica que eles operam para detectar anomalias que podem danificar máquinas sensíveis ou causar paralisações, fornecendo registros detalhados para conformidade com normas. O guia comercial técnico da Wrindu destaca que a integração da computação de borda permite que os analisadores processem informações localmente, minimizando a latência em locais remotos. O guia prático da Wrindu relata na seção de tendências da engenharia que o aprendizado de máquina aprimora a previsão da qualidade da energia, prevendo distúrbios a partir de tendências históricas. O artigo técnico de monitoramento do guia Wrindu assevera explicitamente que o avanço da área da QEE é impulsionado pela eletrificação e pela adoção de redes inteligentes."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O Sistema Elétrico de Potência deve suprir a demanda com qualidade e confiabilidade — tensão e frequência constantes. A QEE ganhou relevância pelos prejuízos financeiros dos distúrbios (impactos diretos e indiretos descritos por Fuchs e Masoum no IFPB) e pela dependência crescente de cargas sensíveis e não lineares da Indústria 4.0, geração distribuída e veículos elétricos. Os analisadores de qualidade de energia, impulsionados pela eletrificação, redes inteligentes, computação de borda e aprendizado de máquina, viabilizam o monitoramento, com ROI tipicamente alcançado em 6 a 12 meses."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Conceitos e indicadores de Qualidade da Energia",
+      "subtitle": "As definições e os índices que medem a QEE",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é Qualidade de Energia Elétrica",
+          "type": "text",
+          "body": "Segundo o documento Análise de Distúrbios IFPB, a Qualidade de Energia Elétrica pode ser definida como qualquer problema manifestado na tensão, corrente ou desvio de frequência que resulte em falha. Conforme o PRODIST Módulo 8, DRP é a Duração Relativa da Transgressão de Tensão Precária e DRC é a Duração Relativa da Transgressão de Tensão Crítica. O PRODIST Módulo 8 estabelece que as leituras se classificam em três categorias: adequadas, precárias ou críticas, baseando-se no afastamento em relação à referência."
+        },
+        {
+          "id": "s2",
+          "title": "Indicadores de tensão e seus limites",
+          "type": "list",
+          "items": [
+            "Segundo a tabela do PRODIST Módulo 8, os limites regulamentados para os indicadores individuais são diferentes: DRPLimite é 3,0 por cento e DRCLimite é 0,5 por cento.",
+            "O PRODIST Módulo 8 determina a utilização exata de 1008 leituras válidas obtidas em intervalos consecutivos de 10 minutos (que equivale a 168 horas) para compor o DRP e DRC.",
+            "O PRODIST Módulo 8 especifica que o sistema de distribuição e as instalações conectadas devem operar dentro dos limites de frequência situados entre 59,9 Hz e 60,1 Hz.",
+            "O PRODIST Módulo 8 caracteriza o desequilíbrio de tensão por qualquer diferença verificada nas amplitudes entre as três tensões de fase ou na defasagem elétrica de 120 graus.",
+            "O PRODIST Módulo 8 define formalmente que o indicador Pst representa a severidade da cintilação luminosa associada à flutuação de tensão num período contínuo de 10 minutos."
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Indicadores de continuidade e fator de potência",
+          "type": "text",
+          "body": "O PRODIST Módulo 8 define DEC como Duração Equivalente de Interrupção e FEC como Frequência Equivalente de Interrupção por Unidade Consumidora. O PRODIST Módulo 8 especifica claramente que os indicadores DEC e FEC apuram apenas as interrupções de longa duração, definidas como aquelas com duração maior ou igual a 3 minutos. O PRODIST Módulo 8 define o DMIC como duração máxima de interrupção contínua, e formaliza o indicador DMIC como a sigla para Duração Máxima de Interrupção Contínua por Unidade Consumidora ou Ponto de Conexão; o DICRI refere-se especificamente à duração da interrupção individual ocorrida em Dia Crítico. O documento Correção de fator de potência da ABB define diretamente que o Fator de Potência é a relação entre a potência ativa e a potência aparente, e o PRODIST Módulo 8 determina que o fator de potência no ponto de conexão deve estar compreendido entre 0,92 e 1,00 indutivo, ou 1,00 e 0,92 capacitivo."
+        },
+        {
+          "id": "s4",
+          "title": "Como se calcula o DRP",
+          "type": "text",
+          "body": "A Equação 1 do PRODIST Módulo 8 define o DRP como a divisão do nlp (maior número de leituras na faixa precária) por 1008, tudo multiplicado por 100 para percentual: DRP = (nlp / 1008) × 100 [%]. A Equação 14 do PRODIST Módulo 8 indica formalmente que o FD% é calculado dividindo a magnitude da tensão eficaz de sequência negativa pela magnitude da tensão eficaz de sequência positiva. A Equação 18 do PRODIST Módulo 8 demonstra matematicamente que o Plt corresponde a um valor representativo de 12 amostras de Pst usando exatamente a raiz cúbica da média da soma dos seus cubos."
+        },
+        {
+          "id": "s5",
+          "title": "Compensação ao consumidor",
+          "type": "note",
+          "body": "O PRODIST Módulo 8 determina explicitamente que o valor da compensação deve ser creditado na fatura emitida no prazo máximo de 2 meses subsequentes ao mês civil de referência."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A QEE é qualquer problema na tensão, corrente ou frequência que resulte em falha (IFPB). O PRODIST Módulo 8 classifica as leituras em adequadas, precárias e críticas e fixa indicadores: DRP (limite 3,0%) e DRC (limite 0,5%), calculados a partir de 1008 leituras de 10 minutos (168 horas); frequência entre 59,9 e 60,1 Hz; fator de potência entre 0,92 e 1,00; e indicadores de continuidade DEC, FEC, DMIC e DICRI. O fator de potência é a relação entre potência ativa e aparente (ABB), e a compensação ao consumidor deve ser creditada em até 2 meses."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Tipos de distúrbios",
+      "subtitle": "Afundamentos, elevações, transitórios, harmônicos e flicker",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Afundamentos e elevações de tensão",
+          "type": "text",
+          "body": "A dissertação do IFPB e as normas definem afundamento de tensão (sag) como a queda brusca do valor eficaz da tensão para um valor entre 0,1 p.u. e 0,9 p.u. na frequência fundamental, com duração entre 0,5 ciclo a um minuto. Conforme a fonte Análise de Distúrbios do IFPB, a norma IEEE 1159 define elevação de tensão (swell) como um aumento na tensão RMS entre 1,1 e 1,8 pu. A dissertação do IFPB aponta que as principais causas do swell são curto-circuito fase-terra (onde as fases sadias elevam a tensão), saída de grandes blocos de cargas e energização de grandes bancos de capacitores."
+        },
+        {
+          "id": "s2",
+          "title": "Interrupções e variações temporárias de tensão",
+          "type": "list",
+          "items": [
+            "O item 69.1 do PRODIST Módulo 8 estabelece diretamente que, para esses sistemas de medição adicionais, considera-se interrupção sempre que a tensão for igual ou inferior a 70% (0,7 p.u.).",
+            "A Tabela 5 do PRODIST Módulo 8 define a Interrupção Momentânea de Tensão (IMT) por possuir amplitude inferior a 0,1 p.u. e duração menor ou igual a 3 segundos.",
+            "A Tabela 5 do PRODIST (Módulo 8) classifica as Variações Temporárias de Tensão (ITT, ATT, ETT) como aquelas com duração superior a 3 segundos e inferior a 3 minutos.",
+            "O item 88 do PRODIST Módulo 8 especifica expressamente que eventos consecutivos em um período de 3 minutos, no mesmo ponto, devem ser agregados compondo um único evento (agregação temporal)."
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Transitórios impulsivos e oscilatórios",
+          "type": "text",
+          "body": "Segundo a dissertação do IFPB referenciando Dugan et al., os transitórios impulsivos possuem polaridade unidirecional (positiva ou negativa) diferentemente dos oscilatórios. O documento Análise de Distúrbios do IFPB cita explicitamente que os transitórios impulsivos são geralmente causados por descargas atmosféricas. A fonte Análise de Distúrbios do IFPB informa que os transitórios impulsivos possuem polaridade unidirecional, enquanto os oscilatórios afetam a onda em polaridade bidirecional. O Quadro 02 da norma IEEE 1159 determina diretamente que a magnitude de duração dos transitórios oscilatórios de baixa frequência (< 5 kHz) compreende a escala entre 0,3 e 50 ms (milissegundos); no Quadro 02 da Norma IEEE 1159 presente na dissertação do IFPB, os transitórios oscilatórios de baixa frequência são caracterizados por frequência menor que 5 kHz e duração entre 0,3 e 50 ms."
+        },
+        {
+          "id": "s4",
+          "title": "Harmônicos e notching",
+          "type": "text",
+          "body": "O documento do IFPB (citando Dugan et al.) define que harmônicos são componentes dos sinais senoidais com frequências que são múltiplos inteiros da frequência fundamental. A fonte Análise de Distúrbios do IFPB define notching como distúrbios decorrentes do curto-circuito momentâneo entre duas fases quando a corrente é comutada em conversores trifásicos. O documento do IFPB informa que o notching é decorrente da operação normal de dispositivos de eletrônica de potência, como conversores trifásicos durante a comutação, e não de raios."
+        },
+        {
+          "id": "s5",
+          "title": "Flutuação de tensão e flicker",
+          "type": "note",
+          "body": "Os documentos sobre Flicker do Procobre e a dissertação do IFPB atestam que fornos a arco são as principais causas de flutuação de tensão que resulta na cintilação luminosa. A documentação técnica do Procobre e Módulo 8 do PRODIST definem a impressão subjetiva de flutuação luminosa causada pela variação de tensão da rede como cintilação ou flicker. O PRODIST Módulo 8 afirma explicitamente que o desequilíbrio é caracterizado por qualquer diferença verificada nas amplitudes entre as três tensões de fase ou na defasagem elétrica de 120 graus."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os distúrbios de QEE incluem afundamentos (sag, 0,1 a 0,9 p.u.), elevações (swell, 1,1 a 1,8 p.u.), interrupções (tensão ≤ 0,7 p.u.) e variações temporárias classificadas na Tabela 5 do PRODIST. Transitórios podem ser impulsivos (unidirecionais, causados por descargas atmosféricas) ou oscilatórios (bidirecionais, < 5 kHz, conforme IEEE 1159). Harmônicos são múltiplos inteiros da fundamental; notching vem da comutação de conversores trifásicos; e o flicker é a cintilação luminosa causada pela flutuação de tensão, tendo os fornos a arco como principal fonte."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Caracterização do problema de QE",
+      "subtitle": "Impactos, diagnóstico e o procedimento da distribuidora",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Impactos diretos, indiretos e de segurança",
+          "type": "text",
+          "body": "O documento Análise de Distúrbios do IFPB (baseado em Fuchs; Masoum) divide os impactos em diretos, indiretos e de segurança, classificando explicitamente a perda de produção e os danos a equipamentos como impactos econômicos diretos. No material do IFPB citando a fonte global de Fuchs e Masoum, esses infortúnios (danos físicos, perda fabril, tempo de máquina morta, material semi-acabado, penalidades) representam os denominados impactos econômicos DIRETOS; indiretos estão ligados ao mercado e vendas perdidas. A dissertação do IFPB, com base em Elphick et al., ressalta que o impacto econômico é imediatamente perceptível devido a danos ou tempo de inatividade, sendo esse o caso particularmente de quedas (sags), interrupções e transientes. O referencial de Análise de Distúrbios do IFPB aponta (baseado em Elphick et al.) que, embora alguns casos sejam imediatos, em outros casos o impacto só é observado com o tempo, podendo citar o envelhecimento de equipamentos."
+        },
+        {
+          "id": "s2",
+          "title": "Efeitos sobre equipamentos e processos",
+          "type": "list",
+          "items": [
+            "O Guia de Proteção em sua seção dedicada a perturbações sobre motores dá conta de que a queda de tensão provoca a diminuição do conjugado do motor e da velocidade: a desaceleração provoca um aumento da corrente e das perdas.",
+            "Segundo a dissertação do IFPB, a queda de tensão afeta o equipamento do usuário em termos de mau funcionamento de computadores, controladores de processo, controladores lógicos programáveis, drives de velocidade ajustável e robótica.",
+            "O guia específico sobre FLICKER publicado pelo Procobre garante tecnicamente que as lâmpadas fluorescentes têm uma sensibilidade às variações de tensão duas ou três vezes menor que as lâmpadas incandescentes.",
+            "O documento sobre Analisadores da Wrindu cita o caso real de uma siderúrgica que identificou distorção harmônica que causava prejuízos de 150 mil dólares por ano em falhas de motores."
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Diagnóstico e técnicas de análise",
+          "type": "text",
+          "body": "De acordo com o estudo científico do IFPB sobre análise de distúrbios, a VMD ganha maior robustez no ambiente de ruído, superando as perdas do EMD, justamente devido ao seu funcionamento baseado no filtro de Wiener embutido em cada iteração modal. O guia comercial da Wrindu afirma que os analisadores de qualidade de energia são ferramentas essenciais para monitorar e diagnosticar o desempenho, garantindo fornecimento confiável e conformidade com normas. O texto de análise da Wrindu menciona que um parque eólico no Texas implantou unidades para resolver uma rejeição de energia de 15 por cento por parte da operadora da rede, aumentando a receita em 12 por cento. O artigo guia da Wrindu relata um caso onde os operadores de Data Centers europeus reduziram o tempo de inatividade em 40 por cento, o que na prática evitou severas multas de US$ 500 mil relacionadas a interrupções."
+        },
+        {
+          "id": "s4",
+          "title": "O procedimento da distribuidora",
+          "type": "note",
+          "body": "O item 86 e seguintes do PRODIST (Módulo 8) determina formalmente que na ocorrência de VTCD ou interrupções longas que poluam os índices macro de DRP ou harmônicas, o intervalo correspondente a estes 10 minutos é expurgado e substituído. O item 121 (a) do PRODIST Módulo 8 exige claramente que a concessionária efetue inspeção técnica para avaliar a reclamação, incluindo a medição instantânea no ponto de conexão de duas leituras, com intervalo mínimo de 5 minutos entre elas. O PRODIST Módulo 8 define claramente no item 121 que a exigência fixada para os resultados oficiais destas ações no prazo de entrega obrigatória dos relatórios resultantes pelo medidor é de até 30 dias contados a partir da data de reclamação. Conforme o PRODIST Módulo 8, no item 133(c), verificada a existência de usuários perturbadores de QE na região de análise, a distribuidora deve notificá-los, recomendando ações a serem desenvolvidas. O PRODIST Módulo 8, item 138, determina que se houver problema de qualidade por causa perturbadora, a instalação de correções deve ser providenciada pelo usuário ou distribuidora, de acordo com as responsabilidades apuradas nos estudos. A documentação oficial em vigor PRODIST em seu módulo oitavo, item 122, exige que os dados devem ser mantidos pela distribuidora, em meio digital, por um período mínimo de 10 anos."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O IFPB (Fuchs; Masoum) divide os impactos em diretos (danos físicos, perda fabril, máquina parada, material semi-acabado, penalidades), indiretos (mercado e vendas perdidas) e de segurança; alguns são imediatos (sags, interrupções, transientes), outros surgem com o tempo (envelhecimento). A queda de tensão afeta motores, computadores, CLPs, drives e robótica. Os analisadores (Wrindu) diagnosticam e geram ROI real, e técnicas como a VMD melhoram a análise em ambiente de ruído. O PRODIST detalha o procedimento da distribuidora: inspeção, duas leituras com 5 minutos de intervalo, relatórios em até 30 dias, notificação de perturbadores e guarda dos dados por no mínimo 10 anos."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Legislação e PRODIST",
+      "subtitle": "O Módulo 8 do PRODIST item a item",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O escopo do PRODIST Módulo 8",
+          "type": "text",
+          "body": "O item 1 da Seção 8.0 do PRODIST Módulo 8 define explicitamente a qualidade do produto, do serviço e comercial para o fornecimento de energia. O item 13 do PRODIST Módulo 8 afirma diretamente que a conformidade refere-se a essa exata comparação entre a medição e os níveis especificados. O item 19 do PRODIST Módulo 8 classifica as leituras associadas à tensão de referência em três categorias: adequadas, precárias ou críticas. O manual técnico da WEG adverte exatamente o aspecto inverso, deixando claro que a IEEE 519 diz respeito aos sistemas de distribuição e não aos equipamentos individuais."
+        },
+        {
+          "id": "s2",
+          "title": "Indicadores, limites e medição",
+          "type": "list",
+          "items": [
+            "O item 28 do PRODIST Módulo 8 define claramente os limites: DRPLimite igual a 3 por cento e DRCLimite igual a 0,5 por cento.",
+            "O item 26.2 do PRODIST Módulo 8 determina que para a composição se deve considerar o registro exato de 1008 leituras válidas, em intervalos consecutivos de 10 minutos, totalizando a conversão para exatas 168 horas na métrica integral.",
+            "O item 87 do PRODIST Módulo 8 estabelece que, na ocorrência de variações temporárias, o intervalo de medição de 10 minutos deve ser expurgado e substituído por igual número de leituras válidas.",
+            "A alínea c do item 22 do PRODIST Módulo 8 determina textualmente que a tensão a ser contratada em tensão inferior a 2,3 kV deve ser a tensão nominal do sistema.",
+            "Conforme descrito logo abaixo da Equação 6 no item 29 do PRODIST Módulo 8, EUSD designa o valor do Encargo de Uso do Sistema de Distribuição."
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Prazos, compensação e responsabilidades",
+          "type": "text",
+          "body": "O item 31 do PRODIST Módulo 8 estabelece que o valor da compensação deve ser creditado na fatura no prazo máximo de 2 meses subsequentes. O item 34 do PRODIST Módulo 8 assegura que a distribuidora deve creditar o valor da compensação integralmente ao novo titular assumido na unidade consumidora. O item 121 (b) do PRODIST Módulo 8 garante ao usuário ser informado sobre o seu direito de solicitar, no prazo de 5 dias, a medição completa de 168 horas. O item 113 do PRODIST Módulo 8 determina que o prazo concedido para a instalação do sistema de medição permanente pela distribuidora é de até 60 dias. O item 112 do PRODIST Módulo 8 define expressamente que a diferença de custo entre o sistema específico e o sistema convencional é de responsabilidade do usuário."
+        },
+        {
+          "id": "s4",
+          "title": "Guarda de dados, sorteio e medidores",
+          "type": "note",
+          "body": "Conforme assinalado repetidamente nos itens 107, 118, 122 e 132 do PRODIST Módulo 8, o prazo de armazenamento exigido é de no mínimo 10 anos. O item 92 do PRODIST Módulo 8 indica formalmente que o sorteio efetuado pela ANEEL usa os dados contidos na BDGD informada pelas distribuidoras. O informativo da KRA2 Energia sobre o PRODIST especifica que é o medidor de Classe A o dispositivo obrigatório em aplicações envolvendo disputas judiciais."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O PRODIST Módulo 8 define a qualidade do produto, do serviço e comercial, e a conformidade como a comparação entre medição e níveis especificados — vale lembrar que a IEEE 519 (WEG) trata de sistemas de distribuição, não de equipamentos individuais. Os limites são DRP 3% e DRC 0,5%, apurados com 1008 leituras de 10 minutos (168 horas), com intervalos afetados por variações temporárias expurgados e substituídos. A norma fixa prazos: compensação em até 2 meses, medição completa solicitável em 5 dias, instalação de medição permanente em até 60 dias e guarda de dados por no mínimo 10 anos. O sorteio da ANEEL usa a BDGD, e o medidor Classe A é o obrigatório em disputas judiciais (KRA2 Energia). Este material foi produzido pelo Grupo GPECx."
+        }
+      ]
+    }
+  ]
+}

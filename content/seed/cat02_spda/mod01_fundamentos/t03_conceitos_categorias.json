@@ -1,0 +1,218 @@
+{
+  "category": "SPDA",
+  "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
+  "categoryOrder": 1,
+  "module": "Fundamentos de SPDA",
+  "moduleSubtitle": "Fisica dos raios, conceitos, tipos e categorias de protecao",
+  "moduleOrder": 0,
+  "trail": "Conceitos e Categorias de SPDA",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a funcao principal de um Sistema de Protecao contra Descargas Atmosfericas (SPDA) instalado em uma edificacao?",
+      "options": [
+        "Estabilizar a tensao da rede eletrica interna durante apagoes prolongados.",
+        "Interceptar, conduzir e dissipar de forma segura a corrente eletrica de uma descarga atmosferica para o solo.",
+        "Evitar completamente que descargas atmosfericas ocorram na regiao da estrutura atraves de ionizacao.",
+        "Filtrar perturbacoes eletromagneticas de baixa frequencia e melhorar o fator de potencia."
+      ],
+      "correctIndex": 1,
+      "explanation": "O SPDA e um conjunto de componentes destinado a interceptar, conduzir e dissipar de forma segura a corrente eletrica de uma descarga atmosferica para o solo, protegendo pessoas e estruturas. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O SPDA externo e composto por tres subsistemas principais que trabalham de forma integrada para garantir a protecao fisica da estrutura. Quais sao eles?",
+      "options": [
+        "Subsistema de captacao, subsistema de descidas e subsistema de aterramento.",
+        "Subsistema de bloqueio, subsistema de conducao e subsistema de dissipacao.",
+        "Subsistema aereo, subsistema de para-raios e subsistema subterraneo.",
+        "Subsistema Franklin, subsistema de Faraday e subsistema de surtos."
+      ],
+      "correctIndex": 0,
+      "explanation": "Conforme a norma ABNT NBR 5419:2015, o SPDA e dividido nos seguintes subsistemas principais: sistema de captacao, sistema de descidas e sistema de aterramento. (Fonte: A3A Engenharia e Mesh Engenharia, Subsistema de Aterramento em SPDA)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A parte 4 da norma ABNT NBR 5419 apresenta as solucoes necessarias para evitar falhas nos sistemas eletricos e eletronicos. O que significa a sigla MPS?",
+      "options": [
+        "Modulos de Protecao de Seguranca",
+        "Mecanismos de Prevencao de Surtos",
+        "Medidas de Protecao contra Surtos",
+        "Malhas de Protecao Subterranea"
+      ],
+      "correctIndex": 2,
+      "explanation": "A parte 4 da norma tecnica ABNT NBR 5419:2015 apresenta as Medidas de Protecao contra Surtos (MPS), essenciais para proteger equipamentos internos. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a atualizacao da NBR 5419, qual e a diferenca basica de atuacao e conceito entre o SPDA e as MPS?",
+      "options": [
+        "O SPDA protege contra sobretensoes transitorias em cabos de dados, enquanto as MPS protegem fisicamente as paredes do edificio.",
+        "O SPDA protege contra danos a estrutura e a vida humana, enquanto as MPS tratam especificamente da protecao aos sistemas eletricos e eletronicos.",
+        "O SPDA e aplicavel apenas em linhas de transmissao, e as MPS sao usadas exclusivamente em residencias unifamiliares.",
+        "Nao existe diferenca, SPDA e MPS sao termos sinonimos e intercambiaveis para o mesmo equipamento de aterramento."
+      ],
+      "correctIndex": 1,
+      "explanation": "O SPDA continua sendo a protecao contra danos fisicos a estrutura e a vida humana, enquanto as MPS tratam especificamente da protecao de equipamentos e sistemas eletricos e eletronicos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A norma NBR 5419 estabelece Niveis de Protecao contra Raios (LPL ou NP), que definem os parametros de dimensionamento. Quantos e quais sao esses niveis?",
+      "options": [
+        "Tres niveis: A, B e C.",
+        "Quatro niveis: I, II, III e IV.",
+        "Dois niveis: Primario e Secundario.",
+        "Cinco niveis: I, II, III, IV e V."
+      ],
+      "correctIndex": 1,
+      "explanation": "A NBR 5419 estabelece quatro Niveis de Protecao contra Raios (Lightning Protection Level - LPL), classificados numericamente de I a IV. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao os tres metodos de posicionamento do subsistema de captacao que sao aceitos e descritos normativamente pela ABNT NBR 5419?",
+      "options": [
+        "Metodo Early Streamer Emission (ESE), Metodo Radioativo e Metodo de Catenaria.",
+        "Metodo da esfera rolante, Metodo das malhas e Metodo do angulo de protecao (Franklin).",
+        "Metodo de equipotencializacao, Metodo de dissipacao e Metodo de blindagem magnetica.",
+        "Metodo do cone de protecao isolado, Metodo de Gauss e Metodo da Gaiola de Faraday inversa."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os metodos de posicionamento do subsistema de captacao aceitos sao o metodo da esfera rolante, metodo das malhas e metodo do angulo de protecao (Franklin). Sistemas nao convencionais como ESE permanecem fora dos metodos aceitos. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Dentre as Medidas de Protecao contra Surtos (MPS) listadas pela NBR 5419, qual delas e considerada exclusivamente uma MPS e nao cumpre nenhuma funcao adicional de seguranca previa na instalacao eletrica?",
+      "options": [
+        "Roteamento de linhas e cabos.",
+        "Aterramento e equipotencializacao.",
+        "Blindagem magnetica de espacos.",
+        "Instalacao de Dispositivos de Protecao contra Surtos (DPS)."
+      ],
+      "correctIndex": 3,
+      "explanation": "Apenas a instalacao de DPS e exclusivamente uma MPS e nao cumpre nenhuma funcao adicional em uma instalacao eletrica, diferente do aterramento ou roteamento de cabos que ja integram o projeto padrao de eletrica. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No Metodo da Esfera Rolante, o raio da esfera ficticia depende da classe do SPDA desejado. Qual e o raio correspondente ao Nivel de Protecao I (LPL I), que exige a protecao mais rigorosa?",
+      "options": [
+        "20 metros.",
+        "30 metros.",
+        "45 metros.",
+        "60 metros."
+      ],
+      "correctIndex": 0,
+      "explanation": "O raio da esfera rolante para o Nivel de Protecao I (LPL I, protecao maxima), o mais exigente da norma, e estipulado em 20 metros. (Fonte: HazOp Engenharia / Professor Pablo Guimaraes, Metodo da Esfera Rolante)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "As Medidas de Protecao contra Surtos (MPS) devem ser avaliadas considerando a divisao da estrutura em Zonas de Protecao contra Raios (ZPR). Qual e o objetivo de empregar blindagens magneticas espaciais e isolamento galvanico como MPS?",
+      "options": [
+        "Estabilizar a tensao de fornecimento da concessionaria em regime permanente de operacao diaria.",
+        "Minimizar ruidos e perturbacoes eletromagneticas, entre eles os surtos de tensao e corrente conduzidos ou irradiados.",
+        "Substituir completamente o uso de Dispositivos de Protecao contra Surtos (DPS) por toda a instalacao.",
+        "Reduzir o nivel isoceraunico da regiao atraves da repulsao de ions e cargas eletricas acumuladas nas nuvens."
+      ],
+      "correctIndex": 1,
+      "explanation": "As blindagens e o isolamento galvanico tem o objetivo tecnico de minimizar ruidos e perturbacoes, entre eles os surtos de tensao e corrente advindos do LEMP (Lightning Electromagnetic Impulse). (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NBR 5419, o Nivel de Protecao LPL I e obrigatorio para estruturas criticas. Alem de utilizar o rigoroso raio da esfera rolante de 20 m, qual e o valor da corrente minima da descarga interceptada adotada para fins de dimensionamento geometrico do LPL I?",
+      "options": [
+        "2,9 kA",
+        "5,4 kA",
+        "10,1 kA",
+        "15,7 kA"
+      ],
+      "correctIndex": 0,
+      "explanation": "Para o LPL I (Protecao Maxima), obrigatorio em locais como hospitais e areas com explosivos, a corrente minima considerada para penetracao da esfera e de 2,9 kA com raio de 20 m. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um SPDA perfeitamente projetado e instalado rigorosamente de acordo com as prescricoes da ABNT NBR 5419 garante a protecao absoluta e de 100% da estrutura, impedindo totalmente a ocorrencia ou impacto de raios no local protegido.",
+      "correctAnswer": false,
+      "explanation": "Um SPDA nao impede que a descarga atmosferica ocorra. Alem disso, mesmo um sistema instalado corretamente de acordo com a ABNT nao pode garantir protecao absoluta e total, servindo para minimizar drasticamente os riscos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "De acordo com as diretrizes do subsistema de descidas da NBR 5419, o espacamento medio maximo permitido para os condutores de descida nao naturais em um SPDA de Nivel de Protecao IV (menos restritivo) e de 25 metros.",
+      "correctAnswer": true,
+      "explanation": "Conforme as tabelas de referencia de distancias para SPDA, o espacamento medio estipulado para os condutores de descida de Nivel IV (LPL IV) e de 25 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para alcancar maxima eficiencia, a norma orienta que deve-se adotar o conceito de uma unica estrutura de aterramento (equipotencializacao), integrando no mesmo arranjo os propositos do SPDA, dos sistemas de energia e dos sinais de telecomunicacoes.",
+      "correctAnswer": true,
+      "explanation": "E interessante assumir uma unica estrutura de aterramento integrando todos os propositos como o SPDA, sistemas de energia e sinal (telecomunicacoes, dados), proporcionando economia e facilidade na manutencao e impedindo diferencas perigosas de potencial. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O metodo de captacao conhecido como Gaiola de Faraday atua criando um caminho em rede de condutores metalicos dispostos sobre a edificacao, tendo como principio distribuir a corrente da descarga e anular o campo eletrico interno do volume protegido.",
+      "correctAnswer": true,
+      "explanation": "A Gaiola de Faraday distribui a corrente eletrica da descarga ao longo dos condutores, reduzindo o impacto num ponto isolado, de forma que o campo eletrico interno a gaiola seja anulado, protegendo o interior da edificacao. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A norma ABNT NBR 5419-4 estabelece uma hierarquia rigida na aplicacao das Medidas de Protecao contra Surtos (MPS), obrigando que o roteamento de linhas seja implementado apenas se a instalacao de DPS falhar nas zonas internas.",
+      "correctAnswer": false,
+      "explanation": "As MPS (aterramento, equipotencializacao, blindagem, roteamento, DPS e interfaces isolantes) podem ser utilizadas de forma individual ou coletivamente, sem que exista uma hierarquia pre-determinada entre elas. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Com as grandes mudancas normativas introduzidas na versao mais recente, os conceitos das protecoes fisica e eletrica foram integrados. O termo macro que consolida a uniao entre o classico SPDA e as Medidas de Protecao contra Surtos (MPS) passou a ser chamado oficialmente de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "PDA"
+        }
+      ],
+      "explanation": "O termo SPDA divide agora espaco com o termo MPS. Os dois termos abordados juntos (estrutural e eletrica) trazem o novo e mais abrangente conceito de Protecao contra Descargas Atmosfericas, o PDA. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No Metodo Eletrogeometrico (Esfera Rolante), o tamanho do raio da esfera define o rigor da protecao nas bordas da edificacao. Para uma estrutura classificada com Nivel de Protecao Elevada (LPL II), comumente aplicada a museus e shopping centers, o raio exigido e de ____ metros.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "30"
+        }
+      ],
+      "explanation": "A tabela para o Metodo da Esfera Rolante determina que o LPL II (Nivel de Protecao II) deve utilizar uma esfera ficticia com raio rigoroso de 30 metros. (Fonte: HazOp Engenharia e Professor Pablo Guimaraes, Metodo da Esfera Rolante)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A ABNT NBR 5419 nao aceita sistemas baseados na emissao antecipada ou atracao de raios. O volume de protecao so permite componentes fisicos reais, excluindo das aprovacoes tecnicas os captores nao convencionais do tipo ____ (Early Streamer Emission).",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ESE"
+        }
+      ],
+      "explanation": "A norma reforca que a determinacao do volume de protecao considera apenas dimensoes fisicas reais dos elementos captores, de modo que sistemas nao convencionais do tipo ESE (Early Streamer Emission) permanecem fora dos metodos aceitos no Brasil. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -124,7 +124,7 @@ class ModulesScreen extends ConsumerWidget {
                         itemBuilder: (context, index) {
                           final module = modules[index];
 
-                          // Calcular progresso
+                          // Calcular progresso (módulos sem bloqueio sequencial)
                           final progIndex = userProgress.indexWhere((p) => p.moduleId == module.id);
                           final prog = progIndex >= 0 ? userProgress[progIndex] : null;
                           final actualProgress = prog?.progressPercent ?? 0.0;

@@ -1,0 +1,218 @@
+{
+  "category": "Comissionamento SPCS",
+  "categorySubtitle": "Metodologia, ensaio de relés e comissionamento IEC 61850",
+  "categoryOrder": 9,
+  "module": "Ensaio de Relés de Proteção",
+  "moduleSubtitle": "Pré-comissionamento, injeção primária/secundária e FAT/SAT",
+  "moduleOrder": 1,
+  "trail": "Implementação (Injeção Secundária, Injeção Primária, Ensaios em Campo)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "A injeção secundária testa o relé aplicando as grandezas fasoriais simuladas em qual local?",
+      "options": [
+        "No primário do transformador de corrente.",
+        "Nos contatos auxiliares do disjuntor.",
+        "No barramento principal de força.",
+        "Diretamente na régua de bornes do relé."
+      ],
+      "correctIndex": 3,
+      "explanation": "A injeção secundária conecta a mala de testes diretamente às entradas do relé, simulando as correntes e tensões dos sensores. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para evitar desligamento inadvertido da carga real durante o ensaio do relé, qual ação é mandatória?",
+      "options": [
+        "Isolar física ou logicamente o circuito de saída de trip.",
+        "Aterrar temporariamente os bornes de corrente.",
+        "Elevar a tensão de alimentação auxiliar em 10%.",
+        "Curto-circuitar os TPs do painel."
+      ],
+      "correctIndex": 0,
+      "explanation": "A saída de disparo (trip) deve ser isolada da automação externa para evitar cortes reais de carga durante a simulação. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual recurso interno do relé digital documenta e comprova os tempos exatos de resposta durante a injeção simulada?",
+      "options": [
+        "O medidor de temperatura interno.",
+        "O registro de oscilografia gravado pelo IED.",
+        "A porta de comunicação traseira isolada.",
+        "O log de alterações de parametrização."
+      ],
+      "correctIndex": 1,
+      "explanation": "A oscilografia grava a forma de onda e a atuação dos elementos lógicos do relé, comprovando sua resposta perante a simulação. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual ação de segurança é exigida logo antes do religamento final da subestação após os ensaios de campo?",
+      "options": [
+        "Bloquear a atuação da proteção de sobrecorrente instantânea.",
+        "Abrir manualmente todos os circuitos de secundário de TC.",
+        "Remover aterramentos temporários, ferramentas e o pessoal não envolvido.",
+        "Injetar tensão contínua na bobina de mínima do disjuntor."
+      ],
+      "correctIndex": 2,
+      "explanation": "O religamento exige a inspeção da área e a remoção segura de todos os aterramentos e ferramentas utilizados nos testes. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Onde devem ser obrigatoriamente arquivados os laudos e registros dos ensaios realizados no comissionamento?",
+      "options": [
+        "Apenas no sistema SCADA local.",
+        "No manual original do fabricante da mala de testes.",
+        "No banco de dados do ONS.",
+        "No Prontuário de Instalações Elétricas."
+      ],
+      "correctIndex": 3,
+      "explanation": "Conforme a NR-10, laudos, projetos e certificados de comissionamento compõem o Prontuário de Instalações Elétricas. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que as malas de teste computadorizadas utilizam faixas de tolerância relativa e absoluta?",
+      "options": [
+        "Para aprovar os ensaios se os tempos e pick-ups medidos ficarem dentro dos limites de erro aceitáveis.",
+        "Para compensar o desvio térmico do disjuntor de potência.",
+        "Para ajustar o burden real do TC primário.",
+        "Para modificar os arquivos de parametrização off-line do relé."
+      ],
+      "correctIndex": 0,
+      "explanation": "As tolerâncias (ex: Tol. t % = 5%) definem os limites de erro aceitáveis do IED para aprovar o passo de teste automaticamente. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a função diferencial (87) é rigorosamente mapeada pela mala de testes na injeção secundária?",
+      "options": [
+        "Injetando unicamente pulsos de sequência zero.",
+        "Simulando correntes simultâneas nas entradas para validar a região de operação (Idif x Irest).",
+        "Avaliando a elevação da temperatura térmica da bobina.",
+        "Medindo a resistência de isolação com corrente contínua."
+      ],
+      "correctIndex": 1,
+      "explanation": "A função diferencial exige injeção em múltiplos terminais (corrente de operação e restrição) para validar o slope e a região de trip. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal vantagem do ensaio por injeção primária comparado à injeção secundária?",
+      "options": [
+        "Aplica fasores diretamente nas entradas analógicas do IED com baixa potência.",
+        "Dispensa totalmente a necessidade de abrir as chaves seccionadoras.",
+        "Exige aplicar altas correntes diretamente no circuito de potência, atestando simultaneamente o TC, a fiação e o relé.",
+        "Testa exclusivamente o sincronismo dos canais de telecomunicação."
+      ],
+      "correctIndex": 2,
+      "explanation": "A injeção primária injeta no barramento de força, validando o circuito completo: relação do TC, fiação primária/secundária e atuação do relé. (Fonte: Cabine Primária).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como devem ser tratados os ajustes off-line (arquivos de parametrização) durante o comissionamento em campo (SAT)?",
+      "options": [
+        "Devem ser verificados apenas no painel de alarmes visuais.",
+        "Devem ser carregados cegamente, assumindo que o projeto preliminar não possui erros.",
+        "Devem ser substituídos pelas regulagens de fábrica do equipamento.",
+        "Devem ser checados e obrigatoriamente adequados à topologia física e fiação real da subestação."
+      ],
+      "correctIndex": 3,
+      "explanation": "Arquivos preparados off-line dependem de validação em campo (SAT) para sanar discrepâncias construtivas ou de fiação real. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No ensaio dinâmico da proteção de distância (21), quais grandezas a mala deve injetar para atestar os limites do plano R-X?",
+      "options": [
+        "Fasores simultâneos de tensões, correntes e suas defasagens angulares.",
+        "Correntes contínuas proporcionais ao comprimento da linha.",
+        "Rampas de frequência e variações de impedância de neutro.",
+        "Apenas potência ativa e reativa da carga local."
+      ],
+      "correctIndex": 0,
+      "explanation": "A proteção de distância mapeia a impedância calculando V/I e o ângulo; logo, a mala deve simular fasores exatos destas grandezas. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O ensaio de injeção secundária conecta a mala diretamente aos bornes do painel de proteção, simulando as grandezas que viriam dos TCs e TPs.",
+      "correctAnswer": true,
+      "explanation": "A injeção secundária evita elevar correntes perigosas no pátio, injetando os sinais já reduzidos diretamente nas entradas do IED. (Fonte: Cabine Primária).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No ensaio das saídas de um IED em operação, é obrigatório isolar o trip para não desligar o disjuntor em carga.",
+      "correctAnswer": true,
+      "explanation": "Para testar as saídas (trip) sem desligar a carga real, o comando externo ao disjuntor deve ser bloqueado. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O ensaio de pick-up na função de sobrecorrente visa verificar a precisão do tempo de abertura mecânica do disjuntor na caixa de engrenagens.",
+      "correctAnswer": false,
+      "explanation": "O ensaio de pick-up verifica o valor exato da corrente mínima (limiar) a partir da qual o relé reconhece a falta e inicia a lógica. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As malas de ensaio utilizadas no comissionamento de relés precisam ter certificados de calibração rastreáveis para validar legalmente os resultados.",
+      "correctAnswer": true,
+      "explanation": "Os instrumentos de teste requerem calibração rastreável para garantir a exatidão e a validade dos registros entregues. (Fonte: Cabine Primária).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na injeção secundária do relé de distância (21), os pontos de teste devem cobrir todo o plano R-X, não apenas o eixo resistivo.",
+      "correctAnswer": false,
+      "explanation": "A mala de teste mapeia toda a região (R e X), usando pontos de busca dentro e fora da área poligonal ou mho para garantir o alcance completo. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para atestar as lógicas temporais que o relé executou durante a falta simulada, a equipe analisa o arquivo de ____ gravado pelo equipamento.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "oscilografia"
+        }
+      ],
+      "explanation": "O arquivo oscilográfico registra as correntes, tensões e status lógicos do relé em frações de milissegundo, permitindo a validação do ensaio. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na injeção secundária do relé diferencial (87), a mala testa a região de atuação fornecendo as correntes de operação e de ____ calculadas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "restrição"
+        }
+      ],
+      "explanation": "A região de operação da função diferencial é caracterizada pela relação entre as correntes de operação (Idif) e restrição (Irest). (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Os desvios de pick-up e tempo medidos na mala são avaliados com base nas bandas de ____ (absoluta e percentual) cadastradas no teste.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "tolerância"
+        }
+      ],
+      "explanation": "As margens de tolerância aceitáveis validam automaticamente se o relé atende aos limites de erro especificados. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "hard"
+    }
+  ]
+}

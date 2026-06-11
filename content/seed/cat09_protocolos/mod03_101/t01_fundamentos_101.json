@@ -1,0 +1,218 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 60870-5-101",
+  "moduleSubtitle": "Telecontrol serial, ASDUs e IOAs",
+  "moduleOrder": 2,
+  "trail": "Fundamentos de IEC 60870-5-101",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual norma da familia IEC 60870-5 define os padroes basicos originais para as tarefas de telecontrole?",
+      "options": [
+        "IEC 60870-5-103",
+        "IEC 60870-5-102",
+        "IEC 60870-5-101",
+        "IEC 60870-5-104"
+      ],
+      "correctIndex": 2,
+      "explanation": "A norma IEC 60870-5-101 estabelece os padroes basicos originais focados em tarefas de telecontrole via links seriais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na definicao de arquitetura de camadas (EPA), quais camadas do modelo OSI o protocolo IEC 60870-5 utiliza nativamente?",
+      "options": [
+        "Apenas a Camada Fisica e a Camada de Rede.",
+        "Camadas 1 (Fisica), 2 (Enlace) e 7 (Aplicacao).",
+        "Camadas 3 (Rede), 4 (Transporte) e 5 (Sessao).",
+        "Todas as 7 camadas completas do modelo OSI."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os protocolos IEC 60870-5, assim como o DNP3, utilizam uma arquitetura enxuta baseada nas camadas 1, 2 e 7.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que significa a sigla ASDU na estrutura de mensagens do protocolo IEC 60870-5?",
+      "options": [
+        "Application System Data Unit.",
+        "Application Serial Data Unit.",
+        "Asynchronous Service Data Unit.",
+        "Application Service Data Unit."
+      ],
+      "correctIndex": 3,
+      "explanation": "ASDU significa Application Service Data Unit, que carrega as informacoes de dados da aplicacao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na ASDU, qual campo e responsavel por identificar de forma unica o escravo que esta enviando os dados?",
+      "options": [
+        "CAA",
+        "COT",
+        "IOA",
+        "VSQ"
+      ],
+      "correctIndex": 0,
+      "explanation": "O campo CAA (Common Address of ASDU) e utilizado para identificar qual escravo esta enviando as informacoes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a funcao do campo Type Identification (TI) no cabecalho da mensagem ASDU?",
+      "options": [
+        "Validar o checksum de redundancia ciclica do quadro Ethernet.",
+        "Identificar o tipo de informacao transmitida, como ponto simples ou comando duplo.",
+        "Determinar o endereco fisico do mestre na rede.",
+        "Definir a estampa de tempo absoluta de sincronismo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Type Identification define o formato do dado util, diferenciando estados digitais, medicoes, comandos, etc.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O campo Cause of Transmission (COT) em uma ASDU e utilizado no protocolo para indicar o que?",
+      "options": [
+        "A prioridade de descarte do pacote em caso de congestionamento de rede.",
+        "A quantidade exata de falhas de comunicacao ocorridas no link fisico.",
+        "O motivo pelo qual o dado foi transmitido, como report espontaneo ou varredura periodica.",
+        "O enderecamento logico do objeto de informacao mapeado no equipamento."
+      ],
+      "correctIndex": 2,
+      "explanation": "O COT (Cause of Transmission) explica a razao do envio do dado, justificando se e espontaneo, periodico ou resposta a comando.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o marcador VSQ indica ao interpretar o bloco de dados de uma mensagem ASDU?",
+      "options": [
+        "Se a mensagem deve ser arquivada obrigatoriamente no banco de dados do SCADA.",
+        "Se o mestre deve confirmar o recebimento do telegrama com uma mensagem de controle.",
+        "Se a porta de comunicacao assincrona opera no modo full-duplex ou half-duplex.",
+        "Se os multiplos objetos presentes estao sendo transmitidos de maneira sequencial ou nao."
+      ],
+      "correctIndex": 3,
+      "explanation": "O VSQ orienta a decodificacao indicando se os enderecos dos objetos subsequentes (IOA) seguem uma ordem sequencial contigua.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao os possiveis qualificadores de status que podem acompanhar o endereco do objeto (IOA)?",
+      "options": [
+        "Invalidade (IV), Nao atualizados (NT), Substituido (SB) ou Bloqueado (BL).",
+        "Read, Write, Execute e Delete.",
+        "High, Medium, Low e Critical.",
+        "Spontaneous, Periodic, Requested e Interrogated."
+      ],
+      "correctIndex": 0,
+      "explanation": "O protocolo preve qualificadores de qualidade anexados ao dado: IV (invalido), NT (nao atualizado), SB (substituido) e BL (bloqueado).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a camada de aplicacao do IEC 60870-5-104 se relaciona de maneira estrutural com a do IEC 60870-5-101?",
+      "options": [
+        "O IEC 104 utiliza protocolos de roteamento exclusivos que descartam a camada do 101.",
+        "A camada de aplicacao do 104 e a mesma do 101, mantendo ASDUs para adequar-se ao TCP/IP.",
+        "Nao possuem qualquer compatibilidade, sendo o 101 focado em barramento de processo.",
+        "A camada de aplicacao do 101 foi substituida pelos blocos de controle MBAP do 104."
+      ],
+      "correctIndex": 1,
+      "explanation": "O IEC 104 e uma extensao do IEC 101; ele altera as camadas inferiores para operar em TCP/IP mas mantem a mesma camada de aplicacao ASDU.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na interpretacao de uma ASDU, o que o dado com Type Identification igual a 1 (TI 1) representa tecnicamente?",
+      "options": [
+        "Um comando duplo de abertura ou fechamento de disjuntor (M_DP_C_1).",
+        "Uma medicao analogica em formato de ponto flutuante IEEE 754.",
+        "Uma entrada digital simples sem tempo (M_SP_NA_1).",
+        "Um sinal de sincronizacao de relogio enviado pelo servidor NTP."
+      ],
+      "correctIndex": 2,
+      "explanation": "No mapeamento do IEC 101/104, o TI 1 designa pontos digitais simples (Single Point) reportados sem a estampa de data e hora.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A norma IEC 60870-5 define padroes abertos especificos voltados a transmissao de telecontrole e aquisicao de dados em sistemas SCADA.",
+      "correctAnswer": true,
+      "explanation": "O escopo da colecao IEC 60870-5 e justamente prover um padrao seguro e aberto para controle telemetrico e informacao de SCADA.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No esquema tradicional do protocolo IEC 60870-5-101, a transmissao de telemetria e concebida nativamente para fluir sobre redes LAN ethernet usando.",
+      "correctAnswer": false,
+      "explanation": "O IEC 60870-5-101 foi criado para meios seriais tradicionais. A migracao e acesso a redes ethernet TCP/IP e feita pela norma IEC 60870-5-104.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A estrutura de dados da ASDU exige que cada informacao possua um IOA (Information Object Address) exclusivo para que o SCADA consiga mapear o ponto.",
+      "correctAnswer": true,
+      "explanation": "O IOA atua como o endereco de objeto de informacao, permitindo a estacao controladora vincular o valor numerico a grandeza fisica no banco de dados.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Quando um ponto de medicao carrega a flag de qualidade NT (Nao Atualizado), significa que houve falha irreversivel no conversor analogico-digital e.",
+      "correctAnswer": false,
+      "explanation": "A flag NT significa apenas que o dado nao foi atualizado pela rotina de varredura interna, e nao necessariamente uma falha irreversivel de conversao.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No metodo de acesso ao barramento utilizado no modelo da serie IEC 60870-5 serial, as estacoes escravas (controlled stations) podem enviar dados.",
+      "correctAnswer": false,
+      "explanation": "O modelo mestre-escravo do IEC 60870-5 opera centralizado, onde nao ha comunicacao direta espontanea entre as diferentes estacoes escravas.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A subnorma da serie IEC 60870-5 desenhada exclusivamente para lidar com a troca de informacoes normativas focadas em equipamentos de protecao e a ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "103"
+        }
+      ],
+      "explanation": "Enquanto a norma 101 dita o telecontrole geral, a variante IEC 60870-5-103 e padronizada para interrogar relatorios de IEDs de protecao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O campo da ASDU que justifica ao sistema mestre se a mudanca de estado reportada advem de um evento espontaneo ou varredura periodica atende pela ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "COT"
+        }
+      ],
+      "explanation": "O Cause of Transmission (COT) e elemento vital no protocolo, confirmando a semantica temporal e motivacional daquele frame recebido.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O endereco comum que agrupa os dados reportados na mensagem, validando a integridade da origem escrava da transmissao, e conhecido por Common ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ASDU"
+        }
+      ],
+      "explanation": "O CAA (Common Address of ASDU) e o endereco da estacao controlada ou escravo responsavel por emitir aquele subconjunto de aplicacao especifico.",
+      "difficulty": "hard"
+    }
+  ]
+}

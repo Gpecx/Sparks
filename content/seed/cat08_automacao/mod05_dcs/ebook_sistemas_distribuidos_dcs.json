@@ -1,0 +1,169 @@
+{
+  "category": "Automação",
+  "categoryOrder": 7,
+  "module": "Sistemas Distribuídos (DCS)",
+  "moduleOrder": 4,
+  "moduleSubtitle": "Arquitetura SDCD, aplicações em SPCS e integração TI/TO com redes Fieldbus",
+  "ebookTitle": "Sistemas Distribuídos de Controle (DCS)",
+  "ebookSubtitle": "Dos fundamentos do SDCD às aplicações em SPCS e à integração segura entre controle, redes e camada corporativa",
+  "estimatedMinutes": 40,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de DCS",
+      "subtitle": "O que é o SDCD, por que surgiu e como sua arquitetura distribuída opera",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O nascimento do SDCD",
+          "type": "text",
+          "body": "O SDCD foi desenvolvido na década de 1970 primordialmente para atuar no controle regulatório e contínuo através de algoritmos PID complexos (Marco Antônio Ribeiro - Kufunda.net). O TDC 2000 da Honeywell foi o primeiro Sistema Digital de Controle Distribuído (SDCD), revolucionando a instrumentação da década de 1970 (Marco Antônio Ribeiro - Kufunda.net). Ele veio substituir os esquemas legados dos instrumentos focados no controle contínuo analógico baseados em sinal pneumático ou sinais eletrônicos simples de 4-20mA (Marco Antônio Ribeiro - Kufunda.net), distribuindo as funções dos instrumentos geograficamente e substituindo controladores centralizados de painel (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s2",
+          "title": "A lógica da arquitetura distribuída",
+          "type": "list",
+          "items": [
+            "O SDCD permite que pequenas salas de controle sejam instaladas localmente nas unidades operacionais, interligadas a um centro operacional principal via barramento (Marco Antônio Ribeiro - Kufunda.net)",
+            "No modelo distribuído, cada módulo possui inteligência própria e opera independentemente, evitando que falhas isoladas afetem toda a rede (Marco Antônio Ribeiro - Kufunda.net)",
+            "O conceito distribuído segmenta o processamento; logo, falhas de módulo isoladas prejudicam no máximo a funcionalidade residente nele próprio, não colapsando o restante da rede (Marco Antônio Ribeiro - Kufunda.net)",
+            "Repartir as conexões impede a vulnerabilidade de falha de modo comum, onde a perda de um único módulo acionaria o desarme geral da unidade (Marco Antônio Ribeiro - Kufunda.net)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A interface com o operador e o barramento de comunicação",
+          "type": "text",
+          "body": "A interface visual principal para o operador monitorar os diagramas do processo, atuar nas malhas e ver alarmes é centralizada na estação de operação do SDCD (Marco Antônio Ribeiro - Kufunda.net). Diferentemente dos primeiros CLPs, que possuíam interface muito rudimentar (botoeiras, lâmpadas), os SDCDs nasceram integrando poderosos consoles de vídeo para o operador (Marco Antônio Ribeiro - Kufunda.net). O sistema de comunicação une todas as esferas operacionais, arbitrando prioridades de fluxo na rede e diagnosticando falhas da interligação do barramento (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s4",
+          "title": "Redundância e proteção do controle",
+          "type": "note",
+          "body": "Para evitar paradas catastróficas, os sistemas SDCD fornecem de modo inerente redundância total de E/S, CPUs e comunicações sem ter falhas de ponto isolado (Marco Antônio Ribeiro - Kufunda.net). Sistemas críticos de segurança e intertravamentos devem ser processados separadamente em redes redundantes (CLPs tolerantes) isentas de conflitos com a malha controladora contínua normal (Marco Antônio Ribeiro - Kufunda.net). Além disso, o gateway independente RTDB atua como buffer coletando dados do processo, o que protege a CPU de controle principal de lentidões em seu tempo de processamento contínuo da planta (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s5",
+          "title": "Base de dados global e custo de aplicação",
+          "type": "text",
+          "body": "Uma enorme facilidade dos SDCDs é prover a base de dados integrada de forma global unificando o acesso às informações unânimes de todo o barramento (Marco Antônio Ribeiro - Kufunda.net). Em indústrias voltadas a multiprodutos, as soluções batelada rodando via arquitetura SDCD fornecem hardware integrado a potentes bancos relacionais unificados, gestão de receita e interface consolidada (Marco Antônio Ribeiro - Kufunda.net). Contudo, a maior desvantagem do SDCD reside em seu altíssimo custo de hardware e software, justificando-se apenas em grandes complexos com forte suporte econômico (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O SDCD nasceu na década de 1970 (com o TDC 2000 da Honeywell) para o controle regulatório e contínuo via PID, substituindo instrumentos analógicos pneumáticos e de 4-20mA. Sua arquitetura distribui o processamento em módulos com inteligência própria interligados por barramento, de modo que falhas isoladas não colapsam a rede. A estação de operação centraliza a interface gráfica; a redundância total de E/S, CPUs e comunicações e o gateway RTDB protegem o controle. A base de dados global unifica as informações, mas o alto custo restringe seu uso a grandes complexos."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Aplicações em SPCS",
+      "subtitle": "Onde o SDCD atua, sua posição na pirâmide de automação e a integração com CLPs",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O SDCD no controle de processos contínuos",
+          "type": "text",
+          "body": "Os primeiros SDCDs eram dedicados ao controle de processos contínuos em refinarias e complexos petroquímicos (Marco Antônio Ribeiro - Kufunda.net). O SDCD foi criado para substituir instrumentos analógicos em aplicações de controle contínuo PID (Marco Antônio Ribeiro - Kufunda.net), distribuindo as funções dos instrumentos geograficamente e substituindo controladores centralizados de painel (Marco Antônio Ribeiro - Kufunda.net). A estação de operação possui monitores de vídeo e teclados, substituindo os painéis convencionais (Marco Antônio Ribeiro - Kufunda.net). Controladores instalados em arranjos SDCD executam ativamente o controle preditivo e cascata com excelentes tempos de computação e resposta local (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s2",
+          "title": "SCADA, DCS e a pirâmide de automação",
+          "type": "list",
+          "items": [
+            "O SCADA não é um hardware atuador, mas sim um software de design utilizado para monitorar o processo através de interfaces gráficas (PLC vs SCADA vs DCS: Principais diferenças explicadas)",
+            "SCADA é um software de design para monitoramento, enquanto o DCS é um sistema dedicado para controlar processos contínuos (PLC vs SCADA vs DCS)",
+            "O DCS (Sistema de Controle Distribuído) atua interligando os PLCs e controlando o processo produtivo de modo unificado (PLC vs SCADA vs DCS)",
+            "Os SDCDs em conjunto com os CLPs operam consolidando ativamente o Nível 2 de controle na pirâmide tradicional de automação industrial (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)",
+            "O Nível 2 compreende equipamentos como CLPs e SDCDs que realizam ativamente o controle automatizado dos processos (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Integração entre CLP e SDCD",
+          "type": "text",
+          "body": "A integração une a rapidez do CLP para E/S discretas ao controle avançado e interface amigável do SDCD (Marco Antônio Ribeiro - Kufunda.net). Diferente de CLPs tradicionais, o SDCD oferece uma base de dados global unificada para gerenciar o sistema de forma integrada (Marco Antônio Ribeiro - Kufunda.net). Para apoiar essa integração, utilizar nomes de tag facilita a identificação global e a implementação de estratégias de controle mistas (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s4",
+          "title": "Do contínuo à batelada",
+          "type": "text",
+          "body": "Apesar de ter nascido no controle contínuo, o DCS se tornou imbatível na batelada ao unir lógicas discretas e gestão avançada e histórica de receitas (Marco Antônio Ribeiro - Kufunda.net). Essa evolução amplia o alcance do SDCD para além do controle regulatório, integrando sequências discretas e gestão de receitas sob a mesma plataforma de controle e interface."
+        },
+        {
+          "id": "s5",
+          "title": "Disponibilidade e segregação da segurança",
+          "type": "note",
+          "body": "Os circuitos de SDCD são projetados para oferecer redundância total sem falha de ponto isolado (Marco Antônio Ribeiro - Kufunda.net). Repartir as conexões impede a vulnerabilidade de falha de modo comum, onde a perda de um único módulo acionaria o desarme geral da unidade (Marco Antônio Ribeiro - Kufunda.net). Para garantir máxima segurança e disponibilidade, lógicas vitais de desligamento são separadas do controle contínuo em CLPs dedicados (Marco Antônio Ribeiro - Kufunda.net). Como proteção adicional, o gateway RTDB atua como buffer, evitando que as consultas externas saturem o SDCD e prejudiquem o controle da planta (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O SDCD aplica-se ao controle de processos contínuos (refinarias, petroquímica), substituindo instrumentos analógicos e painéis convencionais por estações de operação e executando controle preditivo e cascata. Junto com os CLPs, ocupa o Nível 2 da pirâmide de automação; o SCADA é software de monitoramento, enquanto o DCS é o sistema dedicado de controle. A integração CLP+SDCD une a rapidez discreta à interface e base de dados global, evoluindo do contínuo para a batelada com gestão de receitas. Redundância total, segregação das lógicas vitais em CLPs dedicados e o buffer RTDB sustentam a disponibilidade."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Implementação e Integração",
+      "subtitle": "Redes Fieldbus, convergência TI/TO e cibersegurança do SDCD",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Delegação de funções e redes de campo",
+          "type": "text",
+          "body": "O protocolo foca na missão de transferir recursos antes restritos, delegando algoritmos e processamentos cruciais para os instrumentos da linha de campo (Marco Antônio Ribeiro - Kufunda.net). O data highway, ou via de dados, é responsável por trafegar as informações de forma bidirecional por toda a arquitetura SDCD (Marco Antônio Ribeiro - Kufunda.net). A tecnologia H1 provê comunicação bidirecional a 31,25 kbit/s e fornece alimentação embutida utilizando os mesmos condutores de rede (Marco Antônio Ribeiro - Kufunda.net). A transmissão otimizada baseada em eventos ocorre esporadicamente liberando o fluxo da rede para focar na entrega prioritária durante os instantes de anormalidade (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s2",
+          "title": "Interoperabilidade e acoplamento de segmentos",
+          "type": "list",
+          "items": [
+            "A interoperabilidade garante que dispositivos de diferentes marcas operem juntos na rede Fieldbus após uma reconfiguração parametrizada (Marco Antônio Ribeiro - Kufunda.net)",
+            "O uso unificado de nomes de tag facilita imensamente o reconhecimento de dados e a elaboração de malhas de controle híbridas eficientes (Marco Antônio Ribeiro - Kufunda.net)",
+            "O uso do acoplador adapta os ritmos, rebaixando as frequências brutas do backbone DP para abastecer simultaneamente as exigências precisas do segmento físico PA (Marco Antônio Ribeiro - Kufunda.net)",
+            "Para as redes Profibus configuradas integralmente em alta velocidade o hardware independe de acopladores, visto que a camada física estrutural se mantém a mesma para cada segmento (Marco Antônio Ribeiro - Kufunda.net)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Integração com as camadas de manufatura e corporativa",
+          "type": "text",
+          "body": "No nível de informação as aplicações corporativas e corporações geográficas amplas baseiam-se dominantemente nas redes flexíveis do tipo Ethernet (Marco Antônio Ribeiro - Kufunda.net). As arquiteturas modernas permitem que a camada de controle se integre perfeitamente aos níveis de manufatura (MES) e corporativo (ERP) alinhados à ISA-95 (Edge AI na Indústria). Para proteger o controle dessa integração, o gateway com RTDB atua como buffer, impedindo que excessos de requisições gerenciais atrasem o tempo de processamento contínuo do controle (Marco Antônio Ribeiro - Kufunda.net)."
+        },
+        {
+          "id": "s4",
+          "title": "Cibersegurança na convergência TI/TO",
+          "type": "list",
+          "items": [
+            "A convergência entre TI e TO expõe plataformas operacionais antigas a vulnerabilidades severas que exigem mitigação contínua de cibersegurança (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea)",
+            "Sistemas de automação legados exigem modernizações graduais e estratégias compensatórias rigorosas, tal como isolamento lógico de rede e patches virtuais (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea)",
+            "Com a convergência TI/TO e integração à rede corporativa, sistemas DCS exigem firewalls e rigoroso monitoramento para evitar acessos indevidos (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea)",
+            "A criação técnica de DMZs (Demilitarized Zones) separa ativamente o tráfego corporativo livre do ambiente selado da automação SCADA e DCS (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Segregação da segurança vital",
+          "type": "note",
+          "body": "Boas práticas de engenharia determinam que a segurança vital (Shut down) opere segregada em sistemas de CLPs independentes do controle primário SDCD (Marco Antônio Ribeiro - Kufunda.net). O DCS, ou Sistema de Controle Distribuído, age no controle massivo e contínuo interligando lógicas e dispositivos por toda a fábrica (PLC vs SCADA vs DCS: Principais diferenças explicadas), enquanto o SCADA é um software focado em monitoramento, ficando o DCS como um sistema completo e dedicado ao controle de processos contínuos (PLC vs SCADA vs DCS: Principais diferenças explicadas). O Nível 2 abriga os equipamentos como CLPs e SDCDs (DCS) responsáveis por realizar o controle automatizado da planta (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A implementação do SDCD apoia-se em redes de campo que delegam processamento aos instrumentos: o data highway trafega dados bidirecionalmente, a tecnologia H1 opera a 31,25 kbit/s com alimentação embutida e a transmissão por eventos libera o fluxo da rede. A interoperabilidade Fieldbus, os nomes de tag unificados e os acopladores DP/PA viabilizam malhas híbridas. A integração via Ethernet às camadas MES e ERP (alinhada à ISA-95) é protegida pelo buffer RTDB. A convergência TI/TO exige cibersegurança contínua — firewalls, DMZs, isolamento de rede — e a segregação da segurança vital (Shut down) em CLPs independentes do SDCD."
+        }
+      ]
+    }
+  ]
+}

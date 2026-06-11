@@ -1,0 +1,218 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Seletividade e Coordenação",
+  "moduleSubtitle": "Conceitos, TCC, critérios, topologia e fusíveis/religadores",
+  "moduleOrder": 3,
+  "trail": "Curvas Tempo-Corrente (TCC)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal diferença de operação entre as curvas de tempo definido e as de tempo inverso?",
+      "options": [
+        "No tempo definido, o tempo de atuação é constante independente da magnitude da corrente.",
+        "O tempo definido atua mais rápido em correntes elevadas.",
+        "O tempo inverso é instantâneo.",
+        "O tempo inverso atua com atraso fixo e imutável para faltas à terra."
+      ],
+      "correctIndex": 0,
+      "explanation": "No tempo definido, a operação ocorre no mesmo tempo fixo para qualquer valor de corrente; no inverso, o tempo diminui à medida que a corrente aumenta. (Fonte: Apostila Proteção, Virtus_CProt).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são as principais classificações de inclinação das curvas de tempo inverso definidas pela norma IEC?",
+      "options": [
+        "Longa, curta e moderada.",
+        "Normal inversa, muito inversa e extremamente inversa.",
+        "Simétrica, assimétrica e de tempo contínuo.",
+        "Exponencial pura, logarítmica e mista."
+      ],
+      "correctIndex": 1,
+      "explanation": "A norma IEC classifica as curvas de sobrecorrente em normal inversa, muito inversa e extremamente inversa. (Fonte: Ed50_marco_protecao_seletividade e Guia Schneider).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o termo 'pick-up' (corrente de partida) define no ajuste de um relé de sobrecorrente?",
+      "options": [
+        "A corrente máxima de ruptura que o disjuntor suporta.",
+        "O limite térmico do cabo de média tensão.",
+        "A corrente mínima necessária para iniciar o processo de atuação do relé.",
+        "A corrente de rearme ou de 'drop-out' dos contatos do relé."
+      ],
+      "correctIndex": 2,
+      "explanation": "O pick-up ou corrente de partida é a menor corrente capaz de sensibilizar o sistema ou o algoritmo do relé, iniciando a contagem de tempo para a atuação. (Fonte: Caminha, Cap. 13).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o padrão de escala empregado nos gráficos (TCC) para coordenar curvas tempo-corrente de relés?",
+      "options": [
+        "Escala Linear-Linear.",
+        "Escala Logarítmica-Linear.",
+        "Escala Exponencial-Linear.",
+        "Escala Logarítmica-Logarítmica (bilogarítmica)."
+      ],
+      "correctIndex": 3,
+      "explanation": "A verificação gráfica e a coordenação de curvas utilizam folhas-padrão com escalas logarítmicas tanto no eixo vertical (tempo) quanto no horizontal (corrente). (Fonte: Caminha, Cap. 14).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a função do dial de tempo (DT ou TMS) no ajuste de um relé de sobrecorrente inverso?",
+      "options": [
+        "Deslocar a curva verticalmente, definindo o tempo de operação para um dado múltiplo de corrente.",
+        "Ajustar a corrente magnética de inrush.",
+        "Mudar a inclinação da curva de extremamente inversa para normal inversa.",
+        "Filtrar as correntes de sequência zero do sistema."
+      ],
+      "correctIndex": 0,
+      "explanation": "A alavanca de tempo (DT) multiplica o tempo de cálculo base, deslocando a curva para cima ou para baixo, sem alterar o valor de corrente de partida (pick-up). (Fonte: Caminha, Cap. 13).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Comparada à curva normal inversa, qual é a principal característica da curva 'extremamente inversa'?",
+      "options": [
+        "É mais lenta para baixas correntes e decai muito rápido para correntes de falta elevadas.",
+        "Mantém um tempo fixo de 0,5s para qualquer magnitude de curto-circuito.",
+        "Atua instantaneamente para qualquer sobrecarga acima do limite nominal.",
+        "Foi projetada para nunca coordenar com elos fusíveis de distribuição."
+      ],
+      "correctIndex": 0,
+      "explanation": "A curva extremamente inversa é muito lenta em baixas correntes (absorvendo picos de partida e sobrecargas) e age com rapidez extrema em curtos severos, sendo ideal para coordenar com elos fusíveis. (Fonte: Ed50_marco_protecao_seletividade).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No traçado das curvas TCC, para que serve a margem ou degrau de tempo de coordenação (CTI)?",
+      "options": [
+        "Para disparar todos os disjuntores da subestação de forma simultânea.",
+        "Para garantir que a proteção a jusante atue primeiro, englobando os tempos de abertura do disjuntor e margens de erro.",
+        "Para sobrepor intencionalmente as curvas de fase e de terra.",
+        "Para retardar o fechamento das chaves de transferência do sistema."
+      ],
+      "correctIndex": 1,
+      "explanation": "O degrau de tempo (CTI) separa as curvas adjacentes para assegurar a seletividade, permitindo o isolamento pelo relé principal e compensando o tempo próprio do disjuntor a jusante e erros inatos. (Fonte: Caminha, Cap. 14).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre fisicamente na seletividade se duas curvas de relés em série se cruzarem no gráfico log-log?",
+      "options": [
+        "A seletividade é garantida e total, pois indica calibração idêntica.",
+        "A proteção a montante é desligada permanentemente por segurança.",
+        "A coordenação perde a efetividade nos níveis de corrente além do ponto de cruzamento.",
+        "As curvas IEC e IEEE entram em modo de autodiagnóstico."
+      ],
+      "correctIndex": 2,
+      "explanation": "O cruzamento (ou sobreposição) entre a curva protetora e a protegida implica na quebra da seletividade total, resultando numa seletividade apenas parcial antes do ponto onde elas se cruzam. (Fonte: Apostila Proteção, Cap. 4).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o eixo horizontal (das correntes) é costumeiramente representado nas famílias de curvas (TCC) dos fabricantes?",
+      "options": [
+        "Em ampères absolutos da linha primária.",
+        "Em porcentagem da impedância da zona primária.",
+        "Em valores fasoriais de quilovolts simétricos.",
+        "Em múltiplos da corrente de ajuste (pick-up) ou corrente de tap do relé."
+      ],
+      "correctIndex": 3,
+      "explanation": "Para universalizar o uso, o eixo horizontal é frequentemente plotado em múltiplos da corrente de partida ('M'), permitindo que a mesma curva atenda a diferentes ajustes de pick-up. (Fonte: Caminha, Cap. 13 e Apostila Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na fórmula que rege a característica Muito Inversa da IEC, qual é a parcela correspondente à corrente (I) no denominador?",
+      "options": [
+        "I - 1",
+        "I^2 - 1",
+        "I^0,02 - 1",
+        "I^1,5 - 1"
+      ],
+      "correctIndex": 0,
+      "explanation": "Segundo as padronizações IEC, a curva normal inversa usa (I^0,02 - 1), a muito inversa usa (I - 1) linear, e a extremamente inversa utiliza o fator ao quadrado (I^2 - 1). (Fonte: Ed50_marco_protecao_seletividade).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No plano log-log das curvas TCC, a característica de 'tempo definido' é traçada como uma linha reta horizontal após o cruzamento da corrente de pick-up.",
+      "correctAnswer": true,
+      "explanation": "Em curvas de tempo definido, após atingir a corrente de partida, o tempo de operação se mantém estritamente constante e independente do excesso de corrente, resultando numa reta paralela ao eixo x. (Fonte: Caminha, Cap. 13).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A coordenação gráfica da proteção de sobrecorrente é feita em papel log-log (corrente x tempo), não em papel linear.",
+      "correctAnswer": false,
+      "explanation": "A verificação gráfica padrão é sempre executada em papel log-log (escalas bilogarítmicas) (ex: folha KE-336E), para cobrir a vasta gama de tempos e correntes das curvas hiperbólicas simultaneamente de forma clara. (Fonte: Caminha, Cap. 14).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A adição de um elemento instantâneo (ANSI 50) provoca uma acentuada queda vertical na curva temporizada, delimitando sua atuação sem retardo intencional a partir de um ajuste de corrente superior.",
+      "correctAnswer": true,
+      "explanation": "Exato. Quando a unidade instantânea atinge o valor calibrado, ela sobrepõe a unidade 51 promovendo um 'tombamento' ou queda brusca vertical da linha do gráfico para a faixa dos ciclos curtos (tempo zero intencional). (Fonte: Apostila Proteção, Fig 4.14).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para todos os relés e disjuntores da rede, o degrau temporal de seletividade (CTI) exigido pelas normas técnicas nas curvas TCC é universal e rigidamente travado em 0,1 segundos.",
+      "correctAnswer": false,
+      "explanation": "Falso. O intervalo não é universal. Para tecnologia eletromecânica o CTI em cascata tradicional costuma ser de 0,3s a 0,5s; para digitais os tempos mortos e de segurança podem ser menores, como 0,2s a 0,3s, dependendo das velocidades dos disjuntores atrelados. (Fonte: Caminha, Cap. 14).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas curvas analíticas ANSI/IEEE dos IEDs, a constante 'L' define o tempo de assíntota do relé para correntes muito elevadas.",
+      "correctAnswer": true,
+      "explanation": "Correto. O algoritmo que calcula o tempo nos relés modernos soma uma parcela linear fixa 'L' que se traduz diretamente no limite temporal assimptótico quando o múltiplo I tende aos picos astronômicos, impedindo tempos negativos irreais. (Fonte: Virtus_CProtBL2Cd1, fórmulas TCC).",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O ajuste que escalona a temporizacao do rele, deslocando verticalmente a curva caracteristica, e o dial de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "tempo"
+        }
+      ],
+      "explanation": "A alavanca de tempo (Dial de Tempo, DT ou TMS) eleva ou rebaixa graficamente as posições das curvas no papel logarítmico, determinando quão ágil o trip sairá sob dadas sobrecorrentes sem interferir na partida. (Fonte: Caminha, Cap. 13).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na curva IEC Extremamente Inversa, a forte inclinação para correntes altas vem do termo (I elevado ao ____ − 1) no denominador.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "quadrado"
+        }
+      ],
+      "explanation": "O tombo pronunciado das curvas puramente 'Extremamente Inversas' nas tabelas IEC embutem o múltiplo de excitação I exponenciado ao quadrado (fator de 2), modelando a resposta I²t=K, agilizando o intertravamento térmico da fiação. (Fonte: Ed50_marco_protecao_seletividade).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A sobreposição das curvas dos dispositivos no papel bi-logarítmico (log-log) comprova a ____ gráfica da proteção.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "coordenação"
+        }
+      ],
+      "explanation": "O método de transcrever os percursos térmicos da malha juntamente as chaves sobre a trama logarítmica propicia as fronteiras limítrofes para garantir a 'coordenação' (ou seletividade) sistêmica sem pontos de intersecção omissos. (Fonte: Caminha, Cap. 14).",
+      "difficulty": "hard"
+    }
+  ]
+}

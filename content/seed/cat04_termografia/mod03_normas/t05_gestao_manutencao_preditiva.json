@@ -1,0 +1,218 @@
+{
+  "category": "Termografia Infravermelha",
+  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categoryOrder": 3,
+  "module": "Normas e Laudos de Termografia",
+  "moduleSubtitle": "NBR 15572, ISO 10878, NBR 16292, laudos e gestao preditiva",
+  "moduleOrder": 3,
+  "trail": "Gestão de Manutenção Preditiva por Termografia",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que diferencia essencialmente a manutencao preditiva da manutencao corretiva nas industrias?",
+      "options": [
+        "A preditiva atua antes da falha ocorrer baseada no monitoramento, e a corretiva repara apos a quebra.",
+        "A preditiva atua em intervalos fixos de tempo, e a corretiva depende do historico de componentes.",
+        "A preditiva e mais barata apenas se a quebra do equipamento causar acidentes graves.",
+        "A preditiva exige desligar o equipamento para inspecao, enquanto a corretiva e feita em funcionamento."
+      ],
+      "correctIndex": 0,
+      "explanation": "A manutencao preditiva intervem antes da falha a partir do monitoramento, enquanto a corretiva atua apos a quebra. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal vantagem da termografia na manutencao preditiva de componentes eletricos?",
+      "options": [
+        "Elimina a necessidade de calibracao periodica.",
+        "Identifica anomalias sem exigir o desligamento ou contato fisico com o equipamento.",
+        "Reduz o ruido mecanico do sistema eletrico.",
+        "Garante a eliminacao total de quebras de maquinas no parque fabril."
+      ],
+      "correctIndex": 1,
+      "explanation": "A termografia identifica anomalias sem interromper o processo produtivo ou exigir contato direto. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a manutencao preditiva por termografia impacta financeiramente a industria?",
+      "options": [
+        "Aumenta os custos com pecas de reposicao importadas.",
+        "Reduz os custos com manutencao ao prever falhas e evitar danos maiores e paradas inesperadas.",
+        "Elimina a necessidade de contratar engenheiros e tecnicos qualificados.",
+        "Substitui os custos de energia eletrica por custos com calibracao."
+      ],
+      "correctIndex": 1,
+      "explanation": "A deteccao precoce de falhas reduz custos de manutencao e evita danos maiores e paradas intempestivas. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao os principais desafios tecnicos e operacionais na implementacao da termografia preditiva?",
+      "options": [
+        "Condicoes ambientais adversas e o alto custo inicial dos equipamentos e sistemas.",
+        "A necessidade constante de aplicar nitrogenio liquido nas baterias.",
+        "A radiacao invisivel que prejudica a saude dos trabalhadores.",
+        "A falta de softwares capazes de ler imagens infravermelhas."
+      ],
+      "correctIndex": 0,
+      "explanation": "Condicoes ambientais adversas e o alto custo inicial dos equipamentos sao desafios para a termografia. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o uso de dados termicos historicos auxilia os programas de manutencao preditiva?",
+      "options": [
+        "Permite aplicar a modelagem preditiva para prever falhas e melhorar os processos de manutencao.",
+        "Serve apenas para arquivar relatorios para auditorias ambientais.",
+        "Diminui a temperatura absoluta do componente de forma continua.",
+        "Reduz o fator de preenchimento do detector do termovisor."
+      ],
+      "correctIndex": 0,
+      "explanation": "A analise de dados termicos historicos permite prever falhas e melhorar os processos de manutencao. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como deve ser tratada a periodicidade de calibracao dos termovisores utilizados em rotas de inspecao?",
+      "options": [
+        "Deve ser fixa em tres anos e realizada apenas pelo fabricante.",
+        "Deve ser frequentemente reavaliada e otimizada usando um plano de verificacao intermediario.",
+        "Nao necessita de calibracao se a resolucao for alta.",
+        "E determinada apenas pela carga conectada no sistema."
+      ],
+      "correctIndex": 1,
+      "explanation": "A periodicidade de calibracao deve ser reavaliada e otimizada por meio de planos de verificacao intermediaria. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que a manutencao corretiva nao-planejada (emergencial) e a estrategia menos desejavel na gestao de ativos eletricos?",
+      "options": [
+        "Porque exige obrigatoriamente o uso de duas cameras termograficas simultaneas.",
+        "Porque ocorre apos a quebra inesperada, gerando paradas intempestivas, danos maiores e custos elevados.",
+        "Porque so pode ser executada com o equipamento energizado em plena carga.",
+        "Porque elimina a necessidade de qualquer registro em relatorio tecnico."
+      ],
+      "correctIndex": 1,
+      "explanation": "A atuacao apos a quebra (corretiva) gera paradas inesperadas e danos maiores, sendo evitada pela preditiva que antecipa a falha. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o relatorio termografico deve recomendar para o plano de manutencao e inspecao?",
+      "options": [
+        "Acoes baseadas puramente no ruido acustico do ambiente.",
+        "Diretrizes conforme a criticidade e risco dos componentes inspecionados.",
+        "A substituicao imediata de todas as pecas sem falhas por modelos mais novos.",
+        "A mudanca na tensao primaria da concessionaria de energia."
+      ],
+      "correctIndex": 1,
+      "explanation": "O relatorio deve incluir recomendacoes para o plano de manutencao de acordo com a criticidade e risco dos componentes. (Fonte: Como elaborar um relatorio de termografia eletrica, SEP)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal diferenca metodologica entre a manutencao preventiva e a manutencao preditiva?",
+      "options": [
+        "A preventiva e baseada no tempo e a preditiva utiliza a monitoracao da condicao do equipamento.",
+        "A preventiva foca na estetica da maquina e a preditiva na sua operacao eletrica.",
+        "A preditiva exige contato fisico e a preventiva e feita de longe.",
+        "Nao ha diferenca, ambas aguardam a quebra da maquina."
+      ],
+      "correctIndex": 0,
+      "explanation": "A preventiva atua em intervalos fixos de tempo, enquanto a preditiva baseia-se nas condicoes do equipamento. (Fonte: Termografia em manutencao preditiva, Essentia Editora)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a integracao da termografia com a Internet das Coisas (IoT) beneficia as rotas de inspecao industriais?",
+      "options": [
+        "Diminui a quantidade de pixels do FPA para baratear o custo.",
+        "Permite que sensores coletem dados continuamente e enviem alertas instantaneos de anomalias.",
+        "Impede o uso de cameras moveis operadas por termografistas humanos.",
+        "Exige que a temperatura ambiente caia abaixo de zero grau."
+      ],
+      "correctIndex": 1,
+      "explanation": "Sensores termicos conectados a IoT coletam dados continuamente e alertam instantaneamente sobre anomalias. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A termografia e classificada como um teste destrutivo, pois a radiacao da camera aquece os componentes ate falharem.",
+      "correctAnswer": false,
+      "explanation": "A termografia e uma tecnica de ensaio nao destrutivo e nao invasivo que apenas mede a radiacao infravermelha emitida pelos corpos. (Fonte: Termografia aplicada em paineis eletricos)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A manutencao preditiva pode gerar grande economia e prolongar a vida util do equipamento monitorado.",
+      "correctAnswer": true,
+      "explanation": "A manutencao preditiva pode significar economia, permitindo alongar e planejar intervencoes e garantindo operacao sem riscos. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para a correta aplicacao da termografia preditiva, o equipamento eletrico deve ser previamente desligado da fonte de energia.",
+      "correctAnswer": false,
+      "explanation": "A termografia permite identificar anomalias sem exigir o desligamento dos equipamentos ou a interrupcao do processo produtivo. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Temperaturas extremas no ambiente nao afetam o diagnostico preditivo feito com termovisores infravermelhos.",
+      "correctAnswer": false,
+      "explanation": "Condicoes ambientais adversas como temperaturas extremas podem interferir significativamente nas leituras e dificultar o diagnostico. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O foco central da manutencao preditiva moderna e reparar os equipamentos rapidamente, sem considerar as causas que geraram a anomalia.",
+      "correctAnswer": false,
+      "explanation": "A preditiva busca conhecer e eliminar as causas dos defeitos, nao apenas reparar o equipamento rapidamente. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Um dos focos da manutencao preditiva e privilegiar e manter a ____ operacional dos ativos instalados na industria.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "disponibilidade"
+        }
+      ],
+      "explanation": "A manutencao preditiva privilegia a disponibilidade ao nao promover intervencoes indesejadas no regime normal do equipamento. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A aplicacao da Inteligencia Artificial em dados termicos gera diagnosticos ____, permitindo prever falhas criticas nos sistemas de engenharia.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "preditivos"
+        }
+      ],
+      "explanation": "O uso da inteligencia artificial promove diagnosticos preditivos e preve falhas antes de seu acontecimento efetivo. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em um plano de gestao eficiente, as recomendacoes de intervencao termografica devem ser priorizadas conforme o risco e a ____ dos ativos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "criticidade"
+        }
+      ],
+      "explanation": "O planejamento deve conter recomendacoes corretivas embasadas diretamente na criticidade e no risco inerente dos componentes. (Fonte: Como elaborar um relatorio de termografia eletrica, SEP)",
+      "difficulty": "medium"
+    }
+  ]
+}

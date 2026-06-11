@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Fundamentos de Qualidade da Energia",
+  "moduleSubtitle": "Conceitos, indicadores, disturbios e legislacao",
+  "moduleOrder": 0,
+  "trail": "Tipos de Disturbios",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza o disturbio de qualidade da energia denominado afundamento de tensao (sag) de acordo com as normas tecnicas?",
+      "options": [
+        "Elevacao brusca da tensao para valores acima de 1,1 p.u.",
+        "Queda brusca do valor eficaz da tensao para um valor entre 0,1 p.u. e 0,9 p.u.",
+        "Aumento permanente da frequencia para 62 Hz.",
+        "Distorcao da forma de onda sem alteracao no valor RMS."
+      ],
+      "correctIndex": 1,
+      "explanation": "A dissertacao do IFPB e as normas definem afundamento de tensao (sag) como a queda brusca do valor eficaz da tensao para um valor entre 0,1 p.u. e 0,9 p.u. na frequencia fundamental, com duracao entre 0,5 ciclo a um minuto.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a norma IEEE 1159, como e definida fisicamente a elevacao de tensao de curta duracao (swell)?",
+      "options": [
+        "Aumento na tensao RMS com magnitude tipica entre 1,1 e 1,8 p.u.",
+        "Reducao do valor eficaz da tensao para menos de 0,1 p.u.",
+        "Surto unidirecional de corrente causado por descargas atmosfericas.",
+        "Alteracao da defasagem angular da rede para 90 graus."
+      ],
+      "correctIndex": 0,
+      "explanation": "Conforme a fonte Analise de Disturbios do IFPB, a norma IEEE 1159 define elevacao de tensao (swell) como um aumento na tensao RMS entre 1,1 e 1,8 pu.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a principal origem apontada para a ocorrencia de transitorios impulsivos nos sistemas de distribuicao eletrica?",
+      "options": [
+        "Comutacao continua de inversores de frequencia.",
+        "Partida de motores de inducao de alta potencia.",
+        "Incidencia de descargas atmosfericas.",
+        "Atuacao normal de capacitores em derivacao."
+      ],
+      "correctIndex": 2,
+      "explanation": "O documento Analise de Disturbios do IFPB cita explicitamente que os transitorios impulsivos sao geralmente causados por descargas atmosfericas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual nome tecnico e dado aos disturbios periodicos na tensao que ocorrem devido a curtos-circuitos momentaneos entre duas fases durante a comutacao de conversores trifasicos?",
+      "options": [
+        "Flicker",
+        "Notching",
+        "Afundamento",
+        "Sobretensao temporaria"
+      ],
+      "correctIndex": 1,
+      "explanation": "A fonte Analise de Disturbios do IFPB define notching como disturbios decorrentes do curto-circuito momentaneo entre duas fases quando a corrente e comutada em conversores trifasicos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como sao conceituadas tecnicamente as componentes harmonicas presentes em um sinal de tensao ou corrente?",
+      "options": [
+        "Ruidos aleatorios sem frequencia definida.",
+        "Subtensoes que reduzem o fator de potencia a zero.",
+        "Componentes com frequencias que sao multiplos inteiros da frequencia fundamental.",
+        "Interrupcoes sucessivas e curtas de energia eletrica."
+      ],
+      "correctIndex": 2,
+      "explanation": "O documento do IFPB (citando Dugan et al.) define que harmonicos sao componentes dos sinais senoidais com frequencias que sao multiplos inteiros da frequencia fundamental.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com o PRODIST, qual e o intervalo de duracao que caracteriza uma Variacao Temporaria de Tensao (interrupcao, afundamento ou elevacao)?",
+      "options": [
+        "Inferior ou igual a 3 segundos.",
+        "Superior a 3 segundos e inferior a 3 minutos.",
+        "Exatamente igual a 1 ciclo da rede eletrica.",
+        "Maior do que 3 minutos continuos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Tabela 5 do PRODIST (Modulo 8) classifica as Variacoes Temporarias de Tensao (ITT, ATT, ETT) como aquelas com duracao superior a 3 segundos e inferior a 3 minutos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Dentre as condicoes operacionais de um sistema eletrico, quais eventos sao listados como causas comuns para o surgimento de uma elevacao de tensao (swell)?",
+      "options": [
+        "Curto-circuito fase-terra, saida de grandes blocos de cargas e energizacao de bancos de capacitores.",
+        "Surtos de manobra em inversores de frequencia e ruidos de radio.",
+        "Partida direta de motores trifasicos e falhas de isolamento do rotor.",
+        "Subtensao em barramentos adjacentes e interrupcoes momentaneas."
+      ],
+      "correctIndex": 0,
+      "explanation": "A dissertacao do IFPB aponta que as principais causas do swell sao curto-circuito fase-terra (onde as fases sadias elevam a tensao), saida de grandes blocos de cargas e energizacao de grandes bancos de capacitores.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a amplitude da tensao em relacao a tensao de referencia que classifica um evento como Interrupcao Momentanea de Tensao (IMT) segundo a regulamentacao do PRODIST?",
+      "options": [
+        "Inferior a 0,1 p.u.",
+        "Superior a 1,1 p.u.",
+        "Entre 0,1 p.u. e 0,9 p.u.",
+        "Apenas o valor exato de 0,0 p.u."
+      ],
+      "correctIndex": 0,
+      "explanation": "A Tabela 5 do PRODIST Modulo 8 define a Interrupcao Momentanea de Tensao (IMT) por possuir amplitude inferior a 0,1 p.u. e duracao menor ou igual a 3 segundos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os transitorios oscilatorios se diferenciam fisicamente dos transitorios impulsivos com relacao ao seu formato e polaridade de onda?",
+      "options": [
+        "Eles apresentam apenas frequencias da ordem de gigahertz.",
+        "Ocorrem unicamente em corrente continua e bloqueiam o sinal senoidal.",
+        "Apresentam mudanca com polaridade bidirecional (positiva e negativa), diferentemente dos impulsivos que sao estritamente unidirecionais.",
+        "Nao ha diferenca de polaridade, diferindo apenas pelo nivel de tensao RMS medio."
+      ],
+      "correctIndex": 2,
+      "explanation": "A fonte Analise de Disturbios do IFPB informa que os transitorios impulsivos possuem polaridade unidirecional, enquanto os oscilatorios afetam a onda em polaridade bidirecional.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com as classificacoes de disturbios da Norma IEEE 1159 apresentadas nas fontes, quais sao os limites de frequencia e duracao que enquadram o transitorio oscilatorio de baixa frequencia?",
+      "options": [
+        "Frequencias menores que 5 kHz e duracoes de 0,3 a 50 milissegundos.",
+        "Frequencias entre 5 e 500 kHz e duracao de 20 microssegundos.",
+        "Frequencias de 0,5 a 5 MHz e duracao de 5 microssegundos.",
+        "Frequencias de 1 a 10 Hz e duracao superior a 3 minutos."
+      ],
+      "correctIndex": 0,
+      "explanation": "No Quadro 02 da Norma IEEE 1159 presente na dissertacao do IFPB, os transitorios oscilatorios de baixa frequencia sao caracterizados por frequencia menor que 5 kHz e duracao entre 0,3 e 50 ms.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A flutuacao de tensao, causadora do fenomeno flicker, e uma variacao da tensao provocada por equipamentos com carga variavel importante, sendo os fornos a arco reconhecidos como os principais geradores.",
+      "correctAnswer": true,
+      "explanation": "Os documentos sobre Flicker do Procobre e a dissertacao do IFPB atestam que fornos a arco sao as principais causas de flutuacao de tensao que resulta na cintilacao luminosa.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um sistema trifasico e considerado em condicao de desequilibrio de tensao apenas se as amplitudes das tres fases forem diferentes, nao sofrendo impacto caso as amplitudes sejam iguais, mesmo que a defasagem difira de 120 graus.",
+      "correctAnswer": false,
+      "explanation": "O PRODIST Modulo 8 afirma explicitamente que o desequilibrio e caracterizado por qualquer diferenca verificada nas amplitudes entre as tres tensoes de fase ou na defasagem eletrica de 120 graus.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas medicoes de Variacoes de Tensao de Curta Duracao (VTCD) por medidores com funcionalidades adicionais, especificados no PRODIST, considera-se interrupcao se a tensao de fornecimento for igual ou inferior a 70% da nominal.",
+      "correctAnswer": true,
+      "explanation": "O item 69.1 do PRODIST Modulo 8 estabelece diretamente que, para esses sistemas de medicao adicionais, considera-se interrupcao sempre que a tensao for igual ou inferior a 70% (0,7 p.u.).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O disturbio conhecido como notching e originado majoritariamente pela acao de forcas naturais, como descargas atmosfericas diretas nas linhas, que geram cortes agudos na forma da onda de tensao.",
+      "correctAnswer": false,
+      "explanation": "O documento do IFPB informa que o notching e decorrente da operacao normal de dispositivos de eletronica de potencia, como conversores trifasicos durante a comutacao, e nao de raios.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No procedimento normativo de agregacao de eventos de Variacao de Tensao de Curta Duracao (VTCD), eventos consecutivos que ocorram em um periodo de ate 3 minutos no mesmo ponto eletrico devem ser contabilizados como eventos independentes.",
+      "correctAnswer": false,
+      "explanation": "O item 88 do PRODIST Modulo 8 especifica expressamente que eventos consecutivos em um periodo de 3 minutos, no mesmo ponto, devem ser agregados compondo um unico evento (agregacao temporal).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A flutuacao de tensao provoca o efeito subjetivo de incomodo visual ocasionado pelas sucessivas mudancas na luminancia de lampadas, fenomeno mundialmente conhecido pelo termo ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "flicker"
+        }
+      ],
+      "explanation": "A documentacao tecnica do Procobre e Modulo 8 do PRODIST definem a impressao subjetiva de flutuacao luminosa causada pela variacao de tensao da rede como cintilacao ou flicker.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Os fenomenos eletromagneticos de curta duracao que se manifestam por uma alteracao subita e mantem uma polaridade exclusivamente unidirecional na onda sao classificados na norma tecnica como transitorios ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "impulsivos"
+        }
+      ],
+      "explanation": "Segundo a dissertacao do IFPB referenciando Dugan et al., os transitorios impulsivos possuem polaridade unidirecional (positiva ou negativa) diferentemente dos oscilatorios.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Conforme a Norma IEEE 1159 (Quadro 02), os transitorios do tipo oscilatorio classificados na faixa de baixa frequencia possuem duracoes tipicas no sistema que variam de 0,3 ate exatos 50 ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "milissegundos"
+        }
+      ],
+      "explanation": "O Quadro 02 da norma IEEE 1159 determina diretamente que a magnitude de duracao dos transitorios oscilatorios de baixa frequencia (< 5 kHz) compreende a escala entre 0,3 e 50 ms (milissegundos).",
+      "difficulty": "hard"
+    }
+  ]
+}

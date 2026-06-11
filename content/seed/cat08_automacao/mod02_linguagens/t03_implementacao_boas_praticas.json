@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Linguagens de Programação (IEC 61131-3)",
+  "moduleSubtitle": "Norma IEC 61131-3, linguagens e boas praticas",
+  "moduleOrder": 1,
+  "trail": "Implementação e Boas Práticas",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o principal benefício da norma IEC 61131-3 em relação à portabilidade e ao uso de hardware de diferentes fabricantes?",
+      "options": [
+        "Força o uso exclusivo de lógicas C++ nas linhas de montagem automotivas.",
+        "Garante interoperabilidade permitindo integrar controladores distintos sem que o usuário reaprenda métodos novos.",
+        "Bloqueia nativamente as integrações legadas baseadas em interfaces SCADA de terceiros.",
+        "Exige a tradução rotineira e integral do código para a complexa linguagem assembly."
+      ],
+      "correctIndex": 1,
+      "explanation": "A padronização da norma garante que os sistemas sejam interoperáveis, facilitando a integração entre dispositivos de fabricantes distintos (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual problema comum de programação a determinação explícita de tipagem de dados da norma IEC 61131-3 previne logo na fase de desenvolvimento?",
+      "options": [
+        "A ocorrência de cálculos com variáveis inválidas, como dividir acidentalmente uma grandeza de data por um número inteiro.",
+        "A queima física das bobinas de relés eletromecânicos instalados no painel de comando por sobrecarga.",
+        "O aumento expressivo no ciclo de varredura (scan) das matrizes e memórias voláteis do CLP.",
+        "A desconexão repentina e aleatória dos cabos ópticos acoplados aos transmissores inteligentes da subestação."
+      ],
+      "correctIndex": 0,
+      "explanation": "A tipagem de dados previne a mistura indevida de matrizes logo no início do projeto, evitando operações incorretas como a divisão de uma data por um inteiro (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Do ponto de vista de estruturação de variáveis e prevenção de erros crônicos, qual é a finalidade central de se manter um escopo de dados apenas 'local' no bloco?",
+      "options": [
+        "Evitar que transientes pneumáticos afetem a conversão dos módulos analógicos.",
+        "Impedir que variáveis exclusivas de um bloco sejam corrompidas ou sobrescritas indevidamente por outras partes alheias do software.",
+        "Paralisar por completo o tráfego dos nós Mestre/Escravo operando em alta velocidade.",
+        "Substituir o modelo cliente-servidor corporativo descartando a leitura analítica em redes longas."
+      ],
+      "correctIndex": 1,
+      "explanation": "Limitar as variáveis ao escopo local blinda as rotinas específicas, evitando conflitos de endereços de rede e a eventual corrupção de código ao longo do processamento (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na estruturação lógica consolidada pela diretiva IEC 61131-3, quais itens compõem obrigatoriamente as chamadas Unidades de Organização do Programa (POUs)?",
+      "options": [
+        "Cabos UTP isolados, chaves solenóides seletoras e Roteadores industriais SCADA.",
+        "Programas inteiros encadeados, Funções isoladas simples e os Blocos Funcionais (Function Blocks).",
+        "Disjuntores termomagnéticos, transdutores de instrumentação cega e IHMs de painel frontal.",
+        "Telas de banco de dados interligadas e planilhas integradas do tipo SQL Server corporativo."
+      ],
+      "correctIndex": 1,
+      "explanation": "A norma técnica segmenta e intitula especificamente os Programas diretos, as Funções simples e os Blocos Funcionais parametrizados como Unidades de Organização do Programa (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a ferramenta lógica fornecida pela norma que atua ativamente para controlar ou escalonar a execução periódica e o disparo de eventos de um determinado Programa?",
+      "options": [
+        "Matriz puramente mecânica dotada de contatos bimetálicos abertos.",
+        "Barramento fieldbus de campo do tipo mestre-escravo puramente físico.",
+        "Mecanismo de Tarefas de escalonamento operando de forma preemptiva ou não-preemptiva (Tasks).",
+        "Driver de comunicação serial assíncrono projetado para redes baseadas em nuvem de longa distância."
+      ],
+      "correctIndex": 2,
+      "explanation": "O acionamento inteligente por tarefas (Tasks) permite o útil escalonamento e o controle da dinâmica com a qual cada componente ou bloco de dados roda (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando o desenvolvimento requer que um dado flua de forma abrangente pelo ambiente do CLP para ser visto e alterado por múltiplas partes da lógica, qual deve ser a sua declaração formal?",
+      "options": [
+        "Ponteiro encapsulado estrito atuando sob protocolo de criptografia rígida.",
+        "Matriz redundante sem vínculo físico dedicada a contatos secos.",
+        "Variável restrita aos blocos das matrizes OR temporizadas passivas.",
+        "Variável identificada explicitamente possuindo nível de escopo global."
+      ],
+      "correctIndex": 3,
+      "explanation": "A programação define que para existir o compartilhamento limpo de estados e acessos amplos em várias unidades, a variável requer o status de declaração de escopo global (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre durante o mapeamento avançado de projetos muito grandes com alto volume de lógicas que requerem uma capacidade extensiva de configuração dos elementos listados pela norma?",
+      "options": [
+        "A CPU queima por sobrecarga, exigindo estritamente a reconfiguração matricial baseada no C puro para rodar.",
+        "Um sistema pode hospedar e associar múltiplas configurações simultâneas interagindo juntas através de redes padrão de comunicação E/S.",
+        "As lógicas de processo excluem a modularidade forçando toda a malha de segurança a agir sem a proteção mestre SCADA.",
+        "O operador humano perde de forma permanente as capacidades de intervir manualmente na válvula termostática."
+      ],
+      "correctIndex": 1,
+      "explanation": "Plantas mais complexas contêm e unificam várias configurações e até múltiplos CLPs acoplados de modo inteligente e confiável por protocolos padronizados de troca contínua (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao tratar do rigor, depuração (debug) e correção segura do sistema, qual é o trunfo e benefício de usar as opções acopladas nos editores modernos como as chaves definidas em Run/Program?",
+      "options": [
+        "Congelar instantaneamente os motores industriais garantindo a despressurização estrita das caldeiras a vapor sem causar danos em reatores de água.",
+        "Possibilitar e habilitar a inserção de revisões seguras da lógica (on-line) enquanto todo o sistema CLP mantém o controle contínuo, reduzindo paradas operacionais extremas.",
+        "Desconectar as IHMs de visualização remota transferindo a responsabilidade da interface exclusivamente para o barramento cego da Unidade Aritmética Local.",
+        "Limpar inteiramente as lógicas Ladder forçando todo o processo a voltar estritamente à condição original imposta pelos fornecedores em nível estático."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os métodos interativos contínuos facilitam as alterações seguras on-line onde, sob regime Run/Program, retifica-se os desvios indesejáveis em código evitando paralisar as máquinas em trabalho (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o conceito de tipagem na plataforma IEC age favoravelmente em rotinas onde o projetista lida massivamente com entradas e sensores analógicos industriais similares em múltiplos equipamentos?",
+      "options": [
+        "Condensa e substitui todos os sinais variáveis transformando todo o processo estritamente para o cálculo derivativo baseado no assembly nativo puro.",
+        "Impede categoricamente qualquer variação que não represente a arquitetura e as funções dos vetores puramente booleanos da malha nativa simples.",
+        "Habilita a estruturação semântica de tipos de dados flexíveis nomeados sob medida (derivados), recriando as propriedades da entrada para serem reaproveitadas limpas inúmeras vezes.",
+        "Redireciona as operações de comunicação serial anulando as barreiras intrinsecamente isolantes baseadas na detecção manual cega."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os ambientes padronizados oferecem e aceitam definições avançadas em que tipos de dados podem ser derivados especificamente para compor variáveis recorrentes limpas reduzindo o tempo final (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Considerando as rigorosas limitações estipuladas no método do bloco funcional (FBD) inerente às boas práticas algorítmicas, qual diretiva é adotada sobre o encadeamento e o cálculo de respostas em blocos seguidos?",
+      "options": [
+        "A avaliação das equações restringe firmemente o circuito forçando uma averiguação progressiva em que uma malha lógica não avança até as informações atreladas em suas entradas restarem validadas pelo ciclo.",
+        "Os cálculos ocorrem simultaneamente executando matrizes abertas a despeito da amarração temporal ou falha nas lógicas de saída prévias ou periféricos desconexos atrelados fisicamente nas portas.",
+        "As portas inibem a recepção isolando todas as referências que antecedem o contato final na espera única da consolidação temporal passiva por matriz analógica mestre remota em painel.",
+        "Permite executar blocos de temporização estritamente após zerar fisicamente toda a corrente elétrica acumulada em cada barramento e varredura do chão de fábrica ativamente trancada."
+      ],
+      "correctIndex": 0,
+      "explanation": "A norma impede estritamente as inconsistências, obrigando que a cadeia seja avaliada apenas após todas as condições prévias que alimentam a entrada daquele nó estarem plenamente atualizadas no scan (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os Blocos Funcionais (Function Blocks) não possuem capacidade retentiva de memória e descartam seu conjunto de dados da variável interna a cada nova execução.",
+      "correctAnswer": false,
+      "explanation": "Diferente de rotinas simples, os blocos funcionais mantêm seu conjunto de dados ativo e salvo na memória do CLP durante a existência de uma instância (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As 'Funções', usadas na organização de software da norma IEC, operam sem armazenar dados e sempre entregam resultados iguais para um mesmo conjunto fixo de entradas.",
+      "correctAnswer": true,
+      "explanation": "Funções são instâncias ágeis que existem apenas durante o tempo de execução e não possuem persistência interna de informações lógicas (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No paradigma IEC de variáveis, a norma desaconselha expressamente atribuir identificadores lógicos a endereços físicos dos equipamentos para prevenir que o software se torne portátil e aberto.",
+      "correctAnswer": false,
+      "explanation": "A norma incentiva e demanda que variáveis sejam associadas explicitamente aos recursos de hardware, permitindo a separação e promovendo o elevado reuso do software (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Tendo em vista a reutilização prática de software, as linguagens normatizadas excluem categoricamente a formulação e o encapsulamento de novos Blocos Funcionais Derivados pelas engenharias de campo.",
+      "correctAnswer": false,
+      "explanation": "Usuários programadores e engenheiros podem derivar e desenhar ativamente matrizes e novos Blocos Funcionais personalizados a partir do agrupamento dos modelos elementares padrão (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O desenvolvimento modular embasado em programação estruturada incentiva a criação de ramificações incondicionais dispersas no algoritmo visando antecipar e corrigir instantaneamente as panes industriais extremas.",
+      "correctAnswer": false,
+      "explanation": "A programação estruturada constrói arquiteturas contendo um fluxo linear simples organizado via elementos de única entrada e única saída, desencorajando ativamente as ramificações e saltos condicionados complexos (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No funcionamento do ciclo de varredura (scan) do CLP, após o equipamento ler os sinais de entrada e executar a lógica do programa, ele finaliza o laço efetuando a atualização das ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "saídas"
+        }
+      ],
+      "explanation": "O fluxo iterativo do controlador termina a etapa da varredura mandando o resultado dos processamentos lógicos e transferindo as decisões prontas para a atualização das saídas (UNIVERSIDADE FEDERAL DE PELOTAS - Pergamum).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nas boas práticas para manutenção e legibilidade nas linguagens textuais de automação, a inserção de um ____ ajuda a documentar o código sem causar nenhum impacto real na sua execução.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "comentário"
+        }
+      ],
+      "explanation": "A ferramenta do comentário atua como registro interno construtivo, fornecendo legibilidade direta ao desenvolvedor mas sendo descartada nas lógicas de processamento da CPU (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Uma das normas fundamentais estruturais em diagramas de blocos exige que ligações múltiplas na saída emulando conexões atadas não ocorram sozinhas, exigindo-se obrigatoriamente um explícito ____ de portas lógicas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "bloco OR"
+        }
+      ],
+      "explanation": "A norma impõe restrições contra simulações indiretas conhecidas como 'OR fiado', de forma que essas consolidações devam instanciar claramente seus correspondentes blocos lógicos explícitos (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    }
+  ]
+}

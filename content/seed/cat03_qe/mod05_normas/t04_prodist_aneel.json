@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Normas de Qualidade da Energia",
+  "moduleSubtitle": "IEEE 519, IEC 61000, EN 50160 e PRODIST",
+  "moduleOrder": 4,
+  "trail": "PRODIST e Resoluções ANEEL",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o principal objetivo do Modulo 8 do PRODIST no contexto da distribuicao de energia eletrica?",
+      "options": [
+        "Definir o sistema de bandeiras tarifarias e faturamento.",
+        "Regulamentar os tramites de licenciamento ambiental de redes.",
+        "Estabelecer os procedimentos relativos a qualidade do fornecimento de energia eletrica na distribuicao.",
+        "Padronizar os contratos de geracao eolica e solar."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 2 da Secao 8.0 do PRODIST Modulo 8 estabelece que o objetivo e regulamentar os procedimentos relativos a qualidade do fornecimento de energia eletrica (produto, servico e comercial).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o Modulo 8 do PRODIST define essencialmente os fenomenos associados a Qualidade do Produto?",
+      "options": [
+        "A conformidade da onda de tensao em regime permanente e transitorio.",
+        "A velocidade de atendimento das equipes de manutencao a campo.",
+        "O tempo de espera nas filas de atendimento comercial.",
+        "A frequencia de apagoes e blecautes no Sistema Interligado Nacional."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 3 da Secao 8.0 do PRODIST Modulo 8 define a qualidade do produto como os fenomenos relativos a conformidade da onda de tensao em regime permanente e transitorio.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a regulamentacao, como as leituras de tensao em regime permanente sao classificadas em relacao a tensao de referencia?",
+      "options": [
+        "Primarias, secundarias e terciarias.",
+        "Baixas, medias e altas.",
+        "Adequadas, precarias ou criticas.",
+        "Transitorias, momentaneas e continuas."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 19 do PRODIST Modulo 8 classifica as leituras de tensao em tres categorias: adequadas, precarias ou criticas, baseando-se no afastamento em relacao a tensao de referencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o prazo maximo estabelecido para que a distribuidora credite a compensacao financeira na fatura do consumidor apos constatar violacao dos limites de tensao DRP ou DRC?",
+      "options": [
+        "Imediatamente no mesmo mes de referencia.",
+        "No prazo maximo de 15 dias uteis.",
+        "No prazo maximo de 2 meses subsequentes ao mes de apuracao.",
+        "Ate o final do ano tarifario corrente."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 31 do PRODIST Modulo 8 estabelece que o valor da compensacao deve ser creditado na fatura emitida no prazo maximo de 2 meses subsequentes ao mes civil de referencia da ultima medicao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para pontos de conexao com tensao nominal de operacao inferior a 2,3 kV, qual e a regra definida no PRODIST para a tensao contratada?",
+      "options": [
+        "Deve situar-se obrigatoriamente entre 95% e 105% da tensao nominal.",
+        "Deve ser exatamente a tensao nominal do sistema.",
+        "E livremente negociada mediante contrato de prestacao.",
+        "Depende estritamente do terminal de derivacao do transformador."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 22, alinea c, do PRODIST Modulo 8 define claramente que a tensao a ser contratada nos pontos de conexao pelos usuarios atendidos em tensao inferior a 2,3 kV deve ser a tensao nominal do sistema.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No processo de gestao de reclamacoes, qual e o prazo maximo para a distribuidora entregar o relatorio tecnico padronizado apos o final de uma medicao estendida de tensao?",
+      "options": [
+        "10 dias.",
+        "15 dias.",
+        "30 dias.",
+        "60 dias."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 131, alinea i, do PRODIST Modulo 8 fixa que os resultados da medicao devem compor um relatorio padronizado a ser entregue no prazo maximo de 30 dias apos o final da medicao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais classes de medidores de qualidade de energia sao regulamentadas para atendimento aos protocolos do PRODIST, segundo as normas da IEC 61000-4-30 (documento KRA2 Energia)?",
+      "options": [
+        "Classe A e Classe S.",
+        "Classe 1 e Classe 2.",
+        "Classe B e Classe C.",
+        "Classe X e Classe Y."
+      ],
+      "correctIndex": 0,
+      "explanation": "O informativo da KRA2 Energia ressalta que os instrumentos de medicao devem atender aos protocolos da IEC 61000 serie 4, seguindo o metodo de medicao Classe A ou S.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Se um usuario solicitar a instalacao de um sistema de medicao permanente com funcoes especificas de qualidade, qual e o prazo para instalacao e quem arca com a diferenca de custo em relacao ao medidor convencional?",
+      "options": [
+        "O prazo e de 30 dias e a ANEEL subsidia os custos pelo encargo setorial.",
+        "O prazo e de ate 60 dias e a diferenca de custo e de responsabilidade do usuario.",
+        "O prazo e de 90 dias e a distribuidora absorve totalmente o custo em P&D.",
+        "O prazo e imediato em 15 dias e a tarifa geral engloba a aquisicao de hardware."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os itens 112 e 113 do PRODIST Modulo 8 ditam que o sistema deve ser instalado no prazo de ate 60 dias da solicitacao e a diferenca de custo e de responsabilidade do usuario interessado.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por quanto tempo a distribuidora e legalmente obrigada a armazenar em meio digital os dados de interrupcoes, indicadores e reclamacoes para fins de fiscalizacao da ANEEL?",
+      "options": [
+        "Por 2 anos fiscais.",
+        "Por 5 anos rotativos.",
+        "Por um periodo minimo de 10 anos.",
+        "Indefinidamente em carater vitalicio."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os itens 107, 118, 122 e 132 do PRODIST Modulo 8 afirmam sistematicamente que os dados devem ser mantidos em meio digital por um periodo minimo de 10 anos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No ambito do PRODIST Modulo 8, os fenomenos relacionados a Qualidade do Servico referem-se estritamente a quais aspectos operacionais?",
+      "options": [
+        "A qualidade do atendimento telefonico e os prazos de ouvidoria comercial.",
+        "A continuidade do fornecimento de energia eletrica e o atendimento a ocorrencias emergenciais.",
+        "O expurgo de distorcoes harmonicas e atenuacao de ruidos na barra.",
+        "A seguranca ocupacional dos trabalhadores na subestacao e da populacao local."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 4 do PRODIST Modulo 8 define que os fenomenos relacionados a qualidade do servico sao aqueles relativos a continuidade do fornecimento e ao atendimento a ocorrencias emergenciais.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A qualidade comercial, conforme definida nos estatutos do PRODIST, engloba expressamente os procedimentos estabelecidos para apuracao da qualidade do atendimento telefonico, o tratamento de reclamacoes e o devido cumprimento dos prazos regulados.",
+      "correctAnswer": true,
+      "explanation": "O item 5 do PRODIST Modulo 8 define a qualidade comercial exatamente como a qualidade do atendimento telefonico, o tratamento das reclamacoes e outras demandas, e o cumprimento dos prazos.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "De acordo com as diretrizes metrologicas informadas para o PRODIST pelo guia da KRA2 Energia, a utilizacao de analisadores enquadrados rigorosamente como Classe A e obrigatoria nas aplicacoes que envolvam disputas judiciais.",
+      "correctAnswer": true,
+      "explanation": "O documento informativo da KRA2 Energia sobre o PRODIST Modulo 8 estabelece explicitamente na lista de requisitos que o Medidor Classe A e obrigatorio em aplicacoes envolvendo disputas judiciais.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para calcular de forma valida os indicadores individuais de tensao DRP e DRC em um ciclo de medicao, a norma do PRODIST exige compulsoriamente a coleta de exatamente 500 leituras validas capturadas em intervalos estritos de 15 minutos.",
+      "correctAnswer": false,
+      "explanation": "O item 26.2 do PRODIST Modulo 8 determina que se deve considerar o registro exato de 1.008 leituras validas obtidas em intervalos consecutivos de 10 minutos cada, e nao 500 leituras a cada 15 minutos.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O pagamento ou credito na fatura da compensacao financeira devida ao consumidor por violacao dos limites dos indicadores de tensao isenta automaticamente a distribuidora de responder legalmente por quaisquer outras perdas e danos eletricos causados na instalacao.",
+      "correctAnswer": false,
+      "explanation": "O item 35 do PRODIST Modulo 8 e categorico ao informar que a compensacao devida ao consumidor nao isenta a distribuidora de responder por outras perdas e danos causados pelo servico inadequado de energia eletrica.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ocorrendo a troca de titularidade de uma unidade consumidora durante um mes civil em que a compensacao por transgressao de qualidade de tensao e atestadamente devida, a distribuidora e obrigada a transferir e creditar o valor integralmente ao novo titular assumido.",
+      "correctAnswer": true,
+      "explanation": "O item 34 do PRODIST Modulo 8 assegura tal direito ditando que, caso haja troca de titularidade, a distribuidora deve creditar o valor integralmente ao novo titular da unidade consumidora.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Segundo as disposicoes normativas que orientam os indicadores de acompanhamento para medir e quantificar a transgressao da tensao precaria e critica em regime permanente, constatam-se como oficiais no pais as composicoes matematicas abreviadas formalmente sob as siglas globais de DRC e ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "DRP"
+        }
+      ],
+      "explanation": "O item 26.1 do PRODIST Modulo 8 apresenta textualmente e oficializa que os indicadores individuais de tensao em regime permanente sao a Duracao Relativa da Transgressao de Tensao Precaria (DRP) e a Duracao Relativa da Transgressao de Tensao Critica (DRC).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para processar anualmente os sorteios estatisticos que definem quais unidades consumidoras na area de concessao obrigatoriamente passarao a integrar as campanhas de medicao amostral, a ANEEL se vale das matrizes geograficas mantidas pelas concessionarias, compilacao esta comumente referenciada no setor sob a abreviatura ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "BDGD"
+        }
+      ],
+      "explanation": "A normativa presente no item 92 do PRODIST Modulo 8 estipula objetivamente que as campanhas analiticas de sorteio executadas ocorrem a partir da exploracao das Bases de Dados Geograficas das Distribuidoras, conhecidas largamente pelo acronimo BDGD.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Sob as regras regimentais que organizam os direitos dos clientes perante a investigacao pratica por via de reclamacoes sobre niveis rebaixados da tensao operante na modalidade de medicao eventual (ciclo fixo com registro estendido de no minimo 168 horas completas de coletas), a concessionaria impoe a propria equipe tecnica o dever de alertar com os devidos detalhes protocolares o respectivo usuario comunicando a data e o horario com uma antecedencia de no minimo exatas ____ horas ao inicio fatico dos procedimentos de captacao.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "48"
+        }
+      ],
+      "explanation": "As diretrizes estabelecidas na alinea h do artigo 121 no bojo legal do PRODIST Modulo 8 requerem que a distribuidora atue com a acao de informar ao usuario, com antecedencia minima de 48 horas da realizacao da medicao pelo periodo minimo de 168 horas.",
+      "difficulty": "hard"
+    }
+  ]
+}

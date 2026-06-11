@@ -1,0 +1,218 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "PRP/HSR e Cibersegurança",
+  "moduleSubtitle": "Redundância PRP/HSR, IEC 62443 e IEC 62351",
+  "moduleOrder": 9,
+  "trail": "Implementação (IEC 62439-3, IEC 62443, IEC 62351)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Na implementacao da topologia PRP, como a redundancia de comunicacao e estabelecida fisicamente na subestacao?",
+      "options": [
+        "Usando um unico switch central com portas VLAN roteadas.",
+        "Utilizando links de radiofrequencia como backup da fibra otica.",
+        "Ativando o Spanning Tree em aneis hibridos de roteadores.",
+        "Transmitindo dados simultaneamente em duas redes paralelas e independentes (LAN A e LAN B)."
+      ],
+      "correctIndex": 3,
+      "explanation": "O protocolo PRP opera transmitindo quadros simultaneamente atraves de duas redes totalmente separadas e paralelas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a topologia fundamental aplicada na implementacao do protocolo de redundancia HSR?",
+      "options": [
+        "Anel fechado com ate 50 IEDs.",
+        "Estrela simples.",
+        "Cascata linear.",
+        "Malha completa L3."
+      ],
+      "correctIndex": 0,
+      "explanation": "O HSR e implementado nativamente formando uma topologia de anel fechado, suportando tipicamente ate 50 equipamentos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para conectar dispositivos simples que nao possuem suporte nativo a redes redundantes, qual equipamento deve ser utilizado?",
+      "options": [
+        "Roteador BGP.",
+        "Modulo RedBox.",
+        "Gateway MMS.",
+        "Firewall de borda."
+      ],
+      "correctIndex": 1,
+      "explanation": "O RedBox (Redundancy Manager in a Box) integra equipamentos comuns as redes de alta disponibilidade PRP ou HSR.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na gestao de ciberseguranca de IEDs, qual pratica e recomendada para controle logico de acessos indesejados?",
+      "options": [
+        "Desabilitar o protocolo MMS do nivel de estacao.",
+        "Manter senhas de fabrica padronizadas para agilizar manutencoes.",
+        "Aplicar senhas fortes com prazo de validade gerenciadas por servidor de dominio.",
+        "Usar redes Wi-Fi abertas no patio."
+      ],
+      "correctIndex": 2,
+      "explanation": "As diretrizes recomendam o uso de politicas de seguranca via dominio, impondo senhas fortes, rotatividade e validade.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual acao fisica e recomendada nos IEDs e switches para aplicar a defesa em profundidade e aumentar a ciberseguranca local?",
+      "options": [
+        "Remover o display IHM dos IEDs.",
+        "Deixar as portas dos paineis sempre abertas para ventilacao.",
+        "Substituir paineis digitais por eletromecanicos.",
+        "Instalar dispositivos de bloqueio fisico nas portas e restringir portas USB."
+      ],
+      "correctIndex": 3,
+      "explanation": "O bloqueio fisico de portas ethernet ociosas e de portas USB nos IEDs consolida a barreira de seguranca local.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a diferenca fundamental no comissionamento de redundancia do PRP/HSR comparado ao legado RSTP?",
+      "options": [
+        "PRP e HSR garantem reconfiguracao transparente com tempo zero (sem perda de pacotes).",
+        "RSTP e mais rapido, recuperando a rede em zero segundos.",
+        "RSTP nao utiliza switches ethernet.",
+        "Ambos derrubam os IEDs por 30 segundos obrigatoriamente."
+      ],
+      "correctIndex": 0,
+      "explanation": "Diferente do RSTP que apresenta lacuna de tempo, PRP e HSR provem tempo zero de recuperacao (seamless redundancy).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre com a ciberseguranca se um pacote GOOSE for deixado sem tag de VLAN (untagged) em uma rede segmentada?",
+      "options": [
+        "O IED o descarta sumariamente.",
+        "Ele recebe a VLAN nativa da porta e pode vazar indevidamente para outras subestacoes.",
+        "Ele e automaticamente criptografado.",
+        "O switch converte o pacote para MMS TCP."
+      ],
+      "correctIndex": 1,
+      "explanation": "Pacotes untagged recebem a VLAN nativa da porta (ex: VLAN do MMS), burlando o confinamento e vazando para fora da planta.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na monitoracao de intrusoes do sistema, em qual Data Object do modelo IEC 61850 os alarmes ciberneticos do hardware sao gerados?",
+      "options": [
+        "Health",
+        "BatFail",
+        "CybSecEvt",
+        "ClkFail"
+      ],
+      "correctIndex": 2,
+      "explanation": "O Data Object CybSecEvt (Cyber Security Event) inserido no LN LPHD0 tem a funcao nativa de reportar eventos de ciberseguranca.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a tecnica de confinamento melhora a ciberseguranca e previne colapsos por conflitos de MAC Address entre subestacoes?",
+      "options": [
+        "Desconectando a subestacao fisicamente do centro de controle.",
+        "Trocando todos os enderecos MAC virtuais diariamente.",
+        "Forcando os IEDs a usar apenas o protocolo serial Modbus.",
+        "Aplicando regras e bloqueios de VLAN nos switches de fronteira para restringir a saida do GOOSE."
+      ],
+      "correctIndex": 3,
+      "explanation": "O confinamento configura os switches para bloquear o trafego da VLAN GOOSE nas portas de interligacao externa.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um teste de redundancia de mensagens GOOSE baseado puramente em Spanning Tree Protocol (STP), qual e a consequencia imediata ao romper um link.",
+      "options": [
+        "Ocorre uma lacuna grave de comunicacao e perda de pacotes devido as fases de Listening e Learning do protocolo.",
+        "A comunicacao prossegue intacta de forma invisivel.",
+        "Apenas os dados analogicos sao perdidos, mantendo os trips.",
+        "O IED de protecao aciona o trip por precaucao automaticamente."
+      ],
+      "correctIndex": 0,
+      "explanation": "O algoritmo STP nao possui recuperacao instantanea; ele necessita de tempo para escutar e recalcular a topologia, gerando perdas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No protocolo PRP, a redundancia e efetivada porque o IED remetente injeta telegramas clonados simultaneamente nas redes LAN A e LAN B.",
+      "correctAnswer": true,
+      "explanation": "O conceito do PRP preve que o dispositivo com interfaces duplas duplique o envio, despachando a mesma trama pelas duas redes isoladas.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A seguranca de sistemas OT requer que as politicas de acesso aos IEDs possuam senhas complexas associadas a validade e auditoria no servidor de.",
+      "correctAnswer": true,
+      "explanation": "A administracao centralizada via servidor de dominio garante rotatividade de senhas e bloqueios de portas perifericas essenciais para o hardening.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os modulos RedBox sao compativeis unicamente com a arquitetura paralela PRP, nao sendo suportada sua integracao em topologias de anel HSR.",
+      "correctAnswer": false,
+      "explanation": "A documentacao exibe diagramas atestando que os RedBoxes tambem sao perfeitamente aplicaveis em aneis HSR para integrar dispositivos sem redundancia.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o teste de redundancia documentado com GOOSE, ao romper o link principal, a troca de mensagens parou definitivamente pois os roteadores L3.",
+      "correctAnswer": false,
+      "explanation": "No teste, a comunicacao migrou para o link redundante configurado com lacunas minimas dependentes do protocolo empregado.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A tecnica de bloqueio da VLAN GOOSE nas portas de entrada e saida do switch impede a evasao dos pacotes, porem nao bloqueia mensagens intrusas caso.",
+      "correctAnswer": true,
+      "explanation": "O confinamento baseado apenas na restricao da tag vaza ou permite invasoes caso os pacotes indesejados possuam a tag da VLAN nativa que trafega livremente.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A conexao de hardwares de rede comuns, que possuem porta simples, aos barramentos de alta disponibilidade PRP/HSR exige o emprego do conversor ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "RedBox"
+        }
+      ],
+      "explanation": "O RedBox atua acoplando as Single Attached Nodes (SAN) aos protocolos duplos gerenciando as filas de redundancia.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O Logical Node padronizado sob as regras de diagnostico LPHD0 para mapear e sinalizar quebras logicas e invasoes operacionais e denominado ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "CybSecEvt"
+        }
+      ],
+      "explanation": "O objeto CybSecEvt (Cyber Security Event) centraliza ativamente as notificacoes de falha de autenticacao e ataques no IED.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A engenharia restringe as difusoes de MAC virtuais entre diferentes subsistemas atraves de filtros logicos de switchs definindo o ____ das.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "confinamento"
+        }
+      ],
+      "explanation": "O confinamento GOOSE mantem os pacotes isolados nas fronteiras das subestacoes barrando o roteamento da respectiva VLAN para o meio externo.",
+      "difficulty": "hard"
+    }
+  ]
+}

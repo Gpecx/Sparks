@@ -1,0 +1,183 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Infraestrutura de Rede SPCS",
+  "moduleSubtitle": "Switches, fibra, VLANs, topologias e redundância",
+  "moduleOrder": 1,
+  "ebookTitle": "Infraestrutura de Rede SPCS",
+  "ebookSubtitle": "A rede Ethernet da subestação digital: switches, fibra, VLANs e redundância",
+  "estimatedMinutes": 60,
+  "trailFiles": [
+    "t01_fundamentos_rede.json",
+    "t02_aplicacoes_rede.json",
+    "t03_implementacao_rede.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — A Rede como Espinha Dorsal da Subestação Digital",
+      "subtitle": "Quando a comunicação vira fiação",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Da fiação de cobre à rede Ethernet",
+          "type": "text",
+          "body": "Na subestação digital baseada em IEC 61850, a rede Ethernet substitui grande parte da fiação de cobre: sinais de trip e intertravamento viajam como mensagens GOOSE, e as medições de TC/TP como Sampled Values. Isso significa que a rede de comunicação não é mais um acessório — ela é a 'fiação' por onde passa a proteção. Uma falha de rede pode comprometer funções críticas. Projetar e manter essa rede com a confiabilidade exigida pela proteção é uma competência central da subestação moderna."
+        },
+        {
+          "id": "s2",
+          "title": "Os componentes da rede SPCS",
+          "type": "list",
+          "items": [
+            "Switches Ethernet industriais — robustos, com suporte a VLANs, prioridade e protocolos de redundância",
+            "Cabeamento de fibra óptica — imune a interferência eletromagnética (crítico no ambiente de subestação)",
+            "Cabeamento de cobre (par trançado) — em distâncias curtas e ambientes controlados",
+            "IEDs, merging units e gateways como nós da rede",
+            "Servidores de tempo (PTP grandmaster) e estações de supervisão"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Por que fibra óptica",
+          "type": "note",
+          "body": "A fibra óptica é preferida na subestação por razões que vão além da banda: ela é imune à interferência eletromagnética intensa do ambiente (campos de alta tensão, correntes de falta, transitórios de manobra), não cria laços de terra (isolação galvânica total), e suporta longas distâncias. Em locais com forte EMI, o cobre captaria ruído que corromperia a comunicação crítica de proteção. A fibra garante a integridade dos sinais GOOSE/SV no ambiente hostil da subestação."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Na subestação digital, a rede Ethernet é a nova 'fiação' por onde passa a proteção (GOOSE, SV) — uma falha de rede compromete funções críticas. Seus componentes são switches industriais, fibra óptica, IEDs, merging units e servidores de tempo. A fibra é preferida por imunidade à EMI, isolação galvânica e distância — essencial no ambiente hostil da subestação."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — VLANs, Prioridade e Segmentação",
+      "subtitle": "Organizando e protegendo o tráfego",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que segmentar com VLANs",
+          "type": "text",
+          "body": "A rede de subestação carrega tráfegos muito diferentes: GOOSE (crítico, multicast), Sampled Values (intenso, contínuo), MMS (supervisão), e tráfego de engenharia/manutenção. Misturar tudo numa rede plana sobrecarregaria os IEDs e comprometeria o desempenho crítico. As VLANs (Virtual LANs) segmentam logicamente a rede, isolando os tráfegos: cada IED só recebe o que lhe interessa, o GOOSE/SV fica contido em seus domínios, e a segurança aumenta. É a organização fundamental da rede SPCS."
+        },
+        {
+          "id": "s2",
+          "title": "Prioridade de tráfego (QoS)",
+          "type": "text",
+          "body": "Nem todo tráfego tem a mesma urgência: um GOOSE de trip precisa chegar em milissegundos, enquanto uma leitura de medição pode esperar. A priorização (QoS, via tag de prioridade IEEE 802.1Q) garante que os switches tratem o tráfego crítico (GOOSE, SV) com prioridade máxima, à frente do tráfego comum. Sem priorização, uma rajada de tráfego de engenharia poderia atrasar um trip — inaceitável. A configuração correta da prioridade é parte essencial do projeto da rede."
+        },
+        {
+          "id": "s3",
+          "title": "Multicast e o controle de inundação",
+          "type": "note",
+          "body": "GOOSE e SV são multicast — uma mensagem enviada a múltiplos destinatários. Sem controle, um switch inundaria toda a rede com cada multicast, sobrecarregando IEDs que não precisam daquela mensagem. Técnicas como o filtragem de multicast (estática ou IGMP snooping) e as VLANs garantem que cada multicast chegue apenas aos assinantes corretos. O controle de inundação de multicast é crítico especialmente para os Sampled Values, que geram tráfego contínuo e intenso."
+        },
+        {
+          "id": "s4",
+          "title": "Endereçamento e configuração",
+          "type": "list",
+          "items": [
+            "Endereços MAC multicast para GOOSE e SV (faixas reservadas)",
+            "APPID — identificador da aplicação, distingue mensagens GOOSE/SV diferentes",
+            "VLAN ID e prioridade configurados nos arquivos SCL e nos switches",
+            "Plano de endereçamento documentado (parte da matriz de comunicação)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As VLANs segmentam a rede por tipo de tráfego (GOOSE, SV, MMS, engenharia), isolando os críticos e aumentando segurança. A prioridade (QoS, 802.1Q) garante que GOOSE/SV passem à frente do tráfego comum. O controle de multicast (filtragem/IGMP snooping) impede inundação, crítico para os SV. Tudo é endereçado (MAC multicast, APPID, VLAN ID) e documentado na matriz de comunicação."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Topologias e Redundância",
+      "subtitle": "Rede que não pode parar",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Topologias de rede",
+          "type": "list",
+          "items": [
+            "Estrela — todos os nós num switch central; simples, mas o switch é ponto único de falha",
+            "Anel — switches em anel, com protocolo de recuperação; boa relação custo/redundância",
+            "Anel duplo / malha — maior redundância para sistemas críticos",
+            "A topologia é escolhida conforme a criticidade e a disponibilidade exigida"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Protocolos de redundância de rede",
+          "type": "text",
+          "body": "Como a rede carrega proteção, ela não pode ter ponto único de falha. Os protocolos de redundância garantem a continuidade: o RSTP (Rapid Spanning Tree) recupera anéis em dezenas a centenas de ms (aceitável para SCADA, lento para proteção); o PRP (Parallel Redundancy Protocol) e o HSR (High-availability Seamless Redundancy), da IEC 62439-3, oferecem redundância SEM TEMPO DE RECUPERAÇÃO — o dado é enviado por dois caminhos simultâneos, e se um falha, o outro já está chegando, sem perda de nenhum pacote."
+        },
+        {
+          "id": "s3",
+          "title": "PRP e HSR: redundância sem perda",
+          "type": "note",
+          "body": "Para tráfego crítico de proteção (GOOSE/SV), a recuperação do RSTP é lenta demais — perder pacotes durante a recuperação poderia atrasar um trip ou cegar uma proteção SV. O PRP e o HSR resolvem isso enviando cada quadro por dois caminhos independentes ao mesmo tempo; o receptor usa o primeiro que chega e descarta o duplicado. Se um caminho falha, não há nenhum tempo de recuperação — a comunicação continua ininterrupta. É a redundância exigida para proteção na subestação digital."
+        },
+        {
+          "id": "s4",
+          "title": "PRP vs HSR",
+          "type": "list",
+          "items": [
+            "PRP — duas redes independentes paralelas; o nó (DAN) conecta-se às duas; exige infraestrutura dupla",
+            "HSR — anel onde o nó envia o quadro nos dois sentidos; usa um único anel, economizando infraestrutura",
+            "Ambos oferecem zero tempo de recuperação (bumpless)",
+            "A escolha depende do custo de infraestrutura e da topologia preferida"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "As topologias (estrela, anel, malha) equilibram custo e disponibilidade. A redundância evita ponto único de falha: RSTP recupera anéis em ms (ok para SCADA, lento para proteção); PRP e HSR (IEC 62439-3) oferecem redundância SEM tempo de recuperação, enviando o dado por dois caminhos simultâneos — exigência para GOOSE/SV. PRP usa redes paralelas; HSR usa um anel."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Diagnóstico e Manutenção da Rede",
+      "subtitle": "Manter a 'fiação digital' saudável",
+      "estimatedMinutes": 9,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Monitoramento da rede",
+          "type": "list",
+          "items": [
+            "Monitorar o estado dos switches e enlaces (SNMP, alarmes)",
+            "Supervisionar a integridade das mensagens GOOSE (via time-to-live)",
+            "Acompanhar a carga de tráfego e detectar tempestades de broadcast/multicast",
+            "Verificar a qualidade do sincronismo de tempo (PTP)",
+            "Registrar e analisar eventos de rede para diagnóstico"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Ferramentas de diagnóstico",
+          "type": "text",
+          "body": "O diagnóstico da rede SPCS usa analisadores de protocolo (sniffers) que capturam e decodificam o tráfego GOOSE/SV/MMS, permitindo verificar se as mensagens estão sendo publicadas e recebidas corretamente, medir tempos e identificar problemas. Diferente da subestação convencional (onde se mede um fio com um multímetro), na digital se 'mede a rede' com ferramentas de TI adaptadas à proteção. O comissionador moderno domina essas ferramentas."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A manutenção da rede SPCS monitora switches, enlaces, integridade de GOOSE, carga de tráfego e qualidade do PTP. O diagnóstico usa analisadores de protocolo (sniffers) que decodificam GOOSE/SV/MMS — a forma de 'medir a rede' na subestação digital. A infraestrutura de rede é a espinha dorsal: projetada com fibra, VLANs, prioridade e redundância PRP/HSR, e mantida com ferramentas de TI adaptadas à proteção."
+        }
+      ]
+    }
+  ]
+}

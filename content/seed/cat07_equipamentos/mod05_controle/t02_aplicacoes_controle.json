@@ -1,0 +1,218 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Controle SPCS",
+  "moduleSubtitle": "Bay control, comando, intertravamento e SBO",
+  "moduleOrder": 4,
+  "trail": "Aplicações em SPCS (CLPs, RTUs, UTRs)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que garante o intertravamento eletromecanico entre uma seccionadora e um disjuntor na subestacao?",
+      "options": [
+        "A extinção do arco eletrico de forma mais rapida em condicoes de curto-circuito.",
+        "A operação da seccionadora apenas sem carga, exigindo que o disjuntor esteja aberto.",
+        "A reducao da tensao de passo na malha de terra durante a manobra.",
+        "O religamento automatico do alimentador sem intervencao do operador local."
+      ],
+      "correctIndex": 1,
+      "explanation": "O intertravamento traz seguranca, impedindo manobras com carga nas seccionadoras. (Fonte: Ed54 fasc protecao).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que o comando remoto de disjuntores e estritamente recomendado durante a energizacao da subestacao?",
+      "options": [
+        "Para reduzir o tempo de arco eletrico nos contatos da câmara de extincao.",
+        "Para bloquear automaticamente os reles de protecao de retaguarda.",
+        "Para afastar o operador do equipamento e garantir sua integridade fisica.",
+        "Para evitar a saturacao magnetica imediata dos transformadores de corrente."
+      ],
+      "correctIndex": 2,
+      "explanation": "O comando remoto via painel ou SCADA protege o operador contra riscos de explosoes e arcos. (Fonte: Ed54 fasc protecao).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em uma subestacao digital, qual equipamento adquire estados locais e executa comandos diretamente no vao?",
+      "options": [
+        "A Unidade Central de processamento de barramento.",
+        "A chave seccionadora de aterramento rapido.",
+        "O transformador de potencial capacitivo.",
+        "A Unidade de Bay (Bay Unit) instalada no painel local."
+      ],
+      "correctIndex": 3,
+      "explanation": "As Unidades de Bay adquirem os estados dos dispositivos locais (chaves e disjuntores) e emitem comandos. (Fonte: Virtus ProtBarras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual funcao ANSI e utilizada para verificar as condicoes da rede antes de autorizar o fechamento do disjuntor?",
+      "options": [
+        "Funcao ANSI 25 de verificacao de sincronismo.",
+        "Funcao ANSI 50 de sobrecorrente instantanea.",
+        "Funcao ANSI 21 de medicao de impedancia.",
+        "Funcao ANSI 87 de protecao diferencial."
+      ],
+      "correctIndex": 0,
+      "explanation": "A funcao 25 verifica se as tensoes, frequencias e angulos estao nos limites antes do fechamento. (Fonte: Guia Protecao 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a caracteristica operacional limitante das manobras com chaves seccionadoras?",
+      "options": [
+        "Elas interrompem elevadas correntes de curto-circuito simetrico.",
+        "Elas realizam manobras de abertura e fechamento estritamente sem carga.",
+        "Elas regulam dinamicamente o nivel de tensao do barramento.",
+        "Elas atuam de forma automatica ao detectar uma sobrecorrente transitória."
+      ],
+      "correctIndex": 1,
+      "explanation": "Chaves seccionadoras nao extinguem arco eletrico, operando apenas para isolar circuitos sem carga. (Fonte: Cabine Primaria).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a logica de controle digital reage ao detectar uma discrepancia de posicao invalida na seccionadora?",
+      "options": [
+        "Gera um alarme de anomalia mecanica e bloqueia operacoes indevidas.",
+        "Forca eletricamente o fechamento imediato do disjuntor associado.",
+        "Emite comando de trip instantaneo para todas as linhas adjacentes.",
+        "Aterra compulsoriamente o barramento principal de forca."
+      ],
+      "correctIndex": 0,
+      "explanation": "Posicoes invalidas (isolator position faulty) geram alarme e impedem operacoes inseguras. (Fonte: Virtus ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No controle avancado de disjuntores, qual e a finalidade do fechamento em modo POW (Point-On-Wave)?",
+      "options": [
+        "Bloquear o sincronismo da barra durante o transitorio de energizacao.",
+        "Executar comandos de trip simultaneos em exatos 50 milissegundos.",
+        "Verificar o cruzamento por zero para fechar cada fase no momento de menor impacto.",
+        "Abrir as seccionadoras de linha instantes antes de fechar o disjuntor principal."
+      ],
+      "correctIndex": 2,
+      "explanation": "O modo POW fecha cada polo no momento mais adequado da onda para evitar altos transitorios. (Fonte: Virtus ProtTrafo).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Que acao de seguranca e tomada pela logica de controle quando a tensao auxiliar DC da seccionadora falha?",
+      "options": [
+        "Abre a chave automaticamente por acao da mola de pre-carga.",
+        "Desliga imediatamente o rele digital por atuacao de subtensao.",
+        "Comanda o trip tripolar de todos os disjuntores do vao afetado.",
+        "Memoriza o ultimo estado valido da chave e emite um alarme de falha."
+      ],
+      "correctIndex": 3,
+      "explanation": "Em falha de tensao auxiliar (DC fail), o ultimo status da seccionadora e memorizado por seguranca. (Fonte: Virtus ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a grande vantagem da integracao de controle e comando nos modernos IEDs de subestacao?",
+      "options": [
+        "A realizacao logica via software, reduzindo drasticamente a quantidade de cabos de cobre.",
+        "A substituicao completa dos transformadores de potencial indutivos.",
+        "O isolamento termico do gas SF6 nas camaras de extincao de arco.",
+        "A utilizacao de robustos reles auxiliares eletromecanicos em paralelo."
+      ],
+      "correctIndex": 0,
+      "explanation": "Logicas antes feitas por fiacao eletromecanica sao processadas digitalmente no IED, diminuindo cablagens. (Fonte: Virtus CProtBL2Cd3).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual funcao ANSI e designada para estabelecer a ordem de operacao dos dispositivos em chaveamentos sequenciais?",
+      "options": [
+        "ANSI 43 (Seletor de transferencia manual).",
+        "ANSI 34 (Dispositivo mestre de sequencia).",
+        "ANSI 90 (Dispositivo de regulacao).",
+        "ANSI 83 (Controle seletivo automatico)."
+      ],
+      "correctIndex": 1,
+      "explanation": "A funcao ANSI 34 determina a sequencia correta de operacao dos dispositivos em manobras. (Fonte: Guia Protecao / KLS).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As chaves seccionadoras sao projetadas com camaras de extincao para manobrar a abertura de circuitos conduzindo carga nominal plena.",
+      "correctAnswer": false,
+      "explanation": "Chaves seccionadoras nao extinguem arco e devem operar apenas para isolar circuitos desenergizados. (Fonte: Cabine Primaria).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A integracao das funcoes nos IEDs permite que logicas de controle e intertravamento sejam processadas digitalmente, reduzindo a fiacao fisica.",
+      "correctAnswer": true,
+      "explanation": "A modernizacao permite que lógicas eletromecânicas passem para o software dos IEDs, economizando cabos. (Fonte: Virtus CProtBL2Cd3).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O intertravamento em subestacoes garante que uma seccionadora so possa ser manobrada caso o seu disjuntor associado esteja aberto.",
+      "correctAnswer": true,
+      "explanation": "O intertravamento eletrico e mecanico previne acidentes garantindo manobras sem carga nas seccionadoras. (Fonte: Ed54 fasc protecao).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A funcao de verificacao de sincronismo (ANSI 25) permite o fechamento do disjuntor ignorando totalmente a diferenca de angulo de fase.",
+      "correctAnswer": false,
+      "explanation": "A funcao 25 verifica justamente se as diferencas de tensao, frequencia e angulo estao dentro de limites seguros. (Fonte: Virtus ProtLT).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na arquitetura distribuida, a Unidade de Bay avalia sua replica de seccionadoras e decide localmente o trip de barra, sem consultar a Unidade Central.",
+      "correctAnswer": false,
+      "explanation": "A logica de desligamento seletivo de barra e centralizada e feita em conjunto com a Unidade Central. (Fonte: Virtus ProtBarras).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A funcao que confere se a tensao, frequencia e angulo de fase estao dentro dos limites pre-estabelecidos e a verificacao de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "sincronismo"
+        }
+      ],
+      "explanation": "A funcao 25 atua fazendo o check de sincronismo antes de permitir o fechamento em paralelo. (Fonte: Guia Protecao / Virtus).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Os IEDs instalados nos paineis locais que adquirem status e emitem comandos para o disjuntor especifico sao as Unidades de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Bay"
+        }
+      ],
+      "explanation": "As Unidades de Bay (Bay Units) interfaceiam diretamente com os equipamentos do vao. (Fonte: Virtus ProtBarras).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O modelo em software do IED que mapeia dinamicamente os estados fisicos das chaves de manobra e conhecido como ____ de seccionadoras.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "replica"
+        }
+      ],
+      "explanation": "A replica de seccionadoras garante que o rele conheca a topologia real da subestacao para comandos precisos. (Fonte: Virtus ProtBarras).",
+      "difficulty": "hard"
+    }
+  ]
+}

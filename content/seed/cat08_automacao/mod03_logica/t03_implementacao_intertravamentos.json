@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "Automação Industrial, IEC 61131-3, Subestações, DCS e Edge/IIoT",
+  "categoryOrder": 7,
+  "module": "Lógica de Controle e Intertravamento",
+  "moduleSubtitle": "Conceitos, aplicações em SPCS e implementação",
+  "moduleOrder": 2,
+  "trail": "Implementação de Intertravamentos",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "No software de engenharia do IED, qual recurso grafico permite programar blocos logicos para condicionar intertravamentos de campo?",
+      "options": [
+        "O ambiente CFC (Continuous Function Chart).",
+        "A tela de oscilografia do Wireshark.",
+        "A porta de configuracao serial RS-232.",
+        "O servidor de tempo SNTP."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Continuous Function Chart (CFC) e o ambiente grafico embarcado no IED que permite compilar logicas booleanas para alarmes e intertravamentos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual tecnica restringe a propagacao de mensagens GOOSE de intertravamento apenas aos switches da propria subestacao em projetos reais?",
+      "options": [
+        "A substituicao do protocolo ethernet por cabos coaxiais dedicados.",
+        "O confinamento logico bloqueando o trafego da respectiva VLAN nas portas de fronteira.",
+        "O encapsulamento TCP de todo o trafego de camada 2.",
+        "A desativacao do recurso multicast nos roteadores corporativos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O confinamento e assegurado configurando regras nos uplinks dos switches para proibir a evasao da VLAN GOOSE para fora da planta.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para atuar no intertravamento remoto, como o IED assinante identifica univocamente o fluxo publicado pelo IED de origem na ethernet?",
+      "options": [
+        "Atraves do relogio sincronizado GPS de tempo absoluto.",
+        "Consultando a tabela de roteamento OSPF do firewall.",
+        "Lendo o MAC Address de destino associado aos identificadores do GOOSE Control Block.",
+        "Decodificando a senha de seguranca MMS de 128 bits."
+      ],
+      "correctIndex": 2,
+      "explanation": "A assinatura ocorre lendo o MAC Address multicast no cabecalho e validando os identificadores como o APPID do bloco de controle.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante o teste ponta-a-ponta, qual identificador e aplicado no sniffer Wireshark para inspecionar puramente os intertravamentos horizontais?",
+      "options": [
+        "O filtro de roteamento IPv6.",
+        "A porta TCP 102 referente exclusivamente aos Sampled Values.",
+        "A porta UDP 502 do padrao Modbus.",
+        "O padrao Ethertype 0x88B8 do protocolo GOOSE."
+      ],
+      "correctIndex": 3,
+      "explanation": "O protocolo GOOSE e isolado nas capturas do analisador de rede rastreando a presenca do Ethertype 0x88B8.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o IED assinante deve fazer ao receber uma mensagem GOOSE de intertravamento com a flag Test ativada como TRUE?",
+      "options": [
+        "Acionar o trip compulsorio na subestacao.",
+        "Deletar a programacao residente em sua memoria flash.",
+        "Abster-se de utilizar a informacao em logicas operativas ou manobras reais.",
+        "Reiniciar a negociacao IP de todas as portas de comunicacao redundantes."
+      ],
+      "correctIndex": 2,
+      "explanation": "O bit de Teste orienta os clientes a invalidarem o dado para fins de acionamento real de campo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a logica do IED deve atuar ao constatar a falha critica de comunicacao de um rele essencial ao intertravamento da planta?",
+      "options": [
+        "Bloquear estritamente as logicas dependentes do IED falho sem descontinuar a operacao do restante da planta.",
+        "Emitir comando de abertura para todos os disjuntores da usina de forma incondicional.",
+        "Suspender toda a protecao diferencial ate a chegada da equipe de telecomunicacoes.",
+        "Forcar a utilizacao imediata de reles eletromecanicos de retaguarda."
+      ],
+      "correctIndex": 0,
+      "explanation": "Em caso de colapso do vizinho, a protecao inibe apenas os lacos a ele associados, mantendo saudaveis as rotinas que independem dele.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No ambiente de logica CFC, qual bloco extrai o status de validade e a qualidade de um sinal GOOSE assinado?",
+      "options": [
+        "O bloco comparador PID.",
+        "O bloco especifico Split_SPS ou Split_DPS.",
+        "O integrador de pulsos CONT.",
+        "O temporizador IEC_TIMER."
+      ],
+      "correctIndex": 1,
+      "explanation": "O bloco Split SPS divide o telegrama GOOSE, permitindo extrair a condicao de qualidade e sanidade do pacote recebido.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No troubleshooting do comissionamento, qual erro e reportado pelo IED assinante caso o publicador altere o dataset sem atualizacao conjunta do arquivo de sistema?",
+      "options": [
+        "Falha de aterramento eletronico GroundFault.",
+        "Defeito irreversivel de RAM no processador do rele principal.",
+        "A anomalia confRev mismatch, rejeitando a assinatura dos pacotes alterados.",
+        "Excesso de trafego IP com alarme BroadcastStorming local."
+      ],
+      "correctIndex": 2,
+      "explanation": "A discrepancia de revisoes por alteracao unilateral dispara no assinante o bloqueio de conformidade conhecido por confRev mismatch.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na transferencia do projeto para as ferramentas de teste, qual arquivo unificado documenta os nos logicos e as amarracoes de intertravamento de toda a planta?",
+      "options": [
+        "O descritor de alarmes CSV Modbus.",
+        "O relatorio descritivo em PDF do diagrama trifilar.",
+        "O arquivo CID de configuracao puramente estatica do roteador.",
+        "O arquivo SCD (Substation Configuration Description)."
+      ],
+      "correctIndex": 3,
+      "explanation": "O arquivo SCD concentra toda a modelagem de nos, amarracoes e intertravamentos da planta e alimenta os simuladores.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Se o IED publicador operar com Test Mode desabilitado, mas o IED assinante estiver com Test Mode habilitado, qual e a resposta normatizada nas saidas do assinante?",
+      "options": [
+        "Ele processa os status ativando LEDs e logicas de simulacao de acordo com seu proprio modo de teste, sem atuar nos disjuntores.",
+        "Ele rejeita a mensagem e acusa falha de seguranca na rede ethernet.",
+        "Ele desliga o barramento compulsoriamente via ordem de seguranca 50BF.",
+        "O assinante bloqueia o switch matriz inibindo o controle MAC multicast."
+      ],
+      "correctIndex": 0,
+      "explanation": "O assinante acata o intertravamento para sinalizacao local (estando em teste), mas retem os disparos diretos nos disjuntores.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para que o analisador de protocolo inspecione e valide as matrizes temporais do intertravamento GOOSE, a porta do switch exige ativacao da funcionalidade de Port Mirroring.",
+      "correctAnswer": true,
+      "explanation": "O espelhamento encaminha copias identicas do trafego, viabilizando ao analisador capturas profundas e cronometricas dos lances de intertravamento.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A implementacao do Test Mode altera o bit de teste do frame para TRUE, instruindo incondicionalmente a logica do IED receptor a fechar contatos de saida sem restricoes.",
+      "correctAnswer": false,
+      "explanation": "A marcacao Test instrui a unidade assinante a negar operacoes executivas, desabilitando acionamentos fisicos nos disjuntores.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A logica de intertravamento configurada via CFC no IED tem capacidade para ler o atributo de qualidade do sinal GOOSE, podendo travar manobras caso o report aponte condicao questionavel.",
+      "correctAnswer": true,
+      "explanation": "Blocos funcionais separam a porcao quality da mensagem GOOSE, fornecendo condicionantes para travar operacoes caso o publicador sinalize avarias.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O comissionamento virtual das logicas entre bays distintos e validado inserindo apenas os arquivos CID isolados nas maletas de teste, ignorando a consolidacao do SCD.",
+      "correctAnswer": false,
+      "explanation": "A avaliacao do arranjo integrado depende do SCD, pois ele e o unico portador de todas as interfaces e enderecamentos inter-relacionados da planta.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O impasse confRev mismatch ocorre e barra as acoes de campo caso o valor de revisao esperado pelo assinante destoe do parametro alocado no pacote GOOSE publicado.",
+      "correctAnswer": true,
+      "explanation": "Erros na atualizacao dos arquivos provocam discordancias no Configuration Revision, invalidando a leitura e a permissao daquele GOOSE no IED destino.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na blindagem do intertravamento distribuido contra pacotes evasores, os switches de borda exigem a insercao de filtros de exclusao configurados sob a especificacao de redes virtuais ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "VLAN"
+        }
+      ],
+      "explanation": "As barreiras restritivas baseiam-se nas Virtual Local Area Networks (VLAN), impedindo a interatividade indevida entre usinas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em avaliacoes da sanidade da rede, se a periodicidade do publicador GOOSE for interrompida e exceder o parametro maximo de sobrevida referenciado no PDU como ____, a logica do assinante anula a operacao marcando falha.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "TimeAllowedToLive"
+        }
+      ],
+      "explanation": "O TimeAllowedToLive (TAL) define a margem limite suportavel sem contato; apos a expiracao, deflagra o desarme preventivo do sinal virtual.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na construcao do intertravamento no ambiente DIGSI, o bloco CFC encarregado de separar a condicao de status da qualidade do sinal digital importado via ethernet e nomeado de ____ SPS.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Split"
+        }
+      ],
+      "explanation": "A instrucao Split segrega as porcoes booleanas e qualificativas do sinal, embasando atuacoes com atestado de integridade.",
+      "difficulty": "hard"
+    }
+  ]
+}

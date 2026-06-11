@@ -1,0 +1,218 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Dispositivos de Proteção",
+  "moduleSubtitle": "Relés, disparadores e fusíveis - conceitos e tipos",
+  "moduleOrder": 1,
+  "trail": "Fundamentos de Dispositivos de Proteção",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Nos projetos de sistemas elétricos, o elo fusível é classificado de acordo com a sua classe de tensão de aplicação. Quais são as duas grandes classes em que os fusíveis de proteção se dividem?",
+      "options": [
+        "Corrente Alternada (AC) e Corrente Contínua (DC).",
+        "Baixa Tensão (para tensões inferiores a 1 kV) e Média/Alta Tensão (para tensões superiores a 1 kV).",
+        "Ação Direta e Ação Indireta.",
+        "Disparo Rápido (Instantâneo) e Disparo Temporizado (Longo)."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os fusíveis são divididos em Baixa Tensão (inferiores a 1 kV) e Média/Alta Tensão (acima de 1 kV).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são os três elementos internos principais que regem a operação de um relé clássico?",
+      "options": [
+        "Filtro anti-aliasing, conversor A/D e microprocessador.",
+        "Bobina de operação, bobina de restrição e mola de retenção.",
+        "Elemento sensor, elemento comparador e elemento de atuação.",
+        "Câmara de extinção, contato auxiliar e mecanismo de mola."
+      ],
+      "correctIndex": 2,
+      "explanation": "A arquitetura de um relé conta com: elemento sensor (monitora a grandeza), elemento comparador (avalia contra o ajuste) e elemento de atuação (envia o comando).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a definição correta do conceito de 'Pick-up' de um relé?",
+      "options": [
+        "É o tempo de atraso intencional antes da abertura dos contatos.",
+        "É a tensão auxiliar contínua (CC) que alimenta o microprocessador.",
+        "É a corrente instantânea de magnetização ao energizar o transformador.",
+        "É o valor limite da grandeza a partir do qual o relé inicia a sua atuação."
+      ],
+      "correctIndex": 3,
+      "explanation": "Pick-up é o valor da grandeza supervisionada (tensão, corrente, frequência) para o qual o dispositivo detecta a anomalia e inicia a atuação.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual afirmativa define corretamente a capacidade de interrupção do seccionalizador?",
+      "options": [
+        "Isola o circuito apenas após um disjuntor ou religador a montante interromper a corrente de falta; não possui capacidade de ruptura de curtos.",
+        "Interrompe correntes de curto-circuito de forma autônoma e instantânea.",
+        "Possui câmara SF6 capaz de romper correntes de até 100 kA sozinho.",
+        "Atua exclusivamente em faltas de alta impedância com fusíveis internos."
+      ],
+      "correctIndex": 0,
+      "explanation": "O seccionalizador não interrompe curtos. Conta as atuações do equipamento de retaguarda (religador) e abre seus contatos isolando o trecho apenas com o circuito desenergizado.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a função da 'Bobina de Abertura' (bobina de disparo) no circuito de controle do disjuntor?",
+      "options": [
+        "Fornecer energia contínua ao motor que carrega as molas.",
+        "Destravar mecanicamente o dispositivo de liberação, permitindo que os contatos principais separem o circuito sob falta.",
+        "Extinguir o arco elétrico injetando gás SF6 na câmara.",
+        "Supervisionar o nível do óleo isolante durante manobras."
+      ],
+      "correctIndex": 1,
+      "explanation": "A bobina de disparo, ao ser energizada pelo relé, aciona o destravamento mecânico que libera a energia (mola ou gás) que abre os contatos principais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a sequência básica que define o ciclo de operação de um religador automático?",
+      "options": [
+        "Detecção, isolamento permanente instantâneo e bloqueio imediato.",
+        "Alarme remoto ao SCADA sem interrupção local, aguardando intervenção manual.",
+        "Detecção da falta, interrupção se persistir, e após um tempo predeterminado, religamento automático do trecho.",
+        "Fechamento contínuo sobre o curto até a queima do elo fusível a jusante."
+      ],
+      "correctIndex": 2,
+      "explanation": "O religador detecta a falta, interrompe o circuito e, após o tempo morto, religa para testar se a falta (frequentemente temporária) foi extinta, evitando interrupções prolongadas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como são denominados os dispositivos integrados de proteção de sobrecorrente em disjuntores de Baixa Tensão e quais funções oferecem?",
+      "options": [
+        "Relés a gás Buchholz, com proteção térmica, magnética e diferencial.",
+        "Transformadores de acoplamento capacitivo para teleproteção.",
+        "Comparadores de fase tipo disco de indução para proteção direcional.",
+        "Disparadores Eletrônicos, com funções LTD (Long Time Delay), STD (Short Time Delay), Instantâneo e Ground (Terra)."
+      ],
+      "correctIndex": 3,
+      "explanation": "Disjuntores de BT possuem Disparadores Eletrônicos integrados, com ajustes LTD (tempo longo), STD (tempo curto), Instantâneo e proteção de Terra.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais as principais denominações construtivas dos disjuntores de Baixa Tensão no mercado?",
+      "options": [
+        "Abertos (Power Breakers), em Caixa Moldada (MCCB) e em Caixa Isolada (ICCB).",
+        "Grande Volume de Óleo (GVO) e Pequeno Volume de Óleo (PVO).",
+        "A Sopro Magnético e a Ar Comprimido Seco.",
+        "A Vácuo (VCB) e isolados a gás SF6."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os disjuntores de BT dividem-se em: Abertos (partes internas acessíveis), Caixa Moldada (MCCB) e Caixa Isolada (ICCB).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a característica fundamental da chave seccionadora?",
+      "options": [
+        "Destina-se a extinguir curtos-circuitos francos com fusíveis limitadores.",
+        "É destinada a manobras de abertura e fechamento de circuito sem a presença de carga.",
+        "Atua automaticamente na eliminação de correntes de sobrecarga térmicas.",
+        "Atua como redutor de tensão para medição fasorial na cabine primária."
+      ],
+      "correctIndex": 1,
+      "explanation": "Chaves seccionadoras promovem isolação visível, realizando manobras sem carga, pois não possuem câmaras de extinção de arco para operação em carga.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que configura a operação de um sistema de proteção de ação indireta?",
+      "options": [
+        "O elemento está em série no circuito primário e usa a energia da falha térmica para fundir um elo.",
+        "O disjuntor abre ativado pelo disparo do para-raios de linha por indução.",
+        "O relé mede grandezas secundárias via TCs/TPs, toma a decisão e envia comando elétrico a uma bobina externa que abre o disjuntor.",
+        "A interrupção só ocorre quando a sobretensão destrói o isolador."
+      ],
+      "correctIndex": 2,
+      "explanation": "Na atuação indireta, o relé secundário detecta a anomalia via TCs/TPs e fecha seu contato auxiliar, alimentando a bobina de abertura que ordena o destravamento mecânico do disjuntor.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "'Tempo de Reset' define o tempo máximo admitido para que a corrente de curto flua pelo sistema até a completa fusão de um elo fusível.",
+      "correctAnswer": false,
+      "explanation": "Falso. 'Tempo de Reset' é o tempo necessário para que um relé retorne ao seu estado de repouso (anterior à falta) após a grandeza de atuação ter desaparecido.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas redes aéreas de distribuição, a maioria dos elos fusíveis opera por expulsão, onde o calor do arco ioniza um tubo de fibra gerando gases que comprimem e expelem o arco para a interrupção.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. Os fusíveis de distribuição são de expulsão: após o filamento romper, o calor atua no tubo de fibra que libera gases, ejetando o plasma e apagando o arco.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os seccionalizadores são instalados de modo autônomo nas redes de distribuição porque possuem câmaras de extinção a vácuo que lhes conferem poder pleno de interromper sozinhos elevadas correntes de curto.",
+      "correctAnswer": false,
+      "explanation": "Falso. O seccionalizador não tem poder de ruptura de curto. Conta as atuações do dispositivo a montante (religador) e abre seus contatos para isolar o trecho apenas durante o tempo morto (sem tensão).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em Alta Tensão, o relé não interrompe o circuito primário defeituoso; sua função encerra-se no monitoramento dos sensores e no envio de comando para que a bobina de disparo do disjuntor libere a mola e abra os contatos.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. Quem interrompe as altas correntes e apaga o arco é o disjuntor. O relé opera nos circuitos secundários como o 'cérebro', detectando a falha e comandando a bobina do disjuntor.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O 'Network Protector', adotado em distribuição subterrânea de áreas densas (Spot Network), funciona como um fusível de lâmina bimetálica de ação muito lenta resistente a altas temperaturas.",
+      "correctAnswer": false,
+      "explanation": "Falso. O Network Protector não é um fusível lento. É uma chave e sistema de proteção automático que detecta a reversão indesejada do fluxo de corrente e desarma rapidamente para isolar o defeito da rede secundária em malha.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Um relé é formado por três elementos: o de atuação, o sensor (que coleta a grandeza) e, como elo entre os dois, o elemento ____, que confronta o sinal com os ajustes parametrizados.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "comparador"
+        }
+      ],
+      "explanation": "O elemento comparador toma a decisão baseada no limite pré-ajustado, ligando o elemento sensor ao elemento de atuação.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Muitos disjuntores de baixa tensão são gerenciados por módulos embutidos conhecidos como disparadores ____, cujas funções incluem moldar os retardos de tempo longo (LTD), tempo curto (STD) e o trip instantâneo.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "eletrônicos"
+        }
+      ],
+      "explanation": "Os disparadores eletrônicos (electronic trip units) controlam as curvas de proteção dos disjuntores de BT via microprocessador anexado ao equipamento.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O advento dos religadores dotados de tecnologia ____ permitiu a modelagem flexível de curvas Tempo x Corrente e a reprogramação das funções sem troca do equipamento em campo.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "digital"
+        }
+      ],
+      "explanation": "Religadores digitais (microprocessados) incorporam, via software, algoritmos, medições, telemetria e múltiplas curvas, facilitando a coordenação sem alterar a máquina de manobra.",
+      "difficulty": "hard"
+    }
+  ]
+}

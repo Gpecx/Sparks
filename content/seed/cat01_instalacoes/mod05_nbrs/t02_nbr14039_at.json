@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NBRs Elétricas",
+  "moduleSubtitle": "NBR 5410, NBR 14039, NBR IEC 60439, NBR ISO 55000 e NBR 5462",
+  "moduleOrder": 4,
+  "trail": "NBR 14039 (Instalações de AT)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Como a NR-10 define tecnicamente o nivel de Alta Tensao em corrente alternada para as instalacoes eletricas?",
+      "options": [
+        "Tensao exatamente igual a 13800V",
+        "Tensao superior a 1000V",
+        "Tensao entre 50V e 1000V",
+        "Tensao inferior a 1500V"
+      ],
+      "correctIndex": 1,
+      "explanation": "O glossario da NR-10 define Alta Tensao (AT) como a tensao superior a 1000V em CA ou 1500V em CC.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas subestacoes e cabines primarias de media tensao, qual e a funcao e a restricao principal da chave seccionadora?",
+      "options": [
+        "Possui alta capacidade de extincao de arco eletrico em curtos-circuitos.",
+        "E o dispositivo automatico para eliminacao de falhas fase-terra.",
+        "Tem funcao de isolacao mas nao possui funcao de chaveamento de corrente em servico.",
+        "Serve exclusivamente para regular a tensao do barramento secundario."
+      ],
+      "correctIndex": 2,
+      "explanation": "A chave seccionadora tem a funcao de isolacao da rede, mas nao a funcao de chaveamento de corrente em servico.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual dispositivo e utilizado em transformadores de potencia a oleo para protecao interna sensivel a pressao e gas?",
+      "options": [
+        "Rele direcional de potencia ANSI 32",
+        "Rele de subfrequencia ANSI 81L",
+        "Disjuntor termomagnetico de baixa tensao",
+        "Rele Buchholz ou detecao de gas ANSI 63"
+      ],
+      "correctIndex": 3,
+      "explanation": "O rele Buchholz ou detecao de gas e pressao (ANSI 63) protege contra falhas internas em transformadores a oleo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em uma cabine com esquema de aterramento de neutro isolado, o que ocorre no sistema durante a primeira fuga a terra?",
+      "options": [
+        "Circula apenas uma baixa corrente atraves das capacitancias das fases sem falha.",
+        "Desligamento instantaneo por sobrecorrente elevada.",
+        "A tensao de fase das linhas intactas e anulada.",
+        "O transformador satura desligando o disjuntor principal."
+      ],
+      "correctIndex": 0,
+      "explanation": "No neutro isolado a primeira falha provoca apenas uma baixa corrente capacitiva, permitindo a continuidade temporaria.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A suportabilidade eletrodinamica dos equipamentos passivos em uma subestacao avalia a resistencia a qual esforco?",
+      "options": [
+        "Derretimento dos cabos devido a sobreaquecimento prolongado.",
+        "Esforcos mecanicos durante curtos-circuitos, sendo expressa em kA pico.",
+        "Perda de isolacao por sobretensao atmosferica.",
+        "Oscilacoes lentas de frequencia no sistema interligado."
+      ],
+      "correctIndex": 1,
+      "explanation": "A suportabilidade eletrodinamica e expressa em kA pico para caracterizar a resistencia mecanica aos esforcos de curto-circuito.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para trabalhos em MT na faixa de tensao de 10 a 15 kV, qual e o raio da Zona de Risco estabelecido no Anexo II da NR-10?",
+      "options": [
+        "0,20 metros",
+        "1,00 metro",
+        "0,38 metros",
+        "1,38 metros"
+      ],
+      "correctIndex": 2,
+      "explanation": "O Anexo II da NR-10 fixa que, para 10 a 15 kV, o raio da Zona de Risco e de 0,38 metros e a Zona Controlada e de 1,38 metros.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o objetivo da utilizacao da bobina de Petersen no esquema de aterramento de neutro de subestacoes MT?",
+      "options": [
+        "Aumentar a rigidez dieletrica dos disjuntores a vacuo.",
+        "Reduzir o tempo de operacao das chaves seccionadoras manuais.",
+        "Gerar a tensao de referencia para os reles direcionais de fase.",
+        "Compensar a corrente capacitiva da rede na ocorrencia de fuga a terra."
+      ],
+      "correctIndex": 3,
+      "explanation": "A reatancia de compensacao (bobina de Petersen) ajusta e compensa a capacitancia fase-terra da rede na fuga a terra.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a protecao diferencial do transformador (ANSI 87T) evita trips indevidos gerados pela corrente de inrush na energizacao?",
+      "options": [
+        "Adotando bloqueio por medicao de restricao do harmonico de segunda ordem H2.",
+        "Limitando fisicamente a tensao do sistema com para-raios de oxido de zinco.",
+        "Operando exclusivamente de forma retardada acima de 5 segundos.",
+        "Curto-circuitando os terminais secundarios dos TCs de medicao."
+      ],
+      "correctIndex": 0,
+      "explanation": "Mede-se o harmonico de segunda ordem para detectar a energizacao e inibir o falso trip (restricao H2).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo as normas da NR-10, como deve ser a equipe para execucao de trabalhos em instalacoes eletricas energizadas em Alta Tensao?",
+      "options": [
+        "Nao podem ser realizados individualmente, sendo exigida atuacao em equipe.",
+        "Pode atuar de forma solitaria se usar luvas isolantes.",
+        "Pode atuar individualmente apenas para inspecao visual noturna.",
+        "E delegada a qualquer trabalhador capacitado da producao."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 10.7.3 da NR-10 estabelece que os servicos em instalacoes energizadas em AT nao podem ser realizados individualmente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No aterramento de geradores ou transformadores de MT com neutro impedante, qual combinacao de funcoes garante protecao 100% de falta na carcaca do estator?",
+      "options": [
+        "Sobrecorrente instantanea 50 associada a religador 79.",
+        "Sobretensao residual 59N e subtensao do terceiro harmonico 27TN.",
+        "Rele de distancia 21 e direcional de potencia 32P.",
+        "Subfrequencia 81L e perda de campo 40."
+      ],
+      "correctIndex": 1,
+      "explanation": "A protecao ANSI 64G associa o 59N para deslocamento de neutro e o 27TN para falhas do lado do neutro.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O Prontuario de Instalacoes Eletricas e obrigatorio exclusivamente para cabines primarias de concessionarias, sendo dispensado nas subestacoes industriais.",
+      "correctAnswer": false,
+      "explanation": "O item 10.2.4 da NR-10 exige a formacao do Prontuario para todo estabelecimento comercial ou industrial com carga instalada superior a 75 kW.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A funcao de protecao ANSI 49RMS detecta sobrecarga eletrica calculando uma estimativa do aquecimento baseada na corrente e inercia termica do equipamento.",
+      "correctAnswer": true,
+      "explanation": "A protecao 49RMS calcula a sobrecarga estimando a liberacao e acumulo de calor no transformador ou motor.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O acesso a Zona Controlada de subestacoes eletricas requer respeito as distancias pre-definidas, porem e livre a qualquer visitante da organizacao.",
+      "correctAnswer": false,
+      "explanation": "A aproximacao na Zona Controlada e restrita e so e permitida a profissionais autorizados.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A intervencao operacional em instalacoes de Alta Tensao dentro da zona de risco determina como pre-requisito a desativacao dos religamentos automaticos.",
+      "correctAnswer": true,
+      "explanation": "O item 10.7.7 da NR-10 torna compulsoria a desativacao (bloqueio) de conjuntos de religamento automatico durante intervencoes na zona de risco.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas instalacoes de AT operando com aterramento de neutro por reatancia, a continuidade de servico sob primeira falta fase-terra e assegurada indefinidamente sem trips.",
+      "correctAnswer": false,
+      "explanation": "No aterramento por baixa reatancia a continuidade de servico e degradada, exigindo trip automatico rapido na primeira falta.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em paineis de entrada de media tensao, a protecao de sobrecorrente de fase temporizada tem seu codigo padronizado como ANSI ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "51"
+        }
+      ],
+      "explanation": "A nomenclatura normativa para o rele de sobrecorrente de fase temporizada e 51.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A protecao de equipamentos contra fuga a terra utilizando diferencial de falha ____ (ANSI 64REF) mede o escoamento isolando o ponto neutro aterrado do transformador.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "restrita"
+        }
+      ],
+      "explanation": "A funcao ANSI 64REF e tecnicamente a protecao diferencial de fuga a terra restrita.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para equipamentos passivos, a corrente de curto-circuito mantida durante o ensaio termico de 1 segundo sem causar danos define sua suportabilidade ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "térmica"
+        }
+      ],
+      "explanation": "A capacidade Ith de curtos e nomeada suportabilidade termica, e expressa o aquecimento admissivel do material.",
+      "difficulty": "hard"
+    }
+  ]
+}

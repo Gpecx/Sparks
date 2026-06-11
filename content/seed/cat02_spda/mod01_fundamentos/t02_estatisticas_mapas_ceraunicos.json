@@ -1,0 +1,218 @@
+{
+  "category": "SPDA",
+  "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
+  "categoryOrder": 1,
+  "module": "Fundamentos de SPDA",
+  "moduleSubtitle": "Fisica dos raios, conceitos, tipos e categorias de protecao",
+  "moduleOrder": 0,
+  "trail": "Estatísticas e Mapas Ceráunicos do Brasil",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com os dados do Instituto Nacional de Pesquisas Espaciais (INPE), qual e a posicao do Brasil no ranking mundial de incidencia de descargas atmosfericas?",
+      "options": [
+        "Lider mundial",
+        "Segundo colocado, atras dos Estados Unidos",
+        "Terceiro colocado mundial",
+        "Posicao irrelevante, com baixos indices"
+      ],
+      "correctIndex": 0,
+      "explanation": "Segundo o Instituto Nacional de Pesquisas Espaciais (INPE), o Brasil e lider mundial na incidencia deste fenomeno. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual orgao brasileiro e frequentemente citado nas fontes como o principal responsavel por disponibilizar os mapas isoceraunicos e de densidade de raios para consulta?",
+      "options": [
+        "ONS (Operador Nacional do Sistema)",
+        "ANEEL (Agencia Nacional de Energia Eletrica)",
+        "INPE (Instituto Nacional de Pesquisas Espaciais)",
+        "ABNT (Associacao Brasileira de Normas Tecnicas)"
+      ],
+      "correctIndex": 2,
+      "explanation": "Mapas isoceraunicos e de densidade de descargas atmosfericas sao obtidos atraves do site do INPE, que fornece dados precisos para o pais. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que representa fisicamente o parametro conhecido como Ng nas normas de SPDA e mapas de incidencia?",
+      "options": [
+        "O nivel de probabilidade de danos aos equipamentos",
+        "O numero de dias de trovoada por ano",
+        "A densidade de descargas atmosfericas para a terra",
+        "A area de exposicao equivalente da estrutura"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ng representa a densidade de descargas atmosfericas para a terra utilizada nos calculos de risco em projetos de SPDA. (Fonte: ABNT NBR 5419:2026 Guia pratico / Cleiton Junior Lopes)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na versao antiga da norma (2005), os mapas isoceraunicos forneciam o parametro Td. O que significa Td?",
+      "options": [
+        "Tensao disruptiva do raio",
+        "Quantidade media de dias que ocorreram trovoadas ao longo de um ano",
+        "Tempo de duracao medio de uma tempestade",
+        "Total de descargas registradas em um mes"
+      ],
+      "correctIndex": 1,
+      "explanation": "O Td e a quantidade media de dias que ocorreram trovoadas ao longo de um ano, consultado atraves de um mapa isoceraunico. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a proporcao de mortes por raios no Brasil em relacao ao total mundial, demonstrando a importancia de projetos rigorosos de SPDA no pais?",
+      "options": [
+        "A cada 10 mortes por raio no mundo, uma acontece no Brasil",
+        "A cada 50 mortes por raio no mundo, uma acontece no Brasil",
+        "A cada 100 mortes por raio no mundo, uma acontece no Brasil",
+        "A cada 1000 mortes por raio no mundo, uma acontece no Brasil"
+      ],
+      "correctIndex": 1,
+      "explanation": "Os indices indicam que a cada 50 mortes por raio no mundo, uma acontece no Brasil, com 1.790 vitimas fatais registradas entre 2000 e 2014. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a atualizacao de 2026 da NBR 5419, como os dados de Ng foram organizados para as cidades brasileiras no Anexo F?",
+      "options": [
+        "Cada municipio possui um unico valor de referencia, correspondente a maior densidade observada em seus limites.",
+        "Foi criada uma media aritmetica nacional unica aplicavel a todos os municipios.",
+        "Cada bairro dentro do municipio possui um Ng distinto e individualizado.",
+        "Cada municipio possui um valor fixo correspondente a menor densidade observada no estado."
+      ],
+      "correctIndex": 0,
+      "explanation": "A forma de apresentacao foi modificada: cada municipio passa a possuir um unico valor de referencia correspondente a maior densidade de descargas observada dentro de seus limites territoriais. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Antes da obtencao direta de Ng pelos novos mapas, a edicao de 2005 calculava o Ng atraves do nivel ceraunico (Td). Qual era a equacao empirica correta utilizada?",
+      "options": [
+        "Ng = 0,1 x Td",
+        "Ng = 0,04 x Td^1,25",
+        "Ng = Td / 10",
+        "Ng = 4 x Td^2"
+      ],
+      "correctIndex": 1,
+      "explanation": "Na edicao de 2005, o Ng era calculado pela equacao Ng = 0,04 x Td elevado a 1,25. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual foi a grande mudanca introduzida pela NBR 5419:2015 no que se refere a obtencao da densidade de descargas (Ng) para a analise de risco?",
+      "options": [
+        "O Ng passou a ser fixo em todo o territorio nacional, dispensando o uso de mapas.",
+        "O parametro Ng foi extinto, usando-se apenas a elevacao do terreno (fator E).",
+        "O Ng passou a ser obtido de forma mais precisa diretamente de mapas fornecidos pelo INPE, nao dependendo mais do Td.",
+        "A norma passou a exigir medicoes locais em campo por 1 ano antes da construcao para definir o Ng."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Ng passa agora a ser obtido de uma forma mais precisa atraves de mapas diretos de densidade fornecidos pelo INPE, sem a necessidade de calcular a partir do nivel ceraunico (Td). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na ABNT NBR 5419, o parametro Ng e multiplicado por qual outra grandeza importante para determinar o numero previsivel de descargas (Nd) em uma estrutura?",
+      "options": [
+        "O Risco toleravel de perda de vidas humanas (Rt)",
+        "A Area de exposicao equivalente da estrutura (Ae)",
+        "A corrente maxima presumida do raio (Imax)",
+        "O indice de isolamento dieletrico da estrutura (K)"
+      ],
+      "correctIndex": 1,
+      "explanation": "O numero previsivel de descargas (Nd) na estrutura e calculado pelo produto de Ng x Ae, onde Ae e a Area de exposicao equivalente em m2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em 2026, uma nova revisao da NBR 5419 atualizou drasticamente os mapas e valores de Ng do Brasil. Como esses novos dados foram tecnologicamente adquiridos?",
+      "options": [
+        "Por observadores meteorologicos locais em todos os municipios brasileiros.",
+        "Por estimativas matematicas indiretas usando indices pluviometricos de 1970.",
+        "Por meio de dados coletados por satelites e sensores, com melhorias no processamento.",
+        "Atraves do levantamento atuarial das seguradoras de imoveis brasileiras."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os novos valores foram obtidos por meio de dados coletados por satelites e sensores, com melhorias no processamento das informacoes. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os mapas isoceraunicos do Brasil representavam essencialmente as curvas do numero de dias de trovoada por ano (Td) em uma dada regiao geografica.",
+      "correctAnswer": true,
+      "explanation": "O Td (dias de trovoada por ano) pode ser consultado atraves de um mapa isoceraunico do Brasil, com curvas de contorno. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para facilitar o calculo do risco e melhorar a precisao, o INPE disponibilizou um mapa global do Brasil e mapas focados nas cinco regioes brasileiras contendo o numero direto de descargas Ng.",
+      "correctAnswer": true,
+      "explanation": "O INPE disponibilizou um mapa do Brasil e mais cinco mapas das regioes brasileiras nos quais se pode obter diretamente o Ng. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Com a nova atualizacao da norma ABNT NBR 5419:2026 e melhorias nos sensores do INPE, observou-se que diversos municipios brasileiros passaram a apresentar valores de referencia de Ng mais baixos, indicando uma reducao geral de raios.",
+      "correctAnswer": false,
+      "explanation": "Como resultado dessa atualizacao, diversos municipios brasileiros passaram a apresentar valores de referencia mais elevados, nao menores. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A distribuicao geografica de descargas no Brasil e extremamente uniforme; a regiao de Londrina-PR, por exemplo, possui a mesma densidade extrema de 140 raios/km2/ano vista no lago Maracaibo.",
+      "correctAnswer": false,
+      "explanation": "A incidencia e variavel; a regiao de Londrina-PR tem aproximadamente 5 raios/km2/ano, ao passo que lugares excepcionais como o lago Maracaibo na Venezuela chegam a 140. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A unidade oficial para quantificar a Densidade de Descargas Atmosfericas (Ng) na Tabela de parametros e no mapa do Brasil e definida em descargas/m2/mes.",
+      "correctAnswer": false,
+      "explanation": "A densidade de descargas atmosfericas (Ng) e quantificada e representada nos mapas na unidade descargas/km2/ano (raios por quilometro quadrado por ano). (Fonte: Cleiton Junior Lopes / ABNT NBR 5419:2026 Guia pratico)",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para dimensionar as medidas de protecao atraves da analise de risco, projetistas utilizam o parametro ____, que representa a densidade de descargas atmosfericas diretas para a terra na regiao do imovel.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Ng"
+        }
+      ],
+      "explanation": "O parametro Ng representa a densidade de descargas atmosfericas para a terra (raios/km2/ano), sendo fundamental nos calculos modernos de risco da NBR 5419. (Fonte: ABNT NBR 5419:2026 Guia pratico / Cleiton Junior Lopes)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A sigla ____ define a quantidade media de dias que ocorreram trovoadas ao longo de um ano, sendo o principal fator dos mapas ceraunicos antigos da norma de 2005.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Td"
+        }
+      ],
+      "explanation": "A quantidade media de dias que ocorreram trovoadas ao longo de um ano e representada pela sigla Td, que era consultada nos mapas isoceraunicos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na atualizacao dos mapas pela NBR 5419:2026, cada municipio passou a ter um unico valor de Ng fixado. Esse valor de referencia adotado corresponde a ____ densidade de descargas observada dentro dos limites territoriais do municipio.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "maior"
+        }
+      ],
+      "explanation": "A norma de 2026 modificou a apresentacao dos dados, exigindo que cada municipio adote um unico valor de referencia que corresponde a maior densidade de descargas observada em seus limites territoriais. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "hard"
+    }
+  ]
+}

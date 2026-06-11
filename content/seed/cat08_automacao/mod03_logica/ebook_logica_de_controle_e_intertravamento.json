@@ -1,0 +1,166 @@
+{
+  "category": "Automação",
+  "categoryOrder": 7,
+  "module": "Lógica de Controle e Intertravamento",
+  "moduleOrder": 2,
+  "moduleSubtitle": "Permissivos de manobra, bloqueios (86), GOOSE, SBO e implementação de intertravamentos em SPCS",
+  "ebookTitle": "Lógica de Controle e Intertravamento",
+  "ebookSubtitle": "Dos permissivos do CILO ao GOOSE: como a lógica de controle decide, bloqueia e protege manobras na subestação",
+  "estimatedMinutes": 41,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos de Lógica de Controle",
+      "subtitle": "Comando seguro, permissivos do CILO, bloqueios e o GOOSE no lugar do cabo",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Do cabo de cobre à mensagem na rede",
+          "type": "text",
+          "body": "Por décadas, os bloqueios e intertravamentos de uma subestação foram feitos por ligação física: contatos auxiliares e fios de cobre interligavam os equipamentos para liberar ou barrar manobras. A troca de mensagens GOOSE via rede Ethernet supre a antiga ligação física usada para bloqueios e intertravamentos. Com isso, a troca de dados via rede Ethernet com GOOSE reduz fisicamente as entradas binárias e cabos de bloqueio na subestação. A lógica de controle deixa de viver apenas no cobre e passa a trafegar como informação digital entre os IEDs."
+        },
+        {
+          "id": "s2",
+          "title": "O CILO: o cérebro dos permissivos",
+          "type": "text",
+          "body": "O Logical Node CILO (Control Interlocking) representa a lógica que avalia os permissivos de manobra. Em outras palavras, o LN CILO (Control Interlocking) consolida a inteligência dos intertravamentos, permitindo ou barrando manobras dos IEDs. A norma permite que o CILO seja instanciado em diferentes níveis, como estação e bay, para gerir intertravamentos adequados — ou seja, é possível ter permissivos avaliados tanto no nível de cada vão quanto no nível da estação como um todo, garantindo coerência entre as decisões locais e globais."
+        },
+        {
+          "id": "s3",
+          "title": "Bloqueios, comandos e modos de operação",
+          "type": "list",
+          "items": [
+            "O relé de bloqueio (86), muitas vezes virtualizado via GOOSE, é o intertravamento mandatório que restringe manobras inseguras após uma falta grave",
+            "O sinal 86T enviado via GOOSE entra na lógica intertravando e bloqueando o fechamento dos disjuntores",
+            "Os atributos BlkOpn (Block opening) e BlkCls (Block closing) atuam no bloqueio direto das manobras do disjuntor",
+            "O atributo Loc (Local operation) aponta manobra local efetuada de forma cabeada direta, sem uso do SAS",
+            "O atributo ctlModel especifica o nível de rigor do controle, como direct-operate ou select-before-operate"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Select Before Operate: selecionar antes de operar",
+          "type": "text",
+          "body": "Nem todo comando deve ser executado de imediato. O atributo ctlModel configura a modalidade do controle exigida, de comandos diretos até o SBO reforçado. No Select Before Operate, o SBO seleciona, avalia e reserva primeiramente o equipamento para garantir que a manobra seja estritamente segura e validada. A etapa de seleção no SBO garante a reserva e estabilidade do comando antes de efetivar a manobra de operar. O diagrama de estados ilustra a transição Select_req com teste reprovado levando à rejeição Select_rsp- — ou seja, se a seleção não passa nos permissivos, o comando é recusado antes mesmo de operar."
+        },
+        {
+          "id": "s5",
+          "title": "Lógicas customizadas e o sinal de teste",
+          "type": "note",
+          "body": "Lógicas customizadas como portas AND e OR são construídas na ferramenta utilizando blocos de CFC. Quando um IED falha, os demais bloqueiam unicamente as lógicas referentes ao equipamento falho sem descontinuar o restante do processo — preservando a continuidade operacional. Há ainda um cuidado essencial com testes: o parâmetro Test=TRUE instrui o receptor a abster-se de utilizar a informação em manobras e lógicas operativas de campo, evitando que dados de simulação provoquem manobras reais."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A lógica de controle migrou do cabo de cobre para a mensagem GOOSE na rede Ethernet, reduzindo entradas binárias e fiação de bloqueio. O CILO avalia os permissivos de manobra, instanciado em níveis de estação e bay; o bloqueio 86 (frequentemente virtualizado) restringe manobras inseguras, com atributos como BlkOpn, BlkCls e Loc. O ctlModel define o rigor do comando — do direct-operate ao SBO, que seleciona e reserva o equipamento antes de operar. Lógicas AND/OR são montadas em CFC, e o Test=TRUE protege o campo de manobras indevidas durante simulações."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Aplicações em SPCS",
+      "subtitle": "Cadeia de comando, falha de disjuntor, travas horizontais e descarte de carga",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A cadeia de comando: do CSWI ao XCBR",
+          "type": "text",
+          "body": "Em um Sistema de Proteção, Controle e Supervisão (SPCS), um comando de manobra não vai direto ao disjuntor: ele passa por uma verificação de permissivos. A ordem lógica parte do CSWI, consulta os status do CILO e culmina na operação física aplicada ao XCBR. Reforçando a segurança do comando, o Select Before Operate (SBO) restringe transições forçadas, reservando o objeto até a confirmação final do comando. Assim, cada manobra é validada pelos intertravamentos antes de chegar ao equipamento de potência."
+        },
+        {
+          "id": "s2",
+          "title": "Permissivos e bloqueios em operação",
+          "type": "list",
+          "items": [
+            "O LN Control Interlocking centraliza os permissivos operacionais, impedindo acionamentos contrários à normalidade",
+            "As mensagens de 86T ativam o bloqueio sistemático, obstando manobras que religariam tensões sobre o curto",
+            "Diante da falha vizinha, o conjunto bloqueia apenas as lógicas limitadas e aplica lógicas emergenciais restritas, resguardando o trânsito estável",
+            "O alimentador percebe a anomalia em sua zona e envia um bloqueio direcional para inibir o IED da retaguarda (montante)",
+            "A abertura por subtensão (função 27) faz o IED local alertar imediatamente o IED de barra via GOOSE"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Falha de disjuntor e travas horizontais",
+          "type": "text",
+          "body": "Quando um disjuntor não abre como deveria, a lógica precisa atuar à montante. A proteção de falha de disjuntor (Breaker Failure, 50BF) deflagra um GOOSE protetivo para abrir a energização proveniente dos disjuntores da origem. Para acelerar a eliminação de faltas sem perder coordenação, o escalonamento lógico suprime os degraus de tempo fixo, aplicando travas horizontais velozes que reduzem a duração das faltas. Ainda assim, para manter a seletividade e isolar o defeito, os tempos de montante ficam acima do escalão inferior (jusante)."
+        },
+        {
+          "id": "s4",
+          "title": "Gestão de carga, sincronismo e restabelecimento",
+          "type": "text",
+          "body": "A lógica de controle também administra o equilíbrio entre carga e geração. Os controladores integram a potência e abatem alimentadores não primordiais para preservar os contratos vigentes de tarifa elétrica. O supervisório estabelece as classes priorizadas programadas nos estágios do relé, coordenando o descarte acionado pela subfrequência. Já o sincronismo viabiliza acoplamentos limitados nas malhas, em tempos base mínimos, operando o repasse sem interrupções abruptas. Com o restabelecimento estável da tensão, o IED aciona sequencialmente os disjuntores efetuando a reaceleração gradativa."
+        },
+        {
+          "id": "s5",
+          "title": "Adaptação online, segurança de rede e testes",
+          "type": "note",
+          "body": "A mudança de ajustes online adapta a malha e a torna seletiva frente às diferentes tipologias de alimentação elétrica. Para conter o tráfego crítico, a aplicação de restrições nas Redes Virtuais confina as interações críticas às VLANs exclusivas pré-estabelecidas, evitando vazamentos. Nos ensaios, a ativação da tecla permite testar intertravamentos injetando o sinal restritivo na lógica dos IEDs à montante, sem maletas de injeção primária. E há proteção contra falsos disparos: ao contrário, a flag Test=TRUE denota simulação, forçando os receptores a negar a leitura e inviabilizando o trip efetivo sobre a malha viva."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "No SPCS, o comando percorre uma cadeia lógica: do CSWI ao CILO e ao XCBR, com o SBO reservando o objeto até a confirmação. O CILO centraliza permissivos e o 86T bloqueia religamentos sobre o curto; o 50BF dispara GOOSE à origem na falha de disjuntor, e travas horizontais aceleram a eliminação mantendo a seletividade montante/jusante. A lógica também gere carga (abate de alimentadores e descarte por subfrequência), sincronismo e restabelecimento gradual. Ajustes online tornam a malha adaptativa, VLANs confinam o tráfego crítico e o Test=TRUE protege a malha viva durante ensaios."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Implementação de Intertravamentos",
+      "subtitle": "Do SCD ao CFC: configuração, qualidade do GOOSE, confRev e segurança de rede",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O SCD: a planta inteira em um arquivo",
+          "type": "text",
+          "body": "A implementação de intertravamentos começa na engenharia da configuração. A avaliação do arranjo integrado depende do SCD, pois ele é o único portador de todas as interfaces e endereçamentos inter-relacionados da planta. O arquivo SCD concentra toda a modelagem de nós, amarrações e intertravamentos da planta e alimenta os simuladores. É a partir dele que se constrói e se valida o conjunto de lógicas que vão governar as manobras."
+        },
+        {
+          "id": "s2",
+          "title": "CFC: montando a lógica embarcada",
+          "type": "text",
+          "body": "A lógica booleana de intertravamento é construída dentro do próprio IED. O Continuous Function Chart (CFC) é o ambiente gráfico embarcado no IED que permite compilar lógicas booleanas para alarmes e intertravamentos. É nesse ambiente que portas, comparações e condicionantes são desenhadas e transformadas em comportamento ativo do equipamento, conectando os sinais recebidos via GOOSE às decisões de permitir ou bloquear cada manobra."
+        },
+        {
+          "id": "s3",
+          "title": "Como o assinante valida e usa o GOOSE",
+          "type": "list",
+          "items": [
+            "A assinatura ocorre lendo o MAC Address multicast no cabeçalho e validando os identificadores como o APPID do bloco de controle",
+            "O bloco Split SPS divide o telegrama GOOSE, permitindo extrair a condição de qualidade e sanidade do pacote recebido",
+            "A instrução Split segrega as porções booleanas e qualificativas do sinal, embasando atuações com atestado de integridade",
+            "Blocos funcionais separam a porção quality da mensagem GOOSE, fornecendo condicionantes para travar operações caso o publicador sinalize avarias",
+            "O TimeAllowedToLive (TAL) define a margem limite suportável sem contato; após a expiração, deflagra o desarme preventivo do sinal virtual"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Revisão de configuração e o bit de teste",
+          "type": "text",
+          "body": "A consistência entre publicador e assinante é verificada continuamente. A discrepância de revisões por alteração unilateral dispara no assinante o bloqueio de conformidade conhecido por confRev mismatch. De forma equivalente, erros na atualização dos arquivos provocam discordâncias no Configuration Revision, invalidando a leitura e a permissão daquele GOOSE no IED destino. Já durante ensaios, a marcação Test instrui a unidade assinante a negar operações executivas, desabilitando acionamentos físicos nos disjuntores; o bit de Teste orienta os clientes a invalidarem o dado para fins de acionamento real de campo. Nesse modo, o assinante acata o intertravamento para sinalização local (estando em teste), mas retém os disparos diretos nos disjuntores."
+        },
+        {
+          "id": "s5",
+          "title": "Segurança de rede e diagnóstico do tráfego",
+          "type": "note",
+          "body": "Os intertravamentos entre instalações precisam ficar confinados. As barreiras restritivas baseiam-se nas Virtual Local Area Networks (VLAN), impedindo a interatividade indevida entre usinas, e o confinamento é assegurado configurando regras nos uplinks dos switches para proibir a evasão da VLAN GOOSE para fora da planta. Para diagnosticar o sistema, o espelhamento encaminha cópias idênticas do tráfego, viabilizando ao analisador capturas profundas e cronométricas dos lances de intertravamento; o protocolo GOOSE é isolado nas capturas do analisador de rede rastreando a presença do Ethertype 0x88B8. E mesmo diante de falhas, em caso de colapso do vizinho, a proteção inibe apenas os laços a ele associados, mantendo saudáveis as rotinas que independem dele."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A implementação de intertravamentos parte do SCD, portador de todas as interfaces, endereçamentos e amarrações da planta, que alimenta os simuladores. A lógica booleana é compilada no CFC embarcado no IED. O assinante valida o GOOSE pelo MAC multicast e APPID, usa blocos Split para separar dado booleano de qualidade, e monitora o TAL para desarme preventivo na ausência de mensagens. Divergências de confRev/Configuration Revision bloqueiam o GOOSE, e o bit Test impede acionamentos físicos durante ensaios. A segurança apoia-se em VLANs e regras de uplink que confinam o GOOSE à planta, com espelhamento e rastreio do Ethertype 0x88B8 para diagnóstico, isolando falhas sem derrubar o restante do processo."
+        }
+      ]
+    }
+  ]
+}

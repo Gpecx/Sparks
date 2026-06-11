@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-35",
+  "moduleSubtitle": "Trabalho em Altura",
+  "moduleOrder": 2,
+  "trail": "Equipamentos de Proteção Individual (EPI/EPC)",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual EPI é obrigatório no SPIQ de retenção de queda e no acesso por cordas, segundo a NR-35?",
+      "options": [
+        "Cinturão de segurança tipo abdominal com talabarte sem absorvedor.",
+        "Cinturão de segurança tipo paraquedista.",
+        "Capacete com jugular dupla e calçado com bico de aço.",
+        "Cadeira suspensa acoplada a trava-quedas deslizante."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 35.6.9 estabelece que no SPIQ de retenção de queda e acesso por cordas, o EPI deve ser o cinturão de segurança tipo paraquedista.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a periodicidade máxima para a inspeção periódica do SPIQ?",
+      "options": [
+        "No mínimo uma vez a cada 6 meses.",
+        "No mínimo uma vez a cada 12 meses.",
+        "A cada 2 anos, coincidente com o treinamento de trabalho em altura.",
+        "Somente após retenção de queda ou avarias visíveis."
+      ],
+      "correctIndex": 1,
+      "explanation": "O subitem 35.6.6 determina que a inspeção periódica do SPIQ deve ser realizada 'no mínimo uma vez a cada 12 meses'.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a organização deve fazer com os elementos do SPIQ que sofreram impactos de queda?",
+      "options": [
+        "Enviar para manutenção e recertificação pelo fabricante.",
+        "Substituir apenas o absorvedor e o talabarte, mantendo o cinturão.",
+        "Inutilizá-los e descartá-los.",
+        "Promover inspeção extraordinária antes de nova liberação para uso."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 35.6.6.5 é taxativo: 'Os elementos do SPIQ que apresentarem defeitos, degradação, deformações ou sofrerem impactos de queda devem ser inutilizados e descartados'.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando o cinturão é usado para retenção de queda, o subitem 35.6.9.1.1 exige que seja dotado de talabarte integrado com qual componente?",
+      "options": [
+        "Trava-quedas retrátil de poliéster elástico.",
+        "Mosquetão de aço inoxidável com tripla trava.",
+        "Dispositivo limitador de movimentação.",
+        "Absorvedor de energia."
+      ],
+      "correctIndex": 3,
+      "explanation": "O subitem 35.6.9.1.1 exige que 'Quando utilizado para retenção de queda, o cinturão deve ser dotado de talabarte integrado com absorvedor de energia'.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a força máxima de impacto transmitida ao trabalhador que o SPIQ deve garantir?",
+      "options": [
+        "No máximo 6 kN.",
+        "No máximo 4 kN.",
+        "No máximo 5 kN.",
+        "No máximo 2 kN."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 35.6.7 determina que o SPIQ deve ser selecionado de forma que 'a força de impacto transmitida ao trabalhador seja de no máximo 6 kN'.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a seleção do Sistema de Proteção contra Quedas (SPQ) deve considerar?",
+      "options": [
+        "Apenas o SPIQ, descartando proteções perimetrais.",
+        "O SPCQ e o SPIQ.",
+        "Prioritariamente os EPIs auxiliares antes do SPQ.",
+        "Exclusivamente cabos e cordas de resgate."
+      ],
+      "correctIndex": 1,
+      "explanation": "Segundo o item 35.6.3, a seleção do SPQ deve considerar: 'a) SPCQ; b) SPIQ'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual prática é expressamente vedada pelo subitem 35.6.11.1.1 em relação ao talabarte?",
+      "options": [
+        "Utilizá-lo acoplado a absorvedor de energia dimensionado.",
+        "Fixá-lo aos olhais corretos do cinturão paraquedista.",
+        "Utilizá-lo conectado a outro talabarte, elemento de ligação ou extensor, com nós ou laços.",
+        "Conectar o engate a um trava-quedas deslizante em linha de vida vertical."
+      ],
+      "correctIndex": 2,
+      "explanation": "O subitem 35.6.11.1.1 proíbe o talabarte conectado a outro talabarte, elemento de ligação ou extensor, e com nós ou laços.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O SPIQ pode ser categorizado em quais tipos, conforme o item 35.6.4?",
+      "options": [
+        "Andaime fachadeiro, Acesso por cordas, Proteção passiva integrada e Posicionamento em balancim.",
+        "Redes horizontais, Guarda-corpos modulares e Cadeiras suspensas.",
+        "Proteção passiva, Linhas de vida flexíveis e Restrição de área.",
+        "Restrição de movimentação, Retenção de queda, Posicionamento no trabalho e Acesso por cordas."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 35.6.4 categoriza o SPIQ em: 'Restrição de movimentação', 'Retenção de queda', 'Posicionamento no trabalho' e 'Acesso por cordas'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a NR-35 classifica as inspeções obrigatórias do SPIQ realizadas antes da primeira utilização e antes de cada jornada?",
+      "options": [
+        "Inspeção Inicial (entre recebimento e primeira utilização) e Inspeção Rotineira (antes do início dos trabalhos).",
+        "Inspeção Pré-Requisito e Inspeção Laboratorial.",
+        "Inspeção Primária e Inspeção Contínua.",
+        "Inspeção Periódica Anual e Inspeção Extraordinária Visual."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 35.6.6 define: 'INSPEÇÃO INICIAL: entre o recebimento e a primeira utilização' e 'INSPEÇÃO ROTINEIRA: antes do início dos trabalhos'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a AR deve considerar para o dimensionamento seguro do SPIQ (item 35.6.11)?",
+      "options": [
+        "O CA do cinturão, medidas de resgate do andaime e calçados antiderrapantes.",
+        "A distância de queda livre, o fator de queda, a zona livre de queda e que o impacto não supere 6 kN.",
+        "O número de laços no talabarte e a adoção de extensor limitador.",
+        "O custo de manutenção e normas de isolamento elétrico do capacete."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 35.6.11 exige que a AR considere: 'a distância de queda livre', 'o fator de queda', 'a zona livre de queda' e impacto máximo de 6 kN.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "É obrigatória a utilização do SPQ sempre que não for possível evitar o trabalho em altura.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. O item 35.6.1 determina que 'É obrigatória a utilização de SPQ sempre que não for possível evitar o trabalho em altura'.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A organização pode focar exclusivamente no SPIQ, ficando isenta de analisar o SPCQ.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 35.6.3 determina expressamente que a seleção do SPQ deve considerar tanto o SPCQ quanto o SPIQ.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um cinturão paraquedista que sofreu impactos de queda sem romper costuras pode ser reaproveitado com a substituição do talabarte.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 35.6.6.5 determina que elementos que sofreram impactos de queda devem ser 'inutilizados e descartados', sem possibilidade de reaproveitamento.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O Trava-queda é definido no Glossário da NR-35 como dispositivo de segurança para proteção do usuário contra quedas em operações com movimentação vertical ou horizontal.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. Esta é exatamente a definição de Trava-queda no Glossário da NR-35.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No acesso por cordas (Anexo I), o trabalhador pode estar conectado a apenas uma corda com supervisão dupla no solo.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 3.2 do Anexo I determina que 'durante a execução, o trabalhador deve estar conectado a pelo menos duas cordas em pontos de ancoragem independentes'.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O Glossário da NR-35 define o SPQ como sistema destinado a eliminar o risco de queda dos trabalhadores ou a ____ as consequências da queda.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "minimizar"
+        }
+      ],
+      "explanation": "O Glossário define SPQ como 'Sistema destinado a eliminar o risco de queda dos trabalhadores ou a minimizar as consequências da queda'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O talabarte usado na retenção de queda deve trazer obrigatoriamente incorporado o ____ de energia, responsável por dissipar a energia cinética.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "absorvedor"
+        }
+      ],
+      "explanation": "O subitem 35.6.9.1.1 exige que o talabarte para retenção de queda integre o 'absorvedor de energia'.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O item 35.6.2 estabelece que o SPQ deve ter ____ para suportar a força máxima aplicável prevista quando de uma queda.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "resistência"
+        }
+      ],
+      "explanation": "O item 35.6.2, alínea 'd', exige que o SPQ 'ter resistência para suportar a força máxima aplicável prevista quando de uma queda'.",
+      "difficulty": "hard"
+    }
+  ]
+}

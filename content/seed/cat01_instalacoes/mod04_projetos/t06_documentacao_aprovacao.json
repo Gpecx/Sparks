@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Projetos Elétricos Industriais",
+  "moduleSubtitle": "Fundamentos, normas, dimensionamento e documentação de projetos",
+  "moduleOrder": 3,
+  "trail": "Documentação e Aprovação de Projetos",
+  "trailOrder": 5,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "As empresas estao obrigadas a manter atualizados os esquemas unifilares com especificacoes de qual sistema?",
+      "options": [
+        "Sistema de aterramento e dispositivos de protecao",
+        "Sistema de refrigeracao e ventilacao",
+        "Sistema de ponto eletronico",
+        "Sistema de telefonia e dados"
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 10.2.3 da NR-10 obriga manter esquemas unifilares atualizados com especificacoes do sistema de aterramento e dispositivos de protecao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A partir de qual carga instalada o estabelecimento deve constituir e manter o Prontuario de Instalacoes Eletricas?",
+      "options": [
+        "50 kW",
+        "75 kW",
+        "100 kW",
+        "150 kW"
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.2.4 da NR-10 estabelece a obrigatoriedade do prontuario para carga instalada superior a 75 kW.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quem e o responsavel exclusivo pela elaboracao dos documentos tecnicos previstos no Prontuario de Instalacoes Eletricas?",
+      "options": [
+        "Trabalhador capacitado",
+        "Tecnico de seguranca do trabalho",
+        "Profissional legalmente habilitado",
+        "Membro eleito da CIPA"
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 10.2.7 da NR-10 determina que os documentos tecnicos do Prontuario devem ser elaborados por profissional legalmente habilitado.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No memorial descritivo do projeto eletrico, o que deve ser especificado quanto aos dispositivos de protecao?",
+      "options": [
+        "A cor da pintura do involucro",
+        "O fabricante e o custo de aquisicao",
+        "O peso exato do equipamento",
+        "O principio funcional e a compatibilidade com a instalacao"
+      ],
+      "correctIndex": 3,
+      "explanation": "As alineas f e g do item 10.3.9 da NR-10 exigem a descricao do principio funcional e da compatibilidade dos dispositivos de protecao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para instalacoes em atmosferas potencialmente explosivas, o que o Prontuario deve conter obrigatoriamente?",
+      "options": [
+        "Certificacoes de equipamentos no ambito do Sistema Brasileiro de Certificacao",
+        "Licenca internacional ambiental",
+        "Planta arquitetonica em 3D",
+        "Certificado de garantia estendida"
+      ],
+      "correctIndex": 0,
+      "explanation": "Os itens 10.2.4 alinea f e 10.9.2 da NR-10 exigem as certificacoes dos equipamentos em areas classificadas pelo Sistema Brasileiro de Certificacao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para empresas que operam no SEP, quais documentos adicionais devem constar no Prontuario de Instalacoes Eletricas?",
+      "options": [
+        "Anotacao de Responsabilidade Tecnica civil",
+        "Descricao dos procedimentos para emergencias e certificacoes de EPC e EPI",
+        "Relatorio de faturamento de energia",
+        "Mapa de risco do bairro vizinho"
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.2.5 da NR-10 exige para o SEP a descricao dos procedimentos para emergencias e as certificacoes dos EPCs e EPIs.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a NR-01 exige que a documentacao digitalizada de seguranca do trabalho seja preservada?",
+      "options": [
+        "Impressa em via dupla autenticada",
+        "Exclusivamente em formato PDF aberto",
+        "Garantindo autenticidade, integridade, disponibilidade e rastreabilidade",
+        "Gravada em pen-drives locais"
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 1.6.4 da NR-01 determina a preservacao com validade juridica, garantindo autenticidade, integridade, disponibilidade e rastreabilidade.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-10, qual comprovacao de teste e exigida como parte integrante do Prontuario de Instalacoes Eletricas?",
+      "options": [
+        "Testes de tracao mecanica de cabos",
+        "Ensaios de emissao de ruidos",
+        "Testes de iluminamento predial",
+        "Resultados dos testes de isolacao eletrica em equipamentos de protecao"
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 10.2.4 alinea e da NR-10 exige os resultados dos testes de isolacao eletrica realizados em equipamentos de protecao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O memorial descritivo do projeto exige documentacao sobre os circuitos. Qual item atende a essa exigencia?",
+      "options": [
+        "A descricao do sistema de identificacao de circuitos eletricos e equipamentos",
+        "A lista de precos dos disjuntores",
+        "O diagrama de blocos do software do CLP",
+        "O relatorio de descarte de cabos"
+      ],
+      "correctIndex": 0,
+      "explanation": "A alinea c do item 10.3.9 da NR-10 exige a descricao do sistema de identificacao de circuitos eletricos e equipamentos no memorial descritivo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a NR-01, por quanto tempo o historico das atualizacoes do inventario de riscos ocupacionais deve ser mantido?",
+      "options": [
+        "5 anos",
+        "20 anos",
+        "15 anos",
+        "10 anos"
+      ],
+      "correctIndex": 1,
+      "explanation": "O subitem 1.5.7.3.3.1 da NR-01 estabelece que o historico das atualizacoes deve ser mantido por um periodo minimo de 20 anos.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O projeto eletrico de uma instalacao industrial pode ser assinado por qualquer trabalhador qualificado com curso basico da NR-10.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 10.3.8 da NR-10 exige de forma obrigatoria que o projeto eletrico seja assinado exclusivamente por profissional legalmente habilitado.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O memorial descritivo do projeto eletrico deve conter predefinidas as recomendacoes de restricoes e advertencias quanto ao acesso de pessoas.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. O item 10.3.9 alinea d da NR-10 determina que o memorial contenha recomendacoes e restricoes de acesso de pessoas.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Estabelecimentos com carga instalada de 50 kW ja sao legalmente obrigados a constituir o Prontuario de Instalacoes Eletricas.",
+      "correctAnswer": false,
+      "explanation": "Falso. O item 10.2.4 da NR-10 define que a obrigatoriedade do Prontuario de Instalacoes Eletricas e para cargas superiores a 75 kW.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os documentos fisicos assinados manualmente podem ser arquivados em meio digital com certificado ICP-Brasil, mantendo sua validade legal.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. O item 1.6.3 da NR-01 permite o arquivamento em meio digital mediante processo de digitalizacao com certificado ICP-Brasil.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A documentacao das inspecoes do sistema de protecao contra descargas atmosfericas (SPDA) e opcional na formacao do Prontuario eletrico.",
+      "correctAnswer": false,
+      "explanation": "Falso. A alinea b do item 10.2.4 da NR-10 exige obrigatoriamente a documentacao das inspecoes e medicoes do SPDA e aterramentos no prontuario.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O memorial descritivo do projeto deve detalhar e prever as precaucoes aplicaveis em face das influencias ____ no local da instalacao.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "externas"
+        }
+      ],
+      "explanation": "A alinea e do item 10.3.9 da NR-10 estabelece que o memorial descritivo contenha precaucoes aplicaveis em face das influencias externas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para empresas que operam no SEP, o Prontuario de Instalacoes Eletricas deve acrescentar as ____ dos equipamentos de protecao coletiva e individual.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "certificacoes"
+        }
+      ],
+      "explanation": "O item 10.2.5 alinea b da NR-10 impoe a inclusao das certificacoes dos equipamentos de protecao coletiva e individual no SEP.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O Prontuario de Instalacoes Eletricas deve conter o relatorio tecnico das inspecoes atualizadas, emitido com as respectivas ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "recomendacoes"
+        }
+      ],
+      "explanation": "O item 10.2.4 alinea g da NR-10 exige a presenca de um relatorio tecnico das inspecoes atualizadas com recomendacoes.",
+      "difficulty": "hard"
+    }
+  ]
+}

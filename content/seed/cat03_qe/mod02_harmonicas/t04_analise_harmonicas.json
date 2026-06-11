@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Harmônicas e Distorção",
+  "moduleSubtitle": "Fundamentos, fontes, impactos, analise e mitigacao",
+  "moduleOrder": 1,
+  "trail": "Análise de Harmônicas",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual ferramenta matematica os analisadores de qualidade de energia utilizam para efetuar os calculos harmonicos precisos?",
+      "options": [
+        "Transformada de Wavelet",
+        "Algoritmo de Viterbi",
+        "FFT",
+        "Transformada de Laplace"
+      ],
+      "correctIndex": 2,
+      "explanation": "O artigo Wrindu sobre analisadores afirma que o condicionamento de sinal garante representacao precisa para calculos harmonicos baseados em FFT.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a Distorcao Harmonica Total (THD) quantifica diretamente em um sistema eletrico?",
+      "options": [
+        "A potencia reativa exigida pela carga",
+        "O desvio continuo de frequencia da rede",
+        "A distorcao total de uma forma de onda",
+        "O fator de potencia instantaneo capacitivo"
+      ],
+      "correctIndex": 2,
+      "explanation": "O manual de Solucoes da WEG define que a maneira de quantificar a distorcao total de uma forma de onda e atraves da Distorcao Harmonica Total.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a norma IEEE 519-2022, ate qual ordem harmonica o calculo da THD e da TDD deve englobar as componentes?",
+      "options": [
+        "Vigesima ordem",
+        "Quinquagesima ordem",
+        "Centesima ordem",
+        "Milesima ordem"
+      ],
+      "correctIndex": 1,
+      "explanation": "O documento ABB IEEE 519-2022 especifica que a THD e a TDD consideram as componentes harmonicas ate a 50 ordem (quinquagesima ordem).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No que diz respeito as interharmonicas, como os calculos de THD e TDD sao abordados pela atualizacao da norma IEEE 519?",
+      "options": [
+        "Ambos multiplicam o valor da interharmonica pela fundamental.",
+        "As interharmonicas sao excluidas especificamente dos calculos.",
+        "Apenas a TDD engloba as interharmonicas em sua equacao base.",
+        "Elas sao substituidas pela taxa de distorcao harmonica par."
+      ],
+      "correctIndex": 1,
+      "explanation": "Segundo o guia de revisao da ABB sobre a IEEE 519-2022, o calculo do conteudo harmonico exclui especificamente as interharmonicas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual indicador harmonico o regulamento PRODIST estabelece exclusivamente para contabilizar as componentes multiplas de tres?",
+      "options": [
+        "DITh%",
+        "DTTi%",
+        "DTTp%",
+        "DTT3%"
+      ],
+      "correctIndex": 3,
+      "explanation": "O PRODIST Modulo 8 define explicitamente a sigla DTT3% como a distorcao harmonica total de tensao para as componentes multiplas de 3.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o indicador TDD (Total Demand Distortion) e expresso de forma percentual segundo os criterios da IEEE 519-2022?",
+      "options": [
+        "Como percentual da tensao media de pico do alimentador.",
+        "Como percentual da corrente maxima de demanda.",
+        "Como percentual da impedancia de sequencia zero do circuito.",
+        "Como a razao entre a potencia reativa e a ativa."
+      ],
+      "correctIndex": 1,
+      "explanation": "O documento da ABB informa na definicao da IEEE 519-2022 que a TDD expressa o conteudo harmonico como um percentual da corrente maxima de demanda.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a limitacao principal da Transformada Rapida de Fourier (FFT) ao realizar a decomposicao de sinais nao estacionarios?",
+      "options": [
+        "A incapacidade matematica de processar correntes continuas superiores a 10 Amperes.",
+        "A representacao no dominio da frequencia impossibilita identificar o momento temporal da ocorrencia do disturbio.",
+        "A FFT exige que as frequencias do disturbio operem estritamente acima da faixa de micro-ondas.",
+        "A introducao intencional de zonas mortas de frequencia nos barramentos de medicao."
+      ],
+      "correctIndex": 1,
+      "explanation": "A dissertacao do IFPB aponta que na FFT a informacao temporal fica indisponivel, impossibilitando afirmar quando determinado evento ocorreu no sinal analisado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na avaliacao de distorcoes harmonicas utilizando medidores Classe A segundo o PRODIST, qual e a incerteza maxima permitida?",
+      "options": [
+        "Inferior ou igual a 5 por cento da tensao medida.",
+        "Inferior ou igual a 10 por cento da tensao nominal.",
+        "Exatamente 0,15 por cento da tensao de referencia.",
+        "Menor que 2 por cento do pico da corrente transitoria."
+      ],
+      "correctIndex": 0,
+      "explanation": "O documento informativo da KRA2 Energia dita que a incerteza de medicao para distorcoes harmonicas na Classe A deve ser inferior ou igual a 5 por cento da tensao medida.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o metodo de Decomposicao Variacional de Modos (VMD) estima a largura de banda de cada modo harmonico?",
+      "options": [
+        "Pela amplificacao dos ruidos gaussianos com relacao sinal-ruido fixa de 50 dB.",
+        "Pelo meio quadrado da norma L2 do gradiente do sinal de demodulacao.",
+        "Apenas pela adicao do componente basico de Transformada Wavelet Discreta.",
+        "Pelo calculo exclusivo do logaritmo natural do angulo de defasagem de sequencia zero."
+      ],
+      "correctIndex": 1,
+      "explanation": "O texto do IFPB descreve tecnicamente que a largura de banda do sinal de cada modo no algoritmo VMD e estimada por meio quadrado da norma L2 do gradiente do sinal de demodulacao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao utilizar medidores Classe S segundo as regras do PRODIST, quais sao as caracteristicas exigidas para os registros de desequilibrio e harmonicas?",
+      "options": [
+        "Uso exclusivo de Subgrupos Harmonicos e medicao de sequencia zero compulsoria em todas as linhas.",
+        "Uso de Grupos ou Subgrupos Harmonicos para harmonicas, sendo o calculo da sequencia zero totalmente opcional.",
+        "Obrigatoriedade de extrair todas as caracteristicas baseando-se no metodo da Decomposicao Empirica de Modos.",
+        "Incerteza pre-fixada em exatos 5 por cento apenas para as tensoes medidas que possuem ordem impar."
+      ],
+      "correctIndex": 1,
+      "explanation": "O material KRA2 Energia detalha que a Classe S pode usar Grupos ou Subgrupos Harmonicos, e o calculo do desequilibrio de sequencia zero e opcional.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "De acordo com os padroes tecnologicos, os analisadores de qualidade de energia capturam as formas de onda e empregam calculos baseados na Transformada Rapida de Fourier (FFT) para sua representacao harmonica.",
+      "correctAnswer": true,
+      "explanation": "O artigo Wrindu sobre analisadores de energia indica claramente que o condicionamento de sinal garante precisao de ondas para os calculos harmonicos baseados em FFT.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O indicador harmonico DTTi% normatizado e o encarregado pelo calculo e representacao da distorcao harmonica total associada as componentes pares nao multiplas de tres no padrao PRODIST.",
+      "correctAnswer": false,
+      "explanation": "O PRODIST Modulo 8 define a sigla DTTi% como a distorcao para componentes impares. As componentes pares nao multiplas de tres recebem a sigla DTTp%.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na aplicacao da tecnica de processamento VMD sobre um sinal eletrico com disturbio, a Funcao de Modo Intrinseco principal (IMF 1) normalmente contem a frequencia fundamental limpa isolada das harmonicas.",
+      "correctAnswer": true,
+      "explanation": "Na dissertacao do IFPB, as decomposicoes VMD exibem a frequencia de 60 Hz fundamental isolada de forma eficaz e limpa na IMF 1 para avaliacao das demais frequencias nas outras IMFs.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A Decomposicao Empirica de Modos (EMD) e apontada tecnicamente como um metodo superior ao VMD pois separa as frequencias harmonicas de banda lateral com perfeita precisao durante os curtos-circuitos.",
+      "correctAnswer": false,
+      "explanation": "A pesquisa do IFPB avalia a EMD como sendo ineficiente na deteccao das caracteristicas de banda lateral e altamente sensivel a ruido quando comparada com o metodo VMD.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na decomposicao e analise de sinais eletricos contaminados com ruido branco gaussiano, a tecnica VMD apresenta maior robustez em virtude do filtro de Wiener que se encontra embutido para atualizacao dos modos.",
+      "correctAnswer": true,
+      "explanation": "O estudo da IFPB relata expressamente que a maior robustez do VMD em presenca de ruido ocorre devido ao filtro de Wiener estar embutido no processo de atualizacao de modos do algoritmo.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As definicoes normativas atualizadas da IEEE 519-2022 estabelecem que as formulas de TDD e THD abrangem as componentes ate a ordem 50, excluindo porem especificamente as ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "interharmonicas"
+        }
+      ],
+      "explanation": "O texto oficial de revisao da ABB para a IEEE 519-2022 expressa literalmente que os componentes interharmonicos devem ser especificamente excluidos dos indices TDD e THD.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O indicador padronizado pelo PRODIST denominado DTT95% representa estatisticamente o exato valor da distorcao harmonica total que foi superado em apenas 5 por cento das ____ leituras validas consecutivas do ciclo.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "1008"
+        }
+      ],
+      "explanation": "A tabela 1 e a metodologia do PRODIST Modulo 8 definem que o percentil correspondente ao DTT95% diz respeito ao valor superado em apenas 5 por cento das 1008 leituras validas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para assegurar a precisao das apuracoes harmonicas, a incerteza maxima tolerada pelo PRODIST em instrumentos de Classe A e de mais ou menos ____ por cento em relacao a tensao medida.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "5,0"
+        }
+      ],
+      "explanation": "O material informativo do PRODIST pela KRA2 Energia fixa normativamente que a incerteza de medicao na Classe A e inferior ou igual a +/- 5,0 por cento da tensao.",
+      "difficulty": "hard"
+    }
+  ]
+}

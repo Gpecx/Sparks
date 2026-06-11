@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Curto-Circuito",
+  "moduleSubtitle": "Fundamentos, tipos de falta, modelagem, cálculo e aplicação",
+  "moduleOrder": 1,
+  "trail": "Modelagem de Equipamentos para Curto",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Como a impedancia de sequencia positiva equivalente da concessionaria em valores pu e determinada?",
+      "options": [
+        "Multiplicando a potencia de curto-circuito pelo fator de assimetria",
+        "Multiplicando a tensao nominal pela corrente assimetrica de defeito",
+        "Dividindo a tensao de linha pela impedancia de sequencia zero",
+        "Dividindo a potencia base do sistema pela potencia de curto-circuito trifasico"
+      ],
+      "correctIndex": 3,
+      "explanation": "O equivalente da fonte em pu e calculado pela relacao direta entre a potencia base escolhida para o estudo e a potencia de curto-circuito trifasico informada.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual reatancia e adotada na modelagem do gerador sincrono para determinar a corrente maxima de curto-circuito nos instantes iniciais?",
+      "options": [
+        "Reatancia subtransitoria de eixo direto",
+        "Reatancia transitoria de quadratura",
+        "Reatancia sincrona de eixo direto",
+        "Reatancia de dispersao do estator"
+      ],
+      "correctIndex": 0,
+      "explanation": "Para se obter a maior corrente de contribuicao inicial a reatancia subtransitoria de eixo direto e empregada na montagem do circuito equivalente do gerador.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que o ramo shunt de magnetizacao do transformador e usualmente ignorado nos modelos para calculo de curto-circuito?",
+      "options": [
+        "Sua admitancia causa divergencia nos calculos matriciais da rede",
+        "Sua impedancia e excessivamente elevada frente a impedancia serie limitadora",
+        "Ele conduz toda a corrente de falta fase para terra do sistema",
+        "Ele afeta negativamente o deslocamento angular das componentes simetricas"
+      ],
+      "correctIndex": 1,
+      "explanation": "Por apresentar uma impedancia paralela muito grande em relacao a impedancia serie principal o ramo shunt drena pouca corrente e e omitido para simplificar a modelagem.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na modelagem basica de linhas curtas e medias para calculo de curto-circuito qual parametro eletrico e tipicamente desconsiderado?",
+      "options": [
+        "A resistencia serie dos condutores principais",
+        "A reatancia indutiva de sequencia positiva",
+        "A admitancia shunt ou capacitancia para a terra",
+        "A impedancia mutua de sequencia zero"
+      ],
+      "correctIndex": 2,
+      "explanation": "As metodologias de curto-circuito frequentemente ignoram a capacitancia shunt das linhas reduzindo o modelo a um ramo serie puramente resistivo e indutivo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os grandes motores de inducao sao representados nas analises dos primeiros ciclos de um curto-circuito?",
+      "options": [
+        "Cargas de impedancia constante absorvendo energia passiva da rede",
+        "Elementos passivos descartados devido a queda brusca de tensao",
+        "Capacitores ideais fornecendo potencia reativa de magnetizacao",
+        "Fontes de tensao em serie com uma reatancia subtransitoria equivalente"
+      ],
+      "correctIndex": 3,
+      "explanation": "Devido a inercia e ao fluxo residual no estator os motores de inducao agem momentaneamente como geradores e sao modelados por fonte e reatancia subtransitoria.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na mudanca de base como a impedancia percentual de um transformador e convertida para a nova base do sistema?",
+      "options": [
+        "Multiplicando o valor original pela relacao entre a potencia base do sistema e a potencia nominal do equipamento",
+        "Dividindo o valor original pelo quadrado da tensao nominal de linha do barramento local",
+        "Multiplicando o valor original pela raiz quadrada da potencia de curto-circuito da fonte",
+        "Mantendo o valor inalterado pois a impedancia percentual de placa e uma constante fisica"
+      ],
+      "correctIndex": 0,
+      "explanation": "A conversao para a base comum exige a multiplicacao da impedancia original pela divisao da potencia base nova pela potencia base de placa do equipamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No diagrama de impedancias de sequencia zero de que forma a reatancia de aterramento do neutro do gerador e incorporada a malha?",
+      "options": [
+        "Pelo seu valor ohmico direto em paralelo com a reatancia transitoria do estator",
+        "Multiplicada por tres e conectada em serie com o circuito equivalente do gerador",
+        "Dividida pela raiz quadrada de tres e vinculada diretamente a barra de referencia",
+        "Substituida algebricamente por um curto-circuito franco incondicional para a terra"
+      ],
+      "correctIndex": 1,
+      "explanation": "Como a corrente de neutro concentra a soma das tres correntes de fase a impedancia de aterramento e modelada multiplicada por tres no diagrama de sequencia zero.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a particularidade da impedancia de sequencia zero para a modelagem de um transformador com conexao delta e estrela aterrada visto pelo lado.",
+      "options": [
+        "A impedancia e percebida como perfeitamente nula devido ao isolamento galvanico",
+        "O circuito apresenta admitancia infinita escoando toda a corrente pela malha fechada",
+        "A rede de sequencia zero e vista como um circuito aberto com impedancia infinita",
+        "A defasagem angular anula os componentes simetricos refletidos para o enrolamento secundario"
+      ],
+      "correctIndex": 2,
+      "explanation": "A corrente de sequencia zero circula em malha fechada internamente no delta mas nao flui para as linhas externas tornando a impedancia vista do lado delta infinita.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para obter o modelo equivalente por fase de um transformador de tres enrolamentos qual configuracao topologica e matematicamente adotada?",
+      "options": [
+        "Tres fontes de tensao independentes arranjadas em paralelo com resistores puros de dispersao",
+        "Uma malha fechada em triangulo interligando fisicamente os tres niveis de tensao nominais",
+        "Um unico ramo serie agregando linearmente as reatancias de dispersao de todos os enrolamentos",
+        "Uma ligacao em estrela contendo as impedancias equivalentes primaria secundaria e terciaria"
+      ],
+      "correctIndex": 3,
+      "explanation": "A modelagem de transformadores de tres enrolamentos utiliza uma configuracao central em estrela cujos ramos refletem parcelas obtidas dos ensaios de curto-circuito.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a principal consequencia de uma relacao elevada de reatancia por resistencia na modelagem transitoria da corrente de curto-circuito?",
+      "options": [
+        "Produz uma constante de tempo longa mantendo a assimetria severa por mais ciclos",
+        "Atenua subitamente a componente de corrente continua limitando o fator total de assimetria",
+        "Minimiza a corrente subtransitoria no milissegundo inicial reduzindo os esforcos eletrodinamicos",
+        "Extingue a componente aperiodica no exato instante do estabelecimento inicial da falta trifasica"
+      ],
+      "correctIndex": 0,
+      "explanation": "A constante de tempo do decaimento da componente continua e diretamente proporcional a relacao reatancia sobre resistencia prologando a assimetria em valores altos.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para simplificar os calculos computacionais e manuais de curto-circuito as correntes normais de carga do sistema sao frequentemente ignoradas nas.",
+      "correctAnswer": true,
+      "explanation": "As correntes de carga sao dezenas de vezes menores que as correntes de defeito sendo convencionalmente desprezadas para agilizar as simulacoes estaticas de curto-circuito.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A impedancia de sequencia negativa de um transformador de potencia estatico e rigorosamente igual a sua respectiva impedancia de sequencia positiva.",
+      "correctAnswer": true,
+      "explanation": "Por ser um equipamento puramente estatico e passivo o transformador reage de forma identica as inversoes de giro na sequencia de fases possuindo as mesmas impedancias.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na modelagem classica inicial de curtos-circuitos assume-se que as maquinas sincronas operam em vazio com tensao interna pre-falta ajustada.",
+      "correctAnswer": true,
+      "explanation": "As recomendacoes consolidadas de modelagem adotam tensoes pre-falta unitarias com angulo nulo para as fontes facilitando a montagem e operacao da matriz de impedancia nodal.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O circuito equivalente de sequencia zero de um motor de inducao trifasico conectado em delta apresenta impedancia nula pois absorve integralmente.",
+      "correctAnswer": false,
+      "explanation": "A conexao em delta atua fisicamente bloqueando qualquer passagem de corrente de sequencia zero do equipamento para a terra apresentando impedancia infinita vista pelos terminais.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na construcao computacional da rede de sequencia zero as impedancias mutuas entre linhas de transmissao aereas paralelas devem ser modeladas.",
+      "correctAnswer": true,
+      "explanation": "Linhas fisicamente paralelas e proximas possuem acoplamento magnetico transversal de sequencia zero critico e ignora-lo corrompe os fluxos esperados em defeitos para a terra.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No sistema por unidade a conversao da impedancia de um equipamento para a nova base da rede exige a multiplicacao de seu valor original pela ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "nominal"
+        }
+      ],
+      "explanation": "A transposicao para uma base unificada escala os dados originais atraves da divisao da base arbitraria geral do estudo pela potencia nominal de placa do equipamento.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Devido ao extenso percurso de retorno formado fisicamente atraves do solo a impedancia de sequencia ____ de uma linha de transmissao costuma ser.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "zero"
+        }
+      ],
+      "explanation": "O circuito englobando o fluxo pelo solo e pelo cabo guarda-chuva exibe grande dispersao magnetica elevando a reatancia de sequencia zero comparativamente com os laços de fase.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para incorporar rigorosamente a resistencia de aterramento na malha de sequencia zero equivalente do gerador sincrono o valor fisico real em ohms ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "tres"
+        }
+      ],
+      "explanation": "Ao agrupar a rede equivalente unifilar a corrente de neutro equivale a soma dos tres fasores identicos o que embasa matematicamente triplicar o valor da impedancia inserida.",
+      "difficulty": "hard"
+    }
+  ]
+}

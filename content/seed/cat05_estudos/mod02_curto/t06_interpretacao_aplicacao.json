@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Curto-Circuito",
+  "moduleSubtitle": "Fundamentos, tipos de falta, modelagem, cálculo e aplicação",
+  "moduleOrder": 1,
+  "trail": "Interpretação e Aplicação dos Resultados",
+  "trailOrder": 5,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a finalidade principal do cálculo dos valores máximos das correntes de curto-circuito nos projetos elétricos?",
+      "options": [
+        "Definir a energia ativa consumida mensalmente pela instalação.",
+        "Calcular o rendimento térmico nominal do transformador de força.",
+        "Dimensionar a capacidade de ruptura dos dispositivos de interrupção e a suportabilidade dos equipamentos.",
+        "Ajustar unicamente a configuração base de sub-tensão do relé."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os valores máximos dimensionam disjuntores, fusíveis e os esforços eletrodinâmicos para suportar falhas severas de forma segura.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para os ajustes precisos das unidades instantâneas dos relés de proteção, qual grandeza de falta é fundamental avaliar?",
+      "options": [
+        "A corrente capacitiva nominal gerada pela linha.",
+        "A corrente contínua estática de magnetização do núcleo.",
+        "A corrente puramente ativa oriunda da carga de pico.",
+        "A corrente assimétrica e subtransitória de curto-circuito."
+      ],
+      "correctIndex": 3,
+      "explanation": "O ajuste seguro das unidades instantâneas exige o conhecimento prévio dos valores de pico e das correntes assimétricas severas de curto-circuito.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o cálculo da corrente de curto-circuito fase para terra mínima determina diretamente no ajuste da proteção?",
+      "options": [
+        "A garantia de que o relé possua sensibilidade adequada para atuar na falha.",
+        "O limite de aquecimento suportável dos painéis da subestação.",
+        "A tração de atração mecânica dos cabos flexíveis de distribuição.",
+        "O fator de potência exigido na partida direta do motor."
+      ],
+      "correctIndex": 0,
+      "explanation": "Ajustar com base em valores mínimos garante a sensibilidade vital do esquema de proteção, assegurando que o defeito será detectado.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na seleção de transformadores de corrente para esquemas de proteção, o que o fator de sobrecorrente nominal garante na medição?",
+      "options": [
+        "A amplificação da distorção harmônica no circuito secundário.",
+        "A manutenção da classe de exatidão do equipamento mesmo sob altas correntes de curto-circuito.",
+        "A conversão integral da energia ativa residual em energia reativa.",
+        "A total eliminação de ruídos eletromagnéticos transitórios induzidos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O fator de sobrecorrente garante que o transformador de corrente mantenha a precisão exigida frente a correntes extremas de falta.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que as análises de curto-circuito são imprescindíveis para o projeto seguro da malha de aterramento de uma subestação?",
+      "options": [
+        "Para maximizar propositalmente a impedância térmica do solo profundo.",
+        "Para apurar a potência reativa capacitiva do banco principal.",
+        "Para limitar os potenciais de toque e passo a níveis toleráveis frente a correntes máximas para a terra.",
+        "Para anular as correntes harmônicas rotativas de sequência positiva."
+      ],
+      "correctIndex": 2,
+      "explanation": "A malha dimensionada sob máxima corrente de falta à terra assegura que os potenciais de toque e passo permaneçam abaixo do limite suportável humano.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual variável da corrente de curto-circuito é amplamente empregada para estabelecer os requisitos de coordenação das unidades temporizadas dos relés?",
+      "options": [
+        "A corrente nominal prolongada de partida dos grandes motores.",
+        "A componente aperiódica contínua de decaimento natural lento.",
+        "A corrente de magnetização residual no núcleo do transformador de medição.",
+        "O valor eficaz máximo das correntes simétricas de curtos-circuitos."
+      ],
+      "correctIndex": 3,
+      "explanation": "O valor eficaz máximo das correntes simétricas baliza primariamente os ajustes de coordenação cronométrica das unidades de retardo temporizadas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No dimensionamento da suportabilidade de condutores e barramentos submetidos a curto-circuito, o cálculo de fadiga térmica apoia-se em qual premissa?",
+      "options": [
+        "Todo o calor proveniente da falta é retido de modo adiabático na massa condutora.",
+        "A corrente nominal excedente é dissipada rapidamente no ar circundante por irradiação livre.",
+        "A isolação plástica refrigera ativamente a temperatura de crista do núcleo trançado.",
+        "As fortes forcas de repulsão eletromagnética cancelam perfeitamente as perdas termicas superficiais."
+      ],
+      "correctIndex": 0,
+      "explanation": "Dada a extrema rapidez da interrupção da proteção, o aquecimento é classificado como adiabático, com retenção integral do calor no cabo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como é verificada preliminarmente a adequação do fator de sobrecorrente na especificação prática de um transformador de corrente?",
+      "options": [
+        "A corrente primária vezes a relação nominal unitária deve igualar rigorosamente a carga instalada.",
+        "A corrente primária nominal do equipamento multiplicada usualmente por vinte deve ser maior que a corrente máxima de curto-circuito.",
+        "A corrente de curto-circuito dividida pelo fator térmico gera diretamente a carga suportada.",
+        "A raiz quadrada da potência nominal da máquina de geração dita linearmente a relação final."
+      ],
+      "correctIndex": 1,
+      "explanation": "A prática de projeto atesta que a corrente primária nominal multiplicada por vinte deve superar de forma abrangente o nível calculado da falta.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao ajustar relés de sobrecorrente de fase para motores industriais, qual condição transitória operativa deve figurar integralmente abaixo da curva.",
+      "options": [
+        "A falha térmica por perda total de campo com fluxo reverso senoidal constante.",
+        "O afundamento da tensão capacitiva em regime puramente estacionário de carga.",
+        "A corrente de irrupção e aceleração acompanhada do respectivo fator de assimetria nos ciclos iniciais.",
+        "O defeito de curto-circuito monofásico mantido permanentemente no estator imerso."
+      ],
+      "correctIndex": 2,
+      "explanation": "As curvas da proteção são rigorosamente ajustadas para permitirem a partida segura, alocando-se acima da corrente e do tempo de irrupção do atuador.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na verificação final da sensibilidade da proteção por meio do curto-circuito mínimo fase para terra, qual é o artificio comumente empregado nos.",
+      "options": [
+        "Aumentar artificialmente o fator de assimetria exponencial da componente contínua total do ramo.",
+        "Anular integralmente os acoplamentos mútuos das linhas de transmissão físicas paralelas adjacentes.",
+        "Elevar exclusivamente a malha de sequência positiva e zerar forçosamente o circuito de sequência negativa.",
+        "Inserir estrategicamente uma resistência de contato estimada em quarenta ohms no local da falha."
+      ],
+      "correctIndex": 3,
+      "explanation": "Para aferir e validar os ajustes mínimos é praxe simular as faltas inserindo resistências padronizadas de defeito, usualmente estimadas em quarenta ohms.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A magnitude da corrente de curto-circuito conjugada estritamente ao seu tempo total de duração baliza a quantidade de energia térmica crítica.",
+      "correctAnswer": true,
+      "explanation": "Os severos limitantes térmicos de projeto dependem rigorosamente da integração do quadrado da corrente da falha pelo tempo que a proteção demandará para extingui-la.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Pelo critério estrito da seletividade cronométrica radial as chaves de proteção mais distantes da fonte supridora devem exibir retardos de atuação.",
+      "correctAnswer": false,
+      "explanation": "A seletividade cronométrica em malhas radiais determina explicitamente que os dispositivos mais afastados da fonte atuem rapidamente, enquanto a temporização eleva-se progressivamente ao recuar para a montante.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os modernos pacotes de simulação computacional reportam rotineiramente correntes subtransitórias e fatores de assimetria que são dados.",
+      "correctAnswer": true,
+      "explanation": "Os elaborados relatórios extraídos via software exibem com alta exatidão as componentes assimétricas e simétricas precoces, vitais para salvaguardar o dimensionamento dinâmico repressivo.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A perniciosa componente contínua atrelada a corrente assimétrica sofre atenuação de maneira veloz produzindo picos de defeito mais moderados em.",
+      "correctAnswer": true,
+      "explanation": "Os compêndios matemáticos estipulam que quanto mais diminuta a relação de reatância sobre resistência for, mais contundente e veloz resultará o respectivo amortecimento natural atenuando as cristas assimétricas subjacentes.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na certificação avaliativa térmica atrelada a barramentos de energia, os parâmetros técnicos dimensionais normativos representados pelo índice m e.",
+      "correctAnswer": false,
+      "explanation": "No cômputo restritivo das equações calóricas, o referido fator normativo m contabiliza estritamente os efeitos exponenciais amortecidos da componente contínua asssimétrica da corrente ao passo que a parcela n reflete a degradação e a atenuação gradual experimentada unicamente pela porção alternada.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A minuciosa organização visual do intertravamento e hierarquia envolvendo as atuações de disjuntores fusíveis e relés é consolidada materialmente ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "tempo"
+        }
+      ],
+      "explanation": "A referida técnica avaliativa e comparatória da proteção exibe as cruciais propriedades características de ruptura e tolerância dos aparelhos sempre enquadrando-as no padrão das tradicionais e valiosas curvas de coordenação confeccionadas em elaborados eixos logarítmicos paralelos abrigando unidades espaciais de tempo cotejadas pelos patamares de corrente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "De forma a resguardar a capacidade térmica íntegra dos propulsores elétricos pesados o fino ajuste seletivo atuando na unidade temporizada ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "bloqueado"
+        }
+      ],
+      "explanation": "A sensível unidade programável encarregada do retardo de proteção atua contínua e preventivamente alinhando sua própria temporização atenuada para salvaguardar com eficácia as restritas tolerâncias intrínsecas e destrutivas calóricas estabelecidas pelas extremas informações fabris catalogadas e vitais representadas sob a terminologia técnica usual atrelada e balizada na fronteira de estol ou tempo de rotor estagnado e trancado.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Com a finalidade última de consolidar o seccionamento de isolamento reativo seletivo o projetista especialista emprega sistematicamente na ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "dial"
+        }
+      ],
+      "explanation": "A referida e rigorosa folga ou margem estrita protetiva demandada espaçando atuações temporais distintas atreladas aos contíguos dispositivos dispostos topologicamente e fisicamente alocados à montante perante os elos alocados à justante é matematicamente garantida escalando apropriadamente o delicado posicionamento pré definido contido nos ajustes fixos representados através da alavanca de manobra também identificada sob a terminologia descritiva ou chave multiplicadora seletiva designada rotineiramente a partir da sigla abreviada de marcação que representa a função operacional direta atrelada à figura métrica dial de tempo configurada.",
+      "difficulty": "hard"
+    }
+  ]
+}

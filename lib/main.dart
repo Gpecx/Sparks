@@ -37,7 +37,7 @@ void main() async {
   // 1c. Inicializa sincronização offline (Hive + Connectivity)
   await OfflineSyncService().initialize();
 
-  // 2. Erros globais via Crashlytics (Tratamento de Produção)
+  // 2. Erros globais via Crashlytics — apenas em mobile (não suportado na Web)
   if (!kIsWeb) {
     // Repassa todas as exceções não capturadas pelo framework Flutter
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;

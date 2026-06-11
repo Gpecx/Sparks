@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "",
+  "categoryOrder": 2,
+  "module": "Normas de Qualidade da Energia",
+  "moduleSubtitle": "IEEE 519, IEC 61000, EN 50160 e PRODIST",
+  "moduleOrder": 4,
+  "trail": "EN 50160 (Europa)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual é o escopo principal da norma EN 50160 em relação ao fornecimento de eletricidade?",
+      "options": [
+        "Avaliar apenas redes industriais ilhadas com alta taxa de distorção.",
+        "Especificar as características da tensão nas redes públicas AC nos terminais dos usuários.",
+        "Determinar o dimensionamento de cabos de aterramento para subestações.",
+        "Padronizar exclusivamente elos de transmissão em corrente contínua."
+      ],
+      "correctIndex": 1,
+      "explanation": "A norma especifica as características principais que a tensão da rede deve atender no terminal de suprimento do usuário em redes públicas AC de baixa, média e alta tensão. (EN 50160 Power Quality Report APPLICATION NOTE - NEO Messtechnik)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Em condições normais, qual deve ser o valor nominal da frequência nas redes elétricas públicas europeias segundo a norma?",
+      "options": [
+        "100 Hz",
+        "50 Hz",
+        "60 Hz",
+        "400 Hz"
+      ],
+      "correctIndex": 1,
+      "explanation": "A frequência nominal deve ser igual a 50 Hz nas redes, com avaliação realizada em intervalos médios de 10 minutos. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Na baixa tensão (BT), qual é o valor da tensão nominal (Un) definido entre fase e neutro pela EN 50160?",
+      "options": [
+        "110 V",
+        "127 V",
+        "230 V",
+        "400 V"
+      ],
+      "correctIndex": 2,
+      "explanation": "Na Baixa Tensão (BT), a tensão nominal é Un = 230V entre o condutor de fase e o condutor neutro. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual é a tolerância admitida pela norma para a variação da tensão de alimentação (valores médios de 10 min) durante 95% de uma semana?",
+      "options": [
+        "± 2%",
+        "± 5%",
+        "± 10%",
+        "± 15%"
+      ],
+      "correctIndex": 2,
+      "explanation": "A norma estipula que 95% dos valores eficazes médios de 10 minutos para cada período de uma semana devem situar-se na gama de Un ± 10%. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Como a norma EN 50160 define o limite de aceitação para a severidade da tremulação (flicker) de longa duração (Plt)?",
+      "options": [
+        "Plt < 0,65 em 100% do tempo.",
+        "Plt < 1 durante 95% do tempo de uma semana.",
+        "Plt < 2,5 em 12 horas consecutivas.",
+        "Plt < 5 durante 99% do período mensal."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para qualquer período de uma semana, a severidade de longa duração deve ser Plt < 1 durante 95% do tempo de avaliação. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual é o limite de Distorção Harmônica Total (THD) da tensão especificado para redes de Baixa Tensão pela EN 50160?",
+      "options": [
+        "THD < 2%",
+        "THD < 5%",
+        "THD < 8%",
+        "THD < 12%"
+      ],
+      "correctIndex": 2,
+      "explanation": "Os valores definidos pela EN 50160 para a distorção harmônica exigem que, na Baixa Tensão, o THD seja menor que 8%. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Como a norma DIN EN 50160 define uma queda de tensão em relação ao seu valor nominal RMS?",
+      "options": [
+        "Flutuação prolongada da frequência nominal para 49 Hz.",
+        "Redução repentina para um valor entre 85% e 5% da tensão nominal.",
+        "Sobretensão contínua acima de 115% por mais de 10 minutos.",
+        "Interrupção total onde a tensão cai para exatamente 0% instantaneamente."
+      ],
+      "correctIndex": 1,
+      "explanation": "A norma DIN EN 50160 define uma queda de tensão como uma queda repentina de um valor RMS de tensão para um valor entre 85% e 5% de um valor definido. (Características de qualidade do fornecimento de energia - Jensys)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Em sistemas com ligação síncrona a um sistema interligado, qual é a variação máxima de frequência aceitável durante 99,5% do tempo de um ano?",
+      "options": [
+        "± 0,5%",
+        "± 1%",
+        "± 2%",
+        "± 5%"
+      ],
+      "correctIndex": 1,
+      "explanation": "São aceitáveis variações de ± 1% da frequência da rede (50 Hz) durante 99,5% de um ano em sistemas com ligação síncrona. (Regulação tensão-frequência em redes fracas com produção distribuída e armazenamento de energia Engenharia Eletrotécnica - Técnico Lisboa)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Qual é o limite para o desequilíbrio das tensões de alimentação medido pela componente inversa na NP EN 50160?",
+      "options": [
+        "A componente direta não deve exceder 5% da componente de sequência zero.",
+        "95% dos valores eficazes médios de 10 min da componente inversa não devem ultrapassar 2% da componente direta.",
+        "O sistema é considerado aceitável desde que a soma vetorial das fases permaneça abaixo de 10%.",
+        "O THD da componente de sequência negativa deve ser menor que 2% ao longo do ano."
+      ],
+      "correctIndex": 1,
+      "explanation": "O desequilíbrio de tensão exige que, para cada período de uma semana, 95% dos valores eficazes médios de 10 minutos da componente inversa não ultrapassem 2% da componente direta. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "De acordo com a DIN EN 50160, abaixo de qual limiar percentual da tensão nominal considera-se que ocorreu um corte de tensão (interrupção)?",
+      "options": [
+        "10%",
+        "8%",
+        "5%",
+        "1%"
+      ],
+      "correctIndex": 2,
+      "explanation": "A DIN EN 50160 afirma que um corte de tensão (interrupção) ocorre quando o valor da tensão fica abaixo de 5% da tensão nominal. (Características de qualidade do fornecimento de energia - Jensys)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "Nas redes isoladas, a norma NP EN 50160 estabelece limites de variação de tensão flexibilizados que são assimétricos, fixados em +10% e -15%.",
+      "correctAnswer": true,
+      "explanation": "Para redes isoladas, os limites de variação permitidos para o valor eficaz da tensão de alimentação são +10% e -15%. (Regulação tensão-frequência em redes fracas com produção distribuída e armazenamento de energia Engenharia Eletrotécnica - Técnico Lisboa)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "A norma EN 50160 aplica-se exclusivamente à definição de limites de injeção harmônica em geradores fotovoltaicos e não abrange redes públicas.",
+      "correctAnswer": false,
+      "explanation": "Pelo contrário, o foco da EN 50160 é especificar as características da tensão que devem ser atendidas sob condições normais de operação em redes elétricas públicas AC de baixa, média e alta tensão. (EN 50160 Power Quality Report APPLICATION NOTE - NEO Messtechnik)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Para a análise e fixação dos limites de distorção harmônica, a EN 50160 agrupa os componentes em harmônicas pares, ímpares múltiplas de 3 e ímpares não múltiplas de 3.",
+      "correctAnswer": true,
+      "explanation": "O padrão realiza o agrupamento em harmônicas pares e ímpares (múltiplas e não múltiplas de 3) devido às características de soma nos sistemas trifásicos. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "A avaliação de conformidade da tensão, bem como do desequilíbrio e harmônicos, baseia-se predominantemente em médias calculadas a cada 10 minutos.",
+      "correctAnswer": true,
+      "explanation": "O relatório de qualidade da EN 50160 avalia grandezas como tensão, desequilíbrio e THD registrando os valores médios ao longo de janelas de 10 minutos. (EN 50160 Power Quality Report APPLICATION NOTE - NEO Messtechnik)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "Na análise do flicker estipulada no relatório da EN 50160, o índice Pst é apurado para intervalos de 10 minutos, enquanto o índice de longo prazo Plt baseia-se em períodos de 2 horas.",
+      "correctAnswer": true,
+      "explanation": "Os valores de cintilação exigidos são o flicker de curto prazo Pst (10 minutos) e o de longo prazo Plt (2 horas). (EN 50160 Power Quality Report APPLICATION NOTE - NEO Messtechnik)",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "Em condições normais de fornecimento, a frequência da rede deve manter-se entre 49,5 e 50,5 Hz durante pelo menos ____% de uma semana.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "95"
+        }
+      ],
+      "explanation": "O valor médio da frequência medido em intervalos de 10 minutos deve estar entre 49,5 e 50,5 Hz durante 95% do tempo em uma semana. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "Conforme descrito para as redes de distribuição europeias baseadas na norma EN 50160, a tensão de rede na baixa tensão resulta em um valor de fase L-N de ____ V a 50 Hz.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "230"
+        }
+      ],
+      "explanation": "Na Europa, a tensão da rede de baixa tensão resulta em uma tensão de fase (condutor de fase e neutro L-N) de 230 V. (Características de qualidade do fornecimento de energia - Jensys)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "O limite estatístico para a Distorção Harmônica Total (THD) tolerado em sistemas de Baixa Tensão não deve ultrapassar a margem de ____%.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "8"
+        }
+      ],
+      "explanation": "Os valores definidos pela norma para a distorção harmônica global na Baixa Tensão estipulam que o THD deve ser < 8%. (Qualidade Energia NP EN 50160 - Manutenção Diagnósticos - Webnode)"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Fundamentos de Qualidade da Energia",
+  "moduleSubtitle": "Conceitos, indicadores, disturbios e legislacao",
+  "moduleOrder": 0,
+  "trail": "Conceitos e Indicadores de QE",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que define a qualidade da energia eletrica segundo a literatura tecnica de Dugan et al.?",
+      "options": [
+        "Apenas desvios na amplitude da tensao nominal em barramentos principais.",
+        "Qualquer problema na tensao, corrente ou desvio de frequencia que resulte em falha.",
+        "Somente as interrupcoes de longa duracao causadas por eventos da natureza.",
+        "O aumento do fator de potencia em redes industriais devido a capacitores."
+      ],
+      "correctIndex": 1,
+      "explanation": "Segundo o documento Analise de Disturbios IFPB, a Qualidade de Energia Eletrica pode ser definida como qualquer problema manifestado na tensao, corrente ou desvio de frequencia que resulte em falha.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que os indicadores de continuidade DEC e FEC mensuram de forma coletiva nas redes eletricas?",
+      "options": [
+        "A duracao e a frequencia equivalente de interrupcao por unidade consumidora.",
+        "A distorcao harmonica e o desequilibrio de tensao nos transformadores.",
+        "O fator de potencia e as flutuacoes de tensao em pontos de conexao.",
+        "A variacao de frequencia de curta e longa duracao do sistema interligado."
+      ],
+      "correctIndex": 0,
+      "explanation": "O PRODIST Modulo 8 define DEC como Duracao Equivalente de Interrupcao e FEC como Frequencia Equivalente de Interrupcao por Unidade Consumidora.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como e definido o Fator de Potencia em instalacoes eletricas industriais e comerciais?",
+      "options": [
+        "Pela soma da potencia ativa e reativa consumidas.",
+        "Pela relacao entre a potencia ativa e a potencia aparente.",
+        "Pelo produto da tensao de linha pela corrente de neutro.",
+        "Pela diferenca entre a potencia aparente e a reativa."
+      ],
+      "correctIndex": 1,
+      "explanation": "O documento Correcao de fator de potencia da ABB define diretamente que o Fator de Potencia e a relacao entre a potencia ativa e a potencia aparente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na avaliacao da tensao em regime permanente pelo PRODIST, como se classificam as leituras em relacao a tensao de referencia?",
+      "options": [
+        "Continuas, alternadas e pulsantes.",
+        "Baixas, medias e altas.",
+        "Adequadas, precarias ou criticas.",
+        "Primarias, secundarias e terciarias."
+      ],
+      "correctIndex": 2,
+      "explanation": "O PRODIST Modulo 8 estabelece que as leituras se classificam em tres categorias: adequadas, precarias ou criticas, baseando-se no afastamento em relacao a referencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em condicoes normais de operacao, quais sao os limites de frequencia estipulados para o sistema de distribuicao brasileiro?",
+      "options": [
+        "Entre 49,9 Hz e 50,1 Hz.",
+        "Entre 59,5 Hz e 60,5 Hz.",
+        "Entre 59,9 Hz e 60,1 Hz.",
+        "Entre 55,0 Hz e 65,0 Hz."
+      ],
+      "correctIndex": 2,
+      "explanation": "O PRODIST Modulo 8 especifica que o sistema de distribuicao e as instalacoes conectadas devem operar dentro dos limites de frequencia situados entre 59,9 Hz e 60,1 Hz.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que os indicadores individuais DRP e DRC avaliam especificamente no fornecimento de energia?",
+      "options": [
+        "A duracao relativa da transgressao de tensao precaria e de tensao critica.",
+        "A diferenca de resistencia e reatancia capacitiva da rede aerea.",
+        "A duracao de religamento e a demanda reativa controlada nas subestacoes.",
+        "A dispersao de ruidos e a direcao da corrente residual medida nos medidores."
+      ],
+      "correctIndex": 0,
+      "explanation": "Conforme o PRODIST Modulo 8, DRP e a Duracao Relativa da Transgressao de Tensao Precaria e DRC e a Duracao Relativa da Transgressao de Tensao Critica.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que representa o indicador Pst na determinacao do disturbio de flutuacao de tensao?",
+      "options": [
+        "A severidade dos niveis de cintilacao luminosa verificada num periodo de 2 horas.",
+        "O pico da sobretensao de transitorio oscilatorio registrado em exato 1 minuto.",
+        "A severidade dos niveis de cintilacao luminosa num periodo continuo de 10 minutos.",
+        "O percentual de surtos no secundario do transformador de distribuicao."
+      ],
+      "correctIndex": 2,
+      "explanation": "O PRODIST Modulo 8 define formalmente que o indicador Pst representa a severidade da cintilacao luminosa associada a flutuacao de tensao num periodo continuo de 10 minutos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo as normas de distribuicao, como e caracterizado o desequilibrio de tensao em um sistema trifasico?",
+      "options": [
+        "Pela presenca de harmonicos multiplos de 3 concentrados apenas na fase A.",
+        "Por diferencas nas amplitudes entre as tres tensoes de fase ou na defasagem eletrica de 120 graus entre elas.",
+        "Pelo aumento sincronizado e simetrico das tres fases durante falhas externas.",
+        "Pela reducao subita da frequencia para valores perigosos menores que 56,5 Hz."
+      ],
+      "correctIndex": 1,
+      "explanation": "O PRODIST Modulo 8 caracteriza o desequilibrio de tensao por qualquer diferenca verificada nas amplitudes entre as tres tensoes de fase ou na defasagem eletrica de 120 graus.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a faixa de limite tolerado para o fator de potencia em unidades consumidoras com tensao inferior a 230 kV?",
+      "options": [
+        "Entre 0,85 e 1,00 indutivo, ou 1,00 e 0,85 capacitivo.",
+        "Entre 0,92 e 1,00 indutivo, ou 1,00 e 0,92 capacitivo.",
+        "Sempre estritamente igual a 1,00 indutivo e 1,00 capacitivo.",
+        "Maior que 0,80 indutivo apenas, sem limite para capacitivo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O PRODIST Modulo 8 determina que o fator de potencia no ponto de conexao deve estar compreendido entre 0,92 e 1,00 indutivo, ou 1,00 e 0,92 capacitivo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como e calculado matematicamente o indicador de tensao DRP a partir das leituras obtidas pelo medidor classe A ou S?",
+      "options": [
+        "Multiplicando o numero total de leituras na faixa adequada pelo fator de potencia instantaneo.",
+        "Dividindo o maior valor entre as fases do numero de leituras na faixa precaria por 1008 e multiplicando por 100.",
+        "Dividindo a tensao media RMS acumulada pela corrente de curto-circuito base da subestacao.",
+        "Somando todas as quedas de tensao superiores a 3 minutos e multiplicando por 1000 horas."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Equacao 1 do PRODIST Modulo 8 define o DRP como a divisao do nlp (maior numero de leituras na faixa precaria) por 1008, tudo multiplicado por 100 para percentual.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na apuracao dos indicadores coletivos DEC e FEC, a regulamentacao exige que sejam consideradas as interrupcoes de curta duracao, ou seja, aquelas com tempos inferiores a 3 minutos.",
+      "correctAnswer": false,
+      "explanation": "O PRODIST Modulo 8 especifica claramente que os indicadores DEC e FEC apuram apenas as interrupcoes de longa duracao, definidas como aquelas com duracao maior ou igual a 3 minutos.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para gerar os indicadores individuais de tensao em regime permanente DRP e DRC, considera-se obrigatoriamente o registro de 1008 leituras validas obtidas em intervalos consecutivos de 10 minutos.",
+      "correctAnswer": true,
+      "explanation": "O PRODIST Modulo 8 determina a utilizacao exata de 1008 leituras validas obtidas em intervalos consecutivos de 10 minutos (que equivale a 168 horas) para compor o DRP e DRC.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os limites estipulados na regulamentacao nacional atual para os indicadores de transgressao de tensao DRP e DRC sao fixados rigidamente em 5,0 por cento e 1,0 por cento, respectivamente.",
+      "correctAnswer": false,
+      "explanation": "Segundo a tabela do PRODIST Modulo 8, os limites regulamentados para os indicadores individuais sao diferentes: DRPLimite e 3,0 por cento e DRCLimite e 0,5 por cento.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O indicador de continuidade DICRI tem como finalidade exclusiva mensurar a duracao maxima de interrupcao continua verificada em um conjunto inteiro de unidades consumidoras ao longo do mes.",
+      "correctAnswer": false,
+      "explanation": "O PRODIST Modulo 8 define o DMIC como duracao maxima de interrupcao continua. O DICRI refere-se especificamente a duracao da interrupcao individual ocorrida em Dia Critico.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O indicador de severidade de cintilacao de longa duracao, denominado Plt, e matematicamente calculado atraves da raiz cubica da media da soma dos cubos de 12 amostras consecutivas do indicador Pst.",
+      "correctAnswer": true,
+      "explanation": "A Equacao 18 do PRODIST Modulo 8 demonstra matematicamente que o Plt corresponde a um valor representativo de 12 amostras de Pst usando exatamente a raiz cubica da media da soma dos seus cubos.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O indicador de continuidade que expressa o limite para a Duracao Maxima de Interrupcao Continua por unidade consumidora ou ponto de conexao e conhecido oficialmente pela sigla ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "DMIC"
+        }
+      ],
+      "explanation": "O PRODIST Modulo 8 formaliza o indicador DMIC como a sigla para Duracao Maxima de Interrupcao Continua por Unidade Consumidora ou Ponto de Conexao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na determinacao do fator de desequilibrio de tensao (FD%), a equacao normatizada baseia-se na razao percentual entre a magnitude da tensao eficaz de sequencia negativa e a magnitude da tensao de sequencia ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "positiva"
+        }
+      ],
+      "explanation": "A Equacao 14 do PRODIST Modulo 8 indica formalmente que o FD% e calculado dividindo a magnitude da tensao eficaz de sequencia negativa pela magnitude da tensao eficaz de sequencia positiva.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Quando os indicadores DRP ou DRC superam os limites normativos de transgressao de tensao, a distribuidora deve creditar o valor da compensacao na fatura no prazo maximo de ____ meses subsequentes.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "2"
+        }
+      ],
+      "explanation": "O PRODIST Modulo 8 determina explicitamente que o valor da compensacao deve ser creditado na fatura emitida no prazo maximo de 2 meses subsequentes ao mes civil de referencia.",
+      "difficulty": "hard"
+    }
+  ]
+}

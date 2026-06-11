@@ -1,0 +1,218 @@
+{
+  "category": "Comissionamento SPCS",
+  "categorySubtitle": "Metodologia, ensaio de relés e comissionamento IEC 61850",
+  "categoryOrder": 9,
+  "module": "Comissionamento IEC 61850",
+  "moduleSubtitle": "Validação SCL/IID, testes GOOSE em campo e FAT de sistemas",
+  "moduleOrder": 2,
+  "trail": "Fundamentos de Comissionamento IEC 61850",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que são os IEDs no contexto da norma IEC 61850?",
+      "options": [
+        "Dispositivos mecânicos de abertura de arco elétrico.",
+        "Transformadores de potencial capacitivos de estado sólido.",
+        "Dispositivos Eletrônicos Inteligentes projetados para automação e proteção.",
+        "Conversores analógicos sem microprocessador dedicado."
+      ],
+      "correctIndex": 2,
+      "explanation": "IEDs são dispositivos microprocessados englobando medição, controle e proteção, projetados nos padrões IEC 61850. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na norma IEC 61850, qual nó lógico (Logical Node) corresponde à função ANSI 51/51N (Sobrecorrente)?",
+      "options": [
+        "PDIS",
+        "PTOV",
+        "PDIF",
+        "PTOC"
+      ],
+      "correctIndex": 3,
+      "explanation": "Conforme a norma IEC 61850, a função de sobrecorrente é representada pelo nó lógico PTOC. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual função de proteção ANSI é mapeada para o nó lógico PDIF na norma IEC 61850?",
+      "options": [
+        "Relé Diferencial (87).",
+        "Relé de Distância (21).",
+        "Sobretensão (59).",
+        "Térmica (49)."
+      ],
+      "correctIndex": 0,
+      "explanation": "O nó lógico PDIF da IEC 61850 corresponde à função de proteção Diferencial. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as entradas das mensagens GOOSE são tratadas durante o ensaio secundário em relés digitais?",
+      "options": [
+        "São injetadas apenas como sinais de corrente contínua.",
+        "Possuem filtros dedicados nos quais pode-se configurar o tempo de 'debounce'.",
+        "São bloqueadas fisicamente por chaves faca.",
+        "São transmitidas por cabos coaxiais de 50 ohms exclusivamente."
+      ],
+      "correctIndex": 1,
+      "explanation": "O software de ensaio possui configuração para entradas GOOSE, permitindo ajustar filtros e tempos de debounce. (Fonte: Ensaio de Reles Avançado_PECS).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No contexto da proteção de sistemas, o que estabelece a norma internacional IEC 61850 combinada aos códigos ANSI?",
+      "options": [
+        "A substituição do uso de baterias de subestação.",
+        "O dimensionamento mecânico dos cabos de alta tensão.",
+        "A disposição e nomenclatura das funções executadas por cada relé.",
+        "A proibição do uso de rede Ethernet em subestações."
+      ],
+      "correctIndex": 2,
+      "explanation": "A norma internacional ANSI / IEC 61850 dispõe e padroniza a função executada por cada relé. (Fonte: KLS - PROTEÇÃO SISTEMAS ELÉTRICOS).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O nó lógico PDIS da norma IEC 61850 equivale a qual função de proteção do sistema?",
+      "options": [
+        "Sobrecorrente Direcional (67).",
+        "Relé de Frequência (81).",
+        "Relé de Tensão (27).",
+        "Relé de Distância (21)."
+      ],
+      "correctIndex": 3,
+      "explanation": "A norma IEC 61850 mapeia a função PDIS para o Relé de Distância (ANSI 21). (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a função das mensagens Sampled Values (SV) no barramento de processo?",
+      "options": [
+        "Transmitir de forma contínua as amostras digitalizadas de corrente e tensão.",
+        "Garantir a redundância paralela PRP da rede.",
+        "Sincronizar a hora via protocolo PTP.",
+        "Transferir arquivos de parametrização off-line."
+      ],
+      "correctIndex": 0,
+      "explanation": "As mensagens SV digitalizam e transmitem medições primárias instantâneas das Merging Units. (Aviso: Informação complementar exigida pelo prompt).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são os três níveis hierárquicos de arquitetura definidos para a subestação digital IEC 61850?",
+      "options": [
+        "Nível Físico, Enlace e Aplicação.",
+        "Nível de Processo, Vão (Bay) e Estação.",
+        "Nível de Geração, Transmissão e Distribuição.",
+        "Nível Analógico, Digital e Óptico."
+      ],
+      "correctIndex": 1,
+      "explanation": "A arquitetura IEC 61850 estrutura a subestação nos níveis de Processo (equipamentos), Vão (IEDs) e Estação (supervisão). (Aviso: Informação complementar exigida pelo prompt).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal diferença técnica entre o Process Bus e o Station Bus?",
+      "options": [
+        "O Process Bus usa fios de cobre trançado; o Station Bus usa rádio UHF.",
+        "Ambos são redes analógicas seriais RS-485 com velocidades distintas.",
+        "O Process Bus conecta MUs e IEDs (SV/GOOSE); o Station Bus liga IEDs ao nível de supervisão (MMS/GOOSE).",
+        "O Station Bus carrega correntes de 5A; o Process Bus carrega fibra óptica."
+      ],
+      "correctIndex": 2,
+      "explanation": "O barramento de processo liga sensores aos relés. O barramento de estação liga relés à operação. (Aviso: Informação complementar exigida pelo prompt).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na rede Ethernet de uma subestação IEC 61850, qual o objetivo dos protocolos PRP e HSR?",
+      "options": [
+        "Comprimir mensagens SV para reduzir a largura de banda.",
+        "Criar túneis criptografados para acesso remoto.",
+        "Bloquear a propagação de mensagens GOOSE errôneas.",
+        "Fornecer redundância de rede com zero tempo de recuperação."
+      ],
+      "correctIndex": 3,
+      "explanation": "PRP e HSR garantem redundância de comunicação sem atraso (bumpless), essencial para GOOSE e SV. (Aviso: Informação complementar exigida pelo prompt).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os IEDs são relés projetados para atuar na proteção e automação nos padrões da norma IEC 61850.",
+      "correctAnswer": true,
+      "explanation": "IEDs englobam funções de proteção, controle e comunicação padronizadas pela IEC 61850. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A função de sobretensão (ANSI 59) é referenciada na modelagem da IEC 61850 pelo nó lógico PTOV.",
+      "correctAnswer": true,
+      "explanation": "Segundo o mapeamento ANSI/IEC, a função de proteção 59 corresponde ao nó lógico PTOV. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O protocolo PTP IEEE 1588 promove o sincronismo de tempo via Ethernet com precisão na casa dos microssegundos.",
+      "correctAnswer": true,
+      "explanation": "O PTP é utilizado no barramento de processo para sincronizar as amostras SV das Merging Units com extrema precisão. (Aviso: Informação complementar exigida pelo prompt).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O arquivo de extensão SCD (Substation Configuration Description) descreve exclusivamente as capacidades de fábrica de um único IED.",
+      "correctAnswer": false,
+      "explanation": "O SCD contém a configuração completa da subestação. O arquivo de um IED único de fábrica é o ICD. (Aviso: Informação complementar exigida pelo prompt).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Merging Units (MUs) são IEDs responsáveis por converter mensagens MMS do Station Bus em disparos analógicos para os disjuntores.",
+      "correctAnswer": false,
+      "explanation": "MUs digitalizam grandezas primárias (TC/TP) e publicam na rede como SV, não decodificam MMS para trips analógicos. (Aviso: Informação complementar exigida pelo prompt).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A função térmica do equipamento (ANSI 49) é codificada na modelagem de dados da IEC 61850 através do nó lógico ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "PTR"
+        }
+      ],
+      "explanation": "O Logical Node PTR define a proteção e supervisão térmica conforme os padrões da IEC. (Fonte: ed52_fasc_protecao_seletividade_capV).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O projeto onde os IEDs individuais (ICD) são instanciados primeiro para depois construir o arquivo final da subestação define a engenharia ____-up.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "bottom"
+        }
+      ],
+      "explanation": "Na engenharia bottom-up, o processo começa nos equipamentos e culmina no modelo total da subestação (SCD). (Aviso: Informação complementar exigida pelo prompt).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As mensagens de disparo e intertravamento ____ operam no modo Publisher/Subscriber via Ethernet multicast para atuação ultrarrápida.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "GOOSE"
+        }
+      ],
+      "explanation": "GOOSE (Generic Object Oriented Substation Event) utiliza comunicação paralela multicast para máxima velocidade de trip. (Aviso: Informação complementar exigida pelo prompt).",
+      "difficulty": "hard"
+    }
+  ]
+}

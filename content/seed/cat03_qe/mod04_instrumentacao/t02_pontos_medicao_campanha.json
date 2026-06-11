@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Instrumentação e Medição de QE",
+  "moduleSubtitle": "Equipamentos, campanhas, analise e laudos",
+  "moduleOrder": 3,
+  "trail": "Pontos de Medição e Planejamento de Campanha",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Onde deve ser avaliada a conformidade dos niveis de tensao em regime permanente segundo o PRODIST?",
+      "options": [
+        "Diretamente nos paineis de distribuicao secundarios internos do cliente.",
+        "Nos pontos de conexao com a Rede de Distribuicao.",
+        "Exclusivamente nos barramentos das subestacoes de transmissao em alta tensao.",
+        "Nos quadros gerais de maquinas de forca motriz operando em carga maxima."
+      ],
+      "correctIndex": 1,
+      "explanation": "O PRODIST Modulo 8 (Item 16) determina textualmente que a conformidade dos niveis de tensao deve ser avaliada nos pontos de conexao com a Rede de Distribuicao (entre distribuidoras e entre distribuidoras e unidades consumidoras).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a sigla PCC significa no contexto da qualidade de energia, referenciando o local onde os limites normativos devem ser medidos?",
+      "options": [
+        "Potencial de Curto-Circuito.",
+        "Ponto de Acoplamento Comum.",
+        "Ponto de Compensacao Capacitiva.",
+        "Perfil de Carga Continua."
+      ],
+      "correctIndex": 1,
+      "explanation": "O manual Solucoes WEG define a sigla PCC como Ponto de Acoplamento Comum (Point of Common Coupling), sendo o local exato da instalacao para analise de conformidade.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para compor os indicadores individuais de tensao DRP e DRC em campanhas de medicao, qual e o tempo e o numero de leituras validas exigidos em um ciclo padrao?",
+      "options": [
+        "24 horas com 144 leituras totais.",
+        "168 horas com 1008 leituras.",
+        "720 horas perfazendo 4320 leituras.",
+        "100 horas somando 600 leituras no registrador."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 26.2 do PRODIST Modulo 8 estipula o registro obrigatorio de 1.008 leituras validas obtidas em intervalos consecutivos de 10 minutos, o que perfaz 168 horas completas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao as tres modalidades oficiais de medicao da tensao em regime permanente previstas pelo Modulo 8 do PRODIST?",
+      "options": [
+        "Preventiva, corretiva e preditiva.",
+        "Eventual, amostral e permanente.",
+        "Instantanea, temporaria e diaria.",
+        "Analogica, digital e hibrida."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 89 do PRODIST Modulo 8 dita com clareza que a medicao da tensao em regime permanente ocorre nas modalidades: eventual (por reclamacao), amostral ou permanente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a ANEEL realiza anualmente o sorteio da amostra de unidades consumidoras para formar a base de medicoes amostrais da distribuidora?",
+      "options": [
+        "A partir das listas de clientes com faturas em atraso informadas pelas concessionarias.",
+        "Utilizando um criterio estatistico aleatorio a partir das Bases de Dados Geograficas das Distribuidoras (BDGD).",
+        "Por indicacao direta de unidades criticas apontadas no relatorio anual do ONS.",
+        "Solicitando consumidores voluntarios por meio de chamadas publicas no Diario Oficial."
+      ],
+      "correctIndex": 1,
+      "explanation": "Segundo o item 92 do PRODIST Modulo 8, o sorteio da amostra e realizado pela ANEEL por meio de criterio estatistico aleatorio, a partir das Bases de Dados Geograficas das Distribuidoras (BDGD).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que acontece com os custos operacionais caso um usuario solicite voluntariamente a instalacao de um sistema de medicao permanente com funcionalidades especificas de qualidade da energia?",
+      "options": [
+        "A ANEEL subsidia totalmente o equipamento atraves dos encargos setoriais.",
+        "A distribuidora arca integralmente com todos os custos operacionais da nova medicao.",
+        "A diferenca de custo entre o sistema especifico e o sistema de medicao convencional e de responsabilidade exclusiva do usuario.",
+        "O encargo de uso da linha de transmissao absorve o valor adicional de hardware e software."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 112 do PRODIST Modulo 8 dita que o sistema e instalado pela distribuidora, devendo a diferenca de custo em relacao ao medidor convencional ser paga pelo usuario interessado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao dar prosseguimento a uma reclamacao com a instalacao de medicao para avaliacao de DRP e DRC, qual a antecedencia minima que a distribuidora deve respeitar para informar o inicio da medicao ao consumidor?",
+      "options": [
+        "Aviso em ate 24 horas antes do desligamento da chave.",
+        "Aviso com antecedencia minima de 48 horas.",
+        "Pre-notificacao de no minimo 5 dias uteis consecutivos.",
+        "Comunicado expresso restrito a 15 dias de antecedencia logistica."
+      ],
+      "correctIndex": 1,
+      "explanation": "A alinea h do item 121 do PRODIST Modulo 8 exige informar ao usuario com antecedencia minima de 48 horas da realizacao da medicao de no minimo 168 horas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Uma vez que uma unidade consumidora e sorteada pela ANEEL para fazer parte da campanha amostral de qualidade, qual o periodo em que ela devera ser mantida sob monitoramento continuo?",
+      "options": [
+        "Por um ciclo restrito de exclusivas 168 horas no mes de validade.",
+        "Ao longo de todo o periodo de verao que sucede o ano tarifario.",
+        "Ela passa a compor a base de medicoes amostrais e deve ser monitorada de forma permanente.",
+        "Durante exatos 12 meses cronologicos antes de ser devolvida ao grupo isolado."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 93 do PRODIST Modulo 8 estabelece expressamente que a unidade consumidora sorteada passa a compor a base amostral e deve ser monitorada de forma permanente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo as normas para manutencao da campanha amostral, como a distribuidora deve proceder caso uma unidade consumidora pertencente a amostra tenha o seu contrato encerrado no local?",
+      "options": [
+        "Deve religar e fixar um novo medidor eletronico no poste do imovel vizinho limitrofe por aproximacao geografica.",
+        "A distribuidora deve solicitar a ANEEL a substituicao da unidade mediante um novo sorteio, ate o mes de setembro de cada ano.",
+        "O medidor em questao deve ser desativado sumariamente extinguindo essa fracao estatistica do lote apurado.",
+        "Os custos remanescentes da medicao serao revertidos ao ex-cliente como taxa de retirada da instrumentacao basica."
+      ],
+      "correctIndex": 1,
+      "explanation": "A norma dita no item 96 do PRODIST Modulo 8 que, ocorrendo o encerramento da relacao contratual, a distribuidora deve solicitar a ANEEL a substituicao da unidade consumidora mediante novo sorteio ate o mes de setembro.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Considerando os prazos legais definidos em norma para sistemas particulares, quando o cliente solicita a colocacao de um sistema de medicao permanente de qualidade, qual e o limite estabelecido para a sua instalacao pratica pela distribuidora?",
+      "options": [
+        "Restringe-se a 15 dias uteis corridos a partir da assinatura formal do requerimento.",
+        "Limita-se ao espaco de um ciclo completo de faturamento correspondendo a 30 dias exatos.",
+        "Deve ser instalado pela distribuidora obrigatoriamente no prazo de ate 60 dias contados da solicitacao.",
+        "Possui tolerancia dilatada atingindo 90 dias a contar apenas apos a importacao instrumental do padrao."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 113 do PRODIST Modulo 8 determina categoricamente que o sistema de medicao permanente de qualidade requerido deve ser instalado no prazo de ate 60 dias a partir da solicitacao do usuario.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O planejamento das normatizacoes da qualidade de energia, segundo o PRODIST, assevera que as tensoes de avaliacao deverao ser coletadas focando exclusivamente no interior dos paineis das industrias afetadas e nao nos limites do fornecimento.",
+      "correctAnswer": false,
+      "explanation": "Ao contrario, o item 16 do PRODIST Modulo 8 estabelece que a conformidade dos niveis de tensao deve ser avaliada explicitamente nos pontos de conexao com a Rede de Distribuicao.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os planos de caracterizacao dos indicadores de transgressao individuais (DRP e DRC) consideram valido o registro aglutinado de 1.008 leituras em intervalos continuos de 10 minutos, parametro que perfaz exatamente 168 horas.",
+      "correctAnswer": true,
+      "explanation": "O item 26.2 do PRODIST Modulo 8 fixa de forma direta e inequivoca a necessidade de 1.008 leituras validas capturadas em trechos ininterruptos de 10 minutos cada, totalizando estatisticamente 168 horas.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A execucao do levantamento das amostras de unidades consumidoras por todo o territorio, utilizado para analise coletiva da ANEEL, e guiado anualmente durante o mes de outubro por meio da Base de Dados Geograficas das Distribuidoras (BDGD).",
+      "correctAnswer": true,
+      "explanation": "Como referenciado no PRODIST Modulo 8 (Item 92), o sorteio das amostras destas medicoes e executado aleatoriamente pela ANEEL em outubro com base integral nas informacoes do BDGD.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na modalidade de medicao da tensao em regime permanente do tipo eventual, o inspetor da concessionaria tem total autonomia e autorizacao normativa para colocar o medidor da classe compulsoria na linha do consumidor sem qualquer aviso previo, desde que respeite 168 horas de registro.",
+      "correctAnswer": false,
+      "explanation": "O item 121 na sua alinea h exige textualmente que a concessionaria atue notificando e informando ao usuario final com antecedencia minima exata de 48 horas da instalacao do equipamento de 168 horas.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O procedimento amostral adotado pelas agencias garante que a unidade selecionada e incluida no sorteio da campanha passe a receber uma instrumentacao do tipo descartavel, de tal forma que ela seja obrigatoriamente desconectada e suprimida ao final exclusivo do respectivo trimestre de inspecao.",
+      "correctAnswer": false,
+      "explanation": "O estatuto normativo PRODIST (Modulo 8, Item 93) especifica abertamente o cenario contrario a remocao declarando que as unidades consumidoras que cairem no sorteio passarao a compor a base de acompanhamento e devem ser monitoradas de forma permanente.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A estruturacao do planejamento de analises por leituras de registro estabelece tres ramos principais: quando o equipamento for posto devido a uma apuracao pontual provinda da reclamacao expressa do proprio consumidor, o processo trata-se estritamente de uma modalidade ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "eventual"
+        }
+      ],
+      "explanation": "A classificacao exata listada no PRODIST Modulo 8 (Item 89) especifica as medicoes em eventual, amostral e permanente, detalhando que a medicao eventual ocorre pontualmente por reclamacao ou indicacao da ANEEL.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Os perfis das instalacoes da base territorial do Brasil sao enviados e controlados pelo orgao nacional para aplicacao do algoritmo publico de sorteios; toda a matriz formadora de localidades validas esta atrelada a Base de Dados Geograficas das Distribuidoras, cujo acronimo setorial utilizado na regulamentacao e ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "BDGD"
+        }
+      ],
+      "explanation": "As bases textuais do regulamento indicam expressamente que o referencial informacional geografico que norteia e possibilita a base do dimensionamento analitico para os medidores amostrais pertence as tabelas da BDGD de cada ano (Item 92 PRODIST Modulo 8).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em prol da seguranca na inspecao agendada oriunda de uma reclamacao tecnica na modalidade eventual sobre as variacoes da tensao, as ordens garantem o preparo do assinante estabelecendo um estrito aviso da prestadora informando-o do evento com uma antecedencia temporal da avaliacao de 168 horas contada em, no limite, ____ horas antes do fato em si.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "48"
+        }
+      ],
+      "explanation": "O item 121 (h) determina o prazo com alta precisao estabelecendo a regra direta de que o comunicado pre-instalacao de longa duracao seja entregue na condicao de com antecedencia minima de 48 horas da realizacao da medicao.",
+      "difficulty": "hard"
+    }
+  ]
+}

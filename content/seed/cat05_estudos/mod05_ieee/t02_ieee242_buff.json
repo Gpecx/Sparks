@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Normas IEEE para Estudos",
+  "moduleSubtitle": "IEEE Color Books, C37, 1584 (Arc Flash) e 519",
+  "moduleOrder": 4,
+  "trail": "IEEE 242 (Buff Book - Proteção e Coordenação)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o escopo e foco tematico da norma IEEE duzentos e quarenta e dois, globalmente conhecida como Buff Book?",
+      "options": [
+        "Dimensionamento exclusivo de barramentos de cobre e aluminio nus expostos ao tempo.",
+        "Recomendacoes para protecao e coordenacao de sistemas de energia eletrica industriais e comerciais.",
+        "Padronizacao rigorosa de fatores de demanda de galpoes de uso geral em loteamentos.",
+        "Projetos de construcao civil e fundacao de caixas de passagem subterrâneas polimericas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Buff Book da IEEE abrange o corpo de praticas recomendadas orientando a adequada protecao e a coordenacao seletiva em sistemas eletricos industriais e comerciais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o principal e prioritario objetivo da coordenacao de dispositivos orientada na norma IEEE duzentos e quarenta e dois?",
+      "options": [
+        "Impedir totalmente a formacao do fluxo de energia reativa indesejada nas malhas em configuracao anelada.",
+        "Ampliar intencionalmente a corrente de arco para extinguir os severos transitorios indutivos de comutacao.",
+        "Extinguir o curto circuito rapidamente por meio do desligamento do menor numero possivel de equipamentos da planta.",
+        "Aumentar o retardo global progressivamente visando minimizar o desgaste ciclico nos contatos dos disjuntores numericos."
+      ],
+      "correctIndex": 2,
+      "explanation": "A filosofia basica de coordenacao estipula que as falhas sejam isoladas da forma mais celere possivel e retirando de operacao a menor parcela saudavel do sistema.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a norma orienta definir precisamente o limite da curva de danos termicos dos condutores eletricos submetidos a curtos circuitos?",
+      "options": [
+        "Pelo limite de esforco trativo puramente mecânico medido no tencionamento e compressao da malha.",
+        "Pelas perdas calculadas devidas exclusivamente aos fatores indutivos parasitas formados no agrupamento dos ductos.",
+        "Pela capacidade de escoamento transitorio da armadura protetora de chumbo do cabo unipolar extruido.",
+        "Apoiando se na energia termica retida baseada na corrente de falta, no tempo de atuacao e no limite fisico isolante."
+      ],
+      "correctIndex": 3,
+      "explanation": "O aquecimento adiabatico retido no cabo em um intervalo extremamente veloz rege o limite baseado na energia integral do quadrado da corrente multiplicada pelo tempo de extincao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na aplicacao da protecao temporizada dedicada a motores de inducao, o ajuste padrao de corrente recomendado deve comumente atingir qual patamar.",
+      "options": [
+        "Cento e cinco por cento.",
+        "Duzentos e cinquenta por cento.",
+        "Trezentos por cento redondos.",
+        "Apenas setenta e cinco por cento reais."
+      ],
+      "correctIndex": 0,
+      "explanation": "Para coibir desligamentos descabidos em plena capacidade mantendo a maquina salva os guias recomendam ajustar a protecao primaria em cento e cinco por cento do nivel rotineiro.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para proteger e coordenar os grandes transformadores contra sobrecarga operando apenas pelo lado secundario, o ajuste recomendado situa se.",
+      "options": [
+        "Impreterivelmente delimitado entre cinco e dez por cento exatos da operacao.",
+        "Contido no cume entre cento e vinte e cinco por cento e trezentos por cento limites.",
+        "Fixado na extremidade restritiva que oscila entre seiscentos e oitocentos por cento plenos.",
+        "Acima dos absurdos mil por cento isentos totalmente de atuacoes subitas de retaguarda."
+      ],
+      "correctIndex": 1,
+      "explanation": "O parametro sugerido dita aplicar preferencialmente sobre a nominal a sobrecarga temporaria admitida e limitada na janela que varia de um virgula vinte e cinco ate o triplo no secundario.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos meandros da literatura da IEEE duzentos e quarenta e dois a representativa curva ANSI defasada e deslocada para cinquenta e oito por cento.",
+      "options": [
+        "Modelos rebaixadores construidos com o enrolamento primario em delta e o lado secundario montado em estrela aterrada.",
+        "Autotransformadores elevadores em conexao estrela estrela com isolamento reativo blindado em linha aerea.",
+        "Bancos conversores de atuacao monofasica que sao interligados estritamente em arrojado arranjo delta delta fechado.",
+        "Exclusivamente aos autotransformadores compensadores trifasicos operando com neutro inteiramente flutuante."
+      ],
+      "correctIndex": 0,
+      "explanation": "Para captar sem dubiedade os defeitos de condutores fase para terra surgidos adiante no enrolamento estrela solidamente provido de aterramento, rebaixa se a prevencao ANSI correspondente no delta indutor.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos motores da industria qual limite de duracao deve ser rigorosamente respeitado posicionando a curva do rele temporizado de retaguarda pouco.",
+      "options": [
+        "O tempo de fechamento dinamico do disjuntor monitorado unicamente sob operacao rotineira do operador em campo.",
+        "O tempo de aceleracao natural exigido na rampa de partida e a curva restritiva do extremo tempo de rotor bloqueado.",
+        "O tempo cumulativo apurado somando o inrush livre com o fator assimetrico de magnetizacao do entreferro rotativo.",
+        "A constante natural de descarga transitoria puramente resistiva que drena o bloco auxiliar do banco de capacitores."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para evitar paradas inoportunas as chaves aceitam acomodar correntes transitorias permitindo a maquina girar superando sem problemas seu tempo de aceleracao mas resguardando para clivar na margem limite de estol do rotor.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em sistemas de suprimentos emalhados e analisados pela norma, qual é o intervalo seletivo fixo estipulado para a coordenacao temporal aceitavel.",
+      "options": [
+        "O hiato temporal exiguo de vinte milissegundos sem variacoes aditivas.",
+        "O patamar elástico e expansível oscilante ao redor de oitenta milissegundos.",
+        "A margem nominal de duzentos e cinquenta milissegundos limpos de atraso.",
+        "O longo retardo somado ao tempo total resultando em quatrocentos milissegundos exatos."
+      ],
+      "correctIndex": 2,
+      "explanation": "O quadro de referencias comparativas da norma atesta uma margem minima fiavel pre fixada em exatos duzentos e cinquenta milisegundos operacionais para distanciar com asseio chaves microprocessadas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos casos reais em que ha a preexistência de reles eletromecanicos antigos atuando na rede em vez de processadores, qual acrescimo de tempo o.",
+      "options": [
+        "Adiciona se por prudência cinquenta milissegundos devidos a instabilidade latente evidenciada nas baterias de tensao auxiliar submersas.",
+        "Descarta se qualquer latência pois todos os ajustamentos operam de forma isenta em esquemas associados perfeitamente unificados de disparos imediatos e incondicionais conjuntos.",
+        "Embutem se sem discussões trezentos milissegundos contidos para acomodar os arcos ruidosos espalhados nos faiscamentos destrutivos observados nas chapa dos contatos ressecados.",
+        "Inclui se com obrigatoriedade os cem milissegundos relativos à conhecida e insuprimivel sobriviagem originada pela inercia no giro mecanico motriz livre impregnado nos discos."
+      ],
+      "correctIndex": 3,
+      "explanation": "O mecanismo rudimentar indutor dotado de pecas magneticas espiralantes guarda forte arraste dinâmico giratorio mesmo extinguida a falta e a bobina exigindo agregar os marginais cem milesimos compensatorios.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No trato dos pesados transformadores avaliados e rotulados nos subgrupos como pertencentes a Categoria Dois quando a aplicacao limitante restritiva.",
+      "options": [
+        "Ela sera compulsoriamente plotada nos diagramas quando a estimativa historica demonstrar que a peca enfrentara ativamente um cenario contendo mais de dez sucessivos abalos de curtos ao longo da sobrevida atuante.",
+        "Somente e avaliada nos preenchimentos logicos caso ocorra a previsao real que as correntes assimetricas primarias ultrapassem formidavelmente as doze vezes contadas da sua bitola nominal base.",
+        "Em todas instalacoes subalternas independentes cuja demanda ativa estatica aparente exigida opere invariavelmente e ininterruptamente abrigada nos patamares aquém de cem kilovolt amperes constantes do predio.",
+        "Aplicada unicamente nos curtos de ponta se a condutividade no aterramento provar total nulidade deflagrando assimetrias puras que desencadeiam severas contingencias bifasicas e instaveis sem atenuacao magnetica restritiva."
+      ],
+      "correctIndex": 0,
+      "explanation": "Excepcionando transformacoes moderadas as severas normativas de protecao pedem tracar essa curva limite a danos estruturais trativos caso os analistas e gerentes antecipem historicamente incidencias agudas acima da decima unidade falha ao longo das decadas de utilizacao in loco.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O caderno informativo IEEE duzentos e quarenta e dois compila solidamente as matrizes e orientacoes recomendadas fundamentais a fim de lastrear.",
+      "correctAnswer": true,
+      "explanation": "Sim, ele figura internacionalmente como o guia cabal basico ou Buff Book concebido por especialistas contendo a balizadora compilacao pratica exaustiva no auxilio primordial do estabelecimento restritivo analitico atinente a chaves em ambientes de potencia da manufatura.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em projetos dedicados exclusivamente a fixar as protecoes na classe de fase as faltas assimetricas unifilares terra sao a unica referencia.",
+      "correctAnswer": false,
+      "explanation": "Protecoes de fase alicerçam suas delimitacoes baseando seus picos invariavelmente e preponderantemente calculando as massivas correntes trifasicas balanceadas subtransitorias descartando faltas singelas monofasicas que nao estimulam os atuadores nos lacos de fase nos limites superiores do grafico de avaliacoes logicas primarias.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "E tida na literatura operativa como uma solucao aceitavel tolerada e justificada de compromisso de seletividade aquela instigada situacao onde.",
+      "correctAnswer": true,
+      "explanation": "Quando dois elementos restritores interligam fisicamente a exata e mesmissima espinha dorsal isolada desprovida totalitariamente das ramificacoes com outras unidades ativas os codigos atestam tolerar as ativacoes emparelhadas conjuntas pois nenhuma carga alheia inocente do circuito estara vitimada padecendo inutilmente do fechamento indiscriminado duplo em cadeia transitoria.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao avaliar os quadros e tracados protetivos dos pujantes rotores fabris industriais a norma testifica abertamente a pratica comum robusta e.",
+      "correctAnswer": true,
+      "explanation": "Combinar fusiveis de contencao brutal e os sensiveis aparelhos atuados microprocessados atinge cobertura plena preenchendo adequadamente todos patamares para assegurar os delicados lacos alimentadores e terminais estatoricos pesados conforme pontuado claramente e evidenciado em topologias contidas nos livros base vermelhos e beges.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Visando isolar seletivamente o pernicioso retorno magnetico gerado pelas inducoes passantes nos blocos primarios de transformadores rebaixadores na.",
+      "correctAnswer": true,
+      "explanation": "A logica preservadora pede imperativamente obstar os desligamentos apressados localizados atrelados diretamente acionando chaves no envolucro de utilizacao inferior inibindo desarmes imotivados e precoces salvaguardando plenamente todo aparato montante em caso de faltas fugazes toleradas na malha supridora das instalacoes sem envolver o equipamento nucleo magnetico principal atrelado as chaves vitais da matriz produtora.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A celebre demarcacao termica admitida que retrata a vulnerabilidade pre definindo as taxas limiares absolutas aturando curtos curtos em aparelhos ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ANSI"
+        }
+      ],
+      "explanation": "A conceituada designacao curva ANSI é onipresente nos projetos mundiais abarcando sem restricoes graficos assintoticos retratando limites caloricos fundamentais dos arranjos dos grandes estatores estaticos supridores submersos imersos ou secos da industria base americana de geracao primaria adotada universalmente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos minuciosos espacamentos escalonados do relatorio parametrizando adequadamente e seguramente a sequencia entre os dois disjuntores da rede ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "vinte"
+        }
+      ],
+      "explanation": "A tabela balizadora contida na secao correspondente a interacao de duas caixas da mesma bitola no padrao apurado define e consolida que sejam inseridas e resguardadas folgas logaritmicas da ordem aproximada a estipulada fixada dos 120 milissegundos absolutos garantindo abertura primaria preservada integral da montante estavel inalterada.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Os exatos limites plotados assinalando rigorosamente a estrita proibitiva estagnacao funcional do maquinario de rotatividade pesada fabril sob o ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "bloqueado"
+        }
+      ],
+      "explanation": "Os patamares delimitadores impoem e configuram no eixo logaritmico restritivo dos motores a regua vital descrita de tempo ou zona de rotor bloqueado assinalando a barreira inultrapassavel destrutiva que os atuadores instalados invariavelmente operaram clivando se a maquina sucumbir travada nao desenvolvendo a aceleracao centrifuga normal programada sob forte demanda em linha sem comutacoes reativas compensatorias suaves em sua inercia motriz de carga pre programada ou acoplada atritada impedida nas engrenagens das malhas acopladas aos estatores das usinas ativas do laco industrial unifilar.",
+      "difficulty": "hard"
+    }
+  ]
+}

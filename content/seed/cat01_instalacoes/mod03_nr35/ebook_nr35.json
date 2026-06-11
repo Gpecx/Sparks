@@ -1,0 +1,305 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-35",
+  "moduleSubtitle": "Trabalho em Altura — Segurança e Procedimentos",
+  "moduleOrder": 2,
+  "ebookTitle": "NR-35 — Trabalho em Altura",
+  "ebookSubtitle": "Guia completo: planejamento, análise de risco, ancoragem, EPIs e resgate",
+  "estimatedMinutes": 80,
+  "trailFiles": [
+    "t01_conceitos.json",
+    "t02_analise_risco.json",
+    "t03_ancoragem.json",
+    "t04_epi_epc.json",
+    "t05_resgate.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Conceitos e Campo de Aplicação",
+      "subtitle": "O que é trabalho em altura e por que ele mata",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Definição da NR-35",
+          "type": "text",
+          "body": "A NR-35 define trabalho em altura como toda atividade executada acima de 2,0 metros do nível inferior, onde haja risco de queda. Esse limite de 2 m é uma referência: havendo risco de queda com dano, a norma se aplica mesmo abaixo dessa altura em situações específicas. No setor elétrico, o trabalho em altura é onipresente — manutenção de redes aéreas, linhas de transmissão, estruturas de subestações, postes, torres e coberturas. A queda de altura é uma das principais causas de morte e invalidez no trabalho no Brasil."
+        },
+        {
+          "id": "s2",
+          "title": "Responsabilidades do empregador",
+          "type": "list",
+          "items": [
+            "Garantir a realização da Análise de Risco (AR) e, quando aplicável, a Permissão de Trabalho (PT)",
+            "Desenvolver procedimento operacional para as atividades rotineiras de trabalho em altura",
+            "Assegurar a capacitação dos trabalhadores (treinamento NR-35)",
+            "Garantir EPIs, EPCs e sistemas de ancoragem adequados e inspecionados",
+            "Assegurar que exista análise das condições e a supervisão da atividade",
+            "Garantir meios de resgate adequados à situação"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Responsabilidades do trabalhador",
+          "type": "list",
+          "items": [
+            "Cumprir as disposições legais e os procedimentos da empresa",
+            "Colaborar com a implementação das medidas de proteção",
+            "Interromper a atividade ao constatar risco grave e iminente (direito de recusa)",
+            "Zelar pela própria segurança e a de terceiros afetados por suas ações"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Capacitação e aptidão",
+          "type": "note",
+          "body": "O treinamento de trabalho em altura tem carga horária mínima de 8 horas (teórico e prático), com reciclagem periódica. Além da capacitação, o trabalhador deve ter avaliação de saúde que ateste aptidão — vertigem, problemas cardíacos descompensados e certas condições neurológicas podem contraindicar o trabalho em altura. A aptidão é parte da autorização: estar treinado não basta se a condição de saúde representar risco."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Trabalho em altura é toda atividade acima de 2 m com risco de queda — onipresente no setor elétrico e uma das maiores causas de morte ocupacional. O empregador garante análise de risco, capacitação, equipamentos e resgate; o trabalhador cumpre procedimentos e tem direito de recusa. A capacitação mínima é de 8h, somada à aptidão de saúde."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Análise de Risco e Permissão de Trabalho",
+      "subtitle": "Planejar antes de subir",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A Análise de Risco (AR)",
+          "type": "text",
+          "body": "Toda atividade de trabalho em altura deve ser precedida de Análise de Risco. Para tarefas rotineiras, a AR pode ser contemplada no procedimento operacional; para não rotineiras, deve ser específica. A AR identifica os perigos da tarefa, avalia os riscos e define as medidas de controle. Ela considera não só o risco de queda, mas o conjunto: o local, o acesso, as condições meteorológicas, a presença de energia elétrica próxima, e os riscos adicionais da atividade."
+        },
+        {
+          "id": "s2",
+          "title": "O que a Análise de Risco deve contemplar",
+          "type": "list",
+          "items": [
+            "O local de trabalho e o entorno (estruturas, redes energizadas, vãos)",
+            "O acesso ao ponto de trabalho e a forma de movimentação",
+            "Os riscos de queda e a necessidade de sistemas de proteção",
+            "As condições meteorológicas (vento, chuva, descargas atmosféricas)",
+            "Os riscos adicionais específicos da tarefa (elétrico, espaço confinado, materiais)",
+            "A necessidade de sistemas de comunicação e o plano de emergência/resgate"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A Permissão de Trabalho (PT)",
+          "type": "text",
+          "body": "A Permissão de Trabalho é o documento que autoriza formalmente a execução de tarefas não rotineiras ou de risco elevado. Ela contém as medidas de controle definidas na AR, a delimitação de validade (data, horário, local), os responsáveis e as assinaturas de autorização. A PT garante que alguém com responsabilidade verificou as condições antes de liberar o trabalho — funciona como um 'checklist formal de liberação'."
+        },
+        {
+          "id": "s4",
+          "title": "Condições impeditivas",
+          "type": "note",
+          "body": "Determinadas condições impedem ou suspendem o trabalho em altura, mesmo com tudo planejado: ventos fortes, tempestades com risco de descargas atmosféricas (crítico para trabalho em redes e estruturas metálicas), e qualquer alteração das condições previstas na AR. O trabalho deve ser interrompido e só retomado após reavaliação. Insistir sob condição impeditiva por pressão de prazo é uma das principais causas de acidentes fatais."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A Análise de Risco precede toda atividade em altura, avaliando local, acesso, queda, clima, riscos adicionais e resgate. A Permissão de Trabalho formaliza a liberação de tarefas não rotineiras com as medidas de controle e responsáveis. Condições impeditivas (vento forte, tempestade) suspendem o trabalho — nunca se trabalha sob risco grave por pressão de prazo."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Sistemas de Ancoragem",
+      "subtitle": "O que segura o trabalhador",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Pontos de ancoragem",
+          "type": "text",
+          "body": "O ponto de ancoragem é onde o sistema de proteção contra quedas se conecta à estrutura. Ele deve resistir aos esforços gerados por uma eventual queda — a norma e as referências técnicas exigem resistência mínima (tipicamente da ordem de 1500 kgf por trabalhador para ancoragem de retenção de queda), ou que seja um ponto especificado e certificado para essa função. Escolher um ponto de ancoragem inadequado (um cano, uma estrutura frágil) é tão perigoso quanto não usar ancoragem alguma."
+        },
+        {
+          "id": "s2",
+          "title": "Tipos de sistema de ancoragem",
+          "type": "list",
+          "items": [
+            "Ancoragem estrutural fixa — olhal, viga ou estrutura certificada para a função",
+            "Linha de vida vertical — para subida/descida em escadas e estruturas verticais",
+            "Linha de vida horizontal — permite deslocamento lateral; gera esforços elevados na fixação e exige cálculo estrutural",
+            "Trava-quedas retrátil — bloqueia automaticamente na queda, limitando a distância percorrida",
+            "Trava-quedas guiado (deslizante) — desliza pela linha de vida e trava na queda"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Fator de queda e distância de queda livre",
+          "type": "formula",
+          "formula": "Fator de Queda = altura da queda livre / comprimento do talabarte",
+          "explanation": "O fator de queda mede a severidade de uma queda. Quanto mais alto o ponto de ancoragem em relação ao conector do arnês, menor a queda livre e menor o impacto. Ancorar acima da cabeça (fator próximo de 0) é o ideal; ancorar abaixo da cintura gera fator de queda elevado (até 2) e impacto perigoso. Por isso a regra: ancore sempre o mais alto possível."
+        },
+        {
+          "id": "s4",
+          "title": "Zona livre de queda",
+          "type": "note",
+          "body": "Um erro fatal é instalar o sistema de ancoragem sem verificar a zona livre de queda — a distância vertical disponível abaixo do trabalhador. É preciso somar: o comprimento do talabarte, a abertura do absorvedor de energia (até ~1,75 m), a altura do próprio trabalhador e uma margem de segurança. Se a altura disponível for menor que essa soma, o trabalhador atinge o solo ANTES de o sistema detê-lo — o equipamento, corretamente instalado, não salva. Em alturas pequenas, prefira trava-quedas retrátil, que limita muito a distância de queda."
+        },
+        {
+          "id": "s5",
+          "title": "Inspeção dos equipamentos",
+          "type": "list",
+          "items": [
+            "Inspecione TODO equipamento antes de cada uso",
+            "Cortes, abrasões, fios rompidos, costuras desfeitas → descarte imediato",
+            "Mosquetões e conectores: trava funcionando, sem deformação ou corrosão",
+            "Absorvedor de energia: indicador de acionamento intacto (se acionou, descarte)",
+            "Registre as inspeções periódicas; retire de uso qualquer equipamento com dúvida"
+          ]
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O ponto de ancoragem deve resistir aos esforços de queda (≈1500 kgf) ou ser certificado. Linhas de vida verticais/horizontais e trava-quedas compõem os sistemas. O fator de queda ensina a ancorar o mais alto possível; a zona livre de queda deve ser verificada para o sistema deter o trabalhador antes do solo. Todo equipamento é inspecionado antes de cada uso, com descarte imediato ao menor dano."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — EPIs e EPCs para Trabalho em Altura",
+      "subtitle": "Equipamentos que protegem a vida",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "EPC vs EPI: a ordem de prioridade",
+          "type": "text",
+          "body": "A NR-35, alinhada à hierarquia de controles, prioriza as medidas de proteção coletiva (EPC) sobre as individuais (EPI). Sempre que possível, deve-se eliminar o risco de queda na fonte ou usar proteção coletiva — guarda-corpos, plataformas, redes de segurança, fechamento de vãos. O EPI (sistema de retenção de queda) entra quando o EPC é inviável ou insuficiente. Na prática elétrica em redes e estruturas, frequentemente se combina ambos."
+        },
+        {
+          "id": "s2",
+          "title": "Proteções coletivas (EPC)",
+          "type": "list",
+          "items": [
+            "Guarda-corpos e rodapés em plataformas e aberturas",
+            "Fechamento de vãos, poços e aberturas no piso",
+            "Redes de segurança para retenção de queda",
+            "Plataformas elevatórias de trabalho (PTA) com proteção perimetral",
+            "Sinalização e isolamento da área de projeção (queda de materiais)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O sistema individual de retenção de queda",
+          "type": "list",
+          "items": [
+            "Cinturão de segurança tipo paraquedista (arnês de corpo inteiro) — o cinto abdominal simples é proibido para retenção de queda",
+            "Talabarte com absorvedor de energia — limita a força de impacto no corpo (tipicamente a 6 kN)",
+            "Talabarte em Y (duplo) — permite transposição de obstáculos sem ficar desconectado",
+            "Trava-quedas — guiado ou retrátil, conforme a aplicação",
+            "Conectores (mosquetões) com trava dupla anti-abertura acidental"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Por que o arnês de corpo inteiro",
+          "type": "note",
+          "body": "O cinturão abdominal simples, ainda visto em obras antigas, é proibido como retenção de queda — numa queda, ele concentra todo o impacto na região lombar, podendo causar lesões graves na coluna, e a pessoa pode escorregar para fora dele. O arnês de corpo inteiro (paraquedista) distribui o impacto pelos ombros, coxas e tórax, mantém o corpo na posição vertical e tem o ponto de conexão dorsal (entre as escápulas), que minimiza lesões. O cinto abdominal só é aceitável para posicionamento/restrição, nunca para deter quedas."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A proteção coletiva (guarda-corpos, redes, plataformas) tem prioridade sobre a individual. O sistema individual de retenção usa arnês de corpo inteiro (nunca cinto abdominal), talabarte com absorvedor de energia, talabarte em Y para transposição e trava-quedas. O arnês distribui o impacto e mantém o corpo na posição correta — por isso o cinto simples é proibido para retenção de queda."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Plano de Resgate e Emergência",
+      "subtitle": "Preparar-se para o pior",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que o plano de resgate é obrigatório",
+          "type": "text",
+          "body": "A NR-35 exige que toda atividade de trabalho em altura tenha meios de resgate adequados, planejados ANTES do início do trabalho. A razão é dura: mesmo com toda a prevenção, uma queda pode acontecer — e uma vítima suspensa pelo arnês precisa ser resgatada rapidamente. Improvisar o resgate no momento da emergência custa minutos preciosos e, frequentemente, vidas. O plano deve estar pronto, com equipamento e equipe definidos, antes de qualquer pessoa subir."
+        },
+        {
+          "id": "s2",
+          "title": "Trauma de suspensão (síndrome do arnês)",
+          "type": "note",
+          "body": "Uma pessoa que fica suspensa imóvel pelo arnês após uma queda corre risco de trauma de suspensão: as correias comprimem as veias das pernas, o sangue se acumula nos membros inferiores e o retorno venoso ao coração cai drasticamente. Em minutos, pode haver desmaio e, sem resgate rápido, parada cardíaca — mesmo sem nenhum ferimento da queda em si. Por isso a meta de resgate é de poucos minutos. A vítima consciente deve movimentar as pernas e usar os estribos de alívio do arnês, se disponíveis, para reduzir a compressão."
+        },
+        {
+          "id": "s3",
+          "title": "Elementos de um plano de resgate",
+          "type": "list",
+          "items": [
+            "Equipe treinada e disponível durante toda a atividade",
+            "Equipamentos de resgate adequados ao cenário (sistemas de descida, talhas, macas)",
+            "Tempo de resposta compatível com o risco de trauma de suspensão",
+            "Meios de comunicação para acionamento imediato",
+            "Integração com o atendimento médico de emergência (SAMU/Bombeiros)",
+            "Treinamento e simulados periódicos do plano"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Auto-resgate e resgate assistido",
+          "type": "text",
+          "body": "Há diferentes estratégias conforme o cenário. O auto-resgate (a própria vítima retorna a um local seguro) é possível em quedas leves com a vítima consciente e treinada. O resgate assistido por equipe é necessário quando a vítima está inconsciente ou ferida. Em estruturas elétricas, o plano deve considerar a possível necessidade de desenergização antes do resgate, para não expor a equipe ao risco elétrico que possa ter causado a queda."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O plano de resgate é obrigatório e deve estar pronto ANTES do trabalho — improvisar mata. O trauma de suspensão pode levar à parada cardíaca em minutos numa vítima imóvel no arnês, exigindo resgate rápido. O plano define equipe, equipamentos, tempo de resposta, comunicação e integração com o socorro médico, considerando ainda a desenergização em estruturas elétricas."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Trabalho em Altura no Setor Elétrico",
+      "subtitle": "A combinação NR-35 + NR-10",
+      "estimatedMinutes": 9,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Risco duplo: queda e eletricidade",
+          "type": "text",
+          "body": "O trabalho em postes, torres e estruturas de subestação combina dois dos maiores riscos ocupacionais: a queda (NR-35) e o choque/arco elétrico (NR-10). Os dois se potencializam — um choque pode causar uma queda, e uma queda pode levar ao contato com partes energizadas. Por isso, atividades em redes aéreas exigem a aplicação simultânea e integrada das duas normas, com análise de risco que contemple ambos os perigos."
+        },
+        {
+          "id": "s2",
+          "title": "Cuidados específicos",
+          "type": "list",
+          "items": [
+            "Manter a distância de segurança das partes energizadas conforme a tensão",
+            "Desenergizar a rede sempre que possível antes do trabalho em altura próximo a condutores",
+            "Usar EPIs que atendam aos dois riscos (capacete isolante com jugular, vestimenta anti-arco)",
+            "Considerar a indução eletromagnética de circuitos energizados próximos",
+            "Suspender o trabalho sob risco de descargas atmosféricas — estruturas metálicas em altura são alvos preferenciais"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "No setor elétrico, queda e eletricidade se combinam e se potencializam, exigindo NR-35 e NR-10 aplicadas juntas. Mantenha distância das partes vivas, desenergize quando possível, use EPIs que atendam aos dois riscos e suspenda o trabalho sob tempestade. Em altura com eletricidade, a análise de risco integrada e o plano de resgate que considera a desenergização são o que separam um trabalho seguro de uma tragédia."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "SPDA",
+  "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
+  "categoryOrder": 1,
+  "module": "Normas SPDA",
+  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspecao",
+  "moduleOrder": 2,
+  "trail": "IEC 62305 Series",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "A NBR 5419:2015 foi reestruturada tendo como texto base qual norma internacional, mantendo a mesma organizacao metodologica dividida em quatro partes?",
+      "options": [
+        "Serie IEC 61643",
+        "Serie IEC 62561",
+        "Serie IEC 62305",
+        "Serie IEEE 142"
+      ],
+      "correctIndex": 2,
+      "explanation": "Tendo como texto base a norma internacional IEC 62305/2010, a ABNT NBR 5419:2015 segue com a mesma estrutura e organizacao desta IEC, composta por quatro volumes normativos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A serie normativa internacional que padroniza os requisitos tecnicos e os ensaios para Dispositivos de Protecao contra Surtos (DPS), referenciada ativamente na nova NBR 5419:2026, e a:",
+      "options": [
+        "ABNT NBR IEC 62305",
+        "ABNT NBR IEC 61643",
+        "ABNT NBR IEC 62561-8",
+        "ABNT NBR IEC 60044"
+      ],
+      "correctIndex": 1,
+      "explanation": "No caso dos dispositivos de protecao contra surtos, os requisitos tecnicos passam a ser direcionados a serie ABNT NBR IEC 61643, responsavel pela padronizacao desses dispositivos. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com as diretrizes do Guia PDA da HazOp Engenharia, a ABNT NBR 5419:2015 esta harmonizada com qual norma para garantir o alinhamento com os mais avancados padroes mundiais de engenharia de protecao?",
+      "options": [
+        "IEEE Green Book Std 142",
+        "Serie IEC 62305",
+        "Serie IEC 60056",
+        "Normativa VDE 0414"
+      ],
+      "correctIndex": 1,
+      "explanation": "A ABNT NBR 5419:2015 esta harmonizada com as normas internacionais da serie IEC 62305, garantindo que as praticas brasileiras estejam alinhadas com os mais avancados padroes mundiais de engenharia de protecao. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No subsistema de descida, a revisao da NBR 5419:2026 admite a utilizacao de condutores com isolacao especifica (como o cabo DEHN HVI) para reduzir o risco de centelhamentos perigosos. Qual norma tecnica internacional dita as especificacoes dessa isolacao?",
+      "options": [
+        "IEC 62305-2",
+        "IEC 61643-11",
+        "IEC TS 62561-8",
+        "IEC 60255-20"
+      ],
+      "correctIndex": 2,
+      "explanation": "No subsistema de descida, passa a ser admitida a utilizacao de condutores com isolacao especifica conforme a IEC TS 62561-8, o que permite manter a distancia de seguranca e reduzir centelhamentos. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "As diretrizes sobre protecao de estruturas contra descargas atmosfericas da serie IEC 62305 abordam a complexa avaliacao de risco quantitativa. Essa avaliacao corresponde a qual parte da norma brasileira ABNT NBR 5419?",
+      "options": [
+        "Parte 1",
+        "Parte 2",
+        "Parte 3",
+        "Parte 4"
+      ],
+      "correctIndex": 1,
+      "explanation": "O Volume 2 (Parte 2) trata do Gerenciamento de Risco, tendo como base a documentacao da IEC 62305-2:2010. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Os softwares desenvolvidos para facilitar o Gerenciamento de Risco (como o TUPAN, criado pelo IEE/USP) utilizam como base os algoritmos estabelecidos em qual norma internacional de protecao?",
+      "options": [
+        "Serie IEC 61643",
+        "Serie IEC 62561",
+        "Norma IEC 62305-2:2010",
+        "Norma IEEE C37.2"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ja existem alguns softwares que foram desenvolvidos tanto no Brasil quanto no exterior, com base na IEC 62305-2:2010, que facilitam o calculo de riscos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O conceito de Zonas de Protecao contra Raios (ZPR) foi fundamentado pelas normas baseadas na IEC para dimensionar as protecoes eletronicas (MPS). Nas equacoes matematicas, o parametro Ks1 avalia a eficiencia da blindagem em qual interface de zona?",
+      "options": [
+        "ZPR 0A e ZPR 0B",
+        "ZPR 0 e ZPR 1",
+        "ZPR 1 e ZPR 2",
+        "ZPR X e ZPR Y"
+      ],
+      "correctIndex": 1,
+      "explanation": "O parametro Ks1 leva em consideracao a eficiencia da blindagem por malha da estrutura, SPDA ou outra blindagem na interface ZPR 0/1. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Os Niveis de Protecao contra Raios (Lightning Protection Level - LPL), alinhados as normativas internacionais, classificam a eficiencia do sistema. O LPL I, destinado a Protecao Maxima, oferece interceptacao contra qual porcentagem das correntes de raio?",
+      "options": [
+        "80%",
+        "90%",
+        "95%",
+        "99%"
+      ],
+      "correctIndex": 3,
+      "explanation": "O LPL I oferece protecao contra 99% das correntes de raio, sendo obrigatorio para estruturas criticas como hospitais, centrais de emergencia e instalacoes com risco de explosao. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A norma ABNT NBR 5419 baseada na IEC 62305 define os parametros fisicos fundamentais para os quatro niveis de LPL. Qual e a corrente minima e o raio da esfera rolante exigidos para o Nivel de Protecao III (LPL III)?",
+      "options": [
+        "Corrente minima de 2,9 kA e raio de 20 m.",
+        "Corrente minima de 5,4 kA e raio de 30 m.",
+        "Corrente minima de 10,1 kA e raio de 45 m.",
+        "Corrente minima de 15,7 kA e raio de 60 m."
+      ],
+      "correctIndex": 2,
+      "explanation": "O LPL III, classificado como Protecao Convencional (aplicavel a residenciais e comerciais padrao), possui uma corrente minima estipulada de 10,1 kA e raio da esfera rolante de 45 m. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O Gerenciamento de Risco da NBR 5419, em consonancia com a IEC 62305-2, define estritamente o limite do Risco Toleravel (RT). Qual e o limite de risco RT aceitavel para a componente de perda de vidas humanas (Risco R1)?",
+      "options": [
+        "1 em 1.000 por ano (10^-3)",
+        "1 em 10.000 por ano (10^-4)",
+        "1 em 100.000 por ano (10^-5)",
+        "1 em 1.000.000 por ano (10^-6)"
+      ],
+      "correctIndex": 2,
+      "explanation": "Para a Perda de Vidas Humanas (Risco R1), o criterio mais rigoroso da norma estabelece o Risco Toleravel (RT) aceitavel como sendo de 1 em 100.000 por ano (10^-5). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia / Cleiton Junior Lopes)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A revisao de 2015 da ABNT NBR 5419, adotando os principios da serie internacional IEC 62305, foi estruturada em exatamente quatro partes principais (Principios gerais, Gerenciamento de risco, Danos fisicos e Sistemas eletricos e eletronicos).",
+      "correctAnswer": true,
+      "explanation": "Tendo como texto base a norma internacional IEC 62305/2010, a ABNT NBR 5419:2015 segue com a mesma estrutura e organizacao desta IEC, composta por quatro volumes normativos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os Dispositivos de Protecao contra Surtos (DPS) aplicados como parte das MPS na Parte 4 da norma tem seus requisitos tecnicos, limites e ensaios ditados fundamentalmente pela serie ABNT NBR IEC 61643.",
+      "correctAnswer": true,
+      "explanation": "No caso dos dispositivos de protecao contra surtos, os requisitos tecnicos passam a ser direcionados a serie ABNT NBR IEC 61643, responsavel pela padronizacao desses dispositivos. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As normativas baseadas na IEC 62305 isentam permanentemente as inspecoes e as manutencoes dos sistemas de protecao, contanto que o projeto inicial possua o rigor tecnico e utilize os materiais dimensionados para o Nivel Maximo (LPL I).",
+      "correctAnswer": false,
+      "explanation": "Nao existe isencao de manutencao. A norma exige que haja um periodo previsto para inspecoes visuais e completas, essencial para garantir que o material esteja em boas condicoes de atuacao, dependendo da classe de risco e do ambiente. (Fonte: Guia Completo de Manutencao SPDA, Jel Para-raios / Cleiton Junior Lopes)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os cabos e condutores do subsistema de descida que contam com isolacao em alta tensao para evitar centelhamentos superficiais perigosos nas estruturas (como o DEHN HVI) devem possuir sua tecnologia atestada segundo a IEC TS 62561-8.",
+      "correctAnswer": true,
+      "explanation": "No subsistema de descida, passa a ser admitida a utilizacao de condutores com isolacao especifica (como o DEHN HVI) conforme a IEC TS 62561-8, para manter distancias de seguranca e reduzir o risco de centelhamentos. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O conceito tecnico de Zonas de Protecao contra Raios (ZPR) e empregado pela NBR 5419 / IEC 62305 exclusivamente para caracterizar os limites em que a blindagem espacial e os dispositivos coordenados de surto atenuarao os impulsos LEMP.",
+      "correctAnswer": true,
+      "explanation": "A norma define as Zonas de Protecao contra Raios (ZPR) para caracterizar as interfaces (ZPR 0/1) onde as blindagens eletromagneticas devem ser avaliadas e os DPS posicionados coordenadamente contra os LEMPs. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Com a incorporacao das filosofias da IEC 62305, a normativa brasileira integrou a protecao fisica (SPDA) e a protecao eletroeletronica (MPS). Esse conjunto unificado de protecao passou a ser amplamente chamado pelo acronimo macro de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "PDA"
+        }
+      ],
+      "explanation": "O termo SPDA divide agora espaco com as MPS (Medidas de Protecao contra Surtos), e os dois termos juntos trazem o novo e mais abrangente conceito de protecao contra descargas atmosfericas (PDA). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O modelo cientifico de calculo de perdas e dimensionamento probabilistico da NBR 5419 Parte 2, que determina a obrigatoriedade e as classes do SPDA, baseia-se diretamente na norma internacional IEC ____-2.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "62305"
+        }
+      ],
+      "explanation": "Tanto a estruturacao da norma ABNT NBR 5419 quanto o desenvolvimento de softwares de calculo de risco brasileiros (ex: TUPAN) utilizam como base cientifica a normativa internacional IEC 62305-2:2010. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Ao avaliar os materiais das instalacoes, quando os projetos adotam condutores isolados de alta tecnologia no subsistema de descida para burlar problemas de centelhamento direto, o material empregado deve atestar conformidade tecnica de acordo com a norma IEC TS ____-8.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "62561"
+        }
+      ],
+      "explanation": "A revisao pratica da NBR 5419:2026 admite a utilizacao de condutores com isolacao de alta tensao especifica para as descidas e estipula expressamente que os mesmos estejam conforme a IEC TS 62561-8. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "hard"
+    }
+  ]
+}

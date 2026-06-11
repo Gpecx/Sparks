@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Fundamentos de Qualidade da Energia",
+  "moduleSubtitle": "Conceitos, indicadores, disturbios e legislacao",
+  "moduleOrder": 0,
+  "trail": "História e Importância da Qualidade da Energia",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o objetivo fundamental de um Sistema Eletrico de Potencia (SEP) em relacao ao seu fornecimento de energia?",
+      "options": [
+        "Suprir a demanda com qualidade e confiabilidade.",
+        "Garantir a variacao constante de frequencia para as industrias.",
+        "Reduzir a tensao de operacao global para minimizar o consumo termico.",
+        "Priorizar apenas as cargas nao lineares em detrimento das residenciais."
+      ],
+      "correctIndex": 0,
+      "explanation": "Segundo o documento Apostila Protecao, os objetivos fundamentais de um Sistema Eletrico de Potencia sao suprir a demanda com qualidade e confiabilidade, englobando tensao e frequencia constantes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos ultimos anos, a preocupacao com a Qualidade da Energia Eletrica (QEE) aumentou consideravelmente. Qual e um dos principais motivos tecnicos e praticos citados para esse aumento da preocupacao por parte de industrias e consumidores?",
+      "options": [
+        "O aumento exclusivo no uso de lampadas incandescentes puramente resistivas.",
+        "Os altos prejuizos financeiros acarretados pelos Disturbios da Qualidade da Energia Eletrica.",
+        "A eliminacao completa de normatizacoes e fiscalizacoes no setor eletrico.",
+        "A diminuicao drastica da capacidade de geracao e do consumo global de energia."
+      ],
+      "correctIndex": 1,
+      "explanation": "A dissertacao do IFPB afirma que a preocupacao com a QEE tem se tornado mais evidente devido a diversos fatores, entre os quais os prejuizos financeiros acarretados pelos Disturbios da Qualidade da Energia Eletrica (DQEE).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O avanco tecnologico produtivo introduziu inovacoes que dependem fortemente da qualidade da energia. Qual inovacao e destacada pela literatura como sensivel e dependente do fornecimento adequado para trabalhar corretamente?",
+      "options": [
+        "A robotizacao utilizada em grande escala nos sistemas de automacao.",
+        "O uso de motores de corrente continua puramente eletromecanicos.",
+        "A substituicao de microprocessadores por chaves mecanicas seccionadoras.",
+        "A iluminacao direta atraves de lampadas de descarga a gas do seculo XX."
+      ],
+      "correctIndex": 0,
+      "explanation": "O documento do IFPB menciona que, na Quarta Revolucao Industrial, a robotizacao e utilizada em grande escala e, para isso, e fundamental o fornecimento de energia de qualidade.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com analises sobre a evolucao do mercado de monitoramento, quais fatores macroeconomicos e tecnologicos estao impulsionando o crescimento na adocao de analisadores de qualidade da energia?",
+      "options": [
+        "A forte reducao no uso e desenvolvimento de dispositivos eletronicos sensiveis.",
+        "A eletrificacao global e a adocao macica de redes inteligentes (smart grids).",
+        "A obrigatoriedade de substituir medidores digitais por dispositivos analogicos antigos.",
+        "O abandono comercial do monitoramento continuo em industrias de manufatura."
+      ],
+      "correctIndex": 1,
+      "explanation": "O guia comercial e tecnico da Wrindu relata que o mercado desses equipamentos cresce impulsionado pela eletrificacao e pela adocao de redes inteligentes.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Com a modernizacao das redes, como o expressivo crescimento da geracao distribuida e dos veiculos eletricos tem impactado a qualidade da energia eletrica nos sistemas atuais?",
+      "options": [
+        "Eles nao possuem qualquer tipo de impacto, pois operam isoladamente da rede principal de distribuicao.",
+        "Eles eliminam totalmente a ocorrencia de afundamentos de tensao estabilizando o neutro do transformador.",
+        "Eles acessam a rede por meio de conversores, constituindo uma carga acentuadamente nao linear que e fonte de disturbios.",
+        "Eles aumentam a inercia rotativa do sistema eletrico global, extinguindo assim de forma natural as oscilacoes harmonicas."
+      ],
+      "correctIndex": 2,
+      "explanation": "O documento do IFPB aponta que tecnologias como geracao distribuida e veiculos eletricos acessam a rede por meio de conversores, e essa conexao acentuada de cargas nao lineares sao fontes de disturbios de QEE.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A sensibilidade das cargas modernas motiva o emprego continuo de medicao de qualidade da energia. Qual papel os modernos analisadores desempenham diretamente na protecao de plantas industriais?",
+      "options": [
+        "Desconectam permanentemente toda a subestacao sem necessidade de intervencao humana em quedas minimas.",
+        "Capturam dados e anomalias para proteger maquinas sensiveis contra paralisacoes e prover registros para conformidade com as normas.",
+        "Substituem integralmente os disjuntores de potencia em subestacoes para atuar contra os curtos-circuitos francos.",
+        "Elevam de modo estatico a tensao de fornecimento do transformador para mitigar o fator de potencia das maquinas soldadoras."
+      ],
+      "correctIndex": 1,
+      "explanation": "O artigo sobre Analisadores da Wrindu especifica que eles operam para detectar anomalias que podem danificar maquinas sensiveis ou causar paralisacoes, fornecendo registros detalhados para conformidade com normas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A teoria tecnica aborda o alto custo decorrente de interrupcoes na qualidade da energia atraves de tres categorias de impactos. O que define formalmente um impacto economico indireto sofrido pelo consumidor?",
+      "options": [
+        "A queima imediata de cabos isolantes, disjuntores termicos e transformadores de retaguarda.",
+        "A deterioracao da producao semi-acabada que foi repentinamente interrompida na linha de montagem.",
+        "O custo financeiro gerado pela postergacao de receitas e a perda de participacao competitiva no mercado.",
+        "A exigencia de evacuacao predial obrigatoria devido aos danos causados pela queima de capacitores inflamaveis."
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo o trabalho do IFPB que cita as teorias de Fuchs e Masoum, os impactos economicos indiretos abrangem os custos para uma organizacao de receitas sendo adiados e o custo financeiro da perda de participacao no mercado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "As variacoes subitas da qualidade de energia resultam em grandes reveses ao comercio e a industria. Segundo a literatura, o que se enquadra como um impacto imediato e obvio percebido apos transientes eletromagneticos e interrupcoes?",
+      "options": [
+        "A estabilizacao automatica da distorcao harmonica par no quadro do cliente.",
+        "O dano aos equipamentos eletricos instalados, perda do processo e os altos custos associados a reinicializacao do sistema.",
+        "A reducao drastica dos ruidos brancos no link de corrente continua dos conversores passivos associados a malha.",
+        "O decrescimo imediato das penalidades reativas no momento exato em que a concessionaria afere o medidor de consumo."
+      ],
+      "correctIndex": 1,
+      "explanation": "O estudo de Disturbios do IFPB afirma que o impacto da perturbacao QEE e obvio e imediatamente perceptivel devido a danos ao equipamento, custos de reinicializacao de sistemas, perda de processo produtivo ou inatividade.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para minimizar falhas e acompanhar a evolucao tecnica das redes, qual tecnologia emergente em instrumentacao reduz custos logisticos processando dados complexos de qualidade de energia localmente sem grande latencia?",
+      "options": [
+        "A adocao puramente baseada em reles de atracao de armadura sem contato eletrico.",
+        "A integracao obrigatoria com as Demais Instalacoes de Transmissao isoladas.",
+        "A integracao de recursos baseados em computacao de borda (edge computing).",
+        "O emprego sistematico de discos magneticos perfurados em conversores estaticos do tipo C."
+      ],
+      "correctIndex": 2,
+      "explanation": "O guia comercial tecnico da Wrindu destaca que a integracao da computacao de borda permite que os analisadores processem informacoes localmente, minimizando a latencia em locais remotos.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A presenca acentuada de eletronica de potencia nos dias de hoje aumenta os problemas associados a poluicao harmonica nas redes. Conforme o material tecnico sobre solucoes industriais, como a injecao dessas componentes altera diretamente o custo operacional do consumidor?",
+      "options": [
+        "Essas correntes adicionais nao geram qualquer trabalho, porem intensificam perdas eletricas sistematicas e forcam a reducao no fator de potencia da unidade consumidora.",
+        "Essas correntes aumentam a potencia ativa real aproveitada pelas maquinas com rendimento absoluto isentando o consumidor de penalidades financeiras.",
+        "Elas compensam espontaneamente as componentes de impedancia reativa indutiva advindas do sistema, atuando como verdadeiros capacitores eletricos na rede sem causar custos operacionais.",
+        "Ao serem puramente resistivas, as distorcoes anulam as zonas mortas protetivas e maximizam a corrente de magnetizacao dos geradores reduzindo as cobrancas."
+      ],
+      "correctIndex": 0,
+      "explanation": "O catalogo Solucoes WEG detalha que os harmonicos sao correntes adicionais que nao produzem trabalho e, portanto, ocasionam perdas e reduzem fator de potencia, o que leva ao aumento do custo da energia eletrica.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Devido a notavel expansao global do setor eletrico e a integracao das mais diversas tecnologias industriais modernas, as concessionarias de distribuicao reduziram a sua preocupacao direta com as exigencias relacionadas a qualidade da energia eletrica.",
+      "correctAnswer": false,
+      "explanation": "O IFPB em sua dissertacao declara que a expansao do setor eletrico e acompanhada pelas preocupacoes referentes aos temas relacionados a Qualidade da Energia Eletrica, pela obrigatoriedade da adequacao as normas.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Atraves da evolucao tecnica da industria moderna, constata-se que o crescimento na complexidade de operacao dos processos produtivos tem tornado as cargas eletricas gradualmente muito mais dependentes das qualidades intrinsecas do sistema no qual se encontram interligadas.",
+      "correctAnswer": true,
+      "explanation": "Segundo o estudo do IFPB baseado nos autores Deckmann e Pomilio, os consumidores e seus aparelhos estao sucessivamente mais dependentes das condicoes de operacao do sistema, fruto do aumento da complexidade das funcionalidades.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Historicamente, o rigoroso conjunto de recomendacoes estabelecido atraves da norma internacional IEEE 519 foi formulado com a intencao expressa de regulamentar e certificar o funcionamento restrito aos equipamentos ou produtos eletricos individuais instalados na matriz industrial.",
+      "correctAnswer": false,
+      "explanation": "O manual tecnico da WEG adverte exatamente o aspecto inverso, deixando claro que a IEEE 519 diz respeito aos sistemas de distribuicao e nao aos equipamentos individuais.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na era contemporanea de digitalizacao comercial, prejuizos advindos de eventos como distorcoes de forma de onda e interrupcoes nas instalacoes justificam o emprego da instrumentacao avancada de diagnostico, cujo retorno financeiro geralmente demonstra-se de forma acelerada nos casos praticos industriais relatados.",
+      "correctAnswer": true,
+      "explanation": "O documento Guia da Wrindu ilustra fortes perdas, como uma usina perdendo US$ 150 mil por ano e Data Centers expostos a penalizacoes de US$ 500 mil, evidenciando que o retorno sobre o investimento em analisadores geralmente e alcancado em 6 a 12 meses.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Conforme evidenciado pelas tendencias evolutivas do proprio mercado no ambiente de qualificacao e monitoramento, a instrumentacao tecnologica moderna esta comecando a integrar algoritmos de aprendizado de maquina para fins de realizar previsoes de comportamento e de eventuais desvios a partir de dados operacionais passados e tendencias correntes.",
+      "correctAnswer": true,
+      "explanation": "O guia pratico da Wrindu relata na secao de tendencias da engenharia que o aprendizado de maquina aprimora a previsao da qualidade da energia, prevendo disturbios a partir de tendencias historicas.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na atual evolucao tecnologica do mercado, a automacao em grande escala nas fabricas necessita de energia livre de disturbios para permitir que robos operem de forma confiavel, momento tambem conhecido como ____ 4.0 ou Quarta Revolucao Industrial.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Industria"
+        }
+      ],
+      "explanation": "A dissertacao do IFPB referencia as consequencias do fornecimento de energia instavel abordando a Industria 4.0, conhecida como Quarta Revolucao Industrial, ressaltando a relevancia da robotica nela inserida.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na metodologia que mapeia a importancia financeira de proteger sistemas eletricos da falta de qualidade de energia, eventos como desgaste prematuro, queima direta de transformadores de forca e a consequente deterioracao da producao que estava semi-acabada fazem parte estritamente do impacto economico classificado mundialmente como ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "direto"
+        }
+      ],
+      "explanation": "Conforme a referencia aos estudos globais de Fuchs e Masoum relatados no IFPB, os danos como queima e deterioracao da producao semi-acabada estao textualmente descritos sob a lista de impactos economicos diretos.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Devido as necessidades introduzidas por dispositivos sensiveis, o elevado crescimento e penetracao dos analisadores inteligentes no ambito global e alavancado fortemente pela eletrificacao acelerada e pela crescente adocao e normatizacao das ____ inteligentes (smart grids).",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "redes"
+        }
+      ],
+      "explanation": "O artigo tecnico de monitoramento do guia Wrindu assevera explicitamente que o avanco da area da QEE e impulsionado pela eletrificacao e pela adocao de redes inteligentes.",
+      "difficulty": "hard"
+    }
+  ]
+}

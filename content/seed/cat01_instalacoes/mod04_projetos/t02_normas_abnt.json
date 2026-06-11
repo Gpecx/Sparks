@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Projetos Elétricos Industriais",
+  "moduleSubtitle": "Fundamentos, normas, dimensionamento e documentação de projetos",
+  "moduleOrder": 3,
+  "trail": "Normas ABNT Aplicadas a Projetos",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Quais normas tecnicas de instalacoes eletricas sao exigidas no conteudo do curso basico da NR-10?",
+      "options": [
+        "NBR 5410 e NBR 14039.",
+        "NBR 5419 e NBR 5410.",
+        "NBR 14039 e NBR IEC 60079.",
+        "NBR 14039 e NBR 5418."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Anexo III da NR-10 inclui explicitamente as normas NBR 5410 e NBR 14039 no programa de treinamento basico.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao os esquemas de aterramento funcional listados expressamente no Anexo III da NR-10?",
+      "options": [
+        "TNC, TNS e IT.",
+        "TN, TT e IT.",
+        "TT, TNS e neutro solido.",
+        "IT, neutro isolado e TN."
+      ],
+      "correctIndex": 1,
+      "explanation": "No item de Medidas de Controle do Risco Eletrico, a NR-10 lista o aterramento funcional nas topologias TN, TT e IT.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre na primeira falta fase-terra em um sistema de neutro isolado, segundo o Guia de Protecao?",
+      "options": [
+        "Um curto-circuito violento desliga a rede imediatamente.",
+        "A tensao de toque atinge valores letais em toda a fabrica.",
+        "Uma corrente capacitiva fraca flui, permitindo manter o servico.",
+        "A protecao diferencial atua bloqueando todos os disjuntores."
+      ],
+      "correctIndex": 2,
+      "explanation": "No regime de neutro isolado, a primeira falha gera baixa corrente capacitiva e pode ser mantida sem desligamento imediato.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual modo de aterramento do neutro minimiza sobretensoes, mas provoca elevadas correntes de fuga a terra?",
+      "options": [
+        "Aterramento por reatancia.",
+        "Neutro compensado.",
+        "Neutro isolado.",
+        "Neutro diretamente aterrado."
+      ],
+      "correctIndex": 3,
+      "explanation": "O Guia de Protecao afirma que o neutro diretamente aterrado e ideal contra sobretensoes, mas cria altas correntes de falha.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como deve ser dimensionada a bobina de Petersen em redes de neutro compensado?",
+      "options": [
+        "Ajustada na capacitancia fase-terra total da rede.",
+        "Ajustada com baixa resistencia para disparar fusiveis.",
+        "Dimensionada para o triplo da impedancia de sequencia positiva.",
+        "Sintonizada apenas para bloqueio de correntes harmonicas."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Guia de Protecao indica que a bobina de Petersen e uma reatancia ajustada na capacitancia fase-terra total da rede.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual medida atua ativamente contra riscos de choque por fuga de corrente, segundo o escopo da NR-10?",
+      "options": [
+        "Rele direcional de potencia.",
+        "Dispositivos a corrente de fuga.",
+        "Bobina de Petersen.",
+        "Centelhadores a gas."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os dispositivos a corrente de fuga sao listados no Anexo III da NR-10 como medida de controle do risco eletrico.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o Guia de Protecao define a corrente residual utilizada para deteccao de falhas a terra?",
+      "options": [
+        "Diferenca entre correntes de neutro e aterramento.",
+        "Corrente circulante na malha de terra local.",
+        "Soma vetorial das tres correntes de fase.",
+        "Corrente de magnetizacao do transformador."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Guia define a corrente residual, que caracteriza a fuga a terra, como a soma vetorial das tres correntes de fase.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em instalacoes com neutro diretamente aterrado, qual funcao de protecao e recomendada pelo Guia de Protecao?",
+      "options": [
+        "Sobrecorrente de carcaca ANSI 51G.",
+        "Direcional de potencia reversa ANSI 32P.",
+        "Subtensao de sequencia positiva ANSI 27D.",
+        "Fuga a terra temporizada ANSI 51N."
+      ],
+      "correctIndex": 3,
+      "explanation": "Para neutro diretamente aterrado, a deteccao e feita por funcao de fuga a terra temporizada, codigo ANSI 51N.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais protecoes fisicas sao citadas na NR-10 para impedir o contato direto com partes energizadas?",
+      "options": [
+        "Isolamento das partes vivas, barreiras e involucros.",
+        "Capacetes e luvas de borracha isolante.",
+        "Aterramento temporario e bloqueio por cadeado.",
+        "Tapetes isolantes e hastes de manobra."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Anexo III da NR-10 cita barreiras, involucros, obstaculos e isolamento de partes vivas como medidas de controle.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a NR-10 exige obrigatoriamente nos projetos eletricos quanto ao desligamento de circuitos?",
+      "options": [
+        "Chaves seccionadoras com operacao motorizada.",
+        "Dispositivos com recursos para impedimento de reenergizacao.",
+        "Quadros de comando com portas transparentes.",
+        "Disjuntores a vacuo em todas as entradas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.3.1 da NR-10 exige que os projetos especifiquem dispositivos de desligamento com impedimento de reenergizacao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A analise e aplicacao das normas NBR 5410 e NBR 14039 integram o conteudo programatico do curso basico da NR-10.",
+      "correctAnswer": true,
+      "explanation": "O Anexo III da NR-10 relaciona as NBRs 5410 e 14039 diretamente na programacao minima de treinamento.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Segundo o Guia de Protecao, em um sistema com neutro isolado a primeira falta a terra exige o desligamento automatico imediato do circuito.",
+      "correctAnswer": false,
+      "explanation": "No neutro isolado, a falha capacitiva e baixa e nao exige trip automatico na primeira falta, mantendo a continuidade.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A NR-10 exige que o projeto eletrico defina se ha ou nao interligacao entre o condutor neutro e o condutor de protecao.",
+      "correctAnswer": true,
+      "explanation": "O item 10.3.4 da NR-10 estabelece que o projeto deve definir a obrigatoriedade ou nao da interligacao entre neutro e protecao.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Dispositivos a corrente de fuga sao citados no treinamento da NR-10 como solucoes tecnicas para o controle do risco eletrico.",
+      "correctAnswer": true,
+      "explanation": "No Anexo III da NR-10, o item 4 engloba medidas de controle, citando os dispositivos a corrente de fuga.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em redes com neutro diretamente aterrado, a corrente de fuga a terra comporta-se praticamente como um curto-circuito entre fase e neutro.",
+      "correctAnswer": true,
+      "explanation": "O Guia de Protecao confirma que a falha para a terra no neutro solidamente aterrado atinge altos valores, similares a falha fase-neutro.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No Anexo III da NR-10, o estudo do aterramento funcional engloba expressamente as topologias TN, TT e ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "IT"
+        }
+      ],
+      "explanation": "A NR-10 especifica o treinamento sobre aterramento funcional com a nomenclatura padrao TN, TT e IT.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A reatancia de compensacao instalada no neutro para anular correntes capacitivas de falta e denominada bobina de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Petersen"
+        }
+      ],
+      "explanation": "Conforme o Guia de Protecao, a reatancia que compensa a capacitancia da rede para falhas a terra chama-se bobina de Petersen.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O projeto eletrico deve prever a conexao a terra das partes condutoras que nao sao destinadas a ____ da eletricidade.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "condução"
+        }
+      ],
+      "explanation": "O item 10.3.4 da NR-10 exige definir a conexao a terra de massas nao destinadas a conducao normal da eletricidade.",
+      "difficulty": "hard"
+    }
+  ]
+}

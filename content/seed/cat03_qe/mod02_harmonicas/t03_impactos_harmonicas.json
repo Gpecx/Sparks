@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categoryOrder": 2,
+  "module": "Harmônicas e Distorção",
+  "moduleSubtitle": "Fundamentos, fontes, impactos, analise e mitigacao",
+  "moduleOrder": 1,
+  "trail": "Impactos das Harmônicas",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Quais sao os efeitos das correntes harmonicas nos componentes do sistema eletrico, como motores e transformadores?",
+      "options": [
+        "Reducao do fator de potencia e aquecimento excessivo.",
+        "Aumento da eficiencia termica dos capacitores.",
+        "Melhoria na vida util dos cabos e disjuntores.",
+        "Diminuicao das correntes adicionais no circuito."
+      ],
+      "correctIndex": 0,
+      "explanation": "O manual Solucoes WEG cita o aquecimento excessivo de componentes como motores, capacitores e transformadores como um efeito negativo direto das harmonicas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as correntes harmonicas afetam o fator de potencia de uma instalacao eletrica?",
+      "options": [
+        "Elas elevam o fator de potencia para valores proximos a um.",
+        "Elas nao tem qualquer relacao com o fator de potencia.",
+        "Elas geram correntes adicionais que reduzem o fator de potencia.",
+        "Elas corrigem o fator de potencia compensando a energia reativa."
+      ],
+      "correctIndex": 2,
+      "explanation": "O documento da WEG informa que as correntes harmonicas geram correntes adicionais que nao produzem trabalho, ocasionando perdas e reduzindo o fator de potencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o impacto das distorcoes harmonicas nos equipamentos de protecao e controle?",
+      "options": [
+        "Aumentam a seletividade e precisao dos reles.",
+        "Causam funcionamento irregular nesses equipamentos.",
+        "Impedem o desgaste mecanico dos disjuntores.",
+        "Melhoram a temporizacao em curtos-circuitos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Segundo o guia de automacao da WEG, as harmonicas podem causar o funcionamento irregular nos equipamentos de protecao e controle.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre com os reatores e lampadas de descarga na presenca de elevados niveis de harmonicas?",
+      "options": [
+        "Ocorre o aumento da vida util e do rendimento luminoso.",
+        "Pode ocorrer a queima desses equipamentos.",
+        "Reduzem o consumo de energia em ate 20 por cento.",
+        "Passam a operar como filtros passivos na rede."
+      ],
+      "correctIndex": 1,
+      "explanation": "O documento de automacao da WEG aponta a queima de reatores e lampadas de descarga como um dos efeitos negativos gerados pelas harmonicas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Alem de distorcer a forma de onda de tensao, qual outro problema fisico no ambiente as harmonicas podem gerar?",
+      "options": [
+        "Resfriamento acelerado das bobinas.",
+        "Vibracoes e ruido acustico em componentes.",
+        "Isolamento galvanico automatico dos paineis.",
+        "Supressao natural de arcos eletricos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A literatura da WEG lista vibracoes e ruido acustico entre os efeitos adversos decorrentes da presenca de harmonicas nos sistemas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No que diz respeito a capacitores, qual a consequencia de sobrecorrentes permanentes causadas pela circulacao de correntes harmonicas?",
+      "options": [
+        "Aumento expressivo da capacidade de armazenamento de energia.",
+        "Aquecimento prejudicial a suportabilidade dieletrica e envelhecimento prematuro.",
+        "Reducao das correntes de inrush durante a energizacao dos bancos.",
+        "Diminuicao drastica do nivel de perdas internas de potencia ativa."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Guia de Protecao Schneider afirma que a sobrecarga nos capacitores por circulacao de correntes harmonicas gera aquecimento prejudicial e conduz ao envelhecimento prematuro.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Correntes harmonicas fluindo em um sistema eletrico produzem impactos em pontos de interligacao. Qual e um desses principais efeitos indesejados?",
+      "options": [
+        "Distorcoes de tensao em pontos de interligacao com outras cargas.",
+        "Aumento da rigidez dieletrica do ar ao redor dos condutores.",
+        "Bloqueio de sinais de radiofrequencia provenientes de motores.",
+        "Extincao imediata e espontanea de curtos-circuitos fase-terra."
+      ],
+      "correctIndex": 0,
+      "explanation": "O documento Solucoes WEG afirma diretamente que as correntes harmonicas fluindo produzem distorcoes de tensao em pontos de interligacao com outras cargas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que pode acontecer com a expansao futura de um sistema eletrico caso haja a presenca de altas taxas de correntes harmonicas?",
+      "options": [
+        "As correntes harmonicas facilitam a adicao de novas cargas trifasicas.",
+        "O sistema passa a operar de forma completamente imune a ruidos.",
+        "Ha um aumento na corrente total, limitando futuras ampliacoes.",
+        "As correntes harmonicas geram novas zonas de protecao ativas isoladas."
+      ],
+      "correctIndex": 2,
+      "explanation": "O manual da WEG relata que um dos efeitos negativos e o aumento da corrente total, o que acaba limitando futuras ampliacoes do sistema eletrico.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Um caso real de medicoes da qualidade da energia demonstrou o impacto financeiro das harmonicas em maquinas rotativas. O que foi diagnosticado?",
+      "options": [
+        "Uma reducao de 40 por cento nas multas reativas da concessionaria.",
+        "A queima de transformadores de forca devido unicamente ao sobrefluxo.",
+        "Distorcao harmonica que causava prejuizos devido a falhas em motores.",
+        "Afundamentos de tensao gerados pela filtragem de fornos a arco."
+      ],
+      "correctIndex": 2,
+      "explanation": "O artigo da Wrindu relata o caso real de uma siderurgica onde a distorcao harmonica identificada causava elevados prejuizos financeiros por falhas sucessivas de motores.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Os filtros de harmonicas atuam para evitar impactos negativos na instalacao. O que ocorre quando esses filtros evitam que as harmonicas circulem pelas fontes?",
+      "options": [
+        "Aumento exponencial do ruido de faixa ampla nos barramentos principais.",
+        "Reducao das tensoes harmonicas a montante e das distorcoes nos barramentos de baixa tensao.",
+        "Insercao de sobretensoes transitorias impulsivas nos conectores dos motores.",
+        "Aumento das correntes de sequencia zero em sistemas com o neutro isolado."
+      ],
+      "correctIndex": 1,
+      "explanation": "O documento tecnico da ABB sobre correcao de fator de potencia explica que filtros evitam a circulacao de harmonicas, reduzindo assim tensoes harmonicas a montante e as distorcoes na baixa tensao.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As correntes harmonicas adicionais presentes na instalacao sao beneficas do ponto de vista de rendimento, pois produzem trabalho util extra e reduzem a demanda contratada.",
+      "correctAnswer": false,
+      "explanation": "O manual da WEG informa expressamente que as correntes adicionais provenientes de harmonicas nao produzem trabalho, ocasionam perdas sistematicas e reduzem o fator de potencia.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A presenca de componentes harmonicos no sistema eletrico e um indicador que distorce a forma de onda, podendo causar o mau funcionamento geral dos equipamentos conectados.",
+      "correctAnswer": true,
+      "explanation": "Segundo o artigo da ABB sobre correcao de fator de potencia, a presenca de harmonicas implica em distorcao da energia eletrica que pode causar o mau funcionamento dos equipamentos.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para minimizar os efeitos das correntes harmonicas nos circuitos, os filtros ativos operam injetando correntes harmonicas com fase identica a da rede para reforcar o sinal util.",
+      "correctAnswer": false,
+      "explanation": "O texto da ABB esclarece o funcionamento dos filtros ativos informando que eles injetam harmonicas de corrente com a fase exatamente oposta a aquelas que deverao ser filtradas.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O catalogo tecnico referente a inversores destaca que a presenca de correntes harmonicas fluindo no sistema eletrico e uma das origens para a criacao de interferencias eletromagneticas indesejadas.",
+      "correctAnswer": true,
+      "explanation": "O catalogo da WEG sobre mitigacao lista explicitamente as interferencias eletromagneticas como um dos efeitos negativos gerados pelas harmonicas nos sistemas.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em instalacoes com capacitores, o problema do aquecimento gerado pelas correntes harmonicas e mitigado primariamente pelo uso de indutancias de amortecimento em serie que atuam como sobrecarga termica.",
+      "correctAnswer": false,
+      "explanation": "O Guia de Protecao Schneider afirma que as indutancias de amortecimento atenuam sobrecorrentes de curta duracao na energizacao, ao passo que as sobrecorrentes harmonicas exigem uma protecao de sobrecarga termica ou sobrecorrente.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Surtos e correntes harmonicas causam distorcoes generalizadas, ocasionando o aquecimento anormal e aumento excessivo da temperatura nos ____ e equipamentos de manobra.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "cabos"
+        }
+      ],
+      "explanation": "A literatura de Solucoes da WEG sobre efeitos negativos lista diretamente o aumento da temperatura nos cabos e equipamentos de manobra.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As altas correntes de origem harmonica podem ultrapassar a capacidade toleravel dos equipamentos, resultando em fortes perdas e, nos piores cenarios, na queima de ____ e lampadas de descarga.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "reatores"
+        }
+      ],
+      "explanation": "Entre os diversos efeitos nocivos detalhados no manual da WEG encontra-se a queima de reatores e lampadas de descarga.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O mau funcionamento em dispositivos sensiveis, frequentemente originado por distorcoes harmonicas, atinge especificamente os equipamentos de ____ e controle, ocasionando as vezes disparos indevidos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "protecao"
+        }
+      ],
+      "explanation": "O documento da WEG lista explicitamente entre os danos causados a ocorrencia de funcionamento irregular nos equipamentos de protecao e controle.",
+      "difficulty": "hard"
+    }
+  ]
+}

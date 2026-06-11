@@ -1,0 +1,289 @@
+{
+  "category": "Termografia Infravermelha",
+  "categoryOrder": 3,
+  "module": "Normas e Laudos de Termografia",
+  "moduleOrder": 2,
+  "moduleSubtitle": "Normas técnicas, parâmetros radiométricos, certificação de termografistas e elaboração de laudos",
+  "ebookTitle": "Normas e Laudos de Termografia",
+  "ebookSubtitle": "Das normas NBR 15572 e ISO 18434/18436 à elaboração de laudos e à gestão da manutenção preditiva",
+  "estimatedMinutes": 67,
+  "trailFiles": [],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — NBR 15572: inspeção de equipamentos elétricos",
+      "subtitle": "A norma-guia, o papel do termografista e os critérios de avaliação",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A termografia como técnica preditiva",
+          "type": "text",
+          "body": "A termografia consiste na técnica preditiva focada em observar o mapa ou o perfil de emissão infravermelha dissipado pelos corpos expostos (Fonte: Termografia em manutencao preditiva, Essentia Editora). É uma técnica não destrutiva que detecta por radiação infravermelha a temperatura de equipamentos (Fonte: Termografia em manutencao preditiva, Essentia Editora). As análises produzidas por câmeras térmicas podem gerar informações qualitativas ou quantitativas dependendo do objetivo e calibração do equipamento (Fonte: Termografia em manutencao preditiva, Essentia Editora). Os termogramas são imagens coloridas onde cada cor representa uma faixa de temperatura capturada pela câmera (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)."
+        },
+        {
+          "id": "s2",
+          "title": "O que a NBR 15572 estabelece",
+          "type": "list",
+          "items": [
+            "A norma referenciada constitui especificamente um guia normativo dedicado à inspeção de equipamentos elétricos e mecânicos (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "A norma constitui um guia para inspeção de equipamentos elétricos e mecânicos e relaciona as responsabilidades envolvidas (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "A norma orienta que os usuários finais podem utilizar critérios próprios ou usar como base os parâmetros nominais do fabricante (Fonte: Termografia aplicada em paineis eletricos)",
+            "A ABNT NBR 15572 flexibiliza a avaliação permitindo que o usuário aplique os seus próprios critérios corporativos ou siga os parâmetros previstos pelo fabricante (Fonte: Termografia aplicada em paineis eletricos)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Quem executa a inspeção",
+          "type": "text",
+          "body": "O inspetor termografista é o profissional apto para executar a inspeção e interpretar tecnicamente os resultados gerados (Fonte: Termografia aplicada em paineis eletricos). Ele costuma ser apoiado por um assistente qualificado, que conhece e opera o equipamento de forma segura e detém o conhecimento do histórico de operação para direcionar a inspeção (Fonte: Termografia aplicada em paineis eletricos). O assistente qualificado opera corretamente o equipamento a ser inspecionado e cumpre os requisitos de segurança (Fonte: Termografia aplicada em paineis eletricos)."
+        },
+        {
+          "id": "s4",
+          "title": "Condições de carga e identificação de anomalias",
+          "type": "note",
+          "body": "Para produzir uma análise térmica real, o painel deve operar há no mínimo duas horas sob uma carga igual ou maior que 30% (Fonte: Termografia aplicada em paineis eletricos). Uma das condições concretas para anomalia térmica é a temperatura ser superior à máxima temperatura admissível do respectivo componente (Fonte: Termografia em manutencao preditiva, Essentia Editora). Os hot spots ou pontos quentes ilustram regiões demarcadas de alta temperatura, alertando sobre evidentes quadros de sobrecarga ou estresse no mecanismo (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)."
+        },
+        {
+          "id": "s5",
+          "title": "Emissividade e erros comuns",
+          "type": "text",
+          "body": "A emissividade é a base comparativa entre a excitância do objeto estudado e a excitância de um corpo negro sob igual temperatura (Fonte: Termografia Infravermelha, Editora do Ifes). Saber definir perfeitamente a emissividade local e a temperatura refletida inserida nos parâmetros da câmera evita ocorrência de fortes erros na aferição (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NBR 15572 é um guia para inspeção de equipamentos elétricos e mecânicos que relaciona as responsabilidades envolvidas e flexibiliza a avaliação, permitindo critérios corporativos próprios ou os parâmetros do fabricante. O inspetor termografista executa e interpreta a inspeção, apoiado por um assistente qualificado. Para uma análise real, o painel deve estar energizado há ao menos duas horas com carga de 30% ou mais. Definir corretamente a emissividade e a temperatura refletida é essencial para evitar erros de aferição."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — ISO 18434-1: parâmetros radiométricos e do termovisor",
+      "subtitle": "Corpo negro, emissividade, transmitância e o desempenho da câmera térmica",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O corpo negro e a radiosidade",
+          "type": "text",
+          "body": "Um corpo negro é perfeitamente opaco e ideal, emitindo e absorvendo a máxima radiação térmica possível (Fonte: Termografia Infravermelha, Editora do Ifes). A radiosidade total consolida em equação a componente emitida ativamente pelo objeto com a parcela passiva refletida por este (Fonte: Termografia Infravermelha, Editora do Ifes). Trata-se da leitura bruta capturada pelo sensor que não isola as variadas contribuições de reflexão e transmitância do meio de inspeção (Fonte: ISO 18434-1, irantpm.ir)."
+        },
+        {
+          "id": "s2",
+          "title": "Propriedades radiométricas dos materiais",
+          "type": "list",
+          "items": [
+            "A emissividade é a base comparativa entre a excitância do objeto real e a de um corpo negro sob igual temperatura térmica (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "A razão da emissividade compara a radiância do alvo e do corpo negro estritamente sob a mesma temperatura e no mesmo intervalo espectral (Fonte: ISO 18434-1, irantpm.ir)",
+            "A propriedade da refletividade mede e quantifica a capacidade do material alvo de refletir a energia provinda do ambiente radiante (Fonte: ISO 18434-1, irantpm.ir)",
+            "A proporção da radiação que atravessa livremente a matéria do objeto é a sua transmitância, e não a refletividade superficial (Fonte: ISO 18434-1, irantpm.ir)",
+            "A radiação proveniente de objetos vizinhos que incide sobre o alvo e reflete diretamente na lente da câmera corresponde à temperatura refletida (Fonte: ISO 18434-1, irantpm.ir)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Desempenho do termovisor",
+          "type": "text",
+          "body": "Termovisores industriais convertem a radiação capturada de forma remota por lentes e sensores em termogramas altamente visíveis ao operador (Fonte: Termografia Infravermelha, Editora do Ifes). O termograma é a imagem térmica onde cores ou tons representam a radiação térmica da superfície analisada (Fonte: ISO 18434-1, irantpm.ir). A classificação divide os termovisores nas janelas de operação LW, MW e SW onde a atenuação atmosférica é menos relevante (Fonte: Termografia Infravermelha, Editora do Ifes)."
+        },
+        {
+          "id": "s4",
+          "title": "NETD, FOV e IFOV",
+          "type": "list",
+          "items": [
+            "O NETD expressa a resolução em temperatura equivalente ao incremento térmico do desvio padrão devido ao ruído de imagem (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "O parâmetro NETD quantifica a diferença de temperatura mínima detectável pela câmera frente ao seu próprio ruído eletrônico embutido (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+            "O FOV depende diretamente das dimensões da lente e da matriz focal para estipular e limitar toda a área de visão da câmera (Fonte: Termografia Infravermelha, Editora do Ifes)",
+            "O IFOV é o ângulo de visão específico de um pixel que afeta criticamente a resolução espacial da imagem térmica formada (Fonte: Termografia Infravermelha, Editora do Ifes)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "A influência da atmosfera",
+          "type": "note",
+          "body": "A umidade e a água precipitável são fatores essenciais e limitantes na determinação da atenuação e absorção molecular do meio percorrido (Fonte: Termografia Infravermelha, Editora do Ifes). Operar acima dos limites máximos admissíveis especificados em projeto caracteriza de forma indubitável uma anomalia térmica e falha funcional (Fonte: Termografia aplicada em paineis eletricos)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O corpo negro é o emissor e absorvedor ideal; a radiosidade combina a radiação emitida pelo objeto com a refletida por ele. As propriedades radiométricas — emissividade, refletividade e transmitância — descrevem como o alvo interage com a radiação, e a temperatura refletida vem de objetos vizinhos. O desempenho do termovisor é caracterizado por NETD (resolução térmica frente ao ruído), FOV (área de visão) e IFOV (resolução espacial por pixel), além das janelas LW, MW e SW. A umidade atmosférica limita a medição por atenuação e absorção."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — NBR 16292 e ISO 18436-7: certificação de termografistas",
+      "subtitle": "Níveis de qualificação, categorias de aplicação e requisitos de treinamento",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A norma de qualificação de pessoal",
+          "type": "text",
+          "body": "A norma que fundamenta os requisitos para qualificação e avaliação de pessoal em termografia é a ISO 18436-7 (Fonte: Qualificacao ISO 18436-7, Abendi). A certificação em termografia atende aos critérios da ISO 18436-7 nas categorias I, II e III (Fonte: Qualificacao ISO 18436-7, Abendi). É importante distinguir os dois eixos: níveis referem-se à qualificação e competências, enquanto categorias determinam as áreas específicas de aplicação do profissional avaliado (Fonte: Nossas certificacoes, Thermovisao)."
+        },
+        {
+          "id": "s2",
+          "title": "Os níveis de qualificação",
+          "type": "list",
+          "items": [
+            "Técnicos de Nível 1 operam sob supervisão de um Nível 2 ou 3 e não tomam decisões baseadas nos resultados (Fonte: Nossas certificacoes, Thermovisao)",
+            "O técnico de Nível 1 não é responsável por interpretar os dados ou tomar decisões baseadas nos resultados térmicos (Fonte: Nossas certificacoes, Thermovisao)",
+            "O Nível 2 possui habilidade para vistoriar de forma independente, interpretar resultados e elaborar relatórios (Fonte: Nossas certificacoes, Thermovisao)",
+            "O Nível 3 atua como especialista, desenvolve procedimentos, interpreta resultados complexos e supervisiona equipes (Fonte: Nossas certificacoes, Thermovisao)",
+            "Os especialistas de Nível 3 desenvolvem os procedimentos avançados e atuam ativamente como validadores e auditores em termografia (Fonte: Nossas certificacoes, Thermovisao)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "As categorias de aplicação",
+          "type": "text",
+          "body": "As categorias referem-se às áreas específicas de aplicação: Elétrica, Mecânica, Civil, Processo e Edificações (Fonte: Nossas certificacoes, Thermovisao). A categoria Processo é utilizada para monitorar temperaturas em processos produtivos inteiros, enquanto a categoria Mecânica foca em componentes como motores (Fonte: Nossas certificacoes, Thermovisao). A categoria exigida do termografista deve ser acordada expressamente pelo cliente e provedor antes do início dos trabalhos (Fonte: ISO 18434-1, irantpm.ir)."
+        },
+        {
+          "id": "s4",
+          "title": "Requisitos de treinamento e experiência",
+          "type": "list",
+          "items": [
+            "A categoria I exige obrigatoriamente que o candidato comprove 32 horas de treinamento certificado juntamente com 12 meses de experiência prática (Fonte: Qualificacao ISO 18436-7, Abendi)",
+            "Para a Categoria I, é recomendado e exigido o nível de escolaridade correspondente ao Ensino Médio (Fonte: Qualificacao ISO 18436-7, Abendi)",
+            "A Categoria II exige 64 horas de treinamento específico e 24 meses de experiência profissional comprovada (Fonte: Qualificacao ISO 18436-7, Abendi)",
+            "A Categoria III exige Nível Superior, 96 horas de treinamento e 48 meses de experiência profissional prévia (Fonte: Qualificacao ISO 18436-7, Abendi)",
+            "As certificações conforme as Categorias II e III requerem obrigatoriamente experiência prévia na categoria anterior (Fonte: Qualificacao ISO 18436-7, Abendi)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Validação da experiência e competências matemáticas",
+          "type": "note",
+          "body": "O processo de validação da experiência requer a assinatura de uma pessoa independente na evidência documental apresentada (Fonte: Qualificacao ISO 18436-7, Abendi). A norma recomenda que candidatos das Categorias II e III realizem equações algébricas e utilizem calculadoras científicas com familiaridade (Fonte: Qualificacao ISO 18436-7, Abendi)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A ISO 18436-7 fundamenta a qualificação de pessoal em termografia nas categorias I, II e III. Níveis tratam de competências (Nível 1 opera sob supervisão e não decide; Nível 2 vistoria, interpreta e relata; Nível 3 é especialista, cria procedimentos e supervisiona), enquanto categorias tratam de áreas de aplicação (Elétrica, Mecânica, Civil, Processo e Edificações). Os requisitos crescem por categoria: 32 h/12 meses (I), 64 h/24 meses (II) e 96 h/48 meses com Nível Superior (III). A experiência exige validação por pessoa independente."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Elaboração de laudos termográficos",
+      "subtitle": "Estrutura do relatório, parâmetros obrigatórios e conclusões técnicas",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Introdução e metodologia do relatório",
+          "type": "text",
+          "body": "A introdução tem por finalidade descrever o propósito da inspeção, informar data, hora e identificar a equipe atuante responsável (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental). A seção de metodologia explica de forma direta como a inspeção foi conduzida e descreve os equipamentos utilizados no ensaio (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental). O relatório tem o dever de expor de forma clara a identificação e a respectiva qualificação ISO do profissional que operou e produziu as imagens térmicas (Fonte: ISO 18434-1, irantpm.ir)."
+        },
+        {
+          "id": "s2",
+          "title": "Dados obrigatórios do equipamento e do ensaio",
+          "type": "list",
+          "items": [
+            "O relatório final deve conter o fabricante, o modelo e a data de calibração laboratorial do equipamento infravermelho utilizado (Fonte: ISO 18434-1, irantpm.ir)",
+            "O registro atestando o período em que a câmera sofreu calibração metrológica oficial assegura a capacidade radiométrica confiável exigida da ferramenta para a produção do laudo (Fonte: ISO 18434-1, irantpm.ir)",
+            "O relatório precisa registrar a distância da câmera à anomalia, a carga operacional do momento da inspeção e os valores ajustados de emissividade e transmitância (Fonte: ISO 18434-1, irantpm.ir)",
+            "Informar a emissividade parametrizada utilizada atesta que o termografista compensou adequadamente a capacidade reflexiva da superfície inspecionada para gerar a temperatura lida (Fonte: ISO 18434-1, irantpm.ir)",
+            "O registro técnico impõe relatar, sempre que possível, a carga nominal extrema do componente associada à sua carga medida real do ensaio (Fonte: ISO 18434-1, irantpm.ir)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Condições ambientais e o critério Delta T",
+          "type": "text",
+          "body": "O relatório deve descrever as condições ambientais climáticas porque esses fatores impactam diretamente a precisão física da medição de temperatura do objeto (Fonte: Como elaborar um relatorio de termografia eletrica, SEP). É vital descrever as condições do ambiente e clima porque elas afetam fortemente a precisão metrológica das medições de temperatura (Fonte: Como elaborar um relatorio de termografia eletrica, SEP). Ao aplicar o Delta T como métrica de diagnóstico, é imposto que o relatório documente as temperaturas base e da falha juntamente com seu valor diferencial medido (Fonte: ISO 18434-1, irantpm.ir)."
+        },
+        {
+          "id": "s4",
+          "title": "Resultados, anexos e segurança",
+          "type": "list",
+          "items": [
+            "O termografista deve analisar os mapas, marcar visualmente as anomalias e exibir as áreas quentes destacadas para o esclarecimento pleno do relatório (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+            "A seção de resultados deve apresentar as imagens termográficas com as anomalias destacadas e a descrição detalhada de cada uma (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+            "O laudo deve apresentar de modo integrado as cópias impressas dos termogramas das anomalias ladeados por suas imagens de luz visível originais (Fonte: ISO 18434-1, irantpm.ir)",
+            "A seção designada para anexos em um relatório abarca todas as matrizes e imagens adicionais que suportam e complementam a atividade desempenhada (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+            "A normatização pede que o relatório traga a anotação formal de quaisquer condições operacionais e de instalações inseguras percebidas pelo avaliador no sítio (Fonte: ISO 18434-1, irantpm.ir)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Análise, causas e conclusões",
+          "type": "note",
+          "body": "A análise deve identificar as causas originais das anomalias e gerar recomendações corretivas claras para resolução do defeito (Fonte: Como elaborar um relatorio de termografia eletrica, SEP). As considerações conclusivas relatam a segurança perante os defeitos mapeados e propõem as providências emergenciais para manutenção na estrutura e correção (Fonte: Como elaborar um relatorio de termografia eletrica, SEP)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Um laudo termográfico estrutura-se em introdução (propósito, data, equipe), metodologia (como foi conduzida a inspeção e equipamentos) e identificação do profissional com sua qualificação ISO. São obrigatórios o fabricante, modelo e data de calibração da câmera, além de distância, carga, emissividade e transmitância ajustadas. As condições ambientais devem ser descritas por afetarem a precisão metrológica, e o Delta T documentado com temperaturas base e de falha. Os resultados trazem termogramas e imagens visíveis das anomalias, e a conclusão identifica causas e propõe correções."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Gestão de manutenção preditiva por termografia",
+      "subtitle": "Preditiva versus corretiva, planejamento por criticidade e novas tecnologias",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Vantagens da inspeção termográfica",
+          "type": "text",
+          "body": "A termografia é uma técnica de ensaio não destrutivo e não invasivo que apenas mede a radiação infravermelha emitida pelos corpos (Fonte: Termografia aplicada em paineis eletricos). Ela permite identificar anomalias sem exigir o desligamento dos equipamentos ou a interrupção do processo produtivo (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI). A termografia identifica anomalias sem interromper o processo produtivo ou exigir contato direto (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)."
+        },
+        {
+          "id": "s2",
+          "title": "Preditiva, preventiva e corretiva",
+          "type": "list",
+          "items": [
+            "A manutenção preditiva intervém antes da falha a partir do monitoramento, enquanto a corretiva atua após a quebra (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+            "A atuação após a quebra (corretiva) gera paradas inesperadas e danos maiores, sendo evitada pela preditiva que antecipa a falha (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+            "A preventiva atua em intervalos fixos de tempo, enquanto a preditiva baseia-se nas condições do equipamento (Fonte: Termografia em manutencao preditiva, Essentia Editora)",
+            "A preditiva busca conhecer e eliminar as causas dos defeitos, não apenas reparar o equipamento rapidamente (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+            "A manutenção preditiva privilegia a disponibilidade ao não promover intervenções indesejadas no regime normal do equipamento (Fonte: Termografia Infravermelha, Editora do Ifes)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Planejamento por criticidade e ganhos",
+          "type": "text",
+          "body": "O relatório deve incluir recomendações para o plano de manutenção de acordo com a criticidade e risco dos componentes (Fonte: Como elaborar um relatorio de termografia eletrica, SEP). O planejamento deve conter recomendações corretivas embasadas diretamente na criticidade e no risco inerente dos componentes (Fonte: Como elaborar um relatorio de termografia eletrica, SEP). A detecção precoce de falhas reduz custos de manutenção e evita danos maiores e paradas intempestivas (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia). A manutenção preditiva pode significar economia, permitindo alongar e planejar intervenções e garantindo operação sem riscos (Fonte: Inspecao em Subestacoes Utilizando a Termografia)."
+        },
+        {
+          "id": "s4",
+          "title": "Tecnologias emergentes e dados históricos",
+          "type": "list",
+          "items": [
+            "A análise de dados térmicos históricos permite prever falhas e melhorar os processos de manutenção (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+            "Sensores térmicos conectados a IoT coletam dados continuamente e alertam instantaneamente sobre anomalias (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+            "O uso da inteligência artificial promove diagnósticos preditivos e prevê falhas antes de seu acontecimento efetivo (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+            "A periodicidade de calibração deve ser reavaliada e otimizada por meio de planos de verificação intermediária (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Desafios e limitações",
+          "type": "note",
+          "body": "Condições ambientais adversas como temperaturas extremas podem interferir significativamente nas leituras e dificultar o diagnóstico (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia). Condições ambientais adversas e o alto custo inicial dos equipamentos são desafios para a termografia (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Por ser não destrutiva e não invasiva, a termografia identifica anomalias sem desligar o equipamento nem interromper a produção. A preditiva intervém antes da falha com base na condição do equipamento — diferente da corretiva (após a quebra) e da preventiva (em intervalos fixos) — e busca eliminar as causas dos defeitos, privilegiando a disponibilidade. O planejamento das intervenções deve seguir a criticidade e o risco dos componentes, gerando economia e evitando paradas intempestivas. Dados históricos, IoT e inteligência artificial ampliam a capacidade preditiva, embora condições ambientais adversas e o custo inicial sejam desafios."
+        }
+      ]
+    }
+  ]
+}

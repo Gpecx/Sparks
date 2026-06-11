@@ -1,0 +1,218 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "PTP e Sincronismo de Tempo",
+  "moduleSubtitle": "IEEE 1588, SNTP, grandmaster e testes",
+  "moduleOrder": 8,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a precisao de sincronismo temporal exigida para calcular fasores e comparar ondas senoidais via Sampled Values?",
+      "options": [
+        "Cerca de 1 segundo.",
+        "Cerca de 1 microssegundo.",
+        "Cerca de 1 milissegundo.",
+        "Cerca de 1 minuto."
+      ],
+      "correctIndex": 1,
+      "explanation": "A norma exige precisao critica na ordem de 1 microssegundo para a correta integracao de ondas senoidais e calculos fasoriais.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na hierarquia da IEC 61850, qual resolucao de tempo e comumente aplicada aos eventos padroes de registro e log (SOE)?",
+      "options": [
+        "1 picossegundo.",
+        "1 microssegundo.",
+        "1 milissegundo.",
+        "1 segundo."
+      ],
+      "correctIndex": 2,
+      "explanation": "Eventos nao criticos e listas de alarmes demandam sincronismo da ordem de 1 milissegundo para garantir a exata sequencia.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre com a medicao se a rede nao atingir o sincronismo critico demandado pelo Barramento de Processo?",
+      "options": [
+        "A protecao atua mais rapido por precaucao.",
+        "A rede converte os pacotes IP para formato GOOSE.",
+        "O IED comuta automaticamente para comunicacao serial.",
+        "Ocorre imprecisao ou erro na comparacao de ondas e calculo de fasores."
+      ],
+      "correctIndex": 3,
+      "explanation": "A falta de sincronismo impede o correto alinhamento das ondas senoidais entre diferentes equipamentos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento atua como fonte e relogio base central para garantir que todos os IEDs de um projeto operem com a mesma estampa de tempo?",
+      "options": [
+        "Receptor satelital GPS.",
+        "Switch ethernet gerenciavel.",
+        "Rele de protecao de distancia.",
+        "Servidor OPC."
+      ],
+      "correctIndex": 0,
+      "explanation": "Um equipamento GPS ou GNSS externo e utilizado como relogio mestre primario para suprir a base comum a rede.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em que tipo de aplicacao da automacao o sincronismo de tempo em milissegundos atende plenamente aos requisitos funcionais?",
+      "options": [
+        "Substituicao de cabos de TC e TP.",
+        "Registro cronologico de alarmes e eventos no SCADA.",
+        "Protecao diferencial de barras distribuida.",
+        "Medicao fasorial PMU de tempo real."
+      ],
+      "correctIndex": 1,
+      "explanation": "A precisao de milissegundos cumpre o papel no registro de sequencia de eventos e alarmes da IHM.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No diagnostico do servidor de tempo, o que indica que a fonte primaria apresenta uma falha critica ou desvio inaceitavel?",
+      "options": [
+        "O incremento do contador de pacotes UDP na interface.",
+        "A recepcao continua de pacotes multicast GOOSE.",
+        "Um escorregamento excessivo ou grande diferenca de sincronismo medida no IED.",
+        "A falha de redundancia do anel RSTP."
+      ],
+      "correctIndex": 2,
+      "explanation": "Uma variacao elevada na diferenca de tempo evidencia escorregamento grave, caracterizando falha severa na origem.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o sistema garante a operacao continua do sincronismo no modulo de comunicacao caso o relogio primario falhe?",
+      "options": [
+        "Gerando tempos aleatorios no processador.",
+        "Descartando as medicoes afetadas sem gerar logs.",
+        "Paralisando a comunicacao ate a troca manual da placa.",
+        "Utilizando um relogio secundario configurado previamente nas redes."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os diagnosticos de tempo exibem a configuracao de servidores redundantes (Primario e Secundario) para previnir perdas de clock.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a arquitetura descrita nas fontes, o protocolo SNTP esta alocado em qual camada operacional?",
+      "options": [
+        "Na pilha Soft-Time atuando sobre a malha de transporte UDP.",
+        "Na malha GOOSE prioritario.",
+        "Na pilha restrita de camada de Enlace (Ethernet pura).",
+        "No Barramento de Processo exclusivista."
+      ],
+      "correctIndex": 0,
+      "explanation": "O SNTP opera sobre a arquitetura UDP/IP padrao classificada como Soft-Time stack, suprindo a faixa temporal dos relatorios.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos relatorios de eventos (SOE), qual e o papel real da estampa de tempo (Time Stamp) anexada aos dados transmitidos?",
+      "options": [
+        "Sinalizar o momento em que o pacote alcancou o SCADA.",
+        "Indicar o exato instante em que o evento real ocorreu no processo fisico.",
+        "Informar quando o buffer de transmissao foi criado na camada TCP.",
+        "Registrar a hora da ultima reinicializacao do servidor de rede."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Time Stamp do dado armazena a hora exata da ocorrencia do evento fisico, diferindo do tempo em que o item entrou no buffer logico.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos esquemas baseados em Sampled Values, como a arquitetura induz a coleta deterministica simultanea das medicoes?",
+      "options": [
+        "Atraves do envio assincrono por variacao de estado (data-change).",
+        "Por interrogacoes periodicas emulando o mecanismo poll do Modbus.",
+        "A partir de disparos fixos guiados rigorosamente por um clock event continuo.",
+        "Pelo uso exclusivo do roteamento dinamico BGP ou OSPF."
+      ],
+      "correctIndex": 2,
+      "explanation": "A captura das amostras SV obedece estritamente a eventos de sincronismo periodico denominados clock events.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O protocolo SNTP, por garantir precisao apenas na ordem dos milissegundos, e considerado tecnicamente insuficiente para as rotinas que operam.",
+      "correctAnswer": true,
+      "explanation": "Como a amostragem critica exige 1 microssegundo para exatidao fasorial, o SNTP atende apenas os modulos logicos e SCADA, necessitando de solucoes aprimoradas para SV.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No esquema interno de um IED, a variavel de status ClkFail mapeada sob o Logical Node da aplicacao alerta o sistema sempre que ha falha ou perda da.",
+      "correctAnswer": true,
+      "explanation": "O sinal ClkFail inserido no LN do equipamento (LPHD0) e o ponto nativo encarregado de alarmar perdas de sincronismo horologico na planta.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No registro Sequence of Events de um SPCS, a estampa de tempo definitiva e criada pelo servidor corporativo do SCADA apenas quando a informacao MMS.",
+      "correctAnswer": false,
+      "explanation": "A estampa de tempo (Time Stamp) e gravada na origem pelo proprio IED no exato momento do evento, gracas a fonte referencial de tempo sincronizada em campo.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o diagnostico de redes em laboratorios de subestacao, a avaliacao de logs do SNTP expoe a saude da conexao exibindo metricas de diferenca.",
+      "correctAnswer": true,
+      "explanation": "Os registros nativos listam dados cruciais como o Tx diff, monitorando o desvio temporal dos pacotes SNTP provindos do relogio fonte em relacao ao cristal local.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A arquitetura Hard Real-Time da IEC 61850 define que o sinal de clock event e o responsavel direto por governar a publicacao dos reports.",
+      "correctAnswer": false,
+      "explanation": "O clock event e a premissa de disparo periodico dos Sampled Values. Relatorios (MMS) e GOOSE sao orientados a mudanca estocastica de estado (data-change ou quality-change).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para analisar com total precisao a matriz eletrica da rede de potencia, os modernos recursos de aquisicao fasorial sincronizada aplicados na IEC ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "U"
+        }
+      ],
+      "explanation": "PMU significa Phasor Measurement Unit, equipamento fundamental de analise avancada que mede fasores com altissima precisao de relogio.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos diagnosticos extraidos de modulos de comunicacao operantes em campo, a constatacao de um escorregamento do tempo muito grande frente a base ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "origem"
+        }
+      ],
+      "explanation": "O material normativo aponta que diferencas muito elevadas (escorregamentos) nos ciclos atestam que o erro advem diretamente de falha na origem (o servidor de tempo adotado).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No esquema de modelagem das condicoes do equipamento dentro da camada Application, o nó logico encarregado de notificar os alarmes de hardware e ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "0"
+        }
+      ],
+      "explanation": "O Logical Node LPHD0 (Physical Device Information) congrega os indicativos vitais e o status do proprio hardware do relé, inclusive as deficiencias ou indisponibilidade no sinal temporal.",
+      "difficulty": "hard"
+    }
+  ]
+}

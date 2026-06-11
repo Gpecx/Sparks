@@ -1,0 +1,428 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Gestão de Riscos e Outras NRs",
+  "moduleSubtitle": "NR-01, NR-05, NR-06, NR-12, NR-17, NR-23 e NR-33",
+  "moduleOrder": 0,
+  "ebookTitle": "Gestão de Riscos e Segurança no Trabalho",
+  "ebookSubtitle": "Guia completo das NRs essenciais para o ambiente elétrico industrial",
+  "estimatedMinutes": 95,
+  "trailFiles": [
+    "t01_nr01_gro.json",
+    "t02_nr05_cipa.json",
+    "t03_nr06_epi.json",
+    "t04_nr12_maquinas.json",
+    "t05_nr17_ergonomia.json",
+    "t06_nr23_incendios.json",
+    "t07_nr33_confinado.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos da Segurança e Saúde no Trabalho",
+      "subtitle": "Por que a SST existe e como se organiza no Brasil",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O custo humano e econômico dos acidentes",
+          "type": "text",
+          "body": "A segurança e saúde no trabalho (SST) nasceu da constatação de que o trabalho, mal organizado, adoece e mata. No Brasil, o setor elétrico concentra alguns dos maiores índices de letalidade por acidente: choque elétrico e arco elétrico estão entre as principais causas de morte ocupacional. Cada acidente representa não apenas a tragédia humana, mas custos diretos (afastamentos, indenizações, multas) e indiretos (parada de produção, dano à imagem, perda de conhecimento). Entender a SST não é cumprir burocracia — é gerir um risco real que pode custar vidas e a continuidade do negócio."
+        },
+        {
+          "id": "s2",
+          "title": "O arcabouço legal brasileiro",
+          "type": "text",
+          "body": "A base legal da SST no Brasil está na Consolidação das Leis do Trabalho (CLT), nos artigos 154 a 201, que delegam ao Ministério do Trabalho a edição de Normas Regulamentadoras (NRs). As NRs são obrigatórias para toda empresa que admite trabalhadores pelo regime CLT. Atualmente existem mais de 35 NRs, divididas entre normas gerais (aplicáveis a todos), normas setoriais (construção, mineração, etc.) e normas especiais. Para o profissional de eletricidade, o núcleo essencial é formado por NR-01, NR-06, NR-10, NR-12, NR-33 e NR-35."
+        },
+        {
+          "id": "s3",
+          "title": "Tipos de risco ocupacional",
+          "type": "list",
+          "items": [
+            "Riscos físicos — ruído, vibração, calor, radiações, e a própria energia elétrica",
+            "Riscos químicos — poeiras, fumos metálicos (solda), gases e vapores (SF6, hexafluoreto de enxofre em disjuntores)",
+            "Riscos biológicos — presentes em espaços confinados e ambientes insalubres",
+            "Riscos ergonômicos — esforço repetitivo, postura inadequada, levantamento de carga",
+            "Riscos de acidente (mecânicos) — máquinas, quedas, projeção de partículas, e o arco elétrico"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Ato inseguro vs. condição insegura",
+          "type": "note",
+          "body": "A cultura de segurança moderna abandonou a tese de que o acidente é 'culpa do trabalhador' (ato inseguro). Hoje entende-se que a maioria dos acidentes resulta de falhas no sistema: procedimentos inexistentes, equipamentos inadequados, treinamento insuficiente, pressão por produtividade. A responsabilidade do empregador é criar barreiras que tornem o erro humano improvável e suas consequências controláveis."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A SST brasileira se estrutura na CLT e nas NRs do Ministério do Trabalho, de cumprimento obrigatório. Os riscos se classificam em físicos, químicos, biológicos, ergonômicos e de acidente. A visão moderna foca em corrigir o sistema, não em culpar o indivíduo. Para o eletricista, o núcleo essencial reúne NR-01, NR-06, NR-10, NR-12, NR-33 e NR-35."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — NR-01 e o Gerenciamento de Riscos Ocupacionais (GRO)",
+      "subtitle": "A espinha dorsal de todo o sistema de SST",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que mudou com a revisão de 2020/2021",
+          "type": "text",
+          "body": "A NR-01 foi profundamente revisada (Portaria SEPRT 6.730/2020) e passou a ser o documento estruturante de toda a SST. Ela introduziu o Gerenciamento de Riscos Ocupacionais (GRO) e o Programa de Gerenciamento de Riscos (PGR), substituindo a lógica anterior de programas isolados. A partir dessa revisão, todas as demais NRs passaram a operar dentro do framework do GRO: primeiro identifica-se e avalia-se o risco, depois aplicam-se os requisitos técnicos específicos de cada norma."
+        },
+        {
+          "id": "s2",
+          "title": "As etapas do GRO",
+          "type": "list",
+          "items": [
+            "Identificação de perigos — levantar tudo que pode causar dano (fontes de energia, agentes, situações)",
+            "Avaliação de riscos — estimar probabilidade × severidade de cada perigo",
+            "Classificação e priorização — focar primeiro nos riscos de maior nível",
+            "Implementação de medidas de controle — seguindo a hierarquia de controles",
+            "Acompanhamento e análise crítica — monitorar a eficácia e revisar periodicamente"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A hierarquia de controles de risco",
+          "type": "list",
+          "items": [
+            "1º Eliminação — remover totalmente o perigo (ex.: eliminar um circuito energizado desnecessário)",
+            "2º Substituição — trocar por algo menos perigoso (ex.: usar baixíssima tensão de segurança)",
+            "3º Controles de engenharia — barreiras, intertravamentos, sistemas de bloqueio, aterramento",
+            "4º Controles administrativos — procedimentos, sinalização, permissões de trabalho, rodízio",
+            "5º EPI — equipamento de proteção individual, sempre a ÚLTIMA barreira, nunca a primeira escolha"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Por que o EPI é a última opção",
+          "type": "note",
+          "body": "Um erro comum é tratar o EPI como solução principal. O EPI protege apenas o indivíduo que o usa, depende do uso correto e contínuo, e falha silenciosamente (uma luva furada não avisa). Já um controle de engenharia, como o aterramento temporário, protege todos e não depende do comportamento humano momento a momento. O EPI é indispensável, mas é a barreira de menor confiabilidade — por isso vem por último na hierarquia."
+        },
+        {
+          "id": "s5",
+          "title": "PGR e o Inventário de Riscos",
+          "type": "text",
+          "body": "O PGR é composto por dois documentos: o Inventário de Riscos (que consolida todos os perigos identificados e sua avaliação) e o Plano de Ação (que define as medidas, responsáveis e prazos). Empresas de menor porte e grau de risco podem ter PGR simplificado, mas nenhuma está totalmente isenta de gerenciar seus riscos. O PGR deve ser revisto a cada dois anos, ou quando houver mudança de processo, inovação tecnológica ou após acidente."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NR-01 revisada criou o GRO, que organiza toda a SST em torno de identificar, avaliar, controlar e monitorar riscos. A hierarquia de controles (eliminação → substituição → engenharia → administrativo → EPI) orienta a escolha das medidas, sempre priorizando soluções que não dependem do comportamento humano. O PGR (Inventário de Riscos + Plano de Ação) é o documento central, revisado a cada 2 anos."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — NR-05: CIPA e a participação dos trabalhadores",
+      "subtitle": "A organização interna de prevenção",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é a CIPA e qual seu objetivo",
+          "type": "text",
+          "body": "A Comissão Interna de Prevenção de Acidentes e de Assédio (CIPA) é o canal formal de participação dos trabalhadores na gestão da segurança. Seu objetivo é observar e relatar condições de risco, solicitar medidas de controle, e promover a cultura prevencionista. A CIPA é composta por representantes do empregador (indicados) e dos empregados (eleitos por voto), garantindo equilíbrio de interesses. A obrigatoriedade e o dimensionamento dependem do CNAE (atividade econômica) e do número de empregados."
+        },
+        {
+          "id": "s2",
+          "title": "Atribuições principais",
+          "type": "list",
+          "items": [
+            "Identificar riscos no processo de trabalho e elaborar o mapa de riscos com a participação dos trabalhadores",
+            "Verificar ambientes e condições de trabalho visando à segurança",
+            "Acompanhar a análise de acidentes e propor medidas de solução",
+            "Promover a SIPAT (Semana Interna de Prevenção de Acidentes do Trabalho)",
+            "Colaborar no desenvolvimento e implementação do PGR e do PCMSO"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A CIPA no contexto elétrico",
+          "type": "note",
+          "body": "Em empresas com forte componente elétrico (concessionárias, indústrias, montadoras de painéis), é fundamental que a CIPA tenha membros que compreendam os riscos elétricos específicos. Um cipeiro que conhece a NR-10 consegue identificar condições inseguras — falta de aterramento, ausência de bloqueio, EPIs vencidos — que passariam despercebidas para um observador leigo. A integração entre CIPA e a equipe técnica de proteção e controle eleva o nível de segurança de toda a instalação."
+        },
+        {
+          "id": "s4",
+          "title": "Estabilidade do cipeiro eleito",
+          "type": "text",
+          "body": "Os membros eleitos da CIPA (titulares) têm garantia de emprego desde o registro da candidatura até um ano após o fim do mandato. Essa estabilidade existe para que o cipeiro possa apontar problemas e cobrar soluções sem medo de retaliação — protegendo a independência da função fiscalizadora. Trata-se de um mecanismo legal que reforça a credibilidade e a eficácia da comissão."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A CIPA é o órgão de participação dos trabalhadores na prevenção, com membros eleitos e indicados. Identifica riscos, acompanha acidentes, promove a SIPAT e colabora com o PGR. No setor elétrico, cipeiros que dominam a NR-10 elevam o nível de segurança. Os eleitos têm estabilidade de emprego para fiscalizar sem retaliação."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — NR-06: Equipamentos de Proteção Individual",
+      "subtitle": "A última barreira, dominada em detalhe",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Conceito e o Certificado de Aprovação (CA)",
+          "type": "text",
+          "body": "EPI é todo dispositivo de uso individual destinado a proteger a saúde e a integridade física do trabalhador. A NR-06 estabelece que nenhum EPI pode ser comercializado ou utilizado sem o Certificado de Aprovação (CA), emitido pelo órgão competente do Ministério do Trabalho. O CA atesta que o equipamento foi ensaiado e atende aos requisitos de proteção. Usar EPI sem CA, ou com CA vencido, equivale a não ter proteção alguma do ponto de vista legal e técnico."
+        },
+        {
+          "id": "s2",
+          "title": "Obrigações do empregador",
+          "type": "list",
+          "items": [
+            "Fornecer o EPI adequado ao risco, gratuitamente e em perfeito estado",
+            "Exigir e fiscalizar o uso",
+            "Orientar e treinar o trabalhador sobre o uso correto, guarda e conservação",
+            "Substituir imediatamente quando danificado ou extraviado",
+            "Higienizar e manter periodicamente, e registrar o fornecimento (ficha de EPI)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Obrigações do trabalhador",
+          "type": "list",
+          "items": [
+            "Usar o EPI apenas para a finalidade a que se destina",
+            "Responsabilizar-se pela guarda e conservação",
+            "Comunicar qualquer alteração que o torne impróprio para uso",
+            "Cumprir as determinações do empregador sobre o uso adequado"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "EPIs específicos para o risco elétrico",
+          "type": "list",
+          "items": [
+            "Luvas isolantes de borracha — classificadas por classe de tensão (00 a 4), usadas com luvas de cobertura de raspa",
+            "Vestimenta condutiva ou anti-arco — com índice ATPV/EBT adequado à energia incidente calculada (estudo de arco elétrico)",
+            "Capacete classe B (isolante) com jugular",
+            "Óculos e protetor facial com proteção contra arco elétrico",
+            "Calçado de segurança com solado isolante",
+            "Cinturão e talabarte (quando combinado com trabalho em altura na rede)"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Vestimenta anti-arco e o estudo de arco elétrico",
+          "type": "note",
+          "body": "A escolha da vestimenta anti-arco não é arbitrária: ela depende da energia incidente (cal/cm²) no ponto de trabalho, calculada por um estudo de arco elétrico (conforme IEEE 1584 / NFPA 70E). A vestimenta deve ter um ATPV (Arc Thermal Performance Value) igual ou superior à energia incidente. Vestir uma roupa anti-arco de categoria insuficiente dá uma falsa sensação de segurança e pode resultar em queimaduras graves num evento de arco."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O EPI é a última barreira de proteção e só é válido com CA vigente. O empregador fornece, treina, fiscaliza e substitui; o trabalhador usa corretamente e conserva. No risco elétrico, luvas isolantes por classe de tensão e vestimenta anti-arco dimensionada pela energia incidente (estudo de arco) são itens críticos — a categoria errada equivale a não ter proteção."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — NR-12 e NR-17: Máquinas e Ergonomia",
+      "subtitle": "Segurança em máquinas e adequação do trabalho ao ser humano",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "NR-12: princípios de segurança em máquinas",
+          "type": "text",
+          "body": "A NR-12 define referências técnicas e medidas de proteção para garantir a integridade física de quem opera, mantém ou se aproxima de máquinas e equipamentos. Seu princípio central é a proteção na fonte: a máquina deve ser projetada e mantida de modo que o acesso a zonas de perigo seja fisicamente impedido durante a operação. Para a equipe elétrica, a NR-12 é especialmente relevante na manutenção de painéis, motores e sistemas automatizados."
+        },
+        {
+          "id": "s2",
+          "title": "Dispositivos de segurança em máquinas",
+          "type": "list",
+          "items": [
+            "Proteções fixas e móveis — barreiras físicas que impedem o acesso à zona de perigo",
+            "Dispositivos de intertravamento — param a máquina ao abrir a proteção (chaves de segurança)",
+            "Cortinas de luz e tapetes de segurança — detectam a presença na zona de risco",
+            "Botão de parada de emergência — acessível e de acionamento imediato",
+            "Sistema de bloqueio (LOTO) — para a manutenção segura, garantindo desenergização"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Categoria de segurança e o circuito de comando",
+          "type": "note",
+          "body": "A NR-12 exige que os sistemas de segurança das máquinas tenham categoria adequada ao risco (conforme ISO 13849-1: categorias B, 1, 2, 3, 4). Para o profissional de controle, isso significa que os circuitos de segurança (relés de segurança, CLPs de segurança) devem ser projetados com redundância e diagnóstico proporcionais ao risco. Uma parada de emergência categoria 4, por exemplo, exige dois canais independentes com monitoramento mútuo."
+        },
+        {
+          "id": "s4",
+          "title": "NR-17: ergonomia aplicada ao trabalho elétrico",
+          "type": "text",
+          "body": "A NR-17 visa adaptar as condições de trabalho às características psicofisiológicas dos trabalhadores. No contexto elétrico, isso abrange o levantamento e transporte de materiais pesados (bobinas de cabo, transformadores), a postura em trabalhos prolongados em painéis e quadros, a iluminação adequada da área de trabalho (crítica para leitura de instrumentos e identificação de condutores), e o conforto térmico em salas de painéis e subestações."
+        },
+        {
+          "id": "s5",
+          "title": "Análise Ergonômica do Trabalho (AET)",
+          "type": "text",
+          "body": "Quando há indicativo de risco ergonômico, a NR-17 prevê a Análise Ergonômica do Trabalho (AET) — um estudo que avalia as demandas da tarefa, o ambiente e a organização do trabalho, propondo melhorias. A AET pode recomendar desde a aquisição de equipamentos de movimentação (talhas, paleteiras) até a reorganização de jornadas e pausas. Ergonomia bem aplicada reduz afastamentos por LER/DORT e aumenta a produtividade."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NR-12 protege na fonte: barreiras, intertravamentos e circuitos de segurança com categoria proporcional ao risco (ISO 13849). A NR-17 adapta o trabalho ao ser humano — levantamento de carga, postura, iluminação e conforto térmico — com a AET como ferramenta de diagnóstico. Ambas se aplicam diretamente à manutenção de painéis, motores e sistemas automatizados."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — NR-23: Proteção Contra Incêndios",
+      "subtitle": "Prevenção, combate e o caso especial dos incêndios elétricos",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Obrigações fundamentais da NR-23",
+          "type": "text",
+          "body": "A NR-23 estabelece que todos os empregadores devem adotar medidas de prevenção de incêndios, garantir saídas suficientes e sinalizadas para rápida retirada, equipamentos de combate ao fogo, e trabalhadores treinados no uso correto desses equipamentos e nos procedimentos de evacuação. A norma trabalha em conjunto com as Instruções Técnicas dos Corpos de Bombeiros estaduais, que detalham dimensionamentos."
+        },
+        {
+          "id": "s2",
+          "title": "As classes de incêndio",
+          "type": "list",
+          "items": [
+            "Classe A — materiais sólidos comuns (madeira, papel, tecido); extinção por resfriamento (água)",
+            "Classe B — líquidos e gases inflamáveis (óleo, combustível); extinção por abafamento (espuma, CO2, pó)",
+            "Classe C — equipamentos elétricos energizados; exige agente NÃO condutor (CO2, pó químico)",
+            "Classe D — metais combustíveis (sódio, magnésio); agentes especiais",
+            "Classe K — óleos e gorduras de cozinha"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O incêndio Classe C: jamais use água",
+          "type": "note",
+          "body": "Em equipamentos elétricos energizados (Classe C), o uso de água ou espuma é proibido — a água conduz eletricidade e pode eletrocutar quem combate o fogo, além de danificar mais o equipamento. Os agentes corretos são o CO2 (dióxido de carbono, que abafa e não deixa resíduo, ideal para painéis e eletrônicos) e o pó químico seco. A primeira ação, sempre que possível, é DESENERGIZAR o circuito — uma vez sem energia, o incêndio passa a ser tratado pela classe do material que está queimando (A ou B)."
+        },
+        {
+          "id": "s4",
+          "title": "Causas elétricas de incêndio",
+          "type": "list",
+          "items": [
+            "Sobrecarga de condutores — corrente acima da capacidade gera aquecimento e degrada o isolamento",
+            "Curto-circuito — arco e calor intenso podem ignir materiais próximos",
+            "Conexões mal apertadas — alta resistência de contato gera pontos quentes (detectáveis por termografia)",
+            "Falha de isolamento — fuga de corrente e arcos elétricos (arc fault)",
+            "Dimensionamento inadequado da proteção — disjuntor que não atua a tempo"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A NR-23 exige prevenção, saídas sinalizadas, equipamentos de combate e treinamento. As classes de incêndio definem o agente extintor: incêndio elétrico (Classe C) NUNCA com água — usar CO2 ou pó químico, e desenergizar primeiro. As causas elétricas (sobrecarga, curto, mau contato, falha de isolação) reforçam a importância da proteção bem dimensionada e da termografia preventiva."
+        }
+      ]
+    },
+    {
+      "id": "c07",
+      "order": 6,
+      "title": "Capítulo 7 — NR-33: Espaço Confinado",
+      "subtitle": "O risco invisível em dutos, valas e câmaras",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Definição e por que é tão perigoso",
+          "type": "text",
+          "body": "Espaço confinado é qualquer área não projetada para ocupação humana contínua, com meios limitados de entrada e saída, e onde a ventilação é insuficiente para remover contaminantes ou onde pode haver deficiência/enriquecimento de oxigênio. O perigo da NR-33 é que ele é frequentemente invisível: uma atmosfera com baixo oxigênio ou com gases tóxicos não dá aviso, e a vítima perde a consciência em segundos. A maioria das mortes em espaço confinado inclui o socorrista que entrou sem proteção para salvar a primeira vítima."
+        },
+        {
+          "id": "s2",
+          "title": "Espaços confinados no setor elétrico",
+          "type": "list",
+          "items": [
+            "Galerias e dutos de cabos subterrâneos",
+            "Câmaras de transformadores enterradas",
+            "Valas profundas para lançamento de cabos",
+            "Tanques de óleo de transformadores (na manutenção)",
+            "Poços de aterramento e caixas de inspeção profundas"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Os três papéis obrigatórios",
+          "type": "list",
+          "items": [
+            "Supervisor de entrada — autoriza, avalia condições, garante recursos e encerra a atividade",
+            "Vigia — permanece FORA do espaço, em contato contínuo com os trabalhadores, aciona o resgate; jamais entra",
+            "Trabalhador autorizado — executa a tarefa dentro do espaço, capacitado e monitorado"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Medidas de controle obrigatórias",
+          "type": "list",
+          "items": [
+            "Permissão de Entrada e Trabalho (PET) — documento que autoriza cada entrada",
+            "Monitoramento contínuo da atmosfera — oxigênio (19,5% a 23%), gases inflamáveis (<10% do LIE) e tóxicos",
+            "Ventilação/exaustão forçada quando necessário",
+            "Bloqueio de energias perigosas (LOTO) — incluindo a elétrica",
+            "Equipamento de resgate e plano de emergência prontos antes da entrada"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "A regra de ouro do resgate",
+          "type": "note",
+          "body": "Nunca, em hipótese alguma, entre num espaço confinado para resgatar um colega sem o equipamento de proteção respiratória adequado e sem treinamento de resgate. A estatística é cruel: grande parte das mortes em espaços confinados são de pessoas que tentaram um resgate improvisado. O resgate deve ser planejado ANTES da entrada, com equipamento e equipe prontos. O vigia aciona o resgate; ele não improvisa a entrada."
+        },
+        {
+          "id": "s6",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Espaço confinado tem entrada limitada e atmosfera potencialmente perigosa — risco invisível e de evolução rápida. No setor elétrico, abrange galerias de cabos, câmaras e valas. Exige três papéis (supervisor, vigia, trabalhador autorizado), PET, monitoramento de atmosfera, ventilação, bloqueio de energias e plano de resgate prévio. A regra de ouro: nunca improvisar resgate sem proteção e treinamento."
+        }
+      ]
+    },
+    {
+      "id": "c08",
+      "order": 7,
+      "title": "Capítulo 8 — Integração das NRs na rotina de SST",
+      "subtitle": "Como tudo se conecta na prática",
+      "estimatedMinutes": 8,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "As NRs não operam isoladas",
+          "type": "text",
+          "body": "Na prática de campo, as NRs se sobrepõem e se complementam. Uma manutenção de cabo em galeria subterrânea aciona simultaneamente a NR-10 (risco elétrico), a NR-33 (espaço confinado), a NR-06 (EPIs), a NR-35 se houver trabalho em altura no acesso, e a NR-01 (que organiza tudo via GRO). O profissional competente não pensa em normas isoladas, mas no conjunto de riscos da tarefa e nas barreiras necessárias para controlá-los."
+        },
+        {
+          "id": "s2",
+          "title": "A Análise de Risco da Tarefa (ART/APR)",
+          "type": "text",
+          "body": "A ferramenta que integra tudo é a Análise Preliminar de Risco (APR) ou Análise de Risco da Tarefa (ART): antes de iniciar, a equipe lista as etapas do trabalho, os perigos de cada etapa, e as medidas de controle. É nesse momento que se percebe, por exemplo, que uma tarefa aparentemente simples envolve cinco NRs diferentes. A APR transforma a teoria das normas em ações concretas e verificáveis."
+        },
+        {
+          "id": "s3",
+          "title": "Cultura de segurança",
+          "type": "note",
+          "body": "O nível mais alto de maturidade em SST é a cultura de segurança: quando seguir os procedimentos deixa de ser imposição e passa a ser valor compartilhado. Numa cultura madura, qualquer trabalhador tem autoridade para interromper um trabalho inseguro (stop work authority) sem medo de represália. Esse é o objetivo final de todo o arcabouço de NRs."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "As NRs se integram na rotina via Análise de Risco da Tarefa (APR/ART), que conecta NR-01, NR-06, NR-10, NR-12, NR-33 e NR-35 conforme os perigos de cada atividade. O objetivo final é a cultura de segurança, em que prevenção é valor e qualquer um pode interromper o trabalho inseguro. Domine as NRs como um sistema integrado — é assim que a segurança acontece no mundo real."
+        }
+      ]
+    }
+  ]
+}

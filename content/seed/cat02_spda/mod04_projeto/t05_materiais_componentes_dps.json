@@ -1,0 +1,218 @@
+{
+  "category": "SPDA",
+  "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
+  "categoryOrder": 1,
+  "module": "Projeto de SPDA",
+  "moduleSubtitle": "Projeto, risco, posicionamento, volume, materiais e documentacao",
+  "moduleOrder": 3,
+  "trail": "Materiais, Componentes e DPS",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a ABNT NBR 5419:2026, os requisitos tecnicos e a padronizacao para os Dispositivos de Protecao contra Surtos (DPS) passam a ser direcionados a qual serie normativa internacional harmonizada?",
+      "options": [
+        "ABNT NBR IEC 62305",
+        "ABNT NBR IEC 61643",
+        "ABNT NBR IEC 62561",
+        "ABNT NBR 5410"
+      ],
+      "correctIndex": 1,
+      "explanation": "No caso dos dispositivos de protecao contra surtos, os requisitos tecnicos passam a ser direcionados a serie ABNT NBR IEC 61643, responsavel pela padronizacao desses dispositivos. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Dentre as medidas apresentadas para proteger as instalacoes eletricas, qual e considerada exclusivamente uma Medida de Protecao contra Surtos (MPS) e nao cumpre nenhuma funcao adicional de rotina em uma instalacao convencional?",
+      "options": [
+        "Aterramento estrutural.",
+        "Equipotencializacao das massas.",
+        "Instalacao de DPS.",
+        "Roteamento fisico de cabos."
+      ],
+      "correctIndex": 2,
+      "explanation": "Apenas a instalacao de DPS e exclusivamente uma MPS e nao cumpre nenhuma funcao adicional em uma instalacao eletrica, enquanto aterramento, equipotencializacao e roteamento ja farao parte de um projeto de instalacao. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sobre o funcionamento do Dispositivo de Protecao contra Surtos (DPS), o que a literatura tecnica destaca quanto a sua atuacao na rede eletrica em regime permanente?",
+      "options": [
+        "Ele atua estabilizando continuamente a tensao de fornecimento do distribuidor.",
+        "Ele filtra ativamente todas as perturbacoes e distorcoes harmonicas na rede interna.",
+        "Ele nao estabiliza a tensao nem filtra perturbacoes em regime permanente, protegendo apenas contra sobretensoes temporarias.",
+        "Ele substitui a necessidade de retificadores de tensao e mantem a energia de alimentacao ativa."
+      ],
+      "correctIndex": 2,
+      "explanation": "Um DPS nao estabiliza a tensao, nem filtra perturbacoes em regime permanente; ele apenas protege contra sobretensoes temporarias originadas por raios e chaveamentos. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O texto revisado da NBR 5419:2026 destaca de forma mais clara a diferenca de eficiencia entre dois tipos tecnologicos principais de Dispositivos de Protecao contra Surtos (DPS). Quais sao esses dois tipos?",
+      "options": [
+        "Dispositivos magneticos e Dispositivos indutivos.",
+        "Dispositivos comutadores (como centelhadores) e Dispositivos limitadores de tensao (como varistores).",
+        "Dispositivos ativos e Dispositivos passivos termicamente isolados.",
+        "Dispositivos eletromecanicos e Dispositivos de arco a vacuo."
+      ],
+      "correctIndex": 1,
+      "explanation": "A norma destaca a diferenca de eficiencia dos dois tipos de dispositivos de protecao contra surtos: Dispositivos comutadores, como os DPS centelhadores; e Dispositivos limitadores de tensao, como aqueles baseados em varistores. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Com a atualizacao da NBR 5419:2026, qual material teve seu uso expressamente proibido na execucao da transicao entre o concreto da fundacao e o solo para o subsistema de aterramento, visando mitigar problemas?",
+      "options": [
+        "Cobre nu encordoado.",
+        "Aco inoxidavel.",
+        "Aco zincado a quente.",
+        "Aco cobreado."
+      ],
+      "correctIndex": 2,
+      "explanation": "Entre os ajustes estao a admissao de condutores de cobre no concreto e a proibicao do uso de aco zincado a quente na transicao entre o concreto e o solo. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para reduzir os riscos de centelhamentos perigosos no subsistema de descidas e ainda assim conseguir manter a distancia de seguranca exigida (s), passou a ser admitida a utilizacao de condutores com isolacao especifica (como o DEHN HVI). Qual norma internacional rege esta isolacao?",
+      "options": [
+        "IEC 61643-11",
+        "IEC TS 62561-8",
+        "ABNT NBR 5410",
+        "IEEE Green Book 142"
+      ],
+      "correctIndex": 1,
+      "explanation": "No subsistema de descida, passa a ser admitida a utilizacao de condutores com isolacao especifica conforme a IEC TS 62561-8, o que permite manter a distancia de seguranca e reduzir o risco de centelhamentos. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na ABNT NBR 5419:2026, as secoes nominais minimas para os condutores de aco cobreado foram equiparadas as exigidas para os condutores de cobre. Quais sao as secoes minimas estabelecidas para captacao/descida e aterramento, respectivamente?",
+      "options": [
+        "16 mm2 para todos os subsistemas independentemente da funcao.",
+        "35 mm2 para os subsistemas de captacao e descida, e 50 mm2 para o subsistema de aterramento.",
+        "50 mm2 para captacao e descida, e 70 mm2 para o subsistema de aterramento.",
+        "70 mm2 para todos os subsistemas em contato direto com alvenaria."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os condutores de aco cobreado passam a ter secoes nominais equiparadas as do cobre, com valores minimos de 35 mm2 para os subsistemas de captacao e descida e de 50 mm2 para o subsistema de aterramento. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Consultando a tabela normativa de secoes minimas e configuracao de materiais do SPDA, qual e a exigencia ou restricao aplicada ao uso do aluminio como eletrodo de aterramento (contato direto com o solo)?",
+      "options": [
+        "Exige uma secao minima de 70 mm2 no solo.",
+        "Exige uma secao minima robusta de 100 mm2 por conta de sua baixa resistencia mecanica.",
+        "E permitido apenas se revestido em polimero e nao como eletrodo nu.",
+        "Seu uso e vetado, nao havendo especificacao permitida para uso no solo."
+      ],
+      "correctIndex": 3,
+      "explanation": "Na tabela de materiais e dimensoes minimas, a celula para o Aluminio como eletrodo de aterramento possui um traco (hifen), o que significa que o seu uso nao e permitido em contato direto com o solo. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com o material tecnico sobre as Medidas de Protecao contra Surtos (MPS), qual componente eletrico e empregado especificamente para garantir a equipotencializacao indireta de condutores e elementos normalmente energizados?",
+      "options": [
+        "Cabos flexiveis de aco inoxidavel 304 aterrados na base.",
+        "Filtros de linha capacitivos tipo snubbers.",
+        "Dispositivos de Protecao contra Surtos (DPS).",
+        "Conectores de medicao de fuga e reles supervisores."
+      ],
+      "correctIndex": 2,
+      "explanation": "O material apresenta a instalacao de DPS como medida essencial de vinculacao indireta das fases ativas, indicando: DPS para equipotencializacao indireta de condutores normalmente energizados. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A revisao normativa de 2026 introduziu uma orientacao formal estrutural aplicavel aos captores verticais macicos ou tubulares instalados no topo (como mastros e postes elevados). Qual exigencia tecnica complementar de seguranca deve ser atendida?",
+      "options": [
+        "Devem ser submetidos a ensaios de tracao para forcas de 200 kA em laboratorios homologados internacionais.",
+        "Devem possuir um nucleo interno macico de aco inoxidavel com diametro superior a 50 mm.",
+        "Devem passar por um dimensionamento mecanico capaz de suportar os esforcos do vento conforme dita a norma ABNT NBR 6123.",
+        "Devem ser obrigatoriamente preenchidos internamente com compostos de alta condutividade termica e cimenticia."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para os captores verticais macicos ou tubulares, como postes e mastros, passa a existir orientacao formal para que seja realizado o dimensionamento mecanico capaz de suportar os esforcos do vento, conforme a ABNT NBR 6123. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Conforme o plano documentado de manutencao indicado nas regulamentacoes atualizadas, a simples atuacao de um DPS Classe I no quadro de entrada da instalacao eletrica ja e uma situacao que exige a verificacao e inspecao tecnica do sistema fora de epoca.",
+      "correctAnswer": true,
+      "explanation": "A norma reforca o plano de manutencao, em que entre as situacoes que exigem verificacao do sistema permanecem a suspeita de impacto de descarga atmosferica na estrutura ou a atuacao de DPS Classe I na entrada da instalacao. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Devido aos altissimos riscos de aceleracao de corrosao galvanica, as revisoes estruturais das tabelas da NBR 5419:2026 baniram a possibilidade de uso de condutores de cobre nu embutidos diretamente no concreto das fundacoes.",
+      "correctAnswer": false,
+      "explanation": "A afirmacao e falsa. A norma atualizada de 2026 passou a admitir oficialmente o uso de condutores de cobre no concreto da edificacao. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A NBR 5419:2026 passou a ressaltar a recomendacao de que os Dispositivos de Protecao contra Surtos (DPS) da Classe I tambem funcionam como uma das medidas de protecao destinadas a proteger as pessoas e instalacoes contra choques eletricos decorrentes da elevacao de potencial nas descargas.",
+      "correctAnswer": true,
+      "explanation": "A norma cita textualmente a utilizacao de dispositivos de protecao contra surtos Classe I como parte das medidas de protecao contra choques eletricos associados as descargas atmosfericas. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para a formacao de cabos que serao alocados no subsistema de aterramento em contato com o solo, a atualizacao de 2026 especifica que cabos de cobre nu ou de aco cobreado passam a ser admitidos com formacoes eletricas de 7 fios ou 19 fios.",
+      "correctAnswer": true,
+      "explanation": "O texto confirma que passam a ser permitidos, no aterramento, cabos de cobre ou de aco cobreado com formacao de 7 ou 19 fios. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Pela Tabela de dimensoes minimas em uso para o projeto dos eletrodos de aterramento na NBR 5419 Parte 3, um condutor construido em cobre com a formacao de cabo encordoado utilizado como eletrodo horizontal (nao cravado) deve ter obrigatoriamente a area de secao transversal de pelo menos 50 mm2.",
+      "correctAnswer": true,
+      "explanation": "De acordo com a Tabela normativa de dimensoes minimas para eletrodo, o material Cobre, na configuracao construtiva Encordoado e atuando como Eletrodo nao cravado possui como exigencia a area de secao minima de 50 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A equipotencializacao massiva das linhas passivas reduz o risco para as instalacoes internas. Se o tipo da linha externa for de cabo protegido, os riscos de falhas podem ser nulos caso sua blindagem seja interligada fisicamente, na entrada da instalacao, no mesmo ____ de equipotencializacao em que o equipamento a ser protegido estiver conectado.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "barramento"
+        }
+      ],
+      "explanation": "Os riscos podem ser minimizados a zero se a linha em cabo protegido tiver a sua blindagem interligada, na entrada, ao mesmo barramento de equipotencializacao que o equipamento. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A tabela de dimensoes e bitolas normativas para eletrodos enterrados estipula que, se a decisao de projeto for usar Aco galvanizado a quente em configuracao puramente de fita macica (eletrodo nao cravado) no anel de aterramento, a secao transversal minima demandada e de ____ mm2.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "90"
+        }
+      ],
+      "explanation": "A tabela de dimensoes minimas para eletrodos de aterramento dita que a fita macica fabricada de aco galvanizado a quente como eletrodo nao cravado exige no minimo 90 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na classificacao correta do Dispositivo de Protecao contra Surtos (DPS) visando sua aquisicao, o guia da NBR 5419 destaca a diferenca nas atuacoes entre os dispositivos puramente limitadores de tensao (geralmente varistores) e os dispositivos comutadores, que sao representados tecnicamente pelos conhecidos DPS ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "centelhadores"
+        }
+      ],
+      "explanation": "O texto destaca a diferenca clara de eficiencia em relacao a dois tipos de aparelhos: os dispositivos comutadores, como e o caso dos DPS centelhadores; e os dispositivos limitadores de tensao, como aqueles baseados em varistores. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "difficulty": "hard"
+    }
+  ]
+}

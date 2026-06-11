@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "Automação Industrial, IEC 61131-3, Subestações, DCS e Edge/IIoT",
+  "categoryOrder": 7,
+  "module": "Automação de Subestações",
+  "moduleSubtitle": "SAS (Substation Automation System), aplicações e casos",
+  "moduleOrder": 3,
+  "trail": "Aplicações (SAS - Substation Automation System)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Na automacao moderna baseada na IEC 61850, qual componente substitui os antigos PLCs ao integrar funcoes de protecao, controle e medicao?",
+      "options": [
+        "Os reles de protecao multifuncionais IEDs.",
+        "Os switches ethernet de camada 2.",
+        "As Merging Units instaladas no patio.",
+        "Os gateways seriais operando DNP3."
+      ],
+      "correctIndex": 0,
+      "explanation": "Os IEDs assumiram as funcoes de controle, intertravamento logico e medicao, eliminando a arquitetura centralizada dos antigos PLCs.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um esquema de Transferencia Automatica de Linha, como o IED da entrada avisa instantaneamente ao IED do barramento que houve subtensao?",
+      "options": [
+        "Por cabos seriais dedicados do tipo RS-485.",
+        "Atraves da sinalizacao do disjuntor aberto enviada pela rede via mensagem GOOSE.",
+        "Por relatorios MMS bufferizados direcionados ao SCADA.",
+        "Pelo bloqueio logico do protocolo PTP de tempo na rede."
+      ],
+      "correctIndex": 1,
+      "explanation": "No caso de abertura por subtensao, o IED desta entrada envia a sinalizacao de disjuntor aberto para o IED da barra via rede GOOSE.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante contingencias severas, como a funcao 81 (subfrequencia) e orquestrada para o descarte de cargas inteligente?",
+      "options": [
+        "O operador atua manualmente sobre cada disjuntor do patio.",
+        "A Merging Unit corta a amostragem forcando o rearme dos reles.",
+        "Os IEDs realizam o corte escalonado baseado na matriz de prioridades pre-definida no supervisorio.",
+        "O gateway isola toda a subestacao para preservar o centro nacional de operacao."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os estagios de corte sao setados nos IEDs considerando a matriz de prioridades do SCADA, executando o descarte coordenado de carga via funcao 81.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No confinamento logico das mensagens GOOSE por meio de VLAN, qual o objetivo principal alcancado?",
+      "options": [
+        "Eliminar totalmente o uso de reles de protecao diferencial.",
+        "Permitir a operacao de reles legados nas antigas redes seriais.",
+        "Bloquear unicamente ataques ciberneticos do tipo ransomware na IHM local.",
+        "Evitar operacoes indevidas ou falhas causadas por duplicidade de MAC Address virtual entre subestacoes vizinhas."
+      ],
+      "correctIndex": 3,
+      "explanation": "O confinamento da mensagem GOOSE por VLAN impede que a duplicidade de MAC Address cause operacoes indesejaveis inter-plantas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos projetos de automacao SAS, qual equipamento vital assegura que os IEDs, switches e servidores operem na mesma exata base de tempo?",
+      "options": [
+        "O receptor de referencial satelital GPS conectado a rede.",
+        "O rele diferencial de barra de alta capacidade.",
+        "O conversor de midia fibra para cobre do datacenter.",
+        "O transformador de potencial do nivel de processo."
+      ],
+      "correctIndex": 0,
+      "explanation": "Um dispositivo GPS atua na rede garantindo que IEDs e servidores gerem eventos e logs na mesma base horaria.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em esquemas de seletividade logica implementados via rede GOOSE, o que o IED do alimentador executa ao constatar a passagem da falta?",
+      "options": [
+        "Envia um pacote TCP para o SCADA desarmar todo o conjunto de barras.",
+        "Envia sinal instantaneo via GOOSE ao rele da entrada bloqueando sua funcao de sobrecorrente rapida.",
+        "Solicita confirmacao manual Select Before Operate ao painel do operador.",
+        "Reinicia o algoritmo do switch da rede via RSTP para isolar as mensagens de defeito."
+      ],
+      "correctIndex": 1,
+      "explanation": "O rele do alimentador em pick-up envia sinal de bloqueio GOOSE a entrada, preservando a seletividade e desarmando apenas o equipamento afetado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na automacao do esquema de falha de disjuntor (50BF), qual e a consequencia direta caso o disjuntor associado falhe em interromper a falta no tempo programado?",
+      "options": [
+        "O disjuntor de TIE da barra paralela fecha compulsoriamente para diluir a corrente de curto.",
+        "O rele aciona de forma autonoma a recomposicao ciclica por 3 tentativas consecutivas.",
+        "A protecao 50BF e disparada emitindo um pacote GOOSE que comanda a abertura dos disjuntores a montante.",
+        "O sistema MMS aciona puramente a sinalizacao visual, omitindo comandos para a rede eletrica."
+      ],
+      "correctIndex": 2,
+      "explanation": "Se a falta persistir expirando a temporizacao, a protecao 50BF dispara e envia o GOOSE como gatilho para abertura do disjuntor a montante.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando a protecao diferencial de um transformador (87) atua, de que forma o sinal bloqueador (86T) atinge as unidades vizinhas no SAS digital?",
+      "options": [
+        "Atraves de fios e contatores fisicos interligados rigidamente a retaguarda de cada painel.",
+        "Pelo protocolo de gerenciamento SNMP acionando flags internas nos switches de borda.",
+        "Exclusivamente pelo barramento de processo despachando Sampled Values com 256 amostras nominais.",
+        "O sinal de rele de bloqueio (86) e enviado de forma instantanea via rede GOOSE intertravando o fechamento dos disjuntores remotos."
+      ],
+      "correctIndex": 3,
+      "explanation": "O sinal de 86T recebido via GOOSE entra na logica de bloqueio de fechamento dos IEDs a montante e jusante, efetuando o intertravamento local sem fios extras.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos esquemas de protecao baseados em IEC 61850, como os IEDs de um setor agem perante o recobrimento (backup) ao constatar falha critica em um IED vizinho?",
+      "options": [
+        "Isolam e desligam de imediato todas as cargas associadas aquela subestacao ate o envio de equipes.",
+        "Toleram a situacao alterando ajustes internos ou ativando logicas de emergencia para cobrir tambem a zona do IED ausente.",
+        "Inibem globalmente a emissao de mensagens GOOSE pelo tempo correspondente ao reset da topologia.",
+        "Forcam o operador remoto a preencher logins de administracao antes de reativar logicas vitais."
+      ],
+      "correctIndex": 1,
+      "explanation": "No recobrimento de logica, ao notar a quebra de enlace do IED falho, os demais IEDs assumem uma logica emergencial ou alteram seu grupo de ajuste para proteger a regiao desguarnecida.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No comissionamento da redundancia de links GOOSE, qual comportamento inerente prejudicou a aplicabilidade ao depender unicamente do protocolo Spanning Tree (STP)?",
+      "options": [
+        "O STP lida com tempos e rotinas morosas de recalculo (Listening/Learning), impondo atrasos graves de comutacao na ordem de segundos com lacunas de comunicacao.",
+        "O STP atua obrigatoriamente sob a camada de rede IP descartando as transmissoes locais multicast.",
+        "A tecnica do STP duplica intencionalmente e processa clonagens consumindo o dobro da banda no envio simples.",
+        "Sistemas baseados em STP inibem mandatoriamente etiquetas de prioridade IEEE 802.1Q requeridas nos alarmes."
+      ],
+      "correctIndex": 0,
+      "explanation": "A comutacao reativa via STP passa por etapas de escuta e recadastramento gerando tempos inaceitaveis (proximos de dezenas de segundos), ocasionando perdas nos telegramas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O avanco e aplicacao de mensagens horizontais GOOSE substituiu eficientemente inumeros cabeamentos convencionais antes aplicados na concretizacao fisica dos intertravamentos entre bays vizinhos.",
+      "correctAnswer": true,
+      "explanation": "A comunicacao via rede Ethernet trafegando GOOSE reduz o cabeamento e a fiacao eletrica demandados para logicas de seletividade e bloqueios.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para assegurar auditorias temporais exatas no SCADA, os relatorios que preservam a base real das mudancas suportam o conceito Sequence of Events (SOE) atraves dos buffers internos (BRCB) alojados nos reles.",
+      "correctAnswer": true,
+      "explanation": "Os Buffered Reports (BRCB) memorizam estados com estampa de tempo para suportar sem perdas o log de eventos (SOE) mesmo perante perdas passageiras do enlace.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A arquitetura sem costura permite operar sob contexto dinamico trocando os grupos de ajuste de protecao do equipamento com o rele em pleno funcionamento sem prejuizo a seguranca do sistema.",
+      "correctAnswer": true,
+      "explanation": "Os ajustes dinamicos viabilizam a alteracao do Setting Group mantendo as protecoes atuantes, fato comum ao ajustar a malha para diferentes configuracoes de alimentacao.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao englobar comandos criticos, o mecanismo SBO (Select Before Operate) exige no frame que o parametro de teste seja avaliado como TRUE para aprovar a liberacao de energia no patio.",
+      "correctAnswer": false,
+      "explanation": "Operacoes validas ocorrem apenas se a flag TestMode mantiver-se FALSE, pois valores com Test em TRUE inabilitam qualquer acao real sobre as manobras.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O esquecimento da marcacao logica de um dataset GOOSE como sem tag (untagged) viabiliza escapes acidentais, pois as portas dos switches injetarao a VLAN nativa quebrando a seguranca das ilhas de confinamento.",
+      "correctAnswer": true,
+      "explanation": "Mensagens sem identificacao da VLAN do GOOSE recebem na porta do switch a VLAN do trafego nativo (frequentemente o MMS), burlando as regras exclusivas designadas a confina-las.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em plantas onde subtensoes oriundas de manobras deflagram o corte protetivo dos drives, o reestabelecimento operacional escalonado governado pelos proprios reles caracteriza o automatismo de ____ dos motores.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "reaceleracao"
+        }
+      ],
+      "explanation": "Apos confirmar a estabilizacao das grandezas, os reles orientam sequencialmente acionamentos religando gradativamente as maquinas, efetuando a reaceleracao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para proteger os contratos corporativos e inibir perigos operacionais, os algoritmos dos IEDs computam patamares limitantes gerando GOOSEs e prestando suporte nativo aos esquemas de descarte via ____ contratada.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "demanda"
+        }
+      ],
+      "explanation": "Os IEDs modernos abrigam rotinas de integracao supervisionando os periodos regulamentados a fim de abater alimentadores perante tetos estabelecidos por limites de demanda contratada.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No supervisorio do painel, os elementos graficos acionados sobre o equipamento do unifilar desencadeiam espelhos funcionais interativos mapeados como telas independentes designadas formalmente de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "faceplate"
+        }
+      ],
+      "explanation": "A interacao com os LNs permite ao operador evocar interfaces visuais de controle especifico (faceplates) reproduzindo as propriedades dos paineis de campo.",
+      "difficulty": "hard"
+    }
+  ]
+}

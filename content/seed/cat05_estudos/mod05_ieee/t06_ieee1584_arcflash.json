@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Normas IEEE para Estudos",
+  "moduleSubtitle": "IEEE Color Books, C37, 1584 (Arc Flash) e 519",
+  "moduleOrder": 4,
+  "trail": "IEEE 1584 (Arc Flash)",
+  "trailOrder": 5,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Como a corrente de arco eletrico se compara a corrente de curto-circuito franca (bolted fault) nos calculos analiticos de protecao?",
+      "options": [
+        "E sempre superior devido ao incremento na tensao termica do arco gerado.",
+        "E tipicamente menor em magnitude devido a impedancia inerente do arco no ponto de defeito.",
+        "Apresenta valor identico a falta solida em redes industriais de baixa tensao.",
+        "Torna-se nula durante os primeiros meios ciclos subtransitorios do sistema."
+      ],
+      "correctIndex": 1,
+      "explanation": "O arco insere impedancia resistiva na malha de defeito, reduzindo a magnitude da corrente lida, o que pode atrasar a atuacao dos reles.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual relacao matematica basica baliza a quantidade de energia termica liberada durante um evento de falta por arco eletrico?",
+      "options": [
+        "O quadrado da corrente nominal dividido pela resistencia de aterramento da planta.",
+        "O quociente da tensao de pico nominal pela reatancia de sequencia zero rotativa.",
+        "A multiplicacao direta entre a tensao do arco, a corrente de falta e o tempo de duracao do defeito.",
+        "O fator de assimetria do sistema multiplicado pela corrente simetrica total."
+      ],
+      "correctIndex": 2,
+      "explanation": "A energia liberada em joules ou calorias e proporcional a potencia instantanea (tensao vezes corrente do arco) integrada ao longo do tempo de extincao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que e fundamental minimizar o tempo de eliminacao da falta (clearing time) em cenarios avaliados por estudos de arco eletrico?",
+      "options": [
+        "Para evitar quedas prolongadas de tensao na barra principal da concessionaria supridora.",
+        "Para garantir que os contatores operem unicamente nas zonas retardadas de sobrecarga estatica.",
+        "Para aumentar o estresse magnetico trativo sobre as buchas isoladoras e disjuntores blindados.",
+        "Para diminuir a energia incidente dissipada, limitando queimaduras severas e a destruicao dos paineis."
+      ],
+      "correctIndex": 3,
+      "explanation": "O tempo de eliminacao determina a duracao do aquecimento adiabatico. Quanto mais rapido o desligamento, menores os riscos mortais da explosao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o escopo e o objetivo principal do padrao IEEE 1584 em aplicacoes industriais modernas?",
+      "options": [
+        "Prover um modelo matematico confiavel para calcular a energia incidente e as fronteiras de risco de arco eletrico.",
+        "Fornecer normas para dimensionar a secao transversal de cabos de aterramento profundo.",
+        "Definir metodologias de filtragem ativa para mitigar distorcoes harmonicas de inversores.",
+        "Padronizar universalmente as curvas de disparo de todos os fusiveis e reles de inducao."
+      ],
+      "correctIndex": 0,
+      "explanation": "O padrao estabelece formulas empiricas validadas em laboratorio para prever o calor liberado em uma falta, guiando a definicao de EPIs e seguranca.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nas avaliacoes analiticas, o que demarca fisicamente a fronteira de risco de arco eletrico (arc flash boundary)?",
+      "options": [
+        "A dimensao exata das portas e selamentos frontais contidos na carenagem de forca do painel.",
+        "A distancia no espaco onde o calculo da energia incidente se atenua ao limiar de 1,2 caloria por centimetro quadrado.",
+        "A zona espacial onde as forcas repulsivas eletromagneticas perdem totalmente a sua tracao natural.",
+        "O raio em que o ruido acustico do curto-circuito cai a patamares aceitaveis sem protecao auricular."
+      ],
+      "correctIndex": 1,
+      "explanation": "A fronteira de risco representa o raio limite fora do qual um operador desprotegido esta a salvo de queimaduras de segundo grau irreversiveis.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No contexto da coordenacao de protecao, como o ajuste seletivo dos dispositivos atua para mitigar ativamente a periculosidade do arco eletrico?",
+      "options": [
+        "Elevando a latencia e o retardo de atuacao das chaves, permitindo a auto extincao do plasma.",
+        "Aumentando drasticamente as margens de pickup para impedir a atuação de sobrecorrentes transitorias normais.",
+        "Reduzindo temporalmente as curvas de disparo para secionar o circuito rapidamente em caso de falhas na zona.",
+        "Cancelando completamente o sensoriamento fase-terra das malhas estaticas das subestacoes isoladas."
+      ],
+      "correctIndex": 2,
+      "explanation": "A calibracao com tempos de trip mais agressivos ou logicas bloqueantes limita a duracao do fluxo da corrente, ceifando a escalada termica da explosao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em instalacoes norte-americanas ou regidas pela NR-10, qual a finalidade premente da etiqueta de advertencia de arc flash fixada nos paineis?",
+      "options": [
+        "Detalhar o ano de fabricacao e o numero de serie dos reles microprocessados alocados no vao.",
+        "Exibir os diagramas fasoriais e fluxos de carga nominais do sistema balanceado unifilar interno.",
+        "Registrar graficamente as assinaturas dos tecnicos encarregados das inspecoes preventivas do disjuntor.",
+        "Alertar de prontidao sobre o nivel calculado de energia incidente, distancias limites e o grau exato dos EPIs exigidos."
+      ],
+      "correctIndex": 3,
+      "explanation": "A etiqueta traduz os dados complexos do estudo do IEEE 1584 em regras vitais e diretas garantindo que a manutencao adote a vestimenta certa.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Dentro das equacoes padronizadas pelo IEEE 1584, o que a variavel da distancia de trabalho (working distance) traduz para a analise de risco?",
+      "options": [
+        "A extensao assumida entre a cabeca ou torso do profissional e o nucleo condutor emissor irradiante do provavel arco.",
+        "O alongamento linear da via de cabos entre o trafo secador e o barramento do cubículo principal.",
+        "A area ociosa disposta na frente do painel exigida para a retirada integral dos disjuntores extraiveis padroes.",
+        "O comprimento total do aterramento dissipador da malha interligando hastes de subestacoes blindadas."
+      ],
+      "correctIndex": 0,
+      "explanation": "Como o calor se dissipa com o afastamento, modelar o quao perto o corpo do operador tracionara na chave dita a periculosidade do choque calorico aferido.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por qual motivacao crida o algoritmo normativo demanda o calculo em paralelo de ambas as correntes, a de arco estimada e a de curto-circuito franca?",
+      "options": [
+        "Visando comprovar se o fluxo do plasma fundente elevara bruscamente as impedancias a niveis impeditivos nas tensoes primarias isoladas.",
+        "Porque a menor corrente do arco atua fatalmente retardando a curva inversa do rele gerando os piores e mais mortais niveis caloricos totais.",
+        "Para conferir se fusíveis limitadores queimam simultaneamente na sobrecarga ou em picos nominais operacionais seguros.",
+        "Para permitir o cômputo da matriz Thevenin com perdas resistivas zeradas na rede emalhada subjacente de geracao sincrona."
+      ],
+      "correctIndex": 1,
+      "explanation": "Geralmente a corrente solida atua instantaneamente os reles. A de arco, sendo mais fraca, pode demorar no retardo inverso e gerar energias letais piores.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Com base na avaliacao fenomenologica do arco citada nas literaturas balizadoras, a formacao resistiva do arco eletrico varia em razao de quais.",
+      "options": [
+        "Das perdas caloricas superficiais das chaves de facas dependentes exclusivamente das temperaturas basais retidas.",
+        "Unicamente em virtude dos acoplamentos capacitivos residuais aditivados da reatancia parasita mutua de laco.",
+        "Do incremento direto no comprimento fisico saltado do plasma e das depressoes inversas ligadas a magnitude estrita da corrente passante.",
+        "Das variacoes pendulares restritivas oriundas dos angulos de fluxo do reator limitador operante no arranjo thevenin."
+      ],
+      "correctIndex": 2,
+      "explanation": "Equacoes analiticas classicas de falha (como Warrington) apontam que a resistencia do arco se eleva com maiores distancias de faiscamento e diminui com correntes mais fortes.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A magnitude estrita da energia incidente irradiada e recebida por um painel depende unicamente e estaticamente da classe fixada de tensão nominal.",
+      "correctAnswer": false,
+      "explanation": "O parametro calórico radiado está atrelado maciçamente à corrente de curto-circuito local, ao tempo protetivo da eliminação da clivagem e ao distanciamento adotado do profissional.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A normativa preceituada de segurança laborativa NFPA 70E embasa seus rigores prescrevendo classes e matrizes de vestimentas de EPI a partir das.",
+      "correctAnswer": true,
+      "explanation": "Os manuais absorvem com rigor os limiares quantificados através dos cômputos dessa norma IEEE referencial para validar as grossuras isolantes em trajes retardantes balísticos contra explosões e chamas.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Uma das peculiaridades nefastas observadas nos estudos aponta que a corrente de arco, ao diferir assumindo valores inferiores frente à corrente do.",
+      "correctAnswer": false,
+      "explanation": "A asserção inverte o panorama: justamente por apresentar corrente rebaixada e atenuada, o arco arrasta e adia os disparos nos patamares longos das curvas inversas, desencadeando calor mortífero agudo contínuo.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos modernos centros industriais a adoção tecnológica inserindo zonas temporárias lógicas voltadas a manobras ou chaves de manutenção permite.",
+      "correctAnswer": true,
+      "explanation": "Essa prática suspende atrasos e bloqueios do arranjo cronométrico, disparando a abertura imediata ante curtos para proteger incondicionalmente quem interage fisicamente nas portinholas contra a energia irrompida do flash.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No rigor modelador das matrizes que determinam a irradiação da falta e das fronteiras, a formatação física e o grau de confinamento representados.",
+      "correctAnswer": true,
+      "explanation": "Os testes validam que as chapas da estrutura funcionam quais refletores ou canhões espaciais, focando quase o trâmite todo do bolsão de plasma para fora com enorme severidade contra as faces de passagem de serviço comparado aos arcos dispersos na natureza ou ar livre.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A magnitude balizadora calculada para expressar numericamente as concentrações dos calores mortais expelidos pelas falhas plásmicas agredindo o ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "incidente"
+        }
+      ],
+      "explanation": "A energia incidente é a métrica essencial resultante da integração temporal, denotando a dosagem de aquecimento recebida a uma dada distância pela pele do funcionário no ambiente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Perante a necessidade estrita em normativas nacionais focadas no regulamento trabalhista e NR dez visando salvar a vida do atuante eletricista ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "etiqueta"
+        }
+      ],
+      "explanation": "A elaboração de uma etiqueta (também conhecida na indústria como label warning) cumpre o imperativo legal traduzindo as complexidades de engenharia em exigências visuais instantâneas e barreiras atreladas indicando aos operadores os riscos e graus iminentes do EPI necessário local.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nas aferições e cálculos normativos atinentes ao controle balizador a esfera ou raio abstrato traçado marcando categoricamente o contorno externo ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "risco"
+        }
+      ],
+      "explanation": "Ultrapassar a fronteira de risco desprovido das camadas impeditivas térmicas aprovadas expõe a saúde imediatamente à agressão de queimaduras profundas ou irremediáveis caso a comutação venha a formar um arco reativo violento sustentado inesperado.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "DNP3",
+  "moduleSubtitle": "Arquitetura, objetos e segurança DNP3 SA",
+  "moduleOrder": 1,
+  "trail": "Fundamentos de DNP3",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o principal objetivo e origem do protocolo DNP3 no contexto da automacao industrial?",
+      "options": [
+        "Padronizar as redes corporativas Wi-Fi.",
+        "Garantir a interoperabilidade padronizada entre sistemas de controle e estacoes remotas.",
+        "Substituir totalmente os cabos fisicos de cobre em paineis de protecao.",
+        "Limitar a comunicacao industrial apenas a meios fisicos seriais RS-232."
+      ],
+      "correctIndex": 1,
+      "explanation": "O protocolo DNP3 (Distributed Network Protocol) foi concebido visando promover a interoperabilidade padronizada entre sistemas mestres e equipamentos remotos de varios fabricantes (Informacao externa as fontes).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O DNP3 adota o modelo EPA (Enhanced Performance Architecture). Quais camadas do modelo OSI ele implementa nativamente como referenciado nos.",
+      "options": [
+        "Todas as 7 camadas do modelo de referencia OSI.",
+        "As camadas 1 (Fisica), 2 (Enlace) e 7 (Aplicacao).",
+        "Apenas as camadas 3 (Rede) e 4 (Transporte).",
+        "Camadas 1 (Fisica) e 4 (Transporte) exclusivamente."
+      ],
+      "correctIndex": 1,
+      "explanation": "O DNP3 utiliza a arquitetura EPA simplificada que condensa os servicos nas camadas de aplicacao, enlace e fisica para ganho de performance, similar a padroes citados nas fontes (Informacao hibrida).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como e classificada a relacao de comunicacao tradicional padronizada no DNP3?",
+      "options": [
+        "Topologia estrita de anel Token Ring.",
+        "Publish-Subscribe com transmissao Multicast.",
+        "Cliente-Servidor no formato Mestre-Outstation.",
+        "Comunicacao Peer-to-Peer sem equipamento controlador."
+      ],
+      "correctIndex": 2,
+      "explanation": "A operacao basica do DNP3 segue o modelo onde um ou mais Mestre centraliza o controle interagindo com os dispositivos de campo denominados Outstations (Informacao externa).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No modelo de dados agrupados do DNP3, como sao classificados os pontos digitais que representam estados lidos do equipamento de campo?",
+      "options": [
+        "Analog Inputs.",
+        "Binary Outputs.",
+        "Counters.",
+        "Binary Inputs."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os estados e alarmes digitais provenientes do campo sao mapeados e organizados como variaveis do tipo Binary Inputs no protocolo (Informacao externa).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que um sistema mestre solicita ao enviar um comando de leitura exclusivo da Classe 0 para uma remota DNP3?",
+      "options": [
+        "Os valores estaticos atuais (correntes) de todos os pontos mapeados.",
+        "Apenas eventos criticos com time-stamp.",
+        "Falhas estatisticas da camada de rede TCP/IP.",
+        "O bloqueio total da operacao remota do equipamento."
+      ],
+      "correctIndex": 0,
+      "explanation": "A requisicao de Classe 0 tem a funcao de ler os dados estaticos momentaneos dos equipamentos escravos (polling de integridade) (Informacao externa).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a utilidade pratica da segmentacao de dados nas Classes 1, 2 e 3 dentro do protocolo DNP3?",
+      "options": [
+        "Definir a tensao de alimentacao dos reles supervisionados.",
+        "Organizar e priorizar os eventos com mudancas de estado registrados na remota.",
+        "Classificar cabos de rede e velocidades de porta Ethernet.",
+        "Limitar os acessos criptograficos de operadores do SCADA."
+      ],
+      "correctIndex": 1,
+      "explanation": "Eventos (dados que sofreram mudanca de estado e precisam ser reportados) sao agrupados nas Classes 1, 2 e 3, garantindo priorizacao de leitura pelo mestre (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual caracteristica descreve corretamente o modo Unsolicited Responses (Respostas Nao Solicitadas) do DNP3?",
+      "options": [
+        "A remota envia dados anonimos para broadcasts da rede MAC.",
+        "O mestre envia controles sequenciais que os reles ignoram em caso de alarme.",
+        "A remota transmite eventos espontaneamente ao mestre ao inves de aguardar o polling.",
+        "O mestre opera por broadcast UDP sem confirmacao da remota."
+      ],
+      "correctIndex": 2,
+      "explanation": "As Respostas Nao Solicitadas permitem que a outstation funcione ativamente, reportando excecoes sem que o mestre as peca explicitamente por interrogacao ciclica (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual recurso nativo o DNP3 oferece para a analise precisa da Sequencia de Eventos (SOE), superando protocolos puramente voltados a polling passivo?",
+      "options": [
+        "Redundancia fisica do cabeamento em anel RSTP embutido na camada de aplicacao.",
+        "Criptografia nativa em curva eliptica nos dados analogicos.",
+        "Comandos GOOSE embutidos para transmissao multicast de status digital.",
+        "Geracao da estampa de tempo (time-stamp) diretamente na origem do evento pela remota."
+      ],
+      "correctIndex": 3,
+      "explanation": "O DNP3 atribui a estampa de tempo (time-stamp) aos eventos na propria outstation no momento da ocorrencia, fornecendo precisao essencial para a SOE no centro de operacao (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Embora adote uma arquitetura de 3 camadas (EPA), o DNP3 insere uma subcamada de pseudo-transporte. Qual e a sua funcao principal?",
+      "options": [
+        "Segmentar e remontar mensagens longas da aplicacao para caberem nos quadros restritos do Enlace.",
+        "Substituir roteadores fisicos BGP no nivel corporativo.",
+        "Adicionar checksum CRC de 32 bits as variaveis analogicas.",
+        "Criar túneis virtuais VPN para seguranca de telemetria remota."
+      ],
+      "correctIndex": 0,
+      "explanation": "A funcao do pseudo-transporte e dividir mensagens da aplicacao que excedem os limites da camada de enlace em múltiplos fragmentos e remonta-los no destino (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na operacao de disjuntores via DNP3, qual funcionalidade ajuda a assegurar operacoes seguras evitando falsos comandos devido a erros de rede?",
+      "options": [
+        "Transmissao de comandos exclusivament por TCP porta 80.",
+        "Mecanismo Select-Before-Operate (SBO) exigindo selecao pre-armada e validacao anterior ao disparo.",
+        "Envio ciclico de pulsos GOOSE supervisionados por TimeAllowedToLive.",
+        "A passagem de token digital validado pelo switch de borda."
+      ],
+      "correctIndex": 2,
+      "explanation": "O SBO e uma tecnica de controle em duas etapas (selecionar o ponto, confirmar o status/autorizacao e em seguida operar) que evita atuacoes acidentais por ruidos de comunicacao (Informacao externa).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para integracao e evolucao do SPCS descritas nas fontes IEC 61850, protocolos industriais proprietarios e legados como o DNP (DNP3) podem ser.",
+      "correctAnswer": true,
+      "explanation": "A documentacao aponta esquemas modernos de integracao substituindo padronizacoes unificadas antigas como DNP e MODBUS acoplando-os a nova arquitetura central via Station Gateways.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O DNP3 requer exclusivamente um mecanismo de interrogacao ciclica (polling) operado continuamente pelo Mestre para que falhas ou excecoes nos.",
+      "correctAnswer": false,
+      "explanation": "O DNP3 fornece capacidade hibrida possuindo suporte a Unsolicited Responses, ou seja, reportes por excecao espontaneos emitidos pelas estacoes remotas ao Mestre (Informacao externa).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na definicao de objetos de banco de dados do DNP3, informacoes relativas a leituras fisicas de tensao, corrente ou pressao obtidas de sensores da.",
+      "correctAnswer": false,
+      "explanation": "Grandezas de entrada monitoradas pela remota (leituras de processo) sao identificadas como Analog Inputs. As Analog Outputs sao referencias de setpoint emitidas em sentido reverso pelo controlador (Informacao externa).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A execucao de um Integrity Poll no DNP3 consiste fundamentalmente em o Mestre interrogar os dados estaticos atuais (Class 0) de forma combinada com.",
+      "correctAnswer": true,
+      "explanation": "A interrogacao de integridade garante a sincronizacao da base de dados do SCADA, pois le os valores correntes da Class 0 e, consequentemente, confirma quaisquer transicoes contidas como eventos de outras classes (Informacao externa).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas implementacoes DNP3 sobre redes Ethernet LAN nativas, o quadro de dados descarta por completo os blocos seriais de Enlace (incluindo o checksum.",
+      "correctAnswer": false,
+      "explanation": "Ao contrario de protocolos com variacoes puramente IP como Modbus TCP, o DNP3 sobre IP encapsula todo o quadro DNP nativo (mantendo a redundancia de sua propria camada de enlace CRC) na area de payload do TCP/UDP (Informacao externa).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No sistema de polling do DNP3, a leitura da Classe ____ garante que a base de dados do controlador mestre se atualize com os ultimos estados.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "0"
+        }
+      ],
+      "explanation": "A Class 0 ou Classe 0 agrupa os current values (valores estaticos e correntes) da base da estacao, diferente das classes 1,2,3 que cuidam dos eventos ou SOE (Informacao externa).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Pela terminologia formal do DNP3, os dispositivos de medicao localizados no campo e sob coordenacao de um master central sao tipicamente chamados ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "outstation"
+        }
+      ],
+      "explanation": "Equipamentos perifericos RTUs, CLPs ou reles sao definidos na terminologia do DNP3 como Outstations (Estacoes Remotas) respondendo aos requerimentos do master (Informacao externa).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A utilizacao estrategica apenas das camadas Fisica, Enlace e Aplicacao do modelo OSI em arquiteturas eficientes de telecontrole recebe a sigla ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "EPA"
+        }
+      ],
+      "explanation": "A arquitetura EPA (Enhanced Performance Architecture) otimiza protocolos descartando overhead desnecessario, fundamentando protocolos focados em telemetria como o DNP3 (Informacao abordada parcialmente nas fontes e na arquitetura DNP3 externa).",
+      "difficulty": "hard"
+    }
+  ]
+}

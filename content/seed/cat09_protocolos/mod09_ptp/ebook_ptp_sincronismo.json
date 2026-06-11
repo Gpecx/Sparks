@@ -1,0 +1,141 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "PTP e Sincronismo de Tempo",
+  "moduleSubtitle": "IEEE 1588, SNTP, grandmaster e testes",
+  "moduleOrder": 8,
+  "ebookTitle": "PTP e Sincronismo de Tempo",
+  "ebookSubtitle": "IEEE 1588: a precisão de tempo que torna a subestação digital possível",
+  "estimatedMinutes": 55,
+  "trailFiles": [
+    "t01_fundamentos_ptp.json",
+    "t02_aplicacoes_ptp.json",
+    "t03_implementacao_testes_sincronismo.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Por que o Tempo é Crítico em SPCS",
+      "subtitle": "Da estampa de eventos à medição digital",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Os usos do sincronismo de tempo",
+          "type": "text",
+          "body": "O sincronismo de tempo é a base invisível de muitas funções da subestação moderna. Ele permite: estampar eventos com precisão para o SOE (saber a ordem exata dos acontecimentos em toda a subestação e entre subestações), correlacionar oscilografias de diferentes equipamentos, sincronizar as amostras dos Sampled Values (crítico para a diferencial), e habilitar medições sincrofasoriais (PMU). Sem um tempo comum e preciso, esses recursos seriam impossíveis ou não confiáveis."
+        },
+        {
+          "id": "s2",
+          "title": "Os diferentes níveis de precisão exigidos",
+          "type": "list",
+          "items": [
+            "SOE e oscilografia — precisão de ~1 ms é geralmente suficiente",
+            "Sincrofasores (PMU) — precisão de microssegundos",
+            "Sampled Values (process bus) — precisão de ~1 microssegundo (a mais exigente)",
+            "Quanto mais crítica a aplicação, maior a precisão de tempo necessária",
+            "A precisão exigida define a tecnologia de sincronismo a usar"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A evolução dos métodos de sincronismo",
+          "type": "note",
+          "body": "Os métodos evoluíram com a exigência de precisão: o SNTP/NTP (sobre rede IP) dá precisão de milissegundos — suficiente para SOE, mas não para SV; o pulso por segundo (PPS) e o IRIG-B (sinais dedicados) dão melhor precisão, mas exigem fiação própria; e o PTP (IEEE 1588) dá precisão de sub-microssegundo sobre a mesma rede Ethernet — sendo a tecnologia que viabiliza os Sampled Values e a subestação digital plena."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O sincronismo de tempo habilita SOE, correlação de oscilografias, Sampled Values e sincrofasores. A precisão exigida varia: ~1 ms para SOE, microssegundos para PMU, ~1 µs para SV (o mais exigente). Os métodos evoluíram do SNTP (ms) e IRIG-B/PPS (dedicados) ao PTP/IEEE 1588 (sub-µs sobre Ethernet), que viabiliza a subestação digital plena."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — O PTP (IEEE 1588)",
+      "subtitle": "Precisão de sub-microssegundo na rede",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Como o PTP funciona",
+          "type": "text",
+          "body": "O PTP (Precision Time Protocol) distribui o tempo preciso pela rede Ethernet a partir de um relógio mestre (grandmaster, geralmente disciplinado por GPS). Ele alcança precisão de sub-microssegundo medindo e compensando o atraso de propagação na rede: através de uma troca de mensagens (Sync, Follow_Up, Delay_Req, Delay_Resp), cada dispositivo (escravo) calcula a diferença entre seu relógio e o do mestre, e o atraso do caminho — e ajusta seu relógio para coincidir com o mestre com altíssima precisão."
+        },
+        {
+          "id": "s2",
+          "title": "A hierarquia de relógios",
+          "type": "list",
+          "items": [
+            "Grandmaster Clock — o relógio de referência da rede (disciplinado por GPS)",
+            "Ordinary Clock — um dispositivo final (IED, MU) que se sincroniza ao mestre",
+            "Boundary Clock — um switch que recebe o tempo e o redistribui (reduz o erro acumulado)",
+            "Transparent Clock — um switch que mede e compensa o tempo que o pacote levou para atravessá-lo",
+            "O Best Master Clock Algorithm (BMCA) elege automaticamente o melhor grandmaster"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O papel crítico dos switches",
+          "type": "note",
+          "body": "Para o PTP atingir sub-microssegundo, os switches da rede precisam ser 'PTP-aware' (Boundary ou Transparent Clocks). Um switch comum introduz atrasos variáveis (jitter) ao encaminhar pacotes, que destruiriam a precisão. Os switches PTP-aware compensam esse atraso: o Transparent Clock mede quanto tempo o pacote PTP ficou no switch e corrige; o Boundary Clock se sincroniza ao mestre e atua como mestre para os dispositivos abaixo. Usar switches comuns numa rede com SV é um erro que compromete todo o sincronismo."
+        },
+        {
+          "id": "s4",
+          "title": "O perfil de energia (Power Profile)",
+          "type": "text",
+          "body": "O IEEE 1588 tem perfis para diferentes setores. Para subestações, usa-se o Power Profile (IEC/IEEE 61850-9-3 ou IEEE C37.238), que padroniza os parâmetros do PTP para o ambiente de energia, garantindo interoperabilidade e a precisão exigida pelos Sampled Values. Especificar e configurar o perfil correto é essencial para que equipamentos de diferentes fabricantes se sincronizem corretamente na mesma rede."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O PTP (IEEE 1588) distribui tempo de sub-microssegundo pela Ethernet a partir de um grandmaster (disciplinado por GPS), medindo e compensando o atraso de rede via troca de mensagens. A hierarquia inclui grandmaster, ordinary, boundary e transparent clocks, com o BMCA elegendo o mestre. Os switches devem ser PTP-aware para manter a precisão. O Power Profile (61850-9-3/C37.238) padroniza o PTP para subestações."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Implementação, Redundância e Testes",
+      "subtitle": "Sincronismo confiável",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Redundância do sincronismo",
+          "type": "text",
+          "body": "Como o sincronismo é crítico (sua perda compromete os SV e a proteção diferencial), ele deve ser redundante. Usam-se múltiplos grandmasters (com o BMCA elegendo o ativo e fazendo failover automático para o reserva se o principal falhar), e a redundância da fonte de tempo (múltiplas antenas GPS). A perda do GPS não derruba imediatamente o sincronismo — o grandmaster entra em modo holdover, mantendo o tempo com seu oscilador interno por um período, dando tempo para a recuperação."
+        },
+        {
+          "id": "s2",
+          "title": "SNTP como complemento",
+          "type": "note",
+          "body": "Nem tudo precisa da precisão extrema do PTP. Para funções que toleram precisão de milissegundos (SOE de eventos, sincronismo de relógios de SCADA, registros), o SNTP/NTP sobre IP é suficiente e mais simples. É comum uma subestação usar PTP para o process bus (SV, precisão de µs) e SNTP para os demais sistemas (precisão de ms). Usar a tecnologia certa para cada nível de exigência otimiza custo e complexidade."
+        },
+        {
+          "id": "s3",
+          "title": "Testando o sincronismo",
+          "type": "list",
+          "items": [
+            "Verificar a qualidade do sincronismo de cada dispositivo (erro em relação ao mestre)",
+            "Testar o failover entre grandmasters (simular falha do principal)",
+            "Testar o comportamento na perda do GPS (entrada em holdover)",
+            "Verificar o efeito da perda de sincronismo nas proteções dependentes (SV → bloqueio)",
+            "Confirmar que os switches estão operando como PTP-aware"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O sincronismo crítico exige redundância: múltiplos grandmasters (failover via BMCA), múltiplas fontes GPS e modo holdover na perda do GPS. O SNTP complementa o PTP para funções que toleram ms (SOE, SCADA). Os testes verificam a qualidade do sincronismo, o failover, o holdover e o efeito da perda nas proteções (bloqueio dos SV). O PTP/IEEE 1588 é a base de tempo invisível que torna a subestação digital possível."
+        }
+      ]
+    }
+  ]
+}

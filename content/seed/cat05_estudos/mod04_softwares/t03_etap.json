@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "",
+  "categoryOrder": 4,
+  "module": "Softwares de Estudos Elétricos",
+  "moduleSubtitle": "Ferramentas de analise de sistemas eletricos de potencia",
+  "moduleOrder": 3,
+  "trail": "ETAP",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual é o domínio principal de aplicação do software ETAP em comparação a outras plataformas de simulação?",
+      "options": [
+        "Apenas transmissão de energia em altíssima tensão.",
+        "Projeto e análise de instalações industriais, comerciais e infraestrutura crítica.",
+        "Gerenciamento exclusivo de pequenas redes de distribuição rural.",
+        "Design exclusivo de circuitos de corrente contínua de baixa potência."
+      ],
+      "correctIndex": 1,
+      "explanation": "O ETAP é construído principalmente para o projeto de sistemas elétricos, coordenação de proteção e análise de arc flash em instalações industriais, comerciais e de missão crítica. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Para adicionar componentes elétricos ou alterar a topologia da rede no ETAP, qual ferramenta ou modo deve ser ativado inicialmente?",
+      "options": [
+        "Modo Análise Harmônica.",
+        "Modo Fluxo de Carga.",
+        "Modo Editar.",
+        "Modo de Tração de Cabos."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para criar ou editar um diagrama unilinear no ETAP, o usuário deve estar no modo Editar, clicando no botão apropriado na barra de ferramentas Modo. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Quais normativas o módulo de Arc Flash do ETAP utiliza por padrão para determinar os níveis de energia incidente e limites de proteção?",
+      "options": [
+        "Normas GOST e AS/NZS 3000 de transmissão.",
+        "Normas NFPA 70E e IEEE 1584.",
+        "Apenas recomendações empíricas europeias.",
+        "Normas IEC 60909 e ANSI de curto-circuito apenas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O método de análise de Arc Flash no ETAP pode ser selecionado como NFPA 70E ou IEEE 1584, sendo este último um modelo mais exato configurado por padrão. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Segundo as fontes, quais métodos de cálculo o ETAP oferece para a realização de análises convencionais de fluxo de potência (Load Flow)?",
+      "options": [
+        "Apenas fluxo harmônico em redes industriais.",
+        "Newton-Raphson, Gauss-Seidel e métodos de fluxo de potência DC.",
+        "Sincronização fasorial e Integração de Euler explícita.",
+        "Fluxo linearizado exclusivamente para transmissão em massa."
+      ],
+      "correctIndex": 1,
+      "explanation": "O ETAP executa cálculos de fluxo de potência usando os métodos Newton-Raphson, Gauss-Seidel e métodos de fluxo de potência DC. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "O que indica a cor vermelha em um equipamento no diagrama unilinear após a execução de um cálculo de curto-circuito no ETAP?",
+      "options": [
+        "Que o equipamento é a fonte geradora do curto-circuito.",
+        "Que o dispositivo não possui dados na biblioteca do projeto.",
+        "Que as capacidades do equipamento estão marginalmente adequadas.",
+        "Que o dispositivo de proteção teve sua capacidade nominal excedida em 100% (Crítico)."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os dispositivos que atingem 100% ou mais de sua capacidade aparecem na categoria Crítico da Vista de Alerta e podem ser destacados na cor vermelha, enquanto os marginais (70%) aparecem em magenta. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Ao configurar um estudo de Aceleração de Motores no ETAP, quais opções são utilizadas para acionar manobras e adicionar eventos de carga durante a simulação?",
+      "options": [
+        "Ação por Carga, Ação por categoria inicial e Transição de carga.",
+        "Frequency Scan, LTC e FCT.",
+        "Voltage Drop, TCC e Ground Grid.",
+        "Cable Pulling, Arc Flash e OPF."
+      ],
+      "correctIndex": 0,
+      "explanation": "Na página de Eventos do módulo de Aceleração de Motores, ações podem ser agendadas usando Ação por Carga, Ação por categoria inicial e Transição de carga. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Qual ferramenta do módulo Star (Coordenação de Proteção) é responsável por listar cronologicamente o tempo de operação dos relés durante uma falta simulada?",
+      "options": [
+        "O editor de Caso de Estudo (Study Case).",
+        "A janela de Visualização de Alerta (Alert View).",
+        "O Gerenciador de Relatórios (Report Manager).",
+        "O Visualizador de Sequência (Sequence Viewer)."
+      ],
+      "correctIndex": 3,
+      "explanation": "O Visualizador de Sequência (Sequence Viewer) fornece um resumo dinâmico da sequência das ações operativas aplicáveis pelos elementos de proteção após a inserção de uma falha. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual módulo e ferramenta o ETAP fornece para localizar frequências de ressonância perigosas em um sistema elétrico?",
+      "options": [
+        "Varredura de frequência harmônica (Frequency Scan).",
+        "Aceleração Dinâmica de Motores.",
+        "Cálculo do Fluxo de Potência Ótimo.",
+        "Descarregamento de Baterias."
+      ],
+      "correctIndex": 0,
+      "explanation": "O ETAP identifica os pontos de ressonância calculando valores de impedância em diversas frequências através da ferramenta de 'Varredura de frequência harmônica'. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "No ETAP, qual formato de software é utilizado nativamente para a visualização, impressão e exportação flexível dos relatórios de saída dos estudos?",
+      "options": [
+        "AutoCAD Reports.",
+        "Crystal Reports.",
+        "Microsoft Excel Nativo.",
+        "Adobe Acrobat PDF."
+      ],
+      "correctIndex": 1,
+      "explanation": "O ETAP utiliza o Crystal Reports para exibir os Relatórios de Saída (Output Reports), oferecendo funções de formatação, impressão e exportação de dados. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Ao executar a Análise de Fluxo de Potência Ideal (OPF) no ETAP, qual ajuste o programa pode recomendar automaticamente para otimizar o sistema?",
+      "options": [
+        "Uma nova configuração de toque (tap/LTC) dos transformadores.",
+        "O tamanho exato das chaves de aterramento para proteção.",
+        "O número de polos ótimo do gerador para fluxo contínuo.",
+        "A distância de trabalho necessária contra arco elétrico."
+      ],
+      "correctIndex": 0,
+      "explanation": "O OPF permite encontrar a maneira mais correta de configurar o sistema, recomendando, por exemplo, uma nova configuração de toque (tap) ótimo no transformador LTC. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "As Bibliotecas (Libraries) do ETAP permitem que o usuário escolha equipamentos de fabricantes específicos, transferindo seus dados técnicos automaticamente para o projeto.",
+      "correctAnswer": true,
+      "explanation": "A biblioteca possui uma função de Escolha Rápida (Quickpick) que transfere os dados técnicos e características nominais automaticamente para os elementos do projeto. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "O ETAP possui um módulo específico chamado Análise de Fluxo de Carga Desequilibrada, capaz de revelar desequilíbrios ocultos provocados por grandes cargas monofásicas.",
+      "correctAnswer": true,
+      "explanation": "A Análise de fluxo de carga desequilibrada avalia sistemas assimétricos com grandes cargas monofásicas, revelando desequilíbrios de tensões e correntes por fase. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "O ETAP calcula as correntes de curto-circuito de forma genérica, não possuindo algoritmos analíticos compatíveis com a norma IEC 60909 ou padrões ANSI/IEEE.",
+      "correctAnswer": false,
+      "explanation": "O módulo de Análise de Curto-Circuito do ETAP realiza cálculos exatos baseados nas normas internacionais IEC 60909 e também nos padrões ANSI/IEEE. (ETAP vs PSSE vs DIgSILENT 2026 — Download + Full License | Which is Best? - دو کرک)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "Na Análise de Arc Flash, o Tempo de Limpeza de Falta (FCT) deve obrigatoriamente ser definido pelo usuário de forma manual e estática.",
+      "correctAnswer": false,
+      "explanation": "A FCT pode ser definida manualmente ou determinada automaticamente pela ETAP a partir das curvas de coordenação de tempo (TCC) do dispositivo de proteção inserido no projeto. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "No ETAP, a função de regulação de tensão da barra (LTC automático) de um transformador requer a manipulação manual do usuário a cada iteração do fluxo de carga.",
+      "correctAnswer": false,
+      "explanation": "O ETAP permite aplicar configurações LTC automáticas, de forma que o tap do transformador seja modificado autonomamente para regular a tensão de uma barra conectada durante a simulação. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "No estudo de fluxo de carga, os resultados ou avisos de sobrecarga podem ser visualizados graficamente e de forma imediata no próprio diagrama ____ (OLD).",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "unilinear"
+        }
+      ],
+      "explanation": "Os gráficos e valores do fluxo de carga são exibidos diretamente no diagrama unilinear (OLD), permitindo visualização integrada dos alertas e sobrecargas no sistema elétrico. (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "Além da simulação estática, a Partida ____ de Motores no ETAP é uma análise que exige a inclusão minuciosa do modelo da carga acoplada e da inércia (H).",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "dinâmica"
+        }
+      ],
+      "explanation": "A Partida dinâmica do motor (Dynamic Motor Starting) utiliza as mesmas condições do estudo estático, mas exige dados detalhados como o modelo de carga (Load Model) e a inércia do motor (H). (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "No módulo ETAP Star, a coordenação de proteções e relés é feita manipulando-se visualmente as curvas de tempo versus corrente, referidas nativamente no software pela sigla ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "TCC"
+        }
+      ],
+      "explanation": "A proteção de sobrecorrente e a seletividade são auditadas no módulo Star através da Vista em estrela, onde são manipuladas as curvas características TCC (Time-Current Curves). (Getting Started Tutorial ETAP 5.0.0.en - PT | PDF | Harmônica | Memória Flash - Scribd)"
+    }
+  ]
+}

@@ -134,9 +134,33 @@ class AdminDashboardPage extends ConsumerWidget {
                   context,
                   icon: Icons.code,
                   title: 'Importar JSON',
-                  subtitle: 'Carga em massa de conteúdo',
+                  subtitle: 'Importar uma trilha via JSON',
                   color: AppColors.primary,
                   onTap: () => AdminDialogs.showImportJSON(context, ref),
+                ),
+                _quickActionCard(
+                  context,
+                  icon: Icons.upload_file,
+                  title: 'Importar em Massa',
+                  subtitle: 'Carregar all_trails.json completo',
+                  color: const Color(0xFF6C63FF),
+                  onTap: () => AdminDialogs.showBulkImportJSON(context, ref),
+                ),
+                _quickActionCard(
+                  context,
+                  icon: Icons.menu_book,
+                  title: 'Importar E-book',
+                  subtitle: 'Importar um e-book via JSON',
+                  color: const Color(0xFF2DD4BF),
+                  onTap: () => AdminDialogs.showImportEbook(context, ref),
+                ),
+                _quickActionCard(
+                  context,
+                  icon: Icons.library_books,
+                  title: 'Importar E-books (massa)',
+                  subtitle: 'Carregar all_ebooks.json completo',
+                  color: const Color(0xFF14B8A6),
+                  onTap: () => AdminDialogs.showBulkImportEbooks(context, ref),
                 ),
                 _quickActionCard(
                   context,
@@ -326,6 +350,26 @@ class AdminDashboardPage extends ConsumerWidget {
               runSpacing: 12,
               alignment: WrapAlignment.end,
               children: [
+                OutlinedButton.icon(
+                  onPressed: () => AdminDialogs.showDeleteAllContent(context, ref),
+                  icon: const Icon(Icons.delete_forever, size: 18),
+                  label: const Text('LIMPAR TUDO'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppColors.error,
+                    side: const BorderSide(color: AppColors.error),
+                    minimumSize: const Size(140, 40),
+                  ),
+                ),
+                OutlinedButton.icon(
+                  onPressed: () => AdminDialogs.showBulkImportJSON(context, ref),
+                  icon: const Icon(Icons.upload_file, size: 18),
+                  label: const Text('IMPORTAR EM MASSA'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: const Color(0xFF6C63FF),
+                    side: const BorderSide(color: Color(0xFF6C63FF)),
+                    minimumSize: const Size(160, 40),
+                  ),
+                ),
                 OutlinedButton.icon(
                   onPressed: () => AdminDialogs.showImportJSON(context, ref),
                   icon: const Icon(Icons.code, size: 18),

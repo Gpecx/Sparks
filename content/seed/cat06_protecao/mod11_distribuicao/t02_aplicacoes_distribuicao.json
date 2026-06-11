@@ -1,0 +1,218 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Redes de Distribuição",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de redes de distribuição",
+  "moduleOrder": 10,
+  "trail": "Aplicações (Radial, Anel, Malha)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a característica do fluxo de correntes de defeito em um sistema estritamente radial?",
+      "options": [
+        "Flui em múltiplos sentidos pelas malhas.",
+        "Retorna pelo aterramento do gerador adjacente.",
+        "Flui da carga para a subestação principal.",
+        "Vai sempre da fonte (subestação) para o local do defeito."
+      ],
+      "correctIndex": 3,
+      "explanation": "No sistema radial, a energia e as correntes de defeito trafegam sempre no sentido da subestação para a falha. (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a vantagem do sistema radial com recursos frente ao radial simples?",
+      "options": [
+        "Isolar o trecho defeituoso e reenergizar partes sãs por fontes alternativas.",
+        "Reduzir fisicamente a potência de curto-circuito na barra.",
+        "Eliminar o uso de relés de sobrecorrente e fusíveis.",
+        "Filtrar as correntes harmônicas de cargas não lineares."
+      ],
+      "correctIndex": 0,
+      "explanation": "O uso de chaveamentos permite isolar o defeito e realimentar partes sãs, melhorando a continuidade. (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que a proteção de um sistema em anel deve possuir características direcionais?",
+      "options": [
+        "Porque a corrente de curto-circuito converge para o defeito por todos os lados.",
+        "Para acelerar a queima dos elos fusíveis.",
+        "Pois a tensão no anel zera imediatamente em toda a rede.",
+        "Para impedir a saturação magnética dos TCs."
+      ],
+      "correctIndex": 0,
+      "explanation": "No anel, a falta é alimentada por vários sentidos, exigindo relés direcionais para obter seletividade. (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a função da chave Network Protector em redes subterrâneas Spot Network?",
+      "options": [
+        "Bloquear a atuação da proteção diferencial de barras.",
+        "Detectar a reversão do fluxo das correntes de falta e abrir o circuito.",
+        "Transferir a carga para o gerador a diesel local.",
+        "Elevar a tensão primária durante subtensões."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Network Protector detecta fluxos reversos gerados por falhas nos alimentadores paralelos e isola a rede. (Fonte: KLS - Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como é feita a proteção principal de uma rede operada em malha aberta?",
+      "options": [
+        "Por relés diferenciais de linha instalados em cada cabo.",
+        "Apenas por fusíveis nas chaves seccionadoras manuais.",
+        "Nas extremidades (topos) da malha com proteção de sobrecorrente.",
+        "Por relés de salto de vetor sincronizados por GPS."
+      ],
+      "correctIndex": 2,
+      "explanation": "A rede atua aberta e a proteção é assegurada por relés de sobrecorrente nos disjuntores de topo. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o sistema de automação faz após isolar um cabo em falha na malha aberta?",
+      "options": [
+        "Bloqueia permanentemente o religador da subestação principal.",
+        "Injeta corrente contínua na linha para extinguir o arco.",
+        "Altera a relação de transformação dos TCs da linha.",
+        "Fecha o dispositivo que mantinha a malha aberta para realimentar o trecho são."
+      ],
+      "correctIndex": 3,
+      "explanation": "A automação isola o defeito e fecha o ponto de abertura normal para reconfigurar e alimentar a carga a jusante. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o seccionalizador atua para isolar faltas na rede primária?",
+      "options": [
+        "Conta as aberturas do religador a montante e abre travado sem corrente.",
+        "Interrompe sozinho a corrente máxima de curto-circuito.",
+        "Mede a diferença de corrente entre as fases do ramal.",
+        "Detecta subtensão severa e abre sob carga plena."
+      ],
+      "correctIndex": 0,
+      "explanation": "Ele não corta curtos; apenas conta as aberturas do religador e abre quando o circuito está desenergizado. (Fonte: KLS - Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como opera a transferência em subestação com suprimento duplo (NA e NF)?",
+      "options": [
+        "As duas fontes operam ativamente sempre em paralelo.",
+        "A falha na linha principal abre a chave NF e fecha a NA, transferindo a carga.",
+        "A carga inteira é rejeitada pelo relé de subfrequência.",
+        "Dispara imediatamente o banco de capacitores em série."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para falhas no alimentador de serviço, o esquema abre a chave NF e fecha a NA para transferir a alimentação. (Fonte: KLS - Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais proteções garantem a rápida eliminação de falhas em malha fechada?",
+      "options": [
+        "Relés de sobretensão puramente temporizados.",
+        "Proteção diferencial de linha ou sobrecorrente com seletividade direcional.",
+        "Elos fusíveis de expulsão do tipo K.",
+        "Relés de verificação de sincronismo nas cargas."
+      ],
+      "correctIndex": 1,
+      "explanation": "Em malha fechada, exige-se proteção diferencial (87L) ou sobrecorrente direcional (67) com lógica. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o cogerador é protegido do religamento assíncrono da rede pública?",
+      "options": [
+        "Utilizando cabos subterrâneos isolados a XLPE.",
+        "Aterrando solidamente o neutro do gerador local.",
+        "Através da função de salto de vetor ou direcional de potência.",
+        "Usando reatores shunt no disjuntor de acoplamento."
+      ],
+      "correctIndex": 2,
+      "explanation": "O desacoplamento para evitar distúrbios e religamentos fora de fase é feito por relés de salto de vetor (78) ou potência reversa. (Fonte: Guia Proteção 2008).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Sistemas radiais simples apresentam alta continuidade de serviço sem perda de consumidores sob falha.",
+      "correctAnswer": false,
+      "explanation": "Falso. O sistema radial simples tem baixa continuidade, pois a falha desliga todos os consumidores a jusante. (Fonte: Apostila Proteção).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O sistema em anel permite desconectar a linha em falta mantendo as barras e cargas energizadas.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. A vantagem do anel é atuar a proteção desconectando apenas a linha, sem perda de suprimento às barras. (Fonte: Apostila Proteção).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Subestações com suprimento duplo e chaves de transferência elevam a continuidade do serviço.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. Arranjos com chaves NA e NF permitem trocar de fonte e manter a subestação alimentada. (Fonte: KLS - Proteção).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O religador evita que faltas temporárias nas redes primárias causem interrupções permanentes.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. Com aberturas e fechamentos, o religador extingue faltas fugitivas sem deixar o circuito permanentemente fora. (Fonte: KLS - Proteção).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na rede Spot Network, a falha do alimentador exige a proteção diferencial para abrir os Network Protectors.",
+      "correctAnswer": false,
+      "explanation": "Falso. A chave Network Protector detecta fluxos reversos autônomos para isolar a falha sem exigir proteção diferencial de barras. (Fonte: KLS - Proteção).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O religador é ideal para redes aéreas, pois a maioria das faltas é ____, durando poucos ciclos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "temporária"
+        }
+      ],
+      "explanation": "Nas redes primárias, 75% a 90% das faltas são temporárias (fugitivas), sendo eliminadas pelo religamento. (Fonte: KLS - Proteção).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na automacao de redes em anel operadas radialmente, realimenta-se o trecho sao fechando o dispositivo seccionador (NA) que mantinha a malha ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "aberta"
+        }
+      ],
+      "explanation": "Após isolar o cabo em curto, o sistema fecha o ponto normalmente aberto para restaurar a energia. (Fonte: Guia Proteção 2008).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para alta confiabilidade na transferência de carga, usam-se subestações com barramentos ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "duplicados"
+        }
+      ],
+      "explanation": "O arranjo com barramentos duplicados permite manobrar e distribuir circuitos sem corte de carga. (Fonte: KLS - Proteção).",
+      "difficulty": "hard"
+    }
+  ]
+}

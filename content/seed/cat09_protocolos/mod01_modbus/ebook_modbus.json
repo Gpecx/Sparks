@@ -1,0 +1,146 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "MODBUS",
+  "moduleSubtitle": "RTU, TCP/IP e mapa de registros",
+  "moduleOrder": 0,
+  "ebookTitle": "Protocolo MODBUS",
+  "ebookSubtitle": "O protocolo industrial mais difundido: RTU, TCP/IP e o mapa de registros",
+  "estimatedMinutes": 55,
+  "trailFiles": [
+    "t01_fundamentos_modbus.json",
+    "t02_aplicacoes_modbus.json",
+    "t03_implementacao_modbus.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Fundamentos do MODBUS",
+      "subtitle": "Simplicidade que conquistou a indústria",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é o MODBUS",
+          "type": "text",
+          "body": "O MODBUS é um protocolo de comunicação industrial criado pela Modicon em 1979, e até hoje um dos mais usados do mundo. Sua força é a simplicidade: é aberto, fácil de implementar, e amplamente suportado por praticamente todo equipamento industrial — CLPs, IEDs, medidores, inversores. No contexto de SPCS, o MODBUS é comum na integração de equipamentos diversos a sistemas de supervisão, especialmente onde a simplicidade e o custo importam mais que recursos avançados."
+        },
+        {
+          "id": "s2",
+          "title": "O modelo mestre-escravo",
+          "type": "text",
+          "body": "O MODBUS opera no modelo mestre-escravo (cliente-servidor): um mestre inicia todas as comunicações, enviando requisições aos escravos, que respondem. Os escravos nunca falam espontaneamente — só respondem quando perguntados (polling). Isso torna o protocolo simples e determinístico, mas significa que o mestre precisa varrer (poll) os escravos repetidamente para detectar mudanças, o que pode ser ineficiente para muitos pontos ou para eventos rápidos."
+        },
+        {
+          "id": "s3",
+          "title": "Os tipos de dado MODBUS",
+          "type": "list",
+          "items": [
+            "Coils (saídas digitais) — leitura e escrita de bits (ex.: comandos liga/desliga)",
+            "Discrete Inputs (entradas digitais) — leitura de bits (ex.: estados de equipamentos)",
+            "Holding Registers — registradores de 16 bits para leitura e escrita (ajustes, comandos analógicos)",
+            "Input Registers — registradores de 16 bits somente leitura (medições)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O MODBUS (1979) é simples, aberto e universalmente suportado — um dos protocolos industriais mais usados. Opera no modelo mestre-escravo (o mestre faz polling, escravos só respondem) — simples e determinístico, mas ineficiente para muitos pontos/eventos rápidos. Seus dados são coils e discrete inputs (bits) e holding/input registers (16 bits)."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — MODBUS RTU e MODBUS TCP",
+      "subtitle": "Serial e sobre Ethernet",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "MODBUS RTU (serial)",
+          "type": "text",
+          "body": "O MODBUS RTU é a variante serial, tipicamente sobre RS-485 (que permite múltiplos dispositivos num barramento de dois fios, em distâncias de até ~1200 m). Os dados são transmitidos em formato binário compacto, com verificação de erro por CRC. É robusto e econômico para conectar vários dispositivos numa rede serial, mas limitado em velocidade e no número de dispositivos por barramento. Ainda muito presente em instalações industriais e em equipamentos de campo."
+        },
+        {
+          "id": "s2",
+          "title": "MODBUS TCP",
+          "type": "text",
+          "body": "O MODBUS TCP encapsula as mensagens MODBUS em pacotes TCP/IP, rodando sobre Ethernet. Isso traz as vantagens da rede moderna: maior velocidade, múltiplos mestres simultâneos, integração com a infraestrutura de TI, e distâncias ilimitadas (via rede). O CRC é substituído pela verificação de erro do próprio TCP. O MODBUS TCP é a forma preferida em sistemas novos, aproveitando a rede Ethernet que já existe na subestação digital."
+        },
+        {
+          "id": "s3",
+          "title": "Os códigos de função",
+          "type": "list",
+          "items": [
+            "01/02 — ler coils / discrete inputs",
+            "03/04 — ler holding / input registers",
+            "05/06 — escrever um único coil / registrador",
+            "15/16 — escrever múltiplos coils / registradores",
+            "O código de função define a operação; um código de exceção indica erro na resposta"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "RTU vs TCP: quando usar cada um",
+          "type": "note",
+          "body": "O MODBUS RTU permanece relevante para equipamentos de campo simples e barramentos seriais existentes — é robusto e não exige infraestrutura de rede. O MODBUS TCP é preferido em sistemas novos e onde já há rede Ethernet, pela velocidade e integração. Gateways MODBUS RTU/TCP permitem conectar dispositivos seriais antigos a redes modernas, sendo comuns em modernizações de subestações."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O MODBUS RTU é serial (RS-485, binário com CRC) — robusto e econômico para barramentos de campo. O MODBUS TCP encapsula em TCP/IP sobre Ethernet — mais rápido, múltiplos mestres, integrado à TI. Os códigos de função (01-06, 15, 16) definem as operações de leitura/escrita. Gateways RTU/TCP conectam dispositivos seriais antigos a redes modernas."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — O Mapa de Registros e a Integração",
+      "subtitle": "Onde está cada dado",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O mapa de registros (memory map)",
+          "type": "text",
+          "body": "O coração da integração MODBUS é o mapa de registros: a tabela que define qual endereço corresponde a qual grandeza no equipamento (ex.: holding register 40001 = tensão da fase A, coil 00001 = comando de trip). Cada fabricante define o mapa do seu equipamento, que deve ser fornecido na documentação. Integrar um equipamento via MODBUS é, essencialmente, mapear corretamente esses endereços no sistema de supervisão."
+        },
+        {
+          "id": "s2",
+          "title": "Os desafios da integração MODBUS",
+          "type": "list",
+          "items": [
+            "Endereçamento — diferenças de convenção (base 0 vs base 1, offset de 40001)",
+            "Tipos de dado — inteiros, floats de 32 bits (ocupam 2 registradores), ordem de bytes (endianness)",
+            "Escalas e fatores — o registrador traz um valor bruto que precisa ser escalado",
+            "Falta de auto-descrição — o protocolo não diz o que cada registro significa; depende da documentação",
+            "Sem estampa de tempo nativa — eventos não têm marca de tempo no protocolo"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A questão do endianness e dos floats",
+          "type": "note",
+          "body": "Um dos erros mais comuns na integração MODBUS é a ordem de bytes (endianness) de valores de 32 bits (floats e inteiros longos), que ocupam dois registradores de 16 bits. Fabricantes diferentes podem ordená-los de formas diferentes (big-endian, little-endian, word-swap), e ler na ordem errada produz um número completamente sem sentido. Sempre conferir a documentação e validar os valores lidos contra a realidade é essencial na integração."
+        },
+        {
+          "id": "s4",
+          "title": "Limitações e o lugar do MODBUS",
+          "type": "text",
+          "body": "O MODBUS é simples por design, e isso traz limitações: não tem estampa de tempo nativa (ruim para SOE), não é auto-descritivo (depende de mapa manual), o polling é ineficiente para eventos rápidos, e não tem segurança nativa. Por isso, em SPCS, ele é usado principalmente para integração de equipamentos auxiliares e medição, enquanto protocolos mais ricos (DNP3, IEC 61850) cuidam da proteção e do telecontrole crítico. Cada protocolo tem seu nicho."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O mapa de registros define qual endereço é qual grandeza — integrar via MODBUS é mapear esses endereços corretamente. Os desafios incluem endereçamento, tipos de dado, escalas, endianness de floats (erro comum) e a falta de auto-descrição e estampa de tempo. O MODBUS, simples e universal, ocupa o nicho de integração de auxiliares e medição, enquanto protocolos mais ricos cuidam do telecontrole crítico."
+        }
+      ]
+    }
+  ]
+}

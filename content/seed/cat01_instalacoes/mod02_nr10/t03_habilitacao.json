@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-10",
+  "moduleSubtitle": "Segurança em Instalações e Serviços com Eletricidade",
+  "moduleOrder": 1,
+  "trail": "Habilitação e Capacitação NR-10",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-10, como é definido o trabalhador qualificado?",
+      "options": [
+        "Aquele que atua sob a responsabilidade contínua de um profissional habilitado.",
+        "Aquele que recebe anuência formal da empresa para trabalhar em alta tensão.",
+        "Aquele que possui registro ativo no competente conselho de classe da região.",
+        "Aquele que comprovar conclusão de curso específico na área elétrica reconhecido pelo Sistema Oficial de Ensino."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 10.8.1 da NR-10 define o trabalhador qualificado como aquele que comprovar conclusão de curso específico na área elétrica reconhecido pelo Sistema Oficial de Ensino.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza um profissional legalmente habilitado, de acordo com a NR-10?",
+      "options": [
+        "Ser trabalhador previamente qualificado e com registro no competente conselho de classe.",
+        "Ter concluído apenas o curso básico de 40 horas previsto no Anexo III da norma.",
+        "Receber capacitação prática na empresa e ter mais de cinco anos de experiência.",
+        "Ter retornado de afastamento após três meses e passado por reciclagem."
+      ],
+      "correctIndex": 0,
+      "explanation": "Conforme o item 10.8.2, é considerado profissional legalmente habilitado o trabalhador previamente qualificado e com registro no competente conselho de classe.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para que um trabalhador seja formalmente considerado autorizado a intervir em instalações elétricas, qual medida é exigida pela NR-10?",
+      "options": [
+        "Aprovação unânime pela CIPA da organização.",
+        "Anuência formal da empresa.",
+        "Registro ativo e renovado anualmente no Ministério do Trabalho.",
+        "Realização prévia de estágio probatório de seis meses."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.8.4 da NR-10 estabelece que são considerados autorizados os trabalhadores qualificados ou capacitados e os profissionais habilitados, com a anuência formal da empresa.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a carga horária mínima obrigatória para o Curso Básico de Segurança em Instalações e Serviços com Eletricidade, conforme o Anexo III da NR-10?",
+      "options": [
+        "16 horas.",
+        "24 horas.",
+        "40 horas.",
+        "60 horas."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Anexo III da NR-10 determina explicitamente que o Curso Básico deve ter carga horária mínima de 40 horas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A NR-10 exige a realização periódica de treinamento de reciclagem para trabalhadores autorizados. Qual é a periodicidade padrão estabelecida?",
+      "options": [
+        "Semestral.",
+        "Anual.",
+        "Trienal.",
+        "Bienal."
+      ],
+      "correctIndex": 3,
+      "explanation": "O subitem 10.8.8.2 da NR-10 define que deve ser realizado treinamento de reciclagem bienal (a cada dois anos), além de situações pontuais de contingência.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para ser classificado como trabalhador capacitado segundo a NR-10, um indivíduo deve atender simultaneamente a quais condições?",
+      "options": [
+        "Receber capacitação sob orientação e responsabilidade de profissional habilitado e autorizado, e trabalhar sob responsabilidade destes.",
+        "Possuir curso técnico profissionalizante e registro no conselho de classe.",
+        "Ter concluído o curso do SEP e atuar apenas em sistemas de Baixa Tensão.",
+        "Ter a anuência do conselho regional e atuar como autônomo legalizado."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 10.8.3 da NR-10 estipula duas condições para o trabalhador capacitado: receber capacitação sob orientação de profissional habilitado/autorizado, e trabalhar sob a responsabilidade destes.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Além da periodicidade bienal, em qual das situações abaixo a NR-10 exige a realização imediata do treinamento de reciclagem?",
+      "options": [
+        "Quando o trabalhador retornar de férias regulares de 30 dias.",
+        "Retorno de afastamento ao trabalho ou inatividade por período superior a três meses.",
+        "Apenas quando houver acidente com lesão e afastamento no setor.",
+        "Quando houver troca da chefia direta do trabalhador, sem mudança nos métodos de trabalho."
+      ],
+      "correctIndex": 1,
+      "explanation": "A alínea 'b' do item 10.8.8.2 estabelece a obrigatoriedade do treinamento de reciclagem em caso de retorno de afastamento ao trabalho ou inatividade por período superior a três meses.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sobre o Curso Complementar de Segurança no SEP (Anexo III), qual é o seu pré-requisito formal e sua carga horária mínima?",
+      "options": [
+        "Não possui pré-requisito, sendo a carga horária mínima de 20h.",
+        "Possuir formação técnica ou em engenharia elétrica, com carga horária mínima de 40h.",
+        "Ter concluído o curso básico com aproveitamento, sendo a carga horária mínima de 40h.",
+        "Ser profissional legalmente habilitado, com carga horária mínima de 60h."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Anexo III (item 2) da NR-10 elenca como pré-requisito ter concluído o curso básico com aproveitamento, e define a carga horária mínima do curso complementar em 40 horas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual dos tópicos faz parte, de forma obrigatória, da programação mínima do Curso Básico da NR-10 (Anexo III)?",
+      "options": [
+        "Técnicas de trabalho sob tensão, como linha viva, à distância e em ambientes subterrâneos.",
+        "Segurança com veículos e transporte tático de ferramentas ao potencial.",
+        "Sinalização e isolamento de áreas de trabalho com ênfase em vias públicas urbanas.",
+        "Rotinas de trabalho - Procedimentos (instalações desenergizadas, liberação, sinalização, inspeções)."
+      ],
+      "correctIndex": 3,
+      "explanation": "A programação mínima do Curso Básico (Anexo III) abrange no tópico 9 as 'Rotinas de trabalho - Procedimentos (instalações desenergizadas, liberação, sinalização, inspeções)'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual grupo de riscos é abordado especificamente no Curso Complementar do SEP, não estando na ementa do Curso Básico?",
+      "options": [
+        "Proximidade e contatos com partes energizadas, indução, descargas atmosféricas e estática.",
+        "Choque elétrico (mecanismos e efeitos fisiológicos).",
+        "Riscos de arcos elétricos e queimaduras.",
+        "Quedas e avaliação genérica de campos eletromagnéticos."
+      ],
+      "correctIndex": 0,
+      "explanation": "O Anexo III, seção 2 (Curso Complementar - SEP), lista no tópico 5: 'Riscos típicos no SEP (proximidade/contatos com partes energizadas, indução, descargas atmosféricas, estática...)'. Choques, arcos e quedas são do Curso Básico.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A anuência formal da organização empregadora é um requisito obrigatório para que trabalhadores — qualificados, capacitados ou habilitados — sejam considerados autorizados a intervir nas instalações elétricas.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira e reproduz a exigência do item 10.8.4 da NR-10, que consolida a necessidade de anuência formal da empresa para a autorização do profissional.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um trabalhador com comprovante de conclusão de curso específico na área elétrica reconhecido pelo Sistema Oficial de Ensino recebe a classificação normativa de trabalhador capacitado.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. O item 10.8.1 da NR-10 define o trabalhador com curso reconhecido pelo Sistema Oficial de Ensino como 'Trabalhador Qualificado', não capacitado.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ocorrida uma mudança de empresa contratante, a validade do treinamento bienal é integralmente transferida, dispensando o trabalhador de realizar reciclagem na nova organização caso comprove estar no prazo.",
+      "correctAnswer": false,
+      "explanation": "A afirmação é falsa. A NR-10, item 10.8.8.2 alínea 'a', determina que deve ser realizado novo treinamento de reciclagem sempre que ocorrer 'troca de função ou mudança de empresa'.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Primeiros socorros, abrangendo RCP, massagem cardíaca e técnicas de remoção de acidentados, é conteúdo obrigatório da programação mínima do Curso Básico (Anexo III da NR-10).",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira. O Anexo III elenca no tópico 14 o treinamento mandatório de 'Primeiros socorros (RCP, massagem cardíaca, técnicas de remoção e transporte)'.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Modificações significativas nas instalações elétricas ou troca de métodos de trabalho obrigam a empresa a realizar treinamento de reciclagem para os trabalhadores impactados.",
+      "correctAnswer": true,
+      "explanation": "A afirmação é correta, refletindo o item 10.8.8.2, alínea 'c', da NR-10, que exige reciclagem quando houver 'modificações significativas nas instalações elétricas ou troca de métodos'.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Trabalhadores qualificados, capacitados ou habilitados que recebem a anuência formal da empresa passam a ser classificados como trabalhadores ____ nas instalações elétricas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "autorizados"
+        }
+      ],
+      "explanation": "O item 10.8.4 estabelece que ao receberem a anuência formal da organização, os trabalhadores adquirem o status de 'autorizados'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para ser considerado profissional legalmente habilitado, exige-se que o indivíduo seja previamente ____ e possua registro ativo no conselho de classe correspondente.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "qualificado"
+        }
+      ],
+      "explanation": "Conforme o item 10.8.2, o profissional legalmente habilitado deve ser 'previamente qualificado' e possuir registro no competente conselho de classe.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para iniciar o Curso Complementar voltado para o SEP, o único pré-requisito formativo é ter concluído o curso ____ de segurança em instalações elétricas com aproveitamento.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "básico"
+        }
+      ],
+      "explanation": "O Anexo III da NR-10 é taxativo ao elencar como pré-requisito do Curso Complementar do SEP: 'ter concluído o curso básico com aproveitamento'.",
+      "difficulty": "hard"
+    }
+  ]
+}

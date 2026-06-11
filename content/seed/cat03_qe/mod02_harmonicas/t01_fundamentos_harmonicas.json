@@ -1,0 +1,218 @@
+{
+  "category": "Qualidade da Energia",
+  "categorySubtitle": "Fundamentos, Harmônicas, Transitórios, Medição e Normas",
+  "categoryOrder": 2,
+  "module": "Harmônicas e Distorção",
+  "moduleSubtitle": "Fundamentos, fontes, impactos, análise e mitigação",
+  "moduleOrder": 1,
+  "trail": "Fundamentos de Harmônicas",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que sao harmonicas em um sistema eletrico?",
+      "options": [
+        "Tensoes continuas geradas por baterias.",
+        "Sinais com frequencias que sao multiplos inteiros da frequencia fundamental.",
+        "Ondas de ruidos de baixa frequencia.",
+        "Correntes capacitivas geradas por motores."
+      ],
+      "correctIndex": 1,
+      "explanation": "Harmonicas sao componentes dos sinais com frequencias que sao multiplos inteiros da frequencia fundamental.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais equipamentos sao exemplos de cargas nao lineares que geram harmonicas?",
+      "options": [
+        "Resistores de aquecimento e motores de inducao.",
+        "Lampadas incandescentes e bancos de capacitores.",
+        "Lampadas fluorescentes, fornos a arco e inversores.",
+        "Transformadores de forca operando estritamente a vazio."
+      ],
+      "correctIndex": 2,
+      "explanation": "Lampadas fluorescentes, fontes chaveadas, fornos a arco e inversores de frequencia sao exemplos de cargas nao lineares.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e um dos principais efeitos negativos das correntes harmonicas em uma instalacao?",
+      "options": [
+        "Aumento expressivo do fator de potencia da instalacao.",
+        "Reducao das perdas termicas nas fiacoes e cabos.",
+        "Aquecimento excessivo de motores e transformadores.",
+        "Melhoria no funcionamento dos equipamentos de protecao."
+      ],
+      "correctIndex": 2,
+      "explanation": "As harmonicas causam perdas, reduzem o fator de potencia e provocam aquecimento excessivo de componentes eletricos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os fenomenos de distorcoes harmonicas sao definidos tecnicamente?",
+      "options": [
+        "Picos transitorios isolados de curtissima duracao.",
+        "Quedas de tensao momentaneas no barramento principal.",
+        "Deformacoes nas formas de onda em relacao a onda senoidal da frequencia fundamental.",
+        "Interrupcoes temporarias sucessivas causadas por curtos-circuitos."
+      ],
+      "correctIndex": 2,
+      "explanation": "O PRODIST Modulo 8 define distorcoes harmonicas como deformacoes nas formas de onda das tensoes e correntes em relacao a onda senoidal da frequencia fundamental.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento pode ser utilizado para mitigar a presenca de correntes harmonicas na rede?",
+      "options": [
+        "Instalacao de reles direcionais de sobrecorrente.",
+        "Aumento da tensao primaria dos transformadores.",
+        "Remocao integral dos capacitores do sistema.",
+        "Instalacao de filtros de harmonicas passivos ou ativos."
+      ],
+      "correctIndex": 3,
+      "explanation": "Filtros passivos e ativos evitam a circulacao de harmonicas e reduzem as distorcoes na rede.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com o PRODIST, como sao categorizadas as distorcoes harmonicas totais de tensao quanto as ordens?",
+      "options": [
+        "Componentes continuas, alternadas e mistas.",
+        "Componentes pares nao multiplas de 3, impares nao multiplas de 3 e multiplas de 3.",
+        "Componentes de radiofrequencia e de baixa frequencia.",
+        "Componentes simetricas e puramente assimetricas."
+      ],
+      "correctIndex": 1,
+      "explanation": "O PRODIST Modulo 8 subdivide a distorcao total em componentes pares nao multiplas de 3, impares nao multiplas de 3 e multiplas de 3.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que diferencia o conceito de TDD da THD segundo a IEEE 519-2022?",
+      "options": [
+        "A TDD considera as interharmonicas em sua formula.",
+        "A THD e baseada na corrente demandada e a TDD exclusivamente na tensao.",
+        "A TDD e calculada como percentual da corrente maxima de demanda e a THD sobre o conteudo fundamental.",
+        "Nao existe diferenca matematica entre os indicadores TDD e THD."
+      ],
+      "correctIndex": 2,
+      "explanation": "A IEEE 519-2022 explica que a TDD expressa as harmonicas como percentual da corrente maxima de demanda, diferindo da THD que foca na fundamental.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o limite de distorcao harmonica total de tensao recomendado pela IEEE 519 no ponto de acoplamento comum para linhas ate 1.0 kV?",
+      "options": [
+        "Menor ou igual a 5 por cento.",
+        "Menor ou igual a 8 por cento.",
+        "Menor ou igual a 10 por cento.",
+        "Menor ou igual a 15 por cento."
+      ],
+      "correctIndex": 0,
+      "explanation": "A recomendacao da IEEE 519 no PCC e de que a THD de tensao seja menor ou igual a 5 por cento para linhas ate 1.0 kV.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em inversores de frequencia, qual o efeito da utilizacao de indutores no link CC?",
+      "options": [
+        "Aumenta severamente a emissao de harmonicos de quinta ordem.",
+        "Reduz significativamente a emissao de harmonicos em relacao aos inversores sem indutor.",
+        "Bloqueia exclusivamente as correntes interharmonicas.",
+        "Eleva o aquecimento sem promover alteracoes na THD da instalacao."
+      ],
+      "correctIndex": 1,
+      "explanation": "A utilizacao de indutor no link CC reduz significativamente a emissao de harmonicos na comparacao com equipamentos de 6 pulsos comuns.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Conforme a atualizacao da IEEE 519-2022, qual e o limite de distorcao aplicavel aos harmonicos de ordem par 2, 4 e 6?",
+      "options": [
+        "Eles possuem os mesmos limites exatos dos harmonicos impares sem quaisquer reducoes.",
+        "Sao limitados a 25 por cento dos valores dados para as ordens mais elevadas.",
+        "Sao limitados a 50 por cento dos limites mostrados para os harmonicos impares.",
+        "Devem ser filtrados ate valores completamente nulos no sistema de potencia."
+      ],
+      "correctIndex": 2,
+      "explanation": "Na IEEE 519-2022 os limites dos harmonicos pares sao os mesmos dos impares, exceto o segundo, quarto e sexto, limitados a 50 por cento.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Cargas lineares, como lampadas incandescentes e resistores de aquecimento, sao as principais fontes geradoras de correntes harmonicas em plantas industriais.",
+      "correctAnswer": false,
+      "explanation": "Resistores e lampadas incandescentes sao cargas lineares; as reais produtoras de harmonicas sao as cargas nao lineares.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Correntes harmonicas sao componentes indesejados com frequencias que costumam ser superiores a frequencia fundamental da rede, causando distorcao na tensao.",
+      "correctAnswer": true,
+      "explanation": "As harmonicas sao componentes de corrente com frequencia em geral superiores a frequencia fundamental de 50 ou 60 Hz.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O calculo da Distorcao Harmonica Total (THD) pelas normas recentes engloba de forma explicita e obrigatoria as frequencias interharmonicas ate a quinquagesima ordem.",
+      "correctAnswer": false,
+      "explanation": "A IEEE 519-2022 especifica que as medicoes de THD e TDD excluem especificamente as interharmonicas.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A regulamentacao do PRODIST exige que os instrumentos medidores Classe A considerem subgrupos harmonicos na composicao de seus registros periodicos.",
+      "correctAnswer": true,
+      "explanation": "O PRODIST Modulo 8 confirma que medidores Classe A devem considerar subgrupos harmonicos para os registros.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao utilizar Transformador de Potencial (TP) com conexao em delta aberto, o limite permitido para o indicador de tensao harmonica DTT395 deve equivaler a 50 por cento do valor de referencia.",
+      "correctAnswer": true,
+      "explanation": "O PRODIST Modulo 8 estabelece que para medicao com TP em V ou delta aberto, os limites de DTT395 correspondem a 50 por cento dos limites totais permitidos.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "As cargas nao lineares injetam correntes harmonicas no sistema devido ao simples fato da corrente absorvida nao possuir forma ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "senoidal"
+        }
+      ],
+      "explanation": "Todas as cargas nao lineares produzem harmonicas devido ao fato da corrente nao ter forma senoidal pura.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O indicador de qualidade normatizado pelo PRODIST que expressa a distorcao harmonica individual de tensao de uma ordem especifica e representado pela sigla ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "DITh%"
+        }
+      ],
+      "explanation": "No PRODIST Modulo 8, o indicador DITh% e a Distorcao harmonica individual de tensao de ordem h.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A distorcao harmonica total de tensao que contabiliza apenas as componentes impares que nao sao multiplas de tres e representada oficialmente pelo indicador ____ no padrao nacional.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "DTTi%"
+        }
+      ],
+      "explanation": "O PRODIST Modulo 8 define a Distorcao harmonica total de tensao para as componentes impares nao multiplas de 3 com a nomenclatura DTTi%.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Termografia Infravermelha",
+  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categoryOrder": 3,
+  "module": "Normas e Laudos de Termografia",
+  "moduleSubtitle": "NBR 15572, ISO 10878, NBR 16292, laudos e gestao preditiva",
+  "moduleOrder": 3,
+  "trail": "Elaboração de Laudos Termográficos",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que a secao de Metodologia de um relatorio termografico deve explicar detalhadamente?",
+      "options": [
+        "Como a inspecao foi conduzida e os equipamentos utilizados.",
+        "O valor exato da conta de luz paga pela instalacao analisada.",
+        "A marca de fabricacao de todos os fios do painel eletrico.",
+        "Apenas a listagem das falhas que ja foram corrigidas pela equipe."
+      ],
+      "correctIndex": 0,
+      "explanation": "A secao de metodologia explica de forma direta como a inspecao foi conduzida e descreve os equipamentos utilizados no ensaio. (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um relatorio de inspecao termografica, o que deve constar obrigatoriamente na secao de Resultados?",
+      "options": [
+        "O resumo do faturamento e dos custos de conserto das pecas.",
+        "As imagens termograficas com as anomalias destacadas e sua descricao.",
+        "A data de fabricacao exata do painel eletrico e suas protecoes.",
+        "Os nomes dos operadores mecanicos que trabalham no setor."
+      ],
+      "correctIndex": 1,
+      "explanation": "A secao de resultados deve apresentar as imagens termograficas com as anomalias destacadas e a descricao detalhada de cada uma. (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o objetivo principal da secao de Introducao em um relatorio de inspecao termografica?",
+      "options": [
+        "Descrever o proposito da inspecao, a data, a hora e a equipe responsavel.",
+        "Detalhar e comprovar a calibracao do termovisor no laboratorio credenciado.",
+        "Mostrar um apendice completo com todas as fotos termicas coletadas na area.",
+        "Explicar didaticamente os principios fisicos de transferencia de calor local."
+      ],
+      "correctIndex": 0,
+      "explanation": "A introducao tem por finalidade descrever o proposito da inspecao, informar data, hora e identificar a equipe atuante responsavel. (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que e importante descrever rigorosamente o ambiente e as condicoes da inspecao, como temperatura e umidade, no relatorio?",
+      "options": [
+        "Para enfeitar a capa do laudo com dados climaticos do dia da visita.",
+        "Porque essas condicoes ambientais podem afetar fortemente a precisao das medicoes de temperatura.",
+        "Para comprovar fotograficamente que o termografista compareceu de fato ao local agendado.",
+        "Porque as leis trabalhistas obrigam a medicao de chuvas em qualquer inspecao."
+      ],
+      "correctIndex": 1,
+      "explanation": "E vital descrever as condicoes do ambiente e clima porque elas afetam fortemente a precisao metrologica das medicoes de temperatura. (Fonte: Como elaborar um relatorio de termografia eletrica, SEP)",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a norma ISO 18434-1, quais informacoes tecnicas da camera termografica devem ser documentadas no relatorio de inspecao?",
+      "options": [
+        "O peso exato e as dimensoes fisicas da lente acoplada na hora da captura.",
+        "A cor predominante do equipamento e a marca da bateria de alimentacao.",
+        "O fabricante, o modelo e a data de calibracao do equipamento infravermelho.",
+        "A vida util restante estimada do sensor de matriz do plano focal eletronico."
+      ],
+      "correctIndex": 2,
+      "explanation": "O relatorio final deve conter o fabricante, o modelo e a data de calibracao laboratorial do equipamento infravermelho utilizado. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o termografista deve fornecer de informacao quantitativa no relatorio sempre que realizar a inspecao para fins de emissao de laudo?",
+      "options": [
+        "Apenas a temperatura media mensal da regiao do parque fabril.",
+        "A distancia da camera ate a anomalia, a carga eletrica medida e os parametros de emissividade.",
+        "O valor matematico de energia dissipada por conveccao em todo o ambiente.",
+        "A estimativa de vida util eletrica de todos os disjuntores da subestacao operante."
+      ],
+      "correctIndex": 1,
+      "explanation": "O relatorio precisa registrar a distancia da camera a anomalia, a carga operacional do momento da inspecao e os valores ajustados de emissividade e transmitancia. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como as evidencias das anomalias termicas devem ser apresentadas de forma padronizada no relatorio tecnico?",
+      "options": [
+        "Apresentadas somente em tabelas numericas dos pixels de varredura captados.",
+        "Ilustradas apenas por graficos de linha continua do espectro eletromagnetico local.",
+        "Exibindo copias impressas das imagens termograficas pareadas com as imagens de luz visivel correspondentes.",
+        "Contendo apenas as fotografias visiveis convencionais acompanhadas de seta vermelha apontando o erro."
+      ],
+      "correctIndex": 2,
+      "explanation": "O laudo deve apresentar de modo integrado as copias impressas dos termogramas das anomalias ladeados por suas imagens de luz visivel originais. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com as boas praticas, qual deve ser a entrega da fase de analise e interpretacao dos resultados expostos no relatorio?",
+      "options": [
+        "Exigir a troca compulsoria do fabricante de todas as chaves e disjuntores antigos.",
+        "Apresentar o calculo diferencial algebrico exato do fator emissivo das pecas de cobre.",
+        "Informar isoladamente os valores brutos de maior e menor aquecimento detectados na rede.",
+        "Fornecer recomendacoes claras para resolver as anomalias detectadas baseando-se na identificacao da causa raiz."
+      ],
+      "correctIndex": 3,
+      "explanation": "A analise deve identificar as causas originais das anomalias e gerar recomendacoes corretivas claras para resolucao do defeito. (Fonte: Como elaborar um relatorio de termografia eletrica, SEP)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual nivel de carregamento eletrico o relatorio deve relatar rigorosamente ao documentar os componentes sob avaliacao quantitativa?",
+      "options": [
+        "Apenas a tensao de curto-circuito registrada na barra de medicao da concessionaria local.",
+        "As correntes e distorcoes estritamente harmonicas demandadas por inversores adjacentes.",
+        "A carga nominal maxima tolerada pelo item avaliado e a exata carga medida operante na hora do ensaio.",
+        "A resistencia da respectiva linha de condutores de fuga calculada integralmente no laboratorio."
+      ],
+      "correctIndex": 2,
+      "explanation": "O registro tecnico impoe relatar, sempre que possivel, a carga nominal extrema do componente associada a sua carga medida real do ensaio. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a confeccao do relatorio de termografia trata normativamente as condicoes e os comportamentos inseguros observados no local de inspecao?",
+      "options": [
+        "Tais desvios sao intencionalmente omitidos para nao alongar desnecessariamente o documento termografico.",
+        "Anotando no proprio relatorio quaisquer praticas operacionais ou de sistema consideradas inseguras evidenciando-as ativamente.",
+        "As falhas perigosas devem ser formalizadas num inquerito avulso destinado apenas ao comite dos bombeiros.",
+        "As impericias operacionais nao compoem laudos de engenharia eletrica por figurarem restritas a seguranca no trabalho."
+      ],
+      "correctIndex": 1,
+      "explanation": "A normatizacao pede que o relatorio traga a anotacao formal de quaisquer condicoes operacionais e de instalacoes inseguras percebidas pelo avaliador no sitio. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para favorecer a interpretacao do leitor, as areas operando sob problema devem ser demarcadas e destacadas nas imagens inseridas na secao de resultados do relatorio.",
+      "correctAnswer": true,
+      "explanation": "O termografista deve analisar os mapas, marcar visualmente as anomalias e exibir as areas quentes destacadas para o esclarecimento pleno do relatorio. (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O relatorio tem total permissao para omitir as descricoes da temperatura e umidade ambiente caso os quadros nao tenham ultrapassado os niveis de falha termica severa.",
+      "correctAnswer": false,
+      "explanation": "O relatorio deve descrever as condicoes ambientais climaticas porque esses fatores impactam diretamente a precisao fisica da medicao de temperatura do objeto. (Fonte: Como elaborar um relatorio de termografia eletrica, SEP)",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No documento final validado, informar nominalmente o termografista atuante e essencial, contudo descrever o nivel de sua qualificacao pessoal e um dado bloqueado pela norma de sigilo.",
+      "correctAnswer": false,
+      "explanation": "O relatorio tem o dever de expor de forma clara a identificacao e a respectiva qualificacao ISO do profissional que operou e produziu as imagens termicas. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas secoes encarregadas do fechamento tecnico do laudo preditivo, devem constar conclusoes avaliando se os circuitos estao seguros em paralelo com recomendacoes corretivas vitais.",
+      "correctAnswer": true,
+      "explanation": "As consideracoes conclusivas relatam a seguranca perante os defeitos mapeados e propoem as providencias emergenciais para manutencao na estrutura e correcao. (Fonte: Como elaborar um relatorio de termografia eletrica, SEP)",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao utilizar o metodo rigoroso do Delta T, exige-se do relatorio o apontamento explicito da temperatura detectada da anomalia, da temperatura estipulada como padrao seguro e da referida diferenca termica.",
+      "correctAnswer": true,
+      "explanation": "Ao aplicar o Delta T como metrica de diagnostico, e imposto que o relatorio documente as temperaturas base e da falha juntamente com seu valor diferencial medido. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A fim de reunir todo o material comprobatorio recolhido em campo sem poluir a introducao, o formatador do documento agrupa nas paginas de ____ o montante de imagens brutas e tabelas subsidiarias da varredura.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "anexos"
+        }
+      ],
+      "explanation": "A secao designada para anexos em um relatorio abarca todas as matrizes e imagens adicionais que suportam e complementam a atividade desempenhada. (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O relatorio termografico completo documenta nao so as temperaturas pontuais gravadas mas a exata grandeza ajustada da ____, garantindo que a medicao foi coerente com a radiacao superficial do corpo investigado.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "emissividade"
+        }
+      ],
+      "explanation": "Informar a emissividade parametrizada utilizada atesta que o termografista compensou adequadamente a capacidade reflexiva da superficie inspecionada para gerar a temperatura lida. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Um laudo normatizado, gerado a partir de inspecao quantitativa minuciosa, so detem a validacao tecnica quando seu cabecalho indica as datas corretas validando a rigorosa ____ da camera no laboratorio metrologico.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "calibracao"
+        }
+      ],
+      "explanation": "O registro atestando o periodo em que a camera sofreu calibracao metrologica oficial assegura a capacidade radiometrica confiavel exigida da ferramenta para a producao do laudo. (Fonte: ISO 18434-1, irantpm.ir)",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Coordenação e Seletividade",
+  "moduleSubtitle": "Estudo de coordenação - dados, metodologia, curvas e relatórios",
+  "moduleOrder": 2,
+  "trail": "Elaboração de Curvas de Coordenação",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Em qual tipo de grafico as curvas de tempo e corrente sao tradicionalmente desenhadas para coordenacao da protecao?",
+      "options": [
+        "Escala linear proporcional.",
+        "Escala logaritmica em ambos os eixos.",
+        "Escala puramente exponencial.",
+        "Diagrama polar de impedancias."
+      ],
+      "correctIndex": 1,
+      "explanation": "O processo de aplicar e coordenar os dispositivos e feito visualmente com a ajuda de folhas em escala logaritmica nos eixos de tempo e corrente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o objetivo primario do modulo CAPTOR no pacote de softwares Power Tools for Windows?",
+      "options": [
+        "Calcular as quedas de tensao maximas em regime de partida.",
+        "Determinar o fluxo de correntes harmonicas pelo metodo de Newton-Raphson.",
+        "Tracar as caracteristicas tempo versus corrente e auxiliar na coordenacao dos dispositivos.",
+        "Calcular correntes assimetricas do primeiro meio ciclo isoladamente."
+      ],
+      "correctIndex": 2,
+      "explanation": "O estudo do CAPTOR traca as caracteristicas tempo corrente da coordenacao assegurando que os ajustes protejam o sistema contra sobrecargas e faltas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na plotagem de transformadores o fator de inrush e comumente assinalado para evitar atuacoes indevidas. Qual multiplicador aparece comumente na.",
+      "options": [
+        "Tres vezes a corrente de curto-circuito.",
+        "Cinquenta por cento da corrente de carga leve.",
+        "Cem por cento da corrente do rotor bloqueado.",
+        "Doze vezes a corrente nominal."
+      ],
+      "correctIndex": 3,
+      "explanation": "Conforme relatorios de software demonstrados nas fontes, o parametro Inrush Factor e frequentemente ajustado em doze vezes a corrente nominal no primario.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao desenhar as curvas caracteristicas de um motor de inducao quais grandezas delimitam sua operacao e partida no coordenograma?",
+      "options": [
+        "Corrente nominal, tempo de rotor bloqueado e tempo de aceleracao.",
+        "Corrente de magnetizacao e pico de reatancia sincrona transitoria.",
+        "Limite termico de curto-circuito e relacao reatancia sobre resistencia.",
+        "Corrente de inrush de eixo em quadratura e queda de tensao."
+      ],
+      "correctIndex": 0,
+      "explanation": "O motor possui na sua curva as fronteiras ditadas pela corrente nominal, corrente e tempo de rotor bloqueado, alem do tempo de aceleracao na sua partida.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo as tabelas de intervalo de coordenacao temporal qual e a margem sugerida para coordenar a curva de dois reles digitais consecutivos?",
+      "options": [
+        "Zero virgula dez segundos.",
+        "Zero virgula vinte e cinco segundos.",
+        "Zero virgula quarenta segundos.",
+        "Zero virgula oitenta segundos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A tabela de intervalos de coordenacao especifica um limite de zero virgula vinte e cinco segundos de margem ao coordenar um rele digital com outro rele digital.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando se elaboram graficos de coordenacao englobando equipamentos situados em diferentes niveis de tensao o que e imperativo fazer com os valores.",
+      "options": [
+        "Dividi-los pelo fator de assimetria correspondente.",
+        "Mante-los em seus valores nominais puros originais do fabricante.",
+        "Referi-los a uma mesma tensao de base comum adotada para o estudo.",
+        "Multiplica-los pela frequencia fundamental do sistema e atenuar a fundamental."
+      ],
+      "correctIndex": 2,
+      "explanation": "Nos graficos TCC que englobam varias tensoes, todas as correntes plotadas devem ser refletidas ou referidas a uma unica tensao de referencia.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A curva de dano termico dos condutores e plotada seguindo uma restricao no plano logaritmico. Quais componentes definem essa curva de limite.",
+      "options": [
+        "A capacidade de interrupcao assimetrica e o fator de pico do sistema.",
+        "O nivel isolante basico de impulso e o fator de dissipacao no vacuo.",
+        "A indutancia mutua das linhas paralelas transpostas e a admitancia shunt.",
+        "A secao nominal do cabo associada a corrente de curto-circuito e o tempo de duracao."
+      ],
+      "correctIndex": 3,
+      "explanation": "A equacao de limite I quadrado vezes t depende rigorosamente da secao S do condutor em milimetros quadrados, da corrente de falta e do tempo suportado.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No tracado da curva ANSI deslocada em cinquenta e oito por cento ela e aplicada como protecao adicional de retaguarda especificamente para qual.",
+      "options": [
+        "Transformadores com enrolamento primario em delta e secundario em estrela solidamente aterrada.",
+        "Autotransformadores elevadores com conexao estrela estrela aterrada.",
+        "Transformadores de aterramento zig-zag sem carga conectada.",
+        "Transformadores com conexao delta delta e sem fechamento de neutro."
+      ],
+      "correctIndex": 0,
+      "explanation": "A curva ANSI deslocada em cinquenta e oito por cento protege contra faltas fase-terra no secundario de transformadores delta-estrela aterrada.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Com relacao as curvas padronizadas IEC a sigla EI refere-se tipicamente a qual formato de atuacao dependente do tempo?",
+      "options": [
+        "Tempo Exclusivamente Instantaneo.",
+        "Tempo Extremamente Inverso.",
+        "Tempo Especial Invariante.",
+        "Tempo Estritamente Intermitente."
+      ],
+      "correctIndex": 1,
+      "explanation": "As siglas NI, MI e EI denotam as curvas Normal Inversa, Muito Inversa e Extremamente Inversa nas normativas do padrao europeu IEC.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para os transformadores definidos como Categoria Dois nas regras de seletividade qual e o criterio exigido para se aplicar e plotar a curva de.",
+      "options": [
+        "Sera plotada compulsoriamente caso a corrente de falta presumida ultrapasse os limites assimetricos plenos.",
+        "So e utilizada no caso de se esperar que ocorram mais de dez curtos-circuitos em toda a vida util do equipamento.",
+        "Nunca deve ser aplicada em nenhuma hipotese pois a curva termica supre os esforcos vibratorios e radiais.",
+        "Aplica-se unicamente quando a potencia nominal atinge patamares acima de cem megavolt-amperes."
+      ],
+      "correctIndex": 1,
+      "explanation": "A literatura da norma assevera que para transformadores da Categoria Dois o limite mecanico so e obrigatorio se a exposicao superar dez faltas na vida util.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No estudo da coordenacao as curvas de atuacao grafica dos fusiveis sao avaliadas como fixas uma vez que estes elementos passivos nao possuem.",
+      "correctAnswer": true,
+      "explanation": "A literatura assevera que as curvas de fusiveis, assim como as de alguns disjuntores de baixa tensao, sao fixas e nao oferecem regulagens aos projetistas.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para certificar a correta seletividade entre um fusivel a montante e um disjuntor a jusante a curva de tempo minimo de fusao do fusivel deve.",
+      "correctAnswer": true,
+      "explanation": "A tabela normativa de seletividade exige que o limiar minimo de fusao do elemento superior respeite margem segura acima da total operacao do disjuntor abaixo.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para modelar ajustes fixos de corrente no software CAPTOR o segmento logico denominado pontos de tempo e corrente desenha uma linha ajustada.",
+      "correctAnswer": true,
+      "explanation": "O segmento Time Current Point modela no programa exatamente uma linha vertical fixa no eixo X cujos ajustes delimitam-se operando deslocamentos no tempo no eixo Y.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A perda intencional da seletividade ou os cruzamentos imprecisos nas curvas sao totalmente proibidos sob qualquer hipotese mesmo quando os.",
+      "correctAnswer": false,
+      "explanation": "Em condicoes atipicas a perda da seletividade em chaves estritamente sequenciais dispostas na mesmissima via unifilar pode ser perfeitamente tolerada sem riscos as derivacoes vizinhas.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Devido a deficiencia gerada pelo momento de inercia do disco rotativo os antigos reles do tipo eletromecanicos carecem obrigatoriamente de adicao.",
+      "correctAnswer": true,
+      "explanation": "Os manuais de protecao orientam aumentar a latencia estipulada nos intervalos graficos em cem milissegundos quando comparados aos velozes reles numericos compensando o arraste motriz do disco.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na representacao da moderna chave termomagnetica ou disjuntor de baixa tensao traca-se o fracionamento caracteristico fragmentando as convencoes ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "instantanea"
+        }
+      ],
+      "explanation": "Os modulos dos disjuntores eletronicos segmentam suas rampas em atraso longo, atraso breve de seletividade e o imediato disparo que constitui a limitacao instantanea perante curtos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No software de plotagem da familia PTW os modelos que tracam funcoes matematicas de curvas temporizadas exigem a entrada manual das variaveis ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Dial"
+        }
+      ],
+      "explanation": "Na equacao pre-programada exibida nos menus do CAPTOR o multiplicador temporal D incorpora a magnitude adotada para o Dial inserido regendo a transicao espacial superior do grafico.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A demarcacao essencial no grafico responsavel por delinear as fronteiras relativas a tolerancia mecanica e termica admissivel para maquinas ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ANSI"
+        }
+      ],
+      "explanation": "Os transformadores dispoem da celebre curva ANSI englobando o preceito do limite maximo permissivel de suportabilidade aos curtos repetidos delineado nos diagramas de protecao.",
+      "difficulty": "hard"
+    }
+  ]
+}

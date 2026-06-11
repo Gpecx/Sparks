@@ -1,0 +1,135 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 60870-5-104",
+  "moduleSubtitle": "Adaptação TCP/IP, ASDUs e conectividade",
+  "moduleOrder": 3,
+  "ebookTitle": "IEC 60870-5-104",
+  "ebookSubtitle": "O telecontrole sobre TCP/IP: a evolução do 101 para redes modernas",
+  "estimatedMinutes": 50,
+  "trailFiles": [
+    "t01_fundamentos_104.json",
+    "t02_aplicacoes_104.json",
+    "t03_implementacao_104.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — Do 101 ao 104",
+      "subtitle": "O mesmo telecontrole sobre redes IP",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é a IEC 60870-5-104",
+          "type": "text",
+          "body": "A IEC 60870-5-104 é a adaptação da 101 para rodar sobre redes TCP/IP. Ela mantém praticamente o mesmo modelo de aplicação do 101 — as mesmas ASDUs, os mesmos tipos de informação e causas de transmissão — mas substitui a camada serial pela pilha TCP/IP padrão. O resultado: o telecontrole maduro e padronizado do 101, agora aproveitando as redes Ethernet/WAN modernas. É hoje um dos protocolos mais usados na comunicação subestação–centro de operação."
+        },
+        {
+          "id": "s2",
+          "title": "O que muda e o que permanece",
+          "type": "list",
+          "items": [
+            "PERMANECE — o modelo de aplicação: ASDUs, tipos, IOA, causas de transmissão",
+            "MUDA — a camada de transporte: TCP/IP no lugar do enlace serial",
+            "GANHA — banda maior, múltiplas conexões, integração com a infraestrutura IP",
+            "GANHA — distâncias ilimitadas via rede (não mais limitado ao link serial)",
+            "Quem conhece o 101 aprende o 104 rapidamente"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A porta 2404 e a conexão",
+          "type": "note",
+          "body": "O 104 usa a porta TCP 2404 padronizada. A comunicação é orientada à conexão: o controlador (mestre) estabelece a conexão TCP com a estação controlada (escravo), e a comunicação flui sobre ela. A camada APCI (Application Protocol Control Information) adiciona controle de fluxo e supervisão da conexão sobre o TCP, garantindo a entrega ordenada e a detecção de perda de conexão — recursos que o TCP fornece e o 104 aproveita e complementa."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A IEC 60870-5-104 adapta o 101 para TCP/IP, mantendo o modelo de aplicação (ASDUs, tipos, IOA, COT) e trocando a camada serial pela pilha IP. Ganha banda, múltiplas conexões, integração IP e distância ilimitada. Usa a porta TCP 2404, é orientada à conexão, e a camada APCI adiciona controle de fluxo e supervisão sobre o TCP."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Estrutura e Controle de Fluxo",
+      "subtitle": "Como o 104 garante a entrega confiável",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Os formatos de quadro APCI",
+          "type": "list",
+          "items": [
+            "Formato I (Information) — carrega ASDUs (os dados de aplicação) com números de sequência",
+            "Formato S (Supervisory) — confirma o recebimento de quadros I (acknowledgment)",
+            "Formato U (Unnumbered) — controle da conexão (iniciar/parar a transferência de dados, testar a conexão)",
+            "Esses formatos gerenciam o fluxo e a integridade sobre o TCP"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Números de sequência e janela",
+          "type": "text",
+          "body": "O 104 numera os quadros de informação (I) com números de sequência de envio e recepção, e usa um mecanismo de janela deslizante (parâmetros k e w): k é o máximo de quadros que podem ficar sem confirmação antes de o emissor parar, e w define quando o receptor deve enviar uma confirmação. Esse controle, somado ao TCP, garante que nenhum dado se perca e que a conexão não seja sobrecarregada — robustez sobre robustez."
+        },
+        {
+          "id": "s3",
+          "title": "Supervisão da conexão (timeouts)",
+          "type": "note",
+          "body": "O 104 define temporizadores de supervisão (t0 a t3) que monitoram a saúde da conexão: tempo para estabelecer a conexão, tempo máximo sem confirmação, tempo para enviar confirmação, e tempo para enviar um quadro de teste em conexão ociosa. Se a conexão fica muda além do esperado, o 104 a considera perdida e atua (reconecta, alarma). Isso é vital: numa conexão de telecontrole, descobrir rapidamente que o link caiu evita operar com dados desatualizados."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A camada APCI do 104 usa três formatos: I (dados/ASDUs), S (confirmação) e U (controle da conexão). Os números de sequência e a janela deslizante (k, w) garantem entrega sem perda e sem sobrecarga. Os temporizadores de supervisão (t0-t3) monitoram a saúde da conexão, detectando rapidamente a perda do link para evitar operar com dados desatualizados."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Implementação, Conectividade e Segurança",
+      "subtitle": "104 na prática",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Conectividade e arquitetura",
+          "type": "text",
+          "body": "O 104 conecta tipicamente o gateway/RTU da subestação ao SCADA do centro de operação sobre a rede corporativa (WAN). Permite redundância (múltiplas conexões), e um escravo pode atender múltiplos mestres (ex.: dois centros de operação). A configuração envolve os endereços IP, a porta 2404, os parâmetros de janela e timeouts, e a matriz de pontos (mesma lógica de IOA do 101). É a forma moderna de telecontrole de subestações."
+        },
+        {
+          "id": "s2",
+          "title": "A questão da cibersegurança",
+          "type": "note",
+          "body": "Como roda sobre TCP/IP e conecta subestações a redes corporativas, o 104 expõe a infraestrutura crítica a ameaças cibernéticas — comandos de manobra trafegando numa rede IP são um alvo. O 104 puro não tem segurança nativa. A proteção vem por: segmentação de rede e firewalls, VPNs nos enlaces, e o IEC 62351 (especialmente o 62351-3 para segurança da camada de transporte com TLS), que adiciona criptografia e autenticação. Telecontrole sobre IP sem cibersegurança é um risco grave para infraestrutura crítica."
+        },
+        {
+          "id": "s3",
+          "title": "Boas práticas",
+          "type": "list",
+          "items": [
+            "Documentar a matriz de pontos (IOA) e validá-la no comissionamento",
+            "Configurar timeouts e janela adequados à qualidade do link",
+            "Implementar redundância de conexão para os centros de operação",
+            "Segmentar a rede e aplicar firewalls entre TI e a rede de telecontrole",
+            "Aplicar IEC 62351 (TLS) e VPN nos enlaces que cruzam redes não confiáveis",
+            "Testar a recuperação de conexão (queda e restabelecimento do link)"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O 104 conecta o gateway da subestação ao SCADA sobre WAN, com redundância e múltiplos mestres, configurando IP/porta 2404, janela, timeouts e a matriz de IOAs. Como roda sobre IP, a cibersegurança é crítica: segmentação, firewalls, VPN e IEC 62351 (TLS). O 104 é a evolução natural do 101 para redes modernas — o mesmo telecontrole maduro, agora sobre IP e protegido."
+        }
+      ]
+    }
+  ]
+}

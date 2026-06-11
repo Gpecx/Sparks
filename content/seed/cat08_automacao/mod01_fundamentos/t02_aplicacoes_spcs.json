@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Fundamentos de Automação Industrial",
+  "moduleSubtitle": "Conceitos, componentes, malhas de controle e SPCS",
+  "moduleOrder": 0,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que a sigla SCADA significa no contexto de automação, supervisão e aquisição de dados em plantas elétricas?",
+      "options": [
+        "System Control and Digital Automation.",
+        "Supervisory Control And Data Acquisition.",
+        "Systematic Command and Directed Actions.",
+        "Supervisory Computer and Distributed Architecture."
+      ],
+      "correctIndex": 1,
+      "explanation": "SCADA significa Supervisory Control And Data Acquisition, traduzido como Sistema de Supervisão e Aquisição de Dados (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a finalidade principal do sistema de telemetria aplicado à distribuição de energia e processos remotos?",
+      "options": [
+        "Desligar localmente disjuntores com base em limites de tensão curtos.",
+        "Isolar galvânicamente os relés de proteção de estado sólido.",
+        "Transmitir informações de medição e controle para locais remotos separados geograficamente.",
+        "Substituir os conversores analógico-digitais em subestações de alta tensão."
+      ],
+      "correctIndex": 2,
+      "explanation": "Telemetria é a transmissão da informação de medição para locais remotos por meios como fios, ondas de rádio ou linhas telefônicas (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em uma arquitetura de rede SCADA, qual é a principal função das Unidades Terminais Remotas (RTUs)?",
+      "options": [
+        "Inibir ataques cibernéticos atuando como firewalls de hardware dedicados.",
+        "Agir como servidor corporativo principal para o banco de dados SQL da planta.",
+        "Conectar os componentes de chão de fábrica à rede para transmitir dados ao servidor central.",
+        "Atuar mecanicamente nas válvulas de emergência de forma estritamente pneumática."
+      ],
+      "correctIndex": 2,
+      "explanation": "As RTUs interligam os dispositivos de campo à rede de controle, comunicando os status operacionais aos servidores e IHMs do sistema SCADA (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza o princípio de 'falha segura' (fail-safe) em um sistema de intertravamento energizado de uma planta elétrica?",
+      "options": [
+        "Manter o circuito energizado por baterias infinitas, ignorando falhas mecânicas.",
+        "Desenergizar os equipamentos finais, abrindo os contatos para levar o sistema a um estado seguro de emergência.",
+        "Forçar a tensão máxima nas bobinas dos disjuntores para impedir sua abertura acidental.",
+        "Acionar instantaneamente todos os atuadores pneumáticos na presença de transientes de sinal."
+      ],
+      "correctIndex": 1,
+      "explanation": "Um sistema seguro em falha desenergiza os relés ou solenóides, abrindo os contatos e garantindo a falha segura na perda de alimentação (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na gestão de alarmes descrita pela norma ISA 18.1, qual é a consequência de o operador acionar o botão de 'Conhecimento' (Acknowledge)?",
+      "options": [
+        "O alarme é apagado permanentemente do banco de dados histórico do sistema.",
+        "O dispositivo de proteção desarma o disjuntor associado à zona em falha.",
+        "O sinal visual pisca mais rapidamente para indicar intervenção manual em andamento.",
+        "O sinal sonoro é silenciado e a indicação visual passa de piscante para acesa constantemente."
+      ],
+      "correctIndex": 3,
+      "explanation": "Ao pressionar 'Conhecimento', o operador silencia a buzina e a lâmpada do painel ou tela para de piscar e fica continuamente acesa (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Nos canais de comunicação da telemetria, qual equipamento realiza a modulação e demodulação dos sinais para trafegar os dados multiplexados?",
+      "options": [
+        "Modem.",
+        "Transdutor.",
+        "Relé de Estado Sólido.",
+        "Switch L2."
+      ],
+      "correctIndex": 0,
+      "explanation": "O conjunto responsável por multiplexar, converter sinais e modular/demodular para transmissão é tecnicamente denominado de modem (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a principal consequência da convergência entre a Tecnologia da Informação (TI) e a Tecnologia Operacional (TO) nas redes SCADA modernas?",
+      "options": [
+        "Isola as subestações eletromecânicas das ameaças via internet.",
+        "Elimina a necessidade de criptografia ao usar protocolos legados em modems seriais.",
+        "Aumenta a eficiência e envio de dados, mas eleva severamente a exposição a ciberataques.",
+        "Inibe a capacidade de monitoramento em tempo real devido ao congestionamento da rede."
+      ],
+      "correctIndex": 2,
+      "explanation": "A integração TI/TO traz vantagens competitivas na coleta de dados e agilidade, mas expõe infraestruturas legadas a novas vulnerabilidades cibernéticas (CIBERSEGURANÇA EM SISTEMAS SCADA - Confea).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o comportamento esperado da sequência de alarme tipo 'Ringback' (alerta de retorno) na supervisão do sistema elétrico?",
+      "options": [
+        "Gera um pulso audível e visual distinto exclusivamente para avisar ao operador que a variável anormal retornou ao seu estado seguro.",
+        "Intertrava repetidamente o botão de reset até que a medição flutue fora da zona morta predefinida pelo usuário.",
+        "Transfere automaticamente o controle da chave de alarme para um equipamento sobressalente em caso de queima da bobina principal.",
+        "Reinicia a varredura do CLP descartando todas as informações de tempo e data arquivadas no histórico de alarmes."
+      ],
+      "correctIndex": 0,
+      "explanation": "A sequência Ringback indica através de som ou piscamento diferenciado (geralmente lento) que a condição do processo retornou à normalidade (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em circuitos de proteção complexos de SPCS, qual justificativa técnica apoia a substituição de bancos de relés por CLPs de estado sólido?",
+      "options": [
+        "Os CLPs não requerem fontes de alimentação próprias e funcionam drenando a potência parasitária da linha de medição.",
+        "Após o período inicial de mortalidade infantil, os sistemas de estado sólido apresentam um Tempo Médio Entre Falhas (MTBF) muito superior ao dos relés mecânicos.",
+        "As saídas a relé eletromecânico são proibidas em ambientes industriais devido ao risco constante de ignição de atmosferas explosivas por arco voltaico.",
+        "O CLP anula por completo a necessidade de interfaces isoladoras na conexão direta com disjuntores de extra-alta tensão."
+      ],
+      "correctIndex": 1,
+      "explanation": "Superada a fase de queima prematura (burn-in), os componentes eletrônicos do CLP garantem confiabilidade e MTBF significativamente maiores que contatos mecânicos sujeitos a desgaste (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De que forma a implementação de lógicas de votação (ex: 2 de 3) afeta a proteção e o desligamento automático das subestações e plantas?",
+      "options": [
+        "Anula qualquer redundância existente a favor de uma arquitetura centralizada exclusiva do tipo mestre-escravo em protocolo aberto.",
+        "Aumenta a margem de oscilação térmica aceita pelas tiras bimetálicas dos disjuntores blindados principais.",
+        "Eleva a probabilidade de falhas de comunicação no barramento de fibra óptica devido ao alto volume de mensagens trocadas.",
+        "Aumenta a confiabilidade do sistema e diminui paradas não programadas causadas por alarmes falsos de um único sensor defeituoso."
+      ],
+      "correctIndex": 3,
+      "explanation": "O esquema de votação cruza os dados de múltiplos sensores para evitar desligamentos equivocados (trip falso) gerados pela falha de um único instrumento (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Relés eletromecânicos podem ser usados na proteção de sistemas para desligar equipamentos ao detectar sobrecargas perigosas de tensão ou corrente.",
+      "correctAnswer": true,
+      "explanation": "Os relés são usados para proteger equipamentos de sobrecarga quando variáveis como tensão ou corrente excedem os limites estabelecidos (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em sistemas SCADA modernos, a Interface Homem-Máquina (IHM) virtualiza os painéis físicos, permitindo a operação via monitores de vídeo.",
+      "correctAnswer": true,
+      "explanation": "O monitor do computador substitui os painéis convencionais com botoeiras e anunciadores, criando chaves lógicas e instrumentos virtuais na tela (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O circuito auxiliar de 'Reflash' nos painéis de alarme impede o registro de falhas secundárias até que o alarme principal seja resetado pelo operador.",
+      "correctAnswer": false,
+      "explanation": "O circuito Reflash permite que novas condições anormais reativem o estado de alarme e o piscamento, mesmo que uma condição anterior ainda esteja pendente (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os relés eletromecânicos, apesar de sua antiguidade, são imunes à maioria das interferências elétricas e oferecem isolação física entre o controle e a alta tensão.",
+      "correctAnswer": true,
+      "explanation": "O relé eletromecânico possui alta confiabilidade e imunidade a ruídos elétricos, provendo excelente isolação entre os circuitos de controle e de carga (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Como regra geral de segurança em processos, os sistemas de intertravamento de desligamento (shut down) devem compartilhar e utilizar os mesmos sensores e transmissores da malha regulatória.",
+      "correctAnswer": false,
+      "explanation": "Para garantir máxima proteção, o princípio técnico exige que os sistemas de intertravamento sejam totalmente separados e independentes do controle regulatório do processo (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O ____ atua como um dispositivo de proteção de circuitos que utiliza mecanismos térmicos ou eletromagnéticos para desarmar e interromper correntes excessivas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "disjuntor"
+        }
+      ],
+      "explanation": "O disjuntor utiliza bobinas eletromagnéticas ou tiras bimetálicas térmicas para liberar a trava e abrir o circuito em caso de excesso de corrente (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Em sistemas de aquisição de dados, o conversor ____ transforma os sinais elétricos recebidos dos sensores de campo em valores digitais lidos pelo computador.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "A/D"
+        }
+      ],
+      "explanation": "O conversor analógico-digital (A/D) converte o sinal contínuo do multiplexador em um formato digital paralelo que passa para a interface do microcomputador (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A configuração especial de alarme denominada ____ identifica de maneira visual qual ponto dentro de um grupo operou primeiro, facilitando a diagnose do evento original.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "first-out"
+        }
+      ],
+      "explanation": "A característica 'first-out' ou 'first alert' indica precisamente o primeiro alarme acionado dentro de um conjunto, essencial para descobrir a causa do desligamento (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    }
+  ]
+}

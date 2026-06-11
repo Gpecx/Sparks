@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Projetos Elétricos Industriais",
+  "moduleSubtitle": "Fundamentos, normas, dimensionamento e documentação de projetos",
+  "moduleOrder": 3,
+  "trail": "Diagramas Unifilares e Diagramas de Comando",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Quais componentes principais formam o esquema funcional em DC de um sistema de protecao?",
+      "options": [
+        "Barramentos trifasicos de alta tensao",
+        "Linhas de transmissao e para-raios",
+        "Transformadores de potencial e corrente",
+        "Circuitos de corrente continua juntamente com os contatos dos reles"
+      ],
+      "correctIndex": 3,
+      "explanation": "O esquema funcional DC apresenta somente os circuitos envolvidos por corrente continua juntamente com os contatos dos reles.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que um esquema funcional em CA ilustra em um projeto de protecao?",
+      "options": [
+        "Os circuitos percorridos por corrente alternada em representacao trifasica",
+        "Apenas a rede de telecomunicacoes",
+        "A fiacao interna das baterias da subestacao",
+        "Os circuitos logicos de intertravamento em baixa tensao CC"
+      ],
+      "correctIndex": 0,
+      "explanation": "O esquema funcional em CA apresenta somente os circuitos percorridos por corrente alternada em representacao trifasica.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em esquemas e diagramas eletricos, como e definido o estado normal dos contatos dos reles?",
+      "options": [
+        "Com o circuito energizado com tensao nominal",
+        "Com o circuito desenergizado",
+        "Na condicao de falha maxima do sistema",
+        "Durante o fechamento manual do disjuntor"
+      ],
+      "correctIndex": 1,
+      "explanation": "O estado normalmente aberto ou normalmente fechado de um contato e sempre referido a condicao com o circuito desenergizado.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em diagramas eletricos industriais, o dispositivo identificado pelo codigo ANSI 52 corresponde a qual equipamento?",
+      "options": [
+        "Rele de subtensao",
+        "Transformador de corrente",
+        "Disjuntor de corrente alternada",
+        "Rele de bloqueio"
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo a nomenclatura ASA/ANSI, o numero 52 e atribuido ao disjuntor de corrente alternada.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quando um rele de protecao atua, qual e a sua acao direta no diagrama de controle do disjuntor?",
+      "options": [
+        "Eleva a tensao do circuito CA principal",
+        "Interrompe fisicamente o circuito de alta tensao",
+        "Curto-circuita os terminais do transformador de potencial",
+        "Fecha ou abre seu contato energizando o circuito DC para comandar a abertura do disjuntor"
+      ],
+      "correctIndex": 3,
+      "explanation": "O rele opera fechando ou abrindo seus contatos para energizar o circuito DC que ira comandar a operacao de abertura ou fechamento do disjuntor.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a regra recomendada para a conexao de TCs no diagrama trifilar de um rele diferencial de transformador?",
+      "options": [
+        "TCs do lado estrela ligados em triangulo e TCs do lado triangulo ligados em estrela",
+        "TCs de ambos os lados sempre ligados em triangulo aberto",
+        "TCs do lado estrela ligados em estrela e TCs do lado triangulo em triangulo",
+        "TCs em serie com os TPs independentemente do fechamento do transformador"
+      ],
+      "correctIndex": 0,
+      "explanation": "A regra empirica indica que os TCs colocados no lado estrela devem ser conectados em triangulo, e os TCs do lado triangulo devem ser ligados em estrela.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que as siglas ANSI 50 e 51 representam, respectivamente, nos diagramas de protecao?",
+      "options": [
+        "Rele diferencial e rele direcional",
+        "Rele de sobrecorrente instantaneo e rele de sobrecorrente temporizado",
+        "Rele de distancia e rele de sobretensao",
+        "Rele de religamento e rele de subtensao"
+      ],
+      "correctIndex": 1,
+      "explanation": "Segundo a norma ANSI, 50 e o rele de sobrecorrente instantaneo e 51 e o rele de sobrecorrente temporizado CA.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em um arranjo de protecao diferencial, qual e a funcao do rele auxiliar codigo ANSI 86?",
+      "options": [
+        "Medir a frequencia do sistema",
+        "Regular a tensao do gerador",
+        "Atuar como rele de bloqueio que auxilia a protecao principal",
+        "Sinalizar apenas a presenca de sobrecarga sem atuar no disjuntor"
+      ],
+      "correctIndex": 2,
+      "explanation": "O numero 86 designa o rele de bloqueio (locking-out relay), muito utilizado em conjunto com a protecao diferencial (87) para travar o sistema em condicao segura.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os diagramas vetoriais recomendam a conexao de reles direcionais de sobrecorrente para curto-circuito?",
+      "options": [
+        "Fator de potencia unitario em todas as fases",
+        "Conexoes em quadratura ou adjacentes para garantir maximo conjugado sob defeito",
+        "Tensao e corrente sempre em fase sem defasagem",
+        "Sem o uso de tensoes de polarizacao externa"
+      ],
+      "correctIndex": 1,
+      "explanation": "Para curtos-circuitos com correntes atrasadas, utilizam-se conexoes tipicas de 90 graus (quadratura), 30 graus ou 60 graus para obter melhor conjugado direcional.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na representacao do esquema funcional em DC, como e feita a sustentacao dos barramentos positivo e negativo de comando?",
+      "options": [
+        "Pelos transformadores de potencial da linha",
+        "Pela propria corrente de defeito extraida dos TCs",
+        "Por retificadores ligados diretamente ao neutro do transformador",
+        "Pelo banco de baterias que torna o controle independente do sistema CA"
+      ],
+      "correctIndex": 3,
+      "explanation": "Os barramentos + e - sao sustentados pelo banco de baterias, o que torna o controle independente das tensoes e correntes do sistema eletrico CA.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O esquema funcional em CA de um sistema de protecao exibe os circuitos trifasicos percorridos por corrente alternada, oriundos dos TCs e TPs.",
+      "correctAnswer": true,
+      "explanation": "A definicao de esquema funcional em CA engloba justamente a representacao trifasica dos sinais de corrente alternada alimentando os reles.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "No diagrama unifilar, o equipamento representado pelo numero ANSI 27 e um rele de sobretensao utilizado para desarmar o disjuntor.",
+      "correctAnswer": false,
+      "explanation": "O codigo ANSI 27 corresponde ao rele de subtensao (under voltage relay), enquanto o 59 corresponde ao rele de sobretensao.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "De acordo com o codigo ANSI, a funcao 87 em um diagrama eletrico indica a presenca de um rele de protecao diferencial.",
+      "correctAnswer": true,
+      "explanation": "O codigo 87 designa o rele de protecao diferencial, amplamente aplicado em geradores, transformadores e barramentos.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A representacao de um rele direcional de potencia em um diagrama unifilar e dada pelo codigo ANSI 32.",
+      "correctAnswer": true,
+      "explanation": "O numero ANSI 32 e designado para o rele direcional de potencia (directional power device).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em esquemas funcionais de comando DC, a bobina de disparo do disjuntor e conectada diretamente no secundario do TC sem passar por nenhum contato.",
+      "correctAnswer": false,
+      "explanation": "A bobina de disparo opera no circuito DC de comando e e acionada pelo fechamento dos contatos dos reles, e nao conectada diretamente no secundario CA do TC.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Nos diagramas eletricos, os contatos dos reles representados como NA referem-se a normalmente ____, considerando o circuito desenergizado.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "abertos"
+        }
+      ],
+      "explanation": "A sigla NA indica um contato Normalmente Aberto com o rele em estado de repouso (desenergizado).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O codigo ANSI utilizado nos diagramas eletricos para representar o rele direcional de sobrecorrente de fase e o numero ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "67"
+        }
+      ],
+      "explanation": "A funcao ANSI 67 corresponde ao rele direcional de sobrecorrente CA.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O rele de sobrecorrente temporizado CA e padronizado em diagramas de protecao pelo codigo numerico ____ da norma ASA/ANSI.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "51"
+        }
+      ],
+      "explanation": "O codigo ANSI 51 e atribuido ao rele de sobrecorrente temporizado CA.",
+      "difficulty": "hard"
+    }
+  ]
+}

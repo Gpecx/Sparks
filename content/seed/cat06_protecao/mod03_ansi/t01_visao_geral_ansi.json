@@ -1,0 +1,218 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Funções ANSI",
+  "moduleSubtitle": "Codificação IEEE C37.2, funções principais, supervisão e lógica",
+  "moduleOrder": 2,
+  "trail": "Visão Geral das Funções ANSI/IEEE C37.2",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal finalidade da norma IEEE C37.2 (Tabela ANSI) aplicada aos diagramas unifilares?",
+      "options": [
+        "Especificar a bitola e a isolação térmica dos condutores de alta tensão.",
+        "Regular os limites de emissão de harmônicos nos painéis de faturamento.",
+        "Padronizar os números e funções dos dispositivos nos diagramas de proteção.",
+        "Determinar os protocolos de comunicação exclusivos para a rede SCADA."
+      ],
+      "correctIndex": 2,
+      "explanation": "A norma ANSI/IEEE C37.2 padroniza a identificação dos dispositivos e funções em sistemas de potência através de uma numeração específica.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a diferença fundamental de atuação entre as funções de proteção 50 e 51?",
+      "options": [
+        "A 50 responde a subtensões, e a 51 atua em sobretensões no estator.",
+        "A 50 mede desbalanço de fases, e a 51 afere componentes de sequência negativa.",
+        "A 50 é usada apenas em corrente contínua, e a 51 em corrente alternada.",
+        "A 50 atua de modo instantâneo, e a 51 opera com retardo intencional de tempo."
+      ],
+      "correctIndex": 3,
+      "explanation": "O relé 50 é de sobrecorrente instantâneo (sem retardo), enquanto o 51 é o de sobrecorrente temporizado (tempo definido ou inverso).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O código ANSI 87 refere-se a qual tipo de dispositivo de proteção?",
+      "options": [
+        "Relé de proteção diferencial.",
+        "Relé direcional de potência ativa.",
+        "Relé de sobretensão temporizado.",
+        "Relé de detecção de frequência."
+      ],
+      "correctIndex": 0,
+      "explanation": "A função 87 é o Relé de Proteção Diferencial, que atua pela diferença entre grandezas elétricas medidas no circuito.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o relé designado pelo código ANSI 86 faz?",
+      "options": [
+        "Realiza o religamento automático após faltas transitórias.",
+        "Promove o bloqueio de operação, exigindo rearme intencional para retornar ao serviço.",
+        "Verifica continuamente a impedância ativa do circuito.",
+        "Controla o sincronismo entre dois sistemas distintos."
+      ],
+      "correctIndex": 1,
+      "explanation": "O relé 86 (lock-out) desliga e mantém o equipamento bloqueado na ocorrência de anomalias, necessitando rearme manual ou elétrico.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O monitoramento da estabilidade de tensão utiliza diretamente quais funções ANSI?",
+      "options": [
+        "32 e 37.",
+        "46 e 49.",
+        "27 e 59.",
+        "50 e 51."
+      ],
+      "correctIndex": 2,
+      "explanation": "A função 27 corresponde ao relé de subtensão e a 59 ao relé de sobretensão. Ambas monitoram os limites de voltagem.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que representam, respectivamente, os sufixos 'N', 'G' e 'T' acoplados aos números ANSI (ex: 51N, 50G, 87T)?",
+      "options": [
+        "Nominal, Gás SF6 e Trip.",
+        "Nulo, Gerador e Temporizado.",
+        "Negativo, Gaiola rotativa e Transmissão.",
+        "Neutro (Residual), Terra (Ground) e Transformador."
+      ],
+      "correctIndex": 3,
+      "explanation": "Os sufixos indicam a aplicação: N para neutro, G para terra (ground) e T para transformador.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual função atua quando ocorrem variações excessivas na admitância, reatância ou impedância de um circuito?",
+      "options": [
+        "Função ANSI 21 (Distância).",
+        "Função ANSI 81 (Frequência).",
+        "Função ANSI 49 (Térmico).",
+        "Função ANSI 40 (Campo)."
+      ],
+      "correctIndex": 0,
+      "explanation": "O relé de distância (ANSI 21) opera medindo alterações na impedância, reatância ou admitância em relação a limites estabelecidos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a função ANSI 46 atua na proteção de máquinas rotativas?",
+      "options": [
+        "Detectando falhas no fluxo de potência reversa no acoplamento mecânico.",
+        "Operando na presença de correntes em sequência inversa ou desbalanço de fases.",
+        "Monitorando quedas severas na admitância da linha.",
+        "Limitando o excesso de manobras de partida por hora."
+      ],
+      "correctIndex": 1,
+      "explanation": "O relé ANSI 46 protege contra correntes de sequência negativa ou desbalanço de fase, que causam aquecimento crítico em máquinas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o objetivo da operação conjunta das funções ANSI 25 e 79 numa subestação?",
+      "options": [
+        "O 25 desliga instantaneamente e o 79 bloqueia a barra em sobretensão.",
+        "O 79 monitora a potência reativa, autorizando a partida do 25.",
+        "O relé 25 verifica tensão e defasagem antes de permitir o religamento da linha pelo 79.",
+        "O 25 atua como backup térmico para falhas do 79."
+      ],
+      "correctIndex": 2,
+      "explanation": "A função 25 (sincronismo) verifica se as condições elétricas estão adequadas para que a função 79 efetue com segurança o religamento automático.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a diferença conceitual entre as funções ANSI 32 e ANSI 67?",
+      "options": [
+        "A 32 reverte a polaridade de fase, a 67 inverte a rotação de máquinas CC.",
+        "A 32 atua sob direção do fluxo de potência (W), e a 67 por direção de sobrecorrente CA.",
+        "A 32 monitora perdas de frequência, e a 67 detecta subtensões no estator.",
+        "Não existe diferença; ambas são relés diferenciais de barramento."
+      ],
+      "correctIndex": 1,
+      "explanation": "O relé 32 é direcional de potência, atuando conforme o fluxo de energia; o relé 67 é o direcional de sobrecorrente alternada.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A função térmica (ANSI 49) tem como principal objetivo operar instantaneamente contra curtos-circuitos francos.",
+      "correctAnswer": false,
+      "explanation": "Falso. O relé 49 atua mediante aquecimento excessivo por sobrecargas, com resposta baseada em constante de tempo térmica, e não instantânea.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O relé ANSI 40 detecta e atua quando ocorre perda ou anormalidade na corrente de excitação (campo) de máquinas síncronas.",
+      "correctAnswer": true,
+      "explanation": "Correto. O relé de campo (ANSI 40) identifica anormalidades na corrente de excitação de motores ou geradores síncronos.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A função ANSI 81 opera exclusivamente medindo o fluxo reativo da rede e o fator de potência em compensadores estáticos.",
+      "correctAnswer": false,
+      "explanation": "Falso. A função 81 designa o relé de frequência, operando quando há desvios (sobre ou subfrequência) fora dos limites normais.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A função ANSI 37 (subcorrente ou subpotência) entra em operação quando a grandeza medida cai abaixo de um limiar mínimo predeterminado.",
+      "correctAnswer": true,
+      "explanation": "Correto. O dispositivo ANSI 37 atua se o fluxo cair abaixo do limite ajustado.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A função 50N indica corrente residual frequentemente calculada (de 3 TCs), enquanto a 50G indica corrente residual medida diretamente por um sensor toroidal.",
+      "correctAnswer": true,
+      "explanation": "Correto. O sufixo N designa a medição indireta (residual de 3 TCs) e o G a medição direta por TC de janela (toroidal) na malha de terra.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O relé direcional de sobrecorrente de corrente alternada é padronizado pelo código ANSI ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "67"
+        }
+      ],
+      "explanation": "A norma IEEE C37.2 reserva a função 67 para o Relé Direcional de Sobrecorrente CA.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A sigla '50BF' indica um esquema desenhado para atuar em caso de ____ do disjuntor local.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "falha"
+        }
+      ],
+      "explanation": "BF vem de 'Breaker Failure'. O relé 50BF detecta se o disjuntor não abriu após o comando de trip, enviando o desarme às retaguardas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Faltas assimétricas e perdas de fase geram aquecimentos severos em máquinas, supervisionados pelo relé de sequência ____, código ANSI 46.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "negativa"
+        }
+      ],
+      "explanation": "O relé ANSI 46 detecta desbalanços e atua quando as correntes contêm componentes de sequência negativa.",
+      "difficulty": "hard"
+    }
+  ]
+}

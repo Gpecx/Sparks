@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "",
+  "categoryOrder": 0,
+  "module": "Geração Distribuída e Fotovoltaicos",
+  "moduleSubtitle": "Sistemas GD, fotovoltaicos, inversores, armazenamento e conexão à rede",
+  "moduleOrder": 5,
+  "trail": "Conexão à Rede (NBR 16149 e NBR 16150)",
+  "trailOrder": 5,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Em qual frequência a conexão do sistema de geração em corrente alternada deve ser efetuada na rede de distribuição?",
+      "options": [
+        "50 Hz.",
+        "60 Hz.",
+        "120 Hz.",
+        "220 Hz."
+      ],
+      "correctIndex": 1,
+      "explanation": "A conexão de sistemas à rede deve ser realizada em corrente alternada obrigatoriamente com frequência de 60 Hz. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual o prazo determinado para a distribuidora encaminhar o Orçamento de Conexão quando NÃO houver necessidade de melhoria ou reforço no sistema de distribuição?",
+      "options": [
+        "Até 5 dias.",
+        "Até 15 dias.",
+        "Até 30 dias.",
+        "Até 45 dias."
+      ],
+      "correctIndex": 1,
+      "explanation": "Quando não há necessidade de obras de melhoria na rede, a distribuidora deve encaminhar o Orçamento de Conexão em até 15 dias. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Para sistemas de geração distribuída com potência nominal maior que 6 kW, qual é o requisito de tolerância e ajuste estipulado para o fator de potência?",
+      "options": [
+        "Ajustável de 0,98 indutivo até 0,98 capacitivo.",
+        "Fator de potência fixo em 1.",
+        "Ajustável de 0,90 indutivo até 0,90 capacitivo.",
+        "Ajustável de 0,95 indutivo até 0,95 capacitivo."
+      ],
+      "correctIndex": 2,
+      "explanation": "Sistemas maiores que 6 kW devem ter a capacidade de trabalhar com o fator de potência ajustável de 0,90 indutivo até 0,90 capacitivo. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Após a solicitação de vistoria pelo acessante, em até quantos dias úteis a distribuidora deve realizá-la para as conexões efetuadas em baixa tensão (< 2,3 kV)?",
+      "options": [
+        "Até 3 dias úteis.",
+        "Até 5 dias úteis.",
+        "Até 10 dias úteis.",
+        "Até 15 dias úteis."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para conexões na rede de baixa tensão (tensão menor que 2,3 kV), a vistoria deve ser realizada pela distribuidora em até 5 dias úteis. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Como requisito de segurança contra ilhamento, o sistema de geração deve cessar o fornecimento de energia à rede elétrica em até quanto tempo após a perda da rede?",
+      "options": [
+        "0,5 segundo.",
+        "1 segundo.",
+        "2 segundos.",
+        "5 segundos."
+      ],
+      "correctIndex": 2,
+      "explanation": "O sistema de proteção anti-ilhamento exige que a geração distribuída cesse o fornecimento em até 2 segundos após a perda da rede. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Depois de uma desconexão causada por anomalia na rede, qual o período de atraso obrigatório para que o sistema retome o fornecimento de energia (reconexão)?",
+      "options": [
+        "Imediatamente.",
+        "De 1 a 10 segundos.",
+        "De 20 a 300 segundos.",
+        "Após 600 segundos."
+      ],
+      "correctIndex": 2,
+      "explanation": "A reconexão com a rede após uma anomalia exige que o inversor aguarde um atraso configurado por um período de 20 a 300 segundos. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Para atestar os requisitos operacionais do inversor conectado à rede, qual documento comprobatório o acessante deve apresentar obrigatoriamente à distribuidora?",
+      "options": [
+        "Autorização de importação alfandegária e nota fiscal.",
+        "Certificados de ensaio conforme normas técnicas ou o número de registro de concessão do Inmetro.",
+        "Laudo de vistoria do Corpo de Bombeiros com Anotação de Responsabilidade Técnica.",
+        "Declaração de Utilidade Pública emitida pela ANEEL."
+      ],
+      "correctIndex": 1,
+      "explanation": "O acessante deve apresentar certificados de que os inversores foram ensaiados em conformidade com normas vigentes ou o número de registro no Inmetro. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "As proteções obrigatórias de subtensão, sobretensão, subfrequência e sobrefrequência correspondem, respectivamente, a quais códigos numéricos ANSI?",
+      "options": [
+        "50, 51, 62 e 25.",
+        "27, 59, 81U e 81O.",
+        "46, 47, 50N e 51N.",
+        "25, 27, 50 e 62."
+      ],
+      "correctIndex": 1,
+      "explanation": "Estas proteções essenciais para qualidade e segurança correspondem aos códigos ANSI 27 (subtensão), 59 (sobretensão), 81U (subfrequência) e 81O (sobrefrequência). (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Sobre a adequação do Ponto de Conexão de uma central microgeradora, o que estipula a regulamentação das concessionárias em baixa tensão?",
+      "options": [
+        "Deve ser alterado para um poste exclusivo quando o inversor for instalado.",
+        "É o mesmo da unidade consumidora, sendo vedada a sua modificação exclusivamente em função da geração.",
+        "Será ligado em média tensão obrigatoriamente, independente da carga original.",
+        "Sua estrutura de suporte será deslocada à custa integral da concessionária acessada."
+      ],
+      "correctIndex": 1,
+      "explanation": "A norma dita que o ponto de conexão da central geradora é idêntico ao da unidade consumidora, proibindo modificações baseadas apenas na existência da geração. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "O que o acessante deve instalar adicionalmente caso a sua central microgeradora seja concebida para produzir energia originalmente em corrente alternada?",
+      "options": [
+        "Transformador isolador elevador de tensão trifásico.",
+        "Banco de baterias de lítio com sistema de descarte.",
+        "Retificador de tensão com potência adequada entre a geração e o inversor.",
+        "Medidor mecânico analógico na string box."
+      ],
+      "correctIndex": 2,
+      "explanation": "Nos casos em que a energia for gerada originalmente em AC pela fonte primária, o projeto deve prever a instalação de um retificador de tensão apropriado antes do inversor. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "O inversor de sistemas conectados à rede (on-grid) possui um sistema anti-ilhamento, responsável por cessar o fornecimento de energia caso haja falha da concessionária.",
+      "correctAnswer": true,
+      "explanation": "O anti-ilhamento cessa o fornecimento de energia para a rede em caso de falha, evitando acidentes na manutenção da rede de distribuição. (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "A distribuidora de energia é a única responsável pela sincronização adequada das instalações fotovoltaicas com a frequência e tensão do sistema de distribuição.",
+      "correctAnswer": false,
+      "explanation": "O acessante (cliente) é o único responsável pela sincronização adequada de suas instalações com o sistema de distribuição acessado. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Os custos com eventuais melhorias ou reforços na rede causados exclusivamente pela conexão de microgeração distribuída são integralmente repassados ao consumidor.",
+      "correctAnswer": false,
+      "explanation": "Os custos de melhorias na rede, em função exclusivamente da microgeração, não fazem parte da participação do consumidor, sendo arcados pela distribuidora. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "Os requisitos de segurança determinam que o sistema de geração não precisa suportar o religamento automático da rede fora de fase caso possua microinversores.",
+      "correctAnswer": false,
+      "explanation": "As normas exigem que todo sistema de geração distribuída seja capaz de suportar o religamento automático fora de fase, inclusive na pior condição possível (oposição de fase). (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "É permitido ao titular dividir juridicamente sua central geradora em unidades menores a fim de enquadrá-las no limite de potência exigido para a microgeração distribuída.",
+      "correctAnswer": false,
+      "explanation": "É expressamente vedada a divisão de central geradora em unidades de menor porte na tentativa de enquadrá-las nos limites de potência para microgeração ou minigeração. (Micro e Minigeração Distribuída — Agência Nacional de Energia Elétrica - Portal Gov.br)",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "A geração distribuída deve parar de fornecer energia em 1 segundo se a injeção de componente C.C. for superior a ____ % da corrente nominal do inversor.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "0,5"
+        }
+      ],
+      "explanation": "O sistema deve cessar o fornecimento se a injeção de componente C.C. na rede elétrica ultrapassar o limite de 0,5% da corrente nominal do inversor. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "O sistema de medição para faturamento de microgeração conectada à rede deve obrigatoriamente utilizar a funcionalidade de medição ____ de energia elétrica.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "bidirecional"
+        }
+      ],
+      "explanation": "A funcionalidade bidirecional é exigida no medidor para contabilizar e diferenciar a energia ativa consumida da energia injetada. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "O acessante deve fornecer 3 placas de advertência de segurança para instalar em postes e medidores contendo o texto \"CUIDADO – RISCO DE CHOQUE ELÉTRICO – ____ PRÓPRIA\".",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "GERAÇÃO"
+        }
+      ],
+      "explanation": "As placas obrigatórias devem alertar as equipes de manutenção estampando a mensagem: CUIDADO – RISCO DE CHOQUE ELÉTRICO – GERAÇÃO PRÓPRIA. (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)"
+    }
+  ]
+}

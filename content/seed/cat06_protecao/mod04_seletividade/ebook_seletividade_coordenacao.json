@@ -1,0 +1,272 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Seletividade e Coordenação",
+  "moduleSubtitle": "Coordenação de curvas TCC, critérios IEC/ANSI e coordenação de fusíveis",
+  "moduleOrder": 3,
+  "ebookTitle": "Seletividade e Coordenação de Proteções",
+  "ebookSubtitle": "CTI, curvas IDMT, coordenação relé-relé, fusível e religador em redes radiais e em anel",
+  "estimatedMinutes": 90,
+  "trailFiles": [
+    "t01_conceitos_seletividade.json",
+    "t02_curvas_tcc.json",
+    "t03_criterios_coordenacao.json",
+    "t04_radial_anel.json",
+    "t05_fusiveis_religadores.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — O que é Seletividade",
+      "subtitle": "Isolar o defeito, preservar o sistema",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O objetivo da coordenação",
+          "type": "text",
+          "body": "Coordenação (ou seletividade) é ajustar os dispositivos de proteção em série de modo que, diante de qualquer falta, apenas o dispositivo mais próximo do defeito atue — isolando o menor trecho possível e preservando o fornecimento ao restante do sistema. Uma proteção sem coordenação pode desligar uma subestação inteira por causa de uma falta num único ramal, causando um apagão desnecessário. A coordenação é o que transforma um conjunto de relés num sistema de proteção inteligente."
+        },
+        {
+          "id": "s2",
+          "title": "Tipos de seletividade",
+          "type": "list",
+          "items": [
+            "Cronométrica (por tempo) — relés em série com tempos crescentes do fim para a fonte",
+            "Amperimétrica (por corrente) — usa a diferença de nível de curto entre pontos (instantâneos escalonados)",
+            "Lógica — relés comunicam-se e bloqueiam o de montante (rápida, via GOOSE)",
+            "Por zona (unitária) — proteções diferenciais que só veem sua própria zona (a mais seletiva)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Seletividade total vs. parcial",
+          "type": "note",
+          "body": "Seletividade total significa que para qualquer corrente de falta, em qualquer ponto, só o dispositivo correto atua. Seletividade parcial significa que a coordenação é garantida apenas até certo nível de corrente — acima dele, ambos podem atuar. Em muitos casos práticos, a seletividade total não é economicamente viável, e aceita-se a parcial até o nível de curto esperado. O importante é conhecer e documentar os limites da coordenação obtida."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Seletividade é isolar só o defeito, atuando apenas o dispositivo mais próximo da falta. Pode ser cronométrica, amperimétrica, lógica ou por zona (unitária/diferencial, a mais seletiva). A seletividade total cobre toda a faixa de corrente; a parcial, até um limite — comum por questões de custo, desde que documentada."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Curvas Tempo-Corrente (TCC)",
+      "subtitle": "A linguagem gráfica da coordenação",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que é uma curva TCC",
+          "type": "text",
+          "body": "A curva tempo-corrente (TCC) representa, num gráfico log-log, quanto tempo cada dispositivo leva para atuar em função da corrente. O eixo X é a corrente (em A ou múltiplos do pickup), o eixo Y é o tempo (em segundos). Coordenar é, essencialmente, posicionar essas curvas no gráfico de modo que a do dispositivo a jusante fique sempre abaixo (atua antes) da do dispositivo a montante, com uma margem de segurança entre elas."
+        },
+        {
+          "id": "s2",
+          "title": "Famílias de curvas IDMT",
+          "type": "list",
+          "items": [
+            "IEC Normal Inversa (NI) — A=0,14, P=0,02; curva suave, uso geral",
+            "IEC Muito Inversa (VI) — A=13,5, P=1; mais inclinada",
+            "IEC Extremamente Inversa (EI) — A=80, P=2; muito íngreme, ótima com fusíveis",
+            "IEEE MI/VI/EI — equivalentes norte-americanos com formulação própria",
+            "Tempo definido — atua num tempo fixo independente da corrente (acima do pickup)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Por que a curva extremamente inversa casa com fusíveis",
+          "type": "note",
+          "body": "Fusíveis têm uma característica naturalmente muito inversa: queimam quase instantaneamente em correntes altas, mas demoram muito em correntes baixas. Para coordenar um relé com fusíveis a jusante, a curva extremamente inversa (EI) do relé 'acompanha' o formato da curva do fusível, mantendo uma margem consistente em toda a faixa de corrente. Usar uma curva normal inversa nesse caso resultaria em cruzamento das curvas em alguma corrente — perdendo a coordenação."
+        },
+        {
+          "id": "s4",
+          "title": "Lendo uma TCC de coordenação",
+          "type": "text",
+          "body": "Numa prancha de coordenação bem feita, vê-se: as curvas dos dispositivos empilhadas (jusante embaixo, montante em cima), os pontos de corrente de falta marcados (curto máximo e mínimo em cada ponto), e a verificação visual de que existe margem (CTI) entre as curvas em toda a faixa de corrente de interesse. A calculadora de Curvas de Sobrecorrente (51) do SPARK plota essas curvas e a de Coordenação verifica a margem entre dois relés."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A curva TCC mostra tempo×corrente em escala log-log; coordenar é empilhar as curvas (jusante abaixo de montante) com margem. As famílias IDMT (NI, VI, EI da IEC/IEEE) diferem na inclinação — a EI casa bem com fusíveis por acompanhar seu formato. Uma boa prancha de coordenação marca as correntes de falta e verifica a margem em toda a faixa."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — O Intervalo de Coordenação (CTI)",
+      "subtitle": "A margem que garante a hierarquia",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Definição do CTI",
+          "type": "formula",
+          "formula": "CTI = t_retaguarda − t_principal   ≥   0,3 s (IEC) a 0,4 s (ANSI/IEEE)",
+          "explanation": "O CTI (Coordination Time Interval) é a diferença mínima de tempo entre o dispositivo de retaguarda e o principal, para a mesma corrente de falta. Garante que o principal atue e o disjuntor abra antes que o de retaguarda comece a operar."
+        },
+        {
+          "id": "s2",
+          "title": "De onde vem o valor do CTI",
+          "type": "list",
+          "items": [
+            "Tempo de abertura do disjuntor principal (~0,05-0,1 s)",
+            "Sobrecurso (overshoot) do relé de retaguarda — inércia em parar após a falta sumir (~0,1 s no eletromecânico, menor no digital)",
+            "Tolerância dos relés (erros de medição e de curva)",
+            "Margem de segurança final",
+            "A soma desses fatores resulta nos clássicos 0,3-0,4 s"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "CTI menor com IEDs modernos",
+          "type": "note",
+          "body": "Os relés numéricos têm sobrecurso desprezível e medição precisa, e os disjuntores modernos abrem mais rápido. Por isso, em sistemas totalmente digitais, é possível adotar CTI de 0,2 s com segurança. Já em instalações com relés eletromecânicos antigos, o CTI de 0,4 s é prudente. A calculadora de Coordenação do SPARK calcula o CTI real entre dois relés e indica se a margem é suficiente."
+        },
+        {
+          "id": "s4",
+          "title": "Coordenação amperimétrica para reduzir tempos",
+          "type": "text",
+          "body": "A coordenação puramente cronométrica tem um problema: quanto mais níveis em série, maior o tempo acumulado no relé mais próximo da fonte — justamente onde as correntes de falta são maiores e o dano é mais rápido. A coordenação amperimétrica (usando instantâneos 50 ajustados pela diferença de impedância entre os pontos) ajuda a 'quebrar' esse acúmulo, permitindo eliminação rápida de faltas próximas sem comprometer a seletividade das faltas distantes."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O CTI é a margem de tempo entre retaguarda e principal (0,3-0,4 s tradicionais, 0,2 s com IEDs modernos). Vem da soma de tempo de abertura do disjuntor, sobrecurso do relé, tolerâncias e margem. A coordenação cronométrica acumula tempo próximo à fonte; a amperimétrica (instantâneos) ajuda a reduzir esse acúmulo para faltas próximas."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Coordenação em Redes Radiais e em Anel",
+      "subtitle": "Topologia define a estratégia",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Coordenação em rede radial",
+          "type": "text",
+          "body": "Na rede radial, a corrente de falta flui em um único sentido — da fonte para a falta. Isso simplifica a coordenação: basta ajustar os relés em série com tempos crescentes da carga para a fonte. O relé mais próximo da carga tem o menor dial de tempo; cada relé a montante tem o tempo do anterior mais o CTI, na corrente de falta máxima do ponto. É a configuração mais simples e a base de toda a distribuição."
+        },
+        {
+          "id": "s2",
+          "title": "Passos da coordenação radial",
+          "type": "list",
+          "items": [
+            "Levantar o diagrama unifilar e as correntes de carga e de curto em cada ponto",
+            "Ajustar o pickup de cada relé acima da carga máxima e abaixo da falta mínima",
+            "Começar pelo relé mais a jusante, com o menor dial de tempo",
+            "Subir nível a nível, somando o CTI na corrente de falta de coordenação",
+            "Verificar a seletividade em toda a faixa (curto mínimo e máximo)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "O desafio das redes em anel",
+          "type": "text",
+          "body": "Em redes em anel (ou com múltiplas fontes), a corrente de falta pode chegar a um ponto por dois caminhos diferentes. A sobrecorrente simples não consegue discriminar qual trecho está em falta. A solução é a proteção direcional (67): cada relé só atua para faltas no sentido que protege. Com direcionalidade, o anel é tratado como dois caminhos radiais sobrepostos, cada um coordenado no seu sentido."
+        },
+        {
+          "id": "s4",
+          "title": "Proteção de anel com direcional",
+          "type": "note",
+          "body": "Num anel, instalam-se relés direcionais em ambas as extremidades de cada trecho, 'olhando' para dentro do trecho. Uma falta no trecho é vista pelos dois relés daquela seção (que atuam), enquanto os demais relés, vendo a corrente fluir 'para fora' de suas zonas, ficam bloqueados pela direcionalidade. Coordena-se então cada sentido de circulação como se fosse um radial independente. É mais complexo, mas garante seletividade em topologias malhadas."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Em rede radial, a corrente flui num só sentido — coordena-se por tempos crescentes da carga à fonte, somando CTI a cada nível. Em anel/múltiplas fontes, a corrente vem por dois caminhos, exigindo proteção direcional (67): cada relé atua só no seu sentido, tratando o anel como radiais sobrepostos. A topologia define a estratégia de coordenação."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — Coordenação de Fusíveis e Religadores",
+      "subtitle": "A proteção da distribuição",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Coordenação fusível-fusível",
+          "type": "text",
+          "body": "Quando há fusíveis em série (ex.: fusível do ramal e fusível do tronco), a coordenação exige que o fusível protetor (a jusante) elimine a falta antes que o fusível protegido (a montante) seja danificado. A regra prática: o tempo total de interrupção (total clearing) do fusível protetor deve ser menor que o tempo mínimo de fusão (minimum melt) do fusível protegido, com uma margem (tipicamente 75%) em toda a faixa de corrente."
+        },
+        {
+          "id": "s2",
+          "title": "Coordenação fusível-relé",
+          "type": "list",
+          "items": [
+            "Para o relé proteger o fusível: a curva do relé deve ficar ACIMA da curva total clearing do fusível",
+            "Para o fusível proteger (ser jusante): a curva do relé fica acima, atuando como retaguarda",
+            "A curva extremamente inversa do relé acompanha melhor o formato do fusível",
+            "Verifica-se a coordenação no curto máximo e mínimo do ponto"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Religadores e a filosofia fuse-saving",
+          "type": "text",
+          "body": "Religadores executam sequências de abertura e religamento automático, na expectativa de que faltas transitórias (a maioria na distribuição) se auto-extingam. Na filosofia 'fuse-saving' (salva-fusível), o religador atua rápido (curva instantânea) nas primeiras operações, ANTES do fusível do ramal queimar — se a falta era transitória, o fusível é poupado e ninguém fica sem energia. Se a falta persiste após os religamentos rápidos, o religador passa para a curva temporizada, permitindo que o fusível queime e isole definitivamente o ramal defeituoso."
+        },
+        {
+          "id": "s4",
+          "title": "Fuse-blowing: a filosofia alternativa",
+          "type": "note",
+          "body": "Na filosofia 'fuse-blowing' (queima-fusível), o religador NÃO tenta salvar o fusível: para qualquer falta no ramal, o fusível queima imediatamente, isolando o ramal sem afetar o tronco. A vantagem é não causar piscadas (interrupções momentâneas) em todos os clientes do tronco a cada falta de ramal. A escolha entre fuse-saving e fuse-blowing depende da prioridade da concessionária: minimizar interrupções permanentes (fuse-saving) ou minimizar piscadas (fuse-blowing)."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Fusível-fusível: o total clearing do protetor < minimum melt do protegido (margem ~75%). Fusível-relé: a curva do relé fica acima da total clearing do fusível, idealmente EI. Religadores fazem sequências O-CO contra faltas transitórias: fuse-saving poupa o fusível com operações rápidas iniciais; fuse-blowing sacrifica o fusível para evitar piscadas no tronco. A escolha reflete a prioridade da concessionária."
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "order": 5,
+      "title": "Capítulo 6 — Estudo de Coordenação na Prática",
+      "subtitle": "Do levantamento ao relatório",
+      "estimatedMinutes": 10,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "As etapas de um estudo de coordenação",
+          "type": "list",
+          "items": [
+            "Levantamento de dados — unifilar, dados de equipamentos, correntes de carga e curto",
+            "Definição da filosofia e seleção das funções/dispositivos",
+            "Cálculo dos ajustes (pickup, dial, instantâneo) nível a nível",
+            "Plotagem das curvas TCC e verificação visual da coordenação",
+            "Verificação do CTI em todos os pares de dispositivos e correntes",
+            "Documentação: tabela de ajustes e pranchas de coordenação"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Erros comuns a evitar",
+          "type": "note",
+          "body": "Erros frequentes em coordenação: esquecer de verificar a coordenação no curto MÍNIMO (não só no máximo); ignorar a corrente de inrush/partida ao ajustar o pickup; usar curva inadequada para coordenar com fusíveis; não considerar a saturação dos TCs em altas correntes; e não documentar os limites da seletividade parcial. Um estudo de coordenação só vale se for verificado em toda a faixa de corrente esperada."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Um estudo de coordenação vai do levantamento de dados ao relatório com tabela de ajustes e pranchas TCC, verificando o CTI em todos os pares e em toda a faixa de corrente (mínimo E máximo). Evite os erros clássicos: verificar só o curto máximo, ignorar partida/inrush, curva errada com fusível e saturação de TC. Coordenação é o equilíbrio entre eliminar a falta rápido e preservar o máximo do sistema — a essência da engenharia de proteção."
+        }
+      ]
+    }
+  ]
+}

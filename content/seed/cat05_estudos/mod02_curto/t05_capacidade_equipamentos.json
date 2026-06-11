@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Curto-Circuito",
+  "moduleSubtitle": "Fundamentos, tipos de falta, modelagem, cálculo e aplicação",
+  "moduleOrder": 1,
+  "trail": "Capacidade de Curto de Equipamentos",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "A capacidade de interrupcao nominal de um disjuntor de alta tensao e definida com base em qual parametro da corrente de curto-circuito?",
+      "options": [
+        "O valor instantaneo maximo de crista da componente continua.",
+        "O valor eficaz da componente alternada simetrica na separacao dos contatos.",
+        "O valor medio absoluto da corrente durante tres segundos de arco.",
+        "A integral termica total acumulada no primeiro ciclo subtransitorio."
+      ],
+      "correctIndex": 1,
+      "explanation": "A capacidade de interrupcao nominal determina-se pelo valor eficaz da parcela simetrica CA exatamente no instante de abertura e extincao do arco.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A capacidade de estabelecimento nominal (making capacity) deve garantir a seguranca do equipamento eletrico suportando qual estresse maximo?",
+      "options": [
+        "A suportabilidade dieletrica em regime de carga nominal estabilizada.",
+        "A tensao de restabelecimento puramente simetrica durante dez ciclos.",
+        "O maior valor instantaneo de crista assimetrico no momento do fechamento.",
+        "A maxima distorcao harmonica provocada pela carga nao-linear do transformador."
+      ],
+      "correctIndex": 2,
+      "explanation": "No fechamento sob falta (making capacity), a forca repulsiva inicial e esmagadora, correspondendo ao pico maximo instantaneo da corrente assimetrica.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em instalacoes e normas IEC, o que a abreviacao Icw dimensiona estritamente nos barramentos e dispositivos de protecao de distribuicao?",
+      "options": [
+        "A menor corrente requerida para desligar cargas motrizes capacitivas em vazio.",
+        "A maxima voltagem disruptiva perimitida antes da perfuracao do isolamento.",
+        "O limite do esforco plastico deformavel entre suportes isoladores espacados.",
+        "A corrente admissivel suportavel de curta duracao eficaz sem danos termicos."
+      ],
+      "correctIndex": 3,
+      "explanation": "A sigla Icw representa a corrente de curta duracao eficaz tolerada durante tempos especificados, como um segundo, atestando o limite termico admissivel.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a teoria que rege a repulsao e atracao, as severas forcas eletrodinamicas que atuam nos barramentos durante um curto sao proporcionais a.",
+      "options": [
+        "Ao quadrado do valor da corrente eletrica circulante instantanea de falta.",
+        "A inversamente proporcional capacitancia parasita concentrada no isolador.",
+        "Aos logaritmos das resistencias proprias e mutuas de contato galvanico.",
+        "A integral simples do desvio da frequencia da rede ao longo do defeito."
+      ],
+      "correctIndex": 0,
+      "explanation": "As forcas de interacao magnetica que tracionam a estrutura e estressam os suportes sao diretamente proporcionais ao quadrado da corrente transitoria.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para proteger termicamente os cabos isolados, a norma baseia a curva de suportabilidade no aquecimento adiabatico. O limite termico considera a.",
+      "options": [
+        "A multiplicacao da resistencia ohmica pela derivada da tensao nominal de base.",
+        "O quadrado da corrente eficaz multiplicado estritamente pelo tempo em segundos.",
+        "A capacitancia do condutor multiplicada pelas indutancias mutuas de solo puro.",
+        "O cubo da corrente assimetrica diluido pelo inverso da temperatura ambiente."
+      ],
+      "correctIndex": 1,
+      "explanation": "Em curtos velozes, todo o calor e internalizado adiabaticamente e obedece a restricao termica balizada pela integral do quadrado da corrente vezes o tempo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao avaliar disjuntores de baixa tensao sob normas rigorosas IEC, qual premissa evidencia a diferenca tecnica vital entre as designacoes Icu e Ics?",
+      "options": [
+        "Ics exige que o disjuntor reabra a mesma corrente pesada em servico multiplas vezes apos resfriar, operando em normalidade.",
+        "Icu trata estritamente da componente termica reativa e Ics trata dos fluxos assimetricos unidirecionais paralisados em milissegundos.",
+        "Icu garante a integridade dos reles estaticos ao passo que Ics atua nos transformadores defasadores subtransitorios industriais.",
+        "Nenhuma, as grandezas Icu e Ics definem patamares obrigatoriamente e identicamente unitarios para equipamentos acima de oitocentos amperes."
+      ],
+      "correctIndex": 0,
+      "explanation": "Icu e a capacidade ultima ou extrema e pode requerer revisao do aparelho apos atuacao, ja Ics indica o curto em servico tolerado em multiplos ciclos O-CO-CO mantendo aptidao.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O subdimensionamento da corrente de pico (Ipk) tolerada por paineis de comando e quadros gera qual risco primario severo imediato e irreversivel?",
+      "options": [
+        "Inversao instantanea do fluxo real prejudicando as cargas sensiveis instaladas radialmente.",
+        "Elevacao transitoria drastica e descontrolada da tensao de fase-neutro de estabilizacao a termo.",
+        "Ruptura traumatica das resinas isolantes e amasso catastrofico dos barramentos condutores.",
+        "Acumulo progressivo de carga harmonica tripla bloqueando fusiveis ultra rapidos temporizados."
+      ],
+      "correctIndex": 2,
+      "explanation": "Ignorar as correntes de crista ou os fatores assimetricos condena a instalacao fisica a dobrar, romper suportes e explodir quadros pela tracao mecanica excessiva do impacto eletrodinamico.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual artificio engenhoso torna mais brando o dimensionamento das malhas e barramentos industriais ao usarmos disjuntores com a tecnologia.",
+      "options": [
+        "A dissipacao do arco termico se reverte imediatamente para os transformadores e aterramentos.",
+        "Filtragem eletronica suprimindo a componente continua simetrica sem desconectar galvânicamente a falha subjacente em curso.",
+        "O religamento antecipado comutando reatores em serie anulando temporariamente a potencia ativa e suprindo o balanco dinâmico geral.",
+        "Abertura prematura e ultra-rapida forcando o corte da falta antes que o valor prospectivo de pico destrutivo seja alcancado no ramo a jusante."
+      ],
+      "correctIndex": 3,
+      "explanation": "Disjuntores limitadores sao capazes de intervir subitamente na rampa ascendente do defeito, nao deixando a onda atingir a perigosa crista assimetrica livre pre-calculada.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Se a capacidade interruptiva de disjuntores legados em uma subestacao foi comprometida por um severo acrescimo recente de suprimentos, qual e a.",
+      "options": [
+        "Instalar estrategicamente reatores limitadores de curto circuito em nucleo de ar nas vias ramificadas das saidas das linhas essenciais.",
+        "Substituir todos os condutores de aterramento macicos blindados radiais por fios singelos flexiveis soltos isolados.",
+        "Elevar permanentemente o valor ohmico do sistema de aterramento para neutralizar todas sequencias diretas.",
+        "Aumentar a defasagem vetorial do retransmissor e remover as relutancias ferromagneticas saturadas das conexoes de manobra dos transformadores isolantes."
+      ],
+      "correctIndex": 0,
+      "explanation": "As concessionarias e industrias podem remediar custos proibitivos de troca em massa utilizando reatores puros de limitacao que sufocam a elevacao descontrolada das falhas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante os rigorosos ensaios nominais para fadiga termica integral dos cabos e barras sob falta, quais efeitos primarios sao aferidos utilizando os.",
+      "options": [
+        "O decaimento natural das potencias ativas transmitidas e a oscilacao de frequencia transitoria do estator de polos salientes.",
+        "O aquecimento originado pela atenuacao transitoria exata da componente continua via fator m, acoplado as variacoes da componente alternada via fator n.",
+        "A reatancia de sequencia negativa compensada pela impedancia do acoplamento resistivo mutuo espelhado puramente sob solo isolante da rede primaria.",
+        "O limiar admissivel do esforco de cisalhamento provocado nos barramentos pre-moldados em razao da assimetria extrema do arco voltaico expurgado a frio."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme os compendios de projetos de infraestrutura, os indices m e n avaliam matematicamente a integral de Joule ponderando a amortizacao do patamar da corrente alternada geradora.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A especificacao correta da corrente de ruptura de um equipamento chaveador impoe mandatoriamente que tal patamar supere o maior valor hipotetico.",
+      "correctAnswer": true,
+      "explanation": "A condicao elementar imperativa atesta que todo sistema de chaves dimensionadas tolere integralmente a corrente passante na falha ate a clivagem protetora atuar.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para avaliar com fidelidade e sem exageros o risco plastico, a secao resistente das pecas condutoras tracionadas em quadros eletricos de comando.",
+      "correctAnswer": true,
+      "explanation": "Em oposicao a logica superconservadora de assumir sempre apenas o limite elastico as regras e tabelas atestam abordagens aceitando atingir zonas nobres do limite plastico.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao avaliar os perfis severos das malhas de falhas assimetricas os motores de tracao interligados a barra faltosa podem ser subitamente e totalmente.",
+      "correctAnswer": false,
+      "explanation": "A inercia dos grandes motores induz correntes vigorosas assemelhando estes atuadores como geradores nos ciclos exordiais inflando intensamente a crista de dimensionamento final.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos quadros limitadores e disjuntores blindados prediais submetidos a baixas tensoes com grande atenuacao indutiva a resistencia estatica.",
+      "correctAnswer": true,
+      "explanation": "O arco introduz e acopla impedancias limitadoras consideraveis rebaixando o cume das correntes assimetricas esperadas de um contato metalico puramente macico na ponta de alimentadores extensos radiais.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na estrita conceituacao formal dos disjuntores, a sigla Icu abrange as correntes ciclicas ininterruptas continuas que o elemento testado desliga.",
+      "correctAnswer": false,
+      "explanation": "A corrente ultima padronizada como Icu sinaliza o maior esforco concebivel do disjuntor que possivelmente inutiliza ou deteriora componentes exigindo inspecoes compulsorias e severas antes do retorno operacional das fiações expostas.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Ao lidar com equipamentos submetidos as diretrizes IEC, a nomenclatura internacional utilizada para representar matematicamente a corrente estrita ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Ics"
+        }
+      ],
+      "explanation": "O parametro Ics designa a severidade nominal suportada que preserva plenamente os atributos e mantem o componente intacto apos realizar ciclos de comutacao sem requerimentos corretivos de oficina.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A determinacao fidedigna pre-estabelecida da suportabilidade ao tracionamento fisico das barras metalicas das subestacoes se baseia primariamente ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "crista"
+        }
+      ],
+      "explanation": "Todo arranjo em montagens macicas tracionadas pela forca atrativa deve aguentar a impulsao balistica originada pelo apice absoluto e imediato do impacto que recebe o nome de componente de crista assimetrica inicial.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A lei que modela empiricamente e dimensiona a condicao das mantas termicas e blindagens nobres contra deterioracoes advindas do choque ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "isolacao"
+        }
+      ],
+      "explanation": "A energia de I ao quadrado multiplicado por t tem limites criticos atrelados diretamente a suportabilidade do material responsavel por fornecer a essencial isolacao do cabo blindado contra os aquecimentos indesejaveis de ruptura termica estrutural severa.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Comissionamento SPCS",
+  "categorySubtitle": "Metodologia, ensaio de relés e comissionamento IEC 61850",
+  "categoryOrder": 9,
+  "module": "Metodologia de Comissionamento",
+  "moduleSubtitle": "Planejamento, FAT/SAT, checklists e relatórios",
+  "moduleOrder": 0,
+  "trail": "Implementação (Planejamento, FAT/SAT, Checklists, Relatórios)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que define a etapa de planejamento do comissionamento em uma subestação?",
+      "options": [
+        "A compra dos materiais elétricos.",
+        "O comissionamento direto à quente sem uso de diagramas unifilares.",
+        "A elaboração prévia de um roteiro definindo escopos, etapas e responsabilidades.",
+        "A energização teste inicial para verificar a saturação dos TCs."
+      ],
+      "correctIndex": 2,
+      "explanation": "Planejar é preparar antecipadamente a execução definindo o roteiro e as responsabilidades. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a principal função das folhas de ensaio (checklists) durante o comissionamento?",
+      "options": [
+        "Substituir o memorial descritivo aprovado pela concessionária.",
+        "Avaliar apenas as perdas não técnicas do alimentador em carga.",
+        "Anotar estritamente as leituras de faturamento de energia para a tarifa.",
+        "Registrar verificações, condições reais dos equipamentos e providências recomendadas."
+      ],
+      "correctIndex": 3,
+      "explanation": "As folhas de ensaio servem para documentar as inspeções e registrar recomendações de adequação. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que compõe a documentação as-built gerada ao final do comissionamento?",
+      "options": [
+        "O manual de operação padrão do fabricante do relé.",
+        "A estimativa de custos e o contrato comercial do projeto.",
+        "A revisão do projeto contemplando todas as modificações práticas realizadas durante a construção.",
+        "A certificação de calibração anual da mala de testes."
+      ],
+      "correctIndex": 2,
+      "explanation": "O termo as-built define o projeto atualizado com todas as alterações e imprevistos sanados em campo. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para que serve o relatório técnico de comissionamento entregue no handover?",
+      "options": [
+        "Analisar o estado dos equipamentos, justificar alterações e registrar os valores dos ensaios.",
+        "Aumentar a demanda faturável contratada junto à distribuidora local.",
+        "Eliminar definitivamente a necessidade de programas de manutenção preventiva.",
+        "Apenas para cancelar a ART da fase de execução do projeto."
+      ],
+      "correctIndex": 0,
+      "explanation": "O relatório consolida as medições, registra as atuações e embasa os planos de manutenção futuros. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na entrega e energização (handover), que ação antecede o religamento final da instalação?",
+      "options": [
+        "Curto-circuitar os bornes secundários dos TPs no painel.",
+        "Remover aterramentos temporários, ferramentas, sobras e retirar o pessoal não envolvido do local.",
+        "Bloquear as funções instantâneas de proteção (ANSI 50).",
+        "Desconectar o condutor de neutro do transformador da malha de terra."
+      ],
+      "correctIndex": 1,
+      "explanation": "Antes do religamento, a segurança exige a retirada de aterramentos, materiais e pessoas. (Fonte: Cabine Primária).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante o Teste de Aceitação em Fábrica (FAT) dos painéis de proteção, qual o escopo prioritário de verificação?",
+      "options": [
+        "A resistência de pé de torre das linhas de transmissão aéreas.",
+        "A tensão de passo na malha de terra da subestação final.",
+        "A parametrização inserida e as lógicas funcionais do IED simuladas antes do envio a campo.",
+        "A injeção primária direta no barramento de força (138 kV)."
+      ],
+      "correctIndex": 2,
+      "explanation": "No FAT, verifica-se a parametrização e o intertravamento lógico do painel antes da instalação física. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como devem ser tratados os arquivos de parametrização off-line (ajustes prévios) durante o SAT em campo?",
+      "options": [
+        "Devem ser implementados sem questionamentos, assumindo-se o projeto como ideal.",
+        "O IED deve retornar à fábrica para a gravação definitiva na sua EPROM.",
+        "Devem ser excluídos e formatados pelo relé para criar um novo banco de dados no local.",
+        "Devem ser obrigatoriamente checados e adequados à topologia física real da subestação."
+      ],
+      "correctIndex": 3,
+      "explanation": "Ajustes off-line exigem validação e possíveis correções conforme a realidade construtiva da instalação. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a equipe de comissionamento deve tratar imprevistos não mapeados durante a montagem?",
+      "options": [
+        "Consultar o projetista original e registrar formalmente as alterações no as-built.",
+        "Improvisar adaptações e pular a documentação para acelerar o cronograma.",
+        "Refazer o projeto do zero sem reportar ao cliente.",
+        "Solicitar imediatamente a devolução e troca de todos os relés da cabine."
+      ],
+      "correctIndex": 0,
+      "explanation": "Imprevistos devem ser avaliados tecnicamente e documentados no as-built, compondo o prontuário. (Fonte: Cabine Primária).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual premissa documental da NR-10 é compulsória para o início dos testes de comissionamento (SAT)?",
+      "options": [
+        "Autorização verbal da chefia imediata da concessionária.",
+        "Abertura de ordem de serviço específica e uso de procedimento de trabalho assinado por profissional habilitado.",
+        "Apresentação da nota fiscal dos IEDs à CIPA.",
+        "Bloqueio irreversível dos relés eletromecânicos de retaguarda."
+      ],
+      "correctIndex": 1,
+      "explanation": "Toda tarefa em subestação necessita de OS e procedimento de trabalho específico assinado. (Fonte: Cabine Primária / NR-10).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os relés avaliam o circuito de saída (trip) via automonitoramento, simulando atuações no comissionamento sem desligar a carga?",
+      "options": [
+        "Interrompendo a alimentação de controle DC das bobinas.",
+        "Injetando 10% da corrente de Inrush pelo secundário dos TCs associados.",
+        "Demandando sinal de trip via firmware com a obrigatoriedade de isolamento externo da carga na lógica de projeto.",
+        "Acionando contatores eletromecânicos de by-pass no fechamento."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para testar as saídas via autoteste (Watchdog/Test Mode), a automação externa deve estar isolada ou o circuito projetado de modo a não acionar a bobina. (Fonte: Virtus_CProtBL2Cd3).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "As folhas de ensaio no comissionamento perdem a validade caso sejam anotados vazamentos ou discrepâncias pontuais nos equipamentos.",
+      "correctAnswer": false,
+      "explanation": "As folhas existem exatamente para registrar anomalias, condições indesejadas e definir a lista de pendências (punch list). (Fonte: Cabine Primária).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A documentação as-built espelha as correções reais do comissionamento e compõe obrigatoriamente o Prontuário de Instalações Elétricas.",
+      "correctAnswer": true,
+      "explanation": "O as-built atualiza o projeto conforme a realidade em campo, sendo exigência de registro para a NR-10 no prontuário. (Fonte: Cabine Primária).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os testes de comissionamento em subestações privadas (consumidores livres) são executados exclusivamente pela equipe técnica da distribuidora.",
+      "correctAnswer": false,
+      "explanation": "O consumidor monta e testa sua instalação (comissionamento); a distribuidora apenas vistoria e aprova o ponto de entrega. (Fonte: Cabine Primária).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A parametrização inicial preparada off-line (no escritório) nunca deve ser aplicada cegamente sem o cruzamento com as fiações lidas no FAT/SAT.",
+      "correctAnswer": true,
+      "explanation": "Arquivos off-line dependem de validação em campo (SAT), pois há frequentes discrepâncias com a construção física final. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A sinalização por LEDs e as indicações visuais do painel dispensam testes pontuais, pois vêm pré-validadas de fábrica no sistema operacional do IED.",
+      "correctAnswer": false,
+      "explanation": "É crítico testar integralmente o mapeamento (marshalling) de alarmes e LEDs para atestar a leitura correta do operador sob falta. (Fonte: Virtus_ProtBarras).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A lista de nao conformidades e itens a resolver antes da entrega final e chamada de lista de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "pendências"
+        }
+      ],
+      "explanation": "A punch list (lista de pendências) registra as não conformidades do comissionamento que devem ser sanadas antes do handover.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A documentacao final que traduz as interferencias reais mapeadas em campo e corrige o projeto original e conhecida como documentacao as-____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "built"
+        }
+      ],
+      "explanation": "As-built traduz as interferências reais mapeadas que corrigiram o projeto original durante a construção. (Fonte: Cabine Primária).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Todos os certificados, manuais, laudos e os relatórios de comissionamento de campo devem ser mantidos no ____ de Instalações Elétricas.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Prontuário"
+        }
+      ],
+      "explanation": "O Prontuário de Instalações Elétricas atende às exigências normativas da NR-10 quanto à rastreabilidade da documentação técnica. (Fonte: Cabine Primária).",
+      "difficulty": "hard"
+    }
+  ]
+}

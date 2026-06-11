@@ -1,0 +1,218 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 61850 - GOOSE",
+  "moduleSubtitle": "Fundamentos, configuração SCL, testes e validação",
+  "moduleOrder": 6,
+  "trail": "Fundamentos de GOOSE",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que significa a sigla GOOSE no escopo da norma IEC 61850?",
+      "options": [
+        "Generic Overcurrent Oriented Security Event",
+        "Global Operation Of System Equipment",
+        "Generic Object Oriented Substation Event",
+        "Graphical Object Oriented Substation Ethernet"
+      ],
+      "correctIndex": 2,
+      "explanation": "GOOSE significa Generic Object Oriented Substation Event, representando a transmissao de eventos orientados a objetos na subestacao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o metodo de comunicacao utilizado pelas mensagens GOOSE para distribuir um evento a varios IEDs simultaneamente?",
+      "options": [
+        "Mestre-Escravo com polling continuo.",
+        "Token Ring com passagem de permissao.",
+        "Unicast direcionado a enderecos IP estaticos.",
+        "Multicast baseado no modelo Publisher-Subscriber."
+      ],
+      "correctIndex": 3,
+      "explanation": "O GOOSE utiliza comunicacao horizontal multicast, onde um IED publica o dado e todos os assinantes (subscribers) recebem a mensagem no barramento.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o protocolo GOOSE atinge tempos de transmissao muito baixos adequados para sinais de trip?",
+      "options": [
+        "Mapeando a mensagem diretamente na camada 2 (Enlace Ethernet), ignorando as camadas TCP/IP.",
+        "Compactando os dados em arquivos ZIP antes do envio.",
+        "Utilizando conexoes exclusivas de fibra optica dedicada ponto a ponto para cada rele.",
+        "Operando exclusivamente sobre cabos coaxiais analogicos de 50 ohms."
+      ],
+      "correctIndex": 0,
+      "explanation": "Para garantir alta velocidade, o GOOSE ignora a pilha TCP/IP e mapeia os dados diretamente nas camadas 1 e 2 do modelo OSI.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a norma, qual e a ordem de grandeza exigida para o tempo de transmissao de mensagens GOOSE de alta criticidade (classe P2/P3)?",
+      "options": [
+        "Entre 100 e 200 milissegundos.",
+        "Menos de 4 milissegundos (aproximadamente 3 ms ou um quarto de ciclo).",
+        "Cerca de 1 segundo para garantir a validacao.",
+        "Nao ha restricao de tempo, desde que o pacote chegue com seguranca."
+      ],
+      "correctIndex": 1,
+      "explanation": "Mensagens criticas como trip (classes P2 e P3) exigem um tempo de transporte da ordem de 3 ms para assegurar a seletividade e protecao adequadas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a mensagem GOOSE garante alta confiabilidade na entrega sem exigir a confirmacao de recebimento do destino?",
+      "options": [
+        "Utilizando redundancia de hardware com dois processadores em cada IED.",
+        "Solicitando confirmacoes via protocolo MMS paralelamente no sistema.",
+        "Atraves de um mecanismo continuo de retransmissao de pacotes com intervalos variaveis.",
+        "Requerendo intervencao manual do operador do SCADA a cada falha identificada."
+      ],
+      "correctIndex": 2,
+      "explanation": "O GOOSE garante confiabilidade retransmitindo a mensagem continuamente com tempos definidos (Tmin e Tmax) sem necessitar de Acknowledge do receptor.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na configuracao do perfil de repeticao do GOOSE, o que ocorre exatamente no tempo Tmin?",
+      "options": [
+        "E o tempo limite maximo que o IED aguarda antes de declarar falha severa na rede.",
+        "E o periodo de varredura ciclica do SCADA para atualizar a tela de operacao local.",
+        "E o tempo gasto pelo switch para rotear o pacote IP entre VLANs diferentes.",
+        "E o intervalo inicial e menor de retransmissao disparado imediatamente apos uma mudanca de estado no ponto."
+      ],
+      "correctIndex": 3,
+      "explanation": "Quando um evento ocorre, a mensagem e enviada imediatamente e repetida no menor tempo possivel definido por Tmin, garantindo a rapida entrega.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual parametro indica ao equipamento assinante o tempo maximo que ele deve esperar pela proxima mensagem GOOSE antes de invalidar o sinal?",
+      "options": [
+        "Time Allowed to Live",
+        "Sequence Number",
+        "State Number",
+        "Configuration Revision"
+      ],
+      "correctIndex": 0,
+      "explanation": "O Time Allowed to Live (TAL) informa ao receptor o tempo maximo para aguardar a atualizacao; se expirar, a qualidade do dado e marcada como invalida.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na estrutura interna do pacote GOOSE, qual o comportamento do contador State Number (stNum)?",
+      "options": [
+        "E incrementado a cada milissegundo mantendo sincronismo com o relogio GPS da subestacao.",
+        "Incrementa-se estritamente quando ocorre uma mudanca de estado ou valor em algum elemento do dataset monitorado.",
+        "Aumenta a cada retransmissao da mesma mensagem durante a condicao estavel no intervalo Tmax.",
+        "E mantido fixo em zero durante toda a operacao normal do equipamento de protecao."
+      ],
+      "correctIndex": 1,
+      "explanation": "O contador stNum atesta a ocorrencia de um novo evento, sendo incrementado apenas quando algum dado configurado do dataset e alterado fisicamente.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual Ethertype (identificador de protocolo) e inserido no cabecalho Ethernet MAC para classificar o pacote como uma mensagem GOOSE nativa?",
+      "options": [
+        "0x0800",
+        "0x8100",
+        "0x88b8",
+        "0x88cc"
+      ],
+      "correctIndex": 2,
+      "explanation": "O quadro Ethernet usa o Ethertype especifico hexadecimal 0x88b8 para identificar perfeitamente as mensagens do protocolo IEC 61850 GOOSE na rede.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para priorizar os telegramas GOOSE e evitar atrasos nos switches Ethernet, qual recurso normativo e fortemente empregado no cabecalho do quadro?",
+      "options": [
+        "Enderecamento IPv6 estatico reservado exclusivamente para protecao eletrica.",
+        "Aumento artificial do payload do pacote preenchendo todos os bytes vazios com ruidos nulos.",
+        "Desativacao completa do protocolo Spanning Tree nas portas que trafegam o protocolo de energia.",
+        "Insercao de uma tag VLAN (IEEE 802.1Q) com nivel de prioridade especifico tipicamente ajustado para 4."
+      ],
+      "correctIndex": 3,
+      "explanation": "O GOOSE utiliza a tag de VLAN para assinalar a prioridade do quadro, distinguindo-o do trafego normal de dados e garantindo a baixa latencia.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A substituicao das ligacoes convencionais em cobre pela comunicacao GOOSE permite realizar intertravamentos logicos e comandos de forma flexivel e.",
+      "correctAnswer": true,
+      "explanation": "O GOOSE elimina a necessidade de grande parte da fiacao fisica de controle, transmitindo estados e bloqueios pela LAN com extrema confiabilidade e reducao de custos.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O contador Sequence Number (sqNum) do quadro permanece inalterado enquanto o IED envia mensagens de repeticao continua e sem novidades no modo.",
+      "correctAnswer": false,
+      "explanation": "O Sequence Number (sqNum) e ativamente incrementado a cada nova transmissao do pacote GOOSE, mesmo que nao haja nenhuma mudanca de estado no processo.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A arquitetura do protocolo GOOSE baseia-se fortemente em sessoes Cliente-Servidor onde o SCADA interroga de maneira continua o rele de protecao.",
+      "correctAnswer": false,
+      "explanation": "O GOOSE utiliza exclusivamente o modelo Publisher-Subscriber em modo multicast sobre a camada de enlace para estabelecer uma comunicacao horizontal e extremamente veloz entre IEDs.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em caso de quebra no link optico e nao recebimento do evento no tempo definido pelo Time Allowed to Live, o assinante descarta a operacao marcando.",
+      "correctAnswer": true,
+      "explanation": "Se o temporizador de heartbeat expirar, o IED receptor detecta a quebra grave de comunicacao e altera a qualidade (q) do sinal bloqueando ativamente logicas criticas inseguras.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O parametro confRev presente na mensagem GOOSE atua garantindo que o IED publicador e o respectivo assinante possuam exatamente a mesma versao.",
+      "correctAnswer": true,
+      "explanation": "O Configuration Revision acompanha intrinsecamente o pacote e certifica durante a execucao que nao houveram mudancas nao autorizadas ou nao sincronizadas no layout dos dados vitais.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A troca de dados de processo em altissima velocidade diretamente entre dois ou mais IEDs dispostos no barramento e identificada na norma como ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "horizontal"
+        }
+      ],
+      "explanation": "A norma classifica didaticamente o fluxo deterministico inter-reles peer-to-peer aplicado a protecao intrinseca como comunicacao horizontal.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A mensagem publica em rede os agrupamentos contendo a lista de variaveis exatas de processo e status definidos previamente pela engenharia chamados ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "dataset"
+        }
+      ],
+      "explanation": "O dataset congrega e organiza as variaveis reais do processo que o bloco responsavel de GOOSE ira rastrear e consequentemente publicar no segmento.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Apos confirmar um evento critico a mensagem repete aceleradamente e dobra progressivamente esse tempo ate estabilizar em uma frequencia padrao para ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Tmax"
+        }
+      ],
+      "explanation": "O intervalo Tmax representa o limite tolerado maximo de tempo assinalado para atestar o batimento cardiaco de manutencao do GOOSE no decorrer de condicoes de total repouso.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 61850 - Sampled Values",
+  "moduleSubtitle": "Sampled Values, merging units e testes de sincronismo",
+  "moduleOrder": 7,
+  "trail": "Aplicações em SPCS",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que trafega na interface logica 4 definida pela arquitetura da IEC 61850?",
+      "options": [
+        "Amostras instantaneas de TC e TP entre o nivel de processo e o nivel de bay.",
+        "Comandos de bloqueio reverso entre a estacao e o centro de operacao.",
+        "Mensagens MMS contendo relatorios de oscilografia do barramento de estacao.",
+        "Sincronismo de tempo de 1 milissegundo pelo protocolo SNTP."
+      ],
+      "correctIndex": 0,
+      "explanation": "A interface logica 4 da norma estabelece a troca instantanea de dados de TC e TP (amostras) entre o nivel de processo e o nivel de bay.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na arquitetura da subestacao moderna proposta pela IEC 61850, qual elemento substitui os extensos cabos de cobre dos TCs e TPs ate a sala de reles?",
+      "options": [
+        "Roteadores de borda industriais com portas seriais.",
+        "O Barramento de Processo (Process bus) com fibra optica.",
+        "Antenas de transmissao via radio frequencia.",
+        "Conversores analogicos de 4-20mA no painel local."
+      ],
+      "correctIndex": 1,
+      "explanation": "O Process bus substitui a pesada fiacao de cobre dos TCs e TPs, conectando sensores e atuadores na rede de fibra optica.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com o modelo de dados, quais Logical Nodes originam as amostras de Sampled Values para a rede de processo?",
+      "options": [
+        "CSWI e CILO.",
+        "PTOC e PDIS.",
+        "TCTR e TVTR.",
+        "MMXU e GGIO."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os sensores de corrente (TCTR) e de tensao (TVTR) sao os LNs fisicos que geram as amostras de corrente e tensao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Alem de alimentar as funcoes de protecao, qual outra funcionalidade do SAS comumente compartilha as amostras do fluxo SV?",
+      "options": [
+        "A sincronizacao do relogio GPS local.",
+        "O comando manual de chaves seccionadoras.",
+        "O descarte de cargas via frequencia.",
+        "A medicao de grandezas operacionais (MMXU) em tempo real."
+      ],
+      "correctIndex": 3,
+      "explanation": "A medicao (MMXU) utiliza simultaneamente as mesmas amostras digitais vindas do processo que os reles de protecao aproveitam.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como a transmissao horizontal das mensagens de Sampled Values e enderecada nativamente na rede local?",
+      "options": [
+        "Por meio de mensagens Multicast para que os assinantes recebam simultaneamente.",
+        "Por roteamento IP estatico exclusivo para cada rele.",
+        "Por interrogacao ciclica do gateway em modo mestre-escravo.",
+        "Pelo protocolo TCP orientado a conexao."
+      ],
+      "correctIndex": 0,
+      "explanation": "O fluxo de SV utiliza mensagens Multicast em camadas inferiores para transmissao veloz e paralela a multiplos IEDs da rede.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na implementacao da protecao diferencial de barras (PBDF) via barramento de processo, qual e a exigencia temporal para calcular os fasores.",
+      "options": [
+        "Cada IED deve ter um endereco IP na mesma sub-rede logica.",
+        "Um sincronismo de tempo critico com precisao da ordem de 1 microssegundo.",
+        "Uso exclusivo de cabos coaxiais de 50 ohms.",
+        "Que a transmissao SV seja confirmada com sinal do receptor."
+      ],
+      "correctIndex": 1,
+      "explanation": "A precisao critica de 1 microssegundo e vital nos fluxos SV para alinhar e comparar corretamente as ondas senoidais de multiplos canais.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que os algoritmos de protecao elaboram caso alguns poucos telegramas SV se percam no meio do trafego intenso da rede de processo?",
+      "options": [
+        "Reiniciam o IED imediatamente para resetar a placa de rede.",
+        "Bloqueiam o envio de qualquer comando de trip subjacente.",
+        "Lidam e manejam a perda sem problemas graves na continuidade da atuacao.",
+        "Solicitam a retransmissao automatica do pacote perdido ao emissor."
+      ],
+      "correctIndex": 2,
+      "explanation": "A perda isolada de alguns valores SV nao confirmados e absorvida e gerenciada com sucesso pelos proprios algoritmos de protecao dos reles modernos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em uma arquitetura de barramento orientada a funcao (Alternativa 4), como os segmentos de SV da rede sao distribuidos estrategicamente?",
+      "options": [
+        "Concentrados num unico barramento principal para toda a subestacao.",
+        "Agrupados exclusivamente pelo fabricante do equipamento primario de manobra.",
+        "Desconectados e operados puramente no nivel fisico em RS-485.",
+        "Configurados para corresponder as zonas de protecao, minimizando transferencias via roteadores."
+      ],
+      "correctIndex": 3,
+      "explanation": "A arquitetura orientada a funcao modela os segmentos do barramento em estrita conformidade com as zonas de protecao para otimizar os dados exigidos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na alternativa de barramento de processo unificado para toda a subestacao (Alternativa 3), qual caracteristica de rede e obrigatoria devido aos.",
+      "options": [
+        "Elevada taxa de dados exigida no barramento principal devido ao acumulo de amostras.",
+        "Dispensa do uso do meio fisico guiado por fibras opticas.",
+        "Baixa utilizacao e ocupacao de trafego no switch geral.",
+        "Eliminacao compulsoria de todo o trafego GOOSE de supervisao do sistema."
+      ],
+      "correctIndex": 0,
+      "explanation": "Um unico barramento interligando todos os equipamentos requer uma malha de rede com elevadissima capacidade de taxa de dados (banda).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais camadas de comunicacao do modelo ISO-OSI transportam diretamente as mensagens criticas de Sampled Values visando a altissima velocidade do.",
+      "options": [
+        "Transporte e Sessao.",
+        "Apenas as camadas inferiores de Fisica e Enlace de Dados.",
+        "As sete camadas completas atreladas a pilha TCP-IP.",
+        "A camada superior de Aplicacao de forma isolada."
+      ],
+      "correctIndex": 1,
+      "explanation": "Para atingir desempenho de tempo real restrito, SV e GOOSE circulam saltando pilhas complexas e utilizam somente as camadas 1 e 2.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O fluxo de dados do processo baseados em SV e considerado comunicacao de operacao lenta e deve ser processado pelo servidor MMS na camada de.",
+      "correctAnswer": false,
+      "explanation": "SV e um servico de tempo criticissimo rodando nas camadas mais baixas da Ethernet e nao no modelo cliente-servidor padrao do MMS.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A interface logica enumerada com o digito 4 na arquitetura da norma estabelece formalmente o fluxo de dados amostrados (SV) originados nos.",
+      "correctAnswer": true,
+      "explanation": "O escopo da interface logica 4 efetua exatamente a troca instantanea de dados digitais de TC e TP do nivel de processo ao nivel de bay.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Os modernos dispositivos eletronicos instalados no nivel de processo de uma subestacao digital atuam como coletores dos sinais e publicadores dos.",
+      "correctAnswer": true,
+      "explanation": "No nivel fisico do processo (patio) residem as interfaces remotas e sensores inteligentes, digitalizando e publicando a onda para o barramento de processo.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O modelo critico de envio do sistema IEC 61850 exige categoricamente que a recepcao de um frame de amostras SV seja validada com mensagens de.",
+      "correctAnswer": false,
+      "explanation": "Sampled Values trafegam amplamente em modo multicast e de forma autonoma, desprovidos de qualquer mecanismo de confirmacao de entrega ou Ack.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em arranjos de protecao diferencial de barras (PBDF) distribuidas sobre a rede de processo, o IED responsavel pode agregar perfeitamente amostras.",
+      "correctAnswer": true,
+      "explanation": "A funcao distribuida do PBDF integra sinergicamente as correntes do patio unificando as amostras fornecidas pelos TCTRs distribuidos de cada entrada da barra.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A troca de dados instantaneos correspondentes a medicao das amostras digitalizadas provindas do patio e concebida para atender em primeira ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "bay"
+        }
+      ],
+      "explanation": "Os fluxos do SV sobem da camada de processo rumo aos equipamentos IED instalados funcionalmente na camada central nivel de bay.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para impossibilitar eventuais desvios de angulo no momento de comparar fases ou calcular fasores nas funcoes da rede, o sincronismo global de tempo ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "microssegundo"
+        }
+      ],
+      "explanation": "A precisao de timing imposta as malhas de Sampled Values requer tolerancias severas na escala de 1 microssegundo visando acoplar o fasor fidedigno as rotinas operacionais.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A engenharia e projeto da arquitetura que vincula e limita diretamente as interconexoes dos barramentos de processo as fronteiras geofisicas da ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "funcao"
+        }
+      ],
+      "explanation": "A Alternativa 4 destacada pela documentacao do padrao denota e instrui arranjos do barramento de processo desenhados sendo orientados a funcao limitando expansoes de falhas.",
+      "difficulty": "hard"
+    }
+  ]
+}

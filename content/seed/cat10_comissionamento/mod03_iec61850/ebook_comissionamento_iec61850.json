@@ -1,0 +1,231 @@
+{
+  "category": "Comissionamento SPCS",
+  "categorySubtitle": "Metodologia, ensaio de relés e comissionamento IEC 61850",
+  "categoryOrder": 9,
+  "module": "Comissionamento IEC 61850",
+  "moduleSubtitle": "Validação SCL/IID, testes GOOSE em campo e FAT de sistemas",
+  "moduleOrder": 2,
+  "ebookTitle": "Comissionamento IEC 61850",
+  "ebookSubtitle": "Subestação digital: do arquivo SCL ao teste de GOOSE e Sampled Values em campo",
+  "estimatedMinutes": 85,
+  "trailFiles": [
+    "t01_fundamentos_iec61850.json",
+    "t02_aplicacoes_subestacao_digital.json",
+    "t03_implementacao_iec61850.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — A Subestação Digital e a IEC 61850",
+      "subtitle": "O que muda no comissionamento",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Da fiação de cobre às mensagens digitais",
+          "type": "text",
+          "body": "Na subestação convencional, os sinais entre relés e equipamentos viajam por fios de cobre dedicados — cada trip, intertravamento e medição é um par de fios. Na subestação digital baseada em IEC 61850, grande parte desses sinais trafega como mensagens digitais numa rede Ethernet: o GOOSE substitui a fiação de trip e intertravamento, e os Sampled Values (SV) substituem a fiação dos TCs/TPs. Isso reduz drasticamente o cobre, mas muda completamente a forma de comissionar — não se 'mede um fio', testa-se uma mensagem na rede."
+        },
+        {
+          "id": "s2",
+          "title": "Os três serviços de comunicação da IEC 61850",
+          "type": "list",
+          "items": [
+            "MMS (cliente-servidor) — comunicação do SCADA/IHM com os IEDs (comandos, leituras, eventos); não crítico em tempo",
+            "GOOSE — mensagens multicast rápidas (poucos ms) entre IEDs para trip, intertravamento e bloqueio",
+            "Sampled Values (SV) — amostras de corrente/tensão dos merging units, substituindo TCs/TPs analógicos",
+            "Cada serviço tem requisitos de desempenho e métodos de teste próprios"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Os arquivos SCL",
+          "type": "text",
+          "body": "A IEC 61850 padroniza a configuração da subestação em arquivos SCL (Substation Configuration Language), em XML. Os principais: o ICD (capacidade do IED, fornecido pelo fabricante), o SSD (especificação da subestação), o SCD (configuração completa do sistema, que amarra tudo) e o IID/CID (configuração instanciada de cada IED). O comissionamento de uma subestação digital começa muito antes do campo: na validação desses arquivos, que definem quem fala com quem."
+        },
+        {
+          "id": "s4",
+          "title": "Por que isso exige nova competência",
+          "type": "note",
+          "body": "Comissionar IEC 61850 exige competências que vão além do conhecimento clássico de proteção: leitura de arquivos SCL, uso de analisadores de rede (sniffers), entendimento de VLANs, prioridade de tráfego e multicast. O comissionador moderno precisa ser, ao mesmo tempo, engenheiro de proteção e técnico de redes. Ignorar a camada de comunicação é deixar uma parte crítica do sistema sem teste — e na subestação digital, a comunicação É a fiação."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A subestação digital troca fiação de cobre por mensagens na rede Ethernet: GOOSE (trip/intertravamento) e SV (TCs/TPs). Os serviços MMS, GOOSE e SV têm testes próprios. A configuração é padronizada em arquivos SCL (ICD, SSD, SCD, IID/CID), cuja validação inicia o comissionamento. Isso exige uma competência híbrida: proteção + redes."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — Validação dos Arquivos SCL",
+      "subtitle": "Comissionar começa no XML",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O fluxo de engenharia SCL",
+          "type": "text",
+          "body": "A engenharia de uma subestação digital segue um fluxo: cada fabricante fornece o ICD do seu IED; a ferramenta de sistema (system configurator) integra todos num SCD, definindo os datasets, os control blocks GOOSE/SV e as assinaturas (quem publica e quem subscreve cada mensagem); e dela saem os IID/CID que configuram cada IED. Validar esse fluxo é garantir que o mapa de comunicação está correto antes de testar em campo."
+        },
+        {
+          "id": "s2",
+          "title": "O que verificar nos arquivos SCL",
+          "type": "list",
+          "items": [
+            "Consistência do SCD — todos os IEDs presentes, sem conflitos de endereço",
+            "Datasets — os dados certos agrupados em cada conjunto (ex.: trips no dataset de GOOSE)",
+            "Publicações e assinaturas GOOSE — cada publisher tem os subscribers corretos",
+            "Endereços multicast (MAC), APPID e VLAN/prioridade de cada GOOSE/SV",
+            "Configuração de SV — merging units, taxa de amostragem, mapeamento de canais",
+            "Versão e revisão (confRev) — controle de mudanças de configuração"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Matriz de comunicação (engineering)",
+          "type": "note",
+          "body": "Uma boa prática é elaborar a matriz de comunicação: uma tabela que mostra, para cada mensagem GOOSE/SV, quem publica, quem assina, quais dados carrega e seus parâmetros (APPID, MAC, VLAN). Essa matriz é o 'mapa' contra o qual os testes de campo serão verificados. Sem ela, testar GOOSE vira um exercício às cegas. A matriz, derivada do SCD, é tão importante para a subestação digital quanto o diagrama de fiação é para a convencional."
+        },
+        {
+          "id": "s4",
+          "title": "Ferramentas de validação",
+          "type": "text",
+          "body": "Existem ferramentas (de fabricantes e independentes) que validam arquivos SCL contra o schema da norma e verificam a consistência das assinaturas. Validar o SCL antes do campo captura erros de engenharia — uma assinatura GOOSE faltando, um dataset incompleto, um conflito de APPID — que, do contrário, só apareceriam como uma proteção que não atua ou um intertravamento que não funciona durante os testes funcionais, custando muito mais tempo para diagnosticar."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O comissionamento digital começa validando os arquivos SCL (ICD → SCD → IID/CID): consistência, datasets, publicações/assinaturas GOOSE, endereços (MAC/APPID/VLAN) e configuração SV. A matriz de comunicação derivada do SCD é o 'mapa' dos testes de campo. Ferramentas de validação capturam erros de engenharia antes que virem proteções que não atuam no campo."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Testes de GOOSE em Campo",
+      "subtitle": "Provando o trip e o intertravamento digitais",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Como o GOOSE funciona",
+          "type": "text",
+          "body": "O GOOSE (Generic Object Oriented Substation Event) é uma mensagem multicast publicada por um IED e recebida por todos os IEDs assinantes na rede, em poucos milissegundos. Ele carrega estados (ex.: 'trip ativado', 'disjuntor aberto') e se repete periodicamente: em repouso, com intervalo longo (heartbeat); ao mudar de estado, dispara uma rajada de retransmissões rápidas que vão espaçando até voltar ao repouso. Isso garante entrega rápida e supervisão contínua do enlace."
+        },
+        {
+          "id": "s2",
+          "title": "A supervisão do GOOSE",
+          "type": "note",
+          "body": "Uma vantagem do GOOSE sobre o fio de cobre é a auto-supervisão: cada assinante monitora o contador de sequência (sqNum) e o tempo de vida (time allowed to live) da mensagem. Se a mensagem parar de chegar (cabo rompido, IED desligado), o assinante detecta a falha e alarma — algo impossível com um fio de trip convencional, que só se descobre rompido durante uma falta. Testar essa supervisão (simular a perda do GOOSE e verificar o alarme) é parte do comissionamento."
+        },
+        {
+          "id": "s3",
+          "title": "Roteiro de teste de GOOSE",
+          "type": "list",
+          "items": [
+            "Verificar a publicação — usar um analisador de rede (sniffer) para confirmar que o IED publica o GOOSE esperado (APPID, dados, timing)",
+            "Verificar a assinatura — confirmar que o IED assinante recebe e reage à mensagem",
+            "Teste ponta a ponta — a mala de teste publica um GOOSE simulando o publisher, e verifica-se a reação do subscriber (ex.: trip)",
+            "Medir o tempo total — do evento à reação, deve atender ao requisito de desempenho (tipicamente < 4 ms para trip)",
+            "Testar a supervisão — interromper o GOOSE e confirmar o alarme de perda de comunicação"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "A mala de teste com GOOSE",
+          "type": "text",
+          "body": "As malas de teste modernas falam IEC 61850: elas podem publicar GOOSE (para testar o assinante) e assinar GOOSE (para medir o tempo de resposta de um publisher a uma falta injetada). Um teste clássico: a mala injeta uma corrente de falta no IED de proteção e, simultaneamente, assina o GOOSE de trip que esse IED publica — medindo o tempo entre a falta e a publicação do trip. Isso testa a cadeia de proteção digital ponta a ponta, com precisão de microssegundos."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O GOOSE é mensagem multicast rápida (poucos ms) com retransmissão crescente e auto-supervisão (sqNum, time-to-live). O teste verifica publicação (com sniffer), assinatura, ponta a ponta (mala publica/assina GOOSE), tempo total (<4 ms para trip) e a supervisão de perda. A mala IEC 61850 mede a cadeia digital injetando falta e cronometrando o GOOSE de trip."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Sampled Values e a Cadeia de Medição Digital",
+      "subtitle": "Quando os TCs/TPs viram pacotes",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que são Sampled Values",
+          "type": "text",
+          "body": "Os Sampled Values (SV) digitalizam as correntes e tensões na fonte: um merging unit (MU), conectado aos TCs/TPs convencionais ou a sensores ópticos, amostra os sinais (tipicamente 80 amostras/ciclo para proteção, ou 256 para qualidade) e os publica na rede como pacotes. Os IEDs de proteção, em vez de receber fios analógicos, assinam esses pacotes SV. Isso elimina a fiação de TC/TP, os problemas de burden e saturação convencional, e a fiação de baixa tensão sujeita a interferência."
+        },
+        {
+          "id": "s2",
+          "title": "Requisitos críticos dos SV",
+          "type": "list",
+          "items": [
+            "Sincronismo de tempo preciso (PTP/IEEE 1588) — todos os MUs devem amostrar no mesmo instante",
+            "Taxa de amostragem consistente (ex.: 4800 amostras/s para 80/ciclo a 60 Hz)",
+            "Baixa latência e jitter mínimo na rede",
+            "Largura de banda adequada (SV gera tráfego contínuo e intenso)",
+            "Redundância de rede (PRP/HSR) para não perder amostras"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "A dependência do sincronismo (PTP)",
+          "type": "note",
+          "body": "Diferente do GOOSE (eventos esporádicos), os SV exigem sincronismo de tempo rigoroso: se dois merging units amostram em instantes ligeiramente diferentes, uma proteção diferencial que compara correntes de fontes distintas verá um erro de ângulo que pode causar operação indevida. Por isso o PTP (Precision Time Protocol, IEEE 1588) é parte indissociável de uma subestação com SV. Comissionar SV inclui obrigatoriamente verificar a qualidade do sincronismo."
+        },
+        {
+          "id": "s4",
+          "title": "Testando Sampled Values",
+          "type": "text",
+          "body": "O teste de SV envolve: verificar que o merging unit publica os pacotes com a taxa e os dados corretos (analisador de rede); que os IEDs de proteção assinam e processam corretamente (a mala de teste pode publicar SV simulando o MU, injetando faltas digitais); que o sincronismo PTP está dentro da tolerância; e que a perda de sincronismo ou de pacotes é detectada e tratada (a proteção bloqueia em vez de operar indevidamente). É a cadeia de medição digital provada ponta a ponta."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Os SV digitalizam corrente/tensão no merging unit (80 amostras/ciclo para proteção) e as publicam na rede, eliminando fiação de TC/TP. Exigem sincronismo rigoroso (PTP/IEEE 1588), banda e redundância (PRP/HSR). O teste verifica publicação do MU, assinatura dos IEDs (mala publica SV), qualidade do PTP e o tratamento da perda de sincronismo/pacotes."
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "order": 4,
+      "title": "Capítulo 5 — FAT e SAT de Sistemas Digitais",
+      "subtitle": "Comissionando o sistema completo",
+      "estimatedMinutes": 11,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O FAT de uma subestação digital",
+          "type": "text",
+          "body": "No FAT de um sistema IEC 61850, monta-se a rede completa na fábrica (IEDs, switches, merging units) e testa-se o comportamento integrado antes do envio: as assinaturas GOOSE funcionam, os SV são processados, as lógicas distribuídas (que envolvem vários IEDs trocando GOOSE) operam, e o SCADA enxerga todos os pontos via MMS. O FAT digital é mais sofisticado que o convencional, pois precisa reproduzir a rede e validar a interoperabilidade entre equipamentos de diferentes fabricantes."
+        },
+        {
+          "id": "s2",
+          "title": "Interoperabilidade: o desafio multifabricante",
+          "type": "note",
+          "body": "A promessa da IEC 61850 é a interoperabilidade — IEDs de fabricantes diferentes comunicando-se na mesma rede. Na prática, diferenças de interpretação da norma podem causar incompatibilidades sutis (um GOOSE que um fabricante publica de um jeito que outro não assina corretamente). Por isso o FAT de sistemas multifabricante é essencial: é onde essas incompatibilidades são descobertas e resolvidas, em ambiente controlado, antes do campo."
+        },
+        {
+          "id": "s3",
+          "title": "O SAT e a documentação as-built digital",
+          "type": "text",
+          "body": "No SAT, repete-se a validação no campo, agora com a rede real, os equipamentos primários e o sincronismo de tempo da subestação. Ao final, a documentação as-built de uma subestação digital inclui, além dos diagramas, os arquivos SCL finais (a configuração real), a matriz de comunicação validada e os relatórios de teste de GOOSE/SV. Esses arquivos digitais são tão importantes quanto os diagramas — sem o SCD correto, futuras manutenções e expansões ficam comprometidas."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "O FAT digital monta a rede completa na fábrica e valida GOOSE, SV, lógicas distribuídas, MMS e a interoperabilidade multifabricante (o grande desafio). O SAT repete no campo, com rede e equipamentos reais. A as-built digital inclui os arquivos SCL finais, a matriz de comunicação e os relatórios. Comissionar IEC 61850 une proteção e redes — a comunicação é a nova fiação, e testá-la é indispensável."
+        }
+      ]
+    }
+  ]
+}

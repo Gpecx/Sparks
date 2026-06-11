@@ -1,0 +1,167 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, dispositivos, funções ANSI, seletividade e proteções específicas",
+  "categoryOrder": 5,
+  "module": "Proteção de Barras",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções específicas de barramentos",
+  "moduleOrder": 8,
+  "ebookTitle": "Proteção de Barramentos",
+  "ebookSubtitle": "Diferencial de barra (87B), zonas dinâmicas e proteção de falha de disjuntor",
+  "estimatedMinutes": 60,
+  "trailFiles": [
+    "t01_fundamentos_barramentos.json",
+    "t02_aplicacoes_barramentos.json",
+    "t03_protecoes_barramentos.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — A Criticidade do Barramento",
+      "subtitle": "O ponto de convergência do sistema",
+      "estimatedMinutes": 12,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que o barramento é especial",
+          "type": "text",
+          "body": "O barramento é o ponto onde convergem múltiplos circuitos de uma subestação — linhas, transformadores, geradores. Uma falta no barramento é uma das mais severas do sistema: toda a corrente de curto de todas as fontes conflui para o ponto de falta, e a sua eliminação exige abrir TODOS os disjuntores conectados àquela barra, causando a maior interrupção possível na subestação. Por isso, a proteção de barra precisa ser ao mesmo tempo rapidíssima (para limitar o dano severo) e absolutamente segura (um trip indevido desliga a subestação inteira)."
+        },
+        {
+          "id": "s2",
+          "title": "O dilema rapidez × segurança",
+          "type": "note",
+          "body": "A proteção de barra vive uma tensão extrema entre dependabilidade e segurança. Ela deve atuar muito rápido numa falta de barra (que é severíssima), mas jamais atuar indevidamente (pois desligaria toda a subestação). Esse dilema é mais agudo aqui do que em qualquer outra proteção — e por isso a proteção de barra emprega técnicas sofisticadas de estabilização e, frequentemente, esquemas de verificação (check zone) para garantir que só atua em falta real de barra."
+        },
+        {
+          "id": "s3",
+          "title": "Tipos de arranjo de barra",
+          "type": "list",
+          "items": [
+            "Barra simples — econômica, mas falta de barra ou manutenção desliga tudo",
+            "Barra dupla — duas barras com chave de transferência; mais flexível",
+            "Barra principal e de transferência — permite manutenção de disjuntor",
+            "Disjuntor e meio (breaker-and-a-half) — alta confiabilidade, comum em EAT",
+            "Anel — boa confiabilidade com menos disjuntores",
+            "O arranjo afeta diretamente a complexidade da proteção de barra"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O barramento é o ponto de convergência onde uma falta é severíssima (toda a corrente conflui) e cuja eliminação desliga toda a subestação. Por isso a proteção de barra exige rapidez extrema E segurança absoluta — o dilema dependabilidade × segurança no seu ponto mais agudo. O arranjo de barra (simples, dupla, disjuntor-e-meio, anel) define a complexidade da proteção."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — A Diferencial de Barra (87B)",
+      "subtitle": "Lei de Kirchhoff aplicada à proteção",
+      "estimatedMinutes": 15,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O princípio",
+          "type": "text",
+          "body": "A diferencial de barra (87B) aplica a lei de Kirchhoff das correntes: a soma de todas as correntes que entram e saem de um barramento deve ser zero. Somam-se as correntes de todos os circuitos conectados à barra (via TCs); em operação normal ou falta externa, a soma é ~0; numa falta interna à barra, a soma é igual à corrente de falta. É o princípio diferencial aplicado a um nó com múltiplos terminais — a proteção mais seletiva e rápida para o barramento."
+        },
+        {
+          "id": "s2",
+          "title": "O desafio da saturação de TC",
+          "type": "text",
+          "body": "O grande desafio da 87B é a saturação de TC em faltas externas severas. Numa falta logo fora da barra, a corrente de falta atravessa a barra (passante) e um dos TCs, próximo à falta, pode saturar — gerando uma corrente diferencial espúria que poderia causar trip indevido (desligando a subestação inteira numa falta que nem era da barra). Lidar com a saturação de TC é o problema central do projeto da 87B."
+        },
+        {
+          "id": "s3",
+          "title": "Tipos de diferencial de barra",
+          "type": "list",
+          "items": [
+            "Alta impedância — usa uma impedância estabilizante; muito robusta contra saturação de TC; exige TCs dedicados de mesma relação",
+            "Baixa impedância (percentual/biased) — numérica, com característica de restrição (slope) e detecção de saturação; flexível com relações de TC diferentes",
+            "Com detecção de saturação — os relés numéricos identificam o início da saturação e bloqueiam a operação espúria nesses instantes"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Zona de verificação (check zone)",
+          "type": "note",
+          "body": "Para máxima segurança, muitas 87B usam uma zona de verificação (check zone): uma segunda medição diferencial que engloba toda a subestação, independente das zonas individuais. O trip só é permitido se TANTO a zona específica QUANTO a check zone detectarem a falta. Isso impede que um erro na seleção de zona (ou um problema de TC numa zona) cause trip indevido — uma camada extra de segurança crítica, dado o impacto de um trip de barra."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A 87B aplica Kirchhoff: a soma das correntes da barra é zero em condição normal e igual à falta numa falta interna. Seu desafio central é a saturação de TC em faltas externas, tratada por alta impedância (robusta), baixa impedância (numérica com slope/detecção de saturação) e pela zona de verificação (check zone), que exige confirmação dupla antes de desligar a barra inteira."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Zonas Dinâmicas e Falha de Disjuntor",
+      "subtitle": "Acompanhando a topologia e protegendo a última falha",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Réplica dinâmica da barra",
+          "type": "text",
+          "body": "Em arranjos com barras múltiplas e chaves seccionadoras, a topologia muda conforme as manobras — um circuito pode estar ora na barra A, ora na barra B. A proteção de barra precisa saber, em tempo real, qual circuito está em qual barra, para somar corretamente as correntes de cada zona. Isso é feito pela 'réplica de barra' (bus replica): a proteção lê a posição das chaves seccionadoras e reconfigura dinamicamente suas zonas de medição. Um erro na leitura das chaves leva a proteção a somar correntes erradas — daí a importância de monitorar a consistência da réplica."
+        },
+        {
+          "id": "s2",
+          "title": "Proteção de falha de disjuntor (50BF)",
+          "type": "text",
+          "body": "A 50BF (Breaker Failure) é intimamente ligada à proteção de barra. Quando uma proteção comanda o trip de um disjuntor e ele não abre (mecanismo travado, bobina queimada), a 50BF detecta que a corrente persiste após o tempo esperado e comanda a abertura de todos os disjuntores adjacentes — que, num barramento, são os demais disjuntores daquela barra. Assim, a falha de um disjuntor é contornada isolando a barra, garantindo que a falta seja eliminada de qualquer forma."
+        },
+        {
+          "id": "s3",
+          "title": "A integração 87B + 50BF",
+          "type": "note",
+          "body": "A proteção de barra e a falha de disjuntor trabalham juntas e compartilham a mesma lógica de 'abrir todos os disjuntores da barra'. Quando a 87B detecta falta interna, abre todos os disjuntores da zona. Quando a 50BF detecta que um disjuntor falhou ao eliminar uma falta (mesmo de um alimentador), ela também recorre à barra para isolar. Essa integração faz da proteção de barra/falha de disjuntor um dos esquemas mais críticos e sofisticados da subestação."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "Em arranjos com barras múltiplas, a réplica dinâmica (bus replica) lê as chaves seccionadoras e reconfigura as zonas em tempo real — erros de leitura levam a somas erradas. A 50BF (falha de disjuntor) integra-se à barra: se um disjuntor não abre, abrem-se os demais da barra para isolar a falta. 87B e 50BF compartilham a lógica de 'abrir toda a barra' e formam um esquema crítico integrado."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Aplicação e Boas Práticas",
+      "subtitle": "Projetando a proteção de barra",
+      "estimatedMinutes": 9,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Critérios de projeto",
+          "type": "list",
+          "items": [
+            "Escolher o tipo de 87B (alta ou baixa impedância) conforme os TCs e o arranjo",
+            "Garantir TCs adequados (dedicados e de mesma relação para alta impedância)",
+            "Implementar a réplica de barra correta para arranjos com seccionadoras",
+            "Usar zona de verificação (check zone) para segurança em arranjos complexos",
+            "Integrar com a 50BF e a lógica de trip dos disjuntores da barra"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Comissionamento cuidadoso",
+          "type": "note",
+          "body": "Dado o impacto de um trip indevido (subestação inteira), a proteção de barra exige comissionamento especialmente rigoroso: verificar a polaridade e a fiação de TODOS os TCs (uma única polaridade invertida gera diferencial espúria), testar a réplica de barra para todas as configurações de chave, e simular faltas internas e externas para confirmar atuação seletiva e estabilidade. É um dos comissionamentos mais trabalhosos e importantes de uma subestação."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "Projetar a 87B envolve escolher o tipo conforme TCs e arranjo, garantir TCs adequados, implementar a réplica de barra, usar check zone e integrar com a 50BF. O comissionamento é especialmente rigoroso — polaridade de todos os TCs, réplica para todas as configurações, e simulação de faltas internas/externas. A proteção de barra é a que mais equilibra rapidez extrema e segurança absoluta no sistema."
+        }
+      ]
+    }
+  ]
+}

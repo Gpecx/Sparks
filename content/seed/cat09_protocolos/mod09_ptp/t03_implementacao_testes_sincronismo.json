@@ -1,0 +1,218 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "PTP e Sincronismo de Tempo",
+  "moduleSubtitle": "IEEE 1588, SNTP, grandmaster e testes",
+  "moduleOrder": 8,
+  "trail": "Implementação e Testes de Sincronismo",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Na implementacao da automacao, qual a precisao de sincronismo temporal exigida normativamente para lidar com Sampled Values e calculos de fasores?",
+      "options": [
+        "1 minuto.",
+        "1 segundo.",
+        "1 microssegundo.",
+        "1 milissegundo."
+      ],
+      "correctIndex": 2,
+      "explanation": "Eventos de altissima criticidade como o Sampled Values exigem o sincronismo de 1 microssegundo, garantindo alinhamento de senoides.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na arquitetura de comunicacao do IED, quais protocolos compoem a pilha Soft-Time encarregada da sincronizacao de tempo via Ethernet?",
+      "options": [
+        "MMS e GOOSE.",
+        "ARP e RSTP.",
+        "TCP e ICMP.",
+        "SNTP e PTP."
+      ],
+      "correctIndex": 3,
+      "explanation": "O mapeamento dos serviços de tempo aponta os protocolos SNTP e PTP (Precision Time Protocol) na estrutura Soft-Time stack.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento atua como referencia originadora de tempo para assegurar que toda a rede de subestacao possua uma estampa de tempo comum?",
+      "options": [
+        "O dispositivo de satelite GPS.",
+        "O cartao de entradas binarias.",
+        "O switch ethernet secundario.",
+        "A interface de IHM local."
+      ],
+      "correctIndex": 0,
+      "explanation": "O relogio primario (ex: GPS) atua como base unificada distribuindo o tempo exato para todos os nos da rede.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No processo de monitoramento de qualidade e alarmes da subestacao, onde o sinal de falha de sincronismo de tempo (ClkFail) e mapeado?",
+      "options": [
+        "No Logical Node LLN0.",
+        "No Logical Node LPHD0.",
+        "No Logical Node XCBR1.",
+        "No Logical Node CSWI1."
+      ],
+      "correctIndex": 1,
+      "explanation": "O alarme de perda de relogio (ClkFail) faz parte do Logical Node fisico LPHD0, agrupando as anomalias de hardware.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao avaliar os parametros de diagnostico do modulo Ethernet (ex: EN100), como se constata que o equipamento esta monitorando fontes redundantes de.",
+      "options": [
+        "Pela ausencia de pacotes GOOSE na rede LAN.",
+        "Pela ativacao do filtro multicast na porta 1.",
+        "Pela presenca e registro de um Primary peer e um Secondary peer nas tabelas de sincronismo.",
+        "Pelo reinicio compulsorio do processo de routing interno."
+      ],
+      "correctIndex": 2,
+      "explanation": "O log de diagnostico exibe a rastreabilidade do Primary peer e Secondary peer (IPs diferentes), atestando a redundancia configurada.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante o teste e diagnostico de logs do servidor de tempo, o que a variavel Tx diff exibida em microssegundos representa tecnicamente?",
+      "options": [
+        "A largura de banda disponivel no cabo de fibra otica.",
+        "O numero de colisoes de pacotes CSMA/CD.",
+        "O tempo maximo de holdover permitido pela bateria do rele.",
+        "A diferenca de tempo entre o novo tempo recebido do servidor e o tempo do cristal local do equipamento."
+      ],
+      "correctIndex": 3,
+      "explanation": "O log atesta que Tx diff (difference of new time and crystal time) mede o desvio (escorregamento) do cristal local frente a fonte de tempo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No relatorio de testes de latencia e assimetria, qual equacao calcula analiticamente o atraso de ida e volta (round trip delay) do pacote de tempo?",
+      "options": [
+        "(T4-T1)-(T3-T2)",
+        "(T2+T3)-(T4+T1)",
+        "(T4-T3)+(T2-T1)",
+        "(T1T2)/(T3T4)"
+      ],
+      "correctIndex": 0,
+      "explanation": "A documentacao tecnica expoe formalmente a formula (T4-T1)-(T3-T2) para calcular a latencia de ida e volta do protocolo de tempo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao avaliar o offset de tempo no diagnostico, o que uma diferenca positiva (Tx diff > 0) significa perante o ajuste do IED?",
+      "options": [
+        "Que o cabo ethernet sofreu rompimento fisico.",
+        "Que o servidor de tempo esta adiantado (faster) em relacao ao relogio interno do rele.",
+        "Que o pacote de tempo foi descartado pelo firewall.",
+        "Que o cristal local estabilizou no modo holdover absoluto."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os logs do modulo apontam explicitamente: If positiv, server is faster. Mostrando que o relogio externo esta a frente do local.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o limite tolerado recomendado para as metricas de diferenca de tempo (Tx diff) e atraso de ida e volta (round trip delay) nos testes de.",
+      "options": [
+        "Devem ser sempre estritamente zero absoluto.",
+        "Devem exceder 5000 microssegundos.",
+        "Devem ser menores que 1000 microssegundos.",
+        "Nao ha limite, o algoritmo compensa qualquer desvio infinito."
+      ],
+      "correctIndex": 2,
+      "explanation": "A regra de comissionamento presente nos logs alerta que ambos os parametros should less then 1000 (microssegundos) para operacao saudavel.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para garantir a exatidao das medicoes de delay de transmissao e recepcao interna (device internal receive/transmit delay), que fator critico do.",
+      "options": [
+        "A versao do navegador de internet em uso.",
+        "O endereço MAC do equipamento adjacente.",
+        "A tensao da bateria auxiliar da IHM.",
+        "A carga de processamento da CPU (CPU load depending)."
+      ],
+      "correctIndex": 3,
+      "explanation": "A nota tecnica dos diagnosticos avisa que os atrasos internos da placa de rede variam sendo cpu load depending (dependentes da carga da CPU).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nos projetos de automacao de subestacoes industriais, o sincronismo com precisao de milissegundos atende a demanda de ordenacao e registro de.",
+      "correctAnswer": true,
+      "explanation": "Enquanto os fasores exigem microssegundos, o monitoramento cronologico de logs e eventos padroes trabalha satisfatoriamente na faixa do milissegundo.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O status e a falha do modulo de sincronizacao sao reportados nativamente a rede atraves do sinal logico BatFail contido nas propriedades de saude.",
+      "correctAnswer": false,
+      "explanation": "A indisponibilidade do tempo e mapeada utilizando o sinal ClkFail (Clock fail), ao passo que BatFail indica unicamente a falha de bateria do IED.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O processo de configuracao do protocolo de tempo SNTP/NTP nos dispositivos requer o preenchimento direto do endereco IP associado aos servidores.",
+      "correctAnswer": true,
+      "explanation": "As telas de ajustes da interface mostram o IP sendo designado (ex: NTP 172.016.000.254) nas configuracoes gerais do equipamento.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o teste de qualidade da sincronizacao, a medicao do round trip delay e considerada ideal caso o resultado ultrapasse expressivamente 2000.",
+      "correctAnswer": false,
+      "explanation": "A documentacao instrui que o round trip delay deve preferencialmente se manter inferior a 1000 microssegundos (should less then 1000).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O atraso de processamento interno dos telegramas de tempo na placa Ethernet, responsavel pelo timestamp final, independe totalmente do uso do.",
+      "correctAnswer": false,
+      "explanation": "Os parametros receive delay e transmit delay sao classificados nos traces como dependentes da carga da CPU (cpu load depending).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A notificacao vital que sinaliza perda da referencia de sincronismo e inviabiliza as funcoes temporizadas e supervisionada pelo ponto logico ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Fail"
+        }
+      ],
+      "explanation": "O sinal de Clock Fail ou ClkFail repassa a informacao critica do colapso do tempo externo nos blocos Application/LPHD0.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para assegurar integridade no projeto de telemetria, o offset do sincronismo temporal calculado matematicamente pela divergencia do relogio recebe ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "diff"
+        }
+      ],
+      "explanation": "A diferenca aferida pelo equipamento entre a base horaria informada e sua marcacao de hardware e impressa na listagem diagnosticada como Tx diff.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O retardo cronometrado equivalente ao somatorio do caminho de viagem ate o mestre e seu correspondente regresso e medido nos testes sob a ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "round"
+        }
+      ],
+      "explanation": "O trunfo no acerto fino da temporizacao da rede consiste em compensar e aferir periodicamente o round trip delay pelo algoritmo basico do protocolo.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "",
+  "categoryOrder": 0,
+  "module": "Geração Distribuída e Fotovoltaicos",
+  "moduleSubtitle": "Sistemas GD, fotovoltaicos, inversores, armazenamento e conexão à rede",
+  "moduleOrder": 5,
+  "trail": "Regulamentação ANEEL (REN 482/687/1000)",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual Resolução Normativa da ANEEL, vigente desde 2012, permitiu originalmente que consumidores gerassem a própria energia e participassem do Sistema de Compensação?",
+      "options": [
+        "REN 414/2010.",
+        "REN 482/2012.",
+        "REN 687/2015.",
+        "REN 1000/2021."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Resolução Normativa ANEEL nº 482/2012 foi a inovação original que instituiu a micro/minigeração distribuída e o Sistema de Compensação (Micro e Minigeração Distribuída — Agência Nacional de Energia Elétrica - Portal Gov.br)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual Lei sancionada em 2022 é amplamente considerada como o marco legal da Micro e Minigeração Distribuída no Brasil?",
+      "options": [
+        "Lei nº 11.795/2008.",
+        "Lei nº 14.300/2022.",
+        "Lei nº 13.589/2018.",
+        "Lei nº 10.295/2001."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Lei nº 14.300/2022 é considerada o marco legal da Micro e Minigeração Distribuída e institui o novo Sistema de Compensação de Energia Elétrica (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "De acordo com as normas vigentes, qual é o limite máximo de potência instalada para que uma central seja classificada como microgeração distribuída?",
+      "options": [
+        "Até 10 kW.",
+        "Até 75 kW.",
+        "Acima de 75 kW até 3 MW.",
+        "Até 5 MW."
+      ],
+      "correctIndex": 1,
+      "explanation": "A microgeração distribuída é definida como uma central geradora com potência instalada de até 75 quilowatts (kW) (Micro e Minigeração Distribuída — Agência Nacional de Energia Elétrica - Portal Gov.br)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Em regra geral para as novas instalações, a minigeração distribuída engloba as centrais geradoras com potência instalada:",
+      "options": [
+        "Até 75 kW.",
+        "Superior a 75 kW e menor ou igual a 3 MW.",
+        "De 3 MW a 10 MW.",
+        "Acima de 5 MW independentemente da fonte."
+      ],
+      "correctIndex": 1,
+      "explanation": "Atualmente, a minigeração distribuída é a central com potência acima de 75 kW e menor ou igual a 3 MW para fontes não despacháveis (Micro e Minigeração Distribuída — Agência Nacional de Energia Elétrica - Portal Gov.br)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual o prazo determinado para a distribuidora encaminhar o Orçamento de Conexão quando NÃO houver necessidade de melhoria ou reforço no sistema de distribuição?",
+      "options": [
+        "Até 5 dias.",
+        "Até 15 dias.",
+        "Até 30 dias.",
+        "Até 45 dias."
+      ],
+      "correctIndex": 1,
+      "explanation": "O orçamento de conexão deve ser encaminhado em até 15 dias se não houver necessidade de melhoria ou reforço na rede (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "O documento formal obrigatório da distribuidora que consolida os estudos de viabilidade e informa as condições e prazos para o acesso ao sistema elétrico chama-se:",
+      "options": [
+        "Relatório de Vistoria de Medição.",
+        "Termo de Ajustamento de Conduta Técnica.",
+        "Orçamento de Conexão.",
+        "Acordo Operativo Preliminar."
+      ],
+      "correctIndex": 2,
+      "explanation": "O Orçamento de Conexão (antigo Parecer de Acesso) consolida a viabilidade e informa prazos e Condições de Acesso (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "A modalidade que se caracteriza pela reunião de consumidores sob forma de consórcios ou cooperativas na mesma área de concessão é denominada:",
+      "options": [
+        "Múltiplas unidades consumidoras.",
+        "Autoconsumo remoto corporativo.",
+        "Autoconsumo local exclusivo.",
+        "Geração compartilhada."
+      ],
+      "correctIndex": 3,
+      "explanation": "A geração compartilhada reúne diversos interessados via consórcio ou cooperativa para instalar e utilizar a energia de uma central comum (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Quando a instalação fotovoltaica utiliza as áreas comuns de um condomínio para gerar e repartir energia entre os moradores, ela se enquadra como:",
+      "options": [
+        "Autoconsumo remoto interligado.",
+        "Geração compartilhada via cooperativa.",
+        "Autoconsumo local exclusivo.",
+        "Empreendimento com múltiplas unidades consumidoras."
+      ],
+      "correctIndex": 3,
+      "explanation": "Essa configuração em condomínios divide a energia pelas regras de investimento, enquadrando-se em Empreendimento com Múltiplas Unidades Consumidoras (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Em qual prazo máximo a distribuidora deve realizar a vistoria técnica após a solicitação do acessante para conexões em baixa tensão (tensão < 2,3 kV)?",
+      "options": [
+        "Até 3 dias úteis.",
+        "Até 5 dias úteis.",
+        "Até 10 dias úteis.",
+        "Até 15 dias úteis."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme a regulamentação, a vistoria pela concessionária para liberação em tensão menor que 2,3 kV deve ser feita em até 5 dias úteis (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP)."
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Em consonância com a Lei 14.300/2022, novas unidades de minigeração (>500 kW, não despacháveis, 25%+ para um titular) pagarão até 2028 qual porcentagem da tarifa referente à remuneração dos ativos da distribuidora (Fio B)?",
+      "options": [
+        "20%.",
+        "40%.",
+        "50%.",
+        "100%."
+      ],
+      "correctIndex": 3,
+      "explanation": "O marco estipula incidência de 100% das componentes tarifárias de remuneração dos ativos de distribuição e reintegração/depreciação para essas unidades maiores (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES)."
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "No Sistema de Compensação, a energia gerada excedente injetada na rede não gera créditos futuros para o consumidor, sendo apenas doada à distribuidora.",
+      "correctAnswer": false,
+      "explanation": "A energia excedente injetada é cedida por empréstimo gratuito e transformada em crédito para compensar o consumo dos meses seguintes (Micro e Minigeração Distribuída — Agência Nacional de Energia Elétrica - Portal Gov.br).",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "O prazo de validade estipulado para a utilização dos créditos gerados pela energia excedente injetada na rede elétrica é de 60 meses.",
+      "correctAnswer": true,
+      "explanation": "De acordo com as regras estabelecidas para o Sistema de Compensação de Energia Elétrica, o prazo de validade dos créditos é de 60 meses (Micro e Minigeração Distribuída — Agência Nacional de Energia Elétrica - Portal Gov.br).",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Segundo as normas da ANEEL, os custos com melhorias ou reforços na rede causados exclusivamente pela conexão de microgeração são integralmente repassados ao consumidor.",
+      "correctAnswer": false,
+      "explanation": "Os custos de melhorias na rede, por conta exclusivamente da microgeração, não fazem parte da participação do consumidor, sendo arcados pela distribuidora (conexão de microgeradores ao sistema de distribuição em baixa tensão pt.dt.pdn.00059 06 - EDP).",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Para não ultrapassar o limite da microgeração ou minigeração distribuída, é permitido ao consumidor dividir juridicamente a sua central geradora em unidades menores.",
+      "correctAnswer": false,
+      "explanation": "É expressamente vedada a divisão de central geradora em unidades de menor porte para burlar ou enquadrar-se nos limites de potência estipulados na legislação (Micro e Minigeração Distribuída — Agência Nacional de Energia Elétrica - Portal Gov.br).",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "hard",
+      "statement": "Para centrais da modalidade de minigeração não despachável com características específicas da Lei 14.300, a incidência de 100% dos encargos abrange também P&D, EE e a Taxa de Fiscalização (TFSEE).",
+      "correctAnswer": true,
+      "explanation": "Sim, além das componentes da distribuição (Fio B), essas usinas pagam até 2028 100% dos encargos de P&D, EE e a TFSEE sobre a energia faturada (GUIA INTERATIVO DE EFICIÊNCIA ENERGÉTICA EM EDIFICAÇÕES).",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "O autoconsumo ____ permite que a energia gerada em um local seja compensada em outro, desde que as unidades sejam do mesmo titular.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "remoto"
+        }
+      ],
+      "explanation": "O autoconsumo remoto ocorre quando a compensação é feita em local diferente de onde a energia foi efetivamente gerada (Micro e Minigeração Distribuída — Agência Nacional de Energia Elétrica - Portal Gov.br)."
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "Para consumidores conectados no grupo B (baixa tensão), mesmo que a energia injetada gere sobras, é cobrado o custo de disponibilidade, que para ligação trifásica é de ____ kWh.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "100"
+        }
+      ],
+      "explanation": "Para ligação trifásica do grupo B, cobra-se no faturamento o custo de disponibilidade em valor equivalente a 100 kWh mensais (Micro e Minigeração Distribuída — Agência Nacional de Energia Elétrica - Portal Gov.br)."
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "hard",
+      "statement": "A Resolução Normativa nº 1.059/2023 consolidou as regras de geração distribuída, incorporando-as dentro das Condições Gerais de Fornecimento regidas pela REN nº ____ /2021.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "1.000"
+        }
+      ],
+      "explanation": "As regras atualizadas de micro e minigeração pela Resolução 1.059 foram consolidadas na Resolução Normativa ANEEL nº 1.000/2021 (Micro e Minigeração Distribuída — Agência Nacional de Energia Elétrica - Portal Gov.br)."
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Coordenação e Seletividade",
+  "moduleSubtitle": "Estudo de coordenação - dados, metodologia, curvas e relatórios",
+  "moduleOrder": 2,
+  "trail": "Fundamentos de Estudos de Coordenação",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o objetivo principal da seletividade em um sistema de protecao eletrica?",
+      "options": [
+        "Desligar toda a planta industrial para evitar danos maiores aos geradores.",
+        "Maximizar o tempo de atuacao dos reles para garantir a extincao do arco.",
+        "Evitar que partes nao faltosas do sistema sejam desligadas indevidamente.",
+        "Eliminar a necessidade de disjuntores de baixa tensao e fusiveis ultrarapidos."
+      ],
+      "correctIndex": 2,
+      "explanation": "A seletividade garante que apenas as partes defeituosas do sistema sejam desligadas, preservando a estabilidade e continuidade do servico nas demais areas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual tipo de grafico e tradicionalmente utilizado para o estudo de coordenacao de dispositivos de protecao?",
+      "options": [
+        "Grafico linear de tensao versus impedancia nodais.",
+        "Grafico polar de admitancia e susceptancia concentrada.",
+        "Grafico exponencial de potencia ativa versus frequencia.",
+        "Grafico logaritmico de tempo versus corrente passante."
+      ],
+      "correctIndex": 3,
+      "explanation": "O processo de coordenar os dispositivos e feito visualmente com a ajuda de folhas em escala logaritmica nos eixos de tempo e corrente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na seletividade cronometrica de uma rede radial como se comportam as temporizacoes dos dispositivos de protecao?",
+      "options": [
+        "Sao tao longas quanto mais proximo o rele estiver da fonte.",
+        "Sao iguais para todos os dispositivos garantindo abertura simultanea.",
+        "Sao menores nos reles mais proximos a fonte para preservar a subestacao.",
+        "Dependem exclusivamente da classe de exatidao do transformador de potencial."
+      ],
+      "correctIndex": 0,
+      "explanation": "Na seletividade cronometrica as temporizacoes distribuídas ao longo da rede sao aplicadas de forma crescente, sendo mais longas quanto mais proximo da fonte.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em qual principio fisico basia-se predominantemente a seletividade amperimetrica?",
+      "options": [
+        "A tensao de arco constante e dissipada em qualquer ponto da rede radial.",
+        "A corrente de falha e menor quanto mais longe a falha ocorrer da fonte geradora.",
+        "A frequencia fundamental decai de forma proporcional a distancia do defeito.",
+        "A impedancia termica e inversamente proporcional ao valor das correntes assimetricas."
+      ],
+      "correctIndex": 1,
+      "explanation": "A seletividade amperimetrica baseia-se no principio de que, devido as impedancias dos trechos, a corrente de falha diminui a medida que a distancia da fonte aumenta.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e o principal inconveniente da seletividade puramente cronometrica em redes contendo muitos reles dispostos em cascata?",
+      "options": [
+        "A protecao amperimetrica anula a protecao cronometrica de retaguarda das maquinas sincronas ligadas a rede.",
+        "A coordenacao exige imperativamente a instalacao de malhas de fibra optica entre todos os reles eletromecanicos.",
+        "O tempo de atuacao do rele mais a montante sera muito grande e por vezes incompativel com a suportabilidade termica.",
+        "Os disjuntores de baixa tensao termomagneticos perdem imediatamente a capacidade de interrupcao assimetrica."
+      ],
+      "correctIndex": 2,
+      "explanation": "O acumulo de temporizacoes faz com que as faltas proximas a fonte demorem muito para serem eliminadas, colocando em risco a suportabilidade dos equipamentos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual e a principal vantagem da seletividade logica desenvolvida justamente para remediar os inconvenientes da seletividade cronometrica?",
+      "options": [
+        "Dispensa integralmente o uso de transformadores de corrente para aquisicao de sinais primarios.",
+        "Limita fisicamente e de forma autonoma a magnitude da corrente assimetrica do primeiro meio ciclo.",
+        "Utiliza apenas fusiveis limitadores descartaveis, dispensando totalmente o uso de disjuntores e reles.",
+        "O tempo de trip independe da posicao da falha na cascata de seletividade da instalacao."
+      ],
+      "correctIndex": 3,
+      "explanation": "Com a comunicacao logica entre reles, e possivel isolar o defeito rapidamente sem necessitar de longos retardos em cascata, independentemente do local da falha.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com os padroes normativos qual e o intervalo de coordenacao temporal tipicamente recomendado entre dois reles digitais consecutivos?",
+      "options": [
+        "Duzentos e cinquenta milissegundos de intervalo.",
+        "Entre cinco e dez milissegundos de intervalo.",
+        "Oitocentos e oitenta milissegundos de intervalo.",
+        "Zero virgula zero cinco segundos de intervalo."
+      ],
+      "correctIndex": 0,
+      "explanation": "As tabelas de intervalo de coordenacao determinam zero virgula vinte e cinco segundos para coordenacao rele digital a rele digital.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como e garantida essencialmente a seletividade operacional entre dois fusiveis limitadores dispostos em serie num ramal?",
+      "options": [
+        "O fusivel a montante deve possuir o triplo exato da classe de tensao nominal do fusivel alocado a jusante.",
+        "A relacao matematica entre as correntes nominais dos fusiveis deve ser sistematicamente maior que um virgula seis.",
+        "A curva de tempo de fusao do fusivel a jusante deve cruzar obrigatoriamente o tempo de arco total do fusivel a montante.",
+        "O tempo de abertura dinamica do disjuntor geral define linearmente a curva de corrente ao quadrado vezes tempo de operacao."
+      ],
+      "correctIndex": 1,
+      "explanation": "A coordenacao fusivel a fusivel e obtida garantindo que a razao das correntes nominais respeite fatores empiricos, como ser maior que um virgula seis.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a documentacao tecnica de estudos sistemicos caracteriza fundamentalmente como um compromisso de seletividade ou perda de seletividade?",
+      "options": [
+        "A insercao de uma falha franca e solida de alta impedancia usada apenas para testar fisicamente o desarme do disjuntor.",
+        "A instalacao emergencial de reles eletromecanicos obsoletos em substituicao transitoria a modernos reles microprocessados.",
+        "A situacao admitida e assumida na qual dois dispositivos de protecao em serie operam simultaneamente em caso de um defeito.",
+        "A atuacao indevida da protecao de retaguarda impedida pelo disparo previo coordenado da protecao diferencial restrita de barra."
+      ],
+      "correctIndex": 2,
+      "explanation": "Perder seletividade intencionalmente chama-se compromisso e ocorre quando a operacao simultanea de dois aparelhos e aceita por razoes fisicas, operativas ou economicas.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Por que os intervalos de coordenacao referentes a reles eletromecanicos antigos exigem um acrescimo tipico temporal de cerca de cem milissegundos.",
+      "options": [
+        "Para compensar a drastica perda de precisao dos transformadores de corrente submetidos a saturacao magnetica severa assimetrica.",
+        "Para garantir categoricamente que o mecanismo do disjuntor a vacuo acumule pressao mecanica suficiente na mola mestre de abertura rapida.",
+        "Para permitir que a unidade de subtensao capacitiva estabilize a leitura correta do afundamento transitorio gerado no barramento da malha.",
+        "Devido a inerente e incontrolavel inercia motriz do disco de inducao que continua girando momentaneamente apos a extincao eletrica da corrente."
+      ],
+      "correctIndex": 3,
+      "explanation": "O mecanismo fisico das partes moveis dos reles eletromecanicos introduz uma sobreviagem pela inercia, demandando maiores intervalos na margem de seguranca da coordenacao.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O requisito funcional denominado sensibilidade atrelado a um sistema de protecao assegura com eficacia que somente os devidos componentes.",
+      "correctAnswer": true,
+      "explanation": "A sensibilidade dita a acuidade da medicao para que apenas as partes genuinamente defeituosas do sistema sejam detectadas, viabilizando atuacoes corretas.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao realizar a dificil coordenacao entre um fusivel fixo a montante e um disjuntor a jusante as diretrizes exigem que a curva de tempo minimo de.",
+      "correctAnswer": false,
+      "explanation": "As regras de seletividade afirmam que a curva de tempo minimo de fusao do fusivel a montante deve ficar acima da parte superior da curva do disjuntor para que o disjuntor atue primeiro.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A tecnologia de seletividade puramente logica embute como forte desvantagem a exigencia de um tempo de trip final que resulta demasiadamente longo.",
+      "correctAnswer": false,
+      "explanation": "Isso descreve a desvantagem da seletividade cronometrica em redes radiais longas. A seletividade logica soluciona exatamente isto mantendo trips ultra curtos sem acumular tempos independentemente do local fisico do curto.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao confeccionar com precisao a coordenacao de curvas relativas as protecoes primarias de grandes motores a curva de protecao temporizada definida.",
+      "correctAnswer": true,
+      "explanation": "Para evitar desarmes equivocados (trip falso) na rotina de partidas pesadas em plena carga a folga entre a curva de acionamento relacional do rele e a curva termica de partida deve respeitar sempre uma boa margem.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um enorme inconveniente inerente e limitante na aplicacao sistemica em alta escala do esquema de seletividade logica trata se da obrigatoria.",
+      "correctAnswer": true,
+      "explanation": "Por se basear no bloqueio interdependente instantaneo para agilizar a limpeza a estrutura demanda custosa viabilizacao em cabeamento e fios piloto interligando subestacoes e reles em comunicacao rapida.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Levando em conta o arranjo sistemico primario constata se que eventuais falhas assimetricas ou francas que porventura ocorram nas criticas areas de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "defeito"
+        }
+      ],
+      "explanation": "A sobreposicao das zonas existe para garantir cobertura cega nula porem faz com que os limites invadidos impliquem atuacao conjunta das adjacencias seccionando mais pecas frente ao defeito comum.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para materializar os minuciosos relatorios em operacoes prediais e validar criterios o complexo processo pratico de se aplicar e efetivamente ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "logaritmica"
+        }
+      ],
+      "explanation": "O papel bilogaritmico abrange as elevadissimas magnitudes instantaneas em dezenas de kA em conformidade com infimas fracoes dimensionais de milissegundos sem perder precisao na elaboracao final das grades coordenativas.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Baseando se na rudimentar estrategia da seletividade unicamente baseada em incrementos fixos cronometricos instalados sucessivamente em redes ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "proximo"
+        }
+      ],
+      "explanation": "Para se assegurar as falhas distantes clivadas so pelas unidades termicas alocadas na ponta a protecao geral matriz disposta proxima ou muito perto dos trafos da utilidade tem de retardar enormemente os seus saltos de desligamento total.",
+      "difficulty": "hard"
+    }
+  ]
+}

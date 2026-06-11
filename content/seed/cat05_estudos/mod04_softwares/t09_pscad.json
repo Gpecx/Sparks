@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "",
+  "categoryOrder": 4,
+  "module": "Softwares de Estudos Elétricos",
+  "moduleSubtitle": "Ferramentas de analise de sistemas eletricos de potencia",
+  "moduleOrder": 3,
+  "trail": "PSCAD",
+  "trailOrder": 8,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "O que o motor de simulação EMTDC (usado primariamente pelo software PSCAD) faz fundamentalmente?",
+      "options": [
+        "Otimiza o fluxo de potência focado apenas no despacho econômico.",
+        "Representa e resolve equações diferenciais no domínio do tempo para sistemas eletromagnéticos e eletromecânicos.",
+        "Trabalha exclusivamente com variáveis de fasores para análises RMS estacionárias.",
+        "Realiza coordenação seletiva de relés em regime não-linear estático."
+      ],
+      "correctIndex": 1,
+      "explanation": "O EMTDC é um mecanismo de simulação que representa e resolve equações diferenciais (eletromagnéticas e eletromecânicas) instantaneamente no domínio do tempo. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Qual característica descreve a gestão do passo de integração (time step) na solução transitória do EMTDC?",
+      "options": [
+        "Varia continuamente para emular flutuações reais de frequência.",
+        "É gerado por um modelo estocástico de ruído elétrico.",
+        "É escolhido no início da simulação e permanece fixo (constante) durante todo o processo.",
+        "Depende da potência da placa de vídeo para ser acelerado a cada segundo."
+      ],
+      "correctIndex": 2,
+      "explanation": "O EMTDC é um simulador de passo de tempo fixo (fixed time step), onde o valor do passo é escolhido no início da simulação e permanece constante. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "easy",
+      "statement": "Para quais fenômenos a análise usando simulações do tipo EMT (como no PSCAD) é considerada ideal e requerida?",
+      "options": [
+        "Operações rápidas de chaveamento, curtos-circuitos e respostas a descargas atmosféricas (raios).",
+        "Apenas estudos de planejamento sazonal e expansão de infraestrutura.",
+        "Dimensionamento de suportes mecânicos para turbinas a vapor.",
+        "Medição estatística da variação tarifária da energia em 10 anos."
+      ],
+      "correctIndex": 0,
+      "explanation": "As simulações EMT capturam valores instantâneos de tensão e corrente, tornando-se ideais para fenômenos rápidos como operações de manobra, falhas e queda de raios. (Understanding EMT vs. RMS Simulations in Electrical Power Systems)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Como o algoritmo do EMTDC lida com operações dinâmicas de chaveamento que ocorrem exatamente entre dois passos de tempo discretos?",
+      "options": [
+        "Ignora a operação até que o sistema retorne a uma frequência estável.",
+        "Utiliza um algoritmo de Interpolação para encontrar o instante exato e agir no tempo quebrado, mantendo alta precisão.",
+        "Adiciona grandes capacitores fictícios para amortecer o transitório temporário.",
+        "Trava o sistema exigindo que o usuário reduza o passo de simulação imediatamente."
+      ],
+      "correctIndex": 1,
+      "explanation": "O EMTDC utiliza um algoritmo de Interpolação para operações de chaveamento que permite localizar o momento exato em que a transição ocorre entre os passos, obtendo resultados exatos sem diminuir drasticamente o time step. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "No PSCAD/EMTDC, qual técnica da arquitetura do programa aumenta a eficiência matemática ao processar grandes redes interligadas?",
+      "options": [
+        "Isola os controles em uma placa de processamento de hardware separada.",
+        "Divide a rede elétrica global em 'subsistemas' matematicamente independentes separados por linhas de transmissão de onda viajante.",
+        "Limita o modelo a esquemas equivalentes de sequencia zero puramente estáticos.",
+        "Remove transformadores das malhas, calculando a impedância em per-unit de maneira absoluta."
+      ],
+      "correctIndex": 1,
+      "explanation": "O EMTDC tira vantagem dos subsistemas (subsystems), já que circuitos elétricos divididos por linhas de atraso por tempo de onda (ondas viajantes) são resolvidos como matrizes independentes, aumentando o desempenho. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Na modelagem PSCAD de redes modernas VSC-HVDC, como são estruturados os conversores para atingir as altas tensões requisitadas (ex: 320 kV)?",
+      "options": [
+        "Somente com diodos em antiparalelo descontrolados interligados a reguladores buck-boost.",
+        "Acionando um único grande tiristor por fase e utilizando chaves mecânicas como auxiliares.",
+        "Conectando diversos submódulos em cascata criando uma ponte conversora Modular Multinível (MMC), com dezenas de níveis.",
+        "Criando links virtuais sem contato com o elo DC principal, apenas refletindo valores analíticos em RMS."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para elevar o patamar de tensão, utilizam-se os MMC (Modular Multilevel Converters), onde submódulos (como o tipo Half-bridge) são interligados em série (ex: 38 níveis) suportando as restrições da alta tensão nos IGBTs. (Implementação e validação de um sistema equivalente contemplando um elo VSC-HVDC tipo embutido na ferramenta Organon)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "medium",
+      "statement": "Qual algoritmo embutido no simulador EMTDC tem a importante função de purificar as ondas de simulação instáveis de alta frequência?",
+      "options": [
+        "Snubber Matrix Generator (para reduzir picos RLC).",
+        "Linear Regression Phase Corrector.",
+        "Apenas a limitação dura imposta nos componentes FACTS.",
+        "Chatter Removal algorithm (usado para remover oscilações numéricas indesejadas pós-interpolação)."
+      ],
+      "correctIndex": 3,
+      "explanation": "O EMTDC utiliza um algoritmo de Chatter Removal, estreitamente relacionado à rotina de interpolação numérica, cuja finalidade é atenuar e remover essas oscilações puramente numéricas das equações. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Para quem desenvolve modelos customizados (Custom Model Design) no código do PSCAD, em qual script segment é idealmente declarada as ações de controle que modificam dispositivos elétricos ANTES da rede ser solucionada em cada passo?",
+      "options": [
+        "Apenas no arquivo Data File gerado pelas bibliotecas visuais.",
+        "Dentro da seção DSOUT, aproveitando o momento pós-cálculo.",
+        "Diretamente no subsistema PI-Equivalente da aba Transmission Lines.",
+        "Dentro do segmento DSDYN, para que tais mudanças vigorem previamente à etapa da solução do circuito elétrico."
+      ],
+      "correctIndex": 3,
+      "explanation": "Variáveis que controlam equipamentos são otimizadas para ser inseridas na seção DSDYN, o que garante a sua atualização no mesmo time step, imediatamente antes da etapa onde o solver da rede atua. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "Em simulações detalhadas, a dependência de parâmetros com a frequência das linhas deve ser modelada. Qual modelo é apontado pela documentação atual do PSCAD como a escolha de excelência em termos de estabilidade e precisão para linhas não-simétricas?",
+      "options": [
+        "O modelo Frequency Dependent (Phase) Model.",
+        "O modelo de parâmetros concentrados de sequências unificadas.",
+        "O modelo empírico de Múltiplos Elementos PI-Bergeron.",
+        "O antigo Frequency Dependent (Mode) model oriundo das primeiras versões."
+      ],
+      "correctIndex": 0,
+      "explanation": "Para representar sistemas de condução complexos, desbalanceados e cabos em regime amplo, recomenda-se expressamente o Frequency Dependent (Phase) model, pois superou as restrições da sua versão precursora por modos. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)"
+    },
+    {
+      "type": "multipleChoice",
+      "difficulty": "hard",
+      "statement": "O que o algoritmo do núcleo central do simulador EMTDC faz com uma série de elementos passivos (ex: um ramo R, L e C em série) para aumentar a eficiência computacional de sua rede?",
+      "options": [
+        "Isola o capacitor para ser avaliado através da subrotina TACS separadamente.",
+        "Condensa-os ou 'colapsa-os' matematicamente fundindo os ramos paralelos/série passivos numa resistência e fonte de corrente equivalentes.",
+        "Triplica o número de matrizes jacobianas, calculando transições não lineares de forma bruta em todos os nós internos.",
+        "Exige que o usuário defina barras físicas manuais entre eles ou ocorrerá um erro de compilação Fortran."
+      ],
+      "correctIndex": 1,
+      "explanation": "No motor do EMTDC, ramos elétricos contendo muitos elementos (série ou paralelo) são fundidos/colapsados usando as equivalências, substituindo por uma única fonte de corrente e resistência virtual equivalente, o que livra a matriz G de nós desnecessários otimizando tempo de cálculo. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)"
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "A grande vantagem no uso do EMTDC provém de sua interface gráfica integrada (PSCAD), que permite desenhar os circuitos, gerenciar dados e rodar simulações rapidamente.",
+      "correctAnswer": true,
+      "explanation": "O poder do EMTDC é amplamente aprimorado pelo ambiente do PSCAD, uma interface gráfica de última geração que reduz o tempo de preparação e testes desenhando a rede de forma visual. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "easy",
+      "statement": "Na nova integração de matrizes renováveis, a modelagem via simulação RMS tem substituído inteiramente o EMT por ser mais precisa na captura das dinâmicas dos inversores.",
+      "correctAnswer": false,
+      "explanation": "Pelo contrário, exigências atuais demandam o uso de ferramentas EMT (como PSCAD) porque modelos RMS apresentam fortes limitações para representar detalhadamente as dinâmicas e controles dos inversores (IBRs). (Understanding EMT vs. RMS Simulations in Electrical Power Systems)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Para linhas longas (onde o atraso de propagação supera o passo de tempo), o método PI Equivalente é preferível ao método Bergeron no EMTDC, por impedir sobretensões em alta frequência.",
+      "correctAnswer": false,
+      "explanation": "Linhas onde o tempo da onda viajante supera o passo (tipicamente >15km para dT de 50µs) devem adotar o método Bergeron. O modelo PI em cascata pode introduzir ressonâncias artificiais prejudiciais em frequências altas. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "Ao utilizar o PSCAD para sistemas altamente não-lineares, os engenheiros podem usar arquivos de Snapshot para pular a inicialização lenta do zero e começar o transitório a partir de um regime permanente já estabilizado.",
+      "correctAnswer": true,
+      "explanation": "O recurso de inicialização através do Snapshot File é de extrema valia e muito rápido, sendo praticamente o único método factível para começar simulações já estabilizadas de eletrônica de potência e HVDC muito complexas. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "difficulty": "medium",
+      "statement": "A arquitetura do PSCAD é engessada, não permitindo que o usuário construa componentes ou algoritmos próprios na linguagem C ou Fortran.",
+      "correctAnswer": false,
+      "explanation": "O PSCAD tem a vasta flexibilidade de permitir aos usuários escreverem os seus próprios modelos e customizarem a lógica, aceitando facilmente algoritmos nas linguagens Fortran, C e MATLAB integrados ao EMTDC. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "easy",
+      "statement": "As simulações do tipo ____ resolvem equações diferenciais instantâneas e são as mais aptas para validar interações em equipamentos de alta resposta baseados em inversores.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "EMT"
+        }
+      ],
+      "explanation": "Simulações EMT (Electromagnetic Transients) oferecem modelagens precisas e detalhadas para analisar sistemas modernos caracterizados pela alta penetração de inversores e controles rápidos. (Understanding EMT vs. RMS Simulations in Electrical Power Systems)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "medium",
+      "statement": "Na simulação de VSC-HVDC, um dos blocos modulares mais estudados da biblioteca do PSCAD é o MMC constituído por células de meia ponte, tradicionalmente referido como ____-Bridge.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Half"
+        }
+      ],
+      "explanation": "Modelos como o MMC baseados em células tipo meia-ponte (Half-Bridge) representam o padrão extensivamente empregado e documentado nas bibliotecas de exemplo de projetos HVDC do PSCAD. (HVDC VSC transmission interconnecting two AC systems | PSCAD)"
+    },
+    {
+      "type": "fillBlank",
+      "difficulty": "hard",
+      "statement": "Para discretizar no domínio do tempo os componentes elétricos concentrados emulados (transformando reatâncias em sistemas equivalentes), o EMTDC se sustenta primariamente sobre a aproximação e integração do método ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "trapezoidal"
+        }
+      ],
+      "explanation": "A integração baseada na Regra Trapezoidal, originária dos fundamentos do programa EMTP/EMTDC na digitalização de indutores e capacitores em equações nodais a tempo fixo, é largamente documentada, sendo causadora de distúrbios aliviados pelo Chatter Removal. (USER'S GUIDE A Comprehensive Resource for EMTDC - PSCAD)"
+    }
+  ]
+}

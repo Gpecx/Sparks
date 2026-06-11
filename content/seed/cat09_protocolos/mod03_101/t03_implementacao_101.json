@@ -1,0 +1,218 @@
+{
+  "category": "Protocolos de Comunicação SPCS",
+  "categorySubtitle": "MODBUS, DNP3, IEC 60870, OPC-UA, IEC 61850, PTP e Cibersegurança",
+  "categoryOrder": 8,
+  "module": "IEC 60870-5-101",
+  "moduleSubtitle": "Telecontrol serial, ASDUs e IOAs",
+  "moduleOrder": 2,
+  "trail": "Implementação (ASDUs, IOAs)",
+  "trailOrder": 2,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "O que significa a sigla ASDU no padrao IEC 60870-5?",
+      "options": [
+        "Application Service Data Unit.",
+        "Application Serial Data Unit.",
+        "Asynchronous System Data Unit.",
+        "Applied Structure Data Unit."
+      ],
+      "correctIndex": 0,
+      "explanation": "No protocolo IEC 60870-5, ASDU significa Application Service Data Unit e contem as informacoes de dados uteis da aplicacao.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual campo da ASDU e utilizado para identificar inequivocamente o escravo que esta enviando os dados?",
+      "options": [
+        "IOA (Information Object Address).",
+        "CAA (Common Address of ASDU).",
+        "COT (Cause of Transmission).",
+        "VSQ (Variable Structure Qualifier)."
+      ],
+      "correctIndex": 1,
+      "explanation": "O campo CAA identifica o endereco comum da ASDU, ou seja, o escravo responsavel por emitir aqueles dados.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a funcao especifica do campo Type Identification (TI) no cabecalho da ASDU?",
+      "options": [
+        "Sinalizar exclusivamente a causa da transmissao dos dados.",
+        "Indicar o endereco de rede do roteador escravo.",
+        "Identificar o tipo de informacao transmitida, como ponto simples ou comando duplo.",
+        "Validar o checksum de redundancia do pacote inteiro."
+      ],
+      "correctIndex": 2,
+      "explanation": "O campo TI identifica a semantica do dado que esta sendo carregado, a exemplo de telessinalizacoes ou telecomandos.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O campo Cause of Transmission (COT) e utilizado na ASDU para qual finalidade principal?",
+      "options": [
+        "Apontar o endereco fisico do objeto supervisionado.",
+        "Determinar a sequencia ciclica dos pacotes na rede.",
+        "Indicar o tamanho total em bytes do quadro de telecontrole.",
+        "Identificar o motivo pelo qual o dado foi transmitido (ex: espontaneo ou interrogacao)."
+      ],
+      "correctIndex": 3,
+      "explanation": "O campo COT esclarece a justificativa do envio, informando se foi uma mudanca de estado espontanea, ciclica ou resposta a comando.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que representa o parametro IOA (Information Object Address) dentro da mensagem ASDU?",
+      "options": [
+        "O endereco especifico do ponto ou grandeza que esta sendo transmitido.",
+        "O identificador unificado do fabricante do rele de protecao.",
+        "O endereco de IP logico da estacao de controle (SCADA).",
+        "O endereco do broadcast serial no link RS-485."
+      ],
+      "correctIndex": 0,
+      "explanation": "O IOA vincula o valor reportado na ASDU a um ponto fisico ou logico especifico do equipamento escravo.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o campo VSQ (Variable Structure Qualifier) auxilia na interpretacao do bloco de dados da ASDU?",
+      "options": [
+        "Indica a prioridade de roteamento da mensagem no barramento de estacao.",
+        "Informa se os multiplos objetos reportados sao transmitidos de forma sequencial ou nao.",
+        "Bloqueia automaticamente a leitura de objetos corrompidos.",
+        "Calcula o atraso de sincronismo entre a subestacao e o mestre."
+      ],
+      "correctIndex": 1,
+      "explanation": "O VSQ define a estrutura dos dados sequentes, sinalizando (via flag SQ) se os enderecos IOA obedecem a uma ordem contigua ou isolada.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais qualificadores de qualidade padronizados podem ser anexados logo apos o IOA de um ponto na ASDU?",
+      "options": [
+        "High (HI), Low (LO) e Medium (ME).",
+        "Operative (OP) e Non-operative (NO).",
+        "Invalid (IV), Nao Atualizado (NT), Substituido (SB) e Bloqueado (BL).",
+        "Master (MA), Slave (SL) e Peer (PE)."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os qualificadores IV, NT, SB e BL avaliam e detalham o estado de saude operacional da grandeza medida.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na aplicacao pratica do protocolo, qual e o significado do valor de Causa de Transmissao (COT) equivalente a 14H (20 decimal)?",
+      "options": [
+        "Comando critico de abertura de disjuntor.",
+        "Aviso de estouro do buffer de eventos do escravo.",
+        "Injecao de evento espontaneo sem time-stamp.",
+        "Resposta de integridade (Interrogacao Geral)."
+      ],
+      "correctIndex": 3,
+      "explanation": "O valor 14H para a causa da transmissao identifica estritamente uma resposta aos pedidos de Integridade do mestre.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o Type Identification igual a 1 (TI 1) representa tecnicamente no mapeamento do protocolo IEC 60870-5?",
+      "options": [
+        "Entrada Digital Simples sem tempo (M_SP_NA_1).",
+        "Medida analogica normalizada em ponto flutuante.",
+        "Comando duplo com estampa de tempo longa.",
+        "Sinal de sincronismo de relogio absoluto."
+      ],
+      "correctIndex": 0,
+      "explanation": "O TI 1 classifica os dados contidos na ASDU como telessinalizacoes simples desprovidas de informacao de tempo.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao decodificar uma ASDU com TI=1, SQ=0, COT=14H e CAA=0F, qual a interpretacao correta a partir destes parametros?",
+      "options": [
+        "Uma mensagem espontanea e sequencial disparada pelo mestre 15.",
+        "Uma resposta de integridade com objetos nao sequenciais proveniente do escravo 15.",
+        "Um comando de controle bloqueado para o objeto no endereco 14.",
+        "Uma indicacao de falha de hardware grave no equipamento 14."
+      ],
+      "correctIndex": 1,
+      "explanation": "O TI=1 indica ponto simples, SQ=0 indica nao sequencial, COT=14H confirma resposta de integridade e CAA=0F e o ID decimal 15 do escravo.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A camada de aplicacao (ASDU) do protocolo IEC 60870-5-104 mantem exatamente a mesma estrutura padronizada adotada pelo modelo serial IEC 60870-5-101.",
+      "correctAnswer": true,
+      "explanation": "O IEC 104 estende o IEC 101 adaptando o transporte para TCP/IP, contudo preserva intacta a formacao da camada de aplicacao ASDU.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O qualificador de qualidade NT (Nao Atualizado) e usado pelo escravo para avisar ao SCADA que houve uma queima permanente na placa de aquisicao de.",
+      "correctAnswer": false,
+      "explanation": "A flag NT informa apenas que o dado nao sofreu atualizacao no ultimo ciclo interno de varredura, e nao atesta falha eletronica irrecuperavel.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A principal funcao do campo CAA e assegurar a identificacao univoca de qual estacao remota gerou as informacoes contidas no corpo da ASDU.",
+      "correctAnswer": true,
+      "explanation": "O Common Address of ASDU (CAA) aponta com clareza o enderecamento do escravo transmissor dos dados operacionais daquele pacote.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o envio de eventos, as sinalizacoes de qualidade (como Invalid e Blocked) sao declaradas no cabecalho APCI antes do escopo da ASDU.",
+      "correctAnswer": false,
+      "explanation": "Os qualificadores descritivos de qualidade operam intrinsecamente amarrados ao objeto de dados, sendo posicionados logo apos o IOA dentro do bloco da ASDU.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em uma ASDU operando com o qualificador de estrutura variavel ajustado para eventos nao sequenciais (SQ=0), torna-se obrigatoria a presenca do.",
+      "correctAnswer": true,
+      "explanation": "Quando SQ=0, os enderecos nao formam uma fila sequencial. Portanto, o protocolo requer a informacao do IOA antes de cada novo valor relatado.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O identificador numerico que mapeia de forma unica a grandeza fisica ou logica sendo transmitida no escravo e chamado de Information Object ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Address"
+        }
+      ],
+      "explanation": "O termo IOA deriva de Information Object Address, sendo a chave de indexacao do dado lido pelo telecontrole.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na mensagem designada como Entrada Digital Simples sem tempo (M_SP_NA_1), o identificador de tipo adotado possui o valor padrao TI igual a ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "1"
+        }
+      ],
+      "explanation": "O mapeamento nativo de ASDUs reserva o Type Identification (TI) de numero 1 para o tratamento de pontos digitais simples desprovidos de time-stamp.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O qualificador do protocolo responsavel por comunicar ao mestre que o valor recebido foi artificialmente forcado ou substituido e a flag ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SB"
+        }
+      ],
+      "explanation": "O qualificador SB (Substituted) sinaliza operacoes de by-pass ou substituicao artificial da grandeza original efetuadas localmente no nivel do escravo.",
+      "difficulty": "hard"
+    }
+  ]
+}

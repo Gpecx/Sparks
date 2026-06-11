@@ -1,0 +1,218 @@
+{
+  "category": "Estudos Elétricos",
+  "categorySubtitle": "Fluxo de Carga, Curto-Circuito, Coordenação, Softwares e Normas IEEE",
+  "categoryOrder": 4,
+  "module": "Fluxo de Carga",
+  "moduleSubtitle": "Conceitos, modelagem, métodos, OPF e contingências",
+  "moduleOrder": 0,
+  "trail": "Conceitos de Fluxo de Potência",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Quais grandezas são normalmente especificadas para uma barra de carga (tipo PQ) no fluxo de potência?",
+      "options": [
+        "Potência ativa (P) e potência reativa (Q).",
+        "Magnitude e ângulo da tensão.",
+        "Potência ativa e magnitude da tensão.",
+        "Potência reativa e ângulo da tensão."
+      ],
+      "correctIndex": 0,
+      "explanation": "Nas barras de carga, a demanda de potência ativa (P) e reativa (Q) é especificada de forma independente das tensões na barra.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a principal função da barra de balanço (swing bus) no estudo de fluxo de carga?",
+      "options": [
+        "Regular as distorções harmônicas do sistema elétrico.",
+        "Fornecer a potência para suprir as perdas de MW e Mvar não contabilizadas.",
+        "Monitorar e limitar a corrente de curto-circuito.",
+        "Isolar os geradores principais em caso de falhas na rede."
+      ],
+      "correctIndex": 1,
+      "explanation": "A barra swing (ou de referência) ajusta livremente a sua potência para suprir as perdas de transmissão que não são conhecidas previamente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais grandezas são especificadas (mantidas constantes) na configuração de uma barra de geração (tipo PV)?",
+      "options": [
+        "Potência reativa (Q) e ângulo da tensão.",
+        "Magnitude (|V|) e ângulo da tensão (δ).",
+        "Magnitude da tensão (|V|) e potência ativa (P).",
+        "Potência ativa (P) e potência reativa (Q)."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para geradores, especifica-se P e |V|, pois o regulador de velocidade controla P e a excitação controla |V|.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a equação matricial linear que relaciona correntes, admitâncias e tensões na formulação do fluxo de carga?",
+      "options": [
+        "[V] = [Z][I]",
+        "[S] = [V][I]",
+        "[P] = [J][V]",
+        "[I] = [Y][V]"
+      ],
+      "correctIndex": 3,
+      "explanation": "A equação fundamental da rede é [I] = [Y][V], onde [Y] é a matriz de admitância do sistema.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como os sistemas elétricos são representados nos estudos clássicos de fluxo de carga em regime permanente?",
+      "options": [
+        "Modelo monofásico contendo apenas a sequência positiva.",
+        "Modelo monofásico focado nas componentes de sequência zero.",
+        "Modelo trifásico desequilibrado e dinâmico.",
+        "Modelo em malha fechada de sequência negativa."
+      ],
+      "correctIndex": 0,
+      "explanation": "Por tratar-se de uma operação equilibrada e em regime permanente, utiliza-se um modelo monofásico de sequência positiva.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que ocorre na simulação de fluxo de carga se a saída de potência reativa (Q) de um gerador atingir seu limite máximo?",
+      "options": [
+        "A tensão da barra é mantida constante e a potência ativa é reduzida.",
+        "A potência reativa é fixada no limite e a tensão da barra passa a variar livremente.",
+        "A barra passa a atuar imediatamente como uma barra swing.",
+        "O gerador é desconectado automaticamente da rede."
+      ],
+      "correctIndex": 1,
+      "explanation": "Se o limite Mvar é atingido, o valor Q é retido nesse limite e a especificação de manter a tensão constante é suspensa.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são os dois métodos iterativos fundamentais mais amplamente aplicados na solução do fluxo de carga?",
+      "options": [
+        "Método de Euler e Algoritmo de Runge-Kutta.",
+        "Redução de Kron e Componentes Simétricas.",
+        "Método de Gauss-Seidel e Newton-Raphson.",
+        "Teorema de Thévenin e Teorema de Norton."
+      ],
+      "correctIndex": 2,
+      "explanation": "Os métodos de Gauss-Seidel e Newton-Raphson são as técnicas iterativas básicas mais usadas e conhecidas na indústria.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na formação da matriz de admitância nodal (Ybus), como são definidos os termos fora da diagonal principal (Yij)?",
+      "options": [
+        "O inverso da corrente total que flui entre as barras i e j.",
+        "O negativo da admitância da linha conectando as barras i e j.",
+        "A soma das impedâncias de todas as linhas radiais da barra.",
+        "O quadrado da impedância mútua de sequência zero entre as barras."
+      ],
+      "correctIndex": 1,
+      "explanation": "Os termos fora da diagonal Yij correspondem ao negativo da admitância do ramo entre a barra i e a barra j.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual observação elétrica do sistema de potência fundamenta o método desacoplado de Newton-Raphson?",
+      "options": [
+        "O fluxo de potência reativa independe totalmente das reatâncias da linha.",
+        "A potência ativa e reativa variam exponencialmente com a frequência da rede.",
+        "A matriz Jacobiana é sempre perfeitamente simétrica e não possui zeros.",
+        "Pequenas variações na magnitude da tensão afetam pouco a potência ativa (P)."
+      ],
+      "correctIndex": 3,
+      "explanation": "O método baseia-se no fato de que uma pequena mudança na magnitude da tensão não altera significativamente a potência ativa.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No método de Newton-Raphson aplicado ao fluxo de potência, qual o papel da matriz Jacobiana [J]?",
+      "options": [
+        "Conter as derivadas parciais da potência em relação às magnitudes e aos ângulos de tensão.",
+        "Inverter a matriz de impedância de sequência zero para equilibrar a rede.",
+        "Mapear as correntes subtransitórias durante simulações no primeiro ciclo.",
+        "Acoplar as equações diferenciais dos reguladores e excitadores dos geradores."
+      ],
+      "correctIndex": 0,
+      "explanation": "A matriz Jacobiana abriga as derivadas parciais da potência real e reativa em relação às variações das tensões (magnitudes e ângulos).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O estudo de fluxo de carga permite determinar a tensão, a corrente e as potências ativas e reativas do sistema em regime permanente.",
+      "correctAnswer": true,
+      "explanation": "Essas são exatamente as grandezas determinadas na análise das condições normais de regime estacionário (steady-state).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na modelagem do sistema de potência, a matriz de admitância de barra (Ybus) é tipicamente uma matriz densa, possuindo poucos elementos nulos.",
+      "correctAnswer": false,
+      "explanation": "Ao contrário, a matriz Ybus é caracterizada por ser altamente esparsa, pois a maioria das barras se conecta apenas a poucas outras.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em uma barra de balanço (swing bus), os parâmetros especificados inicialmente são a magnitude da tensão e o seu ângulo, que servem de referência.",
+      "correctAnswer": true,
+      "explanation": "O swing bus detém magnitude (|V|) e ângulo (δ) especificados, garantindo a referência angular necessária para a solução.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O erro de potência (mismatch) é um critério de convergência que avalia a diferença entre a potência especificada e a calculada nas barras.",
+      "correctAnswer": true,
+      "explanation": "O 'power mismatch' avalia o quão próximas as tensões computadas estão da solução exata verificando o balanço de potência.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em fluxos de carga rotineiros, os motores de indução são modelados considerando suas reatâncias de sequência negativa devido aos desequilíbrios.",
+      "correctAnswer": false,
+      "explanation": "Por assumir-se uma operação equilibrada de regime permanente, o fluxo de carga utiliza apenas o modelo da sequência positiva.",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O barramento que não possui potência real ou reativa fixa, atuando para fornecer todas as perdas do sistema, é denominado barra de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "swing"
+        }
+      ],
+      "explanation": "A barra 'swing', 'slack' ou de 'referência' permite ajustar livremente a energia para cobrir as perdas ativas e reativas da rede.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No cálculo dos termos da diagonal de Ybus, além das admitâncias das linhas conectadas e shunts, adiciona-se metade da admitância de ____ de cada.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "carregamento"
+        }
+      ],
+      "explanation": "Os termos diagonais reúnem as admitâncias conectadas ao nó, incluindo metade da susceptância ou admitância de carregamento (charging) da linha.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O método de Newton-Raphson utiliza uma matriz de derivadas parciais denominada matriz ____ para estimar as correções de tensão da rede.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "Jacobiana"
+        }
+      ],
+      "explanation": "A matriz Jacobiana relaciona as pequenas mudanças na potência com as variações necessárias nos ângulos e nas magnitudes de tensão.",
+      "difficulty": "hard"
+    }
+  ]
+}

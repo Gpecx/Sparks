@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -143,6 +144,38 @@ class AdminDialogs {
     );
   }
 
+  static Future<void> showBulkImportJSON(BuildContext context, WidgetRef ref) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => _BulkJSONImportDialog(ref: ref),
+    );
+  }
+
+  static Future<void> showImportEbook(BuildContext context, WidgetRef ref) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (ctx) => _EbookImportDialog(ref: ref),
+    );
+  }
+
+  static Future<void> showBulkImportEbooks(BuildContext context, WidgetRef ref) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => _BulkEbookImportDialog(ref: ref),
+    );
+  }
+
+  static Future<void> showDeleteAllContent(BuildContext context, WidgetRef ref) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => _DeleteAllContentDialog(ref: ref),
+    );
+  }
+
   static Future<void> showConfirmDelete({
     required BuildContext context,
     required String title,
@@ -257,11 +290,37 @@ class _JSONImportDialogState extends State<_JSONImportDialog> {
 
   bool _isSaving = false;
   String? _errorMsg;
+  String? _loadedFileName;
 
   @override
   void dispose() {
     _jsonCtrl.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      withData: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+    final bytes = result.files.first.bytes;
+    if (bytes == null) {
+      setState(() => _errorMsg = 'Não foi possível ler o arquivo.');
+      return;
+    }
+    try {
+      final raw = utf8.decode(bytes);
+      jsonDecode(raw);
+      setState(() {
+        _jsonCtrl.text = raw;
+        _loadedFileName = result.files.first.name;
+        _errorMsg = null;
+      });
+    } catch (e) {
+      setState(() => _errorMsg = 'Arquivo JSON inválido: $e');
+    }
   }
 
   Future<void> _submit() async {
@@ -430,15 +489,51 @@ class _JSONImportDialogState extends State<_JSONImportDialog> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text(
-                      'CONTEÚDO JSON',
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                      ),
+                    Row(
+                      children: [
+                        const Text(
+                          'CONTEÚDO JSON',
+                          style: TextStyle(
+                            color: AppColors.primary,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        const Spacer(),
+                        OutlinedButton.icon(
+                          onPressed: _isSaving ? null : _pickFile,
+                          icon: const Icon(Icons.folder_open, size: 16),
+                          label: const Text('SELECIONAR ARQUIVO .JSON'),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.primary,
+                            side: const BorderSide(color: AppColors.primary),
+                            textStyle: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.8,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                          ),
+                        ),
+                      ],
                     ),
+                    if (_loadedFileName != null) ...[
+                      const SizedBox(height: 6),
+                      Row(
+                        children: [
+                          const Icon(Icons.check_circle,
+                              color: Colors.green, size: 14),
+                          const SizedBox(width: 6),
+                          Text(
+                            'Arquivo carregado: $_loadedFileName',
+                            style: const TextStyle(
+                                color: Colors.green, fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ],
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _jsonCtrl,
@@ -450,7 +545,7 @@ class _JSONImportDialogState extends State<_JSONImportDialog> {
                       ),
                       decoration: InputDecoration(
                         fillColor: AppColors.card.withValues(alpha: 0.5),
-                        hintText: '{\n  "category": "...",\n  "module": "...",\n  "trail": "...",\n  "questions": [...]\n}',
+                        hintText: 'Cole o JSON aqui ou clique em SELECIONAR ARQUIVO acima\n\n{\n  "category": "...",\n  "module": "...",\n  "trail": "...",\n  "questions": [...]\n}',
                       ),
                       validator: (v) =>
                           (v == null || v.trim().isEmpty) ? 'Obrigatório' : null,
@@ -890,6 +985,894 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ─── BULK JSON IMPORT DIALOG ─────────────────────────────────────────────────
+class _BulkJSONImportDialog extends StatefulWidget {
+  final WidgetRef ref;
+  const _BulkJSONImportDialog({required this.ref});
+
+  @override
+  State<_BulkJSONImportDialog> createState() => _BulkJSONImportDialogState();
+}
+
+class _BulkJSONImportDialogState extends State<_BulkJSONImportDialog> {
+  _Phase _phase = _Phase.idle;
+  int _done = 0;
+  int _total = 0;
+  int _success = 0;
+  int _failed = 0;
+  String? _errorMsg;
+
+  Future<void> _pickAndImport() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      withData: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+
+    final bytes = result.files.first.bytes;
+    if (bytes == null) {
+      setState(() => _errorMsg = 'Não foi possível ler o arquivo.');
+      return;
+    }
+
+    List<dynamic> jsonList;
+    try {
+      final raw = utf8.decode(bytes);
+      jsonList = jsonDecode(raw) as List<dynamic>;
+    } catch (e) {
+      setState(() => _errorMsg = 'Arquivo inválido: $e');
+      return;
+    }
+
+    setState(() {
+      _phase = _Phase.loading;
+      _total = jsonList.length;
+      _done = 0;
+      _success = 0;
+      _failed = 0;
+      _errorMsg = null;
+    });
+
+    final counts = await widget.ref
+        .read(adminControllerProvider.notifier)
+        .importBulkFromJSON(
+          jsonList,
+          onProgress: (done, total) {
+            if (mounted) setState(() => _done = done);
+          },
+        );
+
+    if (mounted) {
+      setState(() {
+        _phase = _Phase.done;
+        _success = counts['success'] ?? 0;
+        _failed = counts['failed'] ?? 0;
+      });
+    }
+  }
+
+  Future<void> _pickMultipleAndImport() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      withData: true,
+      allowMultiple: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+
+    final List<dynamic> jsonList = [];
+    final List<String> parseErrors = [];
+
+    for (final file in result.files) {
+      final bytes = file.bytes;
+      if (bytes == null) {
+        parseErrors.add('${file.name}: bytes nulos');
+        continue;
+      }
+      try {
+        final raw = utf8.decode(bytes);
+        final parsed = jsonDecode(raw);
+        if (parsed is Map<String, dynamic>) {
+          jsonList.add(parsed);
+        } else if (parsed is List) {
+          jsonList.addAll(parsed);
+        } else {
+          parseErrors.add('${file.name}: formato não suportado');
+        }
+      } catch (e) {
+        parseErrors.add('${file.name}: $e');
+      }
+    }
+
+    if (jsonList.isEmpty) {
+      setState(() => _errorMsg =
+          'Nenhum arquivo válido. Erros:\n${parseErrors.take(3).join("\n")}');
+      return;
+    }
+
+    setState(() {
+      _phase = _Phase.loading;
+      _total = jsonList.length;
+      _done = 0;
+      _success = 0;
+      _failed = 0;
+      _errorMsg = null;
+    });
+
+    final counts = await widget.ref
+        .read(adminControllerProvider.notifier)
+        .importBulkFromJSON(
+          jsonList,
+          onProgress: (done, total) {
+            if (mounted) setState(() => _done = done);
+          },
+        );
+
+    if (mounted) {
+      setState(() {
+        _phase = _Phase.done;
+        _success = counts['success'] ?? 0;
+        _failed = (counts['failed'] ?? 0) + parseErrors.length;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: AppColors.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 480),
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.upload_file, color: AppColors.primary, size: 26),
+                  ),
+                  const SizedBox(width: 16),
+                  const Expanded(
+                    child: Text(
+                      'Importação em Massa',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  if (_phase != _Phase.loading)
+                    IconButton(
+                      icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                      onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 28),
+              if (_phase == _Phase.idle) ...[
+                const Text(
+                  'Escolha uma das opções:\n• Arquivo único: all_trails.json (array)\n• Múltiplos arquivos: vários .json de uma vez (Ctrl+clique)',
+                  style: TextStyle(color: AppColors.textSecondary, height: 1.5),
+                  textAlign: TextAlign.center,
+                ),
+                if (_errorMsg != null) ...[
+                  const SizedBox(height: 12),
+                  Text(_errorMsg!, style: const TextStyle(color: AppColors.error, fontSize: 13)),
+                ],
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    icon: const Icon(Icons.folder_copy),
+                    label: const Text('SELECIONAR MÚLTIPLOS ARQUIVOS .JSON'),
+                    onPressed: _pickMultipleAndImport,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    icon: const Icon(Icons.folder_open),
+                    label: const Text('SELECIONAR all_trails.json (array)'),
+                    onPressed: _pickAndImport,
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.primary,
+                      side: const BorderSide(color: AppColors.primary),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+              ] else if (_phase == _Phase.loading) ...[
+                Text(
+                  'Importando trilhas...',
+                  style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 15),
+                ),
+                const SizedBox(height: 16),
+                LinearProgressIndicator(
+                  value: _total > 0 ? _done / _total : 0,
+                  backgroundColor: AppColors.card,
+                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  minHeight: 8,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  '$_done / $_total',
+                  style: const TextStyle(
+                    color: AppColors.primary,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ] else ...[
+                Icon(
+                  _failed == 0 ? Icons.check_circle : Icons.warning_amber_rounded,
+                  color: _failed == 0 ? Colors.green : AppColors.orange,
+                  size: 52,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _failed == 0 ? 'Importação concluída!' : 'Importação com erros',
+                  style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                _statRow(Icons.check, '$_success trilhas importadas', Colors.green),
+                if (_failed > 0) ...[
+                  const SizedBox(height: 6),
+                  _statRow(Icons.close, '$_failed com erro', AppColors.error),
+                ],
+                const SizedBox(height: 28),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('FECHAR'),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _statRow(IconData icon, String label, Color color) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color, size: 18),
+        const SizedBox(width: 8),
+        Text(label, style: TextStyle(color: color, fontSize: 14)),
+      ],
+    );
+  }
+}
+
+enum _Phase { idle, loading, done }
+
+// ─── EBOOK IMPORT DIALOG ─────────────────────────────────────────────────────
+class _EbookImportDialog extends StatefulWidget {
+  final WidgetRef ref;
+  const _EbookImportDialog({required this.ref});
+
+  @override
+  State<_EbookImportDialog> createState() => _EbookImportDialogState();
+}
+
+class _EbookImportDialogState extends State<_EbookImportDialog> {
+  final _jsonCtrl = TextEditingController();
+  bool _isLoading = false;
+  String? _errorMsg;
+
+  @override
+  void dispose() {
+    _jsonCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pickFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      withData: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+    final bytes = result.files.first.bytes;
+    if (bytes == null) {
+      setState(() => _errorMsg = 'Não foi possível ler o arquivo.');
+      return;
+    }
+    try {
+      _jsonCtrl.text = utf8.decode(bytes);
+      setState(() => _errorMsg = null);
+    } catch (e) {
+      setState(() => _errorMsg = 'Arquivo inválido: $e');
+    }
+  }
+
+  Future<void> _import() async {
+    final raw = _jsonCtrl.text.trim();
+    if (raw.isEmpty) {
+      setState(() => _errorMsg = 'Cole ou selecione um arquivo JSON.');
+      return;
+    }
+    Map<String, dynamic> jsonMap;
+    try {
+      jsonMap = jsonDecode(raw) as Map<String, dynamic>;
+    } catch (e) {
+      setState(() => _errorMsg = 'JSON inválido: $e');
+      return;
+    }
+    setState(() { _isLoading = true; _errorMsg = null; });
+    try {
+      final ok = await widget.ref
+          .read(adminControllerProvider.notifier)
+          .importEbookFromJSON(jsonMap);
+      if (!mounted) return;
+      if (ok) {
+        Navigator.of(context, rootNavigator: true).pop();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('E-book importado com sucesso!')),
+        );
+      } else {
+        final err = widget.ref.read(adminControllerProvider).errorMessage;
+        setState(() => _errorMsg = err ?? 'Erro desconhecido ao importar e-book');
+      }
+    } catch (e) {
+      if (mounted) setState(() => _errorMsg = 'Erro: $e');
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: AppColors.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 520, maxHeight: 640),
+        child: Padding(
+          padding: const EdgeInsets.all(28),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF2DD4BF).withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(Icons.menu_book, color: Color(0xFF2DD4BF), size: 24),
+                  ),
+                  const SizedBox(width: 14),
+                  const Expanded(
+                    child: Text(
+                      'Importar E-book',
+                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                    onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                'Cole o JSON gerado pela Edu E-booker ou selecione o arquivo ebook_*.json.',
+                style: TextStyle(color: AppColors.textSecondary, fontSize: 13, height: 1.4),
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: TextField(
+                  controller: _jsonCtrl,
+                  maxLines: null,
+                  expands: true,
+                  style: const TextStyle(color: AppColors.textPrimary, fontSize: 12, fontFamily: 'monospace'),
+                  decoration: InputDecoration(
+                    hintText: '{\n  "category": "...",\n  "module": "...",\n  "ebookTitle": "...",\n  "sections": [...]\n}',
+                    hintStyle: const TextStyle(color: AppColors.textMuted, fontSize: 11),
+                    alignLabelWithHint: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: AppColors.cardBorder),
+                    ),
+                  ),
+                ),
+              ),
+              if (_errorMsg != null) ...[
+                const SizedBox(height: 8),
+                Text(_errorMsg!, style: const TextStyle(color: AppColors.error, fontSize: 12)),
+              ],
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: _isLoading ? null : _pickFile,
+                    icon: const Icon(Icons.folder_open, size: 18),
+                    label: const Text('SELECIONAR ARQUIVO'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.textSecondary,
+                      side: const BorderSide(color: AppColors.cardBorder),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: _isLoading ? null : _import,
+                      icon: _isLoading
+                          ? const SizedBox(
+                              width: 16, height: 16,
+                              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                            )
+                          : const Icon(Icons.upload, size: 18),
+                      label: Text(_isLoading ? 'IMPORTANDO...' : 'IMPORTAR'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF2DD4BF),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ─── BULK EBOOK IMPORT DIALOG ────────────────────────────────────────────────
+class _BulkEbookImportDialog extends StatefulWidget {
+  final WidgetRef ref;
+  const _BulkEbookImportDialog({required this.ref});
+
+  @override
+  State<_BulkEbookImportDialog> createState() => _BulkEbookImportDialogState();
+}
+
+class _BulkEbookImportDialogState extends State<_BulkEbookImportDialog> {
+  _Phase _phase = _Phase.idle;
+  int _done = 0;
+  int _total = 0;
+  int _success = 0;
+  int _failed = 0;
+  String? _errorMsg;
+
+  Future<void> _pickAndImport() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      withData: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+
+    final bytes = result.files.first.bytes;
+    if (bytes == null) {
+      setState(() => _errorMsg = 'Não foi possível ler o arquivo.');
+      return;
+    }
+
+    List<dynamic> jsonList;
+    try {
+      final raw = utf8.decode(bytes);
+      jsonList = jsonDecode(raw) as List<dynamic>;
+    } catch (e) {
+      setState(() => _errorMsg = 'Arquivo inválido (esperado um array de e-books): $e');
+      return;
+    }
+
+    setState(() {
+      _phase = _Phase.loading;
+      _total = jsonList.length;
+      _done = 0;
+      _success = 0;
+      _failed = 0;
+      _errorMsg = null;
+    });
+
+    final counts = await widget.ref
+        .read(adminControllerProvider.notifier)
+        .importBulkEbooksFromJSON(
+          jsonList,
+          onProgress: (done, total) {
+            if (mounted) setState(() => _done = done);
+          },
+        );
+
+    if (mounted) {
+      setState(() {
+        _phase = _Phase.done;
+        _success = counts['success'] ?? 0;
+        _failed = counts['failed'] ?? 0;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: AppColors.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 480),
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF2DD4BF).withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.library_books, color: Color(0xFF2DD4BF), size: 26),
+                  ),
+                  const SizedBox(width: 16),
+                  const Expanded(
+                    child: Text(
+                      'Importar E-books em Massa',
+                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  if (_phase != _Phase.loading)
+                    IconButton(
+                      icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                      onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 28),
+              if (_phase == _Phase.idle) ...[
+                const Text(
+                  'Selecione o arquivo all_ebooks.json com todos os e-books.',
+                  style: TextStyle(color: AppColors.textSecondary, height: 1.5),
+                  textAlign: TextAlign.center,
+                ),
+                if (_errorMsg != null) ...[
+                  const SizedBox(height: 12),
+                  Text(_errorMsg!, style: const TextStyle(color: AppColors.error, fontSize: 13)),
+                ],
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    icon: const Icon(Icons.folder_open),
+                    label: const Text('SELECIONAR all_ebooks.json'),
+                    onPressed: _pickAndImport,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF2DD4BF),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+              ] else if (_phase == _Phase.loading) ...[
+                Text(
+                  'Importando e-books...',
+                  style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 15),
+                ),
+                const SizedBox(height: 16),
+                LinearProgressIndicator(
+                  value: _total > 0 ? _done / _total : 0,
+                  backgroundColor: AppColors.card,
+                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF2DD4BF)),
+                  minHeight: 8,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  '$_done / $_total',
+                  style: const TextStyle(color: Color(0xFF2DD4BF), fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+              ] else ...[
+                Icon(
+                  _failed == 0 ? Icons.check_circle : Icons.warning_amber_rounded,
+                  color: _failed == 0 ? Colors.green : AppColors.orange,
+                  size: 52,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _failed == 0 ? 'Importação concluída!' : 'Importação com erros',
+                  style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                _statRow(Icons.check, '$_success e-books importados', Colors.green),
+                if (_failed > 0) ...[
+                  const SizedBox(height: 6),
+                  _statRow(Icons.close, '$_failed com erro', AppColors.error),
+                ],
+                const SizedBox(height: 28),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF2DD4BF),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('FECHAR'),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _statRow(IconData icon, String label, Color color) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color, size: 18),
+        const SizedBox(width: 8),
+        Text(label, style: TextStyle(color: color, fontSize: 14)),
+      ],
+    );
+  }
+}
+
+// ─── DELETE ALL CONTENT DIALOG ───────────────────────────────────────────────
+class _DeleteAllContentDialog extends StatefulWidget {
+  final WidgetRef ref;
+  const _DeleteAllContentDialog({required this.ref});
+
+  @override
+  State<_DeleteAllContentDialog> createState() => _DeleteAllContentDialogState();
+}
+
+class _DeleteAllContentDialogState extends State<_DeleteAllContentDialog> {
+  _Phase _phase = _Phase.idle;
+  int _done = 0;
+  int _total = 0;
+  int _success = 0;
+  int _failed = 0;
+  final _confirmCtrl = TextEditingController();
+
+  @override
+  void dispose() {
+    _confirmCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _execute() async {
+    setState(() => _phase = _Phase.loading);
+    final counts = await widget.ref
+        .read(adminControllerProvider.notifier)
+        .deleteAllContent(
+          onProgress: (done, total) {
+            if (mounted) {
+              setState(() {
+                _done = done;
+                _total = total;
+              });
+            }
+          },
+        );
+    if (mounted) {
+      setState(() {
+        _phase = _Phase.done;
+        _success = counts['success'] ?? 0;
+        _failed = counts['failed'] ?? 0;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final canConfirm = _confirmCtrl.text.trim().toUpperCase() == 'LIMPAR';
+    return Dialog(
+      backgroundColor: AppColors.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 480),
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.error.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.warning_amber_rounded,
+                        color: AppColors.error, size: 26),
+                  ),
+                  const SizedBox(width: 16),
+                  const Expanded(
+                    child: Text(
+                      'Limpar Todo o Conteúdo',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  if (_phase != _Phase.loading)
+                    IconButton(
+                      icon: const Icon(Icons.close,
+                          color: AppColors.textSecondary),
+                      onPressed: () =>
+                          Navigator.of(context, rootNavigator: true).pop(),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              if (_phase == _Phase.idle) ...[
+                const Text(
+                  'Esta ação remove TODAS as categorias, módulos, trilhas, lições e questões do Firestore. Esta operação NÃO PODE ser desfeita.',
+                  style: TextStyle(
+                      color: AppColors.textSecondary,
+                      height: 1.5,
+                      fontSize: 14),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Digite LIMPAR para confirmar:',
+                  style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+                ),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: _confirmCtrl,
+                  onChanged: (_) => setState(() {}),
+                  style: const TextStyle(color: AppColors.textPrimary),
+                  decoration: InputDecoration(
+                    hintText: 'LIMPAR',
+                    filled: true,
+                    fillColor: AppColors.card,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () =>
+                            Navigator.of(context, rootNavigator: true).pop(),
+                        child: const Text('CANCELAR',
+                            style:
+                                TextStyle(color: AppColors.textSecondary)),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: canConfirm ? _execute : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.error,
+                          foregroundColor: Colors.white,
+                          padding:
+                              const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
+                        child: const Text('LIMPAR TUDO'),
+                      ),
+                    ),
+                  ],
+                ),
+              ] else if (_phase == _Phase.loading) ...[
+                Text(
+                  'Removendo categorias...',
+                  style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.85),
+                      fontSize: 15),
+                ),
+                const SizedBox(height: 16),
+                LinearProgressIndicator(
+                  value: _total > 0 ? _done / _total : 0,
+                  backgroundColor: AppColors.card,
+                  valueColor:
+                      const AlwaysStoppedAnimation<Color>(AppColors.error),
+                  minHeight: 8,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  '$_done / $_total',
+                  style: const TextStyle(
+                      color: AppColors.error,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+              ] else ...[
+                Icon(
+                  _failed == 0
+                      ? Icons.check_circle
+                      : Icons.warning_amber_rounded,
+                  color: _failed == 0 ? Colors.green : AppColors.orange,
+                  size: 52,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _failed == 0
+                      ? 'Limpeza concluída!'
+                      : 'Limpeza com erros',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                Text('$_success categorias removidas',
+                    style: const TextStyle(
+                        color: Colors.green, fontSize: 14)),
+                if (_failed > 0)
+                  Text('$_failed com erro',
+                      style: const TextStyle(
+                          color: AppColors.error, fontSize: 14)),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () =>
+                        Navigator.of(context, rootNavigator: true).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    child: const Text('FECHAR'),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
       ),
     );
   }

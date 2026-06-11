@@ -1,0 +1,169 @@
+{
+  "category": "Equipamentos SPCS",
+  "categorySubtitle": "Auxiliares, Rede, Relés, RDPs, Controle, HMI-SCADA, MUs e Monitoramento",
+  "categoryOrder": 6,
+  "module": "Registradores Digitais de Perturbação",
+  "moduleSubtitle": "RDP, oscilografia, COMTRADE e análise de perturbações",
+  "moduleOrder": 3,
+  "ebookTitle": "Registradores Digitais de Perturbação (RDP)",
+  "ebookSubtitle": "Oscilografia, COMTRADE e a análise forense de faltas e atuações de proteção",
+  "estimatedMinutes": 55,
+  "trailFiles": [
+    "t01_fundamentos_rdp.json",
+    "t02_aplicacoes_rdp.json",
+    "t03_implementacao_rdp.json"
+  ],
+  "chapters": [
+    {
+      "id": "c01",
+      "order": 0,
+      "title": "Capítulo 1 — O que é um RDP e por que é Indispensável",
+      "subtitle": "A caixa-preta do sistema elétrico",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "A função do RDP",
+          "type": "text",
+          "body": "O Registrador Digital de Perturbação (RDP) é o equivalente à 'caixa-preta' de um avião para o sistema elétrico: ele registra continuamente as formas de onda de tensão e corrente e o estado dos sinais digitais, e armazena os instantes que cercam uma perturbação (falta, atuação de proteção, manobra). Quando algo acontece, o RDP preserva o registro exato do evento — permitindo reconstruir, depois, o que de fato ocorreu. Sem RDP, a análise de um evento dependeria de suposições; com ele, há evidência objetiva."
+        },
+        {
+          "id": "s2",
+          "title": "RDP dedicado vs. oscilografia em IEDs",
+          "type": "text",
+          "body": "Há duas fontes de registro: o RDP dedicado (um equipamento independente, com muitos canais, alta taxa de amostragem e longa duração de registro, que monitora toda a subestação) e a oscilografia embutida nos próprios relés/IEDs (que registra os sinais que aquele relé vê durante sua atuação). Os dois se complementam: o IED mostra o que a proteção 'enxergou' e por que atuou; o RDP dedicado dá uma visão ampla e independente de toda a subestação. Em eventos complexos, cruzar os dois registros é fundamental."
+        },
+        {
+          "id": "s3",
+          "title": "O que o RDP registra",
+          "type": "list",
+          "items": [
+            "Canais analógicos — formas de onda de tensão e corrente (várias por fase)",
+            "Canais digitais — estados de trip, fechamento, disjuntores, sinais de teleproteção",
+            "Pré-falta — alguns ciclos ANTES do evento (essencial para ver a condição inicial)",
+            "Falta e pós-falta — o evento completo e sua eliminação",
+            "Estampa de tempo precisa (sincronizada) para correlacionar com outros registros"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O RDP é a 'caixa-preta' do sistema: registra formas de onda e sinais digitais em torno das perturbações, preservando a evidência objetiva do evento. Há RDP dedicado (visão ampla e independente da subestação) e oscilografia nos IEDs (o que a proteção viu) — complementares. Registra pré-falta, falta e pós-falta, com estampa de tempo precisa."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "order": 1,
+      "title": "Capítulo 2 — O Formato COMTRADE",
+      "subtitle": "A linguagem universal da oscilografia",
+      "estimatedMinutes": 13,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Por que existe o COMTRADE",
+          "type": "text",
+          "body": "Cada fabricante de RDP e IED poderia ter seu próprio formato de arquivo de oscilografia — o que tornaria impossível analisar registros de equipamentos diferentes com uma mesma ferramenta. O COMTRADE (Common Format for Transient Data Exchange, norma IEEE C37.111 / IEC 60255-24) padroniza o formato dos registros de perturbação, permitindo que qualquer software de análise abra registros de qualquer fabricante. É a interoperabilidade aplicada à oscilografia."
+        },
+        {
+          "id": "s2",
+          "title": "A estrutura de um arquivo COMTRADE",
+          "type": "list",
+          "items": [
+            "Arquivo de configuração (.CFG) — descreve os canais, taxas de amostragem, escalas e estampa de tempo",
+            "Arquivo de dados (.DAT) — as amostras propriamente ditas (em ASCII ou binário)",
+            "Arquivo de cabeçalho (.HDR) — informações descritivas opcionais",
+            "Arquivo de informação (.INF) — dados adicionais específicos do fabricante",
+            "Versões mais novas combinam em um único arquivo (.CFF)"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "COMTRADE e o teste de relés (replay)",
+          "type": "note",
+          "body": "Uma aplicação poderosa do COMTRADE: as malas de teste modernas podem 'reproduzir' (replay) um arquivo COMTRADE — injetando no relé exatamente as formas de onda registradas de uma falta real, incluindo a componente DC, a saturação de TC e os transitórios. Isso permite testar o relé com sinais muito mais realistas que uma injeção senoidal pura, e até reproduzir um evento que causou uma atuação suspeita para investigar o comportamento do relé. É a ponte entre o registro de campo e o ensaio."
+        },
+        {
+          "id": "s4",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "O COMTRADE (IEEE C37.111 / IEC 60255-24) padroniza o formato dos registros de perturbação, permitindo analisar oscilografias de qualquer fabricante numa mesma ferramenta. Estrutura-se em arquivos CFG (configuração), DAT (dados), HDR/INF, ou o CFF unificado. Permite o replay em malas de teste — injetar formas de onda reais no relé, a ponte entre registro de campo e ensaio."
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "order": 2,
+      "title": "Capítulo 3 — Análise de Perturbações",
+      "subtitle": "Lendo a oscilografia como um detetive",
+      "estimatedMinutes": 14,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "O que a análise revela",
+          "type": "text",
+          "body": "Analisar uma oscilografia é como uma investigação forense do evento. A partir das formas de onda, determina-se: o tipo de falta (quais fases e a terra envolvidas), o instante exato de início, a magnitude das correntes e tensões, o tempo de atuação da proteção, o tempo de abertura do disjuntor, e se a sequência de eventos ocorreu como projetado. A oscilografia transforma um evento de milissegundos numa história legível e verificável."
+        },
+        {
+          "id": "s2",
+          "title": "Perguntas que a análise responde",
+          "type": "list",
+          "items": [
+            "A proteção atuou? No tempo correto? Pela função certa?",
+            "O disjuntor abriu no tempo esperado?",
+            "Houve saturação de TC que afetou a medição?",
+            "A falta foi transitória ou permanente? O religamento foi bem-sucedido?",
+            "Houve atuação indevida ou falha de atuação?",
+            "Qual a distância estimada da falta (em linhas)?"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": "Validando o desempenho da proteção",
+          "type": "note",
+          "body": "A análise de oscilografia é a principal ferramenta para validar o desempenho real da proteção após cada evento. Comparando o que a proteção fez com o que deveria ter feito (segundo os ajustes), identificam-se ajustes inadequados, problemas de TC, erros de fiação ou de lógica que só se manifestam em condições reais de falta. Cada evento é uma oportunidade de aprendizado e de melhoria contínua do sistema de proteção — e a oscilografia é a fonte dessa informação."
+        },
+        {
+          "id": "s4",
+          "title": "Localização de falta",
+          "type": "text",
+          "body": "Em linhas, a oscilografia permite estimar a distância da falta a partir das tensões e correntes registradas e da impedância da linha (algoritmos de localização de falta). Isso direciona as equipes de manutenção ao ponto provável do defeito, reduzindo drasticamente o tempo de patrulhamento e de restauração. Em linhas longas, localizar a falta com precisão de poucos por cento do comprimento economiza horas de busca."
+        },
+        {
+          "id": "s5",
+          "title": "Resumo do capítulo",
+          "type": "summary",
+          "body": "A análise de oscilografia é a investigação forense do evento: revela tipo de falta, tempos, magnitudes, saturação de TC e o desempenho da proteção e do disjuntor. Responde se a proteção atuou corretamente e identifica problemas que só aparecem em falta real. Permite localizar a falta em linhas (direcionando a manutenção). Cada evento vira aprendizado para melhorar o sistema."
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "order": 3,
+      "title": "Capítulo 4 — Integração e Boas Práticas",
+      "subtitle": "Do registro à melhoria contínua",
+      "estimatedMinutes": 8,
+      "sections": [
+        {
+          "id": "s1",
+          "title": "Coleta automática e gestão de registros",
+          "type": "text",
+          "body": "Em sistemas modernos, os registros de perturbação são coletados automaticamente dos RDPs e IEDs após cada evento, centralizados num servidor, e disponibilizados para análise. A coleta automática garante que nenhum registro se perca e que a análise seja rápida. A estampa de tempo sincronizada (PTP/GPS) permite correlacionar registros de diferentes equipamentos e subestações, reconstruindo eventos sistêmicos amplos."
+        },
+        {
+          "id": "s2",
+          "title": "A sincronização de tempo é essencial",
+          "type": "note",
+          "body": "Sem estampa de tempo precisa e sincronizada, é impossível correlacionar registros de diferentes equipamentos — qual atuou primeiro? A falta começou onde? Por isso o RDP e os IEDs devem estar sincronizados por uma referência comum (GPS, PTP). Em eventos sistêmicos (que envolvem várias subestações), essa sincronização permite montar a sequência exata dos acontecimentos em toda a rede — fundamental para entender blackouts e eventos complexos."
+        },
+        {
+          "id": "s3",
+          "title": "Resumo do capítulo e do e-book",
+          "type": "summary",
+          "body": "A coleta automática centraliza os registros após cada evento, e a estampa de tempo sincronizada (GPS/PTP) permite correlacionar equipamentos e subestações, reconstruindo eventos sistêmicos. O RDP é a caixa-preta do sistema: registra a evidência, o COMTRADE a padroniza, e a análise transforma o evento em diagnóstico e melhoria contínua. É a memória e o aprendizado do sistema de proteção."
+        }
+      ]
+    }
+  ]
+}

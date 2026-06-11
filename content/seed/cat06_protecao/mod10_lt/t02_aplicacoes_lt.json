@@ -1,0 +1,218 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Linhas de Transmissão",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de linhas de transmissão",
+  "moduleOrder": 9,
+  "trail": "Aplicações de LT",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual proteção é amplamente utilizada para linhas de transmissão curtas?",
+      "options": [
+        "Relé direcional de terra isolado.",
+        "Relé de subfrequência regional.",
+        "Proteção diferencial ou fio-piloto.",
+        "Proteção de distância com cinco zonas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Para linhas curtas ou curtíssimas, as funções fio-piloto ou diferencial são amplamente utilizadas. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual religamento é preferido em linhas extensas de tensão elevada?",
+      "options": [
+        "Religamento monopolar temporizado.",
+        "Religamento bipolar de retaguarda.",
+        "Religamento pentapolar sincronizado.",
+        "Religamento tripolar automático."
+      ],
+      "correctIndex": 3,
+      "explanation": "Em linhas longas e tensões muito elevadas, o religamento tripolar é preferido devido à dificuldade de extinção do arco residual. (Fonte: Caminha).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a finalidade da teleproteção em linhas de transmissão?",
+      "options": [
+        "Limitar a corrente subtransitória de curto-circuito.",
+        "Desligar a linha simultaneamente em todas as extremidades.",
+        "Substituir os relés direcionais de terra.",
+        "Reduzir o aquecimento resistivo dos cabos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A teleproteção visa o rápido desligamento da linha em todas as extremidades, garantindo seletividade e rapidez. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O acoplamento mútuo entre linhas paralelas afeta qual componente simétrica?",
+      "options": [
+        "Sequência zero.",
+        "Sequência negativa.",
+        "Sequência positiva.",
+        "Componente contínua."
+      ],
+      "correctIndex": 0,
+      "explanation": "O acoplamento mútuo indutivo é significativo apenas para as correntes de sequência zero da linha. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual faixa de frequência é usada pelo sistema Carrier (OPLAT)?",
+      "options": [
+        "60 a 120 Hz.",
+        "30 a 300 kHz.",
+        "1 a 5 GHz.",
+        "10 a 20 MHz."
+      ],
+      "correctIndex": 1,
+      "explanation": "O sistema de onda portadora Carrier utiliza a faixa de frequências de 30 a 300 kHz. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual equipamento protege o capacitor série e corrige a leitura do relé?",
+      "options": [
+        "Reator shunt terminal.",
+        "Transformador de aterramento zig-zag.",
+        "Gape-centelhador em paralelo.",
+        "Fusível limitador de alta tensão."
+      ],
+      "correctIndex": 2,
+      "explanation": "Um gape-centelhador curto-circuita o banco durante a falta, eliminando a falsa impressão de distância lida pelo relé. (Fonte: Caminha).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que o efeito infeed causa na medição do relé de distância?",
+      "options": [
+        "Inverte a polaridade da corrente de carga.",
+        "Reduz a reatância lida, gerando sobrealcance.",
+        "Zera a resistência de arco no cálculo fasorial.",
+        "Aumenta a reatância lida, gerando subalcance."
+      ],
+      "correctIndex": 3,
+      "explanation": "A injeção de corrente pela fonte remota eleva a tensão na falta, aumentando a impedância medida e gerando subalcance. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como ocorre a liberação de trip no esquema PUTT?",
+      "options": [
+        "Via recepção de sinal remota com permissão direcional local.",
+        "Após o tempo limite da terceira zona.",
+        "Por falha contínua do canal de fibra óptica.",
+        "Pela saturação imediata do transformador de potencial."
+      ],
+      "correctIndex": 0,
+      "explanation": "No esquema PUTT, o trip exige o sinal recebido e a permissão de um elemento de partida direcional local (subalcance). (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual recurso a proteção exige no religamento automático monopolar?",
+      "options": [
+        "Eliminação da função direcional.",
+        "Identificação exata da fase em falta.",
+        "Uso restrito a curtos-circuitos trifásicos.",
+        "Sintonia da bobina de bloqueio Carrier."
+      ],
+      "correctIndex": 1,
+      "explanation": "O esquema monopolar exige a correta detecção e seleção da fase em falta para abrir apenas o polo defeituoso. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O esquema de comparação de fase é adequado para qual linha?",
+      "options": [
+        "Linhas longas operadas em malha aberta.",
+        "Redes radiais isoladas de baixa tensão.",
+        "Linhas com compensação série capacitiva.",
+        "Sistemas interligados puramente resistivos."
+      ],
+      "correctIndex": 2,
+      "explanation": "A comparação de fases usa apenas correntes, sendo ideal para linhas com compensação série onde o ângulo da tensão é afetado. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas linhas transpostas, o acoplamento mútuo de sequência positiva e negativa é desprezível.",
+      "correctAnswer": true,
+      "explanation": "Para linhas transpostas, os efeitos indutivos mútuos nas sequências positiva e negativa são inferiores a 5% e podem ser desprezados. (Fonte: Virtus_ProtLT).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O acoplamento de sequência zero sempre causa subalcance no relé de distância local.",
+      "correctAnswer": false,
+      "explanation": "Dependendo da direção das correntes nos circuitos paralelos, o relé pode medir uma impedância maior (subalcance) ou menor (sobrealcance). (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A comunicação via fibra óptica OPGW elimina a restrição de distância na proteção diferencial.",
+      "correctAnswer": true,
+      "explanation": "O uso de cabos OPGW com repetidoras não impõe limite prático de extensão para a aplicação da proteção diferencial 87L. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O esquema permissivo POTT autoriza o ajuste do relé com sobrealcance.",
+      "correctAnswer": true,
+      "explanation": "Como o trip exige permissão da extremidade oposta, o alcance da zona pode ultrapassar 100% da linha com segurança. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O capacitor série aumenta a reatância lida pelo relé de distância.",
+      "correctAnswer": false,
+      "explanation": "A reatância capacitiva subtrai da reatância indutiva da linha, reduzindo a impedância aparente e aproximando ficticiamente a falta. (Fonte: Caminha).",
+      "difficulty": "hard",
+      "isTrue": false
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O sistema Carrier exige a bobina de ____ em série com a linha.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "bloqueio"
+        }
+      ],
+      "explanation": "A bobina de bloqueio ou 'wave trap' confina a onda portadora no trecho protegido da linha de transmissão. (Fonte: Virtus_ProtLT).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O esquema DUTT requer ajuste da proteção de distância com ____ da linha.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "subalcance"
+        }
+      ],
+      "explanation": "Na transferência de trip direto (DUTT), a recepção atua diretamente, exigindo subalcance da proteção para manter a seletividade. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A proteção diferencial de linha longa deve ignorar a corrente ____ do circuito.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "capacitiva"
+        }
+      ],
+      "explanation": "A linha longa possui grande admitância shunt, gerando correntes capacitivas normais que a proteção não deve ver como falta interna. (Fonte: Virtus_ProtLT).",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "category": "Automação",
+  "categorySubtitle": "",
+  "categoryOrder": 7,
+  "module": "Linguagens de Programação (IEC 61131-3)",
+  "moduleSubtitle": "Norma IEC 61131-3, linguagens e boas praticas",
+  "moduleOrder": 1,
+  "trail": "Aplicações das Linguagens (LADDER, ST, FBD, SFC, IL)",
+  "trailOrder": 1,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Como a norma IEC 61131-3 classifica estruturalmente as cinco linguagens de programação de CLPs prontas para uso?",
+      "options": [
+        "Textuais (IL, ST) e gráficas (LD, FBD, SFC).",
+        "Assíncronas (ST, FBD) e síncronas (IL, SFC).",
+        "Analógicas (SFC, LD) e digitais (IL, FBD).",
+        "Globais em nuvem (LD) e locais puras (ST, IL)."
+      ],
+      "correctIndex": 0,
+      "explanation": "A norma divide as linguagens em versões textuais, como Lista de Instruções e Texto Estruturado, e gráficas, como Ladder e FBD (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em qual cenário prático a linguagem Function Block Diagram (FBD) se destaca de forma superior na programação industrial?",
+      "options": [
+        "No acionamento estrito de painéis semânticos corporativos usando SQL.",
+        "Em rotinas que exigem controle veloz baseado na linguagem assembly.",
+        "No controle de processos contínuos através de blocos interconectados.",
+        "Em intertravamentos elétricos que dependem apenas de chaves secas simples."
+      ],
+      "correctIndex": 2,
+      "explanation": "A linguagem FBD é ideal para aplicações contínuas com processamento de sinais e visualização do fluxo de dados (IEC 61131-3: A Norma que padroniza a Automação Industrial).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a principal aplicação da linguagem Structured Text (ST) no desenvolvimento avançado de lógicas de automação?",
+      "options": [
+        "A substituição visual e direta de toda a malha gráfica de disjuntores da subestação.",
+        "A implementação de cálculos matemáticos complexos e algoritmos de manipulação de dados.",
+        "A representação exclusiva de lógicas de partida e parada usando bobinas visuais.",
+        "A conversão de lógicas corporativas ERP estritamente para displays de sete segmentos."
+      ],
+      "correctIndex": 1,
+      "explanation": "Sendo uma linguagem textual de alto nível, ST oferece grande poder de sintaxe para algoritmos lógicos detalhados e matemática complexa (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual característica essencial define o uso da linguagem Instruction List (IL) no contexto de programação padronizada de CLPs?",
+      "options": [
+        "Trata-se de um sistema visual que organiza blocos em cascatas auto-explicativas.",
+        "É uma linguagem textual de baixo nível ideal para rotinas críticas que exigem alta performance de hardware.",
+        "Funciona apenas para estabelecer conexões estáticas corporativas (TI) via páginas da web.",
+        "Representa passos isolados proibindo o uso de instruções de salto ou cálculos matemáticos diretos."
+      ],
+      "correctIndex": 1,
+      "explanation": "A Instruction List (IL) entrega comandos simples parecidos com assembly, permitindo eficiência extrema e um controle muito preciso do hardware (A importância da IEC 61131-3 para a programação de CLP - Altus).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são os três elementos estruturais fundamentais que operam compondo o Diagrama de Função Sequencial (SFC)?",
+      "options": [
+        "Classes em cascata, módulos em paralelo e portas OR exclusivas.",
+        "Solenóides mecânicos, chaves limitadoras discretas e cabos Ethernet industriais.",
+        "Passos (steps), elos dirigidos (links) e transições condicionais.",
+        "Displays alfanuméricos IHM, roteadores de campo e transmissores cegos de corrente."
+      ],
+      "correctIndex": 2,
+      "explanation": "O diagrama SFC é construído graficamente através da concatenação lógica de passos, elos de ligação e transições de mudança (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De que forma ocorre fisicamente o fluxo do sinal padronizado entre os componentes em um Function Block Diagram (FBD)?",
+      "options": [
+        "Da saída lateral direita de um bloco para a entrada lateral esquerda da função atrelada em seguida.",
+        "Do pino comum superior alimentando em cascata todas as portas analógicas da base cega.",
+        "Inversamente fluindo apenas da bobina de atuação até os contatos de acionamento originais.",
+        "Por emissão acústica intermitente que ignora o mapeamento de variáveis de ligação serial."
+      ],
+      "correctIndex": 0,
+      "explanation": "O percurso de fluxo do sinal em linguagens FBD avança partindo da saída (direita) de um bloco para a entrada (esquerda) do bloco correspondente (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Ao utilizar o Sequential Function Chart (SFC), qual é a finalidade lógica de implementar as marcações de transição?",
+      "options": [
+        "Manter o sistema rodando infinitamente sem nenhuma forma de avanço programado.",
+        "Atuar como condição avaliativa que, se verificada como verdadeira, desativa o passo prévio e ativa o posterior.",
+        "Excluir os dados analógicos transformando o processamento do módulo inteiro em blocos puros textuais.",
+        "Substituir o hardware corporativo permitindo a geração física de tensão nas saídas digitais em aberto."
+      ],
+      "correctIndex": 1,
+      "explanation": "A transição apresenta a validação condicional que faz o processo sair do passo anterior avançando e habilitando os comandos do passo sucessor (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No desenvolvimento iterativo em Structured Text (ST), qual palavra chave força o aborto de uma malha WHILE ou REPEAT descartando a sua condição nativa de terminação?",
+      "options": [
+        "ABORT_LOOP.",
+        "RETURN_END.",
+        "EXIT.",
+        "JUMP."
+      ],
+      "correctIndex": 2,
+      "explanation": "A execução do comando EXIT encerra prematuramente a sequência iterativa forçando a rotina a sair das laçadas estruturadas de repetição (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a exigência avaliativa aplicada à ordem de execução em cadeias interligadas no Diagrama de Bloco Funcional (FBD)?",
+      "options": [
+        "A avaliação exige o cálculo prévio e completo de um circuito antes do início do processamento de outro que utilize suas respectivas saídas.",
+        "Os cálculos ocorrem simultaneamente executando matrizes abertas a despeito da amarração das lógicas de saída prévias.",
+        "Determina o travamento das operações matemáticas enquanto o fluxo de dados em formato booleano não reverter todas as saídas de 24 Volts.",
+        "Desconsidera o elo do fluxograma operando sempre a porta AND antes da porta lógica do tipo NOT."
+      ],
+      "correctIndex": 0,
+      "explanation": "No FBD a norma define que qualquer circuito originário conclua a emissão dos seus sinais lógicos antes do ciclo que receberá essas saídas ser avaliado (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Analisando a linguagem Instruction List (IL), que condicional é inserida ao adicionar o modificador de operação 'C' nas chamadas nativas?",
+      "options": [
+        "Indica repetição compulsória e cíclica das últimas três variáveis gravadas fisicamente no PLC local.",
+        "Indica que a respectiva ação atrelada ocorrerá somente se a última expressão validada obtiver como resultado puro o booleano 1.",
+        "Instrui o processador a corromper valores digitais isolando as interfaces externas do sistema SDCD principal.",
+        "Ordena a interrupção súbita do fornecimento nominal elétrico nas unidades remotas das portas com falha."
+      ],
+      "correctIndex": 1,
+      "explanation": "A letra C sinaliza uma instrução avaliada condicionalmente forçando a execução daquela linha apenas quando a operação vigente computar como verdadeira ou 1 (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A linguagem gráfica Ladder Diagram (LD) utiliza esquemas baseados em contatos e bobinas, inspirando-se diretamente em diagramas elétricos.",
+      "correctAnswer": true,
+      "explanation": "A linguagem Ladder (LD) aplica símbolos visuais de contatos que simulam a lógica tradicional de relés eletromecânicos (IEC 61131-3: A Norma que padroniza a Automação Industrial).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A linguagem Structured Text (ST) é classificada como uma rotina textual de baixo nível desenvolvida unicamente para atuar como Assembly.",
+      "correctAnswer": false,
+      "explanation": "A Structured Text (ST) é na verdade uma linguagem textual de alto nível muito similar ao Pascal ou C (IEC 61131-3: A Norma que padroniza a Automação Industrial).",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na elaboração da linguagem FBD (Function Block Diagram) a norma proíbe a ligação direta de saídas juntas para emular o tradicional OR fiado do Ladder.",
+      "correctAnswer": true,
+      "explanation": "No diagrama FBD as saídas não podem ser diretamente atadas em conjunto, exigindo-se o uso de um bloco OR explícito para tal operação (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na sintaxe da linguagem Instruction List (IL) a aplicação de um operador abre parêntesis suspende a operação de cálculo até fechar o bloco.",
+      "correctAnswer": true,
+      "explanation": "O modificador de parentização indica que a resolução do operador atrelado ficará suspensa e só terminará na leitura do fecho do parêntesis (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante o sequenciamento em SFC as ações submetidas a um passo admitem qualificação por letras, onde o símbolo 'S' sinaliza que a ação deve ser armazenada (stored).",
+      "correctAnswer": true,
+      "explanation": "As operações do SFC podem carregar letras de qualificação associadas, como 'S' indicando o armazenamento da ação que foi desencadeada (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Para estruturar o controle visual de processos sequenciais complexos operando como máquinas de estados utiliza-se a linguagem ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "SFC"
+        }
+      ],
+      "explanation": "A linguagem SFC (Sequential Function Chart) controla eventos organizando-os claramente em sequências de etapas e transições (IEC 61131-3: A Norma que padroniza a Automação Industrial).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O fluxo de potência em um diagrama lógico da linguagem Ladder deve ocorrer visualmente sempre da ____ para o lado direito da tela.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "esquerda"
+        }
+      ],
+      "explanation": "Na linguagem LD o sentido do fluxo de potência ou continuidade virtual segue rigidamente o formato da esquerda para a direita (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na sintaxe textual de alto nível da linguagem Structured Text (ST) cada finalização de comando na linha recebe a obrigatoriedade de usar ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ponto e vírgula"
+        }
+      ],
+      "explanation": "As diretrizes normativas da sintaxe em ST exigem que todo comando executado seja finalizado com o caractere ponto e vírgula (Marco Antônio Ribeiro - Kufunda.net).",
+      "difficulty": "medium"
+    }
+  ]
+}

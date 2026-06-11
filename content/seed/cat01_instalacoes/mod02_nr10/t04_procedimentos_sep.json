@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "NR-10",
+  "moduleSubtitle": "Segurança em Instalações e Serviços com Eletricidade",
+  "moduleOrder": 1,
+  "trail": "Procedimentos de Segurança em SEP",
+  "trailOrder": 3,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo a NR-10, qual é a primeira etapa obrigatória no procedimento para que uma instalação elétrica seja considerada desenergizada?",
+      "options": [
+        "Seccionamento.",
+        "Constatação da ausência de tensão.",
+        "Impedimento de reenergização.",
+        "Instalação de aterramento temporário."
+      ],
+      "correctIndex": 0,
+      "explanation": "Conforme o item 10.5.1 da NR-10, a primeira etapa para a desenergização é o 'seccionamento', seguido do impedimento de reenergização e constatação de ausência de tensão.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Sobre a execução de serviços em instalações elétricas energizadas em Alta Tensão (AT) e no SEP, a NR-10 determina que:",
+      "options": [
+        "Podem ser realizados individualmente se o trabalhador for qualificado.",
+        "Não podem ser realizados individualmente sob nenhuma hipótese.",
+        "Exigem o acompanhamento ininterrupto de um engenheiro de segurança.",
+        "Podem ser feitos individualmente durante o período diurno e em tempo bom."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.7.3 da NR-10 estabelece categoricamente que os serviços em AT e no SEP não podem ser realizados individualmente.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que a NR-10 exige formalmente como documentação prévia para a realização de qualquer trabalho em Alta Tensão (AT) ou que interaja com o SEP?",
+      "options": [
+        "Aprovação registrada na ata de reunião mensal da CIPA.",
+        "Ordem de serviço específica para data e local, assinada por superior responsável.",
+        "Emissão de uma permissão verbal de trabalho pelo líder da equipe.",
+        "Apenas a Anotação de Responsabilidade Técnica (ART) do supervisor."
+      ],
+      "correctIndex": 1,
+      "explanation": "De acordo com o item 10.7.4, todo trabalho em AT ou no SEP somente pode ser realizado mediante ordem de serviço específica para data e local, assinada por superior responsável.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "As operações elementares como ligar e desligar circuitos em Baixa Tensão (BT) podem ser realizadas por pessoas não advertidas, desde que:",
+      "options": [
+        "O circuito seja protegido exclusivamente por fusíveis do tipo cartucho enclausurado.",
+        "A pessoa possua curso técnico ou de qualificação profissional reconhecido pelo MEC.",
+        "Os materiais e equipamentos encontrem-se em perfeito estado de conservação e funcionamento.",
+        "Haja um tapete isolante de borracha aprovado em frente ao quadro elétrico de comando."
+      ],
+      "correctIndex": 2,
+      "explanation": "O item 10.6.1.2 da norma garante que operações elementares (ligar e desligar em BT) podem ser realizadas por pessoas não advertidas quando os materiais e equipamentos estiverem em perfeito estado.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para empresas que operam instalações integrantes do SEP, o Prontuário deve ser acrescido de quais documentos específicos?",
+      "options": [
+        "Projetos arquitetônicos em 3D e laudos de periculosidade atualizados.",
+        "Anotações de Responsabilidade Técnica específicas do sistema de aterramento.",
+        "Ficha de registro de EPI e cronograma de exames médicos do PCMSO.",
+        "Descrição dos procedimentos para emergências e certificações dos EPCs e EPIs."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 10.2.5 estipula que empresas atuantes no SEP devem acrescentar ao prontuário: a) descrição dos procedimentos para emergências e b) certificações dos EPCs e EPIs.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são as três primeiras etapas, na ordem estrita da NR-10, para a desenergização completa de uma instalação?",
+      "options": [
+        "Seccionamento, impedimento de reenergização e constatação da ausência de tensão.",
+        "Seccionamento, constatação da ausência de tensão e instalação de aterramento temporário.",
+        "Impedimento de reenergização, seccionamento e sinalização de bloqueio.",
+        "Constatação da ausência de tensão, seccionamento e proteção dos elementos energizados."
+      ],
+      "correctIndex": 0,
+      "explanation": "Conforme o item 10.5.1 da NR-10, as três primeiras etapas obrigatórias são: a) seccionamento; b) impedimento de reenergização; e c) constatação da ausência de tensão.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A intervenção em instalações de Alta Tensão dentro da zona de risco impõe qual exigência em relação aos equipamentos automáticos?",
+      "options": [
+        "Redução da sensibilidade de resposta dos relés de proteção de retaguarda.",
+        "Desativação (bloqueio) dos conjuntos e dispositivos de religamento automático.",
+        "Aumento do tempo de atuação do sistema de seccionamento automático em 20%.",
+        "Ativação contínua do sistema de religamento para garantir a estabilidade do SEP."
+      ],
+      "correctIndex": 1,
+      "explanation": "O item 10.7.7 da NR-10 determina que a intervenção em AT dentro da zona de risco somente pode ser realizada mediante a desativação (bloqueio) dos dispositivos de religamento automático.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a primeira etapa para a reenergização de uma instalação elétrica, conforme a NR-10?",
+      "options": [
+        "Destravamento e religação mecânica dos dispositivos de seccionamento.",
+        "Remoção de toda a sinalização visual de impedimento de reenergização.",
+        "Retirada das ferramentas, utensílios e equipamentos do local de trabalho.",
+        "Remoção do aterramento temporário e desfazimento da equipotencialização."
+      ],
+      "correctIndex": 2,
+      "explanation": "De acordo com o item 10.5.2 (alínea 'a') da NR-10, a sequência para reenergizar deve obrigatoriamente iniciar pela 'retirada das ferramentas, utensílios e equipamentos'.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Os trabalhos que exigem o ingresso do trabalhador na zona controlada devem ser realizados respeitando quais critérios segundo a NR-10?",
+      "options": [
+        "Apenas a utilização de vestimentas ignífugas de classe de proteção 4.",
+        "Com o desligamento compulsório e aterramento de toda a subestação adjacente.",
+        "Sob a supervisão direta e ininterrupta de um auditor fiscal do trabalho.",
+        "Mediante procedimentos específicos, respeitando as distâncias previstas no Anexo II."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 10.6.2 especifica que os trabalhos na zona controlada devem ser realizados mediante procedimentos específicos respeitando as distâncias previstas no Anexo II da norma.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Durante serviços em instalações elétricas energizadas, qual é a diretriz da NR-10 sobre suspensão das atividades?",
+      "options": [
+        "Os serviços devem ser suspensos de imediato na iminência de ocorrência que possa colocar os trabalhadores em perigo.",
+        "Os serviços só podem ser suspensos após a conclusão segura da etapa em andamento.",
+        "A suspensão imediata ocorre unicamente se o centro de operação do sistema emitir um alarme sonoro geral.",
+        "O trabalhador deve finalizar o bloqueio mecânico antes de suspender, mesmo em iminência de acidente."
+      ],
+      "correctIndex": 0,
+      "explanation": "Segundo o item 10.6.3 da NR-10, os serviços em instalações energizadas devem ser suspensos de imediato na iminência de ocorrência que possa colocar os trabalhadores em perigo.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Trabalhos em instalações elétricas energizadas em Alta Tensão podem ser realizados de forma individual, desde que o trabalhador comprove sua capacitação pelo Curso Complementar do SEP.",
+      "correctAnswer": false,
+      "explanation": "A afirmação é falsa. O item 10.7.3 da NR-10 é categórico: os serviços em AT e no SEP NÃO PODEM ser realizados individualmente, independentemente da capacitação.",
+      "difficulty": "easy",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na sequência de desenergização, a instalação da sinalização de impedimento de reenergização figura como a quarta etapa, antecedendo o aterramento temporário.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é falsa. Conforme o item 10.5.1, a sinalização é a sexta e última etapa (alínea 'f'), sucedendo o aterramento temporário e a proteção dos elementos energizados.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Todo trabalhador que exerça funções em AT ou no SEP deve dispor de equipamento que permita comunicação permanente com sua equipe ou com o centro de operação.",
+      "correctAnswer": true,
+      "explanation": "Esta afirmação é verdadeira e está no item 10.7.9 da NR-10, garantindo contato contínuo para gestão de riscos e coordenação no SEP e em AT.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Serviços em AT dispensam procedimentos específicos e detalhados caso a organização adote integralmente o manual de instruções fornecido pelo fabricante dos equipamentos.",
+      "correctAnswer": false,
+      "explanation": "A afirmação é falsa. O item 10.7.6 da NR-10 exige que os serviços em AT somente podem ser realizados quando houver procedimentos específicos, detalhados e assinados por profissional autorizado da empresa.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante a reenergização, a remoção do aterramento temporário, da equipotencialização e das proteções adicionais deve ocorrer antes da remoção da sinalização de impedimento de reenergização.",
+      "correctAnswer": true,
+      "explanation": "A afirmativa é verdadeira. A sequência do item 10.5.2 coloca a remoção do aterramento na alínea 'c', antes da remoção da sinalização de impedimento (alínea 'd').",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A NR-10 exige que todo trabalho em Alta Tensão ou que interaja com o SEP somente seja realizado mediante ____ de serviço específica para a data e o local da intervenção.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "ordem"
+        }
+      ],
+      "explanation": "O item 10.7.4 da NR-10 prescreve a obrigatoriedade da 'ordem de serviço' com detalhamento de data e local, assinada pelo superior da área.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Após a instalação do aterramento temporário com equipotencialização dos condutores, a NR-10 exige a proteção dos elementos ____ existentes na zona controlada.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "energizados"
+        }
+      ],
+      "explanation": "Conforme a alínea 'e' do item 10.5.1, o passo subsequente ao aterramento é a 'proteção dos elementos energizados' na zona controlada.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A última etapa do procedimento normativo de reenergização (alínea 'e' do item 10.5.2) é o destravamento e a religação dos dispositivos de ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "seccionamento"
+        }
+      ],
+      "explanation": "A alínea 'e' do item 10.5.2 determina que a conclusão da reenergização é o 'destravamento e religação dos dispositivos de seccionamento'.",
+      "difficulty": "hard"
+    }
+  ]
+}

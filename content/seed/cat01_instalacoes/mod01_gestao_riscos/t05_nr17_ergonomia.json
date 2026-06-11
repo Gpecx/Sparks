@@ -1,0 +1,218 @@
+{
+  "category": "Instalações Elétricas Industriais",
+  "categorySubtitle": "NRs de Segurança, NBRs, Projetos Elétricos e Geração Distribuída",
+  "categoryOrder": 0,
+  "module": "Gestão de Riscos e Outras NRs",
+  "moduleSubtitle": "NR-01, NR-05, NR-06, NR-12, NR-17, NR-23 e NR-33",
+  "moduleOrder": 0,
+  "trail": "NR-17 (Ergonomia)",
+  "trailOrder": 4,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o principal objetivo da NR-17 (Ergonomia)?",
+      "options": [
+        "Estabelecer diretrizes que permitam a adaptação das condições de trabalho às características psicofisiológicas dos trabalhadores.",
+        "Definir regras para implementação de brigadas de emergência ergonômica.",
+        "Padronizar os EPIs utilizados especificamente para posturas repetitivas na indústria.",
+        "Determinar de forma universal a jornada de trabalho máxima permitida para qualquer atividade ocupacional."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 17.1.1 define que a NR-17 visa estabelecer diretrizes que permitam a adaptação das condições de trabalho às características psicofisiológicas dos trabalhadores, proporcionando conforto, segurança e saúde.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Em relação à Avaliação Ergonômica Preliminar (AEP), qual das abordagens a organização pode utilizar segundo a NR-17?",
+      "options": [
+        "Apenas abordagens estritamente quantitativas.",
+        "Abordagens qualitativas, semiquantitativas, quantitativas ou a combinação destas.",
+        "Exclusivamente a análise médica clínica pelo PCMSO.",
+        "Somente medições instrumentais aprovadas pelo INMETRO."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme o subitem 17.3.1.1, a Avaliação Ergonômica Preliminar (AEP) pode ser realizada de maneira versátil por meio de abordagens qualitativas, semiquantitativas, quantitativas ou uma combinação dessas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para os locais de trabalho em ambientes internos, a iluminação deve obedecer a quais níveis mínimos de iluminamento estipulados pela norma?",
+      "options": [
+        "Aqueles definidos exclusivamente pelo fabricante das lâmpadas industriais.",
+        "A 500 lux, valor padronizado obrigatoriamente para todos os setores laborais.",
+        "Aos níveis mínimos dispostos na NHO 11 da Fundacentro.",
+        "Aos limites estabelecidos nos acordos do sindicato da categoria dominante."
+      ],
+      "correctIndex": 2,
+      "explanation": "Segundo o item 17.8.3 da norma, em todos os locais e situações de trabalho internos deve haver iluminação em conformidade direta com os níveis mínimos estipulados na NHO 11 da Fundacentro.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "De acordo com a NR-17, qual é a faixa de temperatura do ar estabelecida como parâmetro para proporcionar conforto térmico em ambientes climatizados?",
+      "options": [
+        "Entre 15 e 20 °C.",
+        "Entre 22 e 26 °C.",
+        "Entre 20 e 24 °C.",
+        "Entre 18 e 25 °C."
+      ],
+      "correctIndex": 3,
+      "explanation": "O subitem 17.8.4.2 da NR-17 estabelece expressamente a obrigatoriedade de observância do parâmetro de faixa de temperatura do ar variando entre 18 e 25 °C para ambientes que possuam climatização.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Segundo o Anexo II da NR-17, qual é o limite de tempo máximo diário para o trabalho em efetiva atividade de teleatendimento ou telemarketing?",
+      "options": [
+        "6 horas diárias.",
+        "4 horas diárias.",
+        "8 horas diárias.",
+        "10 horas diárias."
+      ],
+      "correctIndex": 0,
+      "explanation": "O item 6.3 do Anexo II é categórico ao determinar que o tempo de trabalho em efetiva atividade de teleatendimento é de, no máximo, 6 (seis) horas diárias, incluindo as pausas remuneradas.",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "A exigência legal de elaboração da Análise Ergonômica do Trabalho (AET) não se aplica a quais tipos de organizações, segundo a isenção prevista na NR-17?",
+      "options": [
+        "Organizações de grande porte que possuam o SESMT plenamente estruturado.",
+        "Microempresas (MEs) e Empresas de Pequeno Porte (EPPs) enquadradas como graus de risco 1 e 2, e o MEI.",
+        "Empresas de prestação de serviços enquadradas no grau de risco 3 apenas.",
+        "Empresas da construção civil (CNAE específico), independentemente do número de funcionários."
+      ],
+      "correctIndex": 1,
+      "explanation": "Conforme estipulado explicitamente no item 17.3.4, as MEs e EPPs que sejam enquadradas como graus de risco 1 e 2 e o MEI estão legalmente dispensados e não são obrigados a elaborar a AET.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Quais são os requisitos construtivos mínimos que os assentos utilizados rotineiramente nos postos de trabalho devem atender, conforme estabelecido na NR-17?",
+      "options": [
+        "Borda frontal afiada e encosto totalmente rígido travado em 90 graus.",
+        "Base sem regulagem de altura e confeccionada exclusivamente em material metálico ou plástico duro.",
+        "Altura ajustável, borda frontal arredondada, características de pouca conformação na base e encosto adaptado à lombar.",
+        "Ampla conformação esférica na base do assento e completa ausência de encosto de apoio para as costas."
+      ],
+      "correctIndex": 2,
+      "explanation": "O subitem 17.6.6 determina como requisitos mínimos: a) altura ajustável, b) ajustes acessíveis, c) pouca/nenhuma conformação na base, d) borda frontal arredondada, e e) encosto adaptado para a região lombar.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na movimentação e manuseio manual de cargas, existe uma vedação explícita quanto à distância horizontal durante a pega. Qual é essa restrição normativa?",
+      "options": [
+        "É vedado o levantamento não eventual com distância de alcance superior a 40 cm.",
+        "É vedado o levantamento eventual com distância de alcance horizontal superior a 50 cm.",
+        "É vedado o levantamento não eventual com distância de alcance horizontal superior a 60 cm em relação ao corpo.",
+        "A norma estipula que é vedado qualquer levantamento a uma distância superior a 80 cm, independentemente da carga."
+      ],
+      "correctIndex": 2,
+      "explanation": "De acordo com o rigoroso item 17.5.2.1 da NR-17, é expressamente vedado o levantamento não eventual de cargas que comprometa a segurança quando a distância de alcance horizontal da pega for superior a 60 cm.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como deve ocorrer o programa de treinamento dos operadores de checkout estipulado no Anexo I da NR-17?",
+      "options": [
+        "Treinamento inicial prático de 4 horas obrigatoriamente concluído antes da data de admissão.",
+        "Treinamento semestral de 4 horas ministrado através de Ensino a Distância nos intervalos das jornadas.",
+        "Apenas treinamento periódico anual de 8 horas, dispensando capacitação no momento da admissão.",
+        "Treinamento inicial mínimo de 2 horas até o 30º dia da admissão e treinamento periódico anual mínimo de 2 horas."
+      ],
+      "correctIndex": 3,
+      "explanation": "O item 7 do Anexo I (Trabalho dos Operadores de Checkout) obriga a organização a promover um treinamento inicial de 2 horas até o 30º dia de admissão, além de prever um treinamento periódico anual com a mesma duração.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No trabalho em Teleatendimento/Telemarketing (Anexo II), como devem ser estritamente fracionadas as pausas e os intervalos para a jornada máxima permitida de 6 horas diárias?",
+      "options": [
+        "2 pausas contínuas de 10 minutos (usufruídas fora do posto) e mais um intervalo obrigatório de 20 minutos para repouso e alimentação.",
+        "3 pausas isoladas de 10 minutos cada, acompanhadas de um intervalo maior de 30 minutos para repouso.",
+        "Apenas 1 pausa extensa de 20 minutos somada a um pequeno intervalo para repouso de 15 minutos no final do expediente.",
+        "O teleoperador tem direito a 2 pausas de 15 minutos, abrindo mão do intervalo alimentar para sair mais cedo do trabalho."
+      ],
+      "correctIndex": 0,
+      "explanation": "O subitem 6.4 do Anexo II exige especificamente, para a jornada de 6h, 2 períodos de 10 minutos de pausas contínuas (fora do posto) somados a um intervalo de 20 minutos destinado ao repouso e alimentação.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Sempre que uma determinada atividade puder ser executada alternando-se a posição de pé com a posição sentada, a NR-17 exige que o posto de trabalho seja planejado ou fisicamente adaptado para favorecer plenamente essa alternância de posições.",
+      "correctAnswer": true,
+      "explanation": "A afirmação é correta e reflete a diretriz do subitem 17.6.2 da NR-17, cujo objetivo é evitar os problemas osteomusculares gerados por posturas prolongadas únicas, exigindo o favorecimento da alternância sentada e em pé.",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para garantir o adequado conforto acústico em ambientes organizacionais que exijam constante manutenção intelectual e níveis elevados de concentração, o ruído de fundo tolerado pela NR-17 não deve ultrapassar 85 dB(A).",
+      "correctAnswer": false,
+      "explanation": "A afirmação é falsa. O item 17.8.4.1.2 da NR-17 estipula claramente que o ruído de fundo aceitável para conforto em ambientes intelectuais é de até 65 dB(A), e não 85.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Nas operações de telemarketing e teleatendimento, a legislação autoriza que os supervisores exijam dos operadores a observância estrita e incondicional de um roteiro de atendimento (script) engessado, garantindo assim métricas padronizadas de excelência.",
+      "correctAnswer": false,
+      "explanation": "A afirmativa é integralmente falsa. O item 6.11, alínea 'a', do Anexo II proíbe taxativamente essa prática, vedando à organização exigir a observância estrita do script ou roteiro de atendimento.",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Para os profissionais que operam o sistema de checkout em supermercados, a NR-17 proíbe formalmente a utilização de métodos de avaliação de desempenho atrelados primordialmente ao número de mercadorias que o trabalhador consegue registrar.",
+      "correctAnswer": true,
+      "explanation": "Verdadeiro. Conforme definido pelo item 5 (Organização do Trabalho) do Anexo I, é terminantemente vedado promover sistemas de avaliação que se baseiem exclusivamente na quantidade ou volume de mercadorias registradas pelo caixa.",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Ao adotar medidas ergonômicas em operações de natureza contínua e muito repetitivas, a introdução de pausas obrigatórias ao longo do expediente não pode, de forma alguma, ser compensada por um aumento forçado na cadência individual de trabalho do empregado.",
+      "correctAnswer": true,
+      "explanation": "A afirmação é verdadeira. O item 17.4.3.2, alínea 'a', trata diretamente desse quesito essencial: para propiciar real descanso e recuperação, a pausa concedida não deve implicar na necessidade de trabalhar mais rápido depois.",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A NR-17 estabelece rigorosamente que as organizações estão obrigadas a arquivar e manter o relatório formal da Análise Ergonômica do Trabalho (AET) em seu poder por um período não inferior a ____ anos.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "20"
+        }
+      ],
+      "explanation": "O subitem 17.3.7 fixa uma diretriz documental clara, estipulando que o relatório completo proveniente da AET deve ficar resguardado à disposição na organização pelo longo prazo histórico de 20 (vinte) anos.",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "No Anexo voltado ao Teleatendimento, a parte técnica obriga as empresas a fornecerem headsets individuais e exige que haja treinamento orientando a correta e constante alternância do uso do dispositivo entre as ____ do trabalhador.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "orelhas"
+        }
+      ],
+      "explanation": "O item 4 (Equipamentos) do Anexo II da NR-17 estipula o fornecimento do headset do tipo individual atrelado à necessidade ergonômica inadiável de que o operador faça a alternância de uso entre as orelhas ao longo da jornada.",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Ao utilizar equipamento como computador portátil (notebook) de forma não eventual no seu respectivo posto de trabalho, a norma adverte que devem ser obrigatoriamente previstas formas físicas de adaptação do teclado, do mouse ou da ____.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "tela"
+        }
+      ],
+      "explanation": "Conforme delineia o subitem 17.7.3.2 da norma ergonômica, atividades não eventuais com computadores portáteis demandam necessariamente a adequação do ambiente mediante adaptações externas envolvendo teclado, mouse ou a própria tela.",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -390,6 +390,118 @@ class AdminController extends Notifier<AdminState> {
     }
   }
 
+  // ─── DELETE ALL CONTENT (cascata em todas as categorias) ───────
+  Future<Map<String, int>> deleteAllContent({
+    void Function(int done, int total)? onProgress,
+  }) async {
+    state = state.copyWith(isLoading: true, clearError: true);
+    int success = 0;
+    int failed = 0;
+    try {
+      final snap = await _fs.collection(FS.categories).get();
+      final total = snap.docs.length;
+      for (int i = 0; i < total; i++) {
+        try {
+          await _deleteCategoryDeep(snap.docs[i].reference);
+          success++;
+        } catch (_) {
+          failed++;
+        }
+        onProgress?.call(i + 1, total);
+      }
+      state = state.copyWith(
+        isLoading: false,
+        selectedCategoryId: null,
+        selectedModuleId: null,
+        selectedTrailId: null,
+        selectedLessonId: null,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: 'Erro ao limpar conteúdo: $e',
+      );
+    }
+    return {'success': success, 'failed': failed};
+  }
+
+  // ─── REORDER ───────────────────────────────────────────────────
+  Future<void> reorderItems(AdminEntity entity, List<String> orderedIds) async {
+    state = state.copyWith(isLoading: true, clearError: true);
+    try {
+      final batch = _fs.batch();
+      for (int i = 0; i < orderedIds.length; i++) {
+        final DocumentReference ref;
+        switch (entity) {
+          case AdminEntity.categories:
+            ref = _fs.collection(FS.categories).doc(orderedIds[i]);
+          case AdminEntity.modules:
+            if (state.selectedCategoryId == null) throw 'Selecione uma categoria';
+            ref = _fs
+                .collection(FS.categories)
+                .doc(state.selectedCategoryId!)
+                .collection(FS.modules)
+                .doc(orderedIds[i]);
+          case AdminEntity.trails:
+            if (state.selectedCategoryId == null || state.selectedModuleId == null) {
+              throw 'Selecione categoria e módulo';
+            }
+            ref = _fs
+                .collection(FS.categories)
+                .doc(state.selectedCategoryId!)
+                .collection(FS.modules)
+                .doc(state.selectedModuleId!)
+                .collection(FS.trails)
+                .doc(orderedIds[i]);
+          case AdminEntity.lessons:
+            if (state.selectedCategoryId == null ||
+                state.selectedModuleId == null ||
+                state.selectedTrailId == null) {
+              throw 'Selecione categoria, módulo e trilha';
+            }
+            ref = _fs
+                .collection(FS.categories)
+                .doc(state.selectedCategoryId!)
+                .collection(FS.modules)
+                .doc(state.selectedModuleId!)
+                .collection(FS.trails)
+                .doc(state.selectedTrailId!)
+                .collection(FS.lessons)
+                .doc(orderedIds[i]);
+          case AdminEntity.questions:
+            if (state.selectedCategoryId == null ||
+                state.selectedModuleId == null ||
+                state.selectedTrailId == null ||
+                state.selectedLessonId == null) {
+              throw 'Selecione categoria, módulo, trilha e lição';
+            }
+            ref = _fs
+                .collection(FS.categories)
+                .doc(state.selectedCategoryId!)
+                .collection(FS.modules)
+                .doc(state.selectedModuleId!)
+                .collection(FS.trails)
+                .doc(state.selectedTrailId!)
+                .collection(FS.lessons)
+                .doc(state.selectedLessonId!)
+                .collection(FS.questions)
+                .doc(orderedIds[i]);
+        }
+        batch.update(ref, {FS.order: i, FS.updatedAt: FieldValue.serverTimestamp()});
+      }
+      await batch.commit();
+      state = state.copyWith(isLoading: false);
+    } on FirebaseException catch (e) {
+      final msg = 'Erro Firebase ao reordenar ${entity.label}: [${e.code}] ${e.message}';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+    } catch (e) {
+      final msg = 'Erro ao reordenar ${entity.label}: $e';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+    }
+  }
+
   // ─── DELETE (com cascata completa) ─────────────────────────────
   Future<bool> delete(AdminEntity entity, String docId) async {
     state = state.copyWith(isLoading: true, clearError: true);
@@ -680,9 +792,14 @@ class AdminController extends Notifier<AdminState> {
     try {
       state = state.copyWith(isLoading: true, errorMessage: null);
       
-      final categoryTitle = json['category'] as String?;
-      final moduleTitle = json['module'] as String?;
-      final trailTitle = json['trail'] ?? json['lesson'] as String?; // Usa lesson como trail se não houver trail
+      final categoryTitle    = json['category'] as String?;
+      final categorySubtitle = json['categorySubtitle'] as String? ?? '';
+      final categoryOrder    = json['categoryOrder'] as int? ?? 0;
+      final moduleTitle      = json['module'] as String?;
+      final moduleSubtitle   = json['moduleSubtitle'] as String? ?? '';
+      final moduleOrder      = json['moduleOrder'] as int? ?? 0;
+      final trailTitle = json['trail'] ?? json['lesson'] as String?;
+      final trailOrder       = json['trailOrder'] as int? ?? 0;
       final questionsData = json['questions'] as List?;
 
       if (categoryTitle == null || moduleTitle == null || trailTitle == null) {
@@ -696,15 +813,15 @@ class AdminController extends Notifier<AdminState> {
           .where(FS.title, isEqualTo: categoryTitle)
           .limit(1)
           .get();
-      
+
       DocumentReference catRef;
       if (catQuery.docs.isEmpty) {
         catRef = _fs.collection(FS.categories).doc();
         batch.set(catRef, {
           FS.title: categoryTitle,
-          'subtitle': 'Importado via JSON',
-          'description': 'Importado via JSON',
-          FS.order: 0,
+          'subtitle': categorySubtitle.isNotEmpty ? categorySubtitle : categoryTitle,
+          'description': categorySubtitle.isNotEmpty ? categorySubtitle : categoryTitle,
+          FS.order: categoryOrder,
           FS.createdAt: FieldValue.serverTimestamp(),
           FS.updatedAt: FieldValue.serverTimestamp(),
         });
@@ -723,9 +840,9 @@ class AdminController extends Notifier<AdminState> {
         modRef = catRef.collection(FS.modules).doc();
         batch.set(modRef, {
           FS.title: moduleTitle,
-          'subtitle': 'Importado via JSON',
+          'subtitle': moduleSubtitle.isNotEmpty ? moduleSubtitle : moduleTitle,
           FS.categoryId: catRef.id,
-          FS.order: 0,
+          FS.order: moduleOrder,
           FS.createdAt: FieldValue.serverTimestamp(),
           FS.updatedAt: FieldValue.serverTimestamp(),
         });
@@ -733,7 +850,16 @@ class AdminController extends Notifier<AdminState> {
         modRef = modQuery.docs.first.reference;
       }
 
-      // 3. Criar Trilha
+      // 3. Buscar trilha existente com mesmo título — se existir, deletar (cascata)
+      // para evitar duplicatas ao reimportar
+      final existingTrailQuery = await modRef.collection(FS.trails)
+          .where(FS.title, isEqualTo: trailTitle)
+          .get();
+      for (final existing in existingTrailQuery.docs) {
+        await _deleteTrailDeep(existing.reference);
+      }
+
+      // Criar Trilha (nova)
       final trailRef = modRef.collection(FS.trails).doc();
       batch.set(trailRef, {
         FS.title: trailTitle,
@@ -741,7 +867,7 @@ class AdminController extends Notifier<AdminState> {
         'numEvaluations': 0,
         FS.categoryId: catRef.id,
         FS.moduleId: modRef.id,
-        FS.order: 0,
+        FS.order: trailOrder,
         FS.createdAt: FieldValue.serverTimestamp(),
         FS.updatedAt: FieldValue.serverTimestamp(),
       });
@@ -859,6 +985,213 @@ class AdminController extends Notifier<AdminState> {
       state = state.copyWith(isLoading: false, errorMessage: msg);
       return false;
     }
+  }
+
+  // ─── IMPORT E-BOOK FROM JSON ─────────────────────────────────
+  /// Importa um e-book a partir do JSON gerado pela Edu E-booker.
+  /// Cria/reutiliza a categoria e o módulo existentes (mesmo critério
+  /// de importFromJSON), depois grava o e-book como subcoleção do módulo.
+  Future<bool> importEbookFromJSON(Map<String, dynamic> json) async {
+    try {
+      state = state.copyWith(isLoading: true, errorMessage: null);
+
+      final categoryTitle    = json['category'] as String?;
+      final categorySubtitle = json['categorySubtitle'] as String? ?? '';
+      final categoryOrder    = (json['categoryOrder'] as num?)?.toInt() ?? 0;
+      final moduleTitle      = json['module'] as String?;
+      final moduleSubtitle   = json['moduleSubtitle'] as String? ?? '';
+      final moduleOrder      = (json['moduleOrder'] as num?)?.toInt() ?? 0;
+      final ebookTitle       = json['ebookTitle'] as String?;
+      final ebookSubtitle    = json['ebookSubtitle'] as String? ?? '';
+      final estimatedMinutes = (json['estimatedMinutes'] as num?)?.toInt() ?? 15;
+      final trailFiles       = json['trailFiles'] != null
+          ? List<String>.from(json['trailFiles'] as List)
+          : <String>[];
+
+      if (categoryTitle == null || moduleTitle == null || ebookTitle == null) {
+        throw 'JSON inválido: category, module e ebookTitle são obrigatórios';
+      }
+
+      // Normaliza para o formato de capítulos.
+      // Aceita: (a) json['chapters'] = [{title, sections...}]
+      //         (b) json['sections'] legado → vira 1 capítulo único.
+      List<Map<String, dynamic>> chapters;
+      if (json['chapters'] is List && (json['chapters'] as List).isNotEmpty) {
+        chapters = (json['chapters'] as List)
+            .map((c) => Map<String, dynamic>.from(c as Map))
+            .toList();
+      } else {
+        chapters = [
+          {
+            'title': ebookTitle,
+            'sections': json['sections'] as List? ?? [],
+          }
+        ];
+      }
+
+      final batch = _fs.batch();
+
+      // 1. Buscar ou criar Categoria
+      final catQuery = await _fs
+          .collection(FS.categories)
+          .where(FS.title, isEqualTo: categoryTitle)
+          .limit(1)
+          .get();
+      DocumentReference catRef;
+      if (catQuery.docs.isEmpty) {
+        catRef = _fs.collection(FS.categories).doc();
+        batch.set(catRef, {
+          FS.title: categoryTitle,
+          'subtitle': categorySubtitle.isNotEmpty ? categorySubtitle : categoryTitle,
+          'description': categorySubtitle.isNotEmpty ? categorySubtitle : categoryTitle,
+          FS.order: categoryOrder,
+          FS.createdAt: FieldValue.serverTimestamp(),
+          FS.updatedAt: FieldValue.serverTimestamp(),
+        });
+      } else {
+        catRef = catQuery.docs.first.reference;
+      }
+
+      // 2. Buscar ou criar Módulo
+      final modQuery = await catRef
+          .collection(FS.modules)
+          .where(FS.title, isEqualTo: moduleTitle)
+          .limit(1)
+          .get();
+      DocumentReference modRef;
+      if (modQuery.docs.isEmpty) {
+        modRef = catRef.collection(FS.modules).doc();
+        batch.set(modRef, {
+          FS.title: moduleTitle,
+          'subtitle': moduleSubtitle.isNotEmpty ? moduleSubtitle : moduleTitle,
+          FS.categoryId: catRef.id,
+          FS.order: moduleOrder,
+          FS.createdAt: FieldValue.serverTimestamp(),
+          FS.updatedAt: FieldValue.serverTimestamp(),
+        });
+      } else {
+        modRef = modQuery.docs.first.reference;
+      }
+
+      // 3. Remover e-book com mesmo título (evita duplicatas ao reimportar)
+      final existingQuery = await modRef
+          .collection(FS.ebooks)
+          .where('title', isEqualTo: ebookTitle)
+          .get();
+      for (final doc in existingQuery.docs) {
+        batch.delete(doc.reference);
+      }
+
+      // 4. Criar e-book (metadados + índice de capítulos)
+      final ebookRef = modRef.collection(FS.ebooks).doc();
+      final chapterIndex = <Map<String, dynamic>>[];
+
+      for (var i = 0; i < chapters.length; i++) {
+        final ch = chapters[i];
+        final chSections = ch['sections'] as List? ?? [];
+        final chId = 'c${(i + 1).toString().padLeft(2, '0')}';
+        final chTitle = ch['title'] as String? ?? 'Capítulo ${i + 1}';
+        final chMinutes = (ch['estimatedMinutes'] as num?)?.toInt() ?? 0;
+
+        // Documento do capítulo (subcoleção chapters)
+        final chRef = ebookRef.collection(FS.chapters).doc(chId);
+        batch.set(chRef, {
+          'order': i,
+          'title': chTitle,
+          if (ch['subtitle'] != null) 'subtitle': ch['subtitle'],
+          'estimatedMinutes': chMinutes,
+          'sections': chSections,
+        });
+
+        // Item leve no índice (vive no doc do e-book)
+        chapterIndex.add({
+          'id': chId,
+          'order': i,
+          'title': chTitle,
+          'sectionCount': chSections.length,
+          'estimatedMinutes': chMinutes,
+        });
+      }
+
+      batch.set(ebookRef, {
+        'title': ebookTitle,
+        'subtitle': ebookSubtitle,
+        'categoryId': catRef.id,
+        'moduleId': modRef.id,
+        'estimatedMinutes': estimatedMinutes,
+        'trailIds': trailFiles,
+        'chapterIndex': chapterIndex,
+        FS.updatedAt: FieldValue.serverTimestamp(),
+      });
+
+      await batch.commit();
+
+      state = state.copyWith(isLoading: false);
+      return true;
+    } on FirebaseException catch (e) {
+      final msg = 'Erro Firebase na importação do e-book: [${e.code}] ${e.message}';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+      return false;
+    } catch (e) {
+      final msg = 'Erro na importação do e-book: $e';
+      debugPrint(msg);
+      state = state.copyWith(isLoading: false, errorMessage: msg);
+      return false;
+    }
+  }
+
+  // ─── BULK IMPORT DE E-BOOKS ──────────────────────────────────
+  /// Importa uma lista de e-books (all_ebooks.json) sequencialmente.
+  /// Retorna {'success': n, 'failed': n}.
+  Future<Map<String, int>> importBulkEbooksFromJSON(
+    List<dynamic> jsonList, {
+    void Function(int done, int total)? onProgress,
+  }) async {
+    state = state.copyWith(isLoading: true, errorMessage: null);
+    int success = 0;
+    int failed = 0;
+    final total = jsonList.length;
+
+    for (int i = 0; i < total; i++) {
+      try {
+        final ok = await importEbookFromJSON(
+            Map<String, dynamic>.from(jsonList[i] as Map));
+        if (ok) { success++; } else { failed++; }
+      } catch (_) {
+        failed++;
+      }
+      onProgress?.call(i + 1, total);
+    }
+
+    state = state.copyWith(isLoading: false);
+    return {'success': success, 'failed': failed};
+  }
+
+  // ─── BULK IMPORT FROM JSON ARRAY ─────────────────────────────
+  /// Importa uma lista de objetos JSON sequencialmente.
+  /// Retorna {'success': n, 'failed': n}.
+  Future<Map<String, int>> importBulkFromJSON(
+    List<dynamic> jsonList, {
+    void Function(int done, int total)? onProgress,
+  }) async {
+    state = state.copyWith(isLoading: true, errorMessage: null);
+    int success = 0;
+    int failed = 0;
+    final total = jsonList.length;
+
+    for (int i = 0; i < total; i++) {
+      try {
+        final ok = await importFromJSON(Map<String, dynamic>.from(jsonList[i] as Map));
+        if (ok) { success++; } else { failed++; }
+      } catch (_) {
+        failed++;
+      }
+      onProgress?.call(i + 1, total);
+    }
+
+    state = state.copyWith(isLoading: false);
+    return {'success': success, 'failed': failed};
   }
 
   // Navegação pós-importão (chamar depois de fechar o dialog)

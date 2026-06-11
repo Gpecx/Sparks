@@ -1,0 +1,218 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Motores Elétricos",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de motores",
+  "moduleOrder": 4,
+  "trail": "Fundamentos de Motores Elétricos",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a definição de escorregamento (s) em um motor de indução?",
+      "options": [
+        "A diferença relativa entre a velocidade do campo girante e a velocidade mecânica do rotor.",
+        "A razão entre a velocidade síncrona e a velocidade nominal de placa.",
+        "A diferença entre a tensão de linha e a tensão de fase no estator.",
+        "O tempo que o motor leva para atingir a velocidade de regime após a partida."
+      ],
+      "correctIndex": 0,
+      "explanation": "O escorregamento é a diferença entre a velocidade síncrona (campo girante) e a velocidade real do rotor, essencial para a indução de corrente. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é a faixa típica da corrente de partida (rotor bloqueado) em relação à corrente nominal (In)?",
+      "options": [
+        "1 a 2 vezes a corrente nominal.",
+        "6 a 10 vezes a corrente nominal.",
+        "15 a 20 vezes a corrente nominal.",
+        "Sempre igual à corrente nominal de regime."
+      ],
+      "correctIndex": 1,
+      "explanation": "A corrente de partida, ou de rotor bloqueado, é significativamente alta, variando tipicamente entre 6 e 10 vezes a corrente nominal. (Fonte: Apostila Proteção).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual classe de isolamento térmico suporta a maior temperatura de operação contínua?",
+      "options": [
+        "Classe A (105°C).",
+        "Classe B (130°C).",
+        "Classe H (180°C).",
+        "Classe F (155°C)."
+      ],
+      "correctIndex": 2,
+      "explanation": "As classes de isolamento definem o limite térmico suportado; a Classe H é a que suporta a maior temperatura (180°C). (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o princípio fundamental de funcionamento de um motor de indução trifásico?",
+      "options": [
+        "Atração magnética direta entre polos permanentes do estator e rotor.",
+        "Uso de comutadores mecânicos para inverter a polaridade do campo.",
+        "Aplicação de corrente contínua tanto no estator quanto no rotor.",
+        "Criação de um campo magnético girante no estator que induz correntes no rotor."
+      ],
+      "correctIndex": 3,
+      "explanation": "O motor funciona pela indução de corrente no rotor através do campo girante produzido pelas três fases no estator. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que diferencia um motor síncrono de um motor de indução (assíncrono)?",
+      "options": [
+        "O motor síncrono gira na mesma velocidade do campo magnético girante (escorregamento zero).",
+        "O motor síncrono não possui estator bobinado.",
+        "O motor síncrono só funciona em corrente contínua.",
+        "O motor síncrono possui escorregamento maior que 10% em regime."
+      ],
+      "correctIndex": 0,
+      "explanation": "Motores síncronos operam na velocidade síncrona ditada pela frequência, sem escorregamento em regime permanente. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que representa o Fator de Serviço (FS) indicado na placa de identificação do motor?",
+      "options": [
+        "A eficiência máxima do motor em carga plena.",
+        "Uma reserva de potência que permite sobrecarga contínua sob condições específicas.",
+        "A relação entre o torque de partida e o torque nominal.",
+        "O número máximo de partidas permitidas por hora."
+      ],
+      "correctIndex": 1,
+      "explanation": "O FS indica a capacidade de sobrecarga contínua que o motor pode suportar sem danos excessivos à isolação. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "No regime de operação padronizado S1, qual é a característica de carga do motor?",
+      "options": [
+        "Operação com partidas e frenagens sucessivas em curto intervalo.",
+        "Operação intermitente com ciclos de carga e repouso de 10 minutos.",
+        "Operação com carga constante por tempo suficiente para atingir o equilíbrio térmico.",
+        "Operação exclusiva para emergências com duração máxima de 1 hora."
+      ],
+      "correctIndex": 2,
+      "explanation": "O regime S1 refere-se ao serviço contínuo, onde o motor opera até estabilizar sua temperatura. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o efeito das correntes de sequência negativa (ANSI 46) no rotor de um motor de indução?",
+      "options": [
+        "Melhoram o torque de partida ao reduzir a reatância de dispersão.",
+        "Não produzem efeitos térmicos, afetando apenas o fator de potência.",
+        "Aumentam a velocidade síncrona além do limite nominal de placa.",
+        "Produzem um campo girante contrário, causando aquecimento excessivo e vibrações."
+      ],
+      "correctIndex": 3,
+      "explanation": "A sequência negativa cria um campo girante em sentido oposto, induzindo correntes de alta frequência no rotor e causando aquecimento severo. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Para a proteção térmica efetiva (ANSI 49), quais grandezas são essenciais para modelar o aquecimento do motor?",
+      "options": [
+        "A corrente de fase, a constante de tempo térmica e o histórico de carga.",
+        "Apenas a tensão de linha e a frequência do sistema.",
+        "A resistência de isolamento e a umidade relativa do ar.",
+        "O ângulo de carga e a corrente de excitação de campo."
+      ],
+      "correctIndex": 0,
+      "explanation": "O relé 49 utiliza a corrente e constantes térmicas para estimar a temperatura dos enrolamentos (imagem térmica). (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O 'tempo de rotor bloqueado' (te) fornecido pelo fabricante indica o que?",
+      "options": [
+        "O tempo mínimo necessário para o motor atingir a velocidade nominal.",
+        "O tempo que o motor pode permanecer energizado sem girar antes de danificar o isolamento.",
+        "O tempo de atuação da proteção diferencial durante um curto-circuito interno.",
+        "O intervalo entre duas tentativas de religamento automático sucessivas."
+      ],
+      "correctIndex": 1,
+      "explanation": "Este tempo define o limite térmico do motor sob condição de partida travada (corrente máxima). (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Motores de indução trifásicos com rotor em 'gaiola de esquilo' são os mais utilizados na indústria devido à sua robustez e baixo custo.",
+      "correctAnswer": true,
+      "explanation": "A simplicidade construtiva e a ausência de escovas tornam o motor de gaiola a escolha principal para a maioria das aplicações industriais. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A classe de isolamento F permite uma temperatura máxima de operação de 155°C, incluindo a temperatura ambiente e a elevação de temperatura (atrito e perdas).",
+      "correctAnswer": true,
+      "explanation": "O limite de 155°C da Classe F engloba a temperatura ambiente (geralmente 40°C) e o aumento provocado pela carga. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Um motor operando em regime S3 (serviço intermitente) pode operar continuamente na sua potência nominal sem necessidade de períodos de repouso.",
+      "correctAnswer": false,
+      "explanation": "O regime S3 é intermitente periódico, exigindo períodos de repouso para que o motor esfrie e não ultrapasse o limite térmico. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Em motores síncronos, a proteção contra perda de excitação (ANSI 40) é vital, pois a perda de campo pode levar a máquina a operar como um gerador de indução instável.",
+      "correctAnswer": true,
+      "explanation": "Sem excitação, o motor síncrono perde o sincronismo e passa a drenar reativo da rede, aquecendo o rotor. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "O desequilíbrio de tensão nas fases do estator causa um aumento de temperatura no motor muito superior ao aumento percentual do desequilíbrio de corrente.",
+      "correctAnswer": true,
+      "explanation": "Pequenos desequilíbrios de tensão geram grandes correntes de sequência negativa, aumentando drasticamente as perdas e o calor no rotor. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O ____ é a diferença entre a velocidade do campo girante e a velocidade real do motor.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "escorregamento"
+        }
+      ],
+      "explanation": "Sem o escorregamento, não haveria variação de fluxo no rotor e, consequentemente, não haveria torque em motores de indução. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "O motor de ____ possui enrolamentos no rotor que são conectados a anéis coletores para permitir a inserção de resistências externas na partida.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "rotor bobinado"
+        }
+      ],
+      "explanation": "Esta construção permite controlar o torque e reduzir a corrente de partida através de resistores externos. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "A função ANSI ____ é utilizada para proteger o motor contra sobrecargas através de um modelo de imagem térmica.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "49"
+        }
+      ],
+      "explanation": "O relé 49 estima a temperatura do motor baseando-se na corrente e em constantes de tempo térmicas. (Fonte: Virtus_ProtMotores_Ed1).",
+      "difficulty": "hard"
+    }
+  ]
+}

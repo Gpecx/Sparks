@@ -1,0 +1,218 @@
+{
+  "category": "Proteção de Sistemas Elétricos",
+  "categorySubtitle": "Fundamentos, Dispositivos, Funções ANSI, Seletividade e Proteções por Equipamento",
+  "categoryOrder": 5,
+  "module": "Proteção de Geradores",
+  "moduleSubtitle": "Fundamentos, aplicações e proteções de geradores",
+  "moduleOrder": 7,
+  "trail": "Fundamentos de Geradores",
+  "trailOrder": 0,
+  "questions": [
+    {
+      "type": "multipleChoice",
+      "statement": "Qual é o princípio fundamental de operação de um gerador síncrono?",
+      "options": [
+        "Absorve potência reativa constante da barra infinita.",
+        "Transforma energia térmica em cinética variando o escorregamento.",
+        "Induz tensão contínua na armadura giratória do estator.",
+        "Converte energia mecânica em elétrica apenas na velocidade síncrona."
+      ],
+      "correctIndex": 3,
+      "explanation": "A máquina síncrona converte energia em eletricidade operando apenas na velocidade síncrona. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual a função do Regulador Automático de Tensão (AVR) no gerador?",
+      "options": [
+        "Regular a tensão nos terminais e amortecer oscilações do sistema.",
+        "Limitar a velocidade síncrona da turbina mecânica.",
+        "Sincronizar a máquina com a rede durante a partida.",
+        "Resfriar o enrolamento do rotor com fluxo de hidrogênio."
+      ],
+      "correctIndex": 0,
+      "explanation": "O AVR regula a tensão nos terminais e ajuda a amortecer as oscilações do sistema elétrico. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual grandeza do sistema varia com o suprimento de energia reativa pelo gerador?",
+      "options": [
+        "A frequência elétrica da rede.",
+        "A tensão do sistema elétrico.",
+        "O torque mecânico do eixo.",
+        "A velocidade síncrona da turbina."
+      ],
+      "correctIndex": 1,
+      "explanation": "A energia reativa suprida ou consumida afeta estritamente a tensão do sistema elétrico. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que caracteriza o aterramento do gerador por alta impedância?",
+      "options": [
+        "Eleva a corrente de falta bifásica no estator.",
+        "Impede a saturação magnética do núcleo do estator.",
+        "Limita a corrente de curto-circuito fase-terra a valores entre 5 e 25 A.",
+        "Aumenta a capacitância parasita entre fases."
+      ],
+      "correctIndex": 2,
+      "explanation": "Este método reduz a corrente de curto-circuito fase-terra para a faixa de 5 a 25 A limitando danos. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual reatância limita a corrente do gerador imediatamente após um curto-circuito?",
+      "options": [
+        "Reatância síncrona de eixo direto.",
+        "Reatância transitória de eixo em quadratura.",
+        "Reatância de sequência zero.",
+        "Reatância subtransitória de eixo direto."
+      ],
+      "correctIndex": 3,
+      "explanation": "A corrente subtransitória inicial é limitada pela reatância subtransitória de eixo direto da máquina. (Fonte: Guia Proteção 2008).",
+      "difficulty": "easy"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Na curva de capabilidade, qual limite atua na região subexcitada do gerador?",
+      "options": [
+        "O aquecimento do estator e do núcleo de ferro.",
+        "A temperatura máxima do mancal mecânico.",
+        "A corrente do rotor no enrolamento de campo.",
+        "O limite térmico do transformador elevador."
+      ],
+      "correctIndex": 0,
+      "explanation": "Na região subexcitada, a máquina é limitada pelo aquecimento do estator e do núcleo de ferro. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Qual o risco de faltas fase-terra em um gerador solidamente aterrado?",
+      "options": [
+        "A corrente é muito baixa e não sensibiliza a proteção.",
+        "As altas correntes podem causar danos severos à laminação do núcleo.",
+        "O gerador perde o sincronismo instantaneamente.",
+        "A turbina embala devido à rejeição de carga."
+      ],
+      "correctIndex": 1,
+      "explanation": "Sem impedância limitadora, curtos fase-terra geram correntes muito altas que danificam a laminação. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "O que acontece se o gerador síncrono perde a corrente de campo a plena carga?",
+      "options": [
+        "Ele para de girar devido à perda do torque eletromagnético.",
+        "A tensão nos terminais eleva-se rapidamente para 120%.",
+        "Passa a rodar acima da velocidade síncrona absorvendo potência reativa.",
+        "Ele rejeita a carga mecânica e mantém a tensão nominal."
+      ],
+      "correctIndex": 2,
+      "explanation": "A máquina perde sincronismo, acelera e passa a operar de modo assíncrono absorvendo potência reativa. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como é feita a conexão unitária de um gerador síncrono ao sistema elétrico?",
+      "options": [
+        "O gerador supre energia diretamente às cargas em baixa tensão.",
+        "O estator é diretamente aterrado sem impedância.",
+        "O gerador é ligado à rede elétrica através de um transformador elevador dedicado.",
+        "A excitatriz utiliza escovas rotativas no próprio eixo."
+      ],
+      "correctIndex": 2,
+      "explanation": "Na conexão unitária, o gerador conecta-se ao sistema através de um transformador elevador próprio. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "multipleChoice",
+      "statement": "Como o rotor de polos salientes reage à perda de campo do gerador?",
+      "options": [
+        "Causa aquecimento mais rápido no estator que o rotor de polos lisos.",
+        "Anula a potência reativa absorvida da rede externa.",
+        "Impede o fluxo de correntes induzidas de dupla frequência.",
+        "Mantém a máquina em sincronismo com carga de 15% a 25% da nominal."
+      ],
+      "correctIndex": 3,
+      "explanation": "A diferença nas reatâncias do rotor de polos salientes permite manter o sincronismo com carga de até 25% sem campo. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A variação da potência ativa gerada pelo gerador afeta diretamente a frequência do sistema elétrico.",
+      "correctAnswer": true,
+      "explanation": "A energia ativa gerada e consumida regula estritamente a frequência elétrica do sistema. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "easy",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A energização acidental de um gerador gera alta corrente limitada pela sua impedância de sequência negativa.",
+      "correctAnswer": true,
+      "explanation": "A energização trifásica acidental produz correntes severas ditadas pela impedância de sequência negativa da máquina. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium",
+      "isTrue": true
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Durante um curto-circuito, a impedância interna do gerador diminui progressivamente até o estado de regime permanente.",
+      "correctAnswer": false,
+      "explanation": "A impedância interna aumenta progressivamente dos estágios subtransitório e transitório até o regime síncrono. (Fonte: Guia Proteção 2008).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "Na região sobre-excitada da curva de capabilidade, o gerador absorve potência reativa da rede elétrica.",
+      "correctAnswer": false,
+      "explanation": "Na região sobre-excitada, o gerador atua fornecendo (e não absorvendo) potência reativa para o sistema. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium",
+      "isTrue": false
+    },
+    {
+      "type": "trueFalse",
+      "statement": "A abertura dos fusíveis do TP faz o AVR medir tensão nula e causar a perigosa sobre-excitação do gerador.",
+      "correctAnswer": true,
+      "explanation": "Sem a medição do TP, o regulador automático entende queda de tensão e aumenta ao máximo a excitação do rotor. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "hard",
+      "isTrue": true
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Níveis de densidade de fluxo magnético excessivos provocados por falha no AVR causam a ____ do gerador.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "sobre-excitação"
+        }
+      ],
+      "explanation": "Tensões ou excitações elevadas geram alta densidade de fluxo magnético e saturam o núcleo, fenômeno chamado sobre-excitação. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "medium"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Na perda de sincronismo, o rotor sofre aquecimento devido às correntes induzidas pelo ____ do gerador.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "escorregamento"
+        }
+      ],
+      "explanation": "A máquina operando de forma assíncrona sofre aquecimento rotórico provocado pelas correntes induzidas do escorregamento mecânico. (Fonte: Virtus_ProtGeradores_Ed1).",
+      "difficulty": "hard"
+    },
+    {
+      "type": "fillBlank",
+      "statement": "Um sistema elétrico de grande porte conectado ao gerador atua como uma ____ infinita com tensão constante.",
+      "blanks": [
+        {
+          "index": 0,
+          "answer": "barra"
+        }
+      ],
+      "explanation": "Sistemas enormes conectados a um gerador não variam sua tensão e são tratados analiticamente como barras infinitas. (Fonte: Virtus-Anorm.Sist. Potência).",
+      "difficulty": "hard"
+    }
+  ]
+}
