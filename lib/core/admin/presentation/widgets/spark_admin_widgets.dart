@@ -37,7 +37,7 @@ class _SPARKAdminPanelState extends ConsumerState<SPARKAdminPanel> {
           'SPARK Admin Panel',
           style: TextStyle(
             color: AppColors.primary,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
             fontSize: 20,
           ),
         ),
@@ -140,7 +140,7 @@ class _LeftColumn extends ConsumerWidget {
                   'Categorias',
                   style: TextStyle(
                     color: AppColors.primary,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     fontSize: 16,
                   ),
                 ),
@@ -402,7 +402,7 @@ class _MiddleColumn extends ConsumerWidget {
                   'Módulos',
                   style: TextStyle(
                     color: Color(0xFF1E88E5),
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     fontSize: 16,
                   ),
                 ),
@@ -568,7 +568,7 @@ class _RightColumn extends ConsumerWidget {
                   'Trilhas',
                   style: TextStyle(
                     color: Color(0xFFFF9800),
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     fontSize: 16,
                   ),
                 ),

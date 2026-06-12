@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_skeleton.dart';
 import 'package:spark_app/models/spark_admin_models.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
@@ -157,8 +158,15 @@ class ModulesScreen extends ConsumerWidget {
                         },
                       );
                     },
-                    loading: () => const Center(
-                      child: CircularProgressIndicator(color: AppColors.primary),
+                    loading: () => ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 6,
+                      itemBuilder: (context, index) => const SparkSkeleton(
+                        width: double.infinity,
+                        height: 104,
+                        margin: EdgeInsets.only(bottom: 14),
+                      ),
                     ),
                     error: (err, stack) => Center(
                       child: Text(
@@ -300,7 +308,7 @@ class _ModuleCardState extends State<_ModuleCard>
                             style: TextStyle(
                               color: locked ? AppColors.textMuted : AppColors.textPrimary,
                               fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           const SizedBox(height: 4),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/utils/complex_number.dart';
 import 'package:spark_app/utils/symmetrical_components.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
@@ -421,9 +422,7 @@ class _ResultsPanel extends StatelessWidget {
                         results.map((r) => r.clipboardText).join('\n');
                     Clipboard.setData(ClipboardData(text: text));
                     HapticFeedback.lightImpact();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Resultados copiados')),
-                    );
+                    SparkSnack.success(context, 'Resultados copiados');
                   },
                 ),
               ),
@@ -476,9 +475,7 @@ class _ResultsPanel extends StatelessWidget {
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: r.clipboardText));
                   HapticFeedback.selectionClick();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${r.label} copiado')),
-                  );
+                  SparkSnack.success(context, '${r.label} copiado');
                 },
               ),
             ),

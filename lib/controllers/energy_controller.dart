@@ -9,8 +9,7 @@ import 'package:spark_app/services/user_service.dart';
 //
 //  MUDANÇAS EM RELAÇÃO AO ORIGINAL:
 //  - addXp() agora persiste no Firestore via UserService
-//  - addSparkPoints() e spendSparkPoints() sincronizam com Firestore
-//  - Os getters de xp, sparkPoints e level lêem do UserService
+//  - Os getters de xp e level lêem do UserService
 //    (fonte única de verdade = Firestore)
 //  - A bateria de energia local (gameplay) continua local pois é
 //    volátil e não precisa ser persistida entre sessões
@@ -22,7 +21,6 @@ class EnergyController extends ChangeNotifier {
   static const int entryCost = 1;
   static const int errorCost = 1;
   static const int regenIntervalMinutes = 5;
-  static const int fullRechargeSparkCost = 50;
   static const int streakBonusThreshold = 3;
 
   // ── Singleton ────────────────────────────────────────────────────
@@ -42,7 +40,6 @@ class EnergyController extends ChangeNotifier {
 
   // ── Getters que lêem do Firestore via UserService ────────────────
   int get xp => _userService.xp;
-  int get sparkPoints => _userService.sparkPoints;
   int get userLevel => _userService.level;
 
   // ── Getters locais (bateria de gameplay) ────────────────────────
@@ -118,30 +115,6 @@ class EnergyController extends ChangeNotifier {
     final finalAmount = OverloadService().applyMultiplier(amount);
     await _userService.addXp(finalAmount);
     notifyListeners(); // getter xp reflete novo valor do UserService
-  }
-
-  /// Adiciona Pontos Spark e persiste.
-  Future<void> addSparkPoints(int amount) async {
-    await _userService.addSparkPoints(amount);
-    notifyListeners();
-  }
-
-  /// Gasta Pontos Spark. Retorna true se bem-sucedido.
-  Future<bool> spendSparkPoints(int amount) async {
-    final success = await _userService.spendSparkPoints(amount);
-    if (success) notifyListeners();
-    return success;
-  }
-
-  /// Recarga total da bateria com Spark Points.
-  Future<bool> rechargeWithSparks() async {
-    final success = await spendSparkPoints(fullRechargeSparkCost);
-    if (success) {
-      _energy = maxEnergy;
-      _stopRegen();
-      notifyListeners();
-    }
-    return success;
   }
 
   // ─────────────────────────────────────────────────────────────────

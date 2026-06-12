@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/utils/idmt_curves.dart';
 import 'package:spark_app/utils/coordinogram.dart';
 import 'package:spark_app/screens/tools/widgets/idmt_curve_picker.dart';
@@ -474,9 +475,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
                   onPressed: () {
                     Clipboard.setData(ClipboardData(text: clip));
                     HapticFeedback.lightImpact();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Resultado copiado')),
-                    );
+                    SparkSnack.success(context, 'Resultado copiado');
                   },
                 ),
               ),
@@ -899,7 +898,7 @@ class _RelayInput {
 }
 
 const _relayColors = <Color>[
-  Color(0xFF00C402),
+  AppColors.primary,
   Color(0xFF38BDF8),
   Color(0xFFF97316),
   Color(0xFFA855F7),

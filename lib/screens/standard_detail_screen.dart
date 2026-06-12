@@ -165,7 +165,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
             child: Text(
               s.code,
               textAlign: TextAlign.center,
-              style: TextStyle(color: accent, fontSize: 15, fontWeight: FontWeight.w900),
+              style: TextStyle(color: accent, fontSize: 15, fontWeight: FontWeight.w800),
             ),
           ),
         ),
@@ -177,7 +177,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
         // ── Título ────────────────────────────────────────────────────────
         Text(
           s.code,
-          style: TextStyle(color: accent, fontSize: 28, fontWeight: FontWeight.w900, letterSpacing: 2),
+          style: TextStyle(color: accent, fontSize: 28, fontWeight: FontWeight.w800, letterSpacing: 2),
         ),
         const SizedBox(height: 6),
         Text(
@@ -192,7 +192,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
           child: Text(
             s.description,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white.withValues(alpha: 0.65), fontSize: 14, height: 1.6),
+            style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.6),
           ),
         ),
         const SizedBox(height: 24),
@@ -261,7 +261,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
         const SizedBox(height: 24),
         Container(width: 40, height: 4, decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(2))),
         const SizedBox(height: 16),
-        const Text('POWERPLAY', style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w900, fontStyle: FontStyle.italic, letterSpacing: 3)),
+        const Text('POWERPLAY', style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w800, fontStyle: FontStyle.italic, letterSpacing: 3)),
         const SizedBox(height: 6),
         const Text('O Netflix da Engenharia Elétrica', style: TextStyle(color: AppColors.primary, fontSize: 15, fontWeight: FontWeight.w600)),
         const SizedBox(height: 20),
@@ -270,7 +270,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
           child: Text(
             'Acesse centenas de aulas, estudos de caso e conteúdos exclusivos sobre normas técnicas e engenharia — tudo num só lugar.',
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 14, height: 1.6),
+            style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.6),
           ),
         ),
         const SizedBox(height: 28),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/services/user_service.dart';
@@ -64,12 +65,7 @@ class _SupportScreenState extends State<SupportScreen> {
     } catch (_) {
       if (mounted) {
         setState(() => _sending = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Erro ao enviar. Tente novamente.'),
-            backgroundColor: AppColors.error,
-          ),
-        );
+        SparkSnack.error(context, 'Erro ao enviar. Tente novamente.');
       }
     }
   }
@@ -124,7 +120,7 @@ class _SupportScreenState extends State<SupportScreen> {
             const SizedBox(height: 24),
             const Text(
               'Mensagem enviada!',
-              style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 10),
             const Text(
@@ -142,7 +138,7 @@ class _SupportScreenState extends State<SupportScreen> {
               ),
               child: const Text(
                 'VOLTAR AO INÍCIO',
-                style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold, letterSpacing: 1),
+                style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, letterSpacing: 1),
               ),
             ),
           ],
@@ -169,9 +165,7 @@ class _SupportScreenState extends State<SupportScreen> {
                 color: AppColors.blue,
                 onTap: () {
                   Clipboard.setData(const ClipboardData(text: 'suporte@exs.com.br'));
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('E-mail copiado!'), backgroundColor: AppColors.primary),
-                  );
+                  SparkSnack.success(context, 'E-mail copiado!');
                 },
               ),
               const SizedBox(width: 12),
@@ -181,9 +175,7 @@ class _SupportScreenState extends State<SupportScreen> {
                 sublabel: 'Seg–Sex 8h–18h',
                 color: const Color(0xFF25D366),
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('WhatsApp em breve!'), backgroundColor: AppColors.primary),
-                  );
+                  SparkSnack.info(context, 'WhatsApp em breve!');
                 },
               ),
             ],
@@ -318,7 +310,7 @@ class _SupportScreenState extends State<SupportScreen> {
                             'ENVIAR MENSAGEM',
                             style: TextStyle(
                               color: AppColors.background,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w700,
                               fontSize: 14,
                               letterSpacing: 1,
                             ),
@@ -374,7 +366,7 @@ class _SupportScreenState extends State<SupportScreen> {
                 child: Icon(icon, color: color, size: 20),
               ),
               const SizedBox(height: 10),
-              Text(label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+              Text(label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13)),
               const SizedBox(height: 2),
               Text(sublabel, style: const TextStyle(color: AppColors.textSecondary, fontSize: 11)),
             ],

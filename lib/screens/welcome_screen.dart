@@ -75,11 +75,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                       ),
                       Text(
-                        'by EXS Solutions',
+                        'by VoltsMind',
                         style: TextStyle(
                           color: AppColors.primary,
                           fontSize: 11,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                           letterSpacing: 1.5,
                         ),
                       ),
@@ -195,7 +195,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      'O Futuro do\nSetor Elétrico\nComeça Aqui',
+                      'Da Proteção à\nAutomação,\nDomine Cada Trilha',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
@@ -207,10 +207,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
                     const SizedBox(height: 14),
                     Text(
-                      'Domine normas técnicas com\ntecnologia validada em campo',
+                      'SPDA, Estudos, Termografia e Comissionamento —\nda NR-10 ao IEC 61850, em uma só plataforma',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.55),
+                        color: AppColors.textSecondary,
                         fontSize: 15,
                         height: 1.6,
                       ),
@@ -287,10 +287,10 @@ class _MoleculePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paintGreen = Paint()
-      ..color = const Color(0xFF00C402)
+      ..color = AppColors.primary
       ..style = PaintingStyle.fill;
     final paintDark = Paint()
-      ..color = const Color(0xFF1D5F31)
+      ..color = AppColors.cardBorder
       ..style = PaintingStyle.fill;
 
     final cx = size.width / 2;
@@ -308,7 +308,7 @@ class _MoleculePainter extends CustomPainter {
     ];
 
     final linePaint = Paint()
-      ..color = const Color(0xFF00C402).withValues(alpha: 0.6)
+      ..color = AppColors.primary.withValues(alpha: 0.6)
       ..strokeWidth = 1.5
       ..style = PaintingStyle.stroke;
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -60,13 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       if (_quizCompleted) {
         Navigator.pop(context); // Go back or go to home screen
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Complete o minigame para prosseguir!'),
-            backgroundColor: AppColors.error,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
+        SparkSnack.error(context, 'Complete o minigame para prosseguir!');
       }
     }
   }
@@ -88,13 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         } else {
           // Reseta para tentar novamente
           _quizAnswers.clear();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Algumas respostas estão erradas. Tente novamente!'),
-              backgroundColor: AppColors.error,
-              behavior: SnackBarBehavior.floating,
-            ),
-          );
+          SparkSnack.error(context, 'Algumas respostas estão erradas. Tente novamente!');
         }
       }
     });
@@ -172,7 +161,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           : 'AVANÇAR',
                       style: const TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                         letterSpacing: 1.5,
                       ),
                     ),
@@ -274,7 +263,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   const SizedBox(height: 24),
                   const Text('Parabéns! Você concluiu o treinamento.',
-                      style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 16)),
+                      style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 16)),
                 ],
               ),
             )
@@ -327,7 +316,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     opt,
                     style: TextStyle(
                       color: isSelected ? AppColors.primary : AppColors.textSecondary,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
                     ),
                   ),
                 ),

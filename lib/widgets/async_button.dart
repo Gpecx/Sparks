@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 
 // ─────────────────────────────────────────────────────────────────
@@ -69,6 +70,7 @@ class _AsyncButtonState2 extends State<AsyncButton>
 
   Future<void> _handlePress() async {
     if (_state == _AsyncButtonState.loading) return;
+    HapticFeedback.mediumImpact();
     setState(() {
       _state = _AsyncButtonState.loading;
       _errorMsg = null;
@@ -76,11 +78,13 @@ class _AsyncButtonState2 extends State<AsyncButton>
     try {
       await widget.onPressed();
       if (!mounted) return;
+      HapticFeedback.lightImpact();
       setState(() => _state = _AsyncButtonState.success);
       await Future.delayed(const Duration(seconds: 1));
       if (mounted) setState(() => _state = _AsyncButtonState.idle);
     } catch (e) {
       if (!mounted) return;
+      HapticFeedback.heavyImpact();
       setState(() {
         _state = _AsyncButtonState.error;
         _errorMsg = e.toString();

@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/models/ebook_model.dart';
 import 'package:spark_app/providers/ebook_providers.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/services/access_control_service.dart';
+import 'package:spark_app/services/analytics_service.dart';
+import 'package:spark_app/widgets/plan_widgets.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  TELA 1 — ÍNDICE DO E-BOOK (lista de capítulos)
@@ -25,6 +29,7 @@ class EbookReaderScreen extends ConsumerWidget {
     final progress = ref.watch(ebookProgressProvider(ebook.id));
     final completedChapters = progress?.completedChapters ?? const [];
     final chapters = [...ebook.chapterIndex]..sort((a, b) => a.order.compareTo(b.order));
+    final access = ref.watch(accessControlProvider);
 
     return SparksBackground(
       child: PcbBackground(
@@ -70,7 +75,7 @@ class EbookReaderScreen extends ConsumerWidget {
                             style: const TextStyle(
                               color: AppColors.textPrimary,
                               fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           const SizedBox(height: 6),
@@ -134,6 +139,7 @@ class EbookReaderScreen extends ConsumerWidget {
                         final i = e.key;
                         final ch = e.value;
                         final done = completedChapters.contains(ch.id);
+                        final locked = !access.canAccessEbookChapter(i);
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: _ChapterTile(
@@ -141,7 +147,15 @@ class EbookReaderScreen extends ConsumerWidget {
                             chapterRef: ch,
                             done: done,
                             color: themeColor,
+                            locked: locked,
                             onTap: () {
+                              if (locked) {
+                                AnalyticsService().logLockedFeatureAccessed(
+                                    feature: 'ebook', itemId: ebook.id);
+                                UpgradePromptBottomSheet.show(context,
+                                    feature: 'ebook', trigger: 'ebook_locked');
+                                return;
+                              }
                               HapticFeedback.lightImpact();
                               Navigator.push(
                                 context,
@@ -188,6 +202,7 @@ class _ChapterTile extends StatelessWidget {
   final bool done;
   final Color color;
   final VoidCallback onTap;
+  final bool locked;
 
   const _ChapterTile({
     required this.number,
@@ -195,6 +210,7 @@ class _ChapterTile extends StatelessWidget {
     required this.done,
     required this.color,
     required this.onTap,
+    this.locked = false,
   });
 
   @override
@@ -265,7 +281,10 @@ class _ChapterTile extends StatelessWidget {
                     ],
                   ),
                 ),
-                Icon(Icons.chevron_right, color: color.withValues(alpha: 0.6)),
+                Icon(locked ? Icons.lock_rounded : Icons.chevron_right,
+                    color: locked
+                        ? AppColors.primary
+                        : color.withValues(alpha: 0.6)),
               ],
             ),
           ),
@@ -348,16 +367,11 @@ class _ChapterReaderScreenState extends ConsumerState<ChapterReaderScreen> {
       completed: allDone,
     );
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(allDone
-              ? 'E-book concluído! 🎉'
-              : 'Capítulo ${widget.chapterNumber} concluído'),
-          backgroundColor: AppColors.card,
-          behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        ),
+      SparkSnack.success(
+        context,
+        allDone
+            ? 'E-book concluído! 🎉'
+            : 'Capítulo ${widget.chapterNumber} concluído',
       );
       Navigator.pop(context);
     }
@@ -407,7 +421,7 @@ class _ChapterReaderScreenState extends ConsumerState<ChapterReaderScreen> {
                                 style: const TextStyle(
                                   color: AppColors.textPrimary,
                                   fontSize: 22,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
                               if (chapter.subtitle != null) ...[

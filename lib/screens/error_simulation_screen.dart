@@ -349,7 +349,7 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
                       style: TextStyle(
                         color: _isHintActive ? Colors.black : AppColors.gold,
                         fontSize: 10,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
@@ -596,7 +596,7 @@ class _HitZoneOverlayPainter extends CustomPainter {
             style: TextStyle(
               color: AppColors.error,
               fontSize: 18,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w800,
             ),
           ),
           textDirection: TextDirection.ltr,
@@ -748,7 +748,7 @@ class _TomadaPainter extends CustomPainter {
 
     // ── Caixa embutida ─────────────────────────────────
     rect(Rect.fromLTWH(130, 30, 300, 185), const Color(0xFF0d150d),
-        stroke: const Color(0xFF1a2e1a), sw: 1.5, rx: 6);
+        stroke: AppColors.successBg, sw: 1.5, rx: 6);
     rect(Rect.fromLTWH(140, 40, 280, 165), const Color(0xFF0f1a0f),
         stroke: const Color(0xFF1f341f), rx: 4);
 
@@ -760,7 +760,7 @@ class _TomadaPainter extends CustomPainter {
 
     // Tomada ESQUERDA
     rect(Rect.fromLTWH(178, 76, 76, 78), const Color(0xFF0d170d),
-        stroke: const Color(0xFF1a2e1a), rx: 4);
+        stroke: AppColors.successBg, rx: 4);
     rect(Rect.fromLTWH(188, 92, 14, 16), const Color(0xFF0a0a0a),
         stroke: const Color(0xFF222222), rx: 2);
     rect(Rect.fromLTWH(208, 92, 14, 16), const Color(0xFF0a0a0a),
@@ -774,7 +774,7 @@ class _TomadaPainter extends CustomPainter {
 
     // Tomada DIREITA (com fissura = erro 2)
     rect(Rect.fromLTWH(270, 76, 76, 78), const Color(0xFF0d170d),
-        stroke: const Color(0xFF1a2e1a), rx: 4);
+        stroke: AppColors.successBg, rx: 4);
     rect(Rect.fromLTWH(280, 92, 14, 16), const Color(0xFF0a0a0a),
         stroke: const Color(0xFF222222), rx: 2);
     rect(Rect.fromLTWH(300, 92, 14, 16), const Color(0xFF0a0a0a),
@@ -806,7 +806,7 @@ class _TomadaPainter extends CustomPainter {
 
     // ── Conduíte ───────────────────────────────────────
     rect(Rect.fromLTWH(266, 175, 28, 80), const Color(0xFF141e14),
-        stroke: const Color(0xFF1a2e1a), rx: 3);
+        stroke: AppColors.successBg, rx: 3);
 
     // Fio fase (vermelho) — correto
     line(const Offset(272, 175), const Offset(272, 165), const Color(0xFFC62828), sw: 3);
@@ -837,7 +837,7 @@ class _TomadaPainter extends CustomPainter {
     text('NBR 5410', const Offset(438, 52), const Color(0xFF2a4a3a));
     line(const Offset(438, 63), const Offset(460, 63), const Color(0xFF8BC34A), sw: 3);
     text('Terra PE', const Offset(464, 60), const Color(0xFF4a6a5a));
-    line(const Offset(438, 77), const Offset(460, 77), const Color(0xFF42A5F5), sw: 3);
+    line(const Offset(438, 77), const Offset(460, 77), AppColors.blue, sw: 3);
     text('Neutro N', const Offset(464, 74), const Color(0xFF4a6a5a));
     line(const Offset(438, 91), const Offset(460, 91), const Color(0xFFC62828), sw: 3);
     text('Fase', const Offset(464, 88), const Color(0xFF4a6a5a));
@@ -921,7 +921,7 @@ class _QuadroPainter extends CustomPainter {
     rect(Rect.fromLTWH(50,12,370,285), const Color(0xFF0a1a12),
         stroke: AppColors.primary.withValues(alpha: 0.7), sw: 1.2, rx: 6);
     rect(Rect.fromLTWH(55,17,360,275), const Color(0xFF0d1a0d),
-        stroke: const Color(0xFF1a2e1a), rx: 4);
+        stroke: AppColors.successBg, rx: 4);
     // Header
     rect(Rect.fromLTWH(55,17,360,22), const Color(0xFF081008), rx: 4);
     text('QD-01 · QUADRO DE DISTRIBUIÇÃO', const Offset(235,29), AppColors.primary,
@@ -935,7 +935,7 @@ class _QuadroPainter extends CustomPainter {
         stroke: AppColors.primary, rx: 2);
     rect(Rect.fromLTWH(220,52,8,9), AppColors.primary.withValues(alpha: 0.8), rx: 1);
 
-    line(const Offset(65,86), const Offset(410,86), const Color(0xFF1a2e1a));
+    line(const Offset(65,86), const Offset(410,86), AppColors.successBg);
 
     // Linhas C1–C4
     final circuits = [
@@ -963,7 +963,7 @@ class _QuadroPainter extends CustomPainter {
 
     // Barra Neutro
     rect(Rect.fromLTWH(65,202,330,14), const Color(0xFF0d1a0d),
-        stroke: const Color(0xFF1a2e1a), rx: 2);
+        stroke: AppColors.successBg, rx: 2);
     text('BARRA NEUTRO (N)', const Offset(230, 212), const Color(0xFF2a4a3a),
         fs: 7, align: TextAlign.center);
 
@@ -994,7 +994,7 @@ class _QuadroPainter extends CustomPainter {
     line(const Offset(90,248), const Offset(90,255), const Color(0xFFFFD600), sw:3);
     line(const Offset(90,263), const Offset(90,270), const Color(0xFFFFD600), sw:3);
     // Neutro (azul)
-    line(const Offset(113,216), const Offset(113,285), const Color(0xFF42A5F5), sw:3);
+    line(const Offset(113,216), const Offset(113,285), AppColors.blue, sw:3);
     // Fase preto
     line(const Offset(136,216), const Offset(136,285), const Color(0xFF444444), sw:3);
     line(const Offset(136,216), const Offset(136,285), const Color(0xFF666666), sw:1.5);
@@ -1014,7 +1014,7 @@ class _QuadroPainter extends CustomPainter {
     line(const Offset(438,65), const Offset(458,65), const Color(0xFF8BC34A), sw:3);
     line(const Offset(448,65), const Offset(450,65), const Color(0xFFFFD600), sw:3);
     text('Terra PE', const Offset(462,62), const Color(0xFF4a6a5a));
-    line(const Offset(438,79), const Offset(458,79), const Color(0xFF42A5F5), sw:3);
+    line(const Offset(438,79), const Offset(458,79), AppColors.blue, sw:3);
     text('Neutro N', const Offset(462,76), const Color(0xFF4a6a5a));
     line(const Offset(438,93), const Offset(458,93), const Color(0xFF555555), sw:3);
     text('Fase (preto)', const Offset(462,90), const Color(0xFF4a6a5a));
@@ -1178,7 +1178,7 @@ class _PainelIndustrialPainter extends CustomPainter {
 
     // Fios saindo da calha — NBR 5410 corretos
     line(const Offset(90,181), const Offset(90,260), const Color(0xFFC62828), sw: 2.5);
-    line(const Offset(108,181), const Offset(108,260), const Color(0xFF42A5F5), sw: 2.5);
+    line(const Offset(108,181), const Offset(108,260), AppColors.blue, sw: 2.5);
     line(const Offset(126,181), const Offset(126,260), const Color(0xFFF9A825), sw: 2.5);
     line(const Offset(150,181), const Offset(150,260), const Color(0xFF8BC34A), sw: 2.5);
     line(const Offset(150,228), const Offset(150,235), const Color(0xFFFFD600), sw: 2.5);
@@ -1224,7 +1224,7 @@ class _PainelIndustrialPainter extends CustomPainter {
     line(const Offset(458,65), const Offset(478,65), const Color(0xFF8BC34A), sw:2.5);
     line(const Offset(468,65), const Offset(470,65), const Color(0xFFFFD600), sw:2.5);
     text('Terra PE', const Offset(482,62), const Color(0xFF4a6a5a));
-    line(const Offset(458,77), const Offset(478,77), const Color(0xFF42A5F5), sw:2.5);
+    line(const Offset(458,77), const Offset(478,77), AppColors.blue, sw:2.5);
     text('Neutro', const Offset(482,74), const Color(0xFF4a6a5a));
     line(const Offset(458,89), const Offset(478,89), const Color(0xFFC62828), sw:2.5);
     text('Fase', const Offset(482,86), const Color(0xFF4a6a5a));

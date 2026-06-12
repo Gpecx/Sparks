@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
@@ -430,7 +431,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           const SizedBox(height: 12),
           Row(children: ['Mínima', 'Normal', 'Alta'].map((f) {
             final isSelected = _notifFrequency == f;
-            return Expanded(child: GestureDetector(onTap: () => setState(() => _notifFrequency = f), child: Container(margin: const EdgeInsets.symmetric(horizontal: 4), padding: const EdgeInsets.symmetric(vertical: 8), decoration: BoxDecoration(color: isSelected ? AppColors.primary : AppColors.inputBackground, borderRadius: BorderRadius.circular(6)), child: Center(child: Text(f, style: TextStyle(color: isSelected ? Colors.white : AppColors.textMuted, fontSize: 12, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal))))));
+            return Expanded(child: GestureDetector(onTap: () => setState(() => _notifFrequency = f), child: Container(margin: const EdgeInsets.symmetric(horizontal: 4), padding: const EdgeInsets.symmetric(vertical: 8), decoration: BoxDecoration(color: isSelected ? AppColors.primary : AppColors.inputBackground, borderRadius: BorderRadius.circular(6)), child: Center(child: Text(f, style: TextStyle(color: isSelected ? Colors.white : AppColors.textMuted, fontSize: 12, fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400))))));
           }).toList()),
         ],
       ),
@@ -475,7 +476,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Future<void> _confirmDelete(BuildContext dialogCtx) async {
     final router = GoRouter.of(context);
-    final messenger = ScaffoldMessenger.of(context);
     Navigator.pop(dialogCtx); // fecha o diálogo de confirmação
 
     // Diálogo de progresso (não-cancelável)
@@ -494,12 +494,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     } catch (e) {
       if (!mounted) return;
       Navigator.of(context, rootNavigator: true).pop(); // fecha o progresso
-      messenger.showSnackBar(
-        SnackBar(
-          backgroundColor: AppColors.error,
-          content: Text('Falha ao eliminar conta: $e'),
-        ),
-      );
+      if (!mounted) return;
+      SparkSnack.error(context, 'Falha ao eliminar conta: $e');
     }
   }
 }

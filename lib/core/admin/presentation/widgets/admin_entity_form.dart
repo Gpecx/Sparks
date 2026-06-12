@@ -235,7 +235,7 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
             style: const TextStyle(
               color: AppColors.primary,
               fontSize: 10,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700,
               letterSpacing: 1.2,
             ),
           ),
@@ -285,7 +285,7 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
               style: const TextStyle(
                 color: AppColors.primary,
                 fontSize: 10,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w700,
                 letterSpacing: 1.2,
               ),
             ),
@@ -330,7 +330,7 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
       style: const TextStyle(
         color: AppColors.primary,
         fontSize: 10,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w700,
         letterSpacing: 1.2,
       ),
     );
@@ -485,7 +485,7 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
                       style: const TextStyle(
                         color: AppColors.textPrimary,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                         letterSpacing: 0.5,
                       ),
                     ),
@@ -662,7 +662,7 @@ class _AdminEntityFormState extends State<AdminEntityForm> {
             style: const TextStyle(
               color: AppColors.textPrimary,
               fontSize: 22,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 12),
@@ -811,7 +811,7 @@ class _AdminSuccessDialogState extends State<AdminSuccessDialog> with SingleTick
                   style: const TextStyle(
                     color: AppColors.textPrimary,
                     fontSize: 22,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 const SizedBox(height: 12),

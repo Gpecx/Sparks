@@ -81,7 +81,7 @@ class ModuleRoutingScreen extends ConsumerWidget {
                   style: TextStyle(
                     color: Colors.white70,
                     fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
@@ -122,7 +122,7 @@ class ModuleRoutingScreen extends ConsumerWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -147,7 +147,7 @@ class ModuleRoutingScreen extends ConsumerWidget {
                     ),
                     child: const Text(
                       'Voltar',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
                 ],

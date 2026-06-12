@@ -165,7 +165,7 @@ class _GlobalErrorWidget extends StatelessWidget {
                   style: TextStyle(
                     color: Color(0xFFE0E0E0),
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                   ),
                   textAlign: TextAlign.center,
                 ),

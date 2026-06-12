@@ -49,9 +49,6 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
     return Icons.security;
   }
 
-  // Bet animation
-  bool _showBetDeduction = false;
-
   // Timer
   late AnimationController _timerController;
   static const int _questionTimeSec = 15;
@@ -101,40 +98,10 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
       }
     });
 
-    // Trigger bet deduction animation for non-admins
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (!(_userService.user?.isAdmin ?? false)) {
-        if (mounted) setState(() => _showBetDeduction = true);
-        Future.delayed(const Duration(seconds: 2), () {
-          if (mounted) setState(() => _showBetDeduction = false);
-        });
-      }
-    });
-
     _startMatchmaking();
   }
 
-  static const int betAmount = 20;
-
   Future<void> _startMatchmaking() async {
-    final isAdmin = _userService.user?.isAdmin ?? false;
-
-    // Gasta Spark Points via UserService (persiste no Firestore) se não for admin
-    bool spent = true;
-    if (!isAdmin) {
-      spent = await _userService.spendSparkPoints(betAmount);
-    }
-
-    if (!spent) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Pontos Spark insuficientes para apostar. Custo: 20'), backgroundColor: AppColors.error),
-        );
-        Navigator.pop(context);
-      }
-      return;
-    }
-
     try {
       final match = await _matchService.findMatch('jogador_local');
       if (!mounted) return;
@@ -222,18 +189,15 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
     if (_match != null) {
       final p1Score = _match!.player1TotalScore;
       final p2Score = _match!.player2TotalScore;
-      final isAdmin = _userService.user?.isAdmin ?? false;
 
       if (p1Score > p2Score) {
-        // Vitória: +25 ELO + devolve aposta dobrada
+        // Vitória: +25 ELO
         _userService.updateElo(eloChange: 25, won: true);
-        if (!isAdmin) _userService.addSparkPoints(betAmount * 2);
       } else if (p1Score == p2Score) {
-        // Empate: 0 ELO + devolve aposta
+        // Empate: 0 ELO
         _userService.updateElo(eloChange: 0, won: null);
-        if (!isAdmin) _userService.addSparkPoints(betAmount);
       } else {
-        // Derrota: -15 ELO (aposta já foi consumida no início)
+        // Derrota: -15 ELO
         _userService.updateElo(eloChange: -15, won: false);
       }
     }
@@ -370,7 +334,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                           height: 1.4,
                         ),
                       ),
@@ -457,7 +421,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
           child: Text(
             name,
             style: TextStyle(
-              color: isYou ? Colors.white : Colors.white.withValues(alpha: 0.7),
+              color: isYou ? Colors.white : AppColors.textSecondary,
               fontSize: 12,
               fontWeight: FontWeight.w700,
             ),
@@ -601,7 +565,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                   color: textColor,
                   fontSize: 15,
                   height: 1.3,
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
                 ),
               ),
             ),
@@ -678,38 +642,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                   style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800, letterSpacing: 2),
                 ),
                 const SizedBox(height: 12),
-                Text('Preparando sua arena de faíscas', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14)),
-
-                // Bet deduction animation
-                const SizedBox(height: 20),
-                AnimatedOpacity(
-                  opacity: _showBetDeduction ? 1.0 : 0.0,
-                  duration: const Duration(milliseconds: 500),
-                  child: AnimatedSlide(
-                    offset: _showBetDeduction ? Offset.zero : const Offset(0, 0.5),
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.elasticOut,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: AppColors.error.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: AppColors.error.withValues(alpha: 0.4)),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.bolt, color: AppColors.error, size: 18),
-                          const SizedBox(width: 6),
-                          Text(
-                            '-$betAmount Pontos Spark', // Use standard dash, not U+2212
-                            style: const TextStyle(color: AppColors.error, fontSize: 14, fontWeight: FontWeight.w800),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                Text('Preparando sua arena de faíscas', style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
 
                 const SizedBox(height: 20),
                 SizedBox(
@@ -782,16 +715,14 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                     style: TextStyle(
                       color: resultColor,
                       fontSize: 32,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w800,
                       letterSpacing: 3,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    (_userService.user?.isAdmin ?? false) 
-                        ? 'Modo Teste de Admin - Nenhum ponto alterado.'
-                        : (won ? '+$betAmount Pontos Adquiridos!' : (draw ? 'Seus $betAmount de aposta voltaram.' : 'Você perdeu os $betAmount apostados.')),
-                    style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 14, fontWeight: FontWeight.w700),
+                    won ? 'Vitória!' : (draw ? 'Empate!' : 'Não foi dessa vez.'),
+                    style: TextStyle(color: AppColors.textSecondary, fontSize: 14, fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 10),
                   // ELO change
@@ -834,7 +765,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.3))),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                                child: Text('VS', style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
+                                child: Text('VS', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
                               ),
                               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.3))),
                             ],
@@ -855,7 +786,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                       icon: const Icon(Icons.home, color: AppColors.background),
                       label: const Text(
                         'VOLTAR AO MENU',
-                        style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1),
+                        style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: resultColor,
@@ -907,13 +838,13 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(name, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
-              Text('$correct/5 acertos', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 11)),
+              Text('$correct/5 acertos', style: TextStyle(color: AppColors.textSecondary, fontSize: 11)),
             ],
           ),
         ),
         Text(
           '${score.toInt()} pts',
-          style: TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w900),
+          style: TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w800),
         ),
       ],
     );

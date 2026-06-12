@@ -352,7 +352,7 @@ class _ConnectorPainter extends CustomPainter {
     final tp = TextPainter(
       text: const TextSpan(
         text: '1',
-        style: TextStyle(color: AppColors.gold, fontSize: 11, fontWeight: FontWeight.bold),
+        style: TextStyle(color: AppColors.gold, fontSize: 11, fontWeight: FontWeight.w700),
       ),
       textDirection: TextDirection.ltr,
     )..layout();

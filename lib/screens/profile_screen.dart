@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/clan_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
@@ -14,6 +15,8 @@ import 'package:spark_app/screens/pocket_card_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/services/access_control_service.dart';
+import 'package:spark_app/widgets/plan_widgets.dart';
 import 'package:spark_app/models/badge_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -74,14 +77,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     if (user == null || !user.isAdmin) {
       if (_avatarTapCount >= _triggerTaps) {
         _avatarTapCount = 0;
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Acesso Negado: Apenas administradores podem ativar o Modo Dev.', style: TextStyle(color: Colors.white, fontSize: 13)),
-          duration: Duration(seconds: 3),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(16),
-        ));
+        SparkSnack.error(context, 'Acesso Negado: Apenas administradores podem ativar o Modo Dev.');
       }
       return;
     }
@@ -224,25 +220,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       Text(
                         (user?.role ?? 'TÉCNICO').toUpperCase(),
                         style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.4), fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
+                            color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
                       ),
-                      if (user?.isPremium ?? false) ...[
-                        const SizedBox(width: 8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFD700).withValues(alpha: 0.2),
-                            border: Border.all(color: const Color(0xFFFFD700).withValues(alpha: 0.6)),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            (user?.subscriptionPlanId == 'student' 
-                                ? 'ESTUDANTE' 
-                                : (user?.subscriptionPlanId ?? 'PRO')).toUpperCase(),
-                            style: const TextStyle(color: Color(0xFFFFD700), fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 1.5),
-                          ),
-                        ),
-                      ],
+                      const SizedBox(width: 8),
+                      PlanBadge(plan: ref.watch(accessControlProvider).plan, compact: true),
                     ],
                   ),
                   const SizedBox(height: 14),
@@ -255,9 +236,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(colors: [Color(0xFF00C402), Color(0xFF1D5F31)]),
+                          gradient: const LinearGradient(colors: [AppColors.primary, AppColors.cardBorder]),
                           borderRadius: BorderRadius.circular(20),
-                          boxShadow: [BoxShadow(color: const Color(0xFF00C402).withValues(alpha: 0.3), blurRadius: 10)],
+                          boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 10)],
                         ),
                         child: const Row(
                           mainAxisSize: MainAxisSize.min,
@@ -265,36 +246,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             Icon(Icons.badge, color: Colors.white, size: 16),
                             SizedBox(width: 8),
                             Text('VER CREDENCIAL',
-                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12, letterSpacing: 1)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-
-                  // ── Pontos Spark ─────────────────────────────────
-                  MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      onTap: () => context.push('/store'),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withValues(alpha: 0.10),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(Icons.bolt, color: AppColors.primary, size: 18),
-                            const SizedBox(width: 6),
-                            // ✅ Spark Points reais do Firestore
-                            Text('${userService.sparkPoints} Pontos Spark',
-                                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 14)),
-                            const SizedBox(width: 8),
-                            const Icon(Icons.add_circle_outline, color: AppColors.primary, size: 16),
+                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 12, letterSpacing: 1)),
                           ],
                         ),
                       ),
@@ -334,7 +286,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('DEBUG INFO (MODO DEV)', style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
+                            const Text('DEBUG INFO (MODO DEV)', style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
                             Text('UID: ${userService.uid}', style: const TextStyle(color: Colors.white70, fontSize: 10, fontFamily: 'monospace')),
                             Text('Role Firestore: ${user?.role ?? "Nula"}', style: const TextStyle(color: Colors.white70, fontSize: 10)),
@@ -514,7 +466,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               Text(
                 'Você não tem conquistas no momento.',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700),
               ),
               SizedBox(height: 4),
               Text(
@@ -664,7 +616,7 @@ class _ClanSection extends StatelessWidget {
                             elevation: 0,
                           ),
                           child: const Text('CRIAR CLÃ',
-                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13)),
                         ),
                       ),
                     ),
@@ -680,7 +632,7 @@ class _ClanSection extends StatelessWidget {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
                           child: const Text('ENTRAR',
-                              style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 13)),
+                              style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 13)),
                         ),
                       ),
                     ),

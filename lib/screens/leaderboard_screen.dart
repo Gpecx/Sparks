@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_card.dart';
+import 'package:spark_app/widgets/spark_skeleton.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/services/tournament_service.dart';
@@ -297,9 +299,24 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                 else
                   Expanded(
                     child: isLoadingCurrent
-                        ? const Center(
-                            child: CircularProgressIndicator(
-                                color: AppColors.primary))
+                        ? ListView(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: [
+                              const SparkSkeleton(
+                                  width: double.infinity, height: 200),
+                              const SizedBox(height: 20),
+                              ...List.generate(
+                                6,
+                                (_) => const SparkSkeleton(
+                                  width: double.infinity,
+                                  height: 56,
+                                  radius: AppRadius.md,
+                                  margin: EdgeInsets.only(bottom: 8),
+                                ),
+                              ),
+                            ],
+                          )
                         : (_selectedTab == 0 && _errorGlobal != null) ||
                                 (_selectedTab == 1 && _errorClan != null)
                             ? _buildErrorView()
@@ -367,7 +384,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                                   style: TextStyle(
                                                       color: AppColors.primary,
                                                       fontWeight:
-                                                          FontWeight.bold)),
+                                                          FontWeight.w700)),
                                             ),
                                           ),
                                         // Minha posição fixada no fundo (se fora do top visível)
@@ -474,7 +491,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
               child: Text('#$place',
                   style: TextStyle(
                       color: color,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w800,
                       fontSize: 18)),
             ),
           ),
@@ -527,19 +544,15 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       return const SizedBox();
     }
 
-    return Container(
+    return SparkCard(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        color: isMe
-            ? AppColors.primary.withValues(alpha: 0.1)
-            : AppColors.card,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-            color: isMe
-                ? AppColors.primary.withValues(alpha: 0.4)
-                : AppColors.cardBorder.withValues(alpha: 0.3)),
-      ),
+      color: isMe
+          ? AppColors.primary.withValues(alpha: 0.1)
+          : AppColors.card,
+      borderColor: isMe
+          ? AppColors.primary.withValues(alpha: 0.4)
+          : AppColors.cardBorder.withValues(alpha: 0.3),
       child: Row(
         children: [
           SizedBox(
@@ -698,7 +711,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                   color: active ? Colors.white : AppColors.textMuted,
                   fontSize: 12,
                   fontWeight:
-                      active ? FontWeight.w700 : FontWeight.w500),
+                      active ? FontWeight.w700 : FontWeight.w600),
             ),
           ),
         ),
@@ -716,7 +729,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           margin: const EdgeInsets.only(bottom: 16),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFF0D2641), Color(0xFF061629)],
+              colors: [AppColors.card, AppColors.background],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -735,7 +748,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                   const Text('Torneio em andamento',
                       style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                           fontSize: 15)),
                   const Spacer(),
                   Container(
@@ -748,7 +761,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                         style: TextStyle(
                             color: AppColors.error,
                             fontSize: 10,
-                            fontWeight: FontWeight.w900)),
+                            fontWeight: FontWeight.w800)),
                   ),
                 ],
               ),
@@ -756,7 +769,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
               Text(
                 'Complete o máximo de lições esta semana para subir no ranking e ganhar recompensas exclusivas!',
                 style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.7),
+                    color: AppColors.textSecondary,
                     fontSize: 13,
                     height: 1.4),
               ),
@@ -821,12 +834,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
-                    fontWeight: FontWeight.bold)),
+                    fontWeight: FontWeight.w700)),
             const SizedBox(height: 16),
             Text(
               'O ranking semanal é resetado toda segunda-feira às 00:00.\nSeus pontos acumulados ficam no histórico.',
               style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.7), fontSize: 13, height: 1.5),
+                  color: AppColors.textSecondary, fontSize: 13, height: 1.5),
             ),
             const SizedBox(height: 24),
           ],

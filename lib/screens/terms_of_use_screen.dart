@@ -108,7 +108,7 @@ class TermsOfUseScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Termos & Condições',
-                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                     SizedBox(height: 3),
                     Text(
@@ -166,7 +166,7 @@ class TermsOfUseScreen extends StatelessWidget {
           collapsedIconColor: AppColors.textMuted,
           title: Text(
             title,
-            style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+            style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700),
           ),
           children: [
             Text(
@@ -208,7 +208,7 @@ class TermsOfUseScreen extends StatelessWidget {
                         'Suporte Técnico',
                         style: TextStyle(
                           color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                           decoration: TextDecoration.underline,
                         ),
                       ),

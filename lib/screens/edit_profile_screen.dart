@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 
@@ -55,21 +56,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       );
 
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Perfil atualizado com sucesso!'),
-          backgroundColor: Colors.green,
-        ),
-      );
+      SparkSnack.success(context, 'Perfil atualizado com sucesso!');
       Navigator.pop(context);
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Erro ao atualizar: $e'),
-          backgroundColor: AppColors.error,
-        ),
-      );
+      SparkSnack.error(context, 'Erro ao atualizar: $e');
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -127,7 +118,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             title: const Text(
               'Editar Perfil',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
             ),
           ),
           body: SingleChildScrollView(
@@ -170,7 +161,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             'SALVAR ALTERAÇÕES',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w700,
                                 fontSize: 14),
                           ),
                   ),
@@ -192,7 +183,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           style: const TextStyle(
               color: AppColors.textSecondary,
               fontSize: 12,
-              fontWeight: FontWeight.bold),
+              fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 8),
         Container(

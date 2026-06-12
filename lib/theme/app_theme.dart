@@ -25,6 +25,37 @@ class AppColors {
   static const Color navBarBackground = Color(0xFF040F1C);
   static const Color greenDark = Color(0xFF1D5F31);
   static const Color greenBright = Color(0xFF00C402);
+
+  // ── Tokens semânticos (substituem cores hardcoded espalhadas) ──
+  static const Color surfaceAlt = Color(0xFF0B1410);   // superfície escura alternativa
+  static const Color successBg = Color(0xFF1a2e1a);    // fundo de destaque de sucesso
+  static const Color dangerBg = Color(0xFF2A1212);     // fundo de destaque de erro
+  static const Color warningAmber = Color(0xFFFFB300); // avisos / dev mode / streak
+  static const Color amberBg = Color(0xFF2A1800);      // fundo de destaque de aviso
+}
+
+/// Escala única de raio de borda do SPARK.
+///
+/// Antes existiam 16 valores distintos (2–24) espalhados pelas telas; estes
+/// quatro cobrem todos os casos e mantêm os cantos visualmente consistentes.
+class AppRadius {
+  const AppRadius._();
+
+  static const double sm = 8;     // chips, inputs, botões compactos
+  static const double md = 12;    // cards e diálogos padrão
+  static const double lg = 16;    // cards de destaque, bottom sheets
+  static const double pill = 999; // elementos totalmente arredondados
+}
+
+/// Escala única de espaçamento (múltiplos de 4).
+class AppSpacing {
+  const AppSpacing._();
+
+  static const double xs = 4;
+  static const double sm = 8;
+  static const double md = 16;
+  static const double lg = 24;
+  static const double xl = 32;
 }
 
 class AppTheme {
@@ -44,22 +75,22 @@ class AppTheme {
           displayLarge: TextStyle(
             color: AppColors.textPrimary,
             fontSize: 32,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
           displayMedium: TextStyle(
             color: AppColors.textPrimary,
             fontSize: 28,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
           headlineLarge: TextStyle(
             color: AppColors.textPrimary,
             fontSize: 24,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
           headlineMedium: TextStyle(
             color: AppColors.textPrimary,
             fontSize: 20,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
           titleLarge: TextStyle(
             color: AppColors.textPrimary,
@@ -93,7 +124,7 @@ class AppTheme {
         titleTextStyle: TextStyle(
           color: AppColors.textPrimary,
           fontSize: 18,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w700,
         ),
         iconTheme: IconThemeData(color: AppColors.textPrimary),
       ),

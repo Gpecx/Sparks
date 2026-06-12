@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/screens/quiz_screen.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
@@ -20,6 +21,8 @@ import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/providers/content_providers.dart';
 import 'package:spark_app/providers/progress_provider.dart';
 import 'package:spark_app/providers/user_provider.dart';
+import 'package:spark_app/services/access_control_service.dart';
+import 'package:spark_app/services/analytics_service.dart';
 
 /// Representa um membro do clã presente neste módulo.
 class ClanMemberPresence {
@@ -177,21 +180,19 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
   }
 
   /// Verifica se um nó está bloqueado pelo modelo freemium.
-  /// Regra: apenas a 1ª lição do módulo (índice global 0) é grátis.
+  /// Regra (PDF §2): para o Free, apenas a 1ª TRILHA de cada módulo é
+  /// liberada por completo. As demais trilhas exigem plano pago.
   bool _isFreemiumLocked(int index, SPARKLesson lesson, List<SPARKLesson> allLessons) {
     if (kDebugMode && ref.read(devModeProvider)) return false;
-    final user = ref.read(userModelProvider).value;
-    final isPremium = (user?.isPremium ?? false) || (user?.isOnTrial ?? false);
-    if (isPremium) return false;
+    final access = ref.read(accessControlProvider);
+    if (allLessons.isEmpty) return false;
 
-    // Ordena as lições do módulo por order para garantir o índice correto
-    final sorted = [...allLessons]..sort((a, b) => a.order.compareTo(b.order));
-    final globalIndex = sorted.indexWhere((l) => l.id == lesson.id);
+    // moduleLessonsProvider retorna as lições já ordenadas por trilha
+    // (trail.order). A 1ª trilha é a do primeiro item.
+    final firstTrailId = allLessons.first.trailId;
+    final isFirstTrail = lesson.trailId == firstTrailId;
 
-    debugPrint('🔒 FREEMIUM │ lessonId=${lesson.id} │ globalIndex=$globalIndex │ locked=${globalIndex != 0}');
-
-    // Apenas a primeira lição do módulo (índice 0) é liberada para free
-    return globalIndex != 0;
+    return !access.canAccessTrail(isFirstTrail: isFirstTrail);
   }
 
 
@@ -206,12 +207,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     // ── Verificação de unlock sequencial (removido para navegação livre) ─
     if (!_isNodeUnlocked(index, completedLessons) && !isTestMode) {
       _glitchKey.currentState?.triggerGlitch();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Módulo bloqueado! Conclua as etapas anteriores primeiro.'),
-          backgroundColor: AppColors.error,
-        ),
-      );
+      SparkSnack.error(context, 'Módulo bloqueado! Conclua as etapas anteriores primeiro.');
       return;
     }
 
@@ -292,7 +288,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                 'Você já completou esta lição. Para manter o desafio, refazê-la não está disponível no momento.',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Colors.white.withValues(alpha: 0.7),
+                                  color: AppColors.textSecondary,
                                   fontSize: 15,
                                   height: 1.4,
                                 ),
@@ -318,9 +314,9 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                     'ENTENDIDO',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color: Color(0xFF0B1410),
+                                      color: AppColors.surfaceAlt,
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w900,
+                                      fontWeight: FontWeight.w800,
                                       letterSpacing: 1.2,
                                     ),
                                   ),
@@ -343,6 +339,8 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
 
     // ── Verificação freemium (Apenas a 1ª lição é grátis por trilha) ──
     if (!isTestMode && _isFreemiumLocked(index, sparkLesson, allLessons)) {
+      AnalyticsService().logLockedFeatureAccessed(
+          feature: 'trail', itemId: sparkLesson.trailId);
       _showProUpgradeDialog();
       return;
     }
@@ -464,20 +462,6 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      // Badge SP (Spark Points) — dados reais
-                      ref.watch(userModelProvider).when(
-                        data: (user) => GestureDetector(
-                          onTap: () => context.push('/store'),
-                          child: _buildBadge(
-                            Icons.bolt,
-                            '${user?.sparkPoints ?? 0} SP',
-                            widget.themeColor,
-                          ),
-                        ),
-                        loading: () => _buildBadge(Icons.bolt, '-- SP', widget.themeColor),
-                        error: (_, _) => _buildBadge(Icons.bolt, '0 SP', widget.themeColor),
-                      ),
-                      const SizedBox(width: 6),
                       // Badge XP — dados reais
                       ref.watch(userModelProvider).when(
                         data: (user) => _buildBadge(
@@ -767,7 +751,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
       borderColor = widget.themeColor;
       iconColor = Colors.white;
       icon = Icons.play_arrow;
-      glow = [BoxShadow(color: widget.themeColor.withValues(alpha: 0.25), blurRadius: 18, spreadRadius: 4)];
+      glow = null; // o brilho é provido pelo _PulsingGlow (pulsa para chamar atenção)
     } else {
       nodeColor = AppColors.card;
       borderColor = AppColors.textMuted.withValues(alpha: 0.2);
@@ -784,17 +768,22 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
           Stack(
             clipBehavior: Clip.none,
             children: [
-              Container(
-                width: 64,
-                height: 64,
-                decoration: BoxDecoration(
-                  color: nodeColor,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: borderColor, width: 2.5),
-                  boxShadow: glow,
-                ),
-                child: Icon(icon, color: iconColor, size: 28),
-              ),
+              Builder(builder: (_) {
+                final circle = Container(
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    color: nodeColor,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: borderColor, width: 2.5),
+                    boxShadow: glow,
+                  ),
+                  child: Icon(icon, color: iconColor, size: 28),
+                );
+                return isCurrent
+                    ? _PulsingGlow(color: widget.themeColor, child: circle)
+                    : circle;
+              }),
               if (isCurrent)
                 Positioned(
                   top: -4,
@@ -903,7 +892,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                       ? AppColors.gold
                       : Colors.white.withValues(alpha: 0.35),
               fontSize: 14,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w800,
               letterSpacing: 0.5,
             ),
           ),
@@ -1200,7 +1189,7 @@ class _ProUpgradeDialogState extends State<_ProUpgradeDialog>
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w800,
                       letterSpacing: 0.3,
                     ),
                   ),
@@ -1262,7 +1251,7 @@ class _ProUpgradeDialogState extends State<_ProUpgradeDialog>
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                            colors: [AppColors.gold, Color(0xFFFFB300)],
+                            colors: [AppColors.gold, AppColors.warningAmber],
                           ),
                           borderRadius: BorderRadius.circular(14),
                           boxShadow: [
@@ -1282,7 +1271,7 @@ class _ProUpgradeDialogState extends State<_ProUpgradeDialog>
                               'Ver Planos Pro',
                               style: TextStyle(
                                 color: Colors.black87,
-                                fontWeight: FontWeight.w900,
+                                fontWeight: FontWeight.w800,
                                 fontSize: 15,
                               ),
                             ),
@@ -1725,4 +1714,60 @@ class _VhsNoisePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _VhsNoisePainter old) => old.progress != progress;
+}
+
+/// Envolve um nó circular com um brilho que pulsa suavemente — usado no nó
+/// da lição "atual" para sinalizar onde o usuário deve continuar.
+class _PulsingGlow extends StatefulWidget {
+  final Widget child;
+  final Color color;
+
+  const _PulsingGlow({required this.child, required this.color});
+
+  @override
+  State<_PulsingGlow> createState() => _PulsingGlowState();
+}
+
+class _PulsingGlowState extends State<_PulsingGlow>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1400),
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      child: widget.child,
+      builder: (context, child) {
+        final t = _controller.value;
+        return DecoratedBox(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: widget.color.withValues(alpha: 0.15 + t * 0.25),
+                blurRadius: 14 + t * 10,
+                spreadRadius: 2 + t * 4,
+              ),
+            ],
+          ),
+          child: child,
+        );
+      },
+    );
+  }
 }

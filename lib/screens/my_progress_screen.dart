@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_skeleton.dart';
+import 'package:spark_app/widgets/spark_card.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/providers/progress_provider.dart';
@@ -41,7 +43,27 @@ class MyProgressScreen extends ConsumerWidget {
             centerTitle: true,
           ),
           body: progressAsync.when(
-            loading: () => const Center(child: CircularProgressIndicator(color: AppColors.primary)),
+            loading: () => SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SparkSkeleton(width: double.infinity, height: 96),
+                  const SizedBox(height: 28),
+                  const SparkSkeleton(width: 140, height: 16, radius: AppRadius.sm),
+                  const SizedBox(height: 12),
+                  ...List.generate(
+                    4,
+                    (i) => const SparkSkeleton(
+                      width: double.infinity,
+                      height: 100,
+                      margin: EdgeInsets.only(bottom: 12),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             error: (e, _) => Center(
               child: Text('Erro ao carregar progresso', style: const TextStyle(color: AppColors.error)),
             ),
@@ -98,16 +120,13 @@ class MyProgressScreen extends ConsumerWidget {
         ? 0.0
         : list.fold<double>(0, (sum, p) => sum + p.progressPercent) / list.length;
 
-    return Container(
+    return SparkCard(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.25)),
-        boxShadow: [
-          BoxShadow(color: AppColors.primary.withValues(alpha: 0.06), blurRadius: 12, offset: const Offset(0, 4)),
-        ],
-      ),
+      radius: AppRadius.lg,
+      borderColor: AppColors.primary.withValues(alpha: 0.25),
+      boxShadow: [
+        BoxShadow(color: AppColors.primary.withValues(alpha: 0.06), blurRadius: 12, offset: const Offset(0, 4)),
+      ],
       child: Column(
         children: [
           Row(
@@ -126,7 +145,7 @@ class MyProgressScreen extends ConsumerWidget {
                     style: const TextStyle(
                       color: AppColors.primary,
                       fontSize: 18,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
@@ -139,7 +158,7 @@ class MyProgressScreen extends ConsumerWidget {
                     const Text('Nível atual', style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
                     Text(
                       'Técnico Nível $level',
-                      style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),
@@ -149,7 +168,7 @@ class MyProgressScreen extends ConsumerWidget {
                 children: [
                   Text(
                     '$totalXp XP',
-                    style: const TextStyle(color: AppColors.gold, fontSize: 18, fontWeight: FontWeight.w900),
+                    style: const TextStyle(color: AppColors.gold, fontSize: 18, fontWeight: FontWeight.w800),
                   ),
                   const Text('total', style: TextStyle(color: AppColors.textSecondary, fontSize: 11)),
                 ],
@@ -184,7 +203,7 @@ class MyProgressScreen extends ConsumerWidget {
                 const SizedBox(width: 10),
                 Text(
                   '${(avgProgress * 100).toInt()}% médio',
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w700),
                 ),
               ],
             ),
@@ -207,7 +226,7 @@ class MyProgressScreen extends ConsumerWidget {
           children: [
             Icon(icon, color: color, size: 18),
             const SizedBox(height: 4),
-            Text(value, style: TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w900)),
+            Text(value, style: TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w800)),
             Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
           ],
         ),
@@ -221,17 +240,13 @@ class MyProgressScreen extends ConsumerWidget {
     final name = p.moduleName.isNotEmpty ? p.moduleName : p.moduleId;
     final lastAccessed = _formatDate(p.lastAccessed);
 
-    return Container(
+    return SparkCard(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color.withValues(alpha: isCompleted ? 0.4 : 0.2)),
-        boxShadow: isCompleted
-            ? [BoxShadow(color: AppColors.gold.withValues(alpha: 0.07), blurRadius: 8)]
-            : null,
-      ),
+      radius: AppRadius.lg,
+      borderColor: color.withValues(alpha: isCompleted ? 0.4 : 0.2),
+      boxShadow: isCompleted
+          ? [BoxShadow(color: AppColors.gold.withValues(alpha: 0.07), blurRadius: 8)]
+          : null,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -260,7 +275,7 @@ class MyProgressScreen extends ConsumerWidget {
                       style: TextStyle(
                         color: isCompleted ? AppColors.gold : Colors.white,
                         fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -281,7 +296,7 @@ class MyProgressScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   isCompleted ? 'CONCLUÍDO' : '$pct%',
-                  style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w700),
                 ),
               ),
             ],
@@ -322,7 +337,7 @@ class MyProgressScreen extends ConsumerWidget {
           const SizedBox(height: 20),
           const Text(
             'Nenhum progresso ainda',
-            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
           const Text(
@@ -336,7 +351,7 @@ class MyProgressScreen extends ConsumerWidget {
             icon: const Icon(Icons.play_arrow, color: AppColors.background),
             label: const Text(
               'COMEÇAR A APRENDER',
-              style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold, letterSpacing: 0.8),
+              style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, letterSpacing: 0.8),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,

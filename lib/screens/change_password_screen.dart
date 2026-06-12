@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 
@@ -82,22 +83,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     if (!_passwordsMatch) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('As senhas não coincidem.'),
-          backgroundColor: AppColors.error,
-        ),
-      );
+      SparkSnack.error(context, 'As senhas não coincidem.');
       return;
     }
 
     if (_strengthScore < 3) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('A senha precisa ser pelo menos razoável.'),
-          backgroundColor: AppColors.error,
-        ),
-      );
+      SparkSnack.error(context, 'A senha precisa ser pelo menos razoável.');
       return;
     }
 
@@ -342,7 +333,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   'ALTERAR SENHA',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 14,
                                     letterSpacing: 1,
                                   ),
@@ -377,7 +368,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           style: const TextStyle(
             color: AppColors.textSecondary,
             fontSize: 12,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
         ),
         const SizedBox(height: 8),
@@ -479,7 +470,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             style: TextStyle(
               color: met ? Colors.white : AppColors.textMuted,
               fontSize: 12,
-              fontWeight: met ? FontWeight.w600 : FontWeight.normal,
+              fontWeight: met ? FontWeight.w600 : FontWeight.w400,
             ),
           ),
         ],

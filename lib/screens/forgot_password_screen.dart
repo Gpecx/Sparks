@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
@@ -32,7 +33,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             Text(
               'Insira seu e-mail para receber as instruções de redefinição',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14, height: 1.5),
+              style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
             ),
             const SizedBox(height: 36),
             // Info box EXS style
@@ -50,7 +51,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   Expanded(
                     child: Text(
                       'Um link de redefinição será enviado para o seu e-mail cadastrado.',
-                      style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 12, height: 1.4),
+                      style: TextStyle(color: AppColors.textSecondary, fontSize: 12, height: 1.4),
                     ),
                   ),
                 ],
@@ -72,9 +73,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               height: 52,
               child: ElevatedButton(
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Instruções enviadas para seu e-mail!'), backgroundColor: AppColors.primary),
-                  );
+                  SparkSnack.success(context, 'Instruções enviadas para seu e-mail!');
                 },
                 child: const Text('ENVIAR INSTRUÇÕES', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, letterSpacing: 2)),
               ),

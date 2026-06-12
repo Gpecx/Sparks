@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/services/clan_service.dart';
 import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/leaderboard_screen.dart';
@@ -686,7 +687,7 @@ class _ClanScreenState extends State<ClanScreen> {
                             const SizedBox(height: 12),
                             const Text('O chat está silencioso...', style: TextStyle(color: AppColors.textSecondary, fontSize: 14, fontWeight: FontWeight.w600)),
                             const SizedBox(height: 4),
-                            Text('Seja o primeiro a interagir!', style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 12)),
+                            Text('Seja o primeiro a interagir!', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
                           ],
                         ),
                       );
@@ -710,7 +711,7 @@ class _ClanScreenState extends State<ClanScreen> {
                                 children: [
                                   const Icon(Icons.info_outline, color: AppColors.gold, size: 14),
                                   const SizedBox(width: 6),
-                                  Text(msg['text'] ?? '', style: const TextStyle(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.bold)),
+                                  Text(msg['text'] ?? '', style: const TextStyle(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.w700)),
                                 ],
                               ),
                             );
@@ -737,7 +738,7 @@ class _ClanScreenState extends State<ClanScreen> {
                                   if (!isMe)
                                     Padding(
                                       padding: const EdgeInsets.only(bottom: 4),
-                                      child: Text(msg['name'] ?? 'Membro', style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold)),
+                                      child: Text(msg['name'] ?? 'Membro', style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700)),
                                     ),
                                   Text(msg['text'] ?? '', style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.4)),
                                 ],
@@ -944,8 +945,7 @@ class _ClanScreenState extends State<ClanScreen> {
   void _createClan() async {
     if (!_formKeyCreate.currentState!.validate()) return;
     if (_currentUserUid == null) return;
-    
-    final messenger = ScaffoldMessenger.of(context);
+
     try {
       final name = _nameCtrl.text.trim();
       final desc = _descCtrl.text.trim().isEmpty ? 'Novo clã EXS' : _descCtrl.text.trim();
@@ -966,14 +966,10 @@ class _ClanScreenState extends State<ClanScreen> {
         _myRole = 'admin';
         _clanCreated = true;
       });
-      messenger.showSnackBar(
-        SnackBar(content: Text('Clã "$_clanName" criado com sucesso!'), backgroundColor: AppColors.primary),
-      );
+      SparkSnack.success(context, 'Clã "$_clanName" criado com sucesso!');
     } catch(e) {
       if (!mounted) return;
-      messenger.showSnackBar(
-        SnackBar(content: Text('Erro ao criar: $e'), backgroundColor: AppColors.error),
-      );
+      SparkSnack.error(context, 'Erro ao criar: $e');
     }
   }
 
@@ -981,7 +977,6 @@ class _ClanScreenState extends State<ClanScreen> {
     if (!_formKeyJoin.currentState!.validate()) return;
     if (_currentUserUid == null) return;
 
-    final messenger = ScaffoldMessenger.of(context);
     final input = _joinCodeCtrl.text.trim();
     final pwd   = _joinPasswordCtrl.text.trim();
 
@@ -1008,12 +1003,7 @@ class _ClanScreenState extends State<ClanScreen> {
       if (usedCode) {
         await ClanService().requestToJoin(resolvedClanId, _currentUserUid!);
         if (!mounted) return;
-        messenger.showSnackBar(
-          const SnackBar(
-            content: Text('Pedido de entrada enviado! Aguarde aprovação.'),
-            backgroundColor: AppColors.primary,
-          ),
-        );
+        SparkSnack.success(context, 'Pedido de entrada enviado! Aguarde aprovação.');
         return; // não muda o estado pra "já no clã"
       } else {
         await ClanService().joinClan(
@@ -1025,21 +1015,10 @@ class _ClanScreenState extends State<ClanScreen> {
       await _loadUserClan();
 
       if (!mounted) return;
-      messenger.showSnackBar(
-        const SnackBar(
-          content: Text('Você entrou no clã!'),
-          backgroundColor: AppColors.primary,
-        ),
-      );
+      SparkSnack.success(context, 'Você entrou no clã!');
     } catch (e) {
       if (!mounted) return;
-      final msg = e.toString().replaceFirst('Exception: ', '');
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text('Erro ao entrar: $msg'),
-          backgroundColor: AppColors.error,
-        ),
-      );
+      SparkSnack.error(context, 'Erro ao entrar: ${e.toString().replaceFirst('Exception: ', '')}');
     }
   }
 
@@ -1088,7 +1067,7 @@ class _ClanScreenState extends State<ClanScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    const Text('Editar Clã', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900, letterSpacing: 1)),
+                    const Text('Editar Clã', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800, letterSpacing: 1)),
                     const SizedBox(height: 24),
                     
                     // Input Name
@@ -1217,12 +1196,12 @@ class _ClanScreenState extends State<ClanScreen> {
                                     _clanIcon = tempIcon;
                                   });
                                   Navigator.pop(ctx);
-                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Clã atualizado com sucesso!'), backgroundColor: AppColors.primary));
+                                  SparkSnack.success(context, 'Clã atualizado com sucesso!');
                                 }
                               } catch (e) {
                                 if (mounted) {
                                   setDialogState(() => isLoading = false);
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao atualizar clã: $e'), backgroundColor: AppColors.error));
+                                  SparkSnack.error(context, 'Erro ao atualizar clã: $e');
                                 }
                               }
                             },
@@ -1269,11 +1248,11 @@ class _ClanScreenState extends State<ClanScreen> {
                     _myClanId = null;
                     _clanCreated = false;
                   });
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Clã deletado com sucesso!'), backgroundColor: AppColors.primary));
+                  SparkSnack.success(context, 'Clã deletado com sucesso!');
                 }
               } catch (e) {
                 if (mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao deletar: $e'), backgroundColor: AppColors.error));
+                  SparkSnack.error(context, 'Erro ao deletar: $e');
                 }
               }
             },
@@ -1297,7 +1276,7 @@ class _ClanScreenState extends State<ClanScreen> {
             mainAxisSize: MainAxisSize.min,
             children: _leagues.map((l) => ListTile(
               leading: Icon(l.icon, color: l.color),
-              title: Text(l.name, style: TextStyle(color: l.color, fontWeight: FontWeight.bold)),
+              title: Text(l.name, style: TextStyle(color: l.color, fontWeight: FontWeight.w700)),
               trailing: Text('${l.minXp} XP', style: const TextStyle(color: AppColors.textMuted)),
             )).toList(),
           ),
@@ -1433,7 +1412,7 @@ class _ClanScreenState extends State<ClanScreen> {
                                       ? AppColors.primary
                                       : Colors.white,
                                   fontSize: 28,
-                                  fontWeight: FontWeight.w900,
+                                  fontWeight: FontWeight.w800,
                                   letterSpacing: 8,
                                   fontFamily: 'monospace',
                                 ),
@@ -1505,13 +1484,7 @@ class _ClanScreenState extends State<ClanScreen> {
                                     ClipboardData(text: inviteCode));
                                 setDialogState(() => copied = true);
                                 if (ctx.mounted) {
-                                  ScaffoldMessenger.of(ctx).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('Código copiado!'),
-                                      backgroundColor: AppColors.primary,
-                                      duration: Duration(seconds: 2),
-                                    ),
-                                  );
+                                  SparkSnack.success(ctx, 'Código copiado!');
                                 }
                               },
                               icon: Icon(
@@ -1598,7 +1571,7 @@ class _ClanScreenState extends State<ClanScreen> {
                         onPressed: () async {
                           await ClanService().acceptJoinRequest(_myClanId!, uid, name);
                           if (!mounted) return;
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Pedido aceito!'), backgroundColor: AppColors.primary));
+                          SparkSnack.success(context, 'Pedido aceito!');
                         },
                       ),
                       IconButton(
@@ -1606,7 +1579,7 @@ class _ClanScreenState extends State<ClanScreen> {
                         onPressed: () async {
                           await ClanService().rejectJoinRequest(_myClanId!, uid);
                           if (!mounted) return;
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Pedido recusado!'), backgroundColor: AppColors.error));
+                          SparkSnack.error(context, 'Pedido recusado!');
                         },
                       ),
                     ],
@@ -1623,11 +1596,11 @@ class _ClanScreenState extends State<ClanScreen> {
   void _showManageDialog(ClanMember member) {
     if (member.isUser) return; // Não pode gerenciar a si mesmo
     if (_myRole == 'membro') {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Membros não têm permissão para gerenciar outros.'), backgroundColor: AppColors.error));
-      return; 
+      SparkSnack.error(context, 'Membros não têm permissão para gerenciar outros.');
+      return;
     }
     if (_myRole == 'moderador' && (member.role == ClanRole.admin || member.role == ClanRole.moderador)) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Moderadores não podem gerenciar outros Moderadores ou Admins.'), backgroundColor: AppColors.error));
+      SparkSnack.error(context, 'Moderadores não podem gerenciar outros Moderadores ou Admins.');
       return;
     }
 
@@ -1674,7 +1647,7 @@ class _ClanScreenState extends State<ClanScreen> {
       onTap: () {
         Navigator.pop(ctx);
         onTap();
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$label executado!'), backgroundColor: AppColors.primary));
+        SparkSnack.success(context, '$label executado!');
       },
     );
   }

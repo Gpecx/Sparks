@@ -4,14 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:go_router/go_router.dart';
 import 'package:spark_app/services/firebase_service.dart';
 import 'package:spark_app/services/payment_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
-import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Intervalo e tempo máximo de polling (fallback caso o webhook falhe)
@@ -26,12 +23,10 @@ const Duration _kPollTimeout = Duration(minutes: 15);
 /// Para Cartão / Boleto: abre o link de pagamento do Asaas no navegador.
 class PaymentPendingScreen extends StatefulWidget {
   final CheckoutResult result;
-  final int totalPoints;
 
   const PaymentPendingScreen({
     super.key,
     required this.result,
-    required this.totalPoints,
   });
 
   @override
@@ -234,43 +229,11 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
               Text(
                 'Sua transação foi aprovada com sucesso.',
                 style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.6),
+                  color: AppColors.textSecondary,
                   fontSize: 14,
                 ),
                 textAlign: TextAlign.center,
               ),
-
-              // Pontos creditados
-              if (widget.totalPoints > 0) ...[
-                const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: AppColors.gold.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: AppColors.gold.withValues(alpha: 0.35),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.bolt_rounded,
-                          color: AppColors.gold, size: 22),
-                      const SizedBox(width: 8),
-                      Text(
-                        '+${widget.totalPoints} Pontos Spark creditados!',
-                        style: const TextStyle(
-                          color: AppColors.gold,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
 
               const SizedBox(height: 28),
 
@@ -441,20 +404,6 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
                 fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 4),
-          if (widget.totalPoints > 0)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.bolt, color: AppColors.gold, size: 16),
-                Text(
-                  ' +${widget.totalPoints} Pontos Spark ao confirmar',
-                  style: const TextStyle(
-                      color: AppColors.gold,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
           const SizedBox(height: 28),
 
           // Copia e Cola
@@ -530,7 +479,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
             'O pagamento é confirmado automaticamente.\nVocê não precisa fazer nada após pagar.',
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.35), fontSize: 12),
+                color: AppColors.textMuted, fontSize: 12),
           ),
           const SizedBox(height: 32),
         ],
@@ -561,10 +510,10 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
           ),
           const SizedBox(height: 8),
           Text(
-            'Após finalizar o pagamento, seus Pontos Spark\nserão adicionados automaticamente.',
+            'Após finalizar o pagamento, seu plano\nserá ativado automaticamente.',
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.45), fontSize: 13),
+                color: AppColors.textMuted, fontSize: 13),
           ),
           const SizedBox(height: 32),
           SizedBox(

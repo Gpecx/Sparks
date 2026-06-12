@@ -111,9 +111,6 @@ class GamificationService {
       // Desbloqueia badge
       await userService.unlockBadge('daily_warrior', source: 'daily_mission');
 
-      // Concede Spark Points
-      await userService.addSparkPoints(50, source: 'daily_mission');
-
       // Audit log
       await AuditService().logForUser(
         uid: uid,
