@@ -256,7 +256,26 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 12),
+                    GestureDetector(
+                      onTap: () => context.push('/register'),
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Tem um código de cortesia? ',
+                              style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 12),
+                            ),
+                            const TextSpan(
+                              text: 'Ative na conta',
+                              style: TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),
