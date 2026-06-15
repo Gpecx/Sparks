@@ -30,6 +30,7 @@ import { onSchedule } from "firebase-functions/v2/scheduler";
 import { onDocumentWritten } from "firebase-functions/v2/firestore";
 import { logger, setGlobalOptions } from "firebase-functions/v2";
 import { defineSecret } from "firebase-functions/params";
+import * as functionsV1 from "firebase-functions/v1";
 import * as nodemailer from "nodemailer";
 import {
   findOrCreateCustomer,
@@ -61,6 +62,64 @@ admin.initializeApp({
 });
 const db = getFirestore("default");
 db.settings({ ignoreUndefinedProperties: true });
+
+// Campos padrão de um novo usuário (bônus de boas-vindas). Centralizado para
+// reuso entre o trigger de criação (onUserCreated) e o resgate (redeemAccessCode).
+function defaultUserFields(
+  uid: string,
+  email: string | null | undefined,
+  displayName: string | null | undefined,
+  photoUrl: string | null | undefined
+): Record<string, unknown> {
+  return {
+    uid,
+    displayName: displayName ?? "",
+    email: email ?? "",
+    photoUrl: photoUrl ?? null,
+    role: "técnico",
+    sparkPoints: 100,
+    xp: 0,
+    level: 1,
+    tensionLevel: "BT",
+    currentStreak: 0,
+    longestStreak: 0,
+    activeDays: 0,
+    studiedToday: false,
+    lastStudyDate: null,
+    weeklyXp: 0,
+    monthlyXp: 0,
+    unlockedBadgeIds: [],
+    clanId: null,
+    clanName: null,
+    totalLessonsCompleted: 0,
+    totalCorrectAnswers: 0,
+    totalAnswers: 0,
+    eloRating: 1200,
+    wins: 0,
+    losses: 0,
+    totalDuels: 0,
+    createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+  };
+}
+
+// Bootstrap do doc do usuário no servidor: dispara quando QUALQUER conta é criada
+// no Firebase Auth e cria users/{uid} com os padrões de boas-vindas. Resolve a
+// falha de criação client-side no web (permission-denied por timing de auth) e
+// garante o doc em todas as plataformas. Admin SDK ignora as Security Rules.
+export const onUserCreated = functionsV1
+  .region("southamerica-east1")
+  .auth.user()
+  .onCreate(async (user) => {
+    const userRef = db.collection("users").doc(user.uid);
+    const snap = await userRef.get();
+    if (snap.exists) return; // já criado (client ou redeem) — não sobrescreve
+    await userRef.set(
+      defaultUserFields(user.uid, user.email, user.displayName, user.photoURL),
+      { merge: true }
+    );
+    logger.info(`[onUserCreated] doc de usuário criado para uid=${user.uid}`);
+  });
 
 // ── Hardening de segurança ───────────────────────────────────────
 // Teto de instâncias por função: protege contra picos/DoS que virariam
@@ -1431,37 +1490,11 @@ export const redeemAccessCode = onCall(
         tx.update(userRef, compFields);
       } else {
         // O doc do usuário ainda não existe (ex.: a criação client-side falhou —
-        // problema conhecido de timing de auth no web). Cria aqui com os padrões
-        // de boas-vindas + o acesso liberado. Admin SDK ignora as Security Rules.
+        // problema conhecido de timing de auth no web; normalmente o trigger
+        // onUserCreated já o cria). Cria aqui com os padrões + o acesso liberado.
         const token = request.auth?.token as { email?: string; name?: string } | undefined;
         tx.set(userRef, {
-          uid,
-          displayName: token?.name ?? "",
-          email: token?.email ?? "",
-          photoUrl: null,
-          role: "técnico",
-          sparkPoints: 100,
-          xp: 0,
-          level: 1,
-          tensionLevel: "BT",
-          currentStreak: 0,
-          longestStreak: 0,
-          activeDays: 0,
-          studiedToday: false,
-          lastStudyDate: null,
-          weeklyXp: 0,
-          monthlyXp: 0,
-          unlockedBadgeIds: [],
-          clanId: null,
-          clanName: null,
-          totalLessonsCompleted: 0,
-          totalCorrectAnswers: 0,
-          totalAnswers: 0,
-          eloRating: 1200,
-          wins: 0,
-          losses: 0,
-          totalDuels: 0,
-          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          ...defaultUserFields(uid, token?.email, token?.name, null),
           ...compFields,
         });
       }
@@ -2643,5 +2676,140 @@ export const getBotDuelQuestions = onCall(
       );
     }
     return { questions: pickRandomDuelQuestions(pool, count) };
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// syncPublicProfile — Espelha campos PÚBLICOS de users/{uid} em
+// public_profiles/{uid} (LGPD: /users é privado; o espelho público
+// não carrega e-mail, dados de pagamento nem tokens).
+// As Security Rules deixam public_profiles como write:false (só o
+// servidor escreve), e este trigger é o ÚNICO escritor. Sem ele a
+// coleção fica vazia e o ranking all-time / telas de perfil quebram.
+// (Recuperado: foi removido por engano no merge da PR #19/spark-admin.)
+// ────────────────────────────────────────────────────────────────
+
+/** Campos espelhados em public_profiles. Qualquer outro fica fora (PII). */
+const PUBLIC_PROFILE_FIELDS = [
+  "displayName",
+  "photoUrl",
+  "profession",
+  "xp",
+  "level",
+  "tensionLevel",
+  "weeklyXp",
+  "monthlyXp",
+  "eloRating",
+  "clanId",
+  "clanName",
+  "unlockedBadgeIds",
+  // Módulo que o usuário está estudando agora. Necessário para a "presença
+  // do clã" (learning_path_screen consulta public_profiles por clanId +
+  // currentModuleId). Sem espelhar este campo, a query sempre vinha vazia.
+  "currentModuleId",
+] as const;
+
+/** Extrai apenas os campos públicos de um doc de usuário. */
+function pickPublicFields(
+  data: Record<string, unknown>
+): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const key of PUBLIC_PROFILE_FIELDS) {
+    if (data[key] !== undefined) out[key] = data[key];
+  }
+  return out;
+}
+
+export const syncPublicProfile = onDocumentWritten(
+  {
+    document: "users/{uid}",
+    // Este projeto usa um banco Firestore NOMEADO ("default"), não o
+    // "(default)". Sem declarar isto o deploy do trigger falha com 404
+    // ("database '(default)' does not exist") e o gatilho nunca dispara.
+    database: "default",
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (event) => {
+    const uid = event.params.uid;
+    const publicRef = db.collection("public_profiles").doc(uid);
+
+    const after = event.data?.after;
+    // Documento de usuário foi apagado → remove o espelho público.
+    // (deleteAccount já remove explicitamente, mas isto cobre exclusões diretas.)
+    if (!after || !after.exists) {
+      await publicRef.delete().catch(() => {});
+      logger.info(`[syncPublicProfile] uid=${uid} removido (user apagado).`);
+      return;
+    }
+
+    const afterData = after.data() ?? {};
+    const newPublic = pickPublicFields(afterData);
+
+    // Evita escritas desnecessárias (e loops de custo): só grava se algum
+    // campo público realmente mudou em relação ao estado anterior.
+    const beforeData = event.data?.before?.data() ?? {};
+    const oldPublic = pickPublicFields(beforeData);
+    const changed = PUBLIC_PROFILE_FIELDS.some(
+      (k) => JSON.stringify(oldPublic[k]) !== JSON.stringify(newPublic[k])
+    );
+    if (event.data?.before?.exists && !changed) {
+      return;
+    }
+
+    newPublic["uid"] = uid;
+    newPublic["updatedAt"] = admin.firestore.FieldValue.serverTimestamp();
+
+    await publicRef.set(newPublic, { merge: true });
+    logger.info(`[syncPublicProfile] uid=${uid} espelho público atualizado.`);
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// cleanupOldRankings — Agendada semanalmente. Remove subcoleções de
+// semanas antigas em rankings/weekly para o storage não crescer
+// indefinidamente (o addXp cria uma subcoleção nova a cada semana e
+// nada as apagava). Mantém as últimas RANKING_WEEKS_TO_KEEP semanas.
+// O weekKey tem formato "YYYY-Www" (zero-padded), então a ordenação
+// lexicográfica decrescente equivale à cronológica.
+// (Recuperado: foi removido por engano no merge da PR #19/spark-admin.)
+// ────────────────────────────────────────────────────────────────
+
+const RANKING_WEEKS_TO_KEEP = 8;
+
+export const cleanupOldRankings = onSchedule(
+  {
+    schedule: "every monday 04:00",
+    timeZone: "America/Sao_Paulo",
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async () => {
+    const weeklyDoc = db.collection("rankings").doc("weekly");
+    const weekCols = await weeklyDoc.listCollections();
+
+    if (weekCols.length <= RANKING_WEEKS_TO_KEEP) {
+      logger.info(
+        `[cleanupOldRankings] ${weekCols.length} semana(s); nada a limpar.`
+      );
+      return;
+    }
+
+    // Ordena por ID (weekKey) decrescente e mantém só as mais recentes.
+    const sorted = weekCols.sort((a, b) => (a.id < b.id ? 1 : -1));
+    const toDelete = sorted.slice(RANKING_WEEKS_TO_KEEP);
+
+    for (const col of toDelete) {
+      try {
+        await db.recursiveDelete(col);
+        logger.info(`[cleanupOldRankings] semana ${col.id} removida.`);
+      } catch (e) {
+        logger.warn(`[cleanupOldRankings] falha ao remover ${col.id}:`, e);
+      }
+    }
+
+    logger.info(
+      `[cleanupOldRankings] ${toDelete.length} semana(s) antiga(s) removida(s).`
+    );
   }
 );
