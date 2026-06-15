@@ -39,15 +39,28 @@ void main() async {
   //
   // Em debug usamos o provider de debug (registre o token impresso no console
   // em: Firebase Console → App Check → Apps → Gerenciar tokens de depuração).
-  // Em release: Play Integrity (Android), Device Check (Apple) e reCAPTCHA v3
-  // (Web — substitua RECAPTCHA_V3_SITE_KEY pela chave gerada no console).
-  await FirebaseAppCheck.instance.activate(
-    androidProvider:
-        kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
-    appleProvider:
-        kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
-    webProvider: ReCaptchaV3Provider('RECAPTCHA_V3_SITE_KEY'),
-  );
+  // Em release: Play Integrity (Android), Device Check (Apple) e reCAPTCHA v3 (Web).
+  //
+  // No WEB o App Check só é ativado se houver uma chave reCAPTCHA v3 REAL em
+  // RECAPTCHA_V3_SITE_KEY (.env). Sem chave válida, o provider reCAPTCHA falha e
+  // CONTAMINA o SDK (auth/Firestore/Functions param de anexar token → erros de
+  // permissão). Como o backend ainda não força (enforceAppCheck=false), é seguro
+  // pular no web até a chave estar configurada.
+  if (kIsWeb) {
+    final recaptchaKey = (dotenv.env['RECAPTCHA_V3_SITE_KEY'] ?? '').trim();
+    if (recaptchaKey.isNotEmpty) {
+      await FirebaseAppCheck.instance.activate(
+        webProvider: ReCaptchaV3Provider(recaptchaKey),
+      );
+    }
+  } else {
+    await FirebaseAppCheck.instance.activate(
+      androidProvider:
+          kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+      appleProvider:
+          kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
+    );
+  }
 
   // 1b. Inicializa FCM (permissão + handlers)
   await FcmService().initialize();
