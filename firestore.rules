@@ -69,7 +69,11 @@ service cloud.firestore {
           'trialEndsAt',
           'subscriptionPlanId',
           'trialCardTokenId',
-          'asaasCustomerId'
+          'asaasCustomerId',
+          // ── Acesso-cortesia via código (somente Cloud Functions) ──
+          'compAccessExpiresAt',
+          'compAccessSource',
+          'compAccessCode'
         ]);
     }
 
@@ -351,14 +355,20 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // ─── VOUCHERS ─────────────────────────────────────────────────
+    // ─── VOUCHERS / CÓDIGOS DE ACESSO ─────────────────────────────
 
+    // access_codes: totalmente fechado ao cliente — criação, resgate e
+    // revogação acontecem só via Cloud Functions (Admin SDK ignora as regras).
+    match /access_codes/{code} {
+      allow read, write: if false;
+    }
+
+    // voucher_redemptions: auditoria de resgates. O dono lê o seu histórico;
+    // a escrita é exclusiva da Cloud Function redeemAccessCode (Admin SDK).
     match /voucher_redemptions/{id} {
       allow read: if isAuthenticated()
         && resource.data.uid == request.auth.uid;
-      allow create: if isAuthenticated()
-        && request.resource.data.uid == request.auth.uid;
-      allow update, delete: if false;
+      allow write: if false;
     }
 
     // ─── PEDIDOS (ORDERS) ─────────────────────────────────────────

@@ -3,18 +3,41 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../theme/app_theme.dart';
+import '../../../providers/user_provider.dart';
 import '../../constants/fs.dart';
 import 'admin_controller.dart';
 import 'widgets/admin_dialogs_new.dart';
 import 'widgets/admin_cards.dart';
 import 'widgets/admin_content_panel.dart';
 import 'widgets/admin_support_panel.dart';
+import 'widgets/admin_access_codes_panel.dart';
 
 class AdminDashboardPage extends ConsumerWidget {
   const AdminDashboardPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ── Guard de acesso: somente role=='admin'. Quem chegar via deep-link
+    // /admin sem ser admin é mandado de volta pra home. (A função no servidor
+    // já valida role, mas isto fecha a exposição da própria UI admin.)
+    final userAsync = ref.watch(userModelProvider);
+    if (!userAsync.hasValue) {
+      return const Scaffold(
+        backgroundColor: AppColors.background,
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+    final user = userAsync.value;
+    if (user == null || !user.isAdmin) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted) context.go('/home');
+      });
+      return const Scaffold(
+        backgroundColor: AppColors.background,
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     final state = ref.watch(adminControllerProvider);
     final controller = ref.read(adminControllerProvider.notifier);
     final size = MediaQuery.of(context).size;
@@ -110,6 +133,7 @@ class AdminDashboardPage extends ConsumerWidget {
       case 0: return _buildOverview(context, ref);
       case 1: return _getContentTab(context, ref, state, controller, isDesktop, isTablet);
       case 4: return const AdminSupportPanel();
+      case 5: return const AdminAccessCodesPanel();
       default: return const Center(child: Text('Em desenvolvimento', style: TextStyle(color: Colors.white)));
     }
   }
@@ -291,6 +315,7 @@ class AdminDashboardPage extends ConsumerWidget {
               Text('SISTEMA', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
               const SizedBox(height: 16),
               _sidebarItem(context, Icons.people_outline, 'Usuários', isActive: state.sidebarIndex == 2, onTap: () => controller.setSidebarMenu(2)),
+              _sidebarItem(context, Icons.vpn_key_outlined, 'Códigos de acesso', isActive: state.sidebarIndex == 5, onTap: () => controller.setSidebarMenu(5)),
               _sidebarItem(context, Icons.support_agent_outlined, 'Suporte', isActive: state.sidebarIndex == 4, onTap: () => controller.setSidebarMenu(4)),
               _sidebarItem(context, Icons.settings_outlined, 'Configurações', isActive: state.sidebarIndex == 3, onTap: () => controller.setSidebarMenu(3)),
             ],
