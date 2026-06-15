@@ -496,21 +496,24 @@ class UserService extends ChangeNotifier {
   }) async {
     if (clanId == null) return [];
 
+    // A coleção semanal tem ID dinâmico ("YYYY-Www"), então um índice
+    // composto (clanId + weeklyXp) não pode ser declarado estaticamente.
+    // Como um clã tem um número pequeno e limitado de membros, filtramos
+    // por clanId (campo equality = índice automático) e ordenamos no
+    // cliente — sem necessidade de índice composto.
     final weekKey = currentWeekKey;
-    var query = _db
+    final snap = await _db
         .collection('rankings')
         .doc('weekly')
         .collection(weekKey)
         .where('clanId', isEqualTo: clanId)
-        .orderBy('weeklyXp', descending: true)
-        .limit(limit);
+        .get();
 
-    if (lastDocument != null) {
-      query = query.startAfterDocument(lastDocument);
-    }
+    final entries =
+        snap.docs.map((doc) => RankingEntry.fromFirestore(doc)).toList()
+          ..sort((a, b) => b.weeklyXp.compareTo(a.weeklyXp));
 
-    final snap = await query.get();
-    return snap.docs.map((doc) => RankingEntry.fromFirestore(doc)).toList();
+    return entries.take(limit).toList();
   }
 
   /// Ranking all-time com paginação.
