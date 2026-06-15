@@ -72,10 +72,17 @@ class UserService extends ChangeNotifier {
 
   String get displayName {
     final fromFirestore = _user?.displayName;
-    if (fromFirestore != null && fromFirestore.isNotEmpty) return fromFirestore;
+    if (fromFirestore != null &&
+        fromFirestore.isNotEmpty &&
+        fromFirestore != 'Usuário') {
+      return fromFirestore;
+    }
     final fromAuth = _auth.currentUser?.displayName;
     if (fromAuth != null && fromAuth.isNotEmpty) return fromAuth;
-    return 'Usuário';
+    // Sem nome cadastrado → deriva do e-mail (ex.: admins criados pelo console).
+    return resolveDisplayName(
+      email: _user?.email ?? _auth.currentUser?.email,
+    );
   }
 
   String? get clanId => _user?.clanId;

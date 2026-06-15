@@ -1,6 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ─────────────────────────────────────────────────────────────────
+//  NOME DE EXIBIÇÃO — fonte única de verdade para o fallback de nome.
+//
+//  Antes o fallback era o literal 'Usuário', o que fazia contas sem
+//  displayName (ex.: admins criados pelo console do Firebase Auth, que
+//  nascem sem "Display name") aparecerem como "Usuário" no dashboard e
+//  no perfil. Agora derivamos um nome legível a partir do e-mail.
+//  Ex.: "joao.silva@empresa.com" → "Joao Silva".
+// ─────────────────────────────────────────────────────────────────
+String resolveDisplayName({String? displayName, String? email}) {
+  final name = displayName?.trim();
+  if (name != null && name.isNotEmpty && name != 'Usuário') return name;
+
+  final local = email?.split('@').first.trim() ?? '';
+  if (local.isEmpty) return 'Usuário';
+
+  final parts =
+      local.split(RegExp(r'[._\-+]+')).where((p) => p.isNotEmpty).toList();
+  if (parts.isEmpty) return 'Usuário';
+
+  return parts
+      .map((p) => p[0].toUpperCase() + p.substring(1).toLowerCase())
+      .join(' ');
+}
+
+// ─────────────────────────────────────────────────────────────────
 //  MODELO PRINCIPAL DO USUÁRIO — Firestore: users/{uid}
 //
 //  CAMPOS REMOVIDOS (gerenciados via subcoleções):
@@ -81,8 +106,12 @@ class UserModel {
 
     return UserModel(
       uid: doc.id,
-      // O .toString() garante que mesmo que o Firebase grave um número ali, não quebra
-      displayName: (data['displayName'] ?? data['name'])?.toString() ?? 'Usuário',
+      // O .toString() garante que mesmo que o Firebase grave um número ali, não quebra.
+      // Se não houver nome (ou estiver gravado o legado 'Usuário'), deriva do e-mail.
+      displayName: resolveDisplayName(
+        displayName: (data['displayName'] ?? data['name'])?.toString(),
+        email: data['email']?.toString(),
+      ),
       email: data['email']?.toString() ?? '',
       photoUrl: data['photoUrl']?.toString(),
       role: (data['role']?.toString() ?? 'Técnico').trim(),
