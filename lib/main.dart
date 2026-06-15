@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -29,6 +30,23 @@ void main() async {
   // 1. Inicializa o Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // 1a. App Check — atesta que as chamadas vêm do app legítimo. Já passa a
+  // enviar tokens agora (o backend ainda NÃO força — enforceAppCheck=false),
+  // o que permite validar no console que os tokens estão chegando antes de
+  // ligar a obrigatoriedade nas Cloud Functions.
+  //
+  // Em debug usamos o provider de debug (registre o token impresso no console
+  // em: Firebase Console → App Check → Apps → Gerenciar tokens de depuração).
+  // Em release: Play Integrity (Android), Device Check (Apple) e reCAPTCHA v3
+  // (Web — substitua RECAPTCHA_V3_SITE_KEY pela chave gerada no console).
+  await FirebaseAppCheck.instance.activate(
+    androidProvider:
+        kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+    appleProvider:
+        kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
+    webProvider: ReCaptchaV3Provider('RECAPTCHA_V3_SITE_KEY'),
   );
 
   // 1b. Inicializa FCM (permissão + handlers)

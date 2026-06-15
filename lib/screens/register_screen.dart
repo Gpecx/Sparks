@@ -10,6 +10,7 @@ import 'package:spark_app/screens/animated_spark_logo.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/services/access_code_service.dart';
 import 'package:spark_app/widgets/email_verification_dialog.dart';
 import 'package:spark_app/widgets/google_auth_button.dart';
 
@@ -23,6 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _voucherController = TextEditingController();
   final _authService = AuthService();
   bool _obscurePassword = true;
   bool _isLoading = false;
@@ -96,6 +98,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }).timeout(const Duration(seconds: 3));
       } catch (firestoreError) {
         debugPrint('Firestore Timeout/Error ignorado no cadastro: $firestoreError');
+      }
+
+      // 3b. Código de cortesia (opcional): resgata agora, com o usuário ainda
+      // autenticado, liberando o acesso total antes mesmo de ir para o login.
+      final voucher = _voucherController.text.trim().toUpperCase();
+      DateTime? voucherUntil;
+      String? voucherError;
+      if (voucher.isNotEmpty) {
+        try {
+          voucherUntil = await AccessCodeService.instance.redeem(voucher);
+        } on AccessCodeException catch (e) {
+          voucherError = e.message;
+        } catch (_) {
+          voucherError =
+              'Não foi possível ativar o código agora. Você pode resgatá-lo depois em Configurações.';
+        }
+      }
+
+      if (!mounted) return;
+
+      // Feedback do voucher antes de seguir para a verificação de e-mail.
+      if (voucherUntil != null) {
+        final d =
+            '${voucherUntil.day.toString().padLeft(2, '0')}/${voucherUntil.month.toString().padLeft(2, '0')}/${voucherUntil.year}';
+        await _showInfoDialog(
+          'Acesso total liberado! 🎉',
+          'Sua conta tem acesso completo à plataforma até $d.\n\n'
+              'Confirme seu e-mail para entrar.',
+        );
+      } else if (voucherError != null) {
+        await _showInfoDialog(
+          'Código não aplicado',
+          '$voucherError\n\nSua conta foi criada normalmente — '
+              'você pode resgatar o código depois em Configurações.',
+        );
       }
 
       if (!mounted) return;
@@ -230,7 +267,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 20),
+            _fieldLabel('Código de cortesia (opcional)'),
+            const SizedBox(height: 8),
+            TextField(
+              controller: _voucherController,
+              textCapitalization: TextCapitalization.characters,
+              maxLength: 20,
+              style: const TextStyle(color: Colors.white, letterSpacing: 2, fontWeight: FontWeight.w600),
+              decoration: const InputDecoration(
+                hintText: 'PROF-XXXX-XXXX',
+                prefixIcon: Icon(Icons.card_giftcard_outlined, color: AppColors.textMuted),
+                counterText: '',
+              ),
+            ),
+            const SizedBox(height: 6),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Recebeu um código? Informe aqui para liberar o acesso total na hora.',
+                style: TextStyle(color: Colors.white.withValues(alpha: 0.45), fontSize: 12, height: 1.4),
+              ),
+            ),
 
             const SizedBox(height: 32),
             SizedBox(
@@ -273,6 +331,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 32),
           ],
         ),
+      ),
+    );
+  }
+
+  Future<void> _showInfoDialog(String title, String message) {
+    return showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.card,
+        title: Text(title, style: const TextStyle(color: Colors.white)),
+        content: Text(message, style: const TextStyle(color: AppColors.textMuted)),
+        actions: [
+          FilledButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('OK'),
+          ),
+        ],
       ),
     );
   }

@@ -6,9 +6,9 @@
  *
  * Variáveis de ambiente requeridas (configurar via firebase functions:config:set
  * ou Secret Manager em produção):
- *   ASAAS_API_KEY   — chave de produção ou sandbox do Asaas
- *   ASAAS_BASE_URL  — https://sandbox.asaas.com/api/v3 (teste)
- *                     https://api.asaas.com/v3          (produção)
+ *   ASAAS_API_KEY   — chave de produção do Asaas
+ *   ASAAS_BASE_URL  — https://api.asaas.com/v3 (produção)
+ *                     https://sandbox.asaas.com/api/v3 (teste)
  */
 
 import * as logger from "firebase-functions/logger";
@@ -20,7 +20,7 @@ import { URL } from "url";
 export function getAsaasConfig(): { apiKey: string; baseUrl: string } {
   const apiKey = process.env.ASAAS_API_KEY ?? "";
   const baseUrl =
-    process.env.ASAAS_BASE_URL ?? "https://sandbox.asaas.com/api/v3";
+    process.env.ASAAS_BASE_URL ?? "https://api.asaas.com/v3";
   return { apiKey, baseUrl };
 }
 

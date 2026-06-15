@@ -27,7 +27,8 @@ import {
   HttpsError,
 } from "firebase-functions/v2/https";
 import { onSchedule } from "firebase-functions/v2/scheduler";
-import { logger } from "firebase-functions/v2";
+import { onDocumentWritten } from "firebase-functions/v2/firestore";
+import { logger, setGlobalOptions } from "firebase-functions/v2";
 import { defineSecret } from "firebase-functions/params";
 import * as nodemailer from "nodemailer";
 import {
@@ -44,6 +45,7 @@ import {
   RATE_AUTH,
   RATE_PAYMENT,
   RATE_GAMIFICATION,
+  RATE_ADMIN,
 } from "./rateLimiter";
 
 // ── Secrets vinculados ao Firebase Secret Manager ────────────────
@@ -59,6 +61,22 @@ admin.initializeApp({
 });
 const db = getFirestore("default");
 db.settings({ ignoreUndefinedProperties: true });
+
+// ── Hardening de segurança ───────────────────────────────────────
+// Teto de instâncias por função: protege contra picos/DoS que virariam
+// custo de billing (Cloud Functions escala sem limite por padrão). Vale
+// para TODAS as funções; cada uma pode sobrescrever localmente se precisar.
+setGlobalOptions({ maxInstances: 10 });
+
+// App Check — atesta que a chamada veio do app legítimo (não de curl/script
+// com um token de auth roubado/forjado). Aplicado APENAS aos callables.
+//
+// ⚠️ MANTER false até o cliente Flutter enviar tokens de App Check. Ligar
+// antes disso REJEITA todas as chamadas do app em produção (login, XP,
+// pagamento). Rollout: (1) firebase_app_check no Flutter + initialize;
+// (2) registrar providers no console (Play Integrity/DeviceCheck/reCAPTCHA);
+// (3) publicar o app e confirmar tokens chegando; (4) flip para true + deploy.
+const ENFORCE_APP_CHECK = false;
 
 // ────────────────────────────────────────────────────────────────
 // HELPERS
@@ -117,6 +135,21 @@ function safeEqual(a: string, b: string): boolean {
   const bb = Buffer.from(b);
   if (ab.length !== bb.length) return false;
   return crypto.timingSafeEqual(ab, bb);
+}
+
+/**
+ * Gera um código de acesso legível no formato PROF-XXXX-XXXX usando bytes
+ * criptograficamente seguros. Alfabeto sem caracteres ambíguos (0/O, 1/I/L).
+ */
+const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // sem 0 O 1 I L
+function genCode(): string {
+  const bytes = crypto.randomBytes(8);
+  let body = "";
+  for (let i = 0; i < 8; i++) {
+    body += CODE_ALPHABET[bytes[i] % CODE_ALPHABET.length];
+    if (i === 3) body += "-";
+  }
+  return `PROF-${body}`; // ex.: PROF-X7K2-9QM4
 }
 
 /**
@@ -276,6 +309,7 @@ interface AddXpResult {
 
 export const addXp = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -414,6 +448,7 @@ interface AddSpResult {
 
 export const addSparkPoints = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -490,6 +525,7 @@ interface SpendSpResult {
 
 export const spendSparkPoints = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -577,6 +613,7 @@ interface UnlockBadgeResult {
 
 export const unlockBadge = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -677,6 +714,7 @@ interface CreateCheckoutResult {
 
 export const createAsaasCheckout = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -828,6 +866,7 @@ interface CheckPaymentStatusResult {
 
 export const checkPaymentStatus = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -1195,6 +1234,7 @@ interface StartTrialResult {
 
 export const startTrial = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -1260,6 +1300,7 @@ export const startTrial = onCall(
 
 export const cancelTrial = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -1276,9 +1317,14 @@ export const cancelTrial = onCall(
       throw new HttpsError("failed-precondition", "Usuário não possui trial ativo.");
     }
 
+    // Preserva premium se houver acesso-cortesia (código) ainda ativo — cancelar
+    // o trial não deve derrubar uma cortesia válida.
+    const compTs = data["compAccessExpiresAt"] as admin.firestore.Timestamp | undefined;
+    const compActive = !!compTs && compTs.toMillis() > Date.now();
+
     await userRef.update({
       isOnTrial: false,
-      isPremium: false,
+      isPremium: compActive,
       trialEndsAt: null,
       subscriptionPlanId: null,
       trialCardTokenId: null,
@@ -1292,6 +1338,240 @@ export const cancelTrial = onCall(
     }
 
     logger.info(`[cancelTrial] uid=${uid} trial cancelado.`);
+    return { success: true };
+  }
+);
+
+// ════════════════════════════════════════════════════════════════
+// CÓDIGOS DE ACESSO (cortesia) — libera acesso total por N dias.
+//   access_codes/{CODE}: server-only. Concede isPremium=true +
+//   compAccessExpiresAt (ortogonal a trial/assinatura). A expiração é
+//   tratada pelo processTrialExpiry (bloco de cortesia, abaixo).
+// ════════════════════════════════════════════════════════════════
+
+/** Lê o doc do chamador e exige role=='admin' (mesmo critério das rules). */
+async function assertAdmin(uid: string): Promise<void> {
+  const snap = await db.collection("users").doc(uid).get();
+  if (snap.data()?.["role"] !== "admin") {
+    throw new HttpsError("permission-denied", "Apenas administradores.");
+  }
+}
+
+// redeemAccessCode — professor resgata o código e ganha acesso por durationDays.
+export const redeemAccessCode = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (request: CallableRequest<{ code?: string }>): Promise<{ success: boolean; expiresAt: string }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    // Rate limit (anti-brute-force de códigos): família de entitlement.
+    await checkRateLimit(
+      rateLimitKey("payment", uid, "redeemAccessCode"),
+      RATE_PAYMENT.limit,
+      RATE_PAYMENT.windowMs
+    );
+
+    const code = (request.data?.code ?? "").toString().trim().toUpperCase();
+    if (!code) throw new HttpsError("invalid-argument", "Código é obrigatório.");
+
+    const codeRef = db.collection("access_codes").doc(code);
+    const userRef = db.collection("users").doc(uid);
+
+    const expiresAtIso = await db.runTransaction(async (tx) => {
+      const codeSnap = await tx.get(codeRef);
+      if (!codeSnap.exists) throw new HttpsError("not-found", "Código inválido.");
+      const c = codeSnap.data()!;
+
+      if (c["active"] !== true) {
+        throw new HttpsError("failed-precondition", "Código desativado.");
+      }
+      const codeExp = c["expiresAt"] as admin.firestore.Timestamp | null | undefined;
+      if (codeExp && codeExp.toMillis() <= Date.now()) {
+        throw new HttpsError("failed-precondition", "Código expirado.");
+      }
+      const redeemedBy: string[] = c["redeemedBy"] ?? [];
+      if (redeemedBy.includes(uid)) {
+        throw new HttpsError("already-exists", "Você já resgatou este código.");
+      }
+      if ((c["usedCount"] ?? 0) >= (c["maxUses"] ?? 1)) {
+        throw new HttpsError("resource-exhausted", "Código esgotado.");
+      }
+
+      const userSnap = await tx.get(userRef);
+      if (!userSnap.exists) throw new HttpsError("not-found", "Usuário não encontrado.");
+      const u = userSnap.data()!;
+
+      // Não sobrescreve uma assinatura paga ativa.
+      if (u["subscriptionPlanId"] != null && u["isPremium"] === true) {
+        throw new HttpsError("failed-precondition", "Você já possui uma assinatura ativa.");
+      }
+
+      const durationDays = (c["durationDays"] as number) ?? 30;
+      // Estende a partir do maior entre (agora) e (cortesia atual) — não perde dias.
+      const currentComp = u["compAccessExpiresAt"] as admin.firestore.Timestamp | undefined;
+      const baseMs =
+        currentComp && currentComp.toMillis() > Date.now()
+          ? currentComp.toMillis()
+          : Date.now();
+      const expiresAt = new Date(baseMs + durationDays * 24 * 60 * 60 * 1000);
+      const expiresTs = admin.firestore.Timestamp.fromDate(expiresAt);
+
+      tx.update(userRef, {
+        isPremium: true,
+        compAccessExpiresAt: expiresTs,
+        compAccessSource: "access_code",
+        compAccessCode: code,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+      tx.update(codeRef, {
+        usedCount: admin.firestore.FieldValue.increment(1),
+        redeemedBy: admin.firestore.FieldValue.arrayUnion(uid),
+        lastRedeemedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+      // Auditoria (coleção server-only).
+      tx.set(db.collection("voucher_redemptions").doc(), {
+        uid,
+        code,
+        durationDays,
+        grantedUntil: expiresTs,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      return expiresAt.toISOString();
+    });
+
+    try {
+      await writeAuditLog(uid, "access_code_redeemed", 0, "redeemAccessCode", {
+        code,
+        grantedUntil: expiresAtIso,
+      });
+    } catch (e) {
+      logger.warn("[redeemAccessCode] Audit log error:", e);
+    }
+
+    logger.info(`[redeemAccessCode] uid=${uid} resgatou ${code} até ${expiresAtIso}.`);
+    return { success: true, expiresAt: expiresAtIso };
+  }
+);
+
+// createAccessCodes — admin gera um lote de códigos de uso único.
+export const createAccessCodes = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ count?: number; durationDays?: number; label?: string }>
+  ): Promise<{ codes: string[] }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await checkRateLimit(
+      rateLimitKey("admin", uid, "createAccessCodes"),
+      RATE_ADMIN.limit,
+      RATE_ADMIN.windowMs
+    );
+
+    const count = Math.min(Math.max(Number(request.data?.count) || 1, 1), 100);
+    const durationDays = Math.max(Number(request.data?.durationDays) || 30, 1);
+    const label = request.data?.label ? String(request.data.label).slice(0, 120) : null;
+
+    const codes: string[] = [];
+    const batch = db.batch();
+    for (let i = 0; i < count; i++) {
+      const code = genCode();
+      codes.push(code);
+      batch.set(db.collection("access_codes").doc(code), {
+        code,
+        durationDays,
+        active: true,
+        maxUses: 1,
+        usedCount: 0,
+        createdBy: uid,
+        label,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        expiresAt: null,
+        redeemedBy: [],
+      });
+    }
+    await batch.commit();
+
+    logger.info(`[createAccessCodes] uid=${uid} gerou ${count} código(s) (${durationDays}d).`);
+    return { codes };
+  }
+);
+
+// listAccessCodes — admin lista os códigos e seus status.
+export const listAccessCodes = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (request: CallableRequest<Record<string, never>>): Promise<{ codes: Record<string, unknown>[] }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await checkRateLimit(
+      rateLimitKey("admin", uid, "listAccessCodes"),
+      RATE_ADMIN.limit,
+      RATE_ADMIN.windowMs
+    );
+
+    const snap = await db
+      .collection("access_codes")
+      .orderBy("createdAt", "desc")
+      .limit(500)
+      .get();
+
+    const codes = snap.docs.map((d) => {
+      const c = d.data();
+      const createdAt = c["createdAt"] as admin.firestore.Timestamp | undefined;
+      return {
+        code: d.id,
+        durationDays: c["durationDays"] ?? 30,
+        active: c["active"] ?? false,
+        usedCount: c["usedCount"] ?? 0,
+        maxUses: c["maxUses"] ?? 1,
+        redeemedBy: c["redeemedBy"] ?? [],
+        label: c["label"] ?? null,
+        createdAt: createdAt ? createdAt.toDate().toISOString() : null,
+      };
+    });
+    return { codes };
+  }
+);
+
+// revokeAccessCode — admin desativa um código (não revoga acessos já concedidos).
+export const revokeAccessCode = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (request: CallableRequest<{ code?: string }>): Promise<{ success: boolean }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await checkRateLimit(
+      rateLimitKey("admin", uid, "revokeAccessCode"),
+      RATE_ADMIN.limit,
+      RATE_ADMIN.windowMs
+    );
+
+    const code = (request.data?.code ?? "").toString().trim().toUpperCase();
+    if (!code) throw new HttpsError("invalid-argument", "Código é obrigatório.");
+    const ref = db.collection("access_codes").doc(code);
+    const snap = await ref.get();
+    if (!snap.exists) throw new HttpsError("not-found", "Código não encontrado.");
+    await ref.update({ active: false, updatedAt: admin.firestore.FieldValue.serverTimestamp() });
+
+    logger.info(`[revokeAccessCode] uid=${uid} revogou ${code}.`);
     return { success: true };
   }
 );
@@ -1310,30 +1590,65 @@ export const processTrialExpiry = onSchedule(
   },
   async () => {
     const now = admin.firestore.Timestamp.now();
+    const nowMs = now.toMillis();
+    const BATCH_LIMIT = 500; // Firestore limita um batch a 500 operações.
 
+    // ── 1) Trials vencidos ──────────────────────────────────────
     const expiredSnap = await db
       .collection("users")
       .where("isOnTrial", "==", true)
       .where("trialEndsAt", "<=", now)
       .get();
 
-    if (expiredSnap.empty) {
+    if (!expiredSnap.empty) {
+      const docs = expiredSnap.docs;
+      for (let i = 0; i < docs.length; i += BATCH_LIMIT) {
+        const batch = db.batch();
+        for (const doc of docs.slice(i, i + BATCH_LIMIT)) {
+          // Preserva premium se houver acesso-cortesia ainda ativo.
+          const comp = doc.data()["compAccessExpiresAt"] as admin.firestore.Timestamp | undefined;
+          const compActive = !!comp && comp.toMillis() > nowMs;
+          batch.update(doc.ref, {
+            isOnTrial: false,
+            isPremium: compActive,
+            trialEndsAt: null,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          });
+        }
+        await batch.commit();
+      }
+      logger.info(`[processTrialExpiry] ${expiredSnap.size} trial(s) expirado(s).`);
+    } else {
       logger.info("[processTrialExpiry] Nenhum trial vencido.");
-      return;
     }
 
-    const batch = db.batch();
-    expiredSnap.docs.forEach((doc) => {
-      batch.update(doc.ref, {
-        isOnTrial: false,
-        isPremium: false,
-        trialEndsAt: null,
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      });
-    });
+    // ── 2) Acessos-cortesia (códigos) vencidos ──────────────────
+    const compSnap = await db
+      .collection("users")
+      .where("compAccessExpiresAt", "<=", now)
+      .get();
 
-    await batch.commit();
-    logger.info(`[processTrialExpiry] ${expiredSnap.size} trial(s) expirado(s) e revogado(s).`);
+    if (!compSnap.empty) {
+      const docs = compSnap.docs;
+      for (let i = 0; i < docs.length; i += BATCH_LIMIT) {
+        const batch = db.batch();
+        for (const doc of docs.slice(i, i + BATCH_LIMIT)) {
+          const d = doc.data();
+          // Só revoga isPremium se não houver OUTRA fonte de premium
+          // (assinatura paga ou trial ativo). Sempre limpa os campos comp*.
+          const stillPremium = d["subscriptionPlanId"] != null || d["isOnTrial"] === true;
+          batch.update(doc.ref, {
+            compAccessExpiresAt: null,
+            compAccessSource: null,
+            compAccessCode: null,
+            ...(stillPremium ? {} : { isPremium: false }),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          });
+        }
+        await batch.commit();
+      }
+      logger.info(`[processTrialExpiry] ${compSnap.size} acesso(s)-cortesia expirado(s).`);
+    }
   }
 );
 
@@ -1347,6 +1662,7 @@ interface CheckDeviceTrustData {
 
 export const checkDeviceTrust = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -1408,6 +1724,7 @@ interface SendVerifCodeData {
 
 export const sendEmailVerificationCode = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [SMTP_USER, SMTP_PASS],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -1526,6 +1843,7 @@ interface VerifyEmailCodeResult {
 
 export const verifyEmailCode = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -1644,6 +1962,7 @@ export const verifyEmailCode = onCall(
 
 export const deleteAccount = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },

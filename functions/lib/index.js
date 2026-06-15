@@ -17,12 +17,13 @@
  *  - unlockBadge       : Concede badge se ainda não desbloqueada.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.processTrialExpiry = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
+exports.cleanupOldRankings = exports.syncPublicProfile = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.processTrialExpiry = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.updateElo = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
 const admin = require("firebase-admin");
 const firestore_1 = require("firebase-admin/firestore");
 const crypto = require("crypto");
 const https_1 = require("firebase-functions/v2/https");
 const scheduler_1 = require("firebase-functions/v2/scheduler");
+const firestore_2 = require("firebase-functions/v2/firestore");
 const v2_1 = require("firebase-functions/v2");
 const params_1 = require("firebase-functions/params");
 const nodemailer = require("nodemailer");
@@ -40,6 +41,20 @@ admin.initializeApp({
 });
 const db = (0, firestore_1.getFirestore)("default");
 db.settings({ ignoreUndefinedProperties: true });
+// ── Hardening de segurança ───────────────────────────────────────
+// Teto de instâncias por função: protege contra picos/DoS que virariam
+// custo de billing (Cloud Functions escala sem limite por padrão). Vale
+// para TODAS as funções; cada uma pode sobrescrever localmente se precisar.
+(0, v2_1.setGlobalOptions)({ maxInstances: 10 });
+// App Check — atesta que a chamada veio do app legítimo (não de curl/script
+// com um token de auth roubado/forjado). Aplicado APENAS aos callables.
+//
+// ⚠️ MANTER false até o cliente Flutter enviar tokens de App Check. Ligar
+// antes disso REJEITA todas as chamadas do app em produção (login, XP,
+// pagamento). Rollout: (1) firebase_app_check no Flutter + initialize;
+// (2) registrar providers no console (Play Integrity/DeviceCheck/reCAPTCHA);
+// (3) publicar o app e confirmar tokens chegando; (4) flip para true + deploy.
+const ENFORCE_APP_CHECK = false;
 // ────────────────────────────────────────────────────────────────
 // HELPERS
 // ────────────────────────────────────────────────────────────────
@@ -91,6 +106,21 @@ function safeEqual(a, b) {
     if (ab.length !== bb.length)
         return false;
     return crypto.timingSafeEqual(ab, bb);
+}
+/**
+ * Gera um código de acesso legível no formato PROF-XXXX-XXXX usando bytes
+ * criptograficamente seguros. Alfabeto sem caracteres ambíguos (0/O, 1/I/L).
+ */
+const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // sem 0 O 1 I L
+function genCode() {
+    const bytes = crypto.randomBytes(8);
+    let body = "";
+    for (let i = 0; i < 8; i++) {
+        body += CODE_ALPHABET[bytes[i] % CODE_ALPHABET.length];
+        if (i === 3)
+            body += "-";
+    }
+    return `PROF-${body}`; // ex.: PROF-X7K2-9QM4
 }
 /**
  * Remove um usuário do seu clã de forma consistente:
@@ -190,6 +220,7 @@ function resolveCatalogItem(item) {
     };
 }
 exports.addXp = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -288,6 +319,7 @@ exports.addXp = (0, https_1.onCall)({
     return result;
 });
 exports.addSparkPoints = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -329,6 +361,7 @@ exports.addSparkPoints = (0, https_1.onCall)({
     return { newBalance };
 });
 exports.spendSparkPoints = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -376,6 +409,7 @@ exports.spendSparkPoints = (0, https_1.onCall)({
     return result;
 });
 exports.updateElo = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -431,6 +465,7 @@ exports.updateElo = (0, https_1.onCall)({
     return result;
 });
 exports.unlockBadge = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -478,6 +513,7 @@ exports.unlockBadge = (0, https_1.onCall)({
     return { unlocked, badgeId };
 });
 exports.createAsaasCheckout = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -576,6 +612,7 @@ exports.createAsaasCheckout = (0, https_1.onCall)({
     };
 });
 exports.checkPaymentStatus = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -860,6 +897,7 @@ exports.asaasWebhook = (0, https_1.onRequest)({
     res.status(200).send("OK");
 });
 exports.startTrial = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -912,6 +950,7 @@ exports.startTrial = (0, https_1.onCall)({
 // 10. cancelTrial — Cancela trial antes do vencimento
 // ────────────────────────────────────────────────────────────────
 exports.cancelTrial = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -927,9 +966,13 @@ exports.cancelTrial = (0, https_1.onCall)({
     if (!data["isOnTrial"]) {
         throw new https_1.HttpsError("failed-precondition", "Usuário não possui trial ativo.");
     }
+    // Preserva premium se houver acesso-cortesia (código) ainda ativo — cancelar
+    // o trial não deve derrubar uma cortesia válida.
+    const compTs = data["compAccessExpiresAt"];
+    const compActive = !!compTs && compTs.toMillis() > Date.now();
     await userRef.update({
         isOnTrial: false,
-        isPremium: false,
+        isPremium: compActive,
         trialEndsAt: null,
         subscriptionPlanId: null,
         trialCardTokenId: null,
@@ -944,6 +987,201 @@ exports.cancelTrial = (0, https_1.onCall)({
     v2_1.logger.info(`[cancelTrial] uid=${uid} trial cancelado.`);
     return { success: true };
 });
+// ════════════════════════════════════════════════════════════════
+// CÓDIGOS DE ACESSO (cortesia) — libera acesso total por N dias.
+//   access_codes/{CODE}: server-only. Concede isPremium=true +
+//   compAccessExpiresAt (ortogonal a trial/assinatura). A expiração é
+//   tratada pelo processTrialExpiry (bloco de cortesia, abaixo).
+// ════════════════════════════════════════════════════════════════
+/** Lê o doc do chamador e exige role=='admin' (mesmo critério das rules). */
+async function assertAdmin(uid) {
+    var _a;
+    const snap = await db.collection("users").doc(uid).get();
+    if (((_a = snap.data()) === null || _a === void 0 ? void 0 : _a["role"]) !== "admin") {
+        throw new https_1.HttpsError("permission-denied", "Apenas administradores.");
+    }
+}
+// redeemAccessCode — professor resgata o código e ganha acesso por durationDays.
+exports.redeemAccessCode = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a, _b, _c;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid)
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    // Rate limit (anti-brute-force de códigos): família de entitlement.
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("payment", uid, "redeemAccessCode"), rateLimiter_1.RATE_PAYMENT.limit, rateLimiter_1.RATE_PAYMENT.windowMs);
+    const code = ((_c = (_b = request.data) === null || _b === void 0 ? void 0 : _b.code) !== null && _c !== void 0 ? _c : "").toString().trim().toUpperCase();
+    if (!code)
+        throw new https_1.HttpsError("invalid-argument", "Código é obrigatório.");
+    const codeRef = db.collection("access_codes").doc(code);
+    const userRef = db.collection("users").doc(uid);
+    const expiresAtIso = await db.runTransaction(async (tx) => {
+        var _a, _b, _c, _d;
+        const codeSnap = await tx.get(codeRef);
+        if (!codeSnap.exists)
+            throw new https_1.HttpsError("not-found", "Código inválido.");
+        const c = codeSnap.data();
+        if (c["active"] !== true) {
+            throw new https_1.HttpsError("failed-precondition", "Código desativado.");
+        }
+        const codeExp = c["expiresAt"];
+        if (codeExp && codeExp.toMillis() <= Date.now()) {
+            throw new https_1.HttpsError("failed-precondition", "Código expirado.");
+        }
+        const redeemedBy = (_a = c["redeemedBy"]) !== null && _a !== void 0 ? _a : [];
+        if (redeemedBy.includes(uid)) {
+            throw new https_1.HttpsError("already-exists", "Você já resgatou este código.");
+        }
+        if (((_b = c["usedCount"]) !== null && _b !== void 0 ? _b : 0) >= ((_c = c["maxUses"]) !== null && _c !== void 0 ? _c : 1)) {
+            throw new https_1.HttpsError("resource-exhausted", "Código esgotado.");
+        }
+        const userSnap = await tx.get(userRef);
+        if (!userSnap.exists)
+            throw new https_1.HttpsError("not-found", "Usuário não encontrado.");
+        const u = userSnap.data();
+        // Não sobrescreve uma assinatura paga ativa.
+        if (u["subscriptionPlanId"] != null && u["isPremium"] === true) {
+            throw new https_1.HttpsError("failed-precondition", "Você já possui uma assinatura ativa.");
+        }
+        const durationDays = (_d = c["durationDays"]) !== null && _d !== void 0 ? _d : 30;
+        // Estende a partir do maior entre (agora) e (cortesia atual) — não perde dias.
+        const currentComp = u["compAccessExpiresAt"];
+        const baseMs = currentComp && currentComp.toMillis() > Date.now()
+            ? currentComp.toMillis()
+            : Date.now();
+        const expiresAt = new Date(baseMs + durationDays * 24 * 60 * 60 * 1000);
+        const expiresTs = admin.firestore.Timestamp.fromDate(expiresAt);
+        tx.update(userRef, {
+            isPremium: true,
+            compAccessExpiresAt: expiresTs,
+            compAccessSource: "access_code",
+            compAccessCode: code,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        tx.update(codeRef, {
+            usedCount: admin.firestore.FieldValue.increment(1),
+            redeemedBy: admin.firestore.FieldValue.arrayUnion(uid),
+            lastRedeemedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        // Auditoria (coleção server-only).
+        tx.set(db.collection("voucher_redemptions").doc(), {
+            uid,
+            code,
+            durationDays,
+            grantedUntil: expiresTs,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        return expiresAt.toISOString();
+    });
+    try {
+        await writeAuditLog(uid, "access_code_redeemed", 0, "redeemAccessCode", {
+            code,
+            grantedUntil: expiresAtIso,
+        });
+    }
+    catch (e) {
+        v2_1.logger.warn("[redeemAccessCode] Audit log error:", e);
+    }
+    v2_1.logger.info(`[redeemAccessCode] uid=${uid} resgatou ${code} até ${expiresAtIso}.`);
+    return { success: true, expiresAt: expiresAtIso };
+});
+// createAccessCodes — admin gera um lote de códigos de uso único.
+exports.createAccessCodes = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a, _b, _c, _d;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid)
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("admin", uid, "createAccessCodes"), rateLimiter_1.RATE_ADMIN.limit, rateLimiter_1.RATE_ADMIN.windowMs);
+    const count = Math.min(Math.max(Number((_b = request.data) === null || _b === void 0 ? void 0 : _b.count) || 1, 1), 100);
+    const durationDays = Math.max(Number((_c = request.data) === null || _c === void 0 ? void 0 : _c.durationDays) || 30, 1);
+    const label = ((_d = request.data) === null || _d === void 0 ? void 0 : _d.label) ? String(request.data.label).slice(0, 120) : null;
+    const codes = [];
+    const batch = db.batch();
+    for (let i = 0; i < count; i++) {
+        const code = genCode();
+        codes.push(code);
+        batch.set(db.collection("access_codes").doc(code), {
+            code,
+            durationDays,
+            active: true,
+            maxUses: 1,
+            usedCount: 0,
+            createdBy: uid,
+            label,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            expiresAt: null,
+            redeemedBy: [],
+        });
+    }
+    await batch.commit();
+    v2_1.logger.info(`[createAccessCodes] uid=${uid} gerou ${count} código(s) (${durationDays}d).`);
+    return { codes };
+});
+// listAccessCodes — admin lista os códigos e seus status.
+exports.listAccessCodes = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid)
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("admin", uid, "listAccessCodes"), rateLimiter_1.RATE_ADMIN.limit, rateLimiter_1.RATE_ADMIN.windowMs);
+    const snap = await db
+        .collection("access_codes")
+        .orderBy("createdAt", "desc")
+        .limit(500)
+        .get();
+    const codes = snap.docs.map((d) => {
+        var _a, _b, _c, _d, _e, _f;
+        const c = d.data();
+        const createdAt = c["createdAt"];
+        return {
+            code: d.id,
+            durationDays: (_a = c["durationDays"]) !== null && _a !== void 0 ? _a : 30,
+            active: (_b = c["active"]) !== null && _b !== void 0 ? _b : false,
+            usedCount: (_c = c["usedCount"]) !== null && _c !== void 0 ? _c : 0,
+            maxUses: (_d = c["maxUses"]) !== null && _d !== void 0 ? _d : 1,
+            redeemedBy: (_e = c["redeemedBy"]) !== null && _e !== void 0 ? _e : [],
+            label: (_f = c["label"]) !== null && _f !== void 0 ? _f : null,
+            createdAt: createdAt ? createdAt.toDate().toISOString() : null,
+        };
+    });
+    return { codes };
+});
+// revokeAccessCode — admin desativa um código (não revoga acessos já concedidos).
+exports.revokeAccessCode = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a, _b, _c;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid)
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("admin", uid, "revokeAccessCode"), rateLimiter_1.RATE_ADMIN.limit, rateLimiter_1.RATE_ADMIN.windowMs);
+    const code = ((_c = (_b = request.data) === null || _b === void 0 ? void 0 : _b.code) !== null && _c !== void 0 ? _c : "").toString().trim().toUpperCase();
+    if (!code)
+        throw new https_1.HttpsError("invalid-argument", "Código é obrigatório.");
+    const ref = db.collection("access_codes").doc(code);
+    const snap = await ref.get();
+    if (!snap.exists)
+        throw new https_1.HttpsError("not-found", "Código não encontrado.");
+    await ref.update({ active: false, updatedAt: admin.firestore.FieldValue.serverTimestamp() });
+    v2_1.logger.info(`[revokeAccessCode] uid=${uid} revogou ${code}.`);
+    return { success: true };
+});
 // ────────────────────────────────────────────────────────────────
 // 11. processTrialExpiry — Agendada diariamente (Cloud Scheduler)
 //     Revoga isPremium de todos os trials vencidos.
@@ -955,28 +1193,59 @@ exports.processTrialExpiry = (0, scheduler_1.onSchedule)({
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async () => {
     const now = admin.firestore.Timestamp.now();
+    const nowMs = now.toMillis();
+    const BATCH_LIMIT = 500; // Firestore limita um batch a 500 operações.
+    // ── 1) Trials vencidos ──────────────────────────────────────
     const expiredSnap = await db
         .collection("users")
         .where("isOnTrial", "==", true)
         .where("trialEndsAt", "<=", now)
         .get();
-    if (expiredSnap.empty) {
-        v2_1.logger.info("[processTrialExpiry] Nenhum trial vencido.");
-        return;
+    if (!expiredSnap.empty) {
+        const docs = expiredSnap.docs;
+        for (let i = 0; i < docs.length; i += BATCH_LIMIT) {
+            const batch = db.batch();
+            for (const doc of docs.slice(i, i + BATCH_LIMIT)) {
+                // Preserva premium se houver acesso-cortesia ainda ativo.
+                const comp = doc.data()["compAccessExpiresAt"];
+                const compActive = !!comp && comp.toMillis() > nowMs;
+                batch.update(doc.ref, {
+                    isOnTrial: false,
+                    isPremium: compActive,
+                    trialEndsAt: null,
+                    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+                });
+            }
+            await batch.commit();
+        }
+        v2_1.logger.info(`[processTrialExpiry] ${expiredSnap.size} trial(s) expirado(s).`);
     }
-    const batch = db.batch();
-    expiredSnap.docs.forEach((doc) => {
-        batch.update(doc.ref, {
-            isOnTrial: false,
-            isPremium: false,
-            trialEndsAt: null,
-            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-        });
-    });
-    await batch.commit();
-    v2_1.logger.info(`[processTrialExpiry] ${expiredSnap.size} trial(s) expirado(s) e revogado(s).`);
+    else {
+        v2_1.logger.info("[processTrialExpiry] Nenhum trial vencido.");
+    }
+    // ── 2) Acessos-cortesia (códigos) vencidos ──────────────────
+    const compSnap = await db
+        .collection("users")
+        .where("compAccessExpiresAt", "<=", now)
+        .get();
+    if (!compSnap.empty) {
+        const docs = compSnap.docs;
+        for (let i = 0; i < docs.length; i += BATCH_LIMIT) {
+            const batch = db.batch();
+            for (const doc of docs.slice(i, i + BATCH_LIMIT)) {
+                const d = doc.data();
+                // Só revoga isPremium se não houver OUTRA fonte de premium
+                // (assinatura paga ou trial ativo). Sempre limpa os campos comp*.
+                const stillPremium = d["subscriptionPlanId"] != null || d["isOnTrial"] === true;
+                batch.update(doc.ref, Object.assign(Object.assign({ compAccessExpiresAt: null, compAccessSource: null, compAccessCode: null }, (stillPremium ? {} : { isPremium: false })), { updatedAt: admin.firestore.FieldValue.serverTimestamp() }));
+            }
+            await batch.commit();
+        }
+        v2_1.logger.info(`[processTrialExpiry] ${compSnap.size} acesso(s)-cortesia expirado(s).`);
+    }
 });
 exports.checkDeviceTrust = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -1020,6 +1289,7 @@ exports.checkDeviceTrust = (0, https_1.onCall)({
     }
 });
 exports.sendEmailVerificationCode = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [SMTP_USER, SMTP_PASS],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -1105,6 +1375,7 @@ exports.sendEmailVerificationCode = (0, https_1.onCall)({
     return { sent: true };
 });
 exports.verifyEmailCode = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -1195,6 +1466,7 @@ exports.verifyEmailCode = (0, https_1.onCall)({
 //   5. Apaga o usuário do Firebase Auth
 // ────────────────────────────────────────────────────────────────
 exports.deleteAccount = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -1250,5 +1522,111 @@ exports.deleteAccount = (0, https_1.onCall)({
     }
     v2_1.logger.info(`[deleteAccount] conta ${uid} excluída permanentemente.`);
     return { ok: true };
+});
+// ────────────────────────────────────────────────────────────────
+// syncPublicProfile — Espelha campos PÚBLICOS de users/{uid} em
+// public_profiles/{uid} (LGPD: /users é privado; o espelho público
+// não carrega e-mail, dados de pagamento nem tokens).
+// As Security Rules deixam public_profiles como write:false (só o
+// servidor escreve), e este trigger é o ÚNICO escritor. Sem ele a
+// coleção fica vazia e o ranking all-time / telas de perfil quebram.
+// ────────────────────────────────────────────────────────────────
+/** Campos espelhados em public_profiles. Qualquer outro fica fora (PII). */
+const PUBLIC_PROFILE_FIELDS = [
+    "displayName",
+    "photoUrl",
+    "profession",
+    "xp",
+    "level",
+    "tensionLevel",
+    "weeklyXp",
+    "monthlyXp",
+    "eloRating",
+    "clanId",
+    "clanName",
+    "unlockedBadgeIds",
+    // Módulo que o usuário está estudando agora. Necessário para a "presença
+    // do clã" (learning_path_screen consulta public_profiles por clanId +
+    // currentModuleId). Sem espelhar este campo, a query sempre vinha vazia.
+    "currentModuleId",
+];
+/** Extrai apenas os campos públicos de um doc de usuário. */
+function pickPublicFields(data) {
+    const out = {};
+    for (const key of PUBLIC_PROFILE_FIELDS) {
+        if (data[key] !== undefined)
+            out[key] = data[key];
+    }
+    return out;
+}
+exports.syncPublicProfile = (0, firestore_2.onDocumentWritten)({
+    document: "users/{uid}",
+    // Este projeto usa um banco Firestore NOMEADO ("default"), não o
+    // "(default)". Sem declarar isto o deploy do trigger falha com 404
+    // ("database '(default)' does not exist") e o gatilho nunca dispara.
+    database: "default",
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (event) => {
+    var _a, _b, _c, _d, _e, _f, _g;
+    const uid = event.params.uid;
+    const publicRef = db.collection("public_profiles").doc(uid);
+    const after = (_a = event.data) === null || _a === void 0 ? void 0 : _a.after;
+    // Documento de usuário foi apagado → remove o espelho público.
+    // (deleteAccount já remove explicitamente, mas isto cobre exclusões diretas.)
+    if (!after || !after.exists) {
+        await publicRef.delete().catch(() => { });
+        v2_1.logger.info(`[syncPublicProfile] uid=${uid} removido (user apagado).`);
+        return;
+    }
+    const afterData = (_b = after.data()) !== null && _b !== void 0 ? _b : {};
+    const newPublic = pickPublicFields(afterData);
+    // Evita escritas desnecessárias (e loops de custo): só grava se algum
+    // campo público realmente mudou em relação ao estado anterior.
+    const beforeData = (_e = (_d = (_c = event.data) === null || _c === void 0 ? void 0 : _c.before) === null || _d === void 0 ? void 0 : _d.data()) !== null && _e !== void 0 ? _e : {};
+    const oldPublic = pickPublicFields(beforeData);
+    const changed = PUBLIC_PROFILE_FIELDS.some((k) => JSON.stringify(oldPublic[k]) !== JSON.stringify(newPublic[k]));
+    if (((_g = (_f = event.data) === null || _f === void 0 ? void 0 : _f.before) === null || _g === void 0 ? void 0 : _g.exists) && !changed) {
+        return;
+    }
+    newPublic["uid"] = uid;
+    newPublic["updatedAt"] = admin.firestore.FieldValue.serverTimestamp();
+    await publicRef.set(newPublic, { merge: true });
+    v2_1.logger.info(`[syncPublicProfile] uid=${uid} espelho público atualizado.`);
+});
+// ────────────────────────────────────────────────────────────────
+// cleanupOldRankings — Agendada semanalmente. Remove subcoleções de
+// semanas antigas em rankings/weekly para o storage não crescer
+// indefinidamente (o addXp cria uma subcoleção nova a cada semana e
+// nada as apagava). Mantém as últimas RANKING_WEEKS_TO_KEEP semanas.
+// O weekKey tem formato "YYYY-Www" (zero-padded), então a ordenação
+// lexicográfica decrescente equivale à cronológica.
+// ────────────────────────────────────────────────────────────────
+const RANKING_WEEKS_TO_KEEP = 8;
+exports.cleanupOldRankings = (0, scheduler_1.onSchedule)({
+    schedule: "every monday 04:00",
+    timeZone: "America/Sao_Paulo",
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async () => {
+    const weeklyDoc = db.collection("rankings").doc("weekly");
+    const weekCols = await weeklyDoc.listCollections();
+    if (weekCols.length <= RANKING_WEEKS_TO_KEEP) {
+        v2_1.logger.info(`[cleanupOldRankings] ${weekCols.length} semana(s); nada a limpar.`);
+        return;
+    }
+    // Ordena por ID (weekKey) decrescente e mantém só as mais recentes.
+    const sorted = weekCols.sort((a, b) => (a.id < b.id ? 1 : -1));
+    const toDelete = sorted.slice(RANKING_WEEKS_TO_KEEP);
+    for (const col of toDelete) {
+        try {
+            await db.recursiveDelete(col);
+            v2_1.logger.info(`[cleanupOldRankings] semana ${col.id} removida.`);
+        }
+        catch (e) {
+            v2_1.logger.warn(`[cleanupOldRankings] falha ao remover ${col.id}:`, e);
+        }
+    }
+    v2_1.logger.info(`[cleanupOldRankings] ${toDelete.length} semana(s) antiga(s) removida(s).`);
 });
 //# sourceMappingURL=index.js.map

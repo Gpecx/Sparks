@@ -10,6 +10,7 @@ import 'package:spark_app/screens/edit_profile_screen.dart';
 import 'package:spark_app/screens/change_password_screen.dart';
 import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/services/access_code_service.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/colorblind_provider.dart';
@@ -331,6 +332,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 );
               }),
 
+              _sectionTitle('ACESSO'),
+              _tile(
+                icon: Icons.vpn_key_outlined,
+                title: 'Resgatar código de acesso',
+                subtitle: 'Liberar acesso completo com um código',
+                onTap: _showRedeemCodeDialog,
+              ),
+              const SizedBox(height: 8),
+
               _sectionTitle('SOBRE E SUPORTE'),
               _tile(
                 icon: Icons.info_outline,
@@ -437,6 +447,102 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ),
     ),
   );
+
+  void _showRedeemCodeDialog() {
+    final controller = TextEditingController();
+    bool loading = false;
+    String? error;
+
+    showDialog(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSt) => AlertDialog(
+          backgroundColor: AppColors.card,
+          title: const Text('Resgatar código de acesso',
+              style: TextStyle(color: Colors.white)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Digite o código recebido para liberar o acesso completo.',
+                style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: controller,
+                autofocus: true,
+                textCapitalization: TextCapitalization.characters,
+                style: const TextStyle(
+                    color: Colors.white, letterSpacing: 2, fontWeight: FontWeight.bold),
+                decoration: InputDecoration(
+                  hintText: 'PROF-XXXX-XXXX',
+                  hintStyle: const TextStyle(color: AppColors.textMuted),
+                  errorText: error,
+                  enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.textMuted)),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.primary)),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: loading ? null : () => Navigator.of(ctx).pop(),
+              child: const Text('Cancelar', style: TextStyle(color: AppColors.textMuted)),
+            ),
+            FilledButton(
+              onPressed: loading
+                  ? null
+                  : () async {
+                      final code = controller.text.trim().toUpperCase();
+                      if (code.isEmpty) {
+                        setSt(() => error = 'Informe o código.');
+                        return;
+                      }
+                      setSt(() {
+                        loading = true;
+                        error = null;
+                      });
+                      try {
+                        final until =
+                            await AccessCodeService.instance.redeem(code);
+                        if (!ctx.mounted) return;
+                        Navigator.of(ctx).pop();
+                        final d =
+                            '${until.day.toString().padLeft(2, '0')}/${until.month.toString().padLeft(2, '0')}/${until.year}';
+                        if (!mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: AppColors.primary,
+                            content: Text('Acesso liberado até $d 🎉'),
+                          ),
+                        );
+                      } on AccessCodeException catch (e) {
+                        setSt(() {
+                          loading = false;
+                          error = e.message;
+                        });
+                      } catch (_) {
+                        setSt(() {
+                          loading = false;
+                          error = 'Erro ao resgatar. Tente novamente.';
+                        });
+                      }
+                    },
+              child: loading
+                  ? const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                  : const Text('Resgatar'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   void _showFaqDialog() {
     final faqs = [
