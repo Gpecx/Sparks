@@ -41,6 +41,20 @@ admin.initializeApp({
 });
 const db = (0, firestore_1.getFirestore)("default");
 db.settings({ ignoreUndefinedProperties: true });
+// ── Hardening de segurança ───────────────────────────────────────
+// Teto de instâncias por função: protege contra picos/DoS que virariam
+// custo de billing (Cloud Functions escala sem limite por padrão). Vale
+// para TODAS as funções; cada uma pode sobrescrever localmente se precisar.
+(0, v2_1.setGlobalOptions)({ maxInstances: 10 });
+// App Check — atesta que a chamada veio do app legítimo (não de curl/script
+// com um token de auth roubado/forjado). Aplicado APENAS aos callables.
+//
+// ⚠️ MANTER false até o cliente Flutter enviar tokens de App Check. Ligar
+// antes disso REJEITA todas as chamadas do app em produção (login, XP,
+// pagamento). Rollout: (1) firebase_app_check no Flutter + initialize;
+// (2) registrar providers no console (Play Integrity/DeviceCheck/reCAPTCHA);
+// (3) publicar o app e confirmar tokens chegando; (4) flip para true + deploy.
+const ENFORCE_APP_CHECK = false;
 // ────────────────────────────────────────────────────────────────
 // HELPERS
 // ────────────────────────────────────────────────────────────────
@@ -191,6 +205,7 @@ function resolveCatalogItem(item) {
     };
 }
 exports.addXp = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -289,6 +304,7 @@ exports.addXp = (0, https_1.onCall)({
     return result;
 });
 exports.addSparkPoints = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -330,6 +346,7 @@ exports.addSparkPoints = (0, https_1.onCall)({
     return { newBalance };
 });
 exports.spendSparkPoints = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -377,6 +394,7 @@ exports.spendSparkPoints = (0, https_1.onCall)({
     return result;
 });
 exports.updateElo = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -432,6 +450,7 @@ exports.updateElo = (0, https_1.onCall)({
     return result;
 });
 exports.unlockBadge = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -479,6 +498,7 @@ exports.unlockBadge = (0, https_1.onCall)({
     return { unlocked, badgeId };
 });
 exports.createAsaasCheckout = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -577,6 +597,7 @@ exports.createAsaasCheckout = (0, https_1.onCall)({
     };
 });
 exports.checkPaymentStatus = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -861,6 +882,7 @@ exports.asaasWebhook = (0, https_1.onRequest)({
     res.status(200).send("OK");
 });
 exports.startTrial = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -913,6 +935,7 @@ exports.startTrial = (0, https_1.onCall)({
 // 10. cancelTrial — Cancela trial antes do vencimento
 // ────────────────────────────────────────────────────────────────
 exports.cancelTrial = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -984,6 +1007,7 @@ exports.processTrialExpiry = (0, scheduler_1.onSchedule)({
     v2_1.logger.info(`[processTrialExpiry] ${expiredSnap.size} trial(s) expirado(s) e revogado(s).`);
 });
 exports.checkDeviceTrust = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -1027,6 +1051,7 @@ exports.checkDeviceTrust = (0, https_1.onCall)({
     }
 });
 exports.sendEmailVerificationCode = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [SMTP_USER, SMTP_PASS],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -1112,6 +1137,7 @@ exports.sendEmailVerificationCode = (0, https_1.onCall)({
     return { sent: true };
 });
 exports.verifyEmailCode = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -1202,6 +1228,7 @@ exports.verifyEmailCode = (0, https_1.onCall)({
 //   5. Apaga o usuário do Firebase Auth
 // ────────────────────────────────────────────────────────────────
 exports.deleteAccount = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
