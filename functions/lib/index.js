@@ -1019,7 +1019,7 @@ exports.redeemAccessCode = (0, https_1.onCall)({
     const codeRef = db.collection("access_codes").doc(code);
     const userRef = db.collection("users").doc(uid);
     const expiresAtIso = await db.runTransaction(async (tx) => {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e, _f, _g;
         const codeSnap = await tx.get(codeRef);
         if (!codeSnap.exists)
             throw new https_1.HttpsError("not-found", "Código inválido.");
@@ -1039,28 +1039,36 @@ exports.redeemAccessCode = (0, https_1.onCall)({
             throw new https_1.HttpsError("resource-exhausted", "Código esgotado.");
         }
         const userSnap = await tx.get(userRef);
-        if (!userSnap.exists)
-            throw new https_1.HttpsError("not-found", "Usuário não encontrado.");
-        const u = userSnap.data();
+        const u = userSnap.exists ? userSnap.data() : null;
         // Não sobrescreve uma assinatura paga ativa.
-        if (u["subscriptionPlanId"] != null && u["isPremium"] === true) {
+        if (u && u["subscriptionPlanId"] != null && u["isPremium"] === true) {
             throw new https_1.HttpsError("failed-precondition", "Você já possui uma assinatura ativa.");
         }
         const durationDays = (_d = c["durationDays"]) !== null && _d !== void 0 ? _d : 30;
         // Estende a partir do maior entre (agora) e (cortesia atual) — não perde dias.
-        const currentComp = u["compAccessExpiresAt"];
+        const currentComp = u === null || u === void 0 ? void 0 : u["compAccessExpiresAt"];
         const baseMs = currentComp && currentComp.toMillis() > Date.now()
             ? currentComp.toMillis()
             : Date.now();
         const expiresAt = new Date(baseMs + durationDays * 24 * 60 * 60 * 1000);
         const expiresTs = admin.firestore.Timestamp.fromDate(expiresAt);
-        tx.update(userRef, {
+        const compFields = {
             isPremium: true,
             compAccessExpiresAt: expiresTs,
             compAccessSource: "access_code",
             compAccessCode: code,
             updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-        });
+        };
+        if (userSnap.exists) {
+            tx.update(userRef, compFields);
+        }
+        else {
+            // O doc do usuário ainda não existe (ex.: a criação client-side falhou —
+            // problema conhecido de timing de auth no web). Cria aqui com os padrões
+            // de boas-vindas + o acesso liberado. Admin SDK ignora as Security Rules.
+            const token = (_e = request.auth) === null || _e === void 0 ? void 0 : _e.token;
+            tx.set(userRef, Object.assign({ uid, displayName: (_f = token === null || token === void 0 ? void 0 : token.name) !== null && _f !== void 0 ? _f : "", email: (_g = token === null || token === void 0 ? void 0 : token.email) !== null && _g !== void 0 ? _g : "", photoUrl: null, role: "técnico", sparkPoints: 100, xp: 0, level: 1, tensionLevel: "BT", currentStreak: 0, longestStreak: 0, activeDays: 0, studiedToday: false, lastStudyDate: null, weeklyXp: 0, monthlyXp: 0, unlockedBadgeIds: [], clanId: null, clanName: null, totalLessonsCompleted: 0, totalCorrectAnswers: 0, totalAnswers: 0, eloRating: 1200, wins: 0, losses: 0, totalDuels: 0, createdAt: admin.firestore.FieldValue.serverTimestamp() }, compFields));
+        }
         tx.update(codeRef, {
             usedCount: admin.firestore.FieldValue.increment(1),
             redeemedBy: admin.firestore.FieldValue.arrayUnion(uid),

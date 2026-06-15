@@ -1487,17 +1487,16 @@ export const redeemAccessCode = onCall(
       }
 
       const userSnap = await tx.get(userRef);
-      if (!userSnap.exists) throw new HttpsError("not-found", "Usuário não encontrado.");
-      const u = userSnap.data()!;
+      const u = userSnap.exists ? userSnap.data()! : null;
 
       // Não sobrescreve uma assinatura paga ativa.
-      if (u["subscriptionPlanId"] != null && u["isPremium"] === true) {
+      if (u && u["subscriptionPlanId"] != null && u["isPremium"] === true) {
         throw new HttpsError("failed-precondition", "Você já possui uma assinatura ativa.");
       }
 
       const durationDays = (c["durationDays"] as number) ?? 30;
       // Estende a partir do maior entre (agora) e (cortesia atual) — não perde dias.
-      const currentComp = u["compAccessExpiresAt"] as admin.firestore.Timestamp | undefined;
+      const currentComp = u?.["compAccessExpiresAt"] as admin.firestore.Timestamp | undefined;
       const baseMs =
         currentComp && currentComp.toMillis() > Date.now()
           ? currentComp.toMillis()
@@ -1505,13 +1504,52 @@ export const redeemAccessCode = onCall(
       const expiresAt = new Date(baseMs + durationDays * 24 * 60 * 60 * 1000);
       const expiresTs = admin.firestore.Timestamp.fromDate(expiresAt);
 
-      tx.update(userRef, {
+      const compFields = {
         isPremium: true,
         compAccessExpiresAt: expiresTs,
         compAccessSource: "access_code",
         compAccessCode: code,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      });
+      };
+
+      if (userSnap.exists) {
+        tx.update(userRef, compFields);
+      } else {
+        // O doc do usuário ainda não existe (ex.: a criação client-side falhou —
+        // problema conhecido de timing de auth no web). Cria aqui com os padrões
+        // de boas-vindas + o acesso liberado. Admin SDK ignora as Security Rules.
+        const token = request.auth?.token as { email?: string; name?: string } | undefined;
+        tx.set(userRef, {
+          uid,
+          displayName: token?.name ?? "",
+          email: token?.email ?? "",
+          photoUrl: null,
+          role: "técnico",
+          sparkPoints: 100,
+          xp: 0,
+          level: 1,
+          tensionLevel: "BT",
+          currentStreak: 0,
+          longestStreak: 0,
+          activeDays: 0,
+          studiedToday: false,
+          lastStudyDate: null,
+          weeklyXp: 0,
+          monthlyXp: 0,
+          unlockedBadgeIds: [],
+          clanId: null,
+          clanName: null,
+          totalLessonsCompleted: 0,
+          totalCorrectAnswers: 0,
+          totalAnswers: 0,
+          eloRating: 1200,
+          wins: 0,
+          losses: 0,
+          totalDuels: 0,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          ...compFields,
+        });
+      }
       tx.update(codeRef, {
         usedCount: admin.firestore.FieldValue.increment(1),
         redeemedBy: admin.firestore.FieldValue.arrayUnion(uid),
