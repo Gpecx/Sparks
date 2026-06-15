@@ -73,7 +73,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   void _showProfileMenu(UserModel? userModel) {
     final userService = ref.read(userServiceProvider);
-    final displayName = userModel?.displayName ?? userService.displayName;
+    // Usa o getter do serviço (cadeia de fallback completa: doc → Auth.displayName
+    // → deriva do e-mail do Auth). O userModel.displayName já vem colapsado para
+    // "Usuário" quando o doc não tem nome/e-mail, então não serve de fonte aqui.
+    final displayName = userService.displayName;
     final photoUrl = userModel?.photoUrl ?? userService.user?.photoUrl;
     final email = userModel?.email ?? userService.user?.email ?? '';
     final role = userModel?.role ?? userService.user?.role ?? 'Técnico';
@@ -308,7 +311,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   // ── Header com nome real do Firestore ───────────────────────────
   Widget _buildHeader(UserModel? userModel) {
     final userService = ref.watch(userServiceProvider);
-    final displayName = userModel?.displayName ?? userService.displayName;
+    // Usa o getter do serviço (cadeia de fallback completa: doc → Auth.displayName
+    // → deriva do e-mail do Auth). O userModel.displayName já vem colapsado para
+    // "Usuário" quando o doc não tem nome/e-mail, então não serve de fonte aqui.
+    final displayName = userService.displayName;
     final firstName = displayName.split(' ').first;
     final photoUrl = userModel?.photoUrl ?? userService.user?.photoUrl;
 
