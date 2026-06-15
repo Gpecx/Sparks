@@ -46,7 +46,7 @@ class AdminEntityCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(right: onDelete != null ? 32.0 : 0),
-                  child: Text(title, style: TextStyle(color: isActive ? colorType : Colors.white, fontSize: 16, fontWeight: FontWeight.w700)),
+                  child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: isActive ? colorType : Colors.white, fontSize: 16, fontWeight: FontWeight.w700)),
                 ),
                 const SizedBox(height: 8),
                 Text(description, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),

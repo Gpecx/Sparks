@@ -556,15 +556,21 @@ class AdminDashboardPage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Trilhas e Lições', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
-                Text('Crie a jornada completa com lições e questões.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
-              ],
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Trilhas e Lições', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
+                  Text(
+                    'Crie a jornada completa com lições e questões.',
+                    style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
+                  ),
+                ],
+              ),
             ),
+            const SizedBox(width: 16),
             ElevatedButton.icon(
               onPressed: () => AdminDialogs.showTrailWizard(context, ref),
               icon: const Icon(Icons.auto_awesome, size: 18),
