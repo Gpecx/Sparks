@@ -1,217 +1,217 @@
 {
   "category": "Termografia Infravermelha",
-  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categorySubtitle": "Fundamentos, aplicações em sistemas elétricos e normas de laudos",
   "categoryOrder": 3,
   "module": "Fundamentos de Termografia",
-  "moduleSubtitle": "Fisica do IR, transferencia de calor, equipamentos e calibracao",
+  "moduleSubtitle": "Física do IR, transferência de calor, equipamentos e calibração",
   "moduleOrder": 1,
   "trail": "Transferência de Calor (Condução, Convecção, Radiação)",
   "trailOrder": 1,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Na transferencia de calor por conducao em um solido ou fluido estacionario, qual e a lei que governa o fluxo de calor e qual propriedade do material e utilizada na equacao?",
+      "statement": "Na transferência de calor por condução em um sólido ou fluido estacionário, qual é a lei que governa o fluxo de calor e qual propriedade do material é utilizada na equação?",
       "options": [
-        "Lei de Fourier e condutividade termica.",
-        "Lei de Newton do resfriamento e coeficiente de conveccao.",
+        "Lei de Fourier e condutividade térmica.",
+        "Lei de Newton do resfriamento e coeficiente de convecção.",
         "Lei de Stefan-Boltzmann e emissividade.",
         "Lei de Kirchhoff e absortividade."
       ],
       "correctIndex": 0,
-      "explanation": "A conducao de calor e descrita pela Lei de Fourier, onde a condutividade termica do material atua como constante de proporcionalidade para o gradiente de temperatura. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "A condução de calor é descrita pela Lei de Fourier, onde a condutividade térmica do material atua como constante de proporcionalidade para o gradiente de temperatura. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como e definida a transferencia de calor por conveccao e qual e a lei que a descreve?",
+      "statement": "Como é definida a transferência de calor por convecção e qual é a lei que a descreve?",
       "options": [
-        "E a energia emitida pela materia proporcional a sua temperatura, descrita pela Lei de Planck.",
-        "E o calor transferido em um solido devido a agitacao atomica, descrito pela Lei de Fourier.",
-        "E o calor transferido pelo efeito combinado da conducao e do movimento macroscopico do meio, descrito pela Lei de Newton do resfriamento.",
-        "E a conversao de energia eletrica em termica por resistencia, descrita pela Lei de Joule."
+        "É a energia emitida pela matéria proporcional à sua temperatura, descrita pela Lei de Planck.",
+        "É o calor transferido em um sólido devido à agitação atômica, descrito pela Lei de Fourier.",
+        "É o calor transferido pelo efeito combinado da condução e do movimento macroscópico do meio, descrito pela Lei de Newton do resfriamento.",
+        "É a conversão de energia elétrica em térmica por resistência, descrita pela Lei de Joule."
       ],
       "correctIndex": 2,
-      "explanation": "A conveccao envolve o efeito combinado da conducao e o movimento (adveccao) do fluido, sendo regida pela Lei de Newton do resfriamento. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "A convecção envolve o efeito combinado da condução e o movimento (advecção) do fluido, sendo regida pela Lei de Newton do resfriamento. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual equacao determina a quantidade de energia termica emitida por unidade de area da superficie de um corpo negro perfeito?",
+      "statement": "Qual equação determina a quantidade de energia térmica emitida por unidade de área da superfície de um corpo negro perfeito?",
       "options": [
-        "Poder emissivo igual a condutividade termica multiplicada pelo gradiente.",
-        "Poder emissivo igual a variacao transiente do calor especifico no tempo.",
-        "Poder emissivo igual ao coeficiente de pelicula vezes a diferenca de temperatura.",
-        "Poder emissivo igual a constante de Stefan-Boltzmann multiplicada pela quarta potencia da temperatura absoluta."
+        "Poder emissivo igual à condutividade térmica multiplicada pelo gradiente.",
+        "Poder emissivo igual à variação transiente do calor específico no tempo.",
+        "Poder emissivo igual ao coeficiente de película vezes a diferença de temperatura.",
+        "Poder emissivo igual à constante de Stefan-Boltzmann multiplicada pela quarta potência da temperatura absoluta."
       ],
       "correctIndex": 3,
-      "explanation": "O poder emissivo de um emissor perfeito (corpo negro) segue a lei de Stefan-Boltzmann, dependendo da constante de Stefan-Boltzmann e da quarta potencia da temperatura. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "O poder emissivo de um emissor perfeito (corpo negro) segue a lei de Stefan-Boltzmann, dependendo da constante de Stefan-Boltzmann e da quarta potência da temperatura. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em sistemas eletricos inspecionados por termografia, a elevacao anormal de temperatura (ponto quente) em conexoes e frequentemente explicada por qual fenomeno?",
+      "statement": "Em sistemas elétricos inspecionados por termografia, a elevação anormal de temperatura (ponto quente) em conexões é frequentemente explicada por qual fenômeno?",
       "options": [
-        "Pelo aumento da resistencia ohmica devido a mau contato ou oxidacao, elevando a potencia dissipada por efeito Joule.",
-        "Pela elevacao repentina da condutividade termica do cobre nos cabos, atraindo fluxo de calor externo.",
-        "Pela diminuicao da emissividade do componente, refletindo a radiacao termica das demais fases.",
-        "Pela reducao do coeficiente de conveccao forcada causada pela blindagem de paineis isolados."
+        "Pelo aumento da resistência ôhmica devido a mau contato ou oxidação, elevando a potência dissipada por efeito Joule.",
+        "Pela elevação repentina da condutividade térmica do cobre nos cabos, atraindo fluxo de calor externo.",
+        "Pela diminuição da emissividade do componente, refletindo a radiação térmica das demais fases.",
+        "Pela redução do coeficiente de convecção forçada causada pela blindagem de painéis isolados."
       ],
       "correctIndex": 0,
-      "explanation": "O aumento da resistencia em uma conexao eleva a potencia dissipada (proporcional a R vezes I ao quadrado), ocasionando o sobreaquecimento visivel na termografia. (Fonte: Inspecao em Subestacoes Utilizando a Termografia; Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O aumento da resistência em uma conexão eleva a potência dissipada (proporcional a R vezes I ao quadrado), ocasionando o sobreaquecimento visível na termografia. (Fonte: Inspeção em Subestações Utilizando a Termografia; Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No estudo da radiacao termica, o que afirma a Lei de Kirchhoff para uma superficie pequena envolvida por uma vizinhanca muito maior com temperatura uniforme?",
+      "statement": "No estudo da radiação térmica, o que afirma a Lei de Kirchhoff para uma superfície pequena envolvida por uma vizinhança muito maior com temperatura uniforme?",
       "options": [
-        "A absortividade da superficie e inversamente proporcional a sua emissividade.",
-        "A condutividade da superficie se iguala ao coeficiente de conveccao do gas circundante.",
-        "A absortividade da superficie e identica e igual a sua emissividade.",
-        "O calor radiado e igual a energia dissipada internamente pelo gradiente termico."
+        "A absortividade da superfície é inversamente proporcional à sua emissividade.",
+        "A condutividade da superfície se iguala ao coeficiente de convecção do gás circundante.",
+        "A absortividade da superfície é idêntica e igual à sua emissividade.",
+        "O calor radiado é igual à energia dissipada internamente pelo gradiente térmico."
       ],
       "correctIndex": 2,
-      "explanation": "A Lei de Kirchhoff estabelece que, sob certas condicoes de radiacao na vizinhanca, a absortividade de um corpo e igual a sua emissividade. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "A Lei de Kirchhoff estabelece que, sob certas condições de radiação na vizinhança, a absortividade de um corpo é igual à sua emissividade. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em um balanco de energia na superficie de um material sob regime estacionario (permanente) sem geracao interna de calor, como se comportam os fluxos de calor termicos?",
+      "statement": "Em um balanço de energia na superfície de um material sob regime estacionário (permanente) sem geração interna de calor, como se comportam os fluxos de calor térmicos?",
       "options": [
-        "A soma do calor entrando na superficie e superior ao calor saindo, gerando um gradiente de aquecimento continuo.",
-        "A soma e o balanco dos fluxos termicos de conducao, conveccao e radiacao na superficie resulta em zero.",
-        "O fluxo de radiacao torna-se nulo, restando apenas o equilibrio entre a conducao e a conveccao laminar.",
-        "A energia armazenada aumenta gradativamente devido a resistencia termica do ar estagnado ao redor."
+        "A soma do calor entrando na superfície é superior ao calor saindo, gerando um gradiente de aquecimento contínuo.",
+        "A soma e o balanço dos fluxos térmicos de condução, convecção e radiação na superfície resulta em zero.",
+        "O fluxo de radiação torna-se nulo, restando apenas o equilíbrio entre a condução e a convecção laminar.",
+        "A energia armazenada aumenta gradativamente devido à resistência térmica do ar estagnado ao redor."
       ],
       "correctIndex": 1,
-      "explanation": "Em condicao de regime permanente, a equacao do balanco de energia na superficie e dada por q(conducao) - q(conveccao) - q(radiacao) = 0. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "Em condição de regime permanente, a equação do balanço de energia na superfície é dada por q(condução) - q(convecção) - q(radiação) = 0. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O coeficiente h na transferencia de calor varia conforme a natureza do fluxo de conveccao, que pode ser de dois tipos principais em aplicacoes reais. Quais sao eles?",
+      "statement": "O coeficiente h na transferência de calor varia conforme a natureza do fluxo de convecção, que pode ser de dois tipos principais em aplicações reais. Quais são eles?",
       "options": [
-        "Conducao termica divergente e difusao radiativa.",
-        "Conveccao adiabatica e isotermica constante.",
-        "Conveccao natural (ou livre) e conveccao forcada.",
-        "Conveccao subtransiente laminar e turbulencia solida."
+        "Condução térmica divergente e difusão radiativa.",
+        "Convecção adiabática e isotérmica constante.",
+        "Convecção natural (ou livre) e convecção forçada.",
+        "Convecção subtransiente laminar e turbulência sólida."
       ],
       "correctIndex": 2,
-      "explanation": "A conveccao pode ser livre (natural), baseada em variacoes de densidade, ou forcada (por movimentos induzidos no meio), alterando os valores do coeficiente de conveccao h. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "A convecção pode ser livre (natural), baseada em variações de densidade, ou forçada (por movimentos induzidos no meio), alterando os valores do coeficiente de convecção h. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na aplicacao da Lei de Fourier para a conducao unidimensional de calor em uma parede plana, o termo dT/dx representa que propriedade fisica?",
+      "statement": "Na aplicação da Lei de Fourier para a condução unidimensional de calor em uma parede plana, o termo dT/dx representa que propriedade física?",
       "options": [
-        "A dispersao do poder emissivo pelo material metalico no tempo.",
-        "O gradiente de temperatura, ou seja, a variacao da temperatura ao longo do comprimento ou espessura.",
-        "O fator de preenchimento matricial da resistencia de contato na ligacao.",
-        "A taxa temporal de variacao do efeito Joule no centro do isolador termico."
+        "A dispersão do poder emissivo pelo material metálico no tempo.",
+        "O gradiente de temperatura, ou seja, a variação da temperatura ao longo do comprimento ou espessura.",
+        "O fator de preenchimento matricial da resistência de contato na ligação.",
+        "A taxa temporal de variação do efeito Joule no centro do isolador térmico."
       ],
       "correctIndex": 1,
-      "explanation": "O termo dT/dx equivale ao gradiente de temperatura, medido em K/m, que governa a direcao e a magnitude do fluxo de calor na conducao. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "O termo dT/dx equivale ao gradiente de temperatura, medido em K/m, que governa a direção e a magnitude do fluxo de calor na condução. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No contexto da termografia de barramentos de cobre e conectores de aluminio (materiais condutores), como o angulo de visada (inferior a 45 graus) afeta tipicamente a emissividade?",
+      "statement": "No contexto da termografia de barramentos de cobre e conectores de alumínio (materiais condutores), como o ângulo de visada (inferior a 45 graus) afeta tipicamente a emissividade?",
       "options": [
         "A emissividade aumenta drasticamente, gerando falsos pontos quentes e alarmes improcedentes.",
-        "O fator de forma anula completamente a deteccao radiativa do termovisor pelo efeito de pelicula.",
-        "A variacao da emissividade direcional e praticamente irrelevante e nao afeta o diagnostico para angulos ate 45 graus.",
-        "O material metalico passa a se comportar como um corpo negro perfeito apenas na visada estritamente perpendicular."
+        "O fator de forma anula completamente a detecção radiativa do termovisor pelo efeito de película.",
+        "A variação da emissividade direcional é praticamente irrelevante e não afeta o diagnóstico para ângulos até 45 graus.",
+        "O material metálico passa a se comportar como um corpo negro perfeito apenas na visada estritamente perpendicular."
       ],
       "correctIndex": 2,
-      "explanation": "Materiais condutores apresentam alteracoes sensiveis de emissividade apenas para angulos muito elevados. Para angulos inferiores a 45 graus, a dependencia angular nao e um fator limitante na medicao termografica. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Materiais condutores apresentam alterações sensíveis de emissividade apenas para ângulos muito elevados. Para ângulos inferiores a 45 graus, a dependência angular não é um fator limitante na medição termográfica. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao inspecionar cabos paralelos de uma mesma fase, caso ocorra uma falha de mau contato com uma resistencia muito elevada, qual comportamento paradoxal a termografia pode revelar?",
+      "statement": "Ao inspecionar cabos paralelos de uma mesma fase, caso ocorra uma falha de mau contato com uma resistência muito elevada, qual comportamento paradoxal a termografia pode revelar?",
       "options": [
-        "O cabo defeituoso assumira sempre a maior temperatura do conjunto devido a estagnacao do fluxo convectivo.",
-        "A corrente se desvia para o cabo com bom contato, fazendo com que a conexao saudavel fique mais aquecida que a defeituosa.",
-        "Ambas as conexoes manterao a mesma temperatura estabilizada pelo equilibrio da Lei de Stefan-Boltzmann em curto-circuito.",
-        "O gradiente termico inverte o fluxo de radiacao, mascarando totalmente a emissividade aparente na imagem."
+        "O cabo defeituoso assumirá sempre a maior temperatura do conjunto devido à estagnação do fluxo convectivo.",
+        "A corrente se desvia para o cabo com bom contato, fazendo com que a conexão saudável fique mais aquecida que a defeituosa.",
+        "Ambas as conexões manterão a mesma temperatura estabilizada pelo equilíbrio da Lei de Stefan-Boltzmann em curto-circuito.",
+        "O gradiente térmico inverte o fluxo de radiação, mascarando totalmente a emissividade aparente na imagem."
       ],
       "correctIndex": 1,
-      "explanation": "Em circuitos paralelos sob falha de resistencia de contato excessivamente alta, a corrente desvia para o circuito sadio, aumentando a potencia dissipada nele e tornando o cabo normal mais quente que o danificado. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Em circuitos paralelos sob falha de resistência de contato excessivamente alta, a corrente desvia para o circuito sadio, aumentando a potência dissipada nele e tornando o cabo normal mais quente que o danificado. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A energia termica (ou interna) refere-se aos efeitos microscopicos acumulados na materia, enquanto o calor consiste exclusivamente na energia em transito motivada por uma diferenca de temperatura.",
+      "statement": "A energia térmica (ou interna) refere-se aos efeitos microscópicos acumulados na matéria, enquanto o calor consiste exclusivamente na energia em trânsito motivada por uma diferença de temperatura.",
       "correctAnswer": true,
-      "explanation": "Existe uma definicao conceitual rigorosa separando a energia termica, associada a estrutura e temperatura da materia, do calor, que e sempre energia em transito por gradiente termico. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "Existe uma definição conceitual rigorosa separando a energia térmica, associada à estrutura e temperatura da matéria, do calor, que é sempre energia em trânsito por gradiente térmico. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "De acordo com as leis fundamentais de radiacao aplicadas a termografia, a Lei de Kirchhoff postula que a capacidade de uma superficie absorver calor e inversamente proporcional a sua emissividade.",
+      "statement": "De acordo com as leis fundamentais de radiação aplicadas à termografia, a Lei de Kirchhoff postula que a capacidade de uma superfície absorver calor é inversamente proporcional à sua emissividade.",
       "correctAnswer": false,
-      "explanation": "A Lei de Kirchhoff estabelece que a absortividade de uma superficie em equilibrio termico com o ambiente e igual a sua emissividade, e nao inversamente proporcional. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "A Lei de Kirchhoff estabelece que a absortividade de uma superfície em equilíbrio térmico com o ambiente é igual à sua emissividade, e não inversamente proporcional. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "No regime transiente do aquecimento de um fio eletrico com geracao de calor por efeito Joule, a temperatura aumenta em funcao da massa e do calor especifico do material ate estabilizar.",
+      "statement": "No regime transiente do aquecimento de um fio elétrico com geração de calor por efeito Joule, a temperatura aumenta em função da massa e do calor específico do material até estabilizar.",
       "correctAnswer": true,
-      "explanation": "Em regime transiente, a variacao da energia armazenada internamente antes do equilibrio permanente depende da massa e do calor especifico da substancia conforme ela aquece. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "Em regime transiente, a variação da energia armazenada internamente antes do equilíbrio permanente depende da massa e do calor específico da substância conforme ela aquece. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Diferente da conducao e da conveccao, o mecanismo de transferencia de calor por radiacao (captado por termovisores) nao necessita de nenhum meio fisico ou material para que seu transporte ocorra.",
+      "statement": "Diferente da condução e da convecção, o mecanismo de transferência de calor por radiação (captado por termovisores) não necessita de nenhum meio físico ou material para que seu transporte ocorra.",
       "correctAnswer": true,
-      "explanation": "A radiacao termica e emitida por alteracoes nos niveis eletronicos liberando ondas eletromagneticas que viajam perfeitamente pelo espaco livre ou vacuo, dispensando meio material. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "A radiação térmica é emitida por alterações nos níveis eletrônicos liberando ondas eletromagnéticas que viajam perfeitamente pelo espaço livre ou vácuo, dispensando meio material. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para extrapolar a temperatura de um componente de 50 por cento de carga para 100 por cento de carga nominal de forma preditiva, basta multiplicar o valor direto da elevacao termica registrada por dois, evidenciando uma relacao linear perfeita.",
+      "statement": "Para extrapolar a temperatura de um componente de 50 por cento de carga para 100 por cento de carga nominal de forma preditiva, basta multiplicar o valor direto da elevação térmica registrada por dois, evidenciando uma relação linear perfeita.",
       "correctAnswer": false,
-      "explanation": "O aquecimento dissipado e proporcional ao quadrado da corrente. As extrapolacoes de carga aplicam expoentes especificos (entre 1,4 e 2,0) sobre a relacao de correntes, demonstrando o comportamento nao linear do efeito Joule. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O aquecimento dissipado é proporcional ao quadrado da corrente. As extrapolações de carga aplicam expoentes específicos (entre 1,4 e 2,0) sobre a relação de correntes, demonstrando o comportamento não linear do efeito Joule. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A taxa de transferencia de calor por conducao em regime permanente e proporcional ao gradiente de temperatura, utilizando como constante de proporcionalidade na equacao a propriedade denominada ____ do material.",
+      "statement": "A taxa de transferência de calor por condução em regime permanente é proporcional ao gradiente de temperatura, utilizando como constante de proporcionalidade na equação a propriedade denominada ____ do material.",
       "blanks": [
         {
           "index": 0,
           "answer": "condutividade termica"
         }
       ],
-      "explanation": "Na Lei de Fourier, o k atua como constante de proporcionalidade e representa a condutividade termica, expressa em W/(m.K). (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "Na Lei de Fourier, o k atua como constante de proporcionalidade e representa a condutividade térmica, expressa em W/(m.K). (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A Lei de Newton do resfriamento governa a troca termica convectiva usando o parametro h, tambem chamado tecnicamente de coeficiente de ____ local ou coeficiente de pelicula.",
+      "statement": "A Lei de Newton do resfriamento governa a troca térmica convectiva usando o parâmetro h, também chamado tecnicamente de coeficiente de ____ local ou coeficiente de película.",
       "blanks": [
         {
           "index": 0,
           "answer": "conveccao"
         }
       ],
-      "explanation": "O parametro h e o coeficiente de conveccao local, responsavel por quantificar a troca de calor entre a superficie e o fluido em escoamento ou movimento livre. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "O parâmetro h é o coeficiente de convecção local, responsável por quantificar a troca de calor entre a superfície e o fluido em escoamento ou movimento livre. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Em termografia de paineis eletricos, as falhas mecanicas que provocam forte sobreaquecimento pontual aumentam bruscamente a resistencia ohmica de ____ e intensificam a dissipacao de calor local.",
+      "statement": "Em termografia de painéis elétricos, as falhas mecânicas que provocam forte sobreaquecimento pontual aumentam bruscamente a resistência ôhmica de ____ e intensificam a dissipação de calor local.",
       "blanks": [
         {
           "index": 0,
           "answer": "mau contato"
         }
       ],
-      "explanation": "O acumulo resistivo em um ponto de juncao ou conexao defeituosa e denominado resistencia de mau contato, elevando expressivamente o efeito termico. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O acúmulo resistivo em um ponto de junção ou conexão defeituosa é denominado resistência de mau contato, elevando expressivamente o efeito térmico. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     }
   ]

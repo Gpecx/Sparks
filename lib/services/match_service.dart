@@ -1,151 +1,130 @@
 import 'dart:async';
-import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:spark_app/models/match_models.dart';
 
-/// Serviço Mock que simula um Firebase Realtime Database / WebSocket
-/// para o modo Duelo de Faíscas.
+/// Serviço do Duelo de Faíscas (PvP) — matchmaking e partida apurados no
+/// servidor (Cloud Functions), com sincronização em tempo real via Firestore.
+///
+/// - Matchmaking: [joinQueue] / [leaveQueue] (CFs joinDuelQueue/leaveDuelQueue),
+///   com [myQueueMatchStream] para detectar quando um oponente nos pareia.
+/// - Partida: [matchStream] (tempo real), [submitAnswer] (validação no servidor)
+///   e [finalize] (apuração + ELO dos dois jogadores).
+/// - Treino: [getBotQuestions] traz perguntas reais (com gabarito) para jogar
+///   contra um bot localmente — não afeta o ranking.
 class MatchService {
   static final MatchService _instance = MatchService._internal();
   factory MatchService() => _instance;
   MatchService._internal();
 
-  final _random = Random();
-  Match? _currentMatch;
-  Timer? _opponentTimer;
+  final _db =
+      FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
+  final _functions =
+      FirebaseFunctions.instanceFor(region: 'southamerica-east1');
+  final _auth = FirebaseAuth.instance;
 
-  // Stream controllers para notificar a UI
-  final _matchController = StreamController<Match>.broadcast();
-  final _opponentAnsweredController = StreamController<int>.broadcast();
+  String get uid => _auth.currentUser?.uid ?? '';
 
-  Stream<Match> get matchStream => _matchController.stream;
-  Stream<int> get opponentAnsweredStream => _opponentAnsweredController.stream;
-  Match? get currentMatch => _currentMatch;
+  // ── Matchmaking ─────────────────────────────────────────────────────
 
-  /// Banco de perguntas para o duelo
-  static const List<DuelQuestion> _questionBank = [
-    DuelQuestion(
-      question: 'Qual a tensão mínima que exige treinamento NR-10?',
-      options: ['12V', '24V', '50V', '110V'],
-      correctIndex: 2,
-    ),
-    DuelQuestion(
-      question: 'Qual EPI é obrigatório para trabalho em altura acima de 2m?',
-      options: ['Capacete', 'Cinto de segurança', 'Luva isolante', 'Óculos'],
-      correctIndex: 1,
-    ),
-    DuelQuestion(
-      question: 'O que significa a sigla EPI?',
-      options: [
-        'Equipamento de Proteção Individual',
-        'Estrutura de Proteção Interna',
-        'Equipamento Padrão Industrial',
-        'Estrutura Preventiva Integral',
-      ],
-      correctIndex: 0,
-    ),
-    DuelQuestion(
-      question: 'Qual NR trata de trabalho em altura?',
-      options: ['NR-10', 'NR-12', 'NR-33', 'NR-35'],
-      correctIndex: 3,
-    ),
-    DuelQuestion(
-      question: 'Qual o primeiro passo ao encontrar um fio desencapado?',
-      options: [
-        'Isolar a área imediatamente',
-        'Tocar para verificar a tensão',
-        'Continuar trabalhando',
-        'Chamar um colega para ver',
-      ],
-      correctIndex: 0,
-    ),
-  ];
-
-  /// Inicia a busca por um oponente (mock: cria sala após 2-4 seg de "espera")
-  Future<Match> findMatch(String playerId) async {
-    // Simula busca por oponente
-    await Future.delayed(Duration(seconds: _random.nextInt(2) + 2));
-
-    final questions = List<DuelQuestion>.from(_questionBank)..shuffle(_random);
-
-    _currentMatch = Match(
-      id: 'match_${DateTime.now().millisecondsSinceEpoch}',
-      player1Id: playerId,
-      player2Id: 'bot_oponente',
-      questions: questions.take(5).toList(),
-      status: MatchStatus.active,
+  /// Entra na fila ou é pareado imediatamente. Reentrante: serve também como
+  /// heartbeat enquanto o jogador aguarda.
+  Future<JoinQueueResult> joinQueue() async {
+    final res = await _functions.httpsCallable('joinDuelQueue').call();
+    final d = Map<String, dynamic>.from(res.data as Map);
+    return JoinQueueResult(
+      status: d['status'] as String? ?? 'waiting',
+      matchId: d['matchId'] as String?,
     );
-
-    _matchController.add(_currentMatch!);
-    return _currentMatch!;
   }
 
-  /// Registra a resposta do jogador e simula a resposta do oponente
-  void submitAnswer({
+  /// Sai da fila (cancelar busca). Best-effort.
+  Future<void> leaveQueue() async {
+    try {
+      await _functions.httpsCallable('leaveDuelQueue').call();
+    } catch (e) {
+      debugPrint('[MatchService.leaveQueue] $e');
+    }
+  }
+
+  /// Emite o `matchId` assim que outro jogador nos parear (listener do nosso
+  /// próprio doc de fila).
+  Stream<String?> myQueueMatchStream() {
+    if (uid.isEmpty) return const Stream<String?>.empty();
+    return _db
+        .collection('matchmaking_queue')
+        .doc(uid)
+        .snapshots()
+        .map((s) => s.data()?['matchId'] as String?);
+  }
+
+  // ── Partida (PvP) ───────────────────────────────────────────────────
+
+  /// Estado do duelo em tempo real.
+  Stream<DuelMatch> matchStream(String matchId) {
+    return _db
+        .collection('matches')
+        .doc(matchId)
+        .snapshots()
+        .where((s) => s.exists)
+        .map((s) => DuelMatch.fromFirestore(s));
+  }
+
+  /// Envia uma resposta para validação no servidor. Retorna acerto + índice
+  /// correto (revelado só agora) + pontuação da rodada.
+  Future<SubmitAnswerResult> submitAnswer({
+    required String matchId,
     required int questionIndex,
     required int selectedOption,
-    required int timeTakenMs,
-  }) {
-    if (_currentMatch == null) return;
-    final q = _currentMatch!.questions[questionIndex];
-
-    // Score do jogador
-    _currentMatch!.player1Scores.add(RoundScore(
-      playerId: _currentMatch!.player1Id,
-      questionIndex: questionIndex,
-      isCorrect: selectedOption == q.correctIndex,
-      timeTakenMs: timeTakenMs,
-    ));
-
-    _matchController.add(_currentMatch!);
-
-    // Simula oponente respondendo com delay aleatório
-    _opponentTimer?.cancel();
-    final opponentDelay = Duration(milliseconds: _random.nextInt(3000) + 500);
-    _opponentTimer = Timer(opponentDelay, () {
-      if (_currentMatch == null) return;
-
-      // Bot acerta ~65% das vezes
-      final botCorrect = _random.nextDouble() < 0.65;
-      final botTime = _random.nextInt(4000) + 1000;
-
-      _currentMatch!.player2Scores.add(RoundScore(
-        playerId: _currentMatch!.player2Id,
-        questionIndex: questionIndex,
-        isCorrect: botCorrect,
-        timeTakenMs: botTime,
-      ));
-
-      _opponentAnsweredController.add(questionIndex);
-      _matchController.add(_currentMatch!);
+    required int elapsedMs,
+  }) async {
+    final res = await _functions.httpsCallable('submitDuelAnswer').call({
+      'matchId': matchId,
+      'questionIndex': questionIndex,
+      'selectedOption': selectedOption,
+      'elapsedMs': elapsedMs,
     });
+    final d = Map<String, dynamic>.from(res.data as Map);
+    return SubmitAnswerResult(
+      isCorrect: d['isCorrect'] as bool? ?? false,
+      correctIndex: (d['correctIndex'] as num?)?.toInt() ?? -1,
+      score: (d['score'] as num?)?.toDouble() ?? 0,
+    );
   }
 
-  /// Notifica que o oponente respondeu antes do jogador (simulação)
-  void simulateOpponentFastAnswer(int questionIndex) {
-    _opponentAnsweredController.add(questionIndex);
+  /// Pede a apuração do duelo. Se o oponente ainda não terminou, retorna
+  /// `status: waiting` (use [force] após o timeout de abandono).
+  Future<FinalizeResult> finalize({
+    required String matchId,
+    bool force = false,
+  }) async {
+    final res = await _functions.httpsCallable('finalizeDuel').call({
+      'matchId': matchId,
+      'force': force,
+    });
+    final d = Map<String, dynamic>.from(res.data as Map);
+    return FinalizeResult(
+      status: d['status'] as String? ?? 'waiting',
+      winnerId: d['winnerId'] as String?,
+      player1Total: (d['player1Total'] as num?)?.toDouble(),
+      player2Total: (d['player2Total'] as num?)?.toDouble(),
+      eloChange: (d['eloChange'] as num?)?.toInt() ?? 0,
+    );
   }
 
-  /// Finaliza a partida
-  void finishMatch() {
-    if (_currentMatch != null) {
-      _currentMatch!.status = MatchStatus.finished;
-      _matchController.add(_currentMatch!);
-    }
-    _opponentTimer?.cancel();
-  }
+  // ── Treino (vs bot) ─────────────────────────────────────────────────
 
-  /// Simula desconexão do oponente
-  void simulateDisconnect() {
-    if (_currentMatch != null) {
-      _currentMatch!.status = MatchStatus.disconnected;
-      _matchController.add(_currentMatch!);
-    }
-    _opponentTimer?.cancel();
-  }
-
-  /// Limpa tudo
-  void dispose() {
-    _opponentTimer?.cancel();
-    _currentMatch = null;
+  /// Perguntas reais (com gabarito) para uma partida de treino local.
+  Future<List<DuelQuestion>> getBotQuestions({int count = 8}) async {
+    final res = await _functions
+        .httpsCallable('getBotDuelQuestions')
+        .call({'count': count});
+    final d = Map<String, dynamic>.from(res.data as Map);
+    return ((d['questions'] as List?) ?? const [])
+        .map((e) => DuelQuestion.fromMap(Map<String, dynamic>.from(e as Map)))
+        .toList();
   }
 }

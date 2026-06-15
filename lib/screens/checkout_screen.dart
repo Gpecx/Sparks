@@ -522,25 +522,37 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '${widget.items.length} ${widget.items.length == 1 ? 'item' : 'itens'}',
-                style:
-                    const TextStyle(color: AppColors.textMuted, fontSize: 13),
-              ),
-              Row(children: [
-                const Text('TOTAL ',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700)),
-                Text(
-                  'R\$ ${_total.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w800),
+              Flexible(
+                child: Text(
+                  '${widget.items.length} ${widget.items.length == 1 ? 'item' : 'itens'}',
+                  overflow: TextOverflow.ellipsis,
+                  style:
+                      const TextStyle(color: AppColors.textMuted, fontSize: 13),
                 ),
-              ]),
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('TOTAL ',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700)),
+                    Flexible(
+                      child: Text(
+                        'R\$ ${_total.toStringAsFixed(2)}',
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            color: AppColors.primary,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 14),

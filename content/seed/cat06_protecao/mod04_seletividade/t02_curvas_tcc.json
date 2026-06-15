@@ -180,7 +180,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O ajuste que escalona a temporizacao do rele, deslocando verticalmente a curva caracteristica, e o dial de ____.",
+      "statement": "O ajuste que escalona a temporização do relé, deslocando verticalmente a curva característica, é o dial de ____.",
       "blanks": [
         {
           "index": 0,

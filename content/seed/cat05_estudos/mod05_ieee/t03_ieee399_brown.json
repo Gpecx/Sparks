@@ -12,206 +12,206 @@
       "type": "multipleChoice",
       "statement": "Qual o principal escopo da norma IEEE 399, conhecida como Brown Book?",
       "options": [
-        "Dimensionamento termico exclusivo de cabos isolados de extra alta tensao.",
-        "Padronizacao de tensoes secundarias nominais de motores eletricos de inducao.",
-        "Analise de sistemas de potencia industriais e comerciais por meio de estudos computacionais.",
-        "Regulamentacao de arranjos fisicos de paineis eletricos em cabines primarias."
+        "Dimensionamento térmico exclusivo de cabos isolados de extra alta tensão.",
+        "Padronização de tensões secundárias nominais de motores elétricos de indução.",
+        "Análise de sistemas de potência industriais e comerciais por meio de estudos computacionais.",
+        "Regulamentação de arranjos físicos de painéis elétricos em cabines primárias."
       ],
       "correctIndex": 2,
-      "explanation": "A norma IEEE 399 estabelece praticas recomendadas para analise de sistemas de potencia industriais e comerciais, abrangendo as tecnicas comuns de simulacao por computador.",
+      "explanation": "A norma IEEE 399 estabelece práticas recomendadas para análise de sistemas de potência industriais e comerciais, abrangendo as técnicas comuns de simulação por computador.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quais dos seguintes estudos sistemicos estao explicitamente inclusos no escopo analitico do IEEE Brown Book?",
+      "statement": "Quais dos seguintes estudos sistêmicos estão explicitamente inclusos no escopo analítico do IEEE Brown Book?",
       "options": [
-        "Apenas simulacoes lineares de fluxo de carga e curto-circuito simetrico em barramentos infinitos.",
-        "Estabilidade, analise harmonica, fluxo de carga, curto-circuito e partida de motores.",
-        "Analise termografica e ensaios fisicos destrutivos de isolacao em grandes transformadores.",
-        "Dimensionamento civil de fundacoes mecânicas de caixas de passagem e dutos magneticos."
+        "Apenas simulações lineares de fluxo de carga e curto-circuito simétrico em barramentos infinitos.",
+        "Estabilidade, análise harmônica, fluxo de carga, curto-circuito e partida de motores.",
+        "Análise termográfica e ensaios físicos destrutivos de isolação em grandes transformadores.",
+        "Dimensionamento civil de fundações mecânicas de caixas de passagem e dutos magnéticos."
       ],
       "correctIndex": 1,
-      "explanation": "A norma cobre estudos especificos incluindo curto-circuito, fluxo de carga, partida de motor, estabilidade, analise de harmonicos, entre outros modelos matematicos de redes.",
+      "explanation": "A norma cobre estudos específicos incluindo curto-circuito, fluxo de carga, partida de motor, estabilidade, análise de harmônicos, entre outros modelos matemáticos de redes.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na selecao de programas computacionais para analise, qual caracteristica define softwares com interfaces graficas amigaveis?",
+      "statement": "Na seleção de programas computacionais para análise, qual característica define softwares com interfaces gráficas amigáveis?",
       "options": [
-        "Processam as analises complexas exclusivamente em modo de lote atrasado sem iteracao direta do usuario.",
+        "Processam as análises complexas exclusivamente em modo de lote atrasado sem iteração direta do usuário.",
         "Exigem exclusivamente a entrada de dados via arquivos de texto estruturados em oitenta colunas fixas.",
-        "Bloqueiam a validacao preliminar de dados operacionais durante a entrada manual efetuada pelo projetista.",
-        "Dispensam a referencia constante aos manuais do usuario fornecendo assistencia interativa em tela."
+        "Bloqueiam a validação preliminar de dados operacionais durante a entrada manual efetuada pelo projetista.",
+        "Dispensam a referência constante aos manuais do usuário fornecendo assistência interativa em tela."
       ],
       "correctIndex": 3,
-      "explanation": "Programas amigaveis ou user friendly dispensam uso ininterrupto de manuais, fornecendo telas graficas interativas e validando os dados fornecidos no ato da digitacao.",
+      "explanation": "Programas amigáveis ou user friendly dispensam uso ininterrupto de manuais, fornecendo telas gráficas interativas e validando os dados fornecidos no ato da digitação.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para estudos de partida de motores, os simuladores podem modelar a carga de partida de um motor como qual tipo de elemento transitorio basico?",
+      "statement": "Para estudos de partida de motores, os simuladores podem modelar a carga de partida de um motor como qual tipo de elemento transitório básico?",
       "options": [
-        "Um tipo especifico de carga passiva de impedancia constante.",
-        "Uma capacitancia pura de compensacao sincronizada.",
-        "Uma fonte ativa de tensao de Thevenin invariante no tempo.",
-        "Um gerador sincrono com injecao de potencia ativa integralmente nula."
+        "Um tipo específico de carga passiva de impedância constante.",
+        "Uma capacitância pura de compensação sincronizada.",
+        "Uma fonte ativa de tensão de Thévenin invariante no tempo.",
+        "Um gerador síncrono com injeção de potência ativa integralmente nula."
       ],
       "correctIndex": 0,
-      "explanation": "No modelo da base de dados dos programas para estudo de aceleracao e partida, a carga inicial do motor em arranque costuma ser modelada como uma carga do tipo impedancia constante.",
+      "explanation": "No modelo da base de dados dos programas para estudo de aceleração e partida, a carga inicial do motor em arranque costuma ser modelada como uma carga do tipo impedância constante.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O estudo computacional de sistemas de potencia de corrente continua abrange qual analise funcional descrita no IEEE 399?",
+      "statement": "O estudo computacional de sistemas de potência de corrente contínua abrange qual análise funcional descrita no IEEE 399?",
       "options": [
-        "Calculo restrito ao escorregamento subtransitorio nominal dos grandes conversores industriais reversos.",
-        "Estudo focado em fluxo de carga, perfis de queda de tensao em baterias e analises de curto-circuito unipolar.",
-        "Deslocamento cronometrico do angulo de torque em geradores convencionais de corrente alternada retificada.",
-        "Dimensionamento absoluto da reatancia sincrona de eixo direto em repouso dos atuadores eletromecânicos."
+        "Cálculo restrito ao escorregamento subtransitório nominal dos grandes conversores industriais reversos.",
+        "Estudo focado em fluxo de carga, perfis de queda de tensão em baterias e análises de curto-circuito unipolar.",
+        "Deslocamento cronométrico do ângulo de torque em geradores convencionais de corrente alternada retificada.",
+        "Dimensionamento absoluto da reatância síncrona de eixo direto em repouso dos atuadores eletromecânicos."
       ],
       "correctIndex": 1,
-      "explanation": "Os estudos de sistemas CC envolvem os calculos voltados as baterias e condutores focados no fluxo de carga, queda de voltagem terminal e curtos-circuitos associados.",
+      "explanation": "Os estudos de sistemas CC envolvem os cálculos voltados às baterias e condutores focados no fluxo de carga, queda de voltagem terminal e curtos-circuitos associados.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nos rigorosos estudos de curto-circuito, qual fator fenomenologico afeta significativamente a precisao real dos resultados matriciais computados?",
+      "statement": "Nos rigorosos estudos de curto-circuito, qual fator fenomenológico afeta significativamente a precisão real dos resultados matriciais computados?",
       "options": [
-        "O metodo padronizado de refrigeracao calorifica do transformador de potencial do alimentador radial principal.",
-        "O fator percentual de iluminacao do painel de controle contido na subestacao distribuidora atrelada ao respectivo centro de comando de motores.",
-        "A definicao minuciosa dos acoplamentos mutuos de sequencia zero entre linhas adjacentes e os respectivos defasamentos em transformadores.",
-        "A localizacao e coloracao dos elementos emissores de luz nas frentes operativas do rele eletromecanico subtransitorio de sobrecorrente."
+        "O método padronizado de refrigeração calorífica do transformador de potencial do alimentador radial principal.",
+        "O fator percentual de iluminação do painel de controle contido na subestação distribuidora atrelada ao respectivo centro de comando de motores.",
+        "A definição minuciosa dos acoplamentos mútuos de sequência zero entre linhas adjacentes e os respectivos defasamentos em transformadores.",
+        "A localização e coloração dos elementos emissores de luz nas frentes operativas do relé eletromecânico subtransitório de sobrecorrente."
       ],
       "correctIndex": 2,
-      "explanation": "A literatura da norma 399 alerta que para garantir o refinamento da exatidao deve-se considerar impedancias de aterramento, acoplamentos mutuos em sequencia zero e defasagem gerada em maquinas defasadoras.",
+      "explanation": "A literatura da norma 399 alerta que para garantir o refinamento da exatidão deve-se considerar impedâncias de aterramento, acoplamentos mútuos em sequência zero e defasagem gerada em máquinas defasadoras.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para a correta conducao dos estudos de analise armonica nos softwares especializados, qual equipamento da planta demanda modelagem detalhada devido.",
+      "statement": "Para a correta condução dos estudos de análise harmônica nos softwares especializados, qual equipamento da planta demanda modelagem detalhada devido.",
       "options": [
-        "Os simples disjuntores puramente termomagneticos restritos a protecao residual da baixa tensao predial.",
-        "O singelo transformador de corrente instrumental dimensionado para atuar estritamente na retaguarda da matriz de reles estaticos.",
-        "A elementar chave seccionadora constituida de facas e comandos sem carga projetada para operar no isolamento unifilar em media tensao.",
-        "Os espalhados bancos de capacitores shunt instalados associados a exata caracterizacao da carga não linear poluidora emissora."
+        "Os simples disjuntores puramente termomagnéticos restritos à proteção residual da baixa tensão predial.",
+        "O singelo transformador de corrente instrumental dimensionado para atuar estritamente na retaguarda da matriz de relés estáticos.",
+        "A elementar chave seccionadora constituída de facas e comandos sem carga projetada para operar no isolamento unifilar em média tensão.",
+        "Os espalhados bancos de capacitores shunt instalados associados à exata caracterização da carga não linear poluidora emissora."
       ],
       "correctIndex": 3,
-      "explanation": "A injeção de correntes multiplas por elementos não lineares se acopla a capacitancia paralela da rede podendo desencadear condicoes catastroficas de ressonancia exigindo que capacitores shunt sejam sempre contemplados.",
+      "explanation": "A injeção de correntes múltiplas por elementos não lineares se acopla à capacitância paralela da rede podendo desencadear condições catastróficas de ressonância exigindo que capacitores shunt sejam sempre contemplados.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na simulacao primordial atrelada a montagem inicial de um estudo computacional de fluxo de carga, qual e o objetivo pratico basico de se.",
+      "statement": "Na simulação primordial atrelada à montagem inicial de um estudo computacional de fluxo de carga, qual é o objetivo prático básico de se.",
       "options": [
-        "Representar parametrizando as exatas condicoes de operacao sabidas e conhecidas do sistema operante para validar com exito estatistico o respectivo modelo.",
-        "Calcular instantaneamente e em lote a corrente termica maxima passante para dimensionar o suporte dos barramentos perante arco de falta sustentado longo.",
-        "Injetar matematicamente a maxima corrente distorcida harmonica concebivel visando o projeto superdimensionado preventivo dos filtros passivos da rede subjacente.",
-        "Determinar analiticamente todos os ajustes operacionais limitantes expressos nas curvas bi logaritmicas exclusivas as instalacoes e aos equipamentos tracionadores atrelados fusiveis."
+        "Representar parametrizando as exatas condições de operação sabidas e conhecidas do sistema operante para validar com êxito estatístico o respectivo modelo.",
+        "Calcular instantaneamente e em lote a corrente térmica máxima passante para dimensionar o suporte dos barramentos perante arco de falta sustentado longo.",
+        "Injetar matematicamente a máxima corrente distorcida harmônica concebível visando o projeto superdimensionado preventivo dos filtros passivos da rede subjacente.",
+        "Determinar analiticamente todos os ajustes operacionais limitantes expressos nas curvas bi logarítmicas exclusivas às instalações e aos equipamentos tracionadores atrelados fusíveis."
       ],
       "correctIndex": 0,
-      "explanation": "Criar um cenario ou caso base conhecido que espelha medioes correntes de instrumentacao real serve efetivamente para calibrar as tolerancias e conferir se o comportamento teorico simulado no computador valida a condicao pratica do campo.",
+      "explanation": "Criar um cenário ou caso base conhecido que espelha medições correntes de instrumentação real serve efetivamente para calibrar as tolerâncias e conferir se o comportamento teórico simulado no computador valida a condição prática do campo.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na solucao algebrica matricial dos potentes estudos focados em determinar fluxos de cargas em redes emalhadas com barras controladas, quais sao as.",
+      "statement": "Na solução algébrica matricial dos potentes estudos focados em determinar fluxos de cargas em redes emalhadas com barras controladas, quais são as.",
       "options": [
-        "A estatistica e estocastica amostragem do Metodo de Monte Carlo e a resolucao orientada a regressoes pelo Metodo dos Minimos Quadrados.",
-        "A convergencia simples atribuida a tradicional tecnica de Gauss-Seidel alinhada ao derivativo e rapido procedimento fundamentado na formulacao de Newton-Raphson.",
-        "A translacao de dominios amparada pela Transformada Rapida de Fourier e sua correspondente aplicabilidade na Analise Espectral de ondas estacionarias harmonicas.",
-        "A reducao de lacos vetoriais provida pelo impositivo Metodo de Fortescue interconectado as superposicoes analiticas puras extraidas atreves das formulacoes do Teorema da Superposicao continua."
+        "A estatística e estocástica amostragem do Método de Monte Carlo e a resolução orientada a regressões pelo Método dos Mínimos Quadrados.",
+        "A convergência simples atribuída à tradicional técnica de Gauss-Seidel alinhada ao derivativo e rápido procedimento fundamentado na formulação de Newton-Raphson.",
+        "A translação de domínios amparada pela Transformada Rápida de Fourier e sua correspondente aplicabilidade na Análise Espectral de ondas estacionárias harmônicas.",
+        "A redução de laços vetoriais provida pelo impositivo Método de Fortescue interconectado às superposições analíticas puras extraídas através das formulações do Teorema da Superposição contínua."
       ],
       "correctIndex": 1,
-      "explanation": "O livro cita amplamente as eficientes iteracoes matematicas de Gauss-Seidel bem como as avaliacoes de Newton-Raphson constituindo os pilares primordiais que sustentam e viabilizam as ferramentas modernas no tratamento de matrizes da rede e a apuracao das tensoes angulares.",
+      "explanation": "O livro cita amplamente as eficientes iterações matemáticas de Gauss-Seidel bem como as avaliações de Newton-Raphson constituindo os pilares primordiais que sustentam e viabilizam as ferramentas modernas no tratamento de matrizes da rede e a apuração das tensões angulares.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No que tange as limitantes abordagens de interrupcao de curto-circuito avaliadas historicamente e formatadas perante normas C37 norte americanas.",
+      "statement": "No que tange às limitantes abordagens de interrupção de curto-circuito avaliadas historicamente e formatadas perante normas C37 norte americanas.",
       "options": [
-        "O veloz decaimento exponencial provocado nos terminais primarios na tensao de fonte suprimida operada no laco retentivo devido a presenca do controle de campo magnetico inserido na maquina rotativa geradora central.",
-        "O aceitavel limiar temporal da tensao decrescente limitando os desarmes falsos na situacao subjacente transitoria puramente estipulada nas partidas motrizes estabilizadas unifilares.",
-        "A calibragem asssimetrica precisa que providencia os essenciais fatores matematicos multiplicadores da corrente total em funcao da dependente e real relacao equivalente apurada entre a reatancia e a resistencia.",
-        "O estrito comportamento disperso impulsionador dos decaimentos relativos ao espectro de transientes multiplos confinado as redes ressonantes passivas capacitivas isoladas no cenario de pre manobra conectada estatica."
+        "O veloz decaimento exponencial provocado nos terminais primários na tensão de fonte suprimida operada no laço retentivo devido à presença do controle de campo magnético inserido na máquina rotativa geradora central.",
+        "O aceitável limiar temporal da tensão decrescente limitando os desarmes falsos na situação subjacente transitória puramente estipulada nas partidas motrizes estabilizadas unifilares.",
+        "A calibragem assimétrica precisa que providencia os essenciais fatores matemáticos multiplicadores da corrente total em função da dependente e real relação equivalente apurada entre a reatância e a resistência.",
+        "O estrito comportamento disperso impulsionador dos decaimentos relativos ao espectro de transientes múltiplos confinado às redes ressonantes passivas capacitivas isoladas no cenário de pré manobra conectada estática."
       ],
       "correctIndex": 2,
-      "explanation": "Os cálculos realizados no ciclo exordial conforme padrao C37 balizam e determinam os imperativos índices ou multiplicadores globais assimétricos regidos inequivocamente pela variável X sobre R para se atestar correntes totais disruptivas máximas mecânicas enfrentadas aos equipamentos.",
+      "explanation": "Os cálculos realizados no ciclo exordial conforme padrão C37 balizam e determinam os imperativos índices ou multiplicadores globais assimétricos regidos inequivocamente pela variável X sobre R para se atestar correntes totais disruptivas máximas mecânicas enfrentadas aos equipamentos.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O contorno e escopo tratado no documento balizador IEEE 399 restringe seu raio de acao e orientacoes apenas aos modelos matematicos que tratem.",
+      "statement": "O contorno e escopo tratado no documento balizador IEEE 399 restringe seu raio de ação e orientações apenas aos modelos matemáticos que tratem.",
       "correctAnswer": false,
-      "explanation": "A afirmacao distorce diametralmente a vocacao do Brown Book cujos capitulos amparam amplamente todos os calculos aplicados de modo generalizado nas diversificadas topologias configuracoes operacionais classes isolantes e lacos associativos interligados ao supridor de forca presentes nas medias altas e baixas industriais unificadas instaladas em malhas.",
+      "explanation": "A afirmação distorce diametralmente a vocação do Brown Book cujos capítulos amparam amplamente todos os cálculos aplicados de modo generalizado nas diversificadas topologias configurações operacionais classes isolantes e laços associativos interligados ao supridor de força presentes nas médias altas e baixas industriais unificadas instaladas em malhas.",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Para alimentar com acuracia todos dados cruciais requeridos numa apropriada avaliacao tecnica contida num moderno estudo de protecao associado a.",
+      "statement": "Para alimentar com acurácia todos dados cruciais requeridos numa apropriada avaliação técnica contida num moderno estudo de proteção associado a.",
       "correctAnswer": true,
-      "explanation": "As simulacoes e posicionamentos adotados no tracado em papel logaritmico dos coordenogramas fundamentam suas margens incondicionalmente nos maximos balizadores limites de curtos simetricos trifaicos porem demandando igualmente correntes solidas desequilibradas aterramento balizando as chaves de neutro e assimetricas assinalando esforcos estaticos nos disjuntores envolvidos a jusante e ajustante intercedendo nos barramentos do unifilar.",
+      "explanation": "As simulações e posicionamentos adotados no traçado em papel logarítmico dos coordenogramas fundamentam suas margens incondicionalmente nos máximos balizadores limites de curtos simétricos trifásicos porém demandando igualmente correntes sólidas desequilibradas aterramento balizando as chaves de neutro e assimétricas assinalando esforços estáticos nos disjuntores envolvidos a jusante e a montante intercedendo nos barramentos do unifilar.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Em avaliacoes sofisticadas pertinentes aos dinamicos estudos orientados e dedicados a computar a estabilidade angular frente as instabilidades.",
+      "statement": "Em avaliações sofisticadas pertinentes aos dinâmicos estudos orientados e dedicados a computar a estabilidade angular frente às instabilidades.",
       "correctAnswer": true,
-      "explanation": "As variacoes espaciais angulares das grandezas eletromecânicas que regem os arrastos oscilatorios oscilantes e descompassos apos grandes impactos nos arranjos de geradores exigem fundamentalmente a declaracao acurada do grau da inercia motriz cinetica residente informada como os dados inerciais contidos perfeitamente descritos pelos constantes e equivalentes simbolizados H das unidades nos modelos dos componentes sincronos analisadores de fluxos temporarios.",
+      "explanation": "As variações espaciais angulares das grandezas eletromecânicas que regem os arrastos oscilatórios oscilantes e descompassos após grandes impactos nos arranjos de geradores exigem fundamentalmente a declaração acurada do grau da inércia motriz cinética residente informada como os dados inerciais contidos perfeitamente descritos pelos constantes e equivalentes simbolizados H das unidades nos modelos dos componentes síncronos analisadores de fluxos temporários.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Os pacotes operantes dos modulos voltados a analisar comportamentos provenientes de arranques pesados ou seja os tipicos processamentos.",
+      "statement": "Os pacotes operantes dos módulos voltados a analisar comportamentos provenientes de arranques pesados ou seja os típicos processamentos.",
       "correctAnswer": true,
-      "explanation": "A verificacao imposta ao impacto impulsionador avalia como a malha e outras maquinas instaladas vizinhas suportarao o severo mergulho ou reducao tensional resultante e imposto sobre todo o complexo distribuidor causado no exato transcorrer duradouro atrelado aos espacamentos do lapso acelerativo da referida maquina que suga energia transiente imensa da fonte conectada ate galgar a operacao linear sem resvalos rotineira termicamente tolerada final da maquina interligada reativa indutiva pesada operante.",
+      "explanation": "A verificação imposta ao impacto impulsionador avalia como a malha e outras máquinas instaladas vizinhas suportarão o severo mergulho ou redução tensional resultante e imposto sobre todo o complexo distribuidor causado no exato transcorrer duradouro atrelado aos espaçamentos do lapso acelerativo da referida máquina que suga energia transiente imensa da fonte conectada até galgar a operação linear sem resvalos rotineira termicamente tolerada final da máquina interligada reativa indutiva pesada operante.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Ao tratar da minuciosa e dedicada abordagem fidedigna que baliza com precisao computacional a analise especializada avancada no computo termico das.",
+      "statement": "Ao tratar da minuciosa e dedicada abordagem fidedigna que baliza com precisão computacional a análise especializada avançada no cômputo térmico das.",
       "correctAnswer": true,
-      "explanation": "A disciplina tecnica e especifica direcionada exclusivamente ao rigor no adequado assentamento protetivo termico abordada rege sua essencia balizada indubitavelmente nas formulacoes dissipativas que descrevem quantificam e preveem a dinâmica do fluxo do escape calorico associada sempre ao premente uso da depreciacao calculada normativa representada pelas tolerancias estipuladas fixadas matematicamente referenciadas nos inibidores coeficientes restritores obrigatorios originados decorrentes resultantes das agrupadas formacoes super aquecidas dos cabos multiplos blindados vizinhos submersos confinados em calhas leitos dutos valas espacosos em montagens conjuntas primarias pesadas de transmissao fechadas cimentadas blindadas enterradas industriais conjuntas.",
+      "explanation": "A disciplina técnica e específica direcionada exclusivamente ao rigor no adequado assentamento protetivo térmico abordada rege sua essência balizada indubitavelmente nas formulações dissipativas que descrevem quantificam e preveem a dinâmica do fluxo do escape calórico associada sempre ao premente uso da depreciação calculada normativa representada pelas tolerâncias estipuladas fixadas matematicamente referenciadas nos inibidores coeficientes restritores obrigatórios originados decorrentes resultantes das agrupadas formações super aquecidas dos cabos múltiplos blindados vizinhos submersos confinados em calhas leitos dutos valas espaçosos em montagens conjuntas primárias pesadas de transmissão fechadas cimentadas blindadas enterradas industriais conjuntas.",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O refinado e avancado arranjo matematico procedimental que lida iterativamente construindo de forma robusta e aproximada as funcoes continuas ____.",
+      "statement": "O refinado e avançado arranjo matemático procedimental que lida iterativamente construindo de forma robusta e aproximada as funções contínuas ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Raphson"
         }
       ],
-      "explanation": "O livro 399 enaltece que em sistemas muito conectados onde as variaveis flutuam interagindo em reatancias emalhadas a aplicacao iterativa da tradicional modelagem do metodo e solucao estendida pelo principio analitico formatado conjuntamente pelos criadores Newton Raphson apresenta estabilidade superior contornando com destreza razoavel desvios frente as tecnicas primitivas de reducao passo a passo escalonada basica de matrizes em redes lineares.",
+      "explanation": "O livro 399 enaltece que em sistemas muito conectados onde as variáveis flutuam interagindo em reatâncias emalhadas a aplicação iterativa da tradicional modelagem do método e solução estendida pelo princípio analítico formatado conjuntamente pelos criadores Newton Raphson apresenta estabilidade superior contornando com destreza razoável desvios frente às técnicas primitivas de redução passo a passo escalonada básica de matrizes em redes lineares.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "No trato minucioso das modelagens sistemicas computacionais onde figuram fenomenos caracterizados marcadamente por desvios parciais contendo curtos ____.",
+      "statement": "No trato minucioso das modelagens sistêmicas computacionais onde figuram fenômenos caracterizados marcadamente por desvios parciais contendo curtos ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "sequencias"
         }
       ],
-      "explanation": "O processamento fidedigno e apurado das correntes faltosas imperfeitas na fase isolada se realiza decompondo e depois interligando nas avaliacoes computadas as distintas topologias sintetizadas virtuais oriundas do teorema basico denominadas e tratadas perfeitamente e modeladas na doutrina protetiva americana internacional como as matrizes constituidoras base atinentes as respectivas consagradas modelagens da teoria de redes de sequencia positiva alavancadas as redes de sequencia negativa amarradas nas redes ativas das correntes puras unidirecionais das redes operacionais de base e sequencia zero integradas no espelho do sistema defasador unifilar do curtocircuito de fase avaliada defeituosa desequilibrada avaliada pontual terminal aterramento assimetrica computada na fabrica virtual simulada estatica terminal na extremidade nobel.",
+      "explanation": "O processamento fidedigno e apurado das correntes faltosas imperfeitas na fase isolada se realiza decompondo e depois interligando nas avaliações computadas as distintas topologias sintetizadas virtuais oriundas do teorema básico denominadas e tratadas perfeitamente e modeladas na doutrina protetiva americana internacional como as matrizes constituidoras base atinentes às respectivas consagradas modelagens da teoria de redes de sequência positiva alavancadas as redes de sequência negativa amarradas nas redes ativas das correntes puras unidirecionais das redes operacionais de base e sequência zero integradas no espelho do sistema defasador unifilar do curto-circuito de fase avaliada defeituosa desequilibrada avaliada pontual terminal aterramento assimétrica computada na fábrica virtual simulada estática terminal na extremidade nobel.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Nas interacoes de telas fornecidas nos variados e imponentes pacotes logicos dos softwares mundiais encarregados em balizar as segurancas ____.",
+      "statement": "Nas interações de telas fornecidas nos variados e imponentes pacotes lógicos dos softwares mundiais encarregados em balizar as seguranças ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "TCC"
         }
       ],
-      "explanation": "Os estudos visuais sao formatados sobre a exibicao padrao das limitacoes e tolerancias atuantes registradas em planos comparativos graficos denominados nas interfaces base referenciadas normativas de programas e literaturas mundiais americanas pela reconhecida notoria abreviatura ou sigla inglesa internacional indicativa consolidada nas bibliografias do Brown Book traduzida do original para formacao Time Current Characteristic Curve que se reduziu simplificadamente para apenas o termo universal usual corriqueiro padronizado entre engenheiros correspondendo as expressoes puras logaritmicas plotadas nos tracados gerados impressos formados chamados apenas perante relatorios de analise como a celebre sigla basica consolidada contida na definicao fundamental TCC exibida nos blocos operacionais modulos e planilhas associadas restritivas das janelas de software e nos indices padroes de submodulos analiticos comparativos seletivos atuantes dos sistemas industriais analisados simulados no computo base protetor.",
+      "explanation": "Os estudos visuais são formatados sobre a exibição padrão das limitações e tolerâncias atuantes registradas em planos comparativos gráficos denominados nas interfaces base referenciadas normativas de programas e literaturas mundiais americanas pela reconhecida notória abreviatura ou sigla inglesa internacional indicativa consolidada nas bibliografias do Brown Book traduzida do original para formação Time Current Characteristic Curve que se reduziu simplificadamente para apenas o termo universal usual corriqueiro padronizado entre engenheiros correspondendo às expressões puras logarítmicas plotadas nos traçados gerados impressos formados chamados apenas perante relatórios de análise como a célebre sigla básica consolidada contida na definição fundamental TCC exibida nos blocos operacionais módulos e planilhas associadas restritivas das janelas de software e nos índices padrões de submódulos analíticos comparativos seletivos atuantes dos sistemas industriais analisados simulados no cômputo base protetor.",
       "difficulty": "hard"
     }
   ]

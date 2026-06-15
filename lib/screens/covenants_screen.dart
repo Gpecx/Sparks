@@ -220,6 +220,8 @@ class _CovenantCard extends StatelessWidget {
                   children: [
                     Text(
                       cov.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: isCompleted ? AppColors.gold : Colors.white,
                         fontSize: 15,
@@ -231,6 +233,7 @@ class _CovenantCard extends StatelessWidget {
                       cov.objective,
                       style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
                       maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -275,12 +278,16 @@ class _CovenantCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                Text(
-                  '${cov.currentProgress}/${cov.maxProgress} ${cov.trackingType}',
-                  style: TextStyle(
-                    color: isCompleted ? AppColors.gold : AppColors.textMuted,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
+                Flexible(
+                  child: Text(
+                    '${cov.currentProgress}/${cov.maxProgress} ${cov.trackingType}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: isCompleted ? AppColors.gold : AppColors.textMuted,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ],

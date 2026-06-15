@@ -292,12 +292,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           size: 16,
                         ),
                         const SizedBox(width: 6),
-                        Text(
-                          _passwordsMatch ? 'As senhas coincidem' : 'As senhas não coincidem',
-                          style: TextStyle(
-                            color: _passwordsMatch ? AppColors.primaryLight : AppColors.error,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
+                        Flexible(
+                          child: Text(
+                            _passwordsMatch ? 'As senhas coincidem' : 'As senhas não coincidem',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: _passwordsMatch ? AppColors.primaryLight : AppColors.error,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ],
@@ -420,12 +423,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               ),
             ),
             const SizedBox(width: 12),
-            Text(
-              _strengthLabel,
-              style: TextStyle(
-                color: _strengthColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
+            Flexible(
+              child: Text(
+                _strengthLabel,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: _strengthColor,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ],
@@ -465,12 +471,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             size: 16,
           ),
           const SizedBox(width: 8),
-          Text(
-            text,
-            style: TextStyle(
-              color: met ? Colors.white : AppColors.textMuted,
-              fontSize: 12,
-              fontWeight: met ? FontWeight.w600 : FontWeight.w400,
+          Flexible(
+            child: Text(
+              text,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: met ? Colors.white : AppColors.textMuted,
+                fontSize: 12,
+                fontWeight: met ? FontWeight.w600 : FontWeight.w400,
+              ),
             ),
           ),
         ],

@@ -166,13 +166,20 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Estimativa mensal',
-                          style: TextStyle(color: AppColors.textSecondary)),
-                      Text('R\$ $_monthlyTotal',
-                          style: const TextStyle(
-                              color: AppColors.primary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800)),
+                      const Expanded(
+                        child: Text('Estimativa mensal',
+                            style: TextStyle(color: AppColors.textSecondary)),
+                      ),
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Text('R\$ $_monthlyTotal',
+                            textAlign: TextAlign.right,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                color: AppColors.primary,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800)),
+                      ),
                     ],
                   ),
                 ),

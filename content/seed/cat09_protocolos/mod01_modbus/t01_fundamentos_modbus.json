@@ -10,33 +10,33 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O MODBUS foi originalmente desenvolvido na decada de 1970 para qual finalidade principal?",
+      "statement": "O MODBUS foi originalmente desenvolvido na década de 1970 para qual finalidade principal?",
       "options": [
-        "Comunicacao mestre-escravo para Controladores Logicos Programaveis (CLPs).",
+        "Comunicação mestre-escravo para Controladores Lógicos Programáveis (CLPs).",
         "Redes de computadores corporativos de alta velocidade.",
-        "Automacao de subestacoes elétricas focada em comunicacao peer-to-peer.",
-        "Sincronizacao de tempo em redes de protecao de reles de arco."
+        "Automação de subestações elétricas focada em comunicação peer-to-peer.",
+        "Sincronização de tempo em redes de proteção de relés de arco."
       ],
       "correctIndex": 0,
-      "explanation": "O protocolo MODBUS foi criado pela Modicon para a comunicacao entre CLPs industriais (Informacao externa, adicionada para cobrir os fundamentos solicitados).",
+      "explanation": "O protocolo MODBUS foi criado pela Modicon para a comunicação entre CLPs industriais (Informação externa, adicionada para cobrir os fundamentos solicitados).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No contexto da evolucao da automacao de subestacoes descrita nas fontes, como o MODBUS e classificado em relacao ao IEC 61850?",
+      "statement": "No contexto da evolução da automação de subestações descrita nas fontes, como o MODBUS é classificado em relação ao IEC 61850?",
       "options": [
-        "Como o protocolo padrao global atual e a prova de futuro.",
-        "Como uma das padronizacoes proprietarias do passado substituidas pelo padrao global IEC 61850.",
+        "Como o protocolo padrão global atual e à prova de futuro.",
+        "Como uma das padronizações proprietárias do passado substituídas pelo padrão global IEC 61850.",
         "Como um protocolo exclusivo para o barramento de processo (process bus).",
-        "Como a unica arquitetura que suporta mensagens multicast de alta velocidade."
+        "Como a única arquitetura que suporta mensagens multicast de alta velocidade."
       ],
       "correctIndex": 1,
-      "explanation": "O MODBUS, junto com outros protocolos legados, e listado como uma padronizacao proprietaria superada pela padronizacao global do IEC 61850\n1\n2\n.",
+      "explanation": "O MODBUS, junto com outros protocolos legados, é listado como uma padronização proprietária superada pela padronização global do IEC 61850\n1\n2\n.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual arquitetura de comunicacao define o comportamento padrao do protocolo MODBUS tradicional?",
+      "statement": "Qual arquitetura de comunicação define o comportamento padrão do protocolo MODBUS tradicional?",
       "options": [
         "Produtor-Consumidor orientada a eventos.",
         "Peer-to-Peer sem controle central.",
@@ -44,51 +44,51 @@
         "Publish-Subscribe para dados multicast."
       ],
       "correctIndex": 2,
-      "explanation": "O MODBUS opera tradicionalmente no modelo Mestre-Escravo (Cliente-Servidor), onde apenas o mestre inicia a comunicacao (Informacao externa complementar).",
+      "explanation": "O MODBUS opera tradicionalmente no modelo Mestre-Escravo (Cliente-Servidor), onde apenas o mestre inicia a comunicação (Informação externa complementar).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com as fontes, qual estrategia foi utilizada com sucesso para integrar equipamentos de processo operando em MODBUS em um SAS baseado em.",
+      "statement": "De acordo com as fontes, qual estratégia foi utilizada com sucesso para integrar equipamentos de processo operando em MODBUS em um SAS baseado em.",
       "options": [
-        "Substituicao completa dos reles de protecao legados.",
-        "Mudanca do protocolo dos IEDs para MODBUS TCP de forma nativa.",
-        "Descarte da rede ethernet em favor de ligacoes seriais ponto a ponto.",
-        "Uso de uma gateway responsavel pela conversao do protocolo MODBUS em IEC 61850."
+        "Substituição completa dos relés de proteção legados.",
+        "Mudança do protocolo dos IEDs para MODBUS TCP de forma nativa.",
+        "Descarte da rede ethernet em favor de ligações seriais ponto a ponto.",
+        "Uso de uma gateway responsável pela conversão do protocolo MODBUS em IEC 61850."
       ],
       "correctIndex": 3,
-      "explanation": "Na usina Caue, foi utilizada com sucesso uma gateway de conversao do protocolo modbus em IEC 61850 aplicada no acionamento de motores de media tensao\n3\n.",
+      "explanation": "Na usina Cauê, foi utilizada com sucesso uma gateway de conversão do protocolo modbus em IEC 61850 aplicada no acionamento de motores de média tensão\n3\n.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual o meio de transmissao fisico mais comum e historico associado a implementacao do protocolo MODBUS RTU?",
+      "statement": "Qual o meio de transmissão físico mais comum e histórico associado à implementação do protocolo MODBUS RTU?",
       "options": [
-        "Linhas seriais assincronas como RS-485 ou RS-232.",
+        "Linhas seriais assíncronas como RS-485 ou RS-232.",
         "Redes Ethernet 100Base-FX.",
-        "Fibra optica monomodo.",
-        "Conexoes sem fio Wi-Fi ou Bluetooth."
+        "Fibra óptica monomodo.",
+        "Conexões sem fio Wi-Fi ou Bluetooth."
       ],
       "correctIndex": 0,
-      "explanation": "O MODBUS RTU tipicamente opera sobre interfaces fisicas seriais industriais, predominando o padrao RS-485 (Informacao externa aos documentos).",
+      "explanation": "O MODBUS RTU tipicamente opera sobre interfaces físicas seriais industriais, predominando o padrão RS-485 (Informação externa aos documentos).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No mapa de registros do protocolo MODBUS, qual a principal diferenca entre os tipos de dados Coils e Discrete Inputs?",
+      "statement": "No mapa de registros do protocolo MODBUS, qual a principal diferença entre os tipos de dados Coils e Discrete Inputs?",
       "options": [
-        "Coils armazenam palavras de 16 bits; Discrete Inputs armazenam bits unicos.",
-        "Coils suportam operacoes de leitura e escrita; Discrete Inputs suportam apenas leitura.",
-        "Coils sao usados exclusivamente para entradas analogicas; Discrete Inputs para alarmes.",
-        "Nao existe diferenca pratica, ambos representam registradores holding."
+        "Coils armazenam palavras de 16 bits; Discrete Inputs armazenam bits únicos.",
+        "Coils suportam operações de leitura e escrita; Discrete Inputs suportam apenas leitura.",
+        "Coils são usados exclusivamente para entradas analógicas; Discrete Inputs para alarmes.",
+        "Não existe diferença prática, ambos representam registradores holding."
       ],
       "correctIndex": 1,
-      "explanation": "Coils representam dados booleanos que o mestre pode ler e modificar, enquanto Discrete Inputs representam estados fisicos somente de leitura (Informacao externa).",
+      "explanation": "Coils representam dados booleanos que o mestre pode ler e modificar, enquanto Discrete Inputs representam estados físicos somente de leitura (Informação externa).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual Function Code (FC) do MODBUS e utilizado especificamente para a leitura de multiplos Holding Registers?",
+      "statement": "Qual Function Code (FC) do MODBUS é utilizado especificamente para a leitura de múltiplos Holding Registers?",
       "options": [
         "FC 01",
         "FC 02",
@@ -96,122 +96,122 @@
         "FC 15"
       ],
       "correctIndex": 2,
-      "explanation": "O FC 03 (Read Holding Registers) e o comando padrao usado pelo mestre para ler dados analogicos ou parametros armazenados nos holding registers (Informacao externa).",
+      "explanation": "O FC 03 (Read Holding Registers) é o comando padrão usado pelo mestre para ler dados analógicos ou parâmetros armazenados nos holding registers (Informação externa).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a deteccao de erros e garantida em um quadro (frame) transmitido nativamente em MODBUS RTU?",
+      "statement": "Como a detecção de erros é garantida em um quadro (frame) transmitido nativamente em MODBUS RTU?",
       "options": [
-        "Atraves de pacotes multicast nao confirmados semelhantes ao GOOSE.",
-        "Utilizando checagem de redundancia longitudinal (LRC) em cada byte.",
-        "Apenas atraves de um bit de paridade no cabecalho MBAP.",
-        "Por meio da aplicacao de um Codigo de Redundancia Ciclica (CRC) anexado ao final do quadro."
+        "Através de pacotes multicast não confirmados semelhantes ao GOOSE.",
+        "Utilizando checagem de redundância longitudinal (LRC) em cada byte.",
+        "Apenas através de um bit de paridade no cabeçalho MBAP.",
+        "Por meio da aplicação de um Código de Redundância Cíclica (CRC) anexado ao final do quadro."
       ],
       "correctIndex": 3,
-      "explanation": "O quadro MODBUS RTU inclui um campo de checksum CRC de 16 bits no final para verificar a integridade da transmissao (Informacao externa).",
+      "explanation": "O quadro MODBUS RTU inclui um campo de checksum CRC de 16 bits no final para verificar a integridade da transmissão (Informação externa).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que diferencia a codificacao do quadro no MODBUS RTU em relacao ao MODBUS ASCII?",
+      "statement": "O que diferencia a codificação do quadro no MODBUS RTU em relação ao MODBUS ASCII?",
       "options": [
-        "O RTU transmite dados em formato binario compacto, enquanto o ASCII utiliza caracteres codificados em hexadecimal legivel.",
-        "O RTU usa caracteres imprimiveis e o ASCII usa compressao zip.",
-        "O RTU suporta apenas enderecamento IP, e o ASCII suporta conexoes seriais.",
-        "Nao ha diferencas de codificacao, mudando apenas a velocidade do baud rate."
+        "O RTU transmite dados em formato binário compacto, enquanto o ASCII utiliza caracteres codificados em hexadecimal legível.",
+        "O RTU usa caracteres imprimíveis e o ASCII usa compressão zip.",
+        "O RTU suporta apenas endereçamento IP, e o ASCII suporta conexões seriais.",
+        "Não há diferenças de codificação, mudando apenas a velocidade do baud rate."
       ],
       "correctIndex": 0,
-      "explanation": "No MODBUS RTU cada byte transmite dois caracteres hexadecimais em formato binario puro, otimizando o tamanho do quadro frente ao modo ASCII (Informacao externa).",
+      "explanation": "No MODBUS RTU cada byte transmite dois caracteres hexadecimais em formato binário puro, otimizando o tamanho do quadro frente ao modo ASCII (Informação externa).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a alteracao estrutural basica no quadro (frame) ao se migrar de MODBUS RTU para MODBUS TCP/IP?",
+      "statement": "Qual é a alteração estrutural básica no quadro (frame) ao se migrar de MODBUS RTU para MODBUS TCP/IP?",
       "options": [
-        "O MODBUS TCP mantem o checksum CRC do RTU mas o encapsula diretamente em pacotes UDP.",
-        "O MODBUS TCP adiciona um cabecalho especifico MBAP e remove o campo de checksum CRC.",
-        "O MODBUS TCP altera todos os Function Codes para adequar-se as 7 camadas OSI.",
-        "O MODBUS TCP reduz o tamanho do campo de dados para permitir VLAN tagging prioritario."
+        "O MODBUS TCP mantém o checksum CRC do RTU mas o encapsula diretamente em pacotes UDP.",
+        "O MODBUS TCP adiciona um cabeçalho específico MBAP e remove o campo de checksum CRC.",
+        "O MODBUS TCP altera todos os Function Codes para adequar-se às 7 camadas OSI.",
+        "O MODBUS TCP reduz o tamanho do campo de dados para permitir VLAN tagging prioritário."
       ],
       "correctIndex": 1,
-      "explanation": "No MODBUS TCP, o endereco do escravo e o checksum CRC sao removidos e substituidos por um cabecalho MBAP de 7 bytes; a integridade e garantida pelo TCP (Informacao externa).",
+      "explanation": "No MODBUS TCP, o endereço do escravo e o checksum CRC são removidos e substituídos por um cabeçalho MBAP de 7 bytes; a integridade é garantida pelo TCP (Informação externa).",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Segundo o historico dos protocolos industriais mencionado nas fontes, o MODBUS era utilizado como uma solucao proprietaria e centralizada de.",
+      "statement": "Segundo o histórico dos protocolos industriais mencionado nas fontes, o MODBUS era utilizado como uma solução proprietária e centralizada de.",
       "correctAnswer": true,
-      "explanation": "O MODBUS, assim como DNP e PROFIBUS, sao listados nas fontes como padronizacoes antigas (proprietarias/especificas) contrapostas a padronizacao global aberta do IEC 61850\n1\n2\n.",
+      "explanation": "O MODBUS, assim como DNP e PROFIBUS, são listados nas fontes como padronizações antigas (proprietárias/específicas) contrapostas à padronização global aberta do IEC 61850\n1\n2\n.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "No mapa de memoria do protocolo MODBUS, os Input Registers possuem permissao tanto de leitura quanto de escrita pelo equipamento mestre da rede.",
+      "statement": "No mapa de memória do protocolo MODBUS, os Input Registers possuem permissão tanto de leitura quanto de escrita pelo equipamento mestre da rede.",
       "correctAnswer": false,
-      "explanation": "No modelo de dados do MODBUS, os Input Registers suportam apenas operacoes de leitura (read-only), diferentemente dos Holding Registers que permitem leitura e escrita (Informacao externa).",
+      "explanation": "No modelo de dados do MODBUS, os Input Registers suportam apenas operações de leitura (read-only), diferentemente dos Holding Registers que permitem leitura e escrita (Informação externa).",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "O enderecamento logico padrao para escravos em um link fisico serial operando com o protocolo MODBUS RTU possui limite pratico de 247 enderecos.",
+      "statement": "O endereçamento lógico padrão para escravos em um link físico serial operando com o protocolo MODBUS RTU possui limite prático de 247 endereços.",
       "correctAnswer": true,
-      "explanation": "A especificacao original do protocolo MODBUS estabelece enderecos de 1 a 247 para os escravos (Informacao externa aos documentos).",
+      "explanation": "A especificação original do protocolo MODBUS estabelece endereços de 1 a 247 para os escravos (Informação externa aos documentos).",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "As fontes citam que, devido a incompatibilidade do modelo cliente-servidor do MODBUS, foi inviavel utilizar conversores (gateways) para sua.",
+      "statement": "As fontes citam que, devido à incompatibilidade do modelo cliente-servidor do MODBUS, foi inviável utilizar conversores (gateways) para sua.",
       "correctAnswer": false,
-      "explanation": "Ao contrario, as fontes relatam explicitamente um teste e aplicacao bem sucedida de uma gateway para converter o protocolo modbus em IEC 61850 para motores de media tensao\n3\n.",
+      "explanation": "Ao contrário, as fontes relatam explicitamente um teste e aplicação bem sucedida de uma gateway para converter o protocolo modbus em IEC 61850 para motores de média tensão\n3\n.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Em contraste com as mensagens GOOSE do padrao IEC 61850, o protocolo MODBUS baseia-se num modelo de polling, nao possuindo um mecanismo nativo e.",
+      "statement": "Em contraste com as mensagens GOOSE do padrão IEC 61850, o protocolo MODBUS baseia-se num modelo de polling, não possuindo um mecanismo nativo e.",
       "correctAnswer": true,
-      "explanation": "As mensagens GOOSE permitem envio multicast veloz e nao confirmado entre equipamentos (horizontal)\n4\n5\n, o que nao e suportado nativamente pelo modelo de pooling mestre-escravo do MODBUS (Informacao hibrida).",
+      "explanation": "As mensagens GOOSE permitem envio multicast veloz e não confirmado entre equipamentos (horizontal)\n4\n5\n, o que não é suportado nativamente pelo modelo de pooling mestre-escravo do MODBUS (Informação híbrida).",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O tipo de dado discreto de leitura e escrita do protocolo MODBUS, capaz de controlar fisicamente uma saida digital, recebe a denominacao tecnica de ____.",
+      "statement": "O tipo de dado discreto de leitura e escrita do protocolo MODBUS, capaz de controlar fisicamente uma saída digital, recebe a denominação técnica de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "coil"
         }
       ],
-      "explanation": "No modelo de dados MODBUS, saidas digitais sao mapeadas como Coils, operadas pelos Function Codes 01, 05 ou 15 (Informacao externa).",
+      "explanation": "No modelo de dados MODBUS, saídas digitais são mapeadas como Coils, operadas pelos Function Codes 01, 05 ou 15 (Informação externa).",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "O Function Code responsavel por instruir o escravo MODBUS a escrever dados em multiplos Holding Registers contiguos e o FC numero ____ (valor.",
+      "statement": "O Function Code responsável por instruir o escravo MODBUS a escrever dados em múltiplos Holding Registers contíguos é o FC número ____ (valor.",
       "blanks": [
         {
           "index": 0,
           "answer": "16"
         }
       ],
-      "explanation": "O Function Code 16 (0x10) e utilizado para o comando de Preset/Write Multiple Registers no protocolo (Informacao externa).",
+      "explanation": "O Function Code 16 (0x10) é utilizado para o comando de Preset/Write Multiple Registers no protocolo (Informação externa).",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Para permitir a comunicacao sobre o modelo de camadas do TCP/IP, o quadro MODBUS recebe um cabecalho especial de 7 bytes conhecido pela sigla ____.",
+      "statement": "Para permitir a comunicação sobre o modelo de camadas do TCP/IP, o quadro MODBUS recebe um cabeçalho especial de 7 bytes conhecido pela sigla ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "MBAP"
         }
       ],
-      "explanation": "O cabecalho MBAP (Modbus Application Protocol) atua substituindo o antigo campo de checksum e endereco do RTU, guiando o roteamento TCP/IP (Informacao externa).",
+      "explanation": "O cabeçalho MBAP (Modbus Application Protocol) atua substituindo o antigo campo de checksum e endereço do RTU, guiando o roteamento TCP/IP (Informação externa).",
       "difficulty": "hard"
     }
   ]

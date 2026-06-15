@@ -1,29 +1,29 @@
 {
   "category": "Qualidade da Energia",
-  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categorySubtitle": "Fundamentos, Harmônicas, Transitórios, Medição e Normas",
   "categoryOrder": 2,
   "module": "Instrumentação e Medição de QE",
-  "moduleSubtitle": "Equipamentos, campanhas, analise e laudos",
+  "moduleSubtitle": "Equipamentos, campanhas, análise e laudos",
   "moduleOrder": 3,
   "trail": "Equipamentos de Medição de QE",
   "trailOrder": 0,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual a principal funcao de um analisador de qualidade de energia de acordo com o guia especializado em instrumentacao?",
+      "statement": "Qual a principal função de um analisador de qualidade de energia de acordo com o guia especializado em instrumentação?",
       "options": [
-        "Controlar diretamente o fluxo de potencia ativa nos geradores da subestacao.",
+        "Controlar diretamente o fluxo de potência ativa nos geradores da subestação.",
         "Capturar dados em tempo real sobre formas de onda para detectar anomalias e prevenir paradas.",
-        "Aumentar estaticamente a tensao em barramentos de distribuicao para compensar quedas longas.",
-        "Substituir os disjuntores de alta tensao nas operacoes de interrupcao de curto-circuito."
+        "Aumentar estaticamente a tensão em barramentos de distribuição para compensar quedas longas.",
+        "Substituir os disjuntores de alta tensão nas operações de interrupção de curto-circuito."
       ],
       "correctIndex": 1,
-      "explanation": "O artigo sobre Analisadores da Wrindu afirma que eles capturam dados em tempo real sobre formas de onda, sendo essenciais para detectar anomalias que podem danificar maquinas sensiveis ou causar paralisacoes.",
+      "explanation": "O artigo sobre Analisadores da Wrindu afirma que eles capturam dados em tempo real sobre formas de onda, sendo essenciais para detectar anomalias que podem danificar máquinas sensíveis ou causar paralisações.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na medicao com instrumentos convencionais, qual e o valor padronizado comum para a corrente no secundario de um Transformador de Corrente (TC) em sistemas de protecao?",
+      "statement": "Na medição com instrumentos convencionais, qual é o valor padronizado comum para a corrente no secundário de um Transformador de Corrente (TC) em sistemas de proteção?",
       "options": [
         "5 A ou 1 A",
         "115 V ou 67 V",
@@ -31,187 +31,187 @@
         "10 V ou 24 V"
       ],
       "correctIndex": 0,
-      "explanation": "Conforme a Apostila de Protecao (Pio Decimo), os TCs reduzem a corrente a niveis padronizados no secundario, sendo o padrao de 5 A ou 1 A.",
+      "explanation": "Conforme a Apostila de Proteção (Pio Décimo), os TCs reduzem a corrente a níveis padronizados no secundário, sendo o padrão de 5 A ou 1 A.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo o informativo KRA2 Energia sobre o PRODIST Modulo 8, em qual situacao a utilizacao de medidores Classe A se torna estritamente obrigatoria?",
+      "statement": "Segundo o informativo KRA2 Energia sobre o PRODIST Módulo 8, em qual situação a utilização de medidores Classe A se torna estritamente obrigatória?",
       "options": [
-        "No monitoramento exclusivo de fator de potencia de instalacoes puramente residenciais.",
-        "Nas medicoes voltadas unicamente para propositos estatisticos da concessionaria.",
-        "Nas aplicacoes envolvendo disputas judiciais entre as partes.",
-        "Na inspecao de rotina efetuada nos medidores eletromecanicos antigos de disco."
+        "No monitoramento exclusivo de fator de potência de instalações puramente residenciais.",
+        "Nas medições voltadas unicamente para propósitos estatísticos da concessionária.",
+        "Nas aplicações envolvendo disputas judiciais entre as partes.",
+        "Na inspeção de rotina efetuada nos medidores eletromecânicos antigos de disco."
       ],
       "correctIndex": 2,
-      "explanation": "O documento da KRA2 Energia estabelece diretamente que o Medidor Classe A e obrigatorio em aplicacoes envolvendo disputas judiciais.",
+      "explanation": "O documento da KRA2 Energia estabelece diretamente que o Medidor Classe A é obrigatório em aplicações envolvendo disputas judiciais.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como os analisadores de qualidade modernos garantem a representacao precisa dos sinais na realizacao de calculos harmonicos?",
+      "statement": "Como os analisadores de qualidade modernos garantem a representação precisa dos sinais na realização de cálculos harmônicos?",
       "options": [
-        "Por meio de amostragem de alta velocidade e condicionamento de sinal que filtra o ruido para calculos FFT.",
-        "Por medicao exclusiva do valor RMS a cada ciclo sem a aplicacao de filtros limitadores de ruido.",
-        "Pela utilizacao de reles eletromecanicos de inducao pura para leitura visual de fasores.",
-        "Mediante a separacao fisica das fases na entrada do equipamento utilizando resistores passivos de aquecimento."
+        "Por meio de amostragem de alta velocidade e condicionamento de sinal que filtra o ruído para cálculos FFT.",
+        "Por medição exclusiva do valor RMS a cada ciclo sem a aplicação de filtros limitadores de ruído.",
+        "Pela utilização de relés eletromecânicos de indução pura para leitura visual de fasores.",
+        "Mediante a separação física das fases na entrada do equipamento utilizando resistores passivos de aquecimento."
       ],
       "correctIndex": 0,
-      "explanation": "O guia de analisadores da Wrindu explica que os analisadores operam por amostragem de alta velocidade e condicionamento de sinal, o qual filtra o ruido garantindo representacao precisa para calculos baseados em FFT.",
+      "explanation": "O guia de analisadores da Wrindu explica que os analisadores operam por amostragem de alta velocidade e condicionamento de sinal, o qual filtra o ruído garantindo representação precisa para cálculos baseados em FFT.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que difere a finalidade dos medidores Classe S em relacao aos medidores Classe A no contexto da analise da qualidade da energia?",
+      "statement": "O que difere a finalidade dos medidores Classe S em relação aos medidores Classe A no contexto da análise da qualidade da energia?",
       "options": [
-        "Os da Classe S sao usados prioritariamente para propositos estatisticos, como campanhas de medicao amostrais.",
-        "Os da Classe S sao obrigatorios para atestar e legalizar quaisquer faturas com disputas judiciais abertas.",
-        "Os da Classe S possuem uma exigencia de incerteza obrigatoria inferior a 1 por cento para harmonicas.",
-        "Os da Classe S sao restritos exclusivamente a medicao de flutuacao de tensao por cintilacao."
+        "Os da Classe S são usados prioritariamente para propósitos estatísticos, como campanhas de medição amostrais.",
+        "Os da Classe S são obrigatórios para atestar e legalizar quaisquer faturas com disputas judiciais abertas.",
+        "Os da Classe S possuem uma exigência de incerteza obrigatória inferior a 1 por cento para harmônicas.",
+        "Os da Classe S são restritos exclusivamente à medição de flutuação de tensão por cintilação."
       ],
       "correctIndex": 0,
-      "explanation": "Segundo o material KRA2 Energia, o Medidor Classe S e utilizado principalmente para propositos estatisticos, como campanhas de medicao.",
+      "explanation": "Segundo o material KRA2 Energia, o Medidor Classe S é utilizado principalmente para propósitos estatísticos, como campanhas de medição.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para equipamentos certificados como Classe A, qual e a incerteza maxima tolerada na medicao dos indicadores associados a distorcoes harmonicas?",
+      "statement": "Para equipamentos certificados como Classe A, qual é a incerteza máxima tolerada na medição dos indicadores associados a distorções harmônicas?",
       "options": [
-        "Inferior ou igual a 10,0 por cento da tensao medida.",
-        "Inferior ou igual a 5,0 por cento da tensao medida.",
-        "Inferior ou igual a 0,15 por cento da tensao de referencia.",
+        "Inferior ou igual a 10,0 por cento da tensão medida.",
+        "Inferior ou igual a 5,0 por cento da tensão medida.",
+        "Inferior ou igual a 0,15 por cento da tensão de referência.",
         "Inferior ou igual a 1,0 por cento do valor nominal eficaz."
       ],
       "correctIndex": 1,
-      "explanation": "O documento informativo da KRA2 Energia sobre o PRODIST especifica que na Classe A a incerteza para indicadores de distorcoes harmonicas deve ser inferior ou igual a 5,0 por cento da tensao medida.",
+      "explanation": "O documento informativo da KRA2 Energia sobre o PRODIST especifica que na Classe A a incerteza para indicadores de distorções harmônicas deve ser inferior ou igual a 5,0 por cento da tensão medida.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na captura de disturbios extremamente rapidos por analisadores de energia, qual especificacao do hardware permite a identificacao de transientes que seriam invisiveis para dispositivos mais lentos?",
+      "statement": "Na captura de distúrbios extremamente rápidos por analisadores de energia, qual especificação do hardware permite a identificação de transientes que seriam invisíveis para dispositivos mais lentos?",
       "options": [
-        "A operacao de transformadores de potencial capacitivos operando unicamente em baixa frequencia.",
-        "A utilizacao de reles termicos bimetalicos superdimensionados de acao altamente retardada.",
-        "A presenca de conversores analogico-digitais de alta resolucao com taxa de amostragem de 1 MS/s.",
-        "A montagem de filtros ativos integrados configurados rigidamente para a supressao da 3a harmonica."
+        "A operação de transformadores de potencial capacitivos operando unicamente em baixa frequência.",
+        "A utilização de relés térmicos bimetálicos superdimensionados de ação altamente retardada.",
+        "A presença de conversores analógico-digitais de alta resolução com taxa de amostragem de 1 MS/s.",
+        "A montagem de filtros ativos integrados configurados rigidamente para a supressão da 3a harmônica."
       ],
       "correctIndex": 2,
-      "explanation": "O guia da Wrindu descreve que tecnologias como conversores analogico-digitais (ADCs) de alta resolucao, com taxa de amostragem de 1 MS/s, capturam transientes rapidos invisiveis para dispositivos mais lentos.",
+      "explanation": "O guia da Wrindu descreve que tecnologias como conversores analógico-digitais (ADCs) de alta resolução, com taxa de amostragem de 1 MS/s, capturam transientes rápidos invisíveis para dispositivos mais lentos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nos sistemas de medicao estipulados de acordo com o padrao Classe S, como as normas tratam o processamento e o registro do desequilibrio de tensao de sequencia zero?",
+      "statement": "Nos sistemas de medição estipulados de acordo com o padrão Classe S, como as normas tratam o processamento e o registro do desequilíbrio de tensão de sequência zero?",
       "options": [
-        "Sua afericao e estritamente obrigatoria em todos os modos e submodos operacionais da medicao.",
-        "O calculo e o registro do desequilibrio de tensao de sequencia zero sao estritamente opcionais.",
-        "Este parametro deve ser obrigatoriamente substituido pela leitura compensada de desequilibrio de sequencia positiva.",
-        "E utilizado na base de dados e exigido apenas se a tensao nominal do equipamento for superior a 230 kV."
+        "Sua aferição é estritamente obrigatória em todos os modos e submodos operacionais da medição.",
+        "O cálculo e o registro do desequilíbrio de tensão de sequência zero são estritamente opcionais.",
+        "Este parâmetro deve ser obrigatoriamente substituído pela leitura compensada de desequilíbrio de sequência positiva.",
+        "É utilizado na base de dados e exigido apenas se a tensão nominal do equipamento for superior a 230 kV."
       ],
       "correctIndex": 1,
-      "explanation": "O material da KRA2 Energia dita que para a Classe S e obrigatorio apenas o registro de sequencia negativa, sendo totalmente opcional o calculo do desequilibrio de tensao de sequencia zero.",
+      "explanation": "O material da KRA2 Energia dita que para a Classe S é obrigatório apenas o registro de sequência negativa, sendo totalmente opcional o cálculo do desequilíbrio de tensão de sequência zero.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nos analisadores de ultima geracao, como a integracao da tecnologia de computacao de borda (edge computing) beneficia operacionalmente o monitoramento remoto de grandes usinas?",
+      "statement": "Nos analisadores de última geração, como a integração da tecnologia de computação de borda (edge computing) beneficia operacionalmente o monitoramento remoto de grandes usinas?",
       "options": [
-        "Ao possibilitar que os processadores locais gerenciem as informacoes pesadas do sinal no proprio dispositivo, minimizando a latencia de comunicacao.",
-        "Ao forcar o envio de 100 por cento dos dados brutos analogicos de forma ininterrupta para a nuvem antes de qualquer calculo matematico.",
-        "Substituindo integralmente todos os modernos conversores analogico-digitais por interruptores estaticos na borda do painel.",
-        "Isolando hermeticamente as interfaces da rede de medicao para invalidar qualquer conexao ou acesso remoto a rede SCADA na instalacao."
+        "Ao possibilitar que os processadores locais gerenciem as informações pesadas do sinal no próprio dispositivo, minimizando a latência de comunicação.",
+        "Ao forçar o envio de 100 por cento dos dados brutos analógicos de forma ininterrupta para a nuvem antes de qualquer cálculo matemático.",
+        "Substituindo integralmente todos os modernos conversores analógico-digitais por interruptores estáticos na borda do painel.",
+        "Isolando hermeticamente as interfaces da rede de medição para invalidar qualquer conexão ou acesso remoto à rede SCADA na instalação."
       ],
       "correctIndex": 0,
-      "explanation": "O documento Guia Wrindu afirma textualmente que a integracao da computacao de borda permite que os analisadores processem informacoes localmente, minimizando a latencia em locais remotos.",
+      "explanation": "O documento Guia Wrindu afirma textualmente que a integração da computação de borda permite que os analisadores processem informações localmente, minimizando a latência em locais remotos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual ferramenta baseada em inovacao de software vem sendo cada vez mais adotada por analisadores avancados para prever disturbios antes que causem falhas, inferindo comportamentos sutis a partir de dados da rede?",
+      "statement": "Qual ferramenta baseada em inovação de software vem sendo cada vez mais adotada por analisadores avançados para prever distúrbios antes que causem falhas, inferindo comportamentos sutis a partir de dados da rede?",
       "options": [
-        "A simples plotagem e visualizacao de diagramas fasoriais analogicos estaticos mapeados em graficos sem memoria.",
-        "O emprego de algoritmos de aprendizado de maquina (machine learning) que realizam previsoes com base nas tendencias historicas obtidas.",
-        "A restricao programada da memoria eletronica que aceita e armazena rigorosamente um limite maximo de 12 ciclos senoidais nao volateis.",
-        "A eliminacao completa do rastreamento de modulo de sincronizacao de tempo GPS para evitar falsas indicacoes de transientes no log."
+        "A simples plotagem e visualização de diagramas fasoriais analógicos estáticos mapeados em gráficos sem memória.",
+        "O emprego de algoritmos de aprendizado de máquina (machine learning) que realizam previsões com base nas tendências históricas obtidas.",
+        "A restrição programada da memória eletrônica que aceita e armazena rigorosamente um limite máximo de 12 ciclos senoidais não voláteis.",
+        "A eliminação completa do rastreamento de módulo de sincronização de tempo GPS para evitar falsas indicações de transientes no log."
       ],
       "correctIndex": 1,
-      "explanation": "O artigo guia da Wrindu relata na secao de tecnologias essenciais que o aprendizado de maquina aprimora a previsao da qualidade da energia, prevendo disturbios a partir de tendencias historicas.",
+      "explanation": "O artigo guia da Wrindu relata na seção de tecnologias essenciais que o aprendizado de máquina aprimora a previsão da qualidade da energia, prevendo distúrbios a partir de tendências históricas.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Os transformadores de potencial (TPs) tem a missao na instrumentacao de elevar a amplitude da tensao provinda da rede a valores mais altos que se tornam adequados para leitura direta nos reles da subestacao.",
+      "statement": "Os transformadores de potencial (TPs) têm a missão na instrumentação de elevar a amplitude da tensão provinda da rede a valores mais altos que se tornam adequados para leitura direta nos relés da subestação.",
       "correctAnswer": false,
-      "explanation": "A Apostila Protecao (Pio Decimo) explica que o objetivo dos Transformadores Instrumentais, como os TPs, e reduzir os valores de tensao a niveis baixos e normatizados sem inserir erros, e nao elevar a tensao.",
+      "explanation": "A Apostila Proteção (Pio Décimo) explica que o objetivo dos Transformadores Instrumentais, como os TPs, é reduzir os valores de tensão a níveis baixos e normatizados sem inserir erros, e não elevar a tensão.",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "De acordo com os padroes normativos exigidos para os medidores que atuam na categoria de Classe A, o calculo do valor eficaz da tensao associado aos eventos de Variacao de Tensao de Curta Duracao (VTCD) deve ser atualizado a cada meio ciclo senoidal.",
+      "statement": "De acordo com os padrões normativos exigidos para os medidores que atuam na categoria de Classe A, o cálculo do valor eficaz da tensão associado aos eventos de Variação de Tensão de Curta Duração (VTCD) deve ser atualizado a cada meio ciclo senoidal.",
       "correctAnswer": true,
-      "explanation": "O informativo tecnico da KRA2 Energia dita claramente que no medidor Classe A o valor eficaz da tensao (VTCD) deve ser calculado a cada meio ciclo, incluindo distorcoes.",
+      "explanation": "O informativo técnico da KRA2 Energia dita claramente que no medidor Classe A o valor eficaz da tensão (VTCD) deve ser calculado a cada meio ciclo, incluindo distorções.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Os modernos sensores de corrente denominados LPCT (Low Power Current Transducers) operam com um nucleo rapidamente saturavel, apresentando resposta linear apenas em condicao nominal e limitando os picos de falha instantaneamente.",
+      "statement": "Os modernos sensores de corrente denominados LPCT (Low Power Current Transducers) operam com um núcleo rapidamente saturável, apresentando resposta linear apenas em condição nominal e limitando os picos de falha instantaneamente.",
       "correctAnswer": false,
-      "explanation": "Segundo o Guia de Protecao da Schneider, os sensores tipo LPCT possuem uma resposta linear em uma ampla faixa de corrente e somente comecam a saturar acima das altissimas correntes a serem interrompidas.",
+      "explanation": "Segundo o Guia de Proteção da Schneider, os sensores tipo LPCT possuem uma resposta linear em uma ampla faixa de corrente e somente começam a saturar acima das altíssimas correntes a serem interrompidas.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A sincronizacao do carimbo de tempo baseada na estrutura via satelite GPS e um metodo essencial incorporado aos sistemas de monitoramento de qualidade para assegurar uma exata e confiavel correlacao dos disturbios analisados em multiplos locais distintos.",
+      "statement": "A sincronização do carimbo de tempo baseada na estrutura via satélite GPS é um método essencial incorporado aos sistemas de monitoramento de qualidade para assegurar uma exata e confiável correlação dos distúrbios analisados em múltiplos locais distintos.",
       "correctAnswer": true,
-      "explanation": "O material definitivo sobre analisadores da Wrindu lista como tecnologia essencial o fato de que a sincronizacao de tempo por GPS garante uma correlacao precisa em sistemas de monitoramento em multiplos locais.",
+      "explanation": "O material definitivo sobre analisadores da Wrindu lista como tecnologia essencial o fato de que a sincronização de tempo por GPS garante uma correlação precisa em sistemas de monitoramento em múltiplos locais.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para afericao do sinal com o uso de medidores designados pela Classe S, o regulamento impoe que a incerteza admissivel associada especificamente aos atributos de amplitude e duracao dos transitorios do tipo VTCD e tolerada no patamar amplo de ate mais ou menos 5 por cento da tensao de referencia.",
+      "statement": "Para aferição do sinal com o uso de medidores designados pela Classe S, o regulamento impõe que a incerteza admissível associada especificamente aos atributos de amplitude e duração dos transitórios do tipo VTCD é tolerada no patamar amplo de até mais ou menos 5 por cento da tensão de referência.",
       "correctAnswer": false,
-      "explanation": "O texto da KRA2 Energia dita textualmente para o medidor Classe S que o VTCD (amplitude e duracao do evento) possui incertezas maximas de +/- 1,0 por cento da tensao de referencia e de 1 ciclo, e nao de 5 por cento.",
+      "explanation": "O texto da KRA2 Energia dita textualmente para o medidor Classe S que o VTCD (amplitude e duração do evento) possui incertezas máximas de +/- 1,0 por cento da tensão de referência e de 1 ciclo, e não de 5 por cento.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Os modernos dispositivos portateis dedicados a inspecao profunda da qualidade utilizam processadores internos da arquitetura conhecida pela sigla ____ para executar calculos diretamente no aparelho, cortando o esforco de pos-processamento.",
+      "statement": "Os modernos dispositivos portáteis dedicados à inspeção profunda da qualidade utilizam processadores internos da arquitetura conhecida pela sigla ____ para executar cálculos diretamente no aparelho, cortando o esforço de pós-processamento.",
       "blanks": [
         {
           "index": 0,
           "answer": "DSP"
         }
       ],
-      "explanation": "O guia comercial da Wrindu afirma que os analisadores utilizam processadores DSP (Processador de Sinal Digital) para calculos no proprio dispositivo, reduzindo a necessidade de pos-processamento em softwares remotos.",
+      "explanation": "O guia comercial da Wrindu afirma que os analisadores utilizam processadores DSP (Processador de Sinal Digital) para cálculos no próprio dispositivo, reduzindo a necessidade de pós-processamento em softwares remotos.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Ao avaliar a especificacao do medidor puramente regido como equipamento Classe A, o material normativo frisa que a incerteza instrumental referente aos indicadores matematicos FD2% e FD0% fica restrita, nao devendo ultrapassar o rigoroso desvio de mais ou menos ____ por cento calculado sobre a tensao de referencia base.",
+      "statement": "Ao avaliar a especificação do medidor puramente regido como equipamento Classe A, o material normativo frisa que a incerteza instrumental referente aos indicadores matemáticos FD2% e FD0% fica restrita, não devendo ultrapassar o rigoroso desvio de mais ou menos ____ por cento calculado sobre a tensão de referência base.",
       "blanks": [
         {
           "index": 0,
           "answer": "0,15"
         }
       ],
-      "explanation": "O artigo informativo do PRODIST elaborado pela KRA2 Energia fixa normativamente como requisito para o Medidor Classe A que a incerteza para os indicadores FD2% e FD0% nao deve ser superior a +/- 0,15 por cento da tensao de referencia.",
+      "explanation": "O artigo informativo do PRODIST elaborado pela KRA2 Energia fixa normativamente como requisito para o Medidor Classe A que a incerteza para os indicadores FD2% e FD0% não deve ser superior a +/- 0,15 por cento da tensão de referência.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Consoante as nomenclaturas adotadas no catalogo tecnico da Schneider para dimensionamento de transformadores especificos, a precisao operacional normalizada reservada a transformadores de corrente destinados expressamente as malhas de protecao e identificada comercialmente pelas classes 10P e ____.",
+      "statement": "Consoante as nomenclaturas adotadas no catálogo técnico da Schneider para dimensionamento de transformadores específicos, a precisão operacional normalizada reservada a transformadores de corrente destinados expressamente às malhas de proteção é identificada comercialmente pelas classes 10P e ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "5P"
         }
       ],
-      "explanation": "No Guia de Protecao da Schneider consta claramente que 5P e 10P sao as classes de precisao normalizadas para os TCs de protecao, atestando sua nomenclatura convencional para suportar situacoes limite.",
+      "explanation": "No Guia de Proteção da Schneider consta claramente que 5P e 10P são as classes de precisão normalizadas para os TCs de proteção, atestando sua nomenclatura convencional para suportar situações limite.",
       "difficulty": "hard"
     }
   ]

@@ -10,7 +10,7 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual Logical Node padronizado na IEC 61850 e encarregado de gerenciar as funcoes de intertravamento de manobras?",
+      "statement": "Qual Logical Node padronizado na IEC 61850 é encarregado de gerenciar as funções de intertravamento de manobras?",
       "options": [
         "XCBR",
         "CSWI",
@@ -18,42 +18,42 @@
         "PTOC"
       ],
       "correctIndex": 2,
-      "explanation": "O Logical Node CILO (Control Interlocking) representa a logica que avalia os permissivos de manobra.",
+      "explanation": "O Logical Node CILO (Control Interlocking) representa a lógica que avalia os permissivos de manobra.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na automacao moderna, qual servico substitui as fiacoes convencionais de cobre utilizadas nos intertravamentos logicos entre bays?",
+      "statement": "Na automação moderna, qual serviço substitui as fiações convencionais de cobre utilizadas nos intertravamentos lógicos entre bays?",
       "options": [
         "Comandos MMS roteados.",
-        "Relatorios bufferizados BRCB.",
+        "Relatórios bufferizados BRCB.",
         "Sincronismo SNTP.",
         "Mensagens horizontais GOOSE."
       ],
       "correctIndex": 3,
-      "explanation": "A troca de mensagens GOOSE via rede Ethernet supre a antiga ligacao fisica usada para bloqueios e intertravamentos.",
+      "explanation": "A troca de mensagens GOOSE via rede Ethernet supre a antiga ligação física usada para bloqueios e intertravamentos.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
       "statement": "Qual o objetivo principal da fase Select no mecanismo Select Before Operate (SBO) aplicado ao controle de disjuntores?",
       "options": [
-        "Selecionar e reservar o equipamento aguardando confirmacao previa a operacao.",
-        "Desarmar imediatamente o disjuntor sem verificacoes.",
-        "Aumentar a sensibilidade da protecao de sobrecorrente.",
+        "Selecionar e reservar o equipamento aguardando confirmação prévia à operação.",
+        "Desarmar imediatamente o disjuntor sem verificações.",
+        "Aumentar a sensibilidade da proteção de sobrecorrente.",
         "Bloquear o envio de mensagens GOOSE na rede."
       ],
       "correctIndex": 0,
-      "explanation": "A etapa de selecao no SBO garante a reserva e estabilidade do comando antes de efetivar a manobra de operar.",
+      "explanation": "A etapa de seleção no SBO garante a reserva e estabilidade do comando antes de efetivar a manobra de operar.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Dentro da classe XCBR, o que o atributo mandatorio Loc sinaliza para a seguranca operacional?",
+      "statement": "Dentro da classe XCBR, o que o atributo mandatório Loc sinaliza para a segurança operacional?",
       "options": [
         "Que a falha ocorreu externamente.",
-        "A operacao local direta por fiacao (hardwired), sem comandos via rede.",
-        "Que o bloqueio de fechamento esta inativo.",
+        "A operação local direta por fiação (hardwired), sem comandos via rede.",
+        "Que o bloqueio de fechamento está inativo.",
         "A contagem total de manobras do equipamento."
       ],
       "correctIndex": 1,
@@ -62,7 +62,7 @@
     },
     {
       "type": "multipleChoice",
-      "statement": "Na ocorrencia de um trip diferencial (87), como o sinal do rele de bloqueio virtual (86T) atua nos disjuntores para isolar a falta?",
+      "statement": "Na ocorrência de um trip diferencial (87), como o sinal do relé de bloqueio virtual (86T) atua nos disjuntores para isolar a falta?",
       "options": [
         "Por cabos coaxiais dedicados ao SCADA.",
         "Desativando as portas do switch via protocolo STP.",
@@ -70,7 +70,7 @@
         "Ignorando os disjuntores e alertando apenas o centro nacional."
       ],
       "correctIndex": 2,
-      "explanation": "O sinal 86T enviado via GOOSE entra na logica intertravando e bloqueando o fechamento dos disjuntores.",
+      "explanation": "O sinal 86T enviado via GOOSE entra na lógica intertravando e bloqueando o fechamento dos disjuntores.",
       "difficulty": "easy"
     },
     {
@@ -88,20 +88,20 @@
     },
     {
       "type": "multipleChoice",
-      "statement": "Em IEDs modernos, como logicas booleanas (portas E/OU) sao frequentemente elaboradas para condicionar alarmes ou intertravamentos de campo?",
+      "statement": "Em IEDs modernos, como lógicas booleanas (portas E/OU) são frequentemente elaboradas para condicionar alarmes ou intertravamentos de campo?",
       "options": [
-        "Utilizando logicas programaveis embarcadas como o CFC (Continuous Function Chart).",
-        "Atraves de botoes rotativos no painel frontal.",
+        "Utilizando lógicas programáveis embarcadas como o CFC (Continuous Function Chart).",
+        "Através de botões rotativos no painel frontal.",
         "Cortando fisicamente as trilhas de cobre.",
-        "Mudando o endereco MAC do equipamento."
+        "Mudando o endereço MAC do equipamento."
       ],
       "correctIndex": 0,
-      "explanation": "Logicas customizadas como portas AND e OR sao construidas na ferramenta utilizando blocos de CFC.",
+      "explanation": "Lógicas customizadas como portas AND e OR são construídas na ferramenta utilizando blocos de CFC.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante a sequencia do comando SBO, o que o sistema retorna caso as condicoes de teste falhem logo apos a solicitacao de selecao?",
+      "statement": "Durante a sequência do comando SBO, o que o sistema retorna caso as condições de teste falhem logo após a solicitação de seleção?",
       "options": [
         "Select_rsp+",
         "Select_rsp-",
@@ -109,12 +109,12 @@
         "Cancel_rsp+"
       ],
       "correctIndex": 1,
-      "explanation": "O diagrama de estados ilustra a transicao Select_req com teste reprovado levando a rejeicao Select_rsp-.",
+      "explanation": "O diagrama de estados ilustra a transição Select_req com teste reprovado levando à rejeição Select_rsp-.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No modelo de dados de controle comum (DPC), que parametro define a aplicacao de seguranca da manobra, como sbo-with-enhanced-security?",
+      "statement": "No modelo de dados de controle comum (DPC), que parâmetro define a aplicação de segurança da manobra, como sbo-with-enhanced-security?",
       "options": [
         "ctlVal",
         "stVal",
@@ -122,41 +122,41 @@
         "sboTimeout"
       ],
       "correctIndex": 2,
-      "explanation": "O atributo ctlModel configura a modalidade do controle exigida, de comandos diretos ate o SBO reforcado.",
+      "explanation": "O atributo ctlModel configura a modalidade do controle exigida, de comandos diretos até o SBO reforçado.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em um esquema de recobrimento distribuido, como o sistema de automacao age ao detectar falha critica de comunicacao de um IED num intertravamento?",
+      "statement": "Em um esquema de recobrimento distribuído, como o sistema de automação age ao detectar falha crítica de comunicação de um IED num intertravamento?",
       "options": [
         "Os outros IEDs ignoram a falha e atuam cegamente.",
-        "Revertem para a transmissao serial Modbus.",
-        "Desligam toda a alimentacao da barra por prevencao.",
-        "Bloqueiam as logicas dependentes daquele IED especifico, mantendo as demais operacionais."
+        "Revertem para a transmissão serial Modbus.",
+        "Desligam toda a alimentação da barra por prevenção.",
+        "Bloqueiam as lógicas dependentes daquele IED específico, mantendo as demais operacionais."
       ],
       "correctIndex": 3,
-      "explanation": "Na falha de um IED, os demais bloqueiam unicamente as logicas referentes ao equipamento falho sem descontinuar o restante do processo.",
+      "explanation": "Na falha de um IED, os demais bloqueiam unicamente as lógicas referentes ao equipamento falho sem descontinuar o restante do processo.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A implementacao de mensagens GOOSE elimina grande parte do cabeamento de cobre tradicional utilizado nas logicas de bloqueio e intertravamento entre vaos.",
+      "statement": "A implementação de mensagens GOOSE elimina grande parte do cabeamento de cobre tradicional utilizado nas lógicas de bloqueio e intertravamento entre vãos.",
       "correctAnswer": true,
-      "explanation": "A troca de dados via rede Ethernet com GOOSE reduz fisicamente as entradas binarias e cabos de bloqueio na subestacao.",
+      "explanation": "A troca de dados via rede Ethernet com GOOSE reduz fisicamente as entradas binárias e cabos de bloqueio na subestação.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O no logico CILO, dedicado as permissoes de manobra, pode ser instanciado e distribuido tanto no nivel de estacao quanto no nivel de bay.",
+      "statement": "O nó lógico CILO, dedicado às permissões de manobra, pode ser instanciado e distribuído tanto no nível de estação quanto no nível de bay.",
       "correctAnswer": true,
-      "explanation": "A norma permite que o CILO seja instanciado em diferentes niveis, como estacao e bay, para gerir intertravamentos adequados.",
+      "explanation": "A norma permite que o CILO seja instanciado em diferentes níveis, como estação e bay, para gerir intertravamentos adequados.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para assegurar a operacao remota com total seguranca, a arquitetura com o padrao Select Before Operate (SBO) ignora os status atuais do equipamento e forca a comutacao.",
+      "statement": "Para assegurar a operação remota com total segurança, a arquitetura com o padrão Select Before Operate (SBO) ignora os status atuais do equipamento e força a comutação.",
       "correctAnswer": false,
       "explanation": "O SBO seleciona, avalia e reserva primeiramente o equipamento para garantir que a manobra seja estritamente segura e validada.",
       "difficulty": "medium",
@@ -164,54 +164,54 @@
     },
     {
       "type": "trueFalse",
-      "statement": "No esquema de protecao com falha de disjuntor (50BF), a atuacao do rele 50BF emite um sinal de trigger via GOOSE para comandar a abertura dos disjuntores a montante.",
+      "statement": "No esquema de proteção com falha de disjuntor (50BF), a atuação do relé 50BF emite um sinal de trigger via GOOSE para comandar a abertura dos disjuntores a montante.",
       "correctAnswer": true,
-      "explanation": "Em caso de falha de abertura, a logica do 50BF dispara e atua como gatilho enviando um GOOSE para abrir a alimentacao a montante.",
+      "explanation": "Em caso de falha de abertura, a lógica do 50BF dispara e atua como gatilho enviando um GOOSE para abrir a alimentação a montante.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Ao ativar a flag Test (TRUE) em uma mensagem GOOSE de intertravamento, o IED assinante e instruido a ignorar o comando para fins operacionais reais na planta.",
+      "statement": "Ao ativar a flag Test (TRUE) em uma mensagem GOOSE de intertravamento, o IED assinante é instruído a ignorar o comando para fins operacionais reais na planta.",
       "correctAnswer": true,
-      "explanation": "O parametro Test=TRUE instrui o receptor a abster-se de utilizar a informacao em manobras e logicas operativas de campo.",
+      "explanation": "O parâmetro Test=TRUE instrui o receptor a abster-se de utilizar a informação em manobras e lógicas operativas de campo.",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O parametro de configuracao que define se o modo de controle da chave e direto ou exige validacao previa reforcada e o atributo denominado ctl____.",
+      "statement": "O parâmetro de configuração que define se o modo de controle da chave é direto ou exige validação prévia reforçada é o atributo denominado ctl____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Model"
         }
       ],
-      "explanation": "O atributo ctlModel especifica o nivel de rigor do controle, como direct-operate ou select-before-operate.",
+      "explanation": "O atributo ctlModel especifica o nível de rigor do controle, como direct-operate ou select-before-operate.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Para centralizar e condicionar as restricoes de operacao de uma seccionadora, o modelo de dados emprega o no logico especifico cujo mnemonico tecnico e ____.",
+      "statement": "Para centralizar e condicionar as restrições de operação de uma seccionadora, o modelo de dados emprega o nó lógico específico cujo mnemônico técnico é ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "CILO"
         }
       ],
-      "explanation": "O LN CILO (Control Interlocking) consolida a inteligencia dos intertravamentos, permitindo ou barrando manobras dos IEDs.",
+      "explanation": "O LN CILO (Control Interlocking) consolida a inteligência dos intertravamentos, permitindo ou barrando manobras dos IEDs.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "A acao defensiva automatica, originada pela atuacao da protecao (ex: 87), que proibe ativamente o religamento manual de um disjuntor em condicao de perigo e conhecida como rele de ____ (86).",
+      "statement": "A ação defensiva automática, originada pela atuação da proteção (ex: 87), que proíbe ativamente o religamento manual de um disjuntor em condição de perigo é conhecida como relé de ____ (86).",
       "blanks": [
         {
           "index": 0,
           "answer": "bloqueio"
         }
       ],
-      "explanation": "O rele de bloqueio (86), muitas vezes virtualizado via GOOSE, e o intertravamento mandatorio que restringe manobras inseguras apos uma falta grave.",
+      "explanation": "O relé de bloqueio (86), muitas vezes virtualizado via GOOSE, é o intertravamento mandatório que restringe manobras inseguras após uma falta grave.",
       "difficulty": "hard"
     }
   ]

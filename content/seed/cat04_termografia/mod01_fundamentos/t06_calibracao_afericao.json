@@ -1,29 +1,29 @@
 {
   "category": "Termografia Infravermelha",
-  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categorySubtitle": "Fundamentos, aplicações em sistemas elétricos e normas de laudos",
   "categoryOrder": 3,
   "module": "Fundamentos de Termografia",
-  "moduleSubtitle": "Fisica do IR, transferencia de calor, equipamentos e calibracao",
+  "moduleSubtitle": "Física do IR, transferência de calor, equipamentos e calibração",
   "moduleOrder": 1,
   "trail": "Calibração e Aferição de Câmeras IR",
   "trailOrder": 5,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que e utilizado como padrao de referencia no procedimento de ajuste em fabrica (calibracao) de um termovisor?",
+      "statement": "O que é utilizado como padrão de referência no procedimento de ajuste em fábrica (calibração) de um termovisor?",
       "options": [
         "Corpos negros (radiadores perfeitos) a diferentes temperaturas.",
-        "Superficies de aluminio polido com emissividade nula.",
-        "Lampadas incandescentes de tungstenio padronizadas.",
-        "Fontes de radiacao ultravioleta em camara de vacuo."
+        "Superfícies de alumínio polido com emissividade nula.",
+        "Lâmpadas incandescentes de tungstênio padronizadas.",
+        "Fontes de radiação ultravioleta em câmara de vácuo."
       ],
       "correctIndex": 0,
-      "explanation": "Para o procedimento de ajuste em fabrica, sao usados corpos negros a diferentes temperaturas. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Para o procedimento de ajuste em fábrica, são usados corpos negros a diferentes temperaturas. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a incerteza de medicao tipica especificada pelos fabricantes para a maioria dos termovisores comerciais?",
+      "statement": "Qual é a incerteza de medição típica especificada pelos fabricantes para a maioria dos termovisores comerciais?",
       "options": [
         "+/-0,1 K ou +/-0,1% da temperatura medida.",
         "+/-5 K ou +/-10% da temperatura medida.",
@@ -31,25 +31,25 @@
         "+/-10 K independentemente da temperatura do alvo."
       ],
       "correctIndex": 2,
-      "explanation": "A incerteza para a maioria dos termovisores disponiveis no mercado e de +/-2 K ou +/-2% da temperatura medida. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A incerteza para a maioria dos termovisores disponíveis no mercado é de +/-2 K ou +/-2% da temperatura medida. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o objetivo principal das verificacoes intermediarias realizadas entre as calibracoes sucessivas do termovisor?",
+      "statement": "Qual é o objetivo principal das verificações intermediárias realizadas entre as calibrações sucessivas do termovisor?",
       "options": [
-        "Aumentar a resolucao optica do FPA.",
-        "Garantir a manutencao da confianca no status da calibracao.",
-        "Reduzir o peso e o consumo de bateria da camera.",
-        "Substituir definitivamente a necessidade de calibracao em fabrica."
+        "Aumentar a resolução óptica do FPA.",
+        "Garantir a manutenção da confiança no status da calibração.",
+        "Reduzir o peso e o consumo de bateria da câmera.",
+        "Substituir definitivamente a necessidade de calibração em fábrica."
       ],
       "correctIndex": 1,
-      "explanation": "As verificacoes intermediarias sao necessarias para manter a confianca na situacao de calibracao do instrumento. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "explanation": "As verificações intermediárias são necessárias para manter a confiança na situação de calibração do instrumento. (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual norma brasileira fornece diretrizes para a verificacao de termovisores pelo proprio usuario durante o intervalo de validade da calibracao?",
+      "statement": "Qual norma brasileira fornece diretrizes para a verificação de termovisores pelo próprio usuário durante o intervalo de validade da calibração?",
       "options": [
         "ABNT NBR 5410",
         "ABNT NBR 15572",
@@ -57,161 +57,161 @@
         "ABNT NBR 15866"
       ],
       "correctIndex": 2,
-      "explanation": "A norma ABNT NBR 15718 fornece diretrizes para a verificacao de termovisores pelo usuario final. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A norma ABNT NBR 15718 fornece diretrizes para a verificação de termovisores pelo usuário final. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que o parametro NETD avalia durante a caracterizacao e calibracao de um instrumento termografico?",
+      "statement": "O que o parâmetro NETD avalia durante a caracterização e calibração de um instrumento termográfico?",
       "options": [
-        "A resolucao geometrica limite do sensor infravermelho.",
-        "A estabilidade mecanica do equipamento de calibracao.",
-        "A resolucao em temperatura equivalente ao desvio padrao devido ao ruido.",
-        "A vida util operacional dos microbolometros nao resfriados."
+        "A resolução geométrica limite do sensor infravermelho.",
+        "A estabilidade mecânica do equipamento de calibração.",
+        "A resolução em temperatura equivalente ao desvio padrão devido ao ruído.",
+        "A vida útil operacional dos microbolômetros não resfriados."
       ],
       "correctIndex": 2,
-      "explanation": "O NETD define a resolucao em temperatura, equivalente ao desvio padrao devido ao ruido em um termograma. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "explanation": "O NETD define a resolução em temperatura, equivalente ao desvio padrão devido ao ruído em um termograma. (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a calibracao do termovisor corrige a radiacao adicional emitida pelos circuitos internos da propria camera?",
+      "statement": "Como a calibração do termovisor corrige a radiação adicional emitida pelos circuitos internos da própria câmera?",
       "options": [
-        "Resfriando a camera com nitrogenio liquido a -273 graus Celsius.",
-        "Desligando a camera automaticamente entre cada captura de imagem.",
-        "Por calculos e algoritmos internos que removem o offset gerado pelo aquecimento proprio.",
+        "Resfriando a câmera com nitrogênio líquido a -273 graus Celsius.",
+        "Desligando a câmera automaticamente entre cada captura de imagem.",
+        "Por cálculos e algoritmos internos que removem o offset gerado pelo aquecimento próprio.",
         "Bloqueando fisicamente o sensor infravermelho com um obturador reflexivo."
       ],
       "correctIndex": 2,
-      "explanation": "O aquecimento interno causa um offset no sinal, que e corrigido ativamente pelo sistema atraves de calculos. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O aquecimento interno causa um offset no sinal, que é corrigido ativamente pelo sistema através de cálculos. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como deve ser estabelecida a periodicidade de calibracao de um termovisor utilizado em manutencoes preditivas?",
+      "statement": "Como deve ser estabelecida a periodicidade de calibração de um termovisor utilizado em manutenções preditivas?",
       "options": [
-        "Deve ser fixa em cinco anos para qualquer modelo de camera.",
+        "Deve ser fixa em cinco anos para qualquer modelo de câmera.",
         "Deve ser baseada exclusivamente na data de validade da bateria.",
-        "Deve ser reavaliada e otimizada por meio de verificacoes intermediarias.",
-        "Deve ocorrer somente apos a substituicao do sensor FPA."
+        "Deve ser reavaliada e otimizada por meio de verificações intermediárias.",
+        "Deve ocorrer somente após a substituição do sensor FPA."
       ],
       "correctIndex": 2,
-      "explanation": "A periodicidade de calibracao deve ser frequentemente reavaliada e otimizada por meio de planos de verificacao intermediaria. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "explanation": "A periodicidade de calibração deve ser frequentemente reavaliada e otimizada por meio de planos de verificação intermediária. (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Por que a distancia entre o corpo negro e o termovisor deve ser a menor possivel durante o procedimento de ajuste em fabrica?",
+      "statement": "Por que a distância entre o corpo negro e o termovisor deve ser a menor possível durante o procedimento de ajuste em fábrica?",
       "options": [
-        "Para evitar o acionamento do foco automatico das lentes.",
-        "Para que a transmitancia atmosferica possa ser considerada unitaria.",
-        "Para maximizar a absorcao molecular por gas carbonico.",
-        "Para simular as distancias operacionais reais de inspecao."
+        "Para evitar o acionamento do foco automático das lentes.",
+        "Para que a transmitância atmosférica possa ser considerada unitária.",
+        "Para maximizar a absorção molecular por gás carbônico.",
+        "Para simular as distâncias operacionais reais de inspeção."
       ],
       "correctIndex": 1,
-      "explanation": "A distancia deve ser a menor possivel para que a influencia da transmitancia atmosferica seja considerada unitaria e nao afete a calibracao. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A distância deve ser a menor possível para que a influência da transmitância atmosférica seja considerada unitária e não afete a calibração. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com o Vocabulario Internacional de Metrologia (VIM), como deve ser tratado o termo exatidao nas afericoes termograficas?",
+      "statement": "De acordo com o Vocabulário Internacional de Metrologia (VIM), como deve ser tratado o termo exatidão nas aferições termográficas?",
       "options": [
-        "Como o percentual exato do erro de quantizacao do conversor digital.",
-        "Como um valor numerico expresso em graus Celsius na tabela de calibracao.",
-        "Como um conceito qualitativo nao devendo ser representado por um numero.",
-        "Como o desvio padrao da distribuicao do ruido de fundo da imagem."
+        "Como o percentual exato do erro de quantização do conversor digital.",
+        "Como um valor numérico expresso em graus Celsius na tabela de calibração.",
+        "Como um conceito qualitativo não devendo ser representado por um número.",
+        "Como o desvio padrão da distribuição do ruído de fundo da imagem."
       ],
       "correctIndex": 2,
-      "explanation": "A exatidao, de acordo com o VIM, e um conceito qualitativo e nao deve ser representado por um numero especifico. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "explanation": "A exatidão, de acordo com o VIM, é um conceito qualitativo e não deve ser representado por um número específico. (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a recomendacao OIML R 141 prescreve a determinacao da exatidao da medicao de temperatura do termovisor?",
+      "statement": "Como a recomendação OIML R 141 prescreve a determinação da exatidão da medição de temperatura do termovisor?",
       "options": [
-        "Avaliando um unico ponto na temperatura maxima do equipamento.",
-        "Realizando no minimo 5 medicoes em pelo menos 5 pontos dentro da faixa nominal.",
-        "Comparando a leitura do pixel central com o perimetro externo da lente.",
-        "Medindo a resolucao espacial do detector com um emissor laser padronizado."
+        "Avaliando um único ponto na temperatura máxima do equipamento.",
+        "Realizando no mínimo 5 medições em pelo menos 5 pontos dentro da faixa nominal.",
+        "Comparando a leitura do pixel central com o perímetro externo da lente.",
+        "Medindo a resolução espacial do detector com um emissor laser padronizado."
       ],
       "correctIndex": 1,
-      "explanation": "A exatidao deve ser determinada em pelo menos 5 pontos da faixa nominal com no minimo 5 medicoes em cada um deles. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "explanation": "A exatidão deve ser determinada em pelo menos 5 pontos da faixa nominal com no mínimo 5 medições em cada um deles. (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A calibracao periodica em laboratorio previne de forma definitiva a ocorrencia de falhas e garante que o termovisor nunca operara fora das especificacoes.",
+      "statement": "A calibração periódica em laboratório previne de forma definitiva a ocorrência de falhas e garante que o termovisor nunca operará fora das especificações.",
       "correctAnswer": false,
-      "explanation": "A calibracao periodica nao previne o uso de instrumentos fora das especificacoes, justificando a adocao de verificacoes intermediarias frequentes. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "explanation": "A calibração periódica não previne o uso de instrumentos fora das especificações, justificando a adoção de verificações intermediárias frequentes. (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Segundo os principios de metrologia termografica, a substituicao da lente objetiva de uma camera requer um novo procedimento de ajuste em fabrica.",
+      "statement": "Segundo os princípios de metrologia termográfica, a substituição da lente objetiva de uma câmera requer um novo procedimento de ajuste em fábrica.",
       "correctAnswer": true,
-      "explanation": "A troca da lente pode implicar em mudanca do numero-F ou da transmitancia espectral optica, exigindo novos ajustes de calibracao. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A troca da lente pode implicar em mudança do número-F ou da transmitância espectral óptica, exigindo novos ajustes de calibração. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Durante testes praticos de verificacao e afericao, a umidade relativa do ar e a temperatura ambiente do laboratorio nao influenciam os resultados e devem ser descartadas da modelagem.",
+      "statement": "Durante testes práticos de verificação e aferição, a umidade relativa do ar e a temperatura ambiente do laboratório não influenciam os resultados e devem ser descartadas da modelagem.",
       "correctAnswer": false,
-      "explanation": "As verificacoes de medicao levam em conta as condicoes ambientais, e fatores como temperatura ambiente e umidade relativa do ar interferem nas calibracoes. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "explanation": "As verificações de medição levam em conta as condições ambientais, e fatores como temperatura ambiente e umidade relativa do ar interferem nas calibrações. (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Uma mudanca abrupta na temperatura do ambiente afeta as partes internas da camera termografica, provocando um offset que causa medicoes incorretas.",
+      "statement": "Uma mudança abrupta na temperatura do ambiente afeta as partes internas da câmera termográfica, provocando um offset que causa medições incorretas.",
       "correctAnswer": true,
-      "explanation": "Mudancas na temperatura ambiente afetam a propria camera, gerando um offset no sinal e exigindo a aclimatacao previa do instrumento no local. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Mudanças na temperatura ambiente afetam a própria câmera, gerando um offset no sinal e exigindo a aclimatação prévia do instrumento no local. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para garantir que erros metrologicos nao causem falha no diagnostico, a incerteza maxima admissivel do sistema de medicao deve ser restrita a no maximo um terco da tolerancia do processo.",
+      "statement": "Para garantir que erros metrológicos não causem falha no diagnóstico, a incerteza máxima admissível do sistema de medição deve ser restrita a no máximo um terço da tolerância do processo.",
       "correctAnswer": true,
-      "explanation": "A incerteza maxima admissivel para todo o sistema deve ser da ordem de 1/3 da tolerancia do processo para garantir seguranca no diagnostico preditivo. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A incerteza máxima admissível para todo o sistema deve ser da ordem de 1/3 da tolerância do processo para garantir segurança no diagnóstico preditivo. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Para testar a resolucao angular segundo a OIML R 141, examina-se o campo de visao padrao e o campo de visao ____, empregando conjuntos fisicos normatizados.",
+      "statement": "Para testar a resolução angular segundo a OIML R 141, examina-se o campo de visão padrão e o campo de visão ____, empregando conjuntos físicos normatizados.",
       "blanks": [
         {
           "index": 0,
           "answer": "instantaneo"
         }
       ],
-      "explanation": "A recomendacao determina avaliar o campo de visao (FOV) e o campo de visao instantaneo (IFOV) para definir as caracteristicas de resolucao espacial. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "explanation": "A recomendação determina avaliar o campo de visão (FOV) e o campo de visão instantâneo (IFOV) para definir as características de resolução espacial. (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "O comportamento do ruido interno em um FPA apresenta uma distribuicao estatistica proxima de uma curva ____, permitindo conceituar o NETD atraves de seu desvio padrao.",
+      "statement": "O comportamento do ruído interno em um FPA apresenta uma distribuição estatística próxima de uma curva ____, permitindo conceituar o NETD através de seu desvio padrão.",
       "blanks": [
         {
           "index": 0,
           "answer": "gaussiana"
         }
       ],
-      "explanation": "O ruido interno possui natureza aleatoria cuja distribuicao de probabilidade se aproxima tipicamente do modelo de uma distribuicao gaussiana. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O ruído interno possui natureza aleatória cuja distribuição de probabilidade se aproxima tipicamente do modelo de uma distribuição gaussiana. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "A norma OIML R 141 determina a avaliacao da ____ a um campo nao uniforme calculando o maximo valor de diferenca de temperatura em fragmentos de um mesmo termograma.",
+      "statement": "A norma OIML R 141 determina a avaliação da ____ a um campo não uniforme calculando o máximo valor de diferença de temperatura em fragmentos de um mesmo termograma.",
       "blanks": [
         {
           "index": 0,
           "answer": "instabilidade"
         }
       ],
-      "explanation": "O ensaio afere a instabilidade a um campo nao uniforme medindo a diferenca maxima de temperatura entre fragmentos do termograma padrao. (Fonte: Proposta de metodologia para verificacao de Termovisores, CGTI)",
+      "explanation": "O ensaio afere a instabilidade a um campo não uniforme medindo a diferença máxima de temperatura entre fragmentos do termograma padrão. (Fonte: Proposta de metodologia para verificação de Termovisores, CGTI)",
       "difficulty": "hard"
     }
   ]

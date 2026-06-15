@@ -1,29 +1,29 @@
 {
   "category": "Termografia Infravermelha",
-  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categorySubtitle": "Fundamentos, aplicações em sistemas elétricos e normas de laudos",
   "categoryOrder": 3,
   "module": "Termografia em Sistemas Elétricos",
-  "moduleSubtitle": "Inspecao de subestacoes, paineis, motores, linhas e pontos quentes",
+  "moduleSubtitle": "Inspeção de subestações, painéis, motores, linhas e pontos quentes",
   "moduleOrder": 2,
   "trail": "Metodologia de Inspeção Termográfica",
   "trailOrder": 0,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual a condicao minima de carga e tempo de operacao exigida para realizar uma inspecao termografica fiel em um painel eletrico?",
+      "statement": "Qual a condição mínima de carga e tempo de operação exigida para realizar uma inspeção termográfica fiel em um painel elétrico?",
       "options": [
         "10% da carga por 30 minutos.",
-        "30% da carga por no minimo duas horas.",
+        "30% da carga por no mínimo duas horas.",
         "50% da carga por uma hora.",
-        "100% da carga imediatamente apos ligar."
+        "100% da carga imediatamente após ligar."
       ],
       "correctIndex": 1,
-      "explanation": "O painel eletrico deve estar com pelo menos 30% de sua carga e operando ha no minimo duas horas para garantir precisao termica. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "O painel elétrico deve estar com pelo menos 30% de sua carga e operando há no mínimo duas horas para garantir precisão térmica. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual norma regulamentadora de seguranca deve ser rigorosamente seguida durante o planejamento e a execucao de inspecoes termograficas?",
+      "statement": "Qual norma regulamentadora de segurança deve ser rigorosamente seguida durante o planejamento e a execução de inspeções termográficas?",
       "options": [
         "NR 10.",
         "NR 12.",
@@ -31,187 +31,187 @@
         "NR 18."
       ],
       "correctIndex": 0,
-      "explanation": "O planejamento e as acoes desenvolvidas na inspecao devem atender a todos os requisitos de seguranca da NR 10. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "O planejamento e as ações desenvolvidas na inspeção devem atender a todos os requisitos de segurança da NR 10. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que ocorre se o termografista nao ajustar corretamente a emissividade e a temperatura refletida na camera antes da medicao?",
+      "statement": "O que ocorre se o termografista não ajustar corretamente a emissividade e a temperatura refletida na câmera antes da medição?",
       "options": [
-        "A camera corrige automaticamente pelo autofoco continuo.",
-        "A imagem congela e a camera impede o registro termografico.",
-        "Ocorrem desvios de medicao que geram erros de diagnostico.",
-        "O termovisor desliga instantaneamente por seguranca termica."
+        "A câmera corrige automaticamente pelo autofoco contínuo.",
+        "A imagem congela e a câmera impede o registro termográfico.",
+        "Ocorrem desvios de medição que geram erros de diagnóstico.",
+        "O termovisor desliga instantaneamente por segurança térmica."
       ],
       "correctIndex": 2,
-      "explanation": "Parametros incorretos geram desvios de medicao que causam erros significativos de avaliacao e diagnostico. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "explanation": "Parâmetros incorretos geram desvios de medição que causam erros significativos de avaliação e diagnóstico. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a principal diferenca da analise termografica quantitativa em relacao a analise qualitativa?",
+      "statement": "Qual é a principal diferença da análise termográfica quantitativa em relação à análise qualitativa?",
       "options": [
-        "A quantitativa exige saber a temperatura exata do componente, enquanto a qualitativa foca na diferenca de padrao visual.",
-        "A quantitativa e feita apenas em paineis desenergizados e bloqueados.",
-        "A quantitativa usa apenas cameras acusticas sem display de imagem.",
-        "A quantitativa nao exige conhecimento de termografia do operador."
+        "A quantitativa exige saber a temperatura exata do componente, enquanto a qualitativa foca na diferença de padrão visual.",
+        "A quantitativa é feita apenas em painéis desenergizados e bloqueados.",
+        "A quantitativa usa apenas câmeras acústicas sem display de imagem.",
+        "A quantitativa não exige conhecimento de termografia do operador."
       ],
       "correctIndex": 0,
-      "explanation": "A analise quantitativa busca a temperatura exata do componente, exigindo cameras de melhor resolucao e rigorosos ajustes. (Fonte: Tipos de analise termografica em painel eletrico)",
+      "explanation": "A análise quantitativa busca a temperatura exata do componente, exigindo câmeras de melhor resolução e rigorosos ajustes. (Fonte: Tipos de análise termográfica em painel elétrico)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na inspecao termografica de paineis eletricos, por que a distancia de medicao de 1 metro e frequentemente adotada e recomendada?",
+      "statement": "Na inspeção termográfica de painéis elétricos, por que a distância de medição de 1 metro é frequentemente adotada e recomendada?",
       "options": [
-        "Para anular a transmitancia atmosferica do gas nitrogenio no ambiente.",
-        "Por ser distante o suficiente para seguranca e proxima o bastante para minimizar efeitos de variaveis espurias.",
-        "Para facilitar o calculo algoritmico da resistencia de contato interno.",
-        "Porque as lentes de termovisores industriais nao focam abaixo dessa exata distancia."
+        "Para anular a transmitância atmosférica do gás nitrogênio no ambiente.",
+        "Por ser distante o suficiente para segurança e próxima o bastante para minimizar efeitos de variáveis espúrias.",
+        "Para facilitar o cálculo algorítmico da resistência de contato interno.",
+        "Porque as lentes de termovisores industriais não focam abaixo dessa exata distância."
       ],
       "correctIndex": 1,
-      "explanation": "A distancia de 1 metro garante seguranca operacional e minimiza efeitos de variaveis espurias na imagem capturada. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "A distância de 1 metro garante segurança operacional e minimiza efeitos de variáveis espúrias na imagem capturada. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que indica uma diferenca elevada de temperatura em apenas uma das fases de um sistema trifasico durante a inspecao qualitativa?",
+      "statement": "O que indica uma diferença elevada de temperatura em apenas uma das fases de um sistema trifásico durante a inspeção qualitativa?",
       "options": [
-        "E o comportamento fisico normal do efeito Joule tridimensional.",
-        "Indica uma anomalia, pois as tres fases deveriam estar equilibradas termicamente.",
-        "Mostra que a camera esta descalibrada para o espectro visivel lateral.",
-        "Confirma que o painel eletrico atingiu o equilibrio termodinamico perfeito."
+        "É o comportamento físico normal do efeito Joule tridimensional.",
+        "Indica uma anomalia, pois as três fases deveriam estar equilibradas termicamente.",
+        "Mostra que a câmera está descalibrada para o espectro visível lateral.",
+        "Confirma que o painel elétrico atingiu o equilíbrio termodinâmico perfeito."
       ],
       "correctIndex": 1,
-      "explanation": "Uma diferenca acentuada de temperatura em apenas uma fase de um circuito trifasico e um forte indicio de anomalia. (Fonte: Tipos de analise termografica em painel eletrico)",
+      "explanation": "Uma diferença acentuada de temperatura em apenas uma fase de um circuito trifásico é um forte indício de anomalia. (Fonte: Tipos de análise termográfica em painel elétrico)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a norma ABNT NBR 15572, qual e o papel definido para o assistente qualificado durante a inspecao termografica?",
+      "statement": "Segundo a norma ABNT NBR 15572, qual é o papel definido para o assistente qualificado durante a inspeção termográfica?",
       "options": [
-        "Emitir e assinar o laudo termografico final da inspecao tecnica.",
-        "Operar a camera termica e calcular a emissividade exata da superficie.",
-        "Operar o equipamento inspecionado e seguir os requisitos de seguranca da NR 10.",
-        "Limpar ativamente os barramentos energizados para melhorar a visao da camera."
+        "Emitir e assinar o laudo termográfico final da inspeção técnica.",
+        "Operar a câmera térmica e calcular a emissividade exata da superfície.",
+        "Operar o equipamento inspecionado e seguir os requisitos de segurança da NR 10.",
+        "Limpar ativamente os barramentos energizados para melhorar a visão da câmera."
       ],
       "correctIndex": 2,
-      "explanation": "O assistente qualificado e a pessoa que opera o equipamento inspecionado seguindo as normas de seguranca como a NR 10. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "O assistente qualificado é a pessoa que opera o equipamento inspecionado seguindo as normas de segurança como a NR 10. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como o criterio Delta T classifica a gravidade de uma anomalia termica em equipamentos eletricos inspecionados?",
+      "statement": "Como o critério Delta T classifica a gravidade de uma anomalia térmica em equipamentos elétricos inspecionados?",
       "options": [
         "Comparando a temperatura refletida no local com o IFOV nominal do termovisor.",
-        "Multiplicando a temperatura maxima aparente pela corrente nominal da placa.",
-        "Analisando a variacao de temperatura (Delta T) entre um elemento e outro componente similar.",
+        "Multiplicando a temperatura máxima aparente pela corrente nominal da placa.",
+        "Analisando a variação de temperatura (Delta T) entre um elemento e outro componente similar.",
         "Subtraindo a umidade relativa percentual do ar da temperatura do componente focado."
       ],
       "correctIndex": 2,
-      "explanation": "A gravidade da anomalia e classificada pela variacao de temperatura (Delta T) em comparacao com outro elemento similar e saudavel. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "A gravidade da anomalia é classificada pela variação de temperatura (Delta T) em comparação com outro elemento similar e saudável. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a elevacao de temperatura de um componente inspecionado em carga parcial deve ser corrigida metodologicamente para a referencia de plena carga?",
+      "statement": "Como a elevação de temperatura de um componente inspecionado em carga parcial deve ser corrigida metodologicamente para a referência de plena carga?",
       "options": [
-        "Multiplicando-se a temperatura medida pela raiz quadrada da tensao nominal do barramento.",
-        "Usando uma equacao que relaciona a elevacao medida com a razao entre a corrente nominal e a de teste, elevada a um expoente especifico.",
+        "Multiplicando-se a temperatura medida pela raiz quadrada da tensão nominal do barramento.",
+        "Usando uma equação que relaciona a elevação medida com a razão entre a corrente nominal e a de teste, elevada a um expoente específico.",
         "Somando-se 30 graus Celsius ao valor lido de forma estritamente linear e constante.",
-        "Reduzindo a emissividade pela metade e refazendo a medicao instantanea no termovisor."
+        "Reduzindo a emissividade pela metade e refazendo a medição instantânea no termovisor."
       ],
       "correctIndex": 1,
-      "explanation": "A elevacao termica e corrigida multiplicando a medicao pela relacao de correntes nominal e de teste elevada a um coeficiente especifico. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A elevação térmica é corrigida multiplicando a medição pela relação de correntes nominal e de teste elevada a um coeficiente específico. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em um relatorio de inspecao termografica estruturado, o que deve constar obrigatoriamente na secao de Resultados?",
+      "statement": "Em um relatório de inspeção termográfica estruturado, o que deve constar obrigatoriamente na seção de Resultados?",
       "options": [
         "Apenas a data, a hora e o nome do assistente qualificado presente no ensaio.",
-        "A lista de EPIs usados e os modelos numericos de cadeados de bloqueio aplicados.",
-        "As imagens termograficas com as anomalias destacadas e a descricao detalhada de cada uma.",
-        "O resumo fotografico das acoes corretivas mecanicas ja finalizadas pela manutencao."
+        "A lista de EPIs usados e os modelos numéricos de cadeados de bloqueio aplicados.",
+        "As imagens termográficas com as anomalias destacadas e a descrição detalhada de cada uma.",
+        "O resumo fotográfico das ações corretivas mecânicas já finalizadas pela manutenção."
       ],
       "correctIndex": 2,
-      "explanation": "A secao de resultados deve apresentar as imagens termograficas com as anomalias destacadas e descritas detalhadamente. (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+      "explanation": "A seção de resultados deve apresentar as imagens termográficas com as anomalias destacadas e descritas detalhadamente. (Fonte: Como Fazer um Relatório de Inspeção Termográfica, GNR Ambiental)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Na inspecao termografica em campo, o angulo de visada em relacao a superficie do objeto condutor nao exerce nenhuma influencia e independe de limite direcional para evitar erros de medicao.",
+      "statement": "Na inspeção termográfica em campo, o ângulo de visada em relação à superfície do objeto condutor não exerce nenhuma influência e independe de limite direcional para evitar erros de medição.",
       "correctAnswer": false,
-      "explanation": "A emissividade varia com o angulo de emissao e angulos de visada maiores que 45 graus introduzem erros significativos na medicao termica. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A emissividade varia com o ângulo de emissão e ângulos de visada maiores que 45 graus introduzem erros significativos na medição térmica. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Na inspecao qualitativa por comparacao entre fases, uma diferenca de temperatura de 4 graus Celsius entre componentes semelhantes sob mesma carga ja e indicativo de comportamento anormal.",
+      "statement": "Na inspeção qualitativa por comparação entre fases, uma diferença de temperatura de 4 graus Celsius entre componentes semelhantes sob mesma carga já é indicativo de comportamento anormal.",
       "correctAnswer": true,
-      "explanation": "Diferencas de 4 graus Celsius entre componentes semelhantes comprovam comportamento anormal que deve ser urgentemente investigado. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Diferenças de 4 graus Celsius entre componentes semelhantes comprovam comportamento anormal que deve ser urgentemente investigado. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Em sistemas industriais com multiplos cabos eletricos em paralelo por fase, o condutor que apresentar a menor temperatura lida na termografia sera obrigatoriamente o cabo com funcionamento normal e saudavel.",
+      "statement": "Em sistemas industriais com múltiplos cabos elétricos em paralelo por fase, o condutor que apresentar a menor temperatura lida na termografia será obrigatoriamente o cabo com funcionamento normal e saudável.",
       "correctAnswer": false,
-      "explanation": "Em falhas de resistencia altissima de mau contato, a corrente se desvia para o cabo saudavel aquecendo-o mais, deixando o cabo defeituoso frio. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Em falhas de resistência altíssima de mau contato, a corrente se desvia para o cabo saudável aquecendo-o mais, deixando o cabo defeituoso frio. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A norma tecnica brasileira ABNT NBR 15572 estabelece as diretrizes normativas para inspecao termografica, definindo e relacionando as responsabilidades tanto do usuario final quanto do termografista.",
+      "statement": "A norma técnica brasileira ABNT NBR 15572 estabelece as diretrizes normativas para inspeção termográfica, definindo e relacionando as responsabilidades tanto do usuário final quanto do termografista.",
       "correctAnswer": true,
-      "explanation": "A ABNT NBR 15572 constitui o guia para inspecao de equipamentos relacionando responsabilidades do usuario final e do termografista atuante. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A ABNT NBR 15572 constitui o guia para inspeção de equipamentos relacionando responsabilidades do usuário final e do termografista atuante. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Na confeccao e formatacao do relatorio termografico, as secoes de Conclusao e Recomendacoes tem o proposito tecnico de registrar exclusivamente os parametros matematicos de calibracao laboratorial da camera infravermelha.",
+      "statement": "Na confecção e formatação do relatório termográfico, as seções de Conclusão e Recomendações têm o propósito técnico de registrar exclusivamente os parâmetros matemáticos de calibração laboratorial da câmera infravermelha.",
       "correctAnswer": false,
-      "explanation": "A conclusao e as recomendacoes em um relatorio servem para resumir as descobertas obtidas, sugerir acoes corretivas amplas e citar medidas especificas reparadoras. (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+      "explanation": "A conclusão e as recomendações em um relatório servem para resumir as descobertas obtidas, sugerir ações corretivas amplas e citar medidas específicas reparadoras. (Fonte: Como Fazer um Relatório de Inspeção Termográfica, GNR Ambiental)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Para uma analise termica fiel a realidade operacional, o painel deve operar ininterruptamente ha no minimo duas horas e possuir ao menos ____ por cento de sua carga total no momento da inspecao preditiva.",
+      "statement": "Para uma análise térmica fiel à realidade operacional, o painel deve operar ininterruptamente há no mínimo duas horas e possuir ao menos ____ por cento de sua carga total no momento da inspeção preditiva.",
       "blanks": [
         {
           "index": 0,
           "answer": "trinta"
         }
       ],
-      "explanation": "E recomendado normativamente que o painel opere com pelo menos 30 por cento de sua carga por no minimo duas horas para garantir precisao da carga termica. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "É recomendado normativamente que o painel opere com pelo menos 30 por cento de sua carga por no mínimo duas horas para garantir precisão da carga térmica. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Durante o processo de coleta de dados no painel, a camera termica captura as ____ termograficas, que devem constar anexadas no relatorio final para exibir de modo claro e visual o mapa de calor com anomalias.",
+      "statement": "Durante o processo de coleta de dados no painel, a câmera térmica captura as ____ termográficas, que devem constar anexadas no relatório final para exibir de modo claro e visual o mapa de calor com anomalias.",
       "blanks": [
         {
           "index": 0,
           "answer": "imagens"
         }
       ],
-      "explanation": "As imagens termograficas (ou termogramas) sao pecas essenciais nos relatorios para documentar e localizar com precisao as anomalias de temperatura detectadas. (Fonte: Como Fazer um Relatorio de Inspecao Termografica, GNR Ambiental)",
+      "explanation": "As imagens termográficas (ou termogramas) são peças essenciais nos relatórios para documentar e localizar com precisão as anomalias de temperatura detectadas. (Fonte: Como Fazer um Relatório de Inspeção Termográfica, GNR Ambiental)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A metodologia baseada em avaliar a diferenca de temperatura entre dois componentes identicos submetidos exatamente a mesma carga eletrica sem necessitar da temperatura absoluta e a medicao ____.",
+      "statement": "A metodologia baseada em avaliar a diferença de temperatura entre dois componentes idênticos submetidos exatamente à mesma carga elétrica sem necessitar da temperatura absoluta é a medição ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "comparativa"
         }
       ],
-      "explanation": "O diagnostico pautado por medicoes comparativas avalia a diferenca de temperatura (Delta T) entre componentes semelhantes operando no mesmo regime eletrico. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O diagnóstico pautado por medições comparativas avalia a diferença de temperatura (Delta T) entre componentes semelhantes operando no mesmo regime elétrico. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     }
   ]

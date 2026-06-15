@@ -1,42 +1,42 @@
 {
   "category": "Qualidade da Energia",
-  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categorySubtitle": "Fundamentos, Harmônicas, Transitórios, Medição e Normas",
   "categoryOrder": 2,
   "module": "Fundamentos de Qualidade da Energia",
-  "moduleSubtitle": "Conceitos, indicadores, disturbios e legislacao",
+  "moduleSubtitle": "Conceitos, indicadores, distúrbios e legislação",
   "moduleOrder": 0,
   "trail": "Legislação e PRODIST",
   "trailOrder": 4,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual modulo do PRODIST estabelece os procedimentos relativos a qualidade do fornecimento de energia eletrica na distribuicao?",
+      "statement": "Qual módulo do PRODIST estabelece os procedimentos relativos à qualidade do fornecimento de energia elétrica na distribuição?",
       "options": [
-        "Modulo 1",
-        "Modulo 5",
-        "Modulo 6",
-        "Modulo 8"
+        "Módulo 1",
+        "Módulo 5",
+        "Módulo 6",
+        "Módulo 8"
       ],
       "correctIndex": 3,
-      "explanation": "O item 1 da Secao 8.0 do PRODIST Modulo 8 define explicitamente a qualidade do produto, do servico e comercial para o fornecimento de energia.",
+      "explanation": "O item 1 da Seção 8.0 do PRODIST Módulo 8 define explicitamente a qualidade do produto, do serviço e comercial para o fornecimento de energia.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo o PRODIST Modulo 8, as leituras de tensao em regime permanente classificam-se em tres categorias. Quais sao elas?",
+      "statement": "Segundo o PRODIST Módulo 8, as leituras de tensão em regime permanente classificam-se em três categorias. Quais são elas?",
       "options": [
-        "Alta, Media e Baixa",
-        "Constante, Variavel e Nula",
-        "Adequadas, precarias ou criticas",
-        "Primarias, secundarias e terciarias"
+        "Alta, Média e Baixa",
+        "Constante, Variável e Nula",
+        "Adequadas, precárias ou críticas",
+        "Primárias, secundárias e terciárias"
       ],
       "correctIndex": 2,
-      "explanation": "O item 19 do PRODIST Modulo 8 classifica as leituras associadas a tensao de referencia em tres categorias: adequadas, precarias ou criticas.",
+      "explanation": "O item 19 do PRODIST Módulo 8 classifica as leituras associadas à tensão de referência em três categorias: adequadas, precárias ou críticas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para a composicao dos indicadores individuais de tensao DRP e DRC, qual e o numero de leituras validas que deve ser considerado em um ciclo de medicao?",
+      "statement": "Para a composição dos indicadores individuais de tensão DRP e DRC, qual é o número de leituras válidas que deve ser considerado em um ciclo de medição?",
       "options": [
         "100 leituras",
         "500 leituras",
@@ -44,12 +44,12 @@
         "2016 leituras"
       ],
       "correctIndex": 2,
-      "explanation": "O item 26.2 do PRODIST Modulo 8 determina que para a composicao se deve considerar o registro exato de 1008 leituras validas.",
+      "explanation": "O item 26.2 do PRODIST Módulo 8 determina que para a composição se deve considerar o registro exato de 1008 leituras válidas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quais sao os limites fixos estabelecidos pelo PRODIST para os indicadores de tensao DRP e DRC, respectivamente?",
+      "statement": "Quais são os limites fixos estabelecidos pelo PRODIST para os indicadores de tensão DRP e DRC, respectivamente?",
       "options": [
         "5 por cento e 1 por cento",
         "3 por cento e 0,5 por cento",
@@ -57,161 +57,161 @@
         "8 por cento e 2 por cento"
       ],
       "correctIndex": 1,
-      "explanation": "O item 28 do PRODIST Modulo 8 define claramente os limites: DRPLimite igual a 3 por cento e DRCLimite igual a 0,5 por cento.",
+      "explanation": "O item 28 do PRODIST Módulo 8 define claramente os limites: DRPLimite igual a 3 por cento e DRCLimite igual a 0,5 por cento.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que a regulamentacao exige quando a distribuidora constata violacao dos limites de DRP ou DRC em uma unidade consumidora?",
+      "statement": "O que a regulamentação exige quando a distribuidora constata violação dos limites de DRP ou DRC em uma unidade consumidora?",
       "options": [
         "Deve cancelar o contrato de fornecimento imediatamente.",
-        "Deve emitir multa para o consumidor causador do disturbio.",
-        "Deve compensar os titulares das unidades consumidoras no prazo maximo de 2 meses.",
-        "Deve estornar o valor total da ultima fatura de energia."
+        "Deve emitir multa para o consumidor causador do distúrbio.",
+        "Deve compensar os titulares das unidades consumidoras no prazo máximo de 2 meses.",
+        "Deve estornar o valor total da última fatura de energia."
       ],
       "correctIndex": 2,
-      "explanation": "O item 31 do PRODIST Modulo 8 estabelece que o valor da compensacao deve ser creditado na fatura no prazo maximo de 2 meses subsequentes.",
+      "explanation": "O item 31 do PRODIST Módulo 8 estabelece que o valor da compensação deve ser creditado na fatura no prazo máximo de 2 meses subsequentes.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual regra se aplica legalmente a tensao contratada para os usuarios finais atendidos em tensao inferior a 2,3 kV?",
+      "statement": "Qual regra se aplica legalmente à tensão contratada para os usuários finais atendidos em tensão inferior a 2,3 kV?",
       "options": [
-        "Deve situar-se entre 95 e 105 por cento da tensao nominal livremente.",
-        "Deve ser exatamente a tensao nominal do sistema padronizado.",
-        "Sera sempre igual a tensao medida no ponto de acoplamento em vazio.",
-        "Nao possui um valor nominal definido normativamente, dependendo do transformador local."
+        "Deve situar-se entre 95 e 105 por cento da tensão nominal livremente.",
+        "Deve ser exatamente a tensão nominal do sistema padronizado.",
+        "Será sempre igual à tensão medida no ponto de acoplamento em vazio.",
+        "Não possui um valor nominal definido normativamente, dependendo do transformador local."
       ],
       "correctIndex": 1,
-      "explanation": "A alinea c do item 22 do PRODIST Modulo 8 determina textualmente que a tensao a ser contratada em tensao inferior a 2,3 kV deve ser a tensao nominal do sistema.",
+      "explanation": "A alínea c do item 22 do PRODIST Módulo 8 determina textualmente que a tensão a ser contratada em tensão inferior a 2,3 kV deve ser a tensão nominal do sistema.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante o tratamento de reclamacoes de um usuario sem medicao permanente, caso a inspecao tecnica inicial constate por leitura instantanea que o nivel esta normal, o que o consumidor tem o direito de fazer?",
+      "statement": "Durante o tratamento de reclamações de um usuário sem medição permanente, caso a inspeção técnica inicial constate por leitura instantânea que o nível está normal, o que o consumidor tem o direito de fazer?",
       "options": [
-        "E obrigado a aceitar o laudo instantaneo sem novos questionamentos a distribuidora.",
-        "Pode recorrer diretamente a Aneel sem possibilidade de nova verificacao tecnica.",
-        "Tem o direito legal de solicitar a medicao prolongada de 168 horas no prazo de 5 dias.",
-        "Pode exigir a instalacao de um filtro ativo na entrada custeado pelo faturamento da concessionaria."
+        "É obrigado a aceitar o laudo instantâneo sem novos questionamentos à distribuidora.",
+        "Pode recorrer diretamente à Aneel sem possibilidade de nova verificação técnica.",
+        "Tem o direito legal de solicitar a medição prolongada de 168 horas no prazo de 5 dias.",
+        "Pode exigir a instalação de um filtro ativo na entrada custeado pelo faturamento da concessionária."
       ],
       "correctIndex": 2,
-      "explanation": "O item 121 (b) do PRODIST Modulo 8 garante ao usuario ser informado sobre o seu direito de solicitar, no prazo de 5 dias, a medicao completa de 168 horas.",
+      "explanation": "O item 121 (b) do PRODIST Módulo 8 garante ao usuário ser informado sobre o seu direito de solicitar, no prazo de 5 dias, a medição completa de 168 horas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em relacao a alocacao de custos, o que acontece caso o usuario solicite a instalacao de um sistema de medicao permanente com funcionalidades focadas em qualidade da energia?",
+      "statement": "Em relação à alocação de custos, o que acontece caso o usuário solicite a instalação de um sistema de medição permanente com funcionalidades focadas em qualidade da energia?",
       "options": [
-        "A diferenca de custo entre o sistema especifico e o sistema convencional e de responsabilidade exclusiva do usuario interessado.",
-        "A distribuidora devera absorver compulsoriamente todos os custos de aquisicao e instalacao do medidor avancado.",
-        "A Aneel subsidia o custo tecnologico adicional por meio do rateio na tarifa de uso do sistema.",
-        "O usuario devera pagar um valor parametrizado equivalente a dez vezes o valor do Encargo de Conexao."
+        "A diferença de custo entre o sistema específico e o sistema convencional é de responsabilidade exclusiva do usuário interessado.",
+        "A distribuidora deverá absorver compulsoriamente todos os custos de aquisição e instalação do medidor avançado.",
+        "A Aneel subsidia o custo tecnológico adicional por meio do rateio na tarifa de uso do sistema.",
+        "O usuário deverá pagar um valor parametrizado equivalente a dez vezes o valor do Encargo de Conexão."
       ],
       "correctIndex": 0,
-      "explanation": "O item 112 do PRODIST Modulo 8 define expressamente que a diferenca de custo entre o sistema especifico e o sistema convencional e de responsabilidade do usuario.",
+      "explanation": "O item 112 do PRODIST Módulo 8 define expressamente que a diferença de custo entre o sistema específico e o sistema convencional é de responsabilidade do usuário.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o procedimento tecnico exigido caso ocorra uma Variacao de Tensao de Curta Duracao (VTCD) no decorrer das medicoes para analise de nivel de tensao em regime permanente?",
+      "statement": "Qual é o procedimento técnico exigido caso ocorra uma Variação de Tensão de Curta Duração (VTCD) no decorrer das medições para análise de nível de tensão em regime permanente?",
       "options": [
-        "O periodo de medicao inteiro de 168 horas deve ser cancelado automaticamente.",
-        "A leitura instantanea e mantida inalterada e o indicador DRC assume o pico do valor maximo.",
-        "A distribuidora anula a falha e substitui seu registro final pela media aritmetica das tensoes criticas do periodo.",
-        "O intervalo afetado de medicao de 10 minutos deve ser expurgado do banco e substituido por igual numero de leituras validas."
+        "O período de medição inteiro de 168 horas deve ser cancelado automaticamente.",
+        "A leitura instantânea é mantida inalterada e o indicador DRC assume o pico do valor máximo.",
+        "A distribuidora anula a falha e substitui seu registro final pela média aritmética das tensões críticas do período.",
+        "O intervalo afetado de medição de 10 minutos deve ser expurgado do banco e substituído por igual número de leituras válidas."
       ],
       "correctIndex": 3,
-      "explanation": "O item 87 do PRODIST Modulo 8 estabelece que, na ocorrencia de variacoes temporarias, o intervalo de medicao de 10 minutos deve ser expurgado e substituido por igual numero de leituras validas.",
+      "explanation": "O item 87 do PRODIST Módulo 8 estabelece que, na ocorrência de variações temporárias, o intervalo de medição de 10 minutos deve ser expurgado e substituído por igual número de leituras válidas.",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "No computo da equacao de compensacao financeira por violacao dos limites de DRP ou DRC (Equacao 6), qual e o significado da sigla EUSD?",
+      "statement": "No cômputo da equação de compensação financeira por violação dos limites de DRP ou DRC (Equação 6), qual é o significado da sigla EUSD?",
       "options": [
-        "Energia Util Sem Distorcao.",
-        "Estatistica de Unidades Submetidas a Disturbios.",
-        "Encargo de Uso do Sistema de Distribuicao.",
-        "Elevacao Unica de Sobretensao de Distribuicao."
+        "Energia Útil Sem Distorção.",
+        "Estatística de Unidades Submetidas a Distúrbios.",
+        "Encargo de Uso do Sistema de Distribuição.",
+        "Elevação Única de Sobretensão de Distribuição."
       ],
       "correctIndex": 2,
-      "explanation": "Conforme descrito logo abaixo da Equacao 6 no item 29 do PRODIST Modulo 8, EUSD designa o valor do Encargo de Uso do Sistema de Distribuicao.",
+      "explanation": "Conforme descrito logo abaixo da Equação 6 no item 29 do PRODIST Módulo 8, EUSD designa o valor do Encargo de Uso do Sistema de Distribuição.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A conformidade basica da tensao em regime permanente definida no PRODIST fundamenta-se em comparar o valor de tensao medido no ponto de conexao com as faixas parametrizadas como adequadas, precarias e criticas.",
+      "statement": "A conformidade básica da tensão em regime permanente definida no PRODIST fundamenta-se em comparar o valor de tensão medido no ponto de conexão com as faixas parametrizadas como adequadas, precárias e críticas.",
       "correctAnswer": true,
-      "explanation": "O item 13 do PRODIST Modulo 8 afirma diretamente que a conformidade refere-se a essa exata comparacao entre a medicao e os niveis especificados.",
+      "explanation": "O item 13 do PRODIST Módulo 8 afirma diretamente que a conformidade refere-se a essa exata comparação entre a medição e os níveis especificados.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O sorteio publico da amostra de unidades consumidoras obrigatorias para as campanhas de medicao amostral de tensao realizadas pela ANEEL tem como base a chamada Base de Dados Geograficas das Distribuidoras (BDGD).",
+      "statement": "O sorteio público da amostra de unidades consumidoras obrigatórias para as campanhas de medição amostral de tensão realizadas pela ANEEL tem como base a chamada Base de Dados Geográficas das Distribuidoras (BDGD).",
       "correctAnswer": true,
-      "explanation": "O item 92 do PRODIST Modulo 8 indica formalmente que o sorteio efetuado pela ANEEL usa os dados contidos na BDGD informada pelas distribuidoras.",
+      "explanation": "O item 92 do PRODIST Módulo 8 indica formalmente que o sorteio efetuado pela ANEEL usa os dados contidos na BDGD informada pelas distribuidoras.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para fins legais de instrumentacao, os medidores de Qualidade de Energia rotulados como Classe S sao os unicos equipamentos compulsorios indicados e permitidos para uso em situacoes que envolvam disputas judiciais com o consumidor.",
+      "statement": "Para fins legais de instrumentação, os medidores de Qualidade de Energia rotulados como Classe S são os únicos equipamentos compulsórios indicados e permitidos para uso em situações que envolvam disputas judiciais com o consumidor.",
       "correctAnswer": false,
-      "explanation": "O informativo da KRA2 Energia sobre o PRODIST especifica ao contrario que e o medidor de Classe A o dispositivo obrigatorio em aplicacoes envolvendo disputas judiciais.",
+      "explanation": "O informativo da KRA2 Energia sobre o PRODIST especifica ao contrário que é o medidor de Classe A o dispositivo obrigatório em aplicações envolvendo disputas judiciais.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Nos calculos detalhados em casos em que ocorra uma troca de titularidade da unidade consumidora durante um mes em que uma compensacao de qualidade e atestadamente devida, o valor fica retido ate o fechamento do proximo ciclo amostral integral.",
+      "statement": "Nos cálculos detalhados em casos em que ocorra uma troca de titularidade da unidade consumidora durante um mês em que uma compensação de qualidade é atestadamente devida, o valor fica retido até o fechamento do próximo ciclo amostral integral.",
       "correctAnswer": false,
-      "explanation": "O item 34 do PRODIST Modulo 8 assegura que a distribuidora deve creditar o valor da compensacao integralmente ao novo titular assumido na unidade consumidora.",
+      "explanation": "O item 34 do PRODIST Módulo 8 assegura que a distribuidora deve creditar o valor da compensação integralmente ao novo titular assumido na unidade consumidora.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Na obtencao de dados dos indicadores individuais de tensao em regime permanente, a amostra necessaria para compilar os indicadores mensais requer precisamente o somatorio final equivalente ao periodo de 168 horas.",
+      "statement": "Na obtenção de dados dos indicadores individuais de tensão em regime permanente, a amostra necessária para compilar os indicadores mensais requer precisamente o somatório final equivalente ao período de 168 horas.",
       "correctAnswer": true,
-      "explanation": "De acordo com o item 26.2 do PRODIST Modulo 8, exige-se o registro de 1008 leituras de 10 minutos cada, totalizando a conversao para exatas 168 horas na metrica integral.",
+      "explanation": "De acordo com o item 26.2 do PRODIST Módulo 8, exige-se o registro de 1008 leituras de 10 minutos cada, totalizando a conversão para exatas 168 horas na métrica integral.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Os padroes normativos para a formacao correta da amostra de leitura DRP e DRC ditam que se deve recolher os registros integralizando blocos estatisticos fixos e consecutivos com a duracao exata de ____ minutos cada.",
+      "statement": "Os padrões normativos para a formação correta da amostra de leitura DRP e DRC ditam que se deve recolher os registros integralizando blocos estatísticos fixos e consecutivos com a duração exata de ____ minutos cada.",
       "blanks": [
         {
           "index": 0,
           "answer": "10"
         }
       ],
-      "explanation": "O item 26.2 do PRODIST Modulo 8 estipula que a composicao de indicadores individuais utiliza registros em intervalos consecutivos de 10 minutos.",
+      "explanation": "O item 26.2 do PRODIST Módulo 8 estipula que a composição de indicadores individuais utiliza registros em intervalos consecutivos de 10 minutos.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Quando requerida pelo usuario interessado, a montagem e ativacao de um sistema de medicao permanente de qualidade pelas equipes operacionais da distribuidora deve ocorrer em prazo toleravel maximo de ate ____ dias da solicitacao.",
+      "statement": "Quando requerida pelo usuário interessado, a montagem e ativação de um sistema de medição permanente de qualidade pelas equipes operacionais da distribuidora deve ocorrer em prazo tolerável máximo de até ____ dias da solicitação.",
       "blanks": [
         {
           "index": 0,
           "answer": "60"
         }
       ],
-      "explanation": "O item 113 do PRODIST Modulo 8 determina que o prazo concedido para a instalacao do sistema de medicao permanente pela distribuidora e de ate 60 dias.",
+      "explanation": "O item 113 do PRODIST Módulo 8 determina que o prazo concedido para a instalação do sistema de medição permanente pela distribuidora é de até 60 dias.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "No trato normativo das informacoes das redes, as distribuidoras devem ser incumbidas de manter disponivel em acervo digital todo o relatorio e log com os dados pormenorizados de eventos e medicoes pelo periodo obrigatorio continuo de ____ anos.",
+      "statement": "No trato normativo das informações das redes, as distribuidoras devem ser incumbidas de manter disponível em acervo digital todo o relatório e log com os dados pormenorizados de eventos e medições pelo período obrigatório contínuo de ____ anos.",
       "blanks": [
         {
           "index": 0,
           "answer": "10"
         }
       ],
-      "explanation": "Conforme assinalado repetidamente nos itens 107, 118, 122 e 132 do PRODIST Modulo 8, o prazo de armazenamento exigido e de no minimo 10 anos.",
+      "explanation": "Conforme assinalado repetidamente nos itens 107, 118, 122 e 132 do PRODIST Módulo 8, o prazo de armazenamento exigido é de no mínimo 10 anos.",
       "difficulty": "hard"
     }
   ]

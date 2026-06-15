@@ -10,72 +10,72 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que define fisicamente a resistividade eletrica do solo de acordo com as referencias tecnicas de projeto de aterramento?",
+      "statement": "O que define fisicamente a resistividade elétrica do solo de acordo com as referências técnicas de projeto de aterramento?",
       "options": [
-        "A resistencia medida diretamente entre as duas pontas de uma unica haste de aterramento.",
-        "A resistencia entre faces opostas de um volume de solo consistindo em um cubo homogeneo e isotropo cuja aresta mede uma unidade de comprimento.",
-        "O grau de compactacao quimica que impede a oxidacao das malhas de cobre nu.",
-        "A capacidade de atracao eletromagnetica do solo em relacao a nuvem carregada."
+        "A resistência medida diretamente entre as duas pontas de uma única haste de aterramento.",
+        "A resistência entre faces opostas de um volume de solo consistindo em um cubo homogêneo e isotrópico cuja aresta mede uma unidade de comprimento.",
+        "O grau de compactação química que impede a oxidação das malhas de cobre nu.",
+        "A capacidade de atração eletromagnética do solo em relação à nuvem carregada."
       ],
       "correctIndex": 1,
-      "explanation": "A resistividade eletrica do solo e definida tecnicamente como a resistencia entre faces opostas de um volume de solo consistindo em um cubo homogeneo e isotropo cuja aresta mede uma unidade de comprimento. (Fonte: Capitulo XI Medicao da resistividade do solo, IEE/USP; Instituto Federal Goiano)",
+      "explanation": "A resistividade elétrica do solo é definida tecnicamente como a resistência entre faces opostas de um volume de solo consistindo em um cubo homogêneo e isotrópico cuja aresta mede uma unidade de comprimento. (Fonte: Capítulo XI Medição da resistividade do solo, IEE/USP; Instituto Federal Goiano)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O solo e um meio heterogeneo cuja capacidade de conduzir corrente varia constantemente. Quais sao os principais fatores fisicos e quimicos que influenciam diretamente a resistividade do solo?",
+      "statement": "O solo é um meio heterogêneo cuja capacidade de conduzir corrente varia constantemente. Quais são os principais fatores físicos e químicos que influenciam diretamente a resistividade do solo?",
       "options": [
-        "Apenas a profundidade das fundacoes do edificio e a inclinacao magnetica da terra.",
-        "Umidade, temperatura, concentracao de sais dissolvidos, compactacao, granulometria e composicao (tipo) do solo.",
-        "O numero de raios diretos (Ng) que atingiram a regiao nos ultimos 10 anos e o nivel de protecao LPL.",
-        "Estritamente a presenca de armaduras de concreto protendido e a distancia do mar."
+        "Apenas a profundidade das fundações do edifício e a inclinação magnética da terra.",
+        "Umidade, temperatura, concentração de sais dissolvidos, compactação, granulometria e composição (tipo) do solo.",
+        "O número de raios diretos (Ng) que atingiram a região nos últimos 10 anos e o nível de proteção LPL.",
+        "Estritamente a presença de armaduras de concreto protendido e a distância do mar."
       ],
       "correctIndex": 1,
-      "explanation": "Diversos fatores influenciam na resistividade do solo, destacando-se: tipo e composicao do solo, teor de umidade, temperatura, concentracao de sais dissolvidos na agua retida, compactacao e granulometria. (Fonte: Analise dos Efeitos de Sobretensao em Aerogeradores; Instituto Federal Goiano)",
+      "explanation": "Diversos fatores influenciam na resistividade do solo, destacando-se: tipo e composição do solo, teor de umidade, temperatura, concentração de sais dissolvidos na água retida, compactação e granulometria. (Fonte: Análise dos Efeitos de Sobretensão em Aerogeradores; Instituto Federal Goiano)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No metodo de medicao de Wenner, amplamente utilizado para prospeccao da resistividade aparente, como devem ser posicionados fisicamente os eletrodos (hastes) no solo?",
+      "statement": "No método de medição de Wenner, amplamente utilizado para prospecção da resistividade aparente, como devem ser posicionados fisicamente os eletrodos (hastes) no solo?",
       "options": [
-        "Quatro eletrodos cravados no solo, em linha reta, a mesma profundidade e igualmente espacados entre si.",
-        "Dois eletrodos cravados profundamente em cantos opostos da edificacao.",
-        "Tres eletrodos dispostos em formato de triangulo equilatero com distancias aleatorias.",
-        "Cinco eletrodos com um central de potencial e os demais formando um retangulo de corrente."
+        "Quatro eletrodos cravados no solo, em linha reta, à mesma profundidade e igualmente espaçados entre si.",
+        "Dois eletrodos cravados profundamente em cantos opostos da edificação.",
+        "Três eletrodos dispostos em formato de triângulo equilátero com distâncias aleatórias.",
+        "Cinco eletrodos com um central de potencial e os demais formando um retângulo de corrente."
       ],
       "correctIndex": 0,
-      "explanation": "Para a realizacao da medicao com o metodo de Wenner, e necessario que quatro eletrodos sejam cravados em linha, a mesma profundidade e igualmente espacados entre eles. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha, Instituto Federal Goiano)",
+      "explanation": "Para a realização da medição com o método de Wenner, é necessário que quatro eletrodos sejam cravados em linha, à mesma profundidade e igualmente espaçados entre eles. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha, Instituto Federal Goiano)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com as caracteristicas fisicas abordadas nos estudos do solo, como a presenca de umidade afeta a resistividade eletrica em um ambiente nao saturado?",
+      "statement": "De acordo com as características físicas abordadas nos estudos do solo, como a presença de umidade afeta a resistividade elétrica em um ambiente não saturado?",
       "options": [
-        "A umidade atua isolando os ions do solo, bloqueando a passagem de corrente e aumentando a resistividade.",
-        "Solos mais umidos e com presenca de agua tendem a sofrer um aumento expressivo em sua resistividade aparente.",
-        "O teor de umidade nao possui relevancia estatistica, importando apenas a compactacao mineral.",
-        "A adicao de agua (umidade) diminui a resistividade do solo, melhorando sua capacidade como sistema de aterramento."
+        "A umidade atua isolando os íons do solo, bloqueando a passagem de corrente e aumentando a resistividade.",
+        "Solos mais úmidos e com presença de água tendem a sofrer um aumento expressivo em sua resistividade aparente.",
+        "O teor de umidade não possui relevância estatística, importando apenas a compactação mineral.",
+        "A adição de água (umidade) diminui a resistividade do solo, melhorando sua capacidade como sistema de aterramento."
       ],
       "correctIndex": 3,
-      "explanation": "Em condicoes nao saturadas, o aumento da umidade de compactacao e do volume de agua diminui a resistividade do solo, tornando solos mais umidos mais adequados para sistemas de aterramento. (Fonte: Estudo da eletroresistividade aplicada, Instituto Federal Goiano)",
+      "explanation": "Em condições não saturadas, o aumento da umidade de compactação e do volume de água diminui a resistividade do solo, tornando solos mais úmidos mais adequados para sistemas de aterramento. (Fonte: Estudo da eletrorresistividade aplicada, Instituto Federal Goiano)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante a execucao pratica do metodo de Wenner com as quatro hastes instaladas no campo, como o terrometro opera eletricamente para extrair os dados e calcular a resistencia do solo?",
+      "statement": "Durante a execução prática do método de Wenner com as quatro hastes instaladas no campo, como o terrômetro opera eletricamente para extrair os dados e calcular a resistência do solo?",
       "options": [
-        "Ele aplica um intenso campo magnetico nas hastes centrais e mede a inducao nas extremidades.",
-        "Injeta uma corrente eletrica constante entre os dois eletrodos das extremidades e mede simultaneamente a diferenca de potencial entre os dois eletrodos internos.",
-        "Aplica alta tensao entre as hastes internas e mede a fuga de corrente pelas hastes externas em direcao a malha da concessionaria.",
-        "Injeta tensao em todas as hastes simultaneamente para curto-circuitar a camada superficial."
+        "Ele aplica um intenso campo magnético nas hastes centrais e mede a indução nas extremidades.",
+        "Injeta uma corrente elétrica constante entre os dois eletrodos das extremidades e mede simultaneamente a diferença de potencial entre os dois eletrodos internos.",
+        "Aplica alta tensão entre as hastes internas e mede a fuga de corrente pelas hastes externas em direção à malha da concessionária.",
+        "Injeta tensão em todas as hastes simultaneamente para curto-circuitar a camada superficial."
       ],
       "correctIndex": 1,
-      "explanation": "O terrometro injeta uma corrente eletrica de ensaio entre os eletrodos externos (C1 e C2) e, simultaneamente, mede-se a diferenca de potencial (tensao) gerada entre os eletrodos internos (P1 e P2). (Fonte: Desenvolvimento de Software para Dimensionamento de Malha; Capitulo XI, IEE/USP)",
+      "explanation": "O terrômetro injeta uma corrente elétrica de ensaio entre os eletrodos externos (C1 e C2) e, simultaneamente, mede-se a diferença de potencial (tensão) gerada entre os eletrodos internos (P1 e P2). (Fonte: Desenvolvimento de Software para Dimensionamento de Malha; Capítulo XI, IEE/USP)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para legalizar e fundamentar as medicoes dos parametros do solo no Brasil, qual e a norma tecnica da ABNT que estabelece os requisitos primarios para a medicao da resistividade e modelagem geoeletrica?",
+      "statement": "Para legalizar e fundamentar as medições dos parâmetros do solo no Brasil, qual é a norma técnica da ABNT que estabelece os requisitos primários para a medição da resistividade e modelagem geoelétrica?",
       "options": [
         "NBR 5410",
         "NBR 15751",
@@ -83,25 +83,25 @@
         "NBR 6123"
       ],
       "correctIndex": 2,
-      "explanation": "A norma ABNT NBR 7117 estabelece os parametros do solo para projetos de aterramento, definindo os metodos de medicao da resistividade e a modelagem geoeletrica/estratificacao. (Fonte: Capitulo XI Medicao da resistividade, IEE/USP; Instituto Federal Goiano)",
+      "explanation": "A norma ABNT NBR 7117 estabelece os parâmetros do solo para projetos de aterramento, definindo os métodos de medição da resistividade e a modelagem geoelétrica/estratificação. (Fonte: Capítulo XI Medição da resistividade, IEE/USP; Instituto Federal Goiano)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No Metodo de Wenner, existe uma relacao fisica entre a distancia das hastes e o alcance da avaliacao eletrica no subsolo. O valor da resistencia lida no instrumento representa teoricamente as caracteristicas do terreno ate qual profundidade aproximada?",
+      "statement": "No Método de Wenner, existe uma relação física entre a distância das hastes e o alcance da avaliação elétrica no subsolo. O valor da resistência lida no instrumento representa teoricamente as características do terreno até qual profundidade aproximada?",
       "options": [
-        "Ate uma profundidade equivalente a soma das distancias totais de todas as hastes (3a).",
-        "Ate uma profundidade cravada fisica exata do eletrodo.",
-        "Ate o lencol freatico, independente da distancia dos eletrodos.",
-        "Ate uma profundidade equivalente ao espacamento (a) estabelecido entre as hastes daquele teste."
+        "Até uma profundidade equivalente à soma das distâncias totais de todas as hastes (3a).",
+        "Até uma profundidade cravada física exata do eletrodo.",
+        "Até o lençol freático, independente da distância dos eletrodos.",
+        "Até uma profundidade equivalente ao espaçamento (a) estabelecido entre as hastes daquele teste."
       ],
       "correctIndex": 3,
-      "explanation": "O metodo de Wenner considera que a distribuicao de corrente se concentra principalmente ate uma profundidade equivalente ao espacamento a entre as hastes, interpretando o valor de resistencia como representativo da camada ate essa profundidade a. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
+      "explanation": "O método de Wenner considera que a distribuição de corrente se concentra principalmente até uma profundidade equivalente ao espaçamento a entre as hastes, interpretando o valor de resistência como representativo da camada até essa profundidade a. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O calculo da resistividade aparente pelo arranjo de Wenner envolve parametros geometricos. Quando a profundidade de cravacao dos eletrodos (b) e considerada muito menor que o espacamento (a), geralmente b <= a/10, a equacao e simplificada para:",
+      "statement": "O cálculo da resistividade aparente pelo arranjo de Wenner envolve parâmetros geométricos. Quando a profundidade de cravação dos eletrodos (b) é considerada muito menor que o espaçamento (a), geralmente b <= a/10, a equação é simplificada para:",
       "options": [
         "rho = 4*pi*a*R",
         "rho = 2*pi*a*R",
@@ -109,109 +109,109 @@
         "rho = pi*b*R"
       ],
       "correctIndex": 1,
-      "explanation": "Quando a profundidade de cravacao (b) e muito menor que o espacamento (a), o denominador da equacao aproxima-se de 2, permitindo que a equacao seja simplificada para a formula classica rho = 2*pi*a*R. (Fonte: Capitulo XI Medicao da resistividade do solo, IEE/USP; Instituto Federal Goiano)",
+      "explanation": "Quando a profundidade de cravação (b) é muito menor que o espaçamento (a), o denominador da equação aproxima-se de 2, permitindo que a equação seja simplificada para a fórmula clássica rho = 2*pi*a*R. (Fonte: Capítulo XI Medição da resistividade do solo, IEE/USP; Instituto Federal Goiano)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao avaliar o grafico da resistividade aparente (rho_a) no eixo vertical em funcao do espacamento a no eixo horizontal, o que significa na pratica uma curva que aponta para BAIXO (os valores diminuem conforme o espacamento cresce)?",
+      "statement": "Ao avaliar o gráfico da resistividade aparente (rho_a) no eixo vertical em função do espaçamento a no eixo horizontal, o que significa na prática uma curva que aponta para BAIXO (os valores diminuem conforme o espaçamento cresce)?",
       "options": [
-        "Significa que o solo e um bloco rochoso homogeneo impossivel de ser aterrado.",
-        "Indica que as camadas mais profundas sao menos resistivas (melhores condutoras) do que a camada superficial (rho1 > rho2).",
-        "Revela que ha alta concentracao de bolsoes de ar isolantes no fundo do terreno, e que a superficie conduz melhor (rho1 < rho2).",
-        "Indica que as leituras do terrometro estao obrigatoriamente defeituosas devido a inducao da rede publica."
+        "Significa que o solo é um bloco rochoso homogêneo impossível de ser aterrado.",
+        "Indica que as camadas mais profundas são menos resistivas (melhores condutoras) do que a camada superficial (rho1 > rho2).",
+        "Revela que há alta concentração de bolsões de ar isolantes no fundo do terreno, e que a superfície conduz melhor (rho1 < rho2).",
+        "Indica que as leituras do terrômetro estão obrigatoriamente defeituosas devido à indução da rede pública."
       ],
       "correctIndex": 1,
-      "explanation": "A analise da curva rho_a(a) permite identificar o comportamento em profundidade: se a resistividade aparente diminui com o aumento do espacamento, significa que a camada superficial e mais resistiva que a camada profunda, indicando a relacao rho1 > rho2. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
+      "explanation": "A análise da curva rho_a(a) permite identificar o comportamento em profundidade: se a resistividade aparente diminui com o aumento do espaçamento, significa que a camada superficial é mais resistiva que a camada profunda, indicando a relação rho1 > rho2. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quando softwares ou metodos analiticos constroem as curvas graficas de estratificacao em duas camadas, como o valor da resistividade pura da primeira camada (rho1) costuma ser extraido diretamente da curva de campo (rho x a)?",
+      "statement": "Quando softwares ou métodos analíticos constroem as curvas gráficas de estratificação em duas camadas, como o valor da resistividade pura da primeira camada (rho1) costuma ser extraído diretamente da curva de campo (rho x a)?",
       "options": [
-        "Calculando a media simples de todas as leituras ignorando as distancias.",
-        "Obtendo a tangente no meio exato da curva em relacao as hastes maiores.",
-        "Atraves do prolongamento da curva gerada em direcao a esquerda ate interceptar o eixo das ordenadas (onde o espacamento tende a zero).",
-        "Mapeando a assintota paralela no final das grandes leituras no horizonte direito."
+        "Calculando a média simples de todas as leituras ignorando as distâncias.",
+        "Obtendo a tangente no meio exato da curva em relação às hastes maiores.",
+        "Através do prolongamento da curva gerada em direção à esquerda até interceptar o eixo das ordenadas (onde o espaçamento tende a zero).",
+        "Mapeando a assíntota paralela no final das grandes leituras no horizonte direito."
       ],
       "correctIndex": 2,
-      "explanation": "A determinacao grafica de rho1 e realizada a partir do prolongamento da curva de resistividade gerada ate interceptar o eixo das ordenadas, ou seja, o ponto onde o espacamento tenderia a 0. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
+      "explanation": "A determinação gráfica de rho1 é realizada a partir do prolongamento da curva de resistividade gerada até interceptar o eixo das ordenadas, ou seja, o ponto onde o espaçamento tenderia a 0. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Quando se compacta mecanicamente um solo mantendo sua umidade estritamente constante, o indice de vazios diminui e o grau de saturacao por volume se eleva, o que resulta em uma diminuicao benefica do valor de eletrorresistividade daquela porcao de solo.",
+      "statement": "Quando se compacta mecanicamente um solo mantendo sua umidade estritamente constante, o índice de vazios diminui e o grau de saturação por volume se eleva, o que resulta em uma diminuição benéfica do valor de eletrorresistividade daquela porção de solo.",
       "correctAnswer": true,
-      "explanation": "Quando se mantem a mesma umidade e altera-se o grau de compactacao, o solo tem o seu grau de saturacao aumentado (ja que o numero de vazios e diminuido), o que faz a eletrorresistividade do solo diminuir. (Fonte: Estudo da eletroresistividade aplicada a analises de solos)",
+      "explanation": "Quando se mantém a mesma umidade e altera-se o grau de compactação, o solo tem o seu grau de saturação aumentado (já que o número de vazios é diminuído), o que faz a eletrorresistividade do solo diminuir. (Fonte: Estudo da eletrorresistividade aplicada a análises de solos)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A estratificacao baseia-se no fato natural de que as formacoes geologicas costumam depositar os materiais do solo em camadas horizontais. O modelo matematico simplificado de duas camadas e considerado suficiente para representar e abranger com fidelidade a imensa maioria dos casos praticos de aterramento.",
+      "statement": "A estratificação baseia-se no fato natural de que as formações geológicas costumam depositar os materiais do solo em camadas horizontais. O modelo matemático simplificado de duas camadas é considerado suficiente para representar e abranger com fidelidade a imensa maioria dos casos práticos de aterramento.",
       "correctAnswer": true,
-      "explanation": "Na maioria dos casos, os solos nao sao homogeneos e estratificam-se em camadas. O modelo de duas camadas destaca-se por abranger a maior parte dos casos praticos onde o solo possui caracteristicas diferentes em profundidade. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
+      "explanation": "Na maioria dos casos, os solos não são homogêneos e estratificam-se em camadas. O modelo de duas camadas destaca-se por abranger a maior parte dos casos práticos onde o solo possui características diferentes em profundidade. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O aumento severo da temperatura do solo durante epocas de insolacao extrema tem a funcao de otimizar a atividade ionica, contribuindo para que a resistividade final do solo diminua radicalmente e proteja melhor a malha.",
+      "statement": "O aumento severo da temperatura do solo durante épocas de insolação extrema tem a função de otimizar a atividade iônica, contribuindo para que a resistividade final do solo diminua radicalmente e proteja melhor a malha.",
       "correctAnswer": false,
-      "explanation": "A afirmacao de beneficio pelo calor isolado e incorreta, pois o primeiro aspecto pratico da elevacao de temperatura e que ela faz a agua intersticial evaporar, resultando em menor umidade e aumento vertiginoso da resistividade quando o solo seca (ramo seco). (Fonte: Instituto Federal Goiano)",
+      "explanation": "A afirmação de benefício pelo calor isolado é incorreta, pois o primeiro aspecto prático da elevação de temperatura é que ela faz a água intersticial evaporar, resultando em menor umidade e aumento vertiginoso da resistividade quando o solo seca (ramo seco). (Fonte: Instituto Federal Goiano)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Em avaliacoes tecnicas e laudos de adequacao, a medicao feita por amostragem fisica de pequenas porcoes de terra em laboratorio pode ser adotada para substituir integralmente a execucao do metodo de medicao local de Wenner no canteiro da obra do SPDA.",
+      "statement": "Em avaliações técnicas e laudos de adequação, a medição feita por amostragem física de pequenas porções de terra em laboratório pode ser adotada para substituir integralmente a execução do método de medição local de Wenner no canteiro da obra do SPDA.",
       "correctAnswer": false,
-      "explanation": "O metodo de amostragem laboratorial e utilizado geralmente apenas como criterio comparativo. A medicao local in loco (Metodo de Wenner) e indispensavel para extrair a modelagem e projetar a dissipacao real das correntes em grandes volumes de terra, nao podendo ser substituida. (Fonte: Capitulo XI, IEE/USP; Desenvolvimento de Software)",
+      "explanation": "O método de amostragem laboratorial é utilizado geralmente apenas como critério comparativo. A medição local in loco (Método de Wenner) é indispensável para extrair a modelagem e projetar a dissipação real das correntes em grandes volumes de terra, não podendo ser substituída. (Fonte: Capítulo XI, IEE/USP; Desenvolvimento de Software)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Na formulacao do modelo matematico de multiplas camadas (e tambem nas curvas de Endrenyi), o parametro denominado coeficiente de divergencia (beta) e calculado pela razao fracionaria entre a resistividade da camada mais profunda e a resistividade da camada superior (beta = rho2 / rho1).",
+      "statement": "Na formulação do modelo matemático de múltiplas camadas (e também nas curvas de Endrenyi), o parâmetro denominado coeficiente de divergência (beta) é calculado pela razão fracionária entre a resistividade da camada mais profunda e a resistividade da camada superior (beta = rho2 / rho1).",
       "correctAnswer": true,
-      "explanation": "O coeficiente de divergencia beta representa exatamente a razao entre a resistividade da camada mais profunda do solo (rho2) e a resistividade equivalente das camadas superiores (rho1), operado pela equacao beta = rho2 / rho1. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
+      "explanation": "O coeficiente de divergência beta representa exatamente a razão entre a resistividade da camada mais profunda do solo (rho2) e a resistividade equivalente das camadas superiores (rho1), operado pela equação beta = rho2 / rho1. (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "A resistividade eletrica do solo, que quantifica sua oposicao a conducao de descargas e e comumente representada pela letra grega rho, e expressa em projetos e equipamentos utilizando a unidade de grandeza fisica ____-metro (abreviado por ohm.m).",
+      "statement": "A resistividade elétrica do solo, que quantifica sua oposição à condução de descargas e é comumente representada pela letra grega rho, é expressa em projetos e equipamentos utilizando a unidade de grandeza física ____-metro (abreviado por ohm.m).",
       "blanks": [
         {
           "index": 0,
           "answer": "ohm"
         }
       ],
-      "explanation": "A resistividade eletrica do solo e determinada e expressa oficialmente na unidade ohm-metro (ohm.m). (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
+      "explanation": "A resistividade elétrica do solo é determinada e expressa oficialmente na unidade ohm-metro (ohm.m). (Fonte: Desenvolvimento de Software para Dimensionamento de Malha)",
       "difficulty": "easy"
     },
     {
       "type": "fillBlank",
-      "statement": "Para obter um perfil continuo de variacao com a profundidade seguindo a diretriz do metodo de Wenner (NBR 7117), o ensaio de campo deve abranger diferentes distancias, recomendando-se que o espacamento entre as hastes inicie em 1 metro e se expanda sucessivamente em potencias de ____ (ex: 1, 2, 4, 8, 16...).",
+      "statement": "Para obter um perfil contínuo de variação com a profundidade seguindo a diretriz do método de Wenner (NBR 7117), o ensaio de campo deve abranger diferentes distâncias, recomendando-se que o espaçamento entre as hastes inicie em 1 metro e se expanda sucessivamente em potências de ____ (ex: 1, 2, 4, 8, 16...).",
       "blanks": [
         {
           "index": 0,
           "answer": "2"
         }
       ],
-      "explanation": "A norma NBR 7117 instrui que os espacamentos devem ser prospectados a partir de 1 metro e, se possivel, em potencias de 2 (1m, 2m, 4m, 8m, 16m, 32m...). (Fonte: Instituto Federal Goiano)",
+      "explanation": "A norma NBR 7117 instrui que os espaçamentos devem ser prospectados a partir de 1 metro e, se possível, em potências de 2 (1m, 2m, 4m, 8m, 16m, 32m...). (Fonte: Instituto Federal Goiano)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Alem do consagrado modelo de Wenner, a norma e a literatura listam outros arranjos viaveis de quatro eletrodos para a prospeccao de resistividade em configuracoes especiais, como o arranjo de Lee e o arranjo de ____, muito usado quando os eletrodos de potencial ficam proximos aos de corrente.",
+      "statement": "Além do consagrado modelo de Wenner, a norma e a literatura listam outros arranjos viáveis de quatro eletrodos para a prospecção de resistividade em configurações especiais, como o arranjo de Lee e o arranjo de ____, muito usado quando os eletrodos de potencial ficam próximos aos de corrente.",
       "blanks": [
         {
           "index": 0,
           "answer": "Schlumberger"
         }
       ],
-      "explanation": "A literatura cita variados arranjos para o metodo dos quatro eletrodos, incluindo o arranjo do Eletrodo Central, o de Lee, o de Wenner e o arranjo Schlumberger (ou Schlumberger-Palmer). (Fonte: Capitulo XI Medicao da resistividade do solo, IEE/USP)",
+      "explanation": "A literatura cita variados arranjos para o método dos quatro eletrodos, incluindo o arranjo do Eletrodo Central, o de Lee, o de Wenner e o arranjo Schlumberger (ou Schlumberger-Palmer). (Fonte: Capítulo XI Medição da resistividade do solo, IEE/USP)",
       "difficulty": "medium"
     }
   ]

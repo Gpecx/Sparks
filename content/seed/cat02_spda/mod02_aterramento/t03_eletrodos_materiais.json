@@ -10,33 +10,33 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que sao considerados eletrodos naturais no subsistema de aterramento para SPDA?",
+      "statement": "O que são considerados eletrodos naturais no subsistema de aterramento para SPDA?",
       "options": [
-        "Placas de cobre separadas em caixas de inspecao.",
-        "Armaduras de aco interconectadas nas fundacoes de concreto.",
-        "Tubulacoes de gas e esgoto de PVC.",
-        "Hastes de aluminio cravadas ao redor do edificio."
+        "Placas de cobre separadas em caixas de inspeção.",
+        "Armaduras de aço interconectadas nas fundações de concreto.",
+        "Tubulações de gás e esgoto de PVC.",
+        "Hastes de alumínio cravadas ao redor do edifício."
       ],
       "correctIndex": 1,
-      "explanation": "Para dimensionar o sistema podemos primeiramente considerar os eletrodos naturais, que sao as armaduras de aco interconectadas nas fundacoes de concreto, ou outras estruturas metalicas subterraneas disponiveis. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Para dimensionar o sistema podemos primeiramente considerar os eletrodos naturais, que são as armaduras de aço interconectadas nas fundações de concreto, ou outras estruturas metálicas subterrâneas disponíveis. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual material presente nas fundacoes nao pode ser utilizado como condutor para o sistema de aterramento eletrico, segundo as normas de SPDA?",
+      "statement": "Qual material presente nas fundações não pode ser utilizado como condutor para o sistema de aterramento elétrico, segundo as normas de SPDA?",
       "options": [
         "Cordoalhas de cobre nu.",
-        "Fitas macicas de aco inoxidavel.",
-        "Cabos de aco no caso especifico de concreto protendido.",
-        "Aco galvanizado a quente embutido no concreto."
+        "Fitas maciças de aço inoxidável.",
+        "Cabos de aço no caso específico de concreto protendido.",
+        "Aço galvanizado a quente embutido no concreto."
       ],
       "correctIndex": 2,
-      "explanation": "Para utilizar esses eletrodos devemos garantir a continuidade eletrica; no caso de concreto protendido, os cabos de aco nao podem ser utilizados como condutores para o sistema de aterramento. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Para utilizar esses eletrodos devemos garantir a continuidade elétrica; no caso de concreto protendido, os cabos de aço não podem ser utilizados como condutores para o sistema de aterramento. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na NBR 5419, ao se utilizar o cobre como material para o eletrodo de aterramento, qual e a area de secao minima exigida para este condutor?",
+      "statement": "Na NBR 5419, ao se utilizar o cobre como material para o eletrodo de aterramento, qual é a área de seção mínima exigida para este condutor?",
       "options": [
         "16 mm2",
         "35 mm2",
@@ -44,12 +44,12 @@
         "70 mm2"
       ],
       "correctIndex": 2,
-      "explanation": "Conforme a tabela de secoes minimas dos materiais da norma, o cobre utilizado como eletrodo de aterramento deve possuir secao minima de 50 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Conforme a tabela de seções mínimas dos materiais da norma, o cobre utilizado como eletrodo de aterramento deve possuir seção mínima de 50 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com a atualizacao da ABNT NBR 5419:2026, as secoes nominais dos condutores de aco cobreado foram equiparadas as do cobre. Para o subsistema de aterramento, qual e o valor minimo estabelecido?",
+      "statement": "De acordo com a atualização da ABNT NBR 5419:2026, as seções nominais dos condutores de aço cobreado foram equiparadas às do cobre. Para o subsistema de aterramento, qual é o valor mínimo estabelecido?",
       "options": [
         "25 mm2",
         "35 mm2",
@@ -57,77 +57,77 @@
         "70 mm2"
       ],
       "correctIndex": 2,
-      "explanation": "Os condutores de aco cobreado passam a ter secoes nominais equiparadas as dos condutores de cobre, com valores minimos de 50 mm2 para o subsistema de aterramento. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Os condutores de aço cobreado passam a ter seções nominais equiparadas às dos condutores de cobre, com valores mínimos de 50 mm2 para o subsistema de aterramento. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Sobre a disposicao e instalacao dos condutores do anel de aterramento externo, quais devem ser a profundidade e a distancia minimas da edificacao protegida?",
+      "statement": "Sobre a disposição e instalação dos condutores do anel de aterramento externo, quais devem ser a profundidade e a distância mínimas da edificação protegida?",
       "options": [
-        "0,3 m de profundidade e 0,5 m de distancia.",
-        "0,5 m de profundidade e 1,0 m de distancia.",
-        "1,0 m de profundidade e 1,5 m de distancia.",
-        "0,8 m de profundidade e 2,0 m de distancia."
+        "0,3 m de profundidade e 0,5 m de distância.",
+        "0,5 m de profundidade e 1,0 m de distância.",
+        "1,0 m de profundidade e 1,5 m de distância.",
+        "0,8 m de profundidade e 2,0 m de distância."
       ],
       "correctIndex": 1,
-      "explanation": "Com relacao a instalacao dos condutores de aterramento, devera ser enterrado em uma profundidade de 0,5m no minimo, e ser posicionado a uma distancia minima de 1m ao redor da edificacao a ser protegida. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Com relação à instalação dos condutores de aterramento, deverá ser enterrado em uma profundidade de 0,5m no mínimo, e ser posicionado a uma distância mínima de 1m ao redor da edificação a ser protegida. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "A norma ABNT NBR 5419:2026 atualizou os requisitos para formacao dos condutores de aterramento. Qual formacao de cabos passou a ser explicitamente permitida para o cobre e aco cobreado no solo?",
+      "statement": "A norma ABNT NBR 5419:2026 atualizou os requisitos para formação dos condutores de aterramento. Qual formação de cabos passou a ser explicitamente permitida para o cobre e aço cobreado no solo?",
       "options": [
-        "Apenas fios macicos sem encordoamento.",
-        "Cabos com formacao de 7 ou 19 fios.",
-        "Exclusivamente malhas flexiveis de 32 fios.",
+        "Apenas fios maciços sem encordoamento.",
+        "Cabos com formação de 7 ou 19 fios.",
+        "Exclusivamente malhas flexíveis de 32 fios.",
         "Apenas fitas retangulares laminadas a frio."
       ],
       "correctIndex": 1,
-      "explanation": "Passam a ser permitidos, no aterramento, cabos de cobre ou de aco cobreado com formacao de 7 ou 19 fios. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Passam a ser permitidos, no aterramento, cabos de cobre ou de aço cobreado com formação de 7 ou 19 fios. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual material teve o seu uso estritamente proibido pela nova ABNT NBR 5419:2026 para realizar a transicao entre o concreto da estrutura e o solo no aterramento?",
+      "statement": "Qual material teve o seu uso estritamente proibido pela nova ABNT NBR 5419:2026 para realizar a transição entre o concreto da estrutura e o solo no aterramento?",
       "options": [
         "Cobre encordoado",
-        "Aco inoxidavel",
-        "Aluminio",
-        "Aco zincado a quente"
+        "Aço inoxidável",
+        "Alumínio",
+        "Aço zincado a quente"
       ],
       "correctIndex": 3,
-      "explanation": "Entre os ajustes estao a admissao de condutores de cobre no concreto e a proibicao do uso de aco zincado a quente na transicao entre o concreto e o solo. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Entre os ajustes estão a admissão de condutores de cobre no concreto e a proibição do uso de aço zincado a quente na transição entre o concreto e o solo. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a restricao normativa atualizada na NBR 5419:2026 em relacao a aplicacao de hastes de aterramento cravadas no solo para SPDA?",
+      "statement": "Qual é a restrição normativa atualizada na NBR 5419:2026 em relação à aplicação de hastes de aterramento cravadas no solo para SPDA?",
       "options": [
-        "Sao proibidas em solos com alta resistividade.",
-        "Devem possuir no minimo 100 mm2 de secao para uso isolado.",
-        "Continuam nao sendo permitidas como unico componente do sistema, podendo ser utilizadas apenas como complemento ao anel ou malha.",
-        "Substituem obrigatoriamente as malhas em anel em edificios acima de 20 metros de altura."
+        "São proibidas em solos com alta resistividade.",
+        "Devem possuir no mínimo 100 mm2 de seção para uso isolado.",
+        "Continuam não sendo permitidas como único componente do sistema, podendo ser utilizadas apenas como complemento ao anel ou malha.",
+        "Substituem obrigatoriamente as malhas em anel em edifícios acima de 20 metros de altura."
       ],
       "correctIndex": 2,
-      "explanation": "As hastes de aterramento continuam nao sendo permitidas como unico componente do sistema, podendo ser utilizadas apenas como complemento. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "As hastes de aterramento continuam não sendo permitidas como único componente do sistema, podendo ser utilizadas apenas como complemento. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com a Tabela de Secoes Minimas dos materiais para SPDA, qual e a restricao normativa referente ao uso de condutores de aluminio no subsistema de aterramento?",
+      "statement": "De acordo com a Tabela de Seções Mínimas dos materiais para SPDA, qual é a restrição normativa referente ao uso de condutores de alumínio no subsistema de aterramento?",
       "options": [
-        "Sua secao minima exigida e muito superior a do cobre, fixada em 100 mm2.",
-        "E permitido apenas se estiver revestido por uma camada de 0,5 mm de aco cobreado.",
-        "O aluminio nao possui especificacao permitida para uso como eletrodo de aterramento, sendo vedada sua aplicacao no solo.",
-        "E exigida a mesma secao do aco galvanizado a quente, ou seja, 80 mm2."
+        "Sua seção mínima exigida é muito superior à do cobre, fixada em 100 mm2.",
+        "É permitido apenas se estiver revestido por uma camada de 0,5 mm de aço cobreado.",
+        "O alumínio não possui especificação permitida para uso como eletrodo de aterramento, sendo vedada sua aplicação no solo.",
+        "É exigida a mesma seção do aço galvanizado a quente, ou seja, 80 mm2."
       ],
       "correctIndex": 2,
-      "explanation": "Na tabela de secoes minimas dos materiais, a celula correspondente ao eletrodo de aterramento para o Aluminio e hifenizada (vazia/proibida), nao sendo permitido o uso de aluminio no contato direto com o solo para aterramento. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Na tabela de seções mínimas dos materiais, a célula correspondente ao eletrodo de aterramento para o Alumínio é hifenizada (vazia/proibida), não sendo permitido o uso de alumínio no contato direto com o solo para aterramento. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "A Tabela de dimensoes minimas para eletrodos de aterramento da NBR 5419 estabelece valores rigorosos para configuracoes em fita macica. Qual e a area de secao minima estipulada para a fita macica fabricada em Aco Inoxidavel?",
+      "statement": "A Tabela de dimensões mínimas para eletrodos de aterramento da NBR 5419 estabelece valores rigorosos para configurações em fita maciça. Qual é a área de seção mínima estipulada para a fita maciça fabricada em Aço Inoxidável?",
       "options": [
         "50 mm2",
         "70 mm2",
@@ -135,83 +135,83 @@
         "100 mm2"
       ],
       "correctIndex": 3,
-      "explanation": "A Tabela de dimensoes minimas determina que o eletrodo nao cravado em configuracao de fita macica de Aco inoxidavel deve possuir area de secao minima de 100 mm2 e espessura de 2 mm. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A Tabela de dimensões mínimas determina que o eletrodo não cravado em configuração de fita maciça de Aço inoxidável deve possuir área de seção mínima de 100 mm2 e espessura de 2 mm. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Caso nao seja possivel utilizar as armaduras da fundacao e opte-se por um anel externo, o condutor de aterramento devera estar em contato com o solo em no minimo 80% do seu comprimento total.",
+      "statement": "Caso não seja possível utilizar as armaduras da fundação e opte-se por um anel externo, o condutor de aterramento deverá estar em contato com o solo em no mínimo 80% do seu comprimento total.",
       "correctAnswer": true,
-      "explanation": "Caso nao seja possivel utilizar os eletrodos naturais, deve ser feito um anel externo a estrutura, onde o condutor devera estar em contato com o solo no minimo 80% do seu comprimento total. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Caso não seja possível utilizar os eletrodos naturais, deve ser feito um anel externo à estrutura, onde o condutor deverá estar em contato com o solo no mínimo 80% do seu comprimento total. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A atualizacao da ABNT NBR 5419:2026 oficializou a proibicao do uso de condutores de cobre embutidos diretamente no concreto das fundacoes, devido aos riscos de corrosao galvanica acelerada.",
+      "statement": "A atualização da ABNT NBR 5419:2026 oficializou a proibição do uso de condutores de cobre embutidos diretamente no concreto das fundações, devido aos riscos de corrosão galvânica acelerada.",
       "correctAnswer": false,
-      "explanation": "O correto e o oposto: entre os ajustes das tabelas de materiais na revisao da norma, esta a admissao oficial de condutores de cobre no concreto. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "O correto é o oposto: entre os ajustes das tabelas de materiais na revisão da norma, está a admissão oficial de condutores de cobre no concreto. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Com as atualizacoes da NBR 5419:2026, ficou estabelecido que o anel de aterramento nao pode ter interrupcao parcial quando instalado de forma aparente (fora do solo), exigindo fechamento continuo.",
+      "statement": "Com as atualizações da NBR 5419:2026, ficou estabelecido que o anel de aterramento não pode ter interrupção parcial quando instalado de forma aparente (fora do solo), exigindo fechamento contínuo.",
       "correctAnswer": true,
-      "explanation": "A norma de 2026 elimina a possibilidade anteriormente prevista de interrupcao parcial do anel quando instalado fora do solo. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A norma de 2026 elimina a possibilidade anteriormente prevista de interrupção parcial do anel quando instalado fora do solo. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A instalacao interna do anel de aterramento e terminantemente proibida em qualquer situacao pela nova NBR 5419:2026, exigindo-se sempre a escavacao de vias publicas ou passeios externos.",
+      "statement": "A instalação interna do anel de aterramento é terminantemente proibida em qualquer situação pela nova NBR 5419:2026, exigindo-se sempre a escavação de vias públicas ou passeios externos.",
       "correctAnswer": false,
-      "explanation": "A nova redacao da NBR 5419:2026 traz como atualizacao importante a permissao para a instalacao interna do anel de aterramento em edificacoes geminadas, reconhecendo a limitacao de espaco externo. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A nova redação da NBR 5419:2026 traz como atualização importante a permissão para a instalação interna do anel de aterramento em edificações geminadas, reconhecendo a limitação de espaço externo. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Para a aplicacao de aco galvanizado a quente como eletrodo de aterramento, a norma NBR 5419 permite o uso de cabos encordoados com secao minima de 50 mm2, igualando este parametro ao do cobre.",
+      "statement": "Para a aplicação de aço galvanizado a quente como eletrodo de aterramento, a norma NBR 5419 permite o uso de cabos encordoados com seção mínima de 50 mm2, igualando este parâmetro ao do cobre.",
       "correctAnswer": false,
-      "explanation": "Conforme a Tabela de secoes minimas, o eletrodo de aterramento em aco galvanizado a quente possui secao minima exigida de 80 mm2 para suportar a corrosao, enquanto o cobre exige 50 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Conforme a Tabela de seções mínimas, o eletrodo de aterramento em aço galvanizado a quente possui seção mínima exigida de 80 mm2 para suportar a corrosão, enquanto o cobre exige 50 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Para utilizar as armaduras metalicas subterraneas como eletrodos naturais de aterramento, deve-se garantir a continuidade eletrica. Porem, no caso estrutural especifico de concreto ____, seus cabos de aco nao podem ser utilizados como condutores para o SPDA.",
+      "statement": "Para utilizar as armaduras metálicas subterrâneas como eletrodos naturais de aterramento, deve-se garantir a continuidade elétrica. Porém, no caso estrutural específico de concreto ____, seus cabos de aço não podem ser utilizados como condutores para o SPDA.",
       "blanks": [
         {
           "index": 0,
           "answer": "protendido"
         }
       ],
-      "explanation": "No caso de concreto protendido, os cabos de aco nao podem ser utilizados como condutores para o sistema de aterramento eletrico. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "No caso de concreto protendido, os cabos de aço não podem ser utilizados como condutores para o sistema de aterramento elétrico. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A atualizacao da norma NBR 5419:2026 proibiu categoricamente o uso de material em aco ____ a quente no trecho de transicao entre o concreto da fundacao e o solo.",
+      "statement": "A atualização da norma NBR 5419:2026 proibiu categoricamente o uso de material em aço ____ a quente no trecho de transição entre o concreto da fundação e o solo.",
       "blanks": [
         {
           "index": 0,
           "answer": "zincado"
         }
       ],
-      "explanation": "A norma de 2026 trouxe como ajuste a proibicao do uso de aco zincado a quente na transicao entre o concreto e o solo, para mitigar problemas de corrosao. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A norma de 2026 trouxe como ajuste a proibição do uso de aço zincado a quente na transição entre o concreto e o solo, para mitigar problemas de corrosão. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Segundo as dimensoes minimas normalizadas, se o projetista utilizar uma haste cravada de aco cobreado como eletrodo de aterramento, o diametro da haste deve ser de no minimo ____ milimetros.",
+      "statement": "Segundo as dimensões mínimas normalizadas, se o projetista utilizar uma haste cravada de aço cobreado como eletrodo de aterramento, o diâmetro da haste deve ser de no mínimo ____ milímetros.",
       "blanks": [
         {
           "index": 0,
           "answer": "12,7"
         }
       ],
-      "explanation": "A tabela normativa de dimensoes minimas especifica que para a configuracao de eletrodo cravado (haste arredondada macica) em aco cobreado, o diametro minimo e de 12,7 mm. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A tabela normativa de dimensões mínimas especifica que para a configuração de eletrodo cravado (haste arredondada maciça) em aço cobreado, o diâmetro mínimo é de 12,7 mm. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     }
   ]

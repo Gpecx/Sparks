@@ -3,27 +3,27 @@
   "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
   "categoryOrder": 1,
   "module": "Normas SPDA",
-  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspecao",
+  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspeção",
   "moduleOrder": 2,
   "trail": "NBR 5419 - Parte 3 (Danos Físicos a Estruturas)",
   "trailOrder": 2,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "A Parte 3 da ABNT NBR 5419 possui diretrizes claras sobre os subsistemas fisicos do SPDA. Quais sao os tres subsistemas principais que compoem a protecao externa da edificacao?",
+      "statement": "A Parte 3 da ABNT NBR 5419 possui diretrizes claras sobre os subsistemas físicos do SPDA. Quais são os três subsistemas principais que compõem a proteção externa da edificação?",
       "options": [
-        "Captacao, descidas e aterramento.",
-        "Captacao, isolamento e supressao de surtos.",
-        "Distribuicao, DPS e aterramento em anel.",
-        "Equalizacao, blindagem magnetica e descidas."
+        "Captação, descidas e aterramento.",
+        "Captação, isolamento e supressão de surtos.",
+        "Distribuição, DPS e aterramento em anel.",
+        "Equalização, blindagem magnética e descidas."
       ],
       "correctIndex": 0,
-      "explanation": "O SPDA e dividido nos seguintes subsistemas principais: Sistema de Captacao, Sistema de Descidas e Sistema de Aterramento. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "O SPDA é dividido nos seguintes subsistemas principais: Sistema de Captação, Sistema de Descidas e Sistema de Aterramento. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O espacamento medio exigido entre os condutores de descida nao naturais varia de acordo com o Nivel de Protecao adotado. Qual e o espacamento estipulado para um SPDA classificado como Nivel IV (LPL IV)?",
+      "statement": "O espaçamento médio exigido entre os condutores de descida não naturais varia de acordo com o Nível de Proteção adotado. Qual é o espaçamento estipulado para um SPDA classificado como Nível IV (LPL IV)?",
       "options": [
         "10 metros",
         "15 metros",
@@ -31,38 +31,38 @@
         "25 metros"
       ],
       "correctIndex": 3,
-      "explanation": "De acordo com a tabela de distancias normativas, o espacamento medio dos condutores de descidas nao naturais para o Nivel de protecao IV e de 25 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "De acordo com a tabela de distâncias normativas, o espaçamento médio dos condutores de descidas não naturais para o Nível de proteção IV é de 25 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Com relacao a instalacao dos condutores do anel de aterramento externo em torno de uma edificacao, quais sao, respectivamente, a profundidade minima de soterramento e a distancia minima recomendada das paredes?",
+      "statement": "Com relação à instalação dos condutores do anel de aterramento externo em torno de uma edificação, quais são, respectivamente, a profundidade mínima de soterramento e a distância mínima recomendada das paredes?",
       "options": [
-        "0,3m de profundidade e 0,5m de distancia",
-        "0,5m de profundidade e 1,0m de distancia",
-        "1,0m de profundidade e 1,0m de distancia",
-        "0,8m de profundidade e 1,5m de distancia"
+        "0,3m de profundidade e 0,5m de distância",
+        "0,5m de profundidade e 1,0m de distância",
+        "1,0m de profundidade e 1,0m de distância",
+        "0,8m de profundidade e 1,5m de distância"
       ],
       "correctIndex": 1,
-      "explanation": "A instalacao dos condutores de aterramento devera ser enterrada em uma profundidade de 0,5m no minimo, e ser posicionada a uma distancia minima de 1m ao redor da edificacao a ser protegida. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "A instalação dos condutores de aterramento deverá ser enterrada em uma profundidade de 0,5m no mínimo, e ser posicionada a uma distância mínima de 1m ao redor da edificação a ser protegida. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na organizacao estrutural da norma ABNT NBR 5419, qual e o principal foco abordado na Parte 3?",
+      "statement": "Na organização estrutural da norma ABNT NBR 5419, qual é o principal foco abordado na Parte 3?",
       "options": [
-        "O calculo de risco (Gerenciamento de Risco).",
-        "A protecao de sistemas eletricos e eletronicos internos por meio de DPS.",
-        "Os principios gerais, conceitos e parametros da corrente do raio.",
-        "A protecao de uma estrutura contra danos fisicos por meio de um SPDA e perigos a vida."
+        "O cálculo de risco (Gerenciamento de Risco).",
+        "A proteção de sistemas elétricos e eletrônicos internos por meio de DPS.",
+        "Os princípios gerais, conceitos e parâmetros da corrente do raio.",
+        "A proteção de uma estrutura contra danos físicos por meio de um SPDA e perigos à vida."
       ],
       "correctIndex": 3,
-      "explanation": "A Parte 3 da NBR 5419 trata de Danos fisicos a estruturas e perigos a vida, provendo os requisitos para a protecao de uma estrutura fisica e protecao de seres vivos. (Fonte: ABNT NBR 5419:2026 Guia pratico / Cleiton Junior Lopes)",
+      "explanation": "A Parte 3 da NBR 5419 trata de Danos físicos a estruturas e perigos à vida, provendo os requisitos para a proteção de uma estrutura física e proteção de seres vivos. (Fonte: ABNT NBR 5419:2026 Guia prático / Cleiton Junior Lopes)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com a tabela de dimensoes minimas para eletrodos de aterramento, qual e a secao minima exigida para o uso de cabos encordoados de cobre nu em contato direto com o solo?",
+      "statement": "De acordo com a tabela de dimensões mínimas para eletrodos de aterramento, qual é a seção mínima exigida para o uso de cabos encordoados de cobre nu em contato direto com o solo?",
       "options": [
         "16 mm2",
         "35 mm2",
@@ -70,12 +70,12 @@
         "70 mm2"
       ],
       "correctIndex": 2,
-      "explanation": "Na tabela de materiais e dimensoes minimas para eletrodos de aterramento, a configuracao de cobre encordoado (nao cravado) exige uma area de secao minima de 50 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Na tabela de materiais e dimensões mínimas para eletrodos de aterramento, a configuração de cobre encordoado (não cravado) exige uma área de seção mínima de 50 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao empregar o Metodo das Malhas (Gaiola de Faraday) para projetar o subsistema de captacao de uma edificacao com Nivel de Protecao II (LPL II), qual deve ser a dimensao maxima do modulo da malha?",
+      "statement": "Ao empregar o Método das Malhas (Gaiola de Faraday) para projetar o subsistema de captação de uma edificação com Nível de Proteção II (LPL II), qual deve ser a dimensão máxima do módulo da malha?",
       "options": [
         "5 x 5 metros",
         "10 x 10 metros",
@@ -83,12 +83,12 @@
         "20 x 20 metros"
       ],
       "correctIndex": 1,
-      "explanation": "A tabela que relaciona a classe do SPDA ao metodo de captacao indica que, para o Nivel II, o maximo afastamento dos condutores da malha e de 10 x 10 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A tabela que relaciona a classe do SPDA ao método de captação indica que, para o Nível II, o máximo afastamento dos condutores da malha é de 10 x 10 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O Metodo da Esfera Rolante ou Eletrogeometrico utiliza uma esfera ficticia para determinar a area protegida no subsistema de captacao. Para uma estrutura critica que exige protecao maxima (Classe I), qual o raio da esfera adotado?",
+      "statement": "O Método da Esfera Rolante ou Eletrogeométrico utiliza uma esfera fictícia para determinar a área protegida no subsistema de captação. Para uma estrutura crítica que exige proteção máxima (Classe I), qual o raio da esfera adotado?",
       "options": [
         "20 metros",
         "30 metros",
@@ -96,122 +96,122 @@
         "60 metros"
       ],
       "correctIndex": 0,
-      "explanation": "O raio da esfera rolante depende da classe do SPDA, sendo estipulado em 20 metros para o Nivel de protecao I (Classe I). (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "O raio da esfera rolante depende da classe do SPDA, sendo estipulado em 20 metros para o Nível de proteção I (Classe I). (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Uma das mudancas importantes na NBR 5419 envolve as restricoes quanto aos materiais empregados. Qual material teve o seu uso expressamente proibido para a execucao da transicao entre o concreto e o solo no subsistema de aterramento?",
+      "statement": "Uma das mudanças importantes na NBR 5419 envolve as restrições quanto aos materiais empregados. Qual material teve o seu uso expressamente proibido para a execução da transição entre o concreto e o solo no subsistema de aterramento?",
       "options": [
-        "Aco inoxidavel",
-        "Aco zincado a quente",
-        "Aco cobreado",
+        "Aço inoxidável",
+        "Aço zincado a quente",
+        "Aço cobreado",
         "Cobre nu encordoado"
       ],
       "correctIndex": 1,
-      "explanation": "A atualizacao da norma introduziu a proibicao do uso de aco zincado a quente (aco galvanizado) na transicao entre o concreto e o solo no sistema de aterramento para mitigar corrosao. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A atualização da norma introduziu a proibição do uso de aço zincado a quente (aço galvanizado) na transição entre o concreto e o solo no sistema de aterramento para mitigar corrosão. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "A fim de minimizar os riscos de centelhamentos perigosos no subsistema de descidas sem comprometer o layout, a norma permite o uso de condutores com uma caracteristica especifica. Qual e a alternativa tecnica normatizada na revisao recente para manter a distancia de seguranca (s)?",
+      "statement": "A fim de minimizar os riscos de centelhamentos perigosos no subsistema de descidas sem comprometer o layout, a norma permite o uso de condutores com uma característica específica. Qual é a alternativa técnica normatizada na revisão recente para manter a distância de segurança (s)?",
       "options": [
-        "Instalar condutores blindados magneticamente com tubos de aco galvanizado pesados.",
-        "Utilizar exclusivamente fitas de aluminio pintadas com tinta antichama.",
-        "Empregar condutores com isolacao especifica (como os do tipo HVI) conforme a IEC TS 62561-8.",
-        "Enterrar os condutores de descida na alvenaria sem revestimento, anulando a distancia (s)."
+        "Instalar condutores blindados magneticamente com tubos de aço galvanizado pesados.",
+        "Utilizar exclusivamente fitas de alumínio pintadas com tinta antichama.",
+        "Empregar condutores com isolação específica (como os do tipo HVI) conforme a IEC TS 62561-8.",
+        "Enterrar os condutores de descida na alvenaria sem revestimento, anulando a distância (s)."
       ],
       "correctIndex": 2,
-      "explanation": "No subsistema de descida, passou a ser admitida a utilizacao de condutores com isolacao especifica conforme a IEC TS 62561-8, o que permite manter a distancia de seguranca imposta pela norma e reduzir centelhamentos. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "No subsistema de descida, passou a ser admitida a utilização de condutores com isolação específica conforme a IEC TS 62561-8, o que permite manter a distância de segurança imposta pela norma e reduzir centelhamentos. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como ficaram equiparadas as secoes nominais minimas do aco cobreado na atualizacao de 2026 em relacao aos condutores de cobre para os subsistemas de SPDA?",
+      "statement": "Como ficaram equiparadas as seções nominais mínimas do aço cobreado na atualização de 2026 em relação aos condutores de cobre para os subsistemas de SPDA?",
       "options": [
-        "16 mm2 para captacao e 35 mm2 para aterramento.",
-        "35 mm2 para os subsistemas de captacao e descida e 50 mm2 para o subsistema de aterramento.",
-        "50 mm2 para todos os subsistemas independentemente da funcao.",
+        "16 mm2 para captação e 35 mm2 para aterramento.",
+        "35 mm2 para os subsistemas de captação e descida e 50 mm2 para o subsistema de aterramento.",
+        "50 mm2 para todos os subsistemas independentemente da função.",
         "70 mm2 para descidas longas e 80 mm2 para aterramento superficial."
       ],
       "correctIndex": 1,
-      "explanation": "Os condutores de aco cobreado passaram a ter secoes nominais equiparadas as do cobre, sendo 35 mm2 para os subsistemas de captacao e descida e 50 mm2 para o subsistema de aterramento. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Os condutores de aço cobreado passaram a ter seções nominais equiparadas às do cobre, sendo 35 mm2 para os subsistemas de captação e descida e 50 mm2 para o subsistema de aterramento. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O subsistema de captacao em forma de Gaiola de Faraday baseia-se na distribuicao da corrente eletrica ao longo de condutores interligados em malha, criando um efeito que anula o campo eletrico no interior do volume protegido.",
+      "statement": "O subsistema de captação em forma de Gaiola de Faraday baseia-se na distribuição da corrente elétrica ao longo de condutores interligados em malha, criando um efeito que anula o campo elétrico no interior do volume protegido.",
       "correctAnswer": true,
-      "explanation": "A gaiola de Faraday atua distribuindo a corrente eletrica ao longo dos condutores, e devido a essa disposicao fisica, o campo eletrico interno a gaiola e anulado, protegendo o interior da edificacao. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "A gaiola de Faraday atua distribuindo a corrente elétrica ao longo dos condutores, e devido a essa disposição física, o campo elétrico interno à gaiola é anulado, protegendo o interior da edificação. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Com o intuito de facilitar as instalacoes em espacos reduzidos, as hastes de aterramento cravadas no solo (eletrodos verticais) passaram a ser permitidas como o unico componente do subsistema de aterramento do SPDA nas edificacoes modernas.",
+      "statement": "Com o intuito de facilitar as instalações em espaços reduzidos, as hastes de aterramento cravadas no solo (eletrodos verticais) passaram a ser permitidas como o único componente do subsistema de aterramento do SPDA nas edificações modernas.",
       "correctAnswer": false,
-      "explanation": "A norma dita o oposto: as hastes de aterramento continuam nao sendo permitidas como unico componente do sistema, podendo ser utilizadas apenas como complemento de malhas ou aneis. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A norma dita o oposto: as hastes de aterramento continuam não sendo permitidas como único componente do sistema, podendo ser utilizadas apenas como complemento de malhas ou anéis. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "De acordo com as regras de aterramento da NBR 5419-3, as armaduras de aco de qualquer tipo de fundacao podem servir como eletrodos naturais de aterramento, inclusive os cabos de aco utilizados em estruturas de concreto protendido.",
+      "statement": "De acordo com as regras de aterramento da NBR 5419-3, as armaduras de aço de qualquer tipo de fundação podem servir como eletrodos naturais de aterramento, inclusive os cabos de aço utilizados em estruturas de concreto protendido.",
       "correctAnswer": false,
-      "explanation": "Para utilizar eletrodos naturais, deve-se garantir a continuidade eletrica. No caso especifico de concreto protendido, os cabos de aco nao podem ser utilizados como condutores para o sistema de aterramento eletrico. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Para utilizar eletrodos naturais, deve-se garantir a continuidade elétrica. No caso específico de concreto protendido, os cabos de aço não podem ser utilizados como condutores para o sistema de aterramento elétrico. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Em edificacoes do tipo geminadas onde nao ha recuo fisico para a instalacao do anel externo, a norma atualizada preve a possibilidade de instalacao do anel de aterramento de forma interna, desde que sejam tomadas medidas preventivas contra tensoes de passo e toque.",
+      "statement": "Em edificações do tipo geminadas onde não há recuo físico para a instalação do anel externo, a norma atualizada prevê a possibilidade de instalação do anel de aterramento de forma interna, desde que sejam tomadas medidas preventivas contra tensões de passo e toque.",
       "correctAnswer": true,
-      "explanation": "A nova redacao da NBR 5419:2026 passa a permitir a instalacao interna do anel em edificacoes geminadas, porem devem ser previstas medidas para mitigar os riscos de tensoes perigosas de superficie, como tensao de passo e de toque. (Fonte: ABNT NBR 5419:2026 / Mesh Engenharia)",
+      "explanation": "A nova redação da NBR 5419:2026 passa a permitir a instalação interna do anel em edificações geminadas, porém devem ser previstas medidas para mitigar os riscos de tensões perigosas de superfície, como tensão de passo e de toque. (Fonte: ABNT NBR 5419:2026 / Mesh Engenharia)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Na determinacao do volume de captacao, a NBR 5419 valida a instalacao de captores nao convencionais do tipo ESE (Early Streamer Emission), que baseiam seu funcionamento no principio de atracao antecipada de raios e permitem a ampliacao do raio de protecao.",
+      "statement": "Na determinação do volume de captação, a NBR 5419 valida a instalação de captores não convencionais do tipo ESE (Early Streamer Emission), que baseiam seu funcionamento no princípio de atração antecipada de raios e permitem a ampliação do raio de proteção.",
       "correctAnswer": false,
-      "explanation": "A norma reforca que a determinacao do volume de protecao considera apenas as dimensoes fisicas reais dos captores, de modo que sistemas nao convencionais como os captores do tipo ESE permanecem fora dos metodos aceitos pela NBR 5419. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A norma reforça que a determinação do volume de proteção considera apenas as dimensões físicas reais dos captores, de modo que sistemas não convencionais como os captores do tipo ESE permanecem fora dos métodos aceitos pela NBR 5419. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Entre os metodos de posicionamento do subsistema de captacao reconhecidos e detalhados na NBR 5419-3 estao o Metodo da Esfera Rolante, o Metodo das Malhas e o Metodo do ____ de protecao, conhecido classicamente como metodo Franklin.",
+      "statement": "Entre os métodos de posicionamento do subsistema de captação reconhecidos e detalhados na NBR 5419-3 estão o Método da Esfera Rolante, o Método das Malhas e o Método do ____ de proteção, conhecido classicamente como método Franklin.",
       "blanks": [
         {
           "index": 0,
           "answer": "angulo"
         }
       ],
-      "explanation": "Os tres metodos de dimensionamento do sistema de captacao descritos na norma sao: metodo da esfera rolante (eletrogeometrico), metodo das malhas (Faraday) e metodo do angulo de protecao (Franklin). (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Os três métodos de dimensionamento do sistema de captação descritos na norma são: método da esfera rolante (eletrogeométrico), método das malhas (Faraday) e método do ângulo de proteção (Franklin). (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "No caso da instalacao interna do anel de aterramento ser inevitavel devido a restricoes arquitetonicas, e obrigatorio prever medidas mitigadoras para proteger as pessoas contra os potenciais perigosos de superficie, que se dividem na fisica em tensao de toque e tensao de ____.",
+      "statement": "No caso da instalação interna do anel de aterramento ser inevitável devido a restrições arquitetônicas, é obrigatório prever medidas mitigadoras para proteger as pessoas contra os potenciais perigosos de superfície, que se dividem na física em tensão de toque e tensão de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "passo"
         }
       ],
-      "explanation": "A norma determina que, se adotada a instalacao do anel internamente, devem ser previstos meios para mitigar os riscos associados as tensoes perigosas de superficie, referenciadas como tensao de passo e tensao de toque. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "A norma determina que, se adotada a instalação do anel internamente, devem ser previstos meios para mitigar os riscos associados às tensões perigosas de superfície, referenciadas como tensão de passo e tensão de toque. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Na nova redacao da NBR 5419 Parte 3, os captores verticais macicos ou tubulares, como postes e mastros elevados, passaram a ter a exigencia explicita de serem calculados para suportar o dimensionamento mecanico contra a forca do ____, seguindo as diretrizes da NBR 6123.",
+      "statement": "Na nova redação da NBR 5419 Parte 3, os captores verticais maciços ou tubulares, como postes e mastros elevados, passaram a ter a exigência explícita de serem calculados para suportar o dimensionamento mecânico contra a força do ____, seguindo as diretrizes da NBR 6123.",
       "blanks": [
         {
           "index": 0,
           "answer": "vento"
         }
       ],
-      "explanation": "Para os captores verticais macicos ou tubulares, a norma revisada exige formalmente que seja realizado o dimensionamento mecanico capaz de suportar os esforcos do vento conforme a ABNT NBR 6123. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Para os captores verticais maciços ou tubulares, a norma revisada exige formalmente que seja realizado o dimensionamento mecânico capaz de suportar os esforços do vento conforme a ABNT NBR 6123. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "hard"
     }
   ]

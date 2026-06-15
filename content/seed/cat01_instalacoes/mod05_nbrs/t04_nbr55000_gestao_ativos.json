@@ -10,111 +10,111 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Na gestao de ativos de protecao, qual e a relacao descrita na literatura tecnica entre o releamento de retaguarda e a manutencao preventiva?",
+      "statement": "Na gestão de ativos de proteção, qual é a relação descrita na literatura técnica entre o releamento de retaguarda e a manutenção preventiva?",
       "options": [
-        "A manutencao substitui a necessidade da retaguarda.",
-        "A retaguarda substitui a necessidade de manutencao.",
-        "Ambos sao mutuamente excludentes no projeto do ciclo de vida.",
-        "O releamento de retaguarda nao substitui uma boa manutencao."
+        "A manutenção substitui a necessidade da retaguarda.",
+        "A retaguarda substitui a necessidade de manutenção.",
+        "Ambos são mutuamente excludentes no projeto do ciclo de vida.",
+        "O releamento de retaguarda não substitui uma boa manutenção."
       ],
       "correctIndex": 3,
-      "explanation": "O releamento de retaguarda nao substitui uma boa manutencao, nem vice-versa.",
+      "explanation": "O releamento de retaguarda não substitui uma boa manutenção, nem vice-versa.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual caracteristica dos reles digitais (IEDs) modernos eleva a confiabilidade e reduz a indisponibilidade na gestao do ativo?",
+      "statement": "Qual característica dos relés digitais (IEDs) modernos eleva a confiabilidade e reduz a indisponibilidade na gestão do ativo?",
       "options": [
         "Sistemas incorporados de autoteste e autodiagnose.",
-        "O uso exclusivo de contatos de mercurio e discos de inducao.",
-        "A dependencia de testes manuais diarios pela equipe local.",
-        "A ausencia total de atualizacoes de software e firmware."
+        "O uso exclusivo de contatos de mercúrio e discos de indução.",
+        "A dependência de testes manuais diários pela equipe local.",
+        "A ausência total de atualizações de software e firmware."
       ],
       "correctIndex": 0,
-      "explanation": "Os reles digitais possuem alta confiabilidade gracas aos sistemas integrados de autoteste e autodiagnose.",
+      "explanation": "Os relés digitais possuem alta confiabilidade graças aos sistemas integrados de autoteste e autodiagnose.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Considerando o custo do ciclo de vida dos ativos, o que justifica o investimento no sistema de protecao frente ao equipamento principal?",
+      "statement": "Considerando o custo do ciclo de vida dos ativos, o que justifica o investimento no sistema de proteção frente ao equipamento principal?",
       "options": [
         "O fato de custar tipicamente 50% do valor do equipamento principal.",
-        "Constitui um seguro barato considerando o tempo usual para depreciacao dos equipamentos.",
-        "A capacidade de eliminar totalmente o desgaste mecanico da planta.",
-        "A prorrogacao indefinida da garantia do fabricante do gerador."
+        "Constitui um seguro barato considerando o tempo usual para depreciação dos equipamentos.",
+        "A capacidade de eliminar totalmente o desgaste mecânico da planta.",
+        "A prorrogação indefinida da garantia do fabricante do gerador."
       ],
       "correctIndex": 1,
-      "explanation": "A protecao custa cerca de 2 a 5% do equipamento protegido, sendo um seguro barato face ao tempo de depreciacao.",
+      "explanation": "A proteção custa cerca de 2 a 5% do equipamento protegido, sendo um seguro barato face ao tempo de depreciação.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com a NR-10, onde deve ser arquivado o relatorio tecnico das inspecoes para garantir a rastreabilidade da manutencao do ativo?",
+      "statement": "De acordo com a NR-10, onde deve ser arquivado o relatório técnico das inspeções para garantir a rastreabilidade da manutenção do ativo?",
       "options": [
         "No manual original do fabricante do disjuntor.",
-        "No inventario fisico do almoxarifado de pecas.",
-        "No Prontuario de Instalacoes Eletricas.",
-        "Na caixa de ferramentas da equipe de manutencao."
+        "No inventário físico do almoxarifado de peças.",
+        "No Prontuário de Instalações Elétricas.",
+        "Na caixa de ferramentas da equipe de manutenção."
       ],
       "correctIndex": 2,
-      "explanation": "A NR-10 exige que o relatorio tecnico das inspecoes atualizadas com recomendacoes componha obrigatoriamente o Prontuario de Instalacoes Eletricas.",
+      "explanation": "A NR-10 exige que o relatório técnico das inspeções atualizadas com recomendações componha obrigatoriamente o Prontuário de Instalações Elétricas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Dentre os fatores operacionais que reduzem a disponibilidade e causam atuacao incorreta da protecao, o que e listado como causa de falha?",
+      "statement": "Dentre os fatores operacionais que reduzem a disponibilidade e causam atuação incorreta da proteção, o que é listado como causa de falha?",
       "options": [
-        "A pintura epoxi externa dos quadros eletricos.",
-        "O resfriamento excessivo da sala de paineis.",
+        "A pintura epóxi externa dos quadros elétricos.",
+        "O resfriamento excessivo da sala de painéis.",
         "O uso de cabos blindados de controle.",
-        "O desgaste de utilizacao dos ativos."
+        "O desgaste de utilização dos ativos."
       ],
       "correctIndex": 3,
-      "explanation": "Falhas de configuracao, erros de instalacao, testes incorretos e o desgaste de utilizacao sao causas de operacao incorreta.",
+      "explanation": "Falhas de configuração, erros de instalação, testes incorretos e o desgaste de utilização são causas de operação incorreta.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No planejamento de manutencao do ciclo de vida, por que devem ser previstos testes periodicos manuais ou automaticos nos reles de protecao de barramentos?",
+      "statement": "No planejamento de manutenção do ciclo de vida, por que devem ser previstos testes periódicos manuais ou automáticos nos relés de proteção de barramentos?",
       "options": [
-        "Porque as faltas internas sao raras e o equipamento de protecao ficaria inativo por longo tempo sem ser testado.",
-        "Para recarregar os capacitores internos das placas eletronicas.",
-        "Para lubrificar as engrenagens dos discos de inducao rotativos diariamente.",
-        "Para dissipar a energia acumulada nas bobinas de contencao termica."
+        "Porque as faltas internas são raras e o equipamento de proteção ficaria inativo por longo tempo sem ser testado.",
+        "Para recarregar os capacitores internos das placas eletrônicas.",
+        "Para lubrificar as engrenagens dos discos de indução rotativos diariamente.",
+        "Para dissipar a energia acumulada nas bobinas de contenção térmica."
       ],
       "correctIndex": 0,
-      "explanation": "Os testes periodicos sao recomendados devido a longa inatividade dos reles, justificada pela raridade das faltas internas nos barramentos.",
+      "explanation": "Os testes periódicos são recomendados devido à longa inatividade dos relés, justificada pela raridade das faltas internas nos barramentos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a NR-12, as inspecoes e manutencoes de maquinas e equipamentos devem basear-se em quais parametros de gestao do ativo?",
+      "statement": "Segundo a NR-12, as inspeções e manutenções de máquinas e equipamentos devem basear-se em quais parâmetros de gestão do ativo?",
       "options": [
-        "Apenas no custo comercial de substituicao das pecas sobressalentes.",
-        "Nas recomendacoes do fabricante, normas tecnicas, historico de manutencoes e estudos de probabilidade de falhas.",
-        "Exclusivamente na decisao e experiencia do operador diario da maquina.",
-        "No nivel de ruido ambiente e na pressao barometrica sazonal."
+        "Apenas no custo comercial de substituição das peças sobressalentes.",
+        "Nas recomendações do fabricante, normas técnicas, histórico de manutenções e estudos de probabilidade de falhas.",
+        "Exclusivamente na decisão e experiência do operador diário da máquina.",
+        "No nível de ruído ambiente e na pressão barométrica sazonal."
       ],
       "correctIndex": 1,
-      "explanation": "O item 12.11.2 da NR-12 exige que a manutencao considere as recomendacoes do fabricante, normas, historico e estudos de probabilidade de falhas.",
+      "explanation": "O item 12.11.2 da NR-12 exige que a manutenção considere as recomendações do fabricante, normas, histórico e estudos de probabilidade de falhas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a modularidade dos reles digitais afeta a gestao de obsolescencia e atualizacao do ativo ao longo de sua vida util?",
+      "statement": "Como a modularidade dos relés digitais afeta a gestão de obsolescência e atualização do ativo ao longo de sua vida útil?",
       "options": [
-        "Impede definitivamente a substituicao de pecas e placas danificadas.",
-        "Exige a troca completa do painel eletrico a cada atualizacao de firmware necessitada.",
-        "Permite complementacao por modulos adicionais de comunicacao, protecao e medicao.",
-        "Torna o rele incompativel com os antigos sistemas de corrente alternada."
+        "Impede definitivamente a substituição de peças e placas danificadas.",
+        "Exige a troca completa do painel elétrico a cada atualização de firmware necessitada.",
+        "Permite complementação por módulos adicionais de comunicação, proteção e medição.",
+        "Torna o relé incompatível com os antigos sistemas de corrente alternada."
       ],
       "correctIndex": 2,
-      "explanation": "A modularidade dos reles digitais permite complementar o IED com placas e modulos adicionais.",
+      "explanation": "A modularidade dos relés digitais permite complementar o IED com placas e módulos adicionais.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para manter a rastreabilidade do desempenho, qual e o periodo minimo de guarda do historico do inventario de riscos ocupacionais estipulado na NR-01?",
+      "statement": "Para manter a rastreabilidade do desempenho, qual é o período mínimo de guarda do histórico do inventário de riscos ocupacionais estipulado na NR-01?",
       "options": [
         "5 anos.",
         "10 anos.",
@@ -122,33 +122,33 @@
         "20 anos."
       ],
       "correctIndex": 3,
-      "explanation": "O subitem 1.5.7.3.3.1 da NR-01 exige que o historico de atualizacoes seja mantido por no minimo 20 anos.",
+      "explanation": "O subitem 1.5.7.3.3.1 da NR-01 exige que o histórico de atualizações seja mantido por no mínimo 20 anos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na avaliacao de confiabilidade da protecao, qual e a pior consequencia de uma longa inatividade seguida de falta de manutencao do ativo?",
+      "statement": "Na avaliação de confiabilidade da proteção, qual é a pior consequência de uma longa inatividade seguida de falta de manutenção do ativo?",
       "options": [
-        "O desligamento intempestivo, que pode ter consequencias piores que a propria falha de atuacao.",
-        "O aumento linear da potencia aparente instalada no transformador.",
-        "O aquecimento do rele diminui devido a estabilizacao das correntes de fuga.",
-        "A tensao residual da barra se ajusta automaticamente mitigando a falta."
+        "O desligamento intempestivo, que pode ter consequências piores que a própria falha de atuação.",
+        "O aumento linear da potência aparente instalada no transformador.",
+        "O aquecimento do relé diminui devido à estabilização das correntes de fuga.",
+        "A tensão residual da barra se ajusta automaticamente mitigando a falta."
       ],
       "correctIndex": 0,
-      "explanation": "Atuar de modo intempestivo (falso trip) sem defeito real pode ser ainda pior do que a falha de atuacao, prejudicando a confiabilidade global.",
+      "explanation": "Atuar de modo intempestivo (falso trip) sem defeito real pode ser ainda pior do que a falha de atuação, prejudicando a confiabilidade global.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Os ensaios e o comissionamento de reles sao etapas fundamentais do ciclo de vida para garantir a confiabilidade, atestando que o sistema operara corretamente quando exigido.",
+      "statement": "Os ensaios e o comissionamento de relés são etapas fundamentais do ciclo de vida para garantir a confiabilidade, atestando que o sistema operará corretamente quando exigido.",
       "correctAnswer": true,
-      "explanation": "A confiabilidade e a capacidade de operar corretamente quando exigido, e testes incorretos sao causas diretas de falhas de protecao.",
+      "explanation": "A confiabilidade é a capacidade de operar corretamente quando exigido, e testes incorretos são causas diretas de falhas de proteção.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Durante o ciclo de vida, equipamentos do sistema de protecao contra quedas (SPIQ) que sofrerem impactos severos devem ser reparados e recalibrados para retornarem ao servico.",
+      "statement": "Durante o ciclo de vida, equipamentos do sistema de proteção contra quedas (SPIQ) que sofrerem impactos severos devem ser reparados e recalibrados para retornarem ao serviço.",
       "correctAnswer": false,
       "explanation": "O item 35.6.6.5 da NR-35 afirma que os elementos do SPIQ que sofrerem impacto de queda devem ser inutilizados e descartados, proibindo reparos.",
       "difficulty": "medium",
@@ -156,62 +156,62 @@
     },
     {
       "type": "trueFalse",
-      "statement": "Na gestao de ativos eletricos operando em areas classificadas, o Prontuario de Instalacoes Eletricas deve compilar e arquivar as certificacoes de conformidade desses equipamentos.",
+      "statement": "Na gestão de ativos elétricos operando em áreas classificadas, o Prontuário de Instalações Elétricas deve compilar e arquivar as certificações de conformidade desses equipamentos.",
       "correctAnswer": true,
-      "explanation": "A NR-10 no item 10.2.4 alinea f exige as certificacoes dos equipamentos e materiais eletricos em areas classificadas integrando a documentacao do Prontuario.",
+      "explanation": "A NR-10 no item 10.2.4 alínea f exige as certificações dos equipamentos e materiais elétricos em áreas classificadas integrando a documentação do Prontuário.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A analise economica do ciclo de vida em projetos demonstra que o custo financeiro do sistema de protecao representa tipicamente cerca de 50% do valor do equipamento de potencia protegido.",
+      "statement": "A análise econômica do ciclo de vida em projetos demonstra que o custo financeiro do sistema de proteção representa tipicamente cerca de 50% do valor do equipamento de potência protegido.",
       "correctAnswer": false,
-      "explanation": "O custo da protecao e da ordem de apenas 2 a 5% do equipamento protegido, sendo considerado um seguro barato.",
+      "explanation": "O custo da proteção é da ordem de apenas 2 a 5% do equipamento protegido, sendo considerado um seguro barato.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A longa inatividade dos reles nas subestacoes exige equipamentos com extrema complexidade mecanica e grande quantidade de pecas moveis para garantir a operacao nas raras falhas.",
+      "statement": "A longa inatividade dos relés nas subestações exige equipamentos com extrema complexidade mecânica e grande quantidade de peças móveis para garantir a operação nas raras falhas.",
       "correctAnswer": false,
-      "explanation": "A longa inatividade exige o oposto: simplicidade e robustez para garantir alta confiabilidade na atuacao.",
+      "explanation": "A longa inatividade exige o oposto: simplicidade e robustez para garantir alta confiabilidade na atuação.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Para assegurar a rastreabilidade das acoes de manutencao, a NR-10 determina que o prontuario arquive o relatorio tecnico das inspecoes atualizadas com as respectivas ____.",
+      "statement": "Para assegurar a rastreabilidade das ações de manutenção, a NR-10 determina que o prontuário arquive o relatório técnico das inspeções atualizadas com as respectivas ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "recomendações"
         }
       ],
-      "explanation": "A alinea g do item 10.2.4 da NR-10 determina que o Prontuario inclua o relatorio tecnico das inspecoes atualizadas com as recomendacoes.",
+      "explanation": "A alínea g do item 10.2.4 da NR-10 determina que o Prontuário inclua o relatório técnico das inspeções atualizadas com as recomendações.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "O avanco para a geracao de reles digitais (IEDs) melhorou a manutenibilidade dos ativos ao integrar de fabrica sub-rotinas constantes de monitoramento, autoteste e ____.",
+      "statement": "O avanço para a geração de relés digitais (IEDs) melhorou a manutenibilidade dos ativos ao integrar de fábrica sub-rotinas constantes de monitoramento, autoteste e ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "diagnóstico"
         }
       ],
-      "explanation": "Os IEDs integram sub-rotinas de monitoramento e diagnostico (autodiagnose) que melhoram a manutenibilidade.",
+      "explanation": "Os IEDs integram sub-rotinas de monitoramento e diagnóstico (autodiagnose) que melhoram a manutenibilidade.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "A medida essencial do desempenho da manutencao que avalia a probabilidade de um componente satisfazer a funcao prevista sob as circunstancias de projeto e nomeada como ____.",
+      "statement": "A medida essencial do desempenho da manutenção que avalia a probabilidade de um componente satisfazer a função prevista sob as circunstâncias de projeto é nomeada como ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "confiabilidade"
         }
       ],
-      "explanation": "A confiabilidade de um ativo de protecao e a probabilidade do componente satisfazer a sua funcao prevista sob dadas circunstancias.",
+      "explanation": "A confiabilidade de um ativo de proteção é a probabilidade do componente satisfazer a sua função prevista sob dadas circunstâncias.",
       "difficulty": "hard"
     }
   ]

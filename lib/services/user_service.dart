@@ -32,7 +32,7 @@ import 'package:spark_app/services/clan_service.dart';
 //  Delegado às Cloud Functions:
 //   - addXp              → CF: addXp
 //   - spendSparkPoints   → CF: spendSparkPoints
-//   - updateElo          → CF: updateElo
+//   - ELO de duelo        → CF: finalizeDuel (via MatchService)
 //   - unlockBadge        → CF: unlockBadge
 // ─────────────────────────────────────────────────────────────────
 
@@ -244,31 +244,13 @@ class UserService extends ChangeNotifier {
   }
 
   // ─────────────────────────────────────────────────────────────────
-  //  DUELO / ELO — Via Cloud Functions
+  //  DUELO / ELO
+  //
+  //  O ELO do duelo é apurado e gravado EXCLUSIVAMENTE pela Cloud Function
+  //  `finalizeDuel` (ver MatchService), a partir do resultado real da partida.
+  //  Não há método de atualização de ELO chamável pelo cliente — isso evita
+  //  que o app forje pontuação de ranking.
   // ─────────────────────────────────────────────────────────────────
-
-  Future<void> updateElo({required int eloChange, required bool? won}) async {
-    if (uid.isEmpty) return;
-
-    try {
-      final response = await _functions.httpsCallable('updateElo').call({
-        'eloChange': eloChange,
-        'won': won,
-      });
-
-      final data = response.data as Map;
-
-      await AuditService().log(
-        action: AuditAction.eloUpdated,
-        amount: eloChange,
-        source: 'duel',
-        meta: {'won': won, 'newElo': data['newElo']},
-      );
-    } catch (e) {
-      debugPrint('[UserService.updateElo] Cloud Function error: $e');
-      rethrow;
-    }
-  }
 
   // ─────────────────────────────────────────────────────────────────
   //  CONQUISTAS (BADGES) — Direto no Firestore (Client-Side)

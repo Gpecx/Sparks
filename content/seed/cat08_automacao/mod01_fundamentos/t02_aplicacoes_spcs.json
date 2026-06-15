@@ -26,7 +26,7 @@
       "statement": "Qual é a finalidade principal do sistema de telemetria aplicado à distribuição de energia e processos remotos?",
       "options": [
         "Desligar localmente disjuntores com base em limites de tensão curtos.",
-        "Isolar galvânicamente os relés de proteção de estado sólido.",
+        "Isolar galvanicamente os relés de proteção de estado sólido.",
         "Transmitir informações de medição e controle para locais remotos separados geograficamente.",
         "Substituir os conversores analógico-digitais em subestações de alta tensão."
       ],
@@ -57,7 +57,7 @@
         "Acionar instantaneamente todos os atuadores pneumáticos na presença de transientes de sinal."
       ],
       "correctIndex": 1,
-      "explanation": "Um sistema seguro em falha desenergiza os relés ou solenóides, abrindo os contatos e garantindo a falha segura na perda de alimentação (Marco Antônio Ribeiro - Kufunda.net).",
+      "explanation": "Um sistema seguro em falha desenergiza os relés ou solenoides, abrindo os contatos e garantindo a falha segura na perda de alimentação (Marco Antônio Ribeiro - Kufunda.net).",
       "difficulty": "medium"
     },
     {

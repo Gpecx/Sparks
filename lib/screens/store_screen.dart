@@ -445,12 +445,16 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                     children: [
                       Row(
                         children: [
-                          Text(
-                            plan.name,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w800,
+                          Flexible(
+                            child: Text(
+                              plan.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w800,
+                              ),
                             ),
                           ),
                           if (plan.badge != null) ...[
@@ -489,12 +493,17 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                     ],
                   ),
                 ),
+                const SizedBox(width: 8),
                 // Preço
-                Column(
+                Flexible(
+                  child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
                       displayPrice,
+                      maxLines: 2,
+                      textAlign: TextAlign.end,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: isFree ? AppColors.textMuted : plan.accentColor,
                         fontSize: isFree ? 16 : 17,
@@ -514,6 +523,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                         ),
                       ),
                   ],
+                ),
                 ),
               ],
             ),

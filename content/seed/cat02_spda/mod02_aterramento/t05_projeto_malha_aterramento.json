@@ -10,59 +10,59 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual e o objetivo principal do subsistema de aterramento no projeto de um SPDA?",
+      "statement": "Qual é o objetivo principal do subsistema de aterramento no projeto de um SPDA?",
       "options": [
-        "Absorver a energia do raio para aproveitamento na rede eletrica interna.",
-        "Dispersar a corrente proveniente da descarga atmosferica para a terra a fim de minimizar sobretensoes perigosas.",
-        "Atrair as descargas atmosfericas da vizinhanca para proteger outros edificios.",
-        "Evitar fisicamente a formacao de nuvens carregadas acima da estrutura metalica."
+        "Absorver a energia do raio para aproveitamento na rede elétrica interna.",
+        "Dispersar a corrente proveniente da descarga atmosférica para a terra a fim de minimizar sobretensões perigosas.",
+        "Atrair as descargas atmosféricas da vizinhança para proteger outros edifícios.",
+        "Evitar fisicamente a formação de nuvens carregadas acima da estrutura metálica."
       ],
       "correctIndex": 1,
-      "explanation": "O sistema de aterramento tem como objetivo dispersar a corrente proveniente da descarga atmosferica para a terra a fim de minimizar qualquer sobretensao potencialmente perigosa. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "O sistema de aterramento tem como objetivo dispersar a corrente proveniente da descarga atmosférica para a terra a fim de minimizar qualquer sobretensão potencialmente perigosa. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em relacao a integracao dos subsistemas no projeto, qual e a pratica recomendada para os aterramentos de SPDA, energia e sinal (telecomunicacoes, dados)?",
+      "statement": "Em relação à integração dos subsistemas no projeto, qual é a prática recomendada para os aterramentos de SPDA, energia e sinal (telecomunicações, dados)?",
       "options": [
-        "Devem possuir malhas isoladas e separadas por no minimo 5 metros.",
+        "Devem possuir malhas isoladas e separadas por no mínimo 5 metros.",
         "Devem compartilhar apenas as hastes verticais principais, isolando o anel.",
-        "E interessante assumir uma unica estrutura de aterramento integrada para todos os propositos.",
-        "Apenas os aterramentos de SPDA e energia podem ser unidos, mantendo telecomunicacoes isolado."
+        "É interessante assumir uma única estrutura de aterramento integrada para todos os propósitos.",
+        "Apenas os aterramentos de SPDA e energia podem ser unidos, mantendo telecomunicações isolado."
       ],
       "correctIndex": 2,
-      "explanation": "E interessante assumir uma unica estrutura de aterramento integrando todos os propositos como o SPDA, sistemas de energia e sinal (telecomunicacoes, dados etc.), essa estrategia proporciona maior economia e facilidade. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "É interessante assumir uma única estrutura de aterramento integrando todos os propósitos como o SPDA, sistemas de energia e sinal (telecomunicações, dados etc.), essa estratégia proporciona maior economia e facilidade. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No inicio do dimensionamento do sistema, o que os projetistas podem considerar primeiramente como eletrodos naturais do aterramento disponiveis na edificacao?",
+      "statement": "No início do dimensionamento do sistema, o que os projetistas podem considerar primeiramente como eletrodos naturais do aterramento disponíveis na edificação?",
       "options": [
         "Condutores de cobre nu expostos no telhado.",
-        "As tubulacoes de gas e esgoto feitas de polimeros.",
-        "As armaduras de aco interconectadas nas fundacoes de concreto.",
+        "As tubulações de gás e esgoto feitas de polímeros.",
+        "As armaduras de aço interconectadas nas fundações de concreto.",
         "As descidas de para-raios tipo Franklin fixadas por fora."
       ],
       "correctIndex": 2,
-      "explanation": "Para dimensionar o sistema podemos primeiramente considerar os eletrodos naturais, que sao as armaduras de aco interconectadas nas fundacoes de concreto, ou outras estruturas metalicas subterraneas disponiveis. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Para dimensionar o sistema podemos primeiramente considerar os eletrodos naturais, que são as armaduras de aço interconectadas nas fundações de concreto, ou outras estruturas metálicas subterrâneas disponíveis. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao utilizar as armaduras da fundacao como eletrodo natural de aterramento, qual condicao estrutural especifica PROIBE o uso de seus cabos de aco como condutores?",
+      "statement": "Ao utilizar as armaduras da fundação como eletrodo natural de aterramento, qual condição estrutural específica PROÍBE o uso de seus cabos de aço como condutores?",
       "options": [
         "Concreto usinado simples sem sapatas fundas.",
         "Concreto protendido.",
-        "Concreto ciclopico aparente.",
+        "Concreto ciclópico aparente.",
         "Armaduras revestidas com pintura superficial betuminosa."
       ],
       "correctIndex": 1,
-      "explanation": "Para utilizar esses eletrodos devemos garantir a continuidade eletrica, no caso de concreto protendido, os cabos de aco nao podem ser utilizados como condutores para o sistema de aterramento. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Para utilizar esses eletrodos devemos garantir a continuidade elétrica, no caso de concreto protendido, os cabos de aço não podem ser utilizados como condutores para o sistema de aterramento. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quando nao for possivel usar as fundacoes ou eletrodos naturais, optando-se por um anel externo a estrutura, qual a porcentagem minima de seu comprimento total que deve estar em contato direto com o solo?",
+      "statement": "Quando não for possível usar as fundações ou eletrodos naturais, optando-se por um anel externo à estrutura, qual a porcentagem mínima de seu comprimento total que deve estar em contato direto com o solo?",
       "options": [
         "50%",
         "80%",
@@ -70,25 +70,25 @@
         "100%"
       ],
       "correctIndex": 1,
-      "explanation": "Caso nao seja possivel utilizar os eletrodos naturais da edificacao, deve ser feito um anel externo a estrutura, onde o condutor devera estar em contato com o solo no minimo 80% do seu comprimento total. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Caso não seja possível utilizar os eletrodos naturais da edificação, deve ser feito um anel externo à estrutura, onde o condutor deverá estar em contato com o solo no mínimo 80% do seu comprimento total. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em relacao a instalacao fisica dos condutores em anel ao redor da edificacao a ser protegida, a norma exige profundidade e distancia minimas. Quais sao esses parametros, respectivamente?",
+      "statement": "Em relação à instalação física dos condutores em anel ao redor da edificação a ser protegida, a norma exige profundidade e distância mínimas. Quais são esses parâmetros, respectivamente?",
       "options": [
-        "0,3 m de profundidade e 0,5 m de distancia.",
-        "0,5 m de profundidade e 1,0 m de distancia.",
-        "1,0 m de profundidade e 1,5 m de distancia.",
-        "0,8 m de profundidade e 2,0 m de distancia."
+        "0,3 m de profundidade e 0,5 m de distância.",
+        "0,5 m de profundidade e 1,0 m de distância.",
+        "1,0 m de profundidade e 1,5 m de distância.",
+        "0,8 m de profundidade e 2,0 m de distância."
       ],
       "correctIndex": 1,
-      "explanation": "Com relacao a instalacao dos condutores de aterramento, devera ser enterrado em uma profundidade de 0,5m no minimo, e ser posicionado a uma distancia minima de 1m ao redor da edificacao a ser protegida. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Com relação à instalação dos condutores de aterramento, deverá ser enterrado em uma profundidade de 0,5m no mínimo, e ser posicionado a uma distância mínima de 1m ao redor da edificação a ser protegida. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao dimensionar o projeto de aterramento envolvendo especificamente uma subestacao predial de energia eletrica, a NBR 5419 deve atuar de forma complementar a qual outra norma tecnica de aterramento?",
+      "statement": "Ao dimensionar o projeto de aterramento envolvendo especificamente uma subestação predial de energia elétrica, a NBR 5419 deve atuar de forma complementar a qual outra norma técnica de aterramento?",
       "options": [
         "NBR 5410",
         "NBR 14039",
@@ -96,38 +96,38 @@
         "NBR 16785"
       ],
       "correctIndex": 2,
-      "explanation": "Apesar do sistema de aterramento ter que respeitar a norma NBR 15751 (Sistema de aterramento de subestacoes), aos olhos do SPDA ela deve complementarmente respeitar a NBR 5419. Uma nao anula a outra. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Apesar do sistema de aterramento ter que respeitar a norma NBR 15751 (Sistema de aterramento de subestações), aos olhos do SPDA ela deve complementarmente respeitar a NBR 5419. Uma não anula a outra. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Caso as limitacoes do espaco exijam que a configuracao do anel de aterramento seja instalada internamente a edificacao, qual exigencia normativa deve ser obrigatoriamente incluida no projeto?",
+      "statement": "Caso as limitações do espaço exijam que a configuração do anel de aterramento seja instalada internamente à edificação, qual exigência normativa deve ser obrigatoriamente incluída no projeto?",
       "options": [
-        "O anel devera ter o dobro da secao minima normatizada.",
-        "Devem ser previstas medidas preventivas que minimizem os riscos por tensoes perigosas de superficie, como tensao de passo e de toque.",
-        "A area interna devera sofrer tratamento quimico de resistividade semestralmente.",
-        "O aterramento devera ser encapsulado em duto de ferro galvanizado em toda a extensao."
+        "O anel deverá ter o dobro da seção mínima normatizada.",
+        "Devem ser previstas medidas preventivas que minimizem os riscos por tensões perigosas de superfície, como tensão de passo e de toque.",
+        "A área interna deverá sofrer tratamento químico de resistividade semestralmente.",
+        "O aterramento deverá ser encapsulado em duto de ferro galvanizado em toda a extensão."
       ],
       "correctIndex": 1,
-      "explanation": "Caso nao seja possivel realizar a configuracao em anel externamente, pode ser adotado a instalacao do anel internamente a edificacao devendo ser previstos medidas que minimizem os riscos por tensoes perigosas de superficie como tensao de passo e de toque. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Caso não seja possível realizar a configuração em anel externamente, pode ser adotado a instalação do anel internamente à edificação devendo ser previstos medidas que minimizem os riscos por tensões perigosas de superfície como tensão de passo e de toque. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Entre as modificacoes relevantes impostas pela edicao da ABNT NBR 5419:2026, qual material construtivo passou a ser sumariamente proibido de ser utilizado na transicao entre o concreto e o solo no aterramento?",
+      "statement": "Entre as modificações relevantes impostas pela edição da ABNT NBR 5419:2026, qual material construtivo passou a ser sumariamente proibido de ser utilizado na transição entre o concreto e o solo no aterramento?",
       "options": [
         "Cobre nu encordoado.",
-        "Aco cobreado com nucleo rigido.",
-        "Aco inoxidavel AISI 304.",
-        "Aco zincado a quente."
+        "Aço cobreado com núcleo rígido.",
+        "Aço inoxidável AISI 304.",
+        "Aço zincado a quente."
       ],
       "correctIndex": 3,
-      "explanation": "Entre os ajustes na norma 5419:2026 estao a admissao de condutores de cobre no concreto e a proibicao do uso de aco zincado a quente na transicao entre o concreto e o solo. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Entre os ajustes na norma 5419:2026 estão a admissão de condutores de cobre no concreto e a proibição do uso de aço zincado a quente na transição entre o concreto e o solo. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a Tabela de dimensoes minimas para eletrodos de aterramento da NBR 5419, caso o projetista decida usar fita macica de Aco Galvanizado a quente na configuracao de eletrodo nao cravado, qual e a secao transversal minima necessaria?",
+      "statement": "Segundo a Tabela de dimensões mínimas para eletrodos de aterramento da NBR 5419, caso o projetista decida usar fita maciça de Aço Galvanizado a quente na configuração de eletrodo não cravado, qual é a seção transversal mínima necessária?",
       "options": [
         "50 mm2",
         "70 mm2",
@@ -135,83 +135,83 @@
         "100 mm2"
       ],
       "correctIndex": 2,
-      "explanation": "A tabela determina que, para Aco galvanizado a quente, na configuracao fita macica como eletrodo nao cravado, a area de secao minima e 90 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A tabela determina que, para Aço galvanizado a quente, na configuração fita maciça como eletrodo não cravado, a área de seção mínima é 90 mm2. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A norma e os metodos construtivos atestam que as hastes de aterramento (eletrodos cravados no solo verticalmente) podem ser instaladas sozinhas como o unico componente estrutural do subsistema de aterramento de um SPDA, dispensando a presenca do condutor em anel.",
+      "statement": "A norma e os métodos construtivos atestam que as hastes de aterramento (eletrodos cravados no solo verticalmente) podem ser instaladas sozinhas como o único componente estrutural do subsistema de aterramento de um SPDA, dispensando a presença do condutor em anel.",
       "correctAnswer": false,
-      "explanation": "As hastes de aterramento continuam nao sendo permitidas como unico componente do sistema, podendo ser utilizadas apenas como complemento de malhas ou aneis. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "As hastes de aterramento continuam não sendo permitidas como único componente do sistema, podendo ser utilizadas apenas como complemento de malhas ou anéis. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A atualizacao da norma NBR 5419:2026 flexibilizou algumas restricoes construtivas e passou a permitir o uso de cabos de cobre ou de aco cobreado com formacao de 7 ou 19 fios na composicao do subsistema de aterramento.",
+      "statement": "A atualização da norma NBR 5419:2026 flexibilizou algumas restrições construtivas e passou a permitir o uso de cabos de cobre ou de aço cobreado com formação de 7 ou 19 fios na composição do subsistema de aterramento.",
       "correctAnswer": true,
-      "explanation": "A revisao normativa informa explicitamente que passam a ser permitidos, no aterramento, cabos de cobre ou de aco cobreado com formacao de 7 ou 19 fios. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A revisão normativa informa explicitamente que passam a ser permitidos, no aterramento, cabos de cobre ou de aço cobreado com formação de 7 ou 19 fios. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Verificando as especificacoes da Tabela normativa de dimensoes de eletrodos, nota-se que o Aluminio e amplamente recomendado e tem area minima prevista de 70 mm2 para atuar em contato direto com o solo como malha de aterramento.",
+      "statement": "Verificando as especificações da Tabela normativa de dimensões de eletrodos, nota-se que o Alumínio é amplamente recomendado e tem área mínima prevista de 70 mm2 para atuar em contato direto com o solo como malha de aterramento.",
       "correctAnswer": false,
-      "explanation": "A celula para o eletrodo de aterramento feito em Aluminio e hifenizada nas tabelas da norma, indicando que seu uso e vetado e proibido para contato direto com o solo como eletrodo. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A célula para o eletrodo de aterramento feito em Alumínio é hifenizada nas tabelas da norma, indicando que seu uso é vetado e proibido para contato direto com o solo como eletrodo. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Na redacao atualizada da ABNT NBR 5419:2026, foi eliminada a possibilidade que era anteriormente prevista de haver interrupcao parcial do anel de aterramento sempre que ele for instalado fora do solo.",
+      "statement": "Na redação atualizada da ABNT NBR 5419:2026, foi eliminada a possibilidade que era anteriormente prevista de haver interrupção parcial do anel de aterramento sempre que ele for instalado fora do solo.",
       "correctAnswer": true,
-      "explanation": "A nova redacao da norma elimina a possibilidade anteriormente prevista de interrupcao parcial do anel quando instalado fora do solo, exigindo continuidade. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A nova redação da norma elimina a possibilidade anteriormente prevista de interrupção parcial do anel quando instalado fora do solo, exigindo continuidade. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Caso o raio medio abrigado pela malha de aterramento exija a necessidade de instalar eletrodos adicionais (hastes), a tecnica recomenda que eles sejam instalados o mais distantes possivel dos pontos de conexao do subsistema de descidas.",
+      "statement": "Caso o raio médio abrigado pela malha de aterramento exija a necessidade de instalar eletrodos adicionais (hastes), a técnica recomenda que eles sejam instalados o mais distantes possível dos pontos de conexão do subsistema de descidas.",
       "correctAnswer": false,
-      "explanation": "O correto e exatamente o oposto: caso haja necessidade de instalar eletrodos adicionais, estes devem ser instalados o mais proximo possivel dos pontos de conexao com o subsistema de descida. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "O correto é exatamente o oposto: caso haja necessidade de instalar eletrodos adicionais, estes devem ser instalados o mais próximo possível dos pontos de conexão com o subsistema de descida. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Com a revisao da norma NBR 5419, os condutores de aco cobreado tiveram as suas secoes nominais diretamente equiparadas as exigidas para o cobre. Para o subsistema de aterramento, esse material deve ter uma secao de no minimo ____ mm2.",
+      "statement": "Com a revisão da norma NBR 5419, os condutores de aço cobreado tiveram as suas seções nominais diretamente equiparadas às exigidas para o cobre. Para o subsistema de aterramento, esse material deve ter uma seção de no mínimo ____ mm2.",
       "blanks": [
         {
           "index": 0,
           "answer": "50"
         }
       ],
-      "explanation": "Os condutores de aco cobreado passam a ter secoes equiparadas ao cobre, com valores minimos de 35 mm2 para captacao e descida e de 50 mm2 para o subsistema de aterramento. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Os condutores de aço cobreado passam a ter seções equiparadas ao cobre, com valores mínimos de 35 mm2 para captação e descida e de 50 mm2 para o subsistema de aterramento. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Para utilizar validamente as armaduras de aco das fundacoes da edificacao como componentes do eletrodo natural, o projeto e a instalacao devem obrigatoriamente prever e garantir a ____ eletrica ininterrupta em todas as conexoes do conjunto metalico.",
+      "statement": "Para utilizar validamente as armaduras de aço das fundações da edificação como componentes do eletrodo natural, o projeto e a instalação devem obrigatoriamente prever e garantir a ____ elétrica ininterrupta em todas as conexões do conjunto metálico.",
       "blanks": [
         {
           "index": 0,
           "answer": "continuidade"
         }
       ],
-      "explanation": "Para utilizar os eletrodos naturais (armaduras de aco interconectadas nas fundacoes de concreto), devemos garantir a continuidade eletrica na edificacao. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Para utilizar os eletrodos naturais (armaduras de aço interconectadas nas fundações de concreto), devemos garantir a continuidade elétrica na edificação. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Embora os criterios da ABNT NBR 5419 sejam imperativos para o aterramento relacionado a raios, no ambiente especifico de projeto para subestacoes eletricas, o dimensionamento do aterramento deve ocorrer em complemento com as diretrizes e requisitos da norma NBR ____.",
+      "statement": "Embora os critérios da ABNT NBR 5419 sejam imperativos para o aterramento relacionado a raios, no ambiente específico de projeto para subestações elétricas, o dimensionamento do aterramento deve ocorrer em complemento com as diretrizes e requisitos da norma NBR ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "15751"
         }
       ],
-      "explanation": "Apesar do sistema ter que respeitar a norma NBR 15751 (Sistema de aterramento de subestacoes - Requisitos), aos olhos do SPDA ela deve complementarmente respeitar a NBR 5419. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Apesar do sistema ter que respeitar a norma NBR 15751 (Sistema de aterramento de subestações - Requisitos), aos olhos do SPDA ela deve complementarmente respeitar a NBR 5419. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "hard"
     }
   ]

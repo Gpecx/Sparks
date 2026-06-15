@@ -1,217 +1,217 @@
 {
   "category": "Termografia Infravermelha",
-  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categorySubtitle": "Fundamentos, aplicações em sistemas elétricos e normas de laudos",
   "categoryOrder": 3,
   "module": "Fundamentos de Termografia",
-  "moduleSubtitle": "Fisica do IR, transferencia de calor, equipamentos e calibracao",
+  "moduleSubtitle": "Física do IR, transferência de calor, equipamentos e calibração",
   "moduleOrder": 1,
   "trail": "Emissividade e Temperatura",
   "trailOrder": 2,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que e a definicao de um corpo negro no contexto da termografia infravermelha?",
+      "statement": "O que é a definição de um corpo negro no contexto da termografia infravermelha?",
       "options": [
-        "Um corpo perfeitamente opaco que, como resultado de sua temperatura, emite a maxima radiacao possivel.",
-        "Um objeto com superficie brilhante que reflete toda a radiacao termica incidente do ambiente.",
-        "Uma superficie que absorve o calor da radiacao infravermelha externa mas nao o emite de volta.",
+        "Um corpo perfeitamente opaco que, como resultado de sua temperatura, emite a máxima radiação possível.",
+        "Um objeto com superfície brilhante que reflete toda a radiação térmica incidente do ambiente.",
+        "Uma superfície que absorve o calor da radiação infravermelha externa mas não o emite de volta.",
         "Um material isolante cuja emissividade varia drasticamente de acordo com o comprimento de onda e o tamanho da lente."
       ],
       "correctIndex": 0,
-      "explanation": "Um corpo negro e um corpo perfeitamente opaco que, como resultado de sua temperatura, emite a maxima radiacao possivel, sendo considerado um radiador ou emissor perfeito. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Um corpo negro é um corpo perfeitamente opaco que, como resultado de sua temperatura, emite a máxima radiação possível, sendo considerado um radiador ou emissor perfeito. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que pode ocorrer se a emissividade e a temperatura refletida nao forem ajustadas corretamente na configuracao da camera termografica?",
+      "statement": "O que pode ocorrer se a emissividade e a temperatura refletida não forem ajustadas corretamente na configuração da câmera termográfica?",
       "options": [
-        "O termovisor identifica a divergencia e corrige automaticamente os parametros de leitura termica da imagem.",
-        "A camera bloqueia a captura da imagem infravermelha ate que os parametros de temperatura ambiente sejam informados.",
-        "As medicoes apresentarao desvios, podendo gerar erros de avaliacao e diagnosticos muito significativos para o termografista.",
-        "A temperatura aparente medida pelo equipamento sera exatamente igual a temperatura termica real do objeto avaliado."
+        "O termovisor identifica a divergência e corrige automaticamente os parâmetros de leitura térmica da imagem.",
+        "A câmera bloqueia a captura da imagem infravermelha até que os parâmetros de temperatura ambiente sejam informados.",
+        "As medições apresentarão desvios, podendo gerar erros de avaliação e diagnósticos muito significativos para o termografista.",
+        "A temperatura aparente medida pelo equipamento será exatamente igual à temperatura térmica real do objeto avaliado."
       ],
       "correctIndex": 2,
-      "explanation": "Emissividade, temperatura refletida e outros parametros do objeto devem ser ajustados corretamente, caso contrario, as medicoes apresentarao desvios podendo gerar erros de avaliacao e diagnosticos muito significativos. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "explanation": "Emissividade, temperatura refletida e outros parâmetros do objeto devem ser ajustados corretamente, caso contrário, as medições apresentarão desvios podendo gerar erros de avaliação e diagnósticos muito significativos. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a caracteristica intrinseca de cada objeto que depende da direcao de radiacao, do comprimento de onda analisado e de suas caracteristicas superficiais?",
+      "statement": "Qual é a característica intrínseca de cada objeto que depende da direção de radiação, do comprimento de onda analisado e de suas características superficiais?",
       "options": [
-        "A compensacao da temperatura refletida aparente.",
-        "A constante do poder de reflexao termica global.",
-        "O coeficiente de transmissao e absorcao atmosferica.",
+        "A compensação da temperatura refletida aparente.",
+        "A constante do poder de reflexão térmica global.",
+        "O coeficiente de transmissão e absorção atmosférica.",
         "A emissividade."
       ],
       "correctIndex": 3,
-      "explanation": "A emissividade e uma caracteristica intrinseca de cada objeto e depende da direcao de radiacao, do comprimento de onda analisado e de suas caracteristicas superficiais. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A emissividade é uma característica intrínseca de cada objeto e depende da direção de radiação, do comprimento de onda analisado e de suas características superficiais. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "A radiacao total detectada por um termovisor proveniente de uma superficie inspecionada e composta por quais elementos principais?",
+      "statement": "A radiação total detectada por um termovisor proveniente de uma superfície inspecionada é composta por quais elementos principais?",
       "options": [
-        "Exclusivamente pela radiacao termica dissipada internamente pelo proprio componente focado pela lente.",
-        "Pela soma da radiacao emitida pela propria superficie com a parcela da radiacao proveniente do ambiente que e refletida por ela.",
-        "Apenas pela energia termica refletida de corpos e estruturas adjacentes com alta temperatura de operacao.",
-        "Pela transmitancia atmosferica multiplicada pelo calor especifico acumulado do material eletrico medido."
+        "Exclusivamente pela radiação térmica dissipada internamente pelo próprio componente focado pela lente.",
+        "Pela soma da radiação emitida pela própria superfície com a parcela da radiação proveniente do ambiente que é refletida por ela.",
+        "Apenas pela energia térmica refletida de corpos e estruturas adjacentes com alta temperatura de operação.",
+        "Pela transmitância atmosférica multiplicada pelo calor específico acumulado do material elétrico medido."
       ],
       "correctIndex": 1,
-      "explanation": "A radiacao total proveniente de uma superficie inspecionada corresponde a soma da radiacao emitida pela propria superficie com a parcela por ela refletida proveniente do ambiente. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A radiação total proveniente de uma superfície inspecionada corresponde à soma da radiação emitida pela própria superfície com a parcela por ela refletida proveniente do ambiente. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como se comporta a emissividade de corpos reais (tambem chamados de radiadores nao ideais) em relacao ao angulo direcional de emissao da radiacao?",
+      "statement": "Como se comporta a emissividade de corpos reais (também chamados de radiadores não ideais) em relação ao ângulo direcional de emissão da radiação?",
       "options": [
-        "A emissividade real permanece com valor unitario e invariavel em todas as direcoes possiveis para corpos nao ideais.",
-        "A emissividade de corpos nao ideais sofre aumento linear e constante, subindo a medida que o angulo de inspecao se aproxima de noventa graus.",
-        "Corpos reais tem emissividade inferior a de um radiador perfeito e seu valor varia conforme o angulo de emissao focado.",
-        "O angulo de emissao afeta severamente a emissividade apenas de corpos negros atuando no vacuo absoluto."
+        "A emissividade real permanece com valor unitário e invariável em todas as direções possíveis para corpos não ideais.",
+        "A emissividade de corpos não ideais sofre aumento linear e constante, subindo à medida que o ângulo de inspeção se aproxima de noventa graus.",
+        "Corpos reais têm emissividade inferior à de um radiador perfeito e seu valor varia conforme o ângulo de emissão focado.",
+        "O ângulo de emissão afeta severamente a emissividade apenas de corpos negros atuando no vácuo absoluto."
       ],
       "correctIndex": 2,
-      "explanation": "A emissividade de corpos nao ideais e variavel em funcao do angulo de emissao. Corpos reais tem emissividade inferior a de um radiador perfeito e que varia conforme o angulo de emissao. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A emissividade de corpos não ideais é variável em função do ângulo de emissão. Corpos reais têm emissividade inferior à de um radiador perfeito e que varia conforme o ângulo de emissão. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com os conceitos de interpretacao na termografia, por que superficies com acabamento que possuem brilho costumam fornecer leituras falsas de temperatura aparente?",
+      "statement": "De acordo com os conceitos de interpretação na termografia, por que superfícies com acabamento que possuem brilho costumam fornecer leituras falsas de temperatura aparente?",
       "options": [
-        "Porque elas tem emissividade muito baixa e acabam refletindo grande parte da energia termica radiada por corpos adjacentes.",
-        "Porque a altissima emissividade do polimento absorve toda a radiacao termica do ambiente sem repassa-la ao termovisor.",
-        "Porque o reflexo gerado pelo brilho da peca interfere diretamente na calibracao do microbolometro do termovisor de luz visivel.",
-        "Porque a temperatura interna dessas superficies metalicas polidas e sempre muito inferior a temperatura ambiente real do local."
+        "Porque elas têm emissividade muito baixa e acabam refletindo grande parte da energia térmica radiada por corpos adjacentes.",
+        "Porque a altíssima emissividade do polimento absorve toda a radiação térmica do ambiente sem repassá-la ao termovisor.",
+        "Porque o reflexo gerado pelo brilho da peça interfere diretamente na calibração do microbolômetro do termovisor de luz visível.",
+        "Porque a temperatura interna dessas superfícies metálicas polidas é sempre muito inferior à temperatura ambiente real do local."
       ],
       "correctIndex": 0,
-      "explanation": "Superficies que possuem brilho tem emissividade muito baixa e podem fornecer leituras falsas de temperatura aparente, pois refletem a temperatura e energia de corpos do ambiente adjacente. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "explanation": "Superfícies que possuem brilho têm emissividade muito baixa e podem fornecer leituras falsas de temperatura aparente, pois refletem a temperatura e energia de corpos do ambiente adjacente. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o comportamento direcional tipico da emissividade em materiais condutores, como barras de cobre ou conectores de aluminio, ao se variar progressivamente o angulo de visada na inspecao?",
+      "statement": "Qual é o comportamento direcional típico da emissividade em materiais condutores, como barras de cobre ou conectores de alumínio, ao se variar progressivamente o ângulo de visada na inspeção?",
       "options": [
-        "A emissividade decai de forma estritamente continua e linear desde a visada perfeitamente perpendicular ate os noventa graus.",
-        "A emissividade apresenta uma tendencia de elevacao inicial e somente para angulos de visada extremamente altos, em torno de oitenta graus, comeca a diminuir.",
-        "A emissividade assume comportamento de espelho negro, mantendo-se unitaria para qualquer angulo de medicao infravermelha efetuado.",
-        "A emissividade exibe queda abrupta e imediata para todos os angulos que sejam menores que quarenta e cinco graus em relacao a normal."
+        "A emissividade decai de forma estritamente contínua e linear desde a visada perfeitamente perpendicular até os noventa graus.",
+        "A emissividade apresenta uma tendência de elevação inicial e somente para ângulos de visada extremamente altos, em torno de oitenta graus, começa a diminuir.",
+        "A emissividade assume comportamento de espelho negro, mantendo-se unitária para qualquer ângulo de medição infravermelha efetuado.",
+        "A emissividade exibe queda abrupta e imediata para todos os ângulos que sejam menores que quarenta e cinco graus em relação à normal."
       ],
       "correctIndex": 1,
-      "explanation": "Materiais condutores tendem a apresentar inicialmente uma elevacao da emissividade e somente para angulos de visada extremamente altos, em torno de 80 graus, comecam a apresentar diminuicao. Para angulos menores que 45 graus, a mudanca e irrelevante. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Materiais condutores tendem a apresentar inicialmente uma elevação da emissividade e somente para ângulos de visada extremamente altos, em torno de 80 graus, começam a apresentar diminuição. Para ângulos menores que 45 graus, a mudança é irrelevante. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual solucao pratica baseada em emissividade e citada como eficiente para revelar a temperatura real e corrigir leituras falsas de diferenca de temperatura sobre materiais de cobre brilhantes?",
+      "statement": "Qual solução prática baseada em emissividade é citada como eficiente para revelar a temperatura real e corrigir leituras falsas de diferença de temperatura sobre materiais de cobre brilhantes?",
       "options": [
-        "Aplicar jatos de ar comprimido diretos no material condutor para congelar o fluxo convectivo de calor ao redor da area.",
-        "Colar um simples pedaco ou tira de fita adesiva que possua a propriedade termica de alta emissividade sobre a superficie.",
-        "Subtrair constantemente o valor arbitrario de trinta graus Celsius de toda temperatura aparente lida em areas polidas.",
-        "Configurar no software a medicao automatica do fator de preenchimento do pixel com valor exato de setenta e cinco por cento."
+        "Aplicar jatos de ar comprimido diretos no material condutor para congelar o fluxo convectivo de calor ao redor da área.",
+        "Colar um simples pedaço ou tira de fita adesiva que possua a propriedade térmica de alta emissividade sobre a superfície.",
+        "Subtrair constantemente o valor arbitrário de trinta graus Celsius de toda temperatura aparente lida em áreas polidas.",
+        "Configurar no software a medição automática do fator de preenchimento do pixel com valor exato de setenta e cinco por cento."
       ],
       "correctIndex": 1,
-      "explanation": "O que parece ser apenas uma pequena diferenca de temperatura entre dois pedacos de cobre brilhante e na verdade muito maior, diferenca que e revelada pelo uso de uma tira de fita de alta emissividade sobre o material. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "explanation": "O que parece ser apenas uma pequena diferença de temperatura entre dois pedaços de cobre brilhante é na verdade muito maior, diferença que é revelada pelo uso de uma tira de fita de alta emissividade sobre o material. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na modelagem da radiacao total recebida por um termovisor, a radiacao refletida pelo objeto provem do ambiente e depende da refletividade (r) do material. Qual a relacao usada para tratar a refletividade conhecendo-se a emissividade do corpo opaco?",
+      "statement": "Na modelagem da radiação total recebida por um termovisor, a radiação refletida pelo objeto provém do ambiente e depende da refletividade (r) do material. Qual a relação usada para tratar a refletividade conhecendo-se a emissividade do corpo opaco?",
       "options": [
-        "A refletividade global sera computada como sendo exatamente igual ao quadrado de sua emissividade espectral.",
-        "A refletividade do objeto atua de maneira complementar a sua emissividade, de forma que o coeficiente refletivo seja calculado pela subtracao de um menos a emissividade.",
-        "A capacidade reflexiva corresponde sempre a uma fracao igual a raiz quadrada exata de sua propria emissividade termica.",
-        "A refletividade mais a emissividade compoem somadas o fator de transmitancia absorvida pela atmosfera estavel."
+        "A refletividade global será computada como sendo exatamente igual ao quadrado de sua emissividade espectral.",
+        "A refletividade do objeto atua de maneira complementar à sua emissividade, de forma que o coeficiente refletivo seja calculado pela subtração de um menos a emissividade.",
+        "A capacidade reflexiva corresponde sempre a uma fração igual à raiz quadrada exata de sua própria emissividade térmica.",
+        "A refletividade mais a emissividade compõem somadas o fator de transmitância absorvida pela atmosfera estável."
       ],
       "correctIndex": 1,
-      "explanation": "A emissividade e um fator complementar a refletividade para corpos opacos, de forma que a refletividade pode ser representada pela equacao refletividade = 1 - emissividade. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A emissividade é um fator complementar à refletividade para corpos opacos, de forma que a refletividade pode ser representada pela equação refletividade = 1 - emissividade. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com os principios fisicos da radiacao infravermelha, como a propriedade emissividade espectral e rigorosamente definida?",
+      "statement": "De acordo com os princípios físicos da radiação infravermelha, como a propriedade emissividade espectral é rigorosamente definida?",
       "options": [
-        "Pela divisao entre a taxa de calor absorvido superficialmente pelo objeto e o calor dissipado internamente pelo efeito Joule resistivo.",
-        "Atraves da atenuacao real de energia imposta pelos gases e vapor da atmosfera na propagacao da radiacao do objeto ate as lentes do termovisor.",
-        "E definida como a razao entre a excitancia emitida pelo objeto analisado e a excitancia maxima possivel emitida por um corpo negro teorico, ambos a mesma temperatura absoluta.",
-        "Como a maxima variacao de temperatura superficial na qual um conector eletrico consegue operar em carga maxima sem sofrer degradacao."
+        "Pela divisão entre a taxa de calor absorvido superficialmente pelo objeto e o calor dissipado internamente pelo efeito Joule resistivo.",
+        "Através da atenuação real de energia imposta pelos gases e vapor da atmosfera na propagação da radiação do objeto até as lentes do termovisor.",
+        "É definida como a razão entre a excitância emitida pelo objeto analisado e a excitância máxima possível emitida por um corpo negro teórico, ambos à mesma temperatura absoluta.",
+        "Como a máxima variação de temperatura superficial na qual um conector elétrico consegue operar em carga máxima sem sofrer degradação."
       ],
       "correctIndex": 2,
-      "explanation": "A propriedade emissividade espectral e definida como a razao entre a excitancia emitida pelo objeto analisado e a excitancia emitida por um corpo negro (emissor perfeito), desde que ambos estejam a mesma temperatura. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A propriedade emissividade espectral é definida como a razão entre a excitância emitida pelo objeto analisado e a excitância emitida por um corpo negro (emissor perfeito), desde que ambos estejam à mesma temperatura. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A imagem visivel que observamos na tela de uma camera termografica se limita estritamente ao calor emitido por fontes internas do objeto focado, sem captar influencias termicas refletidas de outras maquinas vizinhas.",
+      "statement": "A imagem visível que observamos na tela de uma câmera termográfica se limita estritamente ao calor emitido por fontes internas do objeto focado, sem captar influências térmicas refletidas de outras máquinas vizinhas.",
       "correctAnswer": false,
-      "explanation": "Os termovisores sao equipamentos passivos e captam tambem a radiacao refletida do ambiente. O que vemos nao se limita ao calor emitido pelo objeto, mas pode ser resultado de energia refletida de corpos adjacentes, gerando uma leitura aparente modificada. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "explanation": "Os termovisores são equipamentos passivos e captam também a radiação refletida do ambiente. O que vemos não se limita ao calor emitido pelo objeto, mas pode ser resultado de energia refletida de corpos adjacentes, gerando uma leitura aparente modificada. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Alem da direcao da radiacao captada, a emissividade termica de um objeto e uma caracteristica intrinseca que sofre influencia de fatores como o comprimento de onda analisado e suas propriedades e condicoes fisicas superficiais.",
+      "statement": "Além da direção da radiação captada, a emissividade térmica de um objeto é uma característica intrínseca que sofre influência de fatores como o comprimento de onda analisado e suas propriedades e condições físicas superficiais.",
       "correctAnswer": true,
-      "explanation": "A emissividade e uma caracteristica intrinseca de cada objeto e depende da direcao de radiacao, do comprimento de onda analisado e de suas caracteristicas superficiais. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A emissividade é uma característica intrínseca de cada objeto e depende da direção de radiação, do comprimento de onda analisado e de suas características superficiais. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Postos a mesma temperatura operacional em um ambiente, os corpos e materiais reais conseguem emitir a atmosfera uma quantidade de radiacao termica identica aquela emanada por um radiador perfeito (corpo negro).",
+      "statement": "Postos à mesma temperatura operacional em um ambiente, os corpos e materiais reais conseguem emitir à atmosfera uma quantidade de radiação térmica idêntica àquela emanada por um radiador perfeito (corpo negro).",
       "correctAnswer": false,
-      "explanation": "A uma mesma temperatura, os corpos reais emitem sempre radiacao menor e variavel em relacao a radiacao maxima possivel emitida por um corpo negro (radiador perfeito). (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A uma mesma temperatura, os corpos reais emitem sempre radiação menor e variável em relação à radiação máxima possível emitida por um corpo negro (radiador perfeito). (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Na terminologia tecnica mais precisa, o termo emitancia aplica-se a corpos e radiadores reais com caracteristicas singulares (como rugosidade ou oxidacao), enquanto emissividade deve ser associado apenas a amostras perfeitamente lisas, limpas e sem porosidade.",
+      "statement": "Na terminologia técnica mais precisa, o termo emitância aplica-se a corpos e radiadores reais com características singulares (como rugosidade ou oxidação), enquanto emissividade deve ser associado apenas a amostras perfeitamente lisas, limpas e sem porosidade.",
       "correctAnswer": true,
-      "explanation": "O termo emissividade deveria ser empregado somente para amostras de materiais planas e livres de porosidades e alteracoes superficiais. Para corpos reais com rugosidade, curvaturas ou oxidacao, utiliza-se o termo emitancia. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O termo emissividade deveria ser empregado somente para amostras de materiais planas e livres de porosidades e alterações superficiais. Para corpos reais com rugosidade, curvaturas ou oxidação, utiliza-se o termo emitância. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Estudando a dependencia angular, todos os isolantes (nao condutores) elevam sua emissividade rapidamente ao girar em grandes angulos ate noventa graus, enquanto as ligas polidas condutoras declinam sua emissividade em todos os angulos sucessivos sem excecao.",
+      "statement": "Estudando a dependência angular, todos os isolantes (não condutores) elevam sua emissividade rapidamente ao girar em grandes ângulos até noventa graus, enquanto as ligas polidas condutoras declinam sua emissividade em todos os ângulos sucessivos sem exceção.",
       "correctAnswer": false,
-      "explanation": "O comportamento e o reverso: os materiais nao condutores apresentam queda acentuada de emissividade ao aumentar o angulo de visada; ja os materiais condutores tendem a mostrar discreta elevacao inicial, declinando apenas sob angulos muito altos, proximos de oitenta graus. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O comportamento é o reverso: os materiais não condutores apresentam queda acentuada de emissividade ao aumentar o ângulo de visada; já os materiais condutores tendem a mostrar discreta elevação inicial, declinando apenas sob ângulos muito altos, próximos de oitenta graus. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Superficies inspecionadas com revestimentos de alto indice de reflexao e intenso ____ tendem a apresentar emissividade muito baixa, propiciando risco de leituras falsas que mascaram a temperatura real local por refletirem energia lateral.",
+      "statement": "Superfícies inspecionadas com revestimentos de alto índice de reflexão e intenso ____ tendem a apresentar emissividade muito baixa, propiciando risco de leituras falsas que mascaram a temperatura real local por refletirem energia lateral.",
       "blanks": [
         {
           "index": 0,
           "answer": "brilho"
         }
       ],
-      "explanation": "As partes com superficies que possuem brilho ou polimento destacam-se por apresentar emissividade muito baixa, refletindo parcela das emissoes vizinhas e induzindo leituras falsas na avaliacao de sua real temperatura aparente. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
+      "explanation": "As partes com superfícies que possuem brilho ou polimento destacam-se por apresentar emissividade muito baixa, refletindo parcela das emissões vizinhas e induzindo leituras falsas na avaliação de sua real temperatura aparente. (Fonte: Os 5 principais erros cometidos por termografistas inexperientes, ATM Brasil)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Os radiadores teoricos ideais (corpo negro) possuem condicao de emissividade considerada matematicamente como plenamente ____, independentemente da direcao de leitura da radiacao, pois agem como perfeitos emissores isotropicos.",
+      "statement": "Os radiadores teóricos ideais (corpo negro) possuem condição de emissividade considerada matematicamente como plenamente ____, independentemente da direção de leitura da radiação, pois agem como perfeitos emissores isotrópicos.",
       "blanks": [
         {
           "index": 0,
           "answer": "unitaria"
         }
       ],
-      "explanation": "O corpo negro teorico detem condicao de emissividade perfeitamente unitaria (igual a um), uniforme em todas as direcoes de radiacao, comportando-se como emissor radiador isotropicamente perfeito. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O corpo negro teórico detém condição de emissividade perfeitamente unitária (igual a um), uniforme em todas as direções de radiação, comportando-se como emissor radiador isotropicamente perfeito. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A soma da radiacao efetivamente emitida pela propria superficie inspecionada com a parcela de radiacao refletida proveniente do ambiente ao redor recebe a denominacao classica de ____ total.",
+      "statement": "A soma da radiação efetivamente emitida pela própria superfície inspecionada com a parcela de radiação refletida proveniente do ambiente ao redor recebe a denominação clássica de ____ total.",
       "blanks": [
         {
           "index": 0,
           "answer": "radiosidade"
         }
       ],
-      "explanation": "A radiacao total captada pelo termovisor em uma superficie, somando a radiacao emitida pela propria superficie e a refletida de corpos do entorno, recebe o nome de radiosidade total. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A radiação total captada pelo termovisor em uma superfície, somando a radiação emitida pela própria superfície e a refletida de corpos do entorno, recebe o nome de radiosidade total. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     }
   ]

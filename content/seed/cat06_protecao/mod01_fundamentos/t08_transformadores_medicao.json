@@ -204,7 +204,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Para detectar correntes de falta fase-terra (homopolares), conectam-se os tres enrolamentos secundarios dos TPs em serie, na configuracao consagrada chamada de ____ aberto, fornecendo a soma algebrica 3V0.",
+      "statement": "Para detectar correntes de falta fase-terra (homopolares), conectam-se os três enrolamentos secundários dos TPs em série, na configuração consagrada chamada de ____ aberto, fornecendo a soma algébrica 3V0.",
       "blanks": [
         {
           "index": 0,

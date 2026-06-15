@@ -192,7 +192,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Na automacao de redes em anel operadas radialmente, realimenta-se o trecho sao fechando o dispositivo seccionador (NA) que mantinha a malha ____.",
+      "statement": "Na automação de redes em anel operadas radialmente, realimenta-se o trecho são fechando o dispositivo seccionador (NA) que mantinha a malha ____.",
       "blanks": [
         {
           "index": 0,

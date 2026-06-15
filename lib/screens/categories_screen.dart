@@ -345,6 +345,8 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
                               color: AppColors.textSecondary,
                               fontSize: 12,
                             ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           if (!comingSoon) ...[
                             const SizedBox(height: 8),

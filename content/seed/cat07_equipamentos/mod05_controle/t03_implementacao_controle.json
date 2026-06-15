@@ -10,98 +10,98 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual a finalidade da funcao 25 (Synchronism and Voltage Check) na implementacao do controle de fechamento?",
+      "statement": "Qual a finalidade da função 25 (Synchronism and Voltage Check) na implementação do controle de fechamento?",
       "options": [
-        "Medir a impedancia de linha morta.",
-        "Transferir a carga para a barra de seguranca.",
-        "Verificar as diferencas de tensao, frequencia e angulo antes de fechar o disjuntor.",
-        "Desbloquear a operacao do rele diferencial."
+        "Medir a impedância de linha morta.",
+        "Transferir a carga para a barra de segurança.",
+        "Verificar as diferenças de tensão, frequência e ângulo antes de fechar o disjuntor.",
+        "Desbloquear a operação do relé diferencial."
       ],
       "correctIndex": 2,
-      "explanation": "A funcao 25 verifica os limites de tensao, frequencia e angulo para garantir o fechamento seguro em paralelo. (Fonte: Virtus ProtLT).",
+      "explanation": "A função 25 verifica os limites de tensão, frequência e ângulo para garantir o fechamento seguro em paralelo. (Fonte: Virtus ProtLT).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na parametrizacao do controle de seccionadoras, o que o ajuste ISOL RUN TIME define?",
+      "statement": "Na parametrização do controle de seccionadoras, o que o ajuste ISOL RUN TIME define?",
       "options": [
         "O tempo de fechamento do disjuntor de linha.",
-        "O tempo de atraso do religamento automatico.",
-        "A temporizacao intencional para abertura sob falta.",
-        "O tempo maximo de operacao de uma seccionadora em uma manobra."
+        "O tempo de atraso do religamento automático.",
+        "A temporização intencional para abertura sob falta.",
+        "O tempo máximo de operação de uma seccionadora em uma manobra."
       ],
       "correctIndex": 3,
-      "explanation": "ISOL RUN TIME estabelece o tempo maximo de operacao de uma seccionadora em uma manobra de comando. (Fonte: Virtus ProtBarras).",
+      "explanation": "ISOL RUN TIME estabelece o tempo máximo de operação de uma seccionadora em uma manobra de comando. (Fonte: Virtus ProtBarras).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a logica do IED trata a seccionadora em caso de falha de alimentacao auxiliar parametrizada no ISOL DC FAIL como old isolator status?",
+      "statement": "Como a lógica do IED trata a seccionadora em caso de falha de alimentação auxiliar parametrizada no ISOL DC FAIL como old isolator status?",
       "options": [
-        "Adota o ultimo status registrado e memorizado para a seccionadora.",
-        "Forca a abertura imediata da chave.",
-        "Bloqueia permanentemente todo o painel de protecao.",
-        "Aciona o trip tripolar no disjuntor do vao."
+        "Adota o último status registrado e memorizado para a seccionadora.",
+        "Força a abertura imediata da chave.",
+        "Bloqueia permanentemente todo o painel de proteção.",
+        "Aciona o trip tripolar no disjuntor do vão."
       ],
       "correctIndex": 0,
-      "explanation": "O tratamento old isolator status memoriza o ultimo estado valido da chave por seguranca em caso de falha DC. (Fonte: Virtus ProtBarras).",
+      "explanation": "O tratamento old isolator status memoriza o último estado válido da chave por segurança em caso de falha DC. (Fonte: Virtus ProtBarras).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em subestacoes digitais, o que e a replica de seccionadoras usada no software do IED?",
+      "statement": "Em subestações digitais, o que é a réplica de seccionadoras usada no software do IED?",
       "options": [
         "Um banco de dados de oscilografia de falhas e eventos.",
-        "A associacao logica que espelha os estados fisicos reais das chaves para comandos e seletividade.",
+        "A associação lógica que espelha os estados físicos reais das chaves para comandos e seletividade.",
         "O hardware de chaveamento manual presente na porta do painel.",
-        "Um rele termico auxiliar para protecao de sobrecarga do vao."
+        "Um relé térmico auxiliar para proteção de sobrecarga do vão."
       ],
       "correctIndex": 1,
-      "explanation": "A replica de seccionadoras mapeia digitalmente a topologia para assegurar a seletividade de comandos e bloqueios na logica. (Fonte: Virtus ProtBarras).",
+      "explanation": "A réplica de seccionadoras mapeia digitalmente a topologia para assegurar a seletividade de comandos e bloqueios na lógica. (Fonte: Virtus ProtBarras).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na parametrizacao da funcao 25, o que o ajuste Maximum voltage difference determina?",
+      "statement": "Na parametrização da função 25, o que o ajuste Maximum voltage difference determina?",
       "options": [
-        "A diferenca maxima de corrente residual tolerada.",
-        "A subtensao de bloqueio do religador automatico.",
-        "A diferenca maxima de tensao permitida entre a barra e a linha para realizar o fechamento.",
-        "O limiar de sobretensao da funcao 59 do gerador."
+        "A diferença máxima de corrente residual tolerada.",
+        "A subtensão de bloqueio do religador automático.",
+        "A diferença máxima de tensão permitida entre a barra e a linha para realizar o fechamento.",
+        "O limiar de sobretensão da função 59 do gerador."
       ],
       "correctIndex": 2,
-      "explanation": "Esse ajuste estabelece o limite de variacao de tensao para autorizar a sincronizacao no comando de fechamento. (Fonte: Virtus ProtLT).",
+      "explanation": "Esse ajuste estabelece o limite de variação de tensão para autorizar a sincronização no comando de fechamento. (Fonte: Virtus ProtLT).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Se a parametrizacao ISOL Malfunct estiver ajustada para Blocking during the fault, qual sera a acao da protecao perante uma falha na seccionadora?",
+      "statement": "Se a parametrização ISOL Malfunct estiver ajustada para Blocking during the fault, qual será a ação da proteção perante uma falha na seccionadora?",
       "options": [
-        "Liberar o intertravamento localmente para intervencao manual.",
+        "Liberar o intertravamento localmente para intervenção manual.",
         "Ignorar a seccionadora defeituosa e manobrar as demais fases.",
-        "Gerar trip imediato do disjuntor do vao sem alarme.",
-        "Bloquear as operacoes de comando e lógicas durante a ocorrencia da falta no equipamento."
+        "Gerar trip imediato do disjuntor do vão sem alarme.",
+        "Bloquear as operações de comando e lógicas durante a ocorrência da falta no equipamento."
       ],
       "correctIndex": 3,
-      "explanation": "O modo Blocking during the fault define o bloqueio temporario da operacao e lógicas de barra durante a anomalia na chave. (Fonte: Virtus ProtBarras).",
+      "explanation": "O modo Blocking during the fault define o bloqueio temporário da operação e lógicas de barra durante a anomalia na chave. (Fonte: Virtus ProtBarras).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na configuracao de check de sincronismo, qual e a finalidade do parametro Live bus / dead line check before Man.Cl?",
+      "statement": "Na configuração de check de sincronismo, qual é a finalidade do parâmetro Live bus / dead line check before Man.Cl?",
       "options": [
-        "Checar as condicoes seguras de barra viva e linha morta antes de um fechamento manual.",
+        "Checar as condições seguras de barra viva e linha morta antes de um fechamento manual.",
         "Liberar a abertura sob carga fortemente capacitiva.",
-        "Bloquear oscilacoes de potencia transitorias na barra principal.",
-        "Forcar a operacao do religador na zona 1 de distancia."
+        "Bloquear oscilações de potência transitórias na barra principal.",
+        "Forçar a operação do religador na zona 1 de distância."
       ],
       "correctIndex": 0,
-      "explanation": "O parametro habilita a verificacao de tensao indicando barra energizada e linha desenergizada antes de autorizar o comando manual. (Fonte: Virtus ProtLT).",
+      "explanation": "O parâmetro habilita a verificação de tensão indicando barra energizada e linha desenergizada antes de autorizar o comando manual. (Fonte: Virtus ProtLT).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual ajuste deve ser parametrizado como released para alterar configuracoes de um Bay Unit localmente durante uma intervencao de manutencao?",
+      "statement": "Qual ajuste deve ser parametrizado como released para alterar configurações de um Bay Unit localmente durante uma intervenção de manutenção?",
       "options": [
         "Earth fault characteristic switchover.",
         "Control release for bay units (CTRL REL BU).",
@@ -109,109 +109,109 @@
         "Synchronism and Voltage Check bypass."
       ],
       "correctIndex": 1,
-      "explanation": "O ajuste Control release for bay units (CTRL REL BU) permite intervencoes e mudancas de parametros localmente durante a manutencao. (Fonte: Virtus ProtBarras).",
+      "explanation": "O ajuste Control release for bay units (CTRL REL BU) permite intervenções e mudanças de parâmetros localmente durante a manutenção. (Fonte: Virtus ProtBarras).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na logica de controle e monitoramento do IED, para que serve o ajuste de parametro I> MAN TRIP?",
+      "statement": "Na lógica de controle e monitoramento do IED, para que serve o ajuste de parâmetro I> MAN TRIP?",
       "options": [
         "Supervisionar a perda de potencial nos enrolamentos dos TPs.",
-        "Limitar a sobrecarga termica do estator do gerador principal.",
-        "Definir o valor limite de corrente para autorizar a realizacao segura do teste do disjuntor.",
-        "Medir a resistencia de arco durante uma falta monofasica."
+        "Limitar a sobrecarga térmica do estator do gerador principal.",
+        "Definir o valor limite de corrente para autorizar a realização segura do teste do disjuntor.",
+        "Medir a resistência de arco durante uma falta monofásica."
       ],
       "correctIndex": 2,
-      "explanation": "O parametro I> MAN TRIP estabelece o limite seguro de corrente durante rotinas de comando manual para o teste do disjuntor. (Fonte: Virtus ProtBarras).",
+      "explanation": "O parâmetro I> MAN TRIP estabelece o limite seguro de corrente durante rotinas de comando manual para o teste do disjuntor. (Fonte: Virtus ProtBarras).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como o ajuste ISOL ST 1/1 trata uma informacao recebida que seja nao plausivel sobre a posicao dos contatos de uma seccionadora?",
+      "statement": "Como o ajuste ISOL ST 1/1 trata uma informação recebida que seja não plausível sobre a posição dos contatos de uma seccionadora?",
       "options": [
-        "Aplica curto-circuito interno na entrada de medicao do IED para proteger a IHM.",
-        "Desliga imediatamente a fonte auxiliar DC do painel de controle do vao.",
-        "Transfere a protecao de barra inteiramente para o rele de retaguarda eletromecanico.",
-        "Adota o ultimo status registrado (old isolator status) ou o status fechado (ON), conforme a parametrizacao escolhida."
+        "Aplica curto-circuito interno na entrada de medição do IED para proteger a IHM.",
+        "Desliga imediatamente a fonte auxiliar DC do painel de controle do vão.",
+        "Transfere a proteção de barra inteiramente para o relé de retaguarda eletromecânico.",
+        "Adota o último status registrado (old isolator status) ou o status fechado (ON), conforme a parametrização escolhida."
       ],
       "correctIndex": 3,
-      "explanation": "Para informacoes nao plausiveis de duplo contato, a logica de seguranca assume o ultimo status valido ou o status ON, dependendo da escolha do usuario. (Fonte: Virtus ProtBarras).",
+      "explanation": "Para informações não plausíveis de duplo contato, a lógica de segurança assume o último status válido ou o status ON, dependendo da escolha do usuário. (Fonte: Virtus ProtBarras).",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A funcao 25 de verificacao de sincronismo pode ser parametrizada para avaliar diferencas maximas de angulo, frequencia e tensao simultaneamente.",
+      "statement": "A função 25 de verificação de sincronismo pode ser parametrizada para avaliar diferenças máximas de ângulo, frequência e tensão simultaneamente.",
       "correctAnswer": true,
-      "explanation": "O check de sincronismo engloba a validacao dos limites maximos permitidos de tensao, angulo e frequencia exigidos para o paralelismo. (Fonte: Virtus ProtLT).",
+      "explanation": "O check de sincronismo engloba a validação dos limites máximos permitidos de tensão, ângulo e frequência exigidos para o paralelismo. (Fonte: Virtus ProtLT).",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A parametrizacao Dead bus / dead line check before Man.Cl assegura que o fechamento manual seguro do disjuntor so ocorra se ambos os lados.",
+      "statement": "A parametrização Dead bus / dead line check before Man.Cl assegura que o fechamento manual seguro do disjuntor só ocorra se ambos os lados.",
       "correctAnswer": true,
-      "explanation": "Esta funcao de seguranca garante que o comando de fechamento manual opere apenas em condicoes reais de barra morta e linha morta. (Fonte: Virtus ProtLT).",
+      "explanation": "Esta função de segurança garante que o comando de fechamento manual opere apenas em condições reais de barra morta e linha morta. (Fonte: Virtus ProtLT).",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O parametro T-CB open na parametrizacao do IED e utilizado exclusivamente para definir o tempo maximo tolerado para o curso mecanico completo das.",
+      "statement": "O parâmetro T-CB open na parametrização do IED é utilizado exclusivamente para definir o tempo máximo tolerado para o curso mecânico completo das.",
       "correctAnswer": false,
-      "explanation": "O parametro T-CB open refere-se a temporizacao intencional para abertura do disjuntor. O curso maximo da seccionadora e definido por ISOL RUN TIME. (Fonte: Virtus ProtBarras).",
+      "explanation": "O parâmetro T-CB open refere-se à temporização intencional para abertura do disjuntor. O curso máximo da seccionadora é definido por ISOL RUN TIME. (Fonte: Virtus ProtBarras).",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Caso a seccionadora do vao ultrapasse o tempo parametrizado em ISOL RUN TIME durante a sua manobra, o sistema de controle registrara um alarme de.",
+      "statement": "Caso a seccionadora do vão ultrapasse o tempo parametrizado em ISOL RUN TIME durante a sua manobra, o sistema de controle registrará um alarme de.",
       "correctAnswer": true,
-      "explanation": "Falhas no tempo de movimentacao esperado (run time) geram um alarme especifico de erro de tempo de execucao e impedem operacoes adicionais inseguras. (Fonte: Virtus ProtBarras).",
+      "explanation": "Falhas no tempo de movimentação esperado (run time) geram um alarme específico de erro de tempo de execução e impedem operações adicionais inseguras. (Fonte: Virtus ProtBarras).",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para liberar a execucao de mudancas de parametros localmente no software por motivo de manutencao, o operador deve colocar a parametrizacao.",
+      "statement": "Para liberar a execução de mudanças de parâmetros localmente no software por motivo de manutenção, o operador deve colocar a parametrização.",
       "correctAnswer": false,
-      "explanation": "O estado released para operacoes de manutencao local deve ser ajustado no parametro Control release for bay units, e nao na protecao da barra de transferencia. (Fonte: Virtus ProtBarras).",
+      "explanation": "O estado released para operações de manutenção local deve ser ajustado no parâmetro Control release for bay units, e não na proteção da barra de transferência. (Fonte: Virtus ProtBarras).",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O parametro Maximum ____ difference na configuracao da funcao 25 restringe o comando de fechamento caso o escorregamento em Hertz exceda o limite.",
+      "statement": "O parâmetro Maximum ____ difference na configuração da função 25 restringe o comando de fechamento caso o escorregamento em Hertz exceda o limite.",
       "blanks": [
         {
           "index": 0,
           "answer": "frequency"
         }
       ],
-      "explanation": "O ajuste Maximum frequency difference (ex: 0,15 Hz) delimita a diferenca de frequencia maxima tolerada para atestar o sincronismo. (Fonte: Virtus ProtLT).",
+      "explanation": "O ajuste Maximum frequency difference (ex: 0,15 Hz) delimita a diferença de frequência máxima tolerada para atestar o sincronismo. (Fonte: Virtus ProtLT).",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A implementacao de software que mapeia digitalmente a topologia real da subestacao para garantir as logicas de intertravamentos e seletividade no ____.",
+      "statement": "A implementação de software que mapeia digitalmente a topologia real da subestação para garantir as lógicas de intertravamentos e seletividade no ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "replica"
         }
       ],
-      "explanation": "A replica de seccionadoras reflete o estado fisico das chaves em logica no software do IED, viabilizando o controle e a seguranca operacional do barramento. (Fonte: Virtus ProtBarras).",
+      "explanation": "A réplica de seccionadoras reflete o estado físico das chaves em lógica no software do IED, viabilizando o controle e a segurança operacional do barramento. (Fonte: Virtus ProtBarras).",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "O tratamento seguro dado pelo IED a logica de intertravamento quando ocorre a perda da tensao auxiliar de corrente continua na seccionadora e ____.",
+      "statement": "O tratamento seguro dado pelo IED à lógica de intertravamento quando ocorre a perda da tensão auxiliar de corrente contínua na seccionadora é ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "FAIL"
         }
       ],
-      "explanation": "O parametro ISOL DC FAIL dita a reacao logica do sistema perante a falha de alimentacao DC, permitindo memorizar o status antigo da chave para evitar acidentes. (Fonte: Virtus ProtBarras).",
+      "explanation": "O parâmetro ISOL DC FAIL dita a reação lógica do sistema perante a falha de alimentação DC, permitindo memorizar o status antigo da chave para evitar acidentes. (Fonte: Virtus ProtBarras).",
       "difficulty": "hard"
     }
   ]

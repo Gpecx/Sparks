@@ -1,16 +1,16 @@
 {
   "category": "Qualidade da Energia",
-  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categorySubtitle": "Fundamentos, Harmônicas, Transitórios, Medição e Normas",
   "categoryOrder": 2,
   "module": "Harmônicas e Distorção",
-  "moduleSubtitle": "Fundamentos, fontes, impactos, analise e mitigacao",
+  "moduleSubtitle": "Fundamentos, fontes, impactos, análise e mitigação",
   "moduleOrder": 1,
   "trail": "Limites IEEE 519 e IEC 61000-3",
   "trailOrder": 5,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "De acordo com as recomendacoes da IEEE 519, qual deve ser o limite maximo da Distorcao Harmonica Total de Tensao (THD V) no ponto de acoplamento comum para a maioria das aplicacoes?",
+      "statement": "De acordo com as recomendações da IEEE 519, qual deve ser o limite máximo da Distorção Harmônica Total de Tensão (THD V) no ponto de acoplamento comum para a maioria das aplicações?",
       "options": [
         "Menor ou igual a 3 por cento.",
         "Menor ou igual a 5 por cento.",
@@ -18,64 +18,64 @@
         "Menor ou igual a 12 por cento."
       ],
       "correctIndex": 1,
-      "explanation": "O manual Solucoes WEG especifica que a recomendacao da IEEE 519 e de que no PCC a THD(V) seja menor ou igual a 5 por cento.",
+      "explanation": "O manual Soluções WEG especifica que a recomendação da IEEE 519 é de que no PCC a THD(V) seja menor ou igual a 5 por cento.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
       "statement": "No contexto da norma IEEE 519, o que significa a sigla PCC (Point of Common Coupling) onde os limites devem ser medidos e avaliados?",
       "options": [
-        "Ponto de Controle Continuo.",
+        "Ponto de Controle Contínuo.",
         "Potencial de Curto-Circuito.",
         "Ponto de Acoplamento Comum.",
         "Ponto de Carga Capacitiva."
       ],
       "correctIndex": 2,
-      "explanation": "O documento da WEG define a sigla PCC repetidas vezes como Ponto de Acoplamento Comum, sendo o local onde a norma exige a analise.",
+      "explanation": "O documento da WEG define a sigla PCC repetidas vezes como Ponto de Acoplamento Comum, sendo o local onde a norma exige a análise.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o foco principal da aplicabilidade dos limites recomendados pela norma IEEE 519?",
+      "statement": "Qual é o foco principal da aplicabilidade dos limites recomendados pela norma IEEE 519?",
       "options": [
-        "Sistemas de distribuicao e nao equipamentos individuais.",
-        "Apenas inversores de frequencia residenciais.",
-        "Filtros ativos operando no interior de maquinas.",
-        "Geradores e baterias automotivas de baixa tensao."
+        "Sistemas de distribuição e não equipamentos individuais.",
+        "Apenas inversores de frequência residenciais.",
+        "Filtros ativos operando no interior de máquinas.",
+        "Geradores e baterias automotivas de baixa tensão."
       ],
       "correctIndex": 0,
-      "explanation": "O manual da WEG ressalta claramente que a IEEE 519 diz respeito aos sistemas de distribuicao e nao aos equipamentos individuais.",
+      "explanation": "O manual da WEG ressalta claramente que a IEEE 519 diz respeito aos sistemas de distribuição e não aos equipamentos individuais.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na tabela da IEEE 519 que define os limites de distorcao harmonica de corrente (TDD), o que o parametro Isc representa?",
+      "statement": "Na tabela da IEEE 519 que define os limites de distorção harmônica de corrente (TDD), o que o parâmetro Isc representa?",
       "options": [
-        "Corrente de magnetizacao do transformador principal.",
-        "Maxima corrente demandada pela carga na fundamental.",
-        "Maxima corrente de curto-circuito no PCC.",
-        "Corrente de sequencia zero em regime permanente."
+        "Corrente de magnetização do transformador principal.",
+        "Máxima corrente demandada pela carga na fundamental.",
+        "Máxima corrente de curto-circuito no PCC.",
+        "Corrente de sequência zero em regime permanente."
       ],
       "correctIndex": 2,
-      "explanation": "As notas da Tabela 2 no documento da WEG e ABB definem Isc como a maxima corrente de curto-circuito no PCC (Point of Common Coupling).",
+      "explanation": "As notas da Tabela 2 no documento da WEG e ABB definem Isc como a máxima corrente de curto-circuito no PCC (Point of Common Coupling).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No calculo dos limites de emissao de corrente pela norma IEEE 519, o que a variavel IL representa matematicamente?",
+      "statement": "No cálculo dos limites de emissão de corrente pela norma IEEE 519, o que a variável IL representa matematicamente?",
       "options": [
-        "Impedancia de linha.",
-        "Maxima corrente demandada pela carga no PCC.",
-        "Corrente induzida por descargas atmosfericas.",
-        "Corrente limite do inversor de frequencia."
+        "Impedância de linha.",
+        "Máxima corrente demandada pela carga no PCC.",
+        "Corrente induzida por descargas atmosféricas.",
+        "Corrente limite do inversor de frequência."
       ],
       "correctIndex": 1,
-      "explanation": "As notas da Tabela no documento WEG e ABB definem IL como a maxima corrente demandada pela carga (componente fundamental) no PCC.",
+      "explanation": "As notas da Tabela no documento WEG e ABB definem IL como a máxima corrente demandada pela carga (componente fundamental) no PCC.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para um sistema eletrico em que a relacao Isc/IL e menor que 20, qual e o limite de Distorcao de Demanda Total (TDD) exigido pela IEEE 519?",
+      "statement": "Para um sistema elétrico em que a relação Isc/IL é menor que 20, qual é o limite de Distorção de Demanda Total (TDD) exigido pela IEEE 519?",
       "options": [
         "3,0 por cento.",
         "5,0 por cento.",
@@ -83,51 +83,51 @@
         "12,0 por cento."
       ],
       "correctIndex": 1,
-      "explanation": "A tabela reproduzida no manual da WEG estabelece que, para Isc/IL menor que 20, o limite maximo da TDD e de 5,0 por cento.",
+      "explanation": "A tabela reproduzida no manual da WEG estabelece que, para Isc/IL menor que 20, o limite máximo da TDD é de 5,0 por cento.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com as alteracoes da atualizacao da IEEE 519-2022, como os componentes interharmonicos devem ser tratados no calculo da TDD e THD?",
+      "statement": "De acordo com as alterações da atualização da IEEE 519-2022, como os componentes interharmônicos devem ser tratados no cálculo da TDD e THD?",
       "options": [
-        "Eles sao especificamente excluidos das equacoes.",
-        "Eles possuem peso duplo no somatorio das tensoes.",
-        "Eles devem substituir os harmonicos impares na analise.",
-        "Eles sao os unicos componentes considerados acima de 60 Hz."
+        "Eles são especificamente excluídos das equações.",
+        "Eles possuem peso duplo no somatório das tensões.",
+        "Eles devem substituir os harmônicos ímpares na análise.",
+        "Eles são os únicos componentes considerados acima de 60 Hz."
       ],
       "correctIndex": 0,
-      "explanation": "O guia de revisao da ABB sobre a IEEE 519-2022 destaca que a THD e a TDD consideram harmonicos ate a 50 ordem, especificamente excluindo as interharmonicas.",
+      "explanation": "O guia de revisão da ABB sobre a IEEE 519-2022 destaca que a THD e a TDD consideram harmônicos até a 50 ordem, especificamente excluindo as interharmônicas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a restricao normativa aplicada aos harmonicos pares de ordem 2, 4 e 6 de acordo com a atualizacao da IEEE 519-2022?",
+      "statement": "Qual é a restrição normativa aplicada aos harmônicos pares de ordem 2, 4 e 6 de acordo com a atualização da IEEE 519-2022?",
       "options": [
-        "Nao possuem qualquer limite normativo exigido.",
-        "Devem ser filtrados ativamente ate atingir valor nulo.",
-        "Sao limitados a 50 por cento dos limites impares exibidos na tabela.",
-        "Possuem limites exatamente iguais aos harmonicos de decima ordem."
+        "Não possuem qualquer limite normativo exigido.",
+        "Devem ser filtrados ativamente até atingir valor nulo.",
+        "São limitados a 50 por cento dos limites ímpares exibidos na tabela.",
+        "Possuem limites exatamente iguais aos harmônicos de décima ordem."
       ],
       "correctIndex": 2,
-      "explanation": "O documento da ABB informa na nota a da Tabela 2 que para harmonicos de ordem menor ou igual a 6, os pares sao limitados a 50 por cento dos limites impares mostrados.",
+      "explanation": "O documento da ABB informa na nota a da Tabela 2 que para harmônicos de ordem menor ou igual a 6, os pares são limitados a 50 por cento dos limites ímpares mostrados.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ate qual ordem harmonica as formulacoes de THD e TDD da atualizacao IEEE 519-2022 exigem que os componentes sejam considerados?",
+      "statement": "Até qual ordem harmônica as formulações de THD e TDD da atualização IEEE 519-2022 exigem que os componentes sejam considerados?",
       "options": [
-        "Ate a 15 ordem.",
-        "Ate a 25 ordem.",
-        "Ate a 50 ordem.",
-        "Ate a 100 ordem."
+        "Até a 15 ordem.",
+        "Até a 25 ordem.",
+        "Até a 50 ordem.",
+        "Até a 100 ordem."
       ],
       "correctIndex": 2,
-      "explanation": "As definicoes atualizadas para THD e TDD no documento ABB indicam a consideracao de componentes harmonicos ate a 50 ordem.",
+      "explanation": "As definições atualizadas para THD e TDD no documento ABB indicam a consideração de componentes harmônicos até a 50 ordem.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo o PRODIST Modulo 8, qual e o limite estabelecido para o indicador global de distorcao harmonica total de tensao (DTT95%) em redes com tensao nominal entre 69 kV e 230 kV?",
+      "statement": "Segundo o PRODIST Módulo 8, qual é o limite estabelecido para o indicador global de distorção harmônica total de tensão (DTT95%) em redes com tensão nominal entre 69 kV e 230 kV?",
       "options": [
         "10,0 por cento.",
         "8,0 por cento.",
@@ -135,83 +135,83 @@
         "3,0 por cento."
       ],
       "correctIndex": 2,
-      "explanation": "A Tabela 2 do PRODIST Modulo 8 define explicitamente que, para tensoes de 69 kV a 230 kV, o limite do DTT95% e de 5,0 por cento.",
+      "explanation": "A Tabela 2 do PRODIST Módulo 8 define explicitamente que, para tensões de 69 kV a 230 kV, o limite do DTT95% é de 5,0 por cento.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A norma IEEE 519 estabelece que o projeto do sistema eletrico industrial deve focar em eliminar todas as correntes harmonicas presentes, independentemente do custo de implementacao.",
+      "statement": "A norma IEEE 519 estabelece que o projeto do sistema elétrico industrial deve focar em eliminar todas as correntes harmônicas presentes, independentemente do custo de implementação.",
       "correctAnswer": false,
-      "explanation": "O manual da WEG relata que nao e economicamente viavel nem possivel eliminar todas as harmonicas do sistema.",
+      "explanation": "O manual da WEG relata que não é economicamente viável nem possível eliminar todas as harmônicas do sistema.",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "De acordo com as tabelas de distorcao da IEEE 519, para redes em que a relacao Isc/IL e inferior a 20, o limite individual exigido para harmonicos impares entre a 11 e a 17 ordem e de 2,0 por cento.",
+      "statement": "De acordo com as tabelas de distorção da IEEE 519, para redes em que a relação Isc/IL é inferior a 20, o limite individual exigido para harmônicos ímpares entre a 11 e a 17 ordem é de 2,0 por cento.",
       "correctAnswer": true,
-      "explanation": "A Tabela II do manual da WEG detalha que, para Isc/IL menor que 20 e ordens harmonicas entre 11 e 17, o limite maximo e exatamente 2,0 por cento.",
+      "explanation": "A Tabela II do manual da WEG detalha que, para Isc/IL menor que 20 e ordens harmônicas entre 11 e 17, o limite máximo é exatamente 2,0 por cento.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A atualizacao da IEEE 519-2022 afirma que as tabelas de limites de distorcao sao idealizadas primordialmente para avaliar e certificar pecas individuais de equipamentos na planta industrial.",
+      "statement": "A atualização da IEEE 519-2022 afirma que as tabelas de limites de distorção são idealizadas primordialmente para avaliar e certificar peças individuais de equipamentos na planta industrial.",
       "correctAnswer": false,
-      "explanation": "O texto de revisao da ABB adverte exatamente o oposto, declarando que os limites dados no documento nao tem a intencao de serem usados para a avaliacao de equipamentos.",
+      "explanation": "O texto de revisão da ABB adverte exatamente o oposto, declarando que os limites dados no documento não têm a intenção de serem usados para a avaliação de equipamentos.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "O regulamento PRODIST Modulo 8 estabelece que o limite maximo toleravel para a distorcao harmonica total de tensao DTT95% em pontos de conexao inferiores a 2,3 kV e igual a 10,0 por cento.",
+      "statement": "O regulamento PRODIST Módulo 8 estabelece que o limite máximo tolerável para a distorção harmônica total de tensão DTT95% em pontos de conexão inferiores a 2,3 kV é igual a 10,0 por cento.",
       "correctAnswer": true,
-      "explanation": "A Tabela 2 do PRODIST Modulo 8 lista o limite de DTT95% para tensao nominal menor que 2,3 kV exatamente como 10,0 por cento.",
+      "explanation": "A Tabela 2 do PRODIST Módulo 8 lista o limite de DTT95% para tensão nominal menor que 2,3 kV exatamente como 10,0 por cento.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Na aplicacao dos limites da IEEE 519, se a instalacao apresentar uma relacao de Isc/IL situada entre 50 e 100, a Distorcao de Demanda Total (TDD) permitida aumenta diretamente para 15,0 por cento.",
+      "statement": "Na aplicação dos limites da IEEE 519, se a instalação apresentar uma relação de Isc/IL situada entre 50 e 100, a Distorção de Demanda Total (TDD) permitida aumenta diretamente para 15,0 por cento.",
       "correctAnswer": false,
-      "explanation": "A tabela da IEEE 519 no manual WEG mostra que para a faixa entre 50 e 100 o limite da TDD e de 12,0 por cento, e nao 15,0 por cento.",
+      "explanation": "A tabela da IEEE 519 no manual WEG mostra que para a faixa entre 50 e 100 o limite da TDD é de 12,0 por cento, e não 15,0 por cento.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O local geografico e eletrico da rede onde a recomendacao da IEEE 519 deve ser aplicada e avaliada e amplamente conhecido na norma como ponto de acoplamento ____.",
+      "statement": "O local geográfico e elétrico da rede onde a recomendação da IEEE 519 deve ser aplicada e avaliada é amplamente conhecido na norma como ponto de acoplamento ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "comum"
         }
       ],
-      "explanation": "O termo PCC e traduzido e referenciado diretamente pelo material da WEG como Ponto de Acoplamento Comum.",
+      "explanation": "O termo PCC é traduzido e referenciado diretamente pelo material da WEG como Ponto de Acoplamento Comum.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Segundo a tabela de limites do PRODIST Modulo 8, o valor normativo admissivel para o indicador total DTT95% operando em tensoes nominais de 2,3 kV a 69 kV equivale a ____ por cento.",
+      "statement": "Segundo a tabela de limites do PRODIST Módulo 8, o valor normativo admissível para o indicador total DTT95% operando em tensões nominais de 2,3 kV a 69 kV equivale a ____ por cento.",
       "blanks": [
         {
           "index": 0,
           "answer": "8,0"
         }
       ],
-      "explanation": "A Tabela 2 do PRODIST Modulo 8 estipula que a faixa de tensao de 2,3 kV ate 69 kV possui o limite DTT95% fixado em 8,0 por cento.",
+      "explanation": "A Tabela 2 do PRODIST Módulo 8 estipula que a faixa de tensão de 2,3 kV até 69 kV possui o limite DTT95% fixado em 8,0 por cento.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Na aplicacao da IEEE 519, se a relacao das correntes Isc/IL calculada para a instalacao industrial for estritamente superior a 1000, o limite maximo tolerado para a TDD e de ____ por cento.",
+      "statement": "Na aplicação da IEEE 519, se a relação das correntes Isc/IL calculada para a instalação industrial for estritamente superior a 1000, o limite máximo tolerado para a TDD é de ____ por cento.",
       "blanks": [
         {
           "index": 0,
           "answer": "20,0"
         }
       ],
-      "explanation": "De acordo com a Tabela da IEEE 519 reproduzida nos materiais da WEG e ABB, a TDD limite para proporcoes maiores que 1000 e estipulada em 20,0 por cento.",
+      "explanation": "De acordo com a Tabela da IEEE 519 reproduzida nos materiais da WEG e ABB, a TDD limite para proporções maiores que 1000 é estipulada em 20,0 por cento.",
       "difficulty": "hard"
     }
   ]

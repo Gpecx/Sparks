@@ -1,16 +1,16 @@
 {
   "category": "Qualidade da Energia",
-  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categorySubtitle": "Fundamentos, Harmônicas, Transitórios, Medição e Normas",
   "categoryOrder": 2,
   "module": "Transitórios e Surtos",
-  "moduleSubtitle": "Tipos, sobretensoes, medicao, DPS e coordenacao",
+  "moduleSubtitle": "Tipos, sobretensões, medição, DPS e coordenação",
   "moduleOrder": 2,
   "trail": "Análise e Medição de Transitórios",
   "trailOrder": 2,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Na medicao e simulacao de transientes, qual forma de onda e utilizada para representar o primeiro impacto de um raio direto na certificacao de DPS Classe I?",
+      "statement": "Na medição e simulação de transientes, qual forma de onda é utilizada para representar o primeiro impacto de um raio direto na certificação de DPS Classe I?",
       "options": [
         "8/20 us",
         "1,2/50 us",
@@ -18,77 +18,77 @@
         "100/1000 us"
       ],
       "correctIndex": 2,
-      "explanation": "O Guia Finder especifica claramente que os DPSs da Classe I sao testados pelo fabricante com uma forma de onda de 10/350 us, a qual e usada para simular o primeiro impacto de um raio.",
+      "explanation": "O Guia Finder especifica claramente que os DPSs da Classe I são testados pelo fabricante com uma forma de onda de 10/350 us, a qual é usada para simular o primeiro impacto de um raio.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual componente dos analisadores modernos de qualidade de energia possibilita a captura de transientes extremamente rapidos de ate 1 microssegundo?",
+      "statement": "Qual componente dos analisadores modernos de qualidade de energia possibilita a captura de transientes extremamente rápidos de até 1 microssegundo?",
       "options": [
-        "Conversores analogico-digitais (ADCs) de alta resolucao com taxa de amostragem de 1 MS/s.",
-        "Reles eletromecanicos baseados em discos de inducao magnetica.",
-        "Filtros passivos de alta impedancia capacitiva na entrada.",
-        "Varistores de oxido metalico de lenta resposta em paralelo."
+        "Conversores analógico-digitais (ADCs) de alta resolução com taxa de amostragem de 1 MS/s.",
+        "Relés eletromecânicos baseados em discos de indução magnética.",
+        "Filtros passivos de alta impedância capacitiva na entrada.",
+        "Varistores de óxido metálico de lenta resposta em paralelo."
       ],
       "correctIndex": 0,
-      "explanation": "De acordo com o artigo sobre Analisadores da Wrindu, conversores analogico-digitais (ADCs) de alta resolucao, com taxa de amostragem de 1 MS/s, capturam transientes rapidos invisiveis para dispositivos mais lentos.",
+      "explanation": "De acordo com o artigo sobre Analisadores da Wrindu, conversores analógico-digitais (ADCs) de alta resolução, com taxa de amostragem de 1 MS/s, capturam transientes rápidos invisíveis para dispositivos mais lentos.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na forma de onda padronizada de 8/20 us utilizada para simular surtos de tensao induzidos, o que o numero 8 representa fisicamente no grafico temporal?",
+      "statement": "Na forma de onda padronizada de 8/20 us utilizada para simular surtos de tensão induzidos, o que o número 8 representa fisicamente no gráfico temporal?",
       "options": [
-        "A duracao total continua do transiente ate sua extincao plena no eixo.",
+        "A duração total contínua do transiente até sua extinção plena no eixo.",
         "O tempo em microssegundos para a frente ascendente do pulso ir de 10 a 90 por cento do seu valor de pico.",
         "O valor limite de pico da corrente injetada medido em quiloamperes.",
-        "A frequencia harmonica de oscilacao do surto expressa em quilohertz."
+        "A frequência harmônica de oscilação do surto expressa em quilohertz."
       ],
       "correctIndex": 1,
-      "explanation": "O Guia Finder de protecao contra surtos, ao ilustrar a forma de onda 8/20 us, indica que T1 = 8 us representa o tempo necessario para ir de 10 a 90% da frente ascendente.",
+      "explanation": "O Guia Finder de proteção contra surtos, ao ilustrar a forma de onda 8/20 us, indica que T1 = 8 us representa o tempo necessário para ir de 10 a 90% da frente ascendente.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em sistemas avancados de monitoramento distribuido, qual tecnologia e essencial para garantir o carimbo e a correlacao precisa de eventos transitorios medidos em multiplos locais distintos?",
+      "statement": "Em sistemas avançados de monitoramento distribuído, qual tecnologia é essencial para garantir o carimbo e a correlação precisa de eventos transitórios medidos em múltiplos locais distintos?",
       "options": [
-        "O filtro passa-baixa de Wiener acoplado a cada medidor trifasico.",
-        "A integracao de reles puramente direcionais de sobrepotencia ativa.",
-        "A sincronizacao de tempo por receptores de GPS.",
-        "O emprego sistematico de transformadores de corrente de baixa relutancia."
+        "O filtro passa-baixa de Wiener acoplado a cada medidor trifásico.",
+        "A integração de relés puramente direcionais de sobrepotência ativa.",
+        "A sincronização de tempo por receptores de GPS.",
+        "O emprego sistemático de transformadores de corrente de baixa relutância."
       ],
       "correctIndex": 2,
-      "explanation": "Segundo o material da Wrindu, na secao de tecnologias essenciais, a sincronizacao de tempo por GPS garante uma correlacao precisa em sistemas de monitoramento de qualidade de energia em multiplos locais.",
+      "explanation": "Segundo o material da Wrindu, na seção de tecnologias essenciais, a sincronização de tempo por GPS garante uma correlação precisa em sistemas de monitoramento de qualidade de energia em múltiplos locais.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo os padroes estabelecidos na Norma IEEE 1159 citados na literatura, qual e a faixa de frequencia que define e caracteriza um transitorio oscilatorio de Baixa Frequencia?",
+      "statement": "Segundo os padrões estabelecidos na Norma IEEE 1159 citados na literatura, qual é a faixa de frequência que define e caracteriza um transitório oscilatório de Baixa Frequência?",
       "options": [
-        "Frequencia menor que 5 kHz.",
-        "Frequencias compreendidas entre 5 e 500 kHz.",
-        "Frequencias que variam de 0,5 a 5 MHz.",
-        "Frequencias superiores a 5 MHz constantes."
+        "Frequência menor que 5 kHz.",
+        "Frequências compreendidas entre 5 e 500 kHz.",
+        "Frequências que variam de 0,5 a 5 MHz.",
+        "Frequências superiores a 5 MHz constantes."
       ],
       "correctIndex": 0,
-      "explanation": "Conforme exposto no Quadro 02 da Norma IEEE 1159 presente na dissertacao do IFPB, transitorios oscilatorios de Baixa Frequencia sao caracterizados por um conteudo espectral menor que 5 kHz.",
+      "explanation": "Conforme exposto no Quadro 02 da Norma IEEE 1159 presente na dissertação do IFPB, transitórios oscilatórios de Baixa Frequência são caracterizados por um conteúdo espectral menor que 5 kHz.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Por que a Transformada Rapida de Fourier (FFT) classica apresenta serias limitacoes metodologicas na analise de transitorios eletricos nao estacionarios?",
+      "statement": "Por que a Transformada Rápida de Fourier (FFT) clássica apresenta sérias limitações metodológicas na análise de transitórios elétricos não estacionários?",
       "options": [
-        "Pois a FFT apenas consegue extrair metricas e sinais puramente de corrente continua.",
-        "Devido ao fato de que a representacao ocorre estritamente no dominio da frequencia, tornando a informacao temporal do instante do disturbio indisponivel.",
-        "Porque ela exige o emprego de conversores eletromecanicos pesados incompativeis com as taxas de MS/s.",
-        "Pois a transformada matematica atenua e rejeita exponencialmente todos os harmonicos de ordem impar da amostragem."
+        "Pois a FFT apenas consegue extrair métricas e sinais puramente de corrente contínua.",
+        "Devido ao fato de que a representação ocorre estritamente no domínio da frequência, tornando a informação temporal do instante do distúrbio indisponível.",
+        "Porque ela exige o emprego de conversores eletromecânicos pesados incompatíveis com as taxas de MS/s.",
+        "Pois a transformada matemática atenua e rejeita exponencialmente todos os harmônicos de ordem ímpar da amostragem."
       ],
       "correctIndex": 1,
-      "explanation": "A dissertacao do IFPB afirma que na FFT a representacao se da no dominio da frequencia e a informacao temporal fica indisponivel, impossibilitando afirmar quando um determinado evento ocorreu, o que dificulta a analise de sinais com caracteristicas transitorias.",
+      "explanation": "A dissertação do IFPB afirma que na FFT a representação se dá no domínio da frequência e a informação temporal fica indisponível, impossibilitando afirmar quando um determinado evento ocorreu, o que dificulta a análise de sinais com características transitórias.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Verificando as classificacoes da norma IEEE 1159 referentes as perturbacoes, qual e a magnitude esperada em pu para os transitorios oscilatorios de Media Frequencia?",
+      "statement": "Verificando as classificações da norma IEEE 1159 referentes às perturbações, qual é a magnitude esperada em pu para os transitórios oscilatórios de Média Frequência?",
       "options": [
         "0 a 4 pu.",
         "0 a 8 pu.",
@@ -96,12 +96,12 @@
         "1,1 a 1,8 pu."
       ],
       "correctIndex": 1,
-      "explanation": "O Quadro 02 da Norma IEEE 1159, reproduzido na dissertacao do IFPB, estabelece para o transitorio oscilatorio de Media Frequencia uma Magnitude estipulada de 0 a 8 pu.",
+      "explanation": "O Quadro 02 da Norma IEEE 1159, reproduzido na dissertação do IFPB, estabelece para o transitório oscilatório de Média Frequência uma Magnitude estipulada de 0 a 8 pu.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na instrumentacao de protecao, a forma de onda combinada de tensao de 1,2/50 us e aplicada por geradores de teste em laboratorio para certificar o desempenho de qual tipo especifico de Dispositivo de Protecao?",
+      "statement": "Na instrumentação de proteção, a forma de onda combinada de tensão de 1,2/50 us é aplicada por geradores de teste em laboratório para certificar o desempenho de qual tipo específico de Dispositivo de Proteção?",
       "options": [
         "DPS da Classe I.",
         "DPS da Classe II.",
@@ -109,25 +109,25 @@
         "Disjuntores diferenciais residuais (DR)."
       ],
       "correctIndex": 2,
-      "explanation": "O Guia Finder de DPS indica na secao de Tipos de Descargas que os dispositivos da Classe III sao testados com um gerador do tipo combinado que gera uma tensao sem carga Uoc com forma de onda de 1,2/50 us.",
+      "explanation": "O Guia Finder de DPS indica na seção de Tipos de Descargas que os dispositivos da Classe III são testados com um gerador do tipo combinado que gera uma tensão sem carga Uoc com forma de onda de 1,2/50 us.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como os modernos analisadores de qualidade de energia minimizam a necessidade de processamento remoto e latencia ao lidar com a pesada e veloz captura de dados dos transientes?",
+      "statement": "Como os modernos analisadores de qualidade de energia minimizam a necessidade de processamento remoto e latência ao lidar com a pesada e veloz captura de dados dos transientes?",
       "options": [
-        "Por meio do envio continuo ininterrupto de dados analogicos puros diretamente para servidores em nuvem antes de qualquer triagem.",
-        "Atraves do processamento de informacoes localmente, utilizando processadores DSP embutidos e a integracao da computacao de borda (edge computing).",
-        "Descartando preventivamente qualquer leitura de sinal transitorio cuja duracao seja diagnosticada como inferior a um ciclo completo de 60 Hz.",
-        "Utilizando transformadores indutivos mecanicos que atuam como filtros retificadores absolutos e dispensam conversoes digitais."
+        "Por meio do envio contínuo ininterrupto de dados analógicos puros diretamente para servidores em nuvem antes de qualquer triagem.",
+        "Através do processamento de informações localmente, utilizando processadores DSP embutidos e a integração da computação de borda (edge computing).",
+        "Descartando preventivamente qualquer leitura de sinal transitório cuja duração seja diagnosticada como inferior a um ciclo completo de 60 Hz.",
+        "Utilizando transformadores indutivos mecânicos que atuam como filtros retificadores absolutos e dispensam conversões digitais."
       ],
       "correctIndex": 1,
-      "explanation": "O material da Wrindu sobre analisadores especifica que os analisadores utilizam processadores DSP para calculos no proprio dispositivo, reduzindo a necessidade de pos-processamento, e que a integracao da computacao de borda permite que processem informacoes localmente, minimizando a latencia.",
+      "explanation": "O material da Wrindu sobre analisadores especifica que os analisadores utilizam processadores DSP para cálculos no próprio dispositivo, reduzindo a necessidade de pós-processamento, e que a integração da computação de borda permite que processem informações localmente, minimizando a latência.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com as diretrizes de padronizacao da IEEE 1159, qual e a duracao temporal tipica fixada para a qualificacao de um transitorio oscilatorio da categoria de Alta Frequencia (0,5 a 5 MHz)?",
+      "statement": "De acordo com as diretrizes de padronização da IEEE 1159, qual é a duração temporal típica fixada para a qualificação de um transitório oscilatório da categoria de Alta Frequência (0,5 a 5 MHz)?",
       "options": [
         "De 0,5 a 30 ciclos fundamentais.",
         "Exatos 20 microssegundos.",
@@ -135,83 +135,83 @@
         "Intervalos amplos de 0,3 a 50 milissegundos."
       ],
       "correctIndex": 2,
-      "explanation": "Baseando-se no Quadro 02 da IEEE 1159 fornecido pelo documento do IFPB, a linha que trata de Transitorio Oscilatorio de Alta Frequencia (0,5 - 5 MHz) define a sua Duracao tipica estritamente como 5 us.",
+      "explanation": "Baseando-se no Quadro 02 da IEEE 1159 fornecido pelo documento do IFPB, a linha que trata de Transitório Oscilatório de Alta Frequência (0,5 - 5 MHz) define a sua Duração típica estritamente como 5 us.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Ao avaliar os desvios da qualidade de energia, a literatura tecnica aponta que os fenomenos transitorios sao classicamente segmentados e analisados a partir de dois grandes subgrupos: os impulsivos e os oscilatorios.",
+      "statement": "Ao avaliar os desvios da qualidade de energia, a literatura técnica aponta que os fenômenos transitórios são classicamente segmentados e analisados a partir de dois grandes subgrupos: os impulsivos e os oscilatórios.",
       "correctAnswer": true,
-      "explanation": "A dissertacao sobre disturbios do IFPB afirma textualmente que de um modo geral os fenomenos transitorios podem ser classificados em dois grupos, impulsivos e oscilatorios.",
+      "explanation": "A dissertação sobre distúrbios do IFPB afirma textualmente que de um modo geral os fenômenos transitórios podem ser classificados em dois grupos, impulsivos e oscilatórios.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Nas descricoes graficas das formas de onda para testes de surto, como a onda de 1,2/50 us, o parametro posterior T2, avaliado neste caso em 50 us, representa matematicamente o tempo cronometrado e necessario para que a onda retorne a 50 por cento do seu valor de pico na frente descendente.",
+      "statement": "Nas descrições gráficas das formas de onda para testes de surto, como a onda de 1,2/50 us, o parâmetro posterior T2, avaliado neste caso em 50 us, representa matematicamente o tempo cronometrado e necessário para que a onda retorne a 50 por cento do seu valor de pico na frente descendente.",
       "correctAnswer": true,
-      "explanation": "O Guia da Finder, ao detalhar as caracteristicas dos pulsos, mostra em seus diagramas a frente de descida explicitando que T2 = 50 us representa o tempo necessario para chegar a 50% do valor da frente descendente.",
+      "explanation": "O Guia da Finder, ao detalhar as características dos pulsos, mostra em seus diagramas a frente de descida explicitando que T2 = 50 us representa o tempo necessário para chegar a 50% do valor da frente descendente.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Embora os analisadores portateis de qualidade de energia sejam uteis no ambiente industrial, as especificacoes provam que seus conversores sao limitados, tornando-os incapazes de rastrear ou registrar eventos que possuam duracao inferior a barreira de 1 milissegundo.",
+      "statement": "Embora os analisadores portáteis de qualidade de energia sejam úteis no ambiente industrial, as especificações provam que seus conversores são limitados, tornando-os incapazes de rastrear ou registrar eventos que possuam duração inferior à barreira de 1 milissegundo.",
       "correctAnswer": false,
-      "explanation": "O Guia da Wrindu sobre analisadores invalida tal limitacao ao frisar que esses equipamentos se destacam na captura de transientes de ate 1 microssegundo, muito inferiores a marca do milissegundo.",
+      "explanation": "O Guia da Wrindu sobre analisadores invalida tal limitação ao frisar que esses equipamentos se destacam na captura de transientes de até 1 microssegundo, muito inferiores à marca do milissegundo.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Com a intencao de contornar a perda de informacao temporal inerente a transformada de Fourier classica na analise de sinais nao estacionarios (como os surtos e transitorios), a tecnica STFT adota o mecanismo do janelamento movel; todavia, a largura fixa desta mesma janela ainda restringe severamente e limita a flexibilidade simultanea entre as resolucoes de tempo e frequencia.",
+      "statement": "Com a intenção de contornar a perda de informação temporal inerente à transformada de Fourier clássica na análise de sinais não estacionários (como os surtos e transitórios), a técnica STFT adota o mecanismo do janelamento móvel; todavia, a largura fixa desta mesma janela ainda restringe severamente e limita a flexibilidade simultânea entre as resoluções de tempo e frequência.",
       "correctAnswer": true,
-      "explanation": "A dissertacao do IFPB confirma a premissa expondo que a STFT usa tecnicas de janelamento movel, e uma vez que um determinado tamanho de janela e escolhido essa janela deve ser usada para todas as frequencias, restringindo assim os resultados a serem obtidos.",
+      "explanation": "A dissertação do IFPB confirma a premissa expondo que a STFT usa técnicas de janelamento móvel, e uma vez que um determinado tamanho de janela é escolhido essa janela deve ser usada para todas as frequências, restringindo assim os resultados a serem obtidos.",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Um marco na caracterizacao da tensao de um transitorio do tipo impulsivo, segundo os normativos da IEEE 1159, e justamente ele possuir continua e acentuada mudanca de polaridade durante seu pulso, assumindo sempre aspecto bidirecional e com balanco cruzando a linha do zero.",
+      "statement": "Um marco na caracterização da tensão de um transitório do tipo impulsivo, segundo os normativos da IEEE 1159, é justamente ele possuir contínua e acentuada mudança de polaridade durante seu pulso, assumindo sempre aspecto bidirecional e com balanço cruzando a linha do zero.",
       "correctAnswer": false,
-      "explanation": "A base metodologica do IFPB ancorada na norma IEEE 1159 indica que isso caracteriza os oscilatorios; enquanto que o transitorio impulsivo pode ser definido por uma alteracao subita tendo como caracteristica impulsos unidirecionais em polaridade (positiva ou negativa), e nao bidirecional.",
+      "explanation": "A base metodológica do IFPB ancorada na norma IEEE 1159 indica que isso caracteriza os oscilatórios; enquanto que o transitório impulsivo pode ser definido por uma alteração súbita tendo como característica impulsos unidirecionais em polaridade (positiva ou negativa), e não bidirecional.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Buscando extrair registros de perturbacoes ultrarrapidas, invisiveis a amostragem convencional, os analisadores modernos englobam conversores analogico-digitais de arquitetura com alta resolucao submetidos rotineiramente a notaveis taxas de varredura firmadas no patamar de 1 ____/s para processamento exato de dados.",
+      "statement": "Buscando extrair registros de perturbações ultrarrápidas, invisíveis à amostragem convencional, os analisadores modernos englobam conversores analógico-digitais de arquitetura com alta resolução submetidos rotineiramente a notáveis taxas de varredura firmadas no patamar de 1 ____/s para processamento exato de dados.",
       "blanks": [
         {
           "index": 0,
           "answer": "MS"
         }
       ],
-      "explanation": "A documentacao das tecnologias base do analisador listadas pelo artigo da Wrindu dita o parametro ao confirmar que os conversores analogico-digitais (ADCs) de alta resolucao, com taxa de amostragem de 1 MS/s, capturam transientes rapidos.",
+      "explanation": "A documentação das tecnologias base do analisador listadas pelo artigo da Wrindu dita o parâmetro ao confirmar que os conversores analógico-digitais (ADCs) de alta resolução, com taxa de amostragem de 1 MS/s, capturam transientes rápidos.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Nas metodologias de simulacao de incidencia baseadas em laboratorio para certificar os supressores de pico rotulados como Classe I, a modelagem que descreve o forte surto associado ao primeiro impacto do raio exibe o seu tempo de cauda descendente (T2) amparado no valor numerico correspondente a rigorosos ____ microssegundos.",
+      "statement": "Nas metodologias de simulação de incidência baseadas em laboratório para certificar os supressores de pico rotulados como Classe I, a modelagem que descreve o forte surto associado ao primeiro impacto do raio exibe o seu tempo de cauda descendente (T2) amparado no valor numérico correspondente a rigorosos ____ microssegundos.",
       "blanks": [
         {
           "index": 0,
           "answer": "350"
         }
       ],
-      "explanation": "A descricao da forma de onda padronizada pelo Guia Finder para simular este fenomeno frente a Classe I e expressa por 10/350 us, onde os 350 figuram como os microssegundos dedicados ao tempo de decaida da crista T2.",
+      "explanation": "A descrição da forma de onda padronizada pelo Guia Finder para simular este fenômeno frente à Classe I é expressa por 10/350 us, onde os 350 figuram como os microssegundos dedicados ao tempo de decaída da crista T2.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Submetido as categorizacoes catalogadas no Quadro 02 da regulacao norte-americana IEEE 1159, atesta-se que toda perturbacao eletromagnetica avaliada como transitorio oscilatorio de Media Frequencia apresenta estatisticamente um intervalo de duracao temporal balizado pelo limite fixo de ____ microssegundos.",
+      "statement": "Submetido às categorizações catalogadas no Quadro 02 da regulação norte-americana IEEE 1159, atesta-se que toda perturbação eletromagnética avaliada como transitório oscilatório de Média Frequência apresenta estatisticamente um intervalo de duração temporal balizado pelo limite fixo de ____ microssegundos.",
       "blanks": [
         {
           "index": 0,
           "answer": "20"
         }
       ],
-      "explanation": "No levantamento das metricas trazido pela dissertacao do IFPB sobre o resumo da IEEE 1159, a coluna respeitante a duracao do evento na faixa estipulada para a Media Frequencia (5 a 500 kHz) crava a marca de 20 us como referencia.",
+      "explanation": "No levantamento das métricas trazido pela dissertação do IFPB sobre o resumo da IEEE 1159, a coluna respeitante à duração do evento na faixa estipulada para a Média Frequência (5 a 500 kHz) crava a marca de 20 us como referência.",
       "difficulty": "hard"
     }
   ]

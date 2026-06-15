@@ -1,9 +1,9 @@
 {
   "category": "Termografia Infravermelha",
-  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categorySubtitle": "Fundamentos, aplicações em sistemas elétricos e normas de laudos",
   "categoryOrder": 3,
   "module": "Fundamentos de Termografia",
-  "moduleSubtitle": "Fisica do IR, transferencia de calor, equipamentos e calibracao",
+  "moduleSubtitle": "Física do IR, transferência de calor, equipamentos e calibração",
   "moduleOrder": 1,
   "trail": "Física do Infravermelho",
   "trailOrder": 0,
@@ -12,31 +12,31 @@
       "type": "multipleChoice",
       "statement": "O que a Lei de Planck descreve na termografia?",
       "options": [
-        "A variacao da intensidade da radiacao com a temperatura e o comprimento de onda.",
-        "A atenuacao da radiacao infravermelha na atmosfera.",
-        "O espalhamento das ondas eletromagneticas pela umidade.",
-        "A conversao de graus Celsius para Kelvin."
+        "A variação da intensidade da radiação com a temperatura e o comprimento de onda.",
+        "A atenuação da radiação infravermelha na atmosfera.",
+        "O espalhamento das ondas eletromagnéticas pela umidade.",
+        "A conversão de graus Celsius para Kelvin."
       ],
       "correctIndex": 0,
-      "explanation": "A emissao de radiacao termica segue a Lei de Planck, que descreve como a intensidade da radiacao varia com a temperatura e o comprimento de onda. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "A emissão de radiação térmica segue a Lei de Planck, que descreve como a intensidade da radiação varia com a temperatura e o comprimento de onda. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a definicao de um corpo negro no estudo da radiacao termica?",
+      "statement": "Qual é a definição de um corpo negro no estudo da radiação térmica?",
       "options": [
-        "Um objeto que absorve radiacao mas nao emite calor para o ambiente.",
-        "Um corpo perfeitamente opaco que emite a maxima radiacao possivel.",
-        "Um material que reflete 100% da radiacao infravermelha incidente.",
-        "Uma superficie cuja temperatura encontra-se no zero absoluto."
+        "Um objeto que absorve radiação mas não emite calor para o ambiente.",
+        "Um corpo perfeitamente opaco que emite a máxima radiação possível.",
+        "Um material que reflete 100% da radiação infravermelha incidente.",
+        "Uma superfície cuja temperatura encontra-se no zero absoluto."
       ],
       "correctIndex": 1,
-      "explanation": "Um corpo negro e um corpo perfeitamente opaco que, como resultado de sua temperatura, emite a maxima radiacao possivel. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Um corpo negro é um corpo perfeitamente opaco que, como resultado de sua temperatura, emite a máxima radiação possível. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Acima de qual temperatura os objetos emitem radiacao eletromagnetica na forma de calor?",
+      "statement": "Acima de qual temperatura os objetos emitem radiação eletromagnética na forma de calor?",
       "options": [
         "0 C",
         "100 C",
@@ -44,25 +44,25 @@
         "273,15 C"
       ],
       "correctIndex": 2,
-      "explanation": "Todos os objetos com temperatura acima de -273,15 C (zero absoluto) emitem radiacao eletromagnetica na forma de calor. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "Todos os objetos com temperatura acima de -273,15 C (zero absoluto) emitem radiação eletromagnética na forma de calor. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a faixa de comprimentos de onda correspondente a radiacao infravermelha no espectro eletromagnetico?",
+      "statement": "Qual é a faixa de comprimentos de onda correspondente à radiação infravermelha no espectro eletromagnético?",
       "options": [
         "10 nanometros a 400 nanometros",
-        "1 milimetro a 1 metro",
+        "1 milímetro a 1 metro",
         "400 nanometros a 700 nanometros",
-        "Aproximadamente 700 nanometros a 1 milimetro"
+        "Aproximadamente 700 nanometros a 1 milímetro"
       ],
       "correctIndex": 3,
-      "explanation": "A radiacao infravermelha e parte do espectro eletromagnetico, compreendendo comprimentos de onda entre aproximadamente 700 nanometros e 1 milimetro. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "A radiação infravermelha é parte do espectro eletromagnético, compreendendo comprimentos de onda entre aproximadamente 700 nanometros e 1 milímetro. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com a classificacao de bandas, qual faixa de comprimento de onda e denominada LW (Long Wave / Infravermelho distante)?",
+      "statement": "De acordo com a classificação de bandas, qual faixa de comprimento de onda é denominada LW (Long Wave / Infravermelho distante)?",
       "options": [
         "3 a 5 micrometros",
         "8 a 12 micrometros",
@@ -77,13 +77,13 @@
       "type": "multipleChoice",
       "statement": "O que se pode determinar por meio da Lei do Deslocamento de Wien?",
       "options": [
-        "O comprimento de onda onde ocorre a excitancia maxima em funcao da temperatura.",
-        "A radiacao total emitida e absorvida por um corpo negro no espaco.",
-        "As janelas de transmitancia atmosferica ideais para termografia.",
-        "A diferenca exata de temperatura entre dois paineis eletricos."
+        "O comprimento de onda onde ocorre a excitância máxima em função da temperatura.",
+        "A radiação total emitida e absorvida por um corpo negro no espaço.",
+        "As janelas de transmitância atmosférica ideais para termografia.",
+        "A diferença exata de temperatura entre dois painéis elétricos."
       ],
       "correctIndex": 0,
-      "explanation": "A localizacao do comprimento de onda onde ocorre a excitancia maxima, em funcao da temperatura, pode ser obtida atraves da Lei de Deslocamento de Wien. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A localização do comprimento de onda onde ocorre a excitância máxima, em função da temperatura, pode ser obtida através da Lei de Deslocamento de Wien. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
@@ -91,17 +91,17 @@
       "statement": "Como se calcula o poder emissivo de um corpo negro de acordo com a Lei de Stefan-Boltzmann?",
       "options": [
         "Multiplicando-se a constante de Stefan-Boltzmann pelo quadrado da temperatura.",
-        "Multiplicando-se a constante de Stefan-Boltzmann pela quarta potencia da temperatura absoluta.",
+        "Multiplicando-se a constante de Stefan-Boltzmann pela quarta potência da temperatura absoluta.",
         "Dividindo-se a constante de Stefan-Boltzmann pelo comprimento de onda.",
         "Subtraindo-se a temperatura ambiente da temperatura do corpo negro."
       ],
       "correctIndex": 1,
-      "explanation": "Poder emissivo de um corpo negro (emissor perfeito) E = sigma x T^4, onde sigma e a constante de Stefan-Boltzmann. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "Poder emissivo de um corpo negro (emissor perfeito) E = sigma x T^4, onde sigma é a constante de Stefan-Boltzmann. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na classificacao da radiacao optica (norma ABNT NBR 15572), qual e a faixa do Mid Wave Infrared (Infravermelho medio - MW)?",
+      "statement": "Na classificação da radiação óptica (norma ABNT NBR 15572), qual é a faixa do Mid Wave Infrared (Infravermelho médio - MW)?",
       "options": [
         "6 a 15 micrometros",
         "0,78 a 1,1 micrometros",
@@ -109,12 +109,12 @@
         "3 a 6 micrometros"
       ],
       "correctIndex": 3,
-      "explanation": "Mid wave infrared (Infravermelho medio): 3 a 6 micrometros. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Mid wave infrared (Infravermelho médio): 3 a 6 micrometros. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em qual faixa de temperatura os corpos produzem um pico de excitancia termica em torno do comprimento de onda de 10 micrometros?",
+      "statement": "Em qual faixa de temperatura os corpos produzem um pico de excitância térmica em torno do comprimento de onda de 10 micrometros?",
       "options": [
         "300 a 400 K",
         "1000 a 2000 K",
@@ -122,96 +122,96 @@
         "100 a 200 K"
       ],
       "correctIndex": 0,
-      "explanation": "Corpos a temperaturas em torno de 300 a 400 K, tipicas de equipamentos eletricos em operacao, possuem excitancia maxima em comprimentos de onda em torno de 10 micrometros. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Corpos a temperaturas em torno de 300 a 400 K, típicas de equipamentos elétricos em operação, possuem excitância máxima em comprimentos de onda em torno de 10 micrometros. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que sao as chamadas janelas de transmitancia atmosfericas no contexto do infravermelho?",
+      "statement": "O que são as chamadas janelas de transmitância atmosféricas no contexto do infravermelho?",
       "options": [
-        "Faixas do espectro que sao totalmente bloqueadas pela presenca de O2 e N2 na atmosfera.",
-        "Perfis de transmitancia formados pela combinacao das concentracoes de moleculas absorvedoras (como H2O e CO2) e nao absorvedoras.",
-        "Areas em paineis eletricos onde a radiacao termica nao sofre nenhum tipo de refracao.",
-        "Regioes do espectro eletromagnetico limitadas a emissao e transmissao da luz visivel."
+        "Faixas do espectro que são totalmente bloqueadas pela presença de O2 e N2 na atmosfera.",
+        "Perfis de transmitância formados pela combinação das concentrações de moléculas absorvedoras (como H2O e CO2) e não absorvedoras.",
+        "Áreas em painéis elétricos onde a radiação térmica não sofre nenhum tipo de refração.",
+        "Regiões do espectro eletromagnético limitadas à emissão e transmissão da luz visível."
       ],
       "correctIndex": 1,
-      "explanation": "A combinacao das diferentes concentracoes dessas moleculas produz um perfil de transmitancia atmosferica que e funcao do comprimento de onda, as chamadas janelas de transmitancia atmosfericas. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A combinação das diferentes concentrações dessas moléculas produz um perfil de transmitância atmosférica que é função do comprimento de onda, as chamadas janelas de transmitância atmosféricas. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A radiacao termica e transferida entre superficies e necessita exclusivamente de um meio fisico material para que ocorra o seu transporte.",
+      "statement": "A radiação térmica é transferida entre superfícies e necessita exclusivamente de um meio físico material para que ocorra o seu transporte.",
       "correctAnswer": false,
-      "explanation": "Radiacao e a energia emitida pela materia proporcional a sua temperatura e nao necessita de um meio fisico para que ocorra seu transporte. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "Radiação é a energia emitida pela matéria proporcional à sua temperatura e não necessita de um meio físico para que ocorra seu transporte. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A emissividade de um corpo real e uma propriedade intrinseca que varia, entre outros fatores, conforme a direcao da radiacao emitida e o comprimento de onda.",
+      "statement": "A emissividade de um corpo real é uma propriedade intrínseca que varia, entre outros fatores, conforme a direção da radiação emitida e o comprimento de onda.",
       "correctAnswer": true,
-      "explanation": "A emissividade e uma caracteristica intrinseca de cada objeto e depende da direcao de radiacao, do comprimento de onda analisado e de suas caracteristicas superficiais. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A emissividade é uma característica intrínseca de cada objeto e depende da direção de radiação, do comprimento de onda analisado e de suas características superficiais. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Os termovisores indicados e comercialmente disponiveis para a manutencao de equipamentos eletricos operam principalmente na faixa espectral de 1 a 3 micrometros (SW).",
+      "statement": "Os termovisores indicados e comercialmente disponíveis para a manutenção de equipamentos elétricos operam principalmente na faixa espectral de 1 a 3 micrometros (SW).",
       "correctAnswer": false,
-      "explanation": "Os termovisores comercialmente disponiveis e indicados para uso em manutencao de equipamentos eletricos, em sua grande maioria, operam na faixa de 3 a 15 micrometros. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Os termovisores comercialmente disponíveis e indicados para uso em manutenção de equipamentos elétricos, em sua grande maioria, operam na faixa de 3 a 15 micrometros. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "De acordo com a Lei de Kirchhoff, para uma superficie pequena envolvida por uma vizinhanca muito maior com temperatura uniforme, o valor da absortividade e igual ao da emissividade.",
+      "statement": "De acordo com a Lei de Kirchhoff, para uma superfície pequena envolvida por uma vizinhança muito maior com temperatura uniforme, o valor da absortividade é igual ao da emissividade.",
       "correctAnswer": true,
-      "explanation": "A Lei de Kirchhoff estabelece que a absortividade e igual a emissividade (alfa = epsilon) sob certas condicoes de radiacao com a vizinhanca. (Fonte: Transferencia de Calor I Cap. 1 Conceitos, UFPR)",
+      "explanation": "A Lei de Kirchhoff estabelece que a absortividade é igual à emissividade (alfa = epsilon) sob certas condições de radiação com a vizinhança. (Fonte: Transferência de Calor I Cap. 1 Conceitos, UFPR)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O nitrogenio e o oxigenio, por serem os gases mais abundantes na atmosfera, sao as principais moleculas que absorvem a radiacao infravermelha na faixa de 1 a 15 micrometros.",
+      "statement": "O nitrogênio e o oxigênio, por serem os gases mais abundantes na atmosfera, são as principais moléculas que absorvem a radiação infravermelha na faixa de 1 a 15 micrometros.",
       "correctAnswer": false,
-      "explanation": "Os dois gases presentes em maior abundancia na atmosfera, nitrogenio (N2) e oxigenio (O2), sao homonucleares, nao possuindo dipolo e nao apresentam absorcao molecular. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Os dois gases presentes em maior abundância na atmosfera, nitrogênio (N2) e oxigênio (O2), são homonucleares, não possuindo dipolo e não apresentam absorção molecular. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Segundo a norma ABNT NBR 15572, o Short wave infrared abrange a faixa de comprimentos de onda de 1,1 a 3 micrometros, sendo conhecido em portugues como infravermelho ____.",
+      "statement": "Segundo a norma ABNT NBR 15572, o Short wave infrared abrange a faixa de comprimentos de onda de 1,1 a 3 micrometros, sendo conhecido em português como infravermelho ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "proximo"
         }
       ],
-      "explanation": "A tabela da ABNT NBR 15572 designa Short wave infrared como Infravermelho proximo, na faixa de 1,1 a 3 micrometros. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A tabela da ABNT NBR 15572 designa Short wave infrared como Infravermelho próximo, na faixa de 1,1 a 3 micrometros. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A propriedade que consiste na comparacao direta entre a excitancia emitida por um objeto analisado e a excitancia emitida por um corpo negro, ambos a mesma temperatura, e definida como emissividade ____.",
+      "statement": "A propriedade que consiste na comparação direta entre a excitância emitida por um objeto analisado e a excitância emitida por um corpo negro, ambos à mesma temperatura, é definida como emissividade ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "espectral"
         }
       ],
-      "explanation": "A propriedade emissividade espectral e definida como a comparacao entre a excitancia emitida pelo objeto analisado e a excitancia emitida por um corpo negro, ambos a mesma temperatura. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A propriedade emissividade espectral é definida como a comparação entre a excitância emitida pelo objeto analisado e a excitância emitida por um corpo negro, ambos à mesma temperatura. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Na Lei de ____, a emissao de radiacao do radiador ideal e descrita relacionando a distribuicao espectral a uma temperatura absoluta por unidade de comprimento de onda.",
+      "statement": "Na Lei de ____, a emissão de radiação do radiador ideal é descrita relacionando a distribuição espectral a uma temperatura absoluta por unidade de comprimento de onda.",
       "blanks": [
         {
           "index": 0,
           "answer": "Planck"
         }
       ],
-      "explanation": "A Lei de Planck descreve a emissao de radiacao do corpo negro relacionando a distribuicao espectral da radiacao emitida por ele a uma determinada temperatura absoluta (T), por unidade de comprimento de onda. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A Lei de Planck descreve a emissão de radiação do corpo negro relacionando a distribuição espectral da radiação emitida por ele a uma determinada temperatura absoluta (T), por unidade de comprimento de onda. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     }
   ]

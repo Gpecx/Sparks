@@ -10,77 +10,77 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual a finalidade principal do banco de baterias em uma subestacao?",
+      "statement": "Qual a finalidade principal do banco de baterias em uma subestação?",
       "options": [
-        "Alimentar circuitos de comando e protecao com tensao continua.",
-        "Aumentar a rigidez dieletrica do transformador.",
+        "Alimentar circuitos de comando e proteção com tensão contínua.",
+        "Aumentar a rigidez dielétrica do transformador.",
         "Reduzir a corrente de curto-circuito na barra principal.",
-        "Elevar a tensao de suprimento da rede primaria."
+        "Elevar a tensão de suprimento da rede primária."
       ],
       "correctIndex": 0,
-      "explanation": "O banco de baterias alimenta os circuitos de comando em corrente continua, tornando-os independentes de falhas no sistema eletrico. (Fonte: Apostila Protecao).",
+      "explanation": "O banco de baterias alimenta os circuitos de comando em corrente contínua, tornando-os independentes de falhas no sistema elétrico. (Fonte: Apostila Proteção).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Por que o comando de disjuntores utiliza corrente continua e nao a corrente alternada derivada da propria barra?",
+      "statement": "Por que o comando de disjuntores utiliza corrente contínua e não a corrente alternada derivada da própria barra?",
       "options": [
-        "Porque os disjuntores modernos nao possuem camaras de extincao compativeis com CA.",
-        "Porque a tensao CA cai severamente durante curtos-circuitos, inviabilizando o disparo da bobina.",
-        "Para evitar a saturacao magnetica dos transformadores de potencial (TPs).",
-        "Para anular as componentes harmonicas de sequencia zero."
+        "Porque os disjuntores modernos não possuem câmaras de extinção compatíveis com CA.",
+        "Porque a tensão CA cai severamente durante curtos-circuitos, inviabilizando o disparo da bobina.",
+        "Para evitar a saturação magnética dos transformadores de potencial (TPs).",
+        "Para anular as componentes harmônicas de sequência zero."
       ],
       "correctIndex": 1,
-      "explanation": "Na ocorrencia de falhas, a tensao CA cai, impossibilitando o comando. Por isso, usa-se alimentacao DC por bateria. (Fonte: ed53_fasc_protecao).",
+      "explanation": "Na ocorrência de falhas, a tensão CA cai, impossibilitando o comando. Por isso, usa-se alimentação DC por bateria. (Fonte: ed53_fasc_protecao).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quais sao os dois principais tipos de baterias comumente utilizados em subestacoes de energia?",
+      "statement": "Quais são os dois principais tipos de baterias comumente utilizados em subestações de energia?",
       "options": [
-        "Litio-ion e Prata-zinco.",
-        "Zinco-carbono e Niquel-metal-hidreto.",
-        "Chumbo-acido e Alcalinas (niquel-cadmio).",
-        "Sodio-enxofre e Alcalinas."
+        "Lítio-íon e Prata-zinco.",
+        "Zinco-carbono e Níquel-metal-hidreto.",
+        "Chumbo-ácido e Alcalinas (níquel-cádmio).",
+        "Sódio-enxofre e Alcalinas."
       ],
       "correctIndex": 2,
-      "explanation": "Os principais tipos de bateria utilizados atualmente sao as de Chumbo-acido e as Alcalinas de niquel-cadmio. (Fonte: ed53_fasc_protecao).",
+      "explanation": "Os principais tipos de bateria utilizados atualmente são as de Chumbo-ácido e as Alcalinas de níquel-cádmio. (Fonte: ed53_fasc_protecao).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que define a autonomia da bateria em um sistema de servicos auxiliares?",
+      "statement": "O que define a autonomia da bateria em um sistema de serviços auxiliares?",
       "options": [
-        "O tempo de vida util projetado antes do descarte ambiental.",
-        "O tempo necessario para recarga total apos um ciclo profundo.",
+        "O tempo de vida útil projetado antes do descarte ambiental.",
+        "O tempo necessário para recarga total após um ciclo profundo.",
         "A capacidade de operar em temperaturas superiores a 50 graus Celsius.",
-        "O tempo em que a bateria mantem a tensao minima necessaria para alimentacao das cargas essenciais."
+        "O tempo em que a bateria mantém a tensão mínima necessária para alimentação das cargas essenciais."
       ],
       "correctIndex": 3,
-      "explanation": "Autonomia e o intervalo de tempo em que a bateria mantem a tensao minima por elemento para alimentar as cargas. (Fonte: ed53_fasc_protecao).",
+      "explanation": "Autonomia é o intervalo de tempo em que a bateria mantém a tensão mínima por elemento para alimentar as cargas. (Fonte: ed53_fasc_protecao).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual componente eletrico e utilizado para carregar e manter a carga do banco de baterias em condicoes normais?",
+      "statement": "Qual componente elétrico é utilizado para carregar e manter a carga do banco de baterias em condições normais?",
       "options": [
         "Carregador de baterias (nobreak DC ou retificador).",
-        "Inversor de frequencia PWM.",
-        "Compensador sincrono rotativo.",
-        "Reator shunt com nucleo de ar."
+        "Inversor de frequência PWM.",
+        "Compensador síncrono rotativo.",
+        "Reator shunt com núcleo de ar."
       ],
       "correctIndex": 0,
-      "explanation": "O carregador e constituido por um modulo retificador projetado para carregar e manter a tensao do banco de baterias. (Fonte: Apostila Protecao / ed53).",
+      "explanation": "O carregador é constituído por um módulo retificador projetado para carregar e manter a tensão do banco de baterias. (Fonte: Apostila Proteção / ed53).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Por que especialistas em protecao preferem sistemas retificadores puros (nobreak DC) ao inves de nobreaks AC para subestacoes?",
+      "statement": "Por que especialistas em proteção preferem sistemas retificadores puros (nobreak DC) ao invés de nobreaks AC para subestações?",
       "options": [
         "Porque o nobreak DC consegue reduzir as correntes de arco nos contatores.",
-        "Porque o nobreak AC apresenta uma disponibilidade de confiabilidade menor devido ao uso do inversor na saida.",
-        "Porque reles digitais exigem comunicacao nativa por fibra optica em DC.",
-        "Porque o nobreak AC exige baterias exclusivas de litio."
+        "Porque o nobreak AC apresenta uma disponibilidade de confiabilidade menor devido ao uso do inversor na saída.",
+        "Porque relés digitais exigem comunicação nativa por fibra óptica em DC.",
+        "Porque o nobreak AC exige baterias exclusivas de lítio."
       ],
       "correctIndex": 1,
       "explanation": "O inversor do nobreak AC adiciona um componente com MTTF menor, diminuindo a confiabilidade global do suprimento de controle. (Fonte: ed53_fasc_protecao).",
@@ -88,20 +88,20 @@
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual instalacao predial especifica e obrigatoria na sala de baterias caso os elementos instalados nao sejam do tipo selado?",
+      "statement": "Qual instalação predial específica é obrigatória na sala de baterias caso os elementos instalados não sejam do tipo selado?",
       "options": [
-        "Sistema de refrigeração liquida continua.",
+        "Sistema de refrigeração líquida contínua.",
         "Piso isolante de 100 kV.",
-        "Sistema de exaustao devido a liberacao de gas hidrogenio no processo de eletrolise.",
-        "Sistema de injecao de gas SF6 para evitar incendios."
+        "Sistema de exaustão devido à liberação de gás hidrogênio no processo de eletrólise.",
+        "Sistema de injeção de gás SF6 para evitar incêndios."
       ],
       "correctIndex": 2,
-      "explanation": "E obrigatoria a exaustao da sala para evitar concentracao explosiva de hidrogenio liberado pelas baterias nao seladas. (Fonte: ed53_fasc_protecao).",
+      "explanation": "É obrigatória a exaustão da sala para evitar concentração explosiva de hidrogênio liberado pelas baterias não seladas. (Fonte: ed53_fasc_protecao).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quais sao os niveis de tensao nominais de corrente continua mais usuais citados no dimensionamento de comandos de subestacao?",
+      "statement": "Quais são os níveis de tensão nominais de corrente contínua mais usuais citados no dimensionamento de comandos de subestação?",
       "options": [
         "12 Vcc e 24 Vcc.",
         "500 Vcc e 600 Vcc.",
@@ -109,109 +109,109 @@
         "115 Vcc e 125 Vcc."
       ],
       "correctIndex": 3,
-      "explanation": "Os textos citam tensoes de 115 Volts e 125 VCC como tipicas e usuais para a operacao dos circuitos de comando e protecao. (Fonte: Apostila Protecao / ed53).",
+      "explanation": "Os textos citam tensões de 115 Volts e 125 VCC como típicas e usuais para a operação dos circuitos de comando e proteção. (Fonte: Apostila Proteção / ed53).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que ocorre com a logica de controle digital do IED se houver perda da tensao auxiliar CC de uma seccionadora?",
+      "statement": "O que ocorre com a lógica de controle digital do IED se houver perda da tensão auxiliar CC de uma seccionadora?",
       "options": [
-        "Memoriza o ultimo estado valido conhecido da chave e emite um alarme de falha.",
+        "Memoriza o último estado válido conhecido da chave e emite um alarme de falha.",
         "Ela envia comando de abertura imediata ao disjuntor principal.",
-        "Reseta as configuracoes da memoria EPROM.",
-        "Aterra o barramento em modo de emergencia."
+        "Reseta as configurações da memória EPROM.",
+        "Aterra o barramento em modo de emergência."
       ],
       "correctIndex": 0,
-      "explanation": "Para evitar mas operacoes em falha CC, o rele memoriza a ultima posicao e gera alarme de anomalia. (Fonte: Virtus ProtBarras).",
+      "explanation": "Para evitar más operações em falha CC, o relé memoriza a última posição e gera alarme de anomalia. (Fonte: Virtus ProtBarras).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como e calculada a capacidade total da bateria a partir da sua caracteristica de descarga para diversas cargas seqüenciais?",
+      "statement": "Como é calculada a capacidade total da bateria a partir da sua característica de descarga para diversas cargas sequenciais?",
       "options": [
-        "Multiplicando a tensao de flutuacao pelo fator K medio.",
-        "Pelo somatorio de parcelas K x (I2 - I1) correspondentes aos trechos e degraus de corrente do perfil de consumo.",
-        "Somando linearmente todas as impedancias dos TPs e TCs associados.",
-        "Dividindo a tensao final de descarga pela potencia aparente da subestacao."
+        "Multiplicando a tensão de flutuação pelo fator K médio.",
+        "Pelo somatório de parcelas K x (I2 - I1) correspondentes aos trechos e degraus de corrente do perfil de consumo.",
+        "Somando linearmente todas as impedâncias dos TPs e TCs associados.",
+        "Dividindo a tensão final de descarga pela potência aparente da subestação."
       ],
       "correctIndex": 1,
-      "explanation": "A capacidade e calculada somando os produtos do fator K da curva pelas variacoes de corrente nos intervalos de descarga. (Fonte: ed53_fasc_protecao).",
+      "explanation": "A capacidade é calculada somando os produtos do fator K da curva pelas variações de corrente nos intervalos de descarga. (Fonte: ed53_fasc_protecao).",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O circuito de comando de abertura do disjuntor utiliza corrente continua justamente para ser independente das falhas de tensao CA do sistema sob.",
+      "statement": "O circuito de comando de abertura do disjuntor utiliza corrente contínua justamente para ser independente das falhas de tensão CA do sistema sob.",
       "correctAnswer": true,
-      "explanation": "A energia DC fornecida pelas baterias garante o trip mesmo quando a tensao CA colapsa devido ao curto-circuito. (Fonte: Apostila Protecao).",
+      "explanation": "A energia DC fornecida pelas baterias garante o trip mesmo quando a tensão CA colapsa devido ao curto-circuito. (Fonte: Apostila Proteção).",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O nobreak AC, utilizado as vezes em servicos auxiliares, possui modulos de retificacao, banco de baterias e inversor de tensao para alimentar as.",
+      "statement": "O nobreak AC, utilizado às vezes em serviços auxiliares, possui módulos de retificação, banco de baterias e inversor de tensão para alimentar as.",
       "correctAnswer": true,
-      "explanation": "O nobreak AC difere do carregador CC comum justamente por conter um inversor que converte a energia da bateria para CA na saida. (Fonte: ed53_fasc_protecao).",
+      "explanation": "O nobreak AC difere do carregador CC comum justamente por conter um inversor que converte a energia da bateria para CA na saída. (Fonte: ed53_fasc_protecao).",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "As baterias alcalinas (niquel-cadmio) possuem tempos nominais de descarga padronizados estritamente e unicamente para 10 horas, tal qual as de.",
+      "statement": "As baterias alcalinas (níquel-cádmio) possuem tempos nominais de descarga padronizados estritamente e unicamente para 10 horas, tal qual as de.",
       "correctAnswer": false,
-      "explanation": "Enquanto as chumbo-acidas tem geralmente capacidade de 10h, as alcalinas podem ter faixas de 3, 5 ou 10 horas. (Fonte: ed53_fasc_protecao).",
+      "explanation": "Enquanto as chumbo-ácidas têm geralmente capacidade de 10h, as alcalinas podem ter faixas de 3, 5 ou 10 horas. (Fonte: ed53_fasc_protecao).",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Reles de protecao dispensam completamente baterias externas, pois extraem a tensao de operacao exigida convertendo sinais CA diretamente dos TCs e.",
+      "statement": "Relés de proteção dispensam completamente baterias externas, pois extraem a tensão de operação exigida convertendo sinais CA diretamente dos TCs e.",
       "correctAnswer": false,
-      "explanation": "Os equipamentos de protecao, incluindo os reles digitais, dependem crucialmente de alimentacao continua auxiliar estavel das baterias para processamento e operacao. (Fonte: Apostila Protecao).",
+      "explanation": "Os equipamentos de proteção, incluindo os relés digitais, dependem crucialmente de alimentação contínua auxiliar estável das baterias para processamento e operação. (Fonte: Apostila Proteção).",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Ao dimensionar o numero de elementos de uma bateria, a escolha baseada na menor tensao final melhora o aproveitamento e gera solucoes de menor custo.",
+      "statement": "Ao dimensionar o número de elementos de uma bateria, a escolha baseada na menor tensão final melhora o aproveitamento e gera soluções de menor custo.",
       "correctAnswer": true,
-      "explanation": "Um numero de elementos focado na tensao minima reduz a capacidade total exigida e aproveita melhor a bateria, sendo mais economico. (Fonte: ed53_fasc_protecao).",
+      "explanation": "Um número de elementos focado na tensão mínima reduz a capacidade total exigida e aproveita melhor a bateria, sendo mais econômico. (Fonte: ed53_fasc_protecao).",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O intervalo de tempo em que a bateria mantem a tensao minima necessaria para suportar a operacao apos a perda do carregador e conhecido como ____.",
+      "statement": "O intervalo de tempo em que a bateria mantém a tensão mínima necessária para suportar a operação após a perda do carregador é conhecido como ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "autonomia"
         }
       ],
-      "explanation": "A autonomia define o periodo em horas que a subestacao mantem protecao ativa operando apenas pelo acumulo da bateria. (Fonte: ed53_fasc_protecao).",
+      "explanation": "A autonomia define o período em horas que a subestação mantém proteção ativa operando apenas pelo acúmulo da bateria. (Fonte: ed53_fasc_protecao).",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Baterias do tipo chumbo-acido e nao seladas exigem instalacao de sistema de ____ nas salas devido a perigosa emanacao de gas hidrogenio na recarga.",
+      "statement": "Baterias do tipo chumbo-ácido e não seladas exigem instalação de sistema de ____ nas salas devido à perigosa emanação de gás hidrogênio na recarga.",
       "blanks": [
         {
           "index": 0,
           "answer": "exaustao"
         }
       ],
-      "explanation": "A exaustao ou ventilacao forcada previne explosoes decorrentes da mistura de ar e hidrogenio desprendido pelas celulas abertas. (Fonte: ed53_fasc_protecao).",
+      "explanation": "A exaustão ou ventilação forçada previne explosões decorrentes da mistura de ar e hidrogênio desprendido pelas células abertas. (Fonte: ed53_fasc_protecao).",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Diferente de um carregador CC direto, a confiabilidade de um nobreak de saida em corrente alternada e penalizada pela probabilidade de falha em seu ____.",
+      "statement": "Diferente de um carregador CC direto, a confiabilidade de um nobreak de saída em corrente alternada é penalizada pela probabilidade de falha em seu ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "inversor"
         }
       ],
-      "explanation": "O inversor (circuito de potencia CC-CA) insere mais uma etapa de conversao sujeita a avarias, reduzindo o MTBF do conjunto (Fonte: ed53_fasc_protecao).",
+      "explanation": "O inversor (circuito de potência CC-CA) insere mais uma etapa de conversão sujeita a avarias, reduzindo o MTBF do conjunto (Fonte: ed53_fasc_protecao).",
       "difficulty": "hard"
     }
   ]

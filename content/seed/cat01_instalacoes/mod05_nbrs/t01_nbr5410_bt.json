@@ -10,7 +10,7 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Segundo o glossario tecnico, qual o limite superior de tensao para instalacoes de Baixa Tensao em corrente alternada?",
+      "statement": "Segundo o glossário técnico, qual o limite superior de tensão para instalações de Baixa Tensão em corrente alternada?",
       "options": [
         "1000V",
         "120V",
@@ -18,38 +18,38 @@
         "1500V"
       ],
       "correctIndex": 0,
-      "explanation": "Baixa Tensao e definida como superior a 50V e igual ou inferior a 1000V em CA.",
+      "explanation": "Baixa Tensão é definida como superior a 50V e igual ou inferior a 1000V em CA.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual medida de protecao e citada para impedir o contato com partes energizadas?",
+      "statement": "Qual medida de proteção é citada para impedir o contato com partes energizadas?",
       "options": [
         "Aterramento do neutro",
-        "Barreiras e involucros",
-        "Uso de disjuntores termomagneticos",
-        "Rele direcional de potencia"
+        "Barreiras e invólucros",
+        "Uso de disjuntores termomagnéticos",
+        "Relé direcional de potência"
       ],
       "correctIndex": 1,
-      "explanation": "Barreiras e involucros sao medidas de controle do risco eletrico contra contatos diretos.",
+      "explanation": "Barreiras e invólucros são medidas de controle do risco elétrico contra contatos diretos.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual dispositivo e listado como medida de controle de risco para protecao adicional contra choques?",
+      "statement": "Qual dispositivo é listado como medida de controle de risco para proteção adicional contra choques?",
       "options": [
         "Bobina de Petersen",
-        "Rele de subfrequencia",
+        "Relé de subfrequência",
         "Dispositivos a corrente de fuga",
         "Transformador de potencial capacitivo"
       ],
       "correctIndex": 2,
-      "explanation": "Os dispositivos a corrente de fuga (DR) sao indicados expressamente como medida de controle.",
+      "explanation": "Os dispositivos a corrente de fuga (DR) são indicados expressamente como medida de controle.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quais esquemas de aterramento funcional sao abordados nas instalacoes de baixa tensao?",
+      "statement": "Quais esquemas de aterramento funcional são abordados nas instalações de baixa tensão?",
       "options": [
         "TNC e TNS",
         "Malhas de terra e hastes profundas",
@@ -57,161 +57,161 @@
         "TN, TT e IT"
       ],
       "correctIndex": 3,
-      "explanation": "O aterramento funcional e classificado nas tipologias TN, TT e IT.",
+      "explanation": "O aterramento funcional é classificado nas tipologias TN, TT e IT.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O memorial descritivo do projeto eletrico deve prever precaucoes contra o que no ambiente de instalacao?",
+      "statement": "O memorial descritivo do projeto elétrico deve prever precauções contra o que no ambiente de instalação?",
       "options": [
-        "Influencias externas",
-        "Surtos de manobra em alta tensao",
+        "Influências externas",
+        "Surtos de manobra em alta tensão",
         "Falhas operacionais humanas",
         "Faltas transientes de geradores"
       ],
       "correctIndex": 0,
-      "explanation": "O projeto deve prever precaucoes aplicaveis em face das influencias externas.",
+      "explanation": "O projeto deve prever precauções aplicáveis em face das influências externas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante a desenergizacao de um circuito, o que deve ser executado junto com a instalacao do aterramento temporario?",
+      "statement": "Durante a desenergização de um circuito, o que deve ser executado junto com a instalação do aterramento temporário?",
       "options": [
-        "Remocao dos equipamentos de protecao",
-        "Equipotencializacao dos condutores",
-        "Ativacao do religamento automatico",
-        "Bloqueio mecanico da porta do painel"
+        "Remoção dos equipamentos de proteção",
+        "Equipotencialização dos condutores",
+        "Ativação do religamento automático",
+        "Bloqueio mecânico da porta do painel"
       ],
       "correctIndex": 1,
-      "explanation": "Exige-se a instalacao de aterramento temporario com a equipotencializacao dos condutores.",
+      "explanation": "Exige-se a instalação de aterramento temporário com a equipotencialização dos condutores.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a suportabilidade termica de condutores face a curtos-circuitos e expressa no dimensionamento eletrico?",
+      "statement": "Como a suportabilidade térmica de condutores face a curtos-circuitos é expressa no dimensionamento elétrico?",
       "options": [
-        "Em kV por milissegundo limitando a tensao",
-        "Em kA de pico instantaneo para esforcos mecanicos",
+        "Em kV por milissegundo limitando a tensão",
+        "Em kA de pico instantâneo para esforços mecânicos",
         "Em kA eficaz durante 1 a 5 segundos",
-        "Em Ohms por quilometro de cabo instalado"
+        "Em Ohms por quilômetro de cabo instalado"
       ],
       "correctIndex": 2,
-      "explanation": "A suportabilidade termica dos cabos e condutores e expressa em kA eficaz durante 1 a 5 segundos.",
+      "explanation": "A suportabilidade térmica dos cabos e condutores é expressa em kA eficaz durante 1 a 5 segundos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em projetos eletricos, o que o projetista deve definir formalmente sobre o condutor neutro e o de protecao?",
+      "statement": "Em projetos elétricos, o que o projetista deve definir formalmente sobre o condutor neutro e o de proteção?",
       "options": [
         "A cor exata e o material do isolamento dos cabos",
-        "A distancia minima de separacao ate o teto",
-        "O uso exclusivo de terminais de aluminio",
-        "A obrigatoriedade ou nao da interligacao entre eles"
+        "A distância mínima de separação até o teto",
+        "O uso exclusivo de terminais de alumínio",
+        "A obrigatoriedade ou não da interligação entre eles"
       ],
       "correctIndex": 3,
-      "explanation": "O projeto deve definir expressamente a interligacao ou nao entre o condutor neutro e o de protecao.",
+      "explanation": "O projeto deve definir expressamente a interligação ou não entre o condutor neutro e o de proteção.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a definicao de tensao de seguranca para prevencao de choques eletricos?",
+      "statement": "Qual é a definição de tensão de segurança para prevenção de choques elétricos?",
       "options": [
-        "Extra baixa tensao originada em uma fonte de seguranca",
-        "Tensao alternada limitada a 220V eficazes",
-        "Tensao superior a 1000V com isolacao dupla",
-        "Tensao de 120V estritamente em corrente alternada"
+        "Extra baixa tensão originada em uma fonte de segurança",
+        "Tensão alternada limitada a 220V eficazes",
+        "Tensão superior a 1000V com isolação dupla",
+        "Tensão de 120V estritamente em corrente alternada"
       ],
       "correctIndex": 0,
-      "explanation": "Tensao de seguranca e a extra baixa tensao originada em uma fonte de seguranca.",
+      "explanation": "Tensão de segurança é a extra baixa tensão originada em uma fonte de segurança.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No calculo do tempo permissivel termico de um condutor sob curto-circuito, qual a relacao da formula com a secao do cabo?",
+      "statement": "No cálculo do tempo permissível térmico de um condutor sob curto-circuito, qual a relação da fórmula com a seção do cabo?",
       "options": [
-        "O tempo e inversamente proporcional a secao transversal",
-        "O tempo e diretamente proporcional ao quadrado da secao do condutor",
-        "O tempo independe completamente da secao do cabo",
-        "O tempo e diretamente proporcional a raiz quadrada da secao"
+        "O tempo é inversamente proporcional à seção transversal",
+        "O tempo é diretamente proporcional ao quadrado da seção do condutor",
+        "O tempo independe completamente da seção do cabo",
+        "O tempo é diretamente proporcional à raiz quadrada da seção"
       ],
       "correctIndex": 1,
-      "explanation": "Na equacao termica o tempo admissivel e diretamente proporcional ao quadrado da secao transversal do condutor.",
+      "explanation": "Na equação térmica o tempo admissível é diretamente proporcional ao quadrado da seção transversal do condutor.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O Prontuario de Instalacoes Eletricas exige obrigatoriamente a documentacao das inspecoes do sistema de protecao contra descargas atmosfericas.",
+      "statement": "O Prontuário de Instalações Elétricas exige obrigatoriamente a documentação das inspeções do sistema de proteção contra descargas atmosféricas.",
       "correctAnswer": true,
-      "explanation": "O item 10.2.4 alinea b da NR-10 torna obrigatoria a documentacao das inspecoes do SPDA e dos aterramentos.",
+      "explanation": "O item 10.2.4 alínea b da NR-10 torna obrigatória a documentação das inspeções do SPDA e dos aterramentos.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A isolacao dupla ou reforcada e listada formalmente como uma das medidas de controle do risco eletrico.",
+      "statement": "A isolação dupla ou reforçada é listada formalmente como uma das medidas de controle do risco elétrico.",
       "correctAnswer": true,
-      "explanation": "A isolacao dupla ou reforcada esta entre as medidas de controle de risco eletrico.",
+      "explanation": "A isolação dupla ou reforçada está entre as medidas de controle de risco elétrico.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Os resultados dos testes de isolacao eletrica realizados em equipamentos de protecao podem ser omitidos do Prontuario de Instalacoes.",
+      "statement": "Os resultados dos testes de isolação elétrica realizados em equipamentos de proteção podem ser omitidos do Prontuário de Instalações.",
       "correctAnswer": false,
-      "explanation": "O item 10.2.4 alinea e da NR-10 exige incondicionalmente os resultados dos testes de isolacao eletrica no prontuario.",
+      "explanation": "O item 10.2.4 alínea e da NR-10 exige incondicionalmente os resultados dos testes de isolação elétrica no prontuário.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Disjuntores e fusiveis sao considerados equipamentos passivos, destinados a conduzir a corrente de curto-circuito sem interrupcao.",
+      "statement": "Disjuntores e fusíveis são considerados equipamentos passivos, destinados a conduzir a corrente de curto-circuito sem interrupção.",
       "correctAnswer": false,
-      "explanation": "Disjuntores e fusiveis sao equipamentos ativos, pois sao destinados a eliminar a corrente de curto-circuito.",
+      "explanation": "Disjuntores e fusíveis são equipamentos ativos, pois são destinados a eliminar a corrente de curto-circuito.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Em redes operando com neutro isolado, uma fuga a terra provoca uma corrente capacitiva muito baixa que permite manter a operacao sem trip imediato.",
+      "statement": "Em redes operando com neutro isolado, uma fuga à terra provoca uma corrente capacitiva muito baixa que permite manter a operação sem trip imediato.",
       "correctAnswer": true,
-      "explanation": "No neutro isolado a corrente de falha capacitiva e baixa, permitindo a continuidade de servico na primeira falha.",
+      "explanation": "No neutro isolado a corrente de falha capacitiva é baixa, permitindo a continuidade de serviço na primeira falha.",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O envoltorio de partes energizadas destinado a impedir qualquer tipo de contato acidental com partes internas e chamado tecnicamente de ____.",
+      "statement": "O envoltório de partes energizadas destinado a impedir qualquer tipo de contato acidental com partes internas é chamado tecnicamente de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "invólucro"
         }
       ],
-      "explanation": "Involucro e o envoltorio de partes energizadas que protege fisicamente contra contatos diretos.",
+      "explanation": "Invólucro é o envoltório de partes energizadas que protege fisicamente contra contatos diretos.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A ligacao eletrica efetiva, confiavel e intencional a terra, destinada especificamente a garantir a ____ de potenciais e definida como aterramento temporario.",
+      "statement": "A ligação elétrica efetiva, confiável e intencional à terra, destinada especificamente a garantir a ____ de potenciais é definida como aterramento temporário.",
       "blanks": [
         {
           "index": 0,
           "answer": "equipotencialidade"
         }
       ],
-      "explanation": "O aterramento eletrico temporario garante a equipotencialidade no local de trabalho.",
+      "explanation": "O aterramento elétrico temporário garante a equipotencialidade no local de trabalho.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "A acao de desligamento seguro das redes na ocorrencia de falhas e listada como ____ automatico da alimentacao eletrica.",
+      "statement": "A ação de desligamento seguro das redes na ocorrência de falhas é listada como ____ automático da alimentação elétrica.",
       "blanks": [
         {
           "index": 0,
           "answer": "seccionamento"
         }
       ],
-      "explanation": "Entre as medidas de controle do risco eletrico esta o seccionamento automatico da alimentacao.",
+      "explanation": "Entre as medidas de controle do risco elétrico está o seccionamento automático da alimentação.",
       "difficulty": "hard"
     }
   ]

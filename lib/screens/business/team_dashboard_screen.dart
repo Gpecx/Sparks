@@ -156,6 +156,8 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
       children: [
         Text(name,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
                 color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
         const SizedBox(height: 16),
@@ -249,11 +251,15 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
             Icon(icon, color: AppColors.primary, size: 20),
             const SizedBox(height: 8),
             Text(value,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w800)),
             Text(label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
           ],
         ),

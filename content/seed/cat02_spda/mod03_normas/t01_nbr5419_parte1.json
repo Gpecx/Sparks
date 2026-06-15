@@ -3,53 +3,53 @@
   "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
   "categoryOrder": 1,
   "module": "Normas SPDA",
-  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspecao",
+  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspeção",
   "moduleOrder": 2,
   "trail": "NBR 5419 - Parte 1 (Princípios Gerais)",
   "trailOrder": 0,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Como a serie de normas tecnicas ABNT NBR 5419 esta dividida estruturalmente e qual e o tema especifico abordado em sua Parte 1?",
+      "statement": "Como a série de normas técnicas ABNT NBR 5419 está dividida estruturalmente e qual é o tema específico abordado em sua Parte 1?",
       "options": [
-        "Em duas partes; a Parte 1 trata da Analise de Risco.",
-        "Em tres partes; a Parte 1 trata dos Danos fisicos a estruturas.",
-        "Em quatro partes; a Parte 1 trata dos Principios gerais.",
-        "Em cinco partes; a Parte 1 trata dos Sistemas eletricos e eletronicos."
+        "Em duas partes; a Parte 1 trata da Análise de Risco.",
+        "Em três partes; a Parte 1 trata dos Danos físicos a estruturas.",
+        "Em quatro partes; a Parte 1 trata dos Princípios gerais.",
+        "Em cinco partes; a Parte 1 trata dos Sistemas elétricos e eletrônicos."
       ],
       "correctIndex": 2,
-      "explanation": "A ABNT NBR 5419 mantem a organizacao estrutural dividida em quatro partes. A Parte 1 trata dos Principios gerais. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A ABNT NBR 5419 mantém a organização estrutural dividida em quatro partes. A Parte 1 trata dos Princípios gerais. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o objetivo principal da Parte 1 da norma ABNT NBR 5419 (Principios Gerais)?",
+      "statement": "Qual é o objetivo principal da Parte 1 da norma ABNT NBR 5419 (Princípios Gerais)?",
       "options": [
-        "Definir exclusivamente os componentes mecanicos das descidas e captores.",
-        "Estabelecer os conceitos fundamentais, definicoes e parametros basicos para compreensao dos fenomenos atmosfericos e seus efeitos.",
-        "Calcular matematicamente a densidade de raios Ng para todos os municipios brasileiros.",
-        "Estipular os limites de tolerancia para os Dispositivos de Protecao contra Surtos (DPS)."
+        "Definir exclusivamente os componentes mecânicos das descidas e captores.",
+        "Estabelecer os conceitos fundamentais, definições e parâmetros básicos para compreensão dos fenômenos atmosféricos e seus efeitos.",
+        "Calcular matematicamente a densidade de raios Ng para todos os municípios brasileiros.",
+        "Estipular os limites de tolerância para os Dispositivos de Proteção contra Surtos (DPS)."
       ],
       "correctIndex": 1,
-      "explanation": "A Parte 1 (Principios Gerais) estabelece os conceitos fundamentais, definicoes e parametros basicos para compreensao dos fenomenos atmosfericos e seus efeitos nas estruturas. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "A Parte 1 (Princípios Gerais) estabelece os conceitos fundamentais, definições e parâmetros básicos para compreensão dos fenômenos atmosféricos e seus efeitos nas estruturas. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No contexto dos principios gerais da protecao, o que define fisicamente o Sistema de Protecao contra Descargas Atmosfericas (SPDA)?",
+      "statement": "No contexto dos princípios gerais da proteção, o que define fisicamente o Sistema de Proteção contra Descargas Atmosféricas (SPDA)?",
       "options": [
-        "Um conjunto de componentes instalado para estabilizar a tensao de concessionarias durante tempestades.",
-        "Um dispositivo isolado responsavel por repelir a formacao de cargas estaticas no topo dos edificios.",
-        "Um conjunto de componentes destinado a interceptar, conduzir e dissipar de forma segura a corrente eletrica de uma descarga para o solo.",
-        "Uma rede de blindagem magnetica que atua exclusivamente filtrando ruidos de alta frequencia."
+        "Um conjunto de componentes instalado para estabilizar a tensão de concessionárias durante tempestades.",
+        "Um dispositivo isolado responsável por repelir a formação de cargas estáticas no topo dos edifícios.",
+        "Um conjunto de componentes destinado a interceptar, conduzir e dissipar de forma segura a corrente elétrica de uma descarga para o solo.",
+        "Uma rede de blindagem magnética que atua exclusivamente filtrando ruídos de alta frequência."
       ],
       "correctIndex": 2,
-      "explanation": "O SPDA e um conjunto de componentes instalados em uma edificacao destinado a interceptar, conduzir e dissipar de forma segura a corrente eletrica de uma descarga atmosferica para o solo. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "O SPDA é um conjunto de componentes instalados em uma edificação destinado a interceptar, conduzir e dissipar de forma segura a corrente elétrica de uma descarga atmosférica para o solo. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Os Niveis de Protecao contra Raios (LPL) determinam a eficiencia teorica da captacao das descargas. Qual e a eficiencia de interceptacao estipulada para o LPL I (Protecao Maxima)?",
+      "statement": "Os Níveis de Proteção contra Raios (LPL) determinam a eficiência teórica da captação das descargas. Qual é a eficiência de interceptação estipulada para o LPL I (Proteção Máxima)?",
       "options": [
         "80%",
         "90%",
@@ -57,77 +57,77 @@
         "99%"
       ],
       "correctIndex": 3,
-      "explanation": "O LPL I oferece protecao contra 99% das correntes de raio, sendo obrigatorio para estruturas criticas como hospitais, centrais de emergencia e instalacoes com risco de explosao. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O LPL I oferece proteção contra 99% das correntes de raio, sendo obrigatório para estruturas críticas como hospitais, centrais de emergência e instalações com risco de explosão. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao avaliar os riscos segundo as diretrizes da NBR 5419, os danos causados por raios sao agrupados. O que representa especificamente o tipo de dano classificado como D3?",
+      "statement": "Ao avaliar os riscos segundo as diretrizes da NBR 5419, os danos causados por raios são agrupados. O que representa especificamente o tipo de dano classificado como D3?",
       "options": [
-        "Ferimentos aos seres vivos causados por choque eletrico.",
-        "Danos fisicos as estruturas, como incendio ou explosao.",
-        "Falhas nos sistemas eletricos e eletronicos.",
-        "Danos a rede publica de abastecimento de agua."
+        "Ferimentos aos seres vivos causados por choque elétrico.",
+        "Danos físicos às estruturas, como incêndio ou explosão.",
+        "Falhas nos sistemas elétricos e eletrônicos.",
+        "Danos à rede pública de abastecimento de água."
       ],
       "correctIndex": 2,
-      "explanation": "Sao considerados tres tipos de danos: os ferimentos aos seres vivos (D1), os danos fisicos as estruturas (D2) e as falhas nos sistemas eletricos e eletronicos (D3). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "São considerados três tipos de danos: os ferimentos aos seres vivos (D1), os danos físicos às estruturas (D2) e as falhas nos sistemas elétricos e eletrônicos (D3). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
       "statement": "A norma mapeia diferentes Fontes de Danos dependendo do ponto de impacto da descarga. O que significam, respectivamente, as fontes S1 e S2?",
       "options": [
-        "S1: Descargas na linha eletrica; S2: Descargas proximas a linha.",
-        "S1: Descargas diretamente na estrutura; S2: Descargas proximas a estrutura.",
+        "S1: Descargas na linha elétrica; S2: Descargas próximas à linha.",
+        "S1: Descargas diretamente na estrutura; S2: Descargas próximas à estrutura.",
         "S1: Falhas internas no SPDA; S2: Falhas no aterramento de sinal.",
         "S1: Descargas nuvem-nuvem; S2: Descargas intranuvem."
       ],
       "correctIndex": 1,
-      "explanation": "O estudo para determinar o tipo de protecao avalia as fontes de danos onde acontecem as descargas diretamente na estrutura (S1) e proximo a estrutura (S2). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O estudo para determinar o tipo de proteção avalia as fontes de danos onde acontecem as descargas diretamente na estrutura (S1) e próximo à estrutura (S2). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nos principios gerais da protecao, as consequencias indesejadas (perdas) sao categorizadas. A perda classificada normativamente como L3 corresponde a qual evento?",
+      "statement": "Nos princípios gerais da proteção, as consequências indesejadas (perdas) são categorizadas. A perda classificada normativamente como L3 corresponde a qual evento?",
       "options": [
         "Perda de vidas humanas.",
-        "Perda de instalacao de servico ao publico.",
-        "Perda de memoria cultural (patrimonio cultural).",
-        "Perda de valor economico e paralisacao de producao."
+        "Perda de instalação de serviço ao público.",
+        "Perda de memória cultural (patrimônio cultural).",
+        "Perda de valor econômico e paralisação de produção."
       ],
       "correctIndex": 2,
-      "explanation": "A ABNT considera os seguintes tipos de perdas: perda de vidas humanas (L1); perda de instalacao de servico ao publico (L2); perda de memoria cultural (L3); e perda de valor economico (L4). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A ABNT considera os seguintes tipos de perdas: perda de vidas humanas (L1); perda de instalação de serviço ao público (L2); perda de memória cultural (L3); e perda de valor econômico (L4). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na transicao e atualizacao para a ABNT NBR 5419:2026, quais tipos de perdas foram retiradas do escopo direto de avaliacao da Parte 1, mantendo-se o foco nas perdas L1 e L3?",
+      "statement": "Na transição e atualização para a ABNT NBR 5419:2026, quais tipos de perdas foram retiradas do escopo direto de avaliação da Parte 1, mantendo-se o foco nas perdas L1 e L3?",
       "options": [
         "Apenas a perda L1 (vidas humanas) foi removida.",
-        "As perdas L2 (servico ao publico) e L4 (valor economico).",
-        "As perdas L1 (vidas humanas) e L2 (servico ao publico).",
-        "Nenhuma perda foi removida; L1, L2, L3 e L4 foram unificadas em uma unica categoria."
+        "As perdas L2 (serviço ao público) e L4 (valor econômico).",
+        "As perdas L1 (vidas humanas) e L2 (serviço ao público).",
+        "Nenhuma perda foi removida; L1, L2, L3 e L4 foram unificadas em uma única categoria."
       ],
       "correctIndex": 1,
-      "explanation": "As perdas classificadas como L2 (perda de servico ao publico) e L4 (perda de valor economico) deixam de integrar o corpo normativo desta Parte, permanecendo apenas as perdas L1 e L3. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "As perdas classificadas como L2 (perda de serviço ao público) e L4 (perda de valor econômico) deixam de integrar o corpo normativo desta Parte, permanecendo apenas as perdas L1 e L3. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao analisar a Tabela 3 da NBR 5419 sobre os parametros relevantes da corrente dos raios, a Carga Eletrica total (Q) e apontada como a causadora primaria de qual fenomeno?",
+      "statement": "Ao analisar a Tabela 3 da NBR 5419 sobre os parâmetros relevantes da corrente dos raios, a Carga Elétrica total (Q) é apontada como a causadora primária de qual fenômeno?",
       "options": [
-        "Danos mecanicos e rompimento de cabos por forcas eletrodinamicas.",
-        "Centelhamentos por inducao de tensao e danos acusticos (trovoes).",
-        "Danos termicos severos nos pontos de impacto, como erosao de materiais e perfuracao de chapas.",
+        "Danos mecânicos e rompimento de cabos por forças eletrodinâmicas.",
+        "Centelhamentos por indução de tensão e danos acústicos (trovões).",
+        "Danos térmicos severos nos pontos de impacto, como erosão de materiais e perfuração de chapas.",
         "Ondas de choque que destroem os transformadores AT/BT."
       ],
       "correctIndex": 2,
-      "explanation": "Conforme a Tabela 3, a Carga Eletrica (Q) e o parametro responsavel pelos danos termicos nos pontos de impacto (erosao de materiais, perfuracao de chapas). (Fonte: A fisica dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3)",
+      "explanation": "Conforme a Tabela 3, a Carga Elétrica (Q) é o parâmetro responsável pelos danos térmicos nos pontos de impacto (erosão de materiais, perfuração de chapas). (Fonte: A física dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a Tabela 3 da NBR 5419 que especifica os parametros fixados para os Niveis de Protecao, qual e o valor exigido para a energia especifica (W/R) da primeira descarga de retorno positiva (1DR+) no Nivel de Protecao I (NP-I)?",
+      "statement": "Segundo a Tabela 3 da NBR 5419 que especifica os parâmetros fixados para os Níveis de Proteção, qual é o valor exigido para a energia específica (W/R) da primeira descarga de retorno positiva (1DR+) no Nível de Proteção I (NP-I)?",
       "options": [
         "200 kJ/ohm",
         "550 kJ/ohm",
@@ -135,83 +135,83 @@
         "15.000 kJ/ohm"
       ],
       "correctIndex": 2,
-      "explanation": "De acordo com a Tabela 3, o valor fixado para o NP-I referente a energia especifica (W/R) da primeira descarga de retorno positiva (1DR+) e de 10.000 kJ/ohm. (Fonte: A fisica dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3)",
+      "explanation": "De acordo com a Tabela 3, o valor fixado para o NP-I referente à energia específica (W/R) da primeira descarga de retorno positiva (1DR+) é de 10.000 kJ/ohm. (Fonte: A física dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A norma ABNT NBR 5419 e composta por quatro partes estruturadas: Principios Gerais, Analise de Risco, Danos Fisicos a Estruturas e Sistemas Eletricos e Eletronicos Internos.",
+      "statement": "A norma ABNT NBR 5419 é composta por quatro partes estruturadas: Princípios Gerais, Análise de Risco, Danos Físicos a Estruturas e Sistemas Elétricos e Eletrônicos Internos.",
       "correctAnswer": true,
-      "explanation": "A ABNT NBR 5419 mantem a organizacao e continua dividida em quatro partes: Parte 1 Principios gerais; Parte 2 Analise de risco; Parte 3 Danos fisicos a estruturas e perigos a vida; Parte 4 Sistemas eletricos e eletronicos internos a estrutura. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A ABNT NBR 5419 mantém a organização e continua dividida em quatro partes: Parte 1 Princípios gerais; Parte 2 Análise de risco; Parte 3 Danos físicos a estruturas e perigos à vida; Parte 4 Sistemas elétricos e eletrônicos internos à estrutura. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A nova abordagem tecnica consolidou o conceito geral de Protecao contra Descargas Atmosfericas (PDA), que engloba tanto o classico SPDA para danos estruturais quanto as MPS para protecao de equipamentos.",
+      "statement": "A nova abordagem técnica consolidou o conceito geral de Proteção contra Descargas Atmosféricas (PDA), que engloba tanto o clássico SPDA para danos estruturais quanto as MPS para proteção de equipamentos.",
       "correctAnswer": true,
-      "explanation": "O termo SPDA divide espaco com o termo MPS, e os dois juntos trazem o novo e mais abrangente conceito de PDA. O SPDA atua contra danos a estrutura, enquanto as MPS tratam da protecao aos sistemas eletricos e eletronicos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O termo SPDA divide espaço com o termo MPS, e os dois juntos trazem o novo e mais abrangente conceito de PDA. O SPDA atua contra danos à estrutura, enquanto as MPS tratam da proteção aos sistemas elétricos e eletrônicos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Nas definicoes das fontes de impacto de raios, o codigo S3 refere-se as descargas que caem diretamente sobre a estrutura, enquanto S1 designa as descargas que atingem a rede eletrica conectada a ela.",
+      "statement": "Nas definições das fontes de impacto de raios, o código S3 refere-se às descargas que caem diretamente sobre a estrutura, enquanto S1 designa as descargas que atingem a rede elétrica conectada a ela.",
       "correctAnswer": false,
-      "explanation": "A correta classificacao e: S1 (descargas diretamente na estrutura) e S3 (descargas nas linhas eletricas que adentram a edificacao). Oposto ao enunciado. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A correta classificação é: S1 (descargas diretamente na estrutura) e S3 (descargas nas linhas elétricas que adentram a edificação). Oposto ao enunciado. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A norma NBR 5419 estabelece que o Nivel de Protecao IV (LPL IV) e a classificacao mais rigorosa, interceptando 99% das descargas, devendo ser empregada obrigatoriamente em usinas e hospitais.",
+      "statement": "A norma NBR 5419 estabelece que o Nível de Proteção IV (LPL IV) é a classificação mais rigorosa, interceptando 99% das descargas, devendo ser empregada obrigatoriamente em usinas e hospitais.",
       "correctAnswer": false,
-      "explanation": "O LPL I (Protecao Maxima) e que intercepta 99% das correntes e e exigido para estruturas criticas como hospitais e locais com explosivos. O LPL IV e o nivel de protecao basica. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O LPL I (Proteção Máxima) é que intercepta 99% das correntes e é exigido para estruturas críticas como hospitais e locais com explosivos. O LPL IV é o nível de proteção básica. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Conforme os parametros da corrente da Tabela 3 da NBR 5419, o Pico de Corrente (Ip) e primariamente responsavel pelos efeitos mecanicos (forcas eletrodinamicas) e danos por onda de choque acustico.",
+      "statement": "Conforme os parâmetros da corrente da Tabela 3 da NBR 5419, o Pico de Corrente (Ip) é primariamente responsável pelos efeitos mecânicos (forças eletrodinâmicas) e danos por onda de choque acústico.",
       "correctAnswer": true,
-      "explanation": "A Tabela 3 da NBR 5419 estabelece que o Pico de Corrente (Ip) causa efeitos mecanicos (forcas eletrodinamicas), centelhamento e danos por onda de choque acustico. (Fonte: A fisica dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3)",
+      "explanation": "A Tabela 3 da NBR 5419 estabelece que o Pico de Corrente (Ip) causa efeitos mecânicos (forças eletrodinâmicas), centelhamento e danos por onda de choque acústico. (Fonte: A física dos raios Parte 1, SciELO, citando NBR 5419 Tabela 3)",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Alem do sistema classico de para-raios (SPDA), a Parte 4 da norma trata especificamente da seguranca dos equipamentos internos atraves das Medidas de Protecao contra Surtos, conhecidas pela sigla ____.",
+      "statement": "Além do sistema clássico de para-raios (SPDA), a Parte 4 da norma trata especificamente da segurança dos equipamentos internos através das Medidas de Proteção contra Surtos, conhecidas pela sigla ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "MPS"
         }
       ],
-      "explanation": "A parte 4 da norma tecnica ABNT NBR 5419 apresenta as Medidas de Protecao contra Surtos (MPS). (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "A parte 4 da norma técnica ABNT NBR 5419 apresenta as Medidas de Proteção contra Surtos (MPS). (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "easy"
     },
     {
       "type": "fillBlank",
-      "statement": "Dentre as categorias de perdas descritas na estrutura de analise de risco, aquela designada pelo codigo ____ foca na avaliacao do risco inaceitavel de perda de vidas humanas e ferimentos permanentes.",
+      "statement": "Dentre as categorias de perdas descritas na estrutura de análise de risco, aquela designada pelo código ____ foca na avaliação do risco inaceitável de perda de vidas humanas e ferimentos permanentes.",
       "blanks": [
         {
           "index": 0,
           "answer": "L1"
         }
       ],
-      "explanation": "A norma considera as seguintes categorias de perdas: perda de vidas humanas (L1); perda de instalacao de servico ao publico (L2), etc. (Fonte: Cleiton Junior Lopes / ABNT NBR 5419:2026 Guia pratico)",
+      "explanation": "A norma considera as seguintes categorias de perdas: perda de vidas humanas (L1); perda de instalação de serviço ao público (L2), etc. (Fonte: Cleiton Junior Lopes / ABNT NBR 5419:2026 Guia prático)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "No mapeamento dos locais onde a descarga atmosferica pode incidir de forma a causar perturbacao na edificacao, as descargas que ocorrem e atingem o solo nas areas proximas as linhas eletricas (que alimentam a estrutura) sao identificadas como a fonte de dano ____.",
+      "statement": "No mapeamento dos locais onde a descarga atmosférica pode incidir de forma a causar perturbação na edificação, as descargas que ocorrem e atingem o solo nas áreas próximas às linhas elétricas (que alimentam a estrutura) são identificadas como a fonte de dano ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "S4"
         }
       ],
-      "explanation": "As fontes de danos sao classificadas como S1, S2, S3 e as descargas que atingem as areas proximas as linhas sao denominadas S4. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "As fontes de danos são classificadas como S1, S2, S3 e as descargas que atingem as áreas próximas às linhas são denominadas S4. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     }
   ]

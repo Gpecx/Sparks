@@ -1,55 +1,55 @@
 {
   "category": "Qualidade da Energia",
-  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categorySubtitle": "Fundamentos, Harmônicas, Transitórios, Medição e Normas",
   "categoryOrder": 2,
   "module": "Transitórios e Surtos",
-  "moduleSubtitle": "Tipos, sobretensoes, medicao, DPS e coordenacao",
+  "moduleSubtitle": "Tipos, sobretensões, medição, DPS e coordenação",
   "moduleOrder": 2,
   "trail": "Sobretensões Atmosféricas e de Manobra",
   "trailOrder": 1,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Segundo o Guia para aplicacao de DPS da Finder, como os surtos de tensao nas instalacoes sao classificados em relacao a sua origem?",
+      "statement": "Segundo o Guia para aplicação de DPS da Finder, como os surtos de tensão nas instalações são classificados em relação à sua origem?",
       "options": [
-        "Endogenos (de manobra) e exogenos (de origem atmosferica).",
+        "Endógenos (de manobra) e exógenos (de origem atmosférica).",
         "Apenas como impulsivos isolados e amortecidos no ar.",
-        "Primarios e secundarios em circuitos de corrente continua.",
-        "Ativos e reativos dependendo da carga instantanea."
+        "Primários e secundários em circuitos de corrente contínua.",
+        "Ativos e reativos dependendo da carga instantânea."
       ],
       "correctIndex": 0,
-      "explanation": "O Guia da Finder descreve explicitamente que os surtos de tensao podem ser endogenos (surtos de manobra) ou exogenos (origem atmosferica).",
+      "explanation": "O Guia da Finder descreve explicitamente que os surtos de tensão podem ser endógenos (surtos de manobra) ou exógenos (origem atmosférica).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que causa principalmente os surtos de tensao de origem atmosferica (exogenos) de acordo com o material tecnico?",
+      "statement": "O que causa principalmente os surtos de tensão de origem atmosférica (exógenos) de acordo com o material técnico?",
       "options": [
-        "Chaveamento simultaneo de motores e interruptores de alta tensao.",
-        "Variacoes bruscas nas cargas conectadas a rede comercial.",
-        "Descargas eletricas entre nuvens ou nuvem-terra decorrentes do acumulo de cargas.",
-        "Insercao rapida de grandes bancos de capacitores para correcao do fator de potencia."
+        "Chaveamento simultâneo de motores e interruptores de alta tensão.",
+        "Variações bruscas nas cargas conectadas à rede comercial.",
+        "Descargas elétricas entre nuvens ou nuvem-terra decorrentes do acúmulo de cargas.",
+        "Inserção rápida de grandes bancos de capacitores para correção do fator de potência."
       ],
       "correctIndex": 2,
-      "explanation": "Conforme o Guia Finder, os surtos de origem atmosferica surgem quando raios atingem um ponto durante uma tempestade devido ao acumulo de cargas positivas e negativas que superam a resistencia dieletrica do ar.",
+      "explanation": "Conforme o Guia Finder, os surtos de origem atmosférica surgem quando raios atingem um ponto durante uma tempestade devido ao acúmulo de cargas positivas e negativas que superam a resistência dielétrica do ar.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a literatura do Guia Finder define os surtos de tensao de manobra (endogenos)?",
+      "statement": "Como a literatura do Guia Finder define os surtos de tensão de manobra (endógenos)?",
       "options": [
-        "Surtos gerados por raios atingindo diretamente a rede eletrica externa.",
-        "Surtos gerados pela operacao normal das linhas, como acionamento de interruptores, motores e variacoes subitas de carga.",
-        "Pulsos eletromagneticos de radiofrequencia irradiados por tempestades solares.",
-        "Flutuacoes periodicas causadas exclusivamente por turbinas de parques eolicos."
+        "Surtos gerados por raios atingindo diretamente a rede elétrica externa.",
+        "Surtos gerados pela operação normal das linhas, como acionamento de interruptores, motores e variações súbitas de carga.",
+        "Pulsos eletromagnéticos de radiofrequência irradiados por tempestades solares.",
+        "Flutuações periódicas causadas exclusivamente por turbinas de parques eólicos."
       ],
       "correctIndex": 1,
-      "explanation": "O Guia Finder define surtos endogenos ou de manobra como aqueles que surgem da operacao normal do sistema, englobando o acionamento de interruptores, variacoes subitas de carga e operacao de motores.",
+      "explanation": "O Guia Finder define surtos endógenos ou de manobra como aqueles que surgem da operação normal do sistema, englobando o acionamento de interruptores, variações súbitas de carga e operação de motores.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual forma de onda padronizada e usada em testes para simular o primeiro impacto direto de um raio, a qual determina a corrente de impulso (Iimp) do DPS?",
+      "statement": "Qual forma de onda padronizada é usada em testes para simular o primeiro impacto direto de um raio, a qual determina a corrente de impulso (Iimp) do DPS?",
       "options": [
         "1,2/50 us",
         "8/20 us",
@@ -57,12 +57,12 @@
         "50/60 Hz"
       ],
       "correctIndex": 2,
-      "explanation": "O Guia Finder estabelece na descricao de correntes que a forma de onda 10/350 us e usada para simular o primeiro impacto do raio para determinar o valor Iimp nos dispositivos de Classe I.",
+      "explanation": "O Guia Finder estabelece na descrição de correntes que a forma de onda 10/350 us é usada para simular o primeiro impacto do raio para determinar o valor Iimp nos dispositivos de Classe I.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual forma de onda normalizada e utilizada para simular os surtos de tensao induzidos e testar o desempenho dos DPS de Classe II (corrente nominal In)?",
+      "statement": "Qual forma de onda normalizada é utilizada para simular os surtos de tensão induzidos e testar o desempenho dos DPS de Classe II (corrente nominal In)?",
       "options": [
         "1,2/50 us",
         "8/20 us",
@@ -70,148 +70,148 @@
         "100/1000 us"
       ],
       "correctIndex": 1,
-      "explanation": "Conforme o Guia Finder, a forma de onda 8/20 us e tipica dos surtos de tensao induzidos por campos magneticos associados e e prescrita para testar a corrente nominal (In) e a corrente maxima (Imax) dos DPS de Classe II.",
+      "explanation": "Conforme o Guia Finder, a forma de onda 8/20 us é típica dos surtos de tensão induzidos por campos magnéticos associados e é prescrita para testar a corrente nominal (In) e a corrente máxima (Imax) dos DPS de Classe II.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a distribuicao espacial documentada no Guia Finder, quais sao as tres familias principais de raios formadas na natureza?",
+      "statement": "Segundo a distribuição espacial documentada no Guia Finder, quais são as três famílias principais de raios formadas na natureza?",
       "options": [
         "Raios positivos, raios negativos e raios bipolares.",
         "Raios entre nuvens, raios intranuvem e raios entre nuvem e terra.",
         "Raios indutivos, raios capacitivos e raios resistivos.",
-        "Raios de curta duracao, media duracao e longa duracao isolada."
+        "Raios de curta duração, média duração e longa duração isolada."
       ],
       "correctIndex": 1,
-      "explanation": "O Guia Finder identifica as tres familias naturais de raios com base no percurso da descarga: raios entre nuvens, raios intranuvem e raios entre nuvem e terra.",
+      "explanation": "O Guia Finder identifica as três famílias naturais de raios com base no percurso da descarga: raios entre nuvens, raios intranuvem e raios entre nuvem e terra.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que caracteriza os danos do acoplamento resistivo provocado por um impacto direto de um raio em uma edificacao devidamente aterrada?",
+      "statement": "O que caracteriza os danos do acoplamento resistivo provocado por um impacto direto de um raio em uma edificação devidamente aterrada?",
       "options": [
-        "O raio cria um campo magnetico que apenas induz baixa tensao residual nao prejudicial nos cabos blindados.",
-        "A corrente se descarrega na terra aumentando instantaneamente o potencial do aterramento, o que pode gerar descargas perigosas que contem energia para iniciar incendios ou destruir equipamentos.",
-        "A tensao absoluta do raio e imediatamente bloqueada e anulada pelos isoladores de porcelana na malha principal sem gerar propagacao.",
-        "O acoplamento resistivo atua equalizando todas as malhas do predio e anula imediatamente a tensao de passo nociva ao ser humano."
+        "O raio cria um campo magnético que apenas induz baixa tensão residual não prejudicial nos cabos blindados.",
+        "A corrente se descarrega na terra aumentando instantaneamente o potencial do aterramento, o que pode gerar descargas perigosas que contêm energia para iniciar incêndios ou destruir equipamentos.",
+        "A tensão absoluta do raio é imediatamente bloqueada e anulada pelos isoladores de porcelana na malha principal sem gerar propagação.",
+        "O acoplamento resistivo atua equalizando todas as malhas do prédio e anula imediatamente a tensão de passo nociva ao ser humano."
       ],
       "correctIndex": 1,
-      "explanation": "O Guia Finder cita na secao de Impacto Direto que o raio, ao ser descarregado na terra, eleva o potencial do aterramento. Os surtos resistivos contem energia suficiente para iniciar um incendio ou destruir os equipamentos conectados.",
+      "explanation": "O Guia Finder cita na seção de Impacto Direto que o raio, ao ser descarregado na terra, eleva o potencial do aterramento. Os surtos resistivos contêm energia suficiente para iniciar um incêndio ou destruir os equipamentos conectados.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
       "statement": "Sobre as anomalias geradas pelo acoplamento indutivo decorrente do impacto indireto de raios, como ele afeta os sistemas nas proximidades?",
       "options": [
-        "Altera a resistencia fundamental do aterramento isolado para patamares abaixo de zero ohm.",
-        "Produz surtos de tensao que nao possuem energia suficiente para iniciar incendios, mas que podem destruir os equipamentos eletronicos.",
-        "Injeta intensas correntes continuas nao oscilatorias diretamente e exclusivamente nas redes primarias de comunicacao telefonica.",
-        "Causa danos estritamente mecanicos e forca a dilatacao por fadiga termica nas cordoalhas das linhas aereas."
+        "Altera a resistência fundamental do aterramento isolado para patamares abaixo de zero ohm.",
+        "Produz surtos de tensão que não possuem energia suficiente para iniciar incêndios, mas que podem destruir os equipamentos eletrônicos.",
+        "Injeta intensas correntes contínuas não oscilatórias diretamente e exclusivamente nas redes primárias de comunicação telefônica.",
+        "Causa danos estritamente mecânicos e força a dilatação por fadiga térmica nas cordoalhas das linhas aéreas."
       ],
       "correctIndex": 1,
-      "explanation": "O Guia Finder explica (secao Impactos Diretos e Indiretos) que os surtos de tensao induzidos, com amplitude de 3 a 5 kV provenientes do impacto indireto de um raio, nao tem energia suficiente para iniciar um incendio, mas podem destruir os equipamentos.",
+      "explanation": "O Guia Finder explica (seção Impactos Diretos e Indiretos) que os surtos de tensão induzidos, com amplitude de 3 a 5 kV provenientes do impacto indireto de um raio, não têm energia suficiente para iniciar um incêndio, mas podem destruir os equipamentos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a consequencia direta descrita no guia para o efeito cumulativo de repetidos surtos de tensao de baixa amplitude sobre os equipamentos eletronicos ao longo do seu ciclo de vida?",
+      "statement": "Qual é a consequência direta descrita no guia para o efeito cumulativo de repetidos surtos de tensão de baixa amplitude sobre os equipamentos eletrônicos ao longo do seu ciclo de vida?",
       "options": [
-        "Eles aumentam adaptativamente a tensao de resistencia ao pulso da blindagem do equipamento a cada novo pulso.",
-        "Eles nao possuem nenhum impacto cumulativo adverso, dado que nunca atingem o nivel de imunidade absoluto de topo.",
-        "Eles comprometem e enfraquecem gradualmente a resistencia dieletrica dos isolamentos, reduzindo a vida util do dispositivo e levando a sua quebra definitiva posteriormente.",
-        "Eles agem carregando a fonte de alimentacao das baterias locais prolongando as constantes termicas de atuacao do disjuntor."
+        "Eles aumentam adaptativamente a tensão de resistência ao pulso da blindagem do equipamento a cada novo pulso.",
+        "Eles não possuem nenhum impacto cumulativo adverso, dado que nunca atingem o nível de imunidade absoluto de topo.",
+        "Eles comprometem e enfraquecem gradualmente a resistência dielétrica dos isolamentos, reduzindo a vida útil do dispositivo e levando à sua quebra definitiva posteriormente.",
+        "Eles agem carregando a fonte de alimentação das baterias locais prolongando as constantes térmicas de atuação do disjuntor."
       ],
       "correctIndex": 2,
-      "explanation": "O Guia Finder assevera no topico de Niveis de imunidade e Danos que surtos de tensao repetidos de baixa amplitude comprometem a resistencia dieletrica dos isolamentos, reduzindo a sua vida util ate o equipamento falhar permanentemente.",
+      "explanation": "O Guia Finder assevera no tópico de Níveis de imunidade e Danos que surtos de tensão repetidos de baixa amplitude comprometem a resistência dielétrica dos isolamentos, reduzindo a sua vida útil até o equipamento falhar permanentemente.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao analisar os disturbios de forma conjunta com a norma IEEE 1159 (presente na dissertacao do IFPB), qual comportamento de polaridade e tempo de atuacao caracterizam fisiologicamente o transitorio impulsivo?",
+      "statement": "Ao analisar os distúrbios de forma conjunta com a norma IEEE 1159 (presente na dissertação do IFPB), qual comportamento de polaridade e tempo de atuação caracterizam fisiologicamente o transitório impulsivo?",
       "options": [
-        "Polaridade mantida em caracteristica unicamente unidirecional e com duracoes extremamente rapidas atuando na escala de nanossegundos ate limitados milissegundos.",
-        "Polaridade bidirecional simetrica sustentando oscilacoes por um periodo fixado em pelo menos tres segundos.",
-        "Alternancia continua da tensao em ciclos puramente senoidais acompanhando a frequencia de base de 60 Hz ao longo do pulso.",
-        "Tensao estabilizada de perfil puramente capacitivo atuando lentamente durante uma interrupcao longa ininterrupta."
+        "Polaridade mantida em característica unicamente unidirecional e com durações extremamente rápidas atuando na escala de nanossegundos até limitados milissegundos.",
+        "Polaridade bidirecional simétrica sustentando oscilações por um período fixado em pelo menos três segundos.",
+        "Alternância contínua da tensão em ciclos puramente senoidais acompanhando a frequência de base de 60 Hz ao longo do pulso.",
+        "Tensão estabilizada de perfil puramente capacitivo atuando lentamente durante uma interrupção longa ininterrupta."
       ],
       "correctIndex": 0,
-      "explanation": "A dissertacao do IFPB baseada em Dugan et al. e na IEEE 1159 afirma que transitorios impulsivos possuem uma alteracao de caracteristica unidirecional na sua polaridade e sua duracao compreende subdivisoes de nanossegundos, microssegundos e milissegundos.",
+      "explanation": "A dissertação do IFPB baseada em Dugan et al. e na IEEE 1159 afirma que transitórios impulsivos possuem uma alteração de característica unidirecional na sua polaridade e sua duração compreende subdivisões de nanossegundos, microssegundos e milissegundos.",
       "difficulty": "medium"
     },
     {
       "type": "trueFalse",
-      "statement": "A resistencia dieletrica de um ambiente com ar perfeitamente limpo e seco atinge os 30 kV/cm, porem na presenca de uma tempestade intensa com acrescimo de umidade e poeira, essa resistencia sofre uma reducao natural caindo para poucos kV/cm, fato que facilita a descarga eletrica do raio.",
+      "statement": "A resistência dielétrica de um ambiente com ar perfeitamente limpo e seco atinge os 30 kV/cm, porém na presença de uma tempestade intensa com acréscimo de umidade e poeira, essa resistência sofre uma redução natural caindo para poucos kV/cm, fato que facilita a descarga elétrica do raio.",
       "correctAnswer": true,
-      "explanation": "O Guia Finder confirma esta caracteristica atmosferica na origem do raio afirmando que no caso do ar limpo e seco a rigidez corresponde a 30 kV/cm, e devido a umidade e as particulas de poeira presentes a resistencia cai para poucos kV/cm.",
+      "explanation": "O Guia Finder confirma esta característica atmosférica na origem do raio afirmando que no caso do ar limpo e seco a rigidez corresponde a 30 kV/cm, e devido à umidade e às partículas de poeira presentes a resistência cai para poucos kV/cm.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Os eventos classificados como surtos de tensao endogenos ou de manobra na rede operam gerando transientes em rampa e, caracteristicamente, nao sao atenuados pela fiacao possuindo formato e duracoes sempre continuas acima de tres minutos.",
+      "statement": "Os eventos classificados como surtos de tensão endógenos ou de manobra na rede operam gerando transientes em rampa e, caracteristicamente, não são atenuados pela fiação possuindo formato e durações sempre contínuas acima de três minutos.",
       "correctAnswer": false,
-      "explanation": "O documento tecnico do Guia Finder dita que os surtos de manobra apresentam percurso oscilatorio amortecido, com transientes muito ingremes, cuja duracao pode ser da ordem de nanossegundos. Logo, nao sao mantidos por minutos.",
+      "explanation": "O documento técnico do Guia Finder dita que os surtos de manobra apresentam percurso oscilatório amortecido, com transientes muito íngremes, cuja duração pode ser da ordem de nanossegundos. Logo, não são mantidos por minutos.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Nas ocorrencias de descarga direta, quando a forca massiva de um raio atinge uma linha de energia eletrica no meio do trajeto, a forte corrente do raio propaga-se invariavelmente em ambos os sentidos da linha, dividindo o seu fluxo em partes iguais.",
+      "statement": "Nas ocorrências de descarga direta, quando a força massiva de um raio atinge uma linha de energia elétrica no meio do trajeto, a forte corrente do raio propaga-se invariavelmente em ambos os sentidos da linha, dividindo o seu fluxo em partes iguais.",
       "correctAnswer": true,
-      "explanation": "Em concordancia ao texto do Guia Finder que aborda Impacto Direto: se um raio atingir uma linha de energia eletrica, a corrente do raio se propaga em ambos os sentidos da linha, dividindo-se em partes iguais.",
+      "explanation": "Em concordância ao texto do Guia Finder que aborda Impacto Direto: se um raio atingir uma linha de energia elétrica, a corrente do raio se propaga em ambos os sentidos da linha, dividindo-se em partes iguais.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O acoplamento indutivo fomentado pelo enorme campo eletromagnetico de um raio indireto que atinja as proximidades da edificacao resulta na inducao de intensas correntes de circulacao restritas ao ar isolante, as quais se dissipam instantaneamente, nao possuindo forca nenhuma para induzir surtos perigosos nos cabos eletricos internos da planta.",
+      "statement": "O acoplamento indutivo fomentado pelo enorme campo eletromagnético de um raio indireto que atinja as proximidades da edificação resulta na indução de intensas correntes de circulação restritas ao ar isolante, as quais se dissipam instantaneamente, não possuindo força nenhuma para induzir surtos perigosos nos cabos elétricos internos da planta.",
       "correctAnswer": false,
-      "explanation": "O Guia Finder pontua o oposto advertindo que o campo eletromagnetico do raio cria efeitos desastrosos se ele se conectar com uma bobina de grande diametro, gerando por acoplamento indutivo um surto de tensao.",
+      "explanation": "O Guia Finder pontua o oposto advertindo que o campo eletromagnético do raio cria efeitos desastrosos se ele se conectar com uma bobina de grande diâmetro, gerando por acoplamento indutivo um surto de tensão.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "No que compete as caracteristicas de forma e simulacao padronizadas em laboratorio para garantir e definir a tensao de teste sem carga (Uoc) dos DPS qualificados como de Classe III, as normas exigem o uso em paralelo unicamente de uma onda que represente o impacto inicial restrita ao formato 10/350 us.",
+      "statement": "No que compete às características de forma e simulação padronizadas em laboratório para garantir e definir a tensão de teste sem carga (Uoc) dos DPS qualificados como de Classe III, as normas exigem o uso em paralelo unicamente de uma onda que represente o impacto inicial restrita ao formato 10/350 us.",
       "correctAnswer": false,
-      "explanation": "Conforme estipula o Guia Finder na secao das Caracteristicas Eletricas, o DPS de Classe III e testado com gerador misto e a sua Tensao sem carga (Uoc) se manifesta caracterizada por uma forma de onda com valor normalizado exato de 1,2/50 us, e nao 10/350 us (que e da Classe I).",
+      "explanation": "Conforme estipula o Guia Finder na seção das Características Elétricas, o DPS de Classe III é testado com gerador misto e a sua Tensão sem carga (Uoc) se manifesta caracterizada por uma forma de onda com valor normalizado exato de 1,2/50 us, e não 10/350 us (que é da Classe I).",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "No fenomeno do impacto de raios, quando ha acoplamento indutivo provocado pela variacao da corrente que atravessa uma bobina ligada ao referencial, surge o temido surto de tensao quantificado analiticamente pela expressao U = Lm vezes a derivada da corrente no tempo, ou seja, ____/dt.",
+      "statement": "No fenômeno do impacto de raios, quando há acoplamento indutivo provocado pela variação da corrente que atravessa uma bobina ligada ao referencial, surge o temido surto de tensão quantificado analiticamente pela expressão U = Lm vezes a derivada da corrente no tempo, ou seja, ____/dt.",
       "blanks": [
         {
           "index": 0,
           "answer": "di"
         }
       ],
-      "explanation": "Nas explanacoes dadas pelo Guia Finder para Surtos de tensao induzidos, o documento estabelece que a corrente que atravessa a bobina ligada ao referencial gera por acoplamento indutivo o surto quantificado por U = Lm.di/dt.",
+      "explanation": "Nas explanações dadas pelo Guia Finder para Surtos de tensão induzidos, o documento estabelece que a corrente que atravessa a bobina ligada ao referencial gera por acoplamento indutivo o surto quantificado por U = Lm.di/dt.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Considerando os parametros de escolha com as curvas padronizadas do catalogo para reproducao de disturbios das descargas, a injecao que simula o teste do surto com os rapidos limiares contendo a frente T1 de 1,2 microssegundos e a cauda referencial de 50 microssegundos figura com exatidao como sendo uma forma de onda tipica de ____, conforme os quadros de normalizacao global.",
+      "statement": "Considerando os parâmetros de escolha com as curvas padronizadas do catálogo para reprodução de distúrbios das descargas, a injeção que simula o teste do surto com os rápidos limiares contendo a frente T1 de 1,2 microssegundos e a cauda referencial de 50 microssegundos figura com exatidão como sendo uma forma de onda típica de ____, conforme os quadros de normalização global.",
       "blanks": [
         {
           "index": 0,
           "answer": "tensao"
         }
       ],
-      "explanation": "No compendio do Guia Finder o referencial ilustrativo retrata este pulso identificando-o sob o titulo forma de onda de tensao 1,2/50 us, distinguindo-se assim da representacao 8/20 us pertencente a corrente.",
+      "explanation": "No compêndio do Guia Finder o referencial ilustrativo retrata este pulso identificando-o sob o título forma de onda de tensão 1,2/50 us, distinguindo-se assim da representação 8/20 us pertencente à corrente.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Para reproduzir em laboratorio o primeiro impacto direto de um raio e ensaiar os DPS de Classe I, definindo o parametro de corrente de impulso Iimp, a norma adota uma forma de onda de corrente cujos tempos de frente e de cauda sao normalizados, respectivamente, em ____ microssegundos.",
+      "statement": "Para reproduzir em laboratório o primeiro impacto direto de um raio e ensaiar os DPS de Classe I, definindo o parâmetro de corrente de impulso Iimp, a norma adota uma forma de onda de corrente cujos tempos de frente e de cauda são normalizados, respectivamente, em ____ microssegundos.",
       "blanks": [
         {
           "index": 0,
           "answer": "10/350"
         }
       ],
-      "explanation": "O Guia Finder estabelece que a forma de onda 10/350 us simula o primeiro impacto direto do raio e e utilizada para determinar a corrente de impulso Iimp dos dispositivos de protecao contra surtos de Classe I.",
+      "explanation": "O Guia Finder estabelece que a forma de onda 10/350 us simula o primeiro impacto direto do raio e é utilizada para determinar a corrente de impulso Iimp dos dispositivos de proteção contra surtos de Classe I.",
       "difficulty": "hard"
     }
   ]

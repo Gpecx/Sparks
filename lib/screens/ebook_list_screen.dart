@@ -314,6 +314,8 @@ class _EbookCard extends StatelessWidget {
                             fontWeight: FontWeight.w700,
                             fontSize: 14,
                           ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 3),
                         Text(
@@ -324,18 +326,17 @@ class _EbookCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 8),
-                        Row(
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 4,
                           children: [
                             _tag(Icons.timer_outlined,
                                 '${ebook.estimatedMinutes} min'),
-                            const SizedBox(width: 8),
                             _tag(Icons.collections_bookmark_outlined,
                                 '${ebook.chapterCount} capítulos'),
-                            if (done) ...[
-                              const SizedBox(width: 8),
+                            if (done)
                               _tag(Icons.check, 'Concluído',
                                   color: themeColor),
-                            ],
                           ],
                         ),
                       ],

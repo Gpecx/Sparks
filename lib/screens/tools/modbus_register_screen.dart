@@ -164,17 +164,22 @@ class _ModbusRegisterScreenState extends State<ModbusRegisterScreen> {
                       ),
                     ),
                   ),
+                  const SizedBox(width: 8),
                   Expanded(
                     flex: 2,
-                    child: Text(
-                      _fmtFloat(d.float32),
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                        color: selected
-                            ? AppColors.primary
-                            : AppColors.textPrimary,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        _fmtFloat(d.float32),
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          color: selected
+                              ? AppColors.primary
+                              : AppColors.textPrimary,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),

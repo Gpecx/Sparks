@@ -193,8 +193,11 @@ class NetworkCableScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          Text(p.name,
-              style: const TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+          Expanded(
+            child: Text(p.name,
+                style: const TextStyle(
+                    color: AppColors.textSecondary, fontSize: 13)),
+          ),
         ],
       ),
     );

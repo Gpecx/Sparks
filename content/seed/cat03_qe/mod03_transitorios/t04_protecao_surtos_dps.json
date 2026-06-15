@@ -1,217 +1,217 @@
 {
   "category": "Qualidade da Energia",
-  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categorySubtitle": "Fundamentos, Harmônicas, Transitórios, Medição e Normas",
   "categoryOrder": 2,
   "module": "Transitórios e Surtos",
-  "moduleSubtitle": "Tipos, sobretensoes, medicao, DPS e coordenacao",
+  "moduleSubtitle": "Tipos, sobretensões, medição, DPS e coordenação",
   "moduleOrder": 2,
   "trail": "Proteção Contra Surtos (DPS)",
   "trailOrder": 3,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Segundo o Guia Finder, qual e a finalidade e a forma de onda de teste caracteristica dos DPSs pertencentes a Classe I?",
+      "statement": "Segundo o Guia Finder, qual é a finalidade e a forma de onda de teste característica dos DPSs pertencentes à Classe I?",
       "options": [
-        "Testado com onda 8/20 us para simular surtos induzidos nas proximidades de aparelhos eletronicos.",
+        "Testado com onda 8/20 us para simular surtos induzidos nas proximidades de aparelhos eletrônicos.",
         "Testado com onda impulsiva de 10/350 us para simular o primeiro impacto de um raio direto.",
-        "Testado com onda combinada de 1,2/50 us para o papel de terminacao e absorcao de harmonicos.",
-        "Testado com forma de onda continua para atuar estritamente na regulacao da tensao permanente da rede."
+        "Testado com onda combinada de 1,2/50 us para o papel de terminação e absorção de harmônicos.",
+        "Testado com forma de onda contínua para atuar estritamente na regulação da tensão permanente da rede."
       ],
       "correctIndex": 1,
-      "explanation": "O Guia Finder de protecao contra surtos define que os DPSs da Classe I sao testados com uma forma de onda de 10/350 us, usada para simular o primeiro impacto de um raio direto, sendo obrigatorios em edificios com para-raios.",
+      "explanation": "O Guia Finder de proteção contra surtos define que os DPSs da Classe I são testados com uma forma de onda de 10/350 us, usada para simular o primeiro impacto de um raio direto, sendo obrigatórios em edifícios com para-raios.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que representa o parametro tecnico Uc (Tensao maxima continua) na especificacao de um Dispositivo de Protecao contra Surtos (DPS)?",
+      "statement": "O que representa o parâmetro técnico Uc (Tensão máxima contínua) na especificação de um Dispositivo de Proteção contra Surtos (DPS)?",
       "options": [
-        "O valor da tensao abaixo do qual o DPS certamente nao sera acionado de forma indesejada no funcionamento normal da rede.",
-        "O pico maximo de tensao transitoria que o DPS deixa passar para o equipamento vulneravel apos acionado.",
-        "A tensao de arco fixada mantida entre os eletrodos durante a descarga plena de um centelhador a gas.",
-        "O limite minimo de subtensao de rede exigido para que o disjuntor termico interno do modulo varistor dispare."
+        "O valor da tensão abaixo do qual o DPS certamente não será acionado de forma indesejada no funcionamento normal da rede.",
+        "O pico máximo de tensão transitória que o DPS deixa passar para o equipamento vulnerável após acionado.",
+        "A tensão de arco fixada mantida entre os eletrodos durante a descarga plena de um centelhador a gás.",
+        "O limite mínimo de subtensão de rede exigido para que o disjuntor térmico interno do módulo varistor dispare."
       ],
       "correctIndex": 0,
-      "explanation": "O Guia Finder estabelece na listagem de caracteristicas que Uc e o valor da tensao abaixo do qual o DPS certamente nao sera acionado, devendo ser pelo menos igual a 110% da tensao nominal do sistema (Un).",
+      "explanation": "O Guia Finder estabelece na listagem de características que Uc é o valor da tensão abaixo do qual o DPS certamente não será acionado, devendo ser pelo menos igual a 110% da tensão nominal do sistema (Un).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a definicao pratica do Nivel de Protecao de Tensao (Up) de um DPS e qual sua relacao com a qualidade do dispositivo?",
+      "statement": "Qual é a definição prática do Nível de Proteção de Tensão (Up) de um DPS e qual sua relação com a qualidade do dispositivo?",
       "options": [
-        "E a corrente de ignicao de pico do centelhador; logo, quanto maior o Up, mais capacitivo e o DPS.",
-        "E o valor maximo de tensao que permanece nos terminais do DPS durante a operacao; logo, quanto mais baixa for a Up, melhor sera a qualidade do DPS.",
-        "E a tensao maxima garantida para o isolamento em regime; e deve ser sempre calculada como o quadruplo da tensao nominal.",
-        "E a tensao de corte em vazio do gerador simulado de testes; este parametro nao tem influencia direta na aplicacao em campo."
+        "É a corrente de ignição de pico do centelhador; logo, quanto maior o Up, mais capacitivo é o DPS.",
+        "É o valor máximo de tensão que permanece nos terminais do DPS durante a operação; logo, quanto mais baixa for a Up, melhor será a qualidade do DPS.",
+        "É a tensão máxima garantida para o isolamento em regime; e deve ser sempre calculada como o quádruplo da tensão nominal.",
+        "É a tensão de corte em vazio do gerador simulado de testes; este parâmetro não tem influência direta na aplicação em campo."
       ],
       "correctIndex": 1,
-      "explanation": "Segundo a secao de caracteristicas do Guia Finder, a Up representa o valor maximo de tensao que permanece nos terminais durante a operacao limitadora; com base no valor associado a Up pode-se inferir a qualidade do DPS, sendo que quanto mais baixa for a Up melhor sera a qualidade.",
+      "explanation": "Segundo a seção de características do Guia Finder, a Up representa o valor máximo de tensão que permanece nos terminais durante a operação limitadora; com base no valor associado à Up pode-se inferir a qualidade do DPS, sendo que quanto mais baixa for a Up melhor será a qualidade.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para garantir a eficacia da protecao oferecida na planta, qual e a regra fisica fundamental e restrita ensinada no guia quanto a disposicao e o comprimento das ligacoes dos cabos junto ao DPS?",
+      "statement": "Para garantir a eficácia da proteção oferecida na planta, qual é a regra física fundamental e restrita ensinada no guia quanto à disposição e o comprimento das ligações dos cabos junto ao DPS?",
       "options": [
-        "O comprimento total dos cabos de derivacao entre a linha, o DPS e o barramento terra nao deve ser maior que 50 cm.",
-        "O comprimento dos condutores diretos de aterramento deve ser dimensionado para atingir distancias superiores a exatos 2 metros radiais.",
-        "A fiacao proveniente do DPS e do equipamento seguro deve obrigatoriamente ser arranjada amarrada e inserida no mesmo conduite fino.",
-        "O cabo de protecao equipotencial (PE) deve possuir, no minimo de seguranca normativa, o equivalente ao triplo do comprimento percorrido pelo condutor de fase."
+        "O comprimento total dos cabos de derivação entre a linha, o DPS e o barramento terra não deve ser maior que 50 cm.",
+        "O comprimento dos condutores diretos de aterramento deve ser dimensionado para atingir distâncias superiores a exatos 2 metros radiais.",
+        "A fiação proveniente do DPS e do equipamento seguro deve obrigatoriamente ser arranjada amarrada e inserida no mesmo conduíte fino.",
+        "O cabo de proteção equipotencial (PE) deve possuir, no mínimo de segurança normativa, o equivalente ao triplo do comprimento percorrido pelo condutor de fase."
       ],
       "correctIndex": 0,
-      "explanation": "O Guia Finder instrui na secao de Tecnicas de Instalacao que para evitar incrementos massivos devido a quedas por indutancias parasitas, o comprimento dos cabos de e para o DPS nao deve ser maior que 50 cm.",
+      "explanation": "O Guia Finder instrui na seção de Técnicas de Instalação que para evitar incrementos massivos devido a quedas por indutâncias parasitas, o comprimento dos cabos de e para o DPS não deve ser maior que 50 cm.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao avaliar estruturalmente a construcao das tecnologias dos DPSs, qual e uma caracteristica pratica indicada como desvantagem atrelada ao uso puramente de Varistores (sem associacao) comparada aos Centelhadores a Gas (GDT)?",
+      "statement": "Ao avaliar estruturalmente a construção das tecnologias dos DPSs, qual é uma característica prática indicada como desvantagem atrelada ao uso puramente de Varistores (sem associação) comparada aos Centelhadores a Gás (GDT)?",
       "options": [
-        "O varistor possui uma rampa de ignicao muito cadenciada, com defasagem de tempo de atuacao normalmente superior a um milissegundo.",
-        "O varistor nao assegura nenhum isolamento galvanico para a linha, uma vez que e continuamente atravessado por uma pequena corrente de fuga passiva.",
-        "O varistor engloba uma altissima e prejudicial tensao residual durante sua atuacao plena e e fisicamente incapaz de limitar amplitudes antes que o centelhador atue.",
-        "O varistor atua forcando e sustentando a formacao continua de um extenso arco voltaico, originando o fenomeno de corrente residual permanente a rede."
+        "O varistor possui uma rampa de ignição muito cadenciada, com defasagem de tempo de atuação normalmente superior a um milissegundo.",
+        "O varistor não assegura nenhum isolamento galvânico para a linha, uma vez que é continuamente atravessado por uma pequena corrente de fuga passiva.",
+        "O varistor engloba uma altíssima e prejudicial tensão residual durante sua atuação plena e é fisicamente incapaz de limitar amplitudes antes que o centelhador atue.",
+        "O varistor atua forçando e sustentando a formação contínua de um extenso arco voltaico, originando o fenômeno de corrente residual permanente à rede."
       ],
       "correctIndex": 1,
-      "explanation": "No material tecnico DPS Finder, ao confrontar os DPSs por limitacao (Varistores), a principal desvantagem explicita listada e que eles nao garantem o isolamento galvanico, portanto a corrente de fuga nao e zero, diferindo da atuacao a vazio das ampolas do GDT.",
+      "explanation": "No material técnico DPS Finder, ao confrontar os DPSs por limitação (Varistores), a principal desvantagem explícita listada é que eles não garantem o isolamento galvânico, portanto a corrente de fuga não é zero, diferindo da atuação a vazio das ampolas do GDT.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Considerando os sistemas recomendados de back-up com a missao de proteger o proprio componente do DPS em face aos curtos-circuitos, o que as analises orientam quanto a adocao de fusiveis perante a alternativa com disjuntores termomagneticos?",
+      "statement": "Considerando os sistemas recomendados de back-up com a missão de proteger o próprio componente do DPS em face aos curtos-circuitos, o que as análises orientam quanto à adoção de fusíveis perante a alternativa com disjuntores termomagnéticos?",
       "options": [
-        "Os disjuntores rapidos comutaveis sao inequivocamente indicados, visto que conseguem religar instantes apos o surto atmosferico cessar.",
-        "E aconselhavel a adocao de fusiveis dedicados, dado que constatacoes revelam que disjuntores tendem a ser atuados intempestivamente apenas com a passagem dinamica da onda do raio, cortando cedo o desempenho do DPS.",
-        "Os fusiveis de base de prata necessitam ser obrigatoriamente bloqueados na entrada devido ao fato de incorrerem passivamente na introducao de resistencias altissimas nao lineares ao ramal.",
-        "Os disjuntores em trilho baseados puramente na curva eletromagnetica tipo C e amperagem de 25 A provaram-se a protecao plena ideal padronizada a DPSs com taxa de Imax fixada nos 40 kA."
+        "Os disjuntores rápidos comutáveis são inequivocamente indicados, visto que conseguem religar instantes após o surto atmosférico cessar.",
+        "É aconselhável a adoção de fusíveis dedicados, dado que constatações revelam que disjuntores tendem a ser atuados intempestivamente apenas com a passagem dinâmica da onda do raio, cortando cedo o desempenho do DPS.",
+        "Os fusíveis de base de prata necessitam ser obrigatoriamente bloqueados na entrada devido ao fato de incorrerem passivamente na introdução de resistências altíssimas não lineares ao ramal.",
+        "Os disjuntores em trilho baseados puramente na curva eletromagnética tipo C e amperagem de 25 A provaram-se a proteção plena ideal padronizada a DPSs com taxa de Imax fixada nos 40 kA."
       ],
       "correctIndex": 1,
-      "explanation": "Na secao de sistemas de back-up do Guia Finder, resultados praticos comprovam que disjuntores sofrem aberturas precoces frente as grandes variacoes impulsivas (di/dt). Desse modo, o guia sugere usar sempre fusiveis que nao piorem a Up/f.",
+      "explanation": "Na seção de sistemas de back-up do Guia Finder, resultados práticos comprovam que disjuntores sofrem aberturas precoces frente às grandes variações impulsivas (di/dt). Desse modo, o guia sugere usar sempre fusíveis que não piorem a Up/f.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Constatando os conceitos de aplicacao, o nivel efetivo de protecao percebido pelo aparelho nas conexoes finais (Up/f) provem do somatorio de parcelas que superam a tensao residual do DPS. Que componente vital agrava severamente a protecao se chicotes muito longos ligarem o DPS?",
+      "statement": "Constatando os conceitos de aplicação, o nível efetivo de proteção percebido pelo aparelho nas conexões finais (Up/f) provém do somatório de parcelas que superam a tensão residual do DPS. Que componente vital agrava severamente a proteção se chicotes muito longos ligarem o DPS?",
       "options": [
-        "A elevacao abrupta da tensao de conducao reversa e ignicao por avalancha na pastilha de zinco isolada do varistor superaquecido.",
-        "O decrescimo drastico associado a queda resistiva dissipativa pura (Lei de Joule) devida ao derretimento do cobre exposto na fiacao.",
-        "A queda de tensao indutiva de ordem temporal (L vezes di/dt) induzida fisicamente em face as indutancias parasitas presentes nos proprios cabos ao escoarem a rapida escalada de corrente da descarga.",
-        "O efeito de saturacao capacitiva direta, atrelado em virtude dos filtros paralelos localizados nos componentes digitais ou medidores na adjacencia do relogio de entrada."
+        "A elevação abrupta da tensão de condução reversa e ignição por avalanche na pastilha de zinco isolada do varistor superaquecido.",
+        "O decréscimo drástico associado à queda resistiva dissipativa pura (Lei de Joule) devida ao derretimento do cobre exposto na fiação.",
+        "A queda de tensão indutiva de ordem temporal (L vezes di/dt) induzida fisicamente em face às indutâncias parasitas presentes nos próprios cabos ao escoarem a rápida escalada de corrente da descarga.",
+        "O efeito de saturação capacitiva direta, atrelado em virtude dos filtros paralelos localizados nos componentes digitais ou medidores na adjacência do relógio de entrada."
       ],
       "correctIndex": 2,
-      "explanation": "Em seu segmento dedicado as Tecnicas de Instalacao, o Guia Finder pontua o problema com chicotes longos expondo a formula que alerta que a indutancia parasita dos condutores desempenha papel fundamental, calculando-se o valor pela equacao Delta-U = L vezes di/dt, compondo um agravante ao calculo do limitador.",
+      "explanation": "Em seu segmento dedicado às Técnicas de Instalação, o Guia Finder pontua o problema com chicotes longos expondo a fórmula que alerta que a indutância parasita dos condutores desempenha papel fundamental, calculando-se o valor pela equação Delta-U = L vezes di/dt, compondo um agravante ao cálculo do limitador.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Analisando os ensaios dispostos pelas normatizacoes tecnicas detalhadas no Guia Finder, as afericoes designadas para os modulos chamados DPS de Classe III (ou Tipo 3) fundamentam-se pelo emprego central de qual aparelho validador e qual o seu foco na alocacao na instalacao em cascata?",
+      "statement": "Analisando os ensaios dispostos pelas normatizações técnicas detalhadas no Guia Finder, as aferições designadas para os módulos chamados DPS de Classe III (ou Tipo 3) fundamentam-se pelo emprego central de qual aparelho validador e qual o seu foco na alocação na instalação em cascata?",
       "options": [
         "Constituem uma fronteira basilar a barramentos abertos externos preenchendo as entradas massivas nos QGBTs, submetidos e validados primordialmente pela onda impulsiva classificada em 10/350 us.",
-        "Prestadores dedicados a integridade unicamente dos transformadores blindados medios, validam suas protecoes mediante um disparo regulado com ondas simetricas ativas na baliza constante 8/20 us sob 100 kA.",
-        "Assumem o papel e ultima margem de terminacao locados de forma contigua em prol dos sistemas finais, submetidos a chancela com gerador combinado emitindo voltagem livre estipulada em matriz 1,2/50 us acompanhada da rampa de corrente na onda 8/20 us.",
-        "Funcionam com o proposito de servir somente a compensacao reativa de falhas por protecao termica nas massas, validados via oscilacao puramente em forma estendida e injetada com corrente continua estatica permanente com 60 Hz."
+        "Prestadores dedicados à integridade unicamente dos transformadores blindados médios, validam suas proteções mediante um disparo regulado com ondas simétricas ativas na baliza constante 8/20 us sob 100 kA.",
+        "Assumem o papel e última margem de terminação locados de forma contígua em prol dos sistemas finais, submetidos à chancela com gerador combinado emitindo voltagem livre estipulada em matriz 1,2/50 us acompanhada da rampa de corrente na onda 8/20 us.",
+        "Funcionam com o propósito de servir somente à compensação reativa de falhas por proteção térmica nas massas, validados via oscilação puramente em forma estendida e injetada com corrente contínua estática permanente com 60 Hz."
       ],
       "correctIndex": 2,
-      "explanation": "A documentacao tecnica DPS Finder especifica a aplicacao em seu capitulo sobre Tipos de Descargas abordando que a Classe III pertence aos dispositivos que desempenham papel de terminacao, testados com um gerador do tipo combinado que gera uma tensao Uoc 1,2/50 us capaz de transmitir corrente 8/20 us.",
+      "explanation": "A documentação técnica DPS Finder especifica a aplicação em seu capítulo sobre Tipos de Descargas abordando que a Classe III pertence aos dispositivos que desempenham papel de terminação, testados com um gerador do tipo combinado que gera uma tensão Uoc 1,2/50 us capaz de transmitir corrente 8/20 us.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nos dispositivos estruturados mediante a tecnologia atrelada ao centelhador a gas puro (GDT), manifesta-se uma ineficiencia que requer controle minucioso com a rede, referenciada por corrente residual. A que fator atribui-se o deflagrar desse prolongamento?",
+      "statement": "Nos dispositivos estruturados mediante a tecnologia atrelada ao centelhador a gás puro (GDT), manifesta-se uma ineficiência que requer controle minucioso com a rede, referenciada por corrente residual. A que fator atribui-se o deflagrar desse prolongamento?",
       "options": [
-        "Aos cristais pastilhados dopados na queima do zinco aquecido que propiciam descargas de derivacao ionica emissivas independentes ativadas pelas resinas blindadoras no GDT sob tensao isolada.",
-        "Pelo decrescimo drastico onde a tensao nos eletrodos despenca no curto, possibilitando que a propria tensao senoidal da matriz distribuidora, sendo maior do que a sustentacao residual, mantenha indesejavelmente o arco com correntes da rede ativa.",
-        "A degeneracao catodica das misturas do neonio com inercia enclausurada resultando na unificacao das ligacoes, proporcionando uma cimentacao interna na forma franca metalica que finda em contato perene unipolar ao pino.",
-        "No rebote de inducao do atuador disjuntor reativo no backup, no momento do disparo impulsivo o desarme aciona uma contra fem passiva invertendo subitamente e forcando reentrada da corrente de falta pelas vias do tubo esgotado."
+        "Aos cristais pastilhados dopados na queima do zinco aquecido que propiciam descargas de derivação iônica emissivas independentes ativadas pelas resinas blindadoras no GDT sob tensão isolada.",
+        "Pelo decréscimo drástico onde a tensão nos eletrodos despenca no curto, possibilitando que a própria tensão senoidal da matriz distribuidora, sendo maior do que a sustentação residual, mantenha indesejavelmente o arco com correntes da rede ativa.",
+        "À degeneração catódica das misturas do neônio com inércia enclausurada resultando na unificação das ligações, proporcionando uma cimentação interna na forma franca metálica que finda em contato perene unipolar ao pino.",
+        "No rebote de indução do atuador disjuntor reativo no backup, no momento do disparo impulsivo o desarme aciona uma contra fem passiva invertendo subitamente e forçando reentrada da corrente de falta pelas vias do tubo esgotado."
       ],
       "correctIndex": 1,
-      "explanation": "Na explanacao funcional sobre o centelhador constante no Guia Finder, assevera-se que na operacao a Ures alcanca um nivel infimo, impondo o risco que a tensao da rede, sendo maior do que a Ures, mantenha o dispositivo ligado mantendo o arco. Tais drenos adicionais retirados da malha publica formam a dita corrente residual prolongada.",
+      "explanation": "Na explanação funcional sobre o centelhador constante no Guia Finder, assevera-se que na operação a Ures alcança um nível ínfimo, impondo o risco que a tensão da rede, sendo maior do que a Ures, mantenha o dispositivo ligado mantendo o arco. Tais drenos adicionais retirados da malha pública formam a dita corrente residual prolongada.",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "A montagem de salvaguardas direcionadas a esquemas prediais tipo TT recomenda taticamente (Conexao Tipo C) o ordenamento dos DPSs amarrado previamente a insercao no disjuntor principal DR. Nesta conjuntura o modelo interno exigido acarreta o bloqueio 3+1 (varistores para L-N e exclusivo GDT indo do N ate a barra de Terra). Qual risco e impedido adotando-se o bloco isolador de gas em N-PE nesses arranjos?",
+      "statement": "A montagem de salvaguardas direcionadas a esquemas prediais tipo TT recomenda taticamente (Conexão Tipo C) o ordenamento dos DPSs amarrado previamente à inserção no disjuntor principal DR. Nesta conjuntura o modelo interno exigido acarreta o bloqueio 3+1 (varistores para L-N e exclusivo GDT indo do N até a barra de Terra). Qual risco é impedido adotando-se o bloco isolador de gás em N-PE nesses arranjos?",
       "options": [
-        "Assegurar a dispersao magnetica que permita absorver amplificacoes duplas referentes a Iimp suportada, de forma que as oscilacoes sejam conduzidas passivamente na forma reativa rumo a malha perimetral sem refluir picos capacitivos em L1.",
-        "Impedir os sinistros em que uma ruptura interna isolada de qualquer varistor desgastado propicie curtos francos repassando a corrente livre com tensao plena via o PE as carcacas dos eletrodomesticos, sem que o RCD consiga se aperceber desarmando.",
-        "Autorizar com folgas condutivas os caminhos onde a conjuncao trifasica drene injecoes dos picos da rede e promova em sincronia o recuo das energias do sub-transitorio sem comprometer a dissipacao junto a lataria no fundo metalico do armario.",
-        "Tornar possivel que a filtragem imposta pelo dispositivo promova a reducao agressiva de correntes contendo ordens harmonicas agudas limitadas na banda de terceira-impares para evitar que o rele toroide residual dispare em momentos indesejados."
+        "Assegurar a dispersão magnética que permita absorver amplificações duplas referentes à Iimp suportada, de forma que as oscilações sejam conduzidas passivamente na forma reativa rumo à malha perimetral sem refluir picos capacitivos em L1.",
+        "Impedir os sinistros em que uma ruptura interna isolada de qualquer varistor desgastado propicie curtos francos repassando a corrente livre com tensão plena via o PE às carcaças dos eletrodomésticos, sem que o RCD consiga se aperceber desarmando.",
+        "Autorizar com folgas condutivas os caminhos onde a conjunção trifásica drene injeções dos picos da rede e promova em sincronia o recuo das energias do sub-transitório sem comprometer a dissipação junto à lataria no fundo metálico do armário.",
+        "Tornar possível que a filtragem imposta pelo dispositivo promova a redução agressiva de correntes contendo ordens harmônicas agudas limitadas na banda de terceira-ímpares para evitar que o relê toroide residual dispare em momentos indesejados."
       ],
       "correctIndex": 1,
-      "explanation": "Em atencao a conformacao TT tratada pelo Guia Finder para obras civis (setor da conexao 3+1 com Tipo C), expoe-se a ameaca no caso em que uma instalacao dispusesse varistores diretos L-PE antes do DR: em caso de falha de um varistor, leva tensao as massas, e o disjuntor diferencial, por estar apos a falha, nao a detecta. Logo, o tubo de descarga a gas do neutro a terra e o unico elo viavel fornecendo isolamento galvanico cortando essa ameaca.",
+      "explanation": "Em atenção à conformação TT tratada pelo Guia Finder para obras civis (setor da conexão 3+1 com Tipo C), expõe-se a ameaça no caso em que uma instalação dispusesse varistores diretos L-PE antes do DR: em caso de falha de um varistor, leva tensão às massas, e o disjuntor diferencial, por estar após a falha, não a detecta. Logo, o tubo de descarga a gás do neutro à terra é o único elo viável fornecendo isolamento galvânico cortando essa ameaça.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "De acordo com o zoneamento LPZ (Zona de Protecao contra Raios) adotado para protecao eletromagnetica descrita nos diagramas tecnicos, a zona denominada LPZ 0A caracteriza-se unicamente por estar alocada confinada e blindada no interior do edificio dispondo de uma atenuacao completa no nivel do campo eletromagnetico incidente.",
+      "statement": "De acordo com o zoneamento LPZ (Zona de Proteção contra Raios) adotado para proteção eletromagnética descrita nos diagramas técnicos, a zona denominada LPZ 0A caracteriza-se unicamente por estar alocada confinada e blindada no interior do edifício dispondo de uma atenuação completa no nível do campo eletromagnético incidente.",
       "correctAnswer": false,
-      "explanation": "O Guia Finder assevera nas conceituacoes iniciais que, na realidade, as LPZ 0A sao zonas livres, sem nenhuma protecao, onde existe a possibilidade de incidencia direta do raio e portanto a corrente e alta e o campo eletromagnetico nao e atenuado. Ambientes atenuados no interior adentram classificacoes numeradas como 1, 2 e 3.",
+      "explanation": "O Guia Finder assevera nas conceituações iniciais que, na realidade, as LPZ 0A são zonas livres, sem nenhuma proteção, onde existe a possibilidade de incidência direta do raio e portanto a corrente é alta e o campo eletromagnético não é atenuado. Ambientes atenuados no interior adentram classificações numeradas como 1, 2 e 3.",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A estrategia pautada para atingir uma correta coordenacao de niveis de energias protetivas distribuida entre dois blocos DPSs em cascata demanda invariavelmente uma distancia, que fornece uma insercao de indutancia natural dada inerentemente pelos proprios trechos dos chicotes em condutores da instalacao sob a escala prescrita e aproximada em valores teoricos de norma de 1 microhenry (1 uH) a cada metro da ligacao.",
+      "statement": "A estratégia pautada para atingir uma correta coordenação de níveis de energias protetivas distribuída entre dois blocos DPSs em cascata demanda invariavelmente uma distância, que fornece uma inserção de indutância natural dada inerentemente pelos próprios trechos dos chicotes em condutores da instalação sob a escala prescrita e aproximada em valores teóricos de norma de 1 microhenry (1 uH) a cada metro da ligação.",
       "correctAnswer": true,
-      "explanation": "A instrucao descrita pelo material do Finder atinente a secao voltada ao Sistema de DPS e coordenacao de energia ensina que essa indutancia, dadas as frequencias, e introduzida automaticamente pelos cabos, e as normas estabelecem 1 uH/m.",
+      "explanation": "A instrução descrita pelo material do Finder atinente à seção voltada ao Sistema de DPS e coordenação de energia ensina que essa indutância, dadas as frequências, é introduzida automaticamente pelos cabos, e as normas estabelecem 1 uH/m.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A arquitetura de protecao que dota os cartuchos varistores de um dispositivo disjuntor termico acoplado tem seu objetivo pautado na imposicao estrita de atuar por ruptura mecanica e ultrarrapida frente somente a ondas exclusivas provenientes do trovao com amplitudes de descargas superiores aos patamares de exatos 100 kA pico, mantendo oculta ao inspetor qualquer bandeira da avaria material ate abertura tecnica do gabinete.",
+      "statement": "A arquitetura de proteção que dota os cartuchos varistores de um dispositivo disjuntor térmico acoplado tem seu objetivo pautado na imposição estrita de atuar por ruptura mecânica e ultrarrápida frente somente a ondas exclusivas provenientes do trovão com amplitudes de descargas superiores aos patamares de exatos 100 kA pico, mantendo oculta ao inspetor qualquer bandeira da avaria material até abertura técnica do gabinete.",
       "correctAnswer": false,
-      "explanation": "A funcao precipua relatada explicitamente pelo Guia Finder elucida contrariamente que tal dispositivo comanda e garante desligar o DPS quando atinge o final de sua vida util devido ao envelhecimento ou corrente de fuga muito elevada, atestando sua transparencia operacional ao indicar visualmente a transicao em que o visor troca a coloracao de verde para vermelho.",
+      "explanation": "A função precípua relatada explicitamente pelo Guia Finder elucida contrariamente que tal dispositivo comanda e garante desligar o DPS quando atinge o final de sua vida útil devido ao envelhecimento ou corrente de fuga muito elevada, atestando sua transparência operacional ao indicar visualmente a transição em que o visor troca a coloração de verde para vermelho.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Os efeitos provenientes das inducoes sobre fiacoes compridas exigem limitacao nas distancias efetivas interpostas entre o protetor DPS no barramento e a sensivel carga no fim, fenomeno justificado pela anomalia das indesejaveis ondas refletidas rebatidas pelas incompatibilidades da linha, as quais geram nos equipamentos amplificacoes que podem ate dobrar agressivamente na crista oscilante alcancando niveis da ordem de duas vezes o valor base de Up.",
+      "statement": "Os efeitos provenientes das induções sobre fiações compridas exigem limitação nas distâncias efetivas interpostas entre o protetor DPS no barramento e a sensível carga no fim, fenômeno justificado pela anomalia das indesejáveis ondas refletidas rebatidas pelas incompatibilidades da linha, as quais geram nos equipamentos amplificações que podem até dobrar agressivamente na crista oscilante alcançando níveis da ordem de duas vezes o valor base de Up.",
       "correctAnswer": true,
-      "explanation": "Nos meandros abordados pelo documento que alerta sobre o alcance real das margens atuantes das descargas atestadas no Guia de Protecao da Finder, o conteudo assegura tal raciocinio aduzindo sobre as ondas refletidas, nas quais uma onda de tensao encontra uma carga nao ajustada e se reflete, e pelo fenomeno das ondas estacionarias a tensao no fim da linha pode ate mesmo dobrar, atingindo 2 Ures.",
+      "explanation": "Nos meandros abordados pelo documento que alerta sobre o alcance real das margens atuantes das descargas atestadas no Guia de Proteção da Finder, o conteúdo assegura tal raciocínio aduzindo sobre as ondas refletidas, nas quais uma onda de tensão encontra uma carga não ajustada e se reflete, e pelo fenômeno das ondas estacionárias a tensão no fim da linha pode até mesmo dobrar, atingindo 2 Ures.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "No trato normativo das implementacoes dedicadas ao escopo dos projetos em placas fotovoltaicas (versadas no panorama da proposta da norma europeia prEN 50539-11), o criterio de conformacao protetiva estipula obrigatoriedade peremptoria de adicao paralela dos elos fusiveis a retaguarda junto aos DPSs da string no Lado DC, aplicados ate nos casos em que a capacidade de curto-circuito do painel fotovoltaico (Iscpv) revela-se menor ou igual aos valores declarados para a habilidade termica certificada do proprio DPS (Iscwpv).",
+      "statement": "No trato normativo das implementações dedicadas ao escopo dos projetos em placas fotovoltaicas (versadas no panorama da proposta da norma europeia prEN 50539-11), o critério de conformação protetiva estipula obrigatoriedade peremptória de adição paralela dos elos fusíveis à retaguarda junto aos DPSs da string no Lado DC, aplicados até nos casos em que a capacidade de curto-circuito do painel fotovoltaico (Iscpv) revela-se menor ou igual aos valores declarados para a habilidade térmica certificada do próprio DPS (Iscwpv).",
       "correctAnswer": false,
-      "explanation": "A instrucao redigida nas disposicoes do prEN 50539-11 expostas na apostila fotovoltaica da Finder garante a desobrigatoriedade: se a corrente maxima de curto-circuito (Iscpv) for menor ou igual a Iscwpv, o DPS pode ser instalado diretamente entre os condutores (+ e -) sem instalar nenhum sistema de protecao de reserva, tais como fusiveis ou disjuntores.",
+      "explanation": "A instrução redigida nas disposições do prEN 50539-11 expostas na apostila fotovoltaica da Finder garante a desobrigatoriedade: se a corrente máxima de curto-circuito (Iscpv) for menor ou igual a Iscwpv, o DPS pode ser instalado diretamente entre os condutores (+ e -) sem instalar nenhum sistema de proteção de reserva, tais como fusíveis ou disjuntores.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O valor de pico da corrente ao qual um DPS de Classe II e capaz de resistir repetidas e normais vezes sem sofrer danos, estabelecido atraves de um ensaio laboratorial submetido a forma de onda padronizada em 8/20 us, recebe a denominacao tecnica de corrente ____ de descarga (In).",
+      "statement": "O valor de pico da corrente ao qual um DPS de Classe II é capaz de resistir repetidas e normais vezes sem sofrer danos, estabelecido através de um ensaio laboratorial submetido a forma de onda padronizada em 8/20 us, recebe a denominação técnica de corrente ____ de descarga (In).",
       "blanks": [
         {
           "index": 0,
           "answer": "nominal"
         }
       ],
-      "explanation": "O texto do Guia Finder para dimensionamentos atesta nos apontamentos das caracteristicas o parametro de catalogo que dita: Corrente nominal de descarga [In 8/20], este e o valor de pico da corrente que atravessa o DPS quando testado com uma forma de onda de 8/20 us.",
+      "explanation": "O texto do Guia Finder para dimensionamentos atesta nos apontamentos das características o parâmetro de catálogo que dita: Corrente nominal de descarga [In 8/20], este é o valor de pico da corrente que atravessa o DPS quando testado com uma forma de onda de 8/20 us.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Na tecnica de instalacao visando a supressao das indutancias deleterias incutidas em trechos longos derivativos, a montagem ideal recomendada que intercala fisicamente o proprio DPS no percurso dos cabos ativos, caracterizada por contornar ou eliminar a parcela fatal na tensao induzida provocada pelo avanco do di/dt da corrente nos chicotes adjacentes, e tratada e conhecida pelo nome adotado em ingles de conexao do tipo ____-Shape.",
+      "statement": "Na técnica de instalação visando a supressão das indutâncias deletérias incutidas em trechos longos derivativos, a montagem ideal recomendada que intercala fisicamente o próprio DPS no percurso dos cabos ativos, caracterizada por contornar ou eliminar a parcela fatal na tensão induzida provocada pelo avanço do di/dt da corrente nos chicotes adjacentes, é tratada e conhecida pelo nome adotado em inglês de conexão do tipo ____-Shape.",
       "blanks": [
         {
           "index": 0,
           "answer": "V"
         }
       ],
-      "explanation": "O guia das metodologias construtivas na Finder expoe esse expediente ensinando que a Conexao serie (V-Shape) permite instalar com eficacia a protecao eliminando a tensao induzida pelos terminais do DPS. Esta solucao difere das perdas associadas em configuracoes convencionais em paralelo, nomeadas tipo T-Shape.",
+      "explanation": "O guia das metodologias construtivas na Finder expõe esse expediente ensinando que a Conexão série (V-Shape) permite instalar com eficácia a proteção eliminando a tensão induzida pelos terminais do DPS. Esta solução difere das perdas associadas em configurações convencionais em paralelo, nomeadas tipo T-Shape.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Considerando as categorias da graduacao atrelada a escalada da capacidade de isolamento intrinseca dispostas na base das exigencias contra suportabilidade de picos destrutivos, os elementos eletricos operantes assentados a montante das placas limitadoras, isto e, fisicamente afixados antes do quadro geral de distribuicao (como ocorre nos contatores de energia na entrada), carregam de fabrica um suporte atestado nos 6 kV, enquadrados segundo a nomenclatura que os atribui ao grupo Categoria de instalacao ____.",
+      "statement": "Considerando as categorias da graduação atrelada à escalada da capacidade de isolamento intrínseca dispostas na base das exigências contra suportabilidade de picos destrutivos, os elementos elétricos operantes assentados a montante das placas limitadoras, isto é, fisicamente afixados antes do quadro geral de distribuição (como ocorre nos contatores de energia na entrada), carregam de fábrica um suporte atestado nos 6 kV, enquadrados segundo a nomenclatura que os atribui ao grupo Categoria de instalação ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "IV"
         }
       ],
-      "explanation": "A documentacao instrucional embutida na subsecao da Categoria de Instalacao delineada no Guia da Finder dita que pertencem a Categoria de instalacao IV os dispositivos instalados antes do quadro de distribuicao, tais como os contatores, cuja tensao de resistencia ao impulso e de 6 kV.",
+      "explanation": "A documentação instrucional embutida na subseção da Categoria de Instalação delineada no Guia da Finder dita que pertencem à Categoria de instalação IV os dispositivos instalados antes do quadro de distribuição, tais como os contatores, cuja tensão de resistência ao impulso é de 6 kV.",
       "difficulty": "medium"
     }
   ]

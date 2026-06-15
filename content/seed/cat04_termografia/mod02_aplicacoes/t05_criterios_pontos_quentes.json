@@ -1,29 +1,29 @@
 {
   "category": "Termografia Infravermelha",
-  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categorySubtitle": "Fundamentos, aplicações em sistemas elétricos e normas de laudos",
   "categoryOrder": 3,
   "module": "Termografia em Sistemas Elétricos",
-  "moduleSubtitle": "Inspecao de subestacoes, paineis, motores, linhas e pontos quentes",
+  "moduleSubtitle": "Inspeção de subestações, painéis, motores, linhas e pontos quentes",
   "moduleOrder": 2,
   "trail": "Critérios de Avaliação de Pontos Quentes",
   "trailOrder": 4,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que avalia o criterio Delta T no diagnostico de anomalias termicas em sistemas eletricos?",
+      "statement": "O que avalia o critério Delta T no diagnóstico de anomalias térmicas em sistemas elétricos?",
       "options": [
-        "A variacao de temperatura entre um elemento e outro componente similar sob a mesma carga.",
-        "A soma absoluta da temperatura ambiente com o aquecimento dieletrico do componente.",
-        "A diferenca entre a radiacao solar incidente e a temperatura da carcaca do equipamento.",
+        "A variação de temperatura entre um elemento e outro componente similar sob a mesma carga.",
+        "A soma absoluta da temperatura ambiente com o aquecimento dielétrico do componente.",
+        "A diferença entre a radiação solar incidente e a temperatura da carcaça do equipamento.",
         "A emissividade calculada do componente multiplicada pela temperatura do ar circundante."
       ],
       "correctIndex": 0,
-      "explanation": "A gravidade da anomalia e classificada pela variacao de temperatura entre o elemento focado e outro componente similar. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "A gravidade da anomalia é classificada pela variação de temperatura entre o elemento focado e outro componente similar. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o limite maximo permitido de variacao de temperatura (Delta T) para atestar a normalidade em conexoes de alta tensao?",
+      "statement": "Qual é o limite máximo permitido de variação de temperatura (Delta T) para atestar a normalidade em conexões de alta tensão?",
       "options": [
         "2 graus Celsius.",
         "5 graus Celsius.",
@@ -31,51 +31,51 @@
         "15 graus Celsius."
       ],
       "correctIndex": 1,
-      "explanation": "O Delta T maximo permitido em conexoes que operam em alta tensao e de 5 graus Celsius. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "O Delta T máximo permitido em conexões que operam em alta tensão é de 5 graus Celsius. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a acao recomendada para uma anomalia termica classificada com prioridade 1 (Delta T superior a 40 graus Celsius)?",
+      "statement": "Qual é a ação recomendada para uma anomalia térmica classificada com prioridade 1 (Delta T superior a 40 graus Celsius)?",
       "options": [
-        "Medidas corretivas no proximo periodo de manutencao programado.",
-        "Medidas corretivas executadas com agendamento previo normal.",
-        "Medidas corretivas assim que for possivel para a equipe de manutencao.",
+        "Medidas corretivas no próximo período de manutenção programado.",
+        "Medidas corretivas executadas com agendamento prévio normal.",
+        "Medidas corretivas assim que for possível para a equipe de manutenção.",
         "Medidas corretivas imediatas."
       ],
       "correctIndex": 3,
-      "explanation": "Para diferencas de temperatura superiores a 40 graus Celsius, sao exigidas medidas corretivas imediatas. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Para diferenças de temperatura superiores a 40 graus Celsius, são exigidas medidas corretivas imediatas. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a elevacao de temperatura medida na inspecao deve ser corrigida caso o equipamento esteja operando sob carga parcial?",
+      "statement": "Como a elevação de temperatura medida na inspeção deve ser corrigida caso o equipamento esteja operando sob carga parcial?",
       "options": [
-        "Somando a diferenca absoluta de corrente nominal a temperatura aparente lida no display da camera.",
-        "Subtraindo o percentual exato de queda de tensao da temperatura maxima aferida pelo termovisor.",
-        "Multiplicando a medicao pela relacao entre as correntes nominal e de teste elevada a um coeficiente.",
-        "Dividindo a temperatura aparente medida pelo angulo de visada adotado na captura do termograma."
+        "Somando a diferença absoluta de corrente nominal à temperatura aparente lida no display da câmera.",
+        "Subtraindo o percentual exato de queda de tensão da temperatura máxima aferida pelo termovisor.",
+        "Multiplicando a medição pela relação entre as correntes nominal e de teste elevada a um coeficiente.",
+        "Dividindo a temperatura aparente medida pelo ângulo de visada adotado na captura do termograma."
       ],
       "correctIndex": 2,
-      "explanation": "A elevacao termica e corrigida multiplicando a medicao por uma fracao da corrente nominal e de teste elevada a um coeficiente. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A elevação térmica é corrigida multiplicando a medição por uma fração da corrente nominal e de teste elevada a um coeficiente. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que a norma ABNT NBR 15572 estabelece em relacao aos criterios para avaliacao da gravidade das anomalias termicas?",
+      "statement": "O que a norma ABNT NBR 15572 estabelece em relação aos critérios para avaliação da gravidade das anomalias térmicas?",
       "options": [
-        "Impoe um limite universal fixo de 90 graus Celsius para operacao de equipamentos industriais.",
-        "Determina que os usuarios finais podem utilizar criterios proprios ou parametros do fabricante.",
-        "Proibe explicitamente o uso do criterio qualitativo de Delta T em inspecoes preditivas.",
-        "Obriga o desligamento imediato para qualquer diferenca de temperatura acima de 1 grau Celsius."
+        "Impõe um limite universal fixo de 90 graus Celsius para operação de equipamentos industriais.",
+        "Determina que os usuários finais podem utilizar critérios próprios ou parâmetros do fabricante.",
+        "Proíbe explicitamente o uso do critério qualitativo de Delta T em inspeções preditivas.",
+        "Obriga o desligamento imediato para qualquer diferença de temperatura acima de 1 grau Celsius."
       ],
       "correctIndex": 1,
-      "explanation": "A NBR 15572 menciona que os usuarios podem usar criterios proprios de avaliacao ou basear-se nos parametros do fabricante. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "A NBR 15572 menciona que os usuários podem usar critérios próprios de avaliação ou basear-se nos parâmetros do fabricante. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o limite maximo aceitavel de variacao Delta T para atestar o funcionamento seguro de conexoes de media tensao?",
+      "statement": "Qual é o limite máximo aceitável de variação Delta T para atestar o funcionamento seguro de conexões de média tensão?",
       "options": [
         "5 graus Celsius.",
         "8 graus Celsius.",
@@ -83,51 +83,51 @@
         "15 graus Celsius."
       ],
       "correctIndex": 1,
-      "explanation": "Para conexoes operantes em media tensao, o delta T maximo permitido e estabelecido em 8 graus Celsius. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "Para conexões operantes em média tensão, o delta T máximo permitido é estabelecido em 8 graus Celsius. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que define o parametro Maxima Temperatura Admissivel (MTA) na analise termografica de um componente eletrico?",
+      "statement": "O que define o parâmetro Máxima Temperatura Admissível (MTA) na análise termográfica de um componente elétrico?",
       "options": [
-        "A temperatura maxima gerada pela soma do calor de fundo e refletividade solar.",
-        "A temperatura teorica na qual o equipamento atinge seu equilibrio criogenico passivo.",
-        "A temperatura maxima na qual o componente pode operar sem causar falha no dispositivo.",
-        "A temperatura minima detectavel calculada pelo parametro NETD do termovisor."
+        "A temperatura máxima gerada pela soma do calor de fundo e refletividade solar.",
+        "A temperatura teórica na qual o equipamento atinge seu equilíbrio criogênico passivo.",
+        "A temperatura máxima na qual o componente pode operar sem causar falha no dispositivo.",
+        "A temperatura mínima detectável calculada pelo parâmetro NETD do termovisor."
       ],
       "correctIndex": 2,
-      "explanation": "O termografista deve conhecer a temperatura maxima admissivel de projeto na qual o componente atua sem sofrer degradacao. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "O termografista deve conhecer a temperatura máxima admissível de projeto na qual o componente atua sem sofrer degradação. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em uma analise comparativa, qual diferenca de temperatura entre componentes semelhantes operando sob mesma carga comprova comportamento anormal?",
+      "statement": "Em uma análise comparativa, qual diferença de temperatura entre componentes semelhantes operando sob mesma carga comprova comportamento anormal?",
       "options": [
-        "Variacoes de ate 1 grau Celsius.",
-        "Variacoes a partir de 2 graus Celsius.",
-        "Variacoes a partir de 4 graus Celsius.",
-        "Variacoes superiores a 15 graus Celsius."
+        "Variações de até 1 grau Celsius.",
+        "Variações a partir de 2 graus Celsius.",
+        "Variações a partir de 4 graus Celsius.",
+        "Variações superiores a 15 graus Celsius."
       ],
       "correctIndex": 2,
-      "explanation": "Diferencas de temperatura a partir de 4 graus Celsius entre componentes semelhantes operando homogeneamente sao provas de anormalidade. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Diferenças de temperatura a partir de 4 graus Celsius entre componentes semelhantes operando homogeneamente são provas de anormalidade. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual prazo de correcao a tabela de severidade estipula para uma anomalia com Delta T entre 10 e 20 graus Celsius (prioridade 3)?",
+      "statement": "Qual prazo de correção a tabela de severidade estipula para uma anomalia com Delta T entre 10 e 20 graus Celsius (prioridade 3)?",
       "options": [
-        "Medidas corretivas no proximo periodo de manutencao.",
+        "Medidas corretivas no próximo período de manutenção.",
         "Medidas corretivas com agendamento.",
-        "Medidas corretivas assim que possivel.",
+        "Medidas corretivas assim que possível.",
         "Medidas corretivas imediatas."
       ],
       "correctIndex": 1,
-      "explanation": "O Delta T situado entre 10 e 20 graus confere a prioridade 3 e demanda medidas corretivas programadas com agendamento. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "O Delta T situado entre 10 e 20 graus confere a prioridade 3 e demanda medidas corretivas programadas com agendamento. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na prioridade 4 da classificacao Delta T, qual a faixa de diferenca de temperatura que exige medidas corretivas no proximo periodo de manutencao?",
+      "statement": "Na prioridade 4 da classificação Delta T, qual a faixa de diferença de temperatura que exige medidas corretivas no próximo período de manutenção?",
       "options": [
         "Delta T inferior a 1 grau Celsius.",
         "Delta T entre 1 e 10 graus Celsius.",
@@ -135,83 +135,83 @@
         "Delta T igual ou superior a 40 graus Celsius."
       ],
       "correctIndex": 1,
-      "explanation": "A prioridade 4 abrange anomalias com Delta T entre 1 e 10 graus Celsius para serem reparadas na proxima manutencao. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "A prioridade 4 abrange anomalias com Delta T entre 1 e 10 graus Celsius para serem reparadas na próxima manutenção. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O criterio termografico de Delta T consiste unicamente em comparar a temperatura do componente com a temperatura atmosferica de referencia do ambiente.",
+      "statement": "O critério termográfico de Delta T consiste unicamente em comparar a temperatura do componente com a temperatura atmosférica de referência do ambiente.",
       "correctAnswer": false,
-      "explanation": "O criterio engloba tambem avaliar a variacao de temperatura entre um componente e outro elemento similar identico operando no circuito. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "O critério engloba também avaliar a variação de temperatura entre um componente e outro elemento similar idêntico operando no circuito. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "As anomalias termicas classificadas como prioridade 2 (Delta T entre 20 e 40 graus Celsius) demandam que a equipe execute medidas corretivas assim que possivel.",
+      "statement": "As anomalias térmicas classificadas como prioridade 2 (Delta T entre 20 e 40 graus Celsius) demandam que a equipe execute medidas corretivas assim que possível.",
       "correctAnswer": true,
-      "explanation": "Para variacoes maiores que 20 e ate 40 graus, a acao recomendada na prioridade 2 e aplicar medidas corretivas assim que possivel. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Para variações maiores que 20 e até 40 graus, a ação recomendada na prioridade 2 é aplicar medidas corretivas assim que possível. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A Maxima Temperatura Admissivel (MTA) de um componente eletrico depende das especificacoes de fabrica de cada equipamento utilizado.",
+      "statement": "A Máxima Temperatura Admissível (MTA) de um componente elétrico depende das especificações de fábrica de cada equipamento utilizado.",
       "correctAnswer": true,
-      "explanation": "Os valores de MTA variam conforme as especificacoes proprias do fabricante e sao essenciais para classificar a anomalia do componente. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Os valores de MTA variam conforme as especificações próprias do fabricante e são essenciais para classificar a anomalia do componente. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Durante o diagnostico comparativo em instalacoes de alta tensao, diferencas de temperatura superiores a 5 graus Celsius entre as fases confirmam necessidade de intervencao.",
+      "statement": "Durante o diagnóstico comparativo em instalações de alta tensão, diferenças de temperatura superiores a 5 graus Celsius entre as fases confirmam necessidade de intervenção.",
       "correctAnswer": true,
-      "explanation": "A aprovacao de componentes em alta tensao limita o valor de Delta T a no maximo 5 graus Celsius antes de requerer correcao. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "A aprovação de componentes em alta tensão limita o valor de Delta T a no máximo 5 graus Celsius antes de requerer correção. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A elevacao de temperatura constatada no componente operando com carga parcial pode ser avaliada como definitiva sem a necessidade de calculos de extrapolacao para carga nominal.",
+      "statement": "A elevação de temperatura constatada no componente operando com carga parcial pode ser avaliada como definitiva sem a necessidade de cálculos de extrapolação para carga nominal.",
       "correctAnswer": false,
-      "explanation": "Como diferentes cargas geram aquecimentos distintos, e metodologicamente necessario corrigir o valor lido simulando o aquecimento gerado em plena carga. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Como diferentes cargas geram aquecimentos distintos, é metodologicamente necessário corrigir o valor lido simulando o aquecimento gerado em plena carga. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Uma anomalia termografica classificada como prioridade ____ demanda a aplicacao de medidas corretivas imediatas devido ao perigoso Delta T acima de 40 graus Celsius.",
+      "statement": "Uma anomalia termográfica classificada como prioridade ____ demanda a aplicação de medidas corretivas imediatas devido ao perigoso Delta T acima de 40 graus Celsius.",
       "blanks": [
         {
           "index": 0,
           "answer": "1"
         }
       ],
-      "explanation": "Pela tabela de classificacao de severidade, a prioridade numero 1 abarca ocorrencias agudas acima de 40 graus que necessitam intervencao imediata. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Pela tabela de classificação de severidade, a prioridade número 1 abarca ocorrências agudas acima de 40 graus que necessitam intervenção imediata. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "easy"
     },
     {
       "type": "fillBlank",
-      "statement": "O metodo de diagnostico baseado em calcular a diferenca de calor entre um componente e outro submetido a mesma carga atende pelo nome de criterio Delta ____.",
+      "statement": "O método de diagnóstico baseado em calcular a diferença de calor entre um componente e outro submetido à mesma carga atende pelo nome de critério Delta ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "T"
         }
       ],
-      "explanation": "O criterio focado na diferenca de temperatura entre elementos iguais sob funcionamento identico e mundialmente referenciado como Delta T. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "O critério focado na diferença de temperatura entre elementos iguais sob funcionamento idêntico é mundialmente referenciado como Delta T. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Na checagem direta de equipamentos da subestacao operantes em linhas de media tensao, o Delta T maximo permitido e tolerado e cravado em ____ graus Celsius.",
+      "statement": "Na checagem direta de equipamentos da subestação operantes em linhas de média tensão, o Delta T máximo permitido e tolerado é cravado em ____ graus Celsius.",
       "blanks": [
         {
           "index": 0,
           "answer": "8"
         }
       ],
-      "explanation": "O parametro limitante adotado para autorizar ou reprovar as conexoes eletricas ligadas a barramentos de media tensao e 8 graus Celsius. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "O parâmetro limitante adotado para autorizar ou reprovar as conexões elétricas ligadas a barramentos de média tensão é 8 graus Celsius. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "hard"
     }
   ]

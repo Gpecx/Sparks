@@ -455,9 +455,9 @@ class _ClanScreenState extends State<ClanScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(_clanName, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
+                          Text(_clanName, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
                           const SizedBox(height: 4),
-                          Text('$memberCount membros', style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                          Text('$memberCount membros', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
                           const SizedBox(height: 12),
                           // Barra de Level do Clã
                           Row(
@@ -476,7 +476,9 @@ class _ClanScreenState extends State<ClanScreen> {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Text(nextLeague != null ? '${(totalXp/1000).toStringAsFixed(1)}k/${(nextLeague.minXp/1000).toStringAsFixed(1)}k XP' : 'MÁXIMO', style: const TextStyle(color: AppColors.textMuted, fontSize: 10, fontFamily: 'monospace')),
+                              Flexible(
+                                child: Text(nextLeague != null ? '${(totalXp/1000).toStringAsFixed(1)}k/${(nextLeague.minXp/1000).toStringAsFixed(1)}k XP' : 'MÁXIMO', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.textMuted, fontSize: 10, fontFamily: 'monospace')),
+                              ),
                             ],
                           ),
                         ],
@@ -645,9 +647,9 @@ class _ClanScreenState extends State<ClanScreen> {
               children: [
                 Icon(icon, color: color, size: 24),
                 const SizedBox(height: 6),
-                Text(value, style: TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w800)),
+                Text(value, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w800)),
                 const SizedBox(height: 2),
-                Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
+                Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
               ],
             ),
           ),
@@ -902,8 +904,11 @@ class _ClanScreenState extends State<ClanScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(title, style: TextStyle(color: isCompleted ? AppColors.gold : Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
-                          Text(rewardDescription, style: const TextStyle(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.w800)),
+                          Flexible(
+                            child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: isCompleted ? AppColors.gold : Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(rewardDescription, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.w800)),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -1746,7 +1751,9 @@ class _MemberTile extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Text(displayName, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13)),
+                              Flexible(
+                                child: Text(displayName, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13)),
+                              ),
                               if (member.isUser) ...[
                                 const SizedBox(width: 6),
                                 Container(
@@ -1764,7 +1771,9 @@ class _MemberTile extends StatelessWidget {
                               const SizedBox(width: 4),
                               Text(_roleLabelOf(member.role), style: TextStyle(color: roleColor, fontSize: 11, fontWeight: FontWeight.w600)),
                               const SizedBox(width: 8),
-                              Text('· $displayXp XP', style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
+                              Flexible(
+                                child: Text('· $displayXp XP', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 6),
@@ -1784,12 +1793,16 @@ class _MemberTile extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Text(
-                                '$xpInCurrentLevel/500 XP (Nv. $displayLevel)',
-                                style: const TextStyle(
-                                  color: AppColors.textMuted,
-                                  fontSize: 9,
-                                  fontFamily: 'monospace',
+                              Flexible(
+                                child: Text(
+                                  '$xpInCurrentLevel/500 XP (Nv. $displayLevel)',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: AppColors.textMuted,
+                                    fontSize: 9,
+                                    fontFamily: 'monospace',
+                                  ),
                                 ),
                               ),
                             ],

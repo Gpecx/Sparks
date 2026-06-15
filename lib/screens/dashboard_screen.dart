@@ -217,52 +217,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                 child: Text('NOVAS MECÂNICAS', style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.w700)),
               ),
-              // PvP — Em Breve ou Teste Admin
-              Builder(
-                builder: (context) {
-                  final isAdmin = userService.user?.isAdmin ?? false;
-                  if (isAdmin) {
-                    return _buildProfileMenuItem(
-                      icon: Icons.flash_on,
-                      label: 'Duelo de Faíscas (PvP)',
-                      color: AppColors.primary,
-                      onTap: () {
-                        Navigator.pop(ctx);
-                        context.push('/duel');
-                      },
-                    );
-                  }
-                  return Opacity(
-                    opacity: 0.4,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.flash_on, color: Colors.grey, size: 22),
-                          const SizedBox(width: 16),
-                          const Expanded(
-                            child: Text(
-                              'Duelo de Faíscas (PvP)',
-                              style: TextStyle(color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(6),
-                              border: Border.all(color: Colors.grey.withValues(alpha: 0.4)),
-                            ),
-                            child: const Text(
-                              'EM BREVE',
-                              style: TextStyle(color: Colors.grey, fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 0.5),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
+              // PvP — Duelo de Faíscas (liberado para todos os usuários)
+              _buildProfileMenuItem(
+                icon: Icons.flash_on,
+                label: 'Duelo de Faíscas (PvP)',
+                color: AppColors.primary,
+                onTap: () {
+                  Navigator.pop(ctx);
+                  context.push('/duel');
+                },
               ),
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
               _buildProfileMenuItem(
@@ -352,19 +315,24 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${_getDynamicGreeting()},',
-              style: const TextStyle(color: AppColors.textSecondary, fontSize: 16),
-            ),
-            Text(
-              '$firstName!',
-              style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w700),
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${_getDynamicGreeting()},',
+                style: const TextStyle(color: AppColors.textSecondary, fontSize: 16),
+              ),
+              Text(
+                '$firstName!',
+                style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w700),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
+        const SizedBox(width: 12),
         Row(
           children: [
             _buildNotificationBell(),
@@ -649,20 +617,25 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Seu Progresso',
-                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Técnico Nível $level',
-                    style: TextStyle(color: AppColors.primary.withValues(alpha: 0.8), fontSize: 13, fontWeight: FontWeight.w600),
-                  ),
-                ],
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Seu Progresso',
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Técnico Nível $level',
+                      style: TextStyle(color: AppColors.primary.withValues(alpha: 0.8), fontSize: 13, fontWeight: FontWeight.w600),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               _ResponsiveTapWidget(
                 onTap: () {
                   SparkSnack.success(context, '🔥 Streak de $streak dias! Multiplicador de ${multiplier}x.');
@@ -1050,25 +1023,32 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Icon(
-                          isCompleted ? Icons.check_circle : Icons.commit,
-                          color: isCompleted ? AppColors.gold : AppColors.primary,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          cov.title,
-                          style: TextStyle(
-                            color: isCompleted ? AppColors.gold : Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 0.5,
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Icon(
+                            isCompleted ? Icons.check_circle : Icons.commit,
+                            color: isCompleted ? AppColors.gold : AppColors.primary,
+                            size: 20,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 8),
+                          Flexible(
+                            child: Text(
+                              cov.title,
+                              style: TextStyle(
+                                color: isCompleted ? AppColors.gold : Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.5,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(

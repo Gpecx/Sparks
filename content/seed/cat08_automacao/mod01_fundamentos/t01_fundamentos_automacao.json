@@ -174,7 +174,7 @@
       "type": "trueFalse",
       "statement": "Na estratégia de controle por faixa dividida (split range) o mesmo processador consegue coordenar em sequência a abertura progressiva e o fechamento oposto de duas válvulas atuando no mesmo processo.",
       "correctAnswer": true,
-      "explanation": "Um controle avançado na faixa dividida usa o intervalo do seu sinal de saída rateado para mover dispositivos seqüenciais em vetores inversos na planta (Marco Antônio Ribeiro - Kufunda.net).",
+      "explanation": "Um controle avançado na faixa dividida usa o intervalo do seu sinal de saída rateado para mover dispositivos sequenciais em vetores inversos na planta (Marco Antônio Ribeiro - Kufunda.net).",
       "difficulty": "hard",
       "isTrue": true
     },

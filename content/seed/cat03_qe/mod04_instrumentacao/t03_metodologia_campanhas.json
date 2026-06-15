@@ -1,16 +1,16 @@
 {
   "category": "Qualidade da Energia",
-  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categorySubtitle": "Fundamentos, Harmônicas, Transitórios, Medição e Normas",
   "categoryOrder": 2,
   "module": "Instrumentação e Medição de QE",
-  "moduleSubtitle": "Equipamentos, campanhas, analise e laudos",
+  "moduleSubtitle": "Equipamentos, campanhas, análise e laudos",
   "moduleOrder": 3,
   "trail": "Metodologia de Campanhas de Medição",
   "trailOrder": 2,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Quantas leituras validas em regime permanente sao necessarias para compor integralmente os indicadores individuais de tensao DRP e DRC em um ciclo de medicao da campanha?",
+      "statement": "Quantas leituras válidas em regime permanente são necessárias para compor integralmente os indicadores individuais de tensão DRP e DRC em um ciclo de medição da campanha?",
       "options": [
         "100 leituras",
         "720 leituras",
@@ -18,12 +18,12 @@
         "2016 leituras"
       ],
       "correctIndex": 2,
-      "explanation": "O item 26.2 do PRODIST Modulo 8 estabelece diretamente que para a composicao dos indicadores individuais deve-se considerar o registro de 1.008 leituras validas.",
+      "explanation": "O item 26.2 do PRODIST Módulo 8 estabelece diretamente que para a composição dos indicadores individuais deve-se considerar o registro de 1.008 leituras válidas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na execucao de uma campanha padrao de avaliacao da tensao, qual e o periodo de tempo total equivalente correspondente as 1008 leituras validas exigidas pelo regulamento?",
+      "statement": "Na execução de uma campanha padrão de avaliação da tensão, qual é o período de tempo total equivalente correspondente às 1008 leituras válidas exigidas pelo regulamento?",
       "options": [
         "24 horas",
         "168 horas",
@@ -31,103 +31,103 @@
         "720 horas"
       ],
       "correctIndex": 1,
-      "explanation": "O item 26.2 do PRODIST Modulo 8 especifica que as 1.008 leituras de 10 minutos cada sao o equivalente a exatas 168 horas ininterruptas.",
+      "explanation": "O item 26.2 do PRODIST Módulo 8 especifica que as 1.008 leituras de 10 minutos cada são o equivalente a exatas 168 horas ininterruptas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante o tratamento dos dados, o que a metodologia exige que seja feito caso alguns intervalos de 10 minutos sejam expurgados para ainda assim garantir as 1008 leituras validas do relatorio?",
+      "statement": "Durante o tratamento dos dados, o que a metodologia exige que seja feito caso alguns intervalos de 10 minutos sejam expurgados para ainda assim garantir as 1008 leituras válidas do relatório?",
       "options": [
-        "O medidor deve interpolar matematicamente os dados faltantes a partir da media movel das tensoes previas.",
-        "Deve-se preencher as lacunas vazias do relatorio utilizando os valores nominais de referencia do transformador local.",
+        "O medidor deve interpolar matematicamente os dados faltantes a partir da média móvel das tensões prévias.",
+        "Deve-se preencher as lacunas vazias do relatório utilizando os valores nominais de referência do transformador local.",
         "Intervalos adicionais devem ser obrigatoriamente agregados para substituir as leituras expurgadas, de forma sempre consecutiva.",
-        "A campanha inteira deve ser cancelada e reiniciada no mes civil subsequente independentemente da quantidade de perdas."
+        "A campanha inteira deve ser cancelada e reiniciada no mês civil subsequente independentemente da quantidade de perdas."
       ],
       "correctIndex": 2,
-      "explanation": "Conforme o item 26.3 do PRODIST Modulo 8, no intuito de obter-se 1.008 leituras validas, intervalos adicionais devem ser agregados para substituir as leituras expurgadas, sempre consecutivamente.",
+      "explanation": "Conforme o item 26.3 do PRODIST Módulo 8, no intuito de obter-se 1.008 leituras válidas, intervalos adicionais devem ser agregados para substituir as leituras expurgadas, sempre consecutivamente.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como o calculo matematico do indicador de transgressao DRP e definido pela metodologia oficial de qualidade?",
+      "statement": "Como o cálculo matemático do indicador de transgressão DRP é definido pela metodologia oficial de qualidade?",
       "options": [
-        "Somando-se as quedas RMS da rede e dividindo-se pela corrente nominal de curto-circuito estatistica.",
-        "Multiplicando a impedancia de base pelo numero de interrupcoes totais divididas pelo limite base 1000.",
-        "Dividindo o maior valor entre as fases do numero de leituras situadas na faixa precaria por 1008 e multiplicando por 100.",
-        "Subtraindo o limite tolerado DRC do total faturado no mes multiplicando pelo fator de impacto k1."
+        "Somando-se as quedas RMS da rede e dividindo-se pela corrente nominal de curto-circuito estatística.",
+        "Multiplicando a impedância de base pelo número de interrupções totais divididas pelo limite base 1000.",
+        "Dividindo o maior valor entre as fases do número de leituras situadas na faixa precária por 1008 e multiplicando por 100.",
+        "Subtraindo o limite tolerado DRC do total faturado no mês multiplicando pelo fator de impacto k1."
       ],
       "correctIndex": 2,
-      "explanation": "A Equacao 1 do PRODIST Modulo 8 define matematicamente o DRP como (nlp / 1.008) x 100, onde nlp e o maior valor entre as fases de leituras na faixa precaria.",
+      "explanation": "A Equação 1 do PRODIST Módulo 8 define matematicamente o DRP como (nlp / 1.008) x 100, onde nlp é o maior valor entre as fases de leituras na faixa precária.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na captura e medicao de Variacoes de Tensao de Curta Duracao (VTCD), qual e a regra basica de agregacao temporal definida pela regulamentacao?",
+      "statement": "Na captura e medição de Variações de Tensão de Curta Duração (VTCD), qual é a regra básica de agregação temporal definida pela regulamentação?",
       "options": [
-        "Eventos sucessivos ocorrendo em ate 3 minutos no mesmo ponto de monitoracao sao agregados formando um unico evento.",
-        "Eventos que afundam a tensao sao agregados em blocos diarios as meia-noites, expurgando os ruidos noturnos.",
-        "Eventos com amplitude superior a 1,1 p.u. nao sofrem agregacao temporal e devem ser apurados de modo fracionado por fase.",
-        "As variacoes com diferenca superior a 10 ciclos sao ignoradas pelo relatorio de consolidacao temporal."
+        "Eventos sucessivos ocorrendo em até 3 minutos no mesmo ponto de monitoração são agregados formando um único evento.",
+        "Eventos que afundam a tensão são agregados em blocos diários às meia-noites, expurgando os ruídos noturnos.",
+        "Eventos com amplitude superior a 1,1 p.u. não sofrem agregação temporal e devem ser apurados de modo fracionado por fase.",
+        "As variações com diferença superior a 10 ciclos são ignoradas pelo relatório de consolidação temporal."
       ],
       "correctIndex": 0,
-      "explanation": "A alinea c do item 88 do PRODIST Modulo 8 estabelece que eventos consecutivos, em um periodo de 3 minutos, no mesmo ponto, devem ser agregados compondo um unico evento (agregacao temporal).",
+      "explanation": "A alínea c do item 88 do PRODIST Módulo 8 estabelece que eventos consecutivos, em um período de 3 minutos, no mesmo ponto, devem ser agregados compondo um único evento (agregação temporal).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que a metodologia de apuracao de harmonicas e desequilibrios dita para os intervalos de 10 minutos nos quais venha a ocorrer incidentalmente uma VTCD ou interrupcao longa?",
+      "statement": "O que a metodologia de apuração de harmônicas e desequilíbrios dita para os intervalos de 10 minutos nos quais venha a ocorrer incidentalmente uma VTCD ou interrupção longa?",
       "options": [
-        "O intervalo de 10 minutos afetado deve ter sua amplitude triplicada como forma de penalizacao compensatoria.",
-        "O intervalo de medicao deve ser integralmente expurgado e substituido por igual numero de leituras validas adicionais.",
-        "O periodo de medicao deve manter o dado armazenado e classifica-lo compulsoriamente como evento da regiao critica A.",
-        "As amostras dessa duracao devem ser mescladas as leituras anteriores para a aplicacao do desvio padrao toleravel."
+        "O intervalo de 10 minutos afetado deve ter sua amplitude triplicada como forma de penalização compensatória.",
+        "O intervalo de medição deve ser integralmente expurgado e substituído por igual número de leituras válidas adicionais.",
+        "O período de medição deve manter o dado armazenado e classificá-lo compulsoriamente como evento da região crítica A.",
+        "As amostras dessa duração devem ser mescladas às leituras anteriores para a aplicação do desvio padrão tolerável."
       ],
       "correctIndex": 1,
-      "explanation": "O item 86 do PRODIST Modulo 8 dita que para as medicoes de harmonicas, desequilibrios e flutuacoes, na ocorrencia de VTCD ou interrupcoes longas, o intervalo de 10 minutos deve ser expurgado e substituido.",
+      "explanation": "O item 86 do PRODIST Módulo 8 dita que para as medições de harmônicas, desequilíbrios e flutuações, na ocorrência de VTCD ou interrupções longas, o intervalo de 10 minutos deve ser expurgado e substituído.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na avaliacao especifica dos niveis de tensao em regime permanente, qual ocorrencia torna o expurgo do intervalo de 10 minutos afetado totalmente opcional para a concessionaria?",
+      "statement": "Na avaliação específica dos níveis de tensão em regime permanente, qual ocorrência torna o expurgo do intervalo de 10 minutos afetado totalmente opcional para a concessionária?",
       "options": [
-        "Transgressao harmonica superior a decima terceira ordem.",
-        "Interrupcoes longas causadas por programacoes de manutencao.",
-        "Variacoes momentaneas de tensao.",
+        "Transgressão harmônica superior à décima terceira ordem.",
+        "Interrupções longas causadas por programações de manutenção.",
+        "Variações momentâneas de tensão.",
         "Surtos decorrentes de manobras de capacitores."
       ],
       "correctIndex": 2,
-      "explanation": "De acordo com o item 87 do PRODIST Modulo 8, na medicao em regime permanente, o expurgo de variacoes temporarias ou interrupcoes longas e obrigatorio, sendo opcional o expurgo de intervalos com variacoes momentaneas de tensao.",
+      "explanation": "De acordo com o item 87 do PRODIST Módulo 8, na medição em regime permanente, o expurgo de variações temporárias ou interrupções longas é obrigatório, sendo opcional o expurgo de intervalos com variações momentâneas de tensão.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quando diversos eventos de VTCD sao agregados temporalmente em uma unica janela de 3 minutos, qual valor de amplitude o padrao determina que deve representar de fato esse evento consolidado?",
+      "statement": "Quando diversos eventos de VTCD são agregados temporalmente em uma única janela de 3 minutos, qual valor de amplitude o padrão determina que deve representar de fato esse evento consolidado?",
       "options": [
-        "A media aritmetica RMS de todos os surtos da janela de tempo.",
-        "A amplitude de menor valor para os afundamentos ou a amplitude de maior valor para as elevacoes.",
-        "O pico unicamente do primeiro pulso oscilatorio que superou o limite do trigger.",
-        "A mediana estatistica desconsiderando o primeiro e o ultimo disturbio amostrados no intervalo."
+        "A média aritmética RMS de todos os surtos da janela de tempo.",
+        "A amplitude de menor valor para os afundamentos ou a amplitude de maior valor para as elevações.",
+        "O pico unicamente do primeiro pulso oscilatório que superou o limite do trigger.",
+        "A mediana estatística desconsiderando o primeiro e o último distúrbio amostrados no intervalo."
       ],
       "correctIndex": 1,
-      "explanation": "O item 88 (d) do PRODIST Modulo 8 especifica que o afundamento ou a elevacao de tensao que representa o intervalo de 3 minutos e o de menor ou de maior amplitude da tensao, respectivamente.",
+      "explanation": "O item 88 (d) do PRODIST Módulo 8 especifica que o afundamento ou a elevação de tensão que representa o intervalo de 3 minutos é o de menor ou de maior amplitude da tensão, respectivamente.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como o PRODIST determina a obtencao da tensao de referencia que sera utilizada no calculo da amplitude relativa para caracterizar adequadamente um evento de VTCD?",
+      "statement": "Como o PRODIST determina a obtenção da tensão de referência que será utilizada no cálculo da amplitude relativa para caracterizar adequadamente um evento de VTCD?",
       "options": [
-        "Sempre equivalera estritamente a tensao maxima de fase medida na barra da subestacao isolada.",
-        "Apenas adotando de forma imutavel os 220 Volts, independentemente da conexao do alimentador.",
-        "A partir de uma tensao fixa nominal ou mediante o calculo de uma tensao media deslizante atualizada considerando os 12 ciclos mais recentes.",
-        "Pela somatoria do desequilibrio do fator de potencia embutido na impedancia secundaria do medidor da classe."
+        "Sempre equivalerá estritamente à tensão máxima de fase medida na barra da subestação isolada.",
+        "Apenas adotando de forma imutável os 220 Volts, independentemente da conexão do alimentador.",
+        "A partir de uma tensão fixa nominal ou mediante o cálculo de uma tensão média deslizante atualizada considerando os 12 ciclos mais recentes.",
+        "Pela somatória do desequilíbrio do fator de potência embutido na impedância secundária do medidor da classe."
       ],
       "correctIndex": 2,
-      "explanation": "A alinea a do item 88 do PRODIST Modulo 8 esclarece que a deteccao deve considerar como parametro uma tensao fixa ou uma tensao media deslizante Vsr(n) calculada a partir do valor eficaz dos 12 ciclos mais recentes.",
+      "explanation": "A alínea a do item 88 do PRODIST Módulo 8 esclarece que a detecção deve considerar como parâmetro uma tensão fixa ou uma tensão média deslizante Vsr(n) calculada a partir do valor eficaz dos 12 ciclos mais recentes.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O Fator de Impacto (FI) caracteriza a severidade de agregacao das VTCDs correlacionando a ocorrencia dos eventos com a sensibilidade. Qual e o seu respectivo valor de referencia de analise comparativa estabelecido para redes SDMT e SDAT?",
+      "statement": "O Fator de Impacto (FI) caracteriza a severidade de agregação das VTCDs correlacionando a ocorrência dos eventos com a sensibilidade. Qual é o seu respectivo valor de referência de análise comparativa estabelecido para redes SDMT e SDAT?",
       "options": [
         "3,0 pu",
         "5,0 pu",
@@ -135,83 +135,83 @@
         "0,5 pu"
       ],
       "correctIndex": 2,
-      "explanation": "O item 77 do PRODIST Modulo 8 assinala formalmente que o valor de referencia do indicador Fator de Impacto (FI) para o SDMT e o SDAT no periodo de 30 dias consecutivos e de 1,0 pu.",
+      "explanation": "O item 77 do PRODIST Módulo 8 assinala formalmente que o valor de referência do indicador Fator de Impacto (FI) para o SDMT e o SDAT no período de 30 dias consecutivos é de 1,0 pu.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O planejamento das normatizacoes da qualidade de energia, segundo o PRODIST, assevera que a formacao correta da amostra de 1.008 leituras DRP e DRC exige a integracao da medicao em periodos unitarios de 15 minutos consecutivos.",
+      "statement": "O planejamento das normatizações da qualidade de energia, segundo o PRODIST, assevera que a formação correta da amostra de 1.008 leituras DRP e DRC exige a integração da medição em períodos unitários de 15 minutos consecutivos.",
       "correctAnswer": false,
-      "explanation": "A regra descrita no item 26.2 do PRODIST Modulo 8 estipula que a composicao de indicadores individuais utiliza registros em intervalos consecutivos de 10 minutos, e nao de 15.",
+      "explanation": "A regra descrita no item 26.2 do PRODIST Módulo 8 estipula que a composição de indicadores individuais utiliza registros em intervalos consecutivos de 10 minutos, e não de 15.",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A agregacao de fases para qualificacao da duracao de um evento de VTCD deve seguir o criterio de uniao das fases, ou seja, o evento engloba desde o instante em que a primeira fase transpoe o limite ate o instante em que a ultima retorna ao padrao.",
+      "statement": "A agregação de fases para qualificação da duração de um evento de VTCD deve seguir o critério de união das fases, ou seja, o evento engloba desde o instante em que a primeira fase transpõe o limite até o instante em que a última retorna ao padrão.",
       "correctAnswer": true,
-      "explanation": "A alinea e do item 88 do PRODIST Modulo 8 define explicitamente que a agregacao de fases pelo criterio de uniao implica que a duracao e o intervalo entre a primeira transposicao e o ultimo retorno da tensao ao limite estavel.",
+      "explanation": "A alínea e do item 88 do PRODIST Módulo 8 define explicitamente que a agregação de fases pelo critério de união implica que a duração é o intervalo entre a primeira transposição e o último retorno da tensão ao limite estável.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A metodologia de expurgo e substituicao de dados exige que os intervalos substituidos correspondam a tensoes puramente adequadas, ignorando a aleatoriedade da amostragem seguinte em favor de facilitar o calculo da compensacao global mensal.",
+      "statement": "A metodologia de expurgo e substituição de dados exige que os intervalos substituídos correspondam a tensões puramente adequadas, ignorando a aleatoriedade da amostragem seguinte em favor de facilitar o cálculo da compensação global mensal.",
       "correctAnswer": false,
-      "explanation": "Nenhuma norma sugere manipular ou falsear leituras impondo valores artificiais adequados. O item 86/87 do Modulo 8 preve apenas que o intervalo de 10 minutos deve ser expurgado e substituido por igual numero de leituras validas coletadas sucessivamente a frente.",
+      "explanation": "Nenhuma norma sugere manipular ou falsear leituras impondo valores artificiais adequados. O item 86/87 do Módulo 8 prevê apenas que o intervalo de 10 minutos deve ser expurgado e substituído por igual número de leituras válidas coletadas sucessivamente à frente.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Na preparacao metodologica para investigar uma reclamacao especifica com o equipamento de medicao temporario de 168 horas, a distribuidora tem o dever de informar ao usuario, com antecedencia minima exata de 48 horas, o relogio de inicio das operacoes.",
+      "statement": "Na preparação metodológica para investigar uma reclamação específica com o equipamento de medição temporário de 168 horas, a distribuidora tem o dever de informar ao usuário, com antecedência mínima exata de 48 horas, o relógio de início das operações.",
       "correctAnswer": true,
-      "explanation": "A secao do item 121, em sua alinea h, determina que a distribuidora deve informar ao usuario com antecedencia minima de 48 horas da realizacao da medicao pelo periodo minimo de 168 horas.",
+      "explanation": "A seção do item 121, em sua alínea h, determina que a distribuidora deve informar ao usuário com antecedência mínima de 48 horas da realização da medição pelo período mínimo de 168 horas.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "No procedimento formal de calculo, a elaboracao do Fator de Impacto (FI) exige que as frequencias apuradas de cada regiao de sensibilidade da matriz de amplitude/tempo sejam multiplicadas por seus fatores de ponderacao cruzados, dividindo-se finalmente pelo Fator de Impacto base da rede.",
+      "statement": "No procedimento formal de cálculo, a elaboração do Fator de Impacto (FI) exige que as frequências apuradas de cada região de sensibilidade da matriz de amplitude/tempo sejam multiplicadas por seus fatores de ponderação cruzados, dividindo-se finalmente pelo Fator de Impacto base da rede.",
       "correctAnswer": true,
-      "explanation": "A Equacao 22 e o texto do item 74 no PRODIST Modulo 8 comprovam esse calculo, evidenciando que o FI e originado pela soma dos produtos das frequencias reais pelos fatores de ponderacao fpond(i), o conjunto dividido em relacao ao FIbase correspondente.",
+      "explanation": "A Equação 22 e o texto do item 74 no PRODIST Módulo 8 comprovam esse cálculo, evidenciando que o FI é originado pela soma dos produtos das frequências reais pelos fatores de ponderação fpond(i), o conjunto dividido em relação ao FIbase correspondente.",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Com base nas metodologias que determinam a captura e construcao do pacote de registros de 1.008 leituras validas das concessoes de tensao, intervalos temporais adicionais de 10 minutos deverao ser agregados para substituir as eventuais perdas e expurgos por anomalias, garantindo que essas insercoes sucessivas ocorram sempre ____.",
+      "statement": "Com base nas metodologias que determinam a captura e construção do pacote de registros de 1.008 leituras válidas das concessões de tensão, intervalos temporais adicionais de 10 minutos deverão ser agregados para substituir as eventuais perdas e expurgos por anomalias, garantindo que essas inserções sucessivas ocorram sempre ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "consecutivamente"
         }
       ],
-      "explanation": "O item 26.3 do PRODIST Modulo 8 determina que no intuito de obter-se as 1.008 leituras validas integrais, os intervalos adicionais sejam agregados para suprir expurgos ocorrendo sempre consecutivamente.",
+      "explanation": "O item 26.3 do PRODIST Módulo 8 determina que no intuito de obter-se as 1.008 leituras válidas integrais, os intervalos adicionais sejam agregados para suprir expurgos ocorrendo sempre consecutivamente.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "No trato sistematico dos dados para avaliacao das ocorrencias rapidas de falhas nas linhas, a agregacao temporal determina que as multiplas manifestacoes de VTCD sucessivas identificadas e contidas dentro do estrito recorte confinado de ____ minutos devera formar compulsoriamente na tabela do relatorio final apenas a computacao de um unico evento consolidado.",
+      "statement": "No trato sistemático dos dados para avaliação das ocorrências rápidas de falhas nas linhas, a agregação temporal determina que as múltiplas manifestações de VTCD sucessivas identificadas e contidas dentro do estrito recorte confinado de ____ minutos deverá formar compulsoriamente na tabela do relatório final apenas a computação de um único evento consolidado.",
       "blanks": [
         {
           "index": 0,
           "answer": "3"
         }
       ],
-      "explanation": "O item 88 (c) do PRODIST Modulo 8 estipula objetivamente o procedimento indicando que eventos consecutivos englobados em um periodo de 3 minutos no mesmo ponto sao compulsoriamente agregados compondo um unico evento temporal conjunto.",
+      "explanation": "O item 88 (c) do PRODIST Módulo 8 estipula objetivamente o procedimento indicando que eventos consecutivos englobados em um período de 3 minutos no mesmo ponto são compulsoriamente agregados compondo um único evento temporal conjunto.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Para mensurar de forma analitica o prejuizo causado as cargas face a duracao e afundamento, o coeficiente resultante que avalia a correlacao de severidade entre os eventos VTCD da amostra ponderada pelo limiar base, calculavel apos os 30 dias integrais de vigilia estatistica, constitui-se pelo nome regulamentar indicador Fator de ____.",
+      "statement": "Para mensurar de forma analítica o prejuízo causado às cargas face à duração e afundamento, o coeficiente resultante que avalia a correlação de severidade entre os eventos VTCD da amostra ponderada pelo limiar base, calculável após os 30 dias integrais de vigília estatística, constitui-se pelo nome regulamentar indicador Fator de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Impacto"
         }
       ],
-      "explanation": "De acordo com o item 74 do PRODIST Modulo 8, o indicador responsavel que caracteriza estritamente o patamar de severidade da incidencia da frequencia de eventos de VTCD em funcao de uma ponderacao de base recebe oficialmente o nome Fator de Impacto - FI.",
+      "explanation": "De acordo com o item 74 do PRODIST Módulo 8, o indicador responsável que caracteriza estritamente o patamar de severidade da incidência da frequência de eventos de VTCD em função de uma ponderação de base recebe oficialmente o nome Fator de Impacto - FI.",
       "difficulty": "hard"
     }
   ]

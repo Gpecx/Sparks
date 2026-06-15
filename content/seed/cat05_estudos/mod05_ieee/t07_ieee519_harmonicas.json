@@ -10,208 +10,208 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual e o objetivo primordial da norma IEEE 519 nos estudos de sistemas eletricos?",
+      "statement": "Qual é o objetivo primordial da norma IEEE 519 nos estudos de sistemas elétricos?",
       "options": [
-        "Controlar a estabilidade puramente angular dos geradores em centrais termicas.",
-        "Padronizar o dimensionamento estrutural e termico de condutores de aterramento.",
-        "Definir recomendacoes e limites admissíveis para o controle da distorcao harmonica.",
-        "Delimitar as fronteiras caloricas do arco eletrico e determinar roupas de protecao."
+        "Controlar a estabilidade puramente angular dos geradores em centrais térmicas.",
+        "Padronizar o dimensionamento estrutural e térmico de condutores de aterramento.",
+        "Definir recomendações e limites admissíveis para o controle da distorção harmônica.",
+        "Delimitar as fronteiras calóricas do arco elétrico e determinar roupas de proteção."
       ],
       "correctIndex": 2,
-      "explanation": "A norma IEEE 519 contem praticas recomendadas especificamente para o controle de harmonicos, impondo limites para a distorcao da tensao de suprimento e das correntes demandadas.",
+      "explanation": "A norma IEEE 519 contém práticas recomendadas especificamente para o controle de harmônicos, impondo limites para a distorção da tensão de suprimento e das correntes demandadas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nos sistemas industriais, quais componentes formam os principais grupos geradores de correntes harmonicas?",
+      "statement": "Nos sistemas industriais, quais componentes formam os principais grupos geradores de correntes harmônicas?",
       "options": [
-        "Transformadores operando a vazio e bancos de capacitores puramente estaticos.",
-        "Motores de inducao assincronos e aquecedores puramente resistivos.",
-        "Reles eletromecanicos e transformadores de potencial indutivos.",
-        "Cargas nao lineares compostas por retificadores e conversores de estado solido."
+        "Transformadores operando a vazio e bancos de capacitores puramente estáticos.",
+        "Motores de indução assíncronos e aquecedores puramente resistivos.",
+        "Relés eletromecânicos e transformadores de potencial indutivos.",
+        "Cargas não lineares compostas por retificadores e conversores de estado sólido."
       ],
       "correctIndex": 3,
-      "explanation": "Dispositivos de estado solido, conversores, retificadores e aparelhos baseados em chaveamentos compoem as cargas nao lineares responsaveis por correntes deformadas.",
+      "explanation": "Dispositivos de estado sólido, conversores, retificadores e aparelhos baseados em chaveamentos compõem as cargas não lineares responsáveis por correntes deformadas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para quantificar as distorcoes na corrente do usuario de forma justa em relacao ao peso na instalacao, qual indice a norma preconiza?",
+      "statement": "Para quantificar as distorções na corrente do usuário de forma justa em relação ao peso na instalação, qual índice a norma preconiza?",
       "options": [
-        "A Distorcao Total de Demanda baseada na media de demanda maxima calculada.",
-        "A Distorcao Harmonica Total aplicada as correntes nominais instantaneas.",
-        "O Fator de Pico Assimetrico fundamentado unicamente nas transicoes da carga.",
-        "O Quociente de Ressonancia Ativa medido na fundamental da rede alimentadora."
+        "A Distorção Total de Demanda baseada na média de demanda máxima calculada.",
+        "A Distorção Harmônica Total aplicada às correntes nominais instantâneas.",
+        "O Fator de Pico Assimétrico fundamentado unicamente nas transições da carga.",
+        "O Quociente de Ressonância Ativa medido na fundamental da rede alimentadora."
       ],
       "correctIndex": 0,
-      "explanation": "A norma substitui o THD pelo TDD nas correntes, baseando a distorcao percentual sobre a corrente de maxima demanda real do consumidor, diluindo avaliacoes em periodos de carga leve.",
+      "explanation": "A norma substitui o THD pelo TDD nas correntes, baseando a distorção percentual sobre a corrente de máxima demanda real do consumidor, diluindo avaliações em períodos de carga leve.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo as premissas de interface e qualidade estabelecidas na IEEE 519, em qual local da rede os limites de distorcao devem ser comprovados?",
+      "statement": "Segundo as premissas de interface e qualidade estabelecidas na IEEE 519, em qual local da rede os limites de distorção devem ser comprovados?",
       "options": [
-        "Nos terminais de alimentacao de cada motor de inducao da fabrica isoladamente.",
-        "No Ponto de Acoplamento Comum definido entre a concessionaria e o cliente.",
-        "No centro estrela aterrado do transformador principal rebaixador da geracao.",
-        "Na barra seccionadora interna do banco retificador tiristorizado das inversores."
+        "Nos terminais de alimentação de cada motor de indução da fábrica isoladamente.",
+        "No Ponto de Acoplamento Comum definido entre a concessionária e o cliente.",
+        "No centro estrela aterrado do transformador principal rebaixador da geração.",
+        "Na barra seccionadora interna do banco retificador tiristorizado dos inversores."
       ],
       "correctIndex": 1,
-      "explanation": "O Point of Common Coupling e a fronteira definida mutuamente onde a utilidade e o consumidor tem a obrigacao conjunta de avaliar e atestar o nivel de poluicao da rede.",
+      "explanation": "O Point of Common Coupling é a fronteira definida mutuamente onde a utilidade e o consumidor têm a obrigação conjunta de avaliar e atestar o nível de poluição da rede.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "A norma divide as responsabilidades mitigadoras na conexao. Qual e a atribuicao primaria esperada da utilidade fornecedora?",
+      "statement": "A norma divide as responsabilidades mitigadoras na conexão. Qual é a atribuição primária esperada da utilidade fornecedora?",
       "options": [
-        "Instalar filtros ativos de banda larga dentro das subestacoes particulares industriais.",
-        "Absorver integralmente todos os ruidos reativos gerados nas linhas passivas.",
-        "Fornecer um suprimento contendo niveis limpos e controlados de distorcao de tensao.",
-        "Inibir compulsoriamente a energizacao de cargas nao lineares por parte dos clientes."
+        "Instalar filtros ativos de banda larga dentro das subestações particulares industriais.",
+        "Absorver integralmente todos os ruídos reativos gerados nas linhas passivas.",
+        "Fornecer um suprimento contendo níveis limpos e controlados de distorção de tensão.",
+        "Inibir compulsoriamente a energização de cargas não lineares por parte dos clientes."
       ],
       "correctIndex": 2,
-      "explanation": "Os limites de distorcao de tensao existem primariamente para a concessionaria prover e garantir o fornecimento de uma onda senoidal de boa qualidade nas premissas de interface.",
+      "explanation": "Os limites de distorção de tensão existem primariamente para a concessionária prover e garantir o fornecimento de uma onda senoidal de boa qualidade nas premissas de interface.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como o fator representativo da robustez do sistema, expresso pela relacao de corrente Isc sobre IL, impacta a tolerância das tabelas restritivas?",
+      "statement": "Como o fator representativo da robustez do sistema, expresso pela relação de corrente Isc sobre IL, impacta a tolerância das tabelas restritivas?",
       "options": [
-        "As relacoes altas exigem o bloqueio integral de conversores estaticos.",
-        "Niveis elevados de suprimento tornam os padroes de poluicao mais rigidos e inflexíveis.",
-        "A razao da capacidade de curto-circuito afeta as frequencias, mas nao o percentual absoluto do limite.",
-        "Redes com conexoes mais robustas (relacao maior) admitem limites maiores de distorcao de corrente."
+        "As relações altas exigem o bloqueio integral de conversores estáticos.",
+        "Níveis elevados de suprimento tornam os padrões de poluição mais rígidos e inflexíveis.",
+        "A razão da capacidade de curto-circuito afeta as frequências, mas não o percentual absoluto do limite.",
+        "Redes com conexões mais robustas (relação maior) admitem limites maiores de distorção de corrente."
       ],
       "correctIndex": 3,
-      "explanation": "O ratio calculando a forca do suprimento (curto-circuito) frente a carga maxima indica que sistemas fortes suportam percentuais de distorcao injetada sensivelmente maiores do que redes fracas.",
+      "explanation": "O ratio calculando a força do suprimento (curto-circuito) frente à carga máxima indica que sistemas fortes suportam percentuais de distorção injetada sensivelmente maiores do que redes fracas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a abordagem tecnica da IEEE 519 impoe as restricoes para a circulacao das raras correntes harmonicas de ordem par na rede?",
+      "statement": "Como a abordagem técnica da IEEE 519 impõe as restrições para a circulação das raras correntes harmônicas de ordem par na rede?",
       "options": [
-        "Limita os componentes pares exigindo que seus niveis fiquem restritos a fracoes da ordem impar vizinha.",
-        "Ignora formalmente o espectro par pois os mesmos nao provocam sobreaquecimento nos rotores.",
-        "Permite niveis exatamente identicos de tolerancias entre as familias de naturezas impares e pares.",
-        "Exige que elas sejam as unicas componentes obrigatoriamente suprimidas por via de filtros ativos."
+        "Limita os componentes pares exigindo que seus níveis fiquem restritos a frações da ordem ímpar vizinha.",
+        "Ignora formalmente o espectro par pois os mesmos não provocam sobreaquecimento nos rotores.",
+        "Permite níveis exatamente idênticos de tolerâncias entre as famílias de naturezas ímpares e pares.",
+        "Exige que elas sejam as únicas componentes obrigatoriamente suprimidas por via de filtros ativos."
       ],
       "correctIndex": 0,
-      "explanation": "O espectro par e severamente limitado de forma percentual baseando-se nos componentes impares proximos e adjacentes para impedir saturacoes acimetricas severas nos nucleos ferrosos.",
+      "explanation": "O espectro par é severamente limitado de forma percentual baseando-se nos componentes ímpares próximos e adjacentes para impedir saturações assimétricas severas nos núcleos ferrosos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na modelagem de redes industriais, qual grave anomalia resultante da presenca de poluidoras cargas nao lineares e sublinhada no livro marrom?",
+      "statement": "Na modelagem de redes industriais, qual grave anomalia resultante da presença de poluidoras cargas não lineares é sublinhada no livro marrom?",
       "options": [
-        "A extincao total das componentes transitorias atreladas a inercia das partidas de motores radiais.",
-        "A criacao de severas condicoes de ressonancia serie e paralela ao excitar os capacitores corretivos.",
-        "A elevacao exponencial da rigidez dieletrica estagnando perdas nas blindagens ferromagneticas dos tubos.",
-        "O isolamento defasador dos ruidos termicos preservando as buchas instaladas dos disjuntores."
+        "A extinção total das componentes transitórias atreladas à inércia das partidas de motores radiais.",
+        "A criação de severas condições de ressonância série e paralela ao excitar os capacitores corretivos.",
+        "A elevação exponencial da rigidez dielétrica estagnando perdas nas blindagens ferromagnéticas dos tubos.",
+        "O isolamento defasador dos ruídos térmicos preservando as buchas instaladas dos disjuntores."
       ],
       "correctIndex": 1,
-      "explanation": "Correntes harmonicas propagadas acoplam nos bancos de capacitores shunt instalados configurando interacoes destrutivas marcadas por acentuadas e agudas ressonancias pontuais de amplificacao da rede.",
+      "explanation": "Correntes harmônicas propagadas acoplam nos bancos de capacitores shunt instalados configurando interações destrutivas marcadas por acentuadas e agudas ressonâncias pontuais de amplificação da rede.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para se determinar a verdadeira base de calculo de TDD, a apuracao da corrente fundamental de demanda foca em qual metodo consolidado pratico?",
+      "statement": "Para se determinar a verdadeira base de cálculo de TDD, a apuração da corrente fundamental de demanda foca em qual método consolidado prático?",
       "options": [
-        "O pico transiente momentaneo assimetrico captado e congelado rigidamente no primeiro meio ciclo.",
-        "A integracao unifilar baseada em relatorios instantaneos espalhados ao longo dos barramentos em anel.",
-        "O pico avaliado sobre patamares integrados de quinze ou trinta minutos tirados da media dos meses pregressos.",
-        "O limiar constante e invariante baseado no somatorio das capacidades nominais nominais das fontes."
+        "O pico transiente momentâneo assimétrico captado e congelado rigidamente no primeiro meio ciclo.",
+        "A integração unifilar baseada em relatórios instantâneos espalhados ao longo dos barramentos em anel.",
+        "O pico avaliado sobre patamares integrados de quinze ou trinta minutos tirados da média dos meses pregressos.",
+        "O limiar constante e invariante baseado no somatório das capacidades nominais nominais das fontes."
       ],
       "correctIndex": 2,
-      "explanation": "O balizamento adotado emprega afericoes baseadas no registro duradouro focado em janelas temporais prolongadas comumente de 15 ate 30 minutos compilando o esforco rotineiro do sistema.",
+      "explanation": "O balizamento adotado emprega aferições baseadas no registro duradouro focado em janelas temporais prolongadas comumente de 15 até 30 minutos compilando o esforço rotineiro do sistema.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Apurando as modelagens focadas nos fenomenos ressonantes acoplados nos filtros o que sucede analiticamente quando se impulsiona macicamente o.",
+      "statement": "Apurando as modelagens focadas nos fenômenos ressonantes acoplados nos filtros o que sucede analiticamente quando se impulsiona maciçamente o.",
       "options": [
-        "Reduz vertiginosamente o espectro alocando o perigo da amplificacao estrita das frequencias subtransitorias rasteiras limitadoras.",
-        "Transfere de modo inflexivel o ponto de interacao unicamente operante para ressonancias atreladas as restricoes submultiplas impares das fontes estaticas.",
-        "Alavanca favoravelmente elevando o ponto de ressonancia dissipando e tornando bastante remota a interacao nas areas atreladas de baixa frequencia de ruidos.",
-        "Estabiliza as vibracoes termicas forçando os barramentos absorverem todas assimetrias oriundas dos lacoes desbalanceados de conversao reativa limitadora."
+        "Reduz vertiginosamente o espectro alocando o perigo da amplificação estrita das frequências subtransitórias rasteiras limitadoras.",
+        "Transfere de modo inflexível o ponto de interação unicamente operante para ressonâncias atreladas às restrições submúltiplas ímpares das fontes estáticas.",
+        "Alavanca favoravelmente elevando o ponto de ressonância dissipando e tornando bastante remota a interação nas áreas atreladas de baixa frequência de ruídos.",
+        "Estabiliza as vibrações térmicas forçando os barramentos absorverem todas assimetrias oriundas dos laços desbalanceados de conversão reativa limitadora."
       ],
       "correctIndex": 2,
-      "explanation": "Modelagens apontam que injetar fornecimentos extremamente fortes detentores de altos niveis MVA enrijecem a malha jogando e arrastando os picos ressonantes criticos para esferas de altas frequencias pouco provaveis isentando riscos ordinarios preexistentes.",
+      "explanation": "Modelagens apontam que injetar fornecimentos extremamente fortes detentores de altos níveis MVA enrijecem a malha jogando e arrastando os picos ressonantes críticos para esferas de altas frequências pouco prováveis isentando riscos ordinários preexistentes.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Ao impor as rigorosas exigencias quantitativas referenciando qualidade de senoides as metricas balizadoras atrelam correntes e tensoes unificadas.",
+      "statement": "Ao impor as rigorosas exigências quantitativas referenciando qualidade de senoides as métricas balizadoras atrelam correntes e tensões unificadas.",
       "correctAnswer": false,
-      "explanation": "A premissa base separa os mundos estipulando distorcoes de tensao pautadas na tradicional THD enquanto adota conceitualmente limitacoes das correntes amparadas baseadas ponderando as razoes medias operativas atreladas formatando a TDD de demanda.",
+      "explanation": "A premissa base separa os mundos estipulando distorções de tensão pautadas na tradicional THD enquanto adota conceitualmente limitações das correntes amparadas baseadas ponderando as razões médias operativas atreladas formatando a TDD de demanda.",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Nas avaliacoes topologicas efetuadas atreladas a planta predial fabril as orientacoes definem categoricamente o Ponto de Acoplamento referenciado.",
+      "statement": "Nas avaliações topológicas efetuadas atreladas à planta predial fabril as orientações definem categoricamente o Ponto de Acoplamento referenciado.",
       "correctAnswer": true,
-      "explanation": "Em casos confinados na prancheta avaliativa interna e admitido posicionar localmente estipulando o PCC disposto internamente balizando as tolerancias isoladas protegendo modulos limpos subjacentes fustigados das sujeiras reativas injetadas do equipamento emissor conectado proximamente.",
+      "explanation": "Em casos confinados na prancheta avaliativa interna é admitido posicionar localmente estipulando o PCC disposto internamente balizando as tolerâncias isoladas protegendo módulos limpos subjacentes fustigados das sujeiras reativas injetadas do equipamento emissor conectado proximamente.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "As bibliografias americanas reforcam claramente a premissa de que os imponentes controladores tiristorizados inversores de frequencias.",
+      "statement": "As bibliografias americanas reforçam claramente a premissa de que os imponentes controladores tiristorizados inversores de frequências.",
       "correctAnswer": true,
-      "explanation": "Os conversores de operacao chaveada forcam fluxos e cortes fragmentados introduzindo imperfeicoes brutais nas amostragens tracionando patamares não lineares poluidores espalhados retroalimentando distorcoes que se deslocam pelo supridor matriz reativo.",
+      "explanation": "Os conversores de operação chaveada forçam fluxos e cortes fragmentados introduzindo imperfeições brutais nas amostragens tracionando patamares não lineares poluidores espalhados retroalimentando distorções que se deslocam pelo supridor matriz reativo.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Na matriz tabulada estipuladora atrelando tolerancias de injecao aos consumidores conectivos constata-se categoricamente a exigencia formatadora.",
+      "statement": "Na matriz tabulada estipuladora atrelando tolerâncias de injeção aos consumidores conectivos constata-se categoricamente a exigência formatadora.",
       "correctAnswer": false,
-      "explanation": "O embasamento tabelado da IEEE inverte a situacao penalizando redes frageis ralas e premiando as industrias supridas de fortes arranjos imensos de suprimentos tolerando permissividades alargadas frouxas com limites crescentes injetaveis as relacoes avolumadas altas e suportaveis absorvidas nas malhas.",
+      "explanation": "O embasamento tabelado da IEEE inverte a situação penalizando redes frágeis ralas e premiando as indústrias supridas de fortes arranjos imensos de suprimentos tolerando permissividades alargadas frouxas com limites crescentes injetáveis às relações avolumadas altas e suportáveis absorvidas nas malhas.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "No trato minucioso referenciador avaliativo contido alocando englobando todos desvios espectrais o capitulo formatador compendio regulamentar.",
+      "statement": "No trato minucioso referenciador avaliativo contido alocando englobando todos desvios espectrais o capítulo formatador compêndio regulamentar.",
       "correctAnswer": false,
-      "explanation": "A documentacao tecnica preceitua limitacoes primordiais orbitando fortemente focando restritivamente englobando ativacoes harmonicas inteiras impares deixando espectros mutantes transientes imprecisos e fracionados de ordens limitadoras inter-harmonicas apartados tratados analogicamente pelas entidades estaticas adjacentes forjadas das avaliacoes em task forces adjuntas formadoras de balizamentos futuros experimentais transientes limitantes parciais.",
+      "explanation": "A documentação técnica preceitua limitações primordiais orbitando fortemente focando restritivamente englobando ativações harmônicas inteiras ímpares deixando espectros mutantes transientes imprecisos e fracionados de ordens limitadoras inter-harmônicas apartados tratados analogicamente pelas entidades estáticas adjacentes forjadas das avaliações em task forces adjuntas formadoras de balizamentos futuros experimentais transientes limitantes parciais.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Nas avaliacoes dimensionais garantidoras referenciadas avaliativas das emissoes perturbadoras injetadas pelo usuario produtor contido englobado o ____.",
+      "statement": "Nas avaliações dimensionais garantidoras referenciadas avaliativas das emissões perturbadoras injetadas pelo usuário produtor contido englobado o ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "TDD"
         }
       ],
-      "explanation": "O parametro normatizador consolidado balizador atestando limitacao puramente em correntes reativas espurias e consolidado fundamentado nas matrizes operativas atrelando os esforcos contínuos referenciado como a Distorcao Total de Demanda contendo as ponderacoes das frações limites na base do suprimento real avaliado rotineiro extraido mitigado na industria referenciada.",
+      "explanation": "O parâmetro normatizador consolidado balizador atestando limitação puramente em correntes reativas espúrias é consolidado fundamentado nas matrizes operativas atrelando os esforços contínuos referenciado como a Distorção Total de Demanda contendo as ponderações das frações limites na base do suprimento real avaliado rotineiro extraído mitigado na indústria referenciada.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Na definicao dos lacos referenciadores das avaliacoes limitantes estipuladoras de limites pre condicionantes aceitaveis do estudo de interacao o nó ____.",
+      "statement": "Na definição dos laços referenciadores das avaliações limitantes estipuladoras de limites pré condicionantes aceitáveis do estudo de interação o nó ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "PCC"
         }
       ],
-      "explanation": "O engate fisico limite parametrizado contendo as devidas legalidades de interacao medicao tolerâncias estipuladas balizadoras absorvidas nas normativas base contendo Point of Common Coupling define legal e fisicamente englobando a barreira separadora das interacoes passivas aceitáveis balizadas em matrizes das tensoes da distribuidora e consumidor estipulados ativamente e passivamente englobados atrelados conjuntos na rede.",
+      "explanation": "O engate físico limite parametrizado contendo as devidas legalidades de interação medição tolerâncias estipuladas balizadoras absorvidas nas normativas base contendo Point of Common Coupling define legal e fisicamente englobando a barreira separadora das interações passivas aceitáveis balizadas em matrizes das tensões da distribuidora e consumidor estipulados ativamente e passivamente englobados atrelados conjuntos na rede.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "No trato minucioso das avaliacoes referenciando limitacoes admissíveis toleradas balizadas aplicadas restringindo a atuacao poluidora o ____.",
+      "statement": "No trato minucioso das avaliações referenciando limitações admissíveis toleradas balizadas aplicadas restringindo a atuação poluidora o ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "demanda"
         }
       ],
-      "explanation": "O índice formador orientador mitigador amparador das tolerâncias estipula percentuais crescentes injetáveis de impurezas baseando sua premissa reativa puramente relacional contendo a proporção originada comparando o curto matriz da fonte fornecedora dividido equacionado e avaliado pela capacidade absorvida da carga máxima imposta referenciada consolidada e absorvida balizadora de energia do cliente no laco avaliativo reativo estático produtivo de consumo operante pre avaliado referenciado contínuo subjacente limitante atrelado unifilar da IEEE.",
+      "explanation": "O índice formador orientador mitigador amparador das tolerâncias estipula percentuais crescentes injetáveis de impurezas baseando sua premissa reativa puramente relacional contendo a proporção originada comparando o curto matriz da fonte fornecedora dividido equacionado e avaliado pela capacidade absorvida da carga máxima imposta referenciada consolidada e absorvida balizadora de energia do cliente no laço avaliativo reativo estático produtivo de consumo operante pré avaliado referenciado contínuo subjacente limitante atrelado unifilar da IEEE.",
       "difficulty": "hard"
     }
   ]

@@ -3,27 +3,27 @@
   "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
   "categoryOrder": 1,
   "module": "Normas SPDA",
-  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspecao",
+  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspeção",
   "moduleOrder": 2,
   "trail": "Inspeção e Manutenção de SPDA",
   "trailOrder": 5,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Segundo as diretrizes de inspecao da NBR 5419, quais sao os objetivos principais da vistoria de um SPDA apos a conclusao da obra e antes da ocupacao do predio?",
+      "statement": "Segundo as diretrizes de inspeção da NBR 5419, quais são os objetivos principais da vistoria de um SPDA após a conclusão da obra e antes da ocupação do prédio?",
       "options": [
-        "Aprovar o modelo arquitetonico da fachada e a pintura dos eletrodutos.",
-        "Assegurar que o SPDA executado esta da forma projetada, com materiais em boas condicoes e aterramento garantindo os valores adequados.",
-        "Medir o consumo eletrico do edificio e checar os disjuntores da subestacao de entrada.",
-        "Garantir que as descargas atmosfericas serao repelidas para as construcoes vizinhas."
+        "Aprovar o modelo arquitetônico da fachada e a pintura dos eletrodutos.",
+        "Assegurar que o SPDA executado está da forma projetada, com materiais em boas condições e aterramento garantindo os valores adequados.",
+        "Medir o consumo elétrico do edifício e checar os disjuntores da subestação de entrada.",
+        "Garantir que as descargas atmosféricas serão repelidas para as construções vizinhas."
       ],
       "correctIndex": 1,
-      "explanation": "As inspecoes tem como objetivo assegurar que o SPDA executado esta da forma projetada, os materiais estao em boas condicoes sem corrosoes, e que o arranjo de aterramento garante a resistencia exigida. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "As inspeções têm como objetivo assegurar que o SPDA executado está da forma projetada, os materiais estão em boas condições sem corrosões, e que o arranjo de aterramento garante a resistência exigida. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Independentemente da classe de risco do SPDA, qual e o periodo de tempo maximo previsto na norma para a realizacao da inspecao estritamente visual de todos os elementos aparentes do sistema?",
+      "statement": "Independentemente da classe de risco do SPDA, qual é o período de tempo máximo previsto na norma para a realização da inspeção estritamente visual de todos os elementos aparentes do sistema?",
       "options": [
         "Semestralmente",
         "Anualmente",
@@ -31,51 +31,51 @@
         "A cada 5 anos"
       ],
       "correctIndex": 1,
-      "explanation": "Conforme a ABNT, deve haver um periodo de tempo previsto para as inspecoes, sendo que anualmente e necessaria uma inspecao visual para todos os elementos aparentes do SPDA. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Conforme a ABNT, deve haver um período de tempo previsto para as inspeções, sendo que anualmente é necessária uma inspeção visual para todos os elementos aparentes do SPDA. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Legal e tecnicamente, quem e o profissional com as atribuicoes habilitadas e reconhecidas pelo conselho de classe para assinar e emitir o Laudo de Inspecao e Manutencao de um SPDA?",
+      "statement": "Legal e tecnicamente, quem é o profissional com as atribuições habilitadas e reconhecidas pelo conselho de classe para assinar e emitir o Laudo de Inspeção e Manutenção de um SPDA?",
       "options": [
-        "Tecnico de Seguranca do Trabalho",
-        "Eletricista de Manutencao certificado",
+        "Técnico de Segurança do Trabalho",
+        "Eletricista de Manutenção certificado",
         "Engenheiro Eletricista com registro no CREA",
         "Engenheiro Civil ou Arquiteto"
       ],
       "correctIndex": 2,
-      "explanation": "Apenas o Engenheiro Eletricista registrado no CREA e habilitado para emitir e assinar o Laudo de Inspecao e Manutencao do SPDA, assumindo a responsabilidade legal. (Fonte: Guia Completo de Manutencao SPDA, Jel Para-raios)",
+      "explanation": "Apenas o Engenheiro Eletricista registrado no CREA é habilitado para emitir e assinar o Laudo de Inspeção e Manutenção do SPDA, assumindo a responsabilidade legal. (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para integrar as exigencias do SPDA a seguranca do trabalho em eletricidade imposta pela NR-10, o Laudo de Inspecao do SPDA deve compor obrigatoriamente qual arquivo do estabelecimento (para cargas superiores a 75 kW)?",
+      "statement": "Para integrar as exigências do SPDA à segurança do trabalho em eletricidade imposta pela NR-10, o Laudo de Inspeção do SPDA deve compor obrigatoriamente qual arquivo do estabelecimento (para cargas superiores a 75 kW)?",
       "options": [
-        "Programa de Prevencao de Riscos Ambientais (PPRA)",
-        "Prontuario de Instalacoes Eletricas (PIE)",
+        "Programa de Prevenção de Riscos Ambientais (PPRA)",
+        "Prontuário de Instalações Elétricas (PIE)",
         "Auto de Vistoria do Corpo de Bombeiros (AVCB)",
-        "Relatorio Tecnico de Incendio (RTI)"
+        "Relatório Técnico de Incêndio (RTI)"
       ],
       "correctIndex": 1,
-      "explanation": "O Prontuario de Instalacoes Eletricas (PIE), documento obrigatorio pela NR-10, deve conter o Laudo de Inspecao do SPDA com periodicidade definida. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O Prontuário de Instalações Elétricas (PIE), documento obrigatório pela NR-10, deve conter o Laudo de Inspeção do SPDA com periodicidade definida. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Alem das inspecoes periodicas programadas (visuais e completas), existem eventos que desencadeiam a necessidade de uma vistoria imediata do SPDA. Qual cenario exige tal acao?",
+      "statement": "Além das inspeções periódicas programadas (visuais e completas), existem eventos que desencadeiam a necessidade de uma vistoria imediata do SPDA. Qual cenário exige tal ação?",
       "options": [
-        "Sempre que o imovel mudar de dono na escritura publica.",
-        "Em qualquer momento que a construcao passar por modificacoes ou apos a suspeita de impacto de uma descarga atmosferica.",
-        "A cada troca de estacao do ano (verao para o outono), devido ao regime de chuvas.",
-        "Exclusivamente quando os quadros eletricos do predio apresentarem conta de luz elevada."
+        "Sempre que o imóvel mudar de dono na escritura pública.",
+        "Em qualquer momento que a construção passar por modificações ou após a suspeita de impacto de uma descarga atmosférica.",
+        "A cada troca de estação do ano (verão para o outono), devido ao regime de chuvas.",
+        "Exclusivamente quando os quadros elétricos do prédio apresentarem conta de luz elevada."
       ],
       "correctIndex": 1,
-      "explanation": "Uma inspecao deve ocorrer a qualquer momento que a construcao passar por modificacoes, ou se for identificado/suspeito que a edificacao foi atingida por um raio. (Fonte: Cleiton Junior Lopes / ABNT NBR 5419:2026 Guia pratico)",
+      "explanation": "Uma inspeção deve ocorrer a qualquer momento que a construção passar por modificações, ou se for identificado/suspeito que a edificação foi atingida por um raio. (Fonte: Cleiton Junior Lopes / ABNT NBR 5419:2026 Guia prático)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para edificacoes que estejam submetidas a condicoes operacionais ou ambientais severas, como as expostas a agressiva corrosao da maresia em areas litoraneas ou os depositos de explosivos, qual o prazo normativo maximo para a inspecao completa do SPDA?",
+      "statement": "Para edificações que estejam submetidas a condições operacionais ou ambientais severas, como as expostas à agressiva corrosão da maresia em áreas litorâneas ou os depósitos de explosivos, qual o prazo normativo máximo para a inspeção completa do SPDA?",
       "options": [
         "6 meses",
         "1 ano",
@@ -83,12 +83,12 @@
         "5 anos"
       ],
       "correctIndex": 1,
-      "explanation": "A norma dita um periodo maximo de 1 ano para construcoes expostas a condicoes severas como regioes de maresia, ambientes industriais com produtos agressivos e armazenagem de explosivos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A norma dita um período máximo de 1 ano para construções expostas a condições severas como regiões de maresia, ambientes industriais com produtos agressivos e armazenagem de explosivos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Construcoes focadas no uso publico e que apresentam grande concentracao de pessoas (como shoppings, teatros, hospitais, escolas) possuem uma exigencia propria para a inspecao completa. Qual e o tempo maximo deste ciclo?",
+      "statement": "Construções focadas no uso público e que apresentam grande concentração de pessoas (como shoppings, teatros, hospitais, escolas) possuem uma exigência própria para a inspeção completa. Qual é o tempo máximo deste ciclo?",
       "options": [
         "1 ano",
         "2 anos",
@@ -96,12 +96,12 @@
         "5 anos"
       ],
       "correctIndex": 2,
-      "explanation": "A norma exige um periodo maximo de 3 anos para construcoes com grande concentracao de pessoas, como hospitais, shoppings e estadios. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A norma exige um período máximo de 3 anos para construções com grande concentração de pessoas, como hospitais, shoppings e estádios. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para edificacoes residenciais e prediais comerciais convencionais, sem riscos atipicos de explosao e que nao se situem em regioes de grande agressividade climatica, a NBR 5419 exige inspecao completa a cada:",
+      "statement": "Para edificações residenciais e prediais comerciais convencionais, sem riscos atípicos de explosão e que não se situem em regiões de grande agressividade climática, a NBR 5419 exige inspeção completa a cada:",
       "options": [
         "1 ano",
         "3 anos",
@@ -109,109 +109,109 @@
         "10 anos"
       ],
       "correctIndex": 2,
-      "explanation": "Para construcoes comuns (residenciais, comerciais, agricolas) que nao tenham risco de explosao e condicoes severas, a inspecao completa possui um periodo maximo de 5 anos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Para construções comuns (residenciais, comerciais, agrícolas) que não tenham risco de explosão e condições severas, a inspeção completa possui um período máximo de 5 anos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo as recomendacoes praticas e os criterios adotados na elaboracao de Planos de Manutencao baseados nas Classes de Risco (I a IV), qual e o cronograma correto de inspecao exigido?",
+      "statement": "Segundo as recomendações práticas e os critérios adotados na elaboração de Planos de Manutenção baseados nas Classes de Risco (I a IV), qual é o cronograma correto de inspeção exigido?",
       "options": [
         "Classe I: Anual / Classe II: a cada 2 anos / Classe III: a cada 3 anos / Classe IV: a cada 5 anos.",
-        "Classe I, II e III: Anual / Classe IV: Isenta de inspecao.",
+        "Classe I, II e III: Anual / Classe IV: Isenta de inspeção.",
         "Todas as Classes devem ser inspecionadas integralmente a cada 6 meses.",
         "Classe I: 5 anos / Classe II: 3 anos / Classe III: 2 anos / Classe IV: Anual."
       ],
       "correctIndex": 0,
-      "explanation": "Conforme a recomendacao para manutencao, a frequencia varia: Classe I: anual; Classe II: a cada 2 anos; Classe III: a cada 3 anos; Classe IV: a cada 5 anos. (Fonte: Guia Completo de Manutencao SPDA, Jel Para-raios)",
+      "explanation": "Conforme a recomendação para manutenção, a frequência varia: Classe I: anual; Classe II: a cada 2 anos; Classe III: a cada 3 anos; Classe IV: a cada 5 anos. (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a norma, um dos objetivos da inspecao e verificar os arranjos e assegurar que a resistencia do solo esta aceitavel. Se o projeto adotar metodologias avancadas de prospeccao, qual prerrogativa o engenheiro pode ter sobre o laudo das medicoes de resistencia em uma nova obra?",
+      "statement": "Segundo a norma, um dos objetivos da inspeção é verificar os arranjos e assegurar que a resistência do solo está aceitável. Se o projeto adotar metodologias avançadas de prospecção, qual prerrogativa o engenheiro pode ter sobre o laudo das medições de resistência em uma nova obra?",
       "options": [
-        "Se o construtor utilizar cobre, dispensa-se a analise de solo permanentemente.",
-        "Se for utilizado um software adequado com estratificacao do solo, a norma permite aferir o valor por calculo e dispensar outras medicoes fisicas iniciais.",
-        "Pode-se utilizar a resistencia informada nos projetos eletricos da concessionaria vizinha.",
-        "A medicao so e dispensada se o predio for erguido sobre macico rochoso."
+        "Se o construtor utilizar cobre, dispensa-se a análise de solo permanentemente.",
+        "Se for utilizado um software adequado com estratificação do solo, a norma permite aferir o valor por cálculo e dispensar outras medições físicas iniciais.",
+        "Pode-se utilizar a resistência informada nos projetos elétricos da concessionária vizinha.",
+        "A medição só é dispensada se o prédio for erguido sobre maciço rochoso."
       ],
       "correctIndex": 1,
-      "explanation": "A norma indica que se for utilizado um software adequado e a estratificacao do solo no projeto, pode-se aferir o valor de resistencia e assim e dispensado outras medicoes de campo inicialmente. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A norma indica que se for utilizado um software adequado e a estratificação do solo no projeto, pode-se aferir o valor de resistência e assim é dispensado outras medições de campo inicialmente. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O SPDA foi concebido para lidar integralmente com os fenomenos naturais, portanto a ocorrencia repetitiva de descargas atmosfericas diretas em uma edificacao nao causa nenhuma degradacao do sistema, que permanece ileso e dispensa reparos ate a proxima manutencao preventiva oficial de 5 anos.",
+      "statement": "O SPDA foi concebido para lidar integralmente com os fenômenos naturais, portanto a ocorrência repetitiva de descargas atmosféricas diretas em uma edificação não causa nenhuma degradação do sistema, que permanece ileso e dispensa reparos até a próxima manutenção preventiva oficial de 5 anos.",
       "correctAnswer": false,
-      "explanation": "A cada descarga eletrica, a eficiencia do sistema pode ser comprometida, tornando-se essencial a manutencao regular para constatar danos aparentes e desgaste apos a ocorrencia de impactos. (Fonte: Guia Completo de Manutencao SPDA, Jel Para-raios)",
+      "explanation": "A cada descarga elétrica, a eficiência do sistema pode ser comprometida, tornando-se essencial a manutenção regular para constatar danos aparentes e desgaste após a ocorrência de impactos. (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Embora tecnicos em eletrotecnica ou instaladores eletricistas possam atuar em medicoes de campo e montagem, eles nao possuem atribuicao legal para emitir e assinar independentemente um Laudo de Inspecao e Manutencao de SPDA sem um Engenheiro Eletricista.",
+      "statement": "Embora técnicos em eletrotécnica ou instaladores eletricistas possam atuar em medições de campo e montagem, eles não possuem atribuição legal para emitir e assinar independentemente um Laudo de Inspeção e Manutenção de SPDA sem um Engenheiro Eletricista.",
       "correctAnswer": true,
-      "explanation": "Apenas o Engenheiro Eletricista registrado no CREA e habilitado para emitir o Laudo, pois requer responsabilidade tecnica com ART, nao sendo competencia dos tecnicos. (Fonte: Guia Completo de Manutencao SPDA, Jel Para-raios)",
+      "explanation": "Apenas o Engenheiro Eletricista registrado no CREA é habilitado para emitir o Laudo, pois requer responsabilidade técnica com ART, não sendo competência dos técnicos. (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "No processo de vistoria e emissao do Laudo de SPDA, o Exame do Sistema de Aterramento e primordial, consistindo no teste instrumental da resistencia para assegurar que a corrente se dissipe no solo eficientemente e dentro dos limites normativos.",
+      "statement": "No processo de vistoria e emissão do Laudo de SPDA, o Exame do Sistema de Aterramento é primordial, consistindo no teste instrumental da resistência para assegurar que a corrente se dissipe no solo eficientemente e dentro dos limites normativos.",
       "correctAnswer": true,
-      "explanation": "A manutencao inclui testar a resistencia de aterramento usando dispositivos adequados e garantir que as conexoes entre os componentes e as hastes estejam firmes. (Fonte: Guia Completo de Manutencao SPDA, Jel Para-raios / HazOp Engenharia)",
+      "explanation": "A manutenção inclui testar a resistência de aterramento usando dispositivos adequados e garantir que as conexões entre os componentes e as hastes estejam firmes. (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios / HazOp Engenharia)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "As inspecoes do SPDA sao exigidas pelas regulamentacoes municipais (AVCB, alvaras) e devem ser concluidas de imediato assim que a obra e finalizada, antes mesmo do predio ser liberado para ocupacao de moradores ou trabalhadores.",
+      "statement": "As inspeções do SPDA são exigidas pelas regulamentações municipais (AVCB, alvarás) e devem ser concluídas de imediato assim que a obra é finalizada, antes mesmo do prédio ser liberado para ocupação de moradores ou trabalhadores.",
       "correctAnswer": true,
-      "explanation": "Toda edificacao precisa passar por inspecoes assim que a obra e concluida e antes que o predio seja ocupado, garantindo conformidade para operacao segura. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Toda edificação precisa passar por inspeções assim que a obra é concluída e antes que o prédio seja ocupado, garantindo conformidade para operação segura. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para assegurar total rastreabilidade, a documentacao tecnica atualizada de inspecao, que engloba relatorio de verificacao, dimensoes dos captores e resistencias de aterramento medidas, deve ser despachada e mantida estritamente nas delegacias do CREA, e nao na propria edificacao.",
+      "statement": "Para assegurar total rastreabilidade, a documentação técnica atualizada de inspeção, que engloba relatório de verificação, dimensões dos captores e resistências de aterramento medidas, deve ser despachada e mantida estritamente nas delegacias do CREA, e não na própria edificação.",
       "correctAnswer": false,
-      "explanation": "A norma exige que a documentacao tecnica (relatorios, desenhos, dados do solo) deve estar atualizada e mantida no local ou com a pessoa encarregada pela manutencao, nao exclusivamente em um orgao do governo. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A norma exige que a documentação técnica (relatórios, desenhos, dados do solo) deve estar atualizada e mantida no local ou com a pessoa encarregada pela manutenção, não exclusivamente em um órgão do governo. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Para atestar a validade legal do laudo durante inspecoes do Corpo de Bombeiros, e indispensavel a apresentacao da ____ (Anotacao de Responsabilidade Tecnica), documento formal emitido pelo Engenheiro Eletricista.",
+      "statement": "Para atestar a validade legal do laudo durante inspeções do Corpo de Bombeiros, é indispensável a apresentação da ____ (Anotação de Responsabilidade Técnica), documento formal emitido pelo Engenheiro Eletricista.",
       "blanks": [
         {
           "index": 0,
           "answer": "ART"
         }
       ],
-      "explanation": "A ART (Anotacao de Responsabilidade Tecnica) e o documento emitido pelo Engenheiro e obrigatorio para a validacao legal do Laudo de SPDA. (Fonte: Guia Completo de Manutencao SPDA, Jel Para-raios / HazOp Engenharia)",
+      "explanation": "A ART (Anotação de Responsabilidade Técnica) é o documento emitido pelo Engenheiro e obrigatório para a validação legal do Laudo de SPDA. (Fonte: Guia Completo de Manutenção SPDA, Jel Para-raios / HazOp Engenharia)",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Em ambientes corporativos e industriais, a falta de um Laudo de SPDA valido e das medicoes de aterramento atrelados ao ____ (Prontuario de Instalacoes Eletricas) e considerada infracao direta a norma NR-10.",
+      "statement": "Em ambientes corporativos e industriais, a falta de um Laudo de SPDA válido e das medições de aterramento atrelados ao ____ (Prontuário de Instalações Elétricas) é considerada infração direta à norma NR-10.",
       "blanks": [
         {
           "index": 0,
           "answer": "PIE"
         }
       ],
-      "explanation": "O Prontuario de Instalacoes Eletricas (PIE) e o documento da NR-10 onde devem obrigatoriamente constar os laudos, relatorios de medicao e ARTs de SPDA. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O Prontuário de Instalações Elétricas (PIE) é o documento da NR-10 onde devem obrigatoriamente constar os laudos, relatórios de medição e ARTs de SPDA. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "O planejamento de inspecao e manutencao ganhou reforcos com a versao 2026. A norma adverte que a suspeita de impacto de uma descarga pode ser revelada e acionar uma revisao imediata atraves da atuacao ou queima do equipamento ____ Classe I presente na entrada de energia.",
+      "statement": "O planejamento de inspeção e manutenção ganhou reforços com a versão 2026. A norma adverte que a suspeita de impacto de uma descarga pode ser revelada e acionar uma revisão imediata através da atuação ou queima do equipamento ____ Classe I presente na entrada de energia.",
       "blanks": [
         {
           "index": 0,
           "answer": "DPS"
         }
       ],
-      "explanation": "Entre as situacoes que exigem verificacao do sistema fora de epoca permanecem a suspeita de impacto e a atuacao de DPS Classe I na entrada da instalacao eletrica. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Entre as situações que exigem verificação do sistema fora de época permanecem a suspeita de impacto e a atuação de DPS Classe I na entrada da instalação elétrica. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "hard"
     }
   ]

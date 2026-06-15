@@ -156,7 +156,7 @@
     },
     {
       "type": "trueFalse",
-      "statement": "A verificação e cálculo do CTI em malhas de relés de retaguarda de tempo inverso exige imperiosamente analisar a sobreposição de tempo originada no patamar do pior cenário de curto-circuito na barra logo a frente do relé a jusante.",
+      "statement": "A verificação e cálculo do CTI em malhas de relés de retaguarda de tempo inverso exige imperiosamente analisar a sobreposição de tempo originada no patamar do pior cenário de curto-circuito na barra logo à frente do relé a jusante.",
       "correctAnswer": true,
       "explanation": "Para se garantir coordenação limpa, assegura-se cronometricamente que as curvas das duas proteções em cascata separem-se em Delta t no cenário crítico: a amplitude máxima do curto na fronteira do dispositivo secundário protegido. (Fonte: Apostila Proteção).",
       "difficulty": "medium",
@@ -166,7 +166,7 @@
       "type": "trueFalse",
       "statement": "As correntes parasitas coletadas pelo relé residual (50N/51N) apresentam valor de repouso igual a zero perante curtos-circuitos classificados como simétricos trifásicos limpos e sem contato com aterramentos.",
       "correctAnswer": true,
-      "explanation": "Tratando-se de faltas integralmente simétricas e trifásicas a soma vetorial contínua se anula na ligação das três fases não despejando correntes homopolares, inibindo atuações restritas as caixas de terra 51N. (Fonte: Virtus CProtBL2Cd1).",
+      "explanation": "Tratando-se de faltas integralmente simétricas e trifásicas a soma vetorial contínua se anula na ligação das três fases não despejando correntes homopolares, inibindo atuações restritas às caixas de terra 51N. (Fonte: Virtus CProtBL2Cd1).",
       "difficulty": "medium",
       "isTrue": true
     },

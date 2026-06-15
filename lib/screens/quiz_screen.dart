@@ -1445,7 +1445,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(children: [Icon(feedbackIcon, color: feedbackColor, size: 28), const SizedBox(width: 10), Text(feedbackTitle, style: TextStyle(color: feedbackColor, fontSize: 20, fontWeight: FontWeight.w700))]),
+          Row(children: [Icon(feedbackIcon, color: feedbackColor, size: 28), const SizedBox(width: 10), Expanded(child: Text(feedbackTitle, style: TextStyle(color: feedbackColor, fontSize: 20, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis))]),
           if (!_isCorrect) ...[const SizedBox(height: 10), Text(q['explanation'], style: const TextStyle(color: Colors.white, fontSize: 14, height: 1.4))],
           const SizedBox(height: 20),
           SizedBox(

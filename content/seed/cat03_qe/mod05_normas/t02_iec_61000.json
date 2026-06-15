@@ -1,6 +1,6 @@
 {
   "category": "Qualidade da Energia",
-  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categorySubtitle": "Fundamentos, Harmônicas, Transitórios, Medição e Normas",
   "categoryOrder": 2,
   "module": "Normas de Qualidade da Energia",
   "moduleSubtitle": "IEEE 519, IEC 61000, EN 50160 e PRODIST",
@@ -10,7 +10,7 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que define as diretrizes para os instrumentos de medicao de qualidade da energia e especifica as categorias de Classe A e Classe S segundo o documento informativo do PRODIST?",
+      "statement": "O que define as diretrizes para os instrumentos de medição de qualidade da energia e especifica as categorias de Classe A e Classe S segundo o documento informativo do PRODIST?",
       "options": [
         "Norma IEEE 519-2022.",
         "Norma IEC 61000-4-30.",
@@ -18,38 +18,38 @@
         "Norma IEC 61000-3-2."
       ],
       "correctIndex": 1,
-      "explanation": "O material da KRA2 Energia cita explicitamente que os analisadores de energia devem atender aos protocolos definidos pela norma da IEC 61000 serie 4, seguindo os metodos Classe A ou S da IEC 61000-4-30.",
+      "explanation": "O material da KRA2 Energia cita explicitamente que os analisadores de energia devem atender aos protocolos definidos pela norma da IEC 61000 série 4, seguindo os métodos Classe A ou S da IEC 61000-4-30.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a situacao pratica em que o regulamento estabelece a obrigatoriedade estrita do uso de medidores de qualidade da energia enquadrados unicamente como Classe A?",
+      "statement": "Qual é a situação prática em que o regulamento estabelece a obrigatoriedade estrita do uso de medidores de qualidade da energia enquadrados unicamente como Classe A?",
       "options": [
-        "Em aplicacoes envolvendo disputas judiciais.",
-        "Para monitoramento exclusivo de fator de potencia de residencias unifamiliares.",
-        "Em campanhas para fins puramente academicos e pesquisas estatisticas.",
-        "Para a avaliacao e projeto de filtros de harmonicas em instalacoes rurais isoladas."
+        "Em aplicações envolvendo disputas judiciais.",
+        "Para monitoramento exclusivo de fator de potência de residências unifamiliares.",
+        "Em campanhas para fins puramente acadêmicos e pesquisas estatísticas.",
+        "Para a avaliação e projeto de filtros de harmônicas em instalações rurais isoladas."
       ],
       "correctIndex": 0,
-      "explanation": "O documento informativo da KRA2 Energia estipula de forma direta que o Medidor Classe A e obrigatorio em aplicacoes envolvendo disputas judiciais.",
+      "explanation": "O documento informativo da KRA2 Energia estipula de forma direta que o Medidor Classe A é obrigatório em aplicações envolvendo disputas judiciais.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o principal uso tecnico destinado aos medidores de qualidade de energia classificados na norma como equipamentos de Classe S?",
+      "statement": "Qual é o principal uso técnico destinado aos medidores de qualidade de energia classificados na norma como equipamentos de Classe S?",
       "options": [
-        "Validacao de faturas com disputas judiciais ativas em alta tensao contra concessionarias.",
-        "Inspecao exclusiva em transformadores a seco operando a vazio.",
-        "Utilizado principalmente para propositos estatisticos, como as campanhas de medicao amostral.",
-        "Apuracao de correntes continuas parasitas em geradores sincronos isolados."
+        "Validação de faturas com disputas judiciais ativas em alta tensão contra concessionárias.",
+        "Inspeção exclusiva em transformadores a seco operando a vazio.",
+        "Utilizado principalmente para propósitos estatísticos, como as campanhas de medição amostral.",
+        "Apuração de correntes contínuas parasitas em geradores síncronos isolados."
       ],
       "correctIndex": 2,
-      "explanation": "O documento de parametros da KRA2 Energia define que o Medidor Classe S e utilizado principalmente para propositos estatisticos, como campanhas de medicao.",
+      "explanation": "O documento de parâmetros da KRA2 Energia define que o Medidor Classe S é utilizado principalmente para propósitos estatísticos, como campanhas de medição.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O indicador de flutuacao de tensao denominado Pst e utilizado para avaliar a cintilacao luminosa (flicker). Qual e o exato periodo continuo de medicao que este indicador representa?",
+      "statement": "O indicador de flutuação de tensão denominado Pst é utilizado para avaliar a cintilação luminosa (flicker). Qual é o exato período contínuo de medição que este indicador representa?",
       "options": [
         "1 minuto.",
         "10 minutos.",
@@ -57,12 +57,12 @@
         "168 horas."
       ],
       "correctIndex": 1,
-      "explanation": "O item 58 do PRODIST Modulo 8 define que o indicador Pst representa a severidade associada a flutuacao de tensao verificada num periodo continuo de 10 minutos.",
+      "explanation": "O item 58 do PRODIST Módulo 8 define que o indicador Pst representa a severidade associada à flutuação de tensão verificada num período contínuo de 10 minutos.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O indicador Plt mensura de forma agrupada a severidade dos niveis de cintilacao luminosa de longa duracao. Qual e o periodo continuo equivalente que ele avalia de acordo com as diretrizes do setor?",
+      "statement": "O indicador Plt mensura de forma agrupada a severidade dos níveis de cintilação luminosa de longa duração. Qual é o período contínuo equivalente que ele avalia de acordo com as diretrizes do setor?",
       "options": [
         "10 minutos.",
         "1 hora.",
@@ -70,148 +70,148 @@
         "24 horas."
       ],
       "correctIndex": 2,
-      "explanation": "O item 59 do PRODIST Modulo 8 estipula que o indicador Plt representa a severidade dos niveis de cintilacao luminosa num periodo continuo de exatas 2 horas.",
+      "explanation": "O item 59 do PRODIST Módulo 8 estipula que o indicador Plt representa a severidade dos níveis de cintilação luminosa num período contínuo de exatas 2 horas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quanto ao calculo matematico do valor eficaz da tensao para a medicao de Eventos de Variacao de Tensao de Curta Duracao (VTCD), qual e o rigoroso requisito estabelecido para os medidores da Classe A?",
+      "statement": "Quanto ao cálculo matemático do valor eficaz da tensão para a medição de Eventos de Variação de Tensão de Curta Duração (VTCD), qual é o rigoroso requisito estabelecido para os medidores da Classe A?",
       "options": [
-        "Deve ser calculado a cada 10 minutos, desconsiderando picos e ruidos passivos da estacao.",
-        "Deve ser calculado a cada 1 ciclo inteiro, operando puramente na frequencia fundamental fixa de 60 Hz.",
-        "Deve ser calculado a cada meio ciclo, incluindo obrigatoriamente as distorcoes harmonicas e inter-harmonicas presentes na tensao.",
-        "O calculo e condensado estatisticamente em janelas estaticas de 3 segundos para suavizar impulsos oscilatorios espurios."
+        "Deve ser calculado a cada 10 minutos, desconsiderando picos e ruídos passivos da estação.",
+        "Deve ser calculado a cada 1 ciclo inteiro, operando puramente na frequência fundamental fixa de 60 Hz.",
+        "Deve ser calculado a cada meio ciclo, incluindo obrigatoriamente as distorções harmônicas e inter-harmônicas presentes na tensão.",
+        "O cálculo é condensado estatisticamente em janelas estáticas de 3 segundos para suavizar impulsos oscilatórios espúrios."
       ],
       "correctIndex": 2,
-      "explanation": "O informe tecnico da KRA2 Energia sobre o PRODIST especifica que, na Classe A, o valor eficaz da tensao (VTCD) deve ser calculado a cada meio ciclo (1/2), incluindo obrigatoriamente as harmonicas e inter-harmonicas.",
+      "explanation": "O informe técnico da KRA2 Energia sobre o PRODIST especifica que, na Classe A, o valor eficaz da tensão (VTCD) deve ser calculado a cada meio ciclo (1/2), incluindo obrigatoriamente as harmônicas e inter-harmônicas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para assegurar a validade do equipamento Classe A na apuracao e registro dos indicadores estatisticos associados as distorcoes harmonicas, qual e a incerteza maxima tolerada imposta pelo regulamento?",
+      "statement": "Para assegurar a validade do equipamento Classe A na apuração e registro dos indicadores estatísticos associados às distorções harmônicas, qual é a incerteza máxima tolerada imposta pelo regulamento?",
       "options": [
-        "Inferior ou igual a 0,15 por cento da tensao de referencia estipulada de base.",
-        "Inferior ou igual a 5,0 por cento calculado sobre o valor real da tensao medida.",
-        "Inferior ou igual a 10,0 por cento referenciada a tensao nominal eficaz do equipamento.",
-        "Menor ou estritamente igual a 0,2 por cento absoluto da tensao de linha secundaria."
+        "Inferior ou igual a 0,15 por cento da tensão de referência estipulada de base.",
+        "Inferior ou igual a 5,0 por cento calculado sobre o valor real da tensão medida.",
+        "Inferior ou igual a 10,0 por cento referenciada à tensão nominal eficaz do equipamento.",
+        "Menor ou estritamente igual a 0,2 por cento absoluto da tensão de linha secundária."
       ],
       "correctIndex": 1,
-      "explanation": "Conforme descrito de forma objetiva no documento da KRA2 Energia, a incerteza de medicao requerida para as distorcoes harmonicas na Classe A deve ser inferior ou igual a 5,0 por cento da tensao medida.",
+      "explanation": "Conforme descrito de forma objetiva no documento da KRA2 Energia, a incerteza de medição requerida para as distorções harmônicas na Classe A deve ser inferior ou igual a 5,0 por cento da tensão medida.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como se diferenciam os limites regulamentares de incerteza de medicao na afericao dos fatores de desequilibrio de tensao (FD2 por cento e FD0 por cento) ao compararmos os medidores de Classe A com os de Classe S?",
+      "statement": "Como se diferenciam os limites regulamentares de incerteza de medição na aferição dos fatores de desequilíbrio de tensão (FD2 por cento e FD0 por cento) ao compararmos os medidores de Classe A com os de Classe S?",
       "options": [
-        "A Classe A exige um limite restrito de 0,15 por cento da tensao de referencia, enquanto a Classe S possui uma flexibilidade de ate 0,30 por cento.",
+        "A Classe A exige um limite restrito de 0,15 por cento da tensão de referência, enquanto a Classe S possui uma flexibilidade de até 0,30 por cento.",
         "A Classe A tem margem livre desde que a Classe S opere com limite total restrito e avalizado de 5,0 por cento absolutos.",
-        "A Classe A opera com margem de erro de 0,2 por cento no maximo e a Classe S e totalmente isenta de exigencias estipuladas para o cenario de desequilibrio.",
-        "Ambas as classes de instrumentos demandam invariavelmente uma incerteza de desequilibrio estritamente nao superior a 0,30 por cento."
+        "A Classe A opera com margem de erro de 0,2 por cento no máximo e a Classe S é totalmente isenta de exigências estipuladas para o cenário de desequilíbrio.",
+        "Ambas as classes de instrumentos demandam invariavelmente uma incerteza de desequilíbrio estritamente não superior a 0,30 por cento."
       ],
       "correctIndex": 0,
-      "explanation": "O documento da KRA2 Energia sobre o PRODIST assinala que a incerteza de medicao para os indicadores FD2 por cento e FD0 por cento nao deve ser superior a 0,15 por cento na Classe A e 0,30 por cento na Classe S.",
+      "explanation": "O documento da KRA2 Energia sobre o PRODIST assinala que a incerteza de medição para os indicadores FD2 por cento e FD0 por cento não deve ser superior a 0,15 por cento na Classe A e 0,30 por cento na Classe S.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O PRODIST Modulo 8 fundamenta a formula do indicador de cintilacao Pst baseando-se na funcao de distribuicao acumulada complementar extraida de uma metodologia normativa especifica. Em qual norma internacional esse calculo repousa inteiramente?",
+      "statement": "O PRODIST Módulo 8 fundamenta a fórmula do indicador de cintilação Pst baseando-se na função de distribuição acumulada complementar extraída de uma metodologia normativa específica. Em qual norma internacional esse cálculo repousa inteiramente?",
       "options": [
         "IEC 61000-3-2 referente a Harmonic Current Emissions.",
-        "IEC 61000-4-7 referente ao guia basico de Harmonicas.",
+        "IEC 61000-4-7 referente ao guia básico de Harmônicas.",
         "IEC 61000-4-15 referente ao Flickermeter Functional and Design Specifications.",
         "IEC 61000-4-30 referente ao Testing and measurement techniques Methods."
       ],
       "correctIndex": 2,
-      "explanation": "O item 61 do PRODIST Modulo 8 referencia especificamente a norma IEC 61000-4-15 Flickermeter Functional and Design Specifications para fundamentar os arranjos e caracteristicas da funcao do Pst.",
+      "explanation": "O item 61 do PRODIST Módulo 8 referencia especificamente a norma IEC 61000-4-15 Flickermeter Functional and Design Specifications para fundamentar os arranjos e características da função do Pst.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Atraves de qual metodo estatistico e algebrico preciso a norma estabelece o computo final da severidade de cintilacao de longa duracao (Plt) a partir das capturas de curta duracao efetuadas para a avaliacao de flicker?",
+      "statement": "Através de qual método estatístico e algébrico preciso a norma estabelece o cômputo final da severidade de cintilação de longa duração (Plt) a partir das capturas de curta duração efetuadas para a avaliação de flicker?",
       "options": [
-        "Pela media aritmetica direta das 6 amostras Pst capturadas em intervalos pares e defasados ao longo da hora inteira de inspecao.",
-        "Atraves do extrato da raiz cubica da media da soma dos cubos de exatas 12 amostras consecutivas e validas do indice Pst.",
-        "Pelo calculo padrao de desvio ponderado aplicado sobre a matriz de 144 amostras Pst agregadas e somadas no decorrer do mes civil.",
-        "Apenas pela adocao integral do valor de pico de crista superado em 95 por cento do tempo analitico entre as ultimas 12 medicoes registradas do Pst."
+        "Pela média aritmética direta das 6 amostras Pst capturadas em intervalos pares e defasados ao longo da hora inteira de inspeção.",
+        "Através do extrato da raiz cúbica da média da soma dos cubos de exatas 12 amostras consecutivas e válidas do índice Pst.",
+        "Pelo cálculo padrão de desvio ponderado aplicado sobre a matriz de 144 amostras Pst agregadas e somadas no decorrer do mês civil.",
+        "Apenas pela adoção integral do valor de pico de crista superado em 95 por cento do tempo analítico entre as últimas 12 medições registradas do Pst."
       ],
       "correctIndex": 1,
-      "explanation": "A Equacao 18 e o item 62 do PRODIST Modulo 8 determinam que o indicador Plt seja calculado aplicando a raiz cubica da media da soma dos cubos gerados por 12 amostras consecutivas do indice Pst.",
+      "explanation": "A Equação 18 e o item 62 do PRODIST Módulo 8 determinam que o indicador Plt seja calculado aplicando a raiz cúbica da média da soma dos cubos gerados por 12 amostras consecutivas do índice Pst.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Na avaliacao subjetiva voltada para as perturbacoes nas variacoes de iluminacao, o guia de estudos sobre flutuacoes garante que a gravidade da cintilacao pode ser avaliada atraves de tratamentos baseados em um dia pontual de ensaios ou avaliacoes estendidas de uma semana, formatando os indices das metricas de flicker.",
+      "statement": "Na avaliação subjetiva voltada para as perturbações nas variações de iluminação, o guia de estudos sobre flutuações garante que a gravidade da cintilação pode ser avaliada através de tratamentos baseados em um dia pontual de ensaios ou avaliações estendidas de uma semana, formatando os índices das métricas de flicker.",
       "correctAnswer": true,
-      "explanation": "O material especializado sobre FLICKER do portal Procobre informa claramente que a avaliacao da severidade do flicker pode ser realizada a partir de dois criterios baseados nas medicoes de um dia ou de uma semana para consolidar os indices de curta e longa duracao.",
+      "explanation": "O material especializado sobre FLICKER do portal Procobre informa claramente que a avaliação da severidade do flicker pode ser realizada a partir de dois critérios baseados nas medições de um dia ou de uma semana para consolidar os índices de curta e longa duração.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Ao formatar normativamente o processamento estatistico basico das medicoes de distorcoes harmonicas exigidas para os analisadores da Classe A, a regulamentacao estabelece e orienta de forma categorica o uso unicamente de Grupos Harmonicos plenos, proibindo terminantemente a adocao interna da configuracao via Subgrupos Harmonicos.",
+      "statement": "Ao formatar normativamente o processamento estatístico básico das medições de distorções harmônicas exigidas para os analisadores da Classe A, a regulamentação estabelece e orienta de forma categórica o uso unicamente de Grupos Harmônicos plenos, proibindo terminantemente a adoção interna da configuração via Subgrupos Harmônicos.",
       "correctAnswer": false,
-      "explanation": "O documento informativo da KRA2 Energia expoe as regras ditando o exato oposto, relatando especificamente para o equipamento de Classe A que a medicao das distorcoes harmonicas deve sim considerar a aplicacao de Subgrupos Harmonicos para realizar a devida composicao dos registros de 12 ciclos.",
+      "explanation": "O documento informativo da KRA2 Energia expõe as regras ditando o exato oposto, relatando especificamente para o equipamento de Classe A que a medição das distorções harmônicas deve sim considerar a aplicação de Subgrupos Harmônicos para realizar a devida composição dos registros de 12 ciclos.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Averiguando o rigor de tolerancias estabelecidas nas limitacoes para incerteza na captacao e representacao de eventos de Variacao de Tensao de Curta Duracao (VTCD), nota-se que medidores limitados a Classe S comportam erros de amplitude de ate 1,0 por cento referenciados na base, enquanto aparelhos balizados em Classe A estao constrangidos a incerteza restrita de ate 0,2 por cento.",
+      "statement": "Averiguando o rigor de tolerâncias estabelecidas nas limitações para incerteza na captação e representação de eventos de Variação de Tensão de Curta Duração (VTCD), nota-se que medidores limitados à Classe S comportam erros de amplitude de até 1,0 por cento referenciados na base, enquanto aparelhos balizados em Classe A estão constrangidos à incerteza restrita de até 0,2 por cento.",
       "correctAnswer": true,
-      "explanation": "O conjunto normativo e o manual da KRA2 Energia exposto pelo PRODIST determina com clareza as exatas tolerancias fisicas citadas, fixando incertezas da amplitude VTCD cravadas em 0,2 por cento limitante a Classe A em contraposicao as restricoes mais laxas de 1,0 por cento designadas aos equipamentos estatisticos de Classe S.",
+      "explanation": "O conjunto normativo e o manual da KRA2 Energia exposto pelo PRODIST determina com clareza as exatas tolerâncias físicas citadas, fixando incertezas da amplitude VTCD cravadas em 0,2 por cento limitante à Classe A em contraposição às restrições mais laxas de 1,0 por cento designadas aos equipamentos estatísticos de Classe S.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Ancorada nas garantias de repetibilidade para os processamentos e metricas de cintilacao, a metodologia que abraca a calibracao da integridade dos registros na Classe A e S impoe que as saidas dos limites de Pst e Plt incorram necessariamente sob um teto de incerteza da medicao sempre menor ou igual a 5,0 por cento avaliado e parametrizado sobre seus correspondentes valores unitarios.",
+      "statement": "Ancorada nas garantias de repetibilidade para os processamentos e métricas de cintilação, a metodologia que abraça a calibração da integridade dos registros na Classe A e S impõe que as saídas dos limites de Pst e Plt incorram necessariamente sob um teto de incerteza da medição sempre menor ou igual a 5,0 por cento avaliado e parametrizado sobre seus correspondentes valores unitários.",
       "correctAnswer": true,
-      "explanation": "As clausulas e as caracteristicas informadas no relatorio da KRA2 que descrevem de forma simultanea as qualidades tanto dos dispositivos validados na Classe A quanto aos designados para a Classe S sublinham de modo textual que as incertezas de medicao associadas aos referidos agregados do Pst e Plt devem ser estatisticamente inferiores ou igualadas aos estritos limites de 5,0 por cento da propria variacao.",
+      "explanation": "As cláusulas e as características informadas no relatório da KRA2 que descrevem de forma simultânea as qualidades tanto dos dispositivos validados na Classe A quanto aos designados para a Classe S sublinham de modo textual que as incertezas de medição associadas aos referidos agregados do Pst e Plt devem ser estatisticamente inferiores ou igualadas aos estritos limites de 5,0 por cento da própria variação.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A categoria subsidiaria de medicao eletronica homologada nominalmente sob o rotulo de Classe B foi introduzida na atualizacao da medicao como um artificio referencial que atende integralmente os criterios basais da resolucao IEC 61000-4-30, sendo dessa forma a solucao prioritariamente aconselhada para a expansao de campanhas no sistema das empresas nacionais em virtude de sua relacao de custo e beneficio.",
+      "statement": "A categoria subsidiária de medição eletrônica homologada nominalmente sob o rótulo de Classe B foi introduzida na atualização da medição como um artifício referencial que atende integralmente os critérios basais da resolução IEC 61000-4-30, sendo dessa forma a solução prioritariamente aconselhada para a expansão de campanhas no sistema das empresas nacionais em virtude de sua relação de custo e benefício.",
       "correctAnswer": false,
-      "explanation": "A nota de rodape contida no documento instrucional KRA2 Energia emite o parecer contrario asseverando que a Classe B existe essencialmente apenas para abarcar os antigos medidores que comprovadamente nao atendem aos devidos criterios da norma IEC 61000-4-30 e que ha efetivamente as devidas recomendacoes para que as areas tecnicas determinem com clareza a sua nao utilizacao.",
+      "explanation": "A nota de rodapé contida no documento instrucional KRA2 Energia emite o parecer contrário asseverando que a Classe B existe essencialmente apenas para abarcar os antigos medidores que comprovadamente não atendem aos devidos critérios da norma IEC 61000-4-30 e que há efetivamente as devidas recomendações para que as áreas técnicas determinem com clareza a sua não utilização.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A apuracao focada em garantir uma resolucao irrefutavel face a determinacoes burocraticas ou operativas com carater indenizatorio baliza nas regulamentacoes que todas as inspecoes que comportam acoes ou disputas judiciais sejam efetuadas apenas atraves dos certificados registradores e analisadores tipificados na referenciada Classe ____ do PRODIST.",
+      "statement": "A apuração focada em garantir uma resolução irrefutável face a determinações burocráticas ou operativas com caráter indenizatório baliza nas regulamentações que todas as inspeções que comportam ações ou disputas judiciais sejam efetuadas apenas através dos certificados registradores e analisadores tipificados na referenciada Classe ____ do PRODIST.",
       "blanks": [
         {
           "index": 0,
           "answer": "A"
         }
       ],
-      "explanation": "Na apresentacao sistemica das hierarquias e finalidades metrologicas oriundas no manual instrutivo pertinente, a KRA2 Energia atesta abertamente em seu primeiro item enumerado referente ao equipamento da Classe A sendo este considerado obrigatorio em aplicacoes envolvendo disputas judiciais.",
+      "explanation": "Na apresentação sistêmica das hierarquias e finalidades metrológicas oriundas no manual instrutivo pertinente, a KRA2 Energia atesta abertamente em seu primeiro item enumerado referente ao equipamento da Classe A sendo este considerado obrigatório em aplicações envolvendo disputas judiciais.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Em instalacoes e alimentadores submetidos a regimes repletos de ligamentos e operacoes flutuantes onde os reflexos visuais tornam-se constantes e a regulamentacao e demandada para levantar as medias em periodos longos agregando amostragens que formam blocos robustos em 2 horas consecutivas, aplica-se o indicador avaliativo da flutuacao denominado pela sigla regulada mundialmente por ____.",
+      "statement": "Em instalações e alimentadores submetidos a regimes repletos de ligamentos e operações flutuantes onde os reflexos visuais tornam-se constantes e a regulamentação é demandada para levantar as médias em períodos longos agregando amostragens que formam blocos robustos em 2 horas consecutivas, aplica-se o indicador avaliativo da flutuação denominado pela sigla regulada mundialmente por ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Plt"
         }
       ],
-      "explanation": "A nomenclatura normatizada para as analises visuais detalhada na redacao oficial do Modulo 8 do PRODIST item 59 garante textualizando que o indicador Plt representa a severidade dos niveis de cintilacao luminosa associados a flutuacao de tensao verificada num periodo continuo de 2 horas.",
+      "explanation": "A nomenclatura normatizada para as análises visuais detalhada na redação oficial do Módulo 8 do PRODIST item 59 garante textualizando que o indicador Plt representa a severidade dos níveis de cintilação luminosa associados à flutuação de tensão verificada num período contínuo de 2 horas.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Os padroes que suportam a validade das curvas analiticas de piscar de lampadas dependem inteiramente de requisitos formulados em arquiteturas de blocos da norma global apontada como IEC 61000-4-15 que instituiu mundialmente as caracteristicas fisicas de simulacao do aparelho virtual ou eletronico intitulado originalmente no padrao pelo termo em ingles ____.",
+      "statement": "Os padrões que suportam a validade das curvas analíticas de piscar de lâmpadas dependem inteiramente de requisitos formulados em arquiteturas de blocos da norma global apontada como IEC 61000-4-15 que instituiu mundialmente as características físicas de simulação do aparelho virtual ou eletrônico intitulado originalmente no padrão pelo termo em inglês ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Flickermeter"
         }
       ],
-      "explanation": "A documentacao embutida nas definicoes de indicadores Pst abordadas do PRODIST Modulo 8 reproduz o referencial normativo ditando textualmente o documento internacional sob o carimbo de IEC 61000-4-15 Flickermeter Functional and Design Specifications que fornece tal suporte teorico ao arranjo das medicoes.",
+      "explanation": "A documentação embutida nas definições de indicadores Pst abordadas do PRODIST Módulo 8 reproduz o referencial normativo ditando textualmente o documento internacional sob o carimbo de IEC 61000-4-15 Flickermeter Functional and Design Specifications que fornece tal suporte teórico ao arranjo das medições.",
       "difficulty": "hard"
     }
   ]

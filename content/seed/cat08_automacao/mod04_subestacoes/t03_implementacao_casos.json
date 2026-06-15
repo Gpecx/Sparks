@@ -10,7 +10,7 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual arquivo SCL padronizado consolida e descreve a subestacao completa contendo todos os IEDs interligados e a configuracao da comunicacao?",
+      "statement": "Qual arquivo SCL padronizado consolida e descreve a subestação completa contendo todos os IEDs interligados e a configuração da comunicação?",
       "options": [
         "ICD",
         "SCD",
@@ -18,145 +18,145 @@
         "CID"
       ],
       "correctIndex": 1,
-      "explanation": "O arquivo SCD (Substation Configuration Description) descreve todos os IEDs e a comunicacao global da planta.",
+      "explanation": "O arquivo SCD (Substation Configuration Description) descreve todos os IEDs e a comunicação global da planta.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em uma planta com varias subestacoes, qual tecnica foi aplicada aos switches para evitar acionamentos indevidos gerados pela duplicidade de MAC Address?",
+      "statement": "Em uma planta com várias subestações, qual técnica foi aplicada aos switches para evitar acionamentos indevidos gerados pela duplicidade de MAC Address?",
       "options": [
-        "Roteamento dinamico OSPF obrigando a conversao dos pacotes para envio MMS exclusivo.",
-        "Substituicao completa dos cabos de fibra por conexoes seriais RS-485 padronizadas.",
-        "Confinamento logico das mensagens GOOSE utilizando regras de VLAN nas portas conectadas.",
-        "Desativacao completa e permanente do protocolo GOOSE em todos os IEDs da planta."
+        "Roteamento dinâmico OSPF obrigando a conversão dos pacotes para envio MMS exclusivo.",
+        "Substituição completa dos cabos de fibra por conexões seriais RS-485 padronizadas.",
+        "Confinamento lógico das mensagens GOOSE utilizando regras de VLAN nas portas conectadas.",
+        "Desativação completa e permanente do protocolo GOOSE em todos os IEDs da planta."
       ],
       "correctIndex": 2,
-      "explanation": "A segregacao e o confinamento via VLAN impedem que pacotes GOOSE de uma usina vazem e atinjam IEDs de outras subestacoes.",
+      "explanation": "A segregação e o confinamento via VLAN impedem que pacotes GOOSE de uma usina vazem e atinjam IEDs de outras subestações.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na modernizacao e digitalizacao de subestacoes industriais, qual equipamento deixou de ser necessario por conta das logicas embarcadas nos IEDs atuais?",
+      "statement": "Na modernização e digitalização de subestações industriais, qual equipamento deixou de ser necessário por conta das lógicas embarcadas nos IEDs atuais?",
       "options": [
-        "O relogio satelital referencial GPS.",
-        "O servidor corporativo controlador de dominio de senhas.",
+        "O relógio satelital referencial GPS.",
+        "O servidor corporativo controlador de domínio de senhas.",
         "O switch ethernet industrial de camada 2 operante no Station Bus.",
-        "O Controlador Logico Programavel (PLC) das antigas cabines convencionais."
+        "O Controlador Lógico Programável (PLC) das antigas cabines convencionais."
       ],
       "correctIndex": 3,
-      "explanation": "A figura do PLC centralizador deixou de existir na maioria das aplicacoes, pois as logicas de intertravamento passaram a residir diretamente nos IEDs.",
+      "explanation": "A figura do PLC centralizador deixou de existir na maioria das aplicações, pois as lógicas de intertravamento passaram a residir diretamente nos IEDs.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para realizar a captura completa de trafego GOOSE via sniffer em campo, qual ajuste e mandatorio na porta do switch ethernet inteligente?",
+      "statement": "Para realizar a captura completa de tráfego GOOSE via sniffer em campo, qual ajuste é mandatório na porta do switch ethernet inteligente?",
       "options": [
-        "Habilitar a funcao de espelhamento de porta (Port Mirroring).",
-        "Desabilitar as redes virtuais e forcar o protocolo Spanning Tree.",
-        "Limitar a banda de passagem a uma fracao de 10 Mbps.",
-        "Converter a interface de operacao Full-Duplex para o modo Half-Duplex."
+        "Habilitar a função de espelhamento de porta (Port Mirroring).",
+        "Desabilitar as redes virtuais e forçar o protocolo Spanning Tree.",
+        "Limitar a banda de passagem a uma fração de 10 Mbps.",
+        "Converter a interface de operação Full-Duplex para o modo Half-Duplex."
       ],
       "correctIndex": 0,
-      "explanation": "O espelhamento de porta (Mirroring) direciona uma copia fiel do trafego passante ao analisador de rede sem paralisar o envio real do sistema.",
+      "explanation": "O espelhamento de porta (Mirroring) direciona uma cópia fiel do tráfego passante ao analisador de rede sem paralisar o envio real do sistema.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual caracteristica e tipica e exigida de uma Ferramenta de Configuracao do Sistema no contexto da norma IEC 61850?",
+      "statement": "Qual característica é típica e exigida de uma Ferramenta de Configuração do Sistema no contexto da norma IEC 61850?",
       "options": [
-        "Nao suportar unifilares ou diagramas eletricos graficos.",
-        "Permitir a engenharia de modelo top-down e o reuso de solucoes de forma off-line.",
-        "Trabalhar essencialmente online fazendo upload direto de registradores estaticos.",
+        "Não suportar unifilares ou diagramas elétricos gráficos.",
+        "Permitir a engenharia de modelo top-down e o reuso de soluções de forma off-line.",
+        "Trabalhar essencialmente online fazendo upload direto de registradores estáticos.",
         "Interagir e comissionar exclusivamente por cabos seriais dedicados do tipo RS-232."
       ],
       "correctIndex": 1,
-      "explanation": "Ferramentas de sistema possibilitam administracao off-line e modelagem top-down avancada, baseando-se na especificacao.",
+      "explanation": "Ferramentas de sistema possibilitam administração off-line e modelagem top-down avançada, baseando-se na especificação.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante o fluxo da engenharia, qual e o escopo pratico do arquivo gerado sob a extensao CID?",
+      "statement": "Durante o fluxo da engenharia, qual é o escopo prático do arquivo gerado sob a extensão CID?",
       "options": [
-        "Detalhar todos os IEDs de todas as plantas em anel da rede de concessao.",
-        "Representar exatamente um IED configurado com os dados e enderecos que este precisa deter.",
+        "Detalhar todos os IEDs de todas as plantas em anel da rede de concessão.",
+        "Representar exatamente um IED configurado com os dados e endereços que este precisa deter.",
         "Apontar unicamente os defeitos de firmware presentes na placa de rede do equipamento.",
-        "Relacionar apenas os desenhos mecanicos e unifilares abstratos do patio."
+        "Relacionar apenas os desenhos mecânicos e unifilares abstratos do pátio."
       ],
       "correctIndex": 1,
-      "explanation": "O arquivo CID (Configured IED Description) e derivado do SCD e contem a configuracao particular designada unicamente ao IED alvo.",
+      "explanation": "O arquivo CID (Configured IED Description) é derivado do SCD e contém a configuração particular designada unicamente ao IED alvo.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual acao de ciberseguranca implementada por servidores corporativos e essencial na mitigacao de riscos ligados ao acesso aos IEDs em campo?",
+      "statement": "Qual ação de cibersegurança implementada por servidores corporativos é essencial na mitigação de riscos ligados ao acesso aos IEDs em campo?",
       "options": [
-        "Bloquear inteiramente a leitura de todos os relatorios de eventos (MMS) por prevencao extrema.",
-        "Excluir compulsoriamente toda e qualquer redundancia em anel para limitar o transito dos dados.",
-        "Aplicar politicas severas de senhas com prazo de validade rigido e bloquear interfaces perifericas USB.",
-        "Obrigar o uso perpetuo de senhas de fabrica a fim de manter a compatibilidade original."
+        "Bloquear inteiramente a leitura de todos os relatórios de eventos (MMS) por prevenção extrema.",
+        "Excluir compulsoriamente toda e qualquer redundância em anel para limitar o trânsito dos dados.",
+        "Aplicar políticas severas de senhas com prazo de validade rígido e bloquear interfaces periféricas USB.",
+        "Obrigar o uso perpétuo de senhas de fábrica a fim de manter a compatibilidade original."
       ],
       "correctIndex": 2,
-      "explanation": "O servidor de dominio (Active Directory) gerencia senhas rotativas complexas e restringe as portas perifericas, barrando interacoes indevidas.",
+      "explanation": "O servidor de domínio (Active Directory) gerencia senhas rotativas complexas e restringe as portas periféricas, barrando interações indevidas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante o troubleshooting, o erro apontado como confRev mismatch indica estritamente qual impasse tecnico?",
+      "statement": "Durante o troubleshooting, o erro apontado como confRev mismatch indica estritamente qual impasse técnico?",
       "options": [
-        "Divergencia entre o nivel de sinal luminoso recebido na fibra e o limiar minimo do fotodiodo.",
-        "Esgotamento da capacidade reserva da bateria atrelada a placa principal do processador.",
-        "Incompatibilidade isolada entre as tensoes fisicas de operacao das bobinas e contatores.",
-        "Discrepancia entre a revisao de configuracao do dataset publicado e a versao que o IED assinante espera receber."
+        "Divergência entre o nível de sinal luminoso recebido na fibra e o limiar mínimo do fotodiodo.",
+        "Esgotamento da capacidade reserva da bateria atrelada à placa principal do processador.",
+        "Incompatibilidade isolada entre as tensões físicas de operação das bobinas e contatores.",
+        "Discrepância entre a revisão de configuração do dataset publicado e a versão que o IED assinante espera receber."
       ],
       "correctIndex": 3,
-      "explanation": "Ocorre a rejeicao da assinatura caso o ConfRev do bloco do publicador seja diferente do referencial alocado no IED receptor.",
+      "explanation": "Ocorre a rejeição da assinatura caso o ConfRev do bloco do publicador seja diferente do referencial alocado no IED receptor.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nos ensaios de redundancia relatados, o que foi observado ao interromper o link gerido unicamente pelo protocolo legado STP?",
+      "statement": "Nos ensaios de redundância relatados, o que foi observado ao interromper o link gerido unicamente pelo protocolo legado STP?",
       "options": [
-        "Ocorreram lacunas criticas de comunicacao de dezenas de segundos em virtude das etapas de escuta e recalculo da arvore logica.",
-        "O switch falhou de forma catastrofica demandando reinicio logico do firmware.",
-        "A comutacao ocorreu de modo instantaneo, caracterizando operacao seamless invisivel.",
+        "Ocorreram lacunas críticas de comunicação de dezenas de segundos em virtude das etapas de escuta e recálculo da árvore lógica.",
+        "O switch falhou de forma catastrófica demandando reinício lógico do firmware.",
+        "A comutação ocorreu de modo instantâneo, caracterizando operação seamless invisível.",
         "Os IEDs comutaram automaticamente e permanentemente para as seriais nativas de retaguarda."
       ],
       "correctIndex": 0,
-      "explanation": "Ao seccionar a fibra com STP, as etapas arborescentes de aprendizagem impoem tempo alto de comutacao, afetando duramente as transmissoes ativas.",
+      "explanation": "Ao seccionar a fibra com STP, as etapas arborescentes de aprendizagem impõem tempo alto de comutação, afetando duramente as transmissões ativas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para que IEDs em diferentes subestacoes mantenham a mesma base horaria via SNTP, qual implementacao infraestrutural e imperativa?",
+      "statement": "Para que IEDs em diferentes subestações mantenham a mesma base horária via SNTP, qual implementação infraestrutural é imperativa?",
       "options": [
-        "Desabilitar as funcoes NTP em redes fechadas focando apenas na modulacao IRIG-B.",
-        "A presenca de um gateway estabelecido possibilitando as faixas de rede comunicarem com a maquina referencial GPS.",
-        "Forcar o roteamento massivo e ininterrupto de broadcast storming em todos os dominios LAN A.",
-        "A aplicacao universal do protocolo PRP suprimindo todo desvio cronologico de propagacao MAC."
+        "Desabilitar as funções NTP em redes fechadas focando apenas na modulação IRIG-B.",
+        "A presença de um gateway estabelecido possibilitando as faixas de rede comunicarem com a máquina referencial GPS.",
+        "Forçar o roteamento massivo e ininterrupto de broadcast storming em todos os domínios LAN A.",
+        "A aplicação universal do protocolo PRP suprimindo todo desvio cronológico de propagação MAC."
       ],
       "correctIndex": 1,
-      "explanation": "Requer-se um caminho via gateway validado na planta para que redes apartadas referenciem e alcancem os pacotes do relogio mestre.",
+      "explanation": "Requer-se um caminho via gateway validado na planta para que redes apartadas referenciem e alcancem os pacotes do relógio mestre.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O documento exportado sob a extensao SSD tem o proposito de materializar topologias apontando as interconexoes do diagrama unifilar e seus nos logicos subjacentes.",
+      "statement": "O documento exportado sob a extensão SSD tem o propósito de materializar topologias apontando as interconexões do diagrama unifilar e seus nós lógicos subjacentes.",
       "correctAnswer": true,
-      "explanation": "O System Specification Description (SSD) modela essencialmente as interconexoes primarias arquitetonicas do projeto eletrico (diagrama).",
+      "explanation": "O System Specification Description (SSD) modela essencialmente as interconexões primárias arquitetônicas do projeto elétrico (diagrama).",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Se um dataset critico GOOSE operar de forma desmarcada (untagged), a regra dos switches introduz a VLAN nativa, ocasionando vazamentos do fluxo para fora da unidade confinada.",
+      "statement": "Se um dataset crítico GOOSE operar de forma desmarcada (untagged), a regra dos switches introduz a VLAN nativa, ocasionando vazamentos do fluxo para fora da unidade confinada.",
       "correctAnswer": true,
-      "explanation": "Os quadros untagged tomam a VLAN nativa da respectiva porta, ignorando fronteiras e burlando as logicas de filtragem.",
+      "explanation": "Os quadros untagged tomam a VLAN nativa da respectiva porta, ignorando fronteiras e burlando as lógicas de filtragem.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A padronizacao baseada na linguagem SCL impede e veta em absoluto a simulacao virtualizada de vaos que ainda carecam de montagem fisica no patio.",
+      "statement": "A padronização baseada na linguagem SCL impede e veta em absoluto a simulação virtualizada de vãos que ainda careçam de montagem física no pátio.",
       "correctAnswer": false,
       "explanation": "As plataformas amparadas no arquivo SCL permitem simular integralmente os fluxos do ambiente interconectado, viabilizando o teste de IEDs ainda fisicamente incompletos.",
       "difficulty": "medium",
@@ -164,54 +164,54 @@
     },
     {
       "type": "trueFalse",
-      "statement": "Para assegurar a convergencia as-built da planta, a diretiva indica que o engenheiro altere as configuracoes editando sempre a via mantida no servidor compartilhado central.",
+      "statement": "Para assegurar a convergência as-built da planta, a diretiva indica que o engenheiro altere as configurações editando sempre a via mantida no servidor compartilhado central.",
       "correctAnswer": true,
-      "explanation": "A metodologia orienta extrair o espelho centralizado atualizado, impedindo descompassos causados por compilacoes autonomas perdidas em notebooks.",
+      "explanation": "A metodologia orienta extrair o espelho centralizado atualizado, impedindo descompassos causados por compilações autônomas perdidas em notebooks.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Em incidentes praticos de campo, o confinamento por VLAN mostrou-se totalmente isento de falhas, eliminando desligamentos erroneos por colisao de APPID de vizinhos remotos.",
+      "statement": "Em incidentes práticos de campo, o confinamento por VLAN mostrou-se totalmente isento de falhas, eliminando desligamentos errôneos por colisão de APPID de vizinhos remotos.",
       "correctAnswer": false,
-      "explanation": "Houve trips indevidos porque o assinante validava unicamente a coincidencia isolada do APPID, aceitando espuriamente o comando de um vizinho.",
+      "explanation": "Houve trips indevidos porque o assinante validava unicamente a coincidência isolada do APPID, aceitando espuriamente o comando de um vizinho.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Para dissipar incoerencias na definicao estrutural de subestacoes de fornecedores distintos, o modelo SAS impoe como espinha dorsal os esquemas da linguagem ____ Configuration description Language.",
+      "statement": "Para dissipar incoerências na definição estrutural de subestações de fornecedores distintos, o modelo SAS impõe como espinha dorsal os esquemas da linguagem ____ Configuration description Language.",
       "blanks": [
         {
           "index": 0,
           "answer": "Substation"
         }
       ],
-      "explanation": "A configuracao parametrizavel apoia sua solidez formal sob os dominios XML referenciados pelo termo Substation Configuration description Language (SCL).",
+      "explanation": "A configuração parametrizável apoia sua solidez formal sob os domínios XML referenciados pelo termo Substation Configuration description Language (SCL).",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A analise em campo demonstrou que operacoes indevidas se consolidaram porque o algoritmo assinante repousava sua validacao examinando solitariamente o pareamento de tramas baseado no codigo do atributo ____.",
+      "statement": "A análise em campo demonstrou que operações indevidas se consolidaram porque o algoritmo assinante repousava sua validação examinando solitariamente o pareamento de tramas baseado no código do atributo ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "APPID"
         }
       ],
-      "explanation": "Ao desconsiderar a verificacao global, os paineis deflagravam comandos enganados por tramas identicas que portavam apenas a mesma marcacao de APPID.",
+      "explanation": "Ao desconsiderar a verificação global, os painéis deflagravam comandos enganados por tramas idênticas que portavam apenas a mesma marcação de APPID.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Para catalogar e espelhar as tentativas bloqueadas e as quebras nas politicas impostas, a arquitetura IED abriga em seu padrao o log operacional alocado sob o Data Object ____.",
+      "statement": "Para catalogar e espelhar as tentativas bloqueadas e as quebras nas políticas impostas, a arquitetura IED abriga em seu padrão o log operacional alocado sob o Data Object ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "CybSecEvt"
         }
       ],
-      "explanation": "Entre os status abrigados na definicao do LPHD0 destaca-se a condicao associada ao diagnostico de Cyber Security Event (CybSecEvt).",
+      "explanation": "Entre os status abrigados na definição do LPHD0 destaca-se a condição associada ao diagnóstico de Cyber Security Event (CybSecEvt).",
       "difficulty": "hard"
     }
   ]

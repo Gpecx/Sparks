@@ -3,53 +3,53 @@
   "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
   "categoryOrder": 1,
   "module": "Normas SPDA",
-  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspecao",
+  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspeção",
   "moduleOrder": 2,
   "trail": "NBR 5419 - Parte 2 (Gerenciamento de Risco)",
   "trailOrder": 1,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual e a finalidade principal do procedimento descrito na Parte 2 da norma ABNT NBR 5419?",
+      "statement": "Qual é a finalidade principal do procedimento descrito na Parte 2 da norma ABNT NBR 5419?",
       "options": [
-        "Calcular fisicamente a altura necessaria para o mastro captor Franklin.",
-        "Avaliar a necessidade de medidas de protecao atraves da analise de risco.",
+        "Calcular fisicamente a altura necessária para o mastro captor Franklin.",
+        "Avaliar a necessidade de medidas de proteção através da análise de risco.",
         "Determinar a bitola dos cabos de descida e das malhas de aterramento.",
-        "Especificar os disjuntores da subestacao de entrada de energia."
+        "Especificar os disjuntores da subestação de entrada de energia."
       ],
       "correctIndex": 1,
-      "explanation": "A Parte 2 trata da Analise de Risco (anteriormente Gerenciamento de Risco), mantendo a logica de avaliacao voltada a verificacao da necessidade de medidas de protecao para reduzir perdas. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A Parte 2 trata da Análise de Risco (anteriormente Gerenciamento de Risco), mantendo a lógica de avaliação voltada à verificação da necessidade de medidas de proteção para reduzir perdas. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na analise de risco da NBR 5419, o que significa a sigla RT e qual a sua funcao no processo de decisao?",
+      "statement": "Na análise de risco da NBR 5419, o que significa a sigla RT e qual a sua função no processo de decisão?",
       "options": [
-        "Resistencia de Terra, limitando o escoamento no aterramento.",
-        "Risco Toleravel, que serve como valor limite aceitavel para comparacao com o risco calculado R.",
-        "Rele Termico, protegendo contra curtos-circuitos demorados.",
-        "Raio Teorico, usado no dimensionamento da esfera rolante."
+        "Resistência de Terra, limitando o escoamento no aterramento.",
+        "Risco Tolerável, que serve como valor limite aceitável para comparação com o risco calculado R.",
+        "Relé Térmico, protegendo contra curtos-circuitos demorados.",
+        "Raio Teórico, usado no dimensionamento da esfera rolante."
       ],
       "correctIndex": 1,
-      "explanation": "O Risco Toleravel (RT) e o valor limite estabelecido pela norma. O risco total calculado (R) e comparado com o RT para decidir a necessidade e nivel de protecao (SPDA). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O Risco Tolerável (RT) é o valor limite estabelecido pela norma. O risco total calculado (R) é comparado com o RT para decidir a necessidade e nível de proteção (SPDA). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante a avaliacao dos riscos, se for constatado que o Risco calculado (R) e estritamente menor ou igual ao Risco Toleravel (RT), qual e a conclusao segundo a NBR 5419?",
+      "statement": "Durante a avaliação dos riscos, se for constatado que o Risco calculado (R) é estritamente menor ou igual ao Risco Tolerável (RT), qual é a conclusão segundo a NBR 5419?",
       "options": [
-        "O risco R esta abaixo do toleravel, logo a estrutura e considerada protegida e dispensa medidas adicionais.",
-        "A estrutura necessita obrigatoriamente de SPDA Nivel I preventivo.",
-        "Deve-se instalar apenas DPS em todas as tomadas, ignorando a malha de captacao.",
-        "O calculo esta incompleto, devendo-se calcular R novamente somando o fator LPL."
+        "O risco R está abaixo do tolerável, logo a estrutura é considerada protegida e dispensa medidas adicionais.",
+        "A estrutura necessita obrigatoriamente de SPDA Nível I preventivo.",
+        "Deve-se instalar apenas DPS em todas as tomadas, ignorando a malha de captação.",
+        "O cálculo está incompleto, devendo-se calcular R novamente somando o fator LPL."
       ],
       "correctIndex": 0,
-      "explanation": "Se o Risco calculado (R) for menor ou igual ao Risco Toleravel (RT), a edificacao encontra-se dentro da tolerancia normativa e o fluxograma indica que a estrutura esta protegida, nao necessitando novas medidas. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Se o Risco calculado (R) for menor ou igual ao Risco Tolerável (RT), a edificação encontra-se dentro da tolerância normativa e o fluxograma indica que a estrutura está protegida, não necessitando novas medidas. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com os indices tipicos indicados na norma, qual e o valor do Risco Toleravel (RT) estabelecido para o risco R1 (perda de vida humana ou ferimentos permanentes)?",
+      "statement": "De acordo com os índices típicos indicados na norma, qual é o valor do Risco Tolerável (RT) estabelecido para o risco R1 (perda de vida humana ou ferimentos permanentes)?",
       "options": [
         "1 em 1.000 por ano (10^-3)",
         "1 em 10.000 por ano (10^-4)",
@@ -57,161 +57,161 @@
         "1 em 1.000.000 por ano (10^-6)"
       ],
       "correctIndex": 2,
-      "explanation": "Os indices tipicos toleraveis indicados na norma estabelecem que para a perda de vida humana ou ferimentos permanentes o risco toleravel (RT) e de 10^-5. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015 / HazOp Engenharia)",
+      "explanation": "Os índices típicos toleráveis indicados na norma estabelecem que para a perda de vida humana ou ferimentos permanentes o risco tolerável (RT) é de 10^-5. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015 / HazOp Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que determina o parametro fisico Nd utilizado nos calculos iniciais da analise de risco da NBR 5419?",
+      "statement": "O que determina o parâmetro físico Nd utilizado nos cálculos iniciais da análise de risco da NBR 5419?",
       "options": [
-        "O numero de dias de trovoada por ano em uma dada regiao isoceraunica.",
-        "O numero de descidas nao naturais necessarias no perimetro do SPDA.",
-        "O numero de eventos perigosos previsiveis devido as descargas atmosfericas diretas em uma estrutura por ano.",
-        "O nivel de disjuntores para acoplamento na subestacao da edificacao."
+        "O número de dias de trovoada por ano em uma dada região isoceráunica.",
+        "O número de descidas não naturais necessárias no perímetro do SPDA.",
+        "O número de eventos perigosos previsíveis devido às descargas atmosféricas diretas em uma estrutura por ano.",
+        "O nível de disjuntores para acoplamento na subestação da edificação."
       ],
       "correctIndex": 2,
-      "explanation": "O parametro Nd representa o numero anual de eventos perigosos devido as descargas atmosfericas incidentes em uma estrutura, calculado pelo produto da densidade de raios (Ng) pela area de exposicao (Ae). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O parâmetro Nd representa o número anual de eventos perigosos devido às descargas atmosféricas incidentes em uma estrutura, calculado pelo produto da densidade de raios (Ng) pela área de exposição (Ae). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Conforme o metodo de calculo de riscos da Parte 2, se em uma determinada edificacao ou zona de estudo nao ha presenca de pessoas (como um deposito automatizado vazio), o que acontece com o risco R1 (perda de vida humana)?",
+      "statement": "Conforme o método de cálculo de riscos da Parte 2, se em uma determinada edificação ou zona de estudo não há presença de pessoas (como um depósito automatizado vazio), o que acontece com o risco R1 (perda de vida humana)?",
       "options": [
         "O risco R1 torna-se igual a zero.",
-        "O risco R1 adota o valor padrao emergencial de 10^-3.",
-        "O risco R1 e automaticamente substituido pelo calculo do R4.",
-        "A norma obriga a considerar pelo menos 1 pessoa, tornando R1 minimo."
+        "O risco R1 adota o valor padrão emergencial de 10^-3.",
+        "O risco R1 é automaticamente substituído pelo cálculo do R4.",
+        "A norma obriga a considerar pelo menos 1 pessoa, tornando R1 mínimo."
       ],
       "correctIndex": 0,
-      "explanation": "O risco R1 e referente a perda de vida humana. Se na edificacao ou zona em estudo nao ha presenca de pessoas, entao o risco R1 torna-se igual a zero, pois nao e possivel perder aquilo que nao se tem. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O risco R1 é referente à perda de vida humana. Se na edificação ou zona em estudo não há presença de pessoas, então o risco R1 torna-se igual a zero, pois não é possível perder aquilo que não se tem. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
       "statement": "A NBR 5419 Parte 2 divide os riscos em diversas componentes. O que representa especificamente a componente de risco RB?",
       "options": [
-        "Ferimentos a seres vivos gerados por choques de tensao de passo na calcada externa.",
-        "Danos fisicos a estrutura (incendio ou explosao) causados por centelhamentos perigosos no interior.",
-        "Falhas de sistemas eletronicos internos exclusivamente devido ao campo magnetico irradiado (LEMP).",
-        "Danos mecanicos causados por descargas que atingem apenas a linha eletrica de alta tensao."
+        "Ferimentos a seres vivos gerados por choques de tensão de passo na calçada externa.",
+        "Danos físicos à estrutura (incêndio ou explosão) causados por centelhamentos perigosos no interior.",
+        "Falhas de sistemas eletrônicos internos exclusivamente devido ao campo magnético irradiado (LEMP).",
+        "Danos mecânicos causados por descargas que atingem apenas a linha elétrica de alta tensão."
       ],
       "correctIndex": 1,
-      "explanation": "A componente RB esta relacionada aos danos fisicos que podem ser causados por centelhamentos dentro da edificacao originando risco de incendio ou explosao por descargas na estrutura. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A componente RB está relacionada aos danos físicos que podem ser causados por centelhamentos dentro da edificação originando risco de incêndio ou explosão por descargas na estrutura. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "A equacao fundamental para o calculo isolado de cada uma das componentes de risco na Parte 2 e expressa por Rx = Nx vezes Px vezes Lx. Nesta equacao, o que representa a variavel Px?",
+      "statement": "A equação fundamental para o cálculo isolado de cada uma das componentes de risco na Parte 2 é expressa por Rx = Nx vezes Px vezes Lx. Nesta equação, o que representa a variável Px?",
       "options": [
-        "O numero total de eventos perigosos esperados por ano.",
-        "A perda consequente e os valores economicos atrelados ao evento.",
-        "A potencia minima de curto-circuito da estrutura analisada.",
-        "A probabilidade de uma descarga atmosferica causar o dano a estrutura."
+        "O número total de eventos perigosos esperados por ano.",
+        "A perda consequente e os valores econômicos atrelados ao evento.",
+        "A potência mínima de curto-circuito da estrutura analisada.",
+        "A probabilidade de uma descarga atmosférica causar o dano à estrutura."
       ],
       "correctIndex": 3,
-      "explanation": "Na composicao do risco (Rx = Nx vezes Px vezes Lx), Nx e o numero de eventos perigosos, Px e a probabilidade de dano a estrutura e Lx e a perda consequente. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Na composição do risco (Rx = Nx vezes Px vezes Lx), Nx é o número de eventos perigosos, Px é a probabilidade de dano à estrutura e Lx é a perda consequente. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a metodologia descreve o processo iterativo correto para a determinacao e escolha do Nivel de Protecao (LPL) aplicavel a estrutura durante o gerenciamento de risco?",
+      "statement": "Como a metodologia descreve o processo iterativo correto para a determinação e escolha do Nível de Proteção (LPL) aplicável à estrutura durante o gerenciamento de risco?",
       "options": [
-        "O LPL e escolhido aleatoriamente pelo arquiteto e depois a malha e construida.",
-        "Calcula-se o risco inicial sem protecao e, se R > RT, implementam-se medidas progressivamente do LPL IV ao LPL I ate que R seja menor ou igual a RT.",
-        "Testa-se obrigatoriamente a solucao maxima de protecao (LPL I) e depois relaxam-se os criterios tecnicos ate chegar no LPL IV para economizar.",
-        "Multiplica-se a densidade Ng pelo Fator Td e estipula-se o LPL correspondente na Tabela de equivalencia estatica."
+        "O LPL é escolhido aleatoriamente pelo arquiteto e depois a malha é construída.",
+        "Calcula-se o risco inicial sem proteção e, se R > RT, implementam-se medidas progressivamente do LPL IV ao LPL I até que R seja menor ou igual a RT.",
+        "Testa-se obrigatoriamente a solução máxima de proteção (LPL I) e depois relaxam-se os critérios técnicos até chegar no LPL IV para economizar.",
+        "Multiplica-se a densidade Ng pelo Fator Td e estipula-se o LPL correspondente na Tabela de equivalência estática."
       ],
       "correctIndex": 1,
-      "explanation": "O LPL adequado nao e escolhido arbitrariamente. O processo e iterativo: calcula-se o risco inicial; se R > RT, implementam-se medidas de protecao progressivamente do menor nivel (LPL IV) ao maior rigor (LPL I) ate que o Risco seja toleravel (R menor ou igual a RT). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O LPL adequado não é escolhido arbitrariamente. O processo é iterativo: calcula-se o risco inicial; se R > RT, implementam-se medidas de proteção progressivamente do menor nível (LPL IV) ao maior rigor (LPL I) até que o Risco seja tolerável (R menor ou igual a RT). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "A componente de risco RM e calculada durante a analise de risco da edificacao. Ela e classificada como sendo referente a qual tipo especifico de falha?",
+      "statement": "A componente de risco RM é calculada durante a análise de risco da edificação. Ela é classificada como sendo referente a qual tipo específico de falha?",
       "options": [
-        "Incendio estrutural severo provocado por descargas diretas nos captores do telhado.",
-        "Danos ao equipamento de transformacao causados por descargas diretas na linha (S3).",
-        "Falha no sistema interno provocada por impulsos eletromagneticos (LEMP) decorrentes de descargas atmosfericas proximas a edificacao.",
-        "Ferimentos aos usuarios por tensao de toque oriunda do aterramento no momento da dispersao."
+        "Incêndio estrutural severo provocado por descargas diretas nos captores do telhado.",
+        "Danos ao equipamento de transformação causados por descargas diretas na linha (S3).",
+        "Falha no sistema interno provocada por impulsos eletromagnéticos (LEMP) decorrentes de descargas atmosféricas próximas à edificação.",
+        "Ferimentos aos usuários por tensão de toque oriunda do aterramento no momento da dispersão."
       ],
       "correctIndex": 2,
-      "explanation": "A componente RM esta relacionada as falhas do sistema (eletroeletronico) decorrentes de LEMP originado por descargas que incidem em areas proximas a edificacao (S2). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A componente RM está relacionada às falhas do sistema (eletroeletrônico) decorrentes de LEMP originado por descargas que incidem em áreas próximas à edificação (S2). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "trueFalse",
-      "statement": "Para facilitar o calculo e otimizar os resultados na avaliacao do montante de perdas, a norma permite que a edificacao seja dividida em diversas Zonas de Estudo (Zonas da estrutura), avaliando-se os componentes de risco e aplicando atenuacoes separadamente em cada zona.",
+      "statement": "Para facilitar o cálculo e otimizar os resultados na avaliação do montante de perdas, a norma permite que a edificação seja dividida em diversas Zonas de Estudo (Zonas da estrutura), avaliando-se os componentes de risco e aplicando atenuações separadamente em cada zona.",
       "correctAnswer": true,
-      "explanation": "E possivel dividir a estrutura em zonas de estudo (ZS) e assim avaliar cada componente de risco separadamente, o que traz grandes beneficios no estudo. O risco total da edificacao sera a soma dos riscos de cada zona. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "É possível dividir a estrutura em zonas de estudo (ZS) e assim avaliar cada componente de risco separadamente, o que traz grandes benefícios no estudo. O risco total da edificação será a soma dos riscos de cada zona. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A componente de risco RA foca a sua analise exclusivamente nas falhas de equipamentos de informatica causadas pela inducao magnetica direta (LEMP) na fiacao interna.",
+      "statement": "A componente de risco RA foca a sua análise exclusivamente nas falhas de equipamentos de informática causadas pela indução magnética direta (LEMP) na fiação interna.",
       "correctAnswer": false,
-      "explanation": "Falso. A componente RA trata de riscos a ferimentos em seres vivos que sejam causados devido a tensao de passo e de toque (descargas na estrutura), nao tendo relacao com falhas de equipamentos eletronicos por LEMP, que sao tratadas em RC e RM. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Falso. A componente RA trata de riscos a ferimentos em seres vivos que sejam causados devido à tensão de passo e de toque (descargas na estrutura), não tendo relação com falhas de equipamentos eletrônicos por LEMP, que são tratadas em RC e RM. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Se em uma analise, os cabos das linhas de servico externas forem adequadamente blindados e essa blindagem for interligada na entrada ao mesmo barramento de equipotencializacao da instalacao, os riscos de falhas eletricas oriundos da linha (RU, RV e RW) podem ser reduzidos a zero.",
+      "statement": "Se em uma análise, os cabos das linhas de serviço externas forem adequadamente blindados e essa blindagem for interligada na entrada ao mesmo barramento de equipotencialização da instalação, os riscos de falhas elétricas oriundos da linha (RU, RV e RW) podem ser reduzidos a zero.",
       "correctAnswer": true,
-      "explanation": "A norma e a literatura indicam que os riscos RU, RV e RW (referentes a choques, incendio e falhas provenientes de descargas na linha de servico) podem ser assumidos como zero se o cabo externo tiver blindagem continua interligada adequadamente ao barramento de equipotencializacao na entrada. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A norma e a literatura indicam que os riscos RU, RV e RW (referentes a choques, incêndio e falhas provenientes de descargas na linha de serviço) podem ser assumidos como zero se o cabo externo tiver blindagem contínua interligada adequadamente ao barramento de equipotencialização na entrada. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Os indices estaticos de Risco Toleravel (RT) definidos pela NBR 5419 estipulam que o risco R2 (perda de servico ao publico) deve ser limitado a 10^-5 e o risco R3 (perda de patrimonio cultural) possui o limite aceitavel de 10^-3.",
+      "statement": "Os índices estáticos de Risco Tolerável (RT) definidos pela NBR 5419 estipulam que o risco R2 (perda de serviço ao público) deve ser limitado a 10^-5 e o risco R3 (perda de patrimônio cultural) possui o limite aceitável de 10^-3.",
       "correctAnswer": false,
-      "explanation": "Os valores estao trocados. O risco toleravel estipulado na norma para perda de servico ao publico (R2) e de 10^-3, enquanto para perda de memoria ou patrimonio cultural (R3) e de 10^-4. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015 / HazOp Engenharia)",
+      "explanation": "Os valores estão trocados. O risco tolerável estipulado na norma para perda de serviço ao público (R2) é de 10^-3, enquanto para perda de memória ou patrimônio cultural (R3) é de 10^-4. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015 / HazOp Engenharia)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A componente RC do gerenciamento de risco modela especificamente a probabilidade de ocorrer falha critica de sistemas eletroeletronicos internos provocada por impulsos eletromagneticos (LEMP) derivados de uma descarga direta sobre a estrutura em estudo (S1).",
+      "statement": "A componente RC do gerenciamento de risco modela especificamente a probabilidade de ocorrer falha crítica de sistemas eletroeletrônicos internos provocada por impulsos eletromagnéticos (LEMP) derivados de uma descarga direta sobre a estrutura em estudo (S1).",
       "correctAnswer": true,
-      "explanation": "Correto. O risco RC e relativo a falha no sistema que pode ter sua origem em LEMPs (impulsos eletromagneticos) decorrentes de descargas que atingem diretamente a edificacao (Fonte de Dano S1). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Correto. O risco RC é relativo à falha no sistema que pode ter sua origem em LEMPs (impulsos eletromagnéticos) decorrentes de descargas que atingem diretamente a edificação (Fonte de Dano S1). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Na equacao basica de composicao para calcular os riscos (Rx = Nx vezes Px vezes Lx), o termo Nx refere-se ao numero de eventos perigosos, Px a probabilidade do dano fisico ocorrer e falhar a protecao, e o termo ____ representa o fator ou o tamanho proporcional da perda consequente.",
+      "statement": "Na equação básica de composição para calcular os riscos (Rx = Nx vezes Px vezes Lx), o termo Nx refere-se ao número de eventos perigosos, Px à probabilidade do dano físico ocorrer e falhar a proteção, e o termo ____ representa o fator ou o tamanho proporcional da perda consequente.",
       "blanks": [
         {
           "index": 0,
           "answer": "Lx"
         }
       ],
-      "explanation": "A equacao fundamental para as componentes e Rx = Nx vezes Px vezes Lx, onde Lx representa a perda consequente associada ao dano. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A equação fundamental para as componentes é Rx = Nx vezes Px vezes Lx, onde Lx representa a perda consequente associada ao dano. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A selecao do Nivel de Protecao adequadamente balizada pela NBR 5419 e iterativa. Se o Risco Calculado inicial nao for satisfatorio (R > RT), o projetista implementa medidas progressivas partindo do nivel de protecao mais brando, o LPL ____, e refaz o calculo subindo a classe ate alcancar a protecao ideal onde R seja menor ou igual a RT.",
+      "statement": "A seleção do Nível de Proteção adequadamente balizada pela NBR 5419 é iterativa. Se o Risco Calculado inicial não for satisfatório (R > RT), o projetista implementa medidas progressivas partindo do nível de proteção mais brando, o LPL ____, e refaz o cálculo subindo a classe até alcançar a proteção ideal onde R seja menor ou igual a RT.",
       "blanks": [
         {
           "index": 0,
           "answer": "IV"
         }
       ],
-      "explanation": "O processo iterativo recomenda implementar medidas de protecao progressivamente do menor rigor normativo (LPL IV) em direcao ao nivel maximo (LPL I), evitando sobrecustos desnecessarios com superdimensionamento. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O processo iterativo recomenda implementar medidas de proteção progressivamente do menor rigor normativo (LPL IV) em direção ao nível máximo (LPL I), evitando sobrecustos desnecessários com superdimensionamento. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Para obter a frequencia previsivel de impactos diretos ou eventos perigosos anuais na edificacao (fator Nd), a area de captacao equivalente deve ser multiplicada pela densidade de descargas atmosfericas para a terra local, um parametro fundamental cujo simbolo nas equacoes e ____.",
+      "statement": "Para obter a frequência previsível de impactos diretos ou eventos perigosos anuais na edificação (fator Nd), a área de captação equivalente deve ser multiplicada pela densidade de descargas atmosféricas para a terra local, um parâmetro fundamental cujo símbolo nas equações é ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Ng"
         }
       ],
-      "explanation": "O parametro da densidade de descargas atmosfericas (raios/km2/ano), essencial na determinacao do numero anual de eventos (Nd) no gerenciamento de risco, e representado pela sigla Ng. (Fonte: Cleiton Junior Lopes / ABNT NBR 5419:2026 Guia pratico)",
+      "explanation": "O parâmetro da densidade de descargas atmosféricas (raios/km2/ano), essencial na determinação do número anual de eventos (Nd) no gerenciamento de risco, é representado pela sigla Ng. (Fonte: Cleiton Junior Lopes / ABNT NBR 5419:2026 Guia prático)",
       "difficulty": "hard"
     }
   ]

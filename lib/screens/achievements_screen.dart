@@ -65,11 +65,15 @@ class AchievementsScreen extends ConsumerWidget {
                         children: [
                           Text(
                             '$unlockedCount Conquistas',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             'de $total disponíveis',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: AppColors.textMuted, fontSize: 13),
                           ),
                         ],
@@ -220,12 +224,16 @@ class AchievementsScreen extends ConsumerWidget {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          badge.title,
-                          style: TextStyle(
-                            color: isUnlocked ? Colors.white : AppColors.textMuted,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
+                        Flexible(
+                          child: Text(
+                            badge.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: isUnlocked ? Colors.white : AppColors.textMuted,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
                         if (isUnlocked) ...[
