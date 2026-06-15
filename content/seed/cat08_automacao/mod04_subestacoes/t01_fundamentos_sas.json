@@ -10,208 +10,208 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual e o objetivo central de um Sistema de Automacao de Subestacao (SAS)?",
+      "statement": "Qual é o objetivo central de um Sistema de Automação de Subestação (SAS)?",
       "options": [
         "Apenas medir a temperatura ambiente.",
-        "Eliminar totalmente o uso de disjuntores no patio.",
+        "Eliminar totalmente o uso de disjuntores no pátio.",
         "Faturar o consumo de energia para os clientes finais.",
-        "Garantir monitoramento e rapida atuacao nos sistemas eletricos."
+        "Garantir monitoramento e rápida atuação nos sistemas elétricos."
       ],
       "correctIndex": 3,
-      "explanation": "O SAS tem como objetivo principal garantir monitoramento continuo e possibilitar rapida atuacao operacional e protecao do sistema.",
+      "explanation": "O SAS tem como objetivo principal garantir monitoramento contínuo e possibilitar rápida atuação operacional e proteção do sistema.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na arquitetura IEC 61850, a subestacao e dividida em quais niveis hierarquicos de operacao?",
+      "statement": "Na arquitetura IEC 61850, a subestação é dividida em quais níveis hierárquicos de operação?",
       "options": [
-        "Estacao, Bay (Vao) e Processo.",
-        "Transmissao, Distribuicao e Geracao.",
+        "Estação, Bay (Vão) e Processo.",
+        "Transmissão, Distribuição e Geração.",
         "Local, Remoto e Nacional.",
         "Modbus, DNP3 e IEC 104."
       ],
       "correctIndex": 0,
-      "explanation": "As funcoes de um SAS moderno sao alocadas nos niveis hierarquicos estabelecidos como Nivel de Processo, Nivel de Bay e Nivel de Estacao.",
+      "explanation": "As funções de um SAS moderno são alocadas nos níveis hierárquicos estabelecidos como Nível de Processo, Nível de Bay e Nível de Estação.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em substituicao as inumeras fiacoes convencionais para logicas de intertravamento inter-bays, qual mecanismo o SAS moderno aplica?",
+      "statement": "Em substituição às inúmeras fiações convencionais para lógicas de intertravamento inter-bays, qual mecanismo o SAS moderno aplica?",
       "options": [
-        "Rele eletromecanico auxiliar tipo 86.",
-        "Comunicacao via rede Ethernet com envio de mensagens GOOSE.",
-        "Redes locais com cabos coaxiais analogicos passivos.",
-        "Transmissores de radio AM de longa distancia."
+        "Relé eletromecânico auxiliar tipo 86.",
+        "Comunicação via rede Ethernet com envio de mensagens GOOSE.",
+        "Redes locais com cabos coaxiais analógicos passivos.",
+        "Transmissores de rádio AM de longa distância."
       ],
       "correctIndex": 1,
-      "explanation": "A comunicacao Ethernet trafega as mensagens GOOSE, reduzindo drasticamente os cabos eletricos antes usados para seletividade e intertravamento.",
+      "explanation": "A comunicação Ethernet trafega as mensagens GOOSE, reduzindo drasticamente os cabos elétricos antes usados para seletividade e intertravamento.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De que forma os IEDs comunicam dados de relatorios e eventos nao criticos com a interface IHM e o supervisorio no nivel de estacao?",
+      "statement": "De que forma os IEDs comunicam dados de relatórios e eventos não críticos com a interface IHM e o supervisório no nível de estação?",
       "options": [
         "Usando broadcast nativo das mensagens SV (Sampled Values).",
-        "Atraves de cabos seriais dedicados do tipo RS-232.",
+        "Através de cabos seriais dedicados do tipo RS-232.",
         "Via protocolo MMS, orientado ao modelo vertical de Cliente-Servidor.",
-        "Somente por conexoes FTP locais sem estampa de tempo."
+        "Somente por conexões FTP locais sem estampa de tempo."
       ],
       "correctIndex": 2,
-      "explanation": "A comunicacao vertical do SAS, responsavel por dados nao criticos com o supervisorio, e realizada por mensagens MMS no padrao cliente-servidor.",
+      "explanation": "A comunicação vertical do SAS, responsável por dados não críticos com o supervisório, é realizada por mensagens MMS no padrão cliente-servidor.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual equipamento integrante do SAS executa a interface de telecontrole para interligar os dados da subestacao a um Centro de Operacao externo?",
+      "statement": "Qual equipamento integrante do SAS executa a interface de telecontrole para interligar os dados da subestação a um Centro de Operação externo?",
       "options": [
-        "A Merging Unit instalada no patio.",
-        "O IED de protecao diferencial.",
+        "A Merging Unit instalada no pátio.",
+        "O IED de proteção diferencial.",
         "O Switch de borda do barramento de processo.",
-        "O Gateway de comunicacao alocado no nivel de estacao."
+        "O Gateway de comunicação alocado no nível de estação."
       ],
       "correctIndex": 3,
-      "explanation": "O Gateway e a interface que opera na estacao responsavel por conectar o SAS e os protocolos locais aos centros de controle remotos.",
+      "explanation": "O Gateway é a interface que opera na estação responsável por conectar o SAS e os protocolos locais aos centros de controle remotos.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No modelo multinivel do SAS, quais tarefas essenciais recaem sobre o nivel de bay?",
+      "statement": "No modelo multinível do SAS, quais tarefas essenciais recaem sobre o nível de bay?",
       "options": [
-        "Utilizar os dados locais para realizar as funcoes de protecao e atuar sobre o equipamento primario daquele vao especifico.",
-        "Apenas digitalizar correntes dos TCs sem tomada de decisao.",
-        "Integrar a subestacao a rede corporativa da empresa sede.",
-        "Armazenar em disco rigido o banco de dados historico geral do sistema SCADA."
+        "Utilizar os dados locais para realizar as funções de proteção e atuar sobre o equipamento primário daquele vão específico.",
+        "Apenas digitalizar correntes dos TCs sem tomada de decisão.",
+        "Integrar a subestação à rede corporativa da empresa sede.",
+        "Armazenar em disco rígido o banco de dados histórico geral do sistema SCADA."
       ],
       "correctIndex": 0,
-      "explanation": "O nivel de bay abriga funcoes vitais de controle e protecao que processam dados locais e atuam majoritariamente sobre o equipamento primario do respectivo vao.",
+      "explanation": "O nível de bay abriga funções vitais de controle e proteção que processam dados locais e atuam majoritariamente sobre o equipamento primário do respectivo vão.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Sob os preceitos da norma IEC 61850 para Sistemas de Automacao de Subestacoes, qual e a diretriz sobre a alocacao das funcoes de controle e protecao?",
+      "statement": "Sob os preceitos da norma IEC 61850 para Sistemas de Automação de Subestações, qual é a diretriz sobre a alocação das funções de controle e proteção?",
       "options": [
-        "A alocacao deve ser compulsoriamente centralizada no computador de estacao.",
-        "A norma suporta uma livre alocacao de funcoes descentralizada entre os dispositivos e os niveis de controle.",
-        "As funcoes devem residir apenas em IEDs de um fabricante exclusivo.",
-        "E proibido distribuir ou fragmentar funcoes de protecao em mais de um equipamento logico."
+        "A alocação deve ser compulsoriamente centralizada no computador de estação.",
+        "A norma suporta uma livre alocação de funções descentralizada entre os dispositivos e os níveis de controle.",
+        "As funções devem residir apenas em IEDs de um fabricante exclusivo.",
+        "É proibido distribuir ou fragmentar funções de proteção em mais de um equipamento lógico."
       ],
       "correctIndex": 1,
-      "explanation": "A alocacao funcional nao e fixa. A norma flexibiliza e suporta arranjos livres de funcoes baseados na disponibilidade, necessidade tecnica e filosofias operacionais.",
+      "explanation": "A alocação funcional não é fixa. A norma flexibiliza e suporta arranjos livres de funções baseados na disponibilidade, necessidade técnica e filosofias operacionais.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No escopo do SAS, qual o proposito primario do servico padronizado GOOSE que trafega pelo barramento de comunicacao?",
+      "statement": "No escopo do SAS, qual o propósito primário do serviço padronizado GOOSE que trafega pelo barramento de comunicação?",
       "options": [
         "Enviar o arquivo final de oscilografias para a IHM de engenharia.",
-        "Ajudar a sincronizar com o relogio GPS todos os microprocessadores conectados na rede LAN.",
-        "Garantir a comunicacao horizontal de eventos criticos e rapidos, suportando atuacoes como trips e intertravamentos.",
-        "Coletar os valores instantaneos amostrados (Sampled Values) diretamente dos TCs primarios."
+        "Ajudar a sincronizar com o relógio GPS todos os microprocessadores conectados na rede LAN.",
+        "Garantir a comunicação horizontal de eventos críticos e rápidos, suportando atuações como trips e intertravamentos.",
+        "Coletar os valores instantâneos amostrados (Sampled Values) diretamente dos TCs primários."
       ],
       "correctIndex": 2,
-      "explanation": "O protocolo GOOSE assegura a troca de eventos de carater critico e de altissima velocidade horizontalmente entre as unidades de protecao conectadas.",
+      "explanation": "O protocolo GOOSE assegura a troca de eventos de caráter crítico e de altíssima velocidade horizontalmente entre as unidades de proteção conectadas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para materializar a engenharia de um SAS e suportar uma infraestrutura interoperavel, a norma aplica arquivos no formato SCL. O que significa essa sigla?",
+      "statement": "Para materializar a engenharia de um SAS e suportar uma infraestrutura interoperável, a norma aplica arquivos no formato SCL. O que significa essa sigla?",
       "options": [
         "Serial Communication Link para IEDs defasados.",
-        "Software Control Logic voltado as linguagens de CLP.",
+        "Software Control Logic voltado às linguagens de CLP.",
         "Standard Coded Library usada no mapeamento do banco de dados DNP3.",
         "Substation Configuration description Language, estruturada sob a linguagem XML."
       ],
       "correctIndex": 3,
-      "explanation": "A sigla SCL refere-se a Substation Configuration description Language, uma linguagem pautada em base formal XML para unificar o esquema dos equipamentos SAS.",
+      "explanation": "A sigla SCL refere-se à Substation Configuration description Language, uma linguagem pautada em base formal XML para unificar o esquema dos equipamentos SAS.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a arquitetura das interfaces logicas no SAS (numeradas de 1 a 10), qual o papel tecnico vital estipulado unicamente a interface 4?",
+      "statement": "Segundo a arquitetura das interfaces lógicas no SAS (numeradas de 1 a 10), qual o papel técnico vital estipulado unicamente à interface 4?",
       "options": [
-        "Trocar instantaneamente e transportar os dados digitalizados de TC e TP do nivel de processo ao nivel de bay.",
-        "Manejar intertravamentos do barramento conectando IEDs da estacao.",
+        "Trocar instantaneamente e transportar os dados digitalizados de TC e TP do nível de processo ao nível de bay.",
+        "Manejar intertravamentos do barramento conectando IEDs da estação.",
         "Transmitir os comandos do despacho de carga interligando-os ao gateway.",
-        "Ocupar-se exclusivamente da sincronizacao de tempo via PTP na DMZ de TI corporativa."
+        "Ocupar-se exclusivamente da sincronização de tempo via PTP na DMZ de TI corporativa."
       ],
       "correctIndex": 0,
-      "explanation": "A interface logica 4 e reservada para viabilizar o fluxo pontual e constante das amostras vitais (correntes e tensoes) oriundas do processo.",
+      "explanation": "A interface lógica 4 é reservada para viabilizar o fluxo pontual e constante das amostras vitais (correntes e tensões) oriundas do processo.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "No que tange a delimitacao dos perimetros do SAS, as rotinas de protecao do sistema compoem um segmento completamente isolado e nao integram as funcoes de automacao da subestacao.",
+      "statement": "No que tange à delimitação dos perímetros do SAS, as rotinas de proteção do sistema compõem um segmento completamente isolado e não integram as funções de automação da subestação.",
       "correctAnswer": false,
-      "explanation": "A Protecao compoe uma parte legitima e fortemente integrada dentro das fronteiras funcionais do Sistema de Automacao de Subestacao.",
+      "explanation": "A Proteção compõe uma parte legítima e fortemente integrada dentro das fronteiras funcionais do Sistema de Automação de Subestação.",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "O planejamento das funcoes de suporte atreladas ao SAS demanda um referencial de tempo coerente, balizando o sincronismo ao limiar de 1 microssegundo quando relacionado aos calculos precisos de fasores.",
+      "statement": "O planejamento das funções de suporte atreladas ao SAS demanda um referencial de tempo coerente, balizando o sincronismo ao limiar de 1 microssegundo quando relacionado aos cálculos precisos de fasores.",
       "correctAnswer": true,
-      "explanation": "As exigencias cronologicas de suporte de sistema delimitam o teto rigoroso de 1 microssegundo aplicado essencialmente para a analise simetrica dos fasores.",
+      "explanation": "As exigências cronológicas de suporte de sistema delimitam o teto rigoroso de 1 microssegundo aplicado essencialmente para a análise simétrica dos fasores.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Em plantas convencionais exigia-se o CLP para consolidar as manobras cruzadas, no entanto o avanco dos modernos SAS atribuiu aos IEDs as incumbencias de controle e intertravamento logico de patio.",
+      "statement": "Em plantas convencionais exigia-se o CLP para consolidar as manobras cruzadas, no entanto o avanço dos modernos SAS atribuiu aos IEDs as incumbências de controle e intertravamento lógico de pátio.",
       "correctAnswer": true,
-      "explanation": "O contexto introduzido com a IEC 61850 outorgou aos reles multifuncionais as logicas embarcadas de intertravamento, dispensando em peso a arquitetura centralizada dos PLCs legados.",
+      "explanation": "O contexto introduzido com a IEC 61850 outorgou aos relés multifuncionais as lógicas embarcadas de intertravamento, dispensando em peso a arquitetura centralizada dos PLCs legados.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O design operacional nomeado como barramento de estacao absorve e unifica o transito funcional de dados usualmente enquadrados nas interfaces logicas classificadas como 1, 3, 6, 8 e 9.",
+      "statement": "O design operacional nomeado como barramento de estação absorve e unifica o trânsito funcional de dados usualmente enquadrados nas interfaces lógicas classificadas como 1, 3, 6, 8 e 9.",
       "correctAnswer": true,
-      "explanation": "O barramento de estacao congrega majoritariamente estas interfaces, harmonizando interconexoes inter-bays e o vinculo ascendente direcionado ao nivel da estacao SCADA.",
+      "explanation": "O barramento de estação congrega majoritariamente estas interfaces, harmonizando interconexões inter-bays e o vínculo ascendente direcionado ao nível da estação SCADA.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A principal meta da camada de software ACSI (Abstract Communication Services Interface) no SAS e restringir a programacao exigindo o emprego compulsorio de canais puramente seriais em detrimento das redes Ethernet.",
+      "statement": "A principal meta da camada de software ACSI (Abstract Communication Services Interface) no SAS é restringir a programação exigindo o emprego compulsório de canais puramente seriais em detrimento das redes Ethernet.",
       "correctAnswer": false,
-      "explanation": "A premissa do ACSI e ofertar flexibilidade separando a modelagem semantica da volatilidade da rede fisica subjacente, permitindo a base de estacao fluir sobre estruturas modernas como a rede Ethernet.",
+      "explanation": "A premissa do ACSI é ofertar flexibilidade separando a modelagem semântica da volatilidade da rede física subjacente, permitindo a base de estação fluir sobre estruturas modernas como a rede Ethernet.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "No particionamento dos canais logicos do SAS, a passagem dos sinais englobando ordens de manobra emitidas do bay rumo aos elementos de patio emprega estritamente a interface de conexao de numero ____.",
+      "statement": "No particionamento dos canais lógicos do SAS, a passagem dos sinais englobando ordens de manobra emitidas do bay rumo aos elementos de pátio emprega estritamente a interface de conexão de número ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "5"
         }
       ],
-      "explanation": "A norma delimita a interface 5 como a encarregada do envio da malha de comandos partindo do nivel de bay incidindo diretamente sobre a infraestrutura fisica do processo.",
+      "explanation": "A norma delimita a interface 5 como a encarregada do envio da malha de comandos partindo do nível de bay incidindo diretamente sobre a infraestrutura física do processo.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Visando garantir modularidade no processamento do software, a menor estrutura virtual portadora de logica designada a hospedar e permutar propriedades das variaveis de campo no padrao SAS e chamada de Logical ____.",
+      "statement": "Visando garantir modularidade no processamento do software, a menor estrutura virtual portadora de lógica designada a hospedar e permutar propriedades das variáveis de campo no padrão SAS é chamada de Logical ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Node"
         }
       ],
-      "explanation": "A padronizacao que propicia a interoperabilidade fragmenta funcoes extensas da automacao em subfuncoes atreladas e intercambiaveis conhecidas por Logical Nodes (LN).",
+      "explanation": "A padronização que propicia a interoperabilidade fragmenta funções extensas da automação em subfunções atreladas e intercambiáveis conhecidas por Logical Nodes (LN).",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Para suprimir ambiguidades e suportar o desenho parametrizavel dos relatorios entre aplicacoes de multiplos provedores, a concepcao do SAS fundamenta-se nos descritivos da linguagem homologada como ____.",
+      "statement": "Para suprimir ambiguidades e suportar o desenho parametrizável dos relatórios entre aplicações de múltiplos provedores, a concepção do SAS fundamenta-se nos descritivos da linguagem homologada como ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "SCL"
         }
       ],
-      "explanation": "A representacao formal e nao ambigua da arquitetura do Sistema de Automacao da Subestacao assenta seus alicerces na Substation Configuration description Language (SCL).",
+      "explanation": "A representação formal e não ambígua da arquitetura do Sistema de Automação da Subestação assenta seus alicerces na Substation Configuration description Language (SCL).",
       "difficulty": "hard"
     }
   ]

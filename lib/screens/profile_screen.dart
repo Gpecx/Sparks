@@ -211,20 +211,34 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   const SizedBox(height: 14),
 
                   // ✅ Nome real do Firestore
-                  Text(userService.displayName,
-                      style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(userService.displayName,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
+                  ),
                   const SizedBox(height: 4),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        (user?.role ?? 'TÉCNICO').toUpperCase(),
-                        style: TextStyle(
-                            color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
-                      ),
-                      const SizedBox(width: 8),
-                      PlanBadge(plan: ref.watch(accessControlProvider).plan, compact: true),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            (user?.role ?? 'TÉCNICO').toUpperCase(),
+                            style: TextStyle(
+                                color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        PlanBadge(plan: ref.watch(accessControlProvider).plan, compact: true),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 14),
 
@@ -502,10 +516,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         children: [
           Icon(icon, color: AppColors.textMuted, size: 16),
           const SizedBox(height: 8),
-          Text(value, style: const TextStyle(color: AppColors.primary, fontSize: 22, fontWeight: FontWeight.w800)),
-          Text(suffix, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(value, style: const TextStyle(color: AppColors.primary, fontSize: 22, fontWeight: FontWeight.w800)),
+          ),
+          Text(suffix, style: const TextStyle(color: AppColors.textMuted, fontSize: 11), maxLines: 1, overflow: TextOverflow.ellipsis),
           const SizedBox(height: 2),
-          Text(label, style: const TextStyle(color: AppColors.textSecondary, fontSize: 11)),
+          Text(label, style: const TextStyle(color: AppColors.textSecondary, fontSize: 11), maxLines: 1, overflow: TextOverflow.ellipsis),
         ],
       ),
     );
@@ -679,6 +697,8 @@ class _ClanSection extends StatelessWidget {
                       children: [
                         // ✅ Nome do clã real do Firestore
                         Text(clanName ?? 'Meu Clã',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800)),
                         const SizedBox(height: 4),
                         Text('Membro', style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),

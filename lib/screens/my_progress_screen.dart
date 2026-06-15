@@ -159,16 +159,21 @@ class MyProgressScreen extends ConsumerWidget {
                     Text(
                       'Técnico Nível $level',
                       style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
               ),
+              const SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
                     '$totalXp XP',
                     style: const TextStyle(color: AppColors.gold, fontSize: 18, fontWeight: FontWeight.w800),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const Text('total', style: TextStyle(color: AppColors.textSecondary, fontSize: 11)),
                 ],
@@ -226,8 +231,11 @@ class MyProgressScreen extends ConsumerWidget {
           children: [
             Icon(icon, color: color, size: 18),
             const SizedBox(height: 4),
-            Text(value, style: TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w800)),
-            Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(value, style: TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w800)),
+            ),
+            Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 10), maxLines: 1, overflow: TextOverflow.ellipsis),
           ],
         ),
       ),

@@ -180,7 +180,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "A onda de corrente de falta é composta pelo termo alternado e por uma componente apriódica decrescente chamada componente ____, responsável por elevar o valor de crista da corrente de defeito.",
+      "statement": "A onda de corrente de falta é composta pelo termo alternado e por uma componente aperiódica decrescente chamada componente ____, responsável por elevar o valor de crista da corrente de defeito.",
       "blanks": [
         {
           "index": 0,

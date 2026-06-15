@@ -10,46 +10,46 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que e fundamentalmente o software SKM Power Tools for Windows (PTW) segundo o material de treinamento?",
+      "statement": "O que é fundamentalmente o software SKM Power Tools for Windows (PTW) segundo o material de treinamento?",
       "options": [
-        "Um modulo fisico de manobra alocado nas cabines primarias de concessionarias.",
-        "Um sistema embarcado em reles digitais para protecao de motores.",
-        "Uma ferramenta exclusiva para calculo termico estrutural de cabos subterraneos.",
-        "Um software para analise e projeto de sistemas eletricos com base de dados orientada a objeto."
+        "Um módulo físico de manobra alocado nas cabines primárias de concessionárias.",
+        "Um sistema embarcado em relés digitais para proteção de motores.",
+        "Uma ferramenta exclusiva para cálculo térmico estrutural de cabos subterrâneos.",
+        "Um software para análise e projeto de sistemas elétricos com base de dados orientada a objeto."
       ],
       "correctIndex": 3,
-      "explanation": "O PTW e um software para projeto e analise de sistemas eletricos de potencia, graficamente interativo e com base de dados orientada a objeto.",
+      "explanation": "O PTW é um software para projeto e análise de sistemas elétricos de potência, graficamente interativo e com base de dados orientada a objeto.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No modulo DAPPER, o estudo de Fluxo de Cargas (Load Flow) tem como principal funcao calcular quais grandezas na rede?",
+      "statement": "No módulo DAPPER, o estudo de Fluxo de Cargas (Load Flow) tem como principal função calcular quais grandezas na rede?",
       "options": [
-        "A queda de tensao nos alimentadores, a tensao nas barras e o fluxo de potencia.",
-        "A distorcao harmonica total e a ressonancia em bancos de capacitores.",
-        "O tempo de fusao dos elos fusiveis de media tensao.",
-        "As correntes transitorias de rotor bloqueado durante partidas severas."
+        "A queda de tensão nos alimentadores, a tensão nas barras e o fluxo de potência.",
+        "A distorção harmônica total e a ressonância em bancos de capacitores.",
+        "O tempo de fusão dos elos fusíveis de média tensão.",
+        "As correntes transitórias de rotor bloqueado durante partidas severas."
       ],
       "correctIndex": 0,
-      "explanation": "O Estudo de Fluxo de Cargas calcula a queda de tensao em cada alimentador, a tensao em cada barra e o fluxo de carga em todos os ramos.",
+      "explanation": "O Estudo de Fluxo de Cargas calcula a queda de tensão em cada alimentador, a tensão em cada barra e o fluxo de carga em todos os ramos.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o principal objetivo do modulo CAPTOR dentro da plataforma PTW?",
+      "statement": "Qual é o principal objetivo do módulo CAPTOR dentro da plataforma PTW?",
       "options": [
-        "Dimensionar a secao transversal de condutores de aterramento.",
-        "Tracar as caracteristicas tempo corrente da coordenacao e seletividade.",
-        "Executar o fluxo de carga e a distribuicao de demanda da planta.",
-        "Elaborar o calculo da malha de terra e emissoes de relatorios de tensao de passo."
+        "Dimensionar a seção transversal de condutores de aterramento.",
+        "Traçar as características tempo corrente da coordenação e seletividade.",
+        "Executar o fluxo de carga e a distribuição de demanda da planta.",
+        "Elaborar o cálculo da malha de terra e emissões de relatórios de tensão de passo."
       ],
       "correctIndex": 1,
-      "explanation": "O Estudo do CAPTOR traca as caracteristicas tempo corrente da coordenacao (TCC) do componente eletrico para assegurar protecao e seletividade.",
+      "explanation": "O Estudo do CAPTOR traça as características tempo corrente da coordenação (TCC) do componente elétrico para assegurar proteção e seletividade.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual interface do PTW e utilizada especificamente para inserir e gerenciar os parametros eletricos detalhados de cada componente do projeto?",
+      "statement": "Qual interface do PTW é utilizada especificamente para inserir e gerenciar os parâmetros elétricos detalhados de cada componente do projeto?",
       "options": [
         "Data Visualizer.",
         "Scenario Manager.",
@@ -57,92 +57,92 @@
         "Report Viewer."
       ],
       "correctIndex": 2,
-      "explanation": "O Component Editor permite a entrada de dados dos componentes do sistema eletrico, caracterizando cada um para os tipos de estudo.",
+      "explanation": "O Component Editor permite a entrada de dados dos componentes do sistema elétrico, caracterizando cada um para os tipos de estudo.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a principal utilidade da ferramenta Library (biblioteca) integrada aos projetos do software PTW?",
+      "statement": "Qual é a principal utilidade da ferramenta Library (biblioteca) integrada aos projetos do software PTW?",
       "options": [
         "Limpar automaticamente os registros de falhas armazenados no banco de dados.",
         "Converter diagramas unifilares em plantas civis tridimensionais.",
-        "Reduzir as tensoes transitorias simuladas durante a partida de motores.",
-        "Agilizar a construcao do sistema fornecendo dados de fabricantes editaveis."
+        "Reduzir as tensões transitórias simuladas durante a partida de motores.",
+        "Agilizar a construção do sistema fornecendo dados de fabricantes editáveis."
       ],
       "correctIndex": 3,
-      "explanation": "O software incorpora bibliotecas amigaveis contendo caracteristicas testadas de fabricantes, agilizando drasticamente o desenho final do projeto.",
+      "explanation": "O software incorpora bibliotecas amigáveis contendo características testadas de fabricantes, agilizando drasticamente o desenho final do projeto.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No estudo de curto-circuito do PTW, o que a opcao Initial Symmetrical RMS Only calcula padronizadamente?",
+      "statement": "No estudo de curto-circuito do PTW, o que a opção Initial Symmetrical RMS Only calcula padronizadamente?",
       "options": [
-        "As tensoes nas barras e as correntes nos ramos unicamente como valores complexos simetricos.",
-        "O pico assimetrico exato no primeiro ciclo do defeito.",
-        "O decaimento da componente de corrente continua ao longo de trinta ciclos.",
-        "Apenas as impedancias de sequencia zero dos motores de inducao ativos."
+        "As tensões nas barras e as correntes nos ramos unicamente como valores complexos simétricos.",
+        "O pico assimétrico exato no primeiro ciclo do defeito.",
+        "O decaimento da componente de corrente contínua ao longo de trinta ciclos.",
+        "Apenas as impedâncias de sequência zero dos motores de indução ativos."
       ],
       "correctIndex": 0,
-      "explanation": "A opcao Initial Symmetrical RMS Only calcula as tensoes nas barras e as correntes nos ramos como valores complexos sem o offset DC.",
+      "explanation": "A opção Initial Symmetrical RMS Only calcula as tensões nas barras e as correntes nos ramos como valores complexos sem o offset DC.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a plataforma PTW gerencia as adequacoes de topologia elaboradas pelo usuario quando se utiliza a ferramenta Multiple Scenarios?",
+      "statement": "Como a plataforma PTW gerencia as adequações de topologia elaboradas pelo usuário quando se utiliza a ferramenta Multiple Scenarios?",
       "options": [
-        "A mudanca e automaticamente forcada em todos os cenarios base adjuntos de forma destrutiva.",
-        "A alteracao fica armazenada somente no cenario modificado e destacada em uma cor diferente.",
-        "A alteracao exige a criacao de um novo projeto externo na raiz do disco rigido.",
-        "O modulo bloqueia mudancas de comprimento de cabo para proteger as impedancias base."
+        "A mudança é automaticamente forçada em todos os cenários base adjuntos de forma destrutiva.",
+        "A alteração fica armazenada somente no cenário modificado e destacada em uma cor diferente.",
+        "A alteração exige a criação de um novo projeto externo na raiz do disco rígido.",
+        "O módulo bloqueia mudanças de comprimento de cabo para proteger as impedâncias base."
       ],
       "correctIndex": 1,
-      "explanation": "Na aplicabilidade dos Scenarios, o programa grava as alteracoes exclusivas somente no cenario adotado modificado e as destaca com cores diferentes.",
+      "explanation": "Na aplicabilidade dos Scenarios, o programa grava as alterações exclusivas somente no cenário adotado modificado e as destaca com cores diferentes.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao selecionar a opcao Include Source Impedance for Utility no estudo de fluxo de carga, como o PTW trata matematicamente o modelo da fonte?",
+      "statement": "Ao selecionar a opção Include Source Impedance for Utility no estudo de fluxo de carga, como o PTW trata matematicamente o modelo da fonte?",
       "options": [
-        "Zera a admitancia shunt da rede principal simulada.",
-        "Multiplica a tensao nominal pelo fator de demanda ativo.",
-        "Usa a capacidade de curto-circuito trifasica para calcular a impedancia de sequencia positiva e a queda de tensao na barra swing.",
-        "Isola a fonte principal transformando-a em um capacitor em derivacao pura."
+        "Zera a admitância shunt da rede principal simulada.",
+        "Multiplica a tensão nominal pelo fator de demanda ativo.",
+        "Usa a capacidade de curto-circuito trifásica para calcular a impedância de sequência positiva e a queda de tensão na barra swing.",
+        "Isola a fonte principal transformando-a em um capacitor em derivação pura."
       ],
       "correctIndex": 2,
-      "explanation": "O PTW usa a capacidade de corrente de curto circuito trifasica para calcular uma impedancia de sequencia positiva e calcula a queda de tensao na barra swing.",
+      "explanation": "O PTW usa a capacidade de corrente de curto circuito trifásica para calcular uma impedância de sequência positiva e calcula a queda de tensão na barra swing.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o diferencial interativo da planilha gerada pela ferramenta Data Visualizer em relacao a um simples relatorio de dados em texto?",
+      "statement": "Qual é o diferencial interativo da planilha gerada pela ferramenta Data Visualizer em relação a um simples relatório de dados em texto?",
       "options": [
-        "A planilha nao permite salvar formatos graficos de visualizacao.",
-        "As alteracoes aplicam-se apenas para exportacao, sem afetar o Component Editor.",
-        "A tabela converte instantaneamente o diagrama unifilar em blocos logicos de protecao.",
-        "Mudancas feitas na tela sao atualizadas bidirecionalmente e refletem automaticamente na base de dados raiz do projeto."
+        "A planilha não permite salvar formatos gráficos de visualização.",
+        "As alterações aplicam-se apenas para exportação, sem afetar o Component Editor.",
+        "A tabela converte instantaneamente o diagrama unifilar em blocos lógicos de proteção.",
+        "Mudanças feitas na tela são atualizadas bidirecionalmente e refletem automaticamente na base de dados raiz do projeto."
       ],
       "correctIndex": 3,
-      "explanation": "O Data Visualizer tem ligacao direta de mao dupla a base de dados do projeto, de forma que alteracoes na tela modificam a base de dados central.",
+      "explanation": "O Data Visualizer tem ligação direta de mão dupla à base de dados do projeto, de forma que alterações na tela modificam a base de dados central.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No modulo CAPTOR, qual e a principal caracteristica restritiva imposta pelo segmento logico denominado Time-Current Points durante a modelagem de.",
+      "statement": "No módulo CAPTOR, qual é a principal característica restritiva imposta pelo segmento lógico denominado Time-Current Points durante a modelagem de.",
       "options": [
-        "Nao permite criar faixas de tolerancia plotando exclusivamente uma unica linha referencial.",
-        "Exige a entrada compulsoria de tempos de abertura e de fechamento independentes para o arco.",
-        "Utiliza a multiplicacao da corrente de partida pelo fator assimetrico DC da instalacao.",
-        "Traca somente linhas puramente horizontais associadas aos atrasos fixos dos disjuntores."
+        "Não permite criar faixas de tolerância plotando exclusivamente uma única linha referencial.",
+        "Exige a entrada compulsória de tempos de abertura e de fechamento independentes para o arco.",
+        "Utiliza a multiplicação da corrente de partida pelo fator assimétrico DC da instalação.",
+        "Traça somente linhas puramente horizontais associadas aos atrasos fixos dos disjuntores."
       ],
       "correctIndex": 0,
-      "explanation": "O segmento Time-Current Points assemelha-se ao Fuse Curve, mas nao permite uma faixa de tolerancia, ou seja, e desenhada somente uma linha unica.",
+      "explanation": "O segmento Time-Current Points assemelha-se ao Fuse Curve, mas não permite uma faixa de tolerância, ou seja, é desenhada somente uma linha única.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A plataforma PTW exige a construcao de bases de dados separadas e independentes para poder rodar estudos diferentes como fluxo de carga.",
+      "statement": "A plataforma PTW exige a construção de bases de dados separadas e independentes para poder rodar estudos diferentes como fluxo de carga.",
       "correctAnswer": false,
-      "explanation": "O PTW utiliza a mesma base de dados unificada e orientada a objeto para processar todos os modulos de estudo disponiveis no pacote.",
+      "explanation": "O PTW utiliza a mesma base de dados unificada e orientada a objeto para processar todos os módulos de estudo disponíveis no pacote.",
       "difficulty": "easy",
       "isTrue": false
     },
@@ -150,68 +150,68 @@
       "type": "trueFalse",
       "statement": "O estudo de Demand Load do DAPPER calcula as cargas conectadas, demandadas e projetadas, servindo como base matriz para posterior dimensionamento.",
       "correctAnswer": true,
-      "explanation": "O resultado do Demand Load executa o sumario vetorizado das cargas e sua saida pode ser utilizada como base essencial para o Estudo de Dimensionamento (Sizing).",
+      "explanation": "O resultado do Demand Load executa o sumário vetorizado das cargas e sua saída pode ser utilizada como base essencial para o Estudo de Dimensionamento (Sizing).",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Na configuracao dos criterios de solucao do fluxo de carga iterativo, caso o sistema apresente falhas na convergencia, os manuais recomendam.",
+      "statement": "Na configuração dos critérios de solução do fluxo de carga iterativo, caso o sistema apresente falhas na convergência, os manuais recomendam.",
       "correctAnswer": true,
-      "explanation": "Se ocorrer divergencia iterativa no metodo exato, o projetista deve tentar mudar o Generation Acceleration Factor e/ou o Load Acceleration Factor para um fator entre 0.1 e 1.0.",
+      "explanation": "Se ocorrer divergência iterativa no método exato, o projetista deve tentar mudar o Generation Acceleration Factor e/ou o Load Acceleration Factor para um fator entre 0.1 e 1.0.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O recurso Query presente no PTW restringe-se puramente a exportacao estatica de relatorios, sendo impossivel utiliza-lo de forma ativa para.",
+      "statement": "O recurso Query presente no PTW restringe-se puramente à exportação estática de relatórios, sendo impossível utilizá-lo de forma ativa para.",
       "correctAnswer": false,
-      "explanation": "A funcao Query esta disponivel ativamente nos ambientes Component Editor, One-Line Diagrams e Data Visualizer, permitindo filtrar e encontrar componentes em tela com base em criterios definidos pelo usuario.",
+      "explanation": "A função Query está disponível ativamente nos ambientes Component Editor, One-Line Diagrams e Data Visualizer, permitindo filtrar e encontrar componentes em tela com base em critérios definidos pelo usuário.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Na modelagem avancada do CAPTOR, o segmento Delay Band com Open-Clear Time in Seconds permite estipular curvas inversas com faixas de tolerancia.",
+      "statement": "Na modelagem avançada do CAPTOR, o segmento Delay Band com Open-Clear Time in Seconds permite estipular curvas inversas com faixas de tolerância.",
       "correctAnswer": true,
-      "explanation": "A entrada de dados requer que a abertura e fechamento possuam suas inclinacoes distintas calculadas a partir dos pontos (Opening Slope e Clearing Slope), em vez de uma unica inclinacao em conjunto para a faixa.",
+      "explanation": "A entrada de dados requer que a abertura e fechamento possuam suas inclinações distintas calculadas a partir dos pontos (Opening Slope e Clearing Slope), em vez de uma única inclinação em conjunto para a faixa.",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O modulo nativo do pacote SKM especificamente destinado a avaliar quedas de tensao e modelar a dinamica de arrancada transitoria em propulsores ____.",
+      "statement": "O módulo nativo do pacote SKM especificamente destinado a avaliar quedas de tensão e modelar a dinâmica de arrancada transitória em propulsores ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "TMS"
         }
       ],
-      "explanation": "O Estudo do TMS (Transient Motor Starting) executa a simulacao dinamica de partida de motores de inducao modelando o arrasto de carga.",
+      "explanation": "O Estudo do TMS (Transient Motor Starting) executa a simulação dinâmica de partida de motores de indução modelando o arrasto de carga.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "No relatorio final textual focado no fluxo de carga, para evidenciar visualmente as violacoes das tensoes admissiveis pre-configuradas pelo ____.",
+      "statement": "No relatório final textual focado no fluxo de carga, para evidenciar visualmente as violações das tensões admissíveis pré-configuradas pelo ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "$"
         }
       ],
-      "explanation": "No relatorio, o PTW informa as barras e os ramos que excederam as quedas de tensao com o simbolo cifrao indicando a violacao dos criterios de avaliacao estipulados.",
+      "explanation": "No relatório, o PTW informa as barras e os ramos que excederam as quedas de tensão com o símbolo cifrão indicando a violação dos critérios de avaliação estipulados.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Durante as entradas de parametros em segmentos de plotagem no modulo grafico do CAPTOR, o campo de texto nominado na interface inglesa pela ____.",
+      "statement": "Durante as entradas de parâmetros em segmentos de plotagem no módulo gráfico do CAPTOR, o campo de texto nominado na interface inglesa pela ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Desc"
         }
       ],
-      "explanation": "A apostila do treinamento cita inumeras vezes que o campo Desc e usado unicamente para finalidade de descricao, nao sendo nunca usado para qualquer calculo algebrico logico do PTW no tracado das curvas e relatorios.",
+      "explanation": "A apostila do treinamento cita inúmeras vezes que o campo Desc é usado unicamente para finalidade de descrição, não sendo nunca usado para qualquer cálculo algébrico lógico do PTW no traçado das curvas e relatórios.",
       "difficulty": "hard"
     }
   ]

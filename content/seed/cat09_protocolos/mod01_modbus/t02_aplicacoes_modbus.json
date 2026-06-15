@@ -10,119 +10,119 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Como o protocolo MODBUS e visto no contexto de arquiteturas modernas baseadas na norma IEC 61850?",
+      "statement": "Como o protocolo MODBUS é visto no contexto de arquiteturas modernas baseadas na norma IEC 61850?",
       "options": [
         "Como o protocolo principal do barramento de processo.",
-        "Como uma solucao legada e proprietaria integrada via Station Gateway.",
+        "Como uma solução legada e proprietária integrada via Station Gateway.",
         "Como substituto direto das mensagens GOOSE em redes LAN.",
-        "Como padrao exclusivo para reles de protecao de alta tensao."
+        "Como padrão exclusivo para relés de proteção de alta tensão."
       ],
       "correctIndex": 1,
-      "explanation": "Nas arquiteturas modernas ilustradas na norma, o MODBUS atua como uma solucao legada integrada ao sistema atraves de uma Station Gateway.",
+      "explanation": "Nas arquiteturas modernas ilustradas na norma, o MODBUS atua como uma solução legada integrada ao sistema através de uma Station Gateway.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual solucao foi aplicada na usina Caue para integrar motores de media tensao ao sistema IEC 61850?",
+      "statement": "Qual solução foi aplicada na usina Cauê para integrar motores de média tensão ao sistema IEC 61850?",
       "options": [
-        "Implementacao de rede Wi-Fi industrial para todos os motores.",
-        "Troca de todos os reles por modelos nativos GOOSE.",
-        "Uso de gateways para conversao do protocolo MODBUS em IEC 61850.",
-        "Uso exclusivo de cabeamento metalico ponto a ponto."
+        "Implementação de rede Wi-Fi industrial para todos os motores.",
+        "Troca de todos os relés por modelos nativos GOOSE.",
+        "Uso de gateways para conversão do protocolo MODBUS em IEC 61850.",
+        "Uso exclusivo de cabeamento metálico ponto a ponto."
       ],
       "correctIndex": 2,
-      "explanation": "Foi validado e aplicado com sucesso o uso de gateway para conversao do protocolo MODBUS em IEC 61850 no acionamento de motores na usina Caue.",
+      "explanation": "Foi validado e aplicado com sucesso o uso de gateway para conversão do protocolo MODBUS em IEC 61850 no acionamento de motores na usina Cauê.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual o papel comum do protocolo MODBUS na integracao de multimedidores e IEDs em um SCADA?",
+      "statement": "Qual o papel comum do protocolo MODBUS na integração de multimedidores e IEDs em um SCADA?",
       "options": [
-        "Sincronizar o relogio global via satelite.",
+        "Sincronizar o relógio global via satélite.",
         "Substituir os transformadores de corrente do painel.",
-        "Garantir a redundancia fisica da rede Ethernet.",
+        "Garantir a redundância física da rede Ethernet.",
         "Transmitir dados e medidas em um modelo cliente-servidor."
       ],
       "correctIndex": 3,
-      "explanation": "O MODBUS e utilizado para leitura de medidas e estados de multimedidores e IEDs pelo SCADA operando no modelo mestre-escravo (Informacao externa).",
+      "explanation": "O MODBUS é utilizado para leitura de medidas e estados de multimedidores e IEDs pelo SCADA operando no modelo mestre-escravo (Informação externa).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na aplicacao em subestacoes, como o MODBUS TCP se diferencia fisicamente do MODBUS RTU?",
+      "statement": "Na aplicação em subestações, como o MODBUS TCP se diferencia fisicamente do MODBUS RTU?",
       "options": [
-        "O TCP opera sobre redes Ethernet padronizadas de subestacao.",
-        "O TCP utiliza fibras opticas exclusivas sem switches.",
-        "O RTU e mais rapido em redes LAN corporativas.",
-        "O RTU utiliza enderecamento IPv6."
+        "O TCP opera sobre redes Ethernet padronizadas de subestação.",
+        "O TCP utiliza fibras ópticas exclusivas sem switches.",
+        "O RTU é mais rápido em redes LAN corporativas.",
+        "O RTU utiliza endereçamento IPv6."
       ],
       "correctIndex": 0,
-      "explanation": "O MODBUS TCP adapta o protocolo para trafegar sobre redes Ethernet utilizando a pilha TCP/IP, descartando links seriais antigos (Informacao externa).",
+      "explanation": "O MODBUS TCP adapta o protocolo para trafegar sobre redes Ethernet utilizando a pilha TCP/IP, descartando links seriais antigos (Informação externa).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como o protocolo MODBUS permite a operacao remota pelo SCADA em um sistema de controle?",
+      "statement": "Como o protocolo MODBUS permite a operação remota pelo SCADA em um sistema de controle?",
       "options": [
-        "Por meio de mensagens GOOSE nao confirmadas.",
-        "Atraves da escrita de comandos e setpoints em registradores especificos.",
-        "Usando sincronismo PTP de alta precisao.",
-        "Alterando fisicamente a fiacao do painel de protecao."
+        "Por meio de mensagens GOOSE não confirmadas.",
+        "Através da escrita de comandos e setpoints em registradores específicos.",
+        "Usando sincronismo PTP de alta precisão.",
+        "Alterando fisicamente a fiação do painel de proteção."
       ],
       "correctIndex": 1,
-      "explanation": "A operacao remota e feita atraves da escrita de comandos ou setpoints nos registradores e coils mapeados no dispositivo escravo (Informacao externa).",
+      "explanation": "A operação remota é feita através da escrita de comandos ou setpoints nos registradores e coils mapeados no dispositivo escravo (Informação externa).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a diferenca no mecanismo de aquisicao de dados do MODBUS em comparacao com os reports do IEC 61850?",
+      "statement": "Qual é a diferença no mecanismo de aquisição de dados do MODBUS em comparação com os reports do IEC 61850?",
       "options": [
-        "O MODBUS utiliza relatorios espontaneos por excecao.",
+        "O MODBUS utiliza relatórios espontâneos por exceção.",
         "Ambos operam exclusivamente por eventos disparados.",
-        "O MODBUS requer varredura continua ou polling pelo mestre.",
+        "O MODBUS requer varredura contínua ou polling pelo mestre.",
         "O MODBUS utiliza mensagens multicast de alta prioridade."
       ],
       "correctIndex": 2,
-      "explanation": "O MODBUS opera por polling onde o mestre interroga continuamente os escravos nao possuindo mecanismo de report espontaneo (Informacao externa).",
+      "explanation": "O MODBUS opera por polling onde o mestre interroga continuamente os escravos não possuindo mecanismo de report espontâneo (Informação externa).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e uma limitacao conhecida do protocolo MODBUS tradicional ao registrar eventos criticos em um SPCS?",
+      "statement": "Qual é uma limitação conhecida do protocolo MODBUS tradicional ao registrar eventos críticos em um SPCS?",
       "options": [
-        "Nao suporta conexao com CLPs industriais.",
-        "Exige cabos coaxiais de altissima perda de sinal.",
-        "Suporta apenas um equipamento escravo por rede de subestacao.",
+        "Não suporta conexão com CLPs industriais.",
+        "Exige cabos coaxiais de altíssima perda de sinal.",
+        "Suporta apenas um equipamento escravo por rede de subestação.",
         "Faltam estampas de tempo nativas geradas na origem do evento."
       ],
       "correctIndex": 3,
-      "explanation": "O MODBUS tradicional nao possui time-stamp nativo, fazendo com que a estampa de tempo seja dada no momento em que o SCADA recebe o dado (Informacao externa).",
+      "explanation": "O MODBUS tradicional não possui time-stamp nativo, fazendo com que a estampa de tempo seja dada no momento em que o SCADA recebe o dado (Informação externa).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que e considerado uma boa pratica na estruturacao de um mapa de registradores MODBUS para leitura eficiente?",
+      "statement": "O que é considerado uma boa prática na estruturação de um mapa de registradores MODBUS para leitura eficiente?",
       "options": [
-        "Agrupar dados de leitura continua em enderecos contiguos sequenciais.",
-        "Espalhar os dados criticos por blocos muito distantes na memoria.",
-        "Usar apenas a funcao de escrita para tentar realizar a leitura.",
-        "Evitar a documentacao do mapa para manter a seguranca do sistema."
+        "Agrupar dados de leitura contínua em endereços contíguos sequenciais.",
+        "Espalhar os dados críticos por blocos muito distantes na memória.",
+        "Usar apenas a função de escrita para tentar realizar a leitura.",
+        "Evitar a documentação do mapa para manter a segurança do sistema."
       ],
       "correctIndex": 0,
-      "explanation": "Agrupar dados lidos frequentemente em enderecos contiguos reduz o numero de requisicoes de polling, otimizando o trafego da rede (Informacao externa).",
+      "explanation": "Agrupar dados lidos frequentemente em endereços contíguos reduz o número de requisições de polling, otimizando o tráfego da rede (Informação externa).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Por que o MODBUS ainda e aplicado na integracao de equipamentos perifericos em subestacoes modernas?",
+      "statement": "Por que o MODBUS ainda é aplicado na integração de equipamentos periféricos em subestações modernas?",
       "options": [
         "Porque supera o IEC 61850 em velocidade de multicast no barramento.",
-        "Devido a sua simplicidade tecnica e ampla adocao na industria.",
-        "Devido a sua extrema complexidade e seguranca criptografica embutida.",
-        "Porque e o unico protocolo homologado para medidores pelo ONS."
+        "Devido à sua simplicidade técnica e ampla adoção na indústria.",
+        "Devido à sua extrema complexidade e segurança criptográfica embutida.",
+        "Porque é o único protocolo homologado para medidores pelo ONS."
       ],
       "correctIndex": 1,
-      "explanation": "Sua simplicidade de implementacao e o fato de ser um padrao industrial amplamente adotado mantem o MODBUS relevante (Informacao externa).",
+      "explanation": "Sua simplicidade de implementação e o fato de ser um padrão industrial amplamente adotado mantêm o MODBUS relevante (Informação externa).",
       "difficulty": "medium"
     },
     {
@@ -130,88 +130,88 @@
       "statement": "Ao utilizar uma gateway MODBUS para IEC 61850 em um SPCS, qual desafio de desempenho deve ser gerenciado?",
       "options": [
         "A impossibilidade de ler grandezas de multimedidores industriais.",
-        "A incompatibilidade eletrica entre os cabos RS-485 e a gateway Ethernet.",
-        "O tempo de latencia gerado pela varredura continua do link MODBUS.",
-        "O limite estrito de 5 metros de distancia das redes Ethernet da subestacao."
+        "A incompatibilidade elétrica entre os cabos RS-485 e a gateway Ethernet.",
+        "O tempo de latência gerado pela varredura contínua do link MODBUS.",
+        "O limite estrito de 5 metros de distância das redes Ethernet da subestação."
       ],
       "correctIndex": 2,
-      "explanation": "A gateway precisa fazer polling constante no link serial MODBUS para atualizar os dados, o que insere latencia antes do report IEC 61850 (Informacao externa).",
+      "explanation": "A gateway precisa fazer polling constante no link serial MODBUS para atualizar os dados, o que insere latência antes do report IEC 61850 (Informação externa).",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Testes documentados na usina Caue comprovaram ser possivel a integracao de motores de media tensao em sistemas IEC 61850 usando conversores do.",
+      "statement": "Testes documentados na usina Cauê comprovaram ser possível a integração de motores de média tensão em sistemas IEC 61850 usando conversores do.",
       "correctAnswer": true,
-      "explanation": "As fontes citam diretamente a aplicacao e conversao do protocolo MODBUS em IEC 61850 via gateway no acionamento desses motores na usina Caue.",
+      "explanation": "As fontes citam diretamente a aplicação e conversão do protocolo MODBUS em IEC 61850 via gateway no acionamento desses motores na usina Cauê.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Em sua concepcao padrao, o protocolo MODBUS suporta nativamente o conceito de Report por Excecao similar aos Buffered Reports do IEC 61850.",
+      "statement": "Em sua concepção padrão, o protocolo MODBUS suporta nativamente o conceito de Report por Exceção similar aos Buffered Reports do IEC 61850.",
       "correctAnswer": false,
-      "explanation": "O protocolo MODBUS nao possui capacidade nativa de Report por Excecao, operando estritamente baseando-se no modelo de polling mestre-escravo (Informacao externa).",
+      "explanation": "O protocolo MODBUS não possui capacidade nativa de Report por Exceção, operando estritamente baseando-se no modelo de polling mestre-escravo (Informação externa).",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Atraves de uma rede Ethernet em subestacao, o MODBUS TCP permite a integracao do SCADA com multimedidores para leitura de medidas e estados eletricos.",
+      "statement": "Através de uma rede Ethernet em subestação, o MODBUS TCP permite a integração do SCADA com multimedidores para leitura de medidas e estados elétricos.",
       "correctAnswer": true,
-      "explanation": "O MODBUS TCP encapsula a logica do protocolo sobre TCP/IP, permitindo que as aplicacoes SCADA comuniquem-se via rede Ethernet (Informacao externa).",
+      "explanation": "O MODBUS TCP encapsula a lógica do protocolo sobre TCP/IP, permitindo que as aplicações SCADA comuniquem-se via rede Ethernet (Informação externa).",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A configuracao adequada de um conversor MODBUS para IEC 61850 independe do conhecimento previo do mapa de registradores do equipamento escravo.",
+      "statement": "A configuração adequada de um conversor MODBUS para IEC 61850 independe do conhecimento prévio do mapa de registradores do equipamento escravo.",
       "correctAnswer": false,
-      "explanation": "E obrigatorio conhecer o mapa de registradores do escravo para correlacionar e mapear corretamente cada dado MODBUS aos Logical Nodes IEC 61850 (Informacao externa).",
+      "explanation": "É obrigatório conhecer o mapa de registradores do escravo para correlacionar e mapear corretamente cada dado MODBUS aos Logical Nodes IEC 61850 (Informação externa).",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A falta de estampa de tempo nativa no MODBUS dificulta a analise de sequencia de eventos (SOE) com precisao de milissegundos a partir dos dados.",
+      "statement": "A falta de estampa de tempo nativa no MODBUS dificulta a análise de sequência de eventos (SOE) com precisão de milissegundos a partir dos dados.",
       "correctAnswer": true,
-      "explanation": "Como o MODBUS nao possui time-stamp na origem, o SCADA carimba o tempo apenas quando recebe a resposta do polling, afetando a precisao (Informacao externa).",
+      "explanation": "Como o MODBUS não possui time-stamp na origem, o SCADA carimba o tempo apenas quando recebe a resposta do polling, afetando a precisão (Informação externa).",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Equipamentos legados operando em MODBUS sao integrados a arquitetura de rede IEC 61850 do nivel de estacao por meio de um dispositivo chamado ____.",
+      "statement": "Equipamentos legados operando em MODBUS são integrados à arquitetura de rede IEC 61850 do nível de estação por meio de um dispositivo chamado ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Gateway"
         }
       ],
-      "explanation": "A Station Gateway e o componente ilustrado nas arquiteturas para concentrar e converter protocolos legados, como MODBUS e DNP.",
+      "explanation": "A Station Gateway é o componente ilustrado nas arquiteturas para concentrar e converter protocolos legados, como MODBUS e DNP.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Diferente do modelo de publicacao espontanea utilizado nas mensagens GOOSE, o MODBUS exige que a comunicacao seja conduzida por interrogatorios ____.",
+      "statement": "Diferente do modelo de publicação espontânea utilizado nas mensagens GOOSE, o MODBUS exige que a comunicação seja conduzida por interrogatórios ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "polling"
         }
       ],
-      "explanation": "O mecanismo padrao pelo qual um mestre MODBUS requisita dados periodicamente de cada um de seus escravos e conhecido como polling (Informacao externa).",
+      "explanation": "O mecanismo padrão pelo qual um mestre MODBUS requisita dados periodicamente de cada um de seus escravos é conhecido como polling (Informação externa).",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "A migracao do protocolo operando em portas seriais para as redes LAN de subestacao exigiu o encapsulamento do quadro MODBUS nativo sobre a pilha de ____.",
+      "statement": "A migração do protocolo operando em portas seriais para as redes LAN de subestação exigiu o encapsulamento do quadro MODBUS nativo sobre a pilha de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "TCP/IP"
         }
       ],
-      "explanation": "O protocolo TCP/IP e a pilha subjacente que permite que a versao moderna do protocolo MODBUS seja roteada em redes Ethernet (Informacao externa).",
+      "explanation": "O protocolo TCP/IP é a pilha subjacente que permite que a versão moderna do protocolo MODBUS seja roteada em redes Ethernet (Informação externa).",
       "difficulty": "hard"
     }
   ]

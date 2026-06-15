@@ -11,6 +11,7 @@ import 'package:spark_app/screens/learning_path_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/progress_provider.dart';
 import 'package:spark_app/providers/content_providers.dart';
+import 'package:spark_app/core/utils/theme_utils.dart';
 
 class ModulesScreen extends ConsumerWidget {
   final SPARKCategory? category;
@@ -118,12 +119,22 @@ class ModulesScreen extends ConsumerWidget {
                         );
                       }
 
+                      // Ícone ÚNICO por módulo: derivado do conteúdo, sem
+                      // repetição na lista e sempre diferente do ícone da
+                      // categoria. Calculado de uma vez sobre a lista inteira.
+                      final moduleIcons = ThemeUtils.assignUniqueIcons(
+                        modules.map((m) => '${m.title} ${m.subtitle}').toList(),
+                        categoryIcon: themeIcon,
+                        seed: cat.id,
+                      );
+
                       return ListView.builder(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         physics: const BouncingScrollPhysics(),
                         itemCount: modules.length,
                         itemBuilder: (context, index) {
                           final module = modules[index];
+                          final moduleIcon = moduleIcons[index];
 
                           // Calcular progresso (módulos sem bloqueio sequencial)
                           final progIndex = userProgress.indexWhere((p) => p.moduleId == module.id);
@@ -137,7 +148,7 @@ class ModulesScreen extends ConsumerWidget {
                               progress: actualProgress,
                               isLocked: false, // Navegação livre — sem prerequisito sequencial
                               themeColor: themeColor,
-                              themeIcon: themeIcon,
+                              themeIcon: moduleIcon,
                               isTestMode: isTestMode,
                               onTap: () {
                                 HapticFeedback.lightImpact();
@@ -148,7 +159,7 @@ class ModulesScreen extends ConsumerWidget {
                                       category: cat,
                                       module: module,
                                       themeColor: themeColor,
-                                      themeIcon: themeIcon,
+                                      themeIcon: moduleIcon,
                                     ),
                                   ),
                                 );
@@ -310,6 +321,8 @@ class _ModuleCardState extends State<_ModuleCard>
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
                             ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 4),
                           Text(

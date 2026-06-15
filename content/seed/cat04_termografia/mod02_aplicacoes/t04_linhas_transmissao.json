@@ -1,217 +1,217 @@
 {
   "category": "Termografia Infravermelha",
-  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categorySubtitle": "Fundamentos, aplicações em sistemas elétricos e normas de laudos",
   "categoryOrder": 3,
   "module": "Termografia em Sistemas Elétricos",
-  "moduleSubtitle": "Inspecao de subestacoes, paineis, motores, linhas e pontos quentes",
+  "moduleSubtitle": "Inspeção de subestações, painéis, motores, linhas e pontos quentes",
   "moduleOrder": 2,
   "trail": "Aplicações em Linhas de Transmissão",
   "trailOrder": 3,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual a principal vantagem do uso de drones equipados com cameras termicas nas inspecoes de linhas de transmissao?",
+      "statement": "Qual a principal vantagem do uso de drones equipados com câmeras térmicas nas inspeções de linhas de transmissão?",
       "options": [
-        "Alcancar locais altos minimizando o trabalho manual em areas de risco.",
-        "Aumentar a temperatura dos cabos para facilitar a deteccao no ar.",
-        "Medir o nivel de tensao interna dos isoladores de porcelana limpos.",
+        "Alcançar locais altos minimizando o trabalho manual em áreas de risco.",
+        "Aumentar a temperatura dos cabos para facilitar a detecção no ar.",
+        "Medir o nível de tensão interna dos isoladores de porcelana limpos.",
         "Substituir completamente a necessidade de qualquer ajuste de emissividade."
       ],
       "correctIndex": 0,
-      "explanation": "Drones com cameras termicas alcancam locais altos e perigosos como torres de transmissao minimizando o trabalho manual em area de risco. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "Drones com câmeras térmicas alcançam locais altos e perigosos como torres de transmissão minimizando o trabalho manual em área de risco. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quais sao as principais causas da geracao de pontos quentes em circuitos eletricos e linhas aereas?",
+      "statement": "Quais são as principais causas da geração de pontos quentes em circuitos elétricos e linhas aéreas?",
       "options": [
         "Resfriamento convectivo acelerado da atmosfera limpa.",
-        "Aumento agudo da reatancia capacitiva da propria linha.",
-        "Deficiencia de contato, corrosao estrutural ou oxidacao.",
-        "Aumento da transmitancia atmosferica do ar seco."
+        "Aumento agudo da reatância capacitiva da própria linha.",
+        "Deficiência de contato, corrosão estrutural ou oxidação.",
+        "Aumento da transmitância atmosférica do ar seco."
       ],
       "correctIndex": 2,
-      "explanation": "Pontos quentes em circuitos eletricos sao gerados por deficiencia de contato nos componentes, corrosao, oxidacao ou problemas de distribuicao de carga. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "Pontos quentes em circuitos elétricos são gerados por deficiência de contato nos componentes, corrosão, oxidação ou problemas de distribuição de carga. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual instrumento e utilizado para medir a variavel ambiental que causa resfriamento convectivo nos componentes eletricos externos?",
+      "statement": "Qual instrumento é utilizado para medir a variável ambiental que causa resfriamento convectivo nos componentes elétricos externos?",
       "options": [
-        "Anemometro.",
-        "Termohigrometro.",
-        "Barometro.",
-        "Luximetro."
+        "Anemômetro.",
+        "Termo-higrômetro.",
+        "Barômetro.",
+        "Luxímetro."
       ],
       "correctIndex": 0,
-      "explanation": "Um anemometro mede a velocidade do vento incidente no componente para permitir as devidas correcoes termicas. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Um anemômetro mede a velocidade do vento incidente no componente para permitir as devidas correções térmicas. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em inspecoes a longa distancia, o que o parametro IFOV define na configuracao geometrica da camera termografica?",
+      "statement": "Em inspeções a longa distância, o que o parâmetro IFOV define na configuração geométrica da câmera termográfica?",
       "options": [
-        "A velocidade limite de cruzeiro do drone durante a inspecao aerea.",
-        "O angulo sob o qual um elemento detector percebe a radiacao do objeto.",
-        "O fator multiplicativo linear de correcao da emissividade do aluminio.",
-        "A quantidade exata de poeira e agua precipitavel na atmosfera livre."
+        "A velocidade limite de cruzeiro do drone durante a inspeção aérea.",
+        "O ângulo sob o qual um elemento detector percebe a radiação do objeto.",
+        "O fator multiplicativo linear de correção da emissividade do alumínio.",
+        "A quantidade exata de poeira e água precipitável na atmosfera livre."
       ],
       "correctIndex": 1,
-      "explanation": "O IFOV fornece o angulo sob o qual um unico elemento detector do FPA percebe a radiacao do objeto inspecionado. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O IFOV fornece o ângulo sob o qual um único elemento detector do FPA percebe a radiação do objeto inspecionado. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Que tipo de lente e adequado para melhorar a resolucao espacial de alvos distantes, como cabos de alta tensao operantes?",
+      "statement": "Que tipo de lente é adequado para melhorar a resolução espacial de alvos distantes, como cabos de alta tensão operantes?",
       "options": [
-        "Lente grande angular de 45 graus com visao plana.",
-        "Lente padrao comercial de 24 graus.",
-        "Lente telescopica de 12 graus ou menor.",
-        "Lente macro focada apenas para curtas distancias de bancada."
+        "Lente grande angular de 45 graus com visão plana.",
+        "Lente padrão comercial de 24 graus.",
+        "Lente telescópica de 12 graus ou menor.",
+        "Lente macro focada apenas para curtas distâncias de bancada."
       ],
       "correctIndex": 2,
-      "explanation": "Lentes telescopicas de FOV menor melhoram a resolucao espacial porque focam os mesmos pixels em uma area significativamente mais estrita. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Lentes telescópicas de FOV menor melhoram a resolução espacial porque focam os mesmos pixels em uma área significativamente mais estrita. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em condutores operando em paralelo, o que a analise de um cabo apresentando temperatura inferior aos demais pode indicar na realidade?",
+      "statement": "Em condutores operando em paralelo, o que a análise de um cabo apresentando temperatura inferior aos demais pode indicar na realidade?",
       "options": [
-        "Que ele e o unico fio do conjunto funcionando de modo saudavel.",
+        "Que ele é o único fio do conjunto funcionando de modo saudável.",
         "Que ele pode apresentar um grave defeito de contato resistivo e conduz menos corrente.",
         "Que sua emissividade superficial absoluta tornou-se muito superior a um.",
-        "Que o cabo resfriado esta operando perigosamente em estado de curto-circuito."
+        "Que o cabo resfriado está operando perigosamente em estado de curto-circuito."
       ],
       "correctIndex": 1,
-      "explanation": "No cabo com forte mau contato resistivo a corrente se desvia para conexoes saudaveis fazendo o fio ruim aquecer menos que o cabo bom. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "No cabo com forte mau contato resistivo a corrente se desvia para conexões saudáveis fazendo o fio ruim aquecer menos que o cabo bom. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nas linhas e subestacoes, quais elementos sao apontados como os pontos mais comuns de geracao de pontos quentes que demandam inspecao termografica frequente?",
+      "statement": "Nas linhas e subestações, quais elementos são apontados como os pontos mais comuns de geração de pontos quentes que demandam inspeção termográfica frequente?",
       "options": [
-        "Os nucleos magneticos internos dos transformadores selados a vacuo.",
-        "As conexoes, emendas e contatos dos condutores, por deficiencia de contato ou oxidacao.",
+        "Os núcleos magnéticos internos dos transformadores selados a vácuo.",
+        "As conexões, emendas e contatos dos condutores, por deficiência de contato ou oxidação.",
         "As estruturas de concreto das torres e os para-raios de linha aterrados.",
-        "As cadeias de isoladores limpas operando em regiao de baixa umidade."
+        "As cadeias de isoladores limpas operando em região de baixa umidade."
       ],
       "correctIndex": 1,
-      "explanation": "Os pontos quentes concentram-se nas conexoes e contatos dos condutores, gerados por deficiencia de contato, corrosao ou oxidacao. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "Os pontos quentes concentram-se nas conexões e contatos dos condutores, gerados por deficiência de contato, corrosão ou oxidação. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para evitar erro de difracao em alvos muito distantes, qual deve ser o tamanho do componente em relacao ao IFOV calculado pelo operador?",
+      "statement": "Para evitar erro de difração em alvos muito distantes, qual deve ser o tamanho do componente em relação ao IFOV calculado pelo operador?",
       "options": [
-        "Dimensionalmente igual a exata metade do IFOV.",
+        "Dimensionalmente igual à exata metade do IFOV.",
         "Estritamente e perfeitamente igual ao IFOV da lente.",
-        "Aproximadamente duas a tres vezes o tamanho minimo estipulado pelo IFOV.",
+        "Aproximadamente duas a três vezes o tamanho mínimo estipulado pelo IFOV.",
         "Rigorosamente menor que um quarto do IFOV nominal calculado na linha."
       ],
       "correctIndex": 2,
-      "explanation": "O objeto deve medir de duas a tres vezes o tamanho minimo delineado pelo IFOV para prevenir erros limitantes de difracao na lente. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O objeto deve medir de duas a três vezes o tamanho mínimo delineado pelo IFOV para prevenir erros limitantes de difração na lente. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o indicativo pratico que aponta e embasa a classificacao de severidade termica de uma falha detectada na rede eletrica?",
+      "statement": "Qual é o indicativo prático que aponta e embasa a classificação de severidade térmica de uma falha detectada na rede elétrica?",
       "options": [
-        "A temperatura efetiva do componente unida indissociavelmente a sua corrente de carga.",
-        "A medicao exata e pura do reflexo solar no revestimento do componente aereo.",
+        "A temperatura efetiva do componente unida indissociavelmente à sua corrente de carga.",
+        "A medição exata e pura do reflexo solar no revestimento do componente aéreo.",
         "A exclusiva emissividade absoluta aferida no cabo sob repouso noturno.",
-        "O modelo comercial restrito do equipamento drone adotado na inspecao visual."
+        "O modelo comercial restrito do equipamento drone adotado na inspeção visual."
       ],
       "correctIndex": 0,
-      "explanation": "A elevacao de temperatura focada e a sua respectiva carga medida da corrente eletrica sao os robustos indicadores de gravidade do defeito. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A elevação de temperatura focada e a sua respectiva carga medida da corrente elétrica são os robustos indicadores de gravidade do defeito. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em inspecoes aereas muito distantes, como se calcula fundamentalmente a quantidade de agua precipitavel que atenua o sinal infravermelho?",
+      "statement": "Em inspeções aéreas muito distantes, como se calcula fundamentalmente a quantidade de água precipitável que atenua o sinal infravermelho?",
       "options": [
-        "Calculando a subtracao limite entre radiancia do corpo negro e a refletancia aparente.",
-        "Registrando de maneira exclusiva a velocidade direta do vento cruzado com o anemometro.",
-        "Por meio das medicoes precisas da umidade relativa e temperatura atmosferica no trajeto da visada.",
-        "Usando equacoes e tabelas de carga de reatancia dos transformadores rurais trifasicos."
+        "Calculando a subtração limite entre radiância do corpo negro e a refletância aparente.",
+        "Registrando de maneira exclusiva a velocidade direta do vento cruzado com o anemômetro.",
+        "Por meio das medições precisas da umidade relativa e temperatura atmosférica no trajeto da visada.",
+        "Usando equações e tabelas de carga de reatância dos transformadores rurais trifásicos."
       ],
       "correctIndex": 2,
-      "explanation": "A quantidade limitante de agua precipitavel e equacionada aferindo a umidade relativa local e a temperatura atmosferica do caminho da visada. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A quantidade limitante de água precipitável é equacionada aferindo a umidade relativa local e a temperatura atmosférica do caminho da visada. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Condicoes climaticas adversas, como ventos muito fortes, podem dificultar ou ate impedir o uso de drones em inspecoes termograficas.",
+      "statement": "Condições climáticas adversas, como ventos muito fortes, podem dificultar ou até impedir o uso de drones em inspeções termográficas.",
       "correctAnswer": true,
-      "explanation": "Ventos fortes prejudicam o uso de drones e criam desafios que dependem de equipamentos robustos tolerantes a intemperies para superacao. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "Ventos fortes prejudicam o uso de drones e criam desafios que dependem de equipamentos robustos tolerantes a intempéries para superação. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Os pontos de calor (hot spots) detectados nas redes indicam sempre areas operando no seu nivel maximo de eficiencia e seguranca estrutural.",
+      "statement": "Os pontos de calor (hot spots) detectados nas redes indicam sempre áreas operando no seu nível máximo de eficiência e segurança estrutural.",
       "correctAnswer": false,
-      "explanation": "Os hot spots captados revelam areas termicas que sinalizam fadiga e indicam riscos reais de forte sobrecarga e desgaste mecanico. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "Os hot spots captados revelam áreas térmicas que sinalizam fadiga e indicam riscos reais de forte sobrecarga e desgaste mecânico. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Na inspecao preditiva de linhas eletricas, as anomalias termicas detectadas nos condutores habitualmente antecedem o colapso e a falha do equipamento.",
+      "statement": "Na inspeção preditiva de linhas elétricas, as anomalias térmicas detectadas nos condutores habitualmente antecedem o colapso e a falha do equipamento.",
       "correctAnswer": true,
-      "explanation": "As mudancas nas anomalias termicas precedem de modo sistematico rupturas e quebras nos elementos eletricos operantes, atuando como forte diagnostico preventivo. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "As mudanças nas anomalias térmicas precedem de modo sistemático rupturas e quebras nos elementos elétricos operantes, atuando como forte diagnóstico preventivo. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Na inspecao de cabos paralelos de uma mesma fase, o diagnostico trivial de temperatura sempre garantira que o cabo mais aquecido contem a grave falha.",
+      "statement": "Na inspeção de cabos paralelos de uma mesma fase, o diagnóstico trivial de temperatura sempre garantirá que o cabo mais aquecido contém a grave falha.",
       "correctAnswer": false,
-      "explanation": "O mau contato excessivo gera altissima resistencia forcando a passagem da corrente para fios vizinhos, aquecendo ironicamente os cabos intactos e saudaveis. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O mau contato excessivo gera altíssima resistência forçando a passagem da corrente para fios vizinhos, aquecendo ironicamente os cabos intactos e saudáveis. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A termografia infravermelha aplicada em campo possibilita o monitoramento remoto de linhas de transmissao sem impor a interrupcao da forca operacional de energia.",
+      "statement": "A termografia infravermelha aplicada em campo possibilita o monitoramento remoto de linhas de transmissão sem impor a interrupção da força operacional de energia.",
       "correctAnswer": true,
-      "explanation": "O processo preditivo remoto da captacao termografica nao interfere no andamento do sistema e nao pede o corte de energia na rotina produtiva. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "O processo preditivo remoto da captação termográfica não interfere no andamento do sistema e não pede o corte de energia na rotina produtiva. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Inspecoes termograficas seguras em locais altos e perigosos sao realizadas velozmente por ____ equipados com cameras termicas de alta resolucao radiometrica.",
+      "statement": "Inspeções termográficas seguras em locais altos e perigosos são realizadas velozmente por ____ equipados com câmeras térmicas de alta resolução radiométrica.",
       "blanks": [
         {
           "index": 0,
           "answer": "drones"
         }
       ],
-      "explanation": "A integracao propiciada pela tecnologia de drones embarcados minimiza o uso bracal humano de andaimes ao avaliar partes criticas nas torres elevadas de energia. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "A integração propiciada pela tecnologia de drones embarcados minimiza o uso braçal humano de andaimes ao avaliar partes críticas nas torres elevadas de energia. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Para obter maior resolucao optica focando um alvo muito distante na linha, o termografista pode utilizar uma lente ____ que apresente foco otico proximo de 12 graus de FOV nominal.",
+      "statement": "Para obter maior resolução óptica focando um alvo muito distante na linha, o termografista pode utilizar uma lente ____ que apresente foco ótico próximo de 12 graus de FOV nominal.",
       "blanks": [
         {
           "index": 0,
           "answer": "telescopica"
         }
       ],
-      "explanation": "A troca de componentes opticos pela lente telescopica estreita fortemente o FOV captado, maximizando o aproveitamento da resolucao para avaliar objetos afastados. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A troca de componentes ópticos pela lente telescópica estreita fortemente o FOV captado, maximizando o aproveitamento da resolução para avaliar objetos afastados. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Nas inspecoes termograficas executadas em campo e em areas abertas, a dinamica natural e o choque oriundo da velocidade livre do ____ age induzindo resfriamento forcado e mascara sobre as pecas lidas.",
+      "statement": "Nas inspeções termográficas executadas em campo e em áreas abertas, a dinâmica natural e o choque oriundo da velocidade livre do ____ age induzindo resfriamento forçado e máscara sobre as peças lidas.",
       "blanks": [
         {
           "index": 0,
           "answer": "vento"
         }
       ],
-      "explanation": "O choque advectivo gerado pela velocidade do vento afeta termicamente a medicao, promovendo trocas acentuadas e camuflagem no calor dos terminais metalicos avaliados ao ar livre. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O choque advectivo gerado pela velocidade do vento afeta termicamente a medição, promovendo trocas acentuadas e camuflagem no calor dos terminais metálicos avaliados ao ar livre. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     }
   ]

@@ -10,7 +10,7 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual arquivo SCL descreve a subestacao completa incluindo todos os IEDs e a configuracao de comunicacao?",
+      "statement": "Qual arquivo SCL descreve a subestação completa incluindo todos os IEDs e a configuração de comunicação?",
       "options": [
         "CID",
         "ICD",
@@ -18,200 +18,200 @@
         "SCD"
       ],
       "correctIndex": 3,
-      "explanation": "O arquivo SCD (Substation Configuration Description) consolida a topologia e a comunicacao de todos os IEDs interligados.",
+      "explanation": "O arquivo SCD (Substation Configuration Description) consolida a topologia e a comunicação de todos os IEDs interligados.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual caracteristica e tipica das ferramentas de configuracao de sistema para engenharia IEC 61850?",
+      "statement": "Qual característica é típica das ferramentas de configuração de sistema para engenharia IEC 61850?",
       "options": [
-        "Elas suportam engenharia top-down e desenvolvimento off-line a partir da especificacao.",
-        "Elas se conectam online aos IEDs para upload de firmwares proprietarios.",
-        "Elas nao permitem o manuseio de diagramas unifilares da planta.",
-        "Elas focam unicamente no envio de parametros analogicos Modbus."
+        "Elas suportam engenharia top-down e desenvolvimento off-line a partir da especificação.",
+        "Elas se conectam online aos IEDs para upload de firmwares proprietários.",
+        "Elas não permitem o manuseio de diagramas unifilares da planta.",
+        "Elas focam unicamente no envio de parâmetros analógicos Modbus."
       ],
       "correctIndex": 0,
-      "explanation": "Ferramentas de sistema permitem projetar a arquitetura de forma top-down, reutilizando solucoes de projeto de modo off-line.",
+      "explanation": "Ferramentas de sistema permitem projetar a arquitetura de forma top-down, reutilizando soluções de projeto de modo off-line.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Onde os servidores de operacao IHM e os gateways sao fisicamente conectados na arquitetura de rede da norma?",
+      "statement": "Onde os servidores de operação IHM e os gateways são fisicamente conectados na arquitetura de rede da norma?",
       "options": [
         "No barramento de processo.",
-        "No barramento de estacao.",
-        "Em cabos seriais dedicados aos reles de protecao.",
+        "No barramento de estação.",
+        "Em cabos seriais dedicados aos relés de proteção.",
         "Isolados em uma DMZ externa e sem rede local."
       ],
       "correctIndex": 1,
-      "explanation": "Estes computadores, HMIs e gateways compoem o nivel de estacao e atuam conectados diretamente ao barramento de estacao (station bus).",
+      "explanation": "Estes computadores, HMIs e gateways compõem o nível de estação e atuam conectados diretamente ao barramento de estação (station bus).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual pratica administrativa e vital nas politicas de ciberseguranca para mitigar riscos de intrusao em subestacoes digitais?",
+      "statement": "Qual prática administrativa é vital nas políticas de cibersegurança para mitigar riscos de intrusão em subestações digitais?",
       "options": [
-        "Preservar as senhas originais de fabrica para garantir agilidade nas manutencoes.",
+        "Preservar as senhas originais de fábrica para garantir agilidade nas manutenções.",
         "Desabilitar permanentemente o envio de logs MMS de falhas operacionais.",
-        "Implementar senhas fortes geridas centralmente com prazos de validade e o bloqueio sistematico de portas USB.",
-        "Utilizar roteadores de radio abertos no patio da usina."
+        "Implementar senhas fortes geridas centralmente com prazos de validade e o bloqueio sistemático de portas USB.",
+        "Utilizar roteadores de rádio abertos no pátio da usina."
       ],
       "correctIndex": 2,
-      "explanation": "O servidor de dominio administra as credenciais validando senhas fortes e rotativas, alem de restringir acessos perifericos como o USB.",
+      "explanation": "O servidor de domínio administra as credenciais validando senhas fortes e rotativas, além de restringir acessos periféricos como o USB.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No comissionamento da arquitetura SCADA, qual e a funcao primordial do gateway de comunicacao?",
+      "statement": "No comissionamento da arquitetura SCADA, qual é a função primordial do gateway de comunicação?",
       "options": [
-        "Bloquear atuacoes mecanicas em disjuntores de entrada.",
-        "Digitalizar tensoes analogicas oriundas dos TPs.",
-        "Realizar o espelhamento de trafego e roteamento logico de frames GOOSE.",
-        "Traduzir as informacoes da IEC 61850 para protocolos de telemetria WAN como DNP3 e IEC 104."
+        "Bloquear atuações mecânicas em disjuntores de entrada.",
+        "Digitalizar tensões analógicas oriundas dos TPs.",
+        "Realizar o espelhamento de tráfego e roteamento lógico de frames GOOSE.",
+        "Traduzir as informações da IEC 61850 para protocolos de telemetria WAN como DNP3 e IEC 104."
       ],
       "correctIndex": 3,
-      "explanation": "O gateway condensa e converte os dados provenientes do barramento da estacao para protocolos legados, suprindo o centro de operacao corporativo remoto.",
+      "explanation": "O gateway condensa e converte os dados provenientes do barramento da estação para protocolos legados, suprindo o centro de operação corporativo remoto.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante o processo de distribuicao de configuracoes, o que o arquivo CID gerado pela engenharia descreve?",
+      "statement": "Durante o processo de distribuição de configurações, o que o arquivo CID gerado pela engenharia descreve?",
       "options": [
         "Um IED instanciado do projeto contendo de forma filtrada unicamente os dados requeridos por ele.",
-        "O log sequencial listando as quebras de ciberseguranca.",
+        "O log sequencial listando as quebras de cibersegurança.",
         "A planta da usina completamente livre de qualquer IED.",
-        "As chaves corporativas e relatorios do banco de dados MIB."
+        "As chaves corporativas e relatórios do banco de dados MIB."
       ],
       "correctIndex": 0,
-      "explanation": "O Configured IED Description (CID) e um desdobramento pratico do SCD que entrega ao dispositivo as suas configuracoes e enderecos exclusivos.",
+      "explanation": "O Configured IED Description (CID) é um desdobramento prático do SCD que entrega ao dispositivo as suas configurações e endereços exclusivos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No teste dinamico do sistema, se apenas os vaos convencionais foram montados fisicamente, como o intertravamento logico global pode ser validado?",
+      "statement": "No teste dinâmico do sistema, se apenas os vãos convencionais foram montados fisicamente, como o intertravamento lógico global pode ser validado?",
       "options": [
-        "Forcando reles eletromecanicos atraves da injecao isolada de altas correntes CA.",
-        "Simulando os vaos faltantes ou IEDs omissos operando simuladores de comunicacao pautados nos arquivos SCD.",
-        "Desconectando sumariamente o barramento Ethernet ate o fechamento do anel.",
+        "Forçando relés eletromecânicos através da injeção isolada de altas correntes CA.",
+        "Simulando os vãos faltantes ou IEDs omissos operando simuladores de comunicação pautados nos arquivos SCD.",
+        "Desconectando sumariamente o barramento Ethernet até o fechamento do anel.",
         "Injetando comandos Spanning Tree nas portas seriais."
       ],
       "correctIndex": 1,
-      "explanation": "Ferramentas de teste leem o arquivo SCD e simulam os sinais da rede de equipamentos fisicamente inexistentes na planta, testando as logicas em profundidade.",
+      "explanation": "Ferramentas de teste leem o arquivo SCD e simulam os sinais da rede de equipamentos fisicamente inexistentes na planta, testando as lógicas em profundidade.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para gestao e controle de alteracoes feitas nos paineis, o que o atributo revision presente no cabecalho do arquivo SCL expressa?",
+      "statement": "Para gestão e controle de alterações feitas nos painéis, o que o atributo revision presente no cabeçalho do arquivo SCL expressa?",
       "options": [
-        "A temperatura maxima permitida no hardware do switch industrial.",
-        "O padrao firmware aceito nas placas do roteador PTP.",
-        "A quantificacao numerica que atesta quantas vezes o arquivo sofreu alteracoes e revisoes de estrutura.",
+        "A temperatura máxima permitida no hardware do switch industrial.",
+        "O padrão firmware aceito nas placas do roteador PTP.",
+        "A quantificação numérica que atesta quantas vezes o arquivo sofreu alterações e revisões de estrutura.",
         "O registro MAC virtual gravado no switch de borda."
       ],
       "correctIndex": 2,
-      "explanation": "O campo revision do elemento Header atua garantindo uma trilha auditavel listando os versionamentos efetuados sobre o projeto em elaboracao.",
+      "explanation": "O campo revision do elemento Header atua garantindo uma trilha auditável listando os versionamentos efetuados sobre o projeto em elaboração.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Visando preservar as alteracoes efetuadas as-built na rede, qual e o procedimento rigoroso para o manuseio dos arquivos SCD?",
+      "statement": "Visando preservar as alterações efetuadas as-built na rede, qual é o procedimento rigoroso para o manuseio dos arquivos SCD?",
       "options": [
-        "Atualizacoes precisam ser enviadas estritamente usando pendrives comuns entre os engenheiros.",
-        "A equipe terceirizada deve manter esquemas locais segregados em notebooks sem vinculacao de servidor.",
-        "Toda modificacao deve excluir os atributos pregressos de revisao para reduzir peso em bytes.",
-        "As edicoes devem alterar sempre o arquivo mais recente mantido centralizadamente em um servidor compartilhado de engenharia."
+        "Atualizações precisam ser enviadas estritamente usando pendrives comuns entre os engenheiros.",
+        "A equipe terceirizada deve manter esquemas locais segregados em notebooks sem vinculação de servidor.",
+        "Toda modificação deve excluir os atributos pregressos de revisão para reduzir peso em bytes.",
+        "As edições devem alterar sempre o arquivo mais recente mantido centralizadamente em um servidor compartilhado de engenharia."
       ],
       "correctIndex": 3,
-      "explanation": "Extrair e depositar os arquivos unificados atualizados unicamente em servidor consolidado anula colapsos e assimetrias provocados por compilacoes cruzadas perdidas.",
+      "explanation": "Extrair e depositar os arquivos unificados atualizados unicamente em servidor consolidado anula colapsos e assimetrias provocados por compilações cruzadas perdidas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao manipular os fluxos na ferramenta do sistema, a base de construcao formatada em esquema XML entrega qual vantagem processual a engenharia?",
+      "statement": "Ao manipular os fluxos na ferramenta do sistema, a base de construção formatada em esquema XML entrega qual vantagem processual à engenharia?",
       "options": [
-        "Autoriza a auditoria validando passagens sintaticas automatizadas e restricoes limitadas na semantica do arquivo de projeto.",
-        "Emula visualmente chamas radiadas em paineis de tensao operante 3D.",
-        "Compila funcoes autonomas de laco C++ injetando-as nos barramentos legados.",
-        "Criptografa simultaneamente todo relatorio multimedidor do centro regional IPsec."
+        "Autoriza a auditoria validando passagens sintáticas automatizadas e restrições limitadas na semântica do arquivo de projeto.",
+        "Emula visualmente chamas radiadas em painéis de tensão operante 3D.",
+        "Compila funções autônomas de laço C++ injetando-as nos barramentos legados.",
+        "Criptografa simultaneamente todo relatório multimedidor do centro regional IPsec."
       ],
       "correctIndex": 0,
-      "explanation": "O esquema XML e imperativo pois dota o interpretador da possibilidade de atestar falhas na estrutura redigida barrando a insercao equivocada dos atributos exigidos em norma.",
+      "explanation": "O esquema XML é imperativo pois dota o interpretador da possibilidade de atestar falhas na estrutura redigida barrando a inserção equivocada dos atributos exigidos em norma.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O documento digital SSD foca puramente em detalhar as interconexoes primarias do diagrama unifilar e apontar os nos logicos precisos necessarios as logicas da instalacao.",
+      "statement": "O documento digital SSD foca puramente em detalhar as interconexões primárias do diagrama unifilar e apontar os nós lógicos precisos necessários às lógicas da instalação.",
       "correctAnswer": true,
-      "explanation": "O System Specification Description (SSD) materializa a especificacao arquitetonica do unifilar designando as integracoes com as protecoes alocadas.",
+      "explanation": "O System Specification Description (SSD) materializa a especificação arquitetônica do unifilar designando as integrações com as proteções alocadas.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A semantica e tracos contidos na codificacao SCL formam uma incisiva linguagem de programacao logica compilavel que dita processamentos analogicos embarcados e algoritmos nos reles.",
+      "statement": "A semântica e traços contidos na codificação SCL formam uma incisiva linguagem de programação lógica compilável que dita processamentos analógicos embarcados e algoritmos nos relés.",
       "correctAnswer": false,
-      "explanation": "A SCL constitui puramente uma linguagem marcadora referencial em XML destinada a descrever formalmente as topologias, omitindo completamente logicas algoritmicas dinamicas de programacao.",
+      "explanation": "A SCL constitui puramente uma linguagem marcadora referencial em XML destinada a descrever formalmente as topologias, omitindo completamente lógicas algorítmicas dinâmicas de programação.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Para conter as ameacas operacionais de ciberseguranca as logicas restritivas controlando admissoes nos consoles locais demandam concentracao gerencial amparada pelos servidores de dominio.",
+      "statement": "Para conter as ameaças operacionais de cibersegurança as lógicas restritivas controlando admissões nos consoles locais demandam concentração gerencial amparada pelos servidores de domínio.",
       "correctAnswer": true,
-      "explanation": "A administracao por servidores IT/OT de dominio coordena expedientes mandatorios barrando insercoes de senhas corrompidas alem de vedar percursos perigosos limitando as estacoes corporativas.",
+      "explanation": "A administração por servidores IT/OT de domínio coordena expedientes mandatórios barrando inserções de senhas corrompidas além de vedar percursos perigosos limitando as estações corporativas.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A convergencia homogenea ditada pelos moldes de digitalizacao IEC 61850 invalida legalmente o emprego do Gateway inviabilizando qualquer suporte compativel nos despachos DNP3.",
+      "statement": "A convergência homogênea ditada pelos moldes de digitalização IEC 61850 invalida legalmente o emprego do Gateway inviabilizando qualquer suporte compatível nos despachos DNP3.",
       "correctAnswer": false,
-      "explanation": "Mesmo nas plantas modernas, a utilizacao tecnica do Gateway e requerida imperativamente atuando nas concessoes retroativas mapeando os modelos SCL diretamente a envios WAN compativeis com IEC104 e DNP3.",
+      "explanation": "Mesmo nas plantas modernas, a utilização técnica do Gateway é requerida imperativamente atuando nas concessões retroativas mapeando os modelos SCL diretamente a envios WAN compatíveis com IEC104 e DNP3.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Diante das rotinas sincronas distribuidas o parametro que baliza e averigua as alteracoes do projeto confRev processa sua leitura apartada da injecao de eventos dinamicos nos datasets reais.",
+      "statement": "Diante das rotinas síncronas distribuídas o parâmetro que baliza e averigua as alterações do projeto confRev processa sua leitura apartada da injeção de eventos dinâmicos nos datasets reais.",
       "correctAnswer": false,
-      "explanation": "Visando impossibilitar desencontros mortais no disparo as matrizes operacionais enxertam categoricamente nas publicacoes em tempo real a sinalizacao do confRev atestando as atualizacoes pareadas.",
+      "explanation": "Visando impossibilitar desencontros mortais no disparo as matrizes operacionais enxertam categoricamente nas publicações em tempo real a sinalização do confRev atestando as atualizações pareadas.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "No processamento unificado da arquitetura o agrupamento semantico de modelagem estruturado inteiramente sobre marcacoes estendidas XML leva o titulo simplificado ____.",
+      "statement": "No processamento unificado da arquitetura o agrupamento semântico de modelagem estruturado inteiramente sobre marcações estendidas XML leva o título simplificado ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "SCL"
         }
       ],
-      "explanation": "A Substation Configuration description Language e a peca fundamental em padronizacao que fomenta e suporta a arquitetura legivel em XML perante os configuradores da planta.",
+      "explanation": "A Substation Configuration description Language é a peça fundamental em padronização que fomenta e suporta a arquitetura legível em XML perante os configuradores da planta.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "As rotinas e restricoes de ciberseguranca blindando usinas que expurgam permissoes isoladas submetendo os IEDs a senhas expiraveis recaem na adocao incontestavel das gerencias ditadas pelo servidor de ____.",
+      "statement": "As rotinas e restrições de cibersegurança blindando usinas que expurgam permissões isoladas submetendo os IEDs a senhas expiráveis recaem na adoção incontestável das gerências ditadas pelo servidor de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "dominio"
         }
       ],
-      "explanation": "A consolidacao logica das diretrizes requer o Active Directory atuante nestes clusters de dominio que forcam a recusa preventiva resguardando interfaces criticas de acionamentos avulsos na SE.",
+      "explanation": "A consolidação lógica das diretrizes requer o Active Directory atuante nestes clusters de domínio que forçam a recusa preventiva resguardando interfaces críticas de acionamentos avulsos na SE.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Nas avaliacoes integradoras baseadas na especificacao as plataformas agregam no ambiente de sistema as singularidades exclusivas e relatorios previstos para cada rele processando fielmente a leitura de seu descritivo de capacidades denominado ____.",
+      "statement": "Nas avaliações integradoras baseadas na especificação as plataformas agregam no ambiente de sistema as singularidades exclusivas e relatórios previstos para cada relé processando fielmente a leitura de seu descritivo de capacidades denominado ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "ICD"
         }
       ],
-      "explanation": "Para mapear pontualmente as conexoes, o IED Capability Description atesta o inventario logico exato da maquina ao software da base integradora orientando com assertividade o layout.",
+      "explanation": "Para mapear pontualmente as conexões, o IED Capability Description atesta o inventário lógico exato da máquina ao software da base integradora orientando com assertividade o layout.",
       "difficulty": "hard"
     }
   ]

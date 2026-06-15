@@ -53,7 +53,7 @@
       "options": [
         "O decaimento progressivo das tensões transitórias fase neutro de regime permanente.",
         "O fluxo disperso gerado nos enrolamentos terciários de transformadores estabilizadores.",
-        "O nível resistivo da impedância de aterramento multiplicada pela indutância mutua.",
+        "O nível resistivo da impedância de aterramento multiplicada pela indutância mútua.",
         "Os valores instantâneos resultantes das correntes assimétricas de curto-circuito."
       ],
       "correctIndex": 3,
@@ -106,7 +106,7 @@
         "O vértice máximo restrito pela corrente de magnetização aliada ao fator temporal de isolamento das blindagens de cobertura resistivas.",
         "A curva dinâmica temporal do esforço de aceleração estator rotor casada em simultâneo com a plena corrente imposta na sua partida real.",
         "O cruzamento restrito do limite calórico admissível frente as tensões rotativas simétricas em repouso da máquina excitatriz motriz.",
-        "O platô limite do arco extinto no disjuntor geral em sintonia com a impedância de sequencia negativa de bloqueio passivo gerado."
+        "O platô limite do arco extinto no disjuntor geral em sintonia com a impedância de sequência negativa de bloqueio passivo gerado."
       ],
       "correctIndex": 3,
       "explanation": "Para evitar os dispendiosos e inoportunos falsos acionamentos as unidades precisam abrigar as tolerâncias contidas entre a corrente de inércia da partida casada no mesmo envelope que estipula o tempo integral de aceleração destas máquinas.",

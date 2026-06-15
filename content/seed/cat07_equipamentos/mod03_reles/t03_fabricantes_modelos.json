@@ -10,7 +10,7 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que estabelece a linguagem universal entre diversos fabricantes para a numeracao das funcoes de protecao no diagrama unifilar?",
+      "statement": "O que estabelece a linguagem universal entre diversos fabricantes para a numeração das funções de proteção no diagrama unifilar?",
       "options": [
         "A norma ANSI/IEEE C37.2.",
         "A norma NR-10.",
@@ -18,12 +18,12 @@
         "A norma NBR 5410."
       ],
       "correctIndex": 0,
-      "explanation": "A norma ANSI C37.2 define os numeros de dispositivo (device numbers) usados globalmente pelos fabricantes para padronizar os reles.",
+      "explanation": "A norma ANSI C37.2 define os números de dispositivo (device numbers) usados globalmente pelos fabricantes para padronizar os relés.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual familia de reles da fabricante Schweitzer (SEL) e tipicamente empregada para a protecao completa de geradores sincronos?",
+      "statement": "Qual família de relés da fabricante Schweitzer (SEL) é tipicamente empregada para a proteção completa de geradores síncronos?",
       "options": [
         "SEL-387",
         "SEL-300G",
@@ -31,12 +31,12 @@
         "SEL-352"
       ],
       "correctIndex": 1,
-      "explanation": "O rele SEL-300G e o IED multifuncional voltado especificamente para as funcoes e a protecao avancada de geradores.",
+      "explanation": "O relé SEL-300G é o IED multifuncional voltado especificamente para as funções e a proteção avançada de geradores.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual fabricante adota a nomenclatura iniciada com o numero 7 (ex: 7SA, 7SJ, 7UT, 7UM) para os modelos de suas familias de reles?",
+      "statement": "Qual fabricante adota a nomenclatura iniciada com o número 7 (ex: 7SA, 7SJ, 7UT, 7UM) para os modelos de suas famílias de relés?",
       "options": [
         "ABB",
         "General Electric",
@@ -44,12 +44,12 @@
         "Schneider Electric"
       ],
       "correctIndex": 2,
-      "explanation": "A Siemens utiliza essa codificacao padrao para sua linha mundial de protecoes numericas SIPROTEC.",
+      "explanation": "A Siemens utiliza essa codificação padrão para sua linha mundial de proteções numéricas SIPROTEC.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como se chama o software de parametrizacao e configuracao utilizado mundialmente para os reles da fabricante SEL?",
+      "statement": "Como se chama o software de parametrização e configuração utilizado mundialmente para os relés da fabricante SEL?",
       "options": [
         "DIGSI",
         "PCM600",
@@ -57,12 +57,12 @@
         "AcSELerator QuickSet"
       ],
       "correctIndex": 3,
-      "explanation": "O AcSELerator QuickSet e a ferramenta oficial de software para acesso, logica e ajuste dos IEDs da SEL.",
+      "explanation": "O AcSELerator QuickSet é a ferramenta oficial de software para acesso, lógica e ajuste dos IEDs da SEL.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o software de engenharia empregado para parametrizar e se comunicar com os reles SIPROTEC da Siemens?",
+      "statement": "Qual é o software de engenharia empregado para parametrizar e se comunicar com os relés SIPROTEC da Siemens?",
       "options": [
         "DIGSI",
         "ANAFAS",
@@ -70,12 +70,12 @@
         "CAPE"
       ],
       "correctIndex": 0,
-      "explanation": "O software DIGSI realiza a configuracao geral, o roteamento de matriz e o diagnostico dos IEDs da familia Siemens.",
+      "explanation": "O software DIGSI realiza a configuração geral, o roteamento de matriz e o diagnóstico dos IEDs da família Siemens.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com a padronizacao ANSI, qual numero de funcao universal designa a verificacao de sincronismo antes do fechamento de disjuntores?",
+      "statement": "De acordo com a padronização ANSI, qual número de função universal designa a verificação de sincronismo antes do fechamento de disjuntores?",
       "options": [
         "ANSI 21.",
         "ANSI 25.",
@@ -83,12 +83,12 @@
         "ANSI 50."
       ],
       "correctIndex": 1,
-      "explanation": "A funcao ANSI 25 verifica se diferencas de tensao, frequencia e angulo estao nos limites antes do paralelismo.",
+      "explanation": "A função ANSI 25 verifica se diferenças de tensão, frequência e ângulo estão nos limites antes do paralelismo.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para garantir interoperabilidade independente do fabricante, a IEC 61850 usa nos logicos. Qual no equivale a protecao universal ANSI 21 (Distancia)?",
+      "statement": "Para garantir interoperabilidade independente do fabricante, a IEC 61850 usa nós lógicos. Qual nó equivale à proteção universal ANSI 21 (Distância)?",
       "options": [
         "PTOC",
         "PDIF",
@@ -96,12 +96,12 @@
         "PTOV"
       ],
       "correctIndex": 2,
-      "explanation": "O no logico PDIS representa padronizadamente a protecao de distancia no modelo de dados da IEC 61850.",
+      "explanation": "O nó lógico PDIS representa padronizadamente a proteção de distância no modelo de dados da IEC 61850.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nos reles da Siemens, qual sigla representa o codigo alfanumerico exato de especificacao do modelo e do hardware interno do equipamento?",
+      "statement": "Nos relés da Siemens, qual sigla representa o código alfanumérico exato de especificação do modelo e do hardware interno do equipamento?",
       "options": [
         "CID",
         "GOOSE",
@@ -109,25 +109,25 @@
         "MLFB"
       ],
       "correctIndex": 3,
-      "explanation": "A sigla MLFB define o codigo de encomenda e propriedades do rele, especificando as placas e versoes exatas de fabrica.",
+      "explanation": "A sigla MLFB define o código de encomenda e propriedades do relé, especificando as placas e versões exatas de fábrica.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na parametrizacao nativa dos reles SEL, o sufixo P inserido nos comandos de funcao (como 51P1P) indica qual variavel de ajuste?",
+      "statement": "Na parametrização nativa dos relés SEL, o sufixo P inserido nos comandos de função (como 51P1P) indica qual variável de ajuste?",
       "options": [
-        "O nivel de partida ou limiar de corrente (Pickup).",
+        "O nível de partida ou limiar de corrente (Pickup).",
         "O multiplicador de tempo (Time Dial).",
-        "A curva caracteristica inversa (Curve).",
+        "A curva característica inversa (Curve).",
         "O atraso de reset do elemento (Reset)."
       ],
       "correctIndex": 0,
-      "explanation": "O sufixo P (Pickup) define estritamente o valor de partida do elemento de protecao para iniciar a temporizacao.",
+      "explanation": "O sufixo P (Pickup) define estritamente o valor de partida do elemento de proteção para iniciar a temporização.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual modelo especifico da fabricante ABB incorpora a protecao diferencial de linha (87L) efetuando calculos atraves de componentes simetricas?",
+      "statement": "Qual modelo específico da fabricante ABB incorpora a proteção diferencial de linha (87L) efetuando cálculos através de componentes simétricas?",
       "options": [
         "7SA612",
         "REL356",
@@ -135,83 +135,83 @@
         "Sepam 1000"
       ],
       "correctIndex": 1,
-      "explanation": "O rele digital REL356 da ABB efetua a comparacao diferencial compondo correntes com uso de componentes simetricas de forma digital.",
+      "explanation": "O relé digital REL356 da ABB efetua a comparação diferencial compondo correntes com uso de componentes simétricas de forma digital.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A tabela de codigos ANSI/IEEE C37.2 e adotada como linguagem universal para identificar numericamente as funcoes de protecao nos reles de quaisquer fabricantes globais.",
+      "statement": "A tabela de códigos ANSI/IEEE C37.2 é adotada como linguagem universal para identificar numericamente as funções de proteção nos relés de quaisquer fabricantes globais.",
       "correctAnswer": true,
-      "explanation": "A numeracao ANSI padroniza a designacao das funcoes em diagramas e manuais, facilitando a interpretacao tecnica independente do vendor.",
+      "explanation": "A numeração ANSI padroniza a designação das funções em diagramas e manuais, facilitando a interpretação técnica independente do vendor.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A familia de reles digitais SEL-387 e projetada e configurada pela fabricante predominantemente para a protecao diferencial de barramentos de extra alta tensao.",
+      "statement": "A família de relés digitais SEL-387 é projetada e configurada pela fabricante predominantemente para a proteção diferencial de barramentos de extra alta tensão.",
       "correctAnswer": false,
-      "explanation": "A familia SEL-387 e focada nativamente na protecao diferencial de transformadores de potencia, possuindo controle de tap e inrush, nao barramentos.",
+      "explanation": "A família SEL-387 é focada nativamente na proteção diferencial de transformadores de potência, possuindo controle de tap e inrush, não barramentos.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "No software de configuracao da SEL, o sufixo D num parametro de ajuste como 51P1D dita a escolha do tipo de curva do elemento temporizado.",
+      "statement": "No software de configuração da SEL, o sufixo D num parâmetro de ajuste como 51P1D dita a escolha do tipo de curva do elemento temporizado.",
       "correctAnswer": false,
-      "explanation": "O sufixo D determina o multiplicador ou atraso de tempo (Time Delay/Dial), enquanto a curva em si e selecionada pelo sufixo C (Curve).",
+      "explanation": "O sufixo D determina o multiplicador ou atraso de tempo (Time Delay/Dial), enquanto a curva em si é selecionada pelo sufixo C (Curve).",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A serie Sepam 1000+ e uma conhecida familia de reles microprocessados multifuncao fabricada e comercializada pela Merlin Gerin / Schneider Electric.",
+      "statement": "A série Sepam 1000+ é uma conhecida família de relés microprocessados multifunção fabricada e comercializada pela Merlin Gerin / Schneider Electric.",
       "correctAnswer": true,
-      "explanation": "Os reles Sepam sao os equipamentos multifuncao padrao listados para aplicacoes de protecao industrial da Schneider Electric.",
+      "explanation": "Os relés Sepam são os equipamentos multifunção padrão listados para aplicações de proteção industrial da Schneider Electric.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O modelo 7SS52 da Siemens caracteriza-se por ser uma solucao de protecao de motor (ANSI 49/66) baseada exclusivamente em arquitetura fisica centralizada.",
+      "statement": "O modelo 7SS52 da Siemens caracteriza-se por ser uma solução de proteção de motor (ANSI 49/66) baseada exclusivamente em arquitetura física centralizada.",
       "correctAnswer": false,
-      "explanation": "O modelo 7SS52 e um rele de protecao diferencial de barras (87B) notorio por adotar uma arquitetura de rede distribuida com Unidades de Bay locais.",
+      "explanation": "O modelo 7SS52 é um relé de proteção diferencial de barras (87B) notório por adotar uma arquitetura de rede distribuída com Unidades de Bay locais.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O software padrao amplamente empregado pelos engenheiros para parametrizacao, logica e analise de oscilografia dos IEDs da fabricante SEL e o ____ QuickSet.",
+      "statement": "O software padrão amplamente empregado pelos engenheiros para parametrização, lógica e análise de oscilografia dos IEDs da fabricante SEL é o ____ QuickSet.",
       "blanks": [
         {
           "index": 0,
           "answer": "AcSELerator"
         }
       ],
-      "explanation": "O ambiente computacional AcSELerator consolida a comunicacao e o ajuste grafico de toda a linha de reles da Schweitzer.",
+      "explanation": "O ambiente computacional AcSELerator consolida a comunicação e o ajuste gráfico de toda a linha de relés da Schweitzer.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Nos catalogos e paineis da Siemens, a composicao exata do hardware opcional e da firmware do rele e identificada pelo codigo de encomenda de fabrica denominado ____.",
+      "statement": "Nos catálogos e painéis da Siemens, a composição exata do hardware opcional e da firmware do relé é identificada pelo código de encomenda de fábrica denominado ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "MLFB"
         }
       ],
-      "explanation": "A sigla MLFB (Machine-Readable Product Designation) descreve as propriedades vitais e a identificacao unica do IED construida sob medida.",
+      "explanation": "A sigla MLFB (Machine-Readable Product Designation) descreve as propriedades vitais e a identificação única do IED construída sob medida.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Ao ajustar blocos de sobrecorrente no software da SEL, o parametro finalizado estritamente pela letra ____ (ex: 51VC) define a escolha da equacao de curva temporizada.",
+      "statement": "Ao ajustar blocos de sobrecorrente no software da SEL, o parâmetro finalizado estritamente pela letra ____ (ex: 51VC) define a escolha da equação de curva temporizada.",
       "blanks": [
         {
           "index": 0,
           "answer": "C"
         }
       ],
-      "explanation": "O sufixo C designa a Variavel Curve, permitindo escolher entre curvas normais, muito inversas ou modelos padronizados IEC/ANSI.",
+      "explanation": "O sufixo C designa a Variável Curve, permitindo escolher entre curvas normais, muito inversas ou modelos padronizados IEC/ANSI.",
       "difficulty": "hard"
     }
   ]

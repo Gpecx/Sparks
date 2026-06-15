@@ -10,208 +10,208 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Quais sao os meios fisicos de transmissao comuns suportados na camada fisica da Ethernet nas subestacoes eletricas?",
+      "statement": "Quais são os meios físicos de transmissão comuns suportados na camada física da Ethernet nas subestações elétricas?",
       "options": [
         "Apenas cabos coaxiais de 50 ohms.",
-        "Par trancado e fibra otica.",
-        "Ondas curtas de radio AM.",
+        "Par trançado e fibra óptica.",
+        "Ondas curtas de rádio AM.",
         "Cabos de cobre nus suspensos."
       ],
       "correctIndex": 1,
-      "explanation": "A documentacao cita o par trancado, o cabo coaxial e a fibra otica como meios fisicos de transmissao comuns adotados na camada 1 do modelo ISO/OSI.",
+      "explanation": "A documentação cita o par trançado, o cabo coaxial e a fibra óptica como meios físicos de transmissão comuns adotados na camada 1 do modelo ISO/OSI.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
       "statement": "Qual problema grave ocorre em caso de falha de um switch central quando a rede opera em uma topologia puramente em estrela?",
       "options": [
-        "Os IEDs comutam para operacao via links seriais paralelos isolados.",
-        "A rede passa automaticamente para o protocolo HSR de redundancia.",
-        "Perda de comunicacao imediata com todos os IEDs nele conectados.",
-        "A latencia das mensagens GOOSE e reduzida pela metade pela queda do trafego."
+        "Os IEDs comutam para operação via links seriais paralelos isolados.",
+        "A rede passa automaticamente para o protocolo HSR de redundância.",
+        "Perda de comunicação imediata com todos os IEDs nele conectados.",
+        "A latência das mensagens GOOSE é reduzida pela metade pela queda do tráfego."
       ],
       "correctIndex": 2,
-      "explanation": "Na topologia estrela, a falha do concentrador centralizado (switch) acarreta diretamente na perda total de comunicacao com os IEDs nele conectados.",
+      "explanation": "Na topologia estrela, a falha do concentrador centralizado (switch) acarreta diretamente na perda total de comunicação com os IEDs nele conectados.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Devido ao ambiente agressivo das subestacoes, quais sao algumas das caracteristicas obrigatorias exigidas nos switches industriais?",
+      "statement": "Devido ao ambiente agressivo das subestações, quais são algumas das características obrigatórias exigidas nos switches industriais?",
       "options": [
-        "Operacao restrita a temperaturas amenas entre 20 e 25 graus Celsius.",
-        "Desativacao automatica do protocolo Ethernet em caso de picos de descarga atmosferica.",
-        "Uso obrigatorio de fontes de alimentacao exclusivas baseadas em geradores a diesel locais.",
-        "Imunidade a interferencias eletromagneticas e operacao em altas temperaturas sem ventilacao forcada."
+        "Operação restrita a temperaturas amenas entre 20 e 25 graus Celsius.",
+        "Desativação automática do protocolo Ethernet em caso de picos de descarga atmosférica.",
+        "Uso obrigatório de fontes de alimentação exclusivas baseadas em geradores a diesel locais.",
+        "Imunidade a interferências eletromagnéticas e operação em altas temperaturas sem ventilação forçada."
       ],
       "correctIndex": 3,
-      "explanation": "Switches industriais requerem confiabilidade perante interferencia eletromagnetica e suportam faixas termicas extremas de -40 ate +85 graus Celsius sem ventilacao.",
+      "explanation": "Switches industriais requerem confiabilidade perante interferência eletromagnética e suportam faixas térmicas extremas de -40 até +85 graus Celsius sem ventilação.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a diferenca pratica no tempo de recomposicao ao comparar os modernos protocolos de redundancia PRP/HSR com o legado RSTP?",
+      "statement": "Qual é a diferença prática no tempo de recomposição ao comparar os modernos protocolos de redundância PRP/HSR com o legado RSTP?",
       "options": [
-        "Os protocolos PRP e HSR oferecem reconfiguracao transparente caracterizada pelo tempo zero de recuperacao de pacotes.",
-        "O protocolo legado RSTP ja possui tempo zero de recuperacao desde 1990.",
-        "Tanto o PRP quanto o RSTP apresentam um tempo fixo de comutacao exato de 30 segundos em redes isoladas.",
-        "A arquitetura HSR requer sempre um minimo de 5 milissegundos para comutar e recalcular sua arvore."
+        "Os protocolos PRP e HSR oferecem reconfiguração transparente caracterizada pelo tempo zero de recuperação de pacotes.",
+        "O protocolo legado RSTP já possui tempo zero de recuperação desde 1990.",
+        "Tanto o PRP quanto o RSTP apresentam um tempo fixo de comutação exato de 30 segundos em redes isoladas.",
+        "A arquitetura HSR requer sempre um mínimo de 5 milissegundos para comutar e recalcular sua árvore."
       ],
       "correctIndex": 0,
-      "explanation": "Enquanto o RSTP recupera o anel em menos de 5 milissegundos por no, PRP e HSR garantem uma reconfiguracao ininterrupta com perda zero de dados.",
+      "explanation": "Enquanto o RSTP recupera o anel em menos de 5 milissegundos por nó, PRP e HSR garantem uma reconfiguração ininterrupta com perda zero de dados.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como e dominada a forma de transmissao da rede LAN em que o IED destino assina a informacao para filtra-la rapidamente sem sobrecarregar os demais?",
+      "statement": "Como é dominada a forma de transmissão da rede LAN em que o IED destino assina a informação para filtrá-la rapidamente sem sobrecarregar os demais?",
       "options": [
-        "Unicast continuo.",
-        "Transmissao do tipo Multicast.",
-        "Transmissao Token Ring assincrona.",
+        "Unicast contínuo.",
+        "Transmissão do tipo Multicast.",
+        "Transmissão Token Ring assíncrona.",
         "Broadcast destrutivo."
       ],
       "correctIndex": 1,
-      "explanation": "Na transmissao Multicast os pacotes vao para um grupo de estacoes e a informacao e recebida e processada apenas por aquelas que assinam e aguardam tal mensagem.",
+      "explanation": "Na transmissão Multicast os pacotes vão para um grupo de estações e a informação é recebida e processada apenas por aquelas que assinam e aguardam tal mensagem.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No cabecalho do quadro Ethernet de acordo com a norma IEEE 802.1Q, quantos bits sao alocados expressamente para estabelecer o nivel de prioridade do pacote?",
+      "statement": "No cabeçalho do quadro Ethernet de acordo com a norma IEEE 802.1Q, quantos bits são alocados expressamente para estabelecer o nível de prioridade do pacote?",
       "options": [
         "Apenas 1 bit.",
         "Um pacote de 12 bits.",
         "Exatos 3 bits.",
-        "Uma sequencia de 16 bits completos."
+        "Uma sequência de 16 bits completos."
       ],
       "correctIndex": 2,
-      "explanation": "A especificacao IEEE 802.1Q define exatamente 3 bits (indicador PRI) para determinar a prioridade do quadro, enquanto o identificador da VLAN possui 12 bits.",
+      "explanation": "A especificação IEEE 802.1Q define exatamente 3 bits (indicador PRI) para determinar a prioridade do quadro, enquanto o identificador da VLAN possui 12 bits.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na aplicacao pratica e documentada do protocolo de redundancia HSR, qual e a limitacao arquitetural e o limite pratico recomendado de conexoes suportadas?",
+      "statement": "Na aplicação prática e documentada do protocolo de redundância HSR, qual é a limitação arquitetural e o limite prático recomendado de conexões suportadas?",
       "options": [
         "Topologia em duas redes paralelas segregadas LAN A e LAN B em repetidores L1.",
-        "Arranjo de estrela centralizada operando redes para ate 200 equipamentos.",
-        "Enlace de barramento puramente linear de tamanho e extensoes ilimitadas.",
-        "Topologia unicamente em anel fechado suportando idealmente ate 50 IEDs conectados."
+        "Arranjo de estrela centralizada operando redes para até 200 equipamentos.",
+        "Enlace de barramento puramente linear de tamanho e extensões ilimitadas.",
+        "Topologia unicamente em anel fechado suportando idealmente até 50 IEDs conectados."
       ],
       "correctIndex": 3,
-      "explanation": "O padrao HSR (High-Availability Seamless Redundancy) e estabelecido essencialmente com base em uma topologia em anel contendo ate 50 devices associados.",
+      "explanation": "O padrão HSR (High-Availability Seamless Redundancy) é estabelecido essencialmente com base em uma topologia em anel contendo até 50 devices associados.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que e mandatorio configurar nas portas externas e nos switches de fronteira para aplicar plenamente o confinamento logico das mensagens GOOSE?",
+      "statement": "O que é mandatório configurar nas portas externas e nos switches de fronteira para aplicar plenamente o confinamento lógico das mensagens GOOSE?",
       "options": [
         "Liberar amplamente as portas do roteador L3 para abranger todas as redes virtuais locais.",
-        "Bloquear as regras de permissao e passagem da VLAN atrelada ao GOOSE nestas portas limitando a propagacao externa.",
-        "Desabilitar o servico que faz a identificacao por MAC Address dos quadros de dados enviados.",
-        "Aumentar o valor do MTU da porta de uplink corporativa para absorver maior banda de relatorios."
+        "Bloquear as regras de permissão e passagem da VLAN atrelada ao GOOSE nestas portas limitando a propagação externa.",
+        "Desabilitar o serviço que faz a identificação por MAC Address dos quadros de dados enviados.",
+        "Aumentar o valor do MTU da porta de uplink corporativa para absorver maior banda de relatórios."
       ],
       "correctIndex": 1,
-      "explanation": "Aplicando filtros de VLAN (bloqueio da VLAN GOOSE nas saidas interligadas para fora) consolida-se de modo estrito o confinamento local destas transmissoes criticas.",
+      "explanation": "Aplicando filtros de VLAN (bloqueio da VLAN GOOSE nas saídas interligadas para fora) consolida-se de modo estrito o confinamento local destas transmissões críticas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com os modelos de arquitetura da IEC 61850, as trocas sincronizadas de dados de TC e TP sobem para o nivel de bay atraves de qual barramento infraestrutural?",
+      "statement": "De acordo com os modelos de arquitetura da IEC 61850, as trocas sincronizadas de dados de TC e TP sobem para o nível de bay através de qual barramento infraestrutural?",
       "options": [
         "Transportadas ativamente pelo Barramento de processo (Process bus).",
-        "Atraves da malha de Barramento corporativo paralelo.",
-        "Pelo Barramento de estacao exclusivo (Station bus).",
+        "Através da malha de Barramento corporativo paralelo.",
+        "Pelo Barramento de estação exclusivo (Station bus).",
         "Por via do tradicional Barramento passivo serial em cobre RS-485."
       ],
       "correctIndex": 0,
-      "explanation": "O barramento responsavel por prover a infraestrutura que vincula LNs de medicao ao nivel fisico (amostras instantaneas) nomeia-se Process bus (Barramento de processo).",
+      "explanation": "O barramento responsável por prover a infraestrutura que vincula LNs de medição ao nível físico (amostras instantâneas) nomeia-se Process bus (Barramento de processo).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual quebra de seguranca severa decorre quando um pacote GOOSE e abandonado e emitido para a rede segmentada completamente desprovido de seu identificador de VLAN (untagged)?",
+      "statement": "Qual quebra de segurança severa decorre quando um pacote GOOSE é abandonado e emitido para a rede segmentada completamente desprovido de seu identificador de VLAN (untagged)?",
       "options": [
-        "A trama e rejeitada instantaneamente pela porta local com base na restricao nativa bloqueante.",
-        "A trama assimila equivocadamente o tag da VLAN nativa aberta burlando a restricao logica e vazando para plantas contiguas.",
-        "O quadro mutante converte-se isoladamente na especificacao IEC 61850-9-2 congestionando roteadores vizinhos.",
-        "A prioridade da referida mensagem eleva-se aleatoriamente para o indice limite maximo impedindo outras conexoes."
+        "A trama é rejeitada instantaneamente pela porta local com base na restrição nativa bloqueante.",
+        "A trama assimila equivocadamente o tag da VLAN nativa aberta burlando a restrição lógica e vazando para plantas contíguas.",
+        "O quadro mutante converte-se isoladamente na especificação IEC 61850-9-2 congestionando roteadores vizinhos.",
+        "A prioridade da referida mensagem eleva-se aleatoriamente para o índice limite máximo impedindo outras conexões."
       ],
       "correctIndex": 1,
-      "explanation": "Quadros untagged absorvem a tag nativa configurada da porta e perpassam as fronteiras do dominio evadindo aos restritivos filtros pre-moldados em VLANs especificas.",
+      "explanation": "Quadros untagged absorvem a tag nativa configurada da porta e perpassam as fronteiras do domínio evadindo aos restritivos filtros pré-moldados em VLANs específicas.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A utilizacao pratica de switches do tipo gerenciaveis em redes de subestacao justifica-se essencialmente pelo recurso de separar topologias logicas do meio fisico empregando Virtual Local Area Networks (VLANs).",
+      "statement": "A utilização prática de switches do tipo gerenciáveis em redes de subestação justifica-se essencialmente pelo recurso de separar topologias lógicas do meio físico empregando Virtual Local Area Networks (VLANs).",
       "correctAnswer": true,
-      "explanation": "Um dos principais motivos para incorporar switches inteligentes gerenciados assenta-se em sua capacidade basica de aplicar VLANs, isolando grupos taticos de trafego logico na LAN.",
+      "explanation": "Um dos principais motivos para incorporar switches inteligentes gerenciados assenta-se em sua capacidade básica de aplicar VLANs, isolando grupos táticos de tráfego lógico na LAN.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O funcionamento principal do protocolo de alta disponibilidade PRP concretiza-se enlacando logicamente as extremidades dos relatorios de dados da planta compondo um robusto anel unico auto-regenerativo.",
+      "statement": "O funcionamento principal do protocolo de alta disponibilidade PRP concretiza-se enlaçando logicamente as extremidades dos relatórios de dados da planta compondo um robusto anel único auto-regenerativo.",
       "correctAnswer": false,
-      "explanation": "A filosofia basilar do PRP nao e alocar a malha base em modelo anelar e sim difundir clones dos quadros orientados paralelamente por duas redes completamente isoladas (LAN A e B).",
+      "explanation": "A filosofia basilar do PRP não é alocar a malha base em modelo anelar e sim difundir clones dos quadros orientados paralelamente por duas redes completamente isoladas (LAN A e B).",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Para minimizar tempos de viagem e evitar retardos nos comutadores de rede as mensagens rapidas do processo (como o trip do GOOSE) requerem as designacoes contidas nas etiquetas de priorizacao 802.1Q dos frames MAC.",
+      "statement": "Para minimizar tempos de viagem e evitar retardos nos comutadores de rede as mensagens rápidas do processo (como o trip do GOOSE) requerem as designações contidas nas etiquetas de priorização 802.1Q dos frames MAC.",
       "correctAnswer": true,
-      "explanation": "O padrao exige o uso de priority tags inseridas no cabecalho link-layer (baseadas na norma IEEE 802.1Q/p) para desviar fluxos nobres frente ao transito macico normal nas filas de transmissao.",
+      "explanation": "O padrão exige o uso de priority tags inseridas no cabeçalho link-layer (baseadas na norma IEEE 802.1Q/p) para desviar fluxos nobres frente ao trânsito maciço normal nas filas de transmissão.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Limitadores de fluxo atuantes com filtro nas portas do switch sao ativados como pratica administrativa comumente voltada para impedir que picos e temporais de dados (Broadcast Storming) paralisem e derrubem toda a LAN.",
+      "statement": "Limitadores de fluxo atuantes com filtro nas portas do switch são ativados como prática administrativa comumente voltada para impedir que picos e temporais de dados (Broadcast Storming) paralisem e derrubem toda a LAN.",
       "correctAnswer": true,
-      "explanation": "Restricoes e regras alocadas nas configuracoes de porta regulam cotas de transmissao visando impedir enxurradas caoticas de trafego broadcast de avariar os links limpos.",
+      "explanation": "Restrições e regras alocadas nas configurações de porta regulam cotas de transmissão visando impedir enxurradas caóticas de tráfego broadcast de avariar os links limpos.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Ao contrario da versao Rapid Spanning Tree (RSTP), a primeira versao de algoritmo de arvore desenvolvida em 1990 (STP purista) detinha agilidade transparente suficiente para atuar incolume diante de trafegos criticos de 5ms.",
+      "statement": "Ao contrário da versão Rapid Spanning Tree (RSTP), a primeira versão de algoritmo de árvore desenvolvida em 1990 (STP purista) detinha agilidade transparente suficiente para atuar incólume diante de tráfegos críticos de 5ms.",
       "correctAnswer": false,
-      "explanation": "O mecanismo primitivo de topologia livre de loop (STP 802.1D de 1990) apresenta lerdeza inerente (recompondo-se em ate 30 segundos), inviabilizando plenamente a manutencao transparente e fluida em ocorrencias de rompimento perante os exigentes protocolos da norma.",
+      "explanation": "O mecanismo primitivo de topologia livre de loop (STP 802.1D de 1990) apresenta lerdeza inerente (recompondo-se em até 30 segundos), inviabilizando plenamente a manutenção transparente e fluida em ocorrências de rompimento perante os exigentes protocolos da norma.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A incorporacao e conectividade de perifericos mais simples ou equipamentos de geracao anterior desprovidos de portas redundantes nativas numa arquitetura dupla de PRP efetiva-se com a insercao de um equipamento integrador apelidado de ____.",
+      "statement": "A incorporação e conectividade de periféricos mais simples ou equipamentos de geração anterior desprovidos de portas redundantes nativas numa arquitetura dupla de PRP efetiva-se com a inserção de um equipamento integrador apelidado de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "RedBox"
         }
       ],
-      "explanation": "A caixa controladora do nome RedBox acopla os elos unitarios (Single Attached Nodes) aos protocolos avancados PRP/HSR incumbindo-se da manipulacao e da repassagem clonada transparente da malha.",
+      "explanation": "A caixa controladora do nome RedBox acopla os elos unitários (Single Attached Nodes) aos protocolos avançados PRP/HSR incumbindo-se da manipulação e da repassagem clonada transparente da malha.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Com as comunicacoes horizontais embutidas de IED para IED no padrao do sistema operando via pacotes orientados para um agrupamento selecionado e especifico do barramento, nomeia-se esta categoria nativa do envio de ____.",
+      "statement": "Com as comunicações horizontais embutidas de IED para IED no padrão do sistema operando via pacotes orientados para um agrupamento selecionado e específico do barramento, nomeia-se esta categoria nativa do envio de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Multicast"
         }
       ],
-      "explanation": "As trocas nao rastreadas e de rapida expedicao do escopo GOOSE aplicam massivamente a tecnologia Ethernet Multicast designada fundamentalmente as estacoes vinculadas em aceitar tais avisos.",
+      "explanation": "As trocas não rastreadas e de rápida expedição do escopo GOOSE aplicam massivamente a tecnologia Ethernet Multicast designada fundamentalmente às estações vinculadas em aceitar tais avisos.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Tendo a incumbencia de debelar percursos fechados interminaveis e suprimir ciclos circulares repetitivos nos lacos logicos conectados da malha com switches a tecnica adotada bloqueia as conexoes inativas implementando a solucao do ____ Tree.",
+      "statement": "Tendo a incumbência de debelar percursos fechados intermináveis e suprimir ciclos circulares repetitivos nos laços lógicos conectados da malha com switches a técnica adotada bloqueia as conexões inativas implementando a solução do ____ Tree.",
       "blanks": [
         {
           "index": 0,
           "answer": "Spanning"
         }
       ],
-      "explanation": "A arvore de recobrimento referida pelo Spanning Tree Protocol cessa loops descartando logica e metodicamente passagens excedentarias visando o estabelecimento sadio do transito na ethernet comutada.",
+      "explanation": "A árvore de recobrimento referida pelo Spanning Tree Protocol cessa loops descartando lógica e metodicamente passagens excedentárias visando o estabelecimento sadio do trânsito na ethernet comutada.",
       "difficulty": "hard"
     }
   ]

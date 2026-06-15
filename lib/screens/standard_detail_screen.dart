@@ -200,13 +200,13 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
         // ── Feature chips ─────────────────────────────────────────────────
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 10,
+            runSpacing: 10,
             children: [
               _featureChip(Icons.security, 'Segurança'),
-              const SizedBox(width: 10),
               _featureChip(Icons.assignment_outlined, 'Norma Técnica'),
-              const SizedBox(width: 10),
               _featureChip(Icons.verified_outlined, 'MTE'),
             ],
           ),
@@ -228,7 +228,9 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
                 child: const Text('POWERPLAY', style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
               ),
               const SizedBox(width: 10),
-              Text('Vídeos sobre ${s.code}', style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+              Expanded(
+                child: Text('Vídeos sobre ${s.code}', style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
+              ),
             ],
           ),
         ),
@@ -276,13 +278,13 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
         const SizedBox(height: 28),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 10,
+            runSpacing: 10,
             children: [
               _featureChip(Icons.videocam_outlined, 'Vídeo Aulas'),
-              const SizedBox(width: 10),
               _featureChip(Icons.cases_outlined, 'Casos Reais'),
-              const SizedBox(width: 10),
               _featureChip(Icons.offline_bolt_outlined, 'Offline'),
             ],
           ),
@@ -302,7 +304,9 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
                 child: const Text('EM ALTA', style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
               ),
               const SizedBox(width: 10),
-              const Text('Recomendados para você', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+              const Expanded(
+                child: Text('Recomendados para você', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
+              ),
             ],
           ),
         ),

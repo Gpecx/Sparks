@@ -1,217 +1,217 @@
 {
   "category": "Termografia Infravermelha",
-  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categorySubtitle": "Fundamentos, aplicações em sistemas elétricos e normas de laudos",
   "categoryOrder": 3,
   "module": "Termografia em Sistemas Elétricos",
-  "moduleSubtitle": "Inspecao de subestacoes, paineis, motores, linhas e pontos quentes",
+  "moduleSubtitle": "Inspeção de subestações, painéis, motores, linhas e pontos quentes",
   "moduleOrder": 2,
   "trail": "Aplicações em Painéis de BT e Motores",
   "trailOrder": 2,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Quais sao as principais causas de problemas gerados pela relacao entre corrente e resistencia em paineis eletricos?",
+      "statement": "Quais são as principais causas de problemas gerados pela relação entre corrente e resistência em painéis elétricos?",
       "options": [
-        "Isolamento acustico deficiente e campos magneticos externos residuais.",
-        "Conexoes oxidadas, problemas de aperto, sobrecargas ou falhas de componentes.",
+        "Isolamento acústico deficiente e campos magnéticos externos residuais.",
+        "Conexões oxidadas, problemas de aperto, sobrecargas ou falhas de componentes.",
         "Umidade relativa do ar em valores muito abaixo dos limites operacionais.",
-        "Emissividade perfeitamente unitaria de todos os componentes de baixa tensao."
+        "Emissividade perfeitamente unitária de todos os componentes de baixa tensão."
       ],
       "correctIndex": 1,
-      "explanation": "Problemas eletricos termicos sao normalmente provocados por conexoes oxidadas, problemas de aperto, sobrecargas ou pelas falhas de componentes. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Problemas elétricos térmicos são normalmente provocados por conexões oxidadas, problemas de aperto, sobrecargas ou pelas falhas de componentes. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao inspecionar um disjuntor operando em regime continuo, o registro de um ponto a 65 graus Celsius indica obrigatoriamente um defeito critico?",
+      "statement": "Ao inspecionar um disjuntor operando em regime contínuo, o registro de um ponto a 65 graus Celsius indica obrigatoriamente um defeito crítico?",
       "options": [
         "Sim, pois os disjuntores devem operar obrigatoriamente em temperaturas abaixo da ambiente.",
         "Sim, pois qualquer leitura acima de 50 graus desativa mecanicamente o painel.",
-        "Nao, pois a camera infravermelha nao consegue medir a temperatura de plasticos com exatidao.",
-        "Nao, pois pode ser uma temperatura normal de trabalho continuo, especialmente se for o unico circuito ligado."
+        "Não, pois a câmera infravermelha não consegue medir a temperatura de plásticos com exatidão.",
+        "Não, pois pode ser uma temperatura normal de trabalho contínuo, especialmente se for o único circuito ligado."
       ],
       "correctIndex": 3,
-      "explanation": "A temperatura de 65 graus e totalmente normal para um disjuntor em regime continuo, nao significando defeito se for o unico circuito ativo. (Fonte: Tipos de analise termografica em painel eletrico)",
+      "explanation": "A temperatura de 65 graus é totalmente normal para um disjuntor em regime contínuo, não significando defeito se for o único circuito ativo. (Fonte: Tipos de análise termográfica em painel elétrico)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que indica a analise qualitativa termografica quando apenas uma das fases de um disjuntor trifasico apresenta temperatura expressivamente elevada?",
+      "statement": "O que indica a análise qualitativa termográfica quando apenas uma das fases de um disjuntor trifásico apresenta temperatura expressivamente elevada?",
       "options": [
-        "Mostra uma clara anormalidade, pois as tres fases deveriam estar equilibradas termicamente.",
-        "Indica que o equipamento esta funcionando no limite maximo de sua eficiencia energetica perfeita.",
-        "Sinaliza um erro de calibracao automatica da camera na leitura do componente brilhante.",
-        "Garante que as demais fases encontram-se inativas e isentas de qualquer corrente eletrica."
+        "Mostra uma clara anormalidade, pois as três fases deveriam estar equilibradas termicamente.",
+        "Indica que o equipamento está funcionando no limite máximo de sua eficiência energética perfeita.",
+        "Sinaliza um erro de calibração automática da câmera na leitura do componente brilhante.",
+        "Garante que as demais fases encontram-se inativas e isentas de qualquer corrente elétrica."
       ],
       "correctIndex": 0,
-      "explanation": "O aquecimento de apenas uma fase em um circuito trifasico mostra uma anormalidade, pois as tres fases deveriam atuar equilibradas. (Fonte: Tipos de analise termografica em painel eletrico)",
+      "explanation": "O aquecimento de apenas uma fase em um circuito trifásico mostra uma anormalidade, pois as três fases deveriam atuar equilibradas. (Fonte: Tipos de análise termográfica em painel elétrico)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a acao corretiva recomendada em paineis eletricos quando a variacao de temperatura (Delta T) entre componentes similares ultrapassa 40 graus Celsius?",
+      "statement": "Qual é a ação corretiva recomendada em painéis elétricos quando a variação de temperatura (Delta T) entre componentes similares ultrapassa 40 graus Celsius?",
       "options": [
-        "As medidas corretivas devem ser programadas no proximo semestre de rotina preventiva.",
-        "A inspecao deve ser ignorada caso o painel possua refrigeracao de ar forcada.",
-        "As medidas corretivas imediatas sao exigidas devido a alta prioridade e severidade.",
-        "Os disjuntores devem ser lavados e o relatorio arquivado sem intervencao."
+        "As medidas corretivas devem ser programadas no próximo semestre de rotina preventiva.",
+        "A inspeção deve ser ignorada caso o painel possua refrigeração de ar forçada.",
+        "As medidas corretivas imediatas são exigidas devido à alta prioridade e severidade.",
+        "Os disjuntores devem ser lavados e o relatório arquivado sem intervenção."
       ],
       "correctIndex": 2,
-      "explanation": "Para um Delta T superior a 40 graus Celsius classificado como prioridade um, a acao recomendada exige medidas corretivas imediatas. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Para um Delta T superior a 40 graus Celsius classificado como prioridade um, a ação recomendada exige medidas corretivas imediatas. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a tabela de criterios Delta T para anomalias, qual e o procedimento adequado para ocorrencias com elevacao entre 1 e 10 graus Celsius?",
+      "statement": "Segundo a tabela de critérios Delta T para anomalias, qual é o procedimento adequado para ocorrências com elevação entre 1 e 10 graus Celsius?",
       "options": [
-        "Desligamento instantaneo e imediato de todo o fornecimento eletrico do painel.",
-        "Troca sumaria do disjuntor sem necessidade de limpar os barramentos adjacentes.",
-        "Congelamento imediato das bobinas com nitrogenio liquido comercial.",
-        "As medidas corretivas devem ser tomadas no proximo periodo de manutencao."
+        "Desligamento instantâneo e imediato de todo o fornecimento elétrico do painel.",
+        "Troca sumária do disjuntor sem necessidade de limpar os barramentos adjacentes.",
+        "Congelamento imediato das bobinas com nitrogênio líquido comercial.",
+        "As medidas corretivas devem ser tomadas no próximo período de manutenção."
       ],
       "correctIndex": 3,
-      "explanation": "Para prioridade quatro com Delta T entre 1 e 10 graus Celsius, as medidas corretivas devem ser tomadas no proximo periodo de manutencao. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Para prioridade quatro com Delta T entre 1 e 10 graus Celsius, as medidas corretivas devem ser tomadas no próximo período de manutenção. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Por que um diagnostico termografico puramente visual pode ser incorreto ao analisar cabos instalados fisicamente em paralelo em uma mesma fase?",
+      "statement": "Por que um diagnóstico termográfico puramente visual pode ser incorreto ao analisar cabos instalados fisicamente em paralelo em uma mesma fase?",
       "options": [
-        "Porque o campo magnetico desvia o foco da lente da camera termica nos dois fios.",
-        "Em casos de mau contato de alta resistencia, a corrente se desvia para o condutor saudavel, tornando-o o cabo mais aquecido.",
-        "Porque a corrente eletrica flui apenas pela carcaca isolante do cabo com maior bitola geometrica.",
+        "Porque o campo magnético desvia o foco da lente da câmera térmica nos dois fios.",
+        "Em casos de mau contato de alta resistência, a corrente se desvia para o condutor saudável, tornando-o o cabo mais aquecido.",
+        "Porque a corrente elétrica flui apenas pela carcaça isolante do cabo com maior bitola geométrica.",
         "Devido ao reflexo de luz natural que impede a leitura correta das fases em ambientes externos."
       ],
       "correctIndex": 1,
-      "explanation": "Sob forte mau contato resistivo em um cabo, a corrente desvia para a conexao saudavel, fazendo a fiacao boa superaquecer. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Sob forte mau contato resistivo em um cabo, a corrente desvia para a conexão saudável, fazendo a fiação boa superaquecer. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na interpretacao dos mapas termicos em engenharia, o que os Pontos de Calor (Hot Spots) geralmente apontam nos equipamentos operacionais?",
+      "statement": "Na interpretação dos mapas térmicos em engenharia, o que os Pontos de Calor (Hot Spots) geralmente apontam nos equipamentos operacionais?",
       "options": [
-        "Ausencia total de corrente fluindo pelo condutor focado.",
-        "Operacao em estado criogenico extremo abaixo de zero.",
-        "Areas de alta temperatura que sinalizam sinais de sobrecarga ou desgaste mecanico.",
-        "Condicoes de equilibrio termodinamico perfeito do equipamento eletrico."
+        "Ausência total de corrente fluindo pelo condutor focado.",
+        "Operação em estado criogênico extremo abaixo de zero.",
+        "Áreas de alta temperatura que sinalizam sinais de sobrecarga ou desgaste mecânico.",
+        "Condições de equilíbrio termodinâmico perfeito do equipamento elétrico."
       ],
       "correctIndex": 2,
-      "explanation": "Os hot spots indicam areas de elevadissima temperatura que podem ser evidencias de sobrecarga ou desgaste mecanico acentuado. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "Os hot spots indicam áreas de elevadíssima temperatura que podem ser evidências de sobrecarga ou desgaste mecânico acentuado. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em quadros de comando analisados, qual falha causou diretamente o sobreaquecimento emergencial de 76 graus Celsius no terminal do rele de estado solido SSR11L?",
+      "statement": "Em quadros de comando analisados, qual falha causou diretamente o sobreaquecimento emergencial de 76 graus Celsius no terminal do relé de estado sólido SSR11L?",
       "options": [
-        "A substituicao inadequada da tampa de acrilico por uma de vidro fume.",
-        "A sobretensao causada por descargas atmosfericas continuas no painel de medicao.",
-        "A falta de manutencao preventiva no rele que acarretou o aquecimento severo na conexao.",
-        "A queima integral do filtro de harmonicos capacitivo nas tres fases simultaneas."
+        "A substituição inadequada da tampa de acrílico por uma de vidro fumê.",
+        "A sobretensão causada por descargas atmosféricas contínuas no painel de medição.",
+        "A falta de manutenção preventiva no relé que acarretou o aquecimento severo na conexão.",
+        "A queima integral do filtro de harmônicos capacitivo nas três fases simultâneas."
       ],
       "correctIndex": 2,
-      "explanation": "O aquecimento anormal dessa conexao foi causado especificamente pela falta de manutencao preventiva, demandando limpeza e reaperto emergencial. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "O aquecimento anormal dessa conexão foi causado especificamente pela falta de manutenção preventiva, demandando limpeza e reaperto emergencial. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No estudo pratico de disjuntores de caixa moldada, qual evento fisico acionou o aquecimento terminal severo registrado pontualmente a 62 graus Celsius?",
+      "statement": "No estudo prático de disjuntores de caixa moldada, qual evento físico acionou o aquecimento terminal severo registrado pontualmente a 62 graus Celsius?",
       "options": [
-        "A emissao controlada de gas expansivo no interior da camara de extincao do rele.",
-        "A aplicacao de um torque inadequado na conexao acarretando a deterioracao do terminal e isolacao do cabo.",
-        "A inducao magnetica intensa originada pelo rotor bloqueado do motor adjacente trifasico.",
-        "O polimento excessivo nas superficies condutoras que espelhou todo o calor reativo do ambiente."
+        "A emissão controlada de gás expansivo no interior da câmara de extinção do relé.",
+        "A aplicação de um torque inadequado na conexão acarretando a deterioração do terminal e isolação do cabo.",
+        "A indução magnética intensa originada pelo rotor bloqueado do motor adjacente trifásico.",
+        "O polimento excessivo nas superfícies condutoras que espelhou todo o calor reativo do ambiente."
       ],
       "correctIndex": 1,
-      "explanation": "A causa direta desse superaquecimento no painel foi a aplicacao de um torque inadequado que deteriorou severamente o terminal eletrico focado. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "A causa direta desse superaquecimento no painel foi a aplicação de um torque inadequado que deteriorou severamente o terminal elétrico focado. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quais sao as condicoes operacionais minimas de carga e tempo exigidas para que a analise termica de um painel eletrico reflita fielmente sua realidade?",
+      "statement": "Quais são as condições operacionais mínimas de carga e tempo exigidas para que a análise térmica de um painel elétrico reflita fielmente sua realidade?",
       "options": [
-        "Operar no minimo dois minutos com cinco por cento de carga flutuante.",
-        "Estar desligado da rede primaria ha mais de vinte e quatro horas corridas.",
-        "Operar com fator de potencia nulo e corrente reativa totalmente capacitiva isolada.",
-        "O painel deve estar operando ininterruptamente ha no minimo duas horas e possuir ao menos 30 por cento da sua carga."
+        "Operar no mínimo dois minutos com cinco por cento de carga flutuante.",
+        "Estar desligado da rede primária há mais de vinte e quatro horas corridas.",
+        "Operar com fator de potência nulo e corrente reativa totalmente capacitiva isolada.",
+        "O painel deve estar operando ininterruptamente há no mínimo duas horas e possuir ao menos 30 por cento da sua carga."
       ],
       "correctIndex": 3,
-      "explanation": "Para precisao diagnostica, recomenda-se que o painel possua no minimo 30 por cento da carga e opere ativamente ha pelo menos duas horas. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Para precisão diagnóstica, recomenda-se que o painel possua no mínimo 30 por cento da carga e opere ativamente há pelo menos duas horas. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "trueFalse",
-      "statement": "Toda identificacao de um ponto quente isolado no termograma de um painel atesta de forma sempre inequivoca um defeito estrutural grave e imediato no circuito.",
+      "statement": "Toda identificação de um ponto quente isolado no termograma de um painel atesta de forma sempre inequívoca um defeito estrutural grave e imediato no circuito.",
       "correctAnswer": false,
-      "explanation": "Pontos quentes podem indicar meramente o regime continuo de trabalho normal de um circuito, nao sendo sempre caracterizacao obrigatoria de defeito. (Fonte: Tipos de analise termografica em painel eletrico)",
+      "explanation": "Pontos quentes podem indicar meramente o regime contínuo de trabalho normal de um circuito, não sendo sempre caracterização obrigatória de defeito. (Fonte: Tipos de análise termográfica em painel elétrico)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A analise termografica quantitativa difere da qualitativa por buscar a temperatura fisica exata do componente, o que exige ajustes rigorosos e cameras de resolucao superior.",
+      "statement": "A análise termográfica quantitativa difere da qualitativa por buscar a temperatura física exata do componente, o que exige ajustes rigorosos e câmeras de resolução superior.",
       "correctAnswer": true,
-      "explanation": "As analises quantitativas precisam aferir a temperatura exata da falha, demandando equipamentos calibrados de maior qualidade optica e radiometrica. (Fonte: Tipos de analise termografica em painel eletrico)",
+      "explanation": "As análises quantitativas precisam aferir a temperatura exata da falha, demandando equipamentos calibrados de maior qualidade óptica e radiométrica. (Fonte: Tipos de análise termográfica em painel elétrico)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Na inspecao de paineis, uma variacao Delta T superior a 20 graus Celsius e inferior a 40 graus Celsius (Prioridade 2) demanda medidas corretivas programadas apenas no proximo ano.",
+      "statement": "Na inspeção de painéis, uma variação Delta T superior a 20 graus Celsius e inferior a 40 graus Celsius (Prioridade 2) demanda medidas corretivas programadas apenas no próximo ano.",
       "correctAnswer": false,
-      "explanation": "Pela tabela normativa de Delta T, a prioridade 2 exige obrigatoriamente que as medidas corretivas ocorram assim que possivel, e nao no ano seguinte. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Pela tabela normativa de Delta T, a prioridade 2 exige obrigatoriamente que as medidas corretivas ocorram assim que possível, e não no ano seguinte. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Na inspecao qualitativa da termografia infravermelha, diferencas nitidas de temperatura que excedam 4 graus Celsius entre dois barramentos semelhantes ja sao indicativos comprovados de falhas de comportamento.",
+      "statement": "Na inspeção qualitativa da termografia infravermelha, diferenças nítidas de temperatura que excedam 4 graus Celsius entre dois barramentos semelhantes já são indicativos comprovados de falhas de comportamento.",
       "correctAnswer": true,
-      "explanation": "Qualquer divergencia a partir de 4 graus Celsius entre equipamentos semelhantes operando homogeneamente atesta forte sintoma comportamental anormal e suspeito. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Qualquer divergência a partir de 4 graus Celsius entre equipamentos semelhantes operando homogeneamente atesta forte sintoma comportamental anormal e suspeito. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A maxima temperatura admissivel (MTA) adotada como parametro no diagnostico de um disjuntor de caixa moldada e um valor fixo e imutavel de 90 graus Celsius independentemente de seu fabricante.",
+      "statement": "A máxima temperatura admissível (MTA) adotada como parâmetro no diagnóstico de um disjuntor de caixa moldada é um valor fixo e imutável de 90 graus Celsius independentemente de seu fabricante.",
       "correctAnswer": false,
-      "explanation": "A MTA de componentes varia diretamente de acordo com as especificacoes proprias do fabricante e com a capacidade nominal de cada disjuntor. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "A MTA de componentes varia diretamente de acordo com as especificações próprias do fabricante e com a capacidade nominal de cada disjuntor. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Anomalias termicas perceptiveis nas superficies dos paineis de comando normalmente precedem eventuais ____ dos equipamentos eletricos, tornando a inspecao uma ferramenta preditiva vital.",
+      "statement": "Anomalias térmicas perceptíveis nas superfícies dos painéis de comando normalmente precedem eventuais ____ dos equipamentos elétricos, tornando a inspeção uma ferramenta preditiva vital.",
       "blanks": [
         {
           "index": 0,
           "answer": "falhas"
         }
       ],
-      "explanation": "As variacoes de calor mapeadas pelo termovisor habitualmente alertam as falhas fisicas e eletricas antes de sua completa ruptura sistemica. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "As variações de calor mapeadas pelo termovisor habitualmente alertam as falhas físicas e elétricas antes de sua completa ruptura sistêmica. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Os reles de estado solido empregados nos quadros acionam enormes potencias de carga operando unicamente atraves de componentes ____, abolindo totalmente a presenca historica dos contatos moveis fisicos.",
+      "statement": "Os relés de estado sólido empregados nos quadros acionam enormes potências de carga operando unicamente através de componentes ____, abolindo totalmente a presença histórica dos contatos móveis físicos.",
       "blanks": [
         {
           "index": 0,
           "answer": "semicondutores"
         }
       ],
-      "explanation": "Esses dispositivos executam seu chaveamento valendo-se integralmente de arranjos semicondutores como SCRs ou Mosfets sem exigir atuadores contatados fisicos mecanizados. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Esses dispositivos executam seu chaveamento valendo-se integralmente de arranjos semicondutores como SCRs ou Mosfets sem exigir atuadores contatados físicos mecanizados. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Na avaliacao dos paineis preditivos da termografia, o diagnostico tecnico rigoroso depende de a camera prever a ____ maxima admissivel na qual o componente consiga atuar sem sofrer severa degradacao.",
+      "statement": "Na avaliação dos painéis preditivos da termografia, o diagnóstico técnico rigoroso depende de a câmera prever a ____ máxima admissível na qual o componente consiga atuar sem sofrer severa degradação.",
       "blanks": [
         {
           "index": 0,
           "answer": "temperatura"
         }
       ],
-      "explanation": "Conhecer a temperatura maxima admissivel de projeto do componente (MTA) constitui o limiar fundamental ao classificar precisamente se a ocorrencia e de fato perigosa ou rotineira. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Conhecer a temperatura máxima admissível de projeto do componente (MTA) constitui o limiar fundamental ao classificar precisamente se a ocorrência é de fato perigosa ou rotineira. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     }
   ]

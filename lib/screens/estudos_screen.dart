@@ -216,6 +216,8 @@ class _CategoryCard extends StatelessWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 4),
                         Text(
@@ -224,6 +226,8 @@ class _CategoryCard extends StatelessWidget {
                             color: AppColors.textSecondary,
                             fontSize: 12,
                           ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         if (ebooksDone > 0) ...[
                           const SizedBox(height: 8),

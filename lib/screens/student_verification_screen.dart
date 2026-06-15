@@ -294,8 +294,11 @@ class _StatusBanner extends StatelessWidget {
         children: [
           Icon(icon, color: color, size: 20),
           const SizedBox(width: 10),
-          Text(label,
-              style: TextStyle(color: color, fontWeight: FontWeight.w700)),
+          Expanded(
+            child: Text(label,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: color, fontWeight: FontWeight.w700)),
+          ),
         ],
       ),
     );
@@ -327,9 +330,15 @@ class _ProofPicker extends StatelessWidget {
                 color: proof == null ? AppColors.textMuted : const Color(0xFF22C55E),
                 size: 28),
             const SizedBox(height: 8),
-            Text(
-              proof == null ? 'Selecionar foto/PDF' : proof!.name,
-              style: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                proof == null ? 'Selecionar foto/PDF' : proof!.name,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
+              ),
             ),
           ],
         ),

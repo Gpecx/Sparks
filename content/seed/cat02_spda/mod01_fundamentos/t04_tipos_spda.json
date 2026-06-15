@@ -3,118 +3,118 @@
   "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
   "categoryOrder": 1,
   "module": "Fundamentos de SPDA",
-  "moduleSubtitle": "Fisica dos raios, conceitos, tipos e categorias de protecao",
+  "moduleSubtitle": "Física dos raios, conceitos, tipos e categorias de proteção",
   "moduleOrder": 0,
   "trail": "Tipos de SPDA (Captor Franklin, Gaiola de Faraday, Eletrogeométrico)",
   "trailOrder": 3,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Quais sao os tres metodos de posicionamento do subsistema de captacao aceitos e descritos normativamente pela ABNT NBR 5419?",
+      "statement": "Quais são os três métodos de posicionamento do subsistema de captação aceitos e descritos normativamente pela ABNT NBR 5419?",
       "options": [
-        "Metodo Early Streamer Emission (ESE), Metodo Franklin e Metodo de Catenaria.",
-        "Metodo da Esfera Rolante, Metodo das Malhas e Metodo do Angulo de Protecao (Franklin).",
-        "Metodo Radioativo, Metodo Eletrogeometrico e Metodo das Malhas.",
-        "Metodo da Gaiola de Faraday, Metodo de Emissao Ionica e Cabos de Guarda."
+        "Método Early Streamer Emission (ESE), Método Franklin e Método de Catenária.",
+        "Método da Esfera Rolante, Método das Malhas e Método do Ângulo de Proteção (Franklin).",
+        "Método Radioativo, Método Eletrogeométrico e Método das Malhas.",
+        "Método da Gaiola de Faraday, Método de Emissão Iônica e Cabos de Guarda."
       ],
       "correctIndex": 1,
-      "explanation": "A ABNT NBR 5419:2026 estipula que os metodos de posicionamento do subsistema de captacao permanecem os mesmos: metodo da esfera rolante, metodo das malhas e metodo do angulo de protecao. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A ABNT NBR 5419:2026 estipula que os métodos de posicionamento do subsistema de captação permanecem os mesmos: método da esfera rolante, método das malhas e método do ângulo de proteção. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O metodo de captacao Franklin e baseado em qual principio de funcionamento fisico?",
+      "statement": "O método de captação Franklin é baseado em qual princípio de funcionamento físico?",
       "options": [
-        "Emissao radioativa no topo de edificacoes para desviar o raio da estrutura principal.",
-        "Utilizacao de uma rede de condutores ao redor da edificacao para anular o campo magnetico.",
-        "Instalacao de hastes pontiagudas nos pontos mais altos que intensificam o campo eletrico e criam um caminho preferencial.",
-        "Uso de esferas rolantes imaginarias que bloqueiam fisicamente as descargas descendentes."
+        "Emissão radioativa no topo de edificações para desviar o raio da estrutura principal.",
+        "Utilização de uma rede de condutores ao redor da edificação para anular o campo magnético.",
+        "Instalação de hastes pontiagudas nos pontos mais altos que intensificam o campo elétrico e criam um caminho preferencial.",
+        "Uso de esferas rolantes imaginárias que bloqueiam fisicamente as descargas descendentes."
       ],
       "correctIndex": 2,
-      "explanation": "O captor Franklin intercepta o raio antes que atinja a estrutura, baseando-se no principio de que pontos agudos intensificam o campo eletrico, atraindo a descarga para o aterramento. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "O captor Franklin intercepta o raio antes que atinja a estrutura, baseando-se no princípio de que pontos agudos intensificam o campo elétrico, atraindo a descarga para o aterramento. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a comparacao tecnica dos tipos de SPDA, qual metodo apresenta as caracteristicas de baixa complexidade de instalacao, baixo custo e e aplicavel principalmente em estruturas altas (como torres e chamines)?",
+      "statement": "Segundo a comparação técnica dos tipos de SPDA, qual método apresenta as características de baixa complexidade de instalação, baixo custo e é aplicável principalmente em estruturas altas (como torres e chaminés)?",
       "options": [
         "Ponta Franklin",
         "Gaiola de Faraday",
-        "Metodo das Malhas",
+        "Método das Malhas",
         "Cabos de Guarda"
       ],
       "correctIndex": 0,
-      "explanation": "A Tabela de Comparacao entre os Tipos de SPDA define a Ponta Franklin com complexidade de instalacao baixa, custo baixo e aplicabilidade voltada essencialmente para estruturas altas. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "A Tabela de Comparação entre os Tipos de SPDA define a Ponta Franklin com complexidade de instalação baixa, custo baixo e aplicabilidade voltada essencialmente para estruturas altas. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o principal parametro que define o limite de protecao e o tamanho da esfera ficticia no Metodo Eletrogeometrico (Esfera Rolante)?",
+      "statement": "Qual é o principal parâmetro que define o limite de proteção e o tamanho da esfera fictícia no Método Eletrogeométrico (Esfera Rolante)?",
       "options": [
-        "A densidade local de descargas atmosfericas (Ng).",
-        "A altura total do edificio em relacao ao nivel do mar.",
-        "A Classe do SPDA (Nivel de Protecao), que define um raio de 20m a 60m.",
-        "O numero de dias de trovoada por ano na regiao (Td)."
+        "A densidade local de descargas atmosféricas (Ng).",
+        "A altura total do edifício em relação ao nível do mar.",
+        "A Classe do SPDA (Nível de Proteção), que define um raio de 20m a 60m.",
+        "O número de dias de trovoada por ano na região (Td)."
       ],
       "correctIndex": 2,
-      "explanation": "No Metodo da Esfera Rolante, o raio da esfera ficticia depende rigidamente da classe do SPDA desejado, variando de 20m para o Nivel I ate 60m para o Nivel IV. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "No Método da Esfera Rolante, o raio da esfera fictícia depende rigidamente da classe do SPDA desejado, variando de 20m para o Nível I até 60m para o Nível IV. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como o Metodo da Gaiola de Faraday atua especificamente na protecao de grandes edificacoes?",
+      "statement": "Como o Método da Gaiola de Faraday atua especificamente na proteção de grandes edificações?",
       "options": [
-        "Atraves de mastros com formato parabolico que isolam toda a radiacao externa.",
-        "Utilizando cabos aereos sustentados por torres para interceptar o raio longe do teto.",
-        "Com hastes radioativas que emitem lideres ascendentes anulando as correntes da nuvem.",
-        "Criando uma rede de condutores ao redor e sobre a edificacao, distribuindo a corrente e anulando o campo eletrico interno."
+        "Através de mastros com formato parabólico que isolam toda a radiação externa.",
+        "Utilizando cabos aéreos sustentados por torres para interceptar o raio longe do teto.",
+        "Com hastes radioativas que emitem líderes ascendentes anulando as correntes da nuvem.",
+        "Criando uma rede de condutores ao redor e sobre a edificação, distribuindo a corrente e anulando o campo elétrico interno."
       ],
       "correctIndex": 3,
-      "explanation": "A Gaiola de Faraday atua criando uma rede de condutores metalicos dispostos ao redor e sobre a edificacao. Isso distribui a corrente e anula o campo eletrico interno, protegendo o volume. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "A Gaiola de Faraday atua criando uma rede de condutores metálicos dispostos ao redor e sobre a edificação. Isso distribui a corrente e anula o campo elétrico interno, protegendo o volume. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao utilizar o Metodo da Esfera Rolante, caso uma estrutura possua altura superior a 60 metros (raio maximo da esfera de Classe IV), qual e a orientacao tecnica exigida?",
+      "statement": "Ao utilizar o Método da Esfera Rolante, caso uma estrutura possua altura superior a 60 metros (raio máximo da esfera de Classe IV), qual é a orientação técnica exigida?",
       "options": [
-        "A esfera de 60 metros protegera perfeitamente toda a base, nao necessitando captores laterais.",
-        "A chance de o raio atingir a lateral deixa de ser desprezivel, passando a ser exigida a instalacao de captacao nas laterais superiores da construcao.",
-        "O metodo eletrogeometrico e invalidado, sendo obrigatorio o uso do captor Franklin no centro do teto.",
-        "A estrutura nao pode ser protegida e deve utilizar unicamente DPS nas tomadas."
+        "A esfera de 60 metros protegerá perfeitamente toda a base, não necessitando captores laterais.",
+        "A chance de o raio atingir a lateral deixa de ser desprezível, passando a ser exigida a instalação de captação nas laterais superiores da construção.",
+        "O método eletrogeométrico é invalidado, sendo obrigatório o uso do captor Franklin no centro do teto.",
+        "A estrutura não pode ser protegida e deve utilizar unicamente DPS nas tomadas."
       ],
       "correctIndex": 1,
-      "explanation": "Se a estrutura tem altura superior a 60 metros, a chance de uma descarga atingir a lateral deixa de ser desprezivel, passando a ser considerada a necessidade de instalacao de captores na fachada lateral. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "Se a estrutura tem altura superior a 60 metros, a chance de uma descarga atingir a lateral deixa de ser desprezível, passando a ser considerada a necessidade de instalação de captores na fachada lateral. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo as atualizacoes da ABNT NBR 5419:2026, qual o posicionamento normativo em relacao aos captores do tipo emissao antecipada ou ESE (Early Streamer Emission)?",
+      "statement": "Segundo as atualizações da ABNT NBR 5419:2026, qual o posicionamento normativo em relação aos captores do tipo emissão antecipada ou ESE (Early Streamer Emission)?",
       "options": [
-        "Foram integrados como a quarta alternativa metodologica de protecao principal no Brasil.",
-        "Sao recomendados exclusivamente quando combinados com o metodo das Malhas.",
-        "Permanecem fora dos metodos aceitos, pois a norma exige que o volume de protecao considere apenas as dimensoes fisicas reais dos captores.",
-        "Passaram a ser obrigatorios apenas para edificacoes industriais e de telecomunicacoes."
+        "Foram integrados como a quarta alternativa metodológica de proteção principal no Brasil.",
+        "São recomendados exclusivamente quando combinados com o método das Malhas.",
+        "Permanecem fora dos métodos aceitos, pois a norma exige que o volume de proteção considere apenas as dimensões físicas reais dos captores.",
+        "Passaram a ser obrigatórios apenas para edificações industriais e de telecomunicações."
       ],
       "correctIndex": 2,
-      "explanation": "O texto explicita que a determinacao do volume de protecao considera apenas dimensoes fisicas reais, reforcando que sistemas nao convencionais como ESE (Early Streamer Emission) permanecem fora dos metodos aceitos pela norma. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "O texto explicita que a determinação do volume de proteção considera apenas dimensões físicas reais, reforçando que sistemas não convencionais como ESE (Early Streamer Emission) permanecem fora dos métodos aceitos pela norma. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No metodo do Angulo de Protecao (conhecido como Franklin), como e geometricamente definido o volume de protecao gerado por um mastro captor?",
+      "statement": "No método do Ângulo de Proteção (conhecido como Franklin), como é geometricamente definido o volume de proteção gerado por um mastro captor?",
       "options": [
         "Por um cilindro vertical delimitado pelo raio exato da altura do mastro multiplicada por Pi.",
-        "Pela forma de um cone circular cujo vertice esta posicionado no eixo do mastro, com o angulo na base dependendo da classe do SPDA.",
-        "Por uma semiesfera com centro na ponta do mastro estendendo-se ate o solo.",
-        "Por uma piramide cujas faces sao guiadas pelas cordoalhas de aterramento."
+        "Pela forma de um cone circular cujo vértice está posicionado no eixo do mastro, com o ângulo na base dependendo da classe do SPDA.",
+        "Por uma semiesfera com centro na ponta do mastro estendendo-se até o solo.",
+        "Por uma pirâmide cujas faces são guiadas pelas cordoalhas de aterramento."
       ],
       "correctIndex": 1,
-      "explanation": "O volume de protecao provido por um mastro pelo metodo Franklin e definido pela forma de um cone circular cujo vertice esta posicionado no eixo do mastro, com angulo dependendo da classe do SPDA e sua altura. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O volume de proteção provido por um mastro pelo método Franklin é definido pela forma de um cone circular cujo vértice está posicionado no eixo do mastro, com ângulo dependendo da classe do SPDA e sua altura. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "As malhas formadas pelos condutores horizontais variam de tamanho conforme o Nivel de Protecao. De acordo com as tabelas da norma para o Metodo das Malhas, qual e o maximo afastamento dos condutores para um SPDA Classe III?",
+      "statement": "As malhas formadas pelos condutores horizontais variam de tamanho conforme o Nível de Proteção. De acordo com as tabelas da norma para o Método das Malhas, qual é o máximo afastamento dos condutores para um SPDA Classe III?",
       "options": [
         "5 x 5 metros",
         "10 x 10 metros",
@@ -122,12 +122,12 @@
         "20 x 20 metros"
       ],
       "correctIndex": 2,
-      "explanation": "A norma estabelece que para a Classe do SPDA III, o raio da esfera rolante e 45m e o maximo afastamento dos condutores da malha e de 15 x 15 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A norma estabelece que para a Classe do SPDA III, o raio da esfera rolante é 45m e o máximo afastamento dos condutores da malha é de 15 x 15 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No metodo Eletrogeometrico, a equacao elaborada pela CIGRE que relaciona o raio da esfera (R) ao valor de crista da corrente maxima (Imax) adota quais valores de constantes para k e p nas diretrizes da NBR 5419?",
+      "statement": "No método Eletrogeométrico, a equação elaborada pela CIGRE que relaciona o raio da esfera (R) ao valor de crista da corrente máxima (Imax) adota quais valores de constantes para k e p nas diretrizes da NBR 5419?",
       "options": [
         "k = 1 e p = 1,25",
         "k = 10 e p = 0,65",
@@ -135,83 +135,83 @@
         "k = 8 e p = 0,85"
       ],
       "correctIndex": 1,
-      "explanation": "A equacao da distancia de atracao (R) elaborada pelo GT-33 da CIGRE adota para a ABNT NBR 5419 as constantes k = 10 e p = 0,65 no calculo dependente de Imax. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "A equação da distância de atração (R) elaborada pelo GT-33 da CIGRE adota para a ABNT NBR 5419 as constantes k = 10 e p = 0,65 no cálculo dependente de Imax. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O sistema de Cabos de Guarda (Catenaria) consiste em cabos condutores sustentados por mastros instalados acima da estrutura e e uma solucao largamente utilizada em linhas de transmissao de energia eletrica.",
+      "statement": "O sistema de Cabos de Guarda (Catenária) consiste em cabos condutores sustentados por mastros instalados acima da estrutura e é uma solução largamente utilizada em linhas de transmissão de energia elétrica.",
       "correctAnswer": true,
-      "explanation": "O sistema de Cabos de Guarda intercepta raios atraves de fios esticados por mastros ou torres e e muito comum em linhas de transmissao ou para proteger patios abertos. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "O sistema de Cabos de Guarda intercepta raios através de fios esticados por mastros ou torres e é muito comum em linhas de transmissão ou para proteger pátios abertos. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Ao avaliar os metodos de protecao, a Gaiola de Faraday destaca-se por ter baixissima complexidade de instalacao e custo reduzido, sendo a opcao ideal e mais recomendada para estruturas estreitas e muito altas como torres de telecomunicacao.",
+      "statement": "Ao avaliar os métodos de proteção, a Gaiola de Faraday destaca-se por ter baixíssima complexidade de instalação e custo reduzido, sendo a opção ideal e mais recomendada para estruturas estreitas e muito altas como torres de telecomunicação.",
       "correctAnswer": false,
-      "explanation": "O metodo da Gaiola de Faraday possui alta complexidade e alto custo, sendo voltado para grandes edificacoes horizontais. Para estruturas altas e estreitas como torres, a Ponta Franklin e a ideal. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "O método da Gaiola de Faraday possui alta complexidade e alto custo, sendo voltado para grandes edificações horizontais. Para estruturas altas e estreitas como torres, a Ponta Franklin é a ideal. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "No metodo da esfera rolante, uma esfera ficticia deve ser rolada no topo e ao redor de toda a estrutura. Se nenhum ponto da estrutura, exceto os componentes de captacao, tocar no perimetro desta esfera, considera-se a area adequadamente protegida.",
+      "statement": "No método da esfera rolante, uma esfera fictícia deve ser rolada no topo e ao redor de toda a estrutura. Se nenhum ponto da estrutura, exceto os componentes de captação, tocar no perímetro desta esfera, considera-se a área adequadamente protegida.",
       "correctAnswer": true,
-      "explanation": "O metodo eletrogeometrico utiliza uma esfera ficticia que rola pela edificacao; a protecao e validada se apenas o subsistema de captacao entrar em contato com a esfera. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "O método eletrogeométrico utiliza uma esfera fictícia que rola pela edificação; a proteção é validada se apenas o subsistema de captação entrar em contato com a esfera. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A atualizacao da norma ABNT NBR 5419 estipula que mastros ou postes tubulares atuando como captores verticais em telhados estao isentos de calculo estrutural de ventos, exigindo apenas a fixacao superficial para a captacao eletrica.",
+      "statement": "A atualização da norma ABNT NBR 5419 estipula que mastros ou postes tubulares atuando como captores verticais em telhados estão isentos de cálculo estrutural de ventos, exigindo apenas a fixação superficial para a captação elétrica.",
       "correctAnswer": false,
-      "explanation": "Pela norma atualizada, os captores verticais macicos ou tubulares (postes e mastros) passam a ter a exigencia formal para o dimensionamento mecanico capaz de suportar os esforcos do vento conforme a NBR 6123. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Pela norma atualizada, os captores verticais maciços ou tubulares (postes e mastros) passam a ter a exigência formal para o dimensionamento mecânico capaz de suportar os esforços do vento conforme a NBR 6123. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Com as mudancas na norma, a tabela rigida do metodo Franklin foi transformada em um grafico que permite otimizacoes importantes; por exemplo, em estruturas bem baixas de ate dois metros, o projetista pode assumir angulos de protecao mais amplos, beirando os 80 graus.",
+      "statement": "Com as mudanças na norma, a tabela rígida do método Franklin foi transformada em um gráfico que permite otimizações importantes; por exemplo, em estruturas bem baixas de até dois metros, o projetista pode assumir ângulos de proteção mais amplos, beirando os 80 graus.",
       "correctAnswer": true,
-      "explanation": "O novo conceito substituiu a tabela por um grafico que permite trabalhar com angulos maiores em alturas baixas, chegando a quase 80 graus em casos de captores de ate dois metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O novo conceito substituiu a tabela por um gráfico que permite trabalhar com ângulos maiores em alturas baixas, chegando a quase 80 graus em casos de captores de até dois metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O metodo de SPDA focado na instalacao de condutores horizontais no topo da estrutura, formando um quadriculado metalico com dimensoes e afastamentos que dependem da classe de risco, e conhecido normativamente como Metodo das ____.",
+      "statement": "O método de SPDA focado na instalação de condutores horizontais no topo da estrutura, formando um quadriculado metálico com dimensões e afastamentos que dependem da classe de risco, é conhecido normativamente como Método das ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Malhas"
         }
       ],
-      "explanation": "O Sistema de Condutores Horizontais disposto no topo ou nos telhados planos, similar ao conceito de Faraday de lacos quadrangulares, e chamado oficialmente de Metodo das Malhas. (Fonte: A3A Engenharia / Cleiton Junior Lopes)",
+      "explanation": "O Sistema de Condutores Horizontais disposto no topo ou nos telhados planos, similar ao conceito de Faraday de laços quadrangulares, é chamado oficialmente de Método das Malhas. (Fonte: A3A Engenharia / Cleiton Junior Lopes)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "O Metodo da Gaiola de Faraday protege uma edificacao atraves de condutores que formam uma malha envolvente. Essa geometria tem o grande beneficio de que o ____ eletrico interno a gaiola seja anulado, resguardando todo o interior.",
+      "statement": "O Método da Gaiola de Faraday protege uma edificação através de condutores que formam uma malha envolvente. Essa geometria tem o grande benefício de que o ____ elétrico interno à gaiola seja anulado, resguardando todo o interior.",
       "blanks": [
         {
           "index": 0,
           "answer": "campo"
         }
       ],
-      "explanation": "A Gaiola de Faraday distribui a corrente eletrica da descarga pela estrutura externa; esse fenomeno garante que o campo eletrico interno a gaiola seja anulado, protegendo o edificio. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "A Gaiola de Faraday distribui a corrente elétrica da descarga pela estrutura externa; esse fenômeno garante que o campo elétrico interno à gaiola seja anulado, protegendo o edifício. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Ao adotar o Metodo Eletrogeometrico, tambem chamado da Esfera Rolante, o raio da esfera muda consoante a Classe do SPDA. Para a Classe I (LPL I), aplicavel as estruturas mais criticas, a norma estipula que a esfera deve ter exatamente ____ metros de raio.",
+      "statement": "Ao adotar o Método Eletrogeométrico, também chamado da Esfera Rolante, o raio da esfera muda consoante a Classe do SPDA. Para a Classe I (LPL I), aplicável às estruturas mais críticas, a norma estipula que a esfera deve ter exatamente ____ metros de raio.",
       "blanks": [
         {
           "index": 0,
           "answer": "20"
         }
       ],
-      "explanation": "Conforme as tabelas normativas, o raio da esfera rolante (R) correspondente a Classe de SPDA I (nivel maximo de protecao) e estipulado em 20 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Conforme as tabelas normativas, o raio da esfera rolante (R) correspondente à Classe de SPDA I (nível máximo de proteção) é estipulado em 20 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     }
   ]

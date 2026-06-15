@@ -10,208 +10,208 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual e o principal objetivo tecnico da Equalizacao de Potencial dentro de um Sistema de Protecao contra Descargas Atmosfericas (SPDA)?",
+      "statement": "Qual é o principal objetivo técnico da Equalização de Potencial dentro de um Sistema de Proteção contra Descargas Atmosféricas (SPDA)?",
       "options": [
-        "Aumentar a tensao de operacao da instalacao eletrica.",
-        "Minimizar diferencas de potencial eletrico na estrutura, evitando arcos eletricos perigosos.",
-        "Atrair a descarga atmosferica propositalmente para a estrutura metalica.",
-        "Substituir completamente a necessidade de condutores de descida no edificio."
+        "Aumentar a tensão de operação da instalação elétrica.",
+        "Minimizar diferenças de potencial elétrico na estrutura, evitando arcos elétricos perigosos.",
+        "Atrair a descarga atmosférica propositalmente para a estrutura metálica.",
+        "Substituir completamente a necessidade de condutores de descida no edifício."
       ],
       "correctIndex": 1,
-      "explanation": "Segundo a A3A Engenharia, a Equalizacao de Potencial serve para minimizar diferencas de potencial eletrico na estrutura, evitando arcos eletricos perigosos. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "Segundo a A3A Engenharia, a Equalização de Potencial serve para minimizar diferenças de potencial elétrico na estrutura, evitando arcos elétricos perigosos. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo as recomendacoes normativas, como devem ser tratados os aterramentos dos sistemas de SPDA, energia e sinal (telecomunicacoes, dados)?",
+      "statement": "Segundo as recomendações normativas, como devem ser tratados os aterramentos dos sistemas de SPDA, energia e sinal (telecomunicações, dados)?",
       "options": [
         "Devem possuir malhas de aterramento totalmente isoladas e independentes umas das outras.",
-        "Devem ser integrados em uma unica estrutura de aterramento equipotencializada.",
-        "Devem ser aterrados atraves de hastes de materiais distintos, nao podendo se tocar.",
+        "Devem ser integrados em uma única estrutura de aterramento equipotencializada.",
+        "Devem ser aterrados através de hastes de materiais distintos, não podendo se tocar.",
         "Apenas o SPDA precisa de aterramento profundo; os demais sistemas dispensam essa medida."
       ],
       "correctIndex": 1,
-      "explanation": "A Mesh Engenharia afirma que e interessante assumir uma unica estrutura de aterramento integrando todos os propositos como o SPDA, sistemas de energia e sinal. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "A Mesh Engenharia afirma que é interessante assumir uma única estrutura de aterramento integrando todos os propósitos como o SPDA, sistemas de energia e sinal. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para realizar a equipotencializacao indireta de condutores que sao normalmente energizados, qual dispositivo eletrico deve ser empregado?",
+      "statement": "Para realizar a equipotencialização indireta de condutores que são normalmente energizados, qual dispositivo elétrico deve ser empregado?",
       "options": [
-        "Hastes de aco cobreado conectadas diretamente.",
-        "Dispositivos de Protecao contra Surtos (DPS).",
-        "Fitas de aco inoxidavel cravadas.",
+        "Hastes de aço cobreado conectadas diretamente.",
+        "Dispositivos de Proteção contra Surtos (DPS).",
+        "Fitas de aço inoxidável cravadas.",
         "Barramentos de cobre nu expostos."
       ],
       "correctIndex": 1,
-      "explanation": "Conforme a Lambda Consultoria, utiliza-se um DPS para equipotencializacao indireta de condutores normalmente energizados. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "Conforme a Lambda Consultoria, utiliza-se um DPS para equipotencialização indireta de condutores normalmente energizados. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "As Medidas de Protecao contra Surtos (MPS) englobam diversas tecnicas para resguardar a instalacao. Qual das alternativas a seguir e formalmente listada como uma MPS na Parte 4 da NBR 5419?",
+      "statement": "As Medidas de Proteção contra Surtos (MPS) englobam diversas técnicas para resguardar a instalação. Qual das alternativas a seguir é formalmente listada como uma MPS na Parte 4 da NBR 5419?",
       "options": [
         "Captores do tipo Early Streamer Emission.",
-        "Aterramento e equipotencializacao.",
+        "Aterramento e equipotencialização.",
         "Sistemas de para-raios radioativos.",
         "Aumento passivo da espessura dos telhados."
       ],
       "correctIndex": 1,
-      "explanation": "Segundo a Lambda Consultoria, as MPS apresentadas pela norma incluem o aterramento e equipotencializacao, alem da blindagem magnetica, DPS e interfaces isolantes. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "Segundo a Lambda Consultoria, as MPS apresentadas pela norma incluem o aterramento e equipotencialização, além da blindagem magnética, DPS e interfaces isolantes. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quando a instalacao do anel de aterramento precisa ser executada internamente a edificacao, a norma exige a adocao obrigatoria de medidas focadas em quais riscos superficiais?",
+      "statement": "Quando a instalação do anel de aterramento precisa ser executada internamente à edificação, a norma exige a adoção obrigatória de medidas focadas em quais riscos superficiais?",
       "options": [
-        "Riscos de curtos-circuitos bifasicos intermitentes.",
-        "Riscos de falha por inducao magnetica em redes Wi-Fi.",
-        "Riscos por tensoes perigosas de superficie, como tensao de passo e de toque.",
-        "Riscos termicos de queima de transformadores AT/BT."
+        "Riscos de curtos-circuitos bifásicos intermitentes.",
+        "Riscos de falha por indução magnética em redes Wi-Fi.",
+        "Riscos por tensões perigosas de superfície, como tensão de passo e de toque.",
+        "Riscos térmicos de queima de transformadores AT/BT."
       ],
       "correctIndex": 2,
-      "explanation": "A Mesh Engenharia orienta que na instalacao interna devem ser previstas medidas que minimizem os riscos por tensoes perigosas de superficie como tensao de passo e de toque. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "A Mesh Engenharia orienta que na instalação interna devem ser previstas medidas que minimizem os riscos por tensões perigosas de superfície como tensão de passo e de toque. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No que tange aos componentes fisicos utilizados na equipotencializacao, qual revisao tecnica foi destacada como parte da ABNT NBR 5419:2026?",
+      "statement": "No que tange aos componentes físicos utilizados na equipotencialização, qual revisão técnica foi destacada como parte da ABNT NBR 5419:2026?",
       "options": [
-        "A proibicao sumaria de conexoes de cobre nu em qualquer subsistema da malha.",
-        "Os ajustes rigorosos nas secoes transversais dos componentes utilizados na equipotencializacao.",
-        "A exclusao total da equipotencializacao como requisito tecnico normativo no Brasil.",
-        "A exigencia de soldas exotermicas exclusivas em todas as conexoes de cabos coaxiais."
+        "A proibição sumária de conexões de cobre nu em qualquer subsistema da malha.",
+        "Os ajustes rigorosos nas seções transversais dos componentes utilizados na equipotencialização.",
+        "A exclusão total da equipotencialização como requisito técnico normativo no Brasil.",
+        "A exigência de soldas exotérmicas exclusivas em todas as conexões de cabos coaxiais."
       ],
       "correctIndex": 1,
-      "explanation": "O Guia da NBR 5419:2026 destaca que algumas revisoes envolvem ajustes nas secoes transversais de componentes utilizados na equipotencializacao. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "O Guia da NBR 5419:2026 destaca que algumas revisões envolvem ajustes nas seções transversais de componentes utilizados na equipotencialização. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
       "statement": "Para minimizar falhas de equipamentos e mitigar o risco de choque causados por raios em linhas externas de dados ou energia, a norma sugere que a blindagem desses cabos deve ser:",
       "options": [
-        "Seccionada a cada 5 metros com isoladores de tensao galvanica.",
-        "Isolada e separada por fitas isolantes de alta tensao na entrada do quadro.",
-        "Interligada, na entrada da linha, ao mesmo barramento de equipotencializacao que o equipamento.",
-        "Conectada a uma haste de aterramento dedicada, externa e afastada da edificacao."
+        "Seccionada a cada 5 metros com isoladores de tensão galvânica.",
+        "Isolada e separada por fitas isolantes de alta tensão na entrada do quadro.",
+        "Interligada, na entrada da linha, ao mesmo barramento de equipotencialização que o equipamento.",
+        "Conectada a uma haste de aterramento dedicada, externa e afastada da edificação."
       ],
       "correctIndex": 2,
-      "explanation": "O material de Cleiton Junior Lopes menciona que os riscos podem ser zero se a blindagem for interligada, na entrada da linha, ao mesmo barramento de equipotencializacao que o equipamento. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O material de Cleiton Junior Lopes menciona que os riscos podem ser zero se a blindagem for interligada, na entrada da linha, ao mesmo barramento de equipotencialização que o equipamento. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como o conceito de equipotencializacao esta classicamente situado no contexto de Protecao Externa segundo as diretrizes de projeto da NBR 5419 Parte 3?",
+      "statement": "Como o conceito de equipotencialização está classicamente situado no contexto de Proteção Externa segundo as diretrizes de projeto da NBR 5419 Parte 3?",
       "options": [
-        "Junto a captacao, descidas e aterramento, ela forma os requisitos do sistema de protecao externo contra danos fisicos.",
-        "Substituindo por completo o uso dos lacos quadrangulares da Gaiola de Faraday em telhados de grandes edificios.",
-        "Atuando exclusivamente como filtro ativo de distorcao harmonica (THD) nas prumadas de cabos.",
-        "Como a unica medida permitida para repelir raios magneticos induzidos no anel superior."
+        "Junto à captação, descidas e aterramento, ela forma os requisitos do sistema de proteção externo contra danos físicos.",
+        "Substituindo por completo o uso dos laços quadrangulares da Gaiola de Faraday em telhados de grandes edifícios.",
+        "Atuando exclusivamente como filtro ativo de distorção harmônica (THD) nas prumadas de cabos.",
+        "Como a única medida permitida para repelir raios magnéticos induzidos no anel superior."
       ],
       "correctIndex": 0,
-      "explanation": "O Guia PDA da HazOp lista na Parte 3 os requisitos tecnicos para projeto e instalacao do sistema de protecao externo (captacao, descidas, aterramento e equipotencializacao). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O Guia PDA da HazOp lista na Parte 3 os requisitos técnicos para projeto e instalação do sistema de proteção externo (captação, descidas, aterramento e equipotencialização). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Dentre as Medidas de Protecao contra Surtos (MPS), que distincao tecnica a Lambda Consultoria faz a respeito do aterramento e da equipotencializacao em contraste direto com o uso de DPS?",
+      "statement": "Dentre as Medidas de Proteção contra Surtos (MPS), que distinção técnica a Lambda Consultoria faz a respeito do aterramento e da equipotencialização em contraste direto com o uso de DPS?",
       "options": [
-        "O aterramento e uma MPS isolada, enquanto o DPS ja faz parte do sistema basico dos bombeiros contra incendio.",
-        "Apenas a instalacao de DPS e exclusivamente uma MPS, pois o aterramento e a equipotencializacao ja farao parte natural de um projeto de instalacao eletrica.",
-        "A equipotencializacao estrutural anula e substitui formalmente o uso do DPS em zonas internas rigorosas.",
-        "Ambos tem a mesma funcao primaria: estabilizar as quedas de tensao prolongadas da concessionaria local."
+        "O aterramento é uma MPS isolada, enquanto o DPS já faz parte do sistema básico dos bombeiros contra incêndio.",
+        "Apenas a instalação de DPS é exclusivamente uma MPS, pois o aterramento e a equipotencialização já farão parte natural de um projeto de instalação elétrica.",
+        "A equipotencialização estrutural anula e substitui formalmente o uso do DPS em zonas internas rigorosas.",
+        "Ambos têm a mesma função primária: estabilizar as quedas de tensão prolongadas da concessionária local."
       ],
       "correctIndex": 1,
-      "explanation": "A Lambda Consultoria afirma que o aterramento e a equipotencializacao ja farao parte de um projeto de uma instalacao eletrica, e que apenas a instalacao de DPS e exclusivamente uma MPS. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "A Lambda Consultoria afirma que o aterramento e a equipotencialização já farão parte de um projeto de uma instalação elétrica, e que apenas a instalação de DPS é exclusivamente uma MPS. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Alem de impedir a ocorrencia de arcos eletricos perigosos, o que as fontes tecnicas destacam sobre o beneficio de integrar o SPDA, os sistemas de energia e os cabos de sinal em uma unica equipotencializacao estrutural no aterramento?",
+      "statement": "Além de impedir a ocorrência de arcos elétricos perigosos, o que as fontes técnicas destacam sobre o benefício de integrar o SPDA, os sistemas de energia e os cabos de sinal em uma única equipotencialização estrutural no aterramento?",
       "options": [
-        "Zera a resistividade global de qualquer solo pela alteracao quimica da malha.",
-        "Invalida as restricoes da Zona de Protecao contra Raios (ZPR) em analises curtas.",
-        "Proporciona uma maior economia estrutural e facilidade durante os processos de instalacao e manutencao.",
-        "Permite que se dispense em 100% o calculo de risco previsto na Parte 2 da NBR 5419."
+        "Zera a resistividade global de qualquer solo pela alteração química da malha.",
+        "Invalida as restrições da Zona de Proteção contra Raios (ZPR) em análises curtas.",
+        "Proporciona uma maior economia estrutural e facilidade durante os processos de instalação e manutenção.",
+        "Permite que se dispense em 100% o cálculo de risco previsto na Parte 2 da NBR 5419."
       ],
       "correctIndex": 2,
-      "explanation": "Segundo a Mesh Engenharia, essa integracao unificada em uma unica estrutura proporciona maior economia e facilidade durante a manutencao e instalacao. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Segundo a Mesh Engenharia, essa integração unificada em uma única estrutura proporciona maior economia e facilidade durante a manutenção e instalação. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O principal objetivo de executar a equalizacao de potencial (equipotencializacao) num SPDA e maximizar ao extremo as diferencas de potencial eletrico entre as massas metalicas para dispersar mecanicamente o raio.",
+      "statement": "O principal objetivo de executar a equalização de potencial (equipotencialização) num SPDA é maximizar ao extremo as diferenças de potencial elétrico entre as massas metálicas para dispersar mecanicamente o raio.",
       "correctAnswer": false,
-      "explanation": "E falso. Segundo a A3A Engenharia, a Equalizacao de Potencial serve justamente para minimizar diferencas de potencial eletrico na estrutura, evitando arcos eletricos perigosos. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "É falso. Segundo a A3A Engenharia, a Equalização de Potencial serve justamente para minimizar diferenças de potencial elétrico na estrutura, evitando arcos elétricos perigosos. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Como pratica recomendada tecnicamente, o SPDA, os sistemas de potencia e os de sinal (como telecomunicacoes e redes logicas) devem estar conectados em uma unica estrutura de aterramento equipotencializada.",
+      "statement": "Como prática recomendada tecnicamente, o SPDA, os sistemas de potência e os de sinal (como telecomunicações e redes lógicas) devem estar conectados em uma única estrutura de aterramento equipotencializada.",
       "correctAnswer": true,
-      "explanation": "Verdadeiro. A Mesh Engenharia diz que e interessante assumir uma unica estrutura de aterramento integrando todos os propositos como o SPDA, sistemas de energia e sinal. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "Verdadeiro. A Mesh Engenharia diz que é interessante assumir uma única estrutura de aterramento integrando todos os propósitos como o SPDA, sistemas de energia e sinal. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Embora a equipotencializacao seja tecnicamente uma das Medidas de Protecao contra Surtos (MPS), ela tambem ja deve figurar organicamente como parte do projeto natural de uma instalacao eletrica convencional.",
+      "statement": "Embora a equipotencialização seja tecnicamente uma das Medidas de Proteção contra Surtos (MPS), ela também já deve figurar organicamente como parte do projeto natural de uma instalação elétrica convencional.",
       "correctAnswer": true,
-      "explanation": "Verdadeiro. A Lambda Consultoria corrobora que o aterramento, a equipotencializacao e o roteamento de cabos ja farao parte de um projeto de uma instalacao eletrica. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "Verdadeiro. A Lambda Consultoria corrobora que o aterramento, a equipotencialização e o roteamento de cabos já farão parte de um projeto de uma instalação elétrica. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Durante o gerenciamento de risco, ao se avaliar o ambiente externo isolado da edificacao, o risco de incendio por centelhamento perigoso (Risco RB, que a equipotencializacao ajuda a sanar) pode assumir o valor de zero caso nao haja carga de incendio nem area classificada explosiva no local.",
+      "statement": "Durante o gerenciamento de risco, ao se avaliar o ambiente externo isolado da edificação, o risco de incêndio por centelhamento perigoso (Risco RB, que a equipotencialização ajuda a sanar) pode assumir o valor de zero caso não haja carga de incêndio nem área classificada explosiva no local.",
       "correctAnswer": true,
-      "explanation": "Verdadeiro. Conforme Cleiton Junior Lopes, o risco RB podera assumir o valor zero no caso da zona definida para a area externa da edificacao, onde nao ha carga de incendio e nem area classificada explosiva. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Verdadeiro. Conforme Cleiton Junior Lopes, o risco RB poderá assumir o valor zero no caso da zona definida para a área externa da edificação, onde não há carga de incêndio e nem área classificada explosiva. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para diminuir a possibilidade de surtos perigosos oriundos de linhas de energia acopladas, as normas exigem que a blindagem desses condutores seja equipotencializada apenas na haste mais funda no solo e nunca nos pontos de entrada das estruturas metalicas.",
+      "statement": "Para diminuir a possibilidade de surtos perigosos oriundos de linhas de energia acopladas, as normas exigem que a blindagem desses condutores seja equipotencializada apenas na haste mais funda no solo e nunca nos pontos de entrada das estruturas metálicas.",
       "correctAnswer": false,
-      "explanation": "Falso. O material de Cleiton Junior Lopes adverte que o risco e anulado se essa blindagem for interligada, na entrada da linha, ao mesmo barramento de equipotencializacao que o equipamento. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Falso. O material de Cleiton Junior Lopes adverte que o risco é anulado se essa blindagem for interligada, na entrada da linha, ao mesmo barramento de equipotencialização que o equipamento. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "O principio fundamental de Equalizacao de Potencial dentro do estudo de SPDA visa minimizar ativamente as diferencas de potencial eletrico nas instalacoes internas, fato este indispensavel para prevenir ou evitar ____ eletricos indesejados.",
+      "statement": "O princípio fundamental de Equalização de Potencial dentro do estudo de SPDA visa minimizar ativamente as diferenças de potencial elétrico nas instalações internas, fato este indispensável para prevenir ou evitar ____ elétricos indesejados.",
       "blanks": [
         {
           "index": 0,
           "answer": "arcos"
         }
       ],
-      "explanation": "De acordo com a A3A Engenharia, a equalizacao atua para minimizar diferencas de potencial eletrico na estrutura, evitando arcos eletricos perigosos. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "De acordo com a A3A Engenharia, a equalização atua para minimizar diferenças de potencial elétrico na estrutura, evitando arcos elétricos perigosos. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "fillBlank",
-      "statement": "Muitas vezes a conexao direta dos condutores vivos de energia com a malha nao e factivel na equipotencializacao. Nesses casos, para realizar a equipotencializacao indireta de cabos e elementos normalmente energizados, implementa-se o aparelho conhecido pela sigla ____.",
+      "statement": "Muitas vezes a conexão direta dos condutores vivos de energia com a malha não é factível na equipotencialização. Nesses casos, para realizar a equipotencialização indireta de cabos e elementos normalmente energizados, implementa-se o aparelho conhecido pela sigla ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "DPS"
         }
       ],
-      "explanation": "O material da Lambda Consultoria menciona claramente a instalacao de DPS para equipotencializacao indireta de condutores normalmente energizados. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "O material da Lambda Consultoria menciona claramente a instalação de DPS para equipotencialização indireta de condutores normalmente energizados. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Na blindagem sistematica de linhas e sinais entrantes, o risco do dano a equipamentos eletroeletronicos pode ser radicalmente minimizado e zerado se, na entrada, as blindagens de todas as vias de servico forem interligadas ao mesmo ____ de equipotencializacao do ativo.",
+      "statement": "Na blindagem sistemática de linhas e sinais entrantes, o risco do dano a equipamentos eletroeletrônicos pode ser radicalmente minimizado e zerado se, na entrada, as blindagens de todas as vias de serviço forem interligadas ao mesmo ____ de equipotencialização do ativo.",
       "blanks": [
         {
           "index": 0,
           "answer": "barramento"
         }
       ],
-      "explanation": "O texto de Cleiton Junior Lopes orienta que a blindagem deve ser interligada ao mesmo barramento de equipotencializacao que o equipamento para zerar os riscos de falhas internas. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O texto de Cleiton Junior Lopes orienta que a blindagem deve ser interligada ao mesmo barramento de equipotencialização que o equipamento para zerar os riscos de falhas internas. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     }
   ]

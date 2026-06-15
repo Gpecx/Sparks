@@ -10,208 +10,208 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "A norma IEEE Std 399 menciona que a analise de contingencias abrange condicoes anormais como a perda de quais componentes?",
+      "statement": "A norma IEEE Std 399 menciona que a análise de contingências abrange condições anormais como a perda de quais componentes?",
       "options": [
         "Apenas geradores e cargas motorizadas.",
-        "Linha de transmissao, cabo, transformador, gerador ou carga.",
+        "Linha de transmissão, cabo, transformador, gerador ou carga.",
         "Somente capacitores shunt e reatores de linha.",
-        "Exclusivamente barramentos de referencia e paineis solares."
+        "Exclusivamente barramentos de referência e painéis solares."
       ],
       "correctIndex": 1,
-      "explanation": "A norma IEEE 399 especifica as condicoes de contingencia como a perda de linha de transmissao, cabo, transformador, gerador ou uma carga.",
+      "explanation": "A norma IEEE 399 especifica as condições de contingência como a perda de linha de transmissão, cabo, transformador, gerador ou uma carga.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com a IEEE Std 399, o que o estudo de fluxo de carga sob contingencia ajuda a prevenir ou alertar ao usuario?",
+      "statement": "De acordo com a IEEE Std 399, o que o estudo de fluxo de carga sob contingência ajuda a prevenir ou alertar ao usuário?",
       "options": [
         "Fatores de assimetria elevados em curtos-circuitos.",
-        "Frequencias de ressonancia armonica e desvios de fase.",
-        "Condicoes que causam sobrecargas em equipamentos ou perfis de tensao ruins.",
-        "Desgaste mecanico e termico dos contatores principais."
+        "Frequências de ressonância harmônica e desvios de fase.",
+        "Condições que causam sobrecargas em equipamentos ou perfis de tensão ruins.",
+        "Desgaste mecânico e térmico dos contatores principais."
       ],
       "correctIndex": 2,
-      "explanation": "A analise preve as consequencias das falhas e alerta o usuario para ocorrencias de sobrecargas ou niveis precarios de tensao na rede.",
+      "explanation": "A análise prevê as consequências das falhas e alerta o usuário para ocorrências de sobrecargas ou níveis precários de tensão na rede.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o objetivo principal do projeto do sistema frente a inoperancia de linhas, segundo a analise de contingencias da IEEE Std 399?",
+      "statement": "Qual é o objetivo principal do projeto do sistema frente à inoperância de linhas, segundo a análise de contingências da IEEE Std 399?",
       "options": [
-        "Garantir que o sistema suspenda totalmente a producao de forma segura.",
-        "Reduzir a impedancia global de aterramento para minimizar o retorno.",
+        "Garantir que o sistema suspenda totalmente a produção de forma segura.",
+        "Reduzir a impedância global de aterramento para minimizar o retorno.",
         "Eliminar completamente a necessidade de disjuntores de backup.",
         "Continuar operando aceitavelmente quando uma ou mais linhas falharem."
       ],
       "correctIndex": 3,
-      "explanation": "O fluxo de carga avalia o projeto visando que o sistema continue a operar de forma aceitavel mesmo inoperante em uma ou mais linhas devido a falhas.",
+      "explanation": "O fluxo de carga avalia o projeto visando que o sistema continue a operar de forma aceitável mesmo inoperante em uma ou mais linhas devido a falhas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que ocorre matematicamente no simulador quando o modelo de fluxo de carga e alterado para representar a perda de uma linha?",
+      "statement": "O que ocorre matematicamente no simulador quando o modelo de fluxo de carga é alterado para representar a perda de uma linha?",
       "options": [
-        "Uma nova solucao e obtida e os fluxos sao checados contra seus criterios.",
-        "A simulacao e abortada imediatamente por erro logico fatal.",
-        "O software restringe a demanda em toda a zona de geracao.",
-        "A impedancia de sequencia zero do sistema e automaticamente anulada."
+        "Uma nova solução é obtida e os fluxos são checados contra seus critérios.",
+        "A simulação é abortada imediatamente por erro lógico fatal.",
+        "O software restringe a demanda em toda a zona de geração.",
+        "A impedância de sequência zero do sistema é automaticamente anulada."
       ],
       "correctIndex": 0,
-      "explanation": "Quando o modelo reflete a interrupcao de uma linha, gera-se uma nova solucao, permitindo comparar tensoes e fluxos de carga com os criterios estabelecidos.",
+      "explanation": "Quando o modelo reflete a interrupção de uma linha, gera-se uma nova solução, permitindo comparar tensões e fluxos de carga com os critérios estabelecidos.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Conforme a literatura de Fujio Sato, contingencias simples em um sistema eletrico operando no estado normal-seguro podem conduzir a qual nova.",
+      "statement": "Conforme a literatura de Fujio Sato, contingências simples em um sistema elétrico operando no estado normal-seguro podem conduzir a qual nova.",
       "options": [
-        "Estado imperturbavel e passivo de recuperacao termica acelerada.",
-        "Regiao insegura ou ate mesmo um estado de emergencia logica.",
-        "Estabilidade dinamica com amortecimento das restricoes operativas.",
-        "Regime puramente transitório de desbalanco harmonico contínuo."
+        "Estado imperturbável e passivo de recuperação térmica acelerada.",
+        "Região insegura ou até mesmo um estado de emergência lógica.",
+        "Estabilidade dinâmica com amortecimento das restrições operativas.",
+        "Regime puramente transitório de desbalanço harmônico contínuo."
       ],
       "correctIndex": 1,
-      "explanation": "Contingencias simples ou multiplas modificam as variaveis da rede de um estado seguro, levando a operacao para uma regiao insegura ou de emergencia.",
+      "explanation": "Contingências simples ou múltiplas modificam as variáveis da rede de um estado seguro, levando a operação para uma região insegura ou de emergência.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a IEEE Std 399 recomenda a escolha de solucoes sistemicas ao se deparar com multiplas contingencias?",
+      "statement": "Como a IEEE Std 399 recomenda a escolha de soluções sistêmicas ao se deparar com múltiplas contingências?",
       "options": [
-        "Aplicar remediacoes individuais e distintas isolando as variaveis de cada falha.",
-        "Impor redundancia dobrando a capacidade de todos os transformadores das subestacoes.",
-        "Escolher os remedios que tenham os efeitos mais beneficos para a maioria das contingencias.",
-        "Desligar as geracoes locais quando ocorrem multiplas perturbacoes subtransitorias."
+        "Aplicar remediações individuais e distintas isolando as variáveis de cada falha.",
+        "Impor redundância dobrando a capacidade de todos os transformadores das subestações.",
+        "Escolher os remédios que tenham os efeitos mais benéficos para a maioria das contingências.",
+        "Desligar as gerações locais quando ocorrem múltiplas perturbações subtransitórias."
       ],
       "correctIndex": 2,
-      "explanation": "Como solucoes aplicadas podem nao ajudar igualmente em todas as faltas, a norma recomenda optar pelas medidas que trazem mais beneficios conjuntos.",
+      "explanation": "Como soluções aplicadas podem não ajudar igualmente em todas as faltas, a norma recomenda optar pelas medidas que trazem mais benefícios conjuntos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Se a analise de contingencias revelar que o sistema nao suportara operar em condicao degradada, qual alternativa a IEEE Std 399 indica como.",
+      "statement": "Se a análise de contingências revelar que o sistema não suportará operar em condição degradada, qual alternativa a IEEE Std 399 indica como.",
       "options": [
-        "Restricao e possivel corte nas operacoes normais praticadas pela planta.",
-        "Elevacao irrestrita e continua da tensao aplicada no gerador de balanco.",
-        "Alteracao no padrao dos disjuntores da rede para limitar assimetrias.",
-        "Extincao dos lacos de malhas do sistema, passando para radial estrito."
+        "Restrição e possível corte nas operações normais praticadas pela planta.",
+        "Elevação irrestrita e contínua da tensão aplicada no gerador de balanço.",
+        "Alteração no padrão dos disjuntores da rede para limitar assimetrias.",
+        "Extinção dos laços de malhas do sistema, passando para radial estrito."
       ],
       "correctIndex": 0,
-      "explanation": "Se uma condicao degradada nao e aceitavel apos o evento de falha, restricoes limitando a operacao da propria usina deverao ser adotadas.",
+      "explanation": "Se uma condição degradada não é aceitável após o evento de falha, restrições limitando a operação da própria usina deverão ser adotadas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nos metodos de simulacao matematicos de matrizes de rede, como a perda ou abertura de uma linha pode ser retratada, segundo Sato?",
+      "statement": "Nos métodos de simulação matemáticos de matrizes de rede, como a perda ou abertura de uma linha pode ser retratada, segundo Sato?",
       "options": [
-        "Reduzindo as variaveis assimetricas nos metodos de componentes nulos.",
-        "Invertendo os barramentos de suprimento atraves dos nos das extremidades.",
-        "Isolando vetorialmente a submatriz jacobiana ligada as linhas danificadas.",
-        "Adicionando em paralelo uma linha ficticia contendo valor de impedancia negativa."
+        "Reduzindo as variáveis assimétricas nos métodos de componentes nulos.",
+        "Invertendo os barramentos de suprimento através dos nós das extremidades.",
+        "Isolando vetorialmente a submatriz jacobiana ligada às linhas danificadas.",
+        "Adicionando em paralelo uma linha fictícia contendo valor de impedância negativa."
       ],
       "correctIndex": 3,
-      "explanation": "Pelo metodo da reducao matricial de contingencias, a exclusao da linha e emulada algebricamente somando-se um ramo paralelo de impedancia equivalente, porem negativa.",
+      "explanation": "Pelo método da redução matricial de contingências, a exclusão da linha é emulada algebricamente somando-se um ramo paralelo de impedância equivalente, porém negativa.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "As analises comumente denominadas de line-open e line-end-fault apresentadas nos diagramas eletricos sao exemplos aplicados a qual categoria?",
+      "statement": "As análises comumente denominadas de line-open e line-end-fault apresentadas nos diagramas elétricos são exemplos aplicados a qual categoria?",
       "options": [
-        "Estudos estaticos e de contingencias em projetos de curto-circuito.",
-        "Estabilidade subtransitoria de geradores com grandes rotores cilindricos.",
-        "Levantamento probabilistico por simulacao exaustiva de Monte Carlo.",
-        "Metodos de protecao de transformadores em desbalanco acentuado."
+        "Estudos estáticos e de contingências em projetos de curto-circuito.",
+        "Estabilidade subtransitória de geradores com grandes rotores cilíndricos.",
+        "Levantamento probabilístico por simulação exaustiva de Monte Carlo.",
+        "Métodos de proteção de transformadores em desbalanço acentuado."
       ],
       "correctIndex": 0,
-      "explanation": "As condicoes de exclusao de linha ou curtos no final dos ramos compoem o espectro usual dos estudos analiticos para contingencias de sistemas.",
+      "explanation": "As condições de exclusão de linha ou curtos no final dos ramos compõem o espectro usual dos estudos analíticos para contingências de sistemas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para calcular modificacoes de rede causadas por exclusoes rapidas sem inverter toda a malha usando a reducao de Kron, qual base de dados o.",
+      "statement": "Para calcular modificações de rede causadas por exclusões rápidas sem inverter toda a malha usando a redução de Kron, qual base de dados o.",
       "options": [
-        "As informacoes obtidas dinamicamente pelas UTRs ligadas via protocolo SCADA.",
-        "As informacoes estruturais presentes na matriz original ZBARRA do caso basico.",
-        "As informacoes originais contidas na matriz admitancia do fluxo puramente reativo.",
-        "Os registros assimetricos pre-defeito isolados pela taxa linear de decaimento."
+        "As informações obtidas dinamicamente pelas UTRs ligadas via protocolo SCADA.",
+        "As informações estruturais presentes na matriz original ZBARRA do caso básico.",
+        "As informações originais contidas na matriz admitância do fluxo puramente reativo.",
+        "Os registros assimétricos pré-defeito isolados pela taxa linear de decaimento."
       ],
       "correctIndex": 1,
-      "explanation": "A tecnica economiza recursos computacionais aproveitando estritamente a matriz ZBARRA resolvida no cenario fundamental, integrando nela os desvios focais.",
+      "explanation": "A técnica economiza recursos computacionais aproveitando estritamente a matriz ZBARRA resolvida no cenário fundamental, integrando nela os desvios focais.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A avaliacao de contingencias por meio de estudos de fluxo de carga detecta possiveis gargalos alertando o usuario para eventuais sobrecargas de.",
+      "statement": "A avaliação de contingências por meio de estudos de fluxo de carga detecta possíveis gargalos alertando o usuário para eventuais sobrecargas de.",
       "correctAnswer": true,
-      "explanation": "Sim, um dos principais propositos dessa avaliacao em redes eletricas e justamente predizer violacoes criticas de operacao para sanadas.",
+      "explanation": "Sim, um dos principais propósitos dessa avaliação em redes elétricas é justamente predizer violações críticas de operação para sanadas.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Segundo as normas IEEE, ao planejar medidas para combater instabilidades pos-contingencia, nota-se que toda correcao sistêmica beneficia igualmente.",
+      "statement": "Segundo as normas IEEE, ao planejar medidas para combater instabilidades pós-contingência, nota-se que toda correção sistêmica beneficia igualmente.",
       "correctAnswer": false,
-      "explanation": "A IEEE Std 399 faz questao de afirmar que diferentes remedios aplicados podem nao sanar problemas de forma equitativa ou igual para todas as contingencias imaginaveis.",
+      "explanation": "A IEEE Std 399 faz questão de afirmar que diferentes remédios aplicados podem não sanar problemas de forma equitativa ou igual para todas as contingências imagináveis.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Para avaliar com exatidao uma configuracao de contingencia, o fluxo de carga simula o cenario virtual fornecendo ao analista dados e vivencia.",
+      "statement": "Para avaliar com exatidão uma configuração de contingência, o fluxo de carga simula o cenário virtual fornecendo ao analista dados e vivência.",
       "correctAnswer": true,
-      "explanation": "Simulacoes confiaveis geram um grau elevadissimo de inteligencia operacional previa e conhecimento agil de deficiencias, dispensando anos de testes em falhas reais.",
+      "explanation": "Simulações confiáveis geram um grau elevadíssimo de inteligência operacional prévia e conhecimento ágil de deficiências, dispensando anos de testes em falhas reais.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Os ajustes implementados no modelo sistemico apos identificar limitacoes em contingencias devem se limitar a verificar apenas o carregamento.",
+      "statement": "Os ajustes implementados no modelo sistêmico após identificar limitações em contingências devem se limitar a verificar apenas o carregamento.",
       "correctAnswer": false,
-      "explanation": "A literatura assevera que as alteracoes devem conferir normalidade testando condicoes variantes, abrangendo ate perfis com o sistema operando em carga leve e sob diferentes tensoes providas da fonte.",
+      "explanation": "A literatura assevera que as alterações devem conferir normalidade testando condições variantes, abrangendo até perfis com o sistema operando em carga leve e sob diferentes tensões providas da fonte.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Para emular no sistema o calculo de um evento critico denominado curto-circuito em final de linha (line-end-fault), a estrutura da matriz primitiva.",
+      "statement": "Para emular no sistema o cálculo de um evento crítico denominado curto-circuito em final de linha (line-end-fault), a estrutura da matriz primitiva.",
       "correctAnswer": false,
-      "explanation": "A remocao virtual de uma das pontas do ramo preserva inalterada a estrutura basica da matriz primitiva da rede de falhas nao gerando reestruturacao integral do caso base.",
+      "explanation": "A remoção virtual de uma das pontas do ramo preserva inalterada a estrutura básica da matriz primitiva da rede de falhas não gerando reestruturação integral do caso base.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Nos estudos industriais com base no IEEE, a simulacao de alteracoes predatórias de topologia tais como a perda nao programada de uma linha ____.",
+      "statement": "Nos estudos industriais com base no IEEE, a simulação de alterações predatórias de topologia tais como a perda não programada de uma linha ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "contingencias"
         }
       ],
-      "explanation": "A literatura da norma 399 define de forma rigorosa as instabilidades por retiradas de fonte, vias ou carga subita como condicoes tipicas de analise de contingencias de rede.",
+      "explanation": "A literatura da norma 399 define de forma rigorosa as instabilidades por retiradas de fonte, vias ou carga súbita como condições típicas de análise de contingências de rede.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Ao tratar problemas evidenciados no perfil pos-defeito, um estudo efetivo testa se os geradores e o sistema garantem uma operacao de rede ____.",
+      "statement": "Ao tratar problemas evidenciados no perfil pós-defeito, um estudo efetivo testa se os geradores e o sistema garantem uma operação de rede ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "degradada"
         }
       ],
-      "explanation": "Ate mesmo perdas isoladas que nao levem as subestacoes ao colapso imediato mantem operacao num limite inferior funcional, termo apontado na normativa de projeto sob condicao eletrica degradada.",
+      "explanation": "Até mesmo perdas isoladas que não levem as subestações ao colapso imediato mantêm operação num limite inferior funcional, termo apontado na normativa de projeto sob condição elétrica degradada.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Sob o espectro das avaliacoes em simuladores nodais modernos, modelar computacionalmente o impacto assimetrico da abertura em uma das vias contorna ____.",
+      "statement": "Sob o espectro das avaliações em simuladores nodais modernos, modelar computacionalmente o impacto assimétrico da abertura em uma das vias contorna ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Kron"
         }
       ],
-      "explanation": "Para evitar recalculos lentos totais com perda do padrao matricial, insere-se uma conexao virtual negativa por meio logico estrito fundamentado nos pressupostos analiticos padroes da reducao de Kron.",
+      "explanation": "Para evitar recálculos lentos totais com perda do padrão matricial, insere-se uma conexão virtual negativa por meio lógico estrito fundamentado nos pressupostos analíticos padrões da redução de Kron.",
       "difficulty": "hard"
     }
   ]

@@ -10,7 +10,7 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual e a norma tecnica brasileira responsavel por estabelecer os metodos normalizados para a medicao da resistencia de aterramento e de potenciais na superficie do solo?",
+      "statement": "Qual é a norma técnica brasileira responsável por estabelecer os métodos normalizados para a medição da resistência de aterramento e de potenciais na superfície do solo?",
       "options": [
         "ABNT NBR 5410",
         "ABNT NBR 5419",
@@ -18,12 +18,12 @@
         "ABNT NBR 15751"
       ],
       "correctIndex": 2,
-      "explanation": "A ABNT NBR 15749, publicada em 2009, estabelece os criterios e metodos de medicao de resistencia de sistemas de aterramento e de potenciais na superficie do solo. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "A ABNT NBR 15749, publicada em 2009, estabelece os critérios e métodos de medição de resistência de sistemas de aterramento e de potenciais na superfície do solo. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na configuracao classica do metodo da queda de potencial, a medicao envolve a injecao de uma corrente e a leitura de uma tensao. A diferenca de potencial (tensao) deve ser medida entre quais elementos do circuito?",
+      "statement": "Na configuração clássica do método da queda de potencial, a medição envolve a injeção de uma corrente e a leitura de uma tensão. A diferença de potencial (tensão) deve ser medida entre quais elementos do circuito?",
       "options": [
         "Entre o eletrodo auxiliar de corrente e o terra remoto.",
         "Entre a malha de aterramento sob ensaio e a sonda (eletrodo auxiliar de potencial).",
@@ -31,103 +31,103 @@
         "Entre dois eletrodos de corrente dispostos simetricamente na malha."
       ],
       "correctIndex": 1,
-      "explanation": "O metodo consiste em fazer circular uma corrente e, simultaneamente, medir a tensao entre a malha (sob ensaio) e o terra de referencia, por meio de uma sonda ou eletrodo auxiliar de potencial. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "O método consiste em fazer circular uma corrente e, simultaneamente, medir a tensão entre a malha (sob ensaio) e o terra de referência, por meio de uma sonda ou eletrodo auxiliar de potencial. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em relacao aos valores aceitaveis para a resistencia de aterramento, o que a literatura tecnica e especialistas afirmam sobre o famoso limite de 10 ohms?",
+      "statement": "Em relação aos valores aceitáveis para a resistência de aterramento, o que a literatura técnica e especialistas afirmam sobre o famoso limite de 10 ohms?",
       "options": [
-        "E um mito que o aterramento deve obrigatoriamente ter menos de 10 ohms; a NBR 5410 foca no funcionamento correto das protecoes (como o DR) e nao em bater um numero.",
-        "E uma regra absoluta estipulada pela NBR 5410 para qualquer tipo de instalacao residencial.",
-        "Apenas instalacoes rurais podem ultrapassar 10 ohms, ambientes urbanos devem zerar essa resistencia.",
-        "O limite de 10 ohms passou a ser cobrado apenas pela NBR 15749 como criterio para aprovacao do Corpo de Bombeiros."
+        "É um mito que o aterramento deve obrigatoriamente ter menos de 10 ohms; a NBR 5410 foca no funcionamento correto das proteções (como o DR) e não em bater um número.",
+        "É uma regra absoluta estipulada pela NBR 5410 para qualquer tipo de instalação residencial.",
+        "Apenas instalações rurais podem ultrapassar 10 ohms, ambientes urbanos devem zerar essa resistência.",
+        "O limite de 10 ohms passou a ser cobrado apenas pela NBR 15749 como critério para aprovação do Corpo de Bombeiros."
       ],
       "correctIndex": 0,
-      "explanation": "O objetivo do aterramento nao e bater um numero. Na pratica, um aterramento pode funcionar perfeitamente com valor maior que 10 ohms desde que o sistema esteja corretamente projetado e as protecoes atuem. (Fonte: A resistencia de aterramento precisa ter menos de 10 ohms? O que a NBR 5410 realmente exige, Mothe Engenharia)",
+      "explanation": "O objetivo do aterramento não é bater um número. Na prática, um aterramento pode funcionar perfeitamente com valor maior que 10 ohms desde que o sistema esteja corretamente projetado e as proteções atuem. (Fonte: A resistência de aterramento precisa ter menos de 10 ohms? O que a NBR 5410 realmente exige, Mothe Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para garantir a confiabilidade da medicao pelo metodo da queda de potencial, a distancia d (entre a periferia da malha e o eletrodo de corrente) deve respeitar uma regra geometrica minima. Qual e essa distancia recomendada?",
+      "statement": "Para garantir a confiabilidade da medição pelo método da queda de potencial, a distância d (entre a periferia da malha e o eletrodo de corrente) deve respeitar uma regra geométrica mínima. Qual é essa distância recomendada?",
       "options": [
-        "Deve ser identica a profundidade maxima do lencol freatico local.",
-        "No minimo igual ao perimetro total da edificacao somado a area do terreno.",
-        "No minimo tres vezes a maior dimensao da malha de aterramento.",
+        "Deve ser idêntica à profundidade máxima do lençol freático local.",
+        "No mínimo igual ao perímetro total da edificação somado à área do terreno.",
+        "No mínimo três vezes a maior dimensão da malha de aterramento.",
         "Aproximadamente a metade da diagonal principal da malha."
       ],
       "correctIndex": 2,
-      "explanation": "Em geral, a distancia d da periferia da malha de aterramento sob ensaio ate o eletrodo de corrente deve ser de, no minimo, tres vezes a maior dimensao da malha. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "Em geral, a distância d da periferia da malha de aterramento sob ensaio até o eletrodo de corrente deve ser de, no mínimo, três vezes a maior dimensão da malha. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "A curva gerada durante o ensaio da queda de potencial apresenta o valor de resistencia em funcao da distancia. O valor verdadeiro da resistencia de aterramento e extraido de qual regiao desta curva?",
+      "statement": "A curva gerada durante o ensaio da queda de potencial apresenta o valor de resistência em função da distância. O valor verdadeiro da resistência de aterramento é extraído de qual região desta curva?",
       "options": [
-        "Da zona de influencia imediata do eletrodo de corrente.",
-        "Da origem do grafico (distancia igual a zero).",
-        "Da intersecao entre as curvas teoricas de inducao.",
+        "Da zona de influência imediata do eletrodo de corrente.",
+        "Da origem do gráfico (distância igual a zero).",
+        "Da interseção entre as curvas teóricas de indução.",
         "Da zona chamada de patamar de potencial, onde a curva se torna praticamente horizontal."
       ],
       "correctIndex": 3,
-      "explanation": "A curva apresenta zonas de influencia mutua e uma zona chamada de patamar de potencial, onde se pode encontrar o valor verdadeiro de aterramento no trecho horizontal. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "A curva apresenta zonas de influência mútua e uma zona chamada de patamar de potencial, onde se pode encontrar o valor verdadeiro de aterramento no trecho horizontal. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O metodo da queda de potencial consagrou a regra dos 62%. Em que condicoes teoricas o valor verdadeiro da resistencia e encontrado quando a sonda esta a aproximadamente 62% da distancia total do eletrodo de corrente?",
+      "statement": "O método da queda de potencial consagrou a regra dos 62%. Em que condições teóricas o valor verdadeiro da resistência é encontrado quando a sonda está a aproximadamente 62% da distância total do eletrodo de corrente?",
       "options": [
         "Para solos altamente rochosos e malhas complexas maiores que 100 metros.",
         "Exclusivamente para aterramentos isolados que utilizam Dispositivos DR de 300 mA.",
-        "Para solos homogeneos e sistemas de aterramentos pequenos (maior dimensao inferior a 10 metros).",
+        "Para solos homogêneos e sistemas de aterramentos pequenos (maior dimensão inferior a 10 metros).",
         "Sempre que o eletrodo de corrente for cravado a mais de 10 metros de profundidade."
       ],
       "correctIndex": 2,
-      "explanation": "Para solos homogeneos e sistemas de aterramentos considerados pequenos (maior dimensao inferior a 10 metros), o ponto S (sonda) dista aproximadamente 62% da distancia d. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "Para solos homogêneos e sistemas de aterramentos considerados pequenos (maior dimensão inferior a 10 metros), o ponto S (sonda) dista aproximadamente 62% da distância d. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a tecnica recomendada pela NBR 15749 para comprovar a validade do valor obtido no patamar de potencial, assegurando que nao houve sobreposicao das areas de influencia?",
+      "statement": "Qual é a técnica recomendada pela NBR 15749 para comprovar a validade do valor obtido no patamar de potencial, assegurando que não houve sobreposição das áreas de influência?",
       "options": [
-        "Repetir a medicao trocando os eletrodos de cobre por aluminio.",
-        "Deslocar a sonda em 5% da distancia d para a direita e para a esquerda; a diferenca das leituras nao deve ultrapassar 10%.",
+        "Repetir a medição trocando os eletrodos de cobre por alumínio.",
+        "Deslocar a sonda em 5% da distância d para a direita e para a esquerda; a diferença das leituras não deve ultrapassar 10%.",
         "Molhar abundantemente os eletrodos de corrente para observar se o valor cai abaixo de 1 ohm.",
-        "Girar o eletrodo de corrente em um angulo exato de 90 graus e medir a indutancia."
+        "Girar o eletrodo de corrente em um ângulo exato de 90 graus e medir a indutância."
       ],
       "correctIndex": 1,
-      "explanation": "Devem ser tomadas medicoes variando a posicao do eletrodo de potencial em 5% de d para a direita e esquerda. Se a porcentagem entre a diferenca dos valores nao ultrapassar 10%, toma-se o valor medido. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "Devem ser tomadas medições variando a posição do eletrodo de potencial em 5% de d para a direita e esquerda. Se a porcentagem entre a diferença dos valores não ultrapassar 10%, toma-se o valor medido. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No comissionamento de malhas de grande porte e com baixissimos valores de resistencia ohmica (inferiores a 1 ohm), as grandes distancias dos cabos introduzem um problema eletromagnetico que mascara a leitura. Qual e esse fenomeno?",
+      "statement": "No comissionamento de malhas de grande porte e com baixíssimos valores de resistência ôhmica (inferiores a 1 ohm), as grandes distâncias dos cabos introduzem um problema eletromagnético que mascara a leitura. Qual é esse fenômeno?",
       "options": [
-        "Saturacao magnetica dos transdutores de solo.",
-        "Corrosao galvanica acelerada no terrometro.",
-        "Acoplamento entre os cabos de interligacao dos circuitos de corrente e potencial.",
-        "Estratificacao invertida da resistencia superficial."
+        "Saturação magnética dos transdutores de solo.",
+        "Corrosão galvânica acelerada no terrômetro.",
+        "Acoplamento entre os cabos de interligação dos circuitos de corrente e potencial.",
+        "Estratificação invertida da resistência superficial."
       ],
       "correctIndex": 2,
-      "explanation": "Para sistemas com valores muito baixos (abaixo de 1 ohm), o efeito do acoplamento entre os cabos de interligacao dos circuitos de corrente e potencial e um fator importante nas medicoes devido aos grandes comprimentos. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "Para sistemas com valores muito baixos (abaixo de 1 ohm), o efeito do acoplamento entre os cabos de interligação dos circuitos de corrente e potencial é um fator importante nas medições devido aos grandes comprimentos. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para eliminar os erros induzidos por correntes espurias no solo oriundas da rede eletrica de distribuicao (60 Hz), qual recurso tecnologico pode ser empregado durante os ensaios de campo com o terrometro?",
+      "statement": "Para eliminar os erros induzidos por correntes espúrias no solo oriundas da rede elétrica de distribuição (60 Hz), qual recurso tecnológico pode ser empregado durante os ensaios de campo com o terrômetro?",
       "options": [
-        "A substituicao do terrometro por um megohmetro de 5.000 V de corrente continua.",
-        "A utilizacao de instrumentos de banda estreita com frequencias diferentes da industrial, alem da aplicacao de filtros.",
-        "O aterramento temporario da malha na tubulacao de agua local.",
-        "Aumentar a area de seccao do cabo do eletrodo de corrente para dissipar ruidos passivamente."
+        "A substituição do terrômetro por um megôhmetro de 5.000 V de corrente contínua.",
+        "A utilização de instrumentos de banda estreita com frequências diferentes da industrial, além da aplicação de filtros.",
+        "O aterramento temporário da malha na tubulação de água local.",
+        "Aumentar a área de seção do cabo do eletrodo de corrente para dissipar ruídos passivamente."
       ],
       "correctIndex": 1,
-      "explanation": "Uma das medidas adequadas para problemas de ruidos ou correntes espurias (frequencia industrial) e a utilizacao de filtros e instrumentos de banda estreita que usam frequencias diferentes da industrial. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "Uma das medidas adequadas para problemas de ruídos ou correntes espúrias (frequência industrial) é a utilização de filtros e instrumentos de banda estreita que usam frequências diferentes da industrial. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "A NBR 5410 indica a formula (R = UL / Ia) para resistencia em esquemas TT e IT. De acordo com a literatura, qual seria a resistencia maxima aceitavel caso a protecao seja provida por um DR de 30 mA e a tensao de contato limite seja 50 V?",
+      "statement": "A NBR 5410 indica a fórmula (R = UL / Ia) para resistência em esquemas TT e IT. De acordo com a literatura, qual seria a resistência máxima aceitável caso a proteção seja provida por um DR de 30 mA e a tensão de contato limite seja 50 V?",
       "options": [
         "10 ohms.",
         "167 ohms.",
@@ -135,83 +135,83 @@
         "5.000 ohms (5 kohm)."
       ],
       "correctIndex": 2,
-      "explanation": "No caso de um dispositivo DR com corrente de sensibilidade de 30 mA, para a tensao limite de 50 V, a resistencia maxima resulta em R = 50 V / 0,03 A = 1,7 kohm, valor muito elevado e facil de obter. (Fonte: Aterramento Eletrico, Revista Potencia)",
+      "explanation": "No caso de um dispositivo DR com corrente de sensibilidade de 30 mA, para a tensão limite de 50 V, a resistência máxima resulta em R = 50 V / 0,03 A = 1,7 kohm, valor muito elevado e fácil de obter. (Fonte: Aterramento Elétrico, Revista Potência)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O terrometro e o equipamento classico e recomendado pelas normas tecnicas para a execucao pratica dos ensaios da resistencia ohmica pelo metodo da queda de potencial.",
+      "statement": "O terrômetro é o equipamento clássico e recomendado pelas normas técnicas para a execução prática dos ensaios da resistência ôhmica pelo método da queda de potencial.",
       "correctAnswer": true,
-      "explanation": "O metodo da queda de potencial e recomendado para medicoes por meio de equipamentos especificos, por exemplo, o terrometro. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "O método da queda de potencial é recomendado para medições por meio de equipamentos específicos, por exemplo, o terrômetro. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Como o equipamento injeta correntes reduzidas no solo, o operador esta isento de usar calcados isolantes ou equipamentos de protecao individual durante a realizacao das medicoes em campo.",
+      "statement": "Como o equipamento injeta correntes reduzidas no solo, o operador está isento de usar calçados isolantes ou equipamentos de proteção individual durante a realização das medições em campo.",
       "correctAnswer": false,
-      "explanation": "Certas regras tecnicas e de seguranca sao recomendadas, incluindo utilizar calcados e luvas com nivel de isolamento compativel com os riscos do metodo aplicado e niveis de tensao e corrente injetados ou espurios. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "Certas regras técnicas e de segurança são recomendadas, incluindo utilizar calçados e luvas com nível de isolamento compatível com os riscos do método aplicado e níveis de tensão e corrente injetados ou espúrios. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Se o grafico de medicao apresentar uma curva ascendente constante sem estabilizar em um patamar de potencial, isso e um forte indicio de que a zona de influencia do eletrodo de corrente esta sobreposta a da malha, exigindo um maior afastamento da haste.",
+      "statement": "Se o gráfico de medição apresentar uma curva ascendente constante sem estabilizar em um patamar de potencial, isso é um forte indício de que a zona de influência do eletrodo de corrente está sobreposta à da malha, exigindo um maior afastamento da haste.",
       "correctAnswer": true,
-      "explanation": "Na ausencia de patamar, as zonas de influencia podem estar se sobrepondo, nao sendo possivel obter um valor confiavel, tornando necessario um afastamento do eletrodo de corrente ainda maior. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "Na ausência de patamar, as zonas de influência podem estar se sobrepondo, não sendo possível obter um valor confiável, tornando necessário um afastamento do eletrodo de corrente ainda maior. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Em ambientes urbanos densamente ocupados ou complexos industriais, a vasta presenca de tubulacoes metalicas subterraneas e de multiplos aterramentos vizinhos facilita a aplicacao precisa do metodo da queda de potencial devido a alta condutividade do ambiente.",
+      "statement": "Em ambientes urbanos densamente ocupados ou complexos industriais, a vasta presença de tubulações metálicas subterrâneas e de múltiplos aterramentos vizinhos facilita a aplicação precisa do método da queda de potencial devido à alta condutividade do ambiente.",
       "correctAnswer": false,
-      "explanation": "A norma adverte o oposto: a presenca de condutores enterrados, tubulacoes ou aterramentos vizinhos interfere brutalmente. Em areas urbanas ou industriais, torna-se muito dificil, e muitas vezes impossivel, usar esse metodo. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "A norma adverte o oposto: a presença de condutores enterrados, tubulações ou aterramentos vizinhos interfere brutalmente. Em áreas urbanas ou industriais, torna-se muito difícil, e muitas vezes impossível, usar esse método. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A regra pratica estabelece que o efeito de acoplamento entre os cabos do circuito de corrente e de potencial e um problema grave e incontornavel em medicoes cujos resultados sejam maiores que 10 ohms, mas pode ser totalmente ignorado nas malhas de resistencia inferior a 1 ohm.",
+      "statement": "A regra prática estabelece que o efeito de acoplamento entre os cabos do circuito de corrente e de potencial é um problema grave e incontornável em medições cujos resultados sejam maiores que 10 ohms, mas pode ser totalmente ignorado nas malhas de resistência inferior a 1 ohm.",
       "correctAnswer": false,
-      "explanation": "A regra pratica afirma exatamente o contrario: os problemas de acoplamento sao despreziveis para resistencias acima de 10 ohms, mas sao criticos e muito importantes para as medicoes de valores abaixo de 1 ohm. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "A regra prática afirma exatamente o contrário: os problemas de acoplamento são desprezíveis para resistências acima de 10 ohms, mas são críticos e muito importantes para as medições de valores abaixo de 1 ohm. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Na geometria da medicao da queda de potencial, a haste central instalada para aferir a diferenca de tensao do solo em relacao a malha de terra testada e usualmente denominada de ____ ou eletrodo auxiliar de potencial.",
+      "statement": "Na geometria da medição da queda de potencial, a haste central instalada para aferir a diferença de tensão do solo em relação à malha de terra testada é usualmente denominada de ____ ou eletrodo auxiliar de potencial.",
       "blanks": [
         {
           "index": 0,
           "answer": "sonda"
         }
       ],
-      "explanation": "A tensao e medida atraves do uso de um eletrodo auxiliar de tensao, tambem referenciado na norma e literaturas como sonda de potencial. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "A tensão é medida através do uso de um eletrodo auxiliar de tensão, também referenciado na norma e literaturas como sonda de potencial. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "easy"
     },
     {
       "type": "fillBlank",
-      "statement": "Para tracar a curva de patamar da resistencia no metodo da queda de potencial, a sonda de medicao deve ser deslocada a partir do aterramento em direcao a haste de corrente, em intervalos regulares equivalentes a ____ % do valor da distancia d.",
+      "statement": "Para traçar a curva de patamar da resistência no método da queda de potencial, a sonda de medição deve ser deslocada a partir do aterramento em direção à haste de corrente, em intervalos regulares equivalentes a ____ % do valor da distância d.",
       "blanks": [
         {
           "index": 0,
           "answer": "5"
         }
       ],
-      "explanation": "A sonda deve ser deslocada a partir da periferia do sistema sob ensaio em intervalos regulares de medicao iguais a 5% da distancia d. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "A sonda deve ser deslocada a partir da periferia do sistema sob ensaio em intervalos regulares de medição iguais a 5% da distância d. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Em sistemas extensos com resistencias proximas a zero, o extenso trajeto paralelo dos fios do terrometro causa erros de medicao significativos. Esse fenomeno indesejado entre os fios do circuito de corrente e potencial e tecnicamente chamado de ____.",
+      "statement": "Em sistemas extensos com resistências próximas a zero, o extenso trajeto paralelo dos fios do terrômetro causa erros de medição significativos. Esse fenômeno indesejado entre os fios do circuito de corrente e potencial é tecnicamente chamado de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "acoplamento"
         }
       ],
-      "explanation": "Para sistemas de aterramento com valores muito baixos, o efeito indesejado de inducao mutua entre os cabos longos de teste e o acoplamento. (Fonte: Metodos normalizados para medicao de resistencia de aterramento, IEE/USP)",
+      "explanation": "Para sistemas de aterramento com valores muito baixos, o efeito indesejado de indução mútua entre os cabos longos de teste é o acoplamento. (Fonte: Métodos normalizados para medição de resistência de aterramento, IEE/USP)",
       "difficulty": "hard"
     }
   ]

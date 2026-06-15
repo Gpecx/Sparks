@@ -841,12 +841,14 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
               Icon(anyBad ? Icons.error_outline : Icons.check_circle_outline,
                   color: color, size: 18),
               const SizedBox(width: 8),
-              Text(
-                anyBad
-                    ? 'Falha de coordenação em ${fmt0(fault)} A'
-                    : 'Coordenação OK em ${fmt0(fault)} A',
-                style: TextStyle(
-                    color: color, fontWeight: FontWeight.w700, fontSize: 14),
+              Expanded(
+                child: Text(
+                  anyBad
+                      ? 'Falha de coordenação em ${fmt0(fault)} A'
+                      : 'Coordenação OK em ${fmt0(fault)} A',
+                  style: TextStyle(
+                      color: color, fontWeight: FontWeight.w700, fontSize: 14),
+                ),
               ),
             ],
           ),

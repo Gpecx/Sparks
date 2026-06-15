@@ -475,6 +475,8 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           const SizedBox(height: 4),
           Text(
             '$weeklyXp XP',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style:
                 TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w600),
           ),
@@ -585,6 +587,8 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
               children: [
                 Text(
                   displayName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       color: isMe ? AppColors.primary : Colors.white,
                       fontSize: 13,
@@ -592,11 +596,14 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                 ),
                 if (subName != null)
                   Text(subName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           color: AppColors.textMuted, fontSize: 11)),
               ],
             ),
           ),
+          const SizedBox(width: 8),
           Text(
             '$weeklyXp XP',
             style: TextStyle(

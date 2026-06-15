@@ -3,105 +3,105 @@
   "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
   "categoryOrder": 1,
   "module": "Projeto de SPDA",
-  "moduleSubtitle": "Projeto, risco, posicionamento, volume, materiais e documentacao",
+  "moduleSubtitle": "Projeto, risco, posicionamento, volume, materiais e documentação",
   "moduleOrder": 3,
   "trail": "Fundamentos de Projeto de SPDA",
   "trailOrder": 0,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual e o ponto de partida exigido pela nova norma ABNT NBR 5419 para determinar a necessidade e o nivel de protecao do SPDA em um projeto?",
+      "statement": "Qual é o ponto de partida exigido pela nova norma ABNT NBR 5419 para determinar a necessidade e o nível de proteção do SPDA em um projeto?",
       "options": [
-        "A escolha direta do metodo de captacao Franklin ou Faraday.",
-        "A Analise de Risco (Gerenciamento de Risco).",
-        "A medicao da resistencia do solo no terreno da obra.",
-        "O dimensionamento compulsorio de DPS na entrada de energia."
+        "A escolha direta do método de captação Franklin ou Faraday.",
+        "A Análise de Risco (Gerenciamento de Risco).",
+        "A medição da resistência do solo no terreno da obra.",
+        "O dimensionamento compulsório de DPS na entrada de energia."
       ],
       "correctIndex": 1,
-      "explanation": "O Gerenciamento de Risco (Parte 2) e a etapa preliminar essencial para a avaliacao quantitativa, determinacao da necessidade do SPDA e selecao do nivel de protecao adequado para o projeto. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O Gerenciamento de Risco (Parte 2) é a etapa preliminar essencial para a avaliação quantitativa, determinação da necessidade do SPDA e seleção do nível de proteção adequado para o projeto. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "A norma ABNT NBR 5419 e a principal referencia tecnica para o projeto de SPDA no Brasil. Como ela e estruturada documentalmente para cobrir todo o fluxo do projeto?",
+      "statement": "A norma ABNT NBR 5419 é a principal referência técnica para o projeto de SPDA no Brasil. Como ela é estruturada documentalmente para cobrir todo o fluxo do projeto?",
       "options": [
-        "Em 2 partes (Analise de risco e Sistemas eletronicos).",
-        "Em 3 partes (Principios, Danos estruturais e Inspecao).",
-        "Em 4 partes (Principios gerais, Analise de risco, Danos fisicos e Sistemas eletricos e eletronicos).",
-        "Em 5 partes (Principios, Risco, Captacao, Aterramento e DPS)."
+        "Em 2 partes (Análise de risco e Sistemas eletrônicos).",
+        "Em 3 partes (Princípios, Danos estruturais e Inspeção).",
+        "Em 4 partes (Princípios gerais, Análise de risco, Danos físicos e Sistemas elétricos e eletrônicos).",
+        "Em 5 partes (Princípios, Risco, Captação, Aterramento e DPS)."
       ],
       "correctIndex": 2,
-      "explanation": "A ABNT NBR 5419 e estruturada em 4 partes: Principios gerais (1), Analise de risco (2), Danos fisicos a estruturas (3) e Sistemas eletricos e eletronicos internos (4). (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A ABNT NBR 5419 é estruturada em 4 partes: Princípios gerais (1), Análise de risco (2), Danos físicos a estruturas (3) e Sistemas elétricos e eletrônicos internos (4). (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Legal e tecnicamente, quem e o profissional com as atribuicoes habilitadas e reconhecidas para assinar, emitir e assumir a responsabilidade tecnica de um projeto ou laudo de SPDA?",
+      "statement": "Legal e tecnicamente, quem é o profissional com as atribuições habilitadas e reconhecidas para assinar, emitir e assumir a responsabilidade técnica de um projeto ou laudo de SPDA?",
       "options": [
-        "Tecnico em Seguranca do Trabalho.",
-        "Eletricista de Manutencao certificado.",
+        "Técnico em Segurança do Trabalho.",
+        "Eletricista de Manutenção certificado.",
         "Engenheiro Eletricista com registro no CREA.",
         "Arquiteto ou Engenheiro Civil residente da obra."
       ],
       "correctIndex": 2,
-      "explanation": "O CREA regulamenta que somente o Engenheiro eletricista, por sua formacao e registro, tem a competencia legal e responsabilidade para projetar, instalar, inspecionar e emitir laudos de SPDA. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "O CREA regulamenta que somente o Engenheiro eletricista, por sua formação e registro, tem a competência legal e responsabilidade para projetar, instalar, inspecionar e emitir laudos de SPDA. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para conferir validade legal ao projeto e a documentacao do SPDA perante fiscalizacoes e aprovacoes no Corpo de Bombeiros, qual documento e obrigatoriamente emitido pelo engenheiro?",
+      "statement": "Para conferir validade legal ao projeto e à documentação do SPDA perante fiscalizações e aprovações no Corpo de Bombeiros, qual documento é obrigatoriamente emitido pelo engenheiro?",
       "options": [
         "Auto de Vistoria (AVCB)",
-        "Anotacao de Responsabilidade Tecnica (ART)",
-        "Programa de Prevencao de Riscos Ambientais (PPRA)",
-        "Relatorio Tecnico de Incendio (RTI)"
+        "Anotação de Responsabilidade Técnica (ART)",
+        "Programa de Prevenção de Riscos Ambientais (PPRA)",
+        "Relatório Técnico de Incêndio (RTI)"
       ],
       "correctIndex": 1,
-      "explanation": "A emissao da ART (Anotacao de Responsabilidade Tecnica) e obrigatoria para formalizar a responsabilidade tecnica do Engenheiro sobre o projeto ou servico, sendo indispensavel para a validade legal. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "A emissão da ART (Anotação de Responsabilidade Técnica) é obrigatória para formalizar a responsabilidade técnica do Engenheiro sobre o projeto ou serviço, sendo indispensável para a validade legal. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante o desenvolvimento do projeto, se o gerenciamento de risco apontar que o risco calculado (R) e maior que o risco toleravel (RT), qual deve ser a acao do projetista?",
+      "statement": "Durante o desenvolvimento do projeto, se o gerenciamento de risco apontar que o risco calculado (R) é maior que o risco tolerável (RT), qual deve ser a ação do projetista?",
       "options": [
         "Declarar a estrutura como automaticamente protegida pela arquitetura.",
-        "Implementar medidas de protecao no projeto ate que o risco R seja menor ou igual a RT.",
-        "Substituir toda a malha de aterramento por cobre macico para anular o risco R1.",
-        "Isentar a emissao do projeto eletrico perante a prefeitura local."
+        "Implementar medidas de proteção no projeto até que o risco R seja menor ou igual a RT.",
+        "Substituir toda a malha de aterramento por cobre maciço para anular o risco R1.",
+        "Isentar a emissão do projeto elétrico perante a prefeitura local."
       ],
       "correctIndex": 1,
-      "explanation": "Se R > RT (Risco maior que o Toleravel), o projetista deve implementar medidas de protecao de forma progressiva (SPDA, MPS, etc.) ate que o risco seja reduzido a um nivel toleravel (R menor ou igual a RT). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "Se R > RT (Risco maior que o Tolerável), o projetista deve implementar medidas de proteção de forma progressiva (SPDA, MPS, etc.) até que o risco seja reduzido a um nível tolerável (R menor ou igual a RT). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No fluxo de elaboracao do projeto, apos definir o Nivel de Protecao, o engenheiro dimensiona o subsistema de captacao. Quais sao os tres metodos de posicionamento reconhecidos e aceitos pela NBR 5419?",
+      "statement": "No fluxo de elaboração do projeto, após definir o Nível de Proteção, o engenheiro dimensiona o subsistema de captação. Quais são os três métodos de posicionamento reconhecidos e aceitos pela NBR 5419?",
       "options": [
-        "Metodo Early Streamer Emission (ESE), Metodo Franklin e Cabos de Guarda.",
-        "Metodo da Esfera Rolante, Metodo das Malhas e Metodo do Angulo de Protecao (Franklin).",
-        "Metodo Radioativo, Metodo de Catenaria e Metodo Eletrogeometrico.",
-        "Metodo de Faraday, Metodo de Gauss e Metodo Magnetico."
+        "Método Early Streamer Emission (ESE), Método Franklin e Cabos de Guarda.",
+        "Método da Esfera Rolante, Método das Malhas e Método do Ângulo de Proteção (Franklin).",
+        "Método Radioativo, Método de Catenária e Método Eletrogeométrico.",
+        "Método de Faraday, Método de Gauss e Método Magnético."
       ],
       "correctIndex": 1,
-      "explanation": "Os metodos de posicionamento do subsistema de captacao permitidos na norma permanecem sendo: Metodo da esfera rolante, Metodo das malhas (Faraday) e Metodo do angulo de protecao (Franklin). (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Os métodos de posicionamento do subsistema de captação permitidos na norma permanecem sendo: Método da esfera rolante, Método das malhas (Faraday) e Método do ângulo de proteção (Franklin). (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Alem da protecao fisica, o projeto completo de protecao contra descargas engloba as MPS. Qual das medidas a seguir e considerada exclusivamente uma MPS e nao desempenha outra funcao secundaria na instalacao eletrica?",
+      "statement": "Além da proteção física, o projeto completo de proteção contra descargas engloba as MPS. Qual das medidas a seguir é considerada exclusivamente uma MPS e não desempenha outra função secundária na instalação elétrica?",
       "options": [
         "Roteamento de cabos e linhas.",
-        "Aterramento e equipotencializacao estrutural.",
-        "Instalacao de Dispositivos de Protecao contra Surtos (DPS).",
-        "Aplicacao de isolacao em PVC nas fiacoes prediais."
+        "Aterramento e equipotencialização estrutural.",
+        "Instalação de Dispositivos de Proteção contra Surtos (DPS).",
+        "Aplicação de isolação em PVC nas fiações prediais."
       ],
       "correctIndex": 2,
-      "explanation": "Apenas a instalacao de DPS e exclusivamente uma MPS e nao cumpre nenhuma funcao adicional em uma instalacao eletrica, enquanto o roteamento e o aterramento ja farao parte do projeto eletrico natural. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "Apenas a instalação de DPS é exclusivamente uma MPS e não cumpre nenhuma função adicional em uma instalação elétrica, enquanto o roteamento e o aterramento já farão parte do projeto elétrico natural. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Devido a complexidade e ao volume de variaveis no calculo de risco da NBR 5419 Parte 2, muitos projetistas utilizam ferramentas de software. Qual e o nome do sistema desenvolvido pelo Instituto de Energia e Ambiente da USP citado nas fontes?",
+      "statement": "Devido à complexidade e ao volume de variáveis no cálculo de risco da NBR 5419 Parte 2, muitos projetistas utilizam ferramentas de software. Qual é o nome do sistema desenvolvido pelo Instituto de Energia e Ambiente da USP citado nas fontes?",
       "options": [
         "TUPAN",
         "SPDA-Calc",
@@ -109,25 +109,25 @@
         "Siscad-Raios"
       ],
       "correctIndex": 0,
-      "explanation": "O Instituto de Energia e Ambiente da USP desenvolveu uma planilha (software) chamada TUPAN para auxiliar na analise e no gerenciamento de risco da ABNT NBR 5419. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O Instituto de Energia e Ambiente da USP desenvolveu uma planilha (software) chamada TUPAN para auxiliar na análise e no gerenciamento de risco da ABNT NBR 5419. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No fluxo de gerenciamento de risco para determinar o projeto do SPDA, qual e a metodologia iterativa correta recomendada para se evitar superdimensionamento financeiro e estrutural?",
+      "statement": "No fluxo de gerenciamento de risco para determinar o projeto do SPDA, qual é a metodologia iterativa correta recomendada para se evitar superdimensionamento financeiro e estrutural?",
       "options": [
-        "Adotar empiricamente o Nivel Maximo (LPL I) direto em qualquer projeto.",
-        "Comecar sem protecao; se R > RT, aplicar o LPL IV e ir aumentando progressivamente o rigor ate o LPL I, ate que R menor ou igual a RT.",
-        "Comecar pelo LPL I (mais caro) e ir relaxando as protecoes e retirando captores ate a solucao mais barata.",
-        "Omitir o fator arquitetonico multiplicando a densidade Ng diretamente por 10^-5."
+        "Adotar empiricamente o Nível Máximo (LPL I) direto em qualquer projeto.",
+        "Começar sem proteção; se R > RT, aplicar o LPL IV e ir aumentando progressivamente o rigor até o LPL I, até que R menor ou igual a RT.",
+        "Começar pelo LPL I (mais caro) e ir relaxando as proteções e retirando captores até a solução mais barata.",
+        "Omitir o fator arquitetônico multiplicando a densidade Ng diretamente por 10^-5."
       ],
       "correctIndex": 1,
-      "explanation": "O processo de decisao e iterativo: calcula-se o risco inicial; se R > RT, implementam-se medidas de protecao progressivamente, do nivel mais basico (LPL IV) ao mais rigoroso (LPL I), ate que R menor ou igual a RT, evitando superdimensionamento. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O processo de decisão é iterativo: calcula-se o risco inicial; se R > RT, implementam-se medidas de proteção progressivamente, do nível mais básico (LPL IV) ao mais rigoroso (LPL I), até que R menor ou igual a RT, evitando superdimensionamento. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "No detalhamento do projeto do aterramento para uma subestacao predial, alem da NBR 5419, o projetista deve prever a integracao e obediencia a qual norma tecnica complementar de aterramento?",
+      "statement": "No detalhamento do projeto do aterramento para uma subestação predial, além da NBR 5419, o projetista deve prever a integração e obediência a qual norma técnica complementar de aterramento?",
       "options": [
         "NBR 5410",
         "NBR 6123",
@@ -135,83 +135,83 @@
         "NBR 14039"
       ],
       "correctIndex": 2,
-      "explanation": "A malha de aterramento deve ser dimensionada conforme os requisitos da norma NBR 15751 (Sistema de aterramento de subestacoes), que deve atuar de maneira complementar a NBR 5419. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "A malha de aterramento deve ser dimensionada conforme os requisitos da norma NBR 15751 (Sistema de aterramento de subestações), que deve atuar de maneira complementar à NBR 5419. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A boa pratica de projeto orienta que se assuma e detalhe uma unica estrutura de aterramento equipotencializada para a edificacao, integrando os propositos do SPDA, dos sistemas de energia e de telecomunicacoes.",
+      "statement": "A boa prática de projeto orienta que se assuma e detalhe uma única estrutura de aterramento equipotencializada para a edificação, integrando os propósitos do SPDA, dos sistemas de energia e de telecomunicações.",
       "correctAnswer": true,
-      "explanation": "A literatura tecnica afirma que e interessante assumir uma unica estrutura de aterramento integrando todos os propositos como o SPDA, energia e sinal, proporcionando economia e facilidade na instalacao. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
+      "explanation": "A literatura técnica afirma que é interessante assumir uma única estrutura de aterramento integrando todos os propósitos como o SPDA, energia e sinal, proporcionando economia e facilidade na instalação. (Fonte: Subsistema de Aterramento em SPDA, Mesh Engenharia)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para acelerar as entregas dos projetos, os engenheiros podem omitir o memorial descritivo da Analise de Risco (Parte 2) caso adotem arbitrariamente o rigor do Nivel de Protecao I (LPL I) em toda a construcao.",
+      "statement": "Para acelerar as entregas dos projetos, os engenheiros podem omitir o memorial descritivo da Análise de Risco (Parte 2) caso adotem arbitrariamente o rigor do Nível de Proteção I (LPL I) em toda a construção.",
       "correctAnswer": false,
-      "explanation": "A Analise de Risco (Gerenciamento de Risco) nao pode ser omitida; o nivel de protecao adequado NAO e escolhido arbitrariamente, mas sim como resultado do calculo iterativo do Risco inicial contra o Risco Toleravel (RT). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "A Análise de Risco (Gerenciamento de Risco) não pode ser omitida; o nível de proteção adequado NÃO é escolhido arbitrariamente, mas sim como resultado do cálculo iterativo do Risco inicial contra o Risco Tolerável (RT). (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "No projeto do metodo Franklin (angulo de protecao), o projetista conta hoje com a facilidade de um grafico que substituiu as tabelas antigas. Nele, se a altura estrutural do captor for de ate 2 metros, podem ser empregados angulos bastante amplos, beirando os 80 graus.",
+      "statement": "No projeto do método Franklin (ângulo de proteção), o projetista conta hoje com a facilidade de um gráfico que substituiu as tabelas antigas. Nele, se a altura estrutural do captor for de até 2 metros, podem ser empregados ângulos bastante amplos, beirando os 80 graus.",
       "correctAnswer": true,
-      "explanation": "O novo conceito substitui a tabela por um grafico que permite, em situacoes especificas para estruturas baixas (ate 2 metros), trabalhar com angulos maiores, variando de 70 ate quase 80 graus. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O novo conceito substitui a tabela por um gráfico que permite, em situações específicas para estruturas baixas (até 2 metros), trabalhar com ângulos maiores, variando de 70 até quase 80 graus. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Em projetos arquitetonicos modernos e limpos, a NBR 5419 valida que o projetista adote solucoes nao convencionais, como a captacao ESE (Early Streamer Emission), para cobrir todo o volume e reduzir a interferencia visual das descidas.",
+      "statement": "Em projetos arquitetônicos modernos e limpos, a NBR 5419 valida que o projetista adote soluções não convencionais, como a captação ESE (Early Streamer Emission), para cobrir todo o volume e reduzir a interferência visual das descidas.",
       "correctAnswer": false,
-      "explanation": "A norma explicita que a determinacao do volume considera apenas as dimensoes fisicas reais dos captores. Sistemas nao convencionais como ESE permanecem fora dos metodos aceitos pela NBR 5419 no Brasil. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "A norma explicita que a determinação do volume considera apenas as dimensões físicas reais dos captores. Sistemas não convencionais como ESE permanecem fora dos métodos aceitos pela NBR 5419 no Brasil. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Do ponto de vista documental e legal, o projeto de SPDA as-built, com sua ART e os laudos de inspecao inicial, deve compor de forma obrigatoria o Prontuario de Instalacoes Eletricas (PIE) do estabelecimento para atendimento da NR-10.",
+      "statement": "Do ponto de vista documental e legal, o projeto de SPDA as-built, com sua ART e os laudos de inspeção inicial, deve compor de forma obrigatória o Prontuário de Instalações Elétricas (PIE) do estabelecimento para atendimento da NR-10.",
       "correctAnswer": true,
-      "explanation": "A integracao entre a NBR 5419 e a NR-10 exige que o Prontuario de Instalacoes Eletricas (PIE) contenha o projeto completo, o Laudo de Inspecao do SPDA, medicoes e a ART do engenheiro. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "A integração entre a NBR 5419 e a NR-10 exige que o Prontuário de Instalações Elétricas (PIE) contenha o projeto completo, o Laudo de Inspeção do SPDA, medições e a ART do engenheiro. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O documento oficial emitido pelo Engenheiro Eletricista no CREA, que formaliza legalmente sua responsabilidade tecnica pelo projeto, execucao ou pela inspecao de um SPDA, e conhecido pela sigla ____.",
+      "statement": "O documento oficial emitido pelo Engenheiro Eletricista no CREA, que formaliza legalmente sua responsabilidade técnica pelo projeto, execução ou pela inspeção de um SPDA, é conhecido pela sigla ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "ART"
         }
       ],
-      "explanation": "A emissao da ART (Anotacao de Responsabilidade Tecnica) e obrigatoria para formalizar a responsabilidade tecnica do Engenheiro e dar validade ao laudo e ao projeto de SPDA. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "A emissão da ART (Anotação de Responsabilidade Técnica) é obrigatória para formalizar a responsabilidade técnica do Engenheiro e dar validade ao laudo e ao projeto de SPDA. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "fillBlank",
-      "statement": "O conjunto completo de engenharia da Parte 4 focado em resguardar os equipamentos eletricos e de tecnologia da informacao do edificio contra as sobretensoes geradas por raios e chamado oficialmente de Medidas de Protecao contra ____ (MPS).",
+      "statement": "O conjunto completo de engenharia da Parte 4 focado em resguardar os equipamentos elétricos e de tecnologia da informação do edifício contra as sobretensões geradas por raios é chamado oficialmente de Medidas de Proteção contra ____ (MPS).",
       "blanks": [
         {
           "index": 0,
           "answer": "Surtos"
         }
       ],
-      "explanation": "As diretrizes da Parte 4 apresentam as Medidas de Protecao contra Surtos (MPS), fundamentais para evitar falhas ou a queima de instalacoes eletroeletronicas. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "As diretrizes da Parte 4 apresentam as Medidas de Proteção contra Surtos (MPS), fundamentais para evitar falhas ou a queima de instalações eletroeletrônicas. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Na entrada de dados principal para o calculo de Risco do projeto, a variavel fisica que quantifica a Densidade de descargas atmosfericas anuais para a terra na regiao da edificacao e identificada pela sigla ____.",
+      "statement": "Na entrada de dados principal para o cálculo de Risco do projeto, a variável física que quantifica a Densidade de descargas atmosféricas anuais para a terra na região da edificação é identificada pela sigla ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Ng"
         }
       ],
-      "explanation": "O parametro que representa a Densidade de descargas atmosfericas (raios/km2/ano) da localidade no calculo do Gerenciamento de Risco e que rege a probabilidade de impacto e denominado Ng. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O parâmetro que representa a Densidade de descargas atmosféricas (raios/km2/ano) da localidade no cálculo do Gerenciamento de Risco e que rege a probabilidade de impacto é denominado Ng. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     }
   ]

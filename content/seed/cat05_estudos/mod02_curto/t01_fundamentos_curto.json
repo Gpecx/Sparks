@@ -10,208 +10,208 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que caracteriza fundamentalmente um curto-circuito em um sistema eletrico?",
+      "statement": "O que caracteriza fundamentalmente um curto-circuito em um sistema elétrico?",
       "options": [
-        "Uma variacao lenta da frequencia da rede de distribuicao.",
-        "Uma ligacao acidental de baixa impedancia entre dois pontos com potenciais diferentes.",
-        "Um aumento gradual da resistencia dos isoladores sob chuva.",
-        "Uma elevacao controlada da tensao transitoria de restabelecimento."
+        "Uma variação lenta da frequência da rede de distribuição.",
+        "Uma ligação acidental de baixa impedância entre dois pontos com potenciais diferentes.",
+        "Um aumento gradual da resistência dos isoladores sob chuva.",
+        "Uma elevação controlada da tensão transitória de restabelecimento."
       ],
       "correctIndex": 1,
-      "explanation": "Um curto-circuito e uma falha de isolacao formando uma ligacao de baixa impedancia entre pontos de potenciais distintos.",
+      "explanation": "Um curto-circuito é uma falha de isolação formando uma ligação de baixa impedância entre pontos de potenciais distintos.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quais sao as principais origens de curtos-circuitos causados por problemas de isolacao?",
+      "statement": "Quais são as principais origens de curtos-circuitos causados por problemas de isolação?",
       "options": [
-        "Desgaste normal dos disjuntores operando em condicao nominal.",
-        "Aumento da corrente de excitacao de motores de inducao em vazio.",
-        "Sobretensao de manobra ou atmosferica e danos mecanicos aos isoladores.",
-        "Elevacao do fator de potencia capacitivo da planta industrial."
+        "Desgaste normal dos disjuntores operando em condição nominal.",
+        "Aumento da corrente de excitação de motores de indução em vazio.",
+        "Sobretensão de manobra ou atmosférica e danos mecânicos aos isoladores.",
+        "Elevação do fator de potência capacitivo da planta industrial."
       ],
       "correctIndex": 2,
-      "explanation": "Falhas de isolacao podem ser causadas por danos mecanicos, uso abusivo ou sobretensoes atmosfericas e de manobra na rede.",
+      "explanation": "Falhas de isolação podem ser causadas por danos mecânicos, uso abusivo ou sobretensões atmosféricas e de manobra na rede.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual a relacao de proporcao da forca eletromagnetica nos barramentos gerada pela corrente de curto-circuito?",
+      "statement": "Qual a relação de proporção da força eletromagnética nos barramentos gerada pela corrente de curto-circuito?",
       "options": [
-        "Exponencialmente proporcional a impedancia de base do sistema.",
-        "Inversamente proporcional a resistencia do arco eletrico.",
-        "Diretamente proporcional ao inverso da corrente assimetrica.",
+        "Exponencialmente proporcional à impedância de base do sistema.",
+        "Inversamente proporcional à resistência do arco elétrico.",
+        "Diretamente proporcional ao inverso da corrente assimétrica.",
         "Diretamente proporcional ao quadrado da corrente de curto-circuito."
       ],
       "correctIndex": 3,
-      "explanation": "Os efeitos mecanicos e forcas de atracao ou repulsao sao proporcionais ao quadrado da corrente instantanea de curto-circuito.",
+      "explanation": "Os efeitos mecânicos e forças de atração ou repulsão são proporcionais ao quadrado da corrente instantânea de curto-circuito.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quais sao as duas parcelas que formam a corrente assimetrica de curto-circuito?",
+      "statement": "Quais são as duas parcelas que formam a corrente assimétrica de curto-circuito?",
       "options": [
-        "Componente simetrica alternada e componente continua aperiodica.",
-        "Componente harmonica de terceira ordem e fluxo disperso do nucleo.",
-        "Componente de sequencia zero e impedancia linear de aterramento.",
-        "Corrente de magnetizacao simetrica e componente de perdas nominais."
+        "Componente simétrica alternada e componente contínua aperiódica.",
+        "Componente harmônica de terceira ordem e fluxo disperso do núcleo.",
+        "Componente de sequência zero e impedância linear de aterramento.",
+        "Corrente de magnetização simétrica e componente de perdas nominais."
       ],
       "correctIndex": 0,
-      "explanation": "A corrente assimetrica compreende a superposicao da componente alternada simetrica com a componente de corrente continua que decai no tempo.",
+      "explanation": "A corrente assimétrica compreende a superposição da componente alternada simétrica com a componente de corrente contínua que decai no tempo.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual periodo da corrente de curto-circuito em um gerador apresenta a maior magnitude de corrente?",
+      "statement": "Qual período da corrente de curto-circuito em um gerador apresenta a maior magnitude de corrente?",
       "options": [
-        "Periodo subtransitorio.",
-        "Periodo de regime permanente.",
-        "Periodo transitorio.",
-        "Periodo de saturacao magnetica constante."
+        "Período subtransitório.",
+        "Período de regime permanente.",
+        "Período transitório.",
+        "Período de saturação magnética constante."
       ],
       "correctIndex": 0,
-      "explanation": "O periodo subtransitorio ocorre nos primeiros ciclos, possuindo as reatancias aparentes mais baixas e as maiores magnitudes de corrente.",
+      "explanation": "O período subtransitório ocorre nos primeiros ciclos, possuindo as reatâncias aparentes mais baixas e as maiores magnitudes de corrente.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que a relacao reatancia por resistencia do circuito determina diretamente no perfil da corrente de curto-circuito?",
+      "statement": "O que a relação reatância por resistência do circuito determina diretamente no perfil da corrente de curto-circuito?",
       "options": [
-        "A frequencia angular das componentes harmonicas do arco eletrico subjacente.",
-        "A constante de tempo de decaimento da componente de corrente continua.",
-        "O angulo de disparo exato dos reles direcionais de potencia reversa.",
-        "A taxa constante de aquecimento adiabatico dos cabos de alta tensao."
+        "A frequência angular das componentes harmônicas do arco elétrico subjacente.",
+        "A constante de tempo de decaimento da componente de corrente contínua.",
+        "O ângulo de disparo exato dos relés direcionais de potência reversa.",
+        "A taxa constante de aquecimento adiabático dos cabos de alta tensão."
       ],
       "correctIndex": 1,
-      "explanation": "O decaimento da componente continua e uma funcao exponencial cuja constante de tempo depende diretamente da relacao entre reatancia e resistencia da rede.",
+      "explanation": "O decaimento da componente contínua é uma função exponencial cuja constante de tempo depende diretamente da relação entre reatância e resistência da rede.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como os grandes motores de inducao trifasicos afetam o sistema nos instantes iniciais de um curto-circuito?",
+      "statement": "Como os grandes motores de indução trifásicos afetam o sistema nos instantes iniciais de um curto-circuito?",
       "options": [
-        "Absorvem rapidamente a corrente assimetrica protegendo o barramento termicamente.",
-        "Isolam as faltas fase a terra atraves de sua elevadissima impedancia de sequencia zero.",
+        "Absorvem rapidamente a corrente assimétrica protegendo o barramento termicamente.",
+        "Isolam as faltas fase a terra através de sua elevadíssima impedância de sequência zero.",
         "Passam a funcionar momentaneamente como geradores, aumentando a corrente de falta.",
         "Reduzem a corrente de curto-circuito fornecendo enorme energia reativa capacitiva."
       ],
       "correctIndex": 2,
-      "explanation": "No inicio do curto-circuito, o motor opera como gerador devido a energia eletromagnetica armazenada e a inercia, contribuindo com corrente para a falha.",
+      "explanation": "No início do curto-circuito, o motor opera como gerador devido à energia eletromagnética armazenada e à inércia, contribuindo com corrente para a falha.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual condicao teorica produz a maxima assimetria na corrente de falta em um sistema puramente indutivo?",
+      "statement": "Qual condição teórica produz a máxima assimetria na corrente de falta em um sistema puramente indutivo?",
       "options": [
-        "O curto-circuito ocorrer no exato instante em que a tensao da rede atinge seu valor maximo.",
-        "O defeito envolver simultaneamente o aterramento do neutro e uma alta resistencia de arco.",
-        "A corrente nominal de carga capacitiva ser superior a capacidade termica do disjuntor geral.",
-        "O curto-circuito ocorrer no exato instante em que a tensao de operacao passa por zero."
+        "O curto-circuito ocorrer no exato instante em que a tensão da rede atinge seu valor máximo.",
+        "O defeito envolver simultaneamente o aterramento do neutro e uma alta resistência de arco.",
+        "A corrente nominal de carga capacitiva ser superior à capacidade térmica do disjuntor geral.",
+        "O curto-circuito ocorrer no exato instante em que a tensão de operação passa por zero."
       ],
       "correctIndex": 3,
-      "explanation": "Em circuitos indutivos, a componente continua atinge magnitude maxima se a falta for iniciada no momento em que a tensao aplicada passa pelo cruzamento do zero.",
+      "explanation": "Em circuitos indutivos, a componente contínua atinge magnitude máxima se a falta for iniciada no momento em que a tensão aplicada passa pelo cruzamento do zero.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para a selecao de disjuntores e analise de esforcos, quais valores nominais de curto-circuito sao tipicamente calculados?",
+      "statement": "Para a seleção de disjuntores e análise de esforços, quais valores nominais de curto-circuito são tipicamente calculados?",
       "options": [
-        "O valor de crista da corrente assimetrica e a corrente simetrica de interrupcao.",
-        "Apenas a corrente de falta minima assintotica em regime permanente.",
-        "O desvio absoluto de frequencia e as tensoes exclusivas de sequencia negativa.",
-        "A corrente termica puramente continua e o fator nominal de sobretensao temporal."
+        "O valor de crista da corrente assimétrica e a corrente simétrica de interrupção.",
+        "Apenas a corrente de falta mínima assintótica em regime permanente.",
+        "O desvio absoluto de frequência e as tensões exclusivas de sequência negativa.",
+        "A corrente térmica puramente contínua e o fator nominal de sobretensão temporal."
       ],
       "correctIndex": 0,
-      "explanation": "Calcula-se a corrente simetrica eficaz para o dimensionamento do poder de corte e a corrente de crista assimetrica para suportabilidade aos esforcos mecanicos.",
+      "explanation": "Calcula-se a corrente simétrica eficaz para o dimensionamento do poder de corte e a corrente de crista assimétrica para suportabilidade aos esforços mecânicos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No estudo do aquecimento adiabatico por correntes de defeito curtas, a equacao com a corrente ao quadrado multiplicada pelo tempo baliza qual.",
+      "statement": "No estudo do aquecimento adiabático por correntes de defeito curtas, a equação com a corrente ao quadrado multiplicada pelo tempo baliza qual.",
       "options": [
-        "O limite dinamico exato de repulsao vetorial de barramentos paralelos sem blindagem.",
+        "O limite dinâmico exato de repulsão vetorial de barramentos paralelos sem blindagem.",
         "O tempo limite que um condutor suporta a corrente antes que ocorram danos ao seu isolamento.",
-        "A energia eletromagnetica estrita para sustentar o arco eletrico interno do fusivel limitador.",
-        "A constante de tempo real do decaimento subtransitorio global dos motores de inducao em rede."
+        "A energia eletromagnética estrita para sustentar o arco elétrico interno do fusível limitador.",
+        "A constante de tempo real do decaimento subtransitório global dos motores de indução em rede."
       ],
       "correctIndex": 1,
-      "explanation": "A relacao integra os efeitos de aquecimento pelo efeito Joule para assegurar que a duracao da falta nao funda o material ou deteriore o isolante termicamente.",
+      "explanation": "A relação integra os efeitos de aquecimento pelo efeito Joule para assegurar que a duração da falta não funda o material ou deteriore o isolante termicamente.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Apenas os grandes geradores sincronos contribuem ativamente para a corrente de curto-circuito do sistema, sendo aceitavel ignorar totalmente a.",
+      "statement": "Apenas os grandes geradores síncronos contribuem ativamente para a corrente de curto-circuito do sistema, sendo aceitável ignorar totalmente a.",
       "correctAnswer": false,
-      "explanation": "Motores de inducao e motores sincronos conectados ao sistema tambem contribuem injetando correntes substanciais nos instantes iniciais do curto-circuito.",
+      "explanation": "Motores de indução e motores síncronos conectados ao sistema também contribuem injetando correntes substanciais nos instantes iniciais do curto-circuito.",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "O periodo transitorio da corrente de falta e dominado pela constante de tempo do enrolamento amortecedor, caracterizando uma reducao abrupta nos.",
+      "statement": "O período transitório da corrente de falta é dominado pela constante de tempo do enrolamento amortecedor, caracterizando uma redução abrupta nos.",
       "correctAnswer": false,
-      "explanation": "O enrolamento amortecedor domina o periodo subtransitorio que e o mais rapido. O periodo transitorio e governado pelo enrolamento de campo do rotor, tendo decaimento mais suave.",
+      "explanation": "O enrolamento amortecedor domina o período subtransitório que é o mais rápido. O período transitório é governado pelo enrolamento de campo do rotor, tendo decaimento mais suave.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "O fator de assimetria quantifica a relacao entre o pico da corrente assimetrica e o valor da corrente simetrica, elevando-se a medida que cresce a.",
+      "statement": "O fator de assimetria quantifica a relação entre o pico da corrente assimétrica e o valor da corrente simétrica, elevando-se à medida que cresce a.",
       "correctAnswer": true,
-      "explanation": "O fator de assimetria depende da taxa de amortecimento da componente continua, que e diretamente vinculada a grande relacao de reatancia dividida por resistencia no circuito em falta.",
+      "explanation": "O fator de assimetria depende da taxa de amortecimento da componente contínua, que é diretamente vinculada à grande relação de reatância dividida por resistência no circuito em falta.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A potencia de curto-circuito inicial simetrica aparente de um barramento pode ser estimada multiplicando a raiz quadrada de tres pela tensao.",
+      "statement": "A potência de curto-circuito inicial simétrica aparente de um barramento pode ser estimada multiplicando a raiz quadrada de três pela tensão.",
       "correctAnswer": true,
-      "explanation": "As normas definem o parametro numerico da potencia inicial de curto-circuito simetrico como o produto da raiz de tres pela tensao da rede multiplicada pela corrente simetrica inicial.",
+      "explanation": "As normas definem o parâmetro numérico da potência inicial de curto-circuito simétrico como o produto da raiz de três pela tensão da rede multiplicada pela corrente simétrica inicial.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A capacidade de estabelecimento nominal em curto-circuito de um disjuntor fundamenta-se estritamente no valor maximo de crista alcançado no.",
+      "statement": "A capacidade de estabelecimento nominal em curto-circuito de um disjuntor fundamenta-se estritamente no valor máximo de crista alcançado no.",
       "correctAnswer": true,
-      "explanation": "Ao fechar contra uma falha, o disjuntor deve ser capaz de engatar suportando o maior pico instantaneo possivel da forca repulsiva, correspondente ao cume da corrente assimetrica.",
+      "explanation": "Ao fechar contra uma falha, o disjuntor deve ser capaz de engatar suportando o maior pico instantâneo possível da força repulsiva, correspondente ao cume da corrente assimétrica.",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "A parcela da corrente transitoria de defeito com decaimento exponencial aperiodico e referida tecnicamente como componente ____ de corrente.",
+      "statement": "A parcela da corrente transitória de defeito com decaimento exponencial aperiódico é referida tecnicamente como componente ____ de corrente.",
       "blanks": [
         {
           "index": 0,
           "answer": "continua"
         }
       ],
-      "explanation": "A assimetria inicial da forma de onda resulta da superposicao de uma componente unidirecional, comumente chamada de componente DC ou continua.",
+      "explanation": "A assimetria inicial da forma de onda resulta da superposição de uma componente unidirecional, comumente chamada de componente DC ou contínua.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Na modelagem inicial de esforcos subtransitorios, aceita-se que os motores de inducao injetem corrente de contribuicao a falha por uma duracao ____.",
+      "statement": "Na modelagem inicial de esforços subtransitórios, aceita-se que os motores de indução injetem corrente de contribuição à falha por uma duração ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "ciclos"
         }
       ],
-      "explanation": "O motor de inducao decai muito rapidamente ao perder excitacao do estator, limitando sua injecao de defeito severo a cerca de dois ciclos eletricos de duracao.",
+      "explanation": "O motor de indução decai muito rapidamente ao perder excitação do estator, limitando sua injeção de defeito severo a cerca de dois ciclos elétricos de duração.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Para garantir a suportabilidade eletrodinamica de barramentos paralelos as forcas flexoras maximas devem ser dimensionadas usando a corrente de ____.",
+      "statement": "Para garantir a suportabilidade eletrodinâmica de barramentos paralelos às forças flexoras máximas devem ser dimensionadas usando a corrente de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "crista"
         }
       ],
-      "explanation": "A forca mecânica repulsiva ou atrativa entre condutores depende do quadrado da magnitude maxima instantanea de corrente, conhecida tambem como valor de crista ou pico asssimetrico.",
+      "explanation": "A força mecânica repulsiva ou atrativa entre condutores depende do quadrado da magnitude máxima instantânea de corrente, conhecida também como valor de crista ou pico assimétrico.",
       "difficulty": "hard"
     }
   ]

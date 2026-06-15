@@ -10,155 +10,155 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Como a confiabilidade de um sistema de protecao e definida na literatura tecnica classica?",
+      "statement": "Como a confiabilidade de um sistema de proteção é definida na literatura técnica clássica?",
       "options": [
-        "Probabilidade de o sistema satisfazer a funcao prevista sob dadas circunstancias.",
-        "Certeza de que o equipamento nunca apresentara defeitos mecanicos.",
-        "Relacao entre a potencia consumida e a tensao nominal aplicada no rele.",
-        "Capacidade de atuar apenas para falhas fora da sua zona de protecao."
+        "Probabilidade de o sistema satisfazer a função prevista sob dadas circunstâncias.",
+        "Certeza de que o equipamento nunca apresentará defeitos mecânicos.",
+        "Relação entre a potência consumida e a tensão nominal aplicada no relé.",
+        "Capacidade de atuar apenas para falhas fora da sua zona de proteção."
       ],
       "correctIndex": 0,
-      "explanation": "A confiabilidade e definida como a probabilidade de um componente ou sistema satisfazer a funcao prevista sob dadas circunstancias.",
+      "explanation": "A confiabilidade é definida como a probabilidade de um componente ou sistema satisfazer a função prevista sob dadas circunstâncias.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a finalidade principal do releamento de retaguarda em um sistema de potencia?",
+      "statement": "Qual é a finalidade principal do releamento de retaguarda em um sistema de potência?",
       "options": [
-        "Substituir completamente a manutencao preventiva da instalacao de alta tensao.",
-        "Atuar na manutencao do releamento primario em caso de falha deste ultimo.",
-        "Reduzir a potencia de curto-circuito na barra principal da subestacao.",
-        "Aumentar a impedancia da linha durante as manobras operacionais."
+        "Substituir completamente a manutenção preventiva da instalação de alta tensão.",
+        "Atuar na manutenção do releamento primário em caso de falha deste último.",
+        "Reduzir a potência de curto-circuito na barra principal da subestação.",
+        "Aumentar a impedância da linha durante as manobras operacionais."
       ],
       "correctIndex": 1,
-      "explanation": "O releamento de retaguarda, ou de socorro, atua para suprir a eventual falha do releamento primario.",
+      "explanation": "O releamento de retaguarda, ou de socorro, atua para suprir a eventual falha do releamento primário.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual funcao de protecao garante a confiabilidade do sistema caso o disjuntor principal nao abra apos um comando?",
+      "statement": "Qual função de proteção garante a confiabilidade do sistema caso o disjuntor principal não abra após um comando?",
       "options": [
-        "Sobrecarga termica ANSI 49RMS.",
-        "Direcional de potencia ANSI 32P.",
+        "Sobrecarga térmica ANSI 49RMS.",
+        "Direcional de potência ANSI 32P.",
         "Falha de disjuntor ANSI 50BF.",
         "Controle de sincronismo ANSI 25."
       ],
       "correctIndex": 2,
-      "explanation": "A funcao falha de disjuntor (ANSI 50BF) detecta a falha na abertura do disjuntor e aciona os disjuntores adjacentes.",
+      "explanation": "A função falha de disjuntor (ANSI 50BF) detecta a falha na abertura do disjuntor e aciona os disjuntores adjacentes.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual caracteristica dos reles digitais modernos (IEDs) aumenta significativamente a confiabilidade da protecao?",
+      "statement": "Qual característica dos relés digitais modernos (IEDs) aumenta significativamente a confiabilidade da proteção?",
       "options": [
-        "Uso exclusivo de contatos de mercurio e discos de inducao mecanicos.",
-        "Ausencia de capacidade de comunicacao em rede e isolamento fisico.",
-        "Dependencia total de baterias externas de alta tensao em CA.",
-        "Sistemas de autoteste e autodiagnose incorporados no proprio rele."
+        "Uso exclusivo de contatos de mercúrio e discos de indução mecânicos.",
+        "Ausência de capacidade de comunicação em rede e isolamento físico.",
+        "Dependência total de baterias externas de alta tensão em CA.",
+        "Sistemas de autoteste e autodiagnose incorporados no próprio relé."
       ],
       "correctIndex": 3,
-      "explanation": "A vantagem dos reles digitais inclui a alta confiabilidade proporcionada pelos sistemas de autoteste e autodiagnose incorporados.",
+      "explanation": "A vantagem dos relés digitais inclui a alta confiabilidade proporcionada pelos sistemas de autoteste e autodiagnose incorporados.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na arquitetura de controle e protecao, qual e o objetivo direto da funcao de supervisao do circuito de trip?",
+      "statement": "Na arquitetura de controle e proteção, qual é o objetivo direto da função de supervisão do circuito de trip?",
       "options": [
-        "Indicar a falha do circuito de trip do dispositivo de interrupcao associado.",
-        "Aumentar a corrente de curto-circuito circulante na bobina do rele.",
-        "Desligar o transformador durante o inrush transitorio de magnetizacao.",
+        "Indicar a falha do circuito de trip do dispositivo de interrupção associado.",
+        "Aumentar a corrente de curto-circuito circulante na bobina do relé.",
+        "Desligar o transformador durante o inrush transitório de magnetização.",
         "Sinalizar a temperatura excessiva dos mancais e enrolamentos do gerador."
       ],
       "correctIndex": 0,
-      "explanation": "A supervisao do circuito de trip eleva a confiabilidade e disponibilidade ao indicar falhas no circuito de disparo do disjuntor.",
+      "explanation": "A supervisão do circuito de trip eleva a confiabilidade e disponibilidade ao indicar falhas no circuito de disparo do disjuntor.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em relacao a confiabilidade global, o que a literatura afirma sobre a relacao entre releamento de retaguarda e manutencao?",
+      "statement": "Em relação à confiabilidade global, o que a literatura afirma sobre a relação entre releamento de retaguarda e manutenção?",
       "options": [
-        "O releamento de retaguarda substitui totalmente a necessidade de manutencao preventiva.",
-        "O releamento de retaguarda nao substitui uma boa manutencao, nem vice-versa.",
-        "Uma boa manutencao elimina completamente a necessidade de instalar reles de retaguarda.",
-        "A manutencao corretiva isolada e superior ao uso de esquemas de protecao de retaguarda."
+        "O releamento de retaguarda substitui totalmente a necessidade de manutenção preventiva.",
+        "O releamento de retaguarda não substitui uma boa manutenção, nem vice-versa.",
+        "Uma boa manutenção elimina completamente a necessidade de instalar relés de retaguarda.",
+        "A manutenção corretiva isolada é superior ao uso de esquemas de proteção de retaguarda."
       ],
       "correctIndex": 1,
-      "explanation": "O releamento de retaguarda e a manutencao sao complementares e um nao substitui o outro.",
+      "explanation": "O releamento de retaguarda e a manutenção são complementares e um não substitui o outro.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a velocidade de atuacao da protecao afeta a indisponibilidade e a operacao do sistema eletrico?",
+      "statement": "Como a velocidade de atuação da proteção afeta a indisponibilidade e a operação do sistema elétrico?",
       "options": [
-        "Aumenta o tempo de paralisacao dos consumidores na area defeituosa.",
-        "Impede a manutencao das condicoes normais de operacao nas partes sadias.",
-        "Reduz a extensao do dano ocorrido e o tempo total de paralisacao.",
-        "Causa a perda imediata de sincronismo dos motores sincronos industriais."
+        "Aumenta o tempo de paralisação dos consumidores na área defeituosa.",
+        "Impede a manutenção das condições normais de operação nas partes sadias.",
+        "Reduz a extensão do dano ocorrido e o tempo total de paralisação.",
+        "Causa a perda imediata de sincronismo dos motores síncronos industriais."
       ],
       "correctIndex": 2,
-      "explanation": "Uma protecao de alta velocidade diminui a extensao do dano e reduz o tempo total de paralisacao dos consumidores de energia.",
+      "explanation": "Uma proteção de alta velocidade diminui a extensão do dano e reduz o tempo total de paralisação dos consumidores de energia.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo os requisitos de projeto, quais fatores podem fazer a protecao atuar incorretamente, reduzindo a confiabilidade?",
+      "statement": "Segundo os requisitos de projeto, quais fatores podem fazer a proteção atuar incorretamente, reduzindo a confiabilidade?",
       "options": [
-        "Aumento do fator de potencia das cargas industriais conectadas.",
-        "Excesso de ventilacao nos paineis de comando e automacao local.",
-        "Uso de esquemas de aterramento temporario durante a manutencao.",
-        "Erros de dimensionamento, falhas de configuracao, testes incorretos e desgaste."
+        "Aumento do fator de potência das cargas industriais conectadas.",
+        "Excesso de ventilação nos painéis de comando e automação local.",
+        "Uso de esquemas de aterramento temporário durante a manutenção.",
+        "Erros de dimensionamento, falhas de configuração, testes incorretos e desgaste."
       ],
       "correctIndex": 3,
-      "explanation": "A protecao atua incorretamente, falhando em sua confiabilidade, devido a erros de dimensionamento, configuracao, instalacao e desgaste.",
+      "explanation": "A proteção atua incorretamente, falhando em sua confiabilidade, devido a erros de dimensionamento, configuração, instalação e desgaste.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que caracteriza a protecao secundaria (retaguarda remota) em termos de confiabilidade e localizacao?",
+      "statement": "O que caracteriza a proteção secundária (retaguarda remota) em termos de confiabilidade e localização?",
       "options": [
-        "Identifica falta fora da subestacao local nao eliminada pela protecao principal.",
-        "Atua sempre instantaneamente antes da protecao primaria de linha.",
-        "Substitui a protecao mecanica centrifuga da turbina hidraulica.",
-        "E instalada exclusivamente no centro de despacho de carga nacional."
+        "Identifica falta fora da subestação local não eliminada pela proteção principal.",
+        "Atua sempre instantaneamente antes da proteção primária de linha.",
+        "Substitui a proteção mecânica centrífuga da turbina hidráulica.",
+        "É instalada exclusivamente no centro de despacho de carga nacional."
       ],
       "correctIndex": 0,
-      "explanation": "A protecao de retaguarda remota atua quando identifica uma falta fora da subestacao local que nao foi eliminada pela protecao principal.",
+      "explanation": "A proteção de retaguarda remota atua quando identifica uma falta fora da subestação local que não foi eliminada pela proteção principal.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Com base nas estatisticas classicas de operacao, como os defeitos e falhas no sistema eletrico se distribuem aproximadamente?",
+      "statement": "Com base nas estatísticas clássicas de operação, como os defeitos e falhas no sistema elétrico se distribuem aproximadamente?",
       "options": [
-        "50% por erros humanos e 50% causados por descargas atmosfericas diretas.",
-        "73% de natureza eletrica, 12% na atuacao de reles/automaticos e 15% por erros de pessoal.",
-        "90% devido a falhas mecanicas e 10% referentes a falhas no releamento.",
+        "50% por erros humanos e 50% causados por descargas atmosféricas diretas.",
+        "73% de natureza elétrica, 12% na atuação de relés/automáticos e 15% por erros de pessoal.",
+        "90% devido a falhas mecânicas e 10% referentes a falhas no releamento.",
         "33% concentrados nos geradores, 33% nos transformadores e 33% nas linhas."
       ],
       "correctIndex": 1,
-      "explanation": "As estatisticas classicas apontam 73% de falhas de natureza eletrica, 12% na atuacao de reles/automaticos e 15% por erros de pessoal.",
+      "explanation": "As estatísticas clássicas apontam 73% de falhas de natureza elétrica, 12% na atuação de relés/automáticos e 15% por erros de pessoal.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A confiabilidade da protecao exige que o sistema opere corretamente quando exigido, mas tambem que nao atue caso nao exista defeito.",
+      "statement": "A confiabilidade da proteção exige que o sistema opere corretamente quando exigido, mas também que não atue caso não exista defeito.",
       "correctAnswer": true,
-      "explanation": "A protecao nunca deve dar ordens se nao existe defeito, devendo atuar com exatidao apenas na presenca de falhas no sistema.",
+      "explanation": "A proteção nunca deve dar ordens se não existe defeito, devendo atuar com exatidão apenas na presença de falhas no sistema.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Desligamentos intempestivos do sistema de protecao podem ter consequencias ainda piores do que a propria falha de atuacao do equipamento.",
+      "statement": "Desligamentos intempestivos do sistema de proteção podem ter consequências ainda piores do que a própria falha de atuação do equipamento.",
       "correctAnswer": true,
-      "explanation": "Atuar de modo intempestivo (falso trip) pode ser pior do que a falha de atuacao, comprometendo a confiabilidade.",
+      "explanation": "Atuar de modo intempestivo (falso trip) pode ser pior do que a falha de atuação, comprometendo a confiabilidade.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A protecao principal alternada e uma forma de redundancia que opera especificamente no caso de falha ou indisponibilidade da protecao principal primaria.",
+      "statement": "A proteção principal alternada é uma forma de redundância que opera especificamente no caso de falha ou indisponibilidade da proteção principal primária.",
       "correctAnswer": true,
-      "explanation": "A protecao alternada funciona como um backup para cobrir falhas na protecao principal, garantindo a alta confiabilidade do sistema.",
+      "explanation": "A proteção alternada funciona como um backup para cobrir falhas na proteção principal, garantindo a alta confiabilidade do sistema.",
       "difficulty": "medium",
       "isTrue": true
     },
@@ -172,46 +172,46 @@
     },
     {
       "type": "trueFalse",
-      "statement": "A longa inatividade dos reles em campo exige uma extrema complexidade de seus componentes mecanicos para garantir a confiabilidade sob condicoes severas.",
+      "statement": "A longa inatividade dos relés em campo exige uma extrema complexidade de seus componentes mecânicos para garantir a confiabilidade sob condições severas.",
       "correctAnswer": false,
-      "explanation": "A inatividade longa exige o oposto: o equipamento de protecao deve ter simplicidade e robustez para nao falhar quando solicitado.",
+      "explanation": "A inatividade longa exige o oposto: o equipamento de proteção deve ter simplicidade e robustez para não falhar quando solicitado.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Uma das grandes vantagens dos reles digitais (IEDs) para manter alta disponibilidade e a presenca de sistemas de autoteste e ____ incorporados em seu algoritmo.",
+      "statement": "Uma das grandes vantagens dos relés digitais (IEDs) para manter alta disponibilidade é a presença de sistemas de autoteste e ____ incorporados em seu algoritmo.",
       "blanks": [
         {
           "index": 0,
           "answer": "autodiagnose"
         }
       ],
-      "explanation": "A confiabilidade dos IEDs e ampliada gracas as sub-rotinas de monitoramento continuo com autoteste e autodiagnose.",
+      "explanation": "A confiabilidade dos IEDs é ampliada graças às sub-rotinas de monitoramento contínuo com autoteste e autodiagnose.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "O releamento de primeira linha e suportado de forma redundante pelo releamento de retaguarda, que e tambem conhecido na literatura classica como releamento de ____.",
+      "statement": "O releamento de primeira linha é suportado de forma redundante pelo releamento de retaguarda, que é também conhecido na literatura clássica como releamento de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "socorro"
         }
       ],
-      "explanation": "O releamento de retaguarda e frequentemente denominado releamento de socorro para atuar em caso de falha primaria.",
+      "explanation": "O releamento de retaguarda é frequentemente denominado releamento de socorro para atuar em caso de falha primária.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Para manter alta disponibilidade da rede, os reles devem atuar rapidamente para diminuir a extensao do dano material e o tempo total de ____ dos consumidores.",
+      "statement": "Para manter alta disponibilidade da rede, os relés devem atuar rapidamente para diminuir a extensão do dano material e o tempo total de ____ dos consumidores.",
       "blanks": [
         {
           "index": 0,
           "answer": "paralisação"
         }
       ],
-      "explanation": "A rapidez e confiabilidade da protecao objetivam diminuir o tempo total de paralisacao do fornecimento de energia eletrica.",
+      "explanation": "A rapidez e confiabilidade da proteção objetivam diminuir o tempo total de paralisação do fornecimento de energia elétrica.",
       "difficulty": "hard"
     }
   ]

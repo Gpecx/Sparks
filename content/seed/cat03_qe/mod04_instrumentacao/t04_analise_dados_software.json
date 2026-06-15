@@ -1,42 +1,42 @@
 {
   "category": "Qualidade da Energia",
-  "categorySubtitle": "Fundamentos, Harmonicas, Transitorios, Medicao e Normas",
+  "categorySubtitle": "Fundamentos, Harmônicas, Transitórios, Medição e Normas",
   "categoryOrder": 2,
   "module": "Instrumentação e Medição de QE",
-  "moduleSubtitle": "Equipamentos, campanhas, analise e laudos",
+  "moduleSubtitle": "Equipamentos, campanhas, análise e laudos",
   "moduleOrder": 3,
   "trail": "Análise de Dados e Software de QE",
   "trailOrder": 3,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual e a principal limitacao da Transformada Rapida de Fourier (FFT) na analise e processamento de disturbios de qualidade da energia?",
+      "statement": "Qual é a principal limitação da Transformada Rápida de Fourier (FFT) na análise e processamento de distúrbios de qualidade da energia?",
       "options": [
-        "Nao processa sinais de corrente continua.",
-        "A informacao temporal fica indisponivel na representacao no dominio da frequencia.",
-        "Apenas funciona para sinais de baixissima frequencia.",
-        "Exige o uso de conversores eletromecanicos antigos para funcionar."
+        "Não processa sinais de corrente contínua.",
+        "A informação temporal fica indisponível na representação no domínio da frequência.",
+        "Apenas funciona para sinais de baixíssima frequência.",
+        "Exige o uso de conversores eletromecânicos antigos para funcionar."
       ],
       "correctIndex": 1,
-      "explanation": "A dissertacao do IFPB aponta que na FFT a representacao se da no dominio da frequencia e a informacao temporal fica indisponivel, dificultando a analise de sinais nao estacionarios.",
+      "explanation": "A dissertação do IFPB aponta que na FFT a representação se dá no domínio da frequência e a informação temporal fica indisponível, dificultando a análise de sinais não estacionários.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a tecnologia de computacao de borda (edge computing) beneficia os softwares e analisadores modernos de energia?",
+      "statement": "Como a tecnologia de computação de borda (edge computing) beneficia os softwares e analisadores modernos de energia?",
       "options": [
-        "Enviando todos os dados brutos para a nuvem antes de qualquer calculo algoritmico.",
-        "Processando informacoes localmente, minimizando a latencia em locais remotos.",
-        "Substituindo os processadores digitais por chaves de silicio mecanicas.",
-        "Isolando fisicamente o analisador da rede de telecomunicacoes."
+        "Enviando todos os dados brutos para a nuvem antes de qualquer cálculo algorítmico.",
+        "Processando informações localmente, minimizando a latência em locais remotos.",
+        "Substituindo os processadores digitais por chaves de silício mecânicas.",
+        "Isolando fisicamente o analisador da rede de telecomunicações."
       ],
       "correctIndex": 1,
-      "explanation": "O Guia Wrindu afirma que a integracao da computacao de borda permite que os analisadores processem informacoes localmente, minimizando a latencia em locais remotos.",
+      "explanation": "O Guia Wrindu afirma que a integração da computação de borda permite que os analisadores processem informações localmente, minimizando a latência em locais remotos.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na decomposicao avancada de sinais eletricos pelas tecnicas EMD e VMD, o que significa a sigla IMF?",
+      "statement": "Na decomposição avançada de sinais elétricos pelas técnicas EMD e VMD, o que significa a sigla IMF?",
       "options": [
         "Internal Measurement Factor",
         "Interference Modulation Frequency",
@@ -44,174 +44,174 @@
         "Integrated Machine Framework"
       ],
       "correctIndex": 2,
-      "explanation": "A dissertacao do IFPB define que essas tecnicas decompoem o sinal em Funcoes de Modo Intrinseco, traduzidas e referenciadas do ingles como Intrinsic Mode Function (IMF).",
+      "explanation": "A dissertação do IFPB define que essas técnicas decompõem o sinal em Funções de Modo Intrínseco, traduzidas e referenciadas do inglês como Intrinsic Mode Function (IMF).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Quais recursos graficos os softwares de analisadores de energia exibem em tempo real para rapida identificacao de falhas no monitoramento?",
+      "statement": "Quais recursos gráficos os softwares de analisadores de energia exibem em tempo real para rápida identificação de falhas no monitoramento?",
       "options": [
-        "Apenas valores binarios estaticos de tensao da rede.",
-        "Diagramas fasoriais, graficos de tendencia e alertas de eventos.",
-        "Simulacoes tridimensionais do aquecimento dos cabos e transformadores.",
-        "Impressoes em papel termico de todos os harmonicos medidos."
+        "Apenas valores binários estáticos de tensão da rede.",
+        "Diagramas fasoriais, gráficos de tendência e alertas de eventos.",
+        "Simulações tridimensionais do aquecimento dos cabos e transformadores.",
+        "Impressões em papel térmico de todos os harmônicos medidos."
       ],
       "correctIndex": 1,
-      "explanation": "Segundo o Guia Wrindu, os displays em tempo real dos analisadores exibem diagramas fasoriais, graficos de tendencia e alertas de eventos para rapida identificacao de falhas.",
+      "explanation": "Segundo o Guia Wrindu, os displays em tempo real dos analisadores exibem diagramas fasoriais, gráficos de tendência e alertas de eventos para rápida identificação de falhas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o papel inovador do aprendizado de maquina (machine learning) nos modernos softwares de gestao de qualidade de energia?",
+      "statement": "Qual é o papel inovador do aprendizado de máquina (machine learning) nos modernos softwares de gestão de qualidade de energia?",
       "options": [
         "Desconectar fisicamente a planta industrial da rede durante as madrugadas silenciosas.",
-        "Aprimorar a previsao da qualidade da energia, prevendo disturbios a partir de tendencias historicas.",
-        "Aumentar dinamicamente a amplitude dos transitorios para testes reais de estresse nos capacitores.",
-        "Substituir totalmente a necessidade de medicoes fisicas por suposicoes estatisticas programadas."
+        "Aprimorar a previsão da qualidade da energia, prevendo distúrbios a partir de tendências históricas.",
+        "Aumentar dinamicamente a amplitude dos transitórios para testes reais de estresse nos capacitores.",
+        "Substituir totalmente a necessidade de medições físicas por suposições estatísticas programadas."
       ],
       "correctIndex": 1,
-      "explanation": "O artigo sobre Analisadores da Wrindu ressalta que o aprendizado de maquina aprimora a previsao da qualidade da energia, prevendo disturbios a partir de tendencias historicas.",
+      "explanation": "O artigo sobre Analisadores da Wrindu ressalta que o aprendizado de máquina aprimora a previsão da qualidade da energia, prevendo distúrbios a partir de tendências históricas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual vantagem tecnica a Decomposicao Variacional de Modos (VMD) apresenta sobre a Decomposicao Empirica de Modos (EMD) ao processar sinais em ambientes ruidosos?",
+      "statement": "Qual vantagem técnica a Decomposição Variacional de Modos (VMD) apresenta sobre a Decomposição Empírica de Modos (EMD) ao processar sinais em ambientes ruidosos?",
       "options": [
-        "A EMD filtra todo o ruido branco perfeitamente, enquanto a VMD o amplifica exponencialmente.",
-        "A VMD apresenta maior capacidade de filtragem de ruido branco devido ao filtro de Wiener embutido em suas operacoes.",
-        "Ambos os algoritmos sao comprovadamente incapazes de processar ou separar sinais que possuam ruido residual.",
-        "A VMD utiliza apenas a media aritmetica dos picos passados ignorando sumariamente as fracoes de ruido do sinal."
+        "A EMD filtra todo o ruído branco perfeitamente, enquanto a VMD o amplifica exponencialmente.",
+        "A VMD apresenta maior capacidade de filtragem de ruído branco devido ao filtro de Wiener embutido em suas operações.",
+        "Ambos os algoritmos são comprovadamente incapazes de processar ou separar sinais que possuam ruído residual.",
+        "A VMD utiliza apenas a média aritmética dos picos passados ignorando sumariamente as frações de ruído do sinal."
       ],
       "correctIndex": 1,
-      "explanation": "O estudo do IFPB conclui que a VMD apresenta desempenho superior a EMD na filtragem de ruido porque um filtro de Wiener esta embutido no processo de atualizacao dos seus modos.",
+      "explanation": "O estudo do IFPB conclui que a VMD apresenta desempenho superior à EMD na filtragem de ruído porque um filtro de Wiener está embutido no processo de atualização dos seus modos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No estudo do IFPB voltado ao diagnostico inteligente, qual algoritmo de aprendizado de maquina foi associado as funcoes IMF da VMD para realizar a classificacao automatica dos disturbios?",
+      "statement": "No estudo do IFPB voltado ao diagnóstico inteligente, qual algoritmo de aprendizado de máquina foi associado às funções IMF da VMD para realizar a classificação automática dos distúrbios?",
       "options": [
-        "Redes Neurais Convolucionais de processamento optico (CNN)",
+        "Redes Neurais Convolucionais de processamento óptico (CNN)",
         "Support Vector Machine baseado em agrupamentos radiais (SVM)",
-        "Random Forest com execucao em arvores de decisao (RF)",
-        "K-Means Clustering agrupado por fatores minimos quadraticos"
+        "Random Forest com execução em árvores de decisão (RF)",
+        "K-Means Clustering agrupado por fatores mínimos quadráticos"
       ],
       "correctIndex": 2,
-      "explanation": "A dissertacao do IFPB baseia sua metodologia hibrida na classificacao de disturbios utilizando a tecnica da Decomposicao Variacional de Modos (VMD) associada ao algoritmo classificador Random Forest (RF).",
+      "explanation": "A dissertação do IFPB baseia sua metodologia híbrida na classificação de distúrbios utilizando a técnica da Decomposição Variacional de Modos (VMD) associada ao algoritmo classificador Random Forest (RF).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a Transformada de Fourier de Curta Duracao (STFT) tenta superar a limitacao atemporal da Fourier classica e qual acaba sendo o seu ponto fraco decorrente disso?",
+      "statement": "Como a Transformada de Fourier de Curta Duração (STFT) tenta superar a limitação atemporal da Fourier clássica e qual acaba sendo o seu ponto fraco decorrente disso?",
       "options": [
-        "Usa janelamento movel, mas a largura fixa desta janela compromete a resolucao flexivel entre tempo e frequencia.",
-        "Elimina o uso das janelas periodicas, porem exige processamento externo e exclusivo em servidores de nuvem.",
-        "Converte o sinal bruto para corrente continua de forma estrita, perdendo porem as representacoes de harmonicos pares.",
-        "Aplica derivadas parciais aleatorias no tempo, causando instabilidade e longos atrasos de processamento no sinal."
+        "Usa janelamento móvel, mas a largura fixa desta janela compromete a resolução flexível entre tempo e frequência.",
+        "Elimina o uso das janelas periódicas, porém exige processamento externo e exclusivo em servidores de nuvem.",
+        "Converte o sinal bruto para corrente contínua de forma estrita, perdendo porém as representações de harmônicos pares.",
+        "Aplica derivadas parciais aleatórias no tempo, causando instabilidade e longos atrasos de processamento no sinal."
       ],
       "correctIndex": 0,
-      "explanation": "A pesquisa do IFPB explica que a STFT usa janelamento movel para avaliar areas menores, mas a largura fixa da janela restringe os resultados limitando a flexibilidade para lidar com eventos muito curtos.",
+      "explanation": "A pesquisa do IFPB explica que a STFT usa janelamento móvel para avaliar áreas menores, mas a largura fixa da janela restringe os resultados limitando a flexibilidade para lidar com eventos muito curtos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na etapa de selecao e validacao de softwares para avaliacoes aprofundadas e relatorios de qualidade da energia, qual flexibilidade de compatibilidade o Guia Wrindu orienta verificar?",
+      "statement": "Na etapa de seleção e validação de softwares para avaliações aprofundadas e relatórios de qualidade da energia, qual flexibilidade de compatibilidade o Guia Wrindu orienta verificar?",
       "options": [
-        "Compatibilidade retroativa exclusiva com antigos sistemas operacionais de 16 bits para impressoras termicas.",
+        "Compatibilidade retroativa exclusiva com antigos sistemas operacionais de 16 bits para impressoras térmicas.",
         "Compatibilidade nativa do software do analisador com as planilhas do Excel ou o ambiente do MATLAB.",
-        "Integracao direta com softwares dedicados e restritos de edicao de imagens graficas tridimensionais (3D).",
-        "Dependencia estrita dos canais online e plataformas sociais para operacao de qualquer tipo de exportacao de relatorios."
+        "Integração direta com softwares dedicados e restritos de edição de imagens gráficas tridimensionais (3D).",
+        "Dependência estrita dos canais online e plataformas sociais para operação de qualquer tipo de exportação de relatórios."
       ],
       "correctIndex": 1,
-      "explanation": "O Guia de compra da Wrindu orienta que o comprador avalie sempre a compatibilidade do software do analisador de qualidade de energia com o Excel ou o MATLAB para facilitar a geracao de relatorios personalizados.",
+      "explanation": "O Guia de compra da Wrindu orienta que o comprador avalie sempre a compatibilidade do software do analisador de qualidade de energia com o Excel ou o MATLAB para facilitar a geração de relatórios personalizados.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No equacionamento matematico interno do algoritmo VMD para processamento computacional de sinais, como a largura de banda do sinal pertinente a cada modo intrinseco e devidamente estimada?",
+      "statement": "No equacionamento matemático interno do algoritmo VMD para processamento computacional de sinais, como a largura de banda do sinal pertinente a cada modo intrínseco é devidamente estimada?",
       "options": [
-        "Atraves da contagem iterativa e simples de cruzamentos por zero diretamente avaliada no plano principal do dominio do tempo.",
-        "Por meio quadrado da norma L2 do gradiente do sinal de demodulacao do termo obtido na analise.",
-        "Pelo calculo basico e exclusivo da amplitude de pico-a-pico do ruido gaussiano que sobra na amostra fundamental.",
-        "Apenas pela divisao direta do espectro fundamental pela frequencia de Nyquist que rege a limitacao temporal da amostragem."
+        "Através da contagem iterativa e simples de cruzamentos por zero diretamente avaliada no plano principal do domínio do tempo.",
+        "Por meio quadrado da norma L2 do gradiente do sinal de demodulação do termo obtido na análise.",
+        "Pelo cálculo básico e exclusivo da amplitude de pico-a-pico do ruído gaussiano que sobra na amostra fundamental.",
+        "Apenas pela divisão direta do espectro fundamental pela frequência de Nyquist que rege a limitação temporal da amostragem."
       ],
       "correctIndex": 1,
-      "explanation": "A dissertacao de pesquisa do IFPB detalha matematicamente que, no algoritmo VMD, a largura de banda do sinal de cada modo e estimada por meio quadrado da norma L2 do gradiente do sinal de demodulacao.",
+      "explanation": "A dissertação de pesquisa do IFPB detalha matematicamente que, no algoritmo VMD, a largura de banda do sinal de cada modo é estimada por meio quadrado da norma L2 do gradiente do sinal de demodulação.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A Transformada Rapida de Fourier (FFT) exibe desempenho adequadamente perfeito e detalhado para analises em tempo real de sinais nao estacionarios cuja frequencia varia, indicando instantaneamente quando uma VTCD se inicia.",
+      "statement": "A Transformada Rápida de Fourier (FFT) exibe desempenho adequadamente perfeito e detalhado para análises em tempo real de sinais não estacionários cuja frequência varia, indicando instantaneamente quando uma VTCD se inicia.",
       "correctAnswer": false,
-      "explanation": "O documento do IFPB assevera que a FFT nao e adequada para sinais nao estacionarios, pois na FFT a representacao ocorre puramente no dominio da frequencia, logo, a informacao temporal do instante exato do evento fica indisponivel.",
+      "explanation": "O documento do IFPB assevera que a FFT não é adequada para sinais não estacionários, pois na FFT a representação ocorre puramente no domínio da frequência, logo, a informação temporal do instante exato do evento fica indisponível.",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Em implementacoes modernas descritas na analise de engenharia, os softwares de qualidade de energia utilizam recursos de Inteligencia Artificial visando a deteccao de padroes de anomalias sutis que muitas vezes passam despercebidas pelas configuracoes de limites padroes.",
+      "statement": "Em implementações modernas descritas na análise de engenharia, os softwares de qualidade de energia utilizam recursos de Inteligência Artificial visando a detecção de padrões de anomalias sutis que muitas vezes passam despercebidas pelas configurações de limites padrões.",
       "correctAnswer": true,
-      "explanation": "O texto tecnico do Guia Wrindu atesta com clareza que a deteccao de anomalias baseada em IA, presente em softwares de ultima geracao, atua eficazmente identificando padroes sutis que normalmente passam despercebidos pelos limites convencionais estabelecidos.",
+      "explanation": "O texto técnico do Guia Wrindu atesta com clareza que a detecção de anomalias baseada em IA, presente em softwares de última geração, atua eficazmente identificando padrões sutis que normalmente passam despercebidos pelos limites convencionais estabelecidos.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Submetido a testes simulados com elevada carga de ruidos brancos na instalacao, o metodo da Decomposicao Empirica de Modos (EMD) demonstrou ser um instrumento totalmente imune a ruidos em virtude de sua logica de envolventes empiricas sem falhas de alocacao.",
+      "statement": "Submetido a testes simulados com elevada carga de ruídos brancos na instalação, o método da Decomposição Empírica de Modos (EMD) demonstrou ser um instrumento totalmente imune a ruídos em virtude de sua lógica de envolventes empíricas sem falhas de alocação.",
       "correctAnswer": false,
-      "explanation": "A dissertacao de pesquisa do IFPB atesta fatos opostos, indicando que as tecnicas baseadas em EMD sao altamente sensiveis ao ruido, resultando em situacoes onde as frequencias nao sao alocadas apropriadamente ocasionando distorcoes na decomposicao dos sinais originais.",
+      "explanation": "A dissertação de pesquisa do IFPB atesta fatos opostos, indicando que as técnicas baseadas em EMD são altamente sensíveis ao ruído, resultando em situações onde as frequências não são alocadas apropriadamente ocasionando distorções na decomposição dos sinais originais.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "No processo construtivo das matrizes de treino para as arvores de decisao da tecnica Random Forest, atributos fundamentais como a energia do sinal, o grau de curtose, o coeficiente de assimetria e a taxa de cruzamento por zeros (TCZ) sao retirados das funcoes IMF para identificar cada disturbio.",
+      "statement": "No processo construtivo das matrizes de treino para as árvores de decisão da técnica Random Forest, atributos fundamentais como a energia do sinal, o grau de curtose, o coeficiente de assimetria e a taxa de cruzamento por zeros (TCZ) são retirados das funções IMF para identificar cada distúrbio.",
       "correctAnswer": true,
-      "explanation": "A dissertacao analitica do IFPB elenca em suas metodologias exatas que as caracteristicas (atributos) extraidas de cada sinal decomposto pela IMF para o reconhecimento de padroes com o Random Forest abrangem a TCZ, a energia, a Curtose e Skewness, entre outros limites e metricas.",
+      "explanation": "A dissertação analítica do IFPB elenca em suas metodologias exatas que as características (atributos) extraídas de cada sinal decomposto pela IMF para o reconhecimento de padrões com o Random Forest abrangem a TCZ, a energia, a Curtose e Skewness, entre outros limites e métricas.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Na aplicacao pratica das etapas numericas para promover a decomposicao na VMD, o sinal analitico submetido requer a solucao restrita de um problema de otimizacao variacional que se torna viavel atraves da insercao programada de penalidades quadraticas associadas aos conhecidos multiplicadores Lagrangianos.",
+      "statement": "Na aplicação prática das etapas numéricas para promover a decomposição na VMD, o sinal analítico submetido requer a solução restrita de um problema de otimização variacional que se torna viável através da inserção programada de penalidades quadráticas associadas aos conhecidos multiplicadores Lagrangianos.",
       "correctAnswer": true,
-      "explanation": "O estudo metodologico formal contido no material do IFPB descreve essa matematica especifica apontando que para resolver satisfatoriamente o problema de otimizacao restrito exposto pela VMD, sao inseridas operacoes com a penalidade quadratica conjunta aos multiplicadores Lagrangianos.",
+      "explanation": "O estudo metodológico formal contido no material do IFPB descreve essa matemática específica apontando que para resolver satisfatoriamente o problema de otimização restrito exposto pela VMD, são inseridas operações com a penalidade quadrática conjunta aos multiplicadores Lagrangianos.",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Operando no ambito da modelagem do futuro e antecipacao a danos latentes das falhas de rede, observa-se nos sistemas em evolucao que o aprendizado de maquina aprimora a previsao da qualidade da energia ao extrapolar previsoes de ocorrencia de disturbios orientadas por valiosas tendencias ____ das instalacoes.",
+      "statement": "Operando no âmbito da modelagem do futuro e antecipação a danos latentes das falhas de rede, observa-se nos sistemas em evolução que o aprendizado de máquina aprimora a previsão da qualidade da energia ao extrapolar previsões de ocorrência de distúrbios orientadas por valiosas tendências ____ das instalações.",
       "blanks": [
         {
           "index": 0,
           "answer": "historicas"
         }
       ],
-      "explanation": "O artigo guia da Wrindu especifica objetivamente em seu topico de tecnologias fundamentais que o algoritmo atrelado ao aprendizado de maquina aprimora a previsao operacional da qualidade da energia ao prever disturbios a partir de tendencias historicas acumuladas do sistema local.",
+      "explanation": "O artigo guia da Wrindu especifica objetivamente em seu tópico de tecnologias fundamentais que o algoritmo atrelado ao aprendizado de máquina aprimora a previsão operacional da qualidade da energia ao prever distúrbios a partir de tendências históricas acumuladas do sistema local.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Considerando os artificios estatisticos propostos para mitigar as lacunas e limitacoes inerentes a resolucao da Fourier classica, a tecnica nominada STFT insere na decomposicao a abordagem estendida sobre os limites atraves de mecanismos baseados num artificio de ____ movel em virtude do eixo temporal do sinal.",
+      "statement": "Considerando os artifícios estatísticos propostos para mitigar as lacunas e limitações inerentes à resolução da Fourier clássica, a técnica nominada STFT insere na decomposição a abordagem estendida sobre os limites através de mecanismos baseados num artifício de ____ móvel em virtude do eixo temporal do sinal.",
       "blanks": [
         {
           "index": 0,
           "answer": "janelamento"
         }
       ],
-      "explanation": "A revisao de tecnicas classicas documentada pela dissertacao do IFPB aponta que a STFT ou Fourier de Curta Duracao aplica e lida intrinsecamente com restricoes de operacao valendo-se das abordagens envolvendo tecnicas de janelamento movel ao longo do eixo do tempo.",
+      "explanation": "A revisão de técnicas clássicas documentada pela dissertação do IFPB aponta que a STFT ou Fourier de Curta Duração aplica e lida intrinsecamente com restrições de operação valendo-se das abordagens envolvendo técnicas de janelamento móvel ao longo do eixo do tempo.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Nos calculos que descrevem intimamente a robustez proporcionada pela metodologia dos subespacos presentes na tecnica Variacional, a equacao do procedimento interativo de atualizacao dos modos assemelha-se integralmente a acao limpadora garantida pelas passagens frequenciais conhecidas pela operacao por filtro passa-baixa de ____ em cada passo gerado.",
+      "statement": "Nos cálculos que descrevem intimamente a robustez proporcionada pela metodologia dos subespaços presentes na técnica Variacional, a equação do procedimento interativo de atualização dos modos assemelha-se integralmente à ação limpadora garantida pelas passagens frequenciais conhecidas pela operação por filtro passa-baixa de ____ em cada passo gerado.",
       "blanks": [
         {
           "index": 0,
           "answer": "Wiener"
         }
       ],
-      "explanation": "Conforme explicitado pelo equacionamento da atualizacao do dominio espectral providenciado na literatura do IFPB, tal procedimento pode ser diretamente identificado em engenharia como a submissao a um filtro passa-baixa de Wiener centralizado em torno da frequencia requerida, propiciando imunidade extra a ruidos no arranjo.",
+      "explanation": "Conforme explicitado pelo equacionamento da atualização do domínio espectral providenciado na literatura do IFPB, tal procedimento pode ser diretamente identificado em engenharia como a submissão a um filtro passa-baixa de Wiener centralizado em torno da frequência requerida, propiciando imunidade extra a ruídos no arranjo.",
       "difficulty": "hard"
     }
   ]

@@ -93,7 +93,7 @@
         "Todo o calor proveniente da falta é retido de modo adiabático na massa condutora.",
         "A corrente nominal excedente é dissipada rapidamente no ar circundante por irradiação livre.",
         "A isolação plástica refrigera ativamente a temperatura de crista do núcleo trançado.",
-        "As fortes forcas de repulsão eletromagnética cancelam perfeitamente as perdas termicas superficiais."
+        "As fortes forças de repulsão eletromagnética cancelam perfeitamente as perdas térmicas superficiais."
       ],
       "correctIndex": 0,
       "explanation": "Dada a extrema rapidez da interrupção da proteção, o aquecimento é classificado como adiabático, com retenção integral do calor no cabo.",
@@ -127,7 +127,7 @@
     },
     {
       "type": "multipleChoice",
-      "statement": "Na verificação final da sensibilidade da proteção por meio do curto-circuito mínimo fase para terra, qual é o artificio comumente empregado nos.",
+      "statement": "Na verificação final da sensibilidade da proteção por meio do curto-circuito mínimo fase para terra, qual é o artifício comumente empregado nos.",
       "options": [
         "Aumentar artificialmente o fator de assimetria exponencial da componente contínua total do ramo.",
         "Anular integralmente os acoplamentos mútuos das linhas de transmissão físicas paralelas adjacentes.",
@@ -174,7 +174,7 @@
       "type": "trueFalse",
       "statement": "Na certificação avaliativa térmica atrelada a barramentos de energia, os parâmetros técnicos dimensionais normativos representados pelo índice m e.",
       "correctAnswer": false,
-      "explanation": "No cômputo restritivo das equações calóricas, o referido fator normativo m contabiliza estritamente os efeitos exponenciais amortecidos da componente contínua asssimétrica da corrente ao passo que a parcela n reflete a degradação e a atenuação gradual experimentada unicamente pela porção alternada.",
+      "explanation": "No cômputo restritivo das equações calóricas, o referido fator normativo m contabiliza estritamente os efeitos exponenciais amortecidos da componente contínua assimétrica da corrente ao passo que a parcela n reflete a degradação e a atenuação gradual experimentada unicamente pela porção alternada.",
       "difficulty": "hard",
       "isTrue": false
     },

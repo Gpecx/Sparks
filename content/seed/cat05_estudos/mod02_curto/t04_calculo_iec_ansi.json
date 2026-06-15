@@ -10,208 +10,208 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual teorema fornece a base conceitual primaria para o calculo de curtos-circuitos ao determinar a impedancia equivalente e a fonte de tensao no.",
+      "statement": "Qual teorema fornece a base conceitual primária para o cálculo de curtos-circuitos ao determinar a impedância equivalente e a fonte de tensão no.",
       "options": [
-        "Teorema de Thevenin.",
-        "Teorema da Superposicao.",
+        "Teorema de Thévenin.",
+        "Teorema da Superposição.",
         "Teorema de Fortescue.",
         "Teorema de Norton."
       ],
       "correctIndex": 0,
-      "explanation": "O teorema de Thevenin fundamenta a analise nodal de curto-circuito ao reduzir o sistema a uma fonte de tensao em circuito aberto em serie com uma impedancia equivalente.",
+      "explanation": "O teorema de Thévenin fundamenta a análise nodal de curto-circuito ao reduzir o sistema a uma fonte de tensão em circuito aberto em série com uma impedância equivalente.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo as definicoes da recomendacao internacional CEI 909, o que representa a grandeza corrente inicial simetrica de curto-circuito?",
+      "statement": "Segundo as definições da recomendação internacional CEI 909, o que representa a grandeza corrente inicial simétrica de curto-circuito?",
       "options": [
-        "O valor medio da envolvente decrescente de corrente continua.",
-        "O valor eficaz da componente simetrica alternada no instante inicial do defeito.",
-        "O pico absoluto medido na fase mais assimetrica da rede emalhada.",
-        "A corrente termica nominal suportada durante tres segundos no barramento."
+        "O valor médio da envolvente decrescente de corrente contínua.",
+        "O valor eficaz da componente simétrica alternada no instante inicial do defeito.",
+        "O pico absoluto medido na fase mais assimétrica da rede emalhada.",
+        "A corrente térmica nominal suportada durante três segundos no barramento."
       ],
       "correctIndex": 1,
-      "explanation": "A norma define a corrente inicial simetrica como o valor eficaz da componente simetrica alternada calculada no exato instante da ocorrencia da falta.",
+      "explanation": "A norma define a corrente inicial simétrica como o valor eficaz da componente simétrica alternada calculada no exato instante da ocorrência da falta.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No metodo de calculo preconizado pela norma CEI 909, qual e a principal finalidade da adocao do fator c de tensao?",
+      "statement": "No método de cálculo preconizado pela norma CEI 909, qual é a principal finalidade da adoção do fator c de tensão?",
       "options": [
-        "Ajustar a relacao entre reatancia e resistencia dos cabos subterraneos.",
-        "Modelar a atenuacao da componente de corrente continua ao longo do tempo.",
-        "Corrigir o valor da fonte de tensao equivalente em circuito aberto no ponto da falta.",
-        "Compensar as variacoes de frequencia industrial durante oscilacoes eletromecanicas."
+        "Ajustar a relação entre reatância e resistência dos cabos subterrâneos.",
+        "Modelar a atenuação da componente de corrente contínua ao longo do tempo.",
+        "Corrigir o valor da fonte de tensão equivalente em circuito aberto no ponto da falta.",
+        "Compensar as variações de frequência industrial durante oscilações eletromecânicas."
       ],
       "correctIndex": 2,
-      "explanation": "O fator c e utilizado na norma para ajustar a tensao nominal gerando uma fonte de tensao de Thevenin equivalente realista para o cenario pre-falta.",
+      "explanation": "O fator c é utilizado na norma para ajustar a tensão nominal gerando uma fonte de tensão de Thévenin equivalente realista para o cenário pré-falta.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual grandeza define o limite do aquecimento admissivel suportado pelo equipamento durante um tempo especifico nas especificacoes de curto-circuito.",
+      "statement": "Qual grandeza define o limite do aquecimento admissível suportado pelo equipamento durante um tempo específico nas especificações de curto-circuito.",
       "options": [
-        "A potencia inicial simetrica equivalente.",
-        "A corrente simetrica de interrupcao.",
-        "A corrente maxima de crista de estabelecimento.",
-        "A corrente de curta duracao eficaz."
+        "A potência inicial simétrica equivalente.",
+        "A corrente simétrica de interrupção.",
+        "A corrente máxima de crista de estabelecimento.",
+        "A corrente de curta duração eficaz."
       ],
       "correctIndex": 3,
-      "explanation": "A corrente de curta duracao eficaz delimita a capacidade termica que a instalacao tolera sem danos em um intervalo padronizado como um segundo.",
+      "explanation": "A corrente de curta duração eficaz delimita a capacidade térmica que a instalação tolera sem danos em um intervalo padronizado como um segundo.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Por que o uso de softwares dedicados tornou-se imprescindivel para a analise completa e moderna de curtos-circuitos em sistemas de potencia?",
+      "statement": "Por que o uso de softwares dedicados tornou-se imprescindível para a análise completa e moderna de curtos-circuitos em sistemas de potência?",
       "options": [
-        "Devido a imensa dimensao do sistema interligado e a necessidade de resolver extensas matrizes simultaneamente.",
-        "Porque o metodo manual nao suporta regimentos analiticos para faltas bifasicas isoladas.",
-        "Pois os programas sao os unicos meios legais reconhecidos pelos comites certificadores internacionais.",
-        "Porque os modelos analiticos falham em calcular fasores de tensao em redes puramente radiais."
+        "Devido à imensa dimensão do sistema interligado e à necessidade de resolver extensas matrizes simultaneamente.",
+        "Porque o método manual não suporta regimentos analíticos para faltas bifásicas isoladas.",
+        "Pois os programas são os únicos meios legais reconhecidos pelos comitês certificadores internacionais.",
+        "Porque os modelos analíticos falham em calcular fasores de tensão em redes puramente radiais."
       ],
       "correctIndex": 0,
-      "explanation": "As grandes dimensoes dos sistemas reais e a necessidade de computar dezenas ou milhares de fluxos e tensoes nodais impossibilitam as operacoes manuais diretas.",
+      "explanation": "As grandes dimensões dos sistemas reais e a necessidade de computar dezenas ou milhares de fluxos e tensões nodais impossibilitam as operações manuais diretas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que define a grandeza denominada corrente simetrica cortada segundo os preceitos da norma CEI 909?",
+      "statement": "O que define a grandeza denominada corrente simétrica cortada segundo os preceitos da norma CEI 909?",
       "options": [
-        "A corrente nominal exigida pelas cargas de impedancia constante instaladas a jusante.",
-        "O valor eficaz de um ciclo da componente simetrica no instante da separacao dos contatos do disjuntor.",
-        "O pico maximo transitorio suportado pelas buchas dos transformadores rebaixadores.",
-        "A fracao puramente resistiva extraida pelo relatorio de estabilidade termica."
+        "A corrente nominal exigida pelas cargas de impedância constante instaladas a jusante.",
+        "O valor eficaz de um ciclo da componente simétrica no instante da separação dos contatos do disjuntor.",
+        "O pico máximo transitório suportado pelas buchas dos transformadores rebaixadores.",
+        "A fração puramente resistiva extraída pelo relatório de estabilidade térmica."
       ],
       "correctIndex": 1,
-      "explanation": "A corrente simetrica cortada ou de interrupcao reflete o valor eficaz da parcela alternada exatamente quando os contatos do disjuntor iniciam a abertura.",
+      "explanation": "A corrente simétrica cortada ou de interrupção reflete o valor eficaz da parcela alternada exatamente quando os contatos do disjuntor iniciam a abertura.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No metodo de simulacao da CEI 909 para faltas distantes dos geradores, como o valor maximo da corrente de pico e apurado?",
+      "statement": "No método de simulação da CEI 909 para faltas distantes dos geradores, como o valor máximo da corrente de pico é apurado?",
       "options": [
-        "Subtraindo o fator kappa da admitancia de sequencia zero nodal.",
-        "Dividindo a tensao pre-falta pela raiz quadrada da frequencia fundamental do sistema.",
-        "Multiplicando a corrente inicial simetrica por um fator kappa e pela constante raiz de dois.",
-        "Somando a componente aperiodica ao longo de todo o tempo de atraso direcional."
+        "Subtraindo o fator kappa da admitância de sequência zero nodal.",
+        "Dividindo a tensão pré-falta pela raiz quadrada da frequência fundamental do sistema.",
+        "Multiplicando a corrente inicial simétrica por um fator kappa e pela constante raiz de dois.",
+        "Somando a componente aperiódica ao longo de todo o tempo de atraso direcional."
       ],
       "correctIndex": 2,
-      "explanation": "O pico absoluto assimetrico e estimado tomando-se o valor inicial simetrico vezes a raiz de dois e aplicando o fator multiplicativo kappa que insere a componente continua.",
+      "explanation": "O pico absoluto assimétrico é estimado tomando-se o valor inicial simétrico vezes a raiz de dois e aplicando o fator multiplicativo kappa que insere a componente contínua.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nas metodologias baseadas na norma ANSI C37, a extracao de dados da rede simulada no primeiro meio ciclo destina-se primariamente a qual finalidade?",
+      "statement": "Nas metodologias baseadas na norma ANSI C37, a extração de dados da rede simulada no primeiro meio ciclo destina-se primariamente a qual finalidade?",
       "options": [
-        "Dimensionar o ajuste das chaves fusiveis de acao ultra-lenta nos ramais secundários.",
-        "Definir unicamente a corrente de excitacao de reatores shunt compensadores.",
-        "Estimar as perdas termicas de estado estacionario que aquecerao as isolacoes dos cabos.",
-        "Determinar as correntes subtransitorias e assimetricas para dimensionar a suportabilidade aos esforcos mecanicos."
+        "Dimensionar o ajuste das chaves fusíveis de ação ultra-lenta nos ramais secundários.",
+        "Definir unicamente a corrente de excitação de reatores shunt compensadores.",
+        "Estimar as perdas térmicas de estado estacionário que aquecerão as isolações dos cabos.",
+        "Determinar as correntes subtransitórias e assimétricas para dimensionar a suportabilidade aos esforços mecânicos."
       ],
       "correctIndex": 3,
-      "explanation": "O calculo de curto-circuito no primeiro meio ciclo computa os maiores valores instantaneos de crista determinando o esforco mecanico suportavel pelos equipamentos.",
+      "explanation": "O cálculo de curto-circuito no primeiro meio ciclo computa os maiores valores instantâneos de crista determinando o esforço mecânico suportável pelos equipamentos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na definicao do fator de pico kappa, a norma internacional aponta que seu multiplicador depende diretamente de qual parametro na rede?",
+      "statement": "Na definição do fator de pico kappa, a norma internacional aponta que seu multiplicador depende diretamente de qual parâmetro na rede?",
       "options": [
-        "Da relacao entre a reatancia e a resistencia equivalente no ponto sob defeito.",
-        "Do decaimento exponencial do torque do motor primario das usinas proximas.",
-        "Exclusivamente da capacitancia parasita concentrada no trecho a montante do neutro.",
+        "Da relação entre a reatância e a resistência equivalente no ponto sob defeito.",
+        "Do decaimento exponencial do torque do motor primário das usinas próximas.",
+        "Exclusivamente da capacitância parasita concentrada no trecho a montante do neutro.",
         "Da exata topologia dos transformadores de instrumento interligados ao disjuntor."
       ],
       "correctIndex": 0,
-      "explanation": "O fator que simula a maxima assimetria depende do tempo de amortecimento da componente continua regido pela relacao reatancia sobre resistencia equivalente da malha.",
+      "explanation": "O fator que simula a máxima assimetria depende do tempo de amortecimento da componente contínua regido pela relação reatância sobre resistência equivalente da malha.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual premissa base e rigidamente adotada pela recomendacao CEI 909 na modelagem de curtos-circuitos classificados como longe dos alternadores?",
+      "statement": "Qual premissa base é rigidamente adotada pela recomendação CEI 909 na modelagem de curtos-circuitos classificados como longe dos alternadores?",
       "options": [
-        "O afundamento das forcas eletromotrizes atinge quase zero nos tres primeiros ciclos de operacao isolada.",
-        "O valor eficaz da componente simetrica forcada nao se altera e permanece constante durante o defeito.",
-        "A impedancia vista a partir da barra faltosa exibe caracteristicas estritamente capacitivas de avanco.",
-        "Ocorre um declinio acentuado e ininterrupto na magnitude eficaz ate a extincao do arco eletrico em malha fechada."
+        "O afundamento das forças eletromotrizes atinge quase zero nos três primeiros ciclos de operação isolada.",
+        "O valor eficaz da componente simétrica forçada não se altera e permanece constante durante o defeito.",
+        "A impedância vista a partir da barra faltosa exibe características estritamente capacitivas de avanço.",
+        "Ocorre um declínio acentuado e ininterrupto na magnitude eficaz até a extinção do arco elétrico em malha fechada."
       ],
       "correctIndex": 1,
-      "explanation": "Por estarem eletricamente distantes a reatancia variavel das maquinas nao domina o circuito resultando em uma componente alternada simetrica constante no tempo.",
+      "explanation": "Por estarem eletricamente distantes a reatância variável das máquinas não domina o circuito resultando em uma componente alternada simétrica constante no tempo.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A aplicacao do metodo de componentes simetricas converte matematicamente uma falta assimetrica da rede trifasica em tres modelos de sequencias.",
+      "statement": "A aplicação do método de componentes simétricas converte matematicamente uma falta assimétrica da rede trifásica em três modelos de sequências.",
       "correctAnswer": true,
-      "explanation": "O Teorema de Fortescue prova que tensoes e correntes desbalanceadas podem ser sintetizadas como a superposicao de tres conjuntos de fasores balanceados chamados sequencias.",
+      "explanation": "O Teorema de Fortescue prova que tensões e correntes desbalanceadas podem ser sintetizadas como a superposição de três conjuntos de fasores balanceados chamados sequências.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Nos simuladores padrao ANSI e IEEE a componente continua assimetrica de uma corrente de falta decai exponencialmente conforme uma constante de.",
+      "statement": "Nos simuladores padrão ANSI e IEEE a componente contínua assimétrica de uma corrente de falta decai exponencialmente conforme uma constante de.",
       "correctAnswer": false,
-      "explanation": "O decaimento exponencial baseia-se na constante de tempo da malha que e regida pela relacao reatancia sobre resistencia equivalente e nao pelo patamar de tensao nominal.",
+      "explanation": "O decaimento exponencial baseia-se na constante de tempo da malha que é regida pela relação reatância sobre resistência equivalente e não pelo patamar de tensão nominal.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A introducao do fator de tensao c nos calculos baseados na IEC 60909 objetiva corrigir o modelo fisico estatico e estabelecer a correta tensao de.",
+      "statement": "A introdução do fator de tensão c nos cálculos baseados na IEC 60909 objetiva corrigir o modelo físico estático e estabelecer a correta tensão de.",
       "correctAnswer": true,
-      "explanation": "O fator c pre-multiplica a tensao de suprimento modelando com seguranca as possiveis variacoes do perfil e garantindo a representatividade real da fonte de Thevenin.",
+      "explanation": "O fator c pré-multiplica a tensão de suprimento modelando com segurança as possíveis variações do perfil e garantindo a representatividade real da fonte de Thévenin.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O calculo exato do pico maximo utilizando o fator kappa no padrao IEC pressupoe que a relacao de reatancia sobre resistencia varia drasticamente e.",
+      "statement": "O cálculo exato do pico máximo utilizando o fator kappa no padrão IEC pressupõe que a relação de reatância sobre resistência varia drasticamente e.",
       "correctAnswer": false,
-      "explanation": "Para que o uso do fator unificado k seja perfeitamente valido a norma assume que a relacao X sobre R da rede nao varie drasticamente ao longo dos ramos emalhados sob analise.",
+      "explanation": "Para que o uso do fator unificado k seja perfeitamente válido a norma assume que a relação X sobre R da rede não varie drasticamente ao longo dos ramos emalhados sob análise.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Nas diretrizes descritas pela CEI 909 visando agilizar o calculo das correntes iniciais as parcelas de resistencia puramente condutiva das linhas e.",
+      "statement": "Nas diretrizes descritas pela CEI 909 visando agilizar o cálculo das correntes iniciais as parcelas de resistência puramente condutiva das linhas e.",
       "correctAnswer": false,
-      "explanation": "A norma e os textos destacam o risco deste erro afirmando que a resistencia nao e ignorada visto que principalmente nas redes de baixa tensao ela desempenha papel limitador preponderante.",
+      "explanation": "A norma e os textos destacam o risco deste erro afirmando que a resistência não é ignorada visto que principalmente nas redes de baixa tensão ela desempenha papel limitador preponderante.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Na recomendacao CEI 909 a base adotada para deflagrar as rotinas de calculo nodal em regime e o consagrado teorema de ____, construindo o circuito.",
+      "statement": "Na recomendação CEI 909 a base adotada para deflagrar as rotinas de cálculo nodal em regime é o consagrado teorema de ____, construindo o circuito.",
       "blanks": [
         {
           "index": 0,
           "answer": "Thevenin"
         }
       ],
-      "explanation": "O alicerce da resolucao linear de falta apoia-se em sintetizar todo o sistema a montante em uma unica fonte e impedancia pelo respectivo modelo theveniniano de portas.",
+      "explanation": "O alicerce da resolução linear de falta apoia-se em sintetizar todo o sistema a montante em uma única fonte e impedância pelo respectivo modelo theveniniano de portas.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A grandeza definida como valor eficaz de um ciclo da componente alternada extraida no exato instante inicial de separacao dos contatos do aparelho ____.",
+      "statement": "A grandeza definida como valor eficaz de um ciclo da componente alternada extraída no exato instante inicial de separação dos contatos do aparelho ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "cortada"
         }
       ],
-      "explanation": "As grandezas de interrupcao regidas pelo padrao europeu sao tecnicamente denominadas como corrente simetrica de curto-circuito cortada designando o esforco enfrentado no exato cume da cisao fisica.",
+      "explanation": "As grandezas de interrupção regidas pelo padrão europeu são tecnicamente denominadas como corrente simétrica de curto-circuito cortada designando o esforço enfrentado no exato cume da cisão física.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Para embutir o maximo pico de assimetria nas correntes totais sem computar as transicoes infinitesimais a norma CEI 909 eleva o patamar inicial ____.",
+      "statement": "Para embutir o máximo pico de assimetria nas correntes totais sem computar as transições infinitesimais a norma CEI 909 eleva o patamar inicial ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "k"
         }
       ],
-      "explanation": "A equacao normativa para estimar a maxima exposicao as forcas repulsivas de crista multiplica o modulo eficaz inicial puro pela crista senoidal e o fator k proveniente do amortecimento exponencial.",
+      "explanation": "A equação normativa para estimar a máxima exposição às forças repulsivas de crista multiplica o módulo eficaz inicial puro pela crista senoidal e o fator k proveniente do amortecimento exponencial.",
       "difficulty": "hard"
     }
   ]

@@ -10,177 +10,177 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Na fixacao do equipamento global de um sistema, o que deve ser considerado inicialmente para o planejamento?",
+      "statement": "Na fixação do equipamento global de um sistema, o que deve ser considerado inicialmente para o planejamento?",
       "options": [
-        "A diminuicao da capacidade instalada.",
-        "A previsao de crescimento do consumo.",
-        "O fator de demanda dos reles de protecao.",
-        "O isolamento dos cabos de comunicacao de dados."
+        "A diminuição da capacidade instalada.",
+        "A previsão de crescimento do consumo.",
+        "O fator de demanda dos relés de proteção.",
+        "O isolamento dos cabos de comunicação de dados."
       ],
       "correctIndex": 1,
-      "explanation": "Na fixacao do equipamento global ja e considerada a previsao de crescimento do consumo (carga).",
+      "explanation": "Na fixação do equipamento global já é considerada a previsão de crescimento do consumo (carga).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual equipamento e utilizado nas redes para compensar a energia reativa absorvida pelas cargas?",
+      "statement": "Qual equipamento é utilizado nas redes para compensar a energia reativa absorvida pelas cargas?",
       "options": [
         "Transformador de potencial.",
-        "Rele direcional de potencia.",
+        "Relé direcional de potência.",
         "Capacitor.",
         "Bobina de Petersen."
       ],
       "correctIndex": 2,
-      "explanation": "Os capacitores compensam a energia reativa absorvida, melhorando o fator de potencia e a qualidade da rede.",
+      "explanation": "Os capacitores compensam a energia reativa absorvida, melhorando o fator de potência e a qualidade da rede.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que a partida de um motor eletrico provoca diretamente na rede de alimentacao?",
+      "statement": "O que a partida de um motor elétrico provoca diretamente na rede de alimentação?",
       "options": [
-        "Queda na frequencia fundamental do sistema.",
-        "Perda de sincronismo das maquinas adjacentes.",
+        "Queda na frequência fundamental do sistema.",
+        "Perda de sincronismo das máquinas adjacentes.",
         "Aumento imediato do fator de diversidade.",
-        "Sobrecorrentes elevadas de curta duracao."
+        "Sobrecorrentes elevadas de curta duração."
       ],
       "correctIndex": 3,
-      "explanation": "A partida de carga motriz provoca sobrecorrentes elevadas que sao admissiveis por serem de curta duracao.",
+      "explanation": "A partida de carga motriz provoca sobrecorrentes elevadas que são admissíveis por serem de curta duração.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que ocorre no sistema quando o deficit de potencia disponivel e superado pela demanda de potencia da rede?",
+      "statement": "O que ocorre no sistema quando o déficit de potência disponível é superado pela demanda de potência da rede?",
       "options": [
-        "Queda anormal da tensao e da frequencia.",
+        "Queda anormal da tensão e da frequência.",
         "Aumento repentino do fator de simultaneidade.",
         "Queima imediata dos bancos de capacitores.",
-        "Reducao brusca das correntes de curto-circuito."
+        "Redução brusca das correntes de curto-circuito."
       ],
       "correctIndex": 0,
-      "explanation": "O deficit de potencia disponivel frente a demanda provoca queda anormal de tensao e frequencia.",
+      "explanation": "O déficit de potência disponível frente à demanda provoca queda anormal de tensão e frequência.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a consequencia direta se a potencia requerida pela carga tracionada for mais elevada que a potencia nominal do motor?",
+      "statement": "Qual é a consequência direta se a potência requerida pela carga tracionada for mais elevada que a potência nominal do motor?",
       "options": [
-        "Reducao permanente do escorregamento do rotor.",
-        "Sobrecorrente, aumento de perdas e elevacao de temperatura.",
-        "Aumento da tensao nos terminais do estator.",
-        "Melhoria do fator de potencia capacitivo."
+        "Redução permanente do escorregamento do rotor.",
+        "Sobrecorrente, aumento de perdas e elevação de temperatura.",
+        "Aumento da tensão nos terminais do estator.",
+        "Melhoria do fator de potência capacitivo."
       ],
       "correctIndex": 1,
-      "explanation": "Potencia requerida maior que a nominal gera sobrecarga, sobrecorrente, aumento de perdas e aquecimento.",
+      "explanation": "Potência requerida maior que a nominal gera sobrecarga, sobrecorrente, aumento de perdas e aquecimento.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como e calculada a corrente nominal de carga trifasica de um projeto para dimensionamento e ajuste?",
+      "statement": "Como é calculada a corrente nominal de carga trifásica de um projeto para dimensionamento e ajuste?",
       "options": [
-        "Potencia dividida pela tensao de linha.",
-        "Potencia multiplicada pela tensao e raiz de tres.",
-        "Potencia dividida pela raiz de tres vezes a tensao de linha.",
-        "Tensao de fase dividida pela potencia vezes raiz de dois."
+        "Potência dividida pela tensão de linha.",
+        "Potência multiplicada pela tensão e raiz de três.",
+        "Potência dividida pela raiz de três vezes a tensão de linha.",
+        "Tensão de fase dividida pela potência vezes raiz de dois."
       ],
       "correctIndex": 2,
-      "explanation": "A corrente nominal trifasica de projeto e calculada pela formula In = P / (raiz de 3 x U).",
+      "explanation": "A corrente nominal trifásica de projeto é calculada pela fórmula In = P / (raiz de 3 x U).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em condicoes normais, como a carga real demandada de um alimentador se compara a capacidade total dos equipamentos instalados?",
+      "statement": "Em condições normais, como a carga real demandada de um alimentador se compara à capacidade total dos equipamentos instalados?",
       "options": [
-        "E sempre superior devido as perdas de transformacao.",
-        "E igual a soma das potencias nominais de todas as cargas.",
-        "E consideravelmente menor devido a diversidade entre as cargas.",
-        "E o dobro da capacidade instalada para garantir seguranca."
+        "É sempre superior devido às perdas de transformação.",
+        "É igual à soma das potências nominais de todas as cargas.",
+        "É consideravelmente menor devido à diversidade entre as cargas.",
+        "É o dobro da capacidade instalada para garantir segurança."
       ],
       "correctIndex": 2,
-      "explanation": "A carga real e menor que o rating total dos equipamentos devido a diversidade entre as cargas.",
+      "explanation": "A carga real é menor que o rating total dos equipamentos devido à diversidade entre as cargas.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que ocorre ao religar um alimentador apos interrupcao prolongada que excedeu o tempo de repouso termico das cargas?",
+      "statement": "O que ocorre ao religar um alimentador após interrupção prolongada que excedeu o tempo de repouso térmico das cargas?",
       "options": [
-        "A tensao da rede sofre uma elevacao capacitiva subita.",
-        "A demanda de potencia ativa cai subitamente para zero.",
-        "O fator de simultaneidade e reduzido instantaneamente pela metade.",
+        "A tensão da rede sofre uma elevação capacitiva súbita.",
+        "A demanda de potência ativa cai subitamente para zero.",
+        "O fator de simultaneidade é reduzido instantaneamente pela metade.",
         "As cargas perdem a diversidade e entram juntas gerando alto inrush."
       ],
       "correctIndex": 3,
-      "explanation": "Apos longas paradas, todas as cargas entram juntas (sem diversidade), gerando inrush varias vezes maior que o pico normal.",
+      "explanation": "Após longas paradas, todas as cargas entram juntas (sem diversidade), gerando inrush várias vezes maior que o pico normal.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O ajuste de projeto da protecao baseado no limite termico do alimentador permite qual vantagem operativa de demanda?",
+      "statement": "O ajuste de projeto da proteção baseado no limite térmico do alimentador permite qual vantagem operativa de demanda?",
       "options": [
-        "Da liberdade para crescimento de carga sem mudar o ajuste do rele.",
-        "Garante a seletividade amperimetrica com fusiveis primarios.",
-        "Elimina a necessidade de capacitores para correcao de fator de potencia.",
-        "Reduz a corrente de magnetizacao exigida pelo transformador."
+        "Dá liberdade para crescimento de carga sem mudar o ajuste do relé.",
+        "Garante a seletividade amperimétrica com fusíveis primários.",
+        "Elimina a necessidade de capacitores para correção de fator de potência.",
+        "Reduz a corrente de magnetização exigida pelo transformador."
       ],
       "correctIndex": 0,
-      "explanation": "Esse ajuste da liberdade no crescimento de carga sem preocupacao com a mudanca imediata no ajuste do rele.",
+      "explanation": "Esse ajuste dá liberdade no crescimento de carga sem preocupação com a mudança imediata no ajuste do relé.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e o efeito nas cargas luminosas causado pela flutuacao de tensao oriunda da variacao de demanda de conjugado nos motores?",
+      "statement": "Qual é o efeito nas cargas luminosas causado pela flutuação de tensão oriunda da variação de demanda de conjugado nos motores?",
       "options": [
-        "Aumento drastico da vida util das lampadas de descarga.",
+        "Aumento drástico da vida útil das lâmpadas de descarga.",
         "Efeito flicker ou piscamento das fontes luminosas.",
-        "Queima imediata dos reatores termomagneticos.",
-        "Reducao total da energia reativa capacitiva da rede."
+        "Queima imediata dos reatores termomagnéticos.",
+        "Redução total da energia reativa capacitiva da rede."
       ],
       "correctIndex": 1,
-      "explanation": "A flutuacao de tensao provoca variacao de conjugado dos motores, sendo a origem do flicker (piscamento) nas luzes.",
+      "explanation": "A flutuação de tensão provoca variação de conjugado dos motores, sendo a origem do flicker (piscamento) nas luzes.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O bloqueio mecanico do rotor de uma carga motriz faz com que o motor absorva a corrente de partida continuamente, causando aquecimento rapido pela falta de ventilacao.",
+      "statement": "O bloqueio mecânico do rotor de uma carga motriz faz com que o motor absorva a corrente de partida continuamente, causando aquecimento rápido pela falta de ventilação.",
       "correctAnswer": true,
-      "explanation": "O motor absorve corrente de partida e permanece em velocidade zero sem ventilacao, aquecendo rapidamente.",
+      "explanation": "O motor absorve corrente de partida e permanece em velocidade zero sem ventilação, aquecendo rapidamente.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Cargas industriais nao lineares, como inversores de frequencia, podem causar sobrecorrentes permanentes nos capacitores devido a circulacao de correntes harmonicas.",
+      "statement": "Cargas industriais não lineares, como inversores de frequência, podem causar sobrecorrentes permanentes nos capacitores devido à circulação de correntes harmônicas.",
       "correctAnswer": true,
-      "explanation": "Cargas nao lineares geram correntes harmonicas que causam sobrecarga permanente nos bancos de capacitores.",
+      "explanation": "Cargas não lineares geram correntes harmônicas que causam sobrecarga permanente nos bancos de capacitores.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O plano de alivio de carga visa desconectar seletivamente consumidores nao-prioritarios para recuperar o equilibrio entre a potencia disponivel e a demanda do sistema.",
+      "statement": "O plano de alívio de carga visa desconectar seletivamente consumidores não-prioritários para recuperar o equilíbrio entre a potência disponível e a demanda do sistema.",
       "correctAnswer": true,
-      "explanation": "O alivio e a desconexao de cargas para recuperar o equilibrio entre deficit de potencia e demanda.",
+      "explanation": "O alívio é a desconexão de cargas para recuperar o equilíbrio entre déficit de potência e demanda.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Na gestao de energia com varias fontes em paralelo, o numero de fontes conectadas independe da potencia global requerida pelas cargas industriais.",
+      "statement": "Na gestão de energia com várias fontes em paralelo, o número de fontes conectadas independe da potência global requerida pelas cargas industriais.",
       "correctAnswer": false,
-      "explanation": "Quando diversas fontes estao em paralelo, o numero de fontes deve ser adaptado a potencia requerida pelas cargas.",
+      "explanation": "Quando diversas fontes estão em paralelo, o número de fontes deve ser adaptado à potência requerida pelas cargas.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Apos um desligamento prolongado da rede, o inrush das cargas que entram simultaneamente sem diversidade decai ao valor de pico normal em poucos milissegundos.",
+      "statement": "Após um desligamento prolongado da rede, o inrush das cargas que entram simultaneamente sem diversidade decai ao valor de pico normal em poucos milissegundos.",
       "correctAnswer": false,
-      "explanation": "A corrente de inrush (de cargas entrando sem diversidade) decai para aproximadamente 1,5 vezes a corrente normal apos varios segundos, e nao milissegundos.",
+      "explanation": "A corrente de inrush (de cargas entrando sem diversidade) decai para aproximadamente 1,5 vezes a corrente normal após vários segundos, e não milissegundos.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Os bancos de capacitores sao dimensionados e instalados na rede eletrica para compensar a energia ____ absorvida pelas cargas industriais, melhorando a qualidade da energia.",
+      "statement": "Os bancos de capacitores são dimensionados e instalados na rede elétrica para compensar a energia ____ absorvida pelas cargas industriais, melhorando a qualidade da energia.",
       "blanks": [
         {
           "index": 0,
@@ -192,19 +192,19 @@
     },
     {
       "type": "fillBlank",
-      "statement": "O deficit de potencia disponivel em comparacao com a ____ de potencia provoca queda anormal de tensao e frequencia, exigindo um plano de alivio na rede.",
+      "statement": "O déficit de potência disponível em comparação com a ____ de potência provoca queda anormal de tensão e frequência, exigindo um plano de alívio na rede.",
       "blanks": [
         {
           "index": 0,
           "answer": "demanda"
         }
       ],
-      "explanation": "O deficit de potencia disponivel em comparacao com a demanda de potencia provoca queda de tensao e frequencia.",
+      "explanation": "O déficit de potência disponível em comparação com a demanda de potência provoca queda de tensão e frequência.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "O projeto de alimentadores tira vantagem da ____ natural entre as diversas cargas conectadas para garantir que a demanda real seja inferior a soma das potencias instaladas.",
+      "statement": "O projeto de alimentadores tira vantagem da ____ natural entre as diversas cargas conectadas para garantir que a demanda real seja inferior à soma das potências instaladas.",
       "blanks": [
         {
           "index": 0,

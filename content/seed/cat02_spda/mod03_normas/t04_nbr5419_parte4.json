@@ -3,53 +3,53 @@
   "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
   "categoryOrder": 1,
   "module": "Normas SPDA",
-  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspecao",
+  "moduleSubtitle": "NBR 5419 partes 1-4, IEC 62305 e inspeção",
   "moduleOrder": 2,
   "trail": "NBR 5419 - Parte 4 (Sistemas Elétricos e Eletrônicos)",
   "trailOrder": 3,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual e o objetivo principal abordado pela Parte 4 da norma ABNT NBR 5419?",
+      "statement": "Qual é o objetivo principal abordado pela Parte 4 da norma ABNT NBR 5419?",
       "options": [
-        "Definir o posicionamento de captores mecanicos no telhado.",
-        "Calcular o risco de perda de vidas humanas por tensao de toque no anel externo.",
-        "Fornecer os requisitos para a protecao de sistemas eletricos e eletronicos internos contra impulsos eletromagneticos.",
+        "Definir o posicionamento de captores mecânicos no telhado.",
+        "Calcular o risco de perda de vidas humanas por tensão de toque no anel externo.",
+        "Fornecer os requisitos para a proteção de sistemas elétricos e eletrônicos internos contra impulsos eletromagnéticos.",
         "Padronizar o uso exclusivo de cobre nas malhas de aterramento."
       ],
       "correctIndex": 2,
-      "explanation": "A Parte 4 fornece informacoes para projeto, instalacao, inspecao, manutencao e ensaio de sistemas de protecao para equipamentos eletricos e eletronicos (MPS), a fim de reduzir o risco de danos permanentes internos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A Parte 4 fornece informações para projeto, instalação, inspeção, manutenção e ensaio de sistemas de proteção para equipamentos elétricos e eletrônicos (MPS), a fim de reduzir o risco de danos permanentes internos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que significa a sigla MPS, amplamente utilizada na Parte 4 da NBR 5419 para definir as estrategias de protecao de equipamentos?",
+      "statement": "O que significa a sigla MPS, amplamente utilizada na Parte 4 da NBR 5419 para definir as estratégias de proteção de equipamentos?",
       "options": [
-        "Mecanismos de Prevencao de Seguranca",
-        "Medidas de Protecao contra Surtos",
-        "Malhas de Protecao de Sistemas",
-        "Modelagem de Pulsos Simetricos"
+        "Mecanismos de Prevenção de Segurança",
+        "Medidas de Proteção contra Surtos",
+        "Malhas de Proteção de Sistemas",
+        "Modelagem de Pulsos Simétricos"
       ],
       "correctIndex": 1,
-      "explanation": "As MPS significam Medidas de Protecao contra Surtos, que sao apresentadas na parte 4 da norma para evitar falhas temporarias ou permanentes nas instalacoes eletricas e de sinal. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "As MPS significam Medidas de Proteção contra Surtos, que são apresentadas na parte 4 da norma para evitar falhas temporárias ou permanentes nas instalações elétricas e de sinal. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com a norma, qual das seguintes medidas e considerada EXCLUSIVAMENTE uma Medida de Protecao contra Surtos (MPS) e nao cumpre nenhuma funcao adicional de rotina em uma instalacao eletrica?",
+      "statement": "De acordo com a norma, qual das seguintes medidas é considerada EXCLUSIVAMENTE uma Medida de Proteção contra Surtos (MPS) e não cumpre nenhuma função adicional de rotina em uma instalação elétrica?",
       "options": [
         "Aterramento",
-        "Equipotencializacao",
+        "Equipotencialização",
         "Roteamento de cabos",
-        "Instalacao de DPS (Dispositivo de Protecao contra Surtos)"
+        "Instalação de DPS (Dispositivo de Proteção contra Surtos)"
       ],
       "correctIndex": 3,
-      "explanation": "Apenas a instalacao de DPS e exclusivamente uma MPS e nao cumpre nenhuma funcao adicional, enquanto aterramento, equipotencializacao e roteamento ja fariam parte do projeto padrao. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "Apenas a instalação de DPS é exclusivamente uma MPS e não cumpre nenhuma função adicional, enquanto aterramento, equipotencialização e roteamento já fariam parte do projeto padrão. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No contexto da NBR 5419, as perturbacoes eletromagneticas oriundas dos raios que a Parte 4 busca mitigar sao referenciadas por uma sigla internacional. Que sigla e essa?",
+      "statement": "No contexto da NBR 5419, as perturbações eletromagnéticas oriundas dos raios que a Parte 4 busca mitigar são referenciadas por uma sigla internacional. Que sigla é essa?",
       "options": [
         "LEMP",
         "ZPR",
@@ -57,161 +57,161 @@
         "SDSC"
       ],
       "correctIndex": 0,
-      "explanation": "Os pulsos eletromagneticos devido aos raios, que causam falhas nos sistemas eletricos e eletronicos, sao conhecidos pela sigla LEMP (Lightning Electromagnetic Impulse). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Os pulsos eletromagnéticos devido aos raios, que causam falhas nos sistemas elétricos e eletrônicos, são conhecidos pela sigla LEMP (Lightning Electromagnetic Impulse). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "As MPS apresentadas pela norma ABNT NBR 5419-4 podem ser utilizadas de forma individual ou coletiva. Quais sao as quatro categorias de MPS listadas na norma?",
+      "statement": "As MPS apresentadas pela norma ABNT NBR 5419-4 podem ser utilizadas de forma individual ou coletiva. Quais são as quatro categorias de MPS listadas na norma?",
       "options": [
-        "Isolamento galvanico, captacao Franklin, descidas blindadas e eletrodos.",
-        "Aterramento e equipotencializacao, blindagem magnetica e roteamento, coordenacao de DPS, e interfaces isolantes.",
-        "Uso de no-breaks, separacao de circuitos, isolacao de 10kV e malha de terra.",
-        "Cabos coaxiais blindados, para-raios radioativos, DPS classe I e estabilizadores de tensao."
+        "Isolamento galvânico, captação Franklin, descidas blindadas e eletrodos.",
+        "Aterramento e equipotencialização, blindagem magnética e roteamento, coordenação de DPS, e interfaces isolantes.",
+        "Uso de no-breaks, separação de circuitos, isolação de 10kV e malha de terra.",
+        "Cabos coaxiais blindados, para-raios radioativos, DPS classe I e estabilizadores de tensão."
       ],
       "correctIndex": 1,
-      "explanation": "As MPS apresentadas pela norma sao: 1) Aterramento e equipotencializacao; 2) Blindagem magnetica e roteamento de linhas; 3) Coordenacao de DPS; 4) Interfaces isolantes. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "As MPS apresentadas pela norma são: 1) Aterramento e equipotencialização; 2) Blindagem magnética e roteamento de linhas; 3) Coordenação de DPS; 4) Interfaces isolantes. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a principal funcao tecnica da blindagem magnetica e do uso de interfaces isolantes quando empregadas como Medidas de Protecao contra Surtos (MPS)?",
+      "statement": "Qual é a principal função técnica da blindagem magnética e do uso de interfaces isolantes quando empregadas como Medidas de Proteção contra Surtos (MPS)?",
       "options": [
-        "Filtrar as quedas prolongadas de tensao e oscilacoes diarias da concessionaria.",
-        "Substituir o aterramento principal da edificacao por uma barreira nao condutora.",
-        "Minimizar ruidos e perturbacoes, entre eles os surtos de tensao e corrente acoplados no sistema.",
-        "Reduzir o consumo energetico dos equipamentos de informatica, estabilizando as correntes nominais."
+        "Filtrar as quedas prolongadas de tensão e oscilações diárias da concessionária.",
+        "Substituir o aterramento principal da edificação por uma barreira não condutora.",
+        "Minimizar ruídos e perturbações, entre eles os surtos de tensão e corrente acoplados no sistema.",
+        "Reduzir o consumo energético dos equipamentos de informática, estabilizando as correntes nominais."
       ],
       "correctIndex": 2,
-      "explanation": "As blindagens e o isolamento galvanico tem o objetivo de minimizar ruidos e perturbacoes, entre eles os surtos de tensao e corrente, podendo ou nao ser utilizados como MPS. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "As blindagens e o isolamento galvânico têm o objetivo de minimizar ruídos e perturbações, entre eles os surtos de tensão e corrente, podendo ou não ser utilizados como MPS. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "A norma utiliza o conceito de divisao da estrutura para avaliar a atenuacao do campo eletromagnetico e dimensionar corretamente as protecoes de surto e DPS. Como e chamada essa divisao de zonas?",
+      "statement": "A norma utiliza o conceito de divisão da estrutura para avaliar a atenuação do campo eletromagnético e dimensionar corretamente as proteções de surto e DPS. Como é chamada essa divisão de zonas?",
       "options": [
-        "Zonas de Captacao Residual (ZCR)",
-        "Zonas de Protecao contra Raios (ZPR)",
-        "Malhas de Faraday Intermediarias (MFI)",
-        "Classes de Imunidade Eletromagnetica (CIE)"
+        "Zonas de Captação Residual (ZCR)",
+        "Zonas de Proteção contra Raios (ZPR)",
+        "Malhas de Faraday Intermediárias (MFI)",
+        "Classes de Imunidade Eletromagnética (CIE)"
       ],
       "correctIndex": 1,
-      "explanation": "A norma define Zonas de Protecao contra Raios (ZPR) para caracterizar as interfaces, como as zonas ZPR 0/1, onde devem ser avaliadas as blindagens e posicionados os DPS. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A norma define Zonas de Proteção contra Raios (ZPR) para caracterizar as interfaces, como as zonas ZPR 0/1, onde devem ser avaliadas as blindagens e posicionados os DPS. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo o Gerenciamento de Risco associado aos sistemas eletronicos (Parte 4 e Parte 2), a componente de risco chamada RM refere-se especificamente a qual fenomeno causador de falha interna?",
+      "statement": "Segundo o Gerenciamento de Risco associado aos sistemas eletrônicos (Parte 4 e Parte 2), a componente de risco chamada RM refere-se especificamente a qual fenômeno causador de falha interna?",
       "options": [
-        "Falha de sistema originada por tensao de toque de descargas diretamente na linha (S3).",
-        "Falha dos sistemas decorrente de LEMP originado por descargas proximas a edificacao (S2).",
-        "Dano fisico e incendio provocados por descargas diretamente sobre a estrutura (S1).",
-        "Falha de transformadores gerada exclusivamente por curto-circuito na rede primaria da rua (S4)."
+        "Falha de sistema originada por tensão de toque de descargas diretamente na linha (S3).",
+        "Falha dos sistemas decorrente de LEMP originado por descargas próximas à edificação (S2).",
+        "Dano físico e incêndio provocados por descargas diretamente sobre a estrutura (S1).",
+        "Falha de transformadores gerada exclusivamente por curto-circuito na rede primária da rua (S4)."
       ],
       "correctIndex": 1,
-      "explanation": "A componente RM trata das falhas do sistema (eletronico) decorrentes de LEMP originados por descargas que incidem em areas proximas a edificacao (S2). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A componente RM trata das falhas do sistema (eletrônico) decorrentes de LEMP originados por descargas que incidem em áreas próximas à edificação (S2). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Nas equacoes utilizadas para avaliar a probabilidade de falhas e a protecao requerida, o que o fator Ks1 leva em consideracao dentro da analise dos sistemas eletricos e eletronicos?",
+      "statement": "Nas equações utilizadas para avaliar a probabilidade de falhas e a proteção requerida, o que o fator Ks1 leva em consideração dentro da análise dos sistemas elétricos e eletrônicos?",
       "options": [
-        "A corrente maxima suportavel pelo DPS Classe II na entrada do edificio.",
-        "As caracteristicas de isolamento da fiacao interna nas prumadas de telecomunicacao.",
-        "A eficiencia da blindagem espacial por malha da estrutura ou do SPDA na interface ZPR 0/1.",
-        "A tensao de impulso (UW) suportavel do sistema que se deseja proteger."
+        "A corrente máxima suportável pelo DPS Classe II na entrada do edifício.",
+        "As características de isolamento da fiação interna nas prumadas de telecomunicação.",
+        "A eficiência da blindagem espacial por malha da estrutura ou do SPDA na interface ZPR 0/1.",
+        "A tensão de impulso (UW) suportável do sistema que se deseja proteger."
       ],
       "correctIndex": 2,
-      "explanation": "O parametro Ks1 leva em consideracao a eficiencia da blindagem por malha da estrutura, SPDA ou outra blindagem na interface ZPR 0/1. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O parâmetro Ks1 leva em consideração a eficiência da blindagem por malha da estrutura, SPDA ou outra blindagem na interface ZPR 0/1. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na revisao mais recente, a ABNT NBR 5419:2026 direcionou explicitamente a especificacao dos requisitos tecnicos e padronizacao dos Dispositivos de Protecao contra Surtos (DPS) para outra norma internacionalmente harmonizada. Que serie normativa e essa?",
+      "statement": "Na revisão mais recente, a ABNT NBR 5419:2026 direcionou explicitamente a especificação dos requisitos técnicos e padronização dos Dispositivos de Proteção contra Surtos (DPS) para outra norma internacionalmente harmonizada. Que série normativa é essa?",
       "options": [
-        "Serie ABNT NBR IEC 61643",
-        "Serie ABNT NBR 5410",
-        "Serie IEEE 142 Green Book",
-        "Serie IEC 62561-8"
+        "Série ABNT NBR IEC 61643",
+        "Série ABNT NBR 5410",
+        "Série IEEE 142 Green Book",
+        "Série IEC 62561-8"
       ],
       "correctIndex": 0,
-      "explanation": "No caso dos dispositivos de protecao contra surtos, os requisitos tecnicos passam a ser direcionados a serie ABNT NBR IEC 61643, responsavel pela padronizacao desses dispositivos. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "No caso dos dispositivos de proteção contra surtos, os requisitos técnicos passam a ser direcionados à série ABNT NBR IEC 61643, responsável pela padronização desses dispositivos. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "As Medidas de Protecao contra Surtos (MPS) possuem uma rigida hierarquia normativa e devem ser aplicadas sempre de forma coletiva e sequencial para garantir a validade do projeto eletrico.",
+      "statement": "As Medidas de Proteção contra Surtos (MPS) possuem uma rígida hierarquia normativa e devem ser aplicadas sempre de forma coletiva e sequencial para garantir a validade do projeto elétrico.",
       "correctAnswer": false,
-      "explanation": "As MPS podem ser utilizadas de forma individual ou coletivamente, sem que exista uma hierarquia entre elas, devendo cada caso ser avaliado de acordo com a necessidade. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "As MPS podem ser utilizadas de forma individual ou coletivamente, sem que exista uma hierarquia entre elas, devendo cada caso ser avaliado de acordo com a necessidade. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Apesar de sua capacidade protetiva de pico, um Dispositivo de Protecao contra Surtos (DPS) nao estabiliza a tensao de fornecimento continuo nem atua filtrando distorcoes de regime permanente.",
+      "statement": "Apesar de sua capacidade protetiva de pico, um Dispositivo de Proteção contra Surtos (DPS) não estabiliza a tensão de fornecimento contínuo nem atua filtrando distorções de regime permanente.",
       "correctAnswer": true,
-      "explanation": "Um DPS nao estabiliza a tensao, nem filtra perturbacoes em regime permanente; ele apenas protege contra sobretensoes temporarias originadas por raios e chaveamentos. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "Um DPS não estabiliza a tensão, nem filtra perturbações em regime permanente; ele apenas protege contra sobretensões temporárias originadas por raios e chaveamentos. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A componente de risco chamada RC modela a probabilidade de falhas criticas nos sistemas eletricos e eletronicos que tem origem nos impulsos eletromagneticos (LEMP) de descargas que atingem diretamente a estrutura (S1).",
+      "statement": "A componente de risco chamada RC modela a probabilidade de falhas críticas nos sistemas elétricos e eletrônicos que têm origem nos impulsos eletromagnéticos (LEMP) de descargas que atingem diretamente a estrutura (S1).",
       "correctAnswer": true,
-      "explanation": "A componente RC e relativa a falha no sistema interno que pode ter sua origem em LEMPs decorrentes de descargas diretas na edificacao (Fonte S1). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A componente RC é relativa à falha no sistema interno que pode ter sua origem em LEMPs decorrentes de descargas diretas na edificação (Fonte S1). (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Diferente da instalacao de um DPS, a equipotencializacao, o aterramento e o roteamento adequado de cabos sao praticas que idealmente ja deveriam fazer parte intrinseca do projeto da instalacao eletrica convencional.",
+      "statement": "Diferente da instalação de um DPS, a equipotencialização, o aterramento e o roteamento adequado de cabos são práticas que idealmente já deveriam fazer parte intrínseca do projeto da instalação elétrica convencional.",
       "correctAnswer": true,
-      "explanation": "O aterramento, a equipotencializacao e o roteamento de cabos ja farao parte de um projeto de instalacao eletrica e deverao ser adequados; apenas a instalacao de DPS e exclusivamente uma MPS. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "O aterramento, a equipotencialização e o roteamento de cabos já farão parte de um projeto de instalação elétrica e deverão ser adequados; apenas a instalação de DPS é exclusivamente uma MPS. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para zerar efetivamente as componentes de risco de falhas em equipamentos eletronicos provindas de linhas externas (RU, RV, RW), a norma proibe a interligacao das blindagens dos cabos de dados ao barramento de equipotencializacao principal.",
+      "statement": "Para zerar efetivamente as componentes de risco de falhas em equipamentos eletrônicos provindas de linhas externas (RU, RV, RW), a norma proíbe a interligação das blindagens dos cabos de dados ao barramento de equipotencialização principal.",
       "correctAnswer": false,
-      "explanation": "E exatamente o oposto. Tais riscos podem ser zero se o cabo for protegido e a blindagem for interligada, na entrada da linha, ao mesmo barramento de equipotencializacao que o equipamento. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "É exatamente o oposto. Tais riscos podem ser zero se o cabo for protegido e a blindagem for interligada, na entrada da linha, ao mesmo barramento de equipotencialização que o equipamento. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "As Medidas de Protecao contra ____ (MPS), descritas na Parte 4 da norma, sao tecnicas aplicadas com o proposito de resguardar as instalacoes contra falhas eletricas temporarias ou permanentes causadas por descargas.",
+      "statement": "As Medidas de Proteção contra ____ (MPS), descritas na Parte 4 da norma, são técnicas aplicadas com o propósito de resguardar as instalações contra falhas elétricas temporárias ou permanentes causadas por descargas.",
       "blanks": [
         {
           "index": 0,
           "answer": "Surtos"
         }
       ],
-      "explanation": "A parte 4 da norma tecnica apresenta as Medidas de Protecao contra Surtos (MPS), fundamentais para evitar a falha e queima de equipamentos eletroeletronicos. (Fonte: As Medidas de Protecao contra Surtos, Lambda Consultoria)",
+      "explanation": "A parte 4 da norma técnica apresenta as Medidas de Proteção contra Surtos (MPS), fundamentais para evitar a falha e queima de equipamentos eletroeletrônicos. (Fonte: As Medidas de Proteção contra Surtos, Lambda Consultoria)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Para realizar o estudo de blindagens de espaco, o projeto deve conceber o conceito de fronteiras invisiveis. A sigla utilizada normativamente para identificar e separar essas Zonas de Protecao contra Raios e ____.",
+      "statement": "Para realizar o estudo de blindagens de espaço, o projeto deve conceber o conceito de fronteiras invisíveis. A sigla utilizada normativamente para identificar e separar essas Zonas de Proteção contra Raios é ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "ZPR"
         }
       ],
-      "explanation": "As Zonas de Protecao contra Raios (ZPR) definem as interfaces onde as blindagens sao avaliadas e os DPS coordenados devem atuar. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "As Zonas de Proteção contra Raios (ZPR) definem as interfaces onde as blindagens são avaliadas e os DPS coordenados devem atuar. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A falha dos equipamentos eletroeletronicos internos e frequentemente induzida nao pela corrente do raio em si, mas pelo severo campo e pulso irradiado, fenomeno tecnicamente conhecido na norma atraves do acronimo ingles ____ (Lightning Electromagnetic Impulse).",
+      "statement": "A falha dos equipamentos eletroeletrônicos internos é frequentemente induzida não pela corrente do raio em si, mas pelo severo campo e pulso irradiado, fenômeno tecnicamente conhecido na norma através do acrônimo inglês ____ (Lightning Electromagnetic Impulse).",
       "blanks": [
         {
           "index": 0,
           "answer": "LEMP"
         }
       ],
-      "explanation": "Os LEMPs sao os pulsos eletromagneticos devido aos raios, decorrentes de descargas diretas (RC) ou proximas (RM), responsaveis pelas sobretensoes induzidas que danificam o sistema interno. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Os LEMPs são os pulsos eletromagnéticos devido aos raios, decorrentes de descargas diretas (RC) ou próximas (RM), responsáveis pelas sobretensões induzidas que danificam o sistema interno. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     }
   ]

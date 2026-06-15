@@ -3,27 +3,27 @@
   "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
   "categoryOrder": 1,
   "module": "Projeto de SPDA",
-  "moduleSubtitle": "Projeto, risco, posicionamento, volume, materiais e documentacao",
+  "moduleSubtitle": "Projeto, risco, posicionamento, volume, materiais e documentação",
   "moduleOrder": 3,
-  "trail": "Metodos de Posicionamento de Captacao",
+  "trail": "Métodos de Posicionamento de Captação",
   "trailOrder": 2,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Quais sao os tres metodos de posicionamento do subsistema de captacao reconhecidos e aceitos pela NBR 5419?",
+      "statement": "Quais são os três métodos de posicionamento do subsistema de captação reconhecidos e aceitos pela NBR 5419?",
       "options": [
-        "Metodo Early Streamer Emission (ESE), Metodo Radioativo e Metodo Catenaria.",
-        "Metodo da Esfera Rolante, Metodo das Malhas e Metodo do Angulo de Protecao.",
-        "Metodo do Cone Invertido, Metodo das Grades e Metodo da Catenaria Isolada.",
-        "Metodo Franklin, Metodo de Faraday e Metodo de Ionizacao Precoce."
+        "Método Early Streamer Emission (ESE), Método Radioativo e Método Catenária.",
+        "Método da Esfera Rolante, Método das Malhas e Método do Ângulo de Proteção.",
+        "Método do Cone Invertido, Método das Grades e Método da Catenária Isolada.",
+        "Método Franklin, Método de Faraday e Método de Ionização Precoce."
       ],
       "correctIndex": 1,
-      "explanation": "Os metodos de posicionamento do subsistema de captacao permanecem os mesmos: metodo da esfera rolante, metodo das malhas e metodo do angulo de protecao. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Os métodos de posicionamento do subsistema de captação permanecem os mesmos: método da esfera rolante, método das malhas e método do ângulo de proteção. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No Metodo da Esfera Rolante (Eletrogeometrico), qual e o raio da esfera ficticia adotado para uma estrutura que exige um SPDA de Classe I (Nivel de Protecao I)?",
+      "statement": "No Método da Esfera Rolante (Eletrogeométrico), qual é o raio da esfera fictícia adotado para uma estrutura que exige um SPDA de Classe I (Nível de Proteção I)?",
       "options": [
         "20 metros.",
         "30 metros.",
@@ -31,12 +31,12 @@
         "60 metros."
       ],
       "correctIndex": 0,
-      "explanation": "O raio da esfera rolante depende da classe do SPDA, sendo estipulado rigorosamente em 20 metros para a Classe I. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "O raio da esfera rolante depende da classe do SPDA, sendo estipulado rigorosamente em 20 metros para a Classe I. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao utilizar o Metodo das Malhas (Gaiola de Faraday), qual e o maximo afastamento permitido entre os condutores da malha para um SPDA de Classe II?",
+      "statement": "Ao utilizar o Método das Malhas (Gaiola de Faraday), qual é o máximo afastamento permitido entre os condutores da malha para um SPDA de Classe II?",
       "options": [
         "5 x 5 metros.",
         "10 x 10 metros.",
@@ -44,64 +44,64 @@
         "20 x 20 metros."
       ],
       "correctIndex": 1,
-      "explanation": "A tabela de dimensoes do Metodo das Malhas indica que, para o Nivel II (Classe II), o maximo afastamento dos condutores da malha e de 10 x 10 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A tabela de dimensões do Método das Malhas indica que, para o Nível II (Classe II), o máximo afastamento dos condutores da malha é de 10 x 10 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No Metodo do Angulo de Protecao (metodo Franklin), como e geometricamente definido o volume protegido por um mastro captor?",
+      "statement": "No Método do Ângulo de Proteção (método Franklin), como é geometricamente definido o volume protegido por um mastro captor?",
       "options": [
         "Por um cubo que envolve a haste central.",
-        "Por uma piramide com base igual a malha de aterramento.",
-        "Por um cone circular cujo vertice esta posicionado no eixo do mastro.",
+        "Por uma pirâmide com base igual à malha de aterramento.",
+        "Por um cone circular cujo vértice está posicionado no eixo do mastro.",
         "Por uma semiesfera com centro no meio do mastro."
       ],
       "correctIndex": 2,
-      "explanation": "A definicao do metodo de Franklin determina que o volume de protecao provido por um mastro e definido pela forma de um cone circular cujo vertice esta posicionado no eixo do mastro. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A definição do método de Franklin determina que o volume de proteção provido por um mastro é definido pela forma de um cone circular cujo vértice está posicionado no eixo do mastro. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a NBR 5419 aborda a utilizacao de captores nao convencionais do tipo ESE (Early Streamer Emission) para o dimensionamento do volume de protecao?",
+      "statement": "Como a NBR 5419 aborda a utilização de captores não convencionais do tipo ESE (Early Streamer Emission) para o dimensionamento do volume de proteção?",
       "options": [
-        "Eles multiplicam o raio da esfera rolante por um fator de ganho devido a emissao antecipada.",
-        "Permanecem fora dos metodos aceitos, pois a norma exige que o volume considere apenas as dimensoes fisicas reais dos elementos captores.",
-        "Sao recomendados apenas em substituicao ao metodo das malhas em galpoes industriais.",
-        "Sao o metodo preferencial para estruturas com altura superior a 60 metros."
+        "Eles multiplicam o raio da esfera rolante por um fator de ganho devido à emissão antecipada.",
+        "Permanecem fora dos métodos aceitos, pois a norma exige que o volume considere apenas as dimensões físicas reais dos elementos captores.",
+        "São recomendados apenas em substituição ao método das malhas em galpões industriais.",
+        "São o método preferencial para estruturas com altura superior a 60 metros."
       ],
       "correctIndex": 1,
-      "explanation": "O texto explicita que a determinacao do volume de protecao considera apenas dimensoes fisicas reais, reforcando que sistemas nao convencionais como os captores tipo ESE permanecem fora dos metodos aceitos pela norma. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "O texto explicita que a determinação do volume de proteção considera apenas dimensões físicas reais, reforçando que sistemas não convencionais como os captores tipo ESE permanecem fora dos métodos aceitos pela norma. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No Metodo da Esfera Rolante, qual e a orientacao para estruturas com altura superior a 60 metros, considerando que a maior esfera possivel (Classe IV) tem raio de 60 metros?",
+      "statement": "No Método da Esfera Rolante, qual é a orientação para estruturas com altura superior a 60 metros, considerando que a maior esfera possível (Classe IV) tem raio de 60 metros?",
       "options": [
         "O raio da esfera rolante deve ser extrapolado matematicamente para cobrir estruturas infinitas.",
-        "A captacao passa a ser ignorada, exigindo-se apenas protecao por DPS nas tomadas de energia.",
-        "A chance de descargas laterais deixa de ser desprezivel, exigindo a instalacao de captacao na lateral da construcao.",
-        "Deve-se substituir a esfera rolante exclusivamente pelo Metodo das Malhas verticais a cada 2 metros."
+        "A captação passa a ser ignorada, exigindo-se apenas proteção por DPS nas tomadas de energia.",
+        "A chance de descargas laterais deixa de ser desprezível, exigindo a instalação de captação na lateral da construção.",
+        "Deve-se substituir a esfera rolante exclusivamente pelo Método das Malhas verticais a cada 2 metros."
       ],
       "correctIndex": 2,
-      "explanation": "Caso a estrutura tenha altura superior a 60 metros, a chance de uma descarga atmosferica atingir sua lateral deixa de ser desprezivel, passando a ser considerada a necessidade de instalacao de captacao na lateral da construcao. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "Caso a estrutura tenha altura superior a 60 metros, a chance de uma descarga atmosférica atingir sua lateral deixa de ser desprezível, passando a ser considerada a necessidade de instalação de captação na lateral da construção. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual foi a mudanca metodologica adotada pela NBR 5419:2015 para a determinacao do Angulo de Protecao (Franklin) em relacao a edicao anterior?",
+      "statement": "Qual foi a mudança metodológica adotada pela NBR 5419:2015 para a determinação do Ângulo de Proteção (Franklin) em relação à edição anterior?",
       "options": [
-        "A eliminacao total do metodo de angulo, substituido obrigatoriamente pela gaiola de Faraday.",
-        "A substituicao de tabelas por um grafico, permitindo o uso de angulos de ate quase 80 graus em mastros baixos (ate 2m).",
-        "O metodo passou a exigir um angulo fixo e unico de 45 graus para qualquer nivel de protecao.",
-        "A imposicao de que o angulo so pode ser calculado atraves de softwares certificados do INPE."
+        "A eliminação total do método de ângulo, substituído obrigatoriamente pela gaiola de Faraday.",
+        "A substituição de tabelas por um gráfico, permitindo o uso de ângulos de até quase 80 graus em mastros baixos (até 2m).",
+        "O método passou a exigir um ângulo fixo e único de 45 graus para qualquer nível de proteção.",
+        "A imposição de que o ângulo só pode ser calculado através de softwares certificados do INPE."
       ],
       "correctIndex": 1,
-      "explanation": "O novo conceito substitui a tabela por um grafico que permite, em situacoes especificas para estruturas baixas (ate 2 metros), trabalhar com angulos maiores, variando de 70 ate quase 80 graus. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O novo conceito substitui a tabela por um gráfico que permite, em situações específicas para estruturas baixas (até 2 metros), trabalhar com ângulos maiores, variando de 70 até quase 80 graus. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "A equacao da distancia de atracao do Metodo Eletrogeometrico (R = k x Imax^p) elaborada pela CIGRE utiliza quais valores constantes (k e p) adotados pela NBR 5419?",
+      "statement": "A equação da distância de atração do Método Eletrogeométrico (R = k x Imax^p) elaborada pela CIGRE utiliza quais valores constantes (k e p) adotados pela NBR 5419?",
       "options": [
         "k = 10 e p = 0,65.",
         "k = 8 e p = 0,85.",
@@ -109,12 +109,12 @@
         "k = 0,04 e p = 1,25."
       ],
       "correctIndex": 0,
-      "explanation": "A ABNT NBR 5419 utiliza as constantes k = 10 e p = 0,65 na equacao elaborada pelo GT-33 da CIGRE para determinar a distancia de atracao. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "A ABNT NBR 5419 utiliza as constantes k = 10 e p = 0,65 na equação elaborada pelo GT-33 da CIGRE para determinar a distância de atração. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para o dimensionamento do subsistema de captacao pelo Metodo das Malhas em uma edificacao enquadrada no Nivel de Protecao III (Classe III), qual e a distancia maxima permitida de afastamento dos condutores?",
+      "statement": "Para o dimensionamento do subsistema de captação pelo Método das Malhas em uma edificação enquadrada no Nível de Proteção III (Classe III), qual é a distância máxima permitida de afastamento dos condutores?",
       "options": [
         "5 x 5 metros.",
         "10 x 10 metros.",
@@ -122,96 +122,96 @@
         "20 x 20 metros."
       ],
       "correctIndex": 2,
-      "explanation": "De acordo com a tabela normativa para o Metodo das Malhas, a distancia maxima (afastamento) dos condutores para a Classe III de SPDA e de 15 x 15 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "De acordo com a tabela normativa para o Método das Malhas, a distância máxima (afastamento) dos condutores para a Classe III de SPDA é de 15 x 15 metros. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a ABNT NBR 5419:2026, qual e a exigencia formal estrutural para a utilizacao de captores verticais macicos ou tubulares (como mastros e postes)?",
+      "statement": "Segundo a ABNT NBR 5419:2026, qual é a exigência formal estrutural para a utilização de captores verticais maciços ou tubulares (como mastros e postes)?",
       "options": [
-        "Devem ser revestidos com chumbo espesso para evitar radiacao ionizante.",
-        "Devem passar por ensaio de tensao suportavel de 250 kV antes da instalacao.",
-        "Passa a existir orientacao formal para dimensionamento mecanico capaz de suportar os esforcos do vento conforme NBR 6123.",
-        "Devem possuir exclusivamente nucleo de cobre puro independente de sua altura."
+        "Devem ser revestidos com chumbo espesso para evitar radiação ionizante.",
+        "Devem passar por ensaio de tensão suportável de 250 kV antes da instalação.",
+        "Passa a existir orientação formal para dimensionamento mecânico capaz de suportar os esforços do vento conforme NBR 6123.",
+        "Devem possuir exclusivamente núcleo de cobre puro independente de sua altura."
       ],
       "correctIndex": 2,
-      "explanation": "Para os captores verticais macicos ou tubulares, como postes e mastros, passa a existir orientacao formal para que seja realizado o dimensionamento mecanico capaz de suportar os esforcos do vento, conforme a ABNT NBR 6123. (Fonte: ABNT NBR 5419:2026 Guia pratico das mudancas em SPDA)",
+      "explanation": "Para os captores verticais maciços ou tubulares, como postes e mastros, passa a existir orientação formal para que seja realizado o dimensionamento mecânico capaz de suportar os esforços do vento, conforme a ABNT NBR 6123. (Fonte: ABNT NBR 5419:2026 Guia prático das mudanças em SPDA)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "No Metodo da Esfera Rolante, se a esfera imaginaria for rolada por toda a estrutura e nenhum ponto da edificacao (exceto o subsistema de captacao) tocar nela, considera-se que a area esta protegida.",
+      "statement": "No Método da Esfera Rolante, se a esfera imaginária for rolada por toda a estrutura e nenhum ponto da edificação (exceto o subsistema de captação) tocar nela, considera-se que a área está protegida.",
       "correctAnswer": true,
-      "explanation": "Neste metodo utiliza-se uma esfera ficticia a qual rola pela estrutura. Se nenhum ponto da estrutura, com excecao do subsistema de captacao, tocar na esfera, a area esta protegida. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "Neste método utiliza-se uma esfera fictícia a qual rola pela estrutura. Se nenhum ponto da estrutura, com exceção do subsistema de captação, tocar na esfera, a área está protegida. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para o Nivel de Protecao IV (Classe IV), considerado o mais brando da norma, o raio da esfera rolante exigido no projeto de captacao e de exatos 45 metros.",
+      "statement": "Para o Nível de Proteção IV (Classe IV), considerado o mais brando da norma, o raio da esfera rolante exigido no projeto de captação é de exatos 45 metros.",
       "correctAnswer": false,
-      "explanation": "Para a Classe IV, o raio estipulado para a esfera rolante e de 60 metros, sendo o raio de 45 metros correspondente a Classe III. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes; Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Para a Classe IV, o raio estipulado para a esfera rolante é de 60 metros, sendo o raio de 45 metros correspondente à Classe III. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães; Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "O Metodo das Malhas (conhecido como Gaiola de Faraday) atua fisicamente baseando-se na atracao ionica de cargas eletricas provenientes de lideres descendentes diretamente para o centro geometrico da edificacao.",
+      "statement": "O Método das Malhas (conhecido como Gaiola de Faraday) atua fisicamente baseando-se na atração iônica de cargas elétricas provenientes de líderes descendentes diretamente para o centro geométrico da edificação.",
       "correctAnswer": false,
-      "explanation": "O metodo baseia-se na distribuicao da corrente da descarga pelos condutores interligados em malha ao redor/sobre a edificacao, anulando o campo eletrico interno, e nao na atracao ionica para o centro. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "O método baseia-se na distribuição da corrente da descarga pelos condutores interligados em malha ao redor/sobre a edificação, anulando o campo elétrico interno, e não na atração iônica para o centro. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Componentes naturais da cobertura, como telhas metalicas, podem ser utilizados validamente como elementos captores de raios em um projeto, desde que atendam as caracteristicas tecnicas minimas exigidas pela ABNT NBR 5419.",
+      "statement": "Componentes naturais da cobertura, como telhas metálicas, podem ser utilizados validamente como elementos captores de raios em um projeto, desde que atendam às características técnicas mínimas exigidas pela ABNT NBR 5419.",
       "correctAnswer": true,
-      "explanation": "E possivel utilizar elementos naturais da cobertura, como o proprio telhado metalico, para captacao, desde que atendam as caracteristicas tecnicas minimas exigidas pela norma. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "É possível utilizar elementos naturais da cobertura, como o próprio telhado metálico, para captação, desde que atendam as características técnicas mínimas exigidas pela norma. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A distancia de atracao no modelo eletrogeometrico (Esfera Rolante) independe da intensidade do raio, sendo definida estritamente pela elevacao do terreno (Fator Topografico) onde a edificacao se encontra.",
+      "statement": "A distância de atração no modelo eletrogeométrico (Esfera Rolante) independe da intensidade do raio, sendo definida estritamente pela elevação do terreno (Fator Topográfico) onde a edificação se encontra.",
       "correctAnswer": false,
-      "explanation": "A equacao R = k x Imax^p demonstra que a distancia de atracao (R) e funcao direta da intensidade (valor de crista Imax) do raio, e nao restrita a topografia do terreno. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "A equação R = k x Imax^p demonstra que a distância de atração (R) é função direta da intensidade (valor de crista Imax) do raio, e não restrita à topografia do terreno. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "No Metodo Eletrogeometrico, caso nenhum ponto da estrutura, exceto os componentes de captacao, tocar na ____ ficticia que rola sobre a edificacao, a area e considerada protegida.",
+      "statement": "No Método Eletrogeométrico, caso nenhum ponto da estrutura, exceto os componentes de captação, tocar na ____ fictícia que rola sobre a edificação, a área é considerada protegida.",
       "blanks": [
         {
           "index": 0,
           "answer": "esfera"
         }
       ],
-      "explanation": "O metodo utiliza uma esfera ficticia a qual rola pela estrutura. Se nenhum ponto tocar na esfera, a area esta protegida. (Fonte: SPDA pelo Metodo da Esfera Rolante, Professor Pablo Guimaraes)",
+      "explanation": "O método utiliza uma esfera fictícia a qual rola pela estrutura. Se nenhum ponto tocar na esfera, a área está protegida. (Fonte: SPDA pelo Método da Esfera Rolante, Professor Pablo Guimarães)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "O sistema formado por condutores horizontais e verticais interligados ao redor e sobre a edificacao, que anula o campo eletrico interno distribuindo a corrente do raio, e conhecido classicamente como metodo das ____ (ou Gaiola de Faraday).",
+      "statement": "O sistema formado por condutores horizontais e verticais interligados ao redor e sobre a edificação, que anula o campo elétrico interno distribuindo a corrente do raio, é conhecido classicamente como método das ____ (ou Gaiola de Faraday).",
       "blanks": [
         {
           "index": 0,
           "answer": "Malhas"
         }
       ],
-      "explanation": "O metodo que forma uma rede de condutores (Gaiola de Faraday) e que na norma tambem se reflete na instalacao de condutores horizontais no topo e chamado de Metodo das Malhas. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia; ABNT NBR 5419:2026)",
+      "explanation": "O método que forma uma rede de condutores (Gaiola de Faraday) e que na norma também se reflete na instalação de condutores horizontais no topo é chamado de Método das Malhas. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia; ABNT NBR 5419:2026)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "De acordo com o metodo Franklin (Angulo de protecao), o volume de protecao gerado pelo mastro e projetado na forma geometrica de um ____ circular com vertice posicionado no eixo do mastro.",
+      "statement": "De acordo com o método Franklin (Ângulo de proteção), o volume de proteção gerado pelo mastro é projetado na forma geométrica de um ____ circular com vértice posicionado no eixo do mastro.",
       "blanks": [
         {
           "index": 0,
           "answer": "cone"
         }
       ],
-      "explanation": "O volume de protecao provido por um mastro e definido pela forma de um cone circular cujo vertice esta posicionado no eixo do mastro. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "O volume de proteção provido por um mastro é definido pela forma de um cone circular cujo vértice está posicionado no eixo do mastro. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     }
   ]

@@ -353,21 +353,28 @@ class ToolResultsPanel extends StatelessWidget {
               flex: 3,
               child: Text(
                 r.label,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: AppColors.textSecondary,
                   fontSize: 13,
                 ),
               ),
             ),
+            const SizedBox(width: 8),
             Expanded(
               flex: 2,
-              child: Text(
-                r.value,
-                textAlign: TextAlign.end,
-                style: const TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerRight,
+                child: Text(
+                  r.value,
+                  textAlign: TextAlign.end,
+                  style: const TextStyle(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ),

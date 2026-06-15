@@ -96,7 +96,7 @@
         "Deve-se acrescentar cerca de cem milissegundos ao intervalo devido à inércia do disco de indução."
       ],
       "correctIndex": 3,
-      "explanation": "Relés eletromecânicos possuem sobriviagem devido ao momento de inércia do disco rotativo, exigindo acréscimo de cerca de cem milissegundos nas margens de tempo.",
+      "explanation": "Relés eletromecânicos possuem sobreviagem devido ao momento de inércia do disco rotativo, exigindo acréscimo de cerca de cem milissegundos nas margens de tempo.",
       "difficulty": "medium"
     },
     {

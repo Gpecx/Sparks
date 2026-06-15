@@ -109,6 +109,20 @@ class SparkApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: AppTheme.darkTheme,
             routerConfig: AppRouter.router,
+            builder: (context, child) {
+              // Limita o fator de escala de fonte do sistema para evitar que
+              // fontes muito grandes (acessibilidade Android/iOS) quebrem os
+              // layouts compactos do app. Mantém um teto seguro de 1.3x.
+              final mq = MediaQuery.of(context);
+              final clamped = mq.textScaler.clamp(
+                minScaleFactor: 1.0,
+                maxScaleFactor: 1.3,
+              );
+              return MediaQuery(
+                data: mq.copyWith(textScaler: clamped),
+                child: child!,
+              );
+            },
           ),
         );
       },

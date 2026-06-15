@@ -1,217 +1,217 @@
 {
   "category": "Termografia Infravermelha",
-  "categorySubtitle": "Fundamentos, aplicacoes em sistemas eletricos e normas de laudos",
+  "categorySubtitle": "Fundamentos, aplicações em sistemas elétricos e normas de laudos",
   "categoryOrder": 3,
   "module": "Termografia em Sistemas Elétricos",
-  "moduleSubtitle": "Inspecao de subestacoes, paineis, motores, linhas e pontos quentes",
+  "moduleSubtitle": "Inspeção de subestações, painéis, motores, linhas e pontos quentes",
   "moduleOrder": 2,
   "trail": "Identificação de Falhas e Causas Raiz",
   "trailOrder": 5,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que causa diretamente o surgimento de pontos quentes localizados nas conexoes de circuitos eletricos inspecionados?",
+      "statement": "O que causa diretamente o surgimento de pontos quentes localizados nas conexões de circuitos elétricos inspecionados?",
       "options": [
         "O resfriamento induzido pelo aumento da umidade absoluta do ar.",
-        "A deficiencia de contato mecanico, corrosao ou oxidacao quimica.",
-        "A reducao severa da corrente eletrica nominal do sistema.",
-        "O comportamento emissivo perfeitamente unitario do metal puro."
+        "A deficiência de contato mecânico, corrosão ou oxidação química.",
+        "A redução severa da corrente elétrica nominal do sistema.",
+        "O comportamento emissivo perfeitamente unitário do metal puro."
       ],
       "correctIndex": 1,
-      "explanation": "Pontos quentes em circuitos eletricos sao gerados por deficiencia de contato nos componentes, corrosao, oxidacao ou falhas fisicas. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "Pontos quentes em circuitos elétricos são gerados por deficiência de contato nos componentes, corrosão, oxidação ou falhas físicas. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como o principio do Efeito Joule evidencia anormalidades termicas na termografia de instalacoes eletricas?",
+      "statement": "Como o princípio do Efeito Joule evidencia anormalidades térmicas na termografia de instalações elétricas?",
       "options": [
-        "O calor dissipado pela peca diminui a medida que a corrente operacional sobe.",
-        "O aumento anormal da resistencia ohmica causa maior dissipacao termica no componente.",
-        "A resistencia elevada da conexao anula a potencia ativa de toda a linha principal.",
+        "O calor dissipado pela peça diminui à medida que a corrente operacional sobe.",
+        "O aumento anormal da resistência ôhmica causa maior dissipação térmica no componente.",
+        "A resistência elevada da conexão anula a potência ativa de toda a linha principal.",
         "A corrente induzida reduz abruptamente a temperatura superficial do cobre polido."
       ],
       "correctIndex": 1,
-      "explanation": "A termografia identifica problemas termicos provocados pela relacao entre a corrente de carga e o aumento da resistencia ohmica. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "A termografia identifica problemas térmicos provocados pela relação entre a corrente de carga e o aumento da resistência ôhmica. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na termografia de cabos eletricos instalados em paralelo na mesma fase, o que um condutor significativamente mais frio pode indicar?",
+      "statement": "Na termografia de cabos elétricos instalados em paralelo na mesma fase, o que um condutor significativamente mais frio pode indicar?",
       "options": [
-        "Que o cabo nao possui falhas e e o unico condutor operando com perfeita saude termica.",
-        "Que um forte mau contato elevou sua resistencia, desviando a corrente para os cabos vizinhos.",
-        "Que a emissividade direcional daquele cabo especifico foi ajustada erroneamente no software.",
-        "Que a ventilacao natural convectiva esta atuando de forma concentrada apenas no seu revestimento."
+        "Que o cabo não possui falhas e é o único condutor operando com perfeita saúde térmica.",
+        "Que um forte mau contato elevou sua resistência, desviando a corrente para os cabos vizinhos.",
+        "Que a emissividade direcional daquele cabo específico foi ajustada erroneamente no software.",
+        "Que a ventilação natural convectiva está atuando de forma concentrada apenas no seu revestimento."
       ],
       "correctIndex": 1,
-      "explanation": "Em casos de mau contato de altissima resistencia, a corrente se desvia para os cabos saudaveis, tornando a conexao falha a mais fria do conjunto. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Em casos de mau contato de altíssima resistência, a corrente se desvia para os cabos saudáveis, tornando a conexão falha a mais fria do conjunto. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
       "statement": "Qual foi a causa raiz diagnosticada com termografia para o severo superaquecimento de 62,2 graus no disjuntor de caixa moldada PMCC-04?",
       "options": [
-        "A ocorrencia de um forte curto-circuito bifasico franco nos terminais inferiores.",
-        "A ausencia prolongada do fornecimento de tensao por parte da concessionaria local.",
-        "A aplicacao de um torque inadequado na conexao acarretando a deterioracao do terminal.",
-        "A injecao massiva de harmonicos capacitivos pelo banco de correcao de fator de potencia."
+        "A ocorrência de um forte curto-circuito bifásico franco nos terminais inferiores.",
+        "A ausência prolongada do fornecimento de tensão por parte da concessionária local.",
+        "A aplicação de um torque inadequado na conexão acarretando a deterioração do terminal.",
+        "A injeção massiva de harmônicos capacitivos pelo banco de correção de fator de potência."
       ],
       "correctIndex": 2,
-      "explanation": "A falha geradora do aquecimento foi a aplicacao de um torque inadequado na conexao que deteriorou fisicamente a fixacao do terminal. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "A falha geradora do aquecimento foi a aplicação de um torque inadequado na conexão que deteriorou fisicamente a fixação do terminal. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Alem do aumento da resistencia de contato, quais outros problemas em instalacoes eletricas a termografia consegue diagnosticar pelos padroes termicos?",
+      "statement": "Além do aumento da resistência de contato, quais outros problemas em instalações elétricas a termografia consegue diagnosticar pelos padrões térmicos?",
       "options": [
-        "Curto-circuito, aquecimento por inducao eletromagnetica e cargas totalmente desbalanceadas.",
-        "Apenas as falhas de refrigeracao forcada no interior das carcacas de motores eletricos.",
-        "O erro de bit de paridade no software de rede da camera termografica empregada.",
-        "A absorcao atmosferica total da irradiacao infravermelha pelo gas inerte nitrogenio."
+        "Curto-circuito, aquecimento por indução eletromagnética e cargas totalmente desbalanceadas.",
+        "Apenas as falhas de refrigeração forçada no interior das carcaças de motores elétricos.",
+        "O erro de bit de paridade no software de rede da câmera termográfica empregada.",
+        "A absorção atmosférica total da irradiação infravermelha pelo gás inerte nitrogênio."
       ],
       "correctIndex": 0,
-      "explanation": "Problemas como conexoes frouxas, curtos-circuitos, aquecimento por inducao e cargas desbalanceadas podem ser atestados pela termografia. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Problemas como conexões frouxas, curtos-circuitos, aquecimento por indução e cargas desbalanceadas podem ser atestados pela termografia. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como a termografia quantifica metodologicamente a potencia dissipada para estimar a gravidade do mau contato na conexao eletrica?",
+      "statement": "Como a termografia quantifica metodologicamente a potência dissipada para estimar a gravidade do mau contato na conexão elétrica?",
       "options": [
-        "Atraves da raiz quadrada da tensao local multiplicada pelo ruido NETD da matriz termica.",
-        "Pela correlacao diretamente proporcional ao logaritmo da transmitancia da fenda (SRF).",
-        "Pelo calculo em watts do produto entre a queda de tensao na conexao e a sua corrente eletrica circulante.",
-        "Subtraindo o valor da irradiacao de fundo para isolar a sensibilidade termica bruta do pixel focado."
+        "Através da raiz quadrada da tensão local multiplicada pelo ruído NETD da matriz térmica.",
+        "Pela correlação diretamente proporcional ao logaritmo da transmitância da fenda (SRF).",
+        "Pelo cálculo em watts do produto entre a queda de tensão na conexão e a sua corrente elétrica circulante.",
+        "Subtraindo o valor da irradiação de fundo para isolar a sensibilidade térmica bruta do pixel focado."
       ],
       "correctIndex": 2,
-      "explanation": "A potencia eletrica dissipada no mau contato e o produto entre a queda de tensao pontual na conexao e a corrente eletrica que a atravessa. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "A potência elétrica dissipada no mau contato é o produto entre a queda de tensão pontual na conexão e a corrente elétrica que a atravessa. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que areas com distribuicao termica irregular generalizada no termograma costumam sinalizar na analise de equipamentos industriais?",
+      "statement": "O que áreas com distribuição térmica irregular generalizada no termograma costumam sinalizar na análise de equipamentos industriais?",
       "options": [
-        "A comprovacao inquestionavel da perfeita estabilidade de calibracao laboratorial da camera.",
-        "Falhas nos sistemas fisicos de isolamento termico protetor ou a existencia de vazamentos estruturais internos.",
-        "O termino imediato da vida util operacional da bateria eletronica do equipamento termovisor.",
-        "Uma excessiva correcao parametrica do calor refletido do ambiente preenchido no software de apoio."
+        "A comprovação inquestionável da perfeita estabilidade de calibração laboratorial da câmera.",
+        "Falhas nos sistemas físicos de isolamento térmico protetor ou a existência de vazamentos estruturais internos.",
+        "O término imediato da vida útil operacional da bateria eletrônica do equipamento termovisor.",
+        "Uma excessiva correção paramétrica do calor refletido do ambiente preenchido no software de apoio."
       ],
       "correctIndex": 1,
-      "explanation": "A distribuicao termica difusa ou irregular em superficies indica habitualmente vazamentos sistemicos ou falhas criticas no isolamento termico protetor. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "A distribuição térmica difusa ou irregular em superfícies indica habitualmente vazamentos sistêmicos ou falhas críticas no isolamento térmico protetor. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Por que a reducao da area efetiva de contato metal-metal em uma conexao oxidada eleva agressivamente sua temperatura superficial?",
+      "statement": "Por que a redução da área efetiva de contato metal-metal em uma conexão oxidada eleva agressivamente sua temperatura superficial?",
       "options": [
-        "Pois a emissividade optica do metal afrouxado atinge niveis ideais para absorver calor ambiente.",
-        "Porque a diminuicao da area util aumenta substancialmente a resistencia ohmica e a potencia eletrica dissipada.",
-        "Pelo fato de a corrente nominal do condutor ser imediatamente derivada para o aterramento geral da maquina.",
-        "Devido ao total anulamento dos harmonicos de terceira ordem nas malhas reativas fechadas do circuito."
+        "Pois a emissividade óptica do metal afrouxado atinge níveis ideais para absorver calor ambiente.",
+        "Porque a diminuição da área útil aumenta substancialmente a resistência ôhmica e a potência elétrica dissipada.",
+        "Pelo fato de a corrente nominal do condutor ser imediatamente derivada para o aterramento geral da máquina.",
+        "Devido ao total anulamento dos harmônicos de terceira ordem nas malhas reativas fechadas do circuito."
       ],
       "correctIndex": 1,
-      "explanation": "Quanto menor for a area util de contato de uma conexao, maior sera a sua resistencia eletrica restritiva e a consequente geracao termica. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Quanto menor for a área útil de contato de uma conexão, maior será a sua resistência elétrica restritiva e a consequente geração térmica. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual foi a acao corretiva demandada ao identificar o aquecimento de 76,1 graus no terminal do rele de estado solido SSR11L?",
+      "statement": "Qual foi a ação corretiva demandada ao identificar o aquecimento de 76,1 graus no terminal do relé de estado sólido SSR11L?",
       "options": [
-        "A substituicao integral e preventiva do painel eletrico de potencia do setor mecanico.",
-        "A imediata limpeza e o devido reaperto emergencial nos terminais que sofriam de falta de manutencao.",
-        "A elevacao parametrica forcada do limite tolerado de Delta T para o patamar de 10 graus Celsius.",
-        "A instalacao corretiva de um conjunto de ventilacao forcada nas chapas externas do quadro focado."
+        "A substituição integral e preventiva do painel elétrico de potência do setor mecânico.",
+        "A imediata limpeza e o devido reaperto emergencial nos terminais que sofriam de falta de manutenção.",
+        "A elevação paramétrica forçada do limite tolerado de Delta T para o patamar de 10 graus Celsius.",
+        "A instalação corretiva de um conjunto de ventilação forçada nas chapas externas do quadro focado."
       ],
       "correctIndex": 1,
-      "explanation": "A falha ocorreu por falta de manutencao e exigiu a pronta limpeza e o rigoroso reaperto mecanico do terminal aquecido. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "A falha ocorreu por falta de manutenção e exigiu a pronta limpeza e o rigoroso reaperto mecânico do terminal aquecido. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na interpretacao do mapa de temperatura pelo termografista, o que um ponto de calor concentrado (hot spot) comumente representa?",
+      "statement": "Na interpretação do mapa de temperatura pelo termografista, o que um ponto de calor concentrado (hot spot) comumente representa?",
       "options": [
-        "Areas de expressiva temperatura focalizada que sinalizam indicios agudos de sobrecarga ou desgaste mecanico.",
-        "Apenas o brilho de uma reflexao termica inofensiva gerada por um anteparo de vidro vizinho.",
-        "Um ruido eletronico pontual defeituoso na matriz de plano focal de silicio (FPA) da camera.",
-        "O centro geometrico exato em que a pinca do alicate amperimetro deve obrigatoriamente ser acoplada."
+        "Áreas de expressiva temperatura focalizada que sinalizam indícios agudos de sobrecarga ou desgaste mecânico.",
+        "Apenas o brilho de uma reflexão térmica inofensiva gerada por um anteparo de vidro vizinho.",
+        "Um ruído eletrônico pontual defeituoso na matriz de plano focal de silício (FPA) da câmera.",
+        "O centro geométrico exato em que a pinça do alicate amperímetro deve obrigatoriamente ser acoplada."
       ],
       "correctIndex": 0,
-      "explanation": "Os pontos de calor (hot spots) evidenciam localizacoes de elevada temperatura denunciando sobrecargas ou desgastes das pecas. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "Os pontos de calor (hot spots) evidenciam localizações de elevada temperatura denunciando sobrecargas ou desgastes das peças. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "trueFalse",
-      "statement": "O padrao termico de aquecimento excessivo medido em garras metalicas de porta fusiveis pode ser gerado diretamente pela corrosao na superficie do contato.",
+      "statement": "O padrão térmico de aquecimento excessivo medido em garras metálicas de porta fusíveis pode ser gerado diretamente pela corrosão na superfície do contato.",
       "correctAnswer": true,
-      "explanation": "Os aquecimentos nessas conexoes de fusiveis ocorrem ativamente devido ao aumento da resistencia de contato gerado por deficiencias, corrosoes ou oxidacoes. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "Os aquecimentos nessas conexões de fusíveis ocorrem ativamente devido ao aumento da resistência de contato gerado por deficiências, corrosões ou oxidações. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A inspecao termografica concentra-se estritamente em procurar pontos isolados anormalmente frios para detectar queima progressiva no enrolamento de motores.",
+      "statement": "A inspeção termográfica concentra-se estritamente em procurar pontos isolados anormalmente frios para detectar queima progressiva no enrolamento de motores.",
       "correctAnswer": false,
-      "explanation": "A inspecao localiza predominantemente os acumulos termicos (hot spots) que sinalizam sobrecargas e problemas estruturais mecanicos nos equipamentos. (Fonte: A Evolucao da Termografia nas Inspecoes de Engenharia, eMartins Engenharia)",
+      "explanation": "A inspeção localiza predominantemente os acúmulos térmicos (hot spots) que sinalizam sobrecargas e problemas estruturais mecânicos nos equipamentos. (Fonte: A Evolução da Termografia nas Inspeções de Engenharia, eMartins Engenharia)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Modelos empiricos atestam matematicamente que a area efetiva do contato da conexao nao conforme tem comportamento inversamente proporcional a sua elevacao de temperatura.",
+      "statement": "Modelos empíricos atestam matematicamente que a área efetiva do contato da conexão não conforme tem comportamento inversamente proporcional à sua elevação de temperatura.",
       "correctAnswer": true,
-      "explanation": "O modelo formulado aponta que, a medida que a temperatura eleva-se agressivamente, a area de contato eletrico cai de maneira inversamente correlacionada. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "O modelo formulado aponta que, à medida que a temperatura eleva-se agressivamente, a área de contato elétrico cai de maneira inversamente correlacionada. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A captura de um ponto quente em um disjuntor de baixa tensao durante a analise qualitativa e sempre um laudo irrefutavel de avaria que impoe a substituicao da peca.",
+      "statement": "A captura de um ponto quente em um disjuntor de baixa tensão durante a análise qualitativa é sempre um laudo irrefutável de avaria que impõe a substituição da peça.",
       "correctAnswer": false,
-      "explanation": "Um disjuntor atuando de modo solitario em regime continuo atinge pontualmente uma temperatura alta, constituindo trabalho normal e nao atestando obrigatoriamente um defeito. (Fonte: Tipos de analise termografica em painel eletrico)",
+      "explanation": "Um disjuntor atuando de modo solitário em regime contínuo atinge pontualmente uma temperatura alta, constituindo trabalho normal e não atestando obrigatoriamente um defeito. (Fonte: Tipos de análise termográfica em painel elétrico)",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "A termografia assume grande valia preditiva nas industrias justamente pelo fato de que as anomalias e variacoes termicas antecedem temporalmente a ocorrencia da falha final.",
+      "statement": "A termografia assume grande valia preditiva nas indústrias justamente pelo fato de que as anomalias e variações térmicas antecedem temporalmente a ocorrência da falha final.",
       "correctAnswer": true,
-      "explanation": "A variacao anormal e repentina de calor costuma ser o estagio inicial latente que antecede de maneira sistematica as graves rupturas eletromecanicas. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "A variação anormal e repentina de calor costuma ser o estágio inicial latente que antecede de maneira sistemática as graves rupturas eletromecânicas. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "Na formulacao do diagnostico do condutor, a area efetiva de contato da conexao apresenta uma relacao matematica inversamente proporcional a sua elevacao de ____ medida.",
+      "statement": "Na formulação do diagnóstico do condutor, a área efetiva de contato da conexão apresenta uma relação matemática inversamente proporcional à sua elevação de ____ medida.",
       "blanks": [
         {
           "index": 0,
           "answer": "temperatura"
         }
       ],
-      "explanation": "Quanto menor for a area preservada de contato metalico entre as pecas, mais alta sera a resistencia e muito maior o salto da temperatura medida. (Fonte: Termografia Infravermelha, Editora do Ifes)",
+      "explanation": "Quanto menor for a área preservada de contato metálico entre as peças, mais alta será a resistência e muito maior o salto da temperatura medida. (Fonte: Termografia Infravermelha, Editora do Ifes)",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Termogramas rotineiros de paineis revelam que falhas geradoras de forte aquecimento resistivo originam-se ativamente por superficies oxidadas, sobrecargas ou deficiencia mecanica de ____.",
+      "statement": "Termogramas rotineiros de painéis revelam que falhas geradoras de forte aquecimento resistivo originam-se ativamente por superfícies oxidadas, sobrecargas ou deficiência mecânica de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "aperto"
         }
       ],
-      "explanation": "Muitas avarias sao produzidas fisicamente nas instalacoes pela oxidacao progressiva ou pela falta do aperto recomendado na juncao dos condutores metalicos. (Fonte: Termografia aplicada em paineis eletricos)",
+      "explanation": "Muitas avarias são produzidas fisicamente nas instalações pela oxidação progressiva ou pela falta do aperto recomendado na junção dos condutores metálicos. (Fonte: Termografia aplicada em painéis elétricos)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "O padrao basico que guia a inspecao infravermelha afirma que o aquecimento do metal surge pelo aumento agressivo e concentrado de sua resistencia ____ estrutural.",
+      "statement": "O padrão básico que guia a inspeção infravermelha afirma que o aquecimento do metal surge pelo aumento agressivo e concentrado de sua resistência ____ estrutural.",
       "blanks": [
         {
           "index": 0,
           "answer": "ohmica"
         }
       ],
-      "explanation": "O calor nas chaves e barramentos cresce induzido especificamente pela elevacao concentrada da resistencia ohmica devido ao estado de desgaste das conexoes instaladas. (Fonte: Inspecao em Subestacoes Utilizando a Termografia)",
+      "explanation": "O calor nas chaves e barramentos cresce induzido especificamente pela elevação concentrada da resistência ôhmica devido ao estado de desgaste das conexões instaladas. (Fonte: Inspeção em Subestações Utilizando a Termografia)",
       "difficulty": "medium"
     }
   ]

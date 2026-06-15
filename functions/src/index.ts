@@ -12,8 +12,9 @@
  * Funções exportadas:
  *  - addXp             : Adiciona XP, recalcula nível/tensionLevel e badges.
  *  - spendSparkPoints  : Debita Spark Points com verificação de saldo.
- *  - updateElo         : Processa resultado de duelo e atualiza ELO rating.
  *  - unlockBadge       : Concede badge se ainda não desbloqueada.
+ *  - finalizeDuel      : Apura resultado do duelo e atualiza o ELO dos dois
+ *                        jogadores (única via de escrita de ELO de duelo).
  */
 
 import * as admin from "firebase-admin";
@@ -219,7 +220,6 @@ const PRICE_EPSILON = 0.01;
  *  100% autoritativas no servidor (ver memória spark-security-pending). */
 const MAX_XP_PER_CALL = 1000;
 const MAX_SP_PER_CALL = 500;
-const MAX_ELO_DELTA = 50;
 
 /** Badges que o servidor concede automaticamente — NÃO podem ser
  *  reivindicadas manualmente via unlockBadge. */
@@ -591,96 +591,11 @@ export const spendSparkPoints = onCall(
 );
 
 // ────────────────────────────────────────────────────────────────
-// 3. updateElo — Processa resultado de duelo e atualiza ELO rating
+// 3. (removido) updateElo — o ELO de duelo agora é apurado e gravado
+//    EXCLUSIVAMENTE por `finalizeDuel`, a partir do resultado real da
+//    partida. Não há mais função de ELO que aceite delta arbitrário do
+//    cliente (que permitiria forjar ranking).
 // ────────────────────────────────────────────────────────────────
-
-interface UpdateEloData {
-  eloChange: number;
-  won: boolean | null; // true=vitória, false=derrota, null=empate
-}
-
-interface UpdateEloResult {
-  newElo: number;
-  totalDuels: number;
-}
-
-export const updateElo = onCall(
-  {
-    enforceAppCheck: ENFORCE_APP_CHECK,
-    region: "southamerica-east1",
-    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
-  },
-  async (request: CallableRequest<UpdateEloData>): Promise<UpdateEloResult> => {
-    const uid = request.auth?.uid;
-    if (!uid) {
-      throw new HttpsError("unauthenticated", "Usuário não autenticado.");
-    }
-
-    await checkRateLimit(
-      rateLimitKey("gamification", uid, "updateElo"),
-      RATE_GAMIFICATION.limit,
-      RATE_GAMIFICATION.windowMs
-    );
-
-    const { eloChange, won } = request.data;
-
-    if (typeof eloChange !== "number" || !Number.isFinite(eloChange)) {
-      throw new HttpsError("invalid-argument", "eloChange deve ser um número.");
-    }
-    if (Math.abs(eloChange) > MAX_ELO_DELTA) {
-      throw new HttpsError(
-        "invalid-argument",
-        `eloChange fora do intervalo permitido (±${MAX_ELO_DELTA}).`
-      );
-    }
-
-    const userRef = db.collection("users").doc(uid);
-    let result!: UpdateEloResult;
-
-    await db.runTransaction(async (tx) => {
-      const snap = await tx.get(userRef);
-      if (!snap.exists) {
-        throw new HttpsError("not-found", "Documento do usuário não encontrado.");
-      }
-
-      const data = snap.data()!;
-      const currentElo = (data["eloRating"] as number) ?? 1200;
-      const currentDuels = (data["totalDuels"] as number) ?? 0;
-      const unlockedBadgeIds: string[] = data["unlockedBadgeIds"] ?? [];
-
-      const updates: Record<string, unknown> = {
-        eloRating: admin.firestore.FieldValue.increment(eloChange),
-        totalDuels: admin.firestore.FieldValue.increment(1),
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      };
-
-      if (won === true) {
-        updates["wins"] = admin.firestore.FieldValue.increment(1);
-      } else if (won === false) {
-        updates["losses"] = admin.firestore.FieldValue.increment(1);
-      }
-
-      tx.update(userRef, updates);
-
-      // Badge do primeiro duelo (totalDuels era 0 antes da atualização)
-      if (currentDuels === 0) {
-        if (!unlockedBadgeIds.includes("primeiro_duelo")) {
-          updates.unlockedBadgeIds = admin.firestore.FieldValue.arrayUnion("primeiro_duelo");
-        }
-      }
-
-      result = {
-        newElo: currentElo + eloChange,
-        totalDuels: currentDuels + 1,
-      };
-    });
-
-    logger.info(
-      `[updateElo] uid=${uid} change=${eloChange} won=${won} newElo=${result.newElo}`
-    );
-    return result;
-  }
-);
 
 // ────────────────────────────────────────────────────────────────
 // 4. unlockBadge — Concede badge ao usuário de forma validada
@@ -2115,135 +2030,580 @@ export const deleteAccount = onCall(
   }
 );
 
-// ────────────────────────────────────────────────────────────────
-// syncPublicProfile — Espelha campos PÚBLICOS de users/{uid} em
-// public_profiles/{uid} (LGPD: /users é privado; o espelho público
-// não carrega e-mail, dados de pagamento nem tokens).
-// As Security Rules deixam public_profiles como write:false (só o
-// servidor escreve), e este trigger é o ÚNICO escritor. Sem ele a
-// coleção fica vazia e o ranking all-time / telas de perfil quebram.
-// ────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════
+//  DUELO DE FAÍSCAS (PvP) — Matchmaking + partida server-authoritative
+//
+//  Fluxo:
+//   1. joinDuelQueue   → pareia 2 jogadores OU coloca na fila (heartbeat).
+//   2. submitDuelAnswer→ valida cada resposta no servidor (anti-trapaça).
+//   3. finalizeDuel    → apura vencedor e aplica ELO aos dois jogadores.
+//   4. getBotDuelQuestions → perguntas (com gabarito) p/ partida de treino.
+//
+//  As perguntas vêm das trilhas reais (collectionGroup "questions") e são
+//  sorteadas aleatoriamente. O gabarito do duelo fica numa subcoleção
+//  secreta (matches/{id}/secret/key) que o cliente NÃO consegue ler.
+// ════════════════════════════════════════════════════════════════════
 
-/** Campos espelhados em public_profiles. Qualquer outro fica fora (PII). */
-const PUBLIC_PROFILE_FIELDS = [
-  "displayName",
-  "photoUrl",
-  "profession",
-  "xp",
-  "level",
-  "tensionLevel",
-  "weeklyXp",
-  "monthlyXp",
-  "eloRating",
-  "clanId",
-  "clanName",
-  "unlockedBadgeIds",
-  // Módulo que o usuário está estudando agora. Necessário para a "presença
-  // do clã" (learning_path_screen consulta public_profiles por clanId +
-  // currentModuleId). Sem espelhar este campo, a query sempre vinha vazia.
-  "currentModuleId",
-] as const;
+const DUEL_QUESTION_COUNT = 8; // 7–10 perguntas por duelo
+const DUEL_QUESTION_TIME_MS = 15_000; // tempo por questão (igual ao app)
+const DUEL_QUEUE_TTL_MS = 15_000; // entrada da fila expira sem heartbeat
+const DUEL_RATE = { limit: 60, windowMs: 60 * 1000 } as const;
 
-/** Extrai apenas os campos públicos de um doc de usuário. */
-function pickPublicFields(
-  data: Record<string, unknown>
-): Record<string, unknown> {
-  const out: Record<string, unknown> = {};
-  for (const key of PUBLIC_PROFILE_FIELDS) {
-    if (data[key] !== undefined) out[key] = data[key];
-  }
-  return out;
+// ELO real (fórmula clássica de Elo). O fator K define o "peso" de cada
+// partida; o teto limita variações extremas por segurança.
+const DUEL_ELO_K = 32;
+const DUEL_ELO_MAX = 40;
+
+interface DuelQuestionFull {
+  id: string;
+  statement: string;
+  options: string[];
+  correctIndex: number;
 }
 
-export const syncPublicProfile = onDocumentWritten(
-  {
-    document: "users/{uid}",
-    // Este projeto usa um banco Firestore NOMEADO ("default"), não o
-    // "(default)". Sem declarar isto o deploy do trigger falha com 404
-    // ("database '(default)' does not exist") e o gatilho nunca dispara.
-    database: "default",
-    region: "southamerica-east1",
-    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
-  },
-  async (event) => {
-    const uid = event.params.uid;
-    const publicRef = db.collection("public_profiles").doc(uid);
+// Cache em memória do banco de questões (warm instances) — evita varrer
+// o collectionGroup a cada matchmaking.
+let _questionCache: DuelQuestionFull[] | null = null;
+let _questionCacheAt = 0;
+const QUESTION_CACHE_TTL_MS = 5 * 60 * 1000;
 
-    const after = event.data?.after;
-    // Documento de usuário foi apagado → remove o espelho público.
-    // (deleteAccount já remove explicitamente, mas isto cobre exclusões diretas.)
-    if (!after || !after.exists) {
-      await publicRef.delete().catch(() => {});
-      logger.info(`[syncPublicProfile] uid=${uid} removido (user apagado).`);
-      return;
-    }
-
-    const afterData = after.data() ?? {};
-    const newPublic = pickPublicFields(afterData);
-
-    // Evita escritas desnecessárias (e loops de custo): só grava se algum
-    // campo público realmente mudou em relação ao estado anterior.
-    const beforeData = event.data?.before?.data() ?? {};
-    const oldPublic = pickPublicFields(beforeData);
-    const changed = PUBLIC_PROFILE_FIELDS.some(
-      (k) => JSON.stringify(oldPublic[k]) !== JSON.stringify(newPublic[k])
-    );
-    if (event.data?.before?.exists && !changed) {
-      return;
-    }
-
-    newPublic["uid"] = uid;
-    newPublic["updatedAt"] = admin.firestore.FieldValue.serverTimestamp();
-
-    await publicRef.set(newPublic, { merge: true });
-    logger.info(`[syncPublicProfile] uid=${uid} espelho público atualizado.`);
+async function loadDuelQuestionPool(): Promise<DuelQuestionFull[]> {
+  const now = Date.now();
+  if (_questionCache && now - _questionCacheAt < QUESTION_CACHE_TTL_MS) {
+    return _questionCache;
   }
-);
 
-// ────────────────────────────────────────────────────────────────
-// cleanupOldRankings — Agendada semanalmente. Remove subcoleções de
-// semanas antigas em rankings/weekly para o storage não crescer
-// indefinidamente (o addXp cria uma subcoleção nova a cada semana e
-// nada as apagava). Mantém as últimas RANKING_WEEKS_TO_KEEP semanas.
-// O weekKey tem formato "YYYY-Www" (zero-padded), então a ordenação
-// lexicográfica decrescente equivale à cronológica.
-// ────────────────────────────────────────────────────────────────
+  // Sem where() → não exige índice de collection-group. Filtramos em memória.
+  const snap = await db
+    .collectionGroup("questions")
+    .select("type", "statement", "options", "correctIndex", "isActive")
+    .get();
 
-const RANKING_WEEKS_TO_KEEP = 8;
+  const pool: DuelQuestionFull[] = [];
+  snap.forEach((doc) => {
+    const d = doc.data();
+    if (d["isActive"] === false) return;
+    if (d["type"] !== "multipleChoice") return; // duelo usa só múltipla escolha
+    const options = d["options"];
+    const correctIndex = d["correctIndex"];
+    const statement = d["statement"];
+    if (!Array.isArray(options) || options.length < 2) return;
+    if (
+      typeof correctIndex !== "number" ||
+      correctIndex < 0 ||
+      correctIndex >= options.length
+    ) {
+      return;
+    }
+    if (typeof statement !== "string" || statement.trim() === "") return;
+    pool.push({
+      id: doc.id,
+      statement: statement.trim(),
+      options: options.map((o: unknown) => String(o)),
+      correctIndex,
+    });
+  });
 
-export const cleanupOldRankings = onSchedule(
+  _questionCache = pool;
+  _questionCacheAt = now;
+  logger.info(`[duel] pool de questões recarregado: ${pool.length} válidas`);
+  return pool;
+}
+
+function pickRandomDuelQuestions(
+  pool: DuelQuestionFull[],
+  count: number
+): DuelQuestionFull[] {
+  const arr = [...pool];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr.slice(0, Math.min(count, arr.length));
+}
+
+/** Pontuação de uma rodada — espelha o cálculo do app. */
+function duelRoundScore(isCorrect: boolean, timeMs: number): number {
+  if (!isCorrect) return 0;
+  const clamped = Math.max(0, Math.min(DUEL_QUESTION_TIME_MS, timeMs));
+  return Math.max(0, Math.min(100, 100 - clamped / 100));
+}
+
+function sumDuelScores(answers: Array<Record<string, unknown>>): number {
+  return answers.reduce((acc, a) => acc + ((a["score"] as number) ?? 0), 0);
+}
+
+async function fetchPlayerCard(
+  uid: string
+): Promise<{ name: string; photo: string | null; elo: number }> {
+  try {
+    const snap = await db.collection("users").doc(uid).get();
+    const d = snap.data() ?? {};
+    return {
+      name: (d["displayName"] as string) || (d["name"] as string) || "Jogador",
+      photo: (d["photoUrl"] as string) ?? null,
+      elo: (d["eloRating"] as number) ?? 1200,
+    };
+  } catch {
+    return { name: "Jogador", photo: null, elo: 1200 };
+  }
+}
+
+// ── 1. joinDuelQueue ────────────────────────────────────────────────
+
+interface JoinQueueResult {
+  status: "matched" | "waiting";
+  matchId?: string;
+}
+
+class OpponentTakenError extends Error {}
+
+export const joinDuelQueue = onCall(
   {
-    schedule: "every monday 04:00",
-    timeZone: "America/Sao_Paulo",
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
-  async () => {
-    const weeklyDoc = db.collection("rankings").doc("weekly");
-    const weekCols = await weeklyDoc.listCollections();
+  async (request: CallableRequest): Promise<JoinQueueResult> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
 
-    if (weekCols.length <= RANKING_WEEKS_TO_KEEP) {
-      logger.info(
-        `[cleanupOldRankings] ${weekCols.length} semana(s); nada a limpar.`
-      );
-      return;
+    await checkRateLimit(
+      rateLimitKey("gamification", uid, "joinDuelQueue"),
+      DUEL_RATE.limit,
+      DUEL_RATE.windowMs
+    );
+
+    const myQueueRef = db.collection("matchmaking_queue").doc(uid);
+    const now = Date.now();
+
+    // (a) Já fui pareado por outro jogador enquanto esperava?
+    const mySnap = await myQueueRef.get();
+    const existingMatchId = mySnap.data()?.["matchId"] as string | undefined;
+    if (existingMatchId) {
+      return { status: "matched", matchId: existingMatchId };
     }
 
-    // Ordena por ID (weekKey) decrescente e mantém só as mais recentes.
-    const sorted = weekCols.sort((a, b) => (a.id < b.id ? 1 : -1));
-    const toDelete = sorted.slice(RANKING_WEEKS_TO_KEEP);
+    // (b) Procura um oponente esperando (mais antigo primeiro).
+    const candidates = await db
+      .collection("matchmaking_queue")
+      .orderBy("joinedAt", "asc")
+      .limit(10)
+      .get();
 
-    for (const col of toDelete) {
+    let opponentRef: FirebaseFirestore.DocumentReference | null = null;
+    for (const doc of candidates.docs) {
+      if (doc.id === uid) continue;
+      const d = doc.data();
+      if (d["matchId"]) continue; // já pareado
+      const lastSeen = (d["lastSeen"] as FirebaseFirestore.Timestamp | undefined)?.toMillis() ?? 0;
+      if (now - lastSeen > DUEL_QUEUE_TTL_MS) {
+        // Entrada morta — limpa de forma best-effort.
+        doc.ref.delete().catch(() => undefined);
+        continue;
+      }
+      opponentRef = doc.ref;
+      break;
+    }
+
+    // (c) Encontrou oponente → tenta parear atomicamente.
+    if (opponentRef) {
       try {
-        await db.recursiveDelete(col);
-        logger.info(`[cleanupOldRankings] semana ${col.id} removida.`);
+        const pool = await loadDuelQuestionPool();
+        if (pool.length < DUEL_QUESTION_COUNT) {
+          throw new HttpsError(
+            "failed-precondition",
+            "Não há perguntas suficientes cadastradas para um duelo."
+          );
+        }
+        const picked = pickRandomDuelQuestions(pool, DUEL_QUESTION_COUNT);
+
+        const [meCard, oppCard] = await Promise.all([
+          fetchPlayerCard(uid),
+          fetchPlayerCard(opponentRef.id),
+        ]);
+
+        const matchRef = db.collection("matches").doc();
+        const oppUid = opponentRef.id;
+
+        await db.runTransaction(async (tx) => {
+          const oppDoc = await tx.get(opponentRef!);
+          if (!oppDoc.exists) throw new OpponentTakenError();
+          const od = oppDoc.data()!;
+          if (od["matchId"]) throw new OpponentTakenError();
+          const lastSeen = (od["lastSeen"] as FirebaseFirestore.Timestamp | undefined)?.toMillis() ?? 0;
+          if (now - lastSeen > DUEL_QUEUE_TTL_MS) throw new OpponentTakenError();
+
+          // Doc do match — questões SEM gabarito.
+          tx.set(matchRef, {
+            player1Uid: oppUid, // quem esperava entra como player1
+            player2Uid: uid,
+            player1Name: oppCard.name,
+            player2Name: meCard.name,
+            player1Photo: oppCard.photo,
+            player2Photo: meCard.photo,
+            player1Elo: oppCard.elo,
+            player2Elo: meCard.elo,
+            status: "active",
+            isBot: false,
+            questions: picked.map((q) => ({
+              id: q.id,
+              statement: q.statement,
+              options: q.options,
+            })),
+            player1Scores: [],
+            player2Scores: [],
+            player1Done: false,
+            player2Done: false,
+            winnerId: null,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            finishedAt: null,
+          });
+
+          // Gabarito secreto (regras bloqueiam leitura do cliente).
+          tx.set(matchRef.collection("secret").doc("key"), {
+            answers: picked.map((q) => q.correctIndex),
+          });
+
+          // Avisa o jogador que esperava (listener da fila dele).
+          tx.set(
+            opponentRef!,
+            { matchId: matchRef.id, status: "matched" },
+            { merge: true }
+          );
+
+          // Eu (iniciador) saio da fila.
+          tx.delete(myQueueRef);
+        });
+
+        logger.info(`[joinDuelQueue] match ${matchRef.id}: ${oppUid} vs ${uid}`);
+        return { status: "matched", matchId: matchRef.id };
       } catch (e) {
-        logger.warn(`[cleanupOldRankings] falha ao remover ${col.id}:`, e);
+        if (!(e instanceof OpponentTakenError)) throw e;
+        // Oponente foi pego por outro — cai para enfileirar.
       }
     }
 
-    logger.info(
-      `[cleanupOldRankings] ${toDelete.length} semana(s) antiga(s) removida(s).`
+    // (d) Sem oponente → entra/atualiza a fila (heartbeat).
+    await myQueueRef.set(
+      {
+        uid,
+        status: "waiting",
+        matchId: null,
+        joinedAt: mySnap.exists
+          ? mySnap.data()?.["joinedAt"] ?? admin.firestore.FieldValue.serverTimestamp()
+          : admin.firestore.FieldValue.serverTimestamp(),
+        lastSeen: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
     );
+    return { status: "waiting" };
+  }
+);
+
+// ── 2. leaveDuelQueue ───────────────────────────────────────────────
+
+export const leaveDuelQueue = onCall(
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (request: CallableRequest): Promise<{ ok: boolean }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await db.collection("matchmaking_queue").doc(uid).delete().catch(() => undefined);
+    return { ok: true };
+  }
+);
+
+// ── 3. submitDuelAnswer ─────────────────────────────────────────────
+
+interface SubmitAnswerData {
+  matchId: string;
+  questionIndex: number;
+  selectedOption: number;
+  elapsedMs: number;
+}
+
+interface SubmitAnswerResult {
+  isCorrect: boolean;
+  correctIndex: number;
+  score: number;
+}
+
+export const submitDuelAnswer = onCall(
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<SubmitAnswerData>
+  ): Promise<SubmitAnswerResult> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    await checkRateLimit(
+      rateLimitKey("gamification", uid, "submitDuelAnswer"),
+      DUEL_RATE.limit,
+      DUEL_RATE.windowMs
+    );
+
+    const { matchId, questionIndex, selectedOption, elapsedMs } = request.data;
+    if (typeof matchId !== "string" || !matchId) {
+      throw new HttpsError("invalid-argument", "matchId inválido.");
+    }
+    if (typeof questionIndex !== "number" || questionIndex < 0) {
+      throw new HttpsError("invalid-argument", "questionIndex inválido.");
+    }
+
+    const matchRef = db.collection("matches").doc(matchId);
+    const keyRef = matchRef.collection("secret").doc("key");
+
+    let result!: SubmitAnswerResult;
+
+    await db.runTransaction(async (tx) => {
+      const [matchSnap, keySnap] = await Promise.all([
+        tx.get(matchRef),
+        tx.get(keyRef),
+      ]);
+      if (!matchSnap.exists) throw new HttpsError("not-found", "Duelo não encontrado.");
+
+      const m = matchSnap.data()!;
+      const isP1 = m["player1Uid"] === uid;
+      const isP2 = m["player2Uid"] === uid;
+      if (!isP1 && !isP2) {
+        throw new HttpsError("permission-denied", "Você não participa deste duelo.");
+      }
+      if (m["status"] !== "active") {
+        throw new HttpsError("failed-precondition", "Duelo já encerrado.");
+      }
+
+      const questions = (m["questions"] as Array<unknown>) ?? [];
+      if (questionIndex >= questions.length) {
+        throw new HttpsError("invalid-argument", "Índice de questão fora do intervalo.");
+      }
+
+      const scoresField = isP1 ? "player1Scores" : "player2Scores";
+      const doneField = isP1 ? "player1Done" : "player2Done";
+      const answers = (m[scoresField] as Array<Record<string, unknown>>) ?? [];
+
+      // Anti-replay: só aceita a próxima questão esperada, em ordem.
+      if (questionIndex !== answers.length) {
+        throw new HttpsError("failed-precondition", "Resposta fora de ordem ou duplicada.");
+      }
+
+      const answerKey = (keySnap.data()?.["answers"] as number[]) ?? [];
+      const correctIndex = answerKey[questionIndex] ?? -1;
+      const isCorrect = selectedOption === correctIndex;
+      const timeMs = Math.max(0, Math.min(DUEL_QUESTION_TIME_MS, elapsedMs ?? DUEL_QUESTION_TIME_MS));
+      const score = duelRoundScore(isCorrect, timeMs);
+
+      const round = {
+        q: questionIndex,
+        selectedOption: typeof selectedOption === "number" ? selectedOption : -1,
+        isCorrect,
+        timeMs,
+        score,
+      };
+
+      const updates: Record<string, unknown> = {
+        [scoresField]: admin.firestore.FieldValue.arrayUnion(round),
+      };
+      if (questionIndex === questions.length - 1) {
+        updates[doneField] = true;
+      }
+      tx.update(matchRef, updates);
+
+      result = { isCorrect, correctIndex, score };
+    });
+
+    return result;
+  }
+);
+
+// ── 4. finalizeDuel ─────────────────────────────────────────────────
+
+interface FinalizeData {
+  matchId: string;
+  force?: boolean;
+}
+
+interface FinalizeResult {
+  status: "finished" | "waiting";
+  winnerId?: string | null;
+  player1Total?: number;
+  player2Total?: number;
+  eloChange?: number;
+  newElo?: number;
+}
+
+export const finalizeDuel = onCall(
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (request: CallableRequest<FinalizeData>): Promise<FinalizeResult> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    await checkRateLimit(
+      rateLimitKey("gamification", uid, "finalizeDuel"),
+      DUEL_RATE.limit,
+      DUEL_RATE.windowMs
+    );
+
+    const { matchId, force } = request.data;
+    if (typeof matchId !== "string" || !matchId) {
+      throw new HttpsError("invalid-argument", "matchId inválido.");
+    }
+
+    const matchRef = db.collection("matches").doc(matchId);
+    let result!: FinalizeResult;
+
+    await db.runTransaction(async (tx) => {
+      const matchSnap = await tx.get(matchRef);
+      if (!matchSnap.exists) throw new HttpsError("not-found", "Duelo não encontrado.");
+      const m = matchSnap.data()!;
+
+      const p1 = m["player1Uid"] as string;
+      const p2 = m["player2Uid"] as string;
+      if (uid !== p1 && uid !== p2) {
+        throw new HttpsError("permission-denied", "Você não participa deste duelo.");
+      }
+
+      const p1Answers = (m["player1Scores"] as Array<Record<string, unknown>>) ?? [];
+      const p2Answers = (m["player2Scores"] as Array<Record<string, unknown>>) ?? [];
+      const total = (m["questions"] as Array<unknown>)?.length ?? DUEL_QUESTION_COUNT;
+      const p1Total = sumDuelScores(p1Answers);
+      const p2Total = sumDuelScores(p2Answers);
+
+      // Já finalizado → idempotente.
+      if (m["status"] === "finished") {
+        const isP1 = uid === p1;
+        const myChange = (m[isP1 ? "player1EloChange" : "player2EloChange"] as number) ?? 0;
+        result = {
+          status: "finished",
+          winnerId: (m["winnerId"] as string) ?? null,
+          player1Total: p1Total,
+          player2Total: p2Total,
+          eloChange: myChange,
+        };
+        return;
+      }
+
+      const bothDone = p1Answers.length >= total && p2Answers.length >= total;
+      if (!bothDone && !force) {
+        // Ainda esperando o oponente terminar.
+        result = { status: "waiting" };
+        return;
+      }
+
+      // Apura vencedor.
+      let winnerId: string | null = null;
+      if (p1Total > p2Total) winnerId = p1;
+      else if (p2Total > p1Total) winnerId = p2;
+
+      const p1Ref = db.collection("users").doc(p1);
+      const p2Ref = db.collection("users").doc(p2);
+      const [p1Snap, p2Snap] = await Promise.all([tx.get(p1Ref), tx.get(p2Ref)]);
+
+      const p1Elo = (p1Snap.data()?.["eloRating"] as number) ?? 1200;
+      const p2Elo = (p2Snap.data()?.["eloRating"] as number) ?? 1200;
+
+      // ELO real: ganha-se MAIS batendo quem é mais forte e perde-se MENOS
+      // perdendo para quem é mais forte (e vice-versa).
+      const expected1 = 1 / (1 + Math.pow(10, (p2Elo - p1Elo) / 400));
+      const expected2 = 1 - expected1;
+      const s1 = winnerId === null ? 0.5 : winnerId === p1 ? 1 : 0;
+      const s2 = 1 - s1;
+
+      const clampChange = (raw: number, currentElo: number): number => {
+        const capped = Math.max(-DUEL_ELO_MAX, Math.min(DUEL_ELO_MAX, Math.round(raw)));
+        return Math.max(capped, -currentElo); // ELO nunca fica negativo
+      };
+      const p1Change = clampChange(DUEL_ELO_K * (s1 - expected1), p1Elo);
+      const p2Change = clampChange(DUEL_ELO_K * (s2 - expected2), p2Elo);
+
+      const applyElo = (
+        ref: FirebaseFirestore.DocumentReference,
+        snap: FirebaseFirestore.DocumentSnapshot,
+        change: number,
+        won: boolean | null
+      ) => {
+        if (!snap.exists) return;
+        const data = snap.data()!;
+        const updates: Record<string, unknown> = {
+          eloRating: admin.firestore.FieldValue.increment(change),
+          totalDuels: admin.firestore.FieldValue.increment(1),
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        };
+        if (won === true) updates["wins"] = admin.firestore.FieldValue.increment(1);
+        else if (won === false) updates["losses"] = admin.firestore.FieldValue.increment(1);
+        const unlocked: string[] = data["unlockedBadgeIds"] ?? [];
+        if (((data["totalDuels"] as number) ?? 0) === 0 && !unlocked.includes("primeiro_duelo")) {
+          updates["unlockedBadgeIds"] = admin.firestore.FieldValue.arrayUnion("primeiro_duelo");
+        }
+        tx.update(ref, updates);
+      };
+
+      applyElo(p1Ref, p1Snap, p1Change, winnerId === null ? null : winnerId === p1);
+      applyElo(p2Ref, p2Snap, p2Change, winnerId === null ? null : winnerId === p2);
+
+      tx.update(matchRef, {
+        status: "finished",
+        winnerId,
+        player1EloChange: p1Change,
+        player2EloChange: p2Change,
+        finishedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      const isP1 = uid === p1;
+      result = {
+        status: "finished",
+        winnerId,
+        player1Total: p1Total,
+        player2Total: p2Total,
+        eloChange: isP1 ? p1Change : p2Change,
+      };
+    });
+
+    logger.info(`[finalizeDuel] match=${matchId} status=${result.status} winner=${result.winnerId ?? "-"}`);
+    return result;
+  }
+);
+
+// ── 5. getBotDuelQuestions ──────────────────────────────────────────
+//  Perguntas COM gabarito para partida de treino (vs bot). Treino não
+//  afeta o ranking, então entregar o gabarito ao cliente é aceitável.
+
+interface BotQuestionsData {
+  count?: number;
+}
+
+export const getBotDuelQuestions = onCall(
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<BotQuestionsData>
+  ): Promise<{ questions: DuelQuestionFull[] }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    await checkRateLimit(
+      rateLimitKey("gamification", uid, "getBotDuelQuestions"),
+      DUEL_RATE.limit,
+      DUEL_RATE.windowMs
+    );
+
+    const count = Math.max(3, Math.min(15, request.data?.count ?? DUEL_QUESTION_COUNT));
+    const pool = await loadDuelQuestionPool();
+    if (pool.length === 0) {
+      throw new HttpsError(
+        "failed-precondition",
+        "Não há perguntas cadastradas para o duelo."
+      );
+    }
+    return { questions: pickRandomDuelQuestions(pool, count) };
   }
 );

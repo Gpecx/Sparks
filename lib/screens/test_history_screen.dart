@@ -133,13 +133,15 @@ class _TestHistoryScreenState extends State<TestHistoryScreen> {
           children: [
             Icon(icon, color: AppColors.primary, size: 15),
             const SizedBox(width: 6),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(value, style: const TextStyle(color: AppColors.primary, fontSize: 15, fontWeight: FontWeight.w800)),
-                Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
-              ],
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(value, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.primary, fontSize: 15, fontWeight: FontWeight.w800)),
+                  Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
+                ],
+              ),
             ),
           ],
         ),
@@ -168,9 +170,9 @@ class _TestHistoryScreenState extends State<TestHistoryScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700), maxLines: 2),
+                Text(title, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700), maxLines: 2, overflow: TextOverflow.ellipsis),
                 const SizedBox(height: 4),
-                Text(date, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
+                Text(date, style: const TextStyle(color: AppColors.textMuted, fontSize: 11), maxLines: 1, overflow: TextOverflow.ellipsis),
               ],
             ),
           ),

@@ -10,124 +10,124 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Quais sao os principais tipos de cargas eletricas que produzem e injetam correntes harmonicas no sistema de potencia?",
+      "statement": "Quais são os principais tipos de cargas elétricas que produzem e injetam correntes harmônicas no sistema de potência?",
       "options": [
         "Cargas puramente resistivas.",
-        "Motores de inducao operando a vazio.",
-        "Cargas nao lineares.",
-        "Bancos de capacitores para correcao de fator de potencia."
+        "Motores de indução operando a vazio.",
+        "Cargas não lineares.",
+        "Bancos de capacitores para correção de fator de potência."
       ],
       "correctIndex": 2,
-      "explanation": "O manual da WEG especifica que todas as cargas nao lineares produzem correntes harmonicas que sao injetadas no sistema de potencia.",
+      "explanation": "O manual da WEG especifica que todas as cargas não lineares produzem correntes harmônicas que são injetadas no sistema de potência.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual equipamento e listado diretamente como um exemplo de carga nao linear geradora de harmonicas?",
+      "statement": "Qual equipamento é listado diretamente como um exemplo de carga não linear geradora de harmônicas?",
       "options": [
         "Resistor de aquecimento.",
-        "Transformador apos a energizacao.",
-        "Lampada incandescente.",
-        "Inversor de frequencia."
+        "Transformador após a energização.",
+        "Lâmpada incandescente.",
+        "Inversor de frequência."
       ],
       "correctIndex": 3,
-      "explanation": "O catalogo da WEG lista os inversores de frequencia como exemplos diretos de cargas nao lineares geradoras de harmonicas.",
+      "explanation": "O catálogo da WEG lista os inversores de frequência como exemplos diretos de cargas não lineares geradoras de harmônicas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo o artigo de correcao de fator de potencia, quais aparelhos comuns podem contribuir com distorcoes harmonicas?",
+      "statement": "Segundo o artigo de correção de fator de potência, quais aparelhos comuns podem contribuir com distorções harmônicas?",
       "options": [
-        "Computadores pessoais e maquinas de solda.",
-        "Baterias automotivas de chumbo-acido.",
+        "Computadores pessoais e máquinas de solda.",
+        "Baterias automotivas de chumbo-ácido.",
         "Transformadores isoladores operando em carga nominal.",
         "Sistemas de aterramento com hastes de cobre."
       ],
       "correctIndex": 0,
-      "explanation": "A publicacao da ABB cita computadores pessoais, lampadas fluorescentes e maquinas de solda como equipamentos que causam distorcoes harmonicas.",
+      "explanation": "A publicação da ABB cita computadores pessoais, lâmpadas fluorescentes e máquinas de solda como equipamentos que causam distorções harmônicas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e a causa fisica que faz com que as cargas nao lineares injetem correntes harmonicas na rede eletrica?",
+      "statement": "Qual é a causa física que faz com que as cargas não lineares injetem correntes harmônicas na rede elétrica?",
       "options": [
-        "A operacao em tensoes continuas superiores a 600 V.",
-        "O aumento excessivo da potencia ativa demandada.",
-        "O fato de a corrente absorvida nao ter uma forma senoidal.",
-        "A adicao de filtros passivos nas subestacoes."
+        "A operação em tensões contínuas superiores a 600 V.",
+        "O aumento excessivo da potência ativa demandada.",
+        "O fato de a corrente absorvida não ter uma forma senoidal.",
+        "A adição de filtros passivos nas subestações."
       ],
       "correctIndex": 2,
-      "explanation": "O documento da WEG explica que as cargas nao lineares produzem harmonicas pelo fato de a corrente absorvida nao ter forma senoidal.",
+      "explanation": "O documento da WEG explica que as cargas não lineares produzem harmônicas pelo fato de a corrente absorvida não ter forma senoidal.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Alem de fontes chaveadas e inversores, qual outro equipamento industrial e destacado como fonte geradora de harmonicas?",
+      "statement": "Além de fontes chaveadas e inversores, qual outro equipamento industrial é destacado como fonte geradora de harmônicas?",
       "options": [
         "Fornos a arco.",
-        "Geradores sincronos de polos salientes.",
-        "Motores de inducao trifasicos.",
+        "Geradores síncronos de polos salientes.",
+        "Motores de indução trifásicos.",
         "Reatores de linha lineares."
       ],
       "correctIndex": 0,
-      "explanation": "Os fornos a arco sao explicitamente listados no manual da WEG e na dissertacao do IFPB como importantes geradores de harmonicas e distorcoes.",
+      "explanation": "Os fornos a arco são explicitamente listados no manual da WEG e na dissertação do IFPB como importantes geradores de harmônicas e distorções.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De que maneira a utilizacao de retificadores com 12 ou 18 pulsos afeta a emissao de harmonicos em um acionamento CA?",
+      "statement": "De que maneira a utilização de retificadores com 12 ou 18 pulsos afeta a emissão de harmônicos em um acionamento CA?",
       "options": [
-        "Aumenta exponencialmente a distorcao de tensao na barra.",
-        "Reduz a emissao de harmonicos, atendendo aos limites recomendados pela IEEE 519.",
-        "Elimina apenas os harmonicos pares sem alterar os impares.",
-        "Transfere os harmonicos para a sequencia zero do transformador isolador."
+        "Aumenta exponencialmente a distorção de tensão na barra.",
+        "Reduz a emissão de harmônicos, atendendo aos limites recomendados pela IEEE 519.",
+        "Elimina apenas os harmônicos pares sem alterar os ímpares.",
+        "Transfere os harmônicos para a sequência zero do transformador isolador."
       ],
       "correctIndex": 1,
-      "explanation": "O manual da WEG relata que retificadores de 12 e 18 pulsos sao solucoes tradicionais para mitigacao de harmonicos, atendendo a IEEE 519.",
+      "explanation": "O manual da WEG relata que retificadores de 12 e 18 pulsos são soluções tradicionais para mitigação de harmônicos, atendendo a IEEE 519.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Os conversores trifasicos de eletronia de potencia causam um disturbio periodico na tensao devido a curtos-circuitos momentaneos na comutacao. Qual e o nome deste disturbio?",
+      "statement": "Os conversores trifásicos de eletrônica de potência causam um distúrbio periódico na tensão devido a curtos-circuitos momentâneos na comutação. Qual é o nome deste distúrbio?",
       "options": [
-        "Flicker ou cintilacao.",
-        "Transitorio oscilatorio de alta frequencia.",
-        "Afundamento de tensao temporario.",
+        "Flicker ou cintilação.",
+        "Transitório oscilatório de alta frequência.",
+        "Afundamento de tensão temporário.",
         "Notching."
       ],
       "correctIndex": 3,
-      "explanation": "A dissertacao do IFPB aponta que o notching decorre de curtos-circuitos momentaneos entre duas fases durante a comutacao de conversores trifasicos.",
+      "explanation": "A dissertação do IFPB aponta que o notching decorre de curtos-circuitos momentâneos entre duas fases durante a comutação de conversores trifásicos.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Comparando inversores de 6 pulsos, qual e a vantagem direta de utilizar um indutor no link CC para a qualidade da energia?",
+      "statement": "Comparando inversores de 6 pulsos, qual é a vantagem direta de utilizar um indutor no link CC para a qualidade da energia?",
       "options": [
-        "Aumentar o aquecimento global das linhas de distribuicao.",
-        "Reduzir significativamente a emissao de correntes harmonicas.",
+        "Aumentar o aquecimento global das linhas de distribuição.",
+        "Reduzir significativamente a emissão de correntes harmônicas.",
         "Elevar as correntes parasitas no estator dos motores.",
-        "Anular completamente qualquer fluxo de potencia reativa."
+        "Anular completamente qualquer fluxo de potência reativa."
       ],
       "correctIndex": 1,
-      "explanation": "O guia de automacao da WEG indica que a presenca de indutor no link CC reduz significativamente a emissao de harmonicos comparado a modelos sem indutor.",
+      "explanation": "O guia de automação da WEG indica que a presença de indutor no link CC reduz significativamente a emissão de harmônicos comparado a modelos sem indutor.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No contexto das fontes geradoras, quais equipamentos sao identificados como cargas lineares que NAO injetam harmonicas no sistema de potencia?",
+      "statement": "No contexto das fontes geradoras, quais equipamentos são identificados como cargas lineares que NÃO injetam harmônicas no sistema de potência?",
       "options": [
-        "Fontes chaveadas e inversores de frequencia trifasicos.",
-        "Retificadores de 12 pulsos e lampadas de descarga.",
-        "Resistores de aquecimento e lampadas incandescentes.",
-        "Conversores estaticos bidirecionais e fornos a arco."
+        "Fontes chaveadas e inversores de frequência trifásicos.",
+        "Retificadores de 12 pulsos e lâmpadas de descarga.",
+        "Resistores de aquecimento e lâmpadas incandescentes.",
+        "Conversores estáticos bidirecionais e fornos a arco."
       ],
       "correctIndex": 2,
-      "explanation": "A WEG diferencia cargas lineares das nao lineares, citando motores, resistores de aquecimento e lampadas incandescentes como cargas lineares.",
+      "explanation": "A WEG diferencia cargas lineares das não lineares, citando motores, resistores de aquecimento e lâmpadas incandescentes como cargas lineares.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Segundo a analise comparativa de solucoes para mitigacao, qual e a Distorcao Harmonica Total de Corrente tipica de um drive de 6 pulsos sem indutor no link CC?",
+      "statement": "Segundo a análise comparativa de soluções para mitigação, qual é a Distorção Harmônica Total de Corrente típica de um drive de 6 pulsos sem indutor no link CC?",
       "options": [
         "Tipicamente 4,5 a 6 por cento.",
         "Tipicamente 30 a 40 por cento.",
@@ -135,44 +135,44 @@
         "Tipicamente 81,5 por cento."
       ],
       "correctIndex": 3,
-      "explanation": "A tabela comparativa no documento da WEG mostra que o drive de 6 pulsos sem indutor no link CC possui uma THD de corrente tipica de 81,5 por cento.",
+      "explanation": "A tabela comparativa no documento da WEG mostra que o drive de 6 pulsos sem indutor no link CC possui uma THD de corrente típica de 81,5 por cento.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "Lampadas fluorescentes e fontes chaveadas sao classificadas tecnicamente como cargas lineares, pois nao deformam a onda de tensao ou corrente da rede eletrica.",
+      "statement": "Lâmpadas fluorescentes e fontes chaveadas são classificadas tecnicamente como cargas lineares, pois não deformam a onda de tensão ou corrente da rede elétrica.",
       "correctAnswer": false,
       "isTrue": false,
-      "explanation": "O material da WEG lista lampadas fluorescentes e fontes chaveadas exatamente como exemplos classicos de cargas nao lineares que geram harmonicas.",
+      "explanation": "O material da WEG lista lâmpadas fluorescentes e fontes chaveadas exatamente como exemplos clássicos de cargas não lineares que geram harmônicas.",
       "difficulty": "easy"
     },
     {
       "type": "trueFalse",
-      "statement": "A operacao de conversores estaticos e maquinas de solda esta entre os fatores que introduzem correntes harmonicas e distorcem as formas de onda de sistemas eletricos.",
+      "statement": "A operação de conversores estáticos e máquinas de solda está entre os fatores que introduzem correntes harmônicas e distorcem as formas de onda de sistemas elétricos.",
       "correctAnswer": true,
       "isTrue": true,
-      "explanation": "O guia sobre fator de potencia da ABB confirma que conversores estaticos e maquinas de solda causam o mau funcionamento decorrente de distorcoes harmonicas.",
+      "explanation": "O guia sobre fator de potência da ABB confirma que conversores estáticos e máquinas de solda causam o mau funcionamento decorrente de distorções harmônicas.",
       "difficulty": "medium"
     },
     {
       "type": "trueFalse",
-      "statement": "A instalacao de retificadores de 18 pulsos em sistemas industriais e uma solucao eficaz para mitigar harmonicos, porem apresenta custo elevado e demanda transformador dedicado.",
+      "statement": "A instalação de retificadores de 18 pulsos em sistemas industriais é uma solução eficaz para mitigar harmônicos, porém apresenta custo elevado e demanda transformador dedicado.",
       "correctAnswer": true,
       "isTrue": true,
-      "explanation": "O manual da WEG aponta que a solucao de 18 pulsos atende a IEEE 519 e reduz harmonicos, mas devido ao alto custo, costuma exigir um transformador defasador dedicado.",
+      "explanation": "O manual da WEG aponta que a solução de 18 pulsos atende a IEEE 519 e reduz harmônicos, mas devido ao alto custo, costuma exigir um transformador defasador dedicado.",
       "difficulty": "medium"
     },
     {
       "type": "trueFalse",
-      "statement": "O disturbio eletrico denominado notching manifesta-se essencialmente pelo aumento contínuo do valor RMS da tensao causado exclusivamente por banco de capacitores passivos.",
+      "statement": "O distúrbio elétrico denominado notching manifesta-se essencialmente pelo aumento contínuo do valor RMS da tensão causado exclusivamente por banco de capacitores passivos.",
       "correctAnswer": false,
       "isTrue": false,
-      "explanation": "A dissertacao do IFPB esclarece que o notching e um disturbio periodico na comutacao de conversores de eletronica de potencia, causando picos e ruidos, nao um aumento RMS constante.",
+      "explanation": "A dissertação do IFPB esclarece que o notching é um distúrbio periódico na comutação de conversores de eletrônica de potência, causando picos e ruídos, não um aumento RMS constante.",
       "difficulty": "medium"
     },
     {
       "type": "trueFalse",
-      "statement": "Acionamentos regenerativos com retificador ativo na entrada e filtro LCL sao capazes de manter a distorcao harmonica total de corrente em niveis menores ou iguais a 5 por cento.",
+      "statement": "Acionamentos regenerativos com retificador ativo na entrada e filtro LCL são capazes de manter a distorção harmônica total de corrente em níveis menores ou iguais a 5 por cento.",
       "correctAnswer": true,
       "isTrue": true,
       "explanation": "A tabela comparativa da WEG especifica que o drive regenerativo AFE com filtro LCL atinge THD de corrente menor ou igual a 5 por cento.",
@@ -180,38 +180,38 @@
     },
     {
       "type": "fillBlank",
-      "statement": "As cargas nao lineares sao conhecidas por injetar correntes harmonicas no sistema eletrico, fenomeno originado pelo fato de a corrente exigida nao apresentar forma ____.",
+      "statement": "As cargas não lineares são conhecidas por injetar correntes harmônicas no sistema elétrico, fenômeno originado pelo fato de a corrente exigida não apresentar forma ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "senoidal"
         }
       ],
-      "explanation": "O catalogo da WEG indica que a producao de correntes harmonicas ocorre porque a corrente absorvida pela carga nao tem a forma senoidal padrao.",
+      "explanation": "O catálogo da WEG indica que a produção de correntes harmônicas ocorre porque a corrente absorvida pela carga não tem a forma senoidal padrão.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "O disturbio provocado por conversores trifasicos, caracterizado por curtos-circuitos momentaneos entre fases durante o processo de comutacao, recebe o nome tecnico de ____.",
+      "statement": "O distúrbio provocado por conversores trifásicos, caracterizado por curtos-circuitos momentâneos entre fases durante o processo de comutação, recebe o nome técnico de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "notching"
         }
       ],
-      "explanation": "O texto do IFPB define notching como o disturbio decorrente dos curtos-circuitos momentaneos causados pela comutacao das fases em conversores eletronicos.",
+      "explanation": "O texto do IFPB define notching como o distúrbio decorrente dos curtos-circuitos momentâneos causados pela comutação das fases em conversores eletrônicos.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Segundo o guia de solucoes de automacao, os acionamentos de inversores alimentados por retificadores configurados em ____ pulsos atendem a norma IEEE 519 e sao utilizados para sistemas acima de 500 kW.",
+      "statement": "Segundo o guia de soluções de automação, os acionamentos de inversores alimentados por retificadores configurados em ____ pulsos atendem a norma IEEE 519 e são utilizados para sistemas acima de 500 kW.",
       "blanks": [
         {
           "index": 0,
           "answer": "12"
         }
       ],
-      "explanation": "O material da WEG cita especificamente os retificadores em 12 pulsos ou 18 pulsos como solucoes que atendem a norma IEEE 519 aplicaveis a potencias maiores que 500 kW.",
+      "explanation": "O material da WEG cita especificamente os retificadores em 12 pulsos ou 18 pulsos como soluções que atendem a norma IEEE 519 aplicáveis a potências maiores que 500 kW.",
       "difficulty": "hard"
     }
   ]

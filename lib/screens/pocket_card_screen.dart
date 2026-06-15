@@ -83,7 +83,10 @@ class _PocketCardScreenState extends ConsumerState<PocketCardScreen> {
                   ..setEntry(3, 2, 0.001) // Adiciona a perspectiva (profundidade)
                   ..rotateX(_xRotation)   // Inclina pra cima/baixo
                   ..rotateY(_yRotation),  // Inclina pros lados
-                child: _buildCardUI(),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: FittedBox(fit: BoxFit.scaleDown, child: _buildCardUI()),
+                ),
               ),
             ),
           ),
@@ -199,6 +202,9 @@ class _PocketCardScreenState extends ConsumerState<PocketCardScreen> {
                 Center(
                   child: Text(
                     displayName,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -211,6 +217,9 @@ class _PocketCardScreenState extends ConsumerState<PocketCardScreen> {
                 Center(
                   child: Text(
                     '$role • LVL $level',
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 12,

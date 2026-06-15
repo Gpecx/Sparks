@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:spark_app/models/user_model.dart';
 import 'package:spark_app/services/analytics_service.dart';
 import 'package:spark_app/services/firebase_service.dart';
 
@@ -32,7 +33,10 @@ class AuthService {
             if (!docSnap.exists) {
               await docRef.set({
                 'uid': user.uid,
-                'displayName': user.displayName ?? 'Usuário',
+                'displayName': resolveDisplayName(
+                  displayName: user.displayName,
+                  email: user.email ?? email,
+                ),
                 'email': user.email ?? email,
                 'photoUrl': user.photoURL,
                 'role': 'técnico',
@@ -185,7 +189,10 @@ class AuthService {
         await docRef
             .set(_defaultUserData(
               uid: user.uid,
-              displayName: user.displayName ?? 'Usuário',
+              displayName: resolveDisplayName(
+                displayName: user.displayName,
+                email: user.email,
+              ),
               email: user.email ?? '',
               photoUrl: user.photoURL,
             ))

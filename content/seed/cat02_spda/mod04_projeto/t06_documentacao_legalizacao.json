@@ -3,27 +3,27 @@
   "categorySubtitle": "Fundamentos, Aterramento, Normas NBR 5419 e Projeto de SPDA",
   "categoryOrder": 1,
   "module": "Projeto de SPDA",
-  "moduleSubtitle": "Projeto, risco, posicionamento, volume, materiais e documentacao",
+  "moduleSubtitle": "Projeto, risco, posicionamento, volume, materiais e documentação",
   "moduleOrder": 3,
-  "trail": "Documentacao e Legalizacao",
+  "trail": "Documentação e Legalização",
   "trailOrder": 5,
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Segundo as normas vigentes, quem e o profissional com as atribuicoes legais habilitado para elaborar o projeto e assinar o Laudo de Inspecao do SPDA?",
+      "statement": "Segundo as normas vigentes, quem é o profissional com as atribuições legais habilitado para elaborar o projeto e assinar o Laudo de Inspeção do SPDA?",
       "options": [
-        "Tecnico em eletrotecnica.",
+        "Técnico em eletrotécnica.",
         "Engenheiro civil residente.",
         "Engenheiro eletricista registrado no CREA.",
         "Eletricista qualificado e certificado."
       ],
       "correctIndex": 2,
-      "explanation": "Apenas o Engenheiro eletricista registrado no CREA tem competencia legal para projetar, instalar, inspecionar e emitir laudos sobre sistemas de protecao contra descargas atmosfericas. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "Apenas o Engenheiro eletricista registrado no CREA tem competência legal para projetar, instalar, inspecionar e emitir laudos sobre sistemas de proteção contra descargas atmosféricas. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "A integracao entre a NBR 5419 e a NR-10 exige que a documentacao completa do SPDA faca parte de um prontuario especifico em instalacoes com carga superior a 75 kW. Qual e a sigla deste documento?",
+      "statement": "A integração entre a NBR 5419 e a NR-10 exige que a documentação completa do SPDA faça parte de um prontuário específico em instalações com carga superior a 75 kW. Qual é a sigla deste documento?",
       "options": [
         "PPRA",
         "PIE",
@@ -31,38 +31,38 @@
         "AVCB"
       ],
       "correctIndex": 1,
-      "explanation": "O Prontuario de Instalacoes Eletricas (PIE), documento obrigatorio pela NR-10 para estabelecimentos com carga superior a 75 kW, deve conter o Laudo de Inspecao do SPDA, medicoes e projeto. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O Prontuário de Instalações Elétricas (PIE), documento obrigatório pela NR-10 para estabelecimentos com carga superior a 75 kW, deve conter o Laudo de Inspeção do SPDA, medições e projeto. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual documento emitido pelo engenheiro no CREA e obrigatorio para a validacao legal do laudo e projeto de SPDA, formalizando a sua responsabilidade tecnica?",
+      "statement": "Qual documento emitido pelo engenheiro no CREA é obrigatório para a validação legal do laudo e projeto de SPDA, formalizando a sua responsabilidade técnica?",
       "options": [
         "Atestado de Vistoria (AV)",
         "Certificado de Conformidade (CC)",
-        "Anotacao de Responsabilidade Tecnica (ART)",
-        "Guia de Recolhimento da Uniao (GRU)"
+        "Anotação de Responsabilidade Técnica (ART)",
+        "Guia de Recolhimento da União (GRU)"
       ],
       "correctIndex": 2,
-      "explanation": "A emissao de uma ART e obrigatoria para a validacao legal do laudo e formaliza a responsabilidade tecnica do Engenheiro sobre o servico executado. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "A emissão de uma ART é obrigatória para a validação legal do laudo e formaliza a responsabilidade técnica do Engenheiro sobre o serviço executado. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em muitos estados, o Corpo de Bombeiros exige a verificacao e manutencao adequada do SPDA para conceder um documento essencial para o funcionamento das edificacoes. Qual e a sigla deste documento?",
+      "statement": "Em muitos estados, o Corpo de Bombeiros exige a verificação e manutenção adequada do SPDA para conceder um documento essencial para o funcionamento das edificações. Qual é a sigla deste documento?",
       "options": [
-        "Alvara CND",
+        "Alvará CND",
         "AVCB",
         "Habite-se",
         "CREA-A"
       ],
       "correctIndex": 1,
-      "explanation": "O Corpo de Bombeiros verifica a existencia e a manutencao adequada dos SPDAs como parte das exigencias para a liberacao do Auto de Vistoria do Corpo de Bombeiros (AVCB). (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "O Corpo de Bombeiros verifica a existência e a manutenção adequada dos SPDAs como parte das exigências para a liberação do Auto de Vistoria do Corpo de Bombeiros (AVCB). (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "A norma NBR 5419 estabelece frequencias de inspecao completas baseadas na classe de risco da edificacao. Para uma estrutura classificada como Classe I, qual deve ser a periodicidade da inspecao?",
+      "statement": "A norma NBR 5419 estabelece frequências de inspeção completas baseadas na classe de risco da edificação. Para uma estrutura classificada como Classe I, qual deve ser a periodicidade da inspeção?",
       "options": [
         "Semestral",
         "Anual",
@@ -70,12 +70,12 @@
         "A cada 5 anos"
       ],
       "correctIndex": 1,
-      "explanation": "As recomendacoes de frequencia de inspecoes indicam que para a Classe I, a inspecao deve ser anual. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "As recomendações de frequência de inspeções indicam que para a Classe I, a inspeção deve ser anual. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para edificacoes enquadradas na Classe de risco III (como estruturas residenciais ou industriais comuns), qual a frequencia de inspecao completa recomendada pela NBR 5419?",
+      "statement": "Para edificações enquadradas na Classe de risco III (como estruturas residenciais ou industriais comuns), qual a frequência de inspeção completa recomendada pela NBR 5419?",
       "options": [
         "1 ano",
         "2 anos",
@@ -83,25 +83,25 @@
         "5 anos"
       ],
       "correctIndex": 2,
-      "explanation": "Conforme as recomendacoes da norma, para a Classe III a inspecao completa deve ocorrer a cada 3 anos. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "Conforme as recomendações da norma, para a Classe III a inspeção completa deve ocorrer a cada 3 anos. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que compoe o checklist de requisitos do PIE (Prontuario de Instalacoes Eletricas) referente ao SPDA, segundo as diretrizes de integracao com a NR-10 fornecidas pelo Guia PDA HazOp?",
+      "statement": "O que compõe o checklist de requisitos do PIE (Prontuário de Instalações Elétricas) referente ao SPDA, segundo as diretrizes de integração com a NR-10 fornecidas pelo Guia PDA HazOp?",
       "options": [
-        "Apenas o laudo fotografico simples e o contrato comercial de manutencao.",
-        "Projeto completo com memorial de calculo, certificados de materiais, laudos de inspecao, medicoes de aterramento e ART.",
-        "Apenas o projeto eletrico unifilar e a conta de energia mensal do estabelecimento.",
+        "Apenas o laudo fotográfico simples e o contrato comercial de manutenção.",
+        "Projeto completo com memorial de cálculo, certificados de materiais, laudos de inspeção, medições de aterramento e ART.",
+        "Apenas o projeto elétrico unifilar e a conta de energia mensal do estabelecimento.",
         "Exclusivamente as notas fiscais dos captores instalados e a ART do CREA."
       ],
       "correctIndex": 1,
-      "explanation": "O PIE deve conter: Projeto completo do SPDA com memorial de calculo, Certificados de conformidade dos materiais, Laudo de inspecao, Medicoes de resistencia de aterramento, ART de projeto/inspecao e Procedimentos de manutencao. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "O PIE deve conter: Projeto completo do SPDA com memorial de cálculo, Certificados de conformidade dos materiais, Laudo de inspeção, Medições de resistência de aterramento, ART de projeto/inspeção e Procedimentos de manutenção. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Independentemente da classe da edificacao, de quanto em quanto tempo deve ser obrigatoriamente realizada uma inspecao estritamente visual em todos os elementos aparentes do SPDA?",
+      "statement": "Independentemente da classe da edificação, de quanto em quanto tempo deve ser obrigatoriamente realizada uma inspeção estritamente visual em todos os elementos aparentes do SPDA?",
       "options": [
         "Trimestralmente.",
         "Semestralmente.",
@@ -109,109 +109,109 @@
         "A cada 2 anos."
       ],
       "correctIndex": 2,
-      "explanation": "Conforme a ABNT, deve haver um periodo de tempo previsto para as inspecoes, sendo que anualmente e necessaria uma inspecao visual para todos os elementos aparentes do SPDA. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "Conforme a ABNT, deve haver um período de tempo previsto para as inspeções, sendo que anualmente é necessária uma inspeção visual para todos os elementos aparentes do SPDA. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como parte do comissionamento e documentacao do SPDA, qual medicao instrumental deve constar obrigatoriamente nos relatorios tecnicos atestando a instalacao, de acordo com as recomendacoes da NBR 5419?",
+      "statement": "Como parte do comissionamento e documentação do SPDA, qual medição instrumental deve constar obrigatoriamente nos relatórios técnicos atestando a instalação, de acordo com as recomendações da NBR 5419?",
       "options": [
-        "Medicao do consumo energetico total do predio para calibracao do disjuntor.",
-        "Medicao de resistencia de aterramento e a integridade da continuidade do SPDA.",
-        "Medicao do nivel de ruido acustico gerado pelos captores tipo Franklin.",
-        "Medicao da tensao de fornecimento de energia da concessionaria local."
+        "Medição do consumo energético total do prédio para calibração do disjuntor.",
+        "Medição de resistência de aterramento e a integridade da continuidade do SPDA.",
+        "Medição do nível de ruído acústico gerado pelos captores tipo Franklin.",
+        "Medição da tensão de fornecimento de energia da concessionária local."
       ],
       "correctIndex": 1,
-      "explanation": "O Relatorio de Medicoes deve documentar as medicoes de resistencia de aterramento e a integridade do SPDA, realizadas conforme as recomendacoes da NBR 5419. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "O Relatório de Medições deve documentar as medições de resistência de aterramento e a integridade do SPDA, realizadas conforme as recomendações da NBR 5419. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "hard"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como os desenhos tecnicos e plantas devem ser apresentados na documentacao tecnica atualizada (as-built) de um SPDA, a fim de garantir a rastreabilidade do projeto segundo a NBR 5419?",
+      "statement": "Como os desenhos técnicos e plantas devem ser apresentados na documentação técnica atualizada (as-built) de um SPDA, a fim de garantir a rastreabilidade do projeto segundo a NBR 5419?",
       "options": [
-        "Apenas em rascunhos isometricos focados exclusivamente na fachada do predio.",
-        "Desenhos graficos em formato e escala que possibilitem a verificacao exata das dimensoes, materiais e posicao de todo o sistema.",
-        "Modelagem 3D animada, entregue compulsoriamente em formato de video no pendrive.",
+        "Apenas em rascunhos isométricos focados exclusivamente na fachada do prédio.",
+        "Desenhos gráficos em formato e escala que possibilitem a verificação exata das dimensões, materiais e posição de todo o sistema.",
+        "Modelagem 3D animada, entregue compulsoriamente em formato de vídeo no pendrive.",
         "Planta baixa simplificada englobando apenas a vista do telhado e dispensando cotas e perfis."
       ],
       "correctIndex": 1,
-      "explanation": "A documentacao tecnica deve conter desenhos graficos em formato e escala que possibilitem a verificacao das dimensoes, materiais e posicao de todo sistema de SPDA, garantindo a sua rastreabilidade e manutencao futura. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A documentação técnica deve conter desenhos gráficos em formato e escala que possibilitem a verificação das dimensões, materiais e posição de todo sistema de SPDA, garantindo a sua rastreabilidade e manutenção futura. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O Conselho Regional de Engenharia e Agronomia (CREA) e o orgao responsavel por fiscalizar o exercicio profissional, garantindo que os projetos de SPDA sejam realizados e documentados apenas por profissionais legalmente habilitados.",
+      "statement": "O Conselho Regional de Engenharia e Agronomia (CREA) é o órgão responsável por fiscalizar o exercício profissional, garantindo que os projetos de SPDA sejam realizados e documentados apenas por profissionais legalmente habilitados.",
       "correctAnswer": true,
-      "explanation": "O CREA fiscaliza o exercicio profissional, garantindo que os projetos e execucoes de SPDA sejam realizados por profissionais habilitados e com ART registrada. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "O CREA fiscaliza o exercício profissional, garantindo que os projetos e execuções de SPDA sejam realizados por profissionais habilitados e com ART registrada. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Tecnicos em eletrotecnica e eletricistas qualificados com muita experiencia de campo possuem a atribuicao legal plena para emitir e assinar isoladamente o Laudo de Inspecao e Manutencao de um SPDA.",
+      "statement": "Técnicos em eletrotécnica e eletricistas qualificados com muita experiência de campo possuem a atribuição legal plena para emitir e assinar isoladamente o Laudo de Inspeção e Manutenção de um SPDA.",
       "correctAnswer": false,
-      "explanation": "Apenas o Engenheiro Eletricista registrado no CREA e habilitado para assinar o Laudo de Inspecao do SPDA. Nem tecnicos nem eletricistas possuem a atribuicao legal para emitir e assinar esse tipo de laudo. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "Apenas o Engenheiro Eletricista registrado no CREA é habilitado para assinar o Laudo de Inspeção do SPDA. Nem técnicos nem eletricistas possuem a atribuição legal para emitir e assinar esse tipo de laudo. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Edificacoes que se encontram expostas a condicoes ambientais atipicamente severas e agressivas (como galpoes em regioes de maresia) devem ter seu SPDA inspecionado de forma completa com um periodo maximo de 1 ano, independentemente da sua classe comum de protecao.",
+      "statement": "Edificações que se encontram expostas a condições ambientais atipicamente severas e agressivas (como galpões em regiões de maresia) devem ter seu SPDA inspecionado de forma completa com um período máximo de 1 ano, independentemente da sua classe comum de proteção.",
       "correctAnswer": true,
-      "explanation": "A norma exige um periodo maximo de 1 ano para a inspecao completa de construcoes expostas a condicoes severas, como regioes de maresia, ambientes industriais com produtos agressivos e locais para armazenamento de explosivos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSAO 2015)",
+      "explanation": "A norma exige um período máximo de 1 ano para a inspeção completa de construções expostas a condições severas, como regiões de maresia, ambientes industriais com produtos agressivos e locais para armazenamento de explosivos. (Fonte: Cleiton Junior Lopes, NORMA ABNT NBR 5419 VERSÃO 2015)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A ausencia, validade vencida ou a nao conformidade do Laudo de SPDA e das medicoes dentro do Prontuario de Instalacoes Eletricas (PIE) constitui uma infracao grave a norma NR-10, sujeitando a empresa a penalidades.",
+      "statement": "A ausência, validade vencida ou a não conformidade do Laudo de SPDA e das medições dentro do Prontuário de Instalações Elétricas (PIE) constitui uma infração grave à norma NR-10, sujeitando a empresa a penalidades.",
       "correctAnswer": true,
-      "explanation": "A implicacao legal e critica: a ausencia ou nao-conformidade do Laudo de SPDA no PIE constitui infracao a NR-10, sujeitando o estabelecimento a autuacoes do Ministerio do Trabalho e interdicoes. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "A implicação legal é crítica: a ausência ou não-conformidade do Laudo de SPDA no PIE constitui infração à NR-10, sujeitando o estabelecimento a autuações do Ministério do Trabalho e interdições. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Se uma edificacao passar por reformas, ampliacoes de area ou sofrer modificacoes em suas caracteristicas estruturais, uma nova inspecao do SPDA deve ser realizada imediatamente, independentemente do prazo que ainda restava da ultima inspecao periodica.",
+      "statement": "Se uma edificação passar por reformas, ampliações de área ou sofrer modificações em suas características estruturais, uma nova inspeção do SPDA deve ser realizada imediatamente, independentemente do prazo que ainda restava da última inspeção periódica.",
       "correctAnswer": true,
-      "explanation": "Se houver alteracoes nas caracteristicas da edificacao, como reformas, mudancas nas areas protegidas ou nos equipamentos do SPDA, uma nova inspecao deve ser realizada, independente do prazo anterior. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "Se houver alterações nas características da edificação, como reformas, mudanças nas áreas protegidas ou nos equipamentos do SPDA, uma nova inspeção deve ser realizada, independente do prazo anterior. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O documento oficial exigido que formaliza a responsabilidade tecnica do engenheiro eletricista sobre a elaboracao do projeto, medicoes e a emissao do laudo tecnico de SPDA e amplamente conhecido pela sigla ____.",
+      "statement": "O documento oficial exigido que formaliza a responsabilidade técnica do engenheiro eletricista sobre a elaboração do projeto, medições e a emissão do laudo técnico de SPDA é amplamente conhecido pela sigla ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "ART"
         }
       ],
-      "explanation": "A emissao da ART (Anotacao de Responsabilidade Tecnica) pelo Engenheiro e obrigatoria para atestar a validade legal do laudo de SPDA perante os orgaos de fiscalizacao. (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "A emissão da ART (Anotação de Responsabilidade Técnica) pelo Engenheiro é obrigatória para atestar a validade legal do laudo de SPDA perante os órgãos de fiscalização. (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "easy"
     },
     {
       "type": "fillBlank",
-      "statement": "O Corpo de Bombeiros fiscaliza a existencia e a manutencao adequada do SPDA como parte das rigidas exigencias necessarias para a emissao e liberacao do Auto de Vistoria do Corpo de Bombeiros, conhecido pela sigla ____.",
+      "statement": "O Corpo de Bombeiros fiscaliza a existência e a manutenção adequada do SPDA como parte das rígidas exigências necessárias para a emissão e liberação do Auto de Vistoria do Corpo de Bombeiros, conhecido pela sigla ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "AVCB"
         }
       ],
-      "explanation": "Em muitos estados, o Corpo de Bombeiros verifica o SPDA como parte das exigencias essenciais para a liberacao do Auto de Vistoria do Corpo de Bombeiros (AVCB). (Fonte: SPDA o que e e quais sao os principais tipos, A3A Engenharia)",
+      "explanation": "Em muitos estados, o Corpo de Bombeiros verifica o SPDA como parte das exigências essenciais para a liberação do Auto de Vistoria do Corpo de Bombeiros (AVCB). (Fonte: SPDA o que é e quais são os principais tipos, A3A Engenharia)",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Para garantir a conformidade e a seguranca do trabalho segundo a norma NR-10, todos os laudos, ARTs, relatorios de medicao e o projeto as-built de SPDA de instalacoes com mais de 75 kW devem estar anexados e compor obrigatoriamente o arquivo denominado ____ (Prontuario de Instalacoes Eletricas).",
+      "statement": "Para garantir a conformidade e a segurança do trabalho segundo a norma NR-10, todos os laudos, ARTs, relatórios de medição e o projeto as-built de SPDA de instalações com mais de 75 kW devem estar anexados e compor obrigatoriamente o arquivo denominado ____ (Prontuário de Instalações Elétricas).",
       "blanks": [
         {
           "index": 0,
           "answer": "PIE"
         }
       ],
-      "explanation": "A NR-10 determina obrigatoriamente que o Prontuario de Instalacoes Eletricas (PIE) para estabelecimentos com carga acima de 75 kW deve abrigar o projeto e o laudo de SPDA validos e as medicoes de aterramento. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
+      "explanation": "A NR-10 determina obrigatoriamente que o Prontuário de Instalações Elétricas (PIE) para estabelecimentos com carga acima de 75 kW deve abrigar o projeto e o laudo de SPDA válidos e as medições de aterramento. (Fonte: Guia PDA SPDA + MPS, HazOp Engenharia)",
       "difficulty": "hard"
     }
   ]

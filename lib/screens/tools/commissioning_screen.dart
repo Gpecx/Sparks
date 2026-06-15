@@ -169,9 +169,11 @@ class _CommissioningScreenState extends State<CommissioningScreen> {
         children: [
           Icon(icon, color: color, size: 22),
           const SizedBox(width: 10),
-          Text(
-            pass ? 'APROVADO (dentro da tolerância)' : 'REPROVADO (fora da tolerância)',
-            style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 14),
+          Expanded(
+            child: Text(
+              pass ? 'APROVADO (dentro da tolerância)' : 'REPROVADO (fora da tolerância)',
+              style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 14),
+            ),
           ),
         ],
       ),

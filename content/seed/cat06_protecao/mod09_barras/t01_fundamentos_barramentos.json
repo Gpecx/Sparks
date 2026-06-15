@@ -180,7 +180,7 @@
     },
     {
       "type": "fillBlank",
-      "statement": "Caso o equipamento de interrupcao se recuse a abrir apos o comando de trip da barra, a funcao de falha de ____ (50BF) atua para desligar os adjacentes.",
+      "statement": "Caso o equipamento de interrupção se recuse a abrir após o comando de trip da barra, a função de falha de ____ (50BF) atua para desligar os adjacentes.",
       "blanks": [
         {
           "index": 0,

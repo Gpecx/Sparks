@@ -10,33 +10,33 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "O que o dispositivo watchdog executa ao detectar um erro no laco do programa do IED?",
+      "statement": "O que o dispositivo watchdog executa ao detectar um erro no laço do programa do IED?",
       "options": [
-        "Desliga o disjuntor de alta tensao.",
+        "Desliga o disjuntor de alta tensão.",
         "Dispara um reset no sistema.",
         "Aterra o barramento principal.",
         "Apaga as oscilografias gravadas."
       ],
       "correctIndex": 1,
-      "explanation": "O watchdog atua como guardiao do processador e dispara um reset seguro caso o software trave. (Fonte: Ed50 marco protecao).",
+      "explanation": "O watchdog atua como guardião do processador e dispara um reset seguro caso o software trave. (Fonte: Ed50 marco proteção).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual funcao ANSI bloqueia as protecoes dependentes de tensao caso o fusivel do TP queime?",
+      "statement": "Qual função ANSI bloqueia as proteções dependentes de tensão caso o fusível do TP queime?",
       "options": [
-        "Funcao 87.",
-        "Funcao 50.",
-        "Funcao 60.",
-        "Funcao 51N."
+        "Função 87.",
+        "Função 50.",
+        "Função 60.",
+        "Função 51N."
       ],
       "correctIndex": 2,
-      "explanation": "A funcao 60 detecta perda de potencial (Loss of Potential) e bloqueia as funcoes 21 e 32 para evitar trips falsos. (Fonte: Guia Protecao / Ed58).",
+      "explanation": "A função 60 detecta perda de potencial (Loss of Potential) e bloqueia as funções 21 e 32 para evitar trips falsos. (Fonte: Guia Proteção / Ed58).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual codigo ANSI e utilizado na parametrizacao da supervisao do circuito de trip?",
+      "statement": "Qual código ANSI é utilizado na parametrização da supervisão do circuito de trip?",
       "options": [
         "81L.",
         "50BF.",
@@ -44,64 +44,64 @@
         "74TC."
       ],
       "correctIndex": 3,
-      "explanation": "A supervisao do circuito de disparo do disjuntor (Trip Circuit Supervision) e definida como 74TC. (Fonte: Virtus ProtLT).",
+      "explanation": "A supervisão do circuito de disparo do disjuntor (Trip Circuit Supervision) é definida como 74TC. (Fonte: Virtus ProtLT).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que a sigla MTBF representa nos indicadores de confiabilidade do rele digital?",
+      "statement": "O que a sigla MTBF representa nos indicadores de confiabilidade do relé digital?",
       "options": [
-        "Tempo Medio Entre Falhas.",
-        "Tempo Maximo de Bloqueio de Fases.",
-        "Taxa Minima de Baixa Frequencia.",
-        "Transferencia Manual de Barramento Frontal."
+        "Tempo Médio Entre Falhas.",
+        "Tempo Máximo de Bloqueio de Fases.",
+        "Taxa Mínima de Baixa Frequência.",
+        "Transferência Manual de Barramento Frontal."
       ],
       "correctIndex": 0,
-      "explanation": "O indicador MTBF (Mean Time Between Failures) denota a confiabilidade e o tempo medio entre falhas do hardware. (Fonte: Virtus CProtBL2Cd3).",
+      "explanation": "O indicador MTBF (Mean Time Between Failures) denota a confiabilidade e o tempo médio entre falhas do hardware. (Fonte: Virtus CProtBL2Cd3).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Durante a rotina ciclica de auto-teste de 100 ms, qual e o tempo em que o IED fica sem protecao?",
+      "statement": "Durante a rotina cíclica de auto-teste de 100 ms, qual é o tempo em que o IED fica sem proteção?",
       "options": [
         "100 milissegundos.",
-        "Zero, a protecao opera em paralelo.",
+        "Zero, a proteção opera em paralelo.",
         "1 segundo completo.",
         "50 milissegundos."
       ],
       "correctIndex": 1,
-      "explanation": "O auto-teste e o monitoramento continuo rodam em background, resultando em periodo sem protecao igual a zero. (Fonte: Virtus CProtBL2Cd3).",
+      "explanation": "O auto-teste e o monitoramento contínuo rodam em background, resultando em período sem proteção igual a zero. (Fonte: Virtus CProtBL2Cd3).",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na parametrizacao do IED, como a falha do TP (Voltage Failure Supervision) pode ser confirmada de forma mais segura?",
+      "statement": "Na parametrização do IED, como a falha do TP (Voltage Failure Supervision) pode ser confirmada de forma mais segura?",
       "options": [
-        "Monitorando a pressao do gas SF6.",
-        "Medindo a temperatura do oleo do TP.",
-        "Utilizando a supervisao de corrente associada.",
-        "Aferindo a resistencia de aterramento da malha."
+        "Monitorando a pressão do gás SF6.",
+        "Medindo a temperatura do óleo do TP.",
+        "Utilizando a supervisão de corrente associada.",
+        "Aferindo a resistência de aterramento da malha."
       ],
       "correctIndex": 2,
-      "explanation": "A perda de potencial e validada em conjunto com a supervisao de corrente para diferenciar curto-circuito de queima de fusivel. (Fonte: Virtus ProtLT).",
+      "explanation": "A perda de potencial é validada em conjunto com a supervisão de corrente para diferenciar curto-circuito de queima de fusível. (Fonte: Virtus ProtLT).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como os sinais de falha interna do IED sao mapeados para emitir alarmes remotos no sistema SCADA?",
+      "statement": "Como os sinais de falha interna do IED são mapeados para emitir alarmes remotos no sistema SCADA?",
       "options": [
-        "Usando exclusivamente o relogio GPS do painel.",
-        "Por meio de reles termicos auxiliares externos.",
-        "Pela injecao de corrente continua nas entradas analogicas.",
-        "Atraves da matriz de configuracao Marshalling para saidas binarias."
+        "Usando exclusivamente o relógio GPS do painel.",
+        "Por meio de relés térmicos auxiliares externos.",
+        "Pela injeção de corrente contínua nas entradas analógicas.",
+        "Através da matriz de configuração Marshalling para saídas binárias."
       ],
       "correctIndex": 3,
-      "explanation": "A matriz de configuracao (Marshalling) roteia os alarmes de falha internos para os contatos de saida fisicos. (Fonte: Virtus ProtBarras).",
+      "explanation": "A matriz de configuração (Marshalling) roteia os alarmes de falha internos para os contatos de saída físicos. (Fonte: Virtus ProtBarras).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Com base nos dados de diagnostico, qual a proporcao de falhas geralmente detectada pelo monitoramento continuo do IED?",
+      "statement": "Com base nos dados de diagnóstico, qual a proporção de falhas geralmente detectada pelo monitoramento contínuo do IED?",
       "options": [
         "Cerca de 80 por cento dos casos.",
         "Apenas 10 por cento dos casos.",
@@ -109,109 +109,109 @@
         "Menos de 5 por cento dos casos."
       ],
       "correctIndex": 0,
-      "explanation": "O Auto Check e o monitoramento continuo identificam instantaneamente cerca de 80 por cento das falhas ocultas. (Fonte: Virtus Resumo Slides).",
+      "explanation": "O Auto Check e o monitoramento contínuo identificam instantaneamente cerca de 80 por cento das falhas ocultas. (Fonte: Virtus Resumo Slides).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para reles digitais de transmissao, qual a frequencia tipica recomendada para os testes funcionais de manutencao?",
+      "statement": "Para relés digitais de transmissão, qual a frequência típica recomendada para os testes funcionais de manutenção?",
       "options": [
         "Mensalmente.",
         "A cada 4 anos.",
         "A cada 10 anos.",
-        "Apenas apos falhas graves."
+        "Apenas após falhas graves."
       ],
       "correctIndex": 1,
-      "explanation": "A manutencao centrada em confiabilidade geralmente exige testes funcionais de circuitos externos a cada 4 anos. (Fonte: Virtus CProtBL2Cd3).",
+      "explanation": "A manutenção centrada em confiabilidade geralmente exige testes funcionais de circuitos externos a cada 4 anos. (Fonte: Virtus CProtBL2Cd3).",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No modelo matematico de confiabilidade do rele, como e calculada a taxa de falhas lambda?",
+      "statement": "No modelo matemático de confiabilidade do relé, como é calculada a taxa de falhas lambda?",
       "options": [
-        "E a soma das correntes de sequencia zero.",
-        "E o produto do MTTR pelo tempo de ciclo.",
-        "E o inverso do indicador MTBF (1/MTBF).",
-        "E a derivada da tensao de polarizacao residual."
+        "É a soma das correntes de sequência zero.",
+        "É o produto do MTTR pelo tempo de ciclo.",
+        "É o inverso do indicador MTBF (1/MTBF).",
+        "É a derivada da tensão de polarização residual."
       ],
       "correctIndex": 2,
-      "explanation": "A taxa de falhas lambda (letra grega) e calculada como o inverso do Tempo Medio Entre Falhas (1/MTBF). (Fonte: Virtus Resumo Slides).",
+      "explanation": "A taxa de falhas lambda (letra grega) é calculada como o inverso do Tempo Médio Entre Falhas (1/MTBF). (Fonte: Virtus Resumo Slides).",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "O componente watchdog atua disparando um reset de seguranca ou bloqueando operacoes caso o processador do rele digital trave.",
+      "statement": "O componente watchdog atua disparando um reset de segurança ou bloqueando operações caso o processador do relé digital trave.",
       "correctAnswer": true,
-      "explanation": "O watchdog verifica o ciclo de clock e forca a reinicializacao se detectar congelamento do software. (Fonte: Ed50 marco protecao).",
+      "explanation": "O watchdog verifica o ciclo de clock e força a reinicialização se detectar congelamento do software. (Fonte: Ed50 marco proteção).",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Na matriz de configuracao Marshalling, o sinal de falha de Bay Unit (Bay unit failure) pode ser associado a reles de alarme de saida.",
+      "statement": "Na matriz de configuração Marshalling, o sinal de falha de Bay Unit (Bay unit failure) pode ser associado a relés de alarme de saída.",
       "correctAnswer": true,
-      "explanation": "A matriz permite mapear falhas criticas (group alarms) para LEDs e contatos de saida conectados ao SCADA. (Fonte: Virtus ProtBarras).",
+      "explanation": "A matriz permite mapear falhas críticas (group alarms) para LEDs e contatos de saída conectados ao SCADA. (Fonte: Virtus ProtBarras).",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A funcao ANSI 60 de perda de potencial deve atuar enviando um comando de trip instantaneo tripolar para o disjuntor.",
+      "statement": "A função ANSI 60 de perda de potencial deve atuar enviando um comando de trip instantâneo tripolar para o disjuntor.",
       "correctAnswer": false,
-      "explanation": "A funcao 60 nao da trip, ela bloqueia as protecoes dependentes de tensao para evitar desligamentos indevidos. (Fonte: Guia Protecao 2008).",
+      "explanation": "A função 60 não dá trip, ela bloqueia as proteções dependentes de tensão para evitar desligamentos indevidos. (Fonte: Guia Proteção 2008).",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "O indicador MTTR na analise de confiabilidade da protecao significa o tempo medio necessario para reparar o equipamento apos uma falha.",
+      "statement": "O indicador MTTR na análise de confiabilidade da proteção significa o tempo médio necessário para reparar o equipamento após uma falha.",
       "correctAnswer": true,
-      "explanation": "MTTR (Mean Time To Repair) e o tempo medio de reparo utilizado na definicao de disponibilidade do sistema. (Fonte: Virtus Resumo Slides).",
+      "explanation": "MTTR (Mean Time To Repair) é o tempo médio de reparo utilizado na definição de disponibilidade do sistema. (Fonte: Virtus Resumo Slides).",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O parametro Control release for bay units desabilita permanentemente o monitoramento continuo do IED para evitar envios de erro ao SCADA.",
+      "statement": "O parâmetro Control release for bay units desabilita permanentemente o monitoramento contínuo do IED para evitar envios de erro ao SCADA.",
       "correctAnswer": false,
-      "explanation": "Esse parametro apenas permite alteracoes locais de configuracao durante manutencoes, nao desativa as rotinas de autodiagnose. (Fonte: Virtus ProtBarras).",
+      "explanation": "Esse parâmetro apenas permite alterações locais de configuração durante manutenções, não desativa as rotinas de autodiagnose. (Fonte: Virtus ProtBarras).",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "A funcao responsavel pela supervisao continua do circuito de disparo do disjuntor recebe a designacao ANSI 74____.",
+      "statement": "A função responsável pela supervisão contínua do circuito de disparo do disjuntor recebe a designação ANSI 74____.",
       "blanks": [
         {
           "index": 0,
           "answer": "TC"
         }
       ],
-      "explanation": "A funcao 74TC (Trip Circuit Supervision) atesta a integridade da bobina e fiacao de abertura. (Fonte: Virtus ProtLT).",
+      "explanation": "A função 74TC (Trip Circuit Supervision) atesta a integridade da bobina e fiação de abertura. (Fonte: Virtus ProtLT).",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A tabela de roteamento de entradas, saidas e LEDs do IED para integracao de alarmes de hardware chama-se matriz de ____.",
+      "statement": "A tabela de roteamento de entradas, saídas e LEDs do IED para integração de alarmes de hardware chama-se matriz de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "Marshalling"
         }
       ],
-      "explanation": "A configuracao de Marshalling atribui lógicas internas as E/S fisicas para integracao externa e supervisao. (Fonte: Virtus ProtBarras).",
+      "explanation": "A configuração de Marshalling atribui lógicas internas às E/S físicas para integração externa e supervisão. (Fonte: Virtus ProtBarras).",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Nos calculos de confiabilidade e disponibilidade do IED, a taxa de falhas lambda e inversamente proporcional ao indicador ____.",
+      "statement": "Nos cálculos de confiabilidade e disponibilidade do IED, a taxa de falhas lambda é inversamente proporcional ao indicador ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "MTBF"
         }
       ],
-      "explanation": "A taxa de falhas do hardware e calculada pela equacao Lambda = 1 / MTBF. (Fonte: Virtus Resumo Slides).",
+      "explanation": "A taxa de falhas do hardware é calculada pela equação Lambda = 1 / MTBF. (Fonte: Virtus Resumo Slides).",
       "difficulty": "hard"
     }
   ]

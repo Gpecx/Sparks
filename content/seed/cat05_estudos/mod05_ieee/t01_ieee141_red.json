@@ -10,208 +10,208 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Qual é o objetivo fundamental do projeto eletrico de plantas industriais segundo a IEEE Std 141?",
+      "statement": "Qual é o objetivo fundamental do projeto elétrico de plantas industriais segundo a IEEE Std 141?",
       "options": [
-        "Prover um ambiente seguro, atrativo e com eficiencia energetica para a manufatura.",
-        "Minimizar o custo inicial de construcao eliminando redundancias ativas.",
-        "Eliminar a necessidade de sistemas de aterramento de protecao de forma geral.",
-        "Maximizar a distorcao harmonica para estabilizar a tensao nos barramentos principais."
+        "Prover um ambiente seguro, atrativo e com eficiência energética para a manufatura.",
+        "Minimizar o custo inicial de construção eliminando redundâncias ativas.",
+        "Eliminar a necessidade de sistemas de aterramento de proteção de forma geral.",
+        "Maximizar a distorção harmônica para estabilizar a tensão nos barramentos principais."
       ],
       "correctIndex": 0,
-      "explanation": "A norma enfatiza que o objetivo fundamental do projeto e fornecer um ambiente seguro, energeticamente eficiente e adequado para as operacoes de producao e manufatura.",
+      "explanation": "A norma enfatiza que o objetivo fundamental do projeto é fornecer um ambiente seguro, energeticamente eficiente e adequado para as operações de produção e manufatura.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Conforme o Red Book, o que determina primariamente a categoria de projeto eletrico de uma instalacao?",
+      "statement": "Conforme o Red Book, o que determina primariamente a categoria de projeto elétrico de uma instalação?",
       "options": [
-        "A area fisica total construida da edificacao em metros quadrados.",
-        "O uso especifico da instalacao ou area em questao.",
-        "A localizacao geografica da planta industrial e o clima local.",
-        "O numero de funcionarios e operadores presentes no processo."
+        "A área física total construída da edificação em metros quadrados.",
+        "O uso específico da instalação ou área em questão.",
+        "A localização geográfica da planta industrial e o clima local.",
+        "O número de funcionários e operadores presentes no processo."
       ],
       "correctIndex": 1,
-      "explanation": "O capitulo introdutorio afirma que o uso especifico do local ou instalacao e o fator que dita a categoria do projeto eletrico.",
+      "explanation": "O capítulo introdutório afirma que o uso específico do local ou instalação é o fator que dita a categoria do projeto elétrico.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "No planejamento do sistema, a continuidade da producao em uma planta industrial e descrita como sendo tao confiavel quanto o que?",
+      "statement": "No planejamento do sistema, a continuidade da produção em uma planta industrial é descrita como sendo tão confiável quanto o que?",
       "options": [
-        "A rede de iluminacao publica do municipio adjacente.",
-        "O seu sistema de ventilacao mecânica e exaustao.",
-        "O seu sistema de distribuicao de energia eletrica.",
-        "O provedor de telecomunicacoes e internet local."
+        "A rede de iluminação pública do município adjacente.",
+        "O seu sistema de ventilação mecânica e exaustão.",
+        "O seu sistema de distribuição de energia elétrica.",
+        "O provedor de telecomunicações e internet local."
       ],
       "correctIndex": 2,
-      "explanation": "O capitulo sobre planejamento do sistema pontua claramente que a continuidade da producao e tao confiavel quanto a robustez do seu sistema de distribuicao de eletricidade.",
+      "explanation": "O capítulo sobre planejamento do sistema pontua claramente que a continuidade da produção é tão confiável quanto a robustez do seu sistema de distribuição de eletricidade.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "De acordo com as classes de tensao da IEEE 141, os sistemas nominais de ate 600 Volts sao enquadrados em qual classificacao?",
+      "statement": "De acordo com as classes de tensão da IEEE 141, os sistemas nominais de até 600 Volts são enquadrados em qual classificação?",
       "options": [
-        "Extra Alta Tensao.",
-        "Media Tensao.",
-        "Alta Tensao.",
-        "Baixa Tensao."
+        "Extra Alta Tensão.",
+        "Média Tensão.",
+        "Alta Tensão.",
+        "Baixa Tensão."
       ],
       "correctIndex": 3,
-      "explanation": "A tabela padrao da norma classifica arranjos com tensoes nominais iguais ou inferiores a 600 Volts estritamente como sistemas de Baixa Tensao.",
+      "explanation": "A tabela padrão da norma classifica arranjos com tensões nominais iguais ou inferiores a 600 Volts estritamente como sistemas de Baixa Tensão.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual elemento e considerado crucial ao avaliar estudos e programas de modernizacao de sistemas de energia em uma planta?",
+      "statement": "Qual elemento é considerado crucial ao avaliar estudos e programas de modernização de sistemas de energia em uma planta?",
       "options": [
-        "A conformidade com os requisitos regulatorios e necessidades especiais do processo industrial.",
-        "A cor padronizada dos involucros metalicos dos paineis de distribuicao.",
-        "O tipo de tinta e o acabamento arquitetonico das paredes da instalacao.",
-        "A marca de mercado dos computadores de escritorio utilizados na administracao."
+        "A conformidade com os requisitos regulatórios e necessidades especiais do processo industrial.",
+        "A cor padronizada dos invólucros metálicos dos painéis de distribuição.",
+        "O tipo de tinta e o acabamento arquitetônico das paredes da instalação.",
+        "A marca de mercado dos computadores de escritório utilizados na administração."
       ],
       "correctIndex": 0,
-      "explanation": "O processo de modernizacao exige estrita atencao as necessidades fisicas especiais dos processos industriais e ao cumprimento das conformidades regulatorias aplicaveis.",
+      "explanation": "O processo de modernização exige estrita atenção às necessidades físicas especiais dos processos industriais e ao cumprimento das conformidades regulatórias aplicáveis.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que a norma recomenda documentar sobre os niveis maximos e minimos de curto-circuito durante o planejamento?",
+      "statement": "O que a norma recomenda documentar sobre os níveis máximos e mínimos de curto-circuito durante o planejamento?",
       "options": [
-        "Eles devem ser calculados e listados para orientar corretamente a escolha dos equipamentos e sua capacidade de interrupcao.",
-        "Eles sao necessarios apenas para grandes sistemas que operam com tensoes acima de 69 kiloVolts.",
-        "Eles devem ser ignorados se a planta fabril utilizar apenas cargas motrizes assincronas radiais.",
-        "Eles sao relevantes somente para estimar o custo do ciclo de vida na compra dos cabos subterrâneos isolados."
+        "Eles devem ser calculados e listados para orientar corretamente a escolha dos equipamentos e sua capacidade de interrupção.",
+        "Eles são necessários apenas para grandes sistemas que operam com tensões acima de 69 kiloVolts.",
+        "Eles devem ser ignorados se a planta fabril utilizar apenas cargas motrizes assíncronas radiais.",
+        "Eles são relevantes somente para estimar o custo do ciclo de vida na compra dos cabos subterrâneos isolados."
       ],
       "correctIndex": 0,
-      "explanation": "O guia de planejamento assevera a necessidade de determinar as correntes de defeito minimas e maximas para propiciar o dimensionamento correto e seguro da interrupcao.",
+      "explanation": "O guia de planejamento assevera a necessidade de determinar as correntes de defeito mínimas e máximas para propiciar o dimensionamento correto e seguro da interrupção.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao dimensionar cabos em bancos de dutos subterrâneos, como o uso de dutos magneticos se compara aos nao magneticos em relacao a impedancia?",
+      "statement": "Ao dimensionar cabos em bancos de dutos subterrâneos, como o uso de dutos magnéticos se compara aos não magnéticos em relação à impedância?",
       "options": [
-        "Dutos magneticos aumentam significativamente a reatancia de sequencia zero do circuito confinado.",
-        "Dutos nao magneticos elevam a resistencia de sequencia positiva ao quadrado da malha.",
-        "Dutos magneticos cancelam completamente os transeuntes de reatancia indutiva da instalacao.",
-        "Nao ha nenhuma diferenca tecnica capacitiva ou impediva entre os dois materiais para a rede eletrica."
+        "Dutos magnéticos aumentam significativamente a reatância de sequência zero do circuito confinado.",
+        "Dutos não magnéticos elevam a resistência de sequência positiva ao quadrado da malha.",
+        "Dutos magnéticos cancelam completamente os transeuntes de reatância indutiva da instalação.",
+        "Não há nenhuma diferença técnica capacitiva ou impediva entre os dois materiais para a rede elétrica."
       ],
       "correctIndex": 0,
-      "explanation": "A presenca de envoltorios de naturezas ferromagneticas atua concentrando os fluxos dispersos de desequilibrio, elevando as reatancias de sequencia zero consideravelmente.",
+      "explanation": "A presença de envoltórios de naturezas ferromagnéticas atua concentrando os fluxos dispersos de desequilíbrio, elevando as reatâncias de sequência zero consideravelmente.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "No contexto de avaliacao das quedas de tensao e regulacao, qual e o efeito mais notorio causado pela partida de grandes motores de inducao?",
+      "statement": "No contexto de avaliação das quedas de tensão e regulação, qual é o efeito mais notório causado pela partida de grandes motores de indução?",
       "options": [
-        "Eles melhoram imediatamente o fator de potencia global do barramento de distribuicao durante o acionamento.",
-        "Eles drenam correntes de irrupcao elevadas que podem causar quedas de tensao sistemicas significativas nas barras.",
-        "Eles atuam transitoriamente como capacitores sincronos estabilizando a tensao defasada da rede primária.",
-        "Eles reduzem a corrente assimetrica total de curto-circuito na barra isolando falhas a jusante."
+        "Eles melhoram imediatamente o fator de potência global do barramento de distribuição durante o acionamento.",
+        "Eles drenam correntes de irrupção elevadas que podem causar quedas de tensão sistêmicas significativas nas barras.",
+        "Eles atuam transitoriamente como capacitores síncronos estabilizando a tensão defasada da rede primária.",
+        "Eles reduzem a corrente assimétrica total de curto-circuito na barra isolando falhas a jusante."
       ],
       "correctIndex": 1,
-      "explanation": "A partida subita de grandes atuadores exige altas correntes de energizacao e rotor bloqueado provocando afundamentos transitorios de tensao nos barramentos alimentadores.",
+      "explanation": "A partida súbita de grandes atuadores exige altas correntes de energização e rotor bloqueado provocando afundamentos transitórios de tensão nos barramentos alimentadores.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Como o Red Book aborda a interacao de dispositivos de estado solido como conversores e inversores aplicados em plantas industriais?",
+      "statement": "Como o Red Book aborda a interação de dispositivos de estado sólido como conversores e inversores aplicados em plantas industriais?",
       "options": [
         "Garante que eles eliminam totalmente as demandas por arranjos de aterramento nos processos industriais complexos.",
-        "Confirma que eles corrigem naturalmente o fator de potencia passivo para a unidade dispensando os bancos de capacitores.",
-        "Atesta que eles sao fontes de harmonicos na rede e sao simultaneamente suscetiveis a variacoes na qualidade da tensao.",
-        "Afirma que eles operam de forma isolada e sao completamente imunes as flutuacoes ou quedas subitas no suprimento principal."
+        "Confirma que eles corrigem naturalmente o fator de potência passivo para a unidade dispensando os bancos de capacitores.",
+        "Atesta que eles são fontes de harmônicos na rede e são simultaneamente suscetíveis a variações na qualidade da tensão.",
+        "Afirma que eles operam de forma isolada e são completamente imunes às flutuações ou quedas súbitas no suprimento principal."
       ],
       "correctIndex": 2,
-      "explanation": "Controladores estaticos e de velocidade interagem ativamente distorcendo a onda senoidal gerando harmonicos e sofrem desarmes se a qualidade de tensao da rede nao for adequada.",
+      "explanation": "Controladores estáticos e de velocidade interagem ativamente distorcendo a onda senoidal gerando harmônicos e sofrem desarmes se a qualidade de tensão da rede não for adequada.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Baseado nas avaliacoes de capacidade de conducao dos cabos em canaletas e dutos, o que ocorre com o fator de ajuste de agrupamento a medida que se.",
+      "statement": "Baseado nas avaliações de capacidade de condução dos cabos em canaletas e dutos, o que ocorre com o fator de ajuste de agrupamento à medida que se.",
       "options": [
-        "O indice torna-se irrelevante e estabiliza em um quando os ramais radiais ultrapassam cinco kiloVolts na isolacao.",
+        "O índice torna-se irrelevante e estabiliza em um quando os ramais radiais ultrapassam cinco kiloVolts na isolação.",
         "O fator de ajuste eleva-se gradativamente permitindo que os agrupamentos fechados conduzam mais corrente de regime permanente.",
-        "O parametro multiplicativo de ampacidade permanece imutavel independentemente de quantos condutores compartilhem as sessoes.",
-        "O fator de reducao cai consideravelmente limitando substancialmente a dissipacao termica e a capacidade de conducao permitida."
+        "O parâmetro multiplicativo de ampacidade permanece imutável independentemente de quantos condutores compartilhem as sessões.",
+        "O fator de redução cai consideravelmente limitando substancialmente a dissipação térmica e a capacidade de condução permitida."
       ],
       "correctIndex": 3,
-      "explanation": "Para coibir sobreaquecimentos conjuntos a norma exige aplicar um fator de derating severo menor que um sempre que inumeros condutores isolados dividem os mesmos percursos oclusos.",
+      "explanation": "Para coibir sobreaquecimentos conjuntos a norma exige aplicar um fator de derating severo menor que um sempre que inúmeros condutores isolados dividem os mesmos percursos oclusos.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A diretriz estabelecida pela norma IEEE Std 141 concentra-se de modo estrito e exclusivo nas abordagens para projetos de instalacoes de edificios.",
+      "statement": "A diretriz estabelecida pela norma IEEE Std 141 concentra-se de modo estrito e exclusivo nas abordagens para projetos de instalações de edifícios.",
       "correctAnswer": false,
-      "explanation": "O Livro Vermelho aborda especificamente os sistemas de energia para as plantas industriais enquanto estruturas hospitalares e predios comerciais detem tratativas em normativas paralelas distintas como os Livros Branco e Cinza.",
+      "explanation": "O Livro Vermelho aborda especificamente os sistemas de energia para as plantas industriais enquanto estruturas hospitalares e prédios comerciais detêm tratativas em normativas paralelas distintas como os Livros Branco e Cinza.",
       "difficulty": "easy",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "No escopo delineado da bibliografia destaca-se que as unidades industriais sao essencialmente norteadas ao processo e aos maquinarios.",
+      "statement": "No escopo delineado da bibliografia destaca-se que as unidades industriais são essencialmente norteadas ao processo e aos maquinários.",
       "correctAnswer": true,
-      "explanation": "Logo na introducao o documento atesta as diferencas categoricas de projetos, ratificando a natureza orientada a maquinas da industria frente ao aspecto comercial focado na seguranca e uso por massas de pessoas.",
+      "explanation": "Logo na introdução o documento atesta as diferenças categóricas de projetos, ratificando a natureza orientada a máquinas da indústria frente ao aspecto comercial focado na segurança e uso por massas de pessoas.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para a confeccao de um bom planejamento e coordenacao do sistema, recomenda-se organizar um diagrama unifilar amplo e detalhado sinalizando a secao.",
+      "statement": "Para a confecção de um bom planejamento e coordenação do sistema, recomenda-se organizar um diagrama unifilar amplo e detalhado sinalizando a seção.",
       "correctAnswer": true,
-      "explanation": "O levantamento da topologia e das informacoes construtivas exatas da tubulacao e das secoes condutoras representa uma atividade capital para simular perdas, curtos e validar a rede em projeto.",
+      "explanation": "O levantamento da topologia e das informações construtivas exatas da tubulação e das seções condutoras representa uma atividade capital para simular perdas, curtos e validar a rede em projeto.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "A aplicacao do calculo de analise sobre os custos atrelados ao ciclo de vida total das solucoes e sumariamente desconsiderada pela normativa.",
+      "statement": "A aplicação do cálculo de análise sobre os custos atrelados ao ciclo de vida total das soluções é sumariamente desconsiderada pela normativa.",
       "correctAnswer": false,
-      "explanation": "A norma defende ostensivamente a execucao do estudo do ciclo de vida, enfatizando que os orcamentos devem transpor a simples avaliacao de aquisicao em favor da perspectiva abrangente dos custos operacionais no tempo.",
+      "explanation": "A norma defende ostensivamente a execução do estudo do ciclo de vida, enfatizando que os orçamentos devem transpor a simples avaliação de aquisição em favor da perspectiva abrangente dos custos operacionais no tempo.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Avaliando as limitacoes expostas na tabela padronizada que descreve as classes da tensao norte-americana, um arranjo distribuidor operando no.",
+      "statement": "Avaliando as limitações expostas na tabela padronizada que descreve as classes da tensão norte-americana, um arranjo distribuidor operando no.",
       "correctAnswer": false,
-      "explanation": "A relacao classificada normativamente situa a faixa de 13,8 kiloVolts inequivocamente detida no grupo de Media Tensao ao passo que a classificacao como Alta Tensao se resguarda aos niveis escalados a partir de 46 kiloVolts.",
+      "explanation": "A relação classificada normativamente situa a faixa de 13,8 kiloVolts inequivocamente detida no grupo de Média Tensão ao passo que a classificação como Alta Tensão se resguarda aos níveis escalados a partir de 46 kiloVolts.",
       "difficulty": "hard",
       "isTrue": false
     },
     {
       "type": "fillBlank",
-      "statement": "Consoante as regras orientativas do texto tecnico, assevera-se abertamente que a ininterrupta continuidade na linha de producao guarda rigorosa e ____.",
+      "statement": "Consoante as regras orientativas do texto técnico, assevera-se abertamente que a ininterrupta continuidade na linha de produção guarda rigorosa e ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "distribuicao"
         }
       ],
-      "explanation": "A robustez do arranjo que transporta e converte o fluxo eletrico reflete sem atenuacoes na integridade operativa e inviabiliza producoes fiaveis em caso de colapsos na rede alimentadora principal.",
+      "explanation": "A robustez do arranjo que transporta e converte o fluxo elétrico reflete sem atenuações na integridade operativa e inviabiliza produções fiáveis em caso de colapsos na rede alimentadora principal.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "Ao estudar a suportabilidade termica de arranjos com densidade elevada nas ocupacoes de leitos e dutos a engenharia e constrangida compulsoriamente ____.",
+      "statement": "Ao estudar a suportabilidade térmica de arranjos com densidade elevada nas ocupações de leitos e dutos a engenharia é constrangida compulsoriamente ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "ajuste"
         }
       ],
-      "explanation": "Agrupar passagens implica prender e confinar dissipacoes de energia na forma de calor demandando reducoes ou deratings pre-calculados representados por fatores de ajuste mitigadores prevendo a real fadiga termica das capas protetoras vizinhas.",
+      "explanation": "Agrupar passagens implica prender e confinar dissipações de energia na forma de calor demandando reduções ou deratings pré-calculados representados por fatores de ajuste mitigadores prevendo a real fadiga térmica das capas protetoras vizinhas.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "Um dos propositos mais enfatizados ao estipular e escolher de forma responsavel a bitola dos condutores ramificados exige inspecionar o decrescimo ____.",
+      "statement": "Um dos propósitos mais enfatizados ao estipular e escolher de forma responsável a bitola dos condutores ramificados exige inspecionar o decréscimo ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "tensao"
         }
       ],
-      "explanation": "Evitar falhas funcionais ou queimas exige preservar limites estritos de voltagem aplicados na maquina restringindo afundamentos inaceitaveis durante a partida cujas diretrizes baseiam o redimensionamento criterioso analitico de secao.",
+      "explanation": "Evitar falhas funcionais ou queimas exige preservar limites estritos de voltagem aplicados na máquina restringindo afundamentos inaceitáveis durante a partida cujas diretrizes baseiam o redimensionamento criterioso analítico de seção.",
       "difficulty": "hard"
     }
   ]

@@ -633,14 +633,22 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label,
-            style: TextStyle(
-                color: AppColors.textSecondary, fontSize: 13)),
-        Text(value,
-            style: TextStyle(
-                color: valueColor,
-                fontSize: 13,
-                fontWeight: FontWeight.w700)),
+        Flexible(
+          child: Text(label,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: AppColors.textSecondary, fontSize: 13)),
+        ),
+        const SizedBox(width: 8),
+        Flexible(
+          child: Text(value,
+              textAlign: TextAlign.right,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: valueColor,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700)),
+        ),
       ],
     );
   }

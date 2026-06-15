@@ -10,33 +10,33 @@
   "questions": [
     {
       "type": "multipleChoice",
-      "statement": "Na aplicacao da IEC 61850 em protecao, qual interface logica transporta as amostras brutas de TC e TP do patio para o nivel de bay?",
+      "statement": "Na aplicação da IEC 61850 em proteção, qual interface lógica transporta as amostras brutas de TC e TP do pátio para o nível de bay?",
       "options": [
-        "Interface 1 de comunicacao vertical cliente-servidor.",
+        "Interface 1 de comunicação vertical cliente-servidor.",
         "Interface 10 de telemetria corporativa remota.",
         "Interface 8 de intertravamento horizontal entre bays.",
-        "Interface 4 de troca instantanea de dados no barramento de processo."
+        "Interface 4 de troca instantânea de dados no barramento de processo."
       ],
       "correctIndex": 3,
-      "explanation": "A norma mapeia o fluxo de dados instantaneos de transformadores (como o SV) rigidamente pelo roteiro delimitado da Interface logica 4.",
+      "explanation": "A norma mapeia o fluxo de dados instantâneos de transformadores (como o SV) rigidamente pelo roteiro delimitado da Interface lógica 4.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para que reles de protecao diferencial comparem corretamente as ondas, qual a exigencia de precisao de sincronismo de tempo da rede SV?",
+      "statement": "Para que relés de proteção diferencial comparem corretamente as ondas, qual a exigência de precisão de sincronismo de tempo da rede SV?",
       "options": [
-        "Sincronismo critico aproximado de 1 microssegundo.",
-        "Sincronismo padrao da ordem de 1 milissegundo.",
+        "Sincronismo crítico aproximado de 1 microssegundo.",
+        "Sincronismo padrão da ordem de 1 milissegundo.",
         "Sincronismo lento de 1 segundo.",
-        "Nao ha exigencia de tempo se a rede for Gigabit."
+        "Não há exigência de tempo se a rede for Gigabit."
       ],
       "correctIndex": 0,
-      "explanation": "A arquitetura prescreve que o sincronismo e critico (cerca de 1 microssegundo) visando o calculo exato de fasores e comparacao de ondas.",
+      "explanation": "A arquitetura prescreve que o sincronismo é crítico (cerca de 1 microssegundo) visando o cálculo exato de fasores e comparação de ondas.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Na modelagem de dados, quais Logical Nodes representam e disponibilizam as medidas digitais de corrente e tensao as funcoes de protecao?",
+      "statement": "Na modelagem de dados, quais Logical Nodes representam e disponibilizam as medidas digitais de corrente e tensão às funções de proteção?",
       "options": [
         "CSWI e CILO.",
         "TCTR e TVTR.",
@@ -44,42 +44,42 @@
         "XCBR e XSWI."
       ],
       "correctIndex": 1,
-      "explanation": "Os nos TCTR (Transformador de Corrente) e TVTR (Transformador de Tensao) sao os responsaveis nativos pela amostragem do processo primario.",
+      "explanation": "Os nós TCTR (Transformador de Corrente) e TVTR (Transformador de Tensão) são os responsáveis nativos pela amostragem do processo primário.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Em uma arquitetura de protecao digital, como as amostras de SV originadas nos sensores atingem simultaneamente varios reles assinantes?",
+      "statement": "Em uma arquitetura de proteção digital, como as amostras de SV originadas nos sensores atingem simultaneamente vários relés assinantes?",
       "options": [
         "Via mensagens de broadcast destrutivo em IP.",
-        "Por conexoes cliente-servidor MMS TCP/IP.",
-        "Via enderecamento unificado Multicast na camada de enlace.",
-        "Atraves de tuneis seriais RS-485 roteados."
+        "Por conexões cliente-servidor MMS TCP/IP.",
+        "Via endereçamento unificado Multicast na camada de enlace.",
+        "Através de túneis seriais RS-485 roteados."
       ],
       "correctIndex": 2,
-      "explanation": "A aplicacao faz uso do enderecamento Multicast para enviar o fluxo paralelamente a todas as estacoes de protecao designadas a escuta-lo.",
+      "explanation": "A aplicação faz uso do endereçamento Multicast para enviar o fluxo paralelamente a todas as estações de proteção designadas a escutá-lo.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Qual e um dos beneficios diretos e tangiveis da utilizacao do barramento de processo e Sampled Values para a protecao?",
+      "statement": "Qual é um dos benefícios diretos e tangíveis da utilização do barramento de processo e Sampled Values para a proteção?",
       "options": [
-        "Aumento exponencial do numero de cabos eletricos no painel.",
-        "Eliminacao das restricoes de seguranca cibernetica.",
-        "Abolicao do uso de protocolos de tempo como o PTP ou SNTP.",
-        "A massiva reducao de fiacao e cobre interligando o patio a sala de reles."
+        "Aumento exponencial do número de cabos elétricos no painel.",
+        "Eliminação das restrições de segurança cibernética.",
+        "Abolição do uso de protocolos de tempo como o PTP ou SNTP.",
+        "A massiva redução de fiação e cobre interligando o pátio à sala de relés."
       ],
       "correctIndex": 3,
-      "explanation": "A digitalizacao junto ao primario reduz drasticamente as onerosas e complexas fiacoes secundarias tradicionais de cobre das subestacoes.",
+      "explanation": "A digitalização junto ao primário reduz drasticamente as onerosas e complexas fiações secundárias tradicionais de cobre das subestações.",
       "difficulty": "easy"
     },
     {
       "type": "multipleChoice",
-      "statement": "Para proteger os fluxos vitais de SV e GOOSE de engarrafamentos por dados do SCADA, qual tecnologia de isolamento e aplicada aos switches?",
+      "statement": "Para proteger os fluxos vitais de SV e GOOSE de engarrafamentos por dados do SCADA, qual tecnologia de isolamento é aplicada aos switches?",
       "options": [
-        "O padrao de Redes Virtuais (VLAN).",
-        "O protocolo FTP de transferencia de arquivos.",
-        "O tunelamento dinamico via protocolo BGP.",
+        "O padrão de Redes Virtuais (VLAN).",
+        "O protocolo FTP de transferência de arquivos.",
+        "O tunelamento dinâmico via protocolo BGP.",
         "O barramento puramente serial mestre-escravo."
       ],
       "correctIndex": 0,
@@ -88,46 +88,46 @@
     },
     {
       "type": "multipleChoice",
-      "statement": "Em projetos contendo barramento de processo unificado (Alternativa 3), qual e o principal impacto ou gargalo arquitetural esperado?",
+      "statement": "Em projetos contendo barramento de processo unificado (Alternativa 3), qual é o principal impacto ou gargalo arquitetural esperado?",
       "options": [
-        "As chaves e disjuntores primarios desarmam compulsoriamente.",
-        "O barramento necessita suportar uma elevadissima taxa de uso da banda de dados.",
-        "Isola as medicoes impedindo que os reles realizem atuacoes locais.",
-        "Os IEDs retornam para operacao exclusiva em modelo eletromecanico."
+        "As chaves e disjuntores primários desarmam compulsoriamente.",
+        "O barramento necessita suportar uma elevadíssima taxa de uso da banda de dados.",
+        "Isola as medições impedindo que os relés realizem atuações locais.",
+        "Os IEDs retornam para operação exclusiva em modelo eletromecânico."
       ],
       "correctIndex": 1,
-      "explanation": "O agrupamento de todas as medicoes da planta em um unico segmento (Alternativa 3) requisita redes robustas devido a volumosa banda absorvida pelo SV.",
+      "explanation": "O agrupamento de todas as medições da planta em um único segmento (Alternativa 3) requisita redes robustas devido à volumosa banda absorvida pelo SV.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "O que acontece rotineiramente aos algoritmos de protecao da subestacao caso eles sofram a perda infima e ocasional de amostras na rede?",
+      "statement": "O que acontece rotineiramente aos algoritmos de proteção da subestação caso eles sofram a perda ínfima e ocasional de amostras na rede?",
       "options": [
-        "O equipamento trava aguardando resincronizacao manual de fabrica.",
-        "O rele emite a mensagem MMS imediata desarmando os alimentadores.",
-        "As funcoes toleram e processam essas perdas isoladas sem induzir falhas operacionais graves.",
-        "A rede reinicia as portas do switch atraves do protocolo RSTP."
+        "O equipamento trava aguardando ressincronização manual de fábrica.",
+        "O relé emite a mensagem MMS imediata desarmando os alimentadores.",
+        "As funções toleram e processam essas perdas isoladas sem induzir falhas operacionais graves.",
+        "A rede reinicia as portas do switch através do protocolo RSTP."
       ],
       "correctIndex": 2,
-      "explanation": "Como os canais de fluxo cru nao aplicam reconhecimento ACK, perdas isoladas sao absorvidas silenciosamente sem comprometer a seguranca do algoritmo logico.",
+      "explanation": "Como os canais de fluxo cru não aplicam reconhecimento ACK, perdas isoladas são absorvidas silenciosamente sem comprometer a segurança do algoritmo lógico.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao formatar o trafego na pilha ISO/OSI, o fluxo do Sampled Values difere do modelo tradicional SCADA pois adota arquitetura restrita em qual base?",
+      "statement": "Ao formatar o tráfego na pilha ISO/OSI, o fluxo do Sampled Values difere do modelo tradicional SCADA pois adota arquitetura restrita em qual base?",
       "options": [
-        "Base Hard Real-Time operando somente em camada Fisica e de Enlace.",
+        "Base Hard Real-Time operando somente em camada Física e de Enlace.",
         "Base TCP IP roteada cruzando todas as sete camadas.",
-        "Base Cliente Servidor MMS restrita a camada de Aplicacao.",
+        "Base Cliente Servidor MMS restrita à camada de Aplicação.",
         "Base puramente Token Ring com roteamento HSR."
       ],
       "correctIndex": 0,
-      "explanation": "A comunicacao agil repudia camadas de Transporte e Rede para mitigar atrasos, alocando-se na pilha Hard Real-Time da camada de enlace Ethernet.",
+      "explanation": "A comunicação ágil repudia camadas de Transporte e Rede para mitigar atrasos, alocando-se na pilha Hard Real-Time da camada de enlace Ethernet.",
       "difficulty": "medium"
     },
     {
       "type": "multipleChoice",
-      "statement": "Ao inspecionar e validar a rede em busca de datagramas originados no barramento de processo, qual Ethertype especifico comprova tratar-se de fluxo SV?",
+      "statement": "Ao inspecionar e validar a rede em busca de datagramas originados no barramento de processo, qual Ethertype específico comprova tratar-se de fluxo SV?",
       "options": [
         "0x0800",
         "0x8100",
@@ -135,76 +135,76 @@
         "0x88BA"
       ],
       "correctIndex": 3,
-      "explanation": "O mapeamento dos servicos estipula que a assinatura hex 0x88BA e exclusiva para o trafego dos Sampled Values, diferenciando-o do 0x88B8 do GOOSE.",
+      "explanation": "O mapeamento dos serviços estipula que a assinatura hex 0x88BA é exclusiva para o tráfego dos Sampled Values, diferenciando-o do 0x88B8 do GOOSE.",
       "difficulty": "hard"
     },
     {
       "type": "trueFalse",
-      "statement": "A principal vantagem da arquitetura baseada em SV e o compartilhamento simultaneo de uma mesma medicao digitalizada (sensor TCTR) por multiplos reles assinantes.",
+      "statement": "A principal vantagem da arquitetura baseada em SV é o compartilhamento simultâneo de uma mesma medição digitalizada (sensor TCTR) por múltiplos relés assinantes.",
       "correctAnswer": true,
-      "explanation": "O fluxo multicast converte a medicao isolada em variavel publica, franqueando que inumeros IEDs da zona absorvam os mesmos dados cooperativamente.",
+      "explanation": "O fluxo multicast converte a medição isolada em variável pública, franqueando que inúmeros IEDs da zona absorvam os mesmos dados cooperativamente.",
       "difficulty": "easy",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Os projetos adotando a arquitetura orientada a funcao limitam os segmentos SV de modo que a rede seja moldada refletindo fielmente a abrangencia das zonas de protecao eletrica.",
+      "statement": "Os projetos adotando a arquitetura orientada a função limitam os segmentos SV de modo que a rede seja moldada refletindo fielmente a abrangência das zonas de proteção elétrica.",
       "correctAnswer": true,
-      "explanation": "Na Alternativa 4 descrita no escopo as redes do process bus acompanham diretamente as zonas geofisicas estritas limitando colapsos generalizados.",
+      "explanation": "Na Alternativa 4 descrita no escopo as redes do process bus acompanham diretamente as zonas geofísicas estritas limitando colapsos generalizados.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "Para atestar a sanidade dos sinais em falhas fisicas os fluxos da rede transportam agregado ao bloco de dados o atributo de qualidade designado pelo codigo q.",
+      "statement": "Para atestar a sanidade dos sinais em falhas físicas os fluxos da rede transportam agregado ao bloco de dados o atributo de qualidade designado pelo código q.",
       "correctAnswer": true,
-      "explanation": "O Data Attribute q (Quality) repassa aos assinantes o diagnostico fidedigno assegurando se o equipamento originario lida com falhas marginais em sua medicao.",
+      "explanation": "O Data Attribute q (Quality) repassa aos assinantes o diagnóstico fidedigno assegurando se o equipamento originário lida com falhas marginais em sua medição.",
       "difficulty": "medium",
       "isTrue": true
     },
     {
       "type": "trueFalse",
-      "statement": "O servico de medicao e amostragem SV exige a operacao em padrao TCP orientado a conexao para validar a comparacao instantanea dos fasores diferenciais.",
+      "statement": "O serviço de medição e amostragem SV exige a operação em padrão TCP orientado a conexão para validar a comparação instantânea dos fasores diferenciais.",
       "correctAnswer": false,
-      "explanation": "O Sampled Values utiliza modelo Publisher Subscriber com trafego Ethernet direto (camada 2), sem utilizar o TCP IP nem efetuar confirmacoes rotineiras.",
+      "explanation": "O Sampled Values utiliza modelo Publisher Subscriber com tráfego Ethernet direto (camada 2), sem utilizar o TCP IP nem efetuar confirmações rotineiras.",
       "difficulty": "medium",
       "isTrue": false
     },
     {
       "type": "trueFalse",
-      "statement": "Diferentemente do padrao estocastico do GOOSE motivado por ocorrencias abruptas as transferencias SMV obedecem estritamente ditames temporais chamados clock events.",
+      "statement": "Diferentemente do padrão estocástico do GOOSE motivado por ocorrências abruptas as transferências SMV obedecem estritamente ditames temporais chamados clock events.",
       "correctAnswer": true,
-      "explanation": "Os manuais tecnicos ratificam que a publicacao constante para reconstituir os ciclos baseia-se inflexivelmente em disparos atrelados a sinais de relogio ou clock events.",
+      "explanation": "Os manuais técnicos ratificam que a publicação constante para reconstituir os ciclos baseia-se inflexivelmente em disparos atrelados a sinais de relógio ou clock events.",
       "difficulty": "hard",
       "isTrue": true
     },
     {
       "type": "fillBlank",
-      "statement": "O nivel hierarquico e o segmento de rede destinado prioritariamente a unificacao das conexoes e envio das amostras geradas no equipamento de patio recebe o titulo normativo de barramento de ____.",
+      "statement": "O nível hierárquico e o segmento de rede destinado prioritariamente à unificação das conexões e envio das amostras geradas no equipamento de pátio recebe o título normativo de barramento de ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "processo"
         }
       ],
-      "explanation": "O barramento de processo ou process bus substitui cabos pesados digitalizando e interligando a camada primaria (process level) aos abrigos dos controladores de bay.",
+      "explanation": "O barramento de processo ou process bus substitui cabos pesados digitalizando e interligando a camada primária (process level) aos abrigos dos controladores de bay.",
       "difficulty": "medium"
     },
     {
       "type": "fillBlank",
-      "statement": "A estrita garantia e avaliacao das discrepancias de angulo adotadas nos arranjos de distancia exigem que as estacoes apliquem sincronismo apurado da ordem base de um ____.",
+      "statement": "A estrita garantia e avaliação das discrepâncias de ângulo adotadas nos arranjos de distância exigem que as estações apliquem sincronismo apurado da ordem base de um ____.",
       "blanks": [
         {
           "index": 0,
           "answer": "microssegundo"
         }
       ],
-      "explanation": "Atendendo resolucoes avancadas das matrizes fasoriais e calculos analogicos senoidais, o referencial maximo exato tolera limitacao cravada no limiar de 1 microssegundo.",
+      "explanation": "Atendendo resoluções avançadas das matrizes fasoriais e cálculos analógicos senoidais, o referencial máximo exato tolera limitação cravada no limiar de 1 microssegundo.",
       "difficulty": "hard"
     },
     {
       "type": "fillBlank",
-      "statement": "As variaveis eletricas vitais ao disparo geradas periodicamente pelos TCs e TPs digitais circulam na malha identificadas de modo homogeneo atraves do servico batizado Sampled ____ Values.",
+      "statement": "As variáveis elétricas vitais ao disparo geradas periodicamente pelos TCs e TPs digitais circulam na malha identificadas de modo homogêneo através do serviço batizado Sampled ____ Values.",
       "blanks": [
         {
           "index": 0,

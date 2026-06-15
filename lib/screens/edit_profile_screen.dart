@@ -25,7 +25,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.initState();
     final user = FirebaseAuth.instance.currentUser;
     _uid = user?.uid;
-    _nameCtrl = TextEditingController(text: user?.displayName ?? 'Usuário');
+    // Usa o getter do UserService (que já deriva do e-mail quando não há nome)
+    // para não pré-preencher o campo com o literal "Usuário".
+    _nameCtrl = TextEditingController(text: UserService().displayName);
     _emailCtrl = TextEditingController(text: user?.email ?? '');
     _professionCtrl = TextEditingController(text: '');
 
