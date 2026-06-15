@@ -1825,6 +1825,10 @@ const PUBLIC_PROFILE_FIELDS = [
   "clanId",
   "clanName",
   "unlockedBadgeIds",
+  // Módulo que o usuário está estudando agora. Necessário para a "presença
+  // do clã" (learning_path_screen consulta public_profiles por clanId +
+  // currentModuleId). Sem espelhar este campo, a query sempre vinha vazia.
+  "currentModuleId",
 ] as const;
 
 /** Extrai apenas os campos públicos de um doc de usuário. */
@@ -1841,6 +1845,10 @@ function pickPublicFields(
 export const syncPublicProfile = onDocumentWritten(
   {
     document: "users/{uid}",
+    // Este projeto usa um banco Firestore NOMEADO ("default"), não o
+    // "(default)". Sem declarar isto o deploy do trigger falha com 404
+    // ("database '(default)' does not exist") e o gatilho nunca dispara.
+    database: "default",
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },

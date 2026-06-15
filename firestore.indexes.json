@@ -22,6 +22,16 @@
         { "fieldPath": "isOnTrial", "order": "ASCENDING" },
         { "fieldPath": "trialEndsAt", "order": "ASCENDING" }
       ]
+    },
+    {
+      // Painel de suporte do admin: filtra por categoria e ordena por data.
+      // collection('support_tickets').where('category','==',cat).orderBy('createdAt','desc')
+      "collectionGroup": "support_tickets",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []
