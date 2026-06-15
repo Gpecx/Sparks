@@ -27,7 +27,7 @@ import {
 } from "firebase-functions/v2/https";
 import { onSchedule } from "firebase-functions/v2/scheduler";
 import { onDocumentWritten } from "firebase-functions/v2/firestore";
-import { logger } from "firebase-functions/v2";
+import { logger, setGlobalOptions } from "firebase-functions/v2";
 import { defineSecret } from "firebase-functions/params";
 import * as nodemailer from "nodemailer";
 import {
@@ -59,6 +59,22 @@ admin.initializeApp({
 });
 const db = getFirestore("default");
 db.settings({ ignoreUndefinedProperties: true });
+
+// ── Hardening de segurança ───────────────────────────────────────
+// Teto de instâncias por função: protege contra picos/DoS que virariam
+// custo de billing (Cloud Functions escala sem limite por padrão). Vale
+// para TODAS as funções; cada uma pode sobrescrever localmente se precisar.
+setGlobalOptions({ maxInstances: 10 });
+
+// App Check — atesta que a chamada veio do app legítimo (não de curl/script
+// com um token de auth roubado/forjado). Aplicado APENAS aos callables.
+//
+// ⚠️ MANTER false até o cliente Flutter enviar tokens de App Check. Ligar
+// antes disso REJEITA todas as chamadas do app em produção (login, XP,
+// pagamento). Rollout: (1) firebase_app_check no Flutter + initialize;
+// (2) registrar providers no console (Play Integrity/DeviceCheck/reCAPTCHA);
+// (3) publicar o app e confirmar tokens chegando; (4) flip para true + deploy.
+const ENFORCE_APP_CHECK = false;
 
 // ────────────────────────────────────────────────────────────────
 // HELPERS
@@ -277,6 +293,7 @@ interface AddXpResult {
 
 export const addXp = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -415,6 +432,7 @@ interface AddSpResult {
 
 export const addSparkPoints = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -491,6 +509,7 @@ interface SpendSpResult {
 
 export const spendSparkPoints = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -571,6 +590,7 @@ interface UpdateEloResult {
 
 export const updateElo = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -662,6 +682,7 @@ interface UnlockBadgeResult {
 
 export const unlockBadge = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -762,6 +783,7 @@ interface CreateCheckoutResult {
 
 export const createAsaasCheckout = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -913,6 +935,7 @@ interface CheckPaymentStatusResult {
 
 export const checkPaymentStatus = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [ASAAS_API_KEY, ASAAS_BASE_URL],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -1280,6 +1303,7 @@ interface StartTrialResult {
 
 export const startTrial = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -1345,6 +1369,7 @@ export const startTrial = onCall(
 
 export const cancelTrial = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -1438,6 +1463,7 @@ interface CheckDeviceTrustData {
 
 export const checkDeviceTrust = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -1499,6 +1525,7 @@ interface SendVerifCodeData {
 
 export const sendEmailVerificationCode = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     secrets: [SMTP_USER, SMTP_PASS],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
@@ -1617,6 +1644,7 @@ interface VerifyEmailCodeResult {
 
 export const verifyEmailCode = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -1735,6 +1763,7 @@ export const verifyEmailCode = onCall(
 
 export const deleteAccount = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
