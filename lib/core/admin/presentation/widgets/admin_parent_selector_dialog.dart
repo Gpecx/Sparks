@@ -317,7 +317,7 @@ class _AdminParentSelectorDialogState
                         style: const TextStyle(
                           color: AppColors.textPrimary,
                           fontSize: 17,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       const Text(
@@ -373,7 +373,7 @@ class _AdminParentSelectorDialogState
                 label: const Text(
                   'Continuar',
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.w700),
                 ),
               ),
             ),

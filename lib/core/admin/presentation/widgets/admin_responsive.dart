@@ -41,9 +41,9 @@ class AdminResponsive {
   }
 
   static TextStyle getTitleStyle(BuildContext context) {
-    if (isMobile(context)) return const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-    if (isTablet(context)) return const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
-    return const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
+    if (isMobile(context)) return const TextStyle(fontSize: 18, fontWeight: FontWeight.w700);
+    if (isTablet(context)) return const TextStyle(fontSize: 20, fontWeight: FontWeight.w700);
+    return const TextStyle(fontSize: 24, fontWeight: FontWeight.w700);
   }
 
   static TextStyle getSubtitleStyle(BuildContext context) {

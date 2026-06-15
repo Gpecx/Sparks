@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_skeleton.dart';
 import 'package:spark_app/models/spark_admin_models.dart';
 import 'package:spark_app/models/ebook_model.dart';
 import 'package:spark_app/providers/content_providers.dart';
@@ -61,8 +62,16 @@ class EbookListScreen extends ConsumerWidget {
                         },
                       );
                     },
-                    loading: () => const Center(
-                        child: CircularProgressIndicator(color: AppColors.primary)),
+                    loading: () => ListView.builder(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 5,
+                      itemBuilder: (context, i) => const SparkSkeleton(
+                        width: double.infinity,
+                        height: 120,
+                        margin: EdgeInsets.only(bottom: 16),
+                      ),
+                    ),
                     error: (e, _) => Center(
                         child: Text('Erro: $e',
                             style: const TextStyle(color: AppColors.error))),

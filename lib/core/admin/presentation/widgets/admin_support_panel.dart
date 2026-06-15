@@ -31,7 +31,7 @@ class _AdminSupportPanelState extends State<AdminSupportPanel> {
       children: [
         const Text(
           'Caixa de Entrada de Suporte',
-          style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 8),
         const Text(
@@ -60,7 +60,7 @@ class _AdminSupportPanelState extends State<AdminSupportPanel> {
                   backgroundColor: AppColors.surface,
                   labelStyle: TextStyle(
                     color: isSelected ? Colors.white : AppColors.textSecondary,
-                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                    fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
                   ),
                 ),
               );
@@ -158,7 +158,7 @@ class _AdminSupportPanelState extends State<AdminSupportPanel> {
                 ),
                 child: Text(
                   category,
-                  style: const TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w700),
                 ),
               ),
               Container(
@@ -169,7 +169,7 @@ class _AdminSupportPanelState extends State<AdminSupportPanel> {
                 ),
                 child: Text(
                   statusText,
-                  style: TextStyle(color: statusColor, fontSize: 11, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: statusColor, fontSize: 11, fontWeight: FontWeight.w700),
                 ),
               ),
             ],
@@ -177,7 +177,7 @@ class _AdminSupportPanelState extends State<AdminSupportPanel> {
           const SizedBox(height: 12),
           Text(
             subject,
-            style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
           Text(
@@ -196,7 +196,7 @@ class _AdminSupportPanelState extends State<AdminSupportPanel> {
                   children: [
                     Text(
                       name,
-                      style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                      style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700),
                     ),
                     Text(
                       email,

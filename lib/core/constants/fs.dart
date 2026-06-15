@@ -48,7 +48,6 @@ abstract class FS {
   static const String photoUrl = 'photoUrl';
   static const String createdAt = 'createdAt';
   static const String updatedAt = 'updatedAt';
-  static const String sparkPoints = 'sparkPoints';
   static const String xp = 'xp';
   static const String level = 'level';
   static const String tensionLevel = 'tensionLevel';
@@ -181,8 +180,8 @@ class QuestionModel {
       statement: d[FS.statement] as String? ?? '',
       explanation: d[FS.explanation] as String? ?? '',
       isActive: d[FS.isActive] as bool? ?? true,
-      // multipleChoice
-      options: type == 'multipleChoice' && d[FS.options] != null
+      // multipleChoice + fillInTheBlanks (banco de palavras compartilha o campo options)
+      options: (type == 'multipleChoice' || type == 'fillInTheBlanks') && d[FS.options] != null
           ? List<String>.from(d[FS.options] as List)
           : null,
       correctIndex: (type == 'multipleChoice' || type == 'trueFalse' || type == 'true_false') && d[FS.correctIndex] != null
@@ -206,7 +205,12 @@ class QuestionModel {
   }
 
   /// Converte para o formato Map interno usado pelo QuizScreen.
-  Map<String, dynamic> toQuizMap(String moduleName) {
+  ///
+  /// [blankPool] é um conjunto opcional de termos reais da própria lição
+  /// (respostas de outras lacunas) usado para enriquecer o banco de palavras
+  /// do minigame preencher lacunas em runtime — garante distratores plausíveis
+  /// mesmo quando o campo `options` não foi gravado na importação.
+  Map<String, dynamic> toQuizMap(String moduleName, {Set<String>? blankPool}) {
     switch (type) {
       case 'multipleChoice':
         return {
@@ -230,40 +234,7 @@ class QuestionModel {
           'explanation': explanation,
         };
       case 'fillInTheBlanks':
-        // Converte para múltipla escolha: a resposta correta é blanks[0].answer
-        // e as opções vêm dos distractors + a resposta correta.
-        final correctAnswer = (blanks != null && blanks!.isNotEmpty)
-            ? (blanks!.first['answer'] as String? ?? '')
-            : (textWithBlanks ?? statement);
-        final allDistractors = <String>[];
-        for (final b in (blanks ?? [])) {
-          final d = b['distractors'];
-          if (d != null && d is List) {
-            allDistractors.addAll(List<String>.from(d));
-          }
-        }
-        // Garante pelo menos 3 distratores
-        if (allDistractors.length < 3) {
-          const fallback = ['Nenhuma das anteriores', 'Incorreto', 'Não se aplica', 'Outra opção'];
-          for (final f in fallback) {
-            if (!allDistractors.contains(f) && f != correctAnswer) {
-              allDistractors.add(f);
-              if (allDistractors.length >= 3) break;
-            }
-          }
-        }
-        // Monta lista com a correta + até 3 distratores e embaralha
-        final mcOptions = <String>[correctAnswer, ...allDistractors.take(3).toList()];
-        mcOptions.shuffle();
-        final mcCorrectIndex = mcOptions.indexOf(correctAnswer);
-        return {
-          'type': 'multiple',
-          'module': moduleName,
-          'question': statement,
-          'options': mcOptions,
-          'correct': mcCorrectIndex,
-          'explanation': explanation,
-        };
+        return _fillBlankQuizMap(moduleName, pool: blankPool);
       default:
         return {
           'type': 'multiple',
@@ -274,6 +245,83 @@ class QuestionModel {
           'explanation': explanation,
         };
     }
+  }
+
+  /// Monta o formato "sentence_builder" (preencher lacunas com chips arrastáveis)
+  /// usado pelo QuizScreen. O texto é quebrado nos marcadores de lacuna (`____`),
+  /// as respostas vêm de [blanks] (na ordem de `index`) e o banco de palavras
+  /// vem de [options] (gerados na importação) e/ou de [pool] (termos reais de
+  /// outras lacunas da lição, montados em runtime).
+  Map<String, dynamic> _fillBlankQuizMap(String moduleName, {Set<String>? pool}) {
+    final text = (textWithBlanks != null && textWithBlanks!.trim().isNotEmpty)
+        ? textWithBlanks!
+        : statement;
+
+    // Respostas ordenadas pela posição da lacuna no texto.
+    final ordered = [...(blanks ?? const <Map<String, dynamic>>[])]
+      ..sort((a, b) => ((a['index'] as num?)?.toInt() ?? 0)
+          .compareTo((b['index'] as num?)?.toInt() ?? 0));
+    final answers = ordered
+        .map((b) => (b['answer'] as String?)?.trim() ?? '')
+        .where((a) => a.isNotEmpty)
+        .toList();
+
+    // Sem lacunas utilizáveis: degrada para múltipla escolha simples.
+    if (answers.isEmpty) {
+      return {
+        'type': 'multiple',
+        'module': moduleName,
+        'question': statement,
+        'options': options ?? const <String>[],
+        'correct': correctIndex ?? 0,
+        'explanation': explanation,
+      };
+    }
+
+    // Quebra o texto nos marcadores `____` (4+ underscores), preservando os
+    // underscores internos de termos técnicos como kV_Base ou M_SP_NA_1.
+    final segments = text.split(RegExp(r'_{4,}'));
+    final fragments = <Map<String, dynamic>>[];
+    for (var i = 0; i < segments.length; i++) {
+      if (segments[i].isNotEmpty) {
+        fragments.add({'text': segments[i], 'isGap': false});
+      }
+      if (i < segments.length - 1 && i < answers.length) {
+        fragments.add({'text': answers[i], 'isGap': true, 'id': 'slot$i'});
+      }
+    }
+
+    final gapCount = fragments.where((f) => f['isGap'] == true).length;
+    final usedAnswers = answers.take(gapCount).toList();
+
+    // Banco de palavras: respostas corretas + distratores reais. Une os termos
+    // gravados na importação (options) com o pool de runtime (outras lacunas da
+    // lição), exclui as respostas, prioriza comprimento parecido (pra não
+    // entregar a resposta pelo tamanho) e limita a respostas + 3 distratores.
+    final distractors = <String>{
+      ...(options ?? const <String>[]),
+      ...(pool ?? const <String>{}),
+    }.map((e) => e.trim()).where((e) => e.isNotEmpty && !usedAnswers.contains(e)).toList();
+    final ref = usedAnswers.first.length;
+    distractors.sort((a, b) => (a.length - ref).abs().compareTo((b.length - ref).abs()));
+    final bank = <String>[...usedAnswers];
+    for (final d in distractors) {
+      if (bank.length >= usedAnswers.length + 3) break;
+      bank.add(d);
+    }
+    bank.shuffle();
+
+    return {
+      'type': 'sentence_builder',
+      'module': moduleName,
+      'question': usedAnswers.length > 1
+          ? 'Arraste os termos para preencher as lacunas:'
+          : 'Arraste o termo para preencher a lacuna:',
+      'fragments': fragments,
+      'options': bank,
+      'answer': usedAnswers,
+      'explanation': explanation,
+    };
   }
 
   Map<String, dynamic> toMap() => {

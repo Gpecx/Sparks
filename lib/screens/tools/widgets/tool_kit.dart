@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 
@@ -317,9 +318,7 @@ class ToolResultsPanel extends StatelessWidget {
                     final text = results.map((r) => r.clip).join('\n');
                     Clipboard.setData(ClipboardData(text: text));
                     HapticFeedback.lightImpact();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Resultados copiados')),
-                    );
+                    SparkSnack.success(context, 'Resultados copiados');
                   },
                 ),
               ),
@@ -383,9 +382,7 @@ class ToolResultsPanel extends StatelessWidget {
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: r.clip));
                   HapticFeedback.selectionClick();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${r.label} copiado')),
-                  );
+                  SparkSnack.success(context, '${r.label} copiado');
                 },
               ),
             ),

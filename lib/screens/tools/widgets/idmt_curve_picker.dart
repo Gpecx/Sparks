@@ -106,7 +106,7 @@ class _IdmtCurvePicker extends StatelessWidget {
                   style: TextStyle(
                     color: selected ? AppColors.primary : AppColors.textPrimary,
                     fontSize: 14,
-                    fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                    fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
                   ),
                 ),
               ),

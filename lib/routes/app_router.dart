@@ -26,6 +26,9 @@ import 'package:spark_app/screens/support_screen.dart';
 import 'package:spark_app/screens/terms_of_use_screen.dart';
 import 'package:spark_app/core/admin/presentation/admin_dashboard_page.dart';
 import 'package:spark_app/screens/module_routing_screen.dart';
+import 'package:spark_app/screens/student_verification_screen.dart';
+import 'package:spark_app/screens/business/business_setup_screen.dart';
+import 'package:spark_app/screens/business/team_dashboard_screen.dart';
 
 // Rotas públicas (não requerem autenticação)
 const _publicRoutes = {'/', '/login', '/register', '/registration-success', '/forgot-password', '/onboarding'};
@@ -71,6 +74,9 @@ class AppRouter {
         },
       ),
       GoRoute(path: '/my-progress', builder: (context, state) => const MyProgressScreen()),
+      GoRoute(path: '/student-verification', builder: (context, state) => const StudentVerificationScreen()),
+      GoRoute(path: '/business-setup', builder: (context, state) => const BusinessSetupScreen()),
+      GoRoute(path: '/team-dashboard', builder: (context, state) => const TeamDashboardScreen()),
       GoRoute(
         path: '/standard-detail',
         builder: (context, state) {

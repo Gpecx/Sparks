@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/services/access_control_service.dart';
+import 'package:spark_app/services/analytics_service.dart';
+import 'package:spark_app/widgets/plan_widgets.dart';
 import 'package:spark_app/screens/tools/symmetrical_components_screen.dart';
 import 'package:spark_app/screens/tools/per_unit_screen.dart';
 import 'package:spark_app/screens/tools/idmt_curves_screen.dart';
@@ -41,6 +44,10 @@ class _ToolConfig {
   final Color gradientEnd;
   final WidgetBuilder builder;
 
+  /// ID estável p/ gating. Vazio = ferramenta paga (só planos pagos).
+  /// As 3 do Free recebem os IDs de [kFreeToolIds].
+  final String id;
+
   const _ToolConfig({
     required this.title,
     required this.description,
@@ -49,6 +56,7 @@ class _ToolConfig {
     required this.color,
     required this.gradientEnd,
     required this.builder,
+    this.id = '',
   });
 }
 
@@ -75,15 +83,17 @@ class ToolsScreen extends ConsumerStatefulWidget {
 class _ToolsScreenState extends ConsumerState<ToolsScreen> {
   final List<_ToolConfig> _tools = [
     _ToolConfig(
+      id: 'symmetrical_components',
       title: 'Componentes Simétricas',
       description: 'Decompor e sintetizar fasores ABC ↔ sequências 0/1/2',
       category: _catConversoes,
       icon: Icons.change_circle_outlined,
-      color: const Color(0xFF00C402),
+      color: AppColors.primary,
       gradientEnd: const Color(0xFF007A01),
       builder: (_) => const SymmetricalComponentsScreen(),
     ),
     _ToolConfig(
+      id: 'per_unit',
       title: 'Valor por Unidade (PU)',
       description: 'Bases, conversão real ↔ pu e mudança de base',
       category: _catConversoes,
@@ -111,6 +121,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const OnsVoltageScreen(),
     ),
     _ToolConfig(
+      id: 'rtc_rtp',
       title: 'RTC / RTP',
       description: 'Relação de transformação de TC e TP + conversões',
       category: _catTI,
@@ -328,12 +339,20 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
   }
 
   void _open(_ToolConfig tool) {
+    final access = ref.read(accessControlProvider);
+    if (!access.canAccessTool(tool.id)) {
+      AnalyticsService().logLockedFeatureAccessed(
+          feature: 'tool', itemId: tool.id.isEmpty ? tool.title : tool.id);
+      UpgradePromptBottomSheet.show(context, feature: 'tool', trigger: 'tool_locked');
+      return;
+    }
     HapticFeedback.lightImpact();
     Navigator.push(context, MaterialPageRoute(builder: tool.builder));
   }
 
   @override
   Widget build(BuildContext context) {
+    final access = ref.watch(accessControlProvider);
     return SparksBackground(
       child: PcbBackground(
         child: Scaffold(
@@ -402,6 +421,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                                     height: tileWidth,
                                     child: _ToolTile(
                                       tool: tool,
+                                      locked: !access.canAccessTool(tool.id),
                                       onTap: () => _open(tool),
                                     ),
                                   ),
@@ -480,19 +500,24 @@ class _CategoryHeader extends StatelessWidget {
 class _ToolTile extends StatelessWidget {
   final _ToolConfig tool;
   final VoidCallback onTap;
+  final bool locked;
 
-  const _ToolTile({required this.tool, required this.onTap});
+  const _ToolTile({required this.tool, required this.onTap, this.locked = false});
 
   @override
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      label: '${tool.title}. ${tool.description}',
+      label: '${tool.title}. ${tool.description}${locked ? '. Bloqueado — exclusivo de planos pagos' : ''}',
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
           onTap: onTap,
-          child: Container(
+          child: Stack(
+            children: [
+              Opacity(
+                opacity: locked ? 0.55 : 1,
+                child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               gradient: LinearGradient(
@@ -558,9 +583,28 @@ class _ToolTile extends StatelessWidget {
                 ],
               ),
             ),
+                ),
+                ),
+                if (locked)
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: AppColors.surfaceAlt,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            color: AppColors.primary.withValues(alpha: 0.6)),
+                      ),
+                      child: const Icon(Icons.lock_rounded,
+                          color: AppColors.primary, size: 14),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
-      ),
     );
   }
 }

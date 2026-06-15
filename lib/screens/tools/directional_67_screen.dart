@@ -451,7 +451,7 @@ class _Directional67ScreenState extends State<Directional67Screen> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 textStyle: const TextStyle(
                   fontSize: 11,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w700,
                   letterSpacing: 0.6,
                 ),
               ),

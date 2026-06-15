@@ -82,7 +82,7 @@ class _GoogleLogo extends StatelessWidget {
         'G',
         style: TextStyle(
           fontSize: 22,
-          fontWeight: FontWeight.w900,
+          fontWeight: FontWeight.w800,
           color: Colors.white,
           height: 1.0,
         ),

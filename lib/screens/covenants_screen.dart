@@ -223,13 +223,13 @@ class _CovenantCard extends StatelessWidget {
                       style: TextStyle(
                         color: isCompleted ? AppColors.gold : Colors.white,
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                         letterSpacing: 0.5,
                       ),
                     ),
                     Text(
                       cov.objective,
-                      style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 12),
+                      style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
                       maxLines: 2,
                     ),
                   ],
@@ -245,7 +245,7 @@ class _CovenantCard extends StatelessWidget {
                 ),
                 child: Text(
                   cov.reward,
-                  style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700),
                 ),
               ),
             ],
@@ -280,7 +280,7 @@ class _CovenantCard extends StatelessWidget {
                   style: TextStyle(
                     color: isCompleted ? AppColors.gold : AppColors.textMuted,
                     fontSize: 11,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ],

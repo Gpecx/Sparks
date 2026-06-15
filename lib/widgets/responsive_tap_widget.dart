@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// Reusable responsive tap widget with scale & opacity animation.
 /// Wraps any child to give it interactive feedback (press effect + pointer cursor).
@@ -55,6 +56,7 @@ class _ResponsiveTapWidgetState extends State<ResponsiveTapWidget>
         onTapDown: (_) => _ctrl.forward(),
         onTapUp: (_) {
           _ctrl.reverse();
+          HapticFeedback.selectionClick();
           widget.onTap();
         },
         onTapCancel: () => _ctrl.reverse(),

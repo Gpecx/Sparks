@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/widgets/spark_emitter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -236,10 +237,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
       if (!mounted) return;
 
       if (firestoreQuestions.items.isNotEmpty) {
+        // Pool de termos reais da lição (respostas de outras lacunas) para
+        // enriquecer o banco de palavras do minigame preencher lacunas — garante
+        // distratores plausíveis mesmo sem o campo `options` na importação.
+        final blankPool = <String>{};
+        for (final q in firestoreQuestions.items) {
+          if (q.type == 'fillInTheBlanks') {
+            for (final b in (q.blanks ?? const <Map<String, dynamic>>[])) {
+              final a = (b['answer'] as String?)?.trim();
+              if (a != null && a.isNotEmpty) blankPool.add(a);
+            }
+          }
+        }
         // Questões encontradas no Firestore — limpa o mock e usa as reais
         _questions
           ..clear()
-          ..addAll(firestoreQuestions.items.map((q) => q.toQuizMap(widget.lesson!.title)));
+          ..addAll(firestoreQuestions.items.map((q) => q.toQuizMap(widget.lesson!.title, blankPool: blankPool)));
         setState(() {
           _isLoading = false;
           _noQuestionsFound = false;
@@ -295,25 +308,46 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           'explanation': q.explanation,
         });
       } else if (q is FillInTheBlanks) {
-        // Converte FillInTheBlanks para múltipla escolha
-        final correctAnswer = q.blanks.isNotEmpty ? q.blanks.first.answer : q.statement;
-        // Coleta distratores genéricos (não há distractors no modelo local FillInTheBlanks)
-        const fallback = ['Nenhuma das anteriores', 'Incorreto', 'Não se aplica', 'Outra opção'];
-        final distractors = <String>[];
-        for (final f in fallback) {
-          if (f != correctAnswer) {
-            distractors.add(f);
-            if (distractors.length >= 3) break;
+        // Minigame preencher lacunas (sentence_builder com chips arrastáveis).
+        // Distratores reais: respostas de outras lacunas da mesma lição.
+        final pool = <String>{};
+        for (final other in lesson.questions) {
+          if (other is FillInTheBlanks) {
+            for (final b in other.blanks) {
+              if (b.answer.trim().isNotEmpty) pool.add(b.answer.trim());
+            }
           }
         }
-        final mcOptions = <String>[correctAnswer, ...distractors];
-        mcOptions.shuffle();
+        final text = q.textWithBlanks.trim().isNotEmpty ? q.textWithBlanks : q.statement;
+        final answers = q.blanks.map((b) => b.answer.trim()).where((a) => a.isNotEmpty).toList();
+        final segments = text.split(RegExp(r'_{4,}'));
+        final fragments = <Map<String, dynamic>>[];
+        for (var i = 0; i < segments.length; i++) {
+          if (segments[i].isNotEmpty) {
+            fragments.add({'text': segments[i], 'isGap': false});
+          }
+          if (i < segments.length - 1 && i < answers.length) {
+            fragments.add({'text': answers[i], 'isGap': true, 'id': 'slot$i'});
+          }
+        }
+        final gapCount = fragments.where((f) => f['isGap'] == true).length;
+        final usedAnswers = answers.take(gapCount).toList();
+        final bank = <String>[...usedAnswers];
+        for (final d in pool) {
+          if (bank.length >= usedAnswers.length + 3) break;
+          if (!bank.contains(d)) bank.add(d);
+        }
+        bank.shuffle();
+        if (usedAnswers.isEmpty) continue;
         result.add({
-          'type': 'multiple',
+          'type': 'sentence_builder',
           'module': lesson.title,
-          'question': q.statement,
-          'options': mcOptions,
-          'correct': mcOptions.indexOf(correctAnswer),
+          'question': usedAnswers.length > 1
+              ? 'Arraste os termos para preencher as lacunas:'
+              : 'Arraste o termo para preencher a lacuna:',
+          'fragments': fragments,
+          'options': bank,
+          'answer': usedAnswers,
           'explanation': q.explanation,
         });
       }
@@ -390,14 +424,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           _shakeController.forward(from: 0);
           _epicStreakController.forward(from: 0);
           _energyCtrl.addXp(100);
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('STREAK EPICO! +100 XP Bonus!')));
+          SparkSnack.reward(context, 'STREAK ÉPICO! +100 XP Bônus!');
         } else if (bonus > 0 && _currentStreak < 5) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Acerto em sequencia! +$bonus energia bonus!'),
-              backgroundColor: AppColors.gold,
-            ),
-          );
+          SparkSnack.reward(context, 'Acerto em sequência! +$bonus energia bônus!');
         }
       } else {
         _currentStreak = 0;
@@ -433,7 +462,6 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
     final double score = _totalCorrect / _questions.length;
     final bool passed = widget.isEvaluation ? score >= 0.8 : score >= 0.7;
     int xpEarned = 0;
-    int spEarned = 0; // SP só ao completar módulo ou avaliação
 
     if (passed) {
       CovenantService().addProgress('cov_conhecimento', 1);
@@ -464,7 +492,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           widget.moduleId!,
           lessonId,
           xpEarned,
-          0, // SP não é passado por lição; é concedido ao completar o módulo
+          0, // parâmetro legado (não utilizado)
           moduleName: widget.lesson?.title ?? '',
         ).then((moduleCompleted) {
           // Gravação bem-sucedida
@@ -472,16 +500,6 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
             widget.moduleId!,
             lessonId,
           );
-
-          // 🌟 Concede SP ao completar o módulo inteiro (não por lição)
-          if (moduleCompleted) {
-            final int spModule = (xpEarned * 0.1).toInt().clamp(10, 500);
-            debugPrint('[QuizScreen] Módulo completo! Concedendo +\$spModule SP');
-            _userService.addSparkPoints(spModule, source: 'module_completed')
-                .catchError((e) {
-              debugPrint('[QuizScreen] Erro ao conceder SP de módulo: $e');
-            });
-          }
         }).catchError((e) {
           debugPrint('[QuizScreen] Erro ao salvar progresso no Firebase em background: $e');
           ref.read(optimisticProgressProvider.notifier).removeOptimisticProgress(
@@ -498,20 +516,6 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
             debugPrint('[QuizScreen] Erro ao adicionar XP: $e');
           }
         });
-
-        // SP para avaliações: concedido ao passar na avaliação
-        if (widget.isEvaluation) {
-          spEarned = (xpEarned * 0.2).toInt().clamp(20, 1000);
-          debugPrint('[QuizScreen] Avaliação aprovada! Concedendo +\$spEarned SP');
-          Future.microtask(() async {
-            try {
-              await _userService.addSparkPoints(spEarned, source: 'evaluation_passed')
-                  .timeout(const Duration(seconds: 15));
-            } catch (e) {
-              debugPrint('[QuizScreen] Erro ao adicionar SP da avaliação: $e');
-            }
-          });
-        }
 
         Future.microtask(() async {
           try {
@@ -547,27 +551,24 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
       HapticFeedback.vibrate();
       if (mounted) {
         _completionController.forward(from: 0).then((_) {
-          if (mounted) _showQuizResultModal(true, score, xpEarned, spEarned);
+          if (mounted) _showQuizResultModal(true, score, xpEarned);
         });
       }
     } else {
       if (mounted) setState(() => _isCompleting = false);
       // Reprovado — mostra modal imediatamente
-      if (mounted) _showQuizResultModal(false, score, 0, 0);
+      if (mounted) _showQuizResultModal(false, score, 0);
     }
   }
 
   // Constr\u00f3i a mensagem de sucesso baseada no contexto
-  String _buildSuccessMessage(double score, int xpEarned, int spEarned) {
+  String _buildSuccessMessage(double score, int xpEarned) {
     final pct = (score * 100).toInt();
-    if (widget.isEvaluation && spEarned > 0) {
-      return 'Parab\u00e9ns! Voc\u00ea alcan\u00e7ou $pct% e ganhou $xpEarned XP + $spEarned Pontos Spark pela avalia\u00e7\u00e3o!';
-    }
-    return 'Parab\u00e9ns! Voc\u00ea alcan\u00e7ou $pct% de acertos e ganhou $xpEarned XP! Pontos Spark ser\u00e3o concedidos ao concluir o m\u00f3dulo completo.';
+    return 'Parab\u00e9ns! Voc\u00ea alcan\u00e7ou $pct% de acertos e ganhou $xpEarned XP!';
   }
 
   // === MODAIS ===
-  void _showQuizResultModal(bool passed, double score, int xpEarned, [int spEarned = 0]) {
+  void _showQuizResultModal(bool passed, double score, int xpEarned) {
     
     showModalBottomSheet(
       context: context,
@@ -620,15 +621,15 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                 passed
                     ? (widget.isEvaluation ? 'Avaliação Aprovada!' : 'Lição concluída!')
                     : 'Desempenho Insuficiente',
-                style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 12),
               Text(
                 passed
-                    ? _buildSuccessMessage(score, xpEarned, spEarned)
+                    ? _buildSuccessMessage(score, xpEarned)
                     : 'Você obteve ${(score * 100).toInt()}%. É necessário no mínimo ${widget.isEvaluation ? '80%' : '70%'} para avançar. Revise o material e tente novamente.',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15, height: 1.4),
+                style: TextStyle(color: AppColors.textSecondary, fontSize: 15, height: 1.4),
               ),
               const SizedBox(height: 20),
               SizedBox(
@@ -647,7 +648,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     }
                   },
                   icon: Icon(passed ? Icons.play_arrow : Icons.replay, color: AppColors.background),
-                  label: Text(passed ? 'CONTINUAR' : 'REFAZER', style: const TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  label: Text(passed ? 'CONTINUAR' : 'REFAZER', style: const TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: passed ? AppColors.primary : Colors.redAccent,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -692,9 +693,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                 child: const Icon(Icons.battery_alert, size: 50, color: Colors.redAccent),
               ),
               const SizedBox(height: 24),
-              const Text('Bateria Esgotada!', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+              const Text('Bateria Esgotada!', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700)),
               const SizedBox(height: 12),
-              Text('Você gastou toda a sua energia. Aguarde a recarga automática (5 min por unidade) ou assine um plano para ter bateria infinita ∞.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15, height: 1.4)),
+              Text('Você gastou toda a sua energia. Aguarde a recarga automática (5 min por unidade) ou assine um plano para ter bateria infinita ∞.', textAlign: TextAlign.center, style: TextStyle(color: AppColors.textSecondary, fontSize: 15, height: 1.4)),
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity, height: 56,
@@ -705,7 +706,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     context.push('/store');
                   },
                   icon: const Icon(Icons.all_inclusive, color: AppColors.background),
-                  label: const Text('VER PLANOS COM BATERIA ∞', style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  label: const Text('VER PLANOS COM BATERIA ∞', style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                   style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
                 ),
               ),
@@ -715,7 +716,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                child: const Text('Sair do Quiz', style: TextStyle(color: AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.bold)),
+                child: const Text('Sair do Quiz', style: TextStyle(color: AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.w700)),
               ),
               const SizedBox(height: 10),
             ],
@@ -736,8 +737,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              gradient: const LinearGradient(colors: [Color(0xFF061629), Color(0xFF0D2641)], begin: Alignment.topLeft, end: Alignment.bottomRight),
-              border: Border.all(color: const Color(0xFF00C402).withValues(alpha: 0.5)),
+              gradient: const LinearGradient(colors: [AppColors.background, AppColors.card], begin: Alignment.topLeft, end: Alignment.bottomRight),
+              border: Border.all(color: AppColors.primary.withValues(alpha: 0.5)),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -762,22 +763,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                   width: 80, height: 80,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: const LinearGradient(colors: [Color(0xFF00C402), Color(0xFF1D5F31)]),
-                    boxShadow: [BoxShadow(color: const Color(0xFF00C402).withValues(alpha: 0.4), blurRadius: 20, spreadRadius: 4)],
+                    gradient: const LinearGradient(colors: [AppColors.primary, AppColors.cardBorder]),
+                    boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.4), blurRadius: 20, spreadRadius: 4)],
                   ),
                   child: const Icon(Icons.play_arrow, color: Colors.white, size: 40),
                 ),
                 const SizedBox(height: 20),
-                const Text('POWERPLAY', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w900, fontStyle: FontStyle.italic, letterSpacing: 2)),
+                const Text('POWERPLAY', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800, fontStyle: FontStyle.italic, letterSpacing: 2)),
                 const SizedBox(height: 8),
-                const Text('Parabens pelo modulo!', style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.bold)),
+                const Text('Parabens pelo modulo!', style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 14),
-                Text('Continue aprendendo com vídeos técnicos exclusivos. Experimente grátis por 7 dias!', textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 14, height: 1.4)),
+                Text('Continue aprendendo com vídeos técnicos exclusivos. Experimente grátis por 7 dias!', textAlign: TextAlign.center, style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.4)),
                 const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity, height: 52,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00C402), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
                     onPressed: () {
                       final rootNavigator = Navigator.of(context);
                       final rootRouter = GoRouter.of(context);
@@ -785,7 +786,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                       rootNavigator.pop(true);
                       rootRouter.push('/standard-detail');
                     },
-                    child: const Text('TESTE GRÁTIS POR 7 DIAS', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14, letterSpacing: 1)),
+                    child: const Text('TESTE GRÁTIS POR 7 DIAS', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14, letterSpacing: 1)),
                   ),
                 ),
               ],
@@ -867,7 +868,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                               'Você vai perder todo seu progresso na lição se sair.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Colors.white.withValues(alpha: 0.7),
+                                color: AppColors.textSecondary,
                                 fontSize: 15,
                                 height: 1.4,
                               ),
@@ -928,7 +929,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 15,
-                                          fontWeight: FontWeight.w900,
+                                          fontWeight: FontWeight.w800,
                                           letterSpacing: 1.2,
                                         ),
                                       ),
@@ -962,7 +963,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
             gradient: RadialGradient(
               center: Alignment.center,
               radius: 1.2,
-              colors: [Color(0xFF091E35), Color(0xFF061629)],
+              colors: [AppColors.surface, AppColors.background],
             ),
           ),
           child: SafeArea(
@@ -982,7 +983,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                 const SizedBox(height: 24),
                 const Text(
                   'Nenhuma questão cadastrada',
-                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 10),
                 Padding(
@@ -991,7 +992,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     'Esta lição ainda não possui questões cadastradas no sistema. '
                     'Por favor, entre em contato com o administrador.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 14, height: 1.5),
+                    style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -1001,7 +1002,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                   child: ElevatedButton.icon(
                     onPressed: () => Navigator.pop(context, false),
                     icon: const Icon(Icons.arrow_back, color: AppColors.background),
-                    label: const Text('VOLTAR', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                    label: const Text('VOLTAR', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, letterSpacing: 1)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -1023,7 +1024,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
             gradient: RadialGradient(
               center: Alignment.center,
               radius: 1.2,
-              colors: [Color(0xFF091E35), Color(0xFF061629)],
+              colors: [AppColors.surface, AppColors.background],
             ),
           ),
           child: const Center(
@@ -1069,7 +1070,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
               Transform.translate(
                 offset: Offset(dx, 0),
                 child: Container(
-                  decoration: const BoxDecoration(gradient: RadialGradient(center: Alignment.center, radius: 1.2, colors: [Color(0xFF091E35), Color(0xFF061629)])),
+                  decoration: const BoxDecoration(gradient: RadialGradient(center: Alignment.center, radius: 1.2, colors: [AppColors.surface, AppColors.background])),
                   child: SafeArea(
                     child: Column(
                       children: [
@@ -1096,7 +1097,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                                   children: [
                                     Icon(batteryIcon, color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, size: 20),
                                     const SizedBox(width: 4),
-                                    Text(_energyCtrl.energyDisplay, style: TextStyle(color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, fontSize: 16, fontWeight: FontWeight.bold)),
+                                    Text(_energyCtrl.energyDisplay, style: TextStyle(color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, fontSize: 16, fontWeight: FontWeight.w700)),
                                     if (_energyCtrl.isRecharging) ...[
                                       const SizedBox(width: 6),
                                       Text(_energyCtrl.regenTimeRemaining, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
@@ -1116,11 +1117,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const SizedBox(height: 10),
-                                Text(q['module'], style: TextStyle(color: AppColors.accent.withValues(alpha: 0.8), fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1.5)),
+                                Text(q['module'], style: TextStyle(color: AppColors.accent.withValues(alpha: 0.8), fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1.5)),
                                 const SizedBox(height: 4),
                                 Text('Pergunta ${_currentQuestion + 1} de ${_questions.length}', style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
                                 const SizedBox(height: 12),
-                                Text(q['question'], style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold, height: 1.4)),
+                                Text(q['question'], style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700, height: 1.4)),
                                 const SizedBox(height: 30),
 
                                 // --- CONDICIONAL DA MECÂNICA ---
@@ -1203,7 +1204,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
       child: Container(
         margin: const EdgeInsets.only(bottom: 12), padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(16), border: Border.all(color: borderColor, width: 2)),
-        child: Row(children: [Expanded(child: Text(text, style: TextStyle(color: textColor, fontSize: 16, height: 1.4, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal)))]),
+        child: Row(children: [Expanded(child: Text(text, style: TextStyle(color: textColor, fontSize: 16, height: 1.4, fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400)))]),
       ),
     );
   }
@@ -1422,13 +1423,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
       if (q['type'] == 'swipe') return const SizedBox.shrink(); // Swipe não tem botão Verificar
 
       return Container(
-        padding: const EdgeInsets.all(20), decoration: const BoxDecoration(color: Color(0xFF061629), border: Border(top: BorderSide(color: AppColors.cardBorder))),
+        padding: const EdgeInsets.all(20), decoration: const BoxDecoration(color: AppColors.background, border: Border(top: BorderSide(color: AppColors.cardBorder))),
         child: SizedBox(
           width: double.infinity, height: 56,
           child: ElevatedButton(
             onPressed: canConfirm ? _confirmAnswer : null,
             style: ElevatedButton.styleFrom(backgroundColor: canConfirm ? AppColors.primary : AppColors.card, disabledBackgroundColor: AppColors.card, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
-            child: Text('VERIFICAR', style: TextStyle(color: canConfirm ? Colors.white : AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
+            child: Text('VERIFICAR', style: TextStyle(color: canConfirm ? Colors.white : AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.w700, letterSpacing: 1)),
           ),
         ),
       );
@@ -1444,7 +1445,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(children: [Icon(feedbackIcon, color: feedbackColor, size: 28), const SizedBox(width: 10), Text(feedbackTitle, style: TextStyle(color: feedbackColor, fontSize: 20, fontWeight: FontWeight.bold))]),
+          Row(children: [Icon(feedbackIcon, color: feedbackColor, size: 28), const SizedBox(width: 10), Text(feedbackTitle, style: TextStyle(color: feedbackColor, fontSize: 20, fontWeight: FontWeight.w700))]),
           if (!_isCorrect) ...[const SizedBox(height: 10), Text(q['explanation'], style: const TextStyle(color: Colors.white, fontSize: 14, height: 1.4))],
           const SizedBox(height: 20),
           SizedBox(
@@ -1454,7 +1455,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
               style: ElevatedButton.styleFrom(backgroundColor: feedbackColor, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
               child: _isCompleting
                   ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                  : Text(_currentQuestion + 1 >= _questions.length ? 'FINALIZAR' : 'CONTINUAR', style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  : Text(_currentQuestion + 1 >= _questions.length ? 'FINALIZAR' : 'CONTINUAR', style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700, letterSpacing: 1)),
             ),
           ),
         ],

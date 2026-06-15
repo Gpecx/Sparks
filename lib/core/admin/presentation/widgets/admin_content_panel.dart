@@ -297,7 +297,7 @@ class _TrailCardState extends ConsumerState<_TrailCard> {
                   ),
                   const SizedBox(width: 8),
                   Flexible(
-                    child: Text(title, style: const TextStyle(color: AppColors.textPrimary, fontSize: 14, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis, maxLines: 1),
+                    child: Text(title, style: const TextStyle(color: AppColors.textPrimary, fontSize: 14, fontWeight: FontWeight.w700), overflow: TextOverflow.ellipsis, maxLines: 1),
                   ),
                   const SizedBox(width: 4),
                   _SmallIconBtn(icon: Icons.edit_outlined, color: AppColors.blue, onTap: _openTrailEdit),
@@ -703,7 +703,7 @@ class _QuestionRow extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Center(
-                child: Text('$order', style: TextStyle(color: active ? AppColors.primary : AppColors.textMuted, fontSize: 10, fontWeight: FontWeight.bold)),
+                child: Text('$order', style: TextStyle(color: active ? AppColors.primary : AppColors.textMuted, fontSize: 10, fontWeight: FontWeight.w700)),
               ),
             ),
             const SizedBox(width: 8),

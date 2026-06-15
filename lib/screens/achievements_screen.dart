@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_card.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:go_router/go_router.dart';
@@ -43,14 +44,9 @@ class AchievementsScreen extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               // ── Summary card (reactive) ──────────────────────────
-              Container(
+              SparkCard(
                 margin: const EdgeInsets.only(bottom: 20),
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: AppColors.card,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-                ),
+                highlighted: true,
                 child: Row(
                   children: [
                     Container(
@@ -105,14 +101,11 @@ class AchievementsScreen extends ConsumerWidget {
               ),
 
               if (unlockedCount == 0)
-                Container(
+                SparkCard(
                   margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                  decoration: BoxDecoration(
-                    color: AppColors.card,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-                  ),
+                  radius: AppRadius.lg,
+                  highlighted: true,
                   child: Column(
                     children: [
                       Container(
@@ -128,7 +121,7 @@ class AchievementsScreen extends ConsumerWidget {
                       const SizedBox(height: 24),
                       const Text(
                         'Nenhuma conquista ainda',
-                        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 12),
                       const Text(
@@ -146,7 +139,7 @@ class AchievementsScreen extends ConsumerWidget {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
                         icon: const Icon(Icons.play_arrow, size: 20),
-                        label: const Text('COMEÇAR APRENDER', style: TextStyle(fontWeight: FontWeight.bold)),
+                        label: const Text('COMEÇAR APRENDER', style: TextStyle(fontWeight: FontWeight.w700)),
                       )
                     ],
                   ),
@@ -193,18 +186,13 @@ class AchievementsScreen extends ConsumerWidget {
     return Column(
       children: BadgeRegistry.allBadges.map((badge) {
         final isUnlocked = unlockedIds.contains(badge.id);
-        return Container(
+        return SparkCard(
           margin: const EdgeInsets.only(bottom: 8),
           padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: isUnlocked ? AppColors.primary.withValues(alpha: 0.06) : AppColors.card,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: isUnlocked
-                  ? AppColors.primary.withValues(alpha: 0.35)
-                  : AppColors.cardBorder.withValues(alpha: 0.25),
-            ),
-          ),
+          color: isUnlocked ? AppColors.primary.withValues(alpha: 0.06) : AppColors.card,
+          borderColor: isUnlocked
+              ? AppColors.primary.withValues(alpha: 0.35)
+              : AppColors.cardBorder.withValues(alpha: 0.25),
           child: Row(
             children: [
               Container(
@@ -319,17 +307,12 @@ class _AchievementCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SparkCard(
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: data.unlocked ? AppColors.primary.withValues(alpha: 0.08) : AppColors.card,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: data.unlocked
-              ? AppColors.primary.withValues(alpha: 0.4)
-              : AppColors.cardBorder.withValues(alpha: 0.25),
-        ),
-      ),
+      color: data.unlocked ? AppColors.primary.withValues(alpha: 0.08) : AppColors.card,
+      borderColor: data.unlocked
+          ? AppColors.primary.withValues(alpha: 0.4)
+          : AppColors.cardBorder.withValues(alpha: 0.25),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

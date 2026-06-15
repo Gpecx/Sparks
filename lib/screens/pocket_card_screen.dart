@@ -108,7 +108,7 @@ class _PocketCardScreenState extends ConsumerState<PocketCardScreen> {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF0D2641), Color(0xFF061629)],
+          colors: [AppColors.card, AppColors.background],
         ),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
@@ -160,7 +160,7 @@ class _PocketCardScreenState extends ConsumerState<PocketCardScreen> {
                       style: TextStyle(
                         color: AppColors.primary,
                         fontSize: 18,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w800,
                         letterSpacing: 2,
                       ),
                     ),
@@ -202,7 +202,7 @@ class _PocketCardScreenState extends ConsumerState<PocketCardScreen> {
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                       letterSpacing: 1.5,
                     ),
                   ),

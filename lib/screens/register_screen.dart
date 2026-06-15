@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/services/auth_service.dart';
@@ -33,9 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final password = _passwordController.text;
 
     if (name.isEmpty || email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Preencha todos os campos.')),
-      );
+      SparkSnack.info(context, 'Preencha todos os campos.');
       return;
     }
 
@@ -72,7 +71,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'email': email,
           'photoUrl': null,
           'role': 'técnico',
-          'sparkPoints': 100, // Bônus de boas-vindas
           'xp': 0,
           'level': 1,
           'tensionLevel': 'BT',
@@ -143,12 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } catch (e) {
       WelcomeScreen.skipAutoLogin = false;
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Erro: ${e.toString().replaceAll('Exception: ', '')}'),
-          backgroundColor: AppColors.error,
-        ),
-      );
+      SparkSnack.error(context, 'Erro: ${e.toString().replaceAll('Exception: ', '')}');
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -169,12 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // Usuário fechou o popup — não é erro, ignora silenciosamente.
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString().replaceAll('Exception: ', '')),
-          backgroundColor: AppColors.error,
-        ),
-      );
+      SparkSnack.error(context, e);
     } finally {
       if (mounted) setState(() => _isGoogleLoading = false);
     }
@@ -204,7 +192,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 20),
             const Text('Crie sua conta', style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
-            Text('Cadastre-se no SPARK para começar', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14)),
+            Text('Cadastre-se no SPARK para começar', style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
             const SizedBox(height: 32),
             _fieldLabel('Nome Completo'),
             const SizedBox(height: 8),
@@ -261,7 +249,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Text('ou', style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 12)),
+                child: Text('ou', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
               ),
               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
             ]),
@@ -275,7 +263,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Já possui uma conta? ', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14)),
+                Text('Já possui uma conta? ', style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
                 GestureDetector(
                   onTap: () => context.push('/login'),
                   child: const Text('Entrar', style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),

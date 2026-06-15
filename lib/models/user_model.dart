@@ -16,7 +16,6 @@ class UserModel {
   final String role;
   bool get isAdmin => role.trim().toLowerCase() == 'admin';
   final String? profession;
-  final int sparkPoints;
   final int xp;
   final int level;
   final String tensionLevel; // 'BT' | 'MT' | 'AT' | 'EAT'
@@ -50,7 +49,6 @@ class UserModel {
     this.photoUrl,
     this.role = 'Técnico',
     this.profession,
-    this.sparkPoints = 0,
     this.xp = 0,
     this.level = 1,
     this.tensionLevel = 'BT',
@@ -89,7 +87,6 @@ class UserModel {
       photoUrl: data['photoUrl']?.toString(),
       role: (data['role']?.toString() ?? 'Técnico').trim(),
       profession: data['profession']?.toString(),
-      sparkPoints: (data['sparkPoints'] as num?)?.toInt() ?? 0,
       xp: (data['xp'] as num?)?.toInt() ?? 0,
       level: (data['level'] as num?)?.toInt() ?? 1,
       tensionLevel: data['tensionLevel']?.toString() ?? 'BT',
@@ -146,7 +143,6 @@ class UserModel {
       'photoUrl': photoUrl,
       'role': role,
       'profession': profession,
-      'sparkPoints': sparkPoints,
       'xp': xp,
       'level': level,
       'tensionLevel': tensionLevel,
@@ -180,7 +176,6 @@ class UserModel {
     String? photoUrl,
     String? role,
     String? profession,
-    int? sparkPoints,
     int? xp,
     int? level,
     String? tensionLevel,
@@ -211,7 +206,6 @@ class UserModel {
       photoUrl: photoUrl ?? this.photoUrl,
       role: role ?? this.role,
       profession: profession ?? this.profession,
-      sparkPoints: sparkPoints ?? this.sparkPoints,
       xp: xp ?? this.xp,
       level: level ?? this.level,
       tensionLevel: tensionLevel ?? this.tensionLevel,

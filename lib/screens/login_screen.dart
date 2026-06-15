@@ -8,6 +8,7 @@ import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/device_service.dart';
 import 'package:spark_app/widgets/email_verification_dialog.dart';
 import 'package:spark_app/widgets/google_auth_button.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, this.prefillEmail, this.prefillPassword});
@@ -28,8 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isGoogleLoading = false;
   bool _rememberDevice = false;
 
-  @override
- static const _devEmail = String.fromEnvironment('SPARK_DEV_EMAIL');
+  static const _devEmail = String.fromEnvironment('SPARK_DEV_EMAIL');
   static const _devPassword = String.fromEnvironment('SPARK_DEV_PASSWORD');
   static const _devAutoLogin = bool.fromEnvironment('SPARK_DEV_AUTOLOGIN', defaultValue: false);
 
@@ -60,9 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = _passwordController.text;
 
     if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Preencha todos os campos.')),
-      );
+      SparkSnack.info(context, 'Preencha todos os campos.');
       return;
     }
 
@@ -90,12 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
           // Falhou ao enviar — desloga e mostra erro
           await _authService.signOut();
           if (!mounted) return;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Erro ao enviar código: ${e.toString().replaceAll('Exception: ', '')}'),
-              backgroundColor: AppColors.error,
-            ),
-          );
+          SparkSnack.error(context, 'Erro ao enviar código: ${e.toString().replaceAll('Exception: ', '')}');
           return;
         }
 
@@ -121,14 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (mounted) context.go('/home');
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(e.toString().replaceAll('Exception: ', '')),
-            backgroundColor: AppColors.error,
-          ),
-        );
-      }
+      if (mounted) SparkSnack.error(context, e);
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -148,14 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } on GoogleSignInCancelled {
       // Usuário fechou o popup — não é erro, ignora silenciosamente.
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(e.toString().replaceAll('Exception: ', '')),
-            backgroundColor: AppColors.error,
-          ),
-        );
-      }
+      if (mounted) SparkSnack.error(context, e);
     } finally {
       if (mounted) setState(() => _isGoogleLoading = false);
     }
@@ -189,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 20),
             const Text('Bem-vindo de volta', style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
-            Text('Faça login no SPARK para continuar', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14)),
+            Text('Faça login no SPARK para continuar', style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
             const SizedBox(height: 36),
             _fieldLabel('Endereço de E-mail'),
             const SizedBox(height: 8),
@@ -240,9 +219,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     'Lembrar este dispositivo por 30 dias',
                     style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.7),
+                      color: AppColors.textSecondary,
                       fontSize: 13,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -272,7 +251,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Text('ou', style: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 12)),
+                child: Text('ou', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
               ),
               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
             ]),
@@ -286,7 +265,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Não tem uma conta? ', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14)),
+                Text('Não tem uma conta? ', style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
                 GestureDetector(
                   onTap: () => context.push('/register'),
                   child: const Text('Cadastre-se', style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),

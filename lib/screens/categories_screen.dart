@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_skeleton.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/models/spark_admin_models.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
@@ -114,22 +116,7 @@ class CategoriesScreen extends ConsumerWidget {
                               onTap: isComingSoon
                                   ? () {
                                       HapticFeedback.mediumImpact();
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: const Row(
-                                            children: [
-                                              Icon(Icons.construction_rounded, color: Colors.white, size: 16),
-                                              SizedBox(width: 8),
-                                              Expanded(child: Text('Esta categoria estará disponível em breve!')),
-                                            ],
-                                          ),
-                                          backgroundColor: const Color(0xFF37474F),
-                                          behavior: SnackBarBehavior.floating,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                      );
+                                      SparkSnack.info(context, 'Esta categoria estará disponível em breve!');
                                     }
                                   : () {
                                       HapticFeedback.lightImpact();
@@ -149,8 +136,15 @@ class CategoriesScreen extends ConsumerWidget {
                         },
                       );
                     },
-                    loading: () => const Center(
-                      child: CircularProgressIndicator(color: AppColors.primary),
+                    loading: () => ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 6,
+                      itemBuilder: (context, index) => const SparkSkeleton(
+                        width: double.infinity,
+                        height: 92,
+                        margin: EdgeInsets.only(bottom: 14),
+                      ),
                     ),
                     error: (err, stack) => Center(
                       child: Text(
@@ -321,7 +315,7 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
                               ),
@@ -348,7 +342,7 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
                           Text(
                             cat.subtitle,
                             style: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.5),
+                              color: AppColors.textSecondary,
                               fontSize: 12,
                             ),
                           ),

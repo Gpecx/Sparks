@@ -68,7 +68,7 @@ class AdminDashboardPage extends ConsumerWidget {
           children: [
             Icon(Icons.bolt, color: AppColors.primary, size: 20),
             const SizedBox(width: 8),
-            const Text('SPARK ADMIN', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text('SPARK ADMIN', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
           ],
         ),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -122,7 +122,7 @@ class AdminDashboardPage extends ConsumerWidget {
           children: [
             const Icon(Icons.dashboard_customize_outlined, size: 64, color: AppColors.textMuted),
             const SizedBox(height: 16),
-            const Text('Bem-vindo ao Painel Admin', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+            const Text('Bem-vindo ao Painel Admin', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)),
             const Text('Gerencie seu conteúdo educacional aqui.', style: TextStyle(color: AppColors.textSecondary)),
             const SizedBox(height: 40),
             Wrap(
@@ -202,7 +202,7 @@ class AdminDashboardPage extends ConsumerWidget {
               child: Icon(icon, color: color, size: 24),
             ),
             const SizedBox(height: 16),
-            Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16)),
             const SizedBox(height: 4),
             Text(subtitle, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
           ],
@@ -256,7 +256,7 @@ class AdminDashboardPage extends ConsumerWidget {
           title,
           style: TextStyle(
             color: isActive ? AppColors.primary : AppColors.textSecondary,
-            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+            fontWeight: isActive ? FontWeight.w700 : FontWeight.w400,
             fontSize: 13,
           ),
         ),
@@ -275,7 +275,7 @@ class AdminDashboardPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('CONTEÚDO', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+              Text('CONTEÚDO', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 1.2)),
               const SizedBox(height: 16),
               _sidebarItem(context, Icons.grid_view_rounded, 'Visão Geral', isActive: state.sidebarIndex == 0, onTap: () => controller.setSidebarMenu(0)),
               _sidebarItem(context, Icons.layers_outlined, 'Estrutura', isActive: state.sidebarIndex == 1, onTap: () => controller.setSidebarMenu(1)),
@@ -288,7 +288,7 @@ class AdminDashboardPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('SISTEMA', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+              Text('SISTEMA', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 1.2)),
               const SizedBox(height: 16),
               _sidebarItem(context, Icons.people_outline, 'Usuários', isActive: state.sidebarIndex == 2, onTap: () => controller.setSidebarMenu(2)),
               _sidebarItem(context, Icons.support_agent_outlined, 'Suporte', isActive: state.sidebarIndex == 4, onTap: () => controller.setSidebarMenu(4)),
@@ -320,7 +320,7 @@ class AdminDashboardPage extends ConsumerWidget {
           children: [
             Icon(icon, size: 20, color: isActive ? AppColors.primary : AppColors.textSecondary),
             const SizedBox(width: 12),
-            Text(title, style: TextStyle(color: isActive ? AppColors.primary : AppColors.textSecondary, fontWeight: isActive ? FontWeight.bold : FontWeight.w500)),
+            Text(title, style: TextStyle(color: isActive ? AppColors.primary : AppColors.textSecondary, fontWeight: isActive ? FontWeight.w700 : FontWeight.w600)),
           ],
         ),
       ),
@@ -339,7 +339,7 @@ class AdminDashboardPage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Categorias', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                  const Text('Categorias', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
                   Text('Selecione uma categoria para ver seus módulos.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
                 ],
               ),
@@ -456,7 +456,7 @@ class AdminDashboardPage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Módulos', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                  Text('Módulos', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
                   Text('Gerencie os blocos de ensino deste módulo.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
                 ],
               ),
@@ -536,7 +536,7 @@ class AdminDashboardPage extends ConsumerWidget {
             const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Trilhas e Lições', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                Text('Trilhas e Lições', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
                 Text('Crie a jornada completa com lições e questões.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
               ],
             ),

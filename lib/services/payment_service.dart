@@ -62,7 +62,6 @@ class CheckoutItemPayload {
   final String name;
   final String description;
   final double price;
-  final int sparkPointsGranted;
   final bool isSubscription;
   final String? planId;
 
@@ -70,7 +69,6 @@ class CheckoutItemPayload {
     required this.name,
     required this.description,
     required this.price,
-    required this.sparkPointsGranted,
     this.isSubscription = false,
     this.planId,
   });
@@ -79,7 +77,6 @@ class CheckoutItemPayload {
         'name': name,
         'description': description,
         'price': price,
-        'sparkPointsGranted': sparkPointsGranted,
         'isSubscription': isSubscription,
         if (planId != null) 'planId': planId,
       };

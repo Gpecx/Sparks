@@ -294,7 +294,7 @@ class _AdminEntityListViewState extends ConsumerState<AdminEntityListView> {
                       .toUpperCase(),
                   style: const TextStyle(
                       color: AppColors.primary,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.w700),
                 ),
               ),
         trailing: showDragHandle

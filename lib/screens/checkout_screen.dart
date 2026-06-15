@@ -12,9 +12,6 @@ class CartItem {
   final String description;
   final double price;
   final IconData icon;
-
-  /// Spark Points concedidos ao comprar este item (0 = nenhum)
-  final int sparkPointsGranted;
   final bool isSubscription;
   final String? planId;
 
@@ -23,7 +20,6 @@ class CartItem {
     required this.description,
     required this.price,
     required this.icon,
-    this.sparkPointsGranted = 0,
     this.isSubscription = false,
     this.planId,
   });
@@ -96,16 +92,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   double get _total =>
       widget.items.fold<double>(0, (s, i) => s + i.price);
 
-  int get _totalPoints =>
-      widget.items.fold<int>(0, (s, i) => s + i.sparkPointsGranted);
-
   // Converte os CartItems da loja em payloads para o backend
   List<CheckoutItemPayload> get _payloads => widget.items
       .map((i) => CheckoutItemPayload(
             name: i.name,
             description: i.description,
             price: i.price,
-            sparkPointsGranted: i.sparkPointsGranted,
             isSubscription: i.isSubscription,
             planId: i.planId,
           ))
@@ -130,7 +122,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         MaterialPageRoute(
           builder: (_) => PaymentPendingScreen(
             result: result,
-            totalPoints: _totalPoints,
           ),
         ),
       );
@@ -336,7 +327,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                   'Exigido pelo Banco Central para PIX e Boleto',
                                   style: TextStyle(
                                       color:
-                                          Colors.white.withValues(alpha: 0.3),
+                                          AppColors.textMuted,
                                       fontSize: 11),
                                 ),
                               ],
@@ -376,7 +367,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           'Explore a loja e equipe-se\npara os próximos desafios!',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.4), fontSize: 14),
+              color: AppColors.textMuted, fontSize: 14),
         ),
         const SizedBox(height: 24),
         ElevatedButton.icon(
@@ -430,18 +421,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     Text(item.description,
                         style: const TextStyle(
                             color: AppColors.textMuted, fontSize: 11)),
-                    if (item.sparkPointsGranted > 0)
-                      Row(children: [
-                        const Icon(Icons.bolt,
-                            color: AppColors.primary, size: 12),
-                        Text(
-                          ' +${item.sparkPointsGranted} pts',
-                          style: const TextStyle(
-                              color: AppColors.primary,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ]),
                   ],
                 ),
               ),
@@ -564,23 +543,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ]),
             ],
           ),
-          if (_totalPoints > 0)
-            Padding(
-              padding: const EdgeInsets.only(top: 6),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Icon(Icons.bolt, color: AppColors.gold, size: 14),
-                  Text(
-                    ' +$_totalPoints Pontos Spark no total',
-                    style: const TextStyle(
-                        color: AppColors.gold,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
-            ),
           const SizedBox(height: 14),
           Container(
               height: 1,
@@ -617,7 +579,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               Text(
                 'Pagamento seguro via Asaas',
                 style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.3), fontSize: 11),
+                    color: AppColors.textMuted, fontSize: 11),
               ),
             ],
           ),

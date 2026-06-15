@@ -197,6 +197,75 @@ class AnalyticsService {
   }
 
   // ─────────────────────────────────────────────────────────────────
+  //  PLANOS / GATING / UPGRADE — funil de conversão (PDF §11)
+  // ─────────────────────────────────────────────────────────────────
+
+  Future<void> logPricingViewed() async {
+    try {
+      await _analytics.logEvent(name: 'pricing_viewed');
+    } catch (e) {
+      debugPrint('[Analytics] Erro em pricing_viewed: $e');
+    }
+  }
+
+  Future<void> logPlanSelected({required String plan, required String period}) async {
+    try {
+      await _analytics.logEvent(
+        name: 'plan_selected',
+        parameters: {'plan': plan, 'period': period},
+      );
+    } catch (e) {
+      debugPrint('[Analytics] Erro em plan_selected: $e');
+    }
+  }
+
+  /// Disparado quando o bottom sheet de upgrade é exibido.
+  Future<void> logUpgradePromptShown({String? trigger}) async {
+    try {
+      await _analytics.logEvent(
+        name: 'upgrade_prompt_shown',
+        parameters: {'trigger': trigger ?? 'unknown'},
+      );
+    } catch (e) {
+      debugPrint('[Analytics] Erro em upgrade_prompt_shown: $e');
+    }
+  }
+
+  Future<void> logUpgradePromptClicked({String? trigger}) async {
+    try {
+      await _analytics.logEvent(
+        name: 'upgrade_prompt_clicked',
+        parameters: {'trigger': trigger ?? 'unknown'},
+      );
+    } catch (e) {
+      debugPrint('[Analytics] Erro em upgrade_prompt_clicked: $e');
+    }
+  }
+
+  Future<void> logUpgradePromptDismissed() async {
+    try {
+      await _analytics.logEvent(name: 'upgrade_prompt_dismissed');
+    } catch (e) {
+      debugPrint('[Analytics] Erro em upgrade_prompt_dismissed: $e');
+    }
+  }
+
+  /// Disparado quando o usuário toca em algo bloqueado pelo plano.
+  Future<void> logLockedFeatureAccessed({
+    required String feature,
+    String? itemId,
+  }) async {
+    try {
+      await _analytics.logEvent(
+        name: 'locked_feature_accessed',
+        parameters: {'feature': feature, if (itemId != null) 'item_id': itemId},
+      );
+    } catch (e) {
+      debugPrint('[Analytics] Erro em locked_feature_accessed: $e');
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
   //  USER PROPERTY — define propriedades persistentes
   // ─────────────────────────────────────────────────────────────────
 

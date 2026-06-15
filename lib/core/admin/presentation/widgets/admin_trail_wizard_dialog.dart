@@ -137,7 +137,7 @@ class _AdminTrailWizardDialogState extends ConsumerState<AdminTrailWizardDialog>
                   style: TextStyle(
                     color: AppColors.primary,
                     fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 IconButton(
@@ -247,13 +247,13 @@ class _AdminTrailWizardDialogState extends ConsumerState<AdminTrailWizardDialog>
           style: TextStyle(
             color: AppColors.primary,
             fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
         ),
         const SizedBox(height: 24),
         const Text(
           'Título da Trilha',
-          style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+          style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 8),
         TextField(
@@ -289,7 +289,7 @@ class _AdminTrailWizardDialogState extends ConsumerState<AdminTrailWizardDialog>
           style: TextStyle(
             color: AppColors.primary,
             fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
         ),
         const SizedBox(height: 24),
@@ -328,7 +328,7 @@ class _AdminTrailWizardDialogState extends ConsumerState<AdminTrailWizardDialog>
                 'Preview da Estrutura',
                 style: TextStyle(
                   color: AppColors.primary,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(height: 12),
@@ -359,13 +359,13 @@ class _AdminTrailWizardDialogState extends ConsumerState<AdminTrailWizardDialog>
           style: TextStyle(
             color: AppColors.primary,
             fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
         ),
         const SizedBox(height: 24),
         const Text(
           'Nomes das Lições',
-          style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+          style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 12),
         ..._lessonNameControllers.asMap().entries.map((entry) {
@@ -392,7 +392,7 @@ class _AdminTrailWizardDialogState extends ConsumerState<AdminTrailWizardDialog>
         const SizedBox(height: 24),
         const Text(
           'Nomes das Avaliações',
-          style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+          style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 12),
         ..._evaluationNameControllers.asMap().entries.map((entry) {
@@ -431,7 +431,7 @@ class _AdminTrailWizardDialogState extends ConsumerState<AdminTrailWizardDialog>
           style: TextStyle(
             color: AppColors.primary,
             fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
         ),
         const SizedBox(height: 24),
@@ -471,7 +471,7 @@ class _AdminTrailWizardDialogState extends ConsumerState<AdminTrailWizardDialog>
             value,
             style: const TextStyle(
               color: AppColors.textPrimary,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ],
@@ -489,7 +489,7 @@ class _AdminTrailWizardDialogState extends ConsumerState<AdminTrailWizardDialog>
       children: [
         Text(
           label,
-          style: const TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+          style: const TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 8),
         TextField(

@@ -46,7 +46,7 @@ class AdminEntityCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(right: onDelete != null ? 32.0 : 0),
-                  child: Text(title, style: TextStyle(color: isActive ? colorType : Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                  child: Text(title, style: TextStyle(color: isActive ? colorType : Colors.white, fontSize: 16, fontWeight: FontWeight.w700)),
                 ),
                 const SizedBox(height: 8),
                 Text(description, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
@@ -54,7 +54,7 @@ class AdminEntityCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(color: colorType.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
-                  child: Text(badgeText, style: TextStyle(color: colorType, fontSize: 12, fontWeight: FontWeight.bold)),
+                  child: Text(badgeText, style: TextStyle(color: colorType, fontSize: 12, fontWeight: FontWeight.w700)),
                 ),
               ],
             ),
@@ -115,7 +115,7 @@ class PathNodeCard extends StatelessWidget {
                     children: [
                       Icon(icon, size: 16, color: AppColors.textSecondary),
                       const SizedBox(width: 8),
-                      Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
                     ],
                   ),
                   const SizedBox(height: 4),
@@ -173,13 +173,13 @@ class QuizNodeCard extends StatelessWidget {
                     children: [
                       Icon(Icons.quiz, size: 16, color: AppColors.error),
                       const SizedBox(width: 8),
-                      Text(title, style: TextStyle(color: AppColors.error, fontWeight: FontWeight.bold)),
+                      Text(title, style: TextStyle(color: AppColors.error, fontWeight: FontWeight.w700)),
                     ],
                   ),
                   const SizedBox(height: 4),
                   Text('$questionCount Questões configuradas.', style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
                   const SizedBox(height: 8),
-                  Text('+ Adicionar/Editar Questões', style: TextStyle(color: AppColors.blue, fontSize: 12, fontWeight: FontWeight.bold)),
+                  Text('+ Adicionar/Editar Questões', style: TextStyle(color: AppColors.blue, fontSize: 12, fontWeight: FontWeight.w700)),
                 ],
               ),
             ),

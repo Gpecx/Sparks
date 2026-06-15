@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/services/covenant_service.dart';
@@ -60,6 +61,66 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
     }
   }
 
+  /// Abre o menu com as opções secundárias (Ranking, Ferramentas, Loja).
+  void _showMoreMenu() {
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: AppColors.navBarBackground,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (sheetContext) {
+        Widget tile(IconData icon, String title, String subtitle, int index) {
+          final selected = _currentIndex == index;
+          return ListTile(
+            leading: Icon(
+              icon,
+              color: selected ? AppColors.primary : AppColors.textMuted,
+            ),
+            title: Text(
+              title,
+              style: TextStyle(
+                color: selected ? AppColors.primary : Colors.white,
+                fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
+              ),
+            ),
+            subtitle: Text(
+              subtitle,
+              style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
+            ),
+            onTap: () {
+              Navigator.pop(sheetContext);
+              setState(() => _currentIndex = index);
+            },
+          );
+        }
+
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 12, bottom: 4),
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: AppColors.textMuted.withValues(alpha: 0.4),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              tile(Icons.emoji_events, 'Ranking',
+                  'Classificação geral', 4),
+              tile(Icons.calculate, 'Ferramentas',
+                  'Calculadoras de engenharia', 3),
+              tile(Icons.store, 'Loja', 'Loja de itens', 6),
+              const SizedBox(height: 8),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final isTestMode = ref.watch(devModeProvider);
@@ -72,7 +133,18 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
         Widget mainContent = Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 800),
-            child: _screens[_currentIndex],
+            // Transição suave (fade) ao trocar de aba — reforça a fluidez do app.
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              switchInCurve: Curves.easeOut,
+              switchOutCurve: Curves.easeIn,
+              transitionBuilder: (child, animation) =>
+                  FadeTransition(opacity: animation, child: child),
+              child: KeyedSubtree(
+                key: ValueKey<int>(_currentIndex),
+                child: _screens[_currentIndex],
+              ),
+            ),
           ),
         );
 
@@ -124,7 +196,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                       selectedLabelTextStyle: const TextStyle(
                         color: AppColors.primary,
                         fontSize: 12,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                       ),
                       unselectedLabelTextStyle: const TextStyle(
                         color: AppColors.textMuted,
@@ -145,11 +217,11 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                         ),
                         NavigationRailDestination(
                           icon: Icon(
-                            Icons.route_outlined,
+                            Icons.category_outlined,
                             semanticLabel: 'Categorias',
                           ),
                           selectedIcon: Icon(
-                            Icons.route,
+                            Icons.category,
                             semanticLabel: 'Categorias selecionada',
                           ),
                           label: Text('Categorias'),
@@ -229,107 +301,162 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
           );
         }
 
-        // Layout Mobile
+        // Layout Mobile — nav: Início · Estudos · (FAB Categorias) · Perfil · Menu
+        // Índices: 0 Início · 1 Categorias · 2 Estudos · 3 Ferramentas · 4 Ranking · 5 Perfil · 6 Loja
+        const moreIndexes = [3, 4, 6]; // Ranking, Ferramentas e Loja no menu "..."
+        final isMoreSelected = moreIndexes.contains(_currentIndex);
+
         return Semantics(
           label: 'Tela principal do SPARK',
           child: Scaffold(
-            floatingActionButton: devFab,
-            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            floatingActionButton: devFab ??
+                _CategoriasFab(
+                  selected: _currentIndex == 1,
+                  onPressed: () => setState(() => _currentIndex = 1),
+                ),
+            floatingActionButtonLocation: devFab != null
+                ? FloatingActionButtonLocation.endFloat
+                : FloatingActionButtonLocation.centerDocked,
             body: scaffoldBody,
             bottomNavigationBar: Semantics(
               label: 'Barra de navegação inferior',
               explicitChildNodes: true,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AppColors.navBarBackground,
-                  border: Border(
-                    top: BorderSide(
-                      color: AppColors.cardBorder.withValues(alpha: 0.3),
-                      width: 1,
+              child: BottomAppBar(
+                color: AppColors.navBarBackground,
+                elevation: 0,
+                shape: const CircularNotchedRectangle(),
+                notchMargin: 8,
+                padding: EdgeInsets.zero,
+                height: 64,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(
+                        color: AppColors.cardBorder.withValues(alpha: 0.3),
+                        width: 1,
+                      ),
                     ),
                   ),
-                ),
-                child: BottomNavigationBar(
-                  currentIndex: _currentIndex,
-                  onTap: (index) => setState(() => _currentIndex = index),
-                  type: BottomNavigationBarType.fixed,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  selectedItemColor: AppColors.primary,
-                  unselectedItemColor: AppColors.textMuted,
-                  selectedFontSize: 12,
-                  unselectedFontSize: 12,
-                  items: const [
-                    BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.home_outlined,
-                        semanticLabel: 'Ir para Início',
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _NavItem(
+                        icon: Icons.home_outlined,
+                        activeIcon: Icons.home,
+                        label: 'Início',
+                        selected: _currentIndex == 0,
+                        onTap: () => setState(() => _currentIndex = 0),
                       ),
-                      activeIcon: Icon(Icons.home),
-                      label: 'Início',
-                      tooltip: 'Início',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.route_outlined,
-                        semanticLabel: 'Ir para Categorias',
+                      _NavItem(
+                        icon: Icons.menu_book_outlined,
+                        activeIcon: Icons.menu_book,
+                        label: 'Estudos',
+                        selected: _currentIndex == 2,
+                        onTap: () => setState(() => _currentIndex = 2),
                       ),
-                      activeIcon: Icon(Icons.route),
-                      label: 'Categorias',
-                      tooltip: 'Categorias de aprendizado',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.menu_book_outlined,
-                        semanticLabel: 'Ir para Estudos',
+                      const SizedBox(width: 56), // espaço do FAB central
+                      _NavItem(
+                        icon: Icons.person_outline,
+                        activeIcon: Icons.person,
+                        label: 'Perfil',
+                        selected: _currentIndex == 5,
+                        onTap: () => setState(() => _currentIndex = 5),
                       ),
-                      activeIcon: Icon(Icons.menu_book),
-                      label: 'Estudos',
-                      tooltip: 'E-books por módulo',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.calculate_outlined,
-                        semanticLabel: 'Ir para Ferramentas',
+                      _NavItem(
+                        icon: Icons.more_horiz,
+                        activeIcon: Icons.more_horiz,
+                        label: 'Menu',
+                        selected: isMoreSelected,
+                        onTap: _showMoreMenu,
                       ),
-                      activeIcon: Icon(Icons.calculate),
-                      label: 'Ferramentas',
-                      tooltip: 'Calculadoras de engenharia',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.emoji_events_outlined,
-                        semanticLabel: 'Ir para Ranking',
-                      ),
-                      activeIcon: Icon(Icons.emoji_events),
-                      label: 'Ranking',
-                      tooltip: 'Ranking de usuários',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.person_outline,
-                        semanticLabel: 'Ir para Perfil',
-                      ),
-                      activeIcon: Icon(Icons.person),
-                      label: 'Perfil',
-                      tooltip: 'Meu perfil',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.store_outlined,
-                        semanticLabel: 'Ir para Loja',
-                      ),
-                      activeIcon: Icon(Icons.store),
-                      label: 'Loja',
-                      tooltip: 'Loja de itens',
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         );
       },
+    );
+  }
+}
+
+// ── Item da barra de navegação inferior (mobile) ────────────────
+class _NavItem extends StatelessWidget {
+  final IconData icon;
+  final IconData activeIcon;
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _NavItem({
+    required this.icon,
+    required this.activeIcon,
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final color = selected ? AppColors.primary : AppColors.textMuted;
+    return Expanded(
+      child: Semantics(
+        button: true,
+        selected: selected,
+        label: label,
+        child: InkResponse(
+          onTap: () {
+            HapticFeedback.selectionClick();
+            onTap();
+          },
+          radius: 36,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(selected ? activeIcon : icon, color: color, size: 24),
+              const SizedBox(height: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  color: color,
+                  fontSize: 11,
+                  fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── FAB central "Categorias" ────────────────────────────────────
+class _CategoriasFab extends StatelessWidget {
+  final bool selected;
+  final VoidCallback onPressed;
+
+  const _CategoriasFab({required this.selected, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        HapticFeedback.lightImpact();
+        onPressed();
+      },
+      backgroundColor: AppColors.primary,
+      foregroundColor: Colors.white,
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: selected
+            ? const BorderSide(color: Colors.white, width: 2)
+            : BorderSide.none,
+      ),
+      tooltip: 'Categorias de aprendizado',
+      child: Icon(selected ? Icons.category : Icons.category_outlined, size: 26),
     );
   }
 }
@@ -351,18 +478,18 @@ class _DevModeBanner extends StatelessWidget {
           colors: [Color(0xFF1A0E00), Color(0xFF2A1800)],
         ),
         border: Border(
-          bottom: BorderSide(color: Color(0xFFFFB300), width: 1.5),
+          bottom: BorderSide(color: AppColors.warningAmber, width: 1.5),
         ),
       ),
       child: Row(
         children: [
-          const Icon(Icons.bug_report, color: Color(0xFFFFB300), size: 16),
+          const Icon(Icons.bug_report, color: AppColors.warningAmber, size: 16),
           const SizedBox(width: 8),
           const Expanded(
             child: Text(
               '⚠️  TEST MODE ACTIVE — Todas as lições desbloqueadas',
               style: TextStyle(
-                color: Color(0xFFFFB300),
+                color: AppColors.warningAmber,
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 0.5,
@@ -380,16 +507,16 @@ class _DevModeBanner extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFB300).withValues(alpha: 0.15),
+                  color: AppColors.warningAmber.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(
-                    color: const Color(0xFFFFB300).withValues(alpha: 0.4),
+                    color: AppColors.warningAmber.withValues(alpha: 0.4),
                   ),
                 ),
                 child: const Text(
                   'DESATIVAR',
                   style: TextStyle(
-                    color: Color(0xFFFFB300),
+                    color: AppColors.warningAmber,
                     fontSize: 10,
                     fontWeight: FontWeight.w800,
                   ),
@@ -414,11 +541,11 @@ class _DevModeFab extends StatelessWidget {
     return FloatingActionButton.small(
       onPressed: onToggle,
       backgroundColor: const Color(0xFF2A1800),
-      foregroundColor: const Color(0xFFFFB300),
+      foregroundColor: AppColors.warningAmber,
       tooltip: 'Desativar Modo Dev',
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
-        side: const BorderSide(color: Color(0xFFFFB300), width: 1.5),
+        side: const BorderSide(color: AppColors.warningAmber, width: 1.5),
       ),
       child: const Icon(Icons.bug_report, size: 20),
     );

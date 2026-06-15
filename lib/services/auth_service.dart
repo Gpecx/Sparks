@@ -36,7 +36,6 @@ class AuthService {
                 'email': user.email ?? email,
                 'photoUrl': user.photoURL,
                 'role': 'técnico',
-                'sparkPoints': 100,
                 'xp': 0,
                 'level': 1,
                 'tensionLevel': 'BT',
@@ -99,7 +98,6 @@ class AuthService {
         'email': email.trim(),
         'photoUrl': null,
         'role': 'técnico',
-        'sparkPoints': 100, // Bônus de boas-vindas
         'xp': 0,
         'level': 1,
         'tensionLevel': 'BT',
@@ -211,7 +209,6 @@ class AuthService {
         'email': email,
         'photoUrl': photoUrl,
         'role': 'técnico',
-        'sparkPoints': 100, // Bônus de boas-vindas
         'xp': 0,
         'level': 1,
         'tensionLevel': 'BT',

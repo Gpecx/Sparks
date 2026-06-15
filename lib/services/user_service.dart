@@ -61,7 +61,6 @@ class UserService extends ChangeNotifier {
 
   String get uid => _auth.currentUser?.uid ?? '';
 
-  int get sparkPoints => _user?.sparkPoints ?? 0;
   int get xp => _user?.xp ?? 0;
   int get level => _user?.level ?? 1;
   String get tensionLevel => _user?.tensionLevel ?? 'BT';
@@ -159,7 +158,6 @@ class UserService extends ChangeNotifier {
       'photoUrl': photoUrl,
       'role': 'técnico',
       'profession': null,
-      'sparkPoints': 100,
       'xp': 0,
       'level': 1,
       'tensionLevel': 'BT',
@@ -242,55 +240,6 @@ class UserService extends ChangeNotifier {
     } catch (e) {
       debugPrint('[UserService.addXp] Cloud Function error: $e');
       rethrow;
-    }
-  }
-
-  /// Gasta Spark Points via Cloud Function.
-  /// Retorna false se saldo insuficiente ou falha.
-  Future<bool> spendSparkPoints(int amount, {String source = 'purchase'}) async {
-    if (uid.isEmpty) return false;
-
-    try {
-      final response = await _functions.httpsCallable('spendSparkPoints').call({
-        'amount': amount,
-        'source': source,
-      });
-
-      final data = response.data as Map;
-      final success = data['success'] as bool? ?? false;
-
-      if (success) {
-        await AuditService().log(
-          action: AuditAction.spSpent,
-          amount: amount,
-          source: source,
-        );
-      }
-
-      return success;
-    } catch (e) {
-      debugPrint('[UserService.spendSparkPoints] Cloud Function error: $e');
-      return false;
-    }
-  }
-
-  /// Adiciona Spark Points via Cloud Function (bônus, recompensas de missões).
-  Future<void> addSparkPoints(int amount, {String source = 'app'}) async {
-    if (uid.isEmpty) return;
-
-    try {
-      await _functions.httpsCallable('addSparkPoints').call({
-        'amount': amount,
-        'source': source,
-      });
-
-      await AuditService().log(
-        action: AuditAction.spGained,
-        amount: amount,
-        source: source,
-      );
-    } catch (e) {
-      debugPrint('[UserService.addSparkPoints] Cloud Function error: $e');
     }
   }
 
@@ -442,9 +391,7 @@ class UserService extends ChangeNotifier {
   }
 
   Future<bool> resurrectStreak(int previousStreak) async {
-    final cost = GamificationUtils.streakResurrectCost(previousStreak);
-    final success = await spendSparkPoints(cost, source: 'streak_resurrection');
-    if (!success) return false;
+    if (uid.isEmpty) return false;
 
     await _db.collection('users').doc(uid).update({
       'currentStreak': previousStreak,
@@ -457,7 +404,6 @@ class UserService extends ChangeNotifier {
       action: AuditAction.streakResurrected,
       amount: previousStreak,
       source: 'streak_resurrection',
-      meta: {'spCost': cost},
     );
     return true;
   }

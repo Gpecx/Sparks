@@ -237,7 +237,7 @@ class _ConfirmDeleteDialogState extends State<_ConfirmDeleteDialog> {
           Expanded(
             child: Text(
               widget.title,
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
             ),
           ),
         ],
@@ -268,7 +268,7 @@ class _ConfirmDeleteDialogState extends State<_ConfirmDeleteDialog> {
                   height: 18,
                   child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
                 )
-              : const Text('DELETAR', style: TextStyle(fontWeight: FontWeight.bold)),
+              : const Text('DELETAR', style: TextStyle(fontWeight: FontWeight.w700)),
         ),
       ],
     );
@@ -447,7 +447,7 @@ class _JSONImportDialogState extends State<_JSONImportDialog> {
                         style: TextStyle(
                           color: AppColors.textPrimary,
                           fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                           letterSpacing: 0.5,
                         ),
                       ),
@@ -496,7 +496,7 @@ class _JSONImportDialogState extends State<_JSONImportDialog> {
                           style: TextStyle(
                             color: AppColors.primary,
                             fontSize: 10,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                             letterSpacing: 1.2,
                           ),
                         ),
@@ -510,7 +510,7 @@ class _JSONImportDialogState extends State<_JSONImportDialog> {
                             side: const BorderSide(color: AppColors.primary),
                             textStyle: const TextStyle(
                               fontSize: 11,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w700,
                               letterSpacing: 0.8,
                             ),
                             padding: const EdgeInsets.symmetric(
@@ -689,7 +689,7 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
           style: const TextStyle(
             color: AppColors.primary,
             fontSize: 10,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
             letterSpacing: 1.2,
           ),
         ),
@@ -789,7 +789,7 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
                         style: TextStyle(
                           color: AppColors.textPrimary,
                           fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                           letterSpacing: 0.5,
                         ),
                       ),
@@ -957,7 +957,7 @@ class _TrailWizardDialogState extends State<_TrailWizardDialog> {
             style: TextStyle(
               color: AppColors.textPrimary,
               fontSize: 22,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 12),
@@ -1152,7 +1152,7 @@ class _BulkJSONImportDialogState extends State<_BulkJSONImportDialog> {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
@@ -1222,7 +1222,7 @@ class _BulkJSONImportDialogState extends State<_BulkJSONImportDialog> {
                   style: const TextStyle(
                     color: AppColors.primary,
                     fontSize: 22,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ] else ...[
@@ -1234,7 +1234,7 @@ class _BulkJSONImportDialogState extends State<_BulkJSONImportDialog> {
                 const SizedBox(height: 16),
                 Text(
                   _failed == 0 ? 'Importação concluída!' : 'Importação com erros',
-                  style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 12),
                 _statRow(Icons.check, '$_success trilhas importadas', Colors.green),
@@ -1379,7 +1379,7 @@ class _EbookImportDialogState extends State<_EbookImportDialog> {
                   const Expanded(
                     child: Text(
                       'Importar E-book',
-                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
                     ),
                   ),
                   IconButton(
@@ -1551,7 +1551,7 @@ class _BulkEbookImportDialogState extends State<_BulkEbookImportDialog> {
                   const Expanded(
                     child: Text(
                       'Importar E-books em Massa',
-                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
                     ),
                   ),
                   if (_phase != _Phase.loading)
@@ -1603,7 +1603,7 @@ class _BulkEbookImportDialogState extends State<_BulkEbookImportDialog> {
                 const SizedBox(height: 12),
                 Text(
                   '$_done / $_total',
-                  style: const TextStyle(color: Color(0xFF2DD4BF), fontSize: 22, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: Color(0xFF2DD4BF), fontSize: 22, fontWeight: FontWeight.w700),
                 ),
               ] else ...[
                 Icon(
@@ -1614,7 +1614,7 @@ class _BulkEbookImportDialogState extends State<_BulkEbookImportDialog> {
                 const SizedBox(height: 16),
                 Text(
                   _failed == 0 ? 'Importação concluída!' : 'Importação com erros',
-                  style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 12),
                 _statRow(Icons.check, '$_success e-books importados', Colors.green),
@@ -1733,7 +1733,7 @@ class _DeleteAllContentDialogState extends State<_DeleteAllContentDialog> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
                   if (_phase != _Phase.loading)
@@ -1826,7 +1826,7 @@ class _DeleteAllContentDialogState extends State<_DeleteAllContentDialog> {
                   style: const TextStyle(
                       color: AppColors.error,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.w700),
                 ),
               ] else ...[
                 Icon(
@@ -1844,7 +1844,7 @@ class _DeleteAllContentDialogState extends State<_DeleteAllContentDialog> {
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 12),
                 Text('$_success categorias removidas',

@@ -219,7 +219,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                 textAlign: TextAlign.center,
                 text: TextSpan(
                   style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.7), fontSize: 14),
+                      color: AppColors.textSecondary, fontSize: 14),
                   children: [
                     TextSpan(
                         text: '7 dias grátis do ${widget.plan.planName} '),
@@ -429,7 +429,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                     Text(
                       'Pagamento seguro via Asaas · PCI-DSS',
                       style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.3),
+                          color: AppColors.textMuted,
                           fontSize: 11),
                     ),
                   ],
@@ -481,7 +481,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                 Text(
                   '7 dias grátis • Depois R\$ ${widget.plan.monthlyPrice.toStringAsFixed(2)}/mês',
                   style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.55),
+                      color: AppColors.textSecondary,
                       fontSize: 12),
                 ),
               ],
@@ -501,7 +501,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
               style: TextStyle(
                   color: widget.plan.accentColor,
                   fontSize: 11,
-                  fontWeight: FontWeight.w900),
+                  fontWeight: FontWeight.w800),
             ),
           ),
         ],
@@ -618,7 +618,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                 child: Text(
                   'O cartão só será cobrado após o término dos 7 dias gratuitos.',
                   style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.4),
+                      color: AppColors.textMuted,
                       fontSize: 11),
                 ),
               ),
@@ -635,7 +635,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
       children: [
         Text(label,
             style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.55), fontSize: 13)),
+                color: AppColors.textSecondary, fontSize: 13)),
         Text(value,
             style: TextStyle(
                 color: valueColor,

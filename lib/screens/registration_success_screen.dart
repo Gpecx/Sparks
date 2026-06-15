@@ -100,7 +100,7 @@ class _RegistrationSuccessScreenState extends State<RegistrationSuccessScreen>
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w800,
                     letterSpacing: 0.5,
                   ),
                 ),

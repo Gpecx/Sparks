@@ -113,7 +113,7 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       Text(
@@ -150,7 +150,7 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
                     style: TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 12,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -207,7 +207,7 @@ class _AdminLessonEditorState extends State<AdminLessonEditor> {
                                         style: const TextStyle(
                                           color: AppColors.primary,
                                           fontSize: 10,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w700,
                                         ),
                                       ),
                                     ),

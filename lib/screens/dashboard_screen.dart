@@ -1,8 +1,12 @@
 import 'dart:ui';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
+import 'package:spark_app/widgets/spark_card.dart';
+import 'package:spark_app/widgets/spark_skeleton.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/screens/settings_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
@@ -20,6 +24,7 @@ import 'package:spark_app/models/spark_admin_models.dart';
 import 'package:spark_app/providers/content_providers.dart';
 import 'package:spark_app/models/user_model.dart';
 import 'package:spark_app/core/utils/gamification_utils.dart';
+import 'package:spark_app/widgets/plan_widgets.dart';
 // ─────────────────────────────────────────────────────────────────
 //  DASHBOARD — Versão com Firebase
 //  MUDANÇAS:
@@ -128,14 +133,14 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             email,
                             style: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.5),
+                              color: AppColors.textSecondary,
                               fontSize: 13,
                             ),
                           ),
@@ -210,7 +215,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                child: Text('NOVAS MECÂNICAS', style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.bold)),
+                child: Text('NOVAS MECÂNICAS', style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.w700)),
               ),
               // PvP — Em Breve ou Teste Admin
               Builder(
@@ -238,7 +243,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           const Expanded(
                             child: Text(
                               'Duelo de Faíscas (PvP)',
-                              style: TextStyle(color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w500),
+                              style: TextStyle(color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w600),
                             ),
                           ),
                           Container(
@@ -250,7 +255,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                             ),
                             child: const Text(
                               'EM BREVE',
-                              style: TextStyle(color: Colors.grey, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+                              style: TextStyle(color: Colors.grey, fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 0.5),
                             ),
                           ),
                         ],
@@ -304,7 +309,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   style: TextStyle(
                     color: itemColor,
                     fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -320,13 +325,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+        Text(title, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)),
         if (onSeeAll != null)
           _ResponsiveTapWidget(
             onTap: onSeeAll,
             child: const Row(
               children: [
-                Text('Ver todas', style: TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.bold)),
+                Text('Ver todas', style: TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.w700)),
                 SizedBox(width: 4),
                 Icon(Icons.arrow_forward_ios, color: AppColors.primary, size: 12),
               ],
@@ -337,60 +342,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   }
 
   // ── Banner de Trial Ativo ────────────────────────────────────────
-  Widget _buildTrialBanner(UserModel user) {
-    final endsAt = user.trialEndsAt;
-    final daysLeft = endsAt != null
-        ? endsAt.difference(DateTime.now()).inDays.clamp(0, 7)
-        : 0;
-
-    return GestureDetector(
-      onTap: () => context.push('/store'),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              AppColors.primary.withValues(alpha: 0.25),
-              const Color(0xFF8B5CF6).withValues(alpha: 0.25),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-              color: AppColors.primary.withValues(alpha: 0.4), width: 1.5),
-        ),
-        child: Row(
-          children: [
-            const Icon(Icons.all_inclusive, color: AppColors.primary, size: 28),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Trial Pro Ativo — $daysLeft dia${daysLeft == 1 ? '' : 's'} restante${daysLeft == 1 ? '' : 's'}',
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w800),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    'Assine agora para não perder o acesso',
-                    style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.55),
-                        fontSize: 11),
-                  ),
-                ],
-              ),
-            ),
-            Icon(Icons.arrow_forward_ios,
-                color: AppColors.primary.withValues(alpha: 0.7), size: 14),
-          ],
-        ),
-      ),
-    );
-  }
-
   // ── Header com nome real do Firestore ───────────────────────────
   Widget _buildHeader(UserModel? userModel) {
     final userService = ref.watch(userServiceProvider);
@@ -410,7 +361,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             ),
             Text(
               '$firstName!',
-              style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+              style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w700),
             ),
           ],
         ),
@@ -470,7 +421,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
                     child: Text(
                       unreadCount > 9 ? '9+' : unreadCount.toString(),
-                      style: const TextStyle(color: AppColors.background, fontSize: 10, fontWeight: FontWeight.bold),
+                      style: const TextStyle(color: AppColors.background, fontSize: 10, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
@@ -516,7 +467,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Notificações', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                        const Text('Notificações', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)),
                         if (service.unreadCount > 0)
                           TextButton(
                             onPressed: () {
@@ -569,8 +520,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                     title: Text(
                                       notif.title,
                                       style: TextStyle(
-                                        color: notif.read ? Colors.white.withValues(alpha: 0.7) : Colors.white,
-                                        fontWeight: notif.read ? FontWeight.normal : FontWeight.bold,
+                                        color: notif.read ? AppColors.textSecondary : Colors.white,
+                                        fontWeight: notif.read ? FontWeight.w400 : FontWeight.w700,
                                       ),
                                     ),
                                     subtitle: Text(
@@ -615,8 +566,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 children: [
                   _buildHeader(userModel),
                   const SizedBox(height: 16),
-                  if (userModel?.isOnTrial == true)
-                    _buildTrialBanner(userModel!),
+                  if (userModel?.isOnTrial == true) const TrialCountdown(),
                   const SizedBox(height: 16),
                   _buildGamificationCenter(userModel),
                   const SizedBox(height: 16),
@@ -656,7 +606,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         clipBehavior: Clip.none,
         itemCount: 2,
         separatorBuilder: (ctx, index) => const SizedBox(width: 16),
-        itemBuilder: (ctx, index) => const _SkeletonBox(width: 280, height: 145),
+        itemBuilder: (ctx, index) => const SparkSkeleton(width: 280, height: 145),
       ),
     );
   }
@@ -669,7 +619,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         clipBehavior: Clip.none,
         itemCount: 3,
         separatorBuilder: (ctx, index) => const SizedBox(width: 16),
-        itemBuilder: (ctx, index) => const _SkeletonBox(width: 140, height: 165),
+        itemBuilder: (ctx, index) => const SparkSkeleton(width: 140, height: 165),
       ),
     );
   }
@@ -680,7 +630,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     final streak = userModel?.currentStreak ?? userService.currentStreak;
     final level = userModel?.level ?? userService.level;
     final xp = userModel?.xp ?? userService.xp;
-    final sparkPoints = userModel?.sparkPoints ?? userService.sparkPoints;
     final multiplier = userModel != null ? GamificationUtils.xpMultiplier(streak) : userService.xpMultiplier;
 
     // A cada 500 XP sobe um nível
@@ -705,7 +654,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 children: [
                   const Text(
                     'Seu Progresso',
-                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -716,13 +665,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
               _ResponsiveTapWidget(
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('🔥 Streak de $streak dias! Multiplicador de ${multiplier}x.'),
-                      backgroundColor: AppColors.primary,
-                      duration: const Duration(seconds: 3),
-                    ),
-                  );
+                  SparkSnack.success(context, '🔥 Streak de $streak dias! Multiplicador de ${multiplier}x.');
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -766,32 +709,17 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 style: const TextStyle(
                   color: AppColors.textSecondary,
                   fontSize: 12,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w700,
                   fontFamily: 'monospace',
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10),
-          // Rótulo descritivo do XP total e Spark Points
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'XP Total: $xp XP',
-                style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
-              ),
-              Row(
-                children: [
-                  const Icon(Icons.bolt, color: AppColors.primary, size: 16),
-                  const SizedBox(width: 4),
-                  Text(
-                    '$sparkPoints SP',
-                    style: const TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ],
+          // Rótulo descritivo do XP total
+          Text(
+            'XP Total: $xp XP',
+            style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 14),
@@ -804,12 +732,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               if (isAdmin) {
                 return _ResponsiveTapWidget(
                   onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Desafio Diário: Em desenvolvimento (Acesso Admin)'),
-                        backgroundColor: AppColors.primary,
-                      ),
-                    );
+                    SparkSnack.info(context, 'Desafio Diário: Em desenvolvimento (Acesso Admin)');
                   },
                   child: Row(
                     children: [
@@ -827,7 +750,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Desafio Diário', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+                            Text('Desafio Diário', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
                             Text('Acesso Teste Admin', style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
                           ],
                         ),
@@ -855,7 +778,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Desafio Diário', style: TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.bold)),
+                          Text('Desafio Diário', style: TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w700)),
                           Text('Em breve...', style: TextStyle(color: Colors.grey, fontSize: 12)),
                         ],
                       ),
@@ -867,7 +790,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
                       ),
-                      child: const Text('EM BREVE', style: TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+                      child: const Text('EM BREVE', style: TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
                     ),
                   ],
                 ),
@@ -884,7 +807,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     final userProgressAsync = ref.watch(userProgressProvider);
     
     return userProgressAsync.when(
-      loading: () => const _SkeletonBox(width: double.infinity, height: 120),
+      loading: () => const SparkSkeleton(width: double.infinity, height: 120),
       error: (e, st) => const SizedBox(height: 120, child: Center(child: Text('Erro ao carregar progresso', style: TextStyle(color: AppColors.error)))),
       data: (list) {
         if (list.isEmpty) return _buildContinueLearningContent(null);
@@ -910,19 +833,14 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     final progress = lastModule?.progressPercent ?? 0.0;
     final progressText = lastModule != null ? '${(progress * 100).toInt()}%' : '';
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.5)),
-      ),
+    return SparkCard(
+      radius: AppRadius.lg,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
             'Continue Aprendendo',
-            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 14),
           Row(
@@ -931,10 +849,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF00C402).withValues(alpha: 0.15),
+                  color: AppColors.primary.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.menu_book, color: Color(0xFF00C402)),
+                child: const Icon(Icons.menu_book, color: AppColors.primary),
               ),
               const SizedBox(width: 14),
               Expanded(
@@ -943,7 +861,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   children: [
                     Text(
                       moduleName,
-                      style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                      style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -979,7 +897,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               const SizedBox(width: 12),
               Text(
                 progressText,
-                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 13),
+                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 13),
               ),
             ],
           ),
@@ -1001,7 +919,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           children: [
             Icon(Icons.timer, color: AppColors.primary),
             SizedBox(width: 10),
-            Text('Desafio Diário', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+            Text('Desafio Diário', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18)),
           ],
         ),
         content: Column(
@@ -1010,7 +928,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           children: [
             Text(
               'Teste seus conhecimentos em NR-10! Complete 3 perguntas rápidas para receber recompensas.',
-              style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 14),
+              style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
             ),
             const SizedBox(height: 20),
             Container(
@@ -1019,8 +937,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(children: [Text('💰 +50 XP', style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold)), Text('Recompensa', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
-                  Column(children: [Text('⏱️ 3 min', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)), Text('Tempo Est.', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
+                  Column(children: [Text('💰 +50 XP', style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.w700)), Text('Recompensa', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
+                  Column(children: [Text('⏱️ 3 min', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700)), Text('Tempo Est.', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
                 ],
               ),
             ),
@@ -1029,7 +947,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('AGORA NÃO', style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.bold)),
+            child: const Text('AGORA NÃO', style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.w700)),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -1038,11 +956,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             ),
             onPressed: () {
               Navigator.pop(ctx);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Iniciando desafio diário...'), backgroundColor: AppColors.primary),
-              );
+              SparkSnack.info(context, 'Iniciando desafio diário...');
             },
-            child: const Text('INICIAR DESAFIO', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold)),
+            child: const Text('INICIAR DESAFIO', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700)),
           ),
         ],
       ),
@@ -1080,7 +996,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 children: [
                   const Icon(Icons.shield_outlined, color: AppColors.textMuted, size: 28),
                   const SizedBox(height: 8),
-                  const Text('Nenhum Pacto Ativo', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+                  const Text('Nenhum Pacto Ativo', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14)),
                   const SizedBox(height: 4),
                   const Expanded(
                     child: Text(
@@ -1100,7 +1016,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                       minimumSize: const Size(0, 32),
                     ),
-                    child: const Text('ACEITAR PACTO', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold, fontSize: 11)),
+                    child: const Text('ACEITAR PACTO', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, fontSize: 11)),
                   )
                 ],
               ),
@@ -1147,7 +1063,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           style: TextStyle(
                             color: isCompleted ? AppColors.gold : Colors.white,
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                             letterSpacing: 0.5,
                           ),
                         ),
@@ -1159,7 +1075,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         color: AppColors.primary.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text(cov.reward, style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold)),
+                      child: Text(cov.reward, style: const TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700)),
                     ),
                   ],
                 ),
@@ -1167,7 +1083,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 Expanded(
                   child: Text(
                     cov.objective,
-                    style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 12),
+                    style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -1196,7 +1112,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       style: TextStyle(
                         color: isCompleted ? AppColors.gold : AppColors.textMuted,
                         fontSize: 11,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
@@ -1215,14 +1131,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     return asyncModules.when(
       data: (modules) {
         if (modules.isEmpty) {
-          return Container(
+          return SparkCard(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(
-              color: AppColors.card,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
-            ),
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -1231,7 +1142,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 Text(
                   'Nenhum módulo em destaque no momento.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700),
                 ),
                 SizedBox(height: 4),
                 Text(
@@ -1306,7 +1217,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 const SizedBox(height: 12),
                 Text(
                   module.title,
-                  style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -1339,12 +1250,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           gradient: const LinearGradient(
-            colors: [Color(0xFF061629), Color(0xFF0D2641)],
+            colors: [AppColors.background, AppColors.card],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
           ),
-          border: Border.all(color: const Color(0xFF00C402).withValues(alpha: 0.4)),
-          boxShadow: [BoxShadow(color: const Color(0xFF00C402).withValues(alpha: 0.15), blurRadius: 12, spreadRadius: 1)],
+          border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
+          boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.15), blurRadius: 12, spreadRadius: 1)],
         ),
         child: Row(
           children: [
@@ -1353,8 +1264,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               height: 50,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: const LinearGradient(colors: [Color(0xFF00C402), Color(0xFF1D5F31)], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                boxShadow: [BoxShadow(color: const Color(0xFF00C402).withValues(alpha: 0.4), blurRadius: 10, spreadRadius: 1)],
+                gradient: const LinearGradient(colors: [AppColors.primary, AppColors.cardBorder], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.4), blurRadius: 10, spreadRadius: 1)],
               ),
               child: const Icon(Icons.play_arrow, color: Colors.white, size: 28),
             ),
@@ -1363,11 +1274,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('PowerPlay Streaming', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
+                  const Text('PowerPlay Streaming', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700)),
                   const SizedBox(height: 4),
                   Text(
                     'Vídeos técnicos e conteúdos exclusivos para seu aprendizado',
-                    style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 12, height: 1.3),
+                    style: TextStyle(color: AppColors.textSecondary, fontSize: 12, height: 1.3),
                   ),
                 ],
               ),
@@ -1376,10 +1287,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(colors: [Color(0xFF00C402), Color(0xFF1D5F31)]),
+                gradient: const LinearGradient(colors: [AppColors.primary, AppColors.cardBorder]),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text('Saiba mais', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
+              child: const Text('Saiba mais', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700)),
             ),
           ],
         ),
@@ -1427,6 +1338,7 @@ class _ResponsiveTapWidgetState extends State<_ResponsiveTapWidget>
         onTapDown: (_) => _ctrl.forward(),
         onTapUp: (_) {
           _ctrl.reverse();
+          HapticFeedback.selectionClick();
           widget.onTap();
         },
         onTapCancel: () => _ctrl.reverse(),
@@ -1437,48 +1349,6 @@ class _ResponsiveTapWidgetState extends State<_ResponsiveTapWidget>
             child: Transform.scale(scale: _scaleAnim.value, child: child),
           ),
           child: widget.child,
-        ),
-      ),
-    );
-  }
-}
-
-// ── Skeleton Box ─────────────────────────────────────────────────
-class _SkeletonBox extends StatefulWidget {
-  final double width;
-  final double height;
-
-  const _SkeletonBox({required this.width, required this.height});
-
-  @override
-  State<_SkeletonBox> createState() => _SkeletonBoxState();
-}
-
-class _SkeletonBoxState extends State<_SkeletonBox> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 800))..repeat(reverse: true);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: Tween<double>(begin: 0.4, end: 0.8).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut)),
-      child: Container(
-        width: widget.width,
-        height: widget.height,
-        decoration: BoxDecoration(
-          color: AppColors.cardBorder.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(16),
         ),
       ),
     );

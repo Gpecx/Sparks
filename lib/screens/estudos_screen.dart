@@ -5,12 +5,13 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/models/spark_admin_models.dart';
 import 'package:spark_app/providers/content_providers.dart';
 import 'package:spark_app/providers/ebook_providers.dart';
+import 'package:spark_app/widgets/spark_skeleton.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/ebook_list_screen.dart';
 
 const List<Map<String, dynamic>> _categoryThemes = [
-  {'color': Color(0xFF00C402), 'gradientEnd': Color(0xFF007A01), 'icon': Icons.bolt},
+  {'color': AppColors.primary, 'gradientEnd': Color(0xFF007A01), 'icon': Icons.bolt},
   {'color': Color(0xFF22C55E), 'gradientEnd': Color(0xFF15803D), 'icon': Icons.memory},
   {'color': Color(0xFF2DD4BF), 'gradientEnd': Color(0xFF0F766E), 'icon': Icons.gavel},
   {'color': Color(0xFF84CC16), 'gradientEnd': Color(0xFF3F6212), 'icon': Icons.lightbulb},
@@ -106,8 +107,16 @@ class EstudosScreen extends ConsumerWidget {
                         },
                       );
                     },
-                    loading: () => const Center(
-                        child: CircularProgressIndicator(color: AppColors.primary)),
+                    loading: () => ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 6,
+                      itemBuilder: (context, index) => const SparkSkeleton(
+                        width: double.infinity,
+                        height: 92,
+                        margin: EdgeInsets.only(bottom: 14),
+                      ),
+                    ),
                     error: (e, _) => Center(
                       child: Text('Erro: $e',
                           style: const TextStyle(color: AppColors.error)),
@@ -205,14 +214,14 @@ class _CategoryCard extends StatelessWidget {
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           category.subtitle,
                           style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.5),
+                            color: AppColors.textSecondary,
                             fontSize: 12,
                           ),
                         ),

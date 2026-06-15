@@ -79,7 +79,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
                   Expanded(
                     child: Text(
                       widget.title,
-                      style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -114,7 +114,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
           const SizedBox(height: 16),
           const Text(
             'REPRODUZINDO AMOSTRA...',
-            style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 2),
+            style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2),
           ),
           const SizedBox(height: 10),
           Container(
@@ -126,7 +126,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
             ),
             child: Text(
               'O tempo expira em $_timeDisplay',
-              style: const TextStyle(color: Colors.redAccent, fontSize: 14, fontWeight: FontWeight.bold),
+              style: const TextStyle(color: Colors.redAccent, fontSize: 14, fontWeight: FontWeight.w700),
             ),
           ),
         ],
@@ -157,13 +157,13 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
           const SizedBox(height: 16),
           const Text(
             'Amostra Concluída',
-            style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w900),
+            style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 12),
           Text(
             'Para continuar assistindo ao vídeo completo e liberar todos os recursos EXS Powerplay, realize o upgrade.',
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 14, height: 1.5),
+            style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
           ),
           const SizedBox(height: 24),
           SizedBox(

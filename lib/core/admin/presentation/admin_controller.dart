@@ -885,6 +885,20 @@ class AdminController extends Notifier<AdminState> {
 
       // 5. Adicionar Questões
       if (questionsData != null) {
+        // Pré-passo: reúne todas as respostas de lacunas da lição para gerar
+        // distratores REAIS (termos do próprio assunto) no banco de palavras.
+        final fillAnswerPool = <String>{};
+        for (final raw in questionsData) {
+          if (raw is! Map) continue;
+          final t = raw['type'] as String?;
+          if (t == 'fill_blank' || t == 'fill_in_the_blanks' || t == 'fillInTheBlanks') {
+            for (final b in (raw['blanks'] as List? ?? const [])) {
+              final a = (b is Map ? b['answer'] : null) as String?;
+              if (a != null && a.trim().isNotEmpty) fillAnswerPool.add(a.trim());
+            }
+          }
+        }
+
         for (int i = 0; i < questionsData.length; i++) {
           final q = questionsData[i] as Map<String, dynamic>;
           final qRef = lessonRef.collection(FS.questions).doc();
@@ -900,8 +914,8 @@ class AdminController extends Notifier<AdminState> {
             case 'fill_blank':
             case 'fill_in_the_blanks':
             case 'fillInTheBlanks':
-              // Converte para multipleChoice diretamente
-              firestoreType = 'multipleChoice';
+              // Minigame "preencher lacunas" (renderizado como sentence_builder)
+              firestoreType = 'fillInTheBlanks';
               break;
             default:
               firestoreType = 'multipleChoice';
@@ -932,34 +946,37 @@ class AdminController extends Notifier<AdminState> {
             }
             qData[FS.isTrue] = resolvedIsTrue;
             qData[FS.correctIndex] = resolvedIsTrue ? 0 : 1;
-          } else if (firestoreType == 'multipleChoice' && (q['type'] == 'fill_blank' || q['type'] == 'fill_in_the_blanks' || q['type'] == 'fillInTheBlanks')) {
-            // fill_blank convertido para multipleChoice:
-            // options já existem no JSON; caso não existam, usa answer + fallback
-            final rawOptions = q['options'] as List?;
-            final rawAnswer = q['answer'] as String?;
-            List<String> opts;
-            int correctIdx = 0;
-            if (rawOptions != null && rawOptions.isNotEmpty) {
-              opts = List<String>.from(rawOptions);
-              correctIdx = rawAnswer != null ? opts.indexOf(rawAnswer) : 0;
-              if (correctIdx < 0) correctIdx = 0;
-            } else if (rawAnswer != null) {
-              const fallback = ['Nenhuma das anteriores', 'Incorreto', 'Não se aplica', 'Outra opção'];
-              final distractors = <String>[];
-              for (final f in fallback) {
-                if (f != rawAnswer) {
-                  distractors.add(f);
-                  if (distractors.length >= 3) break;
-                }
-              }
-              opts = [rawAnswer, ...distractors];
-              opts.shuffle();
-              correctIdx = opts.indexOf(rawAnswer);
-            } else {
-              opts = ['Opção A', 'Opção B', 'Opção C', 'Opção D'];
+          } else if (firestoreType == 'fillInTheBlanks') {
+            // Preencher lacunas: normaliza as lacunas e monta o banco de palavras
+            // (resposta correta + distratores reais de outras lacunas da lição).
+            final rawBlanks = q['blanks'] as List? ?? const [];
+            final blanks = <Map<String, dynamic>>[];
+            final answers = <String>[];
+            for (final b in rawBlanks) {
+              if (b is! Map) continue;
+              final answer = (b['answer'] as String?)?.trim() ?? '';
+              if (answer.isEmpty) continue;
+              final index = (b['index'] as num?)?.toInt() ?? blanks.length;
+              blanks.add({'index': index, 'answer': answer});
+              answers.add(answer);
             }
-            qData[FS.options] = opts;
-            qData[FS.correctIndex] = correctIdx;
+            // Distratores: termos reais de OUTRAS lacunas da lição, priorizando
+            // tamanho parecido (evita entregar a resposta pelo comprimento).
+            final pool = fillAnswerPool.where((a) => !answers.contains(a)).toList();
+            final wordBank = <String>[...answers];
+            final target = answers.length + 3;
+            final sorted = [...pool]
+              ..sort((a, b) {
+                final ref = answers.isNotEmpty ? answers.first.length : a.length;
+                return (a.length - ref).abs().compareTo((b.length - ref).abs());
+              });
+            for (final c in sorted) {
+              if (wordBank.length >= target) break;
+              if (!wordBank.contains(c)) wordBank.add(c);
+            }
+            qData[FS.textWithBlanks] = q['statement'] ?? '';
+            qData[FS.blanks] = blanks;
+            qData[FS.options] = wordBank;
           }
 
           batch.set(qRef, qData);

@@ -4,6 +4,8 @@ import 'package:spark_app/screens/checkout_screen.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/screens/trial_checkout_screen.dart';
 import 'package:spark_app/providers/user_provider.dart';
+import 'package:spark_app/services/analytics_service.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -124,7 +126,7 @@ const List<SubscriptionPlan> subscriptionPlans = [
     annualLabel: 'Economia de 17%',
     targetAudience: 'Sênior / consultor',
     icon: Icons.diamond_outlined,
-    accentColor: Color(0xFFFFD700),
+    accentColor: AppColors.gold,
     features: [
       'Tudo do Pro',
       'Bateria infinita ∞',
@@ -178,6 +180,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(() => setState(() {}));
+    AnalyticsService().logPricingViewed();
   }
 
   @override
@@ -188,6 +191,8 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
 
   void _onSubscribe(SubscriptionPlan plan) {
     final period = _isAnnual && plan.annualPrice != null ? 'Anual' : 'Mensal';
+    AnalyticsService().logPlanSelected(
+        plan: plan.id, period: _isAnnual ? 'yearly' : 'monthly');
     final price = (_isAnnual && plan.annualPrice != null)
         ? plan.annualPrice!
         : plan.monthlyPrice;
@@ -197,7 +202,6 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
       description: plan.subtitle,
       price: price,
       icon: plan.icon,
-      sparkPointsGranted: 0,
       isSubscription: true,
       planId: plan.id,
     );
@@ -338,7 +342,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                 style: TextStyle(
                   color: selected ? Colors.white : AppColors.textMuted,
                   fontWeight:
-                      selected ? FontWeight.w800 : FontWeight.w500,
+                      selected ? FontWeight.w800 : FontWeight.w600,
                   fontSize: 13,
                 ),
               ),
@@ -466,7 +470,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                                 style: TextStyle(
                                   color: plan.accentColor,
                                   fontSize: 8,
-                                  fontWeight: FontWeight.w900,
+                                  fontWeight: FontWeight.w800,
                                   letterSpacing: 0.5,
                                 ),
                               ),
@@ -478,7 +482,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                       Text(
                         plan.subtitle,
                         style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.5),
+                          color: AppColors.textSecondary,
                           fontSize: 12,
                         ),
                       ),
@@ -503,7 +507,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                         child: Text(
                           subPrice,
                           style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.35),
+                            color: AppColors.textMuted,
                             fontSize: 9,
                           ),
                           textAlign: TextAlign.end,
@@ -555,10 +559,10 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
               style: TextStyle(
                 color: isInfinity
                     ? color
-                    : Colors.white.withValues(alpha: 0.75),
+                    : AppColors.textSecondary,
                 fontSize: 12,
                 fontWeight:
-                    isInfinity ? FontWeight.w700 : FontWeight.normal,
+                    isInfinity ? FontWeight.w700 : FontWeight.w400,
               ),
             ),
           ),
@@ -591,6 +595,22 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
     // Já assina esse plano
     if (user?.isPremium == true && user?.isOnTrial != true && user?.subscriptionPlanId == plan.id) {
       return _disabledButton('PLANO ATUAL ✓', color: plan.accentColor);
+    }
+
+    // Student exige comprovação de matrícula antes de assinar (PDF §8).
+    if (plan.id == 'student') {
+      return _routeButton('VERIFICAR MATRÍCULA',
+          color: plan.accentColor,
+          icon: Icons.school_outlined,
+          route: '/student-verification');
+    }
+
+    // Business é B2B — leva ao formulário de proposta (PDF §9).
+    if (plan.id == 'business') {
+      return _routeButton('SOLICITAR PROPOSTA',
+          color: plan.accentColor,
+          icon: Icons.business_outlined,
+          route: '/business-setup');
     }
 
     // Assinante de outro plano — upgrade
@@ -651,6 +671,30 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
           ),
         ),
       ],
+    );
+  }
+
+  Widget _routeButton(String label,
+      {required Color color, required IconData icon, required String route}) {
+    return SizedBox(
+      width: double.infinity,
+      height: 44,
+      child: ElevatedButton.icon(
+        onPressed: () => context.push(route),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+        icon: Icon(icon, color: Colors.white, size: 15),
+        label: Text(
+          label,
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 0.8),
+        ),
+      ),
     );
   }
 

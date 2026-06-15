@@ -36,7 +36,7 @@ class _SparksBackgroundState extends State<SparksBackground> with SingleTickerPr
             gradient: RadialGradient(
               center: Alignment.center,
               radius: 1.2,
-              colors: [Color(0xFF091E35), Color(0xFF061629)],
+              colors: [AppColors.surface, AppColors.background],
             ),
           ),
         ),
