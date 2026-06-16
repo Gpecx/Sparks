@@ -206,5 +206,301 @@
         "type": "int"
       }
     }
+  },
+  "storeTitle": "LOJA SPARK",
+  "storeSubtitle": "Escolha o plano ideal para você",
+  "monthly": "Mensal",
+  "yearly": "Anual",
+  "save17Percent": "Economize 17%",
+  "freePlanPrice": "Grátis",
+  "yearlyPlanPrice": "R$ {price}/mês",
+  "monthlyPlanPrice": "R$ {price}/mês",
+  "monthlyPlanPricePerUser": "R$ {price}/usuário/mês",
+  "billedAnnually": "R$ {price} faturados anualmente",
+  "minUsersBilledAnnually": "Mín. {minUsers} usuários • Faturado anual",
+  "orAnnualPlanLabel": "Ou {label} no plano anual",
+  "yourCurrentPlan": "SEU PLANO ATUAL",
+  "basicPlan": "PLANO BÁSICO",
+  "trialActiveDays": "{days, plural, =0{TRIAL ATIVO — 0 dias restantes} =1{TRIAL ATIVO — 1 dia restante} other{TRIAL ATIVO — {days} dias restantes}}",
+  "trialEnded": "TRIAL ENCERRADO",
+  "currentPlanActive": "PLANO ATUAL ✓",
+  "verifyEnrollment": "VERIFICAR MATRÍCULA",
+  "requestProposal": "SOLICITAR PROPOSTA",
+  "upgradeToPlan": "FAZER UPGRADE PARA {planName}",
+  "subscribeToPlan": "ASSINAR {planName}",
+  "test7DaysFree": "TESTAR 7 DIAS GRÁTIS",
+  "@yearlyPlanPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@monthlyPlanPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@monthlyPlanPricePerUser": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@billedAnnually": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@minUsersBilledAnnually": {
+    "placeholders": {
+      "minUsers": {
+        "type": "int"
+      }
+    }
+  },
+  "@orAnnualPlanLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "@trialActiveDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "@upgradeToPlan": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  "@subscribeToPlan": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  "accessDeniedAdminOnly": "Acesso Negado: Apenas administradores podem ativar o Modo Dev.",
+  "devModeTapsRemaining": "🔧 Dev: {remaining} toque(s) restantes...",
+  "devModeDisabled": "🔒 Modo Dev DESATIVADO",
+  "devModeEnabled": "🔓 Modo Dev ATIVADO — Painel Admin Liberado!",
+  "myProfile": "MEU PERFIL",
+  "levelValue": "Lvl {level}",
+  "technicianRole": "TÉCNICO",
+  "viewCredential": "VER CREDENCIAL",
+  "activeDays": "Dias Ativos",
+  "daysLabel": "dias",
+  "streakLabel": "Streak",
+  "streakDaysFire": "dias 🔥",
+  "experienceLabel": "Experiência",
+  "xpLabel": "XP",
+  "debugInfoTitle": "DEBUG INFO (MODO DEV)",
+  "debugUid": "UID: {uid}",
+  "debugRole": "Role Firestore: {role}",
+  "debugIsAdmin": "isAdmin Getter: {isAdmin}",
+  "achievementsTitle": "CONQUISTAS",
+  "seeAll": "Ver Tudo ↗",
+  "noAchievementsYet": "Você não tem conquistas no momento.",
+  "letsLearnAndUnlockRewards": "Bora aprender e desbloquear recompensas!",
+  "clanTitle": "CLÃ",
+  "joinAClan": "Faça parte de um Clã!",
+  "clanDescription": "Junte-se a outros alunos, compita em equipe e ganhe recompensas exclusivas.",
+  "createClanUpper": "CRIAR CLÃ",
+  "enterUpper": "ENTRAR",
+  "myClanTitle": "MEU CLÃ",
+  "clanMemberRole": "Membro",
+  "viewClanUpper": "VISUALIZAR CLÃ",
+  "weeklyRankingTitle": "RANKING SEMANAL",
+  "globalLeaderboard": "Placar Global",
+  "yourRankingPosition": "Você está em {position}º lugar esta semana",
+  "completeLessonsToEnterRanking": "Complete lições para entrar no ranking",
+  "myClanFallback": "Meu Clã",
+  "@devModeTapsRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "@levelValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "@debugUid": {
+    "placeholders": {
+      "uid": {
+        "type": "String"
+      }
+    }
+  },
+  "@debugRole": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "@debugIsAdmin": {
+    "placeholders": {
+      "isAdmin": {
+        "type": "String"
+      }
+    }
+  },
+  "@yourRankingPosition": {
+    "placeholders": {
+      "position": {
+        "type": "int"
+      }
+    }
+  },
+  "goodMorning": "Bom dia",
+  "goodAfternoon": "Boa tarde",
+  "goodEvening": "Boa noite",
+  "myProfileMenu": "Meu Perfil",
+  "settingsMenu": "Configurações",
+  "adminPanelMenu": "Painel Admin",
+  "myAchievementsMenu": "Minhas Conquistas",
+  "myProgressMenu": "Meu Progresso",
+  "helpSupportMenu": "Ajuda / Suporte",
+  "newMechanicsHeader": "NOVAS MECÂNICAS",
+  "sparksDuelMenu": "Duelo de Faíscas (PvP)",
+  "logoutMenu": "Sair",
+  "seeAllPlural": "Ver todas",
+  "notificationsTitle": "Notificações",
+  "markAllAsRead": "Marcar todas como lidas",
+  "noNotificationsAtMoment": "Nenhuma notificação no momento.",
+  "weeklyCovenantsTitle": "Pactos Semanais",
+  "featuredModulesTitle": "Módulos em Destaque",
+  "yourProgressTitle": "Seu Progresso",
+  "technicianLevel": "Técnico Nível {level}",
+  "streakMultiplierMessage": "🔥 Streak de {streak} dias! Multiplicador de {multiplier}x.",
+  "streakDays": "{streak} Dias",
+  "xpProgress": "{current} / {total} XP",
+  "totalXp": "XP Total: {xp} XP",
+  "dailyChallengeTitle": "Desafio Diário",
+  "adminTestAccess": "Acesso Teste Admin",
+  "comingSoonLabel": "Em breve...",
+  "comingSoonUpper": "EM BREVE",
+  "moduleFallback": "Módulo {id}",
+  "noModuleStarted": "Nenhum módulo iniciado",
+  "lessonsCompleted": "{count, plural, =0{0 lições concluídas} =1{1 lição concluída} other{{count} lições concluídas}}",
+  "accessLearningPathToStart": "Acesse o Caminho de Aprendizado para começar",
+  "continueLearningTitle": "Continue Aprendendo",
+  "dailyChallengeDescription": "Teste seus conhecimentos em NR-10! Complete 3 perguntas rápidas para receber recompensas.",
+  "rewardXp": "💰 +{xp} XP",
+  "rewardLabel": "Recompensa",
+  "estimatedTime": "⏱️ {time} min",
+  "estimatedTimeLabel": "Tempo Est.",
+  "notNowButton": "AGORA NÃO",
+  "startChallengeButton": "INICIAR DESAFIO",
+  "startingDailyChallenge": "Iniciando desafio diário...",
+  "noActiveCovenant": "Nenhum Pacto Ativo",
+  "goToCovenantsTabToCreate": "Vá até a aba Pactos para criar o compromisso!",
+  "acceptCovenantButton": "ACEITAR PACTO",
+  "covenantProgress": "{current}/{max} {type}",
+  "noFeaturedModulesCurrently": "Nenhum módulo em destaque no momento.",
+  "continueExploringForNewContent": "Continue explorando para descobrir novos conteúdos!",
+  "errorLoadingModules": "Erro ao carregar módulos",
+  "powerplayStreamingTitle": "PowerPlay Streaming",
+  "technicalVideosDescription": "Vídeos técnicos e conteúdos exclusivos para seu aprendizado",
+  "learnMoreButton": "Saiba mais",
+  "errorLoadingProgress": "Erro ao carregar progresso",
+  "@technicianLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "@streakMultiplierMessage": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      },
+      "multiplier": {
+        "type": "double"
+      }
+    }
+  },
+  "@streakDays": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
+  "@xpProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "@totalXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "@moduleFallback": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "@lessonsCompleted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@rewardXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "@estimatedTime": {
+    "placeholders": {
+      "time": {
+        "type": "int"
+      }
+    }
+  },
+  "@covenantProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
   }
 }

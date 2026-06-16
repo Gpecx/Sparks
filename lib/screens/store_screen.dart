@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/checkout_screen.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
@@ -189,7 +190,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
   }
 
   void _onSubscribe(SubscriptionPlan plan) {
-    final period = _isAnnual && plan.annualPrice != null ? 'Anual' : 'Mensal';
+    final period = _isAnnual && plan.annualPrice != null ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly;
     AnalyticsService().logPlanSelected(
         plan: plan.id, period: _isAnnual ? 'yearly' : 'monthly');
     final price = (_isAnnual && plan.annualPrice != null)
@@ -260,14 +261,14 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('LOJA SPARK',
+                            Text(AppLocalizations.of(context)!.storeTitle,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w800,
                                     letterSpacing: 2)),
                             SizedBox(height: 2),
-                            Text('Escolha o plano ideal para você',
+                            Text(AppLocalizations.of(context)!.storeSubtitle,
                                 style: TextStyle(
                                     color: AppColors.textMuted, fontSize: 12)),
                           ],
@@ -291,12 +292,12 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                     ),
                     child: Row(
                       children: [
-                        _buildToggleOption('Mensal', !_isAnnual, () {
+                        _buildToggleOption(AppLocalizations.of(context)!.monthly, !_isAnnual, () {
                           setState(() => _isAnnual = false);
                         }),
-                        _buildToggleOption('Anual', _isAnnual, () {
+                        _buildToggleOption(AppLocalizations.of(context)!.yearly, _isAnnual, () {
                           setState(() => _isAnnual = true);
-                        }, badge: 'Economize 17%'),
+                        }, badge: AppLocalizations.of(context)!.save17Percent),
                       ],
                     ),
                   ),
@@ -379,7 +380,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
     final showAnnual = _isAnnual && isAnnualAvailable;
 
     final displayPrice = isFree
-        ? 'Grátis'
+        ? AppLocalizations.of(context)!.freePlanPrice
         : showAnnual
             ? 'R\$ ${(plan.annualPrice! / 12).toStringAsFixed(2)}/mês'
             : 'R\$ ${plan.monthlyPrice.toStringAsFixed(2)}${plan.perUser ? '/usuário/mês' : '/mês'}';
@@ -587,7 +588,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
 
     if (isFree) {
       final isCurrentPlan = user == null || (!user.isPremium && !user.isOnTrial);
-      return _disabledButton(isCurrentPlan ? 'SEU PLANO ATUAL' : 'PLANO BÁSICO');
+      return _disabledButton(isCurrentPlan ? AppLocalizations.of(context)!.yourCurrentPlan : AppLocalizations.of(context)!.basicPlan);
     }
 
     // Em trial nesse plano
@@ -596,19 +597,19 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
       return _disabledButton(
         remaining > 0
             ? 'TRIAL ATIVO — $remaining dia${remaining == 1 ? '' : 's'} restante${remaining == 1 ? '' : 's'}'
-            : 'TRIAL ENCERRADO',
+            : AppLocalizations.of(context)!.trialEnded,
         color: plan.accentColor,
       );
     }
 
     // Já assina esse plano
     if (user?.isPremium == true && user?.isOnTrial != true && user?.subscriptionPlanId == plan.id) {
-      return _disabledButton('PLANO ATUAL ✓', color: plan.accentColor);
+      return _disabledButton(AppLocalizations.of(context)!.currentPlanActive, color: plan.accentColor);
     }
 
     // Student exige comprovação de matrícula antes de assinar (PDF §8).
     if (plan.id == 'student') {
-      return _routeButton('VERIFICAR MATRÍCULA',
+      return _routeButton(AppLocalizations.of(context)!.verifyEnrollment,
           color: plan.accentColor,
           icon: Icons.school_outlined,
           route: '/student-verification');
@@ -616,7 +617,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
 
     // Business é B2B — leva ao formulário de proposta (PDF §9).
     if (plan.id == 'business') {
-      return _routeButton('SOLICITAR PROPOSTA',
+      return _routeButton(AppLocalizations.of(context)!.requestProposal,
           color: plan.accentColor,
           icon: Icons.business_outlined,
           route: '/business-setup');
@@ -673,7 +674,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
             ),
             icon: Icon(Icons.all_inclusive, color: plan.accentColor, size: 14),
             label: Text(
-              'TESTAR 7 DIAS GRÁTIS',
+              AppLocalizations.of(context)!.test7DaysFree,
               style: TextStyle(
                   color: plan.accentColor, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.8),
             ),
