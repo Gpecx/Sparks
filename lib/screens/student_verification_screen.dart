@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -175,7 +176,7 @@ class _StudentVerificationScreenState
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: const Text('Verificação de estudante'),
+            title: Text(AppLocalizations.of(context)!.studentVerificationTitle),
           ),
           body: SafeArea(
             top: false,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
@@ -44,20 +45,20 @@ class _BillingTypeOption {
 const _billingOptions = [
   _BillingTypeOption(
     type: AsaasBillingType.pix,
-    label: 'PIX',
-    subtitle: 'Aprovação imediata, 24h por dia',
+    label: AppLocalizations.of(context)!.checkoutPix,
+    subtitle: AppLocalizations.of(context)!.checkoutCreditCardDesc,
     icon: Icons.qr_code_2_rounded,
   ),
   _BillingTypeOption(
     type: AsaasBillingType.creditCard,
-    label: 'Cartão de Crédito',
-    subtitle: 'Processado de forma segura',
+    label: AppLocalizations.of(context)!.checkoutCreditCard,
+    subtitle: AppLocalizations.of(context)!.checkoutProcessedSecurely,
     icon: Icons.credit_card_rounded,
   ),
   _BillingTypeOption(
     type: AsaasBillingType.boleto,
-    label: 'Boleto Bancário',
-    subtitle: 'Compensação em até 3 dias úteis',
+    label: AppLocalizations.of(context)!.checkoutBoleto,
+    subtitle: AppLocalizations.of(context)!.checkoutPixDesc,
     icon: Icons.receipt_long_rounded,
   ),
 ];
@@ -280,7 +281,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 keyboardType: TextInputType.number,
                                 style: const TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
-                                  hintText: 'CPF ou CNPJ (somente números)',
+                                  hintText: AppLocalizations.of(context)!.checkoutCpfCnpj,
                                   hintStyle: const TextStyle(
                                       color: AppColors.textMuted, fontSize: 13),
                                   filled: true,
@@ -324,7 +325,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                     color: AppColors.textMuted, size: 13),
                                 const SizedBox(width: 6),
                                 Text(
-                                  'Exigido pelo Banco Central para PIX e Boleto',
+                                  AppLocalizations.of(context)!.checkoutCpfCnpjRequired,
                                   style: TextStyle(
                                       color:
                                           AppColors.textMuted,
@@ -589,7 +590,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   color: AppColors.textMuted, size: 12),
               const SizedBox(width: 4),
               Text(
-                'Pagamento seguro via Asaas',
+                AppLocalizations.of(context)!.checkoutSecurePayment,
                 style: TextStyle(
                     color: AppColors.textMuted, fontSize: 11),
               ),
