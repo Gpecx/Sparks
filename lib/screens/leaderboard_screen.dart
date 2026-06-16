@@ -248,12 +248,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                   color:
                                       AppColors.primary.withValues(alpha: 0.3)),
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(Icons.calendar_today_outlined,
+                                const Icon(Icons.calendar_today_outlined,
                                     color: AppColors.primary, size: 13),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Text(AppLocalizations.of(context)!.thisWeek,
                                     style: TextStyle(
                                         color: AppColors.primary,
@@ -380,7 +380,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                               onPressed: () => setState(() =>
                                                   _paginatedGlobalCount +=
                                                       _pageSize),
-                                              child: const Text(
+                                              child: Text(
                                                   AppLocalizations.of(context)!.loadMore,
                                                   style: TextStyle(
                                                       color: AppColors.primary,
