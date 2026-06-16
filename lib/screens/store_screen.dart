@@ -133,7 +133,6 @@ const List<SubscriptionPlan> subscriptionPlans = [
       'Conteúdo avançado exclusivo',
       'Mentoria em grupo mensal',
       'Acesso antecipado a novidades',
-      'Suporte VIP 24h',
     ],
     badge: 'PREMIUM',
   ),
