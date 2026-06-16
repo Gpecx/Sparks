@@ -353,68 +353,91 @@ class AdminDashboardPage extends ConsumerWidget {
   }
 
   // --- CATEGORIAS ---
+  // Header responsivo das abas de conteúdo. No MOBILE empilha (título em cima,
+  // ações em baixo) — antes a Row[Expanded(título) + Wrap(botões)] fazia a Wrap
+  // consumir quase toda a largura e esmagar o título.
+  Widget _tabHeader({
+    required bool isMobile,
+    required String title,
+    required String subtitle,
+    required List<Widget> actions,
+  }) {
+    final titleBlock = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(title, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
+        const SizedBox(height: 2),
+        Text(subtitle, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+      ],
+    );
+    if (isMobile) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          titleBlock,
+          const SizedBox(height: 14),
+          Wrap(spacing: 8, runSpacing: 8, children: actions),
+        ],
+      );
+    }
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(child: titleBlock),
+        const SizedBox(width: 16),
+        Wrap(spacing: 12, runSpacing: 12, alignment: WrapAlignment.end, children: actions),
+      ],
+    );
+  }
+
   Widget _buildCategoriesTab(BuildContext context, WidgetRef ref, AdminState state, AdminController controller, bool isDesktop, bool isTablet) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Categorias', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
-                  Text('Selecione uma categoria para ver seus módulos.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
-                ],
+        _tabHeader(
+          isMobile: !isDesktop && !isTablet,
+          title: 'Categorias',
+          subtitle: 'Selecione uma categoria para ver seus módulos.',
+          actions: [
+            OutlinedButton.icon(
+              onPressed: () => AdminDialogs.showDeleteAllContent(context, ref),
+              icon: const Icon(Icons.delete_forever, size: 18),
+              label: const Text('LIMPAR TUDO'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppColors.error,
+                side: const BorderSide(color: AppColors.error),
+                minimumSize: const Size(140, 40),
               ),
             ),
-            const SizedBox(width: 16),
-            Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              alignment: WrapAlignment.end,
-              children: [
-                OutlinedButton.icon(
-                  onPressed: () => AdminDialogs.showDeleteAllContent(context, ref),
-                  icon: const Icon(Icons.delete_forever, size: 18),
-                  label: const Text('LIMPAR TUDO'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.error,
-                    side: const BorderSide(color: AppColors.error),
-                    minimumSize: const Size(140, 40),
-                  ),
-                ),
-                OutlinedButton.icon(
-                  onPressed: () => AdminDialogs.showBulkImportJSON(context, ref),
-                  icon: const Icon(Icons.upload_file, size: 18),
-                  label: const Text('IMPORTAR EM MASSA'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF6C63FF),
-                    side: const BorderSide(color: Color(0xFF6C63FF)),
-                    minimumSize: const Size(160, 40),
-                  ),
-                ),
-                OutlinedButton.icon(
-                  onPressed: () => AdminDialogs.showImportJSON(context, ref),
-                  icon: const Icon(Icons.code, size: 18),
-                  label: const Text('IMPORTAR JSON'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.textSecondary,
-                    side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
-                    minimumSize: const Size(140, 40),
-                  ),
-                ),
-                ElevatedButton.icon(
-                  onPressed: () => AdminDialogs.showCreateCategory(context, ref),
-                  icon: const Icon(Icons.add, size: 18),
-                  label: const Text('NOVA'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    minimumSize: const Size(100, 40),
-                  ),
-                ),
-              ],
+            OutlinedButton.icon(
+              onPressed: () => AdminDialogs.showBulkImportJSON(context, ref),
+              icon: const Icon(Icons.upload_file, size: 18),
+              label: const Text('IMPORTAR EM MASSA'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: const Color(0xFF6C63FF),
+                side: const BorderSide(color: Color(0xFF6C63FF)),
+                minimumSize: const Size(160, 40),
+              ),
+            ),
+            OutlinedButton.icon(
+              onPressed: () => AdminDialogs.showImportJSON(context, ref),
+              icon: const Icon(Icons.code, size: 18),
+              label: const Text('IMPORTAR JSON'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppColors.textSecondary,
+                side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
+                minimumSize: const Size(140, 40),
+              ),
+            ),
+            ElevatedButton.icon(
+              onPressed: () => AdminDialogs.showCreateCategory(context, ref),
+              icon: const Icon(Icons.add, size: 18),
+              label: const Text('NOVA'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                minimumSize: const Size(100, 40),
+              ),
             ),
           ],
         ),
@@ -474,19 +497,11 @@ class AdminDashboardPage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Módulos', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
-                  Text('Gerencie os blocos de ensino deste módulo.', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
-                ],
-              ),
-            ),
-            const SizedBox(width: 16),
+        _tabHeader(
+          isMobile: !isDesktop && !isTablet,
+          title: 'Módulos',
+          subtitle: 'Gerencie os blocos de ensino deste módulo.',
+          actions: [
             ElevatedButton.icon(
               onPressed: () => AdminDialogs.showCreateModule(context, ref),
               icon: const Icon(Icons.add, size: 18),
@@ -555,22 +570,11 @@ class AdminDashboardPage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Trilhas e Lições', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
-                  Text(
-                    'Crie a jornada completa com lições e questões.',
-                    style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 16),
+        _tabHeader(
+          isMobile: !isDesktop && !isTablet,
+          title: 'Trilhas e Lições',
+          subtitle: 'Crie a jornada completa com lições e questões.',
+          actions: [
             ElevatedButton.icon(
               onPressed: () => AdminDialogs.showTrailWizard(context, ref),
               icon: const Icon(Icons.auto_awesome, size: 18),
