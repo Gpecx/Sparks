@@ -9,12 +9,14 @@ import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/providers/progress_provider.dart';
 import 'package:spark_app/models/progress_model.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class MyProgressScreen extends ConsumerWidget {
   const MyProgressScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final progressAsync = ref.watch(userProgressProvider);
     final user = UserService().user;
     final level = UserService().level;
@@ -31,9 +33,9 @@ class MyProgressScreen extends ConsumerWidget {
               icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 20),
               onPressed: () => context.pop(),
             ),
-            title: const Text(
-              'MEU PROGRESSO',
-              style: TextStyle(
+            title: Text(
+              l10n.myProgressScreenTitle,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w800,
                 fontSize: 15,
@@ -65,16 +67,16 @@ class MyProgressScreen extends ConsumerWidget {
               ),
             ),
             error: (e, _) => Center(
-              child: Text('Erro ao carregar progresso', style: const TextStyle(color: AppColors.error)),
+              child: Text(l10n.errorLoadingProgress, style: const TextStyle(color: AppColors.error)),
             ),
-            data: (list) => _buildBody(context, list, level, totalXp),
+            data: (list) => _buildBody(context, l10n, list, level, totalXp),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildBody(BuildContext context, List<ProgressModel> list, int level, int totalXp) {
+  Widget _buildBody(BuildContext context, AppLocalizations l10n, List<ProgressModel> list, int level, int totalXp) {
     final completed = list.where((p) => p.isCompleted).toList();
     final inProgress = list.where((p) => !p.isCompleted).toList()
       ..sort((a, b) => b.lastAccessed.compareTo(a.lastAccessed));
@@ -85,25 +87,25 @@ class MyProgressScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // ── Resumo geral ──────────────────────────────────────────
-          _buildSummaryCard(list, level, totalXp),
+          _buildSummaryCard(l10n, list, level, totalXp),
           const SizedBox(height: 28),
 
           if (list.isEmpty) ...[
-            _buildEmptyState(context),
+            _buildEmptyState(context, l10n),
           ] else ...[
             // Em andamento
             if (inProgress.isNotEmpty) ...[
-              _sectionTitle('EM ANDAMENTO', AppColors.primary),
+              _sectionTitle(l10n.inProgressSection, AppColors.primary),
               const SizedBox(height: 12),
-              ...inProgress.map((p) => _buildProgressCard(p, false)),
+              ...inProgress.map((p) => _buildProgressCard(l10n, p, false)),
               const SizedBox(height: 24),
             ],
 
             // Concluídos
             if (completed.isNotEmpty) ...[
-              _sectionTitle('CONCLUÍDOS', AppColors.gold),
+              _sectionTitle(l10n.completedSection, AppColors.gold),
               const SizedBox(height: 12),
-              ...completed.map((p) => _buildProgressCard(p, true)),
+              ...completed.map((p) => _buildProgressCard(l10n, p, true)),
               const SizedBox(height: 24),
             ],
           ],
@@ -112,7 +114,7 @@ class MyProgressScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildSummaryCard(List<ProgressModel> list, int level, int totalXp) {
+  Widget _buildSummaryCard(AppLocalizations l10n, List<ProgressModel> list, int level, int totalXp) {
     final totalModules = list.length;
     final completedCount = list.where((p) => p.isCompleted).length;
     final totalLessons = list.fold<int>(0, (sum, p) => sum + p.completedLessons.length);
@@ -155,9 +157,9 @@ class MyProgressScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Nível atual', style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                    Text(l10n.currentLevelLabel, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
                     Text(
-                      'Técnico Nível $level',
+                      l10n.technicianLevel(level),
                       style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -175,7 +177,7 @@ class MyProgressScreen extends ConsumerWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const Text('total', style: TextStyle(color: AppColors.textSecondary, fontSize: 11)),
+                  Text(l10n.totalLabel, style: const TextStyle(color: AppColors.textSecondary, fontSize: 11)),
                 ],
               ),
             ],
@@ -183,11 +185,11 @@ class MyProgressScreen extends ConsumerWidget {
           const SizedBox(height: 20),
           Row(
             children: [
-              _statChip(Icons.layers_outlined, '$totalModules', 'módulos', AppColors.blue),
+              _statChip(Icons.layers_outlined, '$totalModules', l10n.statModules, AppColors.blue),
               const SizedBox(width: 10),
-              _statChip(Icons.check_circle_outline, '$completedCount', 'concluídos', AppColors.primary),
+              _statChip(Icons.check_circle_outline, '$completedCount', l10n.statCompleted, AppColors.primary),
               const SizedBox(width: 10),
-              _statChip(Icons.menu_book_outlined, '$totalLessons', 'lições', AppColors.gold),
+              _statChip(Icons.menu_book_outlined, '$totalLessons', l10n.statLessons, AppColors.gold),
             ],
           ),
           if (list.isNotEmpty) ...[
@@ -207,7 +209,7 @@ class MyProgressScreen extends ConsumerWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  '${(avgProgress * 100).toInt()}% médio',
+                  l10n.avgProgressLabel((avgProgress * 100).toInt()),
                   style: const TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w700),
                 ),
               ],
@@ -242,11 +244,11 @@ class MyProgressScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildProgressCard(ProgressModel p, bool isCompleted) {
+  Widget _buildProgressCard(AppLocalizations l10n, ProgressModel p, bool isCompleted) {
     final pct = (p.progressPercent * 100).toInt().clamp(0, 100);
     final color = isCompleted ? AppColors.gold : AppColors.primary;
     final name = p.moduleName.isNotEmpty ? p.moduleName : p.moduleId;
-    final lastAccessed = _formatDate(p.lastAccessed);
+    final lastAccessed = _formatDate(l10n, p.lastAccessed);
 
     return SparkCard(
       margin: const EdgeInsets.only(bottom: 12),
@@ -290,7 +292,7 @@ class MyProgressScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '${p.completedLessons.length} lição(ões) • Acessado $lastAccessed',
+                      l10n.lessonsAccessed(p.completedLessons.length, lastAccessed),
                       style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
                     ),
                   ],
@@ -303,7 +305,7 @@ class MyProgressScreen extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
-                  isCompleted ? 'CONCLUÍDO' : '$pct%',
+                  isCompleted ? l10n.completedBadge : '$pct%',
                   style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w700),
                 ),
               ),
@@ -326,7 +328,7 @@ class MyProgressScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildEmptyState(BuildContext context) {
+  Widget _buildEmptyState(BuildContext context, AppLocalizations l10n) {
     return Container(
       margin: const EdgeInsets.only(top: 40),
       child: Column(
@@ -343,23 +345,23 @@ class MyProgressScreen extends ConsumerWidget {
             child: const Icon(Icons.trending_up, color: AppColors.textMuted, size: 36),
           ),
           const SizedBox(height: 20),
-          const Text(
-            'Nenhum progresso ainda',
-            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
+          Text(
+            l10n.noProgressYet,
+            style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Complete lições e módulos para acompanhar\nseu progresso aqui.',
+          Text(
+            l10n.noProgressDescription,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.textSecondary, fontSize: 13, height: 1.5),
+            style: const TextStyle(color: AppColors.textSecondary, fontSize: 13, height: 1.5),
           ),
           const SizedBox(height: 28),
           ElevatedButton.icon(
             onPressed: () => context.go('/categories'),
             icon: const Icon(Icons.play_arrow, color: AppColors.background),
-            label: const Text(
-              'COMEÇAR A APRENDER',
-              style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, letterSpacing: 0.8),
+            label: Text(
+              l10n.startLearningButton,
+              style: const TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, letterSpacing: 0.8),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
@@ -382,12 +384,12 @@ class MyProgressScreen extends ConsumerWidget {
         ),
       );
 
-  String _formatDate(DateTime dt) {
+  String _formatDate(AppLocalizations l10n, DateTime dt) {
     final now = DateTime.now();
     final diff = now.difference(dt);
-    if (diff.inDays == 0) return 'hoje';
-    if (diff.inDays == 1) return 'ontem';
-    if (diff.inDays < 7) return 'há ${diff.inDays} dias';
+    if (diff.inDays == 0) return l10n.today;
+    if (diff.inDays == 1) return l10n.yesterday;
+    if (diff.inDays < 7) return l10n.daysAgo(diff.inDays);
     return '${dt.day}/${dt.month}/${dt.year}';
   }
 }

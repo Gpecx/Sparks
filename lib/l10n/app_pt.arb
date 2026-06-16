@@ -663,5 +663,46 @@
         "type": "String"
       }
     }
+  },
+  "myProgressScreenTitle": "MEU PROGRESSO",
+  "inProgressSection": "EM ANDAMENTO",
+  "completedSection": "CONCLUÍDOS",
+  "currentLevelLabel": "Nível atual",
+  "totalLabel": "total",
+  "statModules": "módulos",
+  "statCompleted": "concluídos",
+  "statLessons": "lições",
+  "completedBadge": "CONCLUÍDO",
+  "noProgressYet": "Nenhum progresso ainda",
+  "noProgressDescription": "Complete lições e módulos para acompanhar\nseu progresso aqui.",
+  "startLearningButton": "COMEÇAR A APRENDER",
+  "today": "hoje",
+  "yesterday": "ontem",
+  "daysAgo": "há {days} dias",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "avgProgressLabel": "{percent}% médio",
+  "@avgProgressLabel": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "lessonsAccessed": "{count, plural, =1{1 lição} other{{count} lições}} • Acessado {date}",
+  "@lessonsAccessed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
   }
 }

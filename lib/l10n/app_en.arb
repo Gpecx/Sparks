@@ -412,5 +412,46 @@
         "type": "String"
       }
     }
+  },
+  "myProgressScreenTitle": "MY PROGRESS",
+  "inProgressSection": "IN PROGRESS",
+  "completedSection": "COMPLETED",
+  "currentLevelLabel": "Current level",
+  "totalLabel": "total",
+  "statModules": "modules",
+  "statCompleted": "completed",
+  "statLessons": "lessons",
+  "completedBadge": "COMPLETED",
+  "noProgressYet": "No progress yet",
+  "noProgressDescription": "Complete lessons and modules to track\nyour progress here.",
+  "startLearningButton": "START LEARNING",
+  "today": "today",
+  "yesterday": "yesterday",
+  "daysAgo": "{days} days ago",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "avgProgressLabel": "{percent}% avg",
+  "@avgProgressLabel": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "lessonsAccessed": "{count, plural, =1{1 lesson} other{{count} lessons}} • Accessed {date}",
+  "@lessonsAccessed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
   }
 }
