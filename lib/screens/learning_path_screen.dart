@@ -274,7 +274,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                 child: const Icon(Icons.check_circle_rounded, color: AppColors.accent, size: 36),
                               ),
                               const SizedBox(height: 20),
-                              const Text(
+                              Text(
                                 AppLocalizations.of(context)!.lessonCompletedTitle,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -311,7 +311,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                       ),
                                     ],
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     AppLocalizations.of(context)!.understoodButton,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(

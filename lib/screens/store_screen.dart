@@ -257,7 +257,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                   child: Row(
                     children: [
                       _buildSmartBackButton(),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

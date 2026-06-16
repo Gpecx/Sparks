@@ -217,7 +217,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 },
               ),
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                 child: Text(AppLocalizations.of(context)!.newMechanicsHeader, style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.w700)),
               ),
@@ -296,7 +296,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         if (onSeeAll != null)
           _ResponsiveTapWidget(
             onTap: onSeeAll,
-            child: const Row(
+            child: Row(
               children: [
                 Text(AppLocalizations.of(context)!.seeAllPlural, style: TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.w700)),
                 SizedBox(width: 4),
@@ -465,7 +465,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           builder: (context, child) {
                             final notifs = service.notifications;
                             if (notifs.isEmpty) {
-                              return const Center(
+                              return Center(
                                 child: Text(AppLocalizations.of(context)!.noNotificationsAtMoment, style: TextStyle(color: AppColors.textMuted)),
                               );
                             }
@@ -628,7 +628,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.yourProgressTitle,
                       style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                     ),
@@ -726,7 +726,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         child: const Icon(Icons.timer, color: AppColors.primary, size: 20),
                       ),
                       const SizedBox(width: 12),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -754,7 +754,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       child: const Icon(Icons.timer, color: Colors.grey, size: 20),
                     ),
                     const SizedBox(width: 12),
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -818,7 +818,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             AppLocalizations.of(context)!.continueLearningTitle,
             style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
           ),
@@ -895,7 +895,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           borderRadius: BorderRadius.circular(20),
           side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5)),
         ),
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.timer, color: AppColors.primary),
             SizedBox(width: 10),
@@ -914,7 +914,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(color: AppColors.inputBackground, borderRadius: BorderRadius.circular(12)),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Column(children: [Text(AppLocalizations.of(context)!.rewardXp(50), style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.w700)), Text(AppLocalizations.of(context)!.rewardLabel, style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
@@ -978,7 +978,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   const SizedBox(height: 8),
                   Text(AppLocalizations.of(context)!.noActiveCovenant, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14)),
                   const SizedBox(height: 4),
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       AppLocalizations.of(context)!.goToCovenantsTabToCreate, 
                       textAlign: TextAlign.center, 
@@ -1121,7 +1121,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           return SparkCard(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.auto_awesome_mosaic_outlined, color: AppColors.textMuted, size: 28),
