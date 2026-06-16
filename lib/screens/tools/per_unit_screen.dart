@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
@@ -59,9 +58,9 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
         final v = _parse(_vBase);
         if (s > 0 && v > 0) {
           results.add(_ResultEntry(
-              AppLocalizations.of(context)!.perUnitZBase, impedanceBase(sBaseMva: s, vBaseKv: v), 'Ω'));
+              'Z base', impedanceBase(sBaseMva: s, vBaseKv: v), 'Ω'));
           results.add(_ResultEntry(
-              AppLocalizations.of(context)!.perUnitIBase, currentBase(sBaseMva: s, vBaseKv: v), 'A'));
+              'I base', currentBase(sBaseMva: s, vBaseKv: v), 'A'));
         }
         break;
       case _Tab.impedance:
@@ -69,14 +68,14 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
         final v = _parse(_vBase);
         if (s > 0 && v > 0) {
           results.add(_ResultEntry(
-              AppLocalizations.of(context)!.perUnitZBase, impedanceBase(sBaseMva: s, vBaseKv: v), 'Ω'));
+              'Z base', impedanceBase(sBaseMva: s, vBaseKv: v), 'Ω'));
           results.add(_ResultEntry(
-            AppLocalizations.of(context)!.perUnitZRealToPu,
+            'Z real → pu',
             zPuFromReal(zRealOhm: _parse(_zReal), sBaseMva: s, vBaseKv: v),
             'pu',
           ));
           results.add(_ResultEntry(
-            AppLocalizations.of(context)!.perUnitZPuToReal,
+            'Z pu → real',
             zRealFromPu(zPu: _parse(_zPu), sBaseMva: s, vBaseKv: v),
             'Ω',
           ));
@@ -89,7 +88,7 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
         final vNew = _parse(_vNew);
         if (sOld > 0 && vOld > 0 && sNew > 0 && vNew > 0) {
           results.add(_ResultEntry(
-            AppLocalizations.of(context)!.perUnitZPuNewBase,
+            'Z pu (nova base)',
             changeImpedanceBase(
               zPuOld: _parse(_zPuOld),
               sBaseOldMva: sOld,
@@ -114,7 +113,7 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: Text(AppLocalizations.of(context)!.perUnitTitle),
+            title: const Text('Valor por Unidade (PU)'),
           ),
           body: SafeArea(
             top: false,
@@ -139,11 +138,11 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
                     const SizedBox(height: 20),
                     Semantics(
                       button: true,
-                      label: AppLocalizations.of(context)!.perUnitCalculateBtn,
+                      label: 'Calcular',
                       child: ElevatedButton.icon(
                         onPressed: _calculate,
                         icon: const Icon(Icons.calculate_outlined),
-                        label: Text(AppLocalizations.of(context)!.perUnitCalculateUpper),
+                        label: const Text('CALCULAR'),
                       ),
                     ),
                     if (_results != null) ...[
@@ -162,7 +161,7 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
 
   Widget _buildTabSelector() {
     return Semantics(
-      label: AppLocalizations.of(context)!.perUnitSelectConversion,
+      label: 'Selecionar tipo de conversão',
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.card,
@@ -174,9 +173,9 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
         padding: const EdgeInsets.all(4),
         child: Row(
           children: [
-            _tabItem(AppLocalizations.of(context)!.perUnitTabBases, _Tab.bases),
-            _tabItem(AppLocalizations.of(context)!.perUnitTabImpedance, _Tab.impedance),
-            _tabItem(AppLocalizations.of(context)!.perUnitTabChangeBase, _Tab.changeBase),
+            _tabItem('Bases', _Tab.bases),
+            _tabItem('Impedância', _Tab.impedance),
+            _tabItem('Mudar base', _Tab.changeBase),
           ],
         ),
       ),
@@ -229,18 +228,18 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
 
   Widget _buildBaseInputs() {
     return _InputCard(
-      title: AppLocalizations.of(context)!.perUnitBaseQuantities,
+      title: 'Grandezas de base',
       children: [
         _NumberField(
           controller: _sBase,
-          label: AppLocalizations.of(context)!.perUnitSBaseLabel,
-          semantic: AppLocalizations.of(context)!.perUnitSBaseSemantic,
+          label: 'Potência de base S (MVA)',
+          semantic: 'Potência de base em MVA',
         ),
         const SizedBox(height: 12),
         _NumberField(
           controller: _vBase,
-          label: AppLocalizations.of(context)!.perUnitVBaseLabel,
-          semantic: AppLocalizations.of(context)!.perUnitVBaseSemantic,
+          label: 'Tensão de base V (kV)',
+          semantic: 'Tensão de base em kV',
         ),
       ],
     );
@@ -248,18 +247,18 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
 
   Widget _buildImpedanceInputs() {
     return _InputCard(
-      title: AppLocalizations.of(context)!.perUnitImpedanceConv,
+      title: 'Conversão de impedância',
       children: [
         _NumberField(
           controller: _zReal,
-          label: AppLocalizations.of(context)!.perUnitZRealLabel,
-          semantic: AppLocalizations.of(context)!.perUnitZRealSemantic,
+          label: 'Z real (Ω)',
+          semantic: 'Impedância real em ohms',
         ),
         const SizedBox(height: 12),
         _NumberField(
           controller: _zPu,
-          label: AppLocalizations.of(context)!.perUnitZPuLabel,
-          semantic: AppLocalizations.of(context)!.perUnitZPuSemantic,
+          label: 'Z (pu)',
+          semantic: 'Impedância em por unidade',
         ),
       ],
     );
@@ -267,12 +266,12 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
 
   Widget _buildChangeBaseInputs() {
     return _InputCard(
-      title: AppLocalizations.of(context)!.perUnitChangeBase,
+      title: 'Mudança de base',
       children: [
         _NumberField(
           controller: _zPuOld,
-          label: AppLocalizations.of(context)!.perUnitZPuOldBaseLabel,
-          semantic: AppLocalizations.of(context)!.perUnitZPuOldBaseSemantic,
+          label: 'Z pu (base antiga)',
+          semantic: 'Impedância em pu na base antiga',
         ),
         const SizedBox(height: 12),
         Row(
@@ -280,16 +279,16 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
             Expanded(
               child: _NumberField(
                 controller: _sOld,
-                label: AppLocalizations.of(context)!.perUnitSOldLabel,
-                semantic: AppLocalizations.of(context)!.perUnitSOldSemantic,
+                label: 'S antiga (MVA)',
+                semantic: 'Potência de base antiga',
               ),
             ),
             const SizedBox(width: 10),
             Expanded(
               child: _NumberField(
                 controller: _vOld,
-                label: AppLocalizations.of(context)!.perUnitVOldLabel,
-                semantic: AppLocalizations.of(context)!.perUnitVOldSemantic,
+                label: 'V antiga (kV)',
+                semantic: 'Tensão de base antiga',
               ),
             ),
           ],
@@ -300,16 +299,16 @@ class _PerUnitScreenState extends State<PerUnitScreen> {
             Expanded(
               child: _NumberField(
                 controller: _sNew,
-                label: AppLocalizations.of(context)!.perUnitSNewLabel,
-                semantic: AppLocalizations.of(context)!.perUnitSNewSemantic,
+                label: 'S nova (MVA)',
+                semantic: 'Potência de base nova',
               ),
             ),
             const SizedBox(width: 10),
             Expanded(
               child: _NumberField(
                 controller: _vNew,
-                label: AppLocalizations.of(context)!.perUnitVNewLabel,
-                semantic: AppLocalizations.of(context)!.perUnitVNewSemantic,
+                label: 'V nova (kV)',
+                semantic: 'Tensão de base nova',
               ),
             ),
           ],
@@ -420,8 +419,8 @@ class _ResultsPanel extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           border: Border.all(color: AppColors.warning.withValues(alpha: 0.4)),
         ),
-        child: Text(
-          AppLocalizations.of(context)!.perUnitInvalidInputs,
+        child: const Text(
+          'Verifique os valores de entrada (devem ser maiores que zero).',
           style: TextStyle(color: AppColors.warning, fontSize: 13),
         ),
       );

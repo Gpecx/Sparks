@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/ct_saturation.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -73,13 +72,13 @@ class _CtSaturationScreenState extends State<CtSaturationScreen> {
       _saturates = r.saturates;
       _results = [
         ToolResult('RTC', fmtNumber(r.rtc, decimals: 1)),
-        ToolResult(AppLocalizations.of(context)!.ctSaturationZn, '${fmtNumber(r.ratedBurdenOhm, decimals: 3)} Ω'),
-        ToolResult(AppLocalizations.of(context)!.ctSaturationVk, '${fmtNumber(r.kneeVoltage, decimals: 1)} V'),
-        ToolResult(AppLocalizations.of(context)!.ctSaturationFaultSec, '${fmtNumber(r.secondaryFaultCurrent, decimals: 2)} A'),
-        ToolResult(AppLocalizations.of(context)!.ctSaturationVreq, '${fmtNumber(r.requiredVoltage, decimals: 1)} V'),
-        ToolResult(AppLocalizations.of(context)!.ctSaturationMultiple, '${fmtNumber(r.faultMultiple, decimals: 2)} ×'),
-        ToolResult(AppLocalizations.of(context)!.ctSaturationAlfEff, fmtNumber(r.effectiveAlf, decimals: 2)),
-        ToolResult(AppLocalizations.of(context)!.ctSaturationMargin, fmtNumber(r.margin, decimals: 3)),
+        ToolResult('Carga nominal Zn', '${fmtNumber(r.ratedBurdenOhm, decimals: 3)} Ω'),
+        ToolResult('Tensão de joelho Vk', '${fmtNumber(r.kneeVoltage, decimals: 1)} V'),
+        ToolResult('I secundária de falta', '${fmtNumber(r.secondaryFaultCurrent, decimals: 2)} A'),
+        ToolResult('Tensão exigida V_req', '${fmtNumber(r.requiredVoltage, decimals: 1)} V'),
+        ToolResult('Múltiplo de falta', '${fmtNumber(r.faultMultiple, decimals: 2)} ×'),
+        ToolResult('ALF efetivo', fmtNumber(r.effectiveAlf, decimals: 2)),
+        ToolResult('Margem (Vk/V_req)', fmtNumber(r.margin, decimals: 3)),
       ];
     });
   }
@@ -90,28 +89,28 @@ class _CtSaturationScreenState extends State<CtSaturationScreen> {
       title: 'Saturação de TC',
       children: [
         ToolCard(
-          title: AppLocalizations.of(context)!.ctSaturationCT,
+          title: 'Transformador de corrente (classe P)',
           subtitle:
-              AppLocalizations.of(context)!.ctSaturationDesc,
+              'Zn = Sn/In² · Vk ≈ ALF·In·(Rct+Zn) · V_req = I_sec_falta·(Rct+Zb). Satura se V_req > Vk.',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _ctPrimary, label: AppLocalizations.of(context)!.ctSaturationPriA),
-              ToolField(controller: _ctSecondary, label: AppLocalizations.of(context)!.ctSaturationIn),
+              ToolField(controller: _ctPrimary, label: 'TC primário (A)'),
+              ToolField(controller: _ctSecondary, label: 'TC secundário In (A)'),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
-              ToolField(controller: _rct, label: AppLocalizations.of(context)!.ctSaturationRct),
-              ToolField(controller: _alf, label: AppLocalizations.of(context)!.ctSaturationAlf),
+              ToolField(controller: _rct, label: 'Rct interna (Ω)'),
+              ToolField(controller: _alf, label: 'ALF (ex.: 20)'),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
-              ToolField(controller: _ratedBurden, label: AppLocalizations.of(context)!.ctSaturationSn),
-              ToolField(controller: _connectedBurden, label: AppLocalizations.of(context)!.ctSaturationZb),
+              ToolField(controller: _ratedBurden, label: 'Carga nominal Sn (VA)'),
+              ToolField(controller: _connectedBurden, label: 'Carga conectada Zb (Ω)'),
             ]),
             const SizedBox(height: 12),
             ToolField(
               controller: _faultCurrent,
-              label: AppLocalizations.of(context)!.ctSaturationFaultPri,
+              label: 'Corrente de falta no primário (A)',
             ),
           ],
         ),
@@ -124,7 +123,7 @@ class _CtSaturationScreenState extends State<CtSaturationScreen> {
           ToolResultsPanel(
             results: _results ?? const [],
             warning: _warning,
-            title: AppLocalizations.of(context)!.ctSaturationCheck,
+            title: 'Verificação de saturação',
           ),
         ],
       ],

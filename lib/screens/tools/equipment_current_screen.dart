@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/equipment_current.dart';
 import 'package:spark_app/utils/inrush_bank.dart';
@@ -121,12 +120,12 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
     }
     final inPrim = transformerRatedCurrent(powerKva: s, voltageKv: vp);
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.equipmentPriIn, '${fmtNumber(inPrim, decimals: 2)} A'),
+      ToolResult('In primário', '${fmtNumber(inPrim, decimals: 2)} A'),
     ];
     final vs = _p(_vSec);
     if (vs != null && vs > 0) {
       final inSec = transformerRatedCurrent(powerKva: s, voltageKv: vs);
-      results.add(ToolResult(AppLocalizations.of(context)!.equipmentSecIn, '${fmtNumber(inSec, decimals: 2)} A'));
+      results.add(ToolResult('In secundário', '${fmtNumber(inSec, decimals: 2)} A'));
     }
     final k = _p(_inrush);
     if (k != null && k > 0) {
@@ -158,7 +157,7 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
     final inMotor = motorRatedCurrent(
         powerKw: p, voltageV: v, powerFactor: pf, efficiency: eff);
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.equipmentNomI, '${fmtNumber(inMotor, decimals: 2)} A'),
+      ToolResult('Corrente nominal', '${fmtNumber(inMotor, decimals: 2)} A'),
     ];
     final k = _p(_startFactor);
     if (k != null && k > 0) {
@@ -209,8 +208,8 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
     );
 
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.equipmentBankSum, '${fmtNumber(r.totalRatedCurrent, decimals: 1)} A'),
-      ToolResult(AppLocalizations.of(context)!.equipmentBankPeaks, '${fmtNumber(r.sumOfPeaks, decimals: 0)} A'),
+      ToolResult('Σ In do banco', '${fmtNumber(r.totalRatedCurrent, decimals: 1)} A'),
+      ToolResult('Σ picos de inrush', '${fmtNumber(r.sumOfPeaks, decimals: 0)} A'),
       ToolResult('Inrush coincidente (×${fmtNumber(r.coincidenceFactor, decimals: 2)})',
           '${fmtNumber(r.coincidentInrush, decimals: 0)} A'),
     ];
@@ -244,7 +243,7 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
       title: 'Corrente Nominal',
       children: [
         ToolSegmented(
-          labels: const [AppLocalizations.of(context)!.equipmentTransformer, AppLocalizations.of(context)!.equipmentMotor, 'Inrush banco', 'Inrush real'],
+          labels: const ['Transformador', 'Motor', 'Inrush banco', 'Inrush real'],
           selected: _mode,
           onSelect: (i) => setState(() {
             _mode = i;
@@ -278,37 +277,37 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
 
   Widget _transformerCard() {
     return ToolCard(
-      title: AppLocalizations.of(context)!.equipmentTransformer,
-      subtitle: AppLocalizations.of(context)!.equipmentTransfIn,
+      title: 'Transformador',
+      subtitle: 'In = S / (√3 · V)',
       children: [
-        ToolField(controller: _power, label: AppLocalizations.of(context)!.equipmentPower),
+        ToolField(controller: _power, label: 'Potência S (kVA)'),
         const SizedBox(height: 12),
         ToolFieldRow(children: [
-          ToolField(controller: _vPrim, label: AppLocalizations.of(context)!.equipmentPriV),
-          ToolField(controller: _vSec, label: AppLocalizations.of(context)!.equipmentSecV),
+          ToolField(controller: _vPrim, label: 'V primário (kV)'),
+          ToolField(controller: _vSec, label: 'V secundário (kV)'),
         ]),
         const SizedBox(height: 12),
-        ToolField(controller: _inrush, label: AppLocalizations.of(context)!.equipmentTransfFactor),
+        ToolField(controller: _inrush, label: 'Fator de inrush (×)'),
       ],
     );
   }
 
   Widget _motorCard() {
     return ToolCard(
-      title: AppLocalizations.of(context)!.equipmentMotor,
-      subtitle: AppLocalizations.of(context)!.equipmentMotorDesc,
+      title: 'Motor',
+      subtitle: 'In = P / (√3 · V · FP · η)  ·  use kW (1 CV ≈ 0,7355 kW)',
       children: [
         ToolFieldRow(children: [
-          ToolField(controller: _mPower, label: AppLocalizations.of(context)!.equipmentMotorPower),
-          ToolField(controller: _mVolt, label: AppLocalizations.of(context)!.equipmentVLL),
+          ToolField(controller: _mPower, label: 'Potência (kW)'),
+          ToolField(controller: _mVolt, label: 'Tensão (V)'),
         ]),
         const SizedBox(height: 12),
         ToolFieldRow(children: [
-          ToolField(controller: _mPf, label: AppLocalizations.of(context)!.equipmentMotorPF),
-          ToolField(controller: _mEff, label: AppLocalizations.of(context)!.equipmentMotorEff),
+          ToolField(controller: _mPf, label: 'FP (cosφ)'),
+          ToolField(controller: _mEff, label: 'Rendimento η'),
         ]),
         const SizedBox(height: 12),
-        ToolField(controller: _startFactor, label: AppLocalizations.of(context)!.equipmentMotorFactor),
+        ToolField(controller: _startFactor, label: 'Fator de partida (×)'),
       ],
     );
   }
@@ -332,9 +331,9 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
     );
     final results = <ToolResult>[
       ToolResult('In', '${fmtNumber(est.ratedCurrent, decimals: 1)} A'),
-      ToolResult(AppLocalizations.of(context)!.equipmentPeakK, '${fmtNumber(est.peakFactor, decimals: 1)}× In'),
-      ToolResult(AppLocalizations.of(context)!.equipmentPeak, '${fmtNumber(est.peakCurrent, decimals: 0)} A'),
-      ToolResult(AppLocalizations.of(context)!.equipmentHarmonic, '${fmtNumber(est.secondHarmonicRatio, decimals: 0)} %'),
+      ToolResult('Fator de pico k', '${fmtNumber(est.peakFactor, decimals: 1)}× In'),
+      ToolResult('Pico de inrush', '${fmtNumber(est.peakCurrent, decimals: 0)} A'),
+      ToolResult('2º harmônico estimado', '${fmtNumber(est.secondHarmonicRatio, decimals: 0)} %'),
     ];
 
     String? verdict;
@@ -368,22 +367,22 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
 
   Widget _inrushRealCard() {
     return ToolCard(
-      title: AppLocalizations.of(context)!.equipmentInrushReal,
+      title: 'Inrush real (energização)',
       subtitle:
-          AppLocalizations.of(context)!.equipmentTransfDesc
+          'Estima o pico a partir dos dados do trafo, em vez de chutar o k. '
           'k ≈ (1 + fluxo residual) / (Z%/100), limitado fisicamente.',
       children: [
         ToolFieldRow(children: [
-          ToolField(controller: _irPower, label: AppLocalizations.of(context)!.equipmentPower),
-          ToolField(controller: _irVolt, label: AppLocalizations.of(context)!.equipmentVEnergized),
+          ToolField(controller: _irPower, label: 'Potência S (kVA)'),
+          ToolField(controller: _irVolt, label: 'V energizado (kV)'),
         ]),
         const SizedBox(height: 12),
         ToolFieldRow(children: [
-          ToolField(controller: _irZcc, label: AppLocalizations.of(context)!.equipmentZShort),
-          ToolField(controller: _irResidual, label: AppLocalizations.of(context)!.equipmentFlux),
+          ToolField(controller: _irZcc, label: 'Z curto (%)'),
+          ToolField(controller: _irResidual, label: 'Fluxo residual (0–0,8)'),
         ]),
         const SizedBox(height: 12),
-        ToolField(controller: _irPickup50, label: AppLocalizations.of(context)!.equipmentAdjust50),
+        ToolField(controller: _irPickup50, label: 'Ajuste 50 (A) — opcional'),
       ],
     );
   }
@@ -392,25 +391,25 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
     return Column(
       children: [
         ToolCard(
-          title: AppLocalizations.of(context)!.equipmentTransfBank,
+          title: 'Banco de transformadores',
           subtitle:
-              AppLocalizations.of(context)!.equipmentBankDesc
+              'Energização simultânea no mesmo barramento — soma dos picos de '
               'inrush vista pelo relé de montante.',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _bankVolt, label: AppLocalizations.of(context)!.equipmentBankV),
+              ToolField(controller: _bankVolt, label: 'V barramento (kV)'),
               ToolField(
-                  controller: _coincidence, label: AppLocalizations.of(context)!.equipmentBankCoin),
+                  controller: _coincidence, label: 'Fator coincidência (0–1)'),
             ]),
             const SizedBox(height: 12),
             ToolField(
                 controller: _pickup50,
-                label: AppLocalizations.of(context)!.equipmentAdjust50Up),
+                label: 'Ajuste 50 montante (A) — opcional'),
           ],
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.equipmentTransfList,
+          title: 'Trafos (kVA × fator de inrush)',
           children: [
             for (var i = 0; i < _bankRows.length; i++)
               Padding(
@@ -428,7 +427,7 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
                     Expanded(
                       child: ToolField(
                         controller: _bankRows[i].factor,
-                        label: AppLocalizations.of(context)!.equipmentInrush,
+                        label: 'Inrush (×)',
                       ),
                     ),
                     IconButton(
@@ -447,7 +446,7 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
               child: TextButton.icon(
                 onPressed: _addRow,
                 icon: const Icon(Icons.add_circle_outline, size: 20),
-                label: Text(AppLocalizations.of(context)!.equipmentAddTransf),
+                label: const Text('Adicionar trafo'),
               ),
             ),
           ],

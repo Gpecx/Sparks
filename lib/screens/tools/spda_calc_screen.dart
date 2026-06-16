@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/spda_calc.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -76,7 +75,7 @@ class _SpdaCalcScreenState extends State<SpdaCalcScreen> {
         _infoBox(),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.spdaCalcLevel,
+          title: 'Nível de proteção',
           children: [
             ToolSegmented(
               labels: const ['I', 'II', 'III', 'IV'],
@@ -88,24 +87,24 @@ class _SpdaCalcScreenState extends State<SpdaCalcScreen> {
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.spdaCalcStruct,
-          subtitle: AppLocalizations.of(context)!.spdaCalcPerimDesc,
+          title: 'Estrutura',
+          subtitle: 'Perímetro (para nº de descidas) e altura (ângulo).',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _perimeter, label: AppLocalizations.of(context)!.spdaCalcPerim),
-              ToolField(controller: _height, label: AppLocalizations.of(context)!.spdaCalcH),
+              ToolField(controller: _perimeter, label: 'Perímetro (m)'),
+              ToolField(controller: _height, label: 'Altura (m)'),
             ]),
           ],
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.spdaCalcDist,
-          subtitle: AppLocalizations.of(context)!.spdaCalcSDesc,
+          title: 'Distância de segurança (opcional)',
+          subtitle: 's = ki·(kc/km)·L  ·  km: ar=1, sólido=0,5',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _kc, label: AppLocalizations.of(context)!.spdaCalcKc),
-              ToolField(controller: _km, label: AppLocalizations.of(context)!.spdaCalcKm),
-              ToolField(controller: _length, label: AppLocalizations.of(context)!.spdaCalcL),
+              ToolField(controller: _kc, label: 'kc (divisão)'),
+              ToolField(controller: _km, label: 'km (isolamento)'),
+              ToolField(controller: _length, label: 'L (m)'),
             ]),
           ],
         ),
@@ -125,17 +124,17 @@ class _SpdaCalcScreenState extends State<SpdaCalcScreen> {
 
   Widget _resultsPanel(SpdaGeneralResult g) {
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.spdaCalcSphere, '${fmtNumber(g.rollingSphereRadius, decimals: 0)} m'),
-      ToolResult(AppLocalizations.of(context)!.spdaCalcDownNum, '${g.downConductorCount}'),
-      ToolResult(AppLocalizations.of(context)!.spdaCalcAngle, '${fmtNumber(g.protectionAngle, decimals: 1)}°'),
-      ToolResult(AppLocalizations.of(context)!.spdaCalcRadius, '${fmtNumber(g.protectionRadius, decimals: 2)} m'),
+      ToolResult('Raio da esfera rolante', '${fmtNumber(g.rollingSphereRadius, decimals: 0)} m'),
+      ToolResult('Nº de condutores de descida', '${g.downConductorCount}'),
+      ToolResult('Ângulo de proteção α', '${fmtNumber(g.protectionAngle, decimals: 1)}°'),
+      ToolResult('Raio de proteção no solo', '${fmtNumber(g.protectionRadius, decimals: 2)} m'),
       ToolResult('Corrente de impulso (nível $_level)', '${fmtNumber(g.impulseCurrentKa, decimals: 0)} kA'),
-      ToolResult(AppLocalizations.of(context)!.spdaCalcCaptSec, '${fmtNumber(conductorSectionCopper.airTerminationCopper, decimals: 0)} mm²'),
-      ToolResult(AppLocalizations.of(context)!.spdaCalcDownSec, '${fmtNumber(conductorSectionCopper.downConductorCopper, decimals: 0)} mm²'),
-      ToolResult(AppLocalizations.of(context)!.spdaCalcGndSec, '${fmtNumber(conductorSectionCopper.earthCopper, decimals: 0)} mm²'),
+      ToolResult('Seção mín. captação (Cu)', '${fmtNumber(conductorSectionCopper.airTerminationCopper, decimals: 0)} mm²'),
+      ToolResult('Seção mín. descida (Cu)', '${fmtNumber(conductorSectionCopper.downConductorCopper, decimals: 0)} mm²'),
+      ToolResult('Seção mín. aterramento (Cu)', '${fmtNumber(conductorSectionCopper.earthCopper, decimals: 0)} mm²'),
     ];
     if (_safety != null && !_safety!.isNaN) {
-      results.add(ToolResult(AppLocalizations.of(context)!.spdaCalcSafeDist,
+      results.add(ToolResult('Distância de segurança s',
           '${fmtNumber(_safety!, decimals: 3)} m'));
     }
     return ToolResultsPanel(
@@ -161,7 +160,7 @@ class _SpdaCalcScreenState extends State<SpdaCalcScreen> {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              AppLocalizations.of(context)!.spdaCalcDesc
+              'Cálculos gerais de SPDA (NBR 5419-3): esfera rolante, nº de '
               'descidas, ângulo de proteção, corrente de impulso, seções e '
               'distância de segurança. Triagem — confirme no projeto.',
               style: TextStyle(

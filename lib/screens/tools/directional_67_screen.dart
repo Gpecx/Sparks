@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/directional_67.dart';
 import 'package:spark_app/utils/idmt_curves.dart';
@@ -213,7 +212,7 @@ class _Directional67ScreenState extends State<Directional67Screen> {
         if (_mode == 1) ...[
           const SizedBox(height: 12),
           ToolCard(
-            title: AppLocalizations.of(context)!.dir67PolN,
+            title: 'Polarização do 67N',
             children: [
               ToolSegmented(
                 labels: const ['Por 3V0 (tensão)', 'Por 3I0 (corrente)'],
@@ -225,12 +224,12 @@ class _Directional67ScreenState extends State<Directional67Screen> {
         ],
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.dir67OpMagnitude,
+          title: 'Grandeza de operação',
           subtitle: 'Módulo e ângulo de $_opLabel.',
           children: [
             ToolFieldRow(children: [
               ToolField(controller: _iOpMag, label: '$_opLabel (A)'),
-              ToolField(controller: _iOpAng, label: AppLocalizations.of(context)!.dir67Ang, signed: true),
+              ToolField(controller: _iOpAng, label: 'Âng. (°)', signed: true),
             ]),
           ],
         ),
@@ -243,12 +242,12 @@ class _Directional67ScreenState extends State<Directional67Screen> {
           _polarizationMemorialCard(),
         ] else
           ToolCard(
-            title: AppLocalizations.of(context)!.dir67Polarization,
+            title: 'Grandeza de polarização',
             subtitle: _polLabel,
             children: [
               ToolFieldRow(children: [
-                ToolField(controller: _polMag, label: AppLocalizations.of(context)!.dir67Mod),
-                ToolField(controller: _polAng, label: AppLocalizations.of(context)!.dir67Ang, signed: true),
+                ToolField(controller: _polMag, label: 'Módulo'),
+                ToolField(controller: _polAng, label: 'Âng. (°)', signed: true),
               ]),
             ],
           ),
@@ -276,9 +275,9 @@ class _Directional67ScreenState extends State<Directional67Screen> {
 
   Widget _phaseAndModeCard() {
     return ToolCard(
-      title: AppLocalizations.of(context)!.dir67Phase,
+      title: 'Elemento de fase',
       subtitle:
-          AppLocalizations.of(context)!.dir67PolDesc,
+          'Selecione a fase protegida (define a polarização por quadratura) e o modo de entrada.',
       children: [
         Row(
           children: [
@@ -329,23 +328,23 @@ class _Directional67ScreenState extends State<Directional67Screen> {
 
   Widget _trifasicoVoltagesCard() {
     return ToolCard(
-      title: AppLocalizations.of(context)!.dir67Volt,
+      title: 'Tensões trifásicas',
       subtitle:
-          AppLocalizations.of(context)!.dir67VoltDesc,
+          'Módulo e ângulo de cada tensão de fase. Padrão: sistema balanceado ABC.',
       children: [
         ToolFieldRow(children: [
-          ToolField(controller: _vaMag, label: AppLocalizations.of(context)!.dir67Va),
-          ToolField(controller: _vaAng, label: AppLocalizations.of(context)!.dir67VaAng, signed: true),
+          ToolField(controller: _vaMag, label: 'V_A (V)'),
+          ToolField(controller: _vaAng, label: '∠ V_A (°)', signed: true),
         ]),
         const SizedBox(height: 8),
         ToolFieldRow(children: [
-          ToolField(controller: _vbMag, label: AppLocalizations.of(context)!.dir67Vb),
-          ToolField(controller: _vbAng, label: AppLocalizations.of(context)!.dir67VbAng, signed: true),
+          ToolField(controller: _vbMag, label: 'V_B (V)'),
+          ToolField(controller: _vbAng, label: '∠ V_B (°)', signed: true),
         ]),
         const SizedBox(height: 8),
         ToolFieldRow(children: [
-          ToolField(controller: _vcMag, label: AppLocalizations.of(context)!.dir67Vc),
-          ToolField(controller: _vcAng, label: AppLocalizations.of(context)!.dir67VcAng, signed: true),
+          ToolField(controller: _vcMag, label: 'V_C (V)'),
+          ToolField(controller: _vcAng, label: '∠ V_C (°)', signed: true),
         ]),
       ],
     );
@@ -369,7 +368,8 @@ class _Directional67ScreenState extends State<Directional67Screen> {
               const Icon(Icons.functions,
                   color: AppColors.primary, size: 16),
               const SizedBox(width: 8),
-              Text(AppLocalizations.of(context)!.dir67PolCalc,
+              const Text(
+                'Polarização calculada',
                 style: TextStyle(
                   color: AppColors.primary,
                   fontSize: 12,
@@ -419,8 +419,8 @@ class _Directional67ScreenState extends State<Directional67Screen> {
   Widget _faultTypeCard() {
     final recMta = recommendedMta(faultType: _faultType, isNeutral: _mode == 1);
     return ToolCard(
-      title: AppLocalizations.of(context)!.dir67FaultType,
-      subtitle: AppLocalizations.of(context)!.dir67PolNDesc,
+      title: 'Tipo de falta',
+      subtitle: 'Considere apenas faltas Fase-Fase ou Fase-Neutro. MTA recomendado se ajusta ao tipo.',
       children: [
         ToolSegmented(
           labels: const ['Fase-Neutro (F-N)', 'Fase-Fase (F-F)'],
@@ -445,7 +445,7 @@ class _Directional67ScreenState extends State<Directional67Screen> {
             TextButton.icon(
               onPressed: _applyRecommendedMta,
               icon: const Icon(Icons.tune, size: 16),
-              label: Text(AppLocalizations.of(context)!.dir67Apply),
+              label: const Text('APLICAR'),
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.primary,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -464,8 +464,8 @@ class _Directional67ScreenState extends State<Directional67Screen> {
 
   Widget _directionalCard() {
     return ToolCard(
-      title: AppLocalizations.of(context)!.dir67Adjust,
-      subtitle: AppLocalizations.of(context)!.dir67AdjustDesc,
+      title: 'Ajuste direcional',
+      subtitle: 'MTA = ângulo de máximo torque. Abertura define o setor (±metade do valor).',
       children: [
         ToolSegmented(
           labels: const ['Forward (direta)', 'Reverse (reversa)', 'Não direcional'],
@@ -484,8 +484,8 @@ class _Directional67ScreenState extends State<Directional67Screen> {
         ),
         const SizedBox(height: 12),
         ToolFieldRow(children: [
-          ToolField(controller: _mta, label: AppLocalizations.of(context)!.dir67Mta, signed: true),
-          ToolField(controller: _sector, label: AppLocalizations.of(context)!.dir67Aperture),
+          ToolField(controller: _mta, label: 'MTA / RCA (°)', signed: true),
+          ToolField(controller: _sector, label: 'Abertura (°)'),
         ]),
       ],
     );
@@ -493,8 +493,8 @@ class _Directional67ScreenState extends State<Directional67Screen> {
 
   Widget _characteristicCard() {
     return ToolCard(
-      title: AppLocalizations.of(context)!.dir67TimeChar,
-      subtitle: AppLocalizations.of(context)!.dir67TimeDef,
+      title: 'Característica de tempo',
+      subtitle: 'Definite Time (tempo fixo) ou IDMT (curva inversa).',
       children: [
         ToolSegmented(
           labels: const ['Definite Time', 'IDMT'],
@@ -505,11 +505,11 @@ class _Directional67ScreenState extends State<Directional67Screen> {
         ),
         const SizedBox(height: 12),
         ToolFieldRow(children: [
-          ToolField(controller: _pickup, label: AppLocalizations.of(context)!.dir67Ipickup),
+          ToolField(controller: _pickup, label: 'I pickup (A)'),
           if (_char == CharacteristicType.definiteTime)
-            ToolField(controller: _tdMs, label: AppLocalizations.of(context)!.dir67Tms)
+            ToolField(controller: _tdMs, label: 'Tempo Td (ms)')
           else
-            ToolField(controller: _td, label: AppLocalizations.of(context)!.dir67Td),
+            ToolField(controller: _td, label: 'Time dial Td'),
         ]),
         if (_char == CharacteristicType.idmt) ...[
           const SizedBox(height: 12),
@@ -620,18 +620,18 @@ class _Directional67ScreenState extends State<Directional67Screen> {
 
   Widget _resultsPanel(Directional67Result r) {
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.dir67Theta, '${fmtNumber(r.relativeAngle, decimals: 1)}°'),
-      ToolResult(AppLocalizations.of(context)!.dir67ThetaMta, '${fmtNumber(r.torqueAngle, decimals: 1)}°'),
-      ToolResult(AppLocalizations.of(context)!.dir67MarginAng, '${fmtNumber(r.angularMargin, decimals: 1)}°'),
-      ToolResult(AppLocalizations.of(context)!.dir67InSectorFwd, r.inForwardSector ? 'Sim' : 'Não'),
-      ToolResult(AppLocalizations.of(context)!.dir67InSector, r.inSelectedSector ? 'Sim' : 'Não'),
-      ToolResult(AppLocalizations.of(context)!.dir67AbovePkp, r.abovePickup ? 'Sim' : 'Não'),
+      ToolResult('Ângulo relativo θ (Iop − pol)', '${fmtNumber(r.relativeAngle, decimals: 1)}°'),
+      ToolResult('θ − MTA', '${fmtNumber(r.torqueAngle, decimals: 1)}°'),
+      ToolResult('Margem angular ao limite', '${fmtNumber(r.angularMargin, decimals: 1)}°'),
+      ToolResult('No setor direto?', r.inForwardSector ? 'Sim' : 'Não'),
+      ToolResult('No setor selecionado?', r.inSelectedSector ? 'Sim' : 'Não'),
+      ToolResult('Acima do pickup?', r.abovePickup ? 'Sim' : 'Não'),
       if (r.operatingTimeMs != null)
-        ToolResult(AppLocalizations.of(context)!.dir67TimeAtuate, '${r.operatingTimeMs!.toStringAsFixed(0)} ms'),
+        ToolResult('Tempo de atuação', '${r.operatingTimeMs!.toStringAsFixed(0)} ms'),
     ];
     return ToolResultsPanel(
       results: results,
-      title: AppLocalizations.of(context)!.dir67Eval,
+      title: 'Avaliação direcional',
       note: r.reason,
     );
   }
@@ -653,10 +653,10 @@ class _Directional67ScreenState extends State<Directional67Screen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 4, bottom: 8),
             child: Text(
-              AppLocalizations.of(context)!.dir67Phasor,
+              'Diagrama fasorial e setor de operação',
               style: TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 12,
@@ -729,7 +729,7 @@ class _Directional67ScreenState extends State<Directional67Screen> {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              AppLocalizations.of(context)!.dir67TimeDesc
+              'Elemento direcional 67 (fase) e 67N (neutro). Configure pickup, MTA, '
               'abertura do setor e característica (Definite Time ou IDMT). O diagrama '
               'polar atualiza em tempo real. Triagem — convenções variam por fabricante.',
               style: TextStyle(

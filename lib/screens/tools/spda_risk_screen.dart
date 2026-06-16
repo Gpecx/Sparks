@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/spda_risk.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -65,23 +64,23 @@ class _SpdaRiskScreenState extends State<SpdaRiskScreen> {
         _infoBox(),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.spdaRiskStruct,
-          subtitle: AppLocalizations.of(context)!.spdaRiskAdDesc,
+          title: 'Estrutura',
+          subtitle: 'Área de captação Ad = L·W + 2·3H·(L+W) + π·(3H)².',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _length, label: AppLocalizations.of(context)!.spdaRiskL),
-              ToolField(controller: _width, label: AppLocalizations.of(context)!.spdaRiskW),
+              ToolField(controller: _length, label: 'Comprimento L (m)'),
+              ToolField(controller: _width, label: 'Largura W (m)'),
             ]),
             const SizedBox(height: 12),
-            ToolField(controller: _height, label: AppLocalizations.of(context)!.spdaRiskH),
+            ToolField(controller: _height, label: 'Altura H (m)'),
           ],
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.spdaRiskExp,
-          subtitle: AppLocalizations.of(context)!.spdaRiskNgDesc,
+          title: 'Exposição',
+          subtitle: 'Ng do mapa de densidade de descargas (Inpe/norma).',
           children: [
-            ToolField(controller: _ng, label: AppLocalizations.of(context)!.spdaRiskNg),
+            ToolField(controller: _ng, label: 'Ng (descargas/km²/ano)'),
             const SizedBox(height: 12),
             DropdownButtonFormField<StructureLocation>(
               initialValue: _location,
@@ -97,16 +96,16 @@ class _SpdaRiskScreenState extends State<SpdaRiskScreen> {
               items: const [
                 DropdownMenuItem(
                     value: StructureLocation.surrounded,
-                    child: Text(AppLocalizations.of(context)!.spdaRiskSurrounded)),
+                    child: Text('Cercada por objetos mais altos (0,25)')),
                 DropdownMenuItem(
                     value: StructureLocation.near,
-                    child: Text(AppLocalizations.of(context)!.spdaRiskSameH)),
+                    child: Text('Objetos da mesma altura por perto (0,5)')),
                 DropdownMenuItem(
                     value: StructureLocation.isolated,
-                    child: Text(AppLocalizations.of(context)!.spdaRiskIso)),
+                    child: Text('Isolada (1,0)')),
                 DropdownMenuItem(
                     value: StructureLocation.isolatedHill,
-                    child: Text(AppLocalizations.of(context)!.spdaRiskIsoHill)),
+                    child: Text('Isolada no topo de morro (2,0)')),
               ],
               onChanged: (v) {
                 if (v != null) setState(() => _location = v);
@@ -163,17 +162,17 @@ class _SpdaRiskScreenState extends State<SpdaRiskScreen> {
 
   Widget _resultsPanel(SpdaRiskResult r) {
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.spdaRiskAd, '${fmtNumber(r.collectionAreaAd, decimals: 0)} m²'),
-      ToolResult(AppLocalizations.of(context)!.spdaRiskNd, '${r.dangerousEvents.toStringAsExponential(2)} /ano'),
-      ToolResult(AppLocalizations.of(context)!.spdaRiskNc, '${r.admissibleFrequency.toStringAsExponential(0)} /ano'),
+      ToolResult('Área de captação Ad', '${fmtNumber(r.collectionAreaAd, decimals: 0)} m²'),
+      ToolResult('Eventos perigosos Nd', '${r.dangerousEvents.toStringAsExponential(2)} /ano'),
+      ToolResult('Freq. admissível Nc', '${r.admissibleFrequency.toStringAsExponential(0)} /ano'),
       if (r.spdaLikelyNeeded)
-        ToolResult(AppLocalizations.of(context)!.spdaRiskEff, '${fmtNumber(r.requiredEfficiency * 100, decimals: 1)} %'),
+        ToolResult('Eficiência requerida', '${fmtNumber(r.requiredEfficiency * 100, decimals: 1)} %'),
       if (r.suggestedLevel != null)
-        ToolResult(AppLocalizations.of(context)!.spdaRiskLevel, r.suggestedLevel!),
+        ToolResult('Nível de SPDA provável', r.suggestedLevel!),
     ];
     return ToolResultsPanel(
       results: results,
-      title: AppLocalizations.of(context)!.spdaRiskEval,
+      title: 'Triagem de risco',
       note: 'Triagem simplificada (Nd vs frequência admissível Nc). A NBR 5419-2 exige a '
           'soma das componentes de risco (RA…RZ) com coeficientes P/L — faça o '
           'estudo formal e a ART para o projeto definitivo.',
@@ -196,7 +195,7 @@ class _SpdaRiskScreenState extends State<SpdaRiskScreen> {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              AppLocalizations.of(context)!.spdaRiskDesc
+              'Triagem de necessidade de SPDA (NBR 5419-2). Estima o nº de eventos '
               'perigosos e indica o nível provável. NÃO substitui a análise de '
               'risco completa nem a ART do projeto.',
               style: TextStyle(

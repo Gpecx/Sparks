@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/ons_voltage_base.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -91,7 +90,7 @@ class _OnsVoltageScreenState extends State<OnsVoltageScreen> {
     final naive = _mode == 0 ? (r.puOnsBase * vSecNom) : null;
 
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.onsVoltagePrimResult, '${fmtNumber(r.primaryKv, decimals: 3)} kV'),
+      ToolResult('Tensão primária', '${fmtNumber(r.primaryKv, decimals: 3)} kV'),
       ToolResult('pu na base do TP', fmtNumber(r.puTpBase, decimals: 4)),
       ToolResult('pu na base do ONS', fmtNumber(r.puOnsBase, decimals: 4)),
       ToolResult('Tensão secundária (correta)', '${fmtNumber(r.secondaryVolts, decimals: 2)} V'),

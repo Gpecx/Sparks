@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/utils/power_triangle.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
@@ -84,10 +83,10 @@ class _PowerTriangleScreenState extends State<PowerTriangleScreen> {
     setState(() {
       _warning = null;
       _results = [
-        ToolResult(AppLocalizations.of(context)!.powerTrianglePActive, '${fmtNumber(t.activeKw, decimals: 2)} kW'),
-        ToolResult(AppLocalizations.of(context)!.powerTriangleQReactive, '${fmtNumber(t.reactiveKvar, decimals: 2)} kvar'),
-        ToolResult(AppLocalizations.of(context)!.powerTriangleSApparent, '${fmtNumber(t.apparentKva, decimals: 2)} kVA'),
-        ToolResult(AppLocalizations.of(context)!.powerTrianglePF, fmtNumber(t.powerFactor, decimals: 4)),
+        ToolResult('P (ativa)', '${fmtNumber(t.activeKw, decimals: 2)} kW'),
+        ToolResult('Q (reativa)', '${fmtNumber(t.reactiveKvar, decimals: 2)} kvar'),
+        ToolResult('S (aparente)', '${fmtNumber(t.apparentKva, decimals: 2)} kVA'),
+        ToolResult('FP (cosφ)', fmtNumber(t.powerFactor, decimals: 4)),
       ];
     });
   }
@@ -95,7 +94,7 @@ class _PowerTriangleScreenState extends State<PowerTriangleScreen> {
   @override
   Widget build(BuildContext context) {
     final labelA = _mode == 2 ? 'S (kVA)' : 'P (kW)';
-    final labelB = _mode == 1 ? 'Q (kvar)' : AppLocalizations.of(context)!.powerTrianglePF;
+    final labelB = _mode == 1 ? 'Q (kvar)' : 'FP (cosφ)';
     return ToolPage(
       title: 'Triângulo de Potências',
       children: [
@@ -106,7 +105,7 @@ class _PowerTriangleScreenState extends State<PowerTriangleScreen> {
         ),
         const SizedBox(height: 16),
         ToolCard(
-          title: AppLocalizations.of(context)!.powerTriangleInputs,
+          title: 'Entradas',
           subtitle: 'S = √(P² + Q²) · P = S·cosφ · Q = S·senφ',
           children: [
             ToolFieldRow(children: [

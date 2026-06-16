@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/commissioning.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -64,9 +63,9 @@ class _CommissioningScreenState extends State<CommissioningScreen> {
         _warning = null;
         _pass = r.pass;
         _results = [
-          ToolResult(AppLocalizations.of(context)!.commissioningErr, '${fmtNumber(r.errorPercent, decimals: 3)} %'),
+          ToolResult('Erro', '${fmtNumber(r.errorPercent, decimals: 3)} %'),
           ToolResult('Tolerância', '± ${fmtNumber(tol, decimals: 2)} %'),
-          ToolResult(AppLocalizations.of(context)!.commissioningVerdict, r.pass ? 'APROVADO' : 'REPROVADO'),
+          ToolResult('Veredito', r.pass ? 'APROVADO' : 'REPROVADO'),
         ];
       });
     } else {
@@ -81,13 +80,13 @@ class _CommissioningScreenState extends State<CommissioningScreen> {
         return;
       }
       final results = <ToolResult>[
-        ToolResult(AppLocalizations.of(context)!.commissioningSecI,
+        ToolResult('I de injeção (secundário)',
             '${fmtNumber(secondaryInjectionCurrent(faultPrimary: ifault, rtc: rtc), decimals: 3)} A'),
       ];
       final vp = _p(_vPrim);
       final rtp = _p(_rtp);
       if (vp != null && rtp != null && rtp > 0) {
-        results.add(ToolResult(AppLocalizations.of(context)!.commissioningSecV,
+        results.add(ToolResult('V de injeção (secundário)',
             '${fmtNumber(secondaryInjectionVoltage(primaryVoltage: vp, rtp: rtp), decimals: 2)} V'));
       }
       setState(() {
@@ -104,7 +103,7 @@ class _CommissioningScreenState extends State<CommissioningScreen> {
       title: 'Comissionamento / Ensaios',
       children: [
         ToolSegmented(
-          labels: const ['Tolerância', AppLocalizations.of(context)!.commissioningSecCalc],
+          labels: const ['Tolerância', 'Injeção secundária'],
           selected: _mode,
           onSelect: (i) => setState(() {
             _mode = i;
@@ -116,30 +115,30 @@ class _CommissioningScreenState extends State<CommissioningScreen> {
         const SizedBox(height: 16),
         if (_mode == 0)
           ToolCard(
-            title: AppLocalizations.of(context)!.commissioningTol,
-            subtitle: AppLocalizations.of(context)!.commissioningErrDesc,
+            title: 'Tolerância de ensaio',
+            subtitle: 'erro% = (medido − esperado) / esperado · 100',
             children: [
               ToolFieldRow(children: [
-                ToolField(controller: _measured, label: AppLocalizations.of(context)!.commissioningMeasured),
-                ToolField(controller: _expected, label: AppLocalizations.of(context)!.commissioningExpected),
+                ToolField(controller: _measured, label: 'Medido'),
+                ToolField(controller: _expected, label: 'Esperado'),
               ]),
               const SizedBox(height: 12),
-              ToolField(controller: _tolerance, label: AppLocalizations.of(context)!.commissioningTolPct),
+              ToolField(controller: _tolerance, label: 'Tolerância (± %)'),
             ],
           )
         else
           ToolCard(
-            title: AppLocalizations.of(context)!.commissioningSecCalc,
-            subtitle: AppLocalizations.of(context)!.commissioningDesc,
+            title: 'Injeção secundária',
+            subtitle: 'I_sec = I_falta / RTC   ·   V_sec = V_primária / RTP',
             children: [
               ToolFieldRow(children: [
-                ToolField(controller: _faultPrim, label: AppLocalizations.of(context)!.commissioningPriI),
-                ToolField(controller: _rtc, label: AppLocalizations.of(context)!.commissioningRtc),
+                ToolField(controller: _faultPrim, label: 'I falta primária (A)'),
+                ToolField(controller: _rtc, label: 'RTC'),
               ]),
               const SizedBox(height: 12),
               ToolFieldRow(children: [
-                ToolField(controller: _vPrim, label: AppLocalizations.of(context)!.commissioningPriV),
-                ToolField(controller: _rtp, label: AppLocalizations.of(context)!.commissioningRtp),
+                ToolField(controller: _vPrim, label: 'V primária (V)'),
+                ToolField(controller: _rtp, label: 'RTP'),
               ]),
             ],
           ),

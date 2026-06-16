@@ -66,7 +66,7 @@ const List<SubscriptionPlan> subscriptionPlans = [
   SubscriptionPlan(
     id: 'free',
     name: 'SPARK Free',
-    subtitle: AppLocalizations.of(context)!.storeStartJourney,
+    subtitle: 'Comece sua jornada',
     monthlyPrice: 0,
     targetAudience: 'Curioso / experimentador',
     icon: Icons.explore_outlined,
@@ -81,7 +81,7 @@ const List<SubscriptionPlan> subscriptionPlans = [
   SubscriptionPlan(
     id: 'student',
     name: 'SPARK Student',
-    subtitle: AppLocalizations.of(context)!.storePlanForStudents,
+    subtitle: 'Para quem está estudando',
     monthlyPrice: 19.90,
     annualPrice: 199,
     annualLabel: 'Economia de 17%',
@@ -100,7 +100,7 @@ const List<SubscriptionPlan> subscriptionPlans = [
   SubscriptionPlan(
     id: 'pro',
     name: 'SPARK Pro',
-    subtitle: AppLocalizations.of(context)!.storePlanForIndividuals,
+    subtitle: 'Para profissionais individuais',
     monthlyPrice: 39.90,
     annualPrice: 399,
     annualLabel: 'Economia de 17%',
@@ -121,7 +121,7 @@ const List<SubscriptionPlan> subscriptionPlans = [
   SubscriptionPlan(
     id: 'premium',
     name: 'SPARK Premium',
-    subtitle: AppLocalizations.of(context)!.storePlanForSeniors,
+    subtitle: 'Para sêniores e consultores',
     monthlyPrice: 79.90,
     annualPrice: 799,
     annualLabel: 'Economia de 17%',
@@ -140,7 +140,7 @@ const List<SubscriptionPlan> subscriptionPlans = [
   SubscriptionPlan(
     id: 'business',
     name: 'SPARK Business',
-    subtitle: AppLocalizations.of(context)!.storePlanForBusiness,
+    subtitle: 'Para empresas e consultorias',
     monthlyPrice: 29,
     annualPrice: null,
     annualLabel: 'Faturado anual',

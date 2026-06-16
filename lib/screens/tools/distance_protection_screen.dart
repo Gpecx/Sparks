@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/distance_protection.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -79,15 +78,15 @@ class _DistanceProtectionScreenState extends State<DistanceProtectionScreen> {
 
     if (_mode == 0) {
       final results = <ToolResult>[
-        ToolResult(AppLocalizations.of(context)!.distProtZ1T, '${fmtNumber(r.z1, decimals: 3)} Ω prim'),
-        ToolResult(AppLocalizations.of(context)!.distProtZ2T, '${fmtNumber(r.z2, decimals: 3)} Ω prim'),
-        ToolResult(AppLocalizations.of(context)!.distProtZ3T, '${fmtNumber(r.z3, decimals: 3)} Ω prim'),
+        ToolResult('Zona 1 (~instantâneo)', '${fmtNumber(r.z1, decimals: 3)} Ω prim'),
+        ToolResult('Zona 2 (~0,3–0,4 s)', '${fmtNumber(r.z2, decimals: 3)} Ω prim'),
+        ToolResult('Zona 3 (~0,8–1,0 s)', '${fmtNumber(r.z3, decimals: 3)} Ω prim'),
       ];
       if (r.z1Secondary != null) {
         results.addAll([
-          ToolResult(AppLocalizations.of(context)!.distProtZ1Sec, '${fmtNumber(r.z1Secondary!, decimals: 3)} Ω sec'),
-          ToolResult(AppLocalizations.of(context)!.distProtZ2Sec, '${fmtNumber(r.z2Secondary!, decimals: 3)} Ω sec'),
-          ToolResult(AppLocalizations.of(context)!.distProtZ3Sec, '${fmtNumber(r.z3Secondary!, decimals: 3)} Ω sec'),
+          ToolResult('Zona 1 secundária', '${fmtNumber(r.z1Secondary!, decimals: 3)} Ω sec'),
+          ToolResult('Zona 2 secundária', '${fmtNumber(r.z2Secondary!, decimals: 3)} Ω sec'),
+          ToolResult('Zona 3 secundária', '${fmtNumber(r.z3Secondary!, decimals: 3)} Ω sec'),
         ]);
       }
       setState(() {
@@ -141,51 +140,51 @@ class _DistanceProtectionScreenState extends State<DistanceProtectionScreen> {
         ToolCard(
           title: 'Impedâncias',
           subtitle:
-              AppLocalizations.of(context)!.distProtDesc,
+              'Z1 = z1%·Z_linha · Z2 = Z_linha + f2·Z_adj · Z3 = Z_linha + f3·Z_adj',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _zLine, label: AppLocalizations.of(context)!.distProtZLine),
-              ToolField(controller: _zAdjacent, label: AppLocalizations.of(context)!.distProtZAdj),
+              ToolField(controller: _zLine, label: 'Z linha (Ω)'),
+              ToolField(controller: _zAdjacent, label: 'Z linha adjacente (Ω)'),
             ]),
           ],
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.distProtAdjust,
+          title: 'Ajustes das zonas',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _z1Pct, label: AppLocalizations.of(context)!.distProtZ1),
-              ToolField(controller: _z2Factor, label: AppLocalizations.of(context)!.distProtF2),
-              ToolField(controller: _z3Factor, label: AppLocalizations.of(context)!.distProtF3),
+              ToolField(controller: _z1Pct, label: 'Zona 1 (%)'),
+              ToolField(controller: _z2Factor, label: 'Fator Z2 adj.'),
+              ToolField(controller: _z3Factor, label: 'Fator Z3 adj.'),
             ]),
           ],
         ),
         if (_mode == 0) ...[
           const SizedBox(height: 12),
           ToolCard(
-            title: AppLocalizations.of(context)!.distProtConv,
-            subtitle: AppLocalizations.of(context)!.distProtZsec,
+            title: 'Conversão para secundário (opcional)',
+            subtitle: 'Z_sec = Z_prim · (RTC / RTP)',
             children: [
               ToolFieldRow(children: [
-                ToolField(controller: _rtc, label: AppLocalizations.of(context)!.distProtRtc),
-                ToolField(controller: _rtp, label: AppLocalizations.of(context)!.distProtRtp),
+                ToolField(controller: _rtc, label: 'RTC'),
+                ToolField(controller: _rtp, label: 'RTP'),
               ]),
             ],
           ),
         ] else ...[
           const SizedBox(height: 12),
           ToolCard(
-            title: AppLocalizations.of(context)!.distProtLineFault,
+            title: 'Linha e impedância de falta',
             subtitle:
-                AppLocalizations.of(context)!.distProtRxDesc
+                'Ângulo da linha (RCA) e a impedância vista pelo relé na falta '
                 '(módulo Ω e ângulo).',
             children: [
-              ToolField(controller: _lineAngle, label: AppLocalizations.of(context)!.distProtAngLine),
+              ToolField(controller: _lineAngle, label: 'Ângulo da linha (°)'),
               const SizedBox(height: 12),
               ToolFieldRow(children: [
-                ToolField(controller: _faultMag, label: AppLocalizations.of(context)!.distProtZFault),
+                ToolField(controller: _faultMag, label: '|Z falta| (Ω)'),
                 ToolField(
-                    controller: _faultAng, label: AppLocalizations.of(context)!.distProtAngFault, signed: true),
+                    controller: _faultAng, label: 'Âng. falta (°)', signed: true),
               ]),
             ],
           ),
@@ -200,7 +199,7 @@ class _DistanceProtectionScreenState extends State<DistanceProtectionScreen> {
           const SizedBox(height: 24),
           ToolResultsPanel(
             results: _results!,
-            title: AppLocalizations.of(context)!.distProtReach,
+            title: 'Alcance das zonas',
             note:
                 'Tempos típicos de referência. Ajuste Z1 a 80–85% e garanta Z2 ≥ 120% da linha.',
           ),
@@ -260,10 +259,10 @@ class _DistanceProtectionScreenState extends State<DistanceProtectionScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 4, bottom: 8),
             child: Text(
-              AppLocalizations.of(context)!.distProtRx,
+              'Plano R-X · círculos mho das zonas',
               style: TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 12,

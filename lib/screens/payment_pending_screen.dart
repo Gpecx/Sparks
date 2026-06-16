@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -341,8 +340,8 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
                         color: AppColors.primary, shape: BoxShape.circle),
                   ),
                   const SizedBox(width: 8),
-                  Text(
-                    AppLocalizations.of(context)!.paymentPendingWaiting,
+                  const Text(
+                    'Aguardando pagamento...',
                     style: TextStyle(
                         color: AppColors.primary,
                         fontSize: 13,
@@ -383,7 +382,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
                 color: AppColors.card,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Center(
+              child: const Center(
                 child: CircularProgressIndicator(color: AppColors.primary),
               ),
             ),

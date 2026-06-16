@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/iec61850.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -128,15 +127,15 @@ class _Iec61850ScreenState extends State<Iec61850Screen> {
   List<Widget> _timingTab() {
     return [
       ToolCard(
-        title: AppLocalizations.of(context)!.iec61850GooseRetrans,
-        subtitle: AppLocalizations.of(context)!.iec61850KeepAlive,
+        title: 'GOOSE — retransmissão',
+        subtitle: 'Após o evento dobra de T1 até estabilizar em T0 (keep-alive).',
         children: [
           ToolFieldRow(children: [
-            ToolField(controller: _t1, label: AppLocalizations.of(context)!.iec61850T1),
-            ToolField(controller: _t0, label: AppLocalizations.of(context)!.iec61850T0),
+            ToolField(controller: _t1, label: 'T1 pós-evento (ms)'),
+            ToolField(controller: _t0, label: 'T0 estável (ms)'),
           ]),
           const SizedBox(height: 12),
-          ToolField(controller: _measured, label: AppLocalizations.of(context)!.iec61850TimeEst),
+          ToolField(controller: _measured, label: 'Tempo medido/estimado (ms)'),
           const SizedBox(height: 12),
           DropdownButtonFormField<GooseMessageClass>(
             initialValue: _msgClass,
@@ -161,14 +160,14 @@ class _Iec61850ScreenState extends State<Iec61850Screen> {
       ),
       const SizedBox(height: 12),
       ToolCard(
-        title: AppLocalizations.of(context)!.iec61850SV,
-        subtitle: AppLocalizations.of(context)!.iec61850SvDesc,
+        title: 'Sampled Values',
+        subtitle: 'Amostras por ciclo × frequência → pacotes/s e banda.',
         children: [
           Row(
             children: [
               Expanded(
                 child: _segmentInt(
-                  label: AppLocalizations.of(context)!.iec61850Samples,
+                  label: 'Amostras/ciclo',
                   value: _samplesPerCycle,
                   options: const [80, 256],
                   onSelect: (v) => setState(() => _samplesPerCycle = v),
@@ -177,7 +176,7 @@ class _Iec61850ScreenState extends State<Iec61850Screen> {
               const SizedBox(width: 10),
               Expanded(
                 child: _segmentInt(
-                  label: AppLocalizations.of(context)!.iec61850Freq,
+                  label: 'Frequência',
                   value: _frequency,
                   options: const [50, 60],
                   onSelect: (v) => setState(() => _frequency = v),
@@ -234,12 +233,12 @@ class _Iec61850ScreenState extends State<Iec61850Screen> {
 
   Widget _timingResults() {
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.iec61850GooseSeq, _seq!.join(' → ')),
-      ToolResult(AppLocalizations.of(context)!.iec61850RetransNum, '${_seq!.length}'),
+      ToolResult('Sequência GOOSE (ms)', _seq!.join(' → ')),
+      ToolResult('Nº de retransmissões até T0', '${_seq!.length}'),
       if (_sv != null) ...[
-        ToolResult(AppLocalizations.of(context)!.iec61850SvSamples, '${_sv!.samplesPerSecond}'),
-        ToolResult(AppLocalizations.of(context)!.iec61850SvPackets, '${_sv!.packetsPerSecond}'),
-        ToolResult(AppLocalizations.of(context)!.iec61850SvBand, '${fmtNumber(_sv!.estimatedMbps, decimals: 2)} Mbit/s'),
+        ToolResult('SV — amostras/s', '${_sv!.samplesPerSecond}'),
+        ToolResult('SV — pacotes/s', '${_sv!.packetsPerSecond}'),
+        ToolResult('SV — banda estimada', '${fmtNumber(_sv!.estimatedMbps, decimals: 2)} Mbit/s'),
       ],
     ];
     return ToolResultsPanel(
@@ -254,17 +253,17 @@ class _Iec61850ScreenState extends State<Iec61850Screen> {
   List<Widget> _addressingTab() {
     return [
       ToolCard(
-        title: AppLocalizations.of(context)!.iec61850Address,
+        title: 'Endereçamento multicast',
         subtitle:
-            AppLocalizations.of(context)!.iec61850MacRules
+            'GOOSE: 01-0C-CD-01-xx-xx · SV: 01-0C-CD-04-xx-xx. VLAN 0–4094, '
             'prioridade 0–7.',
         children: [
-          ToolField(controller: _mac, label: AppLocalizations.of(context)!.iec61850MacPrefix),
+          ToolField(controller: _mac, label: 'MAC multicast'),
           const SizedBox(height: 12),
           ToolFieldRow(children: [
-            ToolField(controller: _appid, label: AppLocalizations.of(context)!.iec61850AppidHex),
-            ToolField(controller: _vlan, label: AppLocalizations.of(context)!.iec61850VlanID),
-            ToolField(controller: _priority, label: AppLocalizations.of(context)!.iec61850PriorityLabel),
+            ToolField(controller: _appid, label: 'APPID (hex)'),
+            ToolField(controller: _vlan, label: 'VLAN-ID'),
+            ToolField(controller: _priority, label: 'Prioridade'),
           ]),
         ],
       ),
@@ -289,7 +288,7 @@ class _Iec61850ScreenState extends State<Iec61850Screen> {
     final kindLabel = c.kind == MulticastKind.goose
         ? 'GOOSE'
         : c.kind == MulticastKind.sampledValues
-            ? AppLocalizations.of(context)!.iec61850SV
+            ? 'Sampled Values'
             : 'fora das faixas 61850';
     return Container(
       width: double.infinity,
@@ -321,20 +320,20 @@ class _Iec61850ScreenState extends State<Iec61850Screen> {
   Widget _addrResults(AddressCheck c) {
     String yn(bool b) => b ? 'OK' : 'verificar';
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.iec61850MacMult, yn(c.macValid)),
-      ToolResult(AppLocalizations.of(context)!.iec61850MacType,
+      ToolResult('MAC multicast 61850', yn(c.macValid)),
+      ToolResult('Tipo de MAC',
           c.kind == MulticastKind.goose
               ? 'GOOSE'
               : c.kind == MulticastKind.sampledValues
                   ? 'SV'
                   : 'desconhecido'),
-      ToolResult(AppLocalizations.of(context)!.iec61850Appid, yn(c.appidValid)),
-      ToolResult(AppLocalizations.of(context)!.iec61850Vlan, yn(c.vlanValid)),
-      ToolResult(AppLocalizations.of(context)!.iec61850Priority, yn(c.priorityValid)),
+      ToolResult('APPID (0x0000–0xFFFF)', yn(c.appidValid)),
+      ToolResult('VLAN-ID (0–4094)', yn(c.vlanValid)),
+      ToolResult('Prioridade (0–7)', yn(c.priorityValid)),
     ];
     return ToolResultsPanel(
       results: results,
-      title: AppLocalizations.of(context)!.iec61850Verify,
+      title: 'Verificação de endereçamento',
       note: 'Faixas reservadas da IEC 61850-8-1 (GOOSE) e 9-2 (SV). Um MAC fora '
           'da faixa ou VLAN errada costuma derrubar a subscrição no SCD.',
     );
@@ -377,7 +376,7 @@ class _Iec61850ScreenState extends State<Iec61850Screen> {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              AppLocalizations.of(context)!.iec61850Desc
+              'Triagem de GOOSE/SV no comissionamento IEC 61850: sequência de '
               'retransmissão, taxa de Sampled Values e endereçamento multicast '
               '(MAC/APPID/VLAN). Confirme no analisador de rede.',
               style: TextStyle(

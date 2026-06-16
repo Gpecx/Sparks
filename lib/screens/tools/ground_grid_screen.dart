@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/utils/ground_grid.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
@@ -60,11 +59,11 @@ class _GroundGridScreenState extends State<GroundGridScreen> {
     );
 
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.groundGridTouchTol, '${fmtNumber(r.touchVoltage, decimals: 1)} V'),
-      ToolResult(AppLocalizations.of(context)!.groundGridStepTol, '${fmtNumber(r.stepVoltage, decimals: 1)} V'),
+      ToolResult('Tensão de toque tolerável', '${fmtNumber(r.touchVoltage, decimals: 1)} V'),
+      ToolResult('Tensão de passo tolerável', '${fmtNumber(r.stepVoltage, decimals: 1)} V'),
     ];
     if (ig > 0 && rg > 0) {
-      results.add(ToolResult(AppLocalizations.of(context)!.groundGridGpr, '${fmtNumber(r.gpr, decimals: 1)} V'));
+      results.add(ToolResult('GPR (I_malha · R_malha)', '${fmtNumber(r.gpr, decimals: 1)} V'));
     }
 
     setState(() {
@@ -89,25 +88,25 @@ class _GroundGridScreenState extends State<GroundGridScreen> {
         ),
         const SizedBox(height: 16),
         ToolCard(
-          title: AppLocalizations.of(context)!.groundGridParams,
+          title: 'Parâmetros do solo e da falta',
           subtitle:
               'E_toque = (1000 + 1,5·Cs·ρs)·k · E_passo = (1000 + 6·Cs·ρs)·k · k = ${_body == 1 ? '0,157' : '0,116'}/√ts',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _rho, label: AppLocalizations.of(context)!.groundGridRes),
-              ToolField(controller: _ts, label: AppLocalizations.of(context)!.groundGridTime),
+              ToolField(controller: _rho, label: 'ρs superficial (Ω·m)'),
+              ToolField(controller: _ts, label: 'Tempo de falta ts (s)'),
             ]),
             const SizedBox(height: 12),
-            ToolField(controller: _cs, label: AppLocalizations.of(context)!.groundGridCs),
+            ToolField(controller: _cs, label: 'Cs (camada superficial, 1 se nenhuma)'),
           ],
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.groundGridGprCalc,
+          title: 'Elevação de potencial — GPR (opcional)',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _ig, label: AppLocalizations.of(context)!.groundGridIg),
-              ToolField(controller: _rg, label: AppLocalizations.of(context)!.groundGridRg),
+              ToolField(controller: _ig, label: 'Corrente de malha Ig (A)'),
+              ToolField(controller: _rg, label: 'Resistência de malha Rg (Ω)'),
             ]),
           ],
         ),
@@ -118,7 +117,7 @@ class _GroundGridScreenState extends State<GroundGridScreen> {
           ToolResultsPanel(
             results: _results ?? const [],
             warning: _warning,
-            title: AppLocalizations.of(context)!.groundGridTol,
+            title: 'Tensões toleráveis',
             note:
                 'Limites toleráveis pelo corpo humano (IEEE 80). A verificação completa exige '
                 'as tensões de malha (Em) e de passo (Es) reais, que dependem da geometria.',

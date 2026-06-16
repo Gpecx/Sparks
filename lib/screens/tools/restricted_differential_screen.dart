@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/restricted_differential.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -110,24 +109,24 @@ class _RestrictedDifferentialScreenState
         _infoBox(),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.restDiffCharDesc,
-          subtitle: AppLocalizations.of(context)!.restDiffLimDesc,
+          title: 'Característica (dupla inclinação)',
+          subtitle: 'Limiar = pickup, depois slope1 e slope2 acima dos joelhos.',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _pickup, label: AppLocalizations.of(context)!.restDiffPickup),
-              ToolField(controller: _slope1, label: AppLocalizations.of(context)!.restDiffSlope1),
-              ToolField(controller: _slope2, label: AppLocalizations.of(context)!.restDiffSlope2),
+              ToolField(controller: _pickup, label: 'Pickup (pu)'),
+              ToolField(controller: _slope1, label: 'Slope 1 (0–1)'),
+              ToolField(controller: _slope2, label: 'Slope 2 (0–1)'),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
-              ToolField(controller: _knee1, label: AppLocalizations.of(context)!.restDiffKnee1),
-              ToolField(controller: _knee2, label: AppLocalizations.of(context)!.restDiffKnee2),
+              ToolField(controller: _knee1, label: 'Joelho 1 (pu)'),
+              ToolField(controller: _knee2, label: 'Joelho 2 (pu)'),
             ]),
           ],
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.restDiffConv,
+          title: 'Convenção de restrição',
           children: [
             ToolSegmented(
               labels: const ['Média', 'Máximo', 'Soma'],
@@ -140,19 +139,19 @@ class _RestrictedDifferentialScreenState
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: AppLocalizations.of(context)!.restDiffCur,
+          title: 'Correntes dos enrolamentos',
           subtitle:
-              AppLocalizations.of(context)!.restDiffModAng
+              'Módulo (pu de I_nom) e ângulo (°). Passante: ângulos opostos '
               '(0 / 180). Interna: mesmo sentido.',
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _i1, label: AppLocalizations.of(context)!.restDiffI1),
-              ToolField(controller: _ang1, label: AppLocalizations.of(context)!.restDiffI1Ang, signed: true),
+              ToolField(controller: _i1, label: 'I1 (pu)'),
+              ToolField(controller: _ang1, label: 'Âng. I1 (°)', signed: true),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
-              ToolField(controller: _i2, label: AppLocalizations.of(context)!.restDiffI2),
-              ToolField(controller: _ang2, label: AppLocalizations.of(context)!.restDiffI2Ang, signed: true),
+              ToolField(controller: _i2, label: 'I2 (pu)'),
+              ToolField(controller: _ang2, label: 'Âng. I2 (°)', signed: true),
             ]),
           ],
         ),
@@ -208,14 +207,14 @@ class _RestrictedDifferentialScreenState
 
   Widget _resultsPanel(DifferentialOperatingPoint p) {
     final results = <ToolResult>[
-      ToolResult(AppLocalizations.of(context)!.restDiffIdiff, fmtNumber(p.idiff, decimals: 3)),
-      ToolResult(AppLocalizations.of(context)!.restDiffIrest, fmtNumber(p.irest, decimals: 3)),
-      ToolResult(AppLocalizations.of(context)!.restDiffLimIrest, fmtNumber(p.threshold, decimals: 3)),
-      ToolResult(AppLocalizations.of(context)!.restDiffMargin, fmtNumber(p.margin, decimals: 3)),
+      ToolResult('Idiff (diferencial)', fmtNumber(p.idiff, decimals: 3)),
+      ToolResult('Irest (restrição)', fmtNumber(p.irest, decimals: 3)),
+      ToolResult('Limiar na Irest', fmtNumber(p.threshold, decimals: 3)),
+      ToolResult('Margem (Idiff − limiar)', fmtNumber(p.margin, decimals: 3)),
     ];
     return ToolResultsPanel(
       results: results,
-      title: AppLocalizations.of(context)!.restDiffOp,
+      title: 'Ponto de operação',
       note: 'Idiff = |I1 + I2| (soma fasorial). Em falta passante ideal, '
           'Idiff ≈ 0 mesmo com Irest alta — por isso o relé restringe.',
     );
@@ -232,10 +231,10 @@ class _RestrictedDifferentialScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 4, bottom: 8),
             child: Text(
-              AppLocalizations.of(context)!.restDiffChar,
+              'Característica Idiff × Irest',
               style: TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 12,
@@ -276,7 +275,7 @@ class _RestrictedDifferentialScreenState
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              AppLocalizations.of(context)!.restDiffDesc
+              'Característica de restrição do diferencial (87). Mostra se um ponto '
               '(carga, falta passante ou interna) opera ou restringe. Para o '
               'balanço de TAP entre enrolamentos, use a ferramenta "Balanço '
               'Diferencial (87T)".',

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/idmt_curves.dart';
@@ -47,7 +46,7 @@ class _IdmtCurvePicker extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(14),
               child: Text(
-                AppLocalizations.of(context)!.toolsSelectCurve,
+                'Selecionar curva',
                 style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 16,

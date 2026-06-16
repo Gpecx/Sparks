@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -61,18 +60,18 @@ class _ToolConfig {
   });
 }
 
-String get _catConversoes => AppLocalizations.of(context)!.toolsCategoryConversions;
-String get _catTI => AppLocalizations.of(context)!.toolsCategoryTI;
-String get _catFaltas => AppLocalizations.of(context)!.toolsCategoryFaults;
-String get _catReles => AppLocalizations.of(context)!.toolsCategoryRelays;
-String get _catSistema => AppLocalizations.of(context)!.toolsCategoryPowerSystem;
-String get _catAterramento => AppLocalizations.of(context)!.toolsCategoryGrounding;
-String get _catEquip => AppLocalizations.of(context)!.toolsCategoryEquipment;
-String get _catAutomacao => AppLocalizations.of(context)!.toolsCategoryAutomation;
-String get _catTermografia => AppLocalizations.of(context)!.toolsCategoryThermography;
-String get _catComissionamento => AppLocalizations.of(context)!.toolsCategoryCommissioning;
-const _catQualidade = AppLocalizations.of(context)!.toolsPowerQualityTitle;
-String get _catRedes => AppLocalizations.of(context)!.toolsCategoryNetworks;
+const _catConversoes = 'Conversões & Análise';
+const _catTI = 'Transformadores de Instrumentação';
+const _catFaltas = 'Curto-Circuito & Faltas';
+const _catReles = 'Proteção (Relés)';
+const _catSistema = 'Sistema de Potência';
+const _catAterramento = 'Aterramento & Segurança';
+const _catEquip = 'Equipamentos';
+const _catAutomacao = 'Automação & Instrumentação';
+const _catTermografia = 'Termografia & Manutenção';
+const _catComissionamento = 'Comissionamento & Ensaios';
+const _catQualidade = 'Qualidade de Energia';
+const _catRedes = 'Redes & Comunicação';
 
 class ToolsScreen extends ConsumerStatefulWidget {
   const ToolsScreen({super.key});
@@ -82,11 +81,11 @@ class ToolsScreen extends ConsumerStatefulWidget {
 }
 
 class _ToolsScreenState extends ConsumerState<ToolsScreen> {
-  List<_ToolConfig> get _tools => [
+  final List<_ToolConfig> _tools = [
     _ToolConfig(
       id: 'symmetrical_components',
-      title: AppLocalizations.of(context)!.toolsSymmetricalComponentsTitle,
-      description: AppLocalizations.of(context)!.toolsSymmetricalComponentsDesc,
+      title: 'Componentes Simétricas',
+      description: 'Decompor e sintetizar fasores ABC ↔ sequências 0/1/2',
       category: _catConversoes,
       icon: Icons.change_circle_outlined,
       color: AppColors.primary,
@@ -95,8 +94,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     ),
     _ToolConfig(
       id: 'per_unit',
-      title: AppLocalizations.of(context)!.toolsPerUnitTitle,
-      description: AppLocalizations.of(context)!.toolsPerUnitDesc,
+      title: 'Valor por Unidade (PU)',
+      description: 'Bases, conversão real ↔ pu e mudança de base',
       category: _catConversoes,
       icon: Icons.straighten_outlined,
       color: const Color(0xFF2DD4BF),
@@ -104,8 +103,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const PerUnitScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsPowerTriangleTitle,
-      description: AppLocalizations.of(context)!.toolsPowerTriangleDesc,
+      title: 'Triângulo de Potências',
+      description: 'Converte entre P (kW), Q (kvar), S (kVA) e FP',
       category: _catConversoes,
       icon: Icons.change_history,
       color: const Color(0xFF14B8A6),
@@ -113,8 +112,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const PowerTriangleScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsOnsVoltageTitle,
-      description: AppLocalizations.of(context)!.toolsOnsVoltageDesc,
+      title: 'Tensão pu — Base ONS × TP',
+      description: 'Converte pu do estudo ONS para V no secundário do TP',
       category: _catConversoes,
       icon: Icons.swap_vert,
       color: const Color(0xFF38BDF8),
@@ -123,8 +122,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     ),
     _ToolConfig(
       id: 'rtc_rtp',
-      title: AppLocalizations.of(context)!.toolsRtcRtpTitle,
-      description: AppLocalizations.of(context)!.toolsRtcRtpDesc,
+      title: 'RTC / RTP',
+      description: 'Relação de transformação de TC e TP + conversões',
       category: _catTI,
       icon: Icons.transform,
       color: const Color(0xFF22C55E),
@@ -132,8 +131,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const RtcRtpScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsCtSaturationTitle,
-      description: AppLocalizations.of(context)!.toolsCtSaturationDesc,
+      title: 'Saturação de TC',
+      description: 'Burden, tensão de joelho e verificação de saturação',
       category: _catTI,
       icon: Icons.warning_amber_outlined,
       color: const Color(0xFF16A34A),
@@ -141,8 +140,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const CtSaturationScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsShortCircuitTitle,
-      description: AppLocalizations.of(context)!.toolsShortCircuitDesc,
+      title: 'Curto-Circuito',
+      description: 'Correntes 3φ, bifásica e monofásica-terra (Z1/Z2/Z0)',
       category: _catFaltas,
       icon: Icons.bolt,
       color: const Color(0xFF34D399),
@@ -150,8 +149,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const ShortCircuitScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsIdmtCurvesTitle,
-      description: AppLocalizations.of(context)!.toolsIdmtCurvesDesc,
+      title: 'Curvas de Sobrecorrente (51)',
+      description: 'IDMT: cálculo de 1 curva ou coordenograma (comparar curvas + CTI)',
       category: _catReles,
       icon: Icons.show_chart,
       color: const Color(0xFF84CC16),
@@ -159,8 +158,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const IdmtCurvesScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsDifferentialBalanceTitle,
-      description: AppLocalizations.of(context)!.toolsDifferentialBalanceDesc,
+      title: 'Balanço Diferencial (87T)',
+      description: 'Coeficiente de balanço dos enrolamentos do transformador',
       category: _catReles,
       icon: Icons.balance,
       color: const Color(0xFF4ADE80),
@@ -168,8 +167,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const DifferentialBalanceScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsRestrictedDifferentialTitle,
-      description: AppLocalizations.of(context)!.toolsRestrictedDifferentialDesc,
+      title: '87 — Diferencial c/ Restrição',
+      description: 'Característica Idiff × Irest (dupla inclinação): opera ou restringe',
       category: _catReles,
       icon: Icons.show_chart_outlined,
       color: const Color(0xFF34D399),
@@ -177,8 +176,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const RestrictedDifferentialScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsCoordinationTitle,
-      description: AppLocalizations.of(context)!.toolsCoordinationDesc,
+      title: 'Coordenação / Seletividade',
+      description: 'Margem CTI entre relé principal e de retaguarda (51)',
       category: _catReles,
       icon: Icons.compare_arrows,
       color: const Color(0xFF65A30D),
@@ -186,8 +185,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const CoordinationScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsDistanceProtectionTitle,
-      description: AppLocalizations.of(context)!.toolsDistanceProtectionDesc,
+      title: 'Proteção de Distância (21)',
+      description: 'Zonas Z1/Z2/Z3 + característica mho no plano R-X',
       category: _catReles,
       icon: Icons.social_distance_outlined,
       color: const Color(0xFF15803D),
@@ -195,8 +194,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const DistanceProtectionScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsDirectional67Title,
-      description: AppLocalizations.of(context)!.toolsDirectional67Desc,
+      title: 'Direcional 67 / 67N',
+      description: 'Elemento direcional de fase e neutro (3V0/3I0): direta ou reversa',
       category: _catReles,
       icon: Icons.explore_outlined,
       color: const Color(0xFF22C55E),
@@ -204,8 +203,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const Directional67Screen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsVoltageDropTitle,
-      description: AppLocalizations.of(context)!.toolsVoltageDropDesc,
+      title: 'Queda de Tensão',
+      description: 'ΔV e ΔV% em alimentador trifásico',
       category: _catSistema,
       icon: Icons.trending_down,
       color: const Color(0xFF22D3EE),
@@ -213,8 +212,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const VoltageDropScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsPowerFactorTitle,
-      description: AppLocalizations.of(context)!.toolsPowerFactorDesc,
+      title: 'Correção de Fator de Potência',
+      description: 'Dimensiona o banco de capacitores (kvar)',
       category: _catSistema,
       icon: Icons.offline_bolt_outlined,
       color: const Color(0xFF10B981),
@@ -222,8 +221,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const PowerFactorScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsGroundGridTitle,
-      description: AppLocalizations.of(context)!.toolsGroundGridDesc,
+      title: 'Malha de Aterramento (IEEE 80)',
+      description: 'Tensões de toque e passo toleráveis + GPR',
       category: _catAterramento,
       icon: Icons.safety_check_outlined,
       color: const Color(0xFFCA8A04),
@@ -231,8 +230,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const GroundGridScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsArcFlashTitle,
-      description: AppLocalizations.of(context)!.toolsArcFlashDesc,
+      title: 'Arc Flash (energia incidente)',
+      description: 'Energia incidente e categoria de EPI (IEEE 1584 / Lee)',
       category: _catAterramento,
       icon: Icons.local_fire_department_outlined,
       color: const Color(0xFFF97316),
@@ -240,8 +239,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const ArcFlashScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsSpdaRiskTitle,
-      description: AppLocalizations.of(context)!.toolsSpdaRiskDesc,
+      title: 'SPDA — Análise de Risco',
+      description: 'Triagem de necessidade e nível de SPDA (NBR 5419-2)',
       category: _catAterramento,
       icon: Icons.flash_on_outlined,
       color: const Color(0xFFEAB308),
@@ -249,8 +248,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const SpdaRiskScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsSpdaCalcTitle,
-      description: AppLocalizations.of(context)!.toolsSpdaCalcDesc,
+      title: 'SPDA — Cálculos (5419-3)',
+      description: 'Esfera rolante, descidas, distância de segurança, impulso',
       category: _catAterramento,
       icon: Icons.bolt_outlined,
       color: const Color(0xFFF59E0B),
@@ -258,8 +257,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const SpdaCalcScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsPowerQualityTitle,
-      description: AppLocalizations.of(context)!.toolsPowerQualityDesc,
+      title: 'Qualidade de Energia',
+      description: 'Carregamento de trafo e desequilíbrio (PRODIST Mód. 8)',
       category: _catQualidade,
       icon: Icons.insights_outlined,
       color: const Color(0xFFA855F7),
@@ -267,8 +266,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const PowerQualityScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsNetworkCableTitle,
-      description: AppLocalizations.of(context)!.toolsNetworkCableDesc,
+      title: 'Cabos de Rede (RJ-45)',
+      description: 'Pinagem T568A/B + tabela de categorias de cabo',
       category: _catRedes,
       icon: Icons.lan_outlined,
       color: const Color(0xFF06B6D4),
@@ -276,8 +275,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const NetworkCableScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsIec61850Title,
-      description: AppLocalizations.of(context)!.toolsIec61850Desc,
+      title: 'IEC 61850 — GOOSE / SV',
+      description: 'Timing de retransmissão, taxa de SV e endereçamento MAC/VLAN',
       category: _catRedes,
       icon: Icons.hub_outlined,
       color: const Color(0xFF0EA5E9),
@@ -285,8 +284,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const Iec61850Screen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsModbusRegisterTitle,
-      description: AppLocalizations.of(context)!.toolsModbusRegisterDesc,
+      title: 'Modbus — Registradores',
+      description: 'Junta 2 registradores em float32/int32 (ordem de byte/word)',
       category: _catRedes,
       icon: Icons.memory_outlined,
       color: const Color(0xFF0891B2),
@@ -294,8 +293,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const ModbusRegisterScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsEquipmentCurrentTitle,
-      description: AppLocalizations.of(context)!.toolsEquipmentCurrentDesc,
+      title: 'Corrente Nominal',
+      description: 'In de trafo/motor, partida e inrush de banco (multi-trafo)',
       category: _catEquip,
       icon: Icons.electrical_services,
       color: const Color(0xFF22C55E),
@@ -303,8 +302,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const EquipmentCurrentScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsSignalScalingTitle,
-      description: AppLocalizations.of(context)!.toolsSignalScalingDesc,
+      title: 'Escalonamento 4–20 mA',
+      description: 'Converte sinal de instrumentação ↔ grandeza de engenharia',
       category: _catAutomacao,
       icon: Icons.sensors,
       color: const Color(0xFF06B6D4),
@@ -312,8 +311,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const SignalScalingScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsThermalSeverityTitle,
-      description: AppLocalizations.of(context)!.toolsThermalSeverityDesc,
+      title: 'Severidade Térmica',
+      description: 'Classifica anomalia por ΔT + correção por carga',
       category: _catTermografia,
       icon: Icons.thermostat,
       color: const Color(0xFFF97316),
@@ -321,8 +320,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       builder: (_) => const ThermalSeverityScreen(),
     ),
     _ToolConfig(
-      title: AppLocalizations.of(context)!.toolsCommissioningTitle,
-      description: AppLocalizations.of(context)!.toolsCommissioningDesc,
+      title: 'Comissionamento / Ensaios',
+      description: 'Tolerância de ensaio (pass/fail) e injeção secundária',
       category: _catComissionamento,
       icon: Icons.fact_check_outlined,
       color: const Color(0xFF84CC16),
@@ -368,7 +367,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        AppLocalizations.of(context)!.toolsMainTitle,
+                        'FERRAMENTAS',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22,
@@ -378,7 +377,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        AppLocalizations.of(context)!.toolsMainSubtitle,
+                        'Calculadoras de engenharia para Proteção e Controle',
                         style: TextStyle(
                           color: AppColors.textMuted.withValues(alpha: 0.8),
                           fontSize: 13,

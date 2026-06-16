@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/utils/differential_balance.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
@@ -115,7 +114,7 @@ class _DifferentialBalanceScreenState extends State<DifferentialBalanceScreen> {
       children: [
         ToolCard(
           subtitle:
-              AppLocalizations.of(context)!.diffBalDesc
+              'Calcula o coeficiente de balanço de cada enrolamento (referência = Primário). '
               'I_nom = S/(√3·V); I_sec = I_nom·(TC_sec/TC_prim); Balanço = I_sec(ref)/I_sec.',
           children: const [],
         ),
@@ -127,22 +126,22 @@ class _DifferentialBalanceScreenState extends State<DifferentialBalanceScreen> {
               ToolFieldRow(children: [
                 ToolField(
                     controller: w.power,
-                    label: AppLocalizations.of(context)!.diffBalPower,
+                    label: 'Potência (MVA)',
                     semantic: 'Potência do enrolamento ${w.name}'),
                 ToolField(
                     controller: w.voltage,
-                    label: AppLocalizations.of(context)!.diffBalVolt,
+                    label: 'Tensão (kV)',
                     semantic: 'Tensão do enrolamento ${w.name}'),
               ]),
               const SizedBox(height: 12),
               ToolFieldRow(children: [
                 ToolField(
                     controller: w.ctPrimary,
-                    label: AppLocalizations.of(context)!.diffBalPri,
+                    label: 'TC primário (A)',
                     semantic: 'TC primário ${w.name}'),
                 ToolField(
                     controller: w.ctSecondary,
-                    label: AppLocalizations.of(context)!.diffBalSec,
+                    label: 'TC secundário (A)',
                     semantic: 'TC secundário ${w.name}'),
               ]),
             ],
@@ -156,7 +155,7 @@ class _DifferentialBalanceScreenState extends State<DifferentialBalanceScreen> {
           ToolResultsPanel(
             results: _results ?? const [],
             warning: _warning,
-            title: AppLocalizations.of(context)!.diffBalCoeffs,
+            title: 'Coeficientes de balanço',
           ),
         ],
       ],

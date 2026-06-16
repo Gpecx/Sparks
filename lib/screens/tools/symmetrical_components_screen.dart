@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
@@ -96,7 +95,7 @@ class _SymmetricalComponentsScreenState
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: Text(AppLocalizations.of(context)!.symmetricalTitle),
+            title: const Text('Componentes Simétricas'),
           ),
           body: SafeArea(
             top: false,
@@ -116,11 +115,11 @@ class _SymmetricalComponentsScreenState
                     const SizedBox(height: 20),
                     Semantics(
                       button: true,
-                      label: AppLocalizations.of(context)!.perUnitCalculateBtn,
+                      label: 'Calcular',
                       child: ElevatedButton.icon(
                         onPressed: _calculate,
                         icon: const Icon(Icons.calculate_outlined),
-                        label: Text(AppLocalizations.of(context)!.perUnitCalculateUpper),
+                        label: const Text('CALCULAR'),
                       ),
                     ),
                     if (_results != null) ...[
@@ -151,8 +150,8 @@ class _SymmetricalComponentsScreenState
         padding: const EdgeInsets.all(4),
         child: Row(
           children: [
-            _modeTab('Decompor', AppLocalizations.of(context)!.symmetricalTabPhaseToSeq, _Mode.decompose),
-            _modeTab('Sintetizar', AppLocalizations.of(context)!.symmetricalTabSeqToPhase, _Mode.synthesize),
+            _modeTab('Decompor', 'Fase → Sequência', _Mode.decompose),
+            _modeTab('Sintetizar', 'Sequência → Fase', _Mode.synthesize),
           ],
         ),
       ),
