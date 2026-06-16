@@ -228,7 +228,13 @@ class QuestionModel {
   /// (respostas de outras lacunas) usado para enriquecer o banco de palavras
   /// do minigame preencher lacunas em runtime — garante distratores plausíveis
   /// mesmo quando o campo `options` não foi gravado na importação.
-  Map<String, dynamic> toQuizMap(String moduleName, {Set<String>? blankPool}) {
+  Map<String, dynamic> toQuizMap(
+    String moduleName, {
+    Set<String>? blankPool,
+    String trueFalseLabel = 'Verdadeiro ou Falso?',
+    String dragMultiLabel = 'Arraste os termos para preencher as lacunas:',
+    String dragSingleLabel = 'Arraste o termo para preencher a lacuna:',
+  }) {
     switch (type) {
       case 'multipleChoice':
         return {
@@ -246,13 +252,13 @@ class QuestionModel {
         return {
           'type': 'swipe',
           'module': moduleName,
-          'question': 'Verdadeiro ou Falso?',
+          'question': trueFalseLabel,
           'options': [statement],
           'answer': resolvedAnswer,
           'explanation': explanation,
         };
       case 'fillInTheBlanks':
-        return _fillBlankQuizMap(moduleName, pool: blankPool);
+        return _fillBlankQuizMap(moduleName, pool: blankPool, dragMultiLabel: dragMultiLabel, dragSingleLabel: dragSingleLabel);
       default:
         return {
           'type': 'multiple',
@@ -270,7 +276,12 @@ class QuestionModel {
   /// as respostas vêm de [blanks] (na ordem de `index`) e o banco de palavras
   /// vem de [options] (gerados na importação) e/ou de [pool] (termos reais de
   /// outras lacunas da lição, montados em runtime).
-  Map<String, dynamic> _fillBlankQuizMap(String moduleName, {Set<String>? pool}) {
+  Map<String, dynamic> _fillBlankQuizMap(
+    String moduleName, {
+    Set<String>? pool,
+    String dragMultiLabel = 'Arraste os termos para preencher as lacunas:',
+    String dragSingleLabel = 'Arraste o termo para preencher a lacuna:',
+  }) {
     final text = (textWithBlanks != null && textWithBlanks!.trim().isNotEmpty)
         ? textWithBlanks!
         : statement;
@@ -332,9 +343,7 @@ class QuestionModel {
     return {
       'type': 'sentence_builder',
       'module': moduleName,
-      'question': usedAnswers.length > 1
-          ? 'Arraste os termos para preencher as lacunas:'
-          : 'Arraste o termo para preencher a lacuna:',
+      'question': usedAnswers.length > 1 ? dragMultiLabel : dragSingleLabel,
       'fragments': fragments,
       'options': bank,
       'answer': usedAnswers,

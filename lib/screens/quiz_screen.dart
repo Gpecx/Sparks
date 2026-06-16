@@ -253,9 +253,16 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           }
         }
         // Questões encontradas no Firestore — limpa o mock e usa as reais
+        final l10n = AppLocalizations.of(context)!;
         _questions
           ..clear()
-          ..addAll(firestoreQuestions.items.map((q) => q.toQuizMap(widget.lesson!.title, blankPool: blankPool)));
+          ..addAll(firestoreQuestions.items.map((q) => q.toQuizMap(
+                widget.lesson!.title,
+                blankPool: blankPool,
+                trueFalseLabel: l10n.trueOrFalseQuestion,
+                dragMultiLabel: l10n.dragTermsToFillBlanks,
+                dragSingleLabel: l10n.dragTermToFillBlank,
+              )));
         setState(() {
           _isLoading = false;
           _noQuestionsFound = false;
@@ -429,7 +436,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           _energyCtrl.addXp(100);
           SparkSnack.reward(context, AppLocalizations.of(context)!.epicStreakBonus);
         } else if (bonus > 0 && _currentStreak < 5) {
-          SparkSnack.reward(context, 'Acerto em sequência! +$bonus energia bônus!');
+          SparkSnack.reward(context, AppLocalizations.of(context)!.streakBonusEnergy(bonus));
         }
       } else {
         _currentStreak = 0;
@@ -565,9 +572,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
   }
 
   // Constr\u00f3i a mensagem de sucesso baseada no contexto
-  String _buildSuccessMessage(double score, int xpEarned) {
+  String _buildSuccessMessage(BuildContext context, double score, int xpEarned) {
     final pct = (score * 100).toInt();
-    return 'Parab\u00e9ns! Voc\u00ea alcan\u00e7ou $pct% de acertos e ganhou $xpEarned XP!';
+    return AppLocalizations.of(context)!.successMessage(pct, xpEarned);
   }
 
   // === MODAIS ===
@@ -629,8 +636,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
               const SizedBox(height: 12),
               Text(
                 passed
-                    ? _buildSuccessMessage(score, xpEarned)
-                    : 'Você obteve ${(score * 100).toInt()}%. É necessário no mínimo ${widget.isEvaluation ? '80%' : '70%'} para avançar. Revise o material e tente novamente.',
+                    ? _buildSuccessMessage(context, score, xpEarned)
+                    : AppLocalizations.of(context)!.performanceLow((score * 100).toInt(), widget.isEvaluation ? '80%' : '70%'),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: AppColors.textSecondary, fontSize: 15, height: 1.4),
               ),
@@ -805,7 +812,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
-      barrierLabel: 'Fechar',
+      barrierLabel: AppLocalizations.of(context)!.closeButton,
       barrierColor: Colors.black.withValues(alpha: 0.7),
       transitionDuration: const Duration(milliseconds: 350),
       pageBuilder: (_, __, ___) => const SizedBox.shrink(),

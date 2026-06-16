@@ -1658,5 +1658,284 @@
         "type": "String"
       }
     }
+  },
+  "navHome": "Início",
+  "navCategories": "Categorias",
+  "navStudies": "Estudos",
+  "navTools": "Ferramentas",
+  "navRanking": "Ranking",
+  "navProfile": "Perfil",
+  "navStore": "Loja",
+  "navMenu": "Menu",
+  "moreMenuRankingSubtitle": "Classificação geral",
+  "moreMenuToolsSubtitle": "Calculadoras de engenharia",
+  "moreMenuStoreSubtitle": "Loja de itens",
+  "shellSemanticMain": "Tela principal do SPARK",
+  "shellSemanticSideNav": "Menu de navegação lateral",
+  "shellSemanticBottomNav": "Barra de navegação inferior",
+  "categoriesFabTooltip": "Categorias de aprendizado",
+  "estudosTitle": "ESTUDOS",
+  "estudosSubtitle": "Leia os e-books antes de praticar nas trilhas",
+  "noCategoriesAvailable": "Nenhuma categoria disponível",
+  "categorySemanticLabel": "{title}. Categoria de estudos.",
+  "@categorySemanticLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ebooksReadCount": "{count, plural, =1{1 lido} other{{count} lidos}}",
+  "@ebooksReadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "categoriesTitle": "CATEGORIAS",
+  "categoriesSubtitle": "Escolha uma área para começar a aprender",
+  "categoryComingSoonSnack": "Esta categoria estará disponível em breve!",
+  "comingSoonBadge": "Em breve",
+  "errorLoadingCategories": "Erro ao carregar categorias: {error}",
+  "@errorLoadingCategories": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "moduleCountPlural": "{count, plural, =1{1 módulo} other{{count} módulos}}",
+  "@moduleCountPlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "categoryNotFound": "Categoria não encontrada",
+  "noModulesInCategory": "Nenhum módulo encontrado nesta categoria.",
+  "lockedLabel": "Bloqueado",
+  "modulesAvailablePlural": "{count, plural, =1{1 módulo disponível} other{{count} módulos disponíveis}}",
+  "@modulesAvailablePlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "percentComplete": "{percent}% Concluído",
+  "@percentComplete": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "testDriveCompleteTitle": "Test Drive Concluído! 🚀",
+  "testDriveDescPart1": "Você já usou sua lição gratuita desta trilha.\n\nAssine o ",
+  "testDriveDescPart2": " para desbloquear\ntodas as lições sem limites.",
+  "benefitUnlimitedLessons": "Lições ilimitadas",
+  "benefitUnlimitedEnergy": "Energia ilimitada",
+  "benefitCertificates": "Certificados",
+  "viewProPlansButton": "Ver Planos Pro",
+  "moduleNotFound": "Módulo não encontrado",
+  "loadingTrail": "Carregando trilha...",
+  "errorScreenTitle": "Ops! Ocorreu um problema",
+  "goBackLabel": "Voltar",
+  "errorLoadingModuleWithError": "Erro ao carregar o módulo: {error}",
+  "@errorLoadingModuleWithError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noModulesAvailable": "Nenhum módulo disponível.",
+  "ebooksByModule": "E-books por módulo",
+  "playingSample": "REPRODUZINDO AMOSTRA...",
+  "sampleComplete": "Amostra Concluída",
+  "samplePaywallDescription": "Para continuar assistindo ao vídeo completo e liberar todos os recursos EXS Powerplay, realize o upgrade.",
+  "subscribeNowButton": "ASSINAR AGORA",
+  "timeExpiresIn": "O tempo expira em {time}",
+  "@timeExpiresIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ebookSummaryTitle": "Sumário",
+  "chaptersUppercase": "CAPÍTULOS",
+  "chaptersInPreparation": "Capítulos em elaboração.",
+  "chapterNotFound": "Capítulo não encontrado.",
+  "finishChapterButton": "CONCLUIR CAPÍTULO",
+  "finishEbookButton": "CONCLUIR E-BOOK",
+  "ebookCompleted": "E-book concluído! 🎉",
+  "summaryLabel": "Resumo",
+  "chaptersReadProgress": "{read} de {total} capítulos lidos",
+  "@chaptersReadProgress": {
+    "placeholders": {
+      "read": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterSemanticLabel": "Capítulo {number}: {title}",
+  "@chapterSemanticLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionsCount": "{count, plural, =1{1 seção} other{{count} seções}}",
+  "@sectionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterShort": "Cap. {number}/{total}",
+  "@chapterShort": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterCompleted": "Capítulo {number} concluído",
+  "@chapterCompleted": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "errorLoadingChapter": "Erro ao carregar capítulo: {error}",
+  "@errorLoadingChapter": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "ebookInPreparation": "E-book em elaboração",
+  "completedTagLabel": "Concluído",
+  "minutesShort": "{minutes} min",
+  "@minutesShort": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "chaptersCount": "{count, plural, =1{1 capítulo} other{{count} capítulos}}",
+  "@chaptersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ebookSemanticLabel": "{title}. {minutes} minutos.",
+  "@ebookSemanticLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "trueOrFalseQuestion": "Verdadeiro ou Falso?",
+  "dragTermsToFillBlanks": "Arraste os termos para preencher as lacunas:",
+  "dragTermToFillBlank": "Arraste o termo para preencher a lacuna:",
+  "myProgressScreenTitle": "MEU PROGRESSO",
+  "inProgressSection": "EM ANDAMENTO",
+  "completedSection": "CONCLUÍDOS",
+  "currentLevelLabel": "Nível atual",
+  "totalLabel": "total",
+  "statModules": "módulos",
+  "statCompleted": "concluídos",
+  "statLessons": "lições",
+  "completedBadge": "CONCLUÍDO",
+  "noProgressYet": "Nenhum progresso ainda",
+  "noProgressDescription": "Complete lições e módulos para acompanhar\nseu progresso aqui.",
+  "startLearningButton": "COMEÇAR A APRENDER",
+  "today": "hoje",
+  "yesterday": "ontem",
+  "daysAgo": "há {days} dias",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "avgProgressLabel": "{percent}% médio",
+  "@avgProgressLabel": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "lessonsAccessed": "{count, plural, =1{1 lição} other{{count} lições}} • Acessado {date}",
+  "@lessonsAccessed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "forgotPasswordTitle": "Recuperar Senha",
+  "recoverAccess": "Recuperar Acesso",
+  "recoverAccessSubtitle": "Insira seu e-mail para receber as instruções de redefinição",
+  "resetLinkInfo": "Um link de redefinição será enviado para o seu e-mail cadastrado.",
+  "instructionsSent": "Instruções enviadas para seu e-mail!",
+  "sendInstructionsButton": "ENVIAR INSTRUÇÕES",
+  "backToLogin": "← Voltar para o Login",
+  "profileUpdatedSuccess": "Perfil atualizado com sucesso!",
+  "tapToChangePhoto": "Toque para alterar a foto",
+  "professionLabel": "Profissão",
+  "emailShort": "E-mail",
+  "saveChangesButton": "SALVAR ALTERAÇÕES",
+  "errorUpdating": "Erro ao atualizar: {error}",
+  "@errorUpdating": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "covenantsTitle": "PACTOS SEMANAIS",
+  "covenantsInfo": "Selecione os pactos que deseja cumprir. Resetam toda segunda-feira.",
+  "myWeeklyCovenants": "MEUS PACTOS DA SEMANA",
+  "availableCovenantsTitle": "PACTOS DISPONÍVEIS",
+  "loadingCovenants": "Carregando pactos...",
+  "removeCovenantButton": "REMOVER PACTO",
+  "selectCovenantButton": "SELECIONAR PACTO",
+  "activeCovenantsCount": "{count, plural, =1{1 pacto ativo esta semana} other{{count} pactos ativos esta semana}}",
+  "@activeCovenantsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class VideoPreviewScreen extends StatefulWidget {
   final String title;
@@ -112,9 +113,9 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
         children: [
           const Icon(Icons.play_circle_fill, color: AppColors.primary, size: 64),
           const SizedBox(height: 16),
-          const Text(
-            'REPRODUZINDO AMOSTRA...',
-            style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2),
+          Text(
+            AppLocalizations.of(context)!.playingSample,
+            style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2),
           ),
           const SizedBox(height: 10),
           Container(
@@ -125,7 +126,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
               border: Border.all(color: Colors.redAccent),
             ),
             child: Text(
-              'O tempo expira em $_timeDisplay',
+              AppLocalizations.of(context)!.timeExpiresIn(_timeDisplay),
               style: const TextStyle(color: Colors.redAccent, fontSize: 14, fontWeight: FontWeight.w700),
             ),
           ),
@@ -155,13 +156,13 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
         children: [
           const Icon(Icons.lock, color: AppColors.primary, size: 54),
           const SizedBox(height: 16),
-          const Text(
-            'Amostra Concluída',
-            style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800),
+          Text(
+            AppLocalizations.of(context)!.sampleComplete,
+            style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 12),
           Text(
-            'Para continuar assistindo ao vídeo completo e liberar todos os recursos EXS Powerplay, realize o upgrade.',
+            AppLocalizations.of(context)!.samplePaywallDescription,
             textAlign: TextAlign.center,
             style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
           ),
@@ -178,13 +179,13 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
                 backgroundColor: AppColors.primary,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              child: const Text('ASSINAR AGORA', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14)),
+              child: Text(AppLocalizations.of(context)!.subscribeNowButton, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14)),
             ),
           ),
           const SizedBox(height: 12),
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Fechar', style: TextStyle(color: AppColors.textMuted)),
+            child: Text(AppLocalizations.of(context)!.closeButton, style: const TextStyle(color: AppColors.textMuted)),
           ),
         ],
       ),

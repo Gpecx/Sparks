@@ -5,6 +5,7 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/models/covenant_model.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 /// Displays all covenants: active (selected) and available to pick.
 class CovenantsScreen extends StatefulWidget {
@@ -52,6 +53,7 @@ class _CovenantsScreenState extends State<CovenantsScreen> {
   Widget build(BuildContext context) {
     final active = _service.activeCovenants;
     final available = _service.availableCovenants;
+    final l10n = AppLocalizations.of(context)!;
 
     return SparksBackground(
       child: PcbBackground(
@@ -64,9 +66,9 @@ class _CovenantsScreenState extends State<CovenantsScreen> {
               icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 20),
               onPressed: () => context.pop(),
             ),
-            title: const Text(
-              'PACTOS SEMANAIS',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 15, letterSpacing: 1.5),
+            title: Text(
+              l10n.covenantsTitle,
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 15, letterSpacing: 1.5),
             ),
             centerTitle: true,
           ),
@@ -98,13 +100,13 @@ class _CovenantsScreenState extends State<CovenantsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${active.length} pacto${active.length != 1 ? 's' : ''} ativo${active.length != 1 ? 's' : ''} esta semana',
+                            l10n.activeCovenantsCount(active.length),
                             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14),
                           ),
                           const SizedBox(height: 2),
-                          const Text(
-                            'Selecione os pactos que deseja cumprir. Resetam toda segunda-feira.',
-                            style: TextStyle(color: AppColors.textSecondary, fontSize: 11),
+                          Text(
+                            l10n.covenantsInfo,
+                            style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
                           ),
                         ],
                       ),
@@ -115,7 +117,7 @@ class _CovenantsScreenState extends State<CovenantsScreen> {
 
               // ── Active covenants ───────────────────────────────────
               if (active.isNotEmpty) ...[
-                _sectionTitle('MEUS PACTOS DA SEMANA'),
+                _sectionTitle(l10n.myWeeklyCovenants),
                 ...active.map((cov) => _CovenantCard(
                   covenant: cov,
                   onToggle: () => _toggle(cov),
@@ -126,7 +128,7 @@ class _CovenantsScreenState extends State<CovenantsScreen> {
 
               // ── Available covenants ────────────────────────────────
               if (available.isNotEmpty) ...[
-                _sectionTitle('PACTOS DISPONÍVEIS'),
+                _sectionTitle(l10n.availableCovenantsTitle),
                 ...available.map((cov) => _CovenantCard(
                   covenant: cov,
                   onToggle: () => _toggle(cov),
@@ -135,12 +137,12 @@ class _CovenantsScreenState extends State<CovenantsScreen> {
               ],
 
               if (active.isEmpty && available.isEmpty)
-                const Center(
+                Center(
                   child: Padding(
-                    padding: EdgeInsets.all(32),
+                    padding: const EdgeInsets.all(32),
                     child: Text(
-                      'Carregando pactos...',
-                      style: TextStyle(color: AppColors.textMuted),
+                      l10n.loadingCovenants,
+                      style: const TextStyle(color: AppColors.textMuted),
                     ),
                   ),
                 ),
@@ -319,7 +321,7 @@ class _CovenantCard extends StatelessWidget {
                       child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.primary),
                     )
                   : Text(
-                      cov.isSelected ? 'REMOVER PACTO' : 'SELECIONAR PACTO',
+                      cov.isSelected ? AppLocalizations.of(context)!.removeCovenantButton : AppLocalizations.of(context)!.selectCovenantButton,
                       style: TextStyle(
                         color: cov.isSelected ? AppColors.error : AppColors.primary,
                         fontSize: 12,

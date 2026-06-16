@@ -5,6 +5,7 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -58,11 +59,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       );
 
       if (!mounted) return;
-      SparkSnack.success(context, 'Perfil atualizado com sucesso!');
+      SparkSnack.success(context, AppLocalizations.of(context)!.profileUpdatedSuccess);
       Navigator.pop(context);
     } catch (e) {
       if (!mounted) return;
-      SparkSnack.error(context, 'Erro ao atualizar: $e');
+      SparkSnack.error(context, AppLocalizations.of(context)!.errorUpdating(e.toString()));
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -118,9 +119,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text(
-              'Editar Perfil',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+            title: Text(
+              AppLocalizations.of(context)!.editProfile,
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
             ),
           ),
           body: SingleChildScrollView(
@@ -130,18 +131,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               children: [
                 Center(child: _buildAvatar()),
                 const SizedBox(height: 8),
-                const Center(
+                Center(
                   child: Text(
-                    'Toque para alterar a foto',
-                    style: TextStyle(color: AppColors.textMuted, fontSize: 12),
+                    AppLocalizations.of(context)!.tapToChangePhoto,
+                    style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
                   ),
                 ),
                 const SizedBox(height: 32),
-                _buildFieldGroup('Nome Completo', _nameCtrl, maxLength: 50),
+                _buildFieldGroup(AppLocalizations.of(context)!.fullNameLabel, _nameCtrl, maxLength: 50),
                 const SizedBox(height: 20),
-                _buildFieldGroup('Profissão', _professionCtrl, maxLength: 100),
+                _buildFieldGroup(AppLocalizations.of(context)!.professionLabel, _professionCtrl, maxLength: 100),
                 const SizedBox(height: 20),
-                _buildFieldGroup('E-mail', _emailCtrl, maxLength: 100),
+                _buildFieldGroup(AppLocalizations.of(context)!.emailShort, _emailCtrl, maxLength: 100),
                 const SizedBox(height: 40),
                 SizedBox(
                   width: double.infinity,
@@ -159,9 +160,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             height: 24,
                             child: CircularProgressIndicator(
                                 color: Colors.white, strokeWidth: 3))
-                        : const Text(
-                            'SALVAR ALTERAÇÕES',
-                            style: TextStyle(
+                        : Text(
+                            AppLocalizations.of(context)!.saveChangesButton,
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 14),

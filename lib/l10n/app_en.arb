@@ -1042,5 +1042,284 @@
   "voltageDropDesc": "ΔV = √3 · I · L · (R·cosφ + X·senφ)",
   "voltageDropVal": "Voltage drop ΔV",
   "voltageDropPct": "Percentage drop",
-  "voltageDropLoadV": "Load voltage"
+  "voltageDropLoadV": "Load voltage",
+  "navHome": "Home",
+  "navCategories": "Categories",
+  "navStudies": "Studies",
+  "navTools": "Tools",
+  "navRanking": "Ranking",
+  "navProfile": "Profile",
+  "navStore": "Store",
+  "navMenu": "Menu",
+  "moreMenuRankingSubtitle": "Overall ranking",
+  "moreMenuToolsSubtitle": "Engineering calculators",
+  "moreMenuStoreSubtitle": "Item store",
+  "shellSemanticMain": "SPARK main screen",
+  "shellSemanticSideNav": "Side navigation menu",
+  "shellSemanticBottomNav": "Bottom navigation bar",
+  "categoriesFabTooltip": "Learning categories",
+  "estudosTitle": "STUDIES",
+  "estudosSubtitle": "Read the e-books before practicing in the trails",
+  "noCategoriesAvailable": "No categories available",
+  "categorySemanticLabel": "{title}. Studies category.",
+  "@categorySemanticLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ebooksReadCount": "{count, plural, =1{1 read} other{{count} read}}",
+  "@ebooksReadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "categoriesTitle": "CATEGORIES",
+  "categoriesSubtitle": "Choose an area to start learning",
+  "categoryComingSoonSnack": "This category will be available soon!",
+  "comingSoonBadge": "Coming soon",
+  "errorLoadingCategories": "Error loading categories: {error}",
+  "@errorLoadingCategories": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "moduleCountPlural": "{count, plural, =1{1 module} other{{count} modules}}",
+  "@moduleCountPlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "categoryNotFound": "Category not found",
+  "noModulesInCategory": "No modules found in this category.",
+  "lockedLabel": "Locked",
+  "modulesAvailablePlural": "{count, plural, =1{1 module available} other{{count} modules available}}",
+  "@modulesAvailablePlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "percentComplete": "{percent}% Complete",
+  "@percentComplete": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "testDriveCompleteTitle": "Test Drive Complete! 🚀",
+  "testDriveDescPart1": "You've already used your free lesson on this trail.\n\nSubscribe to ",
+  "testDriveDescPart2": " to unlock\nall lessons without limits.",
+  "benefitUnlimitedLessons": "Unlimited lessons",
+  "benefitUnlimitedEnergy": "Unlimited energy",
+  "benefitCertificates": "Certificates",
+  "viewProPlansButton": "View Pro Plans",
+  "moduleNotFound": "Module not found",
+  "loadingTrail": "Loading trail...",
+  "errorScreenTitle": "Oops! Something went wrong",
+  "goBackLabel": "Back",
+  "errorLoadingModuleWithError": "Error loading module: {error}",
+  "@errorLoadingModuleWithError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noModulesAvailable": "No modules available.",
+  "ebooksByModule": "E-books by module",
+  "playingSample": "PLAYING SAMPLE...",
+  "sampleComplete": "Sample Complete",
+  "samplePaywallDescription": "To keep watching the full video and unlock all EXS Powerplay features, upgrade your plan.",
+  "subscribeNowButton": "SUBSCRIBE NOW",
+  "timeExpiresIn": "Time expires in {time}",
+  "@timeExpiresIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ebookSummaryTitle": "Table of Contents",
+  "chaptersUppercase": "CHAPTERS",
+  "chaptersInPreparation": "Chapters in preparation.",
+  "chapterNotFound": "Chapter not found.",
+  "finishChapterButton": "FINISH CHAPTER",
+  "finishEbookButton": "FINISH E-BOOK",
+  "ebookCompleted": "E-book completed! 🎉",
+  "summaryLabel": "Summary",
+  "chaptersReadProgress": "{read} of {total} chapters read",
+  "@chaptersReadProgress": {
+    "placeholders": {
+      "read": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterSemanticLabel": "Chapter {number}: {title}",
+  "@chapterSemanticLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionsCount": "{count, plural, =1{1 section} other{{count} sections}}",
+  "@sectionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterShort": "Ch. {number}/{total}",
+  "@chapterShort": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterCompleted": "Chapter {number} completed",
+  "@chapterCompleted": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "errorLoadingChapter": "Error loading chapter: {error}",
+  "@errorLoadingChapter": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "ebookInPreparation": "E-book in preparation",
+  "completedTagLabel": "Completed",
+  "minutesShort": "{minutes} min",
+  "@minutesShort": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "chaptersCount": "{count, plural, =1{1 chapter} other{{count} chapters}}",
+  "@chaptersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ebookSemanticLabel": "{title}. {minutes} minutes.",
+  "@ebookSemanticLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "trueOrFalseQuestion": "True or False?",
+  "dragTermsToFillBlanks": "Drag the terms to fill in the blanks:",
+  "dragTermToFillBlank": "Drag the term to fill in the blank:",
+  "myProgressScreenTitle": "MY PROGRESS",
+  "inProgressSection": "IN PROGRESS",
+  "completedSection": "COMPLETED",
+  "currentLevelLabel": "Current level",
+  "totalLabel": "total",
+  "statModules": "modules",
+  "statCompleted": "completed",
+  "statLessons": "lessons",
+  "completedBadge": "COMPLETED",
+  "noProgressYet": "No progress yet",
+  "noProgressDescription": "Complete lessons and modules to track\nyour progress here.",
+  "startLearningButton": "START LEARNING",
+  "today": "today",
+  "yesterday": "yesterday",
+  "daysAgo": "{days} days ago",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "avgProgressLabel": "{percent}% avg",
+  "@avgProgressLabel": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "lessonsAccessed": "{count, plural, =1{1 lesson} other{{count} lessons}} • Accessed {date}",
+  "@lessonsAccessed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "forgotPasswordTitle": "Reset Password",
+  "recoverAccess": "Recover Access",
+  "recoverAccessSubtitle": "Enter your email to receive the reset instructions",
+  "resetLinkInfo": "A reset link will be sent to your registered email.",
+  "instructionsSent": "Instructions sent to your email!",
+  "sendInstructionsButton": "SEND INSTRUCTIONS",
+  "backToLogin": "← Back to Login",
+  "profileUpdatedSuccess": "Profile updated successfully!",
+  "tapToChangePhoto": "Tap to change photo",
+  "professionLabel": "Profession",
+  "emailShort": "Email",
+  "saveChangesButton": "SAVE CHANGES",
+  "errorUpdating": "Error updating: {error}",
+  "@errorUpdating": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "covenantsTitle": "WEEKLY PACTS",
+  "covenantsInfo": "Select the pacts you want to fulfill. They reset every Monday.",
+  "myWeeklyCovenants": "MY PACTS OF THE WEEK",
+  "availableCovenantsTitle": "AVAILABLE PACTS",
+  "loadingCovenants": "Loading pacts...",
+  "removeCovenantButton": "REMOVE PACT",
+  "selectCovenantButton": "SELECT PACT",
+  "activeCovenantsCount": "{count, plural, =1{1 active pact this week} other{{count} active pacts this week}}",
+  "@activeCovenantsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

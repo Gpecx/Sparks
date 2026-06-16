@@ -9,6 +9,7 @@ import 'package:spark_app/widgets/spark_skeleton.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/ebook_list_screen.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 const List<Map<String, dynamic>> _categoryThemes = [
   {'color': AppColors.primary, 'gradientEnd': Color(0xFF007A01), 'icon': Icons.bolt},
@@ -24,6 +25,7 @@ class EstudosScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final categoriesAsync = ref.watch(categoriesStreamProvider);
     final progressList = ref.watch(ebookProgressStreamProvider).asData?.value ?? [];
 
@@ -40,9 +42,9 @@ class EstudosScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'ESTUDOS',
-                        style: TextStyle(
+                      Text(
+                        l10n.estudosTitle,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.w800,
@@ -51,7 +53,7 @@ class EstudosScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Leia os e-books antes de praticar nas trilhas',
+                        l10n.estudosSubtitle,
                         style: TextStyle(
                           color: AppColors.textMuted.withValues(alpha: 0.8),
                           fontSize: 13,
@@ -65,10 +67,10 @@ class EstudosScreen extends ConsumerWidget {
                   child: categoriesAsync.when(
                     data: (categories) {
                       if (categories.isEmpty) {
-                        return const Center(
+                        return Center(
                           child: Text(
-                            'Nenhuma categoria disponível',
-                            style: TextStyle(color: Colors.white54),
+                            l10n.noCategoriesAvailable,
+                            style: const TextStyle(color: Colors.white54),
                           ),
                         );
                       }
@@ -118,7 +120,7 @@ class EstudosScreen extends ConsumerWidget {
                       ),
                     ),
                     error: (e, _) => Center(
-                      child: Text('Erro: $e',
+                      child: Text(l10n.genericErrorPrefix(e.toString()),
                           style: const TextStyle(color: AppColors.error)),
                     ),
                   ),
@@ -151,9 +153,10 @@ class _CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Semantics(
       button: true,
-      label: '${category.title}. Categoria de estudos.',
+      label: l10n.categorySemanticLabel(category.title),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
@@ -231,7 +234,7 @@ class _CategoryCard extends StatelessWidget {
                         ),
                         if (ebooksDone > 0) ...[
                           const SizedBox(height: 8),
-                          _chip('$ebooksDone lido${ebooksDone > 1 ? 's' : ''}', color),
+                          _chip(l10n.ebooksReadCount(ebooksDone), color),
                         ],
                       ],
                     ),
