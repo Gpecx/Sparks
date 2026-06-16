@@ -223,7 +223,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
       showGeneralDialog(
         context: context,
         barrierDismissible: true,
-        barrierLabel: 'Fechar',
+        barrierLabel: AppLocalizations.of(context)!.closeButton,
         barrierColor: Colors.black.withValues(alpha: 0.7),
         transitionDuration: const Duration(milliseconds: 350),
         pageBuilder: (_, __, ___) => const SizedBox.shrink(),
@@ -394,7 +394,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
-      barrierLabel: 'Fechar',
+      barrierLabel: AppLocalizations.of(context)!.closeButton,
       barrierColor: Colors.black.withValues(alpha: 0.7),
       transitionDuration: const Duration(milliseconds: 350),
       pageBuilder: (_, _, _) => const SizedBox.shrink(),
@@ -526,7 +526,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                           Text(AppLocalizations.of(context)!.currentModuleTitle, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
                                           const SizedBox(height: 2),
                                           Text(
-                                            'Em Progresso · $completedLessons de $totalLessons etapas',
+                                            AppLocalizations.of(context)!.inProgressModuleSteps(completedLessons, totalLessons),
                                             style: const TextStyle(color: AppColors.textMuted, fontSize: 11),
                                           ),
                                         ],
@@ -571,7 +571,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                 Expanded(
                   child: lessonsAsync.when(
                     loading: () => const Center(child: CircularProgressIndicator()),
-                    error: (e, s) => Center(child: Text('Erro: $e', style: const TextStyle(color: Colors.red))),
+                    error: (e, s) => Center(child: Text(AppLocalizations.of(context)!.genericErrorPrefix(e.toString()), style: const TextStyle(color: Colors.red))),
                     data: (lessons) {
                       if (lessons.isEmpty) {
                         return Center(child: Text(AppLocalizations.of(context)!.noLessonsFoundForModule, style: TextStyle(color: Colors.white54)));
@@ -1184,10 +1184,10 @@ class _ProUpgradeDialogState extends State<_ProUpgradeDialog>
                   const SizedBox(height: 20),
 
                   // ── Título ──────────────────────────────────────
-                  const Text(
-                    'Test Drive Concluído! 🚀',
+                  Text(
+                    AppLocalizations.of(context)!.testDriveCompleteTitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
@@ -1200,17 +1200,17 @@ class _ProUpgradeDialogState extends State<_ProUpgradeDialog>
                   // ── Descrição ───────────────────────────────────
                   RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
-                      style: TextStyle(
+                    text: TextSpan(
+                      style: const TextStyle(
                         color: Color(0xFFB0BEC5),
                         fontSize: 14,
                         height: 1.5,
                       ),
                       children: [
                         TextSpan(
-                          text: 'Você já usou sua lição gratuita desta trilha.\n\nAssine o ',
+                          text: AppLocalizations.of(context)!.testDriveDescPart1,
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text: 'Spark Pro',
                           style: TextStyle(
                             color: AppColors.gold,
@@ -1218,7 +1218,7 @@ class _ProUpgradeDialogState extends State<_ProUpgradeDialog>
                           ),
                         ),
                         TextSpan(
-                          text: ' para desbloquear\ntodas as lições sem limites.',
+                          text: AppLocalizations.of(context)!.testDriveDescPart2,
                         ),
                       ],
                     ),
@@ -1232,9 +1232,9 @@ class _ProUpgradeDialogState extends State<_ProUpgradeDialog>
                     runSpacing: 6,
                     alignment: WrapAlignment.center,
                     children: [
-                      _benefitChip(Icons.all_inclusive, 'Lições ilimitadas'),
-                      _benefitChip(Icons.bolt, 'Energia ilimitada'),
-                      _benefitChip(Icons.emoji_events, 'Certificados'),
+                      _benefitChip(Icons.all_inclusive, AppLocalizations.of(context)!.benefitUnlimitedLessons),
+                      _benefitChip(Icons.bolt, AppLocalizations.of(context)!.benefitUnlimitedEnergy),
+                      _benefitChip(Icons.emoji_events, AppLocalizations.of(context)!.benefitCertificates),
                     ],
                   ),
 
@@ -1263,14 +1263,14 @@ class _ProUpgradeDialogState extends State<_ProUpgradeDialog>
                             ),
                           ],
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.workspace_premium_rounded, color: Colors.black87, size: 20),
-                            SizedBox(width: 8),
+                            const Icon(Icons.workspace_premium_rounded, color: Colors.black87, size: 20),
+                            const SizedBox(width: 8),
                             Text(
-                              'Ver Planos Pro',
-                              style: TextStyle(
+                              AppLocalizations.of(context)!.viewProPlansButton,
+                              style: const TextStyle(
                                 color: Colors.black87,
                                 fontWeight: FontWeight.w800,
                                 fontSize: 15,
@@ -1287,11 +1287,11 @@ class _ProUpgradeDialogState extends State<_ProUpgradeDialog>
                   // ── Botão secundário ────────────────────────────
                   GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
                       child: Text(
-                        'Agora não',
-                        style: TextStyle(
+                        AppLocalizations.of(context)!.notNowButton,
+                        style: const TextStyle(
                           color: Color(0xFF78909C),
                           fontSize: 13,
                           fontWeight: FontWeight.w600,

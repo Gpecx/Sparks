@@ -645,6 +645,13 @@
       }
     }
   },
+  "testDriveCompleteTitle": "Test Drive Concluído! 🚀",
+  "testDriveDescPart1": "Você já usou sua lição gratuita desta trilha.\n\nAssine o ",
+  "testDriveDescPart2": " para desbloquear\ntodas as lições sem limites.",
+  "benefitUnlimitedLessons": "Lições ilimitadas",
+  "benefitUnlimitedEnergy": "Energia ilimitada",
+  "benefitCertificates": "Certificados",
+  "viewProPlansButton": "Ver Planos Pro",
   "moduleNotFound": "Módulo não encontrado",
   "loadingTrail": "Carregando trilha...",
   "errorScreenTitle": "Ops! Ocorreu um problema",

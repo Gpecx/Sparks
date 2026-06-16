@@ -394,6 +394,13 @@
       }
     }
   },
+  "testDriveCompleteTitle": "Test Drive Complete! 🚀",
+  "testDriveDescPart1": "You've already used your free lesson on this trail.\n\nSubscribe to ",
+  "testDriveDescPart2": " to unlock\nall lessons without limits.",
+  "benefitUnlimitedLessons": "Unlimited lessons",
+  "benefitUnlimitedEnergy": "Unlimited energy",
+  "benefitCertificates": "Certificates",
+  "viewProPlansButton": "View Pro Plans",
   "moduleNotFound": "Module not found",
   "loadingTrail": "Loading trail...",
   "errorScreenTitle": "Oops! Something went wrong",
