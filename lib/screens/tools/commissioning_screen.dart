@@ -104,7 +104,7 @@ class _CommissioningScreenState extends State<CommissioningScreen> {
       title: 'Comissionamento / Ensaios',
       children: [
         ToolSegmented(
-          labels: ['Tolerância', AppLocalizations.of(context)!.commissioningSecCalc],
+          labels: [AppLocalizations.of(context)!.commissioningTolerance, AppLocalizations.of(context)!.commissioningSecCalc],
           selected: _mode,
           onSelect: (i) => setState(() {
             _mode = i;

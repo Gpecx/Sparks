@@ -244,7 +244,7 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
       title: 'Corrente Nominal',
       children: [
         ToolSegmented(
-          labels: [AppLocalizations.of(context)!.equipmentTransformer, AppLocalizations.of(context)!.equipmentMotor, 'Inrush banco', 'Inrush real'],
+          labels: [AppLocalizations.of(context)!.equipmentTransformer, AppLocalizations.of(context)!.equipmentMotor, AppLocalizations.of(context)!.equipmentBankInrush, AppLocalizations.of(context)!.equipmentRealInrush],
           selected: _mode,
           onSelect: (i) => setState(() {
             _mode = i;

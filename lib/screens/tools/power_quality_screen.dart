@@ -146,7 +146,7 @@ class _PowerQualityScreenState extends State<PowerQualityScreen> {
       title: 'Qualidade de Energia',
       children: [
         ToolSegmented(
-          labels: [AppLocalizations.of(context)!.powerQualityLoadPct, 'Desequilíbrio'],
+          labels: [AppLocalizations.of(context)!.powerQualityLoadPct, AppLocalizations.of(context)!.powerQualityImbalance],
           selected: _tab,
           onSelect: (i) => setState(() {
             _tab = i;
