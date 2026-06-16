@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/models/ebook_model.dart';
+import 'package:spark_app/providers/language_provider.dart';
 
 final _firestoreProvider = Provider(
   (ref) => FirebaseFirestore.instanceFor(
@@ -25,7 +26,10 @@ final ebooksStreamProvider =
       .doc(args.moduleId)
       .collection(FS.ebooks)
       .snapshots()
-      .map((snap) => snap.docs.map((d) => EbookModel.fromFirestore(d)).toList());
+      .map((snap) {
+        final lang = ref.read(languageProvider).languageCode;
+        return snap.docs.map((d) => EbookModel.fromFirestore(d, lang: lang)).toList();
+      });
 });
 
 // ── Capítulos de um e-book (carregados sob demanda) ──────────────
@@ -44,8 +48,9 @@ final ebookChaptersStreamProvider =
       .collection(FS.chapters)
       .snapshots()
       .map((snap) {
+        final lang = ref.read(languageProvider).languageCode;
         final list =
-            snap.docs.map((d) => EbookChapter.fromFirestore(d)).toList();
+            snap.docs.map((d) => EbookChapter.fromFirestore(d, lang: lang)).toList();
         list.sort((a, b) => a.order.compareTo(b.order));
         return list;
       });
@@ -73,7 +78,8 @@ final ebookChapterProvider =
       .doc(args.chapterId)
       .get();
   if (!doc.exists) return null;
-  return EbookChapter.fromFirestore(doc);
+  final lang = ref.read(languageProvider).languageCode;
+  return EbookChapter.fromFirestore(doc, lang: lang);
 });
 
 // ── Progresso de leitura do usuário ─────────────────────────────

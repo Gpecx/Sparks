@@ -14,6 +14,9 @@ import 'package:spark_app/services/offline_sync_service.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/firebase_options.dart';
 import 'package:spark_app/providers/colorblind_provider.dart';
+import 'package:spark_app/providers/language_provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -114,12 +117,16 @@ class SparkApp extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child) {
         final colorblindMode = ref.watch(colorblindProvider);
+        final locale = ref.watch(languageProvider);
 
         return ColorFiltered(
           colorFilter: _getColorFilter(colorblindMode),
           child: MaterialApp.router(
             title: 'SPARK',
             debugShowCheckedModeBanner: false,
+            locale: locale,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             theme: AppTheme.darkTheme,
             routerConfig: AppRouter.router,
             builder: (context, child) {

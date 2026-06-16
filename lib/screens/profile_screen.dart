@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -77,7 +78,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     if (user == null || !user.isAdmin) {
       if (_avatarTapCount >= _triggerTaps) {
         _avatarTapCount = 0;
-        SparkSnack.error(context, 'Acesso Negado: Apenas administradores podem ativar o Modo Dev.');
+        SparkSnack.error(context, AppLocalizations.of(context)!.accessDeniedAdminOnly);
       }
       return;
     }
@@ -102,7 +103,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         content: Row(children: [
           Icon(isActive ? Icons.bug_report_outlined : Icons.bug_report, color: isActive ? Colors.grey : Colors.amber, size: 20),
           const SizedBox(width: 8),
-          Text(isActive ? '🔒 Modo Dev DESATIVADO' : '🔓 Modo Dev ATIVADO — Painel Admin Liberado!',
+          Text(isActive ? AppLocalizations.of(context)!.devModeDisabled : AppLocalizations.of(context)!.devModeEnabled,
               style: const TextStyle(color: Colors.white, fontSize: 13)),
         ]),
         duration: const Duration(seconds: 3),
@@ -138,7 +139,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     child: Row(
                       children: [
                         const Expanded(
-                          child: Text('MEU PERFIL',
+                          child: Text(AppLocalizations.of(context)!.myProfile,
                               style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 2)),
                         ),
                         MouseRegion(
@@ -228,7 +229,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       children: [
                         Flexible(
                           child: Text(
-                            (user?.role ?? 'TÉCNICO').toUpperCase(),
+                            (user?.role ?? AppLocalizations.of(context)!.technicianRole).toUpperCase(),
                             style: TextStyle(
                                 color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 2.5),
                             maxLines: 1,
@@ -259,7 +260,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           children: [
                             Icon(Icons.badge, color: Colors.white, size: 16),
                             SizedBox(width: 8),
-                            Text('VER CREDENCIAL',
+                            Text(AppLocalizations.of(context)!.viewCredential,
                                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 12, letterSpacing: 1)),
                           ],
                         ),
@@ -274,13 +275,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     child: Row(
                       children: [
                         // ✅ Dias ativos reais
-                        Expanded(child: _statCard('Dias Ativos', '${userService.activeDays}', 'dias', Icons.calendar_today_outlined)),
+                        Expanded(child: _statCard(AppLocalizations.of(context)!.activeDays, '${userService.activeDays}', AppLocalizations.of(context)!.daysLabel, Icons.calendar_today_outlined)),
                         const SizedBox(width: 12),
                         // ✅ Streak atual
-                        Expanded(child: _statCard('Streak', '${userService.currentStreak}', 'dias 🔥', Icons.local_fire_department)),
+                        Expanded(child: _statCard(AppLocalizations.of(context)!.streakLabel, '${userService.currentStreak}', AppLocalizations.of(context)!.streakDaysFire, Icons.local_fire_department)),
                         const SizedBox(width: 12),
                         // ✅ XP real
-                        Expanded(child: _statCard('Experiência', '${userService.xp}', 'XP', Icons.star_border)),
+                        Expanded(child: _statCard(AppLocalizations.of(context)!.experienceLabel, '${userService.xp}', AppLocalizations.of(context)!.xpLabel, Icons.star_border)),
                       ],
                     ),
                   ),
@@ -300,7 +301,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('DEBUG INFO (MODO DEV)', style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.w700)),
+                            const Text(AppLocalizations.of(context)!.debugInfoTitle, style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
                             Text('UID: ${userService.uid}', style: const TextStyle(color: Colors.white70, fontSize: 10, fontFamily: 'monospace')),
                             Text('Role Firestore: ${user?.role ?? "Nula"}', style: const TextStyle(color: Colors.white70, fontSize: 10)),
@@ -327,7 +328,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               onPressed: () => context.push('/admin'),
                               icon: const Icon(Icons.admin_panel_settings, color: Colors.white, size: 20),
                               label: const Text(
-                                'PAINEL ADMINISTRATIVO',
+                                AppLocalizations.of(context)!.adminPanel,
                                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13, letterSpacing: 1),
                               ),
                               style: ElevatedButton.styleFrom(
@@ -351,14 +352,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('CONQUISTAS',
+                        const Text(AppLocalizations.of(context)!.achievementsTitle,
                             style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
                         MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
                             onTap: () =>
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen())),
-                            child: const Text('Ver Tudo ↗',
+                            child: const Text(AppLocalizations.of(context)!.seeAll,
                                 style: TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w700)),
                           ),
                         ),
@@ -394,7 +395,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('RANKING SEMANAL',
+                        const Text(AppLocalizations.of(context)!.weeklyRankingTitle,
                             style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
                         const SizedBox(height: 12),
                         Container(
@@ -426,13 +427,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('Placar Global',
+                                    const Text(AppLocalizations.of(context)!.globalLeaderboard,
                                         style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700)),
                                     const SizedBox(height: 4),
                                     Text(
                                       _rankingPosition > 0
                                           ? 'Você está em $_rankingPositionº lugar esta semana'
-                                          : 'Complete lições para entrar no ranking',
+                                          : AppLocalizations.of(context)!.completeLessonsToEnterRanking,
                                       style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
                                     ),
                                   ],
@@ -478,13 +479,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               Icon(Icons.emoji_events_outlined, color: AppColors.textMuted, size: 28),
               SizedBox(height: 8),
               Text(
-                'Você não tem conquistas no momento.',
+                AppLocalizations.of(context)!.noAchievementsYet,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700),
               ),
               SizedBox(height: 4),
               Text(
-                'Bora aprender e desbloquear recompensas!',
+                AppLocalizations.of(context)!.letsLearnAndUnlockRewards,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
               ),
@@ -587,7 +588,7 @@ class _ClanSection extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('CLÃ',
+          const Text(AppLocalizations.of(context)!.clanTitle,
               style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
           const SizedBox(height: 12),
           Container(
@@ -610,12 +611,12 @@ class _ClanSection extends StatelessWidget {
                 const Icon(Icons.shield_moon, size: 40, color: AppColors.primary),
                 const SizedBox(height: 12),
                 const Text(
-                  'Faça parte de um Clã!',
+                  AppLocalizations.of(context)!.joinAClan,
                   style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 6),
                 const Text(
-                  'Junte-se a outros alunos, compita em equipe e ganhe recompensas exclusivas.',
+                  AppLocalizations.of(context)!.clanDescription,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
                 ),
@@ -633,7 +634,7 @@ class _ClanSection extends StatelessWidget {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             elevation: 0,
                           ),
-                          child: const Text('CRIAR CLÃ',
+                          child: const Text(AppLocalizations.of(context)!.createClanUpper,
                               style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13)),
                         ),
                       ),
@@ -649,7 +650,7 @@ class _ClanSection extends StatelessWidget {
                             side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5), width: 1.5),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
-                          child: const Text('ENTRAR',
+                          child: const Text(AppLocalizations.of(context)!.enterUpper,
                               style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 13)),
                         ),
                       ),
@@ -666,7 +667,7 @@ class _ClanSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('MEU CLÃ',
+        const Text(AppLocalizations.of(context)!.myClanTitle,
             style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
         const SizedBox(height: 12),
         Container(
@@ -696,12 +697,12 @@ class _ClanSection extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // ✅ Nome do clã real do Firestore
-                        Text(clanName ?? 'Meu Clã',
+                        Text(clanName ?? AppLocalizations.of(context)!.myClanFallback,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800)),
                         const SizedBox(height: 4),
-                        Text('Membro', style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                        Text(AppLocalizations.of(context)!.clanMemberRole, style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
                       ],
                     ),
                   ),
@@ -716,7 +717,7 @@ class _ClanSection extends StatelessWidget {
                     MaterialPageRoute(builder: (_) => const ClanScreen(isViewingActive: true)),
                   ),
                   icon: const Icon(Icons.groups, size: 18, color: Colors.white),
-                  label: const Text('VISUALIZAR CLÃ',
+                  label: const Text(AppLocalizations.of(context)!.viewClanUpper,
                       style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1, color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,

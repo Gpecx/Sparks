@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -207,7 +208,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
     // ── Verificação de unlock sequencial (removido para navegação livre) ─
     if (!_isNodeUnlocked(index, completedLessons) && !isTestMode) {
       _glitchKey.currentState?.triggerGlitch();
-      SparkSnack.error(context, 'Módulo bloqueado! Conclua as etapas anteriores primeiro.');
+      SparkSnack.error(context, AppLocalizations.of(context)!.moduleLockedPreviousSteps);
       return;
     }
 
@@ -274,7 +275,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                               ),
                               const SizedBox(height: 20),
                               const Text(
-                                'Lição Concluída!',
+                                AppLocalizations.of(context)!.lessonCompletedTitle,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Colors.white,
@@ -285,7 +286,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                               ),
                               const SizedBox(height: 12),
                               Text(
-                                'Você já completou esta lição. Para manter o desafio, refazê-la não está disponível no momento.',
+                                AppLocalizations.of(context)!.lessonCompletedWarning,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: AppColors.textSecondary,
@@ -311,7 +312,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                     ],
                                   ),
                                   child: const Text(
-                                    'ENTENDIDO',
+                                    AppLocalizations.of(context)!.understoodButton,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: AppColors.surfaceAlt,
@@ -416,7 +417,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
   @override
   Widget build(BuildContext context) {
     if (widget.category == null || widget.module == null) {
-      return const Scaffold(body: Center(child: Text('Erro: Categoria ou Módulo ausente')));
+      return const Scaffold(body: Center(child: Text(AppLocalizations.of(context)!.errorCategoryOrModuleMissing)));
     }
 
     // Obter progresso
@@ -522,7 +523,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          const Text('Módulo Atual', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+                                          const Text(AppLocalizations.of(context)!.currentModuleTitle, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
                                           const SizedBox(height: 2),
                                           Text(
                                             'Em Progresso · $completedLessons de $totalLessons etapas',
@@ -573,7 +574,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                     error: (e, s) => Center(child: Text('Erro: $e', style: const TextStyle(color: Colors.red))),
                     data: (lessons) {
                       if (lessons.isEmpty) {
-                        return const Center(child: Text('Nenhuma lição encontrada para este módulo', style: TextStyle(color: Colors.white54)));
+                        return const Center(child: Text(AppLocalizations.of(context)!.noLessonsFoundForModule, style: TextStyle(color: Colors.white54)));
                       }
 
                       return LayoutBuilder(

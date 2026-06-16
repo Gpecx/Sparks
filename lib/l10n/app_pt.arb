@@ -1,0 +1,506 @@
+{
+  "@@locale": "pt",
+  "languageName": "Português",
+  "@languageName": {
+    "description": "Nome do idioma"
+  },
+  "settingsTitle": "CONFIGURAÇÕES",
+  "accountAndProfile": "CONTA E PERFIL",
+  "editProfile": "Editar Perfil",
+  "editProfileDesc": "Nome, e-mail, cargo",
+  "myAchievements": "Ver Minhas Conquistas",
+  "myAchievementsDesc": "Página de troféus e insígnias",
+  "myProgress": "Meu Progresso",
+  "myProgressDesc": "Acompanhar progresso nos módulos",
+  "changePassword": "Alterar Senha",
+  "changePasswordDesc": "Segurança da conta",
+  "managePlan": "Gerir Plano",
+  "managePlanDesc": "Premium, planos ativos",
+  "deleteAccount": "Eliminar Conta",
+  "deleteAccountDesc": "Apagar permanentemente",
+  "accessibility": "ACESSIBILIDADE",
+  "textSize": "Tamanho do Texto",
+  "textSizeDesc": "Ajuste o tamanho da fonte em todo o app",
+  "colorblindMode": "Modo Daltônico",
+  "colorblindModeDesc": "Ajuste as cores para diferentes tipos de daltonismo",
+  "language": "Idioma",
+  "languageDesc": "Selecione o idioma da interface e dos conteúdos",
+  "admin": "ADMINISTRAÇÃO",
+  "adminPanel": "Painel Admin",
+  "adminPanelDesc": "Gerenciar categorias, módulos e lições",
+  "logout": "SAIR DA CONTA",
+  "createClanTitle": "CRIAR CLÃ",
+  "joinClanTitle": "ENTRAR EM UM CLÃ",
+  "editClanNamePassword": "Editar Nome/Senha",
+  "deleteClan": "Deletar Clã",
+  "createClanDescription": "Crie um grupo para sua empresa e compete contra seus colegas!",
+  "clanNameLabel": "Nome do Clã",
+  "clanNameHint": "Ex: EXS Técnicos SP",
+  "clanNameValidator": "Nome deve ter mais que 3 caracteres",
+  "clanDescriptionLabel": "Descrição do Clã",
+  "clanDescriptionHint": "Sobre o clã...",
+  "clanPasswordLabel": "Senha do Clã",
+  "clanPasswordHint": "Mínimo 4 caracteres",
+  "clanPasswordValidator": "Senha deve ter pelo menos 4 caracteres",
+  "createClanAdminNotice": "Como criador, você terá o cargo de ADMIN e poderá gerenciar todos os membros.",
+  "createClanButton": "CRIAR GRUPO/CLÃ",
+  "joinClanDescription": "Entre com código de convite ou com a senha do clã.",
+  "inviteCodeOptionalLabel": "Código de Convite (opcional)",
+  "inviteCodeHint": "Ex: SPARK-XK29",
+  "clanPasswordJoinHint": "Digite a senha do grupo",
+  "joinPasswordValidator": "Informe a senha ou o código",
+  "joinClanButton": "ENTRAR NO GRUPO",
+  "clanNotFound": "Clã não encontrado.",
+  "clanMembersCount": "{count, plural, =0{Nenhum membro} =1{1 membro} other{{count} membros}}",
+  "@clanMembersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "maxLevel": "MÁXIMO",
+  "currentLeague": "Liga Atual",
+  "globalRank": "Rank Global",
+  "membersListTitle": "MEMBROS",
+  "clanChatTitle": "CHAT DO CLÃ",
+  "chatSilent": "O chat está silencioso...",
+  "beFirstToInteract": "Seja o primeiro a interagir!",
+  "typeAMessage": "Digite uma mensagem...",
+  "clanMascot": "Ícone do Clã",
+  "weeklyQuestsTitle": "MISSÕES DA SEMANA",
+  "noActiveQuests": "Nenhuma missão ativa.",
+  "joinRequestsTitle": "PEDIDOS DE ENTRADA",
+  "noPendingRequests": "Nenhum pedido pendente por enquanto.",
+  "unknownMember": "Membro Desconhecido",
+  "acceptJoinRequestSuccess": "Pedido aceito!",
+  "rejectJoinRequestSuccess": "Pedido recusado!",
+  "clanCreatedSuccess": "Clã criado com sucesso!",
+  "errorCreatingClan": "Erro ao criar: ",
+  "joinRequestSent": "Pedido de entrada enviado! Aguarde aprovação.",
+  "joinedClanSuccess": "Você entrou no clã!",
+  "errorJoiningClan": "Erro ao entrar: ",
+  "editClanTitle": "Editar Clã",
+  "newClanNameHint": "Novo nome do clã",
+  "mainColorLabel": "COR PRINCIPAL",
+  "clanIconLabel": "ÍCONE DO CLÃ",
+  "cancelButton": "Cancelar",
+  "saveButton": "SALVAR",
+  "clanUpdatedSuccess": "Clã atualizado com sucesso!",
+  "errorUpdatingClan": "Erro ao atualizar clã: ",
+  "deleteClanDialogTitle": "Deletar Clã?",
+  "deleteClanWarning": "Esta ação é permanente! Todos os membros serão removidos.",
+  "deleteClanButton": "DELETAR",
+  "clanDeletedSuccess": "Clã deletado com sucesso!",
+  "errorDeletingClan": "Erro ao deletar: ",
+  "clanLeaguesTitle": "Ligas do Clã",
+  "closeButton": "Fechar",
+  "inviteToClanTitle": "Convidar para o Clã",
+  "shareCodeSubtitle": "Compartilhe o código abaixo",
+  "inviteCodeInfo": "Qualquer pessoa com este código pode entrar no seu clã.",
+  "codeCopied": "Código copiado!",
+  "tapToCopy": "Toque no código para copiar",
+  "copyCodeButton": "Copiar Código",
+  "copiedButton": "Copiado!",
+  "moduleLockedPreviousSteps": "Módulo bloqueado! Conclua as etapas anteriores primeiro.",
+  "lessonCompletedTitle": "Lição Concluída!",
+  "lessonCompletedWarning": "Você já completou esta lição. Para manter o desafio, refazê-la não está disponível no momento.",
+  "understoodButton": "ENTENDIDO",
+  "errorCategoryOrModuleMissing": "Erro: Categoria ou Módulo ausente",
+  "currentModuleTitle": "Módulo Atual",
+  "inProgressModuleSteps": "Em Progresso · {completed} de {total} etapas",
+  "noLessonsFoundForModule": "Nenhuma lição encontrada para este módulo",
+  "errorPrefix": "Erro: ",
+  "membersOnlineHere": "{count, plural, =0{Nenhum membro online} =1{1 membro online aqui} other{{count} membros online aqui}}",
+  "unlockFullPotentialPremium": "Desbloqueie o potencial completo com o Spark Premium.",
+  "viewPlansButton": "CONHECER PLANOS",
+  "proUpgradeTitle": "Conteúdo Premium",
+  "proUpgradeDescription": "Este conteúdo é exclusivo para assinantes Premium.",
+  "cancel": "Cancelar",
+  "subscribe": "Assinar",
+  "@inProgressModuleSteps": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "@membersOnlineHere": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "epicStreakBonus": "STREAK ÉPICO! +100 XP Bônus!",
+  "streakBonusEnergy": "Acerto em sequência! +{bonus} energia bônus!",
+  "successMessage": "Parabéns! Você alcançou {pct}% de acertos e ganhou {xpEarned} XP!",
+  "evaluationPassed": "Avaliação Aprovada!",
+  "lessonCompleted": "Lição concluída!",
+  "insufficientPerformance": "Desempenho Insuficiente",
+  "performanceLow": "Você obteve {score}%. É necessário no mínimo {required} para avançar. Revise o material e tente novamente.",
+  "continueButton": "CONTINUAR",
+  "redoButton": "REFAZER",
+  "exitButton": "Sair",
+  "batteryDepleted": "Bateria Esgotada!",
+  "batteryDepletedDescription": "Você gastou toda a sua energia. Aguarde a recarga automática (5 min por unidade) ou assine um plano para ter bateria infinita ∞.",
+  "viewPlansInfiniteBattery": "VER PLANOS COM BATERIA ∞",
+  "exitQuiz": "Sair do Quiz",
+  "skipButton": "Pular ✕",
+  "powerplayTitle": "POWERPLAY",
+  "congratsModule": "Parabens pelo modulo!",
+  "tryPremiumVideosFree": "Continue aprendendo com vídeos técnicos exclusivos. Experimente grátis por 7 dias!",
+  "tryFree7Days": "TESTE GRÁTIS POR 7 DIAS",
+  "areYouSure": "Tem certeza?",
+  "loseProgressWarning": "Você vai perder todo seu progresso na lição se sair.",
+  "cancelUpper": "CANCELAR",
+  "exitUpper": "SAIR",
+  "noQuestionsRegistered": "Nenhuma questão cadastrada",
+  "noQuestionsAdminContact": "Esta lição ainda não possui questões cadastradas no sistema. Por favor, entre em contato com o administrador.",
+  "backButton": "VOLTAR",
+  "loadingQuestions": "Carregando questões...",
+  "questionProgress": "Pergunta {current} de {total}",
+  "verifyButton": "VERIFICAR",
+  "excellentFeedback": "Excelente!",
+  "payAttentionFeedback": "Atenção ao detalhe!",
+  "finishButton": "FINALIZAR",
+  "falseUpper": "FALSO",
+  "trueUpper": "VERDADEIRO",
+  "noStatement": "Sem enunciado",
+  "@streakBonusEnergy": {
+    "placeholders": {
+      "bonus": {
+        "type": "int"
+      }
+    }
+  },
+  "@successMessage": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      },
+      "xpEarned": {
+        "type": "int"
+      }
+    }
+  },
+  "@performanceLow": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      },
+      "required": {
+        "type": "String"
+      }
+    }
+  },
+  "@questionProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "storeTitle": "LOJA SPARK",
+  "storeSubtitle": "Escolha o plano ideal para você",
+  "monthly": "Mensal",
+  "yearly": "Anual",
+  "save17Percent": "Economize 17%",
+  "freePlanPrice": "Grátis",
+  "yearlyPlanPrice": "R$ {price}/mês",
+  "monthlyPlanPrice": "R$ {price}/mês",
+  "monthlyPlanPricePerUser": "R$ {price}/usuário/mês",
+  "billedAnnually": "R$ {price} faturados anualmente",
+  "minUsersBilledAnnually": "Mín. {minUsers} usuários • Faturado anual",
+  "orAnnualPlanLabel": "Ou {label} no plano anual",
+  "yourCurrentPlan": "SEU PLANO ATUAL",
+  "basicPlan": "PLANO BÁSICO",
+  "trialActiveDays": "{days, plural, =0{TRIAL ATIVO — 0 dias restantes} =1{TRIAL ATIVO — 1 dia restante} other{TRIAL ATIVO — {days} dias restantes}}",
+  "trialEnded": "TRIAL ENCERRADO",
+  "currentPlanActive": "PLANO ATUAL ✓",
+  "verifyEnrollment": "VERIFICAR MATRÍCULA",
+  "requestProposal": "SOLICITAR PROPOSTA",
+  "upgradeToPlan": "FAZER UPGRADE PARA {planName}",
+  "subscribeToPlan": "ASSINAR {planName}",
+  "test7DaysFree": "TESTAR 7 DIAS GRÁTIS",
+  "@yearlyPlanPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@monthlyPlanPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@monthlyPlanPricePerUser": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@billedAnnually": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@minUsersBilledAnnually": {
+    "placeholders": {
+      "minUsers": {
+        "type": "int"
+      }
+    }
+  },
+  "@orAnnualPlanLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "@trialActiveDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "@upgradeToPlan": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  "@subscribeToPlan": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  "accessDeniedAdminOnly": "Acesso Negado: Apenas administradores podem ativar o Modo Dev.",
+  "devModeTapsRemaining": "🔧 Dev: {remaining} toque(s) restantes...",
+  "devModeDisabled": "🔒 Modo Dev DESATIVADO",
+  "devModeEnabled": "🔓 Modo Dev ATIVADO — Painel Admin Liberado!",
+  "myProfile": "MEU PERFIL",
+  "levelValue": "Lvl {level}",
+  "technicianRole": "TÉCNICO",
+  "viewCredential": "VER CREDENCIAL",
+  "activeDays": "Dias Ativos",
+  "daysLabel": "dias",
+  "streakLabel": "Streak",
+  "streakDaysFire": "dias 🔥",
+  "experienceLabel": "Experiência",
+  "xpLabel": "XP",
+  "debugInfoTitle": "DEBUG INFO (MODO DEV)",
+  "debugUid": "UID: {uid}",
+  "debugRole": "Role Firestore: {role}",
+  "debugIsAdmin": "isAdmin Getter: {isAdmin}",
+  "achievementsTitle": "CONQUISTAS",
+  "seeAll": "Ver Tudo ↗",
+  "noAchievementsYet": "Você não tem conquistas no momento.",
+  "letsLearnAndUnlockRewards": "Bora aprender e desbloquear recompensas!",
+  "clanTitle": "CLÃ",
+  "joinAClan": "Faça parte de um Clã!",
+  "clanDescription": "Junte-se a outros alunos, compita em equipe e ganhe recompensas exclusivas.",
+  "createClanUpper": "CRIAR CLÃ",
+  "enterUpper": "ENTRAR",
+  "myClanTitle": "MEU CLÃ",
+  "clanMemberRole": "Membro",
+  "viewClanUpper": "VISUALIZAR CLÃ",
+  "weeklyRankingTitle": "RANKING SEMANAL",
+  "globalLeaderboard": "Placar Global",
+  "yourRankingPosition": "Você está em {position}º lugar esta semana",
+  "completeLessonsToEnterRanking": "Complete lições para entrar no ranking",
+  "myClanFallback": "Meu Clã",
+  "@devModeTapsRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "@levelValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "@debugUid": {
+    "placeholders": {
+      "uid": {
+        "type": "String"
+      }
+    }
+  },
+  "@debugRole": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "@debugIsAdmin": {
+    "placeholders": {
+      "isAdmin": {
+        "type": "String"
+      }
+    }
+  },
+  "@yourRankingPosition": {
+    "placeholders": {
+      "position": {
+        "type": "int"
+      }
+    }
+  },
+  "goodMorning": "Bom dia",
+  "goodAfternoon": "Boa tarde",
+  "goodEvening": "Boa noite",
+  "myProfileMenu": "Meu Perfil",
+  "settingsMenu": "Configurações",
+  "adminPanelMenu": "Painel Admin",
+  "myAchievementsMenu": "Minhas Conquistas",
+  "myProgressMenu": "Meu Progresso",
+  "helpSupportMenu": "Ajuda / Suporte",
+  "newMechanicsHeader": "NOVAS MECÂNICAS",
+  "sparksDuelMenu": "Duelo de Faíscas (PvP)",
+  "logoutMenu": "Sair",
+  "seeAllPlural": "Ver todas",
+  "notificationsTitle": "Notificações",
+  "markAllAsRead": "Marcar todas como lidas",
+  "noNotificationsAtMoment": "Nenhuma notificação no momento.",
+  "weeklyCovenantsTitle": "Pactos Semanais",
+  "featuredModulesTitle": "Módulos em Destaque",
+  "yourProgressTitle": "Seu Progresso",
+  "technicianLevel": "Técnico Nível {level}",
+  "streakMultiplierMessage": "🔥 Streak de {streak} dias! Multiplicador de {multiplier}x.",
+  "streakDays": "{streak} Dias",
+  "xpProgress": "{current} / {total} XP",
+  "totalXp": "XP Total: {xp} XP",
+  "dailyChallengeTitle": "Desafio Diário",
+  "adminTestAccess": "Acesso Teste Admin",
+  "comingSoonLabel": "Em breve...",
+  "comingSoonUpper": "EM BREVE",
+  "moduleFallback": "Módulo {id}",
+  "noModuleStarted": "Nenhum módulo iniciado",
+  "lessonsCompleted": "{count, plural, =0{0 lições concluídas} =1{1 lição concluída} other{{count} lições concluídas}}",
+  "accessLearningPathToStart": "Acesse o Caminho de Aprendizado para começar",
+  "continueLearningTitle": "Continue Aprendendo",
+  "dailyChallengeDescription": "Teste seus conhecimentos em NR-10! Complete 3 perguntas rápidas para receber recompensas.",
+  "rewardXp": "💰 +{xp} XP",
+  "rewardLabel": "Recompensa",
+  "estimatedTime": "⏱️ {time} min",
+  "estimatedTimeLabel": "Tempo Est.",
+  "notNowButton": "AGORA NÃO",
+  "startChallengeButton": "INICIAR DESAFIO",
+  "startingDailyChallenge": "Iniciando desafio diário...",
+  "noActiveCovenant": "Nenhum Pacto Ativo",
+  "goToCovenantsTabToCreate": "Vá até a aba Pactos para criar o compromisso!",
+  "acceptCovenantButton": "ACEITAR PACTO",
+  "covenantProgress": "{current}/{max} {type}",
+  "noFeaturedModulesCurrently": "Nenhum módulo em destaque no momento.",
+  "continueExploringForNewContent": "Continue explorando para descobrir novos conteúdos!",
+  "errorLoadingModules": "Erro ao carregar módulos",
+  "powerplayStreamingTitle": "PowerPlay Streaming",
+  "technicalVideosDescription": "Vídeos técnicos e conteúdos exclusivos para seu aprendizado",
+  "learnMoreButton": "Saiba mais",
+  "errorLoadingProgress": "Erro ao carregar progresso",
+  "@technicianLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "@streakMultiplierMessage": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      },
+      "multiplier": {
+        "type": "double"
+      }
+    }
+  },
+  "@streakDays": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
+  "@xpProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "@totalXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "@moduleFallback": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "@lessonsCompleted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@rewardXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "@estimatedTime": {
+    "placeholders": {
+      "time": {
+        "type": "int"
+      }
+    }
+  },
+  "@covenantProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  }
+}

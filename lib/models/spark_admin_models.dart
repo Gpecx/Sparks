@@ -4,6 +4,7 @@
 // ─────────────────────────────────────────────────────────────────
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../core/utils/i18n_utils.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  CATEGORIA
@@ -37,13 +38,13 @@ class SPARKCategory {
     'updatedAt': Timestamp.fromDate(updatedAt),
   };
 
-  factory SPARKCategory.fromFirestore(DocumentSnapshot doc) {
+  factory SPARKCategory.fromFirestore(DocumentSnapshot doc, {String? lang}) {
     final data = doc.data() as Map<String, dynamic>;
     return SPARKCategory(
       id: doc.id,
-      title: data['title'] as String? ?? '',
-      subtitle: data['subtitle'] as String? ?? '',
-      description: data['description'] as String?,
+      title: I18nUtils.localized(data, 'title', (lang ?? I18nUtils.currentLang)),
+      subtitle: I18nUtils.localized(data, 'subtitle', (lang ?? I18nUtils.currentLang)),
+      description: I18nUtils.localizedNullable(data, 'description', (lang ?? I18nUtils.currentLang)),
       order: data['order'] as int? ?? 0,
       createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       updatedAt: (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
@@ -101,13 +102,13 @@ class SPARKModule {
     'updatedAt': Timestamp.fromDate(updatedAt),
   };
 
-  factory SPARKModule.fromFirestore(DocumentSnapshot doc) {
+  factory SPARKModule.fromFirestore(DocumentSnapshot doc, {String? lang}) {
     final data = doc.data() as Map<String, dynamic>;
     return SPARKModule(
       id: doc.id,
       categoryId: data['categoryId'] as String? ?? '',
-      title: data['title'] as String? ?? '',
-      subtitle: data['subtitle'] as String? ?? '',
+      title: I18nUtils.localized(data, 'title', (lang ?? I18nUtils.currentLang)),
+      subtitle: I18nUtils.localized(data, 'subtitle', (lang ?? I18nUtils.currentLang)),
       order: data['order'] as int? ?? 0,
       accessCount: data['accessCount'] as int? ?? 0,
       createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
@@ -175,13 +176,13 @@ class SPARKTrail {
     'updatedAt': Timestamp.fromDate(updatedAt),
   };
 
-  factory SPARKTrail.fromFirestore(DocumentSnapshot doc) {
+  factory SPARKTrail.fromFirestore(DocumentSnapshot doc, {String? lang}) {
     final data = doc.data() as Map<String, dynamic>;
     return SPARKTrail(
       id: doc.id,
       categoryId: data['categoryId'] as String? ?? '',
       moduleId: data['moduleId'] as String? ?? '',
-      title: data['title'] as String? ?? '',
+      title: I18nUtils.localized(data, 'title', (lang ?? I18nUtils.currentLang)),
       numLessons: data['numLessons'] as int? ?? 0,
       numEvaluations: data['numEvaluations'] as int? ?? 0,
       questionsPerLesson: data['questionsPerLesson'] as int? ?? 0,
@@ -252,15 +253,15 @@ class SPARKLesson {
     'updatedAt': Timestamp.fromDate(updatedAt),
   };
 
-  factory SPARKLesson.fromFirestore(DocumentSnapshot doc) {
+  factory SPARKLesson.fromFirestore(DocumentSnapshot doc, {String? lang}) {
     final data = doc.data() as Map<String, dynamic>;
     final trailIdFromPath = doc.reference.parent.parent?.id ?? '';
     return SPARKLesson(
       id: doc.id,
       trailId: data['trailId'] as String? ?? trailIdFromPath,
-      title: data['title'] as String? ?? '',
-      subtitle: data['subtitle'] as String? ?? '',
-      content: data['content'] as String? ?? '',
+      title: I18nUtils.localized(data, 'title', (lang ?? I18nUtils.currentLang)),
+      subtitle: I18nUtils.localized(data, 'subtitle', (lang ?? I18nUtils.currentLang)),
+      content: I18nUtils.localized(data, 'content', (lang ?? I18nUtils.currentLang)),
       type: data['type'] as String? ?? 'lesson',
       order: data['order'] as int? ?? 0,
       createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
@@ -337,18 +338,18 @@ class SPARKQuestion {
     'updatedAt': Timestamp.fromDate(updatedAt),
   };
 
-  factory SPARKQuestion.fromFirestore(DocumentSnapshot doc) {
+  factory SPARKQuestion.fromFirestore(DocumentSnapshot doc, {String? lang}) {
     final data = doc.data() as Map<String, dynamic>;
     return SPARKQuestion(
       id: doc.id,
       lessonId: data['lessonId'] as String? ?? '',
       type: data['type'] as String? ?? 'multipleChoice',
-      statement: data['statement'] as String? ?? '',
-      options: List<String>.from(data['options'] as List? ?? []),
+      statement: I18nUtils.localized(data, 'statement', (lang ?? I18nUtils.currentLang)),
+      options: data['options'] != null ? I18nUtils.localizedList(data, 'options', (lang ?? I18nUtils.currentLang)) : [],
       correctIndex: data['correctIndex'] as int? ?? 0,
       isTrue: data['isTrue'] as bool? ?? false,
-      textWithBlanks: data['textWithBlanks'] as String? ?? '',
-      explanation: data['explanation'] as String? ?? '',
+      textWithBlanks: I18nUtils.localizedNullable(data, 'textWithBlanks', (lang ?? I18nUtils.currentLang)) ?? '',
+      explanation: I18nUtils.localized(data, 'explanation', (lang ?? I18nUtils.currentLang)),
       difficulty: data['difficulty'] as int? ?? 1,
       order: data['order'] as int? ?? 0,
       createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
