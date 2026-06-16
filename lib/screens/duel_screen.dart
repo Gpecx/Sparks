@@ -461,6 +461,16 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
       _winnerId = res.winnerId;
       _phase = _DuelPhase.finished;
     });
+
+    // Concluir um duelo também conta como atividade de estudo do dia.
+    Future.microtask(() async {
+      try {
+        await _userService.registerStudyActivity()
+            .timeout(const Duration(seconds: 15));
+      } catch (e) {
+        debugPrint('[Duel] Erro ao registrar atividade de estudo: $e');
+      }
+    });
   }
 
   @override

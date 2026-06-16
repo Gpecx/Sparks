@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -290,13 +291,20 @@ class UserService extends ChangeNotifier {
   // ─────────────────────────────────────────────────────────────────
 
   Future<void> registerStudyActivity() async {
-    if (uid.isEmpty) return;
+    if (uid.isEmpty) {
+      debugPrint('[Streak] IGNORADO: uid vazio (usuário não carregado).');
+      return;
+    }
 
     final now = DateTime.now();
     final nowBrt = now.toUtc().subtract(const Duration(hours: 3));
     final today = DateTime.utc(nowBrt.year, nowBrt.month, nowBrt.day);
 
-    if (_user?.studiedToday == true) return;
+    if (_user?.studiedToday == true) {
+      debugPrint('[Streak] IGNORADO: já estudou hoje (studiedToday=true). '
+          'streak=$currentStreak activeDays=$activeDays');
+      return;
+    }
 
     final lastStudy = _user?.lastStudyDate;
     int newStreak = 1;
@@ -317,14 +325,24 @@ class UserService extends ChangeNotifier {
 
     final newLongest = newStreak > longestStreak ? newStreak : longestStreak;
 
-    await _db.collection('users').doc(uid).update({
-      'currentStreak': newStreak,
-      'longestStreak': newLongest,
-      'studiedToday': true,
-      'lastStudyDate': Timestamp.fromDate(now),
-      'activeDays': newActiveDays,
-      'updatedAt': FieldValue.serverTimestamp(),
-    });
+    try {
+      await _db.collection('users').doc(uid).update({
+        'currentStreak': newStreak,
+        'longestStreak': newLongest,
+        'studiedToday': true,
+        'lastStudyDate': Timestamp.fromDate(now),
+        'activeDays': newActiveDays,
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+      debugPrint('[Streak] REGISTRADO ✅ dia=$today | '
+          'activeDays: $activeDays → $newActiveDays | '
+          'streak: $currentStreak → $newStreak | longest=$newLongest');
+    } catch (e) {
+      // Falha de escrita NÃO pode ser silenciosa: é exatamente o caso em que
+      // o dia "some" sem ninguém saber. Loga e propaga para o chamador.
+      debugPrint('[Streak] FALHA ao gravar atividade do dia: $e');
+      rethrow;
+    }
 
     CovenantService().addProgress('cov_disciplina', 1);
 
@@ -505,6 +523,29 @@ class UserService extends ChangeNotifier {
 
     await _auth.currentUser?.updateDisplayName(displayName);
     if (photoUrl != null) await _auth.currentUser?.updatePhotoURL(photoUrl);
+  }
+
+  /// Faz upload da foto de perfil para o Firebase Storage e grava a URL
+  /// resultante no Firestore (e no FirebaseAuth). Retorna a URL pública.
+  ///
+  /// [bytes] são os dados da imagem (lidos de um arquivo da galeria).
+  /// [contentType] ex.: 'image/jpeg' ou 'image/png'.
+  Future<String> uploadProfilePhoto(
+    Uint8List bytes, {
+    String contentType = 'image/jpeg',
+  }) async {
+    if (uid.isEmpty) {
+      throw StateError('Usuário não autenticado.');
+    }
+
+    final ext = contentType == 'image/png' ? 'png' : 'jpg';
+    final ref = FirebaseStorage.instance.ref().child('avatars/$uid.$ext');
+
+    await ref.putData(bytes, SettableMetadata(contentType: contentType));
+    final url = await ref.getDownloadURL();
+
+    await updateProfile(photoUrl: url);
+    return url;
   }
 
   // ─────────────────────────────────────────────────────────────────

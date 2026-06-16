@@ -113,14 +113,25 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         shape: BoxShape.circle,
                         border: Border.all(color: AppColors.accent, width: 2),
                       ),
-                      child: CircleAvatar(
-                        backgroundColor: AppColors.surface,
-                        backgroundImage: photoUrl != null
-                            ? NetworkImage(photoUrl)
-                            : null,
-                        child: photoUrl == null
-                            ? const Icon(Icons.person, color: AppColors.accent, size: 30)
-                            : null,
+                      child: ClipOval(
+                        child: photoUrl != null
+                            ? Image.network(
+                                photoUrl,
+                                fit: BoxFit.cover,
+                                width: 56,
+                                height: 56,
+                                webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                                errorBuilder: (_, _, _) => Container(
+                                  color: AppColors.surface,
+                                  alignment: Alignment.center,
+                                  child: const Icon(Icons.person, color: AppColors.accent, size: 30),
+                                ),
+                              )
+                            : Container(
+                                color: AppColors.surface,
+                                alignment: Alignment.center,
+                                child: const Icon(Icons.person, color: AppColors.accent, size: 30),
+                              ),
                       ),
                     ),
                     const SizedBox(width: 14),
@@ -348,7 +359,17 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   border: Border.all(color: AppColors.cardBorder),
                 ),
                 child: photoUrl != null
-                    ? ClipOval(child: Image.network(photoUrl, fit: BoxFit.cover))
+                    ? ClipOval(
+                        child: Image.network(
+                          photoUrl,
+                          fit: BoxFit.cover,
+                          width: 46,
+                          height: 46,
+                          webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                          errorBuilder: (_, _, _) =>
+                              const Icon(Icons.person, color: AppColors.textSecondary, size: 24),
+                        ),
+                      )
                     : const Icon(Icons.person, color: AppColors.textSecondary, size: 24),
               ),
             ),

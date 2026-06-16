@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 
@@ -16,16 +17,71 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+    with TickerProviderStateMixin {
+  late AnimationController _sparkController; // pulso suave do brilho verde
+  late AnimationController _floatController; // flutuar (idle)
+  late AnimationController _introController; // power-up na entrada
+  late AnimationController _blinkController; // piscar os olhos
+  late AnimationController _talkController; // boca falando
+  late AnimationController _ringController; // anéis girando
+  late AnimationController _particleController; // partículas subindo
+  late AnimationController _tapController; // "pulinho" ao tocar
+  late Animation<double> _floatCurve;
+  late Animation<double> _introFade;
+  late Animation<double> _introScale;
+
+  // Parallax: posição do ponteiro normalizada (-1..1) em relação ao centro.
+  final ValueNotifier<Offset> _pointer = ValueNotifier(Offset.zero);
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
+    // Pulso lento do brilho verde ao redor do mascote (mantém ele "vivo")
+    _sparkController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 12),
+      duration: const Duration(milliseconds: 3200),
+    )..repeat(reverse: true);
+    // Flutuar suave (sobe/desce)
+    _floatController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2600),
+    )..repeat(reverse: true);
+    _floatCurve =
+        CurvedAnimation(parent: _floatController, curve: Curves.easeInOut);
+    // Power-up de entrada (dispara uma vez)
+    _introController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1100),
+    )..forward();
+    _introFade =
+        CurvedAnimation(parent: _introController, curve: Curves.easeOut);
+    _introScale =
+        CurvedAnimation(parent: _introController, curve: Curves.easeOutBack);
+    // Pisca a cada ~3,6s (os olhos fecham por um instante perto do fim)
+    _blinkController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 3600),
     )..repeat();
+    // Boca falando em rajadas curtas com pausas
+    _talkController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 3000),
+    )..repeat();
+    // Anéis decorativos girando devagar
+    _ringController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 24),
+    )..repeat();
+    // Partículas de energia subindo
+    _particleController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 6),
+    )..repeat();
+    // "Pulinho" disparado ao tocar no mascote
+    _tapController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 420),
+    );
 
     // ── Auto-Login ──────────────────────────────────────────
     // Se a sessão do Firebase persistiu, pula o Welcome direto pro Home.
@@ -40,8 +96,46 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _sparkController.dispose();
+    _floatController.dispose();
+    _introController.dispose();
+    _blinkController.dispose();
+    _talkController.dispose();
+    _ringController.dispose();
+    _particleController.dispose();
+    _tapController.dispose();
+    _pointer.dispose();
     super.dispose();
+  }
+
+  /// Glow neon verde do corpo do Sparky: silhueta tingida de verde, borrada,
+  /// posicionada atrás do corpo com o mesmo enquadramento. `sigma` controla o
+  /// espalhamento (quanto maior, mais difuso) e `opacity` a intensidade.
+  Widget _neonGlow(double sigma, double opacity) {
+    return IgnorePointer(
+      child: Opacity(
+        opacity: opacity.clamp(0.0, 1.0),
+        child: Transform.scale(
+          scale: 1.45,
+          alignment: Alignment.topCenter,
+          child: ImageFiltered(
+            imageFilter: ui.ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
+            child: ColorFiltered(
+              colorFilter: const ColorFilter.mode(
+                AppColors.primary,
+                BlendMode.srcIn,
+              ),
+              child: Image.asset(
+                'assets/images/sparky.png',
+                fit: BoxFit.cover,
+                alignment: const Alignment(0, -0.8),
+                filterQuality: FilterQuality.high,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -57,8 +151,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Ícone molecular estilo EXS
-                  _ExsMoleculeIcon(size: 38),
+                  // Logo do capacete Spark
+                  Image.asset(
+                    'assets/images/spark_icon.png',
+                    width: 38,
+                    height: 38,
+                    fit: BoxFit.contain,
+                  ),
                   const SizedBox(width: 12),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,94 +191,259 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             // ── Hero Illustration ───────────────────────────────
             Expanded(
               flex: 4,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Glow radial fundo
-                  Container(
-                    width: 260,
-                    height: 260,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: RadialGradient(
-                        colors: [
-                          AppColors.primary.withValues(alpha: 0.12),
-                          AppColors.background,
-                        ],
-                      ),
-                    ),
-                  ),
-                  // Anel externo
-                  Container(
-                    width: 220,
-                    height: 220,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppColors.greenDark.withValues(alpha: 0.4),
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                  // Anel interno
-                  Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppColors.primary.withValues(alpha: 0.3),
-                        width: 1.5,
-                      ),
-                    ),
-                  ),
-                  // Ícone central molecular
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: AppColors.card,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primary.withValues(alpha: 0.35),
-                          blurRadius: 24,
-                          spreadRadius: 4,
-                        ),
-                      ],
-                      border: Border.all(
-                        color: AppColors.primary.withValues(alpha: 0.6),
-                        width: 2,
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.hub_outlined,
-                      color: AppColors.primary,
-                      size: 38,
-                    ),
-                  ),
-                  // Ícones orbitais animados
-                  AnimatedBuilder(
-                    animation: _controller,
-                    builder: (context, child) {
-                      return Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          _OrbitIcon(Icons.bolt, _controller, 100, 70, 0.0),
-                          _OrbitIcon(Icons.electrical_services, _controller, 110, 75, math.pi / 2),
-                          _OrbitIcon(Icons.bar_chart, _controller, 105, 65, math.pi),
-                          _OrbitIcon(Icons.shield_outlined, _controller, 95, 80, 3 * math.pi / 2),
-                        ],
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final w = constraints.maxWidth;
+                  final h = constraints.maxHeight;
+                  return MouseRegion(
+                    // parallax: o mascote acompanha levemente o ponteiro
+                    onHover: (e) {
+                      _pointer.value = Offset(
+                        ((e.localPosition.dx / w) * 2 - 1).clamp(-1.0, 1.0),
+                        ((e.localPosition.dy / h) * 2 - 1).clamp(-1.0, 1.0),
                       );
                     },
-                  ),
-                ],
+                    onExit: (_) => _pointer.value = Offset.zero,
+                    child: AnimatedBuilder(
+                      animation: Listenable.merge([
+                        _sparkController,
+                        _floatController,
+                        _introController,
+                        _blinkController,
+                        _talkController,
+                        _ringController,
+                        _particleController,
+                        _tapController,
+                        _pointer,
+                      ]),
+                      builder: (context, child) {
+                        // pulso suave 0..1 para o brilho verde
+                        final pulse = _sparkController.value;
+
+                        // flutuar: 0 (baixo) .. 1 (cima)
+                        final lift = _floatCurve.value;
+                        final floatY = (lift - 0.5) * 14;
+
+                        // piscar: olhos fechados num instante curto
+                        final bc = _blinkController.value;
+                        final blinking = bc > 0.93 && bc < 0.99;
+
+                        // falar: rajadas curtas com pausas
+                        final tk = _talkController.value;
+                        final envelope =
+                            0.5 + 0.5 * math.sin(tk * 2 * math.pi);
+                        final gate =
+                            ((envelope - 0.7) / 0.3).clamp(0.0, 1.0);
+                        final fast =
+                            0.5 + 0.5 * math.sin(tk * 2 * math.pi * 5);
+                        final talk = (gate * fast).clamp(0.0, 1.0);
+                        final mouthSX = 1.0 + 0.05 * talk;
+                        final mouthSY = 1.0 + 0.20 * talk;
+
+                        // anéis girando + parallax + pulinho ao tocar
+                        final ringAngle = _ringController.value * 2 * math.pi;
+                        final tilt = _pointer.value;
+                        final tapBounce =
+                            math.sin(math.pi * _tapController.value) * 0.12;
+
+                        return Stack(
+                          alignment: const Alignment(0, -0.08),
+                          children: [
+                            // (1) Spotlight: cone de luz verde vindo de cima
+                            Positioned.fill(
+                              child: CustomPaint(
+                                painter: _SpotlightPainter(0.10 + 0.06 * pulse),
+                              ),
+                            ),
+                            // (5) Partículas de energia subindo
+                            Positioned.fill(
+                              child: CustomPaint(
+                                painter: _ParticlePainter(
+                                    _particleController.value),
+                              ),
+                            ),
+                            // Glow radial verde pulsante
+                            Container(
+                              width: 285,
+                              height: 285,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: RadialGradient(
+                                  colors: [
+                                    AppColors.primary.withValues(
+                                        alpha: 0.18 + 0.10 * pulse),
+                                    AppColors.background.withValues(alpha: 0.0),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            // (6) Anel externo girando
+                            Transform.rotate(
+                              angle: ringAngle,
+                              child: CustomPaint(
+                                size: const Size(236, 236),
+                                painter: _RingPainter(
+                                  color: AppColors.greenDark
+                                      .withValues(alpha: 0.5),
+                                  segments: 3,
+                                  gap: 0.28,
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                            ),
+                            // (6) Anel interno girando ao contrário
+                            Transform.rotate(
+                              angle: -ringAngle * 1.7,
+                              child: CustomPaint(
+                                size: const Size(180, 180),
+                                painter: _RingPainter(
+                                  color: AppColors.primary
+                                      .withValues(alpha: 0.45),
+                                  segments: 5,
+                                  gap: 0.16,
+                                  strokeWidth: 1.5,
+                                ),
+                              ),
+                            ),
+                            // (2) Sombra no chão (encolhe/clareia ao flutuar)
+                            Transform.translate(
+                              offset: const Offset(0, 116),
+                              child: Container(
+                                width: 150 - 26 * lift,
+                                height: 24 - 5 * lift,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  gradient: RadialGradient(
+                                    colors: [
+                                      Colors.black.withValues(
+                                          alpha: 0.42 - 0.16 * lift),
+                                      Colors.black.withValues(alpha: 0.0),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // Mascote: power-up + flutuar + parallax + toque
+                            Opacity(
+                              opacity: _introFade.value.clamp(0.0, 1.0),
+                              child: Transform.translate(
+                                offset: Offset(0, floatY),
+                                // (3) parallax: inclina seguindo o ponteiro
+                                child: Transform(
+                                  alignment: Alignment.center,
+                                  transform: Matrix4.identity()
+                                    ..setEntry(3, 2, 0.0012)
+                                    ..rotateX(-tilt.dy * 0.12)
+                                    ..rotateY(tilt.dx * 0.16),
+                                  child: Transform.scale(
+                                    // power-up de entrada + (7) pulinho
+                                    scale: (0.7 + 0.3 * _introScale.value) +
+                                        tapBounce,
+                                    // (7) tocar no Sparky faz ele pular
+                                    child: GestureDetector(
+                                      onTap: () =>
+                                          _tapController.forward(from: 0),
+                                      child: Container(
+                                        width: 200,
+                                        height: 200,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.card,
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: AppColors.primary
+                                                  .withValues(
+                                                      alpha: 0.30 +
+                                                          0.25 * pulse),
+                                              blurRadius: 28 + 18 * pulse,
+                                              spreadRadius: 4 + 4 * pulse,
+                                            ),
+                                          ],
+                                          border: Border.all(
+                                            color: AppColors.primary
+                                                .withValues(alpha: 0.6),
+                                            width: 2,
+                                          ),
+                                        ),
+                                        child: ClipOval(
+                                          child: Stack(
+                                            fit: StackFit.expand,
+                                            children: [
+                                              // 0) glow neon verde pulsante
+                                              //    (atrás do corpo — combina
+                                              //    com a temática do Spark)
+                                              _neonGlow(
+                                                  16, 0.42 + 0.20 * pulse),
+                                              _neonGlow(
+                                                  8, 0.50 + 0.24 * pulse),
+                                              // 1) corpo do Sparky (estático)
+                                              child!,
+                                              // 1b) olhos fechados (piscar)
+                                              if (blinking)
+                                                Transform.scale(
+                                                  scale: 1.45,
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  child: Image.asset(
+                                                    'assets/images/sparky_blink.png',
+                                                    fit: BoxFit.cover,
+                                                    alignment:
+                                                        const Alignment(0, -0.8),
+                                                    filterQuality:
+                                                        FilterQuality.high,
+                                                  ),
+                                                ),
+                                              // 1c) boca falando (abre/fecha)
+                                              Transform.scale(
+                                                scaleX: mouthSX,
+                                                scaleY: mouthSY,
+                                                alignment:
+                                                    const Alignment(0, 0.23),
+                                                child: Transform.scale(
+                                                  scale: 1.45,
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  child: Image.asset(
+                                                    'assets/images/sparky_mouth.png',
+                                                    fit: BoxFit.cover,
+                                                    alignment:
+                                                        const Alignment(0, -0.8),
+                                                    filterQuality:
+                                                        FilterQuality.high,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      child: Transform.scale(
+                        scale: 1.45,
+                        alignment: Alignment.topCenter,
+                        child: Image.asset(
+                          'assets/images/sparky.png',
+                          fit: BoxFit.cover,
+                          alignment: const Alignment(0, -0.8),
+                          filterQuality: FilterQuality.high,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
 
             // ── Texto ───────────────────────────────────────────
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
@@ -195,7 +459,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      'Da Proteção à\nAutomação,\nDomine Cada Trilha',
+                      'Sua Jornada de\nEstudos e Ferramentas\nPráticas para o Setor Elétrico.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
@@ -287,98 +551,117 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   }
 }
 
-// Ícone molecular estilo EXS Solutions
-class _ExsMoleculeIcon extends StatelessWidget {
-  final double size;
-  const _ExsMoleculeIcon({required this.size});
+// (1) Cone de luz (spotlight) verde descendo do topo sobre o mascote.
+class _SpotlightPainter extends CustomPainter {
+  final double intensity;
+  _SpotlightPainter(this.intensity);
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: size,
-      height: size,
-      child: CustomPaint(painter: _MoleculePainter()),
-    );
-  }
-}
-
-class _MoleculePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paintGreen = Paint()
-      ..color = AppColors.primary
-      ..style = PaintingStyle.fill;
-    final paintDark = Paint()
-      ..color = AppColors.cardBorder
-      ..style = PaintingStyle.fill;
-
     final cx = size.width / 2;
-    final cy = size.height / 2;
-    final r = size.width * 0.12;
-
-    // Nós externos
-    final positions = [
-      Offset(cx, cy - size.height * 0.35),
-      Offset(cx + size.width * 0.3, cy - size.height * 0.15),
-      Offset(cx + size.width * 0.3, cy + size.height * 0.15),
-      Offset(cx, cy + size.height * 0.35),
-      Offset(cx - size.width * 0.3, cy + size.height * 0.15),
-      Offset(cx - size.width * 0.3, cy - size.height * 0.15),
-    ];
-
-    final linePaint = Paint()
-      ..color = AppColors.primary.withValues(alpha: 0.6)
-      ..strokeWidth = 1.5
-      ..style = PaintingStyle.stroke;
-
-    // Linhas conectoras
-    for (final pos in positions) {
-      canvas.drawLine(Offset(cx, cy), pos, linePaint);
-    }
-    for (int i = 0; i < positions.length; i++) {
-      canvas.drawLine(positions[i], positions[(i + 1) % positions.length], linePaint);
-    }
-
-    // Nós externos
-    for (int i = 0; i < positions.length; i++) {
-      canvas.drawCircle(positions[i], r * 0.7, i.isEven ? paintGreen : paintDark);
-    }
-
-    // Nó central
-    canvas.drawCircle(Offset(cx, cy), r * 1.2, paintDark);
-    canvas.drawCircle(Offset(cx, cy), r * 0.8, paintGreen);
+    const topY = 0.0;
+    final botY = size.height * 0.74;
+    final path = Path()
+      ..moveTo(cx - 16, topY)
+      ..lineTo(cx + 16, topY)
+      ..lineTo(cx + size.width * 0.34, botY)
+      ..lineTo(cx - size.width * 0.34, botY)
+      ..close();
+    final paint = Paint()
+      ..shader = LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          AppColors.primary.withValues(alpha: intensity),
+          AppColors.primary.withValues(alpha: 0.0),
+        ],
+      ).createShader(Rect.fromLTWH(0, topY, size.width, botY - topY))
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 22);
+    canvas.drawPath(path, paint);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _SpotlightPainter old) =>
+      old.intensity != intensity;
 }
 
-// Ícone orbital animado
-class _OrbitIcon extends StatelessWidget {
-  final IconData icon;
-  final AnimationController controller;
-  final double rx, ry, offset;
-
-  const _OrbitIcon(this.icon, this.controller, this.rx, this.ry, this.offset);
+// (5) Partículas de energia verdes subindo ao redor do mascote.
+class _ParticlePainter extends CustomPainter {
+  final double t; // 0..1 do controller
+  _ParticlePainter(this.t);
 
   @override
-  Widget build(BuildContext context) {
-    final angle = controller.value * 2 * math.pi + offset;
-    return Transform.translate(
-      offset: Offset(math.cos(angle) * rx, math.sin(angle) * ry),
-      child: Container(
-        width: 32,
-        height: 32,
-        decoration: BoxDecoration(
-          color: AppColors.card,
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: AppColors.primary.withValues(alpha: 0.4),
-            width: 1,
-          ),
-        ),
-        child: Icon(icon, color: AppColors.primary, size: 16),
-      ),
-    );
+  void paint(Canvas canvas, Size size) {
+    final cx = size.width / 2;
+    const n = 14;
+    final paint = Paint()..style = PaintingStyle.fill;
+    final yBottom = size.height * 0.66;
+    final yTop = size.height * 0.12;
+    for (int i = 0; i < n; i++) {
+      final r1 = _frac(i * 12.9898);
+      final r2 = _frac(i * 78.233);
+      final r3 = _frac(i * 43.123);
+      final speed = 0.6 + r2 * 0.8;
+      final phase = (t * speed + r1) % 1.0; // 0 base → 1 topo
+      final spread = (r1 - 0.5) * size.width * 0.5;
+      final sway = math.sin((phase * 2 + r3) * math.pi * 2) * 10;
+      final x = cx + spread + sway;
+      final y = yBottom + (yTop - yBottom) * phase;
+      final fade = math.sin(phase * math.pi); // aparece/some no trajeto
+      final radius = 1.2 + r3 * 1.8;
+      paint.color = AppColors.primary
+          .withValues(alpha: (0.5 * fade).clamp(0.0, 1.0));
+      canvas.drawCircle(Offset(x, y), radius, paint);
+    }
   }
+
+  double _frac(double v) {
+    final s = math.sin(v) * 43758.5453;
+    return s - s.floorToDouble();
+  }
+
+  @override
+  bool shouldRepaint(covariant _ParticlePainter old) => old.t != t;
+}
+
+// (6) Anel segmentado (com gaps) — rotacionado pelo widget para "girar".
+class _RingPainter extends CustomPainter {
+  final Color color;
+  final int segments;
+  final double gap; // fração vazia de cada segmento (0..1)
+  final double strokeWidth;
+  _RingPainter({
+    required this.color,
+    required this.segments,
+    required this.gap,
+    required this.strokeWidth,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = Rect.fromLTWH(
+      strokeWidth / 2,
+      strokeWidth / 2,
+      size.width - strokeWidth,
+      size.height - strokeWidth,
+    );
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round;
+    final seg = (2 * math.pi) / segments;
+    final draw = seg * (1 - gap);
+    for (int i = 0; i < segments; i++) {
+      final start = i * seg + seg * gap / 2;
+      canvas.drawArc(rect, start, draw, false, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _RingPainter old) =>
+      old.color != color ||
+      old.segments != segments ||
+      old.gap != gap ||
+      old.strokeWidth != strokeWidth;
 }

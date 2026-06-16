@@ -381,8 +381,11 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
 
       Future.microtask(() async {
         try {
-          await _userService.registerStudyActivity();
-        } catch (_) {}
+          await _userService.registerStudyActivity()
+              .timeout(const Duration(seconds: 15));
+        } catch (e) {
+          debugPrint('[LearningPath] Erro ao registrar atividade de estudo: $e');
+        }
       });
     }
   }
