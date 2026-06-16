@@ -664,6 +664,102 @@
       }
     }
   },
+  "noModulesAvailable": "Nenhum módulo disponível.",
+  "ebooksByModule": "E-books por módulo",
+  "ebookSummaryTitle": "Sumário",
+  "chaptersUppercase": "CAPÍTULOS",
+  "chaptersInPreparation": "Capítulos em elaboração.",
+  "chapterNotFound": "Capítulo não encontrado.",
+  "finishChapterButton": "CONCLUIR CAPÍTULO",
+  "finishEbookButton": "CONCLUIR E-BOOK",
+  "ebookCompleted": "E-book concluído! 🎉",
+  "summaryLabel": "Resumo",
+  "chaptersReadProgress": "{read} de {total} capítulos lidos",
+  "@chaptersReadProgress": {
+    "placeholders": {
+      "read": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterSemanticLabel": "Capítulo {number}: {title}",
+  "@chapterSemanticLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionsCount": "{count, plural, =1{1 seção} other{{count} seções}}",
+  "@sectionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterShort": "Cap. {number}/{total}",
+  "@chapterShort": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterCompleted": "Capítulo {number} concluído",
+  "@chapterCompleted": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "errorLoadingChapter": "Erro ao carregar capítulo: {error}",
+  "@errorLoadingChapter": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "ebookInPreparation": "E-book em elaboração",
+  "completedTagLabel": "Concluído",
+  "minutesShort": "{minutes} min",
+  "@minutesShort": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "chaptersCount": "{count, plural, =1{1 capítulo} other{{count} capítulos}}",
+  "@chaptersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ebookSemanticLabel": "{title}. {minutes} minutos.",
+  "@ebookSemanticLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "trueOrFalseQuestion": "Verdadeiro ou Falso?",
   "dragTermsToFillBlanks": "Arraste os termos para preencher as lacunas:",
   "dragTermToFillBlank": "Arraste o termo para preencher a lacuna:",

@@ -10,6 +10,7 @@ import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/services/access_control_service.dart';
 import 'package:spark_app/services/analytics_service.dart';
 import 'package:spark_app/widgets/plan_widgets.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  TELA 1 — ÍNDICE DO E-BOOK (lista de capítulos)
@@ -30,6 +31,7 @@ class EbookReaderScreen extends ConsumerWidget {
     final completedChapters = progress?.completedChapters ?? const [];
     final chapters = [...ebook.chapterIndex]..sort((a, b) => a.order.compareTo(b.order));
     final access = ref.watch(accessControlProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return SparksBackground(
       child: PcbBackground(
@@ -37,7 +39,7 @@ class EbookReaderScreen extends ConsumerWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: const Text('Sumário'),
+            title: Text(l10n.ebookSummaryTitle),
           ),
           body: SafeArea(
             top: false,
@@ -91,10 +93,10 @@ class EbookReaderScreen extends ConsumerWidget {
                           Row(
                             children: [
                               _tag(Icons.collections_bookmark_outlined,
-                                  '${ebook.chapterCount} capítulos', themeColor),
+                                  l10n.chaptersCount(ebook.chapterCount), themeColor),
                               const SizedBox(width: 10),
                               _tag(Icons.timer_outlined,
-                                  '${ebook.estimatedMinutes} min', themeColor),
+                                  l10n.minutesShort(ebook.estimatedMinutes), themeColor),
                             ],
                           ),
                           if (chapters.isNotEmpty) ...[
@@ -102,19 +104,18 @@ class EbookReaderScreen extends ConsumerWidget {
                             _ProgressBar(
                               value: completedChapters.length / chapters.length,
                               color: themeColor,
-                              label:
-                                  '${completedChapters.length} de ${chapters.length} capítulos lidos',
+                              label: l10n.chaptersReadProgress(completedChapters.length, chapters.length),
                             ),
                           ],
                         ],
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 4, bottom: 8),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4, bottom: 8),
                       child: Text(
-                        'CAPÍTULOS',
-                        style: TextStyle(
+                        l10n.chaptersUppercase,
+                        style: const TextStyle(
                           color: AppColors.textMuted,
                           fontSize: 11,
                           fontWeight: FontWeight.w800,
@@ -131,8 +132,8 @@ class EbookReaderScreen extends ConsumerWidget {
                           border: Border.all(
                               color: AppColors.cardBorder.withValues(alpha: 0.3)),
                         ),
-                        child: const Text('Capítulos em elaboração.',
-                            style: TextStyle(color: AppColors.textMuted)),
+                        child: Text(l10n.chaptersInPreparation,
+                            style: const TextStyle(color: AppColors.textMuted)),
                       )
                     else
                       ...chapters.asMap().entries.map((e) {
@@ -215,9 +216,10 @@ class _ChapterTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Semantics(
       button: true,
-      label: 'Capítulo $number: ${chapterRef.title}',
+      label: l10n.chapterSemanticLabel(number, chapterRef.title),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
@@ -273,8 +275,8 @@ class _ChapterTile extends StatelessWidget {
                       ),
                       const SizedBox(height: 3),
                       Text(
-                        '${chapterRef.sectionCount} seções'
-                        '${chapterRef.estimatedMinutes > 0 ? ' · ${chapterRef.estimatedMinutes} min' : ''}',
+                        l10n.sectionsCount(chapterRef.sectionCount) +
+                            (chapterRef.estimatedMinutes > 0 ? ' · ${l10n.minutesShort(chapterRef.estimatedMinutes)}' : ''),
                         style: const TextStyle(
                             color: AppColors.textMuted, fontSize: 12),
                       ),
@@ -367,11 +369,12 @@ class _ChapterReaderScreenState extends ConsumerState<ChapterReaderScreen> {
       completed: allDone,
     );
     if (mounted) {
+      final l10n = AppLocalizations.of(context)!;
       SparkSnack.success(
         context,
         allDone
-            ? 'E-book concluído! 🎉'
-            : 'Capítulo ${widget.chapterNumber} concluído',
+            ? l10n.ebookCompleted
+            : l10n.chapterCompleted(widget.chapterNumber),
       );
       Navigator.pop(context);
     }
@@ -386,6 +389,7 @@ class _ChapterReaderScreenState extends ConsumerState<ChapterReaderScreen> {
       chapterId: widget.chapterId,
     )));
     final color = widget.themeColor;
+    final l10n = AppLocalizations.of(context)!;
 
     return SparksBackground(
       child: PcbBackground(
@@ -393,16 +397,16 @@ class _ChapterReaderScreenState extends ConsumerState<ChapterReaderScreen> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: Text('Cap. ${widget.chapterNumber}/${widget.totalChapters}'),
+            title: Text(l10n.chapterShort(widget.chapterNumber, widget.totalChapters)),
           ),
           body: SafeArea(
             top: false,
             child: chapterAsync.when(
               data: (chapter) {
                 if (chapter == null) {
-                  return const Center(
-                    child: Text('Capítulo não encontrado.',
-                        style: TextStyle(color: Colors.white54)),
+                  return Center(
+                    child: Text(l10n.chapterNotFound,
+                        style: const TextStyle(color: Colors.white54)),
                   );
                 }
                 return Center(
@@ -461,8 +465,8 @@ class _ChapterReaderScreenState extends ConsumerState<ChapterReaderScreen> {
                               icon: const Icon(Icons.check_circle_outline),
                               label: Text(
                                 widget.chapterNumber < widget.totalChapters
-                                    ? 'CONCLUIR CAPÍTULO'
-                                    : 'CONCLUIR E-BOOK',
+                                    ? l10n.finishChapterButton
+                                    : l10n.finishEbookButton,
                               ),
                             ),
                           ),
@@ -475,7 +479,7 @@ class _ChapterReaderScreenState extends ConsumerState<ChapterReaderScreen> {
               loading: () => const Center(
                   child: CircularProgressIndicator(color: AppColors.primary)),
               error: (e, _) => Center(
-                  child: Text('Erro ao carregar capítulo: $e',
+                  child: Text(l10n.errorLoadingChapter(e.toString()),
                       style: const TextStyle(color: AppColors.error))),
             ),
           ),
@@ -537,12 +541,12 @@ class _SectionWidget extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 14),
-        _buildBody(),
+        _buildBody(context),
       ],
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     switch (section.type) {
       case 'text':
         return _textBlock(section.body ?? '');
@@ -553,7 +557,7 @@ class _SectionWidget extends StatelessWidget {
       case 'formula':
         return _formulaBlock(section.formula ?? '', section.explanation ?? '');
       case 'summary':
-        return _summaryBlock(section.body ?? '');
+        return _summaryBlock(context, section.body ?? '');
       default:
         return _textBlock(section.body ?? '');
     }
@@ -675,7 +679,7 @@ class _SectionWidget extends StatelessWidget {
     );
   }
 
-  Widget _summaryBlock(String text) {
+  Widget _summaryBlock(BuildContext context, String text) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -697,7 +701,7 @@ class _SectionWidget extends StatelessWidget {
               Icon(Icons.stars_outlined, color: themeColor, size: 18),
               const SizedBox(width: 8),
               Text(
-                'Resumo',
+                AppLocalizations.of(context)!.summaryLabel,
                 style: TextStyle(
                   color: themeColor,
                   fontWeight: FontWeight.w800,
