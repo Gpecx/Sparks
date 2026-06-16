@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../core/utils/i18n_utils.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  SEÇÃO DO E-BOOK
@@ -70,18 +71,39 @@ class EbookChapter {
 
   int get sectionCount => sections.length;
 
-  factory EbookChapter.fromFirestore(DocumentSnapshot doc) {
+  factory EbookChapter.fromFirestore(DocumentSnapshot doc, {String? lang}) {
     final d = doc.data() as Map<String, dynamic>? ?? {};
+    
+    List<Map<String, dynamic>>? parsedSections;
+    if (d['sections'] != null) {
+      final originalSections = List<Map<String, dynamic>>.from(d['sections'] as List);
+      final rawTranslations = I18nUtils.localizedRaw(d, 'sections', (lang ?? I18nUtils.currentLang));
+      if (rawTranslations is List && rawTranslations.length == originalSections.length) {
+        parsedSections = [];
+        for (var i = 0; i < originalSections.length; i++) {
+          final os = originalSections[i];
+          final ts = rawTranslations[i] as Map?;
+          parsedSections.add({
+            ...os,
+            if (ts?['title'] != null) 'title': ts!['title'],
+            if (ts?['body'] != null) 'body': ts!['body'],
+            if (ts?['explanation'] != null) 'explanation': ts!['explanation'],
+            if (ts?['items'] != null) 'items': ts!['items'],
+          });
+        }
+      } else {
+        parsedSections = originalSections;
+      }
+    }
+
     return EbookChapter(
       id: doc.id,
       order: (d['order'] as num?)?.toInt() ?? 0,
-      title: d['title'] as String? ?? '',
-      subtitle: d['subtitle'] as String?,
+      title: I18nUtils.localized(d, 'title', (lang ?? I18nUtils.currentLang)),
+      subtitle: I18nUtils.localizedNullable(d, 'subtitle', (lang ?? I18nUtils.currentLang)),
       estimatedMinutes: (d['estimatedMinutes'] as num?)?.toInt() ?? 0,
-      sections: d['sections'] != null
-          ? (d['sections'] as List)
-              .map((s) => EbookSection.fromMap(s as Map<String, dynamic>))
-              .toList()
+      sections: parsedSections != null
+          ? parsedSections.map((s) => EbookSection.fromMap(s)).toList()
           : const [],
     );
   }
@@ -177,14 +199,19 @@ class EbookModel {
 
   int get chapterCount => chapterIndex.length;
 
-  factory EbookModel.fromFirestore(DocumentSnapshot doc) {
+  factory EbookModel.fromFirestore(DocumentSnapshot doc, {String? lang}) {
     final d = doc.data() as Map<String, dynamic>? ?? {};
+
+    // Traduz também os títulos do índice de capítulos (se o LLM os gerou ou se fizermos on-the-fly)
+    // O EbookModel não tem 'translations' de capítulos (vivem nos próprios capítulos).
+    // O ideal seria que o índice buscasse a tradução quando a UI ler, mas deixaremos com I18nUtils por consistência.
+    
     return EbookModel(
       id: doc.id,
       categoryId: d['categoryId'] as String? ?? '',
       moduleId: d['moduleId'] as String? ?? '',
-      title: d['title'] as String? ?? '',
-      subtitle: d['subtitle'] as String? ?? '',
+      title: I18nUtils.localized(d, 'title', (lang ?? I18nUtils.currentLang)),
+      subtitle: I18nUtils.localized(d, 'subtitle', (lang ?? I18nUtils.currentLang)),
       estimatedMinutes: (d['estimatedMinutes'] as num?)?.toInt() ?? 15,
       trailIds: d['trailIds'] != null
           ? List<String>.from(d['trailIds'] as List)

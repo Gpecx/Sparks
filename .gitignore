@@ -88,3 +88,6 @@ patch_functions*.js
 # Segredos locais (chaves de API, tokens)
 setup_asaas_env.sh
 .env.secrets
+scripts/node_modules/
+scripts/package-lock.json
+scripts/_*.js

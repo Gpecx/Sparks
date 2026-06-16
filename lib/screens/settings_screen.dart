@@ -275,8 +275,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       Consumer(
                         builder: (context, ref, child) {
                           final currentLocale = ref.watch(languageProvider);
+                          // Só PT/EN disponíveis por enquanto; evita crash se houver 'es' salvo.
+                          final selectedLang = ['pt', 'en'].contains(currentLocale.languageCode)
+                              ? currentLocale.languageCode
+                              : 'pt';
                           return DropdownButtonFormField<String>(
-                            value: currentLocale.languageCode,
+                            value: selectedLang,
                             dropdownColor: AppColors.card,
                             icon: const Icon(Icons.arrow_drop_down, color: AppColors.textMuted),
                             decoration: InputDecoration(
@@ -291,7 +295,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             items: const [
                               DropdownMenuItem(value: 'pt', child: Text('Português', style: TextStyle(color: Colors.white))),
                               DropdownMenuItem(value: 'en', child: Text('English', style: TextStyle(color: Colors.white))),
-                              DropdownMenuItem(value: 'es', child: Text('Español', style: TextStyle(color: Colors.white))),
+                              // Espanhol será reativado quando a tradução ES estiver concluída.
                             ],
                             onChanged: (code) {
                               if (code != null) {

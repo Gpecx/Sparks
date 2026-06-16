@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../utils/i18n_utils.dart';
 
 abstract class FS {
   // ── Root collections ──────────────────────────────────────────────────────
@@ -169,38 +170,55 @@ class QuestionModel {
     this.blanks,
   });
 
-  factory QuestionModel.fromFirestore(DocumentSnapshot doc) {
+  factory QuestionModel.fromFirestore(DocumentSnapshot doc, {String? lang}) {
+    final String l = lang ?? I18nUtils.currentLang;
     final d = doc.data() as Map<String, dynamic>;
     final type = d[FS.type] as String? ?? 'multipleChoice';
+
+    // Para lacunas, o tradutor pode retornar uma lista de objects em "blanks".
+    // Precisamos mesclar a resposta traduzida com o "index" original.
+    List<Map<String, dynamic>>? parsedBlanks;
+    if (type == 'fillInTheBlanks' && d[FS.blanks] != null) {
+      final originalBlanks = List<Map<String, dynamic>>.from(d[FS.blanks] as List);
+      final rawTranslations = I18nUtils.localizedRaw(d, FS.blanks, l);
+      if (rawTranslations is List && rawTranslations.length == originalBlanks.length) {
+        parsedBlanks = [];
+        for (var i = 0; i < originalBlanks.length; i++) {
+          final ob = originalBlanks[i];
+          final tb = rawTranslations[i] as Map?;
+          parsedBlanks.add({
+            'index': ob['index'],
+            'answer': tb?['answer'] ?? ob['answer'],
+          });
+        }
+      } else {
+        parsedBlanks = originalBlanks;
+      }
+    }
 
     return QuestionModel(
       id: doc.id,
       order: (d[FS.order] as num? ?? 0).toInt(),
       type: type,
-      statement: d[FS.statement] as String? ?? '',
-      explanation: d[FS.explanation] as String? ?? '',
+      statement: I18nUtils.localized(d, FS.statement, l),
+      explanation: I18nUtils.localized(d, FS.explanation, l),
       isActive: d[FS.isActive] as bool? ?? true,
-      // multipleChoice + fillInTheBlanks (banco de palavras compartilha o campo options)
       options: (type == 'multipleChoice' || type == 'fillInTheBlanks') && d[FS.options] != null
-          ? List<String>.from(d[FS.options] as List)
+          ? I18nUtils.localizedList(d, FS.options, l)
           : null,
       correctIndex: (type == 'multipleChoice' || type == 'trueFalse' || type == 'true_false') && d[FS.correctIndex] != null
           ? (d[FS.correctIndex] as num).toInt()
           : null,
-      // trueFalse — derive isTrue from correctIndex when isTrue field is absent
       isTrue: (type == 'trueFalse' || type == 'true_false')
           ? (d[FS.isTrue] as bool?)
               ?? (d[FS.correctIndex] != null
-                  ? (d[FS.correctIndex] as num).toInt() == 0 // 0 = Verdadeiro, 1 = Falso
+                  ? (d[FS.correctIndex] as num).toInt() == 0 
                   : null)
           : null,
-      // fillInTheBlanks
       textWithBlanks: type == 'fillInTheBlanks'
-          ? d[FS.textWithBlanks] as String?
+          ? I18nUtils.localizedNullable(d, FS.textWithBlanks, l)
           : null,
-      blanks: type == 'fillInTheBlanks' && d[FS.blanks] != null
-          ? List<Map<String, dynamic>>.from(d[FS.blanks] as List)
-          : null,
+      blanks: parsedBlanks,
     );
   }
 
