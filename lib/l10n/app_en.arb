@@ -319,5 +319,59 @@
         "type": "String"
       }
     }
+  },
+  "navHome": "Home",
+  "navCategories": "Categories",
+  "navStudies": "Studies",
+  "navTools": "Tools",
+  "navRanking": "Ranking",
+  "navProfile": "Profile",
+  "navStore": "Store",
+  "navMenu": "Menu",
+  "moreMenuRankingSubtitle": "Overall ranking",
+  "moreMenuToolsSubtitle": "Engineering calculators",
+  "moreMenuStoreSubtitle": "Item store",
+  "shellSemanticMain": "SPARK main screen",
+  "shellSemanticSideNav": "Side navigation menu",
+  "shellSemanticBottomNav": "Bottom navigation bar",
+  "categoriesFabTooltip": "Learning categories",
+  "estudosTitle": "STUDIES",
+  "estudosSubtitle": "Read the e-books before practicing in the trails",
+  "noCategoriesAvailable": "No categories available",
+  "categorySemanticLabel": "{title}. Studies category.",
+  "@categorySemanticLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ebooksReadCount": "{count, plural, =1{1 read} other{{count} read}}",
+  "@ebooksReadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "categoriesTitle": "CATEGORIES",
+  "categoriesSubtitle": "Choose an area to start learning",
+  "categoryComingSoonSnack": "This category will be available soon!",
+  "comingSoonBadge": "Coming soon",
+  "errorLoadingCategories": "Error loading categories: {error}",
+  "@errorLoadingCategories": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "moduleCountPlural": "{count, plural, =1{1 module} other{{count} modules}}",
+  "@moduleCountPlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

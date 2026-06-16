@@ -14,6 +14,7 @@ import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/content_providers.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spark_app/core/utils/theme_utils.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 // A configuração de tema agora é dinâmica via ThemeUtils
 
@@ -22,6 +23,7 @@ class CategoriesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final isTestMode = kDebugMode && ref.watch(devModeProvider);
     final categoriesAsync = ref.watch(categoriesStreamProvider);
 
@@ -53,10 +55,10 @@ class CategoriesScreen extends ConsumerWidget {
                             child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
                           ),
                           const SizedBox(width: 12),
-                          const Expanded(
+                          Expanded(
                             child: Text(
-                              'CATEGORIAS',
-                              style: TextStyle(
+                              l10n.categoriesTitle,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
@@ -68,7 +70,7 @@ class CategoriesScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Escolha uma área para começar a aprender',
+                        l10n.categoriesSubtitle,
                         style: TextStyle(
                           color: AppColors.textMuted.withValues(alpha: 0.8),
                           fontSize: 13,
@@ -84,10 +86,10 @@ class CategoriesScreen extends ConsumerWidget {
                   child: categoriesAsync.when(
                     data: (categories) {
                       if (categories.isEmpty) {
-                        return const Center(
+                        return Center(
                           child: Text(
-                            'Nenhuma categoria disponível',
-                            style: TextStyle(color: Colors.white54),
+                            l10n.noCategoriesAvailable,
+                            style: const TextStyle(color: Colors.white54),
                           ),
                         );
                       }
@@ -116,7 +118,7 @@ class CategoriesScreen extends ConsumerWidget {
                               onTap: isComingSoon
                                   ? () {
                                       HapticFeedback.mediumImpact();
-                                      SparkSnack.info(context, 'Esta categoria estará disponível em breve!');
+                                      SparkSnack.info(context, l10n.categoryComingSoonSnack);
                                     }
                                   : () {
                                       HapticFeedback.lightImpact();
@@ -148,7 +150,7 @@ class CategoriesScreen extends ConsumerWidget {
                     ),
                     error: (err, stack) => Center(
                       child: Text(
-                        'Erro ao carregar categorias: $err',
+                        l10n.errorLoadingCategories(err.toString()),
                         style: const TextStyle(color: AppColors.error),
                       ),
                     ),
@@ -217,6 +219,7 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cat = widget.category;
     final locked = !widget.isTestMode && widget.isLocked;
     final comingSoon = widget.isComingSoon;
@@ -327,9 +330,9 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
                                     color: Colors.white.withValues(alpha: 0.08),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
-                                  child: const Text(
-                                    'Em breve',
-                                    style: TextStyle(
+                                  child: Text(
+                                    l10n.comingSoonBadge,
+                                    style: const TextStyle(
                                       color: Colors.white54,
                                       fontSize: 10,
                                       fontWeight: FontWeight.w600,
@@ -352,7 +355,7 @@ class _CategoryCardState extends ConsumerState<_CategoryCard>
                             const SizedBox(height: 8),
                             Row(
                               children: [
-                                _chip(modulesAsync.isLoading ? '...' : '$moduleCount módulos', displayColor),
+                                _chip(modulesAsync.isLoading ? '...' : l10n.moduleCountPlural(moduleCount), displayColor),
                               ],
                             ),
                           ],

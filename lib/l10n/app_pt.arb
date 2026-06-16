@@ -570,5 +570,59 @@
         "type": "String"
       }
     }
+  },
+  "navHome": "Início",
+  "navCategories": "Categorias",
+  "navStudies": "Estudos",
+  "navTools": "Ferramentas",
+  "navRanking": "Ranking",
+  "navProfile": "Perfil",
+  "navStore": "Loja",
+  "navMenu": "Menu",
+  "moreMenuRankingSubtitle": "Classificação geral",
+  "moreMenuToolsSubtitle": "Calculadoras de engenharia",
+  "moreMenuStoreSubtitle": "Loja de itens",
+  "shellSemanticMain": "Tela principal do SPARK",
+  "shellSemanticSideNav": "Menu de navegação lateral",
+  "shellSemanticBottomNav": "Barra de navegação inferior",
+  "categoriesFabTooltip": "Categorias de aprendizado",
+  "estudosTitle": "ESTUDOS",
+  "estudosSubtitle": "Leia os e-books antes de praticar nas trilhas",
+  "noCategoriesAvailable": "Nenhuma categoria disponível",
+  "categorySemanticLabel": "{title}. Categoria de estudos.",
+  "@categorySemanticLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ebooksReadCount": "{count, plural, =1{1 lido} other{{count} lidos}}",
+  "@ebooksReadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "categoriesTitle": "CATEGORIAS",
+  "categoriesSubtitle": "Escolha uma área para começar a aprender",
+  "categoryComingSoonSnack": "Esta categoria estará disponível em breve!",
+  "comingSoonBadge": "Em breve",
+  "errorLoadingCategories": "Erro ao carregar categorias: {error}",
+  "@errorLoadingCategories": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "moduleCountPlural": "{count, plural, =1{1 módulo} other{{count} módulos}}",
+  "@moduleCountPlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }
