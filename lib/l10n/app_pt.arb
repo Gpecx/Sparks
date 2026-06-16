@@ -1,0 +1,32 @@
+{
+  "@@locale": "pt",
+  "languageName": "Português",
+  "@languageName": {
+    "description": "Nome do idioma"
+  },
+  "settingsTitle": "CONFIGURAÇÕES",
+  "accountAndProfile": "CONTA E PERFIL",
+  "editProfile": "Editar Perfil",
+  "editProfileDesc": "Nome, e-mail, cargo",
+  "myAchievements": "Ver Minhas Conquistas",
+  "myAchievementsDesc": "Página de troféus e insígnias",
+  "myProgress": "Meu Progresso",
+  "myProgressDesc": "Acompanhar progresso nos módulos",
+  "changePassword": "Alterar Senha",
+  "changePasswordDesc": "Segurança da conta",
+  "managePlan": "Gerir Plano",
+  "managePlanDesc": "Premium, planos ativos",
+  "deleteAccount": "Eliminar Conta",
+  "deleteAccountDesc": "Apagar permanentemente",
+  "accessibility": "ACESSIBILIDADE",
+  "textSize": "Tamanho do Texto",
+  "textSizeDesc": "Ajuste o tamanho da fonte em todo o app",
+  "colorblindMode": "Modo Daltônico",
+  "colorblindModeDesc": "Ajuste as cores para diferentes tipos de daltonismo",
+  "language": "Idioma",
+  "languageDesc": "Selecione o idioma da interface e dos conteúdos",
+  "admin": "ADMINISTRAÇÃO",
+  "adminPanel": "Painel Admin",
+  "adminPanelDesc": "Gerenciar categorias, módulos e lições",
+  "logout": "SAIR DA CONTA"
+}

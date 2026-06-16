@@ -14,6 +14,7 @@ import 'package:spark_app/services/access_code_service.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/colorblind_provider.dart';
+import 'package:spark_app/providers/language_provider.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -230,6 +231,75 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           ),
                           const Text('A', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
                         ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+
+              Container(
+                margin: const EdgeInsets.only(bottom: 4),
+                decoration: BoxDecoration(
+                  color: AppColors.card,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(Icons.language_outlined, color: AppColors.textMuted, size: 22),
+                          SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Idioma',
+                                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                ),
+                                Text(
+                                  'Selecione o idioma da interface e dos conteúdos',
+                                  style: TextStyle(color: AppColors.textMuted, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Consumer(
+                        builder: (context, ref, child) {
+                          final currentLocale = ref.watch(languageProvider);
+                          return DropdownButtonFormField<String>(
+                            value: currentLocale.languageCode,
+                            dropdownColor: AppColors.card,
+                            icon: const Icon(Icons.arrow_drop_down, color: AppColors.textMuted),
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: AppColors.inputBackground,
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            items: const [
+                              DropdownMenuItem(value: 'pt', child: Text('Português', style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: 'en', child: Text('English', style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: 'es', child: Text('Español', style: TextStyle(color: Colors.white))),
+                            ],
+                            onChanged: (code) {
+                              if (code != null) {
+                                ref.read(languageProvider.notifier).setLanguage(Locale(code));
+                              }
+                            },
+                          );
+                        },
                       ),
                     ],
                   ),

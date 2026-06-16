@@ -1,0 +1,11 @@
+{
+  "name": "spark-translation-pipeline",
+  "version": "1.0.0",
+  "description": "Script de tradução de conteúdo Firebase Firestore usando Gemini",
+  "main": "translate_content.js",
+  "dependencies": {
+    "firebase-admin": "^11.10.1",
+    "@google/genai": "^0.1.2",
+    "dotenv": "^16.3.1"
+  }
+}
