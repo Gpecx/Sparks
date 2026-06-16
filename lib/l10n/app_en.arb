@@ -1321,5 +1321,37 @@
         "type": "int"
       }
     }
+  },
+  "smartNotifications": "SMART NOTIFICATIONS",
+  "notificationCustomization": "NOTIFICATION CUSTOMIZATION",
+  "settingsAccessSection": "ACCESS",
+  "settingsAboutSupportSection": "ABOUT & SUPPORT",
+  "notifFreqMin": "Minimum",
+  "notifFreqNormal": "Normal",
+  "notifFreqHigh": "High",
+  "redeemCodeDialogDesc": "Enter the code you received to unlock full access.",
+  "enterCode": "Enter the code.",
+  "redeemError": "Error redeeming. Please try again.",
+  "accessGrantedUntil": "Access granted until {date} 🎉",
+  "@accessGrantedUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "faqEnergyQ": "How does the energy system work?",
+  "faqEnergyA": "Each lesson consumes 1 energy point.",
+  "faqSparkQ": "What are Spark Points?",
+  "faqSparkA": "The app's currency for premium content.",
+  "deleteAccountConfirmTitle": "Delete Account?",
+  "deleteAccountWarning": "This action is permanent. All your data — XP, progress, your ranking position and your clan membership — will be erased and cannot be recovered.",
+  "deleteAccountFailed": "Failed to delete account: {error}",
+  "@deleteAccountFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   }
 }

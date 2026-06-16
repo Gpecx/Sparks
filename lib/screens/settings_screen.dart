@@ -49,9 +49,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text(
-              'CONFIGURAÇÕES',
-              style: TextStyle(
+            title: Text(
+              AppLocalizations.of(context)!.settingsTitle,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w800,
                 fontSize: 15,
@@ -62,7 +62,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           body: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
-              _sectionTitle('CONTA E PERFIL'),
+              _sectionTitle(AppLocalizations.of(context)!.accountAndProfile),
               _tile(
                 icon: Icons.person_outline,
                 title: AppLocalizations.of(context)!.settingsEditProfile,
@@ -71,7 +71,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
               _tile(
                 icon: Icons.emoji_events_outlined,
-                title: 'Ver Minhas Conquistas',
+                title: AppLocalizations.of(context)!.myAchievements,
                 subtitle: AppLocalizations.of(context)!.settingsAchievementsDesc,
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen())),
               ),
@@ -102,7 +102,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
               const SizedBox(height: 8),
 
-              _sectionTitle('NOTIFICAÇÕES INTELIGENTES'),
+              _sectionTitle(AppLocalizations.of(context)!.smartNotifications),
               _switchTile(
                 icon: Icons.local_fire_department,
                 title: AppLocalizations.of(context)!.settingsStreakAlerts,
@@ -140,7 +140,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
               const SizedBox(height: 8),
 
-              _sectionTitle('PERSONALIZAÇÃO DE NOTIFICAÇÕES'),
+              _sectionTitle(AppLocalizations.of(context)!.notificationCustomization),
               _switchTile(
                 icon: Icons.volume_off_outlined,
                 title: AppLocalizations.of(context)!.settingsSilentMode,
@@ -158,7 +158,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               _buildFrequencySelector(),
               const SizedBox(height: 8),
 
-              _sectionTitle('ACESSIBILIDADE'),
+              _sectionTitle(AppLocalizations.of(context)!.accessibility),
               Container(
                 margin: const EdgeInsets.only(bottom: 4),
                 decoration: BoxDecoration(
@@ -394,7 +394,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _sectionTitle('ADMINISTRAÇÃO'),
+                    _sectionTitle(AppLocalizations.of(context)!.admin),
                     _tile(
                       icon: Icons.admin_panel_settings_outlined,
                       title: AppLocalizations.of(context)!.settingsAdminPanel,
@@ -407,7 +407,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 );
               }),
 
-              _sectionTitle('ACESSO'),
+              _sectionTitle(AppLocalizations.of(context)!.settingsAccessSection),
               _tile(
                 icon: Icons.vpn_key_outlined,
                 title: AppLocalizations.of(context)!.settingsRedeemCode,
@@ -416,7 +416,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
               const SizedBox(height: 8),
 
-              _sectionTitle('SOBRE E SUPORTE'),
+              _sectionTitle(AppLocalizations.of(context)!.settingsAboutSupportSection),
               _tile(
                 icon: Icons.info_outline,
                 title: AppLocalizations.of(context)!.settingsAppVersion,
@@ -478,6 +478,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     child: Text(t, style: const TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
   );
 
+  String _freqLabel(BuildContext context, String f) {
+    final l = AppLocalizations.of(context)!;
+    switch (f) {
+      case 'Mínima': return l.notifFreqMin;
+      case 'Alta': return l.notifFreqHigh;
+      default: return l.notifFreqNormal;
+    }
+  }
+
   Widget _tile({required IconData icon, required String title, required String subtitle, required VoidCallback onTap, Color? titleColor}) => Container(
     margin: const EdgeInsets.only(bottom: 4),
     decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(8), border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3))),
@@ -515,7 +524,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           const SizedBox(height: 12),
           Row(children: ['Mínima', 'Normal', 'Alta'].map((f) {
             final isSelected = _notifFrequency == f;
-            return Expanded(child: GestureDetector(onTap: () => setState(() => _notifFrequency = f), child: Container(margin: const EdgeInsets.symmetric(horizontal: 4), padding: const EdgeInsets.symmetric(vertical: 8), decoration: BoxDecoration(color: isSelected ? AppColors.primary : AppColors.inputBackground, borderRadius: BorderRadius.circular(6)), child: Center(child: Text(f, style: TextStyle(color: isSelected ? Colors.white : AppColors.textMuted, fontSize: 12, fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400))))));
+            return Expanded(child: GestureDetector(onTap: () => setState(() => _notifFrequency = f), child: Container(margin: const EdgeInsets.symmetric(horizontal: 4), padding: const EdgeInsets.symmetric(vertical: 8), decoration: BoxDecoration(color: isSelected ? AppColors.primary : AppColors.inputBackground, borderRadius: BorderRadius.circular(6)), child: Center(child: Text(_freqLabel(context, f), style: TextStyle(color: isSelected ? Colors.white : AppColors.textMuted, fontSize: 12, fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400))))));
           }).toList()),
         ],
       ),
@@ -538,9 +547,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Digite o código recebido para liberar o acesso completo.',
-                style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+              Text(
+                AppLocalizations.of(context)!.redeemCodeDialogDesc,
+                style: const TextStyle(color: AppColors.textMuted, fontSize: 13),
               ),
               const SizedBox(height: 16),
               TextField(
@@ -564,7 +573,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           actions: [
             TextButton(
               onPressed: loading ? null : () => Navigator.of(ctx).pop(),
-              child: const Text('Cancelar', style: TextStyle(color: AppColors.textMuted)),
+              child: Text(AppLocalizations.of(context)!.settingsCancel, style: const TextStyle(color: AppColors.textMuted)),
             ),
             FilledButton(
               onPressed: loading
@@ -572,7 +581,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   : () async {
                       final code = controller.text.trim().toUpperCase();
                       if (code.isEmpty) {
-                        setSt(() => error = 'Informe o código.');
+                        setSt(() => error = AppLocalizations.of(context)!.enterCode);
                         return;
                       }
                       setSt(() {
@@ -590,7 +599,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             backgroundColor: AppColors.primary,
-                            content: Text('Acesso liberado até $d 🎉'),
+                            content: Text(AppLocalizations.of(context)!.accessGrantedUntil(d)),
                           ),
                         );
                       } on AccessCodeException catch (e) {
@@ -601,7 +610,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       } catch (_) {
                         setSt(() {
                           loading = false;
-                          error = 'Erro ao resgatar. Tente novamente.';
+                          error = AppLocalizations.of(context)!.redeemError;
                         });
                       }
                     },
@@ -619,9 +628,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   void _showFaqDialog() {
+    final l10n = AppLocalizations.of(context)!;
     final faqs = [
-      {'q': 'Como funciona o sistema de energia?', 'a': 'Cada lição consome 1 ponto de energia.'},
-      {'q': 'O que são Pontos Spark?', 'a': 'Moeda do app para conteúdos premium.'},
+      {'q': l10n.faqEnergyQ, 'a': l10n.faqEnergyA},
+      {'q': l10n.faqSparkQ, 'a': l10n.faqSparkA},
     ];
     showModalBottomSheet(context: context, isScrollControlled: true, backgroundColor: Colors.transparent, builder: (ctx) => DraggableScrollableSheet(initialChildSize: 0.75, builder: (_, scrollCtrl) => Container(decoration: const BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.vertical(top: Radius.circular(20))), child: Column(children: [const SizedBox(height: 12), Container(width: 40, height: 4, decoration: BoxDecoration(color: AppColors.textMuted, borderRadius: BorderRadius.circular(2))), Expanded(child: ListView.builder(controller: scrollCtrl, padding: const EdgeInsets.all(20), itemCount: faqs.length, itemBuilder: (_, i) => _FaqTile(q: faqs[i]['q']!, a: faqs[i]['a']!)))]))));
   }
@@ -632,12 +642,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.card,
-        title: const Text('Eliminar Conta?', style: TextStyle(color: Colors.white)),
-        content: const Text(
-          'Esta ação é permanente. Todos os seus dados — XP, progresso, '
-          'sua posição no ranking e seu vínculo com clãs — serão apagados '
-          'e não poderão ser recuperados.',
-          style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+        title: Text(AppLocalizations.of(context)!.deleteAccountConfirmTitle, style: const TextStyle(color: Colors.white)),
+        content: Text(
+          AppLocalizations.of(context)!.deleteAccountWarning,
+          style: const TextStyle(color: AppColors.textMuted, fontSize: 13),
         ),
         actions: [
           TextButton(
@@ -675,7 +683,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       if (!mounted) return;
       Navigator.of(context, rootNavigator: true).pop(); // fecha o progresso
       if (!mounted) return;
-      SparkSnack.error(context, 'Falha ao eliminar conta: $e');
+      SparkSnack.error(context, AppLocalizations.of(context)!.deleteAccountFailed(e.toString()));
     }
   }
 }

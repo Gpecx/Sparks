@@ -1937,5 +1937,37 @@
         "type": "int"
       }
     }
+  },
+  "smartNotifications": "NOTIFICAÇÕES INTELIGENTES",
+  "notificationCustomization": "PERSONALIZAÇÃO DE NOTIFICAÇÕES",
+  "settingsAccessSection": "ACESSO",
+  "settingsAboutSupportSection": "SOBRE E SUPORTE",
+  "notifFreqMin": "Mínima",
+  "notifFreqNormal": "Normal",
+  "notifFreqHigh": "Alta",
+  "redeemCodeDialogDesc": "Digite o código recebido para liberar o acesso completo.",
+  "enterCode": "Informe o código.",
+  "redeemError": "Erro ao resgatar. Tente novamente.",
+  "accessGrantedUntil": "Acesso liberado até {date} 🎉",
+  "@accessGrantedUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "faqEnergyQ": "Como funciona o sistema de energia?",
+  "faqEnergyA": "Cada lição consome 1 ponto de energia.",
+  "faqSparkQ": "O que são Pontos Spark?",
+  "faqSparkA": "Moeda do app para conteúdos premium.",
+  "deleteAccountConfirmTitle": "Eliminar Conta?",
+  "deleteAccountWarning": "Esta ação é permanente. Todos os seus dados — XP, progresso, sua posição no ranking e seu vínculo com clãs — serão apagados e não poderão ser recuperados.",
+  "deleteAccountFailed": "Falha ao eliminar conta: {error}",
+  "@deleteAccountFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   }
 }
