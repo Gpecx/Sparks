@@ -415,6 +415,18 @@
   },
   "noModulesAvailable": "No modules available.",
   "ebooksByModule": "E-books by module",
+  "playingSample": "PLAYING SAMPLE...",
+  "sampleComplete": "Sample Complete",
+  "samplePaywallDescription": "To keep watching the full video and unlock all EXS Powerplay features, upgrade your plan.",
+  "subscribeNowButton": "SUBSCRIBE NOW",
+  "timeExpiresIn": "Time expires in {time}",
+  "@timeExpiresIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "ebookSummaryTitle": "Table of Contents",
   "chaptersUppercase": "CHAPTERS",
   "chaptersInPreparation": "Chapters in preparation.",
@@ -550,6 +562,41 @@
       },
       "date": {
         "type": "String"
+      }
+    }
+  },
+  "forgotPasswordTitle": "Reset Password",
+  "recoverAccess": "Recover Access",
+  "recoverAccessSubtitle": "Enter your email to receive the reset instructions",
+  "resetLinkInfo": "A reset link will be sent to your registered email.",
+  "instructionsSent": "Instructions sent to your email!",
+  "sendInstructionsButton": "SEND INSTRUCTIONS",
+  "backToLogin": "← Back to Login",
+  "profileUpdatedSuccess": "Profile updated successfully!",
+  "tapToChangePhoto": "Tap to change photo",
+  "professionLabel": "Profession",
+  "emailShort": "Email",
+  "saveChangesButton": "SAVE CHANGES",
+  "errorUpdating": "Error updating: {error}",
+  "@errorUpdating": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "covenantsTitle": "WEEKLY PACTS",
+  "covenantsInfo": "Select the pacts you want to fulfill. They reset every Monday.",
+  "myWeeklyCovenants": "MY PACTS OF THE WEEK",
+  "availableCovenantsTitle": "AVAILABLE PACTS",
+  "loadingCovenants": "Loading pacts...",
+  "removeCovenantButton": "REMOVE PACT",
+  "selectCovenantButton": "SELECT PACT",
+  "activeCovenantsCount": "{count, plural, =1{1 active pact this week} other{{count} active pacts this week}}",
+  "@activeCovenantsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
       }
     }
   }

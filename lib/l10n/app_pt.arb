@@ -666,6 +666,18 @@
   },
   "noModulesAvailable": "Nenhum módulo disponível.",
   "ebooksByModule": "E-books por módulo",
+  "playingSample": "REPRODUZINDO AMOSTRA...",
+  "sampleComplete": "Amostra Concluída",
+  "samplePaywallDescription": "Para continuar assistindo ao vídeo completo e liberar todos os recursos EXS Powerplay, realize o upgrade.",
+  "subscribeNowButton": "ASSINAR AGORA",
+  "timeExpiresIn": "O tempo expira em {time}",
+  "@timeExpiresIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "ebookSummaryTitle": "Sumário",
   "chaptersUppercase": "CAPÍTULOS",
   "chaptersInPreparation": "Capítulos em elaboração.",
@@ -801,6 +813,41 @@
       },
       "date": {
         "type": "String"
+      }
+    }
+  },
+  "forgotPasswordTitle": "Recuperar Senha",
+  "recoverAccess": "Recuperar Acesso",
+  "recoverAccessSubtitle": "Insira seu e-mail para receber as instruções de redefinição",
+  "resetLinkInfo": "Um link de redefinição será enviado para o seu e-mail cadastrado.",
+  "instructionsSent": "Instruções enviadas para seu e-mail!",
+  "sendInstructionsButton": "ENVIAR INSTRUÇÕES",
+  "backToLogin": "← Voltar para o Login",
+  "profileUpdatedSuccess": "Perfil atualizado com sucesso!",
+  "tapToChangePhoto": "Toque para alterar a foto",
+  "professionLabel": "Profissão",
+  "emailShort": "E-mail",
+  "saveChangesButton": "SALVAR ALTERAÇÕES",
+  "errorUpdating": "Erro ao atualizar: {error}",
+  "@errorUpdating": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "covenantsTitle": "PACTOS SEMANAIS",
+  "covenantsInfo": "Selecione os pactos que deseja cumprir. Resetam toda segunda-feira.",
+  "myWeeklyCovenants": "MEUS PACTOS DA SEMANA",
+  "availableCovenantsTitle": "PACTOS DISPONÍVEIS",
+  "loadingCovenants": "Carregando pactos...",
+  "removeCovenantButton": "REMOVER PACTO",
+  "selectCovenantButton": "SELECIONAR PACTO",
+  "activeCovenantsCount": "{count, plural, =1{1 pacto ativo esta semana} other{{count} pactos ativos esta semana}}",
+  "@activeCovenantsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
       }
     }
   }
