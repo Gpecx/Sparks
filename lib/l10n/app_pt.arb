@@ -624,5 +624,37 @@
         "type": "int"
       }
     }
+  },
+  "categoryNotFound": "Categoria não encontrada",
+  "noModulesInCategory": "Nenhum módulo encontrado nesta categoria.",
+  "errorLoadingModules": "Erro ao carregar módulos",
+  "lockedLabel": "Bloqueado",
+  "modulesAvailablePlural": "{count, plural, =1{1 módulo disponível} other{{count} módulos disponíveis}}",
+  "@modulesAvailablePlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "percentComplete": "{percent}% Concluído",
+  "@percentComplete": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "moduleNotFound": "Módulo não encontrado",
+  "loadingTrail": "Carregando trilha...",
+  "errorScreenTitle": "Ops! Ocorreu um problema",
+  "goBackLabel": "Voltar",
+  "errorLoadingModuleWithError": "Erro ao carregar o módulo: {error}",
+  "@errorLoadingModuleWithError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   }
 }
