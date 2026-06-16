@@ -9,6 +9,7 @@ import 'package:spark_app/services/device_service.dart';
 import 'package:spark_app/widgets/email_verification_dialog.dart';
 import 'package:spark_app/widgets/google_auth_button.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, this.prefillEmail, this.prefillPassword});
@@ -60,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = _passwordController.text;
 
     if (email.isEmpty || password.isEmpty) {
-      SparkSnack.info(context, 'Preencha todos os campos.');
+      SparkSnack.info(context, AppLocalizations.of(context)!.fillAllFields);
       return;
     }
 
@@ -88,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
           // Falhou ao enviar — desloga e mostra erro
           await _authService.signOut();
           if (!mounted) return;
-          SparkSnack.error(context, 'Erro ao enviar código: ${e.toString().replaceAll('Exception: ', '')}');
+          SparkSnack.error(context, AppLocalizations.of(context)!.errorSendingCode(e.toString().replaceAll('Exception: ', '')));
           return;
         }
 
@@ -142,6 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -151,9 +153,9 @@ class _LoginScreenState extends State<LoginScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
-          'Entrar',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 1),
+        title: Text(
+          l10n.loginTitle,
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 1),
         ),
       ),
       body: SingleChildScrollView(
@@ -166,30 +168,30 @@ class _LoginScreenState extends State<LoginScreen> {
             // Linha verde EXS
             Container(width: 40, height: 4, decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(2))),
             const SizedBox(height: 20),
-            const Text('Bem-vindo de volta', style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w800)),
+            Text(l10n.loginWelcomeBack, style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
-            Text('Faça login no SPARK para continuar', style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
+            Text(l10n.loginSubtitle, style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
             const SizedBox(height: 36),
-            _fieldLabel('Endereço de E-mail'),
+            _fieldLabel(l10n.emailAddressLabel),
             const SizedBox(height: 8),
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                hintText: 'Digite seu e-mail',
-                prefixIcon: Icon(Icons.mail_outline, color: AppColors.textMuted),
+              decoration: InputDecoration(
+                hintText: l10n.emailHint,
+                prefixIcon: const Icon(Icons.mail_outline, color: AppColors.textMuted),
               ),
             ),
             const SizedBox(height: 20),
-            _fieldLabel('Senha'),
+            _fieldLabel(l10n.passwordLabel),
             const SizedBox(height: 8),
             TextField(
               controller: _passwordController,
               obscureText: _obscurePassword,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                hintText: 'Digite sua senha',
+                hintText: l10n.passwordHint,
                 prefixIcon: const Icon(Icons.lock_outline, color: AppColors.textMuted),
                 suffixIcon: IconButton(
                   icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility, color: AppColors.textMuted),
@@ -217,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 GestureDetector(
                   onTap: () => setState(() => _rememberDevice = !_rememberDevice),
                   child: Text(
-                    'Lembrar este dispositivo por 30 dias',
+                    l10n.rememberDevice30Days,
                     style: TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 13,
@@ -231,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () => context.push('/forgot-password'),
-                child: const Text('Esqueceu a senha?', style: TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.w600)),
+                child: Text(l10n.forgotPassword, style: const TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.w600)),
               ),
             ),
             const SizedBox(height: 20),
@@ -242,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: _isLoading ? null : _handleLogin,
                 child: _isLoading 
                     ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
-                    : const Text('ENTRAR', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
+                    : Text(l10n.loginButton, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
               ),
             ),
             const SizedBox(height: 20),
@@ -251,13 +253,13 @@ class _LoginScreenState extends State<LoginScreen> {
               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Text('ou', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                child: Text(l10n.orDivider, style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
               ),
               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
             ]),
             const SizedBox(height: 20),
             GoogleAuthButton(
-              label: 'Entrar com Google',
+              label: l10n.signInWithGoogle,
               isLoading: _isGoogleLoading,
               onPressed: (_isLoading || _isGoogleLoading) ? null : _handleGoogleSignIn,
             ),
@@ -265,10 +267,10 @@ class _LoginScreenState extends State<LoginScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Não tem uma conta? ', style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
+                Text(l10n.noAccountQuestion, style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
                 GestureDetector(
                   onTap: () => context.push('/register'),
-                  child: const Text('Cadastre-se', style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),
+                  child: Text(l10n.signUpLink, style: const TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),
                 ),
               ],
             ),
