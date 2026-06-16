@@ -1353,5 +1353,64 @@
         "type": "String"
       }
     }
-  }
+  },
+  "onbWelcomeTitle": "Welcome to\nSPARK",
+  "onbWelcomeDesc": "Your journey into the world of electrical industry technical standards starts now. Shall we learn how the app works?",
+  "onbEnergyTitle": "Energy & Focus",
+  "onbEnergyDesc": "Each lesson you complete spends 1 Energy point. But don't worry, it recovers over time. Keep your Focus so you don't lose your Streak!",
+  "onbRankingTitle": "Ranking & Spark Points",
+  "onbRankingDesc": "Answer correctly, accumulate XP and climb the global and clan Ranking. Earn Spark Points to redeem for benefits in the app.",
+  "onbQ1": "What is consumed when starting a new lesson?",
+  "onbQ2": "What shows how many days in a row you studied?",
+  "onbOptSparkPoints": "Spark Points",
+  "onbOptEnergy": "Energy",
+  "onbOptStreak": "Streak",
+  "onbOptXp": "XP",
+  "onbOptRanking": "Ranking",
+  "onbOptClan": "Clan",
+  "onbSkip": "Skip",
+  "onbCompleteEnter": "FINISH & ENTER",
+  "onbSolveQuiz": "SOLVE THE QUIZ",
+  "onbNext": "NEXT",
+  "onbCompleteMinigame": "Complete the minigame to continue!",
+  "onbWrongAnswers": "Some answers are wrong. Try again!",
+  "onbQuickTest": "Quick Test!",
+  "onbQuickTestDesc": "Let's see if you're ready to master the standards.",
+  "onbCongrats": "Congratulations! You completed the training.",
+  "achievementsUnlockedCount": "{count} Achievements",
+  "@achievementsUnlockedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ofTotalAvailable": "of {total} available",
+  "@ofTotalAvailable": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noAchievementsDesc": "Complete lessons, keep your streak and ace the tests to unlock exclusive achievements.",
+  "dynamicBadges": "DYNAMIC BADGES",
+  "dedicationPresence": "DEDICATION & PRESENCE",
+  "achievementsPerformance": "PERFORMANCE",
+  "achStreak7Title": "7-day Streak",
+  "achStreak7Desc": "Studied 7 days in a row",
+  "achStreak30Title": "30-day Streak",
+  "achStreak30Desc": "Studied 30 days in a row",
+  "achEarlyBirdTitle": "Early Bird",
+  "achEarlyBirdDesc": "Studied before 7am for 5 days",
+  "achDedicatedTitle": "Dedicated",
+  "achDedicatedDesc": "Active for 60 days",
+  "achFirstEvalTitle": "First Evaluation",
+  "achFirstEvalDesc": "Completed your first evaluation",
+  "achTopScoreTitle": "Top Score",
+  "achTopScoreDesc": "Scored 100% on an evaluation",
+  "achPerfectStreakTitle": "Perfect Streak",
+  "achPerfectStreakDesc": "10 correct answers in a row in the quiz",
+  "achUnbeatableTitle": "Unbeatable",
+  "achUnbeatableDesc": "Completed 5 evaluations with top score"
 }

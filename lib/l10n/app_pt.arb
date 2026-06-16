@@ -1969,5 +1969,64 @@
         "type": "String"
       }
     }
-  }
+  },
+  "onbWelcomeTitle": "Bem-vindo ao\nSPARK",
+  "onbWelcomeDesc": "Sua jornada no mundo das normas técnicas do setor elétrico começa agora. Vamos aprender como o app funciona?",
+  "onbEnergyTitle": "Energia & Foco",
+  "onbEnergyDesc": "Cada lição que você completa gasta 1 ponto de Energia. Mas não se preocupe, ela se recupera com o tempo. Mantenha seu Foco para não perder o Streak!",
+  "onbRankingTitle": "Ranking & Spark Points",
+  "onbRankingDesc": "Acerte as questões, acumule XP e suba no Ranking global e do seu Clã. Ganhe Spark Points para trocar por benefícios no app.",
+  "onbQ1": "O que é consumido ao iniciar uma nova lição?",
+  "onbQ2": "O que mostra quantos dias seguidos você estudou?",
+  "onbOptSparkPoints": "Spark Points",
+  "onbOptEnergy": "Energia",
+  "onbOptStreak": "Streak",
+  "onbOptXp": "XP",
+  "onbOptRanking": "Ranking",
+  "onbOptClan": "Clã",
+  "onbSkip": "Pular",
+  "onbCompleteEnter": "CONCLUIR E ENTRAR",
+  "onbSolveQuiz": "RESOLVA O QUIZ",
+  "onbNext": "AVANÇAR",
+  "onbCompleteMinigame": "Complete o minigame para prosseguir!",
+  "onbWrongAnswers": "Algumas respostas estão erradas. Tente novamente!",
+  "onbQuickTest": "Teste Rápido!",
+  "onbQuickTestDesc": "Vamos ver se você está pronto para dominar as normas.",
+  "onbCongrats": "Parabéns! Você concluiu o treinamento.",
+  "achievementsUnlockedCount": "{count} Conquistas",
+  "@achievementsUnlockedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ofTotalAvailable": "de {total} disponíveis",
+  "@ofTotalAvailable": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noAchievementsDesc": "Complete lições, mantenha seu streak de ofensiva e gabarite os testes para destravar conquistas exclusivas.",
+  "dynamicBadges": "BADGES DINÂMICAS",
+  "dedicationPresence": "DEDICAÇÃO E PRESENÇA",
+  "achievementsPerformance": "PERFORMANCE",
+  "achStreak7Title": "Streak 7 dias",
+  "achStreak7Desc": "Estudou 7 dias consecutivos",
+  "achStreak30Title": "Streak 30 dias",
+  "achStreak30Desc": "Estudou 30 dias consecutivos",
+  "achEarlyBirdTitle": "Madrugador",
+  "achEarlyBirdDesc": "Estudou antes das 7h por 5 dias",
+  "achDedicatedTitle": "Dedicado",
+  "achDedicatedDesc": "Ativo por 60 dias",
+  "achFirstEvalTitle": "Primeira Avaliação",
+  "achFirstEvalDesc": "Completou sua primeira avaliação",
+  "achTopScoreTitle": "Nota Máxima",
+  "achTopScoreDesc": "Tirou 100% em uma avaliação",
+  "achPerfectStreakTitle": "Sequência Perfeita",
+  "achPerfectStreakDesc": "10 acertos seguidos no quiz",
+  "achUnbeatableTitle": "Imbatível",
+  "achUnbeatableDesc": "Completou 5 avaliações com nota máxima"
 }
