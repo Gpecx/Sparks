@@ -651,7 +651,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     }
                   },
                   icon: Icon(passed ? Icons.play_arrow : Icons.replay, color: AppColors.background),
-                  label: Text(passed ? AppLocalizations.of(context)!.continueButton : AppLocalizations.of(context)!.redoButton, style: const TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                  label: Text(passed ? AppLocalizations.of(context)!.continueButton : AppLocalizations.of(context)!.redoButton, style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: passed ? AppColors.primary : Colors.redAccent,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -666,7 +666,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     Navigator.of(modalCtx).pop(); 
                     rootNavigator.pop(false); 
                   },
-                  child: const Text(AppLocalizations.of(context)!.exitButton, style: TextStyle(color: AppColors.textMuted)),
+                  child: Text(AppLocalizations.of(context)!.exitButton, style: TextStyle(color: AppColors.textMuted)),
                 ),
             ],
           ),
@@ -696,7 +696,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                 child: const Icon(Icons.battery_alert, size: 50, color: Colors.redAccent),
               ),
               const SizedBox(height: 24),
-              const Text(AppLocalizations.of(context)!.batteryDepleted, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700)),
+              Text(AppLocalizations.of(context)!.batteryDepleted, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700)),
               const SizedBox(height: 12),
               Text(AppLocalizations.of(context)!.batteryDepletedDescription, textAlign: TextAlign.center, style: TextStyle(color: AppColors.textSecondary, fontSize: 15, height: 1.4)),
               const SizedBox(height: 20),
@@ -709,7 +709,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     context.push('/store');
                   },
                   icon: const Icon(Icons.all_inclusive, color: AppColors.background),
-                  label: const Text(AppLocalizations.of(context)!.viewPlansInfiniteBattery, style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                  label: Text(AppLocalizations.of(context)!.viewPlansInfiniteBattery, style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                   style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
                 ),
               ),
@@ -719,7 +719,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                child: const Text(AppLocalizations.of(context)!.exitQuiz, style: TextStyle(color: AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.w700)),
+                child: Text(AppLocalizations.of(context)!.exitQuiz, style: TextStyle(color: AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.w700)),
               ),
               const SizedBox(height: 10),
             ],
@@ -757,7 +757,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(20)),
-                      child: const Text(AppLocalizations.of(context)!.skipButton, style: TextStyle(color: Colors.white70, fontSize: 12)),
+                      child: Text(AppLocalizations.of(context)!.skipButton, style: TextStyle(color: Colors.white70, fontSize: 12)),
                     ),
                   ),
                 ),
@@ -772,9 +772,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                   child: const Icon(Icons.play_arrow, color: Colors.white, size: 40),
                 ),
                 const SizedBox(height: 20),
-                const Text(AppLocalizations.of(context)!.powerplayTitle, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800, fontStyle: FontStyle.italic, letterSpacing: 2)),
+                Text(AppLocalizations.of(context)!.powerplayTitle, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800, fontStyle: FontStyle.italic, letterSpacing: 2)),
                 const SizedBox(height: 8),
-                const Text(AppLocalizations.of(context)!.congratsModule, style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.w700)),
+                Text(AppLocalizations.of(context)!.congratsModule, style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 14),
                 Text(AppLocalizations.of(context)!.tryPremiumVideosFree, textAlign: TextAlign.center, style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.4)),
                 const SizedBox(height: 24),
@@ -789,7 +789,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                       rootNavigator.pop(true);
                       rootRouter.push('/standard-detail');
                     },
-                    child: const Text(AppLocalizations.of(context)!.tryFree7Days, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14, letterSpacing: 1)),
+                    child: Text(AppLocalizations.of(context)!.tryFree7Days, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14, letterSpacing: 1)),
                   ),
                 ),
               ],
@@ -1004,7 +1004,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                   child: ElevatedButton.icon(
                     onPressed: () => Navigator.pop(context, false),
                     icon: const Icon(Icons.arrow_back, color: AppColors.background),
-                    label: const Text(AppLocalizations.of(context)!.backButton, style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                    label: Text(AppLocalizations.of(context)!.backButton, style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, letterSpacing: 1)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -1457,7 +1457,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
               style: ElevatedButton.styleFrom(backgroundColor: feedbackColor, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
               child: _isCompleting
                   ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                  : Text(_currentQuestion + 1 >= _questions.length ? AppLocalizations.of(context)!.finishButton : AppLocalizations.of(context)!.continueButton, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                  : Text(_currentQuestion + 1 >= _questions.length ? AppLocalizations.of(context)!.finishButton : AppLocalizations.of(context)!.continueButton, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700, letterSpacing: 1)),
             ),
           ),
         ],

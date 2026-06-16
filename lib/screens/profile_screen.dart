@@ -301,7 +301,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(AppLocalizations.of(context)!.debugInfoTitle, style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.w700)),
+                            Text(AppLocalizations.of(context)!.debugInfoTitle, style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
                             Text('UID: ${userService.uid}', style: const TextStyle(color: Colors.white70, fontSize: 10, fontFamily: 'monospace')),
                             Text('Role Firestore: ${user?.role ?? "Nula"}', style: const TextStyle(color: Colors.white70, fontSize: 10)),
@@ -352,14 +352,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(AppLocalizations.of(context)!.achievementsTitle,
+                        Text(AppLocalizations.of(context)!.achievementsTitle,
                             style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
                         MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
                             onTap: () =>
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen())),
-                            child: const Text(AppLocalizations.of(context)!.seeAll,
+                            child: Text(AppLocalizations.of(context)!.seeAll,
                                 style: TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w700)),
                           ),
                         ),
@@ -395,7 +395,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(AppLocalizations.of(context)!.weeklyRankingTitle,
+                        Text(AppLocalizations.of(context)!.weeklyRankingTitle,
                             style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
                         const SizedBox(height: 12),
                         Container(
@@ -427,7 +427,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(AppLocalizations.of(context)!.globalLeaderboard,
+                                    Text(AppLocalizations.of(context)!.globalLeaderboard,
                                         style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700)),
                                     const SizedBox(height: 4),
                                     Text(
@@ -588,7 +588,7 @@ class _ClanSection extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(AppLocalizations.of(context)!.clanTitle,
+          Text(AppLocalizations.of(context)!.clanTitle,
               style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
           const SizedBox(height: 12),
           Container(
@@ -634,7 +634,7 @@ class _ClanSection extends StatelessWidget {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             elevation: 0,
                           ),
-                          child: const Text(AppLocalizations.of(context)!.createClanUpper,
+                          child: Text(AppLocalizations.of(context)!.createClanUpper,
                               style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13)),
                         ),
                       ),
@@ -650,7 +650,7 @@ class _ClanSection extends StatelessWidget {
                             side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5), width: 1.5),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
-                          child: const Text(AppLocalizations.of(context)!.enterUpper,
+                          child: Text(AppLocalizations.of(context)!.enterUpper,
                               style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 13)),
                         ),
                       ),
@@ -667,7 +667,7 @@ class _ClanSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(AppLocalizations.of(context)!.myClanTitle,
+        Text(AppLocalizations.of(context)!.myClanTitle,
             style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
         const SizedBox(height: 12),
         Container(
@@ -702,7 +702,7 @@ class _ClanSection extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800)),
                         const SizedBox(height: 4),
-                        Text(AppLocalizations.of(context)!.clanMemberRole, style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                        Text(AppLocalizations.of(context)!.clanMemberRole, style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
                       ],
                     ),
                   ),
@@ -717,7 +717,7 @@ class _ClanSection extends StatelessWidget {
                     MaterialPageRoute(builder: (_) => const ClanScreen(isViewingActive: true)),
                   ),
                   icon: const Icon(Icons.groups, size: 18, color: Colors.white),
-                  label: const Text(AppLocalizations.of(context)!.viewClanUpper,
+                  label: Text(AppLocalizations.of(context)!.viewClanUpper,
                       style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1, color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,

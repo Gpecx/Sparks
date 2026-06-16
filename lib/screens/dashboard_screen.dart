@@ -442,14 +442,14 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(AppLocalizations.of(context)!.notificationsTitle, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)),
+                        Text(AppLocalizations.of(context)!.notificationsTitle, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)),
                         if (service.unreadCount > 0)
                           TextButton(
                             onPressed: () {
                               service.markAllRead(uid);
                               Navigator.pop(ctx);
                             },
-                            child: const Text(AppLocalizations.of(context)!.markAllAsRead, style: TextStyle(color: AppColors.primary, fontSize: 12)),
+                            child: Text(AppLocalizations.of(context)!.markAllAsRead, style: TextStyle(color: AppColors.primary, fontSize: 12)),
                           ),
                       ],
                     ),
@@ -770,7 +770,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
                       ),
-                      child: const Text(AppLocalizations.of(context)!.comingSoonUpper, style: TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
+                      child: Text(AppLocalizations.of(context)!.comingSoonUpper, style: TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
                     ),
                   ],
                 ),
@@ -788,7 +788,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     
     return userProgressAsync.when(
       loading: () => const SparkSkeleton(width: double.infinity, height: 120),
-      error: (e, st) => const SizedBox(height: 120, child: Center(child: Text(AppLocalizations.of(context)!.errorLoadingProgress, style: TextStyle(color: AppColors.error)))),
+      error: (e, st) => SizedBox(height: 120, child: Center(child: Text(AppLocalizations.of(context)!.errorLoadingProgress, style: TextStyle(color: AppColors.error)))),
       data: (list) {
         if (list.isEmpty) return _buildContinueLearningContent(null);
         
@@ -927,7 +927,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text(AppLocalizations.of(context)!.notNowButton, style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.w700)),
+            child: Text(AppLocalizations.of(context)!.notNowButton, style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.w700)),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -938,7 +938,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               Navigator.pop(ctx);
               SparkSnack.info(context, AppLocalizations.of(context)!.startingDailyChallenge);
             },
-            child: const Text(AppLocalizations.of(context)!.startChallengeButton, style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700)),
+            child: Text(AppLocalizations.of(context)!.startChallengeButton, style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700)),
           ),
         ],
       ),
@@ -976,7 +976,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 children: [
                   const Icon(Icons.shield_outlined, color: AppColors.textMuted, size: 28),
                   const SizedBox(height: 8),
-                  const Text(AppLocalizations.of(context)!.noActiveCovenant, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14)),
+                  Text(AppLocalizations.of(context)!.noActiveCovenant, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14)),
                   const SizedBox(height: 4),
                   const Expanded(
                     child: Text(
@@ -996,7 +996,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                       minimumSize: const Size(0, 32),
                     ),
-                    child: const Text(AppLocalizations.of(context)!.acceptCovenantButton, style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, fontSize: 11)),
+                    child: Text(AppLocalizations.of(context)!.acceptCovenantButton, style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, fontSize: 11)),
                   )
                 ],
               ),
@@ -1261,7 +1261,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(AppLocalizations.of(context)!.powerplayStreamingTitle, style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700)),
+                  Text(AppLocalizations.of(context)!.powerplayStreamingTitle, style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700)),
                   const SizedBox(height: 4),
                   Text(
                     AppLocalizations.of(context)!.technicalVideosDescription,
@@ -1277,7 +1277,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 gradient: const LinearGradient(colors: [AppColors.primary, AppColors.cardBorder]),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text(AppLocalizations.of(context)!.learnMoreButton, style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700)),
+              child: Text(AppLocalizations.of(context)!.learnMoreButton, style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700)),
             ),
           ],
         ),
