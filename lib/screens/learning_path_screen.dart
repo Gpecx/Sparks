@@ -417,7 +417,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
   @override
   Widget build(BuildContext context) {
     if (widget.category == null || widget.module == null) {
-      return const Scaffold(body: Center(child: Text(AppLocalizations.of(context)!.errorCategoryOrModuleMissing)));
+      return Scaffold(body: Center(child: Text(AppLocalizations.of(context)!.errorCategoryOrModuleMissing)));
     }
 
     // Obter progresso
@@ -523,7 +523,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          const Text(AppLocalizations.of(context)!.currentModuleTitle, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+                                          Text(AppLocalizations.of(context)!.currentModuleTitle, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
                                           const SizedBox(height: 2),
                                           Text(
                                             'Em Progresso · $completedLessons de $totalLessons etapas',
@@ -574,7 +574,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
                     error: (e, s) => Center(child: Text('Erro: $e', style: const TextStyle(color: Colors.red))),
                     data: (lessons) {
                       if (lessons.isEmpty) {
-                        return const Center(child: Text(AppLocalizations.of(context)!.noLessonsFoundForModule, style: TextStyle(color: Colors.white54)));
+                        return Center(child: Text(AppLocalizations.of(context)!.noLessonsFoundForModule, style: TextStyle(color: Colors.white54)));
                       }
 
                       return LayoutBuilder(
