@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/arc_flash.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -89,8 +90,8 @@ class _ArcFlashScreenState extends State<ArcFlashScreen> {
         _disclaimerBox(),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Classe do equipamento',
-          subtitle: 'Define gap típico e o expoente de distância (x) do 1584.',
+          title: AppLocalizations.of(context)!.arcFlashEquipClass,
+          subtitle: AppLocalizations.of(context)!.arcFlashDefineGap,
           children: [
             DropdownButtonFormField<EnclosureFactor>(
               initialValue: _preset,
@@ -118,20 +119,20 @@ class _ArcFlashScreenState extends State<ArcFlashScreen> {
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Parâmetros da falta',
+          title: AppLocalizations.of(context)!.arcFlashParams,
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _iBf, label: 'I curto Ibf (kA)'),
-              ToolField(controller: _voltage, label: 'Tensão (kV)'),
+              ToolField(controller: _iBf, label: AppLocalizations.of(context)!.arcFlashIbf),
+              ToolField(controller: _voltage, label: AppLocalizations.of(context)!.arcFlashVolt),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
-              ToolField(controller: _time, label: 'T eliminação (s)'),
-              ToolField(controller: _gap, label: 'Gap eletrodos (mm)'),
+              ToolField(controller: _time, label: AppLocalizations.of(context)!.arcFlashTime),
+              ToolField(controller: _gap, label: AppLocalizations.of(context)!.arcFlashGap),
             ]),
             const SizedBox(height: 12),
             ToolField(
-                controller: _distance, label: 'Distância de trabalho (mm)'),
+                controller: _distance, label: AppLocalizations.of(context)!.arcFlashWorkDist),
           ],
         ),
         const SizedBox(height: 20),
@@ -152,15 +153,15 @@ class _ArcFlashScreenState extends State<ArcFlashScreen> {
     final cat = r.ppeCategory;
     final color = _catColor(cat);
     final results = <ToolResult>[
-      ToolResult('Energia incidente',
+      ToolResult(AppLocalizations.of(context)!.arcFlashEnergy,
           '${fmtNumber(r.incidentEnergy, decimals: 2)} cal/cm²'),
       if (!r.arcingCurrentKa.isNaN)
-        ToolResult('Corrente de arco Ia',
+        ToolResult(AppLocalizations.of(context)!.arcFlashIa,
             '${fmtNumber(r.arcingCurrentKa, decimals: 2)} kA'),
       if (_safeDist != null && !_safeDist!.isNaN)
-        ToolResult('Distância segura (1,2 cal/cm²)',
+        ToolResult(AppLocalizations.of(context)!.arcFlashSafeDist,
             '${fmtNumber(_safeDist!, decimals: 0)} mm'),
-      ToolResult('Modelo usado', r.model),
+      ToolResult(AppLocalizations.of(context)!.arcFlashModel, r.model),
     ];
 
     return Column(
@@ -206,7 +207,7 @@ class _ArcFlashScreenState extends State<ArcFlashScreen> {
         const SizedBox(height: 12),
         ToolResultsPanel(
           results: results,
-          title: 'Resultado',
+          title: AppLocalizations.of(context)!.arcFlashResult,
           note: r.outOfRange
               ? 'Fora da faixa de validade do IEEE 1584-2002 (208 V–15 kV, '
                   '0,7–106 kA, gap 13–152 mm) — usado o modelo de Lee, mais '
@@ -251,9 +252,7 @@ class _ArcFlashScreenState extends State<ArcFlashScreen> {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              'Triagem rápida de energia incidente (IEEE 1584-2002 / Lee). '
-              'NÃO substitui o estudo formal de arc flash — use a corrente de '
-              'curto real e os tempos de eliminação dos relés do barramento.',
+              AppLocalizations.of(context)!.arcFlashDesc,
               style: TextStyle(
                 color: AppColors.warning.withValues(alpha: 0.95),
                 fontSize: 12,

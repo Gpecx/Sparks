@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/utils/instrument_transformers.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
@@ -113,7 +114,7 @@ class _RtcRtpScreenState extends State<RtcRtpScreen> {
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Conversões (opcional)',
+          title: AppLocalizations.of(context)!.rtcRtpConversions,
           children: [
             ToolField(
               controller: _primaryVal,

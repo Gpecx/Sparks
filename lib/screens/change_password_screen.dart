@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
@@ -201,7 +202,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Center(
+                  Center(
                     child: Text(
                       'Altere sua senha de acesso',
                       style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
@@ -220,7 +221,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       children: [
                         Icon(Icons.info_outline, color: AppColors.primary.withValues(alpha: 0.7), size: 18),
                         const SizedBox(width: 10),
-                        const Expanded(
+                        Expanded(
                           child: Text(
                             'Por segurança, informe sua senha atual antes de definir uma nova.',
                             style: TextStyle(color: AppColors.textSecondary, fontSize: 12, height: 1.4),
@@ -327,7 +328,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               height: 24,
                               child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3),
                             )
-                          : const Row(
+                          : Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(Icons.lock_outline, color: Colors.white, size: 18),

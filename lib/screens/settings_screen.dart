@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
@@ -64,38 +65,38 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               _sectionTitle('CONTA E PERFIL'),
               _tile(
                 icon: Icons.person_outline,
-                title: 'Editar Perfil',
-                subtitle: 'Nome, e-mail, cargo',
+                title: AppLocalizations.of(context)!.settingsEditProfile,
+                subtitle: AppLocalizations.of(context)!.settingsEditProfileDesc,
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfileScreen())),
               ),
               _tile(
                 icon: Icons.emoji_events_outlined,
                 title: 'Ver Minhas Conquistas',
-                subtitle: 'Página de troféus e insígnias',
+                subtitle: AppLocalizations.of(context)!.settingsAchievementsDesc,
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen())),
               ),
               _tile(
                 icon: Icons.trending_up,
-                title: 'Meu Progresso',
-                subtitle: 'Acompanhar progresso nos módulos',
+                title: AppLocalizations.of(context)!.settingsMyProgress,
+                subtitle: AppLocalizations.of(context)!.settingsTrackProgress,
                 onTap: () => context.push('/my-progress'),
               ),
               _tile(
                 icon: Icons.lock_outline,
-                title: 'Alterar Senha',
-                subtitle: 'Segurança da conta',
+                title: AppLocalizations.of(context)!.settingsChangePassword,
+                subtitle: AppLocalizations.of(context)!.settingsChangePasswordDesc,
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ChangePasswordScreen())),
               ),
               _tile(
                 icon: Icons.card_membership_outlined,
-                title: 'Gerir Plano',
-                subtitle: 'Premium, planos ativos',
+                title: AppLocalizations.of(context)!.settingsManagePlan,
+                subtitle: AppLocalizations.of(context)!.settingsManagePlanDesc,
                 onTap: () => context.push('/store'),
               ),
               _tile(
                 icon: Icons.delete_outline,
-                title: 'Eliminar Conta',
-                subtitle: 'Apagar permanentemente',
+                title: AppLocalizations.of(context)!.settingsDeleteAccount,
+                subtitle: AppLocalizations.of(context)!.settingsDeleteAccountDesc,
                 titleColor: AppColors.error,
                 onTap: _deleteDialog,
               ),
@@ -104,36 +105,36 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               _sectionTitle('NOTIFICAÇÕES INTELIGENTES'),
               _switchTile(
                 icon: Icons.local_fire_department,
-                title: 'Alertas de Streak',
-                subtitle: 'Quando seu streak está em risco',
+                title: AppLocalizations.of(context)!.settingsStreakAlerts,
+                subtitle: AppLocalizations.of(context)!.settingsStreakAlertsDesc,
                 value: _streakAlerts,
                 onChanged: (v) => setState(() => _streakAlerts = v),
               ),
               _switchTile(
                 icon: Icons.person_search_outlined,
-                title: 'Amigos Online',
-                subtitle: 'Quando um amigo está estudando',
+                title: AppLocalizations.of(context)!.settingsOnlineFriends,
+                subtitle: AppLocalizations.of(context)!.settingsOnlineFriendsDesc,
                 value: _friendActivity,
                 onChanged: (v) => setState(() => _friendActivity = v),
               ),
               _switchTile(
                 icon: Icons.bolt,
-                title: 'Desafio Diário',
-                subtitle: 'Lembrete do desafio rápido',
+                title: AppLocalizations.of(context)!.settingsDailyChallenge,
+                subtitle: AppLocalizations.of(context)!.settingsDailyChallengeDesc,
                 value: _dailyChallengeAlert,
                 onChanged: (v) => setState(() => _dailyChallengeAlert = v),
               ),
               _switchTile(
                 icon: Icons.emoji_events_outlined,
-                title: 'Torneio Semanal',
-                subtitle: 'Novos torneios e posição no ranking',
+                title: AppLocalizations.of(context)!.settingsWeeklyTournament,
+                subtitle: AppLocalizations.of(context)!.settingsWeeklyTournamentDesc,
                 value: _tournamentAlerts,
                 onChanged: (v) => setState(() => _tournamentAlerts = v),
               ),
               _switchTile(
                 icon: Icons.star_outline,
-                title: 'Conquistas',
-                subtitle: 'Quando você desbloquear badges',
+                title: AppLocalizations.of(context)!.settingsAchievements,
+                subtitle: AppLocalizations.of(context)!.settingsAlertFreqDesc,
                 value: _achievementAlerts,
                 onChanged: (v) => setState(() => _achievementAlerts = v),
               ),
@@ -142,15 +143,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               _sectionTitle('PERSONALIZAÇÃO DE NOTIFICAÇÕES'),
               _switchTile(
                 icon: Icons.volume_off_outlined,
-                title: 'Modo Silencioso',
-                subtitle: 'Pausa todas as notificações',
+                title: AppLocalizations.of(context)!.settingsSilentMode,
+                subtitle: AppLocalizations.of(context)!.settingsSilentModeDesc,
                 value: _silentMode,
                 onChanged: (v) => setState(() => _silentMode = v),
               ),
               _switchTile(
                 icon: Icons.headset_mic_outlined,
-                title: 'Horário Silencioso',
-                subtitle: 'Sem notificações das 22h às 7h',
+                title: AppLocalizations.of(context)!.settingsSilentHours,
+                subtitle: AppLocalizations.of(context)!.settingsSilentHoursDesc,
                 value: _quietHoursEnabled,
                 onChanged: (v) => setState(() => _quietHoursEnabled = v),
               ),
@@ -174,16 +175,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         children: [
                           const Icon(Icons.text_fields, color: AppColors.textMuted, size: 22),
                           const SizedBox(width: 12),
-                          const Expanded(
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Tamanho do Texto',
+                                  AppLocalizations.of(context)!.settingsTextSize,
                                   style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                                 ),
                                 Text(
-                                  'Ajuste o tamanho da fonte em todo o app',
+                                  AppLocalizations.of(context)!.settingsTextSizeDesc,
                                   style: TextStyle(color: AppColors.textMuted, fontSize: 12),
                                 ),
                               ],
@@ -250,7 +251,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Row(
+                      Row(
                         children: [
                           Icon(Icons.language_outlined, color: AppColors.textMuted, size: 22),
                           SizedBox(width: 12),
@@ -259,11 +260,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Idioma',
+                                  AppLocalizations.of(context)!.settingsLanguage,
                                   style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                                 ),
                                 Text(
-                                  'Selecione o idioma da interface e dos conteúdos',
+                                  AppLocalizations.of(context)!.settingsLanguageDesc,
                                   style: TextStyle(color: AppColors.textMuted, fontSize: 12),
                                 ),
                               ],
@@ -292,9 +293,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 borderSide: BorderSide.none,
                               ),
                             ),
-                            items: const [
-                              DropdownMenuItem(value: 'pt', child: Text('Português', style: TextStyle(color: Colors.white))),
-                              DropdownMenuItem(value: 'en', child: Text('English', style: TextStyle(color: Colors.white))),
+                            items: [
+                              DropdownMenuItem(value: 'pt', child: Text(AppLocalizations.of(context)!.settingsPortuguese, style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: 'en', child: Text(AppLocalizations.of(context)!.settingsEnglish, style: TextStyle(color: Colors.white))),
                               // Espanhol será reativado quando a tradução ES estiver concluída.
                             ],
                             onChanged: (code) {
@@ -323,7 +324,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Row(
+                      Row(
                         children: [
                           Icon(Icons.remove_red_eye_outlined, color: AppColors.textMuted, size: 22),
                           SizedBox(width: 12),
@@ -332,11 +333,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Modo Daltônico',
+                                  AppLocalizations.of(context)!.settingsColorBlindMode,
                                   style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                                 ),
                                 Text(
-                                  'Ajuste as cores para diferentes tipos de daltonismo',
+                                  AppLocalizations.of(context)!.settingsColorBlindDesc,
                                   style: TextStyle(color: AppColors.textMuted, fontSize: 12),
                                 ),
                               ],
@@ -361,11 +362,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 borderSide: BorderSide.none,
                               ),
                             ),
-                            items: const [
-                              DropdownMenuItem(value: ColorblindMode.none, child: Text('Nenhum', style: TextStyle(color: Colors.white))),
-                              DropdownMenuItem(value: ColorblindMode.protanopia, child: Text('Protanopia (Vermelho-Verde)', style: TextStyle(color: Colors.white))),
-                              DropdownMenuItem(value: ColorblindMode.deuteranopia, child: Text('Deuteranopia (Verde-Vermelho)', style: TextStyle(color: Colors.white))),
-                              DropdownMenuItem(value: ColorblindMode.tritanopia, child: Text('Tritanopia (Azul-Amarelo)', style: TextStyle(color: Colors.white))),
+                            items: [
+                              DropdownMenuItem(value: ColorblindMode.none, child: Text(AppLocalizations.of(context)!.settingsNone, style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: ColorblindMode.protanopia, child: Text(AppLocalizations.of(context)!.settingsProtanopia, style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: ColorblindMode.deuteranopia, child: Text(AppLocalizations.of(context)!.settingsDeuteranopia, style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: ColorblindMode.tritanopia, child: Text(AppLocalizations.of(context)!.settingsTritanopia, style: TextStyle(color: Colors.white))),
                             ],
                             onChanged: (mode) {
                               if (mode != null) {
@@ -396,8 +397,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     _sectionTitle('ADMINISTRAÇÃO'),
                     _tile(
                       icon: Icons.admin_panel_settings_outlined,
-                      title: 'Painel Admin',
-                      subtitle: 'Gerenciar categorias, módulos e lições',
+                      title: AppLocalizations.of(context)!.settingsAdminPanel,
+                      subtitle: AppLocalizations.of(context)!.settingsAdminPanelDesc,
                       titleColor: const Color(0xFFFF8C00),
                       onTap: () => context.push('/admin'),
                     ),
@@ -409,8 +410,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               _sectionTitle('ACESSO'),
               _tile(
                 icon: Icons.vpn_key_outlined,
-                title: 'Resgatar código de acesso',
-                subtitle: 'Liberar acesso completo com um código',
+                title: AppLocalizations.of(context)!.settingsRedeemCode,
+                subtitle: AppLocalizations.of(context)!.settingsRedeemCodeDesc,
                 onTap: _showRedeemCodeDialog,
               ),
               const SizedBox(height: 8),
@@ -418,26 +419,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               _sectionTitle('SOBRE E SUPORTE'),
               _tile(
                 icon: Icons.info_outline,
-                title: 'Versão do App',
-                subtitle: 'SPARK v1.0.4 · EXS Solutions',
+                title: AppLocalizations.of(context)!.settingsAppVersion,
+                subtitle: AppLocalizations.of(context)!.settingsAppVersionDesc,
                 onTap: () {},
               ),
               _tile(
                 icon: Icons.help_outline,
-                title: 'Central de Ajuda / FAQ',
-                subtitle: 'Perguntas frequentes',
+                title: AppLocalizations.of(context)!.settingsHelpCenter,
+                subtitle: AppLocalizations.of(context)!.settingsHelpCenterDesc,
                 onTap: _showFaqDialog,
               ),
               _tile(
                 icon: Icons.headset_mic_outlined,
-                title: 'Suporte Técnico',
-                subtitle: 'Reporte um problema',
+                title: AppLocalizations.of(context)!.settingsTechSupport,
+                subtitle: AppLocalizations.of(context)!.settingsTechSupportDesc,
                 onTap: () => context.push('/support'),
               ),
               _tile(
                 icon: Icons.description_outlined,
-                title: 'Termos de Uso',
-                subtitle: 'Leia nossos termos',
+                title: AppLocalizations.of(context)!.settingsTermsOfUse,
+                subtitle: AppLocalizations.of(context)!.settingsTermsOfUseDesc,
                 onTap: () => context.push('/terms-of-use'),
               ),
               const SizedBox(height: 20),
@@ -453,8 +454,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     router.go('/');
                   },
                   icon: const Icon(Icons.logout, size: 18),
-                  label: const Text(
-                    'SAIR DA CONTA',
+                  label: Text(AppLocalizations.of(context)!.settingsLogout,
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, letterSpacing: 1.5),
                   ),
                   style: OutlinedButton.styleFrom(
@@ -511,7 +511,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(children: [Icon(Icons.speed_outlined, color: AppColors.textMuted, size: 22), SizedBox(width: 12), Text('Frequência de Alertas', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600))]),
+          Row(children: [Icon(Icons.speed_outlined, color: AppColors.textMuted, size: 22), SizedBox(width: 12), Text(AppLocalizations.of(context)!.settingsAlertFreq, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600))]),
           const SizedBox(height: 12),
           Row(children: ['Mínima', 'Normal', 'Alta'].map((f) {
             final isSelected = _notifFrequency == f;
@@ -532,7 +532,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setSt) => AlertDialog(
           backgroundColor: AppColors.card,
-          title: const Text('Resgatar código de acesso',
+          title: Text(AppLocalizations.of(context)!.settingsRedeemCode,
               style: TextStyle(color: Colors.white)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -610,7 +610,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       width: 18,
                       height: 18,
                       child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                  : const Text('Resgatar'),
+                  : Text(AppLocalizations.of(context)!.settingsRedeem),
             ),
           ],
         ),
@@ -642,12 +642,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.settingsCancel),
           ),
           ElevatedButton(
             onPressed: () => _confirmDelete(ctx),
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
-            child: const Text('ELIMINAR'),
+            child: Text(AppLocalizations.of(context)!.settingsDeleteAction),
           ),
         ],
       ),
@@ -662,7 +662,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => const Center(child: CircularProgressIndicator()),
+      builder: (_) => Center(child: CircularProgressIndicator()),
     );
 
     try {

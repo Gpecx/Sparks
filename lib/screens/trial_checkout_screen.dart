@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:go_router/go_router.dart';
@@ -144,7 +145,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
             const Icon(Icons.credit_card_off_rounded,
                 color: AppColors.error, size: 48),
             const SizedBox(height: 16),
-            const Text('Ops!',
+            Text(AppLocalizations.of(context)!.trialCheckoutOops,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -208,7 +209,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
               ),
               const SizedBox(height: 20),
               Text(
-                'Trial Ativado! 🎉',
+                AppLocalizations.of(context)!.trialCheckoutSuccess,
                 style: TextStyle(
                     color: widget.plan.accentColor,
                     fontSize: 22,
@@ -427,7 +428,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                         color: AppColors.textMuted, size: 12),
                     const SizedBox(width: 4),
                     Text(
-                      'Pagamento seguro via Asaas · PCI-DSS',
+                      AppLocalizations.of(context)!.trialCheckoutSecure,
                       style: TextStyle(
                           color: AppColors.textMuted,
                           fontSize: 11),
@@ -605,7 +606,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
           ),
           const SizedBox(height: 8),
           _summaryRow('Cancelamento', 'A qualquer momento', AppColors.textMuted),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(vertical: 12),
             child: Divider(color: Color(0xFF2A2A3E)),
           ),

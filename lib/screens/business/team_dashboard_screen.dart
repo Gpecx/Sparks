@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -91,7 +92,7 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
           body: SafeArea(
             top: false,
             child: orgAsync.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
+              loading: () => Center(child: CircularProgressIndicator()),
               error: (e, _) => Center(
                   child: Text('Erro: $e',
                       style: const TextStyle(color: AppColors.textMuted))),
@@ -222,7 +223,7 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
                 fontWeight: FontWeight.w700)),
         const SizedBox(height: 8),
         if (members.isEmpty)
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(vertical: 16),
             child: Text('Nenhum membro ainda. Convide pelo e-mail acima.',
                 style: TextStyle(color: AppColors.textMuted)),

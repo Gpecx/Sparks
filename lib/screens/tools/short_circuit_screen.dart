@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/utils/short_circuit.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
@@ -64,9 +65,9 @@ class _ShortCircuitScreenState extends State<ShortCircuitScreen> {
     setState(() {
       _warning = null;
       _results = [
-        ToolResult('Trifásica (3φ)', _amps(r.threePhase)),
-        ToolResult('Bifásica (FF)', _amps(r.lineToLine)),
-        ToolResult('Monofásica-terra (FT)', _amps(r.lineToGround)),
+        ToolResult(AppLocalizations.of(context)!.shortCircuit3P, _amps(r.threePhase)),
+        ToolResult(AppLocalizations.of(context)!.shortCircuitLL, _amps(r.lineToLine)),
+        ToolResult(AppLocalizations.of(context)!.shortCircuitLG, _amps(r.lineToGround)),
       ];
     });
   }
@@ -77,35 +78,35 @@ class _ShortCircuitScreenState extends State<ShortCircuitScreen> {
       title: 'Curto-Circuito',
       children: [
         ToolCard(
-          title: 'Dados do sistema',
+          title: AppLocalizations.of(context)!.shortCircuitData,
           subtitle:
-              'E = V_LL/√3.  3φ: E/Z1 · FF: √3·E/(Z1+Z2) · FT: 3·E/(Z1+Z2+Z0+3·Zf)',
+              AppLocalizations.of(context)!.shortCircuitDesc,
           children: [
             ToolField(
               controller: _vLL,
-              label: 'Tensão de linha V_LL (kV)',
+              label: AppLocalizations.of(context)!.shortCircuitVLL,
               semantic: 'Tensão de linha em kV',
             ),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
               ToolField(
                   controller: _z1,
-                  label: 'Z1 (Ω)',
+                  label: AppLocalizations.of(context)!.shortCircuitZ1,
                   semantic: 'Impedância de sequência positiva'),
               ToolField(
                   controller: _z2,
-                  label: 'Z2 (Ω)',
+                  label: AppLocalizations.of(context)!.shortCircuitZ2,
                   semantic: 'Impedância de sequência negativa'),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
               ToolField(
                   controller: _z0,
-                  label: 'Z0 (Ω)',
+                  label: AppLocalizations.of(context)!.shortCircuitZ0,
                   semantic: 'Impedância de sequência zero'),
               ToolField(
                   controller: _zf,
-                  label: 'Z falta (Ω)',
+                  label: AppLocalizations.of(context)!.shortCircuitZf,
                   semantic: 'Impedância de falta'),
             ]),
           ],
@@ -117,7 +118,7 @@ class _ShortCircuitScreenState extends State<ShortCircuitScreen> {
           ToolResultsPanel(
             results: _results ?? const [],
             warning: _warning,
-            title: 'Correntes de curto-circuito',
+            title: AppLocalizations.of(context)!.shortCircuitCurrents,
             note:
                 'Aproximação por módulos de impedância (escalar). Para precisão de fase, '
                 'use cálculo fasorial completo.',

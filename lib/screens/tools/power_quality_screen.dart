@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/power_quality.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -81,9 +82,9 @@ class _PowerQualityScreenState extends State<PowerQualityScreen> {
       _verdictColor = color;
       _note = 'S = √3 · V_LL · I. Limites de referência operacional (ajuste conforme a norma/projeto).';
       _results = [
-        ToolResult('Potência aparente medida', '${fmtNumber(r.apparentKva, decimals: 1)} kVA'),
-        ToolResult('Potência nominal', '${fmtNumber(s, decimals: 0)} kVA'),
-        ToolResult('Carregamento', '${fmtNumber(r.loadingPercent, decimals: 1)} %'),
+        ToolResult(AppLocalizations.of(context)!.powerQualityMeasPower, '${fmtNumber(r.apparentKva, decimals: 1)} kVA'),
+        ToolResult(AppLocalizations.of(context)!.powerQualityNomPowerShort, '${fmtNumber(s, decimals: 0)} kVA'),
+        ToolResult(AppLocalizations.of(context)!.powerQualityLoadPct, '${fmtNumber(r.loadingPercent, decimals: 1)} %'),
       ];
     });
   }
@@ -106,12 +107,12 @@ class _PowerQualityScreenState extends State<PowerQualityScreen> {
       fd = voltageUnbalanceProdist(
         va: va, angA: aA, vb: vb, angB: aB, vc: vc, angC: aC,
       );
-      results.add(ToolResult('FD% (PRODIST, V₂/V₁)', '${fmtNumber(fd, decimals: 3)} %'));
+      results.add(ToolResult(AppLocalizations.of(context)!.powerQualityFdProdist, '${fmtNumber(fd, decimals: 3)} %'));
     } else {
       fd = voltageUnbalanceApprox(v1: va, v2: vb, v3: vc);
       final nema = maxDeviationUnbalance(v1: va, v2: vb, v3: vc);
-      results.add(ToolResult('FD% (aproximada CIGRÉ)', '${fmtNumber(fd, decimals: 3)} %'));
-      results.add(ToolResult('Desvio máx. (NEMA)', '${fmtNumber(nema, decimals: 3)} %'));
+      results.add(ToolResult(AppLocalizations.of(context)!.powerQualityFdCigre, '${fmtNumber(fd, decimals: 3)} %'));
+      results.add(ToolResult(AppLocalizations.of(context)!.powerQualityDevNema, '${fmtNumber(nema, decimals: 3)} %'));
     }
 
     // Limite PRODIST Módulo 8 (referência): 3% (Vn ≤ 1 kV) / 2% (1 kV < Vn ≤ 230 kV)
@@ -145,7 +146,7 @@ class _PowerQualityScreenState extends State<PowerQualityScreen> {
       title: 'Qualidade de Energia',
       children: [
         ToolSegmented(
-          labels: const ['Carregamento', 'Desequilíbrio'],
+          labels: [AppLocalizations.of(context)!.powerQualityLoadPct, 'Desequilíbrio'],
           selected: _tab,
           onSelect: (i) => setState(() {
             _tab = i;
@@ -177,22 +178,22 @@ class _PowerQualityScreenState extends State<PowerQualityScreen> {
 
   List<Widget> _loadingInputs() => [
         ToolCard(
-          title: 'Carregamento de transformador',
-          subtitle: 'Carregamento% = (√3 · V_LL · I) / S_nominal · 100',
+          title: AppLocalizations.of(context)!.powerQualityTransfLoad,
+          subtitle: AppLocalizations.of(context)!.powerQualityLoadDesc,
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _vLL, label: 'Tensão V_LL (kV)'),
-              ToolField(controller: _current, label: 'Corrente (A)'),
+              ToolField(controller: _vLL, label: AppLocalizations.of(context)!.powerQualityVLL),
+              ToolField(controller: _current, label: AppLocalizations.of(context)!.powerQualityCur),
             ]),
             const SizedBox(height: 12),
-            ToolField(controller: _ratedKva, label: 'Potência nominal (kVA)'),
+            ToolField(controller: _ratedKva, label: AppLocalizations.of(context)!.powerQualityNomPower),
           ],
         ),
       ];
 
   List<Widget> _unbalanceInputs() => [
         ToolSegmented(
-          labels: const ['PRODIST (mód+âng)', 'Aproximada (só mód.)'],
+          labels: ['PRODIST (mód+âng)', 'Aproximada (só mód.)'],
           selected: _unbMode,
           onSelect: (i) => setState(() {
             _unbMode = i;
@@ -201,7 +202,7 @@ class _PowerQualityScreenState extends State<PowerQualityScreen> {
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Tensões de fase',
+          title: AppLocalizations.of(context)!.powerQualityPhaseV,
           subtitle: _unbMode == 0
               ? 'FD% = V₂/V₁ (componentes simétricas) — método oficial PRODIST'
               : 'FD% aproximado a partir dos módulos das três tensões',
@@ -221,7 +222,7 @@ class _PowerQualityScreenState extends State<PowerQualityScreen> {
     }
     return ToolFieldRow(children: [
       ToolField(controller: mag, label: '$label (V)'),
-      ToolField(controller: ang, label: 'âng °', signed: true),
+      ToolField(controller: ang, label: AppLocalizations.of(context)!.powerQualityPhaseAng, signed: true),
     ]);
   }
 
