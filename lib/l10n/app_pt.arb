@@ -502,5 +502,73 @@
         "type": "String"
       }
     }
+  },
+  "loginTitle": "Entrar",
+  "loginWelcomeBack": "Bem-vindo de volta",
+  "loginSubtitle": "Faça login no SPARK para continuar",
+  "emailAddressLabel": "Endereço de E-mail",
+  "emailHint": "Digite seu e-mail",
+  "passwordLabel": "Senha",
+  "passwordHint": "Digite sua senha",
+  "rememberDevice30Days": "Lembrar este dispositivo por 30 dias",
+  "forgotPassword": "Esqueceu a senha?",
+  "loginButton": "ENTRAR",
+  "orDivider": "ou",
+  "signInWithGoogle": "Entrar com Google",
+  "noAccountQuestion": "Não tem uma conta? ",
+  "signUpLink": "Cadastre-se",
+  "fillAllFields": "Preencha todos os campos.",
+  "errorSendingCode": "Erro ao enviar código: {error}",
+  "@errorSendingCode": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "welcomeHeadline": "Da Proteção à\nAutomação,\nDomine Cada Trilha",
+  "welcomeSubtitle": "SPDA, Estudos, Termografia e Comissionamento —\nda NR-10 ao IEC 61850, em uma só plataforma",
+  "welcomeLoginButton": "FAZER LOGIN",
+  "welcomeCreateAccountButton": "CRIAR NOVA CONTA",
+  "haveCourtesyCode": "Tem um código de cortesia? ",
+  "activateInAccount": "Ative na conta",
+  "createAccountTitle": "Criar Conta",
+  "createYourAccount": "Crie sua conta",
+  "registerSubtitle": "Cadastre-se no SPARK para começar",
+  "fullNameLabel": "Nome Completo",
+  "fullNameHint": "Digite seu nome completo",
+  "createPasswordHint": "Crie uma senha",
+  "courtesyCodeOptional": "Código de cortesia (opcional)",
+  "courtesyCodeHelp": "Recebeu um código? Informe aqui para liberar o acesso total na hora.",
+  "registerButton": "CADASTRAR",
+  "signUpWithGoogle": "Cadastrar com Google",
+  "alreadyHaveAccount": "Já possui uma conta? ",
+  "registerUnknownError": "Erro desconhecido ao criar usuário.",
+  "voucherActivateLater": "Não foi possível ativar o código agora. Você pode resgatá-lo depois em Configurações.",
+  "fullAccessGranted": "Acesso total liberado! 🎉",
+  "fullAccessUntilMessage": "Sua conta tem acesso completo à plataforma até {date}.\n\nConfirme seu e-mail para entrar.",
+  "@fullAccessUntilMessage": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "codeNotApplied": "Código não aplicado",
+  "codeNotAppliedMessage": "{error}\n\nSua conta foi criada normalmente — você pode resgatar o código depois em Configurações.",
+  "@codeNotAppliedMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "genericErrorPrefix": "Erro: {error}",
+  "@genericErrorPrefix": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   }
 }

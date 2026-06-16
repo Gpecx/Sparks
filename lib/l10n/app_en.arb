@@ -251,5 +251,73 @@
   "powerplayStreamingTitle": "PowerPlay Streaming",
   "technicalVideosDescription": "Technical videos and exclusive content for your learning",
   "learnMoreButton": "Learn more",
-  "errorLoadingProgress": "Error loading progress"
+  "errorLoadingProgress": "Error loading progress",
+  "loginTitle": "Sign In",
+  "loginWelcomeBack": "Welcome back",
+  "loginSubtitle": "Sign in to SPARK to continue",
+  "emailAddressLabel": "Email Address",
+  "emailHint": "Enter your email",
+  "passwordLabel": "Password",
+  "passwordHint": "Enter your password",
+  "rememberDevice30Days": "Remember this device for 30 days",
+  "forgotPassword": "Forgot password?",
+  "loginButton": "SIGN IN",
+  "orDivider": "or",
+  "signInWithGoogle": "Sign in with Google",
+  "noAccountQuestion": "Don't have an account? ",
+  "signUpLink": "Sign up",
+  "fillAllFields": "Please fill in all fields.",
+  "errorSendingCode": "Error sending code: {error}",
+  "@errorSendingCode": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "welcomeHeadline": "From Protection to\nAutomation,\nMaster Every Trail",
+  "welcomeSubtitle": "Lightning Protection, Studies, Thermography and Commissioning —\nfrom NR-10 to IEC 61850, all in one platform",
+  "welcomeLoginButton": "LOG IN",
+  "welcomeCreateAccountButton": "CREATE NEW ACCOUNT",
+  "haveCourtesyCode": "Have a courtesy code? ",
+  "activateInAccount": "Activate in account",
+  "createAccountTitle": "Create Account",
+  "createYourAccount": "Create your account",
+  "registerSubtitle": "Sign up to SPARK to get started",
+  "fullNameLabel": "Full Name",
+  "fullNameHint": "Enter your full name",
+  "createPasswordHint": "Create a password",
+  "courtesyCodeOptional": "Courtesy code (optional)",
+  "courtesyCodeHelp": "Received a code? Enter it here to unlock full access right away.",
+  "registerButton": "SIGN UP",
+  "signUpWithGoogle": "Sign up with Google",
+  "alreadyHaveAccount": "Already have an account? ",
+  "registerUnknownError": "Unknown error creating user.",
+  "voucherActivateLater": "Could not activate the code right now. You can redeem it later in Settings.",
+  "fullAccessGranted": "Full access unlocked! 🎉",
+  "fullAccessUntilMessage": "Your account has full access to the platform until {date}.\n\nConfirm your email to sign in.",
+  "@fullAccessUntilMessage": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "codeNotApplied": "Code not applied",
+  "codeNotAppliedMessage": "{error}\n\nYour account was created normally — you can redeem the code later in Settings.",
+  "@codeNotAppliedMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "genericErrorPrefix": "Error: {error}",
+  "@genericErrorPrefix": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

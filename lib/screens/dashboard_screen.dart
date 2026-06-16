@@ -634,7 +634,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Técnico Nível $level',
+                      AppLocalizations.of(context)!.technicianLevel(level),
                       style: TextStyle(color: AppColors.primary.withValues(alpha: 0.8), fontSize: 13, fontWeight: FontWeight.w600),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -645,7 +645,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               const SizedBox(width: 8),
               _ResponsiveTapWidget(
                 onTap: () {
-                  SparkSnack.success(context, '🔥 Streak de $streak dias! Multiplicador de ${multiplier}x.');
+                  SparkSnack.success(context, AppLocalizations.of(context)!.streakMultiplierMessage(streak, multiplier));
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -659,7 +659,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       const Icon(Icons.local_fire_department, color: AppColors.gold, size: 16),
                       const SizedBox(width: 4),
                       Text(
-                        '$streak Dias',
+                        AppLocalizations.of(context)!.streakDays(streak),
                         style: const TextStyle(color: AppColors.gold, fontSize: 13, fontWeight: FontWeight.w800),
                       ),
                     ],
@@ -698,7 +698,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           const SizedBox(height: 10),
           // Rótulo descritivo do XP total
           Text(
-            'XP Total: $xp XP',
+            AppLocalizations.of(context)!.totalXp(xp),
             style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
           ),
           const Padding(
