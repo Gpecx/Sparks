@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -15,6 +16,7 @@ import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/widgets/streak_lightning_emitter.dart';
 import 'package:spark_app/models/quiz_models.dart';
 import 'package:spark_app/providers/progress_provider.dart';
+import 'package:spark_app/providers/language_provider.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final bool isEvaluation;
@@ -231,6 +233,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
         widget.moduleId!,
         widget.trailId!,
         widget.lesson!.id,
+        lang: ref.read(languageProvider).languageCode,
         limit: 20,
       );
 
@@ -424,7 +427,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           _shakeController.forward(from: 0);
           _epicStreakController.forward(from: 0);
           _energyCtrl.addXp(100);
-          SparkSnack.reward(context, 'STREAK ÉPICO! +100 XP Bônus!');
+          SparkSnack.reward(context, AppLocalizations.of(context)!.epicStreakBonus);
         } else if (bonus > 0 && _currentStreak < 5) {
           SparkSnack.reward(context, 'Acerto em sequência! +$bonus energia bônus!');
         }
@@ -619,8 +622,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
               const SizedBox(height: 24),
               Text(
                 passed
-                    ? (widget.isEvaluation ? 'Avaliação Aprovada!' : 'Lição concluída!')
-                    : 'Desempenho Insuficiente',
+                    ? (widget.isEvaluation ? AppLocalizations.of(context)!.evaluationPassed : AppLocalizations.of(context)!.lessonCompleted)
+                    : AppLocalizations.of(context)!.insufficientPerformance,
                 style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 12),
@@ -648,7 +651,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     }
                   },
                   icon: Icon(passed ? Icons.play_arrow : Icons.replay, color: AppColors.background),
-                  label: Text(passed ? 'CONTINUAR' : 'REFAZER', style: const TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                  label: Text(passed ? AppLocalizations.of(context)!.continueButton : AppLocalizations.of(context)!.redoButton, style: const TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: passed ? AppColors.primary : Colors.redAccent,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -663,7 +666,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     Navigator.of(modalCtx).pop(); 
                     rootNavigator.pop(false); 
                   },
-                  child: const Text('Sair', style: TextStyle(color: AppColors.textMuted)),
+                  child: const Text(AppLocalizations.of(context)!.exitButton, style: TextStyle(color: AppColors.textMuted)),
                 ),
             ],
           ),
@@ -693,9 +696,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                 child: const Icon(Icons.battery_alert, size: 50, color: Colors.redAccent),
               ),
               const SizedBox(height: 24),
-              const Text('Bateria Esgotada!', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700)),
+              const Text(AppLocalizations.of(context)!.batteryDepleted, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700)),
               const SizedBox(height: 12),
-              Text('Você gastou toda a sua energia. Aguarde a recarga automática (5 min por unidade) ou assine um plano para ter bateria infinita ∞.', textAlign: TextAlign.center, style: TextStyle(color: AppColors.textSecondary, fontSize: 15, height: 1.4)),
+              Text(AppLocalizations.of(context)!.batteryDepletedDescription, textAlign: TextAlign.center, style: TextStyle(color: AppColors.textSecondary, fontSize: 15, height: 1.4)),
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity, height: 56,
@@ -706,7 +709,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     context.push('/store');
                   },
                   icon: const Icon(Icons.all_inclusive, color: AppColors.background),
-                  label: const Text('VER PLANOS COM BATERIA ∞', style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                  label: const Text(AppLocalizations.of(context)!.viewPlansInfiniteBattery, style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                   style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
                 ),
               ),
@@ -716,7 +719,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                child: const Text('Sair do Quiz', style: TextStyle(color: AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.w700)),
+                child: const Text(AppLocalizations.of(context)!.exitQuiz, style: TextStyle(color: AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.w700)),
               ),
               const SizedBox(height: 10),
             ],
@@ -754,7 +757,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Pular ✕', style: TextStyle(color: Colors.white70, fontSize: 12)),
+                      child: const Text(AppLocalizations.of(context)!.skipButton, style: TextStyle(color: Colors.white70, fontSize: 12)),
                     ),
                   ),
                 ),
@@ -769,11 +772,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                   child: const Icon(Icons.play_arrow, color: Colors.white, size: 40),
                 ),
                 const SizedBox(height: 20),
-                const Text('POWERPLAY', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800, fontStyle: FontStyle.italic, letterSpacing: 2)),
+                const Text(AppLocalizations.of(context)!.powerplayTitle, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800, fontStyle: FontStyle.italic, letterSpacing: 2)),
                 const SizedBox(height: 8),
-                const Text('Parabens pelo modulo!', style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.w700)),
+                const Text(AppLocalizations.of(context)!.congratsModule, style: TextStyle(color: AppColors.accent, fontSize: 16, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 14),
-                Text('Continue aprendendo com vídeos técnicos exclusivos. Experimente grátis por 7 dias!', textAlign: TextAlign.center, style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.4)),
+                Text(AppLocalizations.of(context)!.tryPremiumVideosFree, textAlign: TextAlign.center, style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.4)),
                 const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity, height: 52,
@@ -786,7 +789,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                       rootNavigator.pop(true);
                       rootRouter.push('/standard-detail');
                     },
-                    child: const Text('TESTE GRÁTIS POR 7 DIAS', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14, letterSpacing: 1)),
+                    child: const Text(AppLocalizations.of(context)!.tryFree7Days, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14, letterSpacing: 1)),
                   ),
                 ),
               ],
@@ -854,7 +857,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                             ),
                             const SizedBox(height: 20),
                             const Text(
-                              'Tem certeza?',
+                              AppLocalizations.of(context)!.areYouSure,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,
@@ -865,7 +868,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                             ),
                             const SizedBox(height: 12),
                             Text(
-                              'Você vai perder todo seu progresso na lição se sair.',
+                              AppLocalizations.of(context)!.loseProgressWarning,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: AppColors.textSecondary,
@@ -887,7 +890,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                                         border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
                                       ),
                                       child: const Text(
-                                        'CANCELAR',
+                                        AppLocalizations.of(context)!.cancelUpper,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Colors.white,
@@ -924,7 +927,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                                         ],
                                       ),
                                       child: const Text(
-                                        'SAIR',
+                                        AppLocalizations.of(context)!.exitUpper,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Colors.white,
@@ -982,15 +985,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                 ),
                 const SizedBox(height: 24),
                 const Text(
-                  'Nenhuma questão cadastrada',
+                  AppLocalizations.of(context)!.noQuestionsRegistered,
                   style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Text(
-                    'Esta lição ainda não possui questões cadastradas no sistema. '
-                    'Por favor, entre em contato com o administrador.',
+                    AppLocalizations.of(context)!.noQuestionsAdminContact,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
                   ),
@@ -1002,7 +1004,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                   child: ElevatedButton.icon(
                     onPressed: () => Navigator.pop(context, false),
                     icon: const Icon(Icons.arrow_back, color: AppColors.background),
-                    label: const Text('VOLTAR', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                    label: const Text(AppLocalizations.of(context)!.backButton, style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, letterSpacing: 1)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -1034,7 +1036,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                 CircularProgressIndicator(color: AppColors.primary),
                 SizedBox(height: 16),
                 Text(
-                  'Carregando questões...',
+                  AppLocalizations.of(context)!.loadingQuestions,
                   style: TextStyle(color: AppColors.textMuted, fontSize: 14),
                 ),
               ],
@@ -1374,7 +1376,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           children: [
             Icon(isTrue ? Icons.check_circle : Icons.cancel, color: isTrue ? AppColors.primary : Colors.redAccent, size: 60),
             const SizedBox(height: 10),
-            Text(isTrue ? 'VERDADEIRO' : 'FALSO', style: TextStyle(color: isTrue ? AppColors.primary : Colors.redAccent, fontSize: 24, fontWeight: FontWeight.w800)),
+            Text(isTrue ? AppLocalizations.of(context)!.trueUpper : AppLocalizations.of(context)!.falseUpper, style: TextStyle(color: isTrue ? AppColors.primary : Colors.redAccent, fontSize: 24, fontWeight: FontWeight.w800)),
           ],
         ),
       );
@@ -1387,9 +1389,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           children: [
             Icon(Icons.arrow_back, color: Colors.redAccent.withValues(alpha: 0.6), size: 16),
             const SizedBox(width: 6),
-            Text('FALSO', style: TextStyle(color: Colors.redAccent.withValues(alpha: 0.6), fontSize: 11, fontWeight: FontWeight.w800)),
+            Text(AppLocalizations.of(context)!.falseUpper, style: TextStyle(color: Colors.redAccent.withValues(alpha: 0.6), fontSize: 11, fontWeight: FontWeight.w800)),
             const SizedBox(width: 24),
-            Text('VERDADEIRO', style: TextStyle(color: AppColors.primary.withValues(alpha: 0.6), fontSize: 11, fontWeight: FontWeight.w800)),
+            Text(AppLocalizations.of(context)!.trueUpper, style: TextStyle(color: AppColors.primary.withValues(alpha: 0.6), fontSize: 11, fontWeight: FontWeight.w800)),
             const SizedBox(width: 6),
             Icon(Icons.arrow_forward, color: AppColors.primary.withValues(alpha: 0.6), size: 16),
           ],
@@ -1399,7 +1401,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           key: ValueKey(_currentQuestion),
           statement: (q['options'] != null && (q['options'] as List).isNotEmpty) 
               ? q['options'][0] 
-              : 'Sem enunciado',
+              : AppLocalizations.of(context)!.noStatement,
           onSwiped: (bool isRight) {
             HapticFeedback.mediumImpact();
             setState(() {
@@ -1429,7 +1431,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           child: ElevatedButton(
             onPressed: canConfirm ? _confirmAnswer : null,
             style: ElevatedButton.styleFrom(backgroundColor: canConfirm ? AppColors.primary : AppColors.card, disabledBackgroundColor: AppColors.card, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
-            child: Text('VERIFICAR', style: TextStyle(color: canConfirm ? Colors.white : AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.w700, letterSpacing: 1)),
+            child: Text(AppLocalizations.of(context)!.verifyButton, style: TextStyle(color: canConfirm ? Colors.white : AppColors.textMuted, fontSize: 16, fontWeight: FontWeight.w700, letterSpacing: 1)),
           ),
         ),
       );
@@ -1437,7 +1439,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
 
     Color feedbackColor = _isCorrect ? AppColors.accent : Colors.redAccent;
     IconData feedbackIcon = _isCorrect ? Icons.check_circle : Icons.cancel;
-    String feedbackTitle = _isCorrect ? 'Excelente!' : 'Atenção ao detalhe!';
+    String feedbackTitle = _isCorrect ? AppLocalizations.of(context)!.excellentFeedback : AppLocalizations.of(context)!.payAttentionFeedback;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -1455,7 +1457,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
               style: ElevatedButton.styleFrom(backgroundColor: feedbackColor, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
               child: _isCompleting
                   ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                  : Text(_currentQuestion + 1 >= _questions.length ? 'FINALIZAR' : 'CONTINUAR', style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                  : Text(_currentQuestion + 1 >= _questions.length ? AppLocalizations.of(context)!.finishButton : AppLocalizations.of(context)!.continueButton, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700, letterSpacing: 1)),
             ),
           ),
         ],
