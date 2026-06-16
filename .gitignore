@@ -91,3 +91,4 @@ setup_asaas_env.sh
 scripts/node_modules/
 scripts/package-lock.json
 scripts/_*.js
+lib/l10n/app_localizations*.dart

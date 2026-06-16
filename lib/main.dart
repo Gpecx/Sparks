@@ -16,7 +16,7 @@ import 'package:spark_app/firebase_options.dart';
 import 'package:spark_app/providers/colorblind_provider.dart';
 import 'package:spark_app/providers/language_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
