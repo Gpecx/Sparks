@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/utils/voltage_drop.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
@@ -69,9 +70,9 @@ class _VoltageDropScreenState extends State<VoltageDropScreen> {
     setState(() {
       _warning = null;
       _results = [
-        ToolResult('Queda de tensão ΔV', '${fmtNumber(res.dropVolts, decimals: 1)} V'),
-        ToolResult('Queda percentual', '${fmtNumber(res.dropPercent, decimals: 2)} %'),
-        ToolResult('Tensão na carga', '${fmtNumber(v * 1000 - res.dropVolts, decimals: 1)} V'),
+        ToolResult(AppLocalizations.of(context)!.voltageDropVal, '${fmtNumber(res.dropVolts, decimals: 1)} V'),
+        ToolResult(AppLocalizations.of(context)!.voltageDropPct, '${fmtNumber(res.dropPercent, decimals: 2)} %'),
+        ToolResult(AppLocalizations.of(context)!.voltageDropLoadV, '${fmtNumber(v * 1000 - res.dropVolts, decimals: 1)} V'),
       ];
     });
   }
@@ -82,39 +83,39 @@ class _VoltageDropScreenState extends State<VoltageDropScreen> {
       title: 'Queda de Tensão',
       children: [
         ToolCard(
-          title: 'Alimentador trifásico',
-          subtitle: 'ΔV = √3 · I · L · (R·cosφ + X·senφ)',
+          title: AppLocalizations.of(context)!.voltageDropFeeder,
+          subtitle: AppLocalizations.of(context)!.voltageDropDesc,
           children: [
             ToolFieldRow(children: [
               ToolField(
                   controller: _current,
-                  label: 'Corrente I (A)',
+                  label: AppLocalizations.of(context)!.voltageDropI,
                   semantic: 'Corrente em ampères'),
               ToolField(
                   controller: _length,
-                  label: 'Comprimento L (km)',
+                  label: AppLocalizations.of(context)!.voltageDropL,
                   semantic: 'Comprimento em km'),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
               ToolField(
                   controller: _r,
-                  label: 'R (Ω/km)',
+                  label: AppLocalizations.of(context)!.voltageDropR,
                   semantic: 'Resistência por km'),
               ToolField(
                   controller: _x,
-                  label: 'X (Ω/km)',
+                  label: AppLocalizations.of(context)!.voltageDropX,
                   semantic: 'Reatância por km'),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
               ToolField(
                   controller: _pf,
-                  label: 'FP (cosφ)',
+                  label: AppLocalizations.of(context)!.voltageDropPF,
                   semantic: 'Fator de potência'),
               ToolField(
                   controller: _vLL,
-                  label: 'Tensão V_LL (kV)',
+                  label: AppLocalizations.of(context)!.voltageDropVLL,
                   semantic: 'Tensão de linha em kV'),
             ]),
           ],

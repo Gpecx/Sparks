@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/thermal_severity.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -45,7 +46,7 @@ class _ThermalSeverityScreenState extends State<ThermalSeverityScreen> {
     }
 
     final results = <ToolResult>[
-      ToolResult('ΔT medido', '${fmtNumber(dt, decimals: 1)} °C'),
+      ToolResult(AppLocalizations.of(context)!.thermalMeasDt, '${fmtNumber(dt, decimals: 1)} °C'),
     ];
 
     var classifyValue = dt;
@@ -54,12 +55,12 @@ class _ThermalSeverityScreenState extends State<ThermalSeverityScreen> {
     if (im != null && inom != null && im > 0) {
       final corr = correctDeltaTForLoad(
           deltaTMeasured: dt, currentMeasured: im, currentNominal: inom);
-      results.add(ToolResult('ΔT corrigido p/ In', '${fmtNumber(corr, decimals: 1)} °C'));
+      results.add(ToolResult(AppLocalizations.of(context)!.thermalCorDt, '${fmtNumber(corr, decimals: 1)} °C'));
       classifyValue = corr;
     }
 
     final cls = classifySimilarComponent(classifyValue);
-    results.add(ToolResult('Classificação', cls.label));
+    results.add(ToolResult(AppLocalizations.of(context)!.thermalClass, cls.label));
 
     setState(() {
       _warning = null;
@@ -87,21 +88,21 @@ class _ThermalSeverityScreenState extends State<ThermalSeverityScreen> {
       title: 'Severidade Térmica',
       children: [
         ToolCard(
-          title: 'Anomalia termográfica',
+          title: AppLocalizations.of(context)!.thermalAnomaly,
           subtitle:
-              'ΔT entre o componente e outro similar sob carga semelhante (base NETA).',
+              AppLocalizations.of(context)!.thermalDesc,
           children: [
-            ToolField(controller: _deltaT, label: 'ΔT medido (°C)'),
+            ToolField(controller: _deltaT, label: AppLocalizations.of(context)!.thermalDeltaT),
           ],
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Correção por carga (opcional)',
-          subtitle: 'ΔT_corrigido = ΔT_medido · (I_nominal / I_medida)²',
+          title: AppLocalizations.of(context)!.thermalCorrection,
+          subtitle: AppLocalizations.of(context)!.thermalCorDesc,
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _iMed, label: 'I medida (A)'),
-              ToolField(controller: _iNom, label: 'I nominal (A)'),
+              ToolField(controller: _iMed, label: AppLocalizations.of(context)!.thermalMeasI),
+              ToolField(controller: _iNom, label: AppLocalizations.of(context)!.thermalNomI),
             ]),
           ],
         ),
@@ -114,7 +115,7 @@ class _ThermalSeverityScreenState extends State<ThermalSeverityScreen> {
           ToolResultsPanel(
             results: _results ?? const [],
             warning: _warning,
-            title: 'Diagnóstico térmico',
+            title: AppLocalizations.of(context)!.thermalDiag,
           ),
         ],
       ],

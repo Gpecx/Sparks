@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
@@ -145,7 +146,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: const Text('Curvas de Sobrecorrente (51)'),
+            title: Text(AppLocalizations.of(context)!.idmtTitle),
           ),
           body: SafeArea(
             top: false,
@@ -258,7 +259,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Curva selecionada',
+                      AppLocalizations.of(context)!.idmtCurveSelected,
                       style: TextStyle(
                         color: AppColors.textMuted.withValues(alpha: 0.9),
                         fontSize: 11,
@@ -315,8 +316,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Coeficientes  ·  t = (A·Td + K1)/(M^P − Q) + B·Td + K2',
+          Text(AppLocalizations.of(context)!.idmtCoeff,
             style: TextStyle(
               color: AppColors.textSecondary,
               fontSize: 12,
@@ -382,7 +382,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
               Expanded(
                 child: _NumberField(
                   controller: _iPickup,
-                  label: 'I pick-up (A)',
+                  label: AppLocalizations.of(context)!.idmtPickup,
                   semantic: 'Corrente de pick-up em ampères',
                 ),
               ),
@@ -390,7 +390,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
               Expanded(
                 child: _NumberField(
                   controller: _dial,
-                  label: 'Dial de tempo (Td)',
+                  label: AppLocalizations.of(context)!.idmtDial,
                   semantic: 'Dial de tempo',
                 ),
               ),
@@ -399,7 +399,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
           const SizedBox(height: 12),
           _NumberField(
             controller: _iTest,
-            label: 'I teste (A)',
+            label: AppLocalizations.of(context)!.idmtTestI,
             semantic: 'Corrente de teste em ampères',
           ),
         ],
@@ -455,9 +455,9 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
               const Icon(Icons.timer_outlined,
                   color: AppColors.primary, size: 18),
               const SizedBox(width: 8),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Tempo de atuação',
+                  AppLocalizations.of(context)!.idmtAtuationTime,
                   style: TextStyle(
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w700,
@@ -467,7 +467,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
               ),
               Semantics(
                 button: true,
-                label: 'Copiar resultado',
+                label: AppLocalizations.of(context)!.idmtCopy,
                 child: IconButton(
                   icon: const Icon(Icons.copy_outlined,
                       color: AppColors.primary, size: 20),
@@ -518,10 +518,10 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 4, bottom: 8),
             child: Text(
-              'Curva tempo × múltiplo (log-log)',
+              AppLocalizations.of(context)!.idmtTimeMult,
               style: TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 12,
@@ -566,7 +566,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
             const SizedBox(width: 10),
             Expanded(
               child: Text(
-                'Sobreponha as curvas (em ampères primários) e veja o intervalo '
+                AppLocalizations.of(context)!.idmtLogLogDesc
                 'de coordenação (CTI) na corrente de falta. Eixo X = corrente, '
                 'eixo Y = tempo.',
                 style: TextStyle(
@@ -589,7 +589,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
         child: TextButton.icon(
           onPressed: _relays.length < 5 ? _addRelay : null,
           icon: const Icon(Icons.add_circle_outline, size: 20),
-          label: const Text('Adicionar relé'),
+          label: Text(AppLocalizations.of(context)!.idmtAddRelay),
         ),
       ),
       const SizedBox(height: 6),
@@ -667,14 +667,14 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
               Expanded(
                 child: _NumberField(
                     controller: r.pickupCtrl,
-                    label: 'I> pickup (A)',
+                    label: AppLocalizations.of(context)!.idmtPickup2,
                     semantic: 'Pickup do relé ${i + 1}'),
               ),
               const SizedBox(width: 10),
               Expanded(
                 child: _NumberField(
                     controller: r.tdCtrl,
-                    label: 'Dial (Td)',
+                    label: AppLocalizations.of(context)!.idmtDialShort,
                     semantic: 'Dial do relé ${i + 1}'),
               ),
             ],
@@ -697,14 +697,14 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
           Expanded(
             child: _NumberField(
                 controller: _faultCurrent,
-                label: 'Corrente de falta (A)',
+                label: AppLocalizations.of(context)!.idmtFault,
                 semantic: 'Corrente de falta em ampères'),
           ),
           const SizedBox(width: 10),
           Expanded(
             child: _NumberField(
                 controller: _cti,
-                label: 'CTI requerido (s)',
+                label: AppLocalizations.of(context)!.idmtCtiReq,
                 semantic: 'Intervalo de coordenação requerido'),
           ),
         ],
@@ -725,10 +725,10 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 4, bottom: 8),
             child: Text(
-              'Coordenograma tempo × corrente (log-log)',
+              AppLocalizations.of(context)!.idmtLogLog,
               style: TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 12,
@@ -784,8 +784,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
         ),
-        child: const Text(
-          'Informe ≥ 2 relés válidos e a corrente de falta para checar o CTI.',
+        child: Text(AppLocalizations.of(context)!.idmtNeedTwo,
           style: TextStyle(color: AppColors.textMuted, fontSize: 12),
         ),
       );
