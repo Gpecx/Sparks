@@ -664,6 +664,9 @@
       }
     }
   },
+  "trueOrFalseQuestion": "Verdadeiro ou Falso?",
+  "dragTermsToFillBlanks": "Arraste os termos para preencher as lacunas:",
+  "dragTermToFillBlank": "Arraste o termo para preencher a lacuna:",
   "myProgressScreenTitle": "MEU PROGRESSO",
   "inProgressSection": "EM ANDAMENTO",
   "completedSection": "CONCLUÍDOS",

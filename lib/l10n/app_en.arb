@@ -413,6 +413,9 @@
       }
     }
   },
+  "trueOrFalseQuestion": "True or False?",
+  "dragTermsToFillBlanks": "Drag the terms to fill in the blanks:",
+  "dragTermToFillBlank": "Drag the term to fill in the blank:",
   "myProgressScreenTitle": "MY PROGRESS",
   "inProgressSection": "IN PROGRESS",
   "completedSection": "COMPLETED",
