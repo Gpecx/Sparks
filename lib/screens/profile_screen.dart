@@ -138,7 +138,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                     child: Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Text(AppLocalizations.of(context)!.myProfile,
                               style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 2)),
                         ),
@@ -255,7 +255,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 10)],
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(Icons.badge, color: Colors.white, size: 16),
@@ -327,7 +327,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             child: ElevatedButton.icon(
                               onPressed: () => context.push('/admin'),
                               icon: const Icon(Icons.admin_panel_settings, color: Colors.white, size: 20),
-                              label: const Text(
+                              label: Text(
                                 AppLocalizations.of(context)!.adminPanel,
                                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13, letterSpacing: 1),
                               ),
@@ -473,7 +473,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
           ),
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.emoji_events_outlined, color: AppColors.textMuted, size: 28),
@@ -610,12 +610,12 @@ class _ClanSection extends StatelessWidget {
               children: [
                 const Icon(Icons.shield_moon, size: 40, color: AppColors.primary),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.joinAClan,
                   style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 6),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.clanDescription,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: AppColors.textSecondary, fontSize: 13),

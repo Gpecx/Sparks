@@ -856,7 +856,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                               child: const Icon(Icons.warning_amber_rounded, color: AppColors.error, size: 36),
                             ),
                             const SizedBox(height: 20),
-                            const Text(
+                            Text(
                               AppLocalizations.of(context)!.areYouSure,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -889,7 +889,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                                         borderRadius: BorderRadius.circular(16),
                                         border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
                                       ),
-                                      child: const Text(
+                                      child: Text(
                                         AppLocalizations.of(context)!.cancelUpper,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
@@ -926,7 +926,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                                           ),
                                         ],
                                       ),
-                                      child: const Text(
+                                      child: Text(
                                         AppLocalizations.of(context)!.exitUpper,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
@@ -984,7 +984,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                   child: const Icon(Icons.quiz_outlined, size: 44, color: AppColors.error),
                 ),
                 const SizedBox(height: 24),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.noQuestionsRegistered,
                   style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
                 ),
@@ -1029,7 +1029,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
               colors: [AppColors.surface, AppColors.background],
             ),
           ),
-          child: const Center(
+          child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

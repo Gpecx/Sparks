@@ -237,7 +237,7 @@ class _ClanScreenState extends State<ClanScreen> {
                   child: Icon(Icons.groups, color: AppColors.primary, size: 52),
                 ),
                 const SizedBox(height: 16),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.createClanDescription,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
@@ -286,7 +286,7 @@ class _ClanScreenState extends State<ClanScreen> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.primary.withValues(alpha: 0.25)),
                   ),
-                  child: const Row(
+                  child: Row(
                     children: [
                       Icon(Icons.info_outline, color: AppColors.primary, size: 16),
                       SizedBox(width: 8),
@@ -339,7 +339,7 @@ class _ClanScreenState extends State<ClanScreen> {
               children: [
                 const Center(child: Icon(Icons.login, color: AppColors.primary, size: 52)),
                 const SizedBox(height: 16),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.joinClanDescription,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
@@ -771,7 +771,7 @@ class _ClanScreenState extends State<ClanScreen> {
                           controller: _chatCtrl,
                           maxLength: 500,
                           style: const TextStyle(color: Colors.white, fontSize: 13),
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             hintText: AppLocalizations.of(context)!.typeAMessage,
                             hintStyle: TextStyle(color: AppColors.textMuted, fontSize: 13),
                             border: InputBorder.none,
@@ -1346,7 +1346,7 @@ class _ClanScreenState extends State<ClanScreen> {
                             color: AppColors.primary, size: 22),
                       ),
                       const SizedBox(width: 14),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -1375,7 +1375,7 @@ class _ClanScreenState extends State<ClanScreen> {
                   padding: const EdgeInsets.fromLTRB(24, 8, 24, 28),
                   child: Column(
                     children: [
-                      const Text(
+                      Text(
                         AppLocalizations.of(context)!.inviteCodeInfo,
                         style: TextStyle(
                             color: AppColors.textSecondary, fontSize: 13, height: 1.5),
@@ -1442,7 +1442,7 @@ class _ClanScreenState extends State<ClanScreen> {
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 200),
                         child: copied
-                            ? const Text(
+                            ? Text(
                                 AppLocalizations.of(context)!.codeCopied,
                                 key: ValueKey('copied'),
                                 style: TextStyle(
@@ -1450,7 +1450,7 @@ class _ClanScreenState extends State<ClanScreen> {
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600),
                               )
-                            : const Text(
+                            : Text(
                                 AppLocalizations.of(context)!.tapToCopy,
                                 key: ValueKey('hint'),
                                 style: TextStyle(
@@ -1474,7 +1474,7 @@ class _ClanScreenState extends State<ClanScreen> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12)),
                               ),
-                              child: const Text(
+                              child: Text(
                                 AppLocalizations.of(context)!.closeButton,
                                 style: TextStyle(
                                     color: Colors.white,
