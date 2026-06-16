@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -118,8 +119,7 @@ class _SupportScreenState extends State<SupportScreen> {
               child: const Icon(Icons.check_circle_outline, color: AppColors.primary, size: 40),
             ),
             const SizedBox(height: 24),
-            const Text(
-              'Mensagem enviada!',
+            Text(AppLocalizations.of(context)!.supportMessageSent,
               style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 10),
@@ -160,19 +160,19 @@ class _SupportScreenState extends State<SupportScreen> {
             children: [
               _quickContactCard(
                 icon: Icons.email_outlined,
-                label: 'E-mail',
-                sublabel: 'suporte@exs.com.br',
+                label: AppLocalizations.of(context)!.supportEmail,
+                sublabel: AppLocalizations.of(context)!.supportEmailAddress,
                 color: AppColors.blue,
                 onTap: () {
-                  Clipboard.setData(const ClipboardData(text: 'suporte@exs.com.br'));
+                  Clipboard.setData(const ClipboardData(text: AppLocalizations.of(context)!.supportEmailAddress));
                   SparkSnack.success(context, 'E-mail copiado!');
                 },
               ),
               const SizedBox(width: 12),
               _quickContactCard(
                 icon: Icons.chat_bubble_outline,
-                label: 'WhatsApp',
-                sublabel: 'Seg–Sex 8h–18h',
+                label: AppLocalizations.of(context)!.supportWhatsApp,
+                sublabel: AppLocalizations.of(context)!.supportWhatsAppHours,
                 color: const Color(0xFF25D366),
                 onTap: () {
                   SparkSnack.info(context, 'WhatsApp em breve!');
@@ -262,7 +262,7 @@ class _SupportScreenState extends State<SupportScreen> {
                   style: const TextStyle(color: Colors.white),
                   maxLines: 5,
                   decoration: InputDecoration(
-                    hintText: 'Descreva sua dúvida ou problema em detalhes...',
+                    hintText: AppLocalizations.of(context)!.supportMessageHint,
                     hintStyle: const TextStyle(color: AppColors.textMuted),
                     filled: true,
                     fillColor: AppColors.inputBackground,

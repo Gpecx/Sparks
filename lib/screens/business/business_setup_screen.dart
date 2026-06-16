@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -84,7 +85,7 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF0D1B14),
-        title: const Text('Solicitação enviada',
+        title: Text(AppLocalizations.of(context)!.businessSetupSuccess,
             style: TextStyle(color: Colors.white)),
         content: const Text(
           'Nossa equipe comercial entrará em contato pelo e-mail informado '
@@ -97,7 +98,7 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
               Navigator.pop(ctx);
               Navigator.pop(context);
             },
-            child: const Text('OK'),
+            child: Text(AppLocalizations.of(context)!.businessSetupOk),
           ),
         ],
       ),
@@ -166,7 +167,7 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: Text('Estimativa mensal',
                             style: TextStyle(color: AppColors.textSecondary)),
                       ),

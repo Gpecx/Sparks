@@ -570,5 +570,1093 @@
         "type": "String"
       }
     }
+  },
+  "toolsSymmetricalComponentsTitle": "Componentes Simétricas",
+  "toolsSymmetricalComponentsDesc": "Decompor e sintetizar fasores ABC ↔ sequências 0/1/2",
+  "toolsPerUnitTitle": "Valor por Unidade (PU)",
+  "toolsPerUnitDesc": "Bases, conversão real ↔ pu e mudança de base",
+  "toolsPowerTriangleTitle": "Triângulo de Potências",
+  "toolsPowerTriangleDesc": "Converte entre P (kW), Q (kvar), S (kVA) e FP",
+  "toolsOnsVoltageTitle": "Tensão pu — Base ONS × TP",
+  "toolsOnsVoltageDesc": "Converte pu do estudo ONS para V no secundário do TP",
+  "toolsRtcRtpTitle": "RTC / RTP",
+  "toolsRtcRtpDesc": "Relação de transformação de TC e TP + conversões",
+  "toolsCtSaturationTitle": "Saturação de TC",
+  "toolsCtSaturationDesc": "Burden, tensão de joelho e verificação de saturação",
+  "toolsShortCircuitTitle": "Curto-Circuito",
+  "toolsShortCircuitDesc": "Correntes 3φ, bifásica e monofásica-terra (Z1/Z2/Z0)",
+  "toolsIdmtCurvesTitle": "Curvas de Sobrecorrente (51)",
+  "toolsIdmtCurvesDesc": "IDMT: cálculo de 1 curva ou coordenograma (comparar curvas + CTI)",
+  "toolsDifferentialBalanceTitle": "Balanço Diferencial (87T)",
+  "toolsDifferentialBalanceDesc": "Coeficiente de balanço dos enrolamentos do transformador",
+  "toolsRestrictedDifferentialTitle": "87 — Diferencial c/ Restrição",
+  "toolsRestrictedDifferentialDesc": "Característica Idiff × Irest (dupla inclinação): opera ou restringe",
+  "toolsCoordinationTitle": "Coordenação / Seletividade",
+  "toolsCoordinationDesc": "Margem CTI entre relé principal e de retaguarda (51)",
+  "toolsDistanceProtectionTitle": "Proteção de Distância (21)",
+  "toolsDistanceProtectionDesc": "Zonas Z1/Z2/Z3 + característica mho no plano R-X",
+  "toolsDirectional67Title": "Direcional 67 / 67N",
+  "toolsDirectional67Desc": "Elemento direcional de fase e neutro (3V0/3I0): direta ou reversa",
+  "toolsVoltageDropTitle": "Queda de Tensão",
+  "toolsVoltageDropDesc": "ΔV e ΔV% em alimentador trifásico",
+  "toolsPowerFactorTitle": "Correção de Fator de Potência",
+  "toolsPowerFactorDesc": "Dimensiona o banco de capacitores (kvar)",
+  "toolsGroundGridTitle": "Malha de Aterramento (IEEE 80)",
+  "toolsGroundGridDesc": "Tensões de toque e passo toleráveis + GPR",
+  "toolsArcFlashTitle": "Arc Flash (energia incidente)",
+  "toolsArcFlashDesc": "Energia incidente e categoria de EPI (IEEE 1584 / Lee)",
+  "toolsSpdaRiskTitle": "SPDA — Análise de Risco",
+  "toolsSpdaRiskDesc": "Triagem de necessidade e nível de SPDA (NBR 5419-2)",
+  "toolsSpdaCalcTitle": "SPDA — Cálculos (5419-3)",
+  "toolsSpdaCalcDesc": "Esfera rolante, descidas, distância de segurança, impulso",
+  "toolsPowerQualityTitle": "Qualidade de Energia",
+  "toolsPowerQualityDesc": "Carregamento de trafo e desequilíbrio (PRODIST Mód. 8)",
+  "toolsNetworkCableTitle": "Cabos de Rede (RJ-45)",
+  "toolsNetworkCableDesc": "Pinagem T568A/B + tabela de categorias de cabo",
+  "toolsIec61850Title": "IEC 61850 — GOOSE / SV",
+  "toolsIec61850Desc": "Timing de retransmissão, taxa de SV e endereçamento MAC/VLAN",
+  "toolsModbusRegisterTitle": "Modbus — Registradores",
+  "toolsModbusRegisterDesc": "Junta 2 registradores em float32/int32 (ordem de byte/word)",
+  "toolsEquipmentCurrentTitle": "Corrente Nominal",
+  "toolsEquipmentCurrentDesc": "In de trafo/motor, partida e inrush de banco (multi-trafo)",
+  "toolsSignalScalingTitle": "Escalonamento 4–20 mA",
+  "toolsSignalScalingDesc": "Converte sinal de instrumentação ↔ grandeza de engenharia",
+  "toolsThermalSeverityTitle": "Severidade Térmica",
+  "toolsThermalSeverityDesc": "Classifica anomalia por ΔT + correção por carga",
+  "toolsCommissioningTitle": "Comissionamento / Ensaios",
+  "toolsCommissioningDesc": "Tolerância de ensaio (pass/fail) e injeção secundária",
+  "toolsCategoryConversions": "Conversões & Análise",
+  "toolsCategoryTI": "Transformadores de Instrumentação",
+  "toolsCategoryFaults": "Curto-Circuito & Faltas",
+  "toolsCategoryRelays": "Proteção (Relés)",
+  "toolsCategoryPowerSystem": "Sistema de Potência",
+  "toolsCategoryGrounding": "Aterramento & Segurança",
+  "toolsCategoryEquipment": "Equipamentos",
+  "toolsCategoryAutomation": "Automação & Instrumentação",
+  "toolsCategoryThermography": "Termografia & Manutenção",
+  "toolsCategoryCommissioning": "Comissionamento & Ensaios",
+  "toolsCategoryPowerQuality": "Qualidade de Energia",
+  "toolsCategoryNetworks": "Redes & Comunicação",
+  "toolsMainTitle": "FERRAMENTAS",
+  "toolsMainSubtitle": "Calculadoras de engenharia para Proteção e Controle",
+  "toolsLockedSuffix": ". Bloqueado — exclusivo de planos pagos",
+  "toolsSemanticLabel": "{title}. {description}{lockedText}",
+  "@toolsSemanticLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "description": {
+        "type": "String"
+      },
+      "lockedText": {
+        "type": "String"
+      }
+    }
+  },
+  "toolsResultsTitle": "Resultados",
+  "toolsCopyAllResultsSemantics": "Copiar todos os resultados",
+  "toolsCopyAllTooltip": "Copiar tudo",
+  "toolsResultsCopied": "Resultados copiados",
+  "toolsCopyLabelSemantics": "Copiar {label}",
+  "toolsCopyTooltip": "Copiar",
+  "toolsCopiedSuccess": "{label} copiado",
+  "toolsSelectCurve": "Selecionar curva",
+  "@toolsCopyLabelSemantics": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "@toolsCopiedSuccess": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "perUnitZBase": "Z base",
+  "perUnitIBase": "I base",
+  "perUnitZRealToPu": "Z real → pu",
+  "perUnitZPuToReal": "Z pu → real",
+  "perUnitZPuNewBase": "Z pu (nova base)",
+  "perUnitTitle": "Valor por Unidade (PU)",
+  "perUnitSelectConversion": "Selecionar tipo de conversão",
+  "perUnitTabBases": "Bases",
+  "perUnitTabImpedance": "Impedância",
+  "perUnitTabChangeBase": "Mudar base",
+  "perUnitBaseQuantities": "Grandezas de base",
+  "perUnitSBaseLabel": "Potência de base S (MVA)",
+  "perUnitSBaseSemantic": "Potência de base em MVA",
+  "perUnitVBaseLabel": "Tensão de base V (kV)",
+  "perUnitVBaseSemantic": "Tensão de base em kV",
+  "perUnitImpedanceConv": "Conversão de impedância",
+  "perUnitZRealLabel": "Z real (Ω)",
+  "perUnitZRealSemantic": "Impedância real em ohms",
+  "perUnitZPuLabel": "Z (pu)",
+  "perUnitZPuSemantic": "Impedância em por unidade",
+  "perUnitChangeBase": "Mudança de base",
+  "perUnitZPuOldBaseLabel": "Z pu (base antiga)",
+  "perUnitZPuOldBaseSemantic": "Impedância em pu na base antiga",
+  "perUnitSOldLabel": "S antiga (MVA)",
+  "perUnitSOldSemantic": "Potência de base antiga",
+  "perUnitVOldLabel": "V antiga (kV)",
+  "perUnitVOldSemantic": "Tensão de base antiga",
+  "perUnitSNewLabel": "S nova (MVA)",
+  "perUnitSNewSemantic": "Potência de base nova",
+  "perUnitVNewLabel": "V nova (kV)",
+  "perUnitVNewSemantic": "Tensão de base nova",
+  "perUnitCalculateBtn": "Calcular",
+  "perUnitCalculateUpper": "CALCULAR",
+  "perUnitInvalidInputs": "Verifique os valores de entrada (devem ser maiores que zero).",
+  "powerTriangleTitle": "Triângulo de Potências",
+  "powerTriangleInputs": "Entradas",
+  "powerTrianglePActive": "P (ativa)",
+  "powerTriangleQReactive": "Q (reativa)",
+  "powerTriangleSApparent": "S (aparente)",
+  "powerTrianglePF": "FP (cosφ)",
+  "symmetricalTitle": "Componentes Simétricas",
+  "symmetricalTabPhaseToSeq": "Fase → Sequência",
+  "symmetricalTabSeqToPhase": "Sequência → Fase",
+  "symmetricalPhaseA": "Fase A",
+  "symmetricalPhaseB": "Fase B",
+  "symmetricalPhaseC": "Fase C",
+  "symmetricalSeq0": "Sequência Zero (0)",
+  "symmetricalSeq1": "Sequência Positiva (+)",
+  "symmetricalSeq2": "Sequência Negativa (-)",
+  "onsVoltageTitle": "Tensão pu — Base ONS × TP",
+  "onsVoltageInputs": "Dados do Sistema e TP",
+  "onsVoltageLLBase": "Tensão de base ONS V_LL (kV)",
+  "onsVoltageRTP": "Relação do TP (RTP)",
+  "onsVoltagePuMeasured": "Tensão medida em PU",
+  "onsVoltageSecResult": "Tensão no secundário do TP",
+  "onsVoltagePrimResult": "Tensão primária (kV)",
+  "settingsEditProfile": "Editar Perfil",
+  "settingsEditProfileDesc": "Nome, e-mail, cargo",
+  "settingsChangePassword": "Alterar Senha",
+  "settingsChangePasswordDesc": "Segurança da conta",
+  "settingsManagePlan": "Gerir Plano",
+  "settingsManagePlanDesc": "Premium, planos ativos",
+  "settingsAppVersion": "Versão do App",
+  "settingsAppVersionDesc": "SPARK v1.0.4 · EXS Solutions",
+  "settingsLanguage": "Idioma",
+  "settingsLanguageDesc": "Selecione o idioma da interface e dos conteúdos",
+  "settingsPortuguese": "Português",
+  "settingsEnglish": "English",
+  "settingsColorBlindMode": "Modo Daltônico",
+  "settingsColorBlindDesc": "Ajuste as cores para diferentes tipos de daltonismo",
+  "settingsNone": "Nenhum",
+  "settingsProtanopia": "Protanopia (Vermelho-Verde)",
+  "settingsDeuteranopia": "Deuteranopia (Verde-Vermelho)",
+  "settingsTritanopia": "Tritanopia (Azul-Amarelo)",
+  "settingsTextSize": "Tamanho do Texto",
+  "settingsTextSizeDesc": "Ajuste o tamanho da fonte em todo o app",
+  "settingsSilentMode": "Modo Silencioso",
+  "settingsSilentModeDesc": "Pausa todas as notificações",
+  "settingsSilentHours": "Horário Silencioso",
+  "settingsSilentHoursDesc": "Sem notificações das 22h às 7h",
+  "settingsAlertFreq": "Frequência de Alertas",
+  "settingsAlertFreqDesc": "Quando você desbloquear badges",
+  "settingsDailyChallenge": "Desafio Diário",
+  "settingsDailyChallengeDesc": "Lembrete do desafio rápido",
+  "settingsWeeklyTournament": "Torneio Semanal",
+  "settingsWeeklyTournamentDesc": "Novos torneios e posição no ranking",
+  "settingsStreakAlerts": "Alertas de Streak",
+  "settingsStreakAlertsDesc": "Quando seu streak está em risco",
+  "settingsOnlineFriends": "Amigos Online",
+  "settingsOnlineFriendsDesc": "Quando um amigo está estudando",
+  "settingsRedeemCode": "Resgatar código de acesso",
+  "settingsRedeemCodeDesc": "Liberar acesso completo com um código",
+  "settingsHelpCenter": "Central de Ajuda / FAQ",
+  "settingsHelpCenterDesc": "Perguntas frequentes",
+  "settingsTechSupport": "Suporte Técnico",
+  "settingsTechSupportDesc": "Reporte um problema",
+  "settingsTermsOfUse": "Termos de Uso",
+  "settingsTermsOfUseDesc": "Leia nossos termos",
+  "settingsDeleteAccount": "Eliminar Conta",
+  "settingsDeleteAccountDesc": "Apagar permanentemente",
+  "settingsLogout": "SAIR DA CONTA",
+  "settingsMyProgress": "Meu Progresso",
+  "settingsTrackProgress": "Acompanhar progresso nos módulos",
+  "settingsAchievements": "Conquistas",
+  "settingsAchievementsDesc": "Página de troféus e insígnias",
+  "settingsAdminPanel": "Painel Admin",
+  "settingsAdminPanelDesc": "Gerenciar categorias, módulos e lições",
+  "settingsEnterCode": "Digite o código recebido para liberar o acesso completo.",
+  "settingsCancel": "Cancelar",
+  "settingsRedeem": "Resgatar",
+  "settingsDeleteConfirmTitle": "Eliminar Conta?",
+  "settingsDeleteConfirmBody": "Esta ação é permanente. Todos os seus dados — XP, progresso, planos ativos e histórico — serão perdidos e não poderão ser recuperados.",
+  "settingsDeleteAction": "ELIMINAR",
+  "settingsAccessGranted": "Acesso liberado até {date} 🎉",
+  "supportTitle": "AJUDA & SUPORTE",
+  "supportSubject": "Assunto",
+  "supportMessageHint": "Descreva sua dúvida ou problema em detalhes...",
+  "supportSend": "ENVIAR MENSAGEM",
+  "supportNotice": "Nossa equipe vai analisar seu chamado e responder pelo e-mail cadastrado em até 48 horas.",
+  "supportMessageSent": "Mensagem enviada!",
+  "supportBackHome": "VOLTAR AO INÍCIO",
+  "supportEmail": "E-mail",
+  "supportEmailAddress": "suporte@exs.com.br",
+  "supportWhatsApp": "WhatsApp",
+  "supportWhatsAppHours": "Seg–Sex 8h–18h",
+  "passwordTitle": "Alterar Senha",
+  "passwordSubtitle": "Altere sua senha de acesso",
+  "passwordNotice": "Por segurança, informe sua senha atual antes de definir uma nova.",
+  "passwordCurrent": "Senha Atual",
+  "passwordNew": "Nova Senha",
+  "passwordConfirm": "Confirmar Nova Senha",
+  "passwordChangeBtn": "ALTERAR SENHA",
+  "passwordSuccessTitle": "Senha alterada!",
+  "passwordSuccessBody": "Sua senha foi atualizada com sucesso. Use a nova senha no próximo login.",
+  "passwordContinue": "CONTINUAR",
+  "regSuccessTitle": "Cadastro Concluído!",
+  "regSuccessWelcome": "Bem-vindo ao SPARK!\\nSua jornada de aprendizado começa agora.",
+  "regSuccessBonus": "Bônus de boas-vindas",
+  "regSuccessPoints": "100 Spark Points adicionados à sua conta!",
+  "regSuccessContinue": "CONTINUAR PARA O APP",
+  "termsTitle": "Termos & Condições",
+  "termsHeader": "TERMOS DE USO",
+  "termsLastUpdate": "Última atualização: Junho de 2026",
+  "termsIntro": "Leia atentamente as diretrizes abaixo para entender seus direitos, deveres e as regras da nossa plataforma de aprendizado eletrotécnico.",
+  "termsSection1": "1. Introdução e Objetivo do SPARK",
+  "termsSection2": "2. Conta, Cadastro e Segurança",
+  "termsSection3": "3. Spark Points e Assinatura Premium",
+  "termsSection4": "4. Propriedade Intelectual",
+  "termsSection5": "5. Conduta na Comunidade (Clãs e Duelos)",
+  "termsSection6": "6. Proteção de Dados (LGPD)",
+  "termsSection7": "7. Alterações e Limitação de Responsabilidade",
+  "@settingsAccessGranted": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutTitle": "CHECKOUT",
+  "checkoutItemsHeader": "IDENTIFICAÇÃO",
+  "checkoutEmptyCart": "Seu carrinho está vazio",
+  "checkoutExploreStore": "Explore a loja e equipe-se\\npara os próximos desafios!",
+  "checkoutBackToStore": "VOLTAR À LOJA",
+  "checkoutPaymentMethod": "MÉTODO DE PAGAMENTO",
+  "checkoutCreditCard": "Cartão de Crédito",
+  "checkoutCreditCardDesc": "Aprovação imediata, 24h por dia",
+  "checkoutPix": "PIX",
+  "checkoutPixDesc": "Compensação em até 3 dias úteis",
+  "checkoutBoleto": "Boleto Bancário",
+  "checkoutCpfCnpj": "CPF ou CNPJ (somente números)",
+  "checkoutCpfCnpjRequired": "Exigido pelo Banco Central para PIX e Boleto",
+  "checkoutTotal": "TOTAL",
+  "checkoutConfirmOrder": "CONFIRMAR PEDIDO",
+  "checkoutSecurePayment": "Pagamento seguro via Asaas",
+  "checkoutProcessedSecurely": "Processado de forma segura",
+  "checkoutGotIt": "ENTENDI",
+  "checkoutItemCount": "{count, plural, =0{Nenhum item} =1{1 item} other{{count} itens}}",
+  "trialCheckoutTitle": "TRIAL GRATUITO",
+  "trialCheckoutSummary": "RESUMO",
+  "trialCheckoutFree": "GRÁTIS",
+  "trialCheckoutPricing": "7 dias grátis • Depois R$ {price}/mês",
+  "trialCheckoutNotice": "O cartão só será cobrado após o término dos 7 dias gratuitos.",
+  "trialCheckoutStart": "COMEÇAR A ESTUDAR",
+  "trialCheckoutSuccess": "Trial Ativado! 🎉",
+  "trialCheckoutSecure": "Pagamento seguro via Asaas · PCI-DSS",
+  "trialCheckoutOops": "Ops!",
+  "trialCheckoutRetry": "TENTAR NOVAMENTE",
+  "paymentPendingTitle": "CONCLUÍDO",
+  "paymentPendingWaiting": "Aguardando pagamento...",
+  "paymentPendingNotice": "O pagamento é confirmado automaticamente.\\nVocê não precisa fazer nada após pagar.",
+  "paymentPendingExpires": "Expira em: {date}",
+  "paymentPendingCopyPix": "CÓDIGO PIX — COPIA E COLA",
+  "paymentPendingRedirect": "Você será redirecionado\\npara a página de pagamento",
+  "paymentPendingOpenPage": "ABRIR PÁGINA DE PAGAMENTO",
+  "paymentPendingConfirming": "Aguardando confirmação...",
+  "paymentPendingActivation": "Após finalizar o pagamento, seu plano\\nserá ativado automaticamente.",
+  "paymentPendingSuccess": "Pagamento Concluído!",
+  "paymentPendingApproved": "Sua transação foi aprovada com sucesso.",
+  "studentVerificationTitle": "Verificação de estudante",
+  "studentVerificationNotice": "Comprove sua matrícula para liberar o preço Student (50% off).",
+  "studentVerificationRevalidate": "A revalidação é exigida a cada 12 meses.",
+  "studentVerificationSend": "ENVIAR PARA VERIFICAÇÃO",
+  "businessSetupTitle": "SPARK Business",
+  "businessSetupSubmit": "SOLICITAR PROPOSTA",
+  "businessSetupSuccess": "Solicitação enviada",
+  "businessSetupSuccessMsg": "Nossa equipe comercial entrará em contato pelo e-mail informado",
+  "businessSetupEstimate": "Estimativa mensal",
+  "businessSetupUsers": "{count, plural, =0{Nenhum usuário} =1{1 usuário} other{{count} usuários}}",
+  "businessSetupDesc": "Treine sua equipe com painel administrativo, relatórios de",
+  "businessSetupOk": "OK",
+  "businessTeamTitle": "Painel da equipe",
+  "businessTeamMembers": "Membros",
+  "businessTeamNoMembers": "Nenhum membro ainda. Convide pelo e-mail acima.",
+  "businessTeamInvite": "Convidar membro",
+  "businessTeamNoAdmin": "Você ainda não administra uma equipe.",
+  "businessTeamCreate": "CRIAR PLANO BUSINESS",
+  "businessTeamError": "Erro: {e}",
+  "storePlanForStudents": "Para quem está estudando",
+  "storePlanForIndividuals": "Para profissionais individuais",
+  "storePlanForSeniors": "Para sêniores e consultores",
+  "storePlanForBusiness": "Para empresas e consultorias",
+  "storeStartJourney": "Comece sua jornada",
+  "storeSubscribePrefix": "ASSINAR",
+  "storeUpgradePrefix": "FAZER UPGRADE PARA",
+  "@checkoutItemCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@trialCheckoutPricing": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@paymentPendingExpires": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "@businessSetupUsers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@businessTeamError": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "shortCircuitTitle": "Curto-Circuito",
+  "shortCircuitData": "Dados do sistema",
+  "shortCircuitVLL": "Tensão de linha V_LL (kV)",
+  "shortCircuitZ1": "Z1 (Ω)",
+  "shortCircuitZ2": "Z2 (Ω)",
+  "shortCircuitZ0": "Z0 (Ω)",
+  "shortCircuitZf": "Z falta (Ω)",
+  "shortCircuitCurrents": "Correntes de curto-circuito",
+  "shortCircuit3P": "Trifásica (3φ)",
+  "shortCircuitLL": "Bifásica (FF)",
+  "shortCircuitLG": "Monofásica-terra (FT)",
+  "shortCircuitDesc": "E = V_LL/√3.  3φ: E/Z1 · FF: √3·E/(Z1+Z2) · FT: 3·E/(Z1+Z2+Z0+3·Zf)",
+  "ctSaturationTitle": "Saturação de TC",
+  "ctSaturationCT": "Transformador de corrente (classe P)",
+  "ctSaturationSn": "Carga nominal Sn (VA)",
+  "ctSaturationIn": "TC secundário In (A)",
+  "ctSaturationAlf": "ALF (ex.: 20)",
+  "ctSaturationRct": "Rct interna (Ω)",
+  "ctSaturationCheck": "Verificação de saturação",
+  "ctSaturationFaultPri": "Corrente de falta no primário (A)",
+  "ctSaturationFaultSec": "I secundária de falta",
+  "ctSaturationZb": "Carga conectada Zb (Ω)",
+  "ctSaturationAlfEff": "ALF efetivo",
+  "ctSaturationVk": "Tensão de joelho Vk",
+  "ctSaturationVreq": "Tensão exigida V_req",
+  "ctSaturationMargin": "Margem (Vk/V_req)",
+  "ctSaturationDesc": "Zn = Sn/In² · Vk ≈ ALF·In·(Rct+Zn) · V_req = I_sec_falta·(Rct+Zb). Satura se V_req > Vk.",
+  "ctSaturationZn": "Carga nominal Zn",
+  "ctSaturationPriA": "TC primário (A)",
+  "ctSaturationMultiple": "Múltiplo de falta",
+  "rtcRtpTitle": "RTC / RTP",
+  "rtcRtpPriNom": "Primário nominal ({unit})",
+  "rtcRtpSecNom": "Secundário nominal ({unit})",
+  "rtcRtpLabelDesc": "{label} = {word}_primária_nominal / {word}_secundária_nominal",
+  "rtcRtpConversions": "Conversões (opcional)",
+  "rtcRtpPriMeasured": "Valor medido no primário ({unit})",
+  "rtcRtpSecMeasured": "Valor medido no secundário ({unit})",
+  "rtcRtpSecCalc": "Valor no secundário (de {val}{unit} no primário)",
+  "rtcRtpPriCalc": "Valor no primário (de {val}{unit} no secundário)",
+  "idmtTitle": "Curvas de Sobrecorrente (51)",
+  "idmtCurveSelected": "Curva selecionada",
+  "idmtCurveTap": "Curva selecionada: {name}. Toque para trocar.",
+  "idmtPickup": "I pick-up (A)",
+  "idmtPickup2": "I> pickup (A)",
+  "idmtDial": "Dial de tempo (Td)",
+  "idmtDialShort": "Dial (Td)",
+  "idmtFault": "Corrente de falta (A)",
+  "idmtTimeAt": "Tempo de atuação {sec}, equivalente a {fmt}",
+  "idmtAddRelay": "Adicionar relé",
+  "idmtGraph": "Gráfico log-log da curva {name}",
+  "idmtLogLog": "Coordenograma tempo × corrente (log-log)",
+  "idmtLogLogDesc": "Sobreponha as curvas (em ampères primários) e veja o intervalo",
+  "idmtTimeMult": "Curva tempo × múltiplo (log-log)",
+  "idmtRelayName": "Relé R{i}",
+  "idmtRelayNameShort": "R{i}",
+  "idmtRelayLabel": "{label} · {name}",
+  "idmtTestI": "I teste (A)",
+  "idmtM": "M = I_teste / I_pickup = {m}",
+  "idmtCoeff": "Coeficientes  ·  t = (A·Td + K1)/(M^P − Q) + B·Td + K2",
+  "idmtFmt": "{fmt}  (hh:mm:ss.cc)",
+  "idmtCopy": "Copiar resultado",
+  "idmtAtuationTime": "Tempo de atuação",
+  "idmtCtiReq": "CTI requerido (s)",
+  "idmtNeedTwo": "Informe ≥ 2 relés válidos e a corrente de falta para checar o CTI.",
+  "idmtSensitize": "Apenas {count} relé sensibiliza em {fault} A.",
+  "idmtBackupAfter": "{backup} após {main}:",
+  "diffBalTitle": "Balanço Diferencial (87T)",
+  "diffBalDesc": "Calcula o coeficiente de balanço de cada enrolamento (referência = Primário).",
+  "diffBalVolt": "Tensão (kV)",
+  "diffBalPower": "Potência (MVA)",
+  "diffBalPri": "TC primário (A)",
+  "diffBalSec": "TC secundário (A)",
+  "diffBalCoeffs": "Coeficientes de balanço",
+  "diffBalNomI": "{name} — I nominal",
+  "diffBalSecI": "{name} — I secundário TC",
+  "diffBalBalance": "{name} — Balanço",
+  "restDiffTitle": "87 — Diferencial c/ Restrição",
+  "restDiffDesc": "Característica de restrição do diferencial (87). Mostra se um ponto",
+  "restDiffConv": "Convenção de restrição",
+  "restDiffCur": "Correntes dos enrolamentos",
+  "restDiffOp": "Ponto de operação",
+  "restDiffChar": "Característica Idiff × Irest",
+  "restDiffCharDesc": "Característica (dupla inclinação)",
+  "restDiffLimDesc": "Limiar = pickup, depois slope1 e slope2 acima dos joelhos.",
+  "restDiffModAng": "Módulo (pu de I_nom) e ângulo (°). Passante: ângulos opostos",
+  "restDiffI1": "I1 (pu)",
+  "restDiffI1Ang": "Âng. I1 (°)",
+  "restDiffI2": "I2 (pu)",
+  "restDiffI2Ang": "Âng. I2 (°)",
+  "restDiffIdiff": "Idiff (diferencial)",
+  "restDiffIrest": "Irest (restrição)",
+  "restDiffPickup": "Pickup (pu)",
+  "restDiffSlope1": "Slope 1 (0–1)",
+  "restDiffSlope2": "Slope 2 (0–1)",
+  "restDiffKnee1": "Joelho 1 (pu)",
+  "restDiffKnee2": "Joelho 2 (pu)",
+  "restDiffLimIrest": "Limiar na Irest",
+  "restDiffMargin": "Margem (Idiff − limiar)",
+  "coordTitle": "Coordenação / Seletividade",
+  "coordFault": "Corrente de falta (A)",
+  "coordCtiMin": "CTI mínimo (s)",
+  "coordCtiMinShort": "CTI mínimo",
+  "coordCtiReal": "CTI real (Δt)",
+  "coordCoord": "Coordenação",
+  "coordFaultMargin": "Falta e margem",
+  "coordMainTime": "Tempo do principal",
+  "coordBackupTime": "Tempo da retaguarda",
+  "coordCurveTap": "Curva: {name}. Toque para trocar.",
+  "coordPickup": "Pickup (A)",
+  "coordDial": "Dial (Td)",
+  "distProtTitle": "Proteção de Distância (21)",
+  "distProtConv": "Conversão para secundário (opcional)",
+  "distProtZLine": "Z linha (Ω)",
+  "distProtAngLine": "Ângulo da linha (°)",
+  "distProtZAdj": "Z linha adjacente (Ω)",
+  "distProtZFault": "|Z falta| (Ω)",
+  "distProtAngFault": "Âng. falta (°)",
+  "distProtLineFault": "Linha e impedância de falta",
+  "distProtAdjust": "Ajustes das zonas",
+  "distProtDesc": "Z1 = z1%·Z_linha · Z2 = Z_linha + f2·Z_adj · Z3 = Z_linha + f3·Z_adj",
+  "distProtZ1": "Zona 1 (%)",
+  "distProtF2": "Fator Z2 adj.",
+  "distProtF3": "Fator Z3 adj.",
+  "distProtRtc": "RTC",
+  "distProtRtp": "RTP",
+  "distProtZsec": "Z_sec = Z_prim · (RTC / RTP)",
+  "distProtZ1T": "Zona 1 (~instantâneo)",
+  "distProtZ2T": "Zona 2 (~0,3–0,4 s)",
+  "distProtZ3T": "Zona 3 (~0,8–1,0 s)",
+  "distProtZ1Sec": "Zona 1 secundária",
+  "distProtZ2Sec": "Zona 2 secundária",
+  "distProtZ3Sec": "Zona 3 secundária",
+  "distProtRx": "Plano R-X · círculos mho das zonas",
+  "distProtRxDesc": "Ângulo da linha (RCA) e a impedância vista pelo relé na falta",
+  "distProtReach": "Alcance das zonas",
+  "dir67Title": "Direcional 67 / 67N",
+  "dir67Phase": "Elemento de fase",
+  "dir67Volt": "Tensões trifásicas",
+  "dir67VoltDesc": "Módulo e ângulo de cada tensão de fase. Padrão: sistema balanceado ABC.",
+  "dir67Va": "V_A (V)",
+  "dir67VaAng": "∠ V_A (°)",
+  "dir67Vb": "V_B (V)",
+  "dir67VbAng": "∠ V_B (°)",
+  "dir67Vc": "V_C (V)",
+  "dir67VcAng": "∠ V_C (°)",
+  "dir67Polarization": "Grandeza de polarização",
+  "dir67PolDesc": "Selecione a fase protegida (define a polarização por quadratura) e o modo de entrada.",
+  "dir67PolCalc": "Polarização calculada",
+  "dir67PolN": "Polarização do 67N",
+  "dir67PolNDesc": "Considere apenas faltas Fase-Fase ou Fase-Neutro. MTA recomendado se ajusta ao tipo.",
+  "dir67Pol90": "Em FP=1, V_pol fica 90° atrás de V_fase (daí",
+  "dir67FaultType": "Tipo de falta",
+  "dir67OpMagnitude": "Grandeza de operação",
+  "dir67OpDesc": "Módulo e ângulo de {label}.",
+  "dir67Mod": "Módulo",
+  "dir67Ang": "Âng. (°)",
+  "dir67Adjust": "Ajuste direcional",
+  "dir67AdjustDesc": "MTA = ângulo de máximo torque. Abertura define o setor (±metade do valor).",
+  "dir67Mta": "MTA / RCA (°)",
+  "dir67MtaRec": "MTA recomendado: {val}°",
+  "dir67Aperture": "Abertura (°)",
+  "dir67TimeChar": "Característica de tempo",
+  "dir67TimeDesc": "Elemento direcional 67 (fase) e 67N (neutro). Configure pickup, MTA,",
+  "dir67TimeDef": "Definite Time (tempo fixo) ou IDMT (curva inversa).",
+  "dir67Ipickup": "I pickup (A)",
+  "dir67Td": "Time dial Td",
+  "dir67Tms": "Tempo Td (ms)",
+  "dir67Eval": "Avaliação direcional",
+  "dir67InSector": "No setor direcional?",
+  "dir67InSectorFwd": "No setor direto?",
+  "dir67AbovePkp": "Acima do pickup?",
+  "dir67Theta": "Ângulo relativo θ (Iop − pol)",
+  "dir67ThetaMta": "θ − MTA",
+  "dir67MarginAng": "Margem angular ao limite",
+  "dir67TimeAtuate": "Tempo de atuação",
+  "dir67TimeMsS": "Tempo de atuação: {ms} ms ({s} s)",
+  "dir67Phasor": "Diagrama fasorial e setor de operação",
+  "dir67OpLabel": "{label} (A)",
+  "dir67Apply": "APLICAR",
+  "dir67EvaluateBtn": "AVALIAR",
+  "toolsCalculateUpper": "CALCULAR",
+  "@rtcRtpPriNom": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "@rtcRtpSecNom": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "@rtcRtpPriMeasured": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "@rtcRtpSecMeasured": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "@rtcRtpSecCalc": {
+    "placeholders": {
+      "val": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "@rtcRtpPriCalc": {
+    "placeholders": {
+      "val": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "@rtcRtpLabelDesc": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "word": {
+        "type": "String"
+      }
+    }
+  },
+  "@idmtCurveTap": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@idmtTimeAt": {
+    "placeholders": {
+      "sec": {
+        "type": "String"
+      },
+      "fmt": {
+        "type": "String"
+      }
+    }
+  },
+  "@idmtGraph": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@idmtRelayName": {
+    "placeholders": {
+      "i": {
+        "type": "int"
+      }
+    }
+  },
+  "@idmtRelayNameShort": {
+    "placeholders": {
+      "i": {
+        "type": "int"
+      }
+    }
+  },
+  "@idmtRelayLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@idmtM": {
+    "placeholders": {
+      "m": {
+        "type": "String"
+      }
+    }
+  },
+  "@idmtFmt": {
+    "placeholders": {
+      "fmt": {
+        "type": "String"
+      }
+    }
+  },
+  "@idmtSensitize": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "fault": {
+        "type": "String"
+      }
+    }
+  },
+  "@idmtBackupAfter": {
+    "placeholders": {
+      "backup": {
+        "type": "String"
+      },
+      "main": {
+        "type": "String"
+      }
+    }
+  },
+  "@diffBalNomI": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@diffBalSecI": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@diffBalBalance": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@coordCurveTap": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@dir67OpDesc": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "@dir67MtaRec": {
+    "placeholders": {
+      "val": {
+        "type": "String"
+      }
+    }
+  },
+  "@dir67TimeMsS": {
+    "placeholders": {
+      "ms": {
+        "type": "String"
+      },
+      "s": {
+        "type": "String"
+      }
+    }
+  },
+  "@dir67OpLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "groundGridTitle": "Malha de Aterramento (IEEE 80)",
+  "groundGridParams": "Parâmetros do solo e da falta",
+  "groundGridRes": "ρs superficial (Ω·m)",
+  "groundGridCs": "Cs (camada superficial, 1 se nenhuma)",
+  "groundGridTime": "Tempo de falta ts (s)",
+  "groundGridGprCalc": "Elevação de potencial — GPR (opcional)",
+  "groundGridIg": "Corrente de malha Ig (A)",
+  "groundGridRg": "Resistência de malha Rg (Ω)",
+  "groundGridTol": "Tensões toleráveis",
+  "groundGridTouchTol": "Tensão de toque tolerável",
+  "groundGridStepTol": "Tensão de passo tolerável",
+  "groundGridGpr": "GPR (I_malha · R_malha)",
+  "arcFlashTitle": "Arc Flash (energia incidente)",
+  "arcFlashDesc": "Triagem rápida de energia incidente (IEEE 1584-2002 / Lee).",
+  "arcFlashEquipClass": "Classe do equipamento",
+  "arcFlashEquipLabel": "{name}  ·  gap {gap} mm",
+  "arcFlashDefineGap": "Define gap típico e o expoente de distância (x) do 1584.",
+  "arcFlashParams": "Parâmetros da falta",
+  "arcFlashVolt": "Tensão (kV)",
+  "arcFlashIbf": "I curto Ibf (kA)",
+  "arcFlashTime": "T eliminação (s)",
+  "arcFlashWorkDist": "Distância de trabalho (mm)",
+  "arcFlashGap": "Gap eletrodos (mm)",
+  "arcFlashResult": "Resultado",
+  "arcFlashModel": "Modelo usado",
+  "arcFlashIa": "Corrente de arco Ia",
+  "arcFlashEnergy": "Energia incidente",
+  "arcFlashSafeDist": "Distância segura (1,2 cal/cm²)",
+  "arcFlashEnergyVal": "{val} cal/cm²",
+  "spdaRiskTitle": "SPDA — Análise de Risco",
+  "spdaRiskDesc": "Triagem de necessidade de SPDA (NBR 5419-2). Estima o nº de eventos",
+  "spdaRiskStruct": "Estrutura",
+  "spdaRiskL": "Comprimento L (m)",
+  "spdaRiskW": "Largura W (m)",
+  "spdaRiskH": "Altura H (m)",
+  "spdaRiskAd": "Área de captação Ad",
+  "spdaRiskAdDesc": "Área de captação Ad = L·W + 2·3H·(L+W) + π·(3H)².",
+  "spdaRiskExp": "Exposição",
+  "spdaRiskIso": "Isolada (1,0)",
+  "spdaRiskIsoHill": "Isolada no topo de morro (2,0)",
+  "spdaRiskSameH": "Objetos da mesma altura por perto (0,5)",
+  "spdaRiskSurrounded": "Cercada por objetos mais altos (0,25)",
+  "spdaRiskNg": "Ng (descargas/km²/ano)",
+  "spdaRiskNgDesc": "Ng do mapa de densidade de descargas (Inpe/norma).",
+  "spdaRiskEval": "Triagem de risco",
+  "spdaRiskNd": "Eventos perigosos Nd",
+  "spdaRiskNc": "Freq. admissível Nc",
+  "spdaRiskEff": "Eficiência requerida",
+  "spdaRiskLevel": "Nível de SPDA provável",
+  "spdaRiskEvalBtn": "AVALIAR",
+  "spdaCalcTitle": "SPDA — Cálculos (5419-3)",
+  "spdaCalcDesc": "Cálculos gerais de SPDA (NBR 5419-3): esfera rolante, nº de",
+  "spdaCalcLevel": "Nível de proteção",
+  "spdaCalcStruct": "Estrutura",
+  "spdaCalcL": "L (m)",
+  "spdaCalcH": "Altura (m)",
+  "spdaCalcPerim": "Perímetro (m)",
+  "spdaCalcPerimDesc": "Perímetro (para nº de descidas) e altura (ângulo).",
+  "spdaCalcDist": "Distância de segurança (opcional)",
+  "spdaCalcKm": "km (isolamento)",
+  "spdaCalcKc": "kc (divisão)",
+  "spdaCalcSDesc": "s = ki·(kc/km)·L  ·  km: ar=1, sólido=0,5",
+  "spdaCalcResults": "Resultados (nível {level})",
+  "spdaCalcSphere": "Raio da esfera rolante",
+  "spdaCalcAngle": "Ângulo de proteção α",
+  "spdaCalcRadius": "Raio de proteção no solo",
+  "spdaCalcDownNum": "Nº de condutores de descida",
+  "spdaCalcDownSec": "Seção mín. descida (Cu)",
+  "spdaCalcGndSec": "Seção mín. aterramento (Cu)",
+  "spdaCalcCaptSec": "Seção mín. captação (Cu)",
+  "spdaCalcSafeDist": "Distância de segurança s",
+  "spdaCalcImpulse": "Corrente de impulso (nível {level})",
+  "iec61850Title": "IEC 61850 — GOOSE / SV",
+  "iec61850Desc": "Triagem de GOOSE/SV no comissionamento IEC 61850: sequência de",
+  "iec61850GooseSeq": "Sequência GOOSE (ms)",
+  "iec61850T0": "T0 estável (ms)",
+  "iec61850T1": "T1 pós-evento (ms)",
+  "iec61850GooseRetrans": "GOOSE — retransmissão",
+  "iec61850RetransNum": "Nº de retransmissões até T0",
+  "iec61850TimeEst": "Tempo medido/estimado (ms)",
+  "iec61850KeepAlive": "Após o evento dobra de T1 até estabilizar em T0 (keep-alive).",
+  "iec61850SV": "Sampled Values",
+  "iec61850Freq": "Frequência",
+  "iec61850Samples": "Amostras/ciclo",
+  "iec61850SvSamples": "SV — amostras/s",
+  "iec61850SvPackets": "SV — pacotes/s",
+  "iec61850SvBand": "SV — banda estimada",
+  "iec61850SvDesc": "Amostras por ciclo × frequência → pacotes/s e banda.",
+  "iec61850Address": "Endereçamento multicast",
+  "iec61850MacType": "Tipo de MAC",
+  "iec61850Appid": "APPID (0x0000–0xFFFF)",
+  "iec61850Vlan": "VLAN-ID (0–4094)",
+  "iec61850Priority": "Prioridade (0–7)",
+  "iec61850VerifyBtn": "VERIFICAR",
+  "iec61850Verify": "Verificação de endereçamento",
+  "iec61850MacMult": "MAC multicast 61850",
+  "iec61850MacPrefix": "MAC multicast",
+  "iec61850AppidHex": "APPID (hex)",
+  "iec61850VlanID": "VLAN-ID",
+  "iec61850PriorityLabel": "Prioridade",
+  "iec61850MacRules": "GOOSE: 01-0C-CD-01-xx-xx · SV: 01-0C-CD-04-xx-xx. VLAN 0–4094,",
+  "iec61850ProfileLabel": "{name} — {ms} ms",
+  "modbusTitle": "Modbus — Registradores",
+  "modbusDesc": "Junta 2 registradores de 16 bits em float32/int32 com a ordem de",
+  "modbusOrder": "Ordem de byte/word",
+  "modbusRegs": "Registradores (16 bits, hex)",
+  "modbusReg0": "Reg 0 (hex)",
+  "modbusReg1": "Reg 1 (hex)",
+  "modbusRegDesc": "reg0 = 1º registrador lido · reg1 = 2º. A/B = bytes de reg0;",
+  "modbusDecodeBtn": "DECODIFICAR",
+  "modbusDecoded": "Valor decodificado ({order})",
+  "modbusFloat32": "Float 32 (IEEE-754)",
+  "modbusInt32": "Int 32 (com sinal)",
+  "modbusUint32": "UInt 32 (sem sinal)",
+  "modbusBytes": "Bytes (ordem aplicada)",
+  "modbusCompare": "Compare com o valor esperado para descobrir a ordem certa do medidor.",
+  "modbusFloatAll": "Float em todas as ordens",
+  "netCableTitle": "Cabos de Rede (RJ-45)",
+  "netCablePinout": "Orientação do Pino 1",
+  "netCableHold": "Segure o RJ-45 com a trava (clip) para baixo e os contatos virados para você.",
+  "netCableStraight": "Cabo direto (straight): mesmo padrão nas duas pontas (B–B ou A–A).",
+  "netCableCats": "Categorias de cabo par-trançado",
+  "netCableLength": "Comprimento máximo de 100 m para o canal (Cat 5e a 7A); Cat 8 limitada a ~30 m.",
+  "netCableCat": "Cat",
+  "netCableBand": "Banda",
+  "netCableSpeed": "Velocidade",
+  "netCableMax": "Máx.",
+  "toolsEvaluateUpper": "AVALIAR",
+  "@arcFlashEquipLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "gap": {
+        "type": "String"
+      }
+    }
+  },
+  "@arcFlashEnergyVal": {
+    "placeholders": {
+      "val": {
+        "type": "String"
+      }
+    }
+  },
+  "@spdaCalcResults": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "@spdaCalcImpulse": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "@iec61850ProfileLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "ms": {
+        "type": "String"
+      }
+    }
+  },
+  "@modbusDecoded": {
+    "placeholders": {
+      "order": {
+        "type": "String"
+      }
+    }
+  },
+  "commissioningTitle": "Comissionamento / Ensaios",
+  "commissioningPriI": "I falta primária (A)",
+  "commissioningPriV": "V primária (V)",
+  "commissioningRtc": "RTC",
+  "commissioningRtp": "RTP",
+  "commissioningSecCalc": "Injeção secundária",
+  "commissioningDesc": "I_sec = I_falta / RTC   ·   V_sec = V_primária / RTP",
+  "commissioningSecI": "I de injeção (secundário)",
+  "commissioningSecV": "V de injeção (secundário)",
+  "commissioningTol": "Tolerância de ensaio",
+  "commissioningTolPct": "Tolerância (± %)",
+  "commissioningExpected": "Esperado",
+  "commissioningMeasured": "Medido",
+  "commissioningErrDesc": "erro% = (medido − esperado) / esperado · 100",
+  "commissioningErr": "Erro",
+  "commissioningVerdict": "Veredito",
+  "equipmentTitle": "Corrente Nominal",
+  "equipmentTransformer": "Transformador",
+  "equipmentMotor": "Motor",
+  "equipmentTransfBank": "Banco de transformadores",
+  "equipmentPower": "Potência S (kVA)",
+  "equipmentVLL": "Tensão (V)",
+  "equipmentPriV": "V primário (kV)",
+  "equipmentSecV": "V secundário (kV)",
+  "equipmentZShort": "Z curto (%)",
+  "equipmentFlux": "Fluxo residual (0–0,8)",
+  "equipmentNomI": "Corrente nominal",
+  "equipmentInrushEst": "Inrush estimado ({k}×)",
+  "equipmentInrushReal": "Inrush real (energização)",
+  "equipmentHarmonic": "2º harmônico estimado",
+  "equipmentMotorPower": "Potência (kW)",
+  "equipmentMotorPF": "FP (cosφ)",
+  "equipmentMotorEff": "Rendimento η",
+  "equipmentMotorFactor": "Fator de partida (×)",
+  "equipmentTransfPower": "Trafo {i} — kVA",
+  "equipmentTransfFactor": "Fator de inrush (×)",
+  "equipmentAddTransf": "Adicionar trafo",
+  "equipmentBankSum": "Σ In do banco",
+  "equipmentBankPeaks": "Σ picos de inrush",
+  "equipmentBankCoin": "Fator coincidência (0–1)",
+  "equipmentBankCoinPeak": "Inrush coincidente (×{f})",
+  "equipmentBankV": "V barramento (kV)",
+  "equipmentBankDesc": "Energização simultânea no mesmo barramento — soma dos picos de",
+  "equipmentMotorDesc": "In = P / (√3 · V · FP · η)  ·  use kW (1 CV ≈ 0,7355 kW)",
+  "equipmentMotorStart": "Corrente de partida ({k}×)",
+  "equipmentTransfDesc": "Estima o pico a partir dos dados do trafo, em vez de chutar o k.",
+  "equipmentTransfIn": "In = S / (√3 · V)",
+  "equipmentPriIn": "In primário",
+  "equipmentSecIn": "In secundário",
+  "equipmentInrush": "Inrush (×)",
+  "equipmentPeakK": "Fator de pico k",
+  "equipmentPeak": "Pico de inrush",
+  "equipmentAdjust50": "Ajuste 50 (A) — opcional",
+  "equipmentAdjust50Up": "Ajuste 50 montante (A) — opcional",
+  "equipmentVEnergized": "V energizado (kV)",
+  "equipmentTransfList": "Trafos (kVA × fator de inrush)",
+  "powerFactorTitle": "Correção de Fator de Potência",
+  "powerFactorData": "Dados da carga",
+  "powerFactorActP": "Potência ativa P (kW)",
+  "powerFactorCurPF": "FP atual",
+  "powerFactorDesPF": "FP desejado",
+  "powerFactorDesc": "Q_c = P · (tanφ₁ − tanφ₂)",
+  "powerFactorBank": "Banco de capacitores",
+  "powerFactorAppBefore": "Potência aparente antes",
+  "powerFactorAppAfter": "Potência aparente depois",
+  "powerFactorReactBefore": "Reativo antes",
+  "powerFactorReactAfter": "Reativo depois",
+  "powerFactorReqBank": "Banco necessário",
+  "powerQualityTitle": "Qualidade de Energia",
+  "powerQualityPhaseV": "Tensões de fase",
+  "powerQualityPhaseVal": "{label} (V)",
+  "powerQualityPhaseAng": "âng °",
+  "powerQualityFdProdist": "FD% (PRODIST, V₂/V₁)",
+  "powerQualityFdCigre": "FD% (aproximada CIGRÉ)",
+  "powerQualityDevNema": "Desvio máx. (NEMA)",
+  "powerQualityTransfLoad": "Carregamento de transformador",
+  "powerQualityNomPower": "Potência nominal (kVA)",
+  "powerQualityMeasPower": "Potência aparente medida",
+  "powerQualityVLL": "Tensão V_LL (kV)",
+  "powerQualityCur": "Corrente (A)",
+  "powerQualityLoadPct": "Carregamento",
+  "powerQualityLoadDesc": "Carregamento% = (√3 · V_LL · I) / S_nominal · 100",
+  "powerQualityNomPowerShort": "Potência nominal",
+  "signalScalingTitle": "Escalonamento 4–20 mA",
+  "signalScalingRanges": "Faixas",
+  "signalScalingSigMin": "Sinal mín",
+  "signalScalingSigMax": "Sinal máx",
+  "signalScalingEngMin": "Eng. mín",
+  "signalScalingEngMax": "Eng. máx",
+  "signalScalingDesc": "eng = engMín + (sinal−sigMín)/(sigMáx−sigMín)·(engMáx−engMín)",
+  "signalScalingConv": "Converter",
+  "signalScalingSigToEng": "Sinal {sv} → engenharia",
+  "signalScalingEngToSig": "Engenharia {ev} → sinal",
+  "signalScalingSigVal": "Valor do sinal (mA / V)",
+  "signalScalingEngVal": "Valor de engenharia",
+  "thermalTitle": "Severidade Térmica",
+  "thermalAnomaly": "Anomalia termográfica",
+  "thermalDeltaT": "ΔT medido (°C)",
+  "thermalDesc": "ΔT entre o componente e outro similar sob carga semelhante (base NETA).",
+  "thermalCorrection": "Correção por carga (opcional)",
+  "thermalMeasI": "I medida (A)",
+  "thermalNomI": "I nominal (A)",
+  "thermalCorDesc": "ΔT_corrigido = ΔT_medido · (I_nominal / I_medida)²",
+  "thermalDiag": "Diagnóstico térmico",
+  "thermalMeasDt": "ΔT medido",
+  "thermalCorDt": "ΔT corrigido p/ In",
+  "thermalClass": "Classificação",
+  "voltageDropTitle": "Queda de Tensão",
+  "voltageDropFeeder": "Alimentador trifásico",
+  "voltageDropVLL": "Tensão V_LL (kV)",
+  "voltageDropI": "Corrente I (A)",
+  "voltageDropL": "Comprimento L (km)",
+  "voltageDropPF": "FP (cosφ)",
+  "voltageDropR": "R (Ω/km)",
+  "voltageDropX": "X (Ω/km)",
+  "voltageDropDesc": "ΔV = √3 · I · L · (R·cosφ + X·senφ)",
+  "voltageDropVal": "Queda de tensão ΔV",
+  "voltageDropPct": "Queda percentual",
+  "voltageDropLoadV": "Tensão na carga",
+  "@equipmentInrushEst": {
+    "placeholders": {
+      "k": {
+        "type": "String"
+      }
+    }
+  },
+  "@equipmentMotorStart": {
+    "placeholders": {
+      "k": {
+        "type": "String"
+      }
+    }
+  },
+  "@equipmentTransfPower": {
+    "placeholders": {
+      "i": {
+        "type": "int"
+      }
+    }
+  },
+  "@equipmentBankCoinPeak": {
+    "placeholders": {
+      "f": {
+        "type": "String"
+      }
+    }
+  },
+  "@powerQualityPhaseVal": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "@signalScalingSigToEng": {
+    "placeholders": {
+      "sv": {
+        "type": "String"
+      }
+    }
+  },
+  "@signalScalingEngToSig": {
+    "placeholders": {
+      "ev": {
+        "type": "String"
+      }
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/utils/signal_scaling.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
@@ -117,32 +118,32 @@ class _SignalScalingScreenState extends State<SignalScalingScreen> {
         ),
         const SizedBox(height: 16),
         ToolCard(
-          title: 'Faixas',
-          subtitle: 'eng = engMín + (sinal−sigMín)/(sigMáx−sigMín)·(engMáx−engMín)',
+          title: AppLocalizations.of(context)!.signalScalingRanges,
+          subtitle: AppLocalizations.of(context)!.signalScalingDesc,
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _sigMin, label: 'Sinal mín', signed: true),
-              ToolField(controller: _sigMax, label: 'Sinal máx', signed: true),
+              ToolField(controller: _sigMin, label: AppLocalizations.of(context)!.signalScalingSigMin, signed: true),
+              ToolField(controller: _sigMax, label: AppLocalizations.of(context)!.signalScalingSigMax, signed: true),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
-              ToolField(controller: _engMin, label: 'Eng. mín', signed: true),
-              ToolField(controller: _engMax, label: 'Eng. máx', signed: true),
+              ToolField(controller: _engMin, label: AppLocalizations.of(context)!.signalScalingEngMin, signed: true),
+              ToolField(controller: _engMax, label: AppLocalizations.of(context)!.signalScalingEngMax, signed: true),
             ]),
           ],
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Converter',
+          title: AppLocalizations.of(context)!.signalScalingConv,
           children: [
             ToolField(
                 controller: _sigVal,
-                label: 'Valor do sinal (mA / V)',
+                label: AppLocalizations.of(context)!.signalScalingSigVal,
                 signed: true),
             const SizedBox(height: 12),
             ToolField(
                 controller: _engVal,
-                label: 'Valor de engenharia',
+                label: AppLocalizations.of(context)!.signalScalingEngVal,
                 signed: true),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
@@ -10,7 +11,7 @@ class ToolPage extends StatelessWidget {
   final String title;
   final List<Widget> children;
 
-  const ToolPage({super.key, required this.title, required this.children});
+  const ToolPage({super.key, required this.title == 'Resultados' ? AppLocalizations.of(context)!.toolsResultsTitle : title, required this.children});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class ToolCard extends StatelessWidget {
   final String? subtitle;
   final List<Widget> children;
 
-  const ToolCard({super.key, this.title, this.subtitle, required this.children});
+  const ToolCard({super.key, this.title == 'Resultados' ? AppLocalizations.of(context)!.toolsResultsTitle : title, this.subtitle == 'Resultados' ? AppLocalizations.of(context)!.toolsResultsTitle : title, required this.children});
 
   @override
   Widget build(BuildContext context) {
@@ -251,7 +252,7 @@ class ToolResultsPanel extends StatelessWidget {
   const ToolResultsPanel({
     super.key,
     required this.results,
-    this.title = 'Resultados',
+    this.title = 'Resultados', // To be replaced in build
     this.warning,
     this.note,
   });
@@ -299,7 +300,7 @@ class ToolResultsPanel extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  title,
+                  title == 'Resultados' ? AppLocalizations.of(context)!.toolsResultsTitle : title,
                   style: const TextStyle(
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w700,
@@ -309,16 +310,16 @@ class ToolResultsPanel extends StatelessWidget {
               ),
               Semantics(
                 button: true,
-                label: 'Copiar todos os resultados',
+                label: AppLocalizations.of(context)!.toolsCopyAllResultsSemantics,
                 child: IconButton(
                   icon: const Icon(Icons.copy_all_outlined,
                       color: AppColors.primary, size: 20),
-                  tooltip: 'Copiar tudo',
+                  tooltip: AppLocalizations.of(context)!.toolsCopyAllTooltip,
                   onPressed: () {
                     final text = results.map((r) => r.clip).join('\n');
                     Clipboard.setData(ClipboardData(text: text));
                     HapticFeedback.lightImpact();
-                    SparkSnack.success(context, 'Resultados copiados');
+                    SparkSnack.success(context, AppLocalizations.of(context)!.toolsResultsCopied);
                   },
                 ),
               ),
@@ -385,7 +386,7 @@ class ToolResultsPanel extends StatelessWidget {
                 icon: const Icon(Icons.copy_outlined,
                     color: AppColors.textMuted, size: 16),
                 visualDensity: VisualDensity.compact,
-                tooltip: 'Copiar',
+                tooltip: AppLocalizations.of(context)!.toolsCopyTooltip,
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: r.clip));
                   HapticFeedback.selectionClick();

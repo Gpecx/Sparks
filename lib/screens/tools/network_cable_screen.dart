@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
@@ -65,7 +66,7 @@ class NetworkCableScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: const Text('Cabos de Rede (RJ-45)'),
+            title: Text(AppLocalizations.of(context)!.netCableTitle),
           ),
           body: SafeArea(
             top: false,
@@ -107,7 +108,7 @@ class NetworkCableScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Orientação do Pino 1',
+          Text(AppLocalizations.of(context)!.netCablePinout,
               style: TextStyle(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w700,
@@ -124,7 +125,7 @@ class NetworkCableScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Segure o RJ-45 com a trava (clip) para baixo e os contatos virados para você. '
+            AppLocalizations.of(context)!.netCableHold
             'O Pino 1 é o da ESQUERDA. A numeração segue 1→8 da esquerda para a direita.',
             style: TextStyle(
               color: AppColors.textSecondary,
@@ -218,7 +219,7 @@ class NetworkCableScreen extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              'Cabo direto (straight): mesmo padrão nas duas pontas (B–B ou A–A). '
+              AppLocalizations.of(context)!.netCableStraight
               'Cabo cruzado (crossover): um lado T568A e o outro T568B. '
               'Equipamentos modernos com Auto-MDIX dispensam o crossover.',
               style: TextStyle(
@@ -244,7 +245,7 @@ class NetworkCableScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Categorias de cabo par-trançado',
+          Text(AppLocalizations.of(context)!.netCableCats,
               style: TextStyle(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w700,
@@ -255,7 +256,7 @@ class NetworkCableScreen extends StatelessWidget {
           ..._categories.map(_catRow),
           const SizedBox(height: 10),
           Text(
-            'Comprimento máximo de 100 m para o canal (Cat 5e a 7A); Cat 8 limitada a ~30 m. '
+            AppLocalizations.of(context)!.netCableLength
             'Na subestação digital prefira fibra para GOOSE/SV (imunidade a EMI).',
             style: TextStyle(
                 color: AppColors.textMuted, fontSize: 11, fontStyle: FontStyle.italic),
@@ -268,10 +269,10 @@ class NetworkCableScreen extends StatelessWidget {
   Widget _catHeader() {
     return Row(
       children: const [
-        Expanded(flex: 2, child: Text('Cat', style: _hStyle)),
-        Expanded(flex: 2, child: Text('Banda', style: _hStyle)),
-        Expanded(flex: 3, child: Text('Velocidade', style: _hStyle)),
-        Expanded(flex: 2, child: Text('Máx.', style: _hStyle)),
+        Expanded(flex: 2, child: Text(AppLocalizations.of(context)!.netCableCat, style: _hStyle)),
+        Expanded(flex: 2, child: Text(AppLocalizations.of(context)!.netCableBand, style: _hStyle)),
+        Expanded(flex: 3, child: Text(AppLocalizations.of(context)!.netCableSpeed, style: _hStyle)),
+        Expanded(flex: 2, child: Text(AppLocalizations.of(context)!.netCableMax, style: _hStyle)),
       ],
     );
   }
