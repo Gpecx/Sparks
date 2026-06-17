@@ -1,9 +1,12 @@
 import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:spark_app/theme/app_theme.dart';
-import 'package:spark_app/screens/video_preview_screen.dart';
 import 'package:spark_app/services/standards_service.dart';
 import 'package:spark_app/models/standard_metadata.dart';
+
+/// URL da plataforma PowerPlay (VoltsMind) — abre no navegador externo.
+const String kPowerplayUrl = 'https://site-895835261078.us-central1.run.app/';
 
 /// Tela híbrida: exibe detalhes técnicos da norma + seção PowerPlay de vídeos.
 /// Aceita [standardId] como parâmetro de rota (ex: 'nr-10').
@@ -230,15 +233,18 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text(AppLocalizations.of(context)!.stdVideosAbout(s.code), style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
+                child: Text(AppLocalizations.of(context)!.stdNetflixTagline, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
               ),
             ],
           ),
         ),
         const SizedBox(height: 14),
 
-        // ── Lista de vídeos ────────────────────────────────────────────────
-        _buildVideoList(s.code),
+        // ── Acesso à plataforma PowerPlay ──────────────────────────────────
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: _powerplayButton(context),
+        ),
 
         const SizedBox(height: 32),
       ],
@@ -292,35 +298,12 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
         ),
         const SizedBox(height: 28),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-                ),
-                child: Text(AppLocalizations.of(context)!.stdTrending, style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(AppLocalizations.of(context)!.stdRecommended, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 14),
-        _buildVideoList(null),
-        const SizedBox(height: 32),
-        Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: SizedBox(
             width: double.infinity,
             height: 52,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => _openPowerplay(context),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -342,66 +325,29 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
     );
   }
 
-  Widget _buildVideoList(String? normCode) {
-    final videos = _videosFor(normCode);
-    return SizedBox(
-      height: 195,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: videos.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 12),
-        itemBuilder: (ctx, i) {
-          final v = videos[i];
-          return GestureDetector(
-            onTap: () => Navigator.push(ctx, MaterialPageRoute(builder: (_) => VideoPreviewScreen(title: v['title']!))),
-            child: _videoCard(v['title']!, v['duration']!, i == 0),
-          );
-        },
-      ),
-    );
-  }
-
-  List<Map<String, String>> _videosFor(String? normCode) {
-    final code = normCode?.toUpperCase();
-    if (code == null) {
-      return [
-        {'title': AppLocalizations.of(context)!.stdVidPanelsAdv, 'duration': '12:45'},
-        {'title': AppLocalizations.of(context)!.stdVidHvInspection, 'duration': '8:30'},
-        {'title': AppLocalizations.of(context)!.stdVidNr35Epi, 'duration': '15:20'},
-      ];
+  Future<void> _openPowerplay(BuildContext context) async {
+    final uri = Uri.parse(kPowerplayUrl);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
-    // Mapeamento básico de vídeos por norma
-    final Map<String, List<Map<String, String>>> catalog = {
-      'NR-10': [
-        {'title': AppLocalizations.of(context)!.stdVidNr10Fundamentals, 'duration': '18:20'},
-        {'title': AppLocalizations.of(context)!.stdVidPanelsAdv, 'duration': '12:45'},
-        {'title': AppLocalizations.of(context)!.stdVidLoto, 'duration': '9:10'},
-      ],
-      'NR-35': [
-        {'title': AppLocalizations.of(context)!.stdVidNr35Heights, 'duration': '14:00'},
-        {'title': AppLocalizations.of(context)!.stdVidNr35Anchorage, 'duration': '15:20'},
-        {'title': AppLocalizations.of(context)!.stdVidFallStructure, 'duration': '11:05'},
-      ],
-      'NR-12': [
-        {'title': AppLocalizations.of(context)!.stdVidNr12Machines, 'duration': '16:30'},
-        {'title': AppLocalizations.of(context)!.stdVidNr12Risk, 'duration': '10:15'},
-        {'title': AppLocalizations.of(context)!.stdVidPress, 'duration': '8:50'},
-      ],
-      'NR-33': [
-        {'title': AppLocalizations.of(context)!.stdVidNr33Concepts, 'duration': '13:00'},
-        {'title': AppLocalizations.of(context)!.stdVidNr33Entry, 'duration': '17:40'},
-        {'title': AppLocalizations.of(context)!.stdVidConfinedRescue, 'duration': '9:30'},
-      ],
-    };
-
-    return catalog[code] ??
-        [
-          {'title': AppLocalizations.of(context)!.stdVidIntro(code), 'duration': '10:00'},
-          {'title': AppLocalizations.of(context)!.stdVidPractical(code), 'duration': '12:00'},
-          {'title': AppLocalizations.of(context)!.stdVidCaseWith(code), 'duration': '8:00'},
-        ];
   }
+
+  Widget _powerplayButton(BuildContext context) => SizedBox(
+        width: double.infinity,
+        height: 52,
+        child: ElevatedButton(
+          onPressed: () => _openPowerplay(context),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(AppLocalizations.of(context)!.stdAccessPowerplay,
+                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 2)),
+              const SizedBox(width: 10),
+              const Icon(Icons.open_in_new, size: 16),
+            ],
+          ),
+        ),
+      );
 
   Widget _featureChip(IconData icon, String label) {
     return Container(
@@ -417,79 +363,6 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
           Icon(icon, color: AppColors.primary, size: 14),
           const SizedBox(width: 6),
           Text(label, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
-        ],
-      ),
-    );
-  }
-
-  Widget _videoCard(String title, String duration, bool isNew) {
-    return Container(
-      width: 240,
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Thumbnail
-          Stack(
-            children: [
-              Container(
-                height: 130,
-                width: 240,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                  gradient: LinearGradient(
-                    colors: [AppColors.greenDark.withValues(alpha: 0.6), AppColors.background],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                child: Center(
-                  child: Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.primary.withValues(alpha: 0.15),
-                      border: Border.all(color: AppColors.primary, width: 2),
-                    ),
-                    child: const Icon(Icons.play_arrow, color: AppColors.primary, size: 26),
-                  ),
-                ),
-              ),
-              if (isNew)
-                Positioned(
-                  top: 8,
-                  left: 8,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(5)),
-                    child: Text(AppLocalizations.of(context)!.stdNew, style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 1)),
-                  ),
-                ),
-              Positioned(
-                bottom: 8,
-                right: 8,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                  decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.circular(4)),
-                  child: Text(duration, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600)),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              title,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600, height: 1.4),
-            ),
-          ),
         ],
       ),
     );
