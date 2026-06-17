@@ -153,7 +153,9 @@ class EbookChapterRef {
     return EbookChapterRef(
       id: d['id'] as String? ?? '',
       order: (d['order'] as num?)?.toInt() ?? 0,
-      title: d['title'] as String? ?? '',
+      // Localiza o título do índice (TOC) quando há tradução no próprio item;
+      // cai no PT original caso o chapterIndex ainda não tenha translations.
+      title: I18nUtils.localized(d, 'title', I18nUtils.currentLang),
       sectionCount: (d['sectionCount'] as num?)?.toInt() ?? 0,
       estimatedMinutes: (d['estimatedMinutes'] as num?)?.toInt() ?? 0,
     );
