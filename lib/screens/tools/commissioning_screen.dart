@@ -101,7 +101,7 @@ class _CommissioningScreenState extends State<CommissioningScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Comissionamento / Ensaios',
+      title: AppLocalizations.of(context)!.tlCommissioning,
       children: [
         ToolSegmented(
           labels: [AppLocalizations.of(context)!.commissioningTolerance, AppLocalizations.of(context)!.commissioningSecCalc],
@@ -144,7 +144,7 @@ class _CommissioningScreenState extends State<CommissioningScreen> {
             ],
           ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           if (_pass != null) _verdictBox(_pass!),

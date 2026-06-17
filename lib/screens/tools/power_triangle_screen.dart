@@ -97,7 +97,7 @@ class _PowerTriangleScreenState extends State<PowerTriangleScreen> {
     final labelA = _mode == 2 ? 'S (kVA)' : 'P (kW)';
     final labelB = _mode == 1 ? 'Q (kvar)' : AppLocalizations.of(context)!.powerTrianglePF;
     return ToolPage(
-      title: 'Triângulo de Potências',
+      title: AppLocalizations.of(context)!.tlPowerTriangle,
       children: [
         ToolSegmented(
           labels: const ['P e FP', 'P e Q', 'S e FP'],
@@ -116,7 +116,7 @@ class _PowerTriangleScreenState extends State<PowerTriangleScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: _results ?? const [], warning: _warning),

@@ -453,7 +453,7 @@ class _ResultsPanel extends StatelessWidget {
               ),
               Semantics(
                 button: true,
-                label: 'Copiar todos os resultados',
+                label: AppLocalizations.of(context)!.tlCopyAll,
                 child: IconButton(
                   icon: const Icon(Icons.copy_all_outlined,
                       color: AppColors.primary, size: 20),
@@ -463,7 +463,7 @@ class _ResultsPanel extends StatelessWidget {
                         results.map((r) => r.clipboardText).join('\n');
                     Clipboard.setData(ClipboardData(text: text));
                     HapticFeedback.lightImpact();
-                    SparkSnack.success(context, 'Resultados copiados');
+                    SparkSnack.success(context, AppLocalizations.of(context)!.tlResultsCopied);
                   },
                 ),
               ),

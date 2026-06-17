@@ -475,7 +475,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
                   onPressed: () {
                     Clipboard.setData(ClipboardData(text: clip));
                     HapticFeedback.lightImpact();
-                    SparkSnack.success(context, 'Resultado copiado');
+                    SparkSnack.success(context, AppLocalizations.of(context)!.tlResultCopied);
                   },
                 ),
               ),

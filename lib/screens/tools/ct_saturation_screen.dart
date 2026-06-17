@@ -87,7 +87,7 @@ class _CtSaturationScreenState extends State<CtSaturationScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Saturação de TC',
+      title: AppLocalizations.of(context)!.tlCtSaturation,
       children: [
         ToolCard(
           title: AppLocalizations.of(context)!.ctSaturationCT,
@@ -116,7 +116,7 @@ class _CtSaturationScreenState extends State<CtSaturationScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           if (_results != null) _verdict(),

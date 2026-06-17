@@ -241,7 +241,7 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Corrente Nominal',
+      title: AppLocalizations.of(context)!.tlNominalCurrent,
       children: [
         ToolSegmented(
           labels: [AppLocalizations.of(context)!.equipmentTransformer, AppLocalizations.of(context)!.equipmentMotor, AppLocalizations.of(context)!.equipmentBankInrush, AppLocalizations.of(context)!.equipmentRealInrush],
@@ -263,7 +263,7 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
         else
           _inrushRealCard(),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: _results ?? const [], warning: _warning),

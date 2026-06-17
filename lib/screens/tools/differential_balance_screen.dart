@@ -111,7 +111,7 @@ class _DifferentialBalanceScreenState extends State<DifferentialBalanceScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Balanço Diferencial (87T)',
+      title: AppLocalizations.of(context)!.tlDiffBalance,
       children: [
         ToolCard(
           subtitle:
@@ -149,7 +149,7 @@ class _DifferentialBalanceScreenState extends State<DifferentialBalanceScreen> {
           const SizedBox(height: 12),
         ],
         const SizedBox(height: 8),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(

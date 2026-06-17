@@ -85,7 +85,7 @@ class _ThermalSeverityScreenState extends State<ThermalSeverityScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Severidade Térmica',
+      title: AppLocalizations.of(context)!.tlThermalSeverity,
       children: [
         ToolCard(
           title: AppLocalizations.of(context)!.thermalAnomaly,
@@ -107,7 +107,7 @@ class _ThermalSeverityScreenState extends State<ThermalSeverityScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           if (_verdict != null) _verdictBox(_verdict!),

@@ -143,7 +143,7 @@ class _PowerQualityScreenState extends State<PowerQualityScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Qualidade de Energia',
+      title: AppLocalizations.of(context)!.tlPowerQuality,
       children: [
         ToolSegmented(
           labels: [AppLocalizations.of(context)!.powerQualityLoadPct, AppLocalizations.of(context)!.powerQualityImbalance],
@@ -159,7 +159,7 @@ class _PowerQualityScreenState extends State<PowerQualityScreen> {
         if (_tab == 0) ..._loadingInputs() else ..._unbalanceInputs(),
         const SizedBox(height: 20),
         ToolButton(
-          label: 'CALCULAR',
+          label: AppLocalizations.of(context)!.tlBtnCalculate,
           onPressed: _tab == 0 ? _calcLoading : _calcUnbalance,
         ),
         if (_warning != null || _results != null) ...[

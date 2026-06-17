@@ -79,7 +79,7 @@ class _PowerFactorScreenState extends State<PowerFactorScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Correção de Fator de Potência',
+      title: AppLocalizations.of(context)!.tlPowerFactor,
       children: [
         ToolCard(
           title: AppLocalizations.of(context)!.powerFactorData,
@@ -104,7 +104,7 @@ class _PowerFactorScreenState extends State<PowerFactorScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(

@@ -139,7 +139,7 @@ class _SymmetricalComponentsScreenState
 
   Widget _buildModeSelector() {
     return Semantics(
-      label: 'Selecionar modo de cálculo',
+      label: AppLocalizations.of(context)!.tlSelectCalcMode,
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.card,
@@ -218,7 +218,7 @@ class _SymmetricalComponentsScreenState
 
   Widget _buildDecomposeInputs() {
     return _InputCard(
-      title: 'Fasores de fase (ABC)',
+      title: AppLocalizations.of(context)!.tlPhasePhasors,
       children: [
         _PhasorRow(label: 'Va', magCtrl: _aMag, angCtrl: _aAng),
         _PhasorRow(label: 'Vb', magCtrl: _bMag, angCtrl: _bAng),
@@ -229,7 +229,7 @@ class _SymmetricalComponentsScreenState
 
   Widget _buildSynthesizeInputs() {
     return _InputCard(
-      title: 'Componentes de sequência',
+      title: AppLocalizations.of(context)!.tlSequenceComponents,
       children: [
         _PhasorRow(label: 'V₀', magCtrl: _z0Mag, angCtrl: _z0Ang),
         _PhasorRow(label: 'V₁', magCtrl: _z1Mag, angCtrl: _z1Ang),
@@ -313,7 +313,7 @@ class _PhasorRow extends StatelessWidget {
           Expanded(
             child: _NumberField(
               controller: magCtrl,
-              label: 'Módulo',
+              label: AppLocalizations.of(context)!.tlMagnitude,
               semantic: 'Módulo de $label',
             ),
           ),
@@ -323,7 +323,7 @@ class _PhasorRow extends StatelessWidget {
           Expanded(
             child: _NumberField(
               controller: angCtrl,
-              label: 'Ângulo °',
+              label: AppLocalizations.of(context)!.tlAngleDeg,
               semantic: 'Ângulo de $label em graus',
             ),
           ),
@@ -413,7 +413,7 @@ class _ResultsPanel extends StatelessWidget {
               ),
               Semantics(
                 button: true,
-                label: 'Copiar todos os resultados',
+                label: AppLocalizations.of(context)!.tlCopyAll,
                 child: IconButton(
                   icon: const Icon(Icons.copy_all_outlined,
                       color: AppColors.primary, size: 20),
@@ -423,7 +423,7 @@ class _ResultsPanel extends StatelessWidget {
                         results.map((r) => r.clipboardText).join('\n');
                     Clipboard.setData(ClipboardData(text: text));
                     HapticFeedback.lightImpact();
-                    SparkSnack.success(context, 'Resultados copiados');
+                    SparkSnack.success(context, AppLocalizations.of(context)!.tlResultsCopied);
                   },
                 ),
               ),

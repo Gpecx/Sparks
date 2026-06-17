@@ -2459,5 +2459,103 @@
         "type": "String"
       }
     }
-  }
+  },
+  "tlRestrictedDiff": "87 — Diferencial c/ Restrição",
+  "tlArcFlash": "Arc Flash (energia incidente)",
+  "tlDiffBalance": "Balanço Diferencial (87T)",
+  "tlVoltageBases": "Bases de tensão",
+  "tlCommissioning": "Comissionamento / Ensaios",
+  "tlSequenceComponents": "Componentes de sequência",
+  "tlVoltageConversion": "Conversão de tensão",
+  "tlCoordination": "Coordenação / Seletividade",
+  "tlPowerFactor": "Correção de Fator de Potência",
+  "tlNominalCurrent": "Corrente Nominal",
+  "tlShortCircuit": "Curto-Circuito",
+  "tlDirectional": "Direcional 67 / 67N",
+  "tlScaling": "Escalonamento 4–20 mA",
+  "tlPhasePhasors": "Fasores de fase (ABC)",
+  "tlImpedances": "Impedâncias",
+  "tlGroundGrid": "Malha de Aterramento (IEEE 80)",
+  "tlModbusRegs": "Modbus — Registradores",
+  "tlDistanceProtection": "Proteção de Distância (21)",
+  "tlPowerQuality": "Qualidade de Energia",
+  "tlVoltageDrop": "Queda de Tensão",
+  "tlCtSaturation": "Saturação de TC",
+  "tlThermalSeverity": "Severidade Térmica",
+  "tlSpdaRisk": "SPDA — Análise de Risco",
+  "tlSpdaCalc": "SPDA — Cálculos (5419-3)",
+  "tlOnsVoltage": "Tensão pu — Base ONS × TP",
+  "tlPowerTriangle": "Triângulo de Potências",
+  "tlBtnCalculate": "CALCULAR",
+  "tlBtnEvaluate": "AVALIAR",
+  "tlBtnVerify": "VERIFICAR",
+  "tlBtnDecode": "DECODIFICAR",
+  "tlCopyAll": "Copiar todos os resultados",
+  "tlResultsCopied": "Resultados copiados",
+  "tlResultCopied": "Resultado copiado",
+  "tlSelectCalcMode": "Selecionar modo de cálculo",
+  "tlVoltagePuOns": "Tensão em pu (base ONS)",
+  "tlSecondaryMeasured": "Tensão secundária medida (V)",
+  "tlOnsBaseV": "V base do ONS (kV) — do estudo",
+  "tlVtPrimary": "V nom. TP primário (kV)",
+  "tlVtSecondary": "V nom. TP secundário (V)",
+  "tlAngleDeg": "Ângulo °",
+  "tlMagnitude": "Módulo",
+  "tlDecodedTitle": "Valor decodificado ({order})",
+  "@tlDecodedTitle": {
+    "placeholders": {
+      "order": {
+        "type": "String"
+      }
+    }
+  },
+  "tlResultsLevel": "Resultados (nível {level})",
+  "@tlResultsLevel": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "tlDirModAng": "Módulo e ângulo de {op}.",
+  "@tlDirModAng": {
+    "placeholders": {
+      "op": {
+        "type": "String"
+      }
+    }
+  },
+  "tlOpAmps": "{op} (A)",
+  "@tlOpAmps": {
+    "placeholders": {
+      "op": {
+        "type": "String"
+      }
+    }
+  },
+  "supportSendError": "Erro ao enviar. Tente novamente.",
+  "supportWhatsappSoon": "WhatsApp em breve!",
+  "supportScreenTitle": "AJUDA & SUPORTE",
+  "supportQuickContact": "CONTATO RÁPIDO",
+  "supportFaqTitle": "PERGUNTAS FREQUENTES",
+  "supportSendMessageTitle": "ENVIAR MENSAGEM",
+  "supportSuccessDesc": "Nossa equipe vai analisar seu chamado e responder pelo e-mail cadastrado em até 48 horas.",
+  "supportEmailCopied": "E-mail copiado!",
+  "supportSubjectHint": "Assunto",
+  "supportEnterSubject": "Informe o assunto",
+  "supportMessageTooShort": "Mensagem muito curta (mín. 10 caracteres)",
+  "supportCatGeneral": "Dúvida geral",
+  "supportCatTechnical": "Problema técnico",
+  "supportCatSuggestion": "Sugestão de melhoria",
+  "supportCatContentError": "Erro em conteúdo",
+  "supportCatAccount": "Problema com conta",
+  "supportCatOther": "Outro",
+  "supportFaqQ1": "Como funciona o sistema de XP?",
+  "supportFaqA1": "Você ganha XP ao completar lições e responder perguntas corretamente. O XP aumenta seu nível e desbloqueia novos conteúdos.",
+  "supportFaqQ2": "Como resetar minha senha?",
+  "supportFaqA2": "Acesse a tela de Login e clique em \"Esqueci minha senha\". Você receberá um link de redefinição no seu e-mail.",
+  "supportFaqQ3": "Os pactos semanais resetam quando?",
+  "supportFaqA3": "Os pactos resetam toda segunda-feira às 00:00. Seu progresso é zerado e você pode escolher novos pactos.",
+  "supportFaqQ4": "Como entrar em contato para erros de conteúdo?",
+  "supportFaqA4": "Use o formulário abaixo e selecione \"Erro em conteúdo\". Nossa equipe vai revisar e corrigir o mais rápido possível."
 }

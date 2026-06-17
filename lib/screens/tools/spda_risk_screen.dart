@@ -60,7 +60,7 @@ class _SpdaRiskScreenState extends State<SpdaRiskScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'SPDA — Análise de Risco',
+      title: AppLocalizations.of(context)!.tlSpdaRisk,
       children: [
         _infoBox(),
         const SizedBox(height: 12),
@@ -115,7 +115,7 @@ class _SpdaRiskScreenState extends State<SpdaRiskScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'AVALIAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnEvaluate, onPressed: _calculate),
         if (_warning != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: const [], warning: _warning),

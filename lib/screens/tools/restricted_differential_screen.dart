@@ -105,7 +105,7 @@ class _RestrictedDifferentialScreenState
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: '87 — Diferencial c/ Restrição',
+      title: AppLocalizations.of(context)!.tlRestrictedDiff,
       children: [
         _infoBox(),
         const SizedBox(height: 12),
@@ -156,7 +156,7 @@ class _RestrictedDifferentialScreenState
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'AVALIAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnEvaluate, onPressed: _calculate),
         if (_warning != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: const [], warning: _warning),

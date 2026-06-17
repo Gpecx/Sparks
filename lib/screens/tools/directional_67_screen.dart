@@ -201,7 +201,7 @@ class _Directional67ScreenState extends State<Directional67Screen> {
     final warning = _validationWarning();
 
     return ToolPage(
-      title: 'Direcional 67 / 67N',
+      title: AppLocalizations.of(context)!.tlDirectional,
       children: [
         _infoBox(),
         const SizedBox(height: 12),
@@ -226,10 +226,10 @@ class _Directional67ScreenState extends State<Directional67Screen> {
         const SizedBox(height: 12),
         ToolCard(
           title: AppLocalizations.of(context)!.dir67OpMagnitude,
-          subtitle: 'Módulo e ângulo de $_opLabel.',
+          subtitle: AppLocalizations.of(context)!.tlDirModAng(_opLabel),
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _iOpMag, label: '$_opLabel (A)'),
+              ToolField(controller: _iOpMag, label: AppLocalizations.of(context)!.tlOpAmps(_opLabel)),
               ToolField(controller: _iOpAng, label: AppLocalizations.of(context)!.dir67Ang, signed: true),
             ]),
           ],

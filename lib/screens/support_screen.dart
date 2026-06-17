@@ -66,7 +66,7 @@ class _SupportScreenState extends State<SupportScreen> {
     } catch (_) {
       if (mounted) {
         setState(() => _sending = false);
-        SparkSnack.error(context, 'Erro ao enviar. Tente novamente.');
+        SparkSnack.error(context, AppLocalizations.of(context)!.supportSendError);
       }
     }
   }
@@ -84,8 +84,8 @@ class _SupportScreenState extends State<SupportScreen> {
               icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 20),
               onPressed: () => context.pop(),
             ),
-            title: const Text(
-              'AJUDA & SUPORTE',
+            title: Text(
+              AppLocalizations.of(context)!.supportScreenTitle,
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w800,
@@ -123,8 +123,8 @@ class _SupportScreenState extends State<SupportScreen> {
               style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Nossa equipe vai analisar seu chamado e responder pelo e-mail cadastrado em até 48 horas.',
+            Text(
+              AppLocalizations.of(context)!.supportSuccessDesc,
               textAlign: TextAlign.center,
               style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
             ),
@@ -136,8 +136,8 @@ class _SupportScreenState extends State<SupportScreen> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 minimumSize: const Size(double.infinity, 50),
               ),
-              child: const Text(
-                'VOLTAR AO INÍCIO',
+              child: Text(
+                AppLocalizations.of(context)!.supportBackHome,
                 style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, letterSpacing: 1),
               ),
             ),
@@ -154,7 +154,7 @@ class _SupportScreenState extends State<SupportScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Canais rápidos
-          _sectionTitle('CONTATO RÁPIDO'),
+          _sectionTitle(AppLocalizations.of(context)!.supportQuickContact),
           const SizedBox(height: 12),
           Row(
             children: [
@@ -165,7 +165,7 @@ class _SupportScreenState extends State<SupportScreen> {
                 color: AppColors.blue,
                 onTap: () {
                   Clipboard.setData(ClipboardData(text: AppLocalizations.of(context)!.supportEmailAddress));
-                  SparkSnack.success(context, 'E-mail copiado!');
+                  SparkSnack.success(context, AppLocalizations.of(context)!.supportEmailCopied);
                 },
               ),
               const SizedBox(width: 12),
@@ -175,7 +175,7 @@ class _SupportScreenState extends State<SupportScreen> {
                 sublabel: AppLocalizations.of(context)!.supportWhatsAppHours,
                 color: const Color(0xFF25D366),
                 onTap: () {
-                  SparkSnack.info(context, 'WhatsApp em breve!');
+                  SparkSnack.info(context, AppLocalizations.of(context)!.supportWhatsappSoon);
                 },
               ),
             ],
@@ -184,21 +184,21 @@ class _SupportScreenState extends State<SupportScreen> {
           const SizedBox(height: 32),
 
           // FAQ
-          _sectionTitle('PERGUNTAS FREQUENTES'),
+          _sectionTitle(AppLocalizations.of(context)!.supportFaqTitle),
           const SizedBox(height: 12),
-          _faqItem('Como funciona o sistema de XP?',
-              'Você ganha XP ao completar lições e responder perguntas corretamente. O XP aumenta seu nível e desbloqueia novos conteúdos.'),
-          _faqItem('Como resetar minha senha?',
-              'Acesse a tela de Login e clique em "Esqueci minha senha". Você receberá um link de redefinição no seu e-mail.'),
-          _faqItem('Os pactos semanais resetam quando?',
-              'Os pactos resetam toda segunda-feira às 00:00. Seu progresso é zerado e você pode escolher novos pactos.'),
-          _faqItem('Como entrar em contato para erros de conteúdo?',
-              'Use o formulário abaixo e selecione "Erro em conteúdo". Nossa equipe vai revisar e corrigir o mais rápido possível.'),
+          _faqItem(AppLocalizations.of(context)!.supportFaqQ1,
+              AppLocalizations.of(context)!.supportFaqA1),
+          _faqItem(AppLocalizations.of(context)!.supportFaqQ2,
+              AppLocalizations.of(context)!.supportFaqA2),
+          _faqItem(AppLocalizations.of(context)!.supportFaqQ3,
+              AppLocalizations.of(context)!.supportFaqA3),
+          _faqItem(AppLocalizations.of(context)!.supportFaqQ4,
+              AppLocalizations.of(context)!.supportFaqA4),
 
           const SizedBox(height: 32),
 
           // Formulário
-          _sectionTitle('ENVIAR MENSAGEM'),
+          _sectionTitle(AppLocalizations.of(context)!.supportSendMessageTitle),
           const SizedBox(height: 12),
           Form(
             key: _formKey,
@@ -221,7 +221,7 @@ class _SupportScreenState extends State<SupportScreen> {
                       style: const TextStyle(color: Colors.white, fontSize: 14),
                       icon: const Icon(Icons.expand_more, color: AppColors.textMuted),
                       items: _categories
-                          .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                          .map((c) => DropdownMenuItem(value: c, child: Text(_categoryLabel(context, c))))
                           .toList(),
                       onChanged: (v) => setState(() => _selectedCategory = v!),
                     ),
@@ -234,7 +234,7 @@ class _SupportScreenState extends State<SupportScreen> {
                   controller: _subjectCtrl,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    hintText: 'Assunto',
+                    hintText: AppLocalizations.of(context)!.supportSubjectHint,
                     hintStyle: const TextStyle(color: AppColors.textMuted),
                     filled: true,
                     fillColor: AppColors.inputBackground,
@@ -252,7 +252,7 @@ class _SupportScreenState extends State<SupportScreen> {
                     ),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   ),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Informe o assunto' : null,
+                  validator: (v) => (v == null || v.trim().isEmpty) ? AppLocalizations.of(context)!.supportEnterSubject : null,
                 ),
                 const SizedBox(height: 12),
 
@@ -282,7 +282,7 @@ class _SupportScreenState extends State<SupportScreen> {
                     alignLabelWithHint: true,
                   ),
                   validator: (v) => (v == null || v.trim().length < 10)
-                      ? 'Mensagem muito curta (mín. 10 caracteres)'
+                      ? AppLocalizations.of(context)!.supportMessageTooShort
                       : null,
                 ),
                 const SizedBox(height: 20),
@@ -306,8 +306,8 @@ class _SupportScreenState extends State<SupportScreen> {
                               color: AppColors.background,
                             ),
                           )
-                        : const Text(
-                            'ENVIAR MENSAGEM',
+                        : Text(
+                            AppLocalizations.of(context)!.supportSendMessageTitle,
                             style: TextStyle(
                               color: AppColors.background,
                               fontWeight: FontWeight.w700,
@@ -324,6 +324,18 @@ class _SupportScreenState extends State<SupportScreen> {
         ],
       ),
     );
+  }
+
+  String _categoryLabel(BuildContext context, String c) {
+    final l = AppLocalizations.of(context)!;
+    switch (c) {
+      case 'Problema técnico': return l.supportCatTechnical;
+      case 'Sugestão de melhoria': return l.supportCatSuggestion;
+      case 'Erro em conteúdo': return l.supportCatContentError;
+      case 'Problema com conta': return l.supportCatAccount;
+      case 'Outro': return l.supportCatOther;
+      default: return l.supportCatGeneral;
+    }
   }
 
   Widget _sectionTitle(String text) => Text(

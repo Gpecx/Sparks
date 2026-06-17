@@ -109,7 +109,7 @@ class _SignalScalingScreenState extends State<SignalScalingScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Escalonamento 4–20 mA',
+      title: AppLocalizations.of(context)!.tlScaling,
       children: [
         ToolSegmented(
           labels: const ['4–20 mA', '0–20 mA', '0–10 V', 'Custom'],
@@ -148,7 +148,7 @@ class _SignalScalingScreenState extends State<SignalScalingScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: _results ?? const [], warning: _warning),

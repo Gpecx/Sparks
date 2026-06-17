@@ -1843,5 +1843,103 @@
         "type": "String"
       }
     }
-  }
+  },
+  "tlRestrictedDiff": "87 — Restricted Differential",
+  "tlArcFlash": "Arc Flash (incident energy)",
+  "tlDiffBalance": "Differential Balance (87T)",
+  "tlVoltageBases": "Voltage bases",
+  "tlCommissioning": "Commissioning / Testing",
+  "tlSequenceComponents": "Sequence components",
+  "tlVoltageConversion": "Voltage conversion",
+  "tlCoordination": "Coordination / Selectivity",
+  "tlPowerFactor": "Power Factor Correction",
+  "tlNominalCurrent": "Nominal Current",
+  "tlShortCircuit": "Short Circuit",
+  "tlDirectional": "Directional 67 / 67N",
+  "tlScaling": "4–20 mA Scaling",
+  "tlPhasePhasors": "Phase phasors (ABC)",
+  "tlImpedances": "Impedances",
+  "tlGroundGrid": "Ground Grid (IEEE 80)",
+  "tlModbusRegs": "Modbus — Registers",
+  "tlDistanceProtection": "Distance Protection (21)",
+  "tlPowerQuality": "Power Quality",
+  "tlVoltageDrop": "Voltage Drop",
+  "tlCtSaturation": "CT Saturation",
+  "tlThermalSeverity": "Thermal Severity",
+  "tlSpdaRisk": "LPS — Risk Analysis",
+  "tlSpdaCalc": "LPS — Calculations (5419-3)",
+  "tlOnsVoltage": "Voltage pu — ONS Base × VT",
+  "tlPowerTriangle": "Power Triangle",
+  "tlBtnCalculate": "CALCULATE",
+  "tlBtnEvaluate": "EVALUATE",
+  "tlBtnVerify": "VERIFY",
+  "tlBtnDecode": "DECODE",
+  "tlCopyAll": "Copy all results",
+  "tlResultsCopied": "Results copied",
+  "tlResultCopied": "Result copied",
+  "tlSelectCalcMode": "Select calculation mode",
+  "tlVoltagePuOns": "Voltage in pu (ONS base)",
+  "tlSecondaryMeasured": "Measured secondary voltage (V)",
+  "tlOnsBaseV": "ONS base V (kV) — from study",
+  "tlVtPrimary": "VT nom. primary (kV)",
+  "tlVtSecondary": "VT nom. secondary (V)",
+  "tlAngleDeg": "Angle °",
+  "tlMagnitude": "Magnitude",
+  "tlDecodedTitle": "Decoded value ({order})",
+  "@tlDecodedTitle": {
+    "placeholders": {
+      "order": {
+        "type": "String"
+      }
+    }
+  },
+  "tlResultsLevel": "Results (level {level})",
+  "@tlResultsLevel": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "tlDirModAng": "Magnitude and angle of {op}.",
+  "@tlDirModAng": {
+    "placeholders": {
+      "op": {
+        "type": "String"
+      }
+    }
+  },
+  "tlOpAmps": "{op} (A)",
+  "@tlOpAmps": {
+    "placeholders": {
+      "op": {
+        "type": "String"
+      }
+    }
+  },
+  "supportSendError": "Failed to send. Please try again.",
+  "supportWhatsappSoon": "WhatsApp coming soon!",
+  "supportScreenTitle": "HELP & SUPPORT",
+  "supportQuickContact": "QUICK CONTACT",
+  "supportFaqTitle": "FREQUENTLY ASKED QUESTIONS",
+  "supportSendMessageTitle": "SEND MESSAGE",
+  "supportSuccessDesc": "Our team will review your ticket and respond to your registered email within 48 hours.",
+  "supportEmailCopied": "Email copied!",
+  "supportSubjectHint": "Subject",
+  "supportEnterSubject": "Enter the subject",
+  "supportMessageTooShort": "Message too short (min. 10 characters)",
+  "supportCatGeneral": "General question",
+  "supportCatTechnical": "Technical problem",
+  "supportCatSuggestion": "Improvement suggestion",
+  "supportCatContentError": "Content error",
+  "supportCatAccount": "Account problem",
+  "supportCatOther": "Other",
+  "supportFaqQ1": "How does the XP system work?",
+  "supportFaqA1": "You earn XP by completing lessons and answering questions correctly. XP raises your level and unlocks new content.",
+  "supportFaqQ2": "How do I reset my password?",
+  "supportFaqA2": "Go to the Login screen and tap \"Forgot password\". You'll receive a reset link in your email.",
+  "supportFaqQ3": "When do the weekly pacts reset?",
+  "supportFaqA3": "Pacts reset every Monday at 00:00. Your progress is cleared and you can choose new pacts.",
+  "supportFaqQ4": "How do I report content errors?",
+  "supportFaqA4": "Use the form below and select \"Content error\". Our team will review and fix it as soon as possible."
 }

@@ -85,7 +85,7 @@ class _ArcFlashScreenState extends State<ArcFlashScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Arc Flash (energia incidente)',
+      title: AppLocalizations.of(context)!.tlArcFlash,
       children: [
         _disclaimerBox(),
         const SizedBox(height: 12),
@@ -136,7 +136,7 @@ class _ArcFlashScreenState extends State<ArcFlashScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: const [], warning: _warning),

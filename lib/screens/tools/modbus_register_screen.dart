@@ -56,7 +56,7 @@ class _ModbusRegisterScreenState extends State<ModbusRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Modbus — Registradores',
+      title: AppLocalizations.of(context)!.tlModbusRegs,
       children: [
         _infoBox(),
         const SizedBox(height: 12),
@@ -90,7 +90,7 @@ class _ModbusRegisterScreenState extends State<ModbusRegisterScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'DECODIFICAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnDecode, onPressed: _calculate),
         if (_warning != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: const [], warning: _warning),
@@ -114,7 +114,7 @@ class _ModbusRegisterScreenState extends State<ModbusRegisterScreen> {
     ];
     return ToolResultsPanel(
       results: results,
-      title: 'Valor decodificado (${byteOrderLabel(_order)})',
+      title: AppLocalizations.of(context)!.tlDecodedTitle(byteOrderLabel(_order)),
     );
   }
 

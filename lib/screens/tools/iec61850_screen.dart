@@ -188,7 +188,7 @@ class _Iec61850ScreenState extends State<Iec61850Screen> {
         ],
       ),
       const SizedBox(height: 20),
-      ToolButton(label: 'CALCULAR', onPressed: _calcTiming),
+      ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calcTiming),
       if (_warning != null) ...[
         const SizedBox(height: 24),
         ToolResultsPanel(results: const [], warning: _warning),
@@ -268,7 +268,7 @@ class _Iec61850ScreenState extends State<Iec61850Screen> {
         ],
       ),
       const SizedBox(height: 20),
-      ToolButton(label: 'VERIFICAR', onPressed: _calcAddressing),
+      ToolButton(label: AppLocalizations.of(context)!.tlBtnVerify, onPressed: _calcAddressing),
       if (_warning != null) ...[
         const SizedBox(height: 24),
         ToolResultsPanel(results: const [], warning: _warning),

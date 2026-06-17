@@ -75,7 +75,7 @@ class _ShortCircuitScreenState extends State<ShortCircuitScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Curto-Circuito',
+      title: AppLocalizations.of(context)!.tlShortCircuit,
       children: [
         ToolCard(
           title: AppLocalizations.of(context)!.shortCircuitData,
@@ -112,7 +112,7 @@ class _ShortCircuitScreenState extends State<ShortCircuitScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(

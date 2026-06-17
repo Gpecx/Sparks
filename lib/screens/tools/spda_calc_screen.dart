@@ -71,7 +71,7 @@ class _SpdaCalcScreenState extends State<SpdaCalcScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'SPDA — Cálculos (5419-3)',
+      title: AppLocalizations.of(context)!.tlSpdaCalc,
       children: [
         _infoBox(),
         const SizedBox(height: 12),
@@ -110,7 +110,7 @@ class _SpdaCalcScreenState extends State<SpdaCalcScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: const [], warning: _warning),
@@ -140,7 +140,7 @@ class _SpdaCalcScreenState extends State<SpdaCalcScreen> {
     }
     return ToolResultsPanel(
       results: results,
-      title: 'Resultados (nível $_level)',
+      title: AppLocalizations.of(context)!.tlResultsLevel(_level.toString()),
       note: 'Valores tabelados da NBR 5419-3. O ângulo de proteção é aproximado '
           'das curvas da norma — confirme no gráfico do Anexo A para o projeto.',
     );

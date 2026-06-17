@@ -76,7 +76,7 @@ class _GroundGridScreenState extends State<GroundGridScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Malha de Aterramento (IEEE 80)',
+      title: AppLocalizations.of(context)!.tlGroundGrid,
       children: [
         ToolSegmented(
           labels: const ['Corpo 50 kg', 'Corpo 70 kg'],
@@ -112,7 +112,7 @@ class _GroundGridScreenState extends State<GroundGridScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(

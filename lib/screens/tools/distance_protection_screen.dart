@@ -125,7 +125,7 @@ class _DistanceProtectionScreenState extends State<DistanceProtectionScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Proteção de Distância (21)',
+      title: AppLocalizations.of(context)!.tlDistanceProtection,
       children: [
         ToolSegmented(
           labels: const ['Ajuste de zonas', 'Característica R-X'],
@@ -139,7 +139,7 @@ class _DistanceProtectionScreenState extends State<DistanceProtectionScreen> {
         ),
         const SizedBox(height: 16),
         ToolCard(
-          title: 'Impedâncias',
+          title: AppLocalizations.of(context)!.tlImpedances,
           subtitle:
               AppLocalizations.of(context)!.distProtDesc,
           children: [
@@ -190,7 +190,7 @@ class _DistanceProtectionScreenState extends State<DistanceProtectionScreen> {
           ),
         ],
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: const [], warning: _warning),
