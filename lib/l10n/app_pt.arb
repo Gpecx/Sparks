@@ -2142,5 +2142,63 @@
   "pwReqLowercase": "Letra minúscula (a-z)",
   "pwReqNumber": "Número (0-9)",
   "pwReqSpecial": "Caractere especial (!@#$...)",
-  "changePasswordButton": "ALTERAR SENHA"
+  "changePasswordButton": "ALTERAR SENHA",
+  "duelOpponent": "Oponente",
+  "duelYou": "Você",
+  "duelBotOffline": "Bot (offline)",
+  "duelBotTraining": "Bot Treino",
+  "duelOpponentAnswered": "Oponente respondeu!",
+  "duelSendFailed": "Falha ao enviar resposta. Continuando...",
+  "duelResultFailed": "Não foi possível apurar o resultado.",
+  "duelTrainingBadge": "TREINO",
+  "duelPreparingArena": "Preparando sua arena de faíscas",
+  "duelWaitingPlayer": "Aguardando outro jogador entrar na fila",
+  "duelTakingLong": "Demorando para achar alguém?",
+  "duelTrainAgainstBot": "TREINAR CONTRA BOT",
+  "duelTrainingNoRanking": "Treino não vale ranking",
+  "duelNoConnection": "SEM CONEXÃO",
+  "duelOfflineMessage": "O duelo contra jogadores reais precisa de internet. Sem conexão, você pode treinar contra bots — só para praticar, sem valer ranking.",
+  "duelTrainOffline": "TREINAR OFFLINE",
+  "duelTryConnect": "TENTAR CONECTAR",
+  "duelBackToMenu": "VOLTAR AO MENU",
+  "duelSomethingWrong": "Algo deu errado no duelo.",
+  "duelWaitingOpponent": "AGUARDANDO OPONENTE",
+  "duelTallying": "Apurando o resultado do duelo...",
+  "duelYourScore": "Seu placar: {pts} pts",
+  "@duelYourScore": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "duelTrainingMatch": "Partida de treino",
+  "duelVictory": "Vitória!",
+  "duelDraw": "Empate!",
+  "duelDefeat": "Não foi dessa vez.",
+  "duelOfflineNoRanking": "Treino offline — não afeta o ranking",
+  "duelNoRanking": "Treino — não afeta o ranking",
+  "duelPlayAgain": "JOGAR NOVAMENTE",
+  "duelCorrectCount": "{correct}/{total} acertos",
+  "@duelCorrectCount": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "duelEloProgress": "ELO {elo} · faltam {points} p/ subir",
+  "@duelEloProgress": {
+    "placeholders": {
+      "elo": {
+        "type": "int"
+      },
+      "points": {
+        "type": "int"
+      }
+    }
+  }
 }

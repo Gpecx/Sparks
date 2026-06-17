@@ -6,8 +6,9 @@ import 'package:flutter/widgets.dart';
 /// equivalente aproximado em dólares (USD) usando uma taxa fixa.
 /// Ajuste [_brlPerUsd] se quiser outra taxa de conversão.
 class CurrencyUtils {
-  /// Quantos Reais equivalem a 1 dólar (aprox.).
-  static const double _brlPerUsd = 5.0;
+  /// Fator de conversão BRL→USD: o preço em dólar é 50% do valor em Reais
+  /// (ex.: R$ 20,00 → US$ 10.00). Equivale a dividir por 2.
+  static const double _brlPerUsd = 2.0;
 
   static String format(BuildContext context, double brl, {int decimals = 2}) {
     final isEn = Localizations.localeOf(context).languageCode == 'en';

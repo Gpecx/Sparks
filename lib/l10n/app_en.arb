@@ -1526,5 +1526,63 @@
   "pwReqLowercase": "Lowercase letter (a-z)",
   "pwReqNumber": "Number (0-9)",
   "pwReqSpecial": "Special character (!@#$...)",
-  "changePasswordButton": "CHANGE PASSWORD"
+  "changePasswordButton": "CHANGE PASSWORD",
+  "duelOpponent": "Opponent",
+  "duelYou": "You",
+  "duelBotOffline": "Bot (offline)",
+  "duelBotTraining": "Training Bot",
+  "duelOpponentAnswered": "Opponent answered!",
+  "duelSendFailed": "Failed to send answer. Continuing...",
+  "duelResultFailed": "Could not determine the result.",
+  "duelTrainingBadge": "TRAINING",
+  "duelPreparingArena": "Preparing your spark arena",
+  "duelWaitingPlayer": "Waiting for another player to join the queue",
+  "duelTakingLong": "Taking too long to find someone?",
+  "duelTrainAgainstBot": "TRAIN AGAINST BOT",
+  "duelTrainingNoRanking": "Training doesn't count for ranking",
+  "duelNoConnection": "NO CONNECTION",
+  "duelOfflineMessage": "Duels against real players need internet. Without a connection, you can train against bots — just for practice, no ranking.",
+  "duelTrainOffline": "TRAIN OFFLINE",
+  "duelTryConnect": "TRY TO CONNECT",
+  "duelBackToMenu": "BACK TO MENU",
+  "duelSomethingWrong": "Something went wrong in the duel.",
+  "duelWaitingOpponent": "WAITING FOR OPPONENT",
+  "duelTallying": "Tallying the duel result...",
+  "duelYourScore": "Your score: {pts} pts",
+  "@duelYourScore": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "duelTrainingMatch": "Training match",
+  "duelVictory": "Victory!",
+  "duelDraw": "Draw!",
+  "duelDefeat": "Not this time.",
+  "duelOfflineNoRanking": "Offline training — doesn't affect ranking",
+  "duelNoRanking": "Training — doesn't affect ranking",
+  "duelPlayAgain": "PLAY AGAIN",
+  "duelCorrectCount": "{correct}/{total} correct",
+  "@duelCorrectCount": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "duelEloProgress": "ELO {elo} · {points} pts to rank up",
+  "@duelEloProgress": {
+    "placeholders": {
+      "elo": {
+        "type": "int"
+      },
+      "points": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
   List<DuelQuestion> _questions = [];
   final List<RoundScore> _myScores = [];
   final List<RoundScore> _oppScores = [];
-  String _oppName = 'Oponente';
+  String _oppName = '';
 
   int _currentIndex = 0;
   int _selectedOption = -1;
@@ -252,7 +253,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
     setState(() {
       _isBot = true;
       _offlineMode = offline;
-      _oppName = offline ? 'Bot (offline)' : 'Bot Treino';
+      _oppName = offline ? AppLocalizations.of(context)!.duelBotOffline : AppLocalizations.of(context)!.duelBotTraining;
       _questions = questions;
       _myScores.clear();
       _oppScores.clear();
@@ -383,7 +384,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
       // Falha de rede: segue o jogo (o placar virá pelo snapshot).
       setState(() => _submitting = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Falha ao enviar resposta. Continuando...')),
+        const SnackBar(content: Text(AppLocalizations.of(context)!.duelSendFailed)),
       );
     }
     _advanceAfterDelay();
@@ -438,7 +439,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
         final res = await _matchService.finalize(matchId: _matchId!, force: true);
         if (mounted && res.finished) _applyFinalResult(res);
       } catch (e) {
-        if (mounted) _fail('Não foi possível apurar o resultado.');
+        if (mounted) _fail(AppLocalizations.of(context)!.duelResultFailed);
       }
     });
   }
@@ -546,7 +547,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                                 color: AppColors.textMuted.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: const Text('TREINO',
+                              child: Text(AppLocalizations.of(context)!.duelTrainingBadge,
                                   style: TextStyle(color: AppColors.textMuted, fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 1)),
                             ),
                           ],
@@ -599,7 +600,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                             Icon(Icons.bolt, color: AppColors.gold, size: 16),
                             SizedBox(width: 6),
                             Text(
-                              'Oponente respondeu!',
+                              AppLocalizations.of(context)!.duelOpponentAnswered,
                               style: TextStyle(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.w700),
                             ),
                           ],
@@ -666,7 +667,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
         child: Column(
           children: [
             _buildPlayerProgressRow(
-              name: 'Você',
+              name: AppLocalizations.of(context)!.duelYou,
               progress: total == 0 ? 0 : p1 / total,
               score: _myTotal,
               color: AppColors.primary,
@@ -677,7 +678,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
             Divider(color: AppColors.cardBorder.withValues(alpha: 0.2), height: 1),
             const SizedBox(height: 8),
             _buildPlayerProgressRow(
-              name: _oppName,
+              name: _oppName.isEmpty ? AppLocalizations.of(context)!.duelOpponent : _oppName,
               progress: total == 0 ? 0 : p2 / total,
               score: _oppTotal,
               color: AppColors.gold,
@@ -907,7 +908,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                             Text(
                               _patente.isMaster
                                   ? 'ELO $_eloRating · ${_wins}W ${_losses}L'
-                                  : 'ELO $_eloRating · faltam ${_patente.eloToNext} p/ subir',
+                                  : AppLocalizations.of(context)!.duelEloProgress(_eloRating, _patente.eloToNext),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(color: AppColors.textMuted, fontSize: 11),
@@ -948,7 +949,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  connecting ? 'Preparando sua arena de faíscas' : 'Aguardando outro jogador entrar na fila',
+                  connecting ? AppLocalizations.of(context)!.duelPreparingArena : AppLocalizations.of(context)!.duelWaitingPlayer,
                   style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
                   textAlign: TextAlign.center,
                 ),
@@ -966,15 +967,15 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                     padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: Column(
                       children: [
-                        const Text(
-                          'Demorando para achar alguém?',
+                        Text(
+                          AppLocalizations.of(context)!.duelTakingLong,
                           style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
                         ),
                         const SizedBox(height: 10),
                         OutlinedButton.icon(
                           onPressed: _startBotMatch,
                           icon: const Icon(Icons.smart_toy_outlined, color: AppColors.gold, size: 18),
-                          label: const Text('TREINAR CONTRA BOT', style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                          label: Text(AppLocalizations.of(context)!.duelTrainAgainstBot, style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.w800, letterSpacing: 1)),
                           style: OutlinedButton.styleFrom(
                             side: BorderSide(color: AppColors.gold.withValues(alpha: 0.5)),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -982,8 +983,8 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                           ),
                         ),
                         const SizedBox(height: 6),
-                        const Text(
-                          'Treino não vale ranking',
+                        Text(
+                          AppLocalizations.of(context)!.duelTrainingNoRanking,
                           style: TextStyle(color: AppColors.textMuted, fontSize: 11),
                         ),
                       ],
@@ -992,7 +993,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: _cancelSearchAndExit,
-                  child: const Text('CANCELAR', style: TextStyle(color: AppColors.textMuted, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                  child: Text(AppLocalizations.of(context)!.cancelUpper, style: TextStyle(color: AppColors.textMuted, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                 ),
               ],
             ),
@@ -1027,10 +1028,10 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                     child: const Icon(Icons.wifi_off, color: AppColors.error, size: 48),
                   ),
                   const SizedBox(height: 24),
-                  const Text('SEM CONEXÃO', style: TextStyle(color: AppColors.error, fontSize: 24, fontWeight: FontWeight.w800, letterSpacing: 2)),
+                  Text(AppLocalizations.of(context)!.duelNoConnection, style: TextStyle(color: AppColors.error, fontSize: 24, fontWeight: FontWeight.w800, letterSpacing: 2)),
                   const SizedBox(height: 12),
-                  const Text(
-                    'O duelo contra jogadores reais precisa de internet. Sem conexão, você pode treinar contra bots — só para praticar, sem valer ranking.',
+                  Text(
+                    AppLocalizations.of(context)!.duelOfflineMessage,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.4),
                   ),
@@ -1041,7 +1042,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                     child: ElevatedButton.icon(
                       onPressed: () => _startBotMatch(offline: true),
                       icon: const Icon(Icons.smart_toy_outlined, color: AppColors.background),
-                      label: const Text('TREINAR OFFLINE', style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                      label: Text(AppLocalizations.of(context)!.duelTrainOffline, style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w800, letterSpacing: 1)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.gold,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -1058,13 +1059,13 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                         side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5)),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                       ),
-                      child: const Text('TENTAR CONECTAR', style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                      child: Text(AppLocalizations.of(context)!.duelTryConnect, style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                     ),
                   ),
                   const SizedBox(height: 12),
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('VOLTAR AO MENU', style: TextStyle(color: AppColors.textMuted, fontSize: 13, fontWeight: FontWeight.w700)),
+                    child: Text(AppLocalizations.of(context)!.duelBackToMenu, style: TextStyle(color: AppColors.textMuted, fontSize: 13, fontWeight: FontWeight.w700)),
                   ),
                 ],
               ),
@@ -1080,7 +1081,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
       icon: Icons.error_outline,
       color: AppColors.error,
       title: 'OPS!',
-      message: _errorMessage ?? 'Algo deu errado no duelo.',
+      message: _errorMessage ?? AppLocalizations.of(context)!.duelSomethingWrong,
       primaryLabel: 'TENTAR NOVAMENTE',
       onPrimary: _bootstrap,
     );
@@ -1103,11 +1104,11 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                   ),
                 ),
                 const SizedBox(height: 24),
-                const Text('AGUARDANDO OPONENTE', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
+                Text(AppLocalizations.of(context)!.duelWaitingOpponent, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
                 const SizedBox(height: 12),
-                const Text('Apurando o resultado do duelo...', style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
+                Text(AppLocalizations.of(context)!.duelTallying, style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
                 const SizedBox(height: 24),
-                Text('Seu placar: ${_myTotal.toInt()} pts', style: const TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),
+                Text(AppLocalizations.of(context)!.duelYourScore(_myTotal.toInt()), style: const TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),
               ],
             ),
           ),
@@ -1164,7 +1165,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                   const SizedBox(height: 12),
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('VOLTAR AO MENU', style: TextStyle(color: AppColors.textMuted, fontSize: 13, fontWeight: FontWeight.w700)),
+                    child: Text(AppLocalizations.of(context)!.duelBackToMenu, style: TextStyle(color: AppColors.textMuted, fontSize: 13, fontWeight: FontWeight.w700)),
                   ),
                 ],
               ),
@@ -1221,7 +1222,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                     Text(resultText, style: TextStyle(color: resultColor, fontSize: 32, fontWeight: FontWeight.w800, letterSpacing: 3)),
                     const SizedBox(height: 8),
                     Text(
-                      _isBot ? 'Partida de treino' : (won ? 'Vitória!' : (draw ? 'Empate!' : 'Não foi dessa vez.')),
+                      _isBot ? AppLocalizations.of(context)!.duelTrainingMatch : (won ? AppLocalizations.of(context)!.duelVictory : (draw ? AppLocalizations.of(context)!.duelDraw : AppLocalizations.of(context)!.duelDefeat)),
                       style: const TextStyle(color: AppColors.textSecondary, fontSize: 14, fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 10),
@@ -1240,7 +1241,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                           const SizedBox(width: 6),
                           Text(
                             _isBot
-                                ? (_offlineMode ? 'Treino offline — não afeta o ranking' : 'Treino — não afeta o ranking')
+                                ? (_offlineMode ? AppLocalizations.of(context)!.duelOfflineNoRanking : AppLocalizations.of(context)!.duelNoRanking)
                                 : 'ELO ${_eloChange >= 0 ? '+' : ''}$_eloChange  ·  ${_patente.label}',
                             style: TextStyle(color: resultColor, fontSize: 12, fontWeight: FontWeight.w700),
                           ),
@@ -1257,7 +1258,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                       ),
                       child: Column(
                         children: [
-                          _buildResultRow('Você', p1Score, p1Correct, total, AppColors.primary, true),
+                          _buildResultRow(AppLocalizations.of(context)!.duelYou, p1Score, p1Correct, total, AppColors.primary, true),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Row(
@@ -1271,7 +1272,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                               ],
                             ),
                           ),
-                          _buildResultRow(_oppName, p2Score, p2Correct, total, AppColors.gold, false),
+                          _buildResultRow(_oppName.isEmpty ? AppLocalizations.of(context)!.duelOpponent : _oppName, p2Score, p2Correct, total, AppColors.gold, false),
                         ],
                       ),
                     ),
@@ -1282,7 +1283,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                       child: ElevatedButton.icon(
                         onPressed: () => Navigator.pop(context),
                         icon: const Icon(Icons.home, color: AppColors.background),
-                        label: const Text('VOLTAR AO MENU', style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                        label: Text(AppLocalizations.of(context)!.duelBackToMenu, style: TextStyle(color: AppColors.background, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: resultColor,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -1292,7 +1293,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                     const SizedBox(height: 12),
                     TextButton(
                       onPressed: _playAgain,
-                      child: const Text('JOGAR NOVAMENTE', style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                      child: Text(AppLocalizations.of(context)!.duelPlayAgain, style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
                     ),
                   ],
                 ),
@@ -1322,7 +1323,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
       _revealCorrect = -1;
       _eloChange = 0;
       _winnerId = null;
-      _oppName = 'Oponente';
+      _oppName = AppLocalizations.of(context)!.duelOpponent;
     });
     _bootstrap();
   }
@@ -1346,7 +1347,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(name, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
-              Text('$correct/$total acertos', style: const TextStyle(color: AppColors.textSecondary, fontSize: 11)),
+              Text(AppLocalizations.of(context)!.duelCorrectCount(correct, total), style: const TextStyle(color: AppColors.textSecondary, fontSize: 11)),
             ],
           ),
         ),
