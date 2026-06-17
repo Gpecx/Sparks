@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spark_app/widgets/sparky_companion.dart';
 import 'package:spark_app/core/data/offline_duel_questions.dart';
 import 'package:spark_app/core/utils/rank_utils.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -13,14 +15,15 @@ import 'package:spark_app/widgets/sparks_background.dart';
 /// Fases da tela do Duelo de Faíscas.
 enum _DuelPhase { connecting, offline, searching, playing, waitingResult, finished, error }
 
-class DuelScreen extends StatefulWidget {
+class DuelScreen extends ConsumerStatefulWidget {
   const DuelScreen({super.key});
 
   @override
-  State<DuelScreen> createState() => _DuelScreenState();
+  ConsumerState<DuelScreen> createState() => _DuelScreenState();
 }
 
-class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
+class _DuelScreenState extends ConsumerState<DuelScreen>
+    with TickerProviderStateMixin {
   final MatchService _matchService = MatchService();
   final UserService _userService = UserService();
 
@@ -461,6 +464,16 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
       _winnerId = res.winnerId;
       _phase = _DuelPhase.finished;
     });
+
+    // Sparky reage ao resultado do duelo
+    final companion = ref.read(sparkyCompanionProvider.notifier);
+    if (res.winnerId == null) {
+      companion.cheer('Empate! ⚡ Quase lá!');
+    } else if (res.winnerId == _uid) {
+      companion.celebrate('Vitória! 🏆');
+    } else {
+      companion.sad('Foi por pouco! Bora a revanche 💪');
+    }
 
     // Concluir um duelo também conta como atividade de estudo do dia.
     Future.microtask(() async {

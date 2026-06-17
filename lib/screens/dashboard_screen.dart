@@ -900,65 +900,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  void _showDailyChallengeModal(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppColors.card,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5)),
-        ),
-        title: const Row(
-          children: [
-            Icon(Icons.timer, color: AppColors.primary),
-            SizedBox(width: 10),
-            Text('Desafio Diário', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18)),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Teste seus conhecimentos em NR-10! Complete 3 perguntas rápidas para receber recompensas.',
-              style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: AppColors.inputBackground, borderRadius: BorderRadius.circular(12)),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(children: [Text('💰 +50 XP', style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.w700)), Text('Recompensa', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
-                  Column(children: [Text('⏱️ 3 min', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700)), Text('Tempo Est.', style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
-                ],
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('AGORA NÃO', style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.w700)),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            ),
-            onPressed: () {
-              Navigator.pop(ctx);
-              SparkSnack.info(context, 'Iniciando desafio diário...');
-            },
-            child: const Text('INICIAR DESAFIO', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700)),
-          ),
-        ],
-      ),
-    );
-  }
-
   // ── Covenant List com dados reais da subcoleção ─────────────────
   Widget _buildCovenantList() {
     // CovenantService já sincroniza com users/{uid}/covenants em tempo real

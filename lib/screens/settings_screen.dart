@@ -11,8 +11,8 @@ import 'package:spark_app/screens/change_password_screen.dart';
 import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/services/access_code_service.dart';
+import 'package:spark_app/services/notification_service.dart';
 import 'package:spark_app/providers/user_provider.dart';
-import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/colorblind_provider.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -24,18 +24,9 @@ class SettingsScreen extends ConsumerStatefulWidget {
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   double _textScale = 1.0;
 
-  // Smart Notifications
-  bool _streakAlerts = true;
-  bool _friendActivity = true;
-  bool _dailyChallengeAlert = true;
-  bool _tournamentAlerts = true;
-  bool _achievementAlerts = true;
-  bool _silentMode = false;
-  bool _quietHoursEnabled = true;
-  String _notifFrequency = 'Normal';
-
   @override
   Widget build(BuildContext context) {
+    final notif = ref.watch(notificationServiceProvider);
     return SparksBackground(
       child: PcbBackground(
         child: Scaffold(
@@ -100,61 +91,69 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
               const SizedBox(height: 8),
 
-              _sectionTitle('NOTIFICAÇÕES INTELIGENTES'),
-              _switchTile(
-                icon: Icons.local_fire_department,
-                title: 'Alertas de Streak',
-                subtitle: 'Quando seu streak está em risco',
-                value: _streakAlerts,
-                onChanged: (v) => setState(() => _streakAlerts = v),
-              ),
-              _switchTile(
-                icon: Icons.person_search_outlined,
-                title: 'Amigos Online',
-                subtitle: 'Quando um amigo está estudando',
-                value: _friendActivity,
-                onChanged: (v) => setState(() => _friendActivity = v),
-              ),
-              _switchTile(
-                icon: Icons.bolt,
-                title: 'Desafio Diário',
-                subtitle: 'Lembrete do desafio rápido',
-                value: _dailyChallengeAlert,
-                onChanged: (v) => setState(() => _dailyChallengeAlert = v),
-              ),
-              _switchTile(
-                icon: Icons.emoji_events_outlined,
-                title: 'Torneio Semanal',
-                subtitle: 'Novos torneios e posição no ranking',
-                value: _tournamentAlerts,
-                onChanged: (v) => setState(() => _tournamentAlerts = v),
-              ),
-              _switchTile(
-                icon: Icons.star_outline,
-                title: 'Conquistas',
-                subtitle: 'Quando você desbloquear badges',
-                value: _achievementAlerts,
-                onChanged: (v) => setState(() => _achievementAlerts = v),
-              ),
-              const SizedBox(height: 8),
+              ListenableBuilder(
+                listenable: notif,
+                builder: (context, _) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _sectionTitle('NOTIFICAÇÕES INTELIGENTES'),
+                    _switchTile(
+                      icon: Icons.local_fire_department,
+                      title: 'Alertas de Streak',
+                      subtitle: 'Quando seu streak está em risco',
+                      value: notif.streakAlerts,
+                      onChanged: notif.setStreakAlerts,
+                    ),
+                    _switchTile(
+                      icon: Icons.person_search_outlined,
+                      title: 'Amigos Online',
+                      subtitle: 'Quando um amigo está estudando',
+                      value: notif.friendActivity,
+                      onChanged: notif.setFriendActivity,
+                    ),
+                    _switchTile(
+                      icon: Icons.bolt,
+                      title: 'Desafio Diário',
+                      subtitle: 'Lembrete do desafio rápido',
+                      value: notif.dailyChallengeAlert,
+                      onChanged: notif.setDailyChallengeAlert,
+                    ),
+                    _switchTile(
+                      icon: Icons.emoji_events_outlined,
+                      title: 'Torneio Semanal',
+                      subtitle: 'Novos torneios e posição no ranking',
+                      value: notif.tournamentAlerts,
+                      onChanged: notif.setTournamentAlerts,
+                    ),
+                    _switchTile(
+                      icon: Icons.star_outline,
+                      title: 'Conquistas',
+                      subtitle: 'Quando você desbloquear badges',
+                      value: notif.achievementAlerts,
+                      onChanged: notif.setAchievementAlerts,
+                    ),
+                    const SizedBox(height: 8),
 
-              _sectionTitle('PERSONALIZAÇÃO DE NOTIFICAÇÕES'),
-              _switchTile(
-                icon: Icons.volume_off_outlined,
-                title: 'Modo Silencioso',
-                subtitle: 'Pausa todas as notificações',
-                value: _silentMode,
-                onChanged: (v) => setState(() => _silentMode = v),
+                    _sectionTitle('PERSONALIZAÇÃO DE NOTIFICAÇÕES'),
+                    _switchTile(
+                      icon: Icons.volume_off_outlined,
+                      title: 'Modo Silencioso',
+                      subtitle: 'Pausa todas as notificações',
+                      value: notif.silentMode,
+                      onChanged: notif.setSilentMode,
+                    ),
+                    _switchTile(
+                      icon: Icons.headset_mic_outlined,
+                      title: 'Horário Silencioso',
+                      subtitle: 'Sem notificações das 22h às 7h',
+                      value: notif.quietHoursEnabled,
+                      onChanged: notif.setQuietHoursEnabled,
+                    ),
+                    _buildFrequencySelector(notif),
+                    const SizedBox(height: 8),
+                  ],
+                ),
               ),
-              _switchTile(
-                icon: Icons.headset_mic_outlined,
-                title: 'Horário Silencioso',
-                subtitle: 'Sem notificações das 22h às 7h',
-                value: _quietHoursEnabled,
-                onChanged: (v) => setState(() => _quietHoursEnabled = v),
-              ),
-              _buildFrequencySelector(),
-              const SizedBox(height: 8),
 
               _sectionTitle('ACESSIBILIDADE'),
               Container(
@@ -310,7 +309,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               // ── ADMINISTRAÇÃO ──────────────────────────────────
               Builder(builder: (context) {
                 final userAsync = ref.watch(userModelProvider);
-                final isDevMode = ref.watch(devModeProvider);
                 final user = userAsync.value;
                 final isAdmin = (user != null && user.isAdmin);
 
@@ -429,7 +427,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     ),
   );
 
-  Widget _buildFrequencySelector() => Container(
+  Widget _buildFrequencySelector(NotificationService notif) => Container(
     margin: const EdgeInsets.only(bottom: 4),
     decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(8), border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3))),
     child: Padding(
@@ -440,8 +438,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           const Row(children: [Icon(Icons.speed_outlined, color: AppColors.textMuted, size: 22), SizedBox(width: 12), Text('Frequência de Alertas', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600))]),
           const SizedBox(height: 12),
           Row(children: ['Mínima', 'Normal', 'Alta'].map((f) {
-            final isSelected = _notifFrequency == f;
-            return Expanded(child: GestureDetector(onTap: () => setState(() => _notifFrequency = f), child: Container(margin: const EdgeInsets.symmetric(horizontal: 4), padding: const EdgeInsets.symmetric(vertical: 8), decoration: BoxDecoration(color: isSelected ? AppColors.primary : AppColors.inputBackground, borderRadius: BorderRadius.circular(6)), child: Center(child: Text(f, style: TextStyle(color: isSelected ? Colors.white : AppColors.textMuted, fontSize: 12, fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400))))));
+            final isSelected = notif.frequency == f;
+            return Expanded(child: GestureDetector(onTap: () => notif.setFrequency(f), child: Container(margin: const EdgeInsets.symmetric(horizontal: 4), padding: const EdgeInsets.symmetric(vertical: 8), decoration: BoxDecoration(color: isSelected ? AppColors.primary : AppColors.inputBackground, borderRadius: BorderRadius.circular(6)), child: Center(child: Text(f, style: TextStyle(color: isSelected ? Colors.white : AppColors.textMuted, fontSize: 12, fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400))))));
           }).toList()),
         ],
       ),

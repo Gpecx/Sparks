@@ -38,7 +38,7 @@ class AdminDialogs {
           final id = await ref
               .read(adminControllerProvider.notifier)
               .create(AdminEntity.categories, data);
-          return id ?? '';
+          return id;
         },
       ),
     );
@@ -91,7 +91,7 @@ class AdminDialogs {
           final id = await ref
               .read(adminControllerProvider.notifier)
               .create(AdminEntity.modules, data);
-          return id ?? '';
+          return id;
         },
       ),
     );

@@ -77,6 +77,24 @@ class PlanFeatures {
     advancedStats: true,
     customization: true,
   );
+
+  /// Acesso irrestrito — TODAS as features ligadas. Usado por admins.
+  static const PlanFeatures everything = PlanFeatures(
+    allTrails: true,
+    allEbookChapters: true,
+    allTools: true,
+    certificates: true,
+    offlineMode: true,
+    noAds: true,
+    advancedStats: true,
+    customization: true,
+    monthlyTutoring: true,
+    earlyAccess: true,
+    prioritySupport: true,
+    teamPanel: true,
+    teamReports: true,
+    invoicing: true,
+  );
 }
 
 /// Catálogo padrão de features por plano. (Pode futuramente vir do
@@ -136,13 +154,28 @@ class AccessControl {
   final bool isOnTrial;
   final DateTime? trialEndsAt;
 
+  /// Quando definido, sobrepõe o catálogo de features do [plan].
+  /// Admins recebem [PlanFeatures.everything] aqui (acesso irrestrito).
+  final PlanFeatures? _featuresOverride;
+
   const AccessControl({
     required this.plan,
     this.isOnTrial = false,
     this.trialEndsAt,
-  });
+    PlanFeatures? featuresOverride,
+  }) : _featuresOverride = featuresOverride;
 
   factory AccessControl.fromUser(UserModel? u) {
+    // Admins têm acesso IRRESTRITO: todas as ferramentas, trilhas, lições e
+    // demais recursos liberados, independentemente de pagamento/trial.
+    if (u?.isAdmin ?? false) {
+      return AccessControl(
+        plan: UserPlan.premium, // rótulo do badge; features vêm do override
+        isOnTrial: u?.isOnTrial ?? false,
+        trialEndsAt: u?.trialEndsAt,
+        featuresOverride: PlanFeatures.everything,
+      );
+    }
     // Trial e assinatura ativa dão acesso de plano pago.
     final paid = (u?.isPremium ?? false) || (u?.isOnTrial ?? false);
     final plan = !paid ? UserPlan.free : _planFromId(u?.subscriptionPlanId);
@@ -153,7 +186,8 @@ class AccessControl {
     );
   }
 
-  PlanFeatures get features => kPlanCatalog[plan] ?? const PlanFeatures();
+  PlanFeatures get features =>
+      _featuresOverride ?? kPlanCatalog[plan] ?? const PlanFeatures();
   bool get isFree => plan == UserPlan.free;
 
   // ── Gating de conteúdo ──────────────────────────────────────────

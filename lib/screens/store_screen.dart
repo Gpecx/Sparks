@@ -152,10 +152,6 @@ const List<SubscriptionPlan> subscriptionPlans = [
     features: [
       'Tudo do Premium por usuário',
       'Bateria infinita ∞ para todos',
-      'Painel administrativo',
-      'Relatórios de progresso da equipe',
-      'Integração com RH',
-      'Gerente de conta dedicado',
     ],
     badge: 'EMPRESAS',
   ),

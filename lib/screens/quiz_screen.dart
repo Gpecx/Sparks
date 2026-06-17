@@ -13,8 +13,10 @@ import 'package:spark_app/services/question_service.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/widgets/streak_lightning_emitter.dart';
+import 'package:spark_app/widgets/sparky_companion.dart';
 import 'package:spark_app/models/quiz_models.dart';
 import 'package:spark_app/providers/progress_provider.dart';
+import 'package:spark_app/providers/user_provider.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final bool isEvaluation;
@@ -50,6 +52,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
   int _currentQuestion = 0;
   int _totalCorrect = 0;
   bool _isCompleting = false;
+  // true quando ESTA lição fechou o módulo inteiro (vem do markLessonComplete).
+  // Usado pra decidir quando mostrar o PowerPlay (assinantes só no fim do módulo).
+  bool _moduleJustCompleted = false;
   int _currentStreak = 0; // Streak da sessão atual
 
   // Controladores de animação épica
@@ -486,6 +491,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
 
         // 2. Disparar gravação no Firestore em segundo plano (background)
         // e usar o retorno para saber se o módulo foi completado
+        _moduleJustCompleted = false;
         ProgressService().markLessonComplete(
           uid,
           widget.categoryId ?? '',
@@ -496,6 +502,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           moduleName: widget.lesson?.title ?? '',
         ).then((moduleCompleted) {
           // Gravação bem-sucedida
+          _moduleJustCompleted = moduleCompleted;
           ref.read(optimisticProgressProvider.notifier).removeOptimisticProgress(
             widget.moduleId!,
             lessonId,
@@ -551,13 +558,27 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
       HapticFeedback.vibrate();
       if (mounted) {
         _completionController.forward(from: 0).then((_) {
-          if (mounted) _showQuizResultModal(true, score, xpEarned);
+          if (mounted) {
+            _showQuizResultModal(true, score, xpEarned);
+            // Sparky comemora a lição concluída
+            ref.read(sparkyCompanionProvider.notifier).celebrate(
+                  _totalCorrect == _questions.length
+                      ? 'Gabaritou! 🎉'
+                      : 'Lição concluída! ⚡',
+                );
+          }
         });
       }
     } else {
       if (mounted) setState(() => _isCompleting = false);
       // Reprovado — mostra modal imediatamente
-      if (mounted) _showQuizResultModal(false, score, 0);
+      if (mounted) {
+        _showQuizResultModal(false, score, 0);
+        // Sparky dá um apoio quando não passou
+        ref.read(sparkyCompanionProvider.notifier).sad(
+              'Quase! Revise e tente de novo 💪',
+            );
+      }
     }
   }
 
@@ -642,7 +663,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                     Navigator.of(modalCtx).pop(); // fecha BottomSheet
 
                     if (passed) {
-                      _showPowerplayAd();
+                      if (_shouldShowPowerplay()) {
+                        _showPowerplayAd();
+                      } else {
+                        // Assinante que ainda não fechou o módulo: pula o
+                        // PowerPlay e volta direto pra trilha.
+                        rootNavigator.pop(true);
+                      }
                     } else {
                       rootNavigator.pop(false);
                     }
@@ -724,6 +751,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
         );
       },
     );
+  }
+
+  /// Regra do PowerPlay:
+  /// - Não-assinante: aparece ao fim de TODA lição (comportamento original).
+  /// - Assinante (premium / pro / student / business): só quando esta lição
+  ///   fecha o MÓDULO inteiro.
+  bool _shouldShowPowerplay() {
+    final user = ref.read(userModelProvider).value;
+    final plan = user?.subscriptionPlanId?.toLowerCase();
+    final isSubscriber = (user?.isPremium ?? false) ||
+        plan == 'pro' ||
+        plan == 'premium' ||
+        plan == 'student' ||
+        plan == 'business';
+    if (!isSubscriber) return true;
+    return _moduleJustCompleted;
   }
 
   void _showPowerplayAd() {

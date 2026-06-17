@@ -1653,6 +1653,34 @@ export const processTrialExpiry = onSchedule(
 );
 
 // ────────────────────────────────────────────────────────────────
+// grantAdminPremium — todo usuário com role=='admin' recebe assinatura
+// premium automaticamente. Dispara em qualquer escrita no doc do usuário;
+// ao detectar role=='admin' sem premium, concede isPremium + plano premium.
+// Server-controlled: roda com Admin SDK, ignora as Firestore Rules.
+// ────────────────────────────────────────────────────────────────
+export const grantAdminPremium = onDocumentWritten(
+  { document: "users/{uid}", region: "southamerica-east1" },
+  async (event) => {
+    const after = event.data?.after;
+    if (!after?.exists) return; // doc deletado
+
+    const d = after.data() as Record<string, unknown>;
+    if (d["role"] !== "admin") return; // só admins
+
+    const updates: Record<string, unknown> = {};
+    if (d["isPremium"] !== true) updates["isPremium"] = true;
+    if (d["subscriptionPlanId"] == null) updates["subscriptionPlanId"] = "premium";
+
+    // Nada a alterar ⇒ não escreve (evita loop de re-disparo do trigger).
+    if (Object.keys(updates).length === 0) return;
+
+    updates["updatedAt"] = admin.firestore.FieldValue.serverTimestamp();
+    await after.ref.update(updates);
+    logger.info(`[grantAdminPremium] Premium concedido ao admin ${event.params.uid}.`);
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
 // 12. checkDeviceTrust — Verifica se o dispositivo é confiável (Admin SDK) [v2 — 2026-06-10]
 // ────────────────────────────────────────────────────────────────
 

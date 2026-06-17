@@ -140,6 +140,7 @@ class _ClanScreenState extends State<ClanScreen> {
                 _clanPrimaryColor = Color(clanDoc.data()!['primaryColor']);
               }
               if (clanDoc.data()?['iconCodePoint'] != null) {
+                // ignore: non_const_argument_for_const_parameter — ícone dinâmico do clã (build usa --no-tree-shake-icons)
                 _clanIcon = IconData(clanDoc.data()!['iconCodePoint'], fontFamily: 'MaterialIcons');
               }
               

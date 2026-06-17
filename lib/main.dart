@@ -14,6 +14,7 @@ import 'package:spark_app/services/offline_sync_service.dart';
 import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/firebase_options.dart';
 import 'package:spark_app/providers/colorblind_provider.dart';
+import 'package:spark_app/widgets/sparky_companion.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -42,6 +43,7 @@ void main() async {
   // Em release: Play Integrity (Android), Device Check (Apple) e reCAPTCHA v3
   // (Web — substitua RECAPTCHA_V3_SITE_KEY pela chave gerada no console).
   await FirebaseAppCheck.instance.activate(
+    // ignore: deprecated_member_use — os params provider* novos exigem tipos diferentes (Android/Apple/WebAppCheckProvider); manter a API estável.
     androidProvider:
         kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
     appleProvider:
@@ -120,7 +122,14 @@ class SparkApp extends StatelessWidget {
               );
               return MediaQuery(
                 data: mq.copyWith(textScaler: clamped),
-                child: child!,
+                // Sparky companheiro: overlay global que reage a eventos
+                // (level up, streak, conquista...) em qualquer tela.
+                child: Stack(
+                  children: [
+                    child!,
+                    const SparkyCompanion(),
+                  ],
+                ),
               );
             },
           ),
@@ -153,7 +162,6 @@ class SparkApp extends StatelessWidget {
           0, 0, 0, 1, 0,
         ]);
       case ColorblindMode.none:
-      default:
         // Identity matrix
         return const ColorFilter.matrix([
           1, 0, 0, 0, 0,

@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
+import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 
@@ -26,12 +27,42 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   late AnimationController _ringController; // anéis girando
   late AnimationController _particleController; // partículas subindo
   late AnimationController _tapController; // "pulinho" ao tocar
+  late AnimationController _nodController; // aceninho de cabeça ocasional
+  late AnimationController _chargeController; // raio do peito "carregando"
+  late AnimationController _bubbleController; // balão de fala (entra/sai)
   late Animation<double> _floatCurve;
   late Animation<double> _introFade;
   late Animation<double> _introScale;
 
   // Parallax: posição do ponteiro normalizada (-1..1) em relação ao centro.
   final ValueNotifier<Offset> _pointer = ValueNotifier(Offset.zero);
+  // Olhar automático (quando não há mouse): faz os olhos darem uma espiada.
+  final ValueNotifier<Offset> _autoLook = ValueNotifier(Offset.zero);
+
+  // Faísca elétrica ao tocar: muda a cada toque pra cada raio sair diferente.
+  int _tapSeed = 0;
+  // Variação da piscada: às vezes pisca duas vezes.
+  final math.Random _rng = math.Random();
+  bool _doubleBlink = false;
+  double _lastBlink = 0;
+  // Timers de idle.
+  Timer? _nodTimer;
+  Timer? _glanceTimer;
+  Timer? _bubbleTimer;
+
+  // Balão de fala: mensagens rotativas de saudação/dica.
+  int _msgIndex = 0;
+  static const List<String> _messages = [
+    'Bora aprender? ⚡',
+    'Pronto pro duelo?',
+    'Vamos energizar seus estudos!',
+    'Tô carregado pra hoje! 🔋',
+    'Partiu fechar uma sequência? 🔥',
+    'Cada estudo é uma faísca! ✨',
+    'Que tal um desafio rapidinho?',
+    'Sua evolução não para! 📈',
+    'Tamo junto nessa jornada! 💪',
+  ];
 
   @override
   void initState() {
@@ -82,6 +113,33 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       vsync: this,
       duration: const Duration(milliseconds: 420),
     );
+    // Aceninho de cabeça ocasional (gesto curto e simpático)
+    _nodController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
+    );
+    // Raio do peito "carregando" — pulso elétrico (breathing)
+    _chargeController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    )..repeat(reverse: true);
+    // Balão de fala: anima entrada/saída
+    _bubbleController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 420),
+    );
+
+    // A cada ciclo de piscada, sorteia se a próxima será dupla (~35%).
+    _blinkController.addListener(() {
+      final v = _blinkController.value;
+      if (v < _lastBlink) {
+        _doubleBlink = _rng.nextDouble() < 0.35;
+      }
+      _lastBlink = v;
+    });
+    _scheduleNod();
+    _scheduleGlance();
+    _scheduleBubble();
 
     // ── Auto-Login ──────────────────────────────────────────
     // Se a sessão do Firebase persistiu, pula o Welcome direto pro Home.
@@ -94,8 +152,54 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     });
   }
 
+  /// Dispara um aceninho daqui a 7–12s e se reagenda (loop de idle).
+  void _scheduleNod() {
+    _nodTimer = Timer(Duration(milliseconds: 7000 + _rng.nextInt(5000)), () {
+      if (!mounted) return;
+      _nodController.forward(from: 0);
+      _scheduleNod();
+    });
+  }
+
+  /// Espiadinha automática dos olhos quando não há mouse (mobile): olha pra
+  /// um lado por ~1,2s e volta ao centro.
+  void _scheduleGlance() {
+    _glanceTimer = Timer(Duration(milliseconds: 3500 + _rng.nextInt(3500)), () {
+      if (!mounted) return;
+      if (_pointer.value == Offset.zero) {
+        _autoLook.value = Offset(
+          (_rng.nextDouble() * 2 - 1) * 0.9,
+          (_rng.nextDouble() * 2 - 1) * 0.6,
+        );
+        Timer(const Duration(milliseconds: 1200), () {
+          if (mounted) _autoLook.value = Offset.zero;
+        });
+      }
+      _scheduleGlance();
+    });
+  }
+
+  /// Mostra o balão de fala por ~3,5s, esconde por ~3s e troca a mensagem.
+  void _scheduleBubble() {
+    _bubbleTimer = Timer(Duration(milliseconds: 2200 + _rng.nextInt(1500)), () {
+      if (!mounted) return;
+      _bubbleController.forward();
+      Timer(const Duration(milliseconds: 3500), () {
+        if (!mounted) return;
+        _bubbleController.reverse();
+        Timer(const Duration(milliseconds: 500), () {
+          if (mounted) setState(() => _msgIndex = (_msgIndex + 1) % _messages.length);
+        });
+        _scheduleBubble();
+      });
+    });
+  }
+
   @override
   void dispose() {
+    _nodTimer?.cancel();
+    _glanceTimer?.cancel();
+    _bubbleTimer?.cancel();
     _sparkController.dispose();
     _floatController.dispose();
     _introController.dispose();
@@ -104,7 +208,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     _ringController.dispose();
     _particleController.dispose();
     _tapController.dispose();
+    _nodController.dispose();
+    _chargeController.dispose();
+    _bubbleController.dispose();
     _pointer.dispose();
+    _autoLook.dispose();
     super.dispose();
   }
 
@@ -138,6 +246,64 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     );
   }
 
+  /// Balão de fala acima do Sparky, com mensagem rotativa. Entra/sai animado
+  /// pelo _bubbleController e não captura toques (passam pro mascote).
+  Widget _speechBubble() {
+    return Align(
+      alignment: const Alignment(0.0, -0.92),
+      child: IgnorePointer(
+        child: FadeTransition(
+          opacity: _bubbleController,
+          child: ScaleTransition(
+            scale: CurvedAnimation(
+              parent: _bubbleController,
+              curve: Curves.easeOutBack,
+            ),
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  constraints: const BoxConstraints(maxWidth: 230),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: AppColors.card,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.6),
+                      width: 1.5,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primary.withValues(alpha: 0.22),
+                        blurRadius: 16,
+                        spreadRadius: 1,
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    _messages[_msgIndex],
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                CustomPaint(
+                  size: const Size(18, 9),
+                  painter: _BubbleTailPainter(),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,11 +320,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   // Logo do capacete Spark
                   Image.asset(
                     'assets/images/spark_icon.png',
-                    width: 38,
-                    height: 38,
+                    width: 56,
+                    height: 56,
                     fit: BoxFit.contain,
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 6),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -214,7 +380,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         _ringController,
                         _particleController,
                         _tapController,
+                        _nodController,
+                        _chargeController,
+                        _bubbleController,
                         _pointer,
+                        _autoLook,
                       ]),
                       builder: (context, child) {
                         // pulso suave 0..1 para o brilho verde
@@ -224,9 +394,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         final lift = _floatCurve.value;
                         final floatY = (lift - 0.5) * 14;
 
-                        // piscar: olhos fechados num instante curto
+                        // piscar: olhos fechados num instante curto;
+                        // de vez em quando uma piscada dupla (janela extra antes)
                         final bc = _blinkController.value;
-                        final blinking = bc > 0.93 && bc < 0.99;
+                        final blinking = (bc > 0.93 && bc < 0.99) ||
+                            (_doubleBlink && bc > 0.86 && bc < 0.90);
 
                         // falar: rajadas curtas com pausas
                         final tk = _talkController.value;
@@ -237,14 +409,33 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         final fast =
                             0.5 + 0.5 * math.sin(tk * 2 * math.pi * 5);
                         final talk = (gate * fast).clamp(0.0, 1.0);
-                        final mouthSX = 1.0 + 0.05 * talk;
-                        final mouthSY = 1.0 + 0.20 * talk;
+                        // reação de surpresa ao tocar (boca "O" + olhos saltam)
+                        final react =
+                            math.sin(math.pi * _tapController.value);
+                        final mouthSX = (1.0 + 0.05 * talk) - 0.10 * react;
+                        final mouthSY = (1.0 + 0.20 * talk) + 0.55 * react;
+                        // raio do peito carregando (no Welcome: pulso idle;
+                        // pode ser ligado ao XP do usuário em 0..1)
+                        final charge = _chargeController.value;
+                        // olhos: seguem o mouse; sem mouse, dão espiadinhas
+                        final look = _pointer.value != Offset.zero
+                            ? _pointer.value
+                            : _autoLook.value;
 
                         // anéis girando + parallax + pulinho ao tocar
                         final ringAngle = _ringController.value * 2 * math.pi;
                         final tilt = _pointer.value;
                         final tapBounce =
                             math.sin(math.pi * _tapController.value) * 0.12;
+                        // olhos seguem levemente o ponteiro (ou a espiadinha)
+                        final eyeOffset = Offset(
+                          look.dx * 3.2,
+                          look.dy * 2.4,
+                        );
+                        // olhos "saltam" na reação de surpresa
+                        final eyesPop = 1.0 + 0.16 * react;
+                        // aceninho: meia-senoide curta (cabeça baixa e volta)
+                        final nod = math.sin(math.pi * _nodController.value);
 
                         return Stack(
                           alignment: const Alignment(0, -0.08),
@@ -333,7 +524,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                   alignment: Alignment.center,
                                   transform: Matrix4.identity()
                                     ..setEntry(3, 2, 0.0012)
-                                    ..rotateX(-tilt.dy * 0.12)
+                                    ..rotateX(-tilt.dy * 0.12 + nod * 0.18)
                                     ..rotateY(tilt.dx * 0.16),
                                   child: Transform.scale(
                                     // power-up de entrada + (7) pulinho
@@ -341,9 +532,15 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                         tapBounce,
                                     // (7) tocar no Sparky faz ele pular
                                     child: GestureDetector(
-                                      onTap: () =>
-                                          _tapController.forward(from: 0),
-                                      child: Container(
+                                      onTap: () {
+                                        _tapSeed++;
+                                        _tapController.forward(from: 0);
+                                      },
+                                      child: Stack(
+                                        clipBehavior: Clip.none,
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Container(
                                         width: 200,
                                         height: 200,
                                         decoration: BoxDecoration(
@@ -376,8 +573,30 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                                   16, 0.42 + 0.20 * pulse),
                                               _neonGlow(
                                                   8, 0.50 + 0.24 * pulse),
-                                              // 1) corpo do Sparky (estático)
+                                              // 1) corpo do Sparky (sem olhos)
                                               child!,
+                                              // 1a) olhos — camada móvel que
+                                              //     segue o ponteiro e salta
+                                              //     na reação de surpresa
+                                              Transform.translate(
+                                                offset: eyeOffset,
+                                                child: Transform.scale(
+                                                  scale: eyesPop,
+                                                  child: Transform.scale(
+                                                    scale: 1.45,
+                                                    alignment:
+                                                        Alignment.topCenter,
+                                                    child: Image.asset(
+                                                      'assets/images/sparky_eyes.png',
+                                                      fit: BoxFit.cover,
+                                                      alignment: const Alignment(
+                                                          0, -0.8),
+                                                      filterQuality:
+                                                          FilterQuality.high,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                               // 1b) olhos fechados (piscar)
                                               if (blinking)
                                                 Transform.scale(
@@ -413,15 +632,68 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                                   ),
                                                 ),
                                               ),
+                                              // 1d) raio do peito "carregando":
+                                              //     brilho dourado pulsante
+                                              IgnorePointer(
+                                                child: Opacity(
+                                                  opacity: (0.35 + 0.5 * charge)
+                                                      .clamp(0.0, 1.0),
+                                                  child: Transform.scale(
+                                                    scale: 1.45,
+                                                    alignment:
+                                                        Alignment.topCenter,
+                                                    child: ImageFiltered(
+                                                      imageFilter:
+                                                          ui.ImageFilter.blur(
+                                                        sigmaX: 2.5 + 3.5 * charge,
+                                                        sigmaY: 2.5 + 3.5 * charge,
+                                                      ),
+                                                      child: ColorFiltered(
+                                                        colorFilter:
+                                                            const ColorFilter
+                                                                .mode(
+                                                          Color(0xFFFFF3A0),
+                                                          BlendMode.srcIn,
+                                                        ),
+                                                        child: Image.asset(
+                                                          'assets/images/sparky_bolt.png',
+                                                          fit: BoxFit.cover,
+                                                          alignment:
+                                                              const Alignment(
+                                                                  0, -0.8),
+                                                          filterQuality:
+                                                              FilterQuality.high,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
+                                      ),
+                                          // (8) faísca elétrica saindo do
+                                          //     raio do peito ao tocar
+                                          Positioned.fill(
+                                            child: IgnorePointer(
+                                              child: CustomPaint(
+                                                painter: _SparkBurstPainter(
+                                                  _tapController.value,
+                                                  _tapSeed,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
+                            // (4) balão de fala com saudações/dicas
+                            _speechBubble(),
                           ],
                         );
                       },
@@ -429,7 +701,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         scale: 1.45,
                         alignment: Alignment.topCenter,
                         child: Image.asset(
-                          'assets/images/sparky.png',
+                          'assets/images/sparky_noeyes.png',
                           fit: BoxFit.cover,
                           alignment: const Alignment(0, -0.8),
                           filterQuality: FilterQuality.high,
@@ -539,6 +811,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         textAlign: TextAlign.center,
                       ),
                     ),
+                    // sobe os botões: espaço abaixo equilibra com o Spacer de
+                    // cima (aumente o flex p/ subir mais)
+                    const Spacer(),
                     const SizedBox(height: 16),
                   ],
                 ),
@@ -664,4 +939,126 @@ class _RingPainter extends CustomPainter {
       old.segments != segments ||
       old.gap != gap ||
       old.strokeWidth != strokeWidth;
+}
+
+// (8) Faísca elétrica ao tocar: poucos raios curtos com ramificações,
+// núcleo claro + glow, num flash rápido (relâmpago pisca e some).
+// `progress` 0..1 vem do _tapController; `seed` muda a cada toque.
+class _SparkBurstPainter extends CustomPainter {
+  final double progress;
+  final int seed;
+  _SparkBurstPainter(this.progress, this.seed);
+
+  // direções (rad) irradiando do raio do peito: laterais, diagonais e baixo
+  // (evita subir reto pra cima, em cima do rosto).
+  static const _dirs = [-2.7, -0.45, 0.5, 2.6, 1.9, -2.1];
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // só na primeira fração do toque → flash curto, sem poluir
+    if (progress <= 0.0 || progress >= 0.55) return;
+    final p = progress / 0.55; // 0..1 dentro da janela do flash
+    // dois lampejos rápidos que decaem (cara de relâmpago)
+    final flick = (p < 0.18 || (p > 0.34 && p < 0.5)) ? 1.0 : 0.4;
+    final intensity = ((1.0 - p) * flick).clamp(0.0, 1.0);
+    if (intensity < 0.03) return;
+
+    // origem = raio amarelo no peito do mascote (no espaço de 200px do círculo)
+    final center = Offset(size.width * 0.495, size.height * 0.91);
+    final rng = math.Random(seed);
+    final reach = 26 + 22 * p;
+
+    final glow = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..strokeWidth = 4.0
+      ..color = AppColors.gold.withValues(alpha: 0.28 * intensity)
+      ..maskFilter = const ui.MaskFilter.blur(BlurStyle.normal, 3.5);
+    final core = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..strokeWidth = 1.5
+      ..color = const Color(0xFFFFF3B0).withValues(alpha: 0.95 * intensity);
+
+    for (int i = 0; i < _dirs.length; i++) {
+      final ang = _dirs[i] + (rng.nextDouble() - 0.5) * 0.5;
+      final len = reach * (0.8 + rng.nextDouble() * 0.4);
+      final path = _boltPath(center, ang, len, rng);
+      canvas.drawPath(path, glow);
+      canvas.drawPath(path, core);
+    }
+  }
+
+  Path _boltPath(Offset o, double ang, double len, math.Random rng) {
+    final dir = Offset(math.cos(ang), math.sin(ang));
+    final perp = Offset(-dir.dy, dir.dx);
+    final path = Path()..moveTo(o.dx, o.dy);
+    const segs = 5;
+    Offset? forkAt;
+    double forkBaseT = 0;
+    for (int s = 1; s <= segs; s++) {
+      final t = s / segs;
+      final jit = (rng.nextDouble() - 0.5) * len * 0.22;
+      final pt = Offset(
+        o.dx + dir.dx * len * t + perp.dx * jit,
+        o.dy + dir.dy * len * t + perp.dy * jit,
+      );
+      path.lineTo(pt.dx, pt.dy);
+      if (s == 2) {
+        forkAt = pt;
+        forkBaseT = t;
+      }
+    }
+    // uma ramificação curta saindo de um nó intermediário
+    if (forkAt != null) {
+      final bang = ang + (rng.nextDouble() < 0.5 ? -1 : 1) * (0.5 + rng.nextDouble() * 0.5);
+      final blen = len * (0.35 + rng.nextDouble() * 0.2) * (1 - forkBaseT + 0.4);
+      final bdir = Offset(math.cos(bang), math.sin(bang));
+      final bperp = Offset(-bdir.dy, bdir.dx);
+      path.moveTo(forkAt.dx, forkAt.dy);
+      const bs = 3;
+      for (int s = 1; s <= bs; s++) {
+        final t = s / bs;
+        final jit = (rng.nextDouble() - 0.5) * blen * 0.3;
+        path.lineTo(
+          forkAt.dx + bdir.dx * blen * t + bperp.dx * jit,
+          forkAt.dy + bdir.dy * blen * t + bperp.dy * jit,
+        );
+      }
+    }
+    return path;
+  }
+
+  @override
+  bool shouldRepaint(covariant _SparkBurstPainter old) =>
+      old.progress != progress || old.seed != seed;
+}
+
+// Rabinho do balão de fala (triângulo apontando pro Sparky).
+class _BubbleTailPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final tri = Path()
+      ..moveTo(0, 0)
+      ..lineTo(size.width, 0)
+      ..lineTo(size.width / 2, size.height)
+      ..close();
+    canvas.drawPath(tri, Paint()..color = AppColors.card);
+    final edges = Path()
+      ..moveTo(0, 0)
+      ..lineTo(size.width / 2, size.height)
+      ..lineTo(size.width, 0);
+    canvas.drawPath(
+      edges,
+      Paint()
+        ..color = AppColors.primary.withValues(alpha: 0.6)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.5,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _BubbleTailPainter old) => false;
 }
