@@ -1,3 +1,4 @@
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/screens/video_preview_screen.dart';
@@ -42,7 +43,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
     } catch (e) {
       if (!mounted) return;
       setState(() {
-        _error = 'Erro ao carregar norma';
+        _error = AppLocalizations.of(context)!.stdErrorLoading;
         _loading = false;
       });
     }
@@ -82,12 +83,12 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(Icons.play_arrow, color: AppColors.primary, size: 14),
                         SizedBox(width: 4),
-                        Text('POWERPLAY', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                        Text(AppLocalizations.of(context)!.powerplayTitle, style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
                       ],
                     ),
                   ),
@@ -120,14 +121,14 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
             children: [
               const Icon(Icons.error_outline, color: AppColors.error, size: 48),
               const SizedBox(height: 16),
-              Text(_error ?? 'Erro desconhecido', style: const TextStyle(color: Colors.white, fontSize: 16)),
+              Text(_error ?? AppLocalizations.of(context)!.stdUnknownError, style: const TextStyle(color: Colors.white, fontSize: 16)),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                   setState(() { _loading = true; _error = null; });
                   _loadStandard();
                 },
-                child: const Text('Tentar novamente'),
+                child: Text(AppLocalizations.of(context)!.tryAgain),
               ),
             ],
           ),
@@ -205,8 +206,8 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
             spacing: 10,
             runSpacing: 10,
             children: [
-              _featureChip(Icons.security, 'Segurança'),
-              _featureChip(Icons.assignment_outlined, 'Norma Técnica'),
+              _featureChip(Icons.security, AppLocalizations.of(context)!.stdSafety),
+              _featureChip(Icons.assignment_outlined, AppLocalizations.of(context)!.stdTechnicalStandard),
               _featureChip(Icons.verified_outlined, 'MTE'),
             ],
           ),
@@ -225,11 +226,11 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
                 ),
-                child: const Text('POWERPLAY', style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                child: Text(AppLocalizations.of(context)!.powerplayTitle, style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text('Vídeos sobre ${s.code}', style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
+                child: Text(AppLocalizations.of(context)!.stdVideosAbout(s.code), style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
               ),
             ],
           ),
@@ -263,14 +264,14 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
         const SizedBox(height: 24),
         Container(width: 40, height: 4, decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(2))),
         const SizedBox(height: 16),
-        const Text('POWERPLAY', style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w800, fontStyle: FontStyle.italic, letterSpacing: 3)),
+        Text(AppLocalizations.of(context)!.powerplayTitle, style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w800, fontStyle: FontStyle.italic, letterSpacing: 3)),
         const SizedBox(height: 6),
-        const Text('O Netflix da Engenharia Elétrica', style: TextStyle(color: AppColors.primary, fontSize: 15, fontWeight: FontWeight.w600)),
+        Text(AppLocalizations.of(context)!.stdNetflixTagline, style: TextStyle(color: AppColors.primary, fontSize: 15, fontWeight: FontWeight.w600)),
         const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Text(
-            'Acesse centenas de aulas, estudos de caso e conteúdos exclusivos sobre normas técnicas e engenharia — tudo num só lugar.',
+            AppLocalizations.of(context)!.stdPowerplayDesc,
             textAlign: TextAlign.center,
             style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.6),
           ),
@@ -283,9 +284,9 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
             spacing: 10,
             runSpacing: 10,
             children: [
-              _featureChip(Icons.videocam_outlined, 'Vídeo Aulas'),
-              _featureChip(Icons.cases_outlined, 'Casos Reais'),
-              _featureChip(Icons.offline_bolt_outlined, 'Offline'),
+              _featureChip(Icons.videocam_outlined, AppLocalizations.of(context)!.stdFeatVideoClasses),
+              _featureChip(Icons.cases_outlined, AppLocalizations.of(context)!.stdFeatRealCases),
+              _featureChip(Icons.offline_bolt_outlined, AppLocalizations.of(context)!.stdFeatOffline),
             ],
           ),
         ),
@@ -301,11 +302,11 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
                 ),
-                child: const Text('EM ALTA', style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                child: Text(AppLocalizations.of(context)!.stdTrending, style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
               ),
               const SizedBox(width: 10),
               const Expanded(
-                child: Text('Recomendados para você', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
+                child: Text(AppLocalizations.of(context)!.stdRecommended, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
               ),
             ],
           ),
@@ -320,10 +321,10 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
             height: 52,
             child: ElevatedButton(
               onPressed: () {},
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('ACESSAR POWERPLAY', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 2)),
+                  Text(AppLocalizations.of(context)!.stdAccessPowerplay, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 2)),
                   SizedBox(width: 10),
                   Icon(Icons.open_in_new, size: 16),
                 ],
@@ -334,7 +335,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
         const SizedBox(height: 12),
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Talvez mais tarde', style: TextStyle(color: AppColors.textMuted, fontSize: 13)),
+          child: Text(AppLocalizations.of(context)!.stdMaybeLater, style: TextStyle(color: AppColors.textMuted, fontSize: 13)),
         ),
         const SizedBox(height: 32),
       ],
@@ -365,40 +366,40 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
     final code = normCode?.toUpperCase();
     if (code == null) {
       return [
-        {'title': 'NR-10: Painéis Elétricos Industriais Avançados', 'duration': '12:45'},
-        {'title': 'Estudo de Caso: Inspeção em Alta Tensão', 'duration': '8:30'},
-        {'title': 'NR-35: Equipamentos de Proteção Individual', 'duration': '15:20'},
+        {'title': AppLocalizations.of(context)!.stdVidPanelsAdv, 'duration': '12:45'},
+        {'title': AppLocalizations.of(context)!.stdVidHvInspection, 'duration': '8:30'},
+        {'title': AppLocalizations.of(context)!.stdVidNr35Epi, 'duration': '15:20'},
       ];
     }
     // Mapeamento básico de vídeos por norma
     final Map<String, List<Map<String, String>>> catalog = {
       'NR-10': [
-        {'title': 'NR-10: Fundamentos de Segurança Elétrica', 'duration': '18:20'},
-        {'title': 'NR-10: Painéis Elétricos Industriais Avançados', 'duration': '12:45'},
-        {'title': 'Estudo de Caso: LOTO em Subestações', 'duration': '9:10'},
+        {'title': AppLocalizations.of(context)!.stdVidNr10Fundamentals, 'duration': '18:20'},
+        {'title': AppLocalizations.of(context)!.stdVidPanelsAdv, 'duration': '12:45'},
+        {'title': AppLocalizations.of(context)!.stdVidLoto, 'duration': '9:10'},
       ],
       'NR-35': [
-        {'title': 'NR-35: Trabalho em Altura — Fundamentos', 'duration': '14:00'},
-        {'title': 'NR-35: EPIs e Ancoragem Correta', 'duration': '15:20'},
-        {'title': 'Estudo de Caso: Queda em Estrutura Metálica', 'duration': '11:05'},
+        {'title': AppLocalizations.of(context)!.stdVidNr35Heights, 'duration': '14:00'},
+        {'title': AppLocalizations.of(context)!.stdVidNr35Anchorage, 'duration': '15:20'},
+        {'title': AppLocalizations.of(context)!.stdVidFallStructure, 'duration': '11:05'},
       ],
       'NR-12': [
-        {'title': 'NR-12: Segurança em Máquinas Industriais', 'duration': '16:30'},
-        {'title': 'NR-12: Zonas de Risco e Proteções', 'duration': '10:15'},
-        {'title': 'Estudo de Caso: Acidente em Prensa Hidráulica', 'duration': '8:50'},
+        {'title': AppLocalizations.of(context)!.stdVidNr12Machines, 'duration': '16:30'},
+        {'title': AppLocalizations.of(context)!.stdVidNr12Risk, 'duration': '10:15'},
+        {'title': AppLocalizations.of(context)!.stdVidPress, 'duration': '8:50'},
       ],
       'NR-33': [
-        {'title': 'NR-33: Espaço Confinado — Conceitos', 'duration': '13:00'},
-        {'title': 'NR-33: Procedimentos de Entrada Segura', 'duration': '17:40'},
-        {'title': 'Simulação: Resgate em Ambiente Confinado', 'duration': '9:30'},
+        {'title': AppLocalizations.of(context)!.stdVidNr33Concepts, 'duration': '13:00'},
+        {'title': AppLocalizations.of(context)!.stdVidNr33Entry, 'duration': '17:40'},
+        {'title': AppLocalizations.of(context)!.stdVidConfinedRescue, 'duration': '9:30'},
       ],
     };
 
     return catalog[code] ??
         [
-          {'title': '$code: Introdução à Norma', 'duration': '10:00'},
-          {'title': '$code: Aplicações Práticas', 'duration': '12:00'},
-          {'title': 'Estudo de Caso com $code', 'duration': '8:00'},
+          {'title': AppLocalizations.of(context)!.stdVidIntro(code), 'duration': '10:00'},
+          {'title': AppLocalizations.of(context)!.stdVidPractical(code), 'duration': '12:00'},
+          {'title': AppLocalizations.of(context)!.stdVidCaseWith(code), 'duration': '8:00'},
         ];
   }
 
@@ -466,7 +467,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(5)),
-                    child: const Text('NOVO', style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                    child: Text(AppLocalizations.of(context)!.stdNew, style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 1)),
                   ),
                 ),
               Positioned(

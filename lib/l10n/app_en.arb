@@ -1584,5 +1584,65 @@
         "type": "int"
       }
     }
+  },
+  "stdErrorLoading": "Error loading standard",
+  "stdUnknownError": "Unknown error",
+  "stdSafety": "Safety",
+  "stdTechnicalStandard": "Technical Standard",
+  "stdVideosAbout": "Videos about {code}",
+  "@stdVideosAbout": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "stdNetflixTagline": "The Netflix of Electrical Engineering",
+  "stdPowerplayDesc": "Access hundreds of classes, case studies and exclusive content on technical standards and engineering — all in one place.",
+  "stdFeatVideoClasses": "Video Classes",
+  "stdFeatRealCases": "Real Cases",
+  "stdFeatOffline": "Offline",
+  "stdTrending": "TRENDING",
+  "stdRecommended": "Recommended for you",
+  "stdAccessPowerplay": "ACCESS POWERPLAY",
+  "stdMaybeLater": "Maybe later",
+  "stdNew": "NEW",
+  "stdVidPanelsAdv": "NR-10: Advanced Industrial Electrical Panels",
+  "stdVidHvInspection": "Case Study: High-Voltage Inspection",
+  "stdVidNr35Epi": "NR-35: Personal Protective Equipment",
+  "stdVidNr10Fundamentals": "NR-10: Electrical Safety Fundamentals",
+  "stdVidLoto": "Case Study: LOTO in Substations",
+  "stdVidNr35Heights": "NR-35: Work at Heights — Fundamentals",
+  "stdVidNr35Anchorage": "NR-35: PPE and Correct Anchorage",
+  "stdVidFallStructure": "Case Study: Fall from Metal Structure",
+  "stdVidNr12Machines": "NR-12: Industrial Machine Safety",
+  "stdVidNr12Risk": "NR-12: Risk Zones and Guards",
+  "stdVidPress": "Case Study: Hydraulic Press Accident",
+  "stdVidNr33Concepts": "NR-33: Confined Space — Concepts",
+  "stdVidNr33Entry": "NR-33: Safe Entry Procedures",
+  "stdVidConfinedRescue": "Simulation: Confined Space Rescue",
+  "stdVidIntro": "{code}: Introduction to the Standard",
+  "@stdVidIntro": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "stdVidPractical": "{code}: Practical Applications",
+  "@stdVidPractical": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "stdVidCaseWith": "Case Study with {code}",
+  "@stdVidCaseWith": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
   }
 }

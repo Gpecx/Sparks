@@ -384,7 +384,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
       // Falha de rede: segue o jogo (o placar virá pelo snapshot).
       setState(() => _submitting = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.duelSendFailed)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.duelSendFailed)),
       );
     }
     _advanceAfterDelay();
@@ -593,7 +593,7 @@ class _DuelScreenState extends State<DuelScreen> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

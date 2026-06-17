@@ -2200,5 +2200,65 @@
         "type": "int"
       }
     }
+  },
+  "stdErrorLoading": "Erro ao carregar norma",
+  "stdUnknownError": "Erro desconhecido",
+  "stdSafety": "Segurança",
+  "stdTechnicalStandard": "Norma Técnica",
+  "stdVideosAbout": "Vídeos sobre {code}",
+  "@stdVideosAbout": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "stdNetflixTagline": "O Netflix da Engenharia Elétrica",
+  "stdPowerplayDesc": "Acesse centenas de aulas, estudos de caso e conteúdos exclusivos sobre normas técnicas e engenharia — tudo num só lugar.",
+  "stdFeatVideoClasses": "Vídeo Aulas",
+  "stdFeatRealCases": "Casos Reais",
+  "stdFeatOffline": "Offline",
+  "stdTrending": "EM ALTA",
+  "stdRecommended": "Recomendados para você",
+  "stdAccessPowerplay": "ACESSAR POWERPLAY",
+  "stdMaybeLater": "Talvez mais tarde",
+  "stdNew": "NOVO",
+  "stdVidPanelsAdv": "NR-10: Painéis Elétricos Industriais Avançados",
+  "stdVidHvInspection": "Estudo de Caso: Inspeção em Alta Tensão",
+  "stdVidNr35Epi": "NR-35: Equipamentos de Proteção Individual",
+  "stdVidNr10Fundamentals": "NR-10: Fundamentos de Segurança Elétrica",
+  "stdVidLoto": "Estudo de Caso: LOTO em Subestações",
+  "stdVidNr35Heights": "NR-35: Trabalho em Altura — Fundamentos",
+  "stdVidNr35Anchorage": "NR-35: EPIs e Ancoragem Correta",
+  "stdVidFallStructure": "Estudo de Caso: Queda em Estrutura Metálica",
+  "stdVidNr12Machines": "NR-12: Segurança em Máquinas Industriais",
+  "stdVidNr12Risk": "NR-12: Zonas de Risco e Proteções",
+  "stdVidPress": "Estudo de Caso: Acidente em Prensa Hidráulica",
+  "stdVidNr33Concepts": "NR-33: Espaço Confinado — Conceitos",
+  "stdVidNr33Entry": "NR-33: Procedimentos de Entrada Segura",
+  "stdVidConfinedRescue": "Simulação: Resgate em Ambiente Confinado",
+  "stdVidIntro": "{code}: Introdução à Norma",
+  "@stdVidIntro": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "stdVidPractical": "{code}: Aplicações Práticas",
+  "@stdVidPractical": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "stdVidCaseWith": "Estudo de Caso com {code}",
+  "@stdVidCaseWith": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
   }
 }
