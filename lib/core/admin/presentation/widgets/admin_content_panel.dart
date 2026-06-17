@@ -258,7 +258,7 @@ class _TrailCardState extends ConsumerState<_TrailCard> {
         initialValues: Map<String, String>.from(merged),
         onSave: (d) async {
           ctrl.update(AdminEntity.trails, widget.trailDoc.id, d)
-              .catchError((e) => debugPrint('Erro update trail: $e'));
+              .then((_) {}, onError: (e) => debugPrint('Erro update trail: $e'));
           return '';
         },
       ),
@@ -533,7 +533,7 @@ class _QuestionsSection extends StatelessWidget {
             'order': nextOrder,
             'isActive': false,
             FS.createdAt: FieldValue.serverTimestamp(),
-          }).catchError((e) => debugPrint('Erro add question: $e'));
+          }).then((_) {}, onError: (e) => debugPrint('Erro add question: $e'));
           return 'ok';
         },
       ),
@@ -752,7 +752,7 @@ class _AddLessonButton extends StatelessWidget {
               'order': orderVal,
               FS.createdAt: FieldValue.serverTimestamp(),
               FS.updatedAt: FieldValue.serverTimestamp(),
-            }).catchError((e) => debugPrint('Erro add lesson: $e'));
+            }).then((_) {}, onError: (e) => debugPrint('Erro add lesson: $e'));
             return 'ok';
           },
         ),

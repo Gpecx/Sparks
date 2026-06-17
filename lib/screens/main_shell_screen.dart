@@ -62,7 +62,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
     }
   }
 
-  /// Abre o menu com as opções secundárias (Ranking, Ferramentas, Loja).
+  /// Abre o menu com as opções secundárias (Perfil, Ranking, Loja).
   void _showMoreMenu() {
     final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet<void>(
@@ -110,11 +110,11 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              tile(Icons.emoji_events, l10n.navRanking,
-                  l10n.moreMenuRankingSubtitle, 4),
-              tile(Icons.calculate, l10n.navTools,
-                  l10n.moreMenuToolsSubtitle, 3),
-              tile(Icons.store, l10n.navStore, l10n.moreMenuStoreSubtitle, 6),
+              tile(Icons.person, 'Perfil',
+                  'Sua conta e configurações', 5),
+              tile(Icons.emoji_events, 'Ranking',
+                  'Classificação geral', 4),
+              tile(Icons.store, 'Loja', 'Loja de itens', 6),
               const SizedBox(height: 8),
             ],
           ),
@@ -306,7 +306,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
 
         // Layout Mobile — nav: Início · Estudos · (FAB Categorias) · Perfil · Menu
         // Índices: 0 Início · 1 Categorias · 2 Estudos · 3 Ferramentas · 4 Ranking · 5 Perfil · 6 Loja
-        const moreIndexes = [3, 4, 6]; // Ranking, Ferramentas e Loja no menu "..."
+        const moreIndexes = [5, 4, 6]; // Perfil, Ranking e Loja no menu "..."
         final isMoreSelected = moreIndexes.contains(_currentIndex);
 
         return Semantics(
@@ -359,11 +359,11 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                       ),
                       const SizedBox(width: 56), // espaço do FAB central
                       _NavItem(
-                        icon: Icons.person_outline,
-                        activeIcon: Icons.person,
-                        label: l10n.navProfile,
-                        selected: _currentIndex == 5,
-                        onTap: () => setState(() => _currentIndex = 5),
+                        icon: Icons.calculate_outlined,
+                        activeIcon: Icons.calculate,
+                        label: 'Ferramentas',
+                        selected: _currentIndex == 3,
+                        onTap: () => setState(() => _currentIndex = 3),
                       ),
                       _NavItem(
                         icon: Icons.more_horiz,

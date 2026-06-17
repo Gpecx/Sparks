@@ -117,14 +117,25 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         shape: BoxShape.circle,
                         border: Border.all(color: AppColors.accent, width: 2),
                       ),
-                      child: CircleAvatar(
-                        backgroundColor: AppColors.surface,
-                        backgroundImage: photoUrl != null
-                            ? NetworkImage(photoUrl)
-                            : null,
-                        child: photoUrl == null
-                            ? const Icon(Icons.person, color: AppColors.accent, size: 30)
-                            : null,
+                      child: ClipOval(
+                        child: photoUrl != null
+                            ? Image.network(
+                                photoUrl,
+                                fit: BoxFit.cover,
+                                width: 56,
+                                height: 56,
+                                webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                                errorBuilder: (_, _, _) => Container(
+                                  color: AppColors.surface,
+                                  alignment: Alignment.center,
+                                  child: const Icon(Icons.person, color: AppColors.accent, size: 30),
+                                ),
+                              )
+                            : Container(
+                                color: AppColors.surface,
+                                alignment: Alignment.center,
+                                child: const Icon(Icons.person, color: AppColors.accent, size: 30),
+                              ),
                       ),
                     ),
                     const SizedBox(width: 14),
@@ -355,7 +366,17 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   border: Border.all(color: AppColors.cardBorder),
                 ),
                 child: photoUrl != null
-                    ? ClipOval(child: Image.network(photoUrl, fit: BoxFit.cover))
+                    ? ClipOval(
+                        child: Image.network(
+                          photoUrl,
+                          fit: BoxFit.cover,
+                          width: 46,
+                          height: 46,
+                          webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                          errorBuilder: (_, _, _) =>
+                              const Icon(Icons.person, color: AppColors.textSecondary, size: 24),
+                        ),
+                      )
                     : const Icon(Icons.person, color: AppColors.textSecondary, size: 24),
               ),
             ),
@@ -880,65 +901,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 13),
               ),
             ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showDailyChallengeModal(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppColors.card,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5)),
-        ),
-        title: Row(
-          children: [
-            Icon(Icons.timer, color: AppColors.primary),
-            SizedBox(width: 10),
-            Text(AppLocalizations.of(context)!.dailyChallengeTitle, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18)),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.dailyChallengeDescription,
-              style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: AppColors.inputBackground, borderRadius: BorderRadius.circular(12)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(children: [Text(AppLocalizations.of(context)!.rewardXp(50), style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.w700)), Text(AppLocalizations.of(context)!.rewardLabel, style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
-                  Column(children: [Text(AppLocalizations.of(context)!.estimatedTime(3), style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700)), Text(AppLocalizations.of(context)!.estimatedTimeLabel, style: TextStyle(color: AppColors.textMuted, fontSize: 10))]),
-                ],
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: Text(AppLocalizations.of(context)!.notNowButton, style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.w700)),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            ),
-            onPressed: () {
-              Navigator.pop(ctx);
-              SparkSnack.info(context, AppLocalizations.of(context)!.startingDailyChallenge);
-            },
-            child: Text(AppLocalizations.of(context)!.startChallengeButton, style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700)),
           ),
         ],
       ),

@@ -18,7 +18,7 @@
  *                        jogadores (única via de escrita de ELO de duelo).
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cleanupOldRankings = exports.syncPublicProfile = exports.getBotDuelQuestions = exports.finalizeDuel = exports.submitDuelAnswer = exports.leaveDuelQueue = exports.joinDuelQueue = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.processTrialExpiry = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = exports.onUserCreated = void 0;
+exports.getBotDuelQuestions = exports.finalizeDuel = exports.submitDuelAnswer = exports.leaveDuelQueue = exports.joinDuelQueue = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.grantAdminPremium = exports.processTrialExpiry = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = void 0;
 const admin = require("firebase-admin");
 const firestore_1 = require("firebase-admin/firestore");
 const crypto = require("crypto");
@@ -1246,6 +1246,32 @@ exports.processTrialExpiry = (0, scheduler_1.onSchedule)({
         v2_1.logger.info(`[processTrialExpiry] ${compSnap.size} acesso(s)-cortesia expirado(s).`);
     }
 });
+// ────────────────────────────────────────────────────────────────
+// grantAdminPremium — todo usuário com role=='admin' recebe assinatura
+// premium automaticamente. Dispara em qualquer escrita no doc do usuário;
+// ao detectar role=='admin' sem premium, concede isPremium + plano premium.
+// Server-controlled: roda com Admin SDK, ignora as Firestore Rules.
+// ────────────────────────────────────────────────────────────────
+exports.grantAdminPremium = (0, firestore_2.onDocumentWritten)({ document: "users/{uid}", region: "southamerica-east1" }, async (event) => {
+    var _a;
+    const after = (_a = event.data) === null || _a === void 0 ? void 0 : _a.after;
+    if (!(after === null || after === void 0 ? void 0 : after.exists))
+        return; // doc deletado
+    const d = after.data();
+    if (d["role"] !== "admin")
+        return; // só admins
+    const updates = {};
+    if (d["isPremium"] !== true)
+        updates["isPremium"] = true;
+    if (d["subscriptionPlanId"] == null)
+        updates["subscriptionPlanId"] = "premium";
+    // Nada a alterar ⇒ não escreve (evita loop de re-disparo do trigger).
+    if (Object.keys(updates).length === 0)
+        return;
+    updates["updatedAt"] = admin.firestore.FieldValue.serverTimestamp();
+    await after.ref.update(updates);
+    v2_1.logger.info(`[grantAdminPremium] Premium concedido ao admin ${event.params.uid}.`);
+});
 exports.checkDeviceTrust = (0, https_1.onCall)({
     enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
@@ -1748,6 +1774,19 @@ exports.joinDuelQueue = (0, https_1.onCall)({
 });
 // ── 2. leaveDuelQueue ───────────────────────────────────────────────
 exports.leaveDuelQueue = (0, https_1.onCall)({
+// ────────────────────────────────────────────────────────────────
+// cleanupOldRankings — Agendada semanalmente. Remove subcoleções de
+// semanas antigas em rankings/weekly para o storage não crescer
+// indefinidamente (o addXp cria uma subcoleção nova a cada semana e
+// nada as apagava). Mantém as últimas RANKING_WEEKS_TO_KEEP semanas.
+// O weekKey tem formato "YYYY-Www" (zero-padded), então a ordenação
+// lexicográfica decrescente equivale à cronológica.
+// (Recuperado: foi removido por engano no merge da PR #19/spark-admin.)
+// ────────────────────────────────────────────────────────────────
+const RANKING_WEEKS_TO_KEEP = 8;
+exports.cleanupOldRankings = (0, scheduler_1.onSchedule)({
+    schedule: "every monday 04:00",
+    timeZone: "America/Sao_Paulo",
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -1957,113 +1996,5 @@ exports.getBotDuelQuestions = (0, https_1.onCall)({
         throw new https_1.HttpsError("failed-precondition", "Não há perguntas cadastradas para o duelo.");
     }
     return { questions: pickRandomDuelQuestions(pool, count) };
-});
-// ────────────────────────────────────────────────────────────────
-// syncPublicProfile — Espelha campos PÚBLICOS de users/{uid} em
-// public_profiles/{uid} (LGPD: /users é privado; o espelho público
-// não carrega e-mail, dados de pagamento nem tokens).
-// As Security Rules deixam public_profiles como write:false (só o
-// servidor escreve), e este trigger é o ÚNICO escritor. Sem ele a
-// coleção fica vazia e o ranking all-time / telas de perfil quebram.
-// (Recuperado: foi removido por engano no merge da PR #19/spark-admin.)
-// ────────────────────────────────────────────────────────────────
-/** Campos espelhados em public_profiles. Qualquer outro fica fora (PII). */
-const PUBLIC_PROFILE_FIELDS = [
-    "displayName",
-    "photoUrl",
-    "profession",
-    "xp",
-    "level",
-    "tensionLevel",
-    "weeklyXp",
-    "monthlyXp",
-    "eloRating",
-    "clanId",
-    "clanName",
-    "unlockedBadgeIds",
-    // Módulo que o usuário está estudando agora. Necessário para a "presença
-    // do clã" (learning_path_screen consulta public_profiles por clanId +
-    // currentModuleId). Sem espelhar este campo, a query sempre vinha vazia.
-    "currentModuleId",
-];
-/** Extrai apenas os campos públicos de um doc de usuário. */
-function pickPublicFields(data) {
-    const out = {};
-    for (const key of PUBLIC_PROFILE_FIELDS) {
-        if (data[key] !== undefined)
-            out[key] = data[key];
-    }
-    return out;
-}
-exports.syncPublicProfile = (0, firestore_2.onDocumentWritten)({
-    document: "users/{uid}",
-    // Este projeto usa um banco Firestore NOMEADO ("default"), não o
-    // "(default)". Sem declarar isto o deploy do trigger falha com 404
-    // ("database '(default)' does not exist") e o gatilho nunca dispara.
-    database: "default",
-    region: "southamerica-east1",
-    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
-}, async (event) => {
-    var _a, _b, _c, _d, _e, _f, _g;
-    const uid = event.params.uid;
-    const publicRef = db.collection("public_profiles").doc(uid);
-    const after = (_a = event.data) === null || _a === void 0 ? void 0 : _a.after;
-    // Documento de usuário foi apagado → remove o espelho público.
-    // (deleteAccount já remove explicitamente, mas isto cobre exclusões diretas.)
-    if (!after || !after.exists) {
-        await publicRef.delete().catch(() => { });
-        v2_1.logger.info(`[syncPublicProfile] uid=${uid} removido (user apagado).`);
-        return;
-    }
-    const afterData = (_b = after.data()) !== null && _b !== void 0 ? _b : {};
-    const newPublic = pickPublicFields(afterData);
-    // Evita escritas desnecessárias (e loops de custo): só grava se algum
-    // campo público realmente mudou em relação ao estado anterior.
-    const beforeData = (_e = (_d = (_c = event.data) === null || _c === void 0 ? void 0 : _c.before) === null || _d === void 0 ? void 0 : _d.data()) !== null && _e !== void 0 ? _e : {};
-    const oldPublic = pickPublicFields(beforeData);
-    const changed = PUBLIC_PROFILE_FIELDS.some((k) => JSON.stringify(oldPublic[k]) !== JSON.stringify(newPublic[k]));
-    if (((_g = (_f = event.data) === null || _f === void 0 ? void 0 : _f.before) === null || _g === void 0 ? void 0 : _g.exists) && !changed) {
-        return;
-    }
-    newPublic["uid"] = uid;
-    newPublic["updatedAt"] = admin.firestore.FieldValue.serverTimestamp();
-    await publicRef.set(newPublic, { merge: true });
-    v2_1.logger.info(`[syncPublicProfile] uid=${uid} espelho público atualizado.`);
-});
-// ────────────────────────────────────────────────────────────────
-// cleanupOldRankings — Agendada semanalmente. Remove subcoleções de
-// semanas antigas em rankings/weekly para o storage não crescer
-// indefinidamente (o addXp cria uma subcoleção nova a cada semana e
-// nada as apagava). Mantém as últimas RANKING_WEEKS_TO_KEEP semanas.
-// O weekKey tem formato "YYYY-Www" (zero-padded), então a ordenação
-// lexicográfica decrescente equivale à cronológica.
-// (Recuperado: foi removido por engano no merge da PR #19/spark-admin.)
-// ────────────────────────────────────────────────────────────────
-const RANKING_WEEKS_TO_KEEP = 8;
-exports.cleanupOldRankings = (0, scheduler_1.onSchedule)({
-    schedule: "every monday 04:00",
-    timeZone: "America/Sao_Paulo",
-    region: "southamerica-east1",
-    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
-}, async () => {
-    const weeklyDoc = db.collection("rankings").doc("weekly");
-    const weekCols = await weeklyDoc.listCollections();
-    if (weekCols.length <= RANKING_WEEKS_TO_KEEP) {
-        v2_1.logger.info(`[cleanupOldRankings] ${weekCols.length} semana(s); nada a limpar.`);
-        return;
-    }
-    // Ordena por ID (weekKey) decrescente e mantém só as mais recentes.
-    const sorted = weekCols.sort((a, b) => (a.id < b.id ? 1 : -1));
-    const toDelete = sorted.slice(RANKING_WEEKS_TO_KEEP);
-    for (const col of toDelete) {
-        try {
-            await db.recursiveDelete(col);
-            v2_1.logger.info(`[cleanupOldRankings] semana ${col.id} removida.`);
-        }
-        catch (e) {
-            v2_1.logger.warn(`[cleanupOldRankings] falha ao remover ${col.id}:`, e);
-        }
-    }
-    v2_1.logger.info(`[cleanupOldRankings] ${toDelete.length} semana(s) antiga(s) removida(s).`);
 });
 //# sourceMappingURL=index.js.map

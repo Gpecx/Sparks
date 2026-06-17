@@ -1,0 +1,20 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Foto de perfil: cada usuário só pode escrever a sua própria.
+    // Leitura pública (avatares aparecem em rankings, clãs, etc.).
+    match /avatars/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null
+                   && fileName.matches(request.auth.uid + '\\.(jpg|png)')
+                   && request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/(jpeg|png)');
+    }
+
+    // Tudo o mais é bloqueado por padrão.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

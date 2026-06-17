@@ -16,7 +16,6 @@ void main() {
         'displayName': 'Test User',
         'email': 'test@example.com',
         'role': 'Técnico',
-        'sparkPoints': 100,
         'xp': 500,
         'level': 2,
         'tensionLevel': 'BT',
@@ -41,7 +40,6 @@ void main() {
       expect(user.displayName, 'Test User');
       expect(user.email, 'test@example.com');
       expect(user.role, 'Técnico');
-      expect(user.sparkPoints, 100);
       expect(user.xp, 500);
       expect(user.level, 2);
       expect(user.currentStreak, 5);
@@ -55,7 +53,6 @@ void main() {
         displayName: 'Test User 2',
         email: 'test2@test.com',
         role: 'Admin',
-        sparkPoints: 0,
         xp: 0,
         level: 1,
         currentStreak: 0,

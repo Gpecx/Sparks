@@ -9,7 +9,6 @@ import 'package:spark_app/widgets/spark_card.dart';
 import 'package:spark_app/widgets/spark_skeleton.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
-import 'package:spark_app/services/tournament_service.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -63,7 +62,6 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   int _selectedTab = 0; // 0 = Global, 1 = Clã, 2 = Torneio
-  final _tournament = TournamentService();
   final _db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
 
   // Dados do Firebase
@@ -439,6 +437,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       final clanColor = _parseColor(player.primaryColor);
       avatar = Container(
         color: clanColor.withValues(alpha: 0.2),
+        // ignore: non_const_argument_for_const_parameter — ícone dinâmico do clã (build usa --no-tree-shake-icons)
         child: Icon(IconData(player.iconCodePoint, fontFamily: 'MaterialIcons'), color: clanColor, size: 24),
       );
     } else {
@@ -541,6 +540,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       final clanColor = _parseColor(player.primaryColor);
       avatar = Container(
         color: clanColor.withValues(alpha: 0.2),
+        // ignore: non_const_argument_for_const_parameter — ícone dinâmico do clã (build usa --no-tree-shake-icons)
         child: Icon(IconData(player.iconCodePoint, fontFamily: 'MaterialIcons'), color: clanColor, size: 20),
       );
     } else {

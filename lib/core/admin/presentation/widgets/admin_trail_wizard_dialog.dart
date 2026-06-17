@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../admin_controller.dart';
 import '../../../../theme/app_theme.dart';
-import 'spark_admin_widgets.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  TRAIL WIZARD DIALOG

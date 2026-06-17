@@ -3,9 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
@@ -19,7 +16,6 @@ import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/services/access_control_service.dart';
 import 'package:spark_app/widgets/plan_widgets.dart';
 import 'package:spark_app/models/badge_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  PROFILE SCREEN — Versão com Firebase
@@ -183,13 +179,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             decoration: const BoxDecoration(color: AppColors.card, shape: BoxShape.circle),
                             clipBehavior: Clip.antiAlias,
                             child: user?.photoUrl != null
-                                ? CachedNetworkImage(
-                                    imageUrl: user!.photoUrl!,
+                                ? Image.network(
+                                    user!.photoUrl!,
                                     fit: BoxFit.cover,
-                                    placeholder: (context, url) => const Center(
-                                      child: CircularProgressIndicator(color: AppColors.primary),
-                                    ),
-                                    errorWidget: (context, url, error) =>
+                                    width: 102,
+                                    height: 102,
+                                    webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                                    loadingBuilder: (context, child, progress) =>
+                                        progress == null
+                                            ? child
+                                            : const Center(
+                                                child: CircularProgressIndicator(color: AppColors.primary),
+                                              ),
+                                    errorBuilder: (context, error, stack) =>
                                         const Icon(Icons.person, color: AppColors.primary, size: 52),
                                   )
                                 : const Icon(Icons.person, color: AppColors.primary, size: 52),

@@ -1,5 +1,7 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
@@ -21,6 +23,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   bool _saving = false;
   String? _uid;
 
+  // Foto de perfil
+  final ImagePicker _picker = ImagePicker();
+  String? _photoUrl; // URL atual (Firestore)
+  Uint8List? _pickedPreview; // pré-visualização local logo após escolher
+  bool _uploadingPhoto = false;
+
   @override
   void initState() {
     super.initState();
@@ -37,8 +45,51 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       if (mounted && u != null) {
         setState(() {
           _professionCtrl.text = u.profession ?? '';
+          _photoUrl = u.photoUrl;
         });
       }
+    }
+  }
+
+  /// Abre a galeria do celular, deixa o usuário escolher uma imagem e
+  /// faz o upload para o Firebase Storage, atualizando a foto de perfil.
+  Future<void> _pickPhoto() async {
+    if (_uploadingPhoto) return;
+    try {
+      final XFile? picked = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1024,
+        maxHeight: 1024,
+        imageQuality: 85,
+      );
+      if (picked == null) return; // usuário cancelou
+
+      final bytes = await picked.readAsBytes();
+      if (!mounted) return;
+      setState(() {
+        _pickedPreview = bytes;
+        _uploadingPhoto = true;
+      });
+
+      final isPng = picked.name.toLowerCase().endsWith('.png');
+      final url = await UserService().uploadProfilePhoto(
+        bytes,
+        contentType: isPng ? 'image/png' : 'image/jpeg',
+      );
+
+      if (!mounted) return;
+      setState(() {
+        _photoUrl = url;
+        _uploadingPhoto = false;
+      });
+      SparkSnack.success(context, 'Foto de perfil atualizada!');
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _uploadingPhoto = false;
+        _pickedPreview = null;
+      });
+      SparkSnack.error(context, 'Erro ao enviar a foto: $e');
     }
   }
 
@@ -78,31 +129,66 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Widget _buildAvatar() {
-    return Stack(
-      children: [
-        Container(
-          width: 100,
-          height: 100,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: AppColors.primary, width: 3),
-            color: AppColors.card,
-          ),
-          child: const Icon(Icons.person, color: AppColors.textMuted, size: 48),
-        ),
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-              color: AppColors.primary,
+    Widget avatarContent;
+    if (_pickedPreview != null) {
+      avatarContent = Image.memory(_pickedPreview!, fit: BoxFit.cover, width: 100, height: 100);
+    } else if (_photoUrl != null && _photoUrl!.isNotEmpty) {
+      avatarContent = Image.network(
+        _photoUrl!,
+        fit: BoxFit.cover,
+        width: 100,
+        height: 100,
+        webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+        loadingBuilder: (_, child, progress) => progress == null
+            ? child
+            : const Center(child: CircularProgressIndicator(color: AppColors.primary)),
+        errorBuilder: (_, _, _) => const Icon(Icons.person, color: AppColors.textMuted, size: 48),
+      );
+    } else {
+      avatarContent = const Icon(Icons.person, color: AppColors.textMuted, size: 48);
+    }
+
+    return GestureDetector(
+      onTap: _uploadingPhoto ? null : _pickPhoto,
+      child: Stack(
+        children: [
+          Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
+              border: Border.all(color: AppColors.primary, width: 3),
+              color: AppColors.card,
             ),
-            child: const Icon(Icons.camera_alt, color: Colors.white, size: 16),
+            clipBehavior: Clip.antiAlias,
+            child: Center(child: avatarContent),
           ),
-        ),
-      ],
+          if (_uploadingPhoto)
+            Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.black.withValues(alpha: 0.5),
+              ),
+              child: const Center(
+                child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3),
+              ),
+            ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                color: AppColors.primary,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.camera_alt, color: Colors.white, size: 16),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
