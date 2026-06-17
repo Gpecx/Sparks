@@ -43,6 +43,10 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
   int _currentIndex = 0;
   int _selectedOption = -1;
   bool _hasAnswered = false;
+  // Já respondi a ÚLTIMA questão (mesmo durante os 2s antes de ir para
+  // waitingResult). Sair daqui em diante NÃO é abandono — minhas respostas
+  // já foram para o servidor; o oponente apura o resultado normalmente.
+  bool _finishedAnswering = false;
   bool _opponentAnswered = false;
   int _revealCorrect = -1; // índice correto revelado após responder
   bool _submitting = false;
@@ -50,6 +54,7 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
   // Resultado
   int _eloChange = 0;
   String? _winnerId;
+  bool _oppLeft = false; // o oponente saiu no meio (vencemos por W.O.)
 
   String get _uid => _userService.uid;
   double get _myTotal => _myScores.fold(0.0, (s, r) => s + r.score);
@@ -203,6 +208,16 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
     // Alerta "Oponente respondeu!" quando o oponente passa do índice atual.
     if (_oppScores.length > _currentIndex && !_hasAnswered) {
       _triggerOpponentAlert();
+    }
+
+    // O oponente abandonou o duelo → vencemos por W.O.
+    if (match.opponentLeft(_uid) && !_oppLeft) {
+      _oppLeft = true;
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Seu oponente saiu do duelo. Você venceu! ⚡')),
+        );
+      }
     }
 
     // Servidor encerrou o duelo → mostra resultado.
@@ -394,6 +409,11 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
   }
 
   void _advanceAfterDelay() {
+    // Marca já AQUI (antes dos 2s): se o jogador sair durante a animação de
+    // revelação da última questão, não conta como abandono/derrota.
+    if (!_isBot && _currentIndex + 1 >= _questions.length) {
+      _finishedAnswering = true;
+    }
     Future.delayed(const Duration(seconds: 2), () {
       if (!mounted) return;
       if (_currentIndex + 1 >= _questions.length) {
@@ -460,6 +480,8 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
 
   void _applyFinalResult(FinalizeResult res) {
     _abandonTimer?.cancel();
+    _tickTimer?.cancel();
+    _botOpponentTimer?.cancel();
     setState(() {
       _eloChange = res.eloChange;
       _winnerId = res.winnerId;
@@ -499,8 +521,22 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
     _botOpponentTimer?.cancel();
     _queueSub?.cancel();
     _matchSub?.cancel();
-    // Se ainda estava procurando, sai da fila.
-    if (_phase == _DuelPhase.searching) {
+    // Saiu NO MEIO de um duelo PvP (ainda respondendo) → abandona: o servidor
+    // encerra a partida dando a vitória (e o ELO) ao oponente que continuou.
+    // O `leaveDuel` também limpa as filas dos dois jogadores.
+    if (!_isBot &&
+        _matchId != null &&
+        _phase == _DuelPhase.playing &&
+        !_finishedAnswering) {
+      _matchService.leaveDuel(_matchId!);
+    } else if (!_isBot &&
+        (_phase == _DuelPhase.searching ||
+            _phase == _DuelPhase.waitingResult ||
+            _finishedAnswering)) {
+      // Procurando, ou já terminou as questões e só aguardava o resultado:
+      // não é abandono — só limpa o doc de fila. Sem isto, o `matchId` gravado
+      // na fila de quem esperava (player1) fica órfão e reabrir o PvP
+      // recolocaria o jogador na MESMA partida. best-effort.
       _matchService.leaveQueue();
     }
     super.dispose();
@@ -1245,7 +1281,10 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
                     Text(resultText, style: TextStyle(color: resultColor, fontSize: 32, fontWeight: FontWeight.w800, letterSpacing: 3)),
                     const SizedBox(height: 8),
                     Text(
-                      _isBot ? AppLocalizations.of(context)!.duelTrainingMatch : (won ? AppLocalizations.of(context)!.duelVictory : (draw ? AppLocalizations.of(context)!.duelDraw : AppLocalizations.of(context)!.duelDefeat)),
+                      _oppLeft
+                          ? 'Seu oponente saiu do duelo — vitória por W.O.! ⚡'
+                          : (_isBot ? AppLocalizations.of(context)!.duelTrainingMatch : (won ? AppLocalizations.of(context)!.duelVictory : (draw ? AppLocalizations.of(context)!.duelDraw : AppLocalizations.of(context)!.duelDefeat))),
+                      textAlign: TextAlign.center,
                       style: const TextStyle(color: AppColors.textSecondary, fontSize: 14, fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 10),
@@ -1342,10 +1381,12 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
       _currentIndex = 0;
       _selectedOption = -1;
       _hasAnswered = false;
+      _finishedAnswering = false;
       _opponentAnswered = false;
       _revealCorrect = -1;
       _eloChange = 0;
       _winnerId = null;
+      _oppLeft = false;
       _oppName = AppLocalizations.of(context)!.duelOpponent;
     });
     _bootstrap();
