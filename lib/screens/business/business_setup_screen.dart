@@ -89,7 +89,7 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
         title: Text(AppLocalizations.of(context)!.businessSetupSuccess,
             style: TextStyle(color: Colors.white)),
         content: Text(
-          AppLocalizations.of(context)!.bizContactSoon
+          AppLocalizations.of(context)!.bizContactSoon,
           style: TextStyle(color: AppColors.textSecondary),
         ),
         actions: [
@@ -123,7 +123,7 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
               children: [
                 Text(
-                  AppLocalizations.of(context)!.bizDesc
+                  AppLocalizations.of(context)!.bizDesc,
                   style: TextStyle(color: AppColors.textSecondary, height: 1.4),
                 ),
                 const SizedBox(height: 24),

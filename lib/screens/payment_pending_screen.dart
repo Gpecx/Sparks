@@ -391,7 +391,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
           const SizedBox(height: 8),
           if (widget.result.pixExpirationDate != null)
             Text(
-              AppLocalizations.of(context)!.paymentExpiresIn(widget.result.pixExpirationDate),
+              AppLocalizations.of(context)!.paymentExpiresIn(widget.result.pixExpirationDate ?? ''),
               style: const TextStyle(
                   color: AppColors.textMuted, fontSize: 11),
             ),
