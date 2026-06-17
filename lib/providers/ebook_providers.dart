@@ -19,6 +19,7 @@ typedef EbookArgs = ({String categoryId, String moduleId});
 final ebooksStreamProvider =
     StreamProvider.family<List<EbookModel>, EbookArgs>((ref, args) {
   final firestore = ref.watch(_firestoreProvider);
+  final lang = ref.watch(languageProvider).languageCode; // re-emite ao trocar idioma
   return firestore
       .collection(FS.categories)
       .doc(args.categoryId)
@@ -27,7 +28,6 @@ final ebooksStreamProvider =
       .collection(FS.ebooks)
       .snapshots()
       .map((snap) {
-        final lang = ref.read(languageProvider).languageCode;
         return snap.docs.map((d) => EbookModel.fromFirestore(d, lang: lang)).toList();
       });
 });
@@ -38,6 +38,7 @@ typedef ChapterArgs = ({String categoryId, String moduleId, String ebookId});
 final ebookChaptersStreamProvider =
     StreamProvider.family<List<EbookChapter>, ChapterArgs>((ref, args) {
   final firestore = ref.watch(_firestoreProvider);
+  final lang = ref.watch(languageProvider).languageCode; // re-emite ao trocar idioma
   return firestore
       .collection(FS.categories)
       .doc(args.categoryId)
@@ -48,7 +49,6 @@ final ebookChaptersStreamProvider =
       .collection(FS.chapters)
       .snapshots()
       .map((snap) {
-        final lang = ref.read(languageProvider).languageCode;
         final list =
             snap.docs.map((d) => EbookChapter.fromFirestore(d, lang: lang)).toList();
         list.sort((a, b) => a.order.compareTo(b.order));
@@ -78,7 +78,7 @@ final ebookChapterProvider =
       .doc(args.chapterId)
       .get();
   if (!doc.exists) return null;
-  final lang = ref.read(languageProvider).languageCode;
+  final lang = ref.watch(languageProvider).languageCode;
   return EbookChapter.fromFirestore(doc, lang: lang);
 });
 
