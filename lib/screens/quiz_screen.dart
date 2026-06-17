@@ -18,6 +18,7 @@ import 'package:spark_app/widgets/sparky_companion.dart';
 import 'package:spark_app/models/quiz_models.dart';
 import 'package:spark_app/providers/progress_provider.dart';
 import 'package:spark_app/providers/user_provider.dart';
+import 'package:spark_app/providers/language_provider.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final bool isEvaluation;
