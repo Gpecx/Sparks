@@ -240,7 +240,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
   Widget _buildCurveSelector() {
     return Semantics(
       button: true,
-      label: 'Curva selecionada: ${_curve.name}. Toque para trocar.',
+      label: AppLocalizations.of(context)!.a11yCurveSelectedTap(_curve.name),
       child: GestureDetector(
         onTap: _pickCurve,
         child: Container(
@@ -483,7 +483,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
           ),
           const SizedBox(height: 6),
           Semantics(
-            label: 'Tempo de atuação $secondsText, equivalente a $formatted',
+            label: AppLocalizations.of(context)!.a11yOperatingTime(secondsText, formatted),
             child: Text(
               secondsText,
               style: const TextStyle(
@@ -532,7 +532,7 @@ class _IdmtCurvesScreenState extends State<IdmtCurvesScreen> {
           AspectRatio(
             aspectRatio: 1.25,
             child: Semantics(
-              label: 'Gráfico log-log da curva ${_curve.name}',
+              label: AppLocalizations.of(context)!.a11yLogLogChart(_curve.name),
               child: CustomPaint(
                 painter: _TccPainter(
                   curve: _curve,

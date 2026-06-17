@@ -440,7 +440,7 @@ class _ResultsPanel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Semantics(
-        label: '${r.label}: módulo ${r.magnitudeText}, ângulo ${r.angleText} graus',
+        label: AppLocalizations.of(context)!.a11ySymResult(r.label, r.magnitudeText, r.angleText),
         child: Row(
           children: [
             Expanded(
@@ -467,7 +467,7 @@ class _ResultsPanel extends StatelessWidget {
             ),
             Semantics(
               button: true,
-              label: 'Copiar ${r.label}',
+              label: AppLocalizations.of(context)!.a11yCopy(r.label),
               child: IconButton(
                 icon: const Icon(Icons.copy_outlined,
                     color: AppColors.textMuted, size: 16),

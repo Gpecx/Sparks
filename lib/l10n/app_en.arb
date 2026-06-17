@@ -1941,5 +1941,102 @@
   "supportFaqQ3": "When do the weekly pacts reset?",
   "supportFaqA3": "Pacts reset every Monday at 00:00. Your progress is cleared and you can choose new pacts.",
   "supportFaqQ4": "How do I report content errors?",
-  "supportFaqA4": "Use the form below and select \"Content error\". Our team will review and fix it as soon as possible."
+  "supportFaqA4": "Use the form below and select \"Content error\". Our team will review and fix it as soon as possible.",
+  "a11yCopy": "Copy {label}",
+  "@a11yCopy": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yCurveTap": "Curve: {curve}. Tap to change.",
+  "@a11yCurveTap": {
+    "placeholders": {
+      "curve": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yCurveSelectedTap": "Selected curve: {curve}. Tap to change.",
+  "@a11yCurveSelectedTap": {
+    "placeholders": {
+      "curve": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yOperatingTime": "Operating time {seconds}, equivalent to {formatted}",
+  "@a11yOperatingTime": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      },
+      "formatted": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yLogLogChart": "Log-log chart of curve {curve}",
+  "@a11yLogLogChart": {
+    "placeholders": {
+      "curve": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yTransfKva": "Transformer {n} — kVA",
+  "@a11yTransfKva": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "a11ySymResult": "{label}: magnitude {mag}, angle {ang} degrees",
+  "@a11ySymResult": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "mag": {
+        "type": "String"
+      },
+      "ang": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yPrimaryNominal": "Nominal primary ({unit})",
+  "@a11yPrimaryNominal": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "a11ySecondaryNominal": "Nominal secondary ({unit})",
+  "@a11ySecondaryNominal": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yMeasuredPrimary": "Measured value on primary ({unit})",
+  "@a11yMeasuredPrimary": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yMeasuredSecondary": "Measured value on secondary ({unit})",
+  "@a11yMeasuredSecondary": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -2557,5 +2557,102 @@
   "supportFaqQ3": "Os pactos semanais resetam quando?",
   "supportFaqA3": "Os pactos resetam toda segunda-feira às 00:00. Seu progresso é zerado e você pode escolher novos pactos.",
   "supportFaqQ4": "Como entrar em contato para erros de conteúdo?",
-  "supportFaqA4": "Use o formulário abaixo e selecione \"Erro em conteúdo\". Nossa equipe vai revisar e corrigir o mais rápido possível."
+  "supportFaqA4": "Use o formulário abaixo e selecione \"Erro em conteúdo\". Nossa equipe vai revisar e corrigir o mais rápido possível.",
+  "a11yCopy": "Copiar {label}",
+  "@a11yCopy": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yCurveTap": "Curva: {curve}. Toque para trocar.",
+  "@a11yCurveTap": {
+    "placeholders": {
+      "curve": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yCurveSelectedTap": "Curva selecionada: {curve}. Toque para trocar.",
+  "@a11yCurveSelectedTap": {
+    "placeholders": {
+      "curve": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yOperatingTime": "Tempo de atuação {seconds}, equivalente a {formatted}",
+  "@a11yOperatingTime": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      },
+      "formatted": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yLogLogChart": "Gráfico log-log da curva {curve}",
+  "@a11yLogLogChart": {
+    "placeholders": {
+      "curve": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yTransfKva": "Trafo {n} — kVA",
+  "@a11yTransfKva": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "a11ySymResult": "{label}: módulo {mag}, ângulo {ang} graus",
+  "@a11ySymResult": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "mag": {
+        "type": "String"
+      },
+      "ang": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yPrimaryNominal": "Primário nominal ({unit})",
+  "@a11yPrimaryNominal": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "a11ySecondaryNominal": "Secundário nominal ({unit})",
+  "@a11ySecondaryNominal": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yMeasuredPrimary": "Valor medido no primário ({unit})",
+  "@a11yMeasuredPrimary": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yMeasuredSecondary": "Valor medido no secundário ({unit})",
+  "@a11yMeasuredSecondary": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  }
 }

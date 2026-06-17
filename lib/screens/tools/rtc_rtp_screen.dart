@@ -101,12 +101,12 @@ class _RtcRtpScreenState extends State<RtcRtpScreen> {
             ToolFieldRow(children: [
               ToolField(
                 controller: _primaryNom,
-                label: 'Primário nominal ($_unit)',
+                label: AppLocalizations.of(context)!.a11yPrimaryNominal(_unit),
                 semantic: 'Valor nominal no primário',
               ),
               ToolField(
                 controller: _secondaryNom,
-                label: 'Secundário nominal ($_unit)',
+                label: AppLocalizations.of(context)!.a11ySecondaryNominal(_unit),
                 semantic: 'Valor nominal no secundário',
               ),
             ]),
@@ -118,13 +118,13 @@ class _RtcRtpScreenState extends State<RtcRtpScreen> {
           children: [
             ToolField(
               controller: _primaryVal,
-              label: 'Valor medido no primário ($_unit)',
+              label: AppLocalizations.of(context)!.a11yMeasuredPrimary(_unit),
               semantic: 'Valor medido no primário',
             ),
             const SizedBox(height: 12),
             ToolField(
               controller: _secondaryVal,
-              label: 'Valor medido no secundário ($_unit)',
+              label: AppLocalizations.of(context)!.a11yMeasuredSecondary(_unit),
               semantic: 'Valor medido no secundário',
             ),
           ],

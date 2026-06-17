@@ -507,7 +507,7 @@ class _ResultsPanel extends StatelessWidget {
             ),
             Semantics(
               button: true,
-              label: 'Copiar ${r.label}',
+              label: AppLocalizations.of(context)!.a11yCopy(r.label),
               child: IconButton(
                 icon: const Icon(Icons.copy_outlined,
                     color: AppColors.textMuted, size: 16),

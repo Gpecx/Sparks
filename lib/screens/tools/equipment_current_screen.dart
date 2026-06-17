@@ -419,7 +419,7 @@ class _EquipmentCurrentScreenState extends State<EquipmentCurrentScreen> {
                     Expanded(
                       child: ToolField(
                         controller: _bankRows[i].kva,
-                        label: 'Trafo ${i + 1} — kVA',
+                        label: AppLocalizations.of(context)!.a11yTransfKva(i + 1),
                       ),
                     ),
                     const SizedBox(width: 10),

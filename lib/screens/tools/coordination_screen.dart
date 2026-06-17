@@ -157,7 +157,7 @@ class _CoordinationScreenState extends State<CoordinationScreen> {
       children: [
         Semantics(
           button: true,
-          label: 'Curva: ${r.curve.name}. Toque para trocar.',
+          label: AppLocalizations.of(context)!.a11yCurveTap(r.curve.name),
           child: GestureDetector(
             onTap: () => _pick(r),
             child: Container(
