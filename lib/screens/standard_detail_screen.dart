@@ -305,7 +305,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
                 child: Text(AppLocalizations.of(context)!.stdTrending, style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
               ),
               const SizedBox(width: 10),
-              const Expanded(
+              Expanded(
                 child: Text(AppLocalizations.of(context)!.stdRecommended, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
               ),
             ],

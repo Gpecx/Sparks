@@ -1644,5 +1644,18 @@
         "type": "String"
       }
     }
-  }
+  },
+  "labInstruction1": "Inspect the outlet box.\nFind the 2 hidden hazards.",
+  "labInstruction2": "Inspect panel QD-01.\nMind the conductor colors.",
+  "labInstruction3": "Inspect the industrial panel.\n3 non-conformities present.",
+  "labInspectionDone": "✓ Inspection complete! +50 XP",
+  "labRisk1": "⚡ HAZARD · Stripped ground wire — exposed copper without green/yellow insulation.",
+  "labRisk2": "⚠ STANDARD · Outlet without child protection (NBR 14136). Exposed opening.",
+  "labRisk3": "⚡ CRITICAL · Breaker C3 TRIPPED. Root cause not investigated — reconnection prohibited.",
+  "labRisk4": "⚡ DANGER · LIVE wire connected to the NEUTRAL bar. Polarity reversal — shock risk even with the breaker off.",
+  "labRisk5": "⚡ CRITICAL · Thermal relay TRIPPED without authorized reset. Motor with overload history.",
+  "labRisk6": "⚠ HAZARD · Cable over a metal edge without a grommet. Insulation will be progressively cut.",
+  "labRisk7": "⚠ STANDARD · Missing cabinet screw. IP protection rating compromised.",
+  "labKeepSearching": "// All good here. Keep searching...",
+  "labCompleted": "🎉 Lab Complete! +150 XP"
 }

@@ -2260,5 +2260,18 @@
         "type": "String"
       }
     }
-  }
+  },
+  "labInstruction1": "Inspecione a caixa de tomada.\nEncontre os 2 riscos ocultos.",
+  "labInstruction2": "Inspecione o Quadro QD-01.\nAtenção às cores dos condutores.",
+  "labInstruction3": "Inspecione o painel industrial.\n3 não-conformidades presentes.",
+  "labInspectionDone": "✓ Inspeção concluída! +50 XP",
+  "labRisk1": "⚡ RISCO · Fio terra desencapado — cobre exposto sem isolamento verde/amarelo.",
+  "labRisk2": "⚠ NORMA · Tomada sem proteção infantil (NBR 14136). Abertura exposta.",
+  "labRisk3": "⚡ CRÍTICO · Disjuntor C3 em TRIP. Causa raiz não investigada — reconexão proibida.",
+  "labRisk4": "⚡ PERIGO · Fio FASE ligado na barra NEUTRO. Inversão de polaridade — risco de choque com disjuntor desligado.",
+  "labRisk5": "⚡ CRÍTICO · Relé térmico em TRIP sem reset autorizado. Motor com histórico de sobrecarga.",
+  "labRisk6": "⚠ RISCO · Cabo elétrico sobre borda metálica sem passa-fio. Isolamento sofrerá corte progressivo.",
+  "labRisk7": "⚠ NORMA · Parafuso ausente no gabinete. Grau de proteção IP comprometido.",
+  "labKeepSearching": "// Tudo certo por aqui. Continue procurando...",
+  "labCompleted": "🎉 Laboratório Concluído! +150 XP"
 }
