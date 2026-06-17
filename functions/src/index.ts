@@ -1730,7 +1730,7 @@ export const processTrialExpiry = onSchedule(
 // Server-controlled: roda com Admin SDK, ignora as Firestore Rules.
 // ────────────────────────────────────────────────────────────────
 export const grantAdminPremium = onDocumentWritten(
-  { document: "users/{uid}", region: "southamerica-east1" },
+  { document: "users/{uid}", region: "southamerica-east1", database: "default" },
   async (event) => {
     const after = event.data?.after;
     if (!after?.exists) return; // doc deletado
@@ -2257,6 +2257,15 @@ interface JoinQueueResult {
 
 class OpponentTakenError extends Error {}
 
+/** Lançada quando, dentro da transação de pareamento, descobrimos que o
+ *  PRÓPRIO iniciador já foi pareado por outro jogador. Evita criar uma
+ *  segunda partida (duplo-pareamento) numa corrida de heartbeat. */
+class AlreadyMatchedError extends Error {
+  constructor(public readonly matchId: string) {
+    super("already matched");
+  }
+}
+
 export const joinDuelQueue = onCall(
   {
     region: "southamerica-east1",
@@ -2277,9 +2286,18 @@ export const joinDuelQueue = onCall(
 
     // (a) Já fui pareado por outro jogador enquanto esperava?
     const mySnap = await myQueueRef.get();
+    let staleCleared = false;
     const existingMatchId = mySnap.data()?.["matchId"] as string | undefined;
     if (existingMatchId) {
-      return { status: "matched", matchId: existingMatchId };
+      // Só recoloca na partida se ela AINDA existe e está ativa. Caso contrário
+      // (partida encerrada/abandonada), a entrada está velha: limpa e segue para
+      // um novo pareamento — senão o jogador cairia numa "partida fantasma".
+      const existingSnap = await db.collection("matches").doc(existingMatchId).get();
+      if (existingSnap.exists && existingSnap.data()?.["status"] === "active") {
+        return { status: "matched", matchId: existingMatchId };
+      }
+      await myQueueRef.delete().catch(() => undefined);
+      staleCleared = true;
     }
 
     // (b) Procura um oponente esperando (mais antigo primeiro).
@@ -2325,7 +2343,14 @@ export const joinDuelQueue = onCall(
         const oppUid = opponentRef.id;
 
         await db.runTransaction(async (tx) => {
-          const oppDoc = await tx.get(opponentRef!);
+          const [oppDoc, myDoc] = await Promise.all([
+            tx.get(opponentRef!),
+            tx.get(myQueueRef),
+          ]);
+          // Corrida de heartbeat: outro jogador me pareou enquanto eu procurava
+          // um oponente. NÃO crio uma segunda partida — devolvo a que já existe.
+          const myMatchId = myDoc.data()?.["matchId"] as string | undefined;
+          if (myMatchId) throw new AlreadyMatchedError(myMatchId);
           if (!oppDoc.exists) throw new OpponentTakenError();
           const od = oppDoc.data()!;
           if (od["matchId"]) throw new OpponentTakenError();
@@ -2377,6 +2402,10 @@ export const joinDuelQueue = onCall(
         logger.info(`[joinDuelQueue] match ${matchRef.id}: ${oppUid} vs ${uid}`);
         return { status: "matched", matchId: matchRef.id };
       } catch (e) {
+        // Já fui pareado por outro durante a transação → devolvo essa partida.
+        if (e instanceof AlreadyMatchedError) {
+          return { status: "matched", matchId: e.matchId };
+        }
         if (!(e instanceof OpponentTakenError)) throw e;
         // Oponente foi pego por outro — cai para enfileirar.
       }
@@ -2388,7 +2417,7 @@ export const joinDuelQueue = onCall(
         uid,
         status: "waiting",
         matchId: null,
-        joinedAt: mySnap.exists
+        joinedAt: mySnap.exists && !staleCleared
           ? mySnap.data()?.["joinedAt"] ?? admin.firestore.FieldValue.serverTimestamp()
           : admin.firestore.FieldValue.serverTimestamp(),
         lastSeen: admin.firestore.FieldValue.serverTimestamp(),
@@ -2655,6 +2684,12 @@ export const finalizeDuel = onCall(
         finishedAt: admin.firestore.FieldValue.serverTimestamp(),
       });
 
+      // Limpa as entradas de fila dos dois jogadores: ao parear, o doc de fila
+      // de quem esperava (player1) fica com o `matchId` gravado. Sem apagá-lo
+      // aqui, reabrir o PvP recolocaria o jogador na partida JÁ encerrada.
+      tx.delete(db.collection("matchmaking_queue").doc(p1));
+      tx.delete(db.collection("matchmaking_queue").doc(p2));
+
       const isP1 = uid === p1;
       result = {
         status: "finished",
@@ -2667,6 +2702,123 @@ export const finalizeDuel = onCall(
 
     logger.info(`[finalizeDuel] match=${matchId} status=${result.status} winner=${result.winnerId ?? "-"}`);
     return result;
+  }
+);
+
+// ── 4b. leaveDuel ───────────────────────────────────────────────────
+//  Abandono explícito: o jogador SAIU da partida no meio (fechou a tela
+//  ou o app). O oponente que continuou VENCE por W.O. e leva o ELO da
+//  vitória. O doc do match é marcado com `abandonedBy` para o cliente do
+//  oponente exibir a mensagem "seu oponente saiu". Idempotente: se a
+//  partida já foi encerrada (ou é treino), não faz nada.
+
+interface LeaveDuelData {
+  matchId: string;
+}
+
+export const leaveDuel = onCall(
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<LeaveDuelData>
+  ): Promise<{ ok: boolean; finished: boolean }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    await checkRateLimit(
+      rateLimitKey("gamification", uid, "leaveDuel"),
+      DUEL_RATE.limit,
+      DUEL_RATE.windowMs
+    );
+
+    const { matchId } = request.data ?? ({} as LeaveDuelData);
+    if (typeof matchId !== "string" || !matchId) {
+      throw new HttpsError("invalid-argument", "matchId inválido.");
+    }
+
+    const matchRef = db.collection("matches").doc(matchId);
+    let finished = false;
+
+    await db.runTransaction(async (tx) => {
+      const matchSnap = await tx.get(matchRef);
+      if (!matchSnap.exists) return; // nada a fazer
+      const m = matchSnap.data()!;
+
+      const p1 = m["player1Uid"] as string;
+      const p2 = m["player2Uid"] as string;
+      if (uid !== p1 && uid !== p2) {
+        throw new HttpsError("permission-denied", "Você não participa deste duelo.");
+      }
+      // Já encerrado (quem chegou primeiro decide) ou treino → ignora.
+      if (m["status"] !== "active" || m["isBot"] === true) return;
+
+      // Quem SAI perde; o oponente que CONTINUOU vence.
+      const winnerId = uid === p1 ? p2 : p1;
+
+      const p1Ref = db.collection("users").doc(p1);
+      const p2Ref = db.collection("users").doc(p2);
+      const [p1Snap, p2Snap] = await Promise.all([tx.get(p1Ref), tx.get(p2Ref)]);
+
+      const p1Elo = (p1Snap.data()?.["eloRating"] as number) ?? 1200;
+      const p2Elo = (p2Snap.data()?.["eloRating"] as number) ?? 1200;
+
+      const expected1 = 1 / (1 + Math.pow(10, (p2Elo - p1Elo) / 400));
+      const expected2 = 1 - expected1;
+      const s1 = winnerId === p1 ? 1 : 0;
+      const s2 = 1 - s1;
+
+      const clampChange = (raw: number, currentElo: number): number => {
+        const capped = Math.max(-DUEL_ELO_MAX, Math.min(DUEL_ELO_MAX, Math.round(raw)));
+        return Math.max(capped, -currentElo); // ELO nunca fica negativo
+      };
+      const p1Change = clampChange(DUEL_ELO_K * (s1 - expected1), p1Elo);
+      const p2Change = clampChange(DUEL_ELO_K * (s2 - expected2), p2Elo);
+
+      const applyElo = (
+        ref: FirebaseFirestore.DocumentReference,
+        snap: FirebaseFirestore.DocumentSnapshot,
+        change: number,
+        won: boolean
+      ) => {
+        if (!snap.exists) return;
+        const data = snap.data()!;
+        const updates: Record<string, unknown> = {
+          eloRating: admin.firestore.FieldValue.increment(change),
+          totalDuels: admin.firestore.FieldValue.increment(1),
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        };
+        if (won) updates["wins"] = admin.firestore.FieldValue.increment(1);
+        else updates["losses"] = admin.firestore.FieldValue.increment(1);
+        const unlocked: string[] = data["unlockedBadgeIds"] ?? [];
+        if (((data["totalDuels"] as number) ?? 0) === 0 && !unlocked.includes("primeiro_duelo")) {
+          updates["unlockedBadgeIds"] = admin.firestore.FieldValue.arrayUnion("primeiro_duelo");
+        }
+        tx.update(ref, updates);
+      };
+
+      applyElo(p1Ref, p1Snap, p1Change, winnerId === p1);
+      applyElo(p2Ref, p2Snap, p2Change, winnerId === p2);
+
+      tx.update(matchRef, {
+        status: "finished",
+        winnerId,
+        abandonedBy: uid,
+        player1EloChange: p1Change,
+        player2EloChange: p2Change,
+        finishedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      // Limpa as filas dos dois (mesmo motivo do finalizeDuel).
+      tx.delete(db.collection("matchmaking_queue").doc(p1));
+      tx.delete(db.collection("matchmaking_queue").doc(p2));
+
+      finished = true;
+    });
+
+    logger.info(`[leaveDuel] match=${matchId} abandonedBy=${uid} finished=${finished}`);
+    return { ok: true, finished };
   }
 );
 
@@ -2838,6 +2990,77 @@ export const cleanupOldRankings = onSchedule(
 
     logger.info(
       `[cleanupOldRankings] ${toDelete.length} semana(s) antiga(s) removida(s).`
+    );
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// cleanupStaleDuels — Agendada. Encerra duelos que ficaram presos em
+// "active" por tempo demais (ex.: os DOIS jogadores fecharam o app sem
+// que `leaveDuel`/`finalizeDuel` rodasse). Sem isto, a partida fica viva
+// para sempre e o doc de fila de quem esperava guarda o `matchId`,
+// recolocando o jogador numa "partida fantasma" ao reabrir o PvP.
+//
+// Política: apenas ENCERRA (status → finished, winner pelo placar atual,
+// closedBy: "cleanup") e APAGA as filas dos dois. NÃO aplica ELO — uma
+// partida abandonada pelos dois não deve mexer no ranking de ninguém.
+// ────────────────────────────────────────────────────────────────
+
+const DUEL_STALE_TTL_MS = 10 * 60 * 1000; // 10 min sem ser finalizada
+
+export const cleanupStaleDuels = onSchedule(
+  {
+    schedule: "every 15 minutes",
+    timeZone: "America/Sao_Paulo",
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async () => {
+    const now = Date.now();
+    // Só igualdade em `status` (sem orderBy) → não exige índice composto.
+    const snap = await db
+      .collection("matches")
+      .where("status", "==", "active")
+      .limit(500)
+      .get();
+
+    let closed = 0;
+    for (const doc of snap.docs) {
+      const m = doc.data();
+      if (m["isBot"] === true) continue; // treino não vive no servidor
+      const createdAt = (m["createdAt"] as FirebaseFirestore.Timestamp | undefined)?.toMillis();
+      // Sem createdAt (doc legado) também é tratado como velho.
+      if (createdAt && now - createdAt < DUEL_STALE_TTL_MS) continue;
+
+      const p1 = m["player1Uid"] as string | undefined;
+      const p2 = m["player2Uid"] as string | undefined;
+      const p1Total = sumDuelScores((m["player1Scores"] as Array<Record<string, unknown>>) ?? []);
+      const p2Total = sumDuelScores((m["player2Scores"] as Array<Record<string, unknown>>) ?? []);
+      let winnerId: string | null = null;
+      if (p1 && p2) {
+        if (p1Total > p2Total) winnerId = p1;
+        else if (p2Total > p1Total) winnerId = p2;
+      }
+
+      try {
+        const batch = db.batch();
+        batch.update(doc.ref, {
+          status: "finished",
+          winnerId,
+          closedBy: "cleanup",
+          finishedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        if (p1) batch.delete(db.collection("matchmaking_queue").doc(p1));
+        if (p2) batch.delete(db.collection("matchmaking_queue").doc(p2));
+        await batch.commit();
+        closed++;
+      } catch (e) {
+        logger.warn(`[cleanupStaleDuels] falha ao encerrar ${doc.id}:`, e);
+      }
+    }
+
+    logger.info(
+      `[cleanupStaleDuels] ${closed}/${snap.size} duelo(s) travado(s) encerrado(s).`
     );
   }
 );
