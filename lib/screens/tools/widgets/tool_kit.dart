@@ -1,3 +1,4 @@
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
