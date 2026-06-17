@@ -98,7 +98,7 @@ class _StudentVerificationScreenState
       final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (picked != null) setState(() => _proof = picked);
     } catch (_) {
-      _snack('Não foi possível selecionar o arquivo.');
+      _snack(AppLocalizations.of(context)!.svPickFailed);
     }
   }
 
@@ -109,11 +109,11 @@ class _StudentVerificationScreenState
     final institution = _institutionCtrl.text.trim();
     final email = _emailCtrl.text.trim();
     if (institution.isEmpty) {
-      _snack('Informe o nome da instituição.');
+      _snack(AppLocalizations.of(context)!.svEnterInstitution);
       return;
     }
     if (email.isEmpty && _proof == null) {
-      _snack('Informe o e-mail institucional ou anexe um comprovante.');
+      _snack(AppLocalizations.of(context)!.svEnterEmailOrProof);
       return;
     }
 
@@ -150,11 +150,11 @@ class _StudentVerificationScreenState
       if (!mounted) return;
       if (!mounted) return;
       SparkSnack.success(context, autoEligible
-          ? 'E-mail institucional reconhecido! Aprovação em instantes.'
-          : 'Comprovante enviado. Análise em até 48h.');
+          ? AppLocalizations.of(context)!.svEmailRecognized
+          : AppLocalizations.of(context)!.svProofSent);
     } catch (e) {
       if (!mounted) return;
-      SparkSnack.error(context, 'Erro ao enviar: $e');
+      SparkSnack.error(context, AppLocalizations.of(context)!.genericErrorPrefix(e.toString()));
     } finally {
       if (mounted) setState(() => _submitting = false);
     }
@@ -185,19 +185,19 @@ class _StudentVerificationScreenState
               children: [
                 if (status != null) _StatusBanner(status: status),
                 const SizedBox(height: 16),
-                const Text(
-                  'Comprove sua matrícula para liberar o preço Student (50% off).',
+                Text(
+                  AppLocalizations.of(context)!.svSubtitle,
                   style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.4),
                 ),
                 const SizedBox(height: 24),
-                _label('Instituição de ensino'),
-                _field(_institutionCtrl, 'Ex.: Universidade Federal de...'),
+                _label(AppLocalizations.of(context)!.svInstitution),
+                _field(_institutionCtrl, AppLocalizations.of(context)!.svInstitutionHint),
                 const SizedBox(height: 20),
-                _label('E-mail institucional (.edu.br) — aprovação imediata'),
+                _label(AppLocalizations.of(context)!.svInstitutionalEmail),
                 _field(_emailCtrl, 'voce@instituicao.edu.br',
                     keyboard: TextInputType.emailAddress),
                 const SizedBox(height: 20),
-                _label('Ou anexe um comprovante de matrícula'),
+                _label(AppLocalizations.of(context)!.svOrAttachProof),
                 _ProofPicker(proof: _proof, onTap: _pickProof),
                 const SizedBox(height: 28),
                 GestureDetector(
@@ -218,7 +218,7 @@ class _StudentVerificationScreenState
                               height: 20,
                               child: CircularProgressIndicator(
                                   strokeWidth: 2, color: AppColors.surfaceAlt))
-                          : const Text('ENVIAR PARA VERIFICAÇÃO',
+                          : Text(AppLocalizations.of(context)!.svSubmit,
                               style: TextStyle(
                                   color: AppColors.surfaceAlt,
                                   fontWeight: FontWeight.w800,
@@ -227,8 +227,8 @@ class _StudentVerificationScreenState
                   ),
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  'A revalidação é exigida a cada 12 meses.',
+                Text(
+                  AppLocalizations.of(context)!.svRevalidation,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: AppColors.textMuted, fontSize: 12),
                 ),
@@ -280,9 +280,9 @@ class _StatusBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (label, color, icon) = switch (status) {
-      'approved' => ('Matrícula verificada', const Color(0xFF22C55E), Icons.verified),
-      'rejected' => ('Comprovante rejeitado — reenvie', AppColors.error, Icons.error_outline),
-      _ => ('Em análise (até 48h)', const Color(0xFFF59E0B), Icons.hourglass_top),
+      'approved' => (AppLocalizations.of(context)!.svVerified, const Color(0xFF22C55E), Icons.verified),
+      'rejected' => (AppLocalizations.of(context)!.svRejected, AppColors.error, Icons.error_outline),
+      _ => (AppLocalizations.of(context)!.svUnderReview, const Color(0xFFF59E0B), Icons.hourglass_top),
     };
     return Container(
       padding: const EdgeInsets.all(14),
@@ -334,7 +334,7 @@ class _ProofPicker extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                proof == null ? 'Selecionar foto/PDF' : proof!.name,
+                proof == null ? AppLocalizations.of(context)!.svSelectFile : proof!.name,
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

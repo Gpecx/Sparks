@@ -1,3 +1,4 @@
+import 'package:spark_app/core/utils/currency_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
@@ -54,7 +55,7 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
     if (_company.text.trim().isEmpty ||
         _cnpj.text.trim().isEmpty ||
         _contactEmail.text.trim().isEmpty) {
-      _snack('Preencha empresa, CNPJ e e-mail de contato.');
+      _snack(AppLocalizations.of(context)!.bizFillCompany);
       return;
     }
     setState(() => _submitting = true);
@@ -74,7 +75,7 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
       if (!mounted) return;
       _showSuccess();
     } catch (e) {
-      _snack('Erro ao enviar: $e');
+      _snack(AppLocalizations.of(context)!.genericErrorPrefix(e.toString()));
     } finally {
       if (mounted) setState(() => _submitting = false);
     }
@@ -87,9 +88,8 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
         backgroundColor: const Color(0xFF0D1B14),
         title: Text(AppLocalizations.of(context)!.businessSetupSuccess,
             style: TextStyle(color: Colors.white)),
-        content: const Text(
-          'Nossa equipe comercial entrará em contato pelo e-mail informado '
-          'para finalizar a proposta e o faturamento.',
+        content: Text(
+          AppLocalizations.of(context)!.bizContactSoon
           style: TextStyle(color: AppColors.textSecondary),
         ),
         actions: [
@@ -122,38 +122,37 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
             child: ListView(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
               children: [
-                const Text(
-                  'Treine sua equipe com painel administrativo, relatórios de '
-                  'progresso e faturamento via NF-e.',
+                Text(
+                  AppLocalizations.of(context)!.bizDesc
                   style: TextStyle(color: AppColors.textSecondary, height: 1.4),
                 ),
                 const SizedBox(height: 24),
-                _label('Razão social'),
-                _field(_company, 'Empresa Ltda.'),
+                _label(AppLocalizations.of(context)!.bizLegalName),
+                _field(_company, AppLocalizations.of(context)!.bizCompanyPlaceholder),
                 const SizedBox(height: 16),
                 _label('CNPJ'),
                 _field(_cnpj, '00.000.000/0001-00',
                     keyboard: TextInputType.number),
                 const SizedBox(height: 16),
-                _label('Nome do contato'),
-                _field(_contactName, 'Responsável'),
+                _label(AppLocalizations.of(context)!.bizContactName),
+                _field(_contactName, AppLocalizations.of(context)!.bizResponsible),
                 const SizedBox(height: 16),
-                _label('E-mail de contato'),
+                _label(AppLocalizations.of(context)!.bizContactEmail),
                 _field(_contactEmail, 'contato@empresa.com.br',
                     keyboard: TextInputType.emailAddress),
                 const SizedBox(height: 24),
-                _label('Número de licenças (mín. $kBusinessMinSeats)'),
+                _label(AppLocalizations.of(context)!.bizSeats(kBusinessMinSeats)),
                 _SeatStepper(
                   seats: _seats,
                   onChanged: (v) => setState(() => _seats = v),
                 ),
                 const SizedBox(height: 20),
-                _label('Período de faturamento'),
+                _label(AppLocalizations.of(context)!.bizBillingPeriod),
                 Row(
                   children: [
-                    _periodChip('Anual', 'yearly'),
+                    _periodChip(AppLocalizations.of(context)!.bizAnnual, 'yearly'),
                     const SizedBox(width: 10),
-                    _periodChip('Mensal', 'monthly'),
+                    _periodChip(AppLocalizations.of(context)!.bizMonthly, 'monthly'),
                   ],
                 ),
                 const SizedBox(height: 24),
@@ -168,12 +167,12 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Text('Estimativa mensal',
+                        child: Text(AppLocalizations.of(context)!.bizMonthlyEstimate,
                             style: TextStyle(color: AppColors.textSecondary)),
                       ),
                       const SizedBox(width: 8),
                       Flexible(
-                        child: Text('R\$ $_monthlyTotal',
+                        child: Text(CurrencyUtils.format(context, _monthlyTotal.toDouble()),
                             textAlign: TextAlign.right,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -203,7 +202,7 @@ class _BusinessSetupScreenState extends ConsumerState<BusinessSetupScreen> {
                               height: 20,
                               child: CircularProgressIndicator(
                                   strokeWidth: 2, color: AppColors.surfaceAlt))
-                          : const Text('SOLICITAR PROPOSTA',
+                          : Text(AppLocalizations.of(context)!.bizRequestQuote,
                               style: TextStyle(
                                   color: AppColors.surfaceAlt,
                                   fontWeight: FontWeight.w800,
@@ -300,7 +299,7 @@ class _SeatStepper extends StatelessWidget {
           _btn(Icons.remove, () {
             if (seats > kBusinessMinSeats) onChanged(seats - 1);
           }),
-          Text('$seats usuários',
+          Text(AppLocalizations.of(context)!.bizUsersCount(seats),
               style: const TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 16,

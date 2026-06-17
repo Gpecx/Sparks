@@ -2273,5 +2273,139 @@
   "labRisk6": "⚠ RISCO · Cabo elétrico sobre borda metálica sem passa-fio. Isolamento sofrerá corte progressivo.",
   "labRisk7": "⚠ NORMA · Parafuso ausente no gabinete. Grau de proteção IP comprometido.",
   "labKeepSearching": "// Tudo certo por aqui. Continue procurando...",
-  "labCompleted": "🎉 Laboratório Concluído! +150 XP"
+  "labCompleted": "🎉 Laboratório Concluído! +150 XP",
+  "trialErrorStart": "Erro ao iniciar trial. Verifique os dados do cartão.",
+  "trialErrorUnexpected": "Erro inesperado. Tente novamente.",
+  "trialTryAgain": "TENTAR NOVAMENTE",
+  "trialStartStudying": "COMEÇAR A ESTUDAR",
+  "trialCardName": "Nome impresso no cartão",
+  "trialEnterName": "Informe o nome",
+  "trialInvalidCardNumber": "Número de cartão inválido",
+  "trialInvalid": "Inválida",
+  "trialToday": "Hoje",
+  "trialAfter7Days": "Após 7 dias",
+  "trialCancellation": "Cancelamento",
+  "trialAnytime": "A qualquer momento",
+  "trialChargeNote": "O cartão só será cobrado após o término dos 7 dias gratuitos.",
+  "paymentCompleted": "Pagamento Concluído!",
+  "paymentApproved": "Sua transação foi aprovada com sucesso.",
+  "paymentExpiresIn": "Expira em: {date}",
+  "@paymentExpiresIn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "paymentPixCode": "CÓDIGO PIX — COPIA E COLA",
+  "paymentAutoConfirm": "O pagamento é confirmado automaticamente.\nVocê não precisa fazer nada após pagar.",
+  "paymentRedirecting": "Você será redirecionado\npara a página de pagamento",
+  "paymentAfterComplete": "Após finalizar o pagamento, seu plano\nserá ativado automaticamente.",
+  "paymentOpenPage": "ABRIR PÁGINA DE PAGAMENTO",
+  "paymentWaitingConfirm": "Aguardando confirmação...",
+  "termsQuestions": "Dúvidas sobre os termos? Entre em contato com a equipe de ",
+  "termsSupportTeam": "Suporte Técnico",
+  "termsT1": "1. Introdução e Objetivo do SPARK",
+  "termsB1": "O SPARK é uma plataforma digital focada no treinamento, capacitação e aprimoramento profissional na área de engenharia eletrotécnica e normas do setor elétrico. Ao acessar a plataforma, você concorda em cumprir e ser regido por estes Termos de Uso, bem como pela nossa Política de Privacidade.",
+  "termsT2": "2. Conta, Cadastro e Segurança",
+  "termsB2": "Para acessar as funcionalidades completas, lições e simulação de erros, você deve realizar o cadastro fornecendo dados verídicos e atualizados. A segurança da sua senha é de sua inteira responsabilidade. Qualquer atividade realizada sob sua conta será atribuída a você.",
+  "termsT3": "3. Spark Points e Assinatura Premium",
+  "termsB3": "O SPARK possui mecânicas de gamificação (XP, Clãs, Torneios) e uma loja virtual. Pontos Spark e assinaturas premium podem ser adquiridos via métodos de pagamento disponíveis. As compras de produtos digitais são definitivas, e o reembolso segue estritamente as diretrizes da legislação nacional aplicável de comércio eletrônico.",
+  "termsT4": "4. Propriedade Intelectual",
+  "termsB4": "Todos os materiais didáticos, questões, simulações de esquemas de PCI/PCB, códigos, artes visuais e textos disponibilizados no SPARK são de propriedade intelectual exclusiva da EXS Solutions ou devidamente licenciados. É expressamente proibida a reprodução, distribuição ou engenharia reversa destes materiais sem autorização prévia por escrito.",
+  "termsT5": "5. Conduta na Comunidade (Clãs e Duelos)",
+  "termsB5": "A convivência na área de Clãs e Duelos de Conhecimento deve ser pautada pelo respeito mútuo. Trapaças, uso de scripts maliciosos, ofensas no chat ou qualquer comportamento que prejudique a experiência pedagógica de outros usuários resultará na suspensão imediata ou cancelamento definitivo da conta do infrator.",
+  "termsT6": "6. Proteção de Dados (LGPD)",
+  "termsB6": "Coletamos e processamos seus dados (como e-mail, nome, progresso de estudos e respostas) com o objetivo exclusivo de aprimorar a sua jornada de aprendizado e validar suas conquistas, respeitando integralmente as disposições da Lei Geral de Proteção de Dados (LGPD).",
+  "termsT7": "7. Alterações e Limitação de Responsabilidade",
+  "termsB7": "Reservamo-nos o direito de alterar estes termos e atualizar os conteúdos da plataforma a qualquer momento para melhoria contínua. O SPARK não se responsabiliza por eventuais interrupções temporárias de conexão ou bugs de terceiros, mas empenhará os melhores esforços técnicos para rápida resolução de incidentes.",
+  "svPickFailed": "Não foi possível selecionar o arquivo.",
+  "svEnterInstitution": "Informe o nome da instituição.",
+  "svEnterEmailOrProof": "Informe o e-mail institucional ou anexe um comprovante.",
+  "svEmailRecognized": "E-mail institucional reconhecido! Aprovação em instantes.",
+  "svProofSent": "Comprovante enviado. Análise em até 48h.",
+  "svSubtitle": "Comprove sua matrícula para liberar o preço Student (50% off).",
+  "svInstitution": "Instituição de ensino",
+  "svInstitutionHint": "Ex.: Universidade Federal de...",
+  "svInstitutionalEmail": "E-mail institucional (.edu.br) — aprovação imediata",
+  "svOrAttachProof": "Ou anexe um comprovante de matrícula",
+  "svSubmit": "ENVIAR PARA VERIFICAÇÃO",
+  "svRevalidation": "A revalidação é exigida a cada 12 meses.",
+  "svVerified": "Matrícula verificada",
+  "svRejected": "Comprovante rejeitado — reenvie",
+  "svUnderReview": "Em análise (até 48h)",
+  "svSelectFile": "Selecionar foto/PDF",
+  "testHistoryTitle": "HISTÓRICO DE TESTES",
+  "testHistoryTests": "Testes",
+  "testHistoryAvg": "Média",
+  "testHistoryStandards": "Normas",
+  "testHistorySearch": "Pesquisar testes...",
+  "testHistoryUnknown": "Desconhecido",
+  "testHistoryUnknownDate": "Data Desconhecida",
+  "testHistoryModule": "Módulo: {id}",
+  "@testHistoryModule": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "bizFillCompany": "Preencha empresa, CNPJ e e-mail de contato.",
+  "bizContactSoon": "Nossa equipe comercial entrará em contato pelo e-mail informado para finalizar a proposta e o faturamento.",
+  "bizDesc": "Treine sua equipe com painel administrativo, relatórios de progresso e faturamento via NF-e.",
+  "bizLegalName": "Razão social",
+  "bizCompanyPlaceholder": "Empresa Ltda.",
+  "bizContactName": "Nome do contato",
+  "bizResponsible": "Responsável",
+  "bizContactEmail": "E-mail de contato",
+  "bizSeats": "Número de licenças (mín. {min})",
+  "@bizSeats": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "bizBillingPeriod": "Período de faturamento",
+  "bizAnnual": "Anual",
+  "bizMonthly": "Mensal",
+  "bizMonthlyEstimate": "Estimativa mensal",
+  "bizRequestQuote": "SOLICITAR PROPOSTA",
+  "bizUsersCount": "{seats} usuários",
+  "@bizUsersCount": {
+    "placeholders": {
+      "seats": {
+        "type": "int"
+      }
+    }
+  },
+  "teamSeatsLimit": "Limite de {seats} licenças atingido.",
+  "@teamSeatsLimit": {
+    "placeholders": {
+      "seats": {
+        "type": "int"
+      }
+    }
+  },
+  "teamEmailInvited": "Esse e-mail já foi convidado.",
+  "teamDashboardTitle": "Painel da equipe",
+  "teamNoTeam": "Você ainda não administra uma equipe.",
+  "teamCreateBusiness": "CRIAR PLANO BUSINESS",
+  "teamMyTeam": "Minha equipe",
+  "teamSeats": "Licenças",
+  "teamAvgProgress": "Progresso médio",
+  "teamInviteMember": "Convidar membro",
+  "teamMembers": "Membros",
+  "teamNoMembers": "Nenhum membro ainda. Convide pelo e-mail acima.",
+  "teamInvitePending": "Convite pendente",
+  "teamProgress": "Progresso {progress}%",
+  "@teamProgress": {
+    "placeholders": {
+      "progress": {
+        "type": "int"
+      }
+    }
+  },
+  "termsAppBarTitle": "TERMOS DE USO",
+  "termsSectionsHeader": "SEÇÕES DOS TERMOS"
 }

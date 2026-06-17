@@ -95,8 +95,8 @@ class _RegistrationSuccessScreenState extends State<RegistrationSuccessScreen>
               // ── Title ─────────────────────────────────────────────
               FadeTransition(
                 opacity: _fadeAnim,
-                child: const Text(
-                  'Cadastro Concluído!',
+                child: Text(
+                  AppLocalizations.of(context)!.regSuccessTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
@@ -111,8 +111,8 @@ class _RegistrationSuccessScreenState extends State<RegistrationSuccessScreen>
 
               FadeTransition(
                 opacity: _fadeAnim,
-                child: const Text(
-                  'Bem-vindo ao SPARK!\nSua jornada de aprendizado começa agora.',
+                child: Text(
+                  AppLocalizations.of(context)!.regSuccessWelcome,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.textSecondary,
@@ -164,7 +164,7 @@ class _RegistrationSuccessScreenState extends State<RegistrationSuccessScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Bônus de boas-vindas',
+                              AppLocalizations.of(context)!.regSuccessBonus,
                               style: TextStyle(
                                 color: AppColors.gold,
                                 fontSize: 13,

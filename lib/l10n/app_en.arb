@@ -1657,5 +1657,139 @@
   "labRisk6": "⚠ HAZARD · Cable over a metal edge without a grommet. Insulation will be progressively cut.",
   "labRisk7": "⚠ STANDARD · Missing cabinet screw. IP protection rating compromised.",
   "labKeepSearching": "// All good here. Keep searching...",
-  "labCompleted": "🎉 Lab Complete! +150 XP"
+  "labCompleted": "🎉 Lab Complete! +150 XP",
+  "trialErrorStart": "Error starting trial. Check your card details.",
+  "trialErrorUnexpected": "Unexpected error. Please try again.",
+  "trialTryAgain": "TRY AGAIN",
+  "trialStartStudying": "START STUDYING",
+  "trialCardName": "Name on card",
+  "trialEnterName": "Enter the name",
+  "trialInvalidCardNumber": "Invalid card number",
+  "trialInvalid": "Invalid",
+  "trialToday": "Today",
+  "trialAfter7Days": "After 7 days",
+  "trialCancellation": "Cancellation",
+  "trialAnytime": "Anytime",
+  "trialChargeNote": "Your card will only be charged after the 7 free days end.",
+  "paymentCompleted": "Payment Complete!",
+  "paymentApproved": "Your transaction was approved successfully.",
+  "paymentExpiresIn": "Expires on: {date}",
+  "@paymentExpiresIn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "paymentPixCode": "PIX CODE — COPY AND PASTE",
+  "paymentAutoConfirm": "Payment is confirmed automatically.\nYou don't need to do anything after paying.",
+  "paymentRedirecting": "You will be redirected\nto the payment page",
+  "paymentAfterComplete": "After completing the payment, your plan\nwill be activated automatically.",
+  "paymentOpenPage": "OPEN PAYMENT PAGE",
+  "paymentWaitingConfirm": "Waiting for confirmation...",
+  "termsQuestions": "Questions about the terms? Contact the ",
+  "termsSupportTeam": "Technical Support",
+  "termsT1": "1. Introduction and Purpose of SPARK",
+  "termsB1": "SPARK is a digital platform focused on training, qualification and professional development in electrotechnical engineering and electrical-sector standards. By accessing the platform, you agree to comply with and be bound by these Terms of Use, as well as our Privacy Policy.",
+  "termsT2": "2. Account, Registration and Security",
+  "termsB2": "To access the full features, lessons and error simulations, you must register providing truthful and up-to-date information. The security of your password is entirely your responsibility. Any activity performed under your account will be attributed to you.",
+  "termsT3": "3. Spark Points and Premium Subscription",
+  "termsB3": "SPARK has gamification mechanics (XP, Clans, Tournaments) and a virtual store. Spark Points and premium subscriptions can be purchased via the available payment methods. Purchases of digital products are final, and refunds strictly follow the applicable national e-commerce legislation.",
+  "termsT4": "4. Intellectual Property",
+  "termsB4": "All educational materials, questions, PCB schematic simulations, code, visual art and texts provided in SPARK are the exclusive intellectual property of EXS Solutions or duly licensed. Reproduction, distribution or reverse engineering of these materials without prior written authorization is expressly prohibited.",
+  "termsT5": "5. Community Conduct (Clans and Duels)",
+  "termsB5": "Interaction in the Clans and Knowledge Duels area must be guided by mutual respect. Cheating, use of malicious scripts, chat offenses or any behavior that harms the educational experience of other users will result in immediate suspension or permanent cancellation of the offender's account.",
+  "termsT6": "6. Data Protection (LGPD)",
+  "termsB6": "We collect and process your data (such as email, name, study progress and answers) for the sole purpose of improving your learning journey and validating your achievements, fully respecting the provisions of the Brazilian General Data Protection Law (LGPD).",
+  "termsT7": "7. Changes and Limitation of Liability",
+  "termsB7": "We reserve the right to change these terms and update the platform's content at any time for continuous improvement. SPARK is not liable for occasional temporary connection interruptions or third-party bugs, but will make its best technical efforts to quickly resolve incidents.",
+  "svPickFailed": "Could not select the file.",
+  "svEnterInstitution": "Enter the institution name.",
+  "svEnterEmailOrProof": "Enter your institutional email or attach proof.",
+  "svEmailRecognized": "Institutional email recognized! Approval in moments.",
+  "svProofSent": "Proof submitted. Review within 48h.",
+  "svSubtitle": "Prove your enrollment to unlock the Student price (50% off).",
+  "svInstitution": "Educational institution",
+  "svInstitutionHint": "e.g., Federal University of...",
+  "svInstitutionalEmail": "Institutional email (.edu) — instant approval",
+  "svOrAttachProof": "Or attach proof of enrollment",
+  "svSubmit": "SUBMIT FOR VERIFICATION",
+  "svRevalidation": "Revalidation is required every 12 months.",
+  "svVerified": "Enrollment verified",
+  "svRejected": "Proof rejected — resubmit",
+  "svUnderReview": "Under review (up to 48h)",
+  "svSelectFile": "Select photo/PDF",
+  "testHistoryTitle": "TEST HISTORY",
+  "testHistoryTests": "Tests",
+  "testHistoryAvg": "Average",
+  "testHistoryStandards": "Standards",
+  "testHistorySearch": "Search tests...",
+  "testHistoryUnknown": "Unknown",
+  "testHistoryUnknownDate": "Unknown Date",
+  "testHistoryModule": "Module: {id}",
+  "@testHistoryModule": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "bizFillCompany": "Fill in company, tax ID and contact email.",
+  "bizContactSoon": "Our sales team will contact you at the email provided to finalize the proposal and billing.",
+  "bizDesc": "Train your team with an admin panel, progress reports and NF-e invoicing.",
+  "bizLegalName": "Legal name",
+  "bizCompanyPlaceholder": "Company Inc.",
+  "bizContactName": "Contact name",
+  "bizResponsible": "Responsible",
+  "bizContactEmail": "Contact email",
+  "bizSeats": "Number of seats (min. {min})",
+  "@bizSeats": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "bizBillingPeriod": "Billing period",
+  "bizAnnual": "Annual",
+  "bizMonthly": "Monthly",
+  "bizMonthlyEstimate": "Monthly estimate",
+  "bizRequestQuote": "REQUEST QUOTE",
+  "bizUsersCount": "{seats} users",
+  "@bizUsersCount": {
+    "placeholders": {
+      "seats": {
+        "type": "int"
+      }
+    }
+  },
+  "teamSeatsLimit": "Seat limit of {seats} reached.",
+  "@teamSeatsLimit": {
+    "placeholders": {
+      "seats": {
+        "type": "int"
+      }
+    }
+  },
+  "teamEmailInvited": "That email was already invited.",
+  "teamDashboardTitle": "Team dashboard",
+  "teamNoTeam": "You don't manage a team yet.",
+  "teamCreateBusiness": "CREATE BUSINESS PLAN",
+  "teamMyTeam": "My team",
+  "teamSeats": "Seats",
+  "teamAvgProgress": "Average progress",
+  "teamInviteMember": "Invite member",
+  "teamMembers": "Members",
+  "teamNoMembers": "No members yet. Invite using the email above.",
+  "teamInvitePending": "Invite pending",
+  "teamProgress": "Progress {progress}%",
+  "@teamProgress": {
+    "placeholders": {
+      "progress": {
+        "type": "int"
+      }
+    }
+  },
+  "termsAppBarTitle": "TERMS OF USE",
+  "termsSectionsHeader": "TERMS SECTIONS"
 }

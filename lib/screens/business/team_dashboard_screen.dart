@@ -53,11 +53,11 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
     final email = _inviteCtrl.text.trim().toLowerCase();
     if (email.isEmpty || !email.contains('@')) return;
     if (members.length >= seats) {
-      _snack('Limite de $seats licenças atingido.');
+      _snack(AppLocalizations.of(context)!.teamSeatsLimit(seats));
       return;
     }
     if (members.any((m) => (m['email'] as String?)?.toLowerCase() == email)) {
-      _snack('Esse e-mail já foi convidado.');
+      _snack(AppLocalizations.of(context)!.teamEmailInvited);
       return;
     }
     await orgRef.update({
@@ -87,14 +87,14 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: const Text('Painel da equipe'),
+            title: Text(AppLocalizations.of(context)!.teamDashboardTitle),
           ),
           body: SafeArea(
             top: false,
             child: orgAsync.when(
               loading: () => Center(child: CircularProgressIndicator()),
               error: (e, _) => Center(
-                  child: Text('Erro: $e',
+                  child: Text(AppLocalizations.of(context)!.genericErrorPrefix(e.toString()),
                       style: const TextStyle(color: AppColors.textMuted))),
               data: (doc) =>
                   doc == null ? _empty(context) : _dashboard(doc),
@@ -114,8 +114,8 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
           children: [
             const Icon(Icons.business_outlined, color: AppColors.textMuted, size: 48),
             const SizedBox(height: 16),
-            const Text(
-              'Você ainda não administra uma equipe.',
+            Text(
+              AppLocalizations.of(context)!.teamNoTeam,
               textAlign: TextAlign.center,
               style: TextStyle(color: AppColors.textSecondary, fontSize: 15),
             ),
@@ -128,7 +128,7 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Text('CRIAR PLANO BUSINESS',
+                child: Text(AppLocalizations.of(context)!.teamCreateBusiness,
                     style: TextStyle(
                         color: AppColors.surfaceAlt, fontWeight: FontWeight.w800)),
               ),
@@ -142,7 +142,7 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
   Widget _dashboard(QueryDocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     final orgRef = doc.reference;
-    final name = data['name'] as String? ?? 'Minha equipe';
+    final name = data['name'] as String? ?? AppLocalizations.of(context)!.teamMyTeam;
     final seats = (data['seats'] as num?)?.toInt() ?? 0;
     final members = (data['members'] as List?) ?? const [];
     final avg = members.isEmpty
@@ -164,13 +164,13 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
         const SizedBox(height: 16),
         Row(
           children: [
-            _stat('Licenças', '${members.length}/$seats', Icons.event_seat),
+            _stat(AppLocalizations.of(context)!.teamSeats, '${members.length}/$seats', Icons.event_seat),
             const SizedBox(width: 12),
-            _stat('Progresso médio', '$avg%', Icons.trending_up),
+            _stat(AppLocalizations.of(context)!.teamAvgProgress, '$avg%', Icons.trending_up),
           ],
         ),
         const SizedBox(height: 24),
-        const Text('Convidar membro',
+        Text(AppLocalizations.of(context)!.teamInviteMember,
             style: TextStyle(
                 color: AppColors.textPrimary,
                 fontSize: 13,
@@ -216,7 +216,7 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
           ],
         ),
         const SizedBox(height: 24),
-        const Text('Membros',
+        Text(AppLocalizations.of(context)!.teamMembers,
             style: TextStyle(
                 color: AppColors.textPrimary,
                 fontSize: 13,
@@ -225,7 +225,7 @@ class _TeamDashboardScreenState extends ConsumerState<TeamDashboardScreen> {
         if (members.isEmpty)
           Padding(
             padding: EdgeInsets.symmetric(vertical: 16),
-            child: Text('Nenhum membro ainda. Convide pelo e-mail acima.',
+            child: Text(AppLocalizations.of(context)!.teamNoMembers,
                 style: TextStyle(color: AppColors.textMuted)),
           )
         else
@@ -308,8 +308,8 @@ class _MemberTile extends StatelessWidget {
                     overflow: TextOverflow.ellipsis),
                 Text(
                     status == 'invited'
-                        ? 'Convite pendente'
-                        : 'Progresso $progress%',
+                        ? AppLocalizations.of(context)!.teamInvitePending
+                        : AppLocalizations.of(context)!.teamProgress(progress),
                     style: const TextStyle(
                         color: AppColors.textMuted, fontSize: 12)),
               ],

@@ -1,3 +1,4 @@
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,7 +34,7 @@ class _TestHistoryScreenState extends State<TestHistoryScreen> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(context)),
-            title: const Text('HISTÓRICO DE TESTES', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14, letterSpacing: 1.5)),
+            title: Text(AppLocalizations.of(context)!.testHistoryTitle, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14, letterSpacing: 1.5)),
           ),
           body: Column(
             children: [
@@ -57,11 +58,11 @@ class _TestHistoryScreenState extends State<TestHistoryScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         children: [
-                          _summaryChip('$total', 'Testes', Icons.quiz_outlined),
+                          _summaryChip('$total', AppLocalizations.of(context)!.testHistoryTests, Icons.quiz_outlined),
                           const SizedBox(width: 10),
-                          _summaryChip('${media.toStringAsFixed(0)}%', 'Média', Icons.gps_fixed),
+                          _summaryChip('${media.toStringAsFixed(0)}%', AppLocalizations.of(context)!.testHistoryAvg, Icons.gps_fixed),
                           const SizedBox(width: 10),
-                          _summaryChip('-', 'Normas', Icons.menu_book_outlined),
+                          _summaryChip('-', AppLocalizations.of(context)!.testHistoryStandards, Icons.menu_book_outlined),
                         ],
                       ),
                     );
@@ -73,7 +74,7 @@ class _TestHistoryScreenState extends State<TestHistoryScreen> {
                 child: TextField(
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    hintText: 'Pesquisar testes...',
+                    hintText: AppLocalizations.of(context)!.testHistorySearch,
                     prefixIcon: const Icon(Icons.search, color: AppColors.textMuted),
                     filled: true,
                     fillColor: AppColors.card,
@@ -100,13 +101,13 @@ class _TestHistoryScreenState extends State<TestHistoryScreen> {
                           itemBuilder: (ctx, i) {
                             final data = snapshot.data!.docs[i].data() as Map<String, dynamic>;
                             final score = data['score'] as double? ?? 0.0;
-                            final moduleId = data['moduleId'] as String? ?? 'Desconhecido';
+                            final moduleId = data['moduleId'] as String? ?? AppLocalizations.of(context)!.testHistoryUnknown;
                             final ts = data['timestamp'] as Timestamp?;
-                            final dateStr = ts != null ? DateFormat('dd/MM/yyyy').format(ts.toDate()) : 'Data Desconhecida';
+                            final dateStr = ts != null ? DateFormat('dd/MM/yyyy').format(ts.toDate()) : AppLocalizations.of(context)!.testHistoryUnknownDate;
                             
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 10),
-                              child: _histCard('Módulo: $moduleId', dateStr, score, Icons.text_snippet_outlined, score >= 0.7),
+                              child: _histCard(AppLocalizations.of(context)!.testHistoryModule(moduleId), dateStr, score, Icons.text_snippet_outlined, score >= 0.7),
                             );
                           },
                         );
