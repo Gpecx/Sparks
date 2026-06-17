@@ -432,7 +432,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                     const SizedBox(height: 4),
                                     Text(
                                       _rankingPosition > 0
-                                          ? 'Você está em $_rankingPositionº lugar esta semana'
+                                          ? AppLocalizations.of(context)!.rankingPositionWeek(_rankingPosition)
                                           : AppLocalizations.of(context)!.completeLessonsToEnterRanking,
                                       style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
                                     ),

@@ -1791,5 +1791,57 @@
     }
   },
   "termsAppBarTitle": "TERMS OF USE",
-  "termsSectionsHeader": "TERMS SECTIONS"
+  "termsSectionsHeader": "TERMS SECTIONS",
+  "leagueBronze": "Bronze",
+  "leagueSilver": "Silver",
+  "leagueGold": "Gold",
+  "leaguePlatinum": "Platinum",
+  "leagueDiamond": "Diamond",
+  "leagueMaster": "Master",
+  "roleAdmin": "Admin",
+  "roleModerator": "Moderator",
+  "roleMember": "Member",
+  "clanActionsLabel": "Actions:",
+  "clanNameUpper": "CLAN NAME",
+  "clanCreatedNamed": "Clan \"{name}\" created successfully!",
+  "@clanCreatedNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "clanPermMembers": "Members are not allowed to manage others.",
+  "clanPermModerators": "Moderators cannot manage other Moderators or Admins.",
+  "clanCurrentRole": "Current role: {role}",
+  "@clanCurrentRole": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "clanMeLabel": "Me",
+  "clanNewDefault": "New EXS clan",
+  "clanDefaultName": "Current Clan",
+  "clanUserFallback": "User",
+  "clanLoadingName": "Loading...",
+  "rankingPositionWeek": "You're in {pos} place this week",
+  "@rankingPositionWeek": {
+    "placeholders": {
+      "pos": {
+        "type": "int"
+      }
+    }
+  },
+  "netCableT568bSub": "Most widely used standard",
+  "netCableT568aSub": "Green and orange pairs swapped vs. B",
+  "clanActionExecuted": "{label} done!",
+  "@clanActionExecuted": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  }
 }

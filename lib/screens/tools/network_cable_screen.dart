@@ -79,9 +79,9 @@ class NetworkCableScreen extends StatelessWidget {
                   children: [
                     _connectorOrientation(context),
                     const SizedBox(height: 16),
-                    _pinoutCard('T568B', 'Padrão mais usado no Brasil', _t568b),
+                    _pinoutCard('T568B', AppLocalizations.of(context)!.netCableT568bSub, _t568b),
                     const SizedBox(height: 12),
-                    _pinoutCard('T568A', 'Par verde e laranja invertidos vs. B', _t568a),
+                    _pinoutCard('T568A', AppLocalizations.of(context)!.netCableT568aSub, _t568a),
                     const SizedBox(height: 16),
                     _straightVsCrossover(context),
                     const SizedBox(height: 16),

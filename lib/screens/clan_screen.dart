@@ -108,7 +108,7 @@ class _ClanScreenState extends State<ClanScreen> {
   void initState() {
     super.initState();
     _currentUserUid = FirebaseAuth.instance.currentUser?.uid;
-    _myName = FirebaseAuth.instance.currentUser?.displayName ?? 'Usuário';
+    _myName = FirebaseAuth.instance.currentUser?.displayName ?? AppLocalizations.of(context)!.clanUserFallback;
 
     if (widget.isViewingActive) {
       _clanCreated = true;
@@ -135,7 +135,7 @@ class _ClanScreenState extends State<ClanScreen> {
             setState(() {
               _myClanId = clanId;
               _myRole = role;
-              _clanName = clanDoc.data()?['name'] ?? 'Clã Atual';
+              _clanName = clanDoc.data()?['name'] ?? AppLocalizations.of(context)!.clanDefaultName;
               
               if (clanDoc.data()?['primaryColor'] != null) {
                 _clanPrimaryColor = Color(clanDoc.data()!['primaryColor']);
@@ -458,12 +458,12 @@ class _ClanScreenState extends State<ClanScreen> {
                         children: [
                           Text(_clanName, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
                           const SizedBox(height: 4),
-                          Text('$memberCount membros', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                          Text(AppLocalizations.of(context)!.clanMembersCount(memberCount), maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
                           const SizedBox(height: 12),
                           // Barra de Level do Clã
                           Row(
                             children: [
-                              Text(currentLeague.name, style: TextStyle(color: currentLeague.color, fontSize: 11, fontWeight: FontWeight.w700)),
+                              Text(_leagueLabel(context, currentLeague.name), style: TextStyle(color: currentLeague.color, fontSize: 11, fontWeight: FontWeight.w700)),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: ClipRRect(
@@ -547,7 +547,7 @@ class _ClanScreenState extends State<ClanScreen> {
                     final uid = mData['uid'];
                     
                     // Buscar dados em tempo real da coleção /users
-                    String realName = mData['name'] ?? 'Membro';
+                    String realName = mData['name'] ?? AppLocalizations.of(context)!.roleMember;
                     int realXp = mData['xpContribution'] ?? 0;
                     
                     if (usersSnapshot.hasData) {
@@ -579,7 +579,7 @@ class _ClanScreenState extends State<ClanScreen> {
                     
                     return ClanMember(
                       uid: uid,
-                      name: uid == _currentUserUid ? 'Eu' : realName, 
+                      name: uid == _currentUserUid ? AppLocalizations.of(context)!.clanMeLabel : realName, 
                       position: roleStr.toUpperCase(), 
                       xp: realXp, 
                       role: roleEnum,
@@ -615,7 +615,7 @@ class _ClanScreenState extends State<ClanScreen> {
     return Row(
       children: [
         Expanded(
-          child: _statCard(AppLocalizations.of(context)!.currentLeague, league.name, league.icon, league.color, onTap: _showLeagueTreeDialog),
+          child: _statCard(AppLocalizations.of(context)!.currentLeague, _leagueLabel(context, league.name), league.icon, league.color, onTap: _showLeagueTreeDialog),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -954,7 +954,7 @@ class _ClanScreenState extends State<ClanScreen> {
 
     try {
       final name = _nameCtrl.text.trim();
-      final desc = _descCtrl.text.trim().isEmpty ? 'Novo clã EXS' : _descCtrl.text.trim();
+      final desc = _descCtrl.text.trim().isEmpty ? AppLocalizations.of(context)!.clanNewDefault : _descCtrl.text.trim();
       final pwd = _passwordCtrl.text.trim();
       
       final clanId = await ClanService().createClan(
@@ -972,10 +972,10 @@ class _ClanScreenState extends State<ClanScreen> {
         _myRole = 'admin';
         _clanCreated = true;
       });
-      SparkSnack.success(context, 'Clã "$_clanName" criado com sucesso!');
+      SparkSnack.success(context, AppLocalizations.of(context)!.clanCreatedNamed(_clanName));
     } catch(e) {
       if (!mounted) return;
-      SparkSnack.error(context, 'Erro ao criar: $e');
+      SparkSnack.error(context, '${AppLocalizations.of(context)!.errorCreatingClan}$e');
     }
   }
 
@@ -1024,7 +1024,7 @@ class _ClanScreenState extends State<ClanScreen> {
       SparkSnack.success(context, AppLocalizations.of(context)!.joinedClanSuccess);
     } catch (e) {
       if (!mounted) return;
-      SparkSnack.error(context, 'Erro ao entrar: ${e.toString().replaceFirst('Exception: ', '')}');
+      SparkSnack.error(context, '${AppLocalizations.of(context)!.errorJoiningClan}${e.toString().replaceFirst('Exception: ', '')}');
     }
   }
 
@@ -1079,7 +1079,7 @@ class _ClanScreenState extends State<ClanScreen> {
                     // Input Name
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: const Text('NOME DO CLÃ', style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                      child: Text(AppLocalizations.of(context)!.clanNameUpper, style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
                     ),
                     const SizedBox(height: 8),
                     TextField(
@@ -1207,7 +1207,7 @@ class _ClanScreenState extends State<ClanScreen> {
                               } catch (e) {
                                 if (mounted) {
                                   setDialogState(() => isLoading = false);
-                                  SparkSnack.error(context, 'Erro ao atualizar clã: $e');
+                                  SparkSnack.error(context, '${AppLocalizations.of(context)!.errorUpdatingClan}$e');
                                 }
                               }
                             },
@@ -1258,7 +1258,7 @@ class _ClanScreenState extends State<ClanScreen> {
                 }
               } catch (e) {
                 if (mounted) {
-                  SparkSnack.error(context, 'Erro ao deletar: $e');
+                  SparkSnack.error(context, '${AppLocalizations.of(context)!.errorDeletingClan}$e');
                 }
               }
             },
@@ -1282,7 +1282,7 @@ class _ClanScreenState extends State<ClanScreen> {
             mainAxisSize: MainAxisSize.min,
             children: _leagues.map((l) => ListTile(
               leading: Icon(l.icon, color: l.color),
-              title: Text(l.name, style: TextStyle(color: l.color, fontWeight: FontWeight.w700)),
+              title: Text(_leagueLabel(context, l.name), style: TextStyle(color: l.color, fontWeight: FontWeight.w700)),
               trailing: Text('${l.minXp} XP', style: const TextStyle(color: AppColors.textMuted)),
             )).toList(),
           ),
@@ -1602,11 +1602,11 @@ class _ClanScreenState extends State<ClanScreen> {
   void _showManageDialog(ClanMember member) {
     if (member.isUser) return; // Não pode gerenciar a si mesmo
     if (_myRole == 'membro') {
-      SparkSnack.error(context, 'Membros não têm permissão para gerenciar outros.');
+      SparkSnack.error(context, AppLocalizations.of(context)!.clanPermMembers);
       return;
     }
     if (_myRole == 'moderador' && (member.role == ClanRole.admin || member.role == ClanRole.moderador)) {
-      SparkSnack.error(context, 'Moderadores não podem gerenciar outros Moderadores ou Admins.');
+      SparkSnack.error(context, AppLocalizations.of(context)!.clanPermModerators);
       return;
     }
 
@@ -1620,9 +1620,9 @@ class _ClanScreenState extends State<ClanScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Cargo atual: ${_roleName(member.role)}', style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
+            Text(AppLocalizations.of(context)!.clanCurrentRole(_roleName(context, member.role)), style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
             const SizedBox(height: 16),
-            const Text('Ações:', style: TextStyle(color: AppColors.textSecondary, fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(AppLocalizations.of(context)!.clanActionsLabel, style: TextStyle(color: AppColors.textSecondary, fontSize: 13, fontWeight: FontWeight.w600)),
             const SizedBox(height: 8),
             if (_myRole == 'admin' && member.role != ClanRole.admin)
               _actionTile(ctx, Icons.arrow_upward, member.role == ClanRole.membro ? 'Promover a Moderador' : 'Promover a Admin', AppColors.primary, () async {
@@ -1653,16 +1653,29 @@ class _ClanScreenState extends State<ClanScreen> {
       onTap: () {
         Navigator.pop(ctx);
         onTap();
-        SparkSnack.success(context, '$label executado!');
+        SparkSnack.success(context, AppLocalizations.of(context)!.clanActionExecuted(label));
       },
     );
   }
 
-  String _roleName(ClanRole role) {
+  String _roleName(BuildContext context, ClanRole role) {
+    final l = AppLocalizations.of(context)!;
     switch (role) {
-      case ClanRole.admin: return 'Admin';
-      case ClanRole.moderador: return 'Moderador';
-      case ClanRole.membro: return 'Membro';
+      case ClanRole.admin: return l.roleAdmin;
+      case ClanRole.moderador: return l.roleModerator;
+      case ClanRole.membro: return l.roleMember;
+    }
+  }
+
+  String _leagueLabel(BuildContext context, String name) {
+    final l = AppLocalizations.of(context)!;
+    switch (name) {
+      case 'Prata': return l.leagueSilver;
+      case 'Ouro': return l.leagueGold;
+      case 'Platina': return l.leaguePlatinum;
+      case 'Diamante': return l.leagueDiamond;
+      case 'Mestre': return l.leagueMaster;
+      default: return l.leagueBronze;
     }
   }
 }
@@ -1760,7 +1773,7 @@ class _MemberTile extends StatelessWidget {
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                   decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(4)),
-                                  child: const Text('Você', style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700)),
+                                  child: Text(AppLocalizations.of(context)!.duelYou, style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700)),
                                 ),
                               ],
                             ],

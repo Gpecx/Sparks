@@ -2407,5 +2407,57 @@
     }
   },
   "termsAppBarTitle": "TERMOS DE USO",
-  "termsSectionsHeader": "SEÇÕES DOS TERMOS"
+  "termsSectionsHeader": "SEÇÕES DOS TERMOS",
+  "leagueBronze": "Bronze",
+  "leagueSilver": "Prata",
+  "leagueGold": "Ouro",
+  "leaguePlatinum": "Platina",
+  "leagueDiamond": "Diamante",
+  "leagueMaster": "Mestre",
+  "roleAdmin": "Admin",
+  "roleModerator": "Moderador",
+  "roleMember": "Membro",
+  "clanActionsLabel": "Ações:",
+  "clanNameUpper": "NOME DO CLÃ",
+  "clanCreatedNamed": "Clã \"{name}\" criado com sucesso!",
+  "@clanCreatedNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "clanPermMembers": "Membros não têm permissão para gerenciar outros.",
+  "clanPermModerators": "Moderadores não podem gerenciar outros Moderadores ou Admins.",
+  "clanCurrentRole": "Cargo atual: {role}",
+  "@clanCurrentRole": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "clanMeLabel": "Eu",
+  "clanNewDefault": "Novo clã EXS",
+  "clanDefaultName": "Clã Atual",
+  "clanUserFallback": "Usuário",
+  "clanLoadingName": "Carregando...",
+  "rankingPositionWeek": "Você está em {pos}º lugar esta semana",
+  "@rankingPositionWeek": {
+    "placeholders": {
+      "pos": {
+        "type": "int"
+      }
+    }
+  },
+  "netCableT568bSub": "Padrão mais usado no Brasil",
+  "netCableT568aSub": "Par verde e laranja invertidos vs. B",
+  "clanActionExecuted": "{label} executado!",
+  "@clanActionExecuted": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  }
 }
