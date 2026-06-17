@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/core/utils/currency_utils.dart';
 import 'package:spark_app/screens/checkout_screen.dart';
 import 'package:spark_app/screens/main_shell_screen.dart';
 import 'package:spark_app/screens/trial_checkout_screen.dart';
@@ -61,99 +63,102 @@ class SubscriptionPlan {
   });
 }
 
-const List<SubscriptionPlan> subscriptionPlans = [
+List<SubscriptionPlan> subscriptionPlans(BuildContext context) => [
   SubscriptionPlan(
     id: 'free',
     name: 'SPARK Free',
-    subtitle: 'Comece sua jornada',
+    subtitle: AppLocalizations.of(context)!.storeStartJourney,
     monthlyPrice: 0,
     targetAudience: 'Curioso / experimentador',
     icon: Icons.explore_outlined,
     accentColor: Color(0xFF6B7280),
     features: [
-      'Acesso a módulos básicos',
-      'Bateria limitada (recarrega em 5 min/unidade)',
-      'Ranking público',
-      'Conquistas básicas',
+      AppLocalizations.of(context)!.storeFeatBasicModules,
+      AppLocalizations.of(context)!.storeFeatLimitedBattery,
+      AppLocalizations.of(context)!.storeFeatPublicRanking,
+      AppLocalizations.of(context)!.storeFeatBasicAchievements,
     ],
   ),
   SubscriptionPlan(
     id: 'student',
     name: 'SPARK Student',
-    subtitle: 'Para quem está estudando',
+    subtitle: AppLocalizations.of(context)!.storePlanForStudents,
     monthlyPrice: 19.90,
     annualPrice: 199,
-    annualLabel: 'Economia de 17%',
+    annualLabel: AppLocalizations.of(context)!.storeSave17,
     targetAudience: 'Estudante (com comprovação)',
     icon: Icons.school_outlined,
     accentColor: Color(0xFF3B82F6),
     features: [
-      'Tudo do Free',
-      'Bateria infinita ∞',
-      'Acesso a módulos intermediários',
-      'Suporte via chat',
-      'Comprovante de matrícula necessário',
+      AppLocalizations.of(context)!.storeFeatAllFree,
+      AppLocalizations.of(context)!.storeFeatInfiniteBattery,
+      AppLocalizations.of(context)!.storeFeatIntermediateModules,
+      AppLocalizations.of(context)!.storeFeatChatSupport,
+      AppLocalizations.of(context)!.storeFeatEnrollmentProof,
     ],
-    badge: 'ACESSÍVEL',
+    badge: AppLocalizations.of(context)!.storeBadgeAffordable,
   ),
   SubscriptionPlan(
     id: 'pro',
     name: 'SPARK Pro',
-    subtitle: 'Para profissionais individuais',
+    subtitle: AppLocalizations.of(context)!.storePlanForIndividuals,
     monthlyPrice: 39.90,
     annualPrice: 399,
-    annualLabel: 'Economia de 17%',
+    annualLabel: AppLocalizations.of(context)!.storeSave17,
     targetAudience: 'Profissional individual',
     icon: Icons.workspace_premium_outlined,
     accentColor: AppColors.primary,
     highlighted: true,
     features: [
-      'Tudo do Student',
-      'Bateria infinita ∞',
-      'Todos os módulos desbloqueados',
-      'Duelos PvP',
-      'Certificados digitais',
-      'Suporte prioritário',
+      AppLocalizations.of(context)!.storeFeatAllStudent,
+      AppLocalizations.of(context)!.storeFeatInfiniteBattery,
+      AppLocalizations.of(context)!.storeFeatAllModulesUnlocked,
+      AppLocalizations.of(context)!.storeFeatPvpDuels,
+      AppLocalizations.of(context)!.storeFeatDigitalCertificates,
+      AppLocalizations.of(context)!.storeFeatPrioritySupport,
     ],
-    badge: 'MAIS POPULAR',
+    badge: AppLocalizations.of(context)!.storeBadgeMostPopular,
   ),
   SubscriptionPlan(
     id: 'premium',
     name: 'SPARK Premium',
-    subtitle: 'Para sêniores e consultores',
+    subtitle: AppLocalizations.of(context)!.storePlanForSeniors,
     monthlyPrice: 79.90,
     annualPrice: 799,
-    annualLabel: 'Economia de 17%',
+    annualLabel: AppLocalizations.of(context)!.storeSave17,
     targetAudience: 'Sênior / consultor',
     icon: Icons.diamond_outlined,
     accentColor: AppColors.gold,
     features: [
-      'Tudo do Pro',
-      'Bateria infinita ∞',
-      'Conteúdo avançado exclusivo',
-      'Mentoria em grupo mensal',
-      'Acesso antecipado a novidades',
-      'Suporte VIP 24h',
+      AppLocalizations.of(context)!.storeFeatAllPro,
+      AppLocalizations.of(context)!.storeFeatInfiniteBattery,
+      AppLocalizations.of(context)!.storeFeatExclusiveAdvanced,
+      AppLocalizations.of(context)!.storeFeatMonthlyMentoring,
+      AppLocalizations.of(context)!.storeFeatEarlyAccess,
     ],
-    badge: 'PREMIUM',
+    badge: AppLocalizations.of(context)!.storeBadgePremium,
   ),
   SubscriptionPlan(
     id: 'business',
     name: 'SPARK Business',
-    subtitle: 'Para empresas e consultorias',
+    subtitle: AppLocalizations.of(context)!.storePlanForBusiness,
     monthlyPrice: 29,
     annualPrice: null,
-    annualLabel: 'Faturado anual',
+    annualLabel: AppLocalizations.of(context)!.storeBilledAnnual,
     targetAudience: 'Empresas e consultorias',
     icon: Icons.business_outlined,
     accentColor: Color(0xFF8B5CF6),
     perUser: true,
     minUsers: 5,
     features: [
-      'Tudo do Premium por usuário',
-      'Bateria infinita ∞ para todos',
+      AppLocalizations.of(context)!.storeFeatAllPremiumPerUser,
+      AppLocalizations.of(context)!.storeFeatInfiniteBatteryAll,
+      AppLocalizations.of(context)!.storeFeatAdminPanel,
+      AppLocalizations.of(context)!.storeFeatTeamReports,
+      AppLocalizations.of(context)!.storeFeatHrIntegration,
+      AppLocalizations.of(context)!.storeFeatDedicatedManager,
     ],
-    badge: 'EMPRESAS',
+    badge: AppLocalizations.of(context)!.storeBadgeBusiness,
   ),
 ];
 
@@ -186,7 +191,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
   }
 
   void _onSubscribe(SubscriptionPlan plan) {
-    final period = _isAnnual && plan.annualPrice != null ? 'Anual' : 'Mensal';
+    final period = _isAnnual && plan.annualPrice != null ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly;
     AnalyticsService().logPlanSelected(
         plan: plan.id, period: _isAnnual ? 'yearly' : 'monthly');
     final price = (_isAnnual && plan.annualPrice != null)
@@ -253,18 +258,18 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                   child: Row(
                     children: [
                       _buildSmartBackButton(),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('LOJA SPARK',
+                            Text(AppLocalizations.of(context)!.storeTitle,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w800,
                                     letterSpacing: 2)),
                             SizedBox(height: 2),
-                            Text('Escolha o plano ideal para você',
+                            Text(AppLocalizations.of(context)!.storeSubtitle,
                                 style: TextStyle(
                                     color: AppColors.textMuted, fontSize: 12)),
                           ],
@@ -288,12 +293,12 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                     ),
                     child: Row(
                       children: [
-                        _buildToggleOption('Mensal', !_isAnnual, () {
+                        _buildToggleOption(AppLocalizations.of(context)!.monthly, !_isAnnual, () {
                           setState(() => _isAnnual = false);
                         }),
-                        _buildToggleOption('Anual', _isAnnual, () {
+                        _buildToggleOption(AppLocalizations.of(context)!.yearly, _isAnnual, () {
                           setState(() => _isAnnual = true);
-                        }, badge: 'Economize 17%'),
+                        }, badge: AppLocalizations.of(context)!.save17Percent),
                       ],
                     ),
                   ),
@@ -304,10 +309,10 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
                 Expanded(
                   child: ListView.separated(
                     padding: const EdgeInsets.fromLTRB(20, 4, 20, 32),
-                    itemCount: subscriptionPlans.length,
+                    itemCount: subscriptionPlans(context).length,
                     separatorBuilder: (_, __) => const SizedBox(height: 12),
                     itemBuilder: (_, i) =>
-                        _buildPlanCard(subscriptionPlans[i]),
+                        _buildPlanCard(subscriptionPlans(context)[i]),
                   ),
                 ),
               ],
@@ -375,19 +380,20 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
     final isAnnualAvailable = plan.annualPrice != null;
     final showAnnual = _isAnnual && isAnnualAvailable;
 
+    final l10n = AppLocalizations.of(context)!;
     final displayPrice = isFree
-        ? 'Grátis'
+        ? l10n.freePlanPrice
         : showAnnual
-            ? 'R\$ ${(plan.annualPrice! / 12).toStringAsFixed(2)}/mês'
-            : 'R\$ ${plan.monthlyPrice.toStringAsFixed(2)}${plan.perUser ? '/usuário/mês' : '/mês'}';
+            ? '${CurrencyUtils.format(context, plan.annualPrice! / 12)}${l10n.storePerMonth}'
+            : '${CurrencyUtils.format(context, plan.monthlyPrice)}${plan.perUser ? l10n.storePerUserPerMonth : l10n.storePerMonth}';
 
     final subPrice = isFree
         ? null
         : showAnnual
-            ? 'R\$ ${plan.annualPrice!.toStringAsFixed(0)} faturados anualmente'
+            ? '${CurrencyUtils.format(context, plan.annualPrice!, decimals: 0)} ${l10n.storeBilledAnnuallySuffix}'
             : plan.perUser
-                ? 'Mín. ${plan.minUsers} usuários • Faturado anual'
-                : (isAnnualAvailable ? 'Ou ${plan.annualLabel} no plano anual' : plan.annualLabel);
+                ? l10n.storeMinUsersBilledAnnual(plan.minUsers ?? 0)
+                : (isAnnualAvailable ? l10n.storeOrAnnualPlan(plan.annualLabel) : plan.annualLabel);
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
@@ -584,7 +590,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
 
     if (isFree) {
       final isCurrentPlan = user == null || (!user.isPremium && !user.isOnTrial);
-      return _disabledButton(isCurrentPlan ? 'SEU PLANO ATUAL' : 'PLANO BÁSICO');
+      return _disabledButton(isCurrentPlan ? AppLocalizations.of(context)!.yourCurrentPlan : AppLocalizations.of(context)!.basicPlan);
     }
 
     // Em trial nesse plano
@@ -592,20 +598,20 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
       final remaining = _trialDaysRemaining(user!.trialEndsAt);
       return _disabledButton(
         remaining > 0
-            ? 'TRIAL ATIVO — $remaining dia${remaining == 1 ? '' : 's'} restante${remaining == 1 ? '' : 's'}'
-            : 'TRIAL ENCERRADO',
+            ? AppLocalizations.of(context)!.trialActiveRemaining(remaining)
+            : AppLocalizations.of(context)!.trialEnded,
         color: plan.accentColor,
       );
     }
 
     // Já assina esse plano
     if (user?.isPremium == true && user?.isOnTrial != true && user?.subscriptionPlanId == plan.id) {
-      return _disabledButton('PLANO ATUAL ✓', color: plan.accentColor);
+      return _disabledButton(AppLocalizations.of(context)!.currentPlanActive, color: plan.accentColor);
     }
 
     // Student exige comprovação de matrícula antes de assinar (PDF §8).
     if (plan.id == 'student') {
-      return _routeButton('VERIFICAR MATRÍCULA',
+      return _routeButton(AppLocalizations.of(context)!.verifyEnrollment,
           color: plan.accentColor,
           icon: Icons.school_outlined,
           route: '/student-verification');
@@ -613,7 +619,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
 
     // Business é B2B — leva ao formulário de proposta (PDF §9).
     if (plan.id == 'business') {
-      return _routeButton('SOLICITAR PROPOSTA',
+      return _routeButton(AppLocalizations.of(context)!.requestProposal,
           color: plan.accentColor,
           icon: Icons.business_outlined,
           route: '/business-setup');
@@ -631,7 +637,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
           child: Text(
-            'FAZER UPGRADE PARA ${plan.name.split(' ').last.toUpperCase()}',
+            AppLocalizations.of(context)!.upgradeToPlan(plan.name.split(' ').last.toUpperCase()),
             style: const TextStyle(
                 color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 0.8),
           ),
@@ -652,7 +658,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             ),
             child: Text(
-              'ASSINAR ${plan.name.split(' ').last.toUpperCase()}',
+              AppLocalizations.of(context)!.subscribeToPlan(plan.name.split(' ').last.toUpperCase()),
               style: const TextStyle(
                   color: Colors.white, fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1),
             ),
@@ -670,7 +676,7 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
             ),
             icon: Icon(Icons.all_inclusive, color: plan.accentColor, size: 14),
             label: Text(
-              'TESTAR 7 DIAS GRÁTIS',
+              AppLocalizations.of(context)!.test7DaysFree,
               style: TextStyle(
                   color: plan.accentColor, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.8),
             ),

@@ -2654,5 +2654,13 @@
         "type": "String"
       }
     }
+  },
+  "moduleFallbackName": "Módulo {id}",
+  "@moduleFallbackName": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
   }
 }

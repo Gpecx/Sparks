@@ -826,7 +826,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     final moduleName = lastModule != null
         ? lastModule.moduleName.isNotEmpty
             ? lastModule.moduleName
-            : 'Módulo ${lastModule.moduleId.split('_').last}'
+            : AppLocalizations.of(context)!.moduleFallbackName(lastModule.moduleId.split('_').last)
         : AppLocalizations.of(context)!.noModuleStarted;
     final moduleSubtitle = lastModule != null
         ? '${lastModule.completedLessons.length} lição(ões) concluída(s)'

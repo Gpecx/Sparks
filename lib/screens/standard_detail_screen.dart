@@ -292,6 +292,29 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
         ),
         const SizedBox(height: 28),
         Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                ),
+                child: Text(AppLocalizations.of(context)!.stdTrending, style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(AppLocalizations.of(context)!.stdRecommended, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 14),
+        _buildVideoList(null),
+        const SizedBox(height: 32),
+        Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: SizedBox(
             width: double.infinity,

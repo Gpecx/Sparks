@@ -2038,5 +2038,13 @@
         "type": "String"
       }
     }
+  },
+  "moduleFallbackName": "Module {id}",
+  "@moduleFallbackName": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
   }
 }
