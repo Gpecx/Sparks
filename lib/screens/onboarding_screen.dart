@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -18,38 +19,41 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final Map<String, String> _quizAnswers = {};
   bool _quizCompleted = false;
 
-  final List<Map<String, dynamic>> _pages = [
+  List<Map<String, dynamic>> get _pages => [
     {
-      'title': 'Bem-vindo ao\nSPARK',
-      'description': 'Sua jornada no mundo das normas técnicas do setor elétrico começa agora. Vamos aprender como o app funciona?',
+      'title': AppLocalizations.of(context)!.onbWelcomeTitle,
+      'description': AppLocalizations.of(context)!.onbWelcomeDesc,
       'icon': Icons.hub_outlined,
     },
     {
-      'title': 'Energia & Foco',
-      'description': 'Cada lição que você completa gasta 1 ponto de Energia. Mas não se preocupe, ela se recupera com o tempo. Mantenha seu Foco para não perder o Streak!',
+      'title': AppLocalizations.of(context)!.onbEnergyTitle,
+      'description': AppLocalizations.of(context)!.onbEnergyDesc,
       'icon': Icons.bolt,
     },
     {
-      'title': 'Ranking & Spark Points',
-      'description': 'Acerte as questões, acumule XP e suba no Ranking global e do seu Clã. Ganhe Spark Points para trocar por benefícios no app.',
+      'title': AppLocalizations.of(context)!.onbRankingTitle,
+      'description': AppLocalizations.of(context)!.onbRankingDesc,
       'icon': Icons.emoji_events_outlined,
     },
   ];
 
-  final List<Map<String, dynamic>> _quizQuestions = [
-    {
-      'id': 'energy',
-      'question': 'O que é consumido ao iniciar uma nova lição?',
-      'options': ['Spark Points', 'Energia', 'Streak', 'XP'],
-      'correct': 'Energia',
-    },
-    {
-      'id': 'streak',
-      'question': 'O que mostra quantos dias seguidos você estudou?',
-      'options': ['Ranking', 'Clã', 'Streak', 'Energia'],
-      'correct': 'Streak',
-    },
-  ];
+  List<Map<String, dynamic>> get _quizQuestions {
+    final l = AppLocalizations.of(context)!;
+    return [
+      {
+        'id': 'energy',
+        'question': l.onbQ1,
+        'options': [l.onbOptSparkPoints, l.onbOptEnergy, l.onbOptStreak, l.onbOptXp],
+        'correct': l.onbOptEnergy,
+      },
+      {
+        'id': 'streak',
+        'question': l.onbQ2,
+        'options': [l.onbOptRanking, l.onbOptClan, l.onbOptStreak, l.onbOptEnergy],
+        'correct': l.onbOptStreak,
+      },
+    ];
+  }
 
   void _nextPage() {
     if (_currentPage < _pages.length) {
@@ -61,7 +65,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       if (_quizCompleted) {
         Navigator.pop(context); // Go back or go to home screen
       } else {
-        SparkSnack.error(context, 'Complete o minigame para prosseguir!');
+        SparkSnack.error(context, AppLocalizations.of(context)!.onbCompleteMinigame);
       }
     }
   }
@@ -83,7 +87,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         } else {
           // Reseta para tentar novamente
           _quizAnswers.clear();
-          SparkSnack.error(context, 'Algumas respostas estão erradas. Tente novamente!');
+          SparkSnack.error(context, AppLocalizations.of(context)!.onbWrongAnswers);
         }
       }
     });
@@ -105,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('Pular', style: TextStyle(color: AppColors.textMuted)),
+                      child: Text(AppLocalizations.of(context)!.onbSkip, style: const TextStyle(color: AppColors.textMuted)),
                     ),
                     Row(
                       children: List.generate(_pages.length + 1, (index) {
@@ -156,9 +160,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       elevation: _currentPage == _pages.length && !_quizCompleted ? 0 : 4,
                     ),
                     child: Text(
-                      _currentPage == _pages.length 
-                          ? (_quizCompleted ? 'CONCLUIR E ENTRAR' : 'RESOLVA O QUIZ')
-                          : 'AVANÇAR',
+                      _currentPage == _pages.length
+                          ? (_quizCompleted ? AppLocalizations.of(context)!.onbCompleteEnter : AppLocalizations.of(context)!.onbSolveQuiz)
+                          : AppLocalizations.of(context)!.onbNext,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
@@ -232,20 +236,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           const Icon(Icons.videogame_asset_outlined, size: 64, color: AppColors.gold),
           const SizedBox(height: 16),
-          const Text(
-            'Teste Rápido!',
+          Text(
+            AppLocalizations.of(context)!.onbQuickTest,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 24,
               fontWeight: FontWeight.w800,
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Vamos ver se você está pronto para dominar as normas.',
+          Text(
+            AppLocalizations.of(context)!.onbQuickTestDesc,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
+            style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
           ),
           const SizedBox(height: 32),
           
@@ -262,8 +266,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: const Icon(Icons.check_circle, size: 80, color: AppColors.primary),
                   ),
                   const SizedBox(height: 24),
-                  const Text('Parabéns! Você concluiu o treinamento.',
-                      style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 16)),
+                  Text(AppLocalizations.of(context)!.onbCongrats,
+                      style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 16)),
                 ],
               ),
             )

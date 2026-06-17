@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/utils/differential_balance.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
@@ -110,12 +111,11 @@ class _DifferentialBalanceScreenState extends State<DifferentialBalanceScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Balanço Diferencial (87T)',
+      title: AppLocalizations.of(context)!.tlDiffBalance,
       children: [
         ToolCard(
           subtitle:
-              'Calcula o coeficiente de balanço de cada enrolamento (referência = Primário). '
-              'I_nom = S/(√3·V); I_sec = I_nom·(TC_sec/TC_prim); Balanço = I_sec(ref)/I_sec.',
+              AppLocalizations.of(context)!.diffBalDesc,
           children: const [],
         ),
         const SizedBox(height: 12),
@@ -126,22 +126,22 @@ class _DifferentialBalanceScreenState extends State<DifferentialBalanceScreen> {
               ToolFieldRow(children: [
                 ToolField(
                     controller: w.power,
-                    label: 'Potência (MVA)',
+                    label: AppLocalizations.of(context)!.diffBalPower,
                     semantic: 'Potência do enrolamento ${w.name}'),
                 ToolField(
                     controller: w.voltage,
-                    label: 'Tensão (kV)',
+                    label: AppLocalizations.of(context)!.diffBalVolt,
                     semantic: 'Tensão do enrolamento ${w.name}'),
               ]),
               const SizedBox(height: 12),
               ToolFieldRow(children: [
                 ToolField(
                     controller: w.ctPrimary,
-                    label: 'TC primário (A)',
+                    label: AppLocalizations.of(context)!.diffBalPri,
                     semantic: 'TC primário ${w.name}'),
                 ToolField(
                     controller: w.ctSecondary,
-                    label: 'TC secundário (A)',
+                    label: AppLocalizations.of(context)!.diffBalSec,
                     semantic: 'TC secundário ${w.name}'),
               ]),
             ],
@@ -149,13 +149,13 @@ class _DifferentialBalanceScreenState extends State<DifferentialBalanceScreen> {
           const SizedBox(height: 12),
         ],
         const SizedBox(height: 8),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(
             results: _results ?? const [],
             warning: _warning,
-            title: 'Coeficientes de balanço',
+            title: AppLocalizations.of(context)!.diffBalCoeffs,
           ),
         ],
       ],

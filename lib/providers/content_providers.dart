@@ -3,12 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/models/spark_admin_models.dart';
+import 'package:spark_app/providers/language_provider.dart';
 
 final _firestoreProvider = Provider((ref) => FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default'));
 
 // ── 1. Categorias ───────────────────────────────────────────────────────────
 final categoriesStreamProvider = StreamProvider<List<SPARKCategory>>((ref) {
   final firestore = ref.watch(_firestoreProvider);
+  ref.watch(languageProvider); // re-parseia o conteúdo ao trocar de idioma
   return firestore
       .collection(FS.categories)
       .snapshots()
@@ -23,6 +25,7 @@ final categoriesStreamProvider = StreamProvider<List<SPARKCategory>>((ref) {
 final modulesStreamProvider =
     StreamProvider.family<List<SPARKModule>, String>((ref, categoryId) {
   final firestore = ref.watch(_firestoreProvider);
+  ref.watch(languageProvider); // re-parseia o conteúdo ao trocar de idioma
   return firestore
       .collection(FS.categories)
       .doc(categoryId)
@@ -41,6 +44,7 @@ typedef TrailArgs = ({String categoryId, String moduleId});
 final trailsStreamProvider =
     StreamProvider.family<List<SPARKTrail>, TrailArgs>((ref, args) {
   final firestore = ref.watch(_firestoreProvider);
+  ref.watch(languageProvider); // re-parseia o conteúdo ao trocar de idioma
   return firestore
       .collection(FS.categories)
       .doc(args.categoryId)
@@ -61,6 +65,7 @@ typedef LessonArgs = ({String categoryId, String moduleId, String trailId});
 final lessonsStreamProvider =
     StreamProvider.family<List<SPARKLesson>, LessonArgs>((ref, args) {
   final firestore = ref.watch(_firestoreProvider);
+  ref.watch(languageProvider); // re-parseia o conteúdo ao trocar de idioma
   return firestore
       .collection(FS.categories)
       .doc(args.categoryId)

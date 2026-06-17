@@ -1,3 +1,4 @@
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -71,24 +72,24 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
   late Animation<double> _shakeAnim;
 
   // ── Lista de Níveis ─────────────────────────────────────────────
-  late final List<InspectionLevel> _levels = [
+  List<InspectionLevel> get _levels => [
     // LAB-01 · Caixa de Tomada Residencial
     InspectionLevel(
       title: 'LAB-01',
-      instruction: 'Inspecione a caixa de tomada.\nEncontre os 2 riscos ocultos.',
-      completionMessage: '✓ Inspeção concluída! +50 XP',
-      hitZones: const [
+      instruction: AppLocalizations.of(context)!.labInstruction1,
+      completionMessage: AppLocalizations.of(context)!.labInspectionDone,
+      hitZones: [
         HitZone(
           id: 'fio',
           rect: Rect.fromLTWH(200, 140, 85, 55),
           errorMessage:
-              '⚡ RISCO · Fio terra desencapado — cobre exposto sem isolamento verde/amarelo.',
+              AppLocalizations.of(context)!.labRisk1,
         ),
         HitZone(
           id: 'prot',
           rect: Rect.fromLTWH(270, 68, 85, 65),
           errorMessage:
-              '⚠ NORMA · Tomada sem proteção infantil (NBR 14136). Abertura exposta.',
+              AppLocalizations.of(context)!.labRisk2,
         ),
       ],
       sceneBuilder: (foundIds) => _TomadaScene(foundIds: foundIds),
@@ -99,20 +100,20 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
     // LAB-02 · Quadro de Distribuição
     InspectionLevel(
       title: 'LAB-02',
-      instruction: 'Inspecione o Quadro QD-01.\nAtenção às cores dos condutores.',
-      completionMessage: '✓ Inspeção concluída! +50 XP',
-      hitZones: const [
+      instruction: AppLocalizations.of(context)!.labInstruction2,
+      completionMessage: AppLocalizations.of(context)!.labInspectionDone,
+      hitZones: [
         HitZone(
           id: 'trip',
           rect: Rect.fromLTWH(55, 132, 230, 42),
           errorMessage:
-              '⚡ CRÍTICO · Disjuntor C3 em TRIP. Causa raiz não investigada — reconexão proibida.',
+              AppLocalizations.of(context)!.labRisk3,
         ),
         HitZone(
           id: 'inv',
           rect: Rect.fromLTWH(130, 195, 50, 50),
           errorMessage:
-              '⚡ PERIGO · Fio FASE ligado na barra NEUTRO. Inversão de polaridade — risco de choque com disjuntor desligado.',
+              AppLocalizations.of(context)!.labRisk4,
         ),
       ],
       sceneBuilder: (foundIds) => _QuadroScene(foundIds: foundIds),
@@ -123,26 +124,26 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
     // LAB-03 · Painel Industrial
     InspectionLevel(
       title: 'LAB-03',
-      instruction: 'Inspecione o painel industrial.\n3 não-conformidades presentes.',
-      completionMessage: '✓ Inspeção concluída! +50 XP',
-      hitZones: const [
+      instruction: AppLocalizations.of(context)!.labInstruction3,
+      completionMessage: AppLocalizations.of(context)!.labInspectionDone,
+      hitZones: [
         HitZone(
           id: 'rele',
           rect: Rect.fromLTWH(268, 35, 90, 68),
           errorMessage:
-              '⚡ CRÍTICO · Relé térmico em TRIP sem reset autorizado. Motor com histórico de sobrecarga.',
+              AppLocalizations.of(context)!.labRisk5,
         ),
         HitZone(
           id: 'borda',
           rect: Rect.fromLTWH(145, 238, 65, 35),
           errorMessage:
-              '⚠ RISCO · Cabo elétrico sobre borda metálica sem passa-fio. Isolamento sofrerá corte progressivo.',
+              AppLocalizations.of(context)!.labRisk6,
         ),
         HitZone(
           id: 'paraf',
           rect: Rect.fromLTWH(405, 260, 40, 35),
           errorMessage:
-              '⚠ NORMA · Parafuso ausente no gabinete. Grau de proteção IP comprometido.',
+              AppLocalizations.of(context)!.labRisk7,
         ),
       ],
       sceneBuilder: (foundIds) => _PainelIndustrialScene(foundIds: foundIds),
@@ -220,7 +221,7 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
     _shakeCtrl.forward(from: 0.0); 
 
     setState(() {
-      _feedbackMessage = '// Tudo certo por aqui. Continue procurando...';
+      _feedbackMessage = AppLocalizations.of(context)!.labKeepSearching;
       _feedbackIsError = false;
     });
   }
@@ -250,8 +251,8 @@ class _ErrorSimulationScreenState extends State<ErrorSimulationScreen>
         if (!mounted) return;
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('🎉 Laboratório Concluído! +150 XP'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.labCompleted),
             backgroundColor: AppColors.gold,
           ),
         );

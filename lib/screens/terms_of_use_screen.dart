@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
@@ -20,8 +21,8 @@ class TermsOfUseScreen extends StatelessWidget {
               icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 20),
               onPressed: () => context.pop(),
             ),
-            title: const Text(
-              'TERMOS DE USO',
+            title: Text(
+              AppLocalizations.of(context)!.termsAppBarTitle,
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w800,
@@ -36,37 +37,37 @@ class TermsOfUseScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildHeader(),
+                _buildHeader(context),
                 const SizedBox(height: 24),
-                _sectionTitle('SEÇÕES DOS TERMOS'),
+                _sectionTitle(AppLocalizations.of(context)!.termsSectionsHeader),
                 const SizedBox(height: 12),
                 _buildTermTile(
-                  title: '1. Introdução e Objetivo do SPARK',
-                  content: 'O SPARK é uma plataforma digital focada no treinamento, capacitação e aprimoramento profissional na área de engenharia eletrotécnica e normas do setor elétrico. Ao acessar a plataforma, você concorda em cumprir e ser regido por estes Termos de Uso, bem como pela nossa Política de Privacidade.',
+                  title: AppLocalizations.of(context)!.termsT1,
+                  content: AppLocalizations.of(context)!.termsB1,
                 ),
                 _buildTermTile(
-                  title: '2. Conta, Cadastro e Segurança',
-                  content: 'Para acessar as funcionalidades completas, lições e simulação de erros, você deve realizar o cadastro fornecendo dados verídicos e atualizados. A segurança da sua senha é de sua inteira responsabilidade. Qualquer atividade realizada sob sua conta será atribuída a você.',
+                  title: AppLocalizations.of(context)!.termsT2,
+                  content: AppLocalizations.of(context)!.termsB2,
                 ),
                 _buildTermTile(
-                  title: '3. Spark Points e Assinatura Premium',
-                  content: 'O SPARK possui mecânicas de gamificação (XP, Clãs, Torneios) e uma loja virtual. Pontos Spark e assinaturas premium podem ser adquiridos via métodos de pagamento disponíveis. As compras de produtos digitais são definitivas, e o reembolso segue estritamente as diretrizes da legislação nacional aplicável de comércio eletrônico.',
+                  title: AppLocalizations.of(context)!.termsT3,
+                  content: AppLocalizations.of(context)!.termsB3,
                 ),
                 _buildTermTile(
-                  title: '4. Propriedade Intelectual',
-                  content: 'Todos os materiais didáticos, questões, simulações de esquemas de PCI/PCB, códigos, artes visuais e textos disponibilizados no SPARK são de propriedade intelectual exclusiva da EXS Solutions ou devidamente licenciados. É expressamente proibida a reprodução, distribuição ou engenharia reversa destes materiais sem autorização prévia por escrito.',
+                  title: AppLocalizations.of(context)!.termsT4,
+                  content: AppLocalizations.of(context)!.termsB4,
                 ),
                 _buildTermTile(
-                  title: '5. Conduta na Comunidade (Clãs e Duelos)',
-                  content: 'A convivência na área de Clãs e Duelos de Conhecimento deve ser pautada pelo respeito mútuo. Trapaças, uso de scripts maliciosos, ofensas no chat ou qualquer comportamento que prejudique a experiência pedagógica de outros usuários resultará na suspensão imediata ou cancelamento definitivo da conta do infrator.',
+                  title: AppLocalizations.of(context)!.termsT5,
+                  content: AppLocalizations.of(context)!.termsB5,
                 ),
                 _buildTermTile(
-                  title: '6. Proteção de Dados (LGPD)',
-                  content: 'Coletamos e processamos seus dados (como e-mail, nome, progresso de estudos e respostas) com o objetivo exclusivo de aprimorar a sua jornada de aprendizado e validar suas conquistas, respeitando integralmente as disposições da Lei Geral de Proteção de Dados (LGPD).',
+                  title: AppLocalizations.of(context)!.termsT6,
+                  content: AppLocalizations.of(context)!.termsB6,
                 ),
                 _buildTermTile(
-                  title: '7. Alterações e Limitação de Responsabilidade',
-                  content: 'Reservamo-nos o direito de alterar estes termos e atualizar os conteúdos da plataforma a qualquer momento para melhoria contínua. O SPARK não se responsabiliza por eventuais interrupções temporárias de conexão ou bugs de terceiros, mas empenhará os melhores esforços técnicos para rápida resolução de incidentes.',
+                  title: AppLocalizations.of(context)!.termsT7,
+                  content: AppLocalizations.of(context)!.termsB7,
                 ),
                 const SizedBox(height: 32),
                 _buildFooter(context),
@@ -79,7 +80,7 @@ class TermsOfUseScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -102,17 +103,17 @@ class TermsOfUseScreen extends StatelessWidget {
                 child: const Icon(Icons.verified_user_outlined, color: AppColors.primary, size: 26),
               ),
               const SizedBox(width: 14),
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Termos & Condições',
+                      AppLocalizations.of(context)!.termsTitle,
                       style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                     SizedBox(height: 3),
                     Text(
-                      'Última atualização: Junho de 2026',
+                      AppLocalizations.of(context)!.termsLastUpdate,
                       style: TextStyle(color: AppColors.textSecondary, fontSize: 11),
                     ),
                   ],
@@ -121,8 +122,8 @@ class TermsOfUseScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Leia atentamente as diretrizes abaixo para entender seus direitos, deveres e as regras da nossa plataforma de aprendizado eletrotécnico.',
+          Text(
+            AppLocalizations.of(context)!.termsIntro,
             style: TextStyle(color: AppColors.textMuted, fontSize: 13, height: 1.5),
           ),
         ],
@@ -196,7 +197,7 @@ class TermsOfUseScreen extends StatelessWidget {
               text: TextSpan(
                 style: const TextStyle(color: AppColors.textSecondary, fontSize: 11, height: 1.5),
                 children: [
-                  const TextSpan(text: 'Dúvidas sobre os termos? Entre em contato com a equipe de '),
+                  TextSpan(text: AppLocalizations.of(context)!.termsQuestions),
                   WidgetSpan(
                     alignment: PlaceholderAlignment.middle,
                     child: GestureDetector(
@@ -204,8 +205,8 @@ class TermsOfUseScreen extends StatelessWidget {
                         context.pop();
                         context.push('/support');
                       },
-                      child: const Text(
-                        'Suporte Técnico',
+                      child: Text(
+                        AppLocalizations.of(context)!.termsSupportTeam,
                         style: TextStyle(
                           color: AppColors.primary,
                           fontWeight: FontWeight.w700,

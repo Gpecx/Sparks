@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -107,7 +108,7 @@ class _ClanScreenState extends State<ClanScreen> {
   void initState() {
     super.initState();
     _currentUserUid = FirebaseAuth.instance.currentUser?.uid;
-    _myName = FirebaseAuth.instance.currentUser?.displayName ?? 'Usuário';
+    _myName = FirebaseAuth.instance.currentUser?.displayName ?? AppLocalizations.of(context)!.clanUserFallback;
 
     if (widget.isViewingActive) {
       _clanCreated = true;
@@ -134,7 +135,7 @@ class _ClanScreenState extends State<ClanScreen> {
             setState(() {
               _myClanId = clanId;
               _myRole = role;
-              _clanName = clanDoc.data()?['name'] ?? 'Clã Atual';
+              _clanName = clanDoc.data()?['name'] ?? AppLocalizations.of(context)!.clanDefaultName;
               
               if (clanDoc.data()?['primaryColor'] != null) {
                 _clanPrimaryColor = Color(clanDoc.data()!['primaryColor']);
@@ -183,8 +184,8 @@ class _ClanScreenState extends State<ClanScreen> {
               _clanCreated
                   ? _clanName.toUpperCase()
                   : widget.isCreating
-                      ? 'CRIAR CLÃ'
-                      : 'ENTRAR EM UM CLÃ',
+                      ? AppLocalizations.of(context)!.createClanTitle
+                      : AppLocalizations.of(context)!.joinClanTitle,
               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 15, letterSpacing: 1.5),
             ),
             actions: _clanCreated && (_myRole == 'admin' || _myRole == 'moderador')
@@ -198,9 +199,9 @@ class _ClanScreenState extends State<ClanScreen> {
                       },
                       itemBuilder: (_) => [
                         if (_myRole == 'admin' || _myRole == 'moderador')
-                          const PopupMenuItem(value: 'edit', child: Text('Editar Nome/Senha', style: TextStyle(color: Colors.white))),
+                          PopupMenuItem(value: 'edit', child: Text(AppLocalizations.of(context)!.editClanNamePassword, style: TextStyle(color: Colors.white))),
                         if (_myRole == 'admin')
-                          const PopupMenuItem(value: 'delete', child: Text('Deletar Clã', style: TextStyle(color: Colors.redAccent))),
+                          PopupMenuItem(value: 'delete', child: Text(AppLocalizations.of(context)!.deleteClan, style: TextStyle(color: Colors.redAccent))),
                       ],
                     ),
                   ]
@@ -237,13 +238,13 @@ class _ClanScreenState extends State<ClanScreen> {
                   child: Icon(Icons.groups, color: AppColors.primary, size: 52),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Crie um grupo para sua empresa e compete contra seus colegas!',
+                Text(
+                  AppLocalizations.of(context)!.createClanDescription,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
                 ),
                 const SizedBox(height: 24),
-                _label('Nome do Clã'),
+                _label(AppLocalizations.of(context)!.clanNameLabel),
                 const SizedBox(height: 8),
                 Form(
                   key: _formKeyCreate,
@@ -251,29 +252,29 @@ class _ClanScreenState extends State<ClanScreen> {
                     children: [
                       _inputField(
                         _nameCtrl, 
-                        'Ex: EXS Técnicos SP', 
+                        AppLocalizations.of(context)!.clanNameHint, 
                         Icons.shield_outlined,
                         maxLength: 50,
-                        validator: (v) => (v == null || v.trim().length <= 3) ? 'Nome deve ter mais que 3 caracteres' : null,
+                        validator: (v) => (v == null || v.trim().length <= 3) ? AppLocalizations.of(context)!.clanNameValidator : null,
                       ),
                       const SizedBox(height: 16),
-                      _label('Descrição do Clã'),
+                      _label(AppLocalizations.of(context)!.clanDescriptionLabel),
                       const SizedBox(height: 8),
                       _inputField(
                         _descCtrl, 
-                        'Sobre o clã...', 
+                        AppLocalizations.of(context)!.clanDescriptionHint, 
                         Icons.description_outlined,
                         maxLength: 300,
                       ),
                       const SizedBox(height: 16),
-                      _label('Senha do Clã'),
+                      _label(AppLocalizations.of(context)!.clanPasswordLabel),
                       const SizedBox(height: 8),
                       _inputField(
                         _passwordCtrl, 
-                        'Mínimo 4 caracteres', 
+                        AppLocalizations.of(context)!.clanPasswordHint, 
                         Icons.lock_outline, 
                         isPassword: true,
-                        validator: (v) => (v == null || v.trim().length < 4) ? 'Senha deve ter pelo menos 4 caracteres' : null,
+                        validator: (v) => (v == null || v.trim().length < 4) ? AppLocalizations.of(context)!.clanPasswordValidator : null,
                       ),
                     ],
                   ),
@@ -286,13 +287,13 @@ class _ClanScreenState extends State<ClanScreen> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.primary.withValues(alpha: 0.25)),
                   ),
-                  child: const Row(
+                  child: Row(
                     children: [
                       Icon(Icons.info_outline, color: AppColors.primary, size: 16),
                       SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          'Como criador, você terá o cargo de ADMIN e poderá gerenciar todos os membros.',
+                          AppLocalizations.of(context)!.createClanAdminNotice,
                           style: TextStyle(color: AppColors.textSecondary, fontSize: 12, height: 1.4),
                         ),
                       ),
@@ -309,7 +310,7 @@ class _ClanScreenState extends State<ClanScreen> {
                       backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text('CRIAR GRUPO/CLÃ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14, letterSpacing: 1)),
+                    child: Text(AppLocalizations.of(context)!.createClanButton, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14, letterSpacing: 1)),
                   ),
                 ),
               ],
@@ -339,28 +340,28 @@ class _ClanScreenState extends State<ClanScreen> {
               children: [
                 const Center(child: Icon(Icons.login, color: AppColors.primary, size: 52)),
                 const SizedBox(height: 16),
-                const Text(
-                  'Entre com código de convite ou com a senha do clã.',
+                Text(
+                  AppLocalizations.of(context)!.joinClanDescription,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
                 ),
                 const SizedBox(height: 24),
-                _label('Código de Convite (opcional)'),
+                _label(AppLocalizations.of(context)!.inviteCodeOptionalLabel),
                 const SizedBox(height: 8),
                 Form(
                   key: _formKeyJoin,
                   child: Column(
                     children: [
-                      _inputField(_joinCodeCtrl, 'Ex: SPARK-XK29', Icons.confirmation_number_outlined),
+                      _inputField(_joinCodeCtrl, AppLocalizations.of(context)!.inviteCodeHint, Icons.confirmation_number_outlined),
                       const SizedBox(height: 16),
-                      _label('Senha do Clã'),
+                      _label(AppLocalizations.of(context)!.clanPasswordLabel),
                       const SizedBox(height: 8),
                       _inputField(
                         _joinPasswordCtrl, 
-                        'Digite a senha do grupo', 
+                        AppLocalizations.of(context)!.clanPasswordJoinHint, 
                         Icons.lock_outline, 
                         isPassword: true,
-                        validator: (v) => (_joinCodeCtrl.text.isEmpty && (v == null || v.isEmpty)) ? 'Informe a senha ou o código' : null,
+                        validator: (v) => (_joinCodeCtrl.text.isEmpty && (v == null || v.isEmpty)) ? AppLocalizations.of(context)!.joinPasswordValidator : null,
                       ),
                     ],
                   ),
@@ -375,7 +376,7 @@ class _ClanScreenState extends State<ClanScreen> {
                       backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text('ENTRAR NO GRUPO', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14, letterSpacing: 1)),
+                    child: Text(AppLocalizations.of(context)!.joinClanButton, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14, letterSpacing: 1)),
                   ),
                 ),
               ],
@@ -395,7 +396,7 @@ class _ClanScreenState extends State<ClanScreen> {
       builder: (context, clanSnapshot) {
         if (!clanSnapshot.hasData) return const Center(child: CircularProgressIndicator());
         if (!clanSnapshot.data!.exists) {
-          return const Center(child: Text('Clã não encontrado.', style: TextStyle(color: Colors.white)));
+          return Center(child: Text(AppLocalizations.of(context)!.clanNotFound, style: TextStyle(color: Colors.white)));
         }
 
         final clanData = clanSnapshot.data!.data() as Map<String, dynamic>;
@@ -458,12 +459,12 @@ class _ClanScreenState extends State<ClanScreen> {
                         children: [
                           Text(_clanName, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800)),
                           const SizedBox(height: 4),
-                          Text('$memberCount membros', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                          Text(AppLocalizations.of(context)!.clanMembersCount(memberCount), maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
                           const SizedBox(height: 12),
                           // Barra de Level do Clã
                           Row(
                             children: [
-                              Text(currentLeague.name, style: TextStyle(color: currentLeague.color, fontSize: 11, fontWeight: FontWeight.w700)),
+                              Text(_leagueLabel(context, currentLeague.name), style: TextStyle(color: currentLeague.color, fontSize: 11, fontWeight: FontWeight.w700)),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: ClipRRect(
@@ -478,7 +479,7 @@ class _ClanScreenState extends State<ClanScreen> {
                               ),
                               const SizedBox(width: 8),
                               Flexible(
-                                child: Text(nextLeague != null ? '${(totalXp/1000).toStringAsFixed(1)}k/${(nextLeague.minXp/1000).toStringAsFixed(1)}k XP' : 'MÁXIMO', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.textMuted, fontSize: 10, fontFamily: 'monospace')),
+                                child: Text(nextLeague != null ? '${(totalXp/1000).toStringAsFixed(1)}k/${(nextLeague.minXp/1000).toStringAsFixed(1)}k XP' : AppLocalizations.of(context)!.maxLevel, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: AppColors.textMuted, fontSize: 10, fontFamily: 'monospace')),
                               ),
                             ],
                           ),
@@ -532,7 +533,7 @@ class _ClanScreenState extends State<ClanScreen> {
               const SizedBox(height: 20),
 
               // Membros
-              const Text('MEMBROS', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
+              Text(AppLocalizations.of(context)!.membersListTitle, style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
               const SizedBox(height: 10),
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('clans').doc(_myClanId).collection('members').orderBy('xpContribution', descending: true).snapshots(),
@@ -547,7 +548,7 @@ class _ClanScreenState extends State<ClanScreen> {
                     final uid = mData['uid'];
                     
                     // Buscar dados em tempo real da coleção /users
-                    String realName = mData['name'] ?? 'Membro';
+                    String realName = mData['name'] ?? AppLocalizations.of(context)!.roleMember;
                     int realXp = mData['xpContribution'] ?? 0;
                     
                     if (usersSnapshot.hasData) {
@@ -579,7 +580,7 @@ class _ClanScreenState extends State<ClanScreen> {
                     
                     return ClanMember(
                       uid: uid,
-                      name: uid == _currentUserUid ? 'Eu' : realName, 
+                      name: uid == _currentUserUid ? AppLocalizations.of(context)!.clanMeLabel : realName, 
                       position: roleStr.toUpperCase(), 
                       xp: realXp, 
                       role: roleEnum,
@@ -615,11 +616,11 @@ class _ClanScreenState extends State<ClanScreen> {
     return Row(
       children: [
         Expanded(
-          child: _statCard('Liga Atual', league.name, league.icon, league.color, onTap: _showLeagueTreeDialog),
+          child: _statCard(AppLocalizations.of(context)!.currentLeague, _leagueLabel(context, league.name), league.icon, league.color, onTap: _showLeagueTreeDialog),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _statCard('Rank Global', rank > 0 ? '#$rank' : '-', Icons.public, _clanPrimaryColor, onTap: () {
+          child: _statCard(AppLocalizations.of(context)!.globalRank, rank > 0 ? '#$rank' : '-', Icons.public, _clanPrimaryColor, onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => const LeaderboardScreen()));
           }),
         ),
@@ -663,7 +664,7 @@ class _ClanScreenState extends State<ClanScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('CHAT DO CLÃ', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
+        Text(AppLocalizations.of(context)!.clanChatTitle, style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
         const SizedBox(height: 10),
         Container(
           height: 350,
@@ -688,9 +689,9 @@ class _ClanScreenState extends State<ClanScreen> {
                           children: [
                             Icon(Icons.speaker_notes_off_outlined, color: AppColors.primary.withValues(alpha: 0.2), size: 64),
                             const SizedBox(height: 12),
-                            const Text('O chat está silencioso...', style: TextStyle(color: AppColors.textSecondary, fontSize: 14, fontWeight: FontWeight.w600)),
+                            Text(AppLocalizations.of(context)!.chatSilent, style: TextStyle(color: AppColors.textSecondary, fontSize: 14, fontWeight: FontWeight.w600)),
                             const SizedBox(height: 4),
-                            Text('Seja o primeiro a interagir!', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                            Text(AppLocalizations.of(context)!.beFirstToInteract, style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
                           ],
                         ),
                       );
@@ -771,8 +772,8 @@ class _ClanScreenState extends State<ClanScreen> {
                           controller: _chatCtrl,
                           maxLength: 500,
                           style: const TextStyle(color: Colors.white, fontSize: 13),
-                          decoration: const InputDecoration(
-                            hintText: 'Digite uma mensagem...',
+                          decoration: InputDecoration(
+                            hintText: AppLocalizations.of(context)!.typeAMessage,
                             hintStyle: TextStyle(color: AppColors.textMuted, fontSize: 13),
                             border: InputBorder.none,
                             counterText: '',
@@ -872,14 +873,14 @@ class _ClanScreenState extends State<ClanScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('MISSÕES DA SEMANA', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
+        Text(AppLocalizations.of(context)!.weeklyQuestsTitle, style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
         const SizedBox(height: 10),
         StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('clans').doc(_myClanId).collection('quests').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return const CircularProgressIndicator();
             final quests = snapshot.data!.docs;
-            if (quests.isEmpty) return const Text('Nenhuma missão ativa.', style: TextStyle(color: AppColors.textMuted));
+            if (quests.isEmpty) return Text(AppLocalizations.of(context)!.noActiveQuests, style: TextStyle(color: AppColors.textMuted));
             
             return Column(
               children: quests.map((q) {
@@ -954,7 +955,7 @@ class _ClanScreenState extends State<ClanScreen> {
 
     try {
       final name = _nameCtrl.text.trim();
-      final desc = _descCtrl.text.trim().isEmpty ? 'Novo clã EXS' : _descCtrl.text.trim();
+      final desc = _descCtrl.text.trim().isEmpty ? AppLocalizations.of(context)!.clanNewDefault : _descCtrl.text.trim();
       final pwd = _passwordCtrl.text.trim();
       
       final clanId = await ClanService().createClan(
@@ -972,10 +973,10 @@ class _ClanScreenState extends State<ClanScreen> {
         _myRole = 'admin';
         _clanCreated = true;
       });
-      SparkSnack.success(context, 'Clã "$_clanName" criado com sucesso!');
+      SparkSnack.success(context, AppLocalizations.of(context)!.clanCreatedNamed(_clanName));
     } catch(e) {
       if (!mounted) return;
-      SparkSnack.error(context, 'Erro ao criar: $e');
+      SparkSnack.error(context, '${AppLocalizations.of(context)!.errorCreatingClan}$e');
     }
   }
 
@@ -1009,7 +1010,7 @@ class _ClanScreenState extends State<ClanScreen> {
       if (usedCode) {
         await ClanService().requestToJoin(resolvedClanId, _currentUserUid!);
         if (!mounted) return;
-        SparkSnack.success(context, 'Pedido de entrada enviado! Aguarde aprovação.');
+        SparkSnack.success(context, AppLocalizations.of(context)!.joinRequestSent);
         return; // não muda o estado pra "já no clã"
       } else {
         await ClanService().joinClan(
@@ -1021,10 +1022,10 @@ class _ClanScreenState extends State<ClanScreen> {
       await _loadUserClan();
 
       if (!mounted) return;
-      SparkSnack.success(context, 'Você entrou no clã!');
+      SparkSnack.success(context, AppLocalizations.of(context)!.joinedClanSuccess);
     } catch (e) {
       if (!mounted) return;
-      SparkSnack.error(context, 'Erro ao entrar: ${e.toString().replaceFirst('Exception: ', '')}');
+      SparkSnack.error(context, '${AppLocalizations.of(context)!.errorJoiningClan}${e.toString().replaceFirst('Exception: ', '')}');
     }
   }
 
@@ -1073,13 +1074,13 @@ class _ClanScreenState extends State<ClanScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    const Text('Editar Clã', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                    Text(AppLocalizations.of(context)!.editClanTitle, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800, letterSpacing: 1)),
                     const SizedBox(height: 24),
                     
                     // Input Name
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: const Text('NOME DO CLÃ', style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                      child: Text(AppLocalizations.of(context)!.clanNameUpper, style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
                     ),
                     const SizedBox(height: 8),
                     TextField(
@@ -1087,7 +1088,7 @@ class _ClanScreenState extends State<ClanScreen> {
                       maxLength: 50,
                       style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                       decoration: InputDecoration(
-                        hintText: 'Novo nome do clã',
+                        hintText: AppLocalizations.of(context)!.newClanNameHint,
                         counterText: '',
                         hintStyle: const TextStyle(color: AppColors.textMuted),
                         filled: true,
@@ -1103,7 +1104,7 @@ class _ClanScreenState extends State<ClanScreen> {
                     // Colors
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: const Text('COR PRINCIPAL', style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                      child: Text(AppLocalizations.of(context)!.mainColorLabel, style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
                     ),
                     const SizedBox(height: 12),
                     Wrap(
@@ -1138,7 +1139,7 @@ class _ClanScreenState extends State<ClanScreen> {
                     // Icons
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: const Text('ÍCONE DO CLÃ', style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                      child: Text(AppLocalizations.of(context)!.clanIconLabel, style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1)),
                     ),
                     const SizedBox(height: 12),
                     Wrap(
@@ -1184,7 +1185,7 @@ class _ClanScreenState extends State<ClanScreen> {
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                             ),
-                            child: const Text('Cancelar', style: TextStyle(color: AppColors.textSecondary, fontWeight: FontWeight.w700)),
+                            child: Text(AppLocalizations.of(context)!.cancelButton, style: TextStyle(color: AppColors.textSecondary, fontWeight: FontWeight.w700)),
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -1202,12 +1203,12 @@ class _ClanScreenState extends State<ClanScreen> {
                                     _clanIcon = tempIcon;
                                   });
                                   Navigator.pop(ctx);
-                                  SparkSnack.success(context, 'Clã atualizado com sucesso!');
+                                  SparkSnack.success(context, AppLocalizations.of(context)!.clanUpdatedSuccess);
                                 }
                               } catch (e) {
                                 if (mounted) {
                                   setDialogState(() => isLoading = false);
-                                  SparkSnack.error(context, 'Erro ao atualizar clã: $e');
+                                  SparkSnack.error(context, '${AppLocalizations.of(context)!.errorUpdatingClan}$e');
                                 }
                               }
                             },
@@ -1219,7 +1220,7 @@ class _ClanScreenState extends State<ClanScreen> {
                             ),
                             child: isLoading
                                 ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                                : const Text('SALVAR', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, letterSpacing: 1)),
+                                : Text(AppLocalizations.of(context)!.saveButton, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, letterSpacing: 1)),
                           ),
                         ),
                       ],
@@ -1240,10 +1241,10 @@ class _ClanScreenState extends State<ClanScreen> {
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.card,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide(color: AppColors.error)),
-        title: const Text('Deletar Clã?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
-        content: const Text('Esta ação é permanente! Todos os membros serão removidos.', style: TextStyle(color: AppColors.textSecondary)),
+        title: Text(AppLocalizations.of(context)!.deleteClanDialogTitle, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+        content: Text(AppLocalizations.of(context)!.deleteClanWarning, style: TextStyle(color: AppColors.textSecondary)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar', style: TextStyle(color: AppColors.textMuted))),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context)!.cancelButton, style: TextStyle(color: AppColors.textMuted))),
           ElevatedButton(
             onPressed: () async {
               Navigator.pop(ctx);
@@ -1254,16 +1255,16 @@ class _ClanScreenState extends State<ClanScreen> {
                     _myClanId = null;
                     _clanCreated = false;
                   });
-                  SparkSnack.success(context, 'Clã deletado com sucesso!');
+                  SparkSnack.success(context, AppLocalizations.of(context)!.clanDeletedSuccess);
                 }
               } catch (e) {
                 if (mounted) {
-                  SparkSnack.error(context, 'Erro ao deletar: $e');
+                  SparkSnack.error(context, '${AppLocalizations.of(context)!.errorDeletingClan}$e');
                 }
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.error, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            child: const Text('DELETAR', style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white)),
+            child: Text(AppLocalizations.of(context)!.deleteClanButton, style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white)),
           ),
         ],
       ),
@@ -1276,19 +1277,19 @@ class _ClanScreenState extends State<ClanScreen> {
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.card,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide(color: AppColors.primary)),
-        title: const Text('Ligas do Clã', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+        title: Text(AppLocalizations.of(context)!.clanLeaguesTitle, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: _leagues.map((l) => ListTile(
               leading: Icon(l.icon, color: l.color),
-              title: Text(l.name, style: TextStyle(color: l.color, fontWeight: FontWeight.w700)),
+              title: Text(_leagueLabel(context, l.name), style: TextStyle(color: l.color, fontWeight: FontWeight.w700)),
               trailing: Text('${l.minXp} XP', style: const TextStyle(color: AppColors.textMuted)),
             )).toList(),
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Fechar', style: TextStyle(color: AppColors.textMuted))),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context)!.closeButton, style: TextStyle(color: AppColors.textMuted))),
         ],
       ),
     );
@@ -1346,17 +1347,17 @@ class _ClanScreenState extends State<ClanScreen> {
                             color: AppColors.primary, size: 22),
                       ),
                       const SizedBox(width: 14),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Convidar para o Clã',
+                            Text(AppLocalizations.of(context)!.inviteToClanTitle,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 17,
                                     fontWeight: FontWeight.w800)),
                             SizedBox(height: 2),
-                            Text('Compartilhe o código abaixo',
+                            Text(AppLocalizations.of(context)!.shareCodeSubtitle,
                                 style: TextStyle(
                                     color: AppColors.textMuted, fontSize: 12)),
                           ],
@@ -1375,8 +1376,8 @@ class _ClanScreenState extends State<ClanScreen> {
                   padding: const EdgeInsets.fromLTRB(24, 8, 24, 28),
                   child: Column(
                     children: [
-                      const Text(
-                        'Qualquer pessoa com este código pode entrar no seu clã.',
+                      Text(
+                        AppLocalizations.of(context)!.inviteCodeInfo,
                         style: TextStyle(
                             color: AppColors.textSecondary, fontSize: 13, height: 1.5),
                         textAlign: TextAlign.center,
@@ -1442,16 +1443,16 @@ class _ClanScreenState extends State<ClanScreen> {
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 200),
                         child: copied
-                            ? const Text(
-                                'Código copiado!',
+                            ? Text(
+                                AppLocalizations.of(context)!.codeCopied,
                                 key: ValueKey('copied'),
                                 style: TextStyle(
                                     color: AppColors.primary,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600),
                               )
-                            : const Text(
-                                'Toque no código para copiar',
+                            : Text(
+                                AppLocalizations.of(context)!.tapToCopy,
                                 key: ValueKey('hint'),
                                 style: TextStyle(
                                     color: AppColors.textMuted, fontSize: 12),
@@ -1474,8 +1475,8 @@ class _ClanScreenState extends State<ClanScreen> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12)),
                               ),
-                              child: const Text(
-                                'Fechar',
+                              child: Text(
+                                AppLocalizations.of(context)!.closeButton,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w700),
@@ -1490,7 +1491,7 @@ class _ClanScreenState extends State<ClanScreen> {
                                     ClipboardData(text: inviteCode));
                                 setDialogState(() => copied = true);
                                 if (ctx.mounted) {
-                                  SparkSnack.success(ctx, 'Código copiado!');
+                                  SparkSnack.success(ctx, AppLocalizations.of(context)!.codeCopied);
                                 }
                               },
                               icon: Icon(
@@ -1500,7 +1501,7 @@ class _ClanScreenState extends State<ClanScreen> {
                                 size: 16,
                               ),
                               label: Text(
-                                copied ? 'Copiado!' : 'Copiar Código',
+                                copied ? AppLocalizations.of(context)!.copiedButton : AppLocalizations.of(context)!.copyCodeButton,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w700),
                               ),
@@ -1532,13 +1533,13 @@ class _ClanScreenState extends State<ClanScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('PEDIDOS DE ENTRADA', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
+        Text(AppLocalizations.of(context)!.joinRequestsTitle, style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 2)),
         const SizedBox(height: 10),
         StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default').collection('clans').doc(_myClanId).collection('requests').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Text('Nenhum pedido pendente por enquanto.', style: const TextStyle(color: AppColors.textMuted, fontSize: 13));
+              return Text(AppLocalizations.of(context)!.noPendingRequests, style: TextStyle(color: AppColors.textMuted, fontSize: 13));
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const SizedBox(
@@ -1548,14 +1549,14 @@ class _ClanScreenState extends State<ClanScreen> {
               );
             }
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-              return const Text('Nenhum pedido pendente por enquanto.', style: TextStyle(color: AppColors.textMuted, fontSize: 13));
+              return Text(AppLocalizations.of(context)!.noPendingRequests, style: TextStyle(color: AppColors.textMuted, fontSize: 13));
             }
             final requests = snapshot.data!.docs;
             return Column(
               children: requests.map((req) {
                 final data = req.data() as Map<String, dynamic>;
                 final uid = req.id;
-                final name = data['name'] ?? 'Membro Desconhecido';
+                final name = data['name'] ?? AppLocalizations.of(context)!.unknownMember;
                 
                 return Container(
                   margin: const EdgeInsets.only(bottom: 8),
@@ -1577,7 +1578,7 @@ class _ClanScreenState extends State<ClanScreen> {
                         onPressed: () async {
                           await ClanService().acceptJoinRequest(_myClanId!, uid, name);
                           if (!mounted) return;
-                          SparkSnack.success(context, 'Pedido aceito!');
+                          SparkSnack.success(context, AppLocalizations.of(context)!.acceptJoinRequestSuccess);
                         },
                       ),
                       IconButton(
@@ -1585,7 +1586,7 @@ class _ClanScreenState extends State<ClanScreen> {
                         onPressed: () async {
                           await ClanService().rejectJoinRequest(_myClanId!, uid);
                           if (!mounted) return;
-                          SparkSnack.error(context, 'Pedido recusado!');
+                          SparkSnack.error(context, AppLocalizations.of(context)!.rejectJoinRequestSuccess);
                         },
                       ),
                     ],
@@ -1602,11 +1603,11 @@ class _ClanScreenState extends State<ClanScreen> {
   void _showManageDialog(ClanMember member) {
     if (member.isUser) return; // Não pode gerenciar a si mesmo
     if (_myRole == 'membro') {
-      SparkSnack.error(context, 'Membros não têm permissão para gerenciar outros.');
+      SparkSnack.error(context, AppLocalizations.of(context)!.clanPermMembers);
       return;
     }
     if (_myRole == 'moderador' && (member.role == ClanRole.admin || member.role == ClanRole.moderador)) {
-      SparkSnack.error(context, 'Moderadores não podem gerenciar outros Moderadores ou Admins.');
+      SparkSnack.error(context, AppLocalizations.of(context)!.clanPermModerators);
       return;
     }
 
@@ -1620,9 +1621,9 @@ class _ClanScreenState extends State<ClanScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Cargo atual: ${_roleName(member.role)}', style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
+            Text(AppLocalizations.of(context)!.clanCurrentRole(_roleName(context, member.role)), style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
             const SizedBox(height: 16),
-            const Text('Ações:', style: TextStyle(color: AppColors.textSecondary, fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(AppLocalizations.of(context)!.clanActionsLabel, style: TextStyle(color: AppColors.textSecondary, fontSize: 13, fontWeight: FontWeight.w600)),
             const SizedBox(height: 8),
             if (_myRole == 'admin' && member.role != ClanRole.admin)
               _actionTile(ctx, Icons.arrow_upward, member.role == ClanRole.membro ? 'Promover a Moderador' : 'Promover a Admin', AppColors.primary, () async {
@@ -1639,7 +1640,7 @@ class _ClanScreenState extends State<ClanScreen> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar', style: TextStyle(color: AppColors.textMuted))),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context)!.cancelButton, style: TextStyle(color: AppColors.textMuted))),
         ],
       ),
     );
@@ -1653,16 +1654,29 @@ class _ClanScreenState extends State<ClanScreen> {
       onTap: () {
         Navigator.pop(ctx);
         onTap();
-        SparkSnack.success(context, '$label executado!');
+        SparkSnack.success(context, AppLocalizations.of(context)!.clanActionExecuted(label));
       },
     );
   }
 
-  String _roleName(ClanRole role) {
+  String _roleName(BuildContext context, ClanRole role) {
+    final l = AppLocalizations.of(context)!;
     switch (role) {
-      case ClanRole.admin: return 'Admin';
-      case ClanRole.moderador: return 'Moderador';
-      case ClanRole.membro: return 'Membro';
+      case ClanRole.admin: return l.roleAdmin;
+      case ClanRole.moderador: return l.roleModerator;
+      case ClanRole.membro: return l.roleMember;
+    }
+  }
+
+  String _leagueLabel(BuildContext context, String name) {
+    final l = AppLocalizations.of(context)!;
+    switch (name) {
+      case 'Prata': return l.leagueSilver;
+      case 'Ouro': return l.leagueGold;
+      case 'Platina': return l.leaguePlatinum;
+      case 'Diamante': return l.leagueDiamond;
+      case 'Mestre': return l.leagueMaster;
+      default: return l.leagueBronze;
     }
   }
 }
@@ -1760,7 +1774,7 @@ class _MemberTile extends StatelessWidget {
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                   decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(4)),
-                                  child: const Text('Você', style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700)),
+                                  child: Text(AppLocalizations.of(context)!.duelYou, style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700)),
                                 ),
                               ],
                             ],

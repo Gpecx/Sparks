@@ -8,6 +8,7 @@ import 'package:spark_app/core/utils/theme_utils.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class ModuleRoutingScreen extends ConsumerWidget {
   final String categoryId;
@@ -23,6 +24,7 @@ class ModuleRoutingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final categoriesAsync = ref.watch(categoriesStreamProvider);
     final modulesAsync = ref.watch(modulesStreamProvider(categoryId));
 
@@ -32,13 +34,13 @@ class ModuleRoutingScreen extends ConsumerWidget {
           data: (modules) {
             final categoryIndex = categories.indexWhere((c) => c.id == categoryId);
             if (categoryIndex == -1) {
-              return _buildErrorScreen(context, 'Categoria não encontrada');
+              return _buildErrorScreen(context, l10n.categoryNotFound);
             }
             final category = categories[categoryIndex];
 
             final moduleIndex = modules.indexWhere((m) => m.id == moduleId);
             if (moduleIndex == -1) {
-              return _buildErrorScreen(context, 'Módulo não encontrado');
+              return _buildErrorScreen(context, l10n.moduleNotFound);
             }
             final module = modules[moduleIndex];
 
@@ -53,17 +55,17 @@ class ModuleRoutingScreen extends ConsumerWidget {
               themeIcon: themeIcon,
             );
           },
-          loading: () => _buildLoadingScreen(),
-          error: (err, stack) => _buildErrorScreen(context, 'Erro ao carregar o módulo: $err'),
+          loading: () => _buildLoadingScreen(context),
+          error: (err, stack) => _buildErrorScreen(context, l10n.errorLoadingModuleWithError(err.toString())),
         );
       },
-      loading: () => _buildLoadingScreen(),
-      error: (err, stack) => _buildErrorScreen(context, 'Erro ao carregar categoria: $err'),
+      loading: () => _buildLoadingScreen(context),
+      error: (err, stack) => _buildErrorScreen(context, l10n.errorLoadingCategories(err.toString())),
     );
   }
 
-  Widget _buildLoadingScreen() {
-    return const SparksBackground(
+  Widget _buildLoadingScreen(BuildContext context) {
+    return SparksBackground(
       child: PcbBackground(
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -71,14 +73,14 @@ class ModuleRoutingScreen extends ConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(
+                const CircularProgressIndicator(
                   color: AppColors.primary,
                   strokeWidth: 3.0,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
-                  'Carregando trilha...',
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.loadingTrail,
+                  style: const TextStyle(
                     color: Colors.white70,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -117,9 +119,9 @@ class ModuleRoutingScreen extends ConsumerWidget {
                     size: 64,
                   ),
                   const SizedBox(height: 24),
-                  const Text(
-                    'Ops! Ocorreu um problema',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.errorScreenTitle,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
@@ -145,9 +147,9 @@ class ModuleRoutingScreen extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
-                      'Voltar',
-                      style: TextStyle(fontWeight: FontWeight.w700),
+                    child: Text(
+                      AppLocalizations.of(context)!.goBackLabel,
+                      style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
                 ],

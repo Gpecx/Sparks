@@ -27,6 +27,7 @@ const scheduler_1 = require("firebase-functions/v2/scheduler");
 const firestore_2 = require("firebase-functions/v2/firestore");
 const v2_1 = require("firebase-functions/v2");
 const params_1 = require("firebase-functions/params");
+const functionsV1 = require("firebase-functions/v1");
 const nodemailer = require("nodemailer");
 const asaasService_1 = require("./services/asaasService");
 const rateLimiter_1 = require("./rateLimiter");
@@ -42,6 +43,55 @@ admin.initializeApp({
 });
 const db = (0, firestore_1.getFirestore)("default");
 db.settings({ ignoreUndefinedProperties: true });
+// Campos padrão de um novo usuário (bônus de boas-vindas). Centralizado para
+// reuso entre o trigger de criação (onUserCreated) e o resgate (redeemAccessCode).
+function defaultUserFields(uid, email, displayName, photoUrl) {
+    return {
+        uid,
+        displayName: displayName !== null && displayName !== void 0 ? displayName : "",
+        email: email !== null && email !== void 0 ? email : "",
+        photoUrl: photoUrl !== null && photoUrl !== void 0 ? photoUrl : null,
+        role: "técnico",
+        sparkPoints: 100,
+        xp: 0,
+        level: 1,
+        tensionLevel: "BT",
+        currentStreak: 0,
+        longestStreak: 0,
+        activeDays: 0,
+        studiedToday: false,
+        lastStudyDate: null,
+        weeklyXp: 0,
+        monthlyXp: 0,
+        unlockedBadgeIds: [],
+        clanId: null,
+        clanName: null,
+        totalLessonsCompleted: 0,
+        totalCorrectAnswers: 0,
+        totalAnswers: 0,
+        eloRating: 1200,
+        wins: 0,
+        losses: 0,
+        totalDuels: 0,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    };
+}
+// Bootstrap do doc do usuário no servidor: dispara quando QUALQUER conta é criada
+// no Firebase Auth e cria users/{uid} com os padrões de boas-vindas. Resolve a
+// falha de criação client-side no web (permission-denied por timing de auth) e
+// garante o doc em todas as plataformas. Admin SDK ignora as Security Rules.
+exports.onUserCreated = functionsV1
+    .region("southamerica-east1")
+    .auth.user()
+    .onCreate(async (user) => {
+    const userRef = db.collection("users").doc(user.uid);
+    const snap = await userRef.get();
+    if (snap.exists)
+        return; // já criado (client ou redeem) — não sobrescreve
+    await userRef.set(defaultUserFields(user.uid, user.email, user.displayName, user.photoURL), { merge: true });
+    v2_1.logger.info(`[onUserCreated] doc de usuário criado para uid=${user.uid}`);
+});
 // ── Hardening de segurança ───────────────────────────────────────
 // Teto de instâncias por função: protege contra picos/DoS que virariam
 // custo de billing (Cloud Functions escala sem limite por padrão). Vale
@@ -963,7 +1013,7 @@ exports.redeemAccessCode = (0, https_1.onCall)({
     const codeRef = db.collection("access_codes").doc(code);
     const userRef = db.collection("users").doc(uid);
     const expiresAtIso = await db.runTransaction(async (tx) => {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e;
         const codeSnap = await tx.get(codeRef);
         if (!codeSnap.exists)
             throw new https_1.HttpsError("not-found", "Código inválido.");
@@ -983,28 +1033,36 @@ exports.redeemAccessCode = (0, https_1.onCall)({
             throw new https_1.HttpsError("resource-exhausted", "Código esgotado.");
         }
         const userSnap = await tx.get(userRef);
-        if (!userSnap.exists)
-            throw new https_1.HttpsError("not-found", "Usuário não encontrado.");
-        const u = userSnap.data();
+        const u = userSnap.exists ? userSnap.data() : null;
         // Não sobrescreve uma assinatura paga ativa.
-        if (u["subscriptionPlanId"] != null && u["isPremium"] === true) {
+        if (u && u["subscriptionPlanId"] != null && u["isPremium"] === true) {
             throw new https_1.HttpsError("failed-precondition", "Você já possui uma assinatura ativa.");
         }
         const durationDays = (_d = c["durationDays"]) !== null && _d !== void 0 ? _d : 30;
         // Estende a partir do maior entre (agora) e (cortesia atual) — não perde dias.
-        const currentComp = u["compAccessExpiresAt"];
+        const currentComp = u === null || u === void 0 ? void 0 : u["compAccessExpiresAt"];
         const baseMs = currentComp && currentComp.toMillis() > Date.now()
             ? currentComp.toMillis()
             : Date.now();
         const expiresAt = new Date(baseMs + durationDays * 24 * 60 * 60 * 1000);
         const expiresTs = admin.firestore.Timestamp.fromDate(expiresAt);
-        tx.update(userRef, {
+        const compFields = {
             isPremium: true,
             compAccessExpiresAt: expiresTs,
             compAccessSource: "access_code",
             compAccessCode: code,
             updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-        });
+        };
+        if (userSnap.exists) {
+            tx.update(userRef, compFields);
+        }
+        else {
+            // O doc do usuário ainda não existe (ex.: a criação client-side falhou —
+            // problema conhecido de timing de auth no web; normalmente o trigger
+            // onUserCreated já o cria). Cria aqui com os padrões + o acesso liberado.
+            const token = (_e = request.auth) === null || _e === void 0 ? void 0 : _e.token;
+            tx.set(userRef, Object.assign(Object.assign({}, defaultUserFields(uid, token === null || token === void 0 ? void 0 : token.email, token === null || token === void 0 ? void 0 : token.name, null)), compFields));
+        }
         tx.update(codeRef, {
             usedCount: admin.firestore.FieldValue.increment(1),
             redeemedBy: admin.firestore.FieldValue.arrayUnion(uid),
@@ -1716,6 +1774,19 @@ exports.joinDuelQueue = (0, https_1.onCall)({
 });
 // ── 2. leaveDuelQueue ───────────────────────────────────────────────
 exports.leaveDuelQueue = (0, https_1.onCall)({
+// ────────────────────────────────────────────────────────────────
+// cleanupOldRankings — Agendada semanalmente. Remove subcoleções de
+// semanas antigas em rankings/weekly para o storage não crescer
+// indefinidamente (o addXp cria uma subcoleção nova a cada semana e
+// nada as apagava). Mantém as últimas RANKING_WEEKS_TO_KEEP semanas.
+// O weekKey tem formato "YYYY-Www" (zero-padded), então a ordenação
+// lexicográfica decrescente equivale à cronológica.
+// (Recuperado: foi removido por engano no merge da PR #19/spark-admin.)
+// ────────────────────────────────────────────────────────────────
+const RANKING_WEEKS_TO_KEEP = 8;
+exports.cleanupOldRankings = (0, scheduler_1.onSchedule)({
+    schedule: "every monday 04:00",
+    timeZone: "America/Sao_Paulo",
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {

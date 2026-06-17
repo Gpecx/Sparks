@@ -1,4 +1,6 @@
+import 'package:spark_app/core/utils/currency_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:go_router/go_router.dart';
@@ -123,10 +125,10 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
       }
     } on FirebaseFunctionsException catch (e) {
       if (!mounted) return;
-      _showError(e.message ?? 'Erro ao iniciar trial. Verifique os dados do cartão.');
+      _showError(e.message ?? AppLocalizations.of(context)!.trialErrorStart);
     } catch (e) {
       if (!mounted) return;
-      _showError('Erro inesperado. Tente novamente.');
+      _showError(AppLocalizations.of(context)!.trialErrorUnexpected);
     } finally {
       if (mounted) setState(() => _isProcessing = false);
     }
@@ -144,7 +146,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
             const Icon(Icons.credit_card_off_rounded,
                 color: AppColors.error, size: 48),
             const SizedBox(height: 16),
-            const Text('Ops!',
+            Text(AppLocalizations.of(context)!.trialCheckoutOops,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -159,7 +161,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('TENTAR NOVAMENTE',
+                child: Text(AppLocalizations.of(context)!.trialTryAgain,
                     style: TextStyle(fontWeight: FontWeight.w800)),
               ),
             ),
@@ -208,7 +210,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
               ),
               const SizedBox(height: 20),
               Text(
-                'Trial Ativado! 🎉',
+                AppLocalizations.of(context)!.trialCheckoutSuccess,
                 style: TextStyle(
                     color: widget.plan.accentColor,
                     fontSize: 22,
@@ -233,7 +235,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                             '.\n\nApós o período, você será cobrado '),
                     TextSpan(
                       text:
-                          'R\$ ${widget.plan.monthlyPrice.toStringAsFixed(2)}/mês',
+                          '${CurrencyUtils.format(context, widget.plan.monthlyPrice)}${AppLocalizations.of(context)!.storePerMonth}',
                       style: const TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w700),
                     ),
@@ -251,7 +253,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: widget.plan.accentColor,
                   ),
-                  child: const Text('COMEÇAR A ESTUDAR',
+                  child: Text(AppLocalizations.of(context)!.trialStartStudying,
                       style: TextStyle(
                           fontWeight: FontWeight.w800, letterSpacing: 1)),
                 ),
@@ -299,11 +301,11 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                 const SizedBox(height: 12),
                 _buildField(
                   controller: _holderCtrl,
-                  hint: 'Nome impresso no cartão',
+                  hint: AppLocalizations.of(context)!.trialCardName,
                   icon: Icons.person_outline,
                   textCapitalization: TextCapitalization.characters,
                   validator: (v) =>
-                      (v == null || v.trim().isEmpty) ? 'Informe o nome' : null,
+                      (v == null || v.trim().isEmpty) ? AppLocalizations.of(context)!.trialEnterName : null,
                 ),
                 const SizedBox(height: 10),
                 _buildField(
@@ -314,7 +316,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                   inputFormatters: [_CardNumberFormatter()],
                   validator: (v) {
                     final d = v?.replaceAll(' ', '') ?? '';
-                    if (d.length != 16) return 'Número de cartão inválido';
+                    if (d.length != 16) return AppLocalizations.of(context)!.trialInvalidCardNumber;
                     return null;
                   },
                 ),
@@ -329,7 +331,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                         keyboardType: TextInputType.number,
                         inputFormatters: [_ExpiryFormatter()],
                         validator: (v) {
-                          if (v == null || v.length < 5) return 'Inválida';
+                          if (v == null || v.length < 5) return AppLocalizations.of(context)!.trialInvalid;
                           return null;
                         },
                       ),
@@ -427,7 +429,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                         color: AppColors.textMuted, size: 12),
                     const SizedBox(width: 4),
                     Text(
-                      'Pagamento seguro via Asaas · PCI-DSS',
+                      AppLocalizations.of(context)!.trialCheckoutSecure,
                       style: TextStyle(
                           color: AppColors.textMuted,
                           fontSize: 11),
@@ -596,16 +598,16 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
                 fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 12),
-          _summaryRow('Hoje', 'R\$ 0,00 (trial)', AppColors.primary),
+          _summaryRow(AppLocalizations.of(context)!.trialToday, 'R\$ 0,00 (trial)', AppColors.primary),
           const SizedBox(height: 8),
           _summaryRow(
-            'Após 7 dias',
-            'R\$ ${widget.plan.monthlyPrice.toStringAsFixed(2)}/mês',
+            AppLocalizations.of(context)!.trialAfter7Days,
+            '${CurrencyUtils.format(context, widget.plan.monthlyPrice)}${AppLocalizations.of(context)!.storePerMonth}',
             Colors.white,
           ),
           const SizedBox(height: 8),
-          _summaryRow('Cancelamento', 'A qualquer momento', AppColors.textMuted),
-          const Padding(
+          _summaryRow(AppLocalizations.of(context)!.trialCancellation, AppLocalizations.of(context)!.trialAnytime, AppColors.textMuted),
+          Padding(
             padding: EdgeInsets.symmetric(vertical: 12),
             child: Divider(color: Color(0xFF2A2A3E)),
           ),
@@ -616,7 +618,7 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
-                  'O cartão só será cobrado após o término dos 7 dias gratuitos.',
+                  AppLocalizations.of(context)!.trialChargeNote,
                   style: TextStyle(
                       color: AppColors.textMuted,
                       fontSize: 11),

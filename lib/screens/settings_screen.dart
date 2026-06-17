@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
@@ -14,6 +15,7 @@ import 'package:spark_app/services/access_code_service.dart';
 import 'package:spark_app/services/notification_service.dart';
 import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/providers/colorblind_provider.dart';
+import 'package:spark_app/providers/language_provider.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -38,9 +40,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text(
-              'CONFIGURAÇÕES',
-              style: TextStyle(
+            title: Text(
+              AppLocalizations.of(context)!.settingsTitle,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w800,
                 fontSize: 15,
@@ -51,41 +53,41 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           body: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
-              _sectionTitle('CONTA E PERFIL'),
+              _sectionTitle(AppLocalizations.of(context)!.accountAndProfile),
               _tile(
                 icon: Icons.person_outline,
-                title: 'Editar Perfil',
-                subtitle: 'Nome, e-mail, cargo',
+                title: AppLocalizations.of(context)!.settingsEditProfile,
+                subtitle: AppLocalizations.of(context)!.settingsEditProfileDesc,
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfileScreen())),
               ),
               _tile(
                 icon: Icons.emoji_events_outlined,
-                title: 'Ver Minhas Conquistas',
-                subtitle: 'Página de troféus e insígnias',
+                title: AppLocalizations.of(context)!.myAchievements,
+                subtitle: AppLocalizations.of(context)!.settingsAchievementsDesc,
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen())),
               ),
               _tile(
                 icon: Icons.trending_up,
-                title: 'Meu Progresso',
-                subtitle: 'Acompanhar progresso nos módulos',
+                title: AppLocalizations.of(context)!.settingsMyProgress,
+                subtitle: AppLocalizations.of(context)!.settingsTrackProgress,
                 onTap: () => context.push('/my-progress'),
               ),
               _tile(
                 icon: Icons.lock_outline,
-                title: 'Alterar Senha',
-                subtitle: 'Segurança da conta',
+                title: AppLocalizations.of(context)!.settingsChangePassword,
+                subtitle: AppLocalizations.of(context)!.settingsChangePasswordDesc,
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ChangePasswordScreen())),
               ),
               _tile(
                 icon: Icons.card_membership_outlined,
-                title: 'Gerir Plano',
-                subtitle: 'Premium, planos ativos',
+                title: AppLocalizations.of(context)!.settingsManagePlan,
+                subtitle: AppLocalizations.of(context)!.settingsManagePlanDesc,
                 onTap: () => context.push('/store'),
               ),
               _tile(
                 icon: Icons.delete_outline,
-                title: 'Eliminar Conta',
-                subtitle: 'Apagar permanentemente',
+                title: AppLocalizations.of(context)!.settingsDeleteAccount,
+                subtitle: AppLocalizations.of(context)!.settingsDeleteAccountDesc,
                 titleColor: AppColors.error,
                 onTap: _deleteDialog,
               ),
@@ -155,7 +157,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ),
               ),
 
-              _sectionTitle('ACESSIBILIDADE'),
+              _sectionTitle(AppLocalizations.of(context)!.accessibility),
               Container(
                 margin: const EdgeInsets.only(bottom: 4),
                 decoration: BoxDecoration(
@@ -172,16 +174,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         children: [
                           const Icon(Icons.text_fields, color: AppColors.textMuted, size: 22),
                           const SizedBox(width: 12),
-                          const Expanded(
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Tamanho do Texto',
+                                  AppLocalizations.of(context)!.settingsTextSize,
                                   style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                                 ),
                                 Text(
-                                  'Ajuste o tamanho da fonte em todo o app',
+                                  AppLocalizations.of(context)!.settingsTextSizeDesc,
                                   style: TextStyle(color: AppColors.textMuted, fontSize: 12),
                                 ),
                               ],
@@ -248,7 +250,80 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Row(
+                      Row(
+                        children: [
+                          Icon(Icons.language_outlined, color: AppColors.textMuted, size: 22),
+                          SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!.settingsLanguage,
+                                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                ),
+                                Text(
+                                  AppLocalizations.of(context)!.settingsLanguageDesc,
+                                  style: TextStyle(color: AppColors.textMuted, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Consumer(
+                        builder: (context, ref, child) {
+                          final currentLocale = ref.watch(languageProvider);
+                          // Só PT/EN disponíveis por enquanto; evita crash se houver 'es' salvo.
+                          final selectedLang = ['pt', 'en'].contains(currentLocale.languageCode)
+                              ? currentLocale.languageCode
+                              : 'pt';
+                          return DropdownButtonFormField<String>(
+                            value: selectedLang,
+                            dropdownColor: AppColors.card,
+                            icon: const Icon(Icons.arrow_drop_down, color: AppColors.textMuted),
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: AppColors.inputBackground,
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            items: [
+                              DropdownMenuItem(value: 'pt', child: Text(AppLocalizations.of(context)!.settingsPortuguese, style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: 'en', child: Text(AppLocalizations.of(context)!.settingsEnglish, style: TextStyle(color: Colors.white))),
+                              // Espanhol será reativado quando a tradução ES estiver concluída.
+                            ],
+                            onChanged: (code) {
+                              if (code != null) {
+                                ref.read(languageProvider.notifier).setLanguage(Locale(code));
+                              }
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+
+              Container(
+                margin: const EdgeInsets.only(bottom: 4),
+                decoration: BoxDecoration(
+                  color: AppColors.card,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.3)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
                           Icon(Icons.remove_red_eye_outlined, color: AppColors.textMuted, size: 22),
                           SizedBox(width: 12),
@@ -257,11 +332,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Modo Daltônico',
+                                  AppLocalizations.of(context)!.settingsColorBlindMode,
                                   style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                                 ),
                                 Text(
-                                  'Ajuste as cores para diferentes tipos de daltonismo',
+                                  AppLocalizations.of(context)!.settingsColorBlindDesc,
                                   style: TextStyle(color: AppColors.textMuted, fontSize: 12),
                                 ),
                               ],
@@ -286,11 +361,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 borderSide: BorderSide.none,
                               ),
                             ),
-                            items: const [
-                              DropdownMenuItem(value: ColorblindMode.none, child: Text('Nenhum', style: TextStyle(color: Colors.white))),
-                              DropdownMenuItem(value: ColorblindMode.protanopia, child: Text('Protanopia (Vermelho-Verde)', style: TextStyle(color: Colors.white))),
-                              DropdownMenuItem(value: ColorblindMode.deuteranopia, child: Text('Deuteranopia (Verde-Vermelho)', style: TextStyle(color: Colors.white))),
-                              DropdownMenuItem(value: ColorblindMode.tritanopia, child: Text('Tritanopia (Azul-Amarelo)', style: TextStyle(color: Colors.white))),
+                            items: [
+                              DropdownMenuItem(value: ColorblindMode.none, child: Text(AppLocalizations.of(context)!.settingsNone, style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: ColorblindMode.protanopia, child: Text(AppLocalizations.of(context)!.settingsProtanopia, style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: ColorblindMode.deuteranopia, child: Text(AppLocalizations.of(context)!.settingsDeuteranopia, style: TextStyle(color: Colors.white))),
+                              DropdownMenuItem(value: ColorblindMode.tritanopia, child: Text(AppLocalizations.of(context)!.settingsTritanopia, style: TextStyle(color: Colors.white))),
                             ],
                             onChanged: (mode) {
                               if (mode != null) {
@@ -317,11 +392,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _sectionTitle('ADMINISTRAÇÃO'),
+                    _sectionTitle(AppLocalizations.of(context)!.admin),
                     _tile(
                       icon: Icons.admin_panel_settings_outlined,
-                      title: 'Painel Admin',
-                      subtitle: 'Gerenciar categorias, módulos e lições',
+                      title: AppLocalizations.of(context)!.settingsAdminPanel,
+                      subtitle: AppLocalizations.of(context)!.settingsAdminPanelDesc,
                       titleColor: const Color(0xFFFF8C00),
                       onTap: () => context.push('/admin'),
                     ),
@@ -330,38 +405,38 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 );
               }),
 
-              _sectionTitle('ACESSO'),
+              _sectionTitle(AppLocalizations.of(context)!.settingsAccessSection),
               _tile(
                 icon: Icons.vpn_key_outlined,
-                title: 'Resgatar código de acesso',
-                subtitle: 'Liberar acesso completo com um código',
+                title: AppLocalizations.of(context)!.settingsRedeemCode,
+                subtitle: AppLocalizations.of(context)!.settingsRedeemCodeDesc,
                 onTap: _showRedeemCodeDialog,
               ),
               const SizedBox(height: 8),
 
-              _sectionTitle('SOBRE E SUPORTE'),
+              _sectionTitle(AppLocalizations.of(context)!.settingsAboutSupportSection),
               _tile(
                 icon: Icons.info_outline,
-                title: 'Versão do App',
-                subtitle: 'SPARK v1.0.4 · EXS Solutions',
+                title: AppLocalizations.of(context)!.settingsAppVersion,
+                subtitle: AppLocalizations.of(context)!.settingsAppVersionDesc,
                 onTap: () {},
               ),
               _tile(
                 icon: Icons.help_outline,
-                title: 'Central de Ajuda / FAQ',
-                subtitle: 'Perguntas frequentes',
+                title: AppLocalizations.of(context)!.settingsHelpCenter,
+                subtitle: AppLocalizations.of(context)!.settingsHelpCenterDesc,
                 onTap: _showFaqDialog,
               ),
               _tile(
                 icon: Icons.headset_mic_outlined,
-                title: 'Suporte Técnico',
-                subtitle: 'Reporte um problema',
+                title: AppLocalizations.of(context)!.settingsTechSupport,
+                subtitle: AppLocalizations.of(context)!.settingsTechSupportDesc,
                 onTap: () => context.push('/support'),
               ),
               _tile(
                 icon: Icons.description_outlined,
-                title: 'Termos de Uso',
-                subtitle: 'Leia nossos termos',
+                title: AppLocalizations.of(context)!.settingsTermsOfUse,
+                subtitle: AppLocalizations.of(context)!.settingsTermsOfUseDesc,
                 onTap: () => context.push('/terms-of-use'),
               ),
               const SizedBox(height: 20),
@@ -377,8 +452,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     router.go('/');
                   },
                   icon: const Icon(Icons.logout, size: 18),
-                  label: const Text(
-                    'SAIR DA CONTA',
+                  label: Text(AppLocalizations.of(context)!.settingsLogout,
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, letterSpacing: 1.5),
                   ),
                   style: OutlinedButton.styleFrom(
@@ -401,6 +475,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     padding: const EdgeInsets.fromLTRB(4, 16, 0, 8),
     child: Text(t, style: const TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
   );
+
+  String _freqLabel(BuildContext context, String f) {
+    final l = AppLocalizations.of(context)!;
+    switch (f) {
+      case 'Mínima': return l.notifFreqMin;
+      case 'Alta': return l.notifFreqHigh;
+      default: return l.notifFreqNormal;
+    }
+  }
 
   Widget _tile({required IconData icon, required String title, required String subtitle, required VoidCallback onTap, Color? titleColor}) => Container(
     margin: const EdgeInsets.only(bottom: 4),
@@ -435,7 +518,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(children: [Icon(Icons.speed_outlined, color: AppColors.textMuted, size: 22), SizedBox(width: 12), Text('Frequência de Alertas', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600))]),
+          Row(children: [Icon(Icons.speed_outlined, color: AppColors.textMuted, size: 22), SizedBox(width: 12), Text(AppLocalizations.of(context)!.settingsAlertFreq, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600))]),
           const SizedBox(height: 12),
           Row(children: ['Mínima', 'Normal', 'Alta'].map((f) {
             final isSelected = notif.frequency == f;
@@ -456,15 +539,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setSt) => AlertDialog(
           backgroundColor: AppColors.card,
-          title: const Text('Resgatar código de acesso',
+          title: Text(AppLocalizations.of(context)!.settingsRedeemCode,
               style: TextStyle(color: Colors.white)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Digite o código recebido para liberar o acesso completo.',
-                style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+              Text(
+                AppLocalizations.of(context)!.redeemCodeDialogDesc,
+                style: const TextStyle(color: AppColors.textMuted, fontSize: 13),
               ),
               const SizedBox(height: 16),
               TextField(
@@ -488,7 +571,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           actions: [
             TextButton(
               onPressed: loading ? null : () => Navigator.of(ctx).pop(),
-              child: const Text('Cancelar', style: TextStyle(color: AppColors.textMuted)),
+              child: Text(AppLocalizations.of(context)!.settingsCancel, style: const TextStyle(color: AppColors.textMuted)),
             ),
             FilledButton(
               onPressed: loading
@@ -496,7 +579,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   : () async {
                       final code = controller.text.trim().toUpperCase();
                       if (code.isEmpty) {
-                        setSt(() => error = 'Informe o código.');
+                        setSt(() => error = AppLocalizations.of(context)!.enterCode);
                         return;
                       }
                       setSt(() {
@@ -514,7 +597,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             backgroundColor: AppColors.primary,
-                            content: Text('Acesso liberado até $d 🎉'),
+                            content: Text(AppLocalizations.of(context)!.accessGrantedUntil(d)),
                           ),
                         );
                       } on AccessCodeException catch (e) {
@@ -525,7 +608,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       } catch (_) {
                         setSt(() {
                           loading = false;
-                          error = 'Erro ao resgatar. Tente novamente.';
+                          error = AppLocalizations.of(context)!.redeemError;
                         });
                       }
                     },
@@ -534,7 +617,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       width: 18,
                       height: 18,
                       child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                  : const Text('Resgatar'),
+                  : Text(AppLocalizations.of(context)!.settingsRedeem),
             ),
           ],
         ),
@@ -543,9 +626,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   void _showFaqDialog() {
+    final l10n = AppLocalizations.of(context)!;
     final faqs = [
-      {'q': 'Como funciona o sistema de energia?', 'a': 'Cada lição consome 1 ponto de energia.'},
-      {'q': 'O que são Pontos Spark?', 'a': 'Moeda do app para conteúdos premium.'},
+      {'q': l10n.faqEnergyQ, 'a': l10n.faqEnergyA},
+      {'q': l10n.faqSparkQ, 'a': l10n.faqSparkA},
     ];
     showModalBottomSheet(context: context, isScrollControlled: true, backgroundColor: Colors.transparent, builder: (ctx) => DraggableScrollableSheet(initialChildSize: 0.75, builder: (_, scrollCtrl) => Container(decoration: const BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.vertical(top: Radius.circular(20))), child: Column(children: [const SizedBox(height: 12), Container(width: 40, height: 4, decoration: BoxDecoration(color: AppColors.textMuted, borderRadius: BorderRadius.circular(2))), Expanded(child: ListView.builder(controller: scrollCtrl, padding: const EdgeInsets.all(20), itemCount: faqs.length, itemBuilder: (_, i) => _FaqTile(q: faqs[i]['q']!, a: faqs[i]['a']!)))]))));
   }
@@ -556,22 +640,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.card,
-        title: const Text('Eliminar Conta?', style: TextStyle(color: Colors.white)),
-        content: const Text(
-          'Esta ação é permanente. Todos os seus dados — XP, progresso, '
-          'sua posição no ranking e seu vínculo com clãs — serão apagados '
-          'e não poderão ser recuperados.',
-          style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+        title: Text(AppLocalizations.of(context)!.deleteAccountConfirmTitle, style: const TextStyle(color: Colors.white)),
+        content: Text(
+          AppLocalizations.of(context)!.deleteAccountWarning,
+          style: const TextStyle(color: AppColors.textMuted, fontSize: 13),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.settingsCancel),
           ),
           ElevatedButton(
             onPressed: () => _confirmDelete(ctx),
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
-            child: const Text('ELIMINAR'),
+            child: Text(AppLocalizations.of(context)!.settingsDeleteAction),
           ),
         ],
       ),
@@ -586,7 +668,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => const Center(child: CircularProgressIndicator()),
+      builder: (_) => Center(child: CircularProgressIndicator()),
     );
 
     try {
@@ -599,7 +681,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       if (!mounted) return;
       Navigator.of(context, rootNavigator: true).pop(); // fecha o progresso
       if (!mounted) return;
-      SparkSnack.error(context, 'Falha ao eliminar conta: $e');
+      SparkSnack.error(context, AppLocalizations.of(context)!.deleteAccountFailed(e.toString()));
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/idmt_curves.dart';
 import 'package:spark_app/utils/coordination.dart';
@@ -108,10 +109,10 @@ class _CoordinationScreenState extends State<CoordinationScreen> {
       _warning = null;
       _coordinated = r.coordinated;
       _results = [
-        ToolResult('Tempo do principal', '${fmtNumber(r.timeMain, decimals: 3)} s'),
-        ToolResult('Tempo da retaguarda', '${fmtNumber(r.timeBackup, decimals: 3)} s'),
-        ToolResult('CTI real (Δt)', '${fmtNumber(r.interval, decimals: 3)} s'),
-        ToolResult('CTI mínimo', '${fmtNumber(cti, decimals: 3)} s'),
+        ToolResult(AppLocalizations.of(context)!.coordMainTime, '${fmtNumber(r.timeMain, decimals: 3)} s'),
+        ToolResult(AppLocalizations.of(context)!.coordBackupTime, '${fmtNumber(r.timeBackup, decimals: 3)} s'),
+        ToolResult(AppLocalizations.of(context)!.coordCtiReal, '${fmtNumber(r.interval, decimals: 3)} s'),
+        ToolResult(AppLocalizations.of(context)!.coordCtiMinShort, '${fmtNumber(cti, decimals: 3)} s'),
       ];
     });
   }
@@ -119,23 +120,23 @@ class _CoordinationScreenState extends State<CoordinationScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Coordenação / Seletividade',
+      title: AppLocalizations.of(context)!.tlCoordination,
       children: [
         _relayCard(_main),
         const SizedBox(height: 12),
         _relayCard(_backup),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Falta e margem',
+          title: AppLocalizations.of(context)!.coordFaultMargin,
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _fault, label: 'Corrente de falta (A)'),
-              ToolField(controller: _cti, label: 'CTI mínimo (s)'),
+              ToolField(controller: _fault, label: AppLocalizations.of(context)!.coordFault),
+              ToolField(controller: _cti, label: AppLocalizations.of(context)!.coordCtiMin),
             ]),
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           if (_results != null) _verdict(),
@@ -143,7 +144,7 @@ class _CoordinationScreenState extends State<CoordinationScreen> {
           ToolResultsPanel(
             results: _results ?? const [],
             warning: _warning,
-            title: 'Coordenação',
+            title: AppLocalizations.of(context)!.coordCoord,
           ),
         ],
       ],
@@ -156,7 +157,7 @@ class _CoordinationScreenState extends State<CoordinationScreen> {
       children: [
         Semantics(
           button: true,
-          label: 'Curva: ${r.curve.name}. Toque para trocar.',
+          label: AppLocalizations.of(context)!.a11yCurveTap(r.curve.name),
           child: GestureDetector(
             onTap: () => _pick(r),
             child: Container(
@@ -191,8 +192,8 @@ class _CoordinationScreenState extends State<CoordinationScreen> {
         ),
         const SizedBox(height: 12),
         ToolFieldRow(children: [
-          ToolField(controller: r.pickup, label: 'Pickup (A)'),
-          ToolField(controller: r.dial, label: 'Dial (Td)'),
+          ToolField(controller: r.pickup, label: AppLocalizations.of(context)!.coordPickup),
+          ToolField(controller: r.dial, label: AppLocalizations.of(context)!.coordDial),
         ]),
       ],
     );

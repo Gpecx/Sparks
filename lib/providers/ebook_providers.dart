@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/models/ebook_model.dart';
+import 'package:spark_app/providers/language_provider.dart';
 
 final _firestoreProvider = Provider(
   (ref) => FirebaseFirestore.instanceFor(
@@ -18,6 +19,7 @@ typedef EbookArgs = ({String categoryId, String moduleId});
 final ebooksStreamProvider =
     StreamProvider.family<List<EbookModel>, EbookArgs>((ref, args) {
   final firestore = ref.watch(_firestoreProvider);
+  final lang = ref.watch(languageProvider).languageCode; // re-emite ao trocar idioma
   return firestore
       .collection(FS.categories)
       .doc(args.categoryId)
@@ -25,7 +27,9 @@ final ebooksStreamProvider =
       .doc(args.moduleId)
       .collection(FS.ebooks)
       .snapshots()
-      .map((snap) => snap.docs.map((d) => EbookModel.fromFirestore(d)).toList());
+      .map((snap) {
+        return snap.docs.map((d) => EbookModel.fromFirestore(d, lang: lang)).toList();
+      });
 });
 
 // ── Capítulos de um e-book (carregados sob demanda) ──────────────
@@ -34,6 +38,7 @@ typedef ChapterArgs = ({String categoryId, String moduleId, String ebookId});
 final ebookChaptersStreamProvider =
     StreamProvider.family<List<EbookChapter>, ChapterArgs>((ref, args) {
   final firestore = ref.watch(_firestoreProvider);
+  final lang = ref.watch(languageProvider).languageCode; // re-emite ao trocar idioma
   return firestore
       .collection(FS.categories)
       .doc(args.categoryId)
@@ -45,7 +50,7 @@ final ebookChaptersStreamProvider =
       .snapshots()
       .map((snap) {
         final list =
-            snap.docs.map((d) => EbookChapter.fromFirestore(d)).toList();
+            snap.docs.map((d) => EbookChapter.fromFirestore(d, lang: lang)).toList();
         list.sort((a, b) => a.order.compareTo(b.order));
         return list;
       });
@@ -73,7 +78,8 @@ final ebookChapterProvider =
       .doc(args.chapterId)
       .get();
   if (!doc.exists) return null;
-  return EbookChapter.fromFirestore(doc);
+  final lang = ref.watch(languageProvider).languageCode;
+  return EbookChapter.fromFirestore(doc, lang: lang);
 });
 
 // ── Progresso de leitura do usuário ─────────────────────────────

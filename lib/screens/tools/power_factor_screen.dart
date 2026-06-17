@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/utils/power_factor.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
@@ -66,11 +67,11 @@ class _PowerFactorScreenState extends State<PowerFactorScreen> {
     setState(() {
       _warning = null;
       _results = [
-        ToolResult('Banco necessário', '${fmtNumber(res.capacitorKvar, decimals: 2)} kvar'),
-        ToolResult('Reativo antes', '${fmtNumber(res.reactiveBefore, decimals: 2)} kvar'),
-        ToolResult('Reativo depois', '${fmtNumber(res.reactiveAfter, decimals: 2)} kvar'),
-        ToolResult('Potência aparente antes', '${fmtNumber(res.apparentBefore, decimals: 2)} kVA'),
-        ToolResult('Potência aparente depois', '${fmtNumber(res.apparentAfter, decimals: 2)} kVA'),
+        ToolResult(AppLocalizations.of(context)!.powerFactorReqBank, '${fmtNumber(res.capacitorKvar, decimals: 2)} kvar'),
+        ToolResult(AppLocalizations.of(context)!.powerFactorReactBefore, '${fmtNumber(res.reactiveBefore, decimals: 2)} kvar'),
+        ToolResult(AppLocalizations.of(context)!.powerFactorReactAfter, '${fmtNumber(res.reactiveAfter, decimals: 2)} kvar'),
+        ToolResult(AppLocalizations.of(context)!.powerFactorAppBefore, '${fmtNumber(res.apparentBefore, decimals: 2)} kVA'),
+        ToolResult(AppLocalizations.of(context)!.powerFactorAppAfter, '${fmtNumber(res.apparentAfter, decimals: 2)} kVA'),
       ];
     });
   }
@@ -78,38 +79,38 @@ class _PowerFactorScreenState extends State<PowerFactorScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Correção de Fator de Potência',
+      title: AppLocalizations.of(context)!.tlPowerFactor,
       children: [
         ToolCard(
-          title: 'Dados da carga',
-          subtitle: 'Q_c = P · (tanφ₁ − tanφ₂)',
+          title: AppLocalizations.of(context)!.powerFactorData,
+          subtitle: AppLocalizations.of(context)!.powerFactorDesc,
           children: [
             ToolField(
               controller: _power,
-              label: 'Potência ativa P (kW)',
+              label: AppLocalizations.of(context)!.powerFactorActP,
               semantic: 'Potência ativa em kW',
             ),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
               ToolField(
                   controller: _pfNow,
-                  label: 'FP atual',
+                  label: AppLocalizations.of(context)!.powerFactorCurPF,
                   semantic: 'Fator de potência atual'),
               ToolField(
                   controller: _pfTarget,
-                  label: 'FP desejado',
+                  label: AppLocalizations.of(context)!.powerFactorDesPF,
                   semantic: 'Fator de potência desejado'),
             ]),
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(
             results: _results ?? const [],
             warning: _warning,
-            title: 'Banco de capacitores',
+            title: AppLocalizations.of(context)!.powerFactorBank,
           ),
         ],
       ],

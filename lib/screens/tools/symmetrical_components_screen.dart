@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
@@ -95,7 +96,7 @@ class _SymmetricalComponentsScreenState
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: const Text('Componentes Simétricas'),
+            title: Text(AppLocalizations.of(context)!.symmetricalTitle),
           ),
           body: SafeArea(
             top: false,
@@ -115,11 +116,11 @@ class _SymmetricalComponentsScreenState
                     const SizedBox(height: 20),
                     Semantics(
                       button: true,
-                      label: 'Calcular',
+                      label: AppLocalizations.of(context)!.perUnitCalculateBtn,
                       child: ElevatedButton.icon(
                         onPressed: _calculate,
                         icon: const Icon(Icons.calculate_outlined),
-                        label: const Text('CALCULAR'),
+                        label: Text(AppLocalizations.of(context)!.perUnitCalculateUpper),
                       ),
                     ),
                     if (_results != null) ...[
@@ -138,7 +139,7 @@ class _SymmetricalComponentsScreenState
 
   Widget _buildModeSelector() {
     return Semantics(
-      label: 'Selecionar modo de cálculo',
+      label: AppLocalizations.of(context)!.tlSelectCalcMode,
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.card,
@@ -150,8 +151,8 @@ class _SymmetricalComponentsScreenState
         padding: const EdgeInsets.all(4),
         child: Row(
           children: [
-            _modeTab('Decompor', 'Fase → Sequência', _Mode.decompose),
-            _modeTab('Sintetizar', 'Sequência → Fase', _Mode.synthesize),
+            _modeTab('Decompor', AppLocalizations.of(context)!.symmetricalTabPhaseToSeq, _Mode.decompose),
+            _modeTab('Sintetizar', AppLocalizations.of(context)!.symmetricalTabSeqToPhase, _Mode.synthesize),
           ],
         ),
       ),
@@ -217,7 +218,7 @@ class _SymmetricalComponentsScreenState
 
   Widget _buildDecomposeInputs() {
     return _InputCard(
-      title: 'Fasores de fase (ABC)',
+      title: AppLocalizations.of(context)!.tlPhasePhasors,
       children: [
         _PhasorRow(label: 'Va', magCtrl: _aMag, angCtrl: _aAng),
         _PhasorRow(label: 'Vb', magCtrl: _bMag, angCtrl: _bAng),
@@ -228,7 +229,7 @@ class _SymmetricalComponentsScreenState
 
   Widget _buildSynthesizeInputs() {
     return _InputCard(
-      title: 'Componentes de sequência',
+      title: AppLocalizations.of(context)!.tlSequenceComponents,
       children: [
         _PhasorRow(label: 'V₀', magCtrl: _z0Mag, angCtrl: _z0Ang),
         _PhasorRow(label: 'V₁', magCtrl: _z1Mag, angCtrl: _z1Ang),
@@ -312,7 +313,7 @@ class _PhasorRow extends StatelessWidget {
           Expanded(
             child: _NumberField(
               controller: magCtrl,
-              label: 'Módulo',
+              label: AppLocalizations.of(context)!.tlMagnitude,
               semantic: 'Módulo de $label',
             ),
           ),
@@ -322,7 +323,7 @@ class _PhasorRow extends StatelessWidget {
           Expanded(
             child: _NumberField(
               controller: angCtrl,
-              label: 'Ângulo °',
+              label: AppLocalizations.of(context)!.tlAngleDeg,
               semantic: 'Ângulo de $label em graus',
             ),
           ),
@@ -412,7 +413,7 @@ class _ResultsPanel extends StatelessWidget {
               ),
               Semantics(
                 button: true,
-                label: 'Copiar todos os resultados',
+                label: AppLocalizations.of(context)!.tlCopyAll,
                 child: IconButton(
                   icon: const Icon(Icons.copy_all_outlined,
                       color: AppColors.primary, size: 20),
@@ -422,7 +423,7 @@ class _ResultsPanel extends StatelessWidget {
                         results.map((r) => r.clipboardText).join('\n');
                     Clipboard.setData(ClipboardData(text: text));
                     HapticFeedback.lightImpact();
-                    SparkSnack.success(context, 'Resultados copiados');
+                    SparkSnack.success(context, AppLocalizations.of(context)!.tlResultsCopied);
                   },
                 ),
               ),
@@ -439,7 +440,7 @@ class _ResultsPanel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Semantics(
-        label: '${r.label}: módulo ${r.magnitudeText}, ângulo ${r.angleText} graus',
+        label: AppLocalizations.of(context)!.a11ySymResult(r.label, r.magnitudeText, r.angleText),
         child: Row(
           children: [
             Expanded(
@@ -466,7 +467,7 @@ class _ResultsPanel extends StatelessWidget {
             ),
             Semantics(
               button: true,
-              label: 'Copiar ${r.label}',
+              label: AppLocalizations.of(context)!.a11yCopy(r.label),
               child: IconButton(
                 icon: const Icon(Icons.copy_outlined,
                     color: AppColors.textMuted, size: 16),

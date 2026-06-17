@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/restricted_differential.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -104,29 +105,29 @@ class _RestrictedDifferentialScreenState
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: '87 — Diferencial c/ Restrição',
+      title: AppLocalizations.of(context)!.tlRestrictedDiff,
       children: [
         _infoBox(),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Característica (dupla inclinação)',
-          subtitle: 'Limiar = pickup, depois slope1 e slope2 acima dos joelhos.',
+          title: AppLocalizations.of(context)!.restDiffCharDesc,
+          subtitle: AppLocalizations.of(context)!.restDiffLimDesc,
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _pickup, label: 'Pickup (pu)'),
-              ToolField(controller: _slope1, label: 'Slope 1 (0–1)'),
-              ToolField(controller: _slope2, label: 'Slope 2 (0–1)'),
+              ToolField(controller: _pickup, label: AppLocalizations.of(context)!.restDiffPickup),
+              ToolField(controller: _slope1, label: AppLocalizations.of(context)!.restDiffSlope1),
+              ToolField(controller: _slope2, label: AppLocalizations.of(context)!.restDiffSlope2),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
-              ToolField(controller: _knee1, label: 'Joelho 1 (pu)'),
-              ToolField(controller: _knee2, label: 'Joelho 2 (pu)'),
+              ToolField(controller: _knee1, label: AppLocalizations.of(context)!.restDiffKnee1),
+              ToolField(controller: _knee2, label: AppLocalizations.of(context)!.restDiffKnee2),
             ]),
           ],
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Convenção de restrição',
+          title: AppLocalizations.of(context)!.restDiffConv,
           children: [
             ToolSegmented(
               labels: const ['Média', 'Máximo', 'Soma'],
@@ -139,24 +140,23 @@ class _RestrictedDifferentialScreenState
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Correntes dos enrolamentos',
+          title: AppLocalizations.of(context)!.restDiffCur,
           subtitle:
-              'Módulo (pu de I_nom) e ângulo (°). Passante: ângulos opostos '
-              '(0 / 180). Interna: mesmo sentido.',
+              AppLocalizations.of(context)!.restDiffModAng,
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _i1, label: 'I1 (pu)'),
-              ToolField(controller: _ang1, label: 'Âng. I1 (°)', signed: true),
+              ToolField(controller: _i1, label: AppLocalizations.of(context)!.restDiffI1),
+              ToolField(controller: _ang1, label: AppLocalizations.of(context)!.restDiffI1Ang, signed: true),
             ]),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
-              ToolField(controller: _i2, label: 'I2 (pu)'),
-              ToolField(controller: _ang2, label: 'Âng. I2 (°)', signed: true),
+              ToolField(controller: _i2, label: AppLocalizations.of(context)!.restDiffI2),
+              ToolField(controller: _ang2, label: AppLocalizations.of(context)!.restDiffI2Ang, signed: true),
             ]),
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'AVALIAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnEvaluate, onPressed: _calculate),
         if (_warning != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: const [], warning: _warning),
@@ -207,14 +207,14 @@ class _RestrictedDifferentialScreenState
 
   Widget _resultsPanel(DifferentialOperatingPoint p) {
     final results = <ToolResult>[
-      ToolResult('Idiff (diferencial)', fmtNumber(p.idiff, decimals: 3)),
-      ToolResult('Irest (restrição)', fmtNumber(p.irest, decimals: 3)),
-      ToolResult('Limiar na Irest', fmtNumber(p.threshold, decimals: 3)),
-      ToolResult('Margem (Idiff − limiar)', fmtNumber(p.margin, decimals: 3)),
+      ToolResult(AppLocalizations.of(context)!.restDiffIdiff, fmtNumber(p.idiff, decimals: 3)),
+      ToolResult(AppLocalizations.of(context)!.restDiffIrest, fmtNumber(p.irest, decimals: 3)),
+      ToolResult(AppLocalizations.of(context)!.restDiffLimIrest, fmtNumber(p.threshold, decimals: 3)),
+      ToolResult(AppLocalizations.of(context)!.restDiffMargin, fmtNumber(p.margin, decimals: 3)),
     ];
     return ToolResultsPanel(
       results: results,
-      title: 'Ponto de operação',
+      title: AppLocalizations.of(context)!.restDiffOp,
       note: 'Idiff = |I1 + I2| (soma fasorial). Em falta passante ideal, '
           'Idiff ≈ 0 mesmo com Irest alta — por isso o relé restringe.',
     );
@@ -231,10 +231,10 @@ class _RestrictedDifferentialScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 4, bottom: 8),
             child: Text(
-              'Característica Idiff × Irest',
+              AppLocalizations.of(context)!.restDiffChar,
               style: TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 12,
@@ -275,10 +275,7 @@ class _RestrictedDifferentialScreenState
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              'Característica de restrição do diferencial (87). Mostra se um ponto '
-              '(carga, falta passante ou interna) opera ou restringe. Para o '
-              'balanço de TAP entre enrolamentos, use a ferramenta "Balanço '
-              'Diferencial (87T)".',
+              AppLocalizations.of(context)!.restDiffDesc,
               style: TextStyle(
                 color: AppColors.primary.withValues(alpha: 0.9),
                 fontSize: 12,

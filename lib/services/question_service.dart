@@ -80,6 +80,7 @@ class QuestionService {
     String modId,
     String trailId,
     String lessonId, {
+    String? lang,
     int limit = 20,
     DocumentSnapshot? lastDocument,
   }) async {
@@ -101,7 +102,7 @@ class QuestionService {
     }
 
     final snap = await query.get();
-    final items = snap.docs.map((d) => QuestionModel.fromFirestore(d)).toList();
+    final items = snap.docs.map((d) => QuestionModel.fromFirestore(d, lang: lang)).toList();
 
     return QuestionPage(
       items: items,
@@ -117,9 +118,10 @@ class QuestionService {
     String modId,
     String trailId,
     String lessonId, {
+    String? lang,
     int limit = 20,
   }) async {
-    final page = await getQuestions(catId, modId, trailId, lessonId, limit: limit);
+    final page = await getQuestions(catId, modId, trailId, lessonId, lang: lang, limit: limit);
     return page.items;
   }
 }

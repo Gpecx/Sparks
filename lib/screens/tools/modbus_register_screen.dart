@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/modbus_register.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -55,24 +56,23 @@ class _ModbusRegisterScreenState extends State<ModbusRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Modbus — Registradores',
+      title: AppLocalizations.of(context)!.tlModbusRegs,
       children: [
         _infoBox(),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Registradores (16 bits, hex)',
-          subtitle: 'reg0 = 1º registrador lido · reg1 = 2º. A/B = bytes de reg0; '
-              'C/D = bytes de reg1.',
+          title: AppLocalizations.of(context)!.modbusRegs,
+          subtitle: AppLocalizations.of(context)!.modbusRegDesc,
           children: [
             ToolFieldRow(children: [
-              ToolField(controller: _reg0, label: 'Reg 0 (hex)'),
-              ToolField(controller: _reg1, label: 'Reg 1 (hex)'),
+              ToolField(controller: _reg0, label: AppLocalizations.of(context)!.modbusReg0),
+              ToolField(controller: _reg1, label: AppLocalizations.of(context)!.modbusReg1),
             ]),
           ],
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Ordem de byte/word',
+          title: AppLocalizations.of(context)!.modbusOrder,
           children: [
             ToolSegmented(
               labels: const ['ABCD', 'CDAB', 'BADC', 'DCBA'],
@@ -90,7 +90,7 @@ class _ModbusRegisterScreenState extends State<ModbusRegisterScreen> {
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'DECODIFICAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnDecode, onPressed: _calculate),
         if (_warning != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(results: const [], warning: _warning),
@@ -107,14 +107,14 @@ class _ModbusRegisterScreenState extends State<ModbusRegisterScreen> {
 
   Widget _decodeResults(ModbusDecode d) {
     final results = <ToolResult>[
-      ToolResult('Bytes (ordem aplicada)', d.hex),
-      ToolResult('Float 32 (IEEE-754)', _fmtFloat(d.float32)),
-      ToolResult('Int 32 (com sinal)', '${d.int32}'),
-      ToolResult('UInt 32 (sem sinal)', '${d.uint32}'),
+      ToolResult(AppLocalizations.of(context)!.modbusBytes, d.hex),
+      ToolResult(AppLocalizations.of(context)!.modbusFloat32, _fmtFloat(d.float32)),
+      ToolResult(AppLocalizations.of(context)!.modbusInt32, '${d.int32}'),
+      ToolResult(AppLocalizations.of(context)!.modbusUint32, '${d.uint32}'),
     ];
     return ToolResultsPanel(
       results: results,
-      title: 'Valor decodificado (${byteOrderLabel(_order)})',
+      title: AppLocalizations.of(context)!.tlDecodedTitle(byteOrderLabel(_order)),
     );
   }
 
@@ -129,8 +129,7 @@ class _ModbusRegisterScreenState extends State<ModbusRegisterScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Float em todas as ordens',
+          Text(AppLocalizations.of(context)!.modbusFloatAll,
             style: TextStyle(
               color: AppColors.textSecondary,
               fontSize: 12,
@@ -138,8 +137,7 @@ class _ModbusRegisterScreenState extends State<ModbusRegisterScreen> {
             ),
           ),
           const SizedBox(height: 4),
-          const Text(
-            'Compare com o valor esperado para descobrir a ordem certa do medidor.',
+          Text(AppLocalizations.of(context)!.modbusCompare,
             style: TextStyle(color: AppColors.textMuted, fontSize: 11),
           ),
           const SizedBox(height: 10),
@@ -216,9 +214,7 @@ class _ModbusRegisterScreenState extends State<ModbusRegisterScreen> {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              'Junta 2 registradores de 16 bits em float32/int32 com a ordem de '
-              'byte/word do medidor. Quando o valor "vem absurdo", é quase sempre '
-              'a ordem errada — veja a tabela com as 4 ordens.',
+              AppLocalizations.of(context)!.modbusDesc,
               style: TextStyle(
                 color: AppColors.primary.withValues(alpha: 0.9),
                 fontSize: 12,

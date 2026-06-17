@@ -88,3 +88,7 @@ patch_functions*.js
 # Segredos locais (chaves de API, tokens)
 setup_asaas_env.sh
 .env.secrets
+scripts/node_modules/
+scripts/package-lock.json
+scripts/_*.js
+lib/l10n/app_localizations*.dart

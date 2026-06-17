@@ -7,6 +7,7 @@ import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spark_app/models/badge_model.dart';
 import 'package:spark_app/providers/user_provider.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class AchievementsScreen extends ConsumerWidget {
   const AchievementsScreen({super.key});
@@ -30,9 +31,9 @@ class AchievementsScreen extends ConsumerWidget {
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text(
-              'CONQUISTAS',
-              style: TextStyle(
+            title: Text(
+              AppLocalizations.of(context)!.achievementsTitle,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w800,
                 fontSize: 15,
@@ -64,14 +65,14 @@ class AchievementsScreen extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '$unlockedCount Conquistas',
+                            AppLocalizations.of(context)!.achievementsUnlockedCount(unlockedCount),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800),
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'de $total disponíveis',
+                            AppLocalizations.of(context)!.ofTotalAvailable(total),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: AppColors.textMuted, fontSize: 13),
@@ -123,15 +124,15 @@ class AchievementsScreen extends ConsumerWidget {
                         child: const Icon(Icons.lock_outline, size: 40, color: AppColors.textMuted),
                       ),
                       const SizedBox(height: 24),
-                      const Text(
-                        'Nenhuma conquista ainda',
-                        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
+                      Text(
+                        AppLocalizations.of(context)!.noAchievementsYet,
+                        style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 12),
-                      const Text(
-                        'Complete lições, mantenha seu streak de ofensiva e gabarite os testes para destravar conquistas exclusivas.',
+                      Text(
+                        AppLocalizations.of(context)!.noAchievementsDesc,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.4),
+                        style: const TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.4),
                       ),
                       const SizedBox(height: 24),
                       ElevatedButton.icon(
@@ -143,38 +144,38 @@ class AchievementsScreen extends ConsumerWidget {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
                         icon: const Icon(Icons.play_arrow, size: 20),
-                        label: const Text('COMEÇAR APRENDER', style: TextStyle(fontWeight: FontWeight.w700)),
+                        label: Text(AppLocalizations.of(context)!.startLearningButton, style: const TextStyle(fontWeight: FontWeight.w700)),
                       )
                     ],
                   ),
                 )
               else ...[
                 // ── Dynamic badges from Firestore ────────────────────
-                _sectionTitle('BADGES DINÂMICAS'),
+                _sectionTitle(AppLocalizations.of(context)!.dynamicBadges),
                 _buildDynamicBadges(unlockedIds),
                 const SizedBox(height: 8),
 
-                _sectionTitle('DEDICAÇÃO E PRESENÇA'),
+                _sectionTitle(AppLocalizations.of(context)!.dedicationPresence),
                 _achievementGrid(context, [
-                  _AchievementData('Streak 7 dias', Icons.local_fire_department, 'Estudou 7 dias consecutivos',
+                  _AchievementData(AppLocalizations.of(context)!.achStreak7Title, Icons.local_fire_department, AppLocalizations.of(context)!.achStreak7Desc,
                       unlockedIds.contains('streak_7')),
-                  _AchievementData('Streak 30 dias', Icons.whatshot, 'Estudou 30 dias consecutivos',
+                  _AchievementData(AppLocalizations.of(context)!.achStreak30Title, Icons.whatshot, AppLocalizations.of(context)!.achStreak30Desc,
                       unlockedIds.contains('streak_30')),
-                  _AchievementData('Madrugador', Icons.wb_twilight, 'Estudou antes das 7h por 5 dias',
+                  _AchievementData(AppLocalizations.of(context)!.achEarlyBirdTitle, Icons.wb_twilight, AppLocalizations.of(context)!.achEarlyBirdDesc,
                       unlockedIds.contains('noturno')),
-                  _AchievementData('Dedicado', Icons.calendar_month, 'Ativo por 60 dias',
+                  _AchievementData(AppLocalizations.of(context)!.achDedicatedTitle, Icons.calendar_month, AppLocalizations.of(context)!.achDedicatedDesc,
                       unlockedIds.contains('streak_100')),
                 ]),
 
-                _sectionTitle('PERFORMANCE'),
+                _sectionTitle(AppLocalizations.of(context)!.achievementsPerformance),
                 _achievementGrid(context, [
-                  _AchievementData('Primeira Avaliação', Icons.quiz_outlined, 'Completou sua primeira avaliação',
+                  _AchievementData(AppLocalizations.of(context)!.achFirstEvalTitle, Icons.quiz_outlined, AppLocalizations.of(context)!.achFirstEvalDesc,
                       unlockedIds.contains('first_lesson')),
-                  _AchievementData('Nota Máxima', Icons.star_outlined, 'Tirou 100% em uma avaliação',
+                  _AchievementData(AppLocalizations.of(context)!.achTopScoreTitle, Icons.star_outlined, AppLocalizations.of(context)!.achTopScoreDesc,
                       unlockedIds.contains('xp_1000')),
-                  _AchievementData('Sequência Perfeita', Icons.military_tech, '10 acertos seguidos no quiz',
+                  _AchievementData(AppLocalizations.of(context)!.achPerfectStreakTitle, Icons.military_tech, AppLocalizations.of(context)!.achPerfectStreakDesc,
                       unlockedIds.contains('sniper')),
-                  _AchievementData('Imbatível', Icons.workspace_premium, 'Completou 5 avaliações com nota máxima',
+                  _AchievementData(AppLocalizations.of(context)!.achUnbeatableTitle, Icons.workspace_premium, AppLocalizations.of(context)!.achUnbeatableDesc,
                       unlockedIds.contains('lesson_50')),
                 ]),
               ],

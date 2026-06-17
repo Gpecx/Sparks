@@ -1,3 +1,4 @@
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -309,7 +310,7 @@ class ToolResultsPanel extends StatelessWidget {
               ),
               Semantics(
                 button: true,
-                label: 'Copiar todos os resultados',
+                label: AppLocalizations.of(context)!.tlCopyAll,
                 child: IconButton(
                   icon: const Icon(Icons.copy_all_outlined,
                       color: AppColors.primary, size: 20),
@@ -318,7 +319,7 @@ class ToolResultsPanel extends StatelessWidget {
                     final text = results.map((r) => r.clip).join('\n');
                     Clipboard.setData(ClipboardData(text: text));
                     HapticFeedback.lightImpact();
-                    SparkSnack.success(context, 'Resultados copiados');
+                    SparkSnack.success(context, AppLocalizations.of(context)!.tlResultsCopied);
                   },
                 ),
               ),
@@ -380,7 +381,7 @@ class ToolResultsPanel extends StatelessWidget {
             ),
             Semantics(
               button: true,
-              label: 'Copiar ${r.label}',
+              label: AppLocalizations.of(context)!.a11yCopy(r.label),
               child: IconButton(
                 icon: const Icon(Icons.copy_outlined,
                     color: AppColors.textMuted, size: 16),

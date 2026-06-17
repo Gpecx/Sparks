@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/utils/instrument_transformers.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
 
@@ -100,12 +101,12 @@ class _RtcRtpScreenState extends State<RtcRtpScreen> {
             ToolFieldRow(children: [
               ToolField(
                 controller: _primaryNom,
-                label: 'Primário nominal ($_unit)',
+                label: AppLocalizations.of(context)!.a11yPrimaryNominal(_unit),
                 semantic: 'Valor nominal no primário',
               ),
               ToolField(
                 controller: _secondaryNom,
-                label: 'Secundário nominal ($_unit)',
+                label: AppLocalizations.of(context)!.a11ySecondaryNominal(_unit),
                 semantic: 'Valor nominal no secundário',
               ),
             ]),
@@ -113,23 +114,23 @@ class _RtcRtpScreenState extends State<RtcRtpScreen> {
         ),
         const SizedBox(height: 12),
         ToolCard(
-          title: 'Conversões (opcional)',
+          title: AppLocalizations.of(context)!.rtcRtpConversions,
           children: [
             ToolField(
               controller: _primaryVal,
-              label: 'Valor medido no primário ($_unit)',
+              label: AppLocalizations.of(context)!.a11yMeasuredPrimary(_unit),
               semantic: 'Valor medido no primário',
             ),
             const SizedBox(height: 12),
             ToolField(
               controller: _secondaryVal,
-              label: 'Valor medido no secundário ($_unit)',
+              label: AppLocalizations.of(context)!.a11yMeasuredSecondary(_unit),
               semantic: 'Valor medido no secundário',
             ),
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(

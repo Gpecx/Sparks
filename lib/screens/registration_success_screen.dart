@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spark_app/theme/app_theme.dart';
 
@@ -94,8 +95,8 @@ class _RegistrationSuccessScreenState extends State<RegistrationSuccessScreen>
               // ── Title ─────────────────────────────────────────────
               FadeTransition(
                 opacity: _fadeAnim,
-                child: const Text(
-                  'Cadastro Concluído!',
+                child: Text(
+                  AppLocalizations.of(context)!.regSuccessTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
@@ -110,8 +111,8 @@ class _RegistrationSuccessScreenState extends State<RegistrationSuccessScreen>
 
               FadeTransition(
                 opacity: _fadeAnim,
-                child: const Text(
-                  'Bem-vindo ao SPARK!\nSua jornada de aprendizado começa agora.',
+                child: Text(
+                  AppLocalizations.of(context)!.regSuccessWelcome,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.textSecondary,
@@ -158,12 +159,12 @@ class _RegistrationSuccessScreenState extends State<RegistrationSuccessScreen>
                         ),
                       ),
                       const SizedBox(width: 16),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Bônus de boas-vindas',
+                              AppLocalizations.of(context)!.regSuccessBonus,
                               style: TextStyle(
                                 color: AppColors.gold,
                                 fontSize: 13,
@@ -204,7 +205,7 @@ class _RegistrationSuccessScreenState extends State<RegistrationSuccessScreen>
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(

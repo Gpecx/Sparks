@@ -1,3 +1,4 @@
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -129,7 +130,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       onError: (e) {
         if (mounted) {
           setState(() {
-            _errorGlobal = 'Erro ao carregar ranking';
+            _errorGlobal = AppLocalizations.of(context)!.errorLoadingRanking;
             _loadingGlobal = false;
           });
         }
@@ -164,7 +165,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       onError: (e) {
         if (mounted) {
           setState(() {
-            _errorClan = 'Erro ao carregar ranking de clãs';
+            _errorClan = AppLocalizations.of(context)!.errorLoadingClanRanking;
             _loadingClan = false;
           });
         }
@@ -220,10 +221,10 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                       Expanded(
                         child: Text(
                           _selectedTab == 2
-                              ? 'TORNEIO SEMANAL'
+                              ? AppLocalizations.of(context)!.weeklyTournament
                               : _selectedTab == 1
-                                  ? 'RANKING DO CLÃ'
-                                  : 'RANKING SEMANAL',
+                                  ? AppLocalizations.of(context)!.clanRankingTitle
+                                  : AppLocalizations.of(context)!.weeklyRankingTitle,
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -245,13 +246,13 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                   color:
                                       AppColors.primary.withValues(alpha: 0.3)),
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(Icons.calendar_today_outlined,
+                                const Icon(Icons.calendar_today_outlined,
                                     color: AppColors.primary, size: 13),
-                                SizedBox(width: 5),
-                                Text('Esta semana',
+                                const SizedBox(width: 5),
+                                Text(AppLocalizations.of(context)!.thisWeek,
                                     style: TextStyle(
                                         color: AppColors.primary,
                                         fontSize: 11,
@@ -377,8 +378,8 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                               onPressed: () => setState(() =>
                                                   _paginatedGlobalCount +=
                                                       _pageSize),
-                                              child: const Text(
-                                                  'Carregar mais',
+                                              child: Text(
+                                                  AppLocalizations.of(context)!.loadMore,
                                                   style: TextStyle(
                                                       color: AppColors.primary,
                                                       fontWeight:
@@ -667,12 +668,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         children: [
           const Icon(Icons.wifi_off, color: AppColors.textMuted, size: 48),
           const SizedBox(height: 12),
-          const Text('Não foi possível carregar o ranking',
+          Text(AppLocalizations.of(context)!.couldNotLoadRanking,
               style: TextStyle(color: AppColors.textSecondary)),
           const SizedBox(height: 16),
           TextButton(
             onPressed: _loadRankings,
-            child: const Text('Tentar novamente',
+            child: Text(AppLocalizations.of(context)!.tryAgain,
                 style: TextStyle(color: AppColors.primary)),
           ),
         ],
@@ -690,8 +691,8 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           const SizedBox(height: 12),
           Text(
             _selectedTab == 1
-                ? 'Nenhum clã no ranking esta semana'
-                : 'Nenhum dado de ranking esta semana',
+                ? AppLocalizations.of(context)!.noClansRankingWeek
+                : AppLocalizations.of(context)!.noRankingDataWeek,
             style: const TextStyle(color: AppColors.textSecondary),
             textAlign: TextAlign.center,
           ),
@@ -752,7 +753,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                   const Icon(Icons.emoji_events,
                       color: AppColors.gold, size: 24),
                   const SizedBox(width: 8),
-                  const Text('Torneio em andamento',
+                  Text(AppLocalizations.of(context)!.tournamentInProgress,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
@@ -764,7 +765,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                     decoration: BoxDecoration(
                         color: AppColors.error.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(8)),
-                    child: const Text('AO VIVO',
+                    child: Text(AppLocalizations.of(context)!.liveLabel,
                         style: TextStyle(
                             color: AppColors.error,
                             fontSize: 10,
@@ -774,7 +775,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
               ),
               const SizedBox(height: 12),
               Text(
-                'Complete o máximo de lições esta semana para subir no ranking e ganhar recompensas exclusivas!',
+                AppLocalizations.of(context)!.tournamentDescription,
                 style: TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: 13,
@@ -792,7 +793,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
             ],
           ),
         ),
-        const Text('PARTICIPANTES',
+        Text(AppLocalizations.of(context)!.participantsLabel,
             style: TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 11,
@@ -837,14 +838,14 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Período do ranking',
+            Text(AppLocalizations.of(context)!.rankingPeriod,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w700)),
             const SizedBox(height: 16),
             Text(
-              'O ranking semanal é resetado toda segunda-feira às 00:00.\nSeus pontos acumulados ficam no histórico.',
+              AppLocalizations.of(context)!.rankingResetInfo,
               style: TextStyle(
                   color: AppColors.textSecondary, fontSize: 13, height: 1.5),
             ),

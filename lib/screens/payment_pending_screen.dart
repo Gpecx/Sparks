@@ -1,6 +1,8 @@
+import 'package:spark_app/core/utils/currency_utils.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -214,8 +216,8 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
               ),
               const SizedBox(height: 20),
 
-              const Text(
-                'Pagamento Concluído!',
+              Text(
+                AppLocalizations.of(context)!.paymentCompleted,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 22,
@@ -227,7 +229,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
               const SizedBox(height: 10),
 
               Text(
-                'Sua transação foi aprovada com sucesso.',
+                AppLocalizations.of(context)!.paymentApproved,
                 style: TextStyle(
                   color: AppColors.textSecondary,
                   fontSize: 14,
@@ -340,8 +342,8 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
                         color: AppColors.primary, shape: BoxShape.circle),
                   ),
                   const SizedBox(width: 8),
-                  const Text(
-                    'Aguardando pagamento...',
+                  Text(
+                    AppLocalizations.of(context)!.paymentPendingWaiting,
                     style: TextStyle(
                         color: AppColors.primary,
                         fontSize: 13,
@@ -382,14 +384,14 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
                 color: AppColors.card,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: const Center(
+              child: Center(
                 child: CircularProgressIndicator(color: AppColors.primary),
               ),
             ),
           const SizedBox(height: 8),
           if (widget.result.pixExpirationDate != null)
             Text(
-              'Expira em: ${widget.result.pixExpirationDate}',
+              AppLocalizations.of(context)!.paymentExpiresIn(widget.result.pixExpirationDate ?? ''),
               style: const TextStyle(
                   color: AppColors.textMuted, fontSize: 11),
             ),
@@ -397,7 +399,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
 
           // Total
           Text(
-            'R\$ ${widget.result.totalPrice.toStringAsFixed(2)}',
+            CurrencyUtils.format(context, widget.result.totalPrice),
             style: const TextStyle(
                 color: Colors.white,
                 fontSize: 32,
@@ -408,9 +410,9 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
 
           // Copia e Cola
           if (payload != null) ...[
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
-              child: Text('CÓDIGO PIX — COPIA E COLA',
+              child: Text(AppLocalizations.of(context)!.paymentPixCode,
                   style: TextStyle(
                       color: AppColors.textMuted,
                       fontSize: 10,
@@ -476,7 +478,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
 
           const SizedBox(height: 16),
           Text(
-            'O pagamento é confirmado automaticamente.\nVocê não precisa fazer nada após pagar.',
+            AppLocalizations.of(context)!.paymentAutoConfirm,
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: AppColors.textMuted, fontSize: 12),
@@ -500,8 +502,8 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
           const Icon(Icons.open_in_browser,
               color: AppColors.primary, size: 72),
           const SizedBox(height: 24),
-          const Text(
-            'Você será redirecionado\npara a página de pagamento',
+          Text(
+            AppLocalizations.of(context)!.paymentRedirecting,
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Colors.white,
@@ -510,7 +512,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
           ),
           const SizedBox(height: 8),
           Text(
-            'Após finalizar o pagamento, seu plano\nserá ativado automaticamente.',
+            AppLocalizations.of(context)!.paymentAfterComplete,
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: AppColors.textMuted, fontSize: 13),
@@ -523,7 +525,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
               onPressed: url != null ? _openExternalLink : null,
               icon:
                   const Icon(Icons.open_in_new, size: 18, color: Colors.black),
-              label: const Text('ABRIR PÁGINA DE PAGAMENTO',
+              label: Text(AppLocalizations.of(context)!.paymentOpenPage,
                   style: TextStyle(
                       fontWeight: FontWeight.w800, letterSpacing: 1)),
             ),
@@ -543,7 +545,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
                       color: AppColors.primary, shape: BoxShape.circle),
                 ),
                 const SizedBox(width: 8),
-                const Text('Aguardando confirmação...',
+                Text(AppLocalizations.of(context)!.paymentWaitingConfirm,
                     style: TextStyle(
                         color: AppColors.textMuted, fontSize: 12)),
               ],

@@ -1,0 +1,2042 @@
+{
+  "@@locale": "en",
+  "languageName": "English",
+  "settingsTitle": "SETTINGS",
+  "accountAndProfile": "ACCOUNT AND PROFILE",
+  "editProfile": "Edit Profile",
+  "editProfileDesc": "Name, email, role",
+  "myAchievements": "View My Achievements",
+  "myAchievementsDesc": "Trophies and badges page",
+  "myProgress": "My Progress",
+  "myProgressDesc": "Track progress across modules",
+  "changePassword": "Change Password",
+  "changePasswordDesc": "Account security",
+  "managePlan": "Manage Plan",
+  "managePlanDesc": "Premium, active plans",
+  "deleteAccount": "Delete Account",
+  "deleteAccountDesc": "Permanently delete",
+  "accessibility": "ACCESSIBILITY",
+  "textSize": "Text Size",
+  "textSizeDesc": "Adjust the font size across the app",
+  "colorblindMode": "Colorblind Mode",
+  "colorblindModeDesc": "Adjust colors for different types of color blindness",
+  "language": "Language",
+  "languageDesc": "Select the interface and content language",
+  "admin": "ADMINISTRATION",
+  "adminPanel": "Admin Panel",
+  "adminPanelDesc": "Manage categories, modules and lessons",
+  "logout": "LOG OUT",
+  "createClanTitle": "CREATE CLAN",
+  "joinClanTitle": "JOIN A CLAN",
+  "editClanNamePassword": "Edit Name/Password",
+  "deleteClan": "Delete Clan",
+  "createClanDescription": "Create a group for your company and compete against your colleagues!",
+  "clanNameLabel": "Clan Name",
+  "clanNameHint": "e.g.: EXS Técnicos SP",
+  "clanNameValidator": "Name must be longer than 3 characters",
+  "clanDescriptionLabel": "Clan Description",
+  "clanDescriptionHint": "About the clan...",
+  "clanPasswordLabel": "Clan Password",
+  "clanPasswordHint": "Minimum 4 characters",
+  "clanPasswordValidator": "Password must be at least 4 characters",
+  "createClanAdminNotice": "As the creator, you will have the ADMIN role and can manage all members.",
+  "createClanButton": "CREATE GROUP/CLAN",
+  "joinClanDescription": "Join with an invite code or with the clan password.",
+  "inviteCodeOptionalLabel": "Invite Code (optional)",
+  "inviteCodeHint": "e.g.: SPARK-XK29",
+  "clanPasswordJoinHint": "Enter the group password",
+  "joinPasswordValidator": "Enter the password or the code",
+  "joinClanButton": "JOIN THE GROUP",
+  "clanNotFound": "Clan not found.",
+  "clanMembersCount": "{count, plural, =0{No members} =1{1 member} other{{count} members}}",
+  "maxLevel": "MAX",
+  "currentLeague": "Current League",
+  "globalRank": "Global Rank",
+  "membersListTitle": "MEMBERS",
+  "clanChatTitle": "CLAN CHAT",
+  "chatSilent": "The chat is quiet...",
+  "beFirstToInteract": "Be the first to interact!",
+  "typeAMessage": "Type a message...",
+  "clanMascot": "Clan Icon",
+  "weeklyQuestsTitle": "WEEKLY QUESTS",
+  "noActiveQuests": "No active quests.",
+  "joinRequestsTitle": "JOIN REQUESTS",
+  "noPendingRequests": "No pending requests for now.",
+  "unknownMember": "Unknown Member",
+  "acceptJoinRequestSuccess": "Request accepted!",
+  "rejectJoinRequestSuccess": "Request rejected!",
+  "clanCreatedSuccess": "Clan created successfully!",
+  "errorCreatingClan": "Error creating: ",
+  "joinRequestSent": "Join request sent! Wait for approval.",
+  "joinedClanSuccess": "You joined the clan!",
+  "errorJoiningClan": "Error joining: ",
+  "editClanTitle": "Edit Clan",
+  "newClanNameHint": "New clan name",
+  "mainColorLabel": "MAIN COLOR",
+  "clanIconLabel": "CLAN ICON",
+  "cancelButton": "Cancel",
+  "saveButton": "SAVE",
+  "clanUpdatedSuccess": "Clan updated successfully!",
+  "errorUpdatingClan": "Error updating clan: ",
+  "deleteClanDialogTitle": "Delete Clan?",
+  "deleteClanWarning": "This action is permanent! All members will be removed.",
+  "deleteClanButton": "DELETE",
+  "clanDeletedSuccess": "Clan deleted successfully!",
+  "errorDeletingClan": "Error deleting: ",
+  "clanLeaguesTitle": "Clan Leagues",
+  "closeButton": "Close",
+  "inviteToClanTitle": "Invite to the Clan",
+  "shareCodeSubtitle": "Share the code below",
+  "inviteCodeInfo": "Anyone with this code can join your clan.",
+  "codeCopied": "Code copied!",
+  "tapToCopy": "Tap the code to copy",
+  "copyCodeButton": "Copy Code",
+  "copiedButton": "Copied!",
+  "moduleLockedPreviousSteps": "Module locked! Complete the previous steps first.",
+  "lessonCompletedTitle": "Lesson Completed!",
+  "lessonCompletedWarning": "You have already completed this lesson. To keep the challenge, redoing it is not available at the moment.",
+  "understoodButton": "GOT IT",
+  "errorCategoryOrModuleMissing": "Error: Category or Module missing",
+  "currentModuleTitle": "Current Module",
+  "inProgressModuleSteps": "In Progress · {completed} of {total} steps",
+  "noLessonsFoundForModule": "No lessons found for this module",
+  "errorPrefix": "Error: ",
+  "membersOnlineHere": "{count, plural, =0{No members online} =1{1 member online here} other{{count} members online here}}",
+  "unlockFullPotentialPremium": "Unlock the full potential with Spark Premium.",
+  "viewPlansButton": "VIEW PLANS",
+  "proUpgradeTitle": "Premium Content",
+  "proUpgradeDescription": "This content is exclusive to Premium subscribers.",
+  "cancel": "Cancel",
+  "subscribe": "Subscribe",
+  "epicStreakBonus": "EPIC STREAK! +100 XP Bonus!",
+  "streakBonusEnergy": "Streak hit! +{bonus} bonus energy!",
+  "successMessage": "Congratulations! You reached {pct}% correct and earned {xpEarned} XP!",
+  "evaluationPassed": "Evaluation Passed!",
+  "lessonCompleted": "Lesson completed!",
+  "insufficientPerformance": "Insufficient Performance",
+  "performanceLow": "You got {score}%. You need at least {required} to advance. Review the material and try again.",
+  "continueButton": "CONTINUE",
+  "redoButton": "REDO",
+  "exitButton": "Exit",
+  "batteryDepleted": "Battery Depleted!",
+  "batteryDepletedDescription": "You used all your energy. Wait for the automatic recharge (5 min per unit) or subscribe to a plan for infinite battery ∞.",
+  "viewPlansInfiniteBattery": "VIEW PLANS WITH ∞ BATTERY",
+  "exitQuiz": "Exit Quiz",
+  "skipButton": "Skip ✕",
+  "powerplayTitle": "POWERPLAY",
+  "congratsModule": "Congrats on the module!",
+  "tryPremiumVideosFree": "Keep learning with exclusive technical videos. Try it free for 7 days!",
+  "tryFree7Days": "TRY FREE FOR 7 DAYS",
+  "areYouSure": "Are you sure?",
+  "loseProgressWarning": "You will lose all your progress in the lesson if you leave.",
+  "cancelUpper": "CANCEL",
+  "exitUpper": "EXIT",
+  "noQuestionsRegistered": "No questions registered",
+  "noQuestionsAdminContact": "This lesson does not have any questions registered in the system yet. Please contact the administrator.",
+  "backButton": "BACK",
+  "loadingQuestions": "Loading questions...",
+  "questionProgress": "Question {current} of {total}",
+  "verifyButton": "CHECK",
+  "excellentFeedback": "Excellent!",
+  "payAttentionFeedback": "Mind the detail!",
+  "finishButton": "FINISH",
+  "falseUpper": "FALSE",
+  "trueUpper": "TRUE",
+  "noStatement": "No statement",
+  "storeTitle": "SPARK STORE",
+  "storeSubtitle": "Choose the ideal plan for you",
+  "monthly": "Monthly",
+  "yearly": "Yearly",
+  "save17Percent": "Save 17%",
+  "freePlanPrice": "Free",
+  "yearlyPlanPrice": "R$ {price}/month",
+  "monthlyPlanPrice": "R$ {price}/month",
+  "monthlyPlanPricePerUser": "R$ {price}/user/month",
+  "billedAnnually": "R$ {price} billed annually",
+  "minUsersBilledAnnually": "Min. {minUsers} users • Billed annually",
+  "orAnnualPlanLabel": "Or {label} on the annual plan",
+  "yourCurrentPlan": "YOUR CURRENT PLAN",
+  "basicPlan": "BASIC PLAN",
+  "trialActiveDays": "{days, plural, =0{TRIAL ACTIVE — 0 days left} =1{TRIAL ACTIVE — 1 day left} other{TRIAL ACTIVE — {days} days left}}",
+  "trialEnded": "TRIAL ENDED",
+  "currentPlanActive": "CURRENT PLAN ✓",
+  "verifyEnrollment": "VERIFY ENROLLMENT",
+  "requestProposal": "REQUEST A PROPOSAL",
+  "upgradeToPlan": "UPGRADE TO {planName}",
+  "subscribeToPlan": "SUBSCRIBE TO {planName}",
+  "test7DaysFree": "TRY 7 DAYS FREE",
+  "accessDeniedAdminOnly": "Access Denied: Only administrators can enable Dev Mode.",
+  "devModeTapsRemaining": "🔧 Dev: {remaining} tap(s) remaining...",
+  "devModeDisabled": "🔒 Dev Mode DISABLED",
+  "devModeEnabled": "🔓 Dev Mode ENABLED — Admin Panel Unlocked!",
+  "myProfile": "MY PROFILE",
+  "levelValue": "Lvl {level}",
+  "technicianRole": "TECHNICIAN",
+  "viewCredential": "VIEW CREDENTIAL",
+  "activeDays": "Active Days",
+  "daysLabel": "days",
+  "streakLabel": "Streak",
+  "streakDaysFire": "days 🔥",
+  "experienceLabel": "Experience",
+  "xpLabel": "XP",
+  "debugInfoTitle": "DEBUG INFO (DEV MODE)",
+  "debugUid": "UID: {uid}",
+  "debugRole": "Firestore Role: {role}",
+  "debugIsAdmin": "isAdmin Getter: {isAdmin}",
+  "achievementsTitle": "ACHIEVEMENTS",
+  "seeAll": "See All ↗",
+  "noAchievementsYet": "You have no achievements at the moment.",
+  "letsLearnAndUnlockRewards": "Let's learn and unlock rewards!",
+  "clanTitle": "CLAN",
+  "joinAClan": "Join a Clan!",
+  "clanDescription": "Join other students, compete as a team and earn exclusive rewards.",
+  "createClanUpper": "CREATE CLAN",
+  "enterUpper": "JOIN",
+  "myClanTitle": "MY CLAN",
+  "clanMemberRole": "Member",
+  "viewClanUpper": "VIEW CLAN",
+  "weeklyRankingTitle": "WEEKLY RANKING",
+  "globalLeaderboard": "Global Leaderboard",
+  "yourRankingPosition": "You are #{position} this week",
+  "completeLessonsToEnterRanking": "Complete lessons to enter the ranking",
+  "myClanFallback": "My Clan",
+  "goodMorning": "Good morning",
+  "goodAfternoon": "Good afternoon",
+  "goodEvening": "Good evening",
+  "myProfileMenu": "My Profile",
+  "settingsMenu": "Settings",
+  "adminPanelMenu": "Admin Panel",
+  "myAchievementsMenu": "My Achievements",
+  "myProgressMenu": "My Progress",
+  "helpSupportMenu": "Help / Support",
+  "newMechanicsHeader": "NEW MECHANICS",
+  "sparksDuelMenu": "Sparks Duel (PvP)",
+  "logoutMenu": "Log out",
+  "seeAllPlural": "See all",
+  "notificationsTitle": "Notifications",
+  "markAllAsRead": "Mark all as read",
+  "noNotificationsAtMoment": "No notifications at the moment.",
+  "weeklyCovenantsTitle": "Weekly Pacts",
+  "featuredModulesTitle": "Featured Modules",
+  "yourProgressTitle": "Your Progress",
+  "technicianLevel": "Technician Level {level}",
+  "streakMultiplierMessage": "🔥 {streak}-day streak! {multiplier}x multiplier.",
+  "streakDays": "{streak} Days",
+  "xpProgress": "{current} / {total} XP",
+  "totalXp": "Total XP: {xp} XP",
+  "dailyChallengeTitle": "Daily Challenge",
+  "adminTestAccess": "Admin Test Access",
+  "comingSoonLabel": "Coming soon...",
+  "comingSoonUpper": "COMING SOON",
+  "moduleFallback": "Module {id}",
+  "noModuleStarted": "No module started",
+  "lessonsCompleted": "{count, plural, =0{0 lessons completed} =1{1 lesson completed} other{{count} lessons completed}}",
+  "accessLearningPathToStart": "Go to the Learning Path to start",
+  "continueLearningTitle": "Continue Learning",
+  "dailyChallengeDescription": "Test your knowledge of NR-10! Complete 3 quick questions to earn rewards.",
+  "rewardXp": "💰 +{xp} XP",
+  "rewardLabel": "Reward",
+  "estimatedTime": "⏱️ {time} min",
+  "estimatedTimeLabel": "Est. Time",
+  "notNowButton": "NOT NOW",
+  "startChallengeButton": "START CHALLENGE",
+  "startingDailyChallenge": "Starting daily challenge...",
+  "noActiveCovenant": "No Active Pact",
+  "goToCovenantsTabToCreate": "Go to the Pacts tab to create the commitment!",
+  "acceptCovenantButton": "ACCEPT PACT",
+  "covenantProgress": "{current}/{max} {type}",
+  "noFeaturedModulesCurrently": "No featured modules at the moment.",
+  "continueExploringForNewContent": "Keep exploring to discover new content!",
+  "errorLoadingModules": "Error loading modules",
+  "powerplayStreamingTitle": "PowerPlay Streaming",
+  "technicalVideosDescription": "Technical videos and exclusive content for your learning",
+  "learnMoreButton": "Learn more",
+  "errorLoadingProgress": "Error loading progress",
+  "loginTitle": "Sign In",
+  "loginWelcomeBack": "Welcome back",
+  "loginSubtitle": "Sign in to SPARK to continue",
+  "emailAddressLabel": "Email Address",
+  "emailHint": "Enter your email",
+  "passwordLabel": "Password",
+  "passwordHint": "Enter your password",
+  "rememberDevice30Days": "Remember this device for 30 days",
+  "forgotPassword": "Forgot password?",
+  "loginButton": "SIGN IN",
+  "orDivider": "or",
+  "signInWithGoogle": "Sign in with Google",
+  "noAccountQuestion": "Don't have an account? ",
+  "signUpLink": "Sign up",
+  "fillAllFields": "Please fill in all fields.",
+  "errorSendingCode": "Error sending code: {error}",
+  "@errorSendingCode": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "welcomeHeadline": "From Protection to\nAutomation,\nMaster Every Trail",
+  "welcomeSubtitle": "Lightning Protection, Studies, Thermography and Commissioning —\nfrom NR-10 to IEC 61850, all in one platform",
+  "welcomeLoginButton": "LOG IN",
+  "welcomeCreateAccountButton": "CREATE NEW ACCOUNT",
+  "haveCourtesyCode": "Have a courtesy code? ",
+  "activateInAccount": "Activate in account",
+  "createAccountTitle": "Create Account",
+  "createYourAccount": "Create your account",
+  "registerSubtitle": "Sign up to SPARK to get started",
+  "fullNameLabel": "Full Name",
+  "fullNameHint": "Enter your full name",
+  "createPasswordHint": "Create a password",
+  "courtesyCodeOptional": "Courtesy code (optional)",
+  "courtesyCodeHelp": "Received a code? Enter it here to unlock full access right away.",
+  "registerButton": "SIGN UP",
+  "signUpWithGoogle": "Sign up with Google",
+  "alreadyHaveAccount": "Already have an account? ",
+  "registerUnknownError": "Unknown error creating user.",
+  "voucherActivateLater": "Could not activate the code right now. You can redeem it later in Settings.",
+  "fullAccessGranted": "Full access unlocked! 🎉",
+  "fullAccessUntilMessage": "Your account has full access to the platform until {date}.\n\nConfirm your email to sign in.",
+  "@fullAccessUntilMessage": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "codeNotApplied": "Code not applied",
+  "codeNotAppliedMessage": "{error}\n\nYour account was created normally — you can redeem the code later in Settings.",
+  "@codeNotAppliedMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "genericErrorPrefix": "Error: {error}",
+  "@genericErrorPrefix": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "toolsSymmetricalComponentsTitle": "Symmetrical Components",
+  "toolsSymmetricalComponentsDesc": "Decompose and synthesize ABC phasors ↔ 0/1/2 sequences",
+  "toolsPerUnitTitle": "Per Unit (PU)",
+  "toolsPerUnitDesc": "Bases, real ↔ pu conversion and base change",
+  "toolsPowerTriangleTitle": "Power Triangle",
+  "toolsPowerTriangleDesc": "Convert between P (kW), Q (kvar), S (kVA) and PF",
+  "toolsOnsVoltageTitle": "PU Voltage — ONS Base × PT",
+  "toolsOnsVoltageDesc": "Converts pu from ONS study to V on PT secondary",
+  "toolsRtcRtpTitle": "CT / PT Ratio",
+  "toolsRtcRtpDesc": "CT and PT transformation ratio + conversions",
+  "toolsCtSaturationTitle": "CT Saturation",
+  "toolsCtSaturationDesc": "Burden, knee point voltage and saturation check",
+  "toolsShortCircuitTitle": "Short Circuit",
+  "toolsShortCircuitDesc": "3φ, line-to-line and line-to-ground currents (Z1/Z2/Z0)",
+  "toolsIdmtCurvesTitle": "Overcurrent Curves (51)",
+  "toolsIdmtCurvesDesc": "IDMT: calculate 1 curve or coordination plot (compare curves + CTI)",
+  "toolsDifferentialBalanceTitle": "Differential Balance (87T)",
+  "toolsDifferentialBalanceDesc": "Transformer windings balance coefficient",
+  "toolsRestrictedDifferentialTitle": "87 — Biased Differential",
+  "toolsRestrictedDifferentialDesc": "Idiff × Irest characteristic (dual slope): operate or restrain",
+  "toolsCoordinationTitle": "Coordination / Selectivity",
+  "toolsCoordinationDesc": "CTI margin between main and backup relay (51)",
+  "toolsDistanceProtectionTitle": "Distance Protection (21)",
+  "toolsDistanceProtectionDesc": "Z1/Z2/Z3 zones + mho characteristic in R-X plane",
+  "toolsDirectional67Title": "Directional 67 / 67N",
+  "toolsDirectional67Desc": "Phase and neutral directional element (3V0/3I0): forward or reverse",
+  "toolsVoltageDropTitle": "Voltage Drop",
+  "toolsVoltageDropDesc": "ΔV and ΔV% in 3-phase feeder",
+  "toolsPowerFactorTitle": "Power Factor Correction",
+  "toolsPowerFactorDesc": "Size the capacitor bank (kvar)",
+  "toolsGroundGridTitle": "Ground Grid (IEEE 80)",
+  "toolsGroundGridDesc": "Tolerable touch and step voltages + GPR",
+  "toolsArcFlashTitle": "Arc Flash (incident energy)",
+  "toolsArcFlashDesc": "Incident energy and PPE category (IEEE 1584 / Lee)",
+  "toolsSpdaRiskTitle": "LPS — Risk Analysis",
+  "toolsSpdaRiskDesc": "LPS need screening and level (NBR 5419-2)",
+  "toolsSpdaCalcTitle": "LPS — Calculations (5419-3)",
+  "toolsSpdaCalcDesc": "Rolling sphere, down conductors, separation distance, impulse",
+  "toolsPowerQualityTitle": "Power Quality",
+  "toolsPowerQualityDesc": "Transformer loading and unbalance (PRODIST Mod. 8)",
+  "toolsNetworkCableTitle": "Network Cables (RJ-45)",
+  "toolsNetworkCableDesc": "T568A/B pinout + cable categories table",
+  "toolsIec61850Title": "IEC 61850 — GOOSE / SV",
+  "toolsIec61850Desc": "Retransmission timing, SV rate and MAC/VLAN addressing",
+  "toolsModbusRegisterTitle": "Modbus — Registers",
+  "toolsModbusRegisterDesc": "Merge 2 registers into float32/int32 (byte/word order)",
+  "toolsEquipmentCurrentTitle": "Nominal Current",
+  "toolsEquipmentCurrentDesc": "Transformer/motor In, starting and bank inrush (multi-transformer)",
+  "toolsSignalScalingTitle": "4–20 mA Scaling",
+  "toolsSignalScalingDesc": "Convert instrumentation signal ↔ engineering unit",
+  "toolsThermalSeverityTitle": "Thermal Severity",
+  "toolsThermalSeverityDesc": "Classify anomaly by ΔT + load correction",
+  "toolsCommissioningTitle": "Commissioning / Testing",
+  "toolsCommissioningDesc": "Test tolerance (pass/fail) and secondary injection",
+  "toolsCategoryConversions": "Conversions & Analysis",
+  "toolsCategoryTI": "Instrument Transformers",
+  "toolsCategoryFaults": "Short Circuit & Faults",
+  "toolsCategoryRelays": "Protection (Relays)",
+  "toolsCategoryPowerSystem": "Power System",
+  "toolsCategoryGrounding": "Grounding & Safety",
+  "toolsCategoryEquipment": "Equipment",
+  "toolsCategoryAutomation": "Automation & Instrumentation",
+  "toolsCategoryThermography": "Thermography & Maintenance",
+  "toolsCategoryCommissioning": "Commissioning & Testing",
+  "toolsCategoryPowerQuality": "Power Quality",
+  "toolsCategoryNetworks": "Networks & Communication",
+  "toolsMainTitle": "TOOLS",
+  "toolsMainSubtitle": "Engineering calculators for Protection and Control",
+  "toolsLockedSuffix": ". Locked — exclusive to paid plans",
+  "toolsSemanticLabel": "{title}. {description}{lockedText}",
+  "toolsResultsTitle": "Results",
+  "toolsCopyAllResultsSemantics": "Copy all results",
+  "toolsCopyAllTooltip": "Copy all",
+  "toolsResultsCopied": "Results copied",
+  "toolsCopyLabelSemantics": "Copy {label}",
+  "toolsCopyTooltip": "Copy",
+  "toolsCopiedSuccess": "{label} copied",
+  "toolsSelectCurve": "Select curve",
+  "perUnitZBase": "Z base",
+  "perUnitIBase": "I base",
+  "perUnitZRealToPu": "Real Z → pu",
+  "perUnitZPuToReal": "Z pu → real",
+  "perUnitZPuNewBase": "Z pu (new base)",
+  "perUnitTitle": "Per Unit (PU)",
+  "perUnitSelectConversion": "Select conversion type",
+  "perUnitTabBases": "Bases",
+  "perUnitTabImpedance": "Impedance",
+  "perUnitTabChangeBase": "Change base",
+  "perUnitBaseQuantities": "Base quantities",
+  "perUnitSBaseLabel": "Base power S (MVA)",
+  "perUnitSBaseSemantic": "Base power in MVA",
+  "perUnitVBaseLabel": "Base voltage V (kV)",
+  "perUnitVBaseSemantic": "Base voltage in kV",
+  "perUnitImpedanceConv": "Impedance conversion",
+  "perUnitZRealLabel": "Real Z (Ω)",
+  "perUnitZRealSemantic": "Real impedance in ohms",
+  "perUnitZPuLabel": "Z (pu)",
+  "perUnitZPuSemantic": "Impedance in per unit",
+  "perUnitChangeBase": "Change base",
+  "perUnitZPuOldBaseLabel": "Z pu (old base)",
+  "perUnitZPuOldBaseSemantic": "Impedance in pu on old base",
+  "perUnitSOldLabel": "Old S (MVA)",
+  "perUnitSOldSemantic": "Old base power",
+  "perUnitVOldLabel": "Old V (kV)",
+  "perUnitVOldSemantic": "Old base voltage",
+  "perUnitSNewLabel": "New S (MVA)",
+  "perUnitSNewSemantic": "New base power",
+  "perUnitVNewLabel": "New V (kV)",
+  "perUnitVNewSemantic": "New base voltage",
+  "perUnitCalculateBtn": "Calculate",
+  "perUnitCalculateUpper": "CALCULATE",
+  "perUnitInvalidInputs": "Check input values (must be greater than zero).",
+  "powerTriangleTitle": "Power Triangle",
+  "powerTriangleInputs": "Inputs",
+  "powerTrianglePActive": "P (active)",
+  "powerTriangleQReactive": "Q (reactive)",
+  "powerTriangleSApparent": "S (apparent)",
+  "powerTrianglePF": "PF (cosφ)",
+  "symmetricalTitle": "Symmetrical Components",
+  "symmetricalTabPhaseToSeq": "Phase → Sequence",
+  "symmetricalTabSeqToPhase": "Sequence → Phase",
+  "symmetricalPhaseA": "Phase A",
+  "symmetricalPhaseB": "Phase B",
+  "symmetricalPhaseC": "Phase C",
+  "symmetricalSeq0": "Zero Sequence (0)",
+  "symmetricalSeq1": "Positive Sequence (+)",
+  "symmetricalSeq2": "Negative Sequence (-)",
+  "onsVoltageTitle": "PU Voltage — ONS Base × PT",
+  "onsVoltageInputs": "System and PT Data",
+  "onsVoltageLLBase": "ONS base voltage V_LL (kV)",
+  "onsVoltageRTP": "PT Ratio",
+  "onsVoltagePuMeasured": "Measured voltage in PU",
+  "onsVoltageSecResult": "Voltage at PT secondary",
+  "onsVoltagePrimResult": "Primary voltage (kV)",
+  "settingsEditProfile": "Edit Profile",
+  "settingsEditProfileDesc": "Name, email, role",
+  "settingsChangePassword": "Change Password",
+  "settingsChangePasswordDesc": "Account security",
+  "settingsManagePlan": "Manage Plan",
+  "settingsManagePlanDesc": "Premium, active plans",
+  "settingsAppVersion": "App Version",
+  "settingsAppVersionDesc": "SPARK v1.0.4 · EXS Solutions",
+  "settingsLanguage": "Language",
+  "settingsLanguageDesc": "Select the interface and content language",
+  "settingsPortuguese": "Português",
+  "settingsEnglish": "English",
+  "settingsColorBlindMode": "Color Blind Mode",
+  "settingsColorBlindDesc": "Adjust colors for different types of color blindness",
+  "settingsNone": "None",
+  "settingsProtanopia": "Protanopia (Red-Green)",
+  "settingsDeuteranopia": "Deuteranopia (Green-Red)",
+  "settingsTritanopia": "Tritanopia (Blue-Yellow)",
+  "settingsTextSize": "Text Size",
+  "settingsTextSizeDesc": "Adjust the font size across the app",
+  "settingsSilentMode": "Silent Mode",
+  "settingsSilentModeDesc": "Pauses all notifications",
+  "settingsSilentHours": "Quiet Hours",
+  "settingsSilentHoursDesc": "No notifications from 10 PM to 7 AM",
+  "settingsAlertFreq": "Alert Frequency",
+  "settingsAlertFreqDesc": "When you unlock badges",
+  "settingsDailyChallenge": "Daily Challenge",
+  "settingsDailyChallengeDesc": "Quick challenge reminder",
+  "settingsWeeklyTournament": "Weekly Tournament",
+  "settingsWeeklyTournamentDesc": "New tournaments and leaderboard position",
+  "settingsStreakAlerts": "Streak Alerts",
+  "settingsStreakAlertsDesc": "When your streak is at risk",
+  "settingsOnlineFriends": "Online Friends",
+  "settingsOnlineFriendsDesc": "When a friend is studying",
+  "settingsRedeemCode": "Redeem Access Code",
+  "settingsRedeemCodeDesc": "Unlock full access with a code",
+  "settingsHelpCenter": "Help Center / FAQ",
+  "settingsHelpCenterDesc": "Frequently asked questions",
+  "settingsTechSupport": "Technical Support",
+  "settingsTechSupportDesc": "Report an issue",
+  "settingsTermsOfUse": "Terms of Use",
+  "settingsTermsOfUseDesc": "Read our terms",
+  "settingsDeleteAccount": "Delete Account",
+  "settingsDeleteAccountDesc": "Permanently delete",
+  "settingsLogout": "LOG OUT",
+  "settingsMyProgress": "My Progress",
+  "settingsTrackProgress": "Track progress in modules",
+  "settingsAchievements": "Achievements",
+  "settingsAchievementsDesc": "Trophies and badges page",
+  "settingsAdminPanel": "Admin Panel",
+  "settingsAdminPanelDesc": "Manage categories, modules, and lessons",
+  "settingsEnterCode": "Enter the code received to unlock full access.",
+  "settingsCancel": "Cancel",
+  "settingsRedeem": "Redeem",
+  "settingsDeleteConfirmTitle": "Delete Account?",
+  "settingsDeleteConfirmBody": "This action is permanent. All your data — XP, progress, active plans, and history — will be lost and cannot be recovered.",
+  "settingsDeleteAction": "DELETE",
+  "settingsAccessGranted": "Access granted until {date} 🎉",
+  "supportTitle": "HELP & SUPPORT",
+  "supportSubject": "Subject",
+  "supportMessageHint": "Describe your question or issue in detail...",
+  "supportSend": "SEND MESSAGE",
+  "supportNotice": "Our team will review your request and reply to your registered email within 48 hours.",
+  "supportMessageSent": "Message sent!",
+  "supportBackHome": "BACK TO HOME",
+  "supportEmail": "Email",
+  "supportEmailAddress": "suporte@exs.com.br",
+  "supportWhatsApp": "WhatsApp",
+  "supportWhatsAppHours": "Mon–Fri 8am–6pm",
+  "passwordTitle": "Change Password",
+  "passwordSubtitle": "Change your login password",
+  "passwordNotice": "For security, enter your current password before setting a new one.",
+  "passwordCurrent": "Current Password",
+  "passwordNew": "New Password",
+  "passwordConfirm": "Confirm New Password",
+  "passwordChangeBtn": "CHANGE PASSWORD",
+  "passwordSuccessTitle": "Password changed!",
+  "passwordSuccessBody": "Your password has been successfully updated. Use the new password on your next login.",
+  "passwordContinue": "CONTINUE",
+  "regSuccessTitle": "Registration Complete!",
+  "regSuccessWelcome": "Welcome to SPARK!\\nYour learning journey begins now.",
+  "regSuccessBonus": "Welcome bonus",
+  "regSuccessPoints": "100 Spark Points added to your account!",
+  "regSuccessContinue": "CONTINUE TO APP",
+  "termsTitle": "Terms & Conditions",
+  "termsHeader": "TERMS OF USE",
+  "termsLastUpdate": "Last update: June 2026",
+  "termsIntro": "Read the guidelines below carefully to understand your rights, duties, and the rules of our electrotechnical learning platform.",
+  "termsSection1": "1. Introduction and Purpose of SPARK",
+  "termsSection2": "2. Account, Registration, and Security",
+  "termsSection3": "3. Spark Points and Premium Subscription",
+  "termsSection4": "4. Intellectual Property",
+  "termsSection5": "5. Community Conduct (Clans and Duels)",
+  "termsSection6": "6. Data Protection (LGPD)",
+  "termsSection7": "7. Changes and Limitation of Liability",
+  "checkoutTitle": "CHECKOUT",
+  "checkoutItemsHeader": "IDENTIFICATION",
+  "checkoutEmptyCart": "Your cart is empty",
+  "checkoutExploreStore": "Explore the store and equip yourself\\nfor the next challenges!",
+  "checkoutBackToStore": "BACK TO STORE",
+  "checkoutPaymentMethod": "PAYMENT METHOD",
+  "checkoutCreditCard": "Credit Card",
+  "checkoutCreditCardDesc": "Immediate approval, 24/7",
+  "checkoutPix": "PIX",
+  "checkoutPixDesc": "Clearance in up to 3 business days",
+  "checkoutBoleto": "Boleto",
+  "checkoutCpfCnpj": "CPF or CNPJ (numbers only)",
+  "checkoutCpfCnpjRequired": "Required by Central Bank for PIX and Boleto",
+  "checkoutTotal": "TOTAL",
+  "checkoutConfirmOrder": "CONFIRM ORDER",
+  "checkoutSecurePayment": "Secure payment via Asaas",
+  "checkoutProcessedSecurely": "Processed securely",
+  "checkoutGotIt": "GOT IT",
+  "checkoutItemCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+  "trialCheckoutTitle": "FREE TRIAL",
+  "trialCheckoutSummary": "SUMMARY",
+  "trialCheckoutFree": "FREE",
+  "trialCheckoutPricing": "7 days free • Then R$ {price}/month",
+  "trialCheckoutNotice": "The card will only be charged after the 7-day free trial ends.",
+  "trialCheckoutStart": "START STUDYING",
+  "trialCheckoutSuccess": "Trial Activated! 🎉",
+  "trialCheckoutSecure": "Secure payment via Asaas · PCI-DSS",
+  "trialCheckoutOops": "Oops!",
+  "trialCheckoutRetry": "TRY AGAIN",
+  "paymentPendingTitle": "DONE",
+  "paymentPendingWaiting": "Waiting for payment...",
+  "paymentPendingNotice": "Payment is confirmed automatically.\\nYou do not need to do anything after paying.",
+  "paymentPendingExpires": "Expires on: {date}",
+  "paymentPendingCopyPix": "PIX CODE — COPY AND PASTE",
+  "paymentPendingRedirect": "You will be redirected\\nto the payment page",
+  "paymentPendingOpenPage": "OPEN PAYMENT PAGE",
+  "paymentPendingConfirming": "Waiting for confirmation...",
+  "paymentPendingActivation": "After completing the payment, your plan\\nwill be activated automatically.",
+  "paymentPendingSuccess": "Payment Complete!",
+  "paymentPendingApproved": "Your transaction was successfully approved.",
+  "studentVerificationTitle": "Student Verification",
+  "studentVerificationNotice": "Prove your enrollment to unlock Student pricing (50% off).",
+  "studentVerificationRevalidate": "Revalidation is required every 12 months.",
+  "studentVerificationSend": "SEND FOR VERIFICATION",
+  "businessSetupTitle": "SPARK Business",
+  "businessSetupSubmit": "REQUEST PROPOSAL",
+  "businessSetupSuccess": "Request sent",
+  "businessSetupSuccessMsg": "Our commercial team will contact you at the email provided",
+  "businessSetupEstimate": "Monthly estimate",
+  "businessSetupUsers": "{count, plural, =0{No users} =1{1 user} other{{count} users}}",
+  "businessSetupDesc": "Train your team with an admin panel, reports on",
+  "businessSetupOk": "OK",
+  "businessTeamTitle": "Team Dashboard",
+  "businessTeamMembers": "Members",
+  "businessTeamNoMembers": "No members yet. Invite using the email above.",
+  "businessTeamInvite": "Invite member",
+  "businessTeamNoAdmin": "You don't manage a team yet.",
+  "businessTeamCreate": "CREATE BUSINESS PLAN",
+  "businessTeamError": "Error: {e}",
+  "storePlanForStudents": "For those who are studying",
+  "storePlanForIndividuals": "For individual professionals",
+  "storePlanForSeniors": "For seniors and consultants",
+  "storePlanForBusiness": "For companies and consultancies",
+  "storeStartJourney": "Start your journey",
+  "storeSubscribePrefix": "SUBSCRIBE TO",
+  "storeUpgradePrefix": "UPGRADE TO",
+  "shortCircuitTitle": "Short Circuit",
+  "shortCircuitData": "System data",
+  "shortCircuitVLL": "Line voltage V_LL (kV)",
+  "shortCircuitZ1": "Z1 (Ω)",
+  "shortCircuitZ2": "Z2 (Ω)",
+  "shortCircuitZ0": "Z0 (Ω)",
+  "shortCircuitZf": "Fault Z (Ω)",
+  "shortCircuitCurrents": "Short-circuit currents",
+  "shortCircuit3P": "3-Phase (3φ)",
+  "shortCircuitLL": "Line-to-Line (LL)",
+  "shortCircuitLG": "Line-to-Ground (LG)",
+  "shortCircuitDesc": "E = V_LL/√3.  3φ: E/Z1 · LL: √3·E/(Z1+Z2) · LG: 3·E/(Z1+Z2+Z0+3·Zf)",
+  "ctSaturationTitle": "CT Saturation",
+  "ctSaturationCT": "Current transformer (class P)",
+  "ctSaturationSn": "Nominal burden Sn (VA)",
+  "ctSaturationIn": "Secondary CT In (A)",
+  "ctSaturationAlf": "ALF (e.g.: 20)",
+  "ctSaturationRct": "Internal Rct (Ω)",
+  "ctSaturationCheck": "Saturation check",
+  "ctSaturationFaultPri": "Primary fault current (A)",
+  "ctSaturationFaultSec": "Secondary fault I",
+  "ctSaturationZb": "Connected burden Zb (Ω)",
+  "ctSaturationAlfEff": "Effective ALF",
+  "ctSaturationVk": "Knee voltage Vk",
+  "ctSaturationVreq": "Required voltage V_req",
+  "ctSaturationMargin": "Margin (Vk/V_req)",
+  "ctSaturationDesc": "Zn = Sn/In² · Vk ≈ ALF·In·(Rct+Zn) · V_req = I_sec_fault·(Rct+Zb). Saturates if V_req > Vk.",
+  "ctSaturationZn": "Nominal burden Zn",
+  "ctSaturationPriA": "Primary CT (A)",
+  "ctSaturationMultiple": "Fault multiple",
+  "rtcRtpTitle": "CT / PT Ratio",
+  "rtcRtpPriNom": "Nominal primary ({unit})",
+  "rtcRtpSecNom": "Nominal secondary ({unit})",
+  "rtcRtpLabelDesc": "{label} = nominal_primary_{word} / nominal_secondary_{word}",
+  "rtcRtpConversions": "Conversions (optional)",
+  "rtcRtpPriMeasured": "Measured primary value ({unit})",
+  "rtcRtpSecMeasured": "Measured secondary value ({unit})",
+  "rtcRtpSecCalc": "Secondary value (from {val}{unit} at primary)",
+  "rtcRtpPriCalc": "Primary value (from {val}{unit} at secondary)",
+  "idmtTitle": "Overcurrent Curves (51)",
+  "idmtCurveSelected": "Selected curve",
+  "idmtCurveTap": "Selected curve: {name}. Tap to change.",
+  "idmtPickup": "I pick-up (A)",
+  "idmtPickup2": "I> pickup (A)",
+  "idmtDial": "Time dial (Td)",
+  "idmtDialShort": "Dial (Td)",
+  "idmtFault": "Fault current (A)",
+  "idmtTimeAt": "Actuation time {sec}, equivalent to {fmt}",
+  "idmtAddRelay": "Add relay",
+  "idmtGraph": "Log-log graph of {name} curve",
+  "idmtLogLog": "Time-current coordination plot (log-log)",
+  "idmtLogLogDesc": "Overlay curves (in primary amperes) and see the interval coordination (CTI) at the fault current. X axis = current, Y axis = time.",
+  "idmtTimeMult": "Time vs multiple curve (log-log)",
+  "idmtRelayName": "Relay R{i}",
+  "idmtRelayNameShort": "R{i}",
+  "idmtRelayLabel": "{label} · {name}",
+  "idmtTestI": "Test I (A)",
+  "idmtM": "M = I_test / I_pickup = {m}",
+  "idmtCoeff": "Coefficients  ·  t = (A·Td + K1)/(M^P − Q) + B·Td + K2",
+  "idmtFmt": "{fmt}  (hh:mm:ss.cc)",
+  "idmtCopy": "Copy result",
+  "idmtAtuationTime": "Actuation time",
+  "idmtCtiReq": "Required CTI (s)",
+  "idmtNeedTwo": "Enter ≥ 2 valid relays and the fault current to check the CTI.",
+  "idmtSensitize": "Only {count} relay sensitizes at {fault} A.",
+  "idmtBackupAfter": "{backup} after {main}:",
+  "diffBalTitle": "Differential Balance (87T)",
+  "diffBalDesc": "Calculates the balance coefficient of each winding (reference = Primary). I_nom = S/(√3·V); I_sec = I_nom·(CT_sec/CT_prim); Balance = I_sec(ref)/I_sec.",
+  "diffBalVolt": "Voltage (kV)",
+  "diffBalPower": "Power (MVA)",
+  "diffBalPri": "Primary CT (A)",
+  "diffBalSec": "Secondary CT (A)",
+  "diffBalCoeffs": "Balance coefficients",
+  "diffBalNomI": "{name} — Nominal I",
+  "diffBalSecI": "{name} — Secondary CT I",
+  "diffBalBalance": "{name} — Balance",
+  "restDiffTitle": "87 — Biased Differential",
+  "restDiffDesc": "Differential bias characteristic (87). Shows if a point (load, through or internal fault) operates or restrains. For TAP balance between windings, use the \"Differential Balance (87T)\" tool.",
+  "restDiffConv": "Bias convention",
+  "restDiffCur": "Winding currents",
+  "restDiffOp": "Operating point",
+  "restDiffChar": "Idiff × Irest characteristic",
+  "restDiffCharDesc": "Characteristic (dual slope)",
+  "restDiffLimDesc": "Threshold = pickup, then slope1 and slope2 above knees.",
+  "restDiffModAng": "Magnitude (pu of I_nom) and angle (°). Through: opposite angles (0 / 180). Internal: same direction.",
+  "restDiffI1": "I1 (pu)",
+  "restDiffI1Ang": "Ang. I1 (°)",
+  "restDiffI2": "I2 (pu)",
+  "restDiffI2Ang": "Ang. I2 (°)",
+  "restDiffIdiff": "Idiff (differential)",
+  "restDiffIrest": "Irest (bias)",
+  "restDiffPickup": "Pickup (pu)",
+  "restDiffSlope1": "Slope 1 (0–1)",
+  "restDiffSlope2": "Slope 2 (0–1)",
+  "restDiffKnee1": "Knee 1 (pu)",
+  "restDiffKnee2": "Knee 2 (pu)",
+  "restDiffLimIrest": "Threshold on Irest",
+  "restDiffMargin": "Margin (Idiff − threshold)",
+  "coordTitle": "Coordination / Selectivity",
+  "coordFault": "Fault current (A)",
+  "coordCtiMin": "Minimum CTI (s)",
+  "coordCtiMinShort": "Minimum CTI",
+  "coordCtiReal": "Real CTI (Δt)",
+  "coordCoord": "Coordination",
+  "coordFaultMargin": "Fault and margin",
+  "coordMainTime": "Main time",
+  "coordBackupTime": "Backup time",
+  "coordCurveTap": "Curve: {name}. Tap to change.",
+  "coordPickup": "Pickup (A)",
+  "coordDial": "Dial (Td)",
+  "distProtTitle": "Distance Protection (21)",
+  "distProtConv": "Conversion to secondary (optional)",
+  "distProtZLine": "Z line (Ω)",
+  "distProtAngLine": "Line angle (°)",
+  "distProtZAdj": "Adjacent line Z (Ω)",
+  "distProtZFault": "|Z fault| (Ω)",
+  "distProtAngFault": "Fault ang. (°)",
+  "distProtLineFault": "Line and fault impedance",
+  "distProtAdjust": "Zone settings",
+  "distProtDesc": "Z1 = z1%·Z_line · Z2 = Z_line + f2·Z_adj · Z3 = Z_line + f3·Z_adj",
+  "distProtZ1": "Zone 1 (%)",
+  "distProtF2": "Z2 adj. factor",
+  "distProtF3": "Z3 adj. factor",
+  "distProtRtc": "CT Ratio",
+  "distProtRtp": "PT Ratio",
+  "distProtZsec": "Z_sec = Z_prim · (CT / PT Ratio)",
+  "distProtZ1T": "Zone 1 (~instantaneous)",
+  "distProtZ2T": "Zone 2 (~0.3–0.4 s)",
+  "distProtZ3T": "Zone 3 (~0.8–1.0 s)",
+  "distProtZ1Sec": "Secondary Zone 1",
+  "distProtZ2Sec": "Secondary Zone 2",
+  "distProtZ3Sec": "Secondary Zone 3",
+  "distProtRx": "R-X plane · mho circles",
+  "distProtRxDesc": "Line angle (RCA) and impedance seen by relay at fault (Ω magnitude and angle).",
+  "distProtReach": "Zone reach",
+  "dir67Title": "Directional 67 / 67N",
+  "dir67Phase": "Phase element",
+  "dir67Volt": "3-Phase voltages",
+  "dir67VoltDesc": "Magnitude and angle of each phase voltage. Default: balanced ABC system.",
+  "dir67Va": "V_A (V)",
+  "dir67VaAng": "∠ V_A (°)",
+  "dir67Vb": "V_B (V)",
+  "dir67VbAng": "∠ V_B (°)",
+  "dir67Vc": "V_C (V)",
+  "dir67VcAng": "∠ V_C (°)",
+  "dir67Polarization": "Polarizing quantity",
+  "dir67PolDesc": "Select protected phase (defines cross-polarization) and input mode.",
+  "dir67PolCalc": "Calculated polarization",
+  "dir67PolN": "67N Polarization",
+  "dir67PolNDesc": "Consider only Phase-Phase or Phase-Ground faults. Rec. MTA adjusts to type.",
+  "dir67Pol90": "At PF=1, V_pol lags V_phase by 90° (hence",
+  "dir67FaultType": "Fault type",
+  "dir67OpMagnitude": "Operating quantity",
+  "dir67OpDesc": "Magnitude and angle of {label}.",
+  "dir67Mod": "Magnitude",
+  "dir67Ang": "Ang. (°)",
+  "dir67Adjust": "Directional setting",
+  "dir67AdjustDesc": "MTA = maximum torque angle. Aperture defines the sector (±half value).",
+  "dir67Mta": "MTA / RCA (°)",
+  "dir67MtaRec": "Recommended MTA: {val}°",
+  "dir67Aperture": "Aperture (°)",
+  "dir67TimeChar": "Time characteristic",
+  "dir67TimeDesc": "Directional element 67 (phase) and 67N (neutral). Configure pickup, MTA, sector opening and characteristic (Definite Time or IDMT). The polar diagram updates in real time. Screening — conventions vary by manufacturer.",
+  "dir67TimeDef": "Definite Time or IDMT (inverse curve).",
+  "dir67Ipickup": "I pickup (A)",
+  "dir67Td": "Time dial Td",
+  "dir67Tms": "Time Td (ms)",
+  "dir67Eval": "Directional evaluation",
+  "dir67InSector": "In directional sector?",
+  "dir67InSectorFwd": "In forward sector?",
+  "dir67AbovePkp": "Above pickup?",
+  "dir67Theta": "Relative angle θ (Iop − pol)",
+  "dir67ThetaMta": "θ − MTA",
+  "dir67MarginAng": "Angular margin to limit",
+  "dir67TimeAtuate": "Actuation time",
+  "dir67TimeMsS": "Actuation time: {ms} ms ({s} s)",
+  "dir67Phasor": "Phasor diagram and operating sector",
+  "dir67OpLabel": "{label} (A)",
+  "dir67Apply": "APPLY",
+  "dir67EvaluateBtn": "EVALUATE",
+  "toolsCalculateUpper": "CALCULATE",
+  "groundGridTitle": "Ground Grid (IEEE 80)",
+  "groundGridParams": "Soil and fault parameters",
+  "groundGridRes": "Surface ρs (Ω·m)",
+  "groundGridCs": "Cs (surface layer, 1 if none)",
+  "groundGridTime": "Fault time ts (s)",
+  "groundGridGprCalc": "Ground Potential Rise — GPR (optional)",
+  "groundGridIg": "Grid current Ig (A)",
+  "groundGridRg": "Grid resistance Rg (Ω)",
+  "groundGridTol": "Tolerable voltages",
+  "groundGridTouchTol": "Tolerable touch voltage",
+  "groundGridStepTol": "Tolerable step voltage",
+  "groundGridGpr": "GPR (I_grid · R_grid)",
+  "arcFlashTitle": "Arc Flash (incident energy)",
+  "arcFlashDesc": "Quick incident energy screening (IEEE 1584-2002 / Lee). Does NOT replace a formal arc flash study — use the real short-circuit current and the bus relays clearing times.",
+  "arcFlashEquipClass": "Equipment class",
+  "arcFlashEquipLabel": "{name}  ·  gap {gap} mm",
+  "arcFlashDefineGap": "Defines typical gap and distance exponent (x) from 1584.",
+  "arcFlashParams": "Fault parameters",
+  "arcFlashVolt": "Voltage (kV)",
+  "arcFlashIbf": "Fault Ibf (kA)",
+  "arcFlashTime": "Clearing time (s)",
+  "arcFlashWorkDist": "Working distance (mm)",
+  "arcFlashGap": "Electrode gap (mm)",
+  "arcFlashResult": "Result",
+  "arcFlashModel": "Model used",
+  "arcFlashIa": "Arc current Ia",
+  "arcFlashEnergy": "Incident energy",
+  "arcFlashSafeDist": "Safe distance (1.2 cal/cm²)",
+  "arcFlashEnergyVal": "{val} cal/cm²",
+  "spdaRiskTitle": "LPS — Risk Analysis",
+  "spdaRiskDesc": "LPS screening (NBR 5419-2). Estimates the number of events dangerous events and indicates the likely level. Does NOT replace the full risk analysis nor the project ART.",
+  "spdaRiskStruct": "Structure",
+  "spdaRiskL": "Length L (m)",
+  "spdaRiskW": "Width W (m)",
+  "spdaRiskH": "Height H (m)",
+  "spdaRiskAd": "Collection area Ad",
+  "spdaRiskAdDesc": "Collection area Ad = L·W + 2·3H·(L+W) + π·(3H)².",
+  "spdaRiskExp": "Exposure",
+  "spdaRiskIso": "Isolated (1.0)",
+  "spdaRiskIsoHill": "Isolated on hilltop (2.0)",
+  "spdaRiskSameH": "Objects of same height nearby (0.5)",
+  "spdaRiskSurrounded": "Surrounded by taller objects (0.25)",
+  "spdaRiskNg": "Ng (strikes/km²/year)",
+  "spdaRiskNgDesc": "Ng from flash density map (Inpe/standard).",
+  "spdaRiskEval": "Risk screening",
+  "spdaRiskNd": "Dangerous events Nd",
+  "spdaRiskNc": "Tolerable freq. Nc",
+  "spdaRiskEff": "Required efficiency",
+  "spdaRiskLevel": "Probable LPS level",
+  "spdaRiskEvalBtn": "EVALUATE",
+  "spdaCalcTitle": "LPS — Calculations (5419-3)",
+  "spdaCalcDesc": "General LPS calculations (NBR 5419-3): rolling sphere, number of down-conductors, protection angle, impulse current, cross-sections and safety distance. Screening — confirm in the project.",
+  "spdaCalcLevel": "Protection level",
+  "spdaCalcStruct": "Structure",
+  "spdaCalcL": "L (m)",
+  "spdaCalcH": "Height (m)",
+  "spdaCalcPerim": "Perimeter (m)",
+  "spdaCalcPerimDesc": "Perimeter (for number of down conductors) and height (angle).",
+  "spdaCalcDist": "Separation distance (optional)",
+  "spdaCalcKm": "km (insulation)",
+  "spdaCalcKc": "kc (division)",
+  "spdaCalcSDesc": "s = ki·(kc/km)·L  ·  km: air=1, solid=0.5",
+  "spdaCalcResults": "Results (level {level})",
+  "spdaCalcSphere": "Rolling sphere radius",
+  "spdaCalcAngle": "Protection angle α",
+  "spdaCalcRadius": "Protection radius on ground",
+  "spdaCalcDownNum": "Number of down conductors",
+  "spdaCalcDownSec": "Min. down conductor section (Cu)",
+  "spdaCalcGndSec": "Min. grounding section (Cu)",
+  "spdaCalcCaptSec": "Min. air-termination section (Cu)",
+  "spdaCalcSafeDist": "Separation distance s",
+  "spdaCalcImpulse": "Impulse current (level {level})",
+  "iec61850Title": "IEC 61850 — GOOSE / SV",
+  "iec61850Desc": "GOOSE/SV screening in IEC 61850 commissioning: sequence of retransmission, Sampled Values rate and multicast addressing (MAC/APPID/VLAN). Confirm on the network analyzer.",
+  "iec61850GooseSeq": "GOOSE sequence (ms)",
+  "iec61850T0": "Stable T0 (ms)",
+  "iec61850T1": "Post-event T1 (ms)",
+  "iec61850GooseRetrans": "GOOSE — retransmission",
+  "iec61850RetransNum": "No. of retransmissions until T0",
+  "iec61850TimeEst": "Measured/estimated time (ms)",
+  "iec61850KeepAlive": "After event doubles from T1 until stable at T0 (keep-alive).",
+  "iec61850SV": "Sampled Values",
+  "iec61850Freq": "Frequency",
+  "iec61850Samples": "Samples/cycle",
+  "iec61850SvSamples": "SV — samples/s",
+  "iec61850SvPackets": "SV — packets/s",
+  "iec61850SvBand": "SV — estimated bandwidth",
+  "iec61850SvDesc": "Samples per cycle × frequency → packets/s and bandwidth.",
+  "iec61850Address": "Multicast addressing",
+  "iec61850MacType": "MAC Type",
+  "iec61850Appid": "APPID (0x0000–0xFFFF)",
+  "iec61850Vlan": "VLAN-ID (0–4094)",
+  "iec61850Priority": "Priority (0–7)",
+  "iec61850VerifyBtn": "VERIFY",
+  "iec61850Verify": "Addressing verification",
+  "iec61850MacMult": "IEC 61850 multicast MAC",
+  "iec61850MacPrefix": "Multicast MAC",
+  "iec61850AppidHex": "APPID (hex)",
+  "iec61850VlanID": "VLAN-ID",
+  "iec61850PriorityLabel": "Priority",
+  "iec61850MacRules": "GOOSE: 01-0C-CD-01-xx-xx · SV: 01-0C-CD-04-xx-xx. VLAN 0–4094, priority 0–7.",
+  "iec61850ProfileLabel": "{name} — {ms} ms",
+  "modbusTitle": "Modbus — Registers",
+  "modbusDesc": "Merges 2 16-bit registers into float32/int32 with byte order byte/word of the meter. When the value \"looks absurd\", it is almost always the wrong order — see the table with the 4 orders.",
+  "modbusOrder": "Byte/word order",
+  "modbusRegs": "Registers (16 bits, hex)",
+  "modbusReg0": "Reg 0 (hex)",
+  "modbusReg1": "Reg 1 (hex)",
+  "modbusRegDesc": "reg0 = 1st register read · reg1 = 2nd. A/B = reg0 bytes; C/D = reg1 bytes.",
+  "modbusDecodeBtn": "DECODE",
+  "modbusDecoded": "Decoded value ({order})",
+  "modbusFloat32": "Float 32 (IEEE-754)",
+  "modbusInt32": "Int 32 (signed)",
+  "modbusUint32": "UInt 32 (unsigned)",
+  "modbusBytes": "Bytes (applied order)",
+  "modbusCompare": "Compare with the expected value to find the correct meter order.",
+  "modbusFloatAll": "Float in all orders",
+  "netCableTitle": "Network Cables (RJ-45)",
+  "netCablePinout": "Pin 1 Orientation",
+  "netCableHold": "Hold the RJ-45 with the clip facing down and contacts facing you. Pin 1 is on the LEFT. Numbering goes 1→8 from left to right.",
+  "netCableStraight": "Straight cable: same standard on both ends (B–B or A–A). Crossover cable: one end T568A and the other T568B. Modern equipment with Auto-MDIX makes the crossover unnecessary.",
+  "netCableCats": "Twisted pair cable categories",
+  "netCableLength": "Maximum length of 100 m for the channel (Cat 5e to 7A); Cat 8 limited to ~30 m. In digital substations prefer fiber for GOOSE/SV (EMI immunity).",
+  "netCableCat": "Cat",
+  "netCableBand": "Bandwidth",
+  "netCableSpeed": "Speed",
+  "netCableMax": "Max.",
+  "toolsEvaluateUpper": "EVALUATE",
+  "commissioningTitle": "Commissioning / Testing",
+  "commissioningPriI": "Primary fault I (A)",
+  "commissioningPriV": "Primary V (V)",
+  "commissioningRtc": "CT Ratio",
+  "commissioningRtp": "PT Ratio",
+  "commissioningSecCalc": "Secondary injection",
+  "commissioningDesc": "I_sec = I_fault / CT Ratio   ·   V_sec = V_primary / PT Ratio",
+  "commissioningSecI": "Injection I (secondary)",
+  "commissioningSecV": "Injection V (secondary)",
+  "commissioningTol": "Test tolerance",
+  "commissioningTolPct": "Tolerance (± %)",
+  "commissioningExpected": "Expected",
+  "commissioningMeasured": "Measured",
+  "commissioningErrDesc": "error% = (measured − expected) / expected · 100",
+  "commissioningErr": "Error",
+  "commissioningVerdict": "Verdict",
+  "equipmentTitle": "Nominal Current",
+  "equipmentTransformer": "Transformer",
+  "equipmentMotor": "Motor",
+  "equipmentTransfBank": "Transformer bank",
+  "equipmentPower": "Power S (kVA)",
+  "equipmentVLL": "Voltage (V)",
+  "equipmentPriV": "Primary V (kV)",
+  "equipmentSecV": "Secondary V (kV)",
+  "equipmentZShort": "Short Z (%)",
+  "equipmentFlux": "Residual flux (0–0.8)",
+  "equipmentNomI": "Nominal current",
+  "equipmentInrushEst": "Estimated inrush ({k}×)",
+  "equipmentInrushReal": "Real inrush (energization)",
+  "equipmentHarmonic": "Estimated 2nd harmonic",
+  "equipmentMotorPower": "Power (kW)",
+  "equipmentMotorPF": "PF (cosφ)",
+  "equipmentMotorEff": "Efficiency η",
+  "equipmentMotorFactor": "Starting factor (×)",
+  "equipmentTransfPower": "Transf {i} — kVA",
+  "equipmentTransfFactor": "Inrush factor (×)",
+  "equipmentAddTransf": "Add transf",
+  "equipmentBankSum": "Bank Σ In",
+  "equipmentBankPeaks": "Σ inrush peaks",
+  "equipmentBankCoin": "Coincidence factor (0–1)",
+  "equipmentBankCoinPeak": "Coincident inrush (×{f})",
+  "equipmentBankV": "Busbar V (kV)",
+  "equipmentBankDesc": "Simultaneous energization on the same busbar — sum of inrush seen by the upstream relay.",
+  "equipmentMotorDesc": "In = P / (√3 · V · PF · η)  ·  use kW (1 HP ≈ 0.746 kW)",
+  "equipmentMotorStart": "Starting current ({k}×)",
+  "equipmentTransfDesc": "Estimates the peak from transformer data, instead of guessing k. k ≈ (1 + residual flux) / (Z%/100), physically limited.",
+  "equipmentTransfIn": "In = S / (√3 · V)",
+  "equipmentPriIn": "Primary In",
+  "equipmentSecIn": "Secondary In",
+  "equipmentInrush": "Inrush (×)",
+  "equipmentPeakK": "Peak factor k",
+  "equipmentPeak": "Inrush peak",
+  "equipmentAdjust50": "50 setting (A) — optional",
+  "equipmentAdjust50Up": "Upstream 50 setting (A) — optional",
+  "equipmentVEnergized": "Energized V (kV)",
+  "equipmentTransfList": "Transformers (kVA × inrush factor)",
+  "powerFactorTitle": "Power Factor Correction",
+  "powerFactorData": "Load data",
+  "powerFactorActP": "Active power P (kW)",
+  "powerFactorCurPF": "Current PF",
+  "powerFactorDesPF": "Desired PF",
+  "powerFactorDesc": "Q_c = P · (tanφ₁ − tanφ₂)",
+  "powerFactorBank": "Capacitor bank",
+  "powerFactorAppBefore": "Apparent power before",
+  "powerFactorAppAfter": "Apparent power after",
+  "powerFactorReactBefore": "Reactive power before",
+  "powerFactorReactAfter": "Reactive power after",
+  "powerFactorReqBank": "Required bank",
+  "powerQualityTitle": "Power Quality",
+  "powerQualityPhaseV": "Phase voltages",
+  "powerQualityPhaseVal": "{label} (V)",
+  "powerQualityPhaseAng": "ang °",
+  "powerQualityFdProdist": "VUF% (PRODIST, V₂/V₁)",
+  "powerQualityFdCigre": "VUF% (approximate CIGRÉ)",
+  "powerQualityDevNema": "Max. deviation (NEMA)",
+  "powerQualityTransfLoad": "Transformer loading",
+  "powerQualityNomPower": "Nominal power (kVA)",
+  "powerQualityMeasPower": "Measured apparent power",
+  "powerQualityVLL": "Voltage V_LL (kV)",
+  "powerQualityCur": "Current (A)",
+  "powerQualityLoadPct": "Loading",
+  "powerQualityLoadDesc": "Loading% = (√3 · V_LL · I) / S_nominal · 100",
+  "powerQualityNomPowerShort": "Nominal power",
+  "signalScalingTitle": "4–20 mA Scaling",
+  "signalScalingRanges": "Ranges",
+  "signalScalingSigMin": "Min signal",
+  "signalScalingSigMax": "Max signal",
+  "signalScalingEngMin": "Min eng",
+  "signalScalingEngMax": "Max eng",
+  "signalScalingDesc": "eng = minEng + (signal−minSig)/(maxSig−minSig)·(maxEng−minEng)",
+  "signalScalingConv": "Convert",
+  "signalScalingSigToEng": "Signal {sv} → engineering",
+  "signalScalingEngToSig": "Engineering {ev} → signal",
+  "signalScalingSigVal": "Signal value (mA / V)",
+  "signalScalingEngVal": "Engineering value",
+  "thermalTitle": "Thermal Severity",
+  "thermalAnomaly": "Thermographic anomaly",
+  "thermalDeltaT": "Measured ΔT (°C)",
+  "thermalDesc": "ΔT between component and a similar one under similar load (NETA basis).",
+  "thermalCorrection": "Load correction (optional)",
+  "thermalMeasI": "Measured I (A)",
+  "thermalNomI": "Nominal I (A)",
+  "thermalCorDesc": "Corrected_ΔT = Measured_ΔT · (Nominal_I / Measured_I)²",
+  "thermalDiag": "Thermal diagnosis",
+  "thermalMeasDt": "Measured ΔT",
+  "thermalCorDt": "Corrected ΔT for In",
+  "thermalClass": "Classification",
+  "voltageDropTitle": "Voltage Drop",
+  "voltageDropFeeder": "3-Phase feeder",
+  "voltageDropVLL": "Voltage V_LL (kV)",
+  "voltageDropI": "Current I (A)",
+  "voltageDropL": "Length L (km)",
+  "voltageDropPF": "PF (cosφ)",
+  "voltageDropR": "R (Ω/km)",
+  "voltageDropX": "X (Ω/km)",
+  "voltageDropDesc": "ΔV = √3 · I · L · (R·cosφ + X·senφ)",
+  "voltageDropVal": "Voltage drop ΔV",
+  "voltageDropPct": "Percentage drop",
+  "voltageDropLoadV": "Load voltage",
+  "navHome": "Home",
+  "navCategories": "Categories",
+  "navStudies": "Studies",
+  "navTools": "Tools",
+  "navRanking": "Ranking",
+  "navProfile": "Profile",
+  "navStore": "Store",
+  "navMenu": "Menu",
+  "moreMenuRankingSubtitle": "Overall ranking",
+  "moreMenuToolsSubtitle": "Engineering calculators",
+  "moreMenuStoreSubtitle": "Item store",
+  "shellSemanticMain": "SPARK main screen",
+  "shellSemanticSideNav": "Side navigation menu",
+  "shellSemanticBottomNav": "Bottom navigation bar",
+  "categoriesFabTooltip": "Learning categories",
+  "estudosTitle": "STUDIES",
+  "estudosSubtitle": "Read the e-books before practicing in the trails",
+  "noCategoriesAvailable": "No categories available",
+  "categorySemanticLabel": "{title}. Studies category.",
+  "@categorySemanticLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ebooksReadCount": "{count, plural, =1{1 read} other{{count} read}}",
+  "@ebooksReadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "categoriesTitle": "CATEGORIES",
+  "categoriesSubtitle": "Choose an area to start learning",
+  "categoryComingSoonSnack": "This category will be available soon!",
+  "comingSoonBadge": "Coming soon",
+  "errorLoadingCategories": "Error loading categories: {error}",
+  "@errorLoadingCategories": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "moduleCountPlural": "{count, plural, =1{1 module} other{{count} modules}}",
+  "@moduleCountPlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "categoryNotFound": "Category not found",
+  "noModulesInCategory": "No modules found in this category.",
+  "lockedLabel": "Locked",
+  "modulesAvailablePlural": "{count, plural, =1{1 module available} other{{count} modules available}}",
+  "@modulesAvailablePlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "percentComplete": "{percent}% Complete",
+  "@percentComplete": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "testDriveCompleteTitle": "Test Drive Complete! 🚀",
+  "testDriveDescPart1": "You've already used your free lesson on this trail.\n\nSubscribe to ",
+  "testDriveDescPart2": " to unlock\nall lessons without limits.",
+  "benefitUnlimitedLessons": "Unlimited lessons",
+  "benefitUnlimitedEnergy": "Unlimited energy",
+  "benefitCertificates": "Certificates",
+  "viewProPlansButton": "View Pro Plans",
+  "moduleNotFound": "Module not found",
+  "loadingTrail": "Loading trail...",
+  "errorScreenTitle": "Oops! Something went wrong",
+  "goBackLabel": "Back",
+  "errorLoadingModuleWithError": "Error loading module: {error}",
+  "@errorLoadingModuleWithError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noModulesAvailable": "No modules available.",
+  "ebooksByModule": "E-books by module",
+  "playingSample": "PLAYING SAMPLE...",
+  "sampleComplete": "Sample Complete",
+  "samplePaywallDescription": "To keep watching the full video and unlock all EXS Powerplay features, upgrade your plan.",
+  "subscribeNowButton": "SUBSCRIBE NOW",
+  "timeExpiresIn": "Time expires in {time}",
+  "@timeExpiresIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ebookSummaryTitle": "Table of Contents",
+  "chaptersUppercase": "CHAPTERS",
+  "chaptersInPreparation": "Chapters in preparation.",
+  "chapterNotFound": "Chapter not found.",
+  "finishChapterButton": "FINISH CHAPTER",
+  "finishEbookButton": "FINISH E-BOOK",
+  "ebookCompleted": "E-book completed! 🎉",
+  "summaryLabel": "Summary",
+  "chaptersReadProgress": "{read} of {total} chapters read",
+  "@chaptersReadProgress": {
+    "placeholders": {
+      "read": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterSemanticLabel": "Chapter {number}: {title}",
+  "@chapterSemanticLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionsCount": "{count, plural, =1{1 section} other{{count} sections}}",
+  "@sectionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterShort": "Ch. {number}/{total}",
+  "@chapterShort": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "chapterCompleted": "Chapter {number} completed",
+  "@chapterCompleted": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "errorLoadingChapter": "Error loading chapter: {error}",
+  "@errorLoadingChapter": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "ebookInPreparation": "E-book in preparation",
+  "completedTagLabel": "Completed",
+  "minutesShort": "{minutes} min",
+  "@minutesShort": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "chaptersCount": "{count, plural, =1{1 chapter} other{{count} chapters}}",
+  "@chaptersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ebookSemanticLabel": "{title}. {minutes} minutes.",
+  "@ebookSemanticLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "trueOrFalseQuestion": "True or False?",
+  "dragTermsToFillBlanks": "Drag the terms to fill in the blanks:",
+  "dragTermToFillBlank": "Drag the term to fill in the blank:",
+  "myProgressScreenTitle": "MY PROGRESS",
+  "inProgressSection": "IN PROGRESS",
+  "completedSection": "COMPLETED",
+  "currentLevelLabel": "Current level",
+  "totalLabel": "total",
+  "statModules": "modules",
+  "statCompleted": "completed",
+  "statLessons": "lessons",
+  "completedBadge": "COMPLETED",
+  "noProgressYet": "No progress yet",
+  "noProgressDescription": "Complete lessons and modules to track\nyour progress here.",
+  "startLearningButton": "START LEARNING",
+  "today": "today",
+  "yesterday": "yesterday",
+  "daysAgo": "{days} days ago",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "avgProgressLabel": "{percent}% avg",
+  "@avgProgressLabel": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "lessonsAccessed": "{count, plural, =1{1 lesson} other{{count} lessons}} • Accessed {date}",
+  "@lessonsAccessed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "forgotPasswordTitle": "Reset Password",
+  "recoverAccess": "Recover Access",
+  "recoverAccessSubtitle": "Enter your email to receive the reset instructions",
+  "resetLinkInfo": "A reset link will be sent to your registered email.",
+  "instructionsSent": "Instructions sent to your email!",
+  "sendInstructionsButton": "SEND INSTRUCTIONS",
+  "backToLogin": "← Back to Login",
+  "profileUpdatedSuccess": "Profile updated successfully!",
+  "tapToChangePhoto": "Tap to change photo",
+  "professionLabel": "Profession",
+  "emailShort": "Email",
+  "saveChangesButton": "SAVE CHANGES",
+  "errorUpdating": "Error updating: {error}",
+  "@errorUpdating": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "covenantsTitle": "WEEKLY PACTS",
+  "covenantsInfo": "Select the pacts you want to fulfill. They reset every Monday.",
+  "myWeeklyCovenants": "MY PACTS OF THE WEEK",
+  "availableCovenantsTitle": "AVAILABLE PACTS",
+  "loadingCovenants": "Loading pacts...",
+  "removeCovenantButton": "REMOVE PACT",
+  "selectCovenantButton": "SELECT PACT",
+  "activeCovenantsCount": "{count, plural, =1{1 active pact this week} other{{count} active pacts this week}}",
+  "@activeCovenantsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "smartNotifications": "SMART NOTIFICATIONS",
+  "notificationCustomization": "NOTIFICATION CUSTOMIZATION",
+  "settingsAccessSection": "ACCESS",
+  "settingsAboutSupportSection": "ABOUT & SUPPORT",
+  "notifFreqMin": "Minimum",
+  "notifFreqNormal": "Normal",
+  "notifFreqHigh": "High",
+  "redeemCodeDialogDesc": "Enter the code you received to unlock full access.",
+  "enterCode": "Enter the code.",
+  "redeemError": "Error redeeming. Please try again.",
+  "accessGrantedUntil": "Access granted until {date} 🎉",
+  "@accessGrantedUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "faqEnergyQ": "How does the energy system work?",
+  "faqEnergyA": "Each lesson consumes 1 energy point.",
+  "faqSparkQ": "What are Spark Points?",
+  "faqSparkA": "The app's currency for premium content.",
+  "deleteAccountConfirmTitle": "Delete Account?",
+  "deleteAccountWarning": "This action is permanent. All your data — XP, progress, your ranking position and your clan membership — will be erased and cannot be recovered.",
+  "deleteAccountFailed": "Failed to delete account: {error}",
+  "@deleteAccountFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "onbWelcomeTitle": "Welcome to\nSPARK",
+  "onbWelcomeDesc": "Your journey into the world of electrical industry technical standards starts now. Shall we learn how the app works?",
+  "onbEnergyTitle": "Energy & Focus",
+  "onbEnergyDesc": "Each lesson you complete spends 1 Energy point. But don't worry, it recovers over time. Keep your Focus so you don't lose your Streak!",
+  "onbRankingTitle": "Ranking & Spark Points",
+  "onbRankingDesc": "Answer correctly, accumulate XP and climb the global and clan Ranking. Earn Spark Points to redeem for benefits in the app.",
+  "onbQ1": "What is consumed when starting a new lesson?",
+  "onbQ2": "What shows how many days in a row you studied?",
+  "onbOptSparkPoints": "Spark Points",
+  "onbOptEnergy": "Energy",
+  "onbOptStreak": "Streak",
+  "onbOptXp": "XP",
+  "onbOptRanking": "Ranking",
+  "onbOptClan": "Clan",
+  "onbSkip": "Skip",
+  "onbCompleteEnter": "FINISH & ENTER",
+  "onbSolveQuiz": "SOLVE THE QUIZ",
+  "onbNext": "NEXT",
+  "onbCompleteMinigame": "Complete the minigame to continue!",
+  "onbWrongAnswers": "Some answers are wrong. Try again!",
+  "onbQuickTest": "Quick Test!",
+  "onbQuickTestDesc": "Let's see if you're ready to master the standards.",
+  "onbCongrats": "Congratulations! You completed the training.",
+  "achievementsUnlockedCount": "{count} Achievements",
+  "@achievementsUnlockedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ofTotalAvailable": "of {total} available",
+  "@ofTotalAvailable": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noAchievementsDesc": "Complete lessons, keep your streak and ace the tests to unlock exclusive achievements.",
+  "dynamicBadges": "DYNAMIC BADGES",
+  "dedicationPresence": "DEDICATION & PRESENCE",
+  "achievementsPerformance": "PERFORMANCE",
+  "achStreak7Title": "7-day Streak",
+  "achStreak7Desc": "Studied 7 days in a row",
+  "achStreak30Title": "30-day Streak",
+  "achStreak30Desc": "Studied 30 days in a row",
+  "achEarlyBirdTitle": "Early Bird",
+  "achEarlyBirdDesc": "Studied before 7am for 5 days",
+  "achDedicatedTitle": "Dedicated",
+  "achDedicatedDesc": "Active for 60 days",
+  "achFirstEvalTitle": "First Evaluation",
+  "achFirstEvalDesc": "Completed your first evaluation",
+  "achTopScoreTitle": "Top Score",
+  "achTopScoreDesc": "Scored 100% on an evaluation",
+  "achPerfectStreakTitle": "Perfect Streak",
+  "achPerfectStreakDesc": "10 correct answers in a row in the quiz",
+  "achUnbeatableTitle": "Unbeatable",
+  "achUnbeatableDesc": "Completed 5 evaluations with top score",
+  "equipmentBankInrush": "Bank inrush",
+  "equipmentRealInrush": "Real inrush",
+  "commissioningTolerance": "Tolerance",
+  "powerQualityImbalance": "Imbalance",
+  "errorLoadingRanking": "Error loading ranking",
+  "errorLoadingClanRanking": "Error loading clan ranking",
+  "weeklyTournament": "WEEKLY TOURNAMENT",
+  "clanRankingTitle": "CLAN RANKING",
+  "thisWeek": "This week",
+  "loadMore": "Load more",
+  "couldNotLoadRanking": "Could not load the ranking",
+  "tryAgain": "Try again",
+  "noClansRankingWeek": "No clans in the ranking this week",
+  "noRankingDataWeek": "No ranking data this week",
+  "tournamentInProgress": "Tournament in progress",
+  "liveLabel": "LIVE",
+  "tournamentDescription": "Complete as many lessons as possible this week to climb the ranking and earn exclusive rewards!",
+  "participantsLabel": "PARTICIPANTS",
+  "rankingPeriod": "Ranking period",
+  "rankingResetInfo": "The weekly ranking resets every Monday at 00:00.\nYour accumulated points stay in the history.",
+  "storeFeatBasicModules": "Access to basic modules",
+  "storeFeatLimitedBattery": "Limited battery (recharges 5 min/unit)",
+  "storeFeatPublicRanking": "Public ranking",
+  "storeFeatBasicAchievements": "Basic achievements",
+  "storeFeatAllFree": "Everything in Free",
+  "storeFeatInfiniteBattery": "Infinite battery ∞",
+  "storeFeatIntermediateModules": "Access to intermediate modules",
+  "storeFeatChatSupport": "Chat support",
+  "storeFeatEnrollmentProof": "Enrollment proof required",
+  "storeFeatAllStudent": "Everything in Student",
+  "storeFeatAllModulesUnlocked": "All modules unlocked",
+  "storeFeatPvpDuels": "PvP duels",
+  "storeFeatDigitalCertificates": "Digital certificates",
+  "storeFeatPrioritySupport": "Priority support",
+  "storeFeatAllPro": "Everything in Pro",
+  "storeFeatExclusiveAdvanced": "Exclusive advanced content",
+  "storeFeatMonthlyMentoring": "Monthly group mentoring",
+  "storeFeatEarlyAccess": "Early access to new features",
+  "storeFeatAllPremiumPerUser": "Everything in Premium per user",
+  "storeFeatInfiniteBatteryAll": "Infinite battery ∞ for everyone",
+  "storeFeatAdminPanel": "Admin panel",
+  "storeFeatTeamReports": "Team progress reports",
+  "storeFeatHrIntegration": "HR integration",
+  "storeFeatDedicatedManager": "Dedicated account manager",
+  "storeBadgeAffordable": "AFFORDABLE",
+  "storeBadgeMostPopular": "MOST POPULAR",
+  "storeBadgePremium": "PREMIUM",
+  "storeBadgeBusiness": "BUSINESS",
+  "storeSave17": "Save 17%",
+  "storeBilledAnnual": "Billed annually",
+  "storePerMonth": "/mo",
+  "storePerUserPerMonth": "/user/mo",
+  "storeBilledAnnuallySuffix": "billed annually",
+  "storeMinUsersBilledAnnual": "Min. {count} users • Billed annually",
+  "@storeMinUsersBilledAnnual": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "storeOrAnnualPlan": "Or {label} on the annual plan",
+  "@storeOrAnnualPlan": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "trialActiveRemaining": "{days, plural, =1{TRIAL ACTIVE — 1 day left} other{TRIAL ACTIVE — {days} days left}}",
+  "@trialActiveRemaining": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "checkoutPaymentMaintenance": "The payment system is under maintenance. Please try again soon.",
+  "checkoutMustBeLoggedIn": "You must be logged in to make a purchase.",
+  "checkoutInvalidData": "Invalid data. Please try again.",
+  "checkoutPaymentUnavailable": "The payment system is temporarily unavailable. Please try again soon.",
+  "checkoutPaymentsComingSoon": "Payments coming soon!",
+  "checkoutSomethingWrong": "Oops, something went wrong",
+  "gotItButton": "GOT IT",
+  "checkoutEnterCpf": "Enter your CPF or CNPJ",
+  "checkoutInvalidCpf": "Invalid CPF/CNPJ (too short)",
+  "checkoutCartEmpty": "Your cart is empty",
+  "checkoutCartEmptyDesc": "Explore the store and gear up\nfor the next challenges!",
+  "checkoutTotalLabel": "TOTAL ",
+  "pwStrengthVeryWeak": "Very weak",
+  "pwStrengthWeak": "Weak",
+  "pwStrengthFair": "Fair",
+  "pwStrengthStrong": "Strong",
+  "pwStrengthVeryStrong": "Very strong",
+  "pwMismatchDot": "Passwords do not match.",
+  "pwMismatch": "Passwords do not match",
+  "pwMatch": "Passwords match",
+  "pwMustBeFair": "The password must be at least fair.",
+  "pwChangedTitle": "Password changed!",
+  "pwChangedDesc": "Your password was updated successfully. Use the new password on your next login.",
+  "pwChangeSubtitle": "Change your access password",
+  "pwSecurityNote": "For security, enter your current password before setting a new one.",
+  "pwCurrentLabel": "Current Password",
+  "pwCurrentHint": "Enter your current password",
+  "pwNewLabel": "New Password",
+  "pwNewHint": "Enter the new password",
+  "pwMin8": "Minimum 8 characters",
+  "pwConfirmLabel": "Confirm New Password",
+  "pwConfirmHint": "Confirm the new password",
+  "pwReqUppercase": "Uppercase letter (A-Z)",
+  "pwReqLowercase": "Lowercase letter (a-z)",
+  "pwReqNumber": "Number (0-9)",
+  "pwReqSpecial": "Special character (!@#$...)",
+  "changePasswordButton": "CHANGE PASSWORD",
+  "duelOpponent": "Opponent",
+  "duelYou": "You",
+  "duelBotOffline": "Bot (offline)",
+  "duelBotTraining": "Training Bot",
+  "duelOpponentAnswered": "Opponent answered!",
+  "duelSendFailed": "Failed to send answer. Continuing...",
+  "duelResultFailed": "Could not determine the result.",
+  "duelTrainingBadge": "TRAINING",
+  "duelPreparingArena": "Preparing your spark arena",
+  "duelWaitingPlayer": "Waiting for another player to join the queue",
+  "duelTakingLong": "Taking too long to find someone?",
+  "duelTrainAgainstBot": "TRAIN AGAINST BOT",
+  "duelTrainingNoRanking": "Training doesn't count for ranking",
+  "duelNoConnection": "NO CONNECTION",
+  "duelOfflineMessage": "Duels against real players need internet. Without a connection, you can train against bots — just for practice, no ranking.",
+  "duelTrainOffline": "TRAIN OFFLINE",
+  "duelTryConnect": "TRY TO CONNECT",
+  "duelBackToMenu": "BACK TO MENU",
+  "duelSomethingWrong": "Something went wrong in the duel.",
+  "duelWaitingOpponent": "WAITING FOR OPPONENT",
+  "duelTallying": "Tallying the duel result...",
+  "duelYourScore": "Your score: {pts} pts",
+  "@duelYourScore": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "duelTrainingMatch": "Training match",
+  "duelVictory": "Victory!",
+  "duelDraw": "Draw!",
+  "duelDefeat": "Not this time.",
+  "duelOfflineNoRanking": "Offline training — doesn't affect ranking",
+  "duelNoRanking": "Training — doesn't affect ranking",
+  "duelPlayAgain": "PLAY AGAIN",
+  "duelCorrectCount": "{correct}/{total} correct",
+  "@duelCorrectCount": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "duelEloProgress": "ELO {elo} · {points} pts to rank up",
+  "@duelEloProgress": {
+    "placeholders": {
+      "elo": {
+        "type": "int"
+      },
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "stdErrorLoading": "Error loading standard",
+  "stdUnknownError": "Unknown error",
+  "stdSafety": "Safety",
+  "stdTechnicalStandard": "Technical Standard",
+  "stdVideosAbout": "Videos about {code}",
+  "@stdVideosAbout": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "stdNetflixTagline": "The Netflix of Electrical Engineering",
+  "stdPowerplayDesc": "Access hundreds of classes, case studies and exclusive content on technical standards and engineering — all in one place.",
+  "stdFeatVideoClasses": "Video Classes",
+  "stdFeatRealCases": "Real Cases",
+  "stdFeatOffline": "Offline",
+  "stdTrending": "TRENDING",
+  "stdRecommended": "Recommended for you",
+  "stdAccessPowerplay": "ACCESS POWERPLAY",
+  "stdMaybeLater": "Maybe later",
+  "stdNew": "NEW",
+  "stdVidPanelsAdv": "NR-10: Advanced Industrial Electrical Panels",
+  "stdVidHvInspection": "Case Study: High-Voltage Inspection",
+  "stdVidNr35Epi": "NR-35: Personal Protective Equipment",
+  "stdVidNr10Fundamentals": "NR-10: Electrical Safety Fundamentals",
+  "stdVidLoto": "Case Study: LOTO in Substations",
+  "stdVidNr35Heights": "NR-35: Work at Heights — Fundamentals",
+  "stdVidNr35Anchorage": "NR-35: PPE and Correct Anchorage",
+  "stdVidFallStructure": "Case Study: Fall from Metal Structure",
+  "stdVidNr12Machines": "NR-12: Industrial Machine Safety",
+  "stdVidNr12Risk": "NR-12: Risk Zones and Guards",
+  "stdVidPress": "Case Study: Hydraulic Press Accident",
+  "stdVidNr33Concepts": "NR-33: Confined Space — Concepts",
+  "stdVidNr33Entry": "NR-33: Safe Entry Procedures",
+  "stdVidConfinedRescue": "Simulation: Confined Space Rescue",
+  "stdVidIntro": "{code}: Introduction to the Standard",
+  "@stdVidIntro": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "stdVidPractical": "{code}: Practical Applications",
+  "@stdVidPractical": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "stdVidCaseWith": "Case Study with {code}",
+  "@stdVidCaseWith": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "labInstruction1": "Inspect the outlet box.\nFind the 2 hidden hazards.",
+  "labInstruction2": "Inspect panel QD-01.\nMind the conductor colors.",
+  "labInstruction3": "Inspect the industrial panel.\n3 non-conformities present.",
+  "labInspectionDone": "✓ Inspection complete! +50 XP",
+  "labRisk1": "⚡ HAZARD · Stripped ground wire — exposed copper without green/yellow insulation.",
+  "labRisk2": "⚠ STANDARD · Outlet without child protection (NBR 14136). Exposed opening.",
+  "labRisk3": "⚡ CRITICAL · Breaker C3 TRIPPED. Root cause not investigated — reconnection prohibited.",
+  "labRisk4": "⚡ DANGER · LIVE wire connected to the NEUTRAL bar. Polarity reversal — shock risk even with the breaker off.",
+  "labRisk5": "⚡ CRITICAL · Thermal relay TRIPPED without authorized reset. Motor with overload history.",
+  "labRisk6": "⚠ HAZARD · Cable over a metal edge without a grommet. Insulation will be progressively cut.",
+  "labRisk7": "⚠ STANDARD · Missing cabinet screw. IP protection rating compromised.",
+  "labKeepSearching": "// All good here. Keep searching...",
+  "labCompleted": "🎉 Lab Complete! +150 XP",
+  "trialErrorStart": "Error starting trial. Check your card details.",
+  "trialErrorUnexpected": "Unexpected error. Please try again.",
+  "trialTryAgain": "TRY AGAIN",
+  "trialStartStudying": "START STUDYING",
+  "trialCardName": "Name on card",
+  "trialEnterName": "Enter the name",
+  "trialInvalidCardNumber": "Invalid card number",
+  "trialInvalid": "Invalid",
+  "trialToday": "Today",
+  "trialAfter7Days": "After 7 days",
+  "trialCancellation": "Cancellation",
+  "trialAnytime": "Anytime",
+  "trialChargeNote": "Your card will only be charged after the 7 free days end.",
+  "paymentCompleted": "Payment Complete!",
+  "paymentApproved": "Your transaction was approved successfully.",
+  "paymentExpiresIn": "Expires on: {date}",
+  "@paymentExpiresIn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "paymentPixCode": "PIX CODE — COPY AND PASTE",
+  "paymentAutoConfirm": "Payment is confirmed automatically.\nYou don't need to do anything after paying.",
+  "paymentRedirecting": "You will be redirected\nto the payment page",
+  "paymentAfterComplete": "After completing the payment, your plan\nwill be activated automatically.",
+  "paymentOpenPage": "OPEN PAYMENT PAGE",
+  "paymentWaitingConfirm": "Waiting for confirmation...",
+  "termsQuestions": "Questions about the terms? Contact the ",
+  "termsSupportTeam": "Technical Support",
+  "termsT1": "1. Introduction and Purpose of SPARK",
+  "termsB1": "SPARK is a digital platform focused on training, qualification and professional development in electrotechnical engineering and electrical-sector standards. By accessing the platform, you agree to comply with and be bound by these Terms of Use, as well as our Privacy Policy.",
+  "termsT2": "2. Account, Registration and Security",
+  "termsB2": "To access the full features, lessons and error simulations, you must register providing truthful and up-to-date information. The security of your password is entirely your responsibility. Any activity performed under your account will be attributed to you.",
+  "termsT3": "3. Spark Points and Premium Subscription",
+  "termsB3": "SPARK has gamification mechanics (XP, Clans, Tournaments) and a virtual store. Spark Points and premium subscriptions can be purchased via the available payment methods. Purchases of digital products are final, and refunds strictly follow the applicable national e-commerce legislation.",
+  "termsT4": "4. Intellectual Property",
+  "termsB4": "All educational materials, questions, PCB schematic simulations, code, visual art and texts provided in SPARK are the exclusive intellectual property of EXS Solutions or duly licensed. Reproduction, distribution or reverse engineering of these materials without prior written authorization is expressly prohibited.",
+  "termsT5": "5. Community Conduct (Clans and Duels)",
+  "termsB5": "Interaction in the Clans and Knowledge Duels area must be guided by mutual respect. Cheating, use of malicious scripts, chat offenses or any behavior that harms the educational experience of other users will result in immediate suspension or permanent cancellation of the offender's account.",
+  "termsT6": "6. Data Protection (LGPD)",
+  "termsB6": "We collect and process your data (such as email, name, study progress and answers) for the sole purpose of improving your learning journey and validating your achievements, fully respecting the provisions of the Brazilian General Data Protection Law (LGPD).",
+  "termsT7": "7. Changes and Limitation of Liability",
+  "termsB7": "We reserve the right to change these terms and update the platform's content at any time for continuous improvement. SPARK is not liable for occasional temporary connection interruptions or third-party bugs, but will make its best technical efforts to quickly resolve incidents.",
+  "svPickFailed": "Could not select the file.",
+  "svEnterInstitution": "Enter the institution name.",
+  "svEnterEmailOrProof": "Enter your institutional email or attach proof.",
+  "svEmailRecognized": "Institutional email recognized! Approval in moments.",
+  "svProofSent": "Proof submitted. Review within 48h.",
+  "svSubtitle": "Prove your enrollment to unlock the Student price (50% off).",
+  "svInstitution": "Educational institution",
+  "svInstitutionHint": "e.g., Federal University of...",
+  "svInstitutionalEmail": "Institutional email (.edu) — instant approval",
+  "svOrAttachProof": "Or attach proof of enrollment",
+  "svSubmit": "SUBMIT FOR VERIFICATION",
+  "svRevalidation": "Revalidation is required every 12 months.",
+  "svVerified": "Enrollment verified",
+  "svRejected": "Proof rejected — resubmit",
+  "svUnderReview": "Under review (up to 48h)",
+  "svSelectFile": "Select photo/PDF",
+  "testHistoryTitle": "TEST HISTORY",
+  "testHistoryTests": "Tests",
+  "testHistoryAvg": "Average",
+  "testHistoryStandards": "Standards",
+  "testHistorySearch": "Search tests...",
+  "testHistoryUnknown": "Unknown",
+  "testHistoryUnknownDate": "Unknown Date",
+  "testHistoryModule": "Module: {id}",
+  "@testHistoryModule": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "bizFillCompany": "Fill in company, tax ID and contact email.",
+  "bizContactSoon": "Our sales team will contact you at the email provided to finalize the proposal and billing.",
+  "bizDesc": "Train your team with an admin panel, progress reports and NF-e invoicing.",
+  "bizLegalName": "Legal name",
+  "bizCompanyPlaceholder": "Company Inc.",
+  "bizContactName": "Contact name",
+  "bizResponsible": "Responsible",
+  "bizContactEmail": "Contact email",
+  "bizSeats": "Number of seats (min. {min})",
+  "@bizSeats": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "bizBillingPeriod": "Billing period",
+  "bizAnnual": "Annual",
+  "bizMonthly": "Monthly",
+  "bizMonthlyEstimate": "Monthly estimate",
+  "bizRequestQuote": "REQUEST QUOTE",
+  "bizUsersCount": "{seats} users",
+  "@bizUsersCount": {
+    "placeholders": {
+      "seats": {
+        "type": "int"
+      }
+    }
+  },
+  "teamSeatsLimit": "Seat limit of {seats} reached.",
+  "@teamSeatsLimit": {
+    "placeholders": {
+      "seats": {
+        "type": "int"
+      }
+    }
+  },
+  "teamEmailInvited": "That email was already invited.",
+  "teamDashboardTitle": "Team dashboard",
+  "teamNoTeam": "You don't manage a team yet.",
+  "teamCreateBusiness": "CREATE BUSINESS PLAN",
+  "teamMyTeam": "My team",
+  "teamSeats": "Seats",
+  "teamAvgProgress": "Average progress",
+  "teamInviteMember": "Invite member",
+  "teamMembers": "Members",
+  "teamNoMembers": "No members yet. Invite using the email above.",
+  "teamInvitePending": "Invite pending",
+  "teamProgress": "Progress {progress}%",
+  "@teamProgress": {
+    "placeholders": {
+      "progress": {
+        "type": "int"
+      }
+    }
+  },
+  "termsAppBarTitle": "TERMS OF USE",
+  "termsSectionsHeader": "TERMS SECTIONS",
+  "leagueBronze": "Bronze",
+  "leagueSilver": "Silver",
+  "leagueGold": "Gold",
+  "leaguePlatinum": "Platinum",
+  "leagueDiamond": "Diamond",
+  "leagueMaster": "Master",
+  "roleAdmin": "Admin",
+  "roleModerator": "Moderator",
+  "roleMember": "Member",
+  "clanActionsLabel": "Actions:",
+  "clanNameUpper": "CLAN NAME",
+  "clanCreatedNamed": "Clan \"{name}\" created successfully!",
+  "@clanCreatedNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "clanPermMembers": "Members are not allowed to manage others.",
+  "clanPermModerators": "Moderators cannot manage other Moderators or Admins.",
+  "clanCurrentRole": "Current role: {role}",
+  "@clanCurrentRole": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "clanMeLabel": "Me",
+  "clanNewDefault": "New EXS clan",
+  "clanDefaultName": "Current Clan",
+  "clanUserFallback": "User",
+  "clanLoadingName": "Loading...",
+  "rankingPositionWeek": "You're in {pos} place this week",
+  "@rankingPositionWeek": {
+    "placeholders": {
+      "pos": {
+        "type": "int"
+      }
+    }
+  },
+  "netCableT568bSub": "Most widely used standard",
+  "netCableT568aSub": "Green and orange pairs swapped vs. B",
+  "clanActionExecuted": "{label} done!",
+  "@clanActionExecuted": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "tlRestrictedDiff": "87 — Restricted Differential",
+  "tlArcFlash": "Arc Flash (incident energy)",
+  "tlDiffBalance": "Differential Balance (87T)",
+  "tlVoltageBases": "Voltage bases",
+  "tlCommissioning": "Commissioning / Testing",
+  "tlSequenceComponents": "Sequence components",
+  "tlVoltageConversion": "Voltage conversion",
+  "tlCoordination": "Coordination / Selectivity",
+  "tlPowerFactor": "Power Factor Correction",
+  "tlNominalCurrent": "Nominal Current",
+  "tlShortCircuit": "Short Circuit",
+  "tlDirectional": "Directional 67 / 67N",
+  "tlScaling": "4–20 mA Scaling",
+  "tlPhasePhasors": "Phase phasors (ABC)",
+  "tlImpedances": "Impedances",
+  "tlGroundGrid": "Ground Grid (IEEE 80)",
+  "tlModbusRegs": "Modbus — Registers",
+  "tlDistanceProtection": "Distance Protection (21)",
+  "tlPowerQuality": "Power Quality",
+  "tlVoltageDrop": "Voltage Drop",
+  "tlCtSaturation": "CT Saturation",
+  "tlThermalSeverity": "Thermal Severity",
+  "tlSpdaRisk": "LPS — Risk Analysis",
+  "tlSpdaCalc": "LPS — Calculations (5419-3)",
+  "tlOnsVoltage": "Voltage pu — ONS Base × VT",
+  "tlPowerTriangle": "Power Triangle",
+  "tlBtnCalculate": "CALCULATE",
+  "tlBtnEvaluate": "EVALUATE",
+  "tlBtnVerify": "VERIFY",
+  "tlBtnDecode": "DECODE",
+  "tlCopyAll": "Copy all results",
+  "tlResultsCopied": "Results copied",
+  "tlResultCopied": "Result copied",
+  "tlSelectCalcMode": "Select calculation mode",
+  "tlVoltagePuOns": "Voltage in pu (ONS base)",
+  "tlSecondaryMeasured": "Measured secondary voltage (V)",
+  "tlOnsBaseV": "ONS base V (kV) — from study",
+  "tlVtPrimary": "VT nom. primary (kV)",
+  "tlVtSecondary": "VT nom. secondary (V)",
+  "tlAngleDeg": "Angle °",
+  "tlMagnitude": "Magnitude",
+  "tlDecodedTitle": "Decoded value ({order})",
+  "@tlDecodedTitle": {
+    "placeholders": {
+      "order": {
+        "type": "String"
+      }
+    }
+  },
+  "tlResultsLevel": "Results (level {level})",
+  "@tlResultsLevel": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "tlDirModAng": "Magnitude and angle of {op}.",
+  "@tlDirModAng": {
+    "placeholders": {
+      "op": {
+        "type": "String"
+      }
+    }
+  },
+  "tlOpAmps": "{op} (A)",
+  "@tlOpAmps": {
+    "placeholders": {
+      "op": {
+        "type": "String"
+      }
+    }
+  },
+  "supportSendError": "Failed to send. Please try again.",
+  "supportWhatsappSoon": "WhatsApp coming soon!",
+  "supportScreenTitle": "HELP & SUPPORT",
+  "supportQuickContact": "QUICK CONTACT",
+  "supportFaqTitle": "FREQUENTLY ASKED QUESTIONS",
+  "supportSendMessageTitle": "SEND MESSAGE",
+  "supportSuccessDesc": "Our team will review your ticket and respond to your registered email within 48 hours.",
+  "supportEmailCopied": "Email copied!",
+  "supportSubjectHint": "Subject",
+  "supportEnterSubject": "Enter the subject",
+  "supportMessageTooShort": "Message too short (min. 10 characters)",
+  "supportCatGeneral": "General question",
+  "supportCatTechnical": "Technical problem",
+  "supportCatSuggestion": "Improvement suggestion",
+  "supportCatContentError": "Content error",
+  "supportCatAccount": "Account problem",
+  "supportCatOther": "Other",
+  "supportFaqQ1": "How does the XP system work?",
+  "supportFaqA1": "You earn XP by completing lessons and answering questions correctly. XP raises your level and unlocks new content.",
+  "supportFaqQ2": "How do I reset my password?",
+  "supportFaqA2": "Go to the Login screen and tap \"Forgot password\". You'll receive a reset link in your email.",
+  "supportFaqQ3": "When do the weekly pacts reset?",
+  "supportFaqA3": "Pacts reset every Monday at 00:00. Your progress is cleared and you can choose new pacts.",
+  "supportFaqQ4": "How do I report content errors?",
+  "supportFaqA4": "Use the form below and select \"Content error\". Our team will review and fix it as soon as possible.",
+  "a11yCopy": "Copy {label}",
+  "@a11yCopy": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yCurveTap": "Curve: {curve}. Tap to change.",
+  "@a11yCurveTap": {
+    "placeholders": {
+      "curve": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yCurveSelectedTap": "Selected curve: {curve}. Tap to change.",
+  "@a11yCurveSelectedTap": {
+    "placeholders": {
+      "curve": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yOperatingTime": "Operating time {seconds}, equivalent to {formatted}",
+  "@a11yOperatingTime": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      },
+      "formatted": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yLogLogChart": "Log-log chart of curve {curve}",
+  "@a11yLogLogChart": {
+    "placeholders": {
+      "curve": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yTransfKva": "Transformer {n} — kVA",
+  "@a11yTransfKva": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "a11ySymResult": "{label}: magnitude {mag}, angle {ang} degrees",
+  "@a11ySymResult": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "mag": {
+        "type": "String"
+      },
+      "ang": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yPrimaryNominal": "Nominal primary ({unit})",
+  "@a11yPrimaryNominal": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "a11ySecondaryNominal": "Nominal secondary ({unit})",
+  "@a11ySecondaryNominal": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yMeasuredPrimary": "Measured value on primary ({unit})",
+  "@a11yMeasuredPrimary": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yMeasuredSecondary": "Measured value on secondary ({unit})",
+  "@a11yMeasuredSecondary": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  }
+}

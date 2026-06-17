@@ -13,6 +13,7 @@ import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/services/access_code_service.dart';
 import 'package:spark_app/widgets/email_verification_dialog.dart';
 import 'package:spark_app/widgets/google_auth_button.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -36,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final password = _passwordController.text;
 
     if (name.isEmpty || email.isEmpty || password.isEmpty) {
-      SparkSnack.info(context, 'Preencha todos os campos.');
+      SparkSnack.info(context, AppLocalizations.of(context)!.fillAllFields);
       return;
     }
 
@@ -53,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
 
       final user = credential.user;
-      if (user == null) throw Exception('Erro desconhecido ao criar usuário.');
+      if (user == null) throw Exception(AppLocalizations.of(context)!.registerUnknownError);
 
       // 2. Atualiza o nome do usuário com try/catch e timeout
       try {
@@ -111,8 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         } on AccessCodeException catch (e) {
           voucherError = e.message;
         } catch (_) {
-          voucherError =
-              'Não foi possível ativar o código agora. Você pode resgatá-lo depois em Configurações.';
+          voucherError = AppLocalizations.of(context)!.voucherActivateLater;
         }
       }
 
@@ -123,15 +123,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         final d =
             '${voucherUntil.day.toString().padLeft(2, '0')}/${voucherUntil.month.toString().padLeft(2, '0')}/${voucherUntil.year}';
         await _showInfoDialog(
-          'Acesso total liberado! 🎉',
-          'Sua conta tem acesso completo à plataforma até $d.\n\n'
-              'Confirme seu e-mail para entrar.',
+          AppLocalizations.of(context)!.fullAccessGranted,
+          AppLocalizations.of(context)!.fullAccessUntilMessage(d),
         );
       } else if (voucherError != null) {
         await _showInfoDialog(
-          'Código não aplicado',
-          '$voucherError\n\nSua conta foi criada normalmente — '
-              'você pode resgatar o código depois em Configurações.',
+          AppLocalizations.of(context)!.codeNotApplied,
+          AppLocalizations.of(context)!.codeNotAppliedMessage(voucherError),
         );
       }
 
@@ -178,7 +176,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } catch (e) {
       WelcomeScreen.skipAutoLogin = false;
       if (!mounted) return;
-      SparkSnack.error(context, 'Erro: ${e.toString().replaceAll('Exception: ', '')}');
+      SparkSnack.error(context, AppLocalizations.of(context)!.genericErrorPrefix(e.toString().replaceAll('Exception: ', '')));
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -207,6 +205,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -216,7 +215,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text('Criar Conta', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 1)),
+        title: Text(l10n.createAccountTitle, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 1)),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -227,30 +226,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 24),
             Container(width: 40, height: 4, decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(2))),
             const SizedBox(height: 20),
-            const Text('Crie sua conta', style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w800)),
+            Text(l10n.createYourAccount, style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
-            Text('Cadastre-se no SPARK para começar', style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
+            Text(l10n.registerSubtitle, style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
             const SizedBox(height: 32),
-            _fieldLabel('Nome Completo'),
+            _fieldLabel(l10n.fullNameLabel),
             const SizedBox(height: 8),
             TextField(
               controller: _nameController,
               maxLength: 50,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(hintText: 'Digite seu nome completo', prefixIcon: Icon(Icons.person_outline, color: AppColors.textMuted), counterText: ''),
+              decoration: InputDecoration(hintText: l10n.fullNameHint, prefixIcon: const Icon(Icons.person_outline, color: AppColors.textMuted), counterText: ''),
             ),
             const SizedBox(height: 20),
-            _fieldLabel('Endereço de E-mail'),
+            _fieldLabel(l10n.emailAddressLabel),
             const SizedBox(height: 8),
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               maxLength: 100,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(hintText: 'Digite seu e-mail', prefixIcon: Icon(Icons.mail_outline, color: AppColors.textMuted), counterText: ''),
+              decoration: InputDecoration(hintText: l10n.emailHint, prefixIcon: const Icon(Icons.mail_outline, color: AppColors.textMuted), counterText: ''),
             ),
             const SizedBox(height: 20),
-            _fieldLabel('Senha'),
+            _fieldLabel(l10n.passwordLabel),
             const SizedBox(height: 8),
             TextField(
               controller: _passwordController,
@@ -258,7 +257,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               maxLength: 128,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                hintText: 'Crie uma senha',
+                hintText: l10n.createPasswordHint,
                 prefixIcon: const Icon(Icons.lock_outline, color: AppColors.textMuted),
                 counterText: '',
                 suffixIcon: IconButton(
@@ -268,7 +267,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            _fieldLabel('Código de cortesia (opcional)'),
+            _fieldLabel(l10n.courtesyCodeOptional),
             const SizedBox(height: 8),
             TextField(
               controller: _voucherController,
@@ -285,7 +284,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Recebeu um código? Informe aqui para liberar o acesso total na hora.',
+                l10n.courtesyCodeHelp,
                 style: TextStyle(color: Colors.white.withValues(alpha: 0.45), fontSize: 12, height: 1.4),
               ),
             ),
@@ -298,7 +297,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 onPressed: (_isLoading || _isGoogleLoading) ? null : _handleRegister,
                 child: _isLoading
                     ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
-                    : const Text('CADASTRAR', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
+                    : Text(l10n.registerButton, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 2)),
               ),
             ),
             const SizedBox(height: 20),
@@ -307,13 +306,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Text('ou', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                child: Text(l10n.orDivider, style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
               ),
               Expanded(child: Divider(color: AppColors.cardBorder.withValues(alpha: 0.4))),
             ]),
             const SizedBox(height: 20),
             GoogleAuthButton(
-              label: 'Cadastrar com Google',
+              label: l10n.signUpWithGoogle,
               isLoading: _isGoogleLoading,
               onPressed: (_isLoading || _isGoogleLoading) ? null : _handleGoogleSignIn,
             ),
@@ -321,10 +320,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Já possui uma conta? ', style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
+                Text(l10n.alreadyHaveAccount, style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
                 GestureDetector(
                   onTap: () => context.push('/login'),
-                  child: const Text('Entrar', style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),
+                  child: Text(l10n.loginTitle, style: const TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),
                 ),
               ],
             ),

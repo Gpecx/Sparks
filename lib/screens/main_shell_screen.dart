@@ -15,6 +15,7 @@ import 'package:spark_app/screens/profile_screen.dart';
 import 'package:spark_app/screens/store_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/user_provider.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class MainShellScreen extends ConsumerStatefulWidget {
   final int initialTab;
@@ -63,6 +64,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
 
   /// Abre o menu com as opções secundárias (Perfil, Ranking, Loja).
   void _showMoreMenu() {
+    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: AppColors.navBarBackground,
@@ -123,6 +125,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isTestMode = ref.watch(devModeProvider);
     final isAdmin = ref.watch(userModelProvider.select((user) => user.value?.isAdmin ?? false));
 
@@ -176,11 +179,11 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
             floatingActionButton: devFab,
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             body: Semantics(
-              label: 'Tela principal do SPARK',
+              label: l10n.shellSemanticMain,
               child: Row(
                 children: [
                   Semantics(
-                    label: 'Menu de navegação lateral',
+                    label: l10n.shellSemanticSideNav,
                     child: NavigationRail(
                       selectedIndex: _currentIndex,
                       onDestinationSelected: (index) =>
@@ -203,83 +206,83 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                         fontSize: 12,
                       ),
                       labelType: NavigationRailLabelType.all,
-                      destinations: const [
+                      destinations: [
                         NavigationRailDestination(
                           icon: Icon(
                             Icons.home_outlined,
-                            semanticLabel: 'Início',
+                            semanticLabel: l10n.navHome,
                           ),
                           selectedIcon: Icon(
                             Icons.home,
-                            semanticLabel: 'Início selecionado',
+                            semanticLabel: l10n.navHome,
                           ),
-                          label: Text('Início'),
+                          label: Text(l10n.navHome),
                         ),
                         NavigationRailDestination(
                           icon: Icon(
                             Icons.category_outlined,
-                            semanticLabel: 'Categorias',
+                            semanticLabel: l10n.navCategories,
                           ),
                           selectedIcon: Icon(
                             Icons.category,
-                            semanticLabel: 'Categorias selecionada',
+                            semanticLabel: l10n.navCategories,
                           ),
-                          label: Text('Categorias'),
+                          label: Text(l10n.navCategories),
                         ),
                         NavigationRailDestination(
                           icon: Icon(
                             Icons.menu_book_outlined,
-                            semanticLabel: 'Estudos',
+                            semanticLabel: l10n.navStudies,
                           ),
                           selectedIcon: Icon(
                             Icons.menu_book,
-                            semanticLabel: 'Estudos selecionado',
+                            semanticLabel: l10n.navStudies,
                           ),
-                          label: Text('Estudos'),
+                          label: Text(l10n.navStudies),
                         ),
                         NavigationRailDestination(
                           icon: Icon(
                             Icons.calculate_outlined,
-                            semanticLabel: 'Ferramentas',
+                            semanticLabel: l10n.navTools,
                           ),
                           selectedIcon: Icon(
                             Icons.calculate,
-                            semanticLabel: 'Ferramentas selecionada',
+                            semanticLabel: l10n.navTools,
                           ),
-                          label: Text('Ferramentas'),
+                          label: Text(l10n.navTools),
                         ),
                         NavigationRailDestination(
                           icon: Icon(
                             Icons.emoji_events_outlined,
-                            semanticLabel: 'Ranking',
+                            semanticLabel: l10n.navRanking,
                           ),
                           selectedIcon: Icon(
                             Icons.emoji_events,
-                            semanticLabel: 'Ranking selecionado',
+                            semanticLabel: l10n.navRanking,
                           ),
-                          label: Text('Ranking'),
+                          label: Text(l10n.navRanking),
                         ),
                         NavigationRailDestination(
                           icon: Icon(
                             Icons.person_outline,
-                            semanticLabel: 'Perfil',
+                            semanticLabel: l10n.navProfile,
                           ),
                           selectedIcon: Icon(
                             Icons.person,
-                            semanticLabel: 'Perfil selecionado',
+                            semanticLabel: l10n.navProfile,
                           ),
-                          label: Text('Perfil'),
+                          label: Text(l10n.navProfile),
                         ),
                         NavigationRailDestination(
                           icon: Icon(
                             Icons.store_outlined,
-                            semanticLabel: 'Loja',
+                            semanticLabel: l10n.navStore,
                           ),
                           selectedIcon: Icon(
                             Icons.store,
-                            semanticLabel: 'Loja selecionada',
+                            semanticLabel: l10n.navStore,
                           ),
-                          label: Text('Loja'),
+                          label: Text(l10n.navStore),
                         ),
                       ],
                     ),
@@ -307,7 +310,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
         final isMoreSelected = moreIndexes.contains(_currentIndex);
 
         return Semantics(
-          label: 'Tela principal do SPARK',
+          label: l10n.shellSemanticMain,
           child: Scaffold(
             floatingActionButton: devFab ??
                 _CategoriasFab(
@@ -319,7 +322,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                 : FloatingActionButtonLocation.centerDocked,
             body: scaffoldBody,
             bottomNavigationBar: Semantics(
-              label: 'Barra de navegação inferior',
+              label: l10n.shellSemanticBottomNav,
               explicitChildNodes: true,
               child: BottomAppBar(
                 color: AppColors.navBarBackground,
@@ -343,14 +346,14 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                       _NavItem(
                         icon: Icons.home_outlined,
                         activeIcon: Icons.home,
-                        label: 'Início',
+                        label: l10n.navHome,
                         selected: _currentIndex == 0,
                         onTap: () => setState(() => _currentIndex = 0),
                       ),
                       _NavItem(
                         icon: Icons.menu_book_outlined,
                         activeIcon: Icons.menu_book,
-                        label: 'Estudos',
+                        label: l10n.navStudies,
                         selected: _currentIndex == 2,
                         onTap: () => setState(() => _currentIndex = 2),
                       ),
@@ -365,7 +368,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                       _NavItem(
                         icon: Icons.more_horiz,
                         activeIcon: Icons.more_horiz,
-                        label: 'Menu',
+                        label: l10n.navMenu,
                         selected: isMoreSelected,
                         onTap: _showMoreMenu,
                       ),
@@ -455,7 +458,7 @@ class _CategoriasFab extends StatelessWidget {
             ? const BorderSide(color: Colors.white, width: 2)
             : BorderSide.none,
       ),
-      tooltip: 'Categorias de aprendizado',
+      tooltip: AppLocalizations.of(context)!.categoriesFabTooltip,
       child: Icon(selected ? Icons.category : Icons.category_outlined, size: 26),
     );
   }

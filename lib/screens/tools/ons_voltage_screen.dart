@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/utils/ons_voltage_base.dart';
 import 'package:spark_app/screens/tools/widgets/tool_kit.dart';
@@ -90,7 +91,7 @@ class _OnsVoltageScreenState extends State<OnsVoltageScreen> {
     final naive = _mode == 0 ? (r.puOnsBase * vSecNom) : null;
 
     final results = <ToolResult>[
-      ToolResult('Tensão primária', '${fmtNumber(r.primaryKv, decimals: 3)} kV'),
+      ToolResult(AppLocalizations.of(context)!.onsVoltagePrimResult, '${fmtNumber(r.primaryKv, decimals: 3)} kV'),
       ToolResult('pu na base do TP', fmtNumber(r.puTpBase, decimals: 4)),
       ToolResult('pu na base do ONS', fmtNumber(r.puOnsBase, decimals: 4)),
       ToolResult('Tensão secundária (correta)', '${fmtNumber(r.secondaryVolts, decimals: 2)} V'),
@@ -113,7 +114,7 @@ class _OnsVoltageScreenState extends State<OnsVoltageScreen> {
   @override
   Widget build(BuildContext context) {
     return ToolPage(
-      title: 'Tensão pu — Base ONS × TP',
+      title: AppLocalizations.of(context)!.tlOnsVoltage,
       children: [
         ToolSegmented(
           labels: const ['pu(ONS) → V sec', 'V sec → pu(ONS)'],
@@ -126,25 +127,25 @@ class _OnsVoltageScreenState extends State<OnsVoltageScreen> {
         ),
         const SizedBox(height: 16),
         ToolCard(
-          title: 'Bases de tensão',
+          title: AppLocalizations.of(context)!.tlVoltageBases,
           subtitle:
               'A base do estudo do ONS (ex.: 230/500 kV) costuma diferir do nominal real do TP.',
           children: [
             ToolField(
               controller: _vBaseOns,
-              label: 'V base do ONS (kV) — do estudo',
+              label: AppLocalizations.of(context)!.tlOnsBaseV,
               semantic: 'Tensão de base do ONS em kV',
             ),
             const SizedBox(height: 12),
             ToolFieldRow(children: [
               ToolField(
                 controller: _vTpPrim,
-                label: 'V nom. TP primário (kV)',
+                label: AppLocalizations.of(context)!.tlVtPrimary,
                 semantic: 'Tensão nominal do primário do TP',
               ),
               ToolField(
                 controller: _vTpSec,
-                label: 'V nom. TP secundário (V)',
+                label: AppLocalizations.of(context)!.tlVtSecondary,
                 semantic: 'Tensão nominal do secundário do TP',
               ),
             ]),
@@ -157,25 +158,25 @@ class _OnsVoltageScreenState extends State<OnsVoltageScreen> {
             if (_mode == 0)
               ToolField(
                 controller: _puOns,
-                label: 'Tensão em pu (base ONS)',
+                label: AppLocalizations.of(context)!.tlVoltagePuOns,
                 semantic: 'Valor em pu na base do ONS',
               )
             else
               ToolField(
                 controller: _vSec,
-                label: 'Tensão secundária medida (V)',
+                label: AppLocalizations.of(context)!.tlSecondaryMeasured,
                 semantic: 'Tensão secundária medida em volts',
               ),
           ],
         ),
         const SizedBox(height: 20),
-        ToolButton(label: 'CALCULAR', onPressed: _calculate),
+        ToolButton(label: AppLocalizations.of(context)!.tlBtnCalculate, onPressed: _calculate),
         if (_warning != null || _results != null) ...[
           const SizedBox(height: 24),
           ToolResultsPanel(
             results: _results ?? const [],
             warning: _warning,
-            title: 'Conversão de tensão',
+            title: AppLocalizations.of(context)!.tlVoltageConversion,
             note: _results != null ? _note : null,
           ),
         ],

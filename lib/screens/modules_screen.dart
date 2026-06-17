@@ -12,6 +12,7 @@ import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/progress_provider.dart';
 import 'package:spark_app/providers/content_providers.dart';
 import 'package:spark_app/core/utils/theme_utils.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class ModulesScreen extends ConsumerWidget {
   final SPARKCategory? category;
@@ -28,11 +29,12 @@ class ModulesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final isTestMode = kDebugMode && ref.watch(devModeProvider);
-    
+
     // Fallback: se for nulo, apenas volta
     if (category == null) {
-      return const Scaffold(body: Center(child: Text('Categoria não encontrada')));
+      return Scaffold(body: Center(child: Text(l10n.categoryNotFound)));
     }
     final cat = category!;
 
@@ -89,7 +91,7 @@ class ModulesScreen extends ConsumerWidget {
                             const SizedBox(height: 2),
                             modulesAsync.when(
                               data: (modules) => Text(
-                                '${modules.length} módulos disponíveis',
+                                l10n.modulesAvailablePlural(modules.length),
                                 style: TextStyle(
                                   color: AppColors.textMuted.withValues(alpha: 0.8),
                                   fontSize: 11,
@@ -111,10 +113,10 @@ class ModulesScreen extends ConsumerWidget {
                   child: modulesAsync.when(
                     data: (modules) {
                       if (modules.isEmpty) {
-                        return const Center(
+                        return Center(
                           child: Text(
-                            'Nenhum módulo encontrado nesta categoria.',
-                            style: TextStyle(color: AppColors.textMuted),
+                            l10n.noModulesInCategory,
+                            style: const TextStyle(color: AppColors.textMuted),
                           ),
                         );
                       }
@@ -181,8 +183,8 @@ class ModulesScreen extends ConsumerWidget {
                     ),
                     error: (err, stack) => Center(
                       child: Text(
-                        'Erro ao carregar módulos',
-                        style: TextStyle(color: AppColors.error),
+                        l10n.errorLoadingModules,
+                        style: const TextStyle(color: AppColors.error),
                       ),
                     ),
                   ),
@@ -248,6 +250,7 @@ class _ModuleCardState extends State<_ModuleCard>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final mod = widget.module;
     final locked = !widget.isTestMode && widget.isLocked;
     final color = locked ? AppColors.textMuted : widget.themeColor;
@@ -346,7 +349,7 @@ class _ModuleCardState extends State<_ModuleCard>
                   Row(
                     children: [
                       Text(
-                        '${(widget.progress * 100).toInt()}% Concluído',
+                        l10n.percentComplete((widget.progress * 100).toInt()),
                         style: const TextStyle(
                           color: AppColors.textSecondary,
                           fontSize: 12,
@@ -370,7 +373,7 @@ class _ModuleCardState extends State<_ModuleCard>
                 if (locked) ...[
                   const SizedBox(height: 12),
                   Text(
-                    'Bloqueado',
+                    l10n.lockedLabel,
                     style: TextStyle(
                       color: AppColors.textMuted.withValues(alpha: 0.5),
                       fontSize: 11,

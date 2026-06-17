@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/theme/app_theme.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -306,6 +307,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -733,7 +735,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     const Text(
                       'Sua Jornada de\nEstudos e Ferramentas\nPráticas para o Setor Elétrico.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 28,
                         fontWeight: FontWeight.w800,
@@ -743,7 +745,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
                     const SizedBox(height: 14),
                     Text(
-                      'SPDA, Estudos, Termografia e Comissionamento —\nda NR-10 ao IEC 61850, em uma só plataforma',
+                      l10n.welcomeSubtitle,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: AppColors.textSecondary,
@@ -758,9 +760,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       height: 52,
                       child: ElevatedButton(
                         onPressed: () => context.push('/login'),
-                        child: const Text(
-                          'FAZER LOGIN',
-                          style: TextStyle(
+                        child: Text(
+                          l10n.welcomeLoginButton,
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 2,
@@ -782,9 +784,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        child: const Text(
-                          'CRIAR NOVA CONTA',
-                          style: TextStyle(
+                        child: Text(
+                          l10n.welcomeCreateAccountButton,
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 2,
@@ -799,12 +801,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: 'Tem um código de cortesia? ',
+                              text: l10n.haveCourtesyCode,
                               style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 12),
                             ),
-                            const TextSpan(
-                              text: 'Ative na conta',
-                              style: TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w700),
+                            TextSpan(
+                              text: l10n.activateInAccount,
+                              style: const TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w700),
                             ),
                           ],
                         ),

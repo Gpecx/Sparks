@@ -15,6 +15,9 @@ import 'package:spark_app/screens/welcome_screen.dart';
 import 'package:spark_app/firebase_options.dart';
 import 'package:spark_app/providers/colorblind_provider.dart';
 import 'package:spark_app/widgets/sparky_companion.dart';
+import 'package:spark_app/providers/language_provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -50,6 +53,28 @@ void main() async {
         kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
     webProvider: ReCaptchaV3Provider('RECAPTCHA_V3_SITE_KEY'),
   );
+  // Em release: Play Integrity (Android), Device Check (Apple) e reCAPTCHA v3 (Web).
+  //
+  // No WEB o App Check só é ativado se houver uma chave reCAPTCHA v3 REAL em
+  // RECAPTCHA_V3_SITE_KEY (.env). Sem chave válida, o provider reCAPTCHA falha e
+  // CONTAMINA o SDK (auth/Firestore/Functions param de anexar token → erros de
+  // permissão). Como o backend ainda não força (enforceAppCheck=false), é seguro
+  // pular no web até a chave estar configurada.
+  if (kIsWeb) {
+    final recaptchaKey = (dotenv.env['RECAPTCHA_V3_SITE_KEY'] ?? '').trim();
+    if (recaptchaKey.isNotEmpty) {
+      await FirebaseAppCheck.instance.activate(
+        webProvider: ReCaptchaV3Provider(recaptchaKey),
+      );
+    }
+  } else {
+    await FirebaseAppCheck.instance.activate(
+      androidProvider:
+          kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+      appleProvider:
+          kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
+    );
+  }
 
   // 1b. Inicializa FCM (permissão + handlers)
   await FcmService().initialize();
@@ -103,12 +128,16 @@ class SparkApp extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child) {
         final colorblindMode = ref.watch(colorblindProvider);
+        final locale = ref.watch(languageProvider);
 
         return ColorFiltered(
           colorFilter: _getColorFilter(colorblindMode),
           child: MaterialApp.router(
             title: 'SPARK',
             debugShowCheckedModeBanner: false,
+            locale: locale,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             theme: AppTheme.darkTheme,
             routerConfig: AppRouter.router,
             builder: (context, child) {

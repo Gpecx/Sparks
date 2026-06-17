@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -66,14 +67,17 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   String _getDynamicGreeting() {
     final hour = DateTime.now().hour;
-    if (hour < 12) return 'Bom dia';
-    if (hour < 18) return 'Boa tarde';
-    return 'Boa noite';
+    if (hour < 12) return AppLocalizations.of(context)!.goodMorning;
+    if (hour < 18) return AppLocalizations.of(context)!.goodAfternoon;
+    return AppLocalizations.of(context)!.goodEvening;
   }
 
   void _showProfileMenu(UserModel? userModel) {
     final userService = ref.read(userServiceProvider);
-    final displayName = userModel?.displayName ?? userService.displayName;
+    // Usa o getter do serviço (cadeia de fallback completa: doc → Auth.displayName
+    // → deriva do e-mail do Auth). O userModel.displayName já vem colapsado para
+    // "Usuário" quando o doc não tem nome/e-mail, então não serve de fonte aqui.
+    final displayName = userService.displayName;
     final photoUrl = userModel?.photoUrl ?? userService.user?.photoUrl;
     final email = userModel?.email ?? userService.user?.email ?? '';
     final role = userModel?.role ?? userService.user?.role ?? 'Técnico';
@@ -174,7 +178,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
               _buildProfileMenuItem(
                 icon: Icons.person_outline,
-                label: 'Meu Perfil',
+                label: AppLocalizations.of(context)!.myProfileMenu,
                 onTap: () {
                   Navigator.pop(ctx);
                   final shell = context.findAncestorStateOfType<MainShellScreenState>();
@@ -183,7 +187,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
               _buildProfileMenuItem(
                 icon: Icons.settings_outlined,
-                label: 'Configurações',
+                label: AppLocalizations.of(context)!.settingsMenu,
                 onTap: () {
                   Navigator.pop(ctx);
                   Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen()));
@@ -192,7 +196,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               if (isAdmin)
                 _buildProfileMenuItem(
                   icon: Icons.admin_panel_settings_outlined,
-                  label: 'Painel Admin',
+                  label: AppLocalizations.of(context)!.adminPanelMenu,
                   color: const Color(0xFFFF8C00),
                   onTap: () {
                     Navigator.pop(ctx);
@@ -201,7 +205,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 ),
               _buildProfileMenuItem(
                 icon: Icons.emoji_events_outlined,
-                label: 'Minhas Conquistas',
+                label: AppLocalizations.of(context)!.myAchievementsMenu,
                 onTap: () {
                   Navigator.pop(ctx);
                   Navigator.push(context, MaterialPageRoute(builder: (_) => const AchievementsScreen()));
@@ -209,7 +213,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
               _buildProfileMenuItem(
                 icon: Icons.trending_up,
-                label: 'Meu Progresso',
+                label: AppLocalizations.of(context)!.myProgressMenu,
                 onTap: () {
                   Navigator.pop(ctx);
                   context.push('/my-progress');
@@ -217,21 +221,21 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
               _buildProfileMenuItem(
                 icon: Icons.help_outline,
-                label: 'Ajuda / Suporte',
+                label: AppLocalizations.of(context)!.helpSupportMenu,
                 onTap: () {
                   Navigator.pop(ctx);
                   context.push('/support');
                 },
               ),
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                child: Text('NOVAS MECÂNICAS', style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.w700)),
+                child: Text(AppLocalizations.of(context)!.newMechanicsHeader, style: TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.w700)),
               ),
               // PvP — Duelo de Faíscas (liberado para todos os usuários)
               _buildProfileMenuItem(
                 icon: Icons.flash_on,
-                label: 'Duelo de Faíscas (PvP)',
+                label: AppLocalizations.of(context)!.sparksDuelMenu,
                 color: AppColors.primary,
                 onTap: () {
                   Navigator.pop(ctx);
@@ -241,7 +245,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               Divider(color: AppColors.cardBorder.withValues(alpha: 0.5), height: 1),
               _buildProfileMenuItem(
                 icon: Icons.logout,
-                label: 'Sair',
+                label: AppLocalizations.of(context)!.logoutMenu,
                 color: AppColors.error,
                 onTap: () async {
                   Navigator.pop(ctx);
@@ -303,9 +307,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         if (onSeeAll != null)
           _ResponsiveTapWidget(
             onTap: onSeeAll,
-            child: const Row(
+            child: Row(
               children: [
-                Text('Ver todas', style: TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.w700)),
+                Text(AppLocalizations.of(context)!.seeAllPlural, style: TextStyle(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.w700)),
                 SizedBox(width: 4),
                 Icon(Icons.arrow_forward_ios, color: AppColors.primary, size: 12),
               ],
@@ -319,7 +323,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   // ── Header com nome real do Firestore ───────────────────────────
   Widget _buildHeader(UserModel? userModel) {
     final userService = ref.watch(userServiceProvider);
-    final displayName = userModel?.displayName ?? userService.displayName;
+    // Usa o getter do serviço (cadeia de fallback completa: doc → Auth.displayName
+    // → deriva do e-mail do Auth). O userModel.displayName já vem colapsado para
+    // "Usuário" quando o doc não tem nome/e-mail, então não serve de fonte aqui.
+    final displayName = userService.displayName;
     final firstName = displayName.split(' ').first;
     final photoUrl = userModel?.photoUrl ?? userService.user?.photoUrl;
 
@@ -456,14 +463,14 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Notificações', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)),
+                        Text(AppLocalizations.of(context)!.notificationsTitle, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)),
                         if (service.unreadCount > 0)
                           TextButton(
                             onPressed: () {
                               service.markAllRead(uid);
                               Navigator.pop(ctx);
                             },
-                            child: const Text('Marcar todas como lidas', style: TextStyle(color: AppColors.primary, fontSize: 12)),
+                            child: Text(AppLocalizations.of(context)!.markAllAsRead, style: TextStyle(color: AppColors.primary, fontSize: 12)),
                           ),
                       ],
                     ),
@@ -479,8 +486,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           builder: (context, child) {
                             final notifs = service.notifications;
                             if (notifs.isEmpty) {
-                              return const Center(
-                                child: Text('Nenhuma notificação no momento.', style: TextStyle(color: AppColors.textMuted)),
+                              return Center(
+                                child: Text(AppLocalizations.of(context)!.noNotificationsAtMoment, style: TextStyle(color: AppColors.textMuted)),
                               );
                             }
                             return ListView.builder(
@@ -567,11 +574,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     child: _buildContinueLearningCard(),
                   ),
                   const SizedBox(height: 40),
-                  _buildSectionHeader('Pactos Semanais', () => context.push('/covenants')),
+                  _buildSectionHeader(AppLocalizations.of(context)!.weeklyCovenantsTitle, () => context.push('/covenants')),
                   const SizedBox(height: 16),
                   _isLoading ? _buildCovenantSkeleton() : _buildCovenantList(),
                   const SizedBox(height: 40),
-                  _buildSectionHeader('Módulos em Destaque'),
+                  _buildSectionHeader(AppLocalizations.of(context)!.featuredModulesTitle),
                   const SizedBox(height: 16),
                   _isLoading ? _buildModulesSkeleton() : _buildTopModulesList(context),
                   const SizedBox(height: 40),
@@ -642,13 +649,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Seu Progresso',
+                    Text(
+                      AppLocalizations.of(context)!.yourProgressTitle,
                       style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Técnico Nível $level',
+                      AppLocalizations.of(context)!.technicianLevel(level),
                       style: TextStyle(color: AppColors.primary.withValues(alpha: 0.8), fontSize: 13, fontWeight: FontWeight.w600),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -659,7 +666,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               const SizedBox(width: 8),
               _ResponsiveTapWidget(
                 onTap: () {
-                  SparkSnack.success(context, '🔥 Streak de $streak dias! Multiplicador de ${multiplier}x.');
+                  SparkSnack.success(context, AppLocalizations.of(context)!.streakMultiplierMessage(streak, multiplier));
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -673,7 +680,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       const Icon(Icons.local_fire_department, color: AppColors.gold, size: 16),
                       const SizedBox(width: 4),
                       Text(
-                        '$streak Dias',
+                        AppLocalizations.of(context)!.streakDays(streak),
                         style: const TextStyle(color: AppColors.gold, fontSize: 13, fontWeight: FontWeight.w800),
                       ),
                     ],
@@ -712,7 +719,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           const SizedBox(height: 10),
           // Rótulo descritivo do XP total
           Text(
-            'XP Total: $xp XP',
+            AppLocalizations.of(context)!.totalXp(xp),
             style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
           ),
           const Padding(
@@ -740,12 +747,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         child: const Icon(Icons.timer, color: AppColors.primary, size: 20),
                       ),
                       const SizedBox(width: 12),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Desafio Diário', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
-                            Text('Acesso Teste Admin', style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                            Text(AppLocalizations.of(context)!.dailyChallengeTitle, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+                            Text(AppLocalizations.of(context)!.adminTestAccess, style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
                           ],
                         ),
                       ),
@@ -768,12 +775,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       child: const Icon(Icons.timer, color: Colors.grey, size: 20),
                     ),
                     const SizedBox(width: 12),
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Desafio Diário', style: TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w700)),
-                          Text('Em breve...', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                          Text(AppLocalizations.of(context)!.dailyChallengeTitle, style: TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w700)),
+                          Text(AppLocalizations.of(context)!.comingSoonLabel, style: TextStyle(color: Colors.grey, fontSize: 12)),
                         ],
                       ),
                     ),
@@ -784,7 +791,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
                       ),
-                      child: const Text('EM BREVE', style: TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
+                      child: Text(AppLocalizations.of(context)!.comingSoonUpper, style: TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
                     ),
                   ],
                 ),
@@ -802,7 +809,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     
     return userProgressAsync.when(
       loading: () => const SparkSkeleton(width: double.infinity, height: 120),
-      error: (e, st) => const SizedBox(height: 120, child: Center(child: Text('Erro ao carregar progresso', style: TextStyle(color: AppColors.error)))),
+      error: (e, st) => SizedBox(height: 120, child: Center(child: Text(AppLocalizations.of(context)!.errorLoadingProgress, style: TextStyle(color: AppColors.error)))),
       data: (list) {
         if (list.isEmpty) return _buildContinueLearningContent(null);
         
@@ -820,10 +827,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         ? lastModule.moduleName.isNotEmpty
             ? lastModule.moduleName
             : 'Módulo ${lastModule.moduleId.split('_').last}'
-        : 'Nenhum módulo iniciado';
+        : AppLocalizations.of(context)!.noModuleStarted;
     final moduleSubtitle = lastModule != null
         ? '${lastModule.completedLessons.length} lição(ões) concluída(s)'
-        : 'Acesse o Caminho de Aprendizado para começar';
+        : AppLocalizations.of(context)!.accessLearningPathToStart;
     final progress = lastModule?.progressPercent ?? 0.0;
     final progressText = lastModule != null ? '${(progress * 100).toInt()}%' : '';
 
@@ -832,8 +839,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Continue Aprendendo',
+          Text(
+            AppLocalizations.of(context)!.continueLearningTitle,
             style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 14),
@@ -931,11 +938,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 children: [
                   const Icon(Icons.shield_outlined, color: AppColors.textMuted, size: 28),
                   const SizedBox(height: 8),
-                  const Text('Nenhum Pacto Ativo', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14)),
+                  Text(AppLocalizations.of(context)!.noActiveCovenant, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14)),
                   const SizedBox(height: 4),
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      'Vá até a aba Pactos para criar o compromisso!', 
+                      AppLocalizations.of(context)!.goToCovenantsTabToCreate, 
                       textAlign: TextAlign.center, 
                       style: TextStyle(color: AppColors.textSecondary, fontSize: 11),
                       maxLines: 2,
@@ -951,7 +958,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                       minimumSize: const Size(0, 32),
                     ),
-                    child: const Text('ACEITAR PACTO', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, fontSize: 11)),
+                    child: Text(AppLocalizations.of(context)!.acceptCovenantButton, style: TextStyle(color: AppColors.background, fontWeight: FontWeight.w700, fontSize: 11)),
                   )
                 ],
               ),
@@ -1076,19 +1083,19 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           return SparkCard(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.auto_awesome_mosaic_outlined, color: AppColors.textMuted, size: 28),
                 SizedBox(height: 8),
                 Text(
-                  'Nenhum módulo em destaque no momento.',
+                  AppLocalizations.of(context)!.noFeaturedModulesCurrently,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700),
                 ),
                 SizedBox(height: 4),
                 Text(
-                  'Continue explorando para descobrir novos conteúdos!',
+                  AppLocalizations.of(context)!.continueExploringForNewContent,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
                 ),
@@ -1120,7 +1127,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       error: (err, stack) => SizedBox(
         height: 165,
         child: Center(
-          child: Text('Erro ao carregar módulos', style: TextStyle(color: Colors.red.shade300)),
+          child: Text(AppLocalizations.of(context)!.errorLoadingModules, style: TextStyle(color: Colors.red.shade300)),
         ),
       ),
     );
@@ -1216,10 +1223,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('PowerPlay Streaming', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700)),
+                  Text(AppLocalizations.of(context)!.powerplayStreamingTitle, style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700)),
                   const SizedBox(height: 4),
                   Text(
-                    'Vídeos técnicos e conteúdos exclusivos para seu aprendizado',
+                    AppLocalizations.of(context)!.technicalVideosDescription,
                     style: TextStyle(color: AppColors.textSecondary, fontSize: 12, height: 1.3),
                   ),
                 ],
@@ -1232,7 +1239,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 gradient: const LinearGradient(colors: [AppColors.primary, AppColors.cardBorder]),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text('Saiba mais', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700)),
+              child: Text(AppLocalizations.of(context)!.learnMoreButton, style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700)),
             ),
           ],
         ),

@@ -10,6 +10,7 @@ import 'package:spark_app/providers/ebook_providers.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/ebook_reader_screen.dart';
+import 'package:spark_app/l10n/app_localizations.dart';
 
 class EbookListScreen extends ConsumerWidget {
   final SPARKCategory category;
@@ -42,9 +43,9 @@ class EbookListScreen extends ConsumerWidget {
                   child: modulesAsync.when(
                     data: (modules) {
                       if (modules.isEmpty) {
-                        return const Center(
-                          child: Text('Nenhum módulo disponível.',
-                              style: TextStyle(color: Colors.white54)),
+                        return Center(
+                          child: Text(AppLocalizations.of(context)!.noModulesAvailable,
+                              style: const TextStyle(color: Colors.white54)),
                         );
                       }
                       return ListView.builder(
@@ -73,7 +74,7 @@ class EbookListScreen extends ConsumerWidget {
                       ),
                     ),
                     error: (e, _) => Center(
-                        child: Text('Erro: $e',
+                        child: Text(AppLocalizations.of(context)!.genericErrorPrefix(e.toString()),
                             style: const TextStyle(color: AppColors.error))),
                   ),
                 ),
@@ -130,7 +131,7 @@ class _Header extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  'E-books por módulo',
+                  AppLocalizations.of(context)!.ebooksByModule,
                   style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
                 ),
               ],
@@ -194,8 +195,8 @@ class _ModuleSection extends ConsumerWidget {
                       Icon(Icons.hourglass_empty,
                           color: AppColors.textMuted, size: 18),
                       const SizedBox(width: 10),
-                      const Text('E-book em elaboração',
-                          style: TextStyle(
+                      Text(AppLocalizations.of(context)!.ebookInPreparation,
+                          style: const TextStyle(
                               color: AppColors.textMuted, fontSize: 13)),
                     ],
                   ),
@@ -234,7 +235,7 @@ class _ModuleSection extends ConsumerWidget {
                   child: CircularProgressIndicator(
                       color: AppColors.primary, strokeWidth: 2)),
             ),
-            error: (e, _) => Text('Erro: $e',
+            error: (e, _) => Text(AppLocalizations.of(context)!.genericErrorPrefix(e.toString()),
                 style: const TextStyle(color: AppColors.error)),
           ),
         ],
@@ -260,10 +261,11 @@ class _EbookCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final done = progress?.completed ?? false;
+    final l10n = AppLocalizations.of(context)!;
 
     return Semantics(
       button: true,
-      label: '${ebook.title}. ${ebook.estimatedMinutes} minutos.',
+      label: l10n.ebookSemanticLabel(ebook.title, ebook.estimatedMinutes),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
@@ -331,11 +333,11 @@ class _EbookCard extends StatelessWidget {
                           runSpacing: 4,
                           children: [
                             _tag(Icons.timer_outlined,
-                                '${ebook.estimatedMinutes} min'),
+                                l10n.minutesShort(ebook.estimatedMinutes)),
                             _tag(Icons.collections_bookmark_outlined,
-                                '${ebook.chapterCount} capítulos'),
+                                l10n.chaptersCount(ebook.chapterCount)),
                             if (done)
-                              _tag(Icons.check, 'Concluído',
+                              _tag(Icons.check, l10n.completedTagLabel,
                                   color: themeColor),
                           ],
                         ),

@@ -79,8 +79,11 @@ class UserService extends ChangeNotifier {
       return fromFirestore;
     }
     final fromAuth = _auth.currentUser?.displayName;
-    if (fromAuth != null && fromAuth.isNotEmpty) return fromAuth;
-    // Sem nome cadastrado → deriva do e-mail (ex.: admins criados pelo console).
+    if (fromAuth != null && fromAuth.isNotEmpty && fromAuth != 'Usuário') {
+      return fromAuth;
+    }
+    // Sem nome cadastrado (ou nome literal "Usuário" no Auth/doc) → deriva do
+    // e-mail (ex.: admins criados pelo console com displayName "Usuário").
     return resolveDisplayName(
       email: _user?.email ?? _auth.currentUser?.email,
     );
