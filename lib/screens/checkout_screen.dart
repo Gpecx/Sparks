@@ -143,17 +143,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       final bool isUnavailable;
       switch (e.code) {
         case 'unavailable':
-          msg = e.message ?? 'O sistema de pagamentos está em manutenção. Tente novamente em breve.';
+          msg = e.message ?? AppLocalizations.of(context)!.checkoutPaymentMaintenance;
           isUnavailable = true;
         case 'unauthenticated':
-          msg = 'Você precisa estar logado para fazer uma compra.';
+          msg = AppLocalizations.of(context)!.checkoutMustBeLoggedIn;
           isUnavailable = false;
         case 'invalid-argument':
-          msg = e.message ?? 'Dados inválidos. Tente novamente.';
+          msg = e.message ?? AppLocalizations.of(context)!.checkoutInvalidData;
           isUnavailable = false;
         default:
           // 'internal' ou qualquer outro código desconhecido
-          msg = 'O sistema de pagamentos está temporariamente indisponível. Tente novamente em breve.';
+          msg = AppLocalizations.of(context)!.checkoutPaymentUnavailable;
           isUnavailable = true;
       }
       _showErrorDialog(msg, isUnavailable: isUnavailable);
@@ -183,7 +183,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              isUnavailable ? 'Pagamentos em breve!' : 'Ops, algo deu errado',
+              isUnavailable ? AppLocalizations.of(context)!.checkoutPaymentsComingSoon : AppLocalizations.of(context)!.checkoutSomethingWrong,
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
@@ -201,7 +201,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('ENTENDI',
+                child: Text(AppLocalizations.of(context)!.gotItButton,
                     style: TextStyle(fontWeight: FontWeight.w800)),
               ),
             ),
@@ -311,9 +311,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 ),
                                 validator: (v) {
                                   final text = v?.trim() ?? '';
-                                  if (text.isEmpty) return 'Informe o CPF ou CNPJ';
+                                  if (text.isEmpty) return AppLocalizations.of(context)!.checkoutEnterCpf;
                                   if (text.length < 11) {
-                                    return 'CPF/CNPJ inválido (muito curto)';
+                                    return AppLocalizations.of(context)!.checkoutInvalidCpf;
                                   }
                                   return null;
                                 },
@@ -357,8 +357,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         Icon(Icons.shopping_cart_outlined,
             color: AppColors.primary.withValues(alpha: 0.2), size: 100),
         const SizedBox(height: 16),
-        const Text(
-          'Seu carrinho está vazio',
+        Text(
+          AppLocalizations.of(context)!.checkoutCartEmpty,
           style: TextStyle(
               color: AppColors.textSecondary,
               fontSize: 18,
@@ -366,7 +366,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Explore a loja e equipe-se\npara os próximos desafios!',
+          AppLocalizations.of(context)!.checkoutCartEmptyDesc,
           textAlign: TextAlign.center,
           style: TextStyle(
               color: AppColors.textMuted, fontSize: 14),
@@ -375,7 +375,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ElevatedButton.icon(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.storefront, size: 18, color: AppColors.primary),
-          label: const Text('VOLTAR À LOJA',
+          label: Text(AppLocalizations.of(context)!.checkoutBackToStore,
               style: TextStyle(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w800,
@@ -537,7 +537,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('TOTAL ',
+                    Text(AppLocalizations.of(context)!.checkoutTotalLabel,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,

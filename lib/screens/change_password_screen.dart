@@ -48,15 +48,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     switch (_strengthScore) {
       case 0:
       case 1:
-        return 'Muito fraca';
+        return AppLocalizations.of(context)!.pwStrengthVeryWeak;
       case 2:
-        return 'Fraca';
+        return AppLocalizations.of(context)!.pwStrengthWeak;
       case 3:
-        return 'Razoável';
+        return AppLocalizations.of(context)!.pwStrengthFair;
       case 4:
-        return 'Forte';
+        return AppLocalizations.of(context)!.pwStrengthStrong;
       case 5:
-        return 'Muito forte';
+        return AppLocalizations.of(context)!.pwStrengthVeryStrong;
       default:
         return '';
     }
@@ -84,12 +84,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     if (!_passwordsMatch) {
-      SparkSnack.error(context, 'As senhas não coincidem.');
+      SparkSnack.error(context, AppLocalizations.of(context)!.pwMismatchDot);
       return;
     }
 
     if (_strengthScore < 3) {
-      SparkSnack.error(context, 'A senha precisa ser pelo menos razoável.');
+      SparkSnack.error(context, AppLocalizations.of(context)!.pwMustBeFair);
       return;
     }
 
@@ -110,12 +110,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           side: const BorderSide(color: AppColors.primaryLight, width: 1),
         ),
         icon: const Icon(Icons.check_circle, color: AppColors.primaryLight, size: 48),
-        title: const Text(
-          'Senha alterada!',
+        title: Text(
+          AppLocalizations.of(context)!.pwChangedTitle,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
         ),
-        content: const Text(
-          'Sua senha foi atualizada com sucesso. Use a nova senha no próximo login.',
+        content: Text(
+          AppLocalizations.of(context)!.pwChangedDesc,
           style: TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.5),
           textAlign: TextAlign.center,
         ),
@@ -132,8 +132,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
-              child: const Text(
-                'CONTINUAR',
+              child: Text(
+                AppLocalizations.of(context)!.continueButton,
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 1),
               ),
             ),
@@ -164,8 +164,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text(
-              'ALTERAR SENHA',
+            title: Text(
+              AppLocalizations.of(context)!.changePasswordButton,
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w800,
@@ -204,7 +204,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   const SizedBox(height: 16),
                   Center(
                     child: Text(
-                      'Altere sua senha de acesso',
+                      AppLocalizations.of(context)!.pwChangeSubtitle,
                       style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
                     ),
                   ),
@@ -223,7 +223,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
-                            'Por segurança, informe sua senha atual antes de definir uma nova.',
+                            AppLocalizations.of(context)!.pwSecurityNote,
                             style: TextStyle(color: AppColors.textSecondary, fontSize: 12, height: 1.4),
                           ),
                         ),
@@ -234,12 +234,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
                   // Campo: Senha Atual
                   _buildPasswordField(
-                    label: 'Senha Atual',
+                    label: AppLocalizations.of(context)!.pwCurrentLabel,
                     controller: _currentPassCtrl,
                     showPassword: _showCurrent,
                     onToggle: () => setState(() => _showCurrent = !_showCurrent),
                     validator: (v) {
-                      if (v == null || v.isEmpty) return 'Informe sua senha atual';
+                      if (v == null || v.isEmpty) return AppLocalizations.of(context)!.pwCurrentHint;
                       return null;
                     },
                   ),
@@ -247,14 +247,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
                   // Campo: Nova Senha
                   _buildPasswordField(
-                    label: 'Nova Senha',
+                    label: AppLocalizations.of(context)!.pwNewLabel,
                     controller: _newPassCtrl,
                     showPassword: _showNew,
                     onToggle: () => setState(() => _showNew = !_showNew),
                     onChanged: (_) => setState(() {}),
                     validator: (v) {
-                      if (v == null || v.isEmpty) return 'Informe a nova senha';
-                      if (v.length < 8) return 'Mínimo de 8 caracteres';
+                      if (v == null || v.isEmpty) return AppLocalizations.of(context)!.pwNewHint;
+                      if (v.length < 8) return AppLocalizations.of(context)!.pwMin8;
                       return null;
                     },
                   ),
@@ -270,14 +270,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
                   // Campo: Confirmar Nova Senha
                   _buildPasswordField(
-                    label: 'Confirmar Nova Senha',
+                    label: AppLocalizations.of(context)!.pwConfirmLabel,
                     controller: _confirmPassCtrl,
                     showPassword: _showConfirm,
                     onToggle: () => setState(() => _showConfirm = !_showConfirm),
                     onChanged: (_) => setState(() {}),
                     validator: (v) {
-                      if (v == null || v.isEmpty) return 'Confirme a nova senha';
-                      if (v != _newPassCtrl.text) return 'As senhas não coincidem';
+                      if (v == null || v.isEmpty) return AppLocalizations.of(context)!.pwConfirmHint;
+                      if (v != _newPassCtrl.text) return AppLocalizations.of(context)!.pwMismatch;
                       return null;
                     },
                   ),
@@ -295,7 +295,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         const SizedBox(width: 6),
                         Flexible(
                           child: Text(
-                            _passwordsMatch ? 'As senhas coincidem' : 'As senhas não coincidem',
+                            _passwordsMatch ? AppLocalizations.of(context)!.pwMatch : AppLocalizations.of(context)!.pwMismatch,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: _passwordsMatch ? AppColors.primaryLight : AppColors.error,
@@ -334,7 +334,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 Icon(Icons.lock_outline, color: Colors.white, size: 18),
                                 SizedBox(width: 8),
                                 Text(
-                                  'ALTERAR SENHA',
+                                  AppLocalizations.of(context)!.changePasswordButton,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w700,
@@ -451,11 +451,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       ),
       child: Column(
         children: [
-          _requirementRow('Mínimo de 8 caracteres', _hasMinLength),
-          _requirementRow('Letra maiúscula (A-Z)', _hasUppercase),
-          _requirementRow('Letra minúscula (a-z)', _hasLowercase),
-          _requirementRow('Número (0-9)', _hasNumber),
-          _requirementRow('Caractere especial (!@#\$...)', _hasSpecialChar),
+          _requirementRow(AppLocalizations.of(context)!.pwMin8, _hasMinLength),
+          _requirementRow(AppLocalizations.of(context)!.pwReqUppercase, _hasUppercase),
+          _requirementRow(AppLocalizations.of(context)!.pwReqLowercase, _hasLowercase),
+          _requirementRow(AppLocalizations.of(context)!.pwReqNumber, _hasNumber),
+          _requirementRow(AppLocalizations.of(context)!.pwReqSpecial, _hasSpecialChar),
         ],
       ),
     );
