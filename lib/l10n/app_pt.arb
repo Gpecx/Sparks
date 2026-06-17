@@ -2048,5 +2048,62 @@
   "tournamentDescription": "Complete o máximo de lições esta semana para subir no ranking e ganhar recompensas exclusivas!",
   "participantsLabel": "PARTICIPANTES",
   "rankingPeriod": "Período do ranking",
-  "rankingResetInfo": "O ranking semanal é resetado toda segunda-feira às 00:00.\nSeus pontos acumulados ficam no histórico."
+  "rankingResetInfo": "O ranking semanal é resetado toda segunda-feira às 00:00.\nSeus pontos acumulados ficam no histórico.",
+  "storeFeatBasicModules": "Acesso a módulos básicos",
+  "storeFeatLimitedBattery": "Bateria limitada (recarrega em 5 min/unidade)",
+  "storeFeatPublicRanking": "Ranking público",
+  "storeFeatBasicAchievements": "Conquistas básicas",
+  "storeFeatAllFree": "Tudo do Free",
+  "storeFeatInfiniteBattery": "Bateria infinita ∞",
+  "storeFeatIntermediateModules": "Acesso a módulos intermediários",
+  "storeFeatChatSupport": "Suporte via chat",
+  "storeFeatEnrollmentProof": "Comprovante de matrícula necessário",
+  "storeFeatAllStudent": "Tudo do Student",
+  "storeFeatAllModulesUnlocked": "Todos os módulos desbloqueados",
+  "storeFeatPvpDuels": "Duelos PvP",
+  "storeFeatDigitalCertificates": "Certificados digitais",
+  "storeFeatPrioritySupport": "Suporte prioritário",
+  "storeFeatAllPro": "Tudo do Pro",
+  "storeFeatExclusiveAdvanced": "Conteúdo avançado exclusivo",
+  "storeFeatMonthlyMentoring": "Mentoria em grupo mensal",
+  "storeFeatEarlyAccess": "Acesso antecipado a novidades",
+  "storeFeatAllPremiumPerUser": "Tudo do Premium por usuário",
+  "storeFeatInfiniteBatteryAll": "Bateria infinita ∞ para todos",
+  "storeFeatAdminPanel": "Painel administrativo",
+  "storeFeatTeamReports": "Relatórios de progresso da equipe",
+  "storeFeatHrIntegration": "Integração com RH",
+  "storeFeatDedicatedManager": "Gerente de conta dedicado",
+  "storeBadgeAffordable": "ACESSÍVEL",
+  "storeBadgeMostPopular": "MAIS POPULAR",
+  "storeBadgePremium": "PREMIUM",
+  "storeBadgeBusiness": "EMPRESAS",
+  "storeSave17": "Economia de 17%",
+  "storeBilledAnnual": "Faturado anual",
+  "storePerMonth": "/mês",
+  "storePerUserPerMonth": "/usuário/mês",
+  "storeBilledAnnuallySuffix": "faturados anualmente",
+  "storeMinUsersBilledAnnual": "Mín. {count} usuários • Faturado anual",
+  "@storeMinUsersBilledAnnual": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "storeOrAnnualPlan": "Ou {label} no plano anual",
+  "@storeOrAnnualPlan": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "trialActiveRemaining": "{days, plural, =1{TRIAL ATIVO — 1 dia restante} other{TRIAL ATIVO — {days} dias restantes}}",
+  "@trialActiveRemaining": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  }
 }

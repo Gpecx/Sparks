@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_app/core/utils/currency_utils.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -426,7 +427,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
               ),
               Text(
-                'R\$ ${item.price.toStringAsFixed(2)}',
+                CurrencyUtils.format(context, item.price),
                 style: const TextStyle(
                     color: AppColors.primary,
                     fontSize: 15,
@@ -543,7 +544,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             fontWeight: FontWeight.w700)),
                     Flexible(
                       child: Text(
-                        'R\$ ${_total.toStringAsFixed(2)}',
+                        CurrencyUtils.format(context, _total),
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                             color: AppColors.primary,

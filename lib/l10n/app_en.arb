@@ -1432,5 +1432,62 @@
   "tournamentDescription": "Complete as many lessons as possible this week to climb the ranking and earn exclusive rewards!",
   "participantsLabel": "PARTICIPANTS",
   "rankingPeriod": "Ranking period",
-  "rankingResetInfo": "The weekly ranking resets every Monday at 00:00.\nYour accumulated points stay in the history."
+  "rankingResetInfo": "The weekly ranking resets every Monday at 00:00.\nYour accumulated points stay in the history.",
+  "storeFeatBasicModules": "Access to basic modules",
+  "storeFeatLimitedBattery": "Limited battery (recharges 5 min/unit)",
+  "storeFeatPublicRanking": "Public ranking",
+  "storeFeatBasicAchievements": "Basic achievements",
+  "storeFeatAllFree": "Everything in Free",
+  "storeFeatInfiniteBattery": "Infinite battery ∞",
+  "storeFeatIntermediateModules": "Access to intermediate modules",
+  "storeFeatChatSupport": "Chat support",
+  "storeFeatEnrollmentProof": "Enrollment proof required",
+  "storeFeatAllStudent": "Everything in Student",
+  "storeFeatAllModulesUnlocked": "All modules unlocked",
+  "storeFeatPvpDuels": "PvP duels",
+  "storeFeatDigitalCertificates": "Digital certificates",
+  "storeFeatPrioritySupport": "Priority support",
+  "storeFeatAllPro": "Everything in Pro",
+  "storeFeatExclusiveAdvanced": "Exclusive advanced content",
+  "storeFeatMonthlyMentoring": "Monthly group mentoring",
+  "storeFeatEarlyAccess": "Early access to new features",
+  "storeFeatAllPremiumPerUser": "Everything in Premium per user",
+  "storeFeatInfiniteBatteryAll": "Infinite battery ∞ for everyone",
+  "storeFeatAdminPanel": "Admin panel",
+  "storeFeatTeamReports": "Team progress reports",
+  "storeFeatHrIntegration": "HR integration",
+  "storeFeatDedicatedManager": "Dedicated account manager",
+  "storeBadgeAffordable": "AFFORDABLE",
+  "storeBadgeMostPopular": "MOST POPULAR",
+  "storeBadgePremium": "PREMIUM",
+  "storeBadgeBusiness": "BUSINESS",
+  "storeSave17": "Save 17%",
+  "storeBilledAnnual": "Billed annually",
+  "storePerMonth": "/mo",
+  "storePerUserPerMonth": "/user/mo",
+  "storeBilledAnnuallySuffix": "billed annually",
+  "storeMinUsersBilledAnnual": "Min. {count} users • Billed annually",
+  "@storeMinUsersBilledAnnual": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "storeOrAnnualPlan": "Or {label} on the annual plan",
+  "@storeOrAnnualPlan": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "trialActiveRemaining": "{days, plural, =1{TRIAL ACTIVE — 1 day left} other{TRIAL ACTIVE — {days} days left}}",
+  "@trialActiveRemaining": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  }
 }
