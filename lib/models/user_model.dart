@@ -40,6 +40,18 @@ class UserModel {
   final String? photoUrl;
   final String role;
   bool get isAdmin => role.trim().toLowerCase() == 'admin';
+
+  /// Verdadeiro para qualquer usuário com acesso pago ativo
+  /// (premium, em trial, ou com plano pro/premium/student/business).
+  /// Usado p/ liberar a bateria infinita e demais benefícios.
+  bool get isSubscriber {
+    if (isPremium || isOnTrial) return true;
+    final plan = subscriptionPlanId?.trim().toLowerCase();
+    return plan == 'pro' ||
+        plan == 'premium' ||
+        plan == 'student' ||
+        plan == 'business';
+  }
   final String? profession;
   final int xp;
   final int level;

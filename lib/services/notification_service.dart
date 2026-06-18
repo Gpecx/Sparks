@@ -268,19 +268,43 @@ class NotificationService extends ChangeNotifier {
   }
 
   /// Mark all notifications as read for the user.
+  ///
+  /// Não filtramos por `where('read', isEqualTo: false)`: docs criados sem o
+  /// campo `read` (ex.: notificação de level-up) não casam com essa query e
+  /// ficavam "presos" como não lidos para sempre. Varremos todos os docs e
+  /// marcamos como lidos os que ainda não estão.
   Future<void> markAllRead(String uid) async {
-    final batch = _db.batch();
-    final unreadDocs = await _db
+    final all = await _db
         .collection('users')
         .doc(uid)
         .collection('notifications')
-        .where('read', isEqualTo: false)
         .get();
-        
-    for (final doc in unreadDocs.docs) {
+
+    final batch = _db.batch();
+    var pending = 0;
+    for (final doc in all.docs) {
+      if (doc.data()['read'] == true) continue;
       batch.update(doc.reference, {'read': true});
+      pending++;
     }
+    if (pending == 0) return;
     await batch.commit();
+
+    // Reflete imediatamente na UI mesmo antes do snapshot do stream chegar.
+    _notifications = _notifications
+        .map((n) => n.read
+            ? n
+            : SparkNotification(
+                id: n.id,
+                type: n.type,
+                title: n.title,
+                body: n.body,
+                emoji: n.emoji,
+                createdAt: n.createdAt,
+                read: true,
+              ))
+        .toList();
+    notifyListeners();
   }
   
   /// Delete a specific notification.

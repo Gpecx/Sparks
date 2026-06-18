@@ -1069,12 +1069,28 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen>
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(batteryIcon, color: color, size: 16),
-          const SizedBox(width: 4),
-          Text(
-            _energyCtrl.energyDisplay,
-            style: TextStyle(color: color, fontWeight: FontWeight.w700, fontSize: 13),
-          ),
+          if (_energyCtrl.isPremiumUser)
+            // Mesma bateria dos não-assinantes, com o ∞ branco no meio (pode vazar nas laterais)
+            Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.center,
+              children: [
+                Icon(Icons.battery_full, color: color, size: 20),
+                Transform.translate(
+                  offset: const Offset(0, 1),
+                  child: const Icon(Icons.all_inclusive, color: Colors.white, size: 14),
+                ),
+              ],
+            )
+          else
+            Icon(batteryIcon, color: color, size: 20),
+          if (!_energyCtrl.isPremiumUser) ...[
+            const SizedBox(width: 4),
+            Text(
+              _energyCtrl.energyDisplay,
+              style: TextStyle(color: color, fontWeight: FontWeight.w700, fontSize: 13),
+            ),
+          ],
           if (_energyCtrl.isRecharging) ...[
             const SizedBox(width: 6),
             Text(

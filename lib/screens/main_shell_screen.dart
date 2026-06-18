@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:spark_app/controllers/energy_controller.dart';
 import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
@@ -128,6 +129,23 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
     final l10n = AppLocalizations.of(context)!;
     final isTestMode = ref.watch(devModeProvider);
     final isAdmin = ref.watch(userModelProvider.select((user) => user.value?.isAdmin ?? false));
+
+    // Sincroniza o status de assinante com a bateria de energia (bateria
+    // infinita ∞ para quem tem plano ativo). Sem isso, a flag só era
+    // marcada logo após o checkout do trial e nunca ao reabrir o app.
+    ref.listen<bool>(
+      userModelProvider.select((user) => user.value?.isSubscriber ?? false),
+      (prev, isSubscriber) => EnergyController().setPremium(isSubscriber),
+    );
+    // Sync inicial (caso o provider já tenha dado em cache quando o shell
+    // monta, o listen acima não dispara — então aplicamos o valor atual).
+    final isSubscriberNow =
+        ref.read(userModelProvider).value?.isSubscriber ?? false;
+    if (EnergyController().isPremiumUser != isSubscriberNow) {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => EnergyController().setPremium(isSubscriberNow),
+      );
+    }
 
     return LayoutBuilder(
       builder: (context, constraints) {

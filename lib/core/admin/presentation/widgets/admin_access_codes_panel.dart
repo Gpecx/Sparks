@@ -153,6 +153,14 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
     );
   }
 
+  void _copyCode(String code) {
+    if (code.isEmpty) return;
+    Clipboard.setData(ClipboardData(text: code));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Código $code copiado.')),
+    );
+  }
+
   Future<void> _revoke(String code) async {
     try {
       await _service.revoke(code);
@@ -298,6 +306,11 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
                 child: Text(status,
                     style: TextStyle(
                         color: statusColor, fontSize: 11, fontWeight: FontWeight.bold)),
+              ),
+              IconButton(
+                onPressed: () => _copyCode(c['code']?.toString() ?? ''),
+                icon: const Icon(Icons.copy, size: 18, color: AppColors.textSecondary),
+                tooltip: 'Copiar código',
               ),
               if (active && !exhausted)
                 IconButton(
