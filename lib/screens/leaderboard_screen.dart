@@ -80,6 +80,10 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
   int _paginatedGlobalCount = 10;
   static const int _pageSize = 10;
 
+  // Cache de fotos resolvidas a partir de public_profiles (uid → photoUrl).
+  // Evita refazer leituras a cada atualização do stream de ranking.
+  final Map<String, String?> _photoCache = {};
+
   @override
   void initState() {
     super.initState();
@@ -118,6 +122,11 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
             .toList();
         for (int i = 0; i < data.length; i++) {
           data[i].position = i + 1;
+          // Aplica foto já em cache (pode estar mais atualizada que o ranking).
+          final cached = _photoCache[data[i].uid];
+          if (cached != null && cached.isNotEmpty) {
+            data[i].photoUrl = cached;
+          }
         }
         if (mounted) {
           setState(() {
@@ -126,6 +135,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
             _errorGlobal = null;
           });
         }
+        _enrichMissingPhotos(data);
       },
       onError: (e) {
         if (mounted) {
@@ -136,6 +146,41 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         }
       },
     );
+  }
+
+  // ── Enriquece fotos faltantes a partir de public_profiles ───────
+  // A doc de ranking só grava photoUrl no momento do addXp, então quem
+  // mudou (ou nunca tinha) a foto aparece sem avatar. public_profiles é
+  // o espelho mantido atualizado pelo servidor — buscamos de lá apenas
+  // os uids ainda não resolvidos e atualizamos a lista em memória.
+  Future<void> _enrichMissingPhotos(List<RankingEntry> entries) async {
+    final pending = entries
+        .where((e) =>
+            (e.photoUrl == null || e.photoUrl!.isEmpty) &&
+            !_photoCache.containsKey(e.uid))
+        .map((e) => e.uid)
+        .toSet()
+        .toList();
+    if (pending.isEmpty) return;
+
+    var didUpdate = false;
+    await Future.wait(pending.map((uid) async {
+      try {
+        final doc = await _db.collection('public_profiles').doc(uid).get();
+        final photo = doc.data()?['photoUrl'] as String?;
+        _photoCache[uid] = photo; // marca como resolvido (mesmo se null)
+        if (photo != null && photo.isNotEmpty) {
+          for (final e in _globalPlayers) {
+            if (e.uid == uid) e.photoUrl = photo;
+          }
+          didUpdate = true;
+        }
+      } catch (_) {
+        _photoCache[uid] = null;
+      }
+    }));
+
+    if (didUpdate && mounted) setState(() {});
   }
 
   // ── Real-time listener para o ranking de clãs ───────────────────
@@ -424,10 +469,11 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       weeklyXp = player.weeklyXp;
       
       avatar = photoUrl.isNotEmpty
-          ? CachedNetworkImage(
-              imageUrl: photoUrl,
+          ? Image.network(
+              photoUrl,
               fit: BoxFit.cover,
-              errorWidget: (c, u, e) => _defaultAvatar(color))
+              webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+              errorBuilder: (c, e, s) => _defaultAvatar(color))
           : _defaultAvatar(color);
     } else if (player is ClanRankingEntry) {
       isMe = player.id == myClanId;

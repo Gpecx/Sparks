@@ -466,9 +466,16 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         Text(AppLocalizations.of(context)!.notificationsTitle, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)),
                         if (service.unreadCount > 0)
                           TextButton(
-                            onPressed: () {
-                              service.markAllRead(uid);
+                            onPressed: () async {
+                              final messenger = ScaffoldMessenger.of(context);
                               Navigator.pop(ctx);
+                              try {
+                                await service.markAllRead(uid);
+                              } catch (e) {
+                                messenger.showSnackBar(
+                                  SnackBar(content: Text('Erro ao marcar notificações: $e')),
+                                );
+                              }
                             },
                             child: Text(AppLocalizations.of(context)!.markAllAsRead, style: TextStyle(color: AppColors.primary, fontSize: 12)),
                           ),
