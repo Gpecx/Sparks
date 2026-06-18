@@ -290,6 +290,23 @@ class UserService extends ChangeNotifier {
   }
 
   // ─────────────────────────────────────────────────────────────────
+  //  DESAFIO DIÁRIO
+  // ─────────────────────────────────────────────────────────────────
+
+  /// Marca o Desafio Diário como concluído agora. O próximo só fica
+  /// disponível 24h depois (mesma hora do dia seguinte ou após).
+  Future<void> markDailyChallengeCompleted() async {
+    if (uid.isEmpty) return;
+    try {
+      await _db.collection('users').doc(uid).update({
+        'lastDailyChallengeCompletedAt': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      debugPrint('[UserService.markDailyChallengeCompleted] error: $e');
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
   //  STREAK (SEQUÊNCIA DIÁRIA)
   // ─────────────────────────────────────────────────────────────────
 

@@ -67,6 +67,9 @@ class UserModel {
   final String? asaasSubscriptionId;
   final DateTime? lastStudyDate;
   final bool studiedToday;
+  /// Momento em que o usuário concluiu o último Desafio Diário.
+  /// O próximo só fica disponível 24h depois (mesma hora do dia seguinte ou após).
+  final DateTime? lastDailyChallengeCompletedAt;
   final String? clanId;
   final String? clanName;
   final List<String> unlockedBadgeIds;
@@ -99,6 +102,7 @@ class UserModel {
     this.asaasSubscriptionId,
     this.lastStudyDate,
     this.studiedToday = false,
+    this.lastDailyChallengeCompletedAt,
     this.clanId,
     this.clanName,
     this.unlockedBadgeIds = const [],
@@ -146,6 +150,9 @@ class UserModel {
       // Datas: verifica especificamente se é um Timestamp do Firebase
       lastStudyDate: data['lastStudyDate'] is Timestamp
           ? (data['lastStudyDate'] as Timestamp).toDate()
+          : null,
+      lastDailyChallengeCompletedAt: data['lastDailyChallengeCompletedAt'] is Timestamp
+          ? (data['lastDailyChallengeCompletedAt'] as Timestamp).toDate()
           : null,
 
       // Booleano: a comparação == true evita quebra se vier nulo ou texto
@@ -197,6 +204,9 @@ class UserModel {
       'asaasSubscriptionId': asaasSubscriptionId,
       'lastStudyDate':
           lastStudyDate != null ? Timestamp.fromDate(lastStudyDate!) : null,
+      'lastDailyChallengeCompletedAt': lastDailyChallengeCompletedAt != null
+          ? Timestamp.fromDate(lastDailyChallengeCompletedAt!)
+          : null,
       'studiedToday': studiedToday,
       'clanId': clanId,
       'clanName': clanName,
@@ -230,6 +240,7 @@ class UserModel {
     String? asaasSubscriptionId,
     DateTime? lastStudyDate,
     bool? studiedToday,
+    DateTime? lastDailyChallengeCompletedAt,
     String? clanId,
     String? clanName,
     List<String>? unlockedBadgeIds,
@@ -260,6 +271,8 @@ class UserModel {
       asaasSubscriptionId: asaasSubscriptionId ?? this.asaasSubscriptionId,
       lastStudyDate: lastStudyDate ?? this.lastStudyDate,
       studiedToday: studiedToday ?? this.studiedToday,
+      lastDailyChallengeCompletedAt:
+          lastDailyChallengeCompletedAt ?? this.lastDailyChallengeCompletedAt,
       clanId: clanId ?? this.clanId,
       clanName: clanName ?? this.clanName,
       unlockedBadgeIds: unlockedBadgeIds ?? this.unlockedBadgeIds,

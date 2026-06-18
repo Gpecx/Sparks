@@ -225,6 +225,14 @@
   "xpProgress": "{current} / {total} XP",
   "totalXp": "Total XP: {xp} XP",
   "dailyChallengeTitle": "Daily Challenge",
+  "dailyChallengePlaySubtitle": "5 questions • Tap to play",
+  "dailyChallengeAvailableIn": "Available in {time}",
+  "@dailyChallengeAvailableIn": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "dailyChallengeLoading": "Picking questions...",
+  "dailyChallengeEmpty": "No questions available yet",
+  "dailyChallengeDoneToday": "Done for today! Come back tomorrow",
   "adminTestAccess": "Admin Test Access",
   "comingSoonLabel": "Coming soon...",
   "comingSoonUpper": "COMING SOON",

@@ -9,6 +9,7 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/services/access_control_service.dart';
 import 'package:spark_app/services/analytics_service.dart';
+import 'package:spark_app/providers/user_provider.dart';
 import 'package:spark_app/widgets/plan_widgets.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
 
@@ -368,6 +369,19 @@ class _ChapterReaderScreenState extends ConsumerState<ChapterReaderScreen> {
       completedChapters: done,
       completed: allDone,
     );
+
+    // Concluir um estudo (capítulo de e-book) também conta como atividade do
+    // dia — alimenta streak e dias ativos, mesmo sem jogar nenhuma lição.
+    // Idempotente por dia (registerStudyActivity ignora se já estudou hoje).
+    Future.microtask(() async {
+      try {
+        await ref.read(userServiceProvider).registerStudyActivity()
+            .timeout(const Duration(seconds: 15));
+      } catch (e) {
+        debugPrint('[EbookReader] Erro ao registrar atividade de estudo: $e');
+      }
+    });
+
     if (mounted) {
       final l10n = AppLocalizations.of(context)!;
       SparkSnack.success(
