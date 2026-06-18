@@ -11,6 +11,7 @@ import 'widgets/admin_cards.dart';
 import 'widgets/admin_content_panel.dart';
 import 'widgets/admin_support_panel.dart';
 import 'widgets/admin_access_codes_panel.dart';
+import 'widgets/admin_users_panel.dart';
 
 class AdminDashboardPage extends ConsumerWidget {
   const AdminDashboardPage({super.key});
@@ -132,6 +133,7 @@ class AdminDashboardPage extends ConsumerWidget {
     switch (state.sidebarIndex) {
       case 0: return _buildOverview(context, ref);
       case 1: return _getContentTab(context, ref, state, controller, isDesktop, isTablet);
+      case 2: return const AdminUsersPanel();
       case 4: return const AdminSupportPanel();
       case 5: return const AdminAccessCodesPanel();
       default: return const Center(child: Text('Em desenvolvimento', style: TextStyle(color: Colors.white)));

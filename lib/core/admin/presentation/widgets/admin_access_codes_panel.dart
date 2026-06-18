@@ -173,6 +173,28 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
     }
   }
 
+  /// Formata os resgatadores de um código: "Nome (email)" por pessoa.
+  /// Cai para o email, ou um uid encurtado, quando o nome não está disponível.
+  String _redeemersLabel(List redeemers, List redeemedBy) {
+    if (redeemers.isNotEmpty) {
+      return redeemers.map((r) {
+        final m = Map<String, dynamic>.from(r as Map);
+        final name = (m['name'] as String?)?.trim() ?? '';
+        final email = (m['email'] as String?)?.trim() ?? '';
+        final uid = (m['uid'] as String?) ?? '';
+        if (name.isNotEmpty && email.isNotEmpty) return '$name ($email)';
+        if (name.isNotEmpty) return name;
+        if (email.isNotEmpty) return email;
+        return uid.length > 8 ? '${uid.substring(0, 8)}…' : uid;
+      }).join(', ');
+    }
+    // Fallback: só temos os uids (resposta antiga do backend).
+    return redeemedBy
+        .map((u) => u.toString())
+        .map((u) => u.length > 8 ? '${u.substring(0, 8)}…' : u)
+        .join(', ');
+  }
+
   Widget _field(TextEditingController c, String label, TextInputType type) {
     return TextField(
       controller: c,
@@ -255,6 +277,7 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
         final used = (c['usedCount'] ?? 0) as int;
         final maxUses = (c['maxUses'] ?? 1) as int;
         final redeemed = (c['redeemedBy'] as List?) ?? const [];
+        final redeemers = (c['redeemers'] as List?) ?? const [];
         final label = c['label'] as String?;
         final exhausted = used >= maxUses;
         final status = !active
@@ -290,10 +313,26 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
                     const SizedBox(height: 4),
                     Text(
                       '${c['durationDays'] ?? 30} dias · $used/$maxUses uso(s)'
-                      '${label != null && label.isNotEmpty ? ' · $label' : ''}'
-                      '${redeemed.isNotEmpty ? ' · por ${redeemed.first}' : ''}',
+                      '${label != null && label.isNotEmpty ? ' · $label' : ''}',
                       style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
                     ),
+                    if (redeemers.isNotEmpty || redeemed.isNotEmpty) ...[
+                      const SizedBox(height: 4),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(Icons.person, size: 13, color: AppColors.primary),
+                          const SizedBox(width: 4),
+                          Expanded(
+                            child: Text(
+                              'Resgatado por: ${_redeemersLabel(redeemers, redeemed)}',
+                              style: const TextStyle(
+                                  color: AppColors.textSecondary, fontSize: 12),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ],
                 ),
               ),

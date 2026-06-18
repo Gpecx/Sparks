@@ -18,7 +18,7 @@
  *                        jogadores (única via de escrita de ELO de duelo).
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cleanupStaleDuels = exports.cleanupOldRankings = exports.syncPublicProfile = exports.getBotDuelQuestions = exports.leaveDuel = exports.finalizeDuel = exports.submitDuelAnswer = exports.leaveDuelQueue = exports.joinDuelQueue = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.grantAdminPremium = exports.processTrialExpiry = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = exports.onUserCreated = void 0;
+exports.cleanupStaleDuels = exports.cleanupOldRankings = exports.syncPublicProfile = exports.getBotDuelQuestions = exports.leaveDuel = exports.finalizeDuel = exports.submitDuelAnswer = exports.leaveDuelQueue = exports.joinDuelQueue = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.grantAdminPremium = exports.processTrialExpiry = exports.listUsers = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = exports.onUserCreated = void 0;
 const admin = require("firebase-admin");
 const firestore_1 = require("firebase-admin/firestore");
 const crypto = require("crypto");
@@ -995,6 +995,44 @@ async function assertAdmin(uid) {
         throw new https_1.HttpsError("permission-denied", "Apenas administradores.");
     }
 }
+/**
+ * Resolve uids -> { uid, name, email } mesclando o doc /users (displayName/email)
+ * com o registro do Firebase Auth (preenche email/nome faltantes). Usado para
+ * mostrar POR QUEM cada código foi resgatado e a listagem de usuários do admin.
+ */
+async function resolveUserInfos(uids) {
+    const out = new Map();
+    const unique = [...new Set(uids.filter(Boolean))];
+    if (unique.length === 0)
+        return out;
+    // /users (displayName + email quando houver)
+    const docs = await db.getAll(...unique.map((u) => db.collection("users").doc(u)));
+    const fromDoc = new Map();
+    docs.forEach((d) => {
+        const data = d.data() || {};
+        fromDoc.set(d.id, { name: data["displayName"], email: data["email"] });
+    });
+    // Auth (fonte confiável de email/nome) — em lotes de 100
+    const fromAuth = new Map();
+    for (let i = 0; i < unique.length; i += 100) {
+        const chunk = unique.slice(i, i + 100).map((u) => ({ uid: u }));
+        try {
+            const res = await admin.auth().getUsers(chunk);
+            res.users.forEach((u) => fromAuth.set(u.uid, { name: u.displayName, email: u.email }));
+        }
+        catch (e) {
+            v2_1.logger.warn("[resolveUserInfos] getUsers erro:", e);
+        }
+    }
+    for (const uid of unique) {
+        const d = fromDoc.get(uid) || {};
+        const a = fromAuth.get(uid) || {};
+        const name = (d.name && d.name.trim()) || (a.name && a.name.trim()) || "";
+        const email = d.email || a.email || null;
+        out.set(uid, { uid, name, email });
+    }
+    return out;
+}
 // redeemAccessCode — professor resgata o código e ganha acesso por durationDays.
 exports.redeemAccessCode = (0, https_1.onCall)({
     enforceAppCheck: ENFORCE_APP_CHECK,
@@ -1144,19 +1182,28 @@ exports.listAccessCodes = (0, https_1.onCall)({
         .orderBy("createdAt", "desc")
         .limit(500)
         .get();
+    // Resolve, de uma vez, todos os uids que resgataram qualquer código.
+    const allUids = new Set();
+    snap.docs.forEach((d) => { var _a; return ((_a = d.data()["redeemedBy"]) !== null && _a !== void 0 ? _a : []).forEach((u) => allUids.add(u)); });
+    const infos = await resolveUserInfos([...allUids]);
     const codes = snap.docs.map((d) => {
         var _a, _b, _c, _d, _e, _f;
         const c = d.data();
         const createdAt = c["createdAt"];
+        const lastRedeemedAt = c["lastRedeemedAt"];
+        const redeemedBy = (_a = c["redeemedBy"]) !== null && _a !== void 0 ? _a : [];
         return {
             code: d.id,
-            durationDays: (_a = c["durationDays"]) !== null && _a !== void 0 ? _a : 30,
-            active: (_b = c["active"]) !== null && _b !== void 0 ? _b : false,
-            usedCount: (_c = c["usedCount"]) !== null && _c !== void 0 ? _c : 0,
-            maxUses: (_d = c["maxUses"]) !== null && _d !== void 0 ? _d : 1,
-            redeemedBy: (_e = c["redeemedBy"]) !== null && _e !== void 0 ? _e : [],
+            durationDays: (_b = c["durationDays"]) !== null && _b !== void 0 ? _b : 30,
+            active: (_c = c["active"]) !== null && _c !== void 0 ? _c : false,
+            usedCount: (_d = c["usedCount"]) !== null && _d !== void 0 ? _d : 0,
+            maxUses: (_e = c["maxUses"]) !== null && _e !== void 0 ? _e : 1,
+            redeemedBy,
+            // Quem resgatou (nome + email) — para o admin ver por quem cada chave foi usada.
+            redeemers: redeemedBy.map((u) => { var _a; return (_a = infos.get(u)) !== null && _a !== void 0 ? _a : { uid: u, name: "", email: null }; }),
             label: (_f = c["label"]) !== null && _f !== void 0 ? _f : null,
             createdAt: createdAt ? createdAt.toDate().toISOString() : null,
+            lastRedeemedAt: lastRedeemedAt ? lastRedeemedAt.toDate().toISOString() : null,
         };
     });
     return { codes };
@@ -1183,6 +1230,60 @@ exports.revokeAccessCode = (0, https_1.onCall)({
     await ref.update({ active: false, updatedAt: admin.firestore.FieldValue.serverTimestamp() });
     v2_1.logger.info(`[revokeAccessCode] uid=${uid} revogou ${code}.`);
     return { success: true };
+});
+// listUsers — admin lista todos os usuários com o plano/origem de acesso.
+// Resolve nome+email via /users + Firebase Auth e classifica o plano em:
+//   subscription (assinatura paga) · voucher (cortesia por código) · premium · free
+exports.listUsers = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid)
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("admin", uid, "listUsers"), rateLimiter_1.RATE_ADMIN.limit, rateLimiter_1.RATE_ADMIN.windowMs);
+    // Sem orderBy — docs sem createdAt não podem ser excluídos da listagem.
+    const snap = await db.collection("users").limit(1000).get();
+    const infos = await resolveUserInfos(snap.docs.map((d) => d.id));
+    const now = Date.now();
+    const users = snap.docs.map((d) => {
+        var _a, _b, _c, _d, _e, _f;
+        const u = d.data();
+        const info = infos.get(d.id);
+        const compExp = u["compAccessExpiresAt"];
+        const compActive = compExp ? compExp.toMillis() > now : false;
+        const isPremium = u["isPremium"] === true;
+        let plan;
+        if (u["subscriptionPlanId"] != null && isPremium)
+            plan = "subscription";
+        else if (u["compAccessSource"] === "access_code" && compActive)
+            plan = "voucher";
+        else if (isPremium)
+            plan = "premium";
+        else
+            plan = "free";
+        const createdAt = u["createdAt"];
+        return {
+            uid: d.id,
+            name: (info === null || info === void 0 ? void 0 : info.name) || "",
+            email: (info === null || info === void 0 ? void 0 : info.email) || u["email"] || null,
+            role: (_a = u["role"]) !== null && _a !== void 0 ? _a : "técnico",
+            plan,
+            isPremium,
+            subscriptionPlanId: (_b = u["subscriptionPlanId"]) !== null && _b !== void 0 ? _b : null,
+            compAccessSource: (_c = u["compAccessSource"]) !== null && _c !== void 0 ? _c : null,
+            compAccessCode: (_d = u["compAccessCode"]) !== null && _d !== void 0 ? _d : null,
+            compAccessExpiresAt: compExp ? compExp.toDate().toISOString() : null,
+            weeklyXp: (_e = u["weeklyXp"]) !== null && _e !== void 0 ? _e : 0,
+            xp: (_f = u["xp"]) !== null && _f !== void 0 ? _f : 0,
+            createdAt: createdAt ? createdAt.toDate().toISOString() : null,
+        };
+    });
+    v2_1.logger.info(`[listUsers] uid=${uid} listou ${users.length} usuário(s).`);
+    return { users };
 });
 // ────────────────────────────────────────────────────────────────
 // 11. processTrialExpiry — Agendada diariamente (Cloud Scheduler)
