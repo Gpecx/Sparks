@@ -153,10 +153,6 @@ List<SubscriptionPlan> subscriptionPlans(BuildContext context) => [
     features: [
       AppLocalizations.of(context)!.storeFeatAllPremiumPerUser,
       AppLocalizations.of(context)!.storeFeatInfiniteBatteryAll,
-      AppLocalizations.of(context)!.storeFeatAdminPanel,
-      AppLocalizations.of(context)!.storeFeatTeamReports,
-      AppLocalizations.of(context)!.storeFeatHrIntegration,
-      AppLocalizations.of(context)!.storeFeatDedicatedManager,
     ],
     badge: AppLocalizations.of(context)!.storeBadgeBusiness,
   ),
