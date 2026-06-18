@@ -22,6 +22,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 //  - Posição do usuário/clã destacada em todas as listas
 // ─────────────────────────────────────────────────────────────────
 
+/// UIDs ocultados do ranking global (contas de desenvolvimento/teste que
+/// distorcem a competição). Filtrados na leitura do ranking semanal.
+const Set<String> kHiddenRankingUids = {
+  'jhcX8vIPoUNs2JvhcxehFH5CR6y1', // Gabriel Chiarato Santana (programador)
+};
+
 class ClanRankingEntry {
   final String id;
   final String name;
@@ -115,6 +121,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       (snap) {
         final data = snap.docs
             .map((doc) => RankingEntry.fromFirestore(doc))
+            .where((e) => !kHiddenRankingUids.contains(e.uid))
             .toList();
         for (int i = 0; i < data.length; i++) {
           data[i].position = i + 1;
