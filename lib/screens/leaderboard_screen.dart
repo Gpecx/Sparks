@@ -26,6 +26,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 /// distorcem a competição). Filtrados na leitura do ranking semanal.
 const Set<String> kHiddenRankingUids = {
   'jhcX8vIPoUNs2JvhcxehFH5CR6y1', // Gabriel Chiarato Santana (programador)
+  'bEROZ3kSCNanW9X4vTfqNI2Ugl02', // Fábio Souza — conta duplicada (menor); mantém só a de 483xp
 };
 
 class ClanRankingEntry {
