@@ -91,6 +91,10 @@ class DuelMatch {
   final bool player2Done;
   final String? winnerId;
 
+  /// UID de quem abandonou o duelo (saiu no meio). `null` se ninguém saiu.
+  /// Quando preenchido, o outro jogador vence por W.O.
+  final String? abandonedBy;
+
   const DuelMatch({
     required this.id,
     required this.player1Uid,
@@ -109,6 +113,7 @@ class DuelMatch {
     required this.player1Done,
     required this.player2Done,
     this.winnerId,
+    this.abandonedBy,
   });
 
   factory DuelMatch.fromFirestore(DocumentSnapshot doc) {
@@ -138,10 +143,14 @@ class DuelMatch {
       player1Done: d['player1Done'] as bool? ?? false,
       player2Done: d['player2Done'] as bool? ?? false,
       winnerId: d['winnerId'] as String?,
+      abandonedBy: d['abandonedBy'] as String?,
     );
   }
 
   bool get isFinished => status == 'finished';
+
+  /// `true` quando o OPONENTE do [uid] abandonou (saiu) o duelo.
+  bool opponentLeft(String uid) => abandonedBy != null && abandonedBy != uid;
 
   // ── Perspectiva relativa ao jogador local ──────────────────────────
   bool amPlayer1(String uid) => player1Uid == uid;

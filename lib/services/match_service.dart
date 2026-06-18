@@ -50,6 +50,16 @@ class MatchService {
     }
   }
 
+  /// Abandona um duelo EM ANDAMENTO (saiu no meio): o servidor encerra a
+  /// partida dando a vitória (e o ELO) ao oponente que continuou. Best-effort.
+  Future<void> leaveDuel(String matchId) async {
+    try {
+      await _functions.httpsCallable('leaveDuel').call({'matchId': matchId});
+    } catch (e) {
+      debugPrint('[MatchService.leaveDuel] $e');
+    }
+  }
+
   /// Emite o `matchId` assim que outro jogador nos parear (listener do nosso
   /// próprio doc de fila).
   Stream<String?> myQueueMatchStream() {

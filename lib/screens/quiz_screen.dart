@@ -1147,9 +1147,24 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(batteryIcon, color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, size: 20),
-                                    const SizedBox(width: 4),
-                                    Text(_energyCtrl.energyDisplay, style: TextStyle(color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, fontSize: 16, fontWeight: FontWeight.w700)),
+                                    if (_energyCtrl.isPremiumUser)
+                                      // Mesma bateria dos não-assinantes, com o ∞ branco no meio (pode vazar nas laterais)
+                                      Stack(
+                                        clipBehavior: Clip.none,
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Icon(Icons.battery_full, color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, size: 20),
+                                          Transform.translate(
+                                            offset: const Offset(0, 1),
+                                            child: const Icon(Icons.all_inclusive, color: Colors.white, size: 14),
+                                          ),
+                                        ],
+                                      )
+                                    else ...[
+                                      Icon(batteryIcon, color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, size: 20),
+                                      const SizedBox(width: 4),
+                                      Text(_energyCtrl.energyDisplay, style: TextStyle(color: _energyCtrl.hasEnergy ? AppColors.gold : Colors.redAccent, fontSize: 16, fontWeight: FontWeight.w700)),
+                                    ],
                                     if (_energyCtrl.isRecharging) ...[
                                       const SizedBox(width: 6),
                                       Text(_energyCtrl.regenTimeRemaining, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),

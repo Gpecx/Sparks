@@ -650,6 +650,7 @@ class UserService extends ChangeNotifier {
         'level': newLevel,
         'fcmToken': token,
         'sent': false,
+        'read': false,
         'createdAt': FieldValue.serverTimestamp(),
       });
       debugPrint('[FCM] Evento level_up registrado → nível $newLevel');
@@ -694,7 +695,10 @@ class AddXpResult {
 class RankingEntry {
   final String uid;
   final String displayName;
-  final String? photoUrl;
+  /// Mutável: a doc de ranking só grava a foto no momento do addXp, então
+  /// pode vir nula/desatualizada. O leaderboard preenche a partir de
+  /// public_profiles (espelho sempre atualizado pelo trigger).
+  String? photoUrl;
   final int weeklyXp;
   final String? clanId;
   final String? clanName;
