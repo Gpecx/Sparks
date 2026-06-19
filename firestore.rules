@@ -176,6 +176,13 @@ service cloud.firestore {
     // A subcoleção 'trails' estava AUSENTE nas regras anteriores, causando falha silenciosa
     // nas escritas e leituras de trilhas, lições e questões.
 
+    // Desafio Diário: sorteia questões de TODO o banco via collectionGroup('questions').
+    // A regra aninhada abaixo NÃO cobre consultas de collection group — é preciso
+    // este match recursivo para liberar a leitura em qualquer caminho.
+    match /{path=**}/questions/{questionId} {
+      allow read: if isAuthenticated();
+    }
+
     match /categories/{catId} {
       allow read: if isAuthenticated();
       allow write: if isAdmin();

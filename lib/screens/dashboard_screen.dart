@@ -13,7 +13,10 @@ import 'package:spark_app/screens/settings_screen.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
+import 'package:spark_app/screens/quiz_screen.dart';
 import 'package:spark_app/services/covenant_service.dart';
+import 'package:spark_app/services/daily_challenge_service.dart';
+import 'package:spark_app/providers/language_provider.dart';
 import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/user_service.dart';
 
@@ -628,6 +631,126 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   }
 
   // ── Gamification Center com dados reais ─────────────────────────
+  // ─── DESAFIO DIÁRIO ──────────────────────────────────────────────────────
+  // Card no centro de gamificação. Disponível 1x a cada 24h: ao concluir, só
+  // libera no dia seguinte na mesma hora (ou após). Questões são sorteadas
+  // aleatoriamente do banco já existente.
+  Widget _buildDailyChallenge(UserModel? userModel) {
+    final l10n = AppLocalizations.of(context)!;
+    final lastDone = userModel?.lastDailyChallengeCompletedAt;
+    final available = DailyChallengeService.isAvailable(lastDone);
+
+    if (available) {
+      return _ResponsiveTapWidget(
+        onTap: _startDailyChallenge,
+        child: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.15),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.bolt, color: AppColors.primary, size: 22),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(l10n.dailyChallengeTitle, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+                  Text(l10n.dailyChallengePlaySubtitle, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios, color: AppColors.primary, size: 14),
+          ],
+        ),
+      );
+    }
+
+    // Em cooldown — mostra contagem regressiva até liberar.
+    final timeLeft = _formatRemaining(DailyChallengeService.remaining(lastDone));
+    return Opacity(
+      opacity: 0.55,
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.grey.withValues(alpha: 0.15),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.check_circle, color: Colors.grey, size: 22),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(l10n.dailyChallengeTitle, style: const TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w700)),
+                Text(l10n.dailyChallengeDoneToday, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.grey.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
+            ),
+            child: Text(l10n.dailyChallengeAvailableIn(timeLeft), style: const TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Formata uma duração como "5h 20m", "45m" ou "1m".
+  String _formatRemaining(Duration d) {
+    final h = d.inHours;
+    final m = d.inMinutes.remainder(60);
+    if (h > 0) return '${h}h ${m}m';
+    if (m > 0) return '${m}m';
+    return '1m';
+  }
+
+  Future<void> _startDailyChallenge() async {
+    final l10n = AppLocalizations.of(context)!;
+    final lang = ref.read(languageProvider).languageCode;
+
+    // Spinner enquanto sorteia as questões do banco.
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(child: CircularProgressIndicator(color: AppColors.primary)),
+    );
+
+    final questions = await DailyChallengeService().fetchRandomQuestions(lang: lang);
+    if (!mounted) return;
+    Navigator.of(context).pop(); // fecha o spinner
+
+    if (questions.isEmpty) {
+      SparkSnack.info(context, l10n.dailyChallengeEmpty);
+      return;
+    }
+
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => QuizScreen(
+          isDailyChallenge: true,
+          dailyQuestions: questions,
+        ),
+      ),
+    );
+    // Ao voltar, o stream do userModel já reflete o novo cooldown e o card
+    // se atualiza sozinho.
+  }
+
   Widget _buildGamificationCenter(UserModel? userModel) {
     final userService = ref.watch(userServiceProvider);
     final streak = userModel?.currentStreak ?? userService.currentStreak;
@@ -733,78 +856,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             padding: EdgeInsets.symmetric(vertical: 14),
             child: Divider(color: AppColors.cardBorder, height: 1),
           ),
-          // Desafio Diário — Em Breve
-          Builder(
-            builder: (context) {
-              final isAdmin = userModel?.isAdmin ?? userService.user?.isAdmin ?? false;
-              if (isAdmin) {
-                return _ResponsiveTapWidget(
-                  onTap: () {
-                    SparkSnack.info(context, 'Desafio Diário: Em desenvolvimento (Acesso Admin)');
-                  },
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withValues(alpha: 0.15),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(Icons.timer, color: AppColors.primary, size: 20),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(AppLocalizations.of(context)!.dailyChallengeTitle, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
-                            Text(AppLocalizations.of(context)!.adminTestAccess, style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
-                          ],
-                        ),
-                      ),
-                      const Icon(Icons.arrow_forward_ios, color: AppColors.primary, size: 14),
-                    ],
-                  ),
-                );
-              }
-              return Opacity(
-                opacity: 0.45,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withValues(alpha: 0.15),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.timer, color: Colors.grey, size: 20),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(AppLocalizations.of(context)!.dailyChallengeTitle, style: TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w700)),
-                          Text(AppLocalizations.of(context)!.comingSoonLabel, style: TextStyle(color: Colors.grey, fontSize: 12)),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withValues(alpha: 0.12),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
-                      ),
-                      child: Text(AppLocalizations.of(context)!.comingSoonUpper, style: TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
-                    ),
-                  ],
-                ),
-              );
-            }
-          ),
+          // Desafio Diário
+          _buildDailyChallenge(userModel),
         ],
       ),
     );

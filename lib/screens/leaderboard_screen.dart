@@ -11,7 +11,6 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/providers/user_provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  LEADERBOARD SCREEN — Versão com Firebase
@@ -579,11 +578,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       weeklyXp = player.weeklyXp;
       position = player.position;
 
-      avatar = player.photoUrl != null
-          ? CachedNetworkImage(
-              imageUrl: player.photoUrl!,
+      avatar = (player.photoUrl != null && player.photoUrl!.isNotEmpty)
+          ? Image.network(
+              player.photoUrl!,
               fit: BoxFit.cover,
-              errorWidget: (c, u, e) => _defaultAvatar(AppColors.primary))
+              webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+              errorBuilder: (c, e, s) => _defaultAvatar(AppColors.primary))
           : _defaultAvatar(AppColors.primary);
     } else if (player is ClanRankingEntry) {
       isMe = player.id == myClanId;

@@ -12,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spark_app/services/progress_service.dart';
 import 'package:spark_app/services/question_service.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/core/constants/fs.dart';
 import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/widgets/streak_lightning_emitter.dart';
 import 'package:spark_app/widgets/sparky_companion.dart';
@@ -27,6 +28,14 @@ class QuizScreen extends ConsumerStatefulWidget {
   final String? moduleId;
   final String? trailId;
 
+  /// Modo Desafio Diário: questões sorteadas do banco, sem vínculo a uma
+  /// lição/módulo. Não marca progresso de trilha — apenas concede XP e grava
+  /// o cooldown de 24h ao concluir.
+  final bool isDailyChallenge;
+
+  /// Questões pré-sorteadas para o Desafio Diário (modo [isDailyChallenge]).
+  final List<QuestionModel>? dailyQuestions;
+
   const QuizScreen({
     super.key,
     this.isEvaluation = false,
@@ -34,6 +43,8 @@ class QuizScreen extends ConsumerStatefulWidget {
     this.categoryId,
     this.moduleId,
     this.trailId,
+    this.isDailyChallenge = false,
+    this.dailyQuestions,
   });
 
   @override
@@ -206,7 +217,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
     _epicStreakController = AnimationController(vsync: this, duration: const Duration(milliseconds: 1500));
     _completionController = AnimationController(vsync: this, duration: const Duration(milliseconds: 2000));
 
-    if (widget.lesson != null) {
+    if (widget.isDailyChallenge) {
+      // Desafio Diário: questões já sorteadas do banco. Converte com l10n após
+      // o primeiro frame (precisa de context para os rótulos localizados).
+      _isLoading = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) => _prepareDailyChallenge());
+    } else if (widget.lesson != null) {
       if (widget.lesson!.questions.isNotEmpty) {
         // Lição local com questões — converte e usa imediatamente
         _questions
@@ -290,6 +306,47 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
         _noQuestionsFound = true;
       });
     }
+  }
+
+  /// Converte as questões pré-sorteadas do Desafio Diário para o formato
+  /// interno da tela, reusando [QuestionModel.toQuizMap].
+  void _prepareDailyChallenge() {
+    if (!mounted) return;
+    final models = widget.dailyQuestions ?? const <QuestionModel>[];
+    if (models.isEmpty) {
+      setState(() {
+        _isLoading = false;
+        _noQuestionsFound = true;
+      });
+      return;
+    }
+    final l10n = AppLocalizations.of(context)!;
+    // Pool de termos reais (respostas de lacunas) para enriquecer os
+    // distratores do minigame de preencher lacunas.
+    final blankPool = <String>{};
+    for (final q in models) {
+      if (q.type == 'fillInTheBlanks') {
+        for (final b in (q.blanks ?? const <Map<String, dynamic>>[])) {
+          final a = (b['answer'] as String?)?.trim();
+          if (a != null && a.isNotEmpty) blankPool.add(a);
+        }
+      }
+    }
+    _questions
+      ..clear()
+      ..addAll(models.map((q) => q.toQuizMap(
+            l10n.dailyChallengeTitle,
+            blankPool: blankPool,
+            trueFalseLabel: l10n.trueOrFalseQuestion,
+            dragMultiLabel: l10n.dragTermsToFillBlanks,
+            dragSingleLabel: l10n.dragTermToFillBlank,
+          )));
+    setState(() {
+      _isLoading = false;
+      _noQuestionsFound = false;
+    });
+    _initializeQuestionState();
+    _checkEnergy();
   }
 
   void _checkEnergy() {
@@ -478,6 +535,63 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
     final bool passed = widget.isEvaluation ? score >= 0.8 : score >= 0.7;
     int xpEarned = 0;
 
+    // Streak e dias ativos contam por TERMINAR a lição/desafio — passando ou
+    // não. Basta o usuário ter jogado até o fim. Idempotente por dia
+    // (registerStudyActivity ignora se já estudou hoje).
+    if (widget.lesson != null || widget.isDailyChallenge) {
+      Future.microtask(() async {
+        try {
+          await _userService.registerStudyActivity().timeout(const Duration(seconds: 15));
+        } catch (e) {
+          debugPrint('[QuizScreen] Erro ao registrar atividade de estudo: $e');
+        }
+      });
+    }
+
+    // Desafio Diário: grava o cooldown de 24h ao concluir (independente de
+    // acertar tudo) e concede XP quando passa. Não toca no progresso de trilha.
+    if (widget.isDailyChallenge) {
+      // Inicia o cooldown imediatamente — o usuário "terminou" o desafio de hoje.
+      _userService.markDailyChallengeCompleted();
+      if (passed) {
+        CovenantService().addProgress('cov_conhecimento', 1);
+        xpEarned = (score * 100).toInt() + (_totalCorrect * 10);
+        xpEarned = (xpEarned * _userService.xpMultiplier).toInt();
+        Future.microtask(() async {
+          try {
+            await _userService.addXp(xpEarned, source: 'daily_challenge')
+                .timeout(const Duration(seconds: 15));
+          } catch (e) {
+            debugPrint('[QuizScreen] Erro ao adicionar XP (desafio diário): $e');
+          }
+        });
+        // Atividade do dia já é registrada no topo de _onQuizComplete.
+      }
+
+      if (mounted) setState(() => _isCompleting = false);
+      HapticFeedback.vibrate();
+      if (mounted) {
+        if (passed) {
+          _completionController.forward(from: 0).then((_) {
+            if (mounted) {
+              _showQuizResultModal(true, score, xpEarned);
+              ref.read(sparkyCompanionProvider.notifier).celebrate(
+                    _totalCorrect == _questions.length
+                        ? 'Gabaritou o Desafio Diário! 🎉'
+                        : 'Desafio Diário concluído! ⚡',
+                  );
+            }
+          });
+        } else {
+          _showQuizResultModal(false, score, 0);
+          ref.read(sparkyCompanionProvider.notifier).sad(
+                'Desafio concluído! Volte amanhã 💪',
+              );
+        }
+      }
+      return;
+    }
+
     if (passed) {
       CovenantService().addProgress('cov_conhecimento', 1);
       // XP base
@@ -534,13 +648,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
           }
         });
 
-        Future.microtask(() async {
-          try {
-            await _userService.registerStudyActivity().timeout(const Duration(seconds: 15));
-          } catch (e) {
-            debugPrint('[QuizScreen] Erro ao registrar atividade de estudo: $e');
-          }
-        });
+        // Atividade do dia (streak/dias ativos) já é registrada no topo de
+        // _onQuizComplete — conta ao terminar, passando ou não.
 
         if (_totalCorrect == _questions.length) {
           Future.microtask(() async {
