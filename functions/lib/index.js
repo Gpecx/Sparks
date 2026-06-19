@@ -18,7 +18,7 @@
  *                        jogadores (única via de escrita de ELO de duelo).
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cleanupStaleDuels = exports.cleanupOldRankings = exports.syncPublicProfile = exports.getBotDuelQuestions = exports.leaveDuel = exports.finalizeDuel = exports.submitDuelAnswer = exports.leaveDuelQueue = exports.joinDuelQueue = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.grantAdminPremium = exports.processTrialExpiry = exports.listUsers = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = exports.onUserCreated = void 0;
+exports.cleanupStaleDuels = exports.cleanupOldRankings = exports.syncPublicProfile = exports.getBotDuelQuestions = exports.leaveDuel = exports.finalizeDuel = exports.submitDuelAnswer = exports.leaveDuelQueue = exports.joinDuelQueue = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.grantAdminPremium = exports.processTrialExpiry = exports.listUsers = exports.setAccessCodeNote = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = exports.onUserCreated = void 0;
 const admin = require("firebase-admin");
 const firestore_1 = require("firebase-admin/firestore");
 const crypto = require("crypto");
@@ -1187,7 +1187,7 @@ exports.listAccessCodes = (0, https_1.onCall)({
     snap.docs.forEach((d) => { var _a; return ((_a = d.data()["redeemedBy"]) !== null && _a !== void 0 ? _a : []).forEach((u) => allUids.add(u)); });
     const infos = await resolveUserInfos([...allUids]);
     const codes = snap.docs.map((d) => {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g;
         const c = d.data();
         const createdAt = c["createdAt"];
         const lastRedeemedAt = c["lastRedeemedAt"];
@@ -1202,6 +1202,8 @@ exports.listAccessCodes = (0, https_1.onCall)({
             // Quem resgatou (nome + email) — para o admin ver por quem cada chave foi usada.
             redeemers: redeemedBy.map((u) => { var _a; return (_a = infos.get(u)) !== null && _a !== void 0 ? _a : { uid: u, name: "", email: null }; }),
             label: (_f = c["label"]) !== null && _f !== void 0 ? _f : null,
+            // Anotação livre do admin (ex.: "enviado para Fulano / escola X").
+            note: (_g = c["note"]) !== null && _g !== void 0 ? _g : null,
             createdAt: createdAt ? createdAt.toDate().toISOString() : null,
             lastRedeemedAt: lastRedeemedAt ? lastRedeemedAt.toDate().toISOString() : null,
         };
@@ -1229,6 +1231,34 @@ exports.revokeAccessCode = (0, https_1.onCall)({
         throw new https_1.HttpsError("not-found", "Código não encontrado.");
     await ref.update({ active: false, updatedAt: admin.firestore.FieldValue.serverTimestamp() });
     v2_1.logger.info(`[revokeAccessCode] uid=${uid} revogou ${code}.`);
+    return { success: true };
+});
+// setAccessCodeNote — admin anota livremente em um código (ex.: "enviado para
+// Fulano / escola X"). Substitui a planilha/txt de controle manual.
+exports.setAccessCodeNote = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async (request) => {
+    var _a, _b, _c, _d, _e;
+    const uid = (_a = request.auth) === null || _a === void 0 ? void 0 : _a.uid;
+    if (!uid)
+        throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("admin", uid, "setAccessCodeNote"), rateLimiter_1.RATE_ADMIN.limit, rateLimiter_1.RATE_ADMIN.windowMs);
+    const code = ((_c = (_b = request.data) === null || _b === void 0 ? void 0 : _b.code) !== null && _c !== void 0 ? _c : "").toString().trim().toUpperCase();
+    if (!code)
+        throw new https_1.HttpsError("invalid-argument", "Código é obrigatório.");
+    const note = ((_e = (_d = request.data) === null || _d === void 0 ? void 0 : _d.note) !== null && _e !== void 0 ? _e : "").toString().slice(0, 280);
+    const ref = db.collection("access_codes").doc(code);
+    const snap = await ref.get();
+    if (!snap.exists)
+        throw new https_1.HttpsError("not-found", "Código não encontrado.");
+    await ref.update({
+        note: note.length > 0 ? note : admin.firestore.FieldValue.delete(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    v2_1.logger.info(`[setAccessCodeNote] uid=${uid} anotou ${code}.`);
     return { success: true };
 });
 // listUsers — admin lista todos os usuários com o plano/origem de acesso.

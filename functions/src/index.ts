@@ -1668,6 +1668,8 @@ export const listAccessCodes = onCall(
           (u) => infos.get(u) ?? { uid: u, name: "", email: null }
         ),
         label: c["label"] ?? null,
+        // Anotação livre do admin (ex.: "enviado para Fulano / escola X").
+        note: c["note"] ?? null,
         createdAt: createdAt ? createdAt.toDate().toISOString() : null,
         lastRedeemedAt: lastRedeemedAt ? lastRedeemedAt.toDate().toISOString() : null,
       };
@@ -1701,6 +1703,43 @@ export const revokeAccessCode = onCall(
     await ref.update({ active: false, updatedAt: admin.firestore.FieldValue.serverTimestamp() });
 
     logger.info(`[revokeAccessCode] uid=${uid} revogou ${code}.`);
+    return { success: true };
+  }
+);
+
+// setAccessCodeNote — admin anota livremente em um código (ex.: "enviado para
+// Fulano / escola X"). Substitui a planilha/txt de controle manual.
+export const setAccessCodeNote = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ code?: string; note?: string }>
+  ): Promise<{ success: boolean }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await checkRateLimit(
+      rateLimitKey("admin", uid, "setAccessCodeNote"),
+      RATE_ADMIN.limit,
+      RATE_ADMIN.windowMs
+    );
+
+    const code = (request.data?.code ?? "").toString().trim().toUpperCase();
+    if (!code) throw new HttpsError("invalid-argument", "Código é obrigatório.");
+    const note = (request.data?.note ?? "").toString().slice(0, 280);
+
+    const ref = db.collection("access_codes").doc(code);
+    const snap = await ref.get();
+    if (!snap.exists) throw new HttpsError("not-found", "Código não encontrado.");
+    await ref.update({
+      note: note.length > 0 ? note : admin.firestore.FieldValue.delete(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    logger.info(`[setAccessCodeNote] uid=${uid} anotou ${code}.`);
     return { success: true };
   }
 );

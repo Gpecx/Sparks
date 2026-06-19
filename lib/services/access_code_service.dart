@@ -73,6 +73,17 @@ class AccessCodeService {
     }
   }
 
+  /// [admin] Define/atualiza a anotação livre de um código (ex.: para quem foi
+  /// enviado). Passar string vazia remove a nota.
+  Future<void> setNote(String code, String note) async {
+    try {
+      final callable = _functions.httpsCallable('setAccessCodeNote');
+      await callable.call<Map<String, dynamic>>({'code': code, 'note': note});
+    } on FirebaseFunctionsException catch (e) {
+      throw AccessCodeException(_messageFor(e));
+    }
+  }
+
   /// [admin] Desativa um código (não afeta acessos já concedidos).
   Future<void> revoke(String code) async {
     try {
