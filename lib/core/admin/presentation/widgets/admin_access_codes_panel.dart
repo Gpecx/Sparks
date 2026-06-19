@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../theme/app_theme.dart';
 import '../../../../services/access_code_service.dart';
+import 'csv_export.dart';
 
 /// Painel admin para gerar, listar e revogar códigos de acesso (cortesia).
 class AdminAccessCodesPanel extends StatefulWidget {
@@ -179,6 +180,112 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
     );
   }
 
+  // ── Export CSV ──────────────────────────────────────────────────
+  static const _statusLabel = {
+    'available': 'Disponível',
+    'redeemed': 'Resgatado',
+    'revoked': 'Revogado',
+  };
+
+  String _fmtDate(String? iso) {
+    if (iso == null) return '';
+    final dt = DateTime.tryParse(iso);
+    if (dt == null) return '';
+    final l = dt.toLocal();
+    return '${l.day.toString().padLeft(2, '0')}/${l.month.toString().padLeft(2, '0')}/${l.year}';
+  }
+
+  String _csvField(String v) => '"${v.replaceAll('"', '""')}"';
+
+  /// Monta o CSV da lista atualmente filtrada.
+  String _buildCsv(List<Map<String, dynamic>> list) {
+    final headers = [
+      'Código',
+      'Status',
+      'Duração (dias)',
+      'Rótulo',
+      'Para quem foi enviado',
+      'Resgatado por',
+      'Criado em',
+      'Resgatado em',
+    ];
+    final rows = <String>[headers.map(_csvField).join(',')];
+    for (final c in list) {
+      final redeemers = (c['redeemers'] as List?) ?? const [];
+      final redeemed = (c['redeemedBy'] as List?) ?? const [];
+      rows.add([
+        c['code']?.toString() ?? '',
+        _statusLabel[_statusOf(c)] ?? '',
+        '${c['durationDays'] ?? 30}',
+        (c['label'] as String?) ?? '',
+        (c['note'] as String?) ?? '',
+        (redeemers.isNotEmpty || redeemed.isNotEmpty)
+            ? _redeemersLabel(redeemers, redeemed)
+            : '',
+        _fmtDate(c['createdAt'] as String?),
+        _fmtDate(c['lastRedeemedAt'] as String?),
+      ].map((v) => _csvField(v.toString())).join(','));
+    }
+    return rows.join('\r\n');
+  }
+
+  Future<void> _exportCsv() async {
+    final list = _filtered;
+    if (list.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nada para exportar neste filtro.')),
+      );
+      return;
+    }
+    final csv = _buildCsv(list);
+    final stamp = DateTime.now();
+    final name =
+        'vouchers_${stamp.year}-${stamp.month.toString().padLeft(2, '0')}-${stamp.day.toString().padLeft(2, '0')}.csv';
+
+    final downloaded = downloadCsv(name, csv);
+    if (downloaded) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('CSV exportado (${list.length} voucher(s)).')),
+      );
+      return;
+    }
+    // Fallback (não-web): mostra o CSV para copiar.
+    if (!mounted) return;
+    await showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.card,
+        title: const Text('CSV', style: TextStyle(color: Colors.white)),
+        content: SizedBox(
+          width: 360,
+          child: SingleChildScrollView(
+            child: SelectableText(csv,
+                style: const TextStyle(
+                    color: AppColors.textSecondary,
+                    fontFamily: 'monospace',
+                    fontSize: 11)),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: csv));
+              ScaffoldMessenger.of(ctx).showSnackBar(
+                const SnackBar(content: Text('CSV copiado.')),
+              );
+            },
+            child: const Text('Copiar'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('Fechar'),
+          ),
+        ],
+      ),
+    );
+  }
+
   /// Abre o diálogo para anotar/editar para quem o voucher foi enviado.
   Future<void> _editNote(Map<String, dynamic> c) async {
     final code = c['code']?.toString() ?? '';
@@ -328,6 +435,11 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
               onPressed: _reload,
               icon: const Icon(Icons.refresh, color: AppColors.textSecondary),
               tooltip: 'Atualizar',
+            ),
+            IconButton(
+              onPressed: _exportCsv,
+              icon: const Icon(Icons.download, color: AppColors.textSecondary),
+              tooltip: 'Exportar CSV',
             ),
             const SizedBox(width: 8),
             ElevatedButton.icon(
