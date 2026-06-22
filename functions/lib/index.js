@@ -1794,6 +1794,7 @@ class AlreadyMatchedError extends Error {
     }
 }
 exports.joinDuelQueue = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -1935,6 +1936,7 @@ exports.joinDuelQueue = (0, https_1.onCall)({
 });
 // ── 2. leaveDuelQueue ───────────────────────────────────────────────
 exports.leaveDuelQueue = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -1946,6 +1948,7 @@ exports.leaveDuelQueue = (0, https_1.onCall)({
     return { ok: true };
 });
 exports.submitDuelAnswer = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -2016,6 +2019,7 @@ exports.submitDuelAnswer = (0, https_1.onCall)({
     return result;
 });
 exports.finalizeDuel = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
@@ -2219,6 +2223,7 @@ exports.leaveDuel = (0, https_1.onCall)({
     return { ok: true, finished };
 });
 exports.getBotDuelQuestions = (0, https_1.onCall)({
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async (request) => {
