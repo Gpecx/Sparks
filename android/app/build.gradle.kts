@@ -13,7 +13,9 @@ plugins {
 
 android {
     namespace = "com.gpecx.spark"
-    compileSdk = flutter.compileSdkVersion
+    // Fixado em 35: a Play Store exige targetSdk >= 35 para apps novos/atualizados
+    // submetidos em 2026 (antes vinha do default do Flutter, que pode ficar para trás).
+    compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -31,7 +33,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
