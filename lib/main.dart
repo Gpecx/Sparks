@@ -28,8 +28,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // 0. Carrega as variáveis de ambiente (.env)
-  await dotenv.load(fileName: ".env");
+  // 0. Carrega só a config pública (Firebase web/RECAPTCHA). Segredos de
+  //    servidor (ASAAS/Gemini) ficam no Secret Manager, nunca no bundle.
+  await dotenv.load(fileName: ".env.public");
 
   // 1. Inicializa o Firebase
   await Firebase.initializeApp(
