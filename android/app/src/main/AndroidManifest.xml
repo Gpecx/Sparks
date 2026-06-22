@@ -1,4 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Acesso à rede (Firebase/HTTP). O Flutter só injeta INTERNET nos builds
+         de debug/profile; no release precisa estar declarada explicitamente. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Notificações push (FCM). Obrigatória para pedir permissão no Android 13+ (API 33). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <application
         android:label="spark_app"
         android:name="${applicationName}"
