@@ -196,6 +196,22 @@
   "clanMemberRole": "Member",
   "viewClanUpper": "VIEW CLAN",
   "weeklyRankingTitle": "WEEKLY RANKING",
+  "globalRankingTitle": "GLOBAL RANKING",
+  "noTournamentData": "No participants in the tournament yet. Complete lessons to join this week's competition!",
+  "firstPlaceShort": "1st place",
+  "secondPlaceShort": "2nd place",
+  "thirdPlaceShort": "3rd place",
+  "tournamentWinTitle": "YOU WON!",
+  "tournamentWinPlaceLine": "You finished in position {place} in the weekly tournament!",
+  "@tournamentWinPlaceLine": {
+    "placeholders": { "place": { "type": "int" } }
+  },
+  "tournamentWinPrize": "+{prize} XP",
+  "@tournamentWinPrize": {
+    "placeholders": { "prize": { "type": "int" } }
+  },
+  "tournamentWinSubtitle": "Your prize has already been added to your XP. Keep it up!",
+  "tournamentWinClose": "Awesome!",
   "globalLeaderboard": "Global Leaderboard",
   "yourRankingPosition": "You are #{position} this week",
   "completeLessonsToEnterRanking": "Complete lessons to enter the ranking",

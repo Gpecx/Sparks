@@ -734,13 +734,18 @@ class RankingEntry {
     this.rawDoc,
   });
 
-  factory RankingEntry.fromFirestore(DocumentSnapshot doc) {
+  /// [scoreField] define qual campo do documento vira o "score" exibido:
+  /// 'xp' para o Ranking Global (total), 'weeklyXp' para o Torneio.
+  factory RankingEntry.fromFirestore(
+    DocumentSnapshot doc, {
+    String scoreField = 'weeklyXp',
+  }) {
     final data = doc.data() as Map<String, dynamic>? ?? {};
     return RankingEntry(
       uid: doc.id,
       displayName: data['displayName'] ?? 'Usuário',
       photoUrl: data['photoUrl'],
-      weeklyXp: (data['weeklyXp'] as num?)?.toInt() ?? 0,
+      weeklyXp: (data[scoreField] as num?)?.toInt() ?? 0,
       clanId: data['clanId'],
       clanName: data['clanName'],
       rawDoc: doc,

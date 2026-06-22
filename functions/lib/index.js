@@ -18,7 +18,7 @@
  *                        jogadores (única via de escrita de ELO de duelo).
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cleanupStaleDuels = exports.cleanupOldRankings = exports.syncPublicProfile = exports.getBotDuelQuestions = exports.leaveDuel = exports.finalizeDuel = exports.submitDuelAnswer = exports.leaveDuelQueue = exports.joinDuelQueue = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.grantAdminPremium = exports.processTrialExpiry = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = exports.onUserCreated = void 0;
+exports.cleanupStaleDuels = exports.closeTournament = exports.syncPublicProfile = exports.getBotDuelQuestions = exports.leaveDuel = exports.finalizeDuel = exports.submitDuelAnswer = exports.leaveDuelQueue = exports.joinDuelQueue = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.grantAdminPremium = exports.processTrialExpiry = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = exports.onUserCreated = void 0;
 const admin = require("firebase-admin");
 const firestore_1 = require("firebase-admin/firestore");
 const crypto = require("crypto");
@@ -131,12 +131,19 @@ function xpBadgesEarned(totalXp) {
         badges.push("xp_10000");
     return badges;
 }
-function currentWeekKey() {
-    const now = new Date();
-    const start = new Date(now.getFullYear(), 0, 1);
-    const dayOfYear = Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-    const weekNum = Math.floor((dayOfYear - now.getDay() + 10) / 7);
-    return `${now.getFullYear()}-W${String(weekNum).padStart(2, "0")}`;
+// Rótulo de semana "YYYY-Www" — usado apenas para arquivar o histórico do
+// torneio e rotular a notificação de vitória.
+function weekKeyFor(d) {
+    const start = new Date(d.getFullYear(), 0, 1);
+    const dayOfYear = Math.floor((d.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+    const weekNum = Math.floor((dayOfYear - d.getDay() + 10) / 7);
+    return `${d.getFullYear()}-W${String(weekNum).padStart(2, "0")}`;
+}
+// Semana que acabou de encerrar (closeTournament roda na virada de segunda).
+function lastWeekKey() {
+    const d = new Date();
+    d.setDate(d.getDate() - 7);
+    return weekKeyFor(d);
 }
 async function writeAuditLog(uid, action, amount, source, meta) {
     const entry = {
@@ -289,23 +296,20 @@ exports.addXp = (0, https_1.onCall)({
     }
     const userRef = db.collection("users").doc(uid);
     let result;
-    let rankingData = null;
     // Transação focada SOMENTE no documento do usuário (sem cross-document)
     await db.runTransaction(async (tx) => {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b;
         const snap = await tx.get(userRef);
         if (!snap.exists) {
             throw new https_1.HttpsError("not-found", "Documento do usuário não encontrado.");
         }
         const data = snap.data();
         const currentXp = (_a = data["xp"]) !== null && _a !== void 0 ? _a : 0;
-        const currentWeeklyXp = (_b = data["weeklyXp"]) !== null && _b !== void 0 ? _b : 0;
-        const unlockedBadgeIds = (_c = data["unlockedBadgeIds"]) !== null && _c !== void 0 ? _c : [];
+        const unlockedBadgeIds = (_b = data["unlockedBadgeIds"]) !== null && _b !== void 0 ? _b : [];
         const oldLevel = calcLevel(currentXp);
         const newXp = currentXp + amount;
         const newLevel = calcLevel(newXp);
         const newTension = calcTension(newXp);
-        const newWeeklyXp = currentWeeklyXp + amount;
         const leveledUp = newLevel > oldLevel;
         const userUpdates = {
             xp: admin.firestore.FieldValue.increment(amount),
@@ -324,32 +328,10 @@ exports.addXp = (0, https_1.onCall)({
         }
         tx.update(userRef, userUpdates);
         result = { newXp, newLevel, newTension, leveledUp, badgesUnlocked };
-        // Armazena dados para ranking (será escrito fora da transação)
-        rankingData = {
-            uid,
-            displayName: (_d = data["displayName"]) !== null && _d !== void 0 ? _d : "Usuário",
-            photoUrl: (_e = data["photoUrl"]) !== null && _e !== void 0 ? _e : null,
-            weeklyXp: newWeeklyXp,
-            clanId: (_f = data["clanId"]) !== null && _f !== void 0 ? _f : null,
-            clanName: (_g = data["clanName"]) !== null && _g !== void 0 ? _g : null,
-            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-        };
+        // O ranking (Global por xp e Torneio por weeklyXp) é lido direto de
+        // public_profiles, mantido pelo trigger syncPublicProfile. Não há mais
+        // escrita em rankings/weekly aqui.
     });
-    // Ranking atualizado FORA da transação — sem risco de contenção
-    if (rankingData) {
-        const weekKey = currentWeekKey();
-        const rankingRef = db
-            .collection("rankings")
-            .doc("weekly")
-            .collection(weekKey)
-            .doc(uid);
-        try {
-            await rankingRef.set(rankingData, { merge: true });
-        }
-        catch (e) {
-            v2_1.logger.warn("[addXp] Erro ao atualizar ranking (não crítico):", e);
-        }
-    }
     // Audit log fora da transação (não-crítico)
     try {
         await writeAuditLog(uid, "xp_gained", amount, source, {
@@ -2161,7 +2143,20 @@ exports.syncPublicProfile = (0, firestore_2.onDocumentWritten)({
         return;
     }
     const afterData = (_b = after.data()) !== null && _b !== void 0 ? _b : {};
+    // Contas de admin/teste NÃO aparecem em nenhum ranking (Global, Torneio
+    // ou clã, que leem public_profiles). Remove o espelho e sai.
+    if (afterData["role"] === "admin" || afterData["excludeFromRanking"] === true) {
+        await publicRef.delete().catch(() => { });
+        v2_1.logger.info(`[syncPublicProfile] uid=${uid} excluído do ranking (admin/teste).`);
+        return;
+    }
     const newPublic = pickPublicFields(afterData);
+    // Garante que os campos de ordenação dos rankings sempre existam — sem
+    // eles o documento some do orderBy('xp')/orderBy('weeklyXp').
+    if (newPublic["xp"] === undefined)
+        newPublic["xp"] = 0;
+    if (newPublic["weeklyXp"] === undefined)
+        newPublic["weeklyXp"] = 0;
     // Evita escritas desnecessárias (e loops de custo): só grava se algum
     // campo público realmente mudou em relação ao estado anterior.
     const beforeData = (_e = (_d = (_c = event.data) === null || _c === void 0 ? void 0 : _c.before) === null || _d === void 0 ? void 0 : _d.data()) !== null && _e !== void 0 ? _e : {};
@@ -2176,40 +2171,100 @@ exports.syncPublicProfile = (0, firestore_2.onDocumentWritten)({
     v2_1.logger.info(`[syncPublicProfile] uid=${uid} espelho público atualizado.`);
 });
 // ────────────────────────────────────────────────────────────────
-// cleanupOldRankings — Agendada semanalmente. Remove subcoleções de
-// semanas antigas em rankings/weekly para o storage não crescer
-// indefinidamente (o addXp cria uma subcoleção nova a cada semana e
-// nada as apagava). Mantém as últimas RANKING_WEEKS_TO_KEEP semanas.
-// O weekKey tem formato "YYYY-Www" (zero-padded), então a ordenação
-// lexicográfica decrescente equivale à cronológica.
-// (Recuperado: foi removido por engano no merge da PR #19/spark-admin.)
+// closeTournament — Agendada na virada de segunda. Encerra o torneio
+// SEMANAL: premia o top 3 por weeklyXp, notifica os vencedores (popup
+// no app), arquiva o pódio final e ZERA weeklyXp de todos para começar
+// a nova semana.
+//
+// O Ranking GLOBAL (por xp total) e o Torneio (por weeklyXp) são lidos
+// direto de public_profiles — os nomes/posições nunca são apagados,
+// apenas o weeklyXp é resetado aqui para reiniciar a competição.
 // ────────────────────────────────────────────────────────────────
-const RANKING_WEEKS_TO_KEEP = 8;
-exports.cleanupOldRankings = (0, scheduler_1.onSchedule)({
-    schedule: "every monday 04:00",
+// Premiação do torneio: 1º, 2º, 3º lugar (XP somado ao total).
+const TOURNAMENT_PRIZES = [500, 250, 100];
+exports.closeTournament = (0, scheduler_1.onSchedule)({
+    // 00:05 de segunda (BRT) — logo após a virada da semana.
+    schedule: "every monday 00:05",
     timeZone: "America/Sao_Paulo",
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
 }, async () => {
-    const weeklyDoc = db.collection("rankings").doc("weekly");
-    const weekCols = await weeklyDoc.listCollections();
-    if (weekCols.length <= RANKING_WEEKS_TO_KEEP) {
-        v2_1.logger.info(`[cleanupOldRankings] ${weekCols.length} semana(s); nada a limpar.`);
-        return;
-    }
-    // Ordena por ID (weekKey) decrescente e mantém só as mais recentes.
-    const sorted = weekCols.sort((a, b) => (a.id < b.id ? 1 : -1));
-    const toDelete = sorted.slice(RANKING_WEEKS_TO_KEEP);
-    for (const col of toDelete) {
+    var _a, _b, _c, _d;
+    const weekKey = lastWeekKey();
+    // 1) Top 3 por weeklyXp (apenas quem realmente pontuou).
+    const topSnap = await db
+        .collection("public_profiles")
+        .orderBy("weeklyXp", "desc")
+        .limit(3)
+        .get();
+    const winners = topSnap.docs.filter((d) => { var _a; return ((_a = d.get("weeklyXp")) !== null && _a !== void 0 ? _a : 0) > 0; });
+    const historyCol = db
+        .collection("rankings")
+        .doc("tournament_history")
+        .collection(weekKey);
+    for (let i = 0; i < winners.length; i++) {
+        const doc = winners[i];
+        const uid = doc.id;
+        const place = i + 1;
+        const prize = (_a = TOURNAMENT_PRIZES[i]) !== null && _a !== void 0 ? _a : 0;
+        const finalWeeklyXp = (_b = doc.get("weeklyXp")) !== null && _b !== void 0 ? _b : 0;
         try {
-            await db.recursiveDelete(col);
-            v2_1.logger.info(`[cleanupOldRankings] semana ${col.id} removida.`);
+            // Premia o XP total (cascateia para public_profiles via trigger).
+            await db.collection("users").doc(uid).set({
+                xp: admin.firestore.FieldValue.increment(prize),
+                updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+            }, { merge: true });
+            // Notificação que dispara o popup animado de vitória no app.
+            await db
+                .collection("users")
+                .doc(uid)
+                .collection("notifications")
+                .add({
+                type: "tournament_win",
+                place,
+                prize,
+                weekKey,
+                weeklyXp: finalWeeklyXp,
+                read: false,
+                createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            });
+            // Arquiva o pódio final (registro permanente das posições).
+            await historyCol.doc(uid).set({
+                uid,
+                place,
+                prize,
+                weeklyXp: finalWeeklyXp,
+                displayName: (_c = doc.get("displayName")) !== null && _c !== void 0 ? _c : "Usuário",
+                photoUrl: (_d = doc.get("photoUrl")) !== null && _d !== void 0 ? _d : null,
+                createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            });
         }
         catch (e) {
-            v2_1.logger.warn(`[cleanupOldRankings] falha ao remover ${col.id}:`, e);
+            v2_1.logger.warn(`[closeTournament] falha ao premiar uid=${uid}:`, e);
         }
     }
-    v2_1.logger.info(`[cleanupOldRankings] ${toDelete.length} semana(s) antiga(s) removida(s).`);
+    // 2) Zera weeklyXp de todos os que pontuaram. Cada lote sai do filtro
+    //    (weeklyXp > 0) após o commit, então re-consultar até esvaziar.
+    let resetCount = 0;
+    while (true) {
+        const snap = await db
+            .collection("users")
+            .where("weeklyXp", ">", 0)
+            .limit(400)
+            .get();
+        if (snap.empty)
+            break;
+        const batch = db.batch();
+        for (const d of snap.docs) {
+            batch.update(d.ref, { weeklyXp: 0 });
+        }
+        await batch.commit();
+        resetCount += snap.size;
+        if (snap.size < 400)
+            break;
+    }
+    v2_1.logger.info(`[closeTournament] semana=${weekKey} premiados=${winners.length} ` +
+        `weeklyXp_resetado=${resetCount}`);
 });
 // ────────────────────────────────────────────────────────────────
 // cleanupStaleDuels — Agendada. Encerra duelos que ficaram presos em

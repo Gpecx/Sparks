@@ -1,5 +1,6 @@
 import 'package:spark_app/l10n/app_localizations.dart';
 import 'dart:async';
+import 'dart:math' as math;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -65,23 +66,27 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
 
   // Dados do Firebase
   List<RankingEntry> _globalPlayers = [];
+  List<RankingEntry> _tournamentPlayers = [];
   List<ClanRankingEntry> _clanRankings = [];
   bool _loadingGlobal = true;
+  bool _loadingTournament = true;
   bool _loadingClan = true;
   String? _errorGlobal;
+  String? _errorTournament;
   String? _errorClan;
 
-  // Real-time stream do ranking global e de clãs
+  // Real-time stream do ranking global, torneio e de clãs
   StreamSubscription<QuerySnapshot>? _globalStream;
+  StreamSubscription<QuerySnapshot>? _tournamentStream;
   StreamSubscription<QuerySnapshot>? _clanStream;
+
+  // Evita reabrir o popup de vitória mais de uma vez por sessão.
+  bool _tournamentRewardChecked = false;
 
   // Paginação
   int _paginatedGlobalCount = 10;
+  int _paginatedTournamentCount = 10;
   static const int _pageSize = 10;
-
-  // Cache de fotos resolvidas a partir de public_profiles (uid → photoUrl).
-  // Evita refazer leituras a cada atualização do stream de ranking.
-  final Map<String, String?> _photoCache = {};
 
   @override
   void initState() {
@@ -90,42 +95,38 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         AnimationController(vsync: this, duration: const Duration(seconds: 4))
           ..repeat(reverse: true);
     _subscribeGlobal();
+    _subscribeTournament();
     _subscribeClans();
   }
 
   @override
   void dispose() {
     _globalStream?.cancel();
+    _tournamentStream?.cancel();
     _clanStream?.cancel();
     _controller.dispose();
     super.dispose();
   }
 
-  // ── Real-time listener para o ranking global ─────────────────────
+  // ── Real-time listener para o RANKING GLOBAL (xp total, permanente) ──
+  // Lê o espelho público (public_profiles), ordenado pelo XP acumulado.
+  // Nunca zera nem apaga nomes.
   void _subscribeGlobal() {
-    final userService = ref.read(userServiceProvider);
-    final weekKey = userService.currentWeekKey;
-
     _globalStream?.cancel();
     _globalStream = _db
-        .collection('rankings')
-        .doc('weekly')
-        .collection(weekKey)
-        .orderBy('weeklyXp', descending: true)
+        .collection('public_profiles')
+        .orderBy('xp', descending: true)
         .limit(100)
         .snapshots()
         .listen(
       (snap) {
         final data = snap.docs
-            .map((doc) => RankingEntry.fromFirestore(doc))
+            .map((doc) => RankingEntry.fromFirestore(doc, scoreField: 'xp'))
+            // Só entra no ranking quem já ganhou algum XP (xp > 0).
+            .where((e) => e.weeklyXp > 0)
             .toList();
         for (int i = 0; i < data.length; i++) {
           data[i].position = i + 1;
-          // Aplica foto já em cache (pode estar mais atualizada que o ranking).
-          final cached = _photoCache[data[i].uid];
-          if (cached != null && cached.isNotEmpty) {
-            data[i].photoUrl = cached;
-          }
         }
         if (mounted) {
           setState(() {
@@ -134,7 +135,6 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
             _errorGlobal = null;
           });
         }
-        _enrichMissingPhotos(data);
       },
       onError: (e) {
         if (mounted) {
@@ -147,39 +147,44 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     );
   }
 
-  // ── Enriquece fotos faltantes a partir de public_profiles ───────
-  // A doc de ranking só grava photoUrl no momento do addXp, então quem
-  // mudou (ou nunca tinha) a foto aparece sem avatar. public_profiles é
-  // o espelho mantido atualizado pelo servidor — buscamos de lá apenas
-  // os uids ainda não resolvidos e atualizamos a lista em memória.
-  Future<void> _enrichMissingPhotos(List<RankingEntry> entries) async {
-    final pending = entries
-        .where((e) =>
-            (e.photoUrl == null || e.photoUrl!.isEmpty) &&
-            !_photoCache.containsKey(e.uid))
-        .map((e) => e.uid)
-        .toSet()
-        .toList();
-    if (pending.isEmpty) return;
-
-    var didUpdate = false;
-    await Future.wait(pending.map((uid) async {
-      try {
-        final doc = await _db.collection('public_profiles').doc(uid).get();
-        final photo = doc.data()?['photoUrl'] as String?;
-        _photoCache[uid] = photo; // marca como resolvido (mesmo se null)
-        if (photo != null && photo.isNotEmpty) {
-          for (final e in _globalPlayers) {
-            if (e.uid == uid) e.photoUrl = photo;
-          }
-          didUpdate = true;
+  // ── Real-time listener para o TORNEIO (weeklyXp, reseta toda semana) ──
+  // Também lê de public_profiles: as entradas/posições persistem, só o
+  // weeklyXp é zerado pelo servidor (closeTournament) na virada da semana.
+  void _subscribeTournament() {
+    _tournamentStream?.cancel();
+    _tournamentStream = _db
+        .collection('public_profiles')
+        .orderBy('weeklyXp', descending: true)
+        .limit(100)
+        .snapshots()
+        .listen(
+      (snap) {
+        final data = snap.docs
+            .map((doc) =>
+                RankingEntry.fromFirestore(doc, scoreField: 'weeklyXp'))
+            .where((e) => e.weeklyXp > 0)
+            .toList();
+        for (int i = 0; i < data.length; i++) {
+          data[i].position = i + 1;
         }
-      } catch (_) {
-        _photoCache[uid] = null;
-      }
-    }));
-
-    if (didUpdate && mounted) setState(() {});
+        if (mounted) {
+          setState(() {
+            _tournamentPlayers = data;
+            _loadingTournament = false;
+            _errorTournament = null;
+          });
+        }
+      },
+      onError: (e) {
+        if (mounted) {
+          setState(() {
+            _errorTournament =
+                AppLocalizations.of(context)!.errorLoadingRanking;
+            _loadingTournament = false;
+          });
+        }
+      },
+    );
   }
 
   // ── Real-time listener para o ranking de clãs ───────────────────
@@ -220,6 +225,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
   // ── Refresh manual (pull-to-refresh) ─────────────────────────────
   Future<void> _loadRankings() async {
     _subscribeGlobal(); // reinicia o stream
+    _subscribeTournament();
     _subscribeClans();
     await Future.delayed(const Duration(milliseconds: 800));
   }
@@ -229,16 +235,28 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     final userService = ref.watch(userServiceProvider);
     final myUid = userService.uid;
 
-    final players = _selectedTab == 1
+    final List<dynamic> players = _selectedTab == 1
         ? _clanRankings
-        : _globalPlayers.take(_paginatedGlobalCount).toList();
+        : _selectedTab == 2
+            ? _tournamentPlayers.take(_paginatedTournamentCount).toList()
+            : _globalPlayers.take(_paginatedGlobalCount).toList();
 
     final topThree = players.take(3).toList();
     final rest = players.skip(3).toList();
     final canLoadMoreGlobal =
-        _selectedTab == 0 && _paginatedGlobalCount < _globalPlayers.length;
-    final isLoadingCurrent =
-        _selectedTab == 0 ? _loadingGlobal : _loadingClan;
+        (_selectedTab == 0 && _paginatedGlobalCount < _globalPlayers.length) ||
+            (_selectedTab == 2 &&
+                _paginatedTournamentCount < _tournamentPlayers.length);
+    final isLoadingCurrent = _selectedTab == 0
+        ? _loadingGlobal
+        : _selectedTab == 2
+            ? _loadingTournament
+            : _loadingClan;
+    final errorCurrent = _selectedTab == 0
+        ? _errorGlobal
+        : _selectedTab == 2
+            ? _errorTournament
+            : _errorClan;
 
     return SparksBackground(
       child: PcbBackground(
@@ -268,7 +286,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                               ? AppLocalizations.of(context)!.weeklyTournament
                               : _selectedTab == 1
                                   ? AppLocalizations.of(context)!.clanRankingTitle
-                                  : AppLocalizations.of(context)!.weeklyRankingTitle,
+                                  : AppLocalizations.of(context)!.globalRankingTitle,
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -325,11 +343,11 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                     child: Row(
                       children: [
                         _tabBtn('🌎 Global', _selectedTab == 0,
-                            () => setState(() => _selectedTab = 0)),
+                            () => _selectTab(0)),
                         _tabBtn('🛡️ Clã', _selectedTab == 1,
-                            () => setState(() => _selectedTab = 1)),
+                            () => _selectTab(1)),
                         _tabBtn('🏆 Torneio', _selectedTab == 2,
-                            () => setState(() => _selectedTab = 2)),
+                            () => _selectTab(2)),
                       ],
                     ),
                   ),
@@ -337,10 +355,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                 const SizedBox(height: 16),
 
                 // ── Conteúdo ──────────────────────────────────────
-                if (_selectedTab == 2)
-                  Expanded(child: _buildTournamentView())
-                else
-                  Expanded(
+                Expanded(
                     child: isLoadingCurrent
                         ? ListView(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -360,8 +375,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                               ),
                             ],
                           )
-                        : (_selectedTab == 0 && _errorGlobal != null) ||
-                                (_selectedTab == 1 && _errorClan != null)
+                        : errorCurrent != null
                             ? _buildErrorView()
                             : players.isEmpty
                                 ? _buildEmptyView()
@@ -372,6 +386,9 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20),
                                       children: [
+                                        // Card de premiação (só no Torneio)
+                                        if (_selectedTab == 2)
+                                          _buildTournamentPrizeCard(),
                                         // Pódio
                                         SizedBox(
                                           height: 310,
@@ -419,9 +436,15 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 16),
                                             child: TextButton(
-                                              onPressed: () => setState(() =>
+                                              onPressed: () => setState(() {
+                                                if (_selectedTab == 2) {
+                                                  _paginatedTournamentCount +=
+                                                      _pageSize;
+                                                } else {
                                                   _paginatedGlobalCount +=
-                                                      _pageSize),
+                                                      _pageSize;
+                                                }
+                                              }),
                                               child: Text(
                                                   AppLocalizations.of(context)!.loadMore,
                                                   style: TextStyle(
@@ -667,11 +690,13 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
   /// na lista visível.
   Widget _buildMyPositionFooter(
       List<dynamic> visiblePlayers, String myUid, UserService userService) {
-    if (_selectedTab == 0) {
+    if (_selectedTab == 0 || _selectedTab == 2) {
+      final source =
+          _selectedTab == 2 ? _tournamentPlayers : _globalPlayers;
       final isVisible = visiblePlayers.any((p) => p is RankingEntry && p.uid == myUid);
       if (isVisible) return const SizedBox.shrink();
 
-      final myIndex = _globalPlayers.indexWhere((p) => p.uid == myUid);
+      final myIndex = source.indexWhere((p) => p.uid == myUid);
       if (myIndex < 0) return const SizedBox.shrink();
 
       return Column(
@@ -680,7 +705,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text('• • •', style: TextStyle(color: AppColors.textMuted.withValues(alpha: 0.5), fontSize: 14)),
           ),
-          _buildPlayerRow(_globalPlayers[myIndex], myUid, userService.clanId),
+          _buildPlayerRow(source[myIndex], myUid, userService.clanId),
         ],
       );
     } else if (_selectedTab == 1) {
@@ -738,7 +763,9 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           Text(
             _selectedTab == 1
                 ? AppLocalizations.of(context)!.noClansRankingWeek
-                : AppLocalizations.of(context)!.noRankingDataWeek,
+                : _selectedTab == 2
+                    ? AppLocalizations.of(context)!.noTournamentData
+                    : AppLocalizations.of(context)!.noRankingDataWeek,
             style: const TextStyle(color: AppColors.textSecondary),
             textAlign: TextAlign.center,
           ),
@@ -773,86 +800,117 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     );
   }
 
-  // ── Torneio (mantido como original) ────────────────────────────
-  Widget _buildTournamentView() {
-    return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      children: [
-        Container(
-          padding: const EdgeInsets.all(16),
-          margin: const EdgeInsets.only(bottom: 16),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [AppColors.card, AppColors.background],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-                color: AppColors.primary.withValues(alpha: 0.4)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+  // ── Troca de aba; ao entrar no Torneio checa popup de vitória ────
+  void _selectTab(int tab) {
+    setState(() => _selectedTab = tab);
+    if (tab == 2) _checkTournamentReward();
+  }
+
+  // ── Card de premiação do Torneio (header da lista) ──────────────
+  Widget _buildTournamentPrizeCard() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [AppColors.card, AppColors.background],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  const Icon(Icons.emoji_events,
-                      color: AppColors.gold, size: 24),
-                  const SizedBox(width: 8),
-                  Text(AppLocalizations.of(context)!.tournamentInProgress,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15)),
-                  const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                        color: AppColors.error.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Text(AppLocalizations.of(context)!.liveLabel,
-                        style: TextStyle(
-                            color: AppColors.error,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w800)),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Text(
-                AppLocalizations.of(context)!.tournamentDescription,
-                style: TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 13,
-                    height: 1.4),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _tournamentStat('🥇', '500 XP', '1º lugar'),
-                  _tournamentStat('🥈', '250 XP', '2º lugar'),
-                  _tournamentStat('🥉', '100 XP', '3º lugar'),
-                ],
+              const Icon(Icons.emoji_events, color: AppColors.gold, size: 24),
+              const SizedBox(width: 8),
+              Text(AppLocalizations.of(context)!.tournamentInProgress,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15)),
+              const Spacer(),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                    color: AppColors.error.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Text(AppLocalizations.of(context)!.liveLabel,
+                    style: TextStyle(
+                        color: AppColors.error,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800)),
               ),
             ],
           ),
-        ),
-        Text(AppLocalizations.of(context)!.participantsLabel,
+          const SizedBox(height: 12),
+          Text(
+            AppLocalizations.of(context)!.tournamentDescription,
             style: TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 11,
-                letterSpacing: 1.5,
-                fontWeight: FontWeight.w700)),
-        const SizedBox(height: 12),
-        // Usa dados globais reais no torneio também
-        ..._globalPlayers.take(8).map((player) {
-          final userService = ref.read(userServiceProvider);
-          return _buildPlayerRow(player, userService.uid, userService.clanId);
-        }),
-      ],
+                color: AppColors.textSecondary, fontSize: 13, height: 1.4),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _tournamentStat('🥇', '500 XP',
+                  AppLocalizations.of(context)!.firstPlaceShort),
+              _tournamentStat('🥈', '250 XP',
+                  AppLocalizations.of(context)!.secondPlaceShort),
+              _tournamentStat('🥉', '100 XP',
+                  AppLocalizations.of(context)!.thirdPlaceShort),
+            ],
+          ),
+        ],
+      ),
     );
+  }
+
+  // ── Popup de vitória do torneio ─────────────────────────────────
+  // Lê a notificação `tournament_win` não lida (gravada pelo servidor em
+  // closeTournament), exibe o popup animado e a marca como lida.
+  Future<void> _checkTournamentReward() async {
+    if (_tournamentRewardChecked) return;
+    _tournamentRewardChecked = true;
+
+    final uid = ref.read(userServiceProvider).uid;
+    if (uid.isEmpty) return;
+
+    try {
+      final snap = await _db
+          .collection('users')
+          .doc(uid)
+          .collection('notifications')
+          .where('type', isEqualTo: 'tournament_win')
+          .where('read', isEqualTo: false)
+          .limit(1)
+          .get();
+      if (snap.docs.isEmpty || !mounted) return;
+
+      final doc = snap.docs.first;
+      final data = doc.data();
+      final place = (data['place'] as num?)?.toInt() ?? 0;
+      final prize = (data['prize'] as num?)?.toInt() ?? 0;
+      if (place < 1 || place > 3) return;
+
+      // Marca como lida antes de exibir (cliente tem permissão na sua
+      // subcoleção de notifications) — evita reabrir em outra sessão.
+      await doc.reference.update({'read': true});
+
+      if (!mounted) return;
+      await showDialog(
+        context: context,
+        barrierDismissible: false,
+        barrierColor: Colors.black.withValues(alpha: 0.78),
+        builder: (_) => TournamentWinDialog(place: place, prize: prize),
+      );
+    } catch (_) {
+      // Falha silenciosa: o popup é cosmético, não bloqueia a tela.
+    }
   }
 
   Widget _tournamentStat(String emoji, String prize, String label) {
@@ -918,4 +976,238 @@ class _MoleculeIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Icon(Icons.hub_outlined, color: AppColors.primary, size: size);
   }
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  POPUP ANIMADO DE VITÓRIA NO TORNEIO (1º / 2º / 3º lugar)
+// ─────────────────────────────────────────────────────────────────
+class TournamentWinDialog extends StatefulWidget {
+  final int place; // 1, 2 ou 3
+  final int prize; // XP premiado
+  const TournamentWinDialog({
+    super.key,
+    required this.place,
+    required this.prize,
+  });
+
+  @override
+  State<TournamentWinDialog> createState() => _TournamentWinDialogState();
+}
+
+class _TournamentWinDialogState extends State<TournamentWinDialog>
+    with TickerProviderStateMixin {
+  late final AnimationController _entry; // entrada (escala elástica)
+  late final AnimationController _loop; // brilho + raios em loop
+
+  @override
+  void initState() {
+    super.initState();
+    _entry = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 750))
+      ..forward();
+    _loop = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 2600))
+      ..repeat();
+  }
+
+  @override
+  void dispose() {
+    _entry.dispose();
+    _loop.dispose();
+    super.dispose();
+  }
+
+  Color get _accent => widget.place == 1
+      ? AppColors.gold
+      : widget.place == 2
+          ? const Color(0xFFC9D2DC) // prata
+          : const Color(0xFFCD7F32); // bronze
+
+  String get _medal =>
+      widget.place == 1 ? '🥇' : widget.place == 2 ? '🥈' : '🥉';
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
+    final scale = CurvedAnimation(parent: _entry, curve: Curves.elasticOut);
+
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 32),
+      child: ScaleTransition(
+        scale: scale,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Raios/partículas explodindo atrás do card.
+            AnimatedBuilder(
+              animation: _loop,
+              builder: (_, _) => SizedBox(
+                width: 320,
+                height: 360,
+                child: CustomPaint(
+                  painter: _BurstPainter(
+                      progress: _loop.value, color: _accent),
+                ),
+              ),
+            ),
+            // Card central.
+            Container(
+              padding: const EdgeInsets.fromLTRB(24, 28, 24, 22),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [AppColors.card, AppColors.background],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: _accent.withValues(alpha: 0.6), width: 2),
+                boxShadow: [
+                  BoxShadow(
+                    color: _accent.withValues(alpha: 0.35),
+                    blurRadius: 32,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Medalha com brilho pulsante.
+                  AnimatedBuilder(
+                    animation: _loop,
+                    builder: (_, child) {
+                      final pulse =
+                          0.9 + 0.12 * math.sin(_loop.value * 2 * math.pi);
+                      return Transform.scale(scale: pulse, child: child);
+                    },
+                    child: Text(_medal, style: const TextStyle(fontSize: 76)),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    l.tournamentWinTitle,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: _accent,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    l.tournamentWinPlaceLine(widget.place),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: AppColors.gold.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(
+                          color: AppColors.gold.withValues(alpha: 0.5)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.bolt, color: AppColors.gold, size: 18),
+                        const SizedBox(width: 4),
+                        Text(
+                          l.tournamentWinPrize(widget.prize),
+                          style: const TextStyle(
+                              color: AppColors.gold,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w800),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    l.tournamentWinSubtitle,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 12,
+                        height: 1.4),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _accent,
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14)),
+                      ),
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(
+                        l.tournamentWinClose,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w800, fontSize: 15),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Explosão de raios/partículas atrás do card de vitória.
+class _BurstPainter extends CustomPainter {
+  final double progress; // 0..1 (loop)
+  final Color color;
+  const _BurstPainter({required this.progress, required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    const count = 14;
+    final maxR = size.shortestSide * 0.62;
+
+    for (int i = 0; i < count; i++) {
+      final angle = (i / count) * 2 * math.pi;
+      // Cada raio "pulsa" para fora com fase deslocada.
+      final phase = (progress + i / count) % 1.0;
+      final r = maxR * Curves.easeOut.transform(phase);
+      final fade = (1.0 - phase);
+      final p1 = Offset(
+        center.dx + math.cos(angle) * (r * 0.45),
+        center.dy + math.sin(angle) * (r * 0.45),
+      );
+      final p2 = Offset(
+        center.dx + math.cos(angle) * r,
+        center.dy + math.sin(angle) * r,
+      );
+      final paint = Paint()
+        ..color = (i.isEven ? color : AppColors.primary)
+            .withValues(alpha: 0.5 * fade)
+        ..strokeWidth = 3
+        ..strokeCap = StrokeCap.round;
+      canvas.drawLine(p1, p2, paint);
+      // pontinho na ponta
+      canvas.drawCircle(
+        p2,
+        2.5 * fade + 0.5,
+        Paint()..color = color.withValues(alpha: 0.7 * fade),
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_BurstPainter old) =>
+      old.progress != progress || old.color != color;
 }

@@ -323,6 +323,22 @@
   "clanMemberRole": "Membro",
   "viewClanUpper": "VISUALIZAR CLÃ",
   "weeklyRankingTitle": "RANKING SEMANAL",
+  "globalRankingTitle": "RANKING GLOBAL",
+  "noTournamentData": "Nenhum participante no torneio ainda. Complete lições para entrar na disputa desta semana!",
+  "firstPlaceShort": "1º lugar",
+  "secondPlaceShort": "2º lugar",
+  "thirdPlaceShort": "3º lugar",
+  "tournamentWinTitle": "VOCÊ VENCEU!",
+  "tournamentWinPlaceLine": "Você ficou em {place}º lugar no torneio semanal!",
+  "@tournamentWinPlaceLine": {
+    "placeholders": { "place": { "type": "int" } }
+  },
+  "tournamentWinPrize": "+{prize} XP",
+  "@tournamentWinPrize": {
+    "placeholders": { "prize": { "type": "int" } }
+  },
+  "tournamentWinSubtitle": "Sua premiação já foi adicionada ao seu XP. Continue assim!",
+  "tournamentWinClose": "Massa!",
   "globalLeaderboard": "Placar Global",
   "yourRankingPosition": "Você está em {position}º lugar esta semana",
   "completeLessonsToEnterRanking": "Complete lições para entrar no ranking",
