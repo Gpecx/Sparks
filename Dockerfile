@@ -34,8 +34,8 @@ RUN flutter pub get
 
  
 
-# Compila a versão Web (com a flag para evitar erro de ícones)
-RUN flutter build web --no-tree-shake-icons
+# Compila a versão Web (CanvasKit servido localmente p/ funcionar no Safari/iOS)
+RUN flutter build web --no-tree-shake-icons --no-web-resources-cdn
 
  
 
