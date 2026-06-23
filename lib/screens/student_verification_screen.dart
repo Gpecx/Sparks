@@ -10,6 +10,7 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/widgets/responsive_form_container.dart';
 import 'package:spark_app/providers/user_provider.dart';
 
 // ─────────────────────────────────────────────────────────────────
@@ -180,7 +181,8 @@ class _StudentVerificationScreenState
           ),
           body: SafeArea(
             top: false,
-            child: ListView(
+            child: ResponsiveFormContainer(
+              child: ListView(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
               children: [
                 if (status != null) _StatusBanner(status: status),
@@ -233,6 +235,7 @@ class _StudentVerificationScreenState
                   style: TextStyle(color: AppColors.textMuted, fontSize: 12),
                 ),
               ],
+            ),
             ),
           ),
         ),

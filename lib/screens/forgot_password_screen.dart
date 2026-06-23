@@ -3,6 +3,7 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/screens/animated_spark_logo.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
+import 'package:spark_app/widgets/responsive_form_container.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});
@@ -23,7 +24,8 @@ class ForgotPasswordScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
+        child: ResponsiveFormContainer(
+          child: Column(
           children: [
             const SizedBox(height: 32),
             const AnimatedSparkLogo(),
@@ -87,6 +89,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             ),
             const SizedBox(height: 32),
           ],
+        ),
         ),
       ),
     );

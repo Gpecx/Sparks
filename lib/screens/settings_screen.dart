@@ -628,8 +628,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   void _showFaqDialog() {
     final l10n = AppLocalizations.of(context)!;
     final faqs = [
+      {'q': l10n.supportFaqQ1, 'a': l10n.supportFaqA1},
+      {'q': l10n.supportFaqQ2, 'a': l10n.supportFaqA2},
+      {'q': l10n.supportFaqQ3, 'a': l10n.supportFaqA3},
+      {'q': l10n.supportFaqQ4, 'a': l10n.supportFaqA4},
+      {'q': l10n.supportFaqQ5, 'a': l10n.supportFaqA5},
+      {'q': l10n.supportFaqQ6, 'a': l10n.supportFaqA6},
+      {'q': l10n.supportFaqQ7, 'a': l10n.supportFaqA7},
+      {'q': l10n.supportFaqQ8, 'a': l10n.supportFaqA8},
+      {'q': l10n.supportFaqQ9, 'a': l10n.supportFaqA9},
       {'q': l10n.faqEnergyQ, 'a': l10n.faqEnergyA},
-      {'q': l10n.faqSparkQ, 'a': l10n.faqSparkA},
     ];
     showModalBottomSheet(context: context, isScrollControlled: true, backgroundColor: Colors.transparent, builder: (ctx) => DraggableScrollableSheet(initialChildSize: 0.75, builder: (_, scrollCtrl) => Container(decoration: const BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.vertical(top: Radius.circular(20))), child: Column(children: [const SizedBox(height: 12), Container(width: 40, height: 4, decoration: BoxDecoration(color: AppColors.textMuted, borderRadius: BorderRadius.circular(2))), Expanded(child: ListView.builder(controller: scrollCtrl, padding: const EdgeInsets.all(20), itemCount: faqs.length, itemBuilder: (_, i) => _FaqTile(q: faqs[i]['q']!, a: faqs[i]['a']!)))]))));
   }

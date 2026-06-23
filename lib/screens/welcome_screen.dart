@@ -311,8 +311,29 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: Column(
-          children: [
+        child: LayoutBuilder(
+          builder: (context, c) {
+            final maxW = c.maxWidth;
+            final maxH = c.maxHeight;
+            final isWide = maxW >= 600; // tablets / iPads / desktop
+            // Mascote escala p/ caber: limitado por largura e altura disponível.
+            final double heroDim =
+                math.min(maxW * 0.78, maxH * 0.40).clamp(150.0, 300.0).toDouble();
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                // garante que ocupe pelo menos a tela toda (centraliza) e role
+                // quando não couber, sem nunca cortar os botões.
+                constraints: BoxConstraints(minHeight: maxH),
+                child: Center(
+                  child: ConstrainedBox(
+                    // em telas largas não estica: limita a coluna central.
+                    constraints: const BoxConstraints(maxWidth: 460),
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: isWide ? 40 : 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
             // ── Logo EXS Solutions ──────────────────────────────
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
@@ -356,14 +377,22 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               ),
             ),
 
-            // ── Hero Illustration ───────────────────────────────
-            Expanded(
-              flex: 4,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final w = constraints.maxWidth;
-                  final h = constraints.maxHeight;
-                  return MouseRegion(
+            // ── Hero Illustration (escala p/ caber em qualquer tela) ──
+            SizedBox(
+              width: heroDim,
+              height: heroDim,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: SizedBox(
+                  // canvas de design fixo — todo o mascote/anéis/partículas é
+                  // desenhado aqui e o FittedBox escala para `heroDim`.
+                  width: 300,
+                  height: 300,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final w = constraints.maxWidth;
+                      final h = constraints.maxHeight;
+                      return MouseRegion(
                     // parallax: o mascote acompanha levemente o ponteiro
                     onHover: (e) {
                       _pointer.value = Offset(
@@ -711,17 +740,18 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       ),
                     ),
                   );
-                },
+                      },
+                    ),
+                  ),
+                ),
               ),
-            ),
 
             // ── Texto ───────────────────────────────────────────
-            Expanded(
-              flex: 4,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Column(
-                  children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                  isWide ? 0 : 32, 24, isWide ? 0 : 32, 8),
+              child: Column(
+                children: [
                     // Linha decorativa verde estilo EXS
                     Container(
                       width: 48,
@@ -731,7 +761,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 28),
                     const Text(
                       'Sua Jornada de\nEstudos e Ferramentas\nPráticas para o Setor Elétrico.',
                       textAlign: TextAlign.center,
@@ -743,7 +773,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         letterSpacing: -0.5,
                       ),
                     ),
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 20),
                     Text(
                       l10n.welcomeSubtitle,
                       textAlign: TextAlign.center,
@@ -753,7 +783,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         height: 1.6,
                       ),
                     ),
-                    const Spacer(),
+                    const SizedBox(height: 40),
                     // Botão principal EXS
                     SizedBox(
                       width: double.infinity,
@@ -770,7 +800,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                       ),
                     ),
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 16),
                     // Criar conta — estilo tag EXS (outline verde)
                     SizedBox(
                       width: double.infinity,
@@ -794,7 +824,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () => context.push('/register'),
                       child: Text.rich(
@@ -813,15 +843,18 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    // sobe os botões: espaço abaixo equilibra com o Spacer de
-                    // cima (aumente o flex p/ subir mais)
-                    const Spacer(),
                     const SizedBox(height: 16),
                   ],
                 ),
               ),
-            ),
-          ],
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

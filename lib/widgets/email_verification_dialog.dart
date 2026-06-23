@@ -181,8 +181,10 @@ class _EmailVerificationDialogState extends State<_EmailVerificationDialog>
     return Dialog(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 24),
-      child: AnimatedBuilder(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 420),
+        child: AnimatedBuilder(
         animation: _shakeAnimation,
         builder: (context, child) {
           final offset = _shakeController.isAnimating
@@ -368,6 +370,7 @@ class _EmailVerificationDialogState extends State<_EmailVerificationDialog>
             ],
           ),
         ),
+      ),
       ),
     );
   }

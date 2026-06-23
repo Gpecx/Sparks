@@ -1966,6 +1966,16 @@
   "supportFaqA3": "Pacts reset every Monday at 00:00. Your progress is cleared and you can choose new pacts.",
   "supportFaqQ4": "How do I report content errors?",
   "supportFaqA4": "Use the form below and select \"Content error\". Our team will review and fix it as soon as possible.",
+  "supportFaqQ5": "What is the access code and how do I use it?",
+  "supportFaqA5": "The access code unlocks the app's full content. Go to Settings › Redeem access code, enter the code provided by your school or company and confirm. Access is immediate.",
+  "supportFaqQ6": "How does the PvP duel work?",
+  "supportFaqA6": "In PvP duels you face another user in real time answering questions from the learning tracks. The fastest and most accurate player wins. Each victory grants bonus XP and improves your duel ELO.",
+  "supportFaqQ7": "What is the global ranking and the weekly tournament?",
+  "supportFaqA7": "The global ranking orders all users by accumulated XP. The weekly tournament uses a separate XP counter that resets every week — the top 3 at the end of the week earn special rewards.",
+  "supportFaqQ8": "How do learning paths work?",
+  "supportFaqA8": "Learning paths are sequences of lessons organised by topic. Each lesson contains multiple-choice exercises and other formats. Complete lessons in order to advance through the path and earn XP.",
+  "supportFaqQ9": "Can I change my username or profile picture?",
+  "supportFaqA9": "Yes. Open your profile by tapping the avatar at the top of the home screen, then tap \"Edit profile\". You can update your display name and photo at any time.",
   "a11yCopy": "Copy {label}",
   "@a11yCopy": {
     "placeholders": {

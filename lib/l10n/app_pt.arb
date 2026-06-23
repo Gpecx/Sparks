@@ -2582,6 +2582,16 @@
   "supportFaqA3": "Os pactos resetam toda segunda-feira às 00:00. Seu progresso é zerado e você pode escolher novos pactos.",
   "supportFaqQ4": "Como entrar em contato para erros de conteúdo?",
   "supportFaqA4": "Use o formulário abaixo e selecione \"Erro em conteúdo\". Nossa equipe vai revisar e corrigir o mais rápido possível.",
+  "supportFaqQ5": "O que é o código de acesso e como usar?",
+  "supportFaqA5": "O código de acesso libera o conteúdo completo do app. Vá em Configurações › Resgatar código de acesso, insira o código fornecido pela sua escola ou empresa e confirme. O acesso é imediato.",
+  "supportFaqQ6": "Como funciona o duelo PvP?",
+  "supportFaqA6": "No duelo PvP você enfrenta outro usuário em tempo real respondendo perguntas das trilhas. Vence quem acertar mais rápido. Cada vitória garante XP extra e melhora seu ELO de duelos.",
+  "supportFaqQ7": "O que é o ranking global e o torneio semanal?",
+  "supportFaqA7": "O ranking global ordena todos os usuários pelo XP acumulado. O torneio semanal usa um XP separado que zera toda semana — os top 3 ao fim da semana ganham recompensas especiais.",
+  "supportFaqQ8": "Como funcionam as trilhas de aprendizagem?",
+  "supportFaqA8": "As trilhas são sequências de lições organizadas por tema. Cada lição contém exercícios de múltipla escolha e outros formatos. Conclua as lições em ordem para avançar na trilha e ganhar XP.",
+  "supportFaqQ9": "Posso alterar meu nome de usuário ou foto de perfil?",
+  "supportFaqA9": "Sim. Acesse seu perfil tocando no avatar no topo da tela inicial, depois toque em \"Editar perfil\". Você pode alterar seu nome de exibição e foto a qualquer momento.",
   "a11yCopy": "Copiar {label}",
   "@a11yCopy": {
     "placeholders": {

@@ -183,20 +183,6 @@ class _SupportScreenState extends State<SupportScreen> {
 
           const SizedBox(height: 32),
 
-          // FAQ
-          _sectionTitle(AppLocalizations.of(context)!.supportFaqTitle),
-          const SizedBox(height: 12),
-          _faqItem(AppLocalizations.of(context)!.supportFaqQ1,
-              AppLocalizations.of(context)!.supportFaqA1),
-          _faqItem(AppLocalizations.of(context)!.supportFaqQ2,
-              AppLocalizations.of(context)!.supportFaqA2),
-          _faqItem(AppLocalizations.of(context)!.supportFaqQ3,
-              AppLocalizations.of(context)!.supportFaqA3),
-          _faqItem(AppLocalizations.of(context)!.supportFaqQ4,
-              AppLocalizations.of(context)!.supportFaqA4),
-
-          const SizedBox(height: 32),
-
           // Formulário
           _sectionTitle(AppLocalizations.of(context)!.supportSendMessageTitle),
           const SizedBox(height: 12),
@@ -388,30 +374,4 @@ class _SupportScreenState extends State<SupportScreen> {
     );
   }
 
-  Widget _faqItem(String question, String answer) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.cardBorder.withValues(alpha: 0.4)),
-      ),
-      child: ExpansionTile(
-        tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
-        iconColor: AppColors.primary,
-        collapsedIconColor: AppColors.textMuted,
-        title: Text(
-          question,
-          style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600),
-        ),
-        children: [
-          Text(
-            answer,
-            style: const TextStyle(color: AppColors.textSecondary, fontSize: 13, height: 1.5),
-          ),
-        ],
-      ),
-    );
-  }
 }
