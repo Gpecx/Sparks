@@ -81,8 +81,10 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
+      # --no-tree-shake-icons: o app usa IconData não-constante (ícones
+      # dinâmicos), incompatível com o tree-shaking de ícones do Flutter.
       - name: Build AAB
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release --no-tree-shake-icons
 
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
