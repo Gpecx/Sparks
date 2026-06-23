@@ -1,0 +1,50 @@
+name: Generate Launcher Icons
+
+# Gera os ícones de launcher (Android + iOS) a partir de
+# assets/images/spark_logo.png usando o flutter_launcher_icons (config no
+# pubspec.yaml) e abre um PR com os arquivos gerados.
+#
+# Acionado só manualmente (workflow_dispatch). Rode sempre que o logo mudar.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate-icons:
+    name: Generate icons & open PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Generate launcher icons
+        run: dart run flutter_launcher_icons
+
+      - name: Open PR with generated icons
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/launcher-icons-generated
+          commit-message: "chore(icons): regenera ícones de launcher (Android + iOS)"
+          title: "chore(icons): ícones de launcher gerados (Android + iOS)"
+          body: |
+            Ícones gerados automaticamente pelo workflow **Generate Launcher Icons**
+            a partir de `assets/images/spark_logo.png` (flutter_launcher_icons).
+
+            Inclui mipmaps do Android e o AppIcon.appiconset do iOS.
+
+            🤖 Generated with [Claude Code](https://claude.com/claude-code)
+          add-paths: |
+            android/app/src/main/res/**
+            ios/Runner/Assets.xcassets/**
