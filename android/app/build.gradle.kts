@@ -13,9 +13,11 @@ plugins {
 
 android {
     namespace = "com.gpecx.spark"
-    // Fixado em 35: a Play Store exige targetSdk >= 35 para apps novos/atualizados
-    // submetidos em 2026 (antes vinha do default do Flutter, que pode ficar para trás).
-    compileSdk = 35
+    // compileSdk 36: os plugins atuais (connectivity_plus, image_picker_android,
+    // androidx activity/browser etc.) exigem compilar contra a API 36, senão o
+    // checkReleaseAarMetadata falha. compileSdk só afeta a compilação.
+    // targetSdk segue em 35 (exigência atual da Play; precisa ser <= compileSdk).
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
