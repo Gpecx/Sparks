@@ -160,13 +160,21 @@ function xpBadgesEarned(totalXp: number): string[] {
   return badges;
 }
 
-function currentWeekKey(): string {
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 1);
+// Rótulo de semana "YYYY-Www" — usado apenas para arquivar o histórico do
+// torneio e rotular a notificação de vitória.
+function weekKeyFor(d: Date): string {
+  const start = new Date(d.getFullYear(), 0, 1);
   const dayOfYear =
-    Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-  const weekNum = Math.floor((dayOfYear - now.getDay() + 10) / 7);
-  return `${now.getFullYear()}-W${String(weekNum).padStart(2, "0")}`;
+    Math.floor((d.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+  const weekNum = Math.floor((dayOfYear - d.getDay() + 10) / 7);
+  return `${d.getFullYear()}-W${String(weekNum).padStart(2, "0")}`;
+}
+
+// Semana que acabou de encerrar (closeTournament roda na virada de segunda).
+function lastWeekKey(): string {
+  const d = new Date();
+  d.setDate(d.getDate() - 7);
+  return weekKeyFor(d);
 }
 
 async function writeAuditLog(
@@ -401,7 +409,6 @@ export const addXp = onCall(
 
     const userRef = db.collection("users").doc(uid);
     let result!: AddXpResult;
-    let rankingData: Record<string, any> | null = null;
 
     // Transação focada SOMENTE no documento do usuário (sem cross-document)
     await db.runTransaction(async (tx) => {
@@ -412,14 +419,12 @@ export const addXp = onCall(
 
       const data = snap.data()!;
       const currentXp = (data["xp"] as number) ?? 0;
-      const currentWeeklyXp = (data["weeklyXp"] as number) ?? 0;
       const unlockedBadgeIds: string[] = data["unlockedBadgeIds"] ?? [];
       const oldLevel = calcLevel(currentXp);
 
       const newXp = currentXp + amount;
       const newLevel = calcLevel(newXp);
       const newTension = calcTension(newXp);
-      const newWeeklyXp = currentWeeklyXp + amount;
       const leveledUp = newLevel > oldLevel;
 
       const userUpdates: Record<string, any> = {
@@ -442,33 +447,10 @@ export const addXp = onCall(
       tx.update(userRef, userUpdates);
 
       result = { newXp, newLevel, newTension, leveledUp, badgesUnlocked };
-
-      // Armazena dados para ranking (será escrito fora da transação)
-      rankingData = {
-        uid,
-        displayName: data["displayName"] ?? "Usuário",
-        photoUrl: data["photoUrl"] ?? null,
-        weeklyXp: newWeeklyXp,
-        clanId: data["clanId"] ?? null,
-        clanName: data["clanName"] ?? null,
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      };
+      // O ranking (Global por xp e Torneio por weeklyXp) é lido direto de
+      // public_profiles, mantido pelo trigger syncPublicProfile. Não há mais
+      // escrita em rankings/weekly aqui.
     });
-
-    // Ranking atualizado FORA da transação — sem risco de contenção
-    if (rankingData) {
-      const weekKey = currentWeekKey();
-      const rankingRef = db
-        .collection("rankings")
-        .doc("weekly")
-        .collection(weekKey)
-        .doc(uid);
-      try {
-        await rankingRef.set(rankingData, { merge: true });
-      } catch (e) {
-        logger.warn("[addXp] Erro ao atualizar ranking (não crítico):", e);
-      }
-    }
 
     // Audit log fora da transação (não-crítico)
     try {
@@ -3088,7 +3070,20 @@ export const syncPublicProfile = onDocumentWritten(
     }
 
     const afterData = after.data() ?? {};
+
+    // Contas de admin/teste NÃO aparecem em nenhum ranking (Global, Torneio
+    // ou clã, que leem public_profiles). Remove o espelho e sai.
+    if (afterData["role"] === "admin" || afterData["excludeFromRanking"] === true) {
+      await publicRef.delete().catch(() => {});
+      logger.info(`[syncPublicProfile] uid=${uid} excluído do ranking (admin/teste).`);
+      return;
+    }
+
     const newPublic = pickPublicFields(afterData);
+    // Garante que os campos de ordenação dos rankings sempre existam — sem
+    // eles o documento some do orderBy('xp')/orderBy('weeklyXp').
+    if (newPublic["xp"] === undefined) newPublic["xp"] = 0;
+    if (newPublic["weeklyXp"] === undefined) newPublic["weeklyXp"] = 0;
 
     // Evita escritas desnecessárias (e loops de custo): só grava se algum
     // campo público realmente mudou em relação ao estado anterior.
@@ -3110,50 +3105,115 @@ export const syncPublicProfile = onDocumentWritten(
 );
 
 // ────────────────────────────────────────────────────────────────
-// cleanupOldRankings — Agendada semanalmente. Remove subcoleções de
-// semanas antigas em rankings/weekly para o storage não crescer
-// indefinidamente (o addXp cria uma subcoleção nova a cada semana e
-// nada as apagava). Mantém as últimas RANKING_WEEKS_TO_KEEP semanas.
-// O weekKey tem formato "YYYY-Www" (zero-padded), então a ordenação
-// lexicográfica decrescente equivale à cronológica.
-// (Recuperado: foi removido por engano no merge da PR #19/spark-admin.)
+// closeTournament — Agendada na virada de segunda. Encerra o torneio
+// SEMANAL: premia o top 3 por weeklyXp, notifica os vencedores (popup
+// no app), arquiva o pódio final e ZERA weeklyXp de todos para começar
+// a nova semana.
+//
+// O Ranking GLOBAL (por xp total) e o Torneio (por weeklyXp) são lidos
+// direto de public_profiles — os nomes/posições nunca são apagados,
+// apenas o weeklyXp é resetado aqui para reiniciar a competição.
 // ────────────────────────────────────────────────────────────────
 
-const RANKING_WEEKS_TO_KEEP = 8;
+// Premiação do torneio: 1º, 2º, 3º lugar (XP somado ao total).
+const TOURNAMENT_PRIZES = [500, 250, 100];
 
-export const cleanupOldRankings = onSchedule(
+export const closeTournament = onSchedule(
   {
-    schedule: "every monday 04:00",
+    // 00:05 de segunda (BRT) — logo após a virada da semana.
+    schedule: "every monday 00:05",
     timeZone: "America/Sao_Paulo",
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
   async () => {
-    const weeklyDoc = db.collection("rankings").doc("weekly");
-    const weekCols = await weeklyDoc.listCollections();
+    const weekKey = lastWeekKey();
 
-    if (weekCols.length <= RANKING_WEEKS_TO_KEEP) {
-      logger.info(
-        `[cleanupOldRankings] ${weekCols.length} semana(s); nada a limpar.`
-      );
-      return;
-    }
+    // 1) Top 3 por weeklyXp (apenas quem realmente pontuou).
+    const topSnap = await db
+      .collection("public_profiles")
+      .orderBy("weeklyXp", "desc")
+      .limit(3)
+      .get();
+    const winners = topSnap.docs.filter(
+      (d) => ((d.get("weeklyXp") as number) ?? 0) > 0
+    );
 
-    // Ordena por ID (weekKey) decrescente e mantém só as mais recentes.
-    const sorted = weekCols.sort((a, b) => (a.id < b.id ? 1 : -1));
-    const toDelete = sorted.slice(RANKING_WEEKS_TO_KEEP);
+    const historyCol = db
+      .collection("rankings")
+      .doc("tournament_history")
+      .collection(weekKey);
 
-    for (const col of toDelete) {
+    for (let i = 0; i < winners.length; i++) {
+      const doc = winners[i];
+      const uid = doc.id;
+      const place = i + 1;
+      const prize = TOURNAMENT_PRIZES[i] ?? 0;
+      const finalWeeklyXp = (doc.get("weeklyXp") as number) ?? 0;
+
       try {
-        await db.recursiveDelete(col);
-        logger.info(`[cleanupOldRankings] semana ${col.id} removida.`);
+        // Premia o XP total (cascateia para public_profiles via trigger).
+        await db.collection("users").doc(uid).set(
+          {
+            xp: admin.firestore.FieldValue.increment(prize),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        );
+
+        // Notificação que dispara o popup animado de vitória no app.
+        await db
+          .collection("users")
+          .doc(uid)
+          .collection("notifications")
+          .add({
+            type: "tournament_win",
+            place,
+            prize,
+            weekKey,
+            weeklyXp: finalWeeklyXp,
+            read: false,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          });
+
+        // Arquiva o pódio final (registro permanente das posições).
+        await historyCol.doc(uid).set({
+          uid,
+          place,
+          prize,
+          weeklyXp: finalWeeklyXp,
+          displayName: doc.get("displayName") ?? "Usuário",
+          photoUrl: doc.get("photoUrl") ?? null,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
       } catch (e) {
-        logger.warn(`[cleanupOldRankings] falha ao remover ${col.id}:`, e);
+        logger.warn(`[closeTournament] falha ao premiar uid=${uid}:`, e);
       }
     }
 
+    // 2) Zera weeklyXp de todos os que pontuaram. Cada lote sai do filtro
+    //    (weeklyXp > 0) após o commit, então re-consultar até esvaziar.
+    let resetCount = 0;
+    while (true) {
+      const snap = await db
+        .collection("users")
+        .where("weeklyXp", ">", 0)
+        .limit(400)
+        .get();
+      if (snap.empty) break;
+
+      const batch = db.batch();
+      for (const d of snap.docs) {
+        batch.update(d.ref, { weeklyXp: 0 });
+      }
+      await batch.commit();
+      resetCount += snap.size;
+      if (snap.size < 400) break;
+    }
+
     logger.info(
-      `[cleanupOldRankings] ${toDelete.length} semana(s) antiga(s) removida(s).`
+      `[closeTournament] semana=${weekKey} premiados=${winners.length} ` +
+        `weeklyXp_resetado=${resetCount}`
     );
   }
 );
@@ -3226,5 +3286,73 @@ export const cleanupStaleDuels = onSchedule(
     logger.info(
       `[cleanupStaleDuels] ${closed}/${snap.size} duelo(s) travado(s) encerrado(s).`
     );
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// rankingAdminTask — ENDPOINT TEMPORÁRIO (mínimo). Protegido por token.
+//   ?token=...&action=findname&q=souza
+// REMOVER após o uso (firebase functions:delete rankingAdminTask).
+// ────────────────────────────────────────────────────────────────
+const RANKING_ADMIN_TOKEN = "rk_7Q2x9Mzv4Lp1Ad8Ws6Tc3Nb5Hf0Ej";
+
+export const rankingAdminTask = onRequest(
+  {
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (req, res) => {
+    if (req.query.token !== RANKING_ADMIN_TOKEN) {
+      res.status(403).json({ error: "forbidden" });
+      return;
+    }
+    const action = String(req.query.action ?? "");
+    try {
+      if (action === "findname") {
+        const q = String(req.query.q ?? "").toLowerCase();
+        const [pubSnap, usersSnap] = await Promise.all([
+          db.collection("public_profiles").get(),
+          db.collection("users").get(),
+        ]);
+        const userById = new Map(usersSnap.docs.map((d) => [d.id, d]));
+        const inPub = pubSnap.docs
+          .filter((d) =>
+            String(d.get("displayName") ?? "").toLowerCase().includes(q)
+          )
+          .map((d) => d.id);
+        const inUsers = usersSnap.docs
+          .filter((d) =>
+            String(d.get("displayName") ?? "").toLowerCase().includes(q)
+          )
+          .map((d) => d.id);
+        const uids = Array.from(new Set([...inPub, ...inUsers]));
+        const matches = [];
+        for (const uid of uids) {
+          let email: string | null = null;
+          try {
+            email = (await admin.auth().getUser(uid)).email ?? null;
+          } catch (_) {
+            email = null;
+          }
+          const ud = userById.get(uid);
+          const pd = pubSnap.docs.find((d) => d.id === uid);
+          matches.push({
+            uid,
+            email,
+            displayName: ud?.get("displayName") ?? pd?.get("displayName") ?? null,
+            xp: ud?.get("xp") ?? pd?.get("xp") ?? 0,
+            role: ud?.get("role") ?? null,
+            inRanking: !!pd,
+          });
+        }
+        res.json({ count: matches.length, matches });
+        return;
+      }
+      res.status(400).json({ error: "unknown action" });
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e);
+      logger.error("[rankingAdminTask]", msg);
+      res.status(500).json({ error: msg });
+    }
   }
 );

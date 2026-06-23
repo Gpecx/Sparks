@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
+import 'package:spark_app/widgets/responsive_form_container.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -99,7 +100,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       backgroundColor: AppColors.background,
       body: SparksBackground(
         child: SafeArea(
-          child: Column(
+          child: ResponsiveFormContainer(
+            child: Column(
             children: [
               // Progress Header
               Padding(
@@ -173,6 +175,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ],
+          ),
           ),
         ),
       ),

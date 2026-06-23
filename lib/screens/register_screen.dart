@@ -14,6 +14,7 @@ import 'package:spark_app/services/access_code_service.dart';
 import 'package:spark_app/widgets/email_verification_dialog.dart';
 import 'package:spark_app/widgets/google_auth_button.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
+import 'package:spark_app/widgets/responsive_form_container.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -219,7 +220,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
+        child: ResponsiveFormContainer(
+          child: Column(
           children: [
             const SizedBox(height: 16),
             const AnimatedSparkLogo(),
@@ -329,6 +331,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             const SizedBox(height: 32),
           ],
+        ),
         ),
       ),
     );

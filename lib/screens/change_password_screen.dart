@@ -4,6 +4,7 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/widgets/responsive_form_container.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
@@ -176,7 +177,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-            child: Form(
+            child: ResponsiveFormContainer(
+              child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -349,6 +351,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   const SizedBox(height: 20),
                 ],
               ),
+            ),
             ),
           ),
         ),
