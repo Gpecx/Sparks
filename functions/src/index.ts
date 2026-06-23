@@ -2427,6 +2427,7 @@ class AlreadyMatchedError extends Error {
 
 export const joinDuelQueue = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -2591,6 +2592,7 @@ export const joinDuelQueue = onCall(
 
 export const leaveDuelQueue = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -2619,6 +2621,7 @@ interface SubmitAnswerResult {
 
 export const submitDuelAnswer = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -2725,6 +2728,7 @@ interface FinalizeResult {
 
 export const finalizeDuel = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -2991,6 +2995,7 @@ interface BotQuestionsData {
 
 export const getBotDuelQuestions = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
