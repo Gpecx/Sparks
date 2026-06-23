@@ -37,21 +37,23 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
 
-      # 5. Gera o arquivo .env com as chaves do Spark
-      #    (consumido pelo `flutter build web` dentro do Dockerfile)
-      - name: Generate .env file
+      # 5. Gera o .env.public APENAS com as chaves PÚBLICAS do Firebase
+      #    (públicas por design — apiKey web/appId etc.). É o único arquivo
+      #    de config empacotado pelo `flutter build web`. Segredos de servidor
+      #    (ASAAS/Gemini) NÃO entram aqui — ficam no Secret Manager das Functions.
+      - name: Generate .env.public file
         run: |
-          echo "FIREBASE_API_KEY_ANDROID=${{ secrets.FIREBASE_API_KEY_ANDROID }}" >> .env
-          echo "FIREBASE_API_KEY_IOS=${{ secrets.FIREBASE_API_KEY_IOS }}" >> .env
-          echo "FIREBASE_API_KEY_WEB=${{ secrets.FIREBASE_API_KEY_WEB }}" >> .env
-          echo "FIREBASE_APP_ID_ANDROID=${{ secrets.FIREBASE_APP_ID_ANDROID }}" >> .env
-          echo "FIREBASE_APP_ID_IOS=${{ secrets.FIREBASE_APP_ID_IOS }}" >> .env
-          echo "FIREBASE_APP_ID_WEB=${{ secrets.FIREBASE_APP_ID_WEB }}" >> .env
-          echo "FIREBASE_AUTH_DOMAIN=${{ secrets.FIREBASE_AUTH_DOMAIN }}" >> .env
-          echo "FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID }}" >> .env
-          echo "FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}" >> .env
-          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> .env
-          echo "FIREBASE_STORAGE_BUCKET=${{ secrets.FIREBASE_STORAGE_BUCKET }}" >> .env
+          echo "FIREBASE_API_KEY_ANDROID=${{ secrets.FIREBASE_API_KEY_ANDROID }}" >> .env.public
+          echo "FIREBASE_API_KEY_IOS=${{ secrets.FIREBASE_API_KEY_IOS }}" >> .env.public
+          echo "FIREBASE_API_KEY_WEB=${{ secrets.FIREBASE_API_KEY_WEB }}" >> .env.public
+          echo "FIREBASE_APP_ID_ANDROID=${{ secrets.FIREBASE_APP_ID_ANDROID }}" >> .env.public
+          echo "FIREBASE_APP_ID_IOS=${{ secrets.FIREBASE_APP_ID_IOS }}" >> .env.public
+          echo "FIREBASE_APP_ID_WEB=${{ secrets.FIREBASE_APP_ID_WEB }}" >> .env.public
+          echo "FIREBASE_AUTH_DOMAIN=${{ secrets.FIREBASE_AUTH_DOMAIN }}" >> .env.public
+          echo "FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID }}" >> .env.public
+          echo "FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}" >> .env.public
+          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> .env.public
+          echo "FIREBASE_STORAGE_BUCKET=${{ secrets.FIREBASE_STORAGE_BUCKET }}" >> .env.public
 
       # 6. Constroi a imagem Docker (o build copia o .env gerado acima)
       - name: Build Docker image

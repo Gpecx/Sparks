@@ -22,6 +22,13 @@ import 'package:spark_app/providers/user_provider.dart';
 //  - Posição do usuário/clã destacada em todas as listas
 // ─────────────────────────────────────────────────────────────────
 
+/// UIDs ocultados do ranking global (contas de desenvolvimento/teste que
+/// distorcem a competição). Filtrados na leitura do ranking semanal.
+const Set<String> kHiddenRankingUids = {
+  'jhcX8vIPoUNs2JvhcxehFH5CR6y1', // Gabriel Chiarato Santana (programador)
+  'bEROZ3kSCNanW9X4vTfqNI2Ugl02', // Fábio Souza — conta duplicada (menor); mantém só a de 483xp
+};
+
 class ClanRankingEntry {
   final String id;
   final String name;
@@ -122,8 +129,9 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       (snap) {
         final data = snap.docs
             .map((doc) => RankingEntry.fromFirestore(doc, scoreField: 'xp'))
-            // Só entra no ranking quem já ganhou algum XP (xp > 0).
-            .where((e) => e.weeklyXp > 0)
+            // Só entra no ranking quem já ganhou algum XP (com scoreField:'xp'
+            // o total de XP vem em weeklyXp) e esconde contas fantasma/duplicadas.
+            .where((e) => e.weeklyXp > 0 && !kHiddenRankingUids.contains(e.uid))
             .toList();
         for (int i = 0; i < data.length; i++) {
           data[i].position = i + 1;

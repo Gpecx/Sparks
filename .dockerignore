@@ -6,3 +6,15 @@ ios/
 linux/
 macos/
 windows/
+
+# Segredos — NUNCA entram na imagem/bundle. Só .env.public (config pública
+# do Firebase, gerada no CI) é incluída. Impede vazar o .env de dev.
+.env
+.env.*
+!.env.public
+*.keystore
+keystore/
+serviceAccount*.json
+*-firebase-adminsdk-*.json
+.env.secrets
+setup_asaas_env.sh

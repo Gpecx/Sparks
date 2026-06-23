@@ -28,8 +28,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // 0. Carrega as variáveis de ambiente (.env)
-  await dotenv.load(fileName: ".env");
+  // 0. Carrega só a config pública (Firebase web/RECAPTCHA). Segredos de
+  //    servidor (ASAAS/Gemini) ficam no Secret Manager, nunca no bundle.
+  await dotenv.load(fileName: ".env.public");
 
   // 1. Inicializa o Firebase
   await Firebase.initializeApp(
@@ -45,15 +46,9 @@ void main() async {
   // em: Firebase Console → App Check → Apps → Gerenciar tokens de depuração).
   // Em release: Play Integrity (Android), Device Check (Apple) e reCAPTCHA v3
   // (Web — substitua RECAPTCHA_V3_SITE_KEY pela chave gerada no console).
-  await FirebaseAppCheck.instance.activate(
-    // ignore: deprecated_member_use — os params provider* novos exigem tipos diferentes (Android/Apple/WebAppCheckProvider); manter a API estável.
-    androidProvider:
-        kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
-    appleProvider:
-        kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
-    webProvider: ReCaptchaV3Provider('RECAPTCHA_V3_SITE_KEY'),
-  );
-  // Em release: Play Integrity (Android), Device Check (Apple) e reCAPTCHA v3 (Web).
+  // (Ativação ÚNICA e guardada abaixo. Removida a chamada anterior que ativava
+  //  o web com a string literal 'RECAPTCHA_V3_SITE_KEY' — chave inválida que
+  //  fazia o reCAPTCHA falhar e contaminar o SDK no web.)
   //
   // No WEB o App Check só é ativado se houver uma chave reCAPTCHA v3 REAL em
   // RECAPTCHA_V3_SITE_KEY (.env). Sem chave válida, o provider reCAPTCHA falha e

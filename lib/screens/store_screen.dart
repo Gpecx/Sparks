@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/core/utils/currency_utils.dart';
@@ -186,10 +188,61 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
     super.dispose();
   }
 
+  // URL do app web do Spark (rota hash do GoRouter). Em mobile, a assinatura é
+  // concluída aqui, no navegador, para cumprir a política do Google Play (bem
+  // digital não pode ser cobrado por gateway externo dentro do app). Na web o
+  // checkout in-app é mantido.
+  static const String _webSubscribeUrl =
+      'https://site-pv4ke3lupq-rj.a.run.app/#/store';
+
+  /// Abre o site no navegador para o usuário concluir a assinatura.
+  Future<void> _openWebSubscription() async {
+    final go = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.card,
+        title: const Text('Assinar pelo site', style: TextStyle(color: Colors.white)),
+        content: const Text(
+          'Para concluir a assinatura com segurança, você será levado ao nosso '
+          'site no navegador. Entre com a MESMA conta e finalize o pagamento. '
+          'Ao voltar ao app, seu plano estará ativo automaticamente.',
+          style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(AppLocalizations.of(context)!.cancel),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Continuar'),
+          ),
+        ],
+      ),
+    );
+    if (go != true) return;
+    final ok = await launchUrl(
+      Uri.parse(_webSubscribeUrl),
+      mode: LaunchMode.externalApplication,
+    );
+    if (!ok && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Não foi possível abrir o navegador.')),
+      );
+    }
+  }
+
   void _onSubscribe(SubscriptionPlan plan) {
-    final period = _isAnnual && plan.annualPrice != null ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly;
     AnalyticsService().logPlanSelected(
         plan: plan.id, period: _isAnnual ? 'yearly' : 'monthly');
+
+    // Mobile: paga pelo navegador (Play Billing policy). Web: checkout in-app.
+    if (!kIsWeb) {
+      _openWebSubscription();
+      return;
+    }
+
+    final period = _isAnnual && plan.annualPrice != null ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly;
     final price = (_isAnnual && plan.annualPrice != null)
         ? plan.annualPrice!
         : plan.monthlyPrice;
@@ -212,6 +265,11 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
   }
 
   void _onTrial(SubscriptionPlan plan) {
+    // Mobile: trial/assinatura concluídos pelo navegador (Play Billing policy).
+    if (!kIsWeb) {
+      _openWebSubscription();
+      return;
+    }
     final info = TrialPlanInfo(
       planId: plan.id,
       planName: plan.name,

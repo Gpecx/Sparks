@@ -1,12 +1,8 @@
 import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/services/standards_service.dart';
 import 'package:spark_app/models/standard_metadata.dart';
-
-/// URL da plataforma PowerPlay (VoltsMind) — abre no navegador externo.
-const String kPowerplayUrl = 'https://site-895835261078.us-central1.run.app/';
 
 /// Tela híbrida: exibe detalhes técnicos da norma + seção PowerPlay de vídeos.
 /// Aceita [standardId] como parâmetro de rota (ex: 'nr-10').
@@ -217,36 +213,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
         ),
         const SizedBox(height: 28),
 
-        // ── Divisor PowerPlay ──────────────────────────────────────────────
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-                ),
-                child: Text(AppLocalizations.of(context)!.powerplayTitle, style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(AppLocalizations.of(context)!.stdNetflixTagline, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 14),
-
-        // ── Acesso à plataforma PowerPlay ──────────────────────────────────
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: _powerplayButton(context),
-        ),
-
-        const SizedBox(height: 32),
+        const SizedBox(height: 8),
       ],
     );
   }
@@ -296,26 +263,7 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
             ],
           ),
         ),
-        const SizedBox(height: 28),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: SizedBox(
-            width: double.infinity,
-            height: 52,
-            child: ElevatedButton(
-              onPressed: () => _openPowerplay(context),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(AppLocalizations.of(context)!.stdAccessPowerplay, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 2)),
-                  SizedBox(width: 10),
-                  Icon(Icons.open_in_new, size: 16),
-                ],
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 20),
         TextButton(
           onPressed: () => Navigator.pop(context),
           child: Text(AppLocalizations.of(context)!.stdMaybeLater, style: TextStyle(color: AppColors.textMuted, fontSize: 13)),
@@ -324,30 +272,6 @@ class _StandardDetailScreenState extends State<StandardDetailScreen> {
       ],
     );
   }
-
-  Future<void> _openPowerplay(BuildContext context) async {
-    final uri = Uri.parse(kPowerplayUrl);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
-
-  Widget _powerplayButton(BuildContext context) => SizedBox(
-        width: double.infinity,
-        height: 52,
-        child: ElevatedButton(
-          onPressed: () => _openPowerplay(context),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(AppLocalizations.of(context)!.stdAccessPowerplay,
-                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 2)),
-              const SizedBox(width: 10),
-              const Icon(Icons.open_in_new, size: 16),
-            ],
-          ),
-        ),
-      );
 
   Widget _featureChip(IconData icon, String label) {
     return Container(

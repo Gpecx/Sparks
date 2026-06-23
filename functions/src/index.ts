@@ -1398,6 +1398,50 @@ async function assertAdmin(uid: string): Promise<void> {
   }
 }
 
+/**
+ * Resolve uids -> { uid, name, email } mesclando o doc /users (displayName/email)
+ * com o registro do Firebase Auth (preenche email/nome faltantes). Usado para
+ * mostrar POR QUEM cada código foi resgatado e a listagem de usuários do admin.
+ */
+async function resolveUserInfos(
+  uids: string[]
+): Promise<Map<string, { uid: string; name: string; email: string | null }>> {
+  const out = new Map<string, { uid: string; name: string; email: string | null }>();
+  const unique = [...new Set(uids.filter(Boolean))];
+  if (unique.length === 0) return out;
+
+  // /users (displayName + email quando houver)
+  const docs = await db.getAll(...unique.map((u) => db.collection("users").doc(u)));
+  const fromDoc = new Map<string, { name?: string; email?: string }>();
+  docs.forEach((d) => {
+    const data = d.data() || {};
+    fromDoc.set(d.id, { name: data["displayName"], email: data["email"] });
+  });
+
+  // Auth (fonte confiável de email/nome) — em lotes de 100
+  const fromAuth = new Map<string, { name?: string; email?: string }>();
+  for (let i = 0; i < unique.length; i += 100) {
+    const chunk = unique.slice(i, i + 100).map((u) => ({ uid: u }));
+    try {
+      const res = await admin.auth().getUsers(chunk);
+      res.users.forEach((u) =>
+        fromAuth.set(u.uid, { name: u.displayName, email: u.email })
+      );
+    } catch (e) {
+      logger.warn("[resolveUserInfos] getUsers erro:", e);
+    }
+  }
+
+  for (const uid of unique) {
+    const d = fromDoc.get(uid) || {};
+    const a = fromAuth.get(uid) || {};
+    const name = (d.name && d.name.trim()) || (a.name && a.name.trim()) || "";
+    const email = d.email || a.email || null;
+    out.set(uid, { uid, name, email });
+  }
+  return out;
+}
+
 // redeemAccessCode — professor resgata o código e ganha acesso por durationDays.
 export const redeemAccessCode = onCall(
   {
@@ -1582,18 +1626,34 @@ export const listAccessCodes = onCall(
       .limit(500)
       .get();
 
+    // Resolve, de uma vez, todos os uids que resgataram qualquer código.
+    const allUids = new Set<string>();
+    snap.docs.forEach((d) =>
+      ((d.data()["redeemedBy"] as string[]) ?? []).forEach((u) => allUids.add(u))
+    );
+    const infos = await resolveUserInfos([...allUids]);
+
     const codes = snap.docs.map((d) => {
       const c = d.data();
       const createdAt = c["createdAt"] as admin.firestore.Timestamp | undefined;
+      const lastRedeemedAt = c["lastRedeemedAt"] as admin.firestore.Timestamp | undefined;
+      const redeemedBy: string[] = c["redeemedBy"] ?? [];
       return {
         code: d.id,
         durationDays: c["durationDays"] ?? 30,
         active: c["active"] ?? false,
         usedCount: c["usedCount"] ?? 0,
         maxUses: c["maxUses"] ?? 1,
-        redeemedBy: c["redeemedBy"] ?? [],
+        redeemedBy,
+        // Quem resgatou (nome + email) — para o admin ver por quem cada chave foi usada.
+        redeemers: redeemedBy.map(
+          (u) => infos.get(u) ?? { uid: u, name: "", email: null }
+        ),
         label: c["label"] ?? null,
+        // Anotação livre do admin (ex.: "enviado para Fulano / escola X").
+        note: c["note"] ?? null,
         createdAt: createdAt ? createdAt.toDate().toISOString() : null,
+        lastRedeemedAt: lastRedeemedAt ? lastRedeemedAt.toDate().toISOString() : null,
       };
     });
     return { codes };
@@ -1626,6 +1686,105 @@ export const revokeAccessCode = onCall(
 
     logger.info(`[revokeAccessCode] uid=${uid} revogou ${code}.`);
     return { success: true };
+  }
+);
+
+// setAccessCodeNote — admin anota livremente em um código (ex.: "enviado para
+// Fulano / escola X"). Substitui a planilha/txt de controle manual.
+export const setAccessCodeNote = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ code?: string; note?: string }>
+  ): Promise<{ success: boolean }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await checkRateLimit(
+      rateLimitKey("admin", uid, "setAccessCodeNote"),
+      RATE_ADMIN.limit,
+      RATE_ADMIN.windowMs
+    );
+
+    const code = (request.data?.code ?? "").toString().trim().toUpperCase();
+    if (!code) throw new HttpsError("invalid-argument", "Código é obrigatório.");
+    const note = (request.data?.note ?? "").toString().slice(0, 280);
+
+    const ref = db.collection("access_codes").doc(code);
+    const snap = await ref.get();
+    if (!snap.exists) throw new HttpsError("not-found", "Código não encontrado.");
+    await ref.update({
+      note: note.length > 0 ? note : admin.firestore.FieldValue.delete(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    logger.info(`[setAccessCodeNote] uid=${uid} anotou ${code}.`);
+    return { success: true };
+  }
+);
+
+// listUsers — admin lista todos os usuários com o plano/origem de acesso.
+// Resolve nome+email via /users + Firebase Auth e classifica o plano em:
+//   subscription (assinatura paga) · voucher (cortesia por código) · premium · free
+export const listUsers = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<Record<string, never>>
+  ): Promise<{ users: Record<string, unknown>[] }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await checkRateLimit(
+      rateLimitKey("admin", uid, "listUsers"),
+      RATE_ADMIN.limit,
+      RATE_ADMIN.windowMs
+    );
+
+    // Sem orderBy — docs sem createdAt não podem ser excluídos da listagem.
+    const snap = await db.collection("users").limit(1000).get();
+    const infos = await resolveUserInfos(snap.docs.map((d) => d.id));
+    const now = Date.now();
+
+    const users = snap.docs.map((d) => {
+      const u = d.data();
+      const info = infos.get(d.id);
+      const compExp = u["compAccessExpiresAt"] as admin.firestore.Timestamp | undefined;
+      const compActive = compExp ? compExp.toMillis() > now : false;
+      const isPremium = u["isPremium"] === true;
+
+      let plan: string;
+      if (u["subscriptionPlanId"] != null && isPremium) plan = "subscription";
+      else if (u["compAccessSource"] === "access_code" && compActive) plan = "voucher";
+      else if (isPremium) plan = "premium";
+      else plan = "free";
+
+      const createdAt = u["createdAt"] as admin.firestore.Timestamp | undefined;
+      return {
+        uid: d.id,
+        name: info?.name || "",
+        email: info?.email || u["email"] || null,
+        role: u["role"] ?? "técnico",
+        plan,
+        isPremium,
+        subscriptionPlanId: u["subscriptionPlanId"] ?? null,
+        compAccessSource: u["compAccessSource"] ?? null,
+        compAccessCode: u["compAccessCode"] ?? null,
+        compAccessExpiresAt: compExp ? compExp.toDate().toISOString() : null,
+        weeklyXp: u["weeklyXp"] ?? 0,
+        xp: u["xp"] ?? 0,
+        createdAt: createdAt ? createdAt.toDate().toISOString() : null,
+      };
+    });
+
+    logger.info(`[listUsers] uid=${uid} listou ${users.length} usuário(s).`);
+    return { users };
   }
 );
 
@@ -2250,6 +2409,7 @@ class AlreadyMatchedError extends Error {
 
 export const joinDuelQueue = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -2414,6 +2574,7 @@ export const joinDuelQueue = onCall(
 
 export const leaveDuelQueue = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -2442,6 +2603,7 @@ interface SubmitAnswerResult {
 
 export const submitDuelAnswer = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -2548,6 +2710,7 @@ interface FinalizeResult {
 
 export const finalizeDuel = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
@@ -2814,6 +2977,7 @@ interface BotQuestionsData {
 
 export const getBotDuelQuestions = onCall(
   {
+    enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },

@@ -59,6 +59,31 @@ class AccessCodeService {
     }
   }
 
+  /// [admin] Lista todos os usuários com plano/origem de acesso (assinatura,
+  /// voucher de cortesia, premium ou free) + nome e email.
+  Future<List<Map<String, dynamic>>> listUsers() async {
+    try {
+      final callable = _functions.httpsCallable('listUsers');
+      final res = await callable.call<Map<String, dynamic>>({});
+      return (res.data['users'] as List)
+          .map((e) => Map<String, dynamic>.from(e as Map))
+          .toList();
+    } on FirebaseFunctionsException catch (e) {
+      throw AccessCodeException(_messageFor(e));
+    }
+  }
+
+  /// [admin] Define/atualiza a anotação livre de um código (ex.: para quem foi
+  /// enviado). Passar string vazia remove a nota.
+  Future<void> setNote(String code, String note) async {
+    try {
+      final callable = _functions.httpsCallable('setAccessCodeNote');
+      await callable.call<Map<String, dynamic>>({'code': code, 'note': note});
+    } on FirebaseFunctionsException catch (e) {
+      throw AccessCodeException(_messageFor(e));
+    }
+  }
+
   /// [admin] Desativa um código (não afeta acessos já concedidos).
   Future<void> revoke(String code) async {
     try {

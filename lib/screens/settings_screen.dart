@@ -439,6 +439,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 subtitle: AppLocalizations.of(context)!.settingsTermsOfUseDesc,
                 onTap: () => context.push('/terms-of-use'),
               ),
+              _tile(
+                icon: Icons.privacy_tip_outlined,
+                title: 'Política de Privacidade',
+                subtitle: 'Como tratamos e protegemos seus dados',
+                onTap: () => context.push('/privacy-policy'),
+              ),
               const SizedBox(height: 20),
 
               // Logout

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../theme/app_theme.dart';
 import '../../../../services/access_code_service.dart';
+import 'csv_export.dart';
 
 /// Painel admin para gerar, listar e revogar códigos de acesso (cortesia).
 class AdminAccessCodesPanel extends StatefulWidget {
@@ -16,6 +17,24 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
   bool _loading = true;
   String? _error;
   List<Map<String, dynamic>> _codes = [];
+  String _filter = 'all'; // all | available | redeemed | revoked
+
+  // Status de um código: 'revoked' | 'redeemed' | 'available'.
+  String _statusOf(Map<String, dynamic> c) {
+    final active = c['active'] == true;
+    final used = (c['usedCount'] ?? 0) as int;
+    final maxUses = (c['maxUses'] ?? 1) as int;
+    if (!active) return 'revoked';
+    if (used >= maxUses) return 'redeemed';
+    return 'available';
+  }
+
+  int _countStatus(String s) => _codes.where((c) => _statusOf(c) == s).length;
+
+  List<Map<String, dynamic>> get _filtered {
+    if (_filter == 'all') return _codes;
+    return _codes.where((c) => _statusOf(c) == _filter).toList();
+  }
 
   @override
   void initState() {
@@ -161,6 +180,186 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
     );
   }
 
+  // ── Export CSV ──────────────────────────────────────────────────
+  static const _statusLabel = {
+    'available': 'Disponível',
+    'redeemed': 'Resgatado',
+    'revoked': 'Revogado',
+  };
+
+  String _fmtDate(String? iso) {
+    if (iso == null) return '';
+    final dt = DateTime.tryParse(iso);
+    if (dt == null) return '';
+    final l = dt.toLocal();
+    return '${l.day.toString().padLeft(2, '0')}/${l.month.toString().padLeft(2, '0')}/${l.year}';
+  }
+
+  String _csvField(String v) => '"${v.replaceAll('"', '""')}"';
+
+  /// Monta o CSV da lista atualmente filtrada.
+  String _buildCsv(List<Map<String, dynamic>> list) {
+    final headers = [
+      'Código',
+      'Status',
+      'Duração (dias)',
+      'Rótulo',
+      'Para quem foi enviado',
+      'Resgatado por',
+      'Criado em',
+      'Resgatado em',
+    ];
+    final rows = <String>[headers.map(_csvField).join(',')];
+    for (final c in list) {
+      final redeemers = (c['redeemers'] as List?) ?? const [];
+      final redeemed = (c['redeemedBy'] as List?) ?? const [];
+      rows.add([
+        c['code']?.toString() ?? '',
+        _statusLabel[_statusOf(c)] ?? '',
+        '${c['durationDays'] ?? 30}',
+        (c['label'] as String?) ?? '',
+        (c['note'] as String?) ?? '',
+        (redeemers.isNotEmpty || redeemed.isNotEmpty)
+            ? _redeemersLabel(redeemers, redeemed)
+            : '',
+        _fmtDate(c['createdAt'] as String?),
+        _fmtDate(c['lastRedeemedAt'] as String?),
+      ].map((v) => _csvField(v.toString())).join(','));
+    }
+    return rows.join('\r\n');
+  }
+
+  Future<void> _exportCsv() async {
+    final list = _filtered;
+    if (list.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nada para exportar neste filtro.')),
+      );
+      return;
+    }
+    final csv = _buildCsv(list);
+    final stamp = DateTime.now();
+    final name =
+        'vouchers_${stamp.year}-${stamp.month.toString().padLeft(2, '0')}-${stamp.day.toString().padLeft(2, '0')}.csv';
+
+    final downloaded = downloadCsv(name, csv);
+    if (downloaded) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('CSV exportado (${list.length} voucher(s)).')),
+      );
+      return;
+    }
+    // Fallback (não-web): mostra o CSV para copiar.
+    if (!mounted) return;
+    await showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.card,
+        title: const Text('CSV', style: TextStyle(color: Colors.white)),
+        content: SizedBox(
+          width: 360,
+          child: SingleChildScrollView(
+            child: SelectableText(csv,
+                style: const TextStyle(
+                    color: AppColors.textSecondary,
+                    fontFamily: 'monospace',
+                    fontSize: 11)),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: csv));
+              ScaffoldMessenger.of(ctx).showSnackBar(
+                const SnackBar(content: Text('CSV copiado.')),
+              );
+            },
+            child: const Text('Copiar'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('Fechar'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Abre o diálogo para anotar/editar para quem o voucher foi enviado.
+  Future<void> _editNote(Map<String, dynamic> c) async {
+    final code = c['code']?.toString() ?? '';
+    if (code.isEmpty) return;
+    final noteCtrl = TextEditingController(text: (c['note'] as String?) ?? '');
+
+    final saved = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.card,
+        title: Row(
+          children: [
+            const Icon(Icons.edit_note, color: AppColors.primary, size: 20),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(code,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'monospace',
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.5)),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Para quem este voucher foi enviado?',
+                style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+            const SizedBox(height: 12),
+            TextField(
+              controller: noteCtrl,
+              autofocus: true,
+              minLines: 2,
+              maxLines: 4,
+              maxLength: 280,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                hintText: 'Ex.: enviado p/ Maria (Escola X) via WhatsApp',
+                hintStyle: TextStyle(color: AppColors.textMuted),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.textMuted)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.primary)),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: const Text('Cancelar', style: TextStyle(color: AppColors.textMuted)),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: const Text('Salvar'),
+          ),
+        ],
+      ),
+    );
+
+    if (saved != true) return;
+    try {
+      await _service.setNote(code, noteCtrl.text.trim());
+      await _reload();
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(backgroundColor: AppColors.error, content: Text(e.toString())),
+      );
+    }
+  }
+
   Future<void> _revoke(String code) async {
     try {
       await _service.revoke(code);
@@ -171,6 +370,28 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
         SnackBar(backgroundColor: AppColors.error, content: Text(e.toString())),
       );
     }
+  }
+
+  /// Formata os resgatadores de um código: "Nome (email)" por pessoa.
+  /// Cai para o email, ou um uid encurtado, quando o nome não está disponível.
+  String _redeemersLabel(List redeemers, List redeemedBy) {
+    if (redeemers.isNotEmpty) {
+      return redeemers.map((r) {
+        final m = Map<String, dynamic>.from(r as Map);
+        final name = (m['name'] as String?)?.trim() ?? '';
+        final email = (m['email'] as String?)?.trim() ?? '';
+        final uid = (m['uid'] as String?) ?? '';
+        if (name.isNotEmpty && email.isNotEmpty) return '$name ($email)';
+        if (name.isNotEmpty) return name;
+        if (email.isNotEmpty) return email;
+        return uid.length > 8 ? '${uid.substring(0, 8)}…' : uid;
+      }).join(', ');
+    }
+    // Fallback: só temos os uids (resposta antiga do backend).
+    return redeemedBy
+        .map((u) => u.toString())
+        .map((u) => u.length > 8 ? '${u.substring(0, 8)}…' : u)
+        .join(', ');
   }
 
   Widget _field(TextEditingController c, String label, TextInputType type) {
@@ -215,6 +436,11 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
               icon: const Icon(Icons.refresh, color: AppColors.textSecondary),
               tooltip: 'Atualizar',
             ),
+            IconButton(
+              onPressed: _exportCsv,
+              icon: const Icon(Icons.download, color: AppColors.textSecondary),
+              tooltip: 'Exportar CSV',
+            ),
             const SizedBox(width: 8),
             ElevatedButton.icon(
               onPressed: _showGenerateDialog,
@@ -227,9 +453,45 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
             ),
           ],
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 16),
+        _buildStatusFilter(),
+        const SizedBox(height: 16),
         Expanded(child: _buildBody()),
       ],
+    );
+  }
+
+  Widget _buildStatusFilter() {
+    Widget chip(String value, String label, int count) {
+      final active = _filter == value;
+      return Padding(
+        padding: const EdgeInsets.only(right: 8),
+        child: ChoiceChip(
+          label: Text('$label ($count)'),
+          selected: active,
+          onSelected: (_) => setState(() => _filter = value),
+          backgroundColor: AppColors.surface,
+          selectedColor: AppColors.primary.withValues(alpha: 0.25),
+          labelStyle: TextStyle(
+              color: active ? AppColors.primary : AppColors.textSecondary,
+              fontSize: 12,
+              fontWeight: FontWeight.w600),
+          side: BorderSide(
+              color: active ? AppColors.primary : Colors.white.withValues(alpha: 0.08)),
+        ),
+      );
+    }
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          chip('all', 'Todos', _codes.length),
+          chip('available', 'Disponível', _countStatus('available')),
+          chip('redeemed', 'Resgatado', _countStatus('redeemed')),
+          chip('revoked', 'Revogado', _countStatus('revoked')),
+        ],
+      ),
     );
   }
 
@@ -246,16 +508,25 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
             style: TextStyle(color: AppColors.textMuted)),
       );
     }
+    final list = _filtered;
+    if (list.isEmpty) {
+      return const Center(
+        child: Text('Nenhum código neste filtro.',
+            style: TextStyle(color: AppColors.textMuted)),
+      );
+    }
     return ListView.separated(
-      itemCount: _codes.length,
+      itemCount: list.length,
       separatorBuilder: (_, __) => const SizedBox(height: 8),
       itemBuilder: (_, i) {
-        final c = _codes[i];
+        final c = list[i];
         final active = c['active'] == true;
         final used = (c['usedCount'] ?? 0) as int;
         final maxUses = (c['maxUses'] ?? 1) as int;
         final redeemed = (c['redeemedBy'] as List?) ?? const [];
+        final redeemers = (c['redeemers'] as List?) ?? const [];
         final label = c['label'] as String?;
+        final note = (c['note'] as String?)?.trim() ?? '';
         final exhausted = used >= maxUses;
         final status = !active
             ? 'Revogado'
@@ -268,57 +539,113 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
                 ? AppColors.textMuted
                 : AppColors.primary;
 
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(c['code']?.toString() ?? '',
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'monospace',
-                            letterSpacing: 1.5)),
-                    const SizedBox(height: 4),
-                    Text(
-                      '${c['durationDays'] ?? 30} dias · $used/$maxUses uso(s)'
-                      '${label != null && label.isNotEmpty ? ' · $label' : ''}'
-                      '${redeemed.isNotEmpty ? ' · por ${redeemed.first}' : ''}',
-                      style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
+            onTap: () => _editNote(c),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(c['code']?.toString() ?? '',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'monospace',
+                                letterSpacing: 1.5)),
+                        const SizedBox(height: 4),
+                        Text(
+                          '${c['durationDays'] ?? 30} dias · $used/$maxUses uso(s)'
+                          '${label != null && label.isNotEmpty ? ' · $label' : ''}',
+                          style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
+                        ),
+                        if (redeemers.isNotEmpty || redeemed.isNotEmpty) ...[
+                          const SizedBox(height: 4),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Icon(Icons.person, size: 13, color: AppColors.primary),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                child: Text(
+                                  'Resgatado por: ${_redeemersLabel(redeemers, redeemed)}',
+                                  style: const TextStyle(
+                                      color: AppColors.textSecondary, fontSize: 12),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                        const SizedBox(height: 4),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(Icons.sticky_note_2_outlined,
+                                size: 13,
+                                color: note.isNotEmpty
+                                    ? AppColors.warningAmber
+                                    : AppColors.textMuted),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                note.isNotEmpty ? note : 'Toque para anotar p/ quem foi enviado',
+                                style: TextStyle(
+                                  color: note.isNotEmpty
+                                      ? AppColors.warningAmber
+                                      : AppColors.textMuted,
+                                  fontSize: 12,
+                                  fontStyle: note.isNotEmpty
+                                      ? FontStyle.normal
+                                      : FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: statusColor.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(status,
+                        style: TextStyle(
+                            color: statusColor,
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                  IconButton(
+                    onPressed: () => _editNote(c),
+                    icon: const Icon(Icons.edit_note, size: 20, color: AppColors.textSecondary),
+                    tooltip: 'Anotar destinatário',
+                  ),
+                  IconButton(
+                    onPressed: () => _copyCode(c['code']?.toString() ?? ''),
+                    icon: const Icon(Icons.copy, size: 18, color: AppColors.textSecondary),
+                    tooltip: 'Copiar código',
+                  ),
+                  if (active && !exhausted)
+                    IconButton(
+                      onPressed: () => _revoke(c['code'].toString()),
+                      icon: const Icon(Icons.block, size: 18, color: AppColors.error),
+                      tooltip: 'Revogar',
+                    ),
+                ],
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: statusColor.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(status,
-                    style: TextStyle(
-                        color: statusColor, fontSize: 11, fontWeight: FontWeight.bold)),
-              ),
-              IconButton(
-                onPressed: () => _copyCode(c['code']?.toString() ?? ''),
-                icon: const Icon(Icons.copy, size: 18, color: AppColors.textSecondary),
-                tooltip: 'Copiar código',
-              ),
-              if (active && !exhausted)
-                IconButton(
-                  onPressed: () => _revoke(c['code'].toString()),
-                  icon: const Icon(Icons.block, size: 18, color: AppColors.error),
-                  tooltip: 'Revogar',
-                ),
-            ],
+            ),
           ),
         );
       },

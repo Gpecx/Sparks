@@ -24,6 +24,7 @@ import 'package:spark_app/screens/onboarding_screen.dart';
 import 'package:spark_app/screens/covenants_screen.dart';
 import 'package:spark_app/screens/support_screen.dart';
 import 'package:spark_app/screens/terms_of_use_screen.dart';
+import 'package:spark_app/screens/privacy_policy_screen.dart';
 import 'package:spark_app/core/admin/presentation/admin_dashboard_page.dart';
 import 'package:spark_app/screens/module_routing_screen.dart';
 import 'package:spark_app/screens/student_verification_screen.dart';
@@ -31,7 +32,7 @@ import 'package:spark_app/screens/business/business_setup_screen.dart';
 import 'package:spark_app/screens/business/team_dashboard_screen.dart';
 
 // Rotas públicas (não requerem autenticação)
-const _publicRoutes = {'/', '/login', '/register', '/registration-success', '/forgot-password', '/onboarding'};
+const _publicRoutes = {'/', '/login', '/register', '/registration-success', '/forgot-password', '/onboarding', '/privacy-policy'};
 
 class AppRouter {
   static final router = GoRouter(
@@ -101,6 +102,7 @@ class AppRouter {
       GoRoute(path: '/covenants', builder: (context, state) => const CovenantsScreen()),
       GoRoute(path: '/support', builder: (context, state) => const SupportScreen()),
       GoRoute(path: '/terms-of-use', builder: (context, state) => const TermsOfUseScreen()),
+      GoRoute(path: '/privacy-policy', builder: (context, state) => const PrivacyPolicyScreen()),
       GoRoute(path: '/admin', builder: (context, state) => const AdminDashboardPage()),
       GoRoute(
         path: '/module/:categoryId/:moduleId',

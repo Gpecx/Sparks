@@ -13,7 +13,11 @@ plugins {
 
 android {
     namespace = "com.gpecx.spark"
-    compileSdk = flutter.compileSdkVersion
+    // compileSdk 36: os plugins atuais (connectivity_plus, image_picker_android,
+    // androidx activity/browser etc.) exigem compilar contra a API 36, senão o
+    // checkReleaseAarMetadata falha. compileSdk só afeta a compilação.
+    // targetSdk segue em 35 (exigência atual da Play; precisa ser <= compileSdk).
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -31,7 +35,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
