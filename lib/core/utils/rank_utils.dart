@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 /// games — entra-se no **III** (mais baixo) e sobe-se até o **I** (mais alto)
 /// antes de promover. A 6ª (Mestre) é o topo aberto, sem tiers.
 ///
-///   Iron III..I   →  0   – 799
+///   Iron III..I   →  0   – 799   (início do jogador: 0 = Iron III)
 ///   Bronze III..I →  800 – 1199
-///   Silver III..I →  1200 – 1599   (início do jogador: 1200 = Silver III)
+///   Silver III..I →  1200 – 1599
 ///   Platinum III..I → 1600 – 1999
 ///   Diamond III..I → 2000 – 2399
 ///   Mestre          → 2400+
@@ -67,8 +67,8 @@ class _Division {
 }
 
 abstract class RankUtils {
-  /// ELO inicial de todo jogador.
-  static const int startingElo = 1200;
+  /// ELO inicial de todo jogador (patente mais baixa: Iron III).
+  static const int startingElo = 0;
 
   /// ELO a partir do qual o jogador é Mestre.
   static const int masterMin = 2400;

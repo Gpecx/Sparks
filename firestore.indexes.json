@@ -32,6 +32,28 @@
         { "fieldPath": "category", "order": "ASCENDING" },
         { "fieldPath": "createdAt", "order": "DESCENDING" }
       ]
+    },
+    {
+      // Histórico de duelos (como player1): partidas encerradas, mais recentes.
+      // matches.where('player1Uid','==',uid).where('status','==','finished').orderBy('finishedAt','desc')
+      "collectionGroup": "matches",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "player1Uid", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "finishedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      // Histórico de duelos (como player2): partidas encerradas, mais recentes.
+      // matches.where('player2Uid','==',uid).where('status','==','finished').orderBy('finishedAt','desc')
+      "collectionGroup": "matches",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "player2Uid", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "finishedAt", "order": "DESCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

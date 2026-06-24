@@ -6,6 +6,7 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
+import 'package:spark_app/widgets/sparky_tutorial.dart';
 import 'package:spark_app/screens/achievements_screen.dart';
 import 'package:spark_app/screens/edit_profile_screen.dart';
 import 'package:spark_app/screens/change_password_screen.dart';
@@ -83,6 +84,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 title: AppLocalizations.of(context)!.settingsManagePlan,
                 subtitle: AppLocalizations.of(context)!.settingsManagePlanDesc,
                 onTap: () => context.push('/store'),
+              ),
+              _tile(
+                icon: Icons.bolt_outlined,
+                title: 'Rever tutorial',
+                subtitle: 'Veja o tour do Sparky na tela de Início',
+                onTap: () {
+                  // Fecha as Configurações (revela o shell por baixo) e pede o
+                  // tour, que vai para a aba Início e aponta os itens reais.
+                  final nav = Navigator.of(context);
+                  if (nav.canPop()) nav.pop();
+                  WidgetsBinding.instance.addPostFrameCallback(
+                    (_) => sparkyTourReplayRequest.value++,
+                  );
+                },
               ),
               _tile(
                 icon: Icons.delete_outline,

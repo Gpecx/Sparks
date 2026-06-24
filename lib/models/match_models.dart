@@ -91,6 +91,13 @@ class DuelMatch {
   final bool player2Done;
   final String? winnerId;
 
+  /// Variação de ELO aplicada a cada jogador (preenchido ao finalizar).
+  final int player1EloChange;
+  final int player2EloChange;
+
+  /// Quando o duelo foi encerrado (para o histórico). `null` se em andamento.
+  final DateTime? finishedAt;
+
   /// UID de quem abandonou o duelo (saiu no meio). `null` se ninguém saiu.
   /// Quando preenchido, o outro jogador vence por W.O.
   final String? abandonedBy;
@@ -113,6 +120,9 @@ class DuelMatch {
     required this.player1Done,
     required this.player2Done,
     this.winnerId,
+    this.player1EloChange = 0,
+    this.player2EloChange = 0,
+    this.finishedAt,
     this.abandonedBy,
   });
 
@@ -131,8 +141,8 @@ class DuelMatch {
       player2Name: d['player2Name'] as String? ?? 'Jogador 2',
       player1Photo: d['player1Photo'] as String?,
       player2Photo: d['player2Photo'] as String?,
-      player1Elo: (d['player1Elo'] as num?)?.toInt() ?? 1200,
-      player2Elo: (d['player2Elo'] as num?)?.toInt() ?? 1200,
+      player1Elo: (d['player1Elo'] as num?)?.toInt() ?? 0,
+      player2Elo: (d['player2Elo'] as num?)?.toInt() ?? 0,
       status: d['status'] as String? ?? 'active',
       isBot: d['isBot'] as bool? ?? false,
       questions: ((d['questions'] as List?) ?? const [])
@@ -143,6 +153,9 @@ class DuelMatch {
       player1Done: d['player1Done'] as bool? ?? false,
       player2Done: d['player2Done'] as bool? ?? false,
       winnerId: d['winnerId'] as String?,
+      player1EloChange: (d['player1EloChange'] as num?)?.toInt() ?? 0,
+      player2EloChange: (d['player2EloChange'] as num?)?.toInt() ?? 0,
+      finishedAt: (d['finishedAt'] as Timestamp?)?.toDate(),
       abandonedBy: d['abandonedBy'] as String?,
     );
   }
@@ -164,6 +177,14 @@ class DuelMatch {
 
   double myTotal(String uid) => myScores(uid).fold(0.0, (s, r) => s + r.score);
   double oppTotal(String uid) => oppScores(uid).fold(0.0, (s, r) => s + r.score);
+
+  int myEloChange(String uid) => amPlayer1(uid) ? player1EloChange : player2EloChange;
+
+  /// Resultado do duelo na perspectiva do [uid]: 'win' | 'loss' | 'draw'.
+  String resultFor(String uid) {
+    if (winnerId == null) return 'draw';
+    return winnerId == uid ? 'win' : 'loss';
+  }
 }
 
 // ── Resultados das chamadas às Cloud Functions ───────────────────────

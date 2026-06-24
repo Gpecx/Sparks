@@ -91,7 +91,7 @@ class UserService extends ChangeNotifier {
 
   String? get clanId => _user?.clanId;
   String? get clanName => _user?.clanName;
-  int get eloRating => _user?.eloRating ?? 1200;
+  int get eloRating => _user?.eloRating ?? 0;
   int get wins => _user?.wins ?? 0;
   int get losses => _user?.losses ?? 0;
   int get totalDuels => _user?.totalDuels ?? 0;
@@ -185,7 +185,7 @@ class UserService extends ChangeNotifier {
       'totalLessonsCompleted': 0,
       'totalCorrectAnswers': 0,
       'totalAnswers': 0,
-      'eloRating': 1200,
+      'eloRating': 0,
       'wins': 0,
       'losses': 0,
       'totalDuels': 0,

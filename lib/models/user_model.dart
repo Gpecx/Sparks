@@ -107,7 +107,7 @@ class UserModel {
     this.clanName,
     this.unlockedBadgeIds = const [],
     this.weeklyXp = 0,
-    this.eloRating = 1200,
+    this.eloRating = 0,
     this.wins = 0,
     this.losses = 0,
     this.totalDuels = 0,
@@ -168,7 +168,7 @@ class UserModel {
           [],
           
       weeklyXp: (data['weeklyXp'] as num?)?.toInt() ?? 0,
-      eloRating: (data['eloRating'] as num?)?.toInt() ?? 1200,
+      eloRating: (data['eloRating'] as num?)?.toInt() ?? 0,
       wins: (data['wins'] as num?)?.toInt() ?? 0,
       losses: (data['losses'] as num?)?.toInt() ?? 0,
       totalDuels: (data['totalDuels'] as num?)?.toInt() ?? 0,

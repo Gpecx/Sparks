@@ -12,6 +12,7 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/providers/user_provider.dart';
+import 'package:spark_app/screens/public_profile_sheet.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  LEADERBOARD SCREEN — Versão com Firebase
@@ -490,10 +491,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     String photoUrl = '';
     String displayName = '';
     int weeklyXp = 0;
+    String? podiumUid; // uid do jogador (abre perfil público ao tocar)
     Widget avatar;
 
     if (player is RankingEntry) {
       isMe = player.uid == myUid;
+      podiumUid = player.uid;
       photoUrl = player.photoUrl ?? '';
       displayName = player.displayName;
       weeklyXp = player.weeklyXp;
@@ -523,7 +526,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     final medal = place == 1 ? '🥇' : place == 2 ? '🥈' : '🥉';
 
     return Expanded(
-      child: Column(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: podiumUid == null
+            ? null
+            : () => showPublicProfileSheet(context, podiumUid!),
+        child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(medal, style: const TextStyle(fontSize: 22)),
@@ -574,6 +582,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
             ),
           ),
         ],
+        ),
       ),
     );
   }
@@ -592,10 +601,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     String? subName;
     int weeklyXp = 0;
     int position = 0;
+    String? rowUid; // uid do jogador (abre perfil público ao tocar)
     Widget avatar;
 
     if (player is RankingEntry) {
       isMe = player.uid == myUid;
+      rowUid = player.uid;
       displayName = isMe ? '${player.displayName} (Você)' : player.displayName;
       subName = player.clanName;
       weeklyXp = player.weeklyXp;
@@ -624,7 +635,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
       return const SizedBox();
     }
 
-    return SparkCard(
+    final card = SparkCard(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       color: isMe
@@ -691,6 +702,13 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           ),
         ],
       ),
+    );
+
+    // Linhas de jogador abrem o perfil público; clãs não (sem perfil próprio).
+    if (rowUid == null) return card;
+    return GestureDetector(
+      onTap: () => showPublicProfileSheet(context, rowUid!),
+      child: card,
     );
   }
 
@@ -938,33 +956,15 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     );
   }
 
+  // Abre o calendário do ano com feriados nacionais e datas comemorativas
+  // (Brasil). Abre sempre no mês/dia atual em tempo real e acompanha a virada
+  // de ano automaticamente, pois tudo deriva de DateTime.now().
   void _showYearCalendar(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.card,
-      shape:
-          const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      builder: (_) => Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(AppLocalizations.of(context)!.rankingPeriod,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700)),
-            const SizedBox(height: 16),
-            Text(
-              AppLocalizations.of(context)!.rankingResetInfo,
-              style: TextStyle(
-                  color: AppColors.textSecondary, fontSize: 13, height: 1.5),
-            ),
-            const SizedBox(height: 24),
-          ],
-        ),
-      ),
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (_) => const _YearCalendarSheet(),
     );
   }
 
@@ -972,6 +972,445 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     final parts = name.split(' ');
     if (parts.length >= 2) return '${parts[0]} ${parts[1][0]}.';
     return name;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  CALENDÁRIO DO ANO — feriados nacionais e datas comemorativas (BR)
+//  Abre sempre no mês/dia atual (tempo real) e acompanha a virada de
+//  dia/mês/ano automaticamente, pois tudo deriva de DateTime.now().
+//  Os feriados móveis (Carnaval, Sexta-feira Santa, Corpus Christi) são
+//  calculados pela data da Páscoa, então valem para 2026, 2027 e diante.
+// ─────────────────────────────────────────────────────────────────
+enum _HolidayKind { national, commemorative }
+
+class _Holiday {
+  final String name;
+  final _HolidayKind kind;
+  const _Holiday(this.name, this.kind);
+}
+
+/// Domingo de Páscoa (algoritmo de Meeus/Jones/Butcher) — válido p/ qualquer ano.
+DateTime _easterSunday(int year) {
+  final a = year % 19;
+  final b = year ~/ 100;
+  final c = year % 100;
+  final d = b ~/ 4;
+  final e = b % 4;
+  final f = (b + 8) ~/ 25;
+  final g = (b - f + 1) ~/ 3;
+  final h = (19 * a + b - d - g + 15) % 30;
+  final i = c ~/ 4;
+  final k = c % 4;
+  final l = (32 + 2 * e + 2 * i - h - k) % 7;
+  final m = (a + 11 * h + 22 * l) ~/ 451;
+  final month = (h + l - 7 * m + 114) ~/ 31;
+  final day = ((h + l - 7 * m + 114) % 31) + 1;
+  return DateTime(year, month, day);
+}
+
+/// N-ésimo domingo de um mês (p/ Dia das Mães e Dia dos Pais).
+DateTime _nthSunday(int year, int month, int n) {
+  var d = DateTime(year, month, 1);
+  var count = 0;
+  while (true) {
+    if (d.weekday == DateTime.sunday) {
+      count++;
+      if (count == n) return d;
+    }
+    d = d.add(const Duration(days: 1));
+  }
+}
+
+/// Feriados nacionais + datas comemorativas do Brasil para um dado ano.
+Map<DateTime, List<_Holiday>> _holidaysForYear(int year) {
+  final map = <DateTime, List<_Holiday>>{};
+  void add(DateTime d, String name, _HolidayKind kind) {
+    final key = DateTime(d.year, d.month, d.day);
+    (map[key] ??= []).add(_Holiday(name, kind));
+  }
+
+  const nat = _HolidayKind.national;
+  const com = _HolidayKind.commemorative;
+
+  // ── Feriados nacionais fixos ──
+  add(DateTime(year, 1, 1), 'Confraternização Universal', nat);
+  add(DateTime(year, 4, 21), 'Tiradentes', nat);
+  add(DateTime(year, 5, 1), 'Dia do Trabalho', nat);
+  add(DateTime(year, 9, 7), 'Independência do Brasil', nat);
+  add(DateTime(year, 10, 12), 'Nossa Senhora Aparecida', nat);
+  add(DateTime(year, 11, 2), 'Finados', nat);
+  add(DateTime(year, 11, 15), 'Proclamação da República', nat);
+  add(DateTime(year, 11, 20), 'Dia da Consciência Negra', nat);
+  add(DateTime(year, 12, 25), 'Natal', nat);
+
+  // ── Feriados/pontos facultativos móveis (base: Páscoa) ──
+  final easter = _easterSunday(year);
+  add(easter.subtract(const Duration(days: 48)), 'Segunda-feira de Carnaval', nat);
+  add(easter.subtract(const Duration(days: 47)), 'Carnaval', nat);
+  add(easter.subtract(const Duration(days: 46)), 'Quarta-feira de Cinzas', com);
+  add(easter.subtract(const Duration(days: 2)), 'Sexta-feira Santa', nat);
+  add(easter, 'Domingo de Páscoa', com);
+  add(easter.add(const Duration(days: 60)), 'Corpus Christi', nat);
+
+  // ── Datas comemorativas importantes ──
+  add(DateTime(year, 3, 8), 'Dia Internacional da Mulher', com);
+  add(DateTime(year, 4, 22), 'Descobrimento do Brasil', com);
+  add(_nthSunday(year, 5, 2), 'Dia das Mães', com);
+  add(DateTime(year, 5, 13), 'Abolição da Escravatura', com);
+  add(DateTime(year, 6, 12), 'Dia dos Namorados', com);
+  add(DateTime(year, 6, 24), 'São João', com);
+  add(DateTime(year, 8, 11), 'Dia do Estudante', com);
+  add(_nthSunday(year, 8, 2), 'Dia dos Pais', com);
+  add(DateTime(year, 9, 21), 'Dia da Árvore', com);
+  add(DateTime(year, 10, 12), 'Dia das Crianças', com);
+  add(DateTime(year, 10, 15), 'Dia do Professor', com);
+  add(DateTime(year, 11, 19), 'Dia da Bandeira', com);
+  add(DateTime(year, 12, 31), 'Véspera de Ano Novo', com);
+
+  return map;
+}
+
+class _YearCalendarSheet extends StatefulWidget {
+  const _YearCalendarSheet();
+  @override
+  State<_YearCalendarSheet> createState() => _YearCalendarSheetState();
+}
+
+class _YearCalendarSheetState extends State<_YearCalendarSheet> {
+  static const _monthNames = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
+  ];
+  static const _weekdayShort = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+  late DateTime _today;
+  late DateTime _visibleMonth; // primeiro dia do mês exibido
+  DateTime? _selected;
+  Timer? _ticker;
+  late Map<DateTime, List<_Holiday>> _holidays;
+  late int _holidaysYear;
+
+  @override
+  void initState() {
+    super.initState();
+    _today = DateTime.now();
+    _visibleMonth = DateTime(_today.year, _today.month);
+    _selected = DateTime(_today.year, _today.month, _today.day);
+    _holidaysYear = _visibleMonth.year;
+    _holidays = _holidaysForYear(_holidaysYear);
+    // Mantém o "hoje" em tempo real: se o dia/mês/ano virar com o calendário
+    // aberto, o destaque acompanha automaticamente.
+    _ticker = Timer.periodic(const Duration(minutes: 1), (_) {
+      final now = DateTime.now();
+      if (now.day != _today.day ||
+          now.month != _today.month ||
+          now.year != _today.year) {
+        setState(() => _today = now);
+      } else {
+        _today = now;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _ticker?.cancel();
+    super.dispose();
+  }
+
+  void _ensureHolidays(int year) {
+    if (year != _holidaysYear) {
+      _holidaysYear = year;
+      _holidays = _holidaysForYear(year);
+    }
+  }
+
+  void _changeMonth(int delta) {
+    setState(() {
+      _visibleMonth =
+          DateTime(_visibleMonth.year, _visibleMonth.month + delta);
+      _ensureHolidays(_visibleMonth.year);
+    });
+  }
+
+  void _goToday() {
+    setState(() {
+      _today = DateTime.now();
+      _visibleMonth = DateTime(_today.year, _today.month);
+      _selected = DateTime(_today.year, _today.month, _today.day);
+      _ensureHolidays(_visibleMonth.year);
+    });
+  }
+
+  bool _sameDay(DateTime a, DateTime b) =>
+      a.year == b.year && a.month == b.month && a.day == b.day;
+
+  @override
+  Widget build(BuildContext context) {
+    final year = _visibleMonth.year;
+    final month = _visibleMonth.month;
+    final daysInMonth = DateTime(year, month + 1, 0).day;
+    final firstWeekday = DateTime(year, month, 1).weekday % 7; // Dom = 0
+    final isCurrentMonth = year == _today.year && month == _today.month;
+
+    // Feriados/datas do mês exibido, ordenados por dia.
+    final monthHolidays = <MapEntry<DateTime, List<_Holiday>>>[];
+    _holidays.forEach((d, list) {
+      if (d.year == year && d.month == month) {
+        monthHolidays.add(MapEntry(d, list));
+      }
+    });
+    monthHolidays.sort((a, b) => a.key.day.compareTo(b.key.day));
+
+    final mq = MediaQuery.of(context);
+
+    return Container(
+      constraints: BoxConstraints(maxHeight: mq.size.height * 0.88),
+      decoration: const BoxDecoration(
+        color: AppColors.card,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Alça
+          Container(
+            margin: const EdgeInsets.only(top: 10, bottom: 6),
+            width: 40,
+            height: 4,
+            decoration: BoxDecoration(
+              color: AppColors.textMuted.withValues(alpha: 0.4),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          // Cabeçalho: mês/ano + navegação
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+            child: Row(
+              children: [
+                _navBtn(Icons.chevron_left, () => _changeMonth(-1)),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text('${_monthNames[month - 1]} $year',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w800)),
+                      if (!isCurrentMonth)
+                        GestureDetector(
+                          onTap: _goToday,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 2),
+                            child: Text('Voltar para hoje',
+                                style: TextStyle(
+                                    color: AppColors.primary,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600)),
+                          ),
+                        )
+                      else
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2),
+                          child: Text('Hoje',
+                              style: TextStyle(
+                                  color: AppColors.textMuted, fontSize: 11)),
+                        ),
+                    ],
+                  ),
+                ),
+                _navBtn(Icons.chevron_right, () => _changeMonth(1)),
+              ],
+            ),
+          ),
+          // Cabeçalho dos dias da semana
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Row(
+              children: _weekdayShort
+                  .map((w) => Expanded(
+                        child: Center(
+                          child: Text(w,
+                              style: TextStyle(
+                                  color: AppColors.textMuted,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700)),
+                        ),
+                      ))
+                  .toList(),
+            ),
+          ),
+          const SizedBox(height: 6),
+          // Grade do mês
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: _buildGrid(year, month, daysInMonth, firstWeekday),
+          ),
+          const SizedBox(height: 8),
+          Divider(
+              color: AppColors.cardBorder.withValues(alpha: 0.4), height: 1),
+          // Lista de feriados/datas do mês
+          Flexible(
+            child: monthHolidays.isEmpty
+                ? Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                        'Sem feriados ou datas comemorativas neste mês.',
+                        style: TextStyle(
+                            color: AppColors.textMuted, fontSize: 13)),
+                  )
+                : ListView(
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+                    children: [
+                      for (final entry in monthHolidays)
+                        for (final h in entry.value)
+                          _holidayTile(entry.key, h),
+                    ],
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _navBtn(IconData icon, VoidCallback onTap) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: AppColors.background.withValues(alpha: 0.5),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(icon, color: AppColors.primary, size: 22),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGrid(int year, int month, int daysInMonth, int firstWeekday) {
+    final cells = <Widget>[];
+    for (var i = 0; i < firstWeekday; i++) {
+      cells.add(const SizedBox());
+    }
+    for (var day = 1; day <= daysInMonth; day++) {
+      final date = DateTime(year, month, day);
+      final isToday = _sameDay(date, _today);
+      final holidays = _holidays[date];
+      final isNational =
+          holidays?.any((h) => h.kind == _HolidayKind.national) ?? false;
+      final hasHoliday = holidays != null && holidays.isNotEmpty;
+      final isSunday = date.weekday == DateTime.sunday;
+      cells.add(_dayCell(date, day, isToday, hasHoliday, isNational, isSunday));
+    }
+    while (cells.length % 7 != 0) {
+      cells.add(const SizedBox());
+    }
+    final rows = <Widget>[];
+    for (var i = 0; i < cells.length; i += 7) {
+      rows.add(Row(
+        children: [
+          for (var j = 0; j < 7; j++)
+            Expanded(child: AspectRatio(aspectRatio: 1, child: cells[i + j])),
+        ],
+      ));
+    }
+    return Column(children: rows);
+  }
+
+  Widget _dayCell(DateTime date, int day, bool isToday, bool hasHoliday,
+      bool isNational, bool isSunday) {
+    Color textColor;
+    if (isToday) {
+      textColor = Colors.white;
+    } else if (isNational || isSunday) {
+      textColor = AppColors.error;
+    } else if (hasHoliday) {
+      textColor = AppColors.warning;
+    } else {
+      textColor = AppColors.textSecondary;
+    }
+    return Padding(
+      padding: const EdgeInsets.all(2),
+      child: GestureDetector(
+        onTap: hasHoliday ? () => setState(() => _selected = date) : null,
+        child: Container(
+          decoration: BoxDecoration(
+            color: isToday ? AppColors.primary : Colors.transparent,
+            shape: BoxShape.circle,
+            border: !isToday && hasHoliday
+                ? Border.all(
+                    color: (isNational ? AppColors.error : AppColors.warning)
+                        .withValues(alpha: 0.5))
+                : null,
+          ),
+          child: Center(
+            child: Text('$day',
+                style: TextStyle(
+                    color: textColor,
+                    fontSize: 13,
+                    fontWeight:
+                        isToday ? FontWeight.w800 : FontWeight.w500)),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _holidayTile(DateTime date, _Holiday h) {
+    final isNational = h.kind == _HolidayKind.national;
+    final color = isNational ? AppColors.error : AppColors.warning;
+    final selected = _selected != null && _sameDay(date, _selected!);
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: selected
+            ? color.withValues(alpha: 0.12)
+            : AppColors.background.withValues(alpha: 0.4),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+            color: color.withValues(alpha: selected ? 0.5 : 0.15)),
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 38,
+            child: Text('${date.day}',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: color,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800)),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(h.name,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w600)),
+                const SizedBox(height: 2),
+                Text(isNational ? 'Feriado nacional' : 'Data comemorativa',
+                    style: TextStyle(
+                        color: AppColors.textMuted, fontSize: 11)),
+              ],
+            ),
+          ),
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+          ),
+        ],
+      ),
+    );
   }
 }
 

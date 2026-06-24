@@ -91,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'totalLessonsCompleted': 0,
           'totalCorrectAnswers': 0,
           'totalAnswers': 0,
-          'eloRating': 1200,
+          'eloRating': 0,
           'wins': 0,
           'losses': 0,
           'totalDuels': 0,

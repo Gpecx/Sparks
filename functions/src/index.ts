@@ -94,7 +94,7 @@ function defaultUserFields(
     totalLessonsCompleted: 0,
     totalCorrectAnswers: 0,
     totalAnswers: 0,
-    eloRating: 1200,
+    eloRating: 0,
     wins: 0,
     losses: 0,
     totalDuels: 0,
@@ -2294,6 +2294,19 @@ const DUEL_RATE = { limit: 60, windowMs: 60 * 1000 } as const;
 const DUEL_ELO_K = 32;
 const DUEL_ELO_MAX = 40;
 
+// Punição por abandono: a cada DUEL_ABANDON_LIMIT abandonos explícitos
+// (leaveDuel numa partida PvP ativa), o jogador fica DUEL_COOLDOWN_MS sem
+// poder entrar no matchmaking. O contador zera após aplicar o castigo.
+const DUEL_ABANDON_LIMIT = 3;
+const DUEL_COOLDOWN_MS = 10 * 60 * 1000; // 10 min
+
+// Carência (ms) que o oponente tem para terminar APÓS o primeiro jogador
+// concluir todas as suas perguntas, antes que o `force` de apuração seja
+// aceito. Fecha a brecha de um cliente forjado encerrar o duelo no meio
+// (liderando) e negar as rodadas restantes ao oponente. Fica abaixo do
+// timeout de 20s do cliente para dar margem de latência.
+const DUEL_FORCE_GRACE_MS = 15_000;
+
 interface DuelQuestionFull {
   id: string;
   statement: string;
@@ -2382,10 +2395,10 @@ async function fetchPlayerCard(
     return {
       name: (d["displayName"] as string) || (d["name"] as string) || "Jogador",
       photo: (d["photoUrl"] as string) ?? null,
-      elo: (d["eloRating"] as number) ?? 1200,
+      elo: (d["eloRating"] as number) ?? 0,
     };
   } catch {
-    return { name: "Jogador", photo: null, elo: 1200 };
+    return { name: "Jogador", photo: null, elo: 0 };
   }
 }
 
@@ -2407,6 +2420,51 @@ class AlreadyMatchedError extends Error {
   }
 }
 
+// ────────────────────────────────────────────────────────────────
+// sendPushToUser — Dispara um push FCM (best-effort) para o usuário.
+// Lê o token salvo em users/{uid}.fcmToken (gravado pelo FcmService no
+// app). É COMPLEMENTAR à notificação in-app: falha de push nunca pode
+// derrubar o fluxo principal (premiação, pareamento etc.), por isso
+// engole o erro. Se o token estiver morto (app desinstalado/expirado),
+// limpa o campo para não insistir em envios fadados a falhar.
+// ────────────────────────────────────────────────────────────────
+async function sendPushToUser(
+  uid: string,
+  payload: { title: string; body: string; data?: Record<string, string> }
+): Promise<void> {
+  try {
+    const snap = await db.collection("users").doc(uid).get();
+    const token = snap.get("fcmToken") as string | undefined;
+    if (!token) return;
+
+    await admin.messaging().send({
+      token,
+      notification: { title: payload.title, body: payload.body },
+      data: payload.data ?? {},
+      android: { priority: "high", notification: { sound: "default" } },
+      apns: {
+        headers: { "apns-priority": "10" },
+        payload: { aps: { sound: "default" } },
+      },
+    });
+  } catch (e: unknown) {
+    const code = (e as { code?: string })?.code ?? "";
+    // Token inválido/expirado → remove para não tentar de novo.
+    if (
+      code === "messaging/registration-token-not-registered" ||
+      code === "messaging/invalid-registration-token" ||
+      code === "messaging/invalid-argument"
+    ) {
+      await db
+        .collection("users")
+        .doc(uid)
+        .update({ fcmToken: admin.firestore.FieldValue.delete() })
+        .catch(() => undefined);
+    }
+    logger.warn(`[sendPushToUser] uid=${uid} push falhou:`, e);
+  }
+}
+
 export const joinDuelQueue = onCall(
   {
     enforceAppCheck: ENFORCE_APP_CHECK,
@@ -2422,6 +2480,20 @@ export const joinDuelQueue = onCall(
       DUEL_RATE.limit,
       DUEL_RATE.windowMs
     );
+
+    // Cooldown por abandono: jogador "de castigo" não entra no matchmaking.
+    const meSnap = await db.collection("users").doc(uid).get();
+    const cooldownUntil = meSnap.get("duelCooldownUntil") as
+      | FirebaseFirestore.Timestamp
+      | undefined;
+    if (cooldownUntil && cooldownUntil.toMillis() > Date.now()) {
+      const remainingMs = cooldownUntil.toMillis() - Date.now();
+      throw new HttpsError(
+        "resource-exhausted",
+        "Você abandonou partidas demais. Aguarde o cooldown para jogar de novo.",
+        { cooldownUntil: cooldownUntil.toMillis(), remainingMs }
+      );
+    }
 
     const myQueueRef = db.collection("matchmaking_queue").doc(uid);
     const now = Date.now();
@@ -2542,6 +2614,15 @@ export const joinDuelQueue = onCall(
         });
 
         logger.info(`[joinDuelQueue] match ${matchRef.id}: ${oppUid} vs ${uid}`);
+
+        // Avisa por push o jogador que ESTAVA esperando (oppUid): o iniciador
+        // já está com o app aberto, mas o oponente pode tê-lo em background.
+        await sendPushToUser(oppUid, {
+          title: "⚔️ Você foi pareado para um duelo!",
+          body: `${meCard.name} entrou na arena. Abra o Spark e dispute!`,
+          data: { type: "duel_matched", matchId: matchRef.id },
+        });
+
         return { status: "matched", matchId: matchRef.id };
       } catch (e) {
         // Já fui pareado por outro durante a transação → devolvo essa partida.
@@ -2682,6 +2763,11 @@ export const submitDuelAnswer = onCall(
       };
       if (questionIndex === questions.length - 1) {
         updates[doneField] = true;
+        // Marca quando o PRIMEIRO jogador terminou todas as perguntas — é o
+        // marco a partir do qual o `force` de apuração ganha carência.
+        if (!m["firstDoneAt"]) {
+          updates["firstDoneAt"] = admin.firestore.FieldValue.serverTimestamp();
+        }
       }
       tx.update(matchRef, updates);
 
@@ -2764,10 +2850,39 @@ export const finalizeDuel = onCall(
       }
 
       const bothDone = p1Answers.length >= total && p2Answers.length >= total;
-      if (!bothDone && !force) {
-        // Ainda esperando o oponente terminar.
-        result = { status: "waiting" };
-        return;
+      if (!bothDone) {
+        if (!force) {
+          // Ainda esperando o oponente terminar.
+          result = { status: "waiting" };
+          return;
+        }
+
+        // ── Validação do `force` (anti-trapaça) ───────────────────────
+        // (a) quem força PRECISA ter concluído as próprias perguntas: impede
+        //     um cliente forjado liderando encerrar no meio e negar rodadas.
+        const callerAnswers = uid === p1 ? p1Answers : p2Answers;
+        if (callerAnswers.length < total) {
+          throw new HttpsError(
+            "failed-precondition",
+            "Conclua suas perguntas antes de encerrar o duelo."
+          );
+        }
+        // (b) o oponente precisa ter tido um período de carência para terminar
+        //     APÓS o primeiro a concluir. Sem o marco `firstDoneAt` (docs
+        //     legados), exige a duração máxima honesta desde a criação.
+        const firstDoneMs =
+          (m["firstDoneAt"] as FirebaseFirestore.Timestamp | undefined)?.toMillis();
+        const createdMs =
+          (m["createdAt"] as FirebaseFirestore.Timestamp | undefined)?.toMillis();
+        const since = firstDoneMs ?? createdMs ?? 0;
+        const graceMs = firstDoneMs
+          ? DUEL_FORCE_GRACE_MS
+          : total * DUEL_QUESTION_TIME_MS;
+        if (since === 0 || Date.now() - since < graceMs) {
+          // Ainda cedo para forçar — segue aguardando (cliente tenta de novo).
+          result = { status: "waiting" };
+          return;
+        }
       }
 
       // Apura vencedor.
@@ -2779,8 +2894,8 @@ export const finalizeDuel = onCall(
       const p2Ref = db.collection("users").doc(p2);
       const [p1Snap, p2Snap] = await Promise.all([tx.get(p1Ref), tx.get(p2Ref)]);
 
-      const p1Elo = (p1Snap.data()?.["eloRating"] as number) ?? 1200;
-      const p2Elo = (p2Snap.data()?.["eloRating"] as number) ?? 1200;
+      const p1Elo = (p1Snap.data()?.["eloRating"] as number) ?? 0;
+      const p2Elo = (p2Snap.data()?.["eloRating"] as number) ?? 0;
 
       // ELO real: ganha-se MAIS batendo quem é mais forte e perde-se MENOS
       // perdendo para quem é mais forte (e vice-versa).
@@ -2906,8 +3021,8 @@ export const leaveDuel = onCall(
       const p2Ref = db.collection("users").doc(p2);
       const [p1Snap, p2Snap] = await Promise.all([tx.get(p1Ref), tx.get(p2Ref)]);
 
-      const p1Elo = (p1Snap.data()?.["eloRating"] as number) ?? 1200;
-      const p2Elo = (p2Snap.data()?.["eloRating"] as number) ?? 1200;
+      const p1Elo = (p1Snap.data()?.["eloRating"] as number) ?? 0;
+      const p2Elo = (p2Snap.data()?.["eloRating"] as number) ?? 0;
 
       const expected1 = 1 / (1 + Math.pow(10, (p2Elo - p1Elo) / 400));
       const expected2 = 1 - expected1;
@@ -2921,11 +3036,30 @@ export const leaveDuel = onCall(
       const p1Change = clampChange(DUEL_ELO_K * (s1 - expected1), p1Elo);
       const p2Change = clampChange(DUEL_ELO_K * (s2 - expected2), p2Elo);
 
+      // ── Castigo por abandono ao jogador que SAIU (uid) ──────────────
+      // Conta o abandono; ao atingir o limite, aplica o cooldown e zera o
+      // contador (dá novas "vidas" depois de cumprir o castigo).
+      const abandonerIsP1 = uid === p1;
+      const abandonerSnap = abandonerIsP1 ? p1Snap : p2Snap;
+      const priorAbandons =
+        (abandonerSnap.data()?.["duelAbandons"] as number) ?? 0;
+      const newAbandons = priorAbandons + 1;
+      const abandonUpdates: Record<string, unknown> =
+        newAbandons >= DUEL_ABANDON_LIMIT
+          ? {
+              duelAbandons: 0,
+              duelCooldownUntil: admin.firestore.Timestamp.fromMillis(
+                Date.now() + DUEL_COOLDOWN_MS
+              ),
+            }
+          : { duelAbandons: newAbandons };
+
       const applyElo = (
         ref: FirebaseFirestore.DocumentReference,
         snap: FirebaseFirestore.DocumentSnapshot,
         change: number,
-        won: boolean
+        won: boolean,
+        extra?: Record<string, unknown>
       ) => {
         if (!snap.exists) return;
         const data = snap.data()!;
@@ -2933,6 +3067,7 @@ export const leaveDuel = onCall(
           eloRating: admin.firestore.FieldValue.increment(change),
           totalDuels: admin.firestore.FieldValue.increment(1),
           updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          ...(extra ?? {}),
         };
         if (won) updates["wins"] = admin.firestore.FieldValue.increment(1);
         else updates["losses"] = admin.firestore.FieldValue.increment(1);
@@ -2943,8 +3078,10 @@ export const leaveDuel = onCall(
         tx.update(ref, updates);
       };
 
-      applyElo(p1Ref, p1Snap, p1Change, winnerId === p1);
-      applyElo(p2Ref, p2Snap, p2Change, winnerId === p2);
+      applyElo(p1Ref, p1Snap, p1Change, winnerId === p1,
+        abandonerIsP1 ? abandonUpdates : undefined);
+      applyElo(p2Ref, p2Snap, p2Change, winnerId === p2,
+        abandonerIsP1 ? undefined : abandonUpdates);
 
       tx.update(matchRef, {
         status: "finished",
@@ -3029,6 +3166,10 @@ const PUBLIC_PROFILE_FIELDS = [
   "clanId",
   "clanName",
   "unlockedBadgeIds",
+  // Streak exibido no perfil público (patente/ofensiva). Sem espelhar,
+  // a tela de perfil público mostraria sempre 0.
+  "currentStreak",
+  "longestStreak",
   // Módulo que o usuário está estudando agora. Necessário para a "presença
   // do clã" (learning_path_screen consulta public_profiles por clanId +
   // currentModuleId). Sem espelhar este campo, a query sempre vinha vazia.
@@ -3176,6 +3317,20 @@ export const closeTournament = onSchedule(
             createdAt: admin.firestore.FieldValue.serverTimestamp(),
           });
 
+        // Push do resultado do torneio (o popup animado continua sendo
+        // disparado in-app pela notificação acima; aqui é só o aviso externo).
+        await sendPushToUser(uid, {
+          title: place === 1
+            ? "🥇 Você venceu o torneio semanal!"
+            : `🏆 ${place}º lugar no torneio semanal!`,
+          body: `Parabéns! Você ganhou ${prize} XP. Veja o pódio no Spark.`,
+          data: {
+            type: "tournament_win",
+            place: String(place),
+            prize: String(prize),
+          },
+        });
+
         // Arquiva o pódio final (registro permanente das posições).
         await historyCol.doc(uid).set({
           uid,
@@ -3215,6 +3370,78 @@ export const closeTournament = onSchedule(
       `[closeTournament] semana=${weekKey} premiados=${winners.length} ` +
         `weeklyXp_resetado=${resetCount}`
     );
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+// streakReminder — Agendada (20:00 BRT). Avisa quem tem streak ativo
+// (currentStreak > 0) mas AINDA não estudou hoje que a ofensiva expira
+// à meia-noite. Cria uma notificação in-app (type "streakAtRisk", lida
+// pelo NotificationService) e dispara o push.
+//
+// Não confiamos só no flag `studiedToday` (que é resetado pelo cliente e
+// pode estar velho): comparamos `lastStudyDate` com o dia atual em BRT.
+// ────────────────────────────────────────────────────────────────
+
+export const streakReminder = onSchedule(
+  {
+    schedule: "every day 20:00",
+    timeZone: "America/Sao_Paulo",
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async () => {
+    // Chave do "hoje" em BRT (UTC-3), independente de fuso do runtime.
+    const dayKey = (ms: number): string => {
+      const d = new Date(ms - 3 * 60 * 60 * 1000);
+      return `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`;
+    };
+    const todayKey = dayKey(Date.now());
+
+    let sent = 0;
+    let last: FirebaseFirestore.QueryDocumentSnapshot | undefined;
+    while (true) {
+      let q = db
+        .collection("users")
+        .where("currentStreak", ">", 0)
+        .orderBy("currentStreak")
+        .limit(300);
+      if (last) q = q.startAfter(last);
+      const snap = await q.get();
+      if (snap.empty) break;
+
+      for (const doc of snap.docs) {
+        const data = doc.data();
+        const streak = (data["currentStreak"] as number) ?? 0;
+        if (streak <= 0) continue;
+
+        // Já estudou hoje → streak garantido, não incomoda.
+        const ls = data["lastStudyDate"] as
+          | FirebaseFirestore.Timestamp
+          | undefined;
+        if (ls && dayKey(ls.toMillis()) === todayKey) continue;
+
+        await doc.ref.collection("notifications").add({
+          type: "streakAtRisk",
+          title: "Seu streak está em risco! 🔥",
+          body: `Você está há ${streak} dia(s) seguidos. Estude hoje para não zerar a ofensiva.`,
+          emoji: "🔥",
+          read: false,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        await sendPushToUser(doc.id, {
+          title: "🔥 Não perca seu streak!",
+          body: `Sua ofensiva de ${streak} dia(s) acaba à meia-noite. Estude agora no Spark!`,
+          data: { type: "streakAtRisk", streak: String(streak) },
+        });
+        sent++;
+      }
+
+      last = snap.docs[snap.docs.length - 1];
+      if (snap.size < 300) break;
+    }
+
+    logger.info(`[streakReminder] lembretes enviados=${sent}`);
   }
 );
 

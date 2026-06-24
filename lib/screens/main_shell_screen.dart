@@ -16,6 +16,7 @@ import 'package:spark_app/screens/profile_screen.dart';
 import 'package:spark_app/screens/store_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/user_provider.dart';
+import 'package:spark_app/widgets/sparky_tutorial.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
 
 class MainShellScreen extends ConsumerStatefulWidget {
@@ -29,6 +30,13 @@ class MainShellScreen extends ConsumerStatefulWidget {
 class MainShellScreenState extends ConsumerState<MainShellScreen> {
   late int _currentIndex;
 
+  // Âncoras para o tour guiado do Sparky (holofote + seta).
+  final GlobalKey _tourHome = GlobalKey();
+  final GlobalKey _tourStudies = GlobalKey();
+  final GlobalKey _tourCategories = GlobalKey();
+  final GlobalKey _tourTools = GlobalKey();
+  final GlobalKey _tourMenu = GlobalKey();
+
   @override
   void initState() {
     super.initState();
@@ -39,10 +47,26 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
       // Inicia escuta em tempo real do Firestore para o usuário logado
       UserService().startListening();
     }
+    // Tour do Sparky no primeiro acesso (uma vez só, flag persistida).
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) SparkyTutorial.showIfFirstTime(context, targets: _tourTargets);
+    });
+    // "Rever tutorial" (pedido de outra tela, ex.: Configurações).
+    sparkyTourReplayRequest.addListener(_onReplayRequested);
+  }
+
+  /// Vai para a aba Início e reabre o tour com holofote nos alvos reais.
+  void _onReplayRequested() {
+    if (!mounted) return;
+    setState(() => _currentIndex = 0);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) SparkyTutorial.show(context, targets: _tourTargets);
+    });
   }
 
   @override
   void dispose() {
+    sparkyTourReplayRequest.removeListener(_onReplayRequested);
     super.dispose();
   }
 
@@ -55,6 +79,14 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
     const ProfileScreen(),
     StoreScreen(),
   ];
+
+  Map<String, GlobalKey> get _tourTargets => {
+        'home': _tourHome,
+        'studies': _tourStudies,
+        'categories': _tourCategories,
+        'tools': _tourTools,
+        'menu': _tourMenu,
+      };
 
   /// Permite que telas filhas troquem a aba ativa.
   void switchTab(int index) {
@@ -332,6 +364,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
           child: Scaffold(
             floatingActionButton: devFab ??
                 _CategoriasFab(
+                  key: _tourCategories,
                   selected: _currentIndex == 1,
                   onPressed: () => setState(() => _currentIndex = 1),
                 ),
@@ -362,6 +395,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       _NavItem(
+                        key: _tourHome,
                         icon: Icons.home_outlined,
                         activeIcon: Icons.home,
                         label: l10n.navHome,
@@ -369,6 +403,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                         onTap: () => setState(() => _currentIndex = 0),
                       ),
                       _NavItem(
+                        key: _tourStudies,
                         icon: Icons.menu_book_outlined,
                         activeIcon: Icons.menu_book,
                         label: l10n.navStudies,
@@ -377,6 +412,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                       ),
                       const SizedBox(width: 56), // espaço do FAB central
                       _NavItem(
+                        key: _tourTools,
                         icon: Icons.calculate_outlined,
                         activeIcon: Icons.calculate,
                         label: 'Ferramentas',
@@ -384,6 +420,7 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
                         onTap: () => setState(() => _currentIndex = 3),
                       ),
                       _NavItem(
+                        key: _tourMenu,
                         icon: Icons.more_horiz,
                         activeIcon: Icons.more_horiz,
                         label: l10n.navMenu,
@@ -411,6 +448,7 @@ class _NavItem extends StatelessWidget {
   final VoidCallback onTap;
 
   const _NavItem({
+    super.key,
     required this.icon,
     required this.activeIcon,
     required this.label,
@@ -458,7 +496,11 @@ class _CategoriasFab extends StatelessWidget {
   final bool selected;
   final VoidCallback onPressed;
 
-  const _CategoriasFab({required this.selected, required this.onPressed});
+  const _CategoriasFab({
+    super.key,
+    required this.selected,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {

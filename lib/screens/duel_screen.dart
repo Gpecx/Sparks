@@ -1,6 +1,7 @@
 import 'package:spark_app/l10n/app_localizations.dart';
 import 'dart:async';
 import 'dart:math';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,11 +11,12 @@ import 'package:spark_app/core/utils/rank_utils.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/models/match_models.dart';
 import 'package:spark_app/services/match_service.dart';
+import 'package:spark_app/screens/duel_history_screen.dart';
 import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 
 /// Fases da tela do Duelo de Faíscas.
-enum _DuelPhase { connecting, offline, searching, playing, waitingResult, finished, error }
+enum _DuelPhase { connecting, offline, searching, playing, waitingResult, finished, error, cooldown }
 
 class DuelScreen extends ConsumerStatefulWidget {
   const DuelScreen({super.key});
@@ -165,6 +167,30 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
       if (!mounted) return;
       if (res.matched) {
         _onMatched(res.matchId!);
+      }
+    } on FirebaseFunctionsException catch (e) {
+      if (!mounted) return;
+      // Cooldown por abandono (resource-exhausted): mostra a tela de castigo
+      // e encerra a busca — não adianta tentar de novo até o tempo passar.
+      if (e.code == 'resource-exhausted') {
+        _cancelMatchmakingTimers();
+        _queueSub?.cancel();
+        final details = e.details;
+        int? remainingMs;
+        if (details is Map && details['remainingMs'] is num) {
+          remainingMs = (details['remainingMs'] as num).toInt();
+        }
+        final mins = remainingMs != null ? (remainingMs / 60000).ceil() : 10;
+        setState(() {
+          _errorMessage =
+              'Você abandonou 3 partidas e ficou de castigo. Volte em ~$mins min para jogar de novo. Abandonar partidas prejudica seu oponente!';
+          _phase = _DuelPhase.cooldown;
+        });
+        return;
+      }
+      if (initial) {
+        debugPrint('[duel] matchmaking falhou (offline?): $e');
+        setState(() => _phase = _DuelPhase.offline);
       }
     } catch (e) {
       if (!mounted) return;
@@ -456,15 +482,32 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
 
     // Oponente ainda jogando: aguarda o snapshot 'finished' ou força após 20s.
     _abandonTimer?.cancel();
-    _abandonTimer = Timer(const Duration(seconds: 20), () async {
+    _abandonTimer = Timer(const Duration(seconds: 20), _forceFinalizeWithRetry);
+  }
+
+  /// Força a apuração após o timeout. O servidor só aceita o `force` depois de
+  /// uma carência (para o oponente terminar), então pode responder `waiting`;
+  /// nesse caso reenviamos algumas vezes antes de desistir.
+  Future<void> _forceFinalizeWithRetry([int attempt = 0]) async {
+    if (!mounted || _phase == _DuelPhase.finished) return;
+    try {
+      final res = await _matchService.finalize(matchId: _matchId!, force: true);
       if (!mounted || _phase == _DuelPhase.finished) return;
-      try {
-        final res = await _matchService.finalize(matchId: _matchId!, force: true);
-        if (mounted && res.finished) _applyFinalResult(res);
-      } catch (e) {
-        if (mounted) _fail(AppLocalizations.of(context)!.duelResultFailed);
+      if (res.finished) {
+        _applyFinalResult(res);
+        return;
       }
-    });
+    } catch (e) {
+      debugPrint('[duel] force finalize (tentativa $attempt): $e');
+    }
+    if (attempt >= 4) {
+      if (mounted) _fail(AppLocalizations.of(context)!.duelResultFailed);
+      return;
+    }
+    // Ainda em carência (status waiting) ou falha transitória → tenta de novo.
+    _abandonTimer?.cancel();
+    _abandonTimer =
+        Timer(const Duration(seconds: 5), () => _forceFinalizeWithRetry(attempt + 1));
   }
 
   /// Chamado quando o snapshot indica que o servidor já encerrou o duelo.
@@ -555,6 +598,8 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
         return _buildOfflineScreen();
       case _DuelPhase.error:
         return _buildErrorScreen();
+      case _DuelPhase.cooldown:
+        return _buildCooldownScreen();
       case _DuelPhase.waitingResult:
         return _buildWaitingResultScreen();
       case _DuelPhase.finished:
@@ -1050,6 +1095,22 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
                     ),
                   ),
                 const SizedBox(height: 16),
+                TextButton.icon(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const DuelHistoryScreen()),
+                  ),
+                  icon: const Icon(Icons.history, color: AppColors.textSecondary, size: 18),
+                  label: Text(
+                    'HISTÓRICO DE DUELOS',
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
                 TextButton(
                   onPressed: _cancelSearchAndExit,
                   child: Text(AppLocalizations.of(context)!.cancelUpper, style: TextStyle(color: AppColors.textMuted, fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1)),
@@ -1143,6 +1204,18 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
       message: _errorMessage ?? AppLocalizations.of(context)!.duelSomethingWrong,
       primaryLabel: 'TENTAR NOVAMENTE',
       onPrimary: _bootstrap,
+    );
+  }
+
+  Widget _buildCooldownScreen() {
+    return _buildMessageScreen(
+      icon: Icons.timer_off,
+      color: AppColors.warning,
+      title: 'EM COOLDOWN',
+      message: _errorMessage ??
+          'Você abandonou partidas demais e ficou de castigo. Tente novamente mais tarde.',
+      primaryLabel: 'VOLTAR',
+      onPrimary: () => Navigator.of(context).pop(),
     );
   }
 
