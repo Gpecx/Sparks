@@ -39,10 +39,34 @@ class CovenantService extends ChangeNotifier {
     {
       'id': 'cov_precisao',
       'title': 'PRECISÃO',
-      'objective': 'Acertar 20 perguntas sem errar',
+      'objective': 'Acertar 20 perguntas em quizzes',
       'reward': '+200 XP',
       'maxProgress': 20,
       'trackingType': 'acertos',
+    },
+    {
+      'id': 'cov_duelista',
+      'title': 'DUELISTA',
+      'objective': 'Vencer 3 duelos no PvP',
+      'reward': '+300 XP',
+      'maxProgress': 3,
+      'trackingType': 'vitórias',
+    },
+    {
+      'id': 'cov_perfeccionista',
+      'title': 'PERFECCIONISTA',
+      'objective': 'Gabaritar 3 lições (100% de acerto)',
+      'reward': '+250 XP',
+      'maxProgress': 3,
+      'trackingType': 'lições',
+    },
+    {
+      'id': 'cov_dedicacao',
+      'title': 'DEDICAÇÃO',
+      'objective': 'Completar 5 Desafios Diários',
+      'reward': '+200 XP',
+      'maxProgress': 5,
+      'trackingType': 'desafios',
     },
   ];
 
@@ -51,9 +75,15 @@ class CovenantService extends ChangeNotifier {
   StreamSubscription? _sub;
   String? _uid;
 
+  /// Máximo de pactos que podem ficar ativos numa mesma semana.
+  static const int maxActivePerWeek = 3;
+
   // ── Public getters ───────────────────────────────────────────────
 
   bool get isLoading => _isLoading;
+
+  /// `true` enquanto o usuário ainda pode selecionar mais pactos nesta semana.
+  bool get canSelectMore => activeCovenants.length < maxActivePerWeek;
 
   /// All covenants loaded for this user (selected + available).
   List<CovenantModel> get allCovenants => _covenants;
@@ -94,6 +124,16 @@ class CovenantService extends ChangeNotifier {
         return; // Snapshot will trigger again after seeding
       }
 
+      // Usuários antigos: semeia apenas os pactos do catálogo que ainda não
+      // existem na subcoleção (ex.: pactos novos adicionados em updates).
+      final existingIds = snap.docs.map((d) => d.id).toSet();
+      final missing =
+          _catalog.where((def) => !existingIds.contains(def['id'])).toList();
+      if (missing.isNotEmpty) {
+        await _seedDefs(uid, missing);
+        return; // Snapshot retrigga com os novos docs já presentes
+      }
+
       _covenants = snap.docs.map((d) => CovenantModel.fromMap(d.data(), d.id)).toList();
       _isLoading = false;
       notifyListeners();
@@ -103,11 +143,17 @@ class CovenantService extends ChangeNotifier {
   }
 
   /// Seeds the full catalog into Firestore for a new user (batch write).
-  Future<void> _seedCatalog(String uid) async {
+  Future<void> _seedCatalog(String uid) => _seedDefs(uid, _catalog);
+
+  /// Seeds a specific subset of catalog definitions (batch write).
+  /// Reused both for first-time seeding and for adding newly-released pacts
+  /// to users that already have the older ones.
+  Future<void> _seedDefs(
+      String uid, List<Map<String, dynamic>> defs) async {
     final db = FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default');
     final batch = db.batch();
 
-    for (final def in _catalog) {
+    for (final def in defs) {
       final ref = db
           .collection(FS.users)
           .doc(uid)
@@ -156,8 +202,16 @@ class CovenantService extends ChangeNotifier {
 
   // ── Selection ────────────────────────────────────────────────────
 
-  Future<void> selectCovenant(String id) async {
-    if (_uid == null) return;
+  /// Seleciona um pacto para a semana. Retorna `false` (sem gravar) se o
+  /// limite de [maxActivePerWeek] já foi atingido ou se já estava selecionado.
+  Future<bool> selectCovenant(String id) async {
+    if (_uid == null) return false;
+    final cov = _covenants.firstWhere(
+      (c) => c.id == id,
+      orElse: () => throw StateError('Pacto $id inexistente'),
+    );
+    if (cov.isSelected) return false;
+    if (!canSelectMore) return false;
     await FirebaseFirestore.instanceFor(app: Firebase.app(), databaseId: 'default')
         .collection(FS.users)
         .doc(_uid)
@@ -167,6 +221,7 @@ class CovenantService extends ChangeNotifier {
       FS.isSelected: true,
       FS.weekKey: currentWeekKey,
     });
+    return true;
   }
 
   Future<void> deselectCovenant(String id) async {
@@ -207,10 +262,10 @@ class CovenantService extends ChangeNotifier {
     });
 
     if (completed) {
-      int xpReward = 0;
-      if (cov.reward.contains('150')) xpReward = 150;
-      if (cov.reward.contains('200')) xpReward = 200;
-      if (cov.reward.contains('250')) xpReward = 250;
+      // Extrai o valor de XP direto da recompensa (ex.: '+300 XP' → 300),
+      // funcionando para qualquer pacto sem precisar listar cada valor.
+      final match = RegExp(r'\d+').firstMatch(cov.reward);
+      final xpReward = match != null ? int.parse(match.group(0)!) : 0;
 
       if (xpReward > 0) {
         await UserService().addXp(xpReward, source: 'pacto_$id');

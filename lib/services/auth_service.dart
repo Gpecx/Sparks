@@ -122,6 +122,8 @@ class AuthService {
         'wins': 0,
         'losses': 0,
         'totalDuels': 0,
+        // Conta nova: dispara o tour guiado uma única vez.
+        'tutorialSeen': false,
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       });
@@ -236,6 +238,8 @@ class AuthService {
         'wins': 0,
         'losses': 0,
         'totalDuels': 0,
+        // Cadastro novo via Google (doc só é criado quando ainda não existe).
+        'tutorialSeen': false,
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       };

@@ -16,6 +16,7 @@ import 'package:spark_app/screens/profile_screen.dart';
 import 'package:spark_app/screens/store_screen.dart';
 import 'package:spark_app/providers/dev_mode_provider.dart';
 import 'package:spark_app/providers/user_provider.dart';
+import 'package:spark_app/models/user_model.dart';
 import 'package:spark_app/widgets/sparky_tutorial.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
 
@@ -47,12 +48,30 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
       // Inicia escuta em tempo real do Firestore para o usuário logado
       UserService().startListening();
     }
-    // Tour do Sparky no primeiro acesso (uma vez só, flag persistida).
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) SparkyTutorial.showIfFirstTime(context, targets: _tourTargets);
-    });
+    // Tour do Sparky: disparado SÓ para contas novas (campo `tutorialSeen`
+    // por conta no Firestore). A decisão fica no build(), via ref.listen ao
+    // userModelProvider, pois o modelo carrega de forma assíncrona.
     // "Rever tutorial" (pedido de outra tela, ex.: Configurações).
     sparkyTourReplayRequest.addListener(_onReplayRequested);
+  }
+
+  // Garante que o tour automático seja avaliado uma única vez por sessão.
+  bool _autoTourChecked = false;
+
+  /// Mostra o tour automaticamente apenas para CONTAS NOVAS (tutorialSeen ==
+  /// false). Contas antigas têm o campo ausente → tutorialSeen == true (default
+  /// no modelo) → nada acontece aqui; elas só veem o tour via Configurações.
+  void _maybeAutoTour(UserModel? user) {
+    if (_autoTourChecked || user == null) return;
+    if (user.tutorialSeen) return;
+    _autoTourChecked = true;
+    // Todo o trabalho de UI é adiado para depois do frame — este método pode
+    // ser chamado durante o build (leitura do valor em cache).
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      setState(() => _currentIndex = 0); // tour aponta para a barra na aba Início
+      SparkyTutorial.show(context, targets: _tourTargets);
+    });
   }
 
   /// Vai para a aba Início e reabre o tour com holofote nos alvos reais.
@@ -178,6 +197,14 @@ class MainShellScreenState extends ConsumerState<MainShellScreen> {
         (_) => EnergyController().setPremium(isSubscriberNow),
       );
     }
+
+    // Tour automático só para contas novas. Escuta a carga do modelo e também
+    // checa o valor já em cache (quando o provider resolve antes do build).
+    ref.listen<AsyncValue<UserModel?>>(
+      userModelProvider,
+      (prev, next) => _maybeAutoTour(next.value),
+    );
+    _maybeAutoTour(ref.read(userModelProvider).value);
 
     return LayoutBuilder(
       builder: (context, constraints) {

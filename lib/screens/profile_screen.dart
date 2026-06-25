@@ -16,6 +16,7 @@ import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/services/access_control_service.dart';
 import 'package:spark_app/widgets/plan_widgets.dart';
 import 'package:spark_app/models/badge_model.dart';
+import 'package:spark_app/core/utils/rank_utils.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  PROFILE SCREEN — Versão com Firebase
@@ -289,6 +290,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                   const SizedBox(height: 28),
 
+                  // ── Patente PvP (Duelo) ──────────────────────────
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: _pvpRankCard(userService.eloRating),
+                  ),
+                  const SizedBox(height: 28),
+
                   // ── Debug Info (Apenas quando Modo Dev está ativo) ──
                   if (kDebugMode && ref.watch(devModeProvider)) ...[
                     Padding(
@@ -504,6 +512,108 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     }
 
     return widgets;
+  }
+
+  /// Card da patente do Duelo (PvP). Reaproveita o sistema de patentes
+  /// (RankUtils) — mesma fonte de verdade usada no perfil público.
+  Widget _pvpRankCard(int elo) {
+    final p = RankUtils.fromElo(elo);
+    final hint = p.isMaster
+        ? 'Patente máxima — topo do ranking.'
+        : 'Faltam ${p.eloToNext} de ELO para a próxima.';
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text('PATENTE DUELO',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.5)),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: p.color.withValues(alpha: 0.18),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: p.color.withValues(alpha: 0.5)),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.sports_kabaddi, color: p.color, size: 13),
+                  const SizedBox(width: 4),
+                  Text('PvP',
+                      style: TextStyle(
+                          color: p.color,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.5)),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: p.color.withValues(alpha: 0.10),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: p.color.withValues(alpha: 0.45)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(p.icon, color: p.color, size: 26),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(p.label,
+                            style: TextStyle(
+                                color: p.color,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w800)),
+                        Text('$elo de ELO',
+                            style: const TextStyle(
+                                color: AppColors.textSecondary, fontSize: 12)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0, end: p.tierProgress),
+                  duration: const Duration(milliseconds: 600),
+                  curve: Curves.easeOutCubic,
+                  builder: (_, value, _) => LinearProgressIndicator(
+                    value: value,
+                    minHeight: 6,
+                    backgroundColor:
+                        AppColors.background.withValues(alpha: 0.6),
+                    valueColor: AlwaysStoppedAnimation(p.color),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(hint,
+                  style: const TextStyle(
+                      color: AppColors.textMuted, fontSize: 11)),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _statCard(String label, String value, String suffix, IconData icon) {

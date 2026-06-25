@@ -276,6 +276,15 @@
   "goToCovenantsTabToCreate": "¡Ve a la pestaña Pactos para crear el compromiso!",
   "acceptCovenantButton": "ACEPTAR PACTO",
   "covenantProgress": "{current}/{max} {type}",
+  "covenantLimitReached": "{max, plural, =1{Solo puedes tener 1 pacto activo por semana. Quita uno para elegir otro.} other{Solo puedes tener {max} pactos activos por semana. Quita uno para elegir otro.}}",
+  "@covenantLimitReached": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "covenantLimitShort": "LÍMITE ALCANZADO",
   "noFeaturedModulesCurrently": "No hay módulos destacados en este momento.",
   "continueExploringForNewContent": "¡Sigue explorando para descubrir nuevo contenido!",
   "errorLoadingModules": "Error al cargar módulos",

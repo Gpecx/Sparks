@@ -13,6 +13,7 @@ import 'package:spark_app/models/match_models.dart';
 import 'package:spark_app/services/match_service.dart';
 import 'package:spark_app/screens/duel_history_screen.dart';
 import 'package:spark_app/services/user_service.dart';
+import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 
 /// Fases da tela do Duelo de Faíscas.
@@ -550,6 +551,12 @@ class _DuelScreenState extends ConsumerState<DuelScreen>
         debugPrint('[Duel] Erro ao registrar atividade de estudo: $e');
       }
     });
+
+    // Pacto DUELISTA: só conta vitória em PvP real (este caminho vem do
+    // servidor; treino contra bot não passa por aqui).
+    if (res.winnerId == _uid) {
+      CovenantService().addProgress('cov_duelista', 1);
+    }
   }
 
   @override

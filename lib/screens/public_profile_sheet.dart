@@ -159,9 +159,23 @@ class PublicProfileSheet extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // ── Patente ELO ──
-          _patenteCard(elo, patente),
-          const SizedBox(height: 12),
+          // ── Estatísticas ──
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Icon(Icons.insights,
+                  color: AppColors.primary, size: 18),
+              const SizedBox(width: 6),
+              const Text(
+                'Estatísticas',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
 
           // ── Stats: nível, streak, recorde ──
           Row(
@@ -201,6 +215,10 @@ class PublicProfileSheet extends StatelessWidget {
           ),
           const SizedBox(height: 18),
 
+          // ── Patente ELO (PvP) ──
+          _patenteCard(elo, patente),
+          const SizedBox(height: 18),
+
           // ── Conquistas ──
           Row(
             children: [
@@ -231,8 +249,8 @@ class PublicProfileSheet extends StatelessWidget {
   // Card de patente com barra de progresso até a próxima.
   Widget _patenteCard(int elo, Patente p) {
     final hint = p.isMaster
-        ? 'Patente máxima — topo do ranking.'
-        : 'Faltam ${p.eloToNext} de ELO para a próxima patente.';
+        ? 'Patente do modo Duelo — máxima, topo do ranking.'
+        : 'Patente do modo Duelo — faltam ${p.eloToNext} de ELO para a próxima.';
 
     return Container(
       padding: const EdgeInsets.all(14),
@@ -262,6 +280,29 @@ class PublicProfileSheet extends StatelessWidget {
                     Text('$elo de ELO',
                         style: const TextStyle(
                             color: AppColors.textSecondary, fontSize: 12)),
+                  ],
+                ),
+              ),
+              // Identifica claramente que esta patente/ELO é do modo Duelo (PvP).
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: p.color.withValues(alpha: 0.18),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: p.color.withValues(alpha: 0.5)),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.sports_kabaddi, color: p.color, size: 13),
+                    const SizedBox(width: 4),
+                    Text('PvP',
+                        style: TextStyle(
+                            color: p.color,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 0.5)),
                   ],
                 ),
               ),

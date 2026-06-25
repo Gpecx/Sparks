@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
 
 // ─────────────────────────────────────────────────────────────────
@@ -10,10 +10,9 @@ import 'package:spark_app/theme/app_theme.dart';
 //  (trilhas, ferramentas, etc.) com um "fio" luminoso + seta, abrindo
 //  um buraco de destaque (spotlight) sobre o alvo.
 //
-//  Mostrado UMA vez no 1º acesso (flag em SharedPreferences) e pode ser
-//  reaberto a qualquer momento (ex.: nas Configurações):
+//  Mostrado UMA vez para CONTAS NOVAS (flag `tutorialSeen` por conta no
+//  Firestore) e pode ser reaberto a qualquer momento (ex.: Configurações):
 //
-//    SparkyTutorial.showIfFirstTime(context, targets: {...});
 //    SparkyTutorial.show(context, targets: {...});
 //
 //  `targets` mapeia o id do passo → GlobalKey do widget a destacar.
@@ -56,10 +55,10 @@ const List<_Step> _steps = [
   _Step(
     icon: Icons.menu_book,
     accent: AppColors.blue,
-    title: 'Trilhas de Estudo',
+    title: 'Estudos',
     message:
-        'Aqui na aba Estudos ficam as trilhas com lições e minigames. Cada '
-        'acerto te dá XP e te aproxima do próximo nível!',
+        'Aqui na aba Estudos ficam os materiais de leitura (e-books), '
+        'organizados por categoria. Leia para dominar cada assunto!',
     targetId: 'studies',
   ),
   _Step(
@@ -99,8 +98,6 @@ const List<_Step> _steps = [
   ),
 ];
 
-const String _prefsKey = 'spark_tutorial_seen_v2';
-
 /// Sinal global para pedir o "rever tutorial" a partir de outra tela
 /// (ex.: Configurações). O [MainShellScreen] escuta este notifier e, ao
 /// recebê-lo, vai para a aba Início e abre o tour com holofote nos alvos.
@@ -111,17 +108,6 @@ final ValueNotifier<int> sparkyTourReplayRequest = ValueNotifier<int>(0);
 class SparkyTutorial extends StatefulWidget {
   final Map<String, GlobalKey> targets;
   const SparkyTutorial({super.key, this.targets = const {}});
-
-  /// Exibe o tour apenas se for o primeiro acesso (flag persistida).
-  static Future<void> showIfFirstTime(
-    BuildContext context, {
-    Map<String, GlobalKey> targets = const {},
-  }) async {
-    final prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool(_prefsKey) ?? false) return;
-    if (!context.mounted) return;
-    await show(context, targets: targets);
-  }
 
   /// Exibe o tour incondicionalmente (ex.: botão "Rever tutorial").
   static Future<void> show(
@@ -185,8 +171,9 @@ class _SparkyTutorialState extends State<SparkyTutorial>
   }
 
   Future<void> _finish() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_prefsKey, true);
+    // Persiste por CONTA (Firestore): só aparece uma vez para contas novas e
+    // nunca para contas antigas. Reabrir via Configurações é um no-op aqui.
+    await UserService().markTutorialSeen();
     if (mounted) Navigator.of(context).pop();
   }
 

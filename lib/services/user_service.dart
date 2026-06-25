@@ -96,6 +96,22 @@ class UserService extends ChangeNotifier {
   int get losses => _user?.losses ?? 0;
   int get totalDuels => _user?.totalDuels ?? 0;
 
+  /// `true` enquanto a conta já viu (ou não precisa ver) o tutorial. Contas
+  /// antigas (sem o campo) caem no default `true` → sem tour automático.
+  bool get tutorialSeen => _user?.tutorialSeen ?? true;
+
+  /// Marca o tutorial como visto NA CONTA (Firestore), para que o tour só
+  /// apareça uma vez e nunca mais — em qualquer dispositivo.
+  Future<void> markTutorialSeen() async {
+    if (uid.isEmpty) return;
+    if (_user?.tutorialSeen == true) return; // já marcado, evita escrita à toa
+    try {
+      await _db.collection('users').doc(uid).update({'tutorialSeen': true});
+    } catch (e) {
+      debugPrint('[UserService] Falha ao marcar tutorialSeen: $e');
+    }
+  }
+
   // Delega para GamificationUtils (sem duplicar lógica)
   double get xpMultiplier => GamificationUtils.xpMultiplier(currentStreak);
   String get xpMultiplierLabel => GamificationUtils.xpMultiplierLabel(currentStreak);

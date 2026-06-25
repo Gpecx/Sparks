@@ -1962,6 +1962,15 @@
       }
     }
   },
+  "covenantLimitReached": "{max, plural, =1{Você só pode ter 1 pacto ativo por semana. Remova um para escolher outro.} other{Você só pode ter {max} pactos ativos por semana. Remova um para escolher outro.}}",
+  "@covenantLimitReached": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "covenantLimitShort": "LIMITE ATINGIDO",
   "smartNotifications": "NOTIFICAÇÕES INTELIGENTES",
   "notificationCustomization": "PERSONALIZAÇÃO DE NOTIFICAÇÕES",
   "settingsAccessSection": "ACESSO",

@@ -5,6 +5,7 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/services/covenant_service.dart';
 import 'package:spark_app/models/covenant_model.dart';
+import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
 
 /// Displays all covenants: active (selected) and available to pick.
@@ -37,6 +38,15 @@ class _CovenantsScreenState extends State<CovenantsScreen> {
 
   Future<void> _toggle(CovenantModel cov) async {
     if (_toggling) return;
+    // Bloqueia (com aviso) ao tentar passar do limite semanal de pactos.
+    if (!cov.isSelected && !_service.canSelectMore) {
+      SparkSnack.info(
+        context,
+        AppLocalizations.of(context)!
+            .covenantLimitReached(CovenantService.maxActivePerWeek),
+      );
+      return;
+    }
     setState(() => _toggling = true);
     try {
       if (cov.isSelected) {
@@ -99,9 +109,26 @@ class _CovenantsScreenState extends State<CovenantsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            l10n.activeCovenantsCount(active.length),
-                            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  l10n.activeCovenantsCount(active.length),
+                                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14),
+                                ),
+                              ),
+                              // Contador X/3 — deixa o limite explícito.
+                              Text(
+                                '${active.length}/${CovenantService.maxActivePerWeek}',
+                                style: TextStyle(
+                                  color: _service.canSelectMore
+                                      ? AppColors.primary
+                                      : AppColors.gold,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 2),
                           Text(
@@ -122,6 +149,7 @@ class _CovenantsScreenState extends State<CovenantsScreen> {
                   covenant: cov,
                   onToggle: () => _toggle(cov),
                   toggling: _toggling,
+                  limitReached: !_service.canSelectMore,
                 )),
                 const SizedBox(height: 8),
               ],
@@ -133,6 +161,7 @@ class _CovenantsScreenState extends State<CovenantsScreen> {
                   covenant: cov,
                   onToggle: () => _toggle(cov),
                   toggling: _toggling,
+                  limitReached: !_service.canSelectMore,
                 )),
               ],
 
@@ -174,11 +203,13 @@ class _CovenantCard extends StatelessWidget {
   final CovenantModel covenant;
   final VoidCallback onToggle;
   final bool toggling;
+  final bool limitReached;
 
   const _CovenantCard({
     required this.covenant,
     required this.onToggle,
     required this.toggling,
+    this.limitReached = false,
   });
 
   @override
@@ -298,39 +329,50 @@ class _CovenantCard extends StatelessWidget {
 
           const SizedBox(height: 14),
 
-          // Toggle button
-          SizedBox(
-            width: double.infinity,
-            height: 38,
-            child: OutlinedButton(
-              onPressed: toggling ? null : onToggle,
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(
-                  color: cov.isSelected
-                      ? AppColors.error.withValues(alpha: 0.6)
-                      : AppColors.primary,
+          // Toggle button — desabilitado para pactos não-selecionados quando
+          // o limite semanal já foi atingido.
+          Builder(builder: (context) {
+            final blocked = !cov.isSelected && limitReached;
+            final accent = cov.isSelected ? AppColors.error : AppColors.primary;
+            return SizedBox(
+              width: double.infinity,
+              height: 38,
+              child: OutlinedButton(
+                onPressed: (toggling || blocked) ? null : onToggle,
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(
+                    color: blocked
+                        ? AppColors.textMuted.withValues(alpha: 0.3)
+                        : cov.isSelected
+                            ? AppColors.error.withValues(alpha: 0.6)
+                            : AppColors.primary,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: toggling
-                  ? const SizedBox(
-                      height: 16,
-                      width: 16,
-                      child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.primary),
-                    )
-                  : Text(
-                      cov.isSelected ? AppLocalizations.of(context)!.removeCovenantButton : AppLocalizations.of(context)!.selectCovenantButton,
-                      style: TextStyle(
-                        color: cov.isSelected ? AppColors.error : AppColors.primary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 1,
+                child: toggling
+                    ? const SizedBox(
+                        height: 16,
+                        width: 16,
+                        child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.primary),
+                      )
+                    : Text(
+                        blocked
+                            ? AppLocalizations.of(context)!.covenantLimitShort
+                            : cov.isSelected
+                                ? AppLocalizations.of(context)!.removeCovenantButton
+                                : AppLocalizations.of(context)!.selectCovenantButton,
+                        style: TextStyle(
+                          color: blocked ? AppColors.textMuted : accent,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 1,
+                        ),
                       ),
-                    ),
-            ),
-          ),
+              ),
+            );
+          }),
         ],
       ),
     );
