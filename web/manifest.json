@@ -1,11 +1,11 @@
 {
-    "name": "SPARK — Normas Elétricas",
+    "name": "SPARK — Estude o que o campo exige",
     "short_name": "SPARK",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#000000",
     "theme_color": "#000000",
-    "description": "Aprenda normas técnicas do setor elétrico com gamificação.",
+    "description": "Estude o que o campo exige: engenharia elétrica gamificada — trilhas, calculadoras, duelos e ranking, da NR-10 ao IEC 61850.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
