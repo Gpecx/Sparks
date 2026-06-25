@@ -8,6 +8,7 @@ import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/controllers/energy_controller.dart';
+import 'package:spark_app/services/analytics_service.dart';
 
 // ─── Modelo do plano recebido pela tela ──────────────────────────────────────
 class TrialPlanInfo {
@@ -114,6 +115,9 @@ class _TrialCheckoutScreenState extends State<TrialCheckoutScreen> {
         'cardExpiryYear': expParts.length > 1 ? '20${expParts[1]}' : '',
         'cardCvv': _cvvCtrl.text.trim(),
       });
+
+      // Marketing: trial iniciado (client-side; o servidor também envia StartTrial via CAPI).
+      AnalyticsService().logTrialStart(plan: widget.plan.planId);
 
       // Ativa premium localmente imediatamente
       EnergyController().setPremium(true);
