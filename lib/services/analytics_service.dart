@@ -219,6 +219,28 @@ class AnalyticsService {
     }
   }
 
+  /// Início de trial (evento padrão de marketing `trial_start`).
+  Future<void> logTrialStart({String? plan}) async {
+    try {
+      await _analytics.logEvent(
+        name: 'trial_start',
+        parameters: plan != null ? {'plan': plan} : null,
+      );
+    } catch (e) {
+      debugPrint('[Analytics] Erro em trial_start: $e');
+    }
+  }
+
+  /// Compra confirmada — sinal client-side. A fonte de verdade da receita é o
+  /// servidor (Meta CAPI no webhook do Asaas).
+  Future<void> logPurchase({required double value, String currency = 'BRL'}) async {
+    try {
+      await _analytics.logPurchase(currency: currency, value: value);
+    } catch (e) {
+      debugPrint('[Analytics] Erro em purchase: $e');
+    }
+  }
+
   /// Disparado quando o bottom sheet de upgrade é exibido.
   Future<void> logUpgradePromptShown({String? trigger}) async {
     try {

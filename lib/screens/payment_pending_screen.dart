@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:spark_app/services/firebase_service.dart';
 import 'package:spark_app/services/payment_service.dart';
+import 'package:spark_app/services/analytics_service.dart';
 import 'package:spark_app/theme/app_theme.dart';
 import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
@@ -88,6 +89,9 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen>
       if (status == 'PAID' && !_paid) {
         setState(() => _paid = true);
         _pulseController.stop();
+
+        // Marketing: compra confirmada (client-side; o servidor envia Purchase via CAPI).
+        AnalyticsService().logPurchase(value: widget.result.totalPrice);
 
         if (mounted) {
           await _showSuccessDialog();
