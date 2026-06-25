@@ -31,6 +31,7 @@ import { onDocumentWritten } from "firebase-functions/v2/firestore";
 import { logger, setGlobalOptions } from "firebase-functions/v2";
 import { defineSecret } from "firebase-functions/params";
 import * as functionsV1 from "firebase-functions/v1";
+import { sendCapiEvent, META_CAPI_TOKEN } from "./capi";
 import * as nodemailer from "nodemailer";
 import {
   findOrCreateCustomer,
@@ -109,8 +110,15 @@ function defaultUserFields(
 // garante o doc em todas as plataformas. Admin SDK ignora as Security Rules.
 export const onUserCreated = functionsV1
   .region("southamerica-east1")
+  .runWith({ secrets: ["META_CAPI_TOKEN"] })
   .auth.user()
   .onCreate(async (user) => {
+    // Meta CAPI — novo usuário = Lead. Aditivo e à prova de falha (nunca lança).
+    await sendCapiEvent(process.env.META_CAPI_TOKEN ?? "", "Lead", {
+      email: user.email,
+      uid: user.uid,
+    });
+
     const userRef = db.collection("users").doc(user.uid);
     const snap = await userRef.get();
     if (snap.exists) return; // já criado (client ou redeem) — não sobrescreve
@@ -1063,7 +1071,7 @@ export const checkPaymentStatus = onCall(
 export const asaasWebhook = onRequest(
   {
     region: "southamerica-east1",
-    secrets: [ASAAS_WEBHOOK_TOKEN, ASAAS_API_KEY, ASAAS_BASE_URL],
+    secrets: [ASAAS_WEBHOOK_TOKEN, ASAAS_API_KEY, ASAAS_BASE_URL, META_CAPI_TOKEN],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
   async (req, res) => {
@@ -1254,6 +1262,22 @@ export const asaasWebhook = onRequest(
       `[asaasWebhook] Pedido ${orderId} confirmado. +${totalPoints} pts para uid=${uid}`
     );
 
+    // Meta CAPI — Purchase confirmado no servidor (fonte de verdade da receita).
+    // Aditivo e à prova de falha: erros aqui NUNCA afetam a resposta do webhook.
+    try {
+      const fbUser = await admin.auth().getUser(uid).catch(() => null);
+      await sendCapiEvent(META_CAPI_TOKEN.value(), "Purchase", {
+        email: fbUser?.email,
+        uid,
+        value: totalPrice,
+        currency: "BRL",
+        eventId: orderId, // dedup com o Pixel
+        actionSource: "website",
+      });
+    } catch (e) {
+      logger.warn("[asaasWebhook] CAPI Purchase falhou (ignorado):", e);
+    }
+
     res.status(200).send("OK");
   }
 );
@@ -1278,6 +1302,7 @@ export const startTrial = onCall(
     enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+    secrets: [META_CAPI_TOKEN],
   },
   async (request: CallableRequest<StartTrialData>): Promise<StartTrialResult> => {
     const uid = request.auth?.uid;
@@ -1329,6 +1354,12 @@ export const startTrial = onCall(
     } catch (e) {
       logger.warn("[startTrial] Audit log error:", e);
     }
+
+    // Meta CAPI — trial iniciado (aditivo, nunca lança).
+    await sendCapiEvent(META_CAPI_TOKEN.value(), "StartTrial", {
+      email: request.auth?.token?.email as string | undefined,
+      uid,
+    });
 
     logger.info(`[startTrial] uid=${uid} plan=${planId} endsAt=${trialEndsAt.toISOString()}`);
     return { success: true, trialEndsAt: trialEndsAt.toISOString() };
