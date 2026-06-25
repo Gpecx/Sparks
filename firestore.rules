@@ -59,6 +59,11 @@ service cloud.firestore {
           'wins',
           'losses',
           'totalDuels',
+          // ── Anti-abandono de duelo (somente Cloud Functions) ──
+          // Sem isto, o cliente zeraria o próprio cooldown/contador e
+          // burlaria a punição por abandono aplicada pelo leaveDuel.
+          'duelAbandons',
+          'duelCooldownUntil',
           'weeklyXp',
           'monthlyXp',
           // ── Assinatura / Pagamento (somente Cloud Functions) ──
@@ -91,7 +96,7 @@ service cloud.firestore {
         && request.resource.data.keys().hasAll(['uid', 'email', 'role'])
         && request.resource.data.role == 'técnico'
         && request.resource.data.xp == 0
-        && (!('eloRating' in request.resource.data) || request.resource.data.eloRating == 1200)
+        && (!('eloRating' in request.resource.data) || request.resource.data.eloRating == 0 || request.resource.data.eloRating == 1200)
         && (!('isPremium' in request.resource.data) || request.resource.data.isPremium == false)
         && (!('isOnTrial' in request.resource.data) || request.resource.data.isOnTrial == false)
         && (!('hadTrial' in request.resource.data) || request.resource.data.hadTrial == false);

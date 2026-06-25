@@ -13,6 +13,7 @@ import 'package:spark_app/services/user_service.dart';
 import 'package:spark_app/services/access_code_service.dart';
 import 'package:spark_app/widgets/email_verification_dialog.dart';
 import 'package:spark_app/widgets/google_auth_button.dart';
+import 'package:spark_app/widgets/redeem_access_code_dialog.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
 import 'package:spark_app/widgets/responsive_form_container.dart';
 
@@ -91,7 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'totalLessonsCompleted': 0,
           'totalCorrectAnswers': 0,
           'totalAnswers': 0,
-          'eloRating': 1200,
+          'eloRating': 0,
           'wins': 0,
           'losses': 0,
           'totalDuels': 0,
@@ -190,6 +191,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
       final credential = await _authService.signInWithGoogle();
       final user = credential.user;
       if (!mounted || user == null) return;
+
+      // Conta nova via Google: oferece resgatar a chave de acesso agora, já
+      // que o fluxo do Google não possui campo para isso. O resgate exige
+      // estar autenticado — e neste ponto o usuário já está.
+      final isNewUser = credential.additionalUserInfo?.isNewUser ?? false;
+      if (isNewUser && mounted) {
+        await showRedeemAccessCodeDialog(context);
+        if (!mounted) return;
+      }
 
       // O Google já verifica a identidade do usuário, então vamos direto
       // para a home (sem o fluxo de OTP do cadastro por e-mail/senha).

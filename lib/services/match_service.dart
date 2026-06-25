@@ -125,6 +125,45 @@ class MatchService {
     );
   }
 
+  // ── Histórico de duelos ─────────────────────────────────────────────
+
+  /// Últimos duelos PvP encerrados do jogador (mais recentes primeiro).
+  ///
+  /// O Firestore não faz OR entre campos diferentes com `orderBy`, então
+  /// rodamos duas queries (como player1 e como player2), mesclamos e
+  /// ordenamos por `finishedAt`. Exige índices compostos
+  /// (player1Uid+finishedAt e player2Uid+finishedAt) — ver firestore.indexes.json.
+  Future<List<DuelMatch>> fetchDuelHistory({int limit = 20}) async {
+    if (uid.isEmpty) return const [];
+    final col = _db.collection('matches');
+
+    Future<List<DuelMatch>> queryBy(String field) async {
+      final snap = await col
+          .where(field, isEqualTo: uid)
+          .where('status', isEqualTo: 'finished')
+          .orderBy('finishedAt', descending: true)
+          .limit(limit)
+          .get();
+      return snap.docs.map(DuelMatch.fromFirestore).toList();
+    }
+
+    final results = await Future.wait([
+      queryBy('player1Uid'),
+      queryBy('player2Uid'),
+    ]);
+
+    // Mescla, remove treinos/bots e duplicatas, ordena por data e corta no limite.
+    final byId = <String, DuelMatch>{};
+    for (final m in [...results[0], ...results[1]]) {
+      if (m.isBot) continue;
+      byId[m.id] = m;
+    }
+    final all = byId.values.toList()
+      ..sort((a, b) => (b.finishedAt ?? DateTime(0))
+          .compareTo(a.finishedAt ?? DateTime(0)));
+    return all.take(limit).toList();
+  }
+
   // ── Treino (vs bot) ─────────────────────────────────────────────────
 
   /// Perguntas reais (com gabarito) para uma partida de treino local.

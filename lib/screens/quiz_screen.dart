@@ -555,6 +555,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
       _userService.markDailyChallengeCompleted();
       if (passed) {
         CovenantService().addProgress('cov_conhecimento', 1);
+        // Pacto DEDICAÇÃO: cada Desafio Diário concluído com sucesso.
+        CovenantService().addProgress('cov_dedicacao', 1);
         xpEarned = (score * 100).toInt() + (_totalCorrect * 10);
         xpEarned = (xpEarned * _userService.xpMultiplier).toInt();
         Future.microtask(() async {
@@ -594,6 +596,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> with TickerProviderStat
 
     if (passed) {
       CovenantService().addProgress('cov_conhecimento', 1);
+      // Pacto PERFECCIONISTA: lição concluída com 100% de acerto.
+      if (_totalCorrect == _questions.length) {
+        CovenantService().addProgress('cov_perfeccionista', 1);
+      }
       // XP base
       xpEarned = (score * 100).toInt() + (_totalCorrect * 10);
       final multiplier = _userService.xpMultiplier;

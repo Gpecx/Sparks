@@ -18,7 +18,7 @@
  *                        jogadores (única via de escrita de ELO de duelo).
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.rankingAdminTask = exports.cleanupStaleDuels = exports.closeTournament = exports.syncPublicProfile = exports.getBotDuelQuestions = exports.leaveDuel = exports.finalizeDuel = exports.submitDuelAnswer = exports.leaveDuelQueue = exports.joinDuelQueue = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.grantAdminPremium = exports.processTrialExpiry = exports.listUsers = exports.setAccessCodeNote = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = exports.onUserCreated = void 0;
+exports.rankingAdminTask = exports.cleanupStaleDuels = exports.streakReminder = exports.closeTournament = exports.syncPublicProfile = exports.getBotDuelQuestions = exports.leaveDuel = exports.finalizeDuel = exports.submitDuelAnswer = exports.leaveDuelQueue = exports.joinDuelQueue = exports.deleteAccount = exports.verifyEmailCode = exports.sendEmailVerificationCode = exports.checkDeviceTrust = exports.grantAdminPremium = exports.processTrialExpiry = exports.listUsers = exports.setAccessCodeNote = exports.revokeAccessCode = exports.listAccessCodes = exports.createAccessCodes = exports.redeemAccessCode = exports.cancelTrial = exports.startTrial = exports.asaasWebhook = exports.checkPaymentStatus = exports.createAsaasCheckout = exports.unlockBadge = exports.spendSparkPoints = exports.addSparkPoints = exports.addXp = exports.onUserCreated = void 0;
 const admin = require("firebase-admin");
 const firestore_1 = require("firebase-admin/firestore");
 const crypto = require("crypto");
@@ -69,7 +69,7 @@ function defaultUserFields(uid, email, displayName, photoUrl) {
         totalLessonsCompleted: 0,
         totalCorrectAnswers: 0,
         totalAnswers: 0,
-        eloRating: 1200,
+        eloRating: 0,
         wins: 0,
         losses: 0,
         totalDuels: 0,
@@ -1685,6 +1685,17 @@ const DUEL_RATE = { limit: 60, windowMs: 60 * 1000 };
 // partida; o teto limita variações extremas por segurança.
 const DUEL_ELO_K = 32;
 const DUEL_ELO_MAX = 40;
+// Punição por abandono: a cada DUEL_ABANDON_LIMIT abandonos explícitos
+// (leaveDuel numa partida PvP ativa), o jogador fica DUEL_COOLDOWN_MS sem
+// poder entrar no matchmaking. O contador zera após aplicar o castigo.
+const DUEL_ABANDON_LIMIT = 3;
+const DUEL_COOLDOWN_MS = 10 * 60 * 1000; // 10 min
+// Carência (ms) que o oponente tem para terminar APÓS o primeiro jogador
+// concluir todas as suas perguntas, antes que o `force` de apuração seja
+// aceito. Fecha a brecha de um cliente forjado encerrar o duelo no meio
+// (liderando) e negar as rodadas restantes ao oponente. Fica abaixo do
+// timeout de 20s do cliente para dar margem de latência.
+const DUEL_FORCE_GRACE_MS = 15000;
 // Cache em memória do banco de questões (warm instances) — evita varrer
 // o collectionGroup a cada matchmaking.
 let _questionCache = null;
@@ -1757,11 +1768,11 @@ async function fetchPlayerCard(uid) {
         return {
             name: d["displayName"] || d["name"] || "Jogador",
             photo: (_b = d["photoUrl"]) !== null && _b !== void 0 ? _b : null,
-            elo: (_c = d["eloRating"]) !== null && _c !== void 0 ? _c : 1200,
+            elo: (_c = d["eloRating"]) !== null && _c !== void 0 ? _c : 0,
         };
     }
     catch (_d) {
-        return { name: "Jogador", photo: null, elo: 1200 };
+        return { name: "Jogador", photo: null, elo: 0 };
     }
 }
 class OpponentTakenError extends Error {
@@ -1775,6 +1786,47 @@ class AlreadyMatchedError extends Error {
         this.matchId = matchId;
     }
 }
+// ────────────────────────────────────────────────────────────────
+// sendPushToUser — Dispara um push FCM (best-effort) para o usuário.
+// Lê o token salvo em users/{uid}.fcmToken (gravado pelo FcmService no
+// app). É COMPLEMENTAR à notificação in-app: falha de push nunca pode
+// derrubar o fluxo principal (premiação, pareamento etc.), por isso
+// engole o erro. Se o token estiver morto (app desinstalado/expirado),
+// limpa o campo para não insistir em envios fadados a falhar.
+// ────────────────────────────────────────────────────────────────
+async function sendPushToUser(uid, payload) {
+    var _a, _b;
+    try {
+        const snap = await db.collection("users").doc(uid).get();
+        const token = snap.get("fcmToken");
+        if (!token)
+            return;
+        await admin.messaging().send({
+            token,
+            notification: { title: payload.title, body: payload.body },
+            data: (_a = payload.data) !== null && _a !== void 0 ? _a : {},
+            android: { priority: "high", notification: { sound: "default" } },
+            apns: {
+                headers: { "apns-priority": "10" },
+                payload: { aps: { sound: "default" } },
+            },
+        });
+    }
+    catch (e) {
+        const code = (_b = e === null || e === void 0 ? void 0 : e.code) !== null && _b !== void 0 ? _b : "";
+        // Token inválido/expirado → remove para não tentar de novo.
+        if (code === "messaging/registration-token-not-registered" ||
+            code === "messaging/invalid-registration-token" ||
+            code === "messaging/invalid-argument") {
+            await db
+                .collection("users")
+                .doc(uid)
+                .update({ fcmToken: admin.firestore.FieldValue.delete() })
+                .catch(() => undefined);
+        }
+        v2_1.logger.warn(`[sendPushToUser] uid=${uid} push falhou:`, e);
+    }
+}
 exports.joinDuelQueue = (0, https_1.onCall)({
     enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
@@ -1785,6 +1837,13 @@ exports.joinDuelQueue = (0, https_1.onCall)({
     if (!uid)
         throw new https_1.HttpsError("unauthenticated", "Usuário não autenticado.");
     await (0, rateLimiter_1.checkRateLimit)((0, rateLimiter_1.rateLimitKey)("gamification", uid, "joinDuelQueue"), DUEL_RATE.limit, DUEL_RATE.windowMs);
+    // Cooldown por abandono: jogador "de castigo" não entra no matchmaking.
+    const meSnap = await db.collection("users").doc(uid).get();
+    const cooldownUntil = meSnap.get("duelCooldownUntil");
+    if (cooldownUntil && cooldownUntil.toMillis() > Date.now()) {
+        const remainingMs = cooldownUntil.toMillis() - Date.now();
+        throw new https_1.HttpsError("resource-exhausted", "Você abandonou partidas demais. Aguarde o cooldown para jogar de novo.", { cooldownUntil: cooldownUntil.toMillis(), remainingMs });
+    }
     const myQueueRef = db.collection("matchmaking_queue").doc(uid);
     const now = Date.now();
     // (a) Já fui pareado por outro jogador enquanto esperava?
@@ -1892,6 +1951,13 @@ exports.joinDuelQueue = (0, https_1.onCall)({
                 tx.delete(myQueueRef);
             });
             v2_1.logger.info(`[joinDuelQueue] match ${matchRef.id}: ${oppUid} vs ${uid}`);
+            // Avisa por push o jogador que ESTAVA esperando (oppUid): o iniciador
+            // já está com o app aberto, mas o oponente pode tê-lo em background.
+            await sendPushToUser(oppUid, {
+                title: "⚔️ Você foi pareado para um duelo!",
+                body: `${meCard.name} entrou na arena. Abra o Spark e dispute!`,
+                data: { type: "duel_matched", matchId: matchRef.id },
+            });
             return { status: "matched", matchId: matchRef.id };
         }
         catch (e) {
@@ -1994,6 +2060,11 @@ exports.submitDuelAnswer = (0, https_1.onCall)({
         };
         if (questionIndex === questions.length - 1) {
             updates[doneField] = true;
+            // Marca quando o PRIMEIRO jogador terminou todas as perguntas — é o
+            // marco a partir do qual o `force` de apuração ganha carência.
+            if (!m["firstDoneAt"]) {
+                updates["firstDoneAt"] = admin.firestore.FieldValue.serverTimestamp();
+            }
         }
         tx.update(matchRef, updates);
         result = { isCorrect, correctIndex, score };
@@ -2017,7 +2088,7 @@ exports.finalizeDuel = (0, https_1.onCall)({
     const matchRef = db.collection("matches").doc(matchId);
     let result;
     await db.runTransaction(async (tx) => {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
         const matchSnap = await tx.get(matchRef);
         if (!matchSnap.exists)
             throw new https_1.HttpsError("not-found", "Duelo não encontrado.");
@@ -2046,10 +2117,33 @@ exports.finalizeDuel = (0, https_1.onCall)({
             return;
         }
         const bothDone = p1Answers.length >= total && p2Answers.length >= total;
-        if (!bothDone && !force) {
-            // Ainda esperando o oponente terminar.
-            result = { status: "waiting" };
-            return;
+        if (!bothDone) {
+            if (!force) {
+                // Ainda esperando o oponente terminar.
+                result = { status: "waiting" };
+                return;
+            }
+            // ── Validação do `force` (anti-trapaça) ───────────────────────
+            // (a) quem força PRECISA ter concluído as próprias perguntas: impede
+            //     um cliente forjado liderando encerrar no meio e negar rodadas.
+            const callerAnswers = uid === p1 ? p1Answers : p2Answers;
+            if (callerAnswers.length < total) {
+                throw new https_1.HttpsError("failed-precondition", "Conclua suas perguntas antes de encerrar o duelo.");
+            }
+            // (b) o oponente precisa ter tido um período de carência para terminar
+            //     APÓS o primeiro a concluir. Sem o marco `firstDoneAt` (docs
+            //     legados), exige a duração máxima honesta desde a criação.
+            const firstDoneMs = (_g = m["firstDoneAt"]) === null || _g === void 0 ? void 0 : _g.toMillis();
+            const createdMs = (_h = m["createdAt"]) === null || _h === void 0 ? void 0 : _h.toMillis();
+            const since = (_j = firstDoneMs !== null && firstDoneMs !== void 0 ? firstDoneMs : createdMs) !== null && _j !== void 0 ? _j : 0;
+            const graceMs = firstDoneMs
+                ? DUEL_FORCE_GRACE_MS
+                : total * DUEL_QUESTION_TIME_MS;
+            if (since === 0 || Date.now() - since < graceMs) {
+                // Ainda cedo para forçar — segue aguardando (cliente tenta de novo).
+                result = { status: "waiting" };
+                return;
+            }
         }
         // Apura vencedor.
         let winnerId = null;
@@ -2060,8 +2154,8 @@ exports.finalizeDuel = (0, https_1.onCall)({
         const p1Ref = db.collection("users").doc(p1);
         const p2Ref = db.collection("users").doc(p2);
         const [p1Snap, p2Snap] = await Promise.all([tx.get(p1Ref), tx.get(p2Ref)]);
-        const p1Elo = (_h = (_g = p1Snap.data()) === null || _g === void 0 ? void 0 : _g["eloRating"]) !== null && _h !== void 0 ? _h : 1200;
-        const p2Elo = (_k = (_j = p2Snap.data()) === null || _j === void 0 ? void 0 : _j["eloRating"]) !== null && _k !== void 0 ? _k : 1200;
+        const p1Elo = (_l = (_k = p1Snap.data()) === null || _k === void 0 ? void 0 : _k["eloRating"]) !== null && _l !== void 0 ? _l : 0;
+        const p2Elo = (_o = (_m = p2Snap.data()) === null || _m === void 0 ? void 0 : _m["eloRating"]) !== null && _o !== void 0 ? _o : 0;
         // ELO real: ganha-se MAIS batendo quem é mais forte e perde-se MENOS
         // perdendo para quem é mais forte (e vice-versa).
         const expected1 = 1 / (1 + Math.pow(10, (p2Elo - p1Elo) / 400));
@@ -2136,7 +2230,7 @@ exports.leaveDuel = (0, https_1.onCall)({
     const matchRef = db.collection("matches").doc(matchId);
     let finished = false;
     await db.runTransaction(async (tx) => {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e, _f;
         const matchSnap = await tx.get(matchRef);
         if (!matchSnap.exists)
             return; // nada a fazer
@@ -2154,8 +2248,8 @@ exports.leaveDuel = (0, https_1.onCall)({
         const p1Ref = db.collection("users").doc(p1);
         const p2Ref = db.collection("users").doc(p2);
         const [p1Snap, p2Snap] = await Promise.all([tx.get(p1Ref), tx.get(p2Ref)]);
-        const p1Elo = (_b = (_a = p1Snap.data()) === null || _a === void 0 ? void 0 : _a["eloRating"]) !== null && _b !== void 0 ? _b : 1200;
-        const p2Elo = (_d = (_c = p2Snap.data()) === null || _c === void 0 ? void 0 : _c["eloRating"]) !== null && _d !== void 0 ? _d : 1200;
+        const p1Elo = (_b = (_a = p1Snap.data()) === null || _a === void 0 ? void 0 : _a["eloRating"]) !== null && _b !== void 0 ? _b : 0;
+        const p2Elo = (_d = (_c = p2Snap.data()) === null || _c === void 0 ? void 0 : _c["eloRating"]) !== null && _d !== void 0 ? _d : 0;
         const expected1 = 1 / (1 + Math.pow(10, (p2Elo - p1Elo) / 400));
         const expected2 = 1 - expected1;
         const s1 = winnerId === p1 ? 1 : 0;
@@ -2166,16 +2260,25 @@ exports.leaveDuel = (0, https_1.onCall)({
         };
         const p1Change = clampChange(DUEL_ELO_K * (s1 - expected1), p1Elo);
         const p2Change = clampChange(DUEL_ELO_K * (s2 - expected2), p2Elo);
-        const applyElo = (ref, snap, change, won) => {
+        // ── Castigo por abandono ao jogador que SAIU (uid) ──────────────
+        // Conta o abandono; ao atingir o limite, aplica o cooldown e zera o
+        // contador (dá novas "vidas" depois de cumprir o castigo).
+        const abandonerIsP1 = uid === p1;
+        const abandonerSnap = abandonerIsP1 ? p1Snap : p2Snap;
+        const priorAbandons = (_f = (_e = abandonerSnap.data()) === null || _e === void 0 ? void 0 : _e["duelAbandons"]) !== null && _f !== void 0 ? _f : 0;
+        const newAbandons = priorAbandons + 1;
+        const abandonUpdates = newAbandons >= DUEL_ABANDON_LIMIT
+            ? {
+                duelAbandons: 0,
+                duelCooldownUntil: admin.firestore.Timestamp.fromMillis(Date.now() + DUEL_COOLDOWN_MS),
+            }
+            : { duelAbandons: newAbandons };
+        const applyElo = (ref, snap, change, won, extra) => {
             var _a, _b;
             if (!snap.exists)
                 return;
             const data = snap.data();
-            const updates = {
-                eloRating: admin.firestore.FieldValue.increment(change),
-                totalDuels: admin.firestore.FieldValue.increment(1),
-                updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-            };
+            const updates = Object.assign({ eloRating: admin.firestore.FieldValue.increment(change), totalDuels: admin.firestore.FieldValue.increment(1), updatedAt: admin.firestore.FieldValue.serverTimestamp() }, (extra !== null && extra !== void 0 ? extra : {}));
             if (won)
                 updates["wins"] = admin.firestore.FieldValue.increment(1);
             else
@@ -2186,8 +2289,8 @@ exports.leaveDuel = (0, https_1.onCall)({
             }
             tx.update(ref, updates);
         };
-        applyElo(p1Ref, p1Snap, p1Change, winnerId === p1);
-        applyElo(p2Ref, p2Snap, p2Change, winnerId === p2);
+        applyElo(p1Ref, p1Snap, p1Change, winnerId === p1, abandonerIsP1 ? abandonUpdates : undefined);
+        applyElo(p2Ref, p2Snap, p2Change, winnerId === p2, abandonerIsP1 ? undefined : abandonUpdates);
         tx.update(matchRef, {
             status: "finished",
             winnerId,
@@ -2244,6 +2347,10 @@ const PUBLIC_PROFILE_FIELDS = [
     "clanId",
     "clanName",
     "unlockedBadgeIds",
+    // Streak exibido no perfil público (patente/ofensiva). Sem espelhar,
+    // a tela de perfil público mostraria sempre 0.
+    "currentStreak",
+    "longestStreak",
     // Módulo que o usuário está estudando agora. Necessário para a "presença
     // do clã" (learning_path_screen consulta public_profiles por clanId +
     // currentModuleId). Sem espelhar este campo, a query sempre vinha vazia.
@@ -2364,6 +2471,19 @@ exports.closeTournament = (0, scheduler_1.onSchedule)({
                 read: false,
                 createdAt: admin.firestore.FieldValue.serverTimestamp(),
             });
+            // Push do resultado do torneio (o popup animado continua sendo
+            // disparado in-app pela notificação acima; aqui é só o aviso externo).
+            await sendPushToUser(uid, {
+                title: place === 1
+                    ? "🥇 Você venceu o torneio semanal!"
+                    : `🏆 ${place}º lugar no torneio semanal!`,
+                body: `Parabéns! Você ganhou ${prize} XP. Veja o pódio no Spark.`,
+                data: {
+                    type: "tournament_win",
+                    place: String(place),
+                    prize: String(prize),
+                },
+            });
             // Arquiva o pódio final (registro permanente das posições).
             await historyCol.doc(uid).set({
                 uid,
@@ -2401,6 +2521,71 @@ exports.closeTournament = (0, scheduler_1.onSchedule)({
     }
     v2_1.logger.info(`[closeTournament] semana=${weekKey} premiados=${winners.length} ` +
         `weeklyXp_resetado=${resetCount}`);
+});
+// ────────────────────────────────────────────────────────────────
+// streakReminder — Agendada (20:00 BRT). Avisa quem tem streak ativo
+// (currentStreak > 0) mas AINDA não estudou hoje que a ofensiva expira
+// à meia-noite. Cria uma notificação in-app (type "streakAtRisk", lida
+// pelo NotificationService) e dispara o push.
+//
+// Não confiamos só no flag `studiedToday` (que é resetado pelo cliente e
+// pode estar velho): comparamos `lastStudyDate` com o dia atual em BRT.
+// ────────────────────────────────────────────────────────────────
+exports.streakReminder = (0, scheduler_1.onSchedule)({
+    schedule: "every day 20:00",
+    timeZone: "America/Sao_Paulo",
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+}, async () => {
+    var _a;
+    // Chave do "hoje" em BRT (UTC-3), independente de fuso do runtime.
+    const dayKey = (ms) => {
+        const d = new Date(ms - 3 * 60 * 60 * 1000);
+        return `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`;
+    };
+    const todayKey = dayKey(Date.now());
+    let sent = 0;
+    let last;
+    while (true) {
+        let q = db
+            .collection("users")
+            .where("currentStreak", ">", 0)
+            .orderBy("currentStreak")
+            .limit(300);
+        if (last)
+            q = q.startAfter(last);
+        const snap = await q.get();
+        if (snap.empty)
+            break;
+        for (const doc of snap.docs) {
+            const data = doc.data();
+            const streak = (_a = data["currentStreak"]) !== null && _a !== void 0 ? _a : 0;
+            if (streak <= 0)
+                continue;
+            // Já estudou hoje → streak garantido, não incomoda.
+            const ls = data["lastStudyDate"];
+            if (ls && dayKey(ls.toMillis()) === todayKey)
+                continue;
+            await doc.ref.collection("notifications").add({
+                type: "streakAtRisk",
+                title: "Seu streak está em risco! 🔥",
+                body: `Você está há ${streak} dia(s) seguidos. Estude hoje para não zerar a ofensiva.`,
+                emoji: "🔥",
+                read: false,
+                createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            });
+            await sendPushToUser(doc.id, {
+                title: "🔥 Não perca seu streak!",
+                body: `Sua ofensiva de ${streak} dia(s) acaba à meia-noite. Estude agora no Spark!`,
+                data: { type: "streakAtRisk", streak: String(streak) },
+            });
+            sent++;
+        }
+        last = snap.docs[snap.docs.length - 1];
+        if (snap.size < 300)
+            break;
+    }
+    v2_1.logger.info(`[streakReminder] lembretes enviados=${sent}`);
 });
 // ────────────────────────────────────────────────────────────────
 // cleanupStaleDuels — Agendada. Encerra duelos que ficaram presos em

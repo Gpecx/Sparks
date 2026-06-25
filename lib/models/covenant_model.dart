@@ -74,6 +74,12 @@ class CovenantModel {
         return '+200 XP';
       case 'cov_conhecimento':
         return '+150 XP';
+      case 'cov_duelista':
+        return '+300 XP';
+      case 'cov_perfeccionista':
+        return '+250 XP';
+      case 'cov_dedicacao':
+        return '+200 XP';
       default:
         // fallback: extrai apenas o número do campo salvo, se existir
         return id.isNotEmpty ? '+XP' : '';

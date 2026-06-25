@@ -56,7 +56,7 @@ class AuthService {
                 'totalLessonsCompleted': 0,
                 'totalCorrectAnswers': 0,
                 'totalAnswers': 0,
-                'eloRating': 1200,
+                'eloRating': 0,
                 'wins': 0,
                 'losses': 0,
                 'totalDuels': 0,
@@ -118,10 +118,12 @@ class AuthService {
         'totalLessonsCompleted': 0,
         'totalCorrectAnswers': 0,
         'totalAnswers': 0,
-        'eloRating': 1200,
+        'eloRating': 0,
         'wins': 0,
         'losses': 0,
         'totalDuels': 0,
+        // Conta nova: dispara o tour guiado uma única vez.
+        'tutorialSeen': false,
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       });
@@ -232,10 +234,12 @@ class AuthService {
         'totalLessonsCompleted': 0,
         'totalCorrectAnswers': 0,
         'totalAnswers': 0,
-        'eloRating': 1200,
+        'eloRating': 0,
         'wins': 0,
         'losses': 0,
         'totalDuels': 0,
+        // Cadastro novo via Google (doc só é criado quando ainda não existe).
+        'tutorialSeen': false,
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       };
