@@ -8,6 +8,7 @@ import 'package:spark_app/services/auth_service.dart';
 import 'package:spark_app/services/device_service.dart';
 import 'package:spark_app/widgets/email_verification_dialog.dart';
 import 'package:spark_app/widgets/google_auth_button.dart';
+import 'package:spark_app/widgets/redeem_access_code_dialog.dart';
 import 'package:spark_app/widgets/responsive_form_container.dart';
 import 'package:spark_app/widgets/spark_snack.dart';
 import 'package:spark_app/l10n/app_localizations.dart';
@@ -129,6 +130,15 @@ class _LoginScreenState extends State<LoginScreen> {
       final credential = await _authService.signInWithGoogle();
       final user = credential.user;
       if (!mounted || user == null) return;
+
+      // Conta nova via Google: oferece resgatar a chave de acesso agora, já
+      // que o fluxo do Google não possui campo para isso. O resgate exige
+      // estar autenticado — e neste ponto o usuário já está.
+      final isNewUser = credential.additionalUserInfo?.isNewUser ?? false;
+      if (isNewUser && mounted) {
+        await showRedeemAccessCodeDialog(context);
+        if (!mounted) return;
+      }
 
       // O Google já verifica a identidade do usuário, então pulamos a
       // verificação de dispositivo por OTP e vamos direto para a home.
@@ -273,6 +283,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 GestureDetector(
                   onTap: () => context.push('/register'),
                   child: Text(l10n.signUpLink, style: const TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w700)),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            // Dica: quem tem uma chave de acesso resgata após o login,
+            // em Configurações → Acesso (não dá para resgatar deslogado).
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.vpn_key_outlined, color: AppColors.textMuted, size: 16),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: Text(
+                    l10n.accessKeyLoginHint,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: AppColors.textMuted, fontSize: 12, height: 1.4),
+                  ),
                 ),
               ],
             ),
