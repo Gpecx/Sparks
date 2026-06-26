@@ -2357,6 +2357,202 @@ export const verifyEmailCode = onCall(
 );
 
 // ────────────────────────────────────────────────────────────────
+//  VERIFICAÇÃO DE ESTUDANTE POR OTP — aprovação automática (PDF §8)
+//
+//  Em vez de validar o RA (não há API nacional p/ isso), validamos que
+//  a pessoa CONTROLA um e-mail institucional reconhecido: enviamos um
+//  código e, se ela confirmar, aprovamos na hora — sem revisão humana.
+//  Quem não tem e-mail institucional cai no fluxo manual (comprovante).
+// ────────────────────────────────────────────────────────────────
+
+/** Domínios reconhecidos p/ verificação automática de estudante.
+ *  Espelha a lista do app; qualquer `.edu.br` também é aceito. */
+const APPROVED_STUDENT_DOMAINS = new Set<string>([
+  "usp.br", "unicamp.br", "ufmg.edu.br", "ufrj.br", "ufpe.br",
+  "ufsc.br", "ufrgs.br", "unesp.br", "ufba.br", "unb.br",
+]);
+
+function isApprovedStudentEmail(email: string): boolean {
+  const e = email.trim().toLowerCase();
+  const at = e.indexOf("@");
+  if (at < 0) return false;
+  const domain = e.substring(at + 1);
+  if (domain.endsWith(".edu.br")) return true;
+  return [...APPROVED_STUDENT_DOMAINS].some(
+    (d) => domain === d || domain.endsWith("." + d)
+  );
+}
+
+// sendStudentVerificationCode — envia OTP ao e-mail institucional.
+export const sendStudentVerificationCode = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    secrets: [SMTP_USER, SMTP_PASS],
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ institutionalEmail?: string; institution?: string }>
+  ): Promise<{ sent: boolean }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    const email = (request.data?.institutionalEmail ?? "").toString().trim();
+    const institution = (request.data?.institution ?? "").toString().trim().slice(0, 160);
+    if (!email || !email.includes("@")) {
+      throw new HttpsError("invalid-argument", "E-mail institucional inválido.");
+    }
+    if (!isApprovedStudentEmail(email)) {
+      throw new HttpsError(
+        "failed-precondition",
+        "Esse e-mail não é de uma instituição reconhecida para verificação automática. Envie um comprovante de matrícula para análise."
+      );
+    }
+
+    // Rate-limit por IP e por usuário (anti-abuso do SMTP / brute de e-mails).
+    const ip = request.rawRequest?.ip ?? "unknown";
+    await checkRateLimit(`auth:ip_${ip}:sendStudentOtp`, RATE_AUTH.limit, RATE_AUTH.windowMs);
+    await checkRateLimit(
+      rateLimitKey("auth", uid, "sendStudentOtp"),
+      RATE_AUTH.limit,
+      RATE_AUTH.windowMs
+    );
+
+    const otp = String(crypto.randomInt(100000, 1000000));
+    const expiresAt = admin.firestore.Timestamp.fromMillis(Date.now() + 10 * 60 * 1000);
+
+    await db.collection("_student_otps").doc(uid).set({
+      uid,
+      email: email.toLowerCase(),
+      institution,
+      code: otp,
+      expiresAt,
+      attempts: 0,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    const smtpUser = process.env.SMTP_USER ?? "";
+    const smtpPass = process.env.SMTP_PASS ?? "";
+    if (!smtpUser || !smtpPass) {
+      logger.error("[sendStudentVerificationCode] SMTP não configurado.");
+      throw new HttpsError("internal", "Serviço de e-mail indisponível. Tente mais tarde.");
+    }
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: smtpUser, pass: smtpPass },
+    });
+
+    await transporter.sendMail({
+      from: `"SPARK" <${smtpUser}>`,
+      to: email,
+      subject: "Verificação de estudante SPARK",
+      html: `
+        <div style="font-family:sans-serif;max-width:480px;margin:0 auto;background:#0d1117;color:#fff;padding:32px;border-radius:16px;">
+          <h1 style="color:#00ff88;margin:0 0 8px;">⚡ SPARK</h1>
+          <p style="color:#aaa;margin:0 0 24px;">Verificação de Estudante</p>
+          <p style="margin:0 0 16px;">Use o código abaixo para confirmar sua matrícula e liberar o plano Student:</p>
+          <div style="background:#1a2332;border:2px solid #00ff88;border-radius:12px;padding:24px;text-align:center;margin:0 0 24px;">
+            <span style="font-size:40px;font-weight:900;letter-spacing:12px;color:#00ff88;">${otp}</span>
+          </div>
+          <p style="color:#aaa;font-size:13px;">Este código expira em <strong style='color:#fff;'>10 minutos</strong>.</p>
+          <p style="color:#555;font-size:12px;">Se você não solicitou, ignore este e-mail.</p>
+        </div>
+      `,
+    });
+
+    logger.info(`[sendStudentVerificationCode] OTP enviado para ${email} (uid=${uid}).`);
+    return { sent: true };
+  }
+);
+
+// verifyStudentVerificationCode — valida o OTP e APROVA o estudante.
+export const verifyStudentVerificationCode = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ code?: string }>
+  ): Promise<{ verified: boolean; error?: string }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    await checkRateLimit(
+      rateLimitKey("auth", uid, "verifyStudentOtp"),
+      RATE_AUTH.limit,
+      RATE_AUTH.windowMs
+    );
+
+    const code = (request.data?.code ?? "").toString().trim();
+    if (code.length !== 6) return { verified: false, error: "Código inválido." };
+
+    const ref = db.collection("_student_otps").doc(uid);
+    const snap = await ref.get();
+    if (!snap.exists) {
+      return { verified: false, error: "Nenhum código encontrado. Solicite um novo." };
+    }
+    const otp = snap.data()!;
+
+    const expiresAt = (otp["expiresAt"] as admin.firestore.Timestamp).toMillis();
+    if (Date.now() > expiresAt) {
+      await ref.delete();
+      return { verified: false, error: "Código expirado. Solicite um novo." };
+    }
+
+    const attempts = (otp["attempts"] as number) ?? 0;
+    if (attempts >= 5) {
+      await ref.delete();
+      return { verified: false, error: "Muitas tentativas. Solicite um novo código." };
+    }
+
+    if (otp["code"] !== code) {
+      await ref.update({ attempts: admin.firestore.FieldValue.increment(1) });
+      const remaining = 4 - attempts;
+      return {
+        verified: false,
+        error: `Código incorreto. ${remaining > 0 ? `${remaining} tentativa(s) restante(s).` : "Solicite um novo código."}`,
+      };
+    }
+
+    // Código correto → aprova o estudante automaticamente.
+    const email = (otp["email"] as string) ?? "";
+    const institution = (otp["institution"] as string) ?? "";
+    const batch = db.batch();
+    batch.set(
+      db.collection("student_verifications").doc(uid),
+      {
+        uid,
+        institution,
+        email,
+        method: "email_otp",
+        status: "approved",
+        autoEligible: true,
+        approvedVia: "otp",
+        reviewedAt: admin.firestore.FieldValue.serverTimestamp(),
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+    batch.set(
+      db.collection("users").doc(uid),
+      {
+        studentVerified: true,
+        studentVerifiedAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+    batch.delete(ref);
+    await batch.commit();
+
+    logger.info(`[verifyStudentVerificationCode] uid=${uid} aprovado via OTP (${email}).`);
+    return { verified: true };
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
 // deleteAccount — Exclui PERMANENTEMENTE a conta e todos os dados
 // ────────────────────────────────────────────────────────────────
 // Remove tudo que se refere ao usuário, inclusive o nome dele no
