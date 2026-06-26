@@ -425,6 +425,16 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // ─── PAGAMENTO POR LINK DA LP (somente Cloud Functions) ───────
+    // Idempotência de webhook e pendências de ativação por e-mail. Nenhum
+    // acesso de cliente — escritas/leituras só via Admin SDK (ignora rules).
+    match /link_activations/{paymentId} {
+      allow read, write: if false;
+    }
+    match /pending_link_activations/{emailKey} {
+      allow read, write: if false;
+    }
+
     // ─── BUSINESS: leads comerciais (PDF §9) ──────────────────────
     match /business_leads/{leadId} {
       // Qualquer autenticado pode solicitar proposta; gestão é do admin.
