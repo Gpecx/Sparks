@@ -810,6 +810,22 @@ export const createAsaasCheckout = onCall(
     const totalPrice = resolvedItems.reduce((acc, i) => acc + i.price, 0);
     const totalPoints = resolvedItems.reduce((acc, i) => acc + i.points, 0);
 
+    // ENFORCEMENT do plano Student: o preço de estudante só é liberado
+    // para quem teve a matrícula verificada e APROVADA (por admin/Cloud
+    // Function). Sem isto, qualquer um compraria Student a R$19,90.
+    if (resolvedItems.some((i) => i.planId === "student")) {
+      const svSnap = await db
+        .collection("student_verifications")
+        .doc(uid)
+        .get();
+      if (!svSnap.exists || svSnap.data()?.["status"] !== "approved") {
+        throw new HttpsError(
+          "failed-precondition",
+          "Verificação de estudante necessária. Envie seu comprovante de matrícula e aguarde a aprovação antes de assinar o plano Student."
+        );
+      }
+    }
+
     // Busca dados do usuário no Firestore para preencher o cliente Asaas
     const userSnap = await db.collection("users").doc(uid).get();
     if (!userSnap.exists) {
@@ -1754,6 +1770,128 @@ export const setAccessCodeNote = onCall(
 
     logger.info(`[setAccessCodeNote] uid=${uid} anotou ${code}.`);
     return { success: true };
+  }
+);
+
+// ───────────────────────────────────────────────────────────────────
+//  VERIFICAÇÃO DE ESTUDANTE — aprovação (PDF §8)
+//
+//  O cliente envia o comprovante e grava student_verifications/{uid}
+//  com status 'pending' (as Security Rules só deixam o dono escrever
+//  'pending'). A APROVAÇÃO/REJEIÇÃO é exclusiva do admin via as duas
+//  funções abaixo — que também gravam users/{uid}.studentVerified, o
+//  flag autoritativo lido pelo enforcement do createAsaasCheckout.
+// ───────────────────────────────────────────────────────────────────
+
+// listStudentVerifications — admin lista as solicitações de verificação.
+export const listStudentVerifications = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ status?: string }>
+  ): Promise<{ verifications: Record<string, unknown>[] }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await checkRateLimit(
+      rateLimitKey("admin", uid, "listStudentVerifications"),
+      RATE_ADMIN.limit,
+      RATE_ADMIN.windowMs
+    );
+
+    const snap = await db
+      .collection("student_verifications")
+      .orderBy("createdAt", "desc")
+      .limit(300)
+      .get();
+
+    const infos = await resolveUserInfos(snap.docs.map((d) => d.id));
+
+    const verifications = snap.docs.map((d) => {
+      const v = d.data();
+      const info = infos.get(d.id);
+      const createdAt = v["createdAt"] as admin.firestore.Timestamp | undefined;
+      const reviewedAt = v["reviewedAt"] as admin.firestore.Timestamp | undefined;
+      return {
+        uid: d.id,
+        name: info?.name ?? "",
+        accountEmail: info?.email ?? null,
+        institution: v["institution"] ?? "",
+        institutionalEmail: v["email"] ?? "",
+        method: v["method"] ?? "email",
+        proofUrl: v["proofUrl"] ?? null,
+        status: v["status"] ?? "pending",
+        autoEligible: v["autoEligible"] === true,
+        createdAt: createdAt ? createdAt.toDate().toISOString() : null,
+        reviewedAt: reviewedAt ? reviewedAt.toDate().toISOString() : null,
+      };
+    });
+    return { verifications };
+  }
+);
+
+// reviewStudentVerification — admin aprova ou rejeita uma solicitação.
+// Aprovar concede users/{uid}.studentVerified=true (lido pelo checkout).
+export const reviewStudentVerification = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ uid?: string; decision?: string }>
+  ): Promise<{ status: string }> => {
+    const adminUid = request.auth?.uid;
+    if (!adminUid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(adminUid);
+    await checkRateLimit(
+      rateLimitKey("admin", adminUid, "reviewStudentVerification"),
+      RATE_ADMIN.limit,
+      RATE_ADMIN.windowMs
+    );
+
+    const targetUid = (request.data?.uid ?? "").toString().trim();
+    const decision = (request.data?.decision ?? "").toString().trim();
+    if (!targetUid) {
+      throw new HttpsError("invalid-argument", "uid é obrigatório.");
+    }
+    if (decision !== "approve" && decision !== "reject") {
+      throw new HttpsError("invalid-argument", "decision deve ser 'approve' ou 'reject'.");
+    }
+
+    const ref = db.collection("student_verifications").doc(targetUid);
+    const snap = await ref.get();
+    if (!snap.exists) {
+      throw new HttpsError("not-found", "Solicitação de verificação não encontrada.");
+    }
+
+    const approved = decision === "approve";
+    const batch = db.batch();
+    batch.update(ref, {
+      status: approved ? "approved" : "rejected",
+      reviewedAt: admin.firestore.FieldValue.serverTimestamp(),
+      reviewedBy: adminUid,
+    });
+    batch.set(
+      db.collection("users").doc(targetUid),
+      {
+        studentVerified: approved,
+        studentVerifiedAt: approved
+          ? admin.firestore.FieldValue.serverTimestamp()
+          : admin.firestore.FieldValue.delete(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+    await batch.commit();
+
+    logger.info(
+      `[reviewStudentVerification] admin=${adminUid} uid=${targetUid} -> ${decision}`
+    );
+    return { status: approved ? "approved" : "rejected" };
   }
 );
 

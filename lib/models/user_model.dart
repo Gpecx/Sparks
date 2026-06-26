@@ -65,6 +65,9 @@ class UserModel {
   final DateTime? trialEndsAt;
   final String? subscriptionPlanId;   // 'pro' | 'premium' | 'student' | 'business'
   final String? asaasSubscriptionId;
+  /// Estudante aprovado na verificação de matrícula. Concedido apenas por
+  /// Cloud Function (reviewStudentVerification) — o cliente nunca escreve.
+  final bool studentVerified;
   final DateTime? lastStudyDate;
   final bool studiedToday;
   /// Momento em que o usuário concluiu o último Desafio Diário.
@@ -105,6 +108,7 @@ class UserModel {
     this.trialEndsAt,
     this.subscriptionPlanId,
     this.asaasSubscriptionId,
+    this.studentVerified = false,
     this.lastStudyDate,
     this.studiedToday = false,
     this.lastDailyChallengeCompletedAt,
@@ -152,6 +156,7 @@ class UserModel {
           : null,
       subscriptionPlanId: data['subscriptionPlanId']?.toString(),
       asaasSubscriptionId: data['asaasSubscriptionId']?.toString(),
+      studentVerified: data['studentVerified'] == true,
 
       // Datas: verifica especificamente se é um Timestamp do Firebase
       lastStudyDate: data['lastStudyDate'] is Timestamp
@@ -248,6 +253,7 @@ class UserModel {
     DateTime? trialEndsAt,
     String? subscriptionPlanId,
     String? asaasSubscriptionId,
+    bool? studentVerified,
     DateTime? lastStudyDate,
     bool? studiedToday,
     DateTime? lastDailyChallengeCompletedAt,
@@ -280,6 +286,7 @@ class UserModel {
       trialEndsAt: trialEndsAt ?? this.trialEndsAt,
       subscriptionPlanId: subscriptionPlanId ?? this.subscriptionPlanId,
       asaasSubscriptionId: asaasSubscriptionId ?? this.asaasSubscriptionId,
+      studentVerified: studentVerified ?? this.studentVerified,
       lastStudyDate: lastStudyDate ?? this.lastStudyDate,
       studiedToday: studiedToday ?? this.studiedToday,
       lastDailyChallengeCompletedAt:

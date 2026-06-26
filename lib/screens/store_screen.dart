@@ -664,7 +664,10 @@ class _StoreScreenState extends ConsumerState<StoreScreen>
     }
 
     // Student exige comprovação de matrícula antes de assinar (PDF §8).
-    if (plan.id == 'student') {
+    // Enquanto a verificação não for APROVADA, só liberamos o fluxo de
+    // verificação — a assinatura em si é bloqueada também no servidor
+    // (createAsaasCheckout exige studentVerified).
+    if (plan.id == 'student' && user?.studentVerified != true) {
       return _routeButton(AppLocalizations.of(context)!.verifyEnrollment,
           color: plan.accentColor,
           icon: Icons.school_outlined,
