@@ -371,3 +371,60 @@ export async function getChargeDetails(
     value: typeof charge.value === "number" ? charge.value : 0,
   };
 }
+
+/**
+ * Como getChargeDetails, mas também retorna o `customer` (id do cliente
+ * Asaas) da cobrança — fonte autoritativa do pagador, usada na ativação
+ * por link de pagamento (LP). Retorna null em caso de erro de consulta.
+ */
+export async function getChargeDetailsFull(
+  chargeId: string
+): Promise<{ status: string; value: number; customer: string | null } | null> {
+  const { apiKey, baseUrl } = getAsaasConfig();
+  const headers = buildHeaders(apiKey);
+
+  const res = await httpRequest(
+    `${baseUrl}/payments/${chargeId}`,
+    { method: "GET", headers }
+  );
+
+  if (res.status >= 400) {
+    logger.error(`[Asaas] Erro ao consultar cobrança ${chargeId}:`, res.data);
+    return null;
+  }
+
+  const charge = res.data as { status?: string; value?: number; customer?: string };
+  return {
+    status: charge.status ?? "UNKNOWN",
+    value: typeof charge.value === "number" ? charge.value : 0,
+    customer: charge.customer ?? null,
+  };
+}
+
+/**
+ * Busca um cliente do Asaas por id (GET /customers/{id}) e retorna
+ * e-mail + nome. Usado para descobrir o pagador de um link de pagamento
+ * da LP (o webhook só traz o id do cliente). Retorna null se não achar.
+ */
+export async function getCustomer(
+  customerId: string
+): Promise<{ email: string | null; name: string | null } | null> {
+  const { apiKey, baseUrl } = getAsaasConfig();
+  const headers = buildHeaders(apiKey);
+
+  const res = await httpRequest(
+    `${baseUrl}/customers/${customerId}`,
+    { method: "GET", headers }
+  );
+
+  if (res.status >= 400) {
+    logger.error(`[Asaas] Erro ao consultar cliente ${customerId}:`, res.data);
+    return null;
+  }
+
+  const cust = res.data as { email?: string; name?: string };
+  return {
+    email: cust.email ?? null,
+    name: cust.name ?? null,
+  };
+}

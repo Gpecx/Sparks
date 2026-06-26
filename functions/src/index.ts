@@ -39,6 +39,8 @@ import {
   createCharge,
   getChargeStatus,
   getChargeDetails,
+  getChargeDetailsFull,
+  getCustomer,
   AsaasBillingType,
 } from "./services/asaasService";
 import {
@@ -121,12 +123,22 @@ export const onUserCreated = functionsV1
 
     const userRef = db.collection("users").doc(user.uid);
     const snap = await userRef.get();
-    if (snap.exists) return; // já criado (client ou redeem) — não sobrescreve
-    await userRef.set(
-      defaultUserFields(user.uid, user.email, user.displayName, user.photoURL),
-      { merge: true }
-    );
-    logger.info(`[onUserCreated] doc de usuário criado para uid=${user.uid}`);
+    if (!snap.exists) {
+      await userRef.set(
+        defaultUserFields(user.uid, user.email, user.displayName, user.photoURL),
+        { merge: true }
+      );
+      logger.info(`[onUserCreated] doc de usuário criado para uid=${user.uid}`);
+    }
+
+    // Reivindica assinatura paga na LP antes da conta existir (se houver).
+    // Roda DEPOIS de garantir o doc com os defaults, para não sobrescrever
+    // isPremium. À prova de falha — nunca quebra a criação da conta.
+    try {
+      await claimPendingActivation(user.uid, user.email);
+    } catch (e) {
+      logger.warn("[onUserCreated] claimPendingActivation falhou (ignorado):", e);
+    }
   });
 
 // ── Hardening de segurança ───────────────────────────────────────
@@ -363,6 +375,146 @@ function resolveCatalogItem(item: {
     isSubscription: true,
     period,
   };
+}
+
+/**
+ * Reverte um VALOR de cobrança para o plano do catálogo (mensal ou anual).
+ * Usado na ativação por link de pagamento da LP, onde não há pedido e só
+ * temos o valor pago. Os preços do catálogo são todos distintos, então o
+ * mapeamento é inequívoco. Retorna null para valores fora do catálogo
+ * (cobrança avulsa/custom) — nesse caso nada é concedido.
+ */
+function resolvePlanByValue(
+  value: number
+): { planId: string; period: "monthly" | "annual" } | null {
+  for (const [planId, plan] of Object.entries(PLAN_CATALOG)) {
+    if (Math.abs(value - plan.monthlyPrice) <= PRICE_EPSILON) {
+      return { planId, period: "monthly" };
+    }
+    if (plan.annualPrice != null && Math.abs(value - plan.annualPrice) <= PRICE_EPSILON) {
+      return { planId, period: "annual" };
+    }
+  }
+  return null;
+}
+
+/** Normaliza um e-mail para usar como id de documento (mesmo padrão dos OTPs). */
+function emailKey(email: string): string {
+  return email.trim().toLowerCase().replace(/[^a-z0-9]/g, "_");
+}
+
+/**
+ * Concede uma assinatura vinda de link de pagamento da LP ao usuário.
+ * Espelha o grant in-app (isPremium + subscriptionPlanId), grava uma
+ * transação idempotente (id determinístico) e dispara o Purchase no CAPI.
+ */
+async function grantLinkSubscription(opts: {
+  uid: string;
+  planId: string;
+  period: "monthly" | "annual";
+  paymentId: string;
+  value: number;
+  email: string | null;
+}): Promise<void> {
+  const { uid, planId, period, paymentId, value, email } = opts;
+  await db.collection("users").doc(uid).set(
+    {
+      isPremium: true,
+      subscriptionPlanId: planId,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    },
+    { merge: true }
+  );
+  await db.collection("transactions").doc(`link_${paymentId}`).set(
+    {
+      uid,
+      asaasPaymentId: paymentId,
+      planId,
+      period,
+      totalPrice: value,
+      totalPoints: 0,
+      status: "PAID",
+      origin: "payment_link",
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    },
+    { merge: true }
+  );
+  try {
+    await sendCapiEvent(META_CAPI_TOKEN.value(), "Purchase", {
+      email: email ?? undefined,
+      uid,
+      value,
+      currency: "BRL",
+      eventId: paymentId,
+      actionSource: "website",
+    });
+  } catch (e) {
+    logger.warn("[linkActivation] CAPI Purchase falhou (ignorado):", e);
+  }
+}
+
+/**
+ * Reivindica uma pendência de ativação por link (pagou na LP antes de ter
+ * conta, ou Student que estava segurado). Chamada no onUserCreated e ao
+ * aprovar a verificação de estudante. Mantém a pendência se ela exigir
+ * verificação de estudante e o usuário ainda não foi verificado.
+ */
+async function claimPendingActivation(
+  uid: string,
+  email: string | null | undefined,
+  opts?: { studentJustVerified?: boolean }
+): Promise<void> {
+  if (!email) return;
+  const ref = db.collection("pending_link_activations").doc(emailKey(email));
+  const snap = await ref.get();
+  if (!snap.exists) return;
+  const p = snap.data()!;
+  const requiresStudent = p["requiresStudentVerification"] === true;
+  if (requiresStudent && !opts?.studentJustVerified) {
+    // Ainda não verificado — segura a pendência, mas amarra o uid.
+    if (p["uid"] !== uid) await ref.set({ uid }, { merge: true });
+    return;
+  }
+  await grantLinkSubscription({
+    uid,
+    planId: (p["planId"] as string) ?? "pro",
+    period: (p["period"] as "monthly" | "annual") ?? "monthly",
+    paymentId: (p["paymentId"] as string) ?? `pending_${uid}`,
+    value: (p["value"] as number) ?? 0,
+    email,
+  });
+  await ref.delete();
+  logger.info(`[claimPending] concedido ${p["planId"]} a uid=${uid} (pendência da LP).`);
+}
+
+/**
+ * Reivindica pendências amarradas a um uid (caso Student segurado: o uid já
+ * foi gravado na pendência quando o pagamento entrou). Chamada ao aprovar a
+ * verificação de estudante. À prova de falha — nunca lança.
+ */
+async function claimPendingActivationsByUid(uid: string): Promise<void> {
+  try {
+    const q = await db
+      .collection("pending_link_activations")
+      .where("uid", "==", uid)
+      .limit(5)
+      .get();
+    for (const doc of q.docs) {
+      const p = doc.data();
+      await grantLinkSubscription({
+        uid,
+        planId: (p["planId"] as string) ?? "student",
+        period: (p["period"] as "monthly" | "annual") ?? "monthly",
+        paymentId: (p["paymentId"] as string) ?? `pending_${uid}`,
+        value: (p["value"] as number) ?? 0,
+        email: (p["email"] as string) ?? null,
+      });
+      await doc.ref.delete();
+      logger.info(`[claimPendingByUid] concedido ${p["planId"]} a uid=${uid}.`);
+    }
+  } catch (e) {
+    logger.warn("[claimPendingByUid] falhou (ignorado):", e);
+  }
 }
 
 // ────────────────────────────────────────────────────────────────
@@ -1162,8 +1314,127 @@ export const asaasWebhook = onRequest(
 
     const orderId = payment.externalReference;
     if (!orderId) {
-      logger.warn("[asaasWebhook] Pagamento sem externalReference.", payment);
-      res.status(200).send("No externalReference");
+      // ── Pagamento via LINK da LP (sem pedido in-app) ──
+      // Descobre o pagador pelo cliente Asaas, reverte o valor p/ plano e
+      // concede (ou segura, se a conta não existir / Student não verificado).
+      const paymentId = payment.id;
+
+      const charge = await getChargeDetailsFull(paymentId);
+      if (!charge) {
+        res.status(200).send("Charge re-verification failed");
+        return;
+      }
+      const linkConfirmed =
+        charge.status === "RECEIVED" ||
+        charge.status === "CONFIRMED" ||
+        charge.status === "RECEIVED_IN_CASH";
+      if (!linkConfirmed) {
+        logger.info(`[linkActivation] cobrança ${paymentId} não confirmada (status=${charge.status}).`);
+        res.status(200).send("Charge not confirmed at Asaas");
+        return;
+      }
+
+      const plan = resolvePlanByValue(charge.value);
+      if (!plan) {
+        logger.warn(`[linkActivation] valor ${charge.value} fora do catálogo (pid=${paymentId}).`);
+        res.status(200).send("No matching plan");
+        return;
+      }
+      if (!charge.customer) {
+        logger.warn(`[linkActivation] cobrança sem customer (pid=${paymentId}).`);
+        res.status(200).send("No customer");
+        return;
+      }
+
+      // Idempotência: claim atômico por paymentId (cada mês = paymentId novo).
+      const claimRef = db.collection("link_activations").doc(paymentId);
+      try {
+        await claimRef.create({
+          paymentId,
+          planId: plan.planId,
+          period: plan.period,
+          value: charge.value,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+      } catch (_e) {
+        logger.info(`[linkActivation] pagamento ${paymentId} já processado.`);
+        res.status(200).send("Already processed");
+        return;
+      }
+
+      const cust = await getCustomer(charge.customer);
+      const payerEmail = cust?.email ?? null;
+      if (!payerEmail) {
+        // Sem e-mail não dá p/ casar — libera o claim para re-tentar depois.
+        await claimRef.delete().catch(() => {});
+        logger.warn(`[linkActivation] cliente ${charge.customer} sem e-mail (pid=${paymentId}).`);
+        res.status(200).send("No customer email");
+        return;
+      }
+
+      // Acha o usuário pelo e-mail (fonte autoritativa: Firebase Auth).
+      let linkUid: string | null = null;
+      try {
+        linkUid = (await admin.auth().getUserByEmail(payerEmail)).uid;
+      } catch (_e) {
+        linkUid = null;
+      }
+
+      const isStudentPlan = plan.planId === "student";
+
+      if (linkUid) {
+        // Student não verificado → SEGURA (rede de segurança; a LP também filtra).
+        if (isStudentPlan) {
+          const uSnap = await db.collection("users").doc(linkUid).get();
+          if (uSnap.data()?.["studentVerified"] !== true) {
+            await db.collection("pending_link_activations").doc(emailKey(payerEmail)).set(
+              {
+                email: payerEmail.toLowerCase(),
+                uid: linkUid,
+                planId: plan.planId,
+                period: plan.period,
+                value: charge.value,
+                paymentId,
+                customerId: charge.customer,
+                requiresStudentVerification: true,
+                createdAt: admin.firestore.FieldValue.serverTimestamp(),
+              },
+              { merge: true }
+            );
+            logger.info(`[linkActivation] Student segurado (uid=${linkUid}) aguardando verificação.`);
+            res.status(200).send("Held: student verification required");
+            return;
+          }
+        }
+        await grantLinkSubscription({
+          uid: linkUid,
+          planId: plan.planId,
+          period: plan.period,
+          paymentId,
+          value: charge.value,
+          email: payerEmail,
+        });
+        logger.info(`[linkActivation] ${plan.planId} concedido a uid=${linkUid} via link da LP.`);
+        res.status(200).send("OK");
+        return;
+      }
+
+      // Usuário ainda não existe → pendência por e-mail (claim no onUserCreated).
+      await db.collection("pending_link_activations").doc(emailKey(payerEmail)).set(
+        {
+          email: payerEmail.toLowerCase(),
+          planId: plan.planId,
+          period: plan.period,
+          value: charge.value,
+          paymentId,
+          customerId: charge.customer,
+          requiresStudentVerification: isStudentPlan,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+      logger.info(`[linkActivation] pendência criada p/ ${payerEmail} (sem conta ainda).`);
+      res.status(200).send("Pending: awaiting signup");
       return;
     }
 
@@ -1888,6 +2159,12 @@ export const reviewStudentVerification = onCall(
     );
     await batch.commit();
 
+    // Estudante aprovado → libera qualquer assinatura Student paga na LP que
+    // estava segurada aguardando verificação.
+    if (approved) {
+      await claimPendingActivationsByUid(targetUid);
+    }
+
     logger.info(
       `[reviewStudentVerification] admin=${adminUid} uid=${targetUid} -> ${decision}`
     );
@@ -2546,6 +2823,9 @@ export const verifyStudentVerificationCode = onCall(
     );
     batch.delete(ref);
     await batch.commit();
+
+    // Libera qualquer assinatura Student paga na LP que estava segurada.
+    await claimPendingActivationsByUid(uid);
 
     logger.info(`[verifyStudentVerificationCode] uid=${uid} aprovado via OTP (${email}).`);
     return { verified: true };
