@@ -12,6 +12,7 @@ import 'package:spark_app/widgets/sparks_background.dart';
 import 'package:spark_app/widgets/pcb_background.dart';
 import 'package:spark_app/widgets/responsive_form_container.dart';
 import 'package:spark_app/providers/user_provider.dart';
+import 'package:spark_app/services/student_verification_service.dart';
 
 // ─────────────────────────────────────────────────────────────────
 //  VERIFICAÇÃO DE ESTUDANTE — PDF §8
@@ -76,8 +77,13 @@ class _StudentVerificationScreenState
     extends ConsumerState<StudentVerificationScreen> {
   final _institutionCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
+  final _codeCtrl = TextEditingController();
   XFile? _proof;
   bool _submitting = false;
+  // Fluxo OTP (verificação automática por e-mail institucional).
+  bool _otpSent = false;
+  bool _otpSending = false;
+  bool _otpVerifying = false;
 
   @override
   void initState() {
@@ -91,7 +97,55 @@ class _StudentVerificationScreenState
   void dispose() {
     _institutionCtrl.dispose();
     _emailCtrl.dispose();
+    _codeCtrl.dispose();
     super.dispose();
+  }
+
+  // ── Fluxo OTP (verificação automática por e-mail institucional) ──
+  // i18n: TODO mover estas strings para os .arb (PT-first no lançamento).
+  Future<void> _sendOtp() async {
+    final email = _emailCtrl.text.trim();
+    if (email.isEmpty || !email.contains('@')) {
+      _snack('Informe seu e-mail institucional.');
+      return;
+    }
+    setState(() => _otpSending = true);
+    try {
+      await StudentVerificationService.instance.sendOtp(
+        institutionalEmail: email,
+        institution: _institutionCtrl.text.trim(),
+      );
+      if (!mounted) return;
+      setState(() => _otpSent = true);
+      SparkSnack.success(context, 'Código enviado para $email. Confira a caixa de entrada.');
+    } catch (e) {
+      if (!mounted) return;
+      SparkSnack.error(context, e.toString());
+    } finally {
+      if (mounted) setState(() => _otpSending = false);
+    }
+  }
+
+  Future<void> _verifyOtp() async {
+    final code = _codeCtrl.text.trim();
+    if (code.length != 6) {
+      _snack('Digite o código de 6 dígitos.');
+      return;
+    }
+    setState(() => _otpVerifying = true);
+    try {
+      await StudentVerificationService.instance.verifyOtp(code);
+      if (!mounted) return;
+      SparkSnack.success(context, 'Matrícula verificada! Plano Student liberado.');
+      // O status reativo (studentVerificationProvider) atualiza o banner.
+      _codeCtrl.clear();
+      setState(() => _otpSent = false);
+    } catch (e) {
+      if (!mounted) return;
+      SparkSnack.error(context, e.toString());
+    } finally {
+      if (mounted) setState(() => _otpVerifying = false);
+    }
   }
 
   Future<void> _pickProof() async {
@@ -198,7 +252,35 @@ class _StudentVerificationScreenState
                 _label(AppLocalizations.of(context)!.svInstitutionalEmail),
                 _field(_emailCtrl, 'voce@instituicao.edu.br',
                     keyboard: TextInputType.emailAddress),
-                const SizedBox(height: 20),
+                const SizedBox(height: 12),
+                // ── Verificação automática por OTP (recomendado) ──
+                _otpButton(
+                  label: _otpSent ? 'Reenviar código' : 'Verificar por e-mail',
+                  busy: _otpSending,
+                  filled: !_otpSent,
+                  onTap: _sendOtp,
+                ),
+                if (_otpSent) ...[
+                  const SizedBox(height: 16),
+                  _label('Código recebido por e-mail'),
+                  _field(_codeCtrl, '000000',
+                      keyboard: TextInputType.number),
+                  const SizedBox(height: 12),
+                  _otpButton(
+                    label: 'Confirmar e liberar acesso',
+                    busy: _otpVerifying,
+                    filled: true,
+                    onTap: _verifyOtp,
+                  ),
+                ],
+                const SizedBox(height: 8),
+                Text(
+                  'A verificação é instantânea para e-mails .edu.br e de instituições reconhecidas. Sem e-mail institucional? Envie um comprovante abaixo.',
+                  style: TextStyle(color: AppColors.textMuted, fontSize: 12, height: 1.4),
+                ),
+                const SizedBox(height: 24),
+                Divider(color: AppColors.cardBorder.withValues(alpha: 0.4)),
+                const SizedBox(height: 16),
                 _label(AppLocalizations.of(context)!.svOrAttachProof),
                 _ProofPicker(proof: _proof, onTap: _pickProof),
                 const SizedBox(height: 28),
@@ -270,6 +352,43 @@ class _StudentVerificationScreenState
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: AppColors.cardBorder.withValues(alpha: 0.4)),
+        ),
+      ),
+    );
+  }
+
+  Widget _otpButton({
+    required String label,
+    required bool busy,
+    required bool filled,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: busy ? null : onTap,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        decoration: BoxDecoration(
+          color: filled
+              ? (busy ? AppColors.primary.withValues(alpha: 0.4) : AppColors.primary)
+              : Colors.transparent,
+          border: filled
+              ? null
+              : Border.all(color: AppColors.primary.withValues(alpha: 0.6)),
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Center(
+          child: busy
+              ? const SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(
+                      strokeWidth: 2, color: AppColors.surfaceAlt))
+              : Text(label,
+                  style: TextStyle(
+                      color: filled ? AppColors.surfaceAlt : AppColors.primary,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 0.5)),
         ),
       ),
     );
