@@ -74,6 +74,9 @@ service cloud.firestore {
           'subscriptionPlanId',
           'trialCardTokenId',
           'asaasCustomerId',
+          // ── Verificação de estudante (somente Cloud Functions) ──
+          'studentVerified',
+          'studentVerifiedAt',
           // ── Acesso-cortesia via código (somente Cloud Functions) ──
           'compAccessExpiresAt',
           'compAccessSource',
