@@ -13,6 +13,7 @@ import 'widgets/admin_support_panel.dart';
 import 'widgets/admin_access_codes_panel.dart';
 import 'widgets/admin_student_verifications_panel.dart';
 import 'widgets/admin_users_panel.dart';
+import 'widgets/admin_stats_panel.dart';
 
 class AdminDashboardPage extends ConsumerWidget {
   const AdminDashboardPage({super.key});
@@ -144,63 +145,76 @@ class AdminDashboardPage extends ConsumerWidget {
 
   Widget _buildOverview(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
+      padding: const EdgeInsets.only(bottom: 32),
       child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.dashboard_customize_outlined, size: 64, color: AppColors.textMuted),
-            const SizedBox(height: 16),
-            const Text('Bem-vindo ao Painel Admin', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)),
-            const Text('Gerencie seu conteúdo educacional aqui.', style: TextStyle(color: AppColors.textSecondary)),
-            const SizedBox(height: 40),
-            Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              alignment: WrapAlignment.center,
-              children: [
-                _quickActionCard(
-                  context,
-                  icon: Icons.code,
-                  title: 'Importar JSON',
-                  subtitle: 'Importar uma trilha via JSON',
-                  color: AppColors.primary,
-                  onTap: () => AdminDialogs.showImportJSON(context, ref),
-                ),
-                _quickActionCard(
-                  context,
-                  icon: Icons.upload_file,
-                  title: 'Importar em Massa',
-                  subtitle: 'Carregar all_trails.json completo',
-                  color: const Color(0xFF6C63FF),
-                  onTap: () => AdminDialogs.showBulkImportJSON(context, ref),
-                ),
-                _quickActionCard(
-                  context,
-                  icon: Icons.menu_book,
-                  title: 'Importar E-book',
-                  subtitle: 'Importar um e-book via JSON',
-                  color: const Color(0xFF2DD4BF),
-                  onTap: () => AdminDialogs.showImportEbook(context, ref),
-                ),
-                _quickActionCard(
-                  context,
-                  icon: Icons.library_books,
-                  title: 'Importar E-books (massa)',
-                  subtitle: 'Carregar all_ebooks.json completo',
-                  color: const Color(0xFF14B8A6),
-                  onTap: () => AdminDialogs.showBulkImportEbooks(context, ref),
-                ),
-                _quickActionCard(
-                  context,
-                  icon: Icons.auto_awesome,
-                  title: 'Gerador de Trilhas',
-                  subtitle: 'Crie estruturas rapidamente',
-                  color: AppColors.orange,
-                  onTap: () => AdminDialogs.showTrailWizard(context, ref),
-                ),
-              ],
-            ),
-          ],
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 900),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // ── Stats em tempo real ─────────────────────────────
+              const AdminStatsPanel(),
+              const SizedBox(height: 40),
+              // ── Divider ───────────────────────────────────
+              Divider(color: Colors.white.withValues(alpha: 0.07)),
+              const SizedBox(height: 32),
+              // ── Quick actions ────────────────────────────
+              const Text(
+                'Ações Rápidas',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(height: 16),
+              Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                children: [
+                  _quickActionCard(
+                    context,
+                    icon: Icons.code,
+                    title: 'Importar JSON',
+                    subtitle: 'Importar uma trilha via JSON',
+                    color: AppColors.primary,
+                    onTap: () => AdminDialogs.showImportJSON(context, ref),
+                  ),
+                  _quickActionCard(
+                    context,
+                    icon: Icons.upload_file,
+                    title: 'Importar em Massa',
+                    subtitle: 'Carregar all_trails.json completo',
+                    color: const Color(0xFF6C63FF),
+                    onTap: () => AdminDialogs.showBulkImportJSON(context, ref),
+                  ),
+                  _quickActionCard(
+                    context,
+                    icon: Icons.menu_book,
+                    title: 'Importar E-book',
+                    subtitle: 'Importar um e-book via JSON',
+                    color: const Color(0xFF2DD4BF),
+                    onTap: () => AdminDialogs.showImportEbook(context, ref),
+                  ),
+                  _quickActionCard(
+                    context,
+                    icon: Icons.library_books,
+                    title: 'Importar E-books (massa)',
+                    subtitle: 'Carregar all_ebooks.json completo',
+                    color: const Color(0xFF14B8A6),
+                    onTap: () => AdminDialogs.showBulkImportEbooks(context, ref),
+                  ),
+                  _quickActionCard(
+                    context,
+                    icon: Icons.auto_awesome,
+                    title: 'Gerador de Trilhas',
+                    subtitle: 'Crie estruturas rapidamente',
+                    color: AppColors.orange,
+                    onTap: () => AdminDialogs.showTrailWizard(context, ref),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -367,31 +381,23 @@ class AdminDashboardPage extends ConsumerWidget {
     required String subtitle,
     required List<Widget> actions,
   }) {
-    final titleBlock = Column(
+    // Sempre Column: título em cima, botões embaixo em Wrap.
+    // Evita o esmagamento do título quando há muitos botões.
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(title, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
+        Text(title,
+            style: const TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.w700)),
         const SizedBox(height: 2),
-        Text(subtitle, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13)),
-      ],
-    );
-    if (isMobile) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          titleBlock,
-          const SizedBox(height: 14),
-          Wrap(spacing: 8, runSpacing: 8, children: actions),
-        ],
-      );
-    }
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(child: titleBlock),
-        const SizedBox(width: 16),
-        Wrap(spacing: 12, runSpacing: 12, alignment: WrapAlignment.end, children: actions),
+        Text(subtitle,
+            style: const TextStyle(
+                color: AppColors.textSecondary, fontSize: 13)),
+        const SizedBox(height: 14),
+        Wrap(spacing: 10, runSpacing: 10, children: actions),
       ],
     );
   }
@@ -458,8 +464,8 @@ class AdminDashboardPage extends ConsumerWidget {
 
               return GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1), 
-                  childAspectRatio: 2.5,
+                  crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
+                  mainAxisExtent: 160,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                 ),
@@ -531,7 +537,7 @@ class AdminDashboardPage extends ConsumerWidget {
               return GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
-                  childAspectRatio: 2.5,
+                  mainAxisExtent: 160,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                 ),

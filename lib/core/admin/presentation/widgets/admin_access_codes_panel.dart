@@ -17,15 +17,18 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
   bool _loading = true;
   String? _error;
   List<Map<String, dynamic>> _codes = [];
-  String _filter = 'all'; // all | available | redeemed | revoked
+  String _filter = 'all'; // all | available | sent | redeemed | revoked
 
-  // Status de um código: 'revoked' | 'redeemed' | 'available'.
+  // Status de um código: 'revoked' | 'redeemed' | 'sent' | 'available'.
   String _statusOf(Map<String, dynamic> c) {
     final active = c['active'] == true;
     final used = (c['usedCount'] ?? 0) as int;
     final maxUses = (c['maxUses'] ?? 1) as int;
+    final note = (c['note'] as String?)?.trim() ?? '';
     if (!active) return 'revoked';
     if (used >= maxUses) return 'redeemed';
+    // Enviado: qualquer código com nota/anotação que ainda não foi resgatado
+    if (note.isNotEmpty) return 'sent';
     return 'available';
   }
 
@@ -372,6 +375,42 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
     }
   }
 
+  /// Retorna as 4 primeiras palavras (separadas por espaço/underline/hífen) do
+  /// código, usadas como rótulo automático para chaves PROF.
+  String _autoLabel(String code) {
+    final parts = code.split(RegExp(r'[\s_\-]+'));
+    return parts.take(4).join(' ');
+  }
+
+  /// Considera enviado qualquer código com nota não vazia (anotado p/ alguém).
+  bool _isSent(String note) => note.isNotEmpty;
+
+  /// Marca o voucher como enviado/indisponível adicionando o prefixo [ENVIADO].
+  Future<void> _markSent(Map<String, dynamic> c) async {
+    final code = c['code']?.toString() ?? '';
+    if (code.isEmpty) return;
+    final currentNote = (c['note'] as String?)?.trim() ?? '';
+    // Evita duplicar a tag.
+    if (_isSent(currentNote)) return;
+    final newNote = '[ENVIADO] $currentNote'.trim();
+    try {
+      await _service.setNote(code, newNote);
+      await _reload();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Chave marcada como enviada / indisponível.'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(backgroundColor: AppColors.error, content: Text(e.toString())),
+      );
+    }
+  }
+
   /// Formata os resgatadores de um código: "Nome (email)" por pessoa.
   /// Cai para o email, ou um uid encurtado, quando o nome não está disponível.
   String _redeemersLabel(List redeemers, List redeemedBy) {
@@ -462,22 +501,28 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
   }
 
   Widget _buildStatusFilter() {
-    Widget chip(String value, String label, int count) {
-      final active = _filter == value;
+    Widget chip(
+      String value,
+      String label,
+      int count, {
+      Color? accentColor,
+    }) {
+      final isActive = _filter == value;
+      final color = accentColor ?? AppColors.primary;
       return Padding(
         padding: const EdgeInsets.only(right: 8),
         child: ChoiceChip(
           label: Text('$label ($count)'),
-          selected: active,
+          selected: isActive,
           onSelected: (_) => setState(() => _filter = value),
           backgroundColor: AppColors.surface,
-          selectedColor: AppColors.primary.withValues(alpha: 0.25),
+          selectedColor: color.withValues(alpha: 0.22),
           labelStyle: TextStyle(
-              color: active ? AppColors.primary : AppColors.textSecondary,
+              color: isActive ? color : AppColors.textSecondary,
               fontSize: 12,
               fontWeight: FontWeight.w600),
           side: BorderSide(
-              color: active ? AppColors.primary : Colors.white.withValues(alpha: 0.08)),
+              color: isActive ? color : Colors.white.withValues(alpha: 0.08)),
         ),
       );
     }
@@ -488,6 +533,8 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
         children: [
           chip('all', 'Todos', _codes.length),
           chip('available', 'Disponível', _countStatus('available')),
+          chip('sent', 'Enviado', _countStatus('sent'),
+              accentColor: Colors.orange),
           chip('redeemed', 'Resgatado', _countStatus('redeemed')),
           chip('revoked', 'Revogado', _countStatus('revoked')),
         ],
@@ -520,6 +567,7 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
       separatorBuilder: (_, __) => const SizedBox(height: 8),
       itemBuilder: (_, i) {
         final c = list[i];
+        final code = c['code']?.toString() ?? '';
         final active = c['active'] == true;
         final used = (c['usedCount'] ?? 0) as int;
         final maxUses = (c['maxUses'] ?? 1) as int;
@@ -528,16 +576,24 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
         final label = c['label'] as String?;
         final note = (c['note'] as String?)?.trim() ?? '';
         final exhausted = used >= maxUses;
+        final isProfCode = code.toUpperCase().startsWith('PROF');
+        final isSent = _isSent(note);
+        // Rótulo automático: 4 primeiras palavras do código (somente PROF)
+        final autoLabel = isProfCode ? _autoLabel(code) : null;
         final status = !active
             ? 'Revogado'
             : exhausted
                 ? 'Resgatado'
-                : 'Disponível';
+                : isSent
+                    ? 'Enviado'
+                    : 'Disponível';
         final statusColor = !active
             ? AppColors.error
             : exhausted
                 ? AppColors.textMuted
-                : AppColors.primary;
+                : isSent
+                    ? Colors.orange
+                    : AppColors.primary;
 
         return Material(
           color: Colors.transparent,
@@ -547,9 +603,15 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
             child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: isSent
+                    ? Colors.orange.withValues(alpha: 0.06)
+                    : AppColors.surface,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+                border: Border.all(
+                  color: isSent
+                      ? Colors.orange.withValues(alpha: 0.3)
+                      : Colors.white.withValues(alpha: 0.05),
+                ),
               ),
               child: Row(
                 children: [
@@ -557,12 +619,41 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(c['code']?.toString() ?? '',
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'monospace',
-                                letterSpacing: 1.5)),
+                        // Código + chip de rótulo automático (PROF)
+                        Row(
+                          children: [
+                            Flexible(
+                              child: Text(code,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'monospace',
+                                      letterSpacing: 1.5)),
+                            ),
+                            if (autoLabel != null) ...[
+                              const SizedBox(width: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary.withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                      color: AppColors.primary.withValues(alpha: 0.4)),
+                                ),
+                                child: Text(
+                                  autoLabel,
+                                  style: const TextStyle(
+                                    color: AppColors.primary,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
                         const SizedBox(height: 4),
                         Text(
                           '${c['durationDays'] ?? 30} dias · $used/$maxUses uso(s)'
@@ -590,19 +681,29 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(Icons.sticky_note_2_outlined,
-                                size: 13,
-                                color: note.isNotEmpty
-                                    ? AppColors.warningAmber
-                                    : AppColors.textMuted),
+                            Icon(
+                              isSent
+                                  ? Icons.send_rounded
+                                  : Icons.sticky_note_2_outlined,
+                              size: 13,
+                              color: isSent
+                                  ? Colors.orange
+                                  : note.isNotEmpty
+                                      ? AppColors.warningAmber
+                                      : AppColors.textMuted,
+                            ),
                             const SizedBox(width: 4),
                             Expanded(
                               child: Text(
-                                note.isNotEmpty ? note : 'Toque para anotar p/ quem foi enviado',
+                                note.isNotEmpty
+                                    ? note
+                                    : 'Toque para anotar p/ quem foi enviado',
                                 style: TextStyle(
-                                  color: note.isNotEmpty
-                                      ? AppColors.warningAmber
-                                      : AppColors.textMuted,
+                                  color: isSent
+                                      ? Colors.orange
+                                      : note.isNotEmpty
+                                          ? AppColors.warningAmber
+                                          : AppColors.textMuted,
                                   fontSize: 12,
                                   fontStyle: note.isNotEmpty
                                       ? FontStyle.normal
@@ -615,6 +716,8 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
                       ],
                     ),
                   ),
+                  // ── Badges e botões ──────────────────────────────
+                  const SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
@@ -627,20 +730,51 @@ class _AdminAccessCodesPanelState extends State<AdminAccessCodesPanel> {
                             fontSize: 11,
                             fontWeight: FontWeight.bold)),
                   ),
+                  // Botão "Enviado / Indisponível": só para chaves PROF disponíveis e não enviadas
+                  if (isProfCode && active && !exhausted && !isSent)
+                    Tooltip(
+                      message: 'Marcar como enviada / indisponível',
+                      child: TextButton.icon(
+                        onPressed: () => _markSent(c),
+                        icon: const Icon(Icons.send_rounded,
+                            size: 16, color: Colors.orange),
+                        label: const Text(
+                          'Enviado',
+                          style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 6),
+                          backgroundColor:
+                              Colors.orange.withValues(alpha: 0.10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            side: BorderSide(
+                                color: Colors.orange.withValues(alpha: 0.4)),
+                          ),
+                        ),
+                      ),
+                    ),
                   IconButton(
                     onPressed: () => _editNote(c),
-                    icon: const Icon(Icons.edit_note, size: 20, color: AppColors.textSecondary),
+                    icon: const Icon(Icons.edit_note,
+                        size: 20, color: AppColors.textSecondary),
                     tooltip: 'Anotar destinatário',
                   ),
                   IconButton(
-                    onPressed: () => _copyCode(c['code']?.toString() ?? ''),
-                    icon: const Icon(Icons.copy, size: 18, color: AppColors.textSecondary),
+                    onPressed: () => _copyCode(code),
+                    icon: const Icon(Icons.copy,
+                        size: 18, color: AppColors.textSecondary),
                     tooltip: 'Copiar código',
                   ),
                   if (active && !exhausted)
                     IconButton(
-                      onPressed: () => _revoke(c['code'].toString()),
-                      icon: const Icon(Icons.block, size: 18, color: AppColors.error),
+                      onPressed: () => _revoke(code),
+                      icon: const Icon(Icons.block,
+                          size: 18, color: AppColors.error),
                       tooltip: 'Revogar',
                     ),
                 ],
