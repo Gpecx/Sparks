@@ -1,55 +1,125 @@
-<!DOCTYPE html><html><head>
+<!DOCTYPE html>
+<html>
+<head>
   <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
+    Base href substituído pelo valor de --base-href no flutter build.
+    Deve começar e terminar com "/" para funcionar corretamente.
   -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="Aprenda normas elétricas com gamificação.">
 
   <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="spark_app">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SPARK">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon (várias resoluções: o navegador escolhe a mais nítida) -->
+  <!-- Viewport: viewport-fit=cover garante que o conteúdo ocupe a tela inteira
+       no iPhone com notch sem deixar faixas brancas. -->
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
+                 user-scalable=no, viewport-fit=cover">
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <title>spark_app</title>
+  <title>SPARK</title>
   <link rel="manifest" href="manifest.json">
-  
-  
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 
+  <!-- Splash inline: aparece imediatamente enquanto o JS Flutter carrega,
+       evitando a percepção de tela branca no Safari iOS. -->
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #0A0A0F;
+      height: 100%;
+      width: 100%;
+    }
+    #flutter-splash {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #0A0A0F;
+      z-index: 9999;
+      transition: opacity 0.4s ease;
+    }
+    #flutter-splash.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #flutter-splash .spark-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #6C63FF, #3ECFCF);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-bottom: 24px;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    #flutter-splash .spark-label {
+      color: #E0E0E0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    #flutter-splash .spark-sub {
+      color: #555;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.08); opacity: 0.85; }
+    }
+  </style>
 </head>
 <body>
 
-  
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
+  <!-- Splash visível antes do Flutter inicializar -->
+  <div id="flutter-splash">
+    <div class="spark-logo">⚡</div>
+    <div class="spark-label">SPARK</div>
+    <div class="spark-sub">Carregando...</div>
+  </div>
 
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
+  <script>
+    // Força o renderer HTML no web — mais compatível com Safari/iOS do que
+    // CanvasKit (WebGL), que causa tela branca em versões antigas do Safari.
+    window.flutterConfiguration = {
+      renderer: "html"
+    };
+  </script>
+
+  <!--
+    flutter_bootstrap.js inicializa o Flutter. O splash acima é removido
+    assim que o primeiro frame é renderizado via _flutter.loader.load().
   -->
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var splash = document.getElementById('flutter-splash');
+      if (splash) {
+        splash.classList.add('hidden');
+        setTimeout(function () { splash.remove(); }, 500);
+      }
+    });
+  </script>
 
   <script src="flutter_bootstrap.js" async=""></script>
 
-
-</body></html>
+</body>
+</html>

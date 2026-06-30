@@ -38,19 +38,29 @@ class FcmService {
 
   /// Chame uma única vez em main(), após Firebase.initializeApp().
   Future<void> initialize() async {
-    // Registra handler de background
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    // onBackgroundMessage usa Service Worker API que não é suportada no
+    // Safari iOS (< 16.4) e pode lançar exceção silenciosa travando o app.
+    // Restringimos ao mobile onde funciona corretamente.
+    if (!kIsWeb) {
+      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    }
 
-    // Solicita permissão (iOS/Web; no Android 13+ também)
-    final settings = await _messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
+    // Solicita permissão — envolvido em try/catch pois no Safari iOS o popup
+    // pode ser bloqueado ou a API pode não estar disponível, o que jogaria
+    // uma exceção e impediria o runApp() de ser chamado (tela branca).
+    try {
+      final settings = await _messaging.requestPermission(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized ||
-        settings.authorizationStatus == AuthorizationStatus.provisional) {
-      await _saveTokenToFirestore();
+      if (settings.authorizationStatus == AuthorizationStatus.authorized ||
+          settings.authorizationStatus == AuthorizationStatus.provisional) {
+        await _saveTokenToFirestore();
+      }
+    } catch (e) {
+      debugPrint('[FCM] requestPermission não suportado neste browser: $e');
     }
 
     // Atualiza token quando rotacionado pelo FCM
