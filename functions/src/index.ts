@@ -31,6 +31,7 @@ import { onDocumentWritten } from "firebase-functions/v2/firestore";
 import { logger, setGlobalOptions } from "firebase-functions/v2";
 import { defineSecret } from "firebase-functions/params";
 import * as functionsV1 from "firebase-functions/v1";
+import { sendCapiEvent, META_CAPI_TOKEN } from "./capi";
 import * as nodemailer from "nodemailer";
 import {
   findOrCreateCustomer,
@@ -38,6 +39,8 @@ import {
   createCharge,
   getChargeStatus,
   getChargeDetails,
+  getChargeDetailsFull,
+  getCustomer,
   AsaasBillingType,
 } from "./services/asaasService";
 import {
@@ -109,16 +112,33 @@ function defaultUserFields(
 // garante o doc em todas as plataformas. Admin SDK ignora as Security Rules.
 export const onUserCreated = functionsV1
   .region("southamerica-east1")
+  .runWith({ secrets: ["META_CAPI_TOKEN"] })
   .auth.user()
   .onCreate(async (user) => {
+    // Meta CAPI — novo usuário = Lead. Aditivo e à prova de falha (nunca lança).
+    await sendCapiEvent(process.env.META_CAPI_TOKEN ?? "", "Lead", {
+      email: user.email,
+      uid: user.uid,
+    });
+
     const userRef = db.collection("users").doc(user.uid);
     const snap = await userRef.get();
-    if (snap.exists) return; // já criado (client ou redeem) — não sobrescreve
-    await userRef.set(
-      defaultUserFields(user.uid, user.email, user.displayName, user.photoURL),
-      { merge: true }
-    );
-    logger.info(`[onUserCreated] doc de usuário criado para uid=${user.uid}`);
+    if (!snap.exists) {
+      await userRef.set(
+        defaultUserFields(user.uid, user.email, user.displayName, user.photoURL),
+        { merge: true }
+      );
+      logger.info(`[onUserCreated] doc de usuário criado para uid=${user.uid}`);
+    }
+
+    // Reivindica assinatura paga na LP antes da conta existir (se houver).
+    // Roda DEPOIS de garantir o doc com os defaults, para não sobrescrever
+    // isPremium. À prova de falha — nunca quebra a criação da conta.
+    try {
+      await claimPendingActivation(user.uid, user.email);
+    } catch (e) {
+      logger.warn("[onUserCreated] claimPendingActivation falhou (ignorado):", e);
+    }
   });
 
 // ── Hardening de segurança ───────────────────────────────────────
@@ -355,6 +375,146 @@ function resolveCatalogItem(item: {
     isSubscription: true,
     period,
   };
+}
+
+/**
+ * Reverte um VALOR de cobrança para o plano do catálogo (mensal ou anual).
+ * Usado na ativação por link de pagamento da LP, onde não há pedido e só
+ * temos o valor pago. Os preços do catálogo são todos distintos, então o
+ * mapeamento é inequívoco. Retorna null para valores fora do catálogo
+ * (cobrança avulsa/custom) — nesse caso nada é concedido.
+ */
+function resolvePlanByValue(
+  value: number
+): { planId: string; period: "monthly" | "annual" } | null {
+  for (const [planId, plan] of Object.entries(PLAN_CATALOG)) {
+    if (Math.abs(value - plan.monthlyPrice) <= PRICE_EPSILON) {
+      return { planId, period: "monthly" };
+    }
+    if (plan.annualPrice != null && Math.abs(value - plan.annualPrice) <= PRICE_EPSILON) {
+      return { planId, period: "annual" };
+    }
+  }
+  return null;
+}
+
+/** Normaliza um e-mail para usar como id de documento (mesmo padrão dos OTPs). */
+function emailKey(email: string): string {
+  return email.trim().toLowerCase().replace(/[^a-z0-9]/g, "_");
+}
+
+/**
+ * Concede uma assinatura vinda de link de pagamento da LP ao usuário.
+ * Espelha o grant in-app (isPremium + subscriptionPlanId), grava uma
+ * transação idempotente (id determinístico) e dispara o Purchase no CAPI.
+ */
+async function grantLinkSubscription(opts: {
+  uid: string;
+  planId: string;
+  period: "monthly" | "annual";
+  paymentId: string;
+  value: number;
+  email: string | null;
+}): Promise<void> {
+  const { uid, planId, period, paymentId, value, email } = opts;
+  await db.collection("users").doc(uid).set(
+    {
+      isPremium: true,
+      subscriptionPlanId: planId,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    },
+    { merge: true }
+  );
+  await db.collection("transactions").doc(`link_${paymentId}`).set(
+    {
+      uid,
+      asaasPaymentId: paymentId,
+      planId,
+      period,
+      totalPrice: value,
+      totalPoints: 0,
+      status: "PAID",
+      origin: "payment_link",
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    },
+    { merge: true }
+  );
+  try {
+    await sendCapiEvent(META_CAPI_TOKEN.value(), "Purchase", {
+      email: email ?? undefined,
+      uid,
+      value,
+      currency: "BRL",
+      eventId: paymentId,
+      actionSource: "website",
+    });
+  } catch (e) {
+    logger.warn("[linkActivation] CAPI Purchase falhou (ignorado):", e);
+  }
+}
+
+/**
+ * Reivindica uma pendência de ativação por link (pagou na LP antes de ter
+ * conta, ou Student que estava segurado). Chamada no onUserCreated e ao
+ * aprovar a verificação de estudante. Mantém a pendência se ela exigir
+ * verificação de estudante e o usuário ainda não foi verificado.
+ */
+async function claimPendingActivation(
+  uid: string,
+  email: string | null | undefined,
+  opts?: { studentJustVerified?: boolean }
+): Promise<void> {
+  if (!email) return;
+  const ref = db.collection("pending_link_activations").doc(emailKey(email));
+  const snap = await ref.get();
+  if (!snap.exists) return;
+  const p = snap.data()!;
+  const requiresStudent = p["requiresStudentVerification"] === true;
+  if (requiresStudent && !opts?.studentJustVerified) {
+    // Ainda não verificado — segura a pendência, mas amarra o uid.
+    if (p["uid"] !== uid) await ref.set({ uid }, { merge: true });
+    return;
+  }
+  await grantLinkSubscription({
+    uid,
+    planId: (p["planId"] as string) ?? "pro",
+    period: (p["period"] as "monthly" | "annual") ?? "monthly",
+    paymentId: (p["paymentId"] as string) ?? `pending_${uid}`,
+    value: (p["value"] as number) ?? 0,
+    email,
+  });
+  await ref.delete();
+  logger.info(`[claimPending] concedido ${p["planId"]} a uid=${uid} (pendência da LP).`);
+}
+
+/**
+ * Reivindica pendências amarradas a um uid (caso Student segurado: o uid já
+ * foi gravado na pendência quando o pagamento entrou). Chamada ao aprovar a
+ * verificação de estudante. À prova de falha — nunca lança.
+ */
+async function claimPendingActivationsByUid(uid: string): Promise<void> {
+  try {
+    const q = await db
+      .collection("pending_link_activations")
+      .where("uid", "==", uid)
+      .limit(5)
+      .get();
+    for (const doc of q.docs) {
+      const p = doc.data();
+      await grantLinkSubscription({
+        uid,
+        planId: (p["planId"] as string) ?? "student",
+        period: (p["period"] as "monthly" | "annual") ?? "monthly",
+        paymentId: (p["paymentId"] as string) ?? `pending_${uid}`,
+        value: (p["value"] as number) ?? 0,
+        email: (p["email"] as string) ?? null,
+      });
+      await doc.ref.delete();
+      logger.info(`[claimPendingByUid] concedido ${p["planId"]} a uid=${uid}.`);
+    }
+  } catch (e) {
+    logger.warn("[claimPendingByUid] falhou (ignorado):", e);
+  }
 }
 
 // ────────────────────────────────────────────────────────────────
@@ -802,6 +962,22 @@ export const createAsaasCheckout = onCall(
     const totalPrice = resolvedItems.reduce((acc, i) => acc + i.price, 0);
     const totalPoints = resolvedItems.reduce((acc, i) => acc + i.points, 0);
 
+    // ENFORCEMENT do plano Student: o preço de estudante só é liberado
+    // para quem teve a matrícula verificada e APROVADA (por admin/Cloud
+    // Function). Sem isto, qualquer um compraria Student a R$19,90.
+    if (resolvedItems.some((i) => i.planId === "student")) {
+      const svSnap = await db
+        .collection("student_verifications")
+        .doc(uid)
+        .get();
+      if (!svSnap.exists || svSnap.data()?.["status"] !== "approved") {
+        throw new HttpsError(
+          "failed-precondition",
+          "Verificação de estudante necessária. Envie seu comprovante de matrícula e aguarde a aprovação antes de assinar o plano Student."
+        );
+      }
+    }
+
     // Busca dados do usuário no Firestore para preencher o cliente Asaas
     const userSnap = await db.collection("users").doc(uid).get();
     if (!userSnap.exists) {
@@ -1063,7 +1239,7 @@ export const checkPaymentStatus = onCall(
 export const asaasWebhook = onRequest(
   {
     region: "southamerica-east1",
-    secrets: [ASAAS_WEBHOOK_TOKEN, ASAAS_API_KEY, ASAAS_BASE_URL],
+    secrets: [ASAAS_WEBHOOK_TOKEN, ASAAS_API_KEY, ASAAS_BASE_URL, META_CAPI_TOKEN],
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
   },
   async (req, res) => {
@@ -1138,8 +1314,127 @@ export const asaasWebhook = onRequest(
 
     const orderId = payment.externalReference;
     if (!orderId) {
-      logger.warn("[asaasWebhook] Pagamento sem externalReference.", payment);
-      res.status(200).send("No externalReference");
+      // ── Pagamento via LINK da LP (sem pedido in-app) ──
+      // Descobre o pagador pelo cliente Asaas, reverte o valor p/ plano e
+      // concede (ou segura, se a conta não existir / Student não verificado).
+      const paymentId = payment.id;
+
+      const charge = await getChargeDetailsFull(paymentId);
+      if (!charge) {
+        res.status(200).send("Charge re-verification failed");
+        return;
+      }
+      const linkConfirmed =
+        charge.status === "RECEIVED" ||
+        charge.status === "CONFIRMED" ||
+        charge.status === "RECEIVED_IN_CASH";
+      if (!linkConfirmed) {
+        logger.info(`[linkActivation] cobrança ${paymentId} não confirmada (status=${charge.status}).`);
+        res.status(200).send("Charge not confirmed at Asaas");
+        return;
+      }
+
+      const plan = resolvePlanByValue(charge.value);
+      if (!plan) {
+        logger.warn(`[linkActivation] valor ${charge.value} fora do catálogo (pid=${paymentId}).`);
+        res.status(200).send("No matching plan");
+        return;
+      }
+      if (!charge.customer) {
+        logger.warn(`[linkActivation] cobrança sem customer (pid=${paymentId}).`);
+        res.status(200).send("No customer");
+        return;
+      }
+
+      // Idempotência: claim atômico por paymentId (cada mês = paymentId novo).
+      const claimRef = db.collection("link_activations").doc(paymentId);
+      try {
+        await claimRef.create({
+          paymentId,
+          planId: plan.planId,
+          period: plan.period,
+          value: charge.value,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+      } catch (_e) {
+        logger.info(`[linkActivation] pagamento ${paymentId} já processado.`);
+        res.status(200).send("Already processed");
+        return;
+      }
+
+      const cust = await getCustomer(charge.customer);
+      const payerEmail = cust?.email ?? null;
+      if (!payerEmail) {
+        // Sem e-mail não dá p/ casar — libera o claim para re-tentar depois.
+        await claimRef.delete().catch(() => {});
+        logger.warn(`[linkActivation] cliente ${charge.customer} sem e-mail (pid=${paymentId}).`);
+        res.status(200).send("No customer email");
+        return;
+      }
+
+      // Acha o usuário pelo e-mail (fonte autoritativa: Firebase Auth).
+      let linkUid: string | null = null;
+      try {
+        linkUid = (await admin.auth().getUserByEmail(payerEmail)).uid;
+      } catch (_e) {
+        linkUid = null;
+      }
+
+      const isStudentPlan = plan.planId === "student";
+
+      if (linkUid) {
+        // Student não verificado → SEGURA (rede de segurança; a LP também filtra).
+        if (isStudentPlan) {
+          const uSnap = await db.collection("users").doc(linkUid).get();
+          if (uSnap.data()?.["studentVerified"] !== true) {
+            await db.collection("pending_link_activations").doc(emailKey(payerEmail)).set(
+              {
+                email: payerEmail.toLowerCase(),
+                uid: linkUid,
+                planId: plan.planId,
+                period: plan.period,
+                value: charge.value,
+                paymentId,
+                customerId: charge.customer,
+                requiresStudentVerification: true,
+                createdAt: admin.firestore.FieldValue.serverTimestamp(),
+              },
+              { merge: true }
+            );
+            logger.info(`[linkActivation] Student segurado (uid=${linkUid}) aguardando verificação.`);
+            res.status(200).send("Held: student verification required");
+            return;
+          }
+        }
+        await grantLinkSubscription({
+          uid: linkUid,
+          planId: plan.planId,
+          period: plan.period,
+          paymentId,
+          value: charge.value,
+          email: payerEmail,
+        });
+        logger.info(`[linkActivation] ${plan.planId} concedido a uid=${linkUid} via link da LP.`);
+        res.status(200).send("OK");
+        return;
+      }
+
+      // Usuário ainda não existe → pendência por e-mail (claim no onUserCreated).
+      await db.collection("pending_link_activations").doc(emailKey(payerEmail)).set(
+        {
+          email: payerEmail.toLowerCase(),
+          planId: plan.planId,
+          period: plan.period,
+          value: charge.value,
+          paymentId,
+          customerId: charge.customer,
+          requiresStudentVerification: isStudentPlan,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+      logger.info(`[linkActivation] pendência criada p/ ${payerEmail} (sem conta ainda).`);
+      res.status(200).send("Pending: awaiting signup");
       return;
     }
 
@@ -1254,6 +1549,22 @@ export const asaasWebhook = onRequest(
       `[asaasWebhook] Pedido ${orderId} confirmado. +${totalPoints} pts para uid=${uid}`
     );
 
+    // Meta CAPI — Purchase confirmado no servidor (fonte de verdade da receita).
+    // Aditivo e à prova de falha: erros aqui NUNCA afetam a resposta do webhook.
+    try {
+      const fbUser = await admin.auth().getUser(uid).catch(() => null);
+      await sendCapiEvent(META_CAPI_TOKEN.value(), "Purchase", {
+        email: fbUser?.email,
+        uid,
+        value: totalPrice,
+        currency: "BRL",
+        eventId: orderId, // dedup com o Pixel
+        actionSource: "website",
+      });
+    } catch (e) {
+      logger.warn("[asaasWebhook] CAPI Purchase falhou (ignorado):", e);
+    }
+
     res.status(200).send("OK");
   }
 );
@@ -1278,6 +1589,7 @@ export const startTrial = onCall(
     enforceAppCheck: ENFORCE_APP_CHECK,
     region: "southamerica-east1",
     serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+    secrets: [META_CAPI_TOKEN],
   },
   async (request: CallableRequest<StartTrialData>): Promise<StartTrialResult> => {
     const uid = request.auth?.uid;
@@ -1329,6 +1641,12 @@ export const startTrial = onCall(
     } catch (e) {
       logger.warn("[startTrial] Audit log error:", e);
     }
+
+    // Meta CAPI — trial iniciado (aditivo, nunca lança).
+    await sendCapiEvent(META_CAPI_TOKEN.value(), "StartTrial", {
+      email: request.auth?.token?.email as string | undefined,
+      uid,
+    });
 
     logger.info(`[startTrial] uid=${uid} plan=${planId} endsAt=${trialEndsAt.toISOString()}`);
     return { success: true, trialEndsAt: trialEndsAt.toISOString() };
@@ -1723,6 +2041,134 @@ export const setAccessCodeNote = onCall(
 
     logger.info(`[setAccessCodeNote] uid=${uid} anotou ${code}.`);
     return { success: true };
+  }
+);
+
+// ───────────────────────────────────────────────────────────────────
+//  VERIFICAÇÃO DE ESTUDANTE — aprovação (PDF §8)
+//
+//  O cliente envia o comprovante e grava student_verifications/{uid}
+//  com status 'pending' (as Security Rules só deixam o dono escrever
+//  'pending'). A APROVAÇÃO/REJEIÇÃO é exclusiva do admin via as duas
+//  funções abaixo — que também gravam users/{uid}.studentVerified, o
+//  flag autoritativo lido pelo enforcement do createAsaasCheckout.
+// ───────────────────────────────────────────────────────────────────
+
+// listStudentVerifications — admin lista as solicitações de verificação.
+export const listStudentVerifications = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ status?: string }>
+  ): Promise<{ verifications: Record<string, unknown>[] }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(uid);
+    await checkRateLimit(
+      rateLimitKey("admin", uid, "listStudentVerifications"),
+      RATE_ADMIN.limit,
+      RATE_ADMIN.windowMs
+    );
+
+    const snap = await db
+      .collection("student_verifications")
+      .orderBy("createdAt", "desc")
+      .limit(300)
+      .get();
+
+    const infos = await resolveUserInfos(snap.docs.map((d) => d.id));
+
+    const verifications = snap.docs.map((d) => {
+      const v = d.data();
+      const info = infos.get(d.id);
+      const createdAt = v["createdAt"] as admin.firestore.Timestamp | undefined;
+      const reviewedAt = v["reviewedAt"] as admin.firestore.Timestamp | undefined;
+      return {
+        uid: d.id,
+        name: info?.name ?? "",
+        accountEmail: info?.email ?? null,
+        institution: v["institution"] ?? "",
+        institutionalEmail: v["email"] ?? "",
+        method: v["method"] ?? "email",
+        proofUrl: v["proofUrl"] ?? null,
+        status: v["status"] ?? "pending",
+        autoEligible: v["autoEligible"] === true,
+        createdAt: createdAt ? createdAt.toDate().toISOString() : null,
+        reviewedAt: reviewedAt ? reviewedAt.toDate().toISOString() : null,
+      };
+    });
+    return { verifications };
+  }
+);
+
+// reviewStudentVerification — admin aprova ou rejeita uma solicitação.
+// Aprovar concede users/{uid}.studentVerified=true (lido pelo checkout).
+export const reviewStudentVerification = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ uid?: string; decision?: string }>
+  ): Promise<{ status: string }> => {
+    const adminUid = request.auth?.uid;
+    if (!adminUid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+    await assertAdmin(adminUid);
+    await checkRateLimit(
+      rateLimitKey("admin", adminUid, "reviewStudentVerification"),
+      RATE_ADMIN.limit,
+      RATE_ADMIN.windowMs
+    );
+
+    const targetUid = (request.data?.uid ?? "").toString().trim();
+    const decision = (request.data?.decision ?? "").toString().trim();
+    if (!targetUid) {
+      throw new HttpsError("invalid-argument", "uid é obrigatório.");
+    }
+    if (decision !== "approve" && decision !== "reject") {
+      throw new HttpsError("invalid-argument", "decision deve ser 'approve' ou 'reject'.");
+    }
+
+    const ref = db.collection("student_verifications").doc(targetUid);
+    const snap = await ref.get();
+    if (!snap.exists) {
+      throw new HttpsError("not-found", "Solicitação de verificação não encontrada.");
+    }
+
+    const approved = decision === "approve";
+    const batch = db.batch();
+    batch.update(ref, {
+      status: approved ? "approved" : "rejected",
+      reviewedAt: admin.firestore.FieldValue.serverTimestamp(),
+      reviewedBy: adminUid,
+    });
+    batch.set(
+      db.collection("users").doc(targetUid),
+      {
+        studentVerified: approved,
+        studentVerifiedAt: approved
+          ? admin.firestore.FieldValue.serverTimestamp()
+          : admin.firestore.FieldValue.delete(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+    await batch.commit();
+
+    // Estudante aprovado → libera qualquer assinatura Student paga na LP que
+    // estava segurada aguardando verificação.
+    if (approved) {
+      await claimPendingActivationsByUid(targetUid);
+    }
+
+    logger.info(
+      `[reviewStudentVerification] admin=${adminUid} uid=${targetUid} -> ${decision}`
+    );
+    return { status: approved ? "approved" : "rejected" };
   }
 );
 
@@ -2183,6 +2629,205 @@ export const verifyEmailCode = onCall(
     await batch.commit();
 
     logger.info(`[verifyEmailCode] uid=${uid} dispositivo ${deviceId} verificado com sucesso.`);
+    return { verified: true };
+  }
+);
+
+// ────────────────────────────────────────────────────────────────
+//  VERIFICAÇÃO DE ESTUDANTE POR OTP — aprovação automática (PDF §8)
+//
+//  Em vez de validar o RA (não há API nacional p/ isso), validamos que
+//  a pessoa CONTROLA um e-mail institucional reconhecido: enviamos um
+//  código e, se ela confirmar, aprovamos na hora — sem revisão humana.
+//  Quem não tem e-mail institucional cai no fluxo manual (comprovante).
+// ────────────────────────────────────────────────────────────────
+
+/** Domínios reconhecidos p/ verificação automática de estudante.
+ *  Espelha a lista do app; qualquer `.edu.br` também é aceito. */
+const APPROVED_STUDENT_DOMAINS = new Set<string>([
+  "usp.br", "unicamp.br", "ufmg.edu.br", "ufrj.br", "ufpe.br",
+  "ufsc.br", "ufrgs.br", "unesp.br", "ufba.br", "unb.br",
+]);
+
+function isApprovedStudentEmail(email: string): boolean {
+  const e = email.trim().toLowerCase();
+  const at = e.indexOf("@");
+  if (at < 0) return false;
+  const domain = e.substring(at + 1);
+  if (domain.endsWith(".edu.br")) return true;
+  return [...APPROVED_STUDENT_DOMAINS].some(
+    (d) => domain === d || domain.endsWith("." + d)
+  );
+}
+
+// sendStudentVerificationCode — envia OTP ao e-mail institucional.
+export const sendStudentVerificationCode = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    secrets: [SMTP_USER, SMTP_PASS],
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ institutionalEmail?: string; institution?: string }>
+  ): Promise<{ sent: boolean }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    const email = (request.data?.institutionalEmail ?? "").toString().trim();
+    const institution = (request.data?.institution ?? "").toString().trim().slice(0, 160);
+    if (!email || !email.includes("@")) {
+      throw new HttpsError("invalid-argument", "E-mail institucional inválido.");
+    }
+    if (!isApprovedStudentEmail(email)) {
+      throw new HttpsError(
+        "failed-precondition",
+        "Esse e-mail não é de uma instituição reconhecida para verificação automática. Envie um comprovante de matrícula para análise."
+      );
+    }
+
+    // Rate-limit por IP e por usuário (anti-abuso do SMTP / brute de e-mails).
+    const ip = request.rawRequest?.ip ?? "unknown";
+    await checkRateLimit(`auth:ip_${ip}:sendStudentOtp`, RATE_AUTH.limit, RATE_AUTH.windowMs);
+    await checkRateLimit(
+      rateLimitKey("auth", uid, "sendStudentOtp"),
+      RATE_AUTH.limit,
+      RATE_AUTH.windowMs
+    );
+
+    const otp = String(crypto.randomInt(100000, 1000000));
+    const expiresAt = admin.firestore.Timestamp.fromMillis(Date.now() + 10 * 60 * 1000);
+
+    await db.collection("_student_otps").doc(uid).set({
+      uid,
+      email: email.toLowerCase(),
+      institution,
+      code: otp,
+      expiresAt,
+      attempts: 0,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    const smtpUser = process.env.SMTP_USER ?? "";
+    const smtpPass = process.env.SMTP_PASS ?? "";
+    if (!smtpUser || !smtpPass) {
+      logger.error("[sendStudentVerificationCode] SMTP não configurado.");
+      throw new HttpsError("internal", "Serviço de e-mail indisponível. Tente mais tarde.");
+    }
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: smtpUser, pass: smtpPass },
+    });
+
+    await transporter.sendMail({
+      from: `"SPARK" <${smtpUser}>`,
+      to: email,
+      subject: "Verificação de estudante SPARK",
+      html: `
+        <div style="font-family:sans-serif;max-width:480px;margin:0 auto;background:#0d1117;color:#fff;padding:32px;border-radius:16px;">
+          <h1 style="color:#00ff88;margin:0 0 8px;">⚡ SPARK</h1>
+          <p style="color:#aaa;margin:0 0 24px;">Verificação de Estudante</p>
+          <p style="margin:0 0 16px;">Use o código abaixo para confirmar sua matrícula e liberar o plano Student:</p>
+          <div style="background:#1a2332;border:2px solid #00ff88;border-radius:12px;padding:24px;text-align:center;margin:0 0 24px;">
+            <span style="font-size:40px;font-weight:900;letter-spacing:12px;color:#00ff88;">${otp}</span>
+          </div>
+          <p style="color:#aaa;font-size:13px;">Este código expira em <strong style='color:#fff;'>10 minutos</strong>.</p>
+          <p style="color:#555;font-size:12px;">Se você não solicitou, ignore este e-mail.</p>
+        </div>
+      `,
+    });
+
+    logger.info(`[sendStudentVerificationCode] OTP enviado para ${email} (uid=${uid}).`);
+    return { sent: true };
+  }
+);
+
+// verifyStudentVerificationCode — valida o OTP e APROVA o estudante.
+export const verifyStudentVerificationCode = onCall(
+  {
+    enforceAppCheck: ENFORCE_APP_CHECK,
+    region: "southamerica-east1",
+    serviceAccount: "spark-v1-e0eb5@appspot.gserviceaccount.com",
+  },
+  async (
+    request: CallableRequest<{ code?: string }>
+  ): Promise<{ verified: boolean; error?: string }> => {
+    const uid = request.auth?.uid;
+    if (!uid) throw new HttpsError("unauthenticated", "Usuário não autenticado.");
+
+    await checkRateLimit(
+      rateLimitKey("auth", uid, "verifyStudentOtp"),
+      RATE_AUTH.limit,
+      RATE_AUTH.windowMs
+    );
+
+    const code = (request.data?.code ?? "").toString().trim();
+    if (code.length !== 6) return { verified: false, error: "Código inválido." };
+
+    const ref = db.collection("_student_otps").doc(uid);
+    const snap = await ref.get();
+    if (!snap.exists) {
+      return { verified: false, error: "Nenhum código encontrado. Solicite um novo." };
+    }
+    const otp = snap.data()!;
+
+    const expiresAt = (otp["expiresAt"] as admin.firestore.Timestamp).toMillis();
+    if (Date.now() > expiresAt) {
+      await ref.delete();
+      return { verified: false, error: "Código expirado. Solicite um novo." };
+    }
+
+    const attempts = (otp["attempts"] as number) ?? 0;
+    if (attempts >= 5) {
+      await ref.delete();
+      return { verified: false, error: "Muitas tentativas. Solicite um novo código." };
+    }
+
+    if (otp["code"] !== code) {
+      await ref.update({ attempts: admin.firestore.FieldValue.increment(1) });
+      const remaining = 4 - attempts;
+      return {
+        verified: false,
+        error: `Código incorreto. ${remaining > 0 ? `${remaining} tentativa(s) restante(s).` : "Solicite um novo código."}`,
+      };
+    }
+
+    // Código correto → aprova o estudante automaticamente.
+    const email = (otp["email"] as string) ?? "";
+    const institution = (otp["institution"] as string) ?? "";
+    const batch = db.batch();
+    batch.set(
+      db.collection("student_verifications").doc(uid),
+      {
+        uid,
+        institution,
+        email,
+        method: "email_otp",
+        status: "approved",
+        autoEligible: true,
+        approvedVia: "otp",
+        reviewedAt: admin.firestore.FieldValue.serverTimestamp(),
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+    batch.set(
+      db.collection("users").doc(uid),
+      {
+        studentVerified: true,
+        studentVerifiedAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+    batch.delete(ref);
+    await batch.commit();
+
+    // Libera qualquer assinatura Student paga na LP que estava segurada.
+    await claimPendingActivationsByUid(uid);
+
+    logger.info(`[verifyStudentVerificationCode] uid=${uid} aprovado via OTP (${email}).`);
     return { verified: true };
   }
 );

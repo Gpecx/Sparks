@@ -11,6 +11,7 @@ import 'widgets/admin_cards.dart';
 import 'widgets/admin_content_panel.dart';
 import 'widgets/admin_support_panel.dart';
 import 'widgets/admin_access_codes_panel.dart';
+import 'widgets/admin_student_verifications_panel.dart';
 import 'widgets/admin_users_panel.dart';
 import 'widgets/admin_stats_panel.dart';
 
@@ -137,6 +138,7 @@ class AdminDashboardPage extends ConsumerWidget {
       case 2: return const AdminUsersPanel();
       case 4: return const AdminSupportPanel();
       case 5: return const AdminAccessCodesPanel();
+      case 6: return const AdminStudentVerificationsPanel();
       default: return const Center(child: Text('Em desenvolvimento', style: TextStyle(color: Colors.white)));
     }
   }
@@ -332,6 +334,7 @@ class AdminDashboardPage extends ConsumerWidget {
               const SizedBox(height: 16),
               _sidebarItem(context, Icons.people_outline, 'Usuários', isActive: state.sidebarIndex == 2, onTap: () => controller.setSidebarMenu(2)),
               _sidebarItem(context, Icons.vpn_key_outlined, 'Códigos de acesso', isActive: state.sidebarIndex == 5, onTap: () => controller.setSidebarMenu(5)),
+              _sidebarItem(context, Icons.school_outlined, 'Verif. estudante', isActive: state.sidebarIndex == 6, onTap: () => controller.setSidebarMenu(6)),
               _sidebarItem(context, Icons.support_agent_outlined, 'Suporte', isActive: state.sidebarIndex == 4, onTap: () => controller.setSidebarMenu(4)),
               _sidebarItem(context, Icons.settings_outlined, 'Configurações', isActive: state.sidebarIndex == 3, onTap: () => controller.setSidebarMenu(3)),
             ],
