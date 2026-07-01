@@ -1,6 +1,11 @@
 [
   {
-    "origin": ["*"],
+    "origin": [
+      "https://spark-v1-e0eb5.firebaseapp.com",
+      "https://spark-v1-e0eb5.web.app",
+      "http://localhost",
+      "http://localhost:*"
+    ],
     "method": ["GET"],
     "maxAgeSeconds": 3600,
     "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"]
