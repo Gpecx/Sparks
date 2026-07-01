@@ -167,6 +167,15 @@ service cloud.firestore {
         allow read: if isSelf(uid);
         allow write: if isSelf(uid);
       }
+
+      // ── Dispositivos confiáveis (Remember Device / OTP 2FA) ───────
+      // Escrita EXCLUSIVA via Cloud Functions verifyEmailCode / checkDeviceTrust
+      // (Admin SDK ignora estas regras). O dono pode LER para verificação local,
+      // mas nunca pode CRIAR ou ALTERAR — impede auto-concessão de confiança sem OTP.
+      match /trusted_devices/{deviceId} {
+        allow read: if isSelf(uid);
+        allow write: if false;
+      }
     }
 
     // ─── PUBLIC PROFILES ──────────────────────────────────────────
@@ -454,6 +463,29 @@ service cloud.firestore {
       allow update: if isAuthenticated()
         && resource.data.ownerUid == request.auth.uid;
       allow create, delete: if isAdmin();
+    }
+
+    // ─── RATE LIMITING (Admin SDK only) ───────────────────────────
+    // Coleção usada pelo rateLimiter.ts (sliding window por uid+função).
+    // Leitura e escrita exclusivas das Cloud Functions (Admin SDK ignora
+    // estas regras). Nenhum cliente pode manipular contadores de rate limit,
+    // o que impediria ataques de "zerar" o próprio throttle.
+    match /rate_limits/{docId} {
+      allow read, write: if false;
+    }
+
+    // Coleção de rate limiting específica para OTP de e-mail.
+    // Mesma garantia: nunca acessível pelo cliente.
+    match /_otp_rate_limits/{docId} {
+      allow read, write: if false;
+    }
+
+    // ─── OTP CODES (Admin SDK only) ───────────────────────────────
+    // Códigos OTP gerados pelo servidor para verificação de e-mail e 2FA.
+    // NUNCA legível pelo cliente — impede que alguém leia o próprio OTP
+    // sem passar pela Cloud Function de validação.
+    match /_otp_codes/{docId} {
+      allow read, write: if false;
     }
   }
 }
