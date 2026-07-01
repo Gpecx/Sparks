@@ -340,9 +340,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Logo do capacete Spark
+                  // Logo do Sparky
                   Image.asset(
-                    'assets/images/spark_icon.png',
+                    'assets/images/sparky_icon_new.png',
                     width: 56,
                     height: 56,
                     fit: BoxFit.contain,

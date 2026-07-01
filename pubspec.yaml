@@ -118,12 +118,12 @@ flutter:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/spark_icon.png"
+  image_path: "assets/images/sparky_icon_new_square.png"
   remove_alpha_ios: true
   background_color_ios: "#000000"
   web:
     generate: true
-    image_path: "assets/images/spark_icon.png"
+    image_path: "assets/images/sparky_icon_new_square.png"
     background_color: "#000000"
     theme_color: "#000000"
 
