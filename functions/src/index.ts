@@ -152,10 +152,12 @@ setGlobalOptions({ maxInstances: 10 });
 //
 // ⚠️ MANTER false até o cliente Flutter enviar tokens de App Check. Ligar
 // antes disso REJEITA todas as chamadas do app em produção (login, XP,
-// pagamento). Rollout: (1) firebase_app_check no Flutter + initialize;
-// (2) registrar providers no console (Play Integrity/DeviceCheck/reCAPTCHA);
-// (3) publicar o app e confirmar tokens chegando; (4) flip para true + deploy.
-const ENFORCE_APP_CHECK = false;
+// ENFORCE_APP_CHECK — Ativado (2026-07-01).
+// Android: Play Integrity ✓  |  iOS: Device Check ✓  |  Web: reCAPTCHA v3
+// ⚠️  Web requer RECAPTCHA_V3_SITE_KEY no .env.public + Firebase Console > App Check > Apps.
+//     Sem a chave reCAPTCHA configurada, usuários WEB serão rejeitados pelas functions.
+//     Passos: console.firebase.google.com → App Check → Web → Registrar → copiar site key.
+const ENFORCE_APP_CHECK = true;
 
 // ────────────────────────────────────────────────────────────────
 // HELPERS

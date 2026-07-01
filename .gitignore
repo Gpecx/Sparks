@@ -16,6 +16,15 @@ run-spark.sh
 .swiftpm/
 migrate_working_dir/
 
+# ── Segurança: credenciais e segredos ───────────────────────────
+serviceAccountKey.json
+*serviceAccountKey*.json
+.spark_segredos_NAO_COMMITAR/
+*.jks
+*.p12
+google-services.json.bak
+GoogleService-Info.plist.bak
+
 # IntelliJ related
 *.iml
 *.ipr
